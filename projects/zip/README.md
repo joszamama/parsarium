@@ -14,6 +14,7 @@
 - [sqlite / C](c/sqlite/README.md)
 - [unarr / C](c/unarr/README.md)
 - [zziplib / C](c/zziplib/README.md)
+- [bit7z / C++](cpp/bit7z/README.md)
 - [karchive / C++](cpp/karchive/README.md)
 - [kuba-zip / C++](cpp/kuba-zip/README.md)
 - [libarchive / C++](cpp/libarchive/README.md)

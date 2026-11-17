@@ -27,12 +27,11 @@
 
 [Control adapter](../../../../../adapters/python/png/standard.py)
 
-## Run this control
-
-[Docker harness and control receipt](../../../../../projects/png/python/stdlib_tkinter_photoimage/README.md)
+## Run this target
 
 ```sh
-python3 projects/png/python/stdlib_tkinter_photoimage/verify-control.py
+python3 parsarium.py build png python stdlib_tkinter_photoimage
+python3 parsarium.py run png python stdlib_tkinter_photoimage controls/png/red-green.png
 ```
 
-Tk's native PNG reader has measured source coverage on this control. AFL++ parser feedback is unavailable, so this path remains staged.
+Tk's pinned PNG reader has measured source coverage and a decoder-scoped AFL++ overlay with stable, format-dependent feedback. [Feedback receipt](../../../../../fuzzing/afl-native/png/python/stdlib_tkinter_photoimage/verification.json)

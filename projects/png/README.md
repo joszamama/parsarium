@@ -81,6 +81,7 @@
 - [pypng / Python](python/pypng/README.md)
 - [rasterio / Python](python/rasterio/README.md)
 - [scikit-image / Python](python/scikit_image/README.md)
+- [tkinter.PhotoImage(file=local path); width(); height(); get(x, y) / Python](python/stdlib_tkinter_photoimage/README.md)
 - [gufo-png / Rust](rust/gufo_png/README.md)
 - [image / Rust](rust/image/README.md)
 - [img-parts / Rust](rust/img_parts/README.md)

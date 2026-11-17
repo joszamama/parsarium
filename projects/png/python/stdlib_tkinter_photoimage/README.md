@@ -1,27 +1,21 @@
 # tkinter.PhotoImage — PNG / Python
 
-This container builds CPython 3.13.1 and Tk 8.6.16 from pinned source. Xvfb provides a display while `tkinter.PhotoImage(file=...)` parses a local PNG. The control reads dimensions and both pixel colors.
+Pinned runtime: `CPython 3.13.1 with bundled Tk 8.6`. [Manifest](manifest.json) · [verification receipt](control-verification.json)
 
-[API and catalog evidence](../../../../catalog/png/python/standard/tkinter-photoimage-file-local-path-width-height-get-x-y/README.md) · [runtime lock](runtime-lock.json) · [control receipt](control-verification.json)
+[Standard API inventory](../../../../data/python/png/standard.json)
 
-## Build and check the valid control
-
-From the repository root:
+## Run from the repository root
 
 ```sh
-python3 projects/png/python/stdlib_tkinter_photoimage/verify-control.py
+python3 parsarium.py build png python stdlib_tkinter_photoimage
+python3 parsarium.py run png python stdlib_tkinter_photoimage controls/png/red-green.png
+python3 parsarium.py replay png python stdlib_tkinter_photoimage CORPUS_DIR runs/png-stdlib_tkinter_photoimage-replay
+python3 parsarium.py afl build png python stdlib_tkinter_photoimage
+python3 parsarium.py afl prepare png python stdlib_tkinter_photoimage runs/png-stdlib_tkinter_photoimage-afl
 ```
 
-## Replay another PNG
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-```sh
-docker run --rm --platform linux/arm64 --network none --read-only \
-  --cap-drop ALL --security-opt no-new-privileges \
-  --tmpfs /tmp:rw,exec,nosuid,size=256m \
-  -v "$PWD/controls/png/red-green.png:/input/file:ro" \
-  --entrypoint /opt/python/bin/python3.13 \
-  parsarium/png-python-stdlib_tkinter_photoimage:local \
-  /work/replay-cli.py /input/file
-```
+**Native engine:** This standard API uses the decoder-scoped AFL++ overlay. A separate in-process native engine is unavailable.
 
-Replace the mounted path to replay another PNG. The control receipt records covered lines in Tk's native `tkImgPNG.c` reader. The [AFL++ feedback overlay](../../../../fuzzing/afl-native/png/python/stdlib_tkinter_photoimage/README.md) recompiles the pinned Tk PNG decoder and checks two valid PNGs for stable, format-sensitive feedback.
+**Feedback scope:** AFL++ observes the pinned Tk `tkImgPNG.c` decoder. The base control covers native decoder source lines; the overlay receipt checks stable, format-dependent edges. [Feedback receipt](../../../../fuzzing/afl-native/png/python/stdlib_tkinter_photoimage/verification.json)

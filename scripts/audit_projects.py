@@ -50,9 +50,12 @@ def browser_control_verified(path: Path, manifest: dict) -> bool:
 
 def native_source_control_verified(path: Path, manifest: dict) -> bool:
     """Validate a staged native parser source control without AFL feedback."""
-    if (manifest.get("coverage_kind") != "native_source_control_only"
-            or manifest.get("parser_feedback_available") is not False
-            or "fuzz_engine" in manifest or "fuzz_engine_sha256" in manifest):
+    kind = manifest.get("coverage_kind")
+    if (kind not in {"native_source_control_only", "native_source_afl_feedback"}
+            or manifest.get("parser_feedback_available") is not
+                (kind == "native_source_afl_feedback")
+            or (kind == "native_source_control_only" and
+                ("fuzz_engine" in manifest or "fuzz_engine_sha256" in manifest))):
         return False
     receipt = path.parent / "control-verification.json"
     if not receipt.is_file():
@@ -81,6 +84,100 @@ def native_source_control_verified(path: Path, manifest: dict) -> bool:
         and observed.get("parser_source_lines_covered", 0) > 0
         and observed.get("parser_feedback_available") is False
         and observed.get("project_file_sha256") == current_files
+    )
+
+
+def native_source_feedback_verified(path: Path, manifest: dict) -> bool:
+    """Bind Tk's source-covered control to decoder-scoped, differential AFL feedback."""
+    if (manifest.get("coverage_kind") != "native_source_afl_feedback"
+            or manifest.get("kind") != "standard"
+            or manifest.get("parser_feedback_available") is not True
+            or manifest.get("fuzz_engine") != "AFL++"
+            or not native_source_control_verified(path, manifest)):
+        return False
+    project = path.parent.relative_to(ROOT / "projects")
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    receipt_path = overlay_dir / "verification.json"
+    if not receipt_path.is_file():
+        return False
+    receipt = json.loads(receipt_path.read_text())
+    base_path = path.parent / "control-verification.json"
+    base = json.loads(base_path.read_text())
+    variant = ROOT / manifest.get("control_variant", "")
+    if not variant.is_file():
+        return False
+    current_files = {
+        str(file.relative_to(overlay_dir)): sha256(file.read_bytes()).hexdigest()
+        for file in sorted(overlay_dir.rglob("*"))
+        if file.is_file() and file.name not in {"verification.json", "README.md"}
+        and "target" not in file.relative_to(overlay_dir).parts
+        and "__pycache__" not in file.relative_to(overlay_dir).parts
+    }
+    docker_text = (overlay_dir / "Dockerfile").read_text()
+    return (
+        receipt.get("pass") is True
+        and receipt.get("project") == str(project)
+        and receipt.get("base_control_receipt_sha256") == sha256(base_path.read_bytes()).hexdigest()
+        and receipt.get("base_image_id") == base["image_id"]
+        and receipt.get("image_id", "").startswith("sha256:")
+        and receipt.get("platform") == manifest["platform"]
+        and receipt.get("afl_package") == manifest["afl_package"]
+        and receipt.get("source_sha256") == manifest["source_sha256"]
+        and receipt.get("png_reader_source_sha256") == manifest["png_reader_source_sha256"]
+        and receipt.get("control_sha256") == manifest["control_sha256"]
+        and receipt.get("variant_sha256") == manifest["control_variant_sha256"]
+        and sha256(variant.read_bytes()).hexdigest() == manifest["control_variant_sha256"]
+        and receipt.get("output") == manifest["expected_output"]
+        and receipt.get("decoder_source_file") == "tkImgPNG.c"
+        and receipt.get("decoder_source_lines_covered", 0) > 0
+        and receipt.get("feedback_scope") == "AFL++ LLVM source allowlist: tkImgPNG.c"
+        and receipt.get("afl_map_size", 0) > 0
+        and receipt.get("unparsed_baseline_edges") == 0
+        and receipt.get("control_edges", 0) >= 2
+        and receipt.get("variant_edges", 0) >= 2
+        and receipt.get("afl_edge_id_difference", 0) > 0
+        and receipt.get("stable_identical_replays") is True
+        and receipt.get("overlay_file_sha256") == current_files
+        and manifest["source_sha256"] in docker_text
+        and manifest["png_reader_source_sha256"] in docker_text
+        and manifest["afl_package"] in docker_text
+        and "src:tkImgPNG.c" in docker_text
+    )
+
+
+def standard_feedback_smoke_verified(path: Path, manifest: dict) -> bool:
+    """Check the saved one-input and AFL plan preflight for a standard feedback path."""
+    if not native_source_feedback_verified(path, manifest):
+        return False
+    receipt_path = ROOT / "data/standard-feedback-smoke.json"
+    if not receipt_path.is_file():
+        return False
+    receipt = json.loads(receipt_path.read_text())
+    project = path.parent.relative_to(ROOT / "projects")
+    base_path = path.parent / "control-verification.json"
+    overlay_path = ROOT / "fuzzing/afl-native" / project / "verification.json"
+    files = ("parsarium.py", "scripts/run_case.py", "scripts/prepare_afl_run.py",
+             "scripts/run_prepared_afl.py", "scripts/replay_corpus.py",
+             "scripts/run_corpus_batch.py", "scripts/verify_standard_feedback.py")
+    current_files = {name: sha256((ROOT / name).read_bytes()).hexdigest() for name in files}
+    base = json.loads(base_path.read_text())
+    overlay = json.loads(overlay_path.read_text())
+    return (
+        receipt.get("project") == str(project)
+        and receipt.get("status") == "verified"
+        and receipt.get("control_sha256") == manifest["control_sha256"]
+        and receipt.get("variant_sha256") == manifest["control_variant_sha256"]
+        and receipt.get("base_receipt_sha256") == sha256(base_path.read_bytes()).hexdigest()
+        and receipt.get("overlay_receipt_sha256") == sha256(overlay_path.read_bytes()).hexdigest()
+        and receipt.get("base_image_id") == base["image_id"]
+        and receipt.get("overlay_image_id") == overlay["image_id"]
+        and receipt.get("control_output") == manifest["expected_output"]
+        and receipt.get("variant_output") == manifest["expected_output"]
+        and receipt.get("afl_plan_status") == "ready"
+        and receipt.get("replay_status") == "ok"
+        and receipt.get("replay_unique_inputs") == 2
+        and receipt.get("afl_target") == ["/work/afl-python", "/work/replay.py", "@@"]
+        and receipt.get("cli_file_sha256") == current_files
     )
 
 
@@ -178,6 +275,8 @@ def smoke_rows(filename: str) -> dict[str, dict]:
 
 def fully_runnable(path: Path, manifest: dict) -> bool:
     """Require a current base receipt, AFL++ overlay, and replay plans."""
+    if manifest.get("coverage_kind") == "native_source_afl_feedback":
+        return standard_feedback_smoke_verified(path, manifest)
     if not receipt_verified(path, manifest):
         return False
     project = path.parent.relative_to(ROOT / "projects")
@@ -352,9 +451,12 @@ def main() -> None:
                 if not browser_control_verified(path, manifest):
                     raise ValueError(f"browser control receipt mismatch: {path}")
                 pinned_fields = ("base_image", "source_sha256")
-            elif manifest.get("coverage_kind") == "native_source_control_only":
+            elif manifest.get("coverage_kind") in {"native_source_control_only", "native_source_afl_feedback"}:
                 if not native_source_control_verified(path, manifest):
                     raise ValueError(f"native source control receipt mismatch: {path}")
+                if (manifest["coverage_kind"] == "native_source_afl_feedback"
+                        and not standard_feedback_smoke_verified(path, manifest)):
+                    raise ValueError(f"native source AFL feedback or execution receipt mismatch: {path}")
                 pinned_fields = ("base_image", "source_sha256", "python_source_sha256",
                                  "png_reader_source_sha256")
             else:

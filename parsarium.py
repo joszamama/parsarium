@@ -62,7 +62,7 @@ def projects(format_name: str | None, ecosystem: str | None, as_json: bool) -> N
         entries.append({"format": manifest["format"],
                         "ecosystem": manifest["ecosystem"],
                         "slug": path.parent.name, "package": manifest["package"],
-                        "release": manifest["release"],
+                        "release": manifest.get("release", manifest.get("runtime", "")),
                         "kind": manifest.get("kind", "third_party")})
     if as_json:
         print(json.dumps(entries, indent=2))
@@ -78,7 +78,8 @@ def show(format_name: str, ecosystem: str, slug: str, as_json: bool) -> None:
 
     project, manifest = project_for(format_name, ecosystem, slug)
     info = {"project": str(project.relative_to(ROOT)),
-            "package": manifest["package"], "release": manifest["release"],
+            "package": manifest["package"],
+            "release": manifest.get("release", manifest.get("runtime")),
             "kind": manifest.get("kind", "third_party"),
             "parser_api": manifest.get("api"), "control": manifest["control"],
             "fuzz_engine": manifest.get("fuzz_engine", "libFuzzer" if ecosystem in
@@ -107,6 +108,12 @@ def build_afl(format_name: str, ecosystem: str, slug: str) -> int:
     sys.path.insert(0, str(ROOT / "scripts"))
     from run_case import image_for, project_for
 
+    candidate = ROOT / "projects" / format_name / ecosystem / slug
+    if (candidate / "manifest.json").is_file():
+        candidate_manifest = json_file(candidate / "manifest.json")
+        if candidate_manifest.get("coverage_kind") == "native_source_afl_feedback":
+            return subprocess.call([sys.executable, str(ROOT / "fuzzing/afl-native" /
+                format_name / ecosystem / slug / "verify-feedback.py")], cwd=ROOT)
     project, manifest = project_for(format_name, ecosystem, slug)
     _, image_id = image_for(project, manifest)
     verification = json_file(project / "verification.json")
@@ -256,6 +263,10 @@ def main() -> int:
         show(args.format, args.ecosystem, args.slug, args.json)
         return 0
     if args.command == "build":
+        project = ROOT / "projects" / args.format / args.ecosystem / args.slug
+        if (project / "manifest.json").is_file() and json_file(project / "manifest.json").get(
+                "coverage_kind") == "native_source_afl_feedback":
+            return subprocess.call([sys.executable, str(project / "verify-control.py")], cwd=ROOT)
         return execute("run_project.py", args.format, args.ecosystem, args.slug)
     if args.command == "run":
         extra = ["--timeout", str(args.timeout)]

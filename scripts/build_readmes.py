@@ -226,6 +226,10 @@ def main() -> None:
                     lines += ["## Run this target", "", "```sh",
                               f"python3 parsarium.py build {fmt} {eco} {slug_name}",
                               f"python3 parsarium.py run {fmt} {eco} {slug_name} {control}", "```", ""]
+                    if read(standard_project).get("coverage_kind") == "native_source_afl_feedback":
+                        lines += ["Tk's pinned PNG reader has measured source coverage and a decoder-scoped "
+                                  "AFL++ overlay with stable, format-dependent feedback. "
+                                  f"[Feedback receipt]({link(item_dir, ROOT / 'fuzzing/afl-native' / fmt / eco / slug_name / 'verification.json')})", ""]
                 elif staged := staged_browser_projects.get((fmt, eco, item.get("api"))):
                     lines += ["## Run the valid control", "",
                               f"[Browser container and control receipt]({link(item_dir, staged.parent / 'README.md')})", "",
@@ -293,10 +297,13 @@ def main() -> None:
         key = (fmt, eco, manifest["package"])
         catalog_readme = next((ROOT / item["readme"] for item in index
                                if (item["format"], item["ecosystem"], item["name"]) == key), None)
+        source_feedback = manifest.get("coverage_kind") == "native_source_afl_feedback"
+        receipt_name = "control-verification.json" if source_feedback else "verification.json"
         lines = [f"# {manifest['package']} — {FORMATS[fmt][0]} / {ECO_LABEL[eco]}", "",
-                 f"Pinned release: `{manifest['release']}`. "
+                 f"{'Pinned runtime' if source_feedback else 'Pinned release'}: "
+                 f"`{manifest.get('release', manifest.get('runtime'))}`. "
                  f"[Manifest]({link(project_dir, path)}) · "
-                 f"[verification receipt]({link(project_dir, project_dir / 'verification.json')})", ""]
+                 f"[verification receipt]({link(project_dir, project_dir / receipt_name)})", ""]
         if catalog_readme:
             lines += [f"[API, control result, and parser family]({link(project_dir, catalog_readme)})", ""]
         else:
@@ -315,11 +322,20 @@ def main() -> None:
         if manifest.get("sanitizer_exception"):
             lines += [f"**Sanitizer exception:** {manifest['sanitizer_exception']}", ""]
         if manifest.get("native_campaign_supported") is False:
-            blocker = project_dir / "inprocess-blocker.json"
-            detail = (f" [Reason]({link(project_dir, blocker)})." if blocker.is_file() else "")
-            lines += ["**Native engine limit:** This target starts a fresh process for each input. "
-                      "In-process native fuzzing is unsupported; use one-input replay or the "
-                      "prepared AFL++ run." + detail, ""]
+            if source_feedback:
+                lines += ["**Native engine:** This standard API uses the decoder-scoped AFL++ overlay. "
+                          "A separate in-process native engine is unavailable.", ""]
+            else:
+                blocker = project_dir / "inprocess-blocker.json"
+                detail = (f" [Reason]({link(project_dir, blocker)})." if blocker.is_file() else "")
+                lines += ["**Native engine limit:** This target starts a fresh process for each input. "
+                          "In-process native fuzzing is unsupported; use one-input replay or the "
+                          "prepared AFL++ run." + detail, ""]
+        if source_feedback:
+            overlay_receipt = ROOT / "fuzzing/afl-native" / fmt / eco / slug_name / "verification.json"
+            lines += ["**Feedback scope:** AFL++ observes the pinned Tk `tkImgPNG.c` decoder. "
+                      "The base control covers native decoder source lines; the overlay receipt "
+                      f"checks stable, format-dependent edges. [Feedback receipt]({link(project_dir, overlay_receipt)})", ""]
         if manifest.get("coverage_kind") == "native_binary_edges":
             module = Path(manifest["binary_feedback_module"]).name
             lines += [

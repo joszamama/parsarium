@@ -20,6 +20,7 @@ from run_case import MAX_CASE_BYTES, ROOT, project_for
 def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
                  output_dir: Path, timeout_ms: int, container_name: str) -> tuple[list[str], list[str]]:
     binary = manifest.get("coverage_kind") == "native_binary_edges"
+    tk_source_feedback = manifest.get("coverage_kind") == "native_source_afl_feedback"
     binary_env = []
     if binary:
         feedback = receipt["binary_feedback"]
@@ -31,16 +32,21 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
               "--pull", "never", "--platform", manifest["platform"],
               "--network", "none", "--read-only", "--cap-drop", "ALL",
               "--security-opt", "no-new-privileges", "--user", f"{os.getuid()}:{os.getgid()}",
-              "--tmpfs", "/tmp:rw,exec,nosuid,size=64m", "--workdir", "/tmp",
+              "--tmpfs", "/tmp:rw,exec,nosuid,size=256m" if tk_source_feedback
+                  else "/tmp:rw,exec,nosuid,size=64m", "--workdir", "/tmp",
               "-e", "AFL_SKIP_CPUFREQ=1", "-e", "AFL_NO_AFFINITY=1",
               "-e", "AFL_NO_UI=1", "-e", f"AFL_MAP_SIZE={receipt['afl_map_size']}",
               *binary_env,
               "-v", f"{seed_dir}:/seeds:ro", "-v", f"{output_dir}:/results",
-              "--entrypoint", "/opt/afl/bin/afl-fuzz" if binary else "afl-fuzz", receipt["image_id"]]
+              "--entrypoint", "/opt/afl/bin/afl-fuzz" if binary else
+                  "/work/with-display.sh" if tk_source_feedback else "afl-fuzz",
+              receipt["image_id"]]
     ecosystem = manifest["ecosystem"]
     php_native = (ecosystem == "php" and manifest.get("fuzz_engine") == "AFL++"
                   and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")))
-    if binary:
+    if tk_source_feedback:
+        target_args = ["/work/afl-python", "/work/replay.py", "@@"]
+    elif binary:
         target_args = ["/opt/venv/bin/python", "/work/binary-run-once.py", "@@"]
     elif php_native:
         target_args = ([manifest["afl_entrypoint"], "@@"] if manifest.get("afl_entrypoint")
@@ -54,9 +60,10 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
         if manifest.get("afl_file_input") is True:
             target_args.append("@@")
     mode = ["-Q"] if binary else []
-    command = [*common, *mode, "-m", "none", "-t", str(timeout_ms), "-i", "/seeds",
+    launcher = ["afl-fuzz"] if tk_source_feedback else []
+    command = [*common, *launcher, *mode, "-m", "none", "-t", str(timeout_ms), "-i", "/seeds",
                "-o", "/results", "--", *target_args]
-    resume = [*common, *mode, "-m", "none", "-t", str(timeout_ms), "-i", "-",
+    resume = [*common, *launcher, *mode, "-m", "none", "-t", str(timeout_ms), "-i", "-",
               "-o", "/results", "--", *target_args]
     return command, resume
 
@@ -82,7 +89,10 @@ def main() -> None:
     if not receipt_path.is_file():
         cli.error("AFL++ overlay is not verified; run python3 parsarium.py afl build FORMAT ECOSYSTEM SLUG")
     receipt = json.loads(receipt_path.read_text())
-    if not receipt.get("pass") or receipt["base_project_receipt_sha256"] != sha256((project / "verification.json").read_bytes()).hexdigest():
+    tk_source_feedback = manifest.get("coverage_kind") == "native_source_afl_feedback"
+    base_receipt = project / ("control-verification.json" if tk_source_feedback else "verification.json")
+    base_hash_field = "base_control_receipt_sha256" if tk_source_feedback else "base_project_receipt_sha256"
+    if not receipt.get("pass") or receipt.get(base_hash_field) != sha256(base_receipt.read_bytes()).hexdigest():
         cli.error("AFL++ overlay receipt does not match the verified project")
     file_hashes = receipt.get("overlay_file_sha256")
     expected_dockerfile = (file_hashes or {}).get("Dockerfile", receipt.get("overlay_dockerfile_sha256"))
@@ -131,7 +141,7 @@ def main() -> None:
     plan = {"schema_version": 1,
             "project": str(project.relative_to(ROOT / "projects")),
             "afl_package": receipt["afl_package"],
-            "afl_feedback_edges_on_control": receipt["feedback_edges"],
+            "afl_feedback_edges_on_control": receipt["control_edges" if tk_source_feedback else "feedback_edges"],
             "afl_map_size": receipt["afl_map_size"],
             "overlay_receipt_sha256": sha256(receipt_path.read_bytes()).hexdigest(),
             "image_id": receipt["image_id"], "platform": manifest["platform"],
@@ -140,7 +150,8 @@ def main() -> None:
             "seed_sources": sources, "unique_seeds": len(seed_data),
             "timeout_ms": timeout_ms,
             "container_name": container_name,
-            "feedback_kind": receipt.get("feedback_kind", "source_instrumented_edges"),
+            "feedback_kind": ("tk_png_decoder_source_edges" if tk_source_feedback else
+                              receipt.get("feedback_kind", "source_instrumented_edges")),
             "command": command, "resume_command": resume,
             "output_directory": str(output_dir)}
     (run_dir / "plan.json").write_text(json.dumps(plan, indent=2) + "\n")

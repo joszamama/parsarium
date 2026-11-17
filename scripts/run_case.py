@@ -28,6 +28,11 @@ def project_for(format_name: str, ecosystem: str, slug: str) -> tuple[Path, dict
     manifest = json.loads((project / "manifest.json").read_text())
     if (manifest["format"], manifest["ecosystem"]) != (format_name, ecosystem):
         raise ValueError("project path and manifest disagree")
+    if manifest.get("coverage_kind") == "native_source_afl_feedback":
+        from audit_projects import native_source_feedback_verified
+        if not native_source_feedback_verified(project / "manifest.json", manifest):
+            raise ValueError("standard API control or AFL++ feedback receipt changed")
+        return project, manifest
     receipt = json.loads((project / "verification.json").read_text())
     if not receipt.get("pass"):
         raise ValueError("project has no passing verification receipt")
@@ -71,6 +76,8 @@ def image_for(project: Path, manifest: dict) -> tuple[str, str]:
 def target_command(manifest: dict, case_sha: str, scratch: Path) -> tuple[str, list[str], list[str]]:
     ecosystem = manifest["ecosystem"]
     mounts: list[str] = []
+    if manifest.get("coverage_kind") == "native_source_afl_feedback":
+        return "/opt/python/bin/python3.13", ["/work/replay-cli.py", "/input/case"], mounts
     if ecosystem == "go":
         entry = manifest["fuzz_entry"]
         corpus = scratch / entry
@@ -106,7 +113,10 @@ def run_case(project: Path, manifest: dict, case: Path, timeout: int) -> dict:
         scratch = Path(tmp)
         (scratch / "case-bytes").write_bytes(data)
         entrypoint, args, extra_mounts = target_command(manifest, case_sha, scratch)
-        tmpfs = "/tmp:rw,exec,nosuid,size=64m" if manifest.get("tmpfs_exec") else "/tmp:rw,nosuid,size=64m"
+        tmpfs = ("/tmp:rw,exec,nosuid,size=256m" if
+                 manifest.get("coverage_kind") == "native_source_afl_feedback" else
+                 "/tmp:rw,exec,nosuid,size=64m" if manifest.get("tmpfs_exec") else
+                 "/tmp:rw,nosuid,size=64m")
         container_name = f"parsarium-case-{uuid.uuid4().hex[:16]}"
         command = [
             "docker", "run", "--rm", "--name", container_name,
