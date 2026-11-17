@@ -28,13 +28,14 @@
     },
     {
       "name": "sqlfluff",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 11606805,
       "metric_error": null,
       "latest_release_observed": "4.5.0",
-      "family": "sqlfluff dialect grammars",
+      "family": "sqlfluff lexer and dialect grammar matcher",
       "documented_api_lead": "sqlfluff.parse",
-      "reason": "sqlfluff.parse(sql, dialect=...) returns a parse-tree record; documented simple API. Large linter."
+      "reason": "sqlfluff.parse(sql, dialect=\"ansi\") is a documented parse API that returns the full segment parse tree as nested records; it raises APIParsingError on unparsable input. Both valid controls equal the oracle (round 2).",
+      "selected_release": "4.5.0"
     },
     {
       "name": "pglast",

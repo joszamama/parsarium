@@ -187,8 +187,100 @@
       "parser_feature_difference": 681,
       "project_receipt": "projects/sql/python/sqlglot/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/python/sqlglot/differential.json"
+    },
+    {
+      "package": "sqlfluff",
+      "version": "4.5.0",
+      "pass": true,
+      "input_api": "sqlfluff.parse(local SQL text, dialect=\"ansi\") -> parse-tree record",
+      "dialect": "ansi",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "sqlfluff pure-Python lexer (core/parser/lexer.py) and dialect grammar matcher (core/parser/grammar, match_algorithms.py) over the ansi dialect segment definitions (dialects/dialect_ansi.py); independent of sqlparse, sqlglot, libpg_query and sqlparser-rs",
+      "parser_source_files": 62,
+      "parser_source_lines_covered": 4648,
+      "afl_tuple_difference": 104,
+      "parser_feature_difference": 115,
+      "project_receipt": "projects/sql/python/sqlfluff/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/python/sqlfluff/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T17:02:19.565496+00:00"
+  "checked_at_utc": "2026-11-17T20:49:59.534584+00:00"
 }
