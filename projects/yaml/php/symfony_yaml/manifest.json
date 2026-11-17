@@ -1,0 +1,469 @@
+{
+  "schema_version": 1,
+  "format": "yaml",
+  "ecosystem": "php",
+  "pilot": true,
+  "package": "symfony/yaml",
+  "release": "v8.1.11",
+  "catalog_parser": "data/php/yaml/parsers.json",
+  "source_lock": "projects/yaml/php/symfony_yaml/source-lock.json",
+  "source_sha256": "aae79f38b12aae25af71c4512be8abadf3a88c42658a106541fc254dda0a9036",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/yaml/catalog.yaml",
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "differential_control": "controls/yaml/order.yaml",
+  "differential_control_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+  "expected_output": {
+    "root": "map",
+    "nodes": {
+      "bool": 2,
+      "float": 2,
+      "int": 7,
+      "map": 7,
+      "null": 1,
+      "seq": 2,
+      "str": 13
+    },
+    "max_depth": 3,
+    "tree": [
+      "map",
+      [
+        [
+          "kind",
+          [
+            "str",
+            "catalog"
+          ]
+        ],
+        [
+          "version",
+          [
+            "int",
+            "2"
+          ]
+        ],
+        [
+          "ratio",
+          [
+            "float",
+            "0.25"
+          ]
+        ],
+        [
+          "offset",
+          [
+            "int",
+            "-17"
+          ]
+        ],
+        [
+          "enabled",
+          [
+            "bool",
+            true
+          ]
+        ],
+        [
+          "retired",
+          [
+            "bool",
+            false
+          ]
+        ],
+        [
+          "missing",
+          [
+            "null"
+          ]
+        ],
+        [
+          "title",
+          [
+            "str",
+            "Café \"quoted\"\tend"
+          ]
+        ],
+        [
+          "single",
+          [
+            "str",
+            "it's here"
+          ]
+        ],
+        [
+          "tags",
+          [
+            "seq",
+            [
+              [
+                "str",
+                "alpha"
+              ],
+              [
+                "str",
+                "beta"
+              ],
+              [
+                "str",
+                "gamma delta"
+              ]
+            ]
+          ]
+        ],
+        [
+          "point",
+          [
+            "map",
+            [
+              [
+                "lat",
+                [
+                  "int",
+                  "1"
+                ]
+              ],
+              [
+                "lon",
+                [
+                  "float",
+                  "-2.5"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "items",
+          [
+            "seq",
+            [
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "7"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "first item"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "line one\nline two\n"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "8"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "Zürich"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "folded text\n"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "defaults",
+          [
+            "map",
+            [
+              [
+                "retries",
+                [
+                  "int",
+                  "3"
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "base"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "service",
+          [
+            "map",
+            [
+              [
+                "settings",
+                [
+                  "map",
+                  [
+                    [
+                      "retries",
+                      [
+                        "int",
+                        "3"
+                      ]
+                    ],
+                    [
+                      "label",
+                      [
+                        "str",
+                        "base"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "edge"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "differential_expected_output": {
+    "root": "seq",
+    "nodes": {
+      "bool": 1,
+      "float": 2,
+      "int": 5,
+      "map": 7,
+      "null": 1,
+      "seq": 5,
+      "str": 11
+    },
+    "max_depth": 4,
+    "tree": [
+      "seq",
+      [
+        [
+          "map",
+          [
+            [
+              "order",
+              [
+                "str",
+                "A-7"
+              ]
+            ],
+            [
+              "lines",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "Xé-1"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "2"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "12.5"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "B '2'"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "1"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "0.75"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "flags",
+              [
+                "seq",
+                []
+              ]
+            ],
+            [
+              "meta",
+              [
+                "map",
+                []
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "seq",
+          [
+            [
+              "int",
+              "1"
+            ],
+            [
+              "seq",
+              [
+                [
+                  "int",
+                  "2"
+                ],
+                [
+                  "int",
+                  "3"
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "k",
+                  [
+                    "str",
+                    "v"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "str",
+          "plain multi word"
+        ],
+        [
+          "str",
+          "line\nbreak"
+        ],
+        [
+          "str",
+          "kept\n  indented"
+        ],
+        [
+          "null"
+        ],
+        [
+          "bool",
+          false
+        ]
+      ]
+    ]
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in symfony/yaml PHP source (Parser.php, Inline.php, Unescaper.php, Yaml.php and helpers); php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/symfony/yaml/",
+  "format_specific_coverage_file_suffix": "/Parser.php",
+  "scope": "One YAML document from local bytes passed to the documented Yaml::parse(string, Yaml::PARSE_OBJECT_FOR_MAP); mappings return as stdClass in source order and sequences as PHP lists, which the harness walks into the shared exact typed tree (map/seq/str/int/float/bool/null, aliases expanded) with node counts and maximum depth."
+}
