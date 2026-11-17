@@ -1,0 +1,58 @@
+[
+  {
+    "name": "xercesImpl",
+    "group": "xerces",
+    "artifact": "xercesImpl",
+    "version": "2.12.2",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses (The Apache Software License, Version 2.0)",
+    "input_api": "new org.apache.xerces.parsers.DOMParser() with http://xml.org/sax/features/namespaces on; parse(InputSource(ByteArrayInputStream)); getDocument()",
+    "documentation": "https://xerces.apache.org/xerces2-j/javadocs/xerces2/org/apache/xerces/parsers/DOMParser.html",
+    "source": "https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.12.2/xercesImpl-2.12.2-sources.jar",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed namespace-aware into a W3C DOM: root and element expanded names in document order, maximum depth, namespace declarations and URIs, non-declaration attributes (sorted per element, DOM keeps no attribute order), decoded character data (predefined entity and character references, CDATA)",
+    "family": "Apache Xerces2-J",
+    "family_note": "The native Xerces DOMParser drives XMLDocumentScannerImpl / XMLNSDocumentScannerImpl and builds the DOM in AbstractDOMParser. The OpenJDK java.xml module carries a repackaged fork of the same Xerces2-J code (com.sun.org.apache.xerces.internal), which is what the standard javax.xml.parsers path runs, so the third-party and standard Java XML paths share the Xerces2-J parser family. They are separate code copies that have diverged (JDK security limits, XMLSecurityManager, later fixes), not one binary. dom4j and JDOM, logged as leads, build trees over a SAX parser that defaults to this same JDK Xerces fork.",
+    "shared_families": [
+      "Apache Xerces2-J"
+    ],
+    "coverage_note": "xercesImpl-2.12.2.jar classes carry no line-number tables; the pinned sources jar of the same release is recompiled with javac -g --release 8 for line coverage and laid over the unpacked release jar.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 2474,
+      "max_release": "2.12.2",
+      "max_release_value": 549,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/xerces%3AxercesImpl",
+      "captured_at_utc": "2026-11-17T03:37:55.868402+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/xercesimpl"
+  }
+]
