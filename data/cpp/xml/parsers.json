@@ -1,0 +1,57 @@
+[
+  {
+    "name": "xerces-c",
+    "version": "3.3.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/apache/xerces-c/blob/v3.3.0/LICENSE",
+    "input_api": "xercesc::XercesDOMParser::parse(const InputSource&) with xercesc::MemBufInputSource(const XMLByte*, XMLSize_t, ...) and setDoNamespaces(true), validation off, external DTD loading off",
+    "documentation": "https://xerces.apache.org/xerces-c/apiDocs-3/classMemBufInputSource.html",
+    "documentation_parser": "https://xerces.apache.org/xerces-c/apiDocs-3/classXercesDOMParser.html",
+    "source": "https://archive.apache.org/dist/xerces/c/3/sources/xerces-c-3.3.0.tar.gz",
+    "adapter": "projects/xml/cpp/xerces_c/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "XML 1.0 with Namespaces, UTF-8 input from a memory buffer, non-validating, parsed into a DOM tree; attributes reported sorted per element because DOM NamedNodeMap order is unspecified",
+    "family": "Apache Xerces-C++ scanner (IGXMLScanner)",
+    "family_note": "Own scanner and reader stack in src/xercesc/internal (IGXMLScanner, ReaderMgr, XMLReader); no delegation to libxml2 or expat. Transcoding goes through GNU iconv for UTF-8 output only. Shares no code with the Go encoding/xml family.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 2676,
+      "dev_package_installs": {
+        "libxerces-c-dev": 2676
+      },
+      "popcon_source_inst": 47794,
+      "homebrew_install_on_request_365d": 1209,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/cpp/xerces_c"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "ecosystem": "cpp",
+  "format": "xml",
+  "status": "pilot_one_selected_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 1,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "tinyxml2",
+    "pugixml",
+    "xerces-c",
+    "libxml++"
+  ],
+  "search_method": "Bounded format-specific comparison of four named C++ XML parser libraries; exact Debian binary-package and Homebrew formula lookups, all hits recorded in registry-snapshot.json",
+  "search_hits_recorded": 4,
+  "unique_search_hits": 4,
+  "unresolved_documentation_leads": 3,
+  "ranking_metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+  "selection": "Xerces-C++ ranks first on Debian dev-package installs: libxerces-c-dev 2,676, then libpugixml-dev 1,503, libtinyxml2-dev 487 and libxml++ dev packages 275 (266 + 7 + 2).",
+  "uncertainty": "Pilot cell: only Xerces-C++ 3.3.0 was built and control-verified. Homebrew install-on-request (365d) orders the four differently: tinyxml2 1,757, pugixml 1,270, Xerces-C++ 1,209, libxml++ 461, so the first place depends on the metric. Source-level popcon is not used because libxml++2.6's 79,794 count is a runtime pulled in by dependents (79,361 with no recent file access). pugixml, tinyxml2 and libxml++ stay unresolved leads in leads.json. libxml++ parses through the libxml2 C library. Whole frameworks (Qt, Boost, POCO) were not ranked. The ISO C++ standard library has no XML API. Two small UTF-8 controls without DOCTYPE do not establish DTD, entity declaration, validation, non-UTF-8 encoding or XML 1.1 behaviour; attributes are reported sorted per element because DOM NamedNodeMap order is unspecified.",
+  "third_party_evidence": "data/cpp/xml/parsers.json",
+  "third_party_control_results": "data/cpp/xml/verification.json",
+  "runtime_evidence": "data/cpp/xml/standard.json",
+  "registry_snapshot": "data/cpp/xml/registry-snapshot.json",
+  "unresolved_leads": "data/cpp/xml/leads.json",
+  "source_lock": "projects/xml/cpp/xerces_c/source-lock.json",
+  "afl_feedback": "data/cpp/xml/afl-feedback.json"
+}

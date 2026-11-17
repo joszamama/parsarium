@@ -1,7 +1,9 @@
-"""Check repeatable, differing source and AFL++ feedback for the C++ JSON pilot.
+"""Check repeatable, differing source and AFL++ feedback for a C++ pilot.
 
 The base project image replays both valid controls against their pinned
-expected outputs and records covered JsonCpp source lines (LLVM lcov export).
+expected outputs and records covered parser source lines (LLVM lcov export).
+Defaults to the JSON JsonCpp pilot; --format xml --slug xerces_c checks the
+XML Xerces-C++ pilot.
 The AFL++ overlay image traces each control twice with afl-showmap. Covered
 lines and AFL++ tuples must repeat exactly per control and differ between the
 two controls. No malformed inputs are run.
@@ -47,10 +49,11 @@ def sandbox(platform: str, mounts: list[str]) -> list[str]:
 
 def main() -> None:
     cli = argparse.ArgumentParser(description=__doc__)
+    cli.add_argument("--format", default="json")
     cli.add_argument("--slug", default="jsoncpp")
     args = cli.parse_args()
-    project, manifest = project_for("json", "cpp", args.slug)
-    relative = Path("json/cpp") / args.slug
+    project, manifest = project_for(args.format, "cpp", args.slug)
+    relative = Path(args.format) / "cpp" / args.slug
     overlay = ROOT / "fuzzing/afl-native" / relative
     base_receipt = json.loads((project / "verification.json").read_text())
     overlay_receipt = json.loads((overlay / "verification.json").read_text())
@@ -66,7 +69,7 @@ def main() -> None:
     platform = manifest["platform"]
     lines: list[set[str]] = []
     maps: list[set[str]] = []
-    with tempfile.TemporaryDirectory(prefix="parsarium-cpp-json-") as temporary:
+    with tempfile.TemporaryDirectory(prefix=f"parsarium-cpp-{args.format}-") as temporary:
         work = Path(temporary)
         for index, control in enumerate(controls):
             run_lines, run_maps = [], []

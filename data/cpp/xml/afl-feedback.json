@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T03:49:06.713445+00:00",
+  "projects_total": 1,
+  "projects_passed": 1,
+  "differential_kind": "fixed_valid_default_namespace_reset_comment_pi",
+  "command": "python3 scripts/build_afl_native.py xml cpp xerces_c && python3 scripts/verify_cpp_json_feedback.py --format xml --slug xerces_c",
+  "results": [
+    {
+      "project": "xml/cpp/xerces_c",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+      "overlay_receipt_sha256": "ce972954310bdfc35d0a566350bc10275912dd26f37bf0106774f8d911f79839",
+      "differential_receipt_sha256": "4e27fcf93e7d6526b6d604e0687633ae2d4584bd553a4198eb8d29d0d1f16ea2",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeated_control_identical": true,
+      "control_source_lines": 9468,
+      "control_afl_tuples": 10721,
+      "differential_source_lines": 9690,
+      "differential_afl_tuples": 10947,
+      "source_line_difference": 476,
+      "afl_tuple_difference": 514
+    }
+  ]
+}

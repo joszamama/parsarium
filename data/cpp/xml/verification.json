@@ -1,0 +1,58 @@
+{
+  "checked_at_utc": "2026-11-17T03:47:28.991313+00:00",
+  "platform": "linux/arm64 Docker",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "controls": {
+    "catalog_ns": "controls/xml/catalog-ns.xml",
+    "order_default_ns": "controls/xml/order-default-ns.xml"
+  },
+  "control_sha256": {
+    "catalog_ns": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "order_default_ns": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba"
+  },
+  "control_meaning": "Namespace-aware XML 1.0: prefixed root, default namespace on children, prefixed attribute, predefined entity references, CDATA section, UTF-8 text; the second control adds a comment, a processing instruction, character references and a default-namespace reset (xmlns=\"\")",
+  "third_party": [
+    {
+      "package": "xerces-c",
+      "version": "3.3.0",
+      "scope": "XercesDOMParser over MemBufInputSource with namespaces on, validation off",
+      "command": "python3 scripts/run_project.py xml cpp xerces_c",
+      "receipt": "projects/xml/cpp/xerces_c/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 9460,
+      "format_specific_source_lines_covered": 402,
+      "error": null
+    }
+  ],
+  "standard": []
+}
