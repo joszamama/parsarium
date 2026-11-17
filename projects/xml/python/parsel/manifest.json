@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "parsel",
+  "release": "1.12.1",
+  "catalog_parser": "data/python/xml/parsel-parser.json",
+  "source_lock": "projects/xml/python/parsel/runtime-requirements.lock",
+  "source_sha256": "cf74e09857329bddc02c13ae239a9b46f410dc5bd1d05361c8c2643a1a5a7149",
+  "sdist_sha256": "f526df846f3a91e13f5499156ea3e755114834cd126b62cd1d784ef558f3a713",
+  "license_sha256": "7c9a5bce33c5cb32fd5b172f6a0bf2691e19ab11b06503eab2d826f5c6dee90d",
+  "dependencies": [
+    {
+      "package": "cssselect",
+      "release": "1.6.0",
+      "sha256": "6df6eab9b264c0f2092a6e386b33610e1684a25e27925ecebe25e3d97cbf3525"
+    },
+    {
+      "package": "jmespath",
+      "release": "1.1.0",
+      "sha256": "a5663118de4908c91729bea0acadca56526eb2698e83de10cd116ae0f4e97c64"
+    },
+    {
+      "package": "w3lib",
+      "release": "2.6.0",
+      "sha256": "e62ce6b7f845b5e8588223d44e64990673a0fefd6815d6b3f2e6d39bf9ef308c"
+    },
+    {
+      "package": "frostwork",
+      "release": "0.2.2",
+      "sha256": "98f0a24eaacffddac21abfa0ea060cc170f65cd4570f0c7fbea3eeb11230e643"
+    },
+    {
+      "package": "typing-extensions",
+      "release": "4.16.0",
+      "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+    }
+  ],
+  "tested_parser": "parsel.selector.SafeXMLParser (lxml.etree.XMLParser subclass with resolve_entities=False; _ctgroup['xml']['_parser'], asserted in the image and in run-control.py)",
+  "parser_family": "Parsel Selector over lxml.etree.fromstring with SafeXMLParser(recover=True, resolve_entities=False, huge_tree=True) over libxml2 2.15.4; shares the lxml/libxml2 XML parser family with projects/xml/python/lxml and projects/xml/python/beautifulsoup4 and has no independent XML tokenizer",
+  "underlying_release": "lxml 6.1.3 over libxml2 2.15.4",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "underlying_lxml_source_sha256": "45222d94ddd511536f3b2f7d9deae3b2339b4ce0f075f1ca25703b07cad9dd21",
+  "build_note": "parsel and its pure-Python dependencies are installed from pinned py3-none-any wheels (parsel/ checked byte-identical to the sdist); frostwork is the pinned prebuilt manylinux aarch64 abi3 wheel that w3lib.html imports. lxml is built from its pinned sdist without Cython regeneration and linked dynamically to libxml2 2.15.4 built from source with clang LLVM source coverage, the same pins as projects/xml/python/lxml. lxml's own Cython/C binding and libxml2's xpath.c are not part of the recorded parser coverage.",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "comments": [],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "processing_instructions": [],
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ],
+    "root": "{urn:parsarium:catalog}catalog"
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "comments": [
+      "order receipt"
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "processing_instructions": [
+      "audit step=\"1\""
+    ],
+    "text": [
+      "A-7",
+      "12.50 €"
+    ],
+    "root": "{urn:parsarium:order}order"
+  },
+  "oracle": "oracle.py",
+  "oracle_note": "Independent structural oracle: CPython pyexpat (Expat 2.7.4 in the image, not libxml2) in namespace mode computes the same summary from the raw bytes. run-control.py and the feedback check require oracle == Parsel summary on both controls. Expat counts namespace declarations (xmlns=\"\" included); the harness counts in-scope namespace changes against the parent element via XPath namespace::*, so a redundant redeclaration of an in-scope prefix would count only in the oracle. Neither control has one. Text is merged character data, CDATA and decoded references between markup events, stripped, non-empty.",
+  "api": "parsel.Selector(body=local XML bytes, type=\"xml\"); Selector.xpath() with get()/getall() for namespace-uri(), local-name(), namespace::*, ancestor-or-self::*, //text(), //comment() and //processing-instruction(), plus Selector.attrib for attributes",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the installed parsel package during parsing and XPath summary (selector.py) plus LLVM source coverage of source-built libxml2 2.15.4 parser.c reached through lxml.etree",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/parsel/",
+  "format_specific_coverage_file_suffix": "/parsel/selector.py",
+  "underlying_coverage_subject_prefix": "/work/libxml2/parser.c",
+  "underlying_format_specific_coverage_file_suffix": "/parser.c",
+  "afl_llvm_module_glob": "/opt/libxml2/lib/libxml2.so.16",
+  "afl_coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/parsel/",
+  "afl_python_entrypoint": "/opt/venv/bin/python",
+  "afl_feature_only_proxy": true,
+  "native_campaign_supported": false,
+  "scope": "Valid UTF-8 XML 1.0 local byte streams without DOCTYPE through Selector(body=bytes, type='xml'): namespace-expanded element and attribute names, namespace declarations (as in-scope changes), decoded text nodes in document order, comments, processing instructions and tree depth read through Parsel's XPath API. CDATA becomes ordinary text (lxml strip_cdata default), the XML declaration is not a node, and Selector strips leading/trailing whitespace and every NUL byte from the body before parsing.",
+  "parser_options_caveat": "Parsel creates SafeXMLParser(recover=True, encoding='utf-8', huge_tree=True) with resolve_entities=False and calls lxml.etree.fromstring(body, parser=parser, base_url=None). recover=True makes this path lenient where projects/xml/python/lxml uses recover=False; huge_tree=True disables libxml2's size limits; an empty body becomes <html/>, and non-UTF-8 bodies with encoding errors are re-decoded with U+FFFD replacement. None of this was exercised: no malformed, non-UTF-8, DTD or resource inputs were run.",
+  "coverage_caveat": "On both valid controls Parsel executes the same 100 selector.py lines (Parsel is a thin wrapper; its parse path has no data-dependent branches for valid input), so the control difference in AFL++ feedback comes from libxml2 parser.c. libxml2 parser.c lines 8700-8720 (an address-sensitive attribute hash lookup) are excluded from AFL++ feedback, as in projects/xml/python/lxml and beautifulsoup4. XPath evaluation runs in libxml2 xpath.c, which is not in the feedback scope.",
+  "afl_package_release": "4.33c-1.1ubuntu1"
+}
