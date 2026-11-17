@@ -85,14 +85,6 @@
   ],
   "unresolved_leads": [
     {
-      "name": "aws-smithy-json",
-      "version": "0.65.1",
-      "recent_downloads_90d": 59322077,
-      "status": "unresolved",
-      "reason": "Token streaming JSON deserializer (deserialize::json_token_iter over &[u8]) generated for AWS SDK clients; documented as an smithy-rs internal and not run on the controls.",
-      "source": "https://crates.io/crates/aws-smithy-json"
-    },
-    {
       "name": "hifijson",
       "version": "0.5.0",
       "recent_downloads_90d": 2630468,
@@ -247,6 +239,15 @@
       "status": "selected",
       "record": "data/rust/json/parsers.json",
       "receipt": "projects/json/rust/json_crate/verification.json"
+    },
+    {
+      "name": "aws-smithy-json",
+      "version": "0.65.1",
+      "recent_downloads_90d": 59322077,
+      "status": "selected",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/aws_smithy_json/verification.json",
+      "scope_note": "Public generic json_token_iter(&[u8]) documented in pinned src/deserialize.rs; TESTING.md gives local-file JSONTestSuite runner. Adapter enforces one balanced root and decodes escaped strings. Source documents permissive numeric syntax; no malformed probes run."
     }
   ]
 }

@@ -239,5 +239,53 @@
       "source": "data/rust/json/registry-snapshot.json"
     },
     "project": "projects/json/rust/json_crate/verification.json"
+  },
+  {
+    "name": "aws-smithy-json",
+    "version": "0.65.1",
+    "license": "Apache-2.0",
+    "input_api": "aws_smithy_json::deserialize::json_token_iter(&[u8]) -> Iterator<Item=Result<Token, DeserializeError>>; Token::{StartObject, EndObject, ObjectKey, StartArray, EndArray, ValueString, ValueNumber, ValueBool, ValueNull}; EscapedStr::to_unescaped()",
+    "documentation": "https://docs.rs/crate/aws-smithy-json/0.65.1/source/src/deserialize.rs",
+    "source": "https://static.crates.io/crates/aws-smithy-json/aws-smithy-json-0.65.1.crate",
+    "scope": "One valid RFC 8259 JSON text decoded from local bytes into a complete token stream: root kind, container and scalar counts, nesting depth, sorted decoded value strings, sorted numbers, and sorted top-level object keys. Adapter requires one balanced root and decodes escaped strings; source iterator itself accepts multiple values and has documented permissive number syntax.",
+    "family": "aws-smithy-json token-stream parser (smithy-rs), used by generated AWS SDK deserializers; own src/deserialize.rs",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 59322077,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/aws_smithy_json/verification.json"
   }
 ]
