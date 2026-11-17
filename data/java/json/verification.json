@@ -1,12 +1,13 @@
 {
-  "checked_at_utc": "2026-11-17T03:51:55.624314+00:00",
   "platform": "linux/arm64 Docker",
   "java": "openjdk version \"25.0.5\" 2026-10-20 LTS",
   "controls": {
-    "nested_object": "controls/json/nested-object.json"
+    "nested_object": "controls/json/nested-object.json",
+    "nested_array": "controls/json/nested-array.json"
   },
   "control_sha256": {
-    "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6"
+    "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+    "nested_array": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
   },
   "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array",
   "third_party": [
@@ -49,7 +50,50 @@
           "version"
         ]
       },
-      "error": null
+      "error": null,
+      "verified_at_utc": "2026-11-17T03:28:28.849918+00:00"
+    },
+    {
+      "package": "jackson-core",
+      "group": "com.fasterxml.jackson.core",
+      "version": "2.23.0",
+      "scope": "RFC 8259 JSON text tokenized directly from local stream; adapter consumes all tokens and summarizes structure",
+      "command": "python3 scripts/run_project.py json java jackson_core",
+      "receipt": "projects/json/java/jackson_core/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "error": null,
+      "verified_at_utc": "2026-11-17T07:17:20.257010+00:00"
     },
     {
       "package": "gson",
@@ -90,8 +134,11 @@
           "version"
         ]
       },
-      "error": null
+      "error": null,
+      "verified_at_utc": "2026-11-17T03:51:55.624314+00:00"
     }
   ],
-  "standard": []
+  "standard": [],
+  "second_control_meaning": "Valid array root with nested objects/arrays, strings, numbers, booleans, and null; differential output and parser feedback in afl-feedback.json",
+  "updated_at_utc": "2026-11-17T07:19:50.203444+00:00"
 }

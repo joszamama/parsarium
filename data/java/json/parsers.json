@@ -11,7 +11,7 @@
     "source": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.23.0/jackson-databind-2.23.0-sources.jar",
     "scope": "RFC 8259 JSON text mapped to untyped Map/List/String/Number/Boolean/null",
     "family": "Jackson (jackson-core streaming parser + databind untyped mapping)",
-    "family_note": "ObjectMapper drives the jackson-core JsonParser (UTF8StreamJsonParser for file input) and maps tokens through UntypedObjectDeserializer. jackson-core alone is a separate lead in the same parser family, not an independent engine.",
+    "family_note": "ObjectMapper drives the jackson-core JsonParser and maps tokens through UntypedObjectDeserializer. The separately selected jackson-core path exposes that same tokenizer directly; the two selected API paths are one parser family, not independent engines.",
     "control": "controls/json/nested-object.json",
     "expected_output": {
       "arrays": 3,
@@ -55,6 +55,65 @@
       "releases": 239,
       "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml.jackson.core%3Ajackson-databind",
       "captured_at_utc": "2026-11-17T03:27:28.596128+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
+  },
+  {
+    "name": "jackson-core",
+    "group": "com.fasterxml.jackson.core",
+    "artifact": "jackson-core",
+    "version": "2.23.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; pinned POM SHA256 in source-lock.json",
+    "input_api": "JsonFactory.createParser(InputStream) over Files.newInputStream(Path), then JsonParser.nextToken()/getText()/getDoubleValue()",
+    "documentation": "https://javadoc.io/static/com.fasterxml.jackson.core/jackson-core/2.23.0/com/fasterxml/jackson/core/JsonFactory.html",
+    "source": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.23.0/jackson-core-2.23.0-sources.jar",
+    "scope": "RFC 8259 JSON text tokenized directly from local stream; adapter consumes all tokens and summarizes structure",
+    "family": "Jackson (jackson-core streaming parser)",
+    "family_note": "The same jackson-core tokenizer is driven by selected jackson-databind. This is a distinct package/API path, not an independent parser engine.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/jackson_core",
+    "configuration_note": "CANONICALIZE_FIELD_NAMES is disabled to avoid wall-clock-seeded ByteQuadsCanonicalizer coverage variance; the direct JsonParser token stream otherwise uses default factory behavior. Adapter requires one complete root and consumes the token stream.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 80053,
+      "max_release": "2.18.2",
+      "max_release_direct_dependent_count": 1934,
+      "default_release_direct_dependent_count": 178,
+      "releases": 198,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml.jackson.core%3Ajackson-core",
+      "captured_at_utc": "2026-11-17T03:27:29.982688+00:00",
       "snapshot": "data/java/json/registry-snapshot.json"
     }
   },

@@ -2,13 +2,14 @@
   {
     "name": "jackson-core",
     "coordinate": "com.fasterxml.jackson.core:jackson-core",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "2.23.0",
     "summed_direct_dependent_count": 80053,
     "max_release_direct_dependent_count": 1934,
     "default_release_direct_dependent_count": 178,
-    "reason": "JsonFactory.createParser(File) streaming tokenizer. It is the tokenizer the selected jackson-databind path drives, so it is the same parser family; not run as a separate path.",
-    "source": "https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-core"
+    "reason": "Direct JsonFactory.createParser(InputStream) path built and control-verified with parser line coverage and AFL++ feedback. Shares the Jackson tokenizer family with jackson-databind; distinct package/API path, not an independent engine.",
+    "source": "https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-core",
+    "evidence": "data/java/json/parsers.json"
   },
   {
     "name": "fastjson",

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T03:52:44.475342+00:00",
-  "projects_total": 2,
-  "projects_passed": 2,
+  "checked_at_utc": "2026-11-17T07:18:27.514923+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
   "differential_kind": "fixed_valid_nested_array",
   "results": [
     {
@@ -37,7 +37,43 @@
       "differential_parser_features": 3554,
       "differential_afl_tuples": 3484,
       "parser_feature_difference": 196,
-      "afl_tuple_difference": 166
+      "afl_tuple_difference": 166,
+      "checked_at_utc": "2026-11-17T03:52:44.475342+00:00"
+    },
+    {
+      "project": "json/java/jackson_core",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "50785b23c1e5dee4da318f32620a9bcf20af91c267adfda6e87750c42ca6f8e1",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_control_identical": true,
+      "control_parser_features": 442,
+      "control_afl_tuples": 460,
+      "differential_parser_features": 393,
+      "differential_afl_tuples": 411,
+      "parser_feature_difference": 109,
+      "afl_tuple_difference": 109,
+      "checked_at_utc": "2026-11-17T07:18:27.514923+00:00"
     },
     {
       "project": "json/java/gson",
@@ -71,7 +107,8 @@
       "differential_parser_features": 863,
       "differential_afl_tuples": 869,
       "parser_feature_difference": 12,
-      "afl_tuple_difference": 12
+      "afl_tuple_difference": 12,
+      "checked_at_utc": "2026-11-17T03:52:44.475342+00:00"
     }
   ]
 }

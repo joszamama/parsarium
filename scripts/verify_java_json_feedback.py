@@ -1,5 +1,6 @@
 """Check the Java JSON AFL++ bridge: repeated control probes match and a second valid input differs."""
 
+import argparse
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
@@ -11,7 +12,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("jackson_databind", "gson")
+PROJECTS = ("jackson_databind", "jackson_core", "gson")
 CONTROL = "controls/json/nested-object.json"
 DIFFERENTIAL = "controls/json/nested-array.json"
 # Structure of controls/json/nested-array.json, read off the file by hand.
@@ -97,10 +98,27 @@ def check(slug: str) -> dict:
 
 
 def main() -> None:
-    results = [check(slug) for slug in PROJECTS]
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--project", choices=PROJECTS, help="verify one newly built project; retain earlier receipts")
+    selected = parser.parse_args().project
+    now = datetime.now(timezone.utc).isoformat()
+    if selected:
+        previous = json.loads(REPORT.read_text())
+        old_checked_at = previous["checked_at_utc"]
+        rows = {row["project"].split("/")[-1]: row for row in previous["results"]}
+        for row in rows.values():
+            row.setdefault("checked_at_utc", old_checked_at)
+        fresh = check(selected)
+        fresh["checked_at_utc"] = now
+        rows[selected] = fresh
+        results = [rows[slug] for slug in PROJECTS if slug in rows]
+    else:
+        results = [check(slug) for slug in PROJECTS]
+        for row in results:
+            row["checked_at_utc"] = now
     REPORT.write_text(json.dumps({
         "schema_version": 1,
-        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+        "checked_at_utc": now,
         "projects_total": len(results), "projects_passed": len(results),
         "differential_kind": "fixed_valid_nested_array",
         "results": results}, indent=2) + "\n")
