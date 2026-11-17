@@ -13,6 +13,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [javax.xml.parsers.DocumentBuilder.parse(InputStream) / Java](java/jdk_documentbuilder/README.md)
 - [woodstox-core / Java](java/woodstox_core/README.md)
 - [xercesImpl / Java](java/xercesimpl/README.md)
+- [fast-xml-parser / JavaScript](javascript/fast_xml_parser/README.md)
 - [sax / JavaScript](javascript/sax/README.md)
 - [saxes / JavaScript](javascript/saxes/README.md)
 - [XMLReader::XML(string $source, ?string $encoding = null, int $flags = 0); XMLReader::read() / PHP](php/stdlib_xmlreader/README.md)
