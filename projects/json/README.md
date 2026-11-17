@@ -11,6 +11,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [github.com/json-iterator/go / Go](go/github_com_json_iterator_go/README.md)
 - [gson / Java](java/gson/README.md)
 - [jackson-databind / Java](java/jackson_databind/README.md)
+- [bfj / JavaScript](javascript/bfj/README.md)
 - [stream-json / JavaScript](javascript/stream_json/README.md)
 - [json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0) / PHP](php/stdlib_json_decode/README.md)
 - [seld/jsonlint / PHP](php/seld_jsonlint/README.md)

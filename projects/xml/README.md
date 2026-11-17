@@ -10,6 +10,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [github.com/beevik/etree / Go](go/github_com_beevik_etree/README.md)
 - [javax.xml.parsers.DocumentBuilder.parse(InputStream) / Java](java/jdk_documentbuilder/README.md)
 - [xercesImpl / Java](java/xercesimpl/README.md)
+- [sax / JavaScript](javascript/sax/README.md)
 - [saxes / JavaScript](javascript/saxes/README.md)
 - [XMLReader::XML(string $source, ?string $encoding = null, int $flags = 0); XMLReader::read() / PHP](php/stdlib_xmlreader/README.md)
 - [sabre/xml / PHP](php/sabre_xml/README.md)
