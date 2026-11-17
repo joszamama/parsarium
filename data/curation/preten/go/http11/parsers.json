@@ -315,5 +315,22 @@
       "target": "/parsarium?x=1",
       "host": "example.test"
     }
+  },
+  {
+    "name": "gnalloy.org/codec-http1",
+    "module": "gnalloy.org/codec-http1",
+    "version": "v0.0.0-20261006130159-161e7f51078b",
+    "license": "Apache-2.0",
+    "input_api": "NewRequestDecoder(int, int).Decode(nil, *buffer.CompositeByteBuf)",
+    "documentation": "https://pkg.go.dev/gnalloy.org/codec-http1@v0.0.0-20261006130159-161e7f51078b",
+    "scope": "request message",
+    "family": "gnalloy codec-http1 parser",
+    "expected_output": {
+      "method": "GET",
+      "target": "/parsarium?x=1",
+      "host": "example.test",
+      "proto": "HTTP/1.1"
+    },
+    "family_note": "Own HTTP/1.x header and request-line parser in a Netty-style codec for the gnalloy channel framework (splitRequestLine, parseHeaderFieldsWithFramingInto); not a net/http or fasthttp derivative. The adapter calls the exported RequestDecoder.Decode directly on a local CompositeByteBuf with a nil HandlerContext, as the package tests do; no channel, socket or listener is opened."
   }
 ]

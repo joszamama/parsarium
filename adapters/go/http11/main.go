@@ -11,8 +11,8 @@ import (
 	"strings"
 
 	oohttp "github.com/FastTLS/oohttp"
-	"github.com/antlabs/httparser"
 	fiohttp "github.com/antlabs/fio/http"
+	"github.com/antlabs/httparser"
 	"github.com/cloudwego/hertz/pkg/protocol"
 	hertzreq "github.com/cloudwego/hertz/pkg/protocol/http1/req"
 	"github.com/evanphx/wildcat"
@@ -32,6 +32,8 @@ import (
 	simd "github.com/sebishogun/simdhttp/http1"
 	"github.com/valyala/fasthttp"
 	clashhttp "github.com/zhaofenghao/clash/listener/http"
+	gnalloyhttp1 "gnalloy.org/codec-http1"
+	gnbuffer "gnalloy.org/gnalloy/buffer"
 )
 
 type byteReader struct {
@@ -208,6 +210,28 @@ func run(name, path string) (map[string]any, error) {
 			return nil, err
 		}
 		return map[string]any{"method": request.Method, "target": request.Path, "host": request.Headers["Host"]}, nil
+	case "gnalloy.org/codec-http1":
+		decoder, err := gnalloyhttp1.NewRequestDecoder(1<<20, 1<<20)
+		if err != nil {
+			return nil, err
+		}
+		source := gnbuffer.NewHeapBuffer(len(data))
+		if _, err := source.WriteBytes(data); err != nil {
+			return nil, err
+		}
+		input := gnbuffer.NewCompositeByteBuf()
+		input.Append(source)
+		defer input.Release()
+		message, err := decoder.Decode(nil, input)
+		if err != nil {
+			return nil, err
+		}
+		request, ok := message.(*gnalloyhttp1.Request)
+		if !ok || request == nil {
+			return nil, fmt.Errorf("HTTP request not completed")
+		}
+		defer request.Release()
+		return map[string]any{"method": strings.Clone(request.Method), "target": strings.Clone(request.URI), "host": strings.Clone(request.Headers.Get("Host")), "proto": strings.Clone(request.Version)}, nil
 	case "github.com/cloudwego/hertz/pkg/protocol/http1/req":
 		var request protocol.Request
 		if err := hertzreq.Read(&request, &byteReader{data: data}); err != nil {

@@ -24,6 +24,8 @@ require (
 	github.com/sebishogun/simdhttp v0.0.0-20261007210108-01268e016029
 	github.com/valyala/fasthttp v1.78.0
 	github.com/zhaofenghao/clash v1.0.14
+	gnalloy.org/codec-http1 v0.0.0-20261006130159-161e7f51078b
+	gnalloy.org/gnalloy v0.0.0-20260929060515-2be1d197ea13
 )
 
 require (
@@ -32,7 +34,7 @@ require (
 	github.com/Mzack9999/go-http-digest-auth-client v0.6.1-0.20220414142836-eb8883508809 // indirect
 	github.com/PuerkitoBio/goquery v1.12.0 // indirect
 	github.com/akrylysov/pogreb v0.10.2 // indirect
-	github.com/andybalholm/brotli v1.2.2 // indirect
+	github.com/andybalholm/brotli v1.2.3 // indirect
 	github.com/andybalholm/cascadia v1.3.3 // indirect
 	github.com/antlabs/pulse v0.0.0-20261007064121-2127031031e2 // indirect
 	github.com/antlabs/wsutil v0.1.13 // indirect
@@ -129,6 +131,7 @@ require (
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	github.com/zmap/rc2 v0.0.0-20190804163417-abaa70531248 // indirect
 	github.com/zmap/zcrypto v0.0.0-20240803002437-3a861682ac77 // indirect
+	gnalloy.org/codec-compression v0.0.0-20260831155050-e50fc657ce98 // indirect
 	go.etcd.io/bbolt v1.4.3 // indirect
 	go.uber.org/atomic v1.12.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
