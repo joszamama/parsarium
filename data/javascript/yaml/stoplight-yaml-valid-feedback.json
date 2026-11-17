@@ -1,0 +1,39 @@
+{
+  "checked_at_utc": "2026-11-17T20:30:42.375690+00:00",
+  "project": "yaml/javascript/stoplight_yaml",
+  "pass": true,
+  "input_kind": "two fixed valid schema-neutral YAML 1.2 controls",
+  "oracle": "hand-written typed trees in controls/yaml/check_controls.py (cross-checked there with Ruby Psych/libyaml)",
+  "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+  "feedback_scope": "V8 source ranges under /work/node_modules/@stoplight/, mapped to the AFL++ bitmap by the Parsarium JavaScript bridge",
+  "overlay_receipt_sha256": "e5f01d5bc50b02e11dd6ae38351e84ce3e5aa763160c260c845f5b5a740bc8f5",
+  "base_image_id": "sha256:c874183017fcc2ec5515d3195497dd0cff587e0f242a014098719ef4d16575ef",
+  "overlay_image_id": "sha256:9d5a0b67017b9ce2a90543a54ecfbbe47bc42116e2d599fe39fcd445c1ef5415",
+  "control": "controls/yaml/catalog.yaml",
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "differential": "controls/yaml/order.yaml",
+  "differential_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+  "control_matches_oracle": true,
+  "differential_matches_oracle": true,
+  "runs_per_control": 3,
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 415,
+  "control_afl_tuples": 431,
+  "differential_parser_features": 409,
+  "differential_afl_tuples": 426,
+  "parser_feature_difference": 74,
+  "afl_tuple_difference": 73,
+  "control_only_features_by_file": {
+    "yaml-ast-parser/dist/src/loader.js": 25,
+    "yaml-ast-parser/dist/src/scalarInference.js": 1,
+    "yaml-ast-parser/dist/src/type/bool.js": 5,
+    "yaml-ast-parser/dist/src/type/float.js": 3,
+    "yaml-ast-parser/dist/src/type/int.js": 4,
+    "yaml-ast-parser/dist/src/type/null.js": 2
+  },
+  "differential_only_features_by_file": {
+    "yaml-ast-parser/dist/src/loader.js": 33,
+    "yaml-ast-parser/dist/src/type/null.js": 1
+  }
+}

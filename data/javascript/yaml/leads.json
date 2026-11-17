@@ -40,15 +40,16 @@
   },
   {
     "name": "@stoplight/yaml",
-    "status": "shared_family",
+    "status": "selected",
     "metric_value": 29327835,
     "metric_error": null,
-    "family": "yaml-ast-parser (js-yaml fork)",
-    "api_hint": "parseWithPointers(string)",
-    "note": "Wraps @stoplight/yaml-ast-parser; shared lineage.",
+    "family": "Wrapper: @stoplight/yaml walker over @stoplight/yaml-ast-parser 0.0.50 (fork of yaml-ast-parser, js-yaml 3.x lineage)",
+    "api_hint": "parseWithPointers(text) with default options",
+    "note": null,
     "found_by": "registry_search",
     "source": "https://www.npmjs.com/package/@stoplight/yaml",
-    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+    "reason": "Selected: pinned 4.3.0 passes both schema-neutral YAML controls against the hand-written typed-tree oracle, with Docker V8 coverage and stable input-dependent AFL++ feedback. Labelled wrapper: see family_note in parsers.json.",
+    "evidence": "projects/yaml/javascript/stoplight_yaml/verification.json"
   },
   {
     "name": "yamljs",
