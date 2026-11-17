@@ -1,0 +1,156 @@
+[
+  {
+    "name": "music-metadata",
+    "status": "unresolved_shared_family",
+    "lead_kind": "own_parser_not_selected",
+    "version_seen": "12.5.0",
+    "license": "MIT",
+    "npm_downloads_30d": 9827896,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/music-metadata",
+    "reason": "Own MPEG frame-header parser (lib/mpeg/MpegParser.js) behind documented parseBuffer/parseFile/parseStream; reports sampleRate, numberOfChannels, codec and frame-scanned duration. Fewer downloads than mediabunny, so not built here. Same music-metadata parser family as the verified mp3_id3v2/javascript path (12.4.0 there).",
+    "source": "https://www.npmjs.com/package/music-metadata"
+  },
+  {
+    "name": "codec-parser",
+    "status": "unresolved",
+    "lead_kind": "own_parser_not_selected",
+    "version_seen": "2.5.0",
+    "license": "LGPL-3.0-or-later",
+    "npm_downloads_30d": 2683215,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/codec-parser",
+    "reason": "Own MPEG/AAC/FLAC/Ogg frame parser (MPEGParser, MPEGHeader) with documented new CodecParser('audio/mpeg').parseAll(Uint8Array). Fewer downloads than mediabunny; not run in this one-package pilot. Strongest independent unbuilt lead.",
+    "source": "https://www.npmjs.com/package/codec-parser"
+  },
+  {
+    "name": "mpg123-decoder",
+    "status": "unresolved_shared_family",
+    "lead_kind": "decoder_not_selected",
+    "version_seen": "1.0.3",
+    "license": "MIT",
+    "npm_downloads_30d": 2505430,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mpg123-decoder",
+    "reason": "mpg123 compiled to WASM with documented MPEGDecoder.decode(Uint8Array). Same libmpg123 engine as the verified C plain MP3 pilot and the mp3_id3v2/javascript @audio/decode paths.",
+    "source": "https://www.npmjs.com/package/mpg123-decoder"
+  },
+  {
+    "name": "audio-decode",
+    "status": "unresolved_shared_family",
+    "lead_kind": "wrapper",
+    "version_seen": "3.12.0",
+    "license": "MIT",
+    "npm_downloads_30d": 1467199,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/audio-decode",
+    "reason": "Unscoped alias of @audio/decode; MP3 path delegates to @audio/decode-mp3 and mpg123-decoder WASM (libmpg123 family).",
+    "source": "https://www.npmjs.com/package/audio-decode"
+  },
+  {
+    "name": "@audio/decode-mp3",
+    "status": "unresolved_shared_family",
+    "lead_kind": "wrapper",
+    "version_seen": "1.3.1",
+    "license": "MIT",
+    "npm_downloads_30d": 703988,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@audio/decode-mp3",
+    "reason": "Delegates MP3 decoding to mpg123-decoder WASM (libmpg123 family); verified in mp3_id3v2/javascript for the tagged control.",
+    "source": "https://www.npmjs.com/package/@audio/decode-mp3"
+  },
+  {
+    "name": "@audio/decode",
+    "status": "unresolved_shared_family",
+    "lead_kind": "wrapper",
+    "version_seen": "4.3.0",
+    "license": "MIT",
+    "npm_downloads_30d": 621561,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@audio/decode",
+    "reason": "Facade over @audio/decode-mp3 and mpg123-decoder WASM (libmpg123 family); verified in mp3_id3v2/javascript.",
+    "source": "https://www.npmjs.com/package/@audio/decode"
+  },
+  {
+    "name": "mp3-duration",
+    "status": "unresolved",
+    "lead_kind": "duration_only",
+    "version_seen": "1.1.0",
+    "license": "MIT",
+    "npm_downloads_30d": 43261,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mp3-duration",
+    "reason": "Own frame-header scan that returns only a duration number; no frame metadata API. Verified in mp3_id3v2/javascript for duration scope.",
+    "source": "https://www.npmjs.com/package/mp3-duration"
+  },
+  {
+    "name": "get-mp3-duration",
+    "status": "unresolved",
+    "lead_kind": "duration_only",
+    "version_seen": "1.0.0",
+    "license": "MIT",
+    "npm_downloads_30d": 41334,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/get-mp3-duration",
+    "reason": "Own frame-header scan that returns only milliseconds from a Buffer; verified in mp3_id3v2/javascript for duration scope.",
+    "source": "https://www.npmjs.com/package/get-mp3-duration"
+  },
+  {
+    "name": "mp3-parser",
+    "status": "unresolved",
+    "lead_kind": "own_parser_not_selected",
+    "version_seen": "0.3.0",
+    "license": "MIT",
+    "npm_downloads_30d": 40519,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mp3-parser",
+    "reason": "Own frame and tag reader (readFrameHeader, readFrame over DataView); low downloads relative to mediabunny. Not run.",
+    "source": "https://www.npmjs.com/package/mp3-parser"
+  },
+  {
+    "name": "is-mp3",
+    "status": "excluded",
+    "lead_kind": "signature_only",
+    "version_seen": "1.1.4",
+    "license": "MIT",
+    "npm_downloads_30d": 39703,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/is-mp3",
+    "reason": "Signature check on leading bytes; does not parse frame streams.",
+    "source": "https://www.npmjs.com/package/is-mp3"
+  },
+  {
+    "name": "mp3",
+    "status": "unresolved",
+    "lead_kind": "decoder_not_selected",
+    "version_seen": "0.1.0",
+    "license": "GPL",
+    "npm_downloads_30d": 26941,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mp3",
+    "reason": "Aurora.js Layer III decoder plugin; requires the Aurora.js framework; low downloads. Not run.",
+    "source": "https://www.npmjs.com/package/mp3"
+  },
+  {
+    "name": "js-mp3",
+    "status": "unresolved",
+    "lead_kind": "decoder_not_selected",
+    "version_seen": "0.1.0",
+    "license": "MIT",
+    "npm_downloads_30d": 8396,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/js-mp3",
+    "reason": "Pure JavaScript decoder; low downloads. Not run.",
+    "source": "https://www.npmjs.com/package/js-mp3"
+  },
+  {
+    "name": "minimp3",
+    "status": "unresolved",
+    "lead_kind": "decoder_not_selected",
+    "version_seen": "2.0.0",
+    "license": "MIT",
+    "npm_downloads_30d": 184,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/minimp3",
+    "reason": "Native Node bindings for minimp3 (C); low downloads. Not run.",
+    "source": "https://www.npmjs.com/package/minimp3"
+  },
+  {
+    "name": "mpeg-frame-parser",
+    "status": "unresolved",
+    "lead_kind": "own_parser_not_selected",
+    "version_seen": "0.3.1",
+    "license": "MIT",
+    "npm_downloads_30d": 23,
+    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mpeg-frame-parser",
+    "reason": "Small MPEG audio frame metadata stream; negligible downloads. Not run.",
+    "source": "https://www.npmjs.com/package/mpeg-frame-parser"
+  }
+]

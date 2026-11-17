@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T03:43:23.523610+00:00",
+  "projects_total": 1,
+  "projects_passed": 1,
+  "differential_kind": "fixed_valid_22k_stereo_control",
+  "standard_feedback": "none: Node.js documents no MPEG audio parser API",
+  "results": [
+    {
+      "project": "mp3/javascript/mediabunny",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "de57d39ab79857eb7e72705f4db763653b0d1cb96278a96d2dd357026fee8325",
+      "base_image_id": "sha256:3ec14b2b6bbe3fe1b36af17ad7c2b81172a9279e1d78fd7745c268c59c5d0da8",
+      "overlay_image_id": "sha256:8d85e82c7953d0af4e55ecb187fd9e65a5af0dc9b47611c9c6d3b0559a2cc55e",
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+      "differential": "controls/mp3/tone-22k-stereo.mp3",
+      "differential_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+      "differential_output": {
+        "format": "MP3",
+        "codec": "mp3",
+        "sample_rate": 22050,
+        "channels": 2,
+        "frames": 12,
+        "frame_bytes": 1254,
+        "samples_per_channel": 6912
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 335,
+      "control_afl_tuples": 352,
+      "differential_parser_features": 336,
+      "differential_afl_tuples": 353,
+      "parser_feature_difference": 3,
+      "afl_tuple_difference": 3,
+      "control_only_features_by_file": {
+        "shared/mp3-misc.js": 1
+      },
+      "differential_only_features_by_file": {
+        "shared/mp3-misc.js": 2
+      }
+    }
+  ]
+}
