@@ -19,6 +19,11 @@
 
 Native C++17 PoDoFo PDF document reader; distinct from Poppler.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/cpp/podofo/README.md)
+
+```sh
+python3 parsarium.py build pdf cpp podofo
+python3 parsarium.py run pdf cpp podofo controls/pdf/one-page.pdf
+```
