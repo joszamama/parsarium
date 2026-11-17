@@ -9,6 +9,7 @@
 - [mupdf / C](c/mupdf/README.md)
 - [poppler-glib / C](c/poppler-glib/README.md)
 - [qpdf / C](c/qpdf/README.md)
+- [ghostscript / C++](cpp/ghostscript/README.md)
 - [libvips / C++](cpp/libvips/README.md)
 - [mupdf / C++](cpp/mupdf/README.md)
 - [pdfwriter / C++](cpp/pdfwriter/README.md)

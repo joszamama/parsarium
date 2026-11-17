@@ -1,6 +1,6 @@
 # PDF / C++
 
-10 verified third-party API paths; 6 have verified Docker harnesses.
+10 verified third-party API paths; 7 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/pdf/ranking.md) · [standard API inventory](../../../data/cpp/pdf/standard.json)
 
@@ -10,7 +10,7 @@
 - [podofo](podofo/README.md) — Docker harness ready
 - [qpdf](qpdf/README.md) — Docker harness ready
 - [mupdf](mupdf/README.md) — Docker harness ready
-- [ghostscript](ghostscript/README.md) — verified API path
+- [ghostscript](ghostscript/README.md) — Docker harness ready
 - [pdfwriter](pdfwriter/README.md) — Docker harness ready
 - [pdf4qt](pdf4qt/README.md) — verified API path
 - [imagemagick](imagemagick/README.md) — verified API path

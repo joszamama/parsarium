@@ -10,6 +10,7 @@ import sys
 import tempfile
 
 from run_case import ROOT, project_for
+from prepare_afl_run import uses_afl_file_input
 
 
 def check(relative: Path, scratch: Path) -> dict:
@@ -42,7 +43,7 @@ def check(relative: Path, scratch: Path) -> dict:
                                       {"go", "java", "javascript", "python", "php"} else
                                       ["--", "/work/afl_fuzzer", "@@"] if manifest["ecosystem"] == "rust" else
                                       ["--", manifest.get("afl_entrypoint", "/work/fuzzer"),
-                                       *(["@@"] if manifest.get("afl_file_input") is True else [])])
+                                       *(["@@"] if uses_afl_file_input(manifest) else [])])
     assert plan["command"][-len(expected_tail):] == expected_tail
     return {"project": str(relative), "status": "ready",
             "image_id": plan["image_id"], "control_sha256": plan["control_sha256"],

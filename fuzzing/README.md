@@ -18,17 +18,17 @@ python3 parsarium.py replay png c libpng generated/png runs/libpng-replay \
 
 ## AFL++
 
-All 83 projects have a verified AFL++ overlay. The feedback source depends on the ecosystem:
+Fully verified projects have an AFL++ overlay; the [current audit](../data/projects-coverage.json) records which paths are ready. The feedback source depends on the project:
 
-| Ecosystem | Projects | AFL++ feedback |
-| --- | ---: | --- |
-| C, C++ | 21 | Compiled parser edges |
-| Rust | 10 | Compiled parser edges through afl.rs |
-| Go | 10 | Covered parser-package statement blocks |
-| Java | 10 | JaCoCo-covered parser source lines |
-| JavaScript | 10 | Executed V8 parser source ranges |
-| Python | 12 | Executed parser source lines |
-| PHP | 10 | Xdebug-covered parser source lines |
+| Ecosystem | AFL++ feedback |
+| --- | --- |
+| C, C++ | Compiled parser edges |
+| Rust | Compiled parser edges through afl.rs |
+| Go | Covered parser-package statement blocks |
+| Java | JaCoCo-covered parser source lines |
+| JavaScript | Executed V8 parser source ranges |
+| Python | Parser source features or pinned native library edges, as recorded per path |
+| PHP | Xdebug-covered parser source lines |
 
 For Go, Java, JavaScript, Python, and PHP, a small instrumented proxy maps parser features into AFL++'s shared feedback map. The parser packages remain unchanged. These bridges are slower than native instrumentation, and their feature and tuple counts are not comparable across ecosystems. Hash collisions in the 64 KiB map are possible. The PHP bridge treats ordinary `Exception` values as parser rejections; PHP `Error` values and process failures remain fatal.
 
@@ -42,11 +42,13 @@ python3 parsarium.py afl summary runs/jply-afl
 
 `afl build` creates the selected local image and verifies its parser coverage. A fresh checkout needs this step before preparation. `afl prepare` copies the project's valid control into `seeds/`, checks the overlay receipt and local image, and writes `plan.json`. Additional inputs enter with repeated `--seed FILE` or `--seed-dir DIRECTORY`. `afl run` checks the plan, image, and seed hashes before starting a time-bounded campaign. `--resume` continues the same `afl-out/` directory. `afl summary` inventories queue, crash, and hang files with hashes and reads AFL++'s `fuzzer_stats`.
 
-Five short campaigns exercised the Go, Java, JavaScript, Python, and PHP bridges; [campaign receipts](../data/afl-campaign-smoke.json) record actual executions and statistics. [Differential checks](../data/afl-feedback-differential.json) show that input-dependent parser features change AFL++ feedback in each of those ecosystems. [Plan preflights](../data/afl-plan-smoke.json) cover all 83 projects. These checks establish runnable launchers and feedback, not parser safety.
+C and C++ plans pass `@@` to the verified one-file harness. AFL++ replaces it with each input path; the harness receives the same file argument used by the valid-control check. A manifest can explicitly opt out when its target reads standard input.
+
+Historical short bridge checks for Go, Java, JavaScript, Python, and PHP have [receipts](../data/afl-campaign-smoke.json). [Differential checks](../data/afl-feedback-differential.json) show input-dependent parser features in those ecosystems. [Recorded plan preflights](../data/afl-plan-smoke.json) cover verified projects at the time each check ran; rerunning a preflight requires its pinned image locally. These checks establish runnable launchers and feedback, not parser safety.
 
 ## Ecosystem fuzz engines
 
-Each project also includes its native fuzz entry point: libFuzzer for C, C++, and Rust; Go native fuzzing; Jazzer for Java; Jazzer.js for JavaScript; Atheris for Python; and PHP-Fuzzer for PHP.
+Most projects also expose a native fuzz engine: libFuzzer for C, C++, and Rust; Go native fuzzing; Jazzer for Java; Jazzer.js for JavaScript; Atheris for Python; and PHP-Fuzzer for PHP. Paths that require a fresh process per input say so in their manifest and project guide.
 
 ```sh
 python3 parsarium.py build png javascript pngjs

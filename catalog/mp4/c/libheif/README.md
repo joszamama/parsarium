@@ -22,6 +22,11 @@
 
 C and C++ adapters call the same libheif 1.23.7 C API and parser. This separate parser reads the MP4 video sequence and ignores audio.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/c/libheif/README.md)
+
+```sh
+python3 parsarium.py build mp4 c libheif
+python3 parsarium.py run mp4 c libheif controls/mp4/red-av.mp4
+```

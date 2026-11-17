@@ -17,6 +17,11 @@ from build_afl_native import OVERLAYS
 from run_case import MAX_CASE_BYTES, ROOT, project_for
 
 
+def uses_afl_file_input(manifest: dict) -> bool:
+    """Native C/C++ harnesses consume a file path unless explicitly overridden."""
+    return manifest.get("afl_file_input", manifest["ecosystem"] in {"c", "cpp"}) is True
+
+
 def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
                  output_dir: Path, timeout_ms: int, container_name: str) -> tuple[list[str], list[str]]:
     binary = manifest.get("coverage_kind") == "native_binary_edges"
@@ -57,7 +62,7 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
         target_args = ["/work/afl_proxy", "@@"]
     else:
         target_args = [manifest.get("afl_entrypoint", "/work/fuzzer")]
-        if manifest.get("afl_file_input") is True:
+        if uses_afl_file_input(manifest):
             target_args.append("@@")
     mode = ["-Q"] if binary else []
     launcher = ["afl-fuzz"] if tk_source_feedback else []

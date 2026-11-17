@@ -1,6 +1,6 @@
 # SVG / C++
 
-10 verified third-party API paths; 5 have verified Docker harnesses.
+10 verified third-party API paths; 6 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/svg/ranking.md) · [standard API inventory](../../../data/cpp/svg/standard.json)
 
@@ -12,7 +12,7 @@
 - [resvg](resvg/README.md) — verified API path
 - [lunasvg](lunasvg/README.md) — Docker harness ready
 - [qtsvg](qtsvg/README.md) — Docker harness ready
-- [thorvg](thorvg/README.md) — verified API path
+- [thorvg](thorvg/README.md) — Docker harness ready
 - [gdk-pixbuf](gdk-pixbuf/README.md) — verified API path
 - [juce](juce/README.md) — Docker harness ready
 - [wxwidgets](wxwidgets/README.md) — verified API path
