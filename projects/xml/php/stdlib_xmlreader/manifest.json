@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "xml",
+  "ecosystem": "php",
+  "package": "php-xmlreader",
+  "release": "8.5.12",
+  "api": "XMLReader::XML(string $source, ?string $encoding = null, int $flags = 0); XMLReader::read()",
+  "runtime": "PHP 8.5.12 CLI (source build, --disable-all --with-libxml --enable-xmlreader) with source-built libxml2 2.15.4",
+  "standard_inventory": "data/php/xml/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "underlying_release": "libxml2 2.15.4",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "fuzz_engine_sha256": "3a1e9c3421208d4065310e95dd65a6b3920762c115bef0c60133cd58a707a21a",
+  "fuzz_smoke_entrypoint": "/opt/php/bin/php",
+  "fuzz_smoke_args": [
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "harness": "harness.php",
+  "coverage": "Clang/LLVM source coverage in PHP 8.5.12 ext/xmlreader and ext/libxml plus source-built libxml2 2.15.4 during valid namespace-aware XML replay",
+  "coverage_subject_prefix": "/work/source/php-8.5.12/ext/",
+  "format_specific_coverage_file_suffix": "/xmlreader/php_xmlreader.c",
+  "underlying_coverage_subject_prefix": "/work/source/libxml2-2.15.4/",
+  "underlying_format_specific_coverage_file_suffix": "/libxml2-2.15.4/parser.c"
+}

@@ -1,0 +1,67 @@
+{
+  "ecosystem": "PHP",
+  "format": "XML",
+  "status": "standard_api_verified",
+  "verified_apis": [
+    {
+      "runtime": "PHP 8.5.12 CLI (source build, --disable-all --with-libxml --enable-xmlreader) with source-built libxml2 2.15.4",
+      "api": "XMLReader::XML(string $source, ?string $encoding = null, int $flags = 0); XMLReader::read()",
+      "documentation": "https://www.php.net/manual/en/xmlreader.xml.php",
+      "adapter": "projects/xml/php/stdlib_xmlreader/harness.php",
+      "control": "controls/xml/catalog-ns.xml",
+      "observable_result": "prefixed root {urn:parsarium:catalog}catalog with a default-namespace child scope, 5 elements in Clark notation, 2 namespace declarations, a prefixed attribute {urn:parsarium:catalog}lang, entity-decoded text and a CDATA section, depth 3",
+      "result": "projects/xml/php/stdlib_xmlreader/verification.json",
+      "family": "libxml2 (via PHP ext/libxml)",
+      "family_note": "PHP's bundled XML extensions DOMDocument/Dom\\XMLDocument (ext/dom), SimpleXML (ext/simplexml), XMLReader (ext/xmlreader) and xml_parser_create (ext/xml, libxml2 SAX compatibility layer) all parse through libxml2. Packagist wrappers of these APIs (sabre/xml, veewee/xml, symfony/dom-crawler, mtownsend/xml-to-array, laravie/parser and similar) share this family and are not independent parser engines.",
+      "expected": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      }
+    }
+  ],
+  "unverified_documented_apis": [
+    {
+      "api": "DOMDocument::loadXML(string $source, int $options = 0)",
+      "documentation": "https://www.php.net/manual/en/domdocument.loadxml.php",
+      "status": "pending",
+      "reason": "Same libxml2 parser family; ext/dom not built or run in this pilot."
+    },
+    {
+      "api": "simplexml_load_string(string $data, ...)",
+      "documentation": "https://www.php.net/manual/en/function.simplexml-load-string.php",
+      "status": "pending",
+      "reason": "Same libxml2 parser family; ext/simplexml not built or run in this pilot."
+    },
+    {
+      "api": "xml_parse(XMLParser $parser, string $data, bool $is_final = false)",
+      "documentation": "https://www.php.net/manual/en/function.xml-parse.php",
+      "status": "pending",
+      "reason": "ext/xml SAX API over libxml2; not built or run in this pilot."
+    }
+  ],
+  "no_api_findings": [],
+  "limit": "Two small UTF-8 namespace-aware controls without DOCTYPE verify XMLReader::XML for this PHP 8.5.12/libxml2 2.15.4 build; they do not establish DTD, external entity, non-UTF-8 encoding, XML 1.1 or validation behaviour."
+}
