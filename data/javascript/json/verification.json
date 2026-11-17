@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T05:06:32.733768+00:00",
+  "checked_at_utc": "2026-11-17T13:11:39.964860+00:00",
   "platform": "linux/arm64 Docker",
   "node": "Node.js 26.10.0",
   "controls": {
@@ -317,6 +317,106 @@
       },
       "parser_source_files": 9,
       "parser_source_lines_covered": 1235,
+      "error": null
+    },
+    {
+      "package": "json-bigint",
+      "version": "1.0.0",
+      "scope": "One complete JSON text from local bytes decoded as strict UTF-8 via JSONbig.parse(text); type-tagged returned tree",
+      "command": "python3 scripts/run_project.py json javascript json_bigint",
+      "receipt": "projects/json/javascript/json_bigint/verification.json",
+      "pass": true,
+      "output": {
+        "type": "object",
+        "members": {
+          "enabled": {
+            "type": "boolean",
+            "value": true
+          },
+          "missing": {
+            "type": "null"
+          },
+          "name": {
+            "type": "string",
+            "value": "parsarium"
+          },
+          "nested": {
+            "type": "object",
+            "members": {
+              "empty": {
+                "type": "object",
+                "members": {}
+              },
+              "items": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "object",
+                    "members": {
+                      "id": {
+                        "type": "number",
+                        "value": 1
+                      },
+                      "ok": {
+                        "type": "boolean",
+                        "value": false
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "members": {
+                      "id": {
+                        "type": "number",
+                        "value": 2
+                      },
+                      "text": {
+                        "type": "string",
+                        "value": "café \"quoted\""
+                      }
+                    }
+                  }
+                ]
+              },
+              "level": {
+                "type": "number",
+                "value": 2
+              },
+              "list": {
+                "type": "array",
+                "items": []
+              }
+            }
+          },
+          "ratio": {
+            "type": "number",
+            "value": -2.5
+          },
+          "tags": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string",
+                "value": "json"
+              },
+              {
+                "type": "string",
+                "value": "go"
+              },
+              {
+                "type": "string",
+                "value": "rfc8259"
+              }
+            ]
+          },
+          "version": {
+            "type": "number",
+            "value": 1
+          }
+        }
+      },
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 293,
       "error": null
     }
   ],

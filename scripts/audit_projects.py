@@ -1018,8 +1018,11 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
             return False
         validation = json.loads(validation_path.read_text())
         allowlist_hash = sha256(allowlist_path.read_bytes()).hexdigest()
-        if (str(project) != "mp3/go/github_com_tosone_minimp3"
-                or overlay.get("feedback_kind") != "go_cgo_minimp3_native_c_parser_edges"
+        native_cgo_kinds = {
+            "mp3/go/github_com_tosone_minimp3": "go_cgo_minimp3_native_c_parser_edges",
+            "xml/go/github_com_moovweb_gokogiri": "go_cgo_libxml2_native_xml_parser_edges",
+        }
+        if (overlay.get("feedback_kind") != native_cgo_kinds.get(str(project))
                 or overlay.get("afl_entrypoint") != manifest.get("afl_entrypoint")
                 or overlay.get("afl_file_input") is not True
                 or overlay.get("source_sha256") != manifest["source_sha256"]
@@ -1034,6 +1037,16 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
                 or validation.get("first_sha256") != manifest["control_sha256"]
                 or validation.get("second_sha256") != manifest["differential_control_sha256"]
                 or validation.get("second_control_output") != manifest["differential_expected_output"]):
+            return False
+        if str(project) == "xml/go/github_com_moovweb_gokogiri" and (
+                overlay.get("underlying_source_sha256") != manifest.get("underlying_source_sha256")
+                or validation.get("first_control_output") != manifest["expected_output"]
+                or validation.get("parse_only_repeat_maps_identical") is not True
+                or validation.get("parse_only_and_full_maps_identical") is not True
+                or validation.get("post_parse_tuples") != 0
+                or validation.get("parse_only_tuple_difference", 0) < 2
+                or validation.get("feedback_scope") !=
+                "AFL++ CLASSIC allowlist of native libxml2 parser.c, parserInternals.c and entities.c; Go runtime, binding and DOM traversal excluded"):
             return False
     if manifest.get("afl_native_c_binding"):
         native_dir = overlay_path.parent

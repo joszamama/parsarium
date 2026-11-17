@@ -1,10 +1,10 @@
 {
   "ecosystem": "go",
   "format": "xml",
-  "status": "pilot_six_selected_search_bounded",
+  "status": "pilot_seven_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 6,
+  "verified_third_party_count": 7,
   "verified_standard_or_runtime_count": 1,
   "search_queries": [
     "xml",
@@ -17,8 +17,8 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 496,
   "unique_search_hits": 464,
-  "unresolved_documentation_leads": 10,
-  "uncertainty": "Six Go XML package paths pass two valid namespace-aware controls with parser-source coverage and stable AFL++ feedback: etree 2,098; xmlquery 627; mxj 553; beego/x2j 436; govmomi/vim25/xml 163; goxpp 132 Imported by. The first four and goxpp use the Go encoding/xml runtime tokenizer through package-specific tree, map or cursor APIs. govmomi/vim25/xml contains its own compiled tokenizer fork of Go encoding/xml; the pinned v0.56.2 package imports no runtime encoding/xml and covers 290 own xml.go lines. Its parser-only AFL feedback differs by 30 fork-source blocks on the valid controls with stable repeats. Its source is a 12,553,438-byte whole govmomi module archive, though the XML package itself is much smaller. Higher-adoption goxml2json (182) and mxj/v2 (178), plus eight other numeric leads, remain unverified; ranks cover selected verified paths only. mxj and x2j map routes lose namespace URIs/prefixes and mixed-content details; x2j byte/string routes alter CDATA whitespace on the valid catalog control, while its selected reader route preserves it. Six pkg.go.dev queries recorded 496 hits, 464 unique; the first 100 hits per query were captured where available. Two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour.",
+  "unresolved_documentation_leads": 9,
+  "uncertainty": "Seven Go XML package paths pass two valid namespace-aware controls with parser-source coverage and stable AFL++ feedback: etree 2,098; xmlquery 627; mxj 553; beego/x2j 436; govmomi/vim25/xml 163; goxpp 132; gokogiri/xml 108 Imported by. The first four and goxpp use the Go encoding/xml runtime tokenizer through package-specific tree, map or cursor APIs. govmomi/vim25/xml contains its own compiled tokenizer fork of Go encoding/xml; the pinned v0.56.2 package imports no runtime encoding/xml and covers 290 own xml.go lines. Its parser-only AFL feedback differs by 30 fork-source blocks on the valid controls with stable repeats. Its source is a 12,553,438-byte whole govmomi module archive, though the XML package itself is much smaller. Higher-adoption goxml2json (182) and mxj/v2 (178), plus seven other numeric leads, remain unverified; ranks cover selected verified paths only. mxj and x2j map routes lose namespace URIs/prefixes and mixed-content details; x2j byte/string routes alter CDATA whitespace on the valid catalog control, while its selected reader route preserves it. Gokogiri is a cgo DOM binding over pinned libxml2 2.15.4 with 93 Go binding and 1,730 native parser source lines covered; parser-only AFL feedback differs between the controls and is stable over five repeats. Six pkg.go.dev queries recorded 496 hits, 464 unique; the first 100 hits per query were captured where available. Two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour.",
   "third_party_evidence": "data/go/xml/parsers.json",
   "third_party_control_results": "data/go/xml/verification.json",
   "runtime_evidence": "data/go/xml/standard.json",

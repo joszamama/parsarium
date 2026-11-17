@@ -1,0 +1,84 @@
+{
+  "project": "json/javascript/json_bigint",
+  "pass": true,
+  "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+  "overlay_receipt_sha256": "4d0f5421f783a1b97bbbf7cd2ec40968a2f428ed5ad8b555907653be36577b31",
+  "base_image_id": "sha256:207069c03fc15259ebdde68790d284bc9971cdf31ca193977721a3c6a0638cc4",
+  "overlay_image_id": "sha256:0226a1be3efb76fc52e08fa015751fe28a8f886aa5d40b6e83596756b0854824",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "differential": "controls/json/nested-array.json",
+  "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_output": {
+    "type": "array",
+    "items": [
+      {
+        "type": "number",
+        "value": 1
+      },
+      {
+        "type": "number",
+        "value": 0.25
+      },
+      {
+        "type": "string",
+        "value": "two"
+      },
+      {
+        "type": "array",
+        "items": [
+          {
+            "type": "boolean",
+            "value": true
+          },
+          {
+            "type": "null"
+          },
+          {
+            "type": "array",
+            "items": [
+              {
+                "type": "boolean",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "object",
+        "members": {
+          "k": {
+            "type": "array",
+            "items": []
+          },
+          "n": {
+            "type": "object",
+            "members": {
+              "deep": {
+                "type": "string",
+                "value": "A"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 50,
+  "control_afl_tuples": 70,
+  "differential_parser_features": 43,
+  "differential_afl_tuples": 63,
+  "parser_feature_difference": 7,
+  "afl_tuple_difference": 7,
+  "control_only_features_by_file": {
+    "lib/parse.js": 7
+  },
+  "differential_only_features_by_file": {
+    "lib/parse.js": 0
+  },
+  "parser_source_path": "/work/node_modules/json-bigint/lib/parse.js",
+  "release_tarball_sha256": "4c4f502953cfb36cfe1c6c4989676bf9b76899a253237fc0220814b88ff903b6"
+}

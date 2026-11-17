@@ -36,6 +36,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer) / JavaScript](javascript/stdlib_json_parse/README.md)
 - [JSONStream / JavaScript](javascript/jsonstream/README.md)
 - [bfj / JavaScript](javascript/bfj/README.md)
+- [json-bigint / JavaScript](javascript/json_bigint/README.md)
 - [jsonparse / JavaScript](javascript/jsonparse/README.md)
 - [stream-json / JavaScript](javascript/stream_json/README.md)
 - [halaxa/json-machine / PHP](php/halaxa_json_machine/README.md)

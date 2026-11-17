@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T12:41:31.647261+00:00",
-  "projects_total": 7,
-  "projects_passed": 7,
+  "checked_at_utc": "2026-11-17T13:15:59.502262+00:00",
+  "projects_total": 8,
+  "projects_passed": 8,
   "differential_kind": "fixed_valid_default_namespace_order",
   "results": [
     {
@@ -139,6 +139,26 @@
       "differential_afl_tuples": 218,
       "parser_feature_difference": 30,
       "afl_tuple_difference": 30
+    },
+    {
+      "project": "xml/go/github_com_moovweb_gokogiri",
+      "pass": true,
+      "feedback_kind": "go_cgo_libxml2_native_xml_parser_edges",
+      "overlay_receipt_sha256": "16cd3b8c80e97b7e9a8687111c8c945f2866d77303e1afb30083a163635621ff",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeated_control_identical": true,
+      "control_parser_features": null,
+      "control_afl_tuples": 700,
+      "differential_parser_features": null,
+      "differential_afl_tuples": 788,
+      "parser_feature_difference": null,
+      "afl_tuple_difference": 364,
+      "feedback_scope": "AFL++ CLASSIC allowlist of native libxml2 parser.c, parserInternals.c and entities.c; Go runtime, binding and DOM traversal excluded",
+      "post_parse_tuples": 0,
+      "source_feature_note": "Native libxml2 source lines are recorded in the base receipt; AFL++ parser-only tuple IDs are measured separately and are not mapped one-to-one to source features."
     }
   ]
 }

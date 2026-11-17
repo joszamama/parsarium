@@ -38,6 +38,8 @@ class JavaScriptJsonPilotTest(unittest.TestCase):
         cell = read(BASE / "cell.json")
         additional = read(ROOT / cell["afl_feedback_additional"])
         feedback[additional["project"]] = additional
+        bigint = read(BASE / "json-bigint-feedback-differential.json")
+        feedback[bigint["project"]] = bigint
         for parser in read(BASE / "parsers.json"):
             project = ROOT / parser["project"]
             manifest = read(project / "manifest.json")

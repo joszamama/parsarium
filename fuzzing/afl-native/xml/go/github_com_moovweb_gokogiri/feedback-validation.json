@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "pass": true,
+  "project": "xml/go/github_com_moovweb_gokogiri",
+  "feedback_scope": "AFL++ CLASSIC allowlist of native libxml2 parser.c, parserInternals.c and entities.c; Go runtime, binding and DOM traversal excluded",
+  "first_control": "controls/xml/catalog-ns.xml",
+  "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "first_control_output": {
+    "root": "{urn:parsarium:catalog}catalog",
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "namespace_declarations": 2,
+    "max_depth": 3,
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "second_control": "controls/xml/order-default-ns.xml",
+  "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "second_control_output": {
+    "root": "{urn:parsarium:order}order",
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "attributes": [
+      "{urn:parsarium:price}currency=EUR",
+      "n=1",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "namespace_declarations": 3,
+    "max_depth": 4,
+    "text": [
+      "A-7",
+      "12.50 \u20ac"
+    ]
+  },
+  "repeats_per_control": 5,
+  "first_native_tuples": 700,
+  "second_native_tuples": 788,
+  "native_tuple_difference": 364,
+  "repeat_maps_identical": true,
+  "parse_only_first_tuples": 700,
+  "parse_only_second_tuples": 788,
+  "parse_only_tuple_difference": 364,
+  "parse_only_repeat_maps_identical": true,
+  "parse_only_and_full_maps_identical": true,
+  "post_parse_tuples": 0,
+  "mutation_campaign_run": false,
+  "allowlist_sha256": "ecbe45ad603a7daea1dac0c35b8465ed5c3e137293969a58b1ad6406ae801782"
+}
