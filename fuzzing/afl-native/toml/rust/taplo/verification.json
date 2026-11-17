@@ -1,0 +1,406 @@
+{
+  "schema_version": 1,
+  "project": "toml/rust/taplo",
+  "pass": true,
+  "base_project_receipt_sha256": "62a4b7145e8721a5116671924a2bb951a6a96cb53f27593d7a54ec13e59c8ab6",
+  "overlay_file_sha256": {
+    "Cargo.toml": "267b19617795838b0e1d3194da9665f6a11d3ff04be48bdb7108a9df43a9298b",
+    "Cargo.lock": "949fee52c50659374c888c6cbb27fc75ec692e77352643535bf38cf6c2b5ca71",
+    "afl_fuzzer.rs": "c318c5f3ae56ec417d73532453ac93d471fa2774b3008cc42d2d48561a605036",
+    "Dockerfile": "0cbcdaf4a30bc801b394c8cfa3dc62825c94715f1949a172f2e0d415bbb11efe",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "build.py": "4ec63952aa3fc0965be81d56a13ad08f5e3287f9778b5697d11b74c8376e4842"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "c221a50eef1a5493074f11ca1ed62bef28c05a4d925002944cc686b2e783a5b3",
+  "image_id": "sha256:fc9fe5ec658a2e15ecff315d169905f95dbcaf650398758572ca59d3f67919f7",
+  "platform": "linux/arm64",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "feedback_edges": 2278,
+  "afl_map_size": 45502,
+  "feedback_kind": "afl_rs_taplo_only_sancov_edges",
+  "feedback_scope": "Only taplo crate objects carry SanitizerCoverage guards; harness, serde_json, logos, rowan, time, ahash, AFL runtime and other crates are uninstrumented; ahash RandomState keys for taplo's DOM lookup maps are fixed by the getrandom AFL_PRELOAD shim",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "taplo"
+    ],
+    "rlib_guard_bytes": {
+      "taplo": 181988
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "ahash",
+      "aho_corasick",
+      "arc_swap",
+      "bstr",
+      "cfg_if",
+      "countme",
+      "deranged",
+      "either",
+      "getrandom",
+      "globset",
+      "hashbrown",
+      "itertools",
+      "itoa",
+      "libc",
+      "log",
+      "logos",
+      "memchr",
+      "memoffset",
+      "num_conv",
+      "once_cell",
+      "parsarium_toml_taplo_harness",
+      "pin_project_lite",
+      "powerfmt",
+      "regex_automata",
+      "regex_syntax",
+      "rowan",
+      "rustc_hash",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "text_size",
+      "thiserror",
+      "time",
+      "time_core",
+      "tracing",
+      "tracing_core",
+      "xdg",
+      "zerocopy"
+    ],
+    "binary_guards": 45497
+  },
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "reason": "taplo keeps DOM table entries in an ahash HashMap index seeded from getrandom; constant getrandom bytes fix the keys; the parser source is unchanged.",
+    "replay_output_unchanged": true
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:836ce9796b4b0c23fdf28a1143121ead92d73f575fb46faac30e88ce4dc8d69f",
+  "variant_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "control_output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "variant_output": {
+    "floats": {
+      "exponent": {
+        "type": "float",
+        "value": "1000.0"
+      },
+      "fraction": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "mixed": {
+        "type": "float",
+        "value": "0.015625"
+      },
+      "negative": {
+        "type": "float",
+        "value": "-0.5"
+      }
+    },
+    "integers": {
+      "binary": {
+        "type": "integer",
+        "value": "13"
+      },
+      "decimal": {
+        "type": "integer",
+        "value": "99"
+      },
+      "hex": {
+        "type": "integer",
+        "value": "3735928559"
+      },
+      "negative": {
+        "type": "integer",
+        "value": "-17"
+      },
+      "octal": {
+        "type": "integer",
+        "value": "493"
+      },
+      "underscored": {
+        "type": "integer",
+        "value": "1000000"
+      }
+    },
+    "keys": {
+      "a": {
+        "b": {
+          "c": {
+            "type": "integer",
+            "value": "1"
+          }
+        }
+      },
+      "quoted key": {
+        "type": "string",
+        "value": "q"
+      },
+      "site": {
+        "example.com": {
+          "type": "bool",
+          "value": "true"
+        }
+      }
+    },
+    "strings": {
+      "escapes": {
+        "type": "string",
+        "value": "tab\tquote\"backslash\\ é"
+      },
+      "literal": {
+        "type": "string",
+        "value": "C:\\Users\\parsarium"
+      },
+      "multiline": {
+        "type": "string",
+        "value": "first second"
+      },
+      "raw_multiline": {
+        "type": "string",
+        "value": "line one\nline two"
+      }
+    },
+    "times": {
+      "local_date": {
+        "type": "date-local",
+        "value": "1979-05-27"
+      },
+      "local_datetime": {
+        "type": "datetime-local",
+        "value": "1979-05-27T07:32:00"
+      },
+      "local_time": {
+        "type": "time-local",
+        "value": "00:32:00.25"
+      },
+      "offset": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00.5Z"
+      }
+    }
+  },
+  "repeats": 10,
+  "variant_feedback_edges": 2552,
+  "edges_only_in_control": 546,
+  "edges_only_in_variant": 820,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/taplo-0.14.0/",
+    "control_lines": {
+      "src/dom/from_syntax.rs": 281,
+      "src/dom/index.rs": 0,
+      "src/dom/mod.rs": 7,
+      "src/dom/node.rs": 66,
+      "src/dom/node/nodes.rs": 162,
+      "src/dom/rewrite.rs": 0,
+      "src/dom/to_toml.rs": 0,
+      "src/formatter/macros.rs": 0,
+      "src/formatter/mod.rs": 0,
+      "src/parser/mod.rs": 268,
+      "src/syntax.rs": 24,
+      "src/util/escape.rs": 21,
+      "src/util/iter.rs": 16,
+      "src/util/mod.rs": 19,
+      "src/util/shared.rs": 20,
+      "src/util/syntax.rs": 0
+    },
+    "variant_lines": {
+      "src/dom/from_syntax.rs": 235,
+      "src/dom/index.rs": 0,
+      "src/dom/mod.rs": 7,
+      "src/dom/node.rs": 50,
+      "src/dom/node/nodes.rs": 195,
+      "src/dom/rewrite.rs": 0,
+      "src/dom/to_toml.rs": 0,
+      "src/formatter/macros.rs": 0,
+      "src/formatter/mod.rs": 0,
+      "src/parser/mod.rs": 208,
+      "src/syntax.rs": 84,
+      "src/util/escape.rs": 36,
+      "src/util/iter.rs": 16,
+      "src/util/mod.rs": 48,
+      "src/util/shared.rs": 17,
+      "src/util/syntax.rs": 0
+    },
+    "files_with_different_line_counts": [
+      "src/dom/from_syntax.rs",
+      "src/dom/node.rs",
+      "src/dom/node/nodes.rs",
+      "src/parser/mod.rs",
+      "src/syntax.rs",
+      "src/util/escape.rs",
+      "src/util/mod.rs",
+      "src/util/shared.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      2278,
+      2278,
+      2278,
+      2278,
+      2278,
+      2278,
+      2278,
+      2278,
+      2278,
+      2278
+    ],
+    "stable_edges": 2278,
+    "union_edges": 2278,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      2552,
+      2552,
+      2552,
+      2552,
+      2552,
+      2552,
+      2552,
+      2552,
+      2552,
+      2552
+    ],
+    "stable_edges": 2552,
+    "union_edges": 2552,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}
