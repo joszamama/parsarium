@@ -12,7 +12,6 @@ python3 parsarium.py run json go stdlib_unmarshal controls/json/nested-object.js
 python3 parsarium.py replay json go stdlib_unmarshal CORPUS_DIR runs/json-stdlib_unmarshal-replay
 python3 parsarium.py afl build json go stdlib_unmarshal
 python3 parsarium.py afl prepare json go stdlib_unmarshal runs/json-stdlib_unmarshal-afl
-python3 scripts/verify_go_json_feedback.py
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign. `verify_go_json_feedback.py` repeats the control probe and compares it with the second valid control, `controls/json/nested-array.json`.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.

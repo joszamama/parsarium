@@ -1,15 +1,15 @@
 # JSON / Go — pilot
 
-**Status:** pilot_not_started; incomplete. 0 verified third-party paths, 0 verified standard APIs, 0 verified Docker harnesses.
+**Status:** pilot_one_selected_search_bounded; incomplete. 1 verified third-party paths, 1 verified standard APIs, 1 verified Docker harnesses.
 
-No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence.
+Pilot cell: only the highest Imported-by general-purpose JSON parser lead (github.com/json-iterator/go, 18,454) was built and control-verified. Eight further numeric leads are logged in leads.json and are not selected or ranked. Non-parser hits such as loggers, JWT, JSON-RPC, and protobuf JSON mappers were not treated as leads. One valid nested object control does not establish complete RFC 8259 support.
 
-
+[Ranking and search limits](../../../data/go/json/ranking.md) · [Standard API inventory](../../../data/go/json/standard.json)
 
 ## Third-party parsers
 
-None verified in this pilot cell yet.
+- [github.com/json-iterator/go](github-com-json-iterator-go/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
 
-None verified in this pilot cell yet.
+- [encoding/json.Unmarshal(\[\]byte, any)](standard/encoding-json-unmarshal-byte-any/README.md) — verified Docker harness
