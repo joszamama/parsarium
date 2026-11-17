@@ -126,12 +126,13 @@ class CppJsonPicoTaoPilotTest(unittest.TestCase):
         self.assertEqual(ranked, sorted(ranked, reverse=True))
         self.assertEqual(len(ranked), 8)
 
-    def test_cell_is_at_ceiling_and_leads_resolved(self):
+    def test_cell_has_nine_paths_and_leads_resolved(self):
         parsers = read(BASE / "parsers.json")
         cell = read(BASE / "cell.json")
         leads = read(BASE / "leads.json")
         self.assertEqual(cell["verified_third_party_count"], len(parsers))
-        self.assertEqual(len(parsers), cell["ceiling"])
+        self.assertEqual(len(parsers), 9)  # POCO JSON demoted 2026-11-17
+        self.assertLess(len(parsers), cell["ceiling"])
         self.assertEqual(cell["unresolved_documentation_leads"],
                          sum(item["status"] == "unresolved" for item in leads))
         for package in PATHS:
@@ -167,8 +168,8 @@ class CppJsonPicoTaoPilotTest(unittest.TestCase):
             # Function-scoped entries instrument parser templates inlined into the probe.
             self.assertTrue(any(entry.startswith("fun:") for entry in differential["allowlist_entries"]))
             self.assertGreater(overlay["afl_map_size"], file_only_sites)
-        self.assertEqual(report["projects_total"], 10)
-        self.assertEqual(report["projects_passed"], 10)
+        self.assertEqual(report["projects_total"], 9)
+        self.assertEqual(report["projects_passed"], 9)
 
 
 if __name__ == "__main__":

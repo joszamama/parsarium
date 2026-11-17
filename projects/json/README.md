@@ -12,7 +12,6 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [yyjson / C](c/yyjson/README.md)
 - [Boost.JSON / C++](cpp/boost-json/README.md)
 - [Glaze / C++](cpp/glaze/README.md)
-- [POCO JSON / C++](cpp/poco-json/README.md)
 - [PicoJSON / C++](cpp/picojson/README.md)
 - [RapidJSON / C++](cpp/rapidjson/README.md)
 - [jsoncons / C++](cpp/jsoncons/README.md)

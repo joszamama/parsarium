@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "checked_at_utc": "2026-11-17T15:10:34.689170+00:00",
-  "projects_total": 10,
-  "projects_passed": 10,
+  "projects_total": 9,
+  "projects_passed": 9,
   "differential_kind": "two fixed valid nested JSON controls; Glaze, POCO, jsoncons, PicoJSON and taoJSON use parser-only probes with exact DOM checks (PicoJSON and taoJSON objects compared by key)",
   "command": "python3 projects/json/cpp/picojson/verify-feedback.py and python3 projects/json/cpp/tao-json/verify-feedback.py; earlier paths retain recorded receipts",
   "results": [
@@ -114,27 +114,6 @@
       "source_line_difference": 25,
       "afl_tuple_difference": 140,
       "parser_only_probe": "projects/json/cpp/glaze/parser-probe.cpp",
-      "exact_tree_outputs_verified": true
-    },
-    {
-      "project": "json/cpp/poco-json",
-      "pass": true,
-      "feedback_kind": "native_afl_clang_fast_parser_only_edges_with_poco_pdjson_source_lines",
-      "overlay_receipt_sha256": "8676908adb1e3badba26245026f89532819dcd48ab3eeb754dc5c0d0ba76bc53",
-      "differential_receipt_sha256": "bd4e66228c459296bbcc11f5be054cf2901c62fe661223c6cc61145ee8a32cda",
-      "control": "controls/json/nested-object.json",
-      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
-      "differential": "controls/json/nested-array.json",
-      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
-      "repeated_control_identical": true,
-      "control_source_lines": 478,
-      "control_afl_tuples": 1320,
-      "differential_source_lines": 458,
-      "differential_afl_tuples": 1321,
-      "source_line_difference": 32,
-      "underlying_pdjson_line_difference": 32,
-      "afl_tuple_difference": 131,
-      "parser_only_probe": "projects/json/cpp/poco-json/parser-probe.cpp",
       "exact_tree_outputs_verified": true
     },
     {
