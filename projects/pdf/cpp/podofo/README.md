@@ -8,7 +8,7 @@ The harness writes each input to a temporary local PDF, then calls `PoDoFo::PdfM
 
 PoDoFo is its own parser family. It does not share parser code with Poppler.
 
-The valid one-page PDF control passed Docker replay and one-case fuzzer smoke. The replay covered 2,378 pinned PoDoFo source lines, including the parser and tokenizer. The AFL++ overlay builds the PoDoFo library with AFL instrumentation and reported 1,259 feedback edges on the same control. The base image's libFuzzer binary has harness feedback only; use the AFL++ overlay for parser steering. [Docker receipt](verification.json) and [AFL++ receipt](../../../../fuzzing/afl-native/pdf/cpp/podofo/verification.json) bind the source, image, and control.
+The valid one-page PDF control passed Docker replay and one-case fuzzer smoke. A separate valid zero-page PDF reports `pages: 0`. The replay covered 2,378 pinned PoDoFo source lines, including the parser and tokenizer. The AFL++ overlay builds the PoDoFo library with AFL instrumentation and reported 1,263 feedback edges on the control. The base image's libFuzzer binary has harness feedback only; use the AFL++ overlay for parser steering. [Docker receipt](verification.json) and [AFL++ receipt](../../../../fuzzing/afl-native/pdf/cpp/podofo/verification.json) bind the source, image, and control.
 
 ## Run from the repository root
 

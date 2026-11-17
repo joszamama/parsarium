@@ -32,7 +32,7 @@ bool parse_data(const std::uint8_t *data, std::size_t size, Result *result) {
         PoDoFo::PdfMemDocument pdf;
         pdf.Load(path);
         const unsigned pages = pdf.GetPages().GetCount();
-        if (pages > 0 && pages <= 100000) {
+        if (pages <= 100000) {
             result->pages = static_cast<int>(pages);
             ok = true;
         }
