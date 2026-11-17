@@ -12,7 +12,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("jcodec", "mp3spi", "jlayer", "jaudiotagger")
+PROJECTS = ("jcodec", "mp3spi", "jlayer", "jaudiotagger", "mp3agic")
 CONTROL = "controls/mp3/tone-44k-mono.mp3"
 DIFFERENTIAL = "controls/mp3/tone-22k-stereo.mp3"
 REPORT = ROOT / "data/java/mp3/afl-feedback.json"

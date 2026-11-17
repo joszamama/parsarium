@@ -194,5 +194,55 @@
       "captured_at_utc": "2026-11-17T03:47:07.667739+00:00",
       "snapshot": "data/java/mp3/registry-snapshot.json"
     }
+  },
+  {
+    "name": "mp3agic",
+    "group": "com.mpatric",
+    "artifact": "mp3agic",
+    "version": "0.9.1",
+    "license": "MIT",
+    "license_evidence": "Pinned 0.9.1 Maven POM declares MIT License",
+    "input_api": "new Mp3File(Path.of(localFile)); getVersion(), getLayer(), getSampleRate(), getChannelMode(), getBitrate() after scanning MPEG frames",
+    "documentation": "https://github.com/mpatric/mp3agic/blob/master/readme.md",
+    "documentation_extra": "https://repo.maven.apache.org/maven2/com/mpatric/mp3agic/0.9.1/mp3agic-0.9.1-sources.jar",
+    "documentation_archive_entries": [
+      "com/mpatric/mp3agic/Mp3File.java",
+      "com/mpatric/mp3agic/MpegFrame.java"
+    ],
+    "source": "https://repo.maven.apache.org/maven2/com/mpatric/mp3agic/0.9.1/mp3agic-0.9.1-sources.jar",
+    "scope": "Local Mp3File(Path) scans MPEG Layer III headers; reports only independently correct version, layer, sample rate, channel mode and bitrate on two untagged controls. Its MPEG-2 start offset, frame count and duration are wrong and excluded from the result; no PCM decode.",
+    "family": "mp3agic native MP3 frame and ID3v2 reader",
+    "family_note": "Same package/release as the mp3agic entry in data/java/mp3_id3v2/parsers.json. Its own Mp3File/MpegFrame code has no JLayer or JCodec runtime dependency. jid3lib and jaudiotagger share historical project ancestry, but not a proven identical MPEG-frame engine. On the valid MPEG-2 control, Mp3File reports start 104, 5 frames and 261 ms versus oracle start 0, 12 frames and about 313 ms.",
+    "adapter_label": "mp3agic",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "codec": "MP3",
+      "mpeg_version": "1.0",
+      "layer": "III",
+      "sample_rate": 44100,
+      "channel_mode": "Mono",
+      "bitrate_kbps": 64
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "codec": "MP3",
+      "mpeg_version": "2.0",
+      "layer": "III",
+      "sample_rate": 22050,
+      "channel_mode": "Joint stereo",
+      "bitrate_kbps": 32
+    },
+    "project": "projects/mp3/java/mp3agic",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 6,
+      "max_release": "0.9.1",
+      "max_release_direct_dependent_count": 4,
+      "default_release_direct_dependent_count": 4,
+      "releases": 6,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.mpatric%3Amp3agic",
+      "captured_at_utc": "2026-11-17T03:47:07.869743+00:00",
+      "snapshot": "data/java/mp3/registry-snapshot.json"
+    }
   }
 ]

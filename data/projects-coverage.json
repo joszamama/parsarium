@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 118,
-    "containerized_verified": 118,
+    "catalog_paths": 119,
+    "containerized_verified": 119,
     "staged": 0,
     "standard_api_paths": 11,
     "standard_containerized_verified": 10,
@@ -1168,8 +1168,8 @@
       {
         "format": "mp3",
         "ecosystem": "java",
-        "catalog_paths": 4,
-        "containerized_verified": 4,
+        "catalog_paths": 5,
+        "containerized_verified": 5,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1177,9 +1177,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_four_selected_search_bounded",
+        "status": "pilot_five_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Four pure-Java Layer III paths verified; no padding. jaudiotagger is header-only and its higher-level MP3AudioHeader(File) misidentifies the valid 22.05 kHz control start at byte 104 and estimates 5 rather than 12 frames; the selected first-header API reports only independently correct fields. Maven Central phrase queries returned no hits, so named leads were inspected via deps.dev and package documentation. deps.dev counts whole-package dependency use, not MP3-specific calls. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or ID3 behavior. Java SE 25 exports no MP3 reader by inventory."
+        "uncertainty": "Five pure-Java Layer III paths verified; no padding. jaudiotagger is first-header-only and mp3agic reports only accurate header fields. Both higher-level APIs misidentify the valid 22.05 kHz control start at byte 104 and estimate 5 rather than 12 frames; mp3agic reports 261 ms versus oracle about 313 ms. These paths make no whole-file frame-count or duration claim. Maven Central phrase queries returned no hits, so named leads were inspected via deps.dev and package documentation. deps.dev counts whole-package dependency use, not MP3-specific calls. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or ID3 behavior. Java SE 25 exports no MP3 reader by inventory."
       },
       {
         "format": "mp3",
