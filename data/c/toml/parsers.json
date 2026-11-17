@@ -113,7 +113,7 @@
     "source": "https://www.npmjs.com/package/@dnsquery/dns-packet/v/6.1.1",
     "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
     "family": "dns-packet family (fork of mafintosh dns-packet)",
-    "family_note": "Shared family with dns-packet: the README calls it a fork with TypeScript types that does not use Node.js primitives. Its index.js is a separate TypeScript build (about 3,100 differing non-whitespace lines from dns-packet 5.6.1) and reads integers through its own buffer_utils.js; the decoding algorithm and record codecs follow dns-packet. A/AAAA text comes from @leichtgewicht/ip-codec 2.0.5.",
+    "family_note": "Shared family with dns-packet: the README calls it a fork with TypeScript types that does not use Node.js primitives. Its index.js is a separate TypeScript build (about 3,100 differing non-whitespace lines from dns-packet 5.6.1) and reads integers through its own buffer_utils.js; the decoding algorithm and record codecs follow dns-packet. A/AAAA text comes from @leichtgewicht/ip-codec 2.0.5. Kept as a substantive rewrite: only 53 of its 1,222 distinct non-test source lines (4.3%) occur in dns-packet 5.6.1, and 364 of 1,220 (29.8%) after normalising whitespace, semicolons, declarations and quotes; the decoding algorithm and record layout still follow dns-packet.",
     "project": "projects/dns/javascript/dnsquery_dns_packet",
     "control": "controls/dns/response.bin",
     "differential_control": "controls/dns/query.bin",
@@ -204,6 +204,20 @@
       "additional": []
     },
     "rank": 2,
-    "afl_feedback": "data/javascript/dns/dnsquery-dns-packet-feedback-differential.json"
+    "afl_feedback": "data/javascript/dns/dnsquery-dns-packet-feedback-differential.json",
+    "source_overlap_with_dns_packet": {
+      "method": "distinct stripped, non-empty, non-comment lines of the non-test .js sources (index, buffer_utils, types, classes, opcodes, optioncodes, rcodes) compared with set intersection against dns-packet 5.6.1",
+      "dnsquery_distinct_lines": 1222,
+      "dns_packet_distinct_lines": 1105,
+      "shared_distinct_lines": 53,
+      "share_of_dnsquery": 0.043,
+      "normalized_check": {
+        "normalization": "whitespace removed, trailing semicolons dropped, var/let/const unified, quote style unified",
+        "dnsquery": 1220,
+        "dns_packet": 1100,
+        "shared": 364,
+        "share_of_dnsquery": 0.298
+      }
+    }
   }
 ]
