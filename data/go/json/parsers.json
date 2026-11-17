@@ -386,7 +386,7 @@
       "snapshot": "data/go/json/registry-snapshot.json",
       "rechecked_at_utc": "2026-11-17T14:34:03+00:00",
       "rechecked_value": 348,
-      "within_cell_rank_note": "348 is below fastjson (895), so it ranks 9 of 9 among verified Go JSON paths"
+      "within_cell_rank_note": "348 is below go-faster/jx (451), so it ranks 10 of 10 among verified Go JSON paths"
     },
     "expected_output": {
       "arrays": 3,
@@ -479,5 +479,62 @@
     "control": "controls/json/nested-object.json",
     "project": "projects/json/go/github_com_mailru_easyjson_jlexer",
     "verification_note": "Both valid controls (nested-object.json and nested-array.json) match exact structural summaries recomputed with Python's json module as an independent oracle. The object control covers 212 lines in the pinned jlexer package (lexer.go 211, bytestostr.go 1). AFL++ feedback is scoped to the jlexer package: 126 parser features and 146 tuples on the object control; repeats of each control are identical, and the array control changes 6 parser features and 6 tuples. The easyjson v0.9.2 module zip and the josharian/intern v1.0.0 dependency zip are sha256-checked in the Dockerfile. pkg.go.dev Imported by 3,424 comes from the same 2026-11-17 snapshot as the other Go JSON rows and was rechecked at 2026-11-17T15:03Z."
+  },
+  {
+    "name": "github.com/go-faster/jx",
+    "module": "github.com/go-faster/jx",
+    "version": "v1.2.0",
+    "license": "MIT",
+    "license_evidence": "LICENSE in pinned Go module zip (MIT, copyright json-iterator); pkg.go.dev license MIT",
+    "input_api": "jx.DecodeBytes([]byte) Decoder walked with Next/Obj/Arr/Str/Float64/Bool/Null over one complete local JSON byte slice; a final Skip must return io.EOF",
+    "documentation": "https://pkg.go.dev/github.com/go-faster/jx@v1.2.0#DecodeBytes",
+    "source": "https://github.com/go-faster/jx/tree/v1.2.0",
+    "scope": "Complete local JSON document decoded with the jx streaming Decoder into untyped Go values, then summarized; both observed valid controls verified",
+    "family": "go-faster/jx own Go decoder (lightweight fork of json-iterator)",
+    "family_note": "The jx README calls it a lightweight fork of json-iterator/go, and its LICENSE keeps the json-iterator copyright, so it shares lineage with the selected json-iterator path. It does not import json-iterator or encoding/json (non-test files); its decoder code was rewritten: only 55 of 933 distinct non-test source lines longer than 25 characters also occur in json-iterator v1.1.12. The harness builds untyped values with its own recursive walk over jx's documented Decoder methods.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 451,
+      "source": "https://pkg.go.dev/github.com/go-faster/jx?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json",
+      "rechecked_at_utc": "2026-11-17T15:03:00+00:00",
+      "rechecked_value": 451,
+      "within_cell_rank_note": "451 is below fastjson (895) and above segmentio/encoding/json (348), so it ranks 9 among verified Go JSON paths"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "control": "controls/json/nested-object.json",
+    "project": "projects/json/go/github_com_go_faster_jx",
+    "verification_note": "Both valid controls (nested-object.json and nested-array.json) match exact structural summaries recomputed with Python's json module as an independent oracle. The object control covers 355 lines in twelve files of the pinned jx package (dec_str.go 120, dec_float.go 76, dec_read.go 35, dec_obj.go 30, dec.go 24, dec_arr.go 18, dec_float_big.go 13, dec_bool.go 12, dec_null.go 8, w_int.gen.go 7 from the package init digit table, dec_depth.go 6, dec_skip.go 6). AFL++ feedback is scoped to the jx package: 222 parser features and 242 tuples on the object control; repeats of each control are identical, and the array control changes 38 parser features and 38 tuples. The jx v1.2.0 module zip and the go-faster/errors v0.7.1 and segmentio/asm v1.2.1 dependency zips are sha256-checked in the Dockerfile. pkg.go.dev Imported by 451 comes from the same 2026-11-17 snapshot as the other Go JSON rows and was rechecked at 2026-11-17T15:03Z."
   }
 ]

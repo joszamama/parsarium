@@ -12,7 +12,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("github_com_buger_jsonparser", "github_com_bytedance_sonic", "github_com_goccy_go_json", "github_com_json_iterator_go", "github_com_mailru_easyjson_jlexer", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson", "segmentio_encoding", "stdlib_unmarshal")
+PROJECTS = ("github_com_buger_jsonparser", "github_com_bytedance_sonic", "github_com_go_faster_jx", "github_com_goccy_go_json", "github_com_json_iterator_go", "github_com_mailru_easyjson_jlexer", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson", "segmentio_encoding", "stdlib_unmarshal")
 CONTROL = "controls/json/nested-object.json"
 DIFFERENTIAL = "controls/json/nested-array.json"
 REPORT = ROOT / "data/go/json/afl-feedback.json"
@@ -49,7 +49,7 @@ def check(slug: str) -> dict:
     overlay = ROOT / "fuzzing/afl-native" / relative
     receipt = json.loads((overlay / "verification.json").read_text())
     image = receipt["image_id"]
-    if slug in {"github_com_buger_jsonparser", "github_com_bytedance_sonic", "github_com_mailru_easyjson_jlexer", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson", "segmentio_encoding"}:
+    if slug in {"github_com_buger_jsonparser", "github_com_bytedance_sonic", "github_com_go_faster_jx", "github_com_mailru_easyjson_jlexer", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson", "segmentio_encoding"}:
         base_image = f"parsarium/json-go-{slug}:local"
         run(["docker", "run", "--rm", "--platform", manifest["platform"],
              "--network", "none", "--read-only", "--cap-drop", "ALL",
@@ -94,7 +94,7 @@ def check(slug: str) -> dict:
             "parser_feature_difference": feature_difference,
             "afl_tuple_difference": tuple_difference,
             **({"differential_control_pass": True}
-               if slug in {"github_com_buger_jsonparser", "github_com_bytedance_sonic", "github_com_mailru_easyjson_jlexer", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson", "segmentio_encoding"} else {}),
+               if slug in {"github_com_buger_jsonparser", "github_com_bytedance_sonic", "github_com_go_faster_jx", "github_com_mailru_easyjson_jlexer", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "github_com_valyala_fastjson", "segmentio_encoding"} else {}),
             **({"repeated_differential_identical": True,
                 "feedback_scope": "Sonic internal/decoder/optdec Go blocks; native NEON assembly instructions are not instrumented by Go coverpkg"}
                if slug == "github_com_bytedance_sonic" else {})}

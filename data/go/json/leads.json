@@ -70,12 +70,22 @@
     "checked_at_utc": "2026-11-17T15:10:00+00:00"
   },
   {
+    "name": "github.com/go-faster/jx",
+    "status": "promoted_to_verified",
+    "version_seen": "v1.2.0",
+    "license": "MIT",
+    "imported_by": 451,
+    "reason": "Pinned v1.2.0 DecodeBytes Decoder parses the complete local JSON byte slice with jx's own decoder (a lightweight fork of json-iterator with rewritten code; it imports neither json-iterator nor encoding/json); both valid controls, own-source coverage and repeatable AFL differential are verified.",
+    "source": "https://pkg.go.dev/github.com/go-faster/jx",
+    "verified_evidence": "projects/json/go/github_com_go_faster_jx/verification.json"
+  },
+  {
     "name": "github.com/elastic/go-structform/json",
     "status": "unresolved",
     "version_seen": "v0.0.12",
     "license": "Apache-2.0",
     "imported_by": 372,
-    "reason": "Own hand-written state-machine parser (json/parse.go: Parse([]byte, structform.Visitor)) that reports values to a caller Visitor. Not run; below go-faster/jx (451).",
+    "reason": "Own hand-written state-machine parser (json/parse.go: Parse([]byte, structform.Visitor), ParseReader, Parser.stepValue/stepDict/stepArray) that reports values to a caller Visitor. Not run: below go-faster/jx (451) and the cell reached its ten-path ceiling.",
     "source": "https://pkg.go.dev/github.com/elastic/go-structform/json",
     "checked_at_utc": "2026-11-17T15:10:00+00:00"
   },
