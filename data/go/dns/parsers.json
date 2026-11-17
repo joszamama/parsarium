@@ -418,5 +418,110 @@
     },
     "rank": 4,
     "afl_feedback": "data/go/dns/codeberg-org-miekg-dns-feedback-differential.json"
+  },
+  {
+    "name": "github.com/benburkert/dns",
+    "module": "github.com/benburkert/dns",
+    "version": "v0.0.0-20190225204957-d356cf78cdfc",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the module zip (sha256 7e1e3ef1...), checked in the image; pkg.go.dev lists MIT",
+    "input_api": "(*dns.Message).Unpack(b []byte) ([]byte, error)",
+    "documentation": "https://pkg.go.dev/github.com/benburkert/dns@v0.0.0-20190225204957-d356cf78cdfc#Message.Unpack",
+    "source": "https://proxy.golang.org/github.com/benburkert/dns/@v/v0.0.0-20190225204957-d356cf78cdfc.zip",
+    "source_lock": "projects/dns/go/github_com_benburkert_dns/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "benburkert/dns (message.go, compression.go)",
+    "family_note": "Own pure-Go decoder with its own name decompressor; no code from miekg/dns or x/net. The module has no tagged release, so the pinned version is the pseudo-version of the last commit (2019-02-25). It drops the Z, AD and CD bits, so z is reported as 0. TTLs are stored as time.Duration and printed in whole seconds.",
+    "project": "projects/dns/go/github_com_benburkert_dns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 20,
+      "source": "https://pkg.go.dev/github.com/benburkert/dns?tab=importedby",
+      "captured_at_utc": "2026-11-17T19:47:48.115846+00:00",
+      "snapshot": "data/go/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 5,
+    "afl_feedback": "data/go/dns/github-com-benburkert-dns-feedback-differential.json"
   }
 ]

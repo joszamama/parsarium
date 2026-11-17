@@ -1,0 +1,36 @@
+{
+  "checked_at_utc": "2026-11-17T20:04:37.689582+00:00",
+  "project": "dns/go/github_com_benburkert_dns",
+  "pass": true,
+  "input_kind": "two fixed valid DNS messages (RFC 1035 section 4)",
+  "oracle": "controls/dns/check_controls.py hand-written decoder; summaries pinned in controls/dns/expected.json",
+  "feature_kind": "parser-line AFL++ bridge features",
+  "subject_prefix": "github.com/benburkert/dns/",
+  "base_image_id": "sha256:22ec61d10180e00c7654166564fc88aa3f083f5df89c8b12930295b9fd56b200",
+  "overlay_image_id": "sha256:7f1e9e03ee6213b7acdb73edfb97f92f0dbce9de3b1ef9baeefa0e2c6a6c7d57",
+  "overlay_receipt_sha256": "221e9271e8e7dde60280b9a9bccb96e512a62a7aa933dc5ad8cee379a026ea9e",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "control_output_matches": true,
+  "variant_output_matches": true,
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "afl_target": "/work/afl_proxy",
+  "afl_map_size": 65536,
+  "control_parser_features": 77,
+  "variant_parser_features": 36,
+  "parser_feature_difference": 41,
+  "control_afl_tuples": 97,
+  "variant_afl_tuples": 56,
+  "afl_tuple_difference": 41,
+  "control_features_by_file": {
+    "github.com/benburkert/dns/compression.go": 20,
+    "github.com/benburkert/dns/message.go": 57
+  },
+  "variant_features_by_file": {
+    "github.com/benburkert/dns/compression.go": 13,
+    "github.com/benburkert/dns/message.go": 23
+  },
+  "mutation_campaign_run": false
+}
