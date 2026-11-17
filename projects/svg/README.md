@@ -9,6 +9,7 @@
 - [librsvg / C](c/librsvg/README.md)
 - [libvips / C](c/libvips/README.md)
 - [nanosvg / C](c/nanosvg/README.md)
+- [resvg / C](c/resvg/README.md)
 - [sdl2_image / C](c/sdl2_image/README.md)
 - [sdl3_image / C](c/sdl3_image/README.md)
 - [thorvg / C](c/thorvg/README.md)

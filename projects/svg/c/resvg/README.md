@@ -14,8 +14,6 @@ python3 parsarium.py afl build svg c resvg
 python3 parsarium.py afl prepare svg c resvg runs/svg-resvg-afl
 ```
 
-Replace `CORPUS_DIR` with a directory of SVG files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-The harness passes each input to `resvg_parse_tree_from_file` and reports image dimensions and the first two rendered RGB pixels. A valid one-pixel SVG reports `second: null`. The tagged C API shares the `resvg`/`usvg` Rust parser family with the C++ path.
-
-**Coverage limit:** The base libFuzzer target instruments the C harness. The AFL++ `/work/replay @@` target has guards only in the Rust `usvg` parser crate. Replay is one process per file because the selected C API reads a local path.
+**Coverage limit:** The AFL++ target uses one-shot /work/replay @@ because the selected C API parses a local file; parser-source feedback comes from usvg Rust code.

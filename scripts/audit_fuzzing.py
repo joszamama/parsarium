@@ -93,7 +93,7 @@ def main() -> None:
         # parser; the generic C overlay cannot build that parser.
         custom_rust_svg = str(relative) in {
             "svg/c/gdk_pixbuf", "svg/c/librsvg", "svg/cpp/gdk_pixbuf",
-            "svg/cpp/librsvg"}
+            "svg/cpp/librsvg", "svg/c/resvg"}
         if manifest["package"] not in {"gstreamer", "netpbm", "sail"} and not custom_rust_svg:
             assert dockerfile == derived_dockerfile(project).encode()
         if custom_rust_svg:
