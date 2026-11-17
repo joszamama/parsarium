@@ -104,5 +104,59 @@
       ]
     },
     "project": "projects/json/c/json-c"
+  },
+  {
+    "name": "cjson",
+    "version": "1.7.19",
+    "license": "MIT",
+    "license_evidence": "Pinned v1.7.19 LICENSE in source tarball",
+    "input_api": "cJSON_ParseWithLengthOpts(const char *value, size_t buffer_length, const char **return_parse_end, cJSON_bool require_null_terminated)",
+    "documentation": "https://github.com/DaveGamble/cJSON/blob/v1.7.19/README.md",
+    "documentation_note": "Pinned README says cJSON_ParseWithLength accepts a possibly non-NUL-terminated string; pinned cJSON.h documents the length-bounded options API. The harness passes the exact local byte length.",
+    "source": "https://github.com/DaveGamble/cJSON/releases/tag/v1.7.19",
+    "scope": "RFC 8259 JSON text parsed from a bounded local byte buffer into a cJSON tree; observed control subset only",
+    "family": "cJSON recursive-descent parser (cJSON.c)",
+    "family_note": "Single C implementation parses objects, arrays, strings and numbers into cJSON linked nodes; own parser source is compiled with LLVM and AFL++ instrumentation.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package cjson",
+      "value": 150958,
+      "rank": 462,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "project": "projects/json/c/cjson"
   }
 ]

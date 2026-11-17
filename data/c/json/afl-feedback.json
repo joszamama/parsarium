@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T03:53:13.703082+00:00",
-  "projects_total": 2,
-  "projects_passed": 2,
+  "checked_at_utc": "2026-11-17T05:24:31.670854+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
   "differential_kind": "fixed_valid_nested_array",
   "parser_feature_scope": "covered LLVM region entries under each pinned parser source prefix; harness excluded",
   "afl_feedback_scope": "afl-clang-fast edges over the compiled parser sources and the harness; the AFL++ map is not split by file",
@@ -107,6 +107,51 @@
       },
       "differential_only_features_by_file": {
         "json_tokener.c": 2
+      }
+    },
+    {
+      "project": "json/c/cjson",
+      "pass": true,
+      "feedback_kind": "c_llvm_parser_regions_and_afl_native_edges",
+      "overlay_receipt_sha256": "0d01257dfa2f1f968f8acc6ea7b3deb8aefc8e03b280f07c138a08528a9653c5",
+      "base_image_id": "sha256:a7be583497991d629f7c616e6406d764c80287a7d9f7c6330482851d51631e47",
+      "overlay_image_id": "sha256:665e469c3c83f6fb278f06cec30719c5a7861d9f46df90cb7855a49fac1d0a15",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "exact_nested_structure_match": true,
+      "repeats_per_control": 2,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 588,
+      "control_afl_tuples": 273,
+      "differential_parser_features": 553,
+      "differential_afl_tuples": 256,
+      "parser_feature_difference": 39,
+      "afl_tuple_difference": 29,
+      "control_only_features_by_file": {
+        "cJSON.c": 37
+      },
+      "differential_only_features_by_file": {
+        "cJSON.c": 2
       }
     }
   ]

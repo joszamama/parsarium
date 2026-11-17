@@ -17,7 +17,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-SLUGS = ("jansson", "json-c")
+SLUGS = ("jansson", "json-c", "cjson")
 REPORT = ROOT / "data/c/json/afl-feedback.json"
 REPEATS = 2
 
@@ -46,8 +46,54 @@ def typed(value):
     return (type(value).__name__, value)
 
 
+def summarize_tree(tree: object) -> dict:
+    counts = {"arrays": 0, "objects": 0, "booleans": 0, "nulls": 0,
+              "max_depth": 0}
+    numbers: list[int | float] = []
+    strings: list[str] = []
+
+    def walk(value: object, depth: int) -> None:
+        if isinstance(value, dict):
+            counts["objects"] += 1
+            counts["max_depth"] = max(counts["max_depth"], depth)
+            for child in value.values():
+                walk(child, depth + 1)
+        elif isinstance(value, list):
+            counts["arrays"] += 1
+            counts["max_depth"] = max(counts["max_depth"], depth)
+            for child in value:
+                walk(child, depth + 1)
+        elif value is None:
+            counts["nulls"] += 1
+        elif isinstance(value, bool):
+            counts["booleans"] += 1
+        elif isinstance(value, (int, float)):
+            numbers.append(value)
+        elif isinstance(value, str):
+            strings.append(value)
+
+    walk(tree, 1)
+    result = {"arrays": counts["arrays"], "booleans": counts["booleans"],
+              "max_depth": counts["max_depth"], "nulls": counts["nulls"],
+              "numbers": sorted(numbers), "objects": counts["objects"],
+              "root": "object" if isinstance(tree, dict) else "array",
+              "strings": sorted(strings)}
+    if isinstance(tree, dict):
+        result["top_level_keys"] = sorted(tree)
+    else:
+        result["top_level_items"] = len(tree)
+    return result
+
+
 def replay(manifest: dict, image: str, case: Path, work: Path) -> dict:
     common = sandbox(manifest, case, work)
+    if manifest["package"] == "cjson":
+        tree = run([*common, "-e", "LLVM_PROFILE_FILE=/tmp/x.profraw",
+                    "--entrypoint", "/work/replay", image, "/input/case"])
+        parsed = json.loads(tree)
+        if parsed != json.loads(case.read_text()):
+            raise RuntimeError(f"{case.name}: cJSON tree differs from valid control")
+        return summarize_tree(parsed)
     summary = json.loads(run([*common, "-e", "LLVM_PROFILE_FILE=/tmp/x.profraw",
                               "--entrypoint", "/work/replay", image, "/input/case"]))
     tree = run([*common, "-e", "LLVM_PROFILE_FILE=/tmp/x.profraw",
