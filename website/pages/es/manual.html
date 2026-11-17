@@ -21,11 +21,8 @@
     <p class="off">0x0020<b>preparación</b></p>
     <div class="sec-head">
       <h2>Antes de los ejercicios.</h2>
-      <p>Instala el comando desde un clon del repositorio mientras se prepara la versión autónoma para PyPI. Necesitas Python 3.11 o posterior; para ejecutar harnesses también necesitas Docker con soporte para Linux amd64 y arm64.</p>
-      <pre data-copy><span class="p">$ </span>git clone https://github.com/joszamama/parsarium.git
-<span class="p">$ </span>cd parsarium
-<span class="p">$ </span>python3 -m pip install -e .
-<span class="p">$ </span>export PARSARIUM_HOME="$PWD"
+      <p>Instala el comando desde PyPI. Necesitas Python 3.11 o posterior; para ejecutar harnesses también necesitas Docker con soporte para Linux amd64 y arm64.</p>
+      <pre data-copy><span class="p">$ </span>python3 -m pip install parsarium
 <span class="p">$ </span>parsarium list</pre>
       <p>Algunos ejercicios leen archivos del catálogo, como controles y registros. Están en la carpeta que imprime <code>parsarium home --path</code>. Expórtala una vez en cada terminal; los ejercicios se refieren a ella como <code>$PARSARIUM</code>:</p>
       <pre data-copy><span class="p">$ </span>export PARSARIUM="$(parsarium home --path)"
