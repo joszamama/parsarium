@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T08:37:23.482169+00:00",
-  "projects_total": 4,
-  "projects_passed": 4,
+  "checked_at_utc": "2026-11-17T10:06:45.781306+00:00",
+  "projects_total": 5,
+  "projects_passed": 5,
   "differential_kind": "fixed_valid_nested_array",
   "standard_feedback": "JSON.parse has staged native function-entry feedback, not JavaScript source ranges",
   "results": [
@@ -90,6 +90,49 @@
       },
       "differential_only_features_by_file": {
         "src/core/parser.js": 1
+      }
+    },
+    {
+      "project": "json/javascript/humanwhocodes_momoa",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "a013df0eb697246e289137dee135de8ed6d156d5f3c8adc581a135454224ef35",
+      "base_image_id": "sha256:2ba5ff701c64f501b77de24f234dd8ae3de619c8df30ff35f2802ae942eaaed3",
+      "overlay_image_id": "sha256:8b9789b2718363522980be28ad8184b084f9886c6bcfd3fbf1d0ac1bb823fdf0",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 126,
+      "control_afl_tuples": 146,
+      "differential_parser_features": 111,
+      "differential_afl_tuples": 131,
+      "parser_feature_difference": 17,
+      "afl_tuple_difference": 17,
+      "control_only_features_by_file": {
+        "dist/momoa.js": 16
+      },
+      "differential_only_features_by_file": {
+        "dist/momoa.js": 1
       }
     },
     {

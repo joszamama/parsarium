@@ -177,6 +177,65 @@
       "error": null
     },
     {
+      "package": "@humanwhocodes/momoa",
+      "version": "3.3.13",
+      "scope": "One complete JSON text from local bytes decoded as strict UTF-8 (BOM kept) and passed once to parse(text, {mode: 'json'}); parse() rejects any token after the first value, and the summary walks the returned AST nodes",
+      "command": "python3 scripts/run_project.py json javascript humanwhocodes_momoa",
+      "receipt": "projects/json/javascript/humanwhocodes_momoa/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 1590,
+      "error": null
+    },
+    {
       "package": "bfj",
       "version": "9.1.4",
       "scope": "One complete JSON text from local Readable bytes via bfj.parse(stream,{ndjson:false})",

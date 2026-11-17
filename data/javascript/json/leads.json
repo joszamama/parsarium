@@ -168,14 +168,15 @@
   },
   {
     "name": "@humanwhocodes/momoa",
-    "status": "unresolved",
-    "lead_kind": "own_parser_not_selected",
+    "status": "promoted_to_verified",
+    "lead_kind": "own_parser",
     "version_seen": "3.3.13",
     "license": "Apache-2.0",
     "npm_downloads_30d": 18038222,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@humanwhocodes/momoa",
-    "reason": "Own JSON tokenizer and AST parser (no JSON.parse call in 3.3.13); documented parse(text) takes a string. Not run.",
-    "source": "https://www.npmjs.com/package/@humanwhocodes/momoa"
+    "reason": "Own character-level tokenizer and recursive-descent AST parser in dist/momoa.js (no JSON.parse or eval). Documented parse(text) takes a string; the adapter decodes local bytes as strict UTF-8 and calls parse(text, {mode: 'json'}), which rejects any token after the first value. Both valid controls match exactly against the AST-node summary, with pinned npm integrity and tarball SHA-256, V8 package-source coverage, and input-dependent AFL++ feedback verified.",
+    "source": "https://www.npmjs.com/package/@humanwhocodes/momoa",
+    "verified_evidence": "data/javascript/json/verification.json"
   },
   {
     "name": "lossless-json",
