@@ -15,7 +15,7 @@
   },
   {
     "name": "pycares",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
     "primary_metric_value": 17928720,
     "found_by": "targeted documentation lead",
@@ -24,7 +24,10 @@
     "family": "c-ares",
     "note": "Binding to c-ares; exposes query callbacks, not a documented parser for caller-supplied message bytes. To be checked against the pinned release.",
     "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 2
+    "lead_adoption_order": 2,
+    "checked_version": "5.2.1",
+    "checked_source_sha256": "3e89edc56a3745046676207958bf3dbf2971c5df0d64de9f7a893eba8bf255b4",
+    "reason": "pycares 5.2.1's public API is a c-ares Channel (query, search, getaddrinfo, gethostbyaddr) that sends queries; its parse_dnsrec(dnsrec) takes a c-ares record handed to a query callback, not caller-supplied bytes. No documented parser for local message bytes. Its parser family is c-ares, verified separately in the C cell."
   },
   {
     "name": "aiodns",
@@ -38,7 +41,7 @@
   },
   {
     "name": "scapy",
-    "status": "unresolved",
+    "status": "excluded",
     "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
     "primary_metric_value": 4173275,
     "found_by": "targeted documentation lead",
@@ -46,11 +49,15 @@
     "input_api_lead": "scapy.layers.dns.DNS(raw_bytes)",
     "family": "Scapy DNS layer",
     "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 3
+    "lead_adoption_order": 3,
+    "checked_version": "2.8.0",
+    "checked_wheel_sha256": "abf855145ee829a42b2eb28983cd6a0a52b12a31d3f861cb7be36791195ed9aa",
+    "control_result": "scapy.layers.dns.DNS(bytes) decodes the response control's header, question and CNAME/A/AAAA/MX answers.",
+    "reason": "Excluded under this pilot's no-socket rule: importing scapy.layers.dns in a --network none container (python:3.13-slim, socket.socket constructor instrumented) created 11 AF_NETLINK sockets while scapy.arch enumerated routes and interfaces, before any parse. The DNS parse itself opened none."
   },
   {
     "name": "dpkt",
-    "status": "unresolved",
+    "status": "resolved_verified_selected",
     "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
     "primary_metric_value": 1492890,
     "found_by": "targeted documentation lead",
@@ -58,7 +65,9 @@
     "input_api_lead": "dpkt.dns.DNS(buf)",
     "family": "dpkt DNS",
     "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 4
+    "lead_adoption_order": 4,
+    "verification": "projects/dns/python/dpkt/verification.json",
+    "reason": "Pinned 1.9.8 passes both DNS controls; see parsers.json and data/python/dns/dpkt-feedback-differential.json."
   },
   {
     "name": "dnslib",
