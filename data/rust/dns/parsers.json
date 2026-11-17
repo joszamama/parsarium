@@ -205,5 +205,109 @@
     },
     "rank": 2,
     "afl_feedback": "data/rust/dns/dns-parser-feedback-differential.json"
+  },
+  {
+    "name": "rsdns",
+    "version": "0.23.0",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "Cargo metadata 'MIT OR Apache-2.0' and LICENSE-MIT/LICENSE-APACHE in the crate (sha256 b7b0aaeb...), checked in the image",
+    "input_api": "rsdns::message::reader::MessageIterator::new(buf: &[u8]) -> Result<MessageIterator>; header(), questions(), records()",
+    "documentation": "https://docs.rs/rsdns/0.23.0/rsdns/message/reader/struct.MessageIterator.html#method.new",
+    "source": "https://crates.io/crates/rsdns/0.23.0",
+    "source_lock": "projects/dns/rust/rsdns/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "rsdns message reader (src/message/reader/*, bytes/cursor, names, records/data)",
+    "family_note": "Own pure-Rust decoder in a DNS client library; built without any net-* feature, so no client code is compiled. The records iterator tags every record with its section. rsdns exposes no Z, AD or CD flag (the Z getter is test-only), so z is reported as 0.",
+    "project": "projects/dns/rust/rsdns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "crates.io recent_downloads (90 days)",
+      "value": 2486,
+      "source": "https://crates.io/api/v1/crates/rsdns",
+      "captured_at_utc": "2026-11-17T20:09:50.436428+00:00",
+      "snapshot": "data/rust/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 3,
+    "afl_feedback": "data/rust/dns/rsdns-feedback-differential.json"
   }
 ]

@@ -1,6 +1,6 @@
 # Rust × DNS: selected parsers (pilot)
 
-Two verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Three verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -10,10 +10,13 @@ crates.io recent_downloads (90 days), from [registry-snapshot.json](registry-sna
 | ---: | --- | --- | ---: | --- |
 | 1 | [hickory-proto](https://docs.rs/hickory-proto/0.26.3/hickory_proto/op/struct.Message.html#method.from_vec) | 0.26.3 | 36,097,977 | Hickory DNS proto (formerly trust-dns-proto): BinDecoder and Message/Record decoders |
 | 2 | [dns-parser](https://docs.rs/dns-parser/0.8.0/dns_parser/struct.Packet.html#method.parse) | 0.8.0 | 524,293 | dns-parser (src/parser.rs, header.rs, name.rs, rdata/*) |
+| 3 | [rsdns](https://docs.rs/rsdns/0.23.0/rsdns/message/reader/struct.MessageIterator.html#method.new) | 0.23.0 | 2,486 | rsdns message reader (src/message/reader/*, bytes/cursor, names, records/data) |
 
 **hickory-proto 0.26.3** (MIT OR Apache-2.0) parses local bytes with `hickory_proto::op::Message::from_vec(buffer: &[u8]) -> Result<Message, DecodeError>`. Both controls match the oracle summary. The response control covers 479 library lines in 55 files. AFL++ feedback repeats 3 times per control; response and query give 703/446 parser features and 285/178 AFL++ tuples, differing by 259 features and 107 tuples ([receipt](hickory-proto-feedback-differential.json)). Own pure-Rust decoder (serialize/binary/decoder.rs, op/message.rs, rr/record.rs, rr/domain/name.rs). trust-dns-proto is the same project under its earlier crate name. The crate drops the reserved Z bit, so z reports AD and CD only.
 
 **dns-parser 0.8.0** (MIT OR Apache-2.0) parses local bytes with `dns_parser::Packet::parse(data: &[u8]) -> Result<Packet, Error>`. Both controls match the oracle summary. The response control covers 250 library lines in 29 files. AFL++ feedback repeats 3 times per control; response and query give 351/181 parser features and 129/79 AFL++ tuples, differing by 170 features and 52 tuples ([receipt](dns-parser-feedback-differential.json)). Own pure-Rust decoder (tailhook), the parser behind older mDNS crates; no code from hickory-proto or simple-dns. The header keeps AD and CD but not the reserved Z bit, so z reports AD and CD only. ResourceRecord has no numeric type field: the harness maps the decoded RData variant (A, AAAA, CNAME, NS, PTR, MX) to its type number. Last release 2018 (edition 2015 crate).
+
+**rsdns 0.23.0** (MIT OR Apache-2.0) parses local bytes with `rsdns::message::reader::MessageIterator::new(buf: &[u8]) -> Result<MessageIterator>; header(), questions(), records()`. Both controls match the oracle summary. The response control covers 463 library lines in 33 files. AFL++ feedback repeats 3 times per control; response and query give 607/386 parser features and 259/108 AFL++ tuples, differing by 223 features and 151 tuples ([receipt](rsdns-feedback-differential.json)). Own pure-Rust decoder in a DNS client library; built without any net-* feature, so no client code is compiled. The records iterator tags every record with its section. rsdns exposes no Z, AD or CD flag (the Z getter is test-only), so z is reported as 0.
 
 ## Remaining leads
 
