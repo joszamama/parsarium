@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "checked_at_utc": "2026-11-17T09:09:20.044513+00:00",
-  "projects_total": 5,
-  "projects_passed": 5,
+  "projects_total": 6,
+  "projects_passed": 6,
   "differential_kind": "fixed_valid_default_namespace_order",
   "results": [
     {
@@ -39,7 +39,7 @@
         "root": "{urn:parsarium:order}order",
         "text": [
           "A-7",
-          "12.50 \u20ac"
+          "12.50 €"
         ]
       },
       "repeated_control_identical": true,
@@ -84,7 +84,7 @@
         "root": "{urn:parsarium:order}order",
         "text": [
           "A-7",
-          "12.50 \u20ac"
+          "12.50 €"
         ]
       },
       "repeated_control_identical": true,
@@ -130,7 +130,7 @@
         "root": "{urn:parsarium:order}order",
         "text": [
           "A-7",
-          "12.50 \u20ac"
+          "12.50 €"
         ]
       },
       "repeated_control_identical": true,
@@ -176,7 +176,7 @@
         "root": "{urn:parsarium:order}order",
         "text": [
           "A-7",
-          "12.50 \u20ac"
+          "12.50 €"
         ]
       },
       "repeated_control_identical": true,
@@ -222,7 +222,7 @@
         "root": "{urn:parsarium:order}order",
         "text": [
           "A-7",
-          "12.50 \u20ac"
+          "12.50 €"
         ]
       },
       "repeated_control_identical": true,
@@ -232,10 +232,58 @@
       "differential_afl_tuples": 4024,
       "parser_feature_difference": 330,
       "afl_tuple_difference": 314
+    },
+    {
+      "project": "xml/java/jackson_xml",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "7599fe95669137b23b76abaf825b12bc5f2ff9aa3bb6e752977cb25370fb6123",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "events": [
+          "START_OBJECT",
+          "FIELD_NAME:line",
+          "START_OBJECT",
+          "FIELD_NAME:n",
+          "VALUE_STRING:1",
+          "FIELD_NAME:currency",
+          "VALUE_STRING:EUR",
+          "FIELD_NAME:sku",
+          "VALUE_STRING:A-7",
+          "FIELD_NAME:amount",
+          "VALUE_STRING:12.50 €",
+          "END_OBJECT",
+          "FIELD_NAME:line",
+          "START_OBJECT",
+          "FIELD_NAME:n",
+          "VALUE_STRING:2",
+          "FIELD_NAME:note",
+          "VALUE_STRING:say \"hi\"",
+          "FIELD_NAME:plain",
+          "START_OBJECT",
+          "FIELD_NAME:leaf",
+          "VALUE_STRING:",
+          "END_OBJECT",
+          "END_OBJECT",
+          "END_OBJECT"
+        ],
+        "token_count": 25
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 320,
+      "control_afl_tuples": 339,
+      "differential_parser_features": 321,
+      "differential_afl_tuples": 340,
+      "parser_feature_difference": 17,
+      "afl_tuple_difference": 17
     }
   ],
   "refreshed_projects": [
-    "dom4j"
+    "jackson_xml"
   ],
   "retained_prior_results_checked_at_utc": "2026-11-17T03:42:42.669292+00:00"
 }

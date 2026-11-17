@@ -174,6 +174,48 @@
       "parser_source_lines_covered": 1427,
       "afl_feedback": "data/java/xml/afl-feedback.json",
       "error": null
+    },
+    {
+      "package": "jackson-dataformat-xml",
+      "group": "com.fasterxml.jackson.dataformat",
+      "version": "2.23.0",
+      "scope": "Valid XML 1.0 UTF-8 from local InputStream projected into ordered Jackson tokens by XmlFactory/FromXmlParser over Woodstox; namespace URIs and root name omitted",
+      "command": "python3 scripts/run_project.py xml java jackson_xml",
+      "receipt": "projects/xml/java/jackson_xml/verification.json",
+      "pass": true,
+      "output": {
+        "events": [
+          "START_OBJECT",
+          "FIELD_NAME:version",
+          "VALUE_STRING:1",
+          "FIELD_NAME:item",
+          "START_OBJECT",
+          "FIELD_NAME:id",
+          "VALUE_STRING:a1",
+          "FIELD_NAME:lang",
+          "VALUE_STRING:es",
+          "FIELD_NAME:",
+          "VALUE_STRING:Café & té",
+          "END_OBJECT",
+          "FIELD_NAME:item",
+          "START_OBJECT",
+          "FIELD_NAME:id",
+          "VALUE_STRING:b2",
+          "FIELD_NAME:name",
+          "VALUE_STRING:Zürich <HQ>",
+          "FIELD_NAME:note",
+          "VALUE_STRING:x < y",
+          "END_OBJECT",
+          "END_OBJECT"
+        ],
+        "token_count": 22
+      },
+      "parser_source_files": 9,
+      "parser_source_lines_covered": 320,
+      "underlying_source_files": 8,
+      "underlying_source_lines_covered": 832,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
     }
   ],
   "standard": [
@@ -215,7 +257,7 @@
     }
   ],
   "refreshed_projects": [
-    "dom4j"
+    "jackson_xml"
   ],
   "retained_prior_results_checked_at_utc": "2026-11-17T07:27:07.356019+00:00"
 }

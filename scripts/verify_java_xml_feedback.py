@@ -12,7 +12,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("xercesimpl", "woodstox_core", "dom4j", "aalto_xml", "jdk_documentbuilder")
+PROJECTS = ("xercesimpl", "woodstox_core", "dom4j", "aalto_xml", "jdk_documentbuilder", "jackson_xml")
 CONTROL = "controls/xml/catalog-ns.xml"
 DIFFERENTIAL = "controls/xml/order-default-ns.xml"
 # Structure of controls/xml/order-default-ns.xml, read off the file by hand:
@@ -26,6 +26,17 @@ DIFFERENTIAL_EXPECTED = {
     "max_depth": 4, "namespace_declarations": 3,
     "namespaces": ["urn:parsarium:order", "urn:parsarium:price"],
     "root": "{urn:parsarium:order}order", "text": ["A-7", "12.50 \u20ac"],
+}
+JACKSON_XML_DIFFERENTIAL_EXPECTED = {
+    "events": ["START_OBJECT", "FIELD_NAME:line", "START_OBJECT", "FIELD_NAME:n",
+               "VALUE_STRING:1", "FIELD_NAME:currency", "VALUE_STRING:EUR",
+               "FIELD_NAME:sku", "VALUE_STRING:A-7", "FIELD_NAME:amount",
+               "VALUE_STRING:12.50 €", "END_OBJECT", "FIELD_NAME:line",
+               "START_OBJECT", "FIELD_NAME:n", "VALUE_STRING:2",
+               "FIELD_NAME:note", 'VALUE_STRING:say "hi"', "FIELD_NAME:plain",
+               "START_OBJECT", "FIELD_NAME:leaf", "VALUE_STRING:", "END_OBJECT",
+               "END_OBJECT", "END_OBJECT"],
+    "token_count": 25,
 }
 REPORT = ROOT / "data/java/xml/afl-feedback.json"
 
@@ -79,7 +90,8 @@ def check(slug: str) -> dict:
              "-Dstdout.encoding=UTF-8", "-cp", classpath, "GenericHarness",
              "/input/case"], capture_output=True, text=True, timeout=120, check=True)
         differential_output = json.loads(parsed.stdout.strip().splitlines()[-1])
-    if differential_output != DIFFERENTIAL_EXPECTED:
+    if differential_output != (JACKSON_XML_DIFFERENTIAL_EXPECTED if slug == "jackson_xml"
+                               else DIFFERENTIAL_EXPECTED):
         raise RuntimeError(f"{relative}: differential output changed: {differential_output}")
     if first != repeat or first != again or other != other_repeat or other != other_again:
         differences = [(len(left[0] ^ right[0]), len(left[1] ^ right[1]))

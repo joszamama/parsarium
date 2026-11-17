@@ -1,10 +1,10 @@
 {
   "ecosystem": "java",
   "format": "xml",
-  "status": "pilot_four_selected_search_bounded",
+  "status": "pilot_five_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 4,
+  "verified_third_party_count": 5,
   "verified_standard_or_runtime_count": 1,
   "search_queries": [
     "xml",
@@ -18,8 +18,8 @@
   "search_hits_recorded": 346,
   "unique_search_hits": 345,
   "unresolved_documentation_leads": 9,
-  "excluded_non_parser_leads": 5,
-  "uncertainty": "Pilot cell: xerces:xercesImpl 2.12.2 (2,474 deps.dev summed direct dependents), woodstox-core 7.3.0 (1,874), org.dom4j:dom4j 2.2.0 (1,434), and aalto-xml 1.4.0 (559) are four verified third-party paths with direct local stream APIs, exact namespace-aware output on two valid controls, JaCoCo parser-package source lines, and stable input-dependent AFL++ feedback. Xerces, Woodstox, and Aalto are independent parser engines; dom4j is a wrapper path whose SAXReader builds a tree over the default JAXP SAX parser (the OpenJDK java.xml Xerces fork), so it shares the Apache Xerces2-J family and its AFL++ feedback covers dom4j tree-building lines only. The standard javax.xml.parsers path runs the same OpenJDK Xerces fork and is counted separately. Jackson XML, jsoup, and XStream remain non-parser-engine leads; JDOM delegates to JAXP SAX implementations. 9 documentation leads remain unresolved in leads.json, including the legacy dom4j:dom4j coordinate, which is not counted beside org.dom4j:dom4j. Maven Central search is relevance-ranked, not an adoption ranking; deps.dev metrics are summed per release and may count a dependent repeatedly. These small UTF-8 controls without DOCTYPE do not establish DTD, external-entity, schema, non-UTF-8, or XML 1.1 behavior.",
+  "excluded_non_parser_leads": 4,
+  "uncertainty": "Five third-party XML package paths are verified and runnable: Jackson XML, Xerces2-J, Woodstox, dom4j, and Aalto. Xerces2-J, Woodstox, and Aalto are independent tokenizer/parser engines. Jackson XML is a format-specific token projection over pinned Woodstox; its own module and the underlying Woodstox parser have separate source coverage. Its ordered token output retains decoded field/value text but omits namespace URIs, root name, comments, processing instructions, and attribute-versus-child origin. dom4j builds a tree over the default JAXP SAX parser (OpenJDK Xerces fork), with dom4j and underlying JDK coverage separately recorded. The standard javax.xml.parsers path is counted separately and shares the Xerces2-J family. Nine documentation leads remain unresolved; legacy dom4j:dom4j is not counted beside org.dom4j:dom4j. Maven Central search is relevance-ranked and bounded to 100 hits per query (345 unique hits); deps.dev sums direct dependents per release and does not measure XML-specific use or independent parser families. Two small UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, external-entity, schema, non-UTF-8, or XML 1.1 behavior.",
   "third_party_evidence": "data/java/xml/parsers.json",
   "third_party_control_results": "data/java/xml/verification.json",
   "runtime_evidence": "data/java/xml/standard.json",

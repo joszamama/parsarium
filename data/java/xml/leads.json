@@ -2,13 +2,14 @@
   {
     "name": "jackson-dataformat-xml",
     "coordinate": "com.fasterxml.jackson.dataformat:jackson-dataformat-xml",
-    "status": "not_a_parser_engine",
+    "status": "promoted_to_verified",
     "version_seen": "2.23.0",
     "summed_direct_dependent_count": 25682,
     "max_release_direct_dependent_count": 725,
     "default_release_direct_dependent_count": 14,
-    "reason": "XmlMapper object/tree binding over a StAX XMLStreamReader (Woodstox by default); a data-binding layer with no XML tokenizer of its own. Highest metric, but it ranks a Jackson format module, not an XML parser.",
-    "source": "https://central.sonatype.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml"
+    "reason": "Pinned 2.23.0 XmlFactory.createParser(local InputStream) performs XML-to-Jackson token projection over Woodstox StAX. Protocol permits a format-specific parser wrapper when underlying family is recorded. Both valid controls, separate own-module and Woodstox source lines, and input-dependent AFL++ feedback passed. The projection omits namespace URIs, root name, comments and processing instructions.",
+    "source": "https://central.sonatype.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml",
+    "evidence": "data/java/xml/parsers.json"
   },
   {
     "name": "jsoup",

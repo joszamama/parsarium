@@ -225,5 +225,63 @@
       ]
     },
     "project": "projects/xml/java/aalto_xml"
+  },
+  {
+    "name": "jackson-dataformat-xml",
+    "group": "com.fasterxml.jackson.dataformat",
+    "artifact": "jackson-dataformat-xml",
+    "version": "2.23.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Jackson base parent POM and project README; pinned POM and source hashes in source-lock.json",
+    "input_api": "new XmlFactory(new WstxInputFactory()).createParser(Files.newInputStream(local Path)); nextToken() to EOF",
+    "documentation": "https://github.com/FasterXML/jackson-dataformat-xml",
+    "source": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.23.0/jackson-dataformat-xml-2.23.0-sources.jar",
+    "scope": "Valid XML 1.0 UTF-8 without DOCTYPE projected by XmlFactory.createParser(local InputStream) into ordered Jackson tokens; namespace URIs, root name, comments and processing instructions are not represented by this API projection",
+    "family": "Jackson XML FromXmlParser/XmlTokenStream over Woodstox StAX tokenizer",
+    "family_note": "Jackson XML is a format-specific parser/adapter API, with its own XML-to-Jackson token projection but no independent XML lexical engine. Its default/explicit Woodstox StAX parser is the already selected woodstox-core family. Both layers are separately instrumented.",
+    "shared_families": [
+      "Woodstox",
+      "Jackson XML projection"
+    ],
+    "coverage_note": "Same-release Jackson XML module and Woodstox source jars mapped separately to JaCoCo release classes; module lines and underlying tokenizer lines reported separately.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 25682,
+      "max_release": "2.14.2",
+      "max_release_value": 725,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml.jackson.dataformat%3Ajackson-dataformat-xml",
+      "captured_at_utc": "2026-11-17T03:37:58.408539+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Package adoption reflects Jackson XML module use, not an independent XML tokenizer; shares Woodstox family with selected woodstox-core."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "events": [
+        "START_OBJECT",
+        "FIELD_NAME:version",
+        "VALUE_STRING:1",
+        "FIELD_NAME:item",
+        "START_OBJECT",
+        "FIELD_NAME:id",
+        "VALUE_STRING:a1",
+        "FIELD_NAME:lang",
+        "VALUE_STRING:es",
+        "FIELD_NAME:",
+        "VALUE_STRING:Café & té",
+        "END_OBJECT",
+        "FIELD_NAME:item",
+        "START_OBJECT",
+        "FIELD_NAME:id",
+        "VALUE_STRING:b2",
+        "FIELD_NAME:name",
+        "VALUE_STRING:Zürich <HQ>",
+        "FIELD_NAME:note",
+        "VALUE_STRING:x < y",
+        "END_OBJECT",
+        "END_OBJECT"
+      ],
+      "token_count": 22
+    },
+    "project": "projects/xml/java/jackson_xml"
   }
 ]
