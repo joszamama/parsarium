@@ -112,6 +112,65 @@
     "project": "projects/xml/java/woodstox_core"
   },
   {
+    "name": "dom4j",
+    "group": "org.dom4j",
+    "artifact": "dom4j",
+    "version": "2.2.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "Maven release POM licenses ('BSD 3-clause New License', https://github.com/dom4j/dom4j/blob/master/LICENSE); pinned POM SHA256 in source-lock.json",
+    "input_api": "org.dom4j.io.SAXReader.createDefault().read(local InputStream) returns an org.dom4j.Document; walk Element.content()",
+    "documentation": "https://repo.maven.apache.org/maven2/org/dom4j/dom4j/2.2.0/dom4j-2.2.0-sources.jar",
+    "documentation_note": "Pinned sources: SAXReader.java lines 152-162 (createDefault disables external DTD and entity loading), 386-393 (read(InputStream) wraps an InputSource), 462-496 (read(InputSource) parses through getXMLReader() and returns the content handler document), 895-897 (createXMLReader delegates to SAXHelper); SAXHelper.java lines 84-91 and JAXPHelper.java lines 44-48 obtain the reader from SAXParserFactory.newInstance() with namespace awareness on. Official site: https://dom4j.github.io/",
+    "source": "https://repo.maven.apache.org/maven2/org/dom4j/dom4j/2.2.0/dom4j-2.2.0-sources.jar",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE read namespace-aware by dom4j SAXReader into a dom4j Document over the default JAXP SAX parser: expanded element names, maximum depth, declared namespaces and URIs, sorted non-namespace attributes, and decoded character data",
+    "family": "dom4j SAX tree builder over the JAXP default SAX parser (OpenJDK java.xml Xerces2-J fork)",
+    "family_note": "dom4j has no XML tokenizer of its own. SAXReader obtains an XMLReader from JAXP SAXParserFactory.newInstance(); with no factory property or provider configured, the pinned Temurin 25.0.5 runtime returns com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser, so the OpenJDK Xerces fork scans the input and dom4j's SAXContentHandler builds the tree. This path shares the Apache Xerces2-J family with xerces:xercesImpl and the standard javax.xml.parsers path; it is counted as a separate package path (wrapper API), not as an independent parser engine. The legacy dom4j:dom4j 1.x coordinate is the same project and is not counted.",
+    "shared_families": [
+      "dom4j",
+      "Apache Xerces2-J"
+    ],
+    "coverage_note": "Release jar includes line-number tables; JaCoCo instruments pinned org.dom4j release classes and maps lines to the same-release sources jar. The JDK Xerces fork is instrumented as boot classes and reported separately as underlying coverage against jdk25u jdk-25.0.5+8 sources. AFL++ feedback is scoped to org.dom4j lines only.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 1434,
+      "max_release": "2.1.1",
+      "max_release_value": 540,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.dom4j%3Adom4j",
+      "captured_at_utc": "2026-11-17T03:37:55.267371+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Summed over 11 org.dom4j:dom4j releases, so a dependent is counted once per release it depends on; deps.dev coverage is incomplete. The legacy dom4j:dom4j coordinate (1,755) is a separate lead and is not added. Rechecked 2026-11-17 by scripts/check_java_xml_dom4j.py: unchanged."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/dom4j"
+  },
+  {
     "name": "aalto-xml",
     "group": "com.fasterxml",
     "artifact": "aalto-xml",

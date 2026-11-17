@@ -28,6 +28,7 @@ class JavaXmlPilotTest(unittest.TestCase):
         self.assertEqual({lead["coordinate"] for lead in leads
                           if lead["status"] == "promoted_to_verified"},
                          {"com.fasterxml.woodstox:woodstox-core",
+                          "org.dom4j:dom4j",
                           "com.fasterxml:aalto-xml"})
         snapshot = read(BASE / "registry-snapshot.json")
         for parser in parsers:
@@ -55,6 +56,33 @@ class JavaXmlPilotTest(unittest.TestCase):
         self.assertIn("Aalto XML", aalto["shared_families"])
         self.assertNotIn("Apache Xerces2-J", aalto["shared_families"])
         self.assertIn("Xerces2-J", api["family"])
+
+    def test_dom4j_is_a_wrapper_over_the_jdk_xerces_fork(self):
+        parsers = read(BASE / "parsers.json")
+        dom4j = next(parser for parser in parsers if parser["group"] == "org.dom4j")
+        self.assertEqual(dom4j["shared_families"], ["dom4j", "Apache Xerces2-J"])
+        self.assertNotIn("dom4j:dom4j", {f"{p['group']}:{p['artifact']}" for p in parsers})
+        legacy = next(lead for lead in read(BASE / "leads.json")
+                      if lead["coordinate"] == "dom4j:dom4j")
+        self.assertEqual(legacy["status"], "unresolved")
+        self.assertEqual(dom4j["popularity"]["value"], 1434)
+        project = ROOT / dom4j["project"]
+        manifest = read(project / "manifest.json")
+        receipt = read(project / "verification.json")
+        lock = read(project / "source-lock.json")["dom4j"]
+        snapshot = read(BASE / "registry-snapshot.json")["releases"]["org.dom4j:dom4j"]
+        self.assertEqual(snapshot["sources_sha256"], manifest["source_sha256"])
+        self.assertEqual((snapshot["jar_sha256"], snapshot["pom_sha256"]),
+                         (lock["jar_sha256"], lock["pom_sha256"]))
+        self.assertEqual(lock["dependencies"], {})
+        # dom4j's own package lines are the subject; the JDK fork is reported apart.
+        self.assertEqual(manifest["coverage_subject_prefix"], "/work/parser-source/")
+        self.assertEqual(manifest["underlying_coverage_subject_prefix"], "/work/underlying-source/")
+        self.assertGreater(receipt["parser_source_lines_covered"], 0)
+        self.assertGreater(receipt["underlying_source_lines_covered"], 0)
+        overlay = (ROOT / "fuzzing/afl-native/xml/java/dom4j/Dockerfile").read_text()
+        self.assertIn("ENV PARSARIUM_PARSER_JAR=/work/lib/dom4j-2.2.0.jar", overlay)
+        self.assertIn("ENV PARSARIUM_PARSER_SOURCES=/work/parser-source", overlay)
 
     def test_control_receipts_match_catalog(self):
         parsers = read(BASE / "parsers.json")

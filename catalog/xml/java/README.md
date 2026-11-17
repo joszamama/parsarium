@@ -10,6 +10,7 @@ Pilot cell: xerces:xercesImpl 2.12.2 (2,474 deps.dev summed direct dependents), 
 
 - [xercesImpl](xercesimpl/README.md) — verified Docker harness
 - [woodstox-core](woodstox-core/README.md) — verified Docker harness
+- [dom4j](dom4j/README.md) — verified Docker harness
 - [aalto-xml](aalto-xml/README.md) — verified Docker harness
 
 ## Standard and runtime APIs

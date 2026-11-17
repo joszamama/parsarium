@@ -52,19 +52,20 @@
     "summed_direct_dependent_count": 1755,
     "max_release_direct_dependent_count": 1566,
     "default_release_direct_dependent_count": 8,
-    "reason": "Legacy dom4j 1.x coordinate; SAXReader.read(InputStream) builds a tree over a JAXP SAX parser, which defaults to the JDK Xerces fork, so it has no tokenizer of its own. Even with org.dom4j:dom4j added (3,189) the parsing would re-measure the Xerces2-J family. Control not run.",
+    "reason": "Legacy dom4j 1.x coordinate of the same dom4j project as the verified org.dom4j:dom4j 2.2.0 path; not counted as a second path and its metric is not added to org.dom4j:dom4j. SAXReader uses the same JAXP SAX delegation. Control not run.",
     "source": "https://central.sonatype.com/artifact/dom4j/dom4j"
   },
   {
     "name": "dom4j",
     "coordinate": "org.dom4j:dom4j",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "2.2.0",
     "summed_direct_dependent_count": 1434,
     "max_release_direct_dependent_count": 540,
     "default_release_direct_dependent_count": 89,
-    "reason": "dom4j 2.x; same SAXReader-over-JAXP design as dom4j:dom4j, defaulting to the JDK Xerces fork. Control not run.",
-    "source": "https://central.sonatype.com/artifact/org.dom4j/dom4j"
+    "reason": "dom4j 2.2.0 SAXReader wrapper path; builds a dom4j tree over the default JAXP SAX parser (OpenJDK java.xml Xerces fork), so it shares the Apache Xerces2-J family and is not an independent tokenizer. Two valid namespace-aware controls, pinned release jar, sources jar and POM, JaCoCo dom4j package lines, and input-dependent AFL++ feedback verified. Metric rechecked 2026-11-17: 1,434 unchanged.",
+    "source": "https://central.sonatype.com/artifact/org.dom4j/dom4j",
+    "verified_evidence": "data/java/xml/verification.json"
   },
   {
     "name": "xmlbeans",
