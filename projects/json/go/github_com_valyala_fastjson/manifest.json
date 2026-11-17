@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "go",
+  "package": "github.com/valyala/fastjson",
+  "release": "v1.6.10",
+  "catalog_parser": "data/go/json/parsers.json",
+  "source_lock": "projects/json/go/github_com_valyala_fastjson/source-lock.json",
+  "source_sha256": "9b4ec65a79a668f4948baf45f53d127f6c36cd37f78c1f5cfee672bd377afce7",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzJSON",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzJSON",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go coverpkg instrumentation of pinned fastjson source during complete local-byte JSON parsing and tree traversal",
+  "coverage_subject_prefix": "github.com/valyala/fastjson/"
+}

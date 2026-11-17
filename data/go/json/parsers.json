@@ -32,7 +32,7 @@
       "objects": 5,
       "root": "object",
       "strings": [
-        "café \"quoted\"",
+        "caf\u00e9 \"quoted\"",
         "go",
         "json",
         "parsarium",
@@ -84,7 +84,7 @@
       "objects": 5,
       "root": "object",
       "strings": [
-        "café \"quoted\"",
+        "caf\u00e9 \"quoted\"",
         "go",
         "json",
         "parsarium",
@@ -137,7 +137,7 @@
       "objects": 5,
       "root": "object",
       "strings": [
-        "café \"quoted\"",
+        "caf\u00e9 \"quoted\"",
         "go",
         "json",
         "parsarium",
@@ -189,7 +189,7 @@
       "objects": 5,
       "root": "object",
       "strings": [
-        "café \"quoted\"",
+        "caf\u00e9 \"quoted\"",
         "go",
         "json",
         "parsarium",
@@ -241,7 +241,7 @@
       "objects": 5,
       "root": "object",
       "strings": [
-        "café \"quoted\"",
+        "caf\u00e9 \"quoted\"",
         "go",
         "json",
         "parsarium",
@@ -259,5 +259,58 @@
     },
     "control": "controls/json/nested-object.json",
     "project": "projects/json/go/github_com_buger_jsonparser"
+  },
+  {
+    "name": "github.com/valyala/fastjson",
+    "module": "github.com/valyala/fastjson",
+    "version": "v1.6.10",
+    "license": "MIT",
+    "license_evidence": "LICENSE in pinned Go module zip",
+    "input_api": "fastjson.Parser.ParseBytes([]byte) over one complete local JSON byte slice",
+    "documentation": "https://pkg.go.dev/github.com/valyala/fastjson@v1.6.10#Parser.ParseBytes",
+    "source": "https://github.com/valyala/fastjson/tree/v1.6.10",
+    "scope": "Full local JSON document into fastjson.Value tree, recursively traversed to observe decoded structures and values on both controls; only the observed subset is verified",
+    "family": "valyala/fastjson own Go recursive-descent parser",
+    "family_note": "parser.go implements its own JSON tokenizer and Value tree. No encoding/json decoder is used in the parse harness; reporter uses encoding/json only for summary receipt serialization.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 895,
+      "source": "https://pkg.go.dev/github.com/valyala/fastjson?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "caf\u00e9 \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "control": "controls/json/nested-object.json",
+    "project": "projects/json/go/github_com_valyala_fastjson"
   }
 ]

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T07:10:40.357559+00:00",
-  "projects_total": 6,
-  "projects_passed": 6,
+  "checked_at_utc": "2026-11-17T11:28:44.384647+00:00",
+  "projects_total": 7,
+  "projects_passed": 7,
   "differential_kind": "fixed_valid_nested_array",
   "results": [
     {
@@ -91,6 +91,25 @@
       "differential_afl_tuples": 275,
       "parser_feature_difference": 3,
       "afl_tuple_difference": 3,
+      "differential_control_pass": true
+    },
+    {
+      "project": "json/go/github_com_valyala_fastjson",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "overlay_receipt_sha256": "2890d552e5117a2859242ef39200607288e83dd500f6b5a666afb0d14eeebdc0",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 162,
+      "control_afl_tuples": 182,
+      "differential_parser_features": 151,
+      "differential_afl_tuples": 171,
+      "parser_feature_difference": 15,
+      "afl_tuple_difference": 15,
       "differential_control_pass": true
     },
     {

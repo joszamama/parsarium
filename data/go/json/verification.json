@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T07:10:40.358792+00:00",
+  "checked_at_utc": "2026-11-17T11:28:44.384647+00:00",
   "platform": "linux/arm64 Docker",
   "go": "go1.27.1",
   "controls": {
@@ -221,6 +221,49 @@
       },
       "differential_control_pass": true,
       "parser_source_lines_covered": 219,
+      "error": null
+    },
+    {
+      "package": "github.com/valyala/fastjson",
+      "module": "github.com/valyala/fastjson",
+      "version": "v1.6.10",
+      "scope": "Complete local JSON document parsed into fastjson.Value then recursively traversed; observed valid controls only",
+      "command": "python3 scripts/run_project.py json go github_com_valyala_fastjson",
+      "receipt": "projects/json/go/github_com_valyala_fastjson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_control_pass": true,
+      "parser_source_lines_covered": 257,
       "error": null
     }
   ],

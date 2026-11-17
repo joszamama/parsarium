@@ -1,6 +1,6 @@
 # GO × JSON: selected parsers (pilot)
 
-5 control-verified third-party paths selected. The ceiling is ten. GJSON is a JSON path-query parser: the harness uses its own full-document validation before traversing the parsed Result tree. go-codec is a multi-format package, so its Imported by count covers several formats and does not measure JSON-specific use. A path is an API or package route, not necessarily an independent parser engine.
+6 control-verified third-party paths selected. The ceiling is ten. GJSON is a JSON path-query parser: the harness uses its own full-document validation before traversing the parsed Result tree. go-codec is a multi-format package, so its Imported by count covers several formats and does not measure JSON-specific use. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -13,12 +13,15 @@ pkg.go.dev Imported by package count, from the bounded search captured 2026-11-1
 | 3 | [github.com/ugorji/go/codec](https://pkg.go.dev/github.com/ugorji/go/codec@v1.3.2) | v1.3.2 | 10,142 | JSON via JsonHandle into untyped values | go-codec JSON decoder |
 | 4 | [github.com/goccy/go-json](https://pkg.go.dev/github.com/goccy/go-json@v0.12.0) | v0.12.0 | 4,192 | RFC 8259 JSON text into interface{} | go-json compiled decoder |
 | 5 | [github.com/buger/jsonparser](https://pkg.go.dev/github.com/buger/jsonparser@v1.6.1) | v1.6.1 | 2,171 | Local JSON bytes traversed with Get/ObjectEach/ArrayEachErr | jsonparser byte scanner |
+| 6 | [github.com/valyala/fastjson](https://pkg.go.dev/github.com/valyala/fastjson@v1.6.10#Parser.ParseBytes) | v1.6.10 | 895 | Complete local JSON bytes decoded into a Value tree | fastjson own Go parser |
 
 GJSON has a documented `ParseBytes([]byte)` API but does not validate input on its own. The harness calls its own `ValidBytes([]byte)` first, then traverses `Result.ForEach` over every object and array. Both valid controls pass; the second changes 39 GJSON source features and 39 AFL tuples under stable repeats. Its Imported by count is package adoption, not evidence of general-purpose JSON decoding.
 
 go-codec uses `NewDecoderBytes(data, &JsonHandle{})` and its own JSON reader. The two valid controls pass. Its AFL feedback includes only covered `codec/json.*` parser source files: 258 control features and 278 AFL tuples, with stable repeats and a three-feature/three-tuple change on the valid array. The package metric is labeled as whole-package adoption and must not be read as JSON-specific popularity.
 
 buger/jsonparser is a path-query parser. The adapter recursively walks both valid controls using `Get`, `ObjectEach`, and `ArrayEachErr`; it does not claim full-document validation on arbitrary input. The second control produces the expected array result and changes nine parser source features and nine AFL tuples under stable repeats. The unresolved sonic lead (2,428) has a higher Imported by count, so the selected fifth rank is only among verified paths.
+
+fastjson uses the documented `Parser.ParseBytes` API and traverses the resulting `Value` tree. The complete nested object and array controls match the independent expected summaries. Go coverage reaches 257 lines in its pinned source; stable repeated controls differ by 15 parser source features and 15 AFL tuples. Its 895 Imported by count ranks below the unresolved sonic lead, so the sixth rank is among verified paths only.
 
 ## Standard API (unranked)
 
@@ -37,6 +40,5 @@ Numeric leads from the same snapshot, not verified and not selected. Loggers, JW
 | [github.com/mailru/easyjson/jlexer](https://pkg.go.dev/github.com/mailru/easyjson/jlexer) | v0.9.2 | 3,424 | Lexer for generated easyjson code; a generic local-bytes decode into an untyped value remains unchecked. |
 | [github.com/bytedance/sonic](https://pkg.go.dev/github.com/bytedance/sonic) | v1.15.5 | 2,428 | Documentation describes JIT/SIMD paths and an encoding/json-compatible fallback on unsupported platforms; linux/arm64 parser family remains unchecked. |
 | [k8s.io/apimachinery/pkg/util/json](https://pkg.go.dev/k8s.io/apimachinery/pkg/util/json) | v0.37.2 | 2,062 | Wrapper over sigs.k8s.io/json, an encoding/json fork; would share the Go encoding/json lineage. Not run. |
-| [github.com/valyala/fastjson](https://pkg.go.dev/github.com/valyala/fastjson) | v1.6.10 | 895 | Parser.ParseBytes over bytes; control not run in this pilot. |
 
 Queries: `json`, `json parser`, `json decoder`, `json unmarshal`, `json iterator`; limit 100 each; 500 hits, 474 unique.
