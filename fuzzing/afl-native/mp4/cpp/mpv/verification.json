@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "project": "mp4/cpp/mpv",
+  "pass": true,
+  "feedback_kind": "ffmpeg_mov_mpv_demux_lavf_pcguard_edges",
+  "feedback_scope": "FFmpeg 9.0.2 MOV/MP4 demuxer sources (libavformat/mov.c, isom.c, dovi_isom.c, mov_chan.c, mov_esds.c) and mpv 0.42.0 demux/demux_lavf.c via AFL++ allowlist; the rest of libmpv, libavcodec, libplacebo and the C++17 harness uninstrumented",
+  "afl_guarded_archive_members": [
+    "libavformat.a(dovi_isom.o)",
+    "libavformat.a(isom.o)",
+    "libavformat.a(mov.o)",
+    "libavformat.a(mov_chan.o)",
+    "libavformat.a(mov_esds.o)",
+    "libmpv.a(demux_demux_lavf.c.o)"
+  ],
+  "shared_parser_family": "FFmpeg 9.0.2 MOV/MP4 demuxer (libavformat/mov.c) behind libmpv 0.42.0 demux/demux_lavf.c",
+  "shared_parser_family_projects": [
+    "projects/mp4/c/mpv",
+    "projects/mp4/c/ffmpeg",
+    "projects/mp4/cpp/ffmpeg"
+  ],
+  "base_project_receipt_sha256": "49cbc0cb54e2ff667c2952c5bdd19d1d98f396ba990be1168d24e437dcd1976f",
+  "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
+  "underlying_source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "variant_sha256": "a153daff81e38744da7a653d44a4f381b7f4768d6f4148a00391b440af5ef308",
+  "variant_output": {
+    "container": "mov,mp4,m4a,3gp,3g2,mj2",
+    "title": "",
+    "video_codec": "h264",
+    "audio_codec": "aac"
+  },
+  "image_id": "sha256:aad188d33cb7e334f9b383f9874c5bec3a9329df408438f87063715bc451b3a6",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "afl_file_input": true,
+  "afl_map_size": 23893,
+  "repeats": 3,
+  "feedback_edges": 1862,
+  "variant_feedback_edges": 1982,
+  "edges_only_in_control": 30,
+  "edges_only_in_variant": 150,
+  "control_stability": {
+    "repeat_edge_counts": [
+      1862,
+      1862,
+      1862
+    ],
+    "stable_edges": 1862,
+    "union_edges": 1862,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      1982,
+      1982,
+      1982
+    ],
+    "stable_edges": 1982,
+    "union_edges": 1982,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "stable_variant_only_edges": 150,
+  "overlay_file_sha256": {
+    "Dockerfile": "ee41a541313b0596c0aec1bef983c34eb07ebab5715214a6f016854f4eeda8ee",
+    "build.py": "6ed2236d450ef8c1f5c90c0d8e0e61418afa9eb70e10deba3447760a8d9fd8da"
+  }
+}

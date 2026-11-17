@@ -1,0 +1,41 @@
+{
+  "kind": "third_party",
+  "api": "mpv_create; mpv_initialize; mpv_command(loadfile, local MP4 path); mpv_wait_event(MPV_EVENT_FILE_LOADED); mpv_get_property_string(file-format, metadata/by-key/title, track-list/N/type and codec); mpv_get_property(track-list/count), called from a C++17 translation unit",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T02:35:06.962688+00:00",
+  "manifest": "projects/mp4/cpp/mpv/manifest.json",
+  "image_id": "sha256:a03245d72ee7dcc29c1cce96dca9ca557194343868538aac771b5c215897d364",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "project_file_sha256": {
+    "Dockerfile": "5cb03265e563dd57d2efa3cd2f0144d74525f6ec93a3d22653b423a0698f2881",
+    "build.sh": "c3a64737ec1ddf179168b980fff22486f8af89de2843ecc3def74b7f1ca7b782",
+    "fuzz.cpp": "55ade63b50b97d38d023b3fef6836391b419c59e3d5cd3581573317f8992e1c3",
+    "harness.cpp": "9dcf1aa76ddf2a54f5d1d7fcdae97f1806c8b67f2a6e615b24fa8f6fa6df89b6",
+    "harness.h": "8d100f1f63b8261f2fb485b121e5b2e5f45fc2c48fd0522cfaabbdd75295fa9f",
+    "manifest.json": "a641028568d9c35c73b160adfdd4432934c53fa01073100c56fa50287ee6458e",
+    "replay.cpp": "45bb1a2ac7cfb75d9a410a5b1df9a633103bc3347f5fe06bdb9a3b53e6d65eb5",
+    "run-control.sh": "68acc0893e2eac6035beee4e76d701b8884498c22a70048b1a731ba832d57904",
+    "valid-3s.mp4": "a153daff81e38744da7a653d44a4f381b7f4768d6f4148a00391b440af5ef308"
+  },
+  "output": {
+    "container": "mov,mp4,m4a,3gp,3g2,mj2",
+    "title": "Parsarium",
+    "video_codec": "h264",
+    "audio_codec": "aac"
+  },
+  "parser_source_files": 24,
+  "parser_source_lines_covered": 1581,
+  "format_specific_source_lines_covered": 414,
+  "underlying_source_files": 53,
+  "underlying_source_lines_covered": 2482,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/mp4/cpp/mpv/target/coverage/coverage.json",
+  "pass": true
+}
