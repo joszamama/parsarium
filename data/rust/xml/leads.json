@@ -19,14 +19,6 @@
       "family_note": "xml-rs EventReader family (selected path: xml 1.4.0); MIT license, author field Vladimir Matveev (xml-rs)."
     },
     {
-      "name": "minidom",
-      "version": "0.19.0",
-      "recent_downloads_90d": 984597,
-      "status": "unresolved_shared_family",
-      "reason": "DOM built on rxml; not run. Its parsing would share the selected rxml family.",
-      "source": "https://crates.io/crates/minidom"
-    },
-    {
       "name": "instant-xml",
       "version": "0.7.7",
       "recent_downloads_90d": 748214,
@@ -203,6 +195,18 @@
       "audit": "data/rust/xml/rustyxml-feedback-audit.md",
       "source_sha256": "8b5ace29ee3216de37c0546865ad08edef58b0f9e76838ed8959a84a990e58c5",
       "family_note": "RustyXML parser derives from ObjFW OFXMLParser according to the pinned src/parser.rs."
+    },
+    {
+      "name": "minidom",
+      "version": "0.19.0",
+      "recent_downloads_90d": 984597,
+      "status": "selected_shared_family",
+      "reason": "Distinct documented package API, Element::from_reader(BufRead), over the selected rxml family: rxml's RawReader lexes and parses, and minidom's own TreeBuilder resolves element and attribute prefixes, keeps per-element xmlns declarations and builds the DOM (rxml's namespace resolver, src/parser/namespaces.rs, is not used: 0 lines covered). Selected after the catalog control and the restricted order control matched the Expat oracle (the shared order control is rejected with XmlError(RestrictedXml(\"comments\")), as for rxml), Docker covered 155 minidom lines (90 in src/tree_builder.rs) and 827 underlying rxml lines on the catalog control, and AFL++ feedback scoped to minidom, rxml and rxml_validation was identical across ten afl-showmap repeats per control (1,208 vs 1,308 edges; 81 and 181 unique to each control). minidom's own line counts are the same on both controls; the differing source lines are in rxml's lexer, raw parser and attribute map.",
+      "source": "https://crates.io/crates/minidom",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/minidom/verification.json",
+      "source_sha256": "50b47a02dceb0a36b59ebd5971ce47b9db62593527f9e6800d640f3677fc0021",
+      "family_note": "Shares the selected rxml 0.14.0 lexer and RawParser; minidom adds TreeBuilder prefix resolution and the DOM."
     }
   ]
 }

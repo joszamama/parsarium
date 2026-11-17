@@ -87,7 +87,7 @@ class RustXmlRxmlPilotTest(unittest.TestCase):
         self.assertEqual(cell["verified_third_party_count"], len(parsers))
         self.assertEqual(cell["unresolved_documentation_leads"], len(leads["unresolved_leads"]))
         self.assertIn("projects/xml/rust/rxml/verification.json", cell["third_party_control_results"])
-        self.assertIn("| 7 | [rxml]", (BASE / "ranking.md").read_text())
+        self.assertIn("| 8 | [rxml]", (BASE / "ranking.md").read_text())
 
     def test_feedback_is_stable_and_parser_differential(self):
         manifest = read(PROJECT / "manifest.json")

@@ -449,5 +449,80 @@
       "source": "data/rust/xml/registry-snapshot.json"
     },
     "project": "projects/xml/rust/rustyxml/verification.json"
+  },
+  {
+    "name": "minidom",
+    "version": "0.19.0",
+    "license": "MPL-2.0",
+    "input_api": "minidom::Element::from_reader(impl BufRead) -> Result<Element>; Element::name()/ns()/attrs() (rxml AttrMap keyed by namespace URI and local name), Element::prefixes.declared_prefixes(), Element::nodes() -> Node::Element/Node::Text",
+    "documentation": "https://docs.rs/minidom/0.19.0/minidom/element/struct.Element.html#method.from_reader",
+    "source": "https://static.crates.io/crates/minidom/minidom-0.19.0.crate",
+    "scope": "DOM over local bytes: minidom's TreeBuilder consumes rxml RawReader events and itself resolves element and attribute prefixes, records xmlns declarations per element and builds Element/Text nodes. Expanded names, declarations, attributes and decoded text match the oracle on the catalog control and on the restricted order control. It inherits rxml's restricted XML 1.0 subset (no DTD, custom entities or processing instructions; comments rejected), so the shared order control is rejected with XmlError(RestrictedXml(\"comments\")) and order-default-ns-restricted.xml is the second control. minidom targets the XML subset used by XMPP; AttrMap order equals document order on both controls.",
+    "family": "rxml (shared with the selected rxml path): rxml lexer and RawParser via RawReader; minidom adds its own TreeBuilder prefix resolution and DOM. Not an independent tokenizer.",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "second_control": "controls/xml/order-default-ns-restricted.xml",
+    "second_control_expected_output": {
+      "root": "{urn:parsarium:order}order",
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespace_declarations": 3,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "shared_second_control": "controls/xml/order-default-ns.xml",
+    "shared_second_control_result": "XmlError(RestrictedXml(\"comments\"))",
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 984597,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/minidom/verification.json"
   }
 ]
