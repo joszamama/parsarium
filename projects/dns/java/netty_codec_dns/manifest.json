@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "format": "dns",
+  "ecosystem": "java",
+  "pilot": true,
+  "package": "netty-codec-dns",
+  "release": "4.2.21.Final",
+  "catalog_parser": "data/java/dns/parsers.json",
+  "source_lock": "projects/dns/java/netty_codec_dns/source-lock.json",
+  "source_sha256": "7978de41898b8fbcdd06a80448509fc92d86ee7e393a4a7252d980c5c2712b8e",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/dns/response.bin",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "expected_output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "differential_control": "controls/dns/query.bin",
+  "differential_control_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "differential_expected_output": {
+    "id": 4660,
+    "qr": 0,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 0,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 0,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [],
+    "authority": [],
+    "additional": []
+  },
+  "harness": "NettyDnsHarness.java",
+  "api": "DatagramDnsResponseDecoder (DatagramDnsQueryDecoder when it rejects a non-response) on a DatagramPacket of local bytes through an EmbeddedChannel; DnsMessage/DnsRecord getters, DefaultDnsRecordDecoder.decodeName for the decompressed CNAME and MX names",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "NettyDnsHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/netty-codec-dns-4.2.21.Final.jar:/work/lib/netty-codec-base-4.2.21.Final.jar:/work/lib/netty-common-4.2.21.Final.jar:/work/lib/netty-buffer-4.2.21.Final.jar:/work/lib/netty-transport-4.2.21.Final.jar:/work/lib/netty-resolver-4.2.21.Final.jar",
+    "--target_class=NettyDnsHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "summary_command": [
+    "java",
+    "-cp",
+    "/work/classes:/work/lib/*",
+    "NettyDnsHarness",
+    "/input/case"
+  ],
+  "coverage": "JaCoCo bytecode coverage of io.netty:netty-codec-dns:4.2.21.Final (io.netty.handler.codec.dns) during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/DefaultDnsRecordDecoder.java",
+  "field_note": "Netty's DnsQuery has no AA, TC, RA or RCODE; for a decoded query the harness reports them as 0. A and AAAA stay raw records: the harness formats the 4/16 decoded bytes (IPv6 in RFC 5952 form). CNAME and the MX exchange are decompressed by netty and read with DefaultDnsRecordDecoder.decodeName."
+}

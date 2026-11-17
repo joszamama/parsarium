@@ -69,7 +69,10 @@ def bridge_features(manifest: dict, overlay_image: str, case: Path, work: Path, 
     run([*sandbox(manifest, case, work), "--entrypoint", "/bin/sh", overlay_image,
          "/work/afl_trace", "/input/case", f"/coverage/{name}.features"])
     found = set((work / f"{name}.features").read_text().splitlines()) - {""}
-    outside = [item for item in found if not item.startswith(prefix)]
+    # The Java bridge reports JaCoCo source paths relative to PARSARIUM_PARSER_SOURCES.
+    relative_ok = manifest["ecosystem"] == "java"
+    outside = [item for item in found if not item.startswith(prefix)
+               and not (relative_ok and not item.startswith("/"))]
     if not found or outside:
         raise RuntimeError(f"bridge features empty or outside {prefix}: {sorted(outside)[:5]}")
     return found

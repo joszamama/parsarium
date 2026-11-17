@@ -1,10 +1,10 @@
 {
   "ecosystem": "java",
   "format": "dns",
-  "status": "pilot_search_bounded_none_verified",
+  "status": "pilot_one_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 1,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "dns",
@@ -19,10 +19,11 @@
   },
   "search_hits_recorded": 104,
   "unique_search_hits": 101,
-  "unresolved_documentation_leads": 4,
+  "unresolved_documentation_leads": 3,
   "leads_recorded": 7,
   "leads_by_status": {
-    "unresolved": 4,
+    "resolved_verified_selected": 1,
+    "unresolved": 3,
     "excluded": 3
   },
   "ranking_metric": "deps.dev directDependentCount summed over all releases",
@@ -35,5 +36,8 @@
     "differential": "controls/dns/query.bin",
     "oracle": "controls/dns/check_controls.py",
     "expected": "controls/dns/expected.json"
-  }
+  },
+  "third_party_evidence": "data/java/dns/parsers.json",
+  "third_party_control_results": "data/java/dns/verification.json",
+  "selection": "One control-verified Java DNS path(s), ranked by deps.dev directDependentCount summed over all releases: netty-codec-dns 4.2.21.Final (1,038)."
 }
