@@ -4,6 +4,7 @@
   "go": "go version go1.27.1 darwin/arm64",
   "libvips": "8.18.7",
   "magickwand": "7.1.2",
+  "graphicsmagickwand": "1.3.49",
   "control": "controls/ascii_pnm/red-green.ppm",
   "control_sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
   "control_meaning": "ASCII P3 PPM, 2x1, maximum 255, red then green",
@@ -448,6 +449,21 @@
           255,
           0
         ],
+        "width": 2
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/gographics/gmagick",
+      "module": "github.com/gographics/gmagick",
+      "version": "v1.0.0",
+      "scope": "P3 dimensions, format and color count",
+      "command": "go run ./native_gmagick ../../../controls/ascii_pnm/red-green.ppm",
+      "pass": true,
+      "output": {
+        "colors": 2,
+        "format": "PPM",
+        "height": 1,
         "width": 2
       },
       "error": null

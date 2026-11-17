@@ -17,6 +17,7 @@ NATIVE = {
     "github.com/bu/govips/pkg/vips": "native_bu",
     "github.com/robxyy/govips/pkg/vips": "native_robxyy",
     "github.com/perelin/govips/pkg/vips": "native_perelin",
+    "github.com/gographics/gmagick": "native_gmagick",
 }
 
 
@@ -50,6 +51,7 @@ def main() -> None:
               "platform": platform.platform(), "go": tool_version("go", "version"),
               "libvips": tool_version("pkg-config", "--modversion", "vips"),
               "magickwand": tool_version("pkg-config", "--modversion", "MagickWand"),
+              "graphicsmagickwand": tool_version("pkg-config", "--modversion", "GraphicsMagickWand"),
               "control": "controls/ascii_pnm/red-green.ppm",
               "control_sha256": hashlib.sha256(CONTROL.read_bytes()).hexdigest(),
               "control_meaning": "ASCII P3 PPM, 2x1, maximum 255, red then green",

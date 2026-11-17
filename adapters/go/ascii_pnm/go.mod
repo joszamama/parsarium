@@ -28,6 +28,7 @@ require (
 require (
 	github.com/go-images/jpeg2000 v0.14.0 // indirect
 	github.com/go-simd/highway v0.0.14 // indirect
+	github.com/gographics/gmagick v1.0.0 // indirect
 	github.com/kovidgoyal/go-parallel v1.1.1 // indirect
 	github.com/kovidgoyal/go-shm v1.0.0 // indirect
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
