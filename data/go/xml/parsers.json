@@ -162,5 +162,103 @@
       ]
     },
     "project": "projects/xml/go/github_com_clbanning_mxj"
+  },
+  {
+    "name": "github.com/beego/x2j",
+    "module": "github.com/beego/x2j",
+    "version": "v0.0.0-20131220205130-a0352aadc542",
+    "license": "BSD-3-Clause",
+    "input_api": "x2j.Unmarshal([]byte, &map[string]interface{}), x2j.ByteDocToMap([]byte) and x2j.DocToMap(string), which must agree, plus x2j.ToMap(io.Reader), each returning map[string]interface{}; the harness walks the map keys and reports the []byte/string and io.Reader maps separately",
+    "documentation": "https://pkg.go.dev/github.com/beego/x2j@v0.0.0-20131220205130-a0352aadc542#Unmarshal",
+    "source": "https://github.com/beego/x2j/tree/a0352aadc5420072ebe692481a5d6913d77f8cf0",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE converted to a map[string]interface{} with default settings (no recast): local element names as keys, repeated sibling names as ordered lists, '-'-prefixed attribute keys (namespace declarations included), decoded character data and CDATA as string values or '#text'. The []byte/string paths first delete whitespace before every '<' in the raw document; the io.Reader path does not and keeps whitespace runs as '#text' entries",
+    "family": "x2j map conversion over Go encoding/xml Decoder tokenizer",
+    "family_note": "x2j.go creates an encoding/xml.Decoder and builds its own Node tree in xmlToTree from Decoder.Token, then converts it to a map in treeToMap. Lexing, entity and character-reference decoding, CDATA and namespace resolution are the standard encoding/xml code, so x2j shares the Go encoding/xml tokenizer family with etree, xmlquery, mxj and the unranked standard path; it is not an independent tokenizer. github.com/beego/x2j is a GitHub fork of github.com/clbanning/x2j frozen at clbanning commit a0352aa (the clbanning repository is 27 commits ahead); the same author later wrote mxj, so x2j and mxj share map conventions but not source files.",
+    "shared_families": [
+      "Go encoding/xml Decoder tokenizer"
+    ],
+    "representation_losses": [
+      "Namespace URIs are dropped: keys use Name.Local only, so c:catalog becomes catalog and p:amount becomes amount.",
+      "Namespace prefixes are dropped from element and attribute keys (c:lang becomes -lang).",
+      "Namespace declarations are kept only as ordinary attributes named by their local part (xmlns becomes -xmlns, xmlns:c becomes -c); a declaration and an attribute with the same local name collide.",
+      "Order between differently named siblings is lost; only same-name siblings keep their relative order in a list.",
+      "Comments, processing instructions and the XML declaration are discarded.",
+      "Text is not trimmed. In an element with no attributes or children yet, each character-data token replaces the previous one, so text split by a comment, PI or CDATA boundary keeps only the last run; once attributes or children exist, each run becomes a '#text' entry and repeated runs become a '#text' list.",
+      "The []byte/string paths (Unmarshal, ByteDocToMap, DocToMap) run the regular expression [ \\t\\n\\r]*< over the raw document before tokenizing. This deletes inter-element whitespace but also rewrites CDATA content and comments: the valid catalog control's <![CDATA[x < y]]> is reported as 'x< y'.",
+      "The io.Reader path (ToMap) skips that rewrite, so indentation between elements of an element with attributes appears as '#text' list entries ('\\n  ').",
+      "Decoding stops at the root end tag; content after the root element is not read."
+    ],
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 436,
+      "source": "https://pkg.go.dev/github.com/beego/x2j?tab=importedby",
+      "captured_at_utc": "2026-11-17T03:16:02.492959+00:00",
+      "snapshot": "data/go/xml/registry-snapshot.json",
+      "caveat": "Counts importers of github.com/beego/x2j only. The upstream github.com/clbanning/x2j (47) stays a separate unresolved lead and is not added. The module has no tagged release; 436 counts importing packages at any version, likely dominated by older beego framework code that imported it, and importers may use x2j for JSON conversion or value lookup rather than as an XML parser."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "project": "projects/xml/go/github_com_beego_x2j",
+    "expected_output": {
+      "bytes": {
+        "attributes": [
+          "catalog/-c=urn:parsarium:catalog",
+          "catalog/-version=1",
+          "catalog/-xmlns=urn:parsarium:item",
+          "catalog/item[0]/-id=a1",
+          "catalog/item[0]/-lang=es",
+          "catalog/item[1]/-id=b2"
+        ],
+        "elements": [
+          "catalog",
+          "catalog/item[0]",
+          "catalog/item[1]",
+          "catalog/item[1]/name",
+          "catalog/item[1]/note"
+        ],
+        "empty_elements": [],
+        "lists": [
+          "catalog/item=2"
+        ],
+        "max_depth": 3,
+        "root": "catalog",
+        "text": [
+          "catalog/item[0]/#text=Café & té",
+          "catalog/item[1]/name=Zürich <HQ>",
+          "catalog/item[1]/note=x< y"
+        ]
+      },
+      "reader": {
+        "attributes": [
+          "catalog/-c=urn:parsarium:catalog",
+          "catalog/-version=1",
+          "catalog/-xmlns=urn:parsarium:item",
+          "catalog/item[0]/-id=a1",
+          "catalog/item[0]/-lang=es",
+          "catalog/item[1]/-id=b2"
+        ],
+        "elements": [
+          "catalog",
+          "catalog/item[0]",
+          "catalog/item[1]",
+          "catalog/item[1]/name",
+          "catalog/item[1]/note"
+        ],
+        "empty_elements": [],
+        "lists": [
+          "catalog/#text=3",
+          "catalog/item=2"
+        ],
+        "max_depth": 3,
+        "root": "catalog",
+        "text": [
+          "catalog/#text[0]=\n  ",
+          "catalog/#text[1]=\n  ",
+          "catalog/#text[2]=\n",
+          "catalog/item[0]/#text=Café & té",
+          "catalog/item[1]/name=Zürich <HQ>",
+          "catalog/item[1]/note=x < y"
+        ]
+      }
+    }
   }
 ]

@@ -227,6 +227,158 @@
         ]
       },
       "differential_command": "docker run --rm --platform linux/arm64 --network none --read-only --cap-drop ALL --security-opt no-new-privileges --tmpfs /tmp:rw,nosuid,size=64m -v $PWD/controls/xml/order-default-ns.xml:/input/differential:ro --entrypoint /work/harness.test parsarium/xml-go-github_com_clbanning_mxj:local -test.run=^TestDifferential$ -test.v"
+    },
+    {
+      "package": "github.com/beego/x2j",
+      "module": "github.com/beego/x2j",
+      "version": "v0.0.0-20131220205130-a0352aadc542",
+      "scope": "XML 1.0 UTF-8 document without DOCTYPE converted to map[string]interface{} by Unmarshal([]byte, &map), ByteDocToMap([]byte), DocToMap(string) and ToMap(io.Reader), default settings (no recast)",
+      "command": "python3 parsarium.py build xml go github_com_beego_x2j",
+      "receipt": "projects/xml/go/github_com_beego_x2j/verification.json",
+      "pass": true,
+      "output": {
+        "bytes": {
+          "attributes": [
+            "catalog/-c=urn:parsarium:catalog",
+            "catalog/-version=1",
+            "catalog/-xmlns=urn:parsarium:item",
+            "catalog/item[0]/-id=a1",
+            "catalog/item[0]/-lang=es",
+            "catalog/item[1]/-id=b2"
+          ],
+          "elements": [
+            "catalog",
+            "catalog/item[0]",
+            "catalog/item[1]",
+            "catalog/item[1]/name",
+            "catalog/item[1]/note"
+          ],
+          "empty_elements": [],
+          "lists": [
+            "catalog/item=2"
+          ],
+          "max_depth": 3,
+          "root": "catalog",
+          "text": [
+            "catalog/item[0]/#text=Café & té",
+            "catalog/item[1]/name=Zürich <HQ>",
+            "catalog/item[1]/note=x< y"
+          ]
+        },
+        "reader": {
+          "attributes": [
+            "catalog/-c=urn:parsarium:catalog",
+            "catalog/-version=1",
+            "catalog/-xmlns=urn:parsarium:item",
+            "catalog/item[0]/-id=a1",
+            "catalog/item[0]/-lang=es",
+            "catalog/item[1]/-id=b2"
+          ],
+          "elements": [
+            "catalog",
+            "catalog/item[0]",
+            "catalog/item[1]",
+            "catalog/item[1]/name",
+            "catalog/item[1]/note"
+          ],
+          "empty_elements": [],
+          "lists": [
+            "catalog/#text=3",
+            "catalog/item=2"
+          ],
+          "max_depth": 3,
+          "root": "catalog",
+          "text": [
+            "catalog/#text[0]=\n  ",
+            "catalog/#text[1]=\n  ",
+            "catalog/#text[2]=\n",
+            "catalog/item[0]/#text=Café & té",
+            "catalog/item[1]/name=Zürich <HQ>",
+            "catalog/item[1]/note=x < y"
+          ]
+        }
+      },
+      "observed_subset": "Two path-keyed summaries ('bytes' for the three agreeing []byte/string APIs, 'reader' for ToMap): map paths built from local names with list indexes, '-'-prefixed attribute keys (namespace declarations appear as -xmlns and -<prefix>), '#text' runs and simple-element string values, empty elements, list lengths and depth. Namespace URIs, prefixes, order between differently named siblings, comments, processing instructions and the XML declaration are not represented and are not claimed.",
+      "oracle_check": "data/go/xml/x2j-oracle-check.json",
+      "oracle_result": "An expat projection onto x2j's map fields matches the io.Reader summary exactly on both controls and the []byte/string summary on order-default-ns.xml. On catalog-ns.xml the []byte/string summary differs in one field: x2j reports the CDATA text 'x< y' where the document holds 'x < y', caused by x2j's raw-byte whitespace rewrite.",
+      "parser_source_lines_covered": 112,
+      "format_specific_source_lines_covered": 100,
+      "encoding_xml_lines_covered": 288,
+      "error": null,
+      "differential_pass": true,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "bytes": {
+          "attributes": [
+            "order/-p=urn:parsarium:price",
+            "order/-xmlns=urn:parsarium:order",
+            "order/line[0]/-currency=EUR",
+            "order/line[0]/-n=1",
+            "order/line[1]/-n=2",
+            "order/line[1]/-note=say \"hi\"",
+            "order/line[1]/plain/-xmlns="
+          ],
+          "elements": [
+            "order",
+            "order/line[0]",
+            "order/line[0]/amount",
+            "order/line[0]/sku",
+            "order/line[1]",
+            "order/line[1]/plain",
+            "order/line[1]/plain/leaf"
+          ],
+          "empty_elements": [
+            "order/line[1]/plain/leaf"
+          ],
+          "lists": [
+            "order/line=2"
+          ],
+          "max_depth": 4,
+          "root": "order",
+          "text": [
+            "order/line[0]/amount=12.50 €",
+            "order/line[0]/sku=A-7"
+          ]
+        },
+        "reader": {
+          "attributes": [
+            "order/-p=urn:parsarium:price",
+            "order/-xmlns=urn:parsarium:order",
+            "order/line[0]/-currency=EUR",
+            "order/line[0]/-n=1",
+            "order/line[1]/-n=2",
+            "order/line[1]/-note=say \"hi\"",
+            "order/line[1]/plain/-xmlns="
+          ],
+          "elements": [
+            "order",
+            "order/line[0]",
+            "order/line[0]/amount",
+            "order/line[0]/sku",
+            "order/line[1]",
+            "order/line[1]/plain",
+            "order/line[1]/plain/leaf"
+          ],
+          "empty_elements": [
+            "order/line[1]/plain/leaf"
+          ],
+          "lists": [
+            "order/#text=4",
+            "order/line=2"
+          ],
+          "max_depth": 4,
+          "root": "order",
+          "text": [
+            "order/#text[0]=\n  ",
+            "order/#text[1]=\n  ",
+            "order/#text[2]=\n  ",
+            "order/#text[3]=\n",
+            "order/line[0]/amount=12.50 €",
+            "order/line[0]/sku=A-7"
+          ]
+        }
+      },
+      "differential_command": "docker run --rm --platform linux/arm64 --network none --read-only --cap-drop ALL --security-opt no-new-privileges --tmpfs /tmp:rw,nosuid,size=64m -v $PWD/controls/xml/order-default-ns.xml:/input/differential:ro --entrypoint /work/harness.test parsarium/xml-go-github_com_beego_x2j:local -test.run=^TestDifferential$ -test.v"
     }
   ],
   "standard": [
@@ -275,9 +427,10 @@
         "github.com/beevik/etree (via Decoder.RawToken)",
         "github.com/antchfx/xmlquery (via Decoder.Token)",
         "github.com/clbanning/mxj (via Decoder.Token)",
+        "github.com/beego/x2j (via Decoder.Token)",
         "encoding/xml.Decoder.Token()"
       ],
-      "note": "etree, xmlquery and mxj receipts count encoding/xml lines as underlying coverage; their AFL++ bridges map only package-specific source blocks."
+      "note": "etree, xmlquery, mxj and x2j receipts count encoding/xml lines as underlying coverage; their AFL++ bridges map only package-specific source blocks. x2j's feedback check also probes encoding/xml blocks separately through the same harness."
     }
   ]
 }
