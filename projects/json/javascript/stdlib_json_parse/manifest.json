@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "json",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "JSON.parse",
+  "release": "26.10.0",
+  "api": "JSON.parse(text) after new TextDecoder('utf-8', {fatal: true}).decode(Buffer)",
+  "runtime": "Node.js 26.10.0",
+  "v8": "14.6.202.34-node.34",
+  "standard_inventory": "data/javascript/json/standard.json",
+  "adapter": "adapters/javascript/json_node.mjs",
+  "adapter_sha256": "e8e24e794840f27e21c13e9f7266c4803cf5976f9da2674fc6552d671d2c44e2",
+  "input_step": "Control bytes are decoded by the adapter with new TextDecoder('utf-8', {fatal: true}); JSON.parse receives only that string. The UTF-8 step is the adapter's, not the parser's.",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "71b004f18a82f3ea8f26109798564a12e5e4c7989a4c35b93851830b5815dd03",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "harness": "adapter.mjs",
+  "fuzz_engine": null,
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/adapter.mjs"
+  ],
+  "coverage_kind": "native_function_entries",
+  "coverage": "No parser source lines: JSON.parse is V8 C++ inside the node binary and V8 source-range coverage lists no JSON parser script (the run-control checks this). Feedback is gdb function-entry hits on v8::internal::JsonParser<...> text symbols of the pinned, unstripped node binary.",
+  "coverage_subject_prefix": "v8::internal::JsonParser<",
+  "native_feedback_smoke": "native-feedback-probe/run-smoke.sh",
+  "native_feedback_limit": "Function-entry sets only (which JsonParser functions ran), from one-shot gdb breakpoints with SYS_PTRACE and seccomp=unconfined in a separate probe image. Not source lines, not basic blocks or edges, not AFL++ feedback, no fuzz engine. Inlined code is invisible. The gdb package in the probe image is Debian's, recorded but not hash-pinned. Runnable path is valid-control replay only."
+}

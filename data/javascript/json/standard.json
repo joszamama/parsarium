@@ -13,6 +13,7 @@
       "control": "controls/json/nested-object.json",
       "observable_result": "object root with 7 keys, 5 objects, 3 arrays, 5 strings including an escaped \\u00e9 and quotes, 5 numbers, 2 booleans, 1 null, container depth 4",
       "result": "data/javascript/json/standard-receipt.json",
+      "project": "projects/json/javascript/stdlib_json_parse",
       "expected": {
         "arrays": 3,
         "booleans": 2,
@@ -45,9 +46,15 @@
         ]
       },
       "family": "V8 native JSON.parse (JsonParser)",
-      "family_note": "JSON.parse is an ECMAScript builtin implemented natively in V8 14.6.202.34-node.34 inside the node binary. A V8 coverage probe of the adapter listed 84 scripts and no JSON parser script, so no parser source lines or AFL++ parser feedback are attributed. Wrapper packages that call JSON.parse (parse-json, json-parse-even-better-errors, secure-json-parse, @hapi/bourne, fast-json-parse, @discoveryjs/json-ext) share this family.",
+      "family_note": "JSON.parse is an ECMAScript builtin implemented natively in V8 14.6.202.34-node.34 inside the node binary. A V8 coverage probe of the adapter listed 84 scripts and no JSON parser script, so no parser source lines or AFL++ parser feedback are attributed. The Docker project records a narrower native signal instead: gdb function-entry hits on the unstripped binary's v8::internal::JsonParser<...> symbols (21 of 142 for the nested-object control, 0 for a node -e 0 baseline, identical on repeat, 23 for the nested-array control). Wrapper packages that call JSON.parse (parse-json, json-parse-even-better-errors, secure-json-parse, @hapi/bourne, fast-json-parse, @discoveryjs/json-ext) share this family.",
       "parser_source_lines_covered": null,
-      "afl_feedback": null
+      "afl_feedback": null,
+      "native_feedback": {
+        "kind": "native_function_entries_not_source_coverage",
+        "receipt": "projects/json/javascript/stdlib_json_parse/verification.json",
+        "scope": "v8::internal::JsonParser<...> text symbols in /usr/local/bin/node (142)",
+        "control_functions": 21
+      }
     }
   ],
   "unverified_documented_apis": [
@@ -65,5 +72,5 @@
     }
   ],
   "no_api_findings": [],
-  "limit": "One valid nested RFC 8259 object control (plus the fixed nested-array second control in the receipt) verifies JSON.parse after strict UTF-8 decoding on Node.js 26.10.0, not every JSON variant, number range, reviver use, or BOM handling. No parser-source coverage or AFL++ feedback exists for this native path."
+  "limit": "One valid nested RFC 8259 object control (plus the fixed nested-array second control) verifies JSON.parse after strict UTF-8 decoding on Node.js 26.10.0, not every JSON variant, number range, reviver use, or BOM handling. No parser-source coverage or AFL++ feedback exists for this native path; the only feedback is per-function entry sets from gdb, which miss inlined code and say nothing about lines, blocks, or edges."
 }
