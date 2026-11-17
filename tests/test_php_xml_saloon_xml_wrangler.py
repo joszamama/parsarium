@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "data/php/xml"
 PROJECT = ROOT / "projects/xml/php/saloon_xml_wrangler"
 OVERLAY = ROOT / "fuzzing/afl-native/xml/php/saloon_xml_wrangler"
-ROW = BASE / "saloonphp-xml-wrangler-parser.json"
+ROW = BASE / "parsers.json"
 FEEDBACK = BASE / "saloonphp-xml-wrangler-feedback-differential.json"
 
 sys.path.insert(0, str(PROJECT))
@@ -27,7 +27,7 @@ class PhpXmlSaloonXmlWranglerTest(unittest.TestCase):
         manifest = read(PROJECT / "manifest.json")
         receipt = read(PROJECT / "verification.json")
         target = read(PROJECT / "target.json")["expected_output_by_control_sha256"]
-        row, = read(ROW)
+        row, = [item for item in read(ROW) if item["name"] == "saloonphp/xml-wrangler"]
         feedback = read(FEEDBACK)
         self.assertTrue(receipt["pass"])
         self.assertEqual(receipt["output"], manifest["expected_output"])
@@ -50,7 +50,7 @@ class PhpXmlSaloonXmlWranglerTest(unittest.TestCase):
     def test_raw_namespace_behavior_is_recorded_not_repaired(self):
         manifest = read(PROJECT / "manifest.json")
         feedback = read(FEEDBACK)
-        row, = read(ROW)
+        row, = [item for item in read(ROW) if item["name"] == "saloonphp/xml-wrangler"]
         order = manifest["differential_expected_output"]
         self.assertIn("plain", order["elements"])
         self.assertNotIn("plain xmlns=", " ".join(order["namespace_declarations"]))
@@ -65,7 +65,7 @@ class PhpXmlSaloonXmlWranglerTest(unittest.TestCase):
             self.assertNotIn(marker, summary)
 
     def test_release_lock_archives_and_adoption_are_pinned(self):
-        row, = read(ROW)
+        row, = [item for item in read(ROW) if item["name"] == "saloonphp/xml-wrangler"]
         manifest = read(PROJECT / "manifest.json")
         locks = read(PROJECT / "source-lock.json")
         composer = {item["name"]: item for item in read(PROJECT / "composer.lock")["packages"]}
