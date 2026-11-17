@@ -28,11 +28,14 @@
     },
     {
       "name": "wapmorgan/media-file",
-      "status": "unresolved_shared_family",
+      "status": "shared_family",
       "packagist_downloads": 248980,
       "description": "A unified reader of metadata from audio & video files",
-      "reason": "Unified media reader that uses wapmorgan/mp3info for MP3, so it would be the selected Mp3Info family. Not run.",
-      "source": "https://packagist.org/packages/wapmorgan/media-file"
+      "reason": "Source read: src/Adapters/Mp3Adapter.php constructs wapmorgan\\Mp3Info\\Mp3Info($filename) and returns its duration, bitRate, sampleRate, channel and isVbr properties; no MPEG parsing of its own (format choice comes from wapmorgan/file-type-detector). composer.json requires wapmorgan/mp3info ~0.0, which the mp3_id3v2/php project lock resolves to the selected 0.1.1. Same Mp3Info family, not a separate path.",
+      "source": "https://packagist.org/packages/wapmorgan/media-file",
+      "release": "0.1.4 (commit 263f773696e02d173fb9636c9a8111ac84032292)",
+      "license": "MIT",
+      "family": "Mp3Info (selected wapmorgan/mp3info 0.1.1)"
     },
     {
       "name": "phansys/getid3",
@@ -44,11 +47,12 @@
     },
     {
       "name": "buggedcom/phpvideotoolkit",
-      "status": "unresolved_external_native",
+      "status": "excluded_native_wrapper",
       "packagist_downloads": 89411,
       "description": "PHPVideoToolkit is a set of classes aimed to provide a modular, object oriented and accessible interface for interacting with videos and audio through the FFmpeg program.",
-      "reason": "Wraps the FFmpeg command-line tools; parsing happens in FFmpeg's native MP3 demuxer/decoder, not PHP. Not run on the plain controls.",
-      "source": "https://packagist.org/packages/buggedcom/phpvideotoolkit"
+      "reason": "Source read: media information comes from MediaProbeParser/MediaParser, which build ffprobe/ffmpeg command lines run through FfmpegProcess and ExecBuffer (external process). Mime.php only reads a few bytes for MIME sniffing. No in-process PHP MPEG parser, so no build.",
+      "source": "https://packagist.org/packages/buggedcom/phpvideotoolkit",
+      "release": "2.2.5 (commit 383a5b2c0ee7f4de4efea9a9154bb693630bbe0f)"
     },
     {
       "name": "copyleaks/php-plagiarism-checker",
@@ -72,11 +76,15 @@
     },
     {
       "name": "debach/zend-mp3",
-      "status": "unresolved",
+      "status": "excluded_control_failed",
       "packagist_downloads": 45227,
       "description": "The best PHP library for Object-Oriented media file information reading and writing.",
-      "reason": "Sven Vollbehr PHP Reader family (Zend_Media); the mp3_id3v2/php record covers its ID3 reader. Whether its MPEG audio class consumes Layer III frame headers on untagged input was not checked.",
-      "source": "https://packagist.org/packages/debach/zend-mp3"
+      "reason": "Zend_Media_Mpeg_Abs (README: new Zend_Media_Mpeg_Abs('file.mp3'), getLength()) does parse MPEG audio frames itself: Abs_Frame syncs, decodes version/layer/bitrate/sample rate/mode from its own tables, uses separate MPEG-1 (144) and MPEG-2 (72) Layer III coefficients and _readFrames() walks every frame (fork caps at 200). It cannot load on PHP 8: its parent Zend/Media/Mpeg/Object.php line 144 uses the removed $buffer{$pos++} string-offset syntax (Parse error) and Mpeg/Abs/VbriHeader.php line 88 has an unparenthesized nested ternary (fatal). In the PHP 8.5.4 image built from projects/mp3_id3v2/php/debach_zend_mp3 the probe exits 255 on both controls. The ID3v2 reader does not load these files. No newer release; patching is out of scope.",
+      "source": "https://packagist.org/packages/debach/zend-mp3",
+      "release": "1.8.1 (commit 17b523ad57f283ddf3a116bc0eff22cb9d1b4b27; codeload legacy.zip SHA-256 2cf59be0e16a25ff6369bada6c1e6f739a47f7eda6da3c3abc59a7e899c9ef38, as pinned in projects/mp3_id3v2/php/debach_zend_mp3)",
+      "license": "BSD-3-Clause",
+      "family": "Sven Vollbehr PHP Reader (Zend_Media); own MPEG audio frame walker, no getID3 or Mp3Info code",
+      "audit": "data/php/mp3/lead-audit.md"
     },
     {
       "name": "nass600/get-id3",
@@ -128,11 +136,15 @@
     },
     {
       "name": "fobilow/mp3file",
-      "status": "unresolved",
+      "status": "excluded_control_failed",
       "packagist_downloads": 5468,
       "description": "php5 class for detecting bitrate and duration of regular mp3 files (not VBR files)",
-      "reason": "Native PHP class that detects CBR bitrate and duration from MPEG frame headers; low adoption, not run.",
-      "source": "https://packagist.org/packages/fobilow/mp3file"
+      "reason": "No release tag and no license. The class reads only the first frame header bit by bit and derives CBR duration from file size and header bitrate (frame size uses the MPEG-1 coefficient 144 for all versions); it does not walk frames. On PHP 8.5.12 Mp3File.php does not compile: $mp3['MPEG version']{1} at line 253 is removed string-offset syntax (Parse error, exit 255 on both controls).",
+      "source": "https://packagist.org/packages/fobilow/mp3file",
+      "release": "none: dev-master only (commit 5e0f5c7da8804a149a2bb1ca89c45ec8ea7e0388, 2013-08-22)",
+      "license": "none declared (composer.json has no license; LICENSE is empty)",
+      "family": "Zedwood Mp3File script",
+      "audit": "data/php/mp3/lead-audit.md"
     },
     {
       "name": "plutuss/getid3-laravel",
@@ -152,11 +164,14 @@
     },
     {
       "name": "acekyd/laravelmp3",
-      "status": "unresolved",
+      "status": "shared_family",
       "packagist_downloads": 3711,
       "description": "A light weight Laravel package for simple operations with mp3 files",
-      "reason": "Laravel MP3 helper; its MP3 parsing dependency was not inspected. Not run.",
-      "source": "https://packagist.org/packages/acekyd/laravelmp3"
+      "reason": "Source read: src/getid3/ is a bundled getID3 1.9.5-20130220 (module.audio.mp3.php included) and LaravelMP3::load() calls new \\getID3 and analyze(). Same getID3 frame parser family; composer.json also requires php ^5.3.3 || ^7.0.",
+      "source": "https://packagist.org/packages/acekyd/laravelmp3",
+      "release": "1.0.3 (commit 28a870499a489fe7da8ce84aba2ffa62903a4d68)",
+      "license": "GPL-2.0",
+      "family": "getID3 (bundled copy 1.9.5-20130220)"
     },
     {
       "name": "duncan3dc/meta-audio",
@@ -232,11 +247,13 @@
     },
     {
       "name": "akiosarkiz/mp3php",
-      "status": "unresolved",
+      "status": "excluded_native_wrapper",
       "packagist_downloads": 598,
       "description": "Package for manipulation mp3 files in php",
-      "reason": "MP3 manipulation package; frame parsing not inspected. Not run.",
-      "source": "https://packagist.org/packages/akiosarkiz/mp3php"
+      "reason": "Source read: src/Mp3.php requires ffprobe and reads stream information with shell_exec('ffprobe -v quiet -print_format json -show_format -show_streams ...'); parsing happens in FFmpeg, not PHP.",
+      "source": "https://packagist.org/packages/akiosarkiz/mp3php",
+      "release": "1.2.0 (commit 7de9da29519a34c05632a36a24f7d9bf541884e6)",
+      "license": "MIT"
     },
     {
       "name": "brokencube/id3",
@@ -280,11 +297,15 @@
     },
     {
       "name": "xiaosongshu/flv2mp4",
-      "status": "excluded",
+      "status": "excluded_control_failed",
       "packagist_downloads": 190,
       "description": "Pure PHP native media processing library, realize FLV/MP4/HLS mutual conversion , H.264 re-encoding and opus/mp3/aac/wav re-encoding. Built-in live stream relay gateway, file server, multi-protocol push client: RTMP, HTTP-FLV, WebSocket-FLV, no FFmpeg external dependencies.",
-      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
-      "source": "https://packagist.org/packages/xiaosongshu/flv2mp4"
+      "reason": "Snapshot re-scan: the package contains its own PHP Layer III decoder. Mp3L3Decoder::decode() returns 44,100 Hz, 1 channel, 12,672 samples (11 x 1,152) on the MPEG-1 control, matching the header walk, but skips every non-MPEG-1 header and decodes 0 frames (sample rate 0, 0 channels) on the MPEG-2 22.05 kHz stereo control, where the oracle reads 12 frames. The only documented MP3 input API, Client::runMp32Wav(), decodes in a proc_open child (bin/audio-worker.php via AudioParallelPipeline), so in-process parser-line coverage would not see it; Manage\\Mp32Pcm calls the decoder in-process but is undocumented.",
+      "source": "https://packagist.org/packages/xiaosongshu/flv2mp4",
+      "release": "v1.8.7 (commit 9e84aaf8b8d74e2965b451622dce02e9fa206728, 2026-11-12)",
+      "license": "Apache-2.0",
+      "family": "own native PHP MPEG-1 Layer III decoder (src/Mp3/Mp3L3Decoder.php)",
+      "audit": "data/php/mp3/lead-audit.md"
     },
     {
       "name": "simonsimcity/get-id3-bundle",
@@ -371,7 +392,7 @@
       "status": "excluded",
       "packagist_downloads": 68,
       "description": "Bundle to control a mp3 file.",
-      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "reason": "Snapshot re-scan: Handler/Mp3Handler.php reads MPEG frame headers itself, but Packagist lists only dev-master (commit ddb4fc82342b9e04fd65edf060933169d0c9b253, no release tag) and it requires symfony/symfony 2.3.*. No pinned release.",
       "source": "https://packagist.org/packages/rheck/mp3-bundle"
     },
     {
@@ -435,7 +456,7 @@
       "status": "excluded",
       "packagist_downloads": 27,
       "description": "Simple bundle to extract meta information from media files (e.g. mp3)",
-      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "reason": "Snapshot re-scan: Symfony bundle (dev-master only, no release) whose Parser/Types/Mp3Parser.php uses phansys/getid3; getID3 family, not a separate parser path.",
       "source": "https://packagist.org/packages/stinger-soft/media-parsing-bundle"
     },
     {
@@ -464,11 +485,13 @@
     },
     {
       "name": "phpmlkit/soundfile",
-      "status": "unresolved_external_native",
+      "status": "excluded_native_wrapper",
       "packagist_downloads": 20,
       "description": "Low-level libsndfile + libsamplerate bindings for PHP via FFI",
-      "reason": "FFI bindings to libsndfile, whose MP3 path uses libmpg123 (the C plain-MP3 pilot family). Not run.",
-      "source": "https://packagist.org/packages/phpmlkit/soundfile"
+      "reason": "Source read: binds libsndfile through ext-ffi (include/sndfile.h, sf_open); MP3 parsing happens in native libsndfile/libmpg123, which the C plain-MP3 pilot covers, not in PHP.",
+      "source": "https://packagist.org/packages/phpmlkit/soundfile",
+      "release": "1.2.0 (commit acf88e283d9175c1eeca3670a74807fb345a9198)",
+      "license": "MIT"
     },
     {
       "name": "dmelo/you2better",
@@ -488,18 +511,22 @@
     },
     {
       "name": "holine/mp3",
-      "status": "unresolved_shared_family",
+      "status": "excluded_control_failed",
       "packagist_downloads": 9,
       "description": "PHP-MP3 is a simple library for reading and manipulating MPEG audio (MP3)",
-      "reason": "Same description as falahati/php-mp3 (PHP-MP3); appears to be a copy of that code base, which failed the MPEG-2 control (see data/php/mp3/falahati-php-mp3-control-audit.md). Not run.",
-      "source": "https://packagist.org/packages/holine/mp3"
+      "reason": "Ignoring whitespace, src/MpegAudio.php and src/MpegAudioFrameHeader.php differ from falahati/php-mp3 dev-master only in brace placement and namespace MP3, and keep the Version_25 = 2.5 float key that breaks MPEG-2 sample rates. With the falahati probe retargeted to \\MP3\\MpegAudio, neither control returns within timeout 15 on PHP 8.5.12 (exit 124), as with the falahati v0.9.5-alpha2 tag.",
+      "source": "https://packagist.org/packages/holine/mp3",
+      "release": "0.0.1 (commit ea924ae7392a5ba916a639e2b33080a36e9929e5)",
+      "license": "LGPL-3.0",
+      "family": "regin / thegallagher PHP-MP3 (copy of falahati/php-mp3)",
+      "audit": "data/php/mp3/lead-audit.md"
     },
     {
       "name": "orkan/winamp",
       "status": "excluded",
       "packagist_downloads": 9,
       "description": "Winamp Media Library CLI tools",
-      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "reason": "Snapshot re-scan: Winamp media-library CLI tools that depend on james-heinrich/getid3; no separate MPEG parser API.",
       "source": "https://packagist.org/packages/orkan/winamp"
     },
     {
@@ -512,11 +539,14 @@
     },
     {
       "name": "dgoriaev/mp3info",
-      "status": "excluded",
+      "status": "shared_family",
       "packagist_downloads": 6,
       "description": "The fastest php library to extract mp3 tags & meta information.",
-      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
-      "source": "https://packagist.org/packages/dgoriaev/mp3info"
+      "reason": "Snapshot re-scan: ignoring whitespace, src/Mp3Info.php matches wapmorgan/mp3info 0.1.1 except the namespace and a three-line early return when neither bitrate nor sample rate is set. Fork of the selected Mp3Info family.",
+      "source": "https://packagist.org/packages/dgoriaev/mp3info",
+      "release": "1.0.3 (commit 64e790cd31d35d8ae3d5e3d8120f69aabd5ce0de)",
+      "license": "LGPL-3.0",
+      "family": "Mp3Info (selected wapmorgan/mp3info 0.1.1)"
     },
     {
       "name": "mraiur/youtube-mp3-helper",
@@ -528,11 +558,13 @@
     },
     {
       "name": "nicoverbruggen/mediaprobe",
-      "status": "unresolved_external_native",
+      "status": "excluded_native_wrapper",
       "packagist_downloads": 6,
       "description": "MediaProbe leverages `ffprobe` and `ffmpeg` to extract info and cover images from MP3s or other media files.",
-      "reason": "Wraps ffprobe/ffmpeg; native FFmpeg parser. Not run.",
-      "source": "https://packagist.org/packages/nicoverbruggen/mediaprobe"
+      "reason": "Source read: src/MediaProbe.php runs exec(\"ffprobe -v quiet -print_format json=compact=1 -show_format ...\"); external FFmpeg process.",
+      "source": "https://packagist.org/packages/nicoverbruggen/mediaprobe",
+      "release": "v1.1 (commit aa824d0691598dc9d66301f78da2687bc656884c)",
+      "license": "MIT"
     },
     {
       "name": "apiverve/musicnotegenerator",
@@ -619,7 +651,7 @@
       "status": "excluded",
       "packagist_downloads": 0,
       "description": "MP3 ni qayta ishlash uchun.",
-      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "reason": "Snapshot re-scan: src/PHPMP3.php is a copy of thegallagher PHP-MP3 (same sprintf('%08b') binary table; regin family, see falahati/php-mp3); dev-main only, no release, 0 downloads.",
       "source": "https://packagist.org/packages/jamshidbekakhlidinov/php-mp3"
     },
     {

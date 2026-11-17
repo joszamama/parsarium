@@ -45,15 +45,26 @@ Seven Packagist queries returned 100 hits and 79 distinct packages. The
   controls ([audit](falahati-php-mp3-control-audit.md)). The v0.9.5-alpha2 tag
   does not return on PHP 8.5. The dev-master snapshot matches the MPEG-1
   control but reads the MPEG-2 control as 3 frames at 11,025 Hz instead of
-  12 frames at 22,050 Hz. Its copy holine/mp3 was not run.
-- debach/zend-mp3 (45,227) and fobilow/mp3file (5,468): unresolved.
-- wapmorgan/media-file (248,980) wraps Mp3Info for MP3; same family, not run.
-- buggedcom/phpvideotoolkit, nicoverbruggen/mediaprobe and phpmlkit/soundfile
-  hand parsing to FFmpeg or libsndfile; unresolved native paths.
-- 19 getID3 forks and wrappers (for example owen-oj/laravel-getid3 and
-  kiwilan/php-audio) share the getID3 family.
-- 48 hits are excluded: tag-only readers, encoder wrappers, converters,
-  downloaders and unrelated packages.
+  12 frames at 22,050 Hz.
+- debach/zend-mp3 1.8.1 (45,227) walks MPEG frames itself in
+  `Zend_Media_Mpeg_Abs`, but the parent class file uses `$str{$i}` offsets
+  removed in PHP 8. On PHP 8.5 it stops with a parse error on both controls.
+  fobilow/mp3file (5,468) has no release tag or license, and it also fails to
+  compile. The re-scan found a native MPEG-1 Layer III decoder in
+  xiaosongshu/flv2mp4 v1.8.7 (190). It decodes 12,672 samples from the MPEG-1
+  control and no frames from the MPEG-2 control, and its documented API
+  decodes in a child process. holine/mp3 (9) copies PHP-MP3 and does not
+  return on either control. Like falahati/php-mp3, these four are recorded as
+  control failures. The [lead audit](lead-audit.md) gives the details.
+- wapmorgan/media-file (248,980) builds `Mp3Info` and returns its fields, so it
+  is in the same family. dgoriaev/mp3info is an Mp3Info fork.
+- buggedcom/phpvideotoolkit, akiosarkiz/mp3php, nicoverbruggen/mediaprobe and
+  phpmlkit/soundfile hand parsing to FFmpeg or libsndfile.
+- 20 getID3 forks and wrappers share the getID3 family, for example
+  owen-oj/laravel-getid3, kiwilan/php-audio and acekyd/laravelmp3, which
+  bundles getID3 1.9.5.
+- 46 hits are excluded: tag-only readers, encoder wrappers, converters,
+  downloaders, unreleased snapshots and unrelated packages.
 
 This two-entry pilot is neither a top-ten ranking nor evidence that only two
 PHP frame parsers exist. The [cell record](cell.json) gives the remaining
