@@ -656,7 +656,8 @@ class CoverageReportTest(unittest.TestCase):
         project = ROOT / "projects/xml/java/jdom2"
         manifest = json.loads((project / "manifest.json").read_text())
         vm_args, reports = queue_coverage.java_control_commands(project, manifest)
-        self.assertEqual(vm_args[-2:], ["-cp", "/work/classes:/work/lib/jdom2-2.0.6.1.jar"])
+        self.assertEqual(vm_args[-3:], ["-cp", "/work/classes:/work/lib/jdom2-2.0.6.1.jar",
+                                        "GenericHarness"])
         self.assertEqual([entry["sourcefiles"] for entry in reports],
                          ["/work/parser-source", "/work/underlying-source"])
         fake = self.base / "java-project"
@@ -666,6 +667,52 @@ class CoverageReportTest(unittest.TestCase):
             "/work/classes:/work/lib/jdom2-2.0.6.1.jar", "$CLASSPATH"))
         with self.assertRaisesRegex(queue_coverage.QueueCoverageError, "literal /work path"):
             queue_coverage.java_control_commands(fake, manifest)
+
+    def test_java_queue_accepts_verified_custom_harness_and_dual_reports(self):
+        jai = ROOT / "projects/ascii_pnm/java/jai_imageio_core"
+        manifest = json.loads((jai / "manifest.json").read_text())
+        args, reports = queue_coverage.java_control_commands(jai, manifest)
+        self.assertEqual(args[-1], "JaiPnmHarness")
+        self.assertEqual(reports[0]["line_prefixes"],
+                         ["/work/parser-sources/com/github/jaiimageio/"])
+        jackson = ROOT / "projects/xml/java/jackson_xml"
+        manifest = json.loads((jackson / "manifest.json").read_text())
+        args, reports = queue_coverage.java_control_commands(jackson, manifest)
+        self.assertEqual(args[-1], "GenericHarness")
+        self.assertEqual({item["xml"] for item in reports},
+                         {"/coverage/module.xml", "/coverage/underlying.xml"})
+        self.assertEqual({item["filename_root"] for item in reports},
+                         {"/work/parser-source/module", "/work/parser-source/underlying"})
+
+    def test_java_queue_maps_jdk_source_to_verified_class_allowlist(self):
+        imageio = ROOT / "projects/png/java/jdk_imageio"
+        manifest = json.loads((imageio / "manifest.json").read_text())
+        _, reports = queue_coverage.java_control_commands(imageio, manifest)
+        self.assertEqual(reports[0]["filename_root"], "/work/parser-classes")
+        self.assertEqual(reports[0]["line_prefixes"], [
+            "/work/parser-classes/com/sun/imageio/plugins/png/",
+            "/work/parser-classes/sun/awt/image/"])
+        jarfile = ROOT / "projects/zip/java/jdk_jarfile"
+        manifest = json.loads((jarfile / "manifest.json").read_text())
+        args, _ = queue_coverage.java_control_commands(jarfile, manifest)
+        self.assertEqual(args[:2], ["--patch-module", "java.base=/work/instrumented"])
+        fake = self.base / "jdk-project"
+        fake.mkdir()
+        script = (imageio / "run-control.sh").read_text().replace(
+            "'/work/parser-classes/sun/awt/image/'",
+            "'/work/parser-classes/../wrong/'")
+        (fake / "run-control.sh").write_text(script)
+        with self.assertRaisesRegex(queue_coverage.QueueCoverageError,
+                                    "JDK source allowlist is missing or unsafe"):
+            queue_coverage.java_control_commands(fake, json.loads(
+                (imageio / "manifest.json").read_text()))
+
+    def test_java_native_hybrid_needs_combined_reporter(self):
+        project = ROOT / "projects/ascii_ply/java/lwjgl_assimp"
+        manifest = json.loads((project / "manifest.json").read_text())
+        with self.assertRaisesRegex(queue_coverage.QueueCoverageError,
+                                    "Java/native JaCoCo plus LLVM"):
+            queue_coverage.java_control_commands(project, manifest)
 
     def test_java_queue_jacoco_xml_filters_parser_and_positive_lines(self):
         report = self.base / "jacoco.xml"

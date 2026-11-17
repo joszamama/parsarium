@@ -8,6 +8,7 @@ Xdebug, or V8 parser lines.
 from __future__ import annotations
 
 from hashlib import sha256
+import ast
 import heapq
 import json
 import os
@@ -580,27 +581,36 @@ def replay_go_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
 def java_control_commands(project: Path, manifest: dict) -> tuple[list[str], list[dict]]:
     """Extract only literal JaCoCo commands already used by the verified control.
 
-    The JDK module-patch and custom harness variants need project-specific
-    replay, so this deliberately supports only the normal Java agent form.
-    No shell from the project is executed while reporting.
+    Only literal Java agent or JDK module-patch commands are replayed. The
+    project shell and its embedded Python checks are never executed here.
     """
     control_script = project / "run-control.sh"
     if not control_script.is_file():
         raise QueueCoverageError("project has no supported Java JaCoCo control script")
     script = control_script.read_text().replace("\\\n", " ")
-    match = re.search(r"(?m)^java\s+(.+?)\s+GenericHarness\s+/input/control\b", script)
+    if "LLVM_PROFILE_FILE=" in script and "llvm-cov export" in script:
+        raise QueueCoverageError("Java/native JaCoCo plus LLVM queue line replay is unsupported")
+    match = re.search(
+        r"(?m)^java\s+(.+?)\s+([A-Za-z_$][A-Za-z0-9_.$]*Harness)\s+/input/control\b",
+        script)
     if not match:
-        raise QueueCoverageError("project has no supported Java GenericHarness command")
+        raise QueueCoverageError("project has no supported literal Java harness command")
     try:
         args = shlex.split(match.group(1))
     except ValueError as error:
         raise QueueCoverageError("Java control command has invalid quoting") from error
     agent = "-javaagent:/work/jacocoagent.jar=destfile=/coverage/jacoco.exec,append=false,includes="
-    if len(args) not in (3, 4) or not args[0].startswith(agent) or \
-            args[-2] != "-cp" or not args[-1]:
+    patch_vm = ["--patch-module", "java.base=/work/instrumented",
+                "--add-reads", "java.base=ALL-UNNAMED",
+                "-Xbootclasspath/a:/work/jacoco-agent-unpacked",
+                "-Djacoco-agent.destfile=/coverage/jacoco.exec"]
+    if len(args) < 3 or args[-2] != "-cp" or not args[-1]:
         raise QueueCoverageError("project has no supported Java agent/classpath command")
-    if len(args) == 4 and args[1] != "-Dstdout.encoding=UTF-8":
-        raise QueueCoverageError("Java control uses extra VM options outside this replay")
+    if args[0].startswith(agent):
+        if args[1:-2] not in ([], ["-Dstdout.encoding=UTF-8"]):
+            raise QueueCoverageError("Java control uses extra VM options outside this replay")
+    elif args[:-2] != patch_vm:
+        raise QueueCoverageError("project has no supported Java agent/classpath command")
     if any(not path.startswith("/work/") or ".." in Path(path).parts
            for path in args[-1].split(":")):
         raise QueueCoverageError("Java classpath is not a literal /work path")
@@ -619,8 +629,10 @@ def java_control_commands(project: Path, manifest: dict) -> tuple[list[str], lis
         classes, source_root, output = tokens[1], tokens[3], tokens[5]
         if any(not path.startswith("/work/") or ".." in Path(path).parts
                for path in (classes, source_root)) or \
-                not re.fullmatch(r"/coverage/jacoco(?:-[a-z]+)?\.xml", output):
+                not re.fullmatch(r"/coverage/(?:jacoco(?:-[a-z]+)?|module|underlying)\.xml", output):
             raise QueueCoverageError("JaCoCo report command has dynamic or unsafe paths")
+        if any(item["xml"] == output for item in reports):
+            raise QueueCoverageError("JaCoCo report commands reuse an XML output")
         reports.append({"classfiles": classes, "sourcefiles": source_root,
                         "xml": output})
     if not reports:
@@ -628,12 +640,36 @@ def java_control_commands(project: Path, manifest: dict) -> tuple[list[str], lis
     prefixes = [manifest["coverage_subject_prefix"]]
     if manifest.get("underlying_coverage_subject_prefix"):
         prefixes.append(manifest["underlying_coverage_subject_prefix"])
+    # Instrumented JDK classes and their source archive use different roots.
+    # The control explicitly emits class-root paths and a literal allowlist.
+    jdk_roots = [p for p in prefixes if p.rstrip("/") == "/work/parser-classes"]
+    if jdk_roots and len(prefixes) == 1 and len(reports) == 1 and \
+            reports[0]["classfiles"] == "/work/parser-classes" and \
+            reports[0]["sourcefiles"] == "/work/parser-sources":
+        match_prefixes = re.search(r"(?m)^prefixes = (\[[^\n]+\])$", script)
+        try:
+            jdk_prefixes = ast.literal_eval(match_prefixes.group(1)) if match_prefixes else None
+        except (SyntaxError, ValueError) as error:
+            raise QueueCoverageError("JDK source allowlist is invalid") from error
+        if not isinstance(jdk_prefixes, list) or not jdk_prefixes or any(
+                not isinstance(p, str) or not p.startswith("/work/parser-classes/") or
+                ".." in Path(p).parts for p in jdk_prefixes):
+            raise QueueCoverageError("JDK source allowlist is missing or unsafe")
+        reports[0]["filename_root"] = "/work/parser-classes"
+        reports[0]["line_prefixes"] = jdk_prefixes
+    else:
+        for report in reports:
+            report["filename_root"] = report["sourcefiles"]
+            report["line_prefixes"] = [p for p in prefixes if isinstance(p, str) and
+                (p.rstrip("/") == report["sourcefiles"].rstrip("/") or
+                 p.startswith(report["sourcefiles"].rstrip("/") + "/"))]
     if any(not isinstance(prefix, str) or not prefix.startswith("/work/") or
-           not any(prefix.rstrip("/") == report["sourcefiles"].rstrip("/") or
-                   prefix.startswith(report["sourcefiles"].rstrip("/") + "/")
-                   for report in reports) for prefix in prefixes):
+           not any(prefix == line_prefix or
+                   (jdk_roots and line_prefix.startswith(prefix.rstrip("/") + "/"))
+                   for report in reports for line_prefix in report["line_prefixes"])
+           for prefix in prefixes):
         raise QueueCoverageError("JaCoCo source roots do not cover manifest parser prefixes")
-    return args, reports
+    return [*args, match.group(2)], reports
 
 
 def java_jacoco_lines(path: Path, source_root: str,
@@ -679,9 +715,6 @@ def replay_java_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
     if not 1 <= maximum <= MAX_QUEUE_SAMPLE or not 1 <= timeout <= 60:
         raise QueueCoverageError("queue sample must be 1–128 and timeout 1–60 seconds")
     vm_args, reports = java_control_commands(evidence["project"], manifest)
-    prefixes = [manifest["coverage_subject_prefix"]]
-    if manifest.get("underlying_coverage_subject_prefix"):
-        prefixes.append(manifest["underlying_coverage_subject_prefix"])
     plan, _ = plan_for(run_dir, root, evidence)
     total, selected = queue_files(run_dir, maximum)
     if not selected:
@@ -723,8 +756,7 @@ def replay_java_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
             mounts = ["-v", f"{sample}:/input/control:ro",
                       "-v", f"{coverage_dir}:/coverage"]
             command = [*common, "--name", container_name, *mounts,
-                       "--entrypoint", "java", image_id, *vm_args,
-                       "GenericHarness", "/input/control"]
+                       "--entrypoint", "java", image_id, *vm_args, "/input/control"]
             try:
                 result = subprocess.run(command, stdout=subprocess.DEVNULL,
                                         stderr=subprocess.DEVNULL, timeout=timeout)
@@ -763,7 +795,8 @@ def replay_java_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
                     item["report_xml"].append({"sha256": digest(xml_file),
                                                 "sourcefiles": report["sourcefiles"]})
                     for filename, lines in java_jacoco_lines(
-                            xml_file, report["sourcefiles"], prefixes).items():
+                            xml_file, report["filename_root"],
+                            report["line_prefixes"]).items():
                         union.setdefault(filename, set()).update(lines)
             inputs.append(item)
             if sum(path.stat().st_size for path in scratch.rglob("jacoco.exec")) > MAX_PROFILE_BYTES:
@@ -772,7 +805,7 @@ def replay_java_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
                   "mechanism": "JaCoCo source report from verified Java control image",
                   "plan_sha256": digest(run_dir / "plan.json"),
                   "afl_image_id": plan["image_id"], "coverage_image_id": image_id,
-                  "coverage_binary": "java GenericHarness", "llvm_cov_objects": [],
+                  "coverage_binary": f"java {vm_args[-1]}", "llvm_cov_objects": [],
                   "control_script_sha256": digest(evidence["project"] / "run-control.sh"),
                   "source_report_roots": reports,
                   "queue_inputs_available": total, "queue_inputs_sampled": len(inputs),
