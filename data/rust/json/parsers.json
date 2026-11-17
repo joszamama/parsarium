@@ -287,5 +287,53 @@
       "source": "data/rust/json/registry-snapshot.json"
     },
     "project": "projects/json/rust/aws_smithy_json/verification.json"
+  },
+  {
+    "name": "hifijson",
+    "version": "0.5.0",
+    "license": "MIT (SPDX declared in release Cargo.toml; no LICENSE file bundled)",
+    "input_api": "hifijson::SliceLexer::new(&[u8]); Lex::exactly_one(Lex::ws_peek, |next, lexer| value::parse_bounded(256, next, lexer)) -> Result<Value<_,_>, Error>",
+    "documentation": "https://docs.rs/hifijson/0.5.0/hifijson/struct.SliceLexer.html",
+    "source": "https://static.crates.io/crates/hifijson/hifijson-0.5.0.crate",
+    "scope": "One RFC 8259 JSON value decoded from local bytes into hifijson own Value tree, preserving source number strings and object entries; adapter reports root kind, container/scalar counts, depth, decoded value strings, numbers converted to f64 for shared control summary, and top-level object keys. Depth bounded at 256.",
+    "family": "hifijson independent byte-slice lexer and recursive value parser in src/value.rs, src/token.rs, src/num.rs and src/str.rs; serde_json used only for summary encoding",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 2630468,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/hifijson/verification.json"
   }
 ]

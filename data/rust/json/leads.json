@@ -85,14 +85,6 @@
   ],
   "unresolved_leads": [
     {
-      "name": "hifijson",
-      "version": "0.5.0",
-      "recent_downloads_90d": 2630468,
-      "status": "unresolved",
-      "reason": "High-fidelity JSON lexer and parser over byte slices and iterators. Not run on the controls.",
-      "source": "https://crates.io/crates/hifijson"
-    },
-    {
       "name": "ijson",
       "version": "0.1.7",
       "recent_downloads_90d": 1818125,
@@ -248,6 +240,17 @@
       "record": "data/rust/json/parsers.json",
       "receipt": "projects/json/rust/aws_smithy_json/verification.json",
       "scope_note": "Public generic json_token_iter(&[u8]) documented in pinned src/deserialize.rs; TESTING.md gives local-file JSONTestSuite runner. Adapter enforces one balanced root and decodes escaped strings. Source documents permissive numeric syntax; no malformed probes run."
+    },
+    {
+      "name": "hifijson",
+      "version": "0.5.0",
+      "recent_downloads_90d": 2630468,
+      "status": "selected",
+      "reason": "High-fidelity byte-slice lexer and own value parser; selected after exact two-control runs, own-source coverage, and stable differential AFL++ feedback.",
+      "source": "https://crates.io/crates/hifijson",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/hifijson/verification.json",
+      "scope_note": "Pinned own byte-slice lexer and bounded Value parser, with exactly_one enforcing one root. Release Cargo.toml declares MIT but no LICENSE file is bundled."
     }
   ]
 }

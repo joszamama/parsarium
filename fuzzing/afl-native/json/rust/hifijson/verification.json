@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "project": "json/rust/hifijson",
+  "pass": true,
+  "base_project_receipt_sha256": "d6bbe33407dbf3628504322b32e1adf62ed664f46820c44c4a836058ae04b79f",
+  "overlay_file_sha256": {
+    "Cargo.toml": "12a68239d3e068a12d01ad4ae58d6336b9b619981179d03be019e5022270aa5b",
+    "Cargo.lock": "fceb7b9412c72c849174d033bd33c9970881f78bcb85be6157658a125d8eb2b2",
+    "afl_fuzzer.rs": "c006e6f35e92e2761eb11d1ccde77753e489d091603ff5ba16cc28d30391ace6",
+    "Dockerfile": "4eea9af4e60554cb32f378e951a6937cfdbde5c7099cc9a23ad98f551d19ec01",
+    "build.py": "23c53e2d7e8d554b50ee47aa008b7de89ebb175e9a5a3b98464b804375e268c7"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "242402749acf71e6f32f5857598b7002c4058a4e3c3b22b4c7d51cab9aea754e",
+  "image_id": "sha256:28572917566ce8d87dbba6c7db4b9abdb216a5e0759865492cb980b2507b818a",
+  "platform": "linux/arm64",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "feedback_edges": 652,
+  "afl_map_size": 7232,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "Whole afl_fuzzer binary built by cargo-afl: hifijson 0.5.0 parser, serde_json summary serializer, their dependencies and the harness are instrumented",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:0901fb213f19b13ecb5894d1a9bcc307437631c2e0f1c30542d41363155c4805",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1.0,
+      1.0,
+      2.0,
+      2.0
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "variant_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1.0
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "repeats": 3,
+  "variant_feedback_edges": 601,
+  "edges_only_in_control": 75,
+  "edges_only_in_variant": 24,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hifijson-0.5.0/",
+    "control_lines": {
+      "src/escape.rs": 32,
+      "src/ignore.rs": 0,
+      "src/lib.rs": 3,
+      "src/num.rs": 37,
+      "src/read.rs": 18,
+      "src/str.rs": 39,
+      "src/token.rs": 49,
+      "src/value.rs": 40,
+      "src/write.rs": 6
+    },
+    "variant_lines": {
+      "src/escape.rs": 18,
+      "src/ignore.rs": 0,
+      "src/lib.rs": 3,
+      "src/num.rs": 36,
+      "src/read.rs": 18,
+      "src/str.rs": 37,
+      "src/token.rs": 49,
+      "src/value.rs": 40,
+      "src/write.rs": 6
+    },
+    "files_with_different_line_counts": [
+      "src/escape.rs",
+      "src/num.rs",
+      "src/str.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      652,
+      652,
+      652
+    ],
+    "stable_edges": 652,
+    "union_edges": 652,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      601,
+      601,
+      601
+    ],
+    "stable_edges": 601,
+    "union_edges": 601,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}
