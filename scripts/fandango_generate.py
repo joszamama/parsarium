@@ -30,8 +30,8 @@ from format_registry import ALL_FORMATS, ECOSYSTEMS
 FORMATS = ALL_FORMATS
 # Parsarium format -> Fanbase format directory. Formats missing here have no
 # Fanbase spec as of index.yml schema 2 and need --spec. Plain mp3 is omitted:
-# the Fanbase mp3 grammar generates ID3-tagged files, while the plain-MP3
-# pilot's controls and some adapters deliberately require untagged frames.
+# Fanbase's mp3 grammar emits ID3 tags plus Layer I/II frames, so removing
+# the tags does not yield the pilot's contiguous Layer III stream.
 FANBASE_FORMATS = {"png": "png", "zip": "zip", "wav": "wav", "svg": "svg",
                    "mp3_id3v2": "mp3", "json": "json", "xml": "xml"}
 LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan",

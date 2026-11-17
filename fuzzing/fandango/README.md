@@ -9,7 +9,7 @@ python3 parsarium.py fandango generate ascii_ply c assetkit runs/ply-fandango --
 
 The generator selects the bundled spec automatically, saves its hash and generated files, and can prepare the same corpus for AFL++ with `--prepare-afl`. [The MP4 and PDF grammar details](specs/README.md) describe their scope.
 
-JSON and XML pilot targets default to Fanbase's `-F json` and `-F xml` specs. One fixed output from each was checked with Python's JSON or XML parser. For the separate plain-MP3 pilot, supply `--spec FILE.fan`: Fanbase's `-F mp3` output includes an ID3 tag, while the pilot's untagged controls and some adapters require frame-only input.
+JSON and XML pilot targets default to Fanbase's `-F json` and `-F xml` specs. One fixed output from each was checked with Python's JSON or XML parser. The separate plain-MP3 pilot needs a `--spec FILE.fan` that emits contiguous untagged Layer III frames. Fanbase's `-F mp3` output includes ID3 tags **and** Layer I/II frames; [stripping the tags is insufficient](plain-mp3-decision.md).
 
 ```sh
 python3 parsarium.py fandango generate json python simplejson runs/json-fandango \
