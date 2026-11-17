@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "java",
+  "pilot": true,
+  "package": "com.github.jsqlparser:jsqlparser",
+  "release": "5.4",
+  "catalog_parser": "data/java/sql/parsers.json",
+  "source_lock": "projects/sql/java/jsqlparser/source-lock.json",
+  "source_sha256": "6f4aba881d7c8c85dc940bc84fd74a5598a50529bb0f01c601feccef61e09a4e",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "java",
+    "-cp",
+    "/work/classes:/work/lib/*",
+    "SqlHarness",
+    "/input/case"
+  ],
+  "dialect": "JSqlParser default parser features (no dialect switch; CCJSqlParserUtil.parseStatements without a parser consumer)",
+  "parser_family": "JSqlParser JavaCC grammar (JSqlParserCC.jjt generated into net.sf.jsqlparser.parser.CCJSqlParser) building the net.sf.jsqlparser statement and expression model; independent of jOOQ, Druid, Calcite and the Presto/Trino ANTLR grammars",
+  "api": "CCJSqlParserUtil.parseStatements(local SQL text) -> Statements; the harness reads PlainSelect (select items, joins, where, group by, order by) and Insert (columns, Values expressions) and collects tables, Function names and String/Long/Double values with a TablesNamesFinder subclass",
+  "harness": "SqlHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "SqlHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/jsqlparser-5.4.jar",
+    "--target_class=SqlHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of com.github.jsqlparser:jsqlparser:5.4 net.sf.jsqlparser classes (JavaCC CCJSqlParser and token manager, statement and expression model, TablesNamesFinder) during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/net/sf/jsqlparser/parser/CCJSqlParser.java",
+  "scope": "One SQL statement from local bytes decoded as strict UTF-8 and parsed by the documented CCJSqlParserUtil.parseStatements with default features; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Non-default parser features and vendor syntax are untested."
+}

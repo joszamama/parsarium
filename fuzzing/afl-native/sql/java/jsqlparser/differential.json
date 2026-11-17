@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T20:08:38.936682+00:00",
+  "project": "sql/java/jsqlparser",
+  "pass": true,
+  "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "7ae9653290ba4dbb02a466abf6436396b0a204d5c8bf4248bed4fce474d0c262",
+  "overlay_receipt_sha256": "f27956d75c4bbc07db145d9c62c753f23a15b1a9f26b48c99b1df10f3ee2f719",
+  "base_image_id": "sha256:0201b2a6f08fbddc9c9cc28b7e68f005951c47bea487a1fdb85d9848c815807a",
+  "overlay_image_id": "sha256:1b511a030d1ccc6e28d1ecbf346166f515d71a4be1dcd67f8049e6960275e819",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 4272,
+  "second_afl_tuples": 3349,
+  "afl_tuple_difference": 1811,
+  "first_parser_features": 4386,
+  "second_parser_features": 3391,
+  "parser_feature_difference": 1915,
+  "first_only_features_by_file": {
+    "net/sf/jsqlparser/expression/Alias.java": 5,
+    "net/sf/jsqlparser/expression/BinaryExpression.java": 7,
+    "net/sf/jsqlparser/expression/ExpressionVisitor.java": 13,
+    "net/sf/jsqlparser/expression/Function.java": 32,
+    "net/sf/jsqlparser/expression/operators/conditional/AndExpression.java": 6,
+    "net/sf/jsqlparser/expression/operators/relational/ComparisonOperator.java": 3,
+    "net/sf/jsqlparser/expression/operators/relational/EqualsTo.java": 3,
+    "net/sf/jsqlparser/expression/operators/relational/GreaterThanEquals.java": 3,
+    "net/sf/jsqlparser/expression/operators/relational/OldOracleJoinBinaryExpression.java": 3,
+    "net/sf/jsqlparser/parser/ASTNodeAccessImpl.java": 1,
+    "net/sf/jsqlparser/parser/CCJSqlParser.java": 1190,
+    "net/sf/jsqlparser/parser/Node.java": 1,
+    "net/sf/jsqlparser/schema/Column.java": 1,
+    "net/sf/jsqlparser/schema/Table.java": 7,
+    "net/sf/jsqlparser/statement/select/AllColumns.java": 6,
+    "net/sf/jsqlparser/statement/select/FromItemVisitor.java": 4,
+    "net/sf/jsqlparser/statement/select/GroupByElement.java": 11,
+    "net/sf/jsqlparser/statement/select/Join.java": 35,
+    "net/sf/jsqlparser/statement/select/OrderByElement.java": 7,
+    "net/sf/jsqlparser/statement/select/PlainSelect.java": 46,
+    "net/sf/jsqlparser/statement/select/Select.java": 6,
+    "net/sf/jsqlparser/statement/select/SelectItem.java": 6,
+    "net/sf/jsqlparser/util/TablesNamesFinder.java": 59
+  },
+  "second_only_features_by_file": {
+    "net/sf/jsqlparser/expression/DoubleValue.java": 9,
+    "net/sf/jsqlparser/expression/operators/relational/ExpressionList.java": 3,
+    "net/sf/jsqlparser/expression/operators/relational/ParenthesedExpressionList.java": 3,
+    "net/sf/jsqlparser/parser/CCJSqlParser.java": 363,
+    "net/sf/jsqlparser/statement/insert/Insert.java": 52,
+    "net/sf/jsqlparser/statement/select/Select.java": 1,
+    "net/sf/jsqlparser/statement/select/Values.java": 5,
+    "net/sf/jsqlparser/util/TablesNamesFinder.java": 24
+  }
+}

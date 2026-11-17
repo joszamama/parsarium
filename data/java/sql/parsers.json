@@ -447,5 +447,110 @@
         }
       ]
     }
+  },
+  {
+    "name": "com.github.jsqlparser:jsqlparser",
+    "version": "5.4",
+    "license": "LGPL-2.1-only OR Apache-2.0",
+    "license_evidence": "LGPL-2.1 or Apache-2.0 (jsqlparser-5.4.pom lists GNU Library or Lesser General Public License (LGPL) V2.1 and The Apache Software License, Version 2.0)",
+    "input_api": "CCJSqlParserUtil.parseStatements(local SQL text) -> Statements",
+    "documentation": "https://jsqlparser.github.io/JSqlParser/usage.html",
+    "source": "https://repo.maven.apache.org/maven2/com/github/jsqlparser/jsqlparser/5.4/jsqlparser-5.4-sources.jar",
+    "source_sha256": "6f4aba881d7c8c85dc940bc84fd74a5598a50529bb0f01c601feccef61e09a4e",
+    "jar_sha256": "6e10f0b014d6a474808eeaafd639ec9092117af2d4dc083764d0b4bf6897add7",
+    "dependencies": [],
+    "dialect": "JSqlParser default parser features (no dialect switch; CCJSqlParserUtil.parseStatements without a parser consumer)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Non-default parser features and vendor syntax are untested.",
+    "family": "JSqlParser JavaCC grammar (CCJSqlParser)",
+    "family_note": "CCJSqlParserUtil.parseStatements runs the JavaCC-generated CCJSqlParser (first without, then if needed with complex parsing, on a single-thread executor) and returns net.sf.jsqlparser Statement objects: PlainSelect for the query and Insert with a Values select for the insert. The adapter reads those fields and subclasses the library's TablesNamesFinder to collect base tables, Function names and StringValue/LongValue/DoubleValue values. net.sf.jsqlparser:jsqlparser 0.7.0 is the ancient coordinate of the same project (excluded). Independent of jOOQ, Druid, Calcite and the Presto/Trino ANTLR grammars.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 950,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.github.jsqlparser%3Ajsqlparser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over 37 releases of the com.github.jsqlparser coordinate; the older net.sf.jsqlparser coordinate (8) is not added."
+    },
+    "project": "projects/sql/java/jsqlparser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]
