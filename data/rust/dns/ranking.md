@@ -43,16 +43,28 @@ crates.io recent_downloads (90 days), from [registry-snapshot.json](registry-sna
 
 | Order | Lead | Metric | Status | Input API lead | Family |
 | ---: | --- | ---: | --- | --- | --- |
-| 1 | dnssector | 15,065 | unresolved_control_failure | `DNSSector::new(Vec<u8>)?.parse() -> ParsedPacket; RR iterators` | dnssector |
-| 2 | microdns | 6,404 | unresolved_control_failure | `parse_dns_header / skip_question / parse_answer` | microdns |
-| 3 | dns-protocol | 2,785 | unresolved_control_failure | `Message::read(&[u8], &mut [Question], &mut [ResourceRecord], ...)` | dns-protocol |
-| 4 | dns_parse | 1,056 | unresolved_control_failure | `dns_parse::parse(Bytes) -> Vec<idns::Answer>` | dns_parse (idns Answer) |
-| 5 | dnsparse | 11 | unresolved_control_failure | `Message::parse(&mut [u8]) -> questions(), answers()` | dnsparse |
+| 1 | smoltcp | 3,066,475 | unresolved_control_failure | `smoltcp::wire::dns::Packet::new_checked(&[u8]) / Question::parse / Record::parse` | smoltcp wire |
+| 2 | webrtc-mdns | 2,023,825 | unresolved | `webrtc_mdns::message::Message::unpack(&mut self, &[u8])` | Pion/x-net dnsmessage port (webrtc-rs) |
+| 3 | dnssector | 15,065 | unresolved_control_failure | `DNSSector::new(Vec<u8>)?.parse() -> ParsedPacket; RR iterators` | dnssector |
+| 4 | microdns | 6,404 | unresolved_control_failure | `parse_dns_header / skip_question / parse_answer` | microdns |
+| 5 | proxima-protocols | 3,382 | unresolved_control_failure | `proxima_protocols::dns message parser` | proxima |
+| 6 | geiserx_ts_dns_wire | 3,345 | unresolved_control_failure | `decode_query(&[u8]) -> Query` | geiserx_ts_dns_wire |
+| 7 | dns-protocol | 2,785 | unresolved_control_failure | `Message::read(&[u8], &mut [Question], &mut [ResourceRecord], ...)` | dns-protocol |
+| 8 | mdns-proto | 1,735 | unresolved_control_failure |  | mdns-proto (hick) |
+| 9 | dns_parse | 1,056 | unresolved_control_failure | `dns_parse::parse(Bytes) -> Vec<idns::Answer>` | dns_parse (idns Answer) |
+| 10 | flex-dns | 300 | unresolved | `flex_dns::DnsMessage::new(buffer) -> questions(), answers(), ...` | flex-dns |
+| 11 | dnsparse | 11 | unresolved_control_failure | `Message::parse(&mut [u8]) -> questions(), answers()` | dnsparse |
 
+- **smoltcp**: smoltcp::wire::dns (Packet, Question, Record::parse) is a documented public wire API, but RecordData decodes only A and AAAA: CNAME stays as the raw (possibly compressed) name bytes and MX falls into Other(type, raw bytes), with no exported decoder for names inside RDATA, so the control's CNAME and MX answers would have to be decoded by the harness. The crate is a TCP/IP stack; its count covers all protocols.
+- **webrtc-mdns**: The public module webrtc_mdns::message (a Rust port of Go's golang.org/x/net/dns/dnsmessage via Pion mDNS, with typed A/AAAA/CNAME/MX/NS/PTR/SOA/SRV/TXT bodies) has Message::unpack(&mut self, &[u8]), but neither the README (which documents only the mDNS conn) nor any rustdoc comment documents it: every item in message/ carries plain // comments, so docs.rs shows bare signatures. Same rule as PHP yswery/dns: a public but undocumented entry point stays a lead. Family would be the x/net dnsmessage port already selected in Go.
 - **dnssector**: DNSSector::parse validates the whole message (including compressed names inside CNAME/MX RDATA) and the RR iterators return owner name, type, class, TTL and A/AAAA addresses, but other RDATA only as raw bytes (RawRRData::Data). The crate has no public API returning the CNAME target, MX preference or MX exchange as values (Compress::copy_uncompressed_name yields wire-format labels only), so the control's CNAME and MX answers would have to be decoded by the harness.
 - **microdns**: Minimal resolver library: its public helpers parse the header and answer records, but the question section is only skipped (skip_question) and its name, type and class are not returned, and authority/additional handling is left to callers. The control's question cannot be reported from the library.
+- **proxima-protocols**: The dns module (proxima_protocols::dns) is a documented sans-IO RFC 1035 parser, but its own module docs state that RDATA is decoded only for A, AAAA and CNAME/NS/PTR and that other types are kept as raw bytes, so the control's MX answer (preference and exchange) would have to be decoded by the harness.
+- **geiserx_ts_dns_wire**: MagicDNS responder codec: decode_query(&[u8]) decodes only the first question of an incoming query and the crate otherwise only encodes responses, so the response control's answers cannot be reported from the library.
 - **dns-protocol**: Message::read decodes the header, questions and record headers, but ResourceRecord::data() returns RDATA as raw bytes and the crate exports no decoder for (compressed) names inside RDATA, so the control's CNAME and MX targets would have to be decoded by the harness.
+- **mdns-proto**: Sans-I/O mDNS state machines with a wire reader, but its resource_type module documents that only CNAME and PTR name-bearing RDATA are parsed; MX and the other RFC 1035 name-bearing types map to Unknown and are dropped by callers, so the control's MX answer cannot come from the library.
 - **dns_parse**: parse(Bytes) returns only the answer records (it skips the question section and returns no header, question, authority or additional data), so most of the control summary cannot come from the library.
+- **flex-dns**: Documented no_std parser (DnsMessage::new(buffer) with questions()/answers()/name_servers()/additionals() readers) that ranks next by metric, but the crate root enables #![feature(generic_const_exprs)], an incomplete nightly-only feature. Parsarium's pinned Rust 1.99.1 stable image and the generated cargo-afl overlay have no nightly path (it builds only with RUSTC_BOOTSTRAP=1, which the overlay builder does not set), so the runnability gate is not met; not attempted further.
 - **dnsparse**: Message exposes the header, questions and answers, but Answer::rdata() is raw bytes with no decoder for names inside RDATA, and there is no accessor for the authority or additional sections.
 
 ## Checked, excluded or recorded separately
@@ -60,3 +72,14 @@ crates.io recent_downloads (90 days), from [registry-snapshot.json](registry-sna
 - **trust-dns-proto** (excluded): Predecessor of the already selected hickory-proto: trust-dns-proto 0.23.2 is the last release of the same project before the rename to hickory-proto (0.24). It passed both DNS controls and the full gate, but the decoder code is largely the same: 72% of trust-dns-proto's distinct non-test lines in serialize/binary (BinDecoder), 83% in rr/domain (name decoding) and 53% in op (Message/Header) are identical in hickory-proto 0.26.3 (44% over the whole crate, which also carries resolver/runtime code). Shared family with a stronger selected path; not counted. Evidence: data/rust/dns/trust-dns-proto-demoted.json.
 - **mdns-sd** (excluded): mDNS service-discovery daemon; its message parser is not a documented public bytes API.
 - **rama-dns** (excluded): DNS support for the rama framework built on hickory-resolver (Cargo dependency); it exposes resolver services, not its own parser for caller-supplied message bytes.
+- **hickory-net** (excluded): Networking half of the Hickory DNS 0.26 split (clients, transports, runtime); message decoding stays in the selected hickory-proto, which it depends on. No own parser.
+- **rtc-mdns** (excluded): Sans-I/O successor of webrtc-mdns in the same webrtc-rs project; its message module is pub(crate) (src/lib.rs), so there is no public bytes API. 82.7% of its distinct message/ source lines also occur in webrtc-mdns 0.17.3.
+- **tendns** (excluded): Encrypted-TXT discovery library and DNS server built on hickory-proto/hickory-resolver/hickory-server (Cargo dependencies); no own message parser.
+- **packet-dissector-mdns** (excluded): mDNS (RFC 6762) wrapper of the selected packet-dissector-dns: the mDNS reinterpretation (dissect_as_mdns) lives in packet-dissector-dns itself, so this crate adds no own DNS message parser.
+- **idns** (excluded): Racing DNS resolver: it sends queries and parses only answer records per queried type (parse/a.rs, aaaa.rs, mx.rs, spf.rs); no documented API for a caller-supplied whole message. dns_parse (a lead) reuses its Answer type.
+- **dyns** (excluded): DNS discovery and resolver support for DHTTP applications (resolvers, publishers, mDNS); network API with no documented parser for caller-supplied message bytes.
+- **dope-dns** (excluded): Bounded discovery client; its wire module (packet, response) is private to the crate (lib.rs exports config, host, lookup, query, storage, topology), so there is no public bytes API.
+- **dns-parser-revived** (excluded): Fork of the selected dns-parser: 728 of its 1,013 distinct non-comment source lines (71.9%) also occur in dns-parser 0.8.0.
+- **dns-parser-joe** (excluded): Fork of the selected dns-parser: 708 of its 855 distinct non-comment source lines (82.8%) also occur in dns-parser 0.8.0.
+- **dnsclient** (excluded): DNS client and stub resolver (sync, Tokio, Smol) built on dnssector (re-exported); its own API sends queries and returns addresses, with no own parser for caller-supplied message bytes.
+- **pktkit** (excluded): L2/L3 packet toolkit; its virtual client's DNS helper parse_response(data, query) returns only the IP addresses that answer a matching query, not a decoded message.
