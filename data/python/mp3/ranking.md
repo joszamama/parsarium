@@ -1,6 +1,6 @@
 # Python plain MP3 parser pilot
 
-This pilot has two verified third-party paths. The first is
+This pilot has three verified third-party paths. The first is
 [`mutagen`](../../../projects/mp3/python/mutagen/README.md) 1.48.1. Its
 documented `mutagen.mp3.MP3(fileobj)` API read both untagged MPEG Layer III
 controls from an in-memory `BytesIO` and returned the frame-header fields in
@@ -35,6 +35,31 @@ also uses the first three whole frames (626 bytes) of the 44.1 kHz control.
 That is still a valid stream, and it ends before the CBR estimate: 16 `_MPEG`
 lines and 16 AFL++ tuples change, and repeated runs are identical.
 
+The third is [`hachoir`](../../../projects/mp3/python/hachoir/README.md) 3.4.0,
+an independent pure-Python parser framework with **222,718 PyPI downloads last
+month** (same snapshot; rechecked at 10:59 UTC on 2026-11-17 with the same
+value). Its MPEG audio parser, `hachoir/parser/audio/mpeg_audio.py`, builds a
+`frame[]` field set for each frame. Each one decodes the 32-bit header and
+sets its length from the bitrate, sample rate and padding bit. The harness
+opens the bytes with the documented `FileInputStream` and constructs
+`MpegAudioFile` directly with `validate=True`. It does not use `guessParser`:
+with no file name that falls back to every hachoir parser in set order, so the
+code that runs would change from process to process. The harness then
+iterates every frame to the end of the input. It accepts a stream only if
+complete Layer III frames with one header tuple cover every byte. On the
+44.1 kHz control, 397 hachoir lines run, 90 of them in `mpeg_audio.py` and none
+in `id3.py`. It returned MPEG version, layer, sample rate, bitrate, channel
+mode, channels and frame count: 11 MPEG-1 frames at 44.1 kHz mono and 12 MPEG-2
+frames at 22.05 kHz joint stereo. These match the independent header walk plus
+the channel-mode bits of every header. hachoir reads headers and frame lengths;
+it does not decode audio or side information.
+
+The two full-length hachoir controls already give different feedback, so no
+prefix variant is needed. The [feedback check](hachoir-valid-feedback.json)
+finds 4 differing lines, all in `mpeg_audio.py`: the MPEG-1 versus MPEG-2
+bitrate table and frame-length formula. They change 4 AFL++ tuples, and three
+repeated runs per control are identical.
+
 ## Primary within-cell adoption metric
 
 PyPI Stats `last_month` downloads excluding known mirrors, captured 2026-11-17.
@@ -43,13 +68,14 @@ PyPI Stats `last_month` downloads excluding known mirrors, captured 2026-11-17.
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [mutagen](https://mutagen.readthedocs.io/en/latest/api/mp3.html) | 1.48.1 | 10,748,990 | Layer III frame headers: version, layer, sample rate, channels, bitrate, length | Mutagen MP3/ID3 parser |
 | 2 | [tinytag](https://github.com/tinytag/tinytag/blob/2.3.2/README.md#file-like-objects) | 2.3.2 | 4,453,166 | Layer III frame headers: sample rate, channels, bitrate, estimated duration | TinyTag MPEG frame-header reader |
+| 3 | [hachoir](https://github.com/vstinner/hachoir/blob/3.4.0/doc/developer.rst) | 3.4.0 | 222,718 | Every Layer III frame header to EOF: version, layer, sample rate, bitrate, channel mode, channels, frame count | hachoir mpeg_audio parser |
 
 ## Leads
 
 Five name queries over the PyPI Simple index returned 123 (`mp3`), 201
 (`mpeg`), 2 (`mpg123`), 1 (`minimp3`) and 1 (`layer3`) projects. Download
 counts were fetched for 13 named candidates. The [leads](leads.json) record
-each one. Only mutagen and tinytag are verified entries.
+each one. Only mutagen, tinytag and hachoir are verified entries.
 
 - av (51,162,307), soundfile (35,041,933), audioread, pygame, pymediainfo and
   miniaudio wrap native decoders (FFmpeg, libsndfile/libmpg123, SDL_mixer,
@@ -57,10 +83,10 @@ each one. Only mutagen and tinytag are verified entries.
   coverage would not reach their parsers.
 - pydub (16,919,511) calls an external ffmpeg binary; excluded.
 - librosa (10,902,643) decodes through soundfile or audioread; shared family.
-- hachoir, eyed3 and pymp3 are pure-Python leads with their own MPEG header
-  code; unresolved, not run.
+- eyed3 and pymp3 are pure-Python leads with their own MPEG header code;
+  unresolved, not run.
 
-This two-entry pilot is neither a top-ten ranking nor evidence that only one
+This three-entry pilot is neither a top-ten ranking nor evidence that only one
 Python parser exists. The [cell record](cell.json) gives the remaining
 uncertainty, and the [standard-library finding](standard.json) records that
 CPython 3.14 documents no MP3 API.

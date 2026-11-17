@@ -1,10 +1,10 @@
 {
   "ecosystem": "python",
   "format": "mp3",
-  "status": "pilot_two_verified_bounded_search",
+  "status": "pilot_three_verified_bounded_search",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "project name contains 'mp3'",
@@ -23,24 +23,26 @@
   "candidates_with_metric": 13,
   "leads_recorded": 19,
   "leads_by_status": {
-    "selected": 2,
+    "selected": 3,
     "shared_family": 1,
-    "unresolved": 3,
+    "unresolved": 2,
     "unresolved_native_wrapper": 6,
     "unresolved_shared_family": 1,
     "excluded": 6
   },
   "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
-  "selection": "mutagen (10,748,990) and tinytag (4,453,166) are the two most-downloaded candidates whose own Python source parses MPEG Layer III frame headers from a documented byte or file-object API. av, soundfile, pydub and librosa rank higher but hand frame parsing to native FFmpeg or libsndfile/libmpg123, or to an external ffmpeg process; audioread (7,283,376) ranks between the two and dispatches to native backends.",
-  "shared_family": "Same Mutagen package, release 1.48.1 and mutagen/mp3 module as the mp3_id3v2/python mutagen entry. This cell checks MPEGInfo on untagged streams; it is not an independent parser family. tinytag is an independent pure-Python family (its _MPEG class in tinytag/tinytag.py).",
-  "uncertainty": "Two verified paths; no padding. The name search is a substring filter over the PyPI Simple index (serial 43764887) captured 2026-11-17; the 'mp3' and 'mpeg' hit lists were not triaged one by one, and download numbers were fetched only for 13 named candidates, so a less obvious frame parser could be missed. Native wrappers (av, soundfile, audioread, pygame, pymediainfo, miniaudio) are unresolved, not rejected: their parsers are real but outside Python source coverage. eyed3, hachoir and pymp3 are unresolved pure-Python leads. Mutagen reads headers and checks frame syncs but does not decode audio; for CBR streams without Xing/Info/VBRI its duration is stream bytes divided by the first header's bitrate. TinyTag also only reads headers: after five equal-bitrate frames it estimates duration from stream size and mean frame length, and it does not expose MPEG version, layer or frame count. Both full-length controls run the same TinyTag lines; its feedback difference is shown with a valid three-frame prefix of the 44.1 kHz control. Two untagged CBR controls do not establish VBR, free-format, Layer I/II, or MPEG-2.5 support.",
+  "selection": "mutagen (10,748,990), tinytag (4,453,166) and hachoir (222,718) are the three most-downloaded candidates whose own Python source parses MPEG Layer III frame headers from a documented byte or file-object API. av, soundfile, pydub and librosa rank higher but hand frame parsing to native FFmpeg or libsndfile/libmpg123, or to an external ffmpeg process; audioread (7,283,376) ranks between mutagen and tinytag and dispatches to native backends; pygame, pymediainfo and miniaudio rank between tinytag and hachoir and wrap native decoders.",
+  "shared_family": "Same Mutagen package, release 1.48.1 and mutagen/mp3 module as the mp3_id3v2/python mutagen entry. This cell checks MPEGInfo on untagged streams; it is not an independent parser family. tinytag is an independent pure-Python family (its _MPEG class in tinytag/tinytag.py). hachoir is a third independent pure-Python family (hachoir/parser/audio/mpeg_audio.py on hachoir's own field/stream framework).",
+  "uncertainty": "Three verified paths; no padding. The name search is a substring filter over the PyPI Simple index (serial 43764887) captured 2026-11-17; the 'mp3' and 'mpeg' hit lists were not triaged one by one, and download numbers were fetched only for 13 named candidates, so a less obvious frame parser could be missed. Native wrappers (av, soundfile, audioread, pygame, pymediainfo, miniaudio) are unresolved, not rejected: their parsers are real but outside Python source coverage. eyed3 and pymp3 are unresolved pure-Python leads. Mutagen reads headers and checks frame syncs but does not decode audio; for CBR streams without Xing/Info/VBRI its duration is stream bytes divided by the first header's bitrate. TinyTag also only reads headers: after five equal-bitrate frames it estimates duration from stream size and mean frame length, and it does not expose MPEG version, layer or frame count. Both full-length controls run the same TinyTag lines; its feedback difference is shown with a valid three-frame prefix of the 44.1 kHz control. hachoir is called through its MpegAudioFile class directly, not guessParser, whose fallback tries every hachoir parser in set order. It walks every frame header to EOF and reports version, layer, sample rate, bitrate, channel mode and frame count. It does not decode audio or side information, and its two controls differ by only 4 mpeg_audio.py lines: the MPEG-1 versus MPEG-2 bitrate table and frame-length formula. Two untagged CBR controls do not establish VBR, free-format, Layer I/II, or MPEG-2.5 support.",
   "third_party_evidence": "data/python/mp3/parsers.json",
   "third_party_control_results": [
     "projects/mp3/python/mutagen/verification.json",
-    "projects/mp3/python/tinytag/verification.json"
+    "projects/mp3/python/tinytag/verification.json",
+    "projects/mp3/python/hachoir/verification.json"
   ],
   "afl_feedback": "data/python/mp3/afl-feedback.json",
   "tinytag_afl_feedback": "data/python/mp3/tinytag-valid-feedback.json",
+  "hachoir_afl_feedback": "data/python/mp3/hachoir-valid-feedback.json",
   "runtime_evidence": "data/python/mp3/standard.json",
   "registry_snapshot": "data/python/mp3/registry-snapshot.json",
   "unresolved_leads": "data/python/mp3/leads.json",

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "cell": "mp3/python",
-  "checked_at_utc": "2026-11-17T09:30:00+00:00",
+  "checked_at_utc": "2026-11-17T11:20:00+00:00",
   "checks": [
     {
       "command": "python3 controls/mp3/check_controls.py",
@@ -159,16 +159,89 @@
       "command": "python3 -m unittest discover -s tests",
       "pass": false,
       "result": "77 of 78 pass; test_java_json_pilot fails on the fastjson entry added at HEAD 7e8b3032 (data/java/json/parsers.json, not touched here)"
+    },
+    {
+      "command": "SSL_CERT_FILE=/etc/ssl/cert.pem curl https://pypi.org/pypi/hachoir/3.4.0/json; https://pypistats.org/api/packages/hachoir/recent?period=month",
+      "pass": true,
+      "result": "hachoir 3.4.0 wheel sha256 042708fd...1001 and sdist sha256 7f88018d...f8f8 match the registry snapshot; the hachoir/ package trees in wheel and sdist are identical (mpeg_audio.py 6ae899e3...ec45); GNU GPL v2 License field and classifier, COPYING (GPL v2) identical in both; no required dependencies; last_month 222,718 at 2026-11-17T10:59:10Z, unchanged from the 03:40:50Z snapshot"
+    },
+    {
+      "command": "python3 scripts/run_project.py mp3 python hachoir",
+      "pass": true,
+      "image_id": "sha256:7fd69bbfd10221b993fbdcc037c507c857399781cfd200a3629fd159f2dca654",
+      "output": {
+        "version": "1",
+        "layer": "III",
+        "sample_rate": 44100,
+        "bitrate": 64000,
+        "channel_mode": "Single channel",
+        "channels": 1,
+        "frames": 11,
+        "frame_bytes": 2298
+      },
+      "parser_source_files": 15,
+      "parser_source_lines_covered": 397,
+      "mpeg_audio_lines_covered": 90,
+      "id3_lines_covered": 0,
+      "receipt_sha256": "8b61819fb4df6bace7793e4eb1f5af24a99b58e3966b7e510cd733ed1d4a5401"
+    },
+    {
+      "command": "python3 parsarium.py run mp3 python hachoir controls/mp3/tone-44k-mono.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py run mp3 python hachoir controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "cd scripts && python3 build_afl_python.py mp3 python hachoir",
+      "pass": true,
+      "image_id": "sha256:9cba447d1ae705d4fb2c4564ff37ab21f5fdbbc13681b914686ede24c16b8c8c",
+      "parser_source_features": 397,
+      "feedback_edges": 417,
+      "receipt_sha256": "f2615998981cd3326ff6400c9c3fa3a057191d253ca0be3b5eedbbea339af751"
+    },
+    {
+      "command": "cd scripts && python3 verify_python_mp3_hachoir_feedback.py",
+      "pass": true,
+      "first_parser_source_lines": 397,
+      "first_mpeg_audio_lines": 90,
+      "controls_line_difference": 4,
+      "controls_line_difference_in_mpeg_audio": 4,
+      "afl_tuple_difference": 4,
+      "repeats_per_input": 3,
+      "repeated_inputs_identical": true,
+      "receipt_sha256": "85ec95b8429011e32a17cd1b2e9ef80fa92919871ba58da3cd76294f62adb0ba"
+    },
+    {
+      "command": "python3 parsarium.py afl prepare mp3 python hachoir runs/mp3-hachoir-afl --seed controls/mp3/tone-22k-stereo.mp3 && python3 parsarium.py afl run runs/mp3-hachoir-afl --check",
+      "pass": true,
+      "result": "Ready: 2 seeds; no campaign started"
+    },
+    {
+      "command": "(cd scripts && python3 audit_fuzzing.py) && python3 -m unittest discover -s tests",
+      "pass": true,
+      "result": "906/906 AFL++ overlays and 574/574 ecosystem feedback checks current; 112 tests OK"
+    },
+    {
+      "command": "python3 scripts/validate_catalog.py",
+      "pass": false,
+      "result": "fails only with 'pilot matrix differs from its cell record: python/mp3' because the shared data/pilot-cells.json still mirrors the two-path cell.json; base 1aa491ec validates. build_readmes.py likewise needs the shared smoke/coverage aggregates for hachoir. Regenerating shared aggregates (refresh_smoke_batch.py mp3/python/hachoir, audit_projects.py --write, build_matrix.py, build_readmes.py) is left to the integrator; catalog/mp3/python/README.md and catalog/mp3/python/hachoir/README.md were written by hand in the generator's format and should be rechecked with build_readmes.py --check"
     }
   ],
   "notes": [
     "Both controls execute 248 Mutagen lines; 8 line features differ between them. The fuzz.py Atheris entry and the AFL++ bridge both call harness.fuzz_one_input.",
-    "TinyTag runs the same 154 lines (74 in _MPEG, 0 in _ID3) on both full-length controls, so they give identical AFL++ maps. The valid 626-byte three-frame prefix of the 44.1 kHz control ends before the five-frame CBR estimate and changes 16 _MPEG lines and 16 AFL++ tuples; all expected outputs come from the check_controls.py header walk."
+    "TinyTag runs the same 154 lines (74 in _MPEG, 0 in _ID3) on both full-length controls, so they give identical AFL++ maps. The valid 626-byte three-frame prefix of the 44.1 kHz control ends before the five-frame CBR estimate and changes 16 _MPEG lines and 16 AFL++ tuples; all expected outputs come from the check_controls.py header walk.",
+    "hachoir is constructed as MpegAudioFile(FileInputStream(BytesIO), validate=True) rather than through createParser/guessParser: without a file name guessParser's fallback tries every registered hachoir parser in set order, which changes from process to process. The harness iterates every frame[] field set and requires complete Layer III frames covering the whole input with one header tuple. Both controls run 397 hachoir lines (90 in mpeg_audio.py, 0 in id3.py); 4 mpeg_audio.py lines (137, 139, 159, 161: MPEG-1 vs MPEG-2 bitrate table and frame-length formula) and 4 AFL++ tuples differ, so no prefix variant is needed. Expected outputs come from check_controls.py plus channel-mode bits read from every header by the verify script."
   ],
   "not_run": [
     "AFL++ or Atheris campaign",
     "malformed-input or vulnerability experiments",
-    "eyed3, hachoir, pymp3 and native-wrapper leads",
+    "eyed3, pymp3 and native-wrapper leads",
     "aggregate catalog/website regeneration (build_matrix, build_readmes, audit_projects --write, refresh_smoke_batch.py, smoke reports)"
   ]
 }
