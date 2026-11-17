@@ -283,6 +283,98 @@
       "afl_feedback": "fuzzing/afl-native/sql/rust/sqlite3_parser/differential.json"
     },
     {
+      "package": "databend-common-ast",
+      "version": "0.2.5",
+      "pass": true,
+      "input_api": "parser::tokenize_sql(local UTF-8 text) and parser::parse_sql(&tokens, Dialect::PostgreSQL) -> (Statement, Option<String>)",
+      "dialect": "PostgreSQL (crate default)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Databend SQL parser (logos tokenizer, nom/pratt combinators)",
+      "parser_source_files": 75,
+      "parser_source_lines_covered": 1943,
+      "afl_tuple_difference": 3895,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/rust/databend_common_ast/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/rust/databend_common_ast/differential.json"
+    },
+    {
       "package": "qusql-parse",
       "version": "0.12.0",
       "pass": true,
@@ -652,5 +744,5 @@
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T21:03:22.121239+00:00"
+  "checked_at_utc": "2026-11-17T21:06:46.004071+00:00"
 }

@@ -332,6 +332,116 @@
     }
   },
   {
+    "name": "databend-common-ast",
+    "version": "0.2.5",
+    "license": "Apache-2.0",
+    "license_evidence": "Cargo.toml license = Apache-2.0 in the pinned crate (checked in the image) and Apache-2.0 headers in every source file; the crate ships no license file",
+    "input_api": "parser::tokenize_sql(local UTF-8 text) and parser::parse_sql(&tokens, Dialect::PostgreSQL) -> (Statement, Option<String>)",
+    "documentation": "https://docs.rs/databend-common-ast/0.2.5/databend_common_ast/parser/fn.parse_sql.html",
+    "source": "https://static.crates.io/crates/databend-common-ast/databend-common-ast-0.2.5.crate",
+    "source_sha256": "cb8f5789ec063095c16b4be31b30756f9e94c36c752caa3af030d96638dc63fe",
+    "dependencies": [
+      "logos (tokenizer)",
+      "nom 8, nom-rule, pratt (parser combinators)",
+      "derive-visitor",
+      "ethnum (i256 decimals)",
+      "serde, strum and formatting helpers"
+    ],
+    "dialect": "PostgreSQL (crate default)",
+    "scope": "One SQL statement from local UTF-8 text with the default PostgreSQL dialect; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Databend-specific syntax and other dialects are untested.",
+    "family": "Databend SQL parser (logos tokenizer, nom/pratt combinators)",
+    "family_note": "tokenize_sql runs a logos lexer (src/parser/token.rs); parse_sql runs nom-rule combinators and a pratt expression parser (src/parser/statement.rs, query.rs, expr.rs) into Databend's own AST. It does not use sqlparser-rs. The adapter reads Query/SelectStmt and InsertStmt fields and drives the crate's derive-visitor Drive walk; COUNT(*) is the CountAll node. The crates.io package is a published snapshot of the src/query/ast module of the Databend repository.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 6616,
+      "source": "https://crates.io/api/v1/crates/databend-common-ast",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Databend itself depends on the in-repository module, so its use is not counted here."
+    },
+    "project": "projects/sql/rust/databend_common_ast",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "qusql-parse",
     "version": "0.12.0",
     "license": "Apache-2.0",
