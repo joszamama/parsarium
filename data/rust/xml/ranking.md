@@ -17,7 +17,7 @@ crates.io recent downloads (90 days), from the search API in [registry-snapshot.
 | 7 | [rxml](https://docs.rs/rxml/0.14.0/rxml/struct.Parser.html) | 0.14.0 | 961,809 | Restricted XML 1.0 `Parser` over local bytes: namespace-resolved events; own `RawParser` pass counts declarations | rxml lexer, raw parser and namespace resolver |
 | 8 | [uppsala](https://docs.rs/uppsala/0.12.1/uppsala/fn.parse_bytes.html) | 0.12.1 | 287,733 | `parse_bytes(&[u8])` over local bytes: namespace-aware DOM with expanded element and attribute names, declarations, decoded text | uppsala own scanner, recursive-descent parser, namespace resolver and DOM |
 
-Unverified XML parser leads, by the same metric: xml-no-std 1,648,161 (shared family), minidom 984,597 (shared rxml family), instant-xml 748,214, sxd-document 647,390, libxml 621,059, minidom-14 391,747 (shared family), hard-xml 228,546 (shared family), xot 112,374 (shared family). Recent downloads include transitive dependency pulls. windows (113,676,999) and pulldown-cmark (73,457,258) rank above several leads in the search results but are not XML parsers.
+Unverified XML parser leads, by the same metric: xml-no-std 1,648,161 (xml-rs source fork), minidom 984,597 (shared rxml family), instant-xml 748,214, sxd-document 647,390, libxml 621,059, minidom-14 391,747 (shared family), hard-xml 228,546 (shared family), xot 112,374 (shared family). Recent downloads include transitive dependency pulls. windows (113,676,999) and pulldown-cmark (73,457,258) rank above several leads in the search results but are not XML parsers.
 
 ## Standard library
 

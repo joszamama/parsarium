@@ -6,9 +6,17 @@
       "name": "xml-no-std",
       "version": "0.8.26",
       "recent_downloads_90d": 1648161,
-      "status": "unresolved_shared_family",
-      "reason": "no_std fork of xml-rs; shared-family status needs checking.",
-      "source": "https://crates.io/crates/xml-no-std"
+      "status": "unresolved_shared_family_fork",
+      "reason": "Source fork of xml-rs, the same EventReader family as the selected xml crate, not a wrapper with its own parsing layer. The pinned README calls it a no_std fork of xml-rs and credits its authors. Its src/reader/{lexer.rs,parser.rs,parser/*.rs}, namespace.rs and name.rs keep xml-rs 0.8.26's module layout and state machine. A line diff against xml-rs 0.8.26 lists 11 changed lines (removed plus added) in parser/outside_tag.rs (211 lines), 25 in parser/inside_opening_tag.rs (120 lines) and 5 in parser/inside_cdata.rs (41 lines). Most lexer.rs changes are core/alloc imports, Self-to-Token renames and the Iterator<Item = &u8> input in place of std::io::Read. The documented API is the same EventReader::new(source) over that iterator. It would add a near-duplicate xml-rs path rather than a distinct package API, so it was not run; selecting it would need its own controls, coverage and AFL++ evidence and an explicit shared-family label.",
+      "source": "https://static.crates.io/crates/xml-no-std/xml-no-std-0.8.26.crate",
+      "source_sha256": "cd223bc94c615fc02bf2f4bbc22a4a9bfe489c2add3ec10b1038df3aca44cac7",
+      "compared_with": {
+        "package": "xml-rs",
+        "version": "0.8.26",
+        "source": "https://static.crates.io/crates/xml-rs/xml-rs-0.8.26.crate",
+        "source_sha256": "a62ce76d9b56901b19a74f19431b0d8b3bc7ca4ad685a746dfd78ca8f4fc6bda"
+      },
+      "family_note": "xml-rs EventReader family (selected path: xml 1.4.0); MIT license, author field Vladimir Matveev (xml-rs)."
     },
     {
       "name": "minidom",
