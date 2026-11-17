@@ -1,0 +1,25 @@
+---
+# Parsarium YAML control: block sequence root
+- order: A-7
+  lines:
+    - sku: "Xé-1"
+      qty: 2
+      price: 12.5
+    - sku: 'B ''2'''
+      qty: 1
+      price: 0.75
+  flags: []
+  meta: {}
+- &shared
+  city: Berlin
+  zip: "10115"
+- *shared
+- [1, [2, 3], {k: v}]
+- plain multi word
+- "line\nbreak"
+- |-
+  kept
+    indented
+- ~
+- false
+...

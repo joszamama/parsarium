@@ -1,0 +1,74 @@
+[
+  {
+    "name": "PyYAML",
+    "status": "unresolved",
+    "metric_value": 1227712536,
+    "metric_error": null,
+    "family": "PyYAML pure Python (CLoader is the libyaml family)",
+    "api_hint": "yaml.safe_load(str/bytes/stream)",
+    "note": "YAML 1.1 resolver; the pure SafeLoader and the C-accelerated CSafeLoader are separate paths.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/PyYAML/",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "ruamel.yaml",
+    "status": "unresolved",
+    "metric_value": 177667165,
+    "metric_error": null,
+    "family": "ruamel.yaml (PyYAML-derived, YAML 1.2)",
+    "api_hint": "YAML(typ='safe', pure=True).load",
+    "note": "Derived from PyYAML; ruamel.yaml.clib is its optional libyaml-derived C loader.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/ruamel.yaml/",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "strictyaml",
+    "status": "shared_family",
+    "metric_value": 29369654,
+    "metric_error": null,
+    "family": "ruamel.yaml via strictyaml",
+    "api_hint": "strictyaml.load(str)",
+    "note": "Wraps ruamel.yaml; returns strings unless a schema types them.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/strictyaml/",
+    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+  },
+  {
+    "name": "oyaml",
+    "status": "shared_family",
+    "metric_value": 2622495,
+    "metric_error": null,
+    "family": "PyYAML",
+    "api_hint": "oyaml.safe_load",
+    "note": "Ordered-dict shim over PyYAML; shared family.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/oyaml/",
+    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+  },
+  {
+    "name": "rapidyaml",
+    "status": "unresolved",
+    "metric_value": 224758,
+    "metric_error": null,
+    "family": "rapidyaml (ryml)",
+    "api_hint": "ryml.parse_in_arena",
+    "note": "Python binding of C++ rapidyaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": null,
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "yamlcore",
+    "status": "shared_family",
+    "metric_value": 92413,
+    "metric_error": null,
+    "family": "PyYAML with YAML 1.2 core resolver",
+    "api_hint": "yamlcore.CoreLoader",
+    "note": "Resolver subclass of PyYAML; shared family.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/yamlcore/",
+    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+  }
+]

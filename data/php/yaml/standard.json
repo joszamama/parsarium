@@ -1,0 +1,18 @@
+{
+  "ecosystem": "PHP",
+  "format": "YAML 1.2 document (schema-neutral subset)",
+  "status": "none_documented_in_scoped_runtime_apis",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "PHP 8.5 bundled extensions",
+      "official_documentation_scope": [
+        "https://www.php.net/manual/en/funcref.php",
+        "https://www.php.net/manual/en/yaml.installation.php"
+      ],
+      "finding": "No bundled PHP extension parses YAML. yaml_parse comes from the PECL yaml extension, which must be installed separately; it is recorded as a third-party libyaml-family lead, not a standard API."
+    }
+  ],
+  "observed": "2026-11-17",
+  "limit": "This covers the cited official documentation; third-party packages and native system libraries are separate."
+}

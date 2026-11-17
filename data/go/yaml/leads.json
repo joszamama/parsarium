@@ -1,0 +1,74 @@
+[
+  {
+    "name": "gopkg.in/yaml.v2",
+    "status": "unresolved",
+    "metric_value": 60161,
+    "metric_error": null,
+    "family": "go-yaml v2",
+    "api_hint": "yaml.Unmarshal([]byte, *interface{})",
+    "note": "YAML 1.1 resolver.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pkg.go.dev/gopkg.in/yaml.v2",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "gopkg.in/yaml.v3",
+    "status": "unresolved",
+    "metric_value": 44731,
+    "metric_error": null,
+    "family": "go-yaml v3",
+    "api_hint": "yaml.Unmarshal([]byte, *yaml.Node)",
+    "note": null,
+    "found_by": "registry_search",
+    "source": "https://pkg.go.dev/gopkg.in/yaml.v3",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "github.com/ghodss/yaml",
+    "status": "shared_family",
+    "metric_value": 19254,
+    "metric_error": null,
+    "family": "go-yaml v2 via JSON conversion",
+    "api_hint": "yaml.YAMLToJSON",
+    "note": "Wrapper over go-yaml v2; shared family.",
+    "found_by": "registry_search",
+    "source": "https://pkg.go.dev/github.com/ghodss/yaml",
+    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+  },
+  {
+    "name": "sigs.k8s.io/yaml",
+    "status": "shared_family",
+    "metric_value": 12078,
+    "metric_error": null,
+    "family": "go-yaml (forked goyaml.v2) via JSON conversion",
+    "api_hint": "yaml.YAMLToJSON / yaml.Unmarshal",
+    "note": "Wrapper over a vendored go-yaml fork; shared family.",
+    "found_by": "registry_search",
+    "source": "https://pkg.go.dev/sigs.k8s.io/yaml",
+    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+  },
+  {
+    "name": "github.com/goccy/go-yaml",
+    "status": "unresolved",
+    "metric_value": 2983,
+    "metric_error": null,
+    "family": "goccy/go-yaml",
+    "api_hint": "yaml.Unmarshal / parser.ParseBytes",
+    "note": null,
+    "found_by": "registry_search",
+    "source": "https://pkg.go.dev/github.com/goccy/go-yaml",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "go.yaml.in/yaml/v3",
+    "status": "shared_family",
+    "metric_value": 555,
+    "metric_error": null,
+    "family": "go-yaml v3",
+    "api_hint": "yaml.Unmarshal([]byte, *yaml.Node)",
+    "note": "YAML organization continuation of gopkg.in/yaml.v3; shared family.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pkg.go.dev/go.yaml.in/yaml/v3",
+    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+  }
+]

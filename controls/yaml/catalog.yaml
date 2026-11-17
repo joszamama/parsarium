@@ -1,0 +1,29 @@
+# Parsarium YAML control: block mapping root
+kind: catalog
+version: 2
+ratio: 0.25
+offset: -17
+enabled: true
+retired: false
+missing: null
+title: "Caf\u00e9 \"quoted\"\tend"
+single: 'it''s here'
+tags: [alpha, beta, "gamma delta"]
+point: {lat: 1, lon: -2.5}
+items:
+  - id: 7
+    name: first item
+    note: |
+      line one
+      line two
+  - id: 8
+    name: Zürich
+    note: >
+      folded
+      text
+defaults: &base
+  retries: 3
+  label: base
+service:
+  settings: *base
+  label: edge
