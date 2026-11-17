@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "project": "mp3_id3v2/cpp/mpv",
+  "pass": true,
+  "feedback_kind": "ffmpeg_tagged_mp3_mpv_demux_lavf_pcguard_edges",
+  "feedback_scope": "FFmpeg 9.0.2 libavformat/id3v2.c, mp3dec.c, id3v1.c, replaygain.c, libavcodec/mpegaudiodecheader.c, mpegaudio_parser.c and mpv 0.42.0 demux/demux_lavf.c via AFL++ allowlist; the rest of libmpv, libavformat, libavcodec, libplacebo and the C++17 harness uninstrumented",
+  "afl_allowlist": [
+    "src: id3v2.c",
+    "src: mp3dec.c",
+    "src: id3v1.c",
+    "src: replaygain.c",
+    "src: mpegaudiodecheader.c",
+    "src: mpegaudio_parser.c",
+    "src: *demux/demux_lavf.c"
+  ],
+  "afl_guarded_archive_members": [
+    "libavcodec.a(mpegaudio_parser.o)",
+    "libavcodec.a(mpegaudiodecheader.o)",
+    "libavformat.a(id3v1.o)",
+    "libavformat.a(id3v2.o)",
+    "libavformat.a(mp3dec.o)",
+    "libavformat.a(replaygain.o)",
+    "libmpv.a(demux_demux_lavf.c.o)"
+  ],
+  "base_project_receipt_sha256": "6ac8f3de3974417959c882cf72b33d82489e6a43c453a5ea760fcff4ac679bd7",
+  "base_image_id": "sha256:23d8f6d2137600c8c28bbcfd026c0dc6c8745851e32606ca9816aff4ab24c342",
+  "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
+  "underlying_source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "variant_sha256": "a5337540e40f66d89398dbc29e366034d21ec5ba5f0cd539392cddb07530616d",
+  "control_output": {
+    "title": "Parsarium",
+    "codec": "mp3",
+    "duration_ms": 1000
+  },
+  "variant_output": {
+    "title": "Parsarium",
+    "codec": "mp3",
+    "duration_ms": 1000
+  },
+  "image_id": "sha256:8be0939c250301ff55e512b3b0d7e94e9be8daa97ddc1ba4098487968d759799",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "afl_file_input": true,
+  "afl_map_size": 5805,
+  "repeats": 3,
+  "feedback_edges": 660,
+  "variant_feedback_edges": 658,
+  "edges_only_in_control": 7,
+  "edges_only_in_variant": 5,
+  "control_stability": {
+    "repeat_edge_counts": [
+      660,
+      660,
+      660
+    ],
+    "stable_edges": 660,
+    "union_edges": 660,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      658,
+      658,
+      658
+    ],
+    "stable_edges": 658,
+    "union_edges": 658,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "source_differential": {
+    "image_id": "sha256:23d8f6d2137600c8c28bbcfd026c0dc6c8745851e32606ca9816aff4ab24c342",
+    "control_regions": {
+      "/work/ffmpeg/libavformat/id3v2.c": 156,
+      "/work/ffmpeg/libavformat/mp3dec.c": 183,
+      "/work/ffmpeg/libavformat/id3v1.c": 0,
+      "/work/ffmpeg/libavformat/replaygain.c": 23,
+      "/work/ffmpeg/libavcodec/mpegaudiodecheader.c": 32,
+      "/work/ffmpeg/libavcodec/mpegaudio_parser.c": 46,
+      "/work/source/demux/demux_lavf.c": 310
+    },
+    "variant_regions": {
+      "/work/ffmpeg/libavformat/id3v2.c": 155,
+      "/work/ffmpeg/libavformat/mp3dec.c": 183,
+      "/work/ffmpeg/libavformat/id3v1.c": 0,
+      "/work/ffmpeg/libavformat/replaygain.c": 23,
+      "/work/ffmpeg/libavcodec/mpegaudiodecheader.c": 32,
+      "/work/ffmpeg/libavcodec/mpegaudio_parser.c": 46,
+      "/work/source/demux/demux_lavf.c": 310
+    },
+    "variant_only_regions": {
+      "/work/ffmpeg/libavformat/id3v2.c": 8,
+      "/work/ffmpeg/libavformat/mp3dec.c": 0,
+      "/work/ffmpeg/libavformat/id3v1.c": 0,
+      "/work/ffmpeg/libavformat/replaygain.c": 0,
+      "/work/ffmpeg/libavcodec/mpegaudiodecheader.c": 0,
+      "/work/ffmpeg/libavcodec/mpegaudio_parser.c": 0,
+      "/work/source/demux/demux_lavf.c": 0
+    },
+    "control_only_regions": {
+      "/work/ffmpeg/libavformat/id3v2.c": 9,
+      "/work/ffmpeg/libavformat/mp3dec.c": 0,
+      "/work/ffmpeg/libavformat/id3v1.c": 0,
+      "/work/ffmpeg/libavformat/replaygain.c": 0,
+      "/work/ffmpeg/libavcodec/mpegaudiodecheader.c": 0,
+      "/work/ffmpeg/libavcodec/mpegaudio_parser.c": 0,
+      "/work/source/demux/demux_lavf.c": 0
+    }
+  },
+  "overlay_file_sha256": {
+    "Dockerfile": "a38ac9a731b88f0c8eca38b61473da762c3e1a8a3be86c9c1207c68f926bc7f2",
+    "build.py": "7aa80adffa561ff4bc6a0a73b729e54ee3c4c1b7e27fbea63dce20c9b0fe069b"
+  }
+}
