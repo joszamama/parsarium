@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T10:10:19.133590+00:00",
-  "projects_total": 5,
-  "projects_passed": 5,
-  "differential_kind": "fixed_valid_nested_array",
-  "command": "python3 scripts/build_afl_native.py json cpp boost-json && python3 scripts/verify_cpp_json_feedback.py --slug boost-json (earlier paths retain recorded receipts)",
+  "checked_at_utc": "2026-11-17T11:31:43.644920+00:00",
+  "projects_total": 6,
+  "projects_passed": 6,
+  "differential_kind": "two fixed valid nested JSON controls; Glaze uses a parser-only generic_i64 probe with exact DOM checks",
+  "command": "python3 scripts/build_afl_native.py json cpp glaze && python3 projects/json/cpp/glaze/verify-parser-feedback.py (earlier paths retain recorded receipts)",
   "results": [
     {
       "project": "json/cpp/jsoncpp",
@@ -95,6 +95,26 @@
       "differential_afl_tuples": 522,
       "source_line_difference": 140,
       "afl_tuple_difference": 103
+    },
+    {
+      "project": "json/cpp/glaze",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_parser_only_edges_with_glaze_read_source_lines",
+      "overlay_receipt_sha256": "d2e4e8b04780f4ef9ece365ac8edf4483a26830275746b567079d54fbfffdc0e",
+      "differential_receipt_sha256": "effdcf4235346dcdfab76a6e790ecfb7d5cc58770dca1778d18e7ef9797faa17",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_source_lines": 362,
+      "control_afl_tuples": 632,
+      "differential_source_lines": 337,
+      "differential_afl_tuples": 568,
+      "source_line_difference": 25,
+      "afl_tuple_difference": 140,
+      "parser_only_probe": "projects/json/cpp/glaze/parser-probe.cpp",
+      "exact_tree_outputs_verified": true
     }
   ]
 }

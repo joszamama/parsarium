@@ -312,5 +312,64 @@
     },
     "project": "projects/json/cpp/boost-json",
     "not_verified": "Only two valid nested object/array controls; scalar roots, stream_parser, parse_options extensions, large inputs and malformed input remain unverified."
+  },
+  {
+    "name": "Glaze",
+    "version": "9.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/stephenberry/glaze/blob/v9.1.0/LICENSE",
+    "input_api": "glz::read_json(glz::generic_i64&, std::string) on a local byte-backed std::string, yielding an insertion-ordered generic JSON DOM with signed integer and double alternatives",
+    "documentation": "https://github.com/stephenberry/glaze/blob/v9.1.0/docs/generic-json.md",
+    "source": "https://github.com/stephenberry/glaze/archive/refs/tags/v9.1.0.tar.gz",
+    "adapter": "projects/json/cpp/glaze/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text from a local memory buffer into glz::generic_i64; object/array roots in the two valid controls; exact nested tree, key order and integer/float kinds checked",
+    "family": "Glaze own template-based JSON reader",
+    "family_note": "Glaze implements JSON scanning/deserialization in include/glaze/json/read.hpp and related headers, without delegating to JsonCpp, simdjson, nlohmann/json, RapidJSON, or Boost.JSON. The generic_i64 DOM is Glaze own ordered generic value type.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 171,
+      "binary_package": "libglaze-dev",
+      "dev_package_installs": {
+        "libglaze-dev": 171
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json",
+      "qualification": "Header-only source; the primary sourcemax value and dev-package installation count coincide at 171."
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/glaze",
+    "not_verified": "Two valid controls do not establish complete RFC 8259 compliance, malformed-input handling, numeric limits, or all Unicode edge cases."
   }
 ]

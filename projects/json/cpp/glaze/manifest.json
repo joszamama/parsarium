@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "cpp",
+  "package": "Glaze",
+  "release": "9.1.0",
+  "pilot": true,
+  "catalog_parser": "data/cpp/json/parsers.json",
+  "source_lock": "projects/json/cpp/glaze/source-lock.json",
+  "source_sha256": "55f8a675397c505f9bee6c160e1c26b0085868f185d04d7a7727531fdbff4bd4",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "oracle": "The replay prints the parsed glz::generic_i64 DOM; run-control requires exact JSON tree equality with control, preserving object order and integer versus float kinds.",
+  "coverage": "LLVM source coverage in pinned Glaze 9.1.0 headers reached by glz::read_json(glz::generic_i64&, std::string) on local bytes",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/include/glaze/json/read.hpp",
+  "afl_entrypoint": "/work/parser-probe-afl"
+}

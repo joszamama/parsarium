@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T08:29:38.601491+00:00",
+  "checked_at_utc": "2026-11-17T11:31:43.644920+00:00",
   "platform": "linux/arm64 Docker",
   "toolchain": [
     "Ubuntu clang version 21.1.8 (6ubuntu1)",
@@ -37,7 +37,7 @@
         "objects": 5,
         "root": "object",
         "strings": [
-          "caf\u00e9 \"quoted\"",
+          "café \"quoted\"",
           "go",
           "json",
           "parsarium",
@@ -79,7 +79,7 @@
         "objects": 5,
         "root": "object",
         "strings": [
-          "caf\u00e9 \"quoted\"",
+          "café \"quoted\"",
           "go",
           "json",
           "parsarium",
@@ -122,7 +122,7 @@
         "objects": 5,
         "root": "object",
         "strings": [
-          "caf\u00e9 \"quoted\"",
+          "café \"quoted\"",
           "go",
           "json",
           "parsarium",
@@ -164,7 +164,7 @@
         "objects": 5,
         "root": "object",
         "strings": [
-          "caf\u00e9 \"quoted\"",
+          "café \"quoted\"",
           "go",
           "json",
           "parsarium",
@@ -225,7 +225,7 @@
         "objects": 5,
         "root": "object",
         "strings": [
-          "caf\u00e9 \"quoted\"",
+          "café \"quoted\"",
           "go",
           "json",
           "parsarium",
@@ -264,6 +264,68 @@
       "differential_pass": true,
       "family": "Boost.JSON basic_parser",
       "family_status": "independent",
+      "error": null
+    },
+    {
+      "package": "Glaze",
+      "version": "9.1.0",
+      "scope": "RFC 8259 JSON from a local std::string into ordered glz::generic_i64 DOM; both valid controls checked for exact nested structure, key order and numeric kinds",
+      "command": "python3 scripts/run_project.py json cpp glaze",
+      "receipt": "projects/json/cpp/glaze/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "exact_nested_structure_match": true,
+      "parser_source_lines_covered": 1623,
+      "format_specific_source_lines_covered": 415,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "parser_only_afl_feedback": "fuzzing/afl-native/json/cpp/glaze/differential.json",
       "error": null
     }
   ],
