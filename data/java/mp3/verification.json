@@ -129,6 +129,37 @@
       "format_specific_source_lines_covered": 221,
       "format_specific_source": "org/jaudiotagger/audio/mp3/MPEGFrameHeader.java",
       "scope_limit": "First four-byte frame header of two valid untagged CBR MPEG Layer III files only; no frame count, frame size, duration, whole-stream consistency, PCM decode, ID3, VBR, or malformed-input claim. The higher-level MP3AudioHeader(File) misidentifies the valid 22.05 kHz control start at byte 104 and estimates 5 rather than 12 frames; MPEGFrameHeader.getFrameLength/getNoOfSamples are also wrong for that MPEG-2 header and are not reported."
+    },
+    {
+      "package": "mp3agic",
+      "group": "com.mpatric",
+      "version": "0.9.1",
+      "scope": "Local Mp3File(Path) scan; independently correct MPEG Layer III version, layer, sample rate, channel mode, and bitrate only; high-level frame count/start/duration excluded",
+      "command": "python3 scripts/run_project.py mp3 java mp3agic",
+      "receipt": "projects/mp3/java/mp3agic/verification.json",
+      "pass": true,
+      "output": {
+        "codec": "MP3",
+        "mpeg_version": "1.0",
+        "layer": "III",
+        "sample_rate": 44100,
+        "channel_mode": "Mono",
+        "bitrate_kbps": 64
+      },
+      "differential_output": {
+        "codec": "MP3",
+        "mpeg_version": "2.0",
+        "layer": "III",
+        "sample_rate": 22050,
+        "channel_mode": "Joint stereo",
+        "bitrate_kbps": 32
+      },
+      "differential_receipt": "data/java/mp3/mp3agic-feedback-differential.json",
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 219,
+      "format_specific_source_lines_covered": 80,
+      "format_specific_source": "com/mpatric/mp3agic/MpegFrame.java",
+      "scope_limit": "Two valid untagged CBR MPEG Layer III files; only independently correct version, layer, sample rate, channel mode and bitrate are claimed. Mp3File(Path) misidentifies the 22.05 kHz control start at byte 104 and reports 5 frames/261 ms versus oracle byte 0, 12 frames/about 313 ms. No accurate whole-stream frame count, duration or PCM decoding claim; VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 and ID3 are untested."
     }
   ],
   "standard": []

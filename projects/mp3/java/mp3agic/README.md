@@ -14,6 +14,6 @@ python3 parsarium.py afl build mp3 java mp3agic
 python3 parsarium.py afl prepare mp3 java mp3agic runs/mp3-mp3agic-afl
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign. The harness uses mp3agic's documented `Mp3File(Path)` local-file parser and reports only independently correct MPEG header fields.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-**Coverage limit:** On the valid MPEG-2 control, `Mp3File(Path)` reports start byte 104, 5 frames, and 261 ms; the independent header walker finds start byte zero, 12 frames, and approximately 313 ms. Those inaccurate fields and PCM decoding are outside this path's claimed result.
+**Coverage limit:** Two valid untagged CBR MPEG Layer III files; only independently correct version, layer, sample rate, channel mode and bitrate are claimed. Mp3File(Path) misidentifies the 22.05 kHz control start at byte 104 and reports 5 frames/261 ms versus oracle byte 0, 12 frames/about 313 ms. No accurate whole-stream frame count, duration or PCM decoding claim; VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 and ID3 are untested.

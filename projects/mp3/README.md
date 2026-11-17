@@ -12,6 +12,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [jaudiotagger / Java](java/jaudiotagger/README.md)
 - [jcodec / Java](java/jcodec/README.md)
 - [jlayer / Java](java/jlayer/README.md)
+- [mp3agic / Java](java/mp3agic/README.md)
 - [mp3spi / Java](java/mp3spi/README.md)
 - [codec-parser / JavaScript](javascript/codec_parser/README.md)
 - [mediabunny / JavaScript](javascript/mediabunny/README.md)
