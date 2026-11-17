@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "project": "xml/php/querypath",
+  "pass": true,
+  "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+  "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c (DOMDocument::loadXML) via AFL++ allowlist; libxml2 tree, XPath and dict code, the other ext/dom classes, ext/libxml/libxml.c, the Zend engine and the interpreted querypath/querypath PHP code are uninstrumented",
+  "harness": "projects/xml/php/querypath/fuzz-target.php -> harness.php parsarium_parse (querypath/querypath load, summary.php namespace-aware DOM walk)",
+  "parse_only_target": "DOMDocument::loadXML with options 0, as DOMQuery::parseXMLString calls it (QueryPath passes null options, which PHP 8.5 coerces to 0 with a deprecation)",
+  "base_project_receipt_sha256": "39170cdd23f6003ce36e1371041671019685233109c99d78a0fea9f1cb5c6aa4",
+  "base_image_id": "sha256:95206441846256d10ccfd7fd364ae6bf5de393e965765643f499b537be385743",
+  "source_sha256": "10e8e6195661a3e0c1345d2d640e4f9f291fc410b92bd363bf477dbb27c77a60",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "runtime": {
+    "php": "8.5.12",
+    "libxml2": "2.15.4"
+  },
+  "instrumented_objects": [
+    "libxml2-2.15.4/build/.libs/libxml2_la-SAX2.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parser.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parserInternals.o",
+    "php-8.5.12/ext/dom/document.o"
+  ],
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "oracle": "controls/xml/check_controls.py summarize(): namespace-aware expat",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "package_line_coverage": {
+    "tool": "Xdebug (Ubuntu PHP 8.5.4, libxml 2.15.2), two identical replays per control",
+    "file": "src/QueryPath/DOMQuery.php",
+    "package_lines_differ": false,
+    "control_lines": 43,
+    "differential_lines": 43,
+    "shared_lines": 43,
+    "control_only_lines": [],
+    "differential_only_lines": [],
+    "package_lines": {
+      "control": 55,
+      "differential": 55
+    },
+    "package_files": {
+      "control": [
+        "src/QueryPath.php",
+        "src/QueryPath/DOMQuery.php",
+        "src/QueryPath/Exception.php",
+        "src/QueryPath/Options.php",
+        "src/QueryPath/ParseException.php",
+        "src/QueryPath/Query.php",
+        "src/qp_functions.php"
+      ],
+      "differential": [
+        "src/QueryPath.php",
+        "src/QueryPath/DOMQuery.php",
+        "src/QueryPath/Exception.php",
+        "src/QueryPath/Options.php",
+        "src/QueryPath/ParseException.php",
+        "src/QueryPath/Query.php",
+        "src/qp_functions.php"
+      ]
+    }
+  },
+  "image_id": "sha256:fc74eb3e033a19a7726eb4cc5b9db187f4c7d323699fe4a011e61ba3819011b9",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 65536,
+  "repeats_per_control": 5,
+  "all_repeats_identical": true,
+  "feedback_edges": 1098,
+  "differential_feedback_edges": 1220,
+  "stable_shared_edges": 979,
+  "stable_control_only_edges": 119,
+  "stable_differential_only_edges": 241,
+  "afl_tuple_difference": 360,
+  "parse_only_control_edges": 1095,
+  "parse_only_differential_edges": 1217,
+  "parse_only_tuple_difference": 360,
+  "format_dependent_parse_time_tuples": 360,
+  "format_dependent_traversal_only_tuples": 0,
+  "post_parse_control_edges": 4,
+  "post_parse_differential_edges": 4,
+  "post_parse_edges_identical": true,
+  "overlay_file_sha256": {
+    "Dockerfile": "95d1bced71e9fbe48930f1632e7ee66d1f8060989d97461508cce45833de0dbe",
+    "build.py": "5543b8b5b28a0c9fd4f11fd952e03f4e2442f3342e5c3973b81e54d2f6f2775b"
+  }
+}
