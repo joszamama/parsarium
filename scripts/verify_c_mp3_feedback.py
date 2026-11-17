@@ -1,8 +1,10 @@
-"""Check the C plain MP3 AFL++ overlay: repeated control maps match and a second valid control differs.
+"""Check the C plain MP3 AFL++ overlays: repeated control maps match and a second valid control differs.
 
-The base project image replays the differential control against its pinned
-expected output. The AFL++ overlay then maps each valid control twice with
-afl-showmap; tuples must repeat exactly per control and differ between them.
+For each requested path (default: all), the base project image replays the
+differential control against its pinned expected output. The AFL++ overlay then
+maps each valid control REPEATS times with afl-showmap; tuples must repeat
+exactly per control and differ between them. Records of paths not requested are
+kept from the existing report with their own check time.
 """
 
 from datetime import datetime, timezone
@@ -11,13 +13,19 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 
 from run_case import ROOT, project_for
 
 
-SLUG = "mpg123"
-REPEATS = 2
+SCOPES = {
+    "mpg123": ("afl_clang_fast_libmpg123_and_harness_edges",
+               "AFL++ instruments only the pinned libmpg123 sources and the feed-API harness; no other library is compiled into /work/fuzzer."),
+    "libmad": ("afl_clang_fast_libmad_and_harness_edges",
+               "AFL++ instruments only the pinned libmad sources and the mad_stream_buffer/mad_frame_decode/mad_synth_frame harness; no other library is compiled into /work/fuzzer."),
+}
+REPEATS = 5
 REPORT = ROOT / "data/c/mp3/afl-feedback.json"
 
 
@@ -44,9 +52,9 @@ def showmap(manifest: dict, receipt: dict, case: Path, work: Path, name: str) ->
     return set((work / f"{name}.map").read_text().splitlines()) - {""}
 
 
-def main() -> None:
-    project, manifest = project_for("mp3", "c", SLUG)
-    relative = Path("mp3/c") / SLUG
+def check(slug: str) -> dict:
+    project, manifest = project_for("mp3", "c", slug)
+    relative = Path("mp3/c") / slug
     overlay = ROOT / "fuzzing/afl-native" / relative
     receipt = json.loads((overlay / "verification.json").read_text())
     base = json.loads((project / "verification.json").read_text())
@@ -65,7 +73,7 @@ def main() -> None:
         raise RuntimeError(f"differential control output mismatch: {observed}")
 
     maps: list[set[str]] = []
-    with tempfile.TemporaryDirectory(prefix="parsarium-mp3-c-") as temporary:
+    with tempfile.TemporaryDirectory(prefix=f"parsarium-mp3-c-{slug}-") as temporary:
         work = Path(temporary)
         for index, control in enumerate(controls):
             runs = [showmap(manifest, receipt, control, work, f"c{index}r{repeat}")
@@ -81,13 +89,13 @@ def main() -> None:
         raise RuntimeError("differential control did not change AFL++ feedback")
     print(f"{relative}: stable repeats; {len(maps[0])} vs {len(maps[1])} tuples, "
           f"{tuple_difference} edge ids differ", flush=True)
-    REPORT.write_text(json.dumps({
-        "schema_version": 1,
-        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+    kind, scope = SCOPES[slug]
+    return {
         "project": str(relative),
+        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
         "pass": True,
-        "feedback_kind": "afl_clang_fast_libmpg123_and_harness_edges",
-        "feedback_scope": "AFL++ instruments only the pinned libmpg123 sources and the feed-API harness; no other library is compiled into /work/fuzzer.",
+        "feedback_kind": kind,
+        "feedback_scope": scope,
         "base_project_receipt_sha256": sha256((project / "verification.json").read_bytes()).hexdigest(),
         "overlay_receipt_sha256": sha256((overlay / "verification.json").read_bytes()).hexdigest(),
         "base_image_id": base["image_id"],
@@ -103,6 +111,35 @@ def main() -> None:
         "first_afl_tuples": len(maps[0]),
         "second_afl_tuples": len(maps[1]),
         "afl_tuple_difference": tuple_difference,
+    }
+
+
+def previous() -> dict[str, dict]:
+    if not REPORT.exists():
+        return {}
+    report = json.loads(REPORT.read_text())
+    if report.get("schema_version") == 1:
+        record = {key: value for key, value in report.items() if key != "schema_version"}
+        return {record["project"]: record}
+    return {item["project"]: item for item in report["results"]}
+
+
+def main() -> None:
+    slugs = sys.argv[1:] or list(SCOPES)
+    unknown = set(slugs) - set(SCOPES)
+    if unknown:
+        raise SystemExit(f"unknown C MP3 paths: {sorted(unknown)}")
+    records = previous()
+    for slug in slugs:
+        records[f"mp3/c/{slug}"] = check(slug)
+    results = [records[f"mp3/c/{slug}"] for slug in SCOPES if f"mp3/c/{slug}" in records]
+    REPORT.write_text(json.dumps({
+        "schema_version": 2,
+        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+        "projects_total": len(results),
+        "projects_passed": sum(item["pass"] for item in results),
+        "pass": all(item["pass"] for item in results),
+        "results": results,
     }, indent=2) + "\n")
 
 
