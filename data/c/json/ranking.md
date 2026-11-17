@@ -1,6 +1,6 @@
 # C × JSON: selected parsers (pilot)
 
-Nine verified third-party paths, ranked by one Debian metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Nine verified third-party paths, ranked by one Debian metric. The ceiling is ten. The tenth slot stays open: no remaining lead with a positive Debian count passes the valid controls, and parson has no Debian source (stars are allowed only in PLY cells).
 
 ## Adoption metric
 
@@ -41,9 +41,9 @@ yajl 2.1.0 (Debian source `yajl`, same version; the last upstream release, from 
 | [parson](https://github.com/kgabis/parson) | unavailable | Verified technically; no Debian source package |
 | [frozen](https://github.com/cesanta/frozen) | 16 | Fails the nested-object control |
 | [jsmn](https://github.com/zserge/jsmn) | 11 | Tokenizer only; not eligible for the value gate |
-| [liblaxjson](https://github.com/andrewrk/liblaxjson) | 1 | Not control-tested |
+| [liblaxjson](https://github.com/andrewrk/liblaxjson) | 1 | Fails the nested-object control; numbers only as doubles ([evidence](liblaxjson-lead-check.json)) |
 
-frozen 1.7's `json_walk` types tokens but leaves values as raw spans; its `json_unescape` turns the control's `\u00e9` into the single byte 0xE9 rather than UTF-8, so the nested-object control cannot match. jsmn reports only object/array/string/primitive token spans without decoding strings or typing primitives, so the harness would have to interpret JSON itself. parson 1.5.4 passed both controls, 530 own lines and 34 stable AFL++ tuple differences in candidate commit 271447a6, but has no Debian source package and so no primary value; stars are not an allowed fallback outside PLY cells.
+frozen 1.7's `json_walk` types tokens but leaves values as raw spans; its `json_unescape` turns the control's `\u00e9` into the single byte 0xE9 rather than UTF-8, so the nested-object control cannot match. liblaxjson 1.0.5 (MIT, archive SHA-256 `ffc495b5…`) rejects the nested-object control at `-0.25e1`, because its exponent state requires an explicit `+` or `-`, and delivers every number through a single `atof()` double callback, so integer/float kinds cannot be observed. jsmn reports only object/array/string/primitive token spans without decoding strings or typing primitives, so the harness would have to interpret JSON itself. parson 1.5.4 passed both controls, 530 own lines and 34 stable AFL++ tuple differences in candidate commit 271447a6, but has no Debian source package and so no primary value; stars are not an allowed fallback outside PLY cells.
 
 ## Search
 

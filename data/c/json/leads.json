@@ -94,13 +94,15 @@
   },
   {
     "name": "liblaxjson",
-    "status": "unresolved",
+    "status": "unresolved_failed_control",
     "language": "C",
     "debian_source": "liblaxjson",
     "popcon_installed": 1,
     "popcon_rank": 40395,
     "found_by": "Debian source-name search 'json'",
-    "reason": "Lax (non-strict) SAX-style C JSON reader with 1 Debian installation; not control-tested within the six-path verification budget.",
-    "source": "https://github.com/andrewrk/liblaxjson"
+    "reason": "lax_json_feed/lax_json_eof with event callbacks rejects the nested-object control at -0.25e1 ('unexpected character': its exponent state requires an explicit '+' or '-' sign, which RFC 8259 makes optional), and every number reaches the only number callback as an atof() double, so integer/float kinds are not observable on either control. Not selected; 1 Debian installation.",
+    "source": "https://github.com/andrewrk/liblaxjson",
+    "release_checked": "1.0.5 (archive SHA-256 ffc495b5837e703b13af3f5a5790365dc3a6794f12f0fa93fb8593b162b0b762, MIT)",
+    "evidence": "data/c/json/liblaxjson-lead-check.json"
   }
 ]

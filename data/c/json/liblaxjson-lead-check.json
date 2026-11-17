@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "name": "liblaxjson",
+  "checked_at_utc": "2026-11-17T22:45:00+00:00",
+  "status": "unresolved_failed_control",
+  "release": "1.0.5",
+  "source_archive": "https://github.com/andrewrk/liblaxjson/archive/refs/tags/1.0.5.tar.gz",
+  "source_archive_sha256": "ffc495b5837e703b13af3f5a5790365dc3a6794f12f0fa93fb8593b162b0b762",
+  "license": "MIT (COPYING)",
+  "documented_input_api": "lax_json_create(); lax_json_feed(context, int size, const char *data); lax_json_eof(context), with string/number/primitive/begin/end callbacks (include/laxjson.h, README usage)",
+  "documentation": "https://github.com/andrewrk/liblaxjson/blob/1.0.5/README.md",
+  "popularity": {
+    "metric": "Debian popcon sourcemax installations, source package liblaxjson",
+    "value": 1,
+    "rank": 40395,
+    "snapshot_sha256": "9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8"
+  },
+  "probe": "Throwaway event printer compiled with clang against the pinned laxjson.c in the pinned ubuntu base image (linux/arm64); it fed each valid control in one lax_json_feed call, then lax_json_eof, and printed each callback. Not committed as a project.",
+  "controls": {
+    "controls/json/nested-object.json": {
+      "sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "result": "rejected: lax_json_feed returned 'unexpected character' at the value -0.25e1 of member \"ratio\", after delivering name, version (as double 1) and the ratio key",
+      "cause": "LaxJsonStateNumberExponentSign accepts only '+' or '-' after 'e'/'E'; RFC 8259 makes the exponent sign optional. An exponent is also accepted only after a fraction part."
+    },
+    "controls/json/nested-array.json": {
+      "sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "result": "accepted with the full event sequence, but the integer 1 arrives as the double 1 through the only number callback, int (*number)(context, double); 2.5e-1 arrives as 0.25",
+      "cause": "laxjson.c converts every number with atof() and has no integer callback or retained literal, so the cell's order- and number-kind-preserving oracle cannot be satisfied without the harness reinterpreting the source text."
+    }
+  },
+  "decision": "Not selected. The nested-object control fails, and number kinds are not observable on either control. With 1 Debian installation it also has the weakest possible positive signal. It stays a lead with this evidence; the tenth C JSON slot is left open.",
+  "scope": "Valid controls only; no malformed-input, resource-use or fuzzing experiments."
+}
