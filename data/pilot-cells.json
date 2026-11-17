@@ -94,6 +94,71 @@
       "complete": false
     },
     {
+      "ecosystem": "c",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 90,
+      "unique_search_hits": 90,
+      "search_totals": {
+        "yaml": 90
+      },
+      "leads_recorded": 3,
+      "leads_by_status": {
+        "selected": 2,
+        "unresolved": 1
+      },
+      "ranking_metric": "Debian popcon sourcemax/by_inst installations of the lead's source package",
+      "uncertainty": "2 C YAML path(s) pass both schema-neutral YAML controls with the exact typed tree, parser source coverage and stable AFL++ feedback. C YAML libraries return scalars as text with a style and do not resolve plain scalars to types, so the harnesses type plain scalars with the YAML 1.2 core-schema patterns; structure, escapes, block scalars, document markers and alias expansion come from the parser, while the int/float/bool/null distinction is adapter-side. libyaml is the family under PyYAML's CLoader, PHP ext-yaml, Ruby Psych (the controls' cross-check) and Rust unsafe-libyaml, so it is not independent of those paths. Unselected leads: libcyaml (see leads.json). The bounded Debian source-name search for 'yaml' (90 hits) is in the registry snapshot. Debian installations mostly reflect dependencies and miss vendored copies. The controls do not test tags, merge keys, multi-document streams, complex keys, YAML 1.1-only scalars or malformed input. ISO C documents no YAML API.",
+      "runtime_evidence": "data/c/yaml/standard.json",
+      "registry_snapshot": "data/c/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/c/yaml/leads.json",
+      "selection": "Control-verified C YAML paths ranked by Debian popcon sourcemax installations from the pinned snapshot: libyaml 0.2.5 (204,120), libfyaml 0.9.6 (7,482).",
+      "third_party_evidence": "data/c/yaml/parsers.json",
+      "third_party_control_results": "data/c/yaml/verification.json",
+      "libyaml_source_lock": "projects/yaml/c/libyaml/source-lock.json",
+      "libfyaml_source_lock": "projects/yaml/c/libfyaml/source-lock.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "c",
+      "format": "toml",
+      "status": "pilot_search_bounded_none_selected",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 0,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml (case-insensitive substring 'toml' in Debian source-package names)",
+        "toml (case-insensitive substring 'toml' in Debian binary-package names)",
+        "toml (case-insensitive Conan Center recipe-name substring)"
+      ],
+      "search_totals": {
+        "toml (case-insensitive substring 'toml' in Debian source-package names)": 40,
+        "toml (case-insensitive substring 'toml' in Debian binary-package names)": 57,
+        "toml (case-insensitive Conan Center recipe-name substring)": 3
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 86,
+      "unresolved_documentation_leads": 4,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 3 queries, 100 recorded hits (86 unique), at most 100 per query. No C TOML library appears in Debian popcon or Conan Center, so no C path has the primary metric or a Debian fallback of at least 1,000, and none is selected. tomlc17 R261116 and toml-c (tomlc99 fork, commit 6a38d404) passed both valid controls with exact typed trees, parser coverage and stable AFL++ feedback; they stay unresolved_no_primary_metric leads with that evidence. tomlc99 (commit 62ce93ce) rejects the second control (\"expect hex char\" on a lowercase \\u escape); libtoml targets TOML 0.4.0 and was not run. Zero selected is not evidence that no C TOML parser is used.",
+      "primary_metric": "Debian popcon installations (none packaged)",
+      "registry_snapshot": "data/c/toml/registry-snapshot.json",
+      "unresolved_leads": "data/c/toml/leads.json",
+      "runtime_evidence": "data/c/toml/standard.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "cpp",
       "format": "json",
       "status": "pilot_nine_selected_search_bounded",
@@ -165,6 +230,79 @@
       "complete": false
     },
     {
+      "ecosystem": "cpp",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 90,
+      "unique_search_hits": 90,
+      "search_totals": {
+        "yaml": 90
+      },
+      "leads_recorded": 3,
+      "leads_by_status": {
+        "selected": 2,
+        "unresolved": 1
+      },
+      "ranking_metric": "Debian popcon sourcemax/by_inst installations of the lead's source package",
+      "uncertainty": "2 verified C++ YAML paths. The bounded Debian source-name search ('yaml', 90 hits in the pinned sourcemax snapshot) found yaml-cpp and rapidyaml; unresolved leads: fkyaml (fkYAML is not packaged in Debian and has no primary value). yaml-cpp keeps plain scalars untyped, so its harness types plain scalars with YAML 1.2 core-schema patterns and converts them with Node::as<T>; this is adapter-side typing. rapidyaml likewise keeps scalars as text with quote/style flags, and its harness applies the same core-schema patterns before converting with ryml's own atoi/atof; adapter-side typing. rapidyaml's 56 installations are a very weak package proxy. Package installations are not YAML-specific use. Two schema-neutral valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars, complex keys or malformed-input behavior. rapidyaml's AFL++ overlay is built without AddressSanitizer because ASan made 3 of about 4,008 tuples vary between identical replays; without it, eight replays per control repeat exactly.",
+      "runtime_evidence": "data/cpp/yaml/standard.json",
+      "registry_snapshot": "data/cpp/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/cpp/yaml/leads.json",
+      "selection": "2 control-verified C++ YAML paths ranked by Debian popcon sourcemax installations: yaml-cpp 0.9.0 (9,629), rapidyaml 0.16.0 (56). Each has its own scanner and parser; no shared family.",
+      "third_party_evidence": "data/cpp/yaml/parsers.json",
+      "third_party_control_results": "data/cpp/yaml/verification.json",
+      "source_lock": "projects/yaml/cpp/yaml-cpp/source-lock.json",
+      "rapidyaml_source_lock": "projects/yaml/cpp/rapidyaml/source-lock.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "cpp",
+      "format": "toml",
+      "status": "pilot_three_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 3,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml (case-insensitive substring 'toml' in Debian source-package names)",
+        "toml (case-insensitive substring 'toml' in Debian binary-package names)",
+        "toml (case-insensitive Conan Center recipe-name substring)"
+      ],
+      "search_totals": {
+        "toml (case-insensitive substring 'toml' in Debian source-package names)": 40,
+        "toml (case-insensitive substring 'toml' in Debian binary-package names)": 57,
+        "toml (case-insensitive Conan Center recipe-name substring)": 3
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 86,
+      "unresolved_documentation_leads": 0,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 3 queries, 100 recorded hits (86 unique), at most 100 per query. 3 C++ TOML paths (toml++, toml11, cpptoml) print the exact typed tree for both valid controls and show scoped parser source coverage and stable, input-dependent AFL++ feedback (parser-only probes, function- and file-scoped allowlists, three identical repeats per control). The two lower ranks rest on very small counts: toml11 15 installations (0 recent, all no_files) and cpptoml 5 (0 recent). cpptoml 0.1.1 is a 2018 release that targets TOML 0.5.0 and needs <limits> included before its header on the pinned libstdc++; it passes both TOML 1.0.0 controls, which establish only that subset. No other C++ TOML parser appears in the Debian or Conan Center searches; libraries outside these surfaces are not counted. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "Debian popcon installations, source package (sourcemax/by_inst)",
+      "registry_snapshot": "data/cpp/toml/registry-snapshot.json",
+      "unresolved_leads": "data/cpp/toml/leads.json",
+      "runtime_evidence": "data/cpp/toml/standard.json",
+      "ranking_metric": "Debian popcon installations, source package (sourcemax/by_inst)",
+      "selection": "3 control-verified C++ TOML packages rank by Debian source-package sourcemax installations: toml++ 3.4.0 (3,536), toml11 4.4.0 (15), cpptoml 0.1.1 (5). Every lead in the bounded search was tried; 7 of ten slots stay open.",
+      "third_party_evidence": "data/cpp/toml/parsers.json",
+      "third_party_control_results": "data/cpp/toml/verification.json",
+      "afl_feedback": "data/cpp/toml/afl-feedback.json",
+      "tomlplusplus_source_lock": "projects/toml/cpp/tomlplusplus/source-lock.json",
+      "toml11_source_lock": "projects/toml/cpp/toml11/source-lock.json",
+      "cpptoml_source_lock": "projects/toml/cpp/cpptoml/source-lock.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "go",
       "format": "json",
       "status": "pilot_ten_selected_search_bounded",
@@ -219,6 +357,74 @@
       "registry_snapshot": "data/go/xml/registry-snapshot.json",
       "unresolved_leads": "data/go/xml/leads.json",
       "protocol": "catalog/xml/PROTOCOL.md",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "go",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "yaml": null
+      },
+      "leads_recorded": 6,
+      "leads_by_status": {
+        "selected": 2,
+        "shared_family": 3,
+        "unresolved": 1
+      },
+      "ranking_metric": "pkg.go.dev Imported by package count",
+      "uncertainty": "Two verified Go YAML paths: gopkg.in/yaml.v2 v2.4.0 (60,161 Imported by); gopkg.in/yaml.v3 v3.0.1 (44,731 Imported by). Each decodes the two schema-neutral controls into the hand-written oracle typed tree (Psych cross-checked) with Go coverpkg source coverage of the pinned module and three identical AFL++ runs per control whose feedback differs between controls. go-yaml carries a Go translation of the libyaml scanner/parser (MIT-licensed files), so it shares lexical lineage with C libyaml and its bindings without sharing code or cgo. yaml.v2 resolves plain scalars with YAML 1.1 rules; the controls avoid every scalar where that differs from the 1.2 core schema. yaml.v2 and yaml.v3 come from the same go-yaml project and both carry Go translations of the libyaml scanner and parser, so they are one lineage with separate code bases per major version, not independent engines. github.com/goccy/go-yaml (2,983) remains an unresolved lead; ghodss/yaml, sigs.k8s.io/yaml and go.yaml.in/yaml/v3 are shared-family wrappers or continuations and are not run. The bounded search is one pkg.go.dev query (yaml, first 100 hits, captured 2026-11-17); Imported by counts package adoption, not YAML-specific use. The controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars.",
+      "third_party_evidence": "data/go/yaml/parsers.json",
+      "third_party_control_results": "data/go/yaml/verification.json",
+      "afl_feedback": "data/go/yaml/afl-feedback.json",
+      "runtime_evidence": "data/go/yaml/standard.json",
+      "registry_snapshot": "data/go/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/go/yaml/leads.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "go",
+      "format": "toml",
+      "status": "pilot_two_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml",
+        "toml parser",
+        "toml decoder"
+      ],
+      "search_totals": {
+        "toml": null,
+        "toml parser": null,
+        "toml decoder": null
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 300,
+      "unique_search_hits": 263,
+      "unresolved_documentation_leads": 6,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 3 pkg.go.dev queries, 300 recorded hits (263 unique), at most 100 per query. Two Go TOML paths pass both valid controls with the exact typed tree, parser-source coverage and stable AFL++ feedback: BurntSushi/toml v1.6.0 (38,240 Imported by; 585 own lines on service-config, 385/420 AFL++ tuples, 169 differ) and pelletier/go-toml/v2 v2.4.3 (1,986; 739 lines, 482/480 tuples, 342 differ). Each uses its own lexer/parser; they share no code. Higher-ranked pelletier/go-toml v1.9.5 (3,687) fails the typed-scalars control on a local date followed by a newline, and naoina/toml v0.1.1 (2,071) rejects the TOML 0.5 octal integer 0o755; both stay leads, so ranks cover verified paths only. 6 parser leads remain unresolved. BurntSushi/toml marks local date-times, dates and times only by the names of fixed time zones it attaches to time.Time (datetime-local, date-local, time-local), not by distinct Go types. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "pkg.go.dev Imported by package count",
+      "registry_snapshot": "data/go/toml/registry-snapshot.json",
+      "unresolved_leads": "data/go/toml/leads.json",
+      "runtime_evidence": "data/go/toml/standard.json",
+      "third_party_evidence": "data/go/toml/parsers.json",
+      "third_party_control_results": "data/go/toml/verification.json",
+      "afl_feedback": "data/go/toml/afl-feedback.json",
+      "protocol": "catalog/toml/PROTOCOL.md",
       "phase": "pilot",
       "complete": false
     },
@@ -278,6 +484,75 @@
       "registry_snapshot": "data/java/xml/registry-snapshot.json",
       "unresolved_leads": "data/java/xml/leads.json",
       "protocol": "catalog/xml/PROTOCOL.md",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "java",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "yaml": 855
+      },
+      "leads_recorded": 5,
+      "leads_by_status": {
+        "fails_control": 1,
+        "selected": 2,
+        "unresolved": 2
+      },
+      "ranking_metric": "deps.dev directDependentCount summed over every Maven release",
+      "uncertainty": "Two verified Java YAML paths: SnakeYAML 2.7 (YAML 1.1 SafeConstructor) and SnakeYAML Engine 3.2 (YAML 1.2, CoreSchema configured), separately maintained code bases with shared lineage. jackson-dataformat-yaml 2.23.0, the top lead by deps.dev summed dependents (32,860), parses every scalar and collection of both controls but returns aliases as anchor-name strings through YAMLMapper.readTree, so it fails the alias part of the control and stays a lead in the SnakeYAML family. SnakeYAML Engine's default JsonSchema reads ~ as a string; the selected path sets the documented CoreSchema. yamlbeans and eo-yaml (134 and 89) are not yet run. The bounded Maven Central search (query yaml, first 100 of 855 hits) and five named leads are recorded; deps.dev summed directDependentCount counts package adoption, not YAML-specific use. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars. Coverage and AFL++ feedback are SnakeYAML and Engine source lines under JaCoCo; the control differences are in the scanner, parser and constructors.",
+      "runtime_evidence": "data/java/yaml/standard.json",
+      "registry_snapshot": "data/java/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/java/yaml/leads.json",
+      "third_party_evidence": "data/java/yaml/parsers.json",
+      "third_party_control_results": "data/java/yaml/verification.json",
+      "afl_feedback": "data/java/yaml/afl-feedback.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "java",
+      "format": "toml",
+      "status": "pilot_three_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 3,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml",
+        "toml parser"
+      ],
+      "search_totals": {
+        "toml": 335,
+        "toml parser": 1
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 101,
+      "unique_search_hits": 101,
+      "unresolved_documentation_leads": 6,
+      "leads_by_status": {
+        "unresolved_control_failed": 1,
+        "unresolved_not_run": 5
+      },
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 2 queries, 101 recorded hits (101 unique), at most 100 per query. Three Java TOML package/API paths are control-verified on both fixed controls and runnable: jackson-dataformat-toml 2.23.0 (own JFlex lexer and parser; jackson-core/databind are shared with the Java JSON cell, and date/time types need the documented, default-off TomlReadFeature.PARSE_JAVA_TIME), tomlj 2.2.0 (ANTLR-generated lexer/parser pinned to TOML 1.0.0; the shaded ANTLR runtime is outside the coverage scope) and night-config toml 3.9.0 (own hand-written parser over the format-neutral night-config core). They are three separate parser families. toml4j 0.7.2 (TOML 0.4.0) parses the primary control but rejects the hexadecimal integer of the second control and stays a lead; 5 lower-metric leads were not run. deps.dev counts measure package adoption, not TOML-specific use. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "deps.dev directDependentCount summed over all releases",
+      "third_party_evidence": "data/java/toml/parsers.json",
+      "third_party_control_results": "data/java/toml/verification.json",
+      "afl_feedback": "data/java/toml/afl-feedback.json",
+      "registry_snapshot": "data/java/toml/registry-snapshot.json",
+      "unresolved_leads": "data/java/toml/leads.json",
+      "runtime_evidence": "data/java/toml/standard.json",
       "phase": "pilot",
       "complete": false
     },
@@ -343,6 +618,77 @@
       "complete": false
     },
     {
+      "ecosystem": "javascript",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "yaml": 41087
+      },
+      "leads_recorded": 5,
+      "leads_by_status": {
+        "selected": 2,
+        "shared_family": 2,
+        "unresolved": 1
+      },
+      "ranking_metric": "npm downloads in the last month",
+      "uncertainty": "Two verified third-party YAML paths (js-yaml 5.5.0, yaml 2.9.1), selected in descending npm last-month order from the bounded npm search (query 'yaml', first 100 of 41087 hits) and five named leads. js-yaml 5.5.0 ships one bundled dist/js-yaml.cjs.js containing its own YAML 1.2 event parser (parseEvents) and constructor (constructFromEvents). yaml 2.9.1 has its own Lexer and Parser (dist/parse/lexer.js, parser.js) producing a CST that the Composer (dist/compose/) turns into Document nodes; toJS() resolves aliases. Each adapter decodes local bytes as strict UTF-8, calls the documented text API with default (YAML 1.2 core) options and maps the result to the Parsarium typed tree. JavaScript numbers lose YAML's int/float distinction, so a finite integral number is typed int; the controls contain no integral-valued floats or integer-like keys, so this cannot change the result. 3 leads remain unverified (yaml-ast-parser, @stoplight/yaml, yamljs); yaml-ast-parser and @stoplight/yaml are js-yaml 3.x lineage. npm downloads measure package adoption, largely transitive, not YAML parsing volume. Two schema-neutral valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed-input behavior.",
+      "runtime_evidence": "data/javascript/yaml/standard.json",
+      "registry_snapshot": "data/javascript/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/javascript/yaml/leads.json",
+      "third_party_evidence": "data/javascript/yaml/parsers.json",
+      "third_party_control_results": "data/javascript/yaml/verification.json",
+      "afl_feedback": [
+        "data/javascript/yaml/js-yaml-valid-feedback.json",
+        "data/javascript/yaml/yaml-valid-feedback.json"
+      ],
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "javascript",
+      "format": "toml",
+      "status": "pilot_two_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml",
+        "toml parser",
+        "toml parse"
+      ],
+      "search_totals": {
+        "toml": 5678,
+        "toml parser": 57114,
+        "toml parse": 55373
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 300,
+      "unique_search_hits": 239,
+      "unresolved_documentation_leads": 9,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 3 npm queries, 300 recorded hits (239 unique), at most 100 per query. Two JavaScript TOML paths pass both valid controls with the exact typed tree, package parser-source coverage and stable AFL++ feedback: smol-toml 1.9.1 (252,264,468 downloads; parse(text, {integersAsBigInt: true}); 748 package lines on service-config, 151/211 AFL++ tuples, 118 differ) and toml-eslint-parser 1.0.3 (7,684,028; typed tree assembled from its parseTOML syntax tree; 1,586 lines, 301/369 tuples, 156 differ). They share no code. smol-toml types integers only with its documented integersAsBigInt option; without it integers and floats are both Numbers. Higher-ranked confbox 0.3.2 (414,804,968) bundles a minified copy of smol-toml but calls it without options, and toml 5.0.1 (164,115,023) and @iarna/toml 2.2.5 (46,454,916) also return integers and floats as plain Numbers, so all three return float 1e3 as the Number 1000 and fail the typed-scalars control; toml 5.0.1 also returns local dates and times as plain strings. They stay leads, so ranks cover verified paths only. 9 parser leads remain unresolved. Line counts use V8 source ranges, so module top-level lines of loaded files count as covered. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "npm downloads, last month",
+      "registry_snapshot": "data/javascript/toml/registry-snapshot.json",
+      "unresolved_leads": "data/javascript/toml/leads.json",
+      "runtime_evidence": "data/javascript/toml/standard.json",
+      "third_party_evidence": "data/javascript/toml/parsers.json",
+      "third_party_control_results": "data/javascript/toml/verification.json",
+      "afl_feedback": "data/javascript/toml/afl-feedback.json",
+      "protocol": "catalog/toml/PROTOCOL.md",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "python",
       "format": "json",
       "status": "pilot_ten_selected_search_bounded",
@@ -396,6 +742,72 @@
       "registry_snapshot": "data/python/xml/leads.json",
       "unresolved_leads": "data/python/xml/leads.json",
       "source_lock": "data/python/xml/source-lock.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "python",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "project name contains 'yaml'"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "project name contains 'yaml'": 798
+      },
+      "leads_recorded": 7,
+      "leads_by_status": {
+        "selected": 2,
+        "shared_family": 3,
+        "unresolved": 2
+      },
+      "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "uncertainty": "Two verified third-party paths, in PyPI last_month order: PyYAML 6.0.3 through the pure-Python yaml.SafeLoader (1,227,712,536 last-month downloads; YAML 1.1 resolvers; the libyaml CSafeLoader route is a separate unresolved lead); ruamel.yaml 0.19.1 through YAML(typ='safe', pure=True) (177,667,165; PyYAML-derived scanner/parser lineage, YAML 1.2 resolver). Each gives the hand-written typed tree on both schema-neutral YAML controls through bytes, decoded str and a local binary stream, with Python line coverage of its own package and three identical AFL++ line-bridge runs per control whose controls differ in scanner.py and parser.py lines. ruamel.yaml derives from PyYAML's pure-Python loader, so the two selected paths share a code lineage though they are separate, separately maintained code bases. The bounded search (project name contains 'yaml'; first 100 alphabetical hits of 798, captured 2026-11-17) and named leads are recorded; remaining leads (strictyaml and oyaml/yamlcore as wrappers, rapidyaml, and PyYAML's CSafeLoader route) are unverified. Package adoption is not YAML-specific use. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys, YAML 1.1-only scalars or malformed input.",
+      "third_party_evidence": "data/python/yaml/parsers.json",
+      "third_party_control_results": "data/python/yaml/verification.json",
+      "runtime_evidence": "data/python/yaml/standard.json",
+      "registry_snapshot": "data/python/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/python/yaml/leads.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "python",
+      "format": "toml",
+      "status": "pilot_two_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 1,
+      "search_queries": [
+        "project name contains 'toml'",
+        "targeted PyPI and PyPI Stats lookups for 11 named TOML packages"
+      ],
+      "search_totals": {
+        "project name contains 'toml'": 409
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "unresolved_documentation_leads": 6,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 1 query, 100 recorded hits (100 unique), at most 100 per query; the PyPI Simple index has no relevance order and the name filter matches unrelated names, so the leads come from targeted lookups. Two third-party paths pass both valid controls with exact hand-written typed trees, parser-scoped Python line coverage and AFL++ feedback: tomlkit 0.15.2 (591,365,129 PyPI Stats last-month downloads; 845 package lines, 408 in parser.py; controls differ by 401 AFL++ tuples) and tomli 2.5.0 (263,305,223; 284 lines, 259 in _parser.py; controls differ by 137 tuples), three identical runs per control each. tomli is the same code family as the standard tomllib API (a vendored copy), so the two are not independent; the hand-written trees are tomli's independent check. Only tomli's pure-Python wheel is measured, not its mypyc-compiled wheels. tomlkit is an independent style-preserving parser; its downloads mostly reflect Poetry and other tool installs. toml 0.10.2 (145,147,540) fails typed-scalars: it drops the fractional seconds of the local time 00:32:00.25. rtoml (Rust toml crate via PyO3) was not attempted, since it needs a source build with Rust parser coverage; pytoml, pytomlpp, toml-rs and qtoml remain unrun leads. The standard tomllib API passed both controls on a host run. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "registry_snapshot": "data/python/toml/registry-snapshot.json",
+      "unresolved_leads": "data/python/toml/leads.json",
+      "runtime_evidence": "data/python/toml/standard.json",
+      "third_party_evidence": "data/python/toml/parsers.json",
+      "third_party_control_results": [
+        "projects/toml/python/tomlkit/verification.json",
+        "projects/toml/python/tomli/verification.json"
+      ],
+      "third_party_control_summary": "data/python/toml/verification.json",
       "phase": "pilot",
       "complete": false
     },
@@ -499,6 +911,78 @@
       "complete": false
     },
     {
+      "ecosystem": "rust",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "yaml": 11139
+      },
+      "leads_recorded": 10,
+      "leads_by_status": {
+        "selected": 2,
+        "shared_family": 3,
+        "unresolved": 5
+      },
+      "ranking_metric": "crates.io recent_downloads (90 days)",
+      "uncertainty": "2 verified Rust YAML paths (serde_yaml, yaml-rust) out of 10 named leads from the bounded crates.io search (yaml; first 100 of 11,139 hits, captured 2026-11-17), checked in crates.io 90-day recent_downloads order. serde_yaml is in the libyaml family: it drives unsafe-libyaml, a c2rust translation of libyaml, whose lead is recorded as shared family rather than a second path; serde_yml and serde_norway are serde_yaml forks over the same family. yaml-rust has its own pure-Rust scanner and parser; yaml-rust2, saphyr and saphyr-parser continue that code base and remain unverified leads of the same lineage, as does serde-saphyr. serde_yaml is archived upstream (+deprecated) and yaml-rust is unmaintained; both still lead the download metric, which counts transitive installs, not YAML-specific use. The two schema-neutral controls do not test tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars.",
+      "third_party_evidence": "data/rust/yaml/parsers.json",
+      "third_party_control_results": [
+        "projects/yaml/rust/serde_yaml/verification.json",
+        "projects/yaml/rust/yaml_rust/verification.json"
+      ],
+      "runtime_evidence": "data/rust/yaml/standard.json",
+      "registry_snapshot": "data/rust/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/rust/yaml/leads.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "rust",
+      "format": "toml",
+      "status": "pilot_two_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml",
+        "toml parser",
+        "toml deserialize"
+      ],
+      "search_totals": {
+        "toml": 71635,
+        "toml parser": 8178,
+        "toml deserialize": 6540
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 300,
+      "unique_search_hits": 283,
+      "unresolved_documentation_leads": 7,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 3 crates.io queries, 300 recorded hits (283 unique), at most 100 per query. Two paths are verified: toml 1.2.1+spec-1.1.0 and toml_edit 0.25.19+spec-1.1.0. Both lex and parse through the same toml_parser 1.1.5 crate and build their own trees from its events, so they are one parser family with two tree builders, not two independent parsers; their coverage is recorded separately for the own crate and for toml_parser. basic-toml 0.1.10 and toml-span 0.7.2 have no datetime type and reject both controls at the first offset date-time, so they stay leads. 7 leads remain, five of them not run (toml_parser has no value tree). The pinned releases implement TOML 1.1.0; two valid TOML 1.0.0 controls establish only the tested subset; malformed input, huge documents and TOML 1.1 features are untested. Recent downloads include transitive dependency pulls (Cargo itself depends on toml and toml_edit). toml_edit stores tables in IndexMaps with std RandomState hashing; without the overlay's getrandom AFL_PRELOAD shim, 1 of 5 afl-showmap runs on service-config.toml gave 1,546 instead of 1,530 tuples (checked 2026-11-17), so its overlay fixes the hash keys (afl_fixed_hashmap_keys) and then repeats are identical.",
+      "primary_metric": "crates.io recent downloads (90 days)",
+      "registry_snapshot": "data/rust/toml/registry-snapshot.json",
+      "unresolved_leads": "data/rust/toml/leads.json",
+      "runtime_evidence": "data/rust/toml/standard.json",
+      "third_party_evidence": "data/rust/toml/parsers.json",
+      "third_party_control_results": [
+        "projects/toml/rust/toml/verification.json",
+        "projects/toml/rust/toml_edit/verification.json"
+      ],
+      "protocol": "catalog/toml/PROTOCOL.md",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "php",
       "format": "json",
       "status": "pilot_nine_selected_search_bounded",
@@ -573,6 +1057,88 @@
       "registry_snapshot": "data/php/xml/registry-snapshot.json",
       "unresolved_leads": "data/php/xml/leads.json",
       "protocol": "catalog/xml/PROTOCOL.md",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "php",
+      "format": "yaml",
+      "status": "pilot_one_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 1,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "yaml": 1954
+      },
+      "leads_recorded": 3,
+      "leads_by_status": {
+        "excluded": 2,
+        "unresolved": 1
+      },
+      "ranking_metric": "Packagist lifetime downloads",
+      "uncertainty": "One verified PHP YAML path. symfony/yaml v8.1.11 parses both schema-neutral valid controls through the documented Yaml::parse(string) with Yaml::PARSE_OBJECT_FOR_MAP into exact ordered typed trees; without that flag mappings become PHP arrays and {} cannot be told from []. Xdebug covers 570 package lines (365 in Parser.php); the parser-line AFL++ bridge repeats identically three times per control and the controls differ by 61 lines and 61 tuples, all in Parser.php, Inline.php and Unescaper.php. mustangostang/spyc 0.6.3 is excluded: it leaves \\u and \\t escapes undecoded, drops the final line break of clip-chomped block scalars, misreads '|-' with more-indented lines and returns '...' as a sequence item. dallgoot/yaml 1.0.1 (372,583) is excluded: it leaves \\\" and \\t escapes and the single-quoted '' escape undecoded. The PECL yaml extension (libyaml family; no Packagist metric) remains an unverified lead. The bounded Packagist search used one query ('yaml', first 100 of 1,954 hits). Packagist downloads are package adoption, mostly transitive through Symfony and Laravel, not YAML parsing frequency. Two valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed-input behavior.",
+      "runtime_evidence": "data/php/yaml/standard.json",
+      "registry_snapshot": "data/php/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/php/yaml/leads.json",
+      "selection": "symfony/yaml v8.1.11 (926,050,815 Packagist downloads), the top lead, is verified: an own pure-PHP parser (Parser.php, Inline.php, Unescaper.php). mustangostang/spyc 0.6.3 (51,101,645), the second lead, is excluded after a pinned probe failed both valid controls; dallgoot/yaml 1.0.1 (372,583), the third, is excluded after failing the primary control.",
+      "third_party_evidence": "data/php/yaml/parsers.json",
+      "third_party_control_results": "data/php/yaml/verification.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "php",
+      "format": "toml",
+      "status": "pilot_two_selected_search_bounded",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "toml",
+        "toml parser"
+      ],
+      "search_totals": {
+        "toml": 14635,
+        "toml parser": 83
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 183,
+      "unique_search_hits": 162,
+      "unresolved_documentation_leads": 13,
+      "uncertainty": "Bounded TOML search captured 2026-11-17: 2 queries, 183 recorded hits (162 unique), at most 100 per query. Two paths are verified on both valid controls: internal/toml 1.1.3 and php-collective/toml 0.1.5. Neither array API keeps the TOML scalar kinds (internal/toml returns local date-times and local dates as DateTimeImmutable like offset date-times and local times as strings; php-collective/toml returns all three local kinds as strings), so each harness reads the kinds from the library's documented AST value nodes and requires the AST walk to place exactly the values the library's own array assembly returns. The two most downloaded leads failed the typed-scalars control: yosymfony/toml v1.0.4 (TOML 0.4.0) rejects the hexadecimal integer, and devium/toml 1.1.1 stores the local time fraction .25 as 25 milliseconds. 13 leads remain unresolved, 11 of them not yet run (low-download or old-draft packages). Packagist lifetime downloads measure historical adoption, not TOML parsing frequency. Two valid controls establish only the tested TOML 1.0.0 subset; empty tables (indistinguishable from empty arrays in PHP), malformed input, huge documents and TOML 1.1 features are untested.",
+      "primary_metric": "Packagist total downloads",
+      "registry_snapshot": "data/php/toml/registry-snapshot.json",
+      "unresolved_leads": "data/php/toml/leads.json",
+      "runtime_evidence": "data/php/toml/standard.json",
+      "selection": "Two Packagist-ranked paths passed both valid controls with exact typed trees, parser-source line coverage and stable AFL++ feedback: internal/toml 1.1.3 (325,891 downloads) and php-collective/toml 0.1.5 (28,378). Both are read through their documented AST because their array APIs drop the local date/time kinds.",
+      "third_party_evidence": "data/php/toml/verification.json",
+      "third_party_control_results": [
+        {
+          "package": "internal/toml",
+          "version": "1.1.3",
+          "pass": true,
+          "project_receipt": "projects/toml/php/internal_toml/verification.json",
+          "second_valid_control_pass": true,
+          "feedback_receipt": "data/php/toml/internal-toml-feedback-differential.json"
+        },
+        {
+          "package": "php-collective/toml",
+          "version": "0.1.5",
+          "pass": true,
+          "project_receipt": "projects/toml/php/php_collective_toml/verification.json",
+          "second_valid_control_pass": true,
+          "feedback_receipt": "data/php/toml/php-collective-toml-feedback-differential.json"
+        }
+      ],
+      "afl_feedback": "data/php/toml/afl-feedback.json",
       "phase": "pilot",
       "complete": false
     }

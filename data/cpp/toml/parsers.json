@@ -1,0 +1,780 @@
+[
+  {
+    "name": "tomlplusplus",
+    "display_name": "toml++",
+    "version": "3.4.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/marzer/tomlplusplus/blob/v3.4.0/LICENSE",
+    "license_sha256": "529bc3900a9571e49db285b0df432397e70b881cc3bf48de6667ae74ff4b06d8",
+    "input_api": "toml::parse(std::string_view doc) -> toml::table (exceptions enabled; throws toml::parse_error), walked through toml::node / toml::table / toml::array / toml::value<T> and toml::date_time {date, time, optional<time_offset>}",
+    "documentation": "https://github.com/marzer/tomlplusplus/blob/v3.4.0/include/toml%2B%2B/impl/parser.hpp",
+    "documentation_site": "https://marzer.github.io/tomlplusplus/",
+    "source": "https://github.com/marzer/tomlplusplus/tree/v3.4.0",
+    "adapter": "projects/toml/cpp/tomlplusplus/harness.cpp",
+    "control": "controls/toml/service-config.toml",
+    "scope": "TOML 1.0.0 text from an in-memory std::string_view parsed into a toml::table node tree (header-only build, exceptions enabled)",
+    "family": "toml++ (marzer/tomlplusplus)",
+    "family_note": "Own UTF-8 reader and recursive-descent parser in include/toml++/impl/parser.inl (class toml::impl::parser); no delegation to another TOML parser. Shares no parser code with toml11 or cpptoml.",
+    "metric": {
+      "name": "Debian popcon installations, source package (sourcemax/by_inst)",
+      "value": 3536,
+      "source_package": "tomlplusplus",
+      "binary_package": "libtomlplusplus3t64",
+      "dev_package_installs": {
+        "libtomlplusplus-dev": 315,
+        "libtoml++-dev": 3
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "snapshot": "data/cpp/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:31.567492+00:00"
+    },
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/cpp/tomlplusplus"
+  },
+  {
+    "name": "toml11",
+    "display_name": "toml11",
+    "version": "4.4.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/ToruNiina/toml11/blob/v4.4.0/LICENSE",
+    "license_sha256": "b547d41695cdfbc1d054b5044578e476a0e9d756849f1e0cb3864cfc83e50a9e",
+    "input_api": "toml::parse_str(std::string, toml::spec::v(1,0,0)) -> toml::value (throws toml::syntax_error), walked through toml::value::type(), as_table()/as_array()/as_integer()/as_floating()/as_string()/as_boolean() and toml::offset_datetime/local_datetime/local_date/local_time fields",
+    "documentation": "https://github.com/ToruNiina/toml11/blob/v4.4.0/docs/content.en/docs/reference/parser.md",
+    "documentation_site": "https://toruniina.github.io/toml11/",
+    "source": "https://github.com/ToruNiina/toml11/tree/v4.4.0",
+    "adapter": "projects/toml/cpp/toml11/harness.cpp",
+    "control": "controls/toml/service-config.toml",
+    "scope": "TOML 1.0.0 text from an in-memory std::string parsed with spec v1.0.0 into a toml::value tree (header-only build)",
+    "family": "toml11 (ToruNiina)",
+    "family_note": "Own scanner/combinator syntax (include/toml11/syntax.hpp, scanner.hpp) and parser (include/toml11/parser.hpp); no delegation to another TOML parser. Shares no parser code with toml++ or cpptoml.",
+    "metric": {
+      "name": "Debian popcon installations, source package (sourcemax/by_inst)",
+      "value": 15,
+      "source_package": "toml11",
+      "binary_package": "libtoml11-dev",
+      "dev_package_installs": {
+        "libtoml11-dev": 15
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "snapshot": "data/cpp/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:31.567492+00:00"
+    },
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/cpp/toml11"
+  },
+  {
+    "name": "cpptoml",
+    "display_name": "cpptoml",
+    "version": "0.1.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/skystrife/cpptoml/blob/v0.1.1/LICENSE",
+    "license_sha256": "e020e5d4f3e7c2a49b66822b3c3fb99aba9a04f3d2edb3907c493976436f876c",
+    "input_api": "cpptoml::parser(std::istream&).parse() -> std::shared_ptr<cpptoml::table> (throws cpptoml::parse_exception), walked through cpptoml::base is_table/is_array/is_table_array and as<T>() for std::string, int64_t, double, bool, local_date, local_time, local_datetime and offset_datetime",
+    "documentation": "https://github.com/skystrife/cpptoml/blob/v0.1.1/README.md",
+    "documentation_site": "https://github.com/skystrife/cpptoml/blob/v0.1.1/include/cpptoml.h",
+    "source": "https://github.com/skystrife/cpptoml/tree/v0.1.1",
+    "adapter": "projects/toml/cpp/cpptoml/harness.cpp",
+    "control": "controls/toml/service-config.toml",
+    "scope": "TOML text from an in-memory std::istringstream parsed into a cpptoml::table tree (single-header build); the 0.1.1 release targets TOML 0.5.0, and only the two TOML 1.0.0 controls are established",
+    "family": "cpptoml (skystrife)",
+    "family_note": "Own single-header recursive-descent parser (class cpptoml::parser in include/cpptoml.h); no delegation to another TOML parser. Shares no parser code with toml++ or toml11.",
+    "metric": {
+      "name": "Debian popcon installations, source package (sourcemax/by_inst)",
+      "value": 5,
+      "source_package": "cpptoml",
+      "binary_package": "libcpptoml-dev",
+      "dev_package_installs": {
+        "libcpptoml-dev": 5
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "snapshot": "data/cpp/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:31.567492+00:00"
+    },
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/cpp/cpptoml"
+  }
+]

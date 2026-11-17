@@ -1,0 +1,36 @@
+{
+  "ecosystem": "cpp",
+  "format": "toml",
+  "status": "pilot_three_selected_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 3,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "toml (case-insensitive substring 'toml' in Debian source-package names)",
+    "toml (case-insensitive substring 'toml' in Debian binary-package names)",
+    "toml (case-insensitive Conan Center recipe-name substring)"
+  ],
+  "search_totals": {
+    "toml (case-insensitive substring 'toml' in Debian source-package names)": 40,
+    "toml (case-insensitive substring 'toml' in Debian binary-package names)": 57,
+    "toml (case-insensitive Conan Center recipe-name substring)": 3
+  },
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 100,
+  "unique_search_hits": 86,
+  "unresolved_documentation_leads": 0,
+  "uncertainty": "Bounded TOML search captured 2026-11-17: 3 queries, 100 recorded hits (86 unique), at most 100 per query. 3 C++ TOML paths (toml++, toml11, cpptoml) print the exact typed tree for both valid controls and show scoped parser source coverage and stable, input-dependent AFL++ feedback (parser-only probes, function- and file-scoped allowlists, three identical repeats per control). The two lower ranks rest on very small counts: toml11 15 installations (0 recent, all no_files) and cpptoml 5 (0 recent). cpptoml 0.1.1 is a 2018 release that targets TOML 0.5.0 and needs <limits> included before its header on the pinned libstdc++; it passes both TOML 1.0.0 controls, which establish only that subset. No other C++ TOML parser appears in the Debian or Conan Center searches; libraries outside these surfaces are not counted. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+  "primary_metric": "Debian popcon installations, source package (sourcemax/by_inst)",
+  "registry_snapshot": "data/cpp/toml/registry-snapshot.json",
+  "unresolved_leads": "data/cpp/toml/leads.json",
+  "runtime_evidence": "data/cpp/toml/standard.json",
+  "ranking_metric": "Debian popcon installations, source package (sourcemax/by_inst)",
+  "selection": "3 control-verified C++ TOML packages rank by Debian source-package sourcemax installations: toml++ 3.4.0 (3,536), toml11 4.4.0 (15), cpptoml 0.1.1 (5). Every lead in the bounded search was tried; 7 of ten slots stay open.",
+  "third_party_evidence": "data/cpp/toml/parsers.json",
+  "third_party_control_results": "data/cpp/toml/verification.json",
+  "afl_feedback": "data/cpp/toml/afl-feedback.json",
+  "tomlplusplus_source_lock": "projects/toml/cpp/tomlplusplus/source-lock.json",
+  "toml11_source_lock": "projects/toml/cpp/toml11/source-lock.json",
+  "cpptoml_source_lock": "projects/toml/cpp/cpptoml/source-lock.json"
+}

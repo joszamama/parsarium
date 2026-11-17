@@ -704,6 +704,8 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
         rows = []
         for fmt in catalog["formats"]:
             controls = Counter(t["control"] for t in targets.values() if t["format"] == fmt["id"])
+            if not controls:
+                continue  # a newly registered format with no runnable target yet
             control = controls.most_common(1)[0][0]
             head = (ROOT / control).read_bytes()[:8]
             hexes = " ".join(f"{b:02x}" for b in head)
@@ -778,7 +780,8 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
             else:
                 options.append(f'<a href="{other_url}" hreflang="{code}" lang="{code}" '
                                f'aria-label="{s["switch"]}">{code.upper()}</a>')
-        lang_switch = f'<span class="lang">{"<i aria-hidden=\"true\">/</i>".join(options)}</span>'
+        separator = '<i aria-hidden="true">/</i>'
+        lang_switch = f'<span class="lang">{separator.join(options)}</span>'
         return f'''<a class="skip" href="#main">{s["skip"]}</a>
 <header class="masthead"><div class="wrap mh">
   <a class="brand" href="{root or './'}" aria-label="{s["home"]}"><span class="px" aria-hidden="true"><i></i><i></i></span>parsarium</a>

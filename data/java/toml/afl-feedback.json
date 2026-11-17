@@ -1,0 +1,513 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T16:59:52.349678+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
+  "differential_kind": "fixed_valid_typed_scalars",
+  "mutation_campaign_run": false,
+  "results": [
+    {
+      "project": "toml/java/jackson_dataformat_toml",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "feedback_scope": "JaCoCo bytecode coverage of the com.fasterxml.jackson.dataformat.toml package (JFlex Lexer, Parser, TomlFactory, UTF8Reader) of jackson-dataformat-toml 2.23.0 during valid-control replay; jackson-core/databind (shared with the Java JSON cell) are excluded; Jazzer fuzz entry",
+      "base_project_receipt_sha256": "27b759851b7ad02e42cd61e57354384a93f4cf5252383fd2c66d420610b0e82b",
+      "overlay_receipt_sha256": "552476f9c319237957dd64b89070045a1ebef93a4e2d5f40b25db903056985a0",
+      "image_id": "sha256:a4d01a956558c4d9f9b92403d739fb0b24a248393193311993cd7ef0d68b9443",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_lines": 592,
+      "control_afl_tuples": 605,
+      "differential_parser_lines": 572,
+      "differential_afl_tuples": 580,
+      "parser_lines_only_in_control": 79,
+      "parser_lines_only_in_differential": 59,
+      "afl_tuples_only_in_control": 77,
+      "afl_tuples_only_in_differential": 52,
+      "parser_line_difference": 138,
+      "afl_tuple_difference": 129,
+      "control_parser_lines_per_file": {
+        "com/fasterxml/jackson/dataformat/toml/Lexer.java": 225,
+        "com/fasterxml/jackson/dataformat/toml/Parser.java": 199,
+        "com/fasterxml/jackson/dataformat/toml/TomlFactory.java": 18,
+        "com/fasterxml/jackson/dataformat/toml/TomlMapper.java": 14,
+        "com/fasterxml/jackson/dataformat/toml/TomlReadFeature.java": 13,
+        "com/fasterxml/jackson/dataformat/toml/TomlStreamReadException.java": 4,
+        "com/fasterxml/jackson/dataformat/toml/TomlToken.java": 23,
+        "com/fasterxml/jackson/dataformat/toml/TomlWriteFeature.java": 11,
+        "com/fasterxml/jackson/dataformat/toml/UTF8Reader.java": 85
+      },
+      "differential_parser_lines_per_file": {
+        "com/fasterxml/jackson/dataformat/toml/Lexer.java": 250,
+        "com/fasterxml/jackson/dataformat/toml/Parser.java": 166,
+        "com/fasterxml/jackson/dataformat/toml/TomlFactory.java": 18,
+        "com/fasterxml/jackson/dataformat/toml/TomlMapper.java": 14,
+        "com/fasterxml/jackson/dataformat/toml/TomlReadFeature.java": 13,
+        "com/fasterxml/jackson/dataformat/toml/TomlStreamReadException.java": 4,
+        "com/fasterxml/jackson/dataformat/toml/TomlToken.java": 23,
+        "com/fasterxml/jackson/dataformat/toml/TomlWriteFeature.java": 11,
+        "com/fasterxml/jackson/dataformat/toml/UTF8Reader.java": 73
+      },
+      "checked_at_utc": "2026-11-17T16:59:52.349678+00:00"
+    },
+    {
+      "project": "toml/java/tomlj",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "feedback_scope": "JaCoCo bytecode coverage of the org.tomlj packages of tomlj 2.2.0 (ANTLR-generated org.tomlj.internal TomlLexer/TomlParser plus the org.tomlj visitors and tables) during valid-control replay; the shaded ANTLR runtime org.tomlj.internal.antlr.* has no sources in the release and is removed from the report class set; Jazzer fuzz entry",
+      "base_project_receipt_sha256": "ae3a34e3de7c7c7fea3e47e771fc15b63c8e0a475bb96a6924585c4d4e713988",
+      "overlay_receipt_sha256": "61c19fba62de5a65bc8c93c2fea5166f83561aa14c28c8363007aa804fe49b95",
+      "image_id": "sha256:3d1541c5fde3be3b2a4a146921ca938cd2ccb5e0b4745add3af858317145f1c7",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_lines": 1644,
+      "control_afl_tuples": 1648,
+      "differential_parser_lines": 1616,
+      "differential_afl_tuples": 1606,
+      "parser_lines_only_in_control": 414,
+      "parser_lines_only_in_differential": 386,
+      "afl_tuples_only_in_control": 414,
+      "afl_tuples_only_in_differential": 372,
+      "parser_line_difference": 800,
+      "afl_tuple_difference": 786,
+      "control_parser_lines_per_file": {
+        "org/tomlj/AccumulatingErrorListener.java": 11,
+        "org/tomlj/Comments.java": 34,
+        "org/tomlj/ElementContainer.java": 6,
+        "org/tomlj/Entry.java": 12,
+        "org/tomlj/KeyVisitor.java": 9,
+        "org/tomlj/LineRecoveryStrategy.java": 29,
+        "org/tomlj/LineVisitor.java": 153,
+        "org/tomlj/LinkedTomlTable.java": 78,
+        "org/tomlj/ListTomlArray.java": 14,
+        "org/tomlj/LocalDateVisitor.java": 26,
+        "org/tomlj/LocalTimeVisitor.java": 31,
+        "org/tomlj/ParseTrees.java": 6,
+        "org/tomlj/ParsedTomlTable.java": 11,
+        "org/tomlj/Parser.java": 16,
+        "org/tomlj/QuotedStringVisitor.java": 15,
+        "org/tomlj/Source.java": 33,
+        "org/tomlj/SourceSpan.java": 56,
+        "org/tomlj/Toml.java": 15,
+        "org/tomlj/TomlComment.java": 24,
+        "org/tomlj/TomlParseOptions.java": 12,
+        "org/tomlj/TomlParseResult.java": 1,
+        "org/tomlj/TomlPosition.java": 14,
+        "org/tomlj/TomlTable.java": 3,
+        "org/tomlj/TomlType.java": 17,
+        "org/tomlj/TomlVersion.java": 8,
+        "org/tomlj/TomlWriteOptions.java": 4,
+        "org/tomlj/Value.java": 7,
+        "org/tomlj/ValueSpan.java": 8,
+        "org/tomlj/ValueVisitor.java": 132,
+        "org/tomlj/ZoneOffsetVisitor.java": 6,
+        "org/tomlj/internal/AbstractTomlLexer.java": 39,
+        "org/tomlj/internal/AbstractTomlParser.java": 24,
+        "org/tomlj/internal/AbstractTomlParserRuleContext.java": 6,
+        "org/tomlj/internal/TomlLexer.java": 79,
+        "org/tomlj/internal/TomlParser.java": 690,
+        "org/tomlj/internal/TomlParserBaseVisitor.java": 15
+      },
+      "differential_parser_lines_per_file": {
+        "org/tomlj/AccumulatingErrorListener.java": 11,
+        "org/tomlj/Comments.java": 14,
+        "org/tomlj/ElementContainer.java": 6,
+        "org/tomlj/Entry.java": 10,
+        "org/tomlj/KeyVisitor.java": 12,
+        "org/tomlj/LineRecoveryStrategy.java": 29,
+        "org/tomlj/LineVisitor.java": 132,
+        "org/tomlj/LinkedTomlTable.java": 71,
+        "org/tomlj/LocalDateVisitor.java": 26,
+        "org/tomlj/LocalTimeVisitor.java": 40,
+        "org/tomlj/ParseTrees.java": 5,
+        "org/tomlj/ParsedTomlTable.java": 11,
+        "org/tomlj/Parser.java": 16,
+        "org/tomlj/QuotedStringVisitor.java": 25,
+        "org/tomlj/Source.java": 33,
+        "org/tomlj/SourceSpan.java": 54,
+        "org/tomlj/Toml.java": 15,
+        "org/tomlj/TomlComment.java": 24,
+        "org/tomlj/TomlParseOptions.java": 12,
+        "org/tomlj/TomlParseResult.java": 1,
+        "org/tomlj/TomlPosition.java": 14,
+        "org/tomlj/TomlVersion.java": 8,
+        "org/tomlj/TomlWriteOptions.java": 4,
+        "org/tomlj/Value.java": 7,
+        "org/tomlj/ValueSpan.java": 7,
+        "org/tomlj/ValueVisitor.java": 35,
+        "org/tomlj/ZoneOffsetVisitor.java": 25,
+        "org/tomlj/internal/AbstractTomlLexer.java": 33,
+        "org/tomlj/internal/AbstractTomlParser.java": 23,
+        "org/tomlj/internal/AbstractTomlParserRuleContext.java": 6,
+        "org/tomlj/internal/TomlLexer.java": 102,
+        "org/tomlj/internal/TomlParser.java": 785,
+        "org/tomlj/internal/TomlParserBaseVisitor.java": 20
+      },
+      "checked_at_utc": "2026-11-17T16:59:52.349678+00:00"
+    },
+    {
+      "project": "toml/java/night_config_toml",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "feedback_scope": "JaCoCo bytecode coverage of the com.electronwill.nightconfig.toml package (TomlParser, TableParser, ValueParser, StringParser, ArrayParser, TemporalParser) of night-config toml 3.9.0 during valid-control replay; the format-neutral night-config core (CharacterInput, Config maps) is excluded; Jazzer fuzz entry",
+      "base_project_receipt_sha256": "ade71c6d6d70b575572c80cc16dfd881338d2e6a4299b09e715d6aacd71f1b00",
+      "overlay_receipt_sha256": "a60877ede85566a5cd22c89108e336305d786b1a2030fde3752e6d2ec5faaaea",
+      "image_id": "sha256:463357702693cb030e4990f332c9526d85ce19fb54f0b3047408668607176ba2",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_lines": 345,
+      "control_afl_tuples": 365,
+      "differential_parser_lines": 354,
+      "differential_afl_tuples": 373,
+      "parser_lines_only_in_control": 72,
+      "parser_lines_only_in_differential": 81,
+      "afl_tuples_only_in_control": 72,
+      "afl_tuples_only_in_differential": 80,
+      "parser_line_difference": 153,
+      "afl_tuple_difference": 152,
+      "control_parser_lines_per_file": {
+        "com/electronwill/nightconfig/toml/ArrayParser.java": 13,
+        "com/electronwill/nightconfig/toml/StringParser.java": 15,
+        "com/electronwill/nightconfig/toml/TableParser.java": 74,
+        "com/electronwill/nightconfig/toml/TemporalParser.java": 36,
+        "com/electronwill/nightconfig/toml/Toml.java": 31,
+        "com/electronwill/nightconfig/toml/TomlFormat.java": 5,
+        "com/electronwill/nightconfig/toml/TomlParser.java": 92,
+        "com/electronwill/nightconfig/toml/TomlVersion.java": 3,
+        "com/electronwill/nightconfig/toml/ValueParser.java": 76
+      },
+      "differential_parser_lines_per_file": {
+        "com/electronwill/nightconfig/toml/StringParser.java": 52,
+        "com/electronwill/nightconfig/toml/TableParser.java": 63,
+        "com/electronwill/nightconfig/toml/TemporalParser.java": 46,
+        "com/electronwill/nightconfig/toml/Toml.java": 30,
+        "com/electronwill/nightconfig/toml/TomlFormat.java": 5,
+        "com/electronwill/nightconfig/toml/TomlParser.java": 67,
+        "com/electronwill/nightconfig/toml/TomlVersion.java": 3,
+        "com/electronwill/nightconfig/toml/ValueParser.java": 88
+      },
+      "checked_at_utc": "2026-11-17T16:59:52.349678+00:00"
+    }
+  ]
+}

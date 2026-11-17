@@ -1,0 +1,28 @@
+{
+  "ecosystem": "c",
+  "format": "toml",
+  "status": "pilot_search_bounded_none_selected",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 0,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "toml (case-insensitive substring 'toml' in Debian source-package names)",
+    "toml (case-insensitive substring 'toml' in Debian binary-package names)",
+    "toml (case-insensitive Conan Center recipe-name substring)"
+  ],
+  "search_totals": {
+    "toml (case-insensitive substring 'toml' in Debian source-package names)": 40,
+    "toml (case-insensitive substring 'toml' in Debian binary-package names)": 57,
+    "toml (case-insensitive Conan Center recipe-name substring)": 3
+  },
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 100,
+  "unique_search_hits": 86,
+  "unresolved_documentation_leads": 4,
+  "uncertainty": "Bounded TOML search captured 2026-11-17: 3 queries, 100 recorded hits (86 unique), at most 100 per query. No C TOML library appears in Debian popcon or Conan Center, so no C path has the primary metric or a Debian fallback of at least 1,000, and none is selected. tomlc17 R261116 and toml-c (tomlc99 fork, commit 6a38d404) passed both valid controls with exact typed trees, parser coverage and stable AFL++ feedback; they stay unresolved_no_primary_metric leads with that evidence. tomlc99 (commit 62ce93ce) rejects the second control (\"expect hex char\" on a lowercase \\u escape); libtoml targets TOML 0.4.0 and was not run. Zero selected is not evidence that no C TOML parser is used.",
+  "primary_metric": "Debian popcon installations (none packaged)",
+  "registry_snapshot": "data/c/toml/registry-snapshot.json",
+  "unresolved_leads": "data/c/toml/leads.json",
+  "runtime_evidence": "data/c/toml/standard.json"
+}

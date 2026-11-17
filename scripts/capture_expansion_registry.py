@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Capture bounded registry searches for the JSON/XML/plain-MP3 expansion inventory.
+"""Capture bounded registry searches for the JSON/XML/plain-MP3/TOML expansion inventory.
+
+The TOML pilot cells use their own per-cell snapshots from
+scripts/snapshot_toml_registry.py; the "toml" query here only widens a re-capture.
 
 Search hits are leads only. Nothing captured here verifies a parser.
 Writes data/expansion/registry/<ecosystem>.json.
@@ -15,6 +18,7 @@ QUERIES = {
     "json": ["json"],
     "xml": ["xml"],
     "mp3_plain": ["mp3", "mpeg audio"],
+    "toml": ["toml"],
 }
 
 

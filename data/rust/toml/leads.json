@@ -1,0 +1,154 @@
+{
+  "captured_from": "data/rust/toml/registry-snapshot.json",
+  "metric": "crates.io recent downloads (90 days)",
+  "observed": "2026-11-17",
+  "leads": [
+    {
+      "name": "toml_parser",
+      "metric_value": 197554106,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "toml_parser (toml-rs)",
+      "api_lead": "toml_parser::Source::new(&str).lex() + parse_document(events)",
+      "note": "Low-level lexer and event parser without a value tree; a harness would have to assemble tables itself. Its source coverage and AFL++ feedback are recorded as the underlying parser of the selected toml and toml_edit paths (toml_parser 1.1.5+spec-1.1.0).",
+      "source": "https://crates.io/crates/toml_parser",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "basic-toml",
+      "metric_value": 20713123,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "basic-toml (dtolnay; fork of toml 0.5 parser)",
+      "api_lead": "basic_toml::from_str::<T: Deserialize>(&str); the crate exports only from_str, from_slice, to_string and Error",
+      "note": "No own generic value type and no datetime support: the pinned crate has no Datetime type and its tokenizer reads 1979-05-27T07:32:00Z as a number. Tried with basic_toml::from_str::<serde_json::Value> on 2026-11-17: service-config.toml fails with \"invalid number at line 8 column 9\" (owner.since) and typed-scalars.toml with \"invalid number at line 27 column 10\" (times.offset).",
+      "source": "https://crates.io/crates/basic-toml",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.1.10",
+      "source_sha256": "ba62675e8242a4c4e806d12f11d136e626e6c8361d6b829310732241652a178a",
+      "license": "MIT OR Apache-2.0 (LICENSE-MIT and LICENSE-APACHE in the .crate)",
+      "checked_at_utc": "2026-11-17"
+    },
+    {
+      "name": "toml-span",
+      "metric_value": 6719423,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "toml-span (Embark; own parser)",
+      "api_lead": "toml_span::parse(&str) -> Result<Value<'_>, Error>; ValueInner::{String, Integer, Float, Boolean, Array, Table}",
+      "note": "ValueInner has no datetime variant and the README states \"No datetime deserialization\". Tried toml_span::parse on 2026-11-17: service-config.toml fails with Error { kind: InvalidNumber, span: 174..187, line_info: (7, 8) } (owner.since) and typed-scalars.toml with InvalidNumber at 439..452, line_info (26, 9) (times.offset).",
+      "source": "https://crates.io/crates/toml-span",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.7.2",
+      "source_sha256": "ac7807845e399906fbe4e7f57369d284d5bf102836423073290b7c01948dbda3",
+      "license": "MIT OR Apache-2.0 (LICENSE-MIT and LICENSE-APACHE in the .crate)",
+      "checked_at_utc": "2026-11-17"
+    },
+    {
+      "name": "taplo",
+      "metric_value": 703745,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "taplo (rowan syntax tree)",
+      "api_lead": "taplo::parser::parse(&str).into_dom()",
+      "note": null,
+      "source": "https://crates.io/crates/taplo",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "nanoserde",
+      "metric_value": 488505,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "nanoserde (own TOML parser among formats)",
+      "api_lead": "nanoserde::TomlParser::parse(&str)",
+      "note": null,
+      "source": "https://crates.io/crates/nanoserde",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "boml",
+      "metric_value": 136881,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "boml (own parser)",
+      "api_lead": "boml::Toml::parse(&str)",
+      "note": null,
+      "source": "https://crates.io/crates/boml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "toml-spanner",
+      "metric_value": 44429,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "toml-spanner (own parser)",
+      "api_lead": "toml_spanner::parse(&str)",
+      "note": null,
+      "source": "https://crates.io/crates/toml-spanner",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    }
+  ],
+  "excluded": [
+    {
+      "name": "toml_datetime",
+      "metric_value": 352322591,
+      "status": "excluded",
+      "reason": "Datetime value type shared by toml and toml_edit; no document parser."
+    },
+    {
+      "name": "toml_writer",
+      "metric_value": 140246169,
+      "status": "excluded",
+      "reason": "Writer only."
+    },
+    {
+      "name": "toml_write",
+      "metric_value": 77871109,
+      "status": "excluded",
+      "reason": "Writer only."
+    },
+    {
+      "name": "cargo_toml",
+      "metric_value": 25938015,
+      "status": "excluded",
+      "reason": "Cargo manifest structs deserialized through toml."
+    },
+    {
+      "name": "pyproject-toml",
+      "metric_value": 1596251,
+      "status": "excluded",
+      "reason": "pyproject.toml structs over toml."
+    },
+    {
+      "name": "tree-sitter-toml-ng",
+      "metric_value": 1431829,
+      "status": "excluded",
+      "reason": "Tree-sitter grammar; syntax tree only."
+    },
+    {
+      "name": "oxc-toml",
+      "metric_value": 78263,
+      "status": "excluded",
+      "reason": "Formatter library."
+    },
+    {
+      "name": "toml-test-data",
+      "metric_value": 80257,
+      "status": "excluded",
+      "reason": "Test data."
+    },
+    {
+      "name": "toml-test-harness",
+      "metric_value": 56709,
+      "status": "excluded",
+      "reason": "Test harness."
+    },
+    {
+      "name": "toml-test",
+      "metric_value": 55958,
+      "status": "excluded",
+      "reason": "Test harness."
+    }
+  ]
+}

@@ -1,0 +1,510 @@
+[
+ {
+  "name": "tomlkit",
+  "version": "0.15.2",
+  "license": "MIT",
+  "license_evidence": "https://pypi.org/pypi/tomlkit/0.15.2/json",
+  "input_api": "tomlkit.parse(decoded local TOML text) walked by tomlkit item type (Table, InlineTable, AoT, Array, Bool, Integer, Float, String, DateTime, Date, Time) with each scalar unwrapped; TOMLDocument.unwrap(), tomlkit.parse(bytes) and tomlkit.load(BytesIO(local bytes)) give the same typed tree on both controls",
+  "documentation": "https://github.com/python-poetry/tomlkit/blob/0.15.2/docs/api.rst",
+  "source": "https://files.pythonhosted.org/packages/08/72/fc01563df95c189a9f65850096bdc205bc2fe37da6c740cd64afaf18d07e/tomlkit-0.15.2.tar.gz",
+  "source_sha256": "83e32755ba1d20d9340bd069ee97e9f6232ba2346b63ffcba425de01f7e327a6",
+  "wheel_sha256": "05562412163a3037b94497385fb7f9204c637bc605af7a48199e41cf2272f437",
+  "dependencies": [],
+  "scope": "TOML 1.0.0 documents from local text via tomlkit.parse; the two valid controls only (service-config and typed-scalars), each equal to its hand-written typed tree and to a CPython tomllib cross-check. tomlkit keeps comments, whitespace and formatting in its item objects; only the parsed values are compared. Malformed input, TOML 1.1 features and round-trip rendering are untested.",
+  "family": "tomlkit pure-Python style-preserving recursive-descent parser (tomlkit/parser.py over tomlkit/source.py, building tomlkit items)",
+  "family_note": "tomlkit.parse runs tomlkit's own hand-written Parser class over a Source cursor and builds a TOMLDocument of tomlkit item objects that keep comments, whitespace and formatting. It neither imports nor delegates to tomllib or tomli. Independent of the tomli/tomllib family selected beside it in this cell. Poetry and many build tools depend on it, so its downloads largely reflect transitive installs.",
+  "control": "controls/toml/service-config.toml",
+  "differential_control": "controls/toml/typed-scalars.toml",
+  "expected_output": {
+   "database": {
+    "limits": {
+     "max": {
+      "type": "integer",
+      "value": "10"
+     },
+     "min": {
+      "type": "integer",
+      "value": "-2"
+     }
+    },
+    "ports": [
+     {
+      "type": "integer",
+      "value": "8000"
+     },
+     {
+      "type": "integer",
+      "value": "8001"
+     },
+     {
+      "type": "integer",
+      "value": "8002"
+     }
+    ],
+    "ratio": {
+     "type": "float",
+     "value": "3.25"
+    }
+   },
+   "enabled": {
+    "type": "bool",
+    "value": "true"
+   },
+   "owner": {
+    "name": {
+     "type": "string",
+     "value": "Zoë"
+    },
+    "since": {
+     "type": "datetime",
+     "value": "1979-05-27T07:32:00Z"
+    }
+   },
+   "products": [
+    {
+     "name": {
+      "type": "string",
+      "value": "Hammer"
+     },
+     "sku": {
+      "type": "integer",
+      "value": "738594937"
+     }
+    },
+    {
+     "color": {
+      "type": "string",
+      "value": "gray"
+     },
+     "name": {
+      "type": "string",
+      "value": "Nail"
+     },
+     "points": [
+      {
+       "x": {
+        "type": "integer",
+        "value": "1"
+       },
+       "y": {
+        "type": "integer",
+        "value": "2"
+       }
+      },
+      {
+       "x": {
+        "type": "integer",
+        "value": "3"
+       },
+       "y": {
+        "type": "integer",
+        "value": "4"
+       }
+      }
+     ]
+    }
+   ],
+   "retries": {
+    "type": "integer",
+    "value": "3"
+   },
+   "servers": {
+    "alpha": {
+     "ip": {
+      "type": "string",
+      "value": "10.0.0.1"
+     },
+     "tags": [
+      {
+       "type": "string",
+       "value": "edge"
+      },
+      {
+       "type": "string",
+       "value": "eu"
+      }
+     ]
+    },
+    "beta": {
+     "enabled": {
+      "type": "bool",
+      "value": "false"
+     },
+     "ip": {
+      "type": "string",
+      "value": "10.0.0.2"
+     }
+    }
+   },
+   "title": {
+    "type": "string",
+    "value": "Parsarium \"service\" control"
+   }
+  },
+  "differential_expected_output": {
+   "floats": {
+    "exponent": {
+     "type": "float",
+     "value": "1000.0"
+    },
+    "fraction": {
+     "type": "float",
+     "value": "3.25"
+    },
+    "mixed": {
+     "type": "float",
+     "value": "0.015625"
+    },
+    "negative": {
+     "type": "float",
+     "value": "-0.5"
+    }
+   },
+   "integers": {
+    "binary": {
+     "type": "integer",
+     "value": "13"
+    },
+    "decimal": {
+     "type": "integer",
+     "value": "99"
+    },
+    "hex": {
+     "type": "integer",
+     "value": "3735928559"
+    },
+    "negative": {
+     "type": "integer",
+     "value": "-17"
+    },
+    "octal": {
+     "type": "integer",
+     "value": "493"
+    },
+    "underscored": {
+     "type": "integer",
+     "value": "1000000"
+    }
+   },
+   "keys": {
+    "a": {
+     "b": {
+      "c": {
+       "type": "integer",
+       "value": "1"
+      }
+     }
+    },
+    "quoted key": {
+     "type": "string",
+     "value": "q"
+    },
+    "site": {
+     "example.com": {
+      "type": "bool",
+      "value": "true"
+     }
+    }
+   },
+   "strings": {
+    "escapes": {
+     "type": "string",
+     "value": "tab\tquote\"backslash\\ é"
+    },
+    "literal": {
+     "type": "string",
+     "value": "C:\\Users\\parsarium"
+    },
+    "multiline": {
+     "type": "string",
+     "value": "first second"
+    },
+    "raw_multiline": {
+     "type": "string",
+     "value": "line one\nline two"
+    }
+   },
+   "times": {
+    "local_date": {
+     "type": "date-local",
+     "value": "1979-05-27"
+    },
+    "local_datetime": {
+     "type": "datetime-local",
+     "value": "1979-05-27T07:32:00"
+    },
+    "local_time": {
+     "type": "time-local",
+     "value": "00:32:00.25"
+    },
+    "offset": {
+     "type": "datetime",
+     "value": "1979-05-27T07:32:00.5Z"
+    }
+   }
+  },
+  "metric": {
+   "name": "PyPI Stats last_month downloads excluding known mirrors",
+   "value": 591365129,
+   "source": "https://pypistats.org/api/packages/tomlkit/recent",
+   "snapshot": "data/python/toml/registry-snapshot.json",
+   "captured_at_utc": "2026-11-17T16:43:58.424277+00:00",
+   "limitation": "Package-level downloads include transitive installs and non-parsing use; they do not measure TOML parsing directly."
+  },
+  "project": "projects/toml/python/tomlkit"
+ },
+ {
+  "name": "tomli",
+  "version": "2.5.0",
+  "license": "MIT",
+  "license_evidence": "https://pypi.org/pypi/tomli/2.5.0/json",
+  "input_api": "tomli.loads(decoded local TOML text) -> dict; tomli.load(BytesIO(local bytes)) gives the same typed tree on both controls",
+  "documentation": "https://github.com/hukkin/tomli/blob/2.5.0/README.md",
+  "source": "https://files.pythonhosted.org/packages/b0/78/9ad63712633ed3ab5cc1a648d863d7e7da371e9425e209555a0fe711b695/tomli-2.5.0.tar.gz",
+  "source_sha256": "264507556cd8b8c8e7c6ee037cdf443a463f03f4c958e57195e3d369711b8ff6",
+  "wheel_sha256": "32a7b79ac57a2e83670ce329ccf675798bc5a2094783a63676866b70503f2e2b",
+  "dependencies": [],
+  "scope": "TOML 1.0.0 documents from local text via tomli.loads; the two valid controls only (service-config and typed-scalars), each equal to its hand-written typed tree. The CPython tomllib cross-check shares tomli's code, so the hand-written trees are the independent check. Only the pure-Python wheel is measured, not the mypyc-compiled wheels. Malformed input and TOML 1.1 features are untested.",
+  "family": "tomli pure-Python parser (tomli/_parser.py with tomli/_re.py); same code family as CPython's standard tomllib",
+  "family_note": "tomli.loads runs tomli's own hand-written parser in _parser.py with regular expressions from _re.py for numbers and date-times. CPython 3.11+ ships tomllib as a vendored copy of tomli, so this path and the standard tomllib API recorded in standard.json are one family, not independent parsers; for tomli, the hand-written expected trees in controls/toml are the independent check. Only the pure-Python py3-none-any wheel is measured; tomli 2.5.0 also publishes mypyc-compiled platform wheels that pip prefers where available. Independent of tomlkit.",
+  "control": "controls/toml/service-config.toml",
+  "differential_control": "controls/toml/typed-scalars.toml",
+  "expected_output": {
+   "database": {
+    "limits": {
+     "max": {
+      "type": "integer",
+      "value": "10"
+     },
+     "min": {
+      "type": "integer",
+      "value": "-2"
+     }
+    },
+    "ports": [
+     {
+      "type": "integer",
+      "value": "8000"
+     },
+     {
+      "type": "integer",
+      "value": "8001"
+     },
+     {
+      "type": "integer",
+      "value": "8002"
+     }
+    ],
+    "ratio": {
+     "type": "float",
+     "value": "3.25"
+    }
+   },
+   "enabled": {
+    "type": "bool",
+    "value": "true"
+   },
+   "owner": {
+    "name": {
+     "type": "string",
+     "value": "Zoë"
+    },
+    "since": {
+     "type": "datetime",
+     "value": "1979-05-27T07:32:00Z"
+    }
+   },
+   "products": [
+    {
+     "name": {
+      "type": "string",
+      "value": "Hammer"
+     },
+     "sku": {
+      "type": "integer",
+      "value": "738594937"
+     }
+    },
+    {
+     "color": {
+      "type": "string",
+      "value": "gray"
+     },
+     "name": {
+      "type": "string",
+      "value": "Nail"
+     },
+     "points": [
+      {
+       "x": {
+        "type": "integer",
+        "value": "1"
+       },
+       "y": {
+        "type": "integer",
+        "value": "2"
+       }
+      },
+      {
+       "x": {
+        "type": "integer",
+        "value": "3"
+       },
+       "y": {
+        "type": "integer",
+        "value": "4"
+       }
+      }
+     ]
+    }
+   ],
+   "retries": {
+    "type": "integer",
+    "value": "3"
+   },
+   "servers": {
+    "alpha": {
+     "ip": {
+      "type": "string",
+      "value": "10.0.0.1"
+     },
+     "tags": [
+      {
+       "type": "string",
+       "value": "edge"
+      },
+      {
+       "type": "string",
+       "value": "eu"
+      }
+     ]
+    },
+    "beta": {
+     "enabled": {
+      "type": "bool",
+      "value": "false"
+     },
+     "ip": {
+      "type": "string",
+      "value": "10.0.0.2"
+     }
+    }
+   },
+   "title": {
+    "type": "string",
+    "value": "Parsarium \"service\" control"
+   }
+  },
+  "differential_expected_output": {
+   "floats": {
+    "exponent": {
+     "type": "float",
+     "value": "1000.0"
+    },
+    "fraction": {
+     "type": "float",
+     "value": "3.25"
+    },
+    "mixed": {
+     "type": "float",
+     "value": "0.015625"
+    },
+    "negative": {
+     "type": "float",
+     "value": "-0.5"
+    }
+   },
+   "integers": {
+    "binary": {
+     "type": "integer",
+     "value": "13"
+    },
+    "decimal": {
+     "type": "integer",
+     "value": "99"
+    },
+    "hex": {
+     "type": "integer",
+     "value": "3735928559"
+    },
+    "negative": {
+     "type": "integer",
+     "value": "-17"
+    },
+    "octal": {
+     "type": "integer",
+     "value": "493"
+    },
+    "underscored": {
+     "type": "integer",
+     "value": "1000000"
+    }
+   },
+   "keys": {
+    "a": {
+     "b": {
+      "c": {
+       "type": "integer",
+       "value": "1"
+      }
+     }
+    },
+    "quoted key": {
+     "type": "string",
+     "value": "q"
+    },
+    "site": {
+     "example.com": {
+      "type": "bool",
+      "value": "true"
+     }
+    }
+   },
+   "strings": {
+    "escapes": {
+     "type": "string",
+     "value": "tab\tquote\"backslash\\ é"
+    },
+    "literal": {
+     "type": "string",
+     "value": "C:\\Users\\parsarium"
+    },
+    "multiline": {
+     "type": "string",
+     "value": "first second"
+    },
+    "raw_multiline": {
+     "type": "string",
+     "value": "line one\nline two"
+    }
+   },
+   "times": {
+    "local_date": {
+     "type": "date-local",
+     "value": "1979-05-27"
+    },
+    "local_datetime": {
+     "type": "datetime-local",
+     "value": "1979-05-27T07:32:00"
+    },
+    "local_time": {
+     "type": "time-local",
+     "value": "00:32:00.25"
+    },
+    "offset": {
+     "type": "datetime",
+     "value": "1979-05-27T07:32:00.5Z"
+    }
+   }
+  },
+  "metric": {
+   "name": "PyPI Stats last_month downloads excluding known mirrors",
+   "value": 263305223,
+   "source": "https://pypistats.org/api/packages/tomli/recent",
+   "snapshot": "data/python/toml/registry-snapshot.json",
+   "captured_at_utc": "2026-11-17T16:43:56.381486+00:00",
+   "limitation": "Package-level downloads include transitive installs and non-parsing use; they do not measure TOML parsing directly."
+  },
+  "project": "projects/toml/python/tomli"
+ }
+]

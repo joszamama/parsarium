@@ -1,0 +1,591 @@
+{
+  "schema_version": 1,
+  "project": "yaml/rust/serde_yaml",
+  "pass": true,
+  "base_project_receipt_sha256": "0601e007f3a759b24db0ede265fd8053349365c0e00adbfb8794cc71d9ed9927",
+  "overlay_file_sha256": {
+    "Cargo.toml": "59c9e18cdaa4d0baecc7fee84305924d7ea28ba59c1e085e9b3e6fef74bfbdca",
+    "Cargo.lock": "b7511e7a1deb8d3241ae0edbe0f9683f4461a15db974f59f1120d25a72e24666",
+    "afl_fuzzer.rs": "919c888d2476b236cc92fcd56c47d7f73b2b68dd318900f7ea07116878d9b521",
+    "Dockerfile": "172d172cdd733e5253cdfb1f6377093036de91ea79c695778962f469d1e31cd3",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "build.py": "eaacc3472e03165ba846422a36cee28a36791d318621fd3ffbf4b9d8f09e76ef"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "6a8b1a1a2ebf674015cc02edccce75287f1a0130d394307b36743c2f5d504b47",
+  "image_id": "sha256:2c03ee47e95dcfa18568dc753c9d12954995b695cec479411b6f652222b84ac5",
+  "platform": "linux/arm64",
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "feedback_edges": 1525,
+  "afl_map_size": 16135,
+  "feedback_kind": "afl_rs_serde_yaml_unsafe_libyaml_only_sancov_edges",
+  "feedback_scope": "Only serde_yaml and unsafe_libyaml crate objects carry SanitizerCoverage guards; harness, serde_json, AFL runtime and other crates are uninstrumented",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "serde_yaml",
+      "unsafe_libyaml"
+    ],
+    "rlib_guard_bytes": {
+      "serde_yaml": 28872,
+      "unsafe_libyaml": 35648
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "equivalent",
+      "hashbrown",
+      "indexmap",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_yaml_serde_yaml_harness",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde",
+      "serde_core",
+      "serde_json",
+      "xdg"
+    ],
+    "binary_guards": 16130
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:10df2814d2497e2be42270e6ce03380bb2d56193f204778c530d515449ce75c9",
+  "variant_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+  "control_output": {
+    "tree": [
+      "map",
+      [
+        [
+          "kind",
+          [
+            "str",
+            "catalog"
+          ]
+        ],
+        [
+          "version",
+          [
+            "int",
+            "2"
+          ]
+        ],
+        [
+          "ratio",
+          [
+            "float",
+            "0.25"
+          ]
+        ],
+        [
+          "offset",
+          [
+            "int",
+            "-17"
+          ]
+        ],
+        [
+          "enabled",
+          [
+            "bool",
+            true
+          ]
+        ],
+        [
+          "retired",
+          [
+            "bool",
+            false
+          ]
+        ],
+        [
+          "missing",
+          [
+            "null"
+          ]
+        ],
+        [
+          "title",
+          [
+            "str",
+            "Caf\u00e9 \"quoted\"\tend"
+          ]
+        ],
+        [
+          "single",
+          [
+            "str",
+            "it's here"
+          ]
+        ],
+        [
+          "tags",
+          [
+            "seq",
+            [
+              [
+                "str",
+                "alpha"
+              ],
+              [
+                "str",
+                "beta"
+              ],
+              [
+                "str",
+                "gamma delta"
+              ]
+            ]
+          ]
+        ],
+        [
+          "point",
+          [
+            "map",
+            [
+              [
+                "lat",
+                [
+                  "int",
+                  "1"
+                ]
+              ],
+              [
+                "lon",
+                [
+                  "float",
+                  "-2.5"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "items",
+          [
+            "seq",
+            [
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "7"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "first item"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "line one\nline two\n"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "8"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "Z\u00fcrich"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "folded text\n"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "defaults",
+          [
+            "map",
+            [
+              [
+                "retries",
+                [
+                  "int",
+                  "3"
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "base"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "service",
+          [
+            "map",
+            [
+              [
+                "settings",
+                [
+                  "map",
+                  [
+                    [
+                      "retries",
+                      [
+                        "int",
+                        "3"
+                      ]
+                    ],
+                    [
+                      "label",
+                      [
+                        "str",
+                        "base"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "edge"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "variant_output": {
+    "tree": [
+      "seq",
+      [
+        [
+          "map",
+          [
+            [
+              "order",
+              [
+                "str",
+                "A-7"
+              ]
+            ],
+            [
+              "lines",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "X\u00e9-1"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "2"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "12.5"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "B '2'"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "1"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "0.75"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "flags",
+              [
+                "seq",
+                []
+              ]
+            ],
+            [
+              "meta",
+              [
+                "map",
+                []
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "seq",
+          [
+            [
+              "int",
+              "1"
+            ],
+            [
+              "seq",
+              [
+                [
+                  "int",
+                  "2"
+                ],
+                [
+                  "int",
+                  "3"
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "k",
+                  [
+                    "str",
+                    "v"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "str",
+          "plain multi word"
+        ],
+        [
+          "str",
+          "line\nbreak"
+        ],
+        [
+          "str",
+          "kept\n  indented"
+        ],
+        [
+          "null"
+        ],
+        [
+          "bool",
+          false
+        ]
+      ]
+    ]
+  },
+  "repeats": 5,
+  "variant_feedback_edges": 1530,
+  "edges_only_in_control": 91,
+  "edges_only_in_variant": 96,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_yaml-0.9.34+deprecated/",
+    "control_lines": {
+      "src/de.rs": 362,
+      "src/error.rs": 0,
+      "src/libyaml/cstr.rs": 18,
+      "src/libyaml/emitter.rs": 0,
+      "src/libyaml/error.rs": 0,
+      "src/libyaml/parser.rs": 71,
+      "src/libyaml/tag.rs": 0,
+      "src/libyaml/util.rs": 21,
+      "src/loader.rs": 49,
+      "src/mapping.rs": 37,
+      "src/number.rs": 28,
+      "src/path.rs": 0,
+      "src/ser.rs": 0,
+      "src/value/de.rs": 49,
+      "src/value/debug.rs": 0,
+      "src/value/from.rs": 0,
+      "src/value/index.rs": 0,
+      "src/value/mod.rs": 9,
+      "src/value/partial_eq.rs": 0,
+      "src/value/ser.rs": 0,
+      "src/value/tagged.rs": 5,
+      "src/with.rs": 0
+    },
+    "variant_lines": {
+      "src/de.rs": 360,
+      "src/error.rs": 0,
+      "src/libyaml/cstr.rs": 18,
+      "src/libyaml/emitter.rs": 0,
+      "src/libyaml/error.rs": 0,
+      "src/libyaml/parser.rs": 70,
+      "src/libyaml/tag.rs": 0,
+      "src/libyaml/util.rs": 21,
+      "src/loader.rs": 49,
+      "src/mapping.rs": 37,
+      "src/number.rs": 23,
+      "src/path.rs": 0,
+      "src/ser.rs": 0,
+      "src/value/de.rs": 44,
+      "src/value/debug.rs": 0,
+      "src/value/from.rs": 0,
+      "src/value/index.rs": 0,
+      "src/value/mod.rs": 9,
+      "src/value/partial_eq.rs": 0,
+      "src/value/ser.rs": 0,
+      "src/value/tagged.rs": 5,
+      "src/with.rs": 0
+    },
+    "files_with_different_line_counts": [
+      "src/de.rs",
+      "src/libyaml/parser.rs",
+      "src/number.rs",
+      "src/value/de.rs"
+    ],
+    "underlying_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/unsafe-libyaml-0.2.11/",
+    "control_underlying_lines": {
+      "src/api.rs": 198,
+      "src/dumper.rs": 0,
+      "src/emitter.rs": 0,
+      "src/lib.rs": 85,
+      "src/loader.rs": 0,
+      "src/ops.rs": 19,
+      "src/parser.rs": 571,
+      "src/reader.rs": 153,
+      "src/scanner.rs": 969,
+      "src/success.rs": 4,
+      "src/writer.rs": 0,
+      "src/yaml.rs": 3
+    },
+    "variant_underlying_lines": {
+      "src/api.rs": 219,
+      "src/dumper.rs": 0,
+      "src/emitter.rs": 0,
+      "src/lib.rs": 85,
+      "src/loader.rs": 0,
+      "src/ops.rs": 19,
+      "src/parser.rs": 592,
+      "src/reader.rs": 153,
+      "src/scanner.rs": 969,
+      "src/success.rs": 4,
+      "src/writer.rs": 0,
+      "src/yaml.rs": 3
+    },
+    "underlying_files_with_different_line_counts": [
+      "src/api.rs",
+      "src/parser.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      1525,
+      1525,
+      1525,
+      1525,
+      1525
+    ],
+    "stable_edges": 1525,
+    "union_edges": 1525,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      1530,
+      1530,
+      1530,
+      1530,
+      1530
+    ],
+    "stable_edges": 1530,
+    "union_edges": 1530,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

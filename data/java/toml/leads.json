@@ -1,0 +1,95 @@
+{
+  "captured_from": "data/java/toml/registry-snapshot.json",
+  "metric": "deps.dev directDependentCount summed over all releases",
+  "observed": "2026-11-17",
+  "leads": [
+    {
+      "name": "com.moandjiezana.toml:toml4j",
+      "metric_value": 155,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "toml4j (mwanji)",
+      "api_lead": "new Toml().read(File).toMap()",
+      "note": "TOML 0.4.0 implementation (2017). No hexadecimal/octal/binary integers; dates must carry a Z or +hh:mm offset and are returned as java.util.Date, so local date-time, local date and local time cannot be represented.",
+      "source": "https://github.com/mwanji/toml4j",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "version_seen": "0.7.2",
+      "checked_at_utc": "2026-11-17",
+      "probe": "data/java/toml/probes/toml4j-0.7.2.json",
+      "evidence": "service-config.toml matches the expected typed tree; typed-scalars.toml is rejected: Invalid text after key hex on line 6. Make sure to terminate the value or add a comment (#)."
+    },
+    {
+      "name": "io.github.wasabithumb:jtoml",
+      "metric_value": 53,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "jtoml (wasabithumb)",
+      "api_lead": "JToml.jToml().read(String/Path) -> TomlTable",
+      "note": null,
+      "source": "https://github.com/WasabiThumb/jtoml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "com.akuleshov7:ktoml-core",
+      "metric_value": 28,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "ktoml (Kotlin multiplatform)",
+      "api_lead": "Toml.parseToTomlTree / TomlParser",
+      "note": "Kotlin; JVM artifact ktoml-core-jvm.",
+      "source": "https://github.com/orchestr7/ktoml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "io.hotmoka:toml4j",
+      "metric_value": 15,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "toml4j family (fork)",
+      "api_lead": "new Toml().read(...)",
+      "note": "Republished fork of toml4j.",
+      "source": "https://github.com/Hotmoka/toml4j",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "net.peanuuutz.tomlkt:tomlkt",
+      "metric_value": 5,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "tomlkt (Kotlin serialization)",
+      "api_lead": "Toml.parseToTomlTable(String)",
+      "note": "Kotlin.",
+      "source": "https://github.com/Peanuuutz/tomlkt",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "cc.ekblad:4koma",
+      "metric_value": null,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "4koma (Kotlin)",
+      "api_lead": "TomlValue.from(String)",
+      "note": "deps.dev returned 404.",
+      "source": "https://github.com/valderman/4koma",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    }
+  ],
+  "excluded": [],
+  "promoted": [
+    {
+      "name": "com.fasterxml.jackson.dataformat:jackson-dataformat-toml",
+      "release": "2.23.0",
+      "project": "projects/toml/java/jackson_dataformat_toml"
+    },
+    {
+      "name": "org.tomlj:tomlj",
+      "release": "2.2.0",
+      "project": "projects/toml/java/tomlj"
+    },
+    {
+      "name": "com.electronwill.night-config:toml",
+      "release": "3.9.0",
+      "project": "projects/toml/java/night_config_toml"
+    }
+  ]
+}

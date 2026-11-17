@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T16:59:38.667321+00:00",
+  "project": "toml/cpp/cpptoml",
+  "pass": true,
+  "feedback_kind": "afl_clang_fast_allowlisted_parser_edges_with_llvm_source_lines",
+  "probe": "projects/toml/cpp/cpptoml/parser-probe.cpp",
+  "probe_scope": "library parse call only; no tree walk, typed-tree printing, or harness code",
+  "typed_tree_outputs_verified": true,
+  "base_project_receipt_sha256": "58b497ae7361df6b9d2884e554820fec428e901c33a0cac5d9925e21f1c90adf",
+  "overlay_receipt_sha256": "abe342b770d9c786c6bb61529680d086813fe3cdb8a5f508e62c080f32bafb96",
+  "base_image_id": "sha256:663137d6bdebd1b2aec1360ef662e47b9039c2c6c347ca9be25e736cf5d39769",
+  "overlay_image_id": "sha256:5d69e4d52936fbc90c98e27cae15ed7b16e0c2422f18cf0899e19fda917eeb1b",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 2370,
+  "allowlist": "projects/toml/cpp/cpptoml/afl-allowlist.txt",
+  "allowlist_sha256": "f266ad0b6dac8ac8535a3775510e848651a3913c5019e437d5bd13a77d376fb2",
+  "allowlist_entries": [
+    "src:include/cpptoml.h",
+    "fun:_ZN7cpptoml6parser*",
+    "fun:_ZNK7cpptoml6parser*"
+  ],
+  "coverage_subject_prefix": "/work/source/include/",
+  "repeats_per_control": 3,
+  "repeated_feedback_identical": true,
+  "first_control": "controls/toml/service-config.toml",
+  "first_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "second_control": "controls/toml/typed-scalars.toml",
+  "second_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "first_source_lines": 697,
+  "second_source_lines": 696,
+  "first_source_lines_by_file": {
+    "cpptoml.h": 697
+  },
+  "second_source_lines_by_file": {
+    "cpptoml.h": 696
+  },
+  "source_line_difference": 383,
+  "first_only_lines_by_file": {
+    "cpptoml.h": 192
+  },
+  "second_only_lines_by_file": {
+    "cpptoml.h": 191
+  },
+  "first_afl_tuples": 452,
+  "second_afl_tuples": 444,
+  "afl_tuple_difference": 264,
+  "first_only_afl_tuples": 136,
+  "second_only_afl_tuples": 128,
+  "second_case_kind": "valid_control"
+}

@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T16:59:38.326658+00:00",
+  "projects_total": 2,
+  "projects_passed": 2,
+  "differential_kind": "fixed_valid_typed_scalars",
+  "results": [
+    {
+      "project": "toml/javascript/smol_toml",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "ccc0afd9d32771f3fc965b5a080a44612c5d543a38a1f0697fc26f43aa100e63",
+      "base_project_receipt_sha256": "387bf165b1930a09d5e23a34e48c7f32dad1f448efd2163251f59954771349ca",
+      "base_image_id": "sha256:0db59c252039a7e5bb0739e475014a4f065be9347f8421698163e3b862eb9e4b",
+      "overlay_image_id": "sha256:eed8d874e40cd6937f9c7b5a51ec1320b4b7ffb38e9c889ce9de6bda633ad795",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_output_matches_expected": true,
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 131,
+      "control_afl_tuples": 151,
+      "differential_parser_features": 191,
+      "differential_afl_tuples": 211,
+      "parser_feature_difference": 118,
+      "afl_tuple_difference": 118,
+      "control_only_afl_tuples": 29,
+      "differential_only_afl_tuples": 89,
+      "control_only_features_by_file": {
+        "dist/extract.js": 12,
+        "dist/parse.js": 10,
+        "dist/struct.js": 7
+      },
+      "differential_only_features_by_file": {
+        "dist/date.js": 10,
+        "dist/extract.js": 49,
+        "dist/primitive.js": 25,
+        "dist/struct.js": 5
+      },
+      "control_parser_source_lines_by_file": {
+        "dist/date.js": 77,
+        "dist/error.js": 32,
+        "dist/extract.js": 178,
+        "dist/index.js": 34,
+        "dist/parse.js": 129,
+        "dist/primitive.js": 92,
+        "dist/stringify.js": 30,
+        "dist/struct.js": 124,
+        "dist/util.js": 52
+      },
+      "differential_parser_source_lines_by_file": {
+        "dist/date.js": 102,
+        "dist/error.js": 32,
+        "dist/extract.js": 232,
+        "dist/index.js": 34,
+        "dist/parse.js": 119,
+        "dist/primitive.js": 131,
+        "dist/stringify.js": 30,
+        "dist/struct.js": 84,
+        "dist/util.js": 52
+      },
+      "control_only_parser_source_lines_by_file": {
+        "dist/extract.js": 13,
+        "dist/parse.js": 10,
+        "dist/struct.js": 45
+      },
+      "differential_only_parser_source_lines_by_file": {
+        "dist/date.js": 25,
+        "dist/extract.js": 67,
+        "dist/primitive.js": 39,
+        "dist/struct.js": 5
+      }
+    },
+    {
+      "project": "toml/javascript/toml_eslint_parser",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "a0c6e9a715c1856add0c0c0c108611789fc4a5f3709defaa5833f17cf37b18b3",
+      "base_project_receipt_sha256": "69fa3481543924776feafd745acf7f895c4d528c6e498b9812d699af3c3c2ebe",
+      "base_image_id": "sha256:04a1e9ee3fce9761d4c76f22d5023a7afdfbf0c35faf42244c7e9c689320cc66",
+      "overlay_image_id": "sha256:8a25f3bfde8f3989143481dfad5eac27cd8f0557969720e7ca2d4b6b4e2d445c",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_output_matches_expected": true,
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 282,
+      "control_afl_tuples": 301,
+      "differential_parser_features": 350,
+      "differential_afl_tuples": 369,
+      "parser_feature_difference": 156,
+      "afl_tuple_difference": 156,
+      "control_only_afl_tuples": 44,
+      "differential_only_afl_tuples": 112,
+      "control_only_features_by_file": {
+        "lib/index.mjs": 44
+      },
+      "differential_only_features_by_file": {
+        "lib/index.mjs": 112
+      },
+      "control_parser_source_lines_by_file": {
+        "lib/chunk-15K8U1wQ.mjs": 15,
+        "lib/index.mjs": 1571
+      },
+      "differential_parser_source_lines_by_file": {
+        "lib/chunk-15K8U1wQ.mjs": 15,
+        "lib/index.mjs": 1626
+      },
+      "control_only_parser_source_lines_by_file": {
+        "lib/index.mjs": 184
+      },
+      "differential_only_parser_source_lines_by_file": {
+        "lib/index.mjs": 239
+      }
+    }
+  ]
+}

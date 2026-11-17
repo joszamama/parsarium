@@ -1,7 +1,7 @@
 [
   {
     "name": "PyYAML",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 1227712536,
     "metric_error": null,
     "family": "PyYAML pure Python (CLoader is the libyaml family)",
@@ -9,11 +9,24 @@
     "note": "YAML 1.1 resolver; the pure SafeLoader and the C-accelerated CSafeLoader are separate paths.",
     "found_by": "targeted_documentation_lead",
     "source": "https://pypi.org/project/PyYAML/",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Selected: pinned release, documented local API, both valid controls equal the hand-written typed trees through bytes, str and stream, Docker coverage and stable, input-dependent AFL++ feedback recorded.",
+    "evidence": "projects/yaml/python/pyyaml/verification.json"
+  },
+  {
+    "name": "PyYAML CSafeLoader (libyaml)",
+    "status": "unresolved",
+    "metric_value": null,
+    "metric_error": "Same PyPI package as PyYAML; the package metric is not split by loader route.",
+    "family": "libyaml through PyYAML's _yaml C extension",
+    "api_hint": "yaml.load(data, Loader=yaml.CSafeLoader)",
+    "note": "Separate route inside the PyYAML package: the C extension calls libyaml's scanner/parser; only the constructor and resolver stay in Python.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pyyaml.org/wiki/PyYAMLDocumentation",
+    "reason": "Not run in this round; the selected PyYAML path is the pure-Python SafeLoader. Needs native libyaml coverage to count as its own path."
   },
   {
     "name": "ruamel.yaml",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 177667165,
     "metric_error": null,
     "family": "ruamel.yaml (PyYAML-derived, YAML 1.2)",
@@ -21,7 +34,8 @@
     "note": "Derived from PyYAML; ruamel.yaml.clib is its optional libyaml-derived C loader.",
     "found_by": "targeted_documentation_lead",
     "source": "https://pypi.org/project/ruamel.yaml/",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Selected: pinned release, documented local API, both valid controls equal the hand-written typed trees through bytes, str and stream, Docker coverage and stable, input-dependent AFL++ feedback recorded.",
+    "evidence": "projects/yaml/python/ruamel_yaml/verification.json"
   },
   {
     "name": "strictyaml",

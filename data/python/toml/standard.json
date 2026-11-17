@@ -1,0 +1,142 @@
+{
+  "ecosystem": "python",
+  "format": "TOML 1.0.0",
+  "status": "one_api_host_control_verified",
+  "verified_apis": [
+    {
+      "runtime": "CPython 3.13.1 standard library tomllib",
+      "api": "tomllib.load(local binary file)",
+      "documentation": "https://docs.python.org/3.13/library/tomllib.html",
+      "family": "tomli (tomllib is a vendored copy of tomli)",
+      "control": "controls/toml/service-config.toml",
+      "expected": {
+        "title": {
+          "type": "string",
+          "value": "Parsarium \"service\" control"
+        },
+        "enabled": {
+          "type": "bool",
+          "value": "true"
+        },
+        "retries": {
+          "type": "integer",
+          "value": "3"
+        },
+        "owner": {
+          "name": {
+            "type": "string",
+            "value": "Zoë"
+          },
+          "since": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00Z"
+          }
+        },
+        "database": {
+          "ports": [
+            {
+              "type": "integer",
+              "value": "8000"
+            },
+            {
+              "type": "integer",
+              "value": "8001"
+            },
+            {
+              "type": "integer",
+              "value": "8002"
+            }
+          ],
+          "ratio": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "limits": {
+            "max": {
+              "type": "integer",
+              "value": "10"
+            },
+            "min": {
+              "type": "integer",
+              "value": "-2"
+            }
+          }
+        },
+        "servers": {
+          "alpha": {
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.1"
+            },
+            "tags": [
+              {
+                "type": "string",
+                "value": "edge"
+              },
+              {
+                "type": "string",
+                "value": "eu"
+              }
+            ]
+          },
+          "beta": {
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.2"
+            },
+            "enabled": {
+              "type": "bool",
+              "value": "false"
+            }
+          }
+        },
+        "products": [
+          {
+            "name": {
+              "type": "string",
+              "value": "Hammer"
+            },
+            "sku": {
+              "type": "integer",
+              "value": "738594937"
+            }
+          },
+          {
+            "name": {
+              "type": "string",
+              "value": "Nail"
+            },
+            "color": {
+              "type": "string",
+              "value": "gray"
+            },
+            "points": [
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "2"
+                }
+              },
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "3"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "4"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "result": "data/python/toml/stdlib-tomllib-control.json",
+      "scope_note": "Host control run with CPython 3.13.1 (python.org macOS build) on both controls; no container, coverage or AFL++ feedback yet. tomllib is also the oracle of controls/toml/check_controls.py, so the hand-written expected trees are the independent check."
+    }
+  ]
+}

@@ -1,10 +1,10 @@
 {
   "ecosystem": "python",
   "format": "yaml",
-  "status": "pilot_search_recorded_none_verified",
+  "status": "pilot_two_verified_bounded_search",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 2,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "project name contains 'yaml'"
@@ -15,13 +15,16 @@
   "search_totals": {
     "project name contains 'yaml'": 798
   },
-  "leads_recorded": 6,
+  "leads_recorded": 7,
   "leads_by_status": {
+    "selected": 2,
     "shared_family": 3,
-    "unresolved": 3
+    "unresolved": 2
   },
   "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
-  "uncertainty": "No third-party YAML path is verified yet. The bounded search (project name contains 'yaml'; first 100 hits per query, captured 2026-11-17) and 6 named leads are recorded with one primary adoption value each; leads stay unverified until a pinned release passes both schema-neutral YAML controls, the typed-tree oracle, a Docker harness and stable AFL++ feedback. Package adoption is not YAML-specific use. Wrappers and forks are marked shared_family. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars.",
+  "uncertainty": "Two verified third-party paths, in PyPI last_month order: PyYAML 6.0.3 through the pure-Python yaml.SafeLoader (1,227,712,536 last-month downloads; YAML 1.1 resolvers; the libyaml CSafeLoader route is a separate unresolved lead); ruamel.yaml 0.19.1 through YAML(typ='safe', pure=True) (177,667,165; PyYAML-derived scanner/parser lineage, YAML 1.2 resolver). Each gives the hand-written typed tree on both schema-neutral YAML controls through bytes, decoded str and a local binary stream, with Python line coverage of its own package and three identical AFL++ line-bridge runs per control whose controls differ in scanner.py and parser.py lines. ruamel.yaml derives from PyYAML's pure-Python loader, so the two selected paths share a code lineage though they are separate, separately maintained code bases. The bounded search (project name contains 'yaml'; first 100 alphabetical hits of 798, captured 2026-11-17) and named leads are recorded; remaining leads (strictyaml and oyaml/yamlcore as wrappers, rapidyaml, and PyYAML's CSafeLoader route) are unverified. Package adoption is not YAML-specific use. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys, YAML 1.1-only scalars or malformed input.",
+  "third_party_evidence": "data/python/yaml/parsers.json",
+  "third_party_control_results": "data/python/yaml/verification.json",
   "runtime_evidence": "data/python/yaml/standard.json",
   "registry_snapshot": "data/python/yaml/registry-snapshot.json",
   "unresolved_leads": "data/python/yaml/leads.json"

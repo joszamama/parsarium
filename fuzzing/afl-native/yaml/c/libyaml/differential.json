@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T16:54:25.870742+00:00",
+  "project": "yaml/c/libyaml",
+  "pass": true,
+  "feedback_kind": "afl_clang_fast_parser_scoped_edges_and_source_lines",
+  "probe": "projects/yaml/c/libyaml/parser-probe.c",
+  "probe_scope": "load one document from the local bytes and free it; no tree traversal, typing or printing",
+  "tree_oracle": "hand-written expected typed trees in controls/yaml/check_controls.py (Psych cross-checked)",
+  "exact_tree_outputs_verified": true,
+  "base_project_receipt_sha256": "eccca8361f17ed049e6d75812ad4b8ba991d0a9f5ab2918e9dfbe9e6839a039f",
+  "overlay_receipt_sha256": "f17062390c48246cf1b3bc4b2f2e610ab13c0acb7ea368bd25f9a00a360e00c1",
+  "base_image_id": "sha256:0c6bd2d8993975baa8388fc7f545f3a3b0df09f13d04671163aca53ade6bd22c",
+  "overlay_image_id": "sha256:1af445af362808bbca2b734d2bd931d5a24453f9b14efe1216eb12190afd19c1",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 3200,
+  "allowlist": "projects/yaml/c/libyaml/afl-allowlist.txt",
+  "allowlist_entries": [
+    "src:libyaml-src/src/api.c",
+    "src:libyaml-src/src/reader.c",
+    "src:libyaml-src/src/scanner.c",
+    "src:libyaml-src/src/parser.c",
+    "src:libyaml-src/src/loader.c"
+  ],
+  "afl_instrumented_objects": [
+    "api.o",
+    "loader.o",
+    "parser.o",
+    "reader.o",
+    "scanner.o"
+  ],
+  "source_line_scope": "covered lines under /work/libyaml-src/ in the parser-only probe",
+  "repeats_per_control": 3,
+  "first_control": "controls/yaml/catalog.yaml",
+  "second_control": "controls/yaml/order.yaml",
+  "first_tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+  "second_tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46",
+  "first_parser_lines": 1930,
+  "second_parser_lines": 1894,
+  "parser_line_difference": 210,
+  "first_only_lines_by_file": {
+    "src/api.c": 10,
+    "src/parser.c": 17,
+    "src/reader.c": 3,
+    "src/scanner.c": 78,
+    "src/yaml_private.h": 15
+  },
+  "second_only_lines_by_file": {
+    "src/api.c": 6,
+    "src/parser.c": 39,
+    "src/scanner.c": 42
+  },
+  "first_afl_tuples": 566,
+  "second_afl_tuples": 549,
+  "afl_tuple_difference": 115,
+  "repeated_feedback_identical": true,
+  "second_case_kind": "valid_control"
+}

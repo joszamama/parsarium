@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "package": "com.moandjiezana.toml:toml4j",
+  "release": "0.7.2",
+  "status": "unresolved_control_failed",
+  "checked_at_utc": "2026-11-17",
+  "runtime": "openjdk version \"25.0.5\" 2026-10-20 LTS in eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d (linux/arm64, --network none, --read-only)",
+  "jar_url": "https://repo.maven.apache.org/maven2/com/moandjiezana/toml/toml4j/0.7.2/toml4j-0.7.2.jar",
+  "jar_sha256": "f5475e63e7e89e5db62223489aec7a56bd303543772077a17c2cb54c19ca3a20",
+  "source_url": "https://repo.maven.apache.org/maven2/com/moandjiezana/toml/toml4j/0.7.2/toml4j-0.7.2-sources.jar",
+  "source_sha256": "fc9c72fb6a7abda2a65c037af622471da897f84e0a95643210b1c41328c83c5d",
+  "pom_sha256": "5b76216737f2da9383953accc9ba58f6e739d344678799e6d4d082cf6e1d6bd3",
+  "dependency": {
+    "coordinate": "com.google.code.gson:gson",
+    "release": "2.8.1",
+    "jar_sha256": "4f65e7dca6528d644031c43d159f1614f2ed58db7daf75f1e91a9fc1b57818d4"
+  },
+  "license": "MIT",
+  "license_evidence": "Maven release POM licenses",
+  "documentation": "https://javadoc.io/static/com.moandjiezana.toml/toml4j/0.7.2/com/moandjiezana/toml/Toml.html",
+  "api": "new Toml().read(File).toMap()",
+  "probe_source": "data/java/toml/probes/toml4j-TomlAdapter.java",
+  "probe_source_sha256": "5fbcd95772cd4fd317a03c935ead6c5b1f78b6226d1ff16dde6ee15964f6fa08",
+  "cases": [
+    {
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "exit_code": 0,
+      "matches_expected_tree": true,
+      "error": null
+    },
+    {
+      "control": "controls/toml/typed-scalars.toml",
+      "control_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "exit_code": 1,
+      "matches_expected_tree": false,
+      "error": "Exception in thread \"main\" java.lang.RuntimeException: java.lang.IllegalStateException: Invalid text after key hex on line 6. Make sure to terminate the value or add a comment (#)."
+    }
+  ],
+  "finding": "toml4j 0.7.2 implements TOML 0.4.0. The primary control parses to the expected typed tree, but Toml.read rejects the second control at the hexadecimal integer (line 6, hex = 0xDEAD_BEEF). Its DateValueReaderWriter regex also requires a Z or +hh:mm offset and returns java.util.Date, so the local date-time, local date and local time of that control are outside the API as well. It cannot verify the fixed second control and stays a lead."
+}

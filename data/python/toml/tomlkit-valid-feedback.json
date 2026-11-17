@@ -1,0 +1,79 @@
+{
+  "checked_at_utc": "2026-11-17T16:58:24.063891+00:00",
+  "project": "toml/python/tomlkit",
+  "pass": true,
+  "input_kind": "two fixed valid TOML 1.0.0 controls",
+  "oracle": "hand-written typed trees in controls/toml/*.expected.json; every package API mode and CPython tomllib (/usr/bin/python3 -I in the same image, where the package is not importable) must equal them",
+  "control_oracle": {
+    "modes_matching_expected_tree": [
+      "tomlkit-items",
+      "tomlkit-unwrap",
+      "tomlkit-bytes",
+      "tomlkit-stream"
+    ],
+    "stdlib_tomllib_python": "3.14.4",
+    "stdlib_tomllib_matches": true,
+    "stdlib_tomllib_family": "independent (tomllib is the tomli family)",
+    "package_version": "0.15.2",
+    "tree_sha256": "6d2bf3f9f6f555fc84311a1e4e6af9488563c0f0e2ff06b98ba92e894db5f172"
+  },
+  "variant_oracle": {
+    "modes_matching_expected_tree": [
+      "tomlkit-items",
+      "tomlkit-unwrap",
+      "tomlkit-bytes",
+      "tomlkit-stream"
+    ],
+    "stdlib_tomllib_python": "3.14.4",
+    "stdlib_tomllib_matches": true,
+    "stdlib_tomllib_family": "independent (tomllib is the tomli family)",
+    "package_version": "0.15.2",
+    "tree_sha256": "4718dbdbf4a674dfc79cd455be85ca64736c7a70fd6fd91e097bbc5a74626203"
+  },
+  "feedback_scope": "executed Python source lines of the installed tomlkit 0.15.2 package under /opt/venv/lib/python3.14/site-packages/tomlkit/, mapped to the AFL++ bitmap by the Parsarium Python line bridge",
+  "base_image_id": "sha256:25f08aee0f83763d48d8e174f5e2ddc1e28b3b49a4cad0e1b5e6647c2a9e40f4",
+  "overlay_image_id": "sha256:f3559886ff6b822c5093453c7acc174392c5c68235cf45f323f5c330676427db",
+  "overlay_receipt_sha256": "66e8cbe8bbc270955f541ac55e7a6e919e5e3fe3f9182be6548aa85c1ce8155b",
+  "control": "controls/toml/service-config.toml",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "variant": "controls/toml/typed-scalars.toml",
+  "variant_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "control_output_sha256": "6d2bf3f9f6f555fc84311a1e4e6af9488563c0f0e2ff06b98ba92e894db5f172",
+  "variant_output_sha256": "4718dbdbf4a674dfc79cd455be85ca64736c7a70fd6fd91e097bbc5a74626203",
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "control_parser_features": 845,
+  "variant_parser_features": 789,
+  "control_parser_lines_per_file": {
+    "_compat.py": 2,
+    "_utils.py": 16,
+    "api.py": 1,
+    "container.py": 119,
+    "exceptions.py": 2,
+    "items.py": 234,
+    "parser.py": 408,
+    "source.py": 63
+  },
+  "variant_parser_lines_per_file": {
+    "_compat.py": 2,
+    "_utils.py": 52,
+    "api.py": 1,
+    "container.py": 107,
+    "items.py": 173,
+    "parser.py": 390,
+    "source.py": 64
+  },
+  "format_parser_file": "parser.py",
+  "control_format_parser_features": 408,
+  "variant_format_parser_features": 390,
+  "control_only_features": 230,
+  "variant_only_features": 174,
+  "parser_feature_difference": 404,
+  "format_parser_feature_difference": 200,
+  "control_afl_tuples": 865,
+  "variant_afl_tuples": 806,
+  "control_only_afl_tuples": 230,
+  "variant_only_afl_tuples": 171,
+  "afl_tuple_difference": 401
+}

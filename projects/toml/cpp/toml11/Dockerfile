@@ -1,0 +1,22 @@
+FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends ca-certificates clang curl libclang-rt-21-dev llvm python3 \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+RUN curl --fail --location --retry 3 https://codeload.github.com/ToruNiina/toml11/tar.gz/refs/tags/v4.4.0 -o /work/source.tar.gz \
+    && echo '815bfe6792aa11a13a133b86e7f0f45edc5d71eb78f5fb6686c49c7f792b9049  /work/source.tar.gz' | sha256sum --check \
+    && mkdir /work/source && tar -xzf /work/source.tar.gz -C /work/source --strip-components=1 \
+    && echo 'b547d41695cdfbc1d054b5044578e476a0e9d756849f1e0cb3864cfc83e50a9e  /work/source/LICENSE' | sha256sum --check
+COPY harness.cpp typed-tree.h parser-probe.cpp build.sh afl-allowlist.txt /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+    && { clang --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt
+FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+RUN apt-get update -qq && apt-get install -y --no-install-recommends llvm python3 libstdc++6 \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/parser-probe /work/
+COPY --from=build /work/source /work/source
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh manifest.json /work/
+RUN chmod +x /work/run-control.sh
+ENTRYPOINT ["/work/run-control.sh"]

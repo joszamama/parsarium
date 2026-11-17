@@ -1,0 +1,109 @@
+{
+  "captured_from": "data/python/toml/registry-snapshot.json",
+  "metric": "PyPI Stats last_month downloads excluding known mirrors",
+  "observed": "2026-11-17",
+  "leads": [
+    {
+      "name": "toml",
+      "metric_value": 145147540,
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "family": "toml (uiri)",
+      "api_lead": "toml.loads(str)",
+      "note": "TOML 0.5-era parser; drops the fraction of a local time on the typed-scalars control, so it fails the gate. Not promoted.",
+      "source": "https://pypi.org/project/toml/",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.10.2",
+      "release_wheel_sha256": "806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b",
+      "release_sdist_sha256": "b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f",
+      "license": "MIT",
+      "documentation": "https://github.com/uiri/toml/blob/0.10.2/README.rst",
+      "evidence": {
+        "checked_on_utc": "2026-11-17",
+        "run": "host CPython 3.14.7 venv, toml 0.10.2 py2.py3-none-any wheel installed by hash; toml.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
+        "service-config.toml": "matches the hand-written typed tree",
+        "typed-scalars.toml": "differs at times.local_time: toml.loads returns datetime.time(0, 32) for 00:32:00.25, so the typed value is 00:32:00 instead of 00:32:00.25 (the fractional seconds of a local time are dropped); every other value matches"
+      }
+    },
+    {
+      "name": "rtoml",
+      "metric_value": 1380894,
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "family": "Rust toml crate via PyO3 (toml_parser family)",
+      "api_lead": "rtoml.loads(str)",
+      "note": "PyO3 extension over the Rust toml crate: its parser source is Rust, so a path needs a source build with LLVM coverage of the Rust parser (the Python JSON jiter/orjson native route). Not attempted in this pass; the Rust toml crate family is covered by the Rust cell.",
+      "source": "https://pypi.org/project/rtoml/",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false,
+      "release": "0.14.0",
+      "release_sdist_sha256": "e0f95a59e3fac6394985d59ce18a0c06f2176f2eb9dec2fb8c1105febaf05c59",
+      "license": "MIT"
+    },
+    {
+      "name": "pytoml",
+      "metric_value": 337081,
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "family": "pytoml",
+      "api_lead": "pytoml.loads(str)",
+      "note": "Deprecated by its author.",
+      "source": "https://pypi.org/project/pytoml/",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "pytomlpp",
+      "metric_value": 43243,
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "family": "toml++ via pybind11",
+      "api_lead": "pytomlpp.loads(str)",
+      "note": "Native extension over C++ toml++.",
+      "source": "https://pypi.org/project/pytomlpp/",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "toml-rs",
+      "metric_value": 18062,
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "family": "Rust toml crate via PyO3",
+      "api_lead": "toml_rs.loads(str)",
+      "note": null,
+      "source": "https://pypi.org/project/toml-rs/",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "qtoml",
+      "metric_value": 2002,
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "family": "qtoml",
+      "api_lead": "qtoml.loads(str)",
+      "note": null,
+      "source": "https://pypi.org/project/qtoml/",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    }
+  ],
+  "excluded": [
+    {
+      "name": "tomli-w",
+      "metric_value": 85996374,
+      "status": "excluded",
+      "reason": "Writer only."
+    }
+  ],
+  "promoted": [
+    {
+      "name": "tomlkit",
+      "metric_value": 591365129,
+      "status": "promoted_to_verified",
+      "project": "projects/toml/python/tomlkit"
+    },
+    {
+      "name": "tomli",
+      "metric_value": 263305223,
+      "status": "promoted_to_verified",
+      "project": "projects/toml/python/tomli"
+    }
+  ]
+}

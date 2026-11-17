@@ -1,0 +1,35 @@
+# Parsarium TOML control: typed scalars, string escapes and dotted keys
+[integers]
+decimal = +99
+negative = -17
+underscored = 1_000_000
+hex = 0xDEAD_BEEF
+octal = 0o755
+binary = 0b1101
+
+[floats]
+fraction = 3.25
+negative = -0.5
+exponent = 1e3
+mixed = 1.5625e-2
+
+[strings]
+escapes = "tab\tquote\"backslash\\ \u00e9"
+literal = 'C:\Users\parsarium'
+multiline = """
+first \
+  second"""
+raw_multiline = '''
+line one
+line two'''
+
+[times]
+offset = 1979-05-27T00:32:00.5-07:00
+local_datetime = 1979-05-27T07:32:00
+local_date = 1979-05-27
+local_time = 00:32:00.25
+
+[keys]
+"quoted key" = "q"
+site."example.com" = true
+a.b.c = 1

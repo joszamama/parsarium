@@ -1,19 +1,7 @@
 [
   {
-    "name": "symfony/yaml",
-    "status": "unresolved",
-    "metric_value": 926050815,
-    "metric_error": null,
-    "family": "Symfony Yaml Parser",
-    "api_hint": "Symfony\\Component\\Yaml\\Yaml::parse(string)",
-    "note": null,
-    "found_by": "registry_search",
-    "source": "https://packagist.org/packages/symfony/yaml",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
-  },
-  {
     "name": "mustangostang/spyc",
-    "status": "unresolved",
+    "status": "excluded",
     "metric_value": 51101645,
     "metric_error": null,
     "family": "Spyc",
@@ -21,11 +9,13 @@
     "note": null,
     "found_by": "registry_search",
     "source": "https://packagist.org/packages/mustangostang/spyc",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Pinned 0.6.3 (4627c838) fails both valid controls through Spyc::YAMLLoadString: double-quoted \\u and \\t escapes are not decoded, clip-chomped block scalars lose the final line break, '|-' with more-indented lines becomes a nested list, '...' becomes a sequence item, and {} cannot be told from []. See the probe record.",
+    "version_probed": "0.6.3",
+    "evidence": "data/php/yaml/spyc-valid-control-probe.json"
   },
   {
     "name": "dallgoot/yaml",
-    "status": "unresolved",
+    "status": "excluded",
     "metric_value": 372583,
     "metric_error": null,
     "family": "dallgoot/yaml",
@@ -33,7 +23,9 @@
     "note": null,
     "found_by": "registry_search",
     "source": "https://packagist.org/packages/dallgoot/yaml",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Pinned 1.0.1 (973c8a64) fails the primary valid control through Yaml::parse(string): \\\" and \\t escapes in double-quoted scalars stay undecoded and the single-quoted '' escape is not reduced. See the probe record.",
+    "version_probed": "1.0.1",
+    "evidence": "data/php/yaml/dallgoot-yaml-valid-control-probe.json"
   },
   {
     "name": "pecl/yaml",
@@ -45,6 +37,6 @@
     "note": "PECL extension, not a Composer package; no Packagist metric. Third-party libyaml-family binding.",
     "found_by": "registry_search",
     "source": "https://pecl.php.net/package/yaml",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Unverified lead: PECL extension yaml_parse over libyaml (shared libyaml family); not attempted in this round because it needs a PECL build and native libyaml coverage beyond the PHP line bridge."
   }
 ]

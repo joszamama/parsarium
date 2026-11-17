@@ -1,0 +1,30 @@
+# Parsarium TOML control: nested tables, arrays of tables and inline tables
+title = "Parsarium \"service\" control"
+enabled = true
+retries = 3
+
+[owner]
+name = "Zoë"
+since = 1979-05-27T07:32:00Z
+
+[database]
+ports = [8000, 8001, 8002]
+ratio = 3.25
+limits = { max = 10, min = -2 }
+
+[servers.alpha]
+ip = "10.0.0.1"
+tags = ["edge", "eu"]
+
+[servers.beta]
+ip = "10.0.0.2"
+enabled = false
+
+[[products]]
+name = "Hammer"
+sku = 738594937
+
+[[products]]
+name = "Nail"
+color = "gray"
+points = [{ x = 1, y = 2 }, { x = 3, y = 4 }]

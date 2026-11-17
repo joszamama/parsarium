@@ -2,7 +2,7 @@
 
 `data/formats.json` lists formats and their phase. The ten active formats continue to
 populate `data/cells.json`, `data/parser-readmes.json`, and the top-level totals in
-`data/projects-coverage.json`. JSON, XML, and plain MP3 are pilots. Their 24
+`data/projects-coverage.json`. JSON, XML, plain MP3, and TOML are pilots. Their 32
 ecosystem cells live in `data/pilot-cells.json`, their parser guide index lives in
 `data/pilot-parser-readmes.json`, and their coverage appears under the `pilot` key
 of `data/projects-coverage.json`. Every pilot cell stays explicitly incomplete.

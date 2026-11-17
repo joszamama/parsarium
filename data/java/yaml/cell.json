@@ -1,10 +1,10 @@
 {
   "ecosystem": "java",
   "format": "yaml",
-  "status": "pilot_search_recorded_none_verified",
+  "status": "pilot_two_verified_bounded_search",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 2,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "yaml"
@@ -17,12 +17,16 @@
   },
   "leads_recorded": 5,
   "leads_by_status": {
-    "shared_family": 1,
-    "unresolved": 4
+    "fails_control": 1,
+    "selected": 2,
+    "unresolved": 2
   },
   "ranking_metric": "deps.dev directDependentCount summed over every Maven release",
-  "uncertainty": "No third-party YAML path is verified yet. The bounded search (yaml; first 100 hits per query, captured 2026-11-17) and 5 named leads are recorded with one primary adoption value each; leads stay unverified until a pinned release passes both schema-neutral YAML controls, the typed-tree oracle, a Docker harness and stable AFL++ feedback. Package adoption is not YAML-specific use. Wrappers and forks are marked shared_family. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars.",
+  "uncertainty": "Two verified Java YAML paths: SnakeYAML 2.7 (YAML 1.1 SafeConstructor) and SnakeYAML Engine 3.2 (YAML 1.2, CoreSchema configured), separately maintained code bases with shared lineage. jackson-dataformat-yaml 2.23.0, the top lead by deps.dev summed dependents (32,860), parses every scalar and collection of both controls but returns aliases as anchor-name strings through YAMLMapper.readTree, so it fails the alias part of the control and stays a lead in the SnakeYAML family. SnakeYAML Engine's default JsonSchema reads ~ as a string; the selected path sets the documented CoreSchema. yamlbeans and eo-yaml (134 and 89) are not yet run. The bounded Maven Central search (query yaml, first 100 of 855 hits) and five named leads are recorded; deps.dev summed directDependentCount counts package adoption, not YAML-specific use. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars. Coverage and AFL++ feedback are SnakeYAML and Engine source lines under JaCoCo; the control differences are in the scanner, parser and constructors.",
   "runtime_evidence": "data/java/yaml/standard.json",
   "registry_snapshot": "data/java/yaml/registry-snapshot.json",
-  "unresolved_leads": "data/java/yaml/leads.json"
+  "unresolved_leads": "data/java/yaml/leads.json",
+  "third_party_evidence": "data/java/yaml/parsers.json",
+  "third_party_control_results": "data/java/yaml/verification.json",
+  "afl_feedback": "data/java/yaml/afl-feedback.json"
 }

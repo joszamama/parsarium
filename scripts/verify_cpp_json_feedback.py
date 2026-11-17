@@ -3,7 +3,8 @@
 The base project image replays both valid controls against their pinned
 expected outputs and records covered parser source lines (LLVM lcov export).
 Defaults to the JSON JsonCpp pilot; --format xml --slug xerces_c checks the
-XML Xerces-C++ pilot.
+XML Xerces-C++ pilot, and --format yaml --slug yaml-cpp --repeats 3 the YAML
+yaml-cpp pilot.
 The AFL++ overlay image traces each control twice with afl-showmap. Covered
 lines and AFL++ tuples must repeat exactly per control and differ between the
 two controls. No malformed inputs are run.
@@ -91,7 +92,11 @@ def main() -> None:
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("--format", default="json")
     cli.add_argument("--slug", default="jsoncpp")
+    cli.add_argument("--repeats", type=int, default=REPEATS,
+                     help="identical replays required per control (default 2)")
     args = cli.parse_args()
+    if args.repeats < 2:
+        cli.error("--repeats must be at least 2")
     project, manifest = project_for(args.format, "cpp", args.slug)
     relative = Path(args.format) / "cpp" / args.slug
     overlay = ROOT / "fuzzing/afl-native" / relative
@@ -113,7 +118,7 @@ def main() -> None:
         work = Path(temporary)
         for index, control in enumerate(controls):
             run_lines, run_maps = [], []
-            for attempt in range(REPEATS):
+            for attempt in range(args.repeats):
                 name = f"{index}-{attempt}"
                 common = sandbox(platform, ["-v", f"{control}:/input/case:ro", "-v", f"{work}:/coverage"])
                 run([*common, "--entrypoint", "/bin/sh", base_image, "-c", LINES, "lines", name])
@@ -161,7 +166,7 @@ def main() -> None:
         "base_image_id": base_image,
         "overlay_image_id": overlay_receipt["image_id"],
         "afl_package": overlay_receipt["afl_package"],
-        "repeats_per_control": REPEATS,
+        "repeats_per_control": args.repeats,
         "first_control": manifest["control"],
         "first_sha256": digests[0],
         "second_control": manifest["differential_control"],
@@ -181,7 +186,7 @@ def main() -> None:
         record["dom_oracle"] = "python_json_loads_order_and_number_kind_preserving"
     (overlay / "differential.json").write_text(json.dumps(record, indent=2) + "\n")
     print(f"{relative}: {line_difference} source lines, {map_difference} AFL++ tuples differ; "
-          f"{REPEATS} repeats per control identical", flush=True)
+          f"{args.repeats} repeats per control identical", flush=True)
 
 
 if __name__ == "__main__":

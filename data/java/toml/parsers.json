@@ -1,0 +1,780 @@
+[
+  {
+    "name": "jackson-dataformat-toml",
+    "group": "com.fasterxml.jackson.dataformat",
+    "artifact": "jackson-dataformat-toml",
+    "coordinate": "com.fasterxml.jackson.dataformat:jackson-dataformat-toml",
+    "version": "2.23.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "TomlMapper.builder().enable(TomlReadFeature.PARSE_JAVA_TIME).build().readTree(File) -> JsonNode",
+    "documentation": "https://javadoc.io/doc/com.fasterxml.jackson.dataformat/jackson-dataformat-toml/2.23.0/com/fasterxml/jackson/dataformat/toml/TomlMapper.html",
+    "source": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.23.0/jackson-dataformat-toml-2.23.0-sources.jar",
+    "scope": "TOML 1.0.0 text from a local file into a Jackson JsonNode tree; with PARSE_JAVA_TIME the four date/time kinds are java.time values in POJONodes",
+    "family": "Jackson TOML (own JFlex Lexer and recursive Parser in com.fasterxml.jackson.dataformat.toml)",
+    "family_note": "jackson-dataformat-toml tokenizes and parses TOML with its own JFlex-generated Lexer and hand-written Parser; it does not use the jackson-core JSON tokenizer. It builds the result with jackson-databind's JsonNodeFactory, so jackson-core/jackson-databind 2.23.0 are shared with the Java JSON cell's jackson-core and jackson-databind paths (same Jackson project family, different format parser). Coverage and AFL++ feedback are scoped to the com.fasterxml.jackson.dataformat.toml package.",
+    "configuration_note": "TomlReadFeature.PARSE_JAVA_TIME (documented, default off) is enabled. With the default, offset date-times, local date-times, local dates and local times are returned as TextNodes holding the source text, indistinguishable from strings, and offset date-times are not normalized. Floats are returned as DecimalNode (BigDecimal); the harness converts with doubleValue() because TOML floats are IEEE 754 binary64, then prints the shortest round-trip digits positionally.",
+    "control": "controls/toml/service-config.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/java/jackson_dataformat_toml",
+    "metric": {
+      "name": "deps.dev directDependentCount summed over all releases",
+      "value": 293,
+      "releases": 76,
+      "max_release": "2.15.2",
+      "max_release_direct_dependent_count": 15,
+      "default_release": "2.23.0",
+      "default_release_direct_dependent_count": 1,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml.jackson.dataformat%3Ajackson-dataformat-toml",
+      "snapshot": "data/java/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:49.941394+00:00"
+    },
+    "documentation_feature": "https://javadoc.io/doc/com.fasterxml.jackson.dataformat/jackson-dataformat-toml/2.23.0/com/fasterxml/jackson/dataformat/toml/TomlReadFeature.html"
+  },
+  {
+    "name": "tomlj",
+    "group": "org.tomlj",
+    "artifact": "tomlj",
+    "coordinate": "org.tomlj:tomlj",
+    "version": "2.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "Toml.parse(Path, TomlVersion.V1_0_0) -> TomlParseResult (TomlTable); hasErrors() must be false",
+    "documentation": "https://javadoc.io/doc/org.tomlj/tomlj/2.2.0/org/tomlj/Toml.html",
+    "source": "https://repo.maven.apache.org/maven2/org/tomlj/tomlj/2.2.0/tomlj-2.2.0-sources.jar",
+    "scope": "TOML 1.0.0 text from a local file into TomlTable/TomlArray with Long, Double, Boolean, String and java.time values",
+    "family": "tomlj (ANTLR 4 grammar TomlLexer.g4/TomlParser.g4 with generated lexer/parser and own visitors; origin Apache Tuweni toml)",
+    "family_note": "tomlj 2.2.0 parses with ANTLR-generated org.tomlj.internal.TomlLexer/TomlParser plus its own LineVisitor/ValueVisitor table builders. The ANTLR 4 runtime is shaded into org.tomlj.internal.antlr; the release sources jar does not include it, so it is outside the coverage and AFL++ feedback scope. No other selected Java TOML path shares this code.",
+    "configuration_note": "The parse is pinned to TomlVersion.V1_0_0 (2.2.0 also offers V1_1_0 and LATEST = V1_1_0). tomlj records parse errors in TomlParseResult.errors() instead of throwing; the harness fails on any error. Keys are read with entrySet() (raw names), not get(String), which would interpret dots.",
+    "control": "controls/toml/service-config.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/java/tomlj",
+    "metric": {
+      "name": "deps.dev directDependentCount summed over all releases",
+      "value": 133,
+      "releases": 11,
+      "max_release": "1.1.1",
+      "max_release_direct_dependent_count": 71,
+      "default_release": "2.2.0",
+      "default_release_direct_dependent_count": 9,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.tomlj%3Atomlj",
+      "snapshot": "data/java/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:48.866144+00:00"
+    }
+  },
+  {
+    "name": "night-config-toml",
+    "group": "com.electronwill.night-config",
+    "artifact": "toml",
+    "coordinate": "com.electronwill.night-config:toml",
+    "version": "3.9.0",
+    "license": "LGPL-3.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "new TomlParser().parse(Reader) on a local UTF-8 file -> CommentedConfig",
+    "documentation": "https://javadoc.io/doc/com.electronwill.night-config/toml/3.9.0/com/electronwill/nightconfig/toml/TomlParser.html",
+    "source": "https://repo.maven.apache.org/maven2/com/electronwill/night-config/toml/3.9.0/toml-3.9.0-sources.jar",
+    "scope": "TOML 1.0.0 text from a local UTF-8 Reader into a night-config CommentedConfig (sub-tables Config, arrays List, Integer/Long, Double, Boolean, String and java.time values)",
+    "family": "NightConfig TOML (own hand-written TomlParser/TableParser/ValueParser over night-config core CharacterInput)",
+    "family_note": "The TOML grammar is implemented in the com.electronwill.nightconfig.toml package of the toml artifact; it reads characters through the format-neutral night-config core (CharacterInput, Config maps), which is shared with night-config's JSON/YAML/HOCON modules. Coverage and AFL++ feedback are scoped to the toml package. No other selected Java TOML path shares this code.",
+    "configuration_note": "Default TomlParser configuration: TomlVersion.v1_0, strict bare keys and strict '=' separators (both lenient modes default off). Small integers are returned as Integer and larger ones as Long; the harness prints both as decimal integers.",
+    "control": "controls/toml/service-config.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/java/night_config_toml",
+    "metric": {
+      "name": "deps.dev directDependentCount summed over all releases",
+      "value": 77,
+      "releases": 27,
+      "max_release": "3.6.7",
+      "max_release_direct_dependent_count": 17,
+      "default_release": "3.9.0",
+      "default_release_direct_dependent_count": 6,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.electronwill.night-config%3Atoml",
+      "snapshot": "data/java/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:50.730636+00:00"
+    }
+  }
+]

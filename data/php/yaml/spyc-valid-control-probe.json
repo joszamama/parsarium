@@ -1,0 +1,113 @@
+{
+  "package": "mustangostang/spyc",
+  "release": "0.6.3",
+  "composer_reference": "4627c838b16550b666d15aeae1e5289dd5b77da0",
+  "archive_url": "https://codeload.github.com/mustangostang/spyc/legacy.zip/4627c838b16550b666d15aeae1e5289dd5b77da0",
+  "archive_sha256": "a0d2e6218b76df8cedcdf1923ebcb9794e2754de5a2b3be6fa53324dc8c5a992",
+  "spyc_php_sha256": "6925d685a59ca4bd6703e390749feea350a0359fb254e740f9d1c64d18b49b22",
+  "license": "MIT (COPYING)",
+  "api": "Spyc::YAMLLoadString(string) over the local control text",
+  "runtime": "host PHP 8.5.12 (cli, NTS), macOS; probe only, no Docker image",
+  "observed_at_utc": "2026-11-17T16:51:09.307751+00:00",
+  "pass": false,
+  "observed_output": {
+    "catalog.yaml": {
+      "kind": "catalog",
+      "version": 2,
+      "ratio": 0.25,
+      "offset": -17,
+      "enabled": true,
+      "retired": false,
+      "missing": null,
+      "title": "Caf\\u00e9 \"quoted\"\\tend",
+      "single": "it's here",
+      "tags": [
+        "alpha",
+        "beta",
+        "gamma delta"
+      ],
+      "point": {
+        "lat": 1,
+        "lon": -2.5
+      },
+      "items": [
+        {
+          "id": 7,
+          "name": "first item",
+          "note": "line one\nline two"
+        },
+        {
+          "id": 8,
+          "name": "Zürich",
+          "note": "folded text"
+        }
+      ],
+      "defaults": {
+        "retries": 3,
+        "label": "base"
+      },
+      "service": {
+        "settings": {
+          "retries": 3,
+          "label": "base"
+        },
+        "label": "edge"
+      }
+    },
+    "order.yaml": [
+      {
+        "order": "A-7",
+        "lines": [
+          {
+            "sku": "Xé-1",
+            "qty": 2,
+            "price": 12.5
+          },
+          {
+            "sku": "B '2'",
+            "qty": 1,
+            "price": 0.75
+          }
+        ],
+        "flags": [],
+        "meta": []
+      },
+      {
+        "city": "Berlin",
+        "zip": "10115"
+      },
+      {
+        "city": "Berlin",
+        "zip": "10115"
+      },
+      [
+        1,
+        [
+          2,
+          3
+        ],
+        {
+          "k": "v"
+        }
+      ],
+      "plain multi word",
+      "line\nbreak",
+      [
+        [
+          "indented"
+        ]
+      ],
+      null,
+      false,
+      "..."
+    ]
+  },
+  "mismatches_against_oracle": [
+    "catalog.yaml $.title: the double-quoted escapes \\u00e9 and \\t are not decoded (observed 'Caf\\\\u00e9 \"quoted\"\\\\tend', expected 'Café \"quoted\"\\tend')",
+    "catalog.yaml $.items[0].note and $.items[1].note: clip-chomped block scalars lose their final line break ('line one\\nline two', 'folded text')",
+    "order.yaml $[0].meta: the empty flow mapping {} is returned as an empty PHP array, indistinguishable from the empty sequence []; Spyc has no object-for-map mode",
+    "order.yaml $[6]: the strip-chomped literal block '|-' with a more-indented line is returned as [['indented']] instead of 'kept\\n  indented'",
+    "order.yaml: the '...' document end marker is returned as an extra string sequence item"
+  ],
+  "decision": "Excluded from selection: the pinned release does not reproduce either valid control's typed tree. No harness, coverage or AFL++ overlay was built."
+}

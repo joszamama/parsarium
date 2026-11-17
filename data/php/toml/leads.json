@@ -1,0 +1,198 @@
+{
+  "captured_from": "data/php/toml/registry-snapshot.json",
+  "metric": "Packagist total downloads",
+  "observed": "2026-11-17",
+  "leads": [
+    {
+      "name": "yosymfony/toml",
+      "metric_value": 1996947,
+      "metric": "Packagist total downloads",
+      "family": "yosymfony/toml (own lexer and parser)",
+      "api_lead": "Toml::parse(string) -> array",
+      "note": "TOML 0.4.0; likely rejects hexadecimal integers and dotted keys.",
+      "source": "https://packagist.org/packages/yosymfony/toml",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v1.0.4",
+      "composer_reference": "bdab92ad920d0e36810a3a3e4a998d23f3498f8e",
+      "source_sha256": "10a7dc7083e92b37385c46f2f31afc4b988659e66d5a36bec50c19f08002cad3",
+      "archive_url": "https://codeload.github.com/yosymfony/toml/legacy.zip/bdab92ad920d0e36810a3a3e4a998d23f3498f8e",
+      "license": "MIT",
+      "evidence": "Toml::parse(file_get_contents('controls/toml/typed-scalars.toml')) throws Yosymfony\\Toml\\Exception\\ParseException: Syntax error: unexpected token \"T_UNQUOTED_KEY\" at line 6 with value \"xDEAD_BEEF\". Expected T_NEWLINE or T_EOS. (hex = 0xDEAD_BEEF; the release implements TOML 0.4.0, which has no hexadecimal, octal or binary integers). Loading the release on PHP 8.5 also raises E_DEPRECATED implicit-nullable notices.",
+      "checked_at_utc": "2026-11-17",
+      "checked_with": "PHP 8.5.12 CLI, composer install of the pinned release"
+    },
+    {
+      "name": "devium/toml",
+      "metric_value": 134459,
+      "metric": "Packagist total downloads",
+      "family": "devium/toml (own parser)",
+      "api_lead": "Toml::decode(string, asArray: true, asFloat: true)",
+      "note": "TOML 1.0.0/1.1.0.",
+      "source": "https://packagist.org/packages/devium/toml",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "1.1.1",
+      "composer_reference": "59c82e8a1cb5294063c65baf86ad694106da9070",
+      "source_sha256": "0d3d2be39778473efbde53761b3142b68f7bd07d9af41a27e1388148ff1c0bb2",
+      "archive_url": "https://codeload.github.com/vanodevium/toml/legacy.zip/59c82e8a1cb5294063c65baf86ad694106da9070",
+      "license": "MIT",
+      "evidence": "service-config.toml matches its typed tree exactly. typed-scalars.toml differs only at times.local_time: 00:32:00.25 is returned as Devium\\Toml\\TomlLocalTime {hour: 0, minute: 32, second: 0, millisecond: 25}; TomlLocalTime::fromString() takes intval() of the fraction digits, so .25 s becomes 25 ms (the README documents millisecond 999 for .999999), giving 00:32:00.025 instead of 00:32:00.25. Its __toString() prints .25 only because it echoes the same integer. Without asFloat the decoder returns fractional floats such as 3.25 as strings (documented default).",
+      "checked_at_utc": "2026-11-17",
+      "checked_with": "PHP 8.5.12 CLI, composer install of the pinned release"
+    },
+    {
+      "name": "jamesmoss/toml",
+      "metric_value": 31882,
+      "metric": "Packagist total downloads",
+      "family": "jamesmoss/toml",
+      "api_lead": "Toml\\Parser::fromString(string)",
+      "note": "Old TOML draft.",
+      "source": "https://packagist.org/packages/jamesmoss/toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "leonelquinteros/php-toml",
+      "metric_value": 7863,
+      "metric": "Packagist total downloads",
+      "family": "leonelquinteros/php-toml",
+      "api_lead": "Toml::parse(string)",
+      "note": "Old TOML draft.",
+      "source": "https://packagist.org/packages/leonelquinteros/php-toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "zidizei/toml-php",
+      "metric_value": 121,
+      "metric": "Packagist total downloads",
+      "family": "zidizei/toml-php",
+      "api_lead": "Toml::parse(string)",
+      "note": null,
+      "source": "https://packagist.org/packages/zidizei/toml-php",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "app-hive/toml",
+      "metric_value": 30,
+      "metric": "Packagist total downloads",
+      "family": "app-hive/toml",
+      "api_lead": "Toml::parse(string)",
+      "note": null,
+      "source": "https://packagist.org/packages/app-hive/toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "petalbranch/toml",
+      "metric_value": 20,
+      "metric": "Packagist total downloads",
+      "family": "petalbranch/toml",
+      "api_lead": "Toml::decode(string)",
+      "note": null,
+      "source": "https://packagist.org/packages/petalbranch/toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "checkdomain/php-toml",
+      "metric_value": 15,
+      "metric": "Packagist total downloads",
+      "family": "checkdomain/php-toml",
+      "api_lead": "Parser::parse(string)",
+      "note": null,
+      "source": "https://packagist.org/packages/checkdomain/php-toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "dayvsonspacca/psl-toml",
+      "metric_value": 4,
+      "metric": "Packagist total downloads",
+      "family": "psl-toml (over php-standard-library)",
+      "api_lead": "parse(string)",
+      "note": null,
+      "source": "https://packagist.org/packages/dayvsonspacca/psl-toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "makhnanov/toml",
+      "metric_value": 3,
+      "metric": "Packagist total downloads",
+      "family": "yosymfony/toml family (fork)",
+      "api_lead": "Toml::parse(string)",
+      "note": "Fork of yosymfony/toml.",
+      "source": "https://packagist.org/packages/makhnanov/toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "azjezz/toml",
+      "metric_value": 1,
+      "metric": "Packagist total downloads",
+      "family": "azjezz/toml",
+      "api_lead": "parse(string)",
+      "note": null,
+      "source": "https://packagist.org/packages/azjezz/toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "cline/toml",
+      "metric_value": 0,
+      "metric": "Packagist total downloads",
+      "family": "yosymfony/toml family (fork)",
+      "api_lead": "Toml::parse(string)",
+      "note": "Fork of yosymfony/toml.",
+      "source": "https://packagist.org/packages/cline/toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "blixon/toml",
+      "metric_value": 0,
+      "metric": "Packagist total downloads",
+      "family": "blixon/toml",
+      "api_lead": "Toml::parse(string)",
+      "note": null,
+      "source": "https://packagist.org/packages/blixon/toml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false
+    }
+  ],
+  "excluded": [
+    {
+      "name": "m1/vars",
+      "metric_value": 124497,
+      "status": "excluded",
+      "reason": "Configuration loader; delegates TOML to yosymfony/toml."
+    },
+    {
+      "name": "davidbadura/fixtures-bundle",
+      "metric_value": 136839,
+      "status": "excluded",
+      "reason": "Symfony fixtures bundle; delegates parsing."
+    },
+    {
+      "name": "webuni/front-matter",
+      "metric_value": 291996,
+      "status": "excluded",
+      "reason": "Front-matter splitter; delegates TOML to a selected parser."
+    },
+    {
+      "name": "bluebaytravel/phrontmatter",
+      "metric_value": 2594,
+      "status": "excluded",
+      "reason": "Front-matter splitter; delegates parsing."
+    },
+    {
+      "name": "guanguans/php-cs-fixer-custom-fixers",
+      "metric_value": 13074,
+      "status": "excluded",
+      "reason": "Code-style fixers; not a parser API."
+    }
+  ]
+}

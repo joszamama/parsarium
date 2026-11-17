@@ -1,0 +1,47 @@
+{
+  "ecosystem": "php",
+  "format": "toml",
+  "status": "pilot_two_selected_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 2,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "toml",
+    "toml parser"
+  ],
+  "search_totals": {
+    "toml": 14635,
+    "toml parser": 83
+  },
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 183,
+  "unique_search_hits": 162,
+  "unresolved_documentation_leads": 13,
+  "uncertainty": "Bounded TOML search captured 2026-11-17: 2 queries, 183 recorded hits (162 unique), at most 100 per query. Two paths are verified on both valid controls: internal/toml 1.1.3 and php-collective/toml 0.1.5. Neither array API keeps the TOML scalar kinds (internal/toml returns local date-times and local dates as DateTimeImmutable like offset date-times and local times as strings; php-collective/toml returns all three local kinds as strings), so each harness reads the kinds from the library's documented AST value nodes and requires the AST walk to place exactly the values the library's own array assembly returns. The two most downloaded leads failed the typed-scalars control: yosymfony/toml v1.0.4 (TOML 0.4.0) rejects the hexadecimal integer, and devium/toml 1.1.1 stores the local time fraction .25 as 25 milliseconds. 13 leads remain unresolved, 11 of them not yet run (low-download or old-draft packages). Packagist lifetime downloads measure historical adoption, not TOML parsing frequency. Two valid controls establish only the tested TOML 1.0.0 subset; empty tables (indistinguishable from empty arrays in PHP), malformed input, huge documents and TOML 1.1 features are untested.",
+  "primary_metric": "Packagist total downloads",
+  "registry_snapshot": "data/php/toml/registry-snapshot.json",
+  "unresolved_leads": "data/php/toml/leads.json",
+  "runtime_evidence": "data/php/toml/standard.json",
+  "selection": "Two Packagist-ranked paths passed both valid controls with exact typed trees, parser-source line coverage and stable AFL++ feedback: internal/toml 1.1.3 (325,891 downloads) and php-collective/toml 0.1.5 (28,378). Both are read through their documented AST because their array APIs drop the local date/time kinds.",
+  "third_party_evidence": "data/php/toml/verification.json",
+  "third_party_control_results": [
+    {
+      "package": "internal/toml",
+      "version": "1.1.3",
+      "pass": true,
+      "project_receipt": "projects/toml/php/internal_toml/verification.json",
+      "second_valid_control_pass": true,
+      "feedback_receipt": "data/php/toml/internal-toml-feedback-differential.json"
+    },
+    {
+      "package": "php-collective/toml",
+      "version": "0.1.5",
+      "pass": true,
+      "project_receipt": "projects/toml/php/php_collective_toml/verification.json",
+      "second_valid_control_pass": true,
+      "feedback_receipt": "data/php/toml/php-collective-toml-feedback-differential.json"
+    }
+  ],
+  "afl_feedback": "data/php/toml/afl-feedback.json"
+}

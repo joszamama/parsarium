@@ -1,0 +1,308 @@
+[
+  {
+    "name": "smol-toml",
+    "version": "1.9.1",
+    "license": "BSD-3-Clause",
+    "npm_integrity": "sha512-j7WyPdf0CJoutMzMoPLF/bVXHtKZIT9Rb4eGeEbWw8X2t5oirjPgpL+OpaENZrILYaXqYwnVH+qgUwVbl+pUJQ==",
+    "tarball_sha256": "4ac8392f1918c22a4366be19047cf53aa42646077d4c711b2ef73263beefb172",
+    "source": "https://registry.npmjs.org/smol-toml/-/smol-toml-1.9.1.tgz",
+    "license_evidence": "https://registry.npmjs.org/smol-toml/1.9.1 (license BSD-3-Clause; LICENSE file and SPDX headers in dist/)",
+    "documentation": "https://github.com/squirrelchat/smol-toml/blob/v1.9.1/README.md#usage",
+    "input_api": "parse(text, { integersAsBigInt: true }) on local bytes decoded as strict UTF-8 text; the typed tree walks the returned TomlTable (BigInt integers, Number floats, TomlDate date-times)",
+    "scope": "One TOML document from local bytes decoded as strict UTF-8 (BOM kept) and passed once to parse(text, { integersAsBigInt: true }). Only the two valid TOML 1.0.0 controls were run",
+    "family": "smol-toml (own hand-written TOML parser)",
+    "family_note": "smol-toml 1.9.1 has no runtime dependencies. dist/parse.js runs its own document loop over the text (table headers, arrays of tables, key/value lines) and dist/struct.js, dist/extract.js and dist/primitive.js parse keys, inline tables, arrays, strings, numbers and date-times by character scanning; dist/date.js holds TomlDate. It is not a wrapper over another parser. confbox 0.3.2 bundles a minified copy of this parser (dist/_chunks/libs/smol-toml.mjs), so confbox is in the smol-toml family, not a separate engine.",
+    "shared_family_statement": "Own family. confbox's parseTOML is a bundled copy of smol-toml and would share this family.",
+    "control": "controls/toml/service-config.toml",
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "metric": {
+      "name": "npm downloads, last month",
+      "value": 252264468,
+      "window": "2026-10-18 to 2026-11-16",
+      "source": "https://api.npmjs.org/downloads/point/last-month/smol-toml",
+      "snapshot": "data/javascript/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:52.618351+00:00"
+    },
+    "project": "projects/toml/javascript/smol_toml",
+    "verification_note": "The README (tag v1.9.1) documents parse(toml, options) and the integersAsBigInt option (\"parse integers as BigInt\") and TomlDate with isDate()/isTime()/isLocal(). With integersAsBigInt: true every TOML integer is a BigInt and every float a Number, so integer 1000 and float 1e3 stay distinct; without the option both come back as the Number 1000. The adapter decodes the bytes with TextDecoder('utf-8', {fatal: true, ignoreBOM: true}), calls parse once and builds the typed tree from the returned values: BigInt -> integer, Number -> float (shortest round-trip digits written positionally), TomlDate isDate() -> date-local, isTime() -> time-local, isLocal() -> datetime-local, otherwise datetime as the UTC instant of Date.prototype.toISOString with the zero fraction trimmed. TomlDate keeps millisecond precision only; the controls need at most two fractional digits. Both controls match the expected typed trees exactly (data/javascript/toml/smol-toml-tree-verification.json). Only valid controls were run."
+  },
+  {
+    "name": "toml-eslint-parser",
+    "version": "1.0.3",
+    "license": "MIT",
+    "npm_integrity": "sha512-A5F0cM6+mDleacLIEUkmfpkBbnHJFV1d2rprHU2MXNk7mlxHq2zGojA+SRvQD1RoMo9gqjZPWEaKG4v1BQ48lw==",
+    "tarball_sha256": "3554e44f8a9df916700c3d58f469f7110711174feb54799c282069a733e901fb",
+    "source": "https://registry.npmjs.org/toml-eslint-parser/-/toml-eslint-parser-1.0.3.tgz",
+    "license_evidence": "https://registry.npmjs.org/toml-eslint-parser/1.0.3 (license MIT; LICENSE file in the tarball)",
+    "documentation": "https://github.com/ota-meshi/toml-eslint-parser/blob/6008e35499342f1116262162d16dbcab0c84760c/README.md#usage-for-directly",
+    "input_api": "parseTOML(text, { tomlVersion: '1.0.0' }) on local bytes decoded as strict UTF-8 text; the typed tree walks the returned TOML syntax tree (TOMLTable resolvedKey, TOMLKeyValue keys via getStaticTOMLValue, TOMLValue kind and value)",
+    "scope": "One TOML document from local bytes decoded as strict UTF-8 (BOM kept) and passed once to parseTOML(text, { tomlVersion: '1.0.0' }); the typed tree is assembled from the syntax tree's resolved table keys, key paths and typed value nodes. Only the two valid TOML 1.0.0 controls were run",
+    "family": "toml-eslint-parser (own code-point tokenizer and syntax-tree parser)",
+    "family_note": "toml-eslint-parser 1.0.3 ships one bundled module, lib/index.mjs, holding its own code-point tokenizer (TOML 1.0/1.1 escapes, numbers, date-times), its own parser that builds ESLint-compatible TOML nodes and resolves table keys (resolvedKey with array-of-tables indices) and reports redefinitions, and getStaticTOMLValue. Its only dependency, eslint-visitor-keys 5.0.1, lists AST child keys and parses nothing. It does not call smol-toml, toml, @iarna/toml or any other TOML parser; it is a separate family from smol-toml.",
+    "shared_family_statement": "Own family; no code shared with smol-toml or the confbox bundle.",
+    "control": "controls/toml/service-config.toml",
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "metric": {
+      "name": "npm downloads, last month",
+      "value": 7684028,
+      "window": "2026-10-18 to 2026-11-16",
+      "source": "https://api.npmjs.org/downloads/point/last-month/toml-eslint-parser",
+      "snapshot": "data/javascript/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:52.618351+00:00"
+    },
+    "project": "projects/toml/javascript/toml_eslint_parser",
+    "verification_note": "The README at gitHead 6008e35499342f1116262162d16dbcab0c84760c (the 1.0.3 tarball's gitHead) documents direct use: parseTOML(code) returns the AST and getStaticTOMLValue(ast) its static value, and parserOptions.tomlVersion selects 1.0.0 or 1.1.0 (default 1.1.0). getStaticTOMLValue alone returns plain Numbers and Dates, so integer 1000 and float 1e3 or a local date and an offset date-time cannot be told apart from it; the AST keeps them apart. The adapter decodes the bytes with TextDecoder('utf-8', {fatal: true, ignoreBOM: true}), calls parseTOML once with tomlVersion '1.0.0', and assembles the typed tree from the returned nodes: table paths from each TOMLTable's resolvedKey (array-of-tables entries carry numeric indices), key paths from getStaticTOMLValue(key), integers from the node's BigInt, floats from its Number (shortest round-trip digits written positionally), date-time kinds from the node kind with the Date's UTC fields (local kinds are stored as if UTC; the offset date-time Date is the instant). It never re-parses the text and does not read the raw datetime lexeme. Dates keep millisecond precision only; the controls need at most two fractional digits. Both controls match the expected typed trees exactly (data/javascript/toml/toml-eslint-parser-tree-verification.json). Only valid controls were run."
+  }
+]

@@ -142,6 +142,8 @@ class FandangoGenerateTest(unittest.TestCase):
         self.assertIn("mp3", fandango_generate.FORMATS)
         self.assertNotIn("mp3", fandango_generate.FANBASE_FORMATS)
         self.assertEqual(fandango_generate.LOCAL_SPECS["mp3"], "mp3_plain.fan")
+        self.assertNotIn("yaml", fandango_generate.FANBASE_FORMATS)
+        self.assertEqual(fandango_generate.LOCAL_SPECS["yaml"], "yaml.fan")
 
     def test_plain_mp3_default_uses_local_spec_and_checks_frames(self):
         control = ROOT / "controls/mp3/go-tone-44k-mono.mp3"

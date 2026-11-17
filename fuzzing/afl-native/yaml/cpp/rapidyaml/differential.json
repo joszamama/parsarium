@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T17:03:10.439932+00:00",
+  "project": "yaml/cpp/rapidyaml",
+  "pass": true,
+  "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+  "base_project_receipt_sha256": "aaf12efd60b80cc2cc0642b1faa6172cda2d6543cca37f4ce865a4a037fdfbd6",
+  "overlay_receipt_sha256": "d858dd843f067ce0ac4bd59d85fa92d23e74b5354294f29f253a74eb6d4e2d80",
+  "base_image_id": "sha256:613e618121f534f47b45346f840dfe79d2d36514f4384f331d847602589f7df3",
+  "overlay_image_id": "sha256:7430f0e438866fd35b0177fa7c2fbf91d143381a7df73845eb3f6c889d992ac0",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "repeats_per_control": 3,
+  "first_control": "controls/yaml/catalog.yaml",
+  "first_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "second_control": "controls/yaml/order.yaml",
+  "second_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+  "second_control_output": {
+    "tree": [
+      "seq",
+      [
+        [
+          "map",
+          [
+            [
+              "order",
+              [
+                "str",
+                "A-7"
+              ]
+            ],
+            [
+              "lines",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "X\u00e9-1"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "2"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "12.5"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "B '2'"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "1"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "0.75"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "flags",
+              [
+                "seq",
+                []
+              ]
+            ],
+            [
+              "meta",
+              [
+                "map",
+                []
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "seq",
+          [
+            [
+              "int",
+              "1"
+            ],
+            [
+              "seq",
+              [
+                [
+                  "int",
+                  "2"
+                ],
+                [
+                  "int",
+                  "3"
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "k",
+                  [
+                    "str",
+                    "v"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "str",
+          "plain multi word"
+        ],
+        [
+          "str",
+          "line\nbreak"
+        ],
+        [
+          "str",
+          "kept\n  indented"
+        ],
+        [
+          "null"
+        ],
+        [
+          "bool",
+          false
+        ]
+      ]
+    ]
+  },
+  "first_source_lines": 3577,
+  "second_source_lines": 3531,
+  "source_line_difference": 998,
+  "first_only_lines_by_file": {
+    "ext/c4core.src/c4/charconv.hpp": 19,
+    "ext/c4core.src/c4/ext/fast_float_all.h": 10,
+    "ext/c4core.src/c4/substr.hpp": 17,
+    "ext/c4core.src/c4/utf.cpp": 12,
+    "src/c4/yml/event_handler_stack.hpp": 4,
+    "src/c4/yml/event_handler_tree.hpp": 16,
+    "src/c4/yml/filter_processor.hpp": 21,
+    "src/c4/yml/parse_engine.def.hpp": 414,
+    "src/c4/yml/parser_state.hpp": 4,
+    "src/c4/yml/tree.hpp": 5
+  },
+  "second_only_lines_by_file": {
+    "ext/c4core.src/c4/ext/fast_float_all.h": 4,
+    "ext/c4core.src/c4/substr.hpp": 4,
+    "src/c4/yml/event_handler_tree.hpp": 63,
+    "src/c4/yml/node_type.hpp": 3,
+    "src/c4/yml/parse_engine.def.hpp": 291,
+    "src/c4/yml/parser_state.hpp": 5,
+    "src/c4/yml/tag.cpp": 7,
+    "src/c4/yml/tag.hpp": 3,
+    "src/c4/yml/tree.cpp": 77,
+    "src/c4/yml/tree.hpp": 19
+  },
+  "first_afl_tuples": 1462,
+  "second_afl_tuples": 1429,
+  "afl_tuple_difference": 355,
+  "second_case_kind": "valid_control"
+}

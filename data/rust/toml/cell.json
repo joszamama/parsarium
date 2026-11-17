@@ -1,0 +1,34 @@
+{
+  "ecosystem": "rust",
+  "format": "toml",
+  "status": "pilot_two_selected_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 2,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "toml",
+    "toml parser",
+    "toml deserialize"
+  ],
+  "search_totals": {
+    "toml": 71635,
+    "toml parser": 8178,
+    "toml deserialize": 6540
+  },
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 300,
+  "unique_search_hits": 283,
+  "unresolved_documentation_leads": 7,
+  "uncertainty": "Bounded TOML search captured 2026-11-17: 3 crates.io queries, 300 recorded hits (283 unique), at most 100 per query. Two paths are verified: toml 1.2.1+spec-1.1.0 and toml_edit 0.25.19+spec-1.1.0. Both lex and parse through the same toml_parser 1.1.5 crate and build their own trees from its events, so they are one parser family with two tree builders, not two independent parsers; their coverage is recorded separately for the own crate and for toml_parser. basic-toml 0.1.10 and toml-span 0.7.2 have no datetime type and reject both controls at the first offset date-time, so they stay leads. 7 leads remain, five of them not run (toml_parser has no value tree). The pinned releases implement TOML 1.1.0; two valid TOML 1.0.0 controls establish only the tested subset; malformed input, huge documents and TOML 1.1 features are untested. Recent downloads include transitive dependency pulls (Cargo itself depends on toml and toml_edit). toml_edit stores tables in IndexMaps with std RandomState hashing; without the overlay's getrandom AFL_PRELOAD shim, 1 of 5 afl-showmap runs on service-config.toml gave 1,546 instead of 1,530 tuples (checked 2026-11-17), so its overlay fixes the hash keys (afl_fixed_hashmap_keys) and then repeats are identical.",
+  "primary_metric": "crates.io recent downloads (90 days)",
+  "registry_snapshot": "data/rust/toml/registry-snapshot.json",
+  "unresolved_leads": "data/rust/toml/leads.json",
+  "runtime_evidence": "data/rust/toml/standard.json",
+  "third_party_evidence": "data/rust/toml/parsers.json",
+  "third_party_control_results": [
+    "projects/toml/rust/toml/verification.json",
+    "projects/toml/rust/toml_edit/verification.json"
+  ],
+  "protocol": "catalog/toml/PROTOCOL.md"
+}

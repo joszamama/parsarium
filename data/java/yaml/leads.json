@@ -1,7 +1,7 @@
 [
   {
     "name": "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml",
-    "status": "shared_family",
+    "status": "fails_control",
     "metric_value": 32860,
     "metric_error": null,
     "family": "SnakeYAML (Engine in 3.x) via Jackson",
@@ -9,11 +9,14 @@
     "note": "Jackson data format over SnakeYAML; shared family.",
     "found_by": "targeted_documentation_lead",
     "source": "https://central.sonatype.com/artifact/com.fasterxml.jackson.dataformat:jackson-dataformat-yaml",
-    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+    "reason": "Ran the documented YAMLMapper.readTree(InputStream) on the pinned jackson-dataformat-yaml 2.23.0 (jar SHA-256 971bce7e65b63c7f78965c29aa35370143f01e21a420d02bb3cde32069360689) with jackson-databind/core 2.23.0 and SnakeYAML 2.5 (e6682acf1ace77508ef13649cbf4f8d09d2cf5457bdb61d25ffb6ac0233d78dd) on local Temurin 21: every scalar, collection and block scalar matched the oracle, but both aliases came back as the anchor name string (service.settings = \"base\", order.yaml item 3 = \"shared\") instead of the anchored node. Jackson exposes YAML anchors/aliases as Object Ids for databind identity handling, not as expanded tree nodes, so the generic tree path does not meet the alias part of the control. Stays a lead; shared SnakeYAML family.",
+    "version_seen": "2.23.0",
+    "license": "Apache-2.0",
+    "evidence": "local probe 2026-11-17; not harnessed"
   },
   {
     "name": "org.yaml:snakeyaml",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 10859,
     "metric_error": null,
     "family": "SnakeYAML",
@@ -21,11 +24,14 @@
     "note": "YAML 1.1 resolver.",
     "found_by": "registry_search",
     "source": "https://central.sonatype.com/artifact/org.yaml:snakeyaml",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Pinned 2.7 Yaml(SafeConstructor).load(InputStream) gives the exact oracle tree on both controls; Docker coverage (1,920 SnakeYAML lines) and stable AFL++ feedback recorded.",
+    "version_seen": "2.7",
+    "license": "Apache-2.0",
+    "evidence": "projects/yaml/java/snakeyaml/verification.json"
   },
   {
     "name": "org.snakeyaml:snakeyaml-engine",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 493,
     "metric_error": null,
     "family": "SnakeYAML Engine",
@@ -33,7 +39,10 @@
     "note": "YAML 1.2 core schema.",
     "found_by": "targeted_documentation_lead",
     "source": "https://central.sonatype.com/artifact/org.snakeyaml:snakeyaml-engine",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Pinned 3.2 Load(LoadSettings with CoreSchema).loadFromInputStream gives the exact oracle tree on both controls; Docker coverage (1,753 Engine lines) and stable AFL++ feedback recorded. With the default JsonSchema, ~ loads as the string \"~\".",
+    "version_seen": "3.2",
+    "license": "Apache-2.0",
+    "evidence": "projects/yaml/java/snakeyaml_engine/verification.json"
   },
   {
     "name": "com.esotericsoftware.yamlbeans:yamlbeans",

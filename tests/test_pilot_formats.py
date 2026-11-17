@@ -37,7 +37,7 @@ class PilotFormatTest(unittest.TestCase):
         self.assertEqual(len(format_registry.ACTIVE_FORMATS), 10)
         self.assertIn("mp3", format_registry.ACTIVE_FORMATS)
         self.assertNotIn("mp3_id3v2", format_registry.FORMAT_BY_ID)
-        self.assertEqual(format_registry.PILOT_FORMATS, ("json", "xml"))
+        self.assertEqual(format_registry.PILOT_FORMATS, ("json", "xml", "yaml", "toml"))
         self.assertNotIn("mp3_id3v2", format_registry.ALL_FORMATS)
         self.assertEqual(len(format_registry.ECOSYSTEMS), 8)
 
@@ -84,7 +84,7 @@ class PilotFormatTest(unittest.TestCase):
                 active = json.loads((root / "data/cells.json").read_text())["cells"]
                 pilot = json.loads((root / "data/pilot-cells.json").read_text())["cells"]
                 self.assertEqual(len(active), 80)
-                self.assertEqual(len(pilot), 16)
+                self.assertEqual(len(pilot), len(format_registry.ECOSYSTEMS) * len(format_registry.PILOT_FORMATS))
                 self.assertEqual(sum(c["verified_third_party_count"] for c in active), 0)
                 self.assertEqual(sum(c["verified_third_party_count"] for c in pilot), 1)
                 self.assertFalse(next(c for c in pilot if c["ecosystem"] == "python"

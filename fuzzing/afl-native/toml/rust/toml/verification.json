@@ -1,0 +1,446 @@
+{
+  "schema_version": 1,
+  "project": "toml/rust/toml",
+  "pass": true,
+  "base_project_receipt_sha256": "068be08c0d85f09b671bd3e448b7dc26188a6bb87959e8d4c90d0f3c61c5f53e",
+  "overlay_file_sha256": {
+    "Cargo.toml": "305721ba8c55e553db04895704cd13bb5ae8a2afb9d8d9cde7899b454443796b",
+    "Cargo.lock": "a69f5682949203e6ae2a81ff7b11846e3c1fa7ccc92daf36bef8f5c1bd14b11d",
+    "afl_fuzzer.rs": "abcc31ced9b42279f0df4bb84a08a0210c72988d0fcfdd526011b124f9c46772",
+    "Dockerfile": "fd8f5f9751d678464983af1020ccce28187c1d4331fa0103d573125c813b8261",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "build.py": "d81acd266e35da2d367c00cc4fd5657e4e0ba49f1af6e43efeaa0f4ba6e42bef"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "d5755c51863cdac711f1956baf8eb9588e060755f7d3c4c979e70ea1e1f32cd7",
+  "image_id": "sha256:35d7afe2b06a953e3f2a9e8fb0e0454c9d0764410567707fc7e17f73a493fb83",
+  "platform": "linux/arm64",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "feedback_edges": 1027,
+  "afl_map_size": 11592,
+  "feedback_kind": "afl_rs_toml_toml_parser_only_sancov_edges",
+  "feedback_scope": "Only toml and toml_parser crate objects carry SanitizerCoverage guards; harness, serde_json, toml_datetime, serde_spanned, winnow, AFL runtime and other crates are uninstrumented",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "toml",
+      "toml_parser"
+    ],
+    "rlib_guard_bytes": {
+      "toml": 33984,
+      "toml_parser": 12364
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_toml_toml_harness",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "serde_spanned",
+      "toml_datetime",
+      "toml_writer",
+      "winnow",
+      "xdg"
+    ],
+    "binary_guards": 11587
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:e971d39b7027b1ed89b5a74903f2c3d71c98d782273e16f88794b1b36d2d5899",
+  "variant_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "control_output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "variant_output": {
+    "floats": {
+      "exponent": {
+        "type": "float",
+        "value": "1000.0"
+      },
+      "fraction": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "mixed": {
+        "type": "float",
+        "value": "0.015625"
+      },
+      "negative": {
+        "type": "float",
+        "value": "-0.5"
+      }
+    },
+    "integers": {
+      "binary": {
+        "type": "integer",
+        "value": "13"
+      },
+      "decimal": {
+        "type": "integer",
+        "value": "99"
+      },
+      "hex": {
+        "type": "integer",
+        "value": "3735928559"
+      },
+      "negative": {
+        "type": "integer",
+        "value": "-17"
+      },
+      "octal": {
+        "type": "integer",
+        "value": "493"
+      },
+      "underscored": {
+        "type": "integer",
+        "value": "1000000"
+      }
+    },
+    "keys": {
+      "a": {
+        "b": {
+          "c": {
+            "type": "integer",
+            "value": "1"
+          }
+        }
+      },
+      "quoted key": {
+        "type": "string",
+        "value": "q"
+      },
+      "site": {
+        "example.com": {
+          "type": "bool",
+          "value": "true"
+        }
+      }
+    },
+    "strings": {
+      "escapes": {
+        "type": "string",
+        "value": "tab\tquote\"backslash\\ é"
+      },
+      "literal": {
+        "type": "string",
+        "value": "C:\\Users\\parsarium"
+      },
+      "multiline": {
+        "type": "string",
+        "value": "first second"
+      },
+      "raw_multiline": {
+        "type": "string",
+        "value": "line one\nline two"
+      }
+    },
+    "times": {
+      "local_date": {
+        "type": "date-local",
+        "value": "1979-05-27"
+      },
+      "local_datetime": {
+        "type": "datetime-local",
+        "value": "1979-05-27T07:32:00"
+      },
+      "local_time": {
+        "type": "time-local",
+        "value": "00:32:00.25"
+      },
+      "offset": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00.5Z"
+      }
+    }
+  },
+  "repeats": 10,
+  "variant_feedback_edges": 1196,
+  "edges_only_in_control": 209,
+  "edges_only_in_variant": 378,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml-1.2.1+spec-1.1.0/",
+    "underlying_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml_parser-1.1.5+spec-1.1.0/",
+    "control_lines": {
+      "src/de/deserializer/array.rs": 24,
+      "src/de/deserializer/key.rs": 8,
+      "src/de/deserializer/mod.rs": 21,
+      "src/de/deserializer/table.rs": 42,
+      "src/de/deserializer/table_enum.rs": 0,
+      "src/de/deserializer/value.rs": 26,
+      "src/de/error.rs": 10,
+      "src/de/mod.rs": 5,
+      "src/de/parser/array.rs": 55,
+      "src/de/parser/dearray.rs": 18,
+      "src/de/parser/detable.rs": 7,
+      "src/de/parser/devalue.rs": 16,
+      "src/de/parser/document.rs": 162,
+      "src/de/parser/inline_table.rs": 91,
+      "src/de/parser/key.rs": 57,
+      "src/de/parser/mod.rs": 14,
+      "src/de/parser/value.rs": 36,
+      "src/macros.rs": 0,
+      "src/map.rs": 71,
+      "src/ser/document/array.rs": 0,
+      "src/ser/document/array_of_tables.rs": 0,
+      "src/ser/document/buffer.rs": 0,
+      "src/ser/document/map.rs": 0,
+      "src/ser/document/mod.rs": 0,
+      "src/ser/document/strategy.rs": 0,
+      "src/ser/error.rs": 0,
+      "src/ser/mod.rs": 0,
+      "src/ser/value/array.rs": 0,
+      "src/ser/value/key.rs": 0,
+      "src/ser/value/map.rs": 0,
+      "src/ser/value/mod.rs": 0,
+      "src/table.rs": 15,
+      "src/value.rs": 42
+    },
+    "variant_lines": {
+      "src/de/deserializer/array.rs": 0,
+      "src/de/deserializer/key.rs": 8,
+      "src/de/deserializer/mod.rs": 21,
+      "src/de/deserializer/table.rs": 42,
+      "src/de/deserializer/table_enum.rs": 0,
+      "src/de/deserializer/value.rs": 25,
+      "src/de/error.rs": 10,
+      "src/de/mod.rs": 5,
+      "src/de/parser/array.rs": 0,
+      "src/de/parser/dearray.rs": 0,
+      "src/de/parser/detable.rs": 7,
+      "src/de/parser/devalue.rs": 12,
+      "src/de/parser/document.rs": 135,
+      "src/de/parser/inline_table.rs": 0,
+      "src/de/parser/key.rs": 58,
+      "src/de/parser/mod.rs": 14,
+      "src/de/parser/value.rs": 34,
+      "src/macros.rs": 0,
+      "src/map.rs": 54,
+      "src/ser/document/array.rs": 0,
+      "src/ser/document/array_of_tables.rs": 0,
+      "src/ser/document/buffer.rs": 0,
+      "src/ser/document/map.rs": 0,
+      "src/ser/document/mod.rs": 0,
+      "src/ser/document/strategy.rs": 0,
+      "src/ser/error.rs": 0,
+      "src/ser/mod.rs": 0,
+      "src/ser/value/array.rs": 0,
+      "src/ser/value/key.rs": 0,
+      "src/ser/value/map.rs": 0,
+      "src/ser/value/mod.rs": 0,
+      "src/table.rs": 15,
+      "src/value.rs": 33
+    },
+    "control_underlying_lines": {
+      "src/decoder/mod.rs": 26,
+      "src/decoder/scalar.rs": 165,
+      "src/decoder/string.rs": 58,
+      "src/decoder/ws.rs": 13,
+      "src/error.rs": 0,
+      "src/lexer/mod.rs": 120,
+      "src/lexer/token.rs": 13,
+      "src/parser/document.rs": 275,
+      "src/parser/event.rs": 248,
+      "src/source.rs": 81
+    },
+    "variant_underlying_lines": {
+      "src/decoder/mod.rs": 28,
+      "src/decoder/scalar.rs": 263,
+      "src/decoder/string.rs": 183,
+      "src/decoder/ws.rs": 13,
+      "src/error.rs": 0,
+      "src/lexer/mod.rs": 172,
+      "src/lexer/token.rs": 9,
+      "src/parser/document.rs": 186,
+      "src/parser/event.rs": 140,
+      "src/source.rs": 91
+    },
+    "files_with_different_line_counts": [
+      "src/de/deserializer/array.rs",
+      "src/de/deserializer/value.rs",
+      "src/de/parser/array.rs",
+      "src/de/parser/dearray.rs",
+      "src/de/parser/devalue.rs",
+      "src/de/parser/document.rs",
+      "src/de/parser/inline_table.rs",
+      "src/de/parser/key.rs",
+      "src/de/parser/value.rs",
+      "src/map.rs",
+      "src/value.rs"
+    ],
+    "underlying_files_with_different_line_counts": [
+      "src/decoder/mod.rs",
+      "src/decoder/scalar.rs",
+      "src/decoder/string.rs",
+      "src/lexer/mod.rs",
+      "src/lexer/token.rs",
+      "src/parser/document.rs",
+      "src/parser/event.rs",
+      "src/source.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      1027,
+      1027,
+      1027,
+      1027,
+      1027,
+      1027,
+      1027,
+      1027,
+      1027,
+      1027
+    ],
+    "stable_edges": 1027,
+    "union_edges": 1027,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      1196,
+      1196,
+      1196,
+      1196,
+      1196,
+      1196,
+      1196,
+      1196,
+      1196,
+      1196
+    ],
+    "stable_edges": 1196,
+    "union_edges": 1196,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}
