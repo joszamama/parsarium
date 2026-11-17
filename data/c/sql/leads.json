@@ -42,17 +42,18 @@
       "latest_release_observed": null,
       "family": "libgda Lemon-generated SQL parser",
       "documented_api_lead": "gda_sql_parser_parse_string",
-      "reason": "GNOME Data Access 5. Its documented GdaSqlParser (gda_sql_parser_parse_string) returns a GdaStatement whose GdaSqlStatement contents are a public struct tree (select targets, FROM targets and joins, WHERE expression, GROUP BY, ORDER BY). Qualifies on documentation; not yet run. Its popcon count covers the whole data-access library, not SQL parsing."
+      "reason": "GNOME Data Access 5. Its documented GdaSqlParser (gda_sql_parser_parse_string) returns a GdaStatement whose GdaSqlStatement contents are a public struct tree (select targets, FROM targets and joins, WHERE expression, GROUP BY, ORDER BY). Qualifies on documentation; not yet run. Its popcon count covers the whole data-access library, not SQL parsing. Not run in this round: a scoped source build of libgda (GLib/GObject, libxml2) under coverage and AFL++ was not attempted; it outranks the selected libpg_query by this metric and remains the next C lead."
     },
     {
       "name": "libpg-query",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 41,
       "metric_error": null,
       "latest_release_observed": null,
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "pg_query_parse",
-      "reason": "libpg_query: documented pg_query_parse / pg_query_parse_protobuf return the PostgreSQL parse tree (JSON or protobuf) for local text."
+      "reason": "libpg_query: documented pg_query_parse / pg_query_parse_protobuf return the PostgreSQL parse tree (JSON or protobuf) for local text.",
+      "selected_release": "18.1.0"
     },
     {
       "name": "duckdb",

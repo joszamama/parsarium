@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "name": "libpg_query",
+    "version": "18.1.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "LICENSE in the pinned release-tag archive (BSD 3-clause text); bundled PostgreSQL sources under the PostgreSQL License",
+    "input_api": "pg_query_parse(local NUL-terminated SQL text) -> PgQueryParseResult (JSON parse tree)",
+    "documentation": "https://github.com/pganalyze/libpg_query/blob/18.1.0/README.md#usage-parsing-a-query",
+    "source": "https://codeload.github.com/pganalyze/libpg_query/tar.gz/refs/tags/18.1.0",
+    "source_sha256": "2d3486cf6a9d3955b53e66235db39d62b54216c820cd392ab66dc842c5b1316d",
+    "dependencies": [],
+    "dialect": "PostgreSQL 18 grammar",
+    "scope": "One SQL statement from local bytes; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary read from the library's JSON parse tree. PL/pgSQL, deparse, fingerprint and protobuf outputs are untested.",
+    "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+    "family_note": "pg_query_parse runs the extracted PostgreSQL raw parser (bison gram.c, flex scan.c, parser.c) and serializes the raw parse tree as JSON (pg_query_outfuncs_json.c). The adapter reads SelectStmt, InsertStmt, RangeVar, JoinExpr, FuncCall and A_Const nodes from that tree. Shared family: Go pg_query_go, Rust pg_query, Python pglast and the libpg-query/@pgsql WASM npm packages bind this library; DuckDB's parser is a libpg_query-derived fork.",
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package libpg-query",
+      "value": 41,
+      "rank": 20856,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/c/sql/registry-snapshot.json",
+      "limitation": "Very small count; packaged installs only, not use through bindings or vendored copies."
+    },
+    "project": "projects/sql/c/libpg_query",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+]

@@ -1,10 +1,10 @@
 {
   "ecosystem": "c",
   "format": "sql",
-  "status": "pilot_search_recorded_none_verified",
+  "status": "pilot_one_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 1,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "sql"
@@ -17,9 +17,13 @@
   "unique_search_hits": 100,
   "search_captured_at_utc": "2026-11-17T16:38:43.688960+00:00",
   "primary_metric": "Debian popcon sourcemax installations by source package (pinned snapshot)",
-  "unresolved_documentation_leads": 2,
-  "uncertainty": "Bounded search only (Debian popcon source-package names containing 'sql' in the pinned sourcemax snapshot (popcon rank order; one search shared with C++), plus targeted libpg-query, libgda5 and duckdb lookups.). 2 SQL parser leads are unresolved and none is verified yet, so zero is not evidence of absence. Registry relevance order is not adoption order, and package metrics include uses unrelated to parsing SQL text.",
+  "unresolved_documentation_leads": 1,
+  "uncertainty": "One verified C SQL path after a bounded Debian popcon source-name search (names containing 'sql', first 100 of 229 by rank) plus targeted lookups, captured 2026-11-17 from the pinned popcon snapshot. libpg_query 18.1.0 (Debian source libpg-query, 41 installations) parses both valid controls with the PostgreSQL 18 grammar into a parse tree that gives the oracle summary. sqlite3, sqlcipher and postgresql-18 rank higher but are engines or a server without a library syntax-tree API. libgda5 (2,105; GdaSqlParser) ranks higher and qualifies on documentation but was not run in this round, so this is not a top-ten ranking. The popcon count is very small and reflects packaged installs, not use of the library through language bindings. Two valid controls establish only the tested dialect-neutral subset.",
   "registry_snapshot": "data/c/sql/registry-snapshot.json",
   "unresolved_leads": "data/c/sql/leads.json",
-  "runtime_evidence": "data/c/sql/standard.json"
+  "runtime_evidence": "data/c/sql/standard.json",
+  "third_party_evidence": "data/c/sql/parsers.json",
+  "third_party_control_results": [
+    "projects/sql/c/libpg_query/verification.json"
+  ]
 }

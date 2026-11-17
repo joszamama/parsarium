@@ -1,0 +1,66 @@
+{
+  "kind": "third_party",
+  "api": "pg_query_parse(local NUL-terminated SQL text) -> PgQueryParseResult with the parse tree serialized as JSON; pg_query_free_parse_result",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T18:53:33.152957+00:00",
+  "manifest": "projects/sql/c/libpg_query/manifest.json",
+  "image_id": "sha256:ab500708909b266b46a7e5ca74311eeceb03ee4777a9082a5510d2d6140358e4",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "source_sha256": "2d3486cf6a9d3955b53e66235db39d62b54216c820cd392ab66dc842c5b1316d",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "c4e7a77fbdda88f4963544a216fb0b52f7957724c56e40aae0974c155539c2ac",
+    "afl-allowlist.txt": "2888251afb941daf2d1b4fd78d70a4d303c7df848925e803fae4b226d0f61770",
+    "build.sh": "ef62972ad5c141471d6df322491543ae8a4cca83cd873e9797ebd8c8a964ac55",
+    "harness.c": "e4bb408d5001936ad86ebe36f08d8b361a374c698e91447e1091da21641d1712",
+    "manifest.json": "b2c0fe3f7870856f1c88244d194a72a238d6dfaf2be6ed2c1a4c79219312f224",
+    "parser-probe.c": "5b7c5e978c228b927cc813163c8679ed9f5fc5684c848cfd095c36218cb8c4fb",
+    "run-control.sh": "504fadee7e3b37cd2a217cefd8a69eacba768b45c026c2a6ae292fefb90dfede",
+    "source-lock.json": "ef009d4788e39d04173de93ca27478c301ba6930b104d2aa5025b7794ec7d06f",
+    "summarize.py": "1e47640c6fa472a8a313690cfdb1d6983fad7e6680d39f7752aad25d4ab38b5f"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 29,
+  "parser_source_lines_covered": 2369,
+  "format_specific_source_lines_covered": 493,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/c/libpg_query/target/coverage/coverage.json",
+  "pass": true
+}

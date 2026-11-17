@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "c",
+  "pilot": true,
+  "package": "libpg_query",
+  "release": "18.1.0",
+  "catalog_parser": "data/c/sql/parsers.json",
+  "source_lock": "projects/sql/c/libpg_query/source-lock.json",
+  "source_sha256": "2d3486cf6a9d3955b53e66235db39d62b54216c820cd392ab66dc842c5b1316d",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/usr/bin/python3",
+    "/work/summarize.py",
+    "/input/case"
+  ],
+  "dialect": "PostgreSQL 18 grammar (libpg_query has no dialect option)",
+  "parser_family": "PostgreSQL grammar: libpg_query extracts the PostgreSQL 18 server raw parser (bison gram.c, flex scan.c, parser.c); shared by pg_query_go, Rust pg_query, pglast and the libpg-query WASM npm packages",
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "oracle": "The replay prints the JSON parse tree that pg_query_parse returns; summarize.py reads SelectStmt, InsertStmt, RangeVar, JoinExpr, FuncCall and A_Const nodes from it, and run-control requires the hand-written oracle summary.",
+  "api": "pg_query_parse(local NUL-terminated SQL text) -> PgQueryParseResult with the parse tree serialized as JSON; pg_query_free_parse_result",
+  "coverage": "LLVM source coverage of pinned libpg_query 18.1.0 sources reached by pg_query_parse (PostgreSQL grammar, scanner, parse-tree JSON output); bison/flex #line directives removed so lines map to the pinned gram.c and scan.c",
+  "coverage_subject_prefix": "/work/build-cov/src/",
+  "format_specific_coverage_file_suffix": "/src/postgres/src_backend_parser_gram.c",
+  "afl_entrypoint": "/work/parser-probe",
+  "scope": "One SQL statement from local bytes parsed by pg_query_parse with the PostgreSQL 18 grammar; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. PL/pgSQL, deparse, fingerprint and protobuf outputs are untested."
+}
