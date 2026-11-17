@@ -112,8 +112,14 @@ class SourceArchive:
     """Pinned release archive mapped to the directory it was unpacked into."""
 
     def __init__(self, container_dir: str, path: Path, strip: int, manifest: dict):
-        if not PurePosixPath(container_dir).is_absolute():
-            raise ReportError(f"container directory must be absolute: {container_dir}")
+        directory = PurePosixPath(container_dir)
+        if not directory.is_absolute():
+            prefixes = (manifest.get("coverage_subject_prefix", ""),
+                        manifest.get("underlying_coverage_subject_prefix", ""))
+            if manifest.get("ecosystem") != "go" or ".." in directory.parts or \
+                    container_dir.rstrip("/") not in {prefix.rstrip("/") for prefix in prefixes}:
+                raise ReportError(f"container directory must be absolute or a pinned Go "
+                                  f"package prefix: {container_dir}")
         self.container_dir = container_dir.rstrip("/")
         self.path = path.resolve(strict=True)
         self.strip = strip
@@ -380,7 +386,7 @@ def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
 
 
 def source_files(coverage: dict, manifest: dict, archives: list[SourceArchive],
-                 limits: dict) -> tuple[list[dict], int]:
+                 limits: dict, executed_only: bool = False) -> tuple[list[dict], int]:
     groups = coverage_groups(manifest)
     selected, excluded = [], 0
     for item in coverage["data"][0]["files"]:
@@ -400,21 +406,31 @@ def source_files(coverage: dict, manifest: dict, archives: list[SourceArchive],
     loaded = {index: archives[index].read(names) for index, names in wanted.items()}
     files = []
     for number, (item, names) in enumerate(selected, 1):
-        counts = line_counts(item.get("segments", []))
+        if executed_only:
+            observed = item.get("executed_lines")
+            if not isinstance(observed, list) or any(type(n) is not int or n < 1 or n > 10_000_000
+                                                     for n in observed) or observed != sorted(set(observed)):
+                raise ReportError("Go executed lines are not a sorted unique list of valid line numbers")
+            counts = {line: 1 for line in observed}
+        else:
+            counts = line_counts(item.get("segments", []))
         prefix = next(prefix for name, prefix, _, _ in groups if name == names[0])
         entry = {"number": number, "filename": item["filename"], "groups": names,
                  "relative": item["filename"][len(prefix.rsplit("/", 1)[0]) + 1:]
                  if "/" in prefix else item["filename"],
-                 "llvm_summary_lines": {"count": item["summary"]["lines"]["count"],
+                 "line_kind": "executed_only" if executed_only else "llvm_segments",
+                 "llvm_summary_lines": {"count": None if executed_only else item["summary"]["lines"]["count"],
                                         "covered": item["summary"]["lines"]["covered"]},
                  "segment_lines": {"mapped": len(counts),
                                    "covered": sum(1 for c in counts.values() if c > 0)},
                  "source": {"status": "unmapped"}, "page": None}
         entry["segment_lines"]["uncovered"] = (entry["segment_lines"]["mapped"] -
                                                entry["segment_lines"]["covered"])
-        entry["segment_summary_agrees"] = (
+        entry["segment_summary_agrees"] = executed_only or (
             entry["segment_lines"]["mapped"] == entry["llvm_summary_lines"]["count"] and
             entry["segment_lines"]["covered"] == entry["llvm_summary_lines"]["covered"])
+        if executed_only and len(counts) != item["summary"]["lines"]["covered"]:
+            raise ReportError("Go executed lines differ from the verified file summary")
         for index, archive in enumerate(archives):
             relative = relative_member(archive.container_dir, item["filename"])
             if relative is None:
@@ -440,7 +456,8 @@ def source_files(coverage: dict, manifest: dict, archives: list[SourceArchive],
             entry["source"] = source
             break
         entry["_counts"] = counts
-        entry["lines"] = [[line, count] for line, count in sorted(counts.items())]
+        entry["lines"] = [[line, True if executed_only else count]
+                          for line, count in sorted(counts.items())]
         files.append(entry)
     return files, excluded
 
@@ -458,7 +475,7 @@ th,td{border:1px solid var(--line);padding:.2rem .5rem;text-align:left;vertical-
 td.n{text-align:right;font-variant-numeric:tabular-nums}
 code,.src td.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem}
 .src td{border-width:0 1px;padding:0 .5rem}.src td.code{white-space:pre;width:100%}
-tr.covered{background:var(--hit)}tr.uncovered{background:var(--miss)}
+tr.covered,tr.executed{background:var(--hit)}tr.uncovered{background:var(--miss)}
 .note{border-left:4px solid var(--line);padding:.25rem .75rem;color:var(--muted)}
 .warn{border-left:4px solid #c5221f;padding:.25rem .75rem}
 .src thead th{position:sticky;top:0;background:var(--bg)}
@@ -496,6 +513,7 @@ def definition_rows(caption: str, items: dict) -> str:
 
 def file_page(entry: dict, report: dict, max_lines: int) -> tuple[str, bool]:
     counts, text = entry["_counts"], entry.get("_text")
+    executed_only = entry.get("line_kind") == "executed_only"
     numbers = range(1, len(text) + 1) if text is not None else sorted(counts)
     rows, truncated = [], False
     for shown, line in enumerate(numbers):
@@ -503,10 +521,10 @@ def file_page(entry: dict, report: dict, max_lines: int) -> tuple[str, bool]:
             truncated = True
             break
         count = counts.get(line)
-        status = "" if count is None else "covered" if count > 0 else "uncovered"
+        status = "" if count is None else "executed" if executed_only else "covered" if count > 0 else "uncovered"
         source = escape(text[line - 1], 10000) if text is not None else ""
         rows.append(f"<tr class=\"{status}\" id=\"L{line}\"><td class=\"n\">{line}</td>"
-                    f"<td class=\"n\">{'' if count is None else count}</td><td>{status}</td>"
+                    f"<td class=\"n\">{'' if count is None else 'yes' if executed_only else count}</td><td>{status}</td>"
                     f"<td class=\"code\">{source}</td></tr>")
     identity = report["identity"]
     source = entry["source"]
@@ -514,36 +532,46 @@ def file_page(entry: dict, report: dict, max_lines: int) -> tuple[str, bool]:
     if text is None:
         notes.append(f"<p class=\"warn\">Source text not shown: {escape(source['status'])}"
                      f"{' — ' + escape(source['detail']) if source.get('detail') else ''}. "
-                     "Only mapped lines and their counts are listed.</p>")
+                     + ("Only executed line numbers are listed.</p>" if executed_only else
+                        "Only mapped lines and their counts are listed.</p>"))
     if not entry["segment_summary_agrees"]:
         notes.append("<p class=\"note\">The per-line view follows the file's llvm-cov segments; "
                      "llvm-cov's file summary aggregates per-function line counts and differs here.</p>")
     if truncated:
         notes.append(f"<p class=\"warn\">Truncated after {max_lines} lines.</p>")
+    line_details = ({"executed_source_lines": entry["segment_lines"]["covered"]}
+                    if executed_only else {
+                        "segment_mapped_lines": entry["segment_lines"]["mapped"],
+                        "segment_covered_lines": entry["segment_lines"]["covered"],
+                        "segment_uncovered_lines": entry["segment_lines"]["uncovered"],
+                        "llvm_summary_lines": entry["llvm_summary_lines"]["count"],
+                        "llvm_summary_covered": entry["llvm_summary_lines"]["covered"]})
     details = ("<details><summary>Evidence and line-count details</summary>"
             + definition_rows("Path mapping", {
                 "container_path": entry["filename"],
                 "archive": source.get("archive"), "archive_sha256": source.get("archive_sha256"),
                 "pinned_by_manifest_field": source.get("pinned_by"),
                 "archive_member": source.get("member"), "source_sha256": source.get("sha256")})
-            + definition_rows("Line counts", {
-                "segment_mapped_lines": entry["segment_lines"]["mapped"],
-                "segment_covered_lines": entry["segment_lines"]["covered"],
-                "segment_uncovered_lines": entry["segment_lines"]["uncovered"],
-                "llvm_summary_lines": entry["llvm_summary_lines"]["count"],
-                "llvm_summary_covered": entry["llvm_summary_lines"]["covered"]})
+            + definition_rows("Line counts", line_details)
             + "</details>")
+    summary = (f"{entry['segment_lines']['covered']} executed lines are recorded. "
+               "Other lines have no execution information in this Go export."
+               if executed_only else
+               f"{entry['segment_lines']['covered']} of {entry['segment_lines']['mapped']} "
+               "mapped lines executed.")
+    caption = ("Observed execution per source line. Blank: no execution information."
+               if executed_only else
+               "Execution count per source line. Blank count: not instrumented.")
     body = (f"<p><a href=\"../index.html\">Report index</a></p>"
             f"<h1><code>{escape(entry['relative'], 1000)}</code></h1>"
             f"<p>{escape(identity['package'])} {escape(identity['release'])} — "
             f"{escape(', '.join(entry['groups']))} source. "
-            f"{entry['segment_lines']['covered']} of {entry['segment_lines']['mapped']} "
-            "mapped lines executed.</p>"
+            f"{summary}</p>"
             + "".join(notes)
             + details
-            + "<div class=\"wrap\"><table class=\"src\"><caption>Execution count per source line. "
-              "Blank count: not instrumented.</caption><thead><tr><th scope=\"col\">Line</th>"
-              "<th scope=\"col\">Count</th><th scope=\"col\">Status</th>"
+            + f"<div class=\"wrap\"><table class=\"src\"><caption>{caption}</caption>"
+              "<thead><tr><th scope=\"col\">Line</th>"
+              f"<th scope=\"col\">{'Observed' if executed_only else 'Count'}</th><th scope=\"col\">Status</th>"
               "<th scope=\"col\">Source</th></tr></thead><tbody>"
             + "".join(rows) + "</tbody></table></div>")
     return page(f"{entry['relative']} — {identity['package']} coverage", body), truncated
@@ -649,6 +677,21 @@ def index_page(report: dict) -> str:
         parts.append(table("Files (line-view counts from llvm-cov segments)",
                            ("File", "Group", "Covered", "Uncovered", "Mapped", "%", "Source text"),
                            rows, numeric=(2, 3, 4, 5)))
+    elif coverage["status"] == "go_executed_lines":
+        rows = [(escape(group["name"]), f"<code>{escape(group['prefix'])}</code>",
+                 group["files"], group["executed_lines"]) for group in coverage["groups"]]
+        parts.append(table("Observed Go parser source by group",
+                           ("Group", "Package prefix", "Files", "Executed lines"), rows,
+                           numeric=(2, 3)))
+        rows = []
+        for entry in coverage["files"]:
+            name = escape(entry["relative"], 1000)
+            link = f"<a href=\"{entry['page']}\">{name}</a>" if entry["page"] else name
+            rows.append((link, escape(", ".join(entry["groups"])),
+                         entry["segment_lines"]["covered"],
+                         escape(entry["source"]["status"])))
+        parts.append(table("Files (executed line numbers; no denominator recorded)",
+                           ("File", "Group", "Executed", "Source text"), rows, numeric=(2,)))
     elif coverage["status"] == "non_llvm_source_lines":
         rows = [(escape(group["name"]), f"<code>{escape(group['prefix'])}</code>",
                  group["files"], group["covered_lines"]) for group in coverage["groups"]]
@@ -717,6 +760,27 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
                                       f"control tuples in {binary.get('module')}. No parser "
                                       "source-line coverage exists for this project; binding "
                                       "lines are not parser lines."}
+    elif ecosystem == "go" and coverage.get("type") != LLVM_EXPORT_TYPE and all(
+            "executed_lines" in item for item in coverage["data"][0]["files"]):
+        files, excluded = source_files(coverage, manifest, archives, limits, executed_only=True)
+        groups = []
+        for name, prefix, _, _ in coverage_groups(manifest):
+            members = [entry for entry in files if name in entry["groups"]]
+            groups.append({"name": name, "prefix": prefix, "files": len(members),
+                           "executed_lines": sum(entry["segment_lines"]["covered"]
+                                                 for entry in members)})
+        coverage_info = {"status": "go_executed_lines",
+                         "statement": "Go coverprofile source lines executed by the verified valid "
+                                      "control. The export does not record unexecuted mapped "
+                                      "lines or per-line execution counts; no coverage "
+                                      "percentage is inferred.",
+                         "excluded_files": excluded, "groups": groups, "files": files}
+        if not archives:
+            warnings.append("No --source archive was supplied; Go line views list executed "
+                            "line numbers without source text.")
+        if any(entry["source"]["status"] == "rejected_line_mismatch" for entry in files):
+            warnings.append("Some Go source files were rejected because executed lines exceed "
+                            "the pinned archive length.")
     elif coverage.get("type") != LLVM_EXPORT_TYPE:
         receipt = evidence["receipt"]
         groups = [{"name": name, "prefix": prefix,

@@ -477,6 +477,24 @@ class CoverageReportTest(unittest.TestCase):
         with self.assertRaisesRegex(coverage_report.ReportError, "new or empty"):
             fixture.report(self.base / "used")
 
+    def test_go_executed_lines_show_observations_without_a_denominator(self):
+        manifest = {"coverage_subject_prefix": "example.org/parser/"}
+        item = {"filename": "example.org/parser/decode.go",
+                "executed_lines": [2, 4], "summary": {"lines": {"covered": 2}}}
+        coverage = {"data": [{"files": [item]}]}
+        files, excluded = coverage_report.source_files(coverage, manifest, [], LIMITS,
+                                                        executed_only=True)
+        self.assertEqual(excluded, 0)
+        self.assertEqual(files[0]["lines"], [[2, True], [4, True]])
+        html, truncated = coverage_report.file_page(
+            files[0], {"identity": {"package": "parser", "release": "1.0"}}, 10)
+        self.assertFalse(truncated)
+        self.assertIn("Other lines have no execution information", html)
+        self.assertNotIn("mapped lines executed", html)
+        item["executed_lines"] = [4, 2]
+        with self.assertRaisesRegex(coverage_report.ReportError, "sorted unique"):
+            coverage_report.source_files(coverage, manifest, [], LIMITS, executed_only=True)
+
     def test_report_size_limit_truncates_line_views(self):
         fixture = self.fixture()
         output = self.base / "report"
