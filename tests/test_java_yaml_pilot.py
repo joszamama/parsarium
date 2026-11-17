@@ -95,6 +95,28 @@ class JavaYamlPilotTest(unittest.TestCase):
         self.assertEqual(lead["status"], "fails_control")
         self.assertIn("anchor name", lead["reason"])
 
+    def test_round_two_lead_decisions_have_evidence(self):
+        leads = read(DATA / "leads.json")
+        snapshot = read(DATA / "registry-snapshot.json")
+        cell = read(DATA / "cell.json")
+        self.assertEqual(cell["leads_recorded"], len(leads))
+        self.assertEqual(sum(cell["leads_by_status"].values()), len(leads))
+        lowest = min(parser["popularity"]["value"] for parser in self.parsers)
+        for lead in leads:
+            with self.subTest(lead=lead["name"]):
+                self.assertIn(lead["name"], snapshot["metrics"])
+                self.assertEqual(lead["metric_value"], snapshot["metrics"][lead["name"]]["value"])
+                if lead["status"] != "selected":
+                    self.assertIn(lead["status"], {"fails_control", "excluded", "unresolved"})
+                    self.assertTrue(lead["reason"] and lead["evidence"])
+        # Every lead ranked above the lowest selected path was decided, not left unresolved.
+        self.assertFalse([lead["name"] for lead in leads
+                          if lead["status"] == "unresolved" and (lead["metric_value"] or 0) > lowest])
+        decisions = {lead["name"]: lead["status"] for lead in leads}
+        self.assertEqual(decisions["tools.jackson.dataformat:jackson-dataformat-yaml"], "fails_control")
+        self.assertEqual(decisions["com.charleskorn.kaml:kaml-jvm"], "fails_control")
+        self.assertEqual(decisions["org.wso2.orbit.org.yaml:snakeyaml"], "excluded")
+
 
 if __name__ == "__main__":
     unittest.main()
