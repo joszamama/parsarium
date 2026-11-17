@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "rust",
+  "pilot": true,
+  "package": "typedpg_pg_query",
+  "release": "0.7.3",
+  "catalog_parser": "data/rust/sql/parsers.json",
+  "source_lock": "projects/sql/rust/typedpg_pg_query/source-lock.json",
+  "source_sha256": "d68e4f3097f7b7b552e7940175ee9be617997aebc99bc6c2a20070fc63a05320",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/work/replay",
+    "/input/case"
+  ],
+  "dialect": "PostgreSQL (typedpg_pg_query::parse, libpg_query's default top-level grammar mode)",
+  "parser_family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser); same family as the C libpg_query path, Rust pg_query, Go pg_query_go, Python pglast and JavaScript libpg-query. typedpg_pg_query vendors its own libpg_query copy (PostgreSQL 18.6 grammar) with build-time patches, and its own generated protobuf, node-walk and equality code",
+  "api": "typedpg_pg_query::parse(local UTF-8 text) -> ParseResult; the harness reads the protobuf SelectStmt (target_list, where_clause, group_clause, sort_clause) and InsertStmt (relation, cols, VALUES lists) and walks each statement with the crate's own NodeEnum::nodes() breadth-first walk for RangeVar, FuncCall, JoinExpr and A_Const nodes",
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage of the typedpg_pg_query 0.7.3 binding (parse, stack growth, protobuf decode and node walk) and its csrc/catalog.c, plus clang 23.1.3 LLVM source coverage of the vendored libpg_query C compiled by its build script, in one profile; files the crate patches at build time are compiled from OUT_DIR copies, kept in the image as patched-libpg_query/. libFuzzer sanitizer counters in the Rust crates and the C objects",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/typedpg_pg_query-0.7.3/src/",
+  "format_specific_coverage_file_suffix": "/src/lib.rs",
+  "scope": "One SQL statement from local UTF-8 text with the default PostgreSQL grammar; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Integer constants are converted to decimal text, which equals the source text for these controls. The #line directives of the bison/flex outputs gram.c and scan.c are removed before the build so coverage maps to the pinned C files. PL/pgSQL, catalog, type-name, scan and deparse APIs are untested.",
+  "underlying_package": "libpg_query (vendored in the typedpg_pg_query crate: PostgreSQL 18.6 parser, scanner and protobuf output, with the crate's build-time patches)",
+  "underlying_release": "PostgreSQL 18.6 grammar (vendored copy)",
+  "underlying_coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/typedpg_pg_query-0.7.3/libpg_query/",
+  "underlying_format_specific_coverage_file_suffix": "/src_backend_parser_gram.c"
+}

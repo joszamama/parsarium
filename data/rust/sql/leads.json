@@ -182,13 +182,14 @@
     },
     {
       "name": "typedpg_pg_query",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 2424,
       "metric_error": null,
       "latest_release_observed": "0.7.3",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "typedpg_pg_query::parse",
-      "reason": "Separate Rust binding over its own vendored libpg_query (MIT AND BSD-3-Clause AND PostgreSQL); shares only the generated protobuf module with pg_query (difflib: 33% of pg_query src lines). Not run in this round: it needs the same clang-23 dual-profile FFI build as pg_query. Next lead by metric."
+      "reason": "In the recorded 'sql parser' snapshot (2,424 recent downloads). typedpg_pg_query::parse runs its own vendored libpg_query (PostgreSQL 18.6 grammar, crate build-time patches) and returns a prost ParseResult; both valid controls equal the oracle. Built with clang 23.1.3 and rustc 1.99.1 in one LLVM profile; the AFL++ overlay instruments the Rust crates and gram.c, scan.c and parser.c (228 native tuples). Shared libpg_query family with pg_query; separate crate and repository (cubos/typedpg) sharing only the generated protobuf module (33% of pg_query src lines).",
+      "selected_release": "0.7.3"
     },
     {
       "name": "spg-sql",

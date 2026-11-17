@@ -656,6 +656,116 @@
     }
   },
   {
+    "name": "typedpg_pg_query",
+    "version": "0.7.3",
+    "license": "MIT AND BSD-3-Clause AND PostgreSQL",
+    "license_evidence": "Cargo.toml license = \"MIT AND BSD-3-Clause AND PostgreSQL\" in the pinned crate (checked in the image); the crate ships libpg_query/LICENSE (BSD-3-Clause) and no separate MIT text. The vendored libpg_query carries PostgreSQL License code",
+    "input_api": "typedpg_pg_query::parse(local UTF-8 text) -> ParseResult",
+    "documentation": "https://docs.rs/typedpg_pg_query/0.7.3/typedpg_pg_query/fn.parse.html",
+    "source": "https://static.crates.io/crates/typedpg_pg_query/typedpg_pg_query-0.7.3.crate",
+    "source_sha256": "d68e4f3097f7b7b552e7940175ee9be617997aebc99bc6c2a20070fc63a05320",
+    "dependencies": [
+      "libpg_query C (vendored, PostgreSQL 18.6 grammar; built by build.rs with cc after the crate's exact-text patches)",
+      "prost 0.14.6 (protobuf decode)",
+      "stacker 0.1.25 (stack growth around libpg_query calls)",
+      "serde_json",
+      "thiserror"
+    ],
+    "dialect": "PostgreSQL",
+    "scope": "One SQL statement from local UTF-8 text with the default PostgreSQL grammar; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. PL/pgSQL, catalog, type-name, scan and deparse APIs are untested.",
+    "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+    "family_note": "typedpg_pg_query::parse passes the text to its own vendored libpg_query copy (PostgreSQL 18.6 grammar; pg_query_parse_protobuf_opts) on a stacker-grown stack and decodes the protobuf parse tree with prost into its own generated types. The adapter reads SelectStmt and InsertStmt fields and walks RangeVar, FuncCall, JoinExpr and A_Const nodes with the crate's NodeEnum::nodes() walk. Shared libpg_query family with the C libpg_query path, Rust pg_query, Go pg_query_go, Python pglast and JavaScript libpg-query; separate crate and repository (cubos/typedpg) from pg_query, with its own build script, build-time libpg_query patches, generated node walk and equality code. Its generated protobuf module is the only code it shares with pg_query (difflib: 33% of pg_query src lines). Metrics are not combined.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 2424,
+      "source": "https://crates.io/api/v1/crates/typedpg_pg_query",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Small absolute count; most downloads likely come from the typedpg crates that depend on it."
+    },
+    "project": "projects/sql/rust/typedpg_pg_query",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "spg-sql",
     "version": "9.1.0",
     "license": "MIT OR Apache-2.0",

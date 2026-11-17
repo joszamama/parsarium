@@ -1,0 +1,67 @@
+{
+  "kind": "third_party",
+  "api": "typedpg_pg_query::parse(local UTF-8 text) -> ParseResult; the harness reads the protobuf SelectStmt (target_list, where_clause, group_clause, sort_clause) and InsertStmt (relation, cols, VALUES lists) and walks each statement with the crate's own NodeEnum::nodes() breadth-first walk for RangeVar, FuncCall, JoinExpr and A_Const nodes",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:50:26.370236+00:00",
+  "manifest": "projects/sql/rust/typedpg_pg_query/manifest.json",
+  "image_id": "sha256:468c34ea4452477f6f7b43b6aab6f4aca178cdf851d8ea4eb66b094bf3de0353",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)",
+    "clang version 23.1.3 (https://github.com/llvm/llvm-project 0d261d1ca552c95a8f007e061c787ac7132fbcbc)"
+  ],
+  "source_sha256": "d68e4f3097f7b7b552e7940175ee9be617997aebc99bc6c2a20070fc63a05320",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Cargo.lock": "b10036d31aeabeeb38cb3393e4b755f250525903a3709a607a457a83111eb5ff",
+    "Cargo.toml": "7d75a6b9db0483946b1e8eef03a1a27cd8648b2622d04fed1cbafdd68cd86982",
+    "Dockerfile": "cf6097cf9310bd2051f88395aa0c2958be48846ed6db587c786e57c55134a2c2",
+    "manifest.json": "efab15967bb3d2115f0c61cf269baddda12dbc7e44c7fee9ad621458c1cd5d68",
+    "run-control.sh": "295b457c489a8c9502a2c552999afe849da87d65271eaf16fef9a20af2ba10bb",
+    "source-lock.json": "99224760718417605a4de40f5f15c884c0143bc3fb60333cc2048359cfb8c449",
+    "src/bin/fuzzer.rs": "7be6beb06e7312e5cec02902ff45199823f77d9cff76f46d6f4c877f42b8073b",
+    "src/bin/replay.rs": "8b06f20493151c3b1639925e6a826ce9414427730ab8f094a4c9c50e166e3254",
+    "src/lib.rs": "a0eae81556992f7435d6c4eab2fa2a719f9e0158a0dbbaa4ad27755adce8699f"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 6,
+  "parser_source_lines_covered": 221,
+  "format_specific_source_lines_covered": 37,
+  "underlying_source_files": 84,
+  "underlying_source_lines_covered": 3401,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/rust/typedpg_pg_query/target/coverage/coverage.json",
+  "pass": true
+}
