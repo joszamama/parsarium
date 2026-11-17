@@ -1015,5 +1015,118 @@
         }
       ]
     }
+  },
+  {
+    "name": "org.apache.shardingsphere:shardingsphere-sql-parser-engine",
+    "version": "5.3.2",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (shardingsphere-5.3.2.pom: Apache License 2.0)",
+    "input_api": "SQLParserEngine(\"MySQL\", CacheOption).parse(local SQL text, false) -> ParseASTNode; SQLVisitorEngine(\"MySQL\", \"STATEMENT\", false, Properties).visit(tree) -> SQLStatement",
+    "documentation": "https://shardingsphere.apache.org/document/5.3.2/en/reference/sharding/parse/",
+    "source": "https://repo.maven.apache.org/maven2/org/apache/shardingsphere/shardingsphere-sql-parser-engine/5.3.2/shardingsphere-sql-parser-engine-5.3.2-sources.jar",
+    "source_sha256": "de028b6adb93f311137cdb4382c23eaefc8526c0947bcc0f508c42bf535a1966",
+    "jar_sha256": "0c317cfeb1a3af69d6b1be58cdc9178e668881439811d24b5cd4a3a45d3cbf61",
+    "dependencies": [
+      "com.github.ben-manes.caffeine:caffeine 2.9.3",
+      "com.google.guava:guava 30.0-jre",
+      "org.antlr:antlr4-runtime 4.10.1",
+      "org.apache.shardingsphere:shardingsphere-infra-util 5.3.2",
+      "org.apache.shardingsphere:shardingsphere-sql-parser-mysql 5.3.2",
+      "org.apache.shardingsphere:shardingsphere-sql-parser-spi 5.3.2",
+      "org.apache.shardingsphere:shardingsphere-sql-parser-statement 5.3.2"
+    ],
+    "dialect": "MySQL (SQLParserEngine and SQLVisitorEngine with databaseType \"MySQL\", visitor type STATEMENT)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8, MySQL dialect module; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. statement_count is 1 by the single-statement API. Other dialect modules are untested.",
+    "family": "Apache ShardingSphere ANTLR4 dialect grammars (MySQL module)",
+    "family_note": "SQLParserEngine looks up the MySQL dialect through ShardingSphere's SPI and runs the ANTLR4-generated MySQLLexer and MySQLStatementParser (from the shardingsphere-sql-parser-mysql module); SQLVisitorEngine then converts the parse tree with the MySQL statement visitor into MySQLSelectStatement or MySQLInsertStatement segment models. The 5.3.2 coordinates are the ones the 5.3.2 parser documentation names. From 5.4 the modules were renamed (shardingsphere-parser-sql-engine, now a pom aggregator; -engine-core 15 and -engine-mysql 9 direct dependents); those successor coordinates are the same project and are not added separately. Independent of the other Java SQL families.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 135,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.shardingsphere%3Ashardingsphere-sql-parser-engine",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over the 15 releases of the pre-5.4 coordinate; the renamed successor coordinates (-parser-sql-engine 64 as a pom aggregator, -engine-core 15, -engine-mysql 9) are not added."
+    },
+    "project": "projects/sql/java/shardingsphere_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

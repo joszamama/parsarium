@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "java",
+  "pilot": true,
+  "package": "org.apache.shardingsphere:shardingsphere-sql-parser-engine",
+  "release": "5.3.2",
+  "catalog_parser": "data/java/sql/parsers.json",
+  "source_lock": "projects/sql/java/shardingsphere_sql_parser/source-lock.json",
+  "source_sha256": "de028b6adb93f311137cdb4382c23eaefc8526c0947bcc0f508c42bf535a1966",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "java",
+    "-cp",
+    "/work/classes:/work/lib/*",
+    "SqlHarness",
+    "/input/case"
+  ],
+  "dialect": "MySQL (SQLParserEngine and SQLVisitorEngine with databaseType \"MySQL\", visitor type STATEMENT)",
+  "parser_family": "Apache ShardingSphere ANTLR4 dialect grammars (MySQLStatement.g4 generated into MySQLStatementParser) with ShardingSphere's statement visitors building SQLStatement segment models; independent of jOOQ, Druid, Calcite, JSqlParser and the Presto/Trino, Spark and Hive grammars",
+  "api": "new SQLParserEngine(\"MySQL\", new CacheOption(128, 1024L)).parse(local SQL text, false) -> ParseASTNode, then new SQLVisitorEngine(\"MySQL\", \"STATEMENT\", false, new Properties()).visit(tree) -> SQLStatement; the harness reads SelectStatement (projections, join table segments, where, group by, order by) and InsertStatement (table, insert columns, values segments) and walks aggregation, function and literal expression segments",
+  "harness": "SqlHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "SqlHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/caffeine-2.9.3.jar:/work/lib/guava-30.0-jre.jar:/work/lib/antlr4-runtime-4.10.1.jar:/work/lib/shardingsphere-infra-util-5.3.2.jar:/work/lib/shardingsphere-sql-parser-engine-5.3.2.jar:/work/lib/shardingsphere-sql-parser-mysql-5.3.2.jar:/work/lib/shardingsphere-sql-parser-spi-5.3.2.jar:/work/lib/shardingsphere-sql-parser-statement-5.3.2.jar",
+    "--target_class=SqlHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo bytecode coverage of org.apache.shardingsphere:shardingsphere-sql-parser-engine, -mysql and -statement 5.3.2 org.apache.shardingsphere.sql.parser classes (ANTLR MySQLStatementParser and lexer, MySQL statement visitor, statement segments) during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/org/apache/shardingsphere/sql/parser/autogen/MySQLStatementParser.java",
+  "scope": "One SQL statement from local bytes decoded as strict UTF-8, parsed with the documented SQLParserEngine and turned into a SQLStatement by SQLVisitorEngine for the MySQL dialect (the MySQL grammar accepts the terminating semicolon); valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. The API parses one statement, so statement_count is 1 by contract. Other dialect modules and the parse-tree cache are untested."
+}
