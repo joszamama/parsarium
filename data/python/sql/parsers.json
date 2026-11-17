@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "name": "sqlparse",
+    "version": "0.6.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "LICENSE in the pinned sdist (SHA-256 c1938235b80d39e93138eae89edc3af67e18ecbc40d266529fa57b2dce426310)",
+    "input_api": "sqlparse.parse(local SQL text) -> tuple of grouped Statement token trees",
+    "documentation": "https://sqlparse.readthedocs.io/en/0.6.1/api.html#sqlparse.parse",
+    "source": "https://files.pythonhosted.org/packages/7e/e0/361c764ea58cc1a75f7b4b424a74b08449db8bfa5e9199c7275999fdd1b9/sqlparse-0.6.1.tar.gz",
+    "source_sha256": "ca722573f848ff2d30e40ea30f53a104b7dea7635ea9285891263eb2c58fb6e7",
+    "wheel_sha256": "3be5a72d04c873d690d7c6dedd33d6fae2ef82759881ceec02fc2efd0cba564f",
+    "dependencies": [],
+    "dialect": "none (sqlparse has no dialect option)",
+    "scope": "One SQL statement from local text; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Non-validating: it groups tokens into a tree and accepts invalid SQL, so it does not reject non-SQL input.",
+    "family": "sqlparse regex lexer and token-grouping engine (non-validating)",
+    "family_note": "sqlparse.parse lexes with the regex tables in sqlparse/keywords.py and sqlparse/lexer.py, then sqlparse/engine/grouping.py groups tokens into Identifier, IdentifierList, Function, Where, Comparison, Parenthesis and Values nodes under a Statement. The INSERT target 'orders (id, ...)' is grouped as a Function-shaped node; the adapter reads its name and parenthesized identifier list. Independent of sqlglot, libpg_query and sqlparser-rs. sql-metadata wraps this family.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 125550021,
+      "source": "https://pypistats.org/api/packages/sqlparse/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Package-level downloads include Django's dependency on sqlparse for SQL formatting and splitting, not only parse-tree use."
+    },
+    "project": "projects/sql/python/sqlparse",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+]

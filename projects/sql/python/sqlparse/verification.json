@@ -1,0 +1,69 @@
+{
+  "kind": "third_party",
+  "api": "sqlparse.parse(local SQL text decoded from UTF-8 bytes) -> tuple of grouped Statement token trees; the harness walks Statement, IdentifierList, Identifier, Function, Where, Parenthesis and Values groups and leaf token types",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T16:52:12.687707+00:00",
+  "manifest": "projects/sql/python/sqlparse/manifest.json",
+  "image_id": "sha256:9eef7305a120f373d824abcdd04afb44b61701b2f77e70b9546a8753420ded1b",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/amd64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: sqlparse",
+    "Version: 0.6.1",
+    "Name: atheris",
+    "Version: 3.1.0",
+    "d0912101c641e5da59b0c14c6c24a7ad5abcc7a9e60b22b6574ee98bbf9d83f7  sqlparse/engine/grouping.py",
+    "86c32dd25e3273149f6c6a163c8fd0dbdae399de494b2e2bdfec9f4fbde5817c  sqlparse/lexer.py"
+  ],
+  "source_sha256": "3be5a72d04c873d690d7c6dedd33d6fae2ef82759881ceec02fc2efd0cba564f",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "d84128ad98f5b6696148f81cf249de07f9f48ab195823a8020ac0bfc1c32067b",
+    "fuzz.py": "12f5329b821f28b641c53a86c55eaaf560b51775e5687ecaacc33671472c5ae8",
+    "harness.py": "c2cd1fccf5d36cb918d391824db7fd96b3ca682d176e44738bcf66b39b294edd",
+    "manifest.json": "396d2c94c70cdd9398dba640394b3f4e9c2094f5a4c81653c51883fc79938407",
+    "replay.py": "89e812105efc44e79e4f1260847eb11e4bb45570bb0857fd1f1eee08ae262067",
+    "run-control.py": "cccb2c45302652f743136087aacce8ac708f322245264f4415dcbc804b2ea8b8",
+    "runtime-requirements.lock": "098e93965ac4b10e3609cd55fea8655c001653ca972bdd5b68faf2ff6a36e0e0"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 9,
+  "parser_source_lines_covered": 492,
+  "format_specific_source_lines_covered": 243,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/python/sqlparse/target/coverage/coverage.json",
+  "pass": true
+}

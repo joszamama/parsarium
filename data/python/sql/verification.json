@@ -1,0 +1,102 @@
+{
+  "platform": "linux/amd64",
+  "control": "controls/sql/select-join.sql",
+  "differential_control": "controls/sql/insert-values.sql",
+  "oracle": "controls/sql/expected.json",
+  "third_party": [
+    {
+      "package": "sqlparse",
+      "version": "0.6.1",
+      "pass": true,
+      "input_api": "sqlparse.parse(local SQL text) -> tuple of grouped Statement token trees",
+      "dialect": "none (sqlparse has no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "sqlparse regex lexer and token-grouping engine (non-validating)",
+      "parser_source_files": 9,
+      "parser_source_lines_covered": 492,
+      "afl_tuple_difference": 35,
+      "parser_feature_difference": 35,
+      "project_receipt": "projects/sql/python/sqlparse/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/python/sqlparse/differential.json"
+    }
+  ],
+  "standard": [],
+  "checked_at_utc": "2026-11-17T17:01:47.036749+00:00"
+}
