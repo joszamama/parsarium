@@ -1,0 +1,100 @@
+{
+ "observed": "2026-11-17",
+ "formats": {
+  "json": {
+   "name": "JSON text",
+   "definition": "A JSON text as defined by RFC 8259 / ECMA-404, read from local bytes, a string, a file or a stream into values or parse events.",
+   "specifications": [
+    "https://www.rfc-editor.org/rfc/rfc8259",
+    "https://ecma-international.org/publications-and-standards/standards/ecma-404/"
+   ],
+   "in_scope": "DOM, streaming/event, and data-binding parsers that tokenize JSON text themselves or through an identified family.",
+   "out_of_scope": "Encoders/serializers only, schema validators or JSONPath/JMESPath layers without their own parse step (they inherit a parser family), CLI-only tools, remote services.",
+   "ambiguity": "JSON5, Hjson, JSONC and UCL parsers accept supersets; only the strict-JSON control subset can be claimed. Wrappers over a runtime parser (JSON.parse, json_decode, encoding/json) share that family.",
+   "controls": [
+    "control.json"
+   ]
+  },
+  "xml": {
+   "name": "XML 1.0 document",
+   "definition": "A well-formed XML 1.0 document with namespaces, read from local bytes, a string, a file or a stream into a tree or event stream.",
+   "specifications": [
+    "https://www.w3.org/TR/xml/",
+    "https://www.w3.org/TR/xml-names/"
+   ],
+   "in_scope": "DOM, SAX, StAX/pull and tree parsers; object mappers count only with their tokenizer family identified.",
+   "out_of_scope": "Writers/builders only, HTML-only parsers, XSLT/XPath layers without their own tokenizer, binary XML encodings, CLI-only tools.",
+   "ambiguity": "Many wrappers delegate to Expat, libxml2, encoding/xml or a JDK SAX/StAX provider; family must be recorded. HTML parsers with an XML mode (htmlparser2, jsoup) are flagged.",
+   "controls": [
+    "control.xml"
+   ]
+  },
+  "mp3_plain": {
+   "name": "Plain untagged MP3",
+   "definition": "An MPEG-1 or MPEG-2 (LSF) Audio Layer III elementary stream (ISO/IEC 11172-3, ISO/IEC 13818-3) consisting only of contiguous audio frames: no ID3v1, ID3v2 or APE tag and no Xing/Info/VBRI header frame. A parser must interpret frame headers (sync, version, layer, bitrate, sample rate, channel mode) or decode samples.",
+   "specifications": [
+    "https://www.iso.org/standard/22412.html",
+    "https://www.iso.org/standard/26797.html"
+   ],
+   "in_scope": "Frame parsers, duration/property scanners that read frame headers, and PCM decoders.",
+   "out_of_scope": "ID3-only or other tag-only readers, MIME/magic sniffing, external-process wrappers (ffmpeg/lame CLIs), encoders only.",
+   "relation_to_mp3_id3v2": "The existing mp3_id3v2 cell tests tagged files; a parser verified there through ID3 fields does not establish frame-level MP3 parsing. Verification here needs a frame-level observable on an untagged control. Tagging libraries that also scan frame headers (mutagen, TagLib, jaudiotagger, getID3, mp3agic) remain leads until that frame-level result is shown.",
+   "ambiguity": "MPEG-2.5 (8/11.025/12 kHz) is a non-ISO extension and is not used by the controls. Header-only scanners and full decoders produce different observables; the verified observable must be named per path.",
+   "controls": [
+    "silent-plain-44k.mp3",
+    "tone-plain-16k.mp3"
+   ]
+  }
+ },
+ "control_expected": {
+  "control.json": {
+   "keys": [
+    "count",
+    "format",
+    "items",
+    "nested"
+   ],
+   "items": 6,
+   "nested.text": "café ✓",
+   "count": 3
+  },
+  "control.xml": {
+   "root": "{urn:parsarium:control}catalog",
+   "element_children": 3,
+   "item_ids": [
+    "a",
+    "b"
+   ],
+   "item_texts": [
+    "café",
+    "x<y"
+   ]
+  },
+  "silent-plain-44k.mp3": {
+   "mpeg_version": "MPEG-1",
+   "layer": 3,
+   "sample_rate": 44100,
+   "channels": 1,
+   "bitrate": 128000,
+   "frames": 38,
+   "samples_per_channel": 43776,
+   "pcm": "all zero"
+  },
+  "tone-plain-16k.mp3": {
+   "mpeg_version": "MPEG-2 (LSF)",
+   "layer": 3,
+   "sample_rate": 16000,
+   "channels": 1,
+   "bitrate": 32000,
+   "frames": 30,
+   "samples_per_channel": 17280,
+   "pcm": "440 Hz sine, encoder delay/padding included"
+  }
+ },
+ "control_sha256": {
+  "control.json": "66177ecde52177b95b37841a89800be064c44eb7c8aabc9711fbda7a511ce5d8",
+  "control.xml": "ebe7b9f7d172678e4e873dc12dad39a8945531bfea87fa847831e583a51b5495",
+  "silent-plain-44k.mp3": "cc554194c2092ea39eb9de3493ae3a09c0b61d57b411104803f4c1bfd1934f96",
+  "tone-plain-16k.mp3": "f1ddac2f198400d9f9e16a2c38fb47a5e8a051beaf218d54a3892417f83d7d1c"
+ }
+}
