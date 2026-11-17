@@ -14,6 +14,6 @@ python3 parsarium.py afl build mp3 java mp3spi
 python3 parsarium.py afl prepare mp3 java mp3spi runs/mp3-mp3spi-afl
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign. The reader and converter are selected directly from MP3SPI so the path does not depend on Java Sound provider discovery. The image includes JaCoCo source lines for MP3SPI and its soundlibs JLayer decoder as separate groups.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-**Coverage limit:** Two valid untagged CBR Layer III controls. The provider shares JLayer decoder lineage with `javazoom:jlayer` and is a distinct public API path, not an independent decoder family.
+**Coverage limit:** Two untagged CBR MPEG Layer III controls. MP3SPI uses Java Sound SPI but the adapter selects its reader and converter directly; PCM decoding delegates to the soundlibs JLayer fork, the same decoder lineage as javazoom:jlayer. VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 and ID3 are outside these checks.

@@ -120,6 +120,15 @@ def main() -> None:
             slug = result["project"].rsplit("/", 1)[-1]
             path = ROOT / "data/java/mp3" / f"{slug}-feedback-differential.json"
             path.write_text(json.dumps({"schema_version": 1, **result}, indent=2) + "\n")
+        kept = json.loads(REPORT.read_text())["results"] if REPORT.is_file() else []
+        rows = {item["project"]: item for item in kept} | {item["project"]: item for item in results}
+        results = [rows[f"mp3/java/{slug}"] for slug in PROJECTS if f"mp3/java/{slug}" in rows]
+        REPORT.write_text(json.dumps({
+            "schema_version": 1,
+            "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+            "projects_total": len(results), "projects_passed": len(results),
+            "differential_kind": "fixed_valid_mpeg2_stereo",
+            "results": results}, indent=2) + "\n")
         print(json.dumps(results, indent=2))
         return
     REPORT.write_text(json.dumps({

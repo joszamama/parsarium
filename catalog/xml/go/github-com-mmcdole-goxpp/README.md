@@ -1,23 +1,50 @@
 # github.com/mmcdole/goxpp — XML / Go
 
-**Pilot / incomplete format cell.** This path is verified on two valid controls; the format-wide search remains bounded and incomplete.
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.3.0`
 - **License:** MIT
-- **Parser family:** goxpp pull cursor over Go `encoding/xml.Decoder.Token()` tokenizer
-- **Local input API:** `xpp.NewXMLPullParser(io.Reader, true, nil)` and `XMLPullParser.NextToken()`
-- **API reference:** [Go Packages](https://pkg.go.dev/github.com/mmcdole/goxpp@v1.3.0#NewXMLPullParser)
-- **Valid controls:** [catalog with namespaces](../../../../controls/xml/catalog-ns.xml) and [order with default namespace](../../../../controls/xml/order-default-ns.xml)
-- **Evidence:** [parser record](../../../../data/go/xml/parsers.json), [control result](../../../../data/go/xml/verification.json), [AFL++ feedback](../../../../fuzzing/afl-native/xml/go/github_com_mmcdole_goxpp/differential.json)
+- **Parser family:** goxpp XML pull cursor over Go encoding/xml Decoder.Token tokenizer
+- **Local input API:** `xpp.NewXMLPullParser(io.Reader, true, nil) over a local byte stream, then XMLPullParser.NextToken() events`
+- **Documentation:** [API reference](<https://pkg.go.dev/github.com/mmcdole/goxpp@v1.3.0#NewXMLPullParser>)
+- **Valid control:** [`controls/xml/catalog-ns.xml`](../../../../controls/xml/catalog-ns.xml)
+- **Catalog evidence:** [parser record](../../../../data/go/xml/parsers.json) · [control result](../../../../data/go/xml/verification.json)
 
-The observed results include expanded element names, ordered attributes and elements, namespace declarations, text including decoded entities and CDATA, and maximum depth. The catalog control covers 84 goxpp source lines and 306 `encoding/xml` lines. Repeated AFL++ traces are identical for each valid control; the order control changes three goxpp blocks and 32 underlying tokenizer blocks. goxpp is a distinct API and state machine within the shared Go `encoding/xml` parser family.
+## Observed control result
 
-The saved pkg.go.dev snapshot reports 132 importing packages for goxpp. This is a package adoption count, not a measure of distinct tokenizer use.
+```json
+{
+  "attributes": [
+    "version=1",
+    "id=a1",
+    "{urn:parsarium:catalog}lang=es",
+    "id=b2"
+  ],
+  "elements": [
+    "{urn:parsarium:catalog}catalog",
+    "{urn:parsarium:item}item",
+    "{urn:parsarium:item}item",
+    "{urn:parsarium:item}name",
+    "{urn:parsarium:item}note"
+  ],
+  "max_depth": 3,
+  "namespace_declarations": 2,
+  "namespaces": [
+    "urn:parsarium:catalog",
+    "urn:parsarium:item"
+  ],
+  "root": "{urn:parsarium:catalog}catalog",
+  "text": [
+    "Café & té",
+    "Zürich <HQ>",
+    "x < y"
+  ]
+}
+```
 
-## Run
+## Run this target
 
 ```sh
 python3 parsarium.py build xml go github_com_mmcdole_goxpp
 python3 parsarium.py run xml go github_com_mmcdole_goxpp controls/xml/catalog-ns.xml
-python3 parsarium.py run xml go github_com_mmcdole_goxpp controls/xml/order-default-ns.xml
 ```

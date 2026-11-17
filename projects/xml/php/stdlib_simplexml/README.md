@@ -2,11 +2,7 @@
 
 Pinned release: `8.5.12`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[Standard API inventory](../../../../data/php/xml/standard.json) · [AFL++ overlay receipt](../../../../fuzzing/afl-native/xml/php/stdlib_simplexml/verification.json)
-
-`simplexml_load_string()` on the control bytes as a string. PHP 8.5.12 (PHP License 3.01, built with `--enable-simplexml`) and libxml2 2.15.4 (MIT) are built from pinned source archives; `ext/simplexml/simplexml.c` and `php_simplexml.h` are also pinned by SHA-256. The overlay checks both `catalog-ns.xml` and `order-default-ns.xml` against the expat oracle and fuzzes `fuzz-target.php`, which only calls `simplexml_load_string`.
-
-SimpleXML has no text-node accessor: an element's string value joins its direct text and CDATA, so text split by child elements, comments or PIs inside one element is merged. Comments, PIs and the XML declaration are not exposed. Neither control has such mixed content.
+[Standard API inventory](../../../../data/php/xml/standard.json)
 
 ## Run from the repository root
 

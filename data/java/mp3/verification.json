@@ -41,6 +41,37 @@
       "format_specific_source": "org/jcodec/codecs/mpa/Mp3Decoder.java"
     },
     {
+      "package": "mp3spi",
+      "group": "com.googlecode.soundlibs",
+      "version": "1.9.5.4",
+      "scope": "Direct Java Sound MP3SPI reader and converter over every frame of two untagged MPEG Layer III streams; PCM decode delegates to the soundlibs JLayer fork",
+      "command": "python3 scripts/run_project.py mp3 java mp3spi",
+      "receipt": "projects/mp3/java/mp3spi/verification.json",
+      "pass": true,
+      "output": {
+        "codec": "MP3",
+        "sample_rate": 44100,
+        "channels": 1,
+        "frames": 11,
+        "decoded_samples": 12672
+      },
+      "differential_output": {
+        "codec": "MP3",
+        "sample_rate": 22050,
+        "channels": 2,
+        "frames": 12,
+        "decoded_samples": 6912
+      },
+      "differential_receipt": "data/java/mp3/mp3spi-feedback-differential.json",
+      "parser_source_files": 8,
+      "parser_source_lines_covered": 220,
+      "format_specific_source_lines_covered": 80,
+      "format_specific_source": "javazoom/spi/mpeg/sampled/convert/DecodedMpegAudioInputStream.java",
+      "underlying_source_files": 13,
+      "underlying_source_lines_covered": 1739,
+      "underlying_family": "soundlibs JLayer fork of JavaZoom JLayer"
+    },
+    {
       "package": "jlayer",
       "group": "javazoom",
       "version": "1.0.1",
