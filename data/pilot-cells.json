@@ -267,10 +267,10 @@
     {
       "ecosystem": "go",
       "format": "xml",
-      "status": "pilot_two_selected_search_bounded",
+      "status": "pilot_three_selected_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 2,
+      "verified_third_party_count": 3,
       "verified_standard_or_runtime_count": 1,
       "search_queries": [
         "xml",
@@ -283,8 +283,8 @@
       "search_limit_per_query": 100,
       "search_hits_recorded": 496,
       "unique_search_hits": 464,
-      "unresolved_documentation_leads": 14,
-      "uncertainty": "Pilot cell: the two highest Imported-by XML parser leads (etree 2,098; xmlquery 627) were built and control-verified. Both use the Go encoding/xml Decoder tokenizer, but build distinct trees. 14 further numeric leads remain unresolved and are not selected or ranked. The first 100 hits of six queries were captured (xml dom returned 68; xml reader 28). The two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour.",
+      "unresolved_documentation_leads": 13,
+      "uncertainty": "Pilot cell: the three highest Imported-by XML parser leads (etree 2,098; xmlquery 627; mxj 553) were built and control-verified. All three use the Go encoding/xml Decoder tokenizer and build their own trees or maps; none is an independent tokenizer. mxj's map drops namespace URIs and prefixes, order between differently named siblings, comments, processing instructions and mixed-content runs, so only its map paths, attribute keys and trimmed text are claimed. 13 further numeric leads remain unresolved and are not selected or ranked. The first 100 hits of six queries were captured (xml dom returned 68; xml reader 28). The two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour.",
       "third_party_evidence": "data/go/xml/parsers.json",
       "third_party_control_results": "data/go/xml/verification.json",
       "runtime_evidence": "data/go/xml/standard.json",

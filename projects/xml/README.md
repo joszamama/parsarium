@@ -10,6 +10,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [encoding/xml.Decoder.Token() / Go](go/stdlib_decoder/README.md)
 - [github.com/antchfx/xmlquery / Go](go/github_com_antchfx_xmlquery/README.md)
 - [github.com/beevik/etree / Go](go/github_com_beevik_etree/README.md)
+- [github.com/clbanning/mxj / Go](go/github_com_clbanning_mxj/README.md)
 - [aalto-xml / Java](java/aalto_xml/README.md)
 - [dom4j / Java](java/dom4j/README.md)
 - [jackson-dataformat-xml / Java](java/jackson_xml/README.md)
