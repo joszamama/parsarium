@@ -7,6 +7,13 @@ require __DIR__ . '/vendor/autoload.php';
 
 use PHPSQL\Parser;
 
+// php-fuzzer's error handler throws on every error that error_reporting() allows. The parser class is
+// compiled here, with its compile-time warnings masked, instead of lazily inside the fuzz target; the
+// runtime "false to array" deprecation stays masked.
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_WARNING);
+class_exists(Parser::class);
+error_reporting(E_ALL & ~E_DEPRECATED);
+
 // Every summary field is read from the nested parse-tree array that PHPSQL\Parser::parse returns.
 function parsarium_walk(mixed $node, callable $visit): void {
     if (!is_array($node)) { return; }
