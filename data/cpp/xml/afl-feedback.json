@@ -1,28 +1,34 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T11:07:56.465100+00:00",
+  "checked_at_utc": "2026-11-17T11:25:12.195739+00:00",
   "projects_total": 4,
   "projects_passed": 4,
-  "differential_kind": "valid namespace XML controls; tinyxml2 uses the alternate no-processing-instruction second control; libxml++ uses a parser-only probe with native libxml2 parser.c source lines",
-  "command": "for slug in xerces_c pugixml tinyxml2 libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/libxmlpp/verify-feedback.py",
+  "differential_kind": "valid namespace XML controls; Xerces-C++ and libxml++ use parser-only probes; tinyxml2 uses the alternate no-processing-instruction second control",
+  "command": "for slug in pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done; for slug in xerces_c libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/xerces_c/verify-parser-feedback.py; python3 projects/xml/cpp/libxmlpp/verify-feedback.py",
   "results": [
     {
       "project": "xml/cpp/xerces_c",
       "pass": true,
-      "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
-      "overlay_receipt_sha256": "ce972954310bdfc35d0a566350bc10275912dd26f37bf0106774f8d911f79839",
-      "differential_receipt_sha256": "4e27fcf93e7d6526b6d604e0687633ae2d4584bd553a4198eb8d29d0d1f16ea2",
+      "feedback_kind": "native_afl_clang_fast_parser_only_edges_with_xerces_scanner_source_lines",
+      "overlay_receipt_sha256": "aa79ee3f5dfc2de96f824926e764bc3a082a6cc9fc2f09cb3251b0e030b79779",
+      "differential_receipt_sha256": "066b8973d8d72f11d052311eb8f7ec72799333b7a062ecf6a520460fef69eec3",
       "control": "controls/xml/catalog-ns.xml",
       "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
       "differential": "controls/xml/order-default-ns.xml",
       "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
       "repeated_control_identical": true,
-      "control_source_lines": 9468,
-      "control_afl_tuples": 10721,
-      "differential_source_lines": 9690,
-      "differential_afl_tuples": 10947,
-      "source_line_difference": 476,
-      "afl_tuple_difference": 514
+      "control_source_lines": 1323,
+      "control_afl_tuples": 10240,
+      "differential_source_lines": 1463,
+      "differential_afl_tuples": 10457,
+      "source_line_difference": 274,
+      "afl_tuple_difference": 473,
+      "scanner_line_repeat_variation": [
+        0,
+        0
+      ],
+      "probe": "projects/xml/cpp/xerces_c/parser-probe.cpp",
+      "exact_tree_outputs_verified": true
     },
     {
       "project": "xml/cpp/pugixml",
@@ -74,13 +80,13 @@
       "repeated_control_identical": true,
       "control_source_lines": 1332,
       "control_afl_tuples": 1924,
-      "differential_source_lines": 1509,
+      "differential_source_lines": 1503,
       "differential_afl_tuples": 2099,
-      "source_line_difference": 367,
+      "source_line_difference": 361,
       "afl_tuple_difference": 499,
       "parser_c_line_repeat_variation": [
         0,
-        3
+        0
       ],
       "probe": "projects/xml/cpp/libxmlpp/parser-probe.cpp",
       "limit": "A few libxml2 parser.c line hits vary between identical process runs; reported line differences count only lines present in both runs of one control and absent in both runs of the other. AFL++ tuples repeat exactly."

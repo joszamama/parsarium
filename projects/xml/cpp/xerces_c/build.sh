@@ -15,3 +15,7 @@ clang++ -std=c++17 $common -fprofile-instr-generate -fcoverage-mapping $includes
   /work/harness.cpp /work/replay.cpp /work/build-coverage/src/libxerces-c.a -o /work/replay
 clang++ -std=c++17 $common -fsanitize=fuzzer,address,undefined -I/work/source/src -I/work/build-fuzzer/src \
   /work/harness.cpp /work/build-fuzzer/src/libxerces-c.a -o /work/fuzzer
+clang++ -std=c++17 $common -fprofile-instr-generate -fcoverage-mapping $includes \
+  /work/parser-probe.cpp /work/build-coverage/src/libxerces-c.a -o /work/parser-probe
+clang++ -std=c++17 $common -fsanitize=address,undefined -I/work/source/src -I/work/build-fuzzer/src \
+  /work/parser-probe.cpp /work/build-fuzzer/src/libxerces-c.a -o /work/parser-probe-afl

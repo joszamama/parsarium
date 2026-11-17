@@ -1,20 +1,51 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T03:49:06.713445+00:00",
+  "checked_at_utc": "2026-11-17T11:25:32.490752+00:00",
   "project": "xml/cpp/xerces_c",
   "pass": true,
-  "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
-  "base_project_receipt_sha256": "e62e35c714915c6ac804dea2f07747dd94e1f9d7ac0fd7853f5ce78732e6a3a0",
-  "overlay_receipt_sha256": "ce972954310bdfc35d0a566350bc10275912dd26f37bf0106774f8d911f79839",
-  "base_image_id": "sha256:31be9cc0af7cf07c7434d8c170e750e5a36437f49ee065ff7080a7c11be03ea5",
-  "overlay_image_id": "sha256:984565dcf70e70f53160fc2ccc538d324badeb15e4433fc16b6379ecab224a33",
+  "feedback_kind": "native_afl_clang_fast_parser_only_edges_with_xerces_scanner_source_lines",
+  "probe": "projects/xml/cpp/xerces_c/parser-probe.cpp",
+  "probe_scope": "XercesDOMParser::parse(MemBufInputSource) and getDocumentElement only; no DOM traversal, output summarization, or adapter postprocessing",
+  "base_project_receipt_sha256": "8535d31c3579216b19ce99cf27e28cc90fca8c5339a1856cb1564bbb806bf8d6",
+  "overlay_receipt_sha256": "aa79ee3f5dfc2de96f824926e764bc3a082a6cc9fc2f09cb3251b0e030b79779",
+  "base_image_id": "sha256:3d15cfd9c90dc34a3c090b73575b123797849352afaa0555f56d5fa889439266",
+  "overlay_image_id": "sha256:feefbcca4736e2d542dd6d1d95e7e8d11da3fef4bb75f611428a7f48cba143a6",
   "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 292890,
   "repeats_per_control": 2,
   "first_control": "controls/xml/catalog-ns.xml",
   "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
   "second_control": "controls/xml/order-default-ns.xml",
   "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
-  "second_control_output": {
+  "exact_tree_outputs_verified": true,
+  "first_tree_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "second_tree_output": {
     "attributes": [
       "n=1",
       "{urn:parsarium:price}currency=EUR",
@@ -42,46 +73,16 @@
       "12.50 \u20ac"
     ]
   },
-  "first_source_lines": 9468,
-  "second_source_lines": 9690,
-  "source_line_difference": 476,
-  "first_only_lines_by_file": {
-    "src/xercesc/dom/DOMCDATASection.hpp": 1,
-    "src/xercesc/dom/impl/DOMAttrMapImpl.cpp": 1,
-    "src/xercesc/dom/impl/DOMCDATASectionImpl.cpp": 9,
-    "src/xercesc/dom/impl/DOMNodeVector.cpp": 2,
-    "src/xercesc/dom/impl/DOMParentNode.cpp": 4,
-    "src/xercesc/internal/IGXMLScanner.cpp": 4,
-    "src/xercesc/internal/IGXMLScanner2.cpp": 50,
-    "src/xercesc/internal/XMLScanner.cpp": 13,
-    "src/xercesc/parsers/AbstractDOMParser.cpp": 9,
-    "src/xercesc/util/XMLUTF8Transcoder.cpp": 21,
-    "src/xercesc/util/XMLUTF8Transcoder.hpp": 3,
-    "src/xercesc/validators/DTD/DTDElementDecl.cpp": 10
-  },
-  "second_only_lines_by_file": {
-    "src/xercesc/dom/DOMComment.hpp": 1,
-    "src/xercesc/dom/DOMProcessingInstruction.hpp": 1,
-    "src/xercesc/dom/impl/DOMAttrMapImpl.cpp": 2,
-    "src/xercesc/dom/impl/DOMCommentImpl.cpp": 4,
-    "src/xercesc/dom/impl/DOMDocumentImpl.cpp": 12,
-    "src/xercesc/dom/impl/DOMParentNode.cpp": 7,
-    "src/xercesc/dom/impl/DOMProcessingInstructionImpl.cpp": 9,
-    "src/xercesc/internal/ElemStack.cpp": 1,
-    "src/xercesc/internal/ElemStack.hpp": 3,
-    "src/xercesc/internal/IGXMLScanner.cpp": 37,
-    "src/xercesc/internal/IGXMLScanner2.cpp": 23,
-    "src/xercesc/internal/ReaderMgr.cpp": 6,
-    "src/xercesc/internal/ReaderMgr.hpp": 8,
-    "src/xercesc/internal/XMLReader.cpp": 46,
-    "src/xercesc/internal/XMLReader.hpp": 6,
-    "src/xercesc/internal/XMLScanner.cpp": 147,
-    "src/xercesc/parsers/AbstractDOMParser.cpp": 18,
-    "src/xercesc/util/XMLChar.cpp": 14,
-    "src/xercesc/util/XMLUTF8Transcoder.cpp": 4
-  },
-  "first_afl_tuples": 10721,
-  "second_afl_tuples": 10947,
-  "afl_tuple_difference": 514,
+  "first_scanner_lines_stable": 1323,
+  "second_scanner_lines_stable": 1463,
+  "scanner_line_difference": 274,
+  "scanner_line_repeat_variation": [
+    0,
+    0
+  ],
+  "first_afl_tuples": 10240,
+  "second_afl_tuples": 10457,
+  "afl_tuple_difference": 473,
+  "repeated_afl_feedback_identical": true,
   "second_case_kind": "valid_control"
 }
