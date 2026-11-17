@@ -1,0 +1,67 @@
+{
+  "kind": "third_party",
+  "api": "(new PHPSQLParser\\PHPSQLParser())->parse(local SQL text) -> nested array parse tree keyed by clause (SELECT, FROM, WHERE, GROUP, ORDER, INSERT, VALUES)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T17:24:16.152579+00:00",
+  "manifest": "projects/sql/php/greenlion_php_sql_parser/manifest.json",
+  "image_id": "sha256:5bfd19959a886e32d018a993ead678c1a90aed47fc1abb9bb31efd03f63613ab",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "source_sha256": "932355b4ad6261621082089f414e08d1c43622a20588f3e22682571d95c39d8b",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "f5bf02fa6b99d141f66cd56f7b2ab0d4954e4b4010c4123cdde0f05256787e41",
+    "composer.json": "5c195022bf12d4ef93232f74a4b43fb2e57a511b43bf98a63a702dd0459f8370",
+    "composer.lock": "1ac7616708be04652817c97df65756ebe35dde0998c4b29e7421dc3c830e8bbf",
+    "fuzz-target.php": "5c25f2463d9b0bc0b2f2a681e80052c426a1a39f65320688167caf04e6b1d534",
+    "harness.php": "aae2d44f7f11823dc7cd5963b53fa485e4d6266805db1efd28d0ac06111df563",
+    "manifest.json": "d72ba24cb5acd3e6ee63b045de7c711714af92cbdd9008e6c436ee1737c97098",
+    "replay.php": "44ce32d4c2d4c0e07d4deed4f438cb6a7f754ba92e62f29519aafb36b1f22188",
+    "run-control.php": "a401a28dad392d320826503db5dc884d5a0a50d2db88171f70ff5e820f198a14",
+    "source-lock.json": "4c48ba94d5f2f766c2479831ea0279d131566f74f3b1a0ea4c2ffb2a2567f19f",
+    "target.json": "4c7c05708ed450e9eb606933564121f00e5535818a35c539ca0feb7b8ca0e238"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 19,
+  "parser_source_lines_covered": 885,
+  "format_specific_source_lines_covered": 9,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/php/greenlion_php_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}

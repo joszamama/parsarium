@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T17:24:46.720164+00:00",
+  "project": "sql/php/greenlion_php_sql_parser",
+  "pass": true,
+  "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "ae1eb8f79674e9ea7a9be49f09376b70544fef6a4eb626b9becabe8a0544bd0a",
+  "overlay_receipt_sha256": "a8c18e6f1adad879da33523ff6419a353bec3a6fb6daeae7abf5d48264f09943",
+  "base_image_id": "sha256:5bfd19959a886e32d018a993ead678c1a90aed47fc1abb9bb31efd03f63613ab",
+  "overlay_image_id": "sha256:4335fedfbf6c521fb697a919d5552525b38deb1718ab4cd1209b9bdb7fa1bc9d",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 901,
+  "second_afl_tuples": 679,
+  "afl_tuple_difference": 458,
+  "first_parser_features": 885,
+  "second_parser_features": 660,
+  "parser_feature_difference": 461,
+  "first_only_features_by_file": {
+    "src/PHPSQLParser/lexer/PHPSQLLexer.php": 1,
+    "src/PHPSQLParser/processors/AbstractProcessor.php": 16,
+    "src/PHPSQLParser/processors/DefaultProcessor.php": 1,
+    "src/PHPSQLParser/processors/ExpressionListProcessor.php": 46,
+    "src/PHPSQLParser/processors/FromProcessor.php": 116,
+    "src/PHPSQLParser/processors/GroupByProcessor.php": 14,
+    "src/PHPSQLParser/processors/OrderByProcessor.php": 30,
+    "src/PHPSQLParser/processors/SQLChunkProcessor.php": 10,
+    "src/PHPSQLParser/processors/SQLProcessor.php": 7,
+    "src/PHPSQLParser/processors/SelectExpressionProcessor.php": 60,
+    "src/PHPSQLParser/processors/SelectProcessor.php": 28,
+    "src/PHPSQLParser/processors/WhereProcessor.php": 1,
+    "src/PHPSQLParser/utils/ExpressionToken.php": 11,
+    "src/PHPSQLParser/utils/PHPSQLParserConstants.php": 2
+  },
+  "second_only_features_by_file": {
+    "src/PHPSQLParser/processors/AbstractProcessor.php": 4,
+    "src/PHPSQLParser/processors/ColumnListProcessor.php": 7,
+    "src/PHPSQLParser/processors/InsertProcessor.php": 56,
+    "src/PHPSQLParser/processors/RecordProcessor.php": 9,
+    "src/PHPSQLParser/processors/SQLChunkProcessor.php": 4,
+    "src/PHPSQLParser/processors/SQLProcessor.php": 6,
+    "src/PHPSQLParser/processors/ValuesProcessor.php": 32
+  }
+}

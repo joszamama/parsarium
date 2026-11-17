@@ -1,10 +1,10 @@
 {
   "ecosystem": "php",
   "format": "sql",
-  "status": "pilot_one_selected_search_bounded",
+  "status": "pilot_two_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 1,
+  "verified_third_party_count": 2,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "sql parser",
@@ -21,13 +21,14 @@
   "unique_search_hits": 115,
   "search_captured_at_utc": "2026-11-17T16:38:36.119239+00:00",
   "primary_metric": "Packagist total downloads",
-  "unresolved_documentation_leads": 2,
-  "uncertainty": "One verified PHP SQL path after a bounded Packagist search (three queries, 186 hits, 115 unique) and Packagist total downloads for 8 targeted leads, captured 2026-11-17. phpmyadmin/sql-parser 6.0.1 (55,800,144 total downloads) parses both valid controls into statement objects that give the oracle summary with its default MySQL context. iamcal/sql-parser (72,745,721) ranks higher but parses only CREATE TABLE schemas, and the doctrine and jdorn packages are formatters. greenlion/php-sql-parser and sqlftw/sqlftw are unverified, so this is not a top-ten ranking. PDO and SQLite3 prepare are engine APIs with no syntax tree. Two valid controls establish only the tested dialect-neutral subset.",
+  "unresolved_documentation_leads": 1,
+  "uncertainty": "Two verified PHP SQL paths after a bounded Packagist search (three queries, 186 hits, 115 unique) and Packagist total downloads for 8 targeted leads, captured 2026-11-17. phpmyadmin/sql-parser 6.0.1 (55,800,144 total downloads) and greenlion/php-sql-parser v5.0.0 (13,810,212) parse both valid controls into structures that give the oracle summary. They are independent code bases. iamcal/sql-parser (72,745,721) ranks higher but parses only CREATE TABLE schemas, and the doctrine and jdorn packages are formatters. sqlftw/sqlftw and other leads are unverified, so this is not a top-ten ranking. greenlion treats the whole input as one statement. PDO and SQLite3 prepare are engine APIs with no syntax tree. Two valid controls establish only the tested dialect-neutral subset.",
   "registry_snapshot": "data/php/sql/registry-snapshot.json",
   "unresolved_leads": "data/php/sql/leads.json",
   "runtime_evidence": "data/php/sql/standard.json",
   "third_party_evidence": "data/php/sql/parsers.json",
   "third_party_control_results": [
-    "projects/sql/php/phpmyadmin_sql_parser/verification.json"
+    "projects/sql/php/phpmyadmin_sql_parser/verification.json",
+    "projects/sql/php/greenlion_php_sql_parser/verification.json"
   ]
 }
