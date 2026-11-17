@@ -46,28 +46,6 @@
       }
     },
     {
-      "name": "toml-rs",
-      "metric_value": 18062,
-      "metric": "PyPI Stats last_month downloads excluding known mirrors",
-      "family": "toml-rs (lava-sh; PyO3 extension with a Rust TOML parser from the lava-sh/toml for_python_toml_rs git branch)",
-      "api_lead": "toml_rs.loads(str)",
-      "note": "PyO3 extension; its sdist Cargo.toml pulls the TOML v1.0.0 parser from the lava-sh/toml git branch for_python_toml_rs and lexical-core from git.",
-      "source": "https://pypi.org/project/toml-rs/",
-      "status": "unresolved_runnability_pending",
-      "api_lead_checked_against_pinned_release": true,
-      "release": "0.4.3",
-      "license": "Unlicense",
-      "release_sdist_sha256": "28fcd2592409f2b2e0721d58b10660f70ef8781e9e5ca45905bbcbeded9d13af",
-      "release_wheel_sha256": "ce8bfa674b5cb19a9f647acd827c81ab62647c409b129acd2f42866d935daf82",
-      "evidence": {
-        "checked_on_utc": "2026-11-17",
-        "run": "python:3.13-slim (sha256:1c0252262bd9a91b72301c941e478fff5c3dfeb23f146d034d590631cdc75e87, linux/arm64), toml-rs 0.4.3 cp313 manylinux aarch64 wheel; toml_rs.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
-        "service-config.toml": "matches the hand-written typed tree",
-        "typed-scalars.toml": "matches the hand-written typed tree",
-        "blocker": "Compiled Rust parser inside the extension (same coverage problem as rtoml), and its parser source is a git branch rather than a crates.io release; the family relation of lava-sh/toml to toml-rs/toml was not established. Not built from source in this round."
-      }
-    },
-    {
       "name": "qtoml",
       "metric_value": 2002,
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
@@ -94,6 +72,46 @@
       "metric_value": 85996374,
       "status": "excluded",
       "reason": "Writer only."
+    },
+    {
+      "name": "toml-rs",
+      "metric_value": 18062,
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "family": "toml_parser (toml-rs) fork: lava-sh/toml, a fork of toml-rs/toml",
+      "api_lead": "toml_rs.loads(str)",
+      "note": "PyO3 extension; its sdist Cargo.toml pulls the TOML v1.0.0 parser from the lava-sh/toml git branch for_python_toml_rs and lexical-core from git.",
+      "source": "https://pypi.org/project/toml-rs/",
+      "status": "excluded_fork_of_selected_family",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.4.3",
+      "license": "Unlicense",
+      "release_sdist_sha256": "28fcd2592409f2b2e0721d58b10660f70ef8781e9e5ca45905bbcbeded9d13af",
+      "release_wheel_sha256": "ce8bfa674b5cb19a9f647acd827c81ab62647c409b129acd2f42866d935daf82",
+      "evidence": {
+        "checked_on_utc": "2026-11-17",
+        "run": "python:3.13-slim (sha256:1c0252262bd9a91b72301c941e478fff5c3dfeb23f146d034d590631cdc75e87, linux/arm64), toml-rs 0.4.3 cp313 manylinux aarch64 wheel; toml_rs.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
+        "service-config.toml": "matches the hand-written typed tree",
+        "typed-scalars.toml": "matches the hand-written typed tree",
+        "blocker": "Compiled Rust parser inside the extension (same coverage problem as rtoml), and its parser source is a git branch rather than a crates.io release; the family relation of lava-sh/toml to toml-rs/toml was not established. Not built from source in this round."
+      },
+      "reason": "Its parser is not an independent code base: the sdist Cargo.toml takes toml, toml_parser and toml_edit from git forks of toml-rs/toml (lava-sh/toml rev b1581597 for TOML 1.0.0, toml_parser 1.0.5+spec-1.0.0; rev b3ab4b9d for TOML 1.1.0, toml_parser 1.1.5+spec-1.1.0), not from crates.io releases. Their toml_parser src/ shares 94.1% and 97.3% of distinct non-comment lines (>25 chars) with crates.io toml_parser 1.1.5, and their toml src/ 95.3% and 96.5% with crates.io toml 1.2.1, above the ~70% fork-exclusion threshold. The toml_parser family is already selected in this cell through rtoml (upstream toml 1.1.8 over toml_parser 1.1.5), so toml-rs would add a near-identical fork rather than a new parser.",
+      "fork_overlap_evidence": {
+        "checked_on_utc": "2026-11-18",
+        "sdist": "toml-rs 0.4.3 sdist 28fcd2592409f2b2e0721d58b10660f70ef8781e9e5ca45905bbcbeded9d13af",
+        "fork_sources": {
+          "b1581597f0fc10c0cc61faa03a3668b8f49e23f3": "https://codeload.github.com/lava-sh/toml/tar.gz/b1581597f0fc10c0cc61faa03a3668b8f49e23f3",
+          "b3ab4b9debc4eee0572e5c895ff4124d8c159d3e": "https://codeload.github.com/lava-sh/toml/tar.gz/b3ab4b9debc4eee0572e5c895ff4124d8c159d3e"
+        },
+        "method": "distinct stripped non-comment lines longer than 25 characters in crates/<crate>/src/**/*.rs present in the crates.io release src/",
+        "toml_parser_vs_crates_io_1.1.5": {
+          "b1581597": "1,044 of 1,110 (94.1%)",
+          "b3ab4b9d": "1,082 of 1,112 (97.3%)"
+        },
+        "toml_vs_crates_io_1.2.1": {
+          "b1581597": "1,813 of 1,902 (95.3%)",
+          "b3ab4b9d": "1,852 of 1,919 (96.5%)"
+        }
+      }
     }
   ],
   "promoted": [
