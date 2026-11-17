@@ -1,0 +1,43 @@
+{
+  "checked_at_utc": "2026-11-17T20:43:54.721244+00:00",
+  "project": "dns/go/tangled_sh_seiso_moe_magna",
+  "pass": true,
+  "input_kind": "two fixed valid DNS messages (RFC 1035 section 4)",
+  "oracle": "controls/dns/check_controls.py hand-written decoder; summaries pinned in controls/dns/expected.json",
+  "feature_kind": "parser-line AFL++ bridge features",
+  "subject_prefix": "tangled.sh/seiso.moe/magna/",
+  "base_image_id": "sha256:55228f000d16f996700168d208dcbc9372542d1fe4dc4a2a51b9a0c361ad905c",
+  "overlay_image_id": "sha256:e671ee1213b0f080f659dbfe3317563f31e2e084849370e43aef53cef2c36da9",
+  "overlay_receipt_sha256": "50f6b6146c75984d86cdbc43b0bf2a06141da343fa32a468b6ad282f60e27f21",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "control_output_matches": true,
+  "variant_output_matches": true,
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "afl_target": "/work/afl_proxy",
+  "afl_map_size": 65536,
+  "control_parser_features": 84,
+  "variant_parser_features": 47,
+  "parser_feature_difference": 37,
+  "control_afl_tuples": 104,
+  "variant_afl_tuples": 67,
+  "afl_tuple_difference": 37,
+  "control_features_by_file": {
+    "tangled.sh/seiso.moe/magna/domain_name.go": 26,
+    "tangled.sh/seiso.moe/magna/header.go": 8,
+    "tangled.sh/seiso.moe/magna/message.go": 13,
+    "tangled.sh/seiso.moe/magna/question.go": 4,
+    "tangled.sh/seiso.moe/magna/resource_record.go": 25,
+    "tangled.sh/seiso.moe/magna/utils.go": 8
+  },
+  "variant_features_by_file": {
+    "tangled.sh/seiso.moe/magna/domain_name.go": 18,
+    "tangled.sh/seiso.moe/magna/header.go": 8,
+    "tangled.sh/seiso.moe/magna/message.go": 11,
+    "tangled.sh/seiso.moe/magna/question.go": 4,
+    "tangled.sh/seiso.moe/magna/utils.go": 6
+  },
+  "mutation_campaign_run": false
+}

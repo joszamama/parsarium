@@ -733,5 +733,110 @@
     },
     "rank": 7,
     "afl_feedback": "data/go/dns/github-com-cznic-dns-msg-feedback-differential.json"
+  },
+  {
+    "name": "tangled.sh/seiso.moe/magna",
+    "module": "tangled.sh/seiso.moe/magna",
+    "version": "v0.0.2",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the module zip (sha256 b1951fc6...), checked in the image; pkg.go.dev lists MIT",
+    "input_api": "(*magna.Message).Decode(buf []byte) error",
+    "documentation": "https://pkg.go.dev/tangled.sh/seiso.moe/magna@v0.0.2#Message.Decode",
+    "source": "https://proxy.golang.org/tangled.sh/seiso.moe/magna/@v/v0.0.2.zip",
+    "source_lock": "projects/dns/go/tangled_sh_seiso_moe_magna/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "magna (message.go, header.go, question.go, domain_name.go, resource_record.go)",
+    "family_note": "Own pure-Go decoder (a small library behind a hobby DNS server); no code from miekg/dns or x/net. It keeps the 3-bit Z field. magna 0.0.2 has no AAAA type: type-28 RDATA is kept as magna.Reserved raw bytes, which the harness prints with net/netip (harness-side formatting, disclosed). Very low adoption (one known importer).",
+    "project": "projects/dns/go/tangled_sh_seiso_moe_magna",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 1,
+      "source": "https://pkg.go.dev/tangled.sh/seiso.moe/magna?tab=importedby",
+      "captured_at_utc": "2026-11-17T19:47:57.387068+00:00",
+      "snapshot": "data/go/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 8,
+    "afl_feedback": "data/go/dns/tangled-sh-seiso-moe-magna-feedback-differential.json"
   }
 ]
