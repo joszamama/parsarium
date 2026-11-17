@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T15:10:34.689170+00:00",
+  "project": "json/cpp/tao-json",
+  "pass": true,
+  "feedback_kind": "afl_clang_fast_taojson_and_pegtl_header_edges_and_source_lines",
+  "probe": "projects/json/cpp/tao-json/parser-probe.cpp",
+  "probe_scope": "tao::json::from_string(const char*, std::size_t, source) only; no tree traversal, serialization, or result formatting",
+  "dom_oracle": "python_json_loads_number_kind_preserving_sorted_object_keys",
+  "exact_tree_outputs_verified": true,
+  "base_project_receipt_sha256": "3a7c3a8512319606f6acbaaf614eaf660ff24c7f3d2e53d3fa992197fdde0daa",
+  "overlay_receipt_sha256": "399d2dac3f3279509ce404e91fe3628d3a366d8b8d418532ab73d1722e573734",
+  "base_image_id": "sha256:5f98bdcdda2ac4dda039fc1bb260b2ec48e3f84c078281b33043a96cd7baef2c",
+  "overlay_image_id": "sha256:09be6923adbb2cb9f6c346b56ec1b3552b34cd410b64d2df78df52f7fd335385",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 1984,
+  "allowlist": "projects/json/cpp/tao-json/afl-allowlist.txt",
+  "allowlist_entries": [
+    "src:*/tao/json/*",
+    "src:*/tao/pegtl/*",
+    "fun:_ZN3tao4json*",
+    "fun:_ZNK3tao4json*",
+    "fun:_ZN3tao5pegtl*",
+    "fun:_ZNK3tao5pegtl*"
+  ],
+  "repeats_per_control": 3,
+  "first_control": "controls/json/nested-object.json",
+  "second_control": "controls/json/nested-array.json",
+  "first_tree_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "root": "object",
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "second_tree_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "strings": [
+      "A",
+      "two"
+    ],
+    "root": "array",
+    "top_level_items": 5
+  },
+  "first_parser_lines": 436,
+  "second_parser_lines": 406,
+  "parser_line_difference": 34,
+  "first_afl_tuples": 344,
+  "second_afl_tuples": 292,
+  "afl_tuple_difference": 166,
+  "repeated_feedback_identical": true,
+  "second_case_kind": "valid_control"
+}

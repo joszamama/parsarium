@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "cpp",
+  "package": "taoJSON",
+  "release": "1.0.0-beta.14",
+  "pilot": true,
+  "catalog_parser": "data/cpp/json/parsers.json",
+  "source_lock": "projects/json/cpp/tao-json/source-lock.json",
+  "source_sha256": "f9e44a1d6a70a6d39b9e45df76eac928e69f5318e5a957fd5c0efdf45dacaf5e",
+  "underlying_package": "PEGTL",
+  "underlying_release": "3.2.6",
+  "underlying_source_sha256": "0ad229e47e5e865c90788bb9865447804c72dcb171b7402f6f0fe8c78f3b2035",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "oracle": "The replay prints the tao::json::value returned by tao::json::from_string; run-control requires exact JSON tree equality with the control, including array order and integer versus float kinds. tao::json::value objects are std::map, so object members are compared by key and the printed tree must list them in sorted key order; source key order is not preserved.",
+  "coverage": "LLVM source coverage in taoJSON 1.0.0-beta.14 headers reached by tao::json::from_string(const char*, std::size_t, source); the pinned PEGTL 3.2.6 engine headers are counted separately as underlying parser source",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/tao/json/internal/grammar.hpp",
+  "afl_entrypoint": "/work/parser-probe",
+  "underlying_coverage_subject_prefix": "/work/pegtl/"
+}

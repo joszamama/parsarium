@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T15:06:12.416875+00:00",
+  "project": "json/cpp/picojson",
+  "pass": true,
+  "feedback_kind": "afl_clang_fast_picojson_header_only_edges_and_source_lines",
+  "probe": "projects/json/cpp/picojson/parser-probe.cpp",
+  "probe_scope": "picojson::parse(value&, const std::string&) only; no tree traversal, serialization, or result formatting",
+  "dom_oracle": "python_json_loads_number_kind_preserving_sorted_object_keys",
+  "exact_tree_outputs_verified": true,
+  "base_project_receipt_sha256": "14c8aa3609a5b0a0139878b79e6bf312c1374c7430fe4cd4249f62a85436a7ab",
+  "overlay_receipt_sha256": "5ab5614b24f37414b3a17d4f554ceb0759e4bb188e68b54d4f08a786740ef821",
+  "base_image_id": "sha256:661cd3303acb247da134fdb0f7574c90dd0926a3495e58801b8066e25c30a5ac",
+  "overlay_image_id": "sha256:102668bdc466b65e0b8179b941ab2f5ee734a9da68d650d7a0bc735fb0e3049c",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 579,
+  "allowlist": "projects/json/cpp/picojson/afl-allowlist.txt",
+  "allowlist_entries": [
+    "src:picojson.h",
+    "fun:_ZN8picojson*"
+  ],
+  "repeats_per_control": 3,
+  "first_control": "controls/json/nested-object.json",
+  "second_control": "controls/json/nested-array.json",
+  "first_tree_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "root": "object",
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "second_tree_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "strings": [
+      "A",
+      "two"
+    ],
+    "root": "array",
+    "top_level_items": 5
+  },
+  "first_parser_lines": 183,
+  "second_parser_lines": 177,
+  "parser_line_difference": 8,
+  "first_afl_tuples": 156,
+  "second_afl_tuples": 139,
+  "afl_tuple_difference": 37,
+  "repeated_feedback_identical": true,
+  "second_case_kind": "valid_control"
+}
