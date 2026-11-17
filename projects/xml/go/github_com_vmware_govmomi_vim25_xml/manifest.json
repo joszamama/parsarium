@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "go",
+  "package": "github.com/vmware/govmomi/vim25/xml",
+  "release": "v0.56.2",
+  "catalog_parser": "data/go/xml/parsers.json",
+  "source_lock": "projects/xml/go/github_com_vmware_govmomi_vim25_xml/source-lock.json",
+  "source_sha256": "195de21afbe5a372c5afedcc59fef87cec96d07e9564cecf50e037fa31d079d4",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go coverpkg instrumentation of the pinned govmomi/vim25/xml forked XML tokenizer during local namespace-aware Decoder.Token replay",
+  "coverage_subject_prefix": "github.com/vmware/govmomi/vim25/xml/",
+  "format_specific_coverage_file_suffix": "/xml.go"
+}

@@ -449,6 +449,76 @@
         ]
       },
       "differential_command": "python3 projects/xml/go/github_com_mmcdole_goxpp/verify-feedback.py"
+    },
+    {
+      "package": "github.com/vmware/govmomi/vim25/xml",
+      "module": "github.com/vmware/govmomi",
+      "version": "v0.56.2",
+      "scope": "Full XML 1.0 UTF-8 document without DOCTYPE parsed into namespace-resolved tokens: expanded element/attribute names, namespace declarations, decoded text and CDATA, maximum depth on two valid controls",
+      "command": "python3 scripts/run_project.py xml go github_com_vmware_govmomi_vim25_xml",
+      "receipt": "projects/xml/go/github_com_vmware_govmomi_vim25_xml/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 290,
+      "source_file": "github.com/vmware/govmomi/vim25/xml/xml.go",
+      "error": null,
+      "differential_pass": true,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_command": "python3 projects/xml/go/github_com_vmware_govmomi_vim25_xml/verify-feedback.py"
     }
   ],
   "standard": [
@@ -502,6 +572,14 @@
         "encoding/xml.Decoder.Token()"
       ],
       "note": "All five third-party receipts count encoding/xml lines as underlying coverage; AFL++ bridges map package-specific source blocks separately from encoding/xml. goxpp and x2j also probe encoding/xml blocks through the same harness."
+    },
+    {
+      "family": "Go encoding/xml source lineage; separate compiled govmomi fork",
+      "paths": [
+        "encoding/xml.Decoder.Token() (runtime tokenizer)",
+        "github.com/vmware/govmomi/vim25/xml.Decoder.Token() (forked own tokenizer)"
+      ],
+      "note": "govmomi/vim25/xml has its own xml.go tokenizer derived from Go source and directly instrumented; it does not invoke the runtime encoding/xml package. The other five third-party paths share the runtime tokenizer via wrapper APIs."
     }
   ]
 }
