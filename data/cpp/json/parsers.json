@@ -1,0 +1,59 @@
+[
+  {
+    "name": "jsoncpp",
+    "version": "1.9.8",
+    "license": "MIT OR LicenseRef-Public-Domain",
+    "license_evidence": "https://github.com/open-source-parsers/jsoncpp/blob/1.9.8/LICENSE",
+    "input_api": "Json::CharReaderBuilder::newCharReader()->parse(const char* begin, const char* end, Json::Value*, std::string*) with CharReaderBuilder::strictMode",
+    "documentation": "https://github.com/open-source-parsers/jsoncpp/blob/1.9.8/include/json/reader.h",
+    "source": "https://github.com/open-source-parsers/jsoncpp/tree/1.9.8",
+    "adapter": "projects/json/cpp/jsoncpp/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text (strict mode: no comments, object/array root, no trailing data) parsed into a Json::Value tree",
+    "family": "JsonCpp OurReader",
+    "family_note": "Own recursive-descent reader in src/lib_json/json_reader.cpp (OurReader behind CharReaderBuilder); no delegation to another JSON parser.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 32707,
+      "binary_package": "libjsoncpp26",
+      "dev_package_installs": {
+        "libjsoncpp-dev": 2203
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/jsoncpp"
+  }
+]

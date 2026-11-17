@@ -1,0 +1,62 @@
+{
+  "checked_at_utc": "2026-11-17T03:27:45.134313+00:00",
+  "platform": "linux/arm64 Docker",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "controls": {
+    "nested_object": "controls/json/nested-object.json",
+    "nested_array": "controls/json/nested-array.json"
+  },
+  "control_sha256": {
+    "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+    "nested_array": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
+  },
+  "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array",
+  "third_party": [
+    {
+      "package": "jsoncpp",
+      "version": "1.9.8",
+      "scope": "RFC 8259 JSON text in CharReaderBuilder strict mode, parsed into Json::Value",
+      "command": "python3 scripts/run_project.py json cpp jsoncpp",
+      "receipt": "projects/json/cpp/jsoncpp/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_lines_covered": 810,
+      "format_specific_source_lines_covered": 435,
+      "error": null
+    }
+  ],
+  "standard": []
+}

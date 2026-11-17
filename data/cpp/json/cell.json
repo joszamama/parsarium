@@ -1,0 +1,26 @@
+{
+  "ecosystem": "cpp",
+  "format": "json",
+  "status": "pilot_one_selected_search_bounded",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 1,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "json"
+  ],
+  "search_limit_per_query": 320,
+  "search_hits_recorded": 320,
+  "unique_search_hits": 320,
+  "unresolved_documentation_leads": 9,
+  "ranking_metric": "Debian popcon installations (sourcemax/by_inst), maximum over binary packages of the source package",
+  "selection": "Highest popcon count among C++ JSON parser source packages in the 'json' source-name search: libjsoncpp (JsonCpp) 32,707, also highest at dev-package level (libjsoncpp-dev 2,203 vs nlohmann-json3-dev 1,799). C libraries in the same search (json-c, JSON-GLib, cJSON and libfastjson above it; yyjson below) are excluded from the C++ cell.",
+  "uncertainty": "Pilot cell: only JsonCpp 1.9.8 was built and control-verified. Popcon measures Debian installs; JsonCpp's runtime count is inflated by dependents such as CMake, and header-only libraries (nlohmann/json, RapidJSON) have only dev packages, so popcon undercounts them. GitHub stars rank nlohmann/json first (50,894 vs 8,916). Nine leads are logged in leads.json and are not selected or ranked. Framework packages (Qt, Boost, POCO) are not ranked by whole-framework installs. The ISO C++ standard library has no JSON API. Two valid controls do not establish complete RFC 8259 support.",
+  "third_party_evidence": "data/cpp/json/parsers.json",
+  "third_party_control_results": "data/cpp/json/verification.json",
+  "runtime_evidence": "data/cpp/json/standard.json",
+  "registry_snapshot": "data/cpp/json/registry-snapshot.json",
+  "unresolved_leads": "data/cpp/json/leads.json",
+  "source_lock": "projects/json/cpp/jsoncpp/source-lock.json",
+  "afl_feedback": "data/cpp/json/afl-feedback.json"
+}

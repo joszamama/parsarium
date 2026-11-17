@@ -1,0 +1,117 @@
+[
+  {
+    "name": "nlohmann/json",
+    "status": "unresolved",
+    "debian_source": "nlohmann-json3",
+    "popcon_source_inst": 1799,
+    "popcon_dev_package": {
+      "nlohmann-json3-dev": 1799
+    },
+    "github_stars": 50894,
+    "license": "MIT",
+    "reason": "Header-only; nlohmann::json::parse(first, last) over bytes. Ranks below JsonCpp on Debian popcon at both source level (1,799 vs 32,707) and dev-package level (nlohmann-json3-dev 1,799 vs libjsoncpp-dev 2,203). Header-only libraries have no runtime package, so popcon undercounts them; GitHub stars (50,894 vs 8,916) disagree. Not built in this one-parser pilot.",
+    "source": "https://github.com/nlohmann/json"
+  },
+  {
+    "name": "simdjson",
+    "status": "unresolved",
+    "debian_source": "simdjson",
+    "popcon_source_inst": 2688,
+    "popcon_dev_package": {
+      "libsimdjson-dev": 36
+    },
+    "github_stars": 24576,
+    "license": "Apache-2.0 OR MIT",
+    "reason": "ondemand::parser / dom::parser over padded_string; source count reflects the runtime library libsimdjson33 pulled in by dependents. Not run.",
+    "source": "https://github.com/simdjson/simdjson"
+  },
+  {
+    "name": "Boost.JSON",
+    "status": "unresolved",
+    "debian_source": "boost1.83 (multi-library)",
+    "popcon_source_inst": null,
+    "popcon_dev_package": {
+      "libboost-json-dev": 1749,
+      "libboost-json1.83-dev": 1654
+    },
+    "github_stars": 482,
+    "license": "BSL-1.0",
+    "reason": "boost::json::parse(string_view) and stream_parser; Boost source count covers all Boost libraries and is not ranked. Not run.",
+    "source": "https://www.boost.org/doc/libs/release/libs/json/"
+  },
+  {
+    "name": "RapidJSON",
+    "status": "unresolved",
+    "debian_source": "rapidjson",
+    "popcon_source_inst": 899,
+    "popcon_dev_package": {
+      "rapidjson-dev": 899
+    },
+    "github_stars": 15156,
+    "license": "MIT",
+    "reason": "Header-only Document::Parse(const char*, size_t). Latest tagged release v1.1.0 is from 2016; a pinned release choice remains open. Not run.",
+    "source": "https://github.com/Tencent/rapidjson"
+  },
+  {
+    "name": "Qt QJsonDocument",
+    "status": "unresolved",
+    "debian_source": "qtbase-opensource-src / qt6-base (framework)",
+    "popcon_source_inst": null,
+    "popcon_dev_package": {},
+    "github_stars": null,
+    "license": "LGPL-3.0-only OR GPL-2.0+ OR commercial",
+    "reason": "QJsonDocument::fromJson(QByteArray); Qt Core install counts (96,909 / 67,857) cover the whole framework and are not JSON-specific. Not run.",
+    "source": "https://doc.qt.io/qt-6/qjsondocument.html"
+  },
+  {
+    "name": "POCO JSON",
+    "status": "unresolved",
+    "debian_source": "poco (multi-library)",
+    "popcon_source_inst": null,
+    "popcon_dev_package": {
+      "libpoco-dev": 190,
+      "libpocojson100": 125
+    },
+    "github_stars": null,
+    "license": "BSL-1.0",
+    "reason": "Poco::JSON::Parser::parse(std::string); not run.",
+    "source": "https://docs.pocoproject.org/current/Poco.JSON.Parser.html"
+  },
+  {
+    "name": "Glaze",
+    "status": "unresolved",
+    "debian_source": "glaze",
+    "popcon_source_inst": 171,
+    "popcon_dev_package": {
+      "libglaze-dev": 171
+    },
+    "github_stars": 3110,
+    "license": "MIT",
+    "reason": "Compile-time reflection reader glz::read_json; generic value path (glz::generic) remains unchecked. Not run.",
+    "source": "https://github.com/stephenberry/glaze"
+  },
+  {
+    "name": "PicoJSON",
+    "status": "unresolved",
+    "debian_source": "picojson",
+    "popcon_source_inst": 16,
+    "popcon_dev_package": {},
+    "github_stars": null,
+    "license": "BSD-2-Clause",
+    "reason": "Header-only picojson::parse over iterators; not run.",
+    "source": "https://github.com/kazuho/picojson"
+  },
+  {
+    "name": "jsoncons",
+    "status": "unresolved",
+    "debian_source": "jsoncons",
+    "popcon_source_inst": 3,
+    "popcon_dev_package": {
+      "libjsoncons-dev": 3
+    },
+    "github_stars": 859,
+    "license": "BSL-1.0",
+    "reason": "Header-only json::parse; not run.",
+    "source": "https://github.com/danielaparker/jsoncons"
+  }
+]
