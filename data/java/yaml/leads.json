@@ -31,7 +31,7 @@
   },
   {
     "name": "org.snakeyaml:snakeyaml-engine",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 493,
     "metric_error": null,
     "family": "SnakeYAML Engine",
@@ -39,7 +39,10 @@
     "note": "YAML 1.2 core schema.",
     "found_by": "targeted_documentation_lead",
     "source": "https://central.sonatype.com/artifact/org.snakeyaml:snakeyaml-engine",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Pinned 3.2 Load(LoadSettings with CoreSchema).loadFromInputStream gives the exact oracle tree on both controls; Docker coverage (1,753 Engine lines) and stable AFL++ feedback recorded. With the default JsonSchema, ~ loads as the string \"~\".",
+    "version_seen": "3.2",
+    "license": "Apache-2.0",
+    "evidence": "projects/yaml/java/snakeyaml_engine/verification.json"
   },
   {
     "name": "com.esotericsoftware.yamlbeans:yamlbeans",
