@@ -1,6 +1,6 @@
 # Java × DNS: selected parsers (pilot)
 
-Three verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Four verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -11,6 +11,7 @@ deps.dev directDependentCount summed over all releases, from [registry-snapshot.
 | 1 | [netty-codec-dns](https://netty.io/4.2/api/io/netty/handler/codec/dns/DatagramDnsResponseDecoder.html) | 4.2.21.Final | 1,038 | Netty DNS codec (DnsResponseDecoder, DnsMessageUtil, DefaultDnsRecordDecoder, DnsCodecUtil) |
 | 2 | [dnsjava](https://javadoc.io/doc/dnsjava/dnsjava/3.7.1/org/xbill/DNS/Message.html#%3Cinit%3E(byte%5B%5D)) | 3.7.1 | 888 | dnsjava (org.xbill.DNS Message, Header, DNSInput, Name and per-type rrFromWire) |
 | 3 | [pcap4j-core](https://javadoc.io/doc/org.pcap4j/pcap4j-core/1.8.2/org/pcap4j/packet/DnsPacket.html) | 1.8.2 | 210 | Pcap4J DNS packet classes (DnsPacket, DnsDomainName, DnsResourceRecord, DnsRData*) |
+| 4 | [minidns-core](https://javadoc.io/doc/org.minidns/minidns-core/1.1.3/org/minidns/dnsmessage/DnsMessage.html) | 1.1.3 | 32 | MiniDNS (org.minidns DnsMessage, Question, Record, DnsName) |
 
 **netty-codec-dns 4.2.21.Final** (Apache-2.0) parses local bytes with `new DatagramDnsResponseDecoder() / new DatagramDnsQueryDecoder() in an EmbeddedChannel, fed new DatagramPacket(ByteBuf, recipient, sender)`. Both controls match the oracle summary. The response control covers 414 library lines in 15 files. AFL++ feedback repeats 3 times per control; response and query give 414/277 parser features and 433/295 AFL++ tuples, differing by 251 features and 250 tuples ([receipt](netty-codec-dns-feedback-differential.json)). Own Java decoder; Vert.x's DNS client and Netty's DnsNameResolver use it. Netty leaves A/AAAA (and MX/CNAME after decompression) as raw records, so the harness formats addresses from the decoded bytes and reads names with the public DefaultDnsRecordDecoder.decodeName. DnsQuery carries no AA/TC/RA/RCODE; they are reported as 0 for the query control.
 
@@ -18,11 +19,12 @@ deps.dev directDependentCount summed over all releases, from [registry-snapshot.
 
 **pcap4j-core 1.8.2** (MIT) parses local bytes with `org.pcap4j.packet.DnsPacket.newPacket(byte[] rawData, int offset, int length) throws IllegalRawDataException`. Both controls match the oracle summary. The response control covers 575 library lines in 14 files. AFL++ feedback repeats 3 times per control; response and query give 575/437 parser features and 595/457 AFL++ tuples, differing by 138 features and 138 tuples ([receipt](pcap4j-core-feedback-differential.json)). Own Java decoder inside the Pcap4J packet library (pinned to 1.8.2, the latest non-pre-release; 2.0.0-alpha.6 is the deps.dev default). The documented DnsPacket.newPacket(byte[], int, int) decodes a DNS message from caller-supplied bytes; no capture handle, interface or libpcap call is used (JNA is on the class path but never loads a native library). RDATA comes from the documented runtime module pcap4j-packetfactory-static 1.8.2. Pcap4J keeps the reserved Z bit, AD and CD. Names are decompressed with the documented DnsDomainName.decompress(message); for a name that is only a compression pointer Pcap4J returns a leading '.', which the harness drops. AAAA text is formatted by the harness from the decoded 16 bytes (RFC 5952). Its deps.dev count covers the whole multi-protocol pcap4j-core artifact. Coverage and AFL++ features are scoped to Pcap4J's DNS classes (org.pcap4j.packet.Dns*, namednumber.Dns*, StaticDnsRDataFactory and util.ByteArrays): building the first RDATA loads the static factory binder, which initialises every protocol's named-number tables (TcpPort, UdpPort, IpNumber and others) and would otherwise make up most of the response control's features.
 
+**minidns-core 1.1.3** (Apache-2.0) parses local bytes with `org.minidns.dnsmessage.DnsMessage(byte[] data) throws IOException`. Both controls match the oracle summary. The response control covers 458 library lines in 20 files. AFL++ feedback repeats 3 times per control; response and query give 458/377 parser features and 478/397 AFL++ tuples, differing by 81 features and 81 tuples ([receipt](minidns-core-feedback-differential.json)). Own Java decoder of the MiniDNS project (formerly de.measite.minidns, an old coordinate of the same code that is not counted); the minidns-core artifact holds the message model and parser, while the resolver and client live in other artifacts that the harness does not load. MiniDNS decodes AD and CD but not the reserved Z bit, so z carries AD and CD only (both controls have all three bits clear). Names are DnsName.ace (lower-cased ACE text); A text is MiniDNS's own toString; AAAA text is formatted by the harness from the decoded 16 bytes (RFC 5952), because MiniDNS prints uncompressed groups.
+
 ## Remaining leads
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
-| 1 | org.minidns:minidns-core | 32 | `new org.minidns.dnsmessage.DnsMessage(byte[])` | MiniDNS |
 
 ## Checked, excluded or recorded separately
 

@@ -1,0 +1,85 @@
+{
+  "kind": "third_party",
+  "api": "new org.minidns.dnsmessage.DnsMessage(byte[]) on local bytes; public header fields, questions and section Records (typeValue, clazzValue, ttl, payloadData), DnsName.ace for names, A.toString and AAAA from getIp bytes",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:32:27.890616+00:00",
+  "manifest": "projects/dns/java/minidns_core/manifest.json",
+  "image_id": "sha256:d82429fb74856d876961f1ad7b37e9852c061789da9c408cb4b43623d55f1164",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "f4e28a354ed5379e1a6393a41bc6a8df8c031ede3775d0e420cb5d7a93f879f3",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "06de9bf4d671adae4069856011e5dffc53e84c6944d2c4cd687ca7f4f680d41f",
+    "MiniDnsHarness.java": "12f03ac9e6dfec09f918254ff52b0e69c2f58e248bdff31f21314d71f4a56211",
+    "manifest.json": "0a8b6759414c646933436aa73f7869bf036cdc881fb899b72fe40fde797a48d2",
+    "run-control.sh": "1779f09cf42e2dd2afaf7c4dd757cac50386130b621c7f1fb71cfa6e329cf734",
+    "source-lock.json": "0e0252714e126e965b2cdd17b934124d37da9d83a111b3bc2a0035a09ca25b9b"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 20,
+  "parser_source_lines_covered": 458,
+  "format_specific_source_lines_covered": 85,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/java/minidns_core/target/coverage/coverage.json",
+  "pass": true
+}

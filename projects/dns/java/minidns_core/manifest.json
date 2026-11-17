@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "format": "dns",
+  "ecosystem": "java",
+  "pilot": true,
+  "package": "minidns-core",
+  "release": "1.1.3",
+  "catalog_parser": "data/java/dns/parsers.json",
+  "source_lock": "projects/dns/java/minidns_core/source-lock.json",
+  "source_sha256": "f4e28a354ed5379e1a6393a41bc6a8df8c031ede3775d0e420cb5d7a93f879f3",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/dns/response.bin",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "expected_output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "differential_control": "controls/dns/query.bin",
+  "differential_control_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "differential_expected_output": {
+    "id": 4660,
+    "qr": 0,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 0,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 0,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [],
+    "authority": [],
+    "additional": []
+  },
+  "harness": "MiniDnsHarness.java",
+  "api": "new org.minidns.dnsmessage.DnsMessage(byte[]) on local bytes; public header fields, questions and section Records (typeValue, clazzValue, ttl, payloadData), DnsName.ace for names, A.toString and AAAA from getIp bytes",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "MiniDnsHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/minidns-core-1.1.3.jar",
+    "--target_class=MiniDnsHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "summary_command": [
+    "java",
+    "-cp",
+    "/work/classes:/work/lib/*",
+    "MiniDnsHarness",
+    "/input/case"
+  ],
+  "coverage": "JaCoCo bytecode coverage of org.minidns:minidns-core:1.1.3 (org.minidns) during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/DnsMessage.java"
+}
