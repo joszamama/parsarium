@@ -103,5 +103,110 @@
         }
       ]
     }
+  },
+  {
+    "name": "github.com/pingcap/tidb/pkg/parser",
+    "version": "v0.0.0-20261117145351-1e84b3595a3e",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4, Apache License 2.0)",
+    "input_api": "parser.New().Parse(local SQL text, \"\", \"\") -> []ast.StmtNode",
+    "documentation": "https://pkg.go.dev/github.com/pingcap/tidb/pkg/parser@v0.0.0-20261117145351-1e84b3595a3e#Parser.Parse",
+    "source": "https://proxy.golang.org/github.com/pingcap/tidb/pkg/parser/@v/v0.0.0-20261117145351-1e84b3595a3e.zip",
+    "source_sha256": "0c1a8be16c91cd96292df2c50158a8c817c59bffdcb4a13b6b57e2e6f8b591e3",
+    "go_module_sum": "h1:dpAI/eXfZo0rI/Ey1xZ0suScx5FaGPfTZxnbExl8Z7U=",
+    "dependencies": [],
+    "dialect": "MySQL (TiDB parser, default charset and collation)",
+    "scope": "Local SQL text parsed by the TiDB parser with default charset and collation; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. COUNT(*) is represented by the parser as COUNT with a synthetic ValueExpr(1) without a source position; the harness does not report it as a literal. Other TiDB/MySQL syntax is untested.",
+    "family": "TiDB MySQL grammar (goyacc parser.y) and lexer",
+    "family_note": "Parser.Parse runs TiDB's own lexer (lexer.go) and the goyacc parser generated from parser.y into parser.go (no line directives, so coverage is reported on parser.go). The documented quick start imports the test_driver package, which supplies the ValueExpr implementation for literals. The adapter reads *ast.SelectStmt (Fields, From join tree, Where, GroupBy, OrderBy) and *ast.InsertStmt (Columns, Lists) and walks the tree with an ast.Visitor for TableName, AggregateFuncExpr/FuncCallExpr names and ValueExpr values; the synthetic ValueExpr(1) that parser.y builds for COUNT(*) has no source position and is not reported. github.com/pingcap/parser (archived) and github.com/pingcap/tidb/parser are earlier module paths of this parser and are excluded as predecessors. The module has no tagged releases; the pin is the proxy pseudo-version of commit 1e84b3595a3e recorded in the snapshot.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 176,
+      "source": "https://pkg.go.dev/github.com/pingcap/tidb/pkg/parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path only; the older github.com/pingcap/parser (385) and github.com/pingcap/tidb/parser (1,190) paths are counted separately and not added."
+    },
+    "project": "projects/sql/go/github_com_pingcap_tidb_pkg_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

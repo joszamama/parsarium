@@ -70,13 +70,14 @@
     },
     {
       "name": "github.com/pingcap/tidb/pkg/parser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 176,
       "metric_error": null,
       "latest_release_observed": "v0.0.0-...-1e84b35",
       "family": "TiDB MySQL grammar (goyacc)",
       "documented_api_lead": "Parser.Parse",
-      "reason": "Current TiDB parser module; parser.New().ParseOneStmt / Parse return ast.StmtNode. Same family as pingcap/parser."
+      "reason": "Current TiDB parser module (no tagged releases; pinned to the snapshot's proxy pseudo-version of commit 1e84b3595a3e). parser.New().Parse with the documented test_driver package returns ast.StmtNode values that give the oracle summary on both controls; Go coverpkg covers the parser package and the AFL++ bridge differs between the controls.",
+      "selected_release": "v0.0.0-20261117145351-1e84b3595a3e"
     },
     {
       "name": "github.com/blastrain/vitess-sqlparser/sqlparser",

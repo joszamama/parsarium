@@ -1,0 +1,65 @@
+{
+  "kind": "third_party",
+  "api": "parser.New().Parse(local SQL text, \"\", \"\") -> []ast.StmtNode (*ast.SelectStmt, *ast.InsertStmt), with the documented test_driver value-expression package; the harness reads SelectStmt/InsertStmt fields and walks the tree with an ast.Visitor",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T19:56:56.777614+00:00",
+  "manifest": "projects/sql/go/github_com_pingcap_tidb_pkg_parser/manifest.json",
+  "image_id": "sha256:da05f76581523566ced0df732e7643e64615b7fae8ae5152eec8ba41c4a041c2",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "go1.27.3"
+  ],
+  "source_sha256": "0c1a8be16c91cd96292df2c50158a8c817c59bffdcb4a13b6b57e2e6f8b591e3",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "2765fea9d16b1b3e884ca490602e6ef615e11f703210a6371e5d889fd3108fd0",
+    "go.mod": "c9bb422e4e7feee700e1a86e1430bddcedb65c4832b4e5b3d6b748e4e1ac4594",
+    "go.sum": "3912b0b019a439c2946f091eede69246bbf5d1059c54a518eb9a5511b27274dd",
+    "harness.go": "1527a7b04532c5f5ff624af314cb58a8d2ffb8733911031e33d4a6592cc1165d",
+    "harness_test.go": "21ce77da5328322deba73c3efbea3a03772e530ea8f5b64b0fb3a68554f893a6",
+    "manifest.json": "d378575ad10b1bc6b3ef31a8f97fd167a31d613e1fb28e598fbbd8dc720f6bc7",
+    "replay/main.go": "86c22c8fdd87401a02d56417d96045e001a9d245bb416b383c94b983cc6f315b",
+    "reporter/main.go": "fc850a11868c18b09689344821de0ad4157344f6b94229d0e6a31e63711542f9",
+    "source-lock.json": "d19b8d42181867ee44db6a1c325edf922e4f74644f015c627f3f97476a97d7e6"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 4,
+  "parser_source_lines_covered": 531,
+  "format_specific_source_lines_covered": 211,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/go/github_com_pingcap_tidb_pkg_parser/target/coverage/coverage.json",
+  "pass": true
+}
