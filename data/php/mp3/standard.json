@@ -1,0 +1,43 @@
+{
+  "ecosystem": "PHP",
+  "format": "MP3 (untagged MPEG audio Layer III)",
+  "runtime": "PHP 8.5 core and bundled extensions",
+  "status": "none_documented_in_scoped_runtime_apis",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "candidate": "Fileinfo finfo::file and finfo_file",
+      "official_documentation": [
+        "https://www.php.net/manual/en/book.fileinfo.php",
+        "https://www.php.net/manual/en/function.finfo-file.php"
+      ],
+      "finding": "Official documentation describes MIME/content-type guessing from magic bytes. On PHP 8.5.12 (host CLI, bundled Fileinfo) both untagged controls return audio/mpeg only, with no sample rate, channels, bitrate or duration; MIME identification is not a frame parser under the cell protocol."
+    },
+    {
+      "candidate": "getimagesize and Exif",
+      "official_documentation": [
+        "https://www.php.net/manual/en/function.getimagesize.php",
+        "https://www.php.net/manual/en/book.exif.php"
+      ],
+      "finding": "Image metadata APIs; getimagesize returns false on the primary control in the project image."
+    },
+    {
+      "candidate": "generic file_get_contents, unpack and stream functions",
+      "official_documentation": [
+        "https://www.php.net/manual/en/function.file-get-contents.php",
+        "https://www.php.net/manual/en/function.unpack.php",
+        "https://www.php.net/manual/en/book.stream.php"
+      ],
+      "finding": "These return raw bytes or decode caller-specified binary layouts; no bundled MPEG frame-header interpretation."
+    },
+    {
+      "candidate": "PECL id3 extension",
+      "official_documentation": [
+        "https://pecl.php.net/package/id3"
+      ],
+      "finding": "Separately installed ID3 tag extension, not bundled and tag-only; absent from both probed runtimes (function_exists('id3_get_tag') false)."
+    }
+  ],
+  "runtime_probe": "No internal function whose name matches mp3, mpeg or id3 exists in the project image runtime (PHP 8.5.4, Ubuntu php8.5-cli) or on the host PHP 8.5.12 CLI, apart from the unrelated SNMPv3 snmp3_* functions on the host.",
+  "limit": "Scoped to the PHP manual's core and bundled-extension documentation and the two probed runtimes. Not a claim that no separately installed extension or FFI binding can parse MPEG frames. It matches the PHP finding in data/php/mp3_id3v2/standard.json."
+}

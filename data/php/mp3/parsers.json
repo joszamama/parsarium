@@ -1,0 +1,33 @@
+[
+  {
+    "name": "james-heinrich/getid3",
+    "version": "v1.9.28",
+    "license": "GPL-1.0-or-later OR LGPL-3.0-only OR MPL-2.0",
+    "license_evidence": "https://github.com/JamesHeinrich/getID3/blob/v1.9.28/license.txt",
+    "input_api": "(new getID3())->analyze(local temporary file path) -> ['mpeg']['audio'] frame-header fields, ['playtime_seconds'], ['avdataoffset'..'avdataend']",
+    "documentation": "https://github.com/JamesHeinrich/getID3/blob/v1.9.28/README.md",
+    "source": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd",
+    "scope": "MPEG audio frame header of an untagged stream (version, layer, sample rate, channels, channel mode, bitrate, frame length) with frame-sync validation, and CBR duration from audio-data bytes",
+    "family": "getID3 native MP3 frame parser (module.audio.mp3.php)",
+    "family_note": "Same getID3 code base as the mp3_id3v2/php james-heinrich/getid3 entry (and the getID3 wrappers there); this record covers the MPEG frame-header module, not module.tag.id3v2.php.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "mpeg_version": "1",
+      "layer": 3,
+      "sample_rate": 44100,
+      "channels": 1,
+      "channelmode": "mono",
+      "bitrate": 64000,
+      "bitrate_mode": "cbr",
+      "framelength": 208,
+      "playtime_seconds": 0.28725,
+      "audio_data_bytes": 2298,
+      "tag_formats": []
+    },
+    "metric": {
+      "name": "Packagist total downloads",
+      "value": 15766894,
+      "source": "data/php/mp3/registry-snapshot.json"
+    }
+  }
+]

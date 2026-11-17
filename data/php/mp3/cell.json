@@ -1,0 +1,50 @@
+{
+  "ecosystem": "php",
+  "format": "mp3",
+  "status": "pilot_one_verified_bounded_search",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 1,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "mp3",
+    "mpeg audio",
+    "mp3 duration",
+    "mp3 bitrate",
+    "mp3 info",
+    "getid3",
+    "audio duration"
+  ],
+  "search_limit_per_query": 50,
+  "search_totals": {
+    "mp3": 68,
+    "mpeg audio": 10,
+    "mp3 duration": 1,
+    "mp3 bitrate": 1,
+    "mp3 info": 11,
+    "getid3": 20,
+    "audio duration": 7
+  },
+  "search_hits_recorded": 100,
+  "unique_search_hits": 79,
+  "leads_recorded": 79,
+  "leads_by_status": {
+    "selected": 1,
+    "unresolved": 6,
+    "shared_family": 19,
+    "unresolved_shared_family": 2,
+    "unresolved_external_native": 3,
+    "excluded": 48
+  },
+  "ranking_metric": "Packagist total downloads",
+  "selection": "james-heinrich/getid3 has the highest Packagist total downloads (15,766,894) among hits, and its module.audio.mp3.php reads MPEG frame headers from the untagged controls with no tag present. wapmorgan/mp3info (1,512,916) ranks next and is an independent frame-header reader, but it was not run here.",
+  "shared_family": "getID3 is the same code base already counted in the active mp3_id3v2/php cell (james-heinrich/getid3 v1.9.28 and its wrappers). This pilot covers a different module (module.audio.mp3.php frame headers, 273 lines covered on the control) of the same family, not an independent parser.",
+  "uncertainty": "One verified path; no padding. Search is seven Packagist search.json queries capped at 50 hits each, captured 2026-11-17; package descriptions alone decided most exclusions. Packagist total downloads count Composer installs of the whole package (and wrappers pull getID3 transitively), not use of the MPEG frame parser. getID3 reads the first frame header, checks sync on following frames, and derives CBR duration from audio-data bytes and the header bitrate; it does not decode audio or report a frame count on these controls. Mp3Info, PHP-MP3 (falahati/php-mp3), the Zend media reader and fobilow/mp3file are unresolved independent candidates. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support.",
+  "third_party_evidence": "data/php/mp3/parsers.json",
+  "third_party_control_results": "projects/mp3/php/getid3/verification.json",
+  "afl_feedback": "data/php/mp3/afl-feedback.json",
+  "runtime_evidence": "data/php/mp3/standard.json",
+  "registry_snapshot": "data/php/mp3/registry-snapshot.json",
+  "unresolved_leads": "data/php/mp3/leads.json",
+  "protocol": "catalog/mp3/PROTOCOL.md"
+}

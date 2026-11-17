@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "cell": "mp3/php",
+  "checked_at_utc": "2026-11-17T03:43:21.390763+00:00",
+  "checks": [
+    {
+      "command": "python3 controls/mp3/check_controls.py",
+      "pass": true,
+      "result": "header walk: 44.1 kHz mono 64 kbit/s (2,298 frame bytes) and 22.05 kHz stereo 32 kbit/s (1,254 frame bytes), matching getID3's header sample rate, channels, bitrate and audio-data length"
+    },
+    {
+      "command": "python3 scripts/run_project.py mp3 php getid3",
+      "pass": true,
+      "image_id": "sha256:45a99fccc23c567914e3759410cca665585c9a335225215cff91c4eaf3ab2de2",
+      "output": {
+        "mpeg_version": "1",
+        "layer": 3,
+        "sample_rate": 44100,
+        "channels": 1,
+        "channelmode": "mono",
+        "bitrate": 64000,
+        "bitrate_mode": "cbr",
+        "framelength": 208,
+        "playtime_seconds": 0.28725,
+        "audio_data_bytes": 2298,
+        "tag_formats": []
+      },
+      "parser_source_lines_covered": 587,
+      "module_audio_mp3_php_lines_covered": 273,
+      "receipt_sha256": "094bc7e970bfe6b1b66a61d00c5842644e4d49bb9c80d0d71a47f5ecbc56d70b"
+    },
+    {
+      "command": "python3 parsarium.py run mp3 php getid3 controls/mp3/tone-44k-mono.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py run mp3 php getid3 controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "cd scripts && python3 build_afl_bridge.py mp3 php getid3",
+      "pass": true,
+      "image_id": "sha256:62e6316eea0d376eafffe41fbee10abc1fcbe4406bd6ec68f6a5b1ce160cbe53",
+      "parser_source_features": 587,
+      "feedback_edges": 606,
+      "receipt_sha256": "da9a720bbef57ad25e07438b69b50f38933e6e81e6815d256f28e2356fba2447"
+    },
+    {
+      "command": "cd scripts && python3 verify_php_mp3_feedback.py",
+      "pass": true,
+      "repeats_per_control": 3,
+      "first_afl_tuples": 606,
+      "second_afl_tuples": 607,
+      "afl_tuple_difference": 7,
+      "parser_feature_difference": 7,
+      "mp3_module_feature_difference": 7,
+      "report_sha256": "1f1a50b8fabb7854b98df4a3aa7f810a02107c1124f73bea20545ac9a3cf7281"
+    },
+    {
+      "command": "python3 scripts/snapshot_packagist_mp3.py",
+      "pass": true,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 79
+    }
+  ],
+  "not_regenerated": "Shared generated matrices, catalog pages, READMEs and website data are left for the integrator."
+}
