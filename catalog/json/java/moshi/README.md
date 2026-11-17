@@ -1,12 +1,54 @@
-# Moshi — JSON / Java
+# moshi — JSON / Java
 
-**Verified package/API path in an incomplete format cell.**
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-- **Pinned release:** `com.squareup.moshi:moshi:1.15.2` (Apache-2.0)
-- **Parser family:** Moshi's own `JsonReader` and `JsonUtf8Reader`; Okio supplies I/O
-- **Local input API:** `JsonReader.of(BufferedSource).readJsonValue()` over Okio's local file source
-- **Documentation:** [pinned release source](https://repo.maven.apache.org/maven2/com/squareup/moshi/moshi/1.15.2/moshi-1.15.2-sources.jar), `main/com/squareup/moshi/JsonReader.java` lines 205 and 489
-- **Valid controls:** [nested object](../../../../controls/json/nested-object.json) and [nested array](../../../../controls/json/nested-array.json)
-- **Evidence:** [parser record](../../../../data/java/json/parsers.json), [control results](../../../../data/java/json/verification.json), [project and commands](../../../../projects/json/java/moshi/README.md)
+- **Pinned release:** `1.15.2`
+- **License:** Apache-2.0
+- **Parser family:** Moshi JsonReader/JsonUtf8Reader own tokenizer; Okio I/O dependency
+- **Local input API:** `JsonReader.of(Okio.buffer(Okio.source(local File))).readJsonValue(); peek() verifies END_DOCUMENT`
+- **Documentation:** [API reference](<https://repo.maven.apache.org/maven2/com/squareup/moshi/moshi/1.15.2/moshi-1.15.2-sources.jar>)
+- **Valid control:** [`controls/json/nested-object.json`](../../../../controls/json/nested-object.json)
+- **Catalog evidence:** [parser record](../../../../data/java/json/parsers.json) · [control result](../../../../data/java/json/verification.json)
 
-The controls produced the expected nested structures. JaCoCo covered 306 pinned Moshi parser source lines; repeated feedback was stable and differed on the second valid structure. Okio and Kotlin runtime dependencies are pinned and recorded separately from the parser family.
+## Observed control result
+
+```json
+{
+  "arrays": 3,
+  "booleans": 2,
+  "max_depth": 4,
+  "nulls": 1,
+  "numbers": [
+    -2.5,
+    1,
+    1,
+    2,
+    2
+  ],
+  "objects": 5,
+  "root": "object",
+  "strings": [
+    "café \"quoted\"",
+    "go",
+    "json",
+    "parsarium",
+    "rfc8259"
+  ],
+  "top_level_keys": [
+    "enabled",
+    "missing",
+    "name",
+    "nested",
+    "ratio",
+    "tags",
+    "version"
+  ]
+}
+```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json java moshi
+python3 parsarium.py run json java moshi controls/json/nested-object.json
+```

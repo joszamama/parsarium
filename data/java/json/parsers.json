@@ -352,5 +352,64 @@
       "captured_at_utc": "2026-11-17T03:27:34.854916+00:00",
       "snapshot": "data/java/json/registry-snapshot.json"
     }
+  },
+  {
+    "name": "moshi",
+    "group": "com.squareup.moshi",
+    "artifact": "moshi",
+    "version": "1.15.2",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; pinned POM SHA256 in source-lock.json",
+    "input_api": "JsonReader.of(Okio.buffer(Okio.source(local File))).readJsonValue(); peek() verifies END_DOCUMENT",
+    "documentation": "https://repo.maven.apache.org/maven2/com/squareup/moshi/moshi/1.15.2/moshi-1.15.2-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/com/squareup/moshi/moshi/1.15.2/moshi-1.15.2-sources.jar",
+    "scope": "Valid nested RFC 8259 JSON object/array documents from a local Okio BufferedSource, parsed to Map/List/String/Number/Boolean/null",
+    "family": "Moshi JsonReader/JsonUtf8Reader own tokenizer; Okio I/O dependency",
+    "family_note": "Moshi JsonReader and JsonUtf8Reader implement JSON tokenization; Okio provides the BufferedSource and local file source, not a JSON parser. Kotlin runtime jars support the Java release. This family is independent of Jackson, Gson, org.json, and fastjson2.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/moshi",
+    "configuration_note": "Default JsonReader mode (lenient false); adapter requires END_DOCUMENT after readJsonValue().",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 1097,
+      "max_release": "1.15.2",
+      "max_release_direct_dependent_count": 166,
+      "default_release_direct_dependent_count": 166,
+      "releases": 24,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.squareup.moshi%3Amoshi",
+      "captured_at_utc": "2026-11-17T03:27:35.612237+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
   }
 ]

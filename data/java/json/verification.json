@@ -271,9 +271,54 @@
       "afl_feedback": "data/java/json/afl-feedback.json",
       "verified_at_utc": "2026-11-17T07:47:24.247481+00:00",
       "error": null
+    },
+    {
+      "package": "moshi",
+      "group": "com.squareup.moshi",
+      "version": "1.15.2",
+      "scope": "Valid nested RFC 8259 JSON object/array documents from a local Okio BufferedSource, parsed to Map/List/String/Number/Boolean/null",
+      "command": "python3 scripts/run_project.py json java moshi",
+      "receipt": "projects/json/java/moshi/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 2,
+      "parser_source_lines_covered": 306,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T08:22:01.441331+00:00",
+      "error": null
     }
   ],
   "standard": [],
   "second_control_meaning": "Valid array root with nested objects/arrays, strings, numbers, booleans, and null; differential output and parser feedback in afl-feedback.json",
-  "updated_at_utc": "2026-11-17T08:14:59.585341+00:00"
+  "updated_at_utc": "2026-11-17T08:23:51.825013+00:00"
 }
