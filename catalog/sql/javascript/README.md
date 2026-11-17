@@ -1,8 +1,8 @@
 # SQL / JavaScript — pilot
 
-**Status:** pilot_two_selected_search_bounded; incomplete. 2 verified third-party paths, 0 verified standard APIs, 2 verified Docker harnesses.
+**Status:** pilot_ten_selected_search_bounded; incomplete. 10 verified third-party paths, 0 verified standard APIs, 10 verified Docker harnesses.
 
-Two verified JavaScript SQL paths after a bounded npm search (three queries, first 100 hits each, 259 hits, 236 unique) and npm last-month downloads for 15 targeted leads, captured 2026-11-17. node-sql-parser 5.4.0 (13,709,122) and pgsql-ast-parser 12.0.2 (7,717,032) parse both valid controls into their own ASTs, which give the oracle summary. node-sql-parser ships minified, so its line coverage is mapped through the package source map. libpg-query 18.2.4 (11,829,732) ranks between them but runs libpg_query compiled to WebAssembly; V8 coverage does not report C source lines inside the module, so the parser-source coverage gate cannot be met with this harness and it stays a lead. sql-formatter (29,933,061) is a formatter. Other leads are unverified, so this is not a top-ten ranking. node:sqlite prepare is an engine API with no syntax tree. Two valid controls establish only the tested dialect-neutral subset.
+Ten verified JavaScript SQL paths, the ceiling, after a bounded npm search (three queries, first 100 hits each, 259 hits, 236 unique), npm last-month downloads for 15 targeted leads, and a round-2 extension that measured 25 further parser-like hits from the same search with the same window (round_2_metric), captured 2026-11-17. node-sql-parser 5.4.0 (13,709,122), pgsql-ast-parser 12.0.2 (7,717,032), sql-parser-cst 0.44.1 (536,703, sqlite dialect, concrete syntax tree), dt-sql-parser 4.6.1 (364,059, MySQL class, ANTLR4 parse tree), sqlite-parser 1.0.1 (85,900, SQLite), @appland/sql-parser 1.5.1 (80,224, AppLand fork of sqlite-parser with a modified grammar), sqllens 1.11.0 (6,624, postgres dialect, ANTLR4 CST because its lowered IR does not cover INSERT), rawsql-ts 0.30.1 (1,802, hand-written recursive descent), @questdb/sql-parser 0.1.22 (1,470, QuestDB SQL, Chevrotain) and @saralsql/tsql-parser 0.4.7 (731, T-SQL, hand-written) parse both valid controls into their own trees, which give the oracle summary. node-sql-parser ships minified, so its line coverage is mapped through the package source map; sqlite-parser and @appland/sql-parser ship minified without source maps, so their 24 covered lines each are a coarse floor and their AFL++ feedback uses V8 byte ranges. dt-sql-parser's line count includes module-initialization lines of the other dialect grammars its index loads (14,547 of 51,949 lines are in the MySQL files), and its dist needs a resolve hook for extensionless ES module imports; sqllens likewise loads every dialect grammar (14,382 of 169,847 covered lines are in the PostgreSQL lexer and parser). Higher-ranked leads stay unselected with evidence: libpg-query 18.2.4 (11,829,732), pgsql-parser, plpgsql-parser, pg-query-emscripten, @guanmingchiu/sqlparser-ts, @pgsql/parser and postgresql-eslint-parser run libpg_query or sqlparser-rs as WebAssembly (or wasm2js output), whose C or Rust source lines V8 coverage does not report; @derekstride/tree-sitter-sql (1,186,889) and pg-query-parser run native C addons that would need an instrumented node-gyp build; @zeit/cosmosdb-query, @dbml/core and sql-formatter are an executor, a DDL importer and a formatter; js-sql-parser and @clickhouse/parser fail the INSERT control. The ten selected paths are the verified paths in metric order, not a definitive most-used ten; @appland/sql-parser shares the sqlite-parser lineage, and the last three have small download counts (1,802, 1,470 and 731). node:sqlite prepare is an engine API with no syntax tree. Two valid controls establish only the tested dialect-neutral subset.
 
 [Ranking and search limits](../../../data/javascript/sql/ranking.md) · [Standard API inventory](../../../data/javascript/sql/standard.json)
 
@@ -10,6 +10,14 @@ Two verified JavaScript SQL paths after a bounded npm search (three queries, fir
 
 - [node-sql-parser](node-sql-parser/README.md) — verified Docker harness
 - [pgsql-ast-parser](pgsql-ast-parser/README.md) — verified Docker harness
+- [sql-parser-cst](sql-parser-cst/README.md) — verified Docker harness
+- [dt-sql-parser](dt-sql-parser/README.md) — verified Docker harness
+- [sqlite-parser](sqlite-parser/README.md) — verified Docker harness
+- [@appland/sql-parser](appland-sql-parser/README.md) — verified Docker harness
+- [sqllens](sqllens/README.md) — verified Docker harness
+- [rawsql-ts](rawsql-ts/README.md) — verified Docker harness
+- [@questdb/sql-parser](questdb-sql-parser/README.md) — verified Docker harness
+- [@saralsql/tsql-parser](saralsql-tsql-parser/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
 

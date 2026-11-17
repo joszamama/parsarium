@@ -1,14 +1,22 @@
 # SQL / Rust — pilot
 
-**Status:** pilot_one_selected_search_bounded; incomplete. 1 verified third-party paths, 0 verified standard APIs, 1 verified Docker harnesses.
+**Status:** pilot_nine_selected_search_bounded; incomplete. 9 verified third-party paths, 0 verified standard APIs, 9 verified Docker harnesses.
 
-One verified Rust SQL path after a bounded crates.io search (three queries, first 100 hits each, 300 hits, 250 unique) and recent-download metrics for 11 targeted leads, captured 2026-11-17. sqlparser 0.64.0 (18,971,518 90-day downloads) parses both valid controls with GenericDialect into ASTs that give the oracle summary. Its downloads include transitive pulls through DataFusion and other engines. pg_query (libpg_query FFI), sqlite3-parser and other leads are unverified, so this is not a top-ten ranking. sqlparser_derive, datafusion-sql and gluesql-core are sqlparser-rs family helpers or consumers, not separate parsers. Two valid controls establish only the tested dialect-neutral subset.
+Nine verified Rust SQL paths after a bounded crates.io search (three queries, first 100 hits each, 300 hits, 250 unique) and recent-download metrics captured 2026-11-17; round 2 inspected the snapshot hits in metric order. Each selected path parses both valid controls into its own AST, and the adapter's summary equals the hand-written oracle; families and metrics are in parsers.json. Downloads include transitive pulls through engines and bindings, and counts below 10,000 are weak adoption evidence. Forks of sqlparser-rs and sqlite3-parser, non-open-source licences and the predecessor sql-parse are excluded with evidence in leads.json; unverified leads remain, so this is not a definitive top-ten ranking. Two valid controls establish only the tested dialect-neutral subset.
 
 [Ranking and search limits](../../../data/rust/sql/ranking.md) · [Standard API inventory](../../../data/rust/sql/standard.json)
 
 ## Third-party parsers
 
 - [sqlparser](sqlparser/README.md) — verified Docker harness
+- [pg_query](pg-query/README.md) — verified Docker harness
+- [sqlite3-parser](sqlite3-parser/README.md) — verified Docker harness
+- [polyglot-sql](polyglot-sql/README.md) — verified Docker harness
+- [databend-common-ast](databend-common-ast/README.md) — verified Docker harness
+- [qusql-parse](qusql-parse/README.md) — verified Docker harness
+- [spg-sql](spg-sql/README.md) — verified Docker harness
+- [sqlglot-rust](sqlglot-rust/README.md) — verified Docker harness
+- [nom-sql](nom-sql/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
 

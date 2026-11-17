@@ -1,8 +1,8 @@
 # SQL / Python — pilot
 
-**Status:** pilot_two_selected_search_bounded; incomplete. 2 verified third-party paths, 0 verified standard APIs, 2 verified Docker harnesses.
+**Status:** pilot_six_selected_search_bounded; incomplete. 6 verified third-party paths, 0 verified standard APIs, 6 verified Docker harnesses.
 
-Two verified Python SQL paths after a bounded PyPI Simple index name search (five normalized-name queries, all 41 hits kept) and PyPI Stats metrics for 14 targeted leads, captured 2026-11-17. sqlparse 0.6.1 (125,550,021 last-month downloads) is a non-validating parser: its grouped token tree gives the oracle summary for both valid controls, but it accepts invalid SQL, and its downloads mostly reflect Django use for formatting and splitting. sqlglot 30.33.0 (91,735,974) runs its pure-Python tokenizer and parser with the default dialect; the optional sqlglotc/sqlglotrs accelerators are not installed. The remaining unresolved leads (sqlfluff, pglast, sqloxide, mo-sql-parsing and others) are unverified, so this is not a top-ten ranking. CPython sqlite3 is an engine binding with no syntax tree and is recorded, not counted. Two valid controls establish only the tested dialect-neutral subset.
+Six verified Python SQL paths after a bounded PyPI Simple index name search (five normalized-name queries, all 41 hits kept) and PyPI Stats metrics for 14 targeted leads, captured 2026-11-17; round 2 added PyPI Stats values for sqllineage, sqlvalidator, pg-query-python, psqlparse2 and sqlparser (plus five smaller recorded hits) from the same source on 2026-11-17. Selected: sqlparse 0.6.1 (125,550,021; sqlparse regex lexer and token-grouping engine (non-validating)); sqlglot 30.33.0 (91,735,974; sqlglot pure-Python tokenizer and recursive-descent parser); sqlfluff 4.5.0 (11,606,805; sqlfluff lexer and dialect grammar matcher); pglast 8.8 (10,961,367; PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)); sqloxide 0.61.1 (511,801; sqlparser-rs); mo-sql-parsing 11.699.26234 (103,062; mo-sql-parsing grammar on the mo-parsing engine). sqlparse is non-validating (it accepts invalid SQL). sqlfluff is a linter whose documented sqlfluff.parse returns the ansi parse tree; its image is Debian bookworm Python 3.11 on linux/arm64 with Atheris 3.0.0 built from its sdist, so the line bridge stays within afl-showmap's time limit. pglast is source-built with LLVM coverage instead of the optimised wheel and shares the libpg_query family with the C cell. sqloxide is source-built with Rust coverage instead of the optimised wheel; its parser is sqlparser-rs 0.61.0, the family of the Rust sqlparser path. mo-sql-parsing runs on its mo-parsing engine; it uses the same Debian Python 3.11 arm64 image and source-built Atheris 3.0.0 as sqlfluff. Remaining leads are recorded in leads.json; this is not a top-ten ranking. CPython sqlite3 is an engine binding with no syntax tree and is recorded, not counted. Two valid controls establish only the tested dialect-neutral subset.
 
 [Ranking and search limits](../../../data/python/sql/ranking.md) · [Standard API inventory](../../../data/python/sql/standard.json)
 
@@ -10,6 +10,10 @@ Two verified Python SQL paths after a bounded PyPI Simple index name search (fiv
 
 - [sqlparse](sqlparse/README.md) — verified Docker harness
 - [sqlglot](sqlglot/README.md) — verified Docker harness
+- [sqlfluff](sqlfluff/README.md) — verified Docker harness
+- [pglast](pglast/README.md) — verified Docker harness
+- [sqloxide](sqloxide/README.md) — verified Docker harness
+- [mo-sql-parsing](mo-sql-parsing/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
 
