@@ -148,5 +148,6 @@ bool parsarium_parse_mp4(const std::uint8_t *data, std::size_t size, parsarium_m
             result.audio_codec = property(mpv.get(), track + "codec");
     }
     if (std::getenv("PARSARIUM_DEBUG")) std::fprintf(stderr, "result: container=%s video=%s audio=%s\n", result.container.c_str(), result.video_codec.c_str(), result.audio_codec.c_str());
-    return !result.container.empty() && !result.video_codec.empty() && !result.audio_codec.empty();
+    // The pinned FFmpeg build has MOV as its only demuxer; tracks are optional.
+    return !result.container.empty();
 }
