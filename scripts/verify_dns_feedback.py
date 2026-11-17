@@ -50,7 +50,7 @@ def image_id(image: str) -> str:
 def sandbox(manifest: dict, case: Path, work: Path) -> list[str]:
     return ["docker", "run", "--rm", "--platform", manifest["platform"], "--network", "none",
             "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
-            "--user", f"{os.getuid()}:{os.getgid()}", "--tmpfs", "/tmp:rw,exec,nosuid,size=64m",
+            "--user", f"{os.getuid()}:{os.getgid()}", "--tmpfs", "/tmp:rw,exec,nosuid,size=64m,mode=1777",
             "--workdir", "/tmp", "-v", f"{case}:/input/case:ro", "-v", f"{work}:/coverage"]
 
 
@@ -58,7 +58,10 @@ def summary(manifest: dict, image: str, case: Path, work: Path) -> dict:
     entrypoint, *args = manifest["summary_command"]
     output = run([*sandbox(manifest, case, work), "-e", "LLVM_PROFILE_FILE=/tmp/replay.profraw",
                   "--entrypoint", entrypoint, image, *args])
-    return json.loads(output.strip().splitlines()[-1])
+    lines = output.strip().splitlines()
+    # Go test binaries print the summary on an OBSERVED_JSON: line among test output.
+    marked = [line.split("OBSERVED_JSON:", 1)[1] for line in lines if "OBSERVED_JSON:" in line]
+    return json.loads(marked[-1] if marked else lines[-1])
 
 
 def bridge_features(manifest: dict, overlay_image: str, case: Path, work: Path, name: str,
