@@ -145,5 +145,54 @@
       "snapshot": "data/java/mp3/registry-snapshot.json"
     },
     "underlying_family": "JavaZoom JLayer Layer III decoder"
+  },
+  {
+    "name": "jaudiotagger",
+    "group": "net.jthink",
+    "artifact": "jaudiotagger",
+    "version": "3.0.1",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "Pinned 3.0.1 source FileConstants.java and embedded Maven POM headers specify LGPL 2.1 or later; release POM declares LGPL",
+    "input_api": "MPEGFrameHeader.isMPEGFrame(ByteBuffer) and parseMPEGHeader(ByteBuffer) on bytes read from an untagged local File; getters for MPEG version, layer, sampling rate, channel count and bitrate",
+    "documentation": "https://www.jthink.net/jaudiotagger/javadoc/org/jaudiotagger/audio/mp3/MPEGFrameHeader.html",
+    "documentation_extra": "https://repo.maven.apache.org/maven2/net/jthink/jaudiotagger/3.0.1/jaudiotagger-3.0.1-sources.jar",
+    "documentation_archive_entries": [
+      "org/jaudiotagger/audio/mp3/MPEGFrameHeader.java"
+    ],
+    "source": "https://repo.maven.apache.org/maven2/net/jthink/jaudiotagger/3.0.1/jaudiotagger-3.0.1-sources.jar",
+    "scope": "Parses the first four-byte MPEG Layer III frame header at byte zero of each untagged local control; reports only independently correct version, layer, sample rate, channel count and bitrate. Does not decode PCM or claim whole-stream frame count.",
+    "family": "jaudiotagger native MP3 and ID3v2 reader",
+    "family_note": "Same release/package as the jaudiotagger entry in data/java/mp3_id3v2/parsers.json, but this route exercises its own MPEGFrameHeader parser rather than tag fields. The release POM has no JLayer/JCodec runtime dependency. jid3lib and mp3agic share historical project ancestry, not a proven identical MPEG-frame engine. High-level MP3AudioHeader(File) misidentifies the valid MPEG-2 control start at byte 104 and estimates 5 instead of 12 frames; this path omits those fields.",
+    "adapter_label": "jaudiotagger",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "codec": "MP3",
+      "mpeg_version": "MPEG-1",
+      "layer": "Layer 3",
+      "sample_rate": 44100,
+      "channels": 1,
+      "bitrate_kbps": 64
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "codec": "MP3",
+      "mpeg_version": "MPEG-2",
+      "layer": "Layer 3",
+      "sample_rate": 22050,
+      "channels": 2,
+      "bitrate_kbps": 32
+    },
+    "project": "projects/mp3/java/jaudiotagger",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 8,
+      "max_release": "3.0.1",
+      "max_release_direct_dependent_count": 7,
+      "default_release_direct_dependent_count": 7,
+      "releases": 3,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/net.jthink%3Ajaudiotagger",
+      "captured_at_utc": "2026-11-17T03:47:07.667739+00:00",
+      "snapshot": "data/java/mp3/registry-snapshot.json"
+    }
   }
 ]

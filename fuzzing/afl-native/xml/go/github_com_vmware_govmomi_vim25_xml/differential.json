@@ -1,0 +1,23 @@
+{
+  "project": "xml/go/github_com_vmware_govmomi_vim25_xml",
+  "pass": true,
+  "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+  "overlay_receipt_sha256": "208c1b11cefdd42d80e1ffb2f8848e1f75e20fd4d9ab2625e6e555b2f8d9c258",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential": "controls/xml/order-default-ns.xml",
+  "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "repeated_control_identical": true,
+  "control_parser_features": 179,
+  "control_afl_tuples": 199,
+  "differential_parser_features": 195,
+  "differential_afl_tuples": 215,
+  "parser_feature_difference": 30,
+  "afl_tuple_difference": 30,
+  "differential_control_pass": true,
+  "repeated_differential_identical": true,
+  "changed_source_files": [
+    "github.com/vmware/govmomi/vim25/xml/xml.go"
+  ],
+  "family_note": "govmomi fork of Go encoding/xml; own xml.go tokenizer compiled and instrumented"
+}

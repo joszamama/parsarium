@@ -3,6 +3,7 @@
 from hashlib import sha256
 import json
 from pathlib import Path
+import runpy
 import unittest
 
 
@@ -18,7 +19,8 @@ class JavaMp3PilotTest(unittest.TestCase):
     def test_selected_parsers_have_recorded_metrics_and_stay_out_of_leads(self):
         parsers = read(BASE / "parsers.json")
         leads = read(BASE / "leads.json")
-        self.assertEqual([parser["name"] for parser in parsers], ["jcodec", "mp3spi", "jlayer"])
+        self.assertEqual([parser["name"] for parser in parsers],
+                         ["jcodec", "mp3spi", "jlayer", "jaudiotagger"])
         self.assertTrue(all(lead["status"].startswith(("unresolved", "excluded")) for lead in leads))
         # The highest selected pure-Java path outranks remaining unresolved leads.
         self.assertTrue(all(parsers[0]["popularity"]["value"] > lead["summed_direct_dependent_count"] for lead in leads
@@ -45,6 +47,12 @@ class JavaMp3PilotTest(unittest.TestCase):
         self.assertIn("same JLayer decoder lineage", mp3spi["family_note"])
         self.assertEqual(mp3spi["underlying_family"], jlayer["underlying_family"])
         self.assertGreater(read(ROOT / mp3spi["project"] / "verification.json")["underlying_source_lines_covered"], 0)
+        header = next(item for item in read(BASE / "parsers.json") if item["name"] == "jaudiotagger")
+        self.assertEqual(header["family"], next(item for item in read(
+            ROOT / "data/java/mp3_id3v2/parsers.json") if item["name"] == "jaudiotagger")["family"])
+        self.assertNotIn("frames", header["expected_output"])
+        self.assertNotIn("decoded_samples", header["expected_output"])
+        self.assertIn("byte 104", read(ROOT / header["project"] / "manifest.json")["coverage_limit"])
 
     def test_control_receipts_match_catalog(self):
         for parser in read(BASE / "parsers.json"):
@@ -66,9 +74,10 @@ class JavaMp3PilotTest(unittest.TestCase):
         # The cell aggregate is refreshed by the integrator. The new path's
         # scoped receipt is testable before that aggregate is regenerated.
         scoped = [read(ROOT / f"data/java/mp3/{slug}-feedback-differential.json")
-                  for slug in ("jlayer", "mp3spi")]
+                  for slug in ("jlayer", "mp3spi", "jaudiotagger")]
         results = {item["project"]: item for item in [*report["results"], *scoped]}
-        self.assertEqual(set(results), {"mp3/java/jcodec", "mp3/java/jlayer", "mp3/java/mp3spi"})
+        self.assertEqual(set(results), {"mp3/java/jcodec", "mp3/java/jlayer",
+                                        "mp3/java/mp3spi", "mp3/java/jaudiotagger"})
         for result in results.values():
             slug = result["project"].rsplit("/", 1)[-1]
             manifest = read(ROOT / f"projects/mp3/java/{slug}/manifest.json")
@@ -88,6 +97,18 @@ class JavaMp3PilotTest(unittest.TestCase):
         self.assertEqual(standard["verified_apis"], [])
         self.assertEqual(cell["verified_standard_or_runtime_count"], 0)
         self.assertTrue(standard["no_api_findings"])
+
+    def test_jaudiotagger_header_fields_match_independent_frame_walker(self):
+        parser = next(item for item in read(BASE / "parsers.json")
+                      if item["name"] == "jaudiotagger")
+        walk = runpy.run_path(str(ROOT / "controls/mp3/check_controls.py"))["walk"]
+        for path_key, output_key in (("control", "expected_output"),
+                                     ("differential_control", "differential_expected_output")):
+            oracle = walk((ROOT / parser[path_key]).read_bytes())
+            observed = parser[output_key]
+            self.assertEqual(observed["sample_rate"], oracle["sample_rate"])
+            self.assertEqual(observed["channels"], oracle["channels"])
+            self.assertEqual(observed["bitrate_kbps"] * 1000, oracle["bitrate"])
 
 
 if __name__ == "__main__":

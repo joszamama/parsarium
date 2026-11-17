@@ -9,6 +9,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [github.com/hajimehoshi/go-mp3 / Go](go/github_com_hajimehoshi_go_mp3/README.md)
 - [github.com/tcolgate/mp3 / Go](go/github_com_tcolgate_mp3/README.md)
 - [github.com/tosone/minimp3 / Go](go/github_com_tosone_minimp3/README.md)
+- [jaudiotagger / Java](java/jaudiotagger/README.md)
 - [jcodec / Java](java/jcodec/README.md)
 - [jlayer / Java](java/jlayer/README.md)
 - [mp3spi / Java](java/mp3spi/README.md)

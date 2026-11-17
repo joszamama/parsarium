@@ -12,14 +12,9 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("jcodec", "mp3spi", "jlayer")
+PROJECTS = ("jcodec", "mp3spi", "jlayer", "jaudiotagger")
 CONTROL = "controls/mp3/tone-44k-mono.mp3"
 DIFFERENTIAL = "controls/mp3/tone-22k-stereo.mp3"
-# MPEG-2 22.05 kHz stereo; libmpg123 reports the same frames and samples
-# (projects/mp3/c/mpg123/manifest.json).
-DIFFERENTIAL_EXPECTED = {
-    "codec": "MP3", "sample_rate": 22050, "channels": 2, "frames": 12, "decoded_samples": 6912,
-}
 REPORT = ROOT / "data/java/mp3/afl-feedback.json"
 
 
@@ -60,15 +55,17 @@ def check(slug: str) -> dict:
         repeat = probe(manifest, image, ROOT / CONTROL, work, "repeat")
         repeat_two = probe(manifest, image, ROOT / CONTROL, work, "repeat_two")
         other = probe(manifest, image, ROOT / DIFFERENTIAL, work, "other")
+        classpath = next(arg.removeprefix("--cp=") for arg in manifest["fuzz_smoke_args"]
+                         if arg.startswith("--cp="))
         parsed = subprocess.run(
             ["docker", "run", "--rm", "--platform", manifest["platform"], "--network", "none",
              "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
              "--user", f"{os.getuid()}:{os.getgid()}", "--tmpfs", "/tmp:rw,exec,nosuid,size=64m",
              "-v", f"{ROOT / DIFFERENTIAL}:/input/case:ro", "--entrypoint", "java", image,
-             "-cp", "/work/classes:/work/lib/*", "GenericHarness",
+             "-cp", classpath, "GenericHarness",
              "/input/case"], capture_output=True, text=True, timeout=120, check=True)
         differential_output = json.loads(parsed.stdout.strip().splitlines()[-1])
-    if differential_output != DIFFERENTIAL_EXPECTED:
+    if differential_output != manifest["differential_expected_output"]:
         raise RuntimeError(f"{relative}: differential output changed: {differential_output}")
     if first != repeat or first != repeat_two:
         raise RuntimeError(f"{relative}: repeated control probe changed parser features or AFL++ map")

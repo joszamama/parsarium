@@ -262,6 +262,60 @@
     }
   },
   {
+    "name": "github.com/vmware/govmomi/vim25/xml",
+    "module": "github.com/vmware/govmomi",
+    "version": "v0.56.2",
+    "license": "Apache-2.0, BSD-3-Clause",
+    "license_evidence": "vim25/xml/xml.go and LICENSE are BSD-style Go source; vim25/xml/extras.go is SPDX Apache-2.0 in pinned module zip",
+    "input_api": "xml.NewDecoder(io.Reader).Token() over a local byte stream, using the govmomi/vim25/xml package",
+    "documentation": "https://pkg.go.dev/github.com/vmware/govmomi/vim25/xml@v0.56.2#NewDecoder",
+    "source": "https://github.com/vmware/govmomi/tree/v0.56.2/vim25/xml",
+    "scope": "Full XML 1.0 UTF-8 document without DOCTYPE parsed into namespace-resolved tokens: expanded element/attribute names, namespace declarations, decoded text and CDATA, maximum depth on two valid controls",
+    "family": "govmomi/vim25/xml fork of Go encoding/xml tokenizer",
+    "family_note": "The package contains its own xml.go parser and Decoder.Token method, derived from Go encoding/xml source (Go Authors copyright and BSD-style LICENSE). The harness imports govmomi/vim25/xml, not standard encoding/xml; its own forked tokenizer source is cover-instrumented. extras.go adds Apache-2.0 VMware types. This is a separate compiled parser family member sharing code lineage, not an additional call path to the standard runtime parser.",
+    "shared_families": [
+      "Go encoding/xml source lineage (fork, separate compiled tokenizer)"
+    ],
+    "module_zip_bytes": 12553438,
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 163,
+      "source": "https://pkg.go.dev/github.com/vmware/govmomi/vim25/xml?tab=importedby",
+      "captured_at_utc": "2026-11-17T03:16:02.492959+00:00",
+      "snapshot": "data/go/xml/registry-snapshot.json",
+      "note": "Count applies to vim25/xml package imports; source is the 12,553,438-byte govmomi module archive."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/go/github_com_vmware_govmomi_vim25_xml"
+  },
+  {
     "name": "github.com/mmcdole/goxpp",
     "module": "github.com/mmcdole/goxpp",
     "version": "v1.3.0",

@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 115,
-    "containerized_verified": 115,
+    "catalog_paths": 117,
+    "containerized_verified": 117,
     "staged": 0,
     "standard_api_paths": 10,
     "standard_containerized_verified": 9,
@@ -1168,8 +1168,8 @@
       {
         "format": "mp3",
         "ecosystem": "java",
-        "catalog_paths": 3,
-        "containerized_verified": 3,
+        "catalog_paths": 4,
+        "containerized_verified": 4,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1177,9 +1177,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_three_selected_search_bounded",
+        "status": "pilot_four_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Three pure-Java Layer III paths verified; no padding. Maven Central phrase queries returned no hits, so named leads were inspected via deps.dev and package documentation. deps.dev counts whole-package dependency use, not MP3-specific calls. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or ID3 behavior. Java SE 25 exports no MP3 reader by inventory."
+        "uncertainty": "Four pure-Java Layer III paths verified; no padding. jaudiotagger is header-only and its higher-level MP3AudioHeader(File) misidentifies the valid 22.05 kHz control start at byte 104 and estimates 5 rather than 12 frames; the selected first-header API reports only independently correct fields. Maven Central phrase queries returned no hits, so named leads were inspected via deps.dev and package documentation. deps.dev counts whole-package dependency use, not MP3-specific calls. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or ID3 behavior. Java SE 25 exports no MP3 reader by inventory."
       },
       {
         "format": "mp3",
@@ -1280,8 +1280,8 @@
       {
         "format": "xml",
         "ecosystem": "go",
-        "catalog_paths": 5,
-        "containerized_verified": 5,
+        "catalog_paths": 6,
+        "containerized_verified": 6,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 1,
@@ -1289,9 +1289,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_five_selected_search_bounded",
+        "status": "pilot_six_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Five Go XML package paths pass two valid namespace-aware controls with parser and underlying source coverage plus stable AFL++ feedback: etree 2,098; xmlquery 627; mxj 553; beego/x2j 436; goxpp 132 Imported by. All five use Go encoding/xml Decoder as their tokenizer. goxpp builds a pull cursor with its own depth/namespace state; its valid controls differ by three own-source AFL++ blocks, all in comment event handling, and 32 encoding/xml blocks, with stable repeats. Higher-adoption goxml2json (182), mxj/v2 (178), and govmomi XML (163), plus eight other numeric leads, remain unverified; ranks cover selected verified paths only. mxj and x2j map routes lose namespace URIs/prefixes and mixed-content details; x2j byte/string routes also alter CDATA whitespace on the valid catalog control, while its selected reader route preserves it. Six pkg.go.dev queries recorded 496 hits, 464 unique; the first 100 hits per query were captured where available. Two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour."
+        "uncertainty": "Six Go XML package paths pass two valid namespace-aware controls with parser-source coverage and stable AFL++ feedback: etree 2,098; xmlquery 627; mxj 553; beego/x2j 436; govmomi/vim25/xml 163; goxpp 132 Imported by. The first four and goxpp use the Go encoding/xml runtime tokenizer through package-specific tree, map or cursor APIs. govmomi/vim25/xml contains its own compiled tokenizer fork of Go encoding/xml; the pinned v0.56.2 package imports no runtime encoding/xml and covers 290 own xml.go lines. Its parser-only AFL feedback differs by 30 fork-source blocks on the valid controls with stable repeats. Its source is a 12,553,438-byte whole govmomi module archive, though the XML package itself is much smaller. Higher-adoption goxml2json (182) and mxj/v2 (178), plus eight other numeric leads, remain unverified; ranks cover selected verified paths only. mxj and x2j map routes lose namespace URIs/prefixes and mixed-content details; x2j byte/string routes alter CDATA whitespace on the valid catalog control, while its selected reader route preserves it. Six pkg.go.dev queries recorded 496 hits, 464 unique; the first 100 hits per query were captured where available. Two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour."
       },
       {
         "format": "xml",

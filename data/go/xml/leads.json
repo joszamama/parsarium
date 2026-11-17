@@ -20,12 +20,13 @@
   },
   {
     "name": "github.com/vmware/govmomi/vim25/xml",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "v0.56.2",
     "license": "Apache-2.0, BSD-3-Clause",
     "imported_by": 163,
-    "reason": "Synopsis is identical to encoding/xml, which suggests a vendored fork in the encoding/xml family. Not checked or run.",
-    "source": "https://pkg.go.dev/github.com/vmware/govmomi/vim25/xml"
+    "reason": "Pinned v0.56.2 general NewDecoder(io.Reader).Token() path passes both valid namespace XML controls. Its own Go encoding/xml-derived forked xml.go source is covered and gives stable input-dependent AFL++ feedback; it does not delegate to runtime encoding/xml.",
+    "source": "https://pkg.go.dev/github.com/vmware/govmomi/vim25/xml",
+    "verified_evidence": "projects/xml/go/github_com_vmware_govmomi_vim25_xml/verification.json"
   },
   {
     "name": "github.com/mmcdole/goxpp",
