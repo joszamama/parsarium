@@ -356,6 +356,30 @@ def main() -> None:
             assert receipt["post_parse_edges_identical"] is True
             assert json.loads((project / "verification.json").read_text())[
                 "format_specific_source_lines_covered"] > 0
+        elif str(relative) in {"xml/php/veewee_xml", "xml/php/mtownsend_xml_to_array"}:
+            assert manifest.get("native_campaign_supported") is False
+            assert receipt["feedback_kind"] == "native_libxml2_php_dom_parser_source_edges"
+            expected_objects = [
+                "libxml2-2.15.4/build/.libs/libxml2_la-SAX2.o",
+                "libxml2-2.15.4/build/.libs/libxml2_la-parser.o",
+                "libxml2-2.15.4/build/.libs/libxml2_la-parserInternals.o",
+                "php-8.5.12/ext/dom/document.o"]
+            if str(relative) == "xml/php/veewee_xml":
+                expected_objects.append("php-8.5.12/ext/dom/xml_document.o")
+                assert receipt["declarations_resolve_to_expanded_names"] is True
+            else:
+                assert receipt["raw_output_carries_namespace_uris"] is False
+            assert receipt["instrumented_objects"] == expected_objects
+            assert receipt["underlying_source_sha256"] == manifest["underlying_source_sha256"]
+            assert receipt["php_source_sha256"] == manifest["php_source_sha256"]
+            assert receipt["differential_control_sha256"] == manifest["differential_control_sha256"]
+            assert receipt["control_output_matches_oracle"] and receipt["differential_output_matches_oracle"]
+            assert receipt["repeats_per_control"] >= 3 and receipt["all_repeats_identical"]
+            assert receipt["format_dependent_parse_time_tuples"] > 0
+            assert receipt["format_dependent_traversal_only_tuples"] == 0
+            assert receipt["post_parse_edges_identical"] is True
+            assert json.loads((project / "verification.json").read_text())[
+                "format_specific_source_lines_covered"] > 0
         else:
             assert receipt["feedback_edges"] > 0 and receipt["parser_source_features"] > 0
         if str(relative) == "ascii_ply/java/lwjgl_assimp":

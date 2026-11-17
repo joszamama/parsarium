@@ -37,20 +37,20 @@
   },
   {
     "name": "veewee/xml",
-    "status": "unresolved",
+    "status": "selected",
     "version_seen": "4.14.0",
     "license": "MIT",
     "packagist_downloads": 8963799,
-    "reason": "libxml2-family wrapper (Functional wrappers over Dom\\XMLDocument, DOMDocument::loadXML and XMLReader::fromString). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
+    "reason": "Documented package XML-to-array API over PHP DOMDocument/libxml2. Both valid controls match the independently projected Expat oracle for the package's preserved fields; native parser-only AFL feedback changes stably. Projection and shared-family limits are in the parser record. Verified: projects/xml/php/veewee_xml.",
     "source": "https://packagist.org/packages/veewee/xml"
   },
   {
     "name": "mtownsend/xml-to-array",
-    "status": "unresolved",
+    "status": "selected",
     "version_seen": "2.0.1",
     "license": "MIT",
     "packagist_downloads": 4956232,
-    "reason": "libxml2-family wrapper (Converts XML to arrays through DOMDocument::loadXML). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
+    "reason": "Documented package XML-to-array API over PHP DOMDocument/libxml2. Both valid controls match the independently projected Expat oracle for the package's preserved fields; native parser-only AFL feedback changes stably. Projection and shared-family limits are in the parser record. Verified: projects/xml/php/mtownsend_xml_to_array.",
     "source": "https://packagist.org/packages/mtownsend/xml-to-array"
   },
   {
@@ -64,11 +64,11 @@
   },
   {
     "name": "prewk/xml-string-streamer",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "1.2.3",
     "license": "MIT",
     "packagist_downloads": 3642516,
-    "reason": "Own byte-level StringWalker/UniqueNode splitter over streams that yields raw node strings (typically handed to SimpleXML); it does no namespace resolution or entity/CDATA decoding of its own. Not a complete XML parser under the cell protocol; no control run.",
+    "reason": "Pinned valid-control probe shows getNode() returns raw XML byte slices by tag depth without element names, attributes, decoded text, namespace resolution, or entity decoding. README feeds slices onward to SimpleXML; it is a byte splitter, not the XML parser. Evidence: data/php/xml/prewk-xml-string-streamer-lead-check.json.",
     "source": "https://packagist.org/packages/prewk/xml-string-streamer"
   },
   {
@@ -77,7 +77,7 @@
     "version_seen": "v3.0.0",
     "license": "MIT",
     "packagist_downloads": 2274560,
-    "reason": "libxml2-family wrapper (Document reader built on simplexml_load_string / simplexml_load_file). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
+    "reason": "Reader::load delegates parsing to SimpleXML; Document::parse maps the already parsed tree to a caller-provided schema of named fields. This resembles the excluded jms/serializer mapping layer; a verified XML-to-tree result from this package has not been selected. Candidate remains unresolved pending a package-API qualification decision.",
     "source": "https://packagist.org/packages/laravie/parser"
   },
   {

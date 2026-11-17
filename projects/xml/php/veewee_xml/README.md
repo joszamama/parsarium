@@ -1,8 +1,8 @@
 # veewee/xml — XML / PHP
 
-Pinned release: `4.14.0`. [Manifest](manifest.json) · [verification receipt](verification.json) · [AFL++ overlay receipt](../../../../fuzzing/afl-native/xml/php/veewee_xml/verification.json)
+Pinned release: `4.14.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../data/php/xml/veewee-xml-parser.json)
+[API, control result, and parser family](../../../../catalog/xml/php/veewee-xml/README.md)
 
 ## Run from the repository root
 
