@@ -199,10 +199,11 @@
   "status": "standard_api_verified",
   "official_documentation": [
    "https://pkg.go.dev/encoding/json",
-   "https://pkg.go.dev/encoding/json/v2"
+   "https://pkg.go.dev/encoding/json/v2",
+   "https://github.com/golang/go/blob/go1.27.1/src/internal/buildcfg/exp.go#L87"
   ],
   "observed": "2026-11-17",
-  "finding": "encoding/json is documented and verified. encoding/json/v2 and encoding/json/jsontext exist in Go 1.27.1 sources only under GOEXPERIMENT=jsonv2 (build tag goexperiment.jsonv2); they are recorded as experimental and not verified.",
+  "finding": "encoding/json.Unmarshal is documented and locally verified. In Go 1.27.1 the default build enables JSONv2 (internal/buildcfg/exp.go) and compiles encoding/json from v2_* files. The public encoding/json/v2 and jsontext APIs are documented but were not run as separate paths.",
   "receipts": [
    {
     "api": "encoding/json.Unmarshal",

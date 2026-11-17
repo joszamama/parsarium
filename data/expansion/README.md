@@ -103,8 +103,9 @@ the official documentation it relied on. The local receipts cover:
 - **Python 3.13.1:** `json.loads`; `xml.etree.ElementTree`, `xml.dom.minidom`
   and `pyexpat`. All three XML APIs use the bundled Expat family.
 - **Go 1.27.1:** `encoding/json.Unmarshal` and `encoding/xml.Decoder.Token`.
-  `encoding/json/v2` and `jsontext` are present only under
-  `GOEXPERIMENT=jsonv2`. They are recorded as experimental and were not run.
+  The default `encoding/json` build uses the v2 implementation (`JSONv2: true`
+  in [Go's pinned build configuration](https://github.com/golang/go/blob/go1.27.1/src/internal/buildcfg/exp.go#L87)). The public `encoding/json/v2`
+  and `jsontext` APIs were not run as separate paths.
 - **PHP 8.5.12:** `json_decode` (a core extension, always enabled since 8.0);
   SimpleXML, DOM and XMLReader, which share libxml2. These XML extensions are
   enabled by default but are not guaranteed in every build.
