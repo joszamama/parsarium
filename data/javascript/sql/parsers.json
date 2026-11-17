@@ -528,5 +528,109 @@
         }
       ]
     }
+  },
+  {
+    "name": "@appland/sql-parser",
+    "version": "1.5.1",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball",
+    "input_api": "sqliteParser(local UTF-8 text) -> statement list",
+    "documentation": "https://www.npmjs.com/package/@appland/sql-parser/v/1.5.1",
+    "source": "https://registry.npmjs.org/@appland/sql-parser/-/sql-parser-1.5.1.tgz",
+    "source_sha256": "60c988ae6f1e7adb27c71bfd21bf2a4868b82a9d437663eeef55152e3f2c4ff0",
+    "dependencies": [],
+    "dialect": "SQLite",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8 and passed to the synchronous sqliteParser call; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "sqlite-parser PEG.js grammar (AppLand fork)",
+    "family_note": "AppLand's fork of sqlite-parser (repository applandinc/sqlite-parser, release 1.5.1 from 2022) ships its own PEG.js-generated parser, minified without a source map, and keeps sqlite-parser's API and AST shape; the adapter is the sqlite-parser adapter with the package name changed. Overlap with the selected sqlite-parser 1.0.1: the generated parser is 127,259 bytes against 109,981, about 51% of sqlite-parser's statement fragments occur unchanged in it (43% of the fork's), and the index, tracer and streaming wrappers differ only in the version banner. It is a separately maintained fork with grammar changes, not a byte-identical copy or a rename. Independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst, dt-sql-parser and libpg_query.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 80224,
+      "source": "https://api.npmjs.org/downloads/point/last-month/@appland/sql-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Captured in the round-2 extension (round_2_metric) with the same window as round 1; downloads include transitive installs (for example through AppMap tooling)."
+    },
+    "project": "projects/sql/javascript/appland_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]
