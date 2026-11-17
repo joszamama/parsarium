@@ -49,8 +49,13 @@
       "api_lead": "Toml\\Parser::fromString(string)",
       "note": "Old TOML draft.",
       "source": "https://packagist.org/packages/jamesmoss/toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "1.1.1",
+      "license": "MIT",
+      "checked_at_utc": "2026-11-17",
+      "checked_with": "composer:2 image (PHP 8.5.12 CLI), composer require of the release",
+      "evidence": "Toml\\Parser::fromString rejects service-config.toml with 'Unknown primative for `{ max = 10, min = -2 }` on line 14' (no inline tables) and typed-scalars.toml with 'Unknown primative for `+99` on line 4'; the 2014 parser predates TOML 0.4."
     },
     {
       "name": "leonelquinteros/php-toml",
@@ -60,8 +65,13 @@
       "api_lead": "Toml::parse(string)",
       "note": "Old TOML draft.",
       "source": "https://packagist.org/packages/leonelquinteros/php-toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v1.1.1",
+      "license": "BSD-3-Clause-Clear",
+      "checked_at_utc": "2026-11-17",
+      "checked_with": "composer:2 image (PHP 8.5.12 CLI), composer require of the release",
+      "evidence": "Toml::parse returns service-config inline tables as stdClass objects mixed with arrays, and rejects typed-scalars.toml with 'Unknown value type: 0xDEAD_BEEF' (no hexadecimal integers)."
     },
     {
       "name": "zidizei/toml-php",
@@ -71,8 +81,13 @@
       "api_lead": "Toml::parse(string)",
       "note": null,
       "source": "https://packagist.org/packages/zidizei/toml-php",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.3.0",
+      "license": "MIT",
+      "checked_at_utc": "2026-11-17",
+      "checked_with": "composer:2 image (PHP 8.5.12 CLI), composer require of the release",
+      "evidence": "Toml\\Toml::parse rejects service-config.toml with \"Unrecognized data type '{' on line 13 near column 10\" (no inline tables) and typed-scalars.toml with \"Unrecognized data type '+99' on line 3 near column 14\"."
     },
     {
       "name": "app-hive/toml",
@@ -82,19 +97,29 @@
       "api_lead": "Toml::parse(string)",
       "note": null,
       "source": "https://packagist.org/packages/app-hive/toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.0.2",
+      "license": "MIT",
+      "checked_at_utc": "2026-11-17",
+      "checked_with": "php:8.5-cli image (sha256:50956f094e90a716d43bea28087d447555ad80510e386ab8c9c10d8c70d781a9) with gmp and bcmath added, composer install of the release",
+      "evidence": "Toml::parse needs ext-gmp, which composer.json does not declare (without it typed-scalars fails with 'Call to undefined function AppHive\\Toml\\Parser\\gmp_strval()'). With gmp, integers, floats and strings of both controls are correct, but every date-time comes back as a plain string ('1979-05-27T00:32:00.5-07:00', '1979-05-27T07:32:00', '1979-05-27', '00:32:00.25'), indistinguishable from a TOML string; ParserConfig only toggles strictness, and Parser::parse() returns the same array, so no documented API keeps the four date-time kinds."
     },
     {
       "name": "petalbranch/toml",
       "metric_value": 20,
       "metric": "Packagist total downloads",
       "family": "petalbranch/toml",
-      "api_lead": "Toml::decode(string)",
+      "api_lead": "Parser::parseToNode(string) -> TableNodeInterface (ValueNode::getType() TomlType)",
       "note": null,
       "source": "https://packagist.org/packages/petalbranch/toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_partially_checked",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v1.2.0",
+      "license": "Apache-2.0",
+      "checked_at_utc": "2026-11-17",
+      "checked_with": "composer:2 image (PHP 8.5.12 CLI), composer require of the release",
+      "evidence": "Toml::parse returns correct integers, floats, strings and keys for typed-scalars, but formats all four date-time kinds back to plain strings, so the array API fails the typed tree. Its Parser::parseToNode returns a node tree whose ValueNode::getType() carries TomlType (OFFSET_DATETIME, LOCAL_DATETIME, LOCAL_DATE, LOCAL_TIME); a harness over that node tree (the round-1 php-collective/toml approach) was not built in this round."
     },
     {
       "name": "checkdomain/php-toml",
@@ -102,7 +127,7 @@
       "metric": "Packagist total downloads",
       "family": "checkdomain/php-toml",
       "api_lead": "Parser::parse(string)",
-      "note": null,
+      "note": "Packagist p2 metadata lists no tagged release (dev branches only), so no pinned release exists.",
       "source": "https://packagist.org/packages/checkdomain/php-toml",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
@@ -115,8 +140,13 @@
       "api_lead": "parse(string)",
       "note": null,
       "source": "https://packagist.org/packages/dayvsonspacca/psl-toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v1.0.5",
+      "license": "MIT",
+      "checked_at_utc": "2026-11-17",
+      "checked_with": "php:8.5-cli image (sha256:50956f094e90a716d43bea28087d447555ad80510e386ab8c9c10d8c70d781a9) with gmp and bcmath added, composer install of the release",
+      "evidence": "Toml::parse needs ext-bcmath (undeclared). With it, service-config parses, but typed-scalars gives floats.negative = integer 0 for -0.5, keeps the line-ending backslash of the multi-line basic string ('first \\\\\\n  second'), and returns the local date as a DateTimeImmutable carrying the current time of day and the local time on the current date, so local kinds are not represented."
     },
     {
       "name": "makhnanov/toml",
@@ -124,7 +154,7 @@
       "metric": "Packagist total downloads",
       "family": "yosymfony/toml family (fork)",
       "api_lead": "Toml::parse(string)",
-      "note": "Fork of yosymfony/toml.",
+      "note": "Fork of yosymfony/toml; Packagist p2 metadata lists no tagged release (dev branches only), so no pinned release exists.",
       "source": "https://packagist.org/packages/makhnanov/toml",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
@@ -135,7 +165,7 @@
       "metric": "Packagist total downloads",
       "family": "azjezz/toml",
       "api_lead": "parse(string)",
-      "note": null,
+      "note": "Packagist p2 metadata lists no tagged release (dev branches only), so no pinned release exists.",
       "source": "https://packagist.org/packages/azjezz/toml",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
@@ -146,7 +176,7 @@
       "metric": "Packagist total downloads",
       "family": "yosymfony/toml family (fork)",
       "api_lead": "Toml::parse(string)",
-      "note": "Fork of yosymfony/toml.",
+      "note": "Fork of yosymfony/toml; README: compatible with TOML 0.4.0. 0 Packagist downloads, so it has no positive primary metric even if it passed.",
       "source": "https://packagist.org/packages/cline/toml",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
@@ -157,7 +187,7 @@
       "metric": "Packagist total downloads",
       "family": "blixon/toml",
       "api_lead": "Toml::parse(string)",
-      "note": null,
+      "note": "Packagist p2 metadata lists no tagged release (dev branches only); 0 downloads.",
       "source": "https://packagist.org/packages/blixon/toml",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
