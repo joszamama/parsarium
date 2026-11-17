@@ -1,10 +1,10 @@
 {
   "ecosystem": "php",
   "format": "dns",
-  "status": "pilot_search_bounded_none_verified",
+  "status": "pilot_one_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 1,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "dns",
@@ -19,11 +19,12 @@
   },
   "search_hits_recorded": 116,
   "unique_search_hits": 111,
-  "unresolved_documentation_leads": 8,
+  "unresolved_documentation_leads": 7,
   "leads_recorded": 12,
   "leads_by_status": {
-    "unresolved": 8,
-    "excluded": 4
+    "resolved_verified_selected": 1,
+    "excluded": 4,
+    "unresolved": 7
   },
   "ranking_metric": "Packagist total downloads",
   "uncertainty": "Pilot cell: no PHP DNS path is verified yet. The bounded searches and targeted documentation leads are recorded with one adoption metric each; leads are ordered by that metric only to decide what to verify first. Registry search order is not adoption order, and package-level metrics include non-DNS use. Zero verified paths is not evidence that no parser exists.",
@@ -35,5 +36,8 @@
     "differential": "controls/dns/query.bin",
     "oracle": "controls/dns/check_controls.py",
     "expected": "controls/dns/expected.json"
-  }
+  },
+  "third_party_evidence": "data/php/dns/parsers.json",
+  "third_party_control_results": "data/php/dns/verification.json",
+  "selection": "One control-verified PHP DNS path(s), ranked by Packagist total downloads: react/dns v1.14.0 (179,404,103)."
 }

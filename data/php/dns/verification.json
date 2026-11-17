@@ -1,0 +1,93 @@
+{
+  "checked_at_utc": "2026-11-17T17:23:23.881603+00:00",
+  "controls": {
+    "response": "controls/dns/response.bin",
+    "query_differential": "controls/dns/query.bin"
+  },
+  "control_sha256": {
+    "response": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+    "query_differential": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a"
+  },
+  "oracle": "controls/dns/check_controls.py (hand-written RFC 1035 decoder) with controls/dns/expected.json",
+  "third_party": [
+    {
+      "package": "react/dns",
+      "version": "v1.14.0",
+      "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+      "command": "python3 scripts/run_project.py dns php react_dns",
+      "feedback_command": "python3 scripts/verify_dns_feedback.py dns/php/react_dns",
+      "receipt": "projects/dns/php/react_dns/verification.json",
+      "control": "controls/dns/response.bin",
+      "pass": true,
+      "output": {
+        "id": 43981,
+        "qr": 1,
+        "opcode": 0,
+        "aa": 0,
+        "tc": 0,
+        "rd": 1,
+        "ra": 1,
+        "z": 0,
+        "rcode": 0,
+        "qdcount": 1,
+        "ancount": 4,
+        "nscount": 0,
+        "arcount": 0,
+        "questions": [
+          {
+            "name": "www.example.test.",
+            "type": 1,
+            "class": 1
+          }
+        ],
+        "answers": [
+          {
+            "name": "www.example.test.",
+            "type": 5,
+            "class": 1,
+            "ttl": 3600,
+            "rdata": "example.test."
+          },
+          {
+            "name": "example.test.",
+            "type": 1,
+            "class": 1,
+            "ttl": 300,
+            "rdata": "192.0.2.10"
+          },
+          {
+            "name": "example.test.",
+            "type": 28,
+            "class": 1,
+            "ttl": 600,
+            "rdata": "2001:db8::10"
+          },
+          {
+            "name": "example.test.",
+            "type": 15,
+            "class": 1,
+            "ttl": 7200,
+            "rdata": "10 mail.example.test."
+          }
+        ],
+        "authority": [],
+        "additional": []
+      },
+      "differential_control": "controls/dns/query.bin",
+      "differential_output_matches": true,
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 108,
+      "format_specific_source_lines_covered": 95,
+      "afl_feedback": {
+        "control_parser_features": 108,
+        "variant_parser_features": 49,
+        "parser_feature_difference": 59,
+        "control_afl_tuples": 128,
+        "variant_afl_tuples": 69,
+        "afl_tuple_difference": 59,
+        "runs_per_control": 3
+      },
+      "feedback_receipt": "data/php/dns/react-dns-feedback-differential.json"
+    }
+  ]
+}
