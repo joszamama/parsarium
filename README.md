@@ -72,7 +72,7 @@ python3 parsarium.py fandango generate png c lodepng runs/lodepng-fandango \
 python3 parsarium.py afl run runs/lodepng-fandango/afl --check
 ```
 
-Fanbase supplies the default specs for `png`, `zip`, `wav`, `svg`, and `mp3_id3v2` (`mp3` in Fanbase, including an ID3v2.3 tag). Parsarium supplies small local specs for MP4, PDF, HTTP/1.1 requests, ASCII PLY, and ASCII PNM P3. `--fanbase` selects a Fanbase variant such as `png-boundary`; `--spec` selects another local spec. All ten formats have a default generation route. The MP4 grammar includes one decodable 2×2 H.264 video frame and no audio track. Parsers may differ in which valid grammar variations they accept; replay records each outcome.
+Fanbase supplies the default specs for `png`, `zip`, `wav`, `svg`, `json`, `xml`, and `mp3_id3v2` (`mp3` in Fanbase, including an ID3v2.3 tag). Parsarium supplies local specs for MP4, PDF, HTTP/1.1 requests, ASCII PLY, ASCII PNM P3, and the plain-MP3 pilot. `--fanbase` selects a Fanbase variant such as `png-boundary`; `--spec` selects another local spec. All ten active formats and the JSON, XML, and plain-MP3 pilots have a default generation route. The MP4 grammar includes one decodable 2×2 H.264 video frame and no audio track. Parsers may differ in which valid grammar variations they accept; replay records each outcome.
 
 The separate plain-MP3 pilot uses a [local Layer III seed grammar](fuzzing/fandango/plain-mp3-decision.md). Fanbase's `-F mp3` grammar emits tags and Layer I/II frames, so it cannot be converted to this pilot by stripping tags.
 
