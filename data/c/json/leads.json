@@ -1,13 +1,47 @@
 [
   {
-    "name": "jsmn",
-    "status": "unresolved",
+    "name": "json-glib",
     "language": "C",
-    "conan_recipe": true,
-    "popcon_installed": 11,
-    "popcon_rank": 27685,
-    "reason": "Tokenizer only (jsmn_parse fills token spans, no value tree); popcon 11. Not built.",
-    "source": "https://github.com/zserge/jsmn"
+    "debian_source": "json-glib",
+    "popcon_installed": 163249,
+    "popcon_rank": 393,
+    "found_by": "Debian source-name search 'json'",
+    "source": "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.8.tar.xz",
+    "status": "unresolved",
+    "reason": "Debian popcon hit with a C JSON parsing API; not yet control-tested in this branch."
+  },
+  {
+    "name": "jq",
+    "language": "C",
+    "debian_source": "jq",
+    "popcon_installed": 141218,
+    "popcon_rank": 527,
+    "found_by": "supplementary exact Debian source-name lookup",
+    "source": "https://github.com/jqlang/jq/releases/tag/jq-1.8.2",
+    "status": "unresolved",
+    "reason": "Debian popcon hit with a C JSON parsing API; not yet control-tested in this branch."
+  },
+  {
+    "name": "libfastjson",
+    "language": "C",
+    "debian_source": "libfastjson",
+    "popcon_installed": 91226,
+    "popcon_rank": 857,
+    "found_by": "Debian source-name search 'json'",
+    "source": "https://download.rsyslog.com/libfastjson/libfastjson-1.2609.0.tar.gz",
+    "status": "unresolved",
+    "reason": "Debian popcon hit with a C JSON parsing API; not yet control-tested in this branch."
+  },
+  {
+    "name": "json-parser",
+    "language": "C",
+    "debian_source": "libjsonparser",
+    "popcon_installed": 844,
+    "popcon_rank": 7431,
+    "found_by": "Debian source-name search 'json'",
+    "source": "https://github.com/json-parser/json-parser/releases/tag/v1.1.0",
+    "status": "unresolved",
+    "reason": "Debian popcon hit with a C JSON parsing API; not yet control-tested in this branch."
   },
   {
     "name": "parson",
@@ -18,5 +52,39 @@
     "popcon_rank": null,
     "reason": "Technically verified as a candidate (local commit 271447a6): pinned 1.5.4 (MIT), json_parse_string on local text, both valid controls match the full nested value, 530 own parson.c lines covered, 34 stable AFL++ tuple differences between controls. Not selected: no Debian source package in the pinned popcon snapshot, so no value on this cell's primary metric; GitHub stars (1,481) are supplemental and PROTOCOL.md allows star fallback only in PLY cells.",
     "source": "https://github.com/kgabis/parson"
+  },
+  {
+    "name": "frozen",
+    "status": "unresolved_failed_control",
+    "language": "C",
+    "debian_source": "frozen",
+    "popcon_installed": 16,
+    "popcon_rank": 25605,
+    "found_by": "supplementary exact Debian source-name lookup",
+    "release_checked": "1.7 (archive SHA-256 0d6b1a9778fde9793c0d7aa22ca872cfc549bc69d78ef93d6df21102a08e5e3c, Apache-2.0); Debian ships 1.2.0",
+    "reason": "json_walk(bytes, length, callback) reports typed tokens (string, number, true, false, null, object and array start/end) with paths, so the format is interpreted; but values stay raw spans. Its documented json_unescape decodes the control's \\u00e9 to the single byte 0xE9 (probe: 'caf\\u00e9 \\\"quoted\\\"' -> 636166e9202271756f74656422) instead of UTF-8 C3 A9, and the source returns JSON_STRING_INVALID for any \\uXXXX above U+00FF. The nested-object control therefore cannot match the Python oracle; numbers are not converted by the library. Not built into a harness.",
+    "source": "https://github.com/cesanta/frozen"
+  },
+  {
+    "name": "jsmn",
+    "status": "not_eligible_tokenizer_only",
+    "language": "C",
+    "debian_source": "jsmn",
+    "popcon_installed": 11,
+    "popcon_rank": 27685,
+    "conan_recipe": true,
+    "reason": "Decided against PROTOCOL.md's eligibility rule for this cell's value gate: jsmn_parse fills token spans typed only as object, array, string or primitive with child counts. It does not distinguish numbers, booleans and null, does not decode string escapes, and builds no values; reproducing the control's nested value would require the harness to interpret JSON itself. The token structure is observable but is not the parsed value the other rows verify. Not built.",
+    "source": "https://github.com/zserge/jsmn"
+  },
+  {
+    "name": "liblaxjson",
+    "status": "unresolved",
+    "language": "C",
+    "debian_source": "liblaxjson",
+    "popcon_installed": 1,
+    "popcon_rank": 40395,
+    "found_by": "Debian source-name search 'json'",
+    "reason": "Lax (non-strict) SAX-style C JSON reader with 1 Debian installation; not control-tested within the six-path verification budget.",
+    "source": "https://github.com/andrewrk/liblaxjson"
   }
 ]
