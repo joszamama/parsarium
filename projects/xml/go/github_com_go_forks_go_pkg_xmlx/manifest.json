@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "go",
+  "package": "github.com/go-forks/go-pkg-xmlx",
+  "release": "v0.0.0-20151201012946-76f54ee73233",
+  "catalog_parser": "data/go/xml/parsers.json",
+  "source_lock": "projects/xml/go/github_com_go_forks_go_pkg_xmlx/source-lock.json",
+  "source_sha256": "8c48f5f6f488c7f79c8f22caedde724bcc77bcc97a9e2d8be5e39f956346fece",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzXML",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzXML",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of go-pkg-xmlx Document.LoadStream node-tree building (document.go, node.go) and the underlying encoding/xml Token tokenizer during valid-control replay",
+  "coverage_subject_prefix": "github.com/go-forks/go-pkg-xmlx/",
+  "underlying_coverage_subject_prefix": "encoding/xml/",
+  "afl_underlying_subject_prefix": "encoding/xml/"
+}

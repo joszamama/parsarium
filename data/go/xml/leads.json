@@ -111,5 +111,15 @@
     "imported_by": 28,
     "reason": "XML 1.0 lexer (tokenizer, not a tree or namespace resolver); not run.",
     "source": "https://pkg.go.dev/github.com/tdewolff/parse/v2/xml"
+  },
+  {
+    "name": "github.com/go-forks/go-pkg-xmlx",
+    "status": "promoted_to_verified",
+    "version_seen": "v0.0.0-20151201012946-76f54ee73233",
+    "license": "CC0-1.0",
+    "imported_by": 20,
+    "reason": "Pinned 76f54ee73233 pseudo-version Document.LoadBytes builds its own node tree (elements, text, comment, directive and PI nodes) from encoding/xml Decoder.Token and matches the expat oracle summaries on both valid controls. Its own AFL++ blocks repeat per control and differ by two (comment and processing-instruction nodes); encoding/xml blocks differ by 30, measured separately.",
+    "source": "https://pkg.go.dev/github.com/go-forks/go-pkg-xmlx",
+    "verified_evidence": "fuzzing/afl-native/xml/go/github_com_go_forks_go_pkg_xmlx/differential.json"
   }
 ]

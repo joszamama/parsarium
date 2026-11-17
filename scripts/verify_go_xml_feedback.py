@@ -14,7 +14,7 @@ from run_case import ROOT, project_for
 
 PROJECTS = ("github_com_beevik_etree", "github_com_antchfx_xmlquery", "github_com_clbanning_mxj",
             "github_com_beego_x2j", "github_com_vmware_govmomi_vim25_xml",
-            "github_com_mmcdole_goxpp", "stdlib_decoder")
+            "github_com_mmcdole_goxpp", "github_com_go_forks_go_pkg_xmlx", "stdlib_decoder")
 CONTROL = "controls/xml/catalog-ns.xml"
 DIFFERENTIAL = "controls/xml/order-default-ns.xml"
 REPORT = ROOT / "data/go/xml/afl-feedback.json"

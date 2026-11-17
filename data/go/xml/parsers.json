@@ -447,5 +447,58 @@
     },
     "project": "projects/xml/go/github_com_moovweb_gokogiri",
     "compatibility_patch": "projects/xml/go/github_com_moovweb_gokogiri/cgo-compat.patch"
+  },
+  {
+    "name": "github.com/go-forks/go-pkg-xmlx",
+    "module": "github.com/go-forks/go-pkg-xmlx",
+    "version": "v0.0.0-20151201012946-76f54ee73233",
+    "license": "CC0-1.0",
+    "input_api": "xmlx.New() then Document.LoadBytes([]byte, nil) (LoadStream over a local byte buffer); Document.Root node tree walk over Node.Type, Node.Name, Node.Attributes, Node.Value and Node.Children",
+    "documentation": "https://pkg.go.dev/github.com/go-forks/go-pkg-xmlx@v0.0.0-20151201012946-76f54ee73233#Document.LoadBytes",
+    "source": "https://github.com/go-forks/go-pkg-xmlx/tree/76f54ee73233",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE loaded into an xmlx node tree: expanded element and attribute names (encoding/xml Name.Space/Name.Local), maximum depth, namespace declarations and URIs (kept as xmlns attributes), decoded text and CDATA as text nodes, comment and processing-instruction nodes",
+    "family": "go-pkg-xmlx node tree over Go encoding/xml Decoder tokenizer",
+    "family_note": "document.go LoadStream creates encoding/xml.NewDecoder(io.Reader), sets Decoder.Entity to the document's entity map, and builds its own Node tree (element, text, comment, directive and processing-instruction nodes) from Decoder.Token. Lexing, entity and character-reference decoding, CDATA and namespace expansion are the standard encoding/xml code, so xmlx shares the Go encoding/xml tokenizer family with etree, xmlquery, mxj, x2j, goxpp and the unranked standard path; only the node tree and its comment/PI/directive handling are its own. github.com/go-forks/go-pkg-xmlx is a fork of the original jteeuwen/go-pkg-xmlx; github.com/mattn/go-pkg-xmlx (15 Imported by) is byte-identical to it in all three non-test source files and stays an excluded lead.",
+    "shared_families": [
+      "Go encoding/xml Decoder tokenizer"
+    ],
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 20,
+      "source": "https://pkg.go.dev/github.com/go-forks/go-pkg-xmlx?tab=importedby",
+      "captured_at_utc": "2026-11-17T03:16:02.492959+00:00",
+      "snapshot": "data/go/xml/registry-snapshot.json",
+      "caveat": "Package importers at any version, not installations; the module has no tagged release. The byte-identical mattn/go-pkg-xmlx fork (15) is not added."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "project": "projects/xml/go/github_com_go_forks_go_pkg_xmlx"
   }
 ]
