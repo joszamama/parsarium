@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T14:00:48.221407+00:00",
+  "candidate": "mpg123-decoder",
+  "release": "1.0.3",
+  "npm_downloads_30d": 2505430,
+  "license_package": "MIT (package.json; no license file in npm tarball)",
+  "underlying_family": "libmpg123; related to selected C mpg123 path, different pinned build",
+  "underlying_license": "LGPL-2.1-only (libmpg123)",
+  "source_repository_commit": "8f2428c1cd96b54dab74836c8471ff75fe35cbee",
+  "mpg123_submodule_commit": "08247b317163175e62035893af3ff9e71a5dfefd",
+  "source_tarball_sha256": "5207b35109ec884e7d47ab89b670bc86438399f681e1a6c26716003b3949cc5c",
+  "npm_integrity": "sha512-+fjxnWigodWJm3+4pndi+KUg9TBojgn31DPk85zEsim7C6s0X5Ztc/hQYdytXkwuGXH+aB0/aEkG40Emukv6oQ==",
+  "dependency_fixture": "projects/mp3_id3v2/javascript/audio_decode_mp3",
+  "dependency_lock_sha256": "c3cd79df817a10e6f3fa91b89b38d4f3c952f462b2620c3c38ed7d7d464dd3f5",
+  "image_id": "sha256:93de0dba0162fb16d75aa47a6be12c5d47ca4e3b0d8d21ceb54716c83ecf3d61",
+  "documented_api": "new MPEGDecoder({enableGapless:false}); await ready; decode(Uint8Array(local bytes))",
+  "documentation": "https://github.com/eshaz/wasm-audio-decoders/tree/8f2428c1cd96b54dab74836c8471ff75fe35cbee/src/mpg123-decoder",
+  "controls": [
+    {
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+      "oracle": {
+        "sample_rate": 44100,
+        "channels": 1,
+        "frames": 11,
+        "frame_bytes": 2298,
+        "samples_per_frame": 1152,
+        "bitrate": 64000
+      },
+      "verified_output": {
+        "sample_rate": 44100,
+        "samples_decoded": 12672,
+        "channel_lengths": [
+          12672,
+          12672
+        ],
+        "errors": [],
+        "wasm": {
+          "bytes": 99479,
+          "sha256": "f0e9e8848367320ccb757e4092f0d6809668cfe38f43139d47b447151d7dff6b",
+          "custom_sections": {
+            "name": 0,
+            ".debug_info": 0,
+            ".debug_line": 0,
+            "sourceMappingURL": 0
+          },
+          "exports": [
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t"
+          ]
+        }
+      }
+    },
+    {
+      "control": "controls/mp3/tone-22k-stereo.mp3",
+      "sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+      "oracle": {
+        "sample_rate": 22050,
+        "channels": 2,
+        "frames": 12,
+        "frame_bytes": 1254,
+        "samples_per_frame": 576,
+        "bitrate": 32000
+      },
+      "verified_output": {
+        "sample_rate": 22050,
+        "samples_decoded": 6912,
+        "channel_lengths": [
+          6912,
+          6912
+        ],
+        "errors": [],
+        "wasm": {
+          "bytes": 99479,
+          "sha256": "f0e9e8848367320ccb757e4092f0d6809668cfe38f43139d47b447151d7dff6b",
+          "custom_sections": {
+            "name": 0,
+            ".debug_info": 0,
+            ".debug_line": 0,
+            "sourceMappingURL": 0
+          },
+          "exports": [
+            "k",
+            "l",
+            "m",
+            "n",
+            "o",
+            "p",
+            "q",
+            "r",
+            "s",
+            "t"
+          ]
+        }
+      }
+    }
+  ],
+  "verified_scope": "sample rate and decoded samples per output channel on both valid untagged controls; decoder returns two PCM arrays for mono input, so channel count is not claimed",
+  "wasm_module": {
+    "bytes": 99479,
+    "sha256": "f0e9e8848367320ccb757e4092f0d6809668cfe38f43139d47b447151d7dff6b",
+    "custom_sections": {
+      "name": 0,
+      ".debug_info": 0,
+      ".debug_line": 0,
+      "sourceMappingURL": 0
+    },
+    "exports": [
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t"
+    ]
+  },
+  "node_v8_profile_package_scripts": [
+    "mpg123-decoder/index.js",
+    "mpg123-decoder/src/EmscriptenWasm.js",
+    "mpg123-decoder/src/MPEGDecoder.js",
+    "mpg123-decoder/src/MPEGDecoderWebWorker.js"
+  ],
+  "node_v8_profile_wasm_scripts": [],
+  "parser_source_line_coverage": null,
+  "afl_parser_feedback": "blocked",
+  "blocker": "The npm release embeds a compressed libmpg123 WASM module. The extracted pinned binary has no name, DWARF debug_info/debug_line, or sourceMappingURL custom sections; Node V8 coverage reports only JavaScript package wrappers and no WASM source scripts. Wrapper ranges cannot stand in for libmpg123 parser coverage. Source-attributed instrumentation would require rebuilding this package's C/WASM decoder with a pinned Emscripten toolchain and debug/coverage mapping, yielding a different binary whose equivalence to the shipped artifact is unverified.",
+  "selection": "verified_control_feedback_blocked_unselected",
+  "experiments": "two existing valid controls only; no malformed inputs or fuzz campaign"
+}
