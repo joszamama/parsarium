@@ -315,6 +315,111 @@
     }
   },
   {
+    "name": "github.com/blastrain/vitess-sqlparser/sqlparser",
+    "version": "v0.0.0-20201030050434-a139afbb1aba",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30, Apache License 2.0)",
+    "input_api": "sqlparser.Parse(local SQL text) -> Statement",
+    "documentation": "https://pkg.go.dev/github.com/blastrain/vitess-sqlparser@v0.0.0-20201030050434-a139afbb1aba/sqlparser#Parse",
+    "source": "https://proxy.golang.org/github.com/blastrain/vitess-sqlparser/@v/v0.0.0-20201030050434-a139afbb1aba.zip",
+    "source_sha256": "7511319ea56fb67d02f532e797200075a85660de4b5944de65c7eeb9c574f801",
+    "go_module_sum": "h1:hBK2BWzm0OzYZrZy9yzvZZw59C5Do4/miZ8FhEwd5P8=",
+    "dependencies": [],
+    "dialect": "MySQL (vitess-derived grammar, no dialect option)",
+    "scope": "The whole local SQL text parsed by blastrain sqlparser.Parse as one statement; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. DDL (TiDB fallback) and other MySQL syntax are untested.",
+    "family": "vitess MySQL grammar (fork, goyacc sql.y) and tokenizer; TiDB fallback for DDL only",
+    "family_note": "sqlparser.Parse runs the package's own tokenizer (token.go) and the goyacc parser generated from sql.y into sql.go; only DDL, SHOW and other-admin results are re-parsed with the bundled TiDB parser (tidbparser), which the SELECT and INSERT controls do not reach. Overlap of its sqlparser/ non-test .go/.y files: with xwb1989/sqlparser 7 same-named files, none byte-identical, 6,642 of 9,084 lines (73.1%) in matching blocks; with vitess v0.24.5 sqlparser 7 same-named files, none byte-identical, 2,459 lines (27.1%). It is a separate vitess-family package path, not a byte-identical copy. Parse takes the whole text and returns one Statement (no splitter; the grammar accepts the trailing semicolon). The adapter reads *Select (SelectExprs, From join tree, Where, GroupBy, OrderBy) and *Insert (Table, Columns, Values) and walks the tree with sqlparser.Walk for AliasedTableExpr base tables, FuncExpr names and SQLVal values. The module has no tagged releases; the pin is the proxy pseudo-version of commit a139afbb1aba.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 88,
+      "source": "https://pkg.go.dev/github.com/blastrain/vitess-sqlparser/sqlparser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_blastrain_vitess_sqlparser_sqlparser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "github.com/AfterShip/clickhouse-sql-parser/parser",
     "version": "v0.5.7",
     "license": "MIT",

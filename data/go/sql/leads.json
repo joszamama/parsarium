@@ -82,13 +82,14 @@
     },
     {
       "name": "github.com/blastrain/vitess-sqlparser/sqlparser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 88,
       "metric_error": null,
       "latest_release_observed": "v0.0.0-...-a139afb",
       "family": "vitess MySQL grammar (fork)",
       "documented_api_lead": "sqlparser.Parse",
-      "reason": "vitess sqlparser fork with a TiDB-parser fallback; shared vitess family."
+      "reason": "Fork of an older vitess sqlparser with a bundled TiDB parser used only for DDL/SHOW/admin statements (untagged; pinned to pseudo-version a139afbb1aba). Not byte-identical: 0 of 7 same-named sqlparser files identical to xwb1989/sqlparser (73.1% of 9,084 lines matched) or vitess v0.24.5 (27.1%). sqlparser.Parse gives the oracle summary on both controls; selected as a vitess-family path.",
+      "selected_release": "v0.0.0-20201030050434-a139afbb1aba"
     },
     {
       "name": "github.com/pganalyze/pg_query_go/v6",
