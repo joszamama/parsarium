@@ -3,14 +3,6 @@
   "metric": "crates.io recent downloads (90 days), as returned by the search API at capture time",
   "unresolved_leads": [
     {
-      "name": "xmlparser",
-      "version": "0.13.6",
-      "recent_downloads_90d": 52247004,
-      "status": "unresolved",
-      "reason": "Pull-based, zero-allocation XML 1.0 tokenizer; Tokenizer::from(&str) on the controls has not been run in this pilot. It does not resolve namespaces itself.",
-      "source": "https://crates.io/crates/xmlparser"
-    },
-    {
       "name": "xml5ever",
       "version": "0.40.0",
       "recent_downloads_90d": 14338073,
@@ -177,6 +169,17 @@
       "status": "selected",
       "record": "data/rust/xml/parsers.json",
       "receipt": "projects/xml/rust/xml/verification.json"
+    },
+    {
+      "name": "xmlparser",
+      "version": "0.13.6",
+      "recent_downloads_90d": 52247004,
+      "status": "selected",
+      "reason": "Pull-based, zero-allocation XML 1.0 tokenizer; Tokenizer::from(&str) on the controls has not been run in this pilot. It does not resolve namespaces itself.",
+      "source": "https://crates.io/crates/xmlparser",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/xmlparser/verification.json",
+      "scope_note": "Tokenizer::from(&str) yields XML tokens. Adapter resolves namespaces, decodes references and validates nesting for two valid controls."
     }
   ]
 }

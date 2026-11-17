@@ -130,5 +130,49 @@
       "source": "data/rust/xml/registry-snapshot.json"
     },
     "project": "projects/xml/rust/xml/verification.json"
+  },
+  {
+    "name": "xmlparser",
+    "version": "0.13.6",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "xmlparser::Tokenizer::from(&str) -> Iterator<Item=Result<Token, Error>>; Token::{ElementStart, Attribute, ElementEnd, Text, Cdata}",
+    "documentation": "https://docs.rs/xmlparser/0.13.6/xmlparser/struct.Tokenizer.html",
+    "source": "https://static.crates.io/crates/xmlparser/xmlparser-0.13.6.crate",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE tokenized from local text: adapter resolves namespace prefixes and declarations, builds element depth and expanded names, decodes predefined and numeric character references, and reports ordered attributes and text. Tokenizer itself does not resolve namespaces or validate tree structure.",
+    "family": "xmlparser 0.13.6 own low-level XML tokenizer; distinct pinned source from roxmltree 0.21.2 internal tokenizer, with documented historical relationship",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 52247004,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/xmlparser/verification.json"
   }
 ]
