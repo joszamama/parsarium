@@ -36,6 +36,9 @@
     "frame_bytes": 1254,
     "decoded_frames": 6912
   },
+  "afl_instrumented_crates": [
+    "symphonia_bundle_mp3"
+  ],
   "api": "symphonia::default::get_probe().probe(&Hint::new(), MediaSourceStream::new(Box::new(Cursor::new(bytes)), ..), FormatOptions::default(), MetadataOptions::default()); FormatReader::next_packet(); symphonia::default::get_codecs().make_audio_decoder(params, ..).decode(&packet)",
   "harness": "src/lib.rs",
   "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",

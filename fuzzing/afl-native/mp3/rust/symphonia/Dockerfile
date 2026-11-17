@@ -7,12 +7,15 @@ WORKDIR /work
 COPY fuzzing/afl-native/mp3/rust/symphonia/Cargo.toml fuzzing/afl-native/mp3/rust/symphonia/Cargo.lock /work/
 COPY projects/mp3/rust/symphonia/src /work/src
 COPY fuzzing/afl-native/mp3/rust/symphonia/afl_fuzzer.rs /work/src/bin/afl_fuzzer.rs
+COPY fuzzing/afl-native/mp3/rust/symphonia/rustc-scope.sh fuzzing/afl-native/mp3/rust/symphonia/sancov_scope.py /work/
 RUN cargo fetch --locked --target aarch64-unknown-linux-gnu
 RUN cargo afl config --build --force \
-    && cargo afl build --locked --target aarch64-unknown-linux-gnu --release --bin afl_fuzzer \
-    && cp target/aarch64-unknown-linux-gnu/release/afl_fuzzer /work/afl_fuzzer
+    && AFL_SCOPE_CRATES='symphonia_bundle_mp3' RUSTC_WRAPPER=/work/rustc-scope.sh cargo afl build --locked --target aarch64-unknown-linux-gnu --release --bin afl_fuzzer \
+    && cp target/aarch64-unknown-linux-gnu/release/afl_fuzzer /work/afl_fuzzer \
+    && python3 /work/sancov_scope.py 'symphonia_bundle_mp3' target/aarch64-unknown-linux-gnu/release/deps /work/afl_fuzzer > /work/sancov-scope.json
 FROM ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
 RUN apt-get update -qq && apt-get install -y --no-install-recommends afl++=4.33c-1.1ubuntu1 libstdc++6 \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=build /work/afl_fuzzer /work/afl_fuzzer
+COPY --from=build /work/sancov-scope.json /work/sancov-scope.log /work/
 ENTRYPOINT ["/work/afl_fuzzer"]

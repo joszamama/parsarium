@@ -5,7 +5,8 @@ import json
 import tomllib
 
 from build_afl_native import OVERLAYS, derived_dockerfile
-from build_afl_rust import AFL_RUST_RELEASE, dockerfile as rust_dockerfile, overlay_manifest, overlay_target
+from build_afl_rust import (AFL_RUST_RELEASE, SCOPE_CHECK, SCOPE_WRAPPER, dockerfile as rust_dockerfile,
+                            overlay_manifest, overlay_target)
 from audit_projects import (fltk_native_feedback_verified, fully_runnable,
                             lwjgl_assimp_native_feedback_verified,
                             mlt_mp4_feedback_verified,
@@ -196,6 +197,9 @@ def main() -> None:
             expected = {"Cargo.toml": overlay_manifest(project),
                         "afl_fuzzer.rs": overlay_target(project),
                         "Dockerfile": rust_dockerfile(relative, manifest, receipt["afl_package"])}
+            if manifest.get("afl_instrumented_crates"):
+                expected.update({"rustc-scope.sh": SCOPE_WRAPPER, "sancov_scope.py": SCOPE_CHECK})
+                assert receipt["sancov_scope"]["instrumented_crates"] == sorted(manifest["afl_instrumented_crates"])
             for name, text in expected.items():
                 assert (overlay / name).read_text() == text
         lock = tomllib.loads((overlay / "Cargo.lock").read_text())

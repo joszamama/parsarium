@@ -50,7 +50,8 @@
       "seeds": [
         "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
         "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328"
-      ]
+      ],
+      "result": "Ready: 2 seeds; no campaign started (re-run on the scoped overlay, AFL_MAP_SIZE=5537)"
     },
     {
       "command": "python3 parsarium.py afl run runs/mp3-symphonia_bundle_mp3-afl --check",
@@ -65,7 +66,7 @@
     {
       "command": "cd scripts && python3 audit_fuzzing.py",
       "pass": true,
-      "result": "existing 802 projects current; the mp3 cell is not yet in the aggregated smoke reports"
+      "result": "existing 802 projects current; the mp3 cell is not yet in the aggregated smoke reports; re-run after the scoped overlay (audit now compares rustc-scope.sh and sancov_scope.py to the generator): same"
     },
     {
       "command": "python3 scripts/audit_projects.py --check",
@@ -87,7 +88,8 @@
       },
       "facade_own_source_lines_covered": 23,
       "underlying_symphonia_bundle_mp3_lines_covered": 1528,
-      "receipt_sha256": "56af650c5b7f3dde9559f405615b47efa07a9379d1710d0c66093152fd6bc9ba"
+      "receipt_sha256": "1c6bcccfec2d8c90146266ddf25e3854a818d10e3b978b02921621a6cca26d8a",
+      "note": "rebuilt after adding afl_instrumented_crates to the manifest; same image, output and coverage"
     },
     {
       "command": "5x replay of each control in parsarium/mp3-rust-symphonia:local",
@@ -108,20 +110,40 @@
     },
     {
       "command": "python3 fuzzing/afl-native/mp3/rust/symphonia/build.py",
-      "pass": true,
+      "pass": false,
       "image_id": "sha256:3104024d6bdf1940854fc0bef699eed58e7b8c95462b0661902b4e311dfdd682",
-      "feedback_edges": 1881,
-      "variant_feedback_edges": 1925,
+      "result": "superseded: every crate instrumented; separate processes on the same control gave 1881-1887 tuples (control) and 1925-1931 (second control), so the earlier 1881/1925 figures were intersections, not a deterministic map"
+    },
+    {
+      "command": "symbolize varying guards in the superseded afl_fuzzer (llvm-objdump call-site to __sancov_guards slot map; AFL++ runtime numbers guards from 5)",
+      "pass": true,
+      "result": "varying tuple IDs 7544-7561 = guard slots 7539-7556, all inside symphonia_core InnerCodecRegistry<AudioCodecId, RegisteredAudioDecoder>::register_at_tier monomorphized in the symphonia facade crate (registry.rs:164, three std HashMap::insert calls with per-process random SipHash keys)"
+    },
+    {
+      "command": "python3 fuzzing/afl-native/mp3/rust/symphonia/build.py",
+      "pass": true,
+      "image_id": "sha256:15c782d738c3a56bbb6d8353d45c863f9cb35b4374da8bf6fc39e7397c37e2b2",
+      "instrumented_crates": [
+        "symphonia_bundle_mp3"
+      ],
+      "binary_guards": 5532,
+      "feedback_edges": 1220,
+      "variant_feedback_edges": 1264,
       "edges_only_in_control": 116,
       "edges_only_in_variant": 160,
-      "all_repeats_identical": false,
-      "result": "stable intersections over 5 repeats; up to 6 edges per control vary between repeats (see unstable_edge_note in the overlay receipt); the 116/160 stable control-only edges equal the direct symphonia_bundle_mp3 overlay",
-      "receipt_sha256": "ba75bb3cdd22aabfcd2a48b370ed37d3b59c15a874be7b77d0d5d152c5f39f0d"
+      "all_repeats_identical": true,
+      "result": "RUSTC_WRAPPER keeps cargo-afl sancov flags only for symphonia_bundle_mp3; post-build scan finds __sancov_guards in no other rlib. The target still runs the facade probe and codec registry. 5 separate afl-showmap processes per control give byte-identical maps (sha256 04fa6c85... and 57a8c3cf...)",
+      "receipt_sha256": "d02ac6437bff3a9c9b7214cbd3ff2fa75cad75a9d0d6672e82aaa44361efcacd"
+    },
+    {
+      "command": "10 further separate afl-showmap processes per control, default and -r (raw counts)",
+      "pass": true,
+      "result": "1 distinct map per control and mode on sha256:15c782d738c3...; 1220 vs 1264 tuples, 116 control-only and 160 second-control-only; bucketed maps match the receipt hashes; raw maps sha256 5d05f0eb... and 6fa98bb8..."
     },
     {
       "command": "python3 parsarium.py afl prepare mp3 rust symphonia runs/mp3-symphonia-afl --seed controls/mp3/tone-22k-stereo.mp3 && python3 parsarium.py afl run runs/mp3-symphonia-afl --check",
       "pass": true,
-      "result": "Ready: 2 seeds; no campaign started"
+      "result": "Ready: 2 seeds; no campaign started (re-run on the scoped overlay, AFL_MAP_SIZE=5537)"
     },
     {
       "command": "cd scripts && python3 refresh_smoke_batch.py mp3/rust/symphonia",
@@ -131,17 +153,17 @@
     {
       "command": "python3 scripts/audit_projects.py --check (after --write)",
       "pass": true,
-      "result": "80/80 cells runnable; 770/770 active parser paths verified; 24 pilot cells incomplete"
+      "result": "80/80 cells runnable; 770/770 active parser paths verified; 24 pilot cells incomplete; re-run --check after the scoped overlay: same"
     },
     {
       "command": "cd scripts && python3 audit_fuzzing.py",
       "pass": true,
-      "result": "927/927 generic one-input projects; 927/927 AFL++ overlays current"
+      "result": "927/927 generic one-input projects; 927/927 AFL++ overlays current; re-run after the scoped overlay (audit now compares rustc-scope.sh and sancov_scope.py to the generator): same"
     },
     {
       "command": "python3 -m unittest discover -s tests",
       "pass": true,
-      "result": "169 tests OK"
+      "result": "173 tests OK (adds tests/test_rust_mp3_symphonia_pilot.py: wrapper flag stripping, generated overlay files, scope and exact-repeat receipt, smoke rows)"
     }
   ],
   "not_run": [
@@ -149,5 +171,5 @@
     "malformed-input or vulnerability experiments",
     "aggregate catalog/website regeneration (build_readmes, audit_projects --write, smoke reports)"
   ],
-  "symphonia_checked_at_utc": "2026-11-17T12:35:28.203157+00:00"
+  "symphonia_checked_at_utc": "2026-11-17T12:54:52.237279+00:00"
 }
