@@ -22,7 +22,8 @@ class JavaScriptXmlPilotTest(unittest.TestCase):
         selected = {parser["name"] for parser in parsers}
         self.assertTrue(selected.isdisjoint(
             {lead["name"] for lead in leads if lead["status"] == "unresolved"}))
-        self.assertTrue(all(lead["status"] in {"unresolved", "promoted_to_verified"} for lead in leads))
+        self.assertTrue(all(lead["status"] in {"unresolved", "promoted_to_verified", "excluded"}
+                            for lead in leads))
         self.assertEqual({lead["name"] for lead in leads if lead["status"] == "promoted_to_verified"},
                          {"jsdom", "fast-xml-parser", "@xmldom/xmldom", "xml2js", "xml-js"})
         cell = read(BASE / "cell.json")

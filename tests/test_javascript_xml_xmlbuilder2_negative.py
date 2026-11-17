@@ -18,7 +18,7 @@ class Xmlbuilder2NegativeLeadTest(unittest.TestCase):
         selected = {item["name"] for item in read(BASE / "parsers.json")}
         evidence = read(ROOT / lead["negative_evidence"])
         snapshot = read(BASE / "registry-snapshot.json")
-        self.assertEqual(lead["status"], "unresolved")
+        self.assertEqual(lead["status"], "excluded")
         self.assertNotIn("xmlbuilder2", selected)
         self.assertEqual(lead["npm_downloads_30d"], snapshot["downloads"]["xmlbuilder2"]["value"])
         self.assertEqual(evidence["candidate_npm_integrity"],
