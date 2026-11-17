@@ -93,5 +93,44 @@
    "pinned_source_sha256_checked": "9b5ff5c7e4468f1401efb294369a78a8ce89b41c704abecc9d9954ccae674b2c"
   }
  ],
- "excluded": []
+ "excluded": [],
+ "search_recheck": {
+  "checked_at_utc": "2026-11-17T22:55:46Z",
+  "debian_source_packages": {
+   "url": "https://popcon.debian.org/sourcemax/by_inst.gz",
+   "snapshot_sha256": "7a460f12225a77951379ff4e02d58004166294ba839d2af7ab6f178ea7f22f53",
+   "query": "case-insensitive substring 'toml' in source-package names",
+   "hits": 40,
+   "c_or_cpp_libraries": [
+    "tomlplusplus (3,536; C++)",
+    "toml11 (15; C++)",
+    "cpptoml (5; C++)"
+   ],
+   "other_hits": "Python (python-tomlkit, python-tomli, python-toml, python-tomli-w, python-dom-toml), R (r-cran-rcpptoml: an R package that bundles toml++, not a C++ library API), Perl, Ruby, Rust, Go, Haskell, GAP (gap-tomlib) and Fortran (fortran-toml: toml-f) packages"
+  },
+  "debian_binary_packages": {
+   "url": "https://popcon.debian.org/by_inst.gz",
+   "snapshot_sha256": "5db455a219c8c723423f7c2457b615826135ed01729ad2adff1a23f2d28cffb0",
+   "query": "case-insensitive substring 'toml' in binary-package names",
+   "hits": 57,
+   "c_or_cpp_libraries": [
+    "libtomlplusplus3t64 (3,536)",
+    "libtomlplusplus-dev (315)",
+    "libtomlplusplus3 (38, not in sid)",
+    "libtoml11-dev (15)",
+    "libcpptoml-dev (5)",
+    "libtoml++-dev (3, not in sid)"
+   ]
+  },
+  "conan_center_recipes": {
+   "url": "https://github.com/conan-io/conan-center-index/tree/master/recipes",
+   "query": "case-insensitive substring 'toml' in the 1,981 recipe directory names",
+   "hits": [
+    "cpptoml",
+    "toml11",
+    "tomlplusplus"
+   ]
+  },
+  "finding": "No C TOML library is packaged in Debian or listed in Conan Center: the only C/C++ hits are the three selected C++ libraries. tomlc17 and toml-c therefore stay unresolved_no_primary_metric (GitHub stars are a fallback only in PLY cells), and the C cell stays at 0 selected."
+ }
 }
