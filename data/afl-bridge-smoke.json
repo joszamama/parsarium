@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T17:21:13.588112+00:00",
-  "projects_total": 501,
-  "projects_verified": 501,
+  "checked_at_utc": "2026-11-17T19:05:44.175121+00:00",
+  "projects_total": 508,
+  "projects_verified": 508,
   "results": [
     {
       "schema_version": 1,
@@ -7315,6 +7315,171 @@
       "afl_package": "4.33c-1.1ubuntu1",
       "overlay_file_sha256": {
         "Dockerfile": "14a865ee385a9f76c0af0ea88a84f1fcea2d8cef0eff68ea4ea9606500566106",
+        "afl_trace": "cc3dc001b6ca76e67bb1a3a8144c7a689556d6491eb34ea53758d9f421a7ebd8"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "php_trace.php": "23e82e01ddc08e6b188c5de7910c33363de2ab0a94688e638b21eca346bf5a03"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/go/vitess_io_vitess_go_vt_sqlparser",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "base_project_receipt_sha256": "2c5a1114d457cc02dcd525c5b568ed3848928fb295a01b6932e1fa89ad55474b",
+      "base_image_id": "sha256:f3aa8fee0097c3758cb659404b0a300b38c34da1bde3c30e3b612bc8f0b570d1",
+      "image_id": "sha256:bee2f668f9550b1355db6f940a787fb5aa47723d24fbaaae97aac5ed8e8ee027",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 627,
+      "feedback_edges": 646,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "d67a5fa8605fb48580e49efea8a9e1b18750861eb3f333ea5c7c48688538deb6",
+        "afl_trace": "238f0d7ec8d8676b284d9d9bf6e1f9bac23552b6f413f89cd80f957ff60cfe31"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "go_trace.py": "4e3e7f79657ee8de9ec6240dbc98074a09dc325b29f22747ed18564aae9848f5"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/java/druid",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "158e723babb523f79e3c45f39b2565da09ccd6180a216737fc99a406c98b07cf",
+      "base_image_id": "sha256:f89b4417006c6edc08d4349ca79155a72d7118b8ecce3d0568cea09ad1b7eb22",
+      "image_id": "sha256:8bb2b52b4c700b7926753037726bd6c9eb742a03ef105065b1851018b6963330",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 2644,
+      "feedback_edges": 2589,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "d6708d9947da07ad24abe2b9cc009f189c2ae90c1feccfebc8cf3b6c29e16489",
+        "afl_trace": "fe208fa37d8ee184360cf866aa4ebc41fcb241dfdc40b05e134220864306abeb"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "JavaCase.java": "1b90b2fe2457060d7e6794a10a29487130bcacdd312f0ceb444b98bab7f21ad7",
+        "java_trace.py": "4c45d741249b649dcaba4c4cec2fbe378b445aad43c513c5d87811f16e2b9c1b"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/java/jooq",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "ac1f8b2e43efc6c1ad76775fc00e5b2a9b6b7589935e73e97e897fd5037b33e2",
+      "base_image_id": "sha256:bfa8ca2655952ff2b91491247eddab94fcd4953effb40591995635055040a8a6",
+      "image_id": "sha256:2a0017c226d4997b62d2608ae5967500140154e9a72067d260b618d04f524e92",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 5802,
+      "feedback_edges": 5584,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "05abbae91cb713ac41971822f2d8d1978370b5a09ddca4648357edfd97bd1432",
+        "afl_trace": "fe208fa37d8ee184360cf866aa4ebc41fcb241dfdc40b05e134220864306abeb"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "JavaCase.java": "1b90b2fe2457060d7e6794a10a29487130bcacdd312f0ceb444b98bab7f21ad7",
+        "java_trace.py": "4c45d741249b649dcaba4c4cec2fbe378b445aad43c513c5d87811f16e2b9c1b"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/javascript/node_sql_parser",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "base_project_receipt_sha256": "2a085efd14bfd171c751fa1342dbd71b95caaa2b945c5403a1ac6ed5e9dab0ba",
+      "base_image_id": "sha256:0943cc0a9566bc185e9db19e2638b3a899f7757aaa5aa7f20da02975fc869252",
+      "image_id": "sha256:34ee51d30d3a6a5de4289f4a91b8a239a43d42992606c5d33a89d1f964be10a4",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 574,
+      "feedback_edges": 592,
+      "afl_map_size": 65536,
+      "afl_package": "4.21c-5",
+      "overlay_file_sha256": {
+        "Dockerfile": "e074fc92a04c6f3e54095425f32949aaebe51607f32535d5167e3c39b82ab0cc",
+        "afl_trace": "ee21fec7be213714494ca5891e2bdc08d3780a7ae9e56f23bbea4059ee23c78b"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "javascript_child.js": "fed6297bd3d5030ec2af5789c75a667479c0def029fe3c004bfe604c6f1627a3",
+        "javascript_trace.js": "f4c505feb88ff2a90df694413f0d82ae535358840bb6062519a7cfcb661f9201"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/javascript/pgsql_ast_parser",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "base_project_receipt_sha256": "c60f38b6bd707c5008a3a2acd4cadfff299dfe0210af04d27eb8fdd542cc3c57",
+      "base_image_id": "sha256:81f3e5244f9431fbe04f49d1f867f345cf7a4cbe1cc05e3afff6abc9e2206c46",
+      "image_id": "sha256:a670d350ed8b03c5b492b1f53fc24b612c003d5a89d4e767e75f50c5592f0920",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 226,
+      "feedback_edges": 246,
+      "afl_map_size": 65536,
+      "afl_package": "4.21c-5",
+      "overlay_file_sha256": {
+        "Dockerfile": "743229d4a0bbf45d7982c898166851b6b7772b66ea6d56d836f38ed251f0c13b",
+        "afl_trace": "ee21fec7be213714494ca5891e2bdc08d3780a7ae9e56f23bbea4059ee23c78b"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "javascript_child.js": "fed6297bd3d5030ec2af5789c75a667479c0def029fe3c004bfe604c6f1627a3",
+        "javascript_trace.js": "f4c505feb88ff2a90df694413f0d82ae535358840bb6062519a7cfcb661f9201"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/php/greenlion_php_sql_parser",
+      "pass": true,
+      "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "ae1eb8f79674e9ea7a9be49f09376b70544fef6a4eb626b9becabe8a0544bd0a",
+      "base_image_id": "sha256:5bfd19959a886e32d018a993ead678c1a90aed47fc1abb9bb31efd03f63613ab",
+      "image_id": "sha256:4335fedfbf6c521fb697a919d5552525b38deb1718ab4cd1209b9bdb7fa1bc9d",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 885,
+      "feedback_edges": 901,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "b6a3c23775dd23285438e0eabbd82bef4c441ba6fd5f20b4c4871d1e9172eee1",
+        "afl_trace": "cc3dc001b6ca76e67bb1a3a8144c7a689556d6491eb34ea53758d9f421a7ebd8"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "php_trace.php": "23e82e01ddc08e6b188c5de7910c33363de2ab0a94688e638b21eca346bf5a03"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/php/phpmyadmin_sql_parser",
+      "pass": true,
+      "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "8cdf25d56f0a32025323647494106b8e76d29cc89dded8dbd87bea73b48750e2",
+      "base_image_id": "sha256:b8a52a7d5e367ea0c15eed9108e6c3920340fac7fb3f81bf708515fba054e74d",
+      "image_id": "sha256:e211a5c02943b5ace9e4159b4549ec465003cc2121f89853853621c292541bcc",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 794,
+      "feedback_edges": 805,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "1340c020cdf42ba98e1818fee1a04cbd557118973c14434b8feb68e5bf44ae58",
         "afl_trace": "cc3dc001b6ca76e67bb1a3a8144c7a689556d6491eb34ea53758d9f421a7ebd8"
       },
       "bridge_file_sha256": {
