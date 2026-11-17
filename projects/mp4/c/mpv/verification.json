@@ -1,0 +1,39 @@
+{
+  "kind": "third_party",
+  "api": "mpv_create; mpv_initialize; mpv_command(loadfile, local MP4 path); mpv_wait_event(MPV_EVENT_FILE_LOADED); mpv_get_property(file-format, metadata/by-key/title, track-list/N/type and codec)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T02:39:51.007545+00:00",
+  "manifest": "projects/mp4/c/mpv/manifest.json",
+  "image_id": "sha256:4676b4f4480c90922c4ea3d04c540c9ad106c1c2d50230f074465b17661a5925",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "project_file_sha256": {
+    "Dockerfile": "706f2894ddb0f1d6658b9eaa1d15bd0e3d44e42f3eb53f0ce07a365f38fb28cf",
+    "build.sh": "2709f28db34851df34f639a19eb07d2bdab98ad8e3979f87a70825e89b8c223f",
+    "harness.c": "0a895ad37288f918f6d4234d5ac0f0001a7afc8efaf38cb0b81b89cb9b6b7f50",
+    "harness.h": "f529028a27d9fabf4a394c53ff70dde2d0ffbccdbe9a0c43b889722a1c125db5",
+    "manifest.json": "bdc79facf47e7ed9149ee443e30b8bc14c72f868a66191bcb4838198976261af",
+    "replay.c": "fb8e0bb7bf2b935439a38083d2e264222a1a18238fea512f52ab1f5660ba50b0",
+    "run-control.sh": "a318f654b9ea28632dc48f00bd50a63a1bda78d68fdf4fdf816b2c005bcaae17"
+  },
+  "output": {
+    "container": "mov,mp4,m4a,3gp,3g2,mj2",
+    "title": "Parsarium",
+    "video_codec": "h264",
+    "audio_codec": "aac"
+  },
+  "parser_source_files": 24,
+  "parser_source_lines_covered": 1581,
+  "format_specific_source_lines_covered": 414,
+  "underlying_source_files": 53,
+  "underlying_source_lines_covered": 2482,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/mp4/c/mpv/target/coverage/coverage.json",
+  "pass": true
+}
