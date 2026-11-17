@@ -21,6 +21,21 @@ npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snap
 
 | Lead | Status | Metric | Parser family |
 | --- | --- | ---: | --- |
-| yamljs | unresolved | 7,979,436 | yamljs |
+| confbox | excluded_duplicate_fork | 414,804,968 | js-yaml 5.x (bundled minified copy) |
+| @zkochan/js-yaml | excluded_duplicate_fork | 48,760,977 | js-yaml 4.x (fork) |
+| read-yaml-file | excluded_shared_family | 37,443,521 | js-yaml 4.x via dependency |
+| @lezer/yaml | excluded | 33,124,666 | Lezer LR grammar (CodeMirror) |
+| @stoplight/yaml-ast-parser | excluded_duplicate_fork | 29,270,632 | yaml-ast-parser (js-yaml 3.x fork) |
+| yaml-language-server | excluded_no_library_api | 23,630,785 | eemeli/yaml |
+| front-matter | excluded | 16,570,941 | js-yaml |
+| load-yaml-file | excluded_shared_family | 12,549,644 | js-yaml 4.x via dependency |
+| yamljs | excluded_control_failed | 7,979,436 | yamljs |
+| @swagger-api/apidom-parser-adapter-yaml-1-2 | excluded_control_failed | 5,193,122 | tree-sitter-yaml (web-tree-sitter) + ApiDOM YAML AST |
+| tap-yaml | excluded_shared_family | 2,331,374 | eemeli/yaml |
+| yamlparser | excluded_control_failed | 1,212,623 | yamlparser |
+| @sap-ux/yaml | excluded_shared_family | 251,693 | eemeli/yaml |
+| @speclynx/apidom-parser-adapter-yaml-1-2 | excluded_control_failed | 224,531 | tree-sitter-yaml (web-tree-sitter) + ApiDOM YAML AST |
+| yaml-unist-parser | excluded | 176,202 | eemeli/yaml |
+| yawn-yaml | excluded_shared_family | 163,156 | eemeli/yaml |
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).

@@ -1,0 +1,629 @@
+{
+  "checked_at": "2026-11-17",
+  "environment": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (Node 26.10.0, linux/arm64); packages installed from the npm registry at the listed versions; exploratory probes, not pinned harnesses",
+  "controls": [
+    "controls/yaml/catalog.yaml",
+    "controls/yaml/order.yaml"
+  ],
+  "oracle": "hand-written typed trees in controls/yaml/check_controls.py",
+  "mapping": "native values mapped with the same typing rule as the selected JavaScript adapters (finite integral number -> int)",
+  "probes": [
+    {
+      "package": "confbox",
+      "version": "0.3.2",
+      "call": "parseYAML(text)",
+      "controls": {
+        "catalog.yaml": {
+          "matches_oracle": true
+        },
+        "order.yaml": {
+          "matches_oracle": true
+        }
+      }
+    },
+    {
+      "package": "yamljs",
+      "version": "0.3.0",
+      "call": "YAML.parse(text)",
+      "controls": {
+        "catalog.yaml": {
+          "matches_oracle": false,
+          "mismatches": [
+            {
+              "path": "/title",
+              "observed": [
+                "str",
+                "CafÃ© \"quoted\"\tend"
+              ],
+              "expected": [
+                "str",
+                "Café \"quoted\"\tend"
+              ]
+            }
+          ]
+        },
+        "order.yaml": {
+          "matches_oracle": true
+        }
+      }
+    },
+    {
+      "package": "@swagger-api/apidom-parser-adapter-yaml-1-2",
+      "version": "1.14.0",
+      "call": "await parse(text, {sourceMap: false}) then apidom-core 1.14.0 toValue(result)",
+      "controls": {
+        "catalog.yaml": {
+          "matches_oracle": false,
+          "mismatches": [
+            {
+              "path": "/single",
+              "observed": [
+                "str",
+                "it''s here"
+              ],
+              "expected": [
+                "str",
+                "it's here"
+              ]
+            },
+            {
+              "path": "/service/settings",
+              "observed": [
+                "str",
+                "*base"
+              ],
+              "expected": [
+                "map",
+                [
+                  [
+                    "retries",
+                    [
+                      "int",
+                      "3"
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "base"
+                    ]
+                  ]
+                ]
+              ]
+            }
+          ]
+        },
+        "order.yaml": {
+          "matches_oracle": false,
+          "mismatches": [
+            {
+              "path": "/",
+              "observed_items": 10,
+              "expected_items": 9
+            },
+            {
+              "path": "/0/lines/1/sku",
+              "observed": [
+                "str",
+                "B ''2''"
+              ],
+              "expected": [
+                "str",
+                "B '2'"
+              ]
+            },
+            {
+              "path": "/2",
+              "observed": [
+                "str",
+                "*shared"
+              ],
+              "expected": [
+                "map",
+                [
+                  [
+                    "city",
+                    [
+                      "str",
+                      "Berlin"
+                    ]
+                  ],
+                  [
+                    "zip",
+                    [
+                      "str",
+                      "10115"
+                    ]
+                  ]
+                ]
+              ]
+            },
+            {
+              "path": "/3",
+              "observed": [
+                "str",
+                ""
+              ],
+              "expected": [
+                "seq",
+                [
+                  [
+                    "int",
+                    "1"
+                  ],
+                  [
+                    "seq",
+                    [
+                      [
+                        "int",
+                        "2"
+                      ],
+                      [
+                        "int",
+                        "3"
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "k",
+                        [
+                          "str",
+                          "v"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            },
+            {
+              "path": "/4",
+              "observed": [
+                "seq",
+                [
+                  [
+                    "int",
+                    "1"
+                  ],
+                  [
+                    "seq",
+                    [
+                      [
+                        "int",
+                        "2"
+                      ],
+                      [
+                        "int",
+                        "3"
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "k",
+                        [
+                          "str",
+                          "v"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              "expected": [
+                "str",
+                "plain multi word"
+              ]
+            },
+            {
+              "path": "/5",
+              "observed": [
+                "str",
+                "plain multi word"
+              ],
+              "expected": [
+                "str",
+                "line\nbreak"
+              ]
+            },
+            {
+              "path": "/6",
+              "observed": [
+                "str",
+                "line\nbreak"
+              ],
+              "expected": [
+                "str",
+                "kept\n  indented"
+              ]
+            },
+            {
+              "path": "/7",
+              "observed": [
+                "str",
+                "kept\nindented"
+              ],
+              "expected": [
+                "null"
+              ]
+            },
+            {
+              "path": "/8",
+              "observed": [
+                "str",
+                "~"
+              ],
+              "expected": [
+                "bool",
+                false
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "package": "tap-yaml",
+      "version": "4.4.2",
+      "call": "parse(text)",
+      "controls": {
+        "catalog.yaml": {
+          "matches_oracle": true
+        },
+        "order.yaml": {
+          "matches_oracle": true
+        }
+      }
+    },
+    {
+      "package": "yamlparser",
+      "version": "0.0.2",
+      "call": "eval(text)",
+      "controls": {
+        "catalog.yaml": {
+          "matches_oracle": false,
+          "mismatches": [
+            {
+              "path": "/title",
+              "observed": [
+                "str",
+                "\"Caf\\u00e9 \\\"quoted\\\"\\tend\""
+              ],
+              "expected": [
+                "str",
+                "Café \"quoted\"\tend"
+              ]
+            },
+            {
+              "path": "/single",
+              "observed": [
+                "str",
+                "'it''s here'"
+              ],
+              "expected": [
+                "str",
+                "it's here"
+              ]
+            },
+            {
+              "path": "/items/0/note",
+              "observed": [
+                "str",
+                "line one\nline two"
+              ],
+              "expected": [
+                "str",
+                "line one\nline two\n"
+              ]
+            },
+            {
+              "path": "/items/1/note",
+              "observed": [
+                "str",
+                "folded text"
+              ],
+              "expected": [
+                "str",
+                "folded text\n"
+              ]
+            }
+          ]
+        },
+        "order.yaml": {
+          "matches_oracle": false,
+          "mismatches": [
+            {
+              "path": "/",
+              "observed": [
+                "map",
+                []
+              ],
+              "expected": [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "order",
+                        [
+                          "str",
+                          "A-7"
+                        ]
+                      ],
+                      [
+                        "lines",
+                        [
+                          "seq",
+                          [
+                            [
+                              "map",
+                              [
+                                [
+                                  "sku",
+                                  [
+                                    "str",
+                                    "Xé-1"
+                                  ]
+                                ],
+                                [
+                                  "qty",
+                                  [
+                                    "int",
+                                    "2"
+                                  ]
+                                ],
+                                [
+                                  "price",
+                                  [
+                                    "float",
+                                    "12.5"
+                                  ]
+                                ]
+                              ]
+                            ],
+                            [
+                              "map",
+                              [
+                                [
+                                  "sku",
+                                  [
+                                    "str",
+                                    "B '2'"
+                                  ]
+                                ],
+                                [
+                                  "qty",
+                                  [
+                                    "int",
+                                    "1"
+                                  ]
+                                ],
+                                [
+                                  "price",
+                                  [
+                                    "float",
+                                    "0.75"
+                                  ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ],
+                      [
+                        "flags",
+                        [
+                          "seq",
+                          []
+                        ]
+                      ],
+                      [
+                        "meta",
+                        [
+                          "map",
+                          []
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "city",
+                        [
+                          "str",
+                          "Berlin"
+                        ]
+                      ],
+                      [
+                        "zip",
+                        [
+                          "str",
+                          "10115"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "city",
+                        [
+                          "str",
+                          "Berlin"
+                        ]
+                      ],
+                      [
+                        "zip",
+                        [
+                          "str",
+                          "10115"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "seq",
+                    [
+                      [
+                        "int",
+                        "1"
+                      ],
+                      [
+                        "seq",
+                        [
+                          [
+                            "int",
+                            "2"
+                          ],
+                          [
+                            "int",
+                            "3"
+                          ]
+                        ]
+                      ],
+                      [
+                        "map",
+                        [
+                          [
+                            "k",
+                            [
+                              "str",
+                              "v"
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "str",
+                    "plain multi word"
+                  ],
+                  [
+                    "str",
+                    "line\nbreak"
+                  ],
+                  [
+                    "str",
+                    "kept\n  indented"
+                  ],
+                  [
+                    "null"
+                  ],
+                  [
+                    "bool",
+                    false
+                  ]
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "package": "@speclynx/apidom-parser-adapter-yaml-1-2",
+      "version": "7.0.2",
+      "call": "await parse(text, {sourceMap: false}) then apidom-core 7.0.2 toValue(result)",
+      "controls": {
+        "catalog.yaml": {
+          "matches_oracle": false,
+          "mismatches": [
+            {
+              "path": "/service/settings",
+              "observed": [
+                "str",
+                "*base"
+              ],
+              "expected": [
+                "map",
+                [
+                  [
+                    "retries",
+                    [
+                      "int",
+                      "3"
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "base"
+                    ]
+                  ]
+                ]
+              ]
+            }
+          ]
+        },
+        "order.yaml": {
+          "matches_oracle": false,
+          "mismatches": [
+            {
+              "path": "/2",
+              "observed": [
+                "str",
+                "*shared"
+              ],
+              "expected": [
+                "map",
+                [
+                  [
+                    "city",
+                    [
+                      "str",
+                      "Berlin"
+                    ]
+                  ],
+                  [
+                    "zip",
+                    [
+                      "str",
+                      "10115"
+                    ]
+                  ]
+                ]
+              ]
+            },
+            {
+              "path": "/7",
+              "observed": [
+                "str",
+                "~"
+              ],
+              "expected": [
+                "null"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "package": "yaml-unist-parser",
+      "version": "3.2.1",
+      "call": "parse(text)",
+      "controls": {
+        "catalog.yaml": {
+          "matches_oracle": false,
+          "observed": "root node with keys type, position, children, comments (syntax tree; no typed values)"
+        },
+        "order.yaml": {
+          "matches_oracle": false,
+          "observed": "root node with keys type, position, children, comments (syntax tree; no typed values)"
+        }
+      }
+    }
+  ]
+}
