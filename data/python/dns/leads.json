@@ -257,5 +257,119 @@
     "primary_metric_value": 4113220,
     "verification": "projects/dns/python/mitmproxy/verification.json",
     "reason": "Pinned 12.3.1 passes both DNS controls; see parsers.json and data/python/dns/mitmproxy-feedback-differential.json."
+  },
+  {
+    "name": "PythonDNS",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "documentation": "https://pypi.org/project/PythonDNS/",
+    "family": "dnslib",
+    "reason": "DNS interception proxy (0.1): PythonDNS/InterceptResolver.py imports dnslib's DNSRecord, RR and DNSServer; no own message parser.",
+    "primary_metric_value": 48361,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 17
+  },
+  {
+    "name": "dnspython3",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "documentation": "https://pypi.org/project/dnspython3/",
+    "family": "dnspython",
+    "reason": "Separate 2016 distribution of dnspython 1.15.0 for Python 3 (same project, home page dnspython.org); an older release line of the selected dnspython, not counted under the predecessor rule.",
+    "primary_metric_value": 20632,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 18
+  },
+  {
+    "name": "microdns",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "documentation": "https://pypi.org/project/microdns/",
+    "family": "dnslib",
+    "reason": "Test DNS server for the autest suite; its 1.0.3 wheel requires dnslib and trlib and has no own message parser.",
+    "primary_metric_value": 5570,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 19
+  },
+  {
+    "name": "dnsq",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "documentation": "https://pypi.org/project/dnsq/",
+    "family": "dnspython",
+    "reason": "Mailgun query tool (dnsq.py 1.1.6) built on dnspython's resolver (import dns.resolver); network API, no own parser.",
+    "primary_metric_value": 4200,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 20
+  },
+  {
+    "name": "aiodnsresolver",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "documentation": "https://github.com/michalc/aiodnsresolver#readme",
+    "family": "aiodnsresolver",
+    "input_api_lead": "aiodnsresolver.parse(data)",
+    "reason": "asyncio resolver; its README calls the module's pack and parse functions 'otherwise private' (used by the tests' built-in nameserver), so there is no documented message-bytes API.",
+    "primary_metric_value": 3582,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 21
+  },
+  {
+    "name": "dnsmock",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "documentation": "https://pypi.org/project/dnsmock/",
+    "family": "dnsmock",
+    "reason": "Described on PyPI as a custom resolver (21.2b2); no documented API for caller-supplied message bytes.",
+    "primary_metric_value": 1686,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 22
+  },
+  {
+    "name": "dns-client",
+    "status": "unresolved",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "documentation": "https://github.com/s3rgeym/python-dns-client#readme",
+    "family": "dns_client (protocol.py Packet/Record)",
+    "input_api_lead": "dns_client.Packet.read_from(fp)",
+    "checked_version": "0.2.4",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "Exports Packet, Header, Question and Record with a read_from(fp) classmethod, but the README documents only the network DNSClient (query over UDP/TLS). Packet.parse also decodes only the answer section (a TODO notes that authority and additional are not read). Kept as a lead, like async-dns, rather than selected.",
+    "primary_metric_value": 1213,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 23
+  },
+  {
+    "name": "asyncdns2",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "documentation": "https://asyncdns.readthedocs.io/en/latest/",
+    "family": "asyncdns (Alastair Houghton)",
+    "reason": "Pure-Python asynchronous resolver: the documentation covers Query, Resolver and Reply objects returned by lookups; replies are decoded inside the resolver's DNSProtocol, with no documented API for caller-supplied message bytes.",
+    "primary_metric_value": 144,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 24
+  },
+  {
+    "name": "dnspythonchia",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "documentation": "https://pypi.org/project/dnspythonchia/",
+    "family": "dnspython",
+    "reason": "Chia's fork of dnspython 2.2.0 (same DNS toolkit and extras); same family as the selected dnspython.",
+    "primary_metric_value": 192,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 25
+  },
+  {
+    "name": "dnslib3",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "documentation": "https://pypi.org/project/dnslib3/",
+    "family": "dnslib",
+    "reason": "Fork of the selected dnslib: the 0.10.0 wheel installs the same top-level package name dnslib, and 2,100 of the 3,187 distinct non-blank, non-comment source lines of dnslib 0.9.26 (65.9%) also occur in it. Metric 20.",
+    "primary_metric_value": 20,
+    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "lead_adoption_order": 26
   }
 ]

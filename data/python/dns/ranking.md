@@ -35,8 +35,10 @@ PyPI Stats last_month downloads excluding known mirrors, from [registry-snapshot
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
 | 1 | async-dns | 6,920 | `async_dns.core.DNSMessage.parse(data)` | async_dns (async_dns/core/record.py DNSMessage/Record) |
+| 2 | dns-client | 1,213 | `dns_client.Packet.read_from(fp)` | dns_client (protocol.py Packet/Record) |
 
 - **async-dns** (unresolved): No documented message-bytes API: the README documents only the resolver, the server and parse_hosts_file. DNSMessage.parse is exported through async_dns.core but undocumented, so it stays a lead rather than a selected path.
+- **dns-client** (unresolved): Exports Packet, Header, Question and Record with a read_from(fp) classmethod, but the README documents only the network DNSClient (query over UDP/TLS). Packet.parse also decodes only the answer section (a TODO notes that authority and additional are not read). Kept as a lead, like async-dns, rather than selected.
 
 ## Checked, excluded or recorded separately
 
@@ -51,3 +53,12 @@ PyPI Stats last_month downloads excluding known mirrors, from [registry-snapshot
 - **impacket** (excluded): Fails the response control: AAAA rdata is not decoded and the MX exchange is wrong (offset bug), so the oracle summary cannot be produced from the library's parse.
 - **dns-lexicon** (excluded): Manipulates records through DNS hosting providers' HTTP APIs; no DNS wire-message parser.
 - **pydns** (excluded): Python 2 PyDNS distribution, the predecessor of the selected py3dns (py3dns is its Python 3 port with the same DNS.Lib unpackers); not counted under the predecessor rule.
+- **PythonDNS** (excluded): DNS interception proxy (0.1): PythonDNS/InterceptResolver.py imports dnslib's DNSRecord, RR and DNSServer; no own message parser.
+- **dnspython3** (excluded): Separate 2016 distribution of dnspython 1.15.0 for Python 3 (same project, home page dnspython.org); an older release line of the selected dnspython, not counted under the predecessor rule.
+- **microdns** (excluded): Test DNS server for the autest suite; its 1.0.3 wheel requires dnslib and trlib and has no own message parser.
+- **dnsq** (excluded): Mailgun query tool (dnsq.py 1.1.6) built on dnspython's resolver (import dns.resolver); network API, no own parser.
+- **aiodnsresolver** (excluded): asyncio resolver; its README calls the module's pack and parse functions 'otherwise private' (used by the tests' built-in nameserver), so there is no documented message-bytes API.
+- **dnsmock** (excluded): Described on PyPI as a custom resolver (21.2b2); no documented API for caller-supplied message bytes.
+- **asyncdns2** (excluded): Pure-Python asynchronous resolver: the documentation covers Query, Resolver and Reply objects returned by lookups; replies are decoded inside the resolver's DNSProtocol, with no documented API for caller-supplied message bytes.
+- **dnspythonchia** (excluded): Chia's fork of dnspython 2.2.0 (same DNS toolkit and extras); same family as the selected dnspython.
+- **dnslib3** (excluded): Fork of the selected dnslib: the 0.10.0 wheel installs the same top-level package name dnslib, and 2,100 of the 3,187 distinct non-blank, non-comment source lines of dnslib 0.9.26 (65.9%) also occur in it. Metric 20.
