@@ -371,8 +371,100 @@
       "parser_feature_difference": 713,
       "project_receipt": "projects/sql/php/sad_spirit_pg_builder/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/php/sad_spirit_pg_builder/differential.json"
+    },
+    {
+      "package": "crodas/sql-parser",
+      "version": "v0.1.5",
+      "pass": true,
+      "input_api": "(new SQLParser())->parse(local SQL text) -> SQL\\Statement objects",
+      "dialect": "MySQL-oriented (no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "crodas SQLParser Lemon-generated LALR parser (SQL\\Statement objects)",
+      "parser_source_files": 9,
+      "parser_source_lines_covered": 372,
+      "afl_tuple_difference": 127,
+      "parser_feature_difference": 127,
+      "project_receipt": "projects/sql/php/crodas_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/php/crodas_sql_parser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:06:42.168216+00:00"
+  "checked_at_utc": "2026-11-17T20:09:18.066108+00:00"
 }

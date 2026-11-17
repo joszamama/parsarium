@@ -85,6 +85,16 @@
       "family": "pg_builder hand-written PostgreSQL parser",
       "documented_api_lead": "StatementFactory::createFromString",
       "reason": "Query builder backed by a full PostgreSQL parser: createFromString($sql) returns a typed Select/Insert AST walked with the library BlankWalker. One statement per call (a trailing \";\" is rejected), so the adapter splits at the library Lexer's \";\" tokens. Verified with both controls."
+    },
+    {
+      "name": "crodas/sql-parser",
+      "status": "selected",
+      "metric_value": 2490,
+      "metric_error": null,
+      "latest_release_observed": "v0.1.5",
+      "family": "crodas SQLParser Lemon-generated parser",
+      "documented_api_lead": "SQLParser::parse",
+      "reason": "(new SQLParser)->parse($sql) returns SQL\\Select/SQL\\Insert objects built by a PHP LEMON-generated parser; public getters expose tables, joins, columns, where, group, order, fields and values. Verified with both controls; 2016 code runs on PHP 8.5 with deprecations."
     }
   ]
 }

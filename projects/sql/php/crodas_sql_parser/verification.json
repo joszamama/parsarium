@@ -1,0 +1,67 @@
+{
+  "kind": "third_party",
+  "api": "(new SQLParser())->parse(local SQL text) -> array of SQL\\Statement objects (SQL\\Select, SQL\\Insert, ...)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:06:35.119043+00:00",
+  "manifest": "projects/sql/php/crodas_sql_parser/manifest.json",
+  "image_id": "sha256:bb21309fbe777d35804d772a3516d9bc43f5b5dd0e875a1698325314bfef6e81",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "source_sha256": "cfcf15a23ea58c8891b38d092b05833896ead8cd58b6c0f4afb5a600954c64fa",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "dc454b86283fd1191b5447991ddf0060b87b2264fa59b392082a8ccf23836416",
+    "composer.json": "8132c4c1809bbbfd5f3db00a0847189a622c57b4fc932495224f6b73f6aa580b",
+    "composer.lock": "714451ef40924e26ac286bec1c7cc19cc28948d2b85284b2cf840e55926fba39",
+    "fuzz-target.php": "ce06aa611e84b8baa762a0943ec8119dee8da50fb90b3aad5a9142de98d474a2",
+    "harness.php": "9b73d0005cb0cebd4ece8ec084fe8bc0e32bcf16f95181230fa004cfcbe9f8d6",
+    "manifest.json": "c2d2e9c58e85e8280048a8f035a2e69aa94078ee297f15a94880d8ecdbb38bb9",
+    "replay.php": "44ce32d4c2d4c0e07d4deed4f438cb6a7f754ba92e62f29519aafb36b1f22188",
+    "run-control.php": "16cb87b696754000c1ecc8fb6043df06ebcbca27757880b30656405c6749d56d",
+    "source-lock.json": "9cf2a877e1bb247575d551bad282ce3e49db4ebc7abb8f4fa2df187b885fec07",
+    "target.json": "7fe4a09fbe4e381ff370c5d2b3fe293ed68ec4e0b5f74c21ec7f535ddc98e646"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 9,
+  "parser_source_lines_covered": 372,
+  "format_specific_source_lines_covered": 175,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/php/crodas_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}
