@@ -22,6 +22,8 @@ The low-level jaudiotagger API returns correct version, layer, rate, channels, a
 
 javacv (315) and org.bytedeco:ffmpeg (215) have higher counts but are JNI wrappers: MP3 parsing runs in native FFmpeg, with no Java parser source to cover. They are excluded here, not ranked.
 
+JavaMP3 (4) is an MIT-licensed pure-Java decoder with a documented `Sound(InputStream)` API. Its release POM has no JLayer runtime dependency and the source JAR has no JavaZoom package or JLayer reference; broader code ancestry was not audited. Its 1.0.1 release decodes the 44.1 kHz mono control to the oracle's 12,672 samples, but crashes in `Decoder.samples_III` while constructing `Sound` from the valid 22.05 kHz stereo control. The [pinned Docker probe](probes/javamp3/README.md) records both outcomes. It fails the two-control gate and is excluded from ranking; no coverage or AFL++ feedback is claimed.
+
 ## Standard API (none)
 
 OpenJDK 25.0.5 Java Sound without third-party providers has readers for WAV, AU and AIFF only; `AudioSystem.getAudioFileFormat` and `getAudioInputStream` throw `UnsupportedAudioFileException` on the primary control. Details in [standard.json](standard.json).
@@ -38,7 +40,7 @@ Looked up on deps.dev; selected entries are removed from this lead log.
 | [com.badlogicgames.jlayer:jlayer](https://central.sonatype.com/artifact/com.badlogicgames.jlayer/jlayer) | 1.0.2-gdx | 30 | 26 | unresolved_shared_family | libGDX repackaging of JLayer; same decoder family as javazoom:jlayer. Not run. |
 | [com.googlecode.soundlibs:jlayer](https://central.sonatype.com/artifact/com.googlecode.soundlibs/jlayer) | 1.0.1.4 | 28 | 14 | unresolved_shared_family | Maintained fork of javazoom JLayer; same decoder family as javazoom:jlayer. Not run. |
 | [com.soywiz:korau-mp3](https://central.sonatype.com/artifact/com.soywiz/korau-mp3) | 0.19.1 | 25 | 2 | unresolved | Kotlin korau MP3 decoder module published to Maven (last release 0.19.1); decoder lineage not inspected. Control not run. |
-| [fr.delthas:javamp3](https://central.sonatype.com/artifact/fr.delthas/javamp3) | 1.0.1 | 4 | 4 | unresolved | Sound(InputStream) pure-Java Layer III decoder. Control not run. |
+| [fr.delthas:javamp3](https://github.com/delthas/JavaMP3) | 1.0.1 | 4 | 4 | excluded_valid_control_crash | Mono control decodes correctly; valid 22.05 kHz stereo control crashes at `Decoder.samples_III(Decoder.java:773)`. [Probe](probes/javamp3/README.md). |
 | [com.github.kokorin.jaffree:jaffree](https://central.sonatype.com/artifact/com.github.kokorin.jaffree/jaffree) | 2024.08.29 | 3 | 2 | excluded_native_wrapper | Drives an external ffprobe/ffmpeg process; parser is native FFmpeg. Not run. |
 | [com.googlecode.soundlibs:basicplayer](https://central.sonatype.com/artifact/com.googlecode.soundlibs/basicplayer) | 3.0.0.0 | 0 | 0 | excluded | Player UI over mp3spi/JLayer; no parser of its own; zero direct dependents. |
 | [dev.mccue:jlayer](https://central.sonatype.com/artifact/dev.mccue/jlayer) | 2024.04.19 | 0 | 0 | unresolved_shared_family | Modularized JLayer repackaging; zero deps.dev direct dependents. Same JLayer family. Not run. |

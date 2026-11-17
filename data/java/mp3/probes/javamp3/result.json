@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "candidate": "fr.delthas:javamp3",
+  "release": "1.0.1",
+  "status": "excluded_valid_control_crash",
+  "runtime_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "source": "data/java/mp3/probes/javamp3/Probe.java",
+  "source_sha256": "fcd4c88e39b72a0e389e2aadd1dd0c668caf6a1a943f6dbe981ed043a5adcd35",
+  "artifacts": {
+    "javamp3.jar": {
+      "url": "https://repo.maven.apache.org/maven2/fr/delthas/javamp3/1.0.1/javamp3-1.0.1.jar",
+      "sha256": "ee259df947a4242fd03d164b2fb4c61cc42e167a0af483cc18ce0c0bfa13b1ac"
+    },
+    "javamp3-sources.jar": {
+      "url": "https://repo.maven.apache.org/maven2/fr/delthas/javamp3/1.0.1/javamp3-1.0.1-sources.jar",
+      "sha256": "153cb584ecc5d35ed4f39dcd5e4c8040bca8c38511afb69026066ebed4d17d8c"
+    },
+    "javamp3.pom": {
+      "url": "https://repo.maven.apache.org/maven2/fr/delthas/javamp3/1.0.1/javamp3-1.0.1.pom",
+      "sha256": "ad8cb4249a3ab46a04e75729e79c04ae9e749c426d94fdff031a0d617178f725"
+    }
+  },
+  "cases": [
+    {
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+      "oracle": {
+        "sample_rate": 44100,
+        "channels": 1,
+        "decoded_samples": 12672
+      },
+      "exit_code": 0,
+      "output": {
+        "sample_rate": 44100,
+        "channels": 1,
+        "pcm_bytes": 25344,
+        "decoded_samples": 12672
+      },
+      "exception": null,
+      "exception_source": null
+    },
+    {
+      "control": "controls/mp3/tone-22k-stereo.mp3",
+      "control_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+      "oracle": {
+        "sample_rate": 22050,
+        "channels": 2,
+        "decoded_samples": 6912
+      },
+      "exit_code": 1,
+      "output": null,
+      "exception": "ArrayIndexOutOfBoundsException: Index 2304 out of bounds for length 2304",
+      "exception_source": "fr.delthas.javamp3.Decoder.samples_III(Decoder.java:773)"
+    }
+  ],
+  "limit": "Two existing valid untagged CBR Layer III controls; no malformed-input or fuzzing experiment."
+}

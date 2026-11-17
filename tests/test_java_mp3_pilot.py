@@ -1,6 +1,7 @@
 """The Java plain MP3 pilot keeps its selection, leads, and runtime inventory consistent."""
 
 from hashlib import sha256
+from collections import Counter
 import json
 from pathlib import Path
 import runpy
@@ -35,6 +36,34 @@ class JavaMp3PilotTest(unittest.TestCase):
         cell = read(BASE / "cell.json")
         self.assertEqual(sum(1 for lead in leads if lead["status"].startswith("unresolved")),
                          cell["unresolved_documentation_leads"])
+        self.assertEqual(dict(Counter(lead["status"] for lead in leads)), cell["leads_by_status"])
+
+    def test_javamp3_negative_control_is_reproducible_and_not_selected(self):
+        lead, = [item for item in read(BASE / "leads.json")
+                 if item["coordinate"] == "fr.delthas:javamp3"]
+        self.assertEqual(lead["status"], "excluded_valid_control_crash")
+        self.assertNotIn("javamp3", {item["name"] for item in read(BASE / "parsers.json")})
+        result = read(ROOT / lead["probe"])
+        self.assertEqual(result["release"], lead["version_seen"])
+        self.assertEqual(result["status"], lead["status"])
+        source = ROOT / result["source"]
+        self.assertEqual(sha256(source.read_bytes()).hexdigest(), result["source_sha256"])
+        walk = runpy.run_path(str(ROOT / "controls/mp3/check_controls.py"))["walk"]
+        mono, stereo = result["cases"]
+        for case in (mono, stereo):
+            control = (ROOT / case["control"]).read_bytes()
+            oracle = walk(control)
+            self.assertEqual(sha256(control).hexdigest(), case["control_sha256"])
+            self.assertEqual(case["oracle"], {
+                "sample_rate": oracle["sample_rate"],
+                "channels": oracle["channels"],
+                "decoded_samples": oracle["frames"] * oracle["samples_per_frame"],
+            })
+        self.assertEqual(mono["output"]["decoded_samples"], mono["oracle"]["decoded_samples"])
+        self.assertEqual(mono["exit_code"], 0)
+        self.assertNotEqual(stereo["exit_code"], 0)
+        self.assertIsNone(stereo["output"])
+        self.assertIn("Decoder.samples_III", stereo["exception_source"])
 
     def test_same_family_as_id3v2_cell_is_recorded(self):
         parser = next(item for item in read(BASE / "parsers.json") if item["name"] == "jcodec")
