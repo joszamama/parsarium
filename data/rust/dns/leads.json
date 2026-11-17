@@ -138,7 +138,7 @@
   },
   {
     "name": "packet-dissector-dns",
-    "status": "unresolved",
+    "status": "resolved_verified_selected",
     "primary_metric": "crates.io recent_downloads (90 days)",
     "primary_metric_value": 1980,
     "found_by": "registry search hit",
@@ -148,7 +148,8 @@
     "version_seen": "0.6.3",
     "family": "packet-dissector DNS dissector",
     "input_api_lead": "DnsDissector.dissect(&[u8], &mut DissectBuffer, 0) and the field tree",
-    "reason": "Not attempted in round 2. The crate is a sub-crate of packet-dissector (its README says it is used through the main crate's dns feature) and reports a generic DissectBuffer field tree whose name fields are formatted through FormatFn callbacks (write_dns_name); a harness would need to walk that tree. Metric 1,980 is below every selected crate."
+    "reason": "Pinned 0.6.3 passes both DNS controls; see parsers.json and data/rust/dns/packet-dissector-dns-feedback-differential.json.",
+    "verification": "projects/dns/rust/packet_dissector_dns/verification.json"
   },
   {
     "name": "dns_parse",

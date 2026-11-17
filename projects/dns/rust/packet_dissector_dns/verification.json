@@ -1,0 +1,89 @@
+{
+  "kind": "third_party",
+  "api": "packet_dissector_dns::DnsDissector.dissect(&[u8], &mut DissectBuffer, 0) on local bytes (packet_dissector_core::dissector::Dissector trait); header, questions, answers, authorities and additionals fields of the DNS layer, names through the crate's write_dns_name FormatFn",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T22:30:16.371989+00:00",
+  "manifest": "projects/dns/rust/packet_dissector_dns/manifest.json",
+  "image_id": "sha256:89c53a29966791817f9ad7b4e0602f3dd095425c26c602a25efc8c2f4d99327d",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "3ecb03934e48a11cdd34a0f1aa07cbe19f5778c542e18a039051370a17879152",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Cargo.lock": "2c02752c6475ca18e0d3f8a13df0e1e4d2eea2bd55923616644350cd5f9cecd9",
+    "Cargo.toml": "e0104d76e7df90dab5481f6c6b6f12d125dc0caef5d64b4c23bd59e465a872c1",
+    "Dockerfile": "3fbd0073f8db888884ad1f0737e0f87cf422e4b5ade391942d8ee89258c69773",
+    "manifest.json": "c3e06cf325e9e387c284355f27f608a872b89580ae09622c2b4191d2ea158d71",
+    "run-control.sh": "6fcec0e2dccdddba2a884e34da321fa0af327bfd65448150f9fa8417e87e11ff",
+    "source-lock.json": "ae26bdd301b7e3ceb8997042bb896da67f52eed5baa55e0e7d7048b1d3c06d9a",
+    "src/bin/fuzzer.rs": "fd2e2917447563c756897ff1c492fc1db4b8e43bc161dcc1479d105e541ef8a1",
+    "src/bin/replay.rs": "59462c5236cce76b0acec39763455741fddb6d4d32c6790a380a15027048f4d3",
+    "src/lib.rs": "c3aa7faf457fa3c94e092d4b23472d89eadd3b8e16a438f55cc5894e0f373920"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 4,
+  "parser_source_lines_covered": 381,
+  "format_specific_source_lines_covered": 381,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/rust/packet_dissector_dns/target/coverage/coverage.json",
+  "pass": true
+}

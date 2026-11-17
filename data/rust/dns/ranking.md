@@ -1,6 +1,6 @@
 # Rust × DNS: selected parsers (pilot)
 
-Eight verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Nine verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -15,7 +15,8 @@ crates.io recent_downloads (90 days), from [registry-snapshot.json](registry-sna
 | 5 | [dns-message-parser](https://docs.rs/dns-message-parser/0.9.0/dns_message_parser/struct.Dns.html#method.decode) | 0.9.0 | 7,679 | dns-message-parser (src/decode/*: decoder, dns, domain_name, rr) |
 | 6 | [rustdns](https://docs.rs/rustdns/0.7.0/rustdns/struct.Message.html#method.from_slice) | 0.7.0 | 2,786 | rustdns (src/dns.rs MessageParser, types.rs, resource.rs) |
 | 7 | [rsdns](https://docs.rs/rsdns/0.23.0/rsdns/message/reader/struct.MessageIterator.html#method.new) | 0.23.0 | 2,486 | rsdns message reader (src/message/reader/*, bytes/cursor, names, records/data) |
-| 8 | [hns-dns-wire](https://docs.rs/hns-dns-wire/0.2.2/hns_dns_wire/struct.Message.html#method.parse) | 0.2.2 | 1,588 | hns-dns-wire (single-file strict decoder, src/lib.rs) |
+| 8 | [packet-dissector-dns](https://docs.rs/packet-dissector-dns/0.6.3/packet_dissector_dns/struct.DnsDissector.html) | 0.6.3 | 1,980 | packet-dissector DNS dissector (packet-dissector-dns src/lib.rs over packet-dissector-core field tree) |
+| 9 | [hns-dns-wire](https://docs.rs/hns-dns-wire/0.2.2/hns_dns_wire/struct.Message.html#method.parse) | 0.2.2 | 1,588 | hns-dns-wire (single-file strict decoder, src/lib.rs) |
 
 **hickory-proto 0.26.3** (MIT OR Apache-2.0) parses local bytes with `hickory_proto::op::Message::from_vec(buffer: &[u8]) -> Result<Message, DecodeError>`. Both controls match the oracle summary. The response control covers 479 library lines in 55 files. AFL++ feedback repeats 3 times per control; response and query give 703/446 parser features and 285/178 AFL++ tuples, differing by 259 features and 107 tuples ([receipt](hickory-proto-feedback-differential.json)). Own pure-Rust decoder (serialize/binary/decoder.rs, op/message.rs, rr/record.rs, rr/domain/name.rs). trust-dns-proto is the same project under its earlier crate name. The crate drops the reserved Z bit, so z reports AD and CD only.
 
@@ -31,6 +32,8 @@ crates.io recent_downloads (90 days), from [registry-snapshot.json](registry-sna
 
 **rsdns 0.23.0** (MIT OR Apache-2.0) parses local bytes with `rsdns::message::reader::MessageIterator::new(buf: &[u8]) -> Result<MessageIterator>; header(), questions(), records()`. Both controls match the oracle summary. The response control covers 463 library lines in 33 files. AFL++ feedback repeats 3 times per control; response and query give 607/386 parser features and 259/108 AFL++ tuples, differing by 223 features and 151 tuples ([receipt](rsdns-feedback-differential.json)). Own pure-Rust decoder in a DNS client library; built without any net-* feature, so no client code is compiled. The records iterator tags every record with its section. rsdns exposes no Z, AD or CD flag (the Z getter is test-only), so z is reported as 0.
 
+**packet-dissector-dns 0.6.3** (MIT OR Apache-2.0) parses local bytes with `packet_dissector_dns::DnsDissector.dissect(data: &[u8], buf: &mut DissectBuffer, offset: 0)` (the `packet_dissector_core::dissector::Dissector` trait). Both controls match the oracle summary. The response control covers 381 library lines in 4 files. AFL++ feedback repeats 3 times per control; response and query give 549/339 parser features and 168/98 AFL++ tuples, differing by 210 features and 70 tuples ([receipt](packet-dissector-dns-feedback-differential.json)). Own pure-Rust zero-copy dissector from the packet-dissector project (higebu); no code from the other selected crates. The harness calls the DNS dissector directly on the message bytes, not through the Ethernet/IP/UDP registry, so no link-layer frame is involved. The dissector validates every name, including the CNAME and MX targets inside RDATA, and stores names as wire byte ranges; the harness renders them with the crate's public `write_dns_name` FormatFn (which follows compression pointers) and adds the trailing dot. A and AAAA arrive as address field values printed with std::net; Z, AD and CD are separate header fields. The metric is the sub-crate's own count; its README says it is normally used through the packet-dissector crate's dns feature.
+
 **hns-dns-wire 0.2.2** (MIT OR Apache-2.0) parses local bytes with `hns_dns_wire::Message::parse(message: &[u8]) -> Result<Message, Error>`. Both controls match the oracle summary. The response control covers 291 library lines in 1 file. AFL++ feedback repeats 3 times per control; response and query give 502/313 parser features and 156/103 AFL++ tuples, differing by 189 features and 55 tuples ([receipt](hns-dns-wire-feedback-differential.json)). Own single-file pure-Rust decoder from the hns-dane-engine project (Handshake DNSSEC/DANE), with no dependencies and no code from the other selected crates. It is strict: it rejects forward, cyclic and out-of-message compression pointers and a set reserved Z bit, and it exposes AD but not CD, so the harness reads z from the parsed Flags::bits() word. Names are printed by the crate's own Display (lower case, absolute); A and AAAA are std::net addresses. Found by the round-3 crates.io searches sorted by recent downloads.
 
 ## Remaining leads
@@ -40,14 +43,12 @@ crates.io recent_downloads (90 days), from [registry-snapshot.json](registry-sna
 | 1 | dnssector | 15,065 | unresolved_control_failure | `DNSSector::new(Vec<u8>)?.parse() -> ParsedPacket; RR iterators` | dnssector |
 | 2 | microdns | 6,404 | unresolved_control_failure | `parse_dns_header / skip_question / parse_answer` | microdns |
 | 3 | dns-protocol | 2,785 | unresolved_control_failure | `Message::read(&[u8], &mut [Question], &mut [ResourceRecord], ...)` | dns-protocol |
-| 4 | packet-dissector-dns | 1,980 | unresolved | `DnsDissector.dissect(&[u8], &mut DissectBuffer, 0) and the field tree` | packet-dissector DNS dissector |
-| 5 | dns_parse | 1,056 | unresolved_control_failure | `dns_parse::parse(Bytes) -> Vec<idns::Answer>` | dns_parse (idns Answer) |
-| 6 | dnsparse | 11 | unresolved_control_failure | `Message::parse(&mut [u8]) -> questions(), answers()` | dnsparse |
+| 4 | dns_parse | 1,056 | unresolved_control_failure | `dns_parse::parse(Bytes) -> Vec<idns::Answer>` | dns_parse (idns Answer) |
+| 5 | dnsparse | 11 | unresolved_control_failure | `Message::parse(&mut [u8]) -> questions(), answers()` | dnsparse |
 
 - **dnssector**: DNSSector::parse validates the whole message (including compressed names inside CNAME/MX RDATA) and the RR iterators return owner name, type, class, TTL and A/AAAA addresses, but other RDATA only as raw bytes (RawRRData::Data). The crate has no public API returning the CNAME target, MX preference or MX exchange as values (Compress::copy_uncompressed_name yields wire-format labels only), so the control's CNAME and MX answers would have to be decoded by the harness.
 - **microdns**: Minimal resolver library: its public helpers parse the header and answer records, but the question section is only skipped (skip_question) and its name, type and class are not returned, and authority/additional handling is left to callers. The control's question cannot be reported from the library.
 - **dns-protocol**: Message::read decodes the header, questions and record headers, but ResourceRecord::data() returns RDATA as raw bytes and the crate exports no decoder for (compressed) names inside RDATA, so the control's CNAME and MX targets would have to be decoded by the harness.
-- **packet-dissector-dns**: Not attempted in round 2. The crate is a sub-crate of packet-dissector (its README says it is used through the main crate's dns feature) and reports a generic DissectBuffer field tree whose name fields are formatted through FormatFn callbacks (write_dns_name); a harness would need to walk that tree. Metric 1,980 is below every selected crate.
 - **dns_parse**: parse(Bytes) returns only the answer records (it skips the question section and returns no header, question, authority or additional data), so most of the control summary cannot come from the library.
 - **dnsparse**: Message exposes the header, questions and answers, but Answer::rdata() is raw bytes with no decoder for names inside RDATA, and there is no accessor for the authority or additional sections.
 
