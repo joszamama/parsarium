@@ -780,7 +780,8 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
             else:
                 options.append(f'<a href="{other_url}" hreflang="{code}" lang="{code}" '
                                f'aria-label="{s["switch"]}">{code.upper()}</a>')
-        lang_switch = f'<span class="lang">{"<i aria-hidden=\"true\">/</i>".join(options)}</span>'
+        separator = '<i aria-hidden="true">/</i>'
+        lang_switch = f'<span class="lang">{separator.join(options)}</span>'
         return f'''<a class="skip" href="#main">{s["skip"]}</a>
 <header class="masthead"><div class="wrap mh">
   <a class="brand" href="{root or './'}" aria-label="{s["home"]}"><span class="px" aria-hidden="true"><i></i><i></i></span>parsarium</a>
