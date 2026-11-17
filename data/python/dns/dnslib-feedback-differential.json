@@ -1,0 +1,43 @@
+{
+  "checked_at_utc": "2026-11-17T19:54:00.208934+00:00",
+  "project": "dns/python/dnslib",
+  "pass": true,
+  "input_kind": "two fixed valid DNS messages (RFC 1035 section 4)",
+  "oracle": "controls/dns/check_controls.py hand-written decoder; summaries pinned in controls/dns/expected.json",
+  "feature_kind": "parser-line AFL++ bridge features",
+  "subject_prefix": "/opt/venv/lib/python3.14/site-packages/dnslib/",
+  "base_image_id": "sha256:d7aaa5ec71e77ff1ed61acf1003760843ca3f3ce1e644b22ed92ec35e56168d3",
+  "overlay_image_id": "sha256:28cb6ce33986bd3e62dad13c773df3ec8bb84016a5af06cf2d08bfd5e6feb0fb",
+  "overlay_receipt_sha256": "07065b0cae16573634d332c469085fb5fa6091fe4be55536f5f413c3c264027d",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "control_output_matches": true,
+  "variant_output_matches": true,
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "afl_target": "/work/afl_proxy",
+  "afl_map_size": 65536,
+  "control_parser_features": 178,
+  "variant_parser_features": 93,
+  "parser_feature_difference": 85,
+  "control_afl_tuples": 198,
+  "variant_afl_tuples": 113,
+  "afl_tuple_difference": 85,
+  "control_features_by_file": {
+    "/opt/venv/lib/python3.14/site-packages/dnslib/bimap.py": 5,
+    "/opt/venv/lib/python3.14/site-packages/dnslib/bit.py": 2,
+    "/opt/venv/lib/python3.14/site-packages/dnslib/buffer.py": 11,
+    "/opt/venv/lib/python3.14/site-packages/dnslib/dns.py": 123,
+    "/opt/venv/lib/python3.14/site-packages/dnslib/label.py": 29,
+    "/opt/venv/lib/python3.14/site-packages/dnslib/ranges.py": 8
+  },
+  "variant_features_by_file": {
+    "/opt/venv/lib/python3.14/site-packages/dnslib/bit.py": 2,
+    "/opt/venv/lib/python3.14/site-packages/dnslib/buffer.py": 11,
+    "/opt/venv/lib/python3.14/site-packages/dnslib/dns.py": 57,
+    "/opt/venv/lib/python3.14/site-packages/dnslib/label.py": 20,
+    "/opt/venv/lib/python3.14/site-packages/dnslib/ranges.py": 3
+  },
+  "mutation_campaign_run": false
+}

@@ -204,5 +204,108 @@
     },
     "rank": 2,
     "afl_feedback": "data/python/dns/dpkt-feedback-differential.json"
+  },
+  {
+    "name": "dnslib",
+    "version": "0.9.26",
+    "license": "BSD-2-Clause",
+    "license_evidence": "Wheel METADATA 'License: BSD' and dist-info/LICENSE (two-clause BSD text, sha256 a4c62a28...), checked in the image",
+    "input_api": "dnslib.DNSRecord.parse(packet: bytes) -> dnslib.DNSRecord",
+    "documentation": "https://github.com/paulc/dnslib/blob/0.9.26/README.md",
+    "source": "https://pypi.org/project/dnslib/0.9.26/",
+    "scope": "RFC 1035 message from local bytes: header flags and counts, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dnslib (dnslib/dns.py DNSRecord.parse over dnslib/buffer.py and dnslib/label.py)",
+    "family_note": "Own pure-Python decoder; no other DNS library and no socket. dnslib keeps the reserved Z bit, AD and CD as separate header properties; the harness assembles z from them. RDATA text is dnslib's own toZone() presentation.",
+    "project": "projects/dns/python/dnslib",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 1231762,
+      "source": "https://pypistats.org/api/packages/dnslib/recent",
+      "captured_at_utc": "2026-11-17T16:38:53.569296+00:00",
+      "snapshot": "data/python/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 3,
+    "afl_feedback": "data/python/dns/dnslib-feedback-differential.json"
   }
 ]

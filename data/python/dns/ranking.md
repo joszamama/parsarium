@@ -1,6 +1,6 @@
 # Python × DNS: selected parsers (pilot)
 
-Two verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Three verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -10,18 +10,20 @@ PyPI Stats last_month downloads excluding known mirrors, from [registry-snapshot
 | ---: | --- | --- | ---: | --- |
 | 1 | [dnspython](https://dnspython.readthedocs.io/en/v2.9.2/message-make.html#dns.message.from_wire) | 2.9.2 | 286,812,791 | dnspython wire reader (dns/message.py _WireReader, dns/wire.py Parser, dns/name.py) |
 | 2 | [dpkt](https://kbandla.github.io/dpkt/api/api_auto.html#module-dpkt.dns) | 1.9.8 | 1,492,890 | dpkt DNS packet class (dpkt/dns.py) |
+| 3 | [dnslib](https://github.com/paulc/dnslib/blob/0.9.26/README.md) | 0.9.26 | 1,231,762 | dnslib (dnslib/dns.py DNSRecord.parse over dnslib/buffer.py and dnslib/label.py) |
 
 **dnspython 2.9.2** (ISC) parses local bytes with `dns.message.from_wire(wire: bytes) -> dns.message.Message`. Both controls match the oracle summary. The response control covers 665 library lines in 27 files. AFL++ feedback repeats 3 times per control; response and query give 665/216 parser features and 685/236 AFL++ tuples, differing by 449 features and 449 tuples ([receipt](dnspython-feedback-differential.json)). Own pure-Python decoder; no C extension and no other DNS library. RRsets group records by owner and type; the harness lists each rdata with its RRset's owner, type, class and TTL.
 
 **dpkt 1.9.8** (BSD-3-Clause) parses local bytes with `dpkt.dns.DNS(buf: bytes)`. Both controls match the oracle summary. The response control covers 90 library lines in 3 files. AFL++ feedback repeats 3 times per control; response and query give 90/60 parser features and 110/80 AFL++ tuples, differing by 30 features and 30 tuples ([receipt](dpkt-feedback-differential.json)). Own pure-Python decoder in a packet-parsing library; no capture or socket is used. The MX preference is kept as a 1-tuple by dpkt 1.9.8 and the harness reads its value.
 
+**dnslib 0.9.26** (BSD-2-Clause) parses local bytes with `dnslib.DNSRecord.parse(packet: bytes) -> dnslib.DNSRecord`. Both controls match the oracle summary. The response control covers 178 library lines in 6 files. AFL++ feedback repeats 3 times per control; response and query give 178/93 parser features and 198/113 AFL++ tuples, differing by 85 features and 85 tuples ([receipt](dnslib-feedback-differential.json)). Own pure-Python decoder; no other DNS library and no socket. dnslib keeps the reserved Z bit, AD and CD as separate header properties; the harness assembles z from them. RDATA text is dnslib's own toZone() presentation.
+
 ## Remaining leads
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
-| 1 | dnslib | 1,231,762 | `dnslib.DNSRecord.parse(packet)` | dnslib |
-| 2 | py3dns | 129,993 | `DNS.Lib.DnsResult / Munpacker` | py3dns |
-| 3 | pypacker | 3,765 |  | pypacker |
+| 1 | py3dns | 129,993 | `DNS.Lib.DnsResult / Munpacker` | py3dns |
+| 2 | pypacker | 3,765 |  | pypacker |
 
 ## Checked, excluded or recorded separately
 

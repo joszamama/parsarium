@@ -1,10 +1,10 @@
 {
   "ecosystem": "python",
   "format": "dns",
-  "status": "pilot_two_verified_search_bounded",
+  "status": "pilot_three_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "project name contains 'dns'"
@@ -15,15 +15,15 @@
   },
   "search_hits_recorded": 100,
   "unique_search_hits": 100,
-  "unresolved_documentation_leads": 3,
+  "unresolved_documentation_leads": 2,
   "leads_recorded": 10,
   "leads_by_status": {
-    "resolved_verified_selected": 2,
+    "resolved_verified_selected": 3,
     "excluded": 5,
-    "unresolved": 3
+    "unresolved": 2
   },
   "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
-  "uncertainty": "Pilot cell: two Python paths verified, dnspython and dpkt, ranked by PyPI Stats last-month downloads. pycares is excluded (c-ares channel API, no bytes parser) and scapy is excluded under this pilot's no-socket rule (its import opens AF_NETLINK sockets). dnslib, py3dns and pypacker remain leads. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: three Python paths verified, dnspython, dpkt and dnslib, ranked by PyPI Stats last-month downloads. pycares is excluded (c-ares channel API, no bytes parser) and scapy is excluded under this pilot's no-socket rule (its import opens AF_NETLINK sockets). py3dns and pypacker remain leads. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/python/dns/registry-snapshot.json",
   "unresolved_leads": "data/python/dns/leads.json",
   "runtime_evidence": "data/python/dns/standard.json",
@@ -35,5 +35,5 @@
   },
   "third_party_evidence": "data/python/dns/parsers.json",
   "third_party_control_results": "data/python/dns/verification.json",
-  "selection": "Two control-verified Python DNS path(s), ranked by PyPI Stats last_month downloads excluding known mirrors: dnspython 2.9.2 (286,812,791), dpkt 1.9.8 (1,492,890)."
+  "selection": "Three control-verified Python DNS path(s), ranked by PyPI Stats last_month downloads excluding known mirrors: dnspython 2.9.2 (286,812,791), dpkt 1.9.8 (1,492,890), dnslib 0.9.26 (1,231,762)."
 }
