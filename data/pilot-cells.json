@@ -764,10 +764,10 @@
     {
       "ecosystem": "php",
       "format": "json",
-      "status": "pilot_three_selected_search_bounded",
+      "status": "pilot_four_selected_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 3,
+      "verified_third_party_count": 4,
       "verified_standard_or_runtime_count": 1,
       "search_queries": [
         "json",
@@ -779,14 +779,14 @@
       "search_limit_per_query": 100,
       "search_hits_recorded": 429,
       "unique_search_hits": 314,
-      "leads_recorded": 9,
+      "leads_recorded": 8,
       "leads_by_status": {
-        "unresolved": 5,
+        "unresolved": 4,
         "excluded": 4
       },
       "ranking_metric": "Packagist total downloads",
-      "selection": "Three Packagist-ranked paths have passed valid controls: seld/jsonlint (252,371,311 downloads), laminas/laminas-json (35,102,503, forced own PHP Decoder), and halaxa/json-machine (30,443,415, own stream Parser plus ext/json member decoding).",
-      "uncertainty": "Three PHP JSON third-party paths passed valid nested object controls and source-line coverage. Laminas and JSON Machine also passed a valid nested array control and stable source-line AFL feedback. Laminas is abandoned, and its own decoder runs only when explicitly enabled; its default API route delegates to ext/json. JSON Machine shares ext/json for member decoding. Five own-parser or partial-own-parser leads remain unverified; four json_decode wrappers are excluded. The bounded search used five Packagist queries of at most 100 hits each. Package downloads measure overall/historical adoption, not JSON parsing frequency. Valid controls do not establish complete RFC 8259 support.",
+      "selection": "Four Packagist-ranked paths have passed valid controls: seld/jsonlint (252,371,311 downloads), laminas/laminas-json (35,102,503, forced own PHP Decoder), halaxa/json-machine (30,443,415, own stream Parser plus ext/json member decoding), and salsify/json-streaming-parser (7,715,575, own character state machine with listener events).",
+      "uncertainty": "Four PHP JSON third-party paths passed valid nested object controls and source-line coverage. Laminas, JSON Machine and salsify also passed a valid nested array control and stable source-line AFL feedback. Laminas is abandoned, and its own decoder runs only when explicitly enabled; its default API route delegates to ext/json. JSON Machine shares ext/json for member decoding. salsify accepts only object/array roots and silently accepts concatenated documents, so its harness rejects anything other than one complete document; the tree-building listener is harness code. Four own-parser or partial-own-parser leads remain unverified; four json_decode wrappers are excluded. The bounded search used five Packagist queries of at most 100 hits each. Package downloads measure overall/historical adoption, not JSON parsing frequency. Valid controls do not establish complete RFC 8259 support.",
       "third_party_evidence": "data/php/json/parsers.json",
       "third_party_control_results": "data/php/json/verification.json",
       "runtime_evidence": "data/php/json/standard.json",

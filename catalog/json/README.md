@@ -13,4 +13,4 @@ This format is incomplete across the eight ecosystems. Each row reports only doc
 | [JavaScript](javascript/README.md) | pilot_three_selected_search_bounded | 3 | 3 |
 | [Python](python/README.md) | pilot_two_verified_bounded_search_pending | 2 | 2 |
 | [Rust](rust/README.md) | pilot_four_paths_verified_search_bounded | 4 | 4 |
-| [PHP](php/README.md) | pilot_three_selected_search_bounded | 3 | 3 |
+| [PHP](php/README.md) | pilot_four_selected_search_bounded | 4 | 4 |
