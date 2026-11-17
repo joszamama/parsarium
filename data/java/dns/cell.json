@@ -19,14 +19,15 @@
   },
   "search_hits_recorded": 104,
   "unique_search_hits": 101,
-  "unresolved_documentation_leads": 0,
-  "leads_recorded": 7,
+  "unresolved_documentation_leads": 4,
+  "leads_recorded": 18,
   "leads_by_status": {
     "resolved_verified_selected": 4,
-    "excluded": 3
+    "excluded": 10,
+    "unresolved": 4
   },
   "ranking_metric": "deps.dev directDependentCount summed over all releases",
-  "uncertainty": "Pilot cell: two Java paths verified, netty-codec-dns and dnsjava, ranked by deps.dev direct dependents summed over releases (a weak signal). Netty leaves A/AAAA as raw records (the harness formats the decoded bytes) and its DnsQuery has no AA/TC/RA/RCODE. pcap4j and MiniDNS remain leads; vert.x is excluded as a network client over Netty's codec. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: four Java paths verified, netty-codec-dns, dnsjava, pcap4j-core and minidns-core, ranked by deps.dev direct dependents summed over releases (a weak signal; Pcap4J's count covers its whole multi-protocol artifact). Netty leaves A/AAAA as raw records (the harness formats the decoded bytes) and its DnsQuery has no AA/TC/RA/RCODE. Pcap4J's names come from DnsDomainName.decompress, whose leading '.' for pointer-only names the harness drops, and its coverage and AFL++ feedback are scoped to its DNS classes. MiniDNS decodes AD and CD but not the reserved Z bit. Round 2 added targeted deps.dev lookups for the plausible Maven search hits: ApacheDS's DNS decoder fails the response control by source inspection (no CNAME decoder), the Netty backport and Netty 5 alpha are the selected Netty family, ph-dns and spotify dns wrap dnsjava, happy-dns keeps its parser package-private, ninio-dns and the Direct Project DNS are network applications, and the Scala codecs dns4s and otavia stay unresolved pending a decision on Scala artifacts in a Java cell. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/java/dns/registry-snapshot.json",
   "unresolved_leads": "data/java/dns/leads.json",
   "runtime_evidence": "data/java/dns/standard.json",

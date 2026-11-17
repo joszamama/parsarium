@@ -25,9 +25,25 @@ deps.dev directDependentCount summed over all releases, from [registry-snapshot.
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
+| 1 | org.apache.directory.server:apacheds-protocol-dns | 75 | `new DnsMessageDecoder().decode(IoBuffer)` | ApacheDS DNS protocol (DnsMessageDecoder) |
+| 2 | com.github.mkroli:dns4s-core_2.13 | 22 | `Message codec (scodec) on a ByteVector` | dns4s (Scala) |
+| 3 | cc.otavia:otavia-codec-dns_3 | 7 |  | otavia (Scala) |
+| 4 | com.github.greysoft.naf:greynaf-dns | 0 |  | Greysoft NAF |
+
+- **org.apache.directory.server:apacheds-protocol-dns** (unresolved): Fails the response control by source inspection of the pinned 2.0.0.AM27 sources jar (not run): DnsMessageDecoder registers record decoders only for A, NS, MX and AAAA and throws IllegalArgumentException (I18n ERR_600) for any other type, so the CNAME answer of controls/dns/response.bin cannot be decoded. It also decodes no Z, AD or CD bits. The artifact is part of the ApacheDS server (compile dependencies on apacheds-core, MINA and the LDAP API).
+- **com.github.mkroli:dns4s-core_2.13** (unresolved): Not tried: a Scala library (one artifact per Scala binary version; dns4s-core_3 has 8 direct dependents); no Scala artifact has been ranked in a Java cell yet, so whether it belongs to this cell needs a decision.
+- **cc.otavia:otavia-codec-dns_3** (unresolved): Not tried: a Scala 3 network-framework codec (7 direct dependents summed); same Scala-in-Java-cell question as dns4s.
+- **com.github.greysoft.naf:greynaf-dns** (unresolved): Not tried: zero deps.dev direct dependents, so it has no positive primary metric and is not added.
 
 ## Checked, excluded or recorded separately
 
 - **de.measite.minidns:minidns-core** (excluded): Old Maven coordinate of MiniDNS; same family as org.minidns:minidns-core.
 - **io.vertx:vertx-core** (excluded): The DNS client is a network API over Netty's codec; no documented message-bytes parser of its own. Its count is for all of vertx-core.
 - **org.xbill:dnsjava** (excluded): Not on deps.dev (404); the published coordinate is dnsjava:dnsjava.
+- **org.asynchttpclient:netty-codec-dns** (excluded): Backport copy of Netty's DNS codec for async-http-client (parent netty-bp; 2.0.40 ships io.netty.handler.codec.dns classes such as DatagramDnsResponseDecoder and DefaultDnsRecordDecoder under the Netty/Codec/DNS name). It is an older copy of the selected netty-codec-dns family, not a separate parser.
+- **io.netty:netty5-codec-dns** (excluded): Netty 5 alpha line (default 5.0.0.Alpha5) of the selected netty-codec-dns codec; same project and family, pre-release only.
+- **com.helger.web:ph-dns** (excluded): DNS helper library over dnsjava (11.5.1 POM depends on dnsjava); no own message parser.
+- **com.spotify:dns** (excluded): SRV lookup/resolver wrapper over dnsjava (3.3.2 POM depends on dnsjava); network API, no own message parser.
+- **org.nhind:dns** (excluded): Direct Project DNS server application (9.0.0 jar: DNSServer, UDPServer, TCPServer, Spring Boot autoconfiguration); no documented API that parses caller-supplied message bytes.
+- **com.qiniu:happy-dns** (excluded): Resolver library; its wire parser com.qiniu.android.dns.dns.DnsResponse is package-private (2.0.1 sources), so there is no public API for caller-supplied message bytes.
+- **com.davfx.ninio:ninio-dns** (excluded): Asynchronous DNS client (3.0.50 sources: DnsClient, DnsConnecter, DnsRequestBuilder); network API with no documented message-bytes parser.

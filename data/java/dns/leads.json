@@ -84,5 +84,117 @@
     "documentation": "https://github.com/dnsjava/dnsjava",
     "family": "dnsjava",
     "reason": "Not on deps.dev (404); the published coordinate is dnsjava:dnsjava."
+  },
+  {
+    "name": "org.apache.directory.server:apacheds-protocol-dns",
+    "status": "unresolved",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 75,
+    "found_by": "round-2 lookup of a registry search hit",
+    "documentation": "https://repo.maven.apache.org/maven2/org/apache/directory/server/apacheds-protocol-dns/2.0.0.AM27/apacheds-protocol-dns-2.0.0.AM27-sources.jar",
+    "input_api_lead": "new DnsMessageDecoder().decode(IoBuffer)",
+    "family": "ApacheDS DNS protocol (DnsMessageDecoder)",
+    "reason": "Fails the response control by source inspection of the pinned 2.0.0.AM27 sources jar (not run): DnsMessageDecoder registers record decoders only for A, NS, MX and AAAA and throws IllegalArgumentException (I18n ERR_600) for any other type, so the CNAME answer of controls/dns/response.bin cannot be decoded. It also decodes no Z, AD or CD bits. The artifact is part of the ApacheDS server (compile dependencies on apacheds-core, MINA and the LDAP API)."
+  },
+  {
+    "name": "org.asynchttpclient:netty-codec-dns",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 57,
+    "found_by": "round-2 lookup of a registry search hit",
+    "documentation": "https://central.sonatype.com/artifact/org.asynchttpclient/netty-codec-dns",
+    "family": "Netty DNS codec",
+    "reason": "Backport copy of Netty's DNS codec for async-http-client (parent netty-bp; 2.0.40 ships io.netty.handler.codec.dns classes such as DatagramDnsResponseDecoder and DefaultDnsRecordDecoder under the Netty/Codec/DNS name). It is an older copy of the selected netty-codec-dns family, not a separate parser."
+  },
+  {
+    "name": "io.netty:netty5-codec-dns",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 15,
+    "found_by": "round-2 lookup of a registry search hit",
+    "documentation": "https://central.sonatype.com/artifact/io.netty/netty5-codec-dns",
+    "family": "Netty DNS codec",
+    "reason": "Netty 5 alpha line (default 5.0.0.Alpha5) of the selected netty-codec-dns codec; same project and family, pre-release only."
+  },
+  {
+    "name": "com.helger.web:ph-dns",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 46,
+    "found_by": "round-2 lookup of a registry search hit",
+    "documentation": "https://central.sonatype.com/artifact/com.helger.web/ph-dns",
+    "family": "dnsjava",
+    "reason": "DNS helper library over dnsjava (11.5.1 POM depends on dnsjava); no own message parser."
+  },
+  {
+    "name": "com.spotify:dns",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 20,
+    "found_by": "round-2 lookup of a registry search hit",
+    "documentation": "https://central.sonatype.com/artifact/com.spotify/dns",
+    "family": "dnsjava",
+    "reason": "SRV lookup/resolver wrapper over dnsjava (3.3.2 POM depends on dnsjava); network API, no own message parser."
+  },
+  {
+    "name": "org.nhind:dns",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 16,
+    "found_by": "round-2 lookup of a registry search hit",
+    "documentation": "https://central.sonatype.com/artifact/org.nhind/dns",
+    "family": "Direct Project DNS server",
+    "reason": "Direct Project DNS server application (9.0.0 jar: DNSServer, UDPServer, TCPServer, Spring Boot autoconfiguration); no documented API that parses caller-supplied message bytes."
+  },
+  {
+    "name": "com.qiniu:happy-dns",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 14,
+    "found_by": "round-2 lookup of a registry search hit",
+    "documentation": "https://central.sonatype.com/artifact/com.qiniu/happy-dns",
+    "family": "happy-dns",
+    "reason": "Resolver library; its wire parser com.qiniu.android.dns.dns.DnsResponse is package-private (2.0.1 sources), so there is no public API for caller-supplied message bytes."
+  },
+  {
+    "name": "com.davfx.ninio:ninio-dns",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 14,
+    "found_by": "round-2 lookup of a registry search hit",
+    "documentation": "https://central.sonatype.com/artifact/com.davfx.ninio/ninio-dns",
+    "family": "ninio",
+    "reason": "Asynchronous DNS client (3.0.50 sources: DnsClient, DnsConnecter, DnsRequestBuilder); network API with no documented message-bytes parser."
+  },
+  {
+    "name": "com.github.mkroli:dns4s-core_2.13",
+    "status": "unresolved",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 22,
+    "found_by": "round-2 lookup of a registry search hit",
+    "documentation": "https://central.sonatype.com/artifact/com.github.mkroli/dns4s-core_2.13",
+    "input_api_lead": "Message codec (scodec) on a ByteVector",
+    "family": "dns4s (Scala)",
+    "reason": "Not tried: a Scala library (one artifact per Scala binary version; dns4s-core_3 has 8 direct dependents); no Scala artifact has been ranked in a Java cell yet, so whether it belongs to this cell needs a decision."
+  },
+  {
+    "name": "cc.otavia:otavia-codec-dns_3",
+    "status": "unresolved",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 7,
+    "found_by": "round-2 lookup of a registry search hit",
+    "documentation": "https://central.sonatype.com/artifact/cc.otavia/otavia-codec-dns_3",
+    "family": "otavia (Scala)",
+    "reason": "Not tried: a Scala 3 network-framework codec (7 direct dependents summed); same Scala-in-Java-cell question as dns4s."
+  },
+  {
+    "name": "com.github.greysoft.naf:greynaf-dns",
+    "status": "unresolved",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 0,
+    "found_by": "round-2 lookup of a registry search hit",
+    "documentation": "https://central.sonatype.com/artifact/com.github.greysoft.naf/greynaf-dns",
+    "family": "Greysoft NAF",
+    "reason": "Not tried: zero deps.dev direct dependents, so it has no positive primary metric and is not added."
   }
 ]
