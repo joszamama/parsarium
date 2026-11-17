@@ -25,6 +25,7 @@ import venv
 
 from run_case import MAX_CASE_BYTES, ROOT, project_for
 from format_registry import ALL_FORMATS, ECOSYSTEMS
+from mp3_plain import BUNDLED_DECODED_SHA256, SOURCE_CONTROLS, validate_frames
 
 
 FORMATS = ALL_FORMATS
@@ -34,7 +35,7 @@ FORMATS = ALL_FORMATS
 # the tags does not yield the pilot's contiguous Layer III stream.
 FANBASE_FORMATS = {"png": "png", "zip": "zip", "wav": "wav", "svg": "svg",
                    "mp3_id3v2": "mp3", "json": "json", "xml": "xml"}
-LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan",
+LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan", "mp3": "mp3_plain.fan",
                "http11": "http11_request.fan", "ascii_ply": "ascii_ply.fan",
                "ascii_pnm": "ascii_pnm_p3.fan"}
 # Passed as -x with --spec; Fandango defaults to '.txt' for -f.
@@ -57,9 +58,14 @@ def digest(path: Path) -> str:
 
 
 def file_record(path: Path, base: Path) -> dict:
-    data = path.read_bytes()
-    return {"path": str(path.relative_to(base)), "sha256": sha256(data).hexdigest(),
-            "bytes": len(data)}
+    checksum = sha256()
+    size = 0
+    with path.open("rb") as source:
+        while chunk := source.read(1 << 16):
+            checksum.update(chunk)
+            size += len(chunk)
+    return {"path": str(path.relative_to(base)), "sha256": checksum.hexdigest(),
+            "bytes": size}
 
 
 def output_directory(path: Path) -> Path:
@@ -264,6 +270,12 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
         cli.error("--spec must be outside the output directory")
     executable = fandango_executable(args.fandango)
     version = fandango_version(executable)
+    bundled_plain_mp3 = (args.format == "mp3" and
+                         spec == ROOT / "fuzzing/fandango/specs/mp3_plain.fan")
+    if bundled_plain_mp3:
+        for path, expected in SOURCE_CONTROLS.items():
+            if digest(ROOT / path) != expected:
+                raise ValueError(f"bundled MP3 source control changed: {path}")
 
     generated = run_dir / "generated"
     spec_home = run_dir / "fanbase-specs"
@@ -364,8 +376,31 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
     receipt["over_limit_outputs"] = sum(1 for item in outputs if item["bytes"] > MAX_CASE_BYTES)
     receipt["symlinks_skipped"] = [str(path.relative_to(generated)) for path in links]
     receipt["input_limit_bytes"] = MAX_CASE_BYTES
+    if args.format == "mp3":
+        receipt["plain_mp3_route"] = {
+            "source": "local_spec", "postprocess": "none",
+            "validation": "contiguous complete MPEG-1/2 Layer III frame headers",
+            "limit_bytes": MAX_CASE_BYTES,
+            "bundled_decoded_samples": bundled_plain_mp3,
+            "validator_sha256": digest(ROOT / "scripts/mp3_plain.py"),
+            "source_controls": SOURCE_CONTROLS if bundled_plain_mp3 else None,
+        }
 
     problems = []
+    if args.format == "mp3":
+        for path, record in zip(files, outputs):
+            if record["bytes"] > MAX_CASE_BYTES:
+                continue
+            try:
+                validation = validate_frames(path.read_bytes())
+                bundled = receipt["plain_mp3_route"]["bundled_decoded_samples"]
+                validation["pinned_go_and_rust_decode_checked"] = (
+                    bundled and record["sha256"] in BUNDLED_DECODED_SHA256)
+                record["format_validation"] = validation
+                if bundled and not validation["pinned_go_and_rust_decode_checked"]:
+                    problems.append(f"{record['path']}: bundled MP3 output differs from the six decoded samples")
+            except ValueError as error:
+                problems.append(f"{record['path']}: {error}")
     if receipt["exit_code"] != 0:
         problems.append("Fandango did not exit cleanly")
     if not outputs:

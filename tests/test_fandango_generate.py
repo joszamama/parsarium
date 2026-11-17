@@ -48,7 +48,9 @@ FAKE = textwrap.dedent('''\
     extension = value("-x") or "." + (name or "txt").split("-")[0]
     count = 0 if mode == "empty" else int(value("-n"))
     for index in range(count):
-        (directory / f"out-{index}{extension}").write_bytes(b"\\x89PNG" + bytes([index % 256]))
+        payload = (Path(os.environ["FAKE_MP3_CONTROL"]).read_bytes()
+                   if mode == "plain-mp3" else b"\\x89PNG" + bytes([index % 256]))
+        (directory / f"out-{index}{extension}").write_bytes(payload)
     if mode == "symlink":
         (directory / "link").symlink_to("/etc/hosts")
     raise SystemExit(3 if mode == "fail" else 0)
@@ -134,6 +136,42 @@ class FandangoGenerateTest(unittest.TestCase):
                                  ["-F", format_name])
         self.assertIn("mp3", fandango_generate.FORMATS)
         self.assertNotIn("mp3", fandango_generate.FANBASE_FORMATS)
+        self.assertEqual(fandango_generate.LOCAL_SPECS["mp3"], "mp3_plain.fan")
+
+    def test_plain_mp3_default_uses_local_spec_and_checks_frames(self):
+        control = ROOT / "controls/mp3/go-tone-44k-mono.mp3"
+        run = self.tmp / "plain-mp3"
+        with mock.patch.dict(os.environ, {"FAKE_MP3_CONTROL": str(control)}):
+            code, output = self.run_cli("mp3", "go", "github_com_hajimehoshi_go_mp3",
+                                        str(run), "--count", "1", "--seed", "7",
+                                        mode="plain-mp3")
+        self.assertEqual(code, 0, output)
+        spec = ROOT / "fuzzing/fandango/specs/mp3_plain.fan"
+        logged = json.loads(self.log.read_text())
+        self.assertEqual(logged["argv"][1:5], ["-f", str(spec), "-x", ".mp3"])
+        receipt = self.receipt(run)
+        self.assertEqual(receipt["spec"]["sha256"], sha256(spec.read_bytes()).hexdigest())
+        self.assertEqual(receipt["outputs"][0]["sha256"], sha256(control.read_bytes()).hexdigest())
+        self.assertEqual(receipt["outputs"][0]["format_validation"]["frames"], 11)
+        self.assertTrue(receipt["outputs"][0]["format_validation"]["pinned_go_and_rust_decode_checked"])
+        self.assertEqual(receipt["problems"], [])
+
+    def test_plain_mp3_bundled_route_rejects_other_valid_stream(self):
+        control = ROOT / "controls/mp3/tone-44k-mono.mp3"
+        run = self.tmp / "other-plain-mp3"
+        with mock.patch.dict(os.environ, {"FAKE_MP3_CONTROL": str(control)}):
+            code, output = self.run_cli("mp3", "go", "github_com_hajimehoshi_go_mp3",
+                                        str(run), "--count", "1", mode="plain-mp3")
+        self.assertEqual(code, 1, output)
+        self.assertIn("differs from the six decoded samples", output)
+
+    def test_plain_mp3_rejects_output_without_frames(self):
+        run = self.tmp / "bad-plain-mp3"
+        code, output = self.run_cli("mp3", "go", "github_com_hajimehoshi_go_mp3",
+                                    str(run), "--count", "1")
+        self.assertEqual(code, 1, output)
+        self.assertIn("plain MP3 output is outside", output)
+        self.assertEqual(len(self.receipt(run)["problems"]), 1)
 
     def test_standard_feedback_path_uses_control_receipt(self):
         run = self.tmp / "tkinter-png"
