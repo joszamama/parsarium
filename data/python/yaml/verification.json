@@ -1844,6 +1844,468 @@
       "project_receipt": "projects/yaml/python/ruamel_yaml_clib/verification.json",
       "project_receipt_sha256": "8874839f1c4089130c73e7beb798c430db777965b821f019fc6fd7229e2d7bbe",
       "coverage_caveat": "LLVM source-region lines of the libyaml-derived C (api.c, reader.c, scanner.c, parser.c, yaml_private.h) in the source-built extension at -O0; the Cython binding and ruamel.yaml's Python constructor/resolver are not counted."
+    },
+    {
+      "package": "srsly",
+      "version": "3.0.1",
+      "pass": true,
+      "input_api": "srsly.yaml_loads(local YAML text as str); the raw bytes and a local binary stream, passed unchanged to ruamel.yaml, give the same tree",
+      "output": {
+        "root": "map",
+        "nodes": {
+          "bool": 2,
+          "float": 2,
+          "int": 7,
+          "map": 7,
+          "null": 1,
+          "seq": 2,
+          "str": 13
+        },
+        "max_depth": 3,
+        "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+        "tree": [
+          "map",
+          [
+            [
+              "kind",
+              [
+                "str",
+                "catalog"
+              ]
+            ],
+            [
+              "version",
+              [
+                "int",
+                "2"
+              ]
+            ],
+            [
+              "ratio",
+              [
+                "float",
+                "0.25"
+              ]
+            ],
+            [
+              "offset",
+              [
+                "int",
+                "-17"
+              ]
+            ],
+            [
+              "enabled",
+              [
+                "bool",
+                true
+              ]
+            ],
+            [
+              "retired",
+              [
+                "bool",
+                false
+              ]
+            ],
+            [
+              "missing",
+              [
+                "null"
+              ]
+            ],
+            [
+              "title",
+              [
+                "str",
+                "Café \"quoted\"\tend"
+              ]
+            ],
+            [
+              "single",
+              [
+                "str",
+                "it's here"
+              ]
+            ],
+            [
+              "tags",
+              [
+                "seq",
+                [
+                  [
+                    "str",
+                    "alpha"
+                  ],
+                  [
+                    "str",
+                    "beta"
+                  ],
+                  [
+                    "str",
+                    "gamma delta"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "point",
+              [
+                "map",
+                [
+                  [
+                    "lat",
+                    [
+                      "int",
+                      "1"
+                    ]
+                  ],
+                  [
+                    "lon",
+                    [
+                      "float",
+                      "-2.5"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "items",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "id",
+                        [
+                          "int",
+                          "7"
+                        ]
+                      ],
+                      [
+                        "name",
+                        [
+                          "str",
+                          "first item"
+                        ]
+                      ],
+                      [
+                        "note",
+                        [
+                          "str",
+                          "line one\nline two\n"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "id",
+                        [
+                          "int",
+                          "8"
+                        ]
+                      ],
+                      [
+                        "name",
+                        [
+                          "str",
+                          "Zürich"
+                        ]
+                      ],
+                      [
+                        "note",
+                        [
+                          "str",
+                          "folded text\n"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "defaults",
+              [
+                "map",
+                [
+                  [
+                    "retries",
+                    [
+                      "int",
+                      "3"
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "base"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "service",
+              [
+                "map",
+                [
+                  [
+                    "settings",
+                    [
+                      "map",
+                      [
+                        [
+                          "retries",
+                          [
+                            "int",
+                            "3"
+                          ]
+                        ],
+                        [
+                          "label",
+                          [
+                            "str",
+                            "base"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "edge"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      },
+      "differential_control": "controls/yaml/order.yaml",
+      "differential_output": {
+        "root": "seq",
+        "nodes": {
+          "bool": 1,
+          "float": 2,
+          "int": 5,
+          "map": 7,
+          "null": 1,
+          "seq": 5,
+          "str": 11
+        },
+        "max_depth": 4,
+        "tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46",
+        "tree": [
+          "seq",
+          [
+            [
+              "map",
+              [
+                [
+                  "order",
+                  [
+                    "str",
+                    "A-7"
+                  ]
+                ],
+                [
+                  "lines",
+                  [
+                    "seq",
+                    [
+                      [
+                        "map",
+                        [
+                          [
+                            "sku",
+                            [
+                              "str",
+                              "Xé-1"
+                            ]
+                          ],
+                          [
+                            "qty",
+                            [
+                              "int",
+                              "2"
+                            ]
+                          ],
+                          [
+                            "price",
+                            [
+                              "float",
+                              "12.5"
+                            ]
+                          ]
+                        ]
+                      ],
+                      [
+                        "map",
+                        [
+                          [
+                            "sku",
+                            [
+                              "str",
+                              "B '2'"
+                            ]
+                          ],
+                          [
+                            "qty",
+                            [
+                              "int",
+                              "1"
+                            ]
+                          ],
+                          [
+                            "price",
+                            [
+                              "float",
+                              "0.75"
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "flags",
+                  [
+                    "seq",
+                    []
+                  ]
+                ],
+                [
+                  "meta",
+                  [
+                    "map",
+                    []
+                  ]
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "city",
+                  [
+                    "str",
+                    "Berlin"
+                  ]
+                ],
+                [
+                  "zip",
+                  [
+                    "str",
+                    "10115"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "city",
+                  [
+                    "str",
+                    "Berlin"
+                  ]
+                ],
+                [
+                  "zip",
+                  [
+                    "str",
+                    "10115"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "seq",
+              [
+                [
+                  "int",
+                  "1"
+                ],
+                [
+                  "seq",
+                  [
+                    [
+                      "int",
+                      "2"
+                    ],
+                    [
+                      "int",
+                      "3"
+                    ]
+                  ]
+                ],
+                [
+                  "map",
+                  [
+                    [
+                      "k",
+                      [
+                        "str",
+                        "v"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "str",
+              "plain multi word"
+            ],
+            [
+              "str",
+              "line\nbreak"
+            ],
+            [
+              "str",
+              "kept\n  indented"
+            ],
+            [
+              "null"
+            ],
+            [
+              "bool",
+              false
+            ]
+          ]
+        ]
+      },
+      "oracle": "hand-written typed trees in controls/yaml/check_controls.py (EXPECTED); bytes, decoded str and local binary stream inputs all equal them",
+      "oracle_tree_sha256": {
+        "control": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+        "differential_control": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46"
+      },
+      "bytes_str_and_stream_match_oracle": true,
+      "platform": "linux/amd64",
+      "parser_family": "Wrapper: srsly.yaml_loads over ruamel.yaml 0.19.1 YAML(typ='safe', pure=True), the pure-Python ruamel.yaml loader; not an independent parser",
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 7,
+      "format_specific_source_lines_covered": 7,
+      "underlying_source_files": 15,
+      "underlying_source_lines_covered": 1274,
+      "afl_feedback": "data/python/yaml/srsly-valid-feedback.json",
+      "project_receipt": "projects/yaml/python/srsly/verification.json",
+      "project_receipt_sha256": "6b5d7dd8b97248e112a4108754b298cce23cd6336d8cef6fe5b4f136bc6443a4",
+      "coverage_caveat": "Python line coverage of srsly (own wrapper lines) and, as underlying parser source, of ruamel.yaml; AFL++ features cover both packages under site-packages."
     }
   ],
   "standard": []

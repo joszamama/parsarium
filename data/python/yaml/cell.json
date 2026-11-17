@@ -1,10 +1,10 @@
 {
   "ecosystem": "python",
   "format": "yaml",
-  "status": "pilot_four_verified_bounded_search",
+  "status": "pilot_five_verified_bounded_search",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 4,
+  "verified_third_party_count": 5,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "project name contains 'yaml'"
@@ -15,14 +15,14 @@
   "search_totals": {
     "project name contains 'yaml'": 798
   },
-  "leads_recorded": 8,
+  "leads_recorded": 9,
   "leads_by_status": {
-    "selected": 4,
+    "selected": 5,
     "shared_family": 3,
     "unresolved": 1
   },
   "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
-  "uncertainty": "Four verified third-party paths in PyPI last_month order: PyYAML 6.0.3 (1,227,712,536); PyYAML CSafeLoader (libyaml) 6.0.3 (1,227,712,536); ruamel.yaml 0.19.1 (177,667,165); ruamel.yaml.clib 0.2.15 (69,289,256). PyYAML (pure SafeLoader) and ruamel.yaml (YAML(typ='safe', pure=True)) are pure-Python loaders with Python line coverage of their own package. PyYAML CSafeLoader is a separate route of the same PyPI package (its metric is the PyYAML package value, not a split) whose scanner/parser is libyaml 0.2.5, built from source with LLVM coverage and linked statically into _yaml. ruamel.yaml.clib is ruamel.yaml's C loader package with its own metric; its vendored C is an older libyaml snapshot (96.1% of distinct lines shared with libyaml 0.2.5), so it shares the libyaml family with the CSafeLoader path. Native routes report LLVM regions of the parser C; Python routes report executed lines; each has three identical AFL++ runs per control that differ in scanner/parser sources. The bounded search (project name contains 'yaml'; first 100 alphabetical hits of 798, captured 2026-11-17) and named leads are recorded; remaining leads are in leads.json. Package adoption is not YAML-specific use. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys, YAML 1.1-only scalars or malformed input.",
+  "uncertainty": "Five verified third-party paths in PyPI last_month order: PyYAML 6.0.3 (1,227,712,536); PyYAML CSafeLoader (libyaml) 6.0.3 (1,227,712,536); ruamel.yaml 0.19.1 (177,667,165); ruamel.yaml.clib 0.2.15 (69,289,256); srsly 3.0.1 (24,260,205). PyYAML (pure SafeLoader) and ruamel.yaml (YAML(typ='safe', pure=True)) are pure-Python loaders with Python line coverage of their own package. PyYAML CSafeLoader is a separate route of the same PyPI package (its metric is the PyYAML package value, not a split) whose scanner/parser is libyaml 0.2.5, built from source with LLVM coverage and linked statically into _yaml. ruamel.yaml.clib is ruamel.yaml's C loader package with its own metric; its vendored C is an older libyaml snapshot (96.1% of distinct lines shared with libyaml 0.2.5), so it shares the libyaml family with the CSafeLoader path. srsly.yaml_loads is a labelled wrapper over the same pure ruamel.yaml route; its own lines are identical on both controls. Native routes report LLVM regions of the parser C; Python routes report executed lines; each has three identical AFL++ runs per control that differ in scanner/parser sources. The bounded search (project name contains 'yaml'; first 100 alphabetical hits of 798, captured 2026-11-17) and named leads are recorded; remaining leads are in leads.json. Package adoption is not YAML-specific use. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys, YAML 1.1-only scalars or malformed input.",
   "third_party_evidence": "data/python/yaml/parsers.json",
   "third_party_control_results": "data/python/yaml/verification.json",
   "runtime_evidence": "data/python/yaml/standard.json",

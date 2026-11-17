@@ -64,6 +64,19 @@
     "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
   },
   {
+    "name": "srsly",
+    "status": "selected",
+    "metric_value": 24260205,
+    "metric_error": null,
+    "family": "ruamel.yaml via srsly",
+    "api_hint": "srsly.yaml_loads(str)",
+    "note": "Serialization helper package (spaCy/thinc); yaml_loads wraps ruamel.yaml YAML(typ='safe', pure=True).",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/srsly/",
+    "reason": "Selected: pinned release, documented local API, both valid controls equal the hand-written typed trees through bytes, str and stream, Docker coverage and stable, input-dependent AFL++ feedback recorded.",
+    "evidence": "projects/yaml/python/srsly/verification.json"
+  },
+  {
     "name": "oyaml",
     "status": "shared_family",
     "metric_value": 2622495,

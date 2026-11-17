@@ -1,0 +1,535 @@
+{
+  "checked_at_utc": "2026-11-17T20:50:57.427840+00:00",
+  "project": "yaml/python/srsly",
+  "package": "srsly",
+  "release": "3.0.1",
+  "pass": true,
+  "input_kind": "two fixed valid schema-neutral YAML 1.2 controls",
+  "oracle": "hand-written typed trees in controls/yaml/check_controls.py (EXPECTED); bytes, decoded str and local binary stream inputs all equal them",
+  "control_oracle": {
+    "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+    "root": "map",
+    "nodes": {
+      "bool": 2,
+      "float": 2,
+      "int": 7,
+      "map": 7,
+      "null": 1,
+      "seq": 2,
+      "str": 13
+    },
+    "max_depth": 3,
+    "bytes_matches_oracle": true,
+    "str_matches_oracle": true,
+    "stream_matches_oracle": true
+  },
+  "variant_oracle": {
+    "tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46",
+    "root": "seq",
+    "nodes": {
+      "bool": 1,
+      "float": 2,
+      "int": 5,
+      "map": 7,
+      "null": 1,
+      "seq": 5,
+      "str": 11
+    },
+    "max_depth": 4,
+    "bytes_matches_oracle": true,
+    "str_matches_oracle": true,
+    "stream_matches_oracle": true
+  },
+  "feedback_scope": "executed Python source lines of srsly 3.0.1 (wrapper) and of ruamel.yaml 0.19.1 (the parser it calls) under /opt/venv/lib/python3.14/site-packages/, mapped to the AFL++ bitmap by the Parsarium Python line bridge",
+  "base_image_id": "sha256:0e3dddc24bc8baa3a83d7af545a37ec9d51dc75855c77349d38fbe6942674388",
+  "overlay_image_id": "sha256:2165563d276464209c2b3f3fcb3fcec98692ad2b76d1ea7ce6e7c3de87fcf7c4",
+  "overlay_receipt_sha256": "2b0191d26ee2804fd6ac426905c3a9126e149d26b07d6e4b412e645ec344a1f7",
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "variant_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+  "control_output": {
+    "root": "map",
+    "nodes": {
+      "bool": 2,
+      "float": 2,
+      "int": 7,
+      "map": 7,
+      "null": 1,
+      "seq": 2,
+      "str": 13
+    },
+    "max_depth": 3,
+    "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+    "tree": [
+      "map",
+      [
+        [
+          "kind",
+          [
+            "str",
+            "catalog"
+          ]
+        ],
+        [
+          "version",
+          [
+            "int",
+            "2"
+          ]
+        ],
+        [
+          "ratio",
+          [
+            "float",
+            "0.25"
+          ]
+        ],
+        [
+          "offset",
+          [
+            "int",
+            "-17"
+          ]
+        ],
+        [
+          "enabled",
+          [
+            "bool",
+            true
+          ]
+        ],
+        [
+          "retired",
+          [
+            "bool",
+            false
+          ]
+        ],
+        [
+          "missing",
+          [
+            "null"
+          ]
+        ],
+        [
+          "title",
+          [
+            "str",
+            "Café \"quoted\"\tend"
+          ]
+        ],
+        [
+          "single",
+          [
+            "str",
+            "it's here"
+          ]
+        ],
+        [
+          "tags",
+          [
+            "seq",
+            [
+              [
+                "str",
+                "alpha"
+              ],
+              [
+                "str",
+                "beta"
+              ],
+              [
+                "str",
+                "gamma delta"
+              ]
+            ]
+          ]
+        ],
+        [
+          "point",
+          [
+            "map",
+            [
+              [
+                "lat",
+                [
+                  "int",
+                  "1"
+                ]
+              ],
+              [
+                "lon",
+                [
+                  "float",
+                  "-2.5"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "items",
+          [
+            "seq",
+            [
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "7"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "first item"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "line one\nline two\n"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "8"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "Zürich"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "folded text\n"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "defaults",
+          [
+            "map",
+            [
+              [
+                "retries",
+                [
+                  "int",
+                  "3"
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "base"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "service",
+          [
+            "map",
+            [
+              [
+                "settings",
+                [
+                  "map",
+                  [
+                    [
+                      "retries",
+                      [
+                        "int",
+                        "3"
+                      ]
+                    ],
+                    [
+                      "label",
+                      [
+                        "str",
+                        "base"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "edge"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "variant_output": {
+    "root": "seq",
+    "nodes": {
+      "bool": 1,
+      "float": 2,
+      "int": 5,
+      "map": 7,
+      "null": 1,
+      "seq": 5,
+      "str": 11
+    },
+    "max_depth": 4,
+    "tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46",
+    "tree": [
+      "seq",
+      [
+        [
+          "map",
+          [
+            [
+              "order",
+              [
+                "str",
+                "A-7"
+              ]
+            ],
+            [
+              "lines",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "Xé-1"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "2"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "12.5"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "B '2'"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "1"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "0.75"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "flags",
+              [
+                "seq",
+                []
+              ]
+            ],
+            [
+              "meta",
+              [
+                "map",
+                []
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "seq",
+          [
+            [
+              "int",
+              "1"
+            ],
+            [
+              "seq",
+              [
+                [
+                  "int",
+                  "2"
+                ],
+                [
+                  "int",
+                  "3"
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "k",
+                  [
+                    "str",
+                    "v"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "str",
+          "plain multi word"
+        ],
+        [
+          "str",
+          "line\nbreak"
+        ],
+        [
+          "str",
+          "kept\n  indented"
+        ],
+        [
+          "null"
+        ],
+        [
+          "bool",
+          false
+        ]
+      ]
+    ]
+  },
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "control_parser_features": 1281,
+  "variant_parser_features": 1315,
+  "control_features_by_file": {
+    "ruamel/yaml/compat.py": 12,
+    "ruamel/yaml/composer.py": 109,
+    "ruamel/yaml/constructor.py": 130,
+    "ruamel/yaml/docinfo.py": 6,
+    "ruamel/yaml/error.py": 7,
+    "ruamel/yaml/events.py": 26,
+    "ruamel/yaml/main.py": 114,
+    "ruamel/yaml/nodes.py": 15,
+    "ruamel/yaml/parser.py": 223,
+    "ruamel/yaml/reader.py": 57,
+    "ruamel/yaml/resolver.py": 49,
+    "ruamel/yaml/scanner.py": 478,
+    "ruamel/yaml/tag.py": 26,
+    "ruamel/yaml/tokens.py": 16,
+    "ruamel/yaml/util.py": 6,
+    "srsly/_yaml_api.py": 7
+  },
+  "variant_features_by_file": {
+    "ruamel/yaml/compat.py": 12,
+    "ruamel/yaml/composer.py": 109,
+    "ruamel/yaml/constructor.py": 126,
+    "ruamel/yaml/docinfo.py": 6,
+    "ruamel/yaml/error.py": 7,
+    "ruamel/yaml/events.py": 26,
+    "ruamel/yaml/main.py": 118,
+    "ruamel/yaml/nodes.py": 15,
+    "ruamel/yaml/parser.py": 250,
+    "ruamel/yaml/reader.py": 57,
+    "ruamel/yaml/resolver.py": 49,
+    "ruamel/yaml/scanner.py": 485,
+    "ruamel/yaml/tag.py": 26,
+    "ruamel/yaml/tokens.py": 16,
+    "ruamel/yaml/util.py": 6,
+    "srsly/_yaml_api.py": 7
+  },
+  "parser_feature_difference": 98,
+  "own_package_feature_difference": 0,
+  "ruamel_scanner_py_feature_difference": 43,
+  "ruamel_parser_py_feature_difference": 47,
+  "control_afl_tuples": 1295,
+  "variant_afl_tuples": 1329,
+  "afl_tuple_difference": 98
+}

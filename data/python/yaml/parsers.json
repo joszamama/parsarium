@@ -951,7 +951,7 @@
     "dependencies": [],
     "scope": "One YAML 1.2 document from local bytes as a typed tree on the two schema-neutral valid controls. ruamel.yaml applies the YAML 1.2 resolver by default. No tags, merge keys, multi-document streams or malformed input were tested.",
     "family": "ruamel.yaml pure-Python loader (PyYAML-derived Reader/Scanner/Parser/Composer, SafeConstructor, YAML 1.2 VersionedResolver); not the ruamel.yaml.clib(z) C route",
-    "family_note": "ruamel.yaml began as a PyYAML fork and keeps a PyYAML-derived Reader/Scanner/Parser/Composer, separately maintained with YAML 1.2 support. typ='safe', pure=True selects ruamel/yaml/parser.Parser with the pure Reader and Scanner, SafeConstructor and the YAML 1.2 VersionedResolver; no C loader is installed (ruamel.yaml.clib, the C route, is selected as its own path; clibz is a separate lead). strictyaml wraps this package.",
+    "family_note": "ruamel.yaml began as a PyYAML fork and keeps a PyYAML-derived Reader/Scanner/Parser/Composer, separately maintained with YAML 1.2 support. typ='safe', pure=True selects ruamel/yaml/parser.Parser with the pure Reader and Scanner, SafeConstructor and the YAML 1.2 VersionedResolver; no C loader is installed (ruamel.yaml.clib, the C route, is selected as its own path; clibz is a separate lead). srsly.yaml_loads wraps this exact route (selected wrapper path); strictyaml wraps this package.",
     "shared_families": [
       "PyYAML-derived pure-Python loader lineage (with the selected PyYAML path)"
     ],
@@ -1880,5 +1880,502 @@
       "limitation": "Package-level downloads, largely as an installed extra or dependency of ruamel.yaml; they do not measure YAML parsing through the C loader."
     },
     "project": "projects/yaml/python/ruamel_yaml_clib"
+  },
+  {
+    "name": "srsly",
+    "version": "3.0.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/srsly/3.0.1/json (License: MIT in the wheel METADATA; LICENSE in the sdist)",
+    "input_api": "srsly.yaml_loads(local YAML text as str); the raw bytes and a local binary stream, passed unchanged to ruamel.yaml, give the same tree",
+    "documentation": "https://github.com/explosion/srsly#yaml",
+    "documentation_evidence": "The srsly 3.0.1 README (PyPI long description) documents srsly.yaml_loads(data) with data as \"str / IO\" returning the deserialized content, and lists ruamel.yaml as the YAML library it uses.",
+    "source": "https://files.pythonhosted.org/packages/df/f5/a66bb23771c32d1bdccdb53ebff081268ef5896c5576b88ee6273e3d0558/srsly-3.0.1.tar.gz",
+    "source_sha256": "fd56c1876df09eebd0456175a72d7dd9a40f7fad545f777bcb2c40df8c4b0de9",
+    "wheel_sha256": "3f8f38da61fbec84cf2132d6ea90c8a358d00eaac9011244bceccd02abc69392",
+    "dependencies": [
+      {
+        "package": "ruamel.yaml",
+        "release": "0.19.1",
+        "sha256": "27592957fedf6e0b62f281e96effd28043345e0e66001f97683aa9a40c667c93",
+        "license": "MIT",
+        "role": "YAML parser"
+      },
+      {
+        "package": "msgpack",
+        "release": "1.2.4",
+        "sha256": "5d65b791ce4283e02b6267742ad540899155e1b32887b9cbdda47f38f5a076b5",
+        "license": "Apache-2.0",
+        "role": "import-time only"
+      },
+      {
+        "package": "ujson",
+        "release": "5.12.0",
+        "sha256": "0e00cec383eab2406c9e006bd4edb55d284e94bb943fda558326048178d26961",
+        "license": "BSD-3-Clause AND TCL",
+        "role": "import-time only"
+      },
+      {
+        "package": "cloudpickle",
+        "release": "3.1.2",
+        "sha256": "9acb47f6afd73f60dc1df93bb801b472f05ff42fa6c84167d25cb206be1fbf4a",
+        "license": "BSD-3-Clause",
+        "role": "import-time only"
+      }
+    ],
+    "scope": "One YAML 1.2 document from local text as a typed tree on the two schema-neutral valid controls, through ruamel.yaml's YAML 1.2 resolver. No tags, merge keys, multi-document streams or malformed input were tested.",
+    "family": "Wrapper: srsly.yaml_loads over ruamel.yaml 0.19.1 YAML(typ='safe', pure=True), the pure-Python ruamel.yaml loader; not an independent parser",
+    "family_note": "Clearly a wrapper (Parsel/minidom precedent), not a mapping layer: srsly.yaml_loads builds srsly._yaml_api.CustomYaml(), a ruamel.yaml YAML subclass with defaults typ='safe', pure=True, and returns CustomYaml().load(data); ruamel.yaml reads, scans, parses, composes and constructs. srsly 3.x depends on the released ruamel.yaml (the older vendored srsly.ruamel_yaml copy is gone), so this path runs the same ruamel.yaml code as the selected ruamel.yaml path. On both controls srsly executes the same lines; the control differential is in ruamel.yaml scanner.py/parser.py.",
+    "shared_families": [
+      "ruamel.yaml pure-Python loader (selected ruamel.yaml path)"
+    ],
+    "control": "controls/yaml/catalog.yaml",
+    "differential_control": "controls/yaml/order.yaml",
+    "expected_output": {
+      "root": "map",
+      "nodes": {
+        "bool": 2,
+        "float": 2,
+        "int": 7,
+        "map": 7,
+        "null": 1,
+        "seq": 2,
+        "str": 13
+      },
+      "max_depth": 3,
+      "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+      "tree": [
+        "map",
+        [
+          [
+            "kind",
+            [
+              "str",
+              "catalog"
+            ]
+          ],
+          [
+            "version",
+            [
+              "int",
+              "2"
+            ]
+          ],
+          [
+            "ratio",
+            [
+              "float",
+              "0.25"
+            ]
+          ],
+          [
+            "offset",
+            [
+              "int",
+              "-17"
+            ]
+          ],
+          [
+            "enabled",
+            [
+              "bool",
+              true
+            ]
+          ],
+          [
+            "retired",
+            [
+              "bool",
+              false
+            ]
+          ],
+          [
+            "missing",
+            [
+              "null"
+            ]
+          ],
+          [
+            "title",
+            [
+              "str",
+              "Café \"quoted\"\tend"
+            ]
+          ],
+          [
+            "single",
+            [
+              "str",
+              "it's here"
+            ]
+          ],
+          [
+            "tags",
+            [
+              "seq",
+              [
+                [
+                  "str",
+                  "alpha"
+                ],
+                [
+                  "str",
+                  "beta"
+                ],
+                [
+                  "str",
+                  "gamma delta"
+                ]
+              ]
+            ]
+          ],
+          [
+            "point",
+            [
+              "map",
+              [
+                [
+                  "lat",
+                  [
+                    "int",
+                    "1"
+                  ]
+                ],
+                [
+                  "lon",
+                  [
+                    "float",
+                    "-2.5"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "items",
+            [
+              "seq",
+              [
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "7"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "first item"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "line one\nline two\n"
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "8"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "Zürich"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "folded text\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "defaults",
+            [
+              "map",
+              [
+                [
+                  "retries",
+                  [
+                    "int",
+                    "3"
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "base"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "service",
+            [
+              "map",
+              [
+                [
+                  "settings",
+                  [
+                    "map",
+                    [
+                      [
+                        "retries",
+                        [
+                          "int",
+                          "3"
+                        ]
+                      ],
+                      [
+                        "label",
+                        [
+                          "str",
+                          "base"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "edge"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "differential_expected_output": {
+      "root": "seq",
+      "nodes": {
+        "bool": 1,
+        "float": 2,
+        "int": 5,
+        "map": 7,
+        "null": 1,
+        "seq": 5,
+        "str": 11
+      },
+      "max_depth": 4,
+      "tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46",
+      "tree": [
+        "seq",
+        [
+          [
+            "map",
+            [
+              [
+                "order",
+                [
+                  "str",
+                  "A-7"
+                ]
+              ],
+              [
+                "lines",
+                [
+                  "seq",
+                  [
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "Xé-1"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "2"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "12.5"
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "B '2'"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "1"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "0.75"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "flags",
+                [
+                  "seq",
+                  []
+                ]
+              ],
+              [
+                "meta",
+                [
+                  "map",
+                  []
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              [
+                "int",
+                "1"
+              ],
+              [
+                "seq",
+                [
+                  [
+                    "int",
+                    "2"
+                  ],
+                  [
+                    "int",
+                    "3"
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "k",
+                    [
+                      "str",
+                      "v"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "str",
+            "plain multi word"
+          ],
+          [
+            "str",
+            "line\nbreak"
+          ],
+          [
+            "str",
+            "kept\n  indented"
+          ],
+          [
+            "null"
+          ],
+          [
+            "bool",
+            false
+          ]
+        ]
+      ]
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 24260205,
+      "source": "https://pypistats.org/api/packages/srsly/recent?period=month",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/yaml/registry-snapshot.json",
+      "limitation": "Package-level downloads, mostly pulled in by spaCy/thinc for JSON and msgpack serialization; they do not measure YAML parsing."
+    },
+    "project": "projects/yaml/python/srsly"
   }
 ]

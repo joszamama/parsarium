@@ -1,0 +1,293 @@
+{
+  "kind": "third_party",
+  "api": "srsly.yaml_loads(local YAML text as str); the same call on the raw bytes and on a local binary stream (passed unchanged to ruamel.yaml YAML.load) gives the same tree",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:42:36.642303+00:00",
+  "manifest": "projects/yaml/python/srsly/manifest.json",
+  "image_id": "sha256:0e3dddc24bc8baa3a83d7af545a37ec9d51dc75855c77349d38fbe6942674388",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/amd64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: srsly",
+    "Version: 3.0.1",
+    "Name: ruamel.yaml",
+    "Version: 0.19.1",
+    "Name: msgpack",
+    "Version: 1.2.4",
+    "Name: ujson",
+    "Version: 5.12.0",
+    "Name: cloudpickle",
+    "Version: 3.1.2",
+    "Name: atheris",
+    "Version: 3.1.0",
+    "04d78ede0623f3100bfcd4dea8d6a016ea1acbfbf66ffb511b2571c7627a3cfe  srsly/_yaml_api.py",
+    "b716df08841b725be09153e1a093a1359a16044a395bc892a975f9b1509cc8ce  ruamel/yaml/scanner.py",
+    "44b2d0b372807d08fa2175841ed3d1c974320a5858d238a1b8ba50cd77d78f9a  ruamel/yaml/parser.py",
+    "981b0fd0db996cc109ac8639e66129a0e0a2b0b1ea615bc30ece99f4b9569778  ruamel/yaml/composer.py",
+    "fa7fbcadac0b9f979fb14a653109bb831f95b94a4450caa896c14d2a10b571d6  ruamel/yaml/main.py"
+  ],
+  "source_sha256": "3f8f38da61fbec84cf2132d6ea90c8a358d00eaac9011244bceccd02abc69392",
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "project_file_sha256": {
+    "Dockerfile": "ce02020a387ccd13b2cad51b2e123139f3f612d20229ad79dfdd289c6f777ca7",
+    "expected.json": "9e867124aaeccd66e1ac2da6c61844266f1992615d79c4298a486659e5413618",
+    "fuzz.py": "12f5329b821f28b641c53a86c55eaaf560b51775e5687ecaacc33671472c5ae8",
+    "harness.py": "f8d65dbca4c995484cbfa97d2a4593f2c1a1aec57c1af23139ea08926f16d776",
+    "manifest.json": "1707c048946a6b6c745c76bfe51f3350ff3c6f9b3d43c5dee4a09a0a3eb9d055",
+    "replay.py": "f0d57dbf88c4bfc8957f723e14f0f69ee7c757fc4bab506435bb90d1d8bac0f5",
+    "run-control.py": "5ff847aed8574730e3748ef9bd121bf48e5b206ae6efe27f1e57a63a699e00a4",
+    "runtime-requirements.lock": "2a65b0a4e21ea4d440a3f68801fbfeccb96ce02a01e86bef71da26dc3713e735",
+    "structure.py": "822d13c7d2defb1f7ec1b59e38c658b2818436a184e62a7206f62828e1cea334"
+  },
+  "output": {
+    "root": "map",
+    "nodes": {
+      "bool": 2,
+      "float": 2,
+      "int": 7,
+      "map": 7,
+      "null": 1,
+      "seq": 2,
+      "str": 13
+    },
+    "max_depth": 3,
+    "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+    "tree": [
+      "map",
+      [
+        [
+          "kind",
+          [
+            "str",
+            "catalog"
+          ]
+        ],
+        [
+          "version",
+          [
+            "int",
+            "2"
+          ]
+        ],
+        [
+          "ratio",
+          [
+            "float",
+            "0.25"
+          ]
+        ],
+        [
+          "offset",
+          [
+            "int",
+            "-17"
+          ]
+        ],
+        [
+          "enabled",
+          [
+            "bool",
+            true
+          ]
+        ],
+        [
+          "retired",
+          [
+            "bool",
+            false
+          ]
+        ],
+        [
+          "missing",
+          [
+            "null"
+          ]
+        ],
+        [
+          "title",
+          [
+            "str",
+            "Caf\u00e9 \"quoted\"\tend"
+          ]
+        ],
+        [
+          "single",
+          [
+            "str",
+            "it's here"
+          ]
+        ],
+        [
+          "tags",
+          [
+            "seq",
+            [
+              [
+                "str",
+                "alpha"
+              ],
+              [
+                "str",
+                "beta"
+              ],
+              [
+                "str",
+                "gamma delta"
+              ]
+            ]
+          ]
+        ],
+        [
+          "point",
+          [
+            "map",
+            [
+              [
+                "lat",
+                [
+                  "int",
+                  "1"
+                ]
+              ],
+              [
+                "lon",
+                [
+                  "float",
+                  "-2.5"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "items",
+          [
+            "seq",
+            [
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "7"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "first item"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "line one\nline two\n"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "8"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "Z\u00fcrich"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "folded text\n"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "defaults",
+          [
+            "map",
+            [
+              [
+                "retries",
+                [
+                  "int",
+                  "3"
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "base"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "service",
+          [
+            "map",
+            [
+              [
+                "settings",
+                [
+                  "map",
+                  [
+                    [
+                      "retries",
+                      [
+                        "int",
+                        "3"
+                      ]
+                    ],
+                    [
+                      "label",
+                      [
+                        "str",
+                        "base"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "edge"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "parser_source_files": 1,
+  "parser_source_lines_covered": 7,
+  "format_specific_source_lines_covered": 7,
+  "underlying_source_files": 15,
+  "underlying_source_lines_covered": 1274,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/yaml/python/srsly/target/coverage/coverage.json",
+  "pass": true
+}
