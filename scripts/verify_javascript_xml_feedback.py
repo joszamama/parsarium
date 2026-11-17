@@ -46,7 +46,7 @@ def probe(manifest: dict, image: str, case: Path, work: Path, name: str) -> tupl
 
 def main() -> None:
     cli = argparse.ArgumentParser(description=__doc__)
-    cli.add_argument("slug", nargs="?", default="saxes", choices=("saxes", "sax", "fast_xml_parser", "xmldom_xmldom", "xml2js", "jsdom", "xml_js", "htmlparser2", "xmldoc"))
+    cli.add_argument("slug", nargs="?", default="saxes", choices=("saxes", "sax", "fast_xml_parser", "xmldom_xmldom", "xml2js", "jsdom", "xml_js", "htmlparser2", "xmldoc", "xml_tools_parser"))
     slug = cli.parse_args().slug
     project, manifest = project_for("xml", "javascript", slug)
     relative = Path("xml/javascript") / slug

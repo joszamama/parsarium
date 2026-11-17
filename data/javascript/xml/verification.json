@@ -642,6 +642,164 @@
       "differential_matches_projected_expat_oracle": true,
       "namespace_resolution": false,
       "projection_limit": "Measured as a raw-name XML tree path, not as a namespace-aware XML parser. xmldoc documents that namespaces are ignored (<office:body> becomes \"office:body\"), so prefixes, local names, attribute order and xmlns declarations are compared as raw qualified-name strings; no namespace URI, expanded name or in-scope binding is produced by xmldoc or inferred by the harness. The comparison oracle is expat in non-namespace mode restricted to what the tree keeps. Fields xmldoc exposes but the oracle cannot (line, column, position, startTagPosition, val) are not compared."
+    },
+    {
+      "package": "@xml-tools/parser",
+      "version": "1.0.12",
+      "scope": "One XML 1.0 document from local bytes as a hierarchical raw-QName CST with ordered element/attribute structure; no namespace URI expansion or entity decoding is claimed",
+      "command": "python3 scripts/run_project.py xml javascript xml_tools_parser",
+      "receipt": "projects/xml/javascript/xml_tools_parser/verification.json",
+      "pass": true,
+      "output": {
+        "tree": {
+          "qname": "c:catalog",
+          "attributes": [
+            {
+              "qname": "xmlns:c",
+              "raw_value": "\"urn:parsarium:catalog\""
+            },
+            {
+              "qname": "xmlns",
+              "raw_value": "\"urn:parsarium:item\""
+            },
+            {
+              "qname": "version",
+              "raw_value": "\"1\""
+            }
+          ],
+          "children": [
+            {
+              "qname": "item",
+              "attributes": [
+                {
+                  "qname": "id",
+                  "raw_value": "\"a1\""
+                },
+                {
+                  "qname": "c:lang",
+                  "raw_value": "\"es\""
+                }
+              ],
+              "children": []
+            },
+            {
+              "qname": "item",
+              "attributes": [
+                {
+                  "qname": "id",
+                  "raw_value": "\"b2\""
+                }
+              ],
+              "children": [
+                {
+                  "qname": "name",
+                  "attributes": [],
+                  "children": []
+                },
+                {
+                  "qname": "note",
+                  "attributes": [],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "max_depth": 3,
+        "token_count": 70,
+        "lex_errors": 0,
+        "parse_errors": 0
+      },
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 351,
+      "underlying_parser": {
+        "package": "chevrotain",
+        "version": "7.1.1",
+        "npm_integrity": "sha512-wy3mC1x4ye+O+QkEinVJkPf5u2vsrDIYW9G7ZuwFl6v/Yu0LwUuT2POsb+NUWApebyxfkQq6+yDfRExbnI5rcw==",
+        "tarball_sha256": "9cbea943f1aef15a1054d3e3d8f0cfb3736720ae77a926df9a83207f6bf522af"
+      },
+      "underlying_source_files": 42,
+      "underlying_source_lines_covered": 5225,
+      "differential_output": {
+        "tree": {
+          "qname": "order",
+          "attributes": [
+            {
+              "qname": "xmlns",
+              "raw_value": "\"urn:parsarium:order\""
+            },
+            {
+              "qname": "xmlns:p",
+              "raw_value": "\"urn:parsarium:price\""
+            }
+          ],
+          "children": [
+            {
+              "qname": "line",
+              "attributes": [
+                {
+                  "qname": "n",
+                  "raw_value": "'1'"
+                },
+                {
+                  "qname": "p:currency",
+                  "raw_value": "\"EUR\""
+                }
+              ],
+              "children": [
+                {
+                  "qname": "sku",
+                  "attributes": [],
+                  "children": []
+                },
+                {
+                  "qname": "p:amount",
+                  "attributes": [],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "qname": "line",
+              "attributes": [
+                {
+                  "qname": "n",
+                  "raw_value": "\"2\""
+                },
+                {
+                  "qname": "note",
+                  "raw_value": "\"say &quot;hi&quot;\""
+                }
+              ],
+              "children": [
+                {
+                  "qname": "plain",
+                  "attributes": [
+                    {
+                      "qname": "xmlns",
+                      "raw_value": "\"\""
+                    }
+                  ],
+                  "children": [
+                    {
+                      "qname": "leaf",
+                      "attributes": [],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "max_depth": 4,
+        "token_count": 85,
+        "lex_errors": 0,
+        "parse_errors": 0
+      },
+      "differential_matches_projected_expat_oracle": true,
+      "namespace_resolution": false,
+      "projection_limit": "Raw hierarchical QName and quoted attribute-token CST only. Namespace URIs and decoded entity text are not supplied or reconstructed. Expat no-namespace mode independently checks the preserved name hierarchy on both valid controls."
     }
   ],
   "standard": []
