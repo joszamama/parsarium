@@ -994,5 +994,116 @@
       "shared_distinct_lines": 6,
       "share": 0.007
     }
+  },
+  {
+    "name": "dns-message",
+    "version": "1.1.1",
+    "license": "MIT",
+    "license_evidence": "package.json \"license\": \"MIT\" and LICENSE.md in the npm tarball (sha256 ffccb2ff...), checked in the image",
+    "input_api": "decode(bytes: ArrayBufferView | ArrayBufferLike) -> Packet",
+    "documentation": "https://github.com/kitten/dns-message/blob/main/README.md#decodebytes-arraybufferview--arraybufferlike-packet",
+    "documentation_note": "The npm tarball's README.md (1.1.1) documents decode(bytes) in its API reference; the link is to the default branch README.",
+    "source": "https://www.npmjs.com/package/dns-message/v/1.1.1",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dns-message (DataView rewrite derived from dns-packet)",
+    "family_note": "The README calls it a derivative of dns-packet that uses typed arrays and DataViews instead of Node Buffers; the code is a separate TypeScript implementation bundled into dist/dns-message.js that shares 5 of its 889 distinct non-test source lines with dns-packet 5.6.1 (9 of 887 normalised) and 23 with @dnsquery/dns-packet 6.1.1. It returns the raw 16-bit flags word (all three bits after RA are kept) and rtype for RCODE, which the harness reads bit by bit. Types and classes are numbers; A and AAAA text come from its own codecs.",
+    "project": "projects/dns/javascript/dns_message",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
+      "value": 127,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/dns-message",
+      "captured_at_utc": "2026-11-17T16:37:42.334094+00:00",
+      "snapshot": "data/javascript/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 10,
+    "afl_feedback": "data/javascript/dns/dns-message-feedback-differential.json",
+    "source_overlap_with_dns_packet": {
+      "method": "distinct stripped, non-empty, non-comment lines of the non-test .js sources compared with set intersection against dns-packet 5.6.1",
+      "distinct_lines": 889,
+      "dns_packet_distinct_lines": 1106,
+      "shared_distinct_lines": 5,
+      "share": 0.006
+    }
   }
 ]
