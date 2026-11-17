@@ -17,8 +17,15 @@
 }
 ```
 
-The native C++17 RAII header wraps the same C ABI and Rust engine as the C adapter. C and C++ are separate ecosystem package paths, but not independent PDF parser engines.
+The C++17 RAII facade calls the tagged pdf_oxide C ABI, which enters the same Rust 0.3.78 PDF engine as the selected Rust package path. This is a distinct C++ package API but not an independent PDF syntax parser. The C ABI route was examined separately and was not selected for the C/PDF top ten.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/pdf/cpp/pdf_oxide/README.md)
+
+```sh
+python3 parsarium.py build pdf cpp pdf_oxide
+python3 parsarium.py run pdf cpp pdf_oxide controls/pdf/one-page.pdf
+```
+
+**Coverage limit:** AFL++ pcguard guards cover the whole pdf_oxide crate, not only its syntax modules: stable rustc's sancov-module pass takes no source allowlist. Dependencies and the C++ harness are uninstrumented. The AFL++ target is one-shot /work/replay @@.

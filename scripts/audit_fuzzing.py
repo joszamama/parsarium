@@ -11,6 +11,7 @@ from audit_projects import (fltk_native_feedback_verified, fully_runnable,
                             mlt_mp4_feedback_verified,
                             openshot_mp4_feedback_verified,
                             papers_pdf_feedback_verified,
+                            pdf_oxide_cpp_feedback_verified,
                             resvg_cpp_feedback_verified,
                             stereokit_ply_feedback_verified,
                             vlc_cpp_mp3_feedback_verified,
@@ -108,13 +109,16 @@ def main() -> None:
         custom_mlt_mp4 = str(relative) == "mp4/c/mlt"
         custom_openshot_mp4 = str(relative) == "mp4/cpp/libopenshot"
         custom_papers_pdf = str(relative) == "pdf/c/gnome-papers"
+        custom_rust_pdf = str(relative) == "pdf/cpp/pdf_oxide"
         if (manifest["package"] not in {"gstreamer", "netpbm", "sail"}
                 and not custom_rust_svg and not custom_vlc_mp4 and not custom_vlc_mp3
                 and not custom_stereokit_ply and not custom_mlt_mp4
-                and not custom_openshot_mp4 and not custom_papers_pdf):
+                and not custom_openshot_mp4 and not custom_papers_pdf
+                and not custom_rust_pdf):
             assert dockerfile == derived_dockerfile(project).encode()
         if (custom_rust_svg or custom_vlc_mp4 or custom_vlc_mp3 or custom_stereokit_ply
-                or custom_mlt_mp4 or custom_openshot_mp4 or custom_papers_pdf):
+                or custom_mlt_mp4 or custom_openshot_mp4 or custom_papers_pdf
+                or custom_rust_pdf):
             assert (overlay / "build.py").is_file()
             assert "build.py" in receipt.get("overlay_file_sha256", {})
         if custom_vlc_mp4:
@@ -131,6 +135,8 @@ def main() -> None:
             assert openshot_mp4_feedback_verified(path, manifest, receipt)
         if custom_papers_pdf:
             assert papers_pdf_feedback_verified(path, manifest, receipt)
+        if custom_rust_pdf:
+            assert pdf_oxide_cpp_feedback_verified(path, manifest, receipt)
         for name, digest in receipt.get("overlay_file_sha256", {}).items():
             assert sha256((overlay / name).read_bytes()).hexdigest() == digest
         expected_dockerfile_hash = (receipt.get("overlay_dockerfile_sha256") or

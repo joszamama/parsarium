@@ -595,6 +595,66 @@ def openshot_mp4_feedback_verified(path: Path, manifest: dict, overlay: dict) ->
     )
 
 
+def pdf_oxide_cpp_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
+    """Bind C++ pdf_oxide feedback to its instrumented Rust parser crate."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) != "pdf/cpp/pdf_oxide":
+        return True
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    validation_path = overlay_dir / "feedback-validation.json"
+    if not validation_path.is_file():
+        return False
+    validation = json.loads(validation_path.read_text())
+    variant = overlay_dir / "valid-objstm.pdf"
+    second = path.parent / manifest.get("second_control", "")
+    source_second = ROOT / manifest.get("second_control_source", "")
+    hashes = overlay.get("overlay_file_sha256", {})
+    repeat_counts = validation.get("control_repeat_edge_counts", [])
+    stable = validation.get("control_stable_edge_ids", 0)
+    union = validation.get("control_union_edge_ids", 0)
+    return (
+        overlay.get("feedback_kind") == "pdf_oxide_rust_crate_pcguard_edges"
+        and overlay.get("feedback_scope") == validation.get("feedback_scope")
+        and "whole crate" in overlay.get("feedback_scope", "")
+        and "C++17 harness uninstrumented" in overlay.get("feedback_scope", "")
+        and overlay.get("shared_parser_family") == manifest.get("shared_parser_family")
+        and overlay.get("shared_parser_family_projects")
+            == manifest.get("shared_parser_family_projects")
+        and overlay.get("source_sha256") == manifest["source_sha256"]
+        and overlay.get("afl_package") == "4.33c-1.1ubuntu1"
+        and overlay.get("afl_file_input") is True
+        and overlay.get("afl_entrypoint") == "/work/replay"
+        and validation.get("pass") is True
+        and validation.get("mutation_campaign_run") is False
+        and validation.get("pdf_oxide_guard_slots", 0) > 0
+        and validation.get("harness_guard_slots") == 0
+        and validation.get("afl_map_size") == overlay.get("afl_map_size")
+        and validation.get("control_sha256") == manifest["control_sha256"]
+        and validation.get("control_output") == manifest["expected_output"]
+        and len(repeat_counts) >= 3
+        and stable == overlay.get("feedback_edges")
+        and stable <= min(repeat_counts)
+        and union >= max(repeat_counts)
+        and union > 0 and stable / union >= 0.99
+        and validation.get("control_stability_ratio") == round(stable / union, 6)
+        and validation.get("stable_variant_only_edge_ids", 0) > 0
+        and validation.get("variant_output") == {"pages": 3}
+        and variant.is_file()
+        and validation.get("valid_variant_sha256") == sha256(variant.read_bytes()).hexdigest()
+        and second.is_file() and source_second.is_file()
+        and second.read_bytes() == source_second.read_bytes()
+        and validation.get("second_valid_input_sha256")
+            == manifest.get("second_control_sha256") == sha256(second.read_bytes()).hexdigest()
+        and validation.get("second_output") == manifest.get("second_control_expected_output")
+        and overlay.get("feedback_validation_sha256") == sha256(validation_path.read_bytes()).hexdigest()
+        and set(hashes) == {"Dockerfile", "build.py", "make_variant.py",
+                            "valid-objstm.pdf", "feedback-validation.json"}
+        and all((overlay_dir / name).is_file()
+                and sha256((overlay_dir / name).read_bytes()).hexdigest() == digest
+                for name, digest in hashes.items())
+    )
+
+
 def papers_pdf_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
     """Bind Papers feedback to its PDF backend and shared Poppler parser."""
     project = path.parent.relative_to(ROOT / "projects")
@@ -667,6 +727,8 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
     if not fltk_native_feedback_verified(path, manifest, overlay):
         return False
     if not vlc_cpp_mp4_feedback_verified(path, manifest, overlay):
+        return False
+    if not pdf_oxide_cpp_feedback_verified(path, manifest, overlay):
         return False
     if not resvg_cpp_feedback_verified(path, manifest, overlay):
         return False
