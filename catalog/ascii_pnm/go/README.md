@@ -1,6 +1,6 @@
 # ASCII PNM / Go
 
-7 verified third-party API paths; 7 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/ascii_pnm/ranking.md) · [standard API inventory](../../../data/go/ascii_pnm/standard.json)
 
@@ -13,6 +13,9 @@
 - [github.com/harrydb/go/img/pnm](github-com-harrydb-go-img-pnm/README.md) — Docker harness ready
 - [github.com/go-gfx/gfx/codec](github-com-go-gfx-gfx-codec/README.md) — Docker harness ready
 - [gopkg.in/gographics/imagick.v3/imagick](gopkg-in-gographics-imagick-v3-imagick/README.md) — Docker harness ready
+- [github.com/kovidgoyal/imaging](github-com-kovidgoyal-imaging/README.md) — Docker harness ready
+- [github.com/gographics/gmagick](github-com-gographics-gmagick/README.md) — Docker harness ready
+- [github.com/cshum/vipsgen/vips](github-com-cshum-vipsgen-vips/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

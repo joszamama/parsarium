@@ -17,5 +17,3 @@ python3 parsarium.py afl prepare svg python pyqt6 runs/svg-pyqt6-afl
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
 **Native engine limit:** This target starts a fresh process for each input. In-process native fuzzing is unsupported; use one-input replay or the prepared AFL++ run.
-
-**Native parser build:** The pinned wheels are installed unchanged except `libQt6Svg.so.6`, which is replaced by QtSvg 6.12.0 built from its pinned source tarball with LLVM source coverage. Coverage and AFL++ feedback come from that library's `src/svg` sources, which the PyQt6 and PySide6 paths share.

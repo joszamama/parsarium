@@ -1,6 +1,6 @@
 # HTTP/1.1 / Go
 
-9 verified third-party API paths; 9 have verified Docker harnesses.
+10 verified third-party API paths; 10 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/http11/ranking.md) · [standard API inventory](../../../data/go/http11/standard.json)
 
@@ -15,6 +15,7 @@
 - [github.com/lemon4ksan/mach/server/h1](github-com-lemon4ksan-mach-server-h1/README.md) — Docker harness ready
 - [github.com/antlabs/httparser](github-com-antlabs-httparser/README.md) — Docker harness ready
 - [github.com/hsiafan/httpdump/httpport](github-com-hsiafan-httpdump-httpport/README.md) — Docker harness ready
+- [gnalloy.org/codec-http1](gnalloy-org-codec-http1/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

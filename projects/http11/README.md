@@ -33,6 +33,7 @@
 - [github.com/lesismal/nbio/nbhttp / Go](go/github_com_lesismal_nbio_nbhttp/README.md)
 - [github.com/projectdiscovery/nuclei/v3/pkg/protocols/http/raw / Go](go/github_com_projectdiscovery_nuclei_v3_pkg_protocols_http_raw/README.md)
 - [github.com/valyala/fasthttp / Go](go/fasthttp/README.md)
+- [gnalloy.org/codec-http1 / Go](go/gnalloy_org_codec_http1/README.md)
 - [net/http.ReadRequest(*bufio.Reader) / Go](go/stdlib_request/README.md)
 - [net/http.ReadResponse(*bufio.Reader, *Request) / Go](go/stdlib_response/README.md)
 - [commons-httpclient / Java](java/commons_httpclient/README.md)
