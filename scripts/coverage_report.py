@@ -378,13 +378,13 @@ def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
     if not replay:
         return run, None
     ecosystem = evidence["identity"]["ecosystem"]
-    if ecosystem not in {"c", "cpp", "go", "python", "php", "javascript"} or \
+    if ecosystem not in {"c", "cpp", "rust", "go", "python", "php", "javascript"} or \
             evidence["feedback"]["coverage_kind"] != "source_lines":
         run["queue_replay_unsupported"] = (
-            "Source replay currently supports LLVM-covered C/C++, Go, and Python/PHP/JavaScript source-line projects; "
+            "Source replay currently supports LLVM-covered C/C++/Rust, Go, and Python/PHP/JavaScript source-line projects; "
             "this project's saved AFL++ feedback remains separately documented.")
         return run, None
-    if ecosystem in {"c", "cpp"}:
+    if ecosystem in {"c", "cpp", "rust"}:
         try:
             export_objects(evidence["project"])
         except (QueueCoverageError, OSError) as error:

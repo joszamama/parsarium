@@ -143,9 +143,10 @@ def export_objects(project: Path) -> list[str]:
 def replay_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
                  timeout: int) -> tuple[dict, dict | None]:
     manifest = evidence["manifest"]
-    if evidence["identity"]["ecosystem"] not in {"c", "cpp"} or \
+    ecosystem = evidence["identity"]["ecosystem"]
+    if ecosystem not in {"c", "cpp", "rust"} or \
             evidence["feedback"]["coverage_kind"] != "source_lines":
-        raise QueueCoverageError("queue source replay supports LLVM-covered C/C++ projects only")
+        raise QueueCoverageError("queue source replay supports LLVM-covered C/C++/Rust projects only")
     if not 1 <= maximum <= MAX_QUEUE_SAMPLE or not 1 <= timeout <= 60:
         raise QueueCoverageError("queue sample must be 1–128 and timeout 1–60 seconds")
     plan, _ = plan_for(run_dir, root, evidence)
@@ -228,8 +229,10 @@ def replay_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
             return replay, None
         merged = scratch / "aggregate.profdata"
         exported = scratch / "coverage.json"
-        script = ("llvm-profdata merge -sparse /profiles/*.profraw -o /coverage/aggregate.profdata "
-                  "&& llvm-cov export /work/replay --skip-functions --skip-expansions " +
+        llvm_profdata = "/work/llvm-profdata" if ecosystem == "rust" else "llvm-profdata"
+        llvm_cov = "/work/llvm-cov" if ecosystem == "rust" else "llvm-cov"
+        script = (f"{llvm_profdata} merge -sparse /profiles/*.profraw -o /coverage/aggregate.profdata "
+                  f"&& {llvm_cov} export /work/replay --skip-functions --skip-expansions " +
                   " ".join(f"-object={shlex.quote(obj)}" for obj in objects) +
                   " -instr-profile=/coverage/aggregate.profdata > /coverage/coverage.json")
         container_name = f"parsarium-report-{uuid.uuid4().hex[:16]}"
