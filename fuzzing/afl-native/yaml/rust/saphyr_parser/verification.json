@@ -1,0 +1,524 @@
+{
+  "schema_version": 1,
+  "project": "yaml/rust/saphyr_parser",
+  "pass": true,
+  "base_project_receipt_sha256": "7bb3e4c8fe8446e51f5c33cba4662ad9605d7a8f9ea22bcb9170a321c4968342",
+  "overlay_file_sha256": {
+    "Cargo.toml": "720b2d6fcfe8483c3987b1024d0ca6a94a9211e4e0211786987d0e1d4bbd6c9e",
+    "Cargo.lock": "1f206c4d00e1ee26b2d59d5a160f44763cedbd71c79d76e70f8fd0eb7efc621c",
+    "afl_fuzzer.rs": "31e8a77c151a658ba17f8f9bc77e973e5e2364c1b8b42d03e87a0be8cf57af89",
+    "Dockerfile": "29a2e4504f49fa0105f85d93ead47f08525513becff069126105ecf85439708d",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "build.py": "43bf925847e88b6b3f0cbde5a633964f80e97e9ce5f666258e8fef0abdf09f9a"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "c98d2738e44a25e6ba2e6d83d91805648df204768abc96f4f1278cb3d5c90bbe",
+  "image_id": "sha256:49a3f87395b2f745625b2c7845beab48002f4c5ff00953dfff6b33ab0750e34f",
+  "platform": "linux/arm64",
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "feedback_edges": 1432,
+  "afl_map_size": 6767,
+  "feedback_kind": "afl_rs_parsarium_yaml_saphyr_parser_events_saphyr_parser_only_sancov_edges",
+  "feedback_scope": "Only parsarium_yaml_saphyr_parser_events and saphyr_parser crate objects carry SanitizerCoverage guards; harness, serde_json, AFL runtime and other crates are uninstrumented",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "parsarium_yaml_saphyr_parser_events",
+      "saphyr_parser"
+    ],
+    "rlib_guard_bytes": {
+      "parsarium_yaml_saphyr_parser_events": 25792,
+      "saphyr_parser": 1256
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "arraydeque",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_yaml_saphyr_parser_harness",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "thiserror",
+      "xdg"
+    ],
+    "binary_guards": 6762
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:2f6be10e4e2a44af807ecf64bddcbeac215cd89088cfb0a253b844ce1be57115",
+  "variant_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+  "control_output": {
+    "tree": [
+      "map",
+      [
+        [
+          "kind",
+          [
+            "str",
+            "catalog"
+          ]
+        ],
+        [
+          "version",
+          [
+            "int",
+            "2"
+          ]
+        ],
+        [
+          "ratio",
+          [
+            "float",
+            "0.25"
+          ]
+        ],
+        [
+          "offset",
+          [
+            "int",
+            "-17"
+          ]
+        ],
+        [
+          "enabled",
+          [
+            "bool",
+            true
+          ]
+        ],
+        [
+          "retired",
+          [
+            "bool",
+            false
+          ]
+        ],
+        [
+          "missing",
+          [
+            "null"
+          ]
+        ],
+        [
+          "title",
+          [
+            "str",
+            "Caf\u00e9 \"quoted\"\tend"
+          ]
+        ],
+        [
+          "single",
+          [
+            "str",
+            "it's here"
+          ]
+        ],
+        [
+          "tags",
+          [
+            "seq",
+            [
+              [
+                "str",
+                "alpha"
+              ],
+              [
+                "str",
+                "beta"
+              ],
+              [
+                "str",
+                "gamma delta"
+              ]
+            ]
+          ]
+        ],
+        [
+          "point",
+          [
+            "map",
+            [
+              [
+                "lat",
+                [
+                  "int",
+                  "1"
+                ]
+              ],
+              [
+                "lon",
+                [
+                  "float",
+                  "-2.5"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "items",
+          [
+            "seq",
+            [
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "7"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "first item"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "line one\nline two\n"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "8"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "Z\u00fcrich"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "folded text\n"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "defaults",
+          [
+            "map",
+            [
+              [
+                "retries",
+                [
+                  "int",
+                  "3"
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "base"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "service",
+          [
+            "map",
+            [
+              [
+                "settings",
+                [
+                  "map",
+                  [
+                    [
+                      "retries",
+                      [
+                        "int",
+                        "3"
+                      ]
+                    ],
+                    [
+                      "label",
+                      [
+                        "str",
+                        "base"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "edge"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "variant_output": {
+    "tree": [
+      "seq",
+      [
+        [
+          "map",
+          [
+            [
+              "order",
+              [
+                "str",
+                "A-7"
+              ]
+            ],
+            [
+              "lines",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "X\u00e9-1"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "2"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "12.5"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "B '2'"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "1"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "0.75"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "flags",
+              [
+                "seq",
+                []
+              ]
+            ],
+            [
+              "meta",
+              [
+                "map",
+                []
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "seq",
+          [
+            [
+              "int",
+              "1"
+            ],
+            [
+              "seq",
+              [
+                [
+                  "int",
+                  "2"
+                ],
+                [
+                  "int",
+                  "3"
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "k",
+                  [
+                    "str",
+                    "v"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "str",
+          "plain multi word"
+        ],
+        [
+          "str",
+          "line\nbreak"
+        ],
+        [
+          "str",
+          "kept\n  indented"
+        ],
+        [
+          "null"
+        ],
+        [
+          "bool",
+          false
+        ]
+      ]
+    ]
+  },
+  "repeats": 5,
+  "variant_feedback_edges": 1422,
+  "edges_only_in_control": 128,
+  "edges_only_in_variant": 118,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/saphyr-parser-0.3.4/",
+    "control_lines": {
+      "src/char_traits.rs": 41,
+      "src/input.rs": 3,
+      "src/input/buffered.rs": 0,
+      "src/input/str.rs": 143,
+      "src/parser.rs": 288,
+      "src/scanner.rs": 788
+    },
+    "variant_lines": {
+      "src/char_traits.rs": 33,
+      "src/input.rs": 3,
+      "src/input/buffered.rs": 0,
+      "src/input/str.rs": 144,
+      "src/parser.rs": 300,
+      "src/scanner.rs": 789
+    },
+    "files_with_different_line_counts": [
+      "src/char_traits.rs",
+      "src/input/str.rs",
+      "src/parser.rs",
+      "src/scanner.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      1432,
+      1432,
+      1432,
+      1432,
+      1432
+    ],
+    "stable_edges": 1432,
+    "union_edges": 1432,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      1422,
+      1422,
+      1422,
+      1422,
+      1422
+    ],
+    "stable_edges": 1422,
+    "union_edges": 1422,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

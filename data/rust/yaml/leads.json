@@ -103,15 +103,16 @@
   },
   {
     "name": "saphyr-parser",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 8941580,
     "metric_error": null,
-    "family": "saphyr (yaml-rust2 lineage)",
+    "family": "saphyr-parser (yaml-rust2 lineage)",
     "api_hint": "Parser::new_from_str event stream",
     "note": null,
     "found_by": "registry_search",
     "source": "https://crates.io/crates/saphyr-parser",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Selected. Pinned 0.3.4 parses both schema-neutral YAML controls into the exact typed trees of controls/yaml/check_controls.py; Docker coverage 1263 own lines; AFL++ scoped to parsarium_yaml_saphyr_parser_events, saphyr_parser: 5 identical repeats per control, 1432 vs 1422 edges, 128/118 unique. Event API: plain scalars are typed by the harness (YAML 1.2 core schema).",
+    "evidence": "projects/yaml/rust/saphyr_parser/verification.json"
   },
   {
     "name": "yaml_serde",

@@ -1,6 +1,6 @@
 # Rust × YAML: pilot ranking
 
-Six control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. Leads were checked in descending metric order; [leads.json](leads.json) records each decision.
+Seven control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. Leads were checked in descending metric order; [leads.json](leads.json) records each decision.
 
 ## Primary within-cell adoption metric
 
@@ -14,8 +14,9 @@ crates.io `recent_downloads` (90 days), captured 2026-11-17 ([snapshot](registry
 | 4 | [yaml-rust2](https://docs.rs/yaml-rust2/0.13.0/yaml_rust2/yaml/struct.YamlLoader.html) | 0.13.0 | 23,795,451 | yaml-rust lineage (yaml-rust fork) |
 | 5 | [serde-saphyr](https://docs.rs/serde-saphyr/2.1.1/serde_saphyr/fn.from_str.html) | 2.1.1 | 15,482,906 | yaml-rust lineage (via granit-parser) |
 | 6 | [granit-parser](https://docs.rs/granit-parser/2.2.0/granit_parser/struct.Parser.html) | 2.2.0 | 14,752,724 | yaml-rust lineage (saphyr-parser fork) |
+| 7 | [saphyr-parser](https://docs.rs/saphyr-parser/0.3.4/saphyr_parser/struct.Parser.html) | 0.3.4 | 8,941,580 | yaml-rust lineage (saphyr-rs) |
 
-Every path returns the exact typed trees of [`check_controls.py`](../../../controls/yaml/check_controls.py) for [`catalog.yaml`](../../../controls/yaml/catalog.yaml) and [`order.yaml`](../../../controls/yaml/order.yaml). The unsafe-libyaml and granit-parser APIs return untyped scalars, so their harnesses type plain scalars with the YAML 1.2 core-schema patterns, as the C libyaml and C++ harnesses do.
+Every path returns the exact typed trees of [`check_controls.py`](../../../controls/yaml/check_controls.py) for [`catalog.yaml`](../../../controls/yaml/catalog.yaml) and [`order.yaml`](../../../controls/yaml/order.yaml). The unsafe-libyaml and granit-parser and saphyr-parser APIs return untyped scalars, so their harnesses type plain scalars with the YAML 1.2 core-schema patterns, as the C libyaml and C++ harnesses do.
 
 ## Leads (unverified, shared family or excluded)
 
@@ -23,7 +24,6 @@ Every path returns the exact typed trees of [`check_controls.py`](../../../contr
 | --- | --- | ---: | --- |
 | serde_yaml_ng | unresolved | 16,564,340 | unsafe-libyaml (libyaml translation) |
 | serde_norway | shared_family | 12,111,405 | unsafe-libyaml-norway (libyaml translation) |
-| saphyr-parser | unresolved | 8,941,580 | saphyr (yaml-rust2 lineage) |
 | yaml_serde | unresolved | 5,615,643 | libyaml-rs (libyaml translation) |
 | serde_yml | shared_family | 4,221,754 | libyml (libyaml translation) |
 | libyml | unresolved | 3,581,849 | unsafe-libyaml (libyaml translation) |
