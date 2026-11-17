@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T09:27:16.764358+00:00",
+  "checked_at_utc": "2026-11-17T13:15:59.501627+00:00",
   "platform": "linux/arm64 Docker",
   "go": "go1.27.1",
   "controls": {
@@ -519,6 +519,76 @@
         ]
       },
       "differential_command": "python3 projects/xml/go/github_com_mmcdole_goxpp/verify-feedback.py"
+    },
+    {
+      "package": "github.com/moovweb/gokogiri/xml",
+      "module": "github.com/moovweb/gokogiri",
+      "version": "v0.0.0-20180713195410-a1a828153468",
+      "scope": "XML 1.0 UTF-8 local bytes, valid namespace-aware controls, expanded names, attributes, decoded text and CDATA, namespace declarations, tree depth; no DOCTYPE",
+      "command": "python3 scripts/run_project.py xml go github_com_moovweb_gokogiri",
+      "receipt": "projects/xml/go/github_com_moovweb_gokogiri/verification.json",
+      "pass": true,
+      "output": {
+        "root": "{urn:parsarium:catalog}catalog",
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "namespace_declarations": 2,
+        "max_depth": 3,
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 93,
+      "underlying_libxml2_lines_covered": 1730,
+      "error": null,
+      "differential_pass": true,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "root": "{urn:parsarium:order}order",
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "attributes": [
+          "{urn:parsarium:price}currency=EUR",
+          "n=1",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "namespace_declarations": 3,
+        "max_depth": 4,
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_command": "python3 fuzzing/afl-native/xml/go/github_com_moovweb_gokogiri/build.py"
     }
   ],
   "standard": [

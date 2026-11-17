@@ -1,6 +1,6 @@
 # GO × XML: selected parsers (pilot)
 
-6 control-verified third-party paths selected. The ceiling is ten; selected ranks cover only verified paths from the bounded search. A path is an API or package route, not necessarily an independent parser engine.
+7 control-verified third-party paths selected. The ceiling is ten; selected ranks cover only verified paths from the bounded search. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -14,6 +14,7 @@ pkg.go.dev Imported by package count, from the bounded search captured 2026-11-1
 | 4 | [github.com/beego/x2j](https://pkg.go.dev/github.com/beego/x2j@v0.0.0-20131220205130-a0352aadc542) | v0.0.0-20131220205130-a0352aadc542 | 436 | XML 1.0 UTF-8 document into a map[string]interface{} keyed by local names; namespace URIs, sibling order, comments and PIs are lost, and the []byte/string APIs delete whitespace before every '<', including inside CDATA | x2j map conversion over Go encoding/xml Decoder tokenizer |
 | 5 | [github.com/vmware/govmomi/vim25/xml](https://pkg.go.dev/github.com/vmware/govmomi/vim25/xml@v0.56.2#NewDecoder) | v0.56.2 | 163 | Full XML 1.0 UTF-8 document into namespace-resolved tokens | separately compiled govmomi fork of Go encoding/xml tokenizer |
 | 6 | [github.com/mmcdole/goxpp](https://pkg.go.dev/github.com/mmcdole/goxpp@v1.3.0#NewXMLPullParser) | v1.3.0 | 132 | XML 1.0 UTF-8 document through a pull event cursor with expanded element names, attributes, decoded text and depth | goxpp cursor over Go encoding/xml Decoder tokenizer |
+| 7 | [github.com/moovweb/gokogiri/xml](https://pkg.go.dev/github.com/moovweb/gokogiri/xml@v0.0.0-20180713195410-a1a828153468#Parse) | v0.0.0-20180713195410-a1a828153468 | 108 | Local UTF-8 bytes through `xml.Parse`; namespace-aware DOM summary on both valid controls | Go cgo binding over libxml2 2.15.4 XML parser |
 
 ## Standard API (unranked)
 
@@ -29,6 +30,8 @@ goxpp uses the documented `NewXMLPullParser(io.Reader, true, nil)` and `NextToke
 
 govmomi/vim25/xml exposes the general `NewDecoder(io.Reader).Token()` API. The pinned `v0.56.2` Docker build matches both namespace-aware control summaries and covers 290 lines in its own forked `xml.go`. Parser-only AFL++ traces repeat identically per control and differ by 30 source blocks and 30 tuples; every changed block is in `xml.go`. The source lock pins the 12,553,438-byte whole govmomi module archive. Its 163 Imported by count is for the `vim25/xml` package and ranks fifth among verified paths; it is not an XML-call count.
 
+gokogiri's `xml.Parse([]byte)` cgo route builds a DOM through native libxml2. Both namespace-aware controls match the independently specified summaries. The first covers 93 Go binding lines and 1,730 libxml2 parser lines. The AFL++ target instruments only `parser.c`, `parserInternals.c`, and `entities.c`; full and parse-only maps are identical, so DOM traversal contributes no tuples. Five repeats per control are stable, with 364 tuple IDs differing between the two valid controls. It shares the libxml2 parser family counted in C and C++ and is ranked by its Go package's 108 importers, not by libxml2 adoption.
+
 ## Lead log
 
 Numeric leads from the same snapshot, not verified and not selected. Renderers, HTTP clients, Office/OOXML, SAML and xmldsig, JUnit, libvirt, and AWS serializer hits were not treated as parser leads.
@@ -37,7 +40,6 @@ Numeric leads from the same snapshot, not verified and not selected. Renderers, 
 | --- | --- | ---: | --- |
 | [github.com/basgys/goxml2json](https://pkg.go.dev/github.com/basgys/goxml2json@v1.1.0#Convert) | v1.1.0 | 182 | [Both valid controls parsed](goxml2json-lead-check.json), but conversion drops namespace URIs from element and attribute names, so the shared namespace-aware result fails. Unselected; Docker coverage and AFL feedback were not run. |
 | [github.com/clbanning/mxj/v2](https://pkg.go.dev/github.com/clbanning/mxj/v2) | v2.7.0 | 178 | v2 module of clbanning/mxj; its XML path is expected to follow the verified v1.8.4 map conversion over encoding/xml, but the v2 source was not compared or run. Its 178 importers are not added to the v1 metric. |
-| [github.com/moovweb/gokogiri/xml](https://pkg.go.dev/github.com/moovweb/gokogiri/xml) | v0.0.0-...-a1a8281 | 108 | cgo binding to libxml2; pseudo-version only, native build not attempted. |
 | [mellium.im/xmlstream](https://pkg.go.dev/mellium.im/xmlstream) | v0.15.4 | 86 | Streaming token transformer API; whether it is a parser or a token-stream utility was not settled. Not run. |
 | [github.com/jbowtie/gokogiri/xml](https://pkg.go.dev/github.com/jbowtie/gokogiri/xml) | v0.0.0-...-de0f9d4 | 71 | cgo binding to libxml2 (gokogiri fork); pseudo-version only, not run. |
 | [github.com/clbanning/x2j](https://pkg.go.dev/github.com/clbanning/x2j) | v0.0.0-...-8252494 | 47 | Upstream of the verified github.com/beego/x2j fork, 27 commits ahead of the forked commit a0352aa; its later source was not compared or run. Its 47 importers are not added to the beego/x2j metric. |
