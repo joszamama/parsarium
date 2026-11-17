@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "project": "toml/rust/toml_spanner",
+  "pass": true,
+  "base_project_receipt_sha256": "be0a2e1cb31da32f9a3e9a30c0365066dcbd6ce4d257d7ce208b6c06fb42f58c",
+  "overlay_file_sha256": {
+    "Cargo.toml": "71c80643a2ebf43671d99179e10e379756afbbfab170f176586c90406d00d8a6",
+    "Cargo.lock": "49f97341871fb7a17403eabedc13b1fee4345d5a0ca773a2f11aa0aef2c6d19e",
+    "afl_fuzzer.rs": "d133938a2e60043454965eb8b3e9a25da48ae3ce17869ef1774462ca042f5050",
+    "Dockerfile": "4ec0abb4b5ef71b2e0282a82cc4adb72c1b2f644fea51c3ae223c5b4327ac02a",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "build.py": "41bd274a7d36b4608a7e47fcfa7705946cbe75a5c8f6f2cfc416abd3407f6232"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "0454309849e01bb15a8591a5032d706694445b393f0b1ac84b5e3b0b07ca8d69",
+  "image_id": "sha256:bcf5942cd4255d928a399e7808280d45f14ac3e60dc4823c5fb625e2971f7198",
+  "platform": "linux/arm64",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "feedback_edges": 689,
+  "afl_map_size": 4880,
+  "feedback_kind": "afl_rs_toml_spanner_only_sancov_edges",
+  "feedback_scope": "Only toml_spanner crate objects carry SanitizerCoverage guards; harness, serde_json, foldhash, AFL runtime and std are uninstrumented; hash seeds are fixed by the getrandom AFL_PRELOAD shim",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "toml_spanner"
+    ],
+    "rlib_guard_bytes": {
+      "toml_spanner": 19500
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "foldhash",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_toml_toml_spanner_harness",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "xdg"
+    ],
+    "binary_guards": 4875
+  },
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "reason": "toml-spanner indexes tables with at least six entries in a foldhash map; constant getrandom bytes fix any getrandom-derived seed; the parser source is unchanged.",
+    "replay_output_unchanged": true
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:f5745cfd7cfbec8e054778825845178bfcfdaf01f0b31b725b966cc2f3d94099",
+  "variant_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "control_output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "variant_output": {
+    "floats": {
+      "exponent": {
+        "type": "float",
+        "value": "1000.0"
+      },
+      "fraction": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "mixed": {
+        "type": "float",
+        "value": "0.015625"
+      },
+      "negative": {
+        "type": "float",
+        "value": "-0.5"
+      }
+    },
+    "integers": {
+      "binary": {
+        "type": "integer",
+        "value": "13"
+      },
+      "decimal": {
+        "type": "integer",
+        "value": "99"
+      },
+      "hex": {
+        "type": "integer",
+        "value": "3735928559"
+      },
+      "negative": {
+        "type": "integer",
+        "value": "-17"
+      },
+      "octal": {
+        "type": "integer",
+        "value": "493"
+      },
+      "underscored": {
+        "type": "integer",
+        "value": "1000000"
+      }
+    },
+    "keys": {
+      "a": {
+        "b": {
+          "c": {
+            "type": "integer",
+            "value": "1"
+          }
+        }
+      },
+      "quoted key": {
+        "type": "string",
+        "value": "q"
+      },
+      "site": {
+        "example.com": {
+          "type": "bool",
+          "value": "true"
+        }
+      }
+    },
+    "strings": {
+      "escapes": {
+        "type": "string",
+        "value": "tab\tquote\"backslash\\ é"
+      },
+      "literal": {
+        "type": "string",
+        "value": "C:\\Users\\parsarium"
+      },
+      "multiline": {
+        "type": "string",
+        "value": "first second"
+      },
+      "raw_multiline": {
+        "type": "string",
+        "value": "line one\nline two"
+      }
+    },
+    "times": {
+      "local_date": {
+        "type": "date-local",
+        "value": "1979-05-27"
+      },
+      "local_datetime": {
+        "type": "datetime-local",
+        "value": "1979-05-27T07:32:00"
+      },
+      "local_time": {
+        "type": "time-local",
+        "value": "00:32:00.25"
+      },
+      "offset": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00.5Z"
+      }
+    }
+  },
+  "repeats": 10,
+  "variant_feedback_edges": 644,
+  "edges_only_in_control": 236,
+  "edges_only_in_variant": 191,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml-spanner-1.0.3/",
+    "control_lines": {
+      "src/arena.rs": 152,
+      "src/de.rs": 0,
+      "src/error.rs": 0,
+      "src/helper.rs": 0,
+      "src/item.rs": 159,
+      "src/item/array.rs": 62,
+      "src/item/owned.rs": 0,
+      "src/item/table.rs": 79,
+      "src/lib.rs": 0,
+      "src/parser.rs": 641,
+      "src/span.rs": 3,
+      "src/time.rs": 126
+    },
+    "variant_lines": {
+      "src/arena.rs": 154,
+      "src/de.rs": 0,
+      "src/error.rs": 0,
+      "src/helper.rs": 0,
+      "src/item.rs": 111,
+      "src/item/array.rs": 0,
+      "src/item/owned.rs": 0,
+      "src/item/table.rs": 71,
+      "src/lib.rs": 0,
+      "src/parser.rs": 603,
+      "src/span.rs": 3,
+      "src/time.rs": 166
+    },
+    "files_with_different_line_counts": [
+      "src/arena.rs",
+      "src/item.rs",
+      "src/item/array.rs",
+      "src/item/table.rs",
+      "src/parser.rs",
+      "src/time.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      689,
+      689,
+      689,
+      689,
+      689,
+      689,
+      689,
+      689,
+      689,
+      689
+    ],
+    "stable_edges": 689,
+    "union_edges": 689,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      644,
+      644,
+      644,
+      644,
+      644,
+      644,
+      644,
+      644,
+      644,
+      644
+    ],
+    "stable_edges": 644,
+    "union_edges": 644,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

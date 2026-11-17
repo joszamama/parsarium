@@ -1,10 +1,10 @@
 {
   "ecosystem": "rust",
   "format": "toml",
-  "status": "pilot_three_selected_search_bounded",
+  "status": "pilot_four_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 3,
+  "verified_third_party_count": 4,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "toml",
@@ -19,8 +19,8 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 300,
   "unique_search_hits": 283,
-  "unresolved_documentation_leads": 6,
-  "uncertainty": "Bounded TOML search captured 2026-11-17: 3 crates.io queries, 300 recorded hits (283 unique), at most 100 per query. Three paths are verified. toml 1.2.1+spec-1.1.0 and toml_edit 0.25.19+spec-1.1.0 both lex and parse through the same toml_parser 1.1.5 crate and build their own trees from its events, so they are one parser family with two tree builders, not two independent parsers; their coverage is recorded separately for the own crate and for toml_parser. boml 2.0.1 (136,881 recent downloads) is verified as an independent parser family: 446 own lines on service-config and 566 on typed-scalars; AFL++ edges scoped to the boml crate repeat identically over ten runs per control (596 vs 693, 453 differ) with getrandom fixed by the AFL_PRELOAD shim. basic-toml 0.1.10 and toml-span 0.7.2 have no datetime type and reject both controls at the first offset date-time, so they stay leads. 6 leads remain. The pinned releases implement TOML 1.1.0; two valid TOML 1.0.0 controls establish only the tested subset; malformed input, huge documents and TOML 1.1 features are untested. Recent downloads include transitive dependency pulls (Cargo itself depends on toml and toml_edit). toml_edit stores tables in IndexMaps with std RandomState hashing; without the overlay's getrandom AFL_PRELOAD shim, 1 of 5 afl-showmap runs on service-config.toml gave 1,546 instead of 1,530 tuples (checked 2026-11-17), so its overlay fixes the hash keys (afl_fixed_hashmap_keys) and then repeats are identical.",
+  "unresolved_documentation_leads": 5,
+  "uncertainty": "Bounded TOML search captured 2026-11-17: 3 crates.io queries, 300 recorded hits (283 unique), at most 100 per query. Four paths are verified. toml 1.2.1+spec-1.1.0 and toml_edit 0.25.19+spec-1.1.0 both lex and parse through the same toml_parser 1.1.5 crate and build their own trees from its events, so they are one parser family with two tree builders, not two independent parsers; their coverage is recorded separately for the own crate and for toml_parser. boml 2.0.1 (136,881 recent downloads) is verified as an independent parser family: 446 own lines on service-config and 566 on typed-scalars; AFL++ edges scoped to the boml crate repeat identically over ten runs per control (596 vs 693, 453 differ) with getrandom fixed by the AFL_PRELOAD shim. toml-spanner 1.0.3 (44,429 recent downloads) is verified as an independent parser family: 1,222 own lines on service-config and 1,108 on typed-scalars; AFL++ edges scoped to the toml_spanner crate repeat identically over ten runs per control (689 vs 644, 427 differ) with getrandom fixed by the AFL_PRELOAD shim. basic-toml 0.1.10 and toml-span 0.7.2 have no datetime type and reject both controls at the first offset date-time, so they stay leads. 6 leads remain. The pinned releases implement TOML 1.1.0; two valid TOML 1.0.0 controls establish only the tested subset; malformed input, huge documents and TOML 1.1 features are untested. Recent downloads include transitive dependency pulls (Cargo itself depends on toml and toml_edit). toml_edit stores tables in IndexMaps with std RandomState hashing; without the overlay's getrandom AFL_PRELOAD shim, 1 of 5 afl-showmap runs on service-config.toml gave 1,546 instead of 1,530 tuples (checked 2026-11-17), so its overlay fixes the hash keys (afl_fixed_hashmap_keys) and then repeats are identical.",
   "primary_metric": "crates.io recent downloads (90 days)",
   "registry_snapshot": "data/rust/toml/registry-snapshot.json",
   "unresolved_leads": "data/rust/toml/leads.json",
@@ -29,7 +29,8 @@
   "third_party_control_results": [
     "projects/toml/rust/toml/verification.json",
     "projects/toml/rust/toml_edit/verification.json",
-    "projects/toml/rust/boml/verification.json"
+    "projects/toml/rust/boml/verification.json",
+    "projects/toml/rust/toml_spanner/verification.json"
   ],
   "protocol": "catalog/toml/PROTOCOL.md"
 }

@@ -739,5 +739,252 @@
       "captured_at_utc": "2026-11-17T16:36:50.418362+00:00"
     },
     "project": "projects/toml/rust/boml/verification.json"
+  },
+  {
+    "name": "toml-spanner",
+    "version": "1.0.3",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "toml_spanner::parse(&str, &Arena) -> Result<Document, Error>; Document derefs to Table of Item with Item::value() -> Value::{String, Integer, Float, Boolean, DateTime, Array, Table}; DateTime::{date(), time(), offset()}",
+    "documentation": "https://docs.rs/toml-spanner/1.0.3/toml_spanner/fn.parse.html",
+    "source": "https://static.crates.io/crates/toml-spanner/toml-spanner-1.0.3.crate",
+    "scope": "Arena-allocated, span-preserving Item tree over locally decoded UTF-8 text from toml_spanner::parse; the crate's own parser builds tables, arrays and typed values with its own DateTime type (optional date, time and offset parts). The harness walks the tree through Item::value(); offset date-times are converted to the UTC instant arithmetically. Both valid controls match the hand-written typed trees exactly. The pinned release implements TOML 1.1; only the TOML 1.0.0 subset in the two controls is tested.",
+    "family": "toml-spanner (exrok): own byte-level parser and Item tree; independent of toml_parser, toml, toml_edit, taplo and boml (no dependency on them).",
+    "control": "controls/toml/service-config.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "second_control": "controls/toml/typed-scalars.toml",
+    "second_control_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 44429,
+      "source": "data/rust/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:36:50.418362+00:00"
+    },
+    "project": "projects/toml/rust/toml_spanner/verification.json"
   }
 ]
