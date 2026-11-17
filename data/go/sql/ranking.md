@@ -26,10 +26,10 @@ Receipts: [vitess.io/vitess/go/vt/sqlparser](../../../projects/sql/go/vitess_io_
 | Lead | Metric | Status | Parser family |
 | --- | ---: | --- | --- |
 | github.com/pingcap/tidb/ast | 3,737 | excluded | TiDB MySQL grammar |
-| github.com/cockroachdb/cockroach/pkg/sql/parser | 1,972 | unresolved | CockroachDB PostgreSQL-compatible grammar |
-| github.com/pingcap/tidb/parser | 1,190 | unresolved | TiDB MySQL grammar (goyacc) |
+| github.com/cockroachdb/cockroach/pkg/sql/parser | 1,972 | excluded | CockroachDB PostgreSQL-compatible grammar |
+| github.com/pingcap/tidb/parser | 1,190 | excluded | TiDB MySQL grammar (goyacc) |
 | vitess.io/vitess/go/vt/sqlparser | 391 | selected | vitess MySQL grammar (goyacc) |
-| github.com/pingcap/parser | 385 | unresolved_blocked | TiDB MySQL grammar (goyacc) |
+| github.com/pingcap/parser | 385 | excluded | TiDB MySQL grammar (goyacc) |
 | github.com/xwb1989/sqlparser | 305 | selected | vitess MySQL grammar (extracted fork) |
 | github.com/pingcap/tidb/pkg/parser | 176 | selected | TiDB MySQL grammar (goyacc) |
 | github.com/blastrain/vitess-sqlparser/sqlparser | 88 | selected | vitess MySQL grammar (fork) |
@@ -39,6 +39,6 @@ Receipts: [vitess.io/vitess/go/vt/sqlparser](../../../projects/sql/go/vitess_io_
 | github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser | 13 | selected | CockroachDB PostgreSQL-compatible grammar |
 | github.com/AfterShip/clickhouse-sql-parser/parser | 13 | selected | clickhouse-sql-parser hand-written |
 | github.com/akito0107/xsqlparser | 7 | selected | sqlparser-rs port |
-| github.com/krasun/gosqlparser | 1 | unresolved | gosqlparser |
+| github.com/krasun/gosqlparser | 1 | excluded | gosqlparser |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).

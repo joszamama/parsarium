@@ -17,24 +17,24 @@
     },
     {
       "name": "github.com/cockroachdb/cockroach/pkg/sql/parser",
-      "status": "unresolved",
+      "status": "excluded",
       "metric_value": 1972,
       "metric_error": null,
       "latest_release_observed": null,
       "family": "CockroachDB PostgreSQL-compatible grammar",
       "documented_api_lead": "parser.Parse",
-      "reason": "CockroachDB parser inside the full database module (not published for library use; pulls the whole CockroachDB tree). The extracted cockroachdb-parser module is the library form. Importer count from the search snippet; not run.",
+      "reason": "Not importable as a library path. The newest version the Go proxy resolves for github.com/cockroachdb/cockroach is v20.1.17+incompatible (h1:K1cIUwI9...); its pkg/sql/parser ships sql.y but not the generated sql.go and help_messages.go (listed in the package .gitignore), so the package does not compile from the module, and later CockroachDB releases are not published as importable module versions. Cockroach Labs publishes the parser as github.com/cockroachdb/cockroachdb-parser for library use (selected under its own importer count, 13); the auxten extraction is also selected. This snippet count (1,972) is not transferred to either path. Checked 2026-11-17.",
       "metric_source": "pkg.go.dev search snippet in registry-snapshot.json"
     },
     {
       "name": "github.com/pingcap/tidb/parser",
-      "status": "unresolved",
+      "status": "excluded",
       "metric_value": 1190,
       "metric_error": null,
       "latest_release_observed": null,
       "family": "TiDB MySQL grammar (goyacc)",
       "documented_api_lead": "Parser.Parse",
-      "reason": "Older in-repo path of the TiDB parser (now github.com/pingcap/tidb/pkg/parser). Importer count from the search snippet; not run in this round.",
+      "reason": "Predecessor path of the selected github.com/pingcap/tidb/pkg/parser: the TiDB parser moved from parser/ to pkg/parser, and the last module version at the old path is v0.0.0-20231013125129-93a834a6bf8d. Excluded as a renamed predecessor (trust-dns-proto/zend-json precedent); its snippet count (1,190) is not added to the selected path. Checked 2026-11-17.",
       "metric_source": "pkg.go.dev search snippet in registry-snapshot.json"
     },
     {
@@ -50,13 +50,13 @@
     },
     {
       "name": "github.com/pingcap/parser",
-      "status": "unresolved_blocked",
+      "status": "excluded",
       "metric_value": 385,
       "metric_error": null,
       "latest_release_observed": "v3.1.2+incompatible",
       "family": "TiDB MySQL grammar (goyacc)",
       "documented_api_lead": "Parser.Parse",
-      "reason": "Archived standalone TiDB parser module; parser.New().Parse returns []ast.StmtNode. Superseded by github.com/pingcap/tidb/pkg/parser. Checked 2026-11-17: the newest tagged module v3.1.2+incompatible has no test_driver package, so literal values need the parser_driver from the full TiDB module; a standalone harness was not built. Remains a lead."
+      "reason": "Archived standalone module of the same TiDB parser, superseded by github.com/pingcap/tidb/parser and then github.com/pingcap/tidb/pkg/parser (selected). Excluded as a predecessor (rename precedent). Earlier check: the newest tagged module v3.1.2+incompatible has no test_driver package, so literals need the parser_driver from the full TiDB module. Checked 2026-11-17."
     },
     {
       "name": "github.com/xwb1989/sqlparser",
@@ -99,7 +99,7 @@
       "latest_release_observed": "v6.2.5",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "pg_query.Parse",
-      "reason": "cgo binding to libpg_query; pg_query.Parse returns the PostgreSQL protobuf parse tree.",
+      "reason": "cgo binding to the bundled libpg_query 17-6.2.5 C sources (PostgreSQL grammar family). pg_query.Parse gives the oracle summary on both controls; Go binding lines plus native libpg_query C lines are covered (Clang profile), and AFL++ feedback comes from the allowlisted native gram.c, scan.c and parser.c objects; selected.",
       "selected_release": "v6.2.5"
     },
     {
@@ -159,13 +159,13 @@
     },
     {
       "name": "github.com/krasun/gosqlparser",
-      "status": "unresolved",
+      "status": "excluded",
       "metric_value": 1,
       "metric_error": null,
       "latest_release_observed": "v1.0.5",
       "family": "gosqlparser",
       "documented_api_lead": "gosqlparser.Parse",
-      "reason": "Small subset parser; SELECT JOIN support unverified."
+      "reason": "Small subset parser. gosqlparser.Parse v1.0.5 rejects both valid controls with 'unexpected rune' (checked 2026-11-17); its documented grammar covers single-table SELECT/INSERT/UPDATE with == comparisons and double-quoted strings, without joins, functions, GROUP BY or ORDER BY."
     }
   ]
 }
