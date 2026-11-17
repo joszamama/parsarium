@@ -1,0 +1,17 @@
+{
+  "ecosystem": "JavaScript",
+  "format": "MP3 (untagged MPEG audio Layer III)",
+  "status": "none_documented_in_scoped_standard_library",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "Node.js 26.10.0 core modules",
+      "official_documentation_scope": [
+        "https://nodejs.org/download/release/v26.10.0/docs/api/",
+        "https://nodejs.org/download/release/v26.10.0/docs/api/all.json"
+      ],
+      "finding": "The versioned API docs (all.json, 9,051,526 bytes, fetched 2026-11-17) contain no occurrence of mp3, mpeg, AudioContext, decodeAudioData, AudioDecoder or an audio/ MIME type. Buffer, fs and stream expose bytes and generic I/O only; no core module interprets MPEG frame headers, side information or main data."
+    }
+  ],
+  "limit": "This covers documented Node.js 26.10.0 core modules, the runtime of the pinned project image. Browser Web Audio and HTMLMediaElement paths are recorded under data/javascript/mp3_id3v2/standard.json for the tagged control and were not rerun on the untagged controls here. It matches the Node.js finding in that file."
+}

@@ -1,166 +1,187 @@
 {
-  "checked_at_utc": "2026-11-17T10:22:43.801071+00:00",
-  "platform": "linux/arm64 Docker",
-  "java": "openjdk version \"25.0.5\" 2026-10-20 LTS",
-  "controls": {
-    "mono_44k": "controls/mp3/tone-44k-mono.mp3",
-    "stereo_22k": "controls/mp3/tone-22k-stereo.mp3"
+  "captured_at_utc": "2026-11-12T14:48:03.988603+00:00",
+  "environment": {
+    "java": "openjdk version \"21.0.2\" 2024-01-16 LTS\nOpenJDK Runtime Environment Temurin-21.0.2+13 (build 21.0.2+13-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.2+13 (build 21.0.2+13-LTS, mixed mode)",
+    "java25": "openjdk version \"25.0.5.0.3\" 2026-10-24\nOpenJDK Runtime Environment Homebrew (build 25.0.5.0.3)\nOpenJDK 64-Bit Server VM Homebrew (build 25.0.5.0.3, mixed mode, sharing)",
+    "maven": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)\nMaven home: /opt/homebrew/Cellar/maven/3.9.16/libexec\nJava version: 27, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk/27/libexec/openjdk.jdk/Contents/Home\nDefault locale: en_US, platform encoding: UTF-8\nOS name: \"mac os x\", version: \"27.2\", arch: \"aarch64\", family: \"mac\"",
+    "maven_compiler_release": 21,
+    "locked_classpath_jars": {
+      "main": 24,
+      "mp3spi": 4,
+      "bytedeco": 5,
+      "tianscar": 2,
+      "bramp": 13,
+      "imagic": 3,
+      "v47": 8,
+      "vlcj_info": 2,
+      "amilesend": 6
+    }
   },
-  "control_sha256": {
-    "mono_44k": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
-    "stereo_22k": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000"
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "additional_control_sha256": {
+    "controls/mp3_id3v2/tone-tags-44k.mp3": "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307"
   },
-  "control_meaning": "Untagged CBR MPEG Layer III streams: MPEG-1 44.1 kHz mono (11 frames) and MPEG-2 22.05 kHz stereo (12 frames). Frame and sample counts agree with the libmpg123 pilot in projects/mp3/c/mpg123.",
+  "long_control_sha256": {
+    "controls/mp3_id3v2/tone-tags-long.mp3": "2b085bb9e5bef6bb4254233a9d6bf0652ced4589373600cff3b8ddab07909dac"
+  },
+  "control_meaning": "Valid mono 8 kHz, 44.1 kHz, and 18-second 8 kHz MP3 files with ID3v2.3 tags carrying title Parsarium, artist Control and album Pilot",
   "third_party": [
     {
-      "package": "jcodec",
-      "group": "org.jcodec",
-      "version": "0.2.5",
-      "scope": "Every MPEG audio frame of an untagged local stream synchronized by MPEGAudioDemuxer and decoded by the Layer III Mp3Decoder: codec, sample rate, channels, frame count, decoded samples per channel",
-      "command": "python3 scripts/run_project.py mp3 java jcodec",
-      "receipt": "projects/mp3/java/jcodec/verification.json",
-      "pass": true,
-      "output": {
-        "codec": "MP3",
-        "sample_rate": 44100,
-        "channels": 1,
-        "frames": 11,
-        "decoded_samples": 12672
-      },
-      "differential_output": {
-        "codec": "MP3",
-        "sample_rate": 22050,
-        "channels": 2,
-        "frames": 12,
-        "decoded_samples": 6912
-      },
-      "differential_receipt": "data/java/mp3/afl-feedback.json",
-      "parser_source_files": 28,
-      "parser_source_lines_covered": 1142,
-      "format_specific_source_lines_covered": 138,
-      "format_specific_source": "org/jcodec/codecs/mpa/Mp3Decoder.java"
-    },
-    {
-      "package": "mp3spi",
-      "group": "com.googlecode.soundlibs",
-      "version": "1.9.5.4",
-      "scope": "Direct Java Sound MP3SPI reader and converter over every frame of two untagged MPEG Layer III streams; PCM decode delegates to the soundlibs JLayer fork",
-      "command": "python3 scripts/run_project.py mp3 java mp3spi",
-      "receipt": "projects/mp3/java/mp3spi/verification.json",
-      "pass": true,
-      "output": {
-        "codec": "MP3",
-        "sample_rate": 44100,
-        "channels": 1,
-        "frames": 11,
-        "decoded_samples": 12672
-      },
-      "differential_output": {
-        "codec": "MP3",
-        "sample_rate": 22050,
-        "channels": 2,
-        "frames": 12,
-        "decoded_samples": 6912
-      },
-      "differential_receipt": "data/java/mp3/mp3spi-feedback-differential.json",
-      "parser_source_files": 8,
-      "parser_source_lines_covered": 220,
-      "format_specific_source_lines_covered": 80,
-      "format_specific_source": "javazoom/spi/mpeg/sampled/convert/DecodedMpegAudioInputStream.java",
-      "underlying_source_files": 13,
-      "underlying_source_lines_covered": 1739,
-      "underlying_family": "soundlibs JLayer fork of JavaZoom JLayer"
-    },
-    {
-      "package": "jlayer",
-      "group": "javazoom",
-      "version": "1.0.1",
-      "scope": "Every MPEG Layer III frame of an untagged local stream parsed by Bitstream and decoded by LayerIIIDecoder; codec, sample rate, channels, frame count and decoded samples per channel",
-      "command": "python3 scripts/run_project.py mp3 java jlayer",
-      "receipt": "projects/mp3/java/jlayer/verification.json",
-      "pass": true,
-      "output": {
-        "codec": "MP3",
-        "sample_rate": 44100,
-        "channels": 1,
-        "frames": 11,
-        "decoded_samples": 12672
-      },
-      "differential_output": {
-        "codec": "MP3",
-        "sample_rate": 22050,
-        "channels": 2,
-        "frames": 12,
-        "decoded_samples": 6912
-      },
-      "differential_receipt": "data/java/mp3/jlayer-feedback-differential.json",
-      "parser_source_files": 14,
-      "parser_source_lines_covered": 1724,
-      "format_specific_source_lines_covered": 656,
-      "format_specific_source": "javazoom/jl/decoder/LayerIIIDecoder.java"
-    },
-    {
       "package": "jaudiotagger",
-      "group": "net.jthink",
-      "version": "3.0.1",
-      "scope": "First four-byte MPEG Layer III frame header from local untagged bytes: version, layer, sample rate, channels and bitrate only; no whole-stream or PCM claim",
-      "command": "python3 scripts/run_project.py mp3 java jaudiotagger",
-      "receipt": "projects/mp3/java/jaudiotagger/verification.json",
-      "pass": true,
+      "adapter_label": "jaudiotagger",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
       "output": {
-        "codec": "MP3",
-        "mpeg_version": "MPEG-1",
-        "layer": "Layer 3",
-        "sample_rate": 44100,
-        "channels": 1,
-        "bitrate_kbps": 64
+        "title": "Parsarium",
+        "artist": "Control",
+        "album": "Pilot"
       },
-      "differential_output": {
-        "codec": "MP3",
-        "mpeg_version": "MPEG-2",
-        "layer": "Layer 3",
-        "sample_rate": 22050,
-        "channels": 2,
-        "bitrate_kbps": 32
-      },
-      "differential_receipt": "data/java/mp3/jaudiotagger-feedback-differential.json",
-      "parser_source_files": 1,
-      "parser_source_lines_covered": 221,
-      "format_specific_source_lines_covered": 221,
-      "format_specific_source": "org/jaudiotagger/audio/mp3/MPEGFrameHeader.java",
-      "scope_limit": "First four-byte frame header of two valid untagged CBR MPEG Layer III files only; no frame count, frame size, duration, whole-stream consistency, PCM decode, ID3, VBR, or malformed-input claim. The higher-level MP3AudioHeader(File) misidentifies the valid 22.05 kHz control start at byte 104 and estimates 5 rather than 12 frames; MPEGFrameHeader.getFrameLength/getNoOfSamples are also wrong for that MPEG-2 header and are not reported."
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jaudiotagger controls/mp3_id3v2/tone-tags.mp3",
+      "version": "3.0.1"
     },
     {
       "package": "mp3agic",
-      "group": "com.mpatric",
-      "version": "0.9.1",
-      "scope": "Local Mp3File(Path) scan; independently correct MPEG Layer III version, layer, sample rate, channel mode, and bitrate only; high-level frame count/start/duration excluded",
-      "command": "python3 scripts/run_project.py mp3 java mp3agic",
-      "receipt": "projects/mp3/java/mp3agic/verification.json",
+      "adapter_label": "mp3agic",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "artist": "Control",
+        "album": "Pilot",
+        "tag_version": "3.0"
+      },
       "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter mp3agic controls/mp3_id3v2/tone-tags.mp3",
+      "version": "0.9.1"
+    },
+    {
+      "package": "jlayer",
+      "adapter_label": "jlayer",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "frequency": 8000,
+        "layer": 3,
+        "id3v2_present": true
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jlayer controls/mp3_id3v2/tone-tags.mp3",
+      "version": "1.0.1"
+    },
+    {
+      "package": "jave-core",
+      "adapter_label": "jave",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "format": "mp3",
+        "codec": "mp3 (mp3float)",
+        "frequency": 8000,
+        "channels": 1
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jave controls/mp3_id3v2/tone-tags.mp3",
+      "version": "4.2.0"
+    },
+    {
+      "package": "jaffree",
+      "adapter_label": "jaffree",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "codec": "mp3",
+        "frequency": 8000,
+        "title": "Parsarium",
+        "artist": "Control"
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jaffree controls/mp3_id3v2/tone-tags.mp3",
+      "version": "2024.08.29"
+    },
+    {
+      "package": "mp3spi",
+      "adapter_label": "mp3spi",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "type": "MP3",
+        "title": "Parsarium",
+        "artist": "Control",
+        "album": "Pilot",
+        "tag_version": "3"
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <mp3spi locked classpath> org.parsarium.Mp3SpiAdapter  controls/mp3_id3v2/tone-tags.mp3",
+      "version": "1.9.5.4"
+    },
+    {
+      "package": "javacv",
+      "adapter_label": "javacv",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "format": "mp3",
+        "codec": "mp3float",
+        "frequency": 8000,
+        "channels": 1
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <bytedeco locked classpath> org.parsarium.BytedecoMp3Adapter javacv controls/mp3_id3v2/tone-tags.mp3",
+      "version": "1.5.14"
+    },
+    {
+      "package": "bytedeco-ffmpeg",
+      "adapter_label": "ffmpeg",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "format": "mp3",
+        "frequency": 8000,
+        "channels": 1
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <bytedeco locked classpath> org.parsarium.BytedecoMp3Adapter ffmpeg controls/mp3_id3v2/tone-tags.mp3",
+      "version": "8.1.2-1.5.14"
+    },
+    {
+      "package": "jcodec",
+      "adapter_label": "jcodec",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
       "output": {
         "codec": "MP3",
-        "mpeg_version": "1.0",
-        "layer": "III",
-        "sample_rate": 44100,
-        "channel_mode": "Mono",
-        "bitrate_kbps": 64
+        "frame_bytes": 288,
+        "timescale": 8000
       },
-      "differential_output": {
-        "codec": "MP3",
-        "mpeg_version": "2.0",
-        "layer": "III",
-        "sample_rate": 22050,
-        "channel_mode": "Joint stereo",
-        "bitrate_kbps": 32
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jcodec controls/mp3_id3v2/tone-tags.mp3",
+      "version": "0.2.5"
+    },
+    {
+      "package": "javamp3",
+      "adapter_label": "javamp3",
+      "control": "controls/mp3_id3v2/tone-tags-44k.mp3",
+      "output": {
+        "frequency": 44100,
+        "stereo": false,
+        "sample_bytes": 32
       },
-      "differential_receipt": "data/java/mp3/mp3agic-feedback-differential.json",
-      "parser_source_files": 3,
-      "parser_source_lines_covered": 219,
-      "format_specific_source_lines_covered": 80,
-      "format_specific_source": "com/mpatric/mp3agic/MpegFrame.java",
-      "scope_limit": "Two valid untagged CBR MPEG Layer III files; only independently correct version, layer, sample rate, channel mode and bitrate are claimed. Mp3File(Path) misidentifies the 22.05 kHz control start at byte 104 and reports 5 frames/261 ms versus oracle byte 0, 12 frames/about 313 ms. No accurate whole-stream frame count, duration or PCM decoding claim; VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 and ID3 are untested."
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter javamp3 controls/mp3_id3v2/tone-tags-44k.mp3",
+      "version": "1.0.1"
     }
   ],
-  "standard": []
+  "runtime": [],
+  "runtime_probe": {
+    "api": "AudioSystem.getAudioFileFormat(File)",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "command": "java -cp <JDK-only runtime classes> org.parsarium.JdkMp3Probe controls/mp3_id3v2/tone-tags.mp3",
+    "output": {
+      "recognized": false,
+      "exception": "UnsupportedAudioFileException"
+    },
+    "pass": true
+  }
 }

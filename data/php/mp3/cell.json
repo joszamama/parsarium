@@ -1,58 +1,32 @@
 {
   "ecosystem": "php",
-  "format": "mp3",
-  "status": "pilot_two_verified_bounded_search",
+  "format": "mp3_id3v2",
+  "status": "curated_ten_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
+    "id3",
     "mp3",
-    "mpeg audio",
-    "mp3 duration",
-    "mp3 bitrate",
-    "mp3 info",
+    "audio metadata",
     "getid3",
-    "audio duration"
+    "mpeg audio",
+    "id3v2",
+    "mp3 parser",
+    "ffprobe mp3",
+    "audio tags"
   ],
-  "search_limit_per_query": 50,
-  "search_totals": {
-    "mp3": 68,
-    "mpeg audio": 10,
-    "mp3 duration": 1,
-    "mp3 bitrate": 1,
-    "mp3 info": 11,
-    "getid3": 20,
-    "audio duration": 7
-  },
-  "search_hits_recorded": 100,
-  "unique_search_hits": 79,
-  "leads_recorded": 79,
-  "leads_by_status": {
-    "selected": 2,
-    "shared_family": 22,
-    "excluded_native_wrapper": 4,
-    "excluded": 46,
-    "excluded_control_failed": 5
-  },
-  "ranking_metric": "Packagist total downloads",
-  "selection": "james-heinrich/getid3 (15,766,894 Packagist downloads) and wapmorgan/mp3info (1,512,916) are the two highest-download hits whose native PHP code reads MPEG Layer III frame headers from untagged input. getID3's module.audio.mp3.php matches both controls. Mp3Info 0.1.1 matches the MPEG-1 control's version, layer, sample rate, channel mode, bitrate, audio bytes and 11-frame count against the header-walk oracle, but misreads the MPEG-2 control; its scope is MPEG-1 Layer III CBR.",
-  "shared_family": "getID3 is the same code base already counted in the active mp3_id3v2/php cell (james-heinrich/getid3 v1.9.28 and its wrappers). This pilot covers a different module (module.audio.mp3.php frame headers, 273 lines covered on the control) of the same family, not an independent parser. Mp3Info is a separate family: one class (src/Mp3Info.php) with its own tables and no getID3 code; its ID3v2 reader is counted in mp3_id3v2/php and wapmorgan/media-file wraps it.",
-  "uncertainty": "Two verified paths; no padding. Search is seven Packagist search.json queries capped at 50 hits each, captured 2026-11-17; package descriptions alone decided most exclusions. Packagist total downloads count Composer installs of the whole package (and wrappers pull getID3 or Mp3Info transitively), not use of the MPEG frame parser. getID3 reads the first frame header, checks sync on following frames, and derives CBR duration from audio-data bytes and the header bitrate. Mp3Info reads two headers, estimates frames from audio bytes and the computed frame length, and reports duration one frame short ((frames - 1) x 1152 / sample rate). On the MPEG-2 control it uses the MPEG-1 frame-length coefficient, misses the third frame and reads a false sync at byte 236, reporting Layer II 24 kHz mono 96 kbit/s; MPEG-2 is not covered for Mp3Info. Neither path decodes audio. PHP-MP3 (falahati/php-mp3) failed the controls: the v0.9.5-alpha2 tag does not return on PHP 8.5, and the dev-master snapshot reads the MPEG-2 control as 3 frames at 11,025 Hz (data/php/mp3/falahati-php-mp3-control-audit.md). No lead remains unresolved (data/php/mp3/lead-audit.md). debach/zend-mp3 1.8.1 walks MPEG frames itself in Zend_Media_Mpeg_Abs, but its parent class file does not compile on PHP 8 (removed $str{$i} offsets), so it returns nothing on PHP 8.5. fobilow/mp3file has no release tag or license and also fails to compile. The re-scan found a native MPEG-1 Layer III decoder in xiaosongshu/flv2mp4 v1.8.7: 12,672 samples at 44.1 kHz on the MPEG-1 control, no frames on the MPEG-2 control, and its documented API decodes in a child process. holine/mp3 copies PHP-MP3 and does not return on either control. wapmorgan/media-file, dgoriaev/mp3info and acekyd/laravelmp3 delegate to or copy Mp3Info or getID3; phpvideotoolkit, mediaprobe, mp3php and soundfile hand parsing to FFmpeg or libsndfile. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support.",
-  "third_party_evidence": "data/php/mp3/parsers.json",
-  "third_party_control_results": "projects/mp3/php/getid3/verification.json",
-  "afl_feedback": "data/php/mp3/afl-feedback.json",
-  "runtime_evidence": "data/php/mp3/standard.json",
-  "registry_snapshot": "data/php/mp3/registry-snapshot.json",
-  "unresolved_leads": "data/php/mp3/leads.json",
-  "protocol": "catalog/mp3/PROTOCOL.md",
-  "third_party_control_results_by_path": {
-    "james-heinrich/getid3": "projects/mp3/php/getid3/verification.json",
-    "wapmorgan/mp3info": "projects/mp3/php/wapmorgan_mp3info/verification.json"
-  },
-  "afl_feedback_by_path": {
-    "james-heinrich/getid3": "data/php/mp3/afl-feedback.json",
-    "wapmorgan/mp3info": "data/php/mp3/wapmorgan_mp3info-feedback.json"
-  },
-  "lead_audit": "data/php/mp3/lead-audit.md"
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 205,
+  "unique_search_hits": 151,
+  "unresolved_documentation_leads": 13,
+  "uncertainty": "10 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/php/mp3_id3v2/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
+  "third_party_evidence": "data/php/mp3_id3v2/parsers.json",
+  "third_party_control_results": "data/php/mp3_id3v2/verification.json",
+  "runtime_evidence": "data/php/mp3_id3v2/standard.json",
+  "registry_snapshot": "data/php/mp3_id3v2/registry-snapshot.json",
+  "unresolved_leads": "data/php/mp3_id3v2/leads.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/php/mp3_id3v2"
 }

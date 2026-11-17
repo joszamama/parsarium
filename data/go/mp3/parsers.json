@@ -4,253 +4,144 @@
     "module": "github.com/faiface/beep",
     "version": "v1.1.0",
     "license": "MIT",
-    "input_api": "Decode(io.ReadCloser) (beep.StreamSeekCloser, beep.Format, error); StreamSeekCloser.Stream, Len, Err",
+    "input_api": "Decode(io.ReadCloser); Stream(samples)",
     "documentation": "https://pkg.go.dev/github.com/faiface/beep/mp3@v1.1.0",
-    "source": "https://github.com/faiface/beep/tree/v1.1.0/mp3",
-    "scope": "Beep StreamSeekCloser over go-mp3 v0.3.0: MPEG-1/2 Layer III frames decoded to 16-bit stereo PCM and converted to float64 sample pairs; untagged input only in this pilot",
-    "family": "hajime/go-mp3 lineage via Beep",
-    "family_note": "Shared family, stated: decode.go (about 100 lines) calls github.com/hajimehoshi/go-mp3 NewDecoder, Read, Length and Seek and converts its 16-bit PCM with beep.Format.DecodeSigned. faiface/beep v1.1.0 requires go-mp3 v0.3.0, so this path pins an older release of the decoder than the selected go-mp3 v0.3.4 path; its float64 sample hashes are not compared with other paths. Counted as its own package API with its own Imported by metric; it adds no independent MP3 decoder.",
-    "underlying_parser": {
-      "name": "github.com/hajimehoshi/go-mp3",
-      "version": "v0.3.0",
-      "source_sha256": "6a882c1cad1fc23b9b20add4a5bdc78451378232d630ddcdeac7505f970391be"
-    },
-    "control": "controls/mp3/go-tone-44k-mono.mp3",
+    "scope": "decoded samples and sample rate",
+    "family": "hajime/go-mp3 via beep",
     "expected_output": {
       "sample_rate": 44100,
-      "length_samples": 12672,
-      "streamed_samples": 12672,
-      "samples_sha256": "99899cf5f832a09cd132845fb0e2a388e1f56d13388e769d2b6ffd6cee5091f5"
+      "samples": 16
     },
-    "differential_control": "controls/mp3/go-tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "sample_rate": 22050,
-      "length_samples": 6912,
-      "streamed_samples": 6912,
-      "samples_sha256": "ff01cf7013876ecde516b170e1c6769e49e1850d6b1226ba0f94d28184c55041"
-    },
-    "evidence": "projects/mp3/go/github_com_faiface_beep_mp3/verification.json",
-    "popularity": {
-      "metric": "pkg.go.dev Imported by package count",
-      "value": 444,
-      "source": "data/go/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/go/github_com_faiface_beep_mp3"
-  },
-  {
-    "name": "github.com/hajimehoshi/go-mp3",
-    "module": "github.com/hajimehoshi/go-mp3",
-    "version": "v0.3.4",
-    "license": "Apache-2.0",
-    "input_api": "NewDecoder(io.Reader) (*Decoder, error); Read([]byte); SampleRate(); Length()",
-    "documentation": "https://pkg.go.dev/github.com/hajimehoshi/go-mp3@v0.3.4",
-    "source": "https://github.com/hajimehoshi/go-mp3/tree/v0.3.4",
-    "scope": "MPEG-1/2/2.5 Layer III frame headers, side info and main data decoded to 16-bit stereo PCM; untagged input only in this pilot",
-    "family": "hajime/go-mp3 lineage",
-    "family_note": "Same decoder already counted under mp3_id3v2 with a tagged control and root-package-only coverage. Wrapper package paths faiface/beep/mp3, ebiten/v2/audio/mp3 and gopxl/beep/v2/mp3 delegate decoding to this family; where they are selected in this cell, they are counted as separate package APIs with the go-mp3 family stated, not as independent decoders.",
-    "control": "controls/mp3/go-tone-44k-mono.mp3",
-    "expected_output": {
-      "sample_rate": 44100,
-      "length_bytes": 50688,
-      "decoded_bytes": 50688,
-      "pcm_sha256": "18a327dc0181f97f5702af2a35900734e04a0f0bee3091e77580dfe5b8397304"
-    },
-    "differential_control": "controls/mp3/go-tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "sample_rate": 22050,
-      "length_bytes": 27648,
-      "decoded_bytes": 27648,
-      "pcm_sha256": "454a8580b026f4b35026042df3e21768beb3b9fc1f1f1037701902abab2ea0a9"
-    },
-    "evidence": "projects/mp3/go/github_com_hajimehoshi_go_mp3/verification.json",
-    "popularity": {
-      "metric": "pkg.go.dev Imported by package count",
-      "value": 294,
-      "source": "data/go/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/go/github_com_hajimehoshi_go_mp3"
-  },
-  {
-    "name": "github.com/hajimehoshi/ebiten/v2/audio/mp3",
-    "module": "github.com/hajimehoshi/ebiten/v2",
-    "version": "v2.10.6",
-    "license": "Apache-2.0",
-    "input_api": "DecodeWithoutResampling(io.Reader) (*Stream, error); (*Stream).Read, Length, SampleRate",
-    "documentation": "https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio/mp3@v2.10.6",
-    "source": "https://github.com/hajimehoshi/ebiten/tree/v2.10.6/audio/mp3",
-    "scope": "Ebitengine Stream over go-mp3 v0.3.4: MPEG-1/2 Layer III frames decoded to 16-bit stereo PCM without resampling; untagged input only in this pilot",
-    "family": "hajime/go-mp3 lineage via Ebitengine",
-    "family_note": "Shared family, stated: DecodeWithoutResampling returns the github.com/hajimehoshi/go-mp3 v0.3.4 decoder's stream unchanged, so its PCM is byte-identical on both controls to the selected go-mp3 path (18a327dc..., 454a8580...). Same author as go-mp3. Counted as its own package API with its own Imported by metric; it adds no independent MP3 decoder.",
-    "underlying_parser": {
-      "name": "github.com/hajimehoshi/go-mp3",
-      "version": "v0.3.4",
-      "source_sha256": "c14676f9e3fdafe7bbb107e1dd65953a558cbef2346e4955d993f7bf2998e311"
-    },
-    "control": "controls/mp3/go-tone-44k-mono.mp3",
-    "expected_output": {
-      "sample_rate": 44100,
-      "length_bytes": 50688,
-      "decoded_bytes": 50688,
-      "pcm_sha256": "18a327dc0181f97f5702af2a35900734e04a0f0bee3091e77580dfe5b8397304"
-    },
-    "differential_control": "controls/mp3/go-tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "sample_rate": 22050,
-      "length_bytes": 27648,
-      "decoded_bytes": 27648,
-      "pcm_sha256": "454a8580b026f4b35026042df3e21768beb3b9fc1f1f1037701902abab2ea0a9"
-    },
-    "evidence": "projects/mp3/go/github_com_hajimehoshi_ebiten_v2_audio_mp3/verification.json",
-    "popularity": {
-      "metric": "pkg.go.dev Imported by package count",
-      "value": 144,
-      "source": "data/go/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/go/github_com_hajimehoshi_ebiten_v2_audio_mp3"
-  },
-  {
-    "name": "github.com/tcolgate/mp3",
-    "module": "github.com/tcolgate/mp3",
-    "version": "v0.0.0-20170426193717-e79c5a46d300",
-    "license": "MIT",
-    "input_api": "NewDecoder(io.Reader); Decoder.Decode(*Frame,*int); Frame.Header/Size/Samples",
-    "documentation": "https://pkg.go.dev/github.com/tcolgate/mp3@v0.0.0-20170426193717-e79c5a46d300",
-    "source": "https://github.com/tcolgate/mp3/tree/e79c5a46d300",
-    "scope": "MPEG Layer III frame headers and frame boundaries from an untagged byte stream; frame-level parsing only, no PCM decoding",
-    "family": "tcolgate/mp3 frame parser",
-    "family_note": "Independent Go frame parser. Also selected in tagged mp3_id3v2 cell; this plain MP3 path consumes untagged frames. Fork fgergo/mp3 shares its lineage.",
-    "control": "controls/mp3/tone-44k-mono.mp3",
-    "expected_output": {
-      "sample_rate": 44100,
-      "channels": 1,
-      "frames": 11,
-      "frame_bytes": 2298,
-      "samples_per_frame": 1152,
-      "bitrate": 64000
-    },
-    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "sample_rate": 22050,
-      "channels": 2,
-      "frames": 12,
-      "frame_bytes": 1254,
-      "samples_per_frame": 576,
-      "bitrate": 32000
-    },
-    "evidence": "projects/mp3/go/github_com_tcolgate_mp3/verification.json",
-    "popularity": {
-      "metric": "pkg.go.dev Imported by package count",
-      "value": 62,
-      "source": "data/go/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/go/github_com_tcolgate_mp3"
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
   },
   {
     "name": "github.com/gopxl/beep/v2/mp3",
     "module": "github.com/gopxl/beep/v2",
     "version": "v2.1.1",
     "license": "MIT",
-    "input_api": "Decode(io.ReadCloser) (beep.StreamSeekCloser, beep.Format, error); StreamSeekCloser.Stream, Len, Err",
+    "input_api": "Decode(io.ReadCloser); Stream(samples)",
     "documentation": "https://pkg.go.dev/github.com/gopxl/beep/v2/mp3@v2.1.1",
-    "source": "https://github.com/gopxl/beep/tree/v2.1.1/mp3",
-    "scope": "Beep v2 StreamSeekCloser over go-mp3 v0.3.4: MPEG-1/2 Layer III frames decoded to 16-bit stereo PCM and converted to float64 sample pairs; untagged input only in this pilot",
-    "family": "hajime/go-mp3 lineage via Beep",
-    "family_note": "Shared family, stated: gopxl/beep is the maintained fork of faiface/beep; its mp3/decode.go differs from faiface/beep v1.1.0 only in the beep import path and wraps github.com/hajimehoshi/go-mp3 v0.3.4. Counted as its own package API with its own Imported by metric; it adds no independent MP3 decoder.",
-    "underlying_parser": {
-      "name": "github.com/hajimehoshi/go-mp3",
-      "version": "v0.3.4",
-      "source_sha256": "c14676f9e3fdafe7bbb107e1dd65953a558cbef2346e4955d993f7bf2998e311"
-    },
-    "control": "controls/mp3/go-tone-44k-mono.mp3",
+    "scope": "decoded samples and sample rate",
+    "family": "hajime/go-mp3 via beep",
     "expected_output": {
       "sample_rate": 44100,
-      "length_samples": 12672,
-      "streamed_samples": 12672,
-      "samples_sha256": "4c295234e0e6f8c8d269edeaf196553d1a921fbff3fbeb6ef9c273ee278ee8db"
+      "samples": 16
     },
-    "differential_control": "controls/mp3/go-tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "sample_rate": 22050,
-      "length_samples": 6912,
-      "streamed_samples": 6912,
-      "samples_sha256": "6fae8bdc529198edf97afcb95d7bab1581f8b8c2b822e45ab9040d78833a06f2"
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/hajimehoshi/go-mp3",
+    "module": "github.com/hajimehoshi/go-mp3",
+    "version": "v0.3.4",
+    "license": "Apache-2.0",
+    "input_api": "NewDecoder(io.Reader); Read([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/hajimehoshi/go-mp3@v0.3.4",
+    "scope": "decoded PCM bytes and sample rate",
+    "family": "hajime/go-mp3 lineage",
+    "expected_output": {
+      "sample_rate": 44100,
+      "decoded_bytes": 64
     },
-    "evidence": "projects/mp3/go/github_com_gopxl_beep_v2_mp3/verification.json",
-    "popularity": {
-      "metric": "pkg.go.dev Imported by package count",
-      "value": 44,
-      "source": "data/go/mp3/registry-snapshot.json"
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/hajimehoshi/ebiten/v2/audio/mp3",
+    "module": "github.com/hajimehoshi/ebiten/v2",
+    "version": "v2.10.6",
+    "license": "Apache-2.0",
+    "input_api": "DecodeWithoutResampling(io.Reader); Read([]byte)",
+    "documentation": "https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio/mp3@v2.10.6",
+    "scope": "decoded PCM bytes and sample rate",
+    "family": "hajime/go-mp3 lineage",
+    "expected_output": {
+      "sample_rate": 44100,
+      "decoded_bytes": 64
     },
-    "project": "projects/mp3/go/github_com_gopxl_beep_v2_mp3"
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/tcolgate/mp3",
+    "module": "github.com/tcolgate/mp3",
+    "version": "v0.0.0-20170426193717-e79c5a46d300",
+    "license": "MIT",
+    "input_api": "NewDecoder(io.Reader).Decode(*Frame,*int)",
+    "documentation": "https://pkg.go.dev/github.com/tcolgate/mp3@v0.0.0-20170426193717-e79c5a46d300",
+    "scope": "MPEG frame size and samples",
+    "family": "tcolgate MP3 frame lineage",
+    "expected_output": {
+      "frame_bytes": 208,
+      "samples": 1152
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
   },
   {
     "name": "github.com/tosone/minimp3",
     "module": "github.com/tosone/minimp3",
     "version": "v1.1.0",
-    "license": "MIT (Go binding); CC0-1.0 (vendored minimp3.h)",
-    "input_api": "DecodeFull([]byte) (*Decoder, []byte, error); Decoder.SampleRate and Channels",
+    "license": "MIT",
+    "input_api": "DecodeFull([]byte)",
     "documentation": "https://pkg.go.dev/github.com/tosone/minimp3@v1.1.0",
-    "source": "https://github.com/tosone/minimp3/tree/v1.1.0",
-    "scope": "Decode untagged MPEG Layer III bytes to PCM, returning sample rate, channels, byte count and PCM hash",
-    "family": "lieff/minimp3 C decoder via tosone Go cgo binding",
-    "family_note": "Distinct decoder family from hajime/go-mp3. This package is also selected for tagged MP3 controls; the plain path uses untagged controls with native C coverage.",
-    "control": "controls/mp3/tone-44k-mono.mp3",
+    "scope": "decoded PCM bytes and audio format",
+    "family": "minimp3 decoder",
     "expected_output": {
       "sample_rate": 44100,
       "channels": 1,
-      "decoded_bytes": 25344,
-      "pcm_sha256": "0641e37cb18148b29cfc23ffc8c479115a4e042a0952a91570e92888aec0a33e"
-    },
-    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "sample_rate": 22050,
-      "channels": 2,
-      "decoded_bytes": 27648,
-      "pcm_sha256": "ac01db4bb3d3c907d3b51ecaefd6497cce1a693035114377eeedef2ef5afb653"
-    },
-    "evidence": "projects/mp3/go/github_com_tosone_minimp3/verification.json",
-    "popularity": {
-      "metric": "pkg.go.dev Imported by package count",
-      "value": 34,
-      "source": "data/go/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/go/github_com_tosone_minimp3"
+      "decoded_bytes": 94464
+    }
   },
   {
-    "name": "github.com/dmulholl/mp3lib",
-    "module": "github.com/dmulholl/mp3lib",
-    "version": "v1.0.0",
-    "license": "Unlicense",
-    "input_api": "NextFrame(io.Reader) *MP3Frame; MP3Frame header and frame fields",
-    "documentation": "https://pkg.go.dev/github.com/dmulholl/mp3lib@v1.0.0",
-    "source": "https://github.com/dmulholl/mp3lib/tree/v1.0.0",
-    "scope": "MPEG Layer III frame headers and frame boundaries from untagged local bytes; no PCM decoding",
-    "family": "dmulholl/mp3lib frame parser",
-    "family_note": "Independent Go MP3 frame parser; can also skip ID3 tags, but the plain MP3 controls have none. Separate from tcolgate/mp3 and hajime/go-mp3.",
-    "control": "controls/mp3/tone-44k-mono.mp3",
+    "name": "github.com/bogem/id3v2/v2",
+    "module": "github.com/bogem/id3v2/v2",
+    "version": "v2.1.4",
+    "license": "MIT",
+    "input_api": "ParseReader(io.Reader,Options{Parse:true}).Title()",
+    "documentation": "https://pkg.go.dev/github.com/bogem/id3v2/v2@v2.1.4",
+    "scope": "ID3v2.3 title",
+    "family": "bogem ID3v2 parser",
     "expected_output": {
-      "sample_rate": 44100,
-      "channels": 1,
-      "frames": 11,
-      "frame_bytes": 2298,
-      "samples_per_frame": 1152,
-      "bitrate": 64000
+      "title": "Parsarium"
+    }
+  },
+  {
+    "name": "github.com/dhowden/tag",
+    "module": "github.com/dhowden/tag",
+    "version": "v0.0.0-20240417053706-3d75831295e8",
+    "license": "BSD-2-Clause",
+    "input_api": "ReadFrom(io.ReadSeeker).Title()",
+    "documentation": "https://pkg.go.dev/github.com/dhowden/tag@v0.0.0-20240417053706-3d75831295e8",
+    "scope": "ID3v2.3 title",
+    "family": "dhowden/tag lineage",
+    "expected_output": {
+      "title": "Parsarium"
     },
-    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "sample_rate": 22050,
-      "channels": 2,
-      "frames": 12,
-      "frame_bytes": 1254,
-      "samples_per_frame": 576,
-      "bitrate": 32000
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/ascherkus/go-id3/src/id3",
+    "module": "github.com/ascherkus/go-id3",
+    "version": "v0.0.0-20120522061058-b139b6a612de",
+    "license": "Apache-2.0",
+    "input_api": "Read(io.Reader).Name",
+    "documentation": "https://pkg.go.dev/github.com/ascherkus/go-id3/src/id3@v0.0.0-20120522061058-b139b6a612de",
+    "scope": "ID3v2.3 title",
+    "family": "ascherkus/go-id3 lineage",
+    "expected_output": {
+      "title": "Parsarium"
     },
-    "evidence": "projects/mp3/go/github_com_dmulholl_mp3lib/verification.json",
-    "popularity": {
-      "metric": "pkg.go.dev Imported by package count",
-      "value": 9,
-      "source": "data/go/mp3/registry-snapshot.json"
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+  },
+  {
+    "name": "github.com/dustin/go-id3",
+    "module": "github.com/dustin/go-id3",
+    "version": "v0.0.0-20131108194644-73f4b1cf2a4e",
+    "license": "Apache-2.0",
+    "input_api": "Read(io.Reader).Name",
+    "documentation": "https://pkg.go.dev/github.com/dustin/go-id3@v0.0.0-20131108194644-73f4b1cf2a4e",
+    "scope": "ID3v2.3 title",
+    "family": "ascherkus/go-id3 lineage",
+    "expected_output": {
+      "title": "Parsarium"
     },
-    "project": "projects/mp3/go/github_com_dmulholl_mp3lib"
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
   }
 ]

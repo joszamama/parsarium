@@ -1,71 +1,22 @@
-# PHP plain MP3 parser pilot
+# PHP × MP3 with ID3v2: selected parsers
 
-Two third-party paths are verified in this pilot:
-[`james-heinrich/getid3`](../../../projects/mp3/php/getid3/README.md) v1.9.28
-and [`wapmorgan/mp3info`](../../../projects/mp3/php/wapmorgan_mp3info/README.md)
-0.1.1. Both read MPEG Layer III frame headers from untagged input in native PHP.
-The download counts in the [saved search snapshot](registry-snapshot.json)
-count Composer installs of each whole package, including installs pulled in by
-wrappers. They are adoption proxies, not counts of programs that read MP3
-frames. getID3 is already counted in the active PHP MP3-with-ID3v2 cell, so its
-plain-frame path is in the same parser family. Mp3Info is a separate family: one
-class with its own tables and no getID3 code.
+10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
-Packagist total downloads, captured 2026-11-17.
+Packagist lifetime package downloads.
 
 | Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
-| 1 | [james-heinrich/getid3](https://github.com/JamesHeinrich/getID3/blob/v1.9.28/README.md) | v1.9.28 | 15,766,894 | First MPEG frame header with frame-sync check: version, layer, sample rate, channels, bitrate, frame length; CBR duration from audio bytes and header bitrate | getID3 native MP3 frame parser |
-| 2 | [wapmorgan/mp3info](https://github.com/wapmorgan/Mp3Info/blob/e532c2e1997874f9c672c7810ce90ef15004ef94/README.md) | 0.1.1 | 1,512,916 | MPEG-1 Layer III CBR only: two frame headers (version, layer, sample rate, channel mode, bitrate), frame count from audio bytes and computed frame length | Mp3Info native PHP frame-header reader |
+| 1 | [james-heinrich/getid3](https://github.com/JamesHeinrich/getID3/blob/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd/README.md) | v1.9.28 | 15,655,021 | ID3v2.3 title, artist, album, and major version | getID3 native MP3 and ID3v2 parser |
+| 2 | [wapmorgan/mp3info](https://github.com/wapmorgan/Mp3Info/blob/e532c2e1997874f9c672c7810ce90ef15004ef94/README.md) | 0.1.1 | 1,511,066 | ID3v2.3 title, artist, album, and major version | Mp3Info native MP3 and ID3v2 parser |
+| 3 | [christophwurst/id3parser](https://github.com/ChristophWurst/ID3Parser/blob/050c9d81ea89b0cf53e23a27efc4e1840f9ab260/README.md) | v0.1.4 | 832,987 | ID3v2.3 title, artist, album, and major version | getID3-derived ID3 tag parser |
+| 4 | [mhor/php-mediainfo](https://github.com/mhor/php-mediainfo/blob/a0be4ef4dc1f56292793ad31c2b3efc75bfdbf05/README.md) | 5.8.0 | 651,659 | ID3v2.3 title, performer, and album on an 18-second MP3 | MediaInfoLib native MP3 and ID3 parser |
+| 5 | [owen-oj/laravel-getid3](https://github.com/Owen-oj/laravel-getid3/blob/6b89fc96b3dd2536fb2e53f8fee99ee6b76f9fd1/readme.md) | v2.6.0 | 590,279 | ID3v2.3 title, artist, album, and major version | getID3 native MP3 and ID3v2 parser |
+| 6 | [wapmorgan/media-file](https://github.com/wapmorgan/MediaFile/blob/263f773696e02d173fb9636c9a8111ac84032292/README.md) | 0.1.4 | 248,747 | MP3 audio type, 8 kHz sample rate, and 32 kb/s bit rate on an ID3v2.3-tagged control | Mp3Info native MP3 and ID3v2 parser |
+| 7 | [buggedcom/phpvideotoolkit](https://github.com/buggedcom/phpvideotoolkit-v2/blob/383a5b2c0ee7f4de4efea9a9154bb693630bbe0f/README.md) | 2.2.5 | 89,242 | ID3v2.3 text fields and MP3 audio codec/sample rate | FFmpeg native MP3 and ID3 parser |
+| 8 | [debach/zend-mp3](https://github.com/debach/zend-mp3/blob/17b523ad57f283ddf3a116bc0eff22cb9d1b4b27/README.md) | 1.8.1 | 45,193 | ID3v2.3 title, artist, and album | Sven Vollbehr PHP Reader ID3 family |
+| 9 | [kiwilan/php-audio](https://github.com/kiwilan/php-audio/blob/684002b34e5db3fa2935d6b9ba8cba0ebd81b1a7/README.md) | 4.0.02 | 20,408 | ID3v2.3 title, artist, and album | getID3 native MP3 and ID3v2 parser |
+| 10 | [indiehd/audio-manipulator](https://github.com/indiehd/audio-manipulator/blob/1e2f6d76030200c77cd727b40d3ea6166957f45d/src/MediaParsing/MediaParserInterface.php) | v4.1.0 | 8,191 | ID3v2.3 title, artist, album, and major version | getID3 native MP3 and ID3v2 parser |
 
-getID3 reports MPEG-1 Layer III, 64 kbit/s CBR, 208-byte frames and 0.28725 s on
-the 44.1 kHz mono control. On the 22.05 kHz stereo control it reports MPEG-2
-Layer III joint stereo, 32 kbit/s, 104-byte frames and 0.3135 s. Its duration
-is header bitrate times audio-data length, not a frame count.
-
-Mp3Info matches the header-walk oracle in `controls/mp3/check_controls.py` on
-the 44.1 kHz mono control: MPEG-1 Layer III, mono, 64 kbit/s, 2,298 audio bytes
-and 11 frames. It reports 0.26122 s because it computes duration as
-(frames - 1) × 1152 / sample rate; the oracle's 11 × 1152 samples are 0.28735 s.
-On the 22.05 kHz stereo control it reports MPEG-2 **Layer II, 24 kHz mono,
-96 kbit/s, 3 frames** where the oracle reads Layer III, 22.05 kHz stereo,
-32 kbit/s and 12 frames. The first header is read correctly. The jump to the
-next header uses the MPEG-1 coefficient (208 bytes, not 104), and the two-byte
-sync scan skips the real frame at byte 209 and stops on a false sync at byte
-236. Its listed scope is therefore MPEG-1 only.
-
-## Leads
-
-Seven Packagist queries returned 100 hits and 79 distinct packages. The
-[leads](leads.json) record each one. None of these is a verified entry.
-
-- falahati/php-mp3 (80,144), a separate regin/PHP-MP3 family, failed the
-  controls ([audit](falahati-php-mp3-control-audit.md)). The v0.9.5-alpha2 tag
-  does not return on PHP 8.5. The dev-master snapshot matches the MPEG-1
-  control but reads the MPEG-2 control as 3 frames at 11,025 Hz instead of
-  12 frames at 22,050 Hz.
-- debach/zend-mp3 1.8.1 (45,227) walks MPEG frames itself in
-  `Zend_Media_Mpeg_Abs`, but the parent class file uses `$str{$i}` offsets
-  removed in PHP 8. On PHP 8.5 it stops with a parse error on both controls.
-  fobilow/mp3file (5,468) has no release tag or license, and it also fails to
-  compile. The re-scan found a native MPEG-1 Layer III decoder in
-  xiaosongshu/flv2mp4 v1.8.7 (190). It decodes 12,672 samples from the MPEG-1
-  control and no frames from the MPEG-2 control, and its documented API
-  decodes in a child process. holine/mp3 (9) copies PHP-MP3 and does not
-  return on either control. Like falahati/php-mp3, these four are recorded as
-  control failures. The [lead audit](lead-audit.md) gives the details.
-- wapmorgan/media-file (248,980) builds `Mp3Info` and returns its fields, so it
-  is in the same family. dgoriaev/mp3info is an Mp3Info fork.
-- buggedcom/phpvideotoolkit, akiosarkiz/mp3php, nicoverbruggen/mediaprobe and
-  phpmlkit/soundfile hand parsing to FFmpeg or libsndfile.
-- 20 getID3 forks and wrappers share the getID3 family, for example
-  owen-oj/laravel-getid3, kiwilan/php-audio and acekyd/laravelmp3, which
-  bundles getID3 1.9.5.
-- 46 hits are excluded: tag-only readers, encoder wrappers, converters,
-  downloaders, unreleased snapshots and unrelated packages.
-
-This two-entry pilot is neither a top-ten ranking nor evidence that only two
-PHP frame parsers exist. The [cell record](cell.json) gives the remaining
-uncertainty and the [PHP runtime finding](standard.json).
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

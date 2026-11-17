@@ -1,0 +1,240 @@
+{
+  "captured_from": "data/c/mp3/registry-snapshot.json",
+  "metric": "Homebrew install-on-request count (365 days)",
+  "leads": [
+    {
+      "name": "mpg123",
+      "status": "selected",
+      "install_on_request_365d": 12256,
+      "version_seen": "1.33.7",
+      "license": "LGPL-2.1-only",
+      "reason": "Selected and verified: libmpg123 feed API decodes the untagged controls; see data/c/mp3/parsers.json.",
+      "source": "https://formulae.brew.sh/formula/mpg123"
+    },
+    {
+      "name": "lame",
+      "status": "shared_family",
+      "install_on_request_365d": 6992,
+      "version_seen": "4.0",
+      "license": "LGPL-2.0-or-later",
+      "reason": "LAME 4.0 exposes the HIP decoder interface, which data/c/mp3_id3v2/parsers.json records as built over libmpg123; it would add a package path, not a separate Layer III decoder family. Not run on the untagged controls.",
+      "source": "https://formulae.brew.sh/formula/lame"
+    },
+    {
+      "name": "eye-d3",
+      "status": "excluded",
+      "install_on_request_365d": 1190,
+      "version_seen": "0.9.9",
+      "license": "GPL-3.0-or-later",
+      "reason": "Python ID3 tool; not a C library and tag-only.",
+      "source": "https://formulae.brew.sh/formula/eye-d3"
+    },
+    {
+      "name": "mad",
+      "status": "selected",
+      "install_on_request_365d": 1145,
+      "version_seen": "0.16.5",
+      "license": "GPL-2.0-or-later",
+      "reason": "Selected and verified as libmad 0.16.5: mad_stream_buffer/mad_frame_decode/mad_synth_frame decode both untagged controls with no recoverable errors; independent of libmpg123. See data/c/mp3/parsers.json and projects/mp3/c/libmad.",
+      "source": "https://formulae.brew.sh/formula/mad"
+    },
+    {
+      "name": "ncmdump",
+      "status": "excluded",
+      "install_on_request_365d": 871,
+      "version_seen": "1.5.1",
+      "license": "MIT",
+      "reason": "Converter for NCM container files; not an MPEG audio decoder library.",
+      "source": "https://formulae.brew.sh/formula/ncmdump"
+    },
+    {
+      "name": "icecast",
+      "status": "excluded",
+      "install_on_request_365d": 788,
+      "version_seen": "2.4.4",
+      "license": "GPL-2.0-only",
+      "reason": "Streaming server; no documented MP3 decoding library API.",
+      "source": "https://formulae.brew.sh/formula/icecast"
+    },
+    {
+      "name": "mp3gain",
+      "status": "excluded",
+      "install_on_request_365d": 462,
+      "version_seen": "1.6.2",
+      "license": "LGPL-2.1-or-later",
+      "reason": "Command-line normalizer; no documented library byte API.",
+      "source": "https://formulae.brew.sh/formula/mp3gain"
+    },
+    {
+      "name": "mp3splt",
+      "status": "excluded",
+      "install_on_request_365d": 270,
+      "version_seen": "2.6.2",
+      "license": "GPL-2.0-or-later",
+      "reason": "Command-line frontend to libmp3splt.",
+      "source": "https://formulae.brew.sh/formula/mp3splt"
+    },
+    {
+      "name": "mp3val",
+      "status": "excluded",
+      "install_on_request_365d": 267,
+      "version_seen": "0.1.8",
+      "license": "GPL-2.0-or-later",
+      "reason": "Command-line MPEG stream validator; no documented library byte API.",
+      "source": "https://formulae.brew.sh/formula/mp3val"
+    },
+    {
+      "name": "mp3info",
+      "status": "excluded",
+      "install_on_request_365d": 114,
+      "version_seen": "0.8.5a",
+      "license": "GPL-2.0-or-later",
+      "reason": "Command-line header viewer and ID3v1 editor; no documented library byte API.",
+      "source": "https://formulae.brew.sh/formula/mp3info"
+    },
+    {
+      "name": "libmp3splt",
+      "status": "unresolved_shared_family",
+      "install_on_request_365d": 102,
+      "version_seen": "0.9.2",
+      "license": "GPL-2.0-or-later",
+      "reason": "Splitting library whose MP3 plugin decodes through libmad; any path would share the libmad family now verified as mp3/c/libmad. Not run.",
+      "source": "https://formulae.brew.sh/formula/libmp3splt"
+    },
+    {
+      "name": "mpg321",
+      "status": "excluded",
+      "install_on_request_365d": 81,
+      "version_seen": "0.3.2",
+      "license": "GPL-2.0-or-later",
+      "reason": "Command-line player over libmad; no library input API of its own.",
+      "source": "https://formulae.brew.sh/formula/mpg321"
+    },
+    {
+      "name": "clamz",
+      "status": "excluded",
+      "install_on_request_365d": 78,
+      "version_seen": "0.5",
+      "license": "GPL-3.0-or-later",
+      "reason": "Download client; no MPEG audio parsing.",
+      "source": "https://formulae.brew.sh/formula/clamz"
+    },
+    {
+      "name": "two-lame",
+      "status": "excluded",
+      "install_on_request_365d": 69,
+      "version_seen": "0.4.0",
+      "license": "LGPL-2.1-or-later",
+      "reason": "MPEG Layer II encoder; no Layer III decoding.",
+      "source": "https://formulae.brew.sh/formula/two-lame"
+    },
+    {
+      "name": "mpck",
+      "status": "excluded",
+      "install_on_request_365d": 49,
+      "version_seen": "0.22",
+      "license": "GPL-2.0-or-later",
+      "reason": "Command-line MP3 checker; no documented library byte API.",
+      "source": "https://formulae.brew.sh/formula/mpck"
+    },
+    {
+      "name": "madplay",
+      "status": "excluded",
+      "install_on_request_365d": 47,
+      "version_seen": "0.15.2b",
+      "license": "GPL-2.0-or-later",
+      "reason": "Command-line player over libmad; no library input API of its own.",
+      "source": "https://formulae.brew.sh/formula/madplay"
+    },
+    {
+      "name": "overdrive",
+      "status": "excluded",
+      "install_on_request_365d": 46,
+      "version_seen": "2.4.1",
+      "license": "MIT",
+      "reason": "Shell download script; no MPEG audio parsing.",
+      "source": "https://formulae.brew.sh/formula/overdrive"
+    },
+    {
+      "name": "mp3unicode",
+      "status": "excluded",
+      "install_on_request_365d": 42,
+      "version_seen": "1.2.1",
+      "license": "GPL-2.0-only",
+      "reason": "ID3 tag encoding converter; does not decode MPEG audio frames.",
+      "source": "https://formulae.brew.sh/formula/mp3unicode"
+    },
+    {
+      "name": "mp3wrap",
+      "status": "excluded",
+      "install_on_request_365d": 39,
+      "version_seen": "0.5",
+      "license": "LGPL-2.0-or-later",
+      "reason": "Command-line file wrapper; no library API.",
+      "source": "https://formulae.brew.sh/formula/mp3wrap"
+    },
+    {
+      "name": "mp3check",
+      "status": "excluded",
+      "install_on_request_365d": 33,
+      "version_seen": "0.8.7",
+      "license": "GPL-2.0-or-later",
+      "reason": "Command-line MP3 consistency checker; no documented library byte API.",
+      "source": "https://formulae.brew.sh/formula/mp3check"
+    },
+    {
+      "name": "mp3cat",
+      "status": "excluded",
+      "install_on_request_365d": 32,
+      "version_seen": "0.5",
+      "license": "GPL-2.0-or-later",
+      "reason": "Command-line stream concatenation tool; no library API.",
+      "source": "https://formulae.brew.sh/formula/mp3cat"
+    },
+    {
+      "name": "mp3blaster",
+      "status": "excluded",
+      "install_on_request_365d": 27,
+      "version_seen": "3.2.6",
+      "license": "GPL-2.0-or-later",
+      "reason": "Interactive command-line player.",
+      "source": "https://formulae.brew.sh/formula/mp3blaster"
+    },
+    {
+      "name": "whatmp3",
+      "status": "excluded",
+      "install_on_request_365d": 16,
+      "version_seen": "3.9",
+      "license": "MIT",
+      "reason": "Python torrent helper; not a C decoder.",
+      "source": "https://formulae.brew.sh/formula/whatmp3"
+    },
+    {
+      "name": "mp3fs",
+      "status": "excluded",
+      "install_on_request_365d": 6,
+      "version_seen": "1.1.1",
+      "license": "GPL-3.0-or-later",
+      "reason": "FUSE file system that encodes to MP3; not a decoder library.",
+      "source": "https://formulae.brew.sh/formula/mp3fs"
+    },
+    {
+      "name": "minimp3",
+      "status": "unresolved_no_primary_metric",
+      "install_on_request_365d": null,
+      "supplemental_github_stars": 1988,
+      "license": "CC0-1.0",
+      "reason": "Technically verified as a candidate (local commit 681d43c2): own header-only decoder, both untagged controls decoded from memory, parser-source coverage and stable input-dependent AFL++ feedback. Not selected: no Homebrew formula (primary metric) and no Debian package in the pinned popcon snapshot; GitHub stars are supplemental and PROTOCOL.md allows star fallback only in PLY cells.",
+      "source": "https://github.com/lieff/minimp3"
+    },
+    {
+      "name": "dr_mp3",
+      "status": "unresolved_no_primary_metric",
+      "install_on_request_365d": null,
+      "supplemental_github_stars": 1901,
+      "license": "Public domain or MIT-0 (dr_mp3.h header, master branch)",
+      "reason": "Technically verified as a candidate (local commit 31698339): pinned 0.7.4, drmp3_init_memory decodes both controls with PCM byte-identical to the Rust minimp3 receipt, so it shares the minimp3 decoder family. Not selected: no Homebrew formula or Debian package; dr_libs repository stars cover several decoders, are supplemental, and qualify only in PLY cells.",
+      "source": "https://github.com/mackron/dr_libs/blob/master/dr_mp3.h"
+    }
+  ]
+}

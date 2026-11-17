@@ -1,0 +1,166 @@
+{
+  "checked_at_utc": "2026-11-17T10:22:43.801071+00:00",
+  "platform": "linux/arm64 Docker",
+  "java": "openjdk version \"25.0.5\" 2026-10-20 LTS",
+  "controls": {
+    "mono_44k": "controls/mp3/tone-44k-mono.mp3",
+    "stereo_22k": "controls/mp3/tone-22k-stereo.mp3"
+  },
+  "control_sha256": {
+    "mono_44k": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+    "stereo_22k": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000"
+  },
+  "control_meaning": "Untagged CBR MPEG Layer III streams: MPEG-1 44.1 kHz mono (11 frames) and MPEG-2 22.05 kHz stereo (12 frames). Frame and sample counts agree with the libmpg123 pilot in projects/mp3/c/mpg123.",
+  "third_party": [
+    {
+      "package": "jcodec",
+      "group": "org.jcodec",
+      "version": "0.2.5",
+      "scope": "Every MPEG audio frame of an untagged local stream synchronized by MPEGAudioDemuxer and decoded by the Layer III Mp3Decoder: codec, sample rate, channels, frame count, decoded samples per channel",
+      "command": "python3 scripts/run_project.py mp3 java jcodec",
+      "receipt": "projects/mp3/java/jcodec/verification.json",
+      "pass": true,
+      "output": {
+        "codec": "MP3",
+        "sample_rate": 44100,
+        "channels": 1,
+        "frames": 11,
+        "decoded_samples": 12672
+      },
+      "differential_output": {
+        "codec": "MP3",
+        "sample_rate": 22050,
+        "channels": 2,
+        "frames": 12,
+        "decoded_samples": 6912
+      },
+      "differential_receipt": "data/java/mp3/afl-feedback.json",
+      "parser_source_files": 28,
+      "parser_source_lines_covered": 1142,
+      "format_specific_source_lines_covered": 138,
+      "format_specific_source": "org/jcodec/codecs/mpa/Mp3Decoder.java"
+    },
+    {
+      "package": "mp3spi",
+      "group": "com.googlecode.soundlibs",
+      "version": "1.9.5.4",
+      "scope": "Direct Java Sound MP3SPI reader and converter over every frame of two untagged MPEG Layer III streams; PCM decode delegates to the soundlibs JLayer fork",
+      "command": "python3 scripts/run_project.py mp3 java mp3spi",
+      "receipt": "projects/mp3/java/mp3spi/verification.json",
+      "pass": true,
+      "output": {
+        "codec": "MP3",
+        "sample_rate": 44100,
+        "channels": 1,
+        "frames": 11,
+        "decoded_samples": 12672
+      },
+      "differential_output": {
+        "codec": "MP3",
+        "sample_rate": 22050,
+        "channels": 2,
+        "frames": 12,
+        "decoded_samples": 6912
+      },
+      "differential_receipt": "data/java/mp3/mp3spi-feedback-differential.json",
+      "parser_source_files": 8,
+      "parser_source_lines_covered": 220,
+      "format_specific_source_lines_covered": 80,
+      "format_specific_source": "javazoom/spi/mpeg/sampled/convert/DecodedMpegAudioInputStream.java",
+      "underlying_source_files": 13,
+      "underlying_source_lines_covered": 1739,
+      "underlying_family": "soundlibs JLayer fork of JavaZoom JLayer"
+    },
+    {
+      "package": "jlayer",
+      "group": "javazoom",
+      "version": "1.0.1",
+      "scope": "Every MPEG Layer III frame of an untagged local stream parsed by Bitstream and decoded by LayerIIIDecoder; codec, sample rate, channels, frame count and decoded samples per channel",
+      "command": "python3 scripts/run_project.py mp3 java jlayer",
+      "receipt": "projects/mp3/java/jlayer/verification.json",
+      "pass": true,
+      "output": {
+        "codec": "MP3",
+        "sample_rate": 44100,
+        "channels": 1,
+        "frames": 11,
+        "decoded_samples": 12672
+      },
+      "differential_output": {
+        "codec": "MP3",
+        "sample_rate": 22050,
+        "channels": 2,
+        "frames": 12,
+        "decoded_samples": 6912
+      },
+      "differential_receipt": "data/java/mp3/jlayer-feedback-differential.json",
+      "parser_source_files": 14,
+      "parser_source_lines_covered": 1724,
+      "format_specific_source_lines_covered": 656,
+      "format_specific_source": "javazoom/jl/decoder/LayerIIIDecoder.java"
+    },
+    {
+      "package": "jaudiotagger",
+      "group": "net.jthink",
+      "version": "3.0.1",
+      "scope": "First four-byte MPEG Layer III frame header from local untagged bytes: version, layer, sample rate, channels and bitrate only; no whole-stream or PCM claim",
+      "command": "python3 scripts/run_project.py mp3 java jaudiotagger",
+      "receipt": "projects/mp3/java/jaudiotagger/verification.json",
+      "pass": true,
+      "output": {
+        "codec": "MP3",
+        "mpeg_version": "MPEG-1",
+        "layer": "Layer 3",
+        "sample_rate": 44100,
+        "channels": 1,
+        "bitrate_kbps": 64
+      },
+      "differential_output": {
+        "codec": "MP3",
+        "mpeg_version": "MPEG-2",
+        "layer": "Layer 3",
+        "sample_rate": 22050,
+        "channels": 2,
+        "bitrate_kbps": 32
+      },
+      "differential_receipt": "data/java/mp3/jaudiotagger-feedback-differential.json",
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 221,
+      "format_specific_source_lines_covered": 221,
+      "format_specific_source": "org/jaudiotagger/audio/mp3/MPEGFrameHeader.java",
+      "scope_limit": "First four-byte frame header of two valid untagged CBR MPEG Layer III files only; no frame count, frame size, duration, whole-stream consistency, PCM decode, ID3, VBR, or malformed-input claim. The higher-level MP3AudioHeader(File) misidentifies the valid 22.05 kHz control start at byte 104 and estimates 5 rather than 12 frames; MPEGFrameHeader.getFrameLength/getNoOfSamples are also wrong for that MPEG-2 header and are not reported."
+    },
+    {
+      "package": "mp3agic",
+      "group": "com.mpatric",
+      "version": "0.9.1",
+      "scope": "Local Mp3File(Path) scan; independently correct MPEG Layer III version, layer, sample rate, channel mode, and bitrate only; high-level frame count/start/duration excluded",
+      "command": "python3 scripts/run_project.py mp3 java mp3agic",
+      "receipt": "projects/mp3/java/mp3agic/verification.json",
+      "pass": true,
+      "output": {
+        "codec": "MP3",
+        "mpeg_version": "1.0",
+        "layer": "III",
+        "sample_rate": 44100,
+        "channel_mode": "Mono",
+        "bitrate_kbps": 64
+      },
+      "differential_output": {
+        "codec": "MP3",
+        "mpeg_version": "2.0",
+        "layer": "III",
+        "sample_rate": 22050,
+        "channel_mode": "Joint stereo",
+        "bitrate_kbps": 32
+      },
+      "differential_receipt": "data/java/mp3/mp3agic-feedback-differential.json",
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 219,
+      "format_specific_source_lines_covered": 80,
+      "format_specific_source": "com/mpatric/mp3agic/MpegFrame.java",
+      "scope_limit": "Two valid untagged CBR MPEG Layer III files; only independently correct version, layer, sample rate, channel mode and bitrate are claimed. Mp3File(Path) misidentifies the 22.05 kHz control start at byte 104 and reports 5 frames/261 ms versus oracle byte 0, 12 frames/about 313 ms. No accurate whole-stream frame count, duration or PCM decoding claim; VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 and ID3 are untested."
+    }
+  ],
+  "standard": []
+}

@@ -1,138 +1,86 @@
 [
   {
-    "name": "mpg123-decoder",
-    "status": "unresolved_shared_family",
-    "lead_kind": "verified_controls_feedback_blocked_wasm",
-    "version_seen": "1.0.3",
-    "license": "MIT",
-    "npm_downloads_30d": 2505430,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mpg123-decoder",
-    "reason": "Pinned 1.0.3 MPEGDecoder.decode(Uint8Array) directly decodes both untagged valid controls with exact sample rate and decoded samples per channel (44100/12672 and 22050/6912); the mono control produces two PCM arrays, so channel count is not claimed. It bundles a compressed 99,479-byte libmpg123 WASM binary (SHA-256 f0e9e884...), related to the selected C mpg123 family but a different build. The binary has no name, DWARF debug_info/debug_line or sourceMappingURL custom sections; Node V8 coverage sees JavaScript wrapper files and no WASM source scripts. No source-attributed parser coverage or stable parser-owned AFL feedback is established, so this path remains unselected despite its 2,505,430 npm 30-day downloads. A pinned-source Emscripten rebuild with coverage would produce a different binary whose equivalence to the shipped artifact is unverified. Only the two valid controls were run, with no malformed inputs or fuzz campaign.",
-    "source": "https://github.com/eshaz/wasm-audio-decoders/tree/8f2428c1cd96b54dab74836c8471ff75fe35cbee/src/mpg123-decoder",
-    "control_evidence": "data/javascript/mp3/mpg123_decoder-feedback-blocked.json",
-    "reproduce": "python3 scripts/probe_javascript_mp3_mpg123_decoder.py"
-  },
-  {
-    "name": "audio-decode",
-    "status": "unresolved_shared_family",
-    "lead_kind": "wrapper",
-    "version_seen": "3.12.0",
-    "license": "MIT",
-    "npm_downloads_30d": 1467199,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/audio-decode",
-    "reason": "Unscoped alias of @audio/decode; MP3 path delegates to @audio/decode-mp3 and mpg123-decoder WASM (libmpg123 family).",
-    "source": "https://www.npmjs.com/package/audio-decode"
-  },
-  {
-    "name": "@audio/decode-mp3",
-    "status": "unresolved_shared_family",
-    "lead_kind": "wrapper",
-    "version_seen": "1.3.1",
-    "license": "MIT",
-    "npm_downloads_30d": 703988,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@audio/decode-mp3",
-    "reason": "Delegates MP3 decoding to mpg123-decoder WASM (libmpg123 family); verified in mp3_id3v2/javascript for the tagged control.",
-    "source": "https://www.npmjs.com/package/@audio/decode-mp3"
-  },
-  {
-    "name": "@audio/decode",
-    "status": "unresolved_shared_family",
-    "lead_kind": "wrapper",
-    "version_seen": "4.3.0",
-    "license": "MIT",
-    "npm_downloads_30d": 621561,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@audio/decode",
-    "reason": "Facade over @audio/decode-mp3 and mpg123-decoder WASM (libmpg123 family); verified in mp3_id3v2/javascript.",
-    "source": "https://www.npmjs.com/package/@audio/decode"
-  },
-  {
-    "name": "mp3-duration",
-    "status": "promoted_to_verified",
-    "lead_kind": "own_frame_header_scan_duration_only",
-    "version_seen": "1.1.0",
-    "license": "MIT",
-    "npm_downloads_30d": 43261,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mp3-duration",
-    "reason": "Pinned 1.1.0 documented mp3Duration(Buffer,false) walks MPEG frame headers to EOF and sums frame samples/sample rate, returning seconds rounded to milliseconds. Both untagged controls return 287 ms and 313 ms, exactly matching independent frame-count/sample-rate duration. Docker V8 covers its own index.js parser source. Opt-in AFL++ feedback hashes capped parser-function source-range hit counts (11 versus 12 frame calls), with three stable fresh-process repeats per control and zero parser features on a no-parse module load. This is input-length-sensitive execution feedback, not new branch or line coverage. The same package/release is verified in the MP3-with-ID3v2 cell for duration scope; no frame metadata or audio decode is exposed.",
-    "source": "https://www.npmjs.com/package/mp3-duration",
-    "verified_evidence": "projects/mp3/javascript/mp3_duration/verification.json"
-  },
-  {
-    "name": "mp3-parser",
-    "status": "promoted_to_verified",
-    "lead_kind": "own_frame_header_reader",
-    "version_seen": "0.3.0",
-    "license": "MIT",
-    "npm_downloads_30d": 40519,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mp3-parser",
-    "reason": "Documented readFrame(DataView,offset,false) walks every frame of both valid untagged controls to EOF; output matches independent MPEG header walker. Own source coverage and stable two-range/two-tuple bit-extraction differential are pinned.",
-    "source": "https://www.npmjs.com/package/mp3-parser",
-    "verified_evidence": "projects/mp3/javascript/mp3_parser/verification.json"
-  },
-  {
-    "name": "get-mp3-duration",
+    "name": "id3-rw",
     "status": "unresolved",
-    "lead_kind": "duration_only",
-    "version_seen": "1.0.0",
-    "license": "MIT",
-    "npm_downloads_30d": 41334,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/get-mp3-duration",
-    "reason": "Own frame-header scan that returns only milliseconds from a Buffer; verified in mp3_id3v2/javascript for duration scope.",
-    "source": "https://www.npmjs.com/package/get-mp3-duration"
+    "reason": "README documents local stream and bytes, but pinned release import failed on its extensionless WASM module path in Node 26.",
+    "source": "https://www.npmjs.com/package/id3-rw"
   },
   {
-    "name": "is-mp3",
-    "status": "excluded",
-    "lead_kind": "signature_only",
-    "version_seen": "1.1.4",
-    "license": "MIT",
-    "npm_downloads_30d": 39703,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/is-mp3",
-    "reason": "Signature check on leading bytes; does not parse frame streams.",
-    "source": "https://www.npmjs.com/package/is-mp3"
-  },
-  {
-    "name": "mp3",
+    "name": "@rafaelsilvadeveloper/fast-media-tags",
     "status": "unresolved",
-    "lead_kind": "decoder_not_selected",
-    "version_seen": "0.1.0",
-    "license": "GPL",
-    "npm_downloads_30d": 26941,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mp3",
-    "reason": "Aurora.js Layer III decoder plugin; requires the Aurora.js framework; low downloads. Not run.",
-    "source": "https://www.npmjs.com/package/mp3"
-  },
-  {
-    "name": "js-mp3",
-    "status": "unresolved",
-    "lead_kind": "decoder_not_selected",
-    "version_seen": "0.1.0",
-    "license": "MIT",
-    "npm_downloads_30d": 8396,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/js-mp3",
-    "reason": "Pure JavaScript decoder; low downloads. Not run.",
-    "source": "https://www.npmjs.com/package/js-mp3"
+    "reason": "README documents local path and ArrayBuffer, but the pinned ESM package executed CommonJS exports and failed to import.",
+    "source": "https://www.npmjs.com/package/@rafaelsilvadeveloper/fast-media-tags"
   },
   {
     "name": "minimp3",
     "status": "unresolved",
-    "lead_kind": "decoder_not_selected",
-    "version_seen": "2.0.0",
-    "license": "MIT",
-    "npm_downloads_30d": 184,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/minimp3",
-    "reason": "Native Node bindings for minimp3 (C); low downloads. Not run.",
+    "reason": "Documented decodeSync(Buffer) uses a native binding; its install script was not approved or control checked in this batch.",
     "source": "https://www.npmjs.com/package/minimp3"
   },
   {
-    "name": "mpeg-frame-parser",
+    "name": "minimp3-wasm",
     "status": "unresolved",
-    "lead_kind": "own_parser_not_selected",
-    "version_seen": "0.3.1",
-    "license": "MIT",
-    "npm_downloads_30d": 23,
-    "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mpeg-frame-parser",
-    "reason": "Small MPEG audio frame metadata stream; negligible downloads. Not run.",
-    "source": "https://www.npmjs.com/package/mpeg-frame-parser"
+    "reason": "Documented decoder requires a separate WASM binary path; a pinned local-byte control result remains unchecked.",
+    "source": "https://www.npmjs.com/package/minimp3-wasm"
+  },
+  {
+    "name": "js-mp3",
+    "status": "unresolved",
+    "reason": "Documented newDecoder(ArrayBuffer) returned null on the valid tagged control, so no passing result exists.",
+    "source": "https://www.npmjs.com/package/js-mp3"
+  },
+  {
+    "name": "mp3",
+    "status": "unresolved",
+    "reason": "Package describes an Aurora.js MP3 decoder, but a documented standalone local input API and control result remain unchecked.",
+    "source": "https://www.npmjs.com/package/mp3"
+  },
+  {
+    "name": "sm-parsers",
+    "status": "unresolved",
+    "reason": "README documents an MP3 stream parser with frame and ID3v2 events; valid control result remains unchecked.",
+    "source": "https://www.npmjs.com/package/sm-parsers"
+  },
+  {
+    "name": "metadata-connect",
+    "status": "unresolved",
+    "reason": "Search lead advertises MP3 metadata, but documented local input API and control result remain unchecked.",
+    "source": "https://www.npmjs.com/package/metadata-connect"
+  },
+  {
+    "name": "id3-tag-reader",
+    "status": "unresolved",
+    "reason": "Search lead describes an MP3 tag reader; no pinned local input adapter or control result.",
+    "source": "https://www.npmjs.com/package/id3-tag-reader"
+  },
+  {
+    "name": "node-id3-reader",
+    "status": "unresolved",
+    "reason": "Search lead describes a native ID3v2 reader; license, local API, and control result remain unchecked.",
+    "source": "https://www.npmjs.com/package/node-id3-reader"
+  },
+  {
+    "name": "audio-decode",
+    "status": "excluded",
+    "reason": "Published README identifies this as an alias containing the same code as the canonical @audio/decode package, already verified.",
+    "source": "https://www.npmjs.com/package/audio-decode"
+  },
+  {
+    "name": "lamejs",
+    "status": "excluded",
+    "reason": "The documented main API encodes PCM to MP3; a local MP3 input parser API is not established.",
+    "source": "https://www.npmjs.com/package/lamejs"
+  },
+  {
+    "name": "mic-recorder-to-mp3",
+    "status": "excluded",
+    "reason": "Records and encodes microphone audio to MP3; it is not a documented MP3 input parser.",
+    "source": "https://www.npmjs.com/package/mic-recorder-to-mp3"
+  },
+  {
+    "name": "@audio/encode-mp3",
+    "status": "excluded",
+    "reason": "Encodes PCM to MP3 and is not a documented MP3 input parser.",
+    "source": "https://www.npmjs.com/package/@audio/encode-mp3"
   }
 ]

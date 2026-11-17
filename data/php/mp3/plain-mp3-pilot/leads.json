@@ -1,0 +1,674 @@
+{
+  "captured_from": "data/php/mp3/registry-snapshot.json",
+  "metric": "Packagist total downloads",
+  "leads": [
+    {
+      "name": "james-heinrich/getid3",
+      "status": "selected",
+      "packagist_downloads": 15766894,
+      "description": "PHP script that extracts useful information from popular multimedia file formats",
+      "reason": "Selected and verified: getid3 v1.9.28 module.audio.mp3.php reads the untagged controls' MPEG frame headers; see data/php/mp3/parsers.json.",
+      "source": "https://packagist.org/packages/james-heinrich/getid3"
+    },
+    {
+      "name": "wapmorgan/mp3info",
+      "status": "selected",
+      "packagist_downloads": 1512916,
+      "description": "The fastest php library to extract mp3 tags & meta information.",
+      "reason": "Selected and verified for MPEG-1 Layer III CBR: mp3info 0.1.1 src/Mp3Info.php reads the 44.1 kHz mono control's frame headers and matches the header-walk oracle (11 frames, 64 kbit/s); it misreads the MPEG-2 22.05 kHz stereo control as Layer II 24 kHz mono. Independent of getID3; see data/php/mp3/parsers.json.",
+      "source": "https://packagist.org/packages/wapmorgan/mp3info"
+    },
+    {
+      "name": "owen-oj/laravel-getid3",
+      "status": "shared_family",
+      "packagist_downloads": 592654,
+      "description": "This package is a wrapper around james-heinrich/getid3 to extract various information from media files",
+      "reason": "Wraps or depends on james-heinrich/getid3 (see data/php/mp3_id3v2/parsers.json for the verified wrapper records); same module.audio.mp3.php frame parser, not a separate family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/owen-oj/laravel-getid3"
+    },
+    {
+      "name": "wapmorgan/media-file",
+      "status": "shared_family",
+      "packagist_downloads": 248980,
+      "description": "A unified reader of metadata from audio & video files",
+      "reason": "Source read: src/Adapters/Mp3Adapter.php constructs wapmorgan\\Mp3Info\\Mp3Info($filename) and returns its duration, bitRate, sampleRate, channel and isVbr properties; no MPEG parsing of its own (format choice comes from wapmorgan/file-type-detector). composer.json requires wapmorgan/mp3info ~0.0, which the mp3_id3v2/php project lock resolves to the selected 0.1.1. Same Mp3Info family, not a separate path.",
+      "source": "https://packagist.org/packages/wapmorgan/media-file",
+      "release": "0.1.4 (commit 263f773696e02d173fb9636c9a8111ac84032292)",
+      "license": "MIT",
+      "family": "Mp3Info (selected wapmorgan/mp3info 0.1.1)"
+    },
+    {
+      "name": "phansys/getid3",
+      "status": "shared_family",
+      "packagist_downloads": 247212,
+      "description": "This fork of GetId3 library updates to PSR-2 / PSR-4 CS, adds namespaces and makes it installable by composer.",
+      "reason": "Fork or repackaging of the getID3 code base; same module.audio.mp3.php frame parser family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/phansys/getid3"
+    },
+    {
+      "name": "buggedcom/phpvideotoolkit",
+      "status": "excluded_native_wrapper",
+      "packagist_downloads": 89411,
+      "description": "PHPVideoToolkit is a set of classes aimed to provide a modular, object oriented and accessible interface for interacting with videos and audio through the FFmpeg program.",
+      "reason": "Source read: media information comes from MediaProbeParser/MediaParser, which build ffprobe/ffmpeg command lines run through FfmpegProcess and ExecBuffer (external process). Mime.php only reads a few bytes for MIME sniffing. No in-process PHP MPEG parser, so no build.",
+      "source": "https://packagist.org/packages/buggedcom/phpvideotoolkit",
+      "release": "2.2.5 (commit 383a5b2c0ee7f4de4efea9a9154bb693630bbe0f)"
+    },
+    {
+      "name": "copyleaks/php-plagiarism-checker",
+      "status": "excluded",
+      "packagist_downloads": 80474,
+      "description": "The official Copyleaks PHP SDK. Copyleaks is the integrity layer for your tech stack that helps organizations and individuals understand what's human-made and original, AI-generated, or manipulated across text, image, audio and video. This SDK covers AI Text Detection, AI Image Detection, AI Video Detection, Plagiarism Checker, Image Plagiarism Detection, Grammar Checker and Text Moderation.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/copyleaks/php-plagiarism-checker"
+    },
+    {
+      "name": "falahati/php-mp3",
+      "status": "excluded_control_failed",
+      "packagist_downloads": 80144,
+      "description": "PHP-MP3 is a simple library for reading and manipulating MPEG audio (MP3)",
+      "release": "v0.9.5-alpha2 (newest tag, pre-release; commit 33ffe2cb6263345aa17f296719e7261e5f351525) and dev-master commit snapshot 135aa3010cb4d3412ba442abaf2a7225bb751cf0 (not a release)",
+      "license": "LGPL-3.0",
+      "family": "regin / thegallagher PHP-MP3 native frame-header reader; no getID3 or Mp3Info code",
+      "reason": "On PHP 8.5.12 the tag never returns on either control (timeout 15 s, exit 124): since PHP 8.0, substr() past the end returns \"\", so getStart() does not stop. The dev-master snapshot matches the MPEG-1 control (11 frames, 44100 Hz, 64 kbit/s) but on the MPEG-2 control MpegAudio::fromFile()->getFrameCounts()/getFrameHeader(0) report 3 frames, 11025 Hz, 418-byte frames, first frame at byte 104. The oracle reads 12 frames, 22050 Hz, first frame at byte 0. The float key Version_25 = 2.5 is truncated to 2 and replaces the MPEG-2 sample-rate row, and the frame length uses the MPEG-1 144 coefficient. Only version, layer, bitrate and channel mode are correct on both controls. No public API gives a correct sample rate, frame count, frame bytes or duration on both.",
+      "audit": "data/php/mp3/falahati-php-mp3-control-audit.md",
+      "source": "https://packagist.org/packages/falahati/php-mp3"
+    },
+    {
+      "name": "debach/zend-mp3",
+      "status": "excluded_control_failed",
+      "packagist_downloads": 45227,
+      "description": "The best PHP library for Object-Oriented media file information reading and writing.",
+      "reason": "Zend_Media_Mpeg_Abs (README: new Zend_Media_Mpeg_Abs('file.mp3'), getLength()) does parse MPEG audio frames itself: Abs_Frame syncs, decodes version/layer/bitrate/sample rate/mode from its own tables, uses separate MPEG-1 (144) and MPEG-2 (72) Layer III coefficients and _readFrames() walks every frame (fork caps at 200). It cannot load on PHP 8: its parent Zend/Media/Mpeg/Object.php line 144 uses the removed $buffer{$pos++} string-offset syntax (Parse error) and Mpeg/Abs/VbriHeader.php line 88 has an unparenthesized nested ternary (fatal). In the PHP 8.5.4 image built from projects/mp3_id3v2/php/debach_zend_mp3 the probe exits 255 on both controls. The ID3v2 reader does not load these files. No newer release; patching is out of scope.",
+      "source": "https://packagist.org/packages/debach/zend-mp3",
+      "release": "1.8.1 (commit 17b523ad57f283ddf3a116bc0eff22cb9d1b4b27; codeload legacy.zip SHA-256 2cf59be0e16a25ff6369bada6c1e6f739a47f7eda6da3c3abc59a7e899c9ef38, as pinned in projects/mp3_id3v2/php/debach_zend_mp3)",
+      "license": "BSD-3-Clause",
+      "family": "Sven Vollbehr PHP Reader (Zend_Media); own MPEG audio frame walker, no getID3 or Mp3Info code",
+      "audit": "data/php/mp3/lead-audit.md"
+    },
+    {
+      "name": "nass600/get-id3",
+      "status": "shared_family",
+      "packagist_downloads": 34628,
+      "description": "PHP library for handling audio/video files metadata",
+      "reason": "Fork or repackaging of the getID3 code base; same module.audio.mp3.php frame parser family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/nass600/get-id3"
+    },
+    {
+      "name": "b-b3rn4rd/phplame",
+      "status": "excluded",
+      "packagist_downloads": 24569,
+      "description": "PHP wrapper for LAME (MP3 encoder)",
+      "reason": "Wrapper around the LAME encoder.",
+      "source": "https://packagist.org/packages/b-b3rn4rd/phplame"
+    },
+    {
+      "name": "kiwilan/php-audio",
+      "status": "shared_family",
+      "packagist_downloads": 20514,
+      "description": "PHP package to parse and update audio files metadata, with `JamesHeinrich/getID3`.",
+      "reason": "Wraps or depends on james-heinrich/getid3 (see data/php/mp3_id3v2/parsers.json for the verified wrapper records); same module.audio.mp3.php frame parser, not a separate family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/kiwilan/php-audio"
+    },
+    {
+      "name": "indiehd/audio-manipulator",
+      "status": "shared_family",
+      "packagist_downloads": 8212,
+      "description": "Library for manipulating audio files (validating, transcoding, and tagging)",
+      "reason": "Wraps or depends on james-heinrich/getid3 (see data/php/mp3_id3v2/parsers.json for the verified wrapper records); same module.audio.mp3.php frame parser, not a separate family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/indiehd/audio-manipulator"
+    },
+    {
+      "name": "provemark/c2pa-verifier",
+      "status": "excluded",
+      "packagist_downloads": 6213,
+      "description": "Verifier for C2PA Content Credentials in pure PHP: JPEG, PNG, GIF, WebP, ISOBMFF (MP4, MOV, AVIF, HEIC), WAV, AVI, MP3 and FLAC, and plain text when turned on, with c2patool's verdict. Read and verify only; no signing, no keys, no network.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/provemark/c2pa-verifier"
+    },
+    {
+      "name": "azuracast/metadata-manager",
+      "status": "shared_family",
+      "packagist_downloads": 6121,
+      "description": "A command-line wrapper around the PHP GetId3 library.",
+      "reason": "Wraps or depends on james-heinrich/getid3 (see data/php/mp3_id3v2/parsers.json for the verified wrapper records); same module.audio.mp3.php frame parser, not a separate family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/azuracast/metadata-manager"
+    },
+    {
+      "name": "fobilow/mp3file",
+      "status": "excluded_control_failed",
+      "packagist_downloads": 5468,
+      "description": "php5 class for detecting bitrate and duration of regular mp3 files (not VBR files)",
+      "reason": "No release tag and no license. The class reads only the first frame header bit by bit and derives CBR duration from file size and header bitrate (frame size uses the MPEG-1 coefficient 144 for all versions); it does not walk frames. On PHP 8.5.12 Mp3File.php does not compile: $mp3['MPEG version']{1} at line 253 is removed string-offset syntax (Parse error, exit 255 on both controls).",
+      "source": "https://packagist.org/packages/fobilow/mp3file",
+      "release": "none: dev-master only (commit 5e0f5c7da8804a149a2bb1ca89c45ec8ea7e0388, 2013-08-22)",
+      "license": "none declared (composer.json has no license; LICENSE is empty)",
+      "family": "Zedwood Mp3File script",
+      "audit": "data/php/mp3/lead-audit.md"
+    },
+    {
+      "name": "plutuss/getid3-laravel",
+      "status": "shared_family",
+      "packagist_downloads": 4508,
+      "description": "A wrapper around james-heinrich/getid3 to extract various information from media files.",
+      "reason": "Wraps or depends on james-heinrich/getid3 (see data/php/mp3_id3v2/parsers.json for the verified wrapper records); same module.audio.mp3.php frame parser, not a separate family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/plutuss/getid3-laravel"
+    },
+    {
+      "name": "shubhamjain/php-id3",
+      "status": "excluded",
+      "packagist_downloads": 4381,
+      "description": "A MP3 ID3 tags reader in native PHP",
+      "reason": "ID3 tag reader only.",
+      "source": "https://packagist.org/packages/shubhamjain/php-id3"
+    },
+    {
+      "name": "acekyd/laravelmp3",
+      "status": "shared_family",
+      "packagist_downloads": 3711,
+      "description": "A light weight Laravel package for simple operations with mp3 files",
+      "reason": "Source read: src/getid3/ is a bundled getID3 1.9.5-20130220 (module.audio.mp3.php included) and LaravelMP3::load() calls new \\getID3 and analyze(). Same getID3 frame parser family; composer.json also requires php ^5.3.3 || ^7.0.",
+      "source": "https://packagist.org/packages/acekyd/laravelmp3",
+      "release": "1.0.3 (commit 28a870499a489fe7da8ce84aba2ffa62903a4d68)",
+      "license": "GPL-2.0",
+      "family": "getID3 (bundled copy 1.9.5-20130220)"
+    },
+    {
+      "name": "duncan3dc/meta-audio",
+      "status": "excluded",
+      "packagist_downloads": 3677,
+      "description": "A library to read and write metadata tags to audio files",
+      "reason": "Reads and writes metadata tags; not a frame parser.",
+      "source": "https://packagist.org/packages/duncan3dc/meta-audio"
+    },
+    {
+      "name": "podcastcrawler/podcastcrawler",
+      "status": "excluded",
+      "packagist_downloads": 2789,
+      "description": "PHP library to find podcasts",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/podcastcrawler/podcastcrawler"
+    },
+    {
+      "name": "captbaritone/transcode-to-mp3-stream",
+      "status": "excluded",
+      "packagist_downloads": 1797,
+      "description": "Transcode various audio formats to mp3 streams on the fly",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/captbaritone/transcode-to-mp3-stream"
+    },
+    {
+      "name": "stormiix/php-eyed3",
+      "status": "excluded",
+      "packagist_downloads": 1539,
+      "description": "A PHP wrapper for reading and updating ID3 meta data of (e.g.) MP3 files using eyeD3",
+      "reason": "Wrapper around the eyeD3 command for ID3 tags.",
+      "source": "https://packagist.org/packages/stormiix/php-eyed3"
+    },
+    {
+      "name": "guliano/zf-getid3-module",
+      "status": "shared_family",
+      "packagist_downloads": 1209,
+      "description": "ZF2 wrapper for the GetID3 library",
+      "reason": "Wraps or depends on james-heinrich/getid3 (see data/php/mp3_id3v2/parsers.json for the verified wrapper records); same module.audio.mp3.php frame parser, not a separate family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/guliano/zf-getid3-module"
+    },
+    {
+      "name": "michaelbelgium/youtube-to-mp3",
+      "status": "excluded",
+      "packagist_downloads": 1072,
+      "description": "Convert and search youtube video's via your own API",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/michaelbelgium/youtube-to-mp3"
+    },
+    {
+      "name": "mhor/php-mp3info",
+      "status": "excluded",
+      "packagist_downloads": 828,
+      "description": "Simple class to parse mp3info command ID3 tags",
+      "reason": "Parses the output of the mp3info command for ID3 tags; no frame parser in PHP and tag scope.",
+      "source": "https://packagist.org/packages/mhor/php-mp3info"
+    },
+    {
+      "name": "devswebdev/devtube",
+      "status": "excluded",
+      "packagist_downloads": 808,
+      "description": "A Laravel package for downloading videos from the net by simply passing a URL",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/devswebdev/devtube"
+    },
+    {
+      "name": "ultraviolettes/filament-audio-field-column",
+      "status": "excluded",
+      "packagist_downloads": 651,
+      "description": "A Filament plugin to display audio players with circular progress in forms, tables, and infolists",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/ultraviolettes/filament-audio-field-column"
+    },
+    {
+      "name": "akiosarkiz/mp3php",
+      "status": "excluded_native_wrapper",
+      "packagist_downloads": 598,
+      "description": "Package for manipulation mp3 files in php",
+      "reason": "Source read: src/Mp3.php requires ffprobe and reads stream information with shell_exec('ffprobe -v quiet -print_format json -show_format -show_streams ...'); parsing happens in FFmpeg, not PHP.",
+      "source": "https://packagist.org/packages/akiosarkiz/mp3php",
+      "release": "1.2.0 (commit 7de9da29519a34c05632a36a24f7d9bf541884e6)",
+      "license": "MIT"
+    },
+    {
+      "name": "brokencube/id3",
+      "status": "excluded",
+      "packagist_downloads": 475,
+      "description": "ID3 library",
+      "reason": "ID3 tag library only.",
+      "source": "https://packagist.org/packages/brokencube/id3"
+    },
+    {
+      "name": "perminder-klair/yii2-getid3",
+      "status": "shared_family",
+      "packagist_downloads": 453,
+      "description": "getID3() Extention for Yii2",
+      "reason": "Wraps or depends on james-heinrich/getid3 (see data/php/mp3_id3v2/parsers.json for the verified wrapper records); same module.audio.mp3.php frame parser, not a separate family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/perminder-klair/yii2-getid3"
+    },
+    {
+      "name": "afsardo/getid3",
+      "status": "shared_family",
+      "packagist_downloads": 443,
+      "description": "",
+      "reason": "Fork or repackaging of the getID3 code base; same module.audio.mp3.php frame parser family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/afsardo/getid3"
+    },
+    {
+      "name": "vkr/getid3",
+      "status": "shared_family",
+      "packagist_downloads": 246,
+      "description": "This fork of phansys/GetId3 provides compatibility with PHP 7.0",
+      "reason": "Fork or repackaging of the getID3 code base; same module.audio.mp3.php frame parser family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/vkr/getid3"
+    },
+    {
+      "name": "willwh/getid3",
+      "status": "shared_family",
+      "packagist_downloads": 222,
+      "description": "This fork of GetId3 library updates to PSR-2 / PSR-4 CS, adds namespaces and makes it installable by composer.",
+      "reason": "Fork or repackaging of the getID3 code base; same module.audio.mp3.php frame parser family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/willwh/getid3"
+    },
+    {
+      "name": "xiaosongshu/flv2mp4",
+      "status": "excluded_control_failed",
+      "packagist_downloads": 190,
+      "description": "Pure PHP native media processing library, realize FLV/MP4/HLS mutual conversion , H.264 re-encoding and opus/mp3/aac/wav re-encoding. Built-in live stream relay gateway, file server, multi-protocol push client: RTMP, HTTP-FLV, WebSocket-FLV, no FFmpeg external dependencies.",
+      "reason": "Snapshot re-scan: the package contains its own PHP Layer III decoder. Mp3L3Decoder::decode() returns 44,100 Hz, 1 channel, 12,672 samples (11 x 1,152) on the MPEG-1 control, matching the header walk, but skips every non-MPEG-1 header and decodes 0 frames (sample rate 0, 0 channels) on the MPEG-2 22.05 kHz stereo control, where the oracle reads 12 frames. The only documented MP3 input API, Client::runMp32Wav(), decodes in a proc_open child (bin/audio-worker.php via AudioParallelPipeline), so in-process parser-line coverage would not see it; Manage\\Mp32Pcm calls the decoder in-process but is undocumented.",
+      "source": "https://packagist.org/packages/xiaosongshu/flv2mp4",
+      "release": "v1.8.7 (commit 9e84aaf8b8d74e2965b451622dce02e9fa206728, 2026-11-12)",
+      "license": "Apache-2.0",
+      "family": "own native PHP MPEG-1 Layer III decoder (src/Mp3/Mp3L3Decoder.php)",
+      "audit": "data/php/mp3/lead-audit.md"
+    },
+    {
+      "name": "simonsimcity/get-id3-bundle",
+      "status": "shared_family",
+      "packagist_downloads": 140,
+      "description": "Makes it easy to show the getId3 library in symfony's debugger timeline",
+      "reason": "Wraps or depends on james-heinrich/getid3 (see data/php/mp3_id3v2/parsers.json for the verified wrapper records); same module.audio.mp3.php frame parser, not a separate family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/simonsimcity/get-id3-bundle"
+    },
+    {
+      "name": "phanan/koel",
+      "status": "excluded",
+      "packagist_downloads": 121,
+      "description": "Audio streaming solution that works.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/phanan/koel"
+    },
+    {
+      "name": "luudoanh/text-to-speech",
+      "status": "excluded",
+      "packagist_downloads": 119,
+      "description": "A class converts text files into audio files",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/luudoanh/text-to-speech"
+    },
+    {
+      "name": "sempia/getid3",
+      "status": "shared_family",
+      "packagist_downloads": 117,
+      "description": "Stable, namespaced and PSR-4 compliant version of the library getID3, that extracts and writes useful information to/from popular multimedia file formats.",
+      "reason": "Fork or repackaging of the getID3 code base; same module.audio.mp3.php frame parser family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/sempia/getid3"
+    },
+    {
+      "name": "coolguruji/youtube-to-mp3-converter-php-script",
+      "status": "excluded",
+      "packagist_downloads": 116,
+      "description": "youtube to mp3 converter php script",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/coolguruji/youtube-to-mp3-converter-php-script"
+    },
+    {
+      "name": "darkwob/youtube-mp3-converter",
+      "status": "excluded",
+      "packagist_downloads": 114,
+      "description": "A powerful YouTube to MP3 converter with playlist support, progress tracking, and advanced features",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/darkwob/youtube-mp3-converter"
+    },
+    {
+      "name": "mugenyi/m4rconverter",
+      "status": "excluded",
+      "packagist_downloads": 105,
+      "description": "iphone audio ringtone converter MPEG4 audio,m4r converter",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/mugenyi/m4rconverter"
+    },
+    {
+      "name": "mp3063/mail-activation",
+      "status": "excluded",
+      "packagist_downloads": 88,
+      "description": "Provides easy laravel auth with mail activation!",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/mp3063/mail-activation"
+    },
+    {
+      "name": "podcasthosting/audiowaveform-php-client",
+      "status": "excluded",
+      "packagist_downloads": 77,
+      "description": "A PHP wrapper for easy access to the BBC project audiowaveform client.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/podcasthosting/audiowaveform-php-client"
+    },
+    {
+      "name": "belisoful/prado-image",
+      "status": "excluded",
+      "packagist_downloads": 72,
+      "description": "Image containers, metadata editing, and codecs for the PRADO PHP framework: read-write JPEG, TIFF, PNG, WebP/RIFF, GIF87a/89a, AVI, ISO BMFF (HEIF/AVIF/MP4/QuickTime), and JPEG XL; EXIF through Exif 3.1 with makernotes, XMP (ISO 16684-1), IPTC (IIM), Photoshop 8BIM, JFIF/JFXX, JUMBF, PrintIM, and Exif WAVE audio; read-write ICC profiles with a pure-PHP matrix/TRC color transform; dual GD/ImageMagick raster conversion; and the LZW/GIF-LZW/PackBits/CCITT-fax/horizontal-predictor codecs.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/belisoful/prado-image"
+    },
+    {
+      "name": "rheck/mp3-bundle",
+      "status": "excluded",
+      "packagist_downloads": 68,
+      "description": "Bundle to control a mp3 file.",
+      "reason": "Snapshot re-scan: Handler/Mp3Handler.php reads MPEG frame headers itself, but Packagist lists only dev-master (commit ddb4fc82342b9e04fd65edf060933169d0c9b253, no release tag) and it requires symfony/symfony 2.3.*. No pinned release.",
+      "source": "https://packagist.org/packages/rheck/mp3-bundle"
+    },
+    {
+      "name": "aensley/media-organizer",
+      "status": "excluded",
+      "packagist_downloads": 60,
+      "description": "Organize image, video, and audio files (or any files) into date-based folders.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/aensley/media-organizer"
+    },
+    {
+      "name": "ratacibernetica/getid3",
+      "status": "shared_family",
+      "packagist_downloads": 54,
+      "description": "This fork of GetId3 library updates to PSR-2 / PSR-4 CS, adds namespaces and makes it installable by composer.",
+      "reason": "Fork or repackaging of the getID3 code base; same module.audio.mp3.php frame parser family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/ratacibernetica/getid3"
+    },
+    {
+      "name": "navarr/mp3data",
+      "status": "shared_family",
+      "packagist_downloads": 44,
+      "description": "Helper for accessing information about MP3 Files using getid3",
+      "reason": "Wraps or depends on james-heinrich/getid3 (see data/php/mp3_id3v2/parsers.json for the verified wrapper records); same module.audio.mp3.php frame parser, not a separate family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/navarr/mp3data"
+    },
+    {
+      "name": "buonzz/scalp",
+      "status": "excluded",
+      "packagist_downloads": 33,
+      "description": "Command line tool to Analyze and store your Media file's metadata",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/buonzz/scalp"
+    },
+    {
+      "name": "wikimedia/getid3",
+      "status": "shared_family",
+      "packagist_downloads": 30,
+      "description": "PHP script that extracts useful information from popular multimedia file formats",
+      "reason": "Fork or repackaging of the getID3 code base; same module.audio.mp3.php frame parser family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/wikimedia/getid3"
+    },
+    {
+      "name": "belisoful/php-image",
+      "status": "excluded",
+      "packagist_downloads": 29,
+      "description": "Image containers, metadata editing, and codecs for PHP: read-write JPEG, TIFF, PNG, WebP/RIFF, GIF87a/89a, AVI, ISO BMFF (HEIF/AVIF/MP4/QuickTime), and JPEG XL; EXIF through Exif 3.1 with makernotes, XMP (ISO 16684-1), IPTC (IIM), Photoshop 8BIM, JFIF/JFXX, JUMBF, PrintIM, and Exif WAVE audio; read-write ICC profiles with a pure-PHP matrix/TRC color transform; dual GD/ImageMagick raster conversion; and the LZW/GIF-LZW/PackBits/CCITT-fax/horizontal-predictor codecs.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/belisoful/php-image"
+    },
+    {
+      "name": "md-adil/songspk-dl",
+      "status": "excluded",
+      "packagist_downloads": 27,
+      "description": "Download songs pk songs with one command",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/md-adil/songspk-dl"
+    },
+    {
+      "name": "stinger-soft/media-parsing-bundle",
+      "status": "excluded",
+      "packagist_downloads": 27,
+      "description": "Simple bundle to extract meta information from media files (e.g. mp3)",
+      "reason": "Snapshot re-scan: Symfony bundle (dev-master only, no release) whose Parser/Types/Mp3Parser.php uses phansys/getid3; getID3 family, not a separate parser path.",
+      "source": "https://packagist.org/packages/stinger-soft/media-parsing-bundle"
+    },
+    {
+      "name": "isappit/ifile",
+      "status": "excluded",
+      "packagist_downloads": 25,
+      "description": "IFile is a Documental Search Engine Framework to the indexing and serching in many format documents ( PDF, DOC, XLS, DOCX, MP3, JPG and many other ).",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/isappit/ifile"
+    },
+    {
+      "name": "coolguruji/youtube-to-mp3-api",
+      "status": "excluded",
+      "packagist_downloads": 24,
+      "description": "youtube to mp3 api for webmasters",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/coolguruji/youtube-to-mp3-api"
+    },
+    {
+      "name": "vkr/multimedia-analyzer-bundle",
+      "status": "shared_family",
+      "packagist_downloads": 22,
+      "description": "A bundle for Symfony2/3 that analyzes multimedia file duration using GetID3",
+      "reason": "Wraps or depends on james-heinrich/getid3 (see data/php/mp3_id3v2/parsers.json for the verified wrapper records); same module.audio.mp3.php frame parser, not a separate family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/vkr/multimedia-analyzer-bundle"
+    },
+    {
+      "name": "phpmlkit/soundfile",
+      "status": "excluded_native_wrapper",
+      "packagist_downloads": 20,
+      "description": "Low-level libsndfile + libsamplerate bindings for PHP via FFI",
+      "reason": "Source read: binds libsndfile through ext-ffi (include/sndfile.h, sf_open); MP3 parsing happens in native libsndfile/libmpg123, which the C plain-MP3 pilot covers, not in PHP.",
+      "source": "https://packagist.org/packages/phpmlkit/soundfile",
+      "release": "1.2.0 (commit acf88e283d9175c1eeca3670a74807fb345a9198)",
+      "license": "MIT"
+    },
+    {
+      "name": "dmelo/you2better",
+      "status": "excluded",
+      "packagist_downloads": 14,
+      "description": "Provides a way to download youtube media as mp3 or m4v files.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/dmelo/you2better"
+    },
+    {
+      "name": "tractorcow/silverstripe-mediadata",
+      "status": "shared_family",
+      "packagist_downloads": 11,
+      "description": "Extracts video and audio data from files using getId3()",
+      "reason": "Wraps or depends on james-heinrich/getid3 (see data/php/mp3_id3v2/parsers.json for the verified wrapper records); same module.audio.mp3.php frame parser, not a separate family. Not run on the plain controls.",
+      "source": "https://packagist.org/packages/tractorcow/silverstripe-mediadata"
+    },
+    {
+      "name": "holine/mp3",
+      "status": "excluded_control_failed",
+      "packagist_downloads": 9,
+      "description": "PHP-MP3 is a simple library for reading and manipulating MPEG audio (MP3)",
+      "reason": "Ignoring whitespace, src/MpegAudio.php and src/MpegAudioFrameHeader.php differ from falahati/php-mp3 dev-master only in brace placement and namespace MP3, and keep the Version_25 = 2.5 float key that breaks MPEG-2 sample rates. With the falahati probe retargeted to \\MP3\\MpegAudio, neither control returns within timeout 15 on PHP 8.5.12 (exit 124), as with the falahati v0.9.5-alpha2 tag.",
+      "source": "https://packagist.org/packages/holine/mp3",
+      "release": "0.0.1 (commit ea924ae7392a5ba916a639e2b33080a36e9929e5)",
+      "license": "LGPL-3.0",
+      "family": "regin / thegallagher PHP-MP3 (copy of falahati/php-mp3)",
+      "audit": "data/php/mp3/lead-audit.md"
+    },
+    {
+      "name": "orkan/winamp",
+      "status": "excluded",
+      "packagist_downloads": 9,
+      "description": "Winamp Media Library CLI tools",
+      "reason": "Snapshot re-scan: Winamp media-library CLI tools that depend on james-heinrich/getid3; no separate MPEG parser API.",
+      "source": "https://packagist.org/packages/orkan/winamp"
+    },
+    {
+      "name": "lanmiz/mp3shop",
+      "status": "excluded",
+      "packagist_downloads": 8,
+      "description": "mp3 shop",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/lanmiz/mp3shop"
+    },
+    {
+      "name": "dgoriaev/mp3info",
+      "status": "shared_family",
+      "packagist_downloads": 6,
+      "description": "The fastest php library to extract mp3 tags & meta information.",
+      "reason": "Snapshot re-scan: ignoring whitespace, src/Mp3Info.php matches wapmorgan/mp3info 0.1.1 except the namespace and a three-line early return when neither bitrate nor sample rate is set. Fork of the selected Mp3Info family.",
+      "source": "https://packagist.org/packages/dgoriaev/mp3info",
+      "release": "1.0.3 (commit 64e790cd31d35d8ae3d5e3d8120f69aabd5ce0de)",
+      "license": "LGPL-3.0",
+      "family": "Mp3Info (selected wapmorgan/mp3info 0.1.1)"
+    },
+    {
+      "name": "mraiur/youtube-mp3-helper",
+      "status": "excluded",
+      "packagist_downloads": 6,
+      "description": "Search for a music video and download it via youtube-dl as a mp3.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/mraiur/youtube-mp3-helper"
+    },
+    {
+      "name": "nicoverbruggen/mediaprobe",
+      "status": "excluded_native_wrapper",
+      "packagist_downloads": 6,
+      "description": "MediaProbe leverages `ffprobe` and `ffmpeg` to extract info and cover images from MP3s or other media files.",
+      "reason": "Source read: src/MediaProbe.php runs exec(\"ffprobe -v quiet -print_format json=compact=1 -show_format ...\"); external FFmpeg process.",
+      "source": "https://packagist.org/packages/nicoverbruggen/mediaprobe",
+      "release": "v1.1 (commit aa824d0691598dc9d66301f78da2687bc656884c)",
+      "license": "MIT"
+    },
+    {
+      "name": "apiverve/musicnotegenerator",
+      "status": "excluded",
+      "packagist_downloads": 5,
+      "description": "Music Note Generator is a musical note generator API that creates high-quality WAV audio files of musical notes with precise frequency generation, plus customizable duration on paid plans.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/apiverve/musicnotegenerator"
+    },
+    {
+      "name": "copyleaks/copyleaks",
+      "status": "excluded",
+      "packagist_downloads": 5,
+      "description": "The official Copyleaks PHP SDK. Copyleaks is the integrity layer for your tech stack that helps organizations and individuals understand what's human-made and original, AI-generated, or manipulated across text, image, audio and video. This SDK covers AI Text Detection, AI Image Detection, AI Video Detection, Plagiarism Checker, Image Plagiarism Detection, Grammar Checker and Text Moderation.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/copyleaks/copyleaks"
+    },
+    {
+      "name": "iferas93/mp3quran-wrapper",
+      "status": "excluded",
+      "packagist_downloads": 5,
+      "description": "Mp3Quran api wrapper",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/iferas93/mp3quran-wrapper"
+    },
+    {
+      "name": "drooz/youtube-to-mp3",
+      "status": "excluded",
+      "packagist_downloads": 4,
+      "description": "Convert and search youtube video's via your own API",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/drooz/youtube-to-mp3"
+    },
+    {
+      "name": "isproject/framework",
+      "status": "excluded",
+      "packagist_downloads": 3,
+      "description": "A Laravel teaching framework for Information Systems: CRUD scaffolding generated from your database schema, with RBAC, an audit trail, settings, an in-app manual and a self-hosted design system.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/isproject/framework"
+    },
+    {
+      "name": "micompress/micompress",
+      "status": "excluded",
+      "packagist_downloads": 2,
+      "description": "Compress images, PDFs, video, audio, documents & archives from PHP — powered by micompress.com",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/micompress/micompress"
+    },
+    {
+      "name": "oleh-exe/mp3-stream-title",
+      "status": "excluded",
+      "packagist_downloads": 2,
+      "description": "Fetch and parse current track metadata from Icecast and Shoutcast MP3 streams.",
+      "reason": "Icecast/Shoutcast stream title metadata, not MPEG frames.",
+      "source": "https://packagist.org/packages/oleh-exe/mp3-stream-title"
+    },
+    {
+      "name": "filipefernandes/laravel-model-access-audit",
+      "status": "excluded",
+      "packagist_downloads": 1,
+      "description": "Track, store, and visualize access and mutations of sensitive Eloquent models in enterprise applications.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/filipefernandes/laravel-model-access-audit"
+    },
+    {
+      "name": "ytb-dw/php-sdk",
+      "status": "excluded",
+      "packagist_downloads": 1,
+      "description": "SDK PHP officiel pour l'API YouTube Downloader",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/ytb-dw/php-sdk"
+    },
+    {
+      "name": "bamilawal/laravel-assessment-module",
+      "status": "excluded",
+      "packagist_downloads": 0,
+      "description": "A modular, event-driven assessment engine for Laravel-based school management systems. Supports exams, tests, assignments, grading, ranking, audit logs, and result publishing.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/bamilawal/laravel-assessment-module"
+    },
+    {
+      "name": "jamshidbekakhlidinov/php-mp3",
+      "status": "excluded",
+      "packagist_downloads": 0,
+      "description": "MP3 ni qayta ishlash uchun.",
+      "reason": "Snapshot re-scan: src/PHPMP3.php is a copy of thegallagher PHP-MP3 (same sprintf('%08b') binary table; regin family, see falahati/php-mp3); dev-main only, no release, 0 downloads.",
+      "source": "https://packagist.org/packages/jamshidbekakhlidinov/php-mp3"
+    },
+    {
+      "name": "saeedvir/price-trend-audio-visualizer",
+      "status": "excluded",
+      "packagist_downloads": 0,
+      "description": "Convert price trends into audio sequences: detect increasing, decreasing, and flat price ranges and generate a single MP3 summary.",
+      "reason": "Not an MPEG audio frame parser by its package description (converter, downloader, encoder wrapper, unrelated framework, or other media type).",
+      "source": "https://packagist.org/packages/saeedvir/price-trend-audio-visualizer"
+    },
+    {
+      "name": "tofandel/phplame",
+      "status": "excluded",
+      "packagist_downloads": 0,
+      "description": "PHP wrapper for LAME (MP3 encoder)",
+      "reason": "Wrapper around the LAME encoder.",
+      "source": "https://packagist.org/packages/tofandel/phplame"
+    }
+  ]
+}

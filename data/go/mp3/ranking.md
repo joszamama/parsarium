@@ -1,23 +1,22 @@
-# Go plain MP3 parser pilot
+# GO × MP3 with ID3v2: selected parsers
 
-Seven third-party paths are verified against valid untagged MPEG Layer III controls. The ceiling is ten; the remaining recorded leads are unresolved, excluded, or share selected parser families.
+10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
-## Within-cell adoption metric
+## Primary within-cell adoption metric
 
-pkg.go.dev **Imported by** package count from the [saved search snapshot](registry-snapshot.json). It measures package adoption, not MP3-specific use or independent parser families.
+pkg.go.dev Imported by package count.
 
-| Rank | Package | Release | Imported by | Observed parsing scope |
-| ---: | --- | --- | ---: | --- |
-| 1 | [faiface/beep/mp3](../../../projects/mp3/go/github_com_faiface_beep_mp3/README.md) | v1.1.0 | 444 | `Decode(io.ReadCloser)` streams float64 samples; wrapper over go-mp3 v0.3.0 |
-| 2 | [hajimehoshi/go-mp3](../../../projects/mp3/go/github_com_hajimehoshi_go_mp3/README.md) | v0.3.4 | 294 | `NewDecoder(io.Reader)` decodes untagged MPEG Layer III frames to PCM |
-| 3 | [hajimehoshi/ebiten/v2/audio/mp3](../../../projects/mp3/go/github_com_hajimehoshi_ebiten_v2_audio_mp3/README.md) | v2.10.6 | 144 | `DecodeWithoutResampling(io.Reader)` returns 16-bit PCM; wrapper over go-mp3 v0.3.4 |
-| 4 | [tcolgate/mp3](../../../projects/mp3/go/github_com_tcolgate_mp3/README.md) | v0.0.0-20170426193717-e79c5a46d300 | 62 | `NewDecoder(io.Reader)` parses full frame headers and side information; no PCM decoder |
-| 5 | [gopxl/beep/v2/mp3](../../../projects/mp3/go/github_com_gopxl_beep_v2_mp3/README.md) | v2.1.1 | 44 | `Decode(io.ReadCloser)` streams float64 samples; wrapper over go-mp3 v0.3.4 |
-| 6 | [tosone/minimp3](../../../projects/mp3/go/github_com_tosone_minimp3/README.md) | v1.1.0 | 34 | `DecodeFull([]byte)` invokes the vendored native C Layer III decoder through cgo and returns PCM |
-| 7 | [dmulholl/mp3lib](../../../projects/mp3/go/github_com_dmulholl_mp3lib/README.md) | v1.0.0 | 9 | `NextFrame(io.Reader)` parses full frame headers and boundaries; no PCM decoder |
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| ---: | --- | --- | ---: | --- | --- |
+| 1 | [github.com/faiface/beep/mp3](https://pkg.go.dev/github.com/faiface/beep/mp3@v1.1.0) | v1.1.0 | 444 | decoded samples and sample rate | hajime/go-mp3 via beep |
+| 2 | [github.com/dhowden/tag](https://pkg.go.dev/github.com/dhowden/tag@v0.0.0-20240417053706-3d75831295e8) | v0.0.0-20240417053706-3d75831295e8 | 381 | ID3v2.3 title | dhowden/tag lineage |
+| 3 | [github.com/hajimehoshi/go-mp3](https://pkg.go.dev/github.com/hajimehoshi/go-mp3@v0.3.4) | v0.3.4 | 294 | decoded PCM bytes and sample rate | hajime/go-mp3 lineage |
+| 4 | [github.com/hajimehoshi/ebiten/v2/audio/mp3](https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio/mp3@v2.10.6) | v2.10.6 | 144 | decoded PCM bytes and sample rate | hajime/go-mp3 lineage |
+| 5 | [github.com/bogem/id3v2/v2](https://pkg.go.dev/github.com/bogem/id3v2/v2@v2.1.4) | v2.1.4 | 72 | ID3v2.3 title | bogem ID3v2 parser |
+| 6 | [github.com/tcolgate/mp3](https://pkg.go.dev/github.com/tcolgate/mp3@v0.0.0-20170426193717-e79c5a46d300) | v0.0.0-20170426193717-e79c5a46d300 | 62 | MPEG frame size and samples | tcolgate MP3 frame lineage |
+| 7 | [github.com/gopxl/beep/v2/mp3](https://pkg.go.dev/github.com/gopxl/beep/v2/mp3@v2.1.1) | v2.1.1 | 44 | decoded samples and sample rate | hajime/go-mp3 via beep |
+| 8 | [github.com/tosone/minimp3](https://pkg.go.dev/github.com/tosone/minimp3@v1.1.0) | v1.1.0 | 34 | decoded PCM bytes and audio format | minimp3 decoder |
+| 9 | [github.com/ascherkus/go-id3/src/id3](https://pkg.go.dev/github.com/ascherkus/go-id3/src/id3@v0.0.0-20120522061058-b139b6a612de) | v0.0.0-20120522061058-b139b6a612de | 6 | ID3v2.3 title | ascherkus/go-id3 lineage |
+| 10 | [github.com/dustin/go-id3](https://pkg.go.dev/github.com/dustin/go-id3@v0.0.0-20131108194644-73f4b1cf2a4e) | v0.0.0-20131108194644-73f4b1cf2a4e | 5 | ID3v2.3 title | ascherkus/go-id3 lineage |
 
-Four parser families are represented. hajimehoshi/go-mp3, tcolgate/mp3, dmulholl/mp3lib and tosone/minimp3 (native minimp3) each carry their own decoder or frame parser. faiface/beep/mp3, hajimehoshi/ebiten/v2/audio/mp3 and gopxl/beep/v2/mp3 are counted as separate package APIs with their own metrics, but delegate decoding to go-mp3. Their Docker coverage counts wrapper lines and go-mp3 lines separately, and every AFL++ tuple difference between the two controls lies in go-mp3. faiface/beep v1.1.0 resolves the older go-mp3 v0.3.0; the other wrappers use the selected v0.3.4. The ranking is by package adoption and does not count independent decoders.
-
-The go-mp3 and tcolgate/mp3 package paths are also represented in the tagged MP3 cell, so their parser-family lineage is recorded across cells. The two plain-MP3 controls are 11 MPEG-1 mono 44.1 kHz frames and 12 MPEG-2 stereo 22.05 kHz frames. All seven paths have Docker harnesses, source coverage, and repeat-stable AFL++ feedback with a valid-control differential. For tosone/minimp3, source coverage distinguishes its Go binding from the native `minimp3.h` decoder; AFL++ instruments only allowlisted native decoder functions. PCM and sample hashes are toolchain-specific and are not compared across decoders or releases.
-
-The five pkg.go.dev queries were bounded at 100 hits each: 313 hits and 242 distinct package paths. [Leads](leads.json) records 39 inspected candidates: 6 selected, 3 shared-family, 25 excluded, 5 unresolved. derat/mpeg ([probe](probes/derat_mpeg/README.md)) and mattetti/audio/mp3 ([probe](probes/mattetti_audio_mp3/README.md)) parse both valid controls, but each covers the same parser blocks on both, so they fail the feedback gate. fgergo/mp3 is a byte-identical fork of tcolgate/mp3 ([comparison](probes/fgergo_mp3/README.md)). The remaining go-mp3, tcolgate and minimp3 wrappers and the cgo libmpg123 wrapper are unresolved and not harnessed. The selection is not a definitive top-ten ranking. Two constant-bitrate controls do not establish VBR, Xing/Info, free-format, other MPEG layers, or ID3 handling.
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

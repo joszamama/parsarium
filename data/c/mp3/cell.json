@@ -1,50 +1,28 @@
 {
   "ecosystem": "c",
-  "format": "mp3",
-  "status": "pilot_two_verified_bounded_search",
+  "format": "mp3_id3v2",
+  "status": "curated_ten_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "mp3",
-    "mpeg audio",
-    "mpg123",
-    "layer iii",
-    "minimp3",
-    "dr_mp3",
-    "libmad"
+    "id3",
+    "taglib",
+    "mpeg"
   ],
-  "search_totals": {
-    "mp3": 21,
-    "mpeg audio": 5,
-    "mpg123": 1,
-    "layer iii": 1,
-    "minimp3": 0,
-    "dr_mp3": 0,
-    "libmad": 0
-  },
-  "search_hits_recorded": 28,
-  "unique_search_hits": 24,
-  "leads_recorded": 26,
-  "leads_by_status": {
-    "selected": 2,
-    "shared_family": 1,
-    "unresolved_shared_family": 1,
-    "unresolved_no_primary_metric": 2,
-    "excluded": 20
-  },
-  "ranking_metric": "Homebrew install-on-request count (365 days)",
-  "selection": "mpg123 has the highest Homebrew install-on-request count (12,256) among hits whose own C library decodes MPEG Layer III frames from a documented byte API. lame (6,992) ranks next but its HIP decoder is built over libmpg123. mad (libmad 0.16.5, 1,145) is the next independent decoder family and is verified through mad_stream_buffer/mad_frame_decode/mad_synth_frame.",
-  "uncertainty": "Two verified paths from two independent decoder families; no lower-ranked filler entries. Search is a substring match over all Homebrew formula names and descriptions for seven queries, captured 2026-11-17; it misses header-only decoders that are not packaged there. minimp3 and dr_mp3 have no value on the primary metric, so their GitHub stars are recorded as supplemental only and are not compared with Homebrew counts. libmad needs MAD_BUFFER_GUARD (8) zero bytes appended after the input; the harness adds exactly that and counts every recoverable error except the one LOSTSYNC at the guard. Homebrew installs measure macOS/Linux package demand for whole distributions (the mpg123 player and library; the mad formula library), not direct use of the decoding API. libmpg123 is the same engine counted under mp3_id3v2/c, and libmad is the decoder behind the SoX path there. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support.",
-  "third_party_evidence": "data/c/mp3/parsers.json",
-  "third_party_control_results": [
-    "projects/mp3/c/mpg123/verification.json",
-    "projects/mp3/c/libmad/verification.json"
-  ],
-  "afl_feedback": "data/c/mp3/afl-feedback.json",
-  "runtime_evidence": "data/c/mp3/standard.json",
-  "registry_snapshot": "data/c/mp3/registry-snapshot.json",
-  "unresolved_leads": "data/c/mp3/leads.json",
-  "protocol": "catalog/mp3/PROTOCOL.md"
+  "search_limit_per_query": 100,
+  "search_hits_recorded": 38,
+  "unique_search_hits": 38,
+  "unresolved_documentation_leads": 1,
+  "uncertainty": "10 of 20 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/c/mp3_id3v2/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
+  "third_party_evidence": "data/c/mp3_id3v2/parsers.json",
+  "third_party_control_results": "data/c/mp3_id3v2/verification.json",
+  "runtime_evidence": "data/c/mp3_id3v2/standard.json",
+  "registry_snapshot": "data/c/mp3_id3v2/registry-snapshot.json",
+  "unresolved_leads": "data/c/mp3_id3v2/leads.json",
+  "source_lock": "data/c/mp3_id3v2/source-lock.json",
+  "curation_plan": "data/curation/plan.json",
+  "precuration_evidence": "data/curation/preten/c/mp3_id3v2"
 }

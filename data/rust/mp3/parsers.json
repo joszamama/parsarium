@@ -1,225 +1,153 @@
 [
   {
-    "name": "symphonia",
-    "project": "projects/mp3/rust/symphonia",
-    "version": "0.6.1",
-    "license": "MPL-2.0",
-    "input_api": "symphonia::default::get_probe().probe(&Hint::new(), MediaSourceStream::new(Box::new(Cursor::new(bytes)), ..), FormatOptions::default(), MetadataOptions::default()); FormatReader::next_packet(); symphonia::default::get_codecs().make_audio_decoder(params, ..).decode(&packet)",
-    "cargo_features": "symphonia default features plus \"mp3\" (mp3 is not a default feature)",
-    "documentation": "https://docs.rs/symphonia/0.6.1/symphonia/",
-    "source": "https://github.com/pdeljanov/Symphonia/tree/v0.6.1/symphonia",
-    "scope": "Untagged byte stream probed without an extension hint; every packet of the probed MPEG audio track demuxed and decoded: probed format, codec, sample rate, channels, frame count, frame bytes, decoded samples per channel",
-    "family": "Symphonia MP3 demuxer and decoder",
-    "family_note": "Public facade over the selected symphonia-bundle-mp3 0.6.1 demuxer and decoder: a separate package API, not an independent parser family. The facade's own code is the codec registry, probe registration and re-exports; MPEG frame parsing and decoding lines belong to symphonia-bundle-mp3 and are recorded separately as underlying coverage.",
-    "control": "controls/mp3/tone-44k-mono.mp3",
+    "name": "id3",
+    "version": "1.17.3",
+    "license": "MIT",
+    "input_api": "Tag::read_from_path(path).title()/artist()/album()",
+    "documentation": "https://docs.rs/id3/1.17.3/id3/",
+    "scope": "ID3v2 title, artist, album",
+    "family": "id3 tag parser",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {
-      "format": "mp3",
-      "codec": "mp3",
-      "sample_rate": 44100,
-      "channels": 1,
-      "frames": 11,
-      "frame_bytes": 2298,
-      "decoded_frames": 12672
-    },
-    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "format": "mp3",
-      "codec": "mp3",
-      "sample_rate": 22050,
-      "channels": 2,
-      "frames": 12,
-      "frame_bytes": 1254,
-      "decoded_frames": 6912
-    },
-    "evidence": "projects/mp3/rust/symphonia/verification.json",
-    "metric": {
-      "name": "crates.io recent downloads (90 days)",
-      "value": 11469426,
-      "source": "data/rust/mp3/registry-snapshot.json"
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
     }
   },
   {
-    "name": "symphonia-bundle-mp3",
-    "project": "projects/mp3/rust/symphonia_bundle_mp3",
-    "version": "0.6.1",
-    "license": "MPL-2.0",
-    "input_api": "MpaReader::try_new(MediaSourceStream::new(Box::new(Cursor::new(bytes)), ..), FormatOptions::default()); FormatReader::next_packet(); MpaDecoder::try_new(params, ..).decode(&packet)",
-    "documentation": "https://docs.rs/symphonia-bundle-mp3/0.6.1/symphonia_bundle_mp3/",
-    "source": "https://github.com/pdeljanov/Symphonia/tree/v0.6.1/symphonia-bundle-mp3",
-    "scope": "Every MPEG Layer III frame of an untagged stream demuxed and decoded: sample rate, channels, frame count, frame bytes, decoded samples per channel",
-    "family": "Symphonia MP3 demuxer and decoder",
-    "control": "controls/mp3/tone-44k-mono.mp3",
+    "name": "lofty",
+    "version": "0.25.5",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "read_from_path(path).primary_tag().title()/artist()/album()",
+    "documentation": "https://docs.rs/lofty/0.25.5/lofty/",
+    "scope": "ID3v2 title, artist, album",
+    "family": "Lofty MPEG/ID3 parser",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {
-      "sample_rate": 44100,
-      "channels": 1,
-      "frames": 11,
-      "frame_bytes": 2298,
-      "decoded_frames": 12672
-    },
-    "metric": {
-      "name": "crates.io recent downloads (90 days)",
-      "value": 10651437,
-      "source": "data/rust/mp3/registry-snapshot.json"
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
     }
   },
   {
     "name": "minimp3",
     "version": "0.6.1",
-    "license": "MIT (minimp3 and minimp3-sys 0.6.0 Rust crates); CC0-1.0 (vendored minimp3.h)",
-    "input_api": "minimp3::Decoder::new(std::io::Cursor<&[u8]>); Decoder::next_frame() -> Frame { data: Vec<i16>, sample_rate, channels, layer, bitrate } until Error::Eof",
-    "documentation": "https://docs.rs/minimp3/0.6.1/minimp3/",
-    "source": "https://github.com/germangb/minimp3-rs/tree/9f9fcdde624c8f9bf3eee1b2688a6847a7b61716/crates/minimp3",
-    "scope": "Every MPEG Layer III frame of an untagged stream decoded to interleaved i16 PCM: sample rate, channels, layer, bitrate, frame count, samples per channel, PCM sample count and PCM hash",
-    "family": "lieff/minimp3 C decoder via minimp3-sys 0.6.0 Rust FFI binding",
-    "family_note": "Same minimp3 C decoder family as Go github.com/tosone/minimp3 v1.1.0: the vendored minimp3.h files differ by one ARMv6-M preprocessor guard that is inactive on aarch64, and both decode the shared controls to identical PCM hashes. Distinct from the Symphonia family. The crate documentation warns of multiple memory-unsoundness issues. The separately selected pure-Rust nanomp3 0.2.0 path is a port of the same decoder (minimp3-compatible PCM byte-identical to scalar minimp3.h); this receipt's PCM comes from the default NEON SIMD build, which differs from the scalar build by at most 1 LSB.",
-    "control": "controls/mp3/tone-44k-mono.mp3",
-    "expected_output": {
-      "sample_rate": 44100,
-      "channels": 1,
-      "layer": 3,
-      "bitrate_kbps": 64,
-      "frames": 11,
-      "samples_per_channel": 12672,
-      "pcm_samples": 12672,
-      "pcm_sha256": "0641e37cb18148b29cfc23ffc8c479115a4e042a0952a91570e92888aec0a33e"
-    },
-    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "sample_rate": 22050,
-      "channels": 2,
-      "layer": 3,
-      "bitrate_kbps": 32,
-      "frames": 12,
-      "samples_per_channel": 6912,
-      "pcm_samples": 13824,
-      "pcm_sha256": "ac01db4bb3d3c907d3b51ecaefd6497cce1a693035114377eeedef2ef5afb653"
-    },
-    "evidence": "projects/mp3/rust/minimp3/verification.json",
-    "metric": {
-      "name": "crates.io recent downloads (90 days)",
-      "value": 156316,
-      "source": "data/rust/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/rust/minimp3"
-  },
-  {
-    "name": "mp3-duration",
-    "project": "projects/mp3/rust/mp3_duration",
-    "version": "0.1.10",
     "license": "MIT",
-    "license_evidence": "Cargo.toml license = \"MIT\" and LICENSE in mp3-duration-0.1.10.crate (sha256 348bdc7300502f0801e5b57c448815713cd843b744ef9bda252a2698fdf90a0f, Cargo.lock checksum)",
-    "source_sha256": "348bdc7300502f0801e5b57c448815713cd843b744ef9bda252a2698fdf90a0f",
-    "input_api": "mp3_duration::from_read(&mut std::io::Cursor<&[u8]>) -> Result<std::time::Duration, MP3DurationError>",
-    "documentation": "https://docs.rs/mp3-duration/0.1.10/mp3_duration/fn.from_read.html",
-    "source": "https://github.com/agersant/mp3-duration/tree/04d8af89b87626750314028fe6e4953bf9ab9ac7",
-    "scope": "Frame-derived playback duration of an untagged MPEG Layer III stream: from_read reads every frame header (version, layer, bitrate, sample rate, padding, channel mode), checks the side-information offset for a Xing/Info frame count, and sums per-frame durations to EOF. No frame count, audio decode or tag metadata is exposed",
-    "family": "mp3-duration Rust MPEG frame-header scanner",
-    "family_note": "Own src/lib.rs header walker with its own bitrate, sample-rate, samples-per-frame and side-information tables; its only dependency is thiserror. No decoder, so independent of the Symphonia and minimp3 families. Not the npm mp3-duration package (separate JavaScript code by another author).",
-    "control": "controls/mp3/tone-44k-mono.mp3",
+    "input_api": "Decoder::new(File).next_frame()",
+    "documentation": "https://docs.rs/minimp3/0.6.1/minimp3/",
+    "scope": "Decoded first MPEG Layer III frame",
+    "family": "minimp3 C decoder",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {
-      "duration_ns": 287346928
-    },
-    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "duration_ns": 313469376
-    },
-    "evidence": "projects/mp3/rust/mp3_duration/verification.json",
-    "verification_note": "Both untagged valid controls return 287,346,928 ns and 313,469,376 ns, equal to the independent header walk in controls/mp3/check_controls.py: 11 MPEG-1 frames x floor(1152e9/44100) ns and 12 MPEG-2 frames x floor(576e9/22050) ns. The API exposes no frame count, so the frame count is checked only through that product. Docker LLVM coverage: 122 own crate lines on the first control. AFL++ SanitizerCoverage is scoped to mp3_duration and the harness crate, where the generic from_read::<Cursor<&[u8]>> is monomorphized: 77 vs 77 tuples, 1 unique to each control, byte-identical maps over 5 separate processes per control. Covered line sets differ by two src/lib.rs lines each way (MPEG-1 vs MPEG-2 version arm, mono vs joint-stereo mode arm). The feedback differential is real but small, because the per-frame work is table-driven. Two short CBR controls do not establish VBR, Xing/Info, free-format or other layer support; no malformed, resource-use or campaign tests were run.",
-    "metric": {
-      "name": "crates.io recent downloads (90 days)",
-      "value": 149042,
-      "source": "data/rust/mp3/registry-snapshot.json"
+      "sample_rate": 8000,
+      "channels": 1,
+      "decoded_samples": 576
     }
   },
   {
-    "name": "rusty_mp3",
-    "project": "projects/mp3/rust/rusty_mp3",
-    "version": "1.0.6",
-    "license": "Apache-2.0",
-    "license_evidence": "Cargo.toml license = \"Apache-2.0\" and LICENSE in rusty_mp3-1.0.6.crate (sha256 6bc564f58a4eed8f95a43dbbb69b739a7c517230b8f852d45bfcc9c8566a67a8, Cargo.lock checksum)",
-    "source_sha256": "6bc564f58a4eed8f95a43dbbb69b739a7c517230b8f852d45bfcc9c8566a67a8",
-    "input_api": "rusty_mp3::Mp3Decoder::new(); Mp3Decoder::push(&bytes); Mp3Decoder::flush(); Mp3Decoder::next_frame() -> DecodedAudio { sample_rate, channels, samples: Vec<f32> } until Error::Eof",
-    "documentation": "https://docs.rs/rusty_mp3/1.0.6/rusty_mp3/struct.Mp3Decoder.html",
-    "source": "https://github.com/Remade-With-Rust/remade_ffmpeg_rs/tree/37968ee5b1223f98c5b3ff12fa134029e72d869a/crates/rusty_mp3",
-    "scope": "Every MPEG Layer III frame of an untagged stream frame-synced, parsed (header, side information, main data) and decoded to interleaved f32 PCM: sample rate, channels, frame count, samples per channel, PCM sample count and f32 PCM hash. Default features; the crate's encoder is not exercised",
-    "family": "rusty_mp3 pure-Rust Layer III decoder (remade_ffmpeg_rs)",
-    "family_note": "In-house decoder with no dependencies: the crate documentation says it was written because Symphonia is MPL-2.0 and puremp3 is incomplete, and its source cites minimp3 and FFmpeg only as bit-exactness references. Its f32 PCM differs from the nanomp3 minimp3 port's f32 PCM in 11,236 of 12,672 and 12,108 of 13,824 samples (max absolute difference 7.5e-8 and 6.0e-8): numerically equivalent output, not the same implementation. Independent of the Symphonia and minimp3 families. The rff-codec-mp3 search hit is an adapter over this crate.",
-    "control": "controls/mp3/tone-44k-mono.mp3",
+    "name": "mp3-duration",
+    "version": "0.1.10",
+    "license": "MIT",
+    "input_api": "from_path(path)",
+    "documentation": "https://docs.rs/mp3-duration/0.1.10/mp3_duration/",
+    "scope": "MP3 frame-derived duration",
+    "family": "mp3-duration frame scanner",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {
-      "sample_rate": 44100,
+      "duration_ms": 1152
+    }
+  },
+  {
+    "name": "symphonia",
+    "version": "0.6.1",
+    "license": "MPL-2.0",
+    "input_api": "default::get_probe().probe(Hint, MediaSourceStream).next_packet()",
+    "documentation": "https://docs.rs/symphonia/0.6.1/symphonia/",
+    "scope": "MP3 track header and audio packet",
+    "family": "Symphonia MP3 demuxer",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
       "channels": 1,
-      "frames": 11,
-      "samples_per_channel": 12672,
-      "pcm_samples": 12672,
-      "pcm_f32_sha256": "950a4b2c13148eef937e478e683959d5450f71436c95e81423456a85b63dfb8a"
-    },
-    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "sample_rate": 22050,
-      "channels": 2,
-      "frames": 12,
-      "samples_per_channel": 6912,
-      "pcm_samples": 13824,
-      "pcm_f32_sha256": "0bf6b1cc0fc7a5de01a9ce6336667448d9837b98de16c2ff5a151e32e6075f5f"
-    },
-    "evidence": "projects/mp3/rust/rusty_mp3/verification.json",
-    "verification_note": "Both untagged valid controls give 11 frames at 44,100 Hz mono and 12 frames at 22,050 Hz stereo, 12,672 and 6,912 samples per channel, equal to the independent header walk (11 x 1152 and 12 x 576) and to the Symphonia receipts. Mp3Decoder drops a frame whose decode fails without reporting it, so the frame count is checked against the walk rather than trusted. Docker LLVM coverage: 1121 own crate lines on the first control (decoder, header, side information, Huffman, IMDCT, synthesis; encoder files 0). AFL++ SanitizerCoverage is scoped to the rusty_mp3 crate: 1082 vs 1033 tuples, 219 and 170 unique, byte-identical maps over 5 separate processes per control. Two short CBR controls do not establish VBR, Xing/Info, free-format or MPEG-2.5 support; no malformed, resource-use or campaign tests were run.",
-    "metric": {
-      "name": "crates.io recent downloads (90 days)",
-      "value": 81660,
-      "source": "data/rust/mp3/registry-snapshot.json"
+      "packet_bytes": 288
+    }
+  },
+  {
+    "name": "symphonium",
+    "version": "0.13.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "probe_from_file(path, None)",
+    "documentation": "https://docs.rs/symphonium/0.13.0/symphonium/",
+    "scope": "MP3 track header",
+    "family": "Symphonia MP3 demuxer",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1
     }
   },
   {
     "name": "nanomp3",
-    "project": "projects/mp3/rust/nanomp3",
     "version": "0.2.0",
     "license": "MIT OR Apache-2.0",
-    "license_evidence": "Cargo.toml license = \"MIT OR Apache-2.0\" with LICENSE-MIT and LICENSE-APACHE in nanomp3-0.2.0.crate (sha256 acd9a8d0592a17ee5211aae2f976e6dc2f6846135d1f49665b3f19a7afd23435) and nanomp3-core-0.2.0.crate (sha256 63fa2238e662d3d3c1a71168b3278f23422cf9bf76f6943ee6b1c2581d74eb5c), Cargo.lock checksums",
-    "source_sha256": "acd9a8d0592a17ee5211aae2f976e6dc2f6846135d1f49665b3f19a7afd23435",
-    "underlying_package": "nanomp3-core",
-    "underlying_version": "0.2.0",
-    "underlying_source_sha256": "63fa2238e662d3d3c1a71168b3278f23422cf9bf76f6943ee6b1c2581d74eb5c",
-    "input_api": "nanomp3::frames(&bytes) -> Frame { data, channels, sample_rate, layer, bitrate_kbps, samples }; nanomp3::decode_all::<i16>(&bytes) and nanomp3::decode_all_with::<i16>(&bytes, Options::default().minimp3_compat(true)) -> Decoded { samples, channels, sample_rate, layer, .. }",
-    "documentation": "https://docs.rs/nanomp3/0.2.0/nanomp3/fn.decode_all.html",
-    "source": "https://github.com/robbie01/nanomp3/tree/bdf614a85c04bc81e80101ced397dae193da0d6c/nanomp3",
-    "scope": "Every MPEG Layer III frame of an untagged byte slice walked by nanomp3::frames (sample rate, channels, layer, bitrate, frame bytes, samples per frame), then the whole slice decoded to interleaved i16 PCM by decode_all, once with defaults and once with Options::minimp3_compat: frame count, samples per channel, PCM sample count and both PCM hashes",
-    "family": "minimp3 decoder family via the nanomp3-core 0.2.0 pure-Rust port",
-    "family_note": "Safe pure-Rust port of lieff/minimp3 and minimp3_ex (no C code; nanomp3-core describes itself as a bit-exact, safe Rust port of minimp3). Same minimp3 family as the selected minimp3 Rust binding, not an independent engine; a separate package API (frame iterator, tag stripping, whole-buffer loader, sample-accurate reader) with its own adoption metric. With Options::minimp3_compat the i16 PCM is byte-identical on both controls to the minimp3.h vendored in minimp3-sys 0.6.0 built scalar (clang -O2 -ffp-contract=off -DMINIMP3_NO_SIMD): sha256 d8bde33a... and 37eb8d8e.... The selected minimp3 receipt (default NEON SIMD build) differs in 129 of 12,672 and 68 of 13,824 samples by at most 1 LSB; that SIMD build is not bit-exact with minimp3's own scalar build either. Default i16 output differs from compat in 135 and 72 samples, the documented rounding fix. nanomp3-core 0.2.0 is the frame decoder that nanomp3 re-exports unchanged; it is counted once, through this higher-adoption path, and its lines are recorded as underlying coverage.",
-    "control": "controls/mp3/tone-44k-mono.mp3",
+    "input_api": "decode_all::<i16>(&[u8])",
+    "documentation": "https://docs.rs/nanomp3/0.2.0/nanomp3/",
+    "scope": "Decoded MP3 samples and layer",
+    "family": "nanomp3 decoder",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {
-      "sample_rate": 44100,
+      "layer": 3,
+      "sample_rate": 8000,
+      "samples": 8000
+    }
+  },
+  {
+    "name": "symphonia-metadata",
+    "version": "0.6.1",
+    "license": "MPL-2.0",
+    "input_api": "Id3v2Reader::try_new(MediaSourceStream).read_all()",
+    "documentation": "https://docs.rs/symphonia-metadata/0.6.1/symphonia_metadata/",
+    "scope": "ID3v2 frame keys",
+    "family": "Symphonia ID3v2 reader",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "tag_count": 4,
+      "keys": [
+        "TIT2",
+        "TPE1",
+        "TALB",
+        "TSSE"
+      ]
+    }
+  },
+  {
+    "name": "symphonia-bundle-mp3",
+    "version": "0.6.1",
+    "license": "MPL-2.0",
+    "input_api": "Skip the control ID3v2 prefix, then MpaReader::try_new(MediaSourceStream, FormatOptions).next_packet()",
+    "documentation": "https://docs.rs/symphonia-bundle-mp3/0.6.1/symphonia_bundle_mp3/",
+    "scope": "MPEG Layer III track header and audio packet; adapter skips ID3v2 prefix before passing the stream",
+    "family": "Symphonia MP3 demuxer",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
       "channels": 1,
-      "layer": 3,
-      "bitrate_kbps": 64,
-      "frames": 11,
-      "frame_bytes": 2298,
-      "frame_samples_per_channel": 12672,
-      "samples_per_channel": 12672,
-      "pcm_samples": 12672,
-      "pcm_sha256": "1106d468c6a515a4c554991af6ab95e9c811e8e34005478ee81dd1e3a8063edb",
-      "minimp3_compat_pcm_sha256": "d8bde33ad59477f815f1194dd04517bf8b5949807f5bf01fb19a9ab4e3a99364"
-    },
-    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "sample_rate": 22050,
-      "channels": 2,
-      "layer": 3,
-      "bitrate_kbps": 32,
-      "frames": 12,
-      "frame_bytes": 1254,
-      "frame_samples_per_channel": 6912,
-      "samples_per_channel": 6912,
-      "pcm_samples": 13824,
-      "pcm_sha256": "41230a6c407d4fe238ca0bf645f88b3bb9bab440d139dc3b7de3d16160d29f79",
-      "minimp3_compat_pcm_sha256": "37eb8d8e5c57e9d3ae1b6a446183e336912fa66920ac2db94aa2b2f499df30e3"
-    },
-    "evidence": "projects/mp3/rust/nanomp3/verification.json",
-    "verification_note": "Both untagged valid controls give 11 frames/2,298 bytes at 44,100 Hz mono 64 kbps and 12 frames/1,254 bytes at 22,050 Hz stereo 32 kbps, 12,672 and 6,912 samples per channel, equal to the independent header walk and the minimp3 and Symphonia receipts. No LAME/Xing tag is present, so decode_all trims no delay or padding. Docker LLVM coverage: 164 own nanomp3 lines and 985 underlying nanomp3-core lines on the first control. AFL++ SanitizerCoverage is scoped to nanomp3, nanomp3-core and the harness crate, where the generic i16 loader and frame decoder are monomorphized: 955 vs 990 tuples, 97 and 132 unique, byte-identical maps over 5 separate processes per control. Two short CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II or MPEG-2.5 support; no malformed, resource-use or campaign tests were run.",
-    "metric": {
-      "name": "crates.io recent downloads (90 days)",
-      "value": 51847,
-      "source": "data/rust/mp3/registry-snapshot.json"
+      "packet_bytes": 288
+    }
+  },
+  {
+    "name": "rusty_mp3",
+    "version": "1.0.5",
+    "license": "Apache-2.0",
+    "input_api": "Mp3Decoder::new().push(&[u8]).next_frame()",
+    "documentation": "https://docs.rs/rusty_mp3/1.0.5/rusty_mp3/",
+    "scope": "Decoded first MPEG Layer III frame",
+    "family": "rusty_mp3 decoder",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "decoded_samples": 576
     }
   }
 ]

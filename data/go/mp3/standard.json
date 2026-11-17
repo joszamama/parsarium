@@ -1,6 +1,6 @@
 {
   "ecosystem": "Go",
-  "format": "MP3 (untagged MPEG audio Layer III)",
+  "format": "MP3 with ID3v2",
   "status": "none_documented_in_scoped_standard_library",
   "verified_apis": [],
   "no_api_findings": [
@@ -9,10 +9,10 @@
       "official_documentation_scope": [
         "https://pkg.go.dev/std@go1.27.1",
         "https://pkg.go.dev/encoding/binary@go1.27.1",
-        "https://pkg.go.dev/io@go1.27.1"
+        "https://pkg.go.dev/os@go1.27.1"
       ],
-      "finding": "The versioned standard-library package list has no MPEG audio frame parser or Layer III decoder. encoding/binary reads generic numeric fields and io moves bytes; neither interprets MPEG frame headers, side info or main data."
+      "finding": "The versioned standard-library package list has no MPEG Layer III audio or ID3v2 tag parser. encoding/binary reads generic numeric fields and os opens local files; neither interprets MPEG frames or ID3 tags."
     }
   ],
-  "limit": "This is a finding about documented Go 1.27.1 standard-library APIs, not platform media frameworks or third-party modules. It matches the mp3_id3v2 Go finding in data/go/mp3_id3v2/standard.json."
+  "limit": "This is a finding about documented Go 1.27.1 standard-library APIs, not platform media frameworks or third-party modules."
 }

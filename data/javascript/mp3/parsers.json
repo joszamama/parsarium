@@ -1,228 +1,97 @@
 [
   {
-    "name": "mediabunny",
-    "version": "1.66.0",
-    "license": "MPL-2.0",
-    "license_evidence": "https://registry.npmjs.org/mediabunny/-/mediabunny-1.66.0.tgz",
-    "input_api": "new Input({ source: new BufferSource(bytes), formats: ALL_FORMATS }); getFormat(); getPrimaryAudioTrack(); new EncodedPacketSink(track).packets(); track.computeDuration()",
-    "documentation": "https://mediabunny.dev/guide/reading-media-files",
-    "source": "https://github.com/Vanilagy/mediabunny",
-    "scope": "Every MPEG Layer III frame of an untagged stream from local bytes, demuxed by mediabunny's own frame-header reader: format, codec, sample rate, channels, frame count, frame bytes, samples per channel (from duration); no audio decode",
-    "family": "mediabunny TypeScript MP3 demuxer",
-    "family_note": "Own frame-header reader (dist/modules/src/mp3/mp3-reader.js, mp3-demuxer.js). Not one of the ten mp3_id3v2/javascript paths; that cell's music-metadata path is a separate MPEG frame parser and its @audio/decode paths use mpg123 WASM. mediabunny also has an ID3 reader (id3.js) that the untagged controls do not exercise.",
-    "control": "controls/mp3/tone-44k-mono.mp3",
-    "expected_output": {
-      "format": "MP3",
-      "codec": "mp3",
-      "sample_rate": 44100,
-      "channels": 1,
-      "frames": 11,
-      "frame_bytes": 2298,
-      "samples_per_channel": 12672
-    },
-    "metric": {
-      "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
-      "value": 26071768,
-      "source": "data/javascript/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/javascript/mediabunny"
-  },
-  {
     "name": "music-metadata",
-    "version": "12.5.0",
+    "version": "12.4.0",
     "license": "MIT",
-    "license_evidence": "https://registry.npmjs.org/music-metadata/-/music-metadata-12.5.0.tgz",
-    "input_api": "parseBuffer(Uint8Array, { mimeType: 'audio/mpeg', size }, { duration: true }) -> IAudioMetadata.format (codec, sampleRate, numberOfChannels, bitrate, codecProfile, numberOfSamples, duration); parseFile(path) and parseStream(Readable, { mimeType: 'audio/mpeg' }) checked equal by api-check.js",
-    "documentation": "https://github.com/Borewit/music-metadata#readme",
-    "source": "https://github.com/Borewit/music-metadata",
-    "scope": "Every MPEG Layer III frame of an untagged stream from local bytes, walked to EOF by music-metadata's own MpegParser (duration: true): MPEG version and layer (from the codec string MpegFrameHeader builds from header bits), sample rate, channels, header-table bitrate, CBR profile, frame-counted number of samples and duration; no ID3 tags present and no audio decode",
-    "family": "music-metadata JavaScript MPEG frame parser",
-    "family_note": "Shared music-metadata parser family with the mp3_id3v2/javascript path (12.4.0 there, which is verified for ID3v2 tag fields on a tagged control). This cell counts the same package for a different format and code path: lib/mpeg/MpegParser.js (sync, frame loop, side-information skip, Xing/Info probe, EOF frame count) and lib/mpeg/MpegFrameHeader.js (version, layer, bitrate, sample rate, channel mode, frame length). The untagged controls carry no ID3 tags (tag_types []). Separate author, repository and code from mediabunny and codec-parser. Byte access goes through the same author's strtok3/token-types tokenizers.",
-    "dependencies": [
-      {
-        "package": "@borewit/text-codec",
-        "version": "0.2.3",
-        "license": "MIT"
-      },
-      {
-        "package": "@tokenizer/inflate",
-        "version": "0.6.1",
-        "license": "MIT"
-      },
-      {
-        "package": "@tokenizer/token",
-        "version": "0.3.0",
-        "license": "MIT"
-      },
-      {
-        "package": "content-type",
-        "version": "3.1.1",
-        "license": "MIT"
-      },
-      {
-        "package": "debug",
-        "version": "4.4.3",
-        "license": "MIT"
-      },
-      {
-        "package": "file-type",
-        "version": "22.3.0",
-        "license": "MIT"
-      },
-      {
-        "package": "ieee754",
-        "version": "1.2.1",
-        "license": "BSD-3-Clause"
-      },
-      {
-        "package": "media-typer",
-        "version": "2.0.0",
-        "license": "MIT"
-      },
-      {
-        "package": "ms",
-        "version": "2.1.3",
-        "license": "MIT"
-      },
-      {
-        "package": "strtok3",
-        "version": "10.8.0",
-        "license": "MIT"
-      },
-      {
-        "package": "token-types",
-        "version": "6.2.0",
-        "license": "MIT"
-      },
-      {
-        "package": "uint8array-extras",
-        "version": "1.6.0",
-        "license": "MIT"
-      },
-      {
-        "package": "win-guid",
-        "version": "0.2.1",
-        "license": "MIT"
-      }
-    ],
-    "control": "controls/mp3/tone-44k-mono.mp3",
-    "expected_output": {
-      "container": "MPEG",
-      "codec": "MPEG 1 Layer 3",
-      "mpeg_version": 1,
-      "layer": 3,
-      "codec_profile": "CBR",
-      "sample_rate": 44100,
-      "channels": 1,
-      "bitrate": 64000,
-      "number_of_samples": 12672,
-      "duration": 0.2873469387755102,
-      "tag_types": [],
-      "warnings": 0
-    },
-    "metric": {
-      "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
-      "value": 9827896,
-      "source": "data/javascript/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/javascript/music_metadata",
-    "coverage_note": "V8 on the 44.1 kHz control: 3,539 executed lines across 89 lib/ files, which is mostly module evaluation of the ~30 format parsers the package imports plus its ID3v1/ID3v2 probes; 455 of those lines are in lib/mpeg/ and 245 in lib/mpeg/MpegParser.js (format_specific_source_lines_covered). Dependency tokenizers (strtok3, token-types) are not counted.",
-    "feedback_note": "AFL++ bridge scoped to lib/mpeg/: 54 parser source ranges / 74 tuples on the 44.1 kHz control (40 ranges in MpegParser.js, 6 MpegFrameHeader.js, 3 AdtsFrameHeader.js, 2 MpegLoader.js, 1 each ExtendedLameHeader.js, ReplayGainDataFormat.js, XingTag.js; several are module-evaluation ranges), identical over 3 runs; the 22.05 kHz stereo control gives 58 / 78, identical over 3 runs. It adds 4 ranges, none removed, all in sync()'s end-of-stream tail policy: MpegParser.js line 128 (`&& this.audioFrameHeader !== undefined`, `&& (!fullMpegScan || id3v1Tail)`) and lines 142-144 (`!AdtsFrameHeader.matches(...)`, `(!fullMpegScan || id3v1Tail)`). Those run only when 163 bytes or fewer remain in the lookahead, which the 104/105-byte stereo frames reach and the 208/209-byte mono frames do not. MPEG version, sample rate and channel mode are table lookups and ternaries in MpegFrameHeader.js that do not produce separate V8 block ranges on these controls, so the differential tracks frame length, not version or channel branches.",
-    "frame_walk_evidence": "DEBUG=music-metadata:parser:mpeg replay logs one 'offset=… MP3 bitrate=… sample-rate=…' line per frame (11 on the 44.1 kHz control, 12 on the 22.05 kHz control) and then 'Calculate duration at EOF', so number_of_samples is frame count × samples per frame from the full walk, not the CBR file-size estimate.",
-    "feedback_differential": "data/javascript/mp3/music_metadata-feedback-differential.json"
+    "input_api": "parseFile(path)",
+    "documentation": "https://www.npmjs.com/package/music-metadata",
+    "scope": "tags+audio_header",
+    "family": "music-metadata"
   },
   {
-    "name": "codec-parser",
-    "version": "2.5.0",
-    "license": "LGPL-3.0-or-later",
-    "license_evidence": "https://registry.npmjs.org/codec-parser/-/codec-parser-2.5.0.tgz",
-    "input_api": "new CodecParser('audio/mpeg', { onCodecHeader }); parser.parseAll(Uint8Array) -> CodecFrame[] (header.sampleRate/channels/layer, samples, data, totalSamples)",
-    "documentation": "https://github.com/eshaz/codec-parser#readme",
-    "source": "https://github.com/eshaz/codec-parser",
-    "scope": "Every MPEG Layer III frame of an untagged stream from a local Uint8Array, split by codec-parser's own frame-header parser: codec, layer, sample rate, channels, header-table bitrate, frame count, frame bytes, samples per frame, total samples, distinct header variants; no audio decode",
-    "family": "codec-parser JavaScript MPEG frame parser",
-    "family_note": "Own frame-header parser (src/codecs/mpeg/MPEGHeader.js) and fixed-length frame sync that requires the next header at the computed frame length (src/codecs/Parser.js). The 2.5.0 tarball has no runtime dependencies and shares no code with mediabunny (separate author, repository and frame-sync design). Not one of the ten mp3_id3v2/javascript paths. Its ID3v2 probe skips tags without parsing them and is not exercised by the untagged controls. The same package also parses AAC, FLAC and Ogg; those parsers are not loaded for audio/mpeg frames beyond module import.",
-    "dependencies": [],
-    "control": "controls/mp3/tone-44k-mono.mp3",
-    "expected_output": {
-      "codec": "mpeg",
-      "layer": "Layer III",
-      "sample_rate": 44100,
-      "channels": 1,
-      "bitrate": 64000,
-      "frames": 11,
-      "frame_bytes": 2298,
-      "samples_per_frame": 1152,
-      "total_samples": 12672,
-      "header_variants": 1
-    },
-    "metric": {
-      "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
-      "value": 2683215,
-      "source": "data/javascript/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/javascript/codec_parser",
-    "feedback_note": "AFL++ bridge: 124 parser source ranges / 144 tuples on the 44.1 kHz control, identical on repeat; the 22.05 kHz control adds 1 range (1 tuple), the onCodecHeader block in src/codecs/HeaderCache.js setHeader. V8 reports that block separately only when its count differs from setHeader's, which happens when more than one distinct 4-byte header enters the cache after sync (the stereo control alternates padded and unpadded headers; the mono control's only unpadded header precedes sync). MPEG version, sample rate and channel mode are table lookups in MPEGHeader.js, so they do not produce separate V8 block ranges on these valid controls.",
-    "feedback_differential": "data/javascript/mp3/codec_parser-feedback-differential.json"
+    "name": "mediainfo.js",
+    "version": "0.3.8",
+    "license": "BSD-2-Clause",
+    "input_api": "MediaInfo().analyzeData(size,readChunk)",
+    "documentation": "https://www.npmjs.com/package/mediainfo.js",
+    "scope": "tags",
+    "family": "MediaInfoLib WASM"
+  },
+  {
+    "name": "jsmediatags",
+    "version": "3.9.7",
+    "license": "BSD-3-Clause",
+    "input_api": "read(Buffer,{onSuccess,onError})",
+    "documentation": "https://www.npmjs.com/package/jsmediatags",
+    "scope": "tags+version",
+    "family": "jsmediatags"
+  },
+  {
+    "name": "@audio/decode",
+    "version": "4.3.0",
+    "license": "MIT",
+    "input_api": "decode(Buffer)",
+    "documentation": "https://www.npmjs.com/package/@audio/decode",
+    "scope": "decoded_audio",
+    "family": "mpg123 WASM",
+    "family_note": "Facade delegates MP3 decoding to @audio/decode-mp3 and mpg123-decoder WASM."
+  },
+  {
+    "name": "@audio/decode-mp3",
+    "version": "1.3.1",
+    "license": "MIT",
+    "input_api": "decode(Buffer)",
+    "documentation": "https://www.npmjs.com/package/@audio/decode-mp3",
+    "scope": "decoded_audio",
+    "family": "mpg123 WASM",
+    "family_note": "Uses mpg123-decoder WASM. On this mono control the codec API yielded two PCM channels; only sample rate and sample count establish acceptance of the tagged MP3."
+  },
+  {
+    "name": "get-audio-duration",
+    "version": "4.0.1",
+    "license": "MIT",
+    "input_api": "getAudioDurationInSeconds(path)",
+    "documentation": "https://www.npmjs.com/package/get-audio-duration",
+    "scope": "duration",
+    "family": "FFprobe wrapper",
+    "family_note": "Invokes pinned @ffprobe-installer/ffprobe; duration includes encoder padding."
+  },
+  {
+    "name": "node-id3",
+    "version": "0.2.9",
+    "license": "MIT",
+    "input_api": "read(Buffer)",
+    "documentation": "https://www.npmjs.com/package/node-id3",
+    "scope": "tags",
+    "family": "node-id3"
+  },
+  {
+    "name": "id3js",
+    "version": "2.1.1",
+    "license": "MIT",
+    "input_api": "fromPath(path)",
+    "documentation": "https://www.npmjs.com/package/id3js",
+    "scope": "tags+version",
+    "family": "id3js"
   },
   {
     "name": "mp3-duration",
     "version": "1.1.0",
     "license": "MIT",
-    "license_evidence": "https://registry.npmjs.org/mp3-duration/-/mp3-duration-1.1.0.tgz",
-    "npm_integrity": "sha512-5zO6ZLEHEPb1Da5p+et7zsMQ0pt0x2YCZLyUPayBqLMhLPQt3fFAXxvCyznZZQnhXCeIX99tXhvQocm8+VmpvA==",
-    "source_sha256": "9e7e9860c16e3ed7693d64a4b7a9ce0f5b7ef9c43e3fc0af7f543142add4629e",
-    "input_api": "mp3Duration(Buffer, false) Promise on local file bytes; false disables the CBR size estimate so index.js scans frame headers to EOF",
-    "documentation": "https://github.com/ddsol/mp3-duration/blob/20bda6406e92ad200f5774d3a88ae2d9dc1e2cbc/README.md",
-    "source": "https://github.com/ddsol/mp3-duration/tree/20bda6406e92ad200f5774d3a88ae2d9dc1e2cbc",
-    "scope": "Frame-derived duration in milliseconds from an untagged MPEG Layer III stream; no frame metadata, audio decode or ID3 tags exposed",
-    "family": "mp3-duration JavaScript MPEG frame-header scanner",
-    "family_note": "Own index.js parses MPEG version/layer, bitrate, sample rate, padding and frame length, advances by frameSize and sums samples/sampleRate. Bluebird and bluebird-co provide asynchronous control flow, not audio parsing. Same package/release is selected in mp3_id3v2/javascript for duration from tagged MP3; this plain-MP3 path exercises untagged frame walking.",
-    "control": "controls/mp3/tone-44k-mono.mp3",
-    "expected_output": {
-      "duration_ms": 287
-    },
-    "metric": {
-      "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
-      "value": 43261,
-      "source": "data/javascript/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/javascript/mp3_duration",
-    "verification_note": "Both untagged valid controls return 287 and 313 duration_ms, matching the independent frame-header walker (11 MPEG-1 frames of 1152 samples/44100 Hz and 12 MPEG-2 frames of 576 samples/22050 Hz, rounded to milliseconds). The package scans headers through index.js with cbrEstimate=false rather than estimating from file length; it exposes no frame metadata or audio decode. Docker V8 covers 156 own index.js lines. Opt-in AFL++ feedback uses only parseFrameHeader and frameSize range hit counts, capped at 255, giving 11 versus 12 calls with three stable repeats and zero parser features on module-load-only baseline. This tracks frame count and possibly input length; it is not new line or branch coverage. The same release is separately verified in mp3_id3v2/javascript for duration scope. Two short CBR controls do not establish VBR, free-format or other MPEG layer support; no malformed/resource-use/campaign tests were run."
+    "input_api": "mp3Duration(Buffer,callback)",
+    "documentation": "https://www.npmjs.com/package/mp3-duration",
+    "scope": "duration",
+    "family": "mp3-duration",
+    "family_note": "Frame duration includes MP3 padding and differs from nominal one-second source duration."
   },
   {
-    "name": "mp3-parser",
-    "version": "0.3.0",
+    "name": "get-mp3-duration",
+    "version": "1.0.0",
     "license": "MIT",
-    "license_evidence": "https://registry.npmjs.org/mp3-parser/0.3.0",
-    "input_api": "readFrame(DataView, offset, false) repeatedly over local Buffer-backed DataView; each result contains frame header and computed byte/sample lengths",
-    "documentation": "https://github.com/biril/mp3-parser/blob/19761d0aa0d88bcc215fd7fbeb197f8d00229bb4/README.md#readframeview-offset-requirenextframe",
-    "source": "https://registry.npmjs.org/mp3-parser/-/mp3-parser-0.3.0.tgz",
-    "scope": "Every MPEG Layer III frame in each untagged local control via DataView/readFrame: MPEG version bits, layer, sample rate, channel count, bitrate, frame count/bytes, samples per frame and total samples; no audio decode or tag claim",
-    "family": "biril mp3-parser JavaScript frame-header reader",
-    "family_note": "The pinned lib/lib.js implements own MPEG version/layer/bitrate/rate lookup tables, frame-header bit extraction, frame-length computation and readFrame. main.js exposes documented DataView methods. The 0.3.0 tarball has no runtime dependencies and shares no identified code or engine with mediabunny, music-metadata or codec-parser. The same package also has ID3v2/Xing readers, which these untagged controls do not exercise.",
-    "dependencies": [],
-    "control": "controls/mp3/tone-44k-mono.mp3",
-    "expected_output": {
-      "codec": "mp3",
-      "mpeg_version_bits": "11",
-      "layer": "Layer III",
-      "sample_rate": 44100,
-      "channels": 1,
-      "bitrate": 64000,
-      "frames": 11,
-      "frame_bytes": 2298,
-      "samples_per_frame": 1152,
-      "total_samples": 12672,
-      "header_variants": 1
-    },
-    "metric": {
-      "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
-      "value": 40519,
-      "source": "data/javascript/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/javascript/mp3_parser",
-    "feedback_note": "The parser-only AFL++ bridge scopes V8 ranges to lib/lib.js. Three repeats per valid control are identical: 32 source ranges and 52 AFL++ tuples on 44.1 kHz mono, 30 ranges and 50 tuples on 22.05 kHz stereo; two ranges and two tuples differ. The changed ranges map to line 44 octetToBinRep bit-4 branches on the pinned source. This is input-dependent header-bit feedback, not a claim of distinct branches for every MPEG field.",
-    "feedback_differential": "data/javascript/mp3/mp3_parser-feedback-differential.json"
+    "input_api": "getMP3Duration(Buffer)",
+    "documentation": "https://www.npmjs.com/package/get-mp3-duration",
+    "scope": "duration",
+    "family": "get-mp3-duration",
+    "family_note": "Frame duration includes MP3 padding and differs from nominal one-second source duration."
   }
 ]

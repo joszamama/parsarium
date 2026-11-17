@@ -1,0 +1,30 @@
+[
+  {
+    "name": "taglib",
+    "version": "2.3.2",
+    "license": "LGPL-2.1-only OR MPL-1.1",
+    "license_evidence": "https://taglib.org/releases/taglib-2.3.2.tar.gz",
+    "input_api": "TagLib::ByteVectorStream(local bytes); TagLib::MPEG::File(IOStream*, readProperties=true, AudioProperties::Accurate); audioProperties()->version()/layer()/sampleRate()/channels()/bitrate()/lengthInMilliseconds()",
+    "documentation": "https://taglib.org/api/classTagLib_1_1MPEG_1_1File.html",
+    "documentation_properties": "https://taglib.org/api/classTagLib_1_1MPEG_1_1Properties.html",
+    "documentation_stream": "https://taglib.org/api/classTagLib_1_1ByteVectorStream.html",
+    "source": "https://taglib.org/releases/taglib-2.3.2.tar.gz",
+    "scope": "Frame-header scan of an untagged MPEG Layer III stream read from memory: MPEG version, layer, sample rate, channels, bitrate, duration. No audio decoding.",
+    "family": "TagLib MPEG frame-header and tag parser",
+    "family_note": "Same TagLib 2.3.2 library as the mp3_id3v2/cpp taglib entry; that path reads ID3v2 frames through MPEG::File, this one reads MPEG::Header/MPEG::Properties on untagged audio. Shared family, separate plain-frame scope.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "version": 1,
+      "layer": 3,
+      "sample_rate": 44100,
+      "channels": 1,
+      "bitrate_kbps": 64,
+      "length_ms": 287
+    },
+    "metric": {
+      "name": "Homebrew install-on-request count (365 days)",
+      "value": 4118,
+      "source": "data/cpp/mp3/registry-snapshot.json"
+    }
+  }
+]

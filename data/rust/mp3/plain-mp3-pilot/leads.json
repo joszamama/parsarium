@@ -1,0 +1,132 @@
+{
+  "captured_from": "data/rust/mp3/registry-snapshot.json",
+  "metric": "crates.io recent downloads (90 days), as returned by the search API at capture time",
+  "unresolved_leads": [
+    {
+      "name": "symphonia",
+      "version": "0.6.1",
+      "recent_downloads_90d": 11469426,
+      "status": "selected",
+      "reason": "Pinned facade path with default features plus the non-default mp3 feature: symphonia::default::get_probe().probe() over a byte MediaSourceStream with no extension hint, then get_codecs().make_audio_decoder(). Both untagged CBR controls give the same frames, frame bytes, sample rate, channels and decoded samples as the direct symphonia-bundle-mp3 path and the header walk. Shared Symphonia parser family, not an independent engine: facade-owned lines (symphonia src/lib.rs) and symphonia-bundle-mp3 lines are recorded separately.",
+      "source": "https://crates.io/crates/symphonia",
+      "license": "MPL-2.0"
+    },
+    {
+      "name": "minimp3",
+      "version": "0.6.1",
+      "recent_downloads_90d": 156316,
+      "status": "selected",
+      "reason": "Pinned Decoder::new(Cursor).next_frame() over the minimp3 C decoder via minimp3-sys 0.6.0. Both untagged CBR controls match independent header-walk frame and sample counts; Rust binding lines, native minimp3.h Clang source lines and stable native AFL++ edges are recorded in the project receipts. Same minimp3 C family as Go github.com/tosone/minimp3.",
+      "source": "https://crates.io/crates/minimp3",
+      "license": "MIT (crate and minimp3-sys 0.6.0); CC0-1.0 (vendored minimp3.h)"
+    },
+    {
+      "name": "mp3-duration",
+      "version": "0.1.10",
+      "recent_downloads_90d": 149042,
+      "status": "selected",
+      "reason": "Pinned from_read(&mut Cursor<&[u8]>) frame-header scanner. Both untagged CBR controls give 287,346,928 and 313,469,376 ns, equal to the independent header walk (frames x per-frame ns); the API exposes no frame count. Own header-walker family; 122 own source lines; scoped AFL++ maps byte-identical over 5 processes, 1 tuple unique to each control. Recorded in parsers.json and projects/mp3/rust/mp3_duration.",
+      "source": "https://crates.io/crates/mp3-duration",
+      "license": "MIT"
+    },
+    {
+      "name": "rusty_mp3",
+      "version": "1.0.6",
+      "recent_downloads_90d": 81660,
+      "status": "selected",
+      "reason": "Pinned Mp3Decoder push/flush/next_frame over the untagged bytes. Both CBR controls match the header walk and the Symphonia receipts in frames, sample rate, channels and samples; in-house pure-Rust decoder family, f32 PCM numerically close to but not identical with the minimp3 family. Scoped AFL++ maps byte-identical over 5 processes, 219/170 unique tuples. Recorded in parsers.json and projects/mp3/rust/rusty_mp3.",
+      "source": "https://crates.io/crates/rusty_mp3",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "nanomp3",
+      "version": "0.2.0",
+      "recent_downloads_90d": 51847,
+      "status": "selected",
+      "reason": "Pinned frames() walk plus decode_all::<i16> (default and minimp3_compat). Both CBR controls match the header walk; compat PCM byte-identical to scalar minimp3.h, so shared minimp3 family with the selected minimp3 binding, counted as a separate package API with its own metric. Scoped AFL++ maps byte-identical over 5 processes, 97/132 unique tuples. Recorded in parsers.json and projects/mp3/rust/nanomp3.",
+      "source": "https://crates.io/crates/nanomp3",
+      "license": "MIT OR Apache-2.0"
+    },
+    {
+      "name": "nanomp3-core",
+      "version": "0.2.0",
+      "recent_downloads_90d": 43688,
+      "status": "excluded_shared_family",
+      "reason": "Frame decoder that nanomp3 0.2.0 depends on with an exact pin and re-exports unchanged (pub use nanomp3_core::{Channels, DecodeError, Decoder, FrameInfo, Sample, MAX_SAMPLES_PER_FRAME}). Same code, same minimp3-port family and same repository commit as the selected nanomp3 path, whose receipt records 985 nanomp3-core lines as underlying coverage; counted once through the higher-adoption nanomp3 package (51,847 vs 43,688).",
+      "source": "https://crates.io/crates/nanomp3-core",
+      "license": "MIT OR Apache-2.0"
+    },
+    {
+      "name": "minimp3_fixed",
+      "version": "0.5.4",
+      "recent_downloads_90d": 25898,
+      "status": "unresolved_shared_family",
+      "reason": "Patched minimp3 bindings; shares the minimp3 C decoder family and has not been run.",
+      "source": "https://crates.io/crates/minimp3_fixed"
+    },
+    {
+      "name": "mp3-metadata",
+      "version": "0.4.0",
+      "recent_downloads_90d": 13775,
+      "status": "unresolved",
+      "reason": "Reads frame-derived duration and headers; the untagged control has not been run.",
+      "source": "https://crates.io/crates/mp3-metadata"
+    },
+    {
+      "name": "puremp3",
+      "version": "0.1.0",
+      "recent_downloads_90d": 11921,
+      "status": "unresolved",
+      "reason": "Pure-Rust decoder with a Read input; the untagged control has not been run.",
+      "source": "https://crates.io/crates/puremp3"
+    },
+    {
+      "name": "rmp3",
+      "version": "0.3.1",
+      "recent_downloads_90d": 6272,
+      "status": "unresolved_shared_family",
+      "reason": "minimp3 wrapper; shares the minimp3 C decoder family and has not been run.",
+      "source": "https://crates.io/crates/rmp3"
+    },
+    {
+      "name": "oxideav-mp3",
+      "version": "0.1.3",
+      "recent_downloads_90d": 5356,
+      "status": "unresolved",
+      "reason": "Layer III decoder; its local byte input path and untagged-control result have not been recorded.",
+      "source": "https://crates.io/crates/oxideav-mp3"
+    }
+  ],
+  "excluded_hits": [
+    {
+      "name": "id3",
+      "recent_downloads_90d": 1632106,
+      "reason": "ID3 tag reader only; it does not parse MPEG audio frames, so it cannot meet the frame-level requirement of this cell."
+    },
+    {
+      "name": "mp3lame-encoder",
+      "recent_downloads_90d": 271865,
+      "reason": "Encoder bindings; no MP3 input parser."
+    },
+    {
+      "name": "shine-rs",
+      "recent_downloads_90d": 19359,
+      "reason": "Encoder; no MP3 input parser."
+    },
+    {
+      "name": "rfc6381-codec",
+      "recent_downloads_90d": 1276760,
+      "reason": "Codec-string parser; does not read MP3 bytes."
+    },
+    {
+      "name": "mpeg4-audio-const",
+      "recent_downloads_90d": 1272993,
+      "reason": "MPEG-4 audio constants; does not read MP3 bytes."
+    },
+    {
+      "name": "file-format",
+      "recent_downloads_90d": 692761,
+      "reason": "Signature detection only; generic detection does not qualify under PROTOCOL.md."
+    }
+  ]
+}

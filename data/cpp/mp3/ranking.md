@@ -1,50 +1,29 @@
-# C++ plain MP3 parser pilot
+# CPP × MP3 with ID3v2: selected parsers
 
-The only verified third-party path in this pilot is
-[`taglib`](../../../projects/mp3/cpp/taglib/README.md) 2.3.2. Its documented
-`TagLib::MPEG::File` constructor over a `TagLib::ByteVectorStream` scanned the
-frame headers of both untagged MPEG Layer III controls from memory and reported
-MPEG version, layer, sample rate, channels, bitrate and duration. The formula
-has **4,118 Homebrew installs on request** over 365 days in the
-[saved search snapshot](registry-snapshot.json). That counts installs of the
-whole TagLib distribution, mostly used for tags; it is an adoption proxy, not a
-count of programs that read MPEG properties. The same TagLib library is already
-counted in the active C++ MP3-with-ID3v2 cell; this is a separate plain-frame
-path, not an independent parser family.
+10 control-verified third-party paths selected from 21 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
-Homebrew install-on-request count (365 days, 2025-11-17 to 2026-11-17).
+Homebrew install-on-request count over 365 days.
 
 | Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
-| 1 | [taglib](https://taglib.org/api/classTagLib_1_1MPEG_1_1File.html) | 2.3.2 | 4,118 | Layer III frame headers read from memory: version, layer, sample rate, channels, bitrate, duration | TagLib MPEG frame-header and tag parser |
+| 1 | [ffmpeg](https://ffmpeg.org/doxygen/trunk/group__lavf__decoding.html) | 9.0.2 | 1,763,198 | ID3v2 title and identified MP3 audio stream | FFmpeg libavformat MP3 demuxer and ID3v2 metadata reader |
+| 2 | [mpv](https://mpv.io/manual/stable/) | 0.42.0 | 91,258 | ID3v2 title, MP3 audio track codec and duration from local tagged file | libmpv local media frontend over FFmpeg libavformat and libavcodec |
+| 3 | [gstreamer](https://gstreamer.freedesktop.org/documentation/pbutils/gstdiscoverer.html) | 1.28.9 | 44,909 | ID3v2 title plus one parsed MPEG audio stream with sample rate and channels | GStreamer id3demux and mpegaudioparse plugins via GstDiscoverer |
+| 4 | [sox](https://sourceforge.net/p/sox/code/ci/master/tree/src/example0.c) | 14.4.2 | 28,127 | MP3 audio parsing and one decoded sample from a valid ID3v2-tagged input; ID3v2 text is not exposed | libsox MP3 handler over libmad decoder |
+| 5 | [sdl_mixer](https://wiki.libsdl.org/SDL2_mixer/Mix_LoadMUS) | 2.8.2 | 15,365 | ID3v2 title and artist plus a 1-second MP3 music duration | SDL2_mixer ID3v2 tag reader and mpg123 MP3 decoder |
+| 6 | [mpg123](https://www.mpg123.org/api/group__mpg123__metadata.shtml) | 1.33.7 | 12,297 | ID3v2 title/version after scanning valid MP3 audio | libmpg123 MPEG audio and ID3v2 parser |
+| 7 | [libsndfile](https://libsndfile.github.io/libsndfile/api.html) | 1.2.2 | 9,161 | ID3v2 title, MPEG Layer III sample rate/channels/frame count, and one decoded audio frame | libsndfile MPEG frontend over libmpg123 decoder and ID3v2 reader |
+| 8 | [lame](https://github.com/lameproject/lame/blob/master/include/lame.h) | 4.0 | 6,924 | MP3 frame header and 576 decoded PCM samples from ID3v2-tagged local bytes; tag text is not exposed | LAME HIP decoder interface over libmpg123 |
+| 9 | [taglib](https://taglib.org/api/) | 2.3.2 | 4,111 | ID3v2 title and artist from a valid tagged MP3 | TagLib ID3v2 parser |
 
-| Control | Version | Layer | Sample rate | Channels | Bitrate | Duration |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `controls/mp3/tone-44k-mono.mp3` | MPEG-1 | 3 | 44,100 | 1 | 64 kbps | 287 ms |
-| `controls/mp3/tone-22k-stereo.mp3` | MPEG-2 | 3 | 22,050 | 2 | 32 kbps | 314 ms |
+## Supplemental numeric evidence
 
-TagLib reads headers and does not decode audio. Neither control has a
-Xing/VBRI header, so TagLib takes the duration from stream size and the first
-frame's bitrate: 2,298 bytes at 64 kbps is 287 ms, and 1,254 bytes at 32 kbps
-is 314 ms. The frame walk in `controls/mp3/check_controls.py` gives
-11 × 1,152 / 44,100 = 287 ms and 12 × 576 / 22,050 = 314 ms.
+These paths lack a positive primary metric. Their figures are reported separately and are not compared numerically with the table above.
 
-## Leads
+| Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
+| ---: | --- | --- | --- | ---: | --- | --- |
+| 1 | [vlc](https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html) | 3.0.24 | [Debian source installed count](https://sources.debian.org/src/vlc/) | 68,409 | ID3v2 title and recognized MP3 audio track from valid local tagged MP3 | VLC media parser with bundled TagLib and MPEG audio plugins |
 
-Six Homebrew queries returned 31 hits and 25 distinct formulae. The
-[leads](leads.json) record each one. None besides TagLib is a verified entry.
-
-- mpg123 (12,256), lame (6,992), mad (1,145) and libmp3splt (102) are C
-  libraries. libmpg123 is verified in the C plain MP3 cell; the others are
-  listed there.
-- mp3val, mp3check, mp3blaster, ncmdump and mp3fs are C++ programs with no
-  documented library, byte or stream API. mp3unicode is a tag-only tool.
-- The other hits are excluded: command-line tools without a library input API,
-  tag tools, encoders, and non-C++ or non-parser packages.
-
-This one-entry pilot is neither a top-ten ranking nor evidence that only one
-C++ frame parser exists; header-only libraries and vcpkg/Conan were not
-searched. The [cell record](cell.json) gives the remaining uncertainty and the
-[standard-library finding](standard.json).
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

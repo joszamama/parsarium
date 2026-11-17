@@ -1,135 +1,20 @@
 [
   {
-    "name": "javacv",
-    "coordinate": "org.bytedeco:javacv",
-    "status": "excluded_native_wrapper",
-    "version_seen": "1.5.14",
-    "summed_direct_dependent_count": 315,
-    "max_release_direct_dependent_count": 69,
-    "default_release_direct_dependent_count": 4,
-    "reason": "FFmpegFrameGrabber is a JNI wrapper; MP3 frame parsing and decoding run in native FFmpeg (libavformat/libavcodec), so there are no Java parser source lines for JaCoCo. The C/FFmpeg family belongs to a native cell. Recorded as FFmpeg family in data/java/mp3_id3v2/parsers.json.",
-    "source": "https://central.sonatype.com/artifact/org.bytedeco/javacv"
-  },
-  {
-    "name": "ffmpeg",
-    "coordinate": "org.bytedeco:ffmpeg",
-    "status": "excluded_native_wrapper",
-    "version_seen": "8.1.2-1.5.14",
-    "summed_direct_dependent_count": 215,
-    "max_release_direct_dependent_count": 76,
-    "default_release_direct_dependent_count": 9,
-    "reason": "JavaCPP binding to the same native FFmpeg demuxer and decoder as javacv; no Java parser source. Not run.",
-    "source": "https://central.sonatype.com/artifact/org.bytedeco/ffmpeg"
-  },
-  {
-    "name": "jave-core",
-    "coordinate": "ws.schild:jave-core",
-    "status": "excluded_native_wrapper",
-    "version_seen": "4.2.0",
-    "summed_direct_dependent_count": 52,
-    "max_release_direct_dependent_count": 9,
-    "default_release_direct_dependent_count": 2,
-    "reason": "Runs a bundled ffmpeg executable and parses its text output; parser is native FFmpeg. Not run.",
-    "source": "https://central.sonatype.com/artifact/ws.schild/jave-core"
-  },
-  {
-    "name": "jlayer",
-    "coordinate": "com.badlogicgames.jlayer:jlayer",
-    "status": "unresolved_shared_family",
-    "version_seen": "1.0.2-gdx",
-    "summed_direct_dependent_count": 30,
-    "max_release_direct_dependent_count": 26,
-    "default_release_direct_dependent_count": 4,
-    "reason": "libGDX repackaging of JLayer; same decoder family as javazoom:jlayer. Not run.",
-    "source": "https://central.sonatype.com/artifact/com.badlogicgames.jlayer/jlayer"
-  },
-  {
-    "name": "jlayer",
-    "coordinate": "com.googlecode.soundlibs:jlayer",
-    "status": "unresolved_shared_family",
-    "version_seen": "1.0.1.4",
-    "summed_direct_dependent_count": 28,
-    "max_release_direct_dependent_count": 14,
-    "default_release_direct_dependent_count": 14,
-    "reason": "Maintained fork of javazoom JLayer; same decoder family as javazoom:jlayer. Not run.",
-    "source": "https://central.sonatype.com/artifact/com.googlecode.soundlibs/jlayer"
-  },
-  {
-    "name": "korau-mp3",
-    "coordinate": "com.soywiz:korau-mp3",
-    "status": "unresolved",
-    "version_seen": "0.19.1",
-    "summed_direct_dependent_count": 25,
-    "max_release_direct_dependent_count": 2,
-    "default_release_direct_dependent_count": 2,
-    "reason": "Kotlin korau MP3 decoder module published to Maven (last release 0.19.1); decoder lineage not inspected. Control not run.",
-    "source": "https://central.sonatype.com/artifact/com.soywiz/korau-mp3"
-  },
-  {
-    "name": "javamp3",
-    "coordinate": "fr.delthas:javamp3",
-    "status": "excluded_valid_control_crash",
-    "version_seen": "1.0.1",
-    "summed_direct_dependent_count": 4,
-    "max_release_direct_dependent_count": 4,
-    "default_release_direct_dependent_count": 4,
-    "reason": "MIT-licensed pure-Java Sound(BufferedInputStream) decoder 1.0.1 has no JLayer runtime dependency. In the pinned Docker valid-control probe it decodes the 44.1 kHz mono control to the oracle's 12,672 samples, but Sound construction on the valid 22.05 kHz stereo control throws ArrayIndexOutOfBoundsException at Decoder.samples_III(Decoder.java:773). It cannot meet the two-control verification gate; no JaCoCo or AFL claim is made.",
-    "source": "https://github.com/delthas/JavaMP3",
-    "probe": "data/java/mp3/probes/javamp3/result.json"
-  },
-  {
-    "name": "jaffree",
-    "coordinate": "com.github.kokorin.jaffree:jaffree",
-    "status": "excluded_native_wrapper",
-    "version_seen": "2024.08.29",
-    "summed_direct_dependent_count": 3,
-    "max_release_direct_dependent_count": 2,
-    "default_release_direct_dependent_count": 2,
-    "reason": "Drives an external ffprobe/ffmpeg process; parser is native FFmpeg. Not run.",
-    "source": "https://central.sonatype.com/artifact/com.github.kokorin.jaffree/jaffree"
-  },
-  {
-    "name": "basicplayer",
-    "coordinate": "com.googlecode.soundlibs:basicplayer",
+    "name": "metadata-extractor",
     "status": "excluded",
-    "version_seen": "3.0.0.0",
-    "summed_direct_dependent_count": 0,
-    "max_release_direct_dependent_count": 0,
-    "default_release_direct_dependent_count": 0,
-    "reason": "Player UI over mp3spi/JLayer; no parser of its own; zero direct dependents.",
-    "source": "https://central.sonatype.com/artifact/com.googlecode.soundlibs/basicplayer"
+    "source": "https://repo.maven.apache.org/maven2/com/drewnoakes/metadata-extractor/2.19.0/metadata-extractor-2.19.0.jar",
+    "reason": "Mp3MetadataReader.readMetadata(File) was run on the valid ID3v2.3 MP3 control. It returned an MP3 directory containing only the error 'MPEG-2.5 not supported' and no frame fields, so this release did not demonstrate the required format-aware result on this control."
   },
   {
-    "name": "jlayer",
-    "coordinate": "dev.mccue:jlayer",
-    "status": "unresolved_shared_family",
-    "version_seen": "2024.04.19",
-    "summed_direct_dependent_count": 0,
-    "max_release_direct_dependent_count": 0,
-    "default_release_direct_dependent_count": 0,
-    "reason": "Modularized JLayer repackaging; zero deps.dev direct dependents. Same JLayer family. Not run.",
-    "source": "https://central.sonatype.com/artifact/dev.mccue/jlayer"
+    "name": "org.tallison:metadata-extractor",
+    "status": "unresolved",
+    "source": "https://central.sonatype.com/artifact/org.tallison/metadata-extractor/2.17.1.0",
+    "reason": "Fork of metadata-extractor; the parent release failed this control, and the fork's local MP3 result has not been tested."
   },
   {
-    "name": "mp3spi",
-    "coordinate": "dev.mccue:mp3spi",
-    "status": "unresolved_shared_family",
-    "version_seen": "2024.04.19",
-    "summed_direct_dependent_count": 0,
-    "max_release_direct_dependent_count": 0,
-    "default_release_direct_dependent_count": 0,
-    "reason": "Modularized MP3SPI repackaging over dev.mccue:jlayer; zero direct dependents. Same JLayer family. Not run.",
-    "source": "https://central.sonatype.com/artifact/dev.mccue/mp3spi"
-  },
-  {
-    "name": "mp3-wav",
-    "coordinate": "com.sipgate:mp3-wav",
-    "status": "unresolved_no_primary_metric",
-    "version_seen": "1.0.4",
-    "summed_direct_dependent_count": 0,
-    "max_release_direct_dependent_count": 0,
-    "default_release_direct_dependent_count": 0,
-    "reason": "MP3-to-WAV converter; zero direct dependents; decoder backend not inspected. Not run.",
-    "source": "https://central.sonatype.com/artifact/com.sipgate/mp3-wav"
+    "name": "com.groupdocs:groupdocs-metadata",
+    "status": "excluded",
+    "source": "https://central.sonatype.com/artifact/com.groupdocs/groupdocs-metadata/18.4",
+    "reason": "The release declares a proprietary GroupDocs license, so it fails the open-source eligibility rule despite advertising MP3 and ID3 support."
   }
 ]

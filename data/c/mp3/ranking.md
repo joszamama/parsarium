@@ -1,49 +1,29 @@
-# C plain MP3 parser pilot
+# C × MP3 with ID3v2: selected parsers
 
-This pilot has two verified third-party paths from independent decoder
-families. [`mpg123`](../../../projects/mp3/c/mpg123/README.md) 1.33.7 decoded
-both untagged MPEG Layer III controls from memory through the libmpg123 feed API
-(`mpg123_open_feed`, `mpg123_feed`, `mpg123_decode_frame`).
-[`libmad`](../../../projects/mp3/c/libmad/README.md) 0.16.5 (Homebrew formula
-`mad`) decoded the same controls through `mad_stream_buffer`,
-`mad_frame_decode` and `mad_synth_frame`, with the 8-byte `MAD_BUFFER_GUARD`
-zero padding its frame decoder requires and no recoverable errors.
-
-Homebrew install-on-request counts come from the
-[saved search snapshot](registry-snapshot.json). They count installs of whole
-formulae (the mpg123 player is included); they are an adoption proxy, not a
-count of programs that call the decoder. The libmpg123 engine is also counted
-in the active C MP3-with-ID3v2 cell, and libmad is the decoder behind its SoX
-path; these are separate plain-frame paths.
+10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
-Homebrew install-on-request count (365 days, 2025-11-17 to 2026-11-17).
+Homebrew install-on-request count over 365 days.
 
 | Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
-| 1 | [mpg123](https://www.mpg123.de/api/group__mpg123__input.shtml) | 1.33.7 | 12,256 | Every Layer III frame fed from memory and decoded: sample rate, channels, layer, frames, decoded samples | libmpg123 MPEG audio decoder |
-| 2 | [libmad](https://codeberg.org/tenacityteam/libmad/src/tag/0.16.5/include/mad.h.in) (`mad`) | 0.16.5 | 1,145 | Every Layer III frame buffered from memory, decoded and synthesized: sample rate, channels, layer, frames, decoded samples, bitrate range, recoverable errors, consumed bytes | libmad MPEG audio decoder |
+| 1 | [ffmpeg](https://ffmpeg.org/doxygen/trunk/group__lavf__decoding.html) | 9.0.2 | 1,763,198 | ID3v2 title and identified MP3 audio stream | FFmpeg libavformat MP3 demuxer and ID3v2 metadata reader |
+| 2 | [mpv](https://mpv.io/manual/stable/) | 0.42.0 | 91,258 | ID3v2 title, MP3 audio track codec and duration from local tagged file | libmpv local media frontend over FFmpeg libavformat and libavcodec |
+| 3 | [gstreamer](https://gstreamer.freedesktop.org/documentation/pbutils/gstdiscoverer.html) | 1.28.9 | 44,909 | ID3v2 title plus one parsed MPEG audio stream with sample rate and channels | GStreamer id3demux and mpegaudioparse plugins via GstDiscoverer |
+| 4 | [sox](https://sourceforge.net/p/sox/code/ci/master/tree/src/example0.c) | 14.4.2 | 28,127 | MP3 audio parsing and one decoded sample from a valid ID3v2-tagged input; ID3v2 text is not exposed | libsox MP3 handler over libmad decoder |
+| 5 | [sdl_mixer](https://wiki.libsdl.org/SDL2_mixer/Mix_LoadMUS) | 2.8.2 | 15,365 | ID3v2 title and artist plus a 1-second MP3 music duration | SDL2_mixer ID3v2 tag reader and mpg123 MP3 decoder |
+| 6 | [mpg123](https://www.mpg123.org/api/group__mpg123__metadata.shtml) | 1.33.7 | 12,297 | ID3v2 title/version after scanning valid MP3 audio | libmpg123 MPEG audio and ID3v2 parser |
+| 7 | [libsndfile](https://libsndfile.github.io/libsndfile/api.html) | 1.2.2 | 9,161 | ID3v2 title, MPEG Layer III sample rate/channels/frame count, and one decoded audio frame | libsndfile MPEG frontend over libmpg123 decoder and ID3v2 reader |
+| 8 | [lame](https://github.com/lameproject/lame/blob/master/include/lame.h) | 4.0 | 6,924 | MP3 frame header and 576 decoded PCM samples from ID3v2-tagged local bytes; tag text is not exposed | LAME HIP decoder interface over libmpg123 |
+| 9 | [taglib](https://taglib.org/api/) | 2.3.2 | 4,111 | ID3v2 title and artist from a valid tagged MP3 | TagLib ID3v2 parser |
 
-## Leads
+## Supplemental numeric evidence
 
-Seven Homebrew queries returned 28 hits and 24 distinct formulae. The
-[leads](leads.json) record each one, plus two header-only decoders outside
-Homebrew. None of these is a verified entry.
+These paths lack a positive primary metric. Their figures are reported separately and are not compared numerically with the table above.
 
-- lame 4.0 (6,992): HIP decoder built over libmpg123; same family, not run.
-- libmp3splt 0.9.2 (102): decodes through libmad, so it shares the verified
-  libmad family; not run.
-- minimp3 and dr_mp3: not Homebrew formulae, so they have no primary value.
-  GitHub stars (lieff/minimp3 1,988; mackron/dr_libs 1,901, shared by every
-  dr_libs header) are supplemental and not compared with the table. dr_mp3 says
-  it is based on minimp3. Both passed local technical checks (both controls,
-  parser-source coverage, stable AFL++ feedback; dr_mp3 PCM is byte-identical
-  to the Rust minimp3 receipt), but PROTOCOL.md allows a star fallback only in
-  PLY cells, so neither is selected.
-- 20 hits are excluded: command-line tools without a library input API, tag
-  tools, encoders, and non-C or non-decoder packages.
+| Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
+| ---: | --- | --- | --- | ---: | --- | --- |
+| 1 | [vlc](https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html) | 3.0.24 | [Debian source installed count](https://sources.debian.org/src/vlc/) | 68,409 | ID3v2 title and recognized MP3 audio track from valid local tagged MP3 | VLC media parser with bundled TagLib and MPEG audio plugins |
 
-This two-entry pilot is neither a top-ten ranking nor evidence that only two C
-decoders exist. The [cell record](cell.json) gives the remaining uncertainty and
-the [standard-library finding](standard.json).
+The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

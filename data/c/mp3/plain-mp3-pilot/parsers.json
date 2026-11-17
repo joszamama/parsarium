@@ -1,0 +1,62 @@
+[
+  {
+    "name": "mpg123",
+    "version": "1.33.7",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://www.mpg123.de/download/mpg123-1.33.7.tar.bz2",
+    "input_api": "mpg123_open_feed(mh); mpg123_feed(mh, local bytes, size); mpg123_decode_frame() until MPG123_NEED_MORE; mpg123_getformat(); mpg123_info2()",
+    "documentation": "https://www.mpg123.de/api/group__mpg123__input.shtml",
+    "source": "https://www.mpg123.de/download/mpg123-1.33.7.tar.bz2",
+    "project": "projects/mp3/c/mpg123/verification.json",
+    "scope": "Every MPEG Layer III frame of an untagged stream fed from memory and decoded: sample rate, channels, layer, frame count, decoded samples per channel",
+    "family": "libmpg123 MPEG audio decoder",
+    "family_note": "Same libmpg123 engine as the mp3_id3v2/c mpg123 entry and the decoder behind libsndfile, SDL2_mixer and LAME HIP paths there; this record covers plain frame decoding through the feed API, not ID3v2.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "layer": 3,
+      "frames": 11,
+      "decoded_samples": 12672
+    },
+    "metric": {
+      "name": "Homebrew install-on-request count (365 days)",
+      "value": 12256,
+      "source": "data/c/mp3/registry-snapshot.json"
+    }
+  },
+  {
+    "name": "libmad",
+    "version": "0.16.5",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://codeberg.org/tenacityteam/libmad/releases/download/0.16.5/libmad-0.16.5.tar.gz (COPYING, COPYRIGHT)",
+    "input_api": "mad_stream_buffer(stream, local bytes followed by MAD_BUFFER_GUARD zero bytes, length); mad_frame_decode() until MAD_ERROR_BUFLEN; mad_synth_frame(); MAD_RECOVERABLE() error classification",
+    "documentation": "https://codeberg.org/tenacityteam/libmad/src/tag/0.16.5/include/mad.h.in",
+    "documentation_note": "libmad has no separate API manual; the public header declares the stream/frame/synth calls, error codes and MAD_BUFFER_GUARD, and examples/minimad.c shows mad_stream_buffer over an in-memory file.",
+    "source": "https://codeberg.org/tenacityteam/libmad/releases/download/0.16.5/libmad-0.16.5.tar.gz",
+    "project": "projects/mp3/c/libmad/verification.json",
+    "homebrew_formula": "mad",
+    "scope": "Every MPEG Layer III frame of an untagged stream buffered from memory, decoded and synthesized: sample rate, channels, layer, frame count, decoded samples per channel, bitrate range, recoverable errors, consumed bytes",
+    "family": "libmad MPEG audio decoder",
+    "family_note": "Independent fixed-point decoder, not libmpg123. The same libmad engine is linked by the SoX path under mp3_id3v2/c and by libmp3splt and mpg321 leads here.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "layer": 3,
+      "frames": 11,
+      "decoded_samples": 12672,
+      "bit_rate_min": 64000,
+      "bit_rate_max": 64000,
+      "recoverable_errors": 0,
+      "consumed_bytes": 2298,
+      "input_bytes": 2298
+    },
+    "metric": {
+      "name": "Homebrew install-on-request count (365 days)",
+      "value": 1145,
+      "source": "data/c/mp3/registry-snapshot.json",
+      "note": "Aggregate 365-day install-on-request endpoint, window 2025-11-17 to 2026-11-17, rechecked 2026-11-17 at 1,145; the per-formula API splits it into mad 1,141 and mad --HEAD 4. It counts installs of the formula, not programs calling the decoder API."
+    }
+  }
+]

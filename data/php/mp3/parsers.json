@@ -3,115 +3,199 @@
     "name": "james-heinrich/getid3",
     "version": "v1.9.28",
     "license": "GPL-1.0-or-later OR LGPL-3.0-only OR MPL-2.0",
-    "license_evidence": "https://github.com/JamesHeinrich/getID3/blob/v1.9.28/license.txt",
-    "input_api": "(new getID3())->analyze(local temporary file path) -> ['mpeg']['audio'] frame-header fields, ['playtime_seconds'], ['avdataoffset'..'avdataend']",
-    "documentation": "https://github.com/JamesHeinrich/getID3/blob/v1.9.28/README.md",
-    "source": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd",
-    "scope": "MPEG audio frame header of an untagged stream (version, layer, sample rate, channels, channel mode, bitrate, frame length) with frame-sync validation, and CBR duration from audio-data bytes",
-    "family": "getID3 native MP3 frame parser (module.audio.mp3.php)",
-    "family_note": "Same getID3 code base as the mp3_id3v2/php james-heinrich/getid3 entry (and the getID3 wrappers there); this record covers the MPEG frame-header module, not module.tag.id3v2.php.",
-    "control": "controls/mp3/tone-44k-mono.mp3",
+    "license_evidence": "https://github.com/JamesHeinrich/getID3/blob/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd/license.txt",
+    "documentation": "https://github.com/JamesHeinrich/getID3/blob/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd/README.md",
+    "input_api": "getID3::analyze(local tagged MP3 path); ID3v2 title/artist/album and major version",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {
-      "mpeg_version": "1",
-      "layer": 3,
-      "sample_rate": 44100,
-      "channels": 1,
-      "channelmode": "mono",
-      "bitrate": 64000,
-      "bitrate_mode": "cbr",
-      "framelength": 208,
-      "playtime_seconds": 0.28725,
-      "audio_data_bytes": 2298,
-      "tag_formats": []
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "id3v2_major": 3
     },
-    "metric": {
-      "name": "Packagist total downloads",
-      "value": 15766894,
-      "source": "data/php/mp3/registry-snapshot.json"
-    },
-    "project": "projects/mp3/php/getid3"
+    "scope": "ID3v2.3 title, artist, album, and major version",
+    "family": "getID3 native MP3 and ID3v2 parser",
+    "family_note": "Multi-format getID3 package; this adapter uses its own ID3v2 and MPEG audio parsers."
   },
   {
     "name": "wapmorgan/mp3info",
     "version": "0.1.1",
     "license": "LGPL-3.0",
-    "license_evidence": "https://github.com/wapmorgan/Mp3Info/blob/e532c2e1997874f9c672c7810ce90ef15004ef94/LICENSE (GNU LGPL version 3; composer.json declares LGPL-3.0)",
-    "input_api": "new wapmorgan\\Mp3Info\\Mp3Info(local temporary file path) -> codecVersion, layerVersion, sampleRate, channel, bitRate, isVbr, audioSize, _framesCount, duration",
+    "license_evidence": "https://github.com/wapmorgan/Mp3Info/blob/e532c2e1997874f9c672c7810ce90ef15004ef94/LICENSE",
     "documentation": "https://github.com/wapmorgan/Mp3Info/blob/e532c2e1997874f9c672c7810ce90ef15004ef94/README.md",
-    "documentation_note": "The README documents new Mp3Info($filename) and the codecVersion, layerVersion, audioSize, duration, bitRate, sampleRate, isVbr and channel properties; _framesCount is a public property documented only in the class source ('Number of audio frames in file').",
-    "source": "https://api.github.com/repos/wapmorgan/Mp3Info/zipball/e532c2e1997874f9c672c7810ce90ef15004ef94",
-    "release_evidence": "Packagist p2 metadata lists 0.1.1 (2025-04-01, reference e532c2e1997874f9c672c7810ce90ef15004ef94) as the newest tagged release; checked 2026-11-17.",
-    "scope": "First two MPEG audio frame headers of an untagged MPEG-1 Layer III CBR stream (version, layer, sample rate, channel mode, bitrate) with a frame-count estimate from audio bytes and computed frame length; duration is (frames - 1) x 1152 / sample rate",
-    "family": "Mp3Info native PHP MPEG frame-header reader (src/Mp3Info.php)",
-    "family_note": "Independent of getID3: the pinned package is one class (src/Mp3Info.php) with its own bitrate and sample-rate tables, no getID3 code or dependency, and a different frame-length and duration method. The same package is counted for ID3v2 scope in mp3_id3v2/php; wapmorgan/media-file wraps it.",
-    "control": "controls/mp3/tone-44k-mono.mp3",
+    "input_api": "Mp3Info(local tagged MP3 path, parseTags=true); tags2 TIT2/TPE1/TALB and ID3v2 major version",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
     "expected_output": {
-      "mpeg_version": 1,
-      "layer": 3,
-      "sample_rate": 44100,
-      "channel": "mono",
-      "bitrate": 64000,
-      "is_vbr": false,
-      "audio_size": 2298,
-      "frames": 11,
-      "duration": 0.26122
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "id3v2_major": 3
     },
-    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
-    "differential_expected_output": {
-      "mpeg_version": 2,
-      "layer": 2,
-      "sample_rate": 24000,
-      "channel": "mono",
-      "bitrate": 96000,
-      "is_vbr": false,
-      "audio_size": 1254,
-      "frames": 3,
-      "duration": 0.096
+    "scope": "ID3v2.3 title, artist, album, and major version",
+    "family": "Mp3Info native MP3 and ID3v2 parser",
+    "family_note": "Own ID3v2.3 and MPEG audio parser; the pinned release README states that ID3v2.2 and v2.4 are unsupported."
+  },
+  {
+    "name": "christophwurst/id3parser",
+    "version": "v0.1.4",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://github.com/ChristophWurst/ID3Parser/blob/050c9d81ea89b0cf53e23a27efc4e1840f9ab260/LICENSE",
+    "documentation": "https://github.com/ChristophWurst/ID3Parser/blob/050c9d81ea89b0cf53e23a27efc4e1840f9ab260/README.md",
+    "input_api": "ID3Parser::analyze(local tagged MP3 path); ID3v2 comments title/artist/album and major version",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "id3v2_major": 3
     },
-    "independent_oracle": "controls/mp3/check_controls.py walk()",
-    "oracle_comparison": {
-      "controls/mp3/tone-44k-mono.mp3": {
-        "oracle": {
-          "mpeg_version": 1,
-          "layer": 3,
-          "sample_rate": 44100,
-          "channels": 1,
-          "bitrate": 64000,
-          "frames": 11,
-          "frame_bytes": 2298,
-          "samples_per_frame": 1152,
-          "samples": 12672,
-          "duration": 0.28735
-        },
-        "header_fields_match": true,
-        "frames_match": true,
-        "audio_bytes_match": true,
-        "duration_note": "Mp3Info reports (11 - 1) x 1152 / 44100 = 0.26122 s; the oracle's 11 x 1152 samples are 0.28735 s. The one-frame difference is Mp3Info's documented formula, not a parsing error."
-      },
-      "controls/mp3/tone-22k-stereo.mp3": {
-        "oracle": {
-          "mpeg_version": 2,
-          "layer": 3,
-          "sample_rate": 22050,
-          "channels": 2,
-          "bitrate": 32000,
-          "frames": 12,
-          "frame_bytes": 1254,
-          "samples_per_frame": 576,
-          "samples": 6912,
-          "duration": 0.31347
-        },
-        "header_fields_match": false,
-        "frames_match": false,
-        "audio_bytes_match": true,
-        "mismatch": "The first header is read correctly, but the next jump uses floor(144 x 32000 / 22050) = 208 bytes (MPEG-1 coefficient; the MPEG-2 frame is 104 or 105 bytes). The sync scan then steps two bytes at a time from 208, misses the real frame at 209, and accepts the bytes ffeda7ff at offset 236 inside audio data. The last-read false header becomes the result: MPEG-2 Layer II, 24 kHz mono, 96 kbit/s, 3 frames, 0.096 s."
-      }
+    "scope": "ID3v2.3 title, artist, album, and major version",
+    "family": "getID3-derived ID3 tag parser",
+    "family_note": "This package vendors a stripped-down getID3 ID3 implementation; it is a separate package path, not an independent parser family. Packagist marks it abandoned in favor of nextcloud/id3parser."
+  },
+  {
+    "name": "owen-oj/laravel-getid3",
+    "version": "v2.6.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Owen-oj/laravel-getid3/blob/6b89fc96b3dd2536fb2e53f8fee99ee6b76f9fd1/LICENSE",
+    "documentation": "https://github.com/Owen-oj/laravel-getid3/blob/6b89fc96b3dd2536fb2e53f8fee99ee6b76f9fd1/readme.md",
+    "input_api": "GetId3(local tagged MP3 path); getTitle/getArtist/getAlbum and extractInfo ID3v2 major version",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "id3v2_major": 3
     },
-    "project": "projects/mp3/php/wapmorgan_mp3info",
-    "metric": {
-      "name": "Packagist total downloads",
-      "value": 1512916,
-      "source": "data/php/mp3/registry-snapshot.json"
-    }
+    "scope": "ID3v2.3 title, artist, album, and major version",
+    "family": "getID3 native MP3 and ID3v2 parser",
+    "family_note": "Laravel wrapper delegates to the same pinned james-heinrich/getid3 package in this lock; a separate package path, not an independent parser family."
+  },
+  {
+    "name": "wapmorgan/media-file",
+    "version": "0.1.4",
+    "license": "MIT",
+    "license_evidence": "https://github.com/wapmorgan/MediaFile/blob/263f773696e02d173fb9636c9a8111ac84032292/LICENSE",
+    "documentation": "https://github.com/wapmorgan/MediaFile/blob/263f773696e02d173fb9636c9a8111ac84032292/README.md",
+    "input_api": "MediaFile::open(local tagged MP3 path); isAudio and getAudio sample rate/bit rate",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/legacy/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "is_audio": true,
+      "sample_rate": 8000,
+      "bit_rate": 32000
+    },
+    "scope": "MP3 audio type, 8 kHz sample rate, and 32 kb/s bit rate on an ID3v2.3-tagged control",
+    "family": "Mp3Info native MP3 and ID3v2 parser",
+    "family_note": "MediaFile wraps the pinned wapmorgan/mp3info parser in its isolated lock. This adapter exposes audio properties, not the tag text; it is a separate package path, not an independent parser family."
+  },
+  {
+    "name": "kiwilan/php-audio",
+    "version": "4.0.02",
+    "license": "MIT",
+    "license_evidence": "https://github.com/kiwilan/php-audio/blob/684002b34e5db3fa2935d6b9ba8cba0ebd81b1a7/LICENSE.md",
+    "documentation": "https://github.com/kiwilan/php-audio/blob/684002b34e5db3fa2935d6b9ba8cba0ebd81b1a7/README.md",
+    "input_api": "Audio::read(local tagged MP3 path); getTitle/getArtist/getAlbum",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/kiwilan/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    },
+    "scope": "ID3v2.3 title, artist, and album",
+    "family": "getID3 native MP3 and ID3v2 parser",
+    "family_note": "Audio delegates to james-heinrich/getid3 v1.9.22 in its isolated lock; this is a distinct wrapper package path but shares the getID3 parser family."
+  },
+  {
+    "name": "debach/zend-mp3",
+    "version": "1.8.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/debach/zend-mp3/blob/17b523ad57f283ddf3a116bc0eff22cb9d1b4b27/composer.json",
+    "documentation": "https://github.com/debach/zend-mp3/blob/17b523ad57f283ddf3a116bc0eff22cb9d1b4b27/README.md",
+    "input_api": "Zend_Media_Id3v2(local tagged MP3 path); getFramesByIdentifier(TIT2/TPE1/TALB) and frame getText()",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/zend_mp3/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    },
+    "scope": "ID3v2.3 title, artist, and album",
+    "family": "Sven Vollbehr PHP Reader ID3 family",
+    "family_note": "Composer fork of Sven Vollbehr PHP Reader; its ID3 parser shares source lineage with vollbehr/php-reader. A distinct package path, not an independent parser family."
+  },
+  {
+    "name": "mhor/php-mediainfo",
+    "version": "5.8.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/mhor/php-mediainfo/blob/a0be4ef4dc1f56292793ad31c2b3efc75bfdbf05/LICENSE",
+    "documentation": "https://github.com/mhor/php-mediainfo/blob/a0be4ef4dc1f56292793ad31c2b3efc75bfdbf05/README.md",
+    "input_api": "MediaInfo::getInfo(local tagged MP3 path); getGeneral() title/performer/album",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/mediainfo/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags-long.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    },
+    "scope": "ID3v2.3 title, performer, and album on an 18-second MP3",
+    "family": "MediaInfoLib native MP3 and ID3 parser",
+    "family_note": "Composer wrapper invokes the external MediaInfo 26.10 CLI; this is a package path over the MediaInfoLib parser family. The longer valid control is needed for the backend to read sufficient audio bytes.",
+    "external_backend": "MediaInfo command-line 26.10 (Homebrew media-info formula)"
+  },
+  {
+    "name": "buggedcom/phpvideotoolkit",
+    "version": "2.2.5",
+    "license": "MIT",
+    "license_evidence": "https://github.com/buggedcom/phpvideotoolkit-v2/blob/383a5b2c0ee7f4de4efea9a9154bb693630bbe0f/LICENSE.md",
+    "documentation": "https://github.com/buggedcom/phpvideotoolkit-v2/blob/383a5b2c0ee7f4de4efea9a9154bb693630bbe0f/README.md",
+    "input_api": "PHPVideoToolkit\\MediaParser::getFileInformation(local tagged MP3 path); metadata title/artist/album and audio sample rate/codec",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/phptoolkit/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "sample_rate": 8000,
+      "codec": "mp3"
+    },
+    "scope": "ID3v2.3 text fields and MP3 audio codec/sample rate",
+    "family": "FFmpeg native MP3 and ID3 parser",
+    "family_note": "Composer package delegates to the local FFmpeg/FFprobe backend; separate PHP wrapper package path, not an independent parser family. Pinned source LICENSE.md offers MIT, while composer.json also lists GPL-3.0+.",
+    "external_backend": "FFmpeg/FFprobe 9.0.2 (installed CLI)"
+  },
+  {
+    "name": "indiehd/audio-manipulator",
+    "version": "v4.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/indiehd/audio-manipulator/blob/1e2f6d76030200c77cd727b40d3ea6166957f45d/LICENSE",
+    "documentation": "https://github.com/indiehd/audio-manipulator/blob/1e2f6d76030200c77cd727b40d3ea6166957f45d/src/MediaParsing/MediaParserInterface.php",
+    "input_api": "IndieHD\\AudioManipulator\\MediaParsing\\MediaParser::analyze(local tagged MP3 path); tags.id3v2 title/artist/album and ID3v2 major version",
+    "adapter": "adapters/php/mp3_id3v2/parse.php",
+    "composer_lock": "adapters/php/mp3_id3v2/indiehd/composer.lock",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "id3v2_major": 3
+    },
+    "scope": "ID3v2.3 title, artist, album, and major version",
+    "family": "getID3 native MP3 and ID3v2 parser",
+    "family_note": "Public MediaParserInterface specifies analyze(string $file), and implementation delegates to pinned james-heinrich/getid3 v1.9.23. Separate package path, same underlying getID3 parser family."
   }
 ]

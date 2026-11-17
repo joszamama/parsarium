@@ -1,6 +1,6 @@
 {
   "ecosystem": "C++",
-  "format": "MP3 (untagged MPEG audio Layer III)",
+  "format": "MP3 with ID3v2",
   "status": "none_documented_in_scoped_standard_library",
   "verified_apis": [],
   "no_api_findings": [
@@ -10,8 +10,8 @@
         "https://www.open-std.org/jtc1/sc22/WG21/",
         "https://eel.is/c++draft/library"
       ],
-      "finding": "The scoped standard library documents byte and stream I/O (<fstream>, <istream>, std::byte, <span>) but no MPEG audio frame-header parser or Layer III decoder. Generic reads return bytes without interpreting sync words, bitrate or sample-rate indices, side information or main data."
+      "finding": "The scoped standard library documents local byte and stream I/O but no MP3 audio frame or ID3v2 tag parser. Generic file reads do not interpret the tagged control."
     }
   ],
-  "limit": "This covers the documented ISO C++ standard library only. POSIX, platform media frameworks (AVFoundation, Media Foundation, GStreamer) and Boost were not inventoried as standard APIs; TagLib is a third-party package path. It matches the C++ finding in data/cpp/mp3_id3v2/standard.json."
+  "limit": "This finding covers the scoped language standard library; installed native media libraries are third-party package paths."
 }

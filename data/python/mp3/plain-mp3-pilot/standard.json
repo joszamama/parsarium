@@ -1,0 +1,15 @@
+{
+  "ecosystem": "Python",
+  "format": "MP3 (untagged MPEG audio Layer III)",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_scope": [
+    "https://docs.python.org/3.14/library/index.html",
+    "https://docs.python.org/3.14/library/mm.html",
+    "https://docs.python.org/3.14/library/wave.html",
+    "https://docs.python.org/3.14/library/io.html",
+    "https://docs.python.org/3.14/library/struct.html"
+  ],
+  "finding": "The CPython 3.14 library index lists only wave and colorsys under Multimedia Services. wave reads WAV only; io and struct return or unpack caller-chosen bytes without recognising MPEG frame sync, Layer III headers, bitrate or sample-rate tables. No standard-library MP3 parser or decoder is documented.",
+  "limit": "Scoped to the official CPython 3.14 documentation index, checked 2026-11-17. It matches the CPython 3.13 finding in data/python/mp3_id3v2/standard.json; aifc and sunau were removed in 3.13 and never handled MP3."
+}
