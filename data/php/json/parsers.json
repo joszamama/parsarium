@@ -55,6 +55,61 @@
     "not_verified": "Only default flags on one valid UTF-8 object control were run. ALLOW_COMMENTS, duplicate-key flags, PARSE_TO_ASSOC, VALIDATE_UTF8_ENCODING, byte-order-mark input (rejected by failOnBOM), large integers, depth limits and malformed input are unverified."
   },
   {
+    "name": "laminas/laminas-json",
+    "version": "3.8.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/laminas/laminas-json/blob/5448d357c4520d79f5caf4d46a1fe03ec8b8e4b0/LICENSE.md",
+    "documentation": "https://docs.laminas.dev/laminas-json/advanced/#internal-encoderdecoder",
+    "source": "https://github.com/laminas/laminas-json/tree/5448d357c4520d79f5caf4d46a1fe03ec8b8e4b0",
+    "input_api": "Set Laminas\\Json\\Json::$useBuiltinEncoderDecoder = true, then Json::decode(string $input) over local JSON text; forces package Decoder instead of ext/json",
+    "adapter": "projects/json/php/laminas_json/harness.php",
+    "composer_lock": "projects/json/php/laminas_json/composer.lock",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "scope": "JSON text decoded by Laminas own PHP Decoder when static flag forces the internal implementation",
+    "family": "Laminas Json Decoder pure-PHP parser (Zend JSON lineage)",
+    "family_note": "The default Json::decode route delegates to PHP ext/json. The documented useBuiltinEncoderDecoder flag is set true before each call so the own Decoder.php parse path runs; Xdebug source coverage requires Decoder.php. Package is abandoned as documented by its maintainers; cumulative downloads reflect historical adoption. Zendframework/zend-json shares the predecessor lineage and is not counted as an independent family.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 35102503,
+      "source": "https://packagist.org/packages/laminas/laminas-json",
+      "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+      "snapshot": "data/php/json/registry-snapshot.json"
+    },
+    "project": "projects/json/php/laminas_json",
+    "not_verified": "Two valid nested object/array controls were run with exact structural summaries. Expression extensions, duplicate keys, large inputs, scalar roots and malformed input remain unverified."
+  },
+  {
     "name": "halaxa/json-machine",
     "version": "1.2.6",
     "license": "Apache-2.0",

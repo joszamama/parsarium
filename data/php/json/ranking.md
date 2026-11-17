@@ -1,6 +1,6 @@
 # PHP × JSON: selected parsers (pilot)
 
-2 control-verified third-party paths selected. The ceiling is ten; this pilot does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+3 control-verified third-party paths selected. The ceiling is ten; this pilot does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
 
 PHP code mostly parses JSON with the bundled `json_decode` (ext/json). The most downloaded Packagist JSON helpers wrap it, so they are excluded from the third-party ranking rather than counted as separate parsers.
 
@@ -11,9 +11,10 @@ Packagist total downloads, from the bounded search captured 2026-11-17 ([snapsho
 | Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [seld/jsonlint](https://packagist.org/packages/seld/jsonlint) | 1.12.2 | 252,371,311 | JSON text into stdClass/array/scalars | seld/jsonlint Lexer and LR table parser |
-| 2 | [halaxa/json-machine](https://packagist.org/packages/halaxa/json-machine) | 1.2.6 | 30,443,415 | Top-level object/array members; values decoded by ext/json | JSON Machine Lexer/Parser plus PHP ext/json |
+| 2 | [laminas/laminas-json](https://packagist.org/packages/laminas/laminas-json) | 3.8.0 | 35,102,503 | JSON text decoded with explicitly enabled own PHP Decoder | Laminas JSON Decoder (Zend lineage) |
+| 3 | [halaxa/json-machine](https://packagist.org/packages/halaxa/json-machine) | 1.2.6 | 30,443,415 | Top-level object/array members; values decoded by ext/json | JSON Machine Lexer/Parser plus PHP ext/json |
 
-Composer depends on seld/jsonlint, which inflates the download count. Composer calls `json_decode` first and uses `JsonParser` to report errors. JSON Machine has an independent streaming parser for member boundaries, but the selected decoder delegates each member value to PHP ext/json.
+Composer depends on seld/jsonlint, which inflates the download count. Composer calls `json_decode` first and uses `JsonParser` to report errors. Laminas is abandoned; its default API route calls ext/json, so this adapter explicitly enables its own PHP Decoder. JSON Machine has an independent streaming parser for member boundaries, but the selected decoder delegates each member value to PHP ext/json.
 
 ## Standard API (unranked)
 
@@ -27,7 +28,6 @@ Numeric leads from the same snapshot, not verified and not selected. JWT, JSON S
 
 | Lead | Version seen | Packagist downloads | Status | Note |
 | --- | --- | ---: | --- | --- |
-| [laminas/laminas-json](https://packagist.org/packages/laminas/laminas-json) | 3.8.0 | 35,102,503 | unresolved | Json::decode calls json_decode by default; a separate pure-PHP Laminas\Json\Decoder runs only when Json::$useBuiltinEncoderDecoder is true. Packagist marks the package abandoned. That own-decoder path and control were not run in this pilot. |
 | [colinodell/json5](https://packagist.org/packages/colinodell/json5) | v3.0.0 | 32,796,867 | unresolved | JSON5 superset decoder Json5Decoder::decode(string). Project documentation describes trying json_decode first for performance, so valid RFC 8259 input may route to ext/json; own-parser path not run. |
 | [zendframework/zend-json](https://packagist.org/packages/zendframework/zend-json) | 3.1.2 | 24,719,945 | unresolved | Abandoned predecessor of laminas/laminas-json; same decoder lineage. Not run. |
 | [salsify/json-streaming-parser](https://packagist.org/packages/salsify/json-streaming-parser) | v8.3.1 | 7,715,575 | unresolved | Own pure-PHP streaming Parser over a stream resource with a listener API; control not run in this pilot. |
