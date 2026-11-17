@@ -1,7 +1,8 @@
 """Bounded, one-shot source coverage replay of saved AFL++ queue files.
 
 This module never invokes afl-fuzz. It uses the verified control image, not the
-AFL feedback image, for LLVM, Python trace, PHP Xdebug, or V8 parser lines.
+AFL feedback image, for LLVM, Go coverprofile, JaCoCo, Python trace, PHP
+Xdebug, or V8 parser lines.
 """
 
 from __future__ import annotations
@@ -17,6 +18,7 @@ import stat
 import subprocess
 import tempfile
 import uuid
+import xml.etree.ElementTree as ET
 
 from run_case import MAX_CASE_BYTES
 
@@ -570,6 +572,222 @@ def replay_go_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
         exported.write_text(json.dumps(coverage, sort_keys=True) + "\n")
         if exported.stat().st_size > MAX_EXPORT_BYTES:
             raise QueueCoverageError("aggregate Go source export exceeds size limit")
+        replay["coverage_sha256"] = digest(exported)
+        replay["coverage_bytes"] = exported.stat().st_size
+    return replay, coverage
+
+
+def java_control_commands(project: Path, manifest: dict) -> tuple[list[str], list[dict]]:
+    """Extract only literal JaCoCo commands already used by the verified control.
+
+    The JDK module-patch and custom harness variants need project-specific
+    replay, so this deliberately supports only the normal Java agent form.
+    No shell from the project is executed while reporting.
+    """
+    control_script = project / "run-control.sh"
+    if not control_script.is_file():
+        raise QueueCoverageError("project has no supported Java JaCoCo control script")
+    script = control_script.read_text().replace("\\\n", " ")
+    match = re.search(r"(?m)^java\s+(.+?)\s+GenericHarness\s+/input/control\b", script)
+    if not match:
+        raise QueueCoverageError("project has no supported Java GenericHarness command")
+    try:
+        args = shlex.split(match.group(1))
+    except ValueError as error:
+        raise QueueCoverageError("Java control command has invalid quoting") from error
+    agent = "-javaagent:/work/jacocoagent.jar=destfile=/coverage/jacoco.exec,append=false,includes="
+    if len(args) not in (3, 4) or not args[0].startswith(agent) or \
+            args[-2] != "-cp" or not args[-1]:
+        raise QueueCoverageError("project has no supported Java agent/classpath command")
+    if len(args) == 4 and args[1] != "-Dstdout.encoding=UTF-8":
+        raise QueueCoverageError("Java control uses extra VM options outside this replay")
+    if any(not path.startswith("/work/") or ".." in Path(path).parts
+           for path in args[-1].split(":")):
+        raise QueueCoverageError("Java classpath is not a literal /work path")
+    report_lines = re.findall(
+        r"(?m)^java -jar /work/jacococli\.jar report /coverage/jacoco\.exec\s+([^\n]+)",
+        script)
+    reports = []
+    for line in report_lines:
+        try:
+            tokens = shlex.split(line)
+        except ValueError as error:
+            raise QueueCoverageError("JaCoCo report command has invalid quoting") from error
+        if len(tokens) != 7 or tokens[0::2] != [
+                "--classfiles", "--sourcefiles", "--xml", "--quiet"]:
+            raise QueueCoverageError("JaCoCo report command has unsupported options")
+        classes, source_root, output = tokens[1], tokens[3], tokens[5]
+        if any(not path.startswith("/work/") or ".." in Path(path).parts
+               for path in (classes, source_root)) or \
+                not re.fullmatch(r"/coverage/jacoco(?:-[a-z]+)?\.xml", output):
+            raise QueueCoverageError("JaCoCo report command has dynamic or unsafe paths")
+        reports.append({"classfiles": classes, "sourcefiles": source_root,
+                        "xml": output})
+    if not reports:
+        raise QueueCoverageError("project has no supported JaCoCo source report")
+    prefixes = [manifest["coverage_subject_prefix"]]
+    if manifest.get("underlying_coverage_subject_prefix"):
+        prefixes.append(manifest["underlying_coverage_subject_prefix"])
+    if any(not isinstance(prefix, str) or not prefix.startswith("/work/") or
+           not any(prefix.rstrip("/") == report["sourcefiles"].rstrip("/") or
+                   prefix.startswith(report["sourcefiles"].rstrip("/") + "/")
+                   for report in reports) for prefix in prefixes):
+        raise QueueCoverageError("JaCoCo source roots do not cover manifest parser prefixes")
+    return args, reports
+
+
+def java_jacoco_lines(path: Path, source_root: str,
+                      prefixes: list[str]) -> dict[str, set[int]]:
+    """Read JaCoCo line instructions from one bounded source XML report."""
+    if path.stat().st_size > MAX_INTERPRETED_TRACE_BYTES:
+        raise QueueCoverageError("JaCoCo XML exceeds the per-input size limit")
+    try:
+        root = ET.parse(path).getroot()
+    except ET.ParseError as error:
+        raise QueueCoverageError("JaCoCo emitted invalid XML") from error
+    if root.tag != "report":
+        raise QueueCoverageError("JaCoCo XML is not a report")
+    files: dict[str, set[int]] = {}
+    for package in root.findall("package"):
+        package_name = package.get("name", "")
+        for source in package.findall("sourcefile"):
+            filename = f"{source_root.rstrip('/')}/{package_name}/{source.get('name', '')}"
+            if not any(filename.startswith(prefix) for prefix in prefixes):
+                continue
+            executed = set()
+            for line in source.findall("line"):
+                try:
+                    number, instructions = int(line.attrib["nr"]), int(line.attrib["ci"])
+                except (KeyError, ValueError) as error:
+                    raise QueueCoverageError("JaCoCo XML has invalid line counters") from error
+                if number < 1 or number > 10_000_000 or instructions < 0:
+                    raise QueueCoverageError("JaCoCo XML has out-of-range line counters")
+                if instructions > 0:
+                    executed.add(number)
+            if executed:
+                files.setdefault(filename, set()).update(executed)
+    return files
+
+
+def replay_java_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
+                      timeout: int) -> tuple[dict, dict | None]:
+    """Replay each saved input in the verified Java image and union JaCoCo lines."""
+    manifest = evidence["manifest"]
+    if evidence["identity"]["ecosystem"] != "java" or \
+            evidence["feedback"]["coverage_kind"] != "source_lines":
+        raise QueueCoverageError("Java source replay needs a Java source-line project")
+    if not 1 <= maximum <= MAX_QUEUE_SAMPLE or not 1 <= timeout <= 60:
+        raise QueueCoverageError("queue sample must be 1–128 and timeout 1–60 seconds")
+    vm_args, reports = java_control_commands(evidence["project"], manifest)
+    prefixes = [manifest["coverage_subject_prefix"]]
+    if manifest.get("underlying_coverage_subject_prefix"):
+        prefixes.append(manifest["underlying_coverage_subject_prefix"])
+    plan, _ = plan_for(run_dir, root, evidence)
+    total, selected = queue_files(run_dir, maximum)
+    if not selected:
+        raise QueueCoverageError("no saved AFL++ queue inputs exist yet")
+    image_id = evidence["receipt"].get("image_id")
+    inspect = subprocess.run(["docker", "image", "inspect", image_id, "--format",
+                              "{{.Id}} {{.Os}}/{{.Architecture}}"], capture_output=True,
+                             text=True, timeout=15)
+    if inspect.returncode or inspect.stdout.strip() != f"{image_id} {manifest['platform']}":
+        raise QueueCoverageError("verified coverage image is unavailable or has the wrong platform")
+    common = ["docker", "run", "--rm", "--pull", "never", "--platform", manifest["platform"],
+              "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt",
+              "no-new-privileges", "--memory", "2g", "--pids-limit", "128",
+              "--ulimit", "core=0", "--ulimit", "fsize=67108864:67108864",
+              "--user", f"{os.getuid()}:{os.getgid()}",
+              "--tmpfs", "/tmp:rw,exec,nosuid,size=64m", "--workdir", "/tmp",
+              "-e", "HOME=/tmp"]
+    inputs = []
+    union: dict[str, set[int]] = {}
+    with tempfile.TemporaryDirectory(prefix="parsarium-java-queue-") as temp:
+        scratch = Path(temp)
+        for number, (label, original) in enumerate(selected):
+            try:
+                descriptor = os.open(original, os.O_RDONLY | os.O_NOFOLLOW)
+            except OSError as error:
+                raise QueueCoverageError(f"queue input cannot be opened without links: {label}") from error
+            with os.fdopen(descriptor, "rb") as source:
+                metadata = os.fstat(source.fileno())
+                if not stat.S_ISREG(metadata.st_mode) or metadata.st_size > MAX_CASE_BYTES:
+                    raise QueueCoverageError(f"queue input is invalid or too large: {label}")
+                data = source.read(MAX_CASE_BYTES + 1)
+            if len(data) != metadata.st_size:
+                raise QueueCoverageError(f"queue input changed while reading: {label}")
+            sample = scratch / f"{number:03d}.input"
+            sample.write_bytes(data)
+            coverage_dir = scratch / f"coverage-{number:03d}"
+            coverage_dir.mkdir()
+            container_name = f"parsarium-report-{uuid.uuid4().hex[:16]}"
+            mounts = ["-v", f"{sample}:/input/control:ro",
+                      "-v", f"{coverage_dir}:/coverage"]
+            command = [*common, "--name", container_name, *mounts,
+                       "--entrypoint", "java", image_id, *vm_args,
+                       "GenericHarness", "/input/control"]
+            try:
+                result = subprocess.run(command, stdout=subprocess.DEVNULL,
+                                        stderr=subprocess.DEVNULL, timeout=timeout)
+                status, exit_code = ("ok" if result.returncode == 0 else "exit"), result.returncode
+            except subprocess.TimeoutExpired:
+                subprocess.run(["docker", "rm", "-f", container_name],
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=10)
+                status, exit_code = "timeout", None
+            if exit_code in (125, 126, 127):
+                raise QueueCoverageError(f"Docker could not replay queue input {label} (exit {exit_code})")
+            profile = coverage_dir / "jacoco.exec"
+            item = {"queue_path": label, "sha256": sha256(data).hexdigest(),
+                    "bytes": len(data), "status": status, "exit_code": exit_code,
+                    "profile_files": 0, "report_xml": []}
+            if profile.is_file():
+                if profile.stat().st_size > MAX_INTERPRETED_TRACE_BYTES:
+                    raise QueueCoverageError(f"JaCoCo execution profile exceeds size limit: {label}")
+                item["profile_files"] = 1
+                item["profile_sha256"] = digest(profile)
+                for report in reports:
+                    report_command = [*common, "--name", f"parsarium-report-{uuid.uuid4().hex[:16]}",
+                                      "-v", f"{coverage_dir}:/coverage",
+                                      "--entrypoint", "java", image_id,
+                                      "-jar", "/work/jacococli.jar", "report", "/coverage/jacoco.exec",
+                                      "--classfiles", report["classfiles"],
+                                      "--sourcefiles", report["sourcefiles"],
+                                      "--xml", report["xml"], "--quiet"]
+                    try:
+                        output = subprocess.run(report_command, stdout=subprocess.DEVNULL,
+                                                stderr=subprocess.DEVNULL, timeout=timeout)
+                    except subprocess.TimeoutExpired as error:
+                        raise QueueCoverageError("JaCoCo source report timed out") from error
+                    xml_file = coverage_dir / Path(report["xml"]).name
+                    if output.returncode or not xml_file.is_file():
+                        raise QueueCoverageError("JaCoCo source report failed")
+                    item["report_xml"].append({"sha256": digest(xml_file),
+                                                "sourcefiles": report["sourcefiles"]})
+                    for filename, lines in java_jacoco_lines(
+                            xml_file, report["sourcefiles"], prefixes).items():
+                        union.setdefault(filename, set()).update(lines)
+            inputs.append(item)
+            if sum(path.stat().st_size for path in scratch.rglob("jacoco.exec")) > MAX_PROFILE_BYTES:
+                raise QueueCoverageError("JaCoCo profiles exceed reporting size limit")
+        replay = {"status": "source_replay" if union else "no_profiles",
+                  "mechanism": "JaCoCo source report from verified Java control image",
+                  "plan_sha256": digest(run_dir / "plan.json"),
+                  "afl_image_id": plan["image_id"], "coverage_image_id": image_id,
+                  "coverage_binary": "java GenericHarness", "llvm_cov_objects": [],
+                  "control_script_sha256": digest(evidence["project"] / "run-control.sh"),
+                  "source_report_roots": reports,
+                  "queue_inputs_available": total, "queue_inputs_sampled": len(inputs),
+                  "selection": "lexicographically first AFL id files across instances",
+                  "timeout_seconds_per_input": timeout, "inputs": inputs}
+        if not union:
+            return replay, None
+        coverage = {"data": [{"files": [
+            {"filename": name, "executed_lines": sorted(lines),
+             "summary": {"lines": {"covered": len(lines)}}}
+            for name, lines in sorted(union.items())]}]}
+        exported = scratch / "coverage.json"
+        exported.write_text(json.dumps(coverage, sort_keys=True) + "\n")
+        if exported.stat().st_size > MAX_EXPORT_BYTES:
+            raise QueueCoverageError("aggregate Java source export exceeds size limit")
         replay["coverage_sha256"] = digest(exported)
         replay["coverage_bytes"] = exported.stat().st_size
     return replay, coverage

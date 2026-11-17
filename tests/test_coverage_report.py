@@ -652,6 +652,33 @@ class CoverageReportTest(unittest.TestCase):
         self.assertEqual(coverage["data"][0]["files"][0]["executed_lines"], [2, 4, 5])
         self.assertEqual(replay["fuzz_test"], "FuzzParser")
 
+    def test_java_queue_uses_only_literal_verified_jacoco_commands(self):
+        project = ROOT / "projects/xml/java/jdom2"
+        manifest = json.loads((project / "manifest.json").read_text())
+        vm_args, reports = queue_coverage.java_control_commands(project, manifest)
+        self.assertEqual(vm_args[-2:], ["-cp", "/work/classes:/work/lib/jdom2-2.0.6.1.jar"])
+        self.assertEqual([entry["sourcefiles"] for entry in reports],
+                         ["/work/parser-source", "/work/underlying-source"])
+        fake = self.base / "java-project"
+        fake.mkdir()
+        script = (project / "run-control.sh").read_text()
+        (fake / "run-control.sh").write_text(script.replace(
+            "/work/classes:/work/lib/jdom2-2.0.6.1.jar", "$CLASSPATH"))
+        with self.assertRaisesRegex(queue_coverage.QueueCoverageError, "literal /work path"):
+            queue_coverage.java_control_commands(fake, manifest)
+
+    def test_java_queue_jacoco_xml_filters_parser_and_positive_lines(self):
+        report = self.base / "jacoco.xml"
+        report.write_text('<report name="control"><package name="org/jdom2">'
+                          '<sourcefile name="Reader.java"><line nr="10" ci="2"/>'
+                          '<line nr="11" ci="0"/><line nr="12" ci="1"/>'
+                          '</sourcefile></package><package name="other">'
+                          '<sourcefile name="Noise.java"><line nr="1" ci="1"/>'
+                          '</sourcefile></package></report>')
+        result = queue_coverage.java_jacoco_lines(
+            report, "/work/parser-source", ["/work/parser-source/org/jdom2/"])
+        self.assertEqual(result, {"/work/parser-source/org/jdom2/Reader.java": {10, 12}})
+
     def test_afl_queue_source_scope_and_input_limits_are_honest(self):
         fixture = self.fixture("native_binary_edges")
         queue = fixture.afl_plan()

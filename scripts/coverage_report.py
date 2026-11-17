@@ -26,7 +26,8 @@ import zipfile
 import run_case
 from run_case import MAX_CASE_BYTES, project_for
 from queue_coverage import (QueueCoverageError, export_objects, plan_for, queue_files,
-                            replay_go_queue, replay_interpreted_queue, replay_queue)
+                            java_control_commands, replay_go_queue, replay_interpreted_queue,
+                            replay_java_queue, replay_queue)
 
 
 LLVM_EXPORT_TYPE = "llvm.coverage.json.export"
@@ -378,10 +379,10 @@ def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
     if not replay:
         return run, None
     ecosystem = evidence["identity"]["ecosystem"]
-    if ecosystem not in {"c", "cpp", "rust", "go", "python", "php", "javascript"} or \
+    if ecosystem not in {"c", "cpp", "rust", "go", "python", "php", "javascript", "java"} or \
             evidence["feedback"]["coverage_kind"] != "source_lines":
         run["queue_replay_unsupported"] = (
-            "Source replay currently supports LLVM-covered C/C++/Rust, Go, and Python/PHP/JavaScript source-line projects; "
+            "Source replay currently supports LLVM-covered C/C++/Rust, Go, and Python/PHP/JavaScript/Java source-line projects; "
             "this project's saved AFL++ feedback remains separately documented.")
         return run, None
     if ecosystem in {"c", "cpp", "rust"}:
@@ -401,6 +402,14 @@ def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
                 run["queue_replay_unsupported"] = str(error)
                 return run, None
             raise
+    elif ecosystem == "java":
+        try:
+            java_control_commands(evidence["project"], evidence["manifest"])
+        except (QueueCoverageError, OSError) as error:
+            run["queue_replay_unsupported"] = str(error)
+            return run, None
+        sample, coverage = replay_java_queue(run_dir, root, evidence,
+                                             sample_limit, timeout)
     else:
         try:
             sample, coverage = replay_interpreted_queue(run_dir, root, evidence,
@@ -677,6 +686,8 @@ def index_page(report: dict) -> str:
             "coverage_binary": sample["coverage_binary"] if sample else None,
             "source_replay_mechanism": sample.get("mechanism") if sample else None,
             "go_fuzz_test": sample.get("fuzz_test") if sample else None,
+            "java_control_script_sha256": sample.get("control_script_sha256") if sample else None,
+            "java_source_report_roots": sample.get("source_report_roots") if sample else None,
             "llvm_cov_objects": sample["llvm_cov_objects"] if sample else None,
             "profdata_sha256": sample.get("profdata_sha256") if sample else None,
             "trace_script_sha256": sample.get("trace_script_sha256") if sample else None,
@@ -860,6 +871,9 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
             warnings.append(f"{ecosystem.title()} queue tracing observes package source only; "
                             "native extensions and their underlying libraries need a separate "
                             "source replay.")
+        if run["kind"] == "afl" and ecosystem == "java":
+            warnings.append("Java queue line views come from JaCoCo source files included by "
+                            "the verified control agent; native dependencies are not counted.")
         if run["kind"] == "afl" and ecosystem == "javascript":
             warnings.append("V8 source ranges use the same line conversion as the valid-control "
                             "project; comment lines inside executed ranges may be counted.")
