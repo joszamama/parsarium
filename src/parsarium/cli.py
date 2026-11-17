@@ -25,13 +25,14 @@ Catalog and targets (from the snapshot):
   list, catalog, projects, show     browse verified parsers and runnable targets
   build, run, replay, run-format    build a target and run inputs through it
   afl ..., native ...               fuzz a target with AFL++ or its native engine
+  fandango ...                      generate and replay format-aware inputs
 
 Package commands:
   home [--fetch | --path | --remove]  show, download, or delete the snapshot
   run-selection MANIFEST [options]    run a selection saved from parsarium.com/bench
 
 Run `parsarium <command> --help` for details. The first command that needs
-targets downloads this version's snapshot (about 19 MB) and checks its SHA-256.
+targets checks and extracts this version's bundled snapshot.
 Running targets requires Docker.
 """
 

@@ -1,6 +1,6 @@
 # Parsarium
 
-An open testbed of real parsers. Parsarium collects open-source packages and standard-library APIs that parse ten formats (PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY, ASCII PNM, MP3 + ID3v2) in eight languages (C, C++, Go, Java, JavaScript, Python, Rust, PHP). Each runnable target has a pinned release, a documented input API, a valid control file, a Docker harness, and an AFL++ overlay.
+An open testbed of real parsers. Parsarium covers ten core formats (PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY, ASCII PNM, and MP3 with ID3v2) and is piloting JSON, XML, and plain MP3 across C, C++, Go, Java, JavaScript, Python, Rust, and PHP. Verified runnable targets have a pinned release, a documented input API, a valid control file, a Docker harness, and an AFL++ overlay. The catalog marks paths that are still under investigation.
 
 Website, atlas, and manual: [parsarium.com](https://parsarium.com)
 
@@ -10,7 +10,7 @@ Website, atlas, and manual: [parsarium.com](https://parsarium.com)
 pip install parsarium
 ```
 
-Requires Python 3.11+ and Docker for running targets. Release wheels include this version's snapshot (about 19 MB). The first command that needs targets checks its SHA-256 and extracts it into your cache directory. Each package version pins one snapshot, so a version identifies an exact set of targets.
+Requires Python 3.11+ and Docker for running targets. Release wheels include this version's snapshot. The first command that needs targets checks its SHA-256 and extracts it into your cache directory without a network download. Each package version pins one snapshot, so a version identifies an exact set of targets.
 
 ## Use
 
@@ -22,6 +22,9 @@ parsarium run-format png --file my.png --results runs/png-my-file
 parsarium afl build png c libpng
 parsarium afl prepare png c libpng runs/libpng-afl
 parsarium afl run runs/libpng-afl --seconds 3600
+parsarium fandango setup
+parsarium fandango generate png c libpng runs/libpng-fandango --count 100 --seed 42 --replay --prepare-afl
+parsarium afl run runs/libpng-fandango/afl --check
 ```
 
 Run a selection saved from the [bench](https://parsarium.com/bench/):
