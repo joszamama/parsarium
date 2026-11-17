@@ -16,6 +16,7 @@ from audit_projects import (fltk_native_feedback_verified, fully_runnable,
                             pdf_oxide_cpp_feedback_verified,
                             resvg_cpp_feedback_verified,
                             stereokit_ply_feedback_verified,
+                            standard_feedback_smoke_verified,
                             vlc_cpp_mp3_feedback_verified,
                             vlc_cpp_mp4_feedback_verified)
 from run_case import ROOT, project_for
@@ -273,7 +274,10 @@ def main() -> None:
         assert item["status"] == "ready"
         receipt = OVERLAYS / item["project"] / "verification.json"
         assert item["overlay_receipt_sha256"] == sha256(receipt.read_bytes()).hexdigest()
-    print(f"{len(manifests)}/{len(manifests)} one-input projects; "
+    tk_path = ROOT / "projects/png/python/stdlib_tkinter_photoimage/manifest.json"
+    assert standard_feedback_smoke_verified(tk_path, json.loads(tk_path.read_text()))
+    print(f"{len(manifests)}/{len(manifests)} generic one-input projects plus "
+          "1 separately audited Tkinter PNG standard path; "
           f"{native_plans['projects_ready']} in-process native plans ready, "
           f"{batch_report['batch_passing']} batch replay projects, and "
           f"{len(native) + len(rust) + len(managed)}/{len(manifests)} AFL++ overlays plus "

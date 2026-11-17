@@ -1,7 +1,7 @@
 {
   "ecosystem": "JavaScript",
   "format": "XML 1.0 (UTF-8, namespaces)",
-  "status": "no_standard_xml_parser_api",
+  "status": "node_no_xml_parser_browser_api_unverified",
   "runtime": "Node.js 26.10.0",
   "verified_apis": [],
   "inventory_source": "https://nodejs.org/download/release/v26.10.0/docs/api/all.json",
@@ -23,7 +23,7 @@
       "reason": "Emits jUnit XML test results; writer only."
     }
   ],
-  "note": "Browser DOMParser is a WHATWG/W3C web API, not part of Node.js core; in Node it is provided only by packages such as jsdom (delegates XML to saxes) and @xmldom/xmldom, which are logged as third-party leads. No standard project, parser source lines or AFL++ feedback exist for this cell.",
+  "note": "Node.js 26.10.0 core has no XML parser API. Browser DOMParser is a documented web runtime API and is already inventoried for the SVG cell, but it has not been rerun on either XML pilot control or given an XML-specific receipt here. The zero count describes verified XML APIs in this pilot, not absence of browser XML parsing. Node packages such as jsdom (delegating to saxes) and @xmldom/xmldom remain third-party leads.",
   "parser_source_lines_covered": null,
   "afl_feedback": null
 }

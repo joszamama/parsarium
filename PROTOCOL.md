@@ -16,6 +16,8 @@ Registry searches use the format name and relevant parser, decoder, or reader te
 
 A cell reports its actual selected count, search surface, unresolved leads, and what remains uncertain. A count below ten is acceptable when the bounded search or available adoption evidence does not support more choices. Ten paths do not establish a definitive most-used ten.
 
+After the adoption ranking, a selected third-party path also needs a pinned container control and parser-derived AFL++ feedback to remain in the runnable collection. A path that cannot meet that gate is excluded with its control and blocker evidence recorded; the slot is left open rather than filled with an unverified lower-ranked lead. This runnability gate does not change its recorded adoption metric or deny that the package parses the tested control.
+
 ## Popularity
 
 Third-party packages are ranked only among verified paths in the **same cell**. One documented primary metric, source, and observation window is used per ranking. Registry downloads are preferred when comparable; an ecosystem-specific alternative is named when needed. Missing values remain `null` or unranked. Metrics are not invented, mixed into one rank, or compared across ecosystems. Standard and runtime APIs remain outside third-party rankings. Popularity is an adoption proxy, not a quality or security judgment.
@@ -26,4 +28,4 @@ The ten-path curation first keeps positive primary-metric paths in descending or
 
 Official documentation is searched separately for standard-library and runtime-bundled APIs in every cell. A documented API needs the same control and observable result for verification. `none_documented`, `pending`, and `unresolved` describe distinct outcomes; silence is not evidence of absence.
 
-Registry snapshots, source locks, parser evidence, controls, and receipts remain in `data/`, `adapters/`, `controls/`, and `projects/`. Failed or unrun checks stay visible with their reasons. Container harnesses are a verified runnable subset of the catalog. Fuzzing launcher checks are recorded separately from parser selection and do not establish vulnerability findings.
+Registry snapshots, source locks, parser evidence, controls, and receipts remain in `data/`, `adapters/`, `controls/`, and `projects/`. Unselected paths with incomplete parser feedback remain in the curation decision record. Every selected third-party path has a verified container harness and AFL++ overlay; standard/runtime APIs are reported separately, including honest staged controls when native instrumentation is unavailable. Fuzzing launcher checks do not establish vulnerability findings.

@@ -28,7 +28,7 @@ Catalog and targets (from the snapshot):
   fandango ...                      generate and replay format-aware inputs
 
 Package commands:
-  home [--fetch | --path | --remove]  show, download, or delete the snapshot
+  home [--fetch | --path | --remove]  show, extract, or delete the snapshot
   run-selection MANIFEST [options]    run a selection saved from parsarium.com/bench
 
 Run `parsarium <command> --help` for details. The first command that needs
@@ -40,7 +40,7 @@ Running targets requires Docker.
 def _home_command(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(prog="parsarium home", description="Show or manage the snapshot.")
     group = parser.add_mutually_exclusive_group()
-    group.add_argument("--fetch", action="store_true", help="download and verify the snapshot now")
+    group.add_argument("--fetch", action="store_true", help="extract and verify the bundled snapshot now")
     group.add_argument("--path", action="store_true", help="print only the snapshot directory")
     group.add_argument("--remove", action="store_true", help="delete this version's cached snapshot")
     args = parser.parse_args(argv)
@@ -53,7 +53,7 @@ def _home_command(argv: list[str]) -> int:
     except SnapshotError as error:
         if args.path or args.fetch:
             raise
-        print(f"package   {__version__}\nsnapshot  {info.get('version')} (not downloaded)\n"
+        print(f"package   {__version__}\nsnapshot  {info.get('version')} (not cached)\n"
               f"cache     {cache_root()}\nnote      {error}")
         return 0
     if args.path:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the snapshot tarball that the ``parsarium`` package downloads.
+"""Build the reproducible snapshot tarball bundled with a release wheel.
 
 The tarball holds the committed harnesses, controls, catalog data, adapters,
 and helper scripts at one commit, under ``parsarium-<version>/``. It is built
@@ -39,7 +39,7 @@ def main() -> None:
     cli.add_argument("--ref", default="HEAD")
     cli.add_argument("--out", type=Path, default=ROOT / "dist-snapshot")
     cli.add_argument("--write-package", action="store_true",
-                     help="record the snapshot's URL and SHA-256 in src/parsarium/_snapshot.json")
+                     help="bundle the archive and record its SHA-256 in src/parsarium/_snapshot.json")
     args = cli.parse_args()
 
     commit = git("rev-parse", args.ref).decode().strip()

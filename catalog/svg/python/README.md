@@ -1,6 +1,6 @@
 # SVG / Python
 
-10 verified third-party API paths; 8 have verified Docker harnesses.
+8 verified third-party API paths; 8 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/python/svg/ranking.md) · [standard API inventory](../../../data/python/svg/standard.json)
 
@@ -14,8 +14,6 @@
 - [pyvips](pyvips/README.md) — Docker harness ready
 - [Wand](wand/README.md) — Docker harness ready
 - [PyMuPDF](pymupdf/README.md) — Docker harness ready
-- [PyQt6](pyqt6/README.md) — verified API path
-- [PySide6](pyside6/README.md) — verified API path
 
 ## Standard and runtime APIs
 
