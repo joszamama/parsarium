@@ -33,9 +33,14 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
                       "-e", f"AFL_QEMU_EXCLUDE_RANGES={feedback['executable_excluded_range']}",
                       "-e", f"LD_PRELOAD={feedback['module']}",
                       "-e", "AFL_QEMU_MODE=trace"]
+    # The V8 JsonParser function-entry bridge uses gdb on the child Node
+    # process. Its extra privilege is recorded in the verified overlay receipt.
+    ptrace = receipt.get("afl_requires_ptrace") is True
     common = ["docker", "run", "--rm", "--name", container_name,
               "--pull", "never", "--platform", manifest["platform"],
               "--network", "none", "--read-only", "--cap-drop", "ALL",
+              *(["--cap-add", "SYS_PTRACE", "--security-opt", "seccomp=unconfined"]
+                if ptrace else []),
               "--security-opt", "no-new-privileges", "--user", f"{os.getuid()}:{os.getgid()}",
               "--tmpfs", "/tmp:rw,exec,nosuid,size=256m" if tk_source_feedback
                   else "/tmp:rw,exec,nosuid,size=64m", "--workdir", "/tmp",
@@ -144,10 +149,14 @@ def main() -> None:
     container_name = f"parsarium-afl-{uuid.uuid4().hex[:16]}"
     command, resume = commands_for(manifest, receipt, seed_dir, output_dir,
                                    timeout_ms, container_name)
+    function_entries = receipt.get("feedback_kind") == "v8_json_parser_function_entries_to_afl_bitmap"
     plan = {"schema_version": 1,
             "project": str(project.relative_to(ROOT / "projects")),
             "afl_package": receipt["afl_package"],
-            "afl_feedback_edges_on_control": receipt["control_edges" if tk_source_feedback else "feedback_edges"],
+            **({"afl_feedback_bitmap_tuples_on_control": receipt["feedback_tuples"]}
+               if function_entries else
+               {"afl_feedback_edges_on_control": receipt["control_edges" if tk_source_feedback
+                                                         else "feedback_edges"]}),
             "afl_map_size": receipt["afl_map_size"],
             "overlay_receipt_sha256": sha256(receipt_path.read_bytes()).hexdigest(),
             "image_id": receipt["image_id"], "platform": manifest["platform"],

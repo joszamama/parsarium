@@ -52,6 +52,18 @@ class AFLFileInputTest(unittest.TestCase):
         manifest = {"ecosystem": "python", "platform": "linux/arm64"}
         self.assertEqual(self.command(manifest)[0][-3:], ["--", "/work/afl_proxy", "@@"])
 
+    def test_ptrace_bridge_requires_explicit_verified_receipt_flag(self):
+        manifest = {"ecosystem": "javascript", "platform": "linux/arm64"}
+        receipt = {"afl_map_size": 65536, "image_id": "sha256:" + "1" * 64,
+                   "afl_requires_ptrace": True}
+        command, resume = commands_for(manifest, receipt, Path("/seeds"),
+                                       Path("/results"), 1000, "parsarium-test")
+        for plan in (command, resume):
+            self.assertIn("SYS_PTRACE", plan)
+            self.assertIn("seccomp=unconfined", plan)
+            self.assertEqual(plan[-3:], ["--", "/work/afl_proxy", "@@"])
+        self.assertNotIn("SYS_PTRACE", self.command(manifest)[0])
+
     def test_rust_afl_targets_consume_shared_memory_or_stdin(self):
         paths = sorted((ROOT / "projects").glob("*/rust/*/manifest.json"))
         self.assertTrue(paths)
