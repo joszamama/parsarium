@@ -1,8 +1,10 @@
-# fastjson 1.x — JSON / Java
+# fastjson — JSON / Java
 
-Pinned `com.alibaba:fastjson:1.2.83` uses its own `DefaultJSONParser` and lexer. The 2.x compatibility releases delegate to the separate fastjson2 family. [Manifest](manifest.json) · [verification receipt](verification.json) · [API and control evidence](../../../../catalog/json/java/fastjson1/README.md).
+Pinned release: `1.2.83`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-The adapter reads local UTF-8 bytes and calls `JSON.parse(byte[])`. The control covers nested JSON structures and does not establish all JSON behavior.
+[API, control result, and parser family](../../../../catalog/json/java/fastjson/README.md)
+
+## Run from the repository root
 
 ```sh
 python3 parsarium.py build json java fastjson1
@@ -12,4 +14,4 @@ python3 parsarium.py afl build json java fastjson1
 python3 parsarium.py afl prepare json java fastjson1 runs/json-fastjson1-afl
 ```
 
-`afl prepare` seeds a run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.

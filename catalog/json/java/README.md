@@ -11,8 +11,8 @@ Nine JSON package/API paths are control-verified and runnable. jackson-databind 
 - [jackson-databind](jackson-databind/README.md) — verified Docker harness
 - [jackson-core](jackson-core/README.md) — verified Docker harness
 - [gson](gson/README.md) — verified Docker harness
+- [fastjson](fastjson/README.md) — verified Docker harness
 - [json](json/README.md) — verified Docker harness
-- [fastjson 1.x](fastjson1/README.md) — verified Docker harness
 - [fastjson2](fastjson2/README.md) — verified Docker harness
 - [json-simple](json-simple/README.md) — verified Docker harness
 - [json-smart](json-smart/README.md) — verified Docker harness

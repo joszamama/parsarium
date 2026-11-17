@@ -177,6 +177,66 @@
     }
   },
   {
+    "name": "fastjson",
+    "group": "com.alibaba",
+    "artifact": "fastjson",
+    "version": "1.2.83",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; pinned POM SHA256 in source-lock.json",
+    "input_api": "JSON.parse(Files.readAllBytes(local Path))",
+    "documentation": "https://repo.maven.apache.org/maven2/com/alibaba/fastjson/1.2.83/fastjson-1.2.83-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/com/alibaba/fastjson/1.2.83/fastjson-1.2.83-sources.jar",
+    "scope": "Valid nested RFC 8259 JSON object/array documents from local UTF-8 bytes, parsed to JSONObject/JSONArray/String/Number/Boolean/null",
+    "family": "fastjson 1.x DefaultJSONParser and JSONLexer",
+    "family_note": "Pinned 1.2.83 has its own parser and lexer. The same Maven coordinate at 2.x is a compatibility facade over the separately selected fastjson2 engine; the primary adoption metric spans both engine generations.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/fastjson1",
+    "configuration_note": "JSON.parse(byte[]) uses default parser features including AutoCloseSource; DefaultJSONParser.close checks EOF after root.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 10021,
+      "max_release": "1.2.83",
+      "max_release_direct_dependent_count": 1494,
+      "default_release_direct_dependent_count": 48,
+      "releases": 359,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.alibaba%3Afastjson",
+      "captured_at_utc": "2026-11-17T03:27:34.457858+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json",
+      "caveat": "Coordinate total includes fastjson 2.x facade releases; not 1.x-only or JSON-specific usage."
+    }
+  },
+  {
     "name": "json",
     "group": "org.json",
     "artifact": "json",
@@ -469,66 +529,6 @@
       "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.squareup.moshi%3Amoshi",
       "captured_at_utc": "2026-11-17T03:27:35.612237+00:00",
       "snapshot": "data/java/json/registry-snapshot.json"
-    }
-  },
-  {
-    "name": "fastjson",
-    "group": "com.alibaba",
-    "artifact": "fastjson",
-    "version": "1.2.83",
-    "license": "Apache-2.0",
-    "license_evidence": "Maven release POM licenses; pinned POM SHA256 in source-lock.json",
-    "input_api": "JSON.parse(Files.readAllBytes(local Path))",
-    "documentation": "https://repo.maven.apache.org/maven2/com/alibaba/fastjson/1.2.83/fastjson-1.2.83-sources.jar",
-    "source": "https://repo.maven.apache.org/maven2/com/alibaba/fastjson/1.2.83/fastjson-1.2.83-sources.jar",
-    "scope": "Valid nested RFC 8259 JSON object/array documents from local UTF-8 bytes, parsed to JSONObject/JSONArray/String/Number/Boolean/null",
-    "family": "fastjson 1.x DefaultJSONParser and JSONLexer",
-    "family_note": "Pinned 1.2.83 has its own parser and lexer. The same Maven coordinate at 2.x is a compatibility facade over the separately selected fastjson2 engine; the primary adoption metric spans both engine generations.",
-    "control": "controls/json/nested-object.json",
-    "expected_output": {
-      "arrays": 3,
-      "booleans": 2,
-      "max_depth": 4,
-      "nulls": 1,
-      "numbers": [
-        -2.5,
-        1,
-        1,
-        2,
-        2
-      ],
-      "objects": 5,
-      "root": "object",
-      "strings": [
-        "café \"quoted\"",
-        "go",
-        "json",
-        "parsarium",
-        "rfc8259"
-      ],
-      "top_level_keys": [
-        "enabled",
-        "missing",
-        "name",
-        "nested",
-        "ratio",
-        "tags",
-        "version"
-      ]
-    },
-    "project": "projects/json/java/fastjson1",
-    "configuration_note": "JSON.parse(byte[]) uses default parser features including AutoCloseSource; DefaultJSONParser.close checks EOF after root.",
-    "popularity": {
-      "metric": "deps.dev directDependentCount summed over all releases",
-      "value": 10021,
-      "max_release": "1.2.83",
-      "max_release_direct_dependent_count": 1494,
-      "default_release_direct_dependent_count": 48,
-      "releases": 359,
-      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.alibaba%3Afastjson",
-      "captured_at_utc": "2026-11-17T03:27:34.457858+00:00",
-      "snapshot": "data/java/json/registry-snapshot.json",
-      "caveat": "Coordinate total includes fastjson 2.x facade releases; not 1.x-only or JSON-specific usage."
     }
   }
 ]
