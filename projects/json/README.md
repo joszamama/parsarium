@@ -19,5 +19,6 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0) / PHP](php/stdlib_json_decode/README.md)
 - [seld/jsonlint / PHP](php/seld_jsonlint/README.md)
 - [json.load(BytesIO(local UTF-8 bytes), cls=PurePythonJSONDecoder) / Python](python/stdlib_json/README.md)
+- [pydantic / Python](python/pydantic/README.md)
 - [simplejson / Python](python/simplejson/README.md)
 - [serde_json / Rust](rust/serde_json/README.md)

@@ -10,3 +10,5 @@ The comparable within-cell signal is [PyPI Stats](https://pypistats.org/api/) `l
 | 2 | [simplejson](https://simplejson.readthedocs.io/en/latest/) | 4.3.0 | 49,365,386 | JSON structure and values from a local binary stream | simplejson pure-Python decoder |
 
 The standalone `jiter` package has 421,162,504 last-month downloads in the lead log. It shares Pydantic's Jiter parser family but is not a verified package path here. Both selected paths have pinned container controls, parser-scoped coverage, and AFL++ feedback; the [Pydantic native receipt](pydantic-valid-feedback.json) checks repeated, input-dependent Jiter source regions on two valid controls. The [CPython `json` standard API](standard.json) is recorded separately, without a third-party popularity rank.
+
+The Pydantic LLVM export warned about mismatched profile data in 99 whole-extension functions. Its coverage claim is limited to the scoped Jiter regions recorded in the verification receipt; complete extension coverage is not established.
