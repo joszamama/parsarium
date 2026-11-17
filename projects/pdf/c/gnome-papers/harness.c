@@ -36,7 +36,7 @@ int parsarium_parse_pdf_file(const char *path, int *pages) {
 }
 
 int parsarium_parse_pdf_bytes(const uint8_t *data, size_t size, int *pages) {
-    if (!data || !pages || size == 0) return 0;
+    if (!data || !pages || size == 0 || size > (1u << 20)) return 0;
     char path[] = "/tmp/parsarium-papers-XXXXXX.pdf";
     int fd = mkstemps(path, 4);
     if (fd < 0) return 0;

@@ -22,6 +22,7 @@
   "afl_entrypoint": "/work/replay",
   "native_campaign_supported": false,
   "coverage": "LLVM source lines in Papers PDF backend and source-built Poppler GLib/core; AFL++ source edges scoped to these same parsers",
+  "coverage_limit": "The byte-input fuzz bridge accepts at most 1 MiB per case before writing a temporary PDF. The documented local-file API is not subject to this bridge limit. AFL uses one-shot replay because Papers has process-global backend state.",
   "coverage_subject_prefix": "/work/papers-source/libdocument/backend/pdf/",
   "format_specific_coverage_file_suffix": "/pps-poppler.c",
   "underlying_coverage_subject_prefix": "/work/poppler-source/poppler/",

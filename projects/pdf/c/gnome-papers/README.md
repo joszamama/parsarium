@@ -13,4 +13,6 @@ The control result is `{"pages":2}`. `controls/pdf/one-page.pdf` is a second val
 
 The valid control covers 145 Papers PDF backend lines and 1,272 Poppler core lines. AFL++ records 348 PDF parser edges, with identical maps across three control repeats and stable differences for the valid one-page case. `--check` inspects the prepared command without starting a campaign.
 
+The byte-input fuzz bridge accepts up to 1 MiB per case before writing a temporary PDF. The local-file API has no size cap in this harness. AFL uses one-shot replay because Papers keeps process-global backend state.
+
 `verification.json` and the AFL overlay receipt record exact source and image hashes, observed output, coverage, and input-sensitive feedback. The source lock pins Papers 51.1 and Poppler 26.11.0. This project does not run a fuzz campaign.
