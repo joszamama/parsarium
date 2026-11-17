@@ -8,7 +8,7 @@ This format is incomplete across the eight ecosystems. Each row reports only doc
 | --- | --- | ---: | ---: |
 | [C](c/README.md) | pilot_two_selected_search_bounded | 2 | 2 |
 | [C++](cpp/README.md) | pilot_two_selected_search_bounded | 2 | 2 |
-| [Go](go/README.md) | pilot_one_selected_search_bounded | 1 | 1 |
+| [Go](go/README.md) | pilot_two_selected_search_bounded | 2 | 2 |
 | [Java](java/README.md) | pilot_one_selected_search_bounded | 1 | 1 |
 | [JavaScript](javascript/README.md) | pilot_two_selected_search_bounded | 2 | 2 |
 | [Python](python/README.md) | pilot_one_third_party_one_standard_verified_bounded_search_pending | 1 | 1 |

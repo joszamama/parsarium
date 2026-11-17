@@ -7,6 +7,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [pugixml / C++](cpp/pugixml/README.md)
 - [xerces-c / C++](cpp/xerces_c/README.md)
 - [encoding/xml.Decoder.Token() / Go](go/stdlib_decoder/README.md)
+- [github.com/antchfx/xmlquery / Go](go/github_com_antchfx_xmlquery/README.md)
 - [github.com/beevik/etree / Go](go/github_com_beevik_etree/README.md)
 - [javax.xml.parsers.DocumentBuilder.parse(InputStream) / Java](java/jdk_documentbuilder/README.md)
 - [xercesImpl / Java](java/xercesimpl/README.md)
