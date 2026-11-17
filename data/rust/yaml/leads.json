@@ -176,7 +176,7 @@
   },
   {
     "name": "noyalib",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 1154094,
     "metric_error": null,
     "family": "noyalib (own pure-Rust parser)",
@@ -184,7 +184,8 @@
     "note": "serde_yml 0.0.13 re-exports its serde_yaml compatibility module.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/noyalib",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Selected. Pinned 0.0.62 parses both schema-neutral YAML controls into the exact typed trees of controls/yaml/check_controls.py; Docker coverage 2319 own lines; AFL++ scoped to noyalib: 5 identical repeats per control, 2809 vs 2722 edges, 266/179 unique.",
+    "evidence": "projects/yaml/rust/noyalib/verification.json"
   },
   {
     "name": "dbt-yaml",

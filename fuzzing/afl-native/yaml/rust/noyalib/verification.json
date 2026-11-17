@@ -1,0 +1,638 @@
+{
+  "schema_version": 1,
+  "project": "yaml/rust/noyalib",
+  "pass": true,
+  "base_project_receipt_sha256": "036a5e2cb00cf8ed0e283fd81fa429005eb1e6ae9617bfc564591cd2348f31a6",
+  "overlay_file_sha256": {
+    "Cargo.toml": "36800a2e2dadbd80e81104a45f584a016f6dff6b9d18d43a075e8f441aea22d1",
+    "Cargo.lock": "4783d864ee4832eb7b17fed7453defb27c9406eb2a838aabe571b742b23a811a",
+    "afl_fuzzer.rs": "aee64ee26cf9bc2b3e3c162f938eab64b04086cf9ac2525927bc37a2ba7fbad3",
+    "Dockerfile": "5c4860705b278bc268cbbbd044d432844cd6b42463296700f4352b7744bca3b7",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "build.py": "0a1dc0c1f15ff4d2f682061ccec6e21ea71cbce8517c964497a913c710b99f51"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "1bcad14b3afdbfeeec7ab4e92732cb6e2524d6acd1ef220945c10625d58dc670",
+  "image_id": "sha256:3fdec10788ac53003a8d1c8a1650096e0d414d7fe4677dc2513fb5c348a3e2a2",
+  "platform": "linux/arm64",
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "feedback_edges": 2809,
+  "afl_map_size": 50686,
+  "feedback_kind": "afl_rs_noyalib_only_sancov_edges",
+  "feedback_scope": "Only noyalib crate objects carry SanitizerCoverage guards; harness, serde_json, AFL runtime and other crates are uninstrumented",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "noyalib"
+    ],
+    "rlib_guard_bytes": {
+      "noyalib": 202724
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "equivalent",
+      "hashbrown",
+      "indexmap",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_yaml_noyalib_harness",
+      "rustc_hash",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_ignored",
+      "serde_json",
+      "smallvec",
+      "xdg"
+    ],
+    "binary_guards": 50681
+  },
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "2f06fd02b80202275342fa322885f7a67ad8a41130b0fb881b17dc5af64cf41a",
+    "reason": "noyalib's Mapping is an IndexMap with std RandomState; its hashbrown probe code is monomorphized into the noyalib crate, so per-process getrandom SipHash keys changed SanitizerCoverage edges between identical afl-showmap repeats. The overlay preloads a constant-getrandom shim; the parser source is unchanged.",
+    "replay_output_unchanged": true
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:2713a8d89975626174fcd66f0c619953138317699c3fe6332f9bb908eb126679",
+  "variant_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+  "control_output": {
+    "tree": [
+      "map",
+      [
+        [
+          "kind",
+          [
+            "str",
+            "catalog"
+          ]
+        ],
+        [
+          "version",
+          [
+            "int",
+            "2"
+          ]
+        ],
+        [
+          "ratio",
+          [
+            "float",
+            "0.25"
+          ]
+        ],
+        [
+          "offset",
+          [
+            "int",
+            "-17"
+          ]
+        ],
+        [
+          "enabled",
+          [
+            "bool",
+            true
+          ]
+        ],
+        [
+          "retired",
+          [
+            "bool",
+            false
+          ]
+        ],
+        [
+          "missing",
+          [
+            "null"
+          ]
+        ],
+        [
+          "title",
+          [
+            "str",
+            "Caf\u00e9 \"quoted\"\tend"
+          ]
+        ],
+        [
+          "single",
+          [
+            "str",
+            "it's here"
+          ]
+        ],
+        [
+          "tags",
+          [
+            "seq",
+            [
+              [
+                "str",
+                "alpha"
+              ],
+              [
+                "str",
+                "beta"
+              ],
+              [
+                "str",
+                "gamma delta"
+              ]
+            ]
+          ]
+        ],
+        [
+          "point",
+          [
+            "map",
+            [
+              [
+                "lat",
+                [
+                  "int",
+                  "1"
+                ]
+              ],
+              [
+                "lon",
+                [
+                  "float",
+                  "-2.5"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "items",
+          [
+            "seq",
+            [
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "7"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "first item"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "line one\nline two\n"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "8"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "Z\u00fcrich"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "folded text\n"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "defaults",
+          [
+            "map",
+            [
+              [
+                "retries",
+                [
+                  "int",
+                  "3"
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "base"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "service",
+          [
+            "map",
+            [
+              [
+                "settings",
+                [
+                  "map",
+                  [
+                    [
+                      "retries",
+                      [
+                        "int",
+                        "3"
+                      ]
+                    ],
+                    [
+                      "label",
+                      [
+                        "str",
+                        "base"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "edge"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "variant_output": {
+    "tree": [
+      "seq",
+      [
+        [
+          "map",
+          [
+            [
+              "order",
+              [
+                "str",
+                "A-7"
+              ]
+            ],
+            [
+              "lines",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "X\u00e9-1"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "2"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "12.5"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "B '2'"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "1"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "0.75"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "flags",
+              [
+                "seq",
+                []
+              ]
+            ],
+            [
+              "meta",
+              [
+                "map",
+                []
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "seq",
+          [
+            [
+              "int",
+              "1"
+            ],
+            [
+              "seq",
+              [
+                [
+                  "int",
+                  "2"
+                ],
+                [
+                  "int",
+                  "3"
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "k",
+                  [
+                    "str",
+                    "v"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "str",
+          "plain multi word"
+        ],
+        [
+          "str",
+          "line\nbreak"
+        ],
+        [
+          "str",
+          "kept\n  indented"
+        ],
+        [
+          "null"
+        ],
+        [
+          "bool",
+          false
+        ]
+      ]
+    ]
+  },
+  "repeats": 5,
+  "variant_feedback_edges": 2722,
+  "edges_only_in_control": 266,
+  "edges_only_in_variant": 179,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/noyalib-0.0.62/",
+    "control_lines": {
+      "src/anchors.rs": 0,
+      "src/base64.rs": 0,
+      "src/borrowed.rs": 0,
+      "src/comments.rs": 0,
+      "src/cst/anchor.rs": 0,
+      "src/cst/annotated.rs": 0,
+      "src/cst/builder.rs": 0,
+      "src/cst/document.rs": 0,
+      "src/cst/document/edit.rs": 0,
+      "src/cst/document/path.rs": 0,
+      "src/cst/document/transaction.rs": 0,
+      "src/cst/document/validation.rs": 0,
+      "src/cst/emit.rs": 0,
+      "src/cst/entry.rs": 0,
+      "src/cst/format.rs": 0,
+      "src/cst/green.rs": 0,
+      "src/cst/mod.rs": 0,
+      "src/cst/syntax.rs": 0,
+      "src/de.rs": 52,
+      "src/de/config.rs": 74,
+      "src/de/deserializer.rs": 0,
+      "src/diagnostic.rs": 0,
+      "src/doc_boundary.rs": 0,
+      "src/document.rs": 0,
+      "src/error.rs": 0,
+      "src/flattened.rs": 0,
+      "src/fmt.rs": 0,
+      "src/i18n.rs": 0,
+      "src/interner.rs": 0,
+      "src/lib.rs": 0,
+      "src/parser/budget.rs": 32,
+      "src/parser/events.rs": 353,
+      "src/parser/loader.rs": 348,
+      "src/parser/meter.rs": 104,
+      "src/parser/mod.rs": 3,
+      "src/parser/scanner.rs": 662,
+      "src/parser/scanner/block_scalars.rs": 153,
+      "src/parser/scanner/scalars.rs": 382,
+      "src/path.rs": 0,
+      "src/policy.rs": 4,
+      "src/schema.rs": 0,
+      "src/ser.rs": 0,
+      "src/simd.rs": 76,
+      "src/span_context.rs": 0,
+      "src/spanned.rs": 0,
+      "src/streaming.rs": 58,
+      "src/tag_registry.rs": 0,
+      "src/value.rs": 0,
+      "src/value/convert.rs": 0,
+      "src/value/mapping.rs": 18,
+      "src/value/number.rs": 0,
+      "src/value/serde_impl.rs": 0,
+      "src/value/tag.rs": 0,
+      "src/with/singleton_map.rs": 0,
+      "src/with/singleton_map_optional.rs": 0,
+      "src/with/singleton_map_recursive.rs": 0,
+      "src/with/singleton_map_with.rs": 0
+    },
+    "variant_lines": {
+      "src/anchors.rs": 0,
+      "src/base64.rs": 0,
+      "src/borrowed.rs": 0,
+      "src/comments.rs": 0,
+      "src/cst/anchor.rs": 0,
+      "src/cst/annotated.rs": 0,
+      "src/cst/builder.rs": 0,
+      "src/cst/document.rs": 0,
+      "src/cst/document/edit.rs": 0,
+      "src/cst/document/path.rs": 0,
+      "src/cst/document/transaction.rs": 0,
+      "src/cst/document/validation.rs": 0,
+      "src/cst/emit.rs": 0,
+      "src/cst/entry.rs": 0,
+      "src/cst/format.rs": 0,
+      "src/cst/green.rs": 0,
+      "src/cst/mod.rs": 0,
+      "src/cst/syntax.rs": 0,
+      "src/de.rs": 52,
+      "src/de/config.rs": 74,
+      "src/de/deserializer.rs": 0,
+      "src/diagnostic.rs": 0,
+      "src/doc_boundary.rs": 0,
+      "src/document.rs": 0,
+      "src/error.rs": 0,
+      "src/flattened.rs": 0,
+      "src/fmt.rs": 0,
+      "src/i18n.rs": 0,
+      "src/interner.rs": 0,
+      "src/lib.rs": 0,
+      "src/parser/budget.rs": 32,
+      "src/parser/events.rs": 357,
+      "src/parser/loader.rs": 348,
+      "src/parser/meter.rs": 103,
+      "src/parser/mod.rs": 3,
+      "src/parser/scanner.rs": 699,
+      "src/parser/scanner/block_scalars.rs": 150,
+      "src/parser/scanner/scalars.rs": 357,
+      "src/path.rs": 0,
+      "src/policy.rs": 4,
+      "src/schema.rs": 0,
+      "src/ser.rs": 0,
+      "src/simd.rs": 72,
+      "src/span_context.rs": 0,
+      "src/spanned.rs": 0,
+      "src/streaming.rs": 58,
+      "src/tag_registry.rs": 0,
+      "src/value.rs": 0,
+      "src/value/convert.rs": 0,
+      "src/value/mapping.rs": 18,
+      "src/value/number.rs": 0,
+      "src/value/serde_impl.rs": 0,
+      "src/value/tag.rs": 0,
+      "src/with/singleton_map.rs": 0,
+      "src/with/singleton_map_optional.rs": 0,
+      "src/with/singleton_map_recursive.rs": 0,
+      "src/with/singleton_map_with.rs": 0
+    },
+    "files_with_different_line_counts": [
+      "src/parser/events.rs",
+      "src/parser/meter.rs",
+      "src/parser/scanner.rs",
+      "src/parser/scanner/block_scalars.rs",
+      "src/parser/scanner/scalars.rs",
+      "src/simd.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      2809,
+      2809,
+      2809,
+      2809,
+      2809
+    ],
+    "stable_edges": 2809,
+    "union_edges": 2809,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      2722,
+      2722,
+      2722,
+      2722,
+      2722
+    ],
+    "stable_edges": 2722,
+    "union_edges": 2722,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

@@ -15,6 +15,7 @@
 - [serde-saphyr](serde-saphyr/README.md) — verified API path
 - [granit-parser](granit-parser/README.md) — verified API path
 - [saphyr-parser](saphyr-parser/README.md) — verified API path
+- [noyalib](noyalib/README.md) — verified API path
 
 ## Standard and runtime APIs
 

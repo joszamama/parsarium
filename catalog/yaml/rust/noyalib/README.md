@@ -1,0 +1,246 @@
+# noyalib — YAML / Rust
+
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
+
+- **Pinned release:** `0.0.62`
+- **License:** MIT OR Apache-2.0
+- **Parser family:** noyalib: own pure-Rust scanner, parser and loader (forbid(unsafe_code)); at most 187 of its 23,954 distinct non-test source lines longer than 25 characters also occur in serde_yaml (0.8%) and 40 in yaml-rust2. serde_yml 0.0.13 only re-exports its serde_yaml compatibility module.
+- **Local input API:** `noyalib::from_str::<noyalib::Value>(&str) -> Result<Value, Error>; Value::{Null, Bool, Number(Number::{Integer, Float}), String, Sequence, Mapping, Tagged}`
+- **Documentation:** [API reference](<https://docs.rs/noyalib/0.0.62/noyalib/fn.from_str.html>)
+- **Valid control:** [`controls/yaml/catalog.yaml`](../../../../controls/yaml/catalog.yaml)
+- **Catalog evidence:** [parser record](../../../../data/rust/yaml/parsers.json) · [control result](../../../../data/rust/yaml/verification.json)
+
+## Observed control result
+
+```json
+{
+  "tree": [
+    "map",
+    [
+      [
+        "kind",
+        [
+          "str",
+          "catalog"
+        ]
+      ],
+      [
+        "version",
+        [
+          "int",
+          "2"
+        ]
+      ],
+      [
+        "ratio",
+        [
+          "float",
+          "0.25"
+        ]
+      ],
+      [
+        "offset",
+        [
+          "int",
+          "-17"
+        ]
+      ],
+      [
+        "enabled",
+        [
+          "bool",
+          true
+        ]
+      ],
+      [
+        "retired",
+        [
+          "bool",
+          false
+        ]
+      ],
+      [
+        "missing",
+        [
+          "null"
+        ]
+      ],
+      [
+        "title",
+        [
+          "str",
+          "Café \"quoted\"\tend"
+        ]
+      ],
+      [
+        "single",
+        [
+          "str",
+          "it's here"
+        ]
+      ],
+      [
+        "tags",
+        [
+          "seq",
+          [
+            [
+              "str",
+              "alpha"
+            ],
+            [
+              "str",
+              "beta"
+            ],
+            [
+              "str",
+              "gamma delta"
+            ]
+          ]
+        ]
+      ],
+      [
+        "point",
+        [
+          "map",
+          [
+            [
+              "lat",
+              [
+                "int",
+                "1"
+              ]
+            ],
+            [
+              "lon",
+              [
+                "float",
+                "-2.5"
+              ]
+            ]
+          ]
+        ]
+      ],
+      [
+        "items",
+        [
+          "seq",
+          [
+            [
+              "map",
+              [
+                [
+                  "id",
+                  [
+                    "int",
+                    "7"
+                  ]
+                ],
+                [
+                  "name",
+                  [
+                    "str",
+                    "first item"
+                  ]
+                ],
+                [
+                  "note",
+                  [
+                    "str",
+                    "line one\nline two\n"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "id",
+                  [
+                    "int",
+                    "8"
+                  ]
+                ],
+                [
+                  "name",
+                  [
+                    "str",
+                    "Zürich"
+                  ]
+                ],
+                [
+                  "note",
+                  [
+                    "str",
+                    "folded text\n"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ],
+      [
+        "defaults",
+        [
+          "map",
+          [
+            [
+              "retries",
+              [
+                "int",
+                "3"
+              ]
+            ],
+            [
+              "label",
+              [
+                "str",
+                "base"
+              ]
+            ]
+          ]
+        ]
+      ],
+      [
+        "service",
+        [
+          "map",
+          [
+            [
+              "settings",
+              [
+                "map",
+                [
+                  [
+                    "retries",
+                    [
+                      "int",
+                      "3"
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "base"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "label",
+              [
+                "str",
+                "edge"
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+}
+```
