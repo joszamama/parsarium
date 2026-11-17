@@ -1,0 +1,65 @@
+{
+  "kind": "third_party",
+  "api": "sqlparser.New(sqlparser.Options{}) then Parser.SplitStatementToPieces and Parser.Parse(local SQL text) -> Statement (*Select, *Insert); the harness reads Select/Insert fields and walks the tree with sqlparser.Walk",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T17:11:36.599605+00:00",
+  "manifest": "projects/sql/go/vitess_io_vitess_go_vt_sqlparser/manifest.json",
+  "image_id": "sha256:f3aa8fee0097c3758cb659404b0a300b38c34da1bde3c30e3b612bc8f0b570d1",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "go1.27.1"
+  ],
+  "source_sha256": "085b6562e4c3caf1992d031edbdd0c246d13076272706134ef07a868add8ab85",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "926aee21f6ed4d00bd21f55f7736a55604e8295ffcf266d6dababab52a0eecd2",
+    "go.mod": "45fa89468fb829de77264f586f876f7f49bf82eee49f5fe3051c08dcc3229b0c",
+    "go.sum": "8cb77e2c3a916b48f154f966eca4f91368a52852470b6bada6eace0d23b426ea",
+    "harness.go": "72debc14038bd86cee9c97a5d1fc271c2556e93282bf3183f78b72a115867d6c",
+    "harness_test.go": "21ce77da5328322deba73c3efbea3a03772e530ea8f5b64b0fb3a68554f893a6",
+    "manifest.json": "cc58c5aba37aa4f151735575467dc08f00b8abe25a631d4bf375419be738bdbf",
+    "replay/main.go": "43bab006f71a04cb32e52542175555bca49d31b16e17d548c9712fee5fa8738d",
+    "reporter/main.go": "cfa19b9d238cdefd14799421ddd0062be3aa05022bcf65ae1f138b2cbc31c843",
+    "source-lock.json": "dc0880a036fe94794ae40d3868260a6999621ebc83b54674d62e6b5f72524a40"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 9,
+  "parser_source_lines_covered": 924,
+  "format_specific_source_lines_covered": 171,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/go/vitess_io_vitess_go_vt_sqlparser/target/coverage/coverage.json",
+  "pass": true
+}

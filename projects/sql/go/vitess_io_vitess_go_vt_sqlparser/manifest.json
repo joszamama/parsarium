@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "go",
+  "pilot": true,
+  "package": "vitess.io/vitess/go/vt/sqlparser",
+  "release": "v0.24.5",
+  "catalog_parser": "data/go/sql/parsers.json",
+  "source_lock": "projects/sql/go/vitess_io_vitess_go_vt_sqlparser/source-lock.json",
+  "source_sha256": "085b6562e4c3caf1992d031edbdd0c246d13076272706134ef07a868add8ab85",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/work/replay",
+    "/input/case"
+  ],
+  "dialect": "MySQL (vitess sqlparser.New with the library default MySQL server version)",
+  "parser_family": "vitess MySQL grammar (goyacc grammar sql.y, generated parser reported through its sql.y and yaccpar line directives, own tokenizer token.go); xwb1989/sqlparser and blastrain/vitess-sqlparser are extracted forks of older vitess sqlparser",
+  "api": "sqlparser.New(sqlparser.Options{}) then Parser.SplitStatementToPieces and Parser.Parse(local SQL text) -> Statement (*Select, *Insert); the harness reads Select/Insert fields and walks the tree with sqlparser.Walk",
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzSQL",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzSQL",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go coverpkg instrumentation of the pinned vitess go/vt/sqlparser package source during valid-control replay",
+  "coverage_subject_prefix": "vitess.io/vitess/go/vt/sqlparser/",
+  "format_specific_coverage_file_suffix": "/sqlparser/sql.y",
+  "scope": "One SQL statement from local bytes split and parsed by vitess sqlparser with its default MySQL version; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other server versions and vitess-specific syntax are untested."
+}

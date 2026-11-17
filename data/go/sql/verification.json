@@ -1,0 +1,102 @@
+{
+  "platform": "linux/amd64",
+  "control": "controls/sql/select-join.sql",
+  "differential_control": "controls/sql/insert-values.sql",
+  "oracle": "controls/sql/expected.json",
+  "third_party": [
+    {
+      "package": "vitess.io/vitess/go/vt/sqlparser",
+      "version": "v0.24.5",
+      "pass": true,
+      "input_api": "sqlparser.New(sqlparser.Options{}); Parser.SplitStatementToPieces and Parser.Parse(local SQL text) -> Statement",
+      "dialect": "MySQL (library default MySQL server version)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "columns": 4,
+            "kind": "insert",
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ],
+            "rows": 2,
+            "tables": [
+              "orders"
+            ]
+          }
+        ]
+      },
+      "parser_family": "vitess MySQL grammar (goyacc sql.y) and tokenizer",
+      "parser_source_files": 9,
+      "parser_source_lines_covered": 924,
+      "afl_tuple_difference": 391,
+      "parser_feature_difference": 395,
+      "project_receipt": "projects/sql/go/vitess_io_vitess_go_vt_sqlparser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/vitess_io_vitess_go_vt_sqlparser/differential.json"
+    }
+  ],
+  "standard": [],
+  "checked_at_utc": "2026-11-17T17:12:15.499276+00:00"
+}

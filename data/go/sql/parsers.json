@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "name": "vitess.io/vitess/go/vt/sqlparser",
+    "version": "v0.24.5",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30, Apache License 2.0)",
+    "input_api": "sqlparser.New(sqlparser.Options{}); Parser.SplitStatementToPieces and Parser.Parse(local SQL text) -> Statement",
+    "documentation": "https://pkg.go.dev/vitess.io/vitess@v0.24.5/go/vt/sqlparser#Parser.Parse",
+    "source": "https://proxy.golang.org/vitess.io/vitess/@v/v0.24.5.zip",
+    "source_sha256": "085b6562e4c3caf1992d031edbdd0c246d13076272706134ef07a868add8ab85",
+    "go_module_sum": "h1:MYmyGJpqRCs8GSnAyrrzC1ISldWeS5v76QPW7fcngXI=",
+    "dependencies": [],
+    "dialect": "MySQL (library default MySQL server version)",
+    "scope": "One SQL statement from local bytes, split and parsed with the default MySQL version; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other server versions and vitess-only syntax are untested.",
+    "family": "vitess MySQL grammar (goyacc sql.y) and tokenizer",
+    "family_note": "Parser.Parse runs vitess's own tokenizer (token.go) and the goyacc parser generated from sql.y; Go coverage reports the generated parser through its sql.y and yaccpar line directives. The adapter reads *Select (SelectExprs, From join tree, Where, GroupBy, OrderBy) and *Insert (Table, Columns, Values) and walks the tree with sqlparser.Walk for AliasedTableExpr base tables, AggrFunc/FuncExpr names and Literal values. xwb1989/sqlparser and blastrain/vitess-sqlparser are extracted forks of older vitess sqlparser versions (shared family).",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 391,
+      "source": "https://pkg.go.dev/vitess.io/vitess/go/vt/sqlparser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/vitess_io_vitess_go_vt_sqlparser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+]

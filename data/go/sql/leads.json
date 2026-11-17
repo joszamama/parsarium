@@ -5,14 +5,48 @@
   "note": "Leads are not verified parsers. Ranks are assigned only among verified paths.",
   "leads": [
     {
-      "name": "vitess.io/vitess/go/vt/sqlparser",
+      "name": "github.com/pingcap/tidb/ast",
+      "status": "excluded",
+      "metric_value": 3737,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "TiDB MySQL grammar",
+      "documented_api_lead": null,
+      "reason": "AST node types only (old TiDB path); parsing is in the parser package. Importer count from the pkg.go.dev search snippet.",
+      "metric_source": "pkg.go.dev search snippet in registry-snapshot.json"
+    },
+    {
+      "name": "github.com/cockroachdb/cockroach/pkg/sql/parser",
       "status": "unresolved",
+      "metric_value": 1972,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "CockroachDB PostgreSQL-compatible grammar",
+      "documented_api_lead": "parser.Parse",
+      "reason": "CockroachDB parser inside the full database module (not published for library use; pulls the whole CockroachDB tree). The extracted cockroachdb-parser module is the library form. Importer count from the search snippet; not run.",
+      "metric_source": "pkg.go.dev search snippet in registry-snapshot.json"
+    },
+    {
+      "name": "github.com/pingcap/tidb/parser",
+      "status": "unresolved",
+      "metric_value": 1190,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "TiDB MySQL grammar (goyacc)",
+      "documented_api_lead": "Parser.Parse",
+      "reason": "Older in-repo path of the TiDB parser (now github.com/pingcap/tidb/pkg/parser). Importer count from the search snippet; not run in this round.",
+      "metric_source": "pkg.go.dev search snippet in registry-snapshot.json"
+    },
+    {
+      "name": "vitess.io/vitess/go/vt/sqlparser",
+      "status": "selected",
       "metric_value": 391,
       "metric_error": null,
       "latest_release_observed": "v0.24.5",
       "family": "vitess MySQL grammar (goyacc)",
       "documented_api_lead": "Parser.Parse",
-      "reason": "sqlparser.NewTestParser().Parse / Parser.Parse return an AST Statement (Select, Insert) for MySQL-dialect text."
+      "reason": "sqlparser.NewTestParser().Parse / Parser.Parse return an AST Statement (Select, Insert) for MySQL-dialect text.",
+      "selected_release": "v0.24.5"
     },
     {
       "name": "github.com/pingcap/parser",

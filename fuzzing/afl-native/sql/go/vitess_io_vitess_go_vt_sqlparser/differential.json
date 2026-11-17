@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T17:11:41.064705+00:00",
+  "project": "sql/go/vitess_io_vitess_go_vt_sqlparser",
+  "pass": true,
+  "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+  "base_project_receipt_sha256": "2c5a1114d457cc02dcd525c5b568ed3848928fb295a01b6932e1fa89ad55474b",
+  "overlay_receipt_sha256": "a2be63568be672c0e3bd63a95fbf34ae46c06371c8094709ff21f0adc8b8c45d",
+  "base_image_id": "sha256:f3aa8fee0097c3758cb659404b0a300b38c34da1bde3c30e3b612bc8f0b570d1",
+  "overlay_image_id": "sha256:bee2f668f9550b1355db6f940a787fb5aa47723d24fbaaae97aac5ed8e8ee027",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "columns": 4,
+        "kind": "insert",
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "rows": 2,
+        "tables": [
+          "orders"
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 646,
+  "second_afl_tuples": 455,
+  "afl_tuple_difference": 391,
+  "first_parser_features": 627,
+  "second_parser_features": 436,
+  "parser_feature_difference": 395,
+  "first_only_features_by_file": {
+    "ast.go": 2,
+    "ast_funcs.go": 7,
+    "ast_visit.go": 104,
+    "sql.y": 38,
+    "token.go": 4,
+    "yaccpar": 138
+  },
+  "second_only_features_by_file": {
+    "ast_funcs.go": 2,
+    "ast_visit.go": 32,
+    "sql.y": 18,
+    "token.go": 1,
+    "yaccpar": 49
+  }
+}
