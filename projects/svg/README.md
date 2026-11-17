@@ -4,6 +4,7 @@
 
 ## Targets
 
+- [gdk-pixbuf / C](c/gdk_pixbuf/README.md)
 - [imagemagick / C](c/imagemagick/README.md)
 - [libvips / C](c/libvips/README.md)
 - [nanosvg / C](c/nanosvg/README.md)

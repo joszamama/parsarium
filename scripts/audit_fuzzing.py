@@ -86,8 +86,15 @@ def main() -> None:
         assert receipt["control_sha256"] == manifest["control_sha256"]
         assert receipt["base_project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
         dockerfile = (overlay / "Dockerfile").read_bytes()
-        if manifest["package"] not in {"gstreamer", "netpbm", "sail"}:
+        # GDK-Pixbuf's SVG loader uses a path-local build.py to instrument its
+        # bundled librsvg Rust parser; the generic C overlay cannot build it.
+        custom_rust_svg = str(relative) == "svg/c/gdk_pixbuf"
+        if manifest["package"] not in {"gstreamer", "netpbm", "sail"} and not custom_rust_svg:
             assert dockerfile == derived_dockerfile(project).encode()
+        if custom_rust_svg:
+            assert (overlay / "build.py").is_file()
+        for name, digest in receipt.get("overlay_file_sha256", {}).items():
+            assert sha256((overlay / name).read_bytes()).hexdigest() == digest
         expected_dockerfile_hash = (receipt.get("overlay_dockerfile_sha256") or
                                     receipt.get("overlay_file_sha256", {}).get("Dockerfile"))
         assert expected_dockerfile_hash == sha256(dockerfile).hexdigest()
