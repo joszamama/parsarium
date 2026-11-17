@@ -4,7 +4,7 @@ Pinned release: `26.07.0`. [Manifest](manifest.json) · [Docker receipt](verific
 
 [API, control result, and parser family](../../../../catalog/mp4/c/gpac/README.md)
 
-The valid two-track MP4 control passed Docker replay and one-case fuzzer smoke. LLVM coverage reached 2,421 lines in the pinned GPAC ISO media parser. The AFL++ build reported 2,382 feedback edges on the same control.
+The valid two-track MP4 control passed Docker replay and one-case fuzzer smoke. A separate sample-free video-only MP4 also parses, reporting one video track and zero dimensions where no sample description is available. LLVM coverage reached 2,421 lines in the pinned GPAC ISO media parser. The AFL++ build reported 2,376 feedback edges on the control.
 
 ## Run from the repository root
 

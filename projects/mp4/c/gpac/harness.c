@@ -1,6 +1,7 @@
 #define _POSIX_C_SOURCE 200809L
 #include "harness.h"
 #include <stdlib.h>
+#include <limits.h>
 #include <unistd.h>
 #include <gpac/isomedia.h>
 #define PARSARIUM_MAX_INPUT (1u<<20)
@@ -15,16 +16,20 @@ static int inspect(const char *path,struct parsarium_mp4_result *result){
   u32 type=gf_isom_get_media_type(file,i);
   if(type==GF_ISOM_MEDIA_VISUAL){
    video++;
-   if(gf_isom_get_visual_info(file,i,1,&width,&height)!=GF_OK)ok=0;
+   u32 sample_width=0,sample_height=0;
+   if(gf_isom_get_visual_info(file,i,1,&sample_width,&sample_height)==GF_OK){
+    width=sample_width;height=sample_height;
+   }
   }else if(type==GF_ISOM_MEDIA_AUDIO)audio++;
  }
  u32 timescale=gf_isom_get_timescale(file);
  u64 duration=gf_isom_get_duration(file);
- if(ok&&video&&audio&&timescale){
+ if(ok){
   result->tracks=tracks;result->video_tracks=video;result->audio_tracks=audio;
   result->width=width;result->height=height;
-  result->duration_ms=duration/timescale*1000+duration%timescale*1000/timescale;
- }else ok=0;
+  __uint128_t milliseconds=timescale ? (__uint128_t)duration*1000/timescale : 0;
+  result->duration_ms=milliseconds>ULLONG_MAX ? ULLONG_MAX : (unsigned long long)milliseconds;
+ }
  gf_isom_delete(file);
  return ok;
 }
