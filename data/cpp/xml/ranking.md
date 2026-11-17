@@ -15,6 +15,8 @@ Debian popcon installations of each library's `-dev` package(s) (`by_inst`), cap
 
 All four paths give the same structure on the catalog control. Xerces-C++, pugixml, and libxml++ also pass the shared order control; TinyXML2 rejects its processing instruction, so the TinyXML2 path uses a second valid order control with only that instruction removed. Both pugixml and TinyXML2 preserve qualified names; adapter code resolves namespaces. libxml++ delegates actual parsing to libxml2. Its Docker build instruments the wrapper and the pinned libxml2 source; a parser-only probe shows stable, input-dependent AFL++ feedback and different covered `parser.c` lines across the two valid controls.
 
+Xerces-C++ uses its own scanner. Its [parser-only probe](../../../projects/xml/cpp/xerces_c/parser-probe.cpp) calls `XercesDOMParser::parse` without DOM traversal or result formatting; the two valid controls differ by 274 stable scanner source lines and 473 repeat-stable AFL++ tuples ([feedback receipt](../../../fuzzing/afl-native/xml/cpp/xerces_c/differential.json)). The full harness separately checks the namespace-aware tree output.
+
 ## Standard API (unranked)
 
 None. The ISO C++ working draft and cppreference's header index contain no XML header ([evidence](standard.json)).
