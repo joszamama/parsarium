@@ -579,6 +579,163 @@
       "parser_source_files": 2,
       "parser_source_lines_covered": 617,
       "error": null
+    },
+    {
+      "package": "lossless-json",
+      "version": "4.3.3",
+      "scope": "One RFC 8259 JSON text from strictly decoded local bytes as a nested value tree; each number retains its exact source lexeme in LosslessNumber.value",
+      "command": "python3 scripts/run_project.py json javascript lossless_json",
+      "receipt": "projects/json/javascript/lossless_json/verification.json",
+      "pass": true,
+      "output": {
+        "type": "object",
+        "members": {
+          "enabled": {
+            "type": "boolean",
+            "value": true
+          },
+          "missing": {
+            "type": "null"
+          },
+          "name": {
+            "type": "string",
+            "value": "parsarium"
+          },
+          "nested": {
+            "type": "object",
+            "members": {
+              "empty": {
+                "type": "object",
+                "members": {}
+              },
+              "items": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "object",
+                    "members": {
+                      "id": {
+                        "type": "LosslessNumber",
+                        "raw": "1"
+                      },
+                      "ok": {
+                        "type": "boolean",
+                        "value": false
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "members": {
+                      "id": {
+                        "type": "LosslessNumber",
+                        "raw": "2"
+                      },
+                      "text": {
+                        "type": "string",
+                        "value": "café \"quoted\""
+                      }
+                    }
+                  }
+                ]
+              },
+              "level": {
+                "type": "LosslessNumber",
+                "raw": "2"
+              },
+              "list": {
+                "type": "array",
+                "items": []
+              }
+            }
+          },
+          "ratio": {
+            "type": "LosslessNumber",
+            "raw": "-0.25e1"
+          },
+          "tags": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string",
+                "value": "json"
+              },
+              {
+                "type": "string",
+                "value": "go"
+              },
+              {
+                "type": "string",
+                "value": "rfc8259"
+              }
+            ]
+          },
+          "version": {
+            "type": "LosslessNumber",
+            "raw": "1"
+          }
+        }
+      },
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 252,
+      "differential_output": {
+        "type": "array",
+        "items": [
+          {
+            "type": "LosslessNumber",
+            "raw": "1"
+          },
+          {
+            "type": "LosslessNumber",
+            "raw": "2.5e-1"
+          },
+          {
+            "type": "string",
+            "value": "two"
+          },
+          {
+            "type": "array",
+            "items": [
+              {
+                "type": "boolean",
+                "value": true
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "boolean",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "members": {
+              "k": {
+                "type": "array",
+                "items": []
+              },
+              "n": {
+                "type": "object",
+                "members": {
+                  "deep": {
+                    "type": "string",
+                    "value": "A"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "differential_matches_projected_python_json_oracle": true,
+      "numeric_lexemes": "All JSON numbers retained as LosslessNumber.value raw strings; parser output is type-tagged and independently compared with Python json over the same control bytes."
     }
   ],
   "standard": [

@@ -40,6 +40,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [json5 / JavaScript](javascript/json5/README.md)
 - [jsonc-parser / JavaScript](javascript/jsonc_parser/README.md)
 - [jsonparse / JavaScript](javascript/jsonparse/README.md)
+- [lossless-json / JavaScript](javascript/lossless_json/README.md)
 - [stream-json / JavaScript](javascript/stream_json/README.md)
 - [halaxa/json-machine / PHP](php/halaxa_json_machine/README.md)
 - [json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0) / PHP](php/stdlib_json_decode/README.md)
