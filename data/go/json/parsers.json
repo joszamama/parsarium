@@ -32,7 +32,7 @@
       "objects": 5,
       "root": "object",
       "strings": [
-        "caf\u00e9 \"quoted\"",
+        "café \"quoted\"",
         "go",
         "json",
         "parsarium",
@@ -84,7 +84,7 @@
       "objects": 5,
       "root": "object",
       "strings": [
-        "caf\u00e9 \"quoted\"",
+        "café \"quoted\"",
         "go",
         "json",
         "parsarium",
@@ -137,7 +137,7 @@
       "objects": 5,
       "root": "object",
       "strings": [
-        "caf\u00e9 \"quoted\"",
+        "café \"quoted\"",
         "go",
         "json",
         "parsarium",
@@ -189,7 +189,7 @@
       "objects": 5,
       "root": "object",
       "strings": [
-        "caf\u00e9 \"quoted\"",
+        "café \"quoted\"",
         "go",
         "json",
         "parsarium",
@@ -241,7 +241,7 @@
       "objects": 5,
       "root": "object",
       "strings": [
-        "caf\u00e9 \"quoted\"",
+        "café \"quoted\"",
         "go",
         "json",
         "parsarium",
@@ -294,7 +294,7 @@
       "objects": 5,
       "root": "object",
       "strings": [
-        "caf\u00e9 \"quoted\"",
+        "café \"quoted\"",
         "go",
         "json",
         "parsarium",
@@ -312,5 +312,58 @@
     },
     "control": "controls/json/nested-object.json",
     "project": "projects/json/go/github_com_valyala_fastjson"
+  },
+  {
+    "name": "github.com/bytedance/sonic",
+    "module": "github.com/bytedance/sonic",
+    "version": "v1.15.5",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE in pinned Go module zip",
+    "input_api": "sonic.Unmarshal([]byte, *any) over one complete local JSON byte slice",
+    "documentation": "https://pkg.go.dev/github.com/bytedance/sonic@v1.15.5#Unmarshal",
+    "source": "https://github.com/bytedance/sonic/tree/v1.15.5",
+    "scope": "Complete local JSON document decoded into untyped Go values, then summarized; both observed valid controls verified",
+    "family": "Sonic optimized arm64 decoder: Go optdec over native NEON parser",
+    "family_note": "On linux/arm64 with Go 1.27.1, sonic.go and decoder_native.go build tags select Sonic. internal/decoder/api/decoder_arm64.go routes decodeImpl to optdec.Decode; optdec.Parser.parse calls native.ParseWithPadding implemented by NEON assembly. The harness rejects sonic.APIKind != UseSonicJSON. Go source coverage and AFL bridge instrument optdec Go source, not NEON assembly instructions.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 2428,
+      "source": "https://pkg.go.dev/github.com/bytedance/sonic?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "control": "controls/json/nested-object.json",
+    "project": "projects/json/go/github_com_bytedance_sonic"
   }
 ]

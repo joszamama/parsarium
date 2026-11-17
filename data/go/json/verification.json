@@ -265,6 +265,50 @@
       "differential_control_pass": true,
       "parser_source_lines_covered": 257,
       "error": null
+    },
+    {
+      "package": "github.com/bytedance/sonic",
+      "module": "github.com/bytedance/sonic",
+      "version": "v1.15.5",
+      "scope": "Complete local JSON document decoded into untyped Go values, then summarized; both observed valid controls verified",
+      "command": "python3 scripts/run_project.py json go github_com_bytedance_sonic",
+      "receipt": "projects/json/go/github_com_bytedance_sonic/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_control_pass": true,
+      "parser_source_lines_covered": 289,
+      "parser_source_scope": "github.com/bytedance/sonic/internal/decoder/optdec/ Go source; native NEON assembly omitted",
+      "error": null
     }
   ],
   "standard": [
