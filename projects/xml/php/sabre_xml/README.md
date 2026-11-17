@@ -1,7 +1,21 @@
-# sabre/xml 4.1.0 (PHP XML)
+# sabre/xml — XML / PHP
 
-Package API over the libxml2 family: `Sabre\Xml\Reader` extends PHP's `XMLReader` and `parse()` builds a Clark-notation element tree with attributes and leaf text. Sources are pinned GitHub archives of sabre/xml 4.1.0 and sabre/uri 3.1.0 ([source-lock.json](source-lock.json)), loaded by a small PSR-4 autoloader.
+Pinned release: `4.1.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-- Control: `controls/xml/catalog-ns.xml`; `order-default-ns.xml` also matches the expat oracle on elements, attributes, depth, root and text.
-- Coverage: Xdebug line coverage of `vendor/sabre/xml/lib/` (Ubuntu PHP 8.5.4, libxml 2.15.2).
-- Fuzzing feedback: `fuzzing/afl-native/xml/php/sabre_xml` instruments source-built libxml2 2.15.4 and PHP 8.5.12 ext/xmlreader and ext/libxml.
+[API, control result, and parser family](../../../../catalog/xml/php/sabre-xml/README.md)
+
+## Run from the repository root
+
+```sh
+python3 parsarium.py build xml php sabre_xml
+python3 parsarium.py run xml php sabre_xml controls/xml/catalog-ns.xml
+python3 parsarium.py replay xml php sabre_xml CORPUS_DIR runs/xml-sabre_xml-replay
+python3 parsarium.py afl build xml php sabre_xml
+python3 parsarium.py afl prepare xml php sabre_xml runs/xml-sabre_xml-afl
+```
+
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Coverage limit:** The pinned base image does not bundle php-fuzzer; replay is per case and AFL++ uses the one-shot native XMLReader/libxml2 overlay.
+
+**Native engine limit:** This target starts a fresh process for each input. In-process native fuzzing is unsupported; use one-input replay or the prepared AFL++ run.

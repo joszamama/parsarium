@@ -1,8 +1,8 @@
-# jcodec — plain MP3 / Java
+# jcodec — MP3 / Java
 
 Pinned release: `0.2.5`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[Ranking, leads, and parser family](../../../../data/java/mp3/ranking.md)
+[API, control result, and parser family](../../../../catalog/mp3/java/jcodec/README.md)
 
 ## Run from the repository root
 
@@ -15,3 +15,5 @@ python3 parsarium.py afl prepare mp3 java jcodec runs/mp3-jcodec-afl
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Coverage limit:** Untagged MPEG Layer III only; two valid CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or intensity-stereo support (Mp3Decoder throws on intensity stereo). jcodec is also counted under mp3_id3v2/java through the same MPEGAudioDemuxer; this path adds full Layer III decoding of untagged streams.

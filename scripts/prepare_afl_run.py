@@ -53,7 +53,8 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
               receipt["image_id"]]
     ecosystem = manifest["ecosystem"]
     php_native = (ecosystem == "php" and manifest.get("fuzz_engine") == "AFL++"
-                  and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")))
+                  and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")
+                       or manifest.get("native_campaign_supported") is False))
     if tk_source_feedback:
         target_args = ["/work/afl-python", "/work/replay.py", "@@"]
     elif binary:

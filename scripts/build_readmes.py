@@ -311,10 +311,17 @@ def main() -> None:
                 ready = bool(project and fully_runnable(project[0], project[1]))
                 result_path = source / "verification.json"
                 if not result_path.is_file():
-                    evidence = (entry.get("evidence") or
-                                cell_record.get("third_party_control_results") or
-                                (entry.get("project", "") + "/verification.json"))
-                    result_path = ROOT / evidence
+                    if project:
+                        result_path = project[0].parent / "verification.json"
+                    else:
+                        evidence = (entry.get("evidence") or
+                                    cell_record.get("third_party_control_results") or
+                                    (entry.get("project", "") + "/verification.json"))
+                        if isinstance(evidence, list):
+                            if len(evidence) != 1:
+                                raise ValueError(f"pilot parser needs an individual result path: {fmt}/{eco}/{entry['name']}")
+                            evidence = evidence[0]
+                        result_path = ROOT / evidence
                 if not result_path.is_file():
                     raise ValueError(f"pilot parser lacks saved result: {fmt}/{eco}/{entry['name']}")
                 docs = entry["documentation"]
@@ -324,7 +331,7 @@ def main() -> None:
                          "the format-wide search is still in progress.", "",
                          f"- **Pinned release:** `{entry['version']}`",
                          f"- **License:** {entry['license']}",
-                         f"- **Parser family:** {entry['family']}",
+                         f"- **Parser family:** {entry.get('family') or entry['parser_family']}",
                          f"- **Local input API:** `{entry['input_api']}`",
                          "- **Documentation:** " + " · ".join(f"[API reference](<{url}>)" for url in docs),
                          f"- **Valid control:** [`{control}`]({link(item_dir, ROOT / control)})",

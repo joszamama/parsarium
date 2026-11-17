@@ -3,9 +3,13 @@
 Only verified Docker targets appear below; the format remains incomplete.
 
 - [jansson / C](c/jansson/README.md)
+- [json-c / C](c/json-c/README.md)
 - [jsoncpp / C++](cpp/jsoncpp/README.md)
+- [nlohmann-json / C++](cpp/nlohmann-json/README.md)
 - [encoding/json.Unmarshal(\[\]byte, any) / Go](go/stdlib_unmarshal/README.md)
+- [github.com/goccy/go-json / Go](go/github_com_goccy_go_json/README.md)
 - [github.com/json-iterator/go / Go](go/github_com_json_iterator_go/README.md)
+- [gson / Java](java/gson/README.md)
 - [jackson-databind / Java](java/jackson_databind/README.md)
 - [stream-json / JavaScript](javascript/stream_json/README.md)
 - [json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0) / PHP](php/stdlib_json_decode/README.md)

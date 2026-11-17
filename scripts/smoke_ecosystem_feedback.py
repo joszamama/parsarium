@@ -66,7 +66,8 @@ def check_one(path: Path) -> dict:
             feedback = {"kind": "underlying_shared_library_binary_edges",
                         "value": record["feedback_edges"]}
         elif (ecosystem == "php" and manifest.get("fuzz_engine") == "AFL++"
-                and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint"))):
+                and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")
+                     or manifest.get("native_campaign_supported") is False)):
             _, image_id = image_for(project, manifest)
             overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
             record = json.loads(overlay.read_text())

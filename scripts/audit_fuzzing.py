@@ -233,6 +233,11 @@ def main() -> None:
             assert receipt["feedback_edges"] > 0
             assert receipt["feedback_kind"] in {"native_php_runtime_source_edges",
                                                 "native_php_http_parser_source_edges"}
+        elif str(relative) == "xml/php/sabre_xml":
+            assert manifest.get("native_campaign_supported") is False
+            assert receipt["feedback_kind"] == "native_php_runtime_source_edges"
+            assert receipt["feedback_edges"] > 0
+            assert verification["parser_source_lines_covered"] > 0
         else:
             assert receipt["feedback_edges"] > 0 and receipt["parser_source_features"] > 0
         if str(relative) == "ascii_ply/java/lwjgl_assimp":

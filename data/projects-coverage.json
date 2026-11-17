@@ -982,18 +982,18 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 20,
-    "containerized_verified": 20,
+    "catalog_paths": 30,
+    "containerized_verified": 30,
     "staged": 0,
-    "standard_api_paths": 7,
-    "standard_containerized_verified": 6,
+    "standard_api_paths": 8,
+    "standard_containerized_verified": 7,
     "standard_staged": 1,
     "cells": [
       {
         "format": "json",
         "ecosystem": "c",
-        "catalog_paths": 1,
-        "containerized_verified": 1,
+        "catalog_paths": 2,
+        "containerized_verified": 2,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1001,15 +1001,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_one_selected_search_bounded",
+        "status": "pilot_two_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Pilot cell: one third-party path (jansson 2.15.1, 282,984 Debian popcon sourcemax installations, captured 2026-11-17) was built, control-verified against the exact nested structure of the control, and given native AFL++ feedback with a stable valid-control differential. Search was the Conan Center recipe-name substring 'json' (24 hits, 3 of them C JSON parsers) plus three targeted C names (jansson, jsmn, parson); adoption was compared with Debian popcon sourcemax counts. json-c (269,736) is within 5% of jansson and was not built; cJSON (150,958) and yyjson (14,868) were not built. Popcon counts Debian installations of the library packages, mostly pulled in as dependencies, not developer choice; parson has no Debian package and no comparable number. Conan and Debian do not cover vendored single-file copies (common for cJSON). ISO C documents no JSON API. Two valid controls do not establish complete RFC 8259 support."
+        "uncertainty": "Pilot cell: two third-party paths, jansson 2.15.1 (282,984 Debian popcon sourcemax installations) and json-c 0.19 (269,736), both captured 2026-11-17, were built, control-verified against the exact nested structure of the control, and given native AFL++ feedback with a stable valid-control differential. They are separate parser families: jansson's recursive-descent src/load.c and json-c's incremental state-machine json_tokener.c. Search was the Conan Center recipe-name substring 'json' (24 hits, 3 of them C JSON parsers) plus three targeted C names (jansson, jsmn, parson); adoption was compared with Debian popcon sourcemax counts. cJSON (150,958) and yyjson (14,868) were not built. Popcon counts Debian installations of the library packages, mostly pulled in as dependencies, not developer choice; the jansson/json-c gap (13,248, under 5%) is too small to read as a preference. parson has no Debian package and no comparable number. Conan and Debian do not cover vendored single-file copies (common for cJSON). ISO C documents no JSON API. Two valid controls do not establish complete RFC 8259 support."
       },
       {
         "format": "json",
         "ecosystem": "cpp",
-        "catalog_paths": 1,
-        "containerized_verified": 1,
+        "catalog_paths": 2,
+        "containerized_verified": 2,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1017,15 +1017,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_one_selected_search_bounded",
+        "status": "pilot_two_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Pilot cell: only JsonCpp 1.9.8 was built and control-verified. Popcon measures Debian installs; JsonCpp's runtime count is inflated by dependents such as CMake, and header-only libraries (nlohmann/json, RapidJSON) have only dev packages, so popcon undercounts them. GitHub stars rank nlohmann/json first (50,894 vs 8,916). Nine leads are logged in leads.json and are not selected or ranked. Framework packages (Qt, Boost, POCO) are not ranked by whole-framework installs. The ISO C++ standard library has no JSON API. Two valid controls do not establish complete RFC 8259 support."
+        "uncertainty": "Pilot cell: JsonCpp 1.9.8 and nlohmann/json 3.12.0 were built and control-verified. Popcon measures Debian installs; JsonCpp's runtime count is inflated by dependents such as CMake, and header-only libraries (nlohmann/json, RapidJSON) have only dev packages, so popcon undercounts them. GitHub stars rank nlohmann/json first (50,894 vs 8,916). simdjson is above nlohmann/json at popcon source level (2,688 vs 1,799) through its runtime library but was not built. Eight leads are logged in leads.json and are not selected or ranked. Framework packages (Qt, Boost, POCO) are not ranked by whole-framework installs. The ISO C++ standard library has no JSON API. Two valid controls do not establish complete RFC 8259 support."
       },
       {
         "format": "json",
         "ecosystem": "go",
-        "catalog_paths": 1,
-        "containerized_verified": 1,
+        "catalog_paths": 2,
+        "containerized_verified": 2,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 1,
@@ -1033,15 +1033,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_one_selected_search_bounded",
+        "status": "pilot_two_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Pilot cell: only the highest Imported-by general-purpose JSON parser lead (github.com/json-iterator/go, 18,454) was built and control-verified. Eight further numeric leads are logged in leads.json and are not selected or ranked. Non-parser hits such as loggers, JWT, JSON-RPC, and protobuf JSON mappers were not treated as leads. One valid nested object control does not establish complete RFC 8259 support."
+        "uncertainty": "Pilot cell: two general-purpose JSON decoders were built and control-verified: github.com/json-iterator/go (18,454 Imported by) and github.com/goccy/go-json (4,192). gjson (10,420) was passed over as a non-validating path-query API and ugorji/go/codec (10,142) as a multi-format codec whose Imported by count is not JSON-specific. Seven further numeric leads are logged in leads.json and are not selected or ranked. Non-parser hits such as loggers, JWT, JSON-RPC, and protobuf JSON mappers were not treated as leads. Valid nested-object and nested-array controls do not establish complete RFC 8259 support."
       },
       {
         "format": "json",
         "ecosystem": "java",
-        "catalog_paths": 1,
-        "containerized_verified": 1,
+        "catalog_paths": 2,
+        "containerized_verified": 2,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1049,9 +1049,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_one_selected_search_bounded",
+        "status": "pilot_two_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Pilot cell: only the highest-adoption general-purpose JSON parser lead (jackson-databind, 162,890 deps.dev direct dependents summed over 239 releases) was built and control-verified. Maven Central text search ranks by relevance, not adoption, so twelve leads were looked up directly on deps.dev and are logged in leads.json; they are not selected or ranked. The adapter disables CANONICALIZE_FIELD_NAMES for deterministic feedback. Java SE 25 exports no JSON parsing API, so the standard count is zero by inventory, not by omission. One valid nested object control does not establish complete RFC 8259 support."
+        "uncertainty": "Pilot cell: the two highest-adoption general-purpose JSON parser leads from independent parser families were built and control-verified: jackson-databind (162,890 deps.dev direct dependents summed over 239 releases) and gson (33,240 over 45 releases). jackson-core, the second-highest lead (80,053), is the tokenizer jackson-databind drives, so it stays a same-family lead rather than a separate path. Maven Central text search ranks by relevance, not adoption, so leads were looked up directly on deps.dev; the remaining eleven are logged in leads.json and are not selected or ranked. The Jackson adapter disables CANONICALIZE_FIELD_NAMES for deterministic feedback; Gson uses its default instance. Java SE 25 exports no JSON parsing API, so the standard count is zero by inventory, not by omission. Valid nested object and nested array controls do not establish complete RFC 8259 support."
       },
       {
         "format": "json",
@@ -1168,8 +1168,8 @@
       {
         "format": "mp3",
         "ecosystem": "java",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1177,9 +1177,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_one_selected_search_bounded",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "Pilot cell: only the highest-adoption pure-Java Layer III path was built and control-verified; no padding. Maven Central Solr search ranks by relevance, the phrase queries 'mp3 decoder' and 'mpeg audio' returned 0 hits, so leads were looked up directly on deps.dev and logged in leads.json. deps.dev public coverage is incomplete and jcodec's count covers the whole codec library, not MP3 use alone. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or intensity-stereo support; jcodec's Mp3Decoder throws on intensity stereo by design. Java SE 25 exports no MP3 API, so the standard count is zero by inventory."
       },
       {
         "format": "mp3",
@@ -1248,8 +1248,8 @@
       {
         "format": "xml",
         "ecosystem": "c",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 2,
+        "containerized_verified": 2,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1257,15 +1257,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_two_selected_search_bounded",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "Pilot cell: two third-party paths (expat 2.10.0 and libxml2 2.15.4) were built, matched the exact namespace-resolved summary of both valid controls under LLVM source coverage, and have native AFL++ feedback with a stable valid-control differential. They are distinct parser families. expat leads libxml2 by 6,410 installs (2.2%) on the binary-package metric, a near tie. The Debian sourcemax table would invert the order (libxml2 source 61,109) only because the libxml2 source now builds libxml2-16 and the older libxml2 binary is no longer attributed to it, so binary runtime-library counts are the primary metric; libxml2-16 (9,413) is not added because hosts may have both. Popcon counts installations, mostly pulled in as dependencies, not direct parser use. Search was the Conan Center recipe-name substring 'xml' (9 hits, 1 of them a C XML parser) plus seven targeted C names; Conan and Debian miss vendored single-file parsers. The control oracle (controls/xml/check_controls.py) uses Python's pyexpat, the same family as expat but not libxml2, so the libxml2 match is a cross-family check. The expat harness pins XML_SetHashSalt so AFL++ maps are reproducible; libxml2 needed no such change. ISO C documents no XML API. Two valid UTF-8 controls without DOCTYPE do not establish DTD, entity, encoding, XML 1.1 or rejection behaviour."
       },
       {
         "format": "xml",
         "ecosystem": "cpp",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 2,
+        "containerized_verified": 2,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1273,9 +1273,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_two_selected_search_bounded",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "Pilot cell: Xerces-C++ 3.3.0 and pugixml 1.16 were built and control-verified. Homebrew install-on-request (365d) orders the four differently: tinyxml2 1,757, pugixml 1,270, Xerces-C++ 1,209, libxml++ 461, so the order depends on the metric; Debian dev installs remain the one primary metric. Source-level popcon is not used because libxml++2.6's 79,794 count is a runtime pulled in by dependents (79,361 with no recent file access). tinyxml2 and libxml++ stay unresolved leads in leads.json. libxml++ parses through the libxml2 C library. Whole frameworks (Qt, Boost, POCO) were not ranked. The ISO C++ standard library has no XML API. pugixml does no namespace processing: its namespace-resolved output comes from adapter code over pugixml's qualified names, so namespace well-formedness is checked by the adapter, not the library. pugixml also skips DOCTYPE without expanding DTD entities. Two small UTF-8 controls without DOCTYPE do not establish DTD, entity declaration, validation, non-UTF-8 encoding or XML 1.1 behaviour; attributes are reported sorted per element because DOM NamedNodeMap order is unspecified."
       },
       {
         "format": "xml",
@@ -1328,18 +1328,18 @@
       {
         "format": "xml",
         "ecosystem": "php",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
+        "standard_api_paths": 1,
+        "standard_containerized_verified": 1,
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_partial_search_bounded",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "Pilot cell, one verified third-party path. The earlier zero count wrongly excluded libxml2-family wrappers; PROTOCOL.md lets a wrapper qualify as a package API with its parser family identified, so sabre/xml is counted with family libxml2 (shared with the standard XMLReader path). symfony/dom-crawler and jms/serializer stay excluded because they only navigate or map an already parsed DOM/SimpleXML tree. The other libxml2-family wrappers (veewee/xml, mtownsend/xml-to-array, saloonphp/xml-wrangler, laravie/parser, orchestra/parser, pear/xml_parser and smaller ones) were not evaluated by the cutoff and remain unresolved, as do the own-code leads prewk/xml-string-streamer and watoki/dom. sabre/xml drops xmlns declarations and text in mixed-content elements by design, so its summary omits namespace declaration counts. Its coverage image uses Ubuntu PHP 8.5.4 with libxml 2.15.2; its AFL++ overlay uses the source-built PHP 8.5.12 and libxml2 2.15.4. The search covers the first 100 hits of five Packagist queries; controls are two small UTF-8 namespace-aware documents without DOCTYPE."
       },
       {
         "format": "xml",

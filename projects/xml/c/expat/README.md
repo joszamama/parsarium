@@ -16,4 +16,4 @@ python3 parsarium.py afl prepare xml c expat runs/xml-expat-afl
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-**Coverage limit:** Two valid UTF-8 XML 1.0 controls without DOCTYPE establish namespace-resolved element, attribute, declaration and character-data events only; DTDs, external entities, other encodings, XML 1.1 and well-formedness rejection are not established.
+**Coverage limit:** Two valid UTF-8 XML 1.0 controls without DOCTYPE establish namespace-resolved element, attribute, declaration and character-data events only; DTDs, external entities, other encodings, XML 1.1 and well-formedness rejection are not established. The expected outputs come from controls/xml/check_controls.py, which uses Python's bundled pyexpat (same expat family); the go encoding/xml and etree paths and a scratch libxml2 xmlTextReader build produced the same summaries.

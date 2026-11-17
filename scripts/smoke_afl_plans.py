@@ -32,7 +32,8 @@ def check(relative: Path, scratch: Path) -> dict:
     assert plan["control_sha256"] == manifest["control_sha256"]
     assert plan["overlay_receipt_sha256"] == sha256(receipt_path.read_bytes()).hexdigest()
     php_native = (manifest["ecosystem"] == "php" and manifest.get("fuzz_engine") == "AFL++"
-                  and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")))
+                  and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")
+                       or manifest.get("native_campaign_supported") is False))
     if manifest.get("coverage_kind") == "native_binary_edges":
         expected_tail = ["--", "/opt/venv/bin/python", "/work/binary-run-once.py", "@@"]
     elif php_native:
