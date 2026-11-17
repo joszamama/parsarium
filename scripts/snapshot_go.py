@@ -21,6 +21,7 @@ QUERIES = {
     "svg": ["svg", "svg parser", "svg reader", "svg render", "svg image"],
     "ascii_pnm": ["pnm", "ppm", "pgm", "pbm", "netpbm ascii"],
     "ascii_ply": ["ply", "ply reader", "ply parser", "polygon file format", "point cloud ply", "ply mesh"],
+    "json": ["json", "json parser", "json decoder", "json unmarshal", "json iterator"],
 }
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -28,7 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main() -> None:
     cell = sys.argv[1] if len(sys.argv) > 1 else ""
     if cell not in QUERIES:
-        raise SystemExit("usage: python3 scripts/snapshot_go.py zip|png|wav|http11|mp4|mp3_id3v2|pdf|svg|ascii_pnm|ascii_ply")
+        raise SystemExit("usage: python3 scripts/snapshot_go.py zip|png|wav|http11|mp4|mp3_id3v2|pdf|svg|ascii_pnm|ascii_ply|json")
     search = []
     for query in QUERIES[cell]:
         url = "https://pkg.go.dev/search?" + urlencode({"q": query, "limit": 100, "m": "package"})
