@@ -260,5 +260,56 @@
         ]
       }
     }
+  },
+  {
+    "name": "github.com/mmcdole/goxpp",
+    "module": "github.com/mmcdole/goxpp",
+    "version": "v1.3.0",
+    "license": "MIT",
+    "input_api": "xpp.NewXMLPullParser(io.Reader, true, nil) over a local byte stream, then XMLPullParser.NextToken() events",
+    "documentation": "https://pkg.go.dev/github.com/mmcdole/goxpp@v1.3.0#NewXMLPullParser",
+    "source": "https://github.com/mmcdole/goxpp/tree/v1.3.0",
+    "scope": "XML 1.0 UTF-8 documents without DOCTYPE parsed as a pull stream: expanded element names, attributes, namespace declarations, decoded text/CDATA and maximum depth on two valid controls",
+    "family": "goxpp XML pull cursor over Go encoding/xml Decoder.Token tokenizer",
+    "family_note": "goxpp xpp.go NewXMLPullParser constructs xml.NewDecoder(io.Reader); NextToken calls Decoder.Token, then processes tokens into its own cursor, depth and namespace state. Tokenization, entity/character-reference decoding and namespace expansion are supplied by encoding/xml. The package has its own pull-parser state but not an independent XML tokenizer.",
+    "shared_families": [
+      "Go encoding/xml Decoder tokenizer"
+    ],
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 132,
+      "source": "https://pkg.go.dev/github.com/mmcdole/goxpp?tab=importedby",
+      "captured_at_utc": "2026-11-17T03:16:02.492959+00:00",
+      "snapshot": "data/go/xml/registry-snapshot.json"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/go/github_com_mmcdole_goxpp"
   }
 ]

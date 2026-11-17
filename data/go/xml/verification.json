@@ -379,6 +379,76 @@
         }
       },
       "differential_command": "docker run --rm --platform linux/arm64 --network none --read-only --cap-drop ALL --security-opt no-new-privileges --tmpfs /tmp:rw,nosuid,size=64m -v $PWD/controls/xml/order-default-ns.xml:/input/differential:ro --entrypoint /work/harness.test parsarium/xml-go-github_com_beego_x2j:local -test.run=^TestDifferential$ -test.v"
+    },
+    {
+      "package": "github.com/mmcdole/goxpp",
+      "module": "github.com/mmcdole/goxpp",
+      "version": "v1.3.0",
+      "scope": "XML 1.0 UTF-8 documents without DOCTYPE parsed as a pull stream: expanded element names, attributes, namespace declarations, decoded text/CDATA and maximum depth on two valid controls",
+      "command": "python3 scripts/run_project.py xml go github_com_mmcdole_goxpp",
+      "receipt": "projects/xml/go/github_com_mmcdole_goxpp/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 84,
+      "encoding_xml_lines_covered": 306,
+      "error": null,
+      "differential_pass": true,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_command": "python3 projects/xml/go/github_com_mmcdole_goxpp/verify-feedback.py"
     }
   ],
   "standard": [
@@ -428,9 +498,10 @@
         "github.com/antchfx/xmlquery (via Decoder.Token)",
         "github.com/clbanning/mxj (via Decoder.Token)",
         "github.com/beego/x2j (via Decoder.Token)",
+        "github.com/mmcdole/goxpp (via Decoder.Token)",
         "encoding/xml.Decoder.Token()"
       ],
-      "note": "etree, xmlquery, mxj and x2j receipts count encoding/xml lines as underlying coverage; their AFL++ bridges map only package-specific source blocks. x2j's feedback check also probes encoding/xml blocks separately through the same harness."
+      "note": "All five third-party receipts count encoding/xml lines as underlying coverage; AFL++ bridges map package-specific source blocks separately from encoding/xml. goxpp and x2j also probe encoding/xml blocks through the same harness."
     }
   ]
 }
