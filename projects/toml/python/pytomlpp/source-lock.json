@@ -1,0 +1,40 @@
+{
+  "pytomlpp": {
+    "release": "1.1.0",
+    "registry_metadata": "https://pypi.org/pypi/pytomlpp/1.1.0/json",
+    "sdist": "https://files.pythonhosted.org/packages/10/fe/50ca1ac0c1a932d3e71311baff531c0395e546ec0cd42bc8a8a88c36e00b/pytomlpp-1.1.0.tar.gz",
+    "sdist_sha256": "61a0f73e7ba2fe8bba4e99ce6d2701491885850b53aad8f3e46d03c4b31e594d",
+    "upstream_tag": "v1.1.0",
+    "upstream_commit": "8d8d055ef9f3061d49aac4e6c5a7647dbed8d69f",
+    "wheel_note": "PyPI publishes no linux/aarch64 wheel for 1.1.0 (manylinux and musllinux x86_64, macOS and Windows only); this path is a source build and no official wheel is installed.",
+    "license": "MIT",
+    "license_evidence": "setup.cfg classifier 'License :: OSI Approved :: MIT License' (checked in the Dockerfile) and the sdist LICENSE file",
+    "license_file_sha256": "3685f81a5d1a3c520790890888d6fb4b6846a42e7e5467a522a01973389ee169",
+    "runtime_dependencies": [],
+    "documented_api": "README.md usage: pytomlpp.loads(toml_string) -> dict; pytomlpp.load(fl, mode='r'|'rb') is exported in __all__ with a docstring in _io.py",
+    "source_file_sha256": {
+      "src/pytomlpp.cpp": "fe5ab8a244ffef62bd68566ec727c7cc511e713c5eddcfbc08602e53e6d57224",
+      "src/type_casters.cpp": "50f3b593c19fb28fa9f7b6436ceb5cab686f4cb1adf7e11e845eb3f24c152492",
+      "src/encoding_decoding.cpp": "69cebd8759546840bc9f3627e62d8f286d68baa8238ca618507f50e934879211",
+      "src/pytomlpp/_io.py": "ecff3b55f0e28d636b0d6144ae3d2e0d34beb9362cd9e3e439a6b43a2307e02d",
+      "include/pytomlpp/pytomlpp.hpp": "92432152c9484708206269e915a4f3e53d49a25c9ebaebeff8a16359f0ed6379",
+      "third_party/tomlplusplus/include/toml++/impl/parser.inl": "556f60d4a1e9678fdd0d3fc9af2d5d20945ff23f7e2d0ca497a4ad488ba3eb5e",
+      "LICENSE": "3685f81a5d1a3c520790890888d6fb4b6846a42e7e5467a522a01973389ee169",
+      "third_party/tomlplusplus/LICENSE": "529bc3900a9571e49db285b0df432397e70b881cc3bf48de6667ae74ff4b06d8"
+    },
+    "source_sha256": "61a0f73e7ba2fe8bba4e99ce6d2701491885850b53aad8f3e46d03c4b31e594d"
+  },
+  "tomlplusplus": {
+    "vendored_in": "pytomlpp 1.1.0 sdist at third_party/tomlplusplus (pinned by the sdist SHA-256)",
+    "submodule_commit": "e7aaccca3fa3dbde9818ab8313250f3da4976e37",
+    "submodule_evidence": "GitHub contents API for bobfang1992/pytomlpp third_party/tomlplusplus at tag v1.1.0 (type submodule, sha e7aaccca)",
+    "lib_version": "3.4.0",
+    "relation_to_selected_cpp_path": "projects/toml/cpp/tomlplusplus pins the v3.4.0 tag tarball (8517f659). The vendored include/ tree differs in 17 of 49 impl headers (portability macros, MSVC/NVCC workarounds, a dotted-key depth limit, formatter flags); parser.inl differs by 26 changed lines of 3,917. LICENSE is identical (529bc390).",
+    "license": "MIT"
+  },
+  "build_backend": {
+    "pybind11": {"release": "2.13.6", "wheel_sha256": "237c41e29157b962835d356b370ededd57594a26d5894a795960f0047cb5caf5"},
+    "setuptools": {"release": "80.9.0", "wheel_sha256": "062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922"},
+    "role": "build backend only (setup.cfg setup_requires pybind11~=2.10)"
+  }
+}

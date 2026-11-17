@@ -35,6 +35,11 @@ PACKAGES = {
               "native": ("executed LLVM source regions and branch directions of the toml 1.1.8, toml_parser 1.1.5 "
                          "and toml_datetime 1.1.2 crate sources under {prefix}, compiled into the source-built "
                          "rtoml {release} _rtoml extension")},
+    "pytomlpp": {"modes": ("pytomlpp-str", "pytomlpp-path", "pytomlpp-stream"),
+                 "parser_file": "impl/parser.inl",
+                 "stdlib_family": "independent (tomllib is the tomli family; pytomlpp is the C++ toml++ family)",
+                 "native": ("executed LLVM source regions and branch directions of the toml++ headers vendored under "
+                            "{prefix}, compiled into the source-built pytomlpp {release} _impl extension")},
 }
 
 

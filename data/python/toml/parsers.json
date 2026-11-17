@@ -765,5 +765,261 @@
    "limitation": "Package-level downloads include transitive installs and non-parsing use; they do not measure TOML parsing directly."
   },
   "project": "projects/toml/python/rtoml"
+ },
+ {
+  "name": "pytomlpp",
+  "version": "1.1.0",
+  "license": "MIT",
+  "license_evidence": "https://pypi.org/pypi/pytomlpp/1.1.0/json; sdist setup.cfg classifier 'License :: OSI Approved :: MIT License' and LICENSE sha256 3685f81a5d1a3c520790890888d6fb4b6846a42e7e5467a522a01973389ee169",
+  "input_api": "pytomlpp.loads(decoded local TOML text) -> dict; pytomlpp.load(pathlib.Path) and pytomlpp.load(local binary stream, mode=\"rb\") give the same typed tree on both controls",
+  "documentation": "https://github.com/bobfang1992/pytomlpp/blob/v1.1.0/README.md",
+  "source": "https://files.pythonhosted.org/packages/10/fe/50ca1ac0c1a932d3e71311baff531c0395e546ec0cd42bc8a8a88c36e00b/pytomlpp-1.1.0.tar.gz",
+  "source_sha256": "61a0f73e7ba2fe8bba4e99ce6d2701491885850b53aad8f3e46d03c4b31e594d",
+  "dependencies": [
+   "toml++ vendored at third_party/tomlplusplus (submodule commit e7aaccca, lib_version 3.4.0)",
+   "pybind11 2.13.6 (build-time headers)"
+  ],
+  "scope": "TOML 1.0.0 documents from local text via pytomlpp.loads; the two valid controls only (service-config and typed-scalars), each equal to its hand-written typed tree and to CPython tomllib (an independent family) in the same image. Coverage and AFL++ feedback cover the vendored toml++ headers. Malformed input and TOML 1.1 features are untested.",
+  "family": "toml++ (marzer/tomlplusplus) via pybind11: vendored toml++ snapshot (lib_version 3.4.0); shared with the C++ toml++ path",
+  "family_note": "pytomlpp.loads calls the pybind11 _impl.loads function, which runs toml::parse(std::string_view) from the toml++ headers vendored in the sdist and converts the resulting toml::table into Python dict, list and datetime objects with pytomlpp's own type casters. The vendored toml++ is the submodule commit e7aaccca recorded at the pytomlpp v1.1.0 tag, a snapshot after the v3.4.0 release that the selected C++ toml++ path pins: 17 of its 49 impl headers differ from v3.4.0 (portability macros, compiler workarounds, a dotted-key depth limit and formatter flags) and parser.inl differs by 26 changed lines of 3,917. This path therefore shares the toml++ family with the C++ path and is not an independent parser; its feedback differential is measured in the toml++ headers. It is independent of tomli (and the standard tomllib), tomlkit and rtoml's Rust toml_parser family. The measured build is a source build with LLVM coverage; PyPI has no linux/aarch64 wheel for 1.1.0.",
+  "control": "controls/toml/service-config.toml",
+  "differential_control": "controls/toml/typed-scalars.toml",
+  "expected_output": {
+   "database": {
+    "limits": {
+     "max": {
+      "type": "integer",
+      "value": "10"
+     },
+     "min": {
+      "type": "integer",
+      "value": "-2"
+     }
+    },
+    "ports": [
+     {
+      "type": "integer",
+      "value": "8000"
+     },
+     {
+      "type": "integer",
+      "value": "8001"
+     },
+     {
+      "type": "integer",
+      "value": "8002"
+     }
+    ],
+    "ratio": {
+     "type": "float",
+     "value": "3.25"
+    }
+   },
+   "enabled": {
+    "type": "bool",
+    "value": "true"
+   },
+   "owner": {
+    "name": {
+     "type": "string",
+     "value": "Zoë"
+    },
+    "since": {
+     "type": "datetime",
+     "value": "1979-05-27T07:32:00Z"
+    }
+   },
+   "products": [
+    {
+     "name": {
+      "type": "string",
+      "value": "Hammer"
+     },
+     "sku": {
+      "type": "integer",
+      "value": "738594937"
+     }
+    },
+    {
+     "color": {
+      "type": "string",
+      "value": "gray"
+     },
+     "name": {
+      "type": "string",
+      "value": "Nail"
+     },
+     "points": [
+      {
+       "x": {
+        "type": "integer",
+        "value": "1"
+       },
+       "y": {
+        "type": "integer",
+        "value": "2"
+       }
+      },
+      {
+       "x": {
+        "type": "integer",
+        "value": "3"
+       },
+       "y": {
+        "type": "integer",
+        "value": "4"
+       }
+      }
+     ]
+    }
+   ],
+   "retries": {
+    "type": "integer",
+    "value": "3"
+   },
+   "servers": {
+    "alpha": {
+     "ip": {
+      "type": "string",
+      "value": "10.0.0.1"
+     },
+     "tags": [
+      {
+       "type": "string",
+       "value": "edge"
+      },
+      {
+       "type": "string",
+       "value": "eu"
+      }
+     ]
+    },
+    "beta": {
+     "enabled": {
+      "type": "bool",
+      "value": "false"
+     },
+     "ip": {
+      "type": "string",
+      "value": "10.0.0.2"
+     }
+    }
+   },
+   "title": {
+    "type": "string",
+    "value": "Parsarium \"service\" control"
+   }
+  },
+  "differential_expected_output": {
+   "floats": {
+    "exponent": {
+     "type": "float",
+     "value": "1000.0"
+    },
+    "fraction": {
+     "type": "float",
+     "value": "3.25"
+    },
+    "mixed": {
+     "type": "float",
+     "value": "0.015625"
+    },
+    "negative": {
+     "type": "float",
+     "value": "-0.5"
+    }
+   },
+   "integers": {
+    "binary": {
+     "type": "integer",
+     "value": "13"
+    },
+    "decimal": {
+     "type": "integer",
+     "value": "99"
+    },
+    "hex": {
+     "type": "integer",
+     "value": "3735928559"
+    },
+    "negative": {
+     "type": "integer",
+     "value": "-17"
+    },
+    "octal": {
+     "type": "integer",
+     "value": "493"
+    },
+    "underscored": {
+     "type": "integer",
+     "value": "1000000"
+    }
+   },
+   "keys": {
+    "a": {
+     "b": {
+      "c": {
+       "type": "integer",
+       "value": "1"
+      }
+     }
+    },
+    "quoted key": {
+     "type": "string",
+     "value": "q"
+    },
+    "site": {
+     "example.com": {
+      "type": "bool",
+      "value": "true"
+     }
+    }
+   },
+   "strings": {
+    "escapes": {
+     "type": "string",
+     "value": "tab\tquote\"backslash\\ é"
+    },
+    "literal": {
+     "type": "string",
+     "value": "C:\\Users\\parsarium"
+    },
+    "multiline": {
+     "type": "string",
+     "value": "first second"
+    },
+    "raw_multiline": {
+     "type": "string",
+     "value": "line one\nline two"
+    }
+   },
+   "times": {
+    "local_date": {
+     "type": "date-local",
+     "value": "1979-05-27"
+    },
+    "local_datetime": {
+     "type": "datetime-local",
+     "value": "1979-05-27T07:32:00"
+    },
+    "local_time": {
+     "type": "time-local",
+     "value": "00:32:00.25"
+    },
+    "offset": {
+     "type": "datetime",
+     "value": "1979-05-27T07:32:00.5Z"
+    }
+   }
+  },
+  "metric": {
+   "name": "PyPI Stats last_month downloads excluding known mirrors",
+   "value": 43243,
+   "source": "https://pypistats.org/api/packages/pytomlpp/recent",
+   "snapshot": "data/python/toml/registry-snapshot.json",
+   "captured_at_utc": "2026-11-17T16:44:10.069706+00:00",
+   "limitation": "Package-level downloads include transitive installs and non-parsing use; they do not measure TOML parsing directly."
+  },
+  "project": "projects/toml/python/pytomlpp"
  }
 ]

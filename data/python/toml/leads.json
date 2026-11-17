@@ -46,26 +46,6 @@
       }
     },
     {
-      "name": "pytomlpp",
-      "metric_value": 43243,
-      "metric": "PyPI Stats last_month downloads excluding known mirrors",
-      "family": "toml++ via pybind11",
-      "api_lead": "pytomlpp.loads(str)",
-      "note": "pybind11 extension over the C++ toml++ parser (the selected C++ toml++ family).",
-      "source": "https://pypi.org/project/pytomlpp/",
-      "status": "unresolved_runnability_pending",
-      "api_lead_checked_against_pinned_release": true,
-      "release": "1.1.0",
-      "release_sdist_sha256": "61a0f73e7ba2fe8bba4e99ce6d2701491885850b53aad8f3e46d03c4b31e594d",
-      "evidence": {
-        "checked_on_utc": "2026-11-17",
-        "run": "python:3.13-slim (digest sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90, linux/amd64 under emulation; no linux/aarch64 wheel is published), pytomlpp 1.1.0 cp313 manylinux x86_64 wheel; pytomlpp.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
-        "service-config.toml": "matches the hand-written typed tree",
-        "typed-scalars.toml": "matches the hand-written typed tree",
-        "blocker": "No linux/aarch64 wheel exists (pip cannot build the sdist without a C++ toolchain), and the parser is compiled toml++ C++ inside the extension: Python line coverage and the Python AFL++ bridge see none of it. A path needs a source build with C++ coverage and AFL++ instrumentation of the toml++ headers inside the extension; not done in this round."
-      }
-    },
-    {
       "name": "toml-rs",
       "metric_value": 18062,
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
@@ -134,6 +114,12 @@
       "metric_value": 1380894,
       "status": "promoted_to_verified",
       "project": "projects/toml/python/rtoml"
+    },
+    {
+      "name": "pytomlpp",
+      "metric_value": 43243,
+      "status": "promoted_to_verified",
+      "project": "projects/toml/python/pytomlpp"
     }
   ]
 }

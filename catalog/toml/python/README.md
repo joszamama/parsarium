@@ -11,6 +11,7 @@ Bounded TOML search captured 2026-11-17: 1 query, 100 recorded hits (100 unique)
 - [tomlkit](tomlkit/README.md) — verified Docker harness
 - [tomli](tomli/README.md) — verified Docker harness
 - [rtoml](rtoml/README.md) — verified API path
+- [pytomlpp](pytomlpp/README.md) — verified API path
 
 ## Standard and runtime APIs
 
