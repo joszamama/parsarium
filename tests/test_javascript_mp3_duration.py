@@ -1,16 +1,19 @@
 """Pin mp3-duration's frame-derived result and opt-in AFL++ hit-count bridge."""
 
 from hashlib import sha256
+import importlib.util
 import json
 from pathlib import Path
 import sys
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "controls/mp3"))
 sys.path.insert(0, str(ROOT / "scripts"))
-from check_controls import walk  # noqa: E402
 from build_afl_bridge import dockerfile  # noqa: E402
+_walker_spec = importlib.util.spec_from_file_location("mp3_control_walker", ROOT / "controls/mp3/check_controls.py")
+_walker = importlib.util.module_from_spec(_walker_spec)
+_walker_spec.loader.exec_module(_walker)
+walk = _walker.walk
 
 
 def read(path):

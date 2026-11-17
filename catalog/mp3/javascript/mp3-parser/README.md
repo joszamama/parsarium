@@ -1,11 +1,36 @@
-# mp3-parser 0.3.0
+# mp3-parser — MP3 / JavaScript
 
-The pinned [README](https://github.com/biril/mp3-parser/blob/19761d0aa0d88bcc215fd7fbeb197f8d00229bb4/README.md#readframeview-offset-requirenextframe) documents `readFrame(DataView, offset, requireNextFrame)`. It is byte-identical to the npm tarball README. The [adapter](../../../../projects/mp3/javascript/mp3_parser/adapter.mjs) wraps local bytes in a `DataView`, calls `readFrame` at each reported frame boundary, and advances to EOF. Its output reports MPEG version bits, layer, rate, channels, bitrate, frame count and bytes, samples per frame and total samples. It does not decode Layer III audio or claim tag parsing.
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-The 0.3.0 [npm release](https://registry.npmjs.org/mp3-parser/0.3.0) is MIT licensed and pinned by npm integrity, tarball SHA-256 and gitHead in the [source lock](../../../../projects/mp3/javascript/mp3_parser/source-lock.json). It has no runtime dependencies. `lib/lib.js` contains its own MPEG header-bit extraction, bitrate/rate tables and frame-length calculation, distinct from the other selected JavaScript MP3 parser families.
+- **Pinned release:** `0.3.0`
+- **License:** MIT
+- **Parser family:** biril mp3-parser JavaScript frame-header reader
+- **Local input API:** `readFrame(DataView, offset, false) repeatedly over local Buffer-backed DataView; each result contains frame header and computed byte/sample lengths`
+- **Documentation:** [API reference](<https://github.com/biril/mp3-parser/blob/19761d0aa0d88bcc215fd7fbeb197f8d00229bb4/README.md#readframeview-offset-requirenextframe>)
+- **Valid control:** [`controls/mp3/tone-44k-mono.mp3`](../../../../controls/mp3/tone-44k-mono.mp3)
+- **Catalog evidence:** [parser record](../../../../data/javascript/mp3/parsers.json) · [control result](../../../../projects/mp3/javascript/mp3_parser/verification.json)
 
-Both existing untagged controls match the independent frame-header walker. The 44.1 kHz mono file yields 11 frames, 2,298 frame bytes and 12,672 samples at 64 kbit/s. The 22.05 kHz stereo file yields 12 frames, 1,254 frame bytes and 6,912 samples at 32 kbit/s. The [Docker verification](../../../../projects/mp3/javascript/mp3_parser/verification.json) marks 416 lines in `lib/lib.js` on the first control using V8 source ranges; that count includes module initialization as well as frame-reading code.
+## Observed control result
 
-The [scoped AFL++ receipt](../../../../data/javascript/mp3/mp3_parser-feedback-differential.json) repeats each valid control three times. It records 32 versus 30 parser source ranges, with two differing ranges and two differing AFL++ tuples. Both changes are the bit-4 branches of `octetToBinRep` in the pinned frame reader. This is narrow header-bit feedback. The saved 30-day npm snapshot records 40,519 package downloads, below the higher-adoption selected paths and the two duration-only leads. The two valid CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, CRC-protected or ID3 behavior. No malformed-input or campaign result is claimed.
+```json
+{
+  "codec": "mp3",
+  "mpeg_version_bits": "11",
+  "layer": "Layer III",
+  "sample_rate": 44100,
+  "channels": 1,
+  "bitrate": 64000,
+  "frames": 11,
+  "frame_bytes": 2298,
+  "samples_per_frame": 1152,
+  "total_samples": 12672,
+  "header_variants": 1
+}
+```
 
-[Run commands](../../../../projects/mp3/javascript/mp3_parser/README.md)
+## Run this target
+
+```sh
+python3 parsarium.py build mp3 javascript mp3_parser
+python3 parsarium.py run mp3 javascript mp3_parser controls/mp3/tone-44k-mono.mp3
+```

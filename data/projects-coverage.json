@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 129,
-    "containerized_verified": 129,
+    "catalog_paths": 132,
+    "containerized_verified": 132,
     "staged": 0,
     "standard_api_paths": 11,
     "standard_containerized_verified": 11,
@@ -1184,8 +1184,8 @@
       {
         "format": "mp3",
         "ecosystem": "javascript",
-        "catalog_paths": 3,
-        "containerized_verified": 3,
+        "catalog_paths": 5,
+        "containerized_verified": 5,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1193,9 +1193,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_three_selected_search_bounded",
+        "status": "pilot_five_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Three verified paths; no padding. Search is six npm queries of 100 hits each, captured 2026-11-17; downloads were fetched for 15 hand-picked candidates, not every hit. mediabunny was found by `mp3 frame`, `mp3 duration` and `mp3 demuxer`, not the narrower queries. Download counts cover whole toolkits: mediabunny's muxing, conversion and many containers, and codec-parser's AAC, FLAC and Ogg parsers, not MP3 framing alone. The three selected paths are the top three by downloads among the fetched candidates. None decodes Layer III audio. The mpg123 WASM wrappers are recorded as shared-family leads. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, CRC-protected or ID3 support. No standard Node.js MP3 API exists. codec-parser's valid-control AFL++ differential is narrow: one header-cache range that tracks distinct frame headers, not version or channel branches. Its V8 line counts include module evaluation of imported AAC, FLAC, Opus, Vorbis and Ogg files that audio/mpeg parsing does not call. music-metadata reports MPEG version and layer only through its codec string ('MPEG 1 Layer 3'), not as separate fields, and needs duration: true for a full frame walk. Its valid-control AFL++ differential is 4 sync() tail-policy ranges that track frame length, not version or channel branches. Its V8 package line count (3,539) is mostly module evaluation; MpegParser.js alone is 245 lines."
+        "uncertainty": "Five verified paths; no padding. Search is six npm queries of 100 hits each, captured 2026-11-17; downloads were fetched for 15 hand-picked candidates, not every hit. mediabunny was found by `mp3 frame`, `mp3 duration` and `mp3 demuxer`, not the narrower queries. Download counts cover whole toolkits: mediabunny's muxing, conversion and many containers, and codec-parser's AAC, FLAC and Ogg parsers, not MP3 framing alone. The first three remain the highest-download fetched candidates; mp3-duration and mp3-parser have lower adoption. mp3-parser has 40,519 monthly downloads, below the duration-only leads, and is selected for its documented frame reader and exact whole-control walk. Its AFL++ differential is narrow: two source ranges in lib.js octetToBinRep bit extraction, not distinct version/channel branches. None decodes Layer III audio. The mpg123 WASM wrappers are recorded as shared-family leads. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, CRC-protected or ID3 support. No standard Node.js MP3 API exists. codec-parser's valid-control AFL++ differential is narrow: one header-cache range that tracks distinct frame headers, not version or channel branches. Its V8 line counts include module evaluation of imported AAC, FLAC, Opus, Vorbis and Ogg files that audio/mpeg parsing does not call. music-metadata reports MPEG version and layer only through its codec string ('MPEG 1 Layer 3'), not as separate fields, and needs duration: true for a full frame walk. Its valid-control AFL++ differential is 4 sync() tail-policy ranges that track frame length, not version or channel branches. Its V8 package line count (3,539) is mostly module evaluation; MpegParser.js alone is 245 lines. mp3-duration exposes only duration; its count-scoped AFL signal tracks 11 versus 12 frame calls and may reflect input length, not a new branch or line. The same release is also verified for tagged MP3 duration in the ID3v2 cell."
       },
       {
         "format": "mp3",
@@ -1312,8 +1312,8 @@
       {
         "format": "xml",
         "ecosystem": "javascript",
-        "catalog_paths": 6,
-        "containerized_verified": 6,
+        "catalog_paths": 7,
+        "containerized_verified": 7,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1321,9 +1321,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_six_selected_search_bounded",
+        "status": "pilot_seven_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Pilot cell: saxes 6.0.0, jsdom 31.0.1, sax 1.6.1, fast-xml-parser 5.12.1, @xmldom/xmldom 0.9.12, and xml2js 0.6.2 are control-verified, source-covered, and have input-dependent AFL++ feedback. Comparable 30-day npm downloads rank the six package paths; counts include transitive adoption. The six paths cover four independent parser families: jsdom shares saxes and xml2js shares sax. saxes and sax share historical fork lineage but have distinct parser code. fast-xml-parser has its own scanner and validator but no namespace URI resolution, so the adapter resolves expanded names over its qualified names and xmlns attributes. @xmldom/xmldom has its own XMLReader tokenizer and DOM builder, accepts locally decoded text, and the adapter treats every warning or error as fatal. jsdom builds its XML DOM over the same pinned saxes 6.0.0 tokenizer as the selected saxes path; it copies DOCTYPE entity declarations into saxes and forces XML 1.0 rules, and its AFL++ feedback includes input-independent window setup alongside saxes and DOM construction. xml2js builds an ordered tree over the same pinned sax 1.6.1 tokenizer as the selected sax path; it drops comments and processing instructions, which can merge adjacent text segments. Wrapper package and underlying tokenizer source coverage are recorded separately. The search is bounded to recorded queries and snapshot; two valid controls do not establish complete XML 1.0 compliance."
+        "uncertainty": "Pilot cell: saxes 6.0.0, jsdom 31.0.1, sax 1.6.1, fast-xml-parser 5.12.1, @xmldom/xmldom 0.9.12, xml2js 0.6.2, and xml-js 1.6.11 are control-verified, source-covered, and have input-dependent AFL++ feedback. Comparable 30-day npm downloads rank the seven package paths; counts include transitive adoption. The seven paths cover four independent parser families: jsdom shares saxes and xml2js shares sax. saxes and sax share historical fork lineage but have distinct parser code. fast-xml-parser has its own scanner and validator but no namespace URI resolution, so the adapter resolves expanded names over its qualified names and xmlns attributes. @xmldom/xmldom has its own XMLReader tokenizer and DOM builder, accepts locally decoded text, and the adapter treats every warning or error as fatal. jsdom builds its XML DOM over the same pinned saxes 6.0.0 tokenizer as the selected saxes path; it copies DOCTYPE entity declarations into saxes and forces XML 1.0 rules, and its AFL++ feedback includes input-independent window setup alongside saxes and DOM construction. xml2js and xml-js build distinct trees over the same pinned sax 1.6.1 tokenizer as the selected sax path; it drops comments and processing instructions, which can merge adjacent text segments. Wrapper package and underlying tokenizer source coverage are recorded separately. The search is bounded to recorded queries and snapshot; two valid controls do not establish complete XML 1.0 compliance."
       },
       {
         "format": "xml",

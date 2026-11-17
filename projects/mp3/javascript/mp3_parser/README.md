@@ -2,7 +2,7 @@
 
 Pinned release: `0.3.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, parser family and limits](../../../../catalog/mp3/javascript/mp3-parser/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/javascript/mp3-parser/README.md)
 
 ## Run from the repository root
 
@@ -14,4 +14,6 @@ python3 parsarium.py afl build mp3 javascript mp3_parser
 python3 parsarium.py afl prepare mp3 javascript mp3_parser runs/mp3-mp3_parser-afl
 ```
 
-Replace `CORPUS_DIR` with a directory of MP3 files. The AFL++ command prepares a seeded run; it does not start a campaign. Feedback is scoped to the package's `lib/lib.js` frame reader.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Coverage limit:** Untagged MPEG Layer III CBR controls only; frame metadata, no Layer III audio decode. Two valid controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, CRC-protected or ID3 behavior.

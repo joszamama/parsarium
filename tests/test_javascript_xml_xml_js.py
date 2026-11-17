@@ -1,14 +1,16 @@
 """Pin the xml-js API path, its independent controls, and parser-scoped feedback."""
 
 from hashlib import sha256
+import importlib.util
 import json
 from pathlib import Path
-import sys
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "controls/xml"))
-from check_controls import summarize  # noqa: E402
+_oracle_spec = importlib.util.spec_from_file_location("xml_control_oracle", ROOT / "controls/xml/check_controls.py")
+_oracle = importlib.util.module_from_spec(_oracle_spec)
+_oracle_spec.loader.exec_module(_oracle)
+summarize = _oracle.summarize
 
 
 def read(path):

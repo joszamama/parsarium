@@ -15,7 +15,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("mediabunny", "music_metadata", "codec_parser")
+PROJECTS = ("mediabunny", "music_metadata", "codec_parser", "mp3_parser")
 REPEATS = 3
 REPORT = ROOT / "data/javascript/mp3/afl-feedback.json"
 _walker = importlib.util.spec_from_file_location("check_controls", ROOT / "controls/mp3/check_controls.py")
@@ -128,8 +128,12 @@ def check(slug: str) -> dict:
     if not feature_difference or not tuple_difference:
         raise RuntimeError(f"{relative}: second control did not change parser feedback")
     prefix = manifest.get("afl_coverage_subject_prefix", manifest["coverage_subject_prefix"])
-    by_file = lambda items: dict(sorted({name: sum(1 for item in items if item.startswith(prefix + name + ":"))
-                                         for name in {item[len(prefix):].rsplit(":", 1)[0] for item in items}}.items()))
+    if prefix.endswith(".js"):
+        source_name = prefix.split(f"/node_modules/{manifest['package']}/", 1)[-1]
+        by_file = lambda items: {source_name: len(items)}
+    else:
+        by_file = lambda items: dict(sorted({name: sum(1 for item in items if item.startswith(prefix + name + ":"))
+                                             for name in {item[len(prefix):].rsplit(":", 1)[0] for item in items}}.items()))
     result = {"project": str(relative), "pass": True,
               "feedback_kind": receipt["feedback_kind"],
               "overlay_receipt_sha256": sha256((overlay / "verification.json").read_bytes()).hexdigest(),
@@ -171,6 +175,17 @@ def main() -> None:
                                         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
                                         **result}, indent=2, ensure_ascii=False) + "\n")
         return
+    # mp3-duration uses a separate, opt-in function-hit-count verifier. Keep its
+    # pinned result in the cell report without treating counts as branch coverage.
+    duration_report = json.loads((ROOT / "data/javascript/mp3/mp3_duration-feedback-differential.json").read_text())
+    duration, = duration_report["results"]
+    duration_overlay = ROOT / "fuzzing/afl-native/mp3/javascript/mp3_duration/verification.json"
+    if duration["overlay_receipt_sha256"] != sha256(duration_overlay.read_bytes()).hexdigest():
+        raise ValueError("mp3-duration scoped feedback receipt is stale")
+    results.append(duration)
+    order = {entry["project"].rsplit("/", 1)[-1]: index for index, entry in enumerate(
+        json.loads((ROOT / "data/javascript/mp3/parsers.json").read_text()))}
+    results.sort(key=lambda entry: order[entry["project"].rsplit("/", 1)[-1]])
     REPORT.write_text(json.dumps({
         "schema_version": 1,
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),

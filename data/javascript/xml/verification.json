@@ -421,6 +421,76 @@
       },
       "differential_matches_expat_oracle": true,
       "error": null
+    },
+    {
+      "package": "xml-js",
+      "version": "1.6.11",
+      "scope": "xml2js(string) creates an XML object tree over sax 1.6.1; adapter resolves qualified names with namespace declarations",
+      "command": "python3 scripts/run_project.py xml javascript xml_js",
+      "receipt": "projects/xml/javascript/xml_js/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 163,
+      "underlying_parser": "sax 1.6.1",
+      "underlying_source_files": 1,
+      "underlying_source_lines_covered": 888,
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_expat_oracle": true,
+      "projection_limit": "Namespace URIs are resolved by the adapter over xml-js qualified names; xml-js itself does not expose expanded URIs."
     }
   ],
   "standard": []

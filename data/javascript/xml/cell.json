@@ -1,10 +1,10 @@
 {
   "ecosystem": "javascript",
   "format": "xml",
-  "status": "pilot_six_selected_search_bounded",
+  "status": "pilot_seven_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 6,
+  "verified_third_party_count": 7,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "xml parser",
@@ -17,8 +17,8 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 600,
   "unique_search_hits": 382,
-  "unresolved_documentation_leads": 13,
-  "uncertainty": "Pilot cell: saxes 6.0.0, jsdom 31.0.1, sax 1.6.1, fast-xml-parser 5.12.1, @xmldom/xmldom 0.9.12, and xml2js 0.6.2 are control-verified, source-covered, and have input-dependent AFL++ feedback. Comparable 30-day npm downloads rank the six package paths; counts include transitive adoption. The six paths cover four independent parser families: jsdom shares saxes and xml2js shares sax. saxes and sax share historical fork lineage but have distinct parser code. fast-xml-parser has its own scanner and validator but no namespace URI resolution, so the adapter resolves expanded names over its qualified names and xmlns attributes. @xmldom/xmldom has its own XMLReader tokenizer and DOM builder, accepts locally decoded text, and the adapter treats every warning or error as fatal. jsdom builds its XML DOM over the same pinned saxes 6.0.0 tokenizer as the selected saxes path; it copies DOCTYPE entity declarations into saxes and forces XML 1.0 rules, and its AFL++ feedback includes input-independent window setup alongside saxes and DOM construction. xml2js builds an ordered tree over the same pinned sax 1.6.1 tokenizer as the selected sax path; it drops comments and processing instructions, which can merge adjacent text segments. Wrapper package and underlying tokenizer source coverage are recorded separately. The search is bounded to recorded queries and snapshot; two valid controls do not establish complete XML 1.0 compliance.",
+  "unresolved_documentation_leads": 12,
+  "uncertainty": "Pilot cell: saxes 6.0.0, jsdom 31.0.1, sax 1.6.1, fast-xml-parser 5.12.1, @xmldom/xmldom 0.9.12, xml2js 0.6.2, and xml-js 1.6.11 are control-verified, source-covered, and have input-dependent AFL++ feedback. Comparable 30-day npm downloads rank the seven package paths; counts include transitive adoption. The seven paths cover four independent parser families: jsdom shares saxes and xml2js shares sax. saxes and sax share historical fork lineage but have distinct parser code. fast-xml-parser has its own scanner and validator but no namespace URI resolution, so the adapter resolves expanded names over its qualified names and xmlns attributes. @xmldom/xmldom has its own XMLReader tokenizer and DOM builder, accepts locally decoded text, and the adapter treats every warning or error as fatal. jsdom builds its XML DOM over the same pinned saxes 6.0.0 tokenizer as the selected saxes path; it copies DOCTYPE entity declarations into saxes and forces XML 1.0 rules, and its AFL++ feedback includes input-independent window setup alongside saxes and DOM construction. xml2js and xml-js build distinct trees over the same pinned sax 1.6.1 tokenizer as the selected sax path; it drops comments and processing instructions, which can merge adjacent text segments. Wrapper package and underlying tokenizer source coverage are recorded separately. The search is bounded to recorded queries and snapshot; two valid controls do not establish complete XML 1.0 compliance.",
   "third_party_evidence": "data/javascript/xml/parsers.json",
   "third_party_control_results": "data/javascript/xml/verification.json",
   "runtime_evidence": "data/javascript/xml/standard.json",

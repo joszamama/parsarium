@@ -20,19 +20,22 @@ def read(path: Path) -> object:
 
 
 class JavaScriptMp3PilotTest(unittest.TestCase):
-    def test_selected_parsers_are_ranked_and_kept_out_of_leads(self):
+    def test_selected_parsers_are_ranked_and_leads_preserve_discovery(self):
         parsers = read(BASE / "parsers.json")
         leads = read(BASE / "leads.json")
         cell = read(BASE / "cell.json")
         downloads = read(BASE / "registry-snapshot.json")["downloads"]
         self.assertEqual([parser["name"] for parser in parsers],
-                         ["mediabunny", "music-metadata", "codec-parser", "mp3-parser"])
+                         ["mediabunny", "music-metadata", "codec-parser", "mp3-duration", "mp3-parser"])
         values = [parser["metric"]["value"] for parser in parsers]
         self.assertEqual(values, sorted(values, reverse=True))
         for parser in parsers:
             self.assertEqual(downloads[parser["name"]]["downloads"], parser["metric"]["value"])
             self.assertEqual(downloads[parser["name"]]["latest_version"], parser["version"])
-        self.assertFalse({parser["name"] for parser in parsers} & {lead["name"] for lead in leads})
+        self.assertEqual({parser["name"] for parser in parsers} & {lead["name"] for lead in leads},
+                         {"mp3-duration", "mp3-parser"})
+        self.assertTrue(all(lead["status"] == "promoted_to_verified" for lead in leads
+                            if lead["name"] in {"mp3-duration", "mp3-parser"}))
         self.assertEqual(cell["verified_third_party_count"], len(parsers))
         self.assertEqual(cell["leads_recorded"], len(leads))
         self.assertEqual(cell["leads_by_status"], dict(Counter(lead["status"] for lead in leads)))
@@ -58,7 +61,7 @@ class JavaScriptMp3PilotTest(unittest.TestCase):
             self.assertEqual(lock["license"], parser["license"])
             self.assertTrue(receipt["pass"])
             self.assertEqual(receipt["output"], parser["expected_output"])
-            self.assertGreater(receipt["format_specific_source_lines_covered"], 0)
+            self.assertGreater(receipt["parser_source_lines_covered"], 0)
             for key in ("control", "differential_control"):
                 self.assertEqual(sha256((ROOT / manifest[key]).read_bytes()).hexdigest(),
                                  manifest[f"{key}_sha256"])
@@ -136,7 +139,8 @@ class JavaScriptMp3PilotTest(unittest.TestCase):
                   for slug in ("codec_parser", "music_metadata", "mp3_parser")]
         results = {item["project"]: item for item in [*report["results"], *scoped]}
         self.assertEqual(set(results), {"mp3/javascript/mediabunny", "mp3/javascript/music_metadata",
-                                        "mp3/javascript/codec_parser", "mp3/javascript/mp3_parser"})
+                                        "mp3/javascript/codec_parser", "mp3/javascript/mp3_parser",
+                                        "mp3/javascript/mp3_duration"})
         for result in results.values():
             slug = result["project"].rsplit("/", 1)[-1]
             manifest = read(ROOT / f"projects/mp3/javascript/{slug}/manifest.json")
