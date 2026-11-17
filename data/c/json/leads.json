@@ -11,12 +11,12 @@
   },
   {
     "name": "parson",
-    "status": "unresolved",
+    "status": "unresolved_no_primary_metric",
     "language": "C",
     "conan_recipe": true,
     "popcon_installed": null,
     "popcon_rank": null,
-    "reason": "json_parse_string takes a NUL-terminated string, not a length-bounded buffer; Conan recipe present but no Debian source package, so no comparable popcon number. Not built.",
+    "reason": "Technically verified as a candidate (local commit 271447a6): pinned 1.5.4 (MIT), json_parse_string on local text, both valid controls match the full nested value, 530 own parson.c lines covered, 34 stable AFL++ tuple differences between controls. Not selected: no Debian source package in the pinned popcon snapshot, so no value on this cell's primary metric; GitHub stars (1,481) are supplemental and PROTOCOL.md allows star fallback only in PLY cells.",
     "source": "https://github.com/kgabis/parson"
   }
 ]

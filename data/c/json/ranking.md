@@ -24,6 +24,6 @@ yyjson uses the documented `yyjson_read(dat, len, 0)` byte-buffer API. The [pinn
 | Lead | Conan recipe | Popcon installations | Status |
 | --- | --- | ---: | --- |
 | [jsmn](https://github.com/zserge/jsmn) | yes | 11 | Tokenizer-only lead; below the stated supplemental adoption threshold |
-| [parson](https://github.com/kgabis/parson) | yes | unavailable | No comparable Debian source count; input API requires a NUL-terminated string |
+| [parson](https://github.com/kgabis/parson) | yes | unavailable | Verified technically (both controls, 530 own lines, 34 stable AFL++ tuple differences) but no Debian source package, so no primary value; stars are not an allowed fallback outside PLY cells |
 
 Conan Center search: recipe-name substring `json` (24 hits) plus `jansson`, `jsmn`, `parson` targeted names (3 hits), at most 100 results per query; 27 recorded hits, 27 unique. Other Conan hits include C++ libraries, validators and jsonnet. The pinned releases and valid controls support only the observed JSON subset; a complete RFC 8259 implementation claim would need more evidence.

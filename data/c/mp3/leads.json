@@ -224,7 +224,7 @@
       "install_on_request_365d": null,
       "supplemental_github_stars": 1988,
       "license": "CC0-1.0",
-      "reason": "Header-only C Layer III decoder (mp3dec_decode_frame on a byte buffer). Not a Homebrew formula, so it has no value on the primary metric; GitHub stars are recorded as supplemental, non-comparable evidence. No tagged release to pin was checked and the untagged-control adapter has not been run.",
+      "reason": "Technically verified as a candidate (local commit 681d43c2): own header-only decoder, both untagged controls decoded from memory, parser-source coverage and stable input-dependent AFL++ feedback. Not selected: no Homebrew formula (primary metric) and no Debian package in the pinned popcon snapshot; GitHub stars are supplemental and PROTOCOL.md allows star fallback only in PLY cells.",
       "source": "https://github.com/lieff/minimp3"
     },
     {
@@ -233,7 +233,7 @@
       "install_on_request_365d": null,
       "supplemental_github_stars": 1901,
       "license": "Public domain or MIT-0 (dr_mp3.h header, master branch)",
-      "reason": "Single-file C decoder in mackron/dr_libs (drmp3_init_memory), whose header states it is based on minimp3, so it likely shares that family. Not a Homebrew formula; repository stars cover all dr_libs headers and are supplemental only. Not run.",
+      "reason": "Technically verified as a candidate (local commit 31698339): pinned 0.7.4, drmp3_init_memory decodes both controls with PCM byte-identical to the Rust minimp3 receipt, so it shares the minimp3 decoder family. Not selected: no Homebrew formula or Debian package; dr_libs repository stars cover several decoders, are supplemental, and qualify only in PLY cells.",
       "source": "https://github.com/mackron/dr_libs/blob/master/dr_mp3.h"
     }
   ]

@@ -31,8 +31,8 @@ Numeric leads from the same snapshot, not verified and not selected. JWT, JSON S
 | Lead | Version seen | Packagist downloads | Status | Note |
 | --- | --- | ---: | --- | --- |
 | [colinodell/json5](https://packagist.org/packages/colinodell/json5) | v3.0.0 | 32,796,867 | excluded | [Both valid JSON controls](colinodell-json5-lead-check.json) return through ext/json; no own JSON5 parser lines run. This is not an independent parser path for the selected format. |
-| [zendframework/zend-json](https://packagist.org/packages/zendframework/zend-json) | 3.1.2 | 24,719,945 | unresolved | Abandoned predecessor of laminas/laminas-json; same decoder lineage. Not run. |
-| [cerbero/json-parser](https://packagist.org/packages/cerbero/json-parser) | 1.1.1 | 823,332 | unresolved | Lazy JsonParser over strings, streams and files with its own tokenizer; value decoding path and control not run. |
+| [zendframework/zend-json](https://packagist.org/packages/zendframework/zend-json) | 3.1.2 | 24,719,945 | excluded | Pinned probe: default decode is ext/json `json_decode`; the optional builtin Decoder is the predecessor of the selected laminas-json Decoder. Shared family ([evidence](zendframework-zend-json-lead-check.json)). |
+| [cerbero/json-parser](https://packagist.org/packages/cerbero/json-parser) | 1.1.1 | 823,332 | excluded | Own lexer; both valid controls match a Python json oracle, but Xdebug lines and AFL++ tuples are identical on both controls (0 difference). Fails the parser-feedback gate ([evidence](cerbero-json-parser-lead-check.json)). |
 | [nette/utils](https://packagist.org/packages/nette/utils) | v4.1.6 | 514,679,287 | excluded | Nette\Utils\Json::decode is a json_decode wrapper; shares the verified ext/json family. |
 | [symfony/serializer](https://packagist.org/packages/symfony/serializer) | v8.2.0-BETA2 | 384,296,452 | excluded | JsonDecode encoder calls json_decode; shares the verified ext/json family. |
 | [beste/json](https://packagist.org/packages/beste/json) | 1.8.0 | 36,059,399 | excluded | Json::decode helper over json_decode; shares the verified ext/json family. |

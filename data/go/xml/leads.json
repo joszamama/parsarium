@@ -77,12 +77,13 @@
   },
   {
     "name": "aqwari.net/xml/xmltree",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "v0.0.0-...-d9421b2",
     "license": "MIT",
     "imported_by": 43,
-    "reason": "Converts XML documents into a tree of Go values; pseudo-version only, not run.",
-    "source": "https://pkg.go.dev/aqwari.net/xml/xmltree"
+    "reason": "Pinned d9421b2 pseudo-version (MIT) probe: xmltree.Parse builds its tree from encoding/xml Decoder.Token and matches an expat oracle on both valid controls. On the fixed control pair the xmltree-scoped AFL++ bridge gives 0 feature and tuple difference (all 30 differences are in encoding/xml), the same gate that excluded mellium.im/xmlstream. Not counted. Evidence: data/go/xml/xmltree-lead-check.json.",
+    "source": "https://pkg.go.dev/aqwari.net/xml/xmltree",
+    "evidence": "data/go/xml/xmltree-lead-check.json"
   },
   {
     "name": "github.com/nbio/xml",

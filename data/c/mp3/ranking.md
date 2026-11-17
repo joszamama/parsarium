@@ -37,7 +37,10 @@ Homebrew. None of these is a verified entry.
 - minimp3 and dr_mp3: not Homebrew formulae, so they have no primary value.
   GitHub stars (lieff/minimp3 1,988; mackron/dr_libs 1,901, shared by every
   dr_libs header) are supplemental and not compared with the table. dr_mp3 says
-  it is based on minimp3.
+  it is based on minimp3. Both passed local technical checks (both controls,
+  parser-source coverage, stable AFL++ feedback; dr_mp3 PCM is byte-identical
+  to the Rust minimp3 receipt), but PROTOCOL.md allows a star fallback only in
+  PLY cells, so neither is selected.
 - 20 hits are excluded: command-line tools without a library input API, tag
   tools, encoders, and non-C or non-decoder packages.
 

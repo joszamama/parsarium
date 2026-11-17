@@ -73,11 +73,11 @@
   },
   {
     "name": "laravie/parser",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "v3.0.0",
     "license": "MIT",
     "packagist_downloads": 2274560,
-    "reason": "Reader::load delegates parsing to SimpleXML; Document::parse maps the already parsed tree to a caller-provided schema of named fields. This resembles the excluded jms/serializer mapping layer; a verified XML-to-tree result from this package has not been selected. Candidate remains unresolved pending a package-API qualification decision.",
+    "reason": "Pinned v3.0.0 (MIT) probe (local candidate commit e293b060) matched an expat oracle evaluating the same fixed schema, but Reader::load is simplexml_load_file and Document::parse only maps the already parsed SimpleXML tree onto a caller-provided schema; all 359 differing libxml2 tuples also differ under a bare simplexml_load_file and the full and parse-only maps are identical. Treated like the excluded serializer mapping layers; not counted.",
     "source": "https://packagist.org/packages/laravie/parser"
   },
   {

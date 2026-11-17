@@ -11,21 +11,23 @@
   },
   {
     "name": "zendframework/zend-json",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "3.1.2",
     "license": "BSD-3-Clause",
     "packagist_downloads": 24719945,
-    "reason": "Abandoned predecessor of laminas/laminas-json; same decoder lineage. Not run.",
-    "source": "https://packagist.org/packages/zendframework/zend-json"
+    "reason": "Pinned 3.1.2 (BSD-3-Clause) probe: default Json::decode delegates to ext/json json_decode; the optional builtin Decoder is the predecessor of the already selected laminas-json Decoder (same nine methods, coding-standard rewrites only). Shared family with a stronger selected path; not counted. Evidence: data/php/json/zendframework-zend-json-lead-check.json.",
+    "source": "https://packagist.org/packages/zendframework/zend-json",
+    "evidence": "data/php/json/zendframework-zend-json-lead-check.json"
   },
   {
     "name": "cerbero/json-parser",
-    "status": "unresolved",
+    "status": "excluded",
     "version_seen": "1.1.1",
     "license": "MIT",
     "packagist_downloads": 823332,
-    "reason": "Lazy JsonParser over strings, streams and files with its own tokenizer; value decoding path and control not run.",
-    "source": "https://packagist.org/packages/cerbero/json-parser"
+    "reason": "Pinned 1.1.1 (MIT) probe: lazy JsonParser uses its own lexer and token-state parser, and both valid controls match an independent Python json oracle. Blocked by the parser-feedback gate: Xdebug covers the same 294 package lines on both controls, and the PHP parser-line AFL++ bridge gives 0 feature and 0 tuple-id difference (stable repeats). Not counted. Evidence: data/php/json/cerbero-json-parser-lead-check.json.",
+    "source": "https://packagist.org/packages/cerbero/json-parser",
+    "evidence": "data/php/json/cerbero-json-parser-lead-check.json"
   },
   {
     "name": "nette/utils",
