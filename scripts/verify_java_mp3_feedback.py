@@ -6,12 +6,13 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("jcodec",)
+PROJECTS = ("jcodec", "jlayer")
 CONTROL = "controls/mp3/tone-44k-mono.mp3"
 DIFFERENTIAL = "controls/mp3/tone-22k-stereo.mp3"
 # MPEG-2 22.05 kHz stereo; libmpg123 reports the same frames and samples
@@ -57,6 +58,7 @@ def check(slug: str) -> dict:
         work = Path(temporary)
         first = probe(manifest, image, ROOT / CONTROL, work, "first")
         repeat = probe(manifest, image, ROOT / CONTROL, work, "repeat")
+        repeat_two = probe(manifest, image, ROOT / CONTROL, work, "repeat_two")
         other = probe(manifest, image, ROOT / DIFFERENTIAL, work, "other")
         parsed = subprocess.run(
             ["docker", "run", "--rm", "--platform", manifest["platform"], "--network", "none",
@@ -68,7 +70,7 @@ def check(slug: str) -> dict:
         differential_output = json.loads(parsed.stdout.strip().splitlines()[-1])
     if differential_output != DIFFERENTIAL_EXPECTED:
         raise RuntimeError(f"{relative}: differential output changed: {differential_output}")
-    if first != repeat:
+    if first != repeat or first != repeat_two:
         raise RuntimeError(f"{relative}: repeated control probe changed parser features or AFL++ map")
     if len(first[0]) != receipt["parser_source_features"] or len(first[1]) != receipt["feedback_edges"]:
         raise RuntimeError(f"{relative}: control probe differs from overlay receipt")
@@ -97,7 +99,17 @@ def check(slug: str) -> dict:
 
 
 def main() -> None:
-    results = [check(slug) for slug in PROJECTS]
+    selected = tuple(sys.argv[1:]) or PROJECTS
+    if any(slug not in PROJECTS for slug in selected):
+        raise ValueError(f"unknown Java MP3 project: {selected}")
+    results = [check(slug) for slug in selected]
+    if sys.argv[1:]:
+        for result in results:
+            slug = result["project"].rsplit("/", 1)[-1]
+            path = ROOT / "data/java/mp3" / f"{slug}-feedback-differential.json"
+            path.write_text(json.dumps({"schema_version": 1, **result}, indent=2) + "\n")
+        print(json.dumps(results, indent=2))
+        return
     REPORT.write_text(json.dumps({
         "schema_version": 1,
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),

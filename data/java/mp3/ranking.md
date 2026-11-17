@@ -1,8 +1,8 @@
 # JAVA × MP3: selected parsers (pilot)
 
-1 control-verified third-party path selected. The ceiling is ten; this pilot builds only the highest-adoption lead whose own Java code parses untagged MPEG Layer III frames, and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+2 control-verified third-party paths selected. The ceiling is ten; this pilot builds only candidates whose own Java code parses and decodes untagged MPEG Layer III frames, and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
 
-The selected path, [jcodec](../../../projects/mp3/java/jcodec/README.md) 0.2.5, synchronizes every frame with `MPEGAudioDemuxer` and decodes each one with its pure-Java `Mp3Decoder`. It is the same JCodec package and demuxer already counted in the active Java MP3-with-ID3v2 cell, so it is a separate plain-frame path in the same parser family, not an independent family.
+The selected [jcodec](../../../projects/mp3/java/jcodec/README.md) 0.2.5 path synchronizes every frame with `MPEGAudioDemuxer` and decodes each one with its pure-Java `Mp3Decoder`. It is the same JCodec family already counted in the active Java MP3-with-ID3v2 cell. [JLayer](../../../projects/mp3/java/jlayer/README.md) 1.0.1 uses its own `Bitstream`, `Header` and `LayerIIIDecoder` and is independent of JCodec; the soundlibs and libGDX JLayer releases share JLayer lineage.
 
 ## Primary within-cell adoption metric
 
@@ -11,8 +11,9 @@ deps.dev `directDependentCount` summed over every Maven release, captured 2026-1
 | Rank | Package | Release | Metric | Max single release | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | ---: | --- | --- |
 | 1 | [org.jcodec:jcodec](https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar) | 0.2.5 | 76 | 44 (0.2.5) | Every frame of an untagged stream: codec, sample rate, channels, frames, decoded samples | JCodec native MPEG audio demuxer |
+| 2 | [javazoom:jlayer](https://javadoc.io/static/javazoom/jlayer/1.0.1/javazoom/jl/decoder/Bitstream.html) | 1.0.1 | 33 | 33 (1.0.1) | Full Layer III frame and PCM sample decode from local InputStream | Original JavaZoom JLayer decoder |
 
-Controls: `controls/mp3/tone-44k-mono.mp3` gives MP3, 44,100 Hz, 1 channel, 11 frames, 12,672 samples; the AFL++ differential `controls/mp3/tone-22k-stereo.mp3` gives 22,050 Hz, 2 channels, 12 frames, 6,912 samples. Both match the libmpg123 pilot. JaCoCo covers 1,142 jcodec source lines on the primary control. Repeated AFL++ probes are identical and the stereo control changes 185 AFL++ tuples ([feedback receipt](afl-feedback.json)).
+Controls: `controls/mp3/tone-44k-mono.mp3` gives MP3, 44,100 Hz, 1 channel, 11 frames, 12,672 samples; the AFL++ differential `controls/mp3/tone-22k-stereo.mp3` gives 22,050 Hz, 2 channels, 12 frames, 6,912 samples. Both match the independent header walker and libmpg123 pilot. JaCoCo covers 1,142 JCodec and 1,724 JLayer source lines on the primary control, including 656 in JLayer's `LayerIIIDecoder.java`. Three identical JLayer control probes produce the same AFL++ map; the stereo control changes 239 parser-derived tuple IDs ([JLayer differential receipt](jlayer-feedback-differential.json)).
 
 javacv (315) and org.bytedeco:ffmpeg (215) have higher counts but are JNI wrappers: MP3 parsing runs in native FFmpeg, with no Java parser source to cover. They are excluded here, not ranked.
 
@@ -30,7 +31,6 @@ Looked up on deps.dev; none is a verified entry.
 | [org.bytedeco:ffmpeg](https://central.sonatype.com/artifact/org.bytedeco/ffmpeg) | 8.1.2-1.5.14 | 215 | 76 | excluded_native_wrapper | JavaCPP binding to the same native FFmpeg demuxer and decoder as javacv; no Java parser source. Not run. |
 | [com.googlecode.soundlibs:mp3spi](https://central.sonatype.com/artifact/com.googlecode.soundlibs/mp3spi) | 1.9.5.4 | 55 | 38 | unresolved | Java Sound SPI (MpegAudioFileReader) over the soundlibs JLayer fork, a pure-Java Layer III decoder; next-highest Java parser lead (55). Control not run in this pilot. Same JLayer lineage as javazoom:jlayer. |
 | [ws.schild:jave-core](https://central.sonatype.com/artifact/ws.schild/jave-core) | 4.2.0 | 52 | 9 | excluded_native_wrapper | Runs a bundled ffmpeg executable and parses its text output; parser is native FFmpeg. Not run. |
-| [javazoom:jlayer](https://central.sonatype.com/artifact/javazoom/jlayer) | 1.0.1 | 33 | 33 | unresolved | Bitstream.readFrame()/Decoder.decodeFrame over InputStream, pure-Java Layer III decoder. Control not run in this pilot. |
 | [com.badlogicgames.jlayer:jlayer](https://central.sonatype.com/artifact/com.badlogicgames.jlayer/jlayer) | 1.0.2-gdx | 30 | 26 | unresolved_shared_family | libGDX repackaging of JLayer; same decoder family as javazoom:jlayer. Not run. |
 | [com.googlecode.soundlibs:jlayer](https://central.sonatype.com/artifact/com.googlecode.soundlibs/jlayer) | 1.0.1.4 | 28 | 14 | unresolved_shared_family | Maintained fork of javazoom JLayer; same decoder family as javazoom:jlayer. Not run. |
 | [com.soywiz:korau-mp3](https://central.sonatype.com/artifact/com.soywiz/korau-mp3) | 0.19.1 | 25 | 2 | unresolved | Kotlin korau MP3 decoder module published to Maven (last release 0.19.1); decoder lineage not inspected. Control not run. |

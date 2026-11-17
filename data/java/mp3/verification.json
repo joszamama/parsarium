@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T03:43:30.888748+00:00",
+  "checked_at_utc": "2026-11-17T10:22:43.801071+00:00",
   "platform": "linux/arm64 Docker",
   "java": "openjdk version \"25.0.5\" 2026-10-20 LTS",
   "controls": {
@@ -39,6 +39,34 @@
       "parser_source_lines_covered": 1142,
       "format_specific_source_lines_covered": 138,
       "format_specific_source": "org/jcodec/codecs/mpa/Mp3Decoder.java"
+    },
+    {
+      "package": "jlayer",
+      "group": "javazoom",
+      "version": "1.0.1",
+      "scope": "Every MPEG Layer III frame of an untagged local stream parsed by Bitstream and decoded by LayerIIIDecoder; codec, sample rate, channels, frame count and decoded samples per channel",
+      "command": "python3 scripts/run_project.py mp3 java jlayer",
+      "receipt": "projects/mp3/java/jlayer/verification.json",
+      "pass": true,
+      "output": {
+        "codec": "MP3",
+        "sample_rate": 44100,
+        "channels": 1,
+        "frames": 11,
+        "decoded_samples": 12672
+      },
+      "differential_output": {
+        "codec": "MP3",
+        "sample_rate": 22050,
+        "channels": 2,
+        "frames": 12,
+        "decoded_samples": 6912
+      },
+      "differential_receipt": "data/java/mp3/jlayer-feedback-differential.json",
+      "parser_source_files": 14,
+      "parser_source_lines_covered": 1724,
+      "format_specific_source_lines_covered": 656,
+      "format_specific_source": "javazoom/jl/decoder/LayerIIIDecoder.java"
     }
   ],
   "standard": []
