@@ -11,14 +11,6 @@
       "source": "https://crates.io/crates/xmlparser"
     },
     {
-      "name": "roxmltree",
-      "version": "0.21.2",
-      "recent_downloads_90d": 42073295,
-      "status": "unresolved_shared_family",
-      "reason": "Read-only tree with namespace resolution; Document::parse(&str) has not been run. Earlier releases are built on xmlparser, so the family overlap must be checked before counting it as a separate parser.",
-      "source": "https://crates.io/crates/roxmltree"
-    },
-    {
       "name": "xml-rs",
       "version": "1.0.0",
       "recent_downloads_90d": 32180109,
@@ -173,6 +165,17 @@
       "recent_downloads_90d": 570973,
       "status": "excluded",
       "reason": "Tree-sitter grammar; a syntax-tree generator, not a namespace-aware XML reader."
+    }
+  ],
+  "verified_leads": [
+    {
+      "name": "roxmltree",
+      "version": "0.21.2",
+      "recent_downloads_90d": 42073295,
+      "status": "selected",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/roxmltree/verification.json",
+      "family_note": "The pinned crate contains its own src/tokenizer.rs and has no xmlparser package dependency. Historical xmlparser relationship remains noted."
     }
   ]
 }

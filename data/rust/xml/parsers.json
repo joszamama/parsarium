@@ -40,6 +40,51 @@
       "name": "crates.io recent downloads (90 days)",
       "value": 178628779,
       "source": "data/rust/xml/registry-snapshot.json"
-    }
+    },
+    "project": "projects/xml/rust/quick_xml/verification.json"
+  },
+  {
+    "name": "roxmltree",
+    "version": "0.21.2",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "roxmltree::Document::parse(&str) -> Result<Document, Error>; Document::descendants(); Node::tag_name()/attributes()/namespaces()/text()",
+    "documentation": "https://docs.rs/roxmltree/0.21.2/roxmltree/struct.Document.html#method.parse",
+    "source": "https://static.crates.io/crates/roxmltree/roxmltree-0.21.2.crate",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE read into a namespace-resolved DOM: root and element expanded names in document order, maximum depth, namespace declarations and URIs, non-declaration attributes with decoded values, decoded character data including predefined entities, character references and CDATA",
+    "family": "roxmltree 0.21.2 internal tokenizer and namespace-resolving tree builder; no xmlparser crate dependency in pinned source (historical xmlparser relationship recorded in lead)",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 42073295,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/roxmltree/verification.json"
   }
 ]
