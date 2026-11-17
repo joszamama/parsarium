@@ -1,63 +1,83 @@
 [
   {
     "name": "github.com/lmittmann/ppm",
-    "status": "unresolved",
-    "reason": "Documented PPM decoder rejected the valid ASCII P3 control in a local adapter attempt; binary P6 support does not establish ASCII PNM parsing.",
-    "source": "https://pkg.go.dev/github.com/lmittmann/ppm"
+    "status": "excluded",
+    "reason": "Binary-only decoder: pinned v1.0.2 registers only the P6 magic with image.RegisterFormat and reader.go rejects any other magic number, so the valid ASCII P3 control cannot be decoded. 16 importers on 2026-11-17 do not change that.",
+    "source": "https://pkg.go.dev/github.com/lmittmann/ppm",
+    "metric_value": 16,
+    "checked_at_utc": "2026-11-17T22:22:26Z"
   },
   {
     "name": "github.com/knieriem/g/image/pnm",
-    "status": "unresolved",
-    "reason": "Decoder rejected the valid P1, P2, and P3 controls; further documentation review would be needed to establish any ASCII variant.",
-    "source": "https://pkg.go.dev/github.com/knieriem/g/image/pnm"
+    "status": "excluded",
+    "reason": "Binary PBM-only decoder: pinned v0.5.0 registers only the P4 magic (pbm.go) and rejected the valid P1, P2 and P3 controls.",
+    "source": "https://pkg.go.dev/github.com/knieriem/g/image/pnm",
+    "metric_value": 1,
+    "checked_at_utc": "2026-11-17T22:25:00Z"
   },
   {
     "name": "github.com/mbrumlow/ppm",
-    "status": "unresolved",
-    "reason": "The local decoder attempt rejected the valid P1, P2, and P3 controls; no accepted ASCII path was demonstrated.",
-    "source": "https://pkg.go.dev/github.com/mbrumlow/ppm"
+    "status": "excluded",
+    "reason": "Rejected the valid P1, P2 and P3 controls, and pkg.go.dev Imported by 0 on 2026-11-17; zero-importer paths are never selected.",
+    "source": "https://pkg.go.dev/github.com/mbrumlow/ppm",
+    "metric_value": 0,
+    "checked_at_utc": "2026-11-17T22:25:00Z"
   },
   {
     "name": "github.com/slashformotion/pbm",
-    "status": "unresolved",
-    "reason": "The local decoder attempt rejected the valid ASCII P1 control; the documented API may cover only binary PBM.",
-    "source": "https://pkg.go.dev/github.com/slashformotion/pbm"
+    "status": "excluded",
+    "reason": "Rejected the valid ASCII P1 control, and pkg.go.dev Imported by 0 on 2026-11-17; zero-importer paths are never selected.",
+    "source": "https://pkg.go.dev/github.com/slashformotion/pbm",
+    "metric_value": 0,
+    "checked_at_utc": "2026-11-17T22:25:00Z"
   },
   {
     "name": "github.com/TomasMen/go-pgm",
-    "status": "unresolved",
-    "reason": "The local P2 attempt returned an error stating that only raw P5 is supported.",
-    "source": "https://pkg.go.dev/github.com/TomasMen/go-pgm"
+    "status": "excluded",
+    "reason": "Raw-only decoder: the local P2 attempt returned its own error that only raw P5 is supported.",
+    "source": "https://pkg.go.dev/github.com/TomasMen/go-pgm",
+    "metric_value": 1,
+    "checked_at_utc": "2026-11-17T22:25:00Z"
   },
   {
     "name": "github.com/h2non/bimg",
-    "status": "unresolved",
-    "reason": "Its image-processing input API rejected the valid P3 control despite the installed libvips PPM loader parsing it through other bindings.",
-    "source": "https://pkg.go.dev/github.com/h2non/bimg"
+    "status": "excluded",
+    "reason": "The documented byte-buffer API sniffs the input against its own ImageType table (v1.1.9 type.go: JPEG, WEBP, PNG, TIFF, GIF, PDF, SVG, MAGICK, HEIF, AVIF), which has no PPM entry, and it rejected the valid P3 control. libvips ppmload is now selected through github.com/cshum/vipsgen/vips. 180 importers on 2026-11-17.",
+    "source": "https://pkg.go.dev/github.com/h2non/bimg",
+    "metric_value": 180,
+    "checked_at_utc": "2026-11-17T22:25:00Z"
   },
   {
     "name": "github.com/davidbyttow/govips/v2/vips",
-    "status": "unresolved",
-    "reason": "The modern libvips binding's attempted P3 load returned unsupported format; a verified P3-specific adapter is still needed.",
-    "source": "https://pkg.go.dev/github.com/davidbyttow/govips/v2/vips"
+    "status": "excluded",
+    "reason": "The pinned v2.20.0 vips package has no PPM image type or ppmload wrapper in its sources, and its documented buffer loader returned unsupported format for the valid P3 control. libvips ppmload is now selected through github.com/cshum/vipsgen/vips. 135 importers on 2026-11-17.",
+    "source": "https://pkg.go.dev/github.com/davidbyttow/govips/v2/vips",
+    "metric_value": 135,
+    "checked_at_utc": "2026-11-17T22:25:00Z"
   },
   {
     "name": "gopkg.in/gographics/imagick.v2/imagick",
     "status": "unresolved",
-    "reason": "The pinned v2 binding failed to compile against installed ImageMagick 7 headers; no control result was counted.",
-    "source": "https://pkg.go.dev/gopkg.in/gographics/imagick.v2/imagick"
+    "reason": "142 importers on 2026-11-17 (v2.7.1, BSD-3-Clause). The v2 binding targets ImageMagick 6 MagickWand; it failed to compile against the installed ImageMagick 7 headers, and the Ubuntu base used by the selected imagick.v3 project ships ImageMagick 7, so a verified run needs a from-source ImageMagick 6 build that was not attempted. It is the same ImageMagick family as the selected imagick.v3 path (ImageMagick 7). If verified it would rank second and push the 1-importer hexaflex/pnm path out of the ten.",
+    "source": "https://pkg.go.dev/gopkg.in/gographics/imagick.v2/imagick",
+    "metric_value": 142,
+    "checked_at_utc": "2026-11-17T22:22:24Z"
   },
   {
     "name": "github.com/JoshuaDoes/go-ppm",
-    "status": "unresolved",
-    "reason": "Its pinned module requires a missing github.com/bovarysme/adpcm dependency, so a runnable local adapter could not be built.",
-    "source": "https://pkg.go.dev/github.com/JoshuaDoes/go-ppm"
+    "status": "excluded",
+    "reason": "Pinned module requires a missing github.com/bovarysme/adpcm dependency, and pkg.go.dev Imported by 0 on 2026-11-17; zero-importer paths are never selected.",
+    "source": "https://pkg.go.dev/github.com/JoshuaDoes/go-ppm",
+    "metric_value": 0,
+    "checked_at_utc": "2026-11-17T22:25:00Z"
   },
   {
     "name": "github.com/qeedquan/go-media/image/pnm",
-    "status": "unresolved",
-    "reason": "A PNM decoder lead; pinned open-source license evidence and local control output remain unchecked.",
-    "source": "https://pkg.go.dev/github.com/qeedquan/go-media/image/pnm"
+    "status": "excluded",
+    "reason": "pkg.go.dev Imported by 0 and no detected license on 2026-11-17; zero-importer paths are never selected. Its 571451370/go-media copy is already in preten with 0 importers.",
+    "source": "https://pkg.go.dev/github.com/qeedquan/go-media/image/pnm",
+    "metric_value": 0,
+    "checked_at_utc": "2026-11-17T22:22:25Z"
   },
   {
     "name": "github.com/vmware/govmomi/pbm/types",
@@ -70,5 +90,33 @@
     "status": "excluded",
     "reason": "The package concerns a PostgreSQL index, not Portable GrayMap parsing.",
     "source": "https://pkg.go.dev/github.com/agnivade/pgm"
+  },
+  {
+    "name": "github.com/corona10/goimghdr",
+    "status": "excluded",
+    "reason": "Search hit (query portable pixmap, 9 importers): identifies an image type from leading magic bytes and does not decode PNM structure or pixels.",
+    "source": "https://pkg.go.dev/github.com/corona10/goimghdr",
+    "metric_value": 9
+  },
+  {
+    "name": "github.com/kenshaw/iv/decoder/netpbm",
+    "status": "excluded",
+    "reason": "Search hit (query netpbm) with pkg.go.dev Imported by 0 on 2026-11-17; zero-importer paths are never selected.",
+    "source": "https://pkg.go.dev/github.com/kenshaw/iv/decoder/netpbm",
+    "metric_value": 0
+  },
+  {
+    "name": "github.com/barnex/bruteray/imagef/ppm",
+    "status": "excluded",
+    "reason": "Search hit (query netpbm) with pkg.go.dev Imported by 0 on 2026-11-17; zero-importer paths are never selected.",
+    "source": "https://pkg.go.dev/github.com/barnex/bruteray/imagef/ppm",
+    "metric_value": 0
+  },
+  {
+    "name": "github.com/grailbio/bio/encoding/pam",
+    "status": "excluded",
+    "reason": "Search hit (query pam, 5 importers): PAM here is a genomics alignment format, not the Netpbm PAM image format.",
+    "source": "https://pkg.go.dev/github.com/grailbio/bio/encoding/pam",
+    "metric_value": 5
   }
 ]
