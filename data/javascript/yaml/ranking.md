@@ -1,10 +1,10 @@
 # JavaScript × YAML: selected parsers (pilot)
 
-Eight control-verified third-party paths; the ceiling is ten and the cell is not padded. Each path parses both schema-neutral YAML controls to the hand-written typed tree.
+Nine control-verified third-party paths; the ceiling is ten and the cell is not padded. Each path parses both schema-neutral YAML controls to the hand-written typed tree.
 
 ## Primary within-cell adoption metric
 
-npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snapshot](registry-snapshot.json)). Package adoption, largely transitive, not YAML-specific use. Round-2 values use the same window through the explicit-range endpoint.
+npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snapshot](registry-snapshot.json)). Package adoption, largely transitive, not YAML-specific use. Round-2 and round-3 values use the same window through the explicit-range endpoint.
 
 | Rank | Package | Release | Metric | AFL++ parser ranges (control / differing) | Parser family |
 | ---: | --- | --- | ---: | ---: | --- |
@@ -14,8 +14,9 @@ npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snap
 | 4 | [@stoplight/yaml](https://github.com/stoplightio/yaml/blob/v4.3.0/README.md) | 4.3.0 | 29,327,835 | 415 / 74 | Wrapper: @stoplight/yaml walker over @stoplight/yaml-ast-parser 0.0.50 (fork of yaml-ast-parser, js-yaml 3.x lineage) |
 | 5 | [yaml-eslint-parser](https://github.com/ota-meshi/yaml-eslint-parser/blob/v2.1.0/README.md) | 2.1.0 | 15,060,019 | 747 / 139 | Wrapper: yaml-eslint-parser ESTree-style AST and value resolver over eemeli/yaml 2.9.1 Parser and Composer (shared with the selected yaml path) |
 | 6 | [yaml-js](https://github.com/connec/yaml-js/blob/0.3.1/README.md) | 0.3.1 | 1,906,159 | 439 / 50 | yaml-js (line-for-line PyYAML port: reader, scanner, parser, composer, constructor) |
-| 7 | [@visulima/yaml](https://github.com/visulima/visulima/blob/%40visulima/yaml%402.0.0/packages/data-manipulation/yaml/README.md) | 2.0.0 | 145,409 | 234 / 64 | @visulima/yaml own scanner, parser and composer |
-| 8 | [@amritk/yaml](https://github.com/amritk/mjst/blob/%40amritk/yaml%400.8.1/packages/yaml/README.md) | 0.8.1 | 93,353 | 328 / 151 | @amritk/yaml own single-pass scanner and tree builder |
+| 7 | [yaml-to-momoa](https://github.com/drwpow/yaml-to-momoa/blob/0fe4b94a79f198a90d2fdbd47e718e0275428826/README.md) | 0.1.0 | 812,266 | 622 / 110 | Wrapper: yaml-to-momoa document-to-Momoa AST transform over eemeli/yaml 2.9.1 parseDocument (shared with the selected yaml path) |
+| 8 | [@visulima/yaml](https://github.com/visulima/visulima/blob/%40visulima/yaml%402.0.0/packages/data-manipulation/yaml/README.md) | 2.0.0 | 145,409 | 234 / 64 | @visulima/yaml own scanner, parser and composer |
+| 9 | [@amritk/yaml](https://github.com/amritk/mjst/blob/%40amritk/yaml%400.8.1/packages/yaml/README.md) | 0.8.1 | 93,353 | 328 / 151 | @amritk/yaml own single-pass scanner and tree builder |
 
 ## Leads not counted
 

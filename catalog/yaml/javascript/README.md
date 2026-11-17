@@ -14,6 +14,7 @@ Eight verified third-party YAML paths (js-yaml 5.5.0, yaml 2.9.1, yaml-ast-parse
 - [@stoplight/yaml](stoplight-yaml/README.md) — verified Docker harness
 - [yaml-eslint-parser](yaml-eslint-parser/README.md) — verified Docker harness
 - [yaml-js](yaml-js/README.md) — verified Docker harness
+- [yaml-to-momoa](yaml-to-momoa/README.md) — verified API path
 - [@visulima/yaml](visulima-yaml/README.md) — verified Docker harness
 - [@amritk/yaml](amritk-yaml/README.md) — verified Docker harness
 

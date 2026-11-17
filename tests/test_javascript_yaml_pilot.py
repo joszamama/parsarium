@@ -13,15 +13,18 @@ ORACLE = runpy.run_path(str(ROOT / "controls/yaml/check_controls.py"))
 CONTROL_NAMES = {"controls/yaml/catalog.yaml": "catalog.yaml", "controls/yaml/order.yaml": "order.yaml"}
 SLUGS = {"js-yaml": "js_yaml", "yaml": "yaml", "yaml-ast-parser": "yaml_ast_parser",
          "@stoplight/yaml": "stoplight_yaml", "yaml-eslint-parser": "yaml_eslint_parser",
-         "yaml-js": "yaml_js", "@visulima/yaml": "visulima_yaml", "@amritk/yaml": "amritk_yaml"}
+         "yaml-js": "yaml_js", "@visulima/yaml": "visulima_yaml", "@amritk/yaml": "amritk_yaml",
+         "yaml-to-momoa": "yaml_to_momoa"}
 # Upstream tag in each pinned documentation URL.
 DOC_TAGS = {"js-yaml": "5.5.0", "yaml": "v2.9.1", "yaml-ast-parser": "0.0.43", "@stoplight/yaml": "v4.3.0",
             "yaml-eslint-parser": "v2.1.0", "yaml-js": "0.3.1",
-            "@visulima/yaml": "%40visulima/yaml%402.0.0", "@amritk/yaml": "%40amritk/yaml%400.8.1"}
+            "@visulima/yaml": "%40visulima/yaml%402.0.0", "@amritk/yaml": "%40amritk/yaml%400.8.1",
+            "yaml-to-momoa": "0fe4b94a79f198a90d2fdbd47e718e0275428826"}
 # Documented text API each adapter calls.
 API_CALLS = {"js-yaml": "jsyaml.load(text)", "yaml": "YAML.parseDocument(text)", "yaml-ast-parser": "yaml.load(text)",
              "@stoplight/yaml": "yaml.parseWithPointers(text)", "yaml-eslint-parser": "parseYAML(text)",
-             "yaml-js": "yaml.load(text)", "@visulima/yaml": "parseYaml(text)", "@amritk/yaml": "parseDocument(text)"}
+             "yaml-js": "yaml.load(text)", "@visulima/yaml": "parseYaml(text)", "@amritk/yaml": "parseDocument(text)",
+             "yaml-to-momoa": "yamlToMomoa(text)"}
 
 
 def read(path: Path):
