@@ -46,7 +46,7 @@ class PythonJsonRapidjsonPilotTest(unittest.TestCase):
         self.assertIn("last value wins", parser["number_and_key_scope"])
         self.assertIn("python-rapidjson 1.26 (4,066,455)", cell["uncertainty"])
         ranking = (BASE / "ranking.md").read_text()
-        self.assertIn("| 8 | [python-rapidjson]", ranking)
+        self.assertIn("| 9 | [python-rapidjson]", ranking)
 
     def test_release_lock_matches_manifest_and_dockerfile(self):
         manifest = read(PROJECT / "manifest.json")

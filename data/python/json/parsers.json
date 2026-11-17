@@ -258,6 +258,52 @@
     "project": "projects/json/python/orjson"
   },
   {
+    "name": "json5",
+    "version": "0.17.3",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/pypi/json5/0.17.3/json",
+    "input_api": "json5.loads(local JSON bytes); json5.loads(decoded str) and json5.load(BytesIO(local bytes)) give the same exact tree on both controls",
+    "documentation": "https://github.com/dpranke/pyjson5/blob/v0.17.3/README.md",
+    "source": "https://files.pythonhosted.org/packages/16/1f/58a4d7ee466f81bc3c7337036380fc6d49de3afb7855d74f8121b1e89b32/json5-0.17.3.tar.gz",
+    "source_sha256": "8d0278ad34ebaa9c3af76d9519274811830224a2d1cd5af156dbd067f461b8a4",
+    "wheel_sha256": "2c8b22a893c35cd6a3c5ccbf1dd1c7d02c25dc1b5897fea658f9bf08c2e05f9a",
+    "dependencies": [],
+    "scope": "JSON structure and values from local bytes; valid nested object and nested array controls, each equal to an exact type-tagged CPython json oracle tree. JSON5 superset parser: it accepts JSON5-only syntax and so does not reject non-RFC 8259 input.",
+    "family": "json5 pure-Python PEG parser (glop-generated json5/parser.py) with AST conversion in json5/lib.py",
+    "family_note": "json5.loads decodes bytes as UTF-8, runs the Parser class that glop 0.9.0 generated from the project's JSON5 grammar, then walks the AST in lib.py, calling Python int() and float() on number lexemes. It neither imports nor delegates to the standard json module. Independent of the CPython json (_json scanner), simplejson, UltraJSON, Jiter, orjson/yyjson, YAJL, msgspec, RapidJSON and simdjson families in this cell. Unrelated to the Cython pyjson5 package and to the JavaScript json5 package beyond the shared JSON5 grammar.",
+    "number_and_key_scope": "Not exercised beyond the controls; no malformed or edge-case probes were run. From the pinned lib.py source: duplicate object keys are allowed by default and dict(pairs) keeps the last value (allow_duplicate_keys=False rejects them); integers go through Python int() (arbitrary precision), numbers with '.', 'e' or 'E' through float(); hexadecimal, Infinity and NaN JSON5 tokens are accepted. The controls contain no duplicate keys (checked with the oracle's object_pairs_hook), only exactly representable floats (1.25 and 2.5e-1) and small integers.",
+    "control": "controls/json/structure.json",
+    "differential_control": "controls/json/nested-array.json",
+    "expected_output": {
+      "root_type": "object",
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
+      "item_count": 2,
+      "first_id": 7,
+      "first_label": "a\nb",
+      "first_ok": true,
+      "first_value_is_null": true,
+      "second_label": "π"
+    },
+    "differential_expected_output": {
+      "root_type": "array",
+      "item_count": 5,
+      "nested_arrays": 1,
+      "nested_objects": 1
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 50036028,
+      "source": "https://pypistats.org/api/packages/json5/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/json/leads.json",
+      "limitation": "Package-level downloads include JSON5 configuration-file use and transitive installs; they do not measure strict JSON parsing directly."
+    },
+    "project": "projects/json/python/json5"
+  },
+  {
     "name": "simplejson",
     "version": "4.3.0",
     "license": "MIT OR AFL-2.1",

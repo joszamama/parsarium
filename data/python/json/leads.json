@@ -1,11 +1,11 @@
 {
   "format": "json",
   "ecosystem": "python",
-  "status": "targeted_documentation_leads_only",
+  "status": "bounded_name_search_and_targeted_leads",
   "observed_on_utc": "2026-11-17",
-  "search_surface": "Targeted PyPI project pages and project documentation; the bounded PyPI Simple Index name search has not yet been run",
+  "search_surface": "Targeted PyPI project pages and project documentation for the first nine leads; then the PyPI Simple JSON project-name index filtered locally (six name queries, first 100 alphabetical hits each) with a top-15,000 PyPI package list used only to pick plausible high-adoption leads; see registry-snapshot.json",
   "search_limit_per_query": 100,
-  "searched_candidate_count": 9,
+  "searched_candidate_count": 31,
   "adoption_metric": {
     "name": "PyPI Stats last_month downloads excluding known mirrors",
     "source": "https://pypistats.org/api/",
@@ -23,6 +23,36 @@
       "family_hint": "pydantic-core/Jiter",
       "verified_evidence": "data/python/json/verification.json",
       "native_feedback": "data/python/json/pydantic-valid-feedback.json"
+    },
+    {
+      "name": "pydantic-core",
+      "last_month": 1115723951,
+      "status": "excluded",
+      "lead_kind": "same_binary_as_selected_path",
+      "registry": "https://pypi.org/project/pydantic-core/",
+      "api_evidence": "https://docs.pydantic.dev/latest/api/pydantic_core/#pydantic_core.from_json",
+      "reason": "pydantic_core.from_json is documented, but pydantic 2.14.3 requires pydantic-core==2.50.4, the same compiled extension and embedded Jiter 0.18.0 already measured by the selected pydantic path. Counting it would duplicate that binary and parser; not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "pandas",
+      "last_month": 695595266,
+      "status": "excluded",
+      "lead_kind": "tabular_reader_not_value_tree",
+      "registry": "https://pypi.org/project/pandas/",
+      "api_evidence": "https://pandas.pydata.org/docs/reference/api/pandas.read_json.html",
+      "reason": "pandas.read_json returns a DataFrame or Series, not the parsed JSON value tree, so it cannot reproduce the exact type-tagged oracle tree of the nested controls. Its decoder is a vendored UltraJSON-derived copy (UltraJSON family, like the selected ujson path). Documentation-only check; not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "pyarrow",
+      "last_month": 430464888,
+      "status": "excluded",
+      "lead_kind": "tabular_reader_not_value_tree",
+      "registry": "https://pypi.org/project/pyarrow/",
+      "api_evidence": "https://arrow.apache.org/docs/python/json.html",
+      "reason": "pyarrow.json.read_json reads line-delimited JSON objects into an Arrow Table with inferred column types; a top-level array such as the nested-array control is not a supported row, and the result is not a JSON value tree. Documentation-only check; not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
     },
     {
       "name": "jiter",
@@ -47,6 +77,28 @@
       "native_feedback": "data/python/json/orjson-valid-feedback.json"
     },
     {
+      "name": "polars",
+      "last_month": 66586910,
+      "status": "excluded",
+      "lead_kind": "tabular_reader_not_value_tree",
+      "registry": "https://pypi.org/project/polars/",
+      "api_evidence": "https://docs.pola.rs/api/python/stable/reference/api/polars.read_json.html",
+      "reason": "polars.read_json returns a DataFrame with an inferred schema, not the parsed JSON value tree. Documentation-only check; not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "json5",
+      "last_month": 50036028,
+      "status": "promoted_to_verified",
+      "registry": "https://pypi.org/project/json5/",
+      "api_evidence": "https://github.com/dpranke/pyjson5/blob/v0.17.3/README.md",
+      "api_hint": "json5.loads(local bytes or str); json5.load(local binary stream)",
+      "family_hint": "json5 pure-Python glop-generated PEG parser (JSON5 superset; own parser, no stdlib json delegation)",
+      "verified_evidence": "data/python/json/verification.json",
+      "native_feedback": "data/python/json/json5-valid-feedback.json",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
       "name": "simplejson",
       "last_month": 49365386,
       "registry": "https://pypi.org/project/simplejson/",
@@ -65,6 +117,19 @@
       "family_hint": "default yajl2_c / yajl 2.1.1",
       "verified_evidence": "data/python/json/verification.json",
       "native_feedback": "data/python/json/ijson-valid-feedback.json"
+    },
+    {
+      "name": "json-repair",
+      "last_month": 43691294,
+      "status": "lead",
+      "lead_kind": "own_repair_parser_not_selected",
+      "version_seen": "0.64.9",
+      "license": "MIT",
+      "registry": "https://pypi.org/project/json-repair/",
+      "api_evidence": "https://github.com/mangiucugna/json_repair/",
+      "api_hint": "json_repair.loads(local str, skip_json_loads=True)",
+      "reason": "By default loads() first calls the standard json.loads (json_repair.py line 177), so on valid input the default API is the CPython json path. Its own lenient repair parser runs with skip_json_loads=True. A host-only probe (python3 -I, not Docker) of 0.64.9 with skip_json_loads=True gave the exact CPython json tree on both valid controls. No container harness, coverage or AFL++ feedback was built: json5 ranks higher and fills the tenth slot. If verified it would outrank msgspec, ujson, python-rapidjson and pysimdjson.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
     },
     {
       "name": "msgspec",
@@ -89,6 +154,47 @@
       "native_feedback": "data/python/json/ujson-valid-feedback.json"
     },
     {
+      "name": "srsly",
+      "last_month": 24260205,
+      "status": "excluded",
+      "lead_kind": "wrapper_over_selected_family",
+      "version_seen": "3.0.1",
+      "registry": "https://pypi.org/project/srsly/",
+      "api_evidence": "https://github.com/explosion/srsly",
+      "reason": "srsly 3.0.1 no longer vendors a ujson fork: srsly/_json_api.py json_loads/read_json call ujson.loads/ujson.load from its ujson>=5.11.0,<6 dependency. A re-export of the selected UltraJSON family (at an older ujson release), not a separate path.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "partial-json-parser",
+      "last_month": 8722195,
+      "status": "excluded",
+      "lead_kind": "delegates_to_stdlib_json",
+      "version_seen": "0.2.1.1.post7",
+      "registry": "https://pypi.org/project/partial-json-parser/",
+      "reason": "partial_json_parser/core/api.py completes truncated text and then calls the standard json.loads by default; shares the CPython json family.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "dirtyjson",
+      "last_month": 5671026,
+      "status": "lead",
+      "lead_kind": "own_parser_shared_lineage",
+      "version_seen": "1.0.8",
+      "registry": "https://pypi.org/project/dirtyjson/",
+      "reason": "Own pure-Python lenient decoder (dirtyjson/loader.py) derived from the simplejson loader, per its README; would share simplejson lineage. Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "hjson",
+      "last_month": 4411122,
+      "status": "lead",
+      "lead_kind": "own_parser_shared_lineage",
+      "version_seen": "3.1.0",
+      "registry": "https://pypi.org/project/hjson/",
+      "reason": "Own pure-Python Hjson decoder (a JSON superset) whose source says it is based on simplejson; would share simplejson lineage. Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
       "name": "python-rapidjson",
       "last_month": 4066455,
       "registry": "https://pypi.org/project/python-rapidjson/",
@@ -100,6 +206,56 @@
       "native_feedback": "data/python/json/python-rapidjson-valid-feedback.json"
     },
     {
+      "name": "pyjson5",
+      "last_month": 3454361,
+      "status": "lead",
+      "lead_kind": "own_parser_not_selected",
+      "version_seen": "2.0.1",
+      "registry": "https://pypi.org/project/pyjson5/",
+      "reason": "Own Cython/C++ JSON5 decoder (src/_decoder.pyx), unrelated to the json5 package. Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "commentjson",
+      "last_month": 1796628,
+      "status": "excluded",
+      "lead_kind": "delegates_to_stdlib_json",
+      "version_seen": "0.9.0",
+      "registry": "https://pypi.org/project/commentjson/",
+      "reason": "commentjson.loads strips comments with a lark grammar and then calls the standard json.loads (commentjson.py line 185); shares the CPython json family.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "json-stream-rs-tokenizer",
+      "last_month": 1325716,
+      "status": "lead",
+      "lead_kind": "tokenizer_backend",
+      "version_seen": "0.5.5",
+      "registry": "https://pypi.org/project/json-stream-rs-tokenizer/",
+      "reason": "Rust tokenizer backend for json-stream rather than a value-tree API of its own; would be evaluated through the json-stream path. Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "json-stream",
+      "last_month": 1285987,
+      "status": "lead",
+      "lead_kind": "own_parser_not_selected",
+      "version_seen": "2.5.5",
+      "registry": "https://pypi.org/project/json-stream/",
+      "reason": "Own streaming JSON reader with a pure-Python tokenizer; by default select_tokenizer.py uses the Rust tokenizer from the json-stream-rs-tokenizer dependency. Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "jsonnet",
+      "last_month": 1126373,
+      "status": "excluded",
+      "lead_kind": "language_evaluator",
+      "version_seen": "0.22.0",
+      "registry": "https://pypi.org/project/jsonnet/",
+      "reason": "The Python binding evaluates the Jsonnet configuration language and returns JSON text, not a parsed JSON value tree. Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
       "name": "pysimdjson",
       "last_month": 679340,
       "registry": "https://pypi.org/project/pysimdjson/",
@@ -109,6 +265,72 @@
       "family_hint": "simdjson 5.1.1 C++ (same family as C++ simdjson 5.0.4 pilot)",
       "verified_evidence": "data/python/json/verification.json",
       "native_feedback": "data/python/json/pysimdjson-valid-feedback.json"
+    },
+    {
+      "name": "demjson3",
+      "last_month": 601504,
+      "status": "lead",
+      "lead_kind": "own_parser_not_selected",
+      "version_seen": "3.0.6",
+      "license": "LGPL-3.0",
+      "registry": "https://pypi.org/project/demjson3/",
+      "reason": "Own pure-Python JSON parser in demjson3.py; downloads are below every selected path. Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "jsonslicer",
+      "last_month": 281365,
+      "status": "lead",
+      "lead_kind": "native_binding_not_selected",
+      "registry": "https://pypi.org/project/jsonslicer/",
+      "reason": "Streaming C extension that, per its PyPI README, uses the YAJL library (same family as the ijson yajl2_c backend); not checked from source. Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "json-five",
+      "last_month": 157759,
+      "status": "lead",
+      "lead_kind": "own_parser_not_selected",
+      "registry": "https://pypi.org/project/json-five/",
+      "reason": "Own pure-Python JSON5 parser; downloads are below every selected path. Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "yapic-json",
+      "last_month": 10771,
+      "status": "lead",
+      "lead_kind": "native_binding_not_selected",
+      "registry": "https://pypi.org/project/yapic.json/",
+      "reason": "Own C++ JSON extension; downloads are far below every selected path. Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "cysimdjson",
+      "last_month": 2443,
+      "status": "lead",
+      "lead_kind": "native_binding_not_selected",
+      "registry": "https://pypi.org/project/cysimdjson/",
+      "reason": "Cython binding over simdjson (same family as the selected pysimdjson path). Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "yyjson",
+      "last_month": 1875,
+      "status": "lead",
+      "lead_kind": "native_binding_not_selected",
+      "registry": "https://pypi.org/project/yyjson/",
+      "reason": "CPython binding over the yyjson C library (orjson vendors the same C syntax parser). Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
+    },
+    {
+      "name": "hyperjson",
+      "last_month": 72,
+      "status": "lead",
+      "lead_kind": "native_binding_not_selected",
+      "registry": "https://pypi.org/project/hyperjson/",
+      "reason": "Per its PyPI README a thin wrapper around Rust serde_json via PyO3; a handful of monthly downloads. Not run.",
+      "metric_snapshot": "data/python/json/registry-snapshot.json"
     }
-  ]
+  ],
+  "registry_snapshot": "data/python/json/registry-snapshot.json"
 }

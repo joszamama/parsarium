@@ -1,0 +1,85 @@
+{
+  "checked_at_utc": "2026-11-17T15:02:22.931753+00:00",
+  "project": "json/python/json5",
+  "pass": true,
+  "input_kind": "two fixed valid RFC 8259 JSON controls",
+  "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where json5 is not importable; exact type-tagged trees with float.hex values and object member order",
+  "control_oracle": {
+    "oracle_python": "3.14.4",
+    "json5": "0.17.3",
+    "tree_sha256": "9c83c599682c3ea110ea481bf0edd76558a719d67c1c8e331fe047a2332f6c1e",
+    "value_kinds": [
+      "array",
+      "bool",
+      "float",
+      "int",
+      "null",
+      "object",
+      "string"
+    ],
+    "object_members": 10,
+    "duplicate_keys": 0,
+    "bytes_matches_oracle": true,
+    "str_matches_oracle": true,
+    "stream_matches_oracle": true
+  },
+  "variant_oracle": {
+    "oracle_python": "3.14.4",
+    "json5": "0.17.3",
+    "tree_sha256": "e9f1bf32886a233dfe8aa788997e3c327dcc729d2942d2b7d65db3e2f3250c0e",
+    "value_kinds": [
+      "array",
+      "bool",
+      "float",
+      "int",
+      "null",
+      "object",
+      "string"
+    ],
+    "object_members": 3,
+    "duplicate_keys": 0,
+    "bytes_matches_oracle": true,
+    "str_matches_oracle": true,
+    "stream_matches_oracle": true
+  },
+  "feedback_scope": "executed Python source lines of the installed json5 0.17.3 package (glop-generated parser.py and lib.py), mapped to the AFL++ bitmap by the Parsarium Python line bridge",
+  "base_image_id": "sha256:8bd438607a7d35ab8f8451b40a1f2b3d640a96d7b9796a48d4b4c714bdc0b500",
+  "overlay_image_id": "sha256:7683af19f50228689c3470f8471238271ad99d48fcbe86b83846d06fcfa7b034",
+  "overlay_receipt_sha256": "43e2c49377371fb5f5d0c9eaa3703d863abf3d7b8675ce438f02cd277d5924a3",
+  "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "root_type": "object",
+    "top_level_keys": [
+      "items",
+      "kind"
+    ],
+    "item_count": 2,
+    "first_id": 7,
+    "first_label": "a\nb",
+    "first_ok": true,
+    "first_value_is_null": true,
+    "second_label": "π"
+  },
+  "variant_output": {
+    "root_type": "array",
+    "item_count": 5,
+    "nested_arrays": 1,
+    "nested_objects": 1
+  },
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "control_parser_features": 668,
+  "variant_parser_features": 695,
+  "control_parser_py_features": 596,
+  "variant_parser_py_features": 623,
+  "control_lib_py_features": 72,
+  "variant_lib_py_features": 72,
+  "parser_feature_difference": 27,
+  "parser_py_feature_difference": 27,
+  "lib_py_feature_difference": 0,
+  "control_afl_tuples": 688,
+  "variant_afl_tuples": 715,
+  "afl_tuple_difference": 27
+}
