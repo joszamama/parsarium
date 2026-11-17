@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "project": "svg/cpp/gdk_pixbuf",
+  "image_id": "sha256:fa5430b3233ef4a240754e5168f552817cb4f43f46cb0abf9afd11358f96d6a0",
+  "feedback_scope": "librsvg Rust core and SVG loader plugin; no GdkPixbuf or C++ harness guards",
+  "instrumented_guard_slots": {
+    "librsvg_core": 432320,
+    "svg_loader_plugin": 53738,
+    "gdk_pixbuf": 0,
+    "cpp_harness": 0
+  },
+  "afl_map_size": 486063,
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "valid_variant": "fuzzing/afl-native/svg/cpp/gdk_pixbuf/valid-path.svg",
+  "valid_variant_sha256": "85ee385654f90465545b6ff1bb639fbba4e50f3c3830fa8b0b0aacc5919bba06",
+  "feedback_command": "afl-showmap -e -m none -t 30000 -o MAP -- /work/replay /input/control",
+  "control_repeat_edge_counts": [
+    5026,
+    5025,
+    5023,
+    5016,
+    5024
+  ],
+  "control_stable_edge_ids": 5016,
+  "control_union_edge_ids": 5026,
+  "control_stability_ratio": 0.99801,
+  "control_stable_edge_ids_sha256": "24e378787c987b914ac9e2cfc636d5249be147c6d3c85066ebb79dae903dbf63",
+  "variant_repeat_edge_counts": [
+    5181,
+    5188,
+    5191
+  ],
+  "variant_stable_edge_ids": 5181,
+  "variant_union_edge_ids": 5192,
+  "variant_stable_edge_ids_sha256": "19d9fd6d761fb6fc913bcb0467e1eea7114a43464e14e0636d97586465fec84c",
+  "stable_variant_only_edge_ids": 302,
+  "stable_control_only_edge_ids": 139,
+  "xml2_load_source_lines_covered": 177,
+  "one_pixel_valid_input": "fuzzing/afl-native/svg/cpp/gdk_pixbuf/valid-one.svg",
+  "one_pixel_valid_input_sha256": "e599d48750080293af05f246161779fe114a83075fe402a159f05a76bdf90dab",
+  "one_pixel_observed_output": {
+    "width": 1,
+    "height": 1,
+    "first": [
+      255,
+      0,
+      0,
+      255
+    ],
+    "second": null
+  },
+  "mutation_campaign_run": false,
+  "pass": true
+}

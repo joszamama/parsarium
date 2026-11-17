@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "cpp",
+  "package": "gdk-pixbuf",
+  "release": "2.44.8",
+  "catalog_parser": "data/cpp/svg/parsers.json",
+  "source_lock": "data/cpp/svg/source-lock.json",
+  "source_sha256": "919f529512961a12e81cd4b4b466a48c3933469e7f9a310c6513cd4fb252ba3c",
+  "underlying_package": "librsvg",
+  "underlying_release": "2.63.4",
+  "underlying_source_sha256": "31f07d9350dad3f8964fd613c31309ac160fdef13dfac59df6fd082de78d6e8f",
+  "underlying_dependency_lock": "Cargo.lock inside the pinned librsvg 2.63.4 archive (cargo fetch --locked)",
+  "rust_toolchain": "1.92.0",
+  "rust_toolchain_sha256": "3e383f8b4fca710d0600d0c1de97b78281672be2cda6575ecbe1c183a12e3822",
+  "cargo_c_release": "0.10.21+cargo-0.95.0",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "first": [
+      255,
+      0,
+      0,
+      255
+    ],
+    "second": [
+      0,
+      255,
+      0,
+      255
+    ]
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "afl_entrypoint": "/work/replay",
+  "afl_file_input": true,
+  "coverage": "LLVM source coverage in GdkPixbuf file API and underlying librsvg Rust SVG parser and loader plugin",
+  "coverage_limit": "The C++17 harness calls the GDK-Pixbuf C file API. GDK-Pixbuf and its C++ wrapper share the same librsvg SVG syntax engine; the base libFuzzer target instruments the C++ harness, while AFL++ /work/replay provides librsvg parser feedback.",
+  "underlying_family": "librsvg 2.63.4 Rust SVG parser, shared with the GDK-Pixbuf C path",
+  "coverage_subject_prefix": "/work/source/gdk-pixbuf/",
+  "underlying_coverage_subject_prefix": "/work/librsvg/rsvg/src/",
+  "underlying_format_specific_coverage_file_suffix": "/rsvg/src/xml/xml2_load.rs"
+}
