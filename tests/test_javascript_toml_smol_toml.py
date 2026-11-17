@@ -13,8 +13,11 @@ BASE = ROOT / "data/javascript/toml"
 SLUG, NAME = "smol_toml", "smol-toml"
 PROJECT = ROOT / "projects/toml/javascript" / SLUG
 OVERLAY = ROOT / "fuzzing/afl-native/toml/javascript" / SLUG
-sys.path.insert(0, str(ROOT / "controls/toml"))
-from check_controls import typed  # noqa: E402
+import importlib.util  # noqa: E402
+_spec = importlib.util.spec_from_file_location("toml_check_controls", ROOT / "controls/toml/check_controls.py")
+_controls = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_controls)
+typed = _controls.typed
 
 
 def read(path: Path) -> object:

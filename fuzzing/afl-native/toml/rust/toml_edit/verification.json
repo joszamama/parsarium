@@ -11,7 +11,7 @@
     "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
     "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
     "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
-    "build.py": "8b32410aef7a9007aa792d422d07557a2a601b7c28892beac5543a90f495c36b"
+    "build.py": "80abaa7bd97cb2ffea051c03d395ea0eb1dfbcff9e2e2b1884b12475d1e398de"
   },
   "afl_package": "4.33c-1.1ubuntu1",
   "afl_rust_release": "0.18.2",
@@ -53,6 +53,13 @@
       "xdg"
     ],
     "binary_guards": 13011
+  },
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "reason": "toml_edit stores tables in IndexMaps hashed with std RandomState; per-process getrandom keys changed 1 of 5 afl-showmap runs on the primary control. Constant getrandom bytes fix the keys; the parser source is unchanged.",
+    "replay_output_unchanged": true
   },
   "afl_version_output": "4.33c-1.1ubuntu1",
   "base_image_id": "sha256:9ba1ef8912a8b52d577d84ad4a2ec2d51845a11f2f33ebbc1d2e4d819f608f57",
@@ -324,7 +331,7 @@
       "src/index.rs": 0,
       "src/inline_table.rs": 0,
       "src/item.rs": 16,
-      "src/key.rs": 50,
+      "src/key.rs": 53,
       "src/parser/array.rs": 0,
       "src/parser/document.rs": 193,
       "src/parser/inline_table.rs": 0,
@@ -367,7 +374,6 @@
       "src/array_of_tables.rs",
       "src/inline_table.rs",
       "src/item.rs",
-      "src/key.rs",
       "src/parser/array.rs",
       "src/parser/document.rs",
       "src/parser/inline_table.rs",

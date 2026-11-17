@@ -122,6 +122,15 @@ def main() -> None:
         "feedback_kind": FEEDBACK_KIND,
         "feedback_scope": FEEDBACK_SCOPE,
         "sancov_scope": scope,
+        "fixed_hashmap_keys": {
+            "afl_preload": "/work/fixed_getrandom.so",
+            "shim_source": "fixed_getrandom.c",
+            "shim_sha256": sha256((OVERLAY / "fixed_getrandom.c").read_bytes()).hexdigest(),
+            "reason": ("toml_edit stores tables in IndexMaps hashed with std RandomState; per-process "
+                       "getrandom keys changed 1 of 5 afl-showmap runs on the primary control. Constant "
+                       "getrandom bytes fix the keys; the parser source is unchanged."),
+            "replay_output_unchanged": outputs["control"] == manifest["expected_output"],
+        },
         "afl_version_output": afl_version,
         "base_image_id": base_id,
         "variant_sha256": manifest["afl_variant_sha256"],
