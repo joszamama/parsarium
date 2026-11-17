@@ -725,7 +725,17 @@
     "serde_yaml",
     "serde_yml",
     "yaml-rust",
-    "yaml-rust2"
+    "yaml-rust2",
+    "serde_yaml_ng",
+    "granit-parser",
+    "yaml_serde",
+    "libyml",
+    "tree-sitter-yaml",
+    "noyalib",
+    "dbt-yaml",
+    "yaml_parser",
+    "yaml-edit",
+    "serde_yaml_bw"
    ]
   }
  ],
@@ -792,6 +802,76 @@
    "latest_release_observed": "0.8.0",
    "url": "https://crates.io/api/v1/crates/marked-yaml",
    "observed_at_utc": "2026-11-17T16:39:28.762772+00:00"
+  },
+  "serde_yaml_ng": {
+   "value": 16564340,
+   "latest_release_observed": "0.10.0",
+   "url": "https://crates.io/api/v1/crates?q=yaml&per_page=100&page=1",
+   "observed_at_utc": "2026-11-17T16:39:11.322356+00:00",
+   "value_source": "recent_downloads of hit rank 17 in the recorded first-100 'yaml' search"
+  },
+  "granit-parser": {
+   "value": 14752724,
+   "latest_release_observed": "2.2.0",
+   "url": "https://crates.io/api/v1/crates?q=yaml&per_page=100&page=1",
+   "observed_at_utc": "2026-11-17T16:39:11.322356+00:00",
+   "value_source": "recent_downloads of hit rank 14 in the recorded first-100 'yaml' search"
+  },
+  "yaml_serde": {
+   "value": 5615643,
+   "latest_release_observed": "0.10.7",
+   "url": "https://crates.io/api/v1/crates?q=yaml&per_page=100&page=1",
+   "observed_at_utc": "2026-11-17T16:39:11.322356+00:00",
+   "value_source": "recent_downloads of hit rank 8 in the recorded first-100 'yaml' search"
+  },
+  "libyml": {
+   "value": 3581849,
+   "latest_release_observed": "0.0.6",
+   "url": "https://crates.io/api/v1/crates?q=yaml&per_page=100&page=1",
+   "observed_at_utc": "2026-11-17T16:39:11.322356+00:00",
+   "value_source": "recent_downloads of hit rank 7 in the recorded first-100 'yaml' search"
+  },
+  "tree-sitter-yaml": {
+   "value": 2452432,
+   "latest_release_observed": "0.7.2",
+   "url": "https://crates.io/api/v1/crates?q=yaml&per_page=100&page=1",
+   "observed_at_utc": "2026-11-17T16:39:11.322356+00:00",
+   "value_source": "recent_downloads of hit rank 73 in the recorded first-100 'yaml' search"
+  },
+  "noyalib": {
+   "value": 1154094,
+   "latest_release_observed": "0.0.62",
+   "url": "https://crates.io/api/v1/crates?q=yaml&per_page=100&page=1",
+   "observed_at_utc": "2026-11-17T16:39:11.322356+00:00",
+   "value_source": "recent_downloads of hit rank 9 in the recorded first-100 'yaml' search"
+  },
+  "dbt-yaml": {
+   "value": 408383,
+   "latest_release_observed": "0.10.8",
+   "url": "https://crates.io/api/v1/crates?q=yaml&per_page=100&page=1",
+   "observed_at_utc": "2026-11-17T16:39:11.322356+00:00",
+   "value_source": "recent_downloads of hit rank 81 in the recorded first-100 'yaml' search"
+  },
+  "yaml_parser": {
+   "value": 358533,
+   "latest_release_observed": "0.3.0",
+   "url": "https://crates.io/api/v1/crates?q=yaml&per_page=100&page=1",
+   "observed_at_utc": "2026-11-17T16:39:11.322356+00:00",
+   "value_source": "recent_downloads of hit rank 69 in the recorded first-100 'yaml' search"
+  },
+  "yaml-edit": {
+   "value": 274824,
+   "latest_release_observed": "0.3.6",
+   "url": "https://crates.io/api/v1/crates?q=yaml&per_page=100&page=1",
+   "observed_at_utc": "2026-11-17T16:39:11.322356+00:00",
+   "value_source": "recent_downloads of hit rank 23 in the recorded first-100 'yaml' search"
+  },
+  "serde_yaml_bw": {
+   "value": 193796,
+   "latest_release_observed": "2.5.8",
+   "url": "https://crates.io/api/v1/crates?q=yaml&per_page=100&page=1",
+   "observed_at_utc": "2026-11-17T16:39:11.322356+00:00",
+   "value_source": "recent_downloads of hit rank 6 in the recorded first-100 'yaml' search"
   }
  },
  "leads": [
@@ -802,6 +882,14 @@
    "note": "Archived upstream; libyaml port via unsafe-libyaml.",
    "found_by": "registry_search",
    "metric_value": 100619896
+  },
+  {
+   "name": "unsafe-libyaml",
+   "family": "unsafe-libyaml (libyaml translation)",
+   "api_hint": "yaml_parser_parse",
+   "note": "c2rust translation of libyaml.",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 91340058
   },
   {
    "name": "yaml-rust",
@@ -820,36 +908,28 @@
    "metric_value": 23795451
   },
   {
-   "name": "saphyr",
-   "family": "saphyr (yaml-rust2 lineage)",
-   "api_hint": "Yaml::load_from_str",
-   "note": null,
-   "found_by": "registry_search",
-   "metric_value": 1374356
-  },
-  {
-   "name": "saphyr-parser",
-   "family": "saphyr (yaml-rust2 lineage)",
-   "api_hint": "Parser::new_from_str event stream",
-   "note": null,
-   "found_by": "registry_search",
-   "metric_value": 8941580
-  },
-  {
-   "name": "serde_yml",
-   "family": "libyml (libyaml translation)",
-   "api_hint": "serde_yml::from_str::<Value>",
-   "note": "Fork of serde_yaml.",
-   "found_by": "registry_search",
-   "metric_value": 4221754
-  },
-  {
-   "name": "unsafe-libyaml",
+   "name": "serde_yaml_ng",
    "family": "unsafe-libyaml (libyaml translation)",
-   "api_hint": "yaml_parser_parse",
-   "note": "c2rust translation of libyaml.",
-   "found_by": "targeted_documentation_lead",
-   "metric_value": 91340058
+   "api_hint": "serde_yaml_ng::from_str::<Value>",
+   "note": "Fork of serde_yaml over the same unsafe-libyaml 0.2.11.",
+   "found_by": "registry_search",
+   "metric_value": 16564340
+  },
+  {
+   "name": "serde-saphyr",
+   "family": "saphyr-parser",
+   "api_hint": "serde_saphyr::from_str",
+   "note": null,
+   "found_by": "registry_search",
+   "metric_value": 15482906
+  },
+  {
+   "name": "granit-parser",
+   "family": "granit-parser (saphyr-parser fork, yaml-rust lineage)",
+   "api_hint": "Parser::new_from_str event stream",
+   "note": "Event parser under serde-saphyr 2.x.",
+   "found_by": "registry_search",
+   "metric_value": 14752724
   },
   {
    "name": "serde_norway",
@@ -860,12 +940,92 @@
    "metric_value": 12111405
   },
   {
-   "name": "serde-saphyr",
-   "family": "saphyr-parser",
-   "api_hint": "serde_saphyr::from_str",
+   "name": "saphyr-parser",
+   "family": "saphyr (yaml-rust2 lineage)",
+   "api_hint": "Parser::new_from_str event stream",
    "note": null,
    "found_by": "registry_search",
-   "metric_value": 15482906
+   "metric_value": 8941580
+  },
+  {
+   "name": "yaml_serde",
+   "family": "libyaml-rs (libyaml translation)",
+   "api_hint": "yaml_serde::from_str::<Value>",
+   "note": "YAML organization fork of serde_yaml over libyaml-rs.",
+   "found_by": "registry_search",
+   "metric_value": 5615643
+  },
+  {
+   "name": "serde_yml",
+   "family": "libyml (libyaml translation)",
+   "api_hint": "serde_yml::from_str::<Value>",
+   "note": "Fork of serde_yaml.",
+   "found_by": "registry_search",
+   "metric_value": 4221754
+  },
+  {
+   "name": "libyml",
+   "family": "unsafe-libyaml (libyaml translation)",
+   "api_hint": "yaml_parser_* (forwarded)",
+   "note": "0.0.6 is a deprecated shim forwarding to unsafe-libyaml.",
+   "found_by": "registry_search",
+   "metric_value": 3581849
+  },
+  {
+   "name": "tree-sitter-yaml",
+   "family": "tree-sitter grammar (generated C parser)",
+   "api_hint": "tree_sitter_yaml::LANGUAGE",
+   "note": "Concrete syntax tree grammar.",
+   "found_by": "registry_search",
+   "metric_value": 2452432
+  },
+  {
+   "name": "saphyr",
+   "family": "saphyr (yaml-rust2 lineage)",
+   "api_hint": "Yaml::load_from_str",
+   "note": null,
+   "found_by": "registry_search",
+   "metric_value": 1374356
+  },
+  {
+   "name": "noyalib",
+   "family": "noyalib (own pure-Rust parser)",
+   "api_hint": "noyalib::from_str::<Value>",
+   "note": "serde_yml 0.0.13 re-exports its serde_yaml compatibility module.",
+   "found_by": "registry_search",
+   "metric_value": 1154094
+  },
+  {
+   "name": "dbt-yaml",
+   "family": "unsafe-libyaml (libyaml translation)",
+   "api_hint": "dbt_yaml::from_str::<Value>",
+   "note": "serde_yaml fork for dbt over unsafe-libyaml 0.2.11.",
+   "found_by": "registry_search",
+   "metric_value": 408383
+  },
+  {
+   "name": "yaml_parser",
+   "family": "yaml_parser (rowan CST)",
+   "api_hint": "yaml_parser::parse",
+   "note": "Semi-tolerant concrete syntax tree parser.",
+   "found_by": "registry_search",
+   "metric_value": 358533
+  },
+  {
+   "name": "yaml-edit",
+   "family": "yaml-edit (rowan CST)",
+   "api_hint": "yaml_edit::Document",
+   "note": "Lossless parser and editor.",
+   "found_by": "registry_search",
+   "metric_value": 274824
+  },
+  {
+   "name": "serde_yaml_bw",
+   "family": "saphyr-parser / unsafe-libyaml-norway",
+   "api_hint": "serde_yaml_bw::from_str",
+   "note": "serde_yaml fork by the serde-saphyr author.",
+   "found_by": "registry_search",
+   "metric_value": 193796
   },
   {
    "name": "marked-yaml",

@@ -1,0 +1,246 @@
+# unsafe-libyaml — YAML / Rust
+
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
+
+- **Pinned release:** `0.2.11`
+- **License:** MIT
+- **Parser family:** libyaml: unsafe-libyaml 0.2.11 is a c2rust translation of libyaml at upstream commit 2c891fc7 and is the same crate the selected serde_yaml path drives (serde_yaml uses its yaml_parser_parse event interface with its own loader; this path uses libyaml's own yaml_parser_load composer). Shared libyaml family with serde_yaml, C libyaml, PyYAML's CLoader and PHP ext-yaml.
+- **Local input API:** `unsafe_libyaml::{yaml_parser_initialize, yaml_parser_set_input_string(*mut yaml_parser_t, *const u8, u64), yaml_parser_load(*mut yaml_parser_t, *mut yaml_document_t) -> Success, yaml_document_get_root_node, yaml_document_get_node, yaml_document_delete, yaml_parser_delete}; yaml_node_t scalar (value, length, style), sequence items and mapping pairs`
+- **Documentation:** [API reference](<https://docs.rs/unsafe-libyaml/0.2.11/unsafe_libyaml/fn.yaml_parser_load.html>)
+- **Valid control:** [`controls/yaml/catalog.yaml`](../../../../controls/yaml/catalog.yaml)
+- **Catalog evidence:** [parser record](../../../../data/rust/yaml/parsers.json) · [control result](../../../../data/rust/yaml/verification.json)
+
+## Observed control result
+
+```json
+{
+  "tree": [
+    "map",
+    [
+      [
+        "kind",
+        [
+          "str",
+          "catalog"
+        ]
+      ],
+      [
+        "version",
+        [
+          "int",
+          "2"
+        ]
+      ],
+      [
+        "ratio",
+        [
+          "float",
+          "0.25"
+        ]
+      ],
+      [
+        "offset",
+        [
+          "int",
+          "-17"
+        ]
+      ],
+      [
+        "enabled",
+        [
+          "bool",
+          true
+        ]
+      ],
+      [
+        "retired",
+        [
+          "bool",
+          false
+        ]
+      ],
+      [
+        "missing",
+        [
+          "null"
+        ]
+      ],
+      [
+        "title",
+        [
+          "str",
+          "Café \"quoted\"\tend"
+        ]
+      ],
+      [
+        "single",
+        [
+          "str",
+          "it's here"
+        ]
+      ],
+      [
+        "tags",
+        [
+          "seq",
+          [
+            [
+              "str",
+              "alpha"
+            ],
+            [
+              "str",
+              "beta"
+            ],
+            [
+              "str",
+              "gamma delta"
+            ]
+          ]
+        ]
+      ],
+      [
+        "point",
+        [
+          "map",
+          [
+            [
+              "lat",
+              [
+                "int",
+                "1"
+              ]
+            ],
+            [
+              "lon",
+              [
+                "float",
+                "-2.5"
+              ]
+            ]
+          ]
+        ]
+      ],
+      [
+        "items",
+        [
+          "seq",
+          [
+            [
+              "map",
+              [
+                [
+                  "id",
+                  [
+                    "int",
+                    "7"
+                  ]
+                ],
+                [
+                  "name",
+                  [
+                    "str",
+                    "first item"
+                  ]
+                ],
+                [
+                  "note",
+                  [
+                    "str",
+                    "line one\nline two\n"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "id",
+                  [
+                    "int",
+                    "8"
+                  ]
+                ],
+                [
+                  "name",
+                  [
+                    "str",
+                    "Zürich"
+                  ]
+                ],
+                [
+                  "note",
+                  [
+                    "str",
+                    "folded text\n"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ],
+      [
+        "defaults",
+        [
+          "map",
+          [
+            [
+              "retries",
+              [
+                "int",
+                "3"
+              ]
+            ],
+            [
+              "label",
+              [
+                "str",
+                "base"
+              ]
+            ]
+          ]
+        ]
+      ],
+      [
+        "service",
+        [
+          "map",
+          [
+            [
+              "settings",
+              [
+                "map",
+                [
+                  [
+                    "retries",
+                    [
+                      "int",
+                      "3"
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "base"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "label",
+              [
+                "str",
+                "edge"
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+}
+```

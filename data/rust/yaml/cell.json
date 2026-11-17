@@ -1,10 +1,10 @@
 {
   "ecosystem": "rust",
   "format": "yaml",
-  "status": "pilot_two_verified_bounded_search",
+  "status": "pilot_three_verified_bounded_search",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "yaml"
@@ -15,17 +15,18 @@
   "search_totals": {
     "yaml": 11139
   },
-  "leads_recorded": 10,
+  "leads_recorded": 20,
   "leads_by_status": {
-    "selected": 2,
-    "shared_family": 3,
-    "unresolved": 5
+    "selected": 3,
+    "unresolved": 15,
+    "shared_family": 2
   },
   "ranking_metric": "crates.io recent_downloads (90 days)",
-  "uncertainty": "2 verified Rust YAML paths (serde_yaml, yaml-rust) out of 10 named leads from the bounded crates.io search (yaml; first 100 of 11,139 hits, captured 2026-11-17), checked in crates.io 90-day recent_downloads order. serde_yaml is in the libyaml family: it drives unsafe-libyaml, a c2rust translation of libyaml, whose lead is recorded as shared family rather than a second path; serde_yml and serde_norway are serde_yaml forks over the same family. yaml-rust has its own pure-Rust scanner and parser; yaml-rust2, saphyr and saphyr-parser continue that code base and remain unverified leads of the same lineage, as does serde-saphyr. serde_yaml is archived upstream (+deprecated) and yaml-rust is unmaintained; both still lead the download metric, which counts transitive installs, not YAML-specific use. The two schema-neutral controls do not test tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars.",
+  "uncertainty": "3 verified Rust YAML paths (serde_yaml, unsafe-libyaml, yaml-rust) from 20 named leads of the bounded crates.io search (yaml; first 100 of 11,139 hits, captured 2026-11-17), checked in crates.io 90-day recent_downloads order. Families overlap: serde_yaml and unsafe-libyaml share the libyaml translation (unsafe-libyaml is the crate serde_yaml drives), and yaml-rust and its descendants share the yaml-rust lineage. Paths over event parsers or libyaml's node graph type plain scalars in the harness with the YAML 1.2 core-schema patterns. Leads that are not selected remain unverified or carry a recorded decision in leads.json. The download metric counts transitive installs, not YAML-specific use. The two schema-neutral controls do not test tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars.",
   "third_party_evidence": "data/rust/yaml/parsers.json",
   "third_party_control_results": [
     "projects/yaml/rust/serde_yaml/verification.json",
+    "projects/yaml/rust/unsafe_libyaml/verification.json",
     "projects/yaml/rust/yaml_rust/verification.json"
   ],
   "runtime_evidence": "data/rust/yaml/standard.json",

@@ -14,7 +14,7 @@
   },
   {
     "name": "unsafe-libyaml",
-    "status": "shared_family",
+    "status": "selected",
     "metric_value": 91340058,
     "metric_error": null,
     "family": "unsafe-libyaml (libyaml translation)",
@@ -22,7 +22,8 @@
     "note": "c2rust translation of libyaml.",
     "found_by": "targeted_documentation_lead",
     "source": "https://crates.io/crates/unsafe-libyaml",
-    "reason": "Not run as a separate path. unsafe-libyaml 0.2.11 is the c2rust libyaml translation that the selected serde_yaml path drives (its scanner and parser lines are recorded as underlying coverage there). Its only API is the unsafe C-style yaml_parser_* event interface over raw pointers, with docs.rs listing the translated functions but no documented safe local text entry point; its downloads are almost entirely as serde_yaml's dependency."
+    "reason": "Selected. Pinned 0.2.11 parses both schema-neutral YAML controls into the exact typed trees of controls/yaml/check_controls.py; Docker coverage 2427 own lines; AFL++ scoped to unsafe_libyaml: 5 identical repeats per control, 1367 vs 1374 edges, 89/96 unique. Round 1 recorded it as shared family because its only API is the unsafe C-style interface. That interface is documented on docs.rs (yaml_parser_load composes a document from local bytes), the crate is a distinct package with its own metric, and an unsafe API is not an eligibility criterion, so it is selected as a libyaml-family path next to serde_yaml, as C libyaml is in the C cell. Plain scalars are typed by the harness.",
+    "evidence": "projects/yaml/rust/unsafe_libyaml/verification.json"
   },
   {
     "name": "yaml-rust",
@@ -50,6 +51,18 @@
     "reason": "Unverified lead: no pinned release, control run or harness yet."
   },
   {
+    "name": "serde_yaml_ng",
+    "status": "unresolved",
+    "metric_value": 16564340,
+    "metric_error": null,
+    "family": "unsafe-libyaml (libyaml translation)",
+    "api_hint": "serde_yaml_ng::from_str::<Value>",
+    "note": "Fork of serde_yaml over the same unsafe-libyaml 0.2.11.",
+    "found_by": "registry_search",
+    "source": "https://crates.io/crates/serde_yaml_ng",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
     "name": "serde-saphyr",
     "status": "unresolved",
     "metric_value": 15482906,
@@ -59,6 +72,18 @@
     "note": null,
     "found_by": "registry_search",
     "source": "https://crates.io/crates/serde-saphyr",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "granit-parser",
+    "status": "unresolved",
+    "metric_value": 14752724,
+    "metric_error": null,
+    "family": "granit-parser (saphyr-parser fork, yaml-rust lineage)",
+    "api_hint": "Parser::new_from_str event stream",
+    "note": "Event parser under serde-saphyr 2.x.",
+    "found_by": "registry_search",
+    "source": "https://crates.io/crates/granit-parser",
     "reason": "Unverified lead: no pinned release, control run or harness yet."
   },
   {
@@ -86,6 +111,18 @@
     "reason": "Unverified lead: no pinned release, control run or harness yet."
   },
   {
+    "name": "yaml_serde",
+    "status": "unresolved",
+    "metric_value": 5615643,
+    "metric_error": null,
+    "family": "libyaml-rs (libyaml translation)",
+    "api_hint": "yaml_serde::from_str::<Value>",
+    "note": "YAML organization fork of serde_yaml over libyaml-rs.",
+    "found_by": "registry_search",
+    "source": "https://crates.io/crates/yaml_serde",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
     "name": "serde_yml",
     "status": "shared_family",
     "metric_value": 4221754,
@@ -98,6 +135,30 @@
     "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
   },
   {
+    "name": "libyml",
+    "status": "unresolved",
+    "metric_value": 3581849,
+    "metric_error": null,
+    "family": "unsafe-libyaml (libyaml translation)",
+    "api_hint": "yaml_parser_* (forwarded)",
+    "note": "0.0.6 is a deprecated shim forwarding to unsafe-libyaml.",
+    "found_by": "registry_search",
+    "source": "https://crates.io/crates/libyml",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "tree-sitter-yaml",
+    "status": "unresolved",
+    "metric_value": 2452432,
+    "metric_error": null,
+    "family": "tree-sitter grammar (generated C parser)",
+    "api_hint": "tree_sitter_yaml::LANGUAGE",
+    "note": "Concrete syntax tree grammar.",
+    "found_by": "registry_search",
+    "source": "https://crates.io/crates/tree-sitter-yaml",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
     "name": "saphyr",
     "status": "unresolved",
     "metric_value": 1374356,
@@ -107,6 +168,66 @@
     "note": null,
     "found_by": "registry_search",
     "source": "https://crates.io/crates/saphyr",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "noyalib",
+    "status": "unresolved",
+    "metric_value": 1154094,
+    "metric_error": null,
+    "family": "noyalib (own pure-Rust parser)",
+    "api_hint": "noyalib::from_str::<Value>",
+    "note": "serde_yml 0.0.13 re-exports its serde_yaml compatibility module.",
+    "found_by": "registry_search",
+    "source": "https://crates.io/crates/noyalib",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "dbt-yaml",
+    "status": "unresolved",
+    "metric_value": 408383,
+    "metric_error": null,
+    "family": "unsafe-libyaml (libyaml translation)",
+    "api_hint": "dbt_yaml::from_str::<Value>",
+    "note": "serde_yaml fork for dbt over unsafe-libyaml 0.2.11.",
+    "found_by": "registry_search",
+    "source": "https://crates.io/crates/dbt-yaml",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "yaml_parser",
+    "status": "unresolved",
+    "metric_value": 358533,
+    "metric_error": null,
+    "family": "yaml_parser (rowan CST)",
+    "api_hint": "yaml_parser::parse",
+    "note": "Semi-tolerant concrete syntax tree parser.",
+    "found_by": "registry_search",
+    "source": "https://crates.io/crates/yaml_parser",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "yaml-edit",
+    "status": "unresolved",
+    "metric_value": 274824,
+    "metric_error": null,
+    "family": "yaml-edit (rowan CST)",
+    "api_hint": "yaml_edit::Document",
+    "note": "Lossless parser and editor.",
+    "found_by": "registry_search",
+    "source": "https://crates.io/crates/yaml-edit",
+    "reason": "Unverified lead: no pinned release, control run or harness yet."
+  },
+  {
+    "name": "serde_yaml_bw",
+    "status": "unresolved",
+    "metric_value": 193796,
+    "metric_error": null,
+    "family": "saphyr-parser / unsafe-libyaml-norway",
+    "api_hint": "serde_yaml_bw::from_str",
+    "note": "serde_yaml fork by the serde-saphyr author.",
+    "found_by": "registry_search",
+    "source": "https://crates.io/crates/serde_yaml_bw",
     "reason": "Unverified lead: no pinned release, control run or harness yet."
   },
   {

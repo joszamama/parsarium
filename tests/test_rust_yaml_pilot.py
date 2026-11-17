@@ -10,8 +10,16 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 CELL = ROOT / "data/rust/yaml"
-SLUGS = {"serde_yaml": "serde_yaml", "yaml-rust": "yaml_rust"}
-CRATES = {"serde_yaml": ["serde_yaml", "unsafe_libyaml"], "yaml-rust": ["yaml_rust"]}
+SLUGS = {
+    "serde_yaml": "serde_yaml",
+    "yaml-rust": "yaml_rust",
+    "unsafe-libyaml": "unsafe_libyaml",
+}
+CRATES = {
+    "serde_yaml": ["serde_yaml", "unsafe_libyaml"],
+    "yaml-rust": ["yaml_rust"],
+    "unsafe-libyaml": ["unsafe_libyaml"],
+}
 spec = importlib.util.spec_from_file_location("yaml_control_oracle", ROOT / "controls/yaml/check_controls.py")
 oracle = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(oracle)
@@ -70,9 +78,12 @@ class RustYamlPilotTest(unittest.TestCase):
         for parser in parsers:
             self.assertEqual(leads[parser["name"]]["status"], "selected")
             self.assertEqual(leads[parser["name"]]["metric_value"], parser["metric"]["value"])
-        if "serde_yaml" in leads and leads["serde_yaml"]["status"] == "selected":
-            self.assertIn("libyaml", next(p["family"] for p in parsers if p["name"] == "serde_yaml"))
-            self.assertEqual(leads["unsafe-libyaml"]["status"], "shared_family")
+        families = {parser["name"]: parser["family"] for parser in parsers}
+        for name in ("serde_yaml", "unsafe-libyaml"):
+            if name in families:
+                self.assertIn("libyaml", families[name])
+        for name in set(families) - {"serde_yaml", "unsafe-libyaml", "yaml-rust", "noyalib", "dbt-yaml"}:
+            self.assertIn("yaml-rust lineage", families[name])
 
 
 if __name__ == "__main__":

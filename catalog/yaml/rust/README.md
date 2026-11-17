@@ -9,6 +9,7 @@
 ## Third-party parsers
 
 - [serde_yaml](serde-yaml/README.md) — verified Docker harness
+- [unsafe-libyaml](unsafe-libyaml/README.md) — verified API path
 - [yaml-rust](yaml-rust/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
