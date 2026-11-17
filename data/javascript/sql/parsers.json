@@ -424,5 +424,109 @@
         }
       ]
     }
+  },
+  {
+    "name": "sqlite-parser",
+    "version": "1.0.1",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball",
+    "input_api": "sqliteParser(local UTF-8 text) -> statement list",
+    "documentation": "https://www.npmjs.com/package/sqlite-parser/v/1.0.1",
+    "source": "https://registry.npmjs.org/sqlite-parser/-/sqlite-parser-1.0.1.tgz",
+    "source_sha256": "9b0b26c552f5193b1544ff2c92b0520a5ef02f19042baa63a7cff1c005828e65",
+    "dependencies": [],
+    "dialect": "SQLite",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8 and passed to the synchronous sqliteParser call; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "sqlite-parser PEG.js grammar",
+    "family_note": "sqliteParser runs the package's PEG.js-generated SQLite grammar (lib/parser.js, shipped minified without a source map) with its own tracer and returns an AST (statement variant select/insert, result, from map with join entries, where, group, order, function and literal nodes). The adapter reads those fields. Released 2017 (last release). @appland/sql-parser is a separately maintained fork with a modified grammar (same AST shape). Independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst, dt-sql-parser and libpg_query.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 85900,
+      "source": "https://api.npmjs.org/downloads/point/last-month/sqlite-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Package downloads include transitive installs."
+    },
+    "project": "projects/sql/javascript/sqlite_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

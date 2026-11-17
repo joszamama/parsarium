@@ -1,10 +1,10 @@
 {
   "ecosystem": "javascript",
   "format": "sql",
-  "status": "pilot_four_selected_search_bounded",
+  "status": "pilot_five_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 4,
+  "verified_third_party_count": 5,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "sql parser",
@@ -21,8 +21,8 @@
   "unique_search_hits": 236,
   "search_captured_at_utc": "2026-11-17T16:37:54.957183+00:00",
   "primary_metric": "npm downloads, last month",
-  "unresolved_documentation_leads": 9,
-  "uncertainty": "Four verified JavaScript SQL paths after a bounded npm search (three queries, first 100 hits each, 259 hits, 236 unique) and npm last-month downloads for 15 targeted leads, captured 2026-11-17. node-sql-parser 5.4.0 (13,709,122), pgsql-ast-parser 12.0.2 (7,717,032), sql-parser-cst 0.44.1 (536,703, sqlite dialect, concrete syntax tree) and dt-sql-parser 4.6.1 (364,059, MySQL class, ANTLR4 parse tree) parse both valid controls into their own trees, which give the oracle summary. node-sql-parser ships minified, so its line coverage is mapped through the package source map. dt-sql-parser's line count includes module-initialization lines of the other dialect grammars its index loads (14,547 of 51,949 lines are in the MySQL files), and its dist needs a resolve hook for extensionless ES module imports. libpg-query 18.2.4 (11,829,732), pg-query-emscripten (1,749,295) and @guanmingchiu/sqlparser-ts (598,900) rank above sql-parser-cst but run libpg_query or sqlparser-rs compiled to WebAssembly; V8 coverage does not report C or Rust source lines inside the module, so the parser-source coverage gate cannot be met with this harness and they stay leads. sql-formatter (29,933,061) is a formatter. Other leads are unverified, so this is not a top-ten ranking. node:sqlite prepare is an engine API with no syntax tree. Two valid controls establish only the tested dialect-neutral subset.",
+  "unresolved_documentation_leads": 8,
+  "uncertainty": "Five verified JavaScript SQL paths after a bounded npm search (three queries, first 100 hits each, 259 hits, 236 unique) and npm last-month downloads for 15 targeted leads, captured 2026-11-17. node-sql-parser 5.4.0 (13,709,122), pgsql-ast-parser 12.0.2 (7,717,032), sql-parser-cst 0.44.1 (536,703, sqlite dialect, concrete syntax tree), dt-sql-parser 4.6.1 (364,059, MySQL class, ANTLR4 parse tree) and sqlite-parser 1.0.1 (85,900, SQLite) parse both valid controls into their own trees, which give the oracle summary. node-sql-parser ships minified, so its line coverage is mapped through the package source map; sqlite-parser ships minified without a source map, so its 24 covered lines are a coarse floor and its AFL++ feedback uses V8 byte ranges. dt-sql-parser's line count includes module-initialization lines of the other dialect grammars its index loads (14,547 of 51,949 lines are in the MySQL files), and its dist needs a resolve hook for extensionless ES module imports. libpg-query 18.2.4 (11,829,732), pg-query-emscripten (1,749,295) and @guanmingchiu/sqlparser-ts (598,900) rank above sql-parser-cst but run libpg_query or sqlparser-rs compiled to WebAssembly; V8 coverage does not report C or Rust source lines inside the module, so the parser-source coverage gate cannot be met with this harness and they stay leads. js-sql-parser (157,858) and others below dt-sql-parser are recorded in leads.json. sql-formatter (29,933,061) is a formatter. Other leads are unverified, so this is not a top-ten ranking. node:sqlite prepare is an engine API with no syntax tree. Two valid controls establish only the tested dialect-neutral subset.",
   "registry_snapshot": "data/javascript/sql/registry-snapshot.json",
   "unresolved_leads": "data/javascript/sql/leads.json",
   "runtime_evidence": "data/javascript/sql/standard.json",
@@ -31,6 +31,7 @@
     "projects/sql/javascript/node_sql_parser/verification.json",
     "projects/sql/javascript/pgsql_ast_parser/verification.json",
     "projects/sql/javascript/sql_parser_cst/verification.json",
-    "projects/sql/javascript/dt_sql_parser/verification.json"
+    "projects/sql/javascript/dt_sql_parser/verification.json",
+    "projects/sql/javascript/sqlite_parser/verification.json"
   ]
 }
