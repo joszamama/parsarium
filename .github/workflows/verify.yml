@@ -1,0 +1,31 @@
+name: Verify catalog and tooling
+
+on:
+  push:
+    branches: [main, codex/curated-catalog]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.13']
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Check selection and evidence records
+        run: python3 scripts/validate_catalog.py
+      - name: Check runnable targets and source receipts
+        run: python3 scripts/audit_projects.py
+      - name: Check AFL++ overlays and feedback receipts
+        run: python3 scripts/audit_fuzzing.py
+      - name: Test catalog, package paths, and fuzz tooling
+        run: python3 -m unittest discover -s tests -q
