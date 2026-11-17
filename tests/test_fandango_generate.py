@@ -145,6 +145,13 @@ class FandangoGenerateTest(unittest.TestCase):
         self.assertNotIn("yaml", fandango_generate.FANBASE_FORMATS)
         self.assertEqual(fandango_generate.LOCAL_SPECS["yaml"], "yaml.fan")
 
+    def test_dns_pilot_uses_local_message_spec(self):
+        self.assertIn("dns", fandango_generate.FORMATS)
+        self.assertNotIn("dns", fandango_generate.FANBASE_FORMATS)
+        self.assertEqual(fandango_generate.LOCAL_SPECS["dns"], "dns_message.fan")
+        self.assertEqual(fandango_generate.EXTENSIONS["dns"], ".bin")
+        self.assertTrue((ROOT / "fuzzing/fandango/specs/dns_message.fan").is_file())
+
     def test_plain_mp3_default_uses_local_spec_and_checks_frames(self):
         control = ROOT / "controls/mp3/go-tone-44k-mono.mp3"
         run = self.tmp / "plain-mp3"

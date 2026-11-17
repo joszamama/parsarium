@@ -8,6 +8,8 @@ ecosystem cells live in `data/pilot-cells.json`, their parser guide index lives 
 of `data/projects-coverage.json`. Every pilot cell stays explicitly incomplete.
 Zero in an unstarted cell means no verified path has been recorded, not that no
 parser exists. Plain MP3 does not replace the active MP3-with-ID3v2 format.
+DNS (one RFC 1035 wire-format message as local bytes) is also a pilot, with eight
+more cells; its scope and controls are in `catalog/dns/PROTOCOL.md`.
 
 ## Add a verified pilot path
 

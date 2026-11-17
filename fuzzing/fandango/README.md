@@ -45,6 +45,7 @@ python3 parsarium.py fandango generate xml python xmltodict runs/xml-fandango \
 | [`mp3_plain.fan`](specs/mp3_plain.fan) | `mp3` untagged targets | Six whole-frame prefixes from two pinned, untagged Layer III controls; no ID3 tags or mixed layers |
 | [`yaml.fan`](specs/yaml.fan) | `yaml` pilot | One block-mapping document with fixed optional keys, flow and block collections, quoted scalars with escapes, block scalars and one anchor/alias; plain scalars typed the same under YAML 1.1 and the 1.2 core schema. Fanbase has no YAML spec |
 | [`toml.fan`](specs/toml.fan) | `toml` pilot | TOML 1.0.0 documents with fixed key names per position: root keys, optional `[server]`, `[owner]` and dotted-key tables, zero to three `[[products]]`; typed integers, floats, strings with escapes, booleans, arrays, inline tables and date-times |
+| [`dns_message.fan`](specs/dns_message.fan) | `dns` pilot | One DNS message: a query, or a response with 1–4 A, AAAA, CNAME, MX or TXT answers; counts fixed per alternative, `RDLENGTH` constrained, compression only by pointer to the question name at offset 12; see [decision](dns-decision.md) |
 
 Fanbase `ppm` covers both P3 and P6, so the PNM spec is restricted to P3. The `P1` and `P2` controls and HTTP responses are out of scope.
 
