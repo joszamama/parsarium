@@ -29,7 +29,7 @@
     "unresolved": 8
   },
   "ranking_metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
-  "uncertainty": "Pilot cell: no JavaScript DNS path is verified yet. The bounded searches and targeted documentation leads are recorded with one adoption metric each; leads are ordered by that metric only to decide what to verify first. Registry search order is not adoption order, and package-level metrics include non-DNS use. Zero verified paths is not evidence that no parser exists.",
+  "uncertainty": "Pilot cell: two JavaScript paths verified, dns-packet and its fork @dnsquery/dns-packet (shared family), ranked by npm 30-day downloads. dns2, @leichtgewicht/dns-packet (another fork), native-dns-packet and dns-js remain leads; multicast-dns is excluded as an mDNS network API over dns-packet. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/javascript/dns/registry-snapshot.json",
   "unresolved_leads": "data/javascript/dns/leads.json",
   "runtime_evidence": "data/javascript/dns/standard.json",

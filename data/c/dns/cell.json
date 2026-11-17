@@ -28,7 +28,7 @@
     "standard_runtime": 2
   },
   "ranking_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
-  "uncertainty": "Pilot cell: no C DNS path is verified yet. The bounded searches and targeted documentation leads are recorded with one adoption metric each; leads are ordered by that metric only to decide what to verify first. Registry search order is not adoption order, and package-level metrics include non-DNS use. Zero verified paths is not evidence that no parser exists.",
+  "uncertainty": "Pilot cell: two C paths verified, c-ares and ldns, ranked by Debian popcon sourcemax installations. bind9, unbound and libevent are excluded because they document no public parser for caller-supplied message bytes; knot, udns and getdns remain leads (getdns shares the ldns-derived gldns code). glibc and musl libresolv ns_initparse are recorded as standard/runtime leads and were not run. c-ares and ldns drop the reserved Z bit (z carries AD and CD). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/c/dns/registry-snapshot.json",
   "unresolved_leads": "data/c/dns/leads.json",
   "runtime_evidence": "data/c/dns/standard.json",

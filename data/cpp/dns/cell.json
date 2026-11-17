@@ -27,7 +27,7 @@
     "excluded": 7
   },
   "ranking_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
-  "uncertainty": "Pilot cell: no C++ DNS path is verified yet. The bounded searches and targeted documentation leads are recorded with one adoption metric each; leads are ordered by that metric only to decide what to verify first. Registry search order is not adoption order, and package-level metrics include non-DNS use. Zero verified paths is not evidence that no parser exists.",
+  "uncertainty": "Pilot cell: one C++ path verified, libtins (Debian popcon 52, the only C++ DNS message library with a Debian source package). PcapPlusPlus has no Debian source, so it has no primary metric and stays an unranked lead. Poco, Qt QDnsLookup, Boost.Asio and the PowerDNS applications are excluded (resolvers or applications, no message-bytes API). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/cpp/dns/registry-snapshot.json",
   "unresolved_leads": "data/cpp/dns/leads.json",
   "runtime_evidence": "data/cpp/dns/standard.json",

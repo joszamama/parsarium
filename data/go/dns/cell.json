@@ -29,7 +29,7 @@
     "excluded": 1
   },
   "ranking_metric": "pkg.go.dev Imported by package count",
-  "uncertainty": "Pilot cell: no Go DNS path is verified yet. The bounded searches and targeted documentation leads are recorded with one adoption metric each; leads are ordered by that metric only to decide what to verify first. Registry search order is not adoption order, and package-level metrics include non-DNS use. Zero verified paths is not evidence that no parser exists.",
+  "uncertainty": "Pilot cell: two Go paths verified, miekg/dns and gopacket's layers.DNS, ranked by pkg.go.dev known importing packages. gopacket's count covers its whole multi-protocol layers package. golang.org/x/net/dns/dnsmessage, codeberg.org/miekg/dns, the gopacket community fork and phuslu/fastdns remain leads. The standard library exports no DNS message parser. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/go/dns/registry-snapshot.json",
   "unresolved_leads": "data/go/dns/leads.json",
   "runtime_evidence": "data/go/dns/standard.json",

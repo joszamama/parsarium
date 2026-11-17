@@ -27,7 +27,7 @@
     "excluded": 3
   },
   "ranking_metric": "deps.dev directDependentCount summed over all releases",
-  "uncertainty": "Pilot cell: no Java DNS path is verified yet. The bounded searches and targeted documentation leads are recorded with one adoption metric each; leads are ordered by that metric only to decide what to verify first. Registry search order is not adoption order, and package-level metrics include non-DNS use. Zero verified paths is not evidence that no parser exists.",
+  "uncertainty": "Pilot cell: two Java paths verified, netty-codec-dns and dnsjava, ranked by deps.dev direct dependents summed over releases (a weak signal). Netty leaves A/AAAA as raw records (the harness formats the decoded bytes) and its DnsQuery has no AA/TC/RA/RCODE. pcap4j and MiniDNS remain leads; vert.x is excluded as a network client over Netty's codec. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/java/dns/registry-snapshot.json",
   "unresolved_leads": "data/java/dns/leads.json",
   "runtime_evidence": "data/java/dns/standard.json",

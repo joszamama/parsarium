@@ -29,7 +29,7 @@
     "excluded": 1
   },
   "ranking_metric": "crates.io recent_downloads (90 days)",
-  "uncertainty": "Pilot cell: no Rust DNS path is verified yet. The bounded searches and targeted documentation leads are recorded with one adoption metric each; leads are ordered by that metric only to decide what to verify first. Registry search order is not adoption order, and package-level metrics include non-DNS use. Zero verified paths is not evidence that no parser exists.",
+  "uncertainty": "Pilot cell: two Rust paths verified, hickory-proto and trust-dns-proto, ranked by crates.io 90-day downloads; they are one family (trust-dns-proto is the project's old crate name). domain, simple-dns and dns-parser remain leads and would add independent families. Both drop the reserved Z bit (z carries AD and CD); their AFL++ overlays are scoped to the parser crate because the summary encoder's random hashing made whole-binary maps unstable. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/rust/dns/registry-snapshot.json",
   "unresolved_leads": "data/rust/dns/leads.json",
   "runtime_evidence": "data/rust/dns/standard.json",

@@ -28,7 +28,7 @@
     "unresolved": 5
   },
   "ranking_metric": "Packagist total downloads",
-  "uncertainty": "Pilot cell: no PHP DNS path is verified yet. The bounded searches and targeted documentation leads are recorded with one adoption metric each; leads are ordered by that metric only to decide what to verify first. Registry search order is not adoption order, and package-level metrics include non-DNS use. Zero verified paths is not evidence that no parser exists.",
+  "uncertainty": "Pilot cell: two PHP paths verified, react/dns and pear/net_dns2, ranked by Packagist total downloads. daverandom/libdns parses both controls but fails the php-fuzzer gate (its rewrite breaks a constant expression), so its slot is left open; amphp/dns, spatie/dns and remotelyliving/php-dns are excluded as resolvers or wrappers. react/dns drops the Z, AD and CD bits (z reported as 0). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/php/dns/registry-snapshot.json",
   "unresolved_leads": "data/php/dns/leads.json",
   "runtime_evidence": "data/php/dns/standard.json",

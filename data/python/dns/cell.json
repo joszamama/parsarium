@@ -23,7 +23,7 @@
     "unresolved": 3
   },
   "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
-  "uncertainty": "Pilot cell: no Python DNS path is verified yet. The bounded searches and targeted documentation leads are recorded with one adoption metric each; leads are ordered by that metric only to decide what to verify first. Registry search order is not adoption order, and package-level metrics include non-DNS use. Zero verified paths is not evidence that no parser exists.",
+  "uncertainty": "Pilot cell: two Python paths verified, dnspython and dpkt, ranked by PyPI Stats last-month downloads. pycares is excluded (c-ares channel API, no bytes parser) and scapy is excluded under this pilot's no-socket rule (its import opens AF_NETLINK sockets). dnslib, py3dns and pypacker remain leads. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/python/dns/registry-snapshot.json",
   "unresolved_leads": "data/python/dns/leads.json",
   "runtime_evidence": "data/python/dns/standard.json",
