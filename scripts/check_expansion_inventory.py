@@ -113,7 +113,7 @@ cells = json.loads((ROOT / "data/cells.json").read_text())["cells"]
 check(not any(c["format"] in FORMATS for c in cells), "expansion format leaked into data/cells.json")
 pilot = json.loads((ROOT / "data/pilot-cells.json").read_text())["cells"]
 pilot_formats = {c["format"] for c in pilot}
-for fmt in ("json", "xml"):
+for fmt in ("json", "xml", "yaml"):
     check(fmt in pilot_formats, f"{fmt} missing from incomplete pilot catalog")
 # Plain MP3 research (mp3_plain) was merged into the active MP3 format; see
 # data/curation/mp3-merge.json. It is no longer a pilot format.

@@ -184,3 +184,13 @@ Known distortions:
 - **External processes:** `pydub`, `php-ffmpeg` and `phplame` call external
   CLIs and are excluded. Build-dependent backends are leads with that caveat:
   `sox`, `sdl2_mixer`, `audioread`, `rodio`, and `ijson` for JSON.
+
+## YAML pilot searches
+
+YAML was added later as a pilot format and is not part of this inventory
+snapshot. `scripts/capture_yaml_registry.py` reuses the registry search
+functions above with the query `yaml` (first 100 hits) and records one primary
+value per named lead, using the metric of each ecosystem's JSON and XML pilot
+cells (Debian popcon `sourcemax` for C and C++). It writes
+`data/<ecosystem>/yaml/registry-snapshot.json`; the cell rules are in
+[catalog/yaml/PROTOCOL.md](../../catalog/yaml/PROTOCOL.md).

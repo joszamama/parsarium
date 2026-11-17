@@ -3,7 +3,7 @@
 The [13-format default-route smoke](default-smoke-13.md) shows one fixed valid
 generation, replay, and AFL++ preparation for each active format and pilot.
 
-[Fandango](https://fandango-fuzzer.github.io/) 1.3.1 specs for six formats. MP4 and PDF use constraints to keep box sizes and offsets correct; the three text grammars keep headers and data consistent through their productions. Untagged MP3 targets spec reuses whole decoded frames from pinned controls.
+[Fandango](https://fandango-fuzzer.github.io/) 1.3.1 specs for seven formats. MP4 and PDF use constraints to keep box sizes and offsets correct; the three text grammars keep headers and data consistent through their productions. The plain-MP3 pilot spec reuses whole decoded frames from pinned controls.
 
 ```sh
 python3 parsarium.py fandango setup
@@ -43,6 +43,7 @@ python3 parsarium.py fandango generate xml python xmltodict runs/xml-fandango \
 | [`ascii_pnm_p3.fan`](specs/ascii_pnm_p3.fan) | `ascii_pnm` | Plain PPM (`P3`) only; 1×1, 2×1, 1×2 or 2×2; maxval 255 or 15 with every sample at most maxval; space or newline header separators; optional comment after the magic; optional trailing newline |
 | [`http11_request.fan`](specs/http11_request.fan) | `http11` | Requests only; `GET`, `HEAD`, `OPTIONS`, `DELETE` without body, or `POST` with a matching `Content-Length` (0, 3 or 9 bytes); origin-form targets; `Host` always present; optional `User-Agent`, `Accept`, `X-Parsarium`, `Connection`, each at most once; optional whitespace after the colon; CRLF line endings |
 | [`mp3_plain.fan`](specs/mp3_plain.fan) | `mp3` untagged targets | Six whole-frame prefixes from two pinned, untagged Layer III controls; no ID3 tags or mixed layers |
+| [`yaml.fan`](specs/yaml.fan) | `yaml` pilot | One block-mapping document with fixed optional keys, flow and block collections, quoted scalars with escapes, block scalars and one anchor/alias; plain scalars typed the same under YAML 1.1 and the 1.2 core schema. Fanbase has no YAML spec |
 
 Fanbase `ppm` covers both P3 and P6, so the PNM spec is restricted to P3. The `P1` and `P2` controls and HTTP responses are out of scope.
 
