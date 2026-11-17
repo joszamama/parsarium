@@ -35,6 +35,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [salsify/json-streaming-parser / PHP](php/salsify_json_streaming_parser/README.md)
 - [seld/jsonlint / PHP](php/seld_jsonlint/README.md)
 - [json.load(BytesIO(local UTF-8 bytes), cls=PurePythonJSONDecoder) / Python](python/stdlib_json/README.md)
+- [orjson / Python](python/orjson/README.md)
 - [pydantic / Python](python/pydantic/README.md)
 - [simplejson / Python](python/simplejson/README.md)
 - [aws-smithy-json / Rust](rust/aws_smithy_json/README.md)

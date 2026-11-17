@@ -1,14 +1,15 @@
 # JSON / Python — pilot
 
-**Status:** pilot_two_verified_bounded_search_pending; incomplete. 2 verified third-party paths, 1 verified standard APIs, 2 verified Docker harnesses.
+**Status:** pilot_three_selected_search_bounded; incomplete. 3 verified third-party paths, 1 verified standard APIs, 3 verified Docker harnesses.
 
-This is a two-parser pilot, not a completed popularity search or top-ten claim. Nine named package leads were inspected via PyPI/project documentation; the bounded PyPI Simple Index name search remains pending. Seven leads have no pinned control result. Pydantic is verified on its documented byte API with Rust LLVM coverage and input-dependent AFL++ feedback from its pinned Jiter 0.18.0 parser; its package downloads include use unrelated to JSON. The standalone jiter lead shares that underlying parser family and remains unverified as a separate API. The Python standard path explicitly selects the pure-Python json decoder/scanner; CPython default _json accelerator is not covered or ranked. Two valid controls establish their tested subset only.
+Three positive-signal Python JSON third-party paths pass valid nested object and array controls with source-level parser coverage and AFL++ feedback: pydantic 2.14.3 (1,139,429,690 PyPI Stats last-month downloads), orjson 3.13.0 (218,014,317), and simplejson 4.3.0 (49,365,386). orjson shares the yyjson C syntax-parser family, but this pilot measures its Rust deserializer traversal and not the C source lines. PyPI package downloads include encoding use and dependencies. Six targeted documented leads remain unverified; bounded PyPI Simple Index search has not yet been run. Python standard json is separately verified.
 
 [Ranking and search limits](../../../data/python/json/ranking.md) · [Standard API inventory](../../../data/python/json/standard.json)
 
 ## Third-party parsers
 
 - [pydantic](pydantic/README.md) — verified Docker harness
+- [orjson](orjson/README.md) — verified Docker harness
 - [simplejson](simplejson/README.md) — verified Docker harness
 
 ## Standard and runtime APIs

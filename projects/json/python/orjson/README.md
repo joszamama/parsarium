@@ -14,4 +14,4 @@ python3 parsarium.py afl build json python orjson
 python3 parsarium.py afl prepare json python orjson runs/json-orjson-afl
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign. The base image exports orjson Rust JSON deserializer source lines. Its vendored yyjson C syntax parser is shared with the standalone yyjson family and is outside this coverage scope.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
