@@ -25,16 +25,8 @@
       "version": "0.19.0",
       "recent_downloads_90d": 984597,
       "status": "unresolved_shared_family",
-      "reason": "DOM built on rxml; not run, and family overlap with rxml must be recorded.",
+      "reason": "DOM built on rxml; not run. Its parsing would share the selected rxml family.",
       "source": "https://crates.io/crates/minidom"
-    },
-    {
-      "name": "rxml",
-      "version": "0.14.0",
-      "recent_downloads_90d": 961809,
-      "status": "unresolved",
-      "reason": "Restricted XML 1.0 parser that omits DTD features by design; the controls have no DOCTYPE, but it has not been run.",
-      "source": "https://crates.io/crates/rxml"
     },
     {
       "name": "instant-xml",
@@ -185,6 +177,17 @@
       "record": "data/rust/xml/parsers.json",
       "receipt": "projects/xml/rust/xml5ever/verification.json",
       "source_sha256": "73290529dc9bc6c6155bf77fdd70ce0061f98ad387586aa3104cddab29206961"
+    },
+    {
+      "name": "rxml",
+      "version": "0.14.0",
+      "recent_downloads_90d": 961809,
+      "status": "selected",
+      "reason": "Restricted XML 1.0 parser with a documented local byte-slice Parse API and its own namespace resolver; selected after exact catalog and restricted-order controls, rxml source coverage, and exact stable differential AFL++ feedback. The shared order control is rejected because comments and processing instructions are outside its restricted grammar.",
+      "source": "https://crates.io/crates/rxml",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/rxml/verification.json",
+      "source_sha256": "4959705975475401c48b375deedd848d15b816c3915978fc617b31a1776fb60a"
     }
   ]
 }

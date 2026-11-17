@@ -218,5 +218,90 @@
       "source": "data/rust/xml/registry-snapshot.json"
     },
     "project": "projects/xml/rust/xml5ever/verification.json"
+  },
+  {
+    "name": "rxml",
+    "version": "0.14.0",
+    "license": "MIT",
+    "input_api": "rxml::Parser::new() + rxml::Parse::parse_all(&mut &[u8], at_eof = true, FnMut(Event)) -> namespace-resolved events; rxml::RawParser::new() + parse_all -> raw attribute events",
+    "documentation": "https://docs.rs/rxml/0.14.0/rxml/struct.Parser.html",
+    "source": "https://static.crates.io/crates/rxml/rxml-0.14.0.crate",
+    "scope": "Restricted XML 1.0 + Namespaces push/pull parser over local UTF-8 bytes. Default options (comments rejected). Namespace-resolved StartElement/EndElement/Text events give expanded element and attribute names, depth and decoded text; a second pass through rxml's own RawParser counts xmlns declarations that the resolver omits from AttrMap. AttrMap iterates by (namespace URI, local name), which equals document order on both controls. By design rxml has no DTD, custom entities, processing instructions or non-UTF-8 encodings and rejects comments by default, so the shared order control is rejected and an alternate second control without its comment and processing instruction is used.",
+    "family": "rxml (Jonas Schäfer) own lexer, raw parser and namespace resolver, with the same-author rxml_validation crate for name and character classes; minidom 0.19 is built on rxml and is not a separate family",
+    "restricted_features": [
+      "no DTD or doctypedecl",
+      "no custom entity references (only lt, amp, gt, quot, apos)",
+      "no processing instructions",
+      "comments rejected unless CommentMode::Discard",
+      "UTF-8 only; encoding declaration must be utf-8 or absent",
+      "standalone must be yes or absent",
+      "XML 1.0 only",
+      "max_token_length 8192 bytes for names and attribute values by default"
+    ],
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "second_control": "controls/xml/order-default-ns-restricted.xml",
+    "second_control_expected_output": {
+      "root": "{urn:parsarium:order}order",
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespace_declarations": 3,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "shared_second_control": "controls/xml/order-default-ns.xml",
+    "shared_second_control_result": "Error(RestrictedXml(\"comments\"))",
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 961809,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/rxml/verification.json"
   }
 ]

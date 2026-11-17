@@ -18,6 +18,7 @@ CONTROLS = {
     "catalog-ns.xml": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
     "order-default-ns.xml": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
     "order-default-ns-no-pi.xml": "b8b364b48cb3b03a82611917fd6344edfbd80789eb29203cdf6814d96f354d9b",
+    "order-default-ns-restricted.xml": "00a42bfc046d919d0262460ac00b8e8a4ce5d553f4581b58006ef619ebf93f53",
 }
 
 

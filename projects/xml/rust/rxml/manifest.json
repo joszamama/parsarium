@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "rust",
+  "package": "rxml",
+  "release": "0.14.0",
+  "catalog_parser": "data/rust/xml/parsers.json",
+  "source_lock": "projects/xml/rust/rxml/source-lock.json",
+  "source_sha256": "4959705975475401c48b375deedd848d15b816c3915978fc617b31a1776fb60a",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "root": "{urn:parsarium:catalog}catalog",
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "afl_variant": "controls/xml/order-default-ns-restricted.xml",
+  "afl_variant_sha256": "00a42bfc046d919d0262460ac00b8e8a4ce5d553f4581b58006ef619ebf93f53",
+  "afl_variant_expected_output": {
+    "root": "{urn:parsarium:order}order",
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage in rxml own lexer, raw parser and namespace resolver; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rxml-0.14.0/",
+  "format_specific_coverage_file_suffix": "/src/lexer/mod.rs",
+  "parser_options": "rxml::Parser::new() and rxml::RawParser::new() defaults: CommentMode::Reject, max_token_length 8192; crate features default-features = false, features = [\"std\"]",
+  "shared_second_control": "controls/xml/order-default-ns.xml",
+  "shared_second_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "shared_second_control_result": "Error(RestrictedXml(\"comments\"))",
+  "scope_limit": "rxml 0.14.0 removes processing instructions, DTDs and custom entities from its grammar and rejects comments by default. The shared order control has a prolog comment and a processing instruction, so its replay returns Error(RestrictedXml(\"comments\")). The alternate valid second control removes exactly those two lines; expat gives the same summary for both files."
+}
