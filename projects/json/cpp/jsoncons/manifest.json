@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "cpp",
+  "package": "jsoncons",
+  "release": "1.10.0",
+  "pilot": true,
+  "catalog_parser": "data/cpp/json/parsers.json",
+  "source_lock": "projects/json/cpp/jsoncons/source-lock.json",
+  "source_sha256": "c829350a2eece662beb378143e2ab1c1cbb07d703687bf168626665a8a7d8bc1",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "name": "parsarium",
+    "version": 1,
+    "ratio": -2.5,
+    "enabled": true,
+    "missing": null,
+    "tags": [
+      "json",
+      "go",
+      "rfc8259"
+    ],
+    "nested": {
+      "level": 2,
+      "items": [
+        {
+          "id": 1,
+          "ok": false
+        },
+        {
+          "id": 2,
+          "text": "café \"quoted\""
+        }
+      ],
+      "empty": {},
+      "list": []
+    }
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": [
+    1,
+    0.25,
+    "two",
+    [
+      true,
+      null,
+      [
+        false
+      ]
+    ],
+    {
+      "k": [],
+      "n": {
+        "deep": "A"
+      }
+    }
+  ],
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in jsoncons 1.10.0 own json_parser.hpp reached by json::parse(const char*, size_t)",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/jsoncons/json_parser.hpp",
+  "afl_entrypoint": "/work/parser-probe"
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T14:38:36.292645+00:00",
+  "project": "json/cpp/jsoncons",
+  "pass": true,
+  "feedback_kind": "afl_clang_fast_jsoncons_parser_header_only_edges_and_source_lines",
+  "probe": "projects/json/cpp/jsoncons/parser-probe.cpp",
+  "probe_scope": "json::parse(const char*, size_t) only; no tree traversal, serialization, or result formatting",
+  "base_project_receipt_sha256": "ccc7695bf099787456e4cba1074c4daf678671c4c7119473952d45094fc595fa",
+  "overlay_receipt_sha256": "7ea6ea59f9f51ee408e9e71932b115c375752214ac20e07a1dfb17d206137b07",
+  "base_image_id": "sha256:ece2eb354b1eef7a77bc8d45ebae6fe6ebbba644c7086eb43394e4bd57eb63ed",
+  "overlay_image_id": "sha256:f30244c25852ddaa20c115cf87d24523ad5ad15d8d9b96fa192bcc08c7301502",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 60,
+  "allowlist": "projects/json/cpp/jsoncons/afl-allowlist.txt",
+  "repeats_per_control": 3,
+  "first_control": "controls/json/nested-object.json",
+  "second_control": "controls/json/nested-array.json",
+  "first_observed_output": {
+    "enabled": true,
+    "missing": null,
+    "name": "parsarium",
+    "nested": {
+      "empty": {},
+      "items": [
+        {
+          "id": 1,
+          "ok": false
+        },
+        {
+          "id": 2,
+          "text": "caf\u00e9 \"quoted\""
+        }
+      ],
+      "level": 2,
+      "list": []
+    },
+    "ratio": -2.5,
+    "tags": [
+      "json",
+      "go",
+      "rfc8259"
+    ],
+    "version": 1
+  },
+  "second_observed_output": [
+    1,
+    0.25,
+    "two",
+    [
+      true,
+      null,
+      [
+        false
+      ]
+    ],
+    {
+      "k": [],
+      "n": {
+        "deep": "A"
+      }
+    }
+  ],
+  "first_parser_lines": 450,
+  "second_parser_lines": 422,
+  "parser_line_difference": 76,
+  "first_afl_tuples": 16,
+  "second_afl_tuples": 15,
+  "afl_tuple_difference": 1,
+  "repeated_feedback_identical": true,
+  "second_case_kind": "valid_control"
+}
