@@ -540,6 +540,115 @@
     }
   },
   {
+    "name": "sqlglot-rust",
+    "version": "0.11.2",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned crate (SHA-256 199fb97bde68e469d5023a6e8c7db6a99536634e35284d106a935382ee4d309d, MIT License); Cargo.toml license = MIT",
+    "input_api": "parser::parse_statements(local UTF-8 text, Dialect::Ansi) -> Vec<Statement>",
+    "documentation": "https://docs.rs/sqlglot-rust/0.11.2/sqlglot_rust/parser/fn.parse_statements.html",
+    "source": "https://static.crates.io/crates/sqlglot-rust/sqlglot-rust-0.11.2.crate",
+    "source_sha256": "fdf0379e134ebf8d14ba5c88a41e71aa866e353d70fa1aa0c7178d14dbcc95e8",
+    "dependencies": [
+      "log",
+      "serde",
+      "serde_json",
+      "thiserror"
+    ],
+    "dialect": "ANSI",
+    "scope": "One SQL statement from local UTF-8 text with Dialect::Ansi; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other dialects are untested.",
+    "family": "sqlglot-rust tokenizer and recursive-descent parser (sqlglot-inspired)",
+    "family_note": "parse_statements runs the crate's own tokenizer (src/tokens) and parser (src/parser) into a typed AST (src/ast/types.rs) modelled on Python sqlglot. It shares no code with polyglot-sql, which is a separate sqlglot-style Rust project, nor with sqlparser-rs. The adapter reads Select and Insert fields and walks expressions with Expr::walk; COUNT(*) and SUM are TypedFunction Count/Sum nodes.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 1707,
+      "source": "https://crates.io/api/v1/crates/sqlglot-rust",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Small absolute count."
+    },
+    "project": "projects/sql/rust/sqlglot_rust",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "nom-sql",
     "version": "0.0.11",
     "license": "MIT",

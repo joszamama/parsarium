@@ -1,0 +1,66 @@
+{
+  "kind": "third_party",
+  "api": "sqlglot_rust::parser::parse_statements(local UTF-8 text, Dialect::Ansi) -> Vec<Statement>; the harness reads Statement::Select (columns, from, joins, where_clause, group_by, order_by) and Statement::Insert (table, columns, InsertSource::Values) and walks expressions with the crate's Expr::walk for Function/TypedFunction names and Number/StringLiteral values",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T21:02:19.486041+00:00",
+  "manifest": "projects/sql/rust/sqlglot_rust/manifest.json",
+  "image_id": "sha256:953043d3c7099ed8a010a4ca056ad7e64c84abb5a0a2b9ed7091282238b22a55",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "fdf0379e134ebf8d14ba5c88a41e71aa866e353d70fa1aa0c7178d14dbcc95e8",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Cargo.lock": "99e0b829da45f171415864220cd317fac231f7e642ef40147143a5fc131246f6",
+    "Cargo.toml": "856c479c314258394c479d4fcc42f1b9487da432d19645efe5e3e2e1727bad07",
+    "Dockerfile": "d0f637054bc564a354db1a8ed12648f999b769f72fd67cf61fcd4f27b64dc152",
+    "manifest.json": "80b7d65e23a5adf53c0fbecc32dfd0680c9c2d5a36da801b245a34964deeb24f",
+    "run-control.sh": "f47453cdf133c90b7562c2368e010546b0501486cec8f1c5b10bdc9c4c735a3e",
+    "source-lock.json": "04a9cd9624a79b826a68c90e1bd87765e7e1c3f76897a3980c7bf3657f7b238c",
+    "src/bin/fuzzer.rs": "18a13a0e1ff9c4d720977c28f6e9450120958dfd3050f1be386348dd40c2b1ab",
+    "src/bin/replay.rs": "d9e3408e593a5eb6a189026a0e3541832ebf6d2ba7e934160c8fbb9c4c41492d",
+    "src/lib.rs": "1f1f2cfdd9eeff5cded9347be878aac887603540a59bda7ae4f65dc5bbb72b57"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 29,
+  "parser_source_lines_covered": 1189,
+  "format_specific_source_lines_covered": 811,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/rust/sqlglot_rust/target/coverage/coverage.json",
+  "pass": true
+}
