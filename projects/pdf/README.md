@@ -4,6 +4,7 @@
 
 ## Targets
 
+- [atril / C](c/atril/README.md)
 - [evince / C](c/evince/README.md)
 - [ghostscript / C](c/ghostscript/README.md)
 - [gnome-papers / C](c/gnome-papers/README.md)
