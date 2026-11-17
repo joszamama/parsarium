@@ -410,5 +410,108 @@
     },
     "rank": 4,
     "afl_feedback": "data/python/dns/py3dns-feedback-differential.json"
+  },
+  {
+    "name": "dns-messages",
+    "version": "1.0.1",
+    "license": "MIT",
+    "license_evidence": "Wheel METADATA classifier 'License :: OSI Approved :: MIT License' and dist-info/LICENSE (MIT text, sha256 a28306b5...), checked in the image",
+    "input_api": "dns_messages.DnsMessage.from_bytes(raw_bytes: bytes) -> DnsMessage",
+    "documentation": "https://github.com/wahlflo/dns-messages#parsing-dns-messages",
+    "source": "https://pypi.org/project/dns-messages/1.0.1/",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dns-messages (DnsMessageParser with per-type rr_data classes)",
+    "family_note": "Own pure-Python decoder (bit-list header unpacking, its own name decompression); no other DNS library. It keeps the 3-bit z field. The bundled DnsServer class is imported with the package but never started, so no socket is created. Its adoption is very low (46 downloads in the window).",
+    "project": "projects/dns/python/dns_messages",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 46,
+      "source": "https://pypistats.org/api/packages/dns-messages/recent",
+      "captured_at_utc": "2026-11-17T19:47:35.437615+00:00",
+      "snapshot": "data/python/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 5,
+    "afl_feedback": "data/python/dns/dns-messages-feedback-differential.json"
   }
 ]

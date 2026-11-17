@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "format": "dns",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "dns-messages",
+  "release": "1.0.1",
+  "catalog_parser": "data/python/dns/parsers.json",
+  "source_lock": "projects/dns/python/dns_messages/runtime-requirements.lock",
+  "source_sha256": "680a84adbb85aacefe35778041b0afec01caeba66aa3ccb7863086242f20cb59",
+  "sdist_sha256": "dcc959efb78c6685ba079a0cef586f3e4619be48ae1332c0611681b39212285b",
+  "build_note": "Installed from the pinned pure-Python py3-none-any wheel by hash; the image checks that the wheel's dns_messages/ package is byte-identical to the pinned sdist and that the message parser, message model, name decoder and the LICENSE match recorded SHA-256 values. No runtime dependencies.",
+  "dependencies_note": "atheris 3.1.0 is the in-process fuzz bridge only; dns-messages has no runtime dependencies.",
+  "parser_family": "dns-messages (dns_objects/dns_message_parser.py DnsMessageParser over per-type rr_data classes and utilities/name_encoder_and_decoder.py)",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/dns/response.bin",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "expected_output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "differential_control": "controls/dns/query.bin",
+  "differential_control_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "differential_expected_output": {
+    "id": 4660,
+    "qr": 0,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 0,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 0,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [],
+    "authority": [],
+    "additional": []
+  },
+  "api": "dns_messages.DnsMessage.from_bytes(local DNS message bytes)",
+  "harness": "harness.py",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the installed dns_messages package during valid-control replay; Atheris import instrumentation for the byte-input bridge",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/dns_messages/",
+  "format_specific_coverage_file_suffix": "/dns_messages/dns_objects/dns_message_parser.py",
+  "scope": "One RFC 1035 DNS message from local bytes via dns_messages.DnsMessage.from_bytes: header flags (3-bit z kept by the parser), questions, and CNAME/A/AAAA/MX answers with compressed names; valid response and query controls only. The section counts are the parsed list lengths. A and AAAA text is str() of the ipaddress objects the library builds from the decoded bytes. Importing the package also imports its DnsServer class, which creates no socket until started; the harness never starts it.",
+  "summary_command": [
+    "/opt/venv/bin/python",
+    "/work/replay.py",
+    "/input/case"
+  ]
+}

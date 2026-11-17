@@ -1,6 +1,6 @@
 # Python × DNS: selected parsers (pilot)
 
-Four verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Five verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -12,6 +12,7 @@ PyPI Stats last_month downloads excluding known mirrors, from [registry-snapshot
 | 2 | [dpkt](https://kbandla.github.io/dpkt/api/api_auto.html#module-dpkt.dns) | 1.9.8 | 1,492,890 | dpkt DNS packet class (dpkt/dns.py) |
 | 3 | [dnslib](https://github.com/paulc/dnslib/blob/0.9.26/README.md) | 0.9.26 | 1,231,762 | dnslib (dnslib/dns.py DNSRecord.parse over dnslib/buffer.py and dnslib/label.py) |
 | 4 | [py3dns](https://launchpad.net/py3dns) | 4.0.2 | 129,993 | py3dns / PyDNS (DNS/Lib.py Munpacker classes and DnsResult) |
+| 5 | [dns-messages](https://github.com/wahlflo/dns-messages#parsing-dns-messages) | 1.0.1 | 46 | dns-messages (DnsMessageParser with per-type rr_data classes) |
 
 **dnspython 2.9.2** (ISC) parses local bytes with `dns.message.from_wire(wire: bytes) -> dns.message.Message`. Both controls match the oracle summary. The response control covers 665 library lines in 27 files. AFL++ feedback repeats 3 times per control; response and query give 665/216 parser features and 685/236 AFL++ tuples, differing by 449 features and 449 tuples ([receipt](dnspython-feedback-differential.json)). Own pure-Python decoder; no C extension and no other DNS library. RRsets group records by owner and type; the harness lists each rdata with its RRset's owner, type, class and TTL.
 
@@ -21,12 +22,13 @@ PyPI Stats last_month downloads excluding known mirrors, from [registry-snapshot
 
 **py3dns 4.0.2** (CNRI-Python) parses local bytes with `DNS.Lib.DnsResult(u: DNS.Lib.MunpackerText(buf: bytes), args: dict)`. Both controls match the oracle summary. The response control covers 113 library lines in 5 files. AFL++ feedback repeats 3 times per control; response and query give 113/74 parser features and 133/94 AFL++ tuples, differing by 39 features and 39 tuples ([receipt](py3dns-feedback-differential.json)). Own pure-Python decoder: the Python 3 port of Guido van Rossum's PyDNS (the older pydns distribution is its predecessor). py3dns ships no API reference; the README points to the library code and the bundled DNS/tests/testPackers.py, which drive the same DNS.Lib unpackers on byte strings, and DnsRequest itself decodes replies with DnsResult(MunpackerText(reply)). Importing DNS reads /etc/resolv.conf as a local file; no socket is created. The harness joins the MX (preference, exchange) tuple and adds trailing dots.
 
+**dns-messages 1.0.1** (MIT) parses local bytes with `dns_messages.DnsMessage.from_bytes(raw_bytes: bytes) -> DnsMessage`. Both controls match the oracle summary. The response control covers 208 library lines in 14 files. AFL++ feedback repeats 3 times per control; response and query give 208/160 parser features and 228/180 AFL++ tuples, differing by 48 features and 48 tuples ([receipt](dns-messages-feedback-differential.json)). Own pure-Python decoder (bit-list header unpacking, its own name decompression); no other DNS library. It keeps the 3-bit z field. The bundled DnsServer class is imported with the package but never started, so no socket is created. Its adoption is very low (46 downloads in the window).
+
 ## Remaining leads
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
 | 1 | async-dns | 6,920 | `async_dns.core.DNSMessage.parse(data)` | async_dns (async_dns/core/record.py DNSMessage/Record) |
-| 2 | dns-messages | 46 | `dns_messages.DnsMessage.from_bytes(raw_bytes)` | dns-messages |
 
 ## Checked, excluded or recorded separately
 
