@@ -985,8 +985,8 @@
       "dns"
     ],
     "cells_total": 48,
-    "catalog_paths": 255,
-    "containerized_verified": 255,
+    "catalog_paths": 297,
+    "containerized_verified": 297,
     "staged": 0,
     "standard_api_paths": 13,
     "standard_containerized_verified": 11,
@@ -1251,8 +1251,8 @@
       {
         "format": "sql",
         "ecosystem": "c",
-        "catalog_paths": 1,
-        "containerized_verified": 1,
+        "catalog_paths": 2,
+        "containerized_verified": 2,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1260,15 +1260,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_one_selected_search_bounded",
+        "status": "pilot_two_selected_search_bounded",
         "complete": false,
-        "uncertainty": "One verified C SQL path after a bounded Debian popcon source-name search (names containing 'sql', first 100 of 229 by rank) plus targeted lookups, captured 2026-11-17 from the pinned popcon snapshot. libpg_query 18.1.0 (Debian source libpg-query, 41 installations) parses both valid controls with the PostgreSQL 18 grammar into a parse tree that gives the oracle summary. sqlite3, sqlcipher and postgresql-18 rank higher but are engines or a server without a library syntax-tree API. libgda5 (2,105; GdaSqlParser) ranks higher and qualifies on documentation but was not run in this round, so this is not a top-ten ranking. The popcon count is very small and reflects packaged installs, not use of the library through language bindings. Two valid controls establish only the tested dialect-neutral subset."
+        "uncertainty": "Two verified C SQL paths after a bounded Debian popcon source-name search (names containing 'sql', first 100 of 229 by rank) plus targeted lookups, captured 2026-11-17 from the pinned popcon snapshot. libgda 5.2.10 (Debian source libgda5, 2,105 installations) parses both valid controls with its generic Lemon-generated GdaSqlParser into a GdaSqlStatement tree, and libpg_query 18.1.0 (Debian source libpg-query, 41) parses them with the PostgreSQL 18 grammar; both trees give the oracle summary. sqlite3, sqlcipher and postgresql-18 rank higher but are engines or a server without a library syntax-tree API. Both popcon counts are small or library-wide (libgda's covers the whole data-access library) and reflect packaged installs, not use of SQL parsing. No other C source package in the snapshot was found with a documented SQL syntax-tree API, so the cell has two paths, not ten. Two valid controls establish only the tested dialect-neutral subset."
       },
       {
         "format": "sql",
         "ecosystem": "cpp",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1276,15 +1276,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_search_recorded_none_verified",
+        "status": "pilot_one_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Bounded search only (The same Debian popcon source-name search as C (it does not separate languages), plus targeted duckdb and hsql lookups.). 2 SQL parser leads are unresolved and none is verified yet, so zero is not evidence of absence. Registry relevance order is not adoption order, and package metrics include uses unrelated to parsing SQL text."
+        "uncertainty": "One verified C++ SQL path after the shared Debian popcon source-name search (names containing 'sql', first 100 of 229 by rank) plus round-2 targeted lookups in the same pinned snapshot (duckdb, hsql/hyrise, gdal, kdb, libreoffice, sqlitebrowser, sqlitestudio, antlr4-cpp-runtime, soci, poco). DuckDB 2.0.0 (Debian source duckdb, 40 installations) parses both valid controls with its built-in PEG grammar through duckdb::Parser, without a database or client context, into SQLStatement trees that give the oracle summary; the adapter reports DuckDB's count_star node for COUNT(*) as count. Higher-ranked C++ sources are wrappers, applications with internal parsers, a runtime without a grammar, or parsers that cannot read the INSERT control or need a connection (GDAL OGR SQL, KDb). hsql has a documented AST API but no Debian source package, so it has no value for the primary metric. The popcon count is very small and counts installs of the whole engine, not use of its parser. DuckDB's parser is a public header of an engine whose C++ API is described upstream as internal. Two valid controls establish only the tested dialect-neutral subset."
       },
       {
         "format": "sql",
         "ecosystem": "go",
-        "catalog_paths": 1,
-        "containerized_verified": 1,
+        "catalog_paths": 10,
+        "containerized_verified": 10,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1292,15 +1292,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_one_selected_search_bounded",
+        "status": "pilot_ten_selected_search_bounded",
         "complete": false,
-        "uncertainty": "One verified Go SQL path after a bounded pkg.go.dev search (three queries, first 100 hits each, 300 hits, 274 unique) and Imported-by counts for 12 targeted leads, captured 2026-11-17. vitess.io/vitess/go/vt/sqlparser v0.24.5 (391 importers) parses both valid controls with its default MySQL version into ASTs that give the oracle summary. The search snippets list higher importer counts for github.com/pingcap/tidb/ast (3,737, AST types only), github.com/cockroachdb/cockroach/pkg/sql/parser (1,972, inside the full CockroachDB module) and github.com/pingcap/tidb/parser (1,190, older in-repo TiDB parser path); these and pingcap/parser, xwb1989/sqlparser, pg_query_go and other leads are unverified, so this is not a top-ten ranking. database/sql has no SQL parser. Two valid controls establish only the tested dialect-neutral subset."
+        "uncertainty": "Ten verified Go SQL paths after a bounded pkg.go.dev search (three queries, first 100 hits each, 300 hits, 274 unique) and Imported-by counts for 12 targeted leads, captured 2026-11-17: vitess.io/vitess/go/vt/sqlparser (391), github.com/xwb1989/sqlparser (305), github.com/pingcap/tidb/pkg/parser (176), github.com/blastrain/vitess-sqlparser/sqlparser (88), github.com/pganalyze/pg_query_go/v6 (54), github.com/auxten/postgresql-parser/pkg/sql/parser (22), github.com/rqlite/sql (20), github.com/AfterShip/clickhouse-sql-parser/parser (13), github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser (13), github.com/akito0107/xsqlparser (7). Each parses both valid controls into an AST that gives the oracle summary; untagged modules are pinned to proxy pseudo-versions. Higher importer counts in the search snippets belong to github.com/pingcap/tidb/ast (3,737, AST types only), github.com/cockroachdb/cockroach/pkg/sql/parser (1,972, not importable as a library) and github.com/pingcap/tidb/parser (1,190, predecessor path of the selected TiDB parser); remaining leads and blockers are in leads.json, so this is not a definitive top-ten ranking. database/sql has no SQL parser. Two valid controls establish only the tested dialect-neutral subset."
       },
       {
         "format": "sql",
         "ecosystem": "java",
-        "catalog_paths": 2,
-        "containerized_verified": 2,
+        "catalog_paths": 10,
+        "containerized_verified": 10,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1308,15 +1308,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_two_selected_search_bounded",
+        "status": "pilot_ten_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Two verified Java SQL paths after a bounded Maven Central search (three queries, 143 hits) and deps.dev direct dependents summed over releases for 11 targeted leads, captured 2026-11-17. org.jooq:jooq 3.21.9 (4,574) and com.alibaba:druid 1.2.28 (1,945) parse both valid controls into their own ASTs, which give the oracle summary. Both metrics mostly count other uses: jOOQ's query builder and Druid's JDBC connection pool, which ship in the same jars. presto-parser, Calcite, JSqlParser, Trino and other leads are unverified, so this is not a top-ten ranking. java.sql has no SQL parser. Two valid controls establish only the tested dialect-neutral subset."
+        "uncertainty": "Ten verified Java SQL paths, the ceiling, after a bounded Maven Central search (three queries, 143 hits) and deps.dev direct dependents summed over releases for 11 targeted leads, captured 2026-11-17, extended in round 2 with 14 more coordinates by the same function (Hive, Flink, Spark, ShardingSphere renames, ZetaSQL, Calcite Babel and others). org.jooq:jooq 3.21.9 (4,574), com.alibaba:druid 1.2.28 (1,945), com.facebook.presto:presto-parser 0.300 (1,453), org.apache.calcite:calcite-core 1.42.0 (1,250), org.apache.hive:hive-exec 4.2.1 (1,146), com.github.jsqlparser:jsqlparser 5.4 (950), org.apache.spark:spark-catalyst_2.12 3.5.9 (529), io.trino:trino-parser 484 (525), org.apache.flink:flink-sql-parser 2.3.0 (188) and org.apache.shardingsphere:shardingsphere-sql-parser-engine 5.3.2 (135) parse both valid controls into their own trees, which give the oracle summary. The metrics mostly count other uses for jOOQ (query builder), Druid (JDBC connection pool), Calcite (planner and adapters), hive-exec (Hive's execution engine) and spark-catalyst (Spark SQL's analyzer and optimizer), and every value is summed over releases. Two families have two paths: presto-parser and trino-parser share the Presto/Trino SqlBase grammar ancestry, and flink-sql-parser generates its own parser from Calcite's grammar template on top of calcite-core 1.36; each pair is a separate package with its own generated parser. trino-parser and hive-exec have no public statement splitter, so their adapters remove the terminating semicolon; trino-parser, hive-exec, spark-catalyst and ShardingSphere parse one statement, so statement_count is 1 by API contract. Spark's catalyst API is published but marked internal, and its parser rewrites COUNT(*) to count(1), whose synthesized literal is excluded by its origin span. Hive's coverage sources are regenerated with ANTLR 3.5.2 from the pinned grammars and checked against the shipped line tables. ShardingSphere is pinned at the last release of its documented pre-5.4 coordinates; the renamed successor coordinates are not added. The Calcite, Hive, Spark, Flink and ShardingSphere paths pin only the jars their parser paths load. org.apache.spark:spark-sql_2.12 (3,567), Spark's engine module whose internal SparkSqlParser extends the selected catalyst AstBuilder, stays an unrun lead: it would be a same-family wrapper with no own differential on these controls. io.prestosql:presto-parser is excluded as Trino's predecessor name and the ShardingSphere 5.4+ coordinates as renames. Ten paths do not establish a definitive most-used ten. java.sql has no SQL parser. Two valid controls establish only the tested dialect-neutral subset."
       },
       {
         "format": "sql",
         "ecosystem": "javascript",
-        "catalog_paths": 2,
-        "containerized_verified": 2,
+        "catalog_paths": 10,
+        "containerized_verified": 10,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1324,15 +1324,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_two_selected_search_bounded",
+        "status": "pilot_ten_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Two verified JavaScript SQL paths after a bounded npm search (three queries, first 100 hits each, 259 hits, 236 unique) and npm last-month downloads for 15 targeted leads, captured 2026-11-17. node-sql-parser 5.4.0 (13,709,122) and pgsql-ast-parser 12.0.2 (7,717,032) parse both valid controls into their own ASTs, which give the oracle summary. node-sql-parser ships minified, so its line coverage is mapped through the package source map. libpg-query 18.2.4 (11,829,732) ranks between them but runs libpg_query compiled to WebAssembly; V8 coverage does not report C source lines inside the module, so the parser-source coverage gate cannot be met with this harness and it stays a lead. sql-formatter (29,933,061) is a formatter. Other leads are unverified, so this is not a top-ten ranking. node:sqlite prepare is an engine API with no syntax tree. Two valid controls establish only the tested dialect-neutral subset."
+        "uncertainty": "Ten verified JavaScript SQL paths, the ceiling, after a bounded npm search (three queries, first 100 hits each, 259 hits, 236 unique), npm last-month downloads for 15 targeted leads, and a round-2 extension that measured 25 further parser-like hits from the same search with the same window (round_2_metric), captured 2026-11-17. node-sql-parser 5.4.0 (13,709,122), pgsql-ast-parser 12.0.2 (7,717,032), sql-parser-cst 0.44.1 (536,703, sqlite dialect, concrete syntax tree), dt-sql-parser 4.6.1 (364,059, MySQL class, ANTLR4 parse tree), sqlite-parser 1.0.1 (85,900, SQLite), @appland/sql-parser 1.5.1 (80,224, AppLand fork of sqlite-parser with a modified grammar), sqllens 1.11.0 (6,624, postgres dialect, ANTLR4 CST because its lowered IR does not cover INSERT), rawsql-ts 0.30.1 (1,802, hand-written recursive descent), @questdb/sql-parser 0.1.22 (1,470, QuestDB SQL, Chevrotain) and @saralsql/tsql-parser 0.4.7 (731, T-SQL, hand-written) parse both valid controls into their own trees, which give the oracle summary. node-sql-parser ships minified, so its line coverage is mapped through the package source map; sqlite-parser and @appland/sql-parser ship minified without source maps, so their 24 covered lines each are a coarse floor and their AFL++ feedback uses V8 byte ranges. dt-sql-parser's line count includes module-initialization lines of the other dialect grammars its index loads (14,547 of 51,949 lines are in the MySQL files), and its dist needs a resolve hook for extensionless ES module imports; sqllens likewise loads every dialect grammar (14,382 of 169,847 covered lines are in the PostgreSQL lexer and parser). Higher-ranked leads stay unselected with evidence: libpg-query 18.2.4 (11,829,732), pgsql-parser, plpgsql-parser, pg-query-emscripten, @guanmingchiu/sqlparser-ts, @pgsql/parser and postgresql-eslint-parser run libpg_query or sqlparser-rs as WebAssembly (or wasm2js output), whose C or Rust source lines V8 coverage does not report; @derekstride/tree-sitter-sql (1,186,889) and pg-query-parser run native C addons that would need an instrumented node-gyp build; @zeit/cosmosdb-query, @dbml/core and sql-formatter are an executor, a DDL importer and a formatter; js-sql-parser and @clickhouse/parser fail the INSERT control. The ten selected paths are the verified paths in metric order, not a definitive most-used ten; @appland/sql-parser shares the sqlite-parser lineage, and the last three have small download counts (1,802, 1,470 and 731). node:sqlite prepare is an engine API with no syntax tree. Two valid controls establish only the tested dialect-neutral subset."
       },
       {
         "format": "sql",
         "ecosystem": "php",
-        "catalog_paths": 2,
-        "containerized_verified": 2,
+        "catalog_paths": 5,
+        "containerized_verified": 5,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1340,15 +1340,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_two_selected_search_bounded",
+        "status": "pilot_five_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Two verified PHP SQL paths after a bounded Packagist search (three queries, 186 hits, 115 unique) and Packagist total downloads for 8 targeted leads, captured 2026-11-17. phpmyadmin/sql-parser 6.0.1 (55,800,144 total downloads) and greenlion/php-sql-parser v5.0.0 (13,810,212) parse both valid controls into structures that give the oracle summary. They are independent code bases. iamcal/sql-parser (72,745,721) ranks higher but parses only CREATE TABLE schemas, and the doctrine and jdorn packages are formatters. sqlftw/sqlftw and other leads are unverified, so this is not a top-ten ranking. greenlion treats the whole input as one statement. PDO and SQLite3 prepare are engine APIs with no syntax tree. Two valid controls establish only the tested dialect-neutral subset."
+        "uncertainty": "Five verified PHP SQL paths after a bounded Packagist search (7 queries, 284 hits, 165 unique; round 1 on 2026-11-17 used three queries, round 2 added four) and Packagist total downloads for 35 targeted leads, captured 2026-11-17. phpmyadmin/sql-parser 6.0.1, greenlion/php-sql-parser v5.0.0, soundintheory/php-sql-parser 1.0, sad_spirit/pg_builder v3.3.1 and crodas/sql-parser v0.1.5 parse both valid controls into structures that give the oracle summary. soundintheory is a 2013 fork of the Google Code predecessor of greenlion (shared PHP-SQL-Parser lineage, separate monolithic code: 54.3% of its normalized statements occur in greenlion v5.0.0). Later greenlion forks (manticoresoftware, tsukasa, processfast, aitradeinc, michabbb) share 84-99.5% of normalized statements with greenlion and are excluded as near-identical forks or older snapshots; this cut-off is a curation judgment. crodas/sql-parser has a weak metric (2,490 lifetime downloads). The libpg_query PHP extension flow-php/pg-query-ext and its consumer flow-php/postgresql rank above crodas but stay runnability leads: their parser is native C and needs a native coverage and AFL++ PHP-runtime build that was not done in this round. sqlftw/sqlftw is proprietary. iamcal/sql-parser ranks higher but parses only CREATE TABLE schemas, and the doctrine, jdorn and nilportugues packages are formatters. This is not a top-ten ranking. greenlion and soundintheory treat the whole input as one statement; pg_builder parses one statement per call, so its adapter cuts the input at its own Lexer's ';' tokens. PDO and SQLite3 prepare are engine APIs with no syntax tree. Two valid controls establish only the tested dialect-neutral subset."
       },
       {
         "format": "sql",
         "ecosystem": "python",
-        "catalog_paths": 2,
-        "containerized_verified": 2,
+        "catalog_paths": 6,
+        "containerized_verified": 6,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1356,15 +1356,15 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_two_selected_search_bounded",
+        "status": "pilot_six_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Two verified Python SQL paths after a bounded PyPI Simple index name search (five normalized-name queries, all 41 hits kept) and PyPI Stats metrics for 14 targeted leads, captured 2026-11-17. sqlparse 0.6.1 (125,550,021 last-month downloads) is a non-validating parser: its grouped token tree gives the oracle summary for both valid controls, but it accepts invalid SQL, and its downloads mostly reflect Django use for formatting and splitting. sqlglot 30.33.0 (91,735,974) runs its pure-Python tokenizer and parser with the default dialect; the optional sqlglotc/sqlglotrs accelerators are not installed. The remaining unresolved leads (sqlfluff, pglast, sqloxide, mo-sql-parsing and others) are unverified, so this is not a top-ten ranking. CPython sqlite3 is an engine binding with no syntax tree and is recorded, not counted. Two valid controls establish only the tested dialect-neutral subset."
+        "uncertainty": "Six verified Python SQL paths after a bounded PyPI Simple index name search (five normalized-name queries, all 41 hits kept) and PyPI Stats metrics for 14 targeted leads, captured 2026-11-17; round 2 added PyPI Stats values for sqllineage, sqlvalidator, pg-query-python, psqlparse2 and sqlparser (plus five smaller recorded hits) from the same source on 2026-11-17. Selected: sqlparse 0.6.1 (125,550,021; sqlparse regex lexer and token-grouping engine (non-validating)); sqlglot 30.33.0 (91,735,974; sqlglot pure-Python tokenizer and recursive-descent parser); sqlfluff 4.5.0 (11,606,805; sqlfluff lexer and dialect grammar matcher); pglast 8.8 (10,961,367; PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)); sqloxide 0.61.1 (511,801; sqlparser-rs); mo-sql-parsing 11.699.26234 (103,062; mo-sql-parsing grammar on the mo-parsing engine). sqlparse is non-validating (it accepts invalid SQL). sqlfluff is a linter whose documented sqlfluff.parse returns the ansi parse tree; its image is Debian bookworm Python 3.11 on linux/arm64 with Atheris 3.0.0 built from its sdist, so the line bridge stays within afl-showmap's time limit. pglast is source-built with LLVM coverage instead of the optimised wheel and shares the libpg_query family with the C cell. sqloxide is source-built with Rust coverage instead of the optimised wheel; its parser is sqlparser-rs 0.61.0, the family of the Rust sqlparser path. mo-sql-parsing runs on its mo-parsing engine; it uses the same Debian Python 3.11 arm64 image and source-built Atheris 3.0.0 as sqlfluff. Remaining leads are recorded in leads.json; this is not a top-ten ranking. CPython sqlite3 is an engine binding with no syntax tree and is recorded, not counted. Two valid controls establish only the tested dialect-neutral subset."
       },
       {
         "format": "sql",
         "ecosystem": "rust",
-        "catalog_paths": 1,
-        "containerized_verified": 1,
+        "catalog_paths": 9,
+        "containerized_verified": 9,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1372,9 +1372,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_one_selected_search_bounded",
+        "status": "pilot_nine_selected_search_bounded",
         "complete": false,
-        "uncertainty": "One verified Rust SQL path after a bounded crates.io search (three queries, first 100 hits each, 300 hits, 250 unique) and recent-download metrics for 11 targeted leads, captured 2026-11-17. sqlparser 0.64.0 (18,971,518 90-day downloads) parses both valid controls with GenericDialect into ASTs that give the oracle summary. Its downloads include transitive pulls through DataFusion and other engines. pg_query (libpg_query FFI), sqlite3-parser and other leads are unverified, so this is not a top-ten ranking. sqlparser_derive, datafusion-sql and gluesql-core are sqlparser-rs family helpers or consumers, not separate parsers. Two valid controls establish only the tested dialect-neutral subset."
+        "uncertainty": "Nine verified Rust SQL paths after a bounded crates.io search (three queries, first 100 hits each, 300 hits, 250 unique) and recent-download metrics captured 2026-11-17; round 2 inspected the snapshot hits in metric order. Each selected path parses both valid controls into its own AST, and the adapter's summary equals the hand-written oracle; families and metrics are in parsers.json. Downloads include transitive pulls through engines and bindings, and counts below 10,000 are weak adoption evidence. Forks of sqlparser-rs and sqlite3-parser, non-open-source licences and the predecessor sql-parse are excluded with evidence in leads.json; unverified leads remain, so this is not a definitive top-ten ranking. Two valid controls establish only the tested dialect-neutral subset."
       },
       {
         "format": "toml",

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T21:30:24.823898+00:00",
-  "projects_total": 138,
-  "projects_verified": 138,
+  "checked_at_utc": "2026-11-17T22:09:02.633356+00:00",
+  "projects_total": 142,
+  "projects_verified": 142,
   "results": [
     {
       "schema_version": 1,
@@ -2083,6 +2083,75 @@
     },
     {
       "schema_version": 1,
+      "project": "sql/python/mo_sql_parsing",
+      "pass": true,
+      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "876a602e2a229b5c0d5b91a4d158bfd08faf5ab51dc2c93323a5e656b2f2848c",
+      "base_image_id": "sha256:4e852cf17c50cff0523331862d29a211f77bc88b596c6327f3c40d1ea89caae0",
+      "image_id": "sha256:da3091137856315963f47add1da49181b6226ca9f7975dd0c5c982d6362332c0",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 2775,
+      "feedback_edges": 2713,
+      "afl_map_size": 65536,
+      "afl_package": "4.04c-4",
+      "overlay_file_sha256": {
+        "Dockerfile": "03288071570a094d3fbbd69acdf056a8504202509f8821cacaaaa868f7954428",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/python/pglast",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "d179338c5d4341425d44b5e653049cfef36b63d04c51938508c3451fccd07bb2",
+      "base_image_id": "sha256:c779510e3e80f4e6be0ef8dfe05bdb5994761ea53d6e0d7b11a21653729fda81",
+      "image_id": "sha256:843e70072324709ed3aab960f45d30a517f2762da0f8247652f879cbc2f9fb12",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 6854,
+      "feedback_edges": 6500,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "35f45a4c8969fe1e894f8b82b71db6219f409d9c8a9d61c7a59272803a6fdb04",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405",
+        "afl_proxy.c": "c344a7d28e36878cd8d6bd25d0adcee4933b30c3fa0a9edff2d6a2c9705b3316",
+        "afl_start.c": "add54eceda445a1e3d39c4923027f04a37db1957d922c91a14da21ca2c86e2e6",
+        "afl_python_trace.py": "59098d43e096baf3ec1322e354bdaa303780146e70911834dc9c6e834267141a"
+      },
+      "bridge_file_sha256": {}
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/python/sqlfluff",
+      "pass": true,
+      "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "3ce0da9e1855cb375503d23664b12906b823c474b0a3d4b8b17faf586bb70d4f",
+      "base_image_id": "sha256:66a2799a152d4172534051f81e61bbe636d5b4d8e20dee3f6746b3df0a161107",
+      "image_id": "sha256:64b5c48f6dadc4c9bd9804a9a163d0e8d3cb2a485ec9a3fd642ed78038f33c8b",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 4710,
+      "feedback_edges": 4540,
+      "afl_map_size": 65536,
+      "afl_package": "4.04c-4",
+      "overlay_file_sha256": {
+        "Dockerfile": "a0c242c105c806b859c27345820ea2584cf45ba01b5ef9c6262f03829a0fc96a",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
+      }
+    },
+    {
+      "schema_version": 1,
       "project": "sql/python/sqlglot",
       "pass": true,
       "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
@@ -2102,6 +2171,29 @@
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
         "python_trace.py": "d113726886c71a8d99aa2ad035bc996c9f22a98b7a043a8c5e62f6d99e9df5b0"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/python/sqloxide",
+      "pass": true,
+      "feedback_kind": "llvm_native_parser_regions_to_afl_bitmap",
+      "base_project_receipt_sha256": "e8fc03e48e14ac1f812270f17c73a141b1a0d14259e5f1d724d82cae04a36ba4",
+      "base_image_id": "sha256:bf684ce73b9bcd977c52b975b76537afc26ab5a9a3135ba28293023e4591059b",
+      "image_id": "sha256:adf6629834061d1b99dc193808a0eae66eaf7008a5da48663a21464d42670929",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 2210,
+      "feedback_edges": 2185,
+      "afl_map_size": 65536,
+      "afl_package": "4.04c-4",
+      "overlay_file_sha256": {
+        "Dockerfile": "1d5a49b1e82fe4ba43356f7c5423057dd15981b5c46892376bf1c60e6c9ad4fc",
+        "afl_trace": "4c0ee4fa7f8c6603f0a9b945b4cde55ad6c9283a9f9f2a2a4eaf87e8dbaa2405"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "python_llvm_native_trace.py": "e9325d515cc4893c0f034322e94a6b73f25454d340fb91f68275810bf41a2217"
       }
     },
     {
