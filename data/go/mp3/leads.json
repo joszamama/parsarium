@@ -1,12 +1,13 @@
 [
   {
     "name": "github.com/faiface/beep/mp3",
-    "status": "shared_family",
+    "status": "selected",
     "imported_by_packages": 444,
     "version_seen": "v1.1.0",
     "license": "MIT",
-    "reason": "Wraps github.com/hajimehoshi/go-mp3 (hajime/go-mp3 lineage); not counted as a separate plain MP3 parser in this pilot.",
-    "source": "https://pkg.go.dev/github.com/faiface/beep/mp3"
+    "reason": "Selected as a package API over the go-mp3 family. Pinned v1.1.0 Decode(io.ReadCloser) streams both untagged valid controls: 12,672 samples at 44.1 kHz and 6,912 samples at 22.05 kHz, equal to the header walk (11 x 1,152 and 12 x 576). It resolves github.com/hajimehoshi/go-mp3 v0.3.0. Docker coverage, wrapper and go-mp3 lines, and stable AFL++ feedback whose control differences are all in go-mp3 are in the project receipts.",
+    "source": "https://pkg.go.dev/github.com/faiface/beep/mp3",
+    "evidence": "projects/mp3/go/github_com_faiface_beep_mp3/verification.json"
   },
   {
     "name": "github.com/dhowden/tag",
