@@ -108,5 +108,115 @@
     },
     "rank": 1,
     "afl_feedback": "data/c/dns/c-ares-feedback-differential.json"
+  },
+  {
+    "name": "ldns",
+    "version": "1.8.4",
+    "license": "BSD-3-Clause",
+    "license_evidence": "LICENSE in the release tarball (sha256 838b9075...), checked in the image",
+    "input_api": "ldns_status ldns_wire2pkt(ldns_pkt **packet, const uint8_t *data, size_t len)",
+    "documentation": "https://nlnetlabs.nl/documentation/ldns/wire2host_8h.html",
+    "documentation_note": "Doxygen API reference for ldns; the pinned tarball's ldns/wire2host.h documents ldns_wire2pkt.",
+    "source": "https://nlnetlabs.nl/downloads/ldns/ldns-1.8.4.tar.gz",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "NLnet Labs ldns (wire2host.c, rr.c, packet.c, str2host/host2str for presentation)",
+    "family_note": "Own C decoder; getdns bundles gldns derived from ldns, and Unbound's internal sldns shares the lineage. Built without OpenSSL; presentation text comes from ldns_rdf2str. It has no Z getter, so z carries AD and CD only.",
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package ldns",
+      "value": 1240,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "snapshot": "data/curation/popcon-sourcemax-by_inst.gz"
+    },
+    "project": "projects/dns/c/ldns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+      "value": 1240,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T16:38:19.172843+00:00",
+      "snapshot": "data/c/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 2,
+    "afl_feedback": "data/c/dns/ldns-feedback-differential.json"
   }
 ]
