@@ -1,10 +1,8 @@
 # ghostscript — PDF / C
 
-Pinned release: `10.08.0`. [Manifest](manifest.json) · [Docker receipt](verification.json) · [AFL++ receipt](../../../../fuzzing/afl-native/pdf/c/ghostscript/verification.json)
+Pinned release: `10.08.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
 [API, control result, and parser family](../../../../catalog/pdf/c/ghostscript/README.md)
-
-The one-page PDF control passed Docker replay and one-case fuzzer smoke; a separate valid zero-page PDF reports zero pages. LLVM coverage reached 29,797 lines in pinned Ghostscript source, including 1,852 lines in its PDF interpreter. The source-built AFL++ overlay reported 8,020 feedback edges on the control. Repeat maps matched; a valid two-page PDF changed five edge IDs. Ghostscript's public C API loads a local file through its PDF interpreter and reports the parsed `/NumPages` value. The base libFuzzer binary has harness feedback only; use the AFL++ overlay for parser steering.
 
 ## Run from the repository root
 
