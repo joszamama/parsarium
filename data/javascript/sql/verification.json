@@ -279,8 +279,100 @@
       "parser_feature_difference": 442,
       "project_receipt": "projects/sql/javascript/sql_parser_cst/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/javascript/sql_parser_cst/differential.json"
+    },
+    {
+      "package": "dt-sql-parser",
+      "version": "4.6.1",
+      "pass": true,
+      "input_api": "new MySQL().parse(local UTF-8 text, errorListener) -> ProgramContext",
+      "dialect": "MySQL (MySQL class)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "dt-sql-parser ANTLR4 grammars",
+      "parser_source_files": 89,
+      "parser_source_lines_covered": 51949,
+      "afl_tuple_difference": 137,
+      "parser_feature_difference": 139,
+      "project_receipt": "projects/sql/javascript/dt_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/javascript/dt_sql_parser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T19:55:34.061617+00:00"
+  "checked_at_utc": "2026-11-17T20:05:11.537854+00:00"
 }

@@ -317,5 +317,112 @@
         }
       ]
     }
+  },
+  {
+    "name": "dt-sql-parser",
+    "version": "4.6.1",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball",
+    "input_api": "new MySQL().parse(local UTF-8 text, errorListener) -> ProgramContext",
+    "documentation": "https://www.npmjs.com/package/dt-sql-parser/v/4.6.1",
+    "source": "https://registry.npmjs.org/dt-sql-parser/-/dt-sql-parser-4.6.1.tgz",
+    "source_sha256": "0f989e624714580c4281d5bb4a4b45eaa31274546f24041c7278aff32e19299e",
+    "dependencies": [
+      "antlr4ng",
+      "antlr4-c3"
+    ],
+    "dialect": "MySQL (MySQL class)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8 and parsed by the MySQL class with an error listener; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. A resolve hook completes the package's extensionless ES module imports without changing package files.",
+    "family": "dt-sql-parser ANTLR4 grammars",
+    "family_note": "MySQL.parse runs the package's ANTLR4-generated MySqlLexer and MySqlParser (dist/lib/mysql, about 90,000 lines, on the antlr4ng runtime) and returns the concrete ANTLR parse tree. The adapter reads rule contexts by the grammar's rule names (querySpecification, selectElement, tableName, joinPart, groupByItem, orderByExpression, aggregateWindowedFunction, decimalLiteral, stringLiteral, insertStatement, expressionsWithDefaults). The published dist uses extensionless ES module imports meant for bundlers, so the harness registers a resolve hook that retries those relative specifiers with '.js' or '/index.js'. Independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst and libpg_query; the other dialect classes (Flink, Spark, Hive, PostgreSQL, Trino, Impala, generic) are untested.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 364059,
+      "source": "https://api.npmjs.org/downloads/point/last-month/dt-sql-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Package downloads include transitive installs (for example through monaco-sql-languages)."
+    },
+    "project": "projects/sql/javascript/dt_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]
