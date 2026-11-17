@@ -103,3 +103,10 @@
   }
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json php eftec_services_json
+python3 parsarium.py run json php eftec_services_json controls/json/nested-object.json
+```

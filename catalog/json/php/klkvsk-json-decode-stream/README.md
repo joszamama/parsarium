@@ -103,3 +103,10 @@
   }
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json php klkvsk_json_decode_stream
+python3 parsarium.py run json php klkvsk_json_decode_stream controls/json/nested-object.json
+```

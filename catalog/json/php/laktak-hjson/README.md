@@ -103,3 +103,10 @@
   }
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json php laktak_hjson
+python3 parsarium.py run json php laktak_hjson controls/json/nested-object.json
+```

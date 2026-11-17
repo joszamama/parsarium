@@ -103,3 +103,10 @@
   }
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json php boundwize_jsonrecast
+python3 parsarium.py run json php boundwize_jsonrecast controls/json/nested-object.json
+```
