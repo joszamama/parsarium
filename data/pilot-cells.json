@@ -440,10 +440,10 @@
     {
       "ecosystem": "javascript",
       "format": "json",
-      "status": "pilot_three_selected_search_bounded",
+      "status": "pilot_four_selected_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 3,
+      "verified_third_party_count": 4,
       "verified_standard_or_runtime_count": 1,
       "search_queries": [
         "json parser",
@@ -455,8 +455,8 @@
       "search_limit_per_query": 100,
       "search_hits_recorded": 500,
       "unique_search_hits": 454,
-      "unresolved_documentation_leads": 21,
-      "uncertainty": "Pilot cell: three separate high-download parser families have documented local byte/stream APIs, valid nested-object and nested-array controls, parser-source coverage, and input-dependent AFL++ feedback. @streamparser/json receives the entire Buffer and its tokenizer checks trailing bytes after the first root for JSON whitespace. jsonparse (105,362,611 downloads) remains unresolved because README documents no API. Other higher-download leads either use a string-only API, a superset grammar, or delegate to JSON.parse. Downloads were fetched for 24 hand-picked candidates, not every search hit. Standard JSON.parse is counted separately. Two valid controls do not establish complete RFC 8259 support.",
+      "unresolved_documentation_leads": 20,
+      "uncertainty": "Pilot cell: four separate high-download parser families have local byte/stream APIs, valid nested-object and nested-array controls, parser-source coverage, and input-dependent AFL++ feedback. jsonparse (105,362,611 downloads) has no API in its README; its Parser.write(Buffer) path is taken from the packaged example and tests. It has no end() and accepts concatenated values, so the adapter rejects a second root, an open container or an unfinished token. JSONStream wraps jsonparse and is not counted separately. @streamparser/json receives the entire Buffer and its tokenizer checks trailing bytes after the first root for JSON whitespace. Other higher-download leads either use a string-only API, a superset grammar, or delegate to JSON.parse. Downloads were fetched for 24 hand-picked candidates, not every search hit. Standard JSON.parse is counted separately. Two valid controls do not establish complete RFC 8259 support.",
       "third_party_evidence": "data/javascript/json/parsers.json",
       "third_party_control_results": "data/javascript/json/verification.json",
       "runtime_evidence": "data/javascript/json/standard.json",
