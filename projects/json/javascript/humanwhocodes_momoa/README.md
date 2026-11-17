@@ -9,9 +9,9 @@ Pinned release: `3.3.13`. [Manifest](manifest.json) · [verification receipt](ve
 ```sh
 python3 parsarium.py build json javascript humanwhocodes_momoa
 python3 parsarium.py run json javascript humanwhocodes_momoa controls/json/nested-object.json
-python3 parsarium.py replay json javascript humanwhocodes_momoa CORPUS_DIR runs/json-momoa-replay
+python3 parsarium.py replay json javascript humanwhocodes_momoa CORPUS_DIR runs/json-humanwhocodes_momoa-replay
 python3 parsarium.py afl build json javascript humanwhocodes_momoa
-python3 parsarium.py afl prepare json javascript humanwhocodes_momoa runs/json-momoa-afl
+python3 parsarium.py afl prepare json javascript humanwhocodes_momoa runs/json-humanwhocodes_momoa-afl
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.

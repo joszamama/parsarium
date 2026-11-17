@@ -49,3 +49,10 @@
 ## Verification scope
 
 momoa's README documents parse(text) on a JSON string with mode "json" as the default; text input qualifies because the adapter reads it locally and momoa parses its structure. Local bytes are decoded with TextDecoder('utf-8', {fatal: true, ignoreBOM: true}), so invalid UTF-8 is rejected before the parser and a BOM is passed through to momoa. parse() throws on any token after the first value. The adapter summarizes the AST nodes directly (Object.members, Array.elements, String/Number/Boolean/Null values) and does not call evaluate() or JSON.parse. The AST keeps every member, so top_level_keys would list duplicate keys more than once; the controls have none. js/README.md at gitHead 625bcbec28623ccebb1da837c71389cf38014800 (tag momoa-js-v3.3.13) is byte-identical to the tarball README. Both valid controls, nested-object.json and nested-array.json, produce the exact pinned summaries, which an independent Python json summary of the same control bytes also reproduces (tests/test_javascript_json_momoa.py). Only the two valid controls were run.
+
+## Run this target
+
+```sh
+python3 parsarium.py build json javascript humanwhocodes_momoa
+python3 parsarium.py run json javascript humanwhocodes_momoa controls/json/nested-object.json
+```

@@ -446,10 +446,10 @@
     {
       "ecosystem": "javascript",
       "format": "json",
-      "status": "pilot_five_selected_search_bounded",
+      "status": "pilot_six_selected_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 5,
+      "verified_third_party_count": 6,
       "verified_standard_or_runtime_count": 1,
       "search_queries": [
         "json parser",
@@ -461,8 +461,8 @@
       "search_limit_per_query": 100,
       "search_hits_recorded": 500,
       "unique_search_hits": 454,
-      "unresolved_documentation_leads": 19,
-      "uncertainty": "Pilot cell: five high-download package/API paths have valid nested-object and nested-array controls, package parser coverage, and AFL++ feedback; four independent parser families are represented. jsonparse (105,362,611 downloads) has no API in its README; Parser.write(Buffer) is evidenced by packaged examples and tests. The adapter requires one root and checks the parser stack and tokenizer state. JSONStream (56,299,470 downloads) is a separate stream API path over the same pinned jsonparse 1.3.1 tokenizer, not an independent engine. JSONStream.parse([]) emits one root according to packaged code and tests despite its README statement. Its private parser exposes no end-of-input completeness check: the adapter requires one emitted root, no error, and stream end, but trailing unfinished syntax after a complete root may go undetected. JSONStream own package source is covered; differential feedback on the valid controls arises only in underlying jsonparse source. @streamparser/json receives the entire Buffer and checks trailing bytes after the first root for whitespace. Other high-download leads use string-only APIs, superset grammars, or delegate to JSON.parse. Downloads cover 24 hand-picked candidates, not every search hit. Standard JSON.parse is separate. Two valid controls do not establish complete RFC 8259 support.",
+      "unresolved_documentation_leads": 18,
+      "uncertainty": "Pilot cell: six high-download package/API paths have valid nested-object and nested-array controls, package parser coverage, and AFL++ feedback; five independent parser families are represented. jsonparse (105,362,611 downloads) has no API in its README; Parser.write(Buffer) is evidenced by packaged examples and tests. The adapter requires one root and checks the parser stack and tokenizer state. JSONStream (56,299,470 downloads) is a separate stream API path over the same pinned jsonparse 1.3.1 tokenizer, not an independent engine. JSONStream.parse([]) emits one root according to packaged code and tests despite its README statement. Its private parser exposes no end-of-input completeness check: the adapter requires one emitted root, no error, and stream end, but trailing unfinished syntax after a complete root may go undetected. JSONStream own package source is covered; differential feedback on the valid controls arises only in underlying jsonparse source. @humanwhocodes/momoa (18,038,222 downloads) has a documented string API only: the adapter decodes local bytes as strict UTF-8 and calls parse(text, {mode: 'json'}), which rejects tokens after the first value; the summary is taken from its AST nodes. @streamparser/json receives the entire Buffer and checks trailing bytes after the first root for whitespace. Other high-download leads use superset grammars, delegate to JSON.parse, or have string-only APIs that were not run in this pilot; momoa's acceptance does not reassess those leads. Downloads cover 24 hand-picked candidates, not every search hit. Standard JSON.parse is separate. Two valid controls do not establish complete RFC 8259 support.",
       "third_party_evidence": "data/javascript/json/parsers.json",
       "third_party_control_results": "data/javascript/json/verification.json",
       "runtime_evidence": "data/javascript/json/standard.json",
