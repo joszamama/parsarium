@@ -9,6 +9,14 @@
       "project": "ascii_ply/javascript/plyparser",
       "evidence": "fuzzing/afl-native/ascii_ply/javascript/plyparser/verification.json",
       "note": "Next-ranked npm path after the @draco-rust/ply feedback blocker. Pinned Docker control passes with 165 parser-source lines; the AFL++ bridge maps 47 parser features to 67 tuples, repeats identically on triangle.ply and gives a different 56-tuple map on triangle-colour.ply."
+    },
+    {
+      "ecosystem": "python",
+      "format": "ascii_ply",
+      "name": "pyntcloud",
+      "project": "ascii_ply/python/pyntcloud",
+      "evidence": "fuzzing/afl-native/ascii_ply/python/pyntcloud/verification.json",
+      "note": "First next-ranked PyPI path after the PyMeshLab and libigl feedback blockers (rank 11, 46,262 downloads). Pinned Docker control passes with 805 pyntcloud source lines (PLY reader pyntcloud/io/ply.py); the AFL++ Python bridge maps them to 817 tuples, repeats identically on triangle.ply and gives a different 812-tuple map on a valid coloured two-face square."
     }
   ]
 }
