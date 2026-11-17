@@ -1,0 +1,61 @@
+[
+  {
+    "name": "jackson-databind",
+    "group": "com.fasterxml.jackson.core",
+    "artifact": "jackson-databind",
+    "version": "2.23.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "ObjectMapper(JsonFactory with CANONICALIZE_FIELD_NAMES disabled).readValue(File, Object.class)",
+    "documentation": "https://javadoc.io/static/com.fasterxml.jackson.core/jackson-databind/2.23.0/com/fasterxml/jackson/databind/ObjectMapper.html",
+    "source": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.23.0/jackson-databind-2.23.0-sources.jar",
+    "scope": "RFC 8259 JSON text mapped to untyped Map/List/String/Number/Boolean/null",
+    "family": "Jackson (jackson-core streaming parser + databind untyped mapping)",
+    "family_note": "ObjectMapper drives the jackson-core JsonParser (UTF8StreamJsonParser for file input) and maps tokens through UntypedObjectDeserializer. jackson-core alone is a separate lead in the same parser family, not an independent engine.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/jackson_databind",
+    "configuration_note": "The adapter disables JsonFactory.Feature.CANONICALIZE_FIELD_NAMES (documented, default on). With it on, jackson-core's ByteQuadsCanonicalizer seeds its field-name hash from System.currentTimeMillis(), and repeated runs on the same control covered different ByteQuadsCanonicalizer lines. With it off, repeated control coverage is identical. The rest of the parse path is the default ObjectMapper configuration.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 162890,
+      "max_release": "2.18.2",
+      "max_release_direct_dependent_count": 4098,
+      "default_release_direct_dependent_count": 367,
+      "releases": 239,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml.jackson.core%3Ajackson-databind",
+      "captured_at_utc": "2026-11-17T03:27:28.596128+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
+  }
+]
