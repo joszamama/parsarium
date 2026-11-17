@@ -1,18 +1,13 @@
-# C × TOML: selected parsers (pilot)
+# C × TOML: selected parsers
 
-Two verified third-party paths. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+0 selected third-party paths; bounded pilot scope.
 
-## Adoption metric
+## Primary within-cell adoption metric
 
-The C cells rank by Debian popcon installations. No C TOML library is packaged in Debian (source and binary package substring searches in the [registry snapshot](registry-snapshot.json)) or in Conan Center, so each path records the popcon metric as null and unranked. The order below uses a separately labeled adoption exception: GitHub stargazers of the pinned upstream repository, captured 2026-11-17 through the GitHub repos API ([leads capture](leads.json)). Stars measure attention, not installations, and are not comparable with popcon values in other C cells.
+Debian popcon installations ([registry-snapshot.json](registry-snapshot.json), captured 2026-11-17). No C TOML library is packaged in Debian or Conan Center, so no C path has the primary metric or a Debian fallback of at least 1,000. GitHub stars are a fallback only in PLY cells.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
-| --- | --- | --- | --- | --- | --- |
-| 1 | [tomlc17](https://github.com/cktan/tomlc17/blob/R261116/API.md#toml_parse) | R261116 | 201 GitHub stargazers (adoption exception; popcon: not packaged) | TOML 1.0.0 byte buffer via `toml_parse(src, len)` into a `toml_datum_t` tree | tomlc17 (own single-file `src/tomlc17.c`) |
-| 2 | [toml-c](https://github.com/arp242/toml-c/blob/6a38d404184a3b399d61821dbfff229579d59a00/toml.h) | 2025-12-18 (commit `6a38d404`) | 114 GitHub stargazers (adoption exception; popcon: not packaged) | TOML 1.0.0 NUL-terminated string via `toml_parse(toml, errbuf, size)` and typed accessors | tomlc99 family (arp242 fork, `toml.c`) |
+tomlc17 R261116 and toml-c (commit 6a38d404, tomlc99 family) passed both controls, coverage and AFL++ feedback; they are recorded as `unresolved_no_primary_metric` leads with that evidence in [leads.json](leads.json). tomlc99 fails the second control; libtoml (TOML 0.4.0) was not run.
 
-tomlc17 R261116 is pinned from its [release tag](https://github.com/cktan/tomlc17/releases/tag/R261116) archive, SHA-256 `0a9fd8636cf79a08a01e75cb04a1a62b7e0e689576c2407cc1d571e92df7df4b` (MIT). The harness calls the [documented](https://github.com/cktan/tomlc17/blob/R261116/API.md#toml_parse) `toml_parse(src, len)` on the exact bytes and walks the returned `toml_datum_t` tree; offset date-times become UTC instants from the datum's date, time, microsecond and `tz` minute fields. Both controls equal their expected typed trees. The base control covers 1,034 lines of `src/tomlc17.c`. The parser-only probe instruments only `tomlc17.c` (checked with `nm`); three runs per control repeat exactly, and the controls differ by 216 of 268/368 AFL++ tuples and 424 source lines ([receipt](../../../fuzzing/afl-native/toml/c/tomlc17/differential.json)). It is a separate rewrite by the tomlc99 author and shares no parser code with tomlc99.
+## Standard library
 
-toml-c has no tags; it is pinned to commit [`6a38d404`](https://github.com/arp242/toml-c/tree/6a38d404184a3b399d61821dbfff229579d59a00) (2025-12-18), codeload archive SHA-256 `a51cd54aee07ce02c3bdfa603003fad678d51172bf81a29501f8c9b1ff335f9e`. Its LICENSE is the MIT text carried over from tomlc99, which is why GitHub reports NOASSERTION. The harness calls `toml_parse` on a NUL-terminated copy and walks the tree with the accessors [documented in `toml.h`](https://github.com/arp242/toml-c/blob/6a38d404184a3b399d61821dbfff229579d59a00/toml.h); timestamps come from `toml_timestamp_t` (`kind`, millisecond fraction, `tz` minutes). Both controls equal their expected trees. The base control covers 868 lines of `toml.c`; the parser-only probe instruments only `toml.c` and calls only `toml_parse` and `toml_free` (the typed accessors that convert raw values run in the replay, not in the probe), three runs per control repeat exactly, and the controls differ by 156 of 233/193 tuples and 421 source lines ([receipt](../../../fuzzing/afl-native/toml/c/toml-c/differential.json)). It is a fork of tomlc99 and belongs to the tomlc99 family.
-
-Unverified leads: tomlc99 (664 GitHub stargazers) at its latest commit `62ce93ce` (archive SHA-256 `158dbe2b3a98…`, MIT LICENSE text) parses the primary control to the expected tree but rejects the second control with `line 17: expect hex char`: its string scanner accepts only uppercase hex digits after `\u`, and the control writes `\u00e9`. Its README marks the library obsolete in favour of tomlc17. libtoml (125 stargazers, last commit 2016) targets TOML 0.4.0, which lacks dotted keys, non-decimal integers and local date/time types used by the second control; it was not run.
+None documented; see [standard.json](standard.json).
