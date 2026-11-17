@@ -1,0 +1,22 @@
+[package]
+name = "parsarium-yaml-saphyr-harness"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+parsarium-yaml-saphyr-events = { path = "src/events" }
+serde_json = "=1.0.145"
+saphyr = "=0.3.4"
+libfuzzer-sys = { version = "=0.4.13", optional = true }
+
+[features]
+fuzzing = ["dep:libfuzzer-sys"]
+
+[[bin]]
+name = "replay"
+path = "src/bin/replay.rs"
+
+[[bin]]
+name = "fuzzer"
+path = "src/bin/fuzzer.rs"
+required-features = ["fuzzing"]

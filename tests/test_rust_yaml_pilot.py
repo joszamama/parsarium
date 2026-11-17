@@ -18,6 +18,7 @@ SLUGS = {
     "serde-saphyr": "serde_saphyr",
     "granit-parser": "granit_parser",
     "saphyr-parser": "saphyr_parser",
+    "saphyr": "saphyr",
     "noyalib": "noyalib",
     "dbt-yaml": "dbt_yaml",
 }
@@ -29,6 +30,7 @@ CRATES = {
     "serde-saphyr": ["granit_parser", "serde_saphyr"],
     "granit-parser": ["granit_parser", "parsarium_yaml_granit_parser_events"],
     "saphyr-parser": ["parsarium_yaml_saphyr_parser_events", "saphyr_parser"],
+    "saphyr": ["parsarium_yaml_saphyr_events", "saphyr", "saphyr_parser"],
     "noyalib": ["noyalib"],
     "dbt-yaml": ["dbt_yaml", "unsafe_libyaml"],
 }

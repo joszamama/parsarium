@@ -164,15 +164,16 @@
   },
   {
     "name": "saphyr",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 1374356,
     "metric_error": null,
-    "family": "saphyr (yaml-rust2 lineage)",
+    "family": "saphyr-parser (yaml-rust2 lineage)",
     "api_hint": "Yaml::load_from_str",
     "note": null,
     "found_by": "registry_search",
     "source": "https://crates.io/crates/saphyr",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Selected. Pinned 0.3.4 parses both schema-neutral YAML controls into the exact typed trees of controls/yaml/check_controls.py; Docker coverage 225 own lines and 1335 saphyr-parser lines; AFL++ scoped to parsarium_yaml_saphyr_events, saphyr, saphyr_parser: 5 identical repeats per control, 2029 vs 2018 edges, 143/132 unique.",
+    "evidence": "projects/yaml/rust/saphyr/verification.json"
   },
   {
     "name": "noyalib",
