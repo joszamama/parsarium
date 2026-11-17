@@ -1,0 +1,85 @@
+{
+  "kind": "third_party",
+  "api": "new org.xbill.DNS.Message(byte[]) on local bytes; Header getters and getSection, Record.rdataToString (AAAA from getAddress bytes)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T19:04:41.344067+00:00",
+  "manifest": "projects/dns/java/dnsjava/manifest.json",
+  "image_id": "sha256:a419cd246ab8ec265a49e28a936c54ec11f4142c3a689673e83036a6d907e034",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "c943aeec79febb056ee1f029a6f16e53f8950d4eb0ac850d4a3f0c61e89c20e8",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "DnsjavaHarness.java": "741ec9890d619497bd73501b600b13ba412281229b7e9d179a01f81db987ce7e",
+    "Dockerfile": "fd3fd60fecbc2acfb1717c8aa33d785f23b7c05c3ab406e823f11857e3982ea7",
+    "manifest.json": "64d90ced67455fa299b5df9b0575eec8cd1fb1f8f38e6cf6e5c823322c281dc6",
+    "run-control.sh": "6bd3a0abc46893a38ad0cfe7d5608c609e881e1e1ddb686ebea0dce5ceeb1df0",
+    "source-lock.json": "0736b15ddcc8daaa6ee14b1ab4bd665419a54f7cbe01e42b3f2e0d339f48ec5b"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 21,
+  "parser_source_lines_covered": 467,
+  "format_specific_source_lines_covered": 30,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/java/dnsjava/target/coverage/coverage.json",
+  "pass": true
+}

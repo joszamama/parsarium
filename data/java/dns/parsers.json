@@ -104,5 +104,111 @@
     },
     "rank": 1,
     "afl_feedback": "data/java/dns/netty-codec-dns-feedback-differential.json"
+  },
+  {
+    "name": "dnsjava",
+    "group": "dnsjava",
+    "artifact": "dnsjava",
+    "version": "3.7.1",
+    "license": "BSD-3-Clause",
+    "license_evidence": "POM licenses section (BSD-3-Clause, POM sha256 293da64c...) and META-INF/LICENSE in the pinned jar, checked in the image",
+    "input_api": "org.xbill.DNS.Message(byte[] b) throws IOException",
+    "documentation": "https://javadoc.io/doc/dnsjava/dnsjava/3.7.1/org/xbill/DNS/Message.html#%3Cinit%3E(byte%5B%5D)",
+    "source": "https://repo.maven.apache.org/maven2/dnsjava/dnsjava/3.7.1/",
+    "source_lock": "projects/dns/java/dnsjava/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dnsjava (org.xbill.DNS Message, Header, DNSInput, Name and per-type rrFromWire)",
+    "family_note": "Own Java decoder; keeps the raw flags word, so Z, AD and CD are all reported. Presentation text is dnsjava's rdataToString except AAAA, which the harness formats from the decoded 16 bytes as RFC 5952 text.",
+    "project": "projects/dns/java/dnsjava",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 888,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/dnsjava%3Adnsjava",
+      "captured_at_utc": "2026-11-17T16:40:19.620524+00:00",
+      "snapshot": "data/java/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 2,
+    "afl_feedback": "data/java/dns/dnsjava-feedback-differential.json"
   }
 ]
