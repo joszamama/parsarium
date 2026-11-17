@@ -40,9 +40,10 @@
       "name": "sxd-document",
       "version": "0.3.2",
       "recent_downloads_90d": 647390,
-      "status": "unresolved",
-      "reason": "DOM parser (sxd_document::parser::parse); not run on the controls.",
-      "source": "https://crates.io/crates/sxd-document"
+      "status": "unresolved_control_mismatch",
+      "reason": "The documented sxd_document::parser::parse(&str) API was run on both valid XML controls. On catalog-ns.xml, the prefixed root's simultaneous unprefixed default xmlns declaration is not retained in the DOM: unprefixed item/name/note descendants have no namespace URI instead of urn:parsarium:item. The crate's finish_opening_tag processes a default xmlns only in the unprefixed-element branch; the prefixed-element branch does not register it. A DOM-only adapter cannot recover the lost URI, so the path is not selected. Its parser owns XML parsing code, but the shared namespace-aware control cannot be matched without reparsing the raw XML in the adapter.",
+      "source": "https://crates.io/crates/sxd-document",
+      "audit": "data/rust/xml/sxd-document-control-audit.md"
     },
     {
       "name": "libxml",
