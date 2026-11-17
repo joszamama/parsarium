@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "checked_at_utc": "2026-11-17T14:32:54.446410+00:00",
-  "projects_total": 6,
-  "projects_passed": 6,
+  "projects_total": 7,
+  "projects_passed": 7,
   "differential_kind": "valid namespace XML controls; Xerces-C++, libxml++ and RapidXML use parser-only probes; tinyxml2 uses the alternate no-processing-instruction second control",
-  "command": "for slug in pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done; for slug in xerces_c libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/xerces_c/verify-parser-feedback.py; python3 projects/xml/cpp/libxmlpp/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp rapidxml; python3 projects/xml/cpp/rapidxml/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp tinyxml && python3 scripts/verify_cpp_json_feedback.py --format xml --slug tinyxml",
+  "command": "for slug in pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done; for slug in xerces_c libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/xerces_c/verify-parser-feedback.py; python3 projects/xml/cpp/libxmlpp/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp rapidxml; python3 projects/xml/cpp/rapidxml/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp tinyxml && python3 scripts/verify_cpp_json_feedback.py --format xml --slug tinyxml; python3 scripts/build_afl_native.py xml cpp cxxtools && python3 scripts/verify_cpp_json_feedback.py --format xml --slug cxxtools",
   "results": [
     {
       "project": "xml/cpp/xerces_c",
@@ -109,6 +109,26 @@
       ],
       "probe": "projects/xml/cpp/libxmlpp/parser-probe.cpp",
       "limit": "A few libxml2 parser.c line hits vary between identical process runs; reported line differences count only lines present in both runs of one control and absent in both runs of the other. AFL++ tuples repeat exactly."
+    },
+    {
+      "project": "xml/cpp/cxxtools",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+      "overlay_receipt_sha256": "9458915e62c4878db7ed01b55e2e9260a5f3f25876bed65d05f3a81f2d2a5bab",
+      "differential_receipt_sha256": "fd1d4b52c85501d8a23aa8d50771d48341208e2588661e1ce4eae1d1d5e2b4f6",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeated_control_identical": true,
+      "control_source_lines": 1002,
+      "control_afl_tuples": 733,
+      "differential_source_lines": 1085,
+      "differential_afl_tuples": 784,
+      "source_line_difference": 237,
+      "afl_tuple_difference": 123,
+      "xmlreader_line_difference": 177,
+      "limit": "The overlay instruments all of libcxxtools and the adapter; 177 of the 237 differing covered lines are in src/xml/xmlreader.cpp, the rest in string, UTF-8 codec and entity-resolver helpers."
     },
     {
       "project": "xml/cpp/rapidxml",

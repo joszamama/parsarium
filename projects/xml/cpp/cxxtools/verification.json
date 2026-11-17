@@ -1,0 +1,59 @@
+{
+  "kind": "third_party",
+  "api": "cxxtools::xml::XmlReader(std::istream&) over a std::istringstream of the local bytes; XmlReader::get() then next() until Node::EndDocument; StartElement::name() and attributes() (Attribute::name()/value()), Characters::content(); cxxtools::String converted with Utf8Codec::encode",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:43:09.158448+00:00",
+  "manifest": "projects/xml/cpp/cxxtools/manifest.json",
+  "image_id": "sha256:5bb5fecc38d8538292bc6fafb2217e0f1a8e87815f3fdb88ab6ebaa582be3a49",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "source_sha256": "07b18037fb0983f6292f5c8d53e2369e9e7a9711df2c9ad50838aacbc8c62f7c",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "78d40caf3caab11da1c5046a42e4fe668f5e4c848062a3805b9b084fe2b0013c",
+    "build.sh": "7d13023877ddddc6f3a4ce51469a783cf178e01ee1fbd6c809aef214e7287fe5",
+    "harness.cpp": "74beb99ab656d3c4ab2330c10fc07678b79cc3fcbb4408a35eeb4f4fbf7a1427",
+    "harness.h": "7f61d16cfba0c499446f1b4af7fe456a9390595493ae19e5aa3e6cb6351a0463",
+    "manifest.json": "8909d1602e22b0deaea465f4b27471435e1faa28adf021f0e01641b2fb90f3f8",
+    "oracle.py": "c20119ccfec943f3c8f2152a40e1c9fbf5b06d07facc856871b4dfffc8e0a575",
+    "replay.cpp": "4d7da3463af2683b66157f1f713b5d207ff4a2f5ced661ce6d34a5082b2cd538",
+    "run-control.sh": "b92461c4dd6029ffcd2e211edaaef73bde8613d2f3e0ea8f067361f6cf2ec1ca",
+    "source-lock.json": "2492f65525cc52881ef8fe2bcadcdc87bb4ce659132cf37bb841649ebdeec2a4"
+  },
+  "output": {
+    "attributes": [
+      "xmlns:c=urn:parsarium:catalog",
+      "xmlns=urn:parsarium:item",
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "root": "c:catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "parser_source_files": 62,
+  "parser_source_lines_covered": 717,
+  "format_specific_source_lines_covered": 478,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/cpp/cxxtools/target/coverage/coverage.json",
+  "pass": true
+}

@@ -297,6 +297,69 @@
       "error": null
     },
     {
+      "package": "cxxtools",
+      "version": "3.0.0",
+      "scope": "cxxtools XmlReader pull events as a raw-name path (qualified names, xmlns attributes, attribute order and values, depth, trimmed text); no namespace URIs",
+      "command": "python3 scripts/run_project.py xml cpp cxxtools",
+      "receipt": "projects/xml/cpp/cxxtools/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "xmlns:c=urn:parsarium:catalog",
+          "xmlns=urn:parsarium:item",
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "c:catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "root": "c:catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 717,
+      "format_specific_source_lines_covered": 478,
+      "second_valid_control": "controls/xml/order-default-ns.xml",
+      "second_valid_output": {
+        "attributes": [
+          "xmlns=urn:parsarium:order",
+          "xmlns:p=urn:parsarium:price",
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\"",
+          "xmlns="
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "root": "order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "limit": "Raw-name path compared with the expat non-namespace oracle (projects/xml/cpp/cxxtools/oracle.py), not with the namespace-aware control oracle.",
+      "error": null
+    },
+    {
       "package": "rapidxml",
       "version": "1.13",
       "scope": "xml_document<>::parse<0>(char*) in situ over a copied, zero-terminated local UTF-8 buffer with adapter-side namespace resolution",

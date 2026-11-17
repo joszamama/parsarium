@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "cpp",
+  "package": "cxxtools",
+  "release": "3.0.0",
+  "pilot": true,
+  "catalog_parser": "data/cpp/xml/parsers.json",
+  "source_lock": "projects/xml/cpp/cxxtools/source-lock.json",
+  "source_sha256": "07b18037fb0983f6292f5c8d53e2369e9e7a9711df2c9ad50838aacbc8c62f7c",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "xmlns:c=urn:parsarium:catalog",
+      "xmlns=urn:parsarium:item",
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "root": "c:catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "xmlns=urn:parsarium:order",
+      "xmlns:p=urn:parsarium:price",
+      "n=1",
+      "p:currency=EUR",
+      "n=2",
+      "note=say \"hi\"",
+      "xmlns="
+    ],
+    "elements": [
+      "order",
+      "line",
+      "sku",
+      "p:amount",
+      "line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "root": "order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "oracle": "projects/xml/cpp/cxxtools/oracle.py (Python expat without namespace processing, ordered attributes)",
+  "namespace_resolution": false,
+  "output_name_form": "raw qualified names (prefix:local); xmlns/xmlns:* are ordinary attributes",
+  "api": "cxxtools::xml::XmlReader(std::istream&) over a std::istringstream of the local bytes; XmlReader::get() then next() until Node::EndDocument; StartElement::name() and attributes() (Attribute::name()/value()), Characters::content(); cxxtools::String converted with Utf8Codec::encode",
+  "namespace_semantics": "cxxtools 3.0.0's XmlReader reports element and attribute names as written and keeps xmlns/xmlns:* declarations as ordinary attributes in source order. StartElement has a NamespaceContext and namespaceUri(prefix), but xmlreader.cpp never fills it, so no URI is available; the adapter resolves nothing.",
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of the static libcxxtools built from Debian's orig tarball (no SSL, demos or unit tests); XmlReader is in src/xml/xmlreader.cpp",
+  "coverage_subject_prefix": "/work/source/src/",
+  "format_specific_coverage_file_suffix": "/xml/xmlreader.cpp",
+  "coverage_limit": "Two valid UTF-8 XML 1.0 controls without DOCTYPE establish cxxtools XmlReader's element, attribute, comment, processing-instruction, CDATA and character events for them only, as a raw-name path: qualified names, xmlns attributes, attribute order and decoded values, depth and trimmed text runs. No namespace URI, expanded name or in-scope binding is reported. Coverage counts every libcxxtools line reached (string, codec and stream helpers included); the XML reader's own lines are reported separately. DTDs, entities beyond the controls' references, other encodings, XML 1.1 and well-formedness rejection are not established. The expected outputs come from oracle.py (Python pyexpat in non-namespace mode, a different family from cxxtools)."
+}

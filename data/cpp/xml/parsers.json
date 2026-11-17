@@ -282,6 +282,90 @@
     "not_verified": "Two small valid namespace-aware UTF-8 controls do not establish complete XML 1.0, DTD/entity, other encoding or malformed-input behavior."
   },
   {
+    "name": "cxxtools",
+    "version": "3.0.0",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://deb.debian.org/debian/pool/main/c/cxxtools/cxxtools_3.0.0.orig.tar.gz (COPYING: GNU LGPL 2.1; source headers: 'or (at your option) any later version')",
+    "input_api": "cxxtools::xml::XmlReader(std::istream&) over a std::istringstream of the local bytes; XmlReader::get() then next() until Node::EndDocument; StartElement::name() and attributes() (Attribute::name()/value()), Characters::content(); cxxtools::String converted with Utf8Codec::encode",
+    "documentation": "https://github.com/maekitalo/cxxtools/blob/V3.0/include/cxxtools/xml/xmlreader.h",
+    "documentation_parser": "include/cxxtools/xml/xmlreader.h, startelement.h, characters.h in the pinned orig tarball",
+    "source": "https://deb.debian.org/debian/pool/main/c/cxxtools/cxxtools_3.0.0.orig.tar.gz",
+    "adapter": "projects/xml/cpp/cxxtools/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "cxxtools XmlReader pull events of one in-memory document as a raw-name path: document-order qualified element and attribute names as written, xmlns attributes, attribute order and decoded values, maximum depth, and trimmed character and CDATA runs between markup; no namespace URIs or expanded names",
+    "namespace_semantics": "raw_names_only",
+    "namespace_note": "cxxtools 3.0.0's XmlReader reports element and attribute names as written and keeps xmlns/xmlns:* declarations as ordinary attributes in source order. StartElement has a NamespaceContext and namespaceUri(prefix), but xmlreader.cpp never fills it, so no URI is available; the adapter resolves nothing.",
+    "family": "cxxtools XmlReader own state-machine parser",
+    "family_note": "src/xml/xmlreader.cpp is a hand-written state machine over cxxtools' own Unicode text streams with its own entity resolver; libcxxtools links no XML library. cxxtools is a general C++ utility library (also serialization, networking and threading), so its package count is not XML-specific. The pyexpat oracle is a different family, so the match is cross-family.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 42,
+      "dev_package_installs": {
+        "libcxxtools-dev": 42
+      },
+      "popcon_source_inst": 68,
+      "homebrew_install_on_request_365d": null,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json",
+      "qualification": "Weak signal: 42 dev installations of a general-purpose utility library (libcxxtools10 runtime 68), not XML-specific use."
+    },
+    "expected_output": {
+      "attributes": [
+        "xmlns:c=urn:parsarium:catalog",
+        "xmlns=urn:parsarium:item",
+        "version=1",
+        "id=a1",
+        "c:lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "c:catalog",
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "root": "c:catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "xmlns=urn:parsarium:order",
+        "xmlns:p=urn:parsarium:price",
+        "n=1",
+        "p:currency=EUR",
+        "n=2",
+        "note=say \"hi\"",
+        "xmlns="
+      ],
+      "elements": [
+        "order",
+        "line",
+        "sku",
+        "p:amount",
+        "line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "root": "order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "oracle": "projects/xml/cpp/cxxtools/oracle.py (Python expat without namespace processing, ordered attributes)",
+    "project": "projects/xml/cpp/cxxtools",
+    "not_verified": "Measured as a raw-name path against the expat non-namespace oracle, not as a namespace-aware parser. DTD, XML 1.1, external entities, other encodings, large inputs and malformed input remain unverified."
+  },
+  {
     "name": "rapidxml",
     "version": "1.13",
     "license": "BSL-1.0 OR MIT",

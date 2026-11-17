@@ -84,7 +84,7 @@ class CppXmlRapidXmlPilotTest(unittest.TestCase):
                     for name in snapshot["primary_order_by_dev_installs"]]
         self.assertEqual(installs, sorted(installs, reverse=True))
         ranking = (BASE / "ranking.md").read_text(encoding="utf-8")
-        self.assertIn("| 6 | [RapidXML]", ranking)
+        self.assertIn("| 7 | [RapidXML]", ranking)
         self.assertIn("none with recent use", ranking)
 
     def test_family_and_counts(self):
