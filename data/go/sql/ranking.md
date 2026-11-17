@@ -1,6 +1,6 @@
 # Go × SQL: pilot ranking
 
-Four third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
+Five third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
 
 ## Primary within-cell adoption metric
 
@@ -12,8 +12,9 @@ pkg.go.dev Imported by package count, captured 2026-11-17 ([snapshot](registry-s
 | 2 | [github.com/xwb1989/sqlparser](https://pkg.go.dev/github.com/xwb1989/sqlparser@v0.0.0-20180606152119-120387863bf2#Parse) | v0.0.0-20180606152119-120387863bf2 | 305 | `sqlparser.SplitStatementToPieces and sqlparser.Parse(local SQL text) -> Statement`; dialect: MySQL (vitess-derived grammar, no dialect option) | vitess MySQL grammar (2018 extracted fork, goyacc sql.y) and tokenizer |
 | 3 | [github.com/pingcap/tidb/pkg/parser](https://pkg.go.dev/github.com/pingcap/tidb/pkg/parser@v0.0.0-20261117145351-1e84b3595a3e#Parser.Parse) | v0.0.0-20261117145351-1e84b3595a3e | 176 | `parser.New().Parse(local SQL text, "", "") -> []ast.StmtNode`; dialect: MySQL (TiDB parser, default charset and collation) | TiDB MySQL grammar (goyacc parser.y) and lexer |
 | 4 | [github.com/AfterShip/clickhouse-sql-parser/parser](https://pkg.go.dev/github.com/AfterShip/clickhouse-sql-parser@v0.5.7/parser#Parser.ParseStmts) | v0.5.7 | 13 | `parser.NewParser(local SQL text).ParseStmts() -> []parser.Expr`; dialect: ClickHouse (no dialect option) | clickhouse-sql-parser hand-written recursive-descent parser and lexer |
+| 5 | [github.com/akito0107/xsqlparser](https://pkg.go.dev/github.com/akito0107/xsqlparser@v1.0.0#Parser.ParseSQL) | v1.0.0 | 7 | `xsqlparser.NewParser(reader, &dialect.GenericSQLDialect{}).ParseSQL() -> []sqlast.Stmt`; dialect: Generic (dialect.GenericSQLDialect) | xsqlparser recursive-descent parser and tokenizer (Go port of early sqlparser-rs) |
 
-Receipts: [vitess.io/vitess/go/vt/sqlparser](../../../projects/sql/go/vitess_io_vitess_go_vt_sqlparser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/go/vitess_io_vitess_go_vt_sqlparser/differential.json), [github.com/xwb1989/sqlparser](../../../projects/sql/go/github_com_xwb1989_sqlparser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/go/github_com_xwb1989_sqlparser/differential.json), [github.com/pingcap/tidb/pkg/parser](../../../projects/sql/go/github_com_pingcap_tidb_pkg_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/go/github_com_pingcap_tidb_pkg_parser/differential.json), [github.com/AfterShip/clickhouse-sql-parser/parser](../../../projects/sql/go/github_com_aftership_clickhouse_sql_parser_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/go/github_com_aftership_clickhouse_sql_parser_parser/differential.json).
+Receipts: [vitess.io/vitess/go/vt/sqlparser](../../../projects/sql/go/vitess_io_vitess_go_vt_sqlparser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/go/vitess_io_vitess_go_vt_sqlparser/differential.json), [github.com/xwb1989/sqlparser](../../../projects/sql/go/github_com_xwb1989_sqlparser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/go/github_com_xwb1989_sqlparser/differential.json), [github.com/pingcap/tidb/pkg/parser](../../../projects/sql/go/github_com_pingcap_tidb_pkg_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/go/github_com_pingcap_tidb_pkg_parser/differential.json), [github.com/AfterShip/clickhouse-sql-parser/parser](../../../projects/sql/go/github_com_aftership_clickhouse_sql_parser_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/go/github_com_aftership_clickhouse_sql_parser_parser/differential.json), [github.com/akito0107/xsqlparser](../../../projects/sql/go/github_com_akito0107_xsqlparser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/go/github_com_akito0107_xsqlparser/differential.json).
 
 ## Leads by the same metric
 
@@ -32,7 +33,7 @@ Receipts: [vitess.io/vitess/go/vt/sqlparser](../../../projects/sql/go/vitess_io_
 | github.com/rqlite/sql | 20 | unresolved | rqlite/sql hand-written parser |
 | github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser | 13 | unresolved | CockroachDB PostgreSQL-compatible grammar |
 | github.com/AfterShip/clickhouse-sql-parser/parser | 13 | selected | clickhouse-sql-parser hand-written |
-| github.com/akito0107/xsqlparser | 7 | unresolved | sqlparser-rs port |
+| github.com/akito0107/xsqlparser | 7 | selected | sqlparser-rs port |
 | github.com/krasun/gosqlparser | 1 | unresolved | gosqlparser |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).

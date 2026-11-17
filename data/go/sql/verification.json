@@ -371,8 +371,100 @@
       "parser_feature_difference": 384,
       "project_receipt": "projects/sql/go/github_com_aftership_clickhouse_sql_parser_parser/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/go/github_com_aftership_clickhouse_sql_parser_parser/differential.json"
+    },
+    {
+      "package": "github.com/akito0107/xsqlparser",
+      "version": "v1.0.0",
+      "pass": true,
+      "input_api": "xsqlparser.NewParser(reader, &dialect.GenericSQLDialect{}).ParseSQL() -> []sqlast.Stmt",
+      "dialect": "Generic (dialect.GenericSQLDialect)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "xsqlparser recursive-descent parser and tokenizer (Go port of early sqlparser-rs)",
+      "parser_source_files": 2,
+      "parser_source_lines_covered": 539,
+      "afl_tuple_difference": 167,
+      "parser_feature_difference": 167,
+      "project_receipt": "projects/sql/go/github_com_akito0107_xsqlparser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_akito0107_xsqlparser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:35:46.207581+00:00"
+  "checked_at_utc": "2026-11-17T20:36:02.325417+00:00"
 }

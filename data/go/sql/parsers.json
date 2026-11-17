@@ -418,5 +418,110 @@
         }
       ]
     }
+  },
+  {
+    "name": "github.com/akito0107/xsqlparser",
+    "version": "v1.0.0",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE in the pinned module zip (SHA-256 e3c54bff28da2bcc5214064c0d4da3cb976f9c4ebdae9da9ae6976cfd01c34e9, Apache License 2.0)",
+    "input_api": "xsqlparser.NewParser(reader, &dialect.GenericSQLDialect{}).ParseSQL() -> []sqlast.Stmt",
+    "documentation": "https://pkg.go.dev/github.com/akito0107/xsqlparser@v1.0.0#Parser.ParseSQL",
+    "source": "https://proxy.golang.org/github.com/akito0107/xsqlparser/@v/v1.0.0.zip",
+    "source_sha256": "e7e6f22ab8304c399adefdfcb5a6b80c7677c10f69c0159b25903c73e8109f3c",
+    "go_module_sum": "h1:s9uwP+92Hvj06r9MfukAPdxaUIscS61/x27MyFOHUFg=",
+    "dependencies": [],
+    "dialect": "Generic (dialect.GenericSQLDialect)",
+    "scope": "Local SQL text parsed by xsqlparser ParseSQL with GenericSQLDialect; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Numbers are reported from the parsed int64/float64 values formatted back with strconv, which equals the control text. Other syntax and dialects are untested.",
+    "family": "xsqlparser recursive-descent parser and tokenizer (Go port of early sqlparser-rs)",
+    "family_note": "NewParser(reader, dialect).ParseSQL runs the package's own sqltoken tokenizer and the recursive-descent parser in parser.go and returns sqlast statements. The README describes it as a Go port of andygrove/sqlparser-rs; it is Go source and shares no code with the selected Rust sqlparser crate, so the relation is a design lineage, not a shared implementation. The adapter walks each statement with sqlast.Inspect for Table base tables, QualifiedJoin/NaturalJoin/CrossJoin nodes, Function names, LongValue/DoubleValue numbers (formatted back with strconv, equal to the control text) and SingleQuotedString values, and reads QueryStmt/SQLSelect (Projection, WhereClause, GroupByClause, OrderBy) and InsertStmt (TableName, Columns, ConstructorSource rows) fields.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 7,
+      "source": "https://pkg.go.dev/github.com/akito0107/xsqlparser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_akito0107_xsqlparser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]
