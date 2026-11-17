@@ -1,7 +1,7 @@
 [
   {
     "name": "serde_yaml",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 100619896,
     "metric_error": null,
     "family": "unsafe-libyaml (libyaml translation)",
@@ -9,11 +9,12 @@
     "note": "Archived upstream; libyaml port via unsafe-libyaml.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/serde_yaml",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Selected. Pinned 0.9.34+deprecated parses both schema-neutral YAML controls into the exact typed trees of controls/yaml/check_controls.py; Docker coverage 649 own lines and 2002 unsafe-libyaml lines; AFL++ scoped to serde_yaml, unsafe_libyaml: 5 identical repeats per control, 1525 vs 1530 edges, 91/96 unique.",
+    "evidence": "projects/yaml/rust/serde_yaml/verification.json"
   },
   {
     "name": "unsafe-libyaml",
-    "status": "unresolved",
+    "status": "shared_family",
     "metric_value": 91340058,
     "metric_error": null,
     "family": "unsafe-libyaml (libyaml translation)",
@@ -21,7 +22,7 @@
     "note": "c2rust translation of libyaml.",
     "found_by": "targeted_documentation_lead",
     "source": "https://crates.io/crates/unsafe-libyaml",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Not run as a separate path. unsafe-libyaml 0.2.11 is the c2rust libyaml translation that the selected serde_yaml path drives (its scanner and parser lines are recorded as underlying coverage there). Its only API is the unsafe C-style yaml_parser_* event interface over raw pointers, with docs.rs listing the translated functions but no documented safe local text entry point; its downloads are almost entirely as serde_yaml's dependency."
   },
   {
     "name": "yaml-rust",
