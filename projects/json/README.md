@@ -9,6 +9,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [jsoncpp / C++](cpp/jsoncpp/README.md)
 - [nlohmann-json / C++](cpp/nlohmann-json/README.md)
 - [encoding/json.Unmarshal(\[\]byte, any) / Go](go/stdlib_unmarshal/README.md)
+- [github.com/buger/jsonparser / Go](go/github_com_buger_jsonparser/README.md)
 - [github.com/goccy/go-json / Go](go/github_com_goccy_go_json/README.md)
 - [github.com/json-iterator/go / Go](go/github_com_json_iterator_go/README.md)
 - [github.com/tidwall/gjson / Go](go/github_com_tidwall_gjson/README.md)
