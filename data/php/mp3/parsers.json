@@ -29,5 +29,88 @@
       "value": 15766894,
       "source": "data/php/mp3/registry-snapshot.json"
     }
+  },
+  {
+    "name": "wapmorgan/mp3info",
+    "version": "0.1.1",
+    "license": "LGPL-3.0",
+    "license_evidence": "https://github.com/wapmorgan/Mp3Info/blob/e532c2e1997874f9c672c7810ce90ef15004ef94/LICENSE (GNU LGPL version 3; composer.json declares LGPL-3.0)",
+    "input_api": "new wapmorgan\\Mp3Info\\Mp3Info(local temporary file path) -> codecVersion, layerVersion, sampleRate, channel, bitRate, isVbr, audioSize, _framesCount, duration",
+    "documentation": "https://github.com/wapmorgan/Mp3Info/blob/e532c2e1997874f9c672c7810ce90ef15004ef94/README.md",
+    "documentation_note": "The README documents new Mp3Info($filename) and the codecVersion, layerVersion, audioSize, duration, bitRate, sampleRate, isVbr and channel properties; _framesCount is a public property documented only in the class source ('Number of audio frames in file').",
+    "source": "https://api.github.com/repos/wapmorgan/Mp3Info/zipball/e532c2e1997874f9c672c7810ce90ef15004ef94",
+    "release_evidence": "Packagist p2 metadata lists 0.1.1 (2025-04-01, reference e532c2e1997874f9c672c7810ce90ef15004ef94) as the newest tagged release; checked 2026-11-17.",
+    "scope": "First two MPEG audio frame headers of an untagged MPEG-1 Layer III CBR stream (version, layer, sample rate, channel mode, bitrate) with a frame-count estimate from audio bytes and computed frame length; duration is (frames - 1) x 1152 / sample rate",
+    "family": "Mp3Info native PHP MPEG frame-header reader (src/Mp3Info.php)",
+    "family_note": "Independent of getID3: the pinned package is one class (src/Mp3Info.php) with its own bitrate and sample-rate tables, no getID3 code or dependency, and a different frame-length and duration method. The same package is counted for ID3v2 scope in mp3_id3v2/php; wapmorgan/media-file wraps it.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "mpeg_version": 1,
+      "layer": 3,
+      "sample_rate": 44100,
+      "channel": "mono",
+      "bitrate": 64000,
+      "is_vbr": false,
+      "audio_size": 2298,
+      "frames": 11,
+      "duration": 0.26122
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "mpeg_version": 2,
+      "layer": 2,
+      "sample_rate": 24000,
+      "channel": "mono",
+      "bitrate": 96000,
+      "is_vbr": false,
+      "audio_size": 1254,
+      "frames": 3,
+      "duration": 0.096
+    },
+    "independent_oracle": "controls/mp3/check_controls.py walk()",
+    "oracle_comparison": {
+      "controls/mp3/tone-44k-mono.mp3": {
+        "oracle": {
+          "mpeg_version": 1,
+          "layer": 3,
+          "sample_rate": 44100,
+          "channels": 1,
+          "bitrate": 64000,
+          "frames": 11,
+          "frame_bytes": 2298,
+          "samples_per_frame": 1152,
+          "samples": 12672,
+          "duration": 0.28735
+        },
+        "header_fields_match": true,
+        "frames_match": true,
+        "audio_bytes_match": true,
+        "duration_note": "Mp3Info reports (11 - 1) x 1152 / 44100 = 0.26122 s; the oracle's 11 x 1152 samples are 0.28735 s. The one-frame difference is Mp3Info's documented formula, not a parsing error."
+      },
+      "controls/mp3/tone-22k-stereo.mp3": {
+        "oracle": {
+          "mpeg_version": 2,
+          "layer": 3,
+          "sample_rate": 22050,
+          "channels": 2,
+          "bitrate": 32000,
+          "frames": 12,
+          "frame_bytes": 1254,
+          "samples_per_frame": 576,
+          "samples": 6912,
+          "duration": 0.31347
+        },
+        "header_fields_match": false,
+        "frames_match": false,
+        "audio_bytes_match": true,
+        "mismatch": "The first header is read correctly, but the next jump uses floor(144 x 32000 / 22050) = 208 bytes (MPEG-1 coefficient; the MPEG-2 frame is 104 or 105 bytes). The sync scan then steps two bytes at a time from 208, misses the real frame at 209, and accepts the bytes ffeda7ff at offset 236 inside audio data. The last-read false header becomes the result: MPEG-2 Layer II, 24 kHz mono, 96 kbit/s, 3 frames, 0.096 s."
+      }
+    },
+    "project": "projects/mp3/php/wapmorgan_mp3info",
+    "metric": {
+      "name": "Packagist total downloads",
+      "value": 1512916,
+      "source": "data/php/mp3/registry-snapshot.json"
+    }
   }
 ]

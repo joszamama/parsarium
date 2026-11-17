@@ -12,10 +12,10 @@
     },
     {
       "name": "wapmorgan/mp3info",
-      "status": "unresolved",
+      "status": "selected",
       "packagist_downloads": 1512916,
       "description": "The fastest php library to extract mp3 tags & meta information.",
-      "reason": "Mp3Info is an independent native PHP reader that parses MPEG frame headers for bitrate, sample rate and duration; it is verified for ID3v2 scope in mp3_id3v2/php but its plain-frame path has not been run on the untagged controls, given coverage, or an AFL++ overlay in this pilot.",
+      "reason": "Selected and verified for MPEG-1 Layer III CBR: mp3info 0.1.1 src/Mp3Info.php reads the 44.1 kHz mono control's frame headers and matches the header-walk oracle (11 frames, 64 kbit/s); it misreads the MPEG-2 22.05 kHz stereo control as Layer II 24 kHz mono. Independent of getID3; see data/php/mp3/parsers.json.",
       "source": "https://packagist.org/packages/wapmorgan/mp3info"
     },
     {
@@ -31,7 +31,7 @@
       "status": "unresolved_shared_family",
       "packagist_downloads": 248980,
       "description": "A unified reader of metadata from audio & video files",
-      "reason": "Unified media reader that uses wapmorgan/mp3info for MP3; would be the Mp3Info family. Not run.",
+      "reason": "Unified media reader that uses wapmorgan/mp3info for MP3, so it would be the selected Mp3Info family. Not run.",
       "source": "https://packagist.org/packages/wapmorgan/media-file"
     },
     {

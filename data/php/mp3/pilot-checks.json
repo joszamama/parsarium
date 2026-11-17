@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "cell": "mp3/php",
-  "checked_at_utc": "2026-11-17T03:43:21.390763+00:00",
+  "checked_at_utc": "2026-11-17T10:52:52.890152+00:00",
   "checks": [
     {
       "command": "python3 controls/mp3/check_controls.py",
@@ -65,6 +65,57 @@
       "pass": true,
       "search_hits_recorded": 100,
       "unique_search_hits": 79
+    },
+    {
+      "command": "python3 scripts/run_project.py mp3 php wapmorgan_mp3info",
+      "pass": true,
+      "image_id": "sha256:b043c517bc74f44559f21e4996a2776a01c5ac469274fb0e603c233938f9078b",
+      "output": {
+        "mpeg_version": 1,
+        "layer": 3,
+        "sample_rate": 44100,
+        "channel": "mono",
+        "bitrate": 64000,
+        "is_vbr": false,
+        "audio_size": 2298,
+        "frames": 11,
+        "duration": 0.26122
+      },
+      "parser_source_lines_covered": 82,
+      "src_mp3info_php_lines_covered": 78,
+      "receipt_sha256": "7cddd1ea070945206d7b133c7fad2936d9fc816f865068e07efa01c080d48f8a"
+    },
+    {
+      "command": "cd scripts && python3 build_afl_bridge.py mp3 php wapmorgan_mp3info",
+      "pass": true,
+      "image_id": "sha256:8625a277da7b3c472be6e3f8468bdc1a90fa6527ed9d5b417f057e51732cd891",
+      "parser_source_features": 82,
+      "feedback_edges": 102,
+      "receipt_sha256": "f0490e5417a828ad8feaa94419e4b92e3b71b958738f1678bc9683c7016fc739"
+    },
+    {
+      "command": "cd scripts && python3 verify_php_mp3_feedback.py wapmorgan_mp3info",
+      "pass": true,
+      "repeats_per_control": 3,
+      "first_afl_tuples": 102,
+      "second_afl_tuples": 105,
+      "afl_tuple_difference": 3,
+      "parser_feature_difference": 3,
+      "primary_control_matches_oracle": true,
+      "differential_control_matches_oracle": false,
+      "report_sha256": "cac6b3a87965a1b742e1cb9b26b67db04c9289792af3f7292b8c2e0cd5b7d9d9"
+    },
+    {
+      "command": "python3 parsarium.py run mp3 php wapmorgan_mp3info controls/mp3/tone-44k-mono.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py run mp3 php wapmorgan_mp3info controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
     }
   ],
   "not_regenerated": "Shared generated matrices, catalog pages, READMEs and website data are left for the integrator."
