@@ -20,10 +20,10 @@ recorded after the adoption ranking; their slots remain empty. The affected
 cells select 9 JavaScript ASCII PLY paths, 8 Python ASCII PLY paths, and 8
 Python SVG paths. The original valid-control evidence remains in `preten/`.
 
-The report also records 229 excluded paths whose primary metric was missing,
+The report also records 217 excluded paths whose primary metric was missing,
 zero, or whose parser family duplicated a stronger selected path. Of these,
 20 have a secondary number below the selection threshold, 28 have a
-qualifying secondary number but no space under the ten-path ceiling, and 180
+qualifying secondary number but no space under the ten-path ceiling, and 168
 have no secondary number recorded. These are **unresolved adoption signals**,
 not claims that nobody uses the package. The remaining case is a byte-identical
 PHP PLY parser family duplicate with a lower upstream star count.
@@ -48,3 +48,15 @@ Run `python3 scripts/plan_curated_catalog.py --write` to regenerate the plan
 with the feedback exclusions, then `python3 scripts/audit_curated_metrics.py`
 to regenerate and validate the exception report. The protocol is in
 [PROTOCOL.md](../../PROTOCOL.md).
+
+## MP3 merge
+
+The former "MP3 with ID3v2" format and the plain-MP3 pilot are one MP3 format.
+Its plan cells rank the union of the paths that either former cell had
+selected; the pre-merge ID3v2 candidates and their exclusions remain in
+`preten/<ecosystem>/mp3_id3v2_precuration/`, and the plain-MP3 pilot evidence
+in `data/<ecosystem>/mp3/plain-mp3-pilot/`. C, Go, JavaScript and Python were
+re-ranked from one fresh capture
+(`scripts/snapshot_mp3_merge_metrics.py`). The [merge record](mp3-merge.json)
+lists every kept path, the 6 paths removed below the top ten, and the 25
+duplicate package paths removed in favour of the ID3v2-control project.

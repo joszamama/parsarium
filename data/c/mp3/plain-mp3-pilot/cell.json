@@ -37,14 +37,14 @@
   "ranking_metric": "Homebrew install-on-request count (365 days)",
   "selection": "mpg123 has the highest Homebrew install-on-request count (12,256) among hits whose own C library decodes MPEG Layer III frames from a documented byte API. lame (6,992) ranks next but its HIP decoder is built over libmpg123. mad (libmad 0.16.5, 1,145) is the next independent decoder family and is verified through mad_stream_buffer/mad_frame_decode/mad_synth_frame.",
   "uncertainty": "Two verified paths from two independent decoder families; no lower-ranked filler entries. Search is a substring match over all Homebrew formula names and descriptions for seven queries, captured 2026-11-17; it misses header-only decoders that are not packaged there. minimp3 and dr_mp3 have no value on the primary metric, so their GitHub stars are recorded as supplemental only and are not compared with Homebrew counts. libmad needs MAD_BUFFER_GUARD (8) zero bytes appended after the input; the harness adds exactly that and counts every recoverable error except the one LOSTSYNC at the guard. Homebrew installs measure macOS/Linux package demand for whole distributions (the mpg123 player and library; the mad formula library), not direct use of the decoding API. libmpg123 is the same engine counted under mp3_id3v2/c, and libmad is the decoder behind the SoX path there. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support.",
-  "third_party_evidence": "data/c/mp3/parsers.json",
+  "third_party_evidence": "data/c/mp3/plain-mp3-pilot/parsers.json",
   "third_party_control_results": [
     "projects/mp3/c/mpg123/verification.json",
     "projects/mp3/c/libmad/verification.json"
   ],
-  "afl_feedback": "data/c/mp3/afl-feedback.json",
-  "runtime_evidence": "data/c/mp3/standard.json",
-  "registry_snapshot": "data/c/mp3/registry-snapshot.json",
-  "unresolved_leads": "data/c/mp3/leads.json",
+  "afl_feedback": "data/c/mp3/plain-mp3-pilot/afl-feedback.json",
+  "runtime_evidence": "data/c/mp3/plain-mp3-pilot/standard.json",
+  "registry_snapshot": "data/c/mp3/plain-mp3-pilot/registry-snapshot.json",
+  "unresolved_leads": "data/c/mp3/plain-mp3-pilot/leads.json",
   "protocol": "catalog/mp3/PROTOCOL.md"
 }

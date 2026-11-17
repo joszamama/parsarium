@@ -1,8 +1,8 @@
-# audioread — MP3 with ID3v2 / Python
+# audioread — MP3 / Python
 
 Pinned release: `3.1.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/python/audioread/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/python/audioread/README.md)
 
 ## Run from the repository root
 

@@ -1,8 +1,8 @@
-# ffmpeg — MP3 with ID3v2 / C
+# ffmpeg — MP3 / C
 
 Pinned release: `9.0.2`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/c/ffmpeg/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/c/ffmpeg/README.md)
 
 ## Run from the repository root
 

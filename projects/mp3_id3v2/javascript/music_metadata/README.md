@@ -1,8 +1,8 @@
-# music-metadata — MP3 with ID3v2 / JavaScript
+# music-metadata — MP3 / JavaScript
 
 Pinned release: `12.4.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/javascript/music-metadata/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/javascript/music-metadata/README.md)
 
 ## Run from the repository root
 

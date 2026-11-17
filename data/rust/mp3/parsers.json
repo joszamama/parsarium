@@ -1,107 +1,5 @@
 [
   {
-    "name": "id3",
-    "version": "1.17.3",
-    "license": "MIT",
-    "input_api": "Tag::read_from_path(path).title()/artist()/album()",
-    "documentation": "https://docs.rs/id3/1.17.3/id3/",
-    "scope": "ID3v2 title, artist, album",
-    "family": "id3 tag parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "artist": "Control",
-      "album": "Pilot"
-    }
-  },
-  {
-    "name": "lofty",
-    "version": "0.25.5",
-    "license": "MIT OR Apache-2.0",
-    "input_api": "read_from_path(path).primary_tag().title()/artist()/album()",
-    "documentation": "https://docs.rs/lofty/0.25.5/lofty/",
-    "scope": "ID3v2 title, artist, album",
-    "family": "Lofty MPEG/ID3 parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "title": "Parsarium",
-      "artist": "Control",
-      "album": "Pilot"
-    }
-  },
-  {
-    "name": "minimp3",
-    "version": "0.6.1",
-    "license": "MIT",
-    "input_api": "Decoder::new(File).next_frame()",
-    "documentation": "https://docs.rs/minimp3/0.6.1/minimp3/",
-    "scope": "Decoded first MPEG Layer III frame",
-    "family": "minimp3 C decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1,
-      "decoded_samples": 576
-    }
-  },
-  {
-    "name": "mp3-duration",
-    "version": "0.1.10",
-    "license": "MIT",
-    "input_api": "from_path(path)",
-    "documentation": "https://docs.rs/mp3-duration/0.1.10/mp3_duration/",
-    "scope": "MP3 frame-derived duration",
-    "family": "mp3-duration frame scanner",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "duration_ms": 1152
-    }
-  },
-  {
-    "name": "symphonia",
-    "version": "0.6.1",
-    "license": "MPL-2.0",
-    "input_api": "default::get_probe().probe(Hint, MediaSourceStream).next_packet()",
-    "documentation": "https://docs.rs/symphonia/0.6.1/symphonia/",
-    "scope": "MP3 track header and audio packet",
-    "family": "Symphonia MP3 demuxer",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1,
-      "packet_bytes": 288
-    }
-  },
-  {
-    "name": "symphonium",
-    "version": "0.13.0",
-    "license": "MIT OR Apache-2.0",
-    "input_api": "probe_from_file(path, None)",
-    "documentation": "https://docs.rs/symphonium/0.13.0/symphonium/",
-    "scope": "MP3 track header",
-    "family": "Symphonia MP3 demuxer",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "sample_rate": 8000,
-      "channels": 1
-    }
-  },
-  {
-    "name": "nanomp3",
-    "version": "0.2.0",
-    "license": "MIT OR Apache-2.0",
-    "input_api": "decode_all::<i16>(&[u8])",
-    "documentation": "https://docs.rs/nanomp3/0.2.0/nanomp3/",
-    "scope": "Decoded MP3 samples and layer",
-    "family": "nanomp3 decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
-    "expected_output": {
-      "layer": 3,
-      "sample_rate": 8000,
-      "samples": 8000
-    }
-  },
-  {
     "name": "symphonia-metadata",
     "version": "0.6.1",
     "license": "MPL-2.0",
@@ -118,7 +16,28 @@
         "TALB",
         "TSSE"
       ]
-    }
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/rust/symphonia_metadata",
+    "verified_result": "ID3v2-tagged control: ID3v2 frame keys"
+  },
+  {
+    "name": "symphonia",
+    "version": "0.6.1",
+    "license": "MPL-2.0",
+    "input_api": "default::get_probe().probe(Hint, MediaSourceStream).next_packet()",
+    "documentation": "https://docs.rs/symphonia/0.6.1/symphonia/",
+    "scope": "MP3 track header and audio packet",
+    "family": "Symphonia MP3 demuxer",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "packet_bytes": 288
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/rust/symphonia",
+    "verified_result": "ID3v2-tagged control: MP3 track header and audio packet"
   },
   {
     "name": "symphonia-bundle-mp3",
@@ -133,7 +52,80 @@
       "sample_rate": 8000,
       "channels": 1,
       "packet_bytes": 288
-    }
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/rust/symphonia_bundle_mp3",
+    "verified_result": "ID3v2-tagged control: MPEG Layer III track header and audio packet; adapter skips ID3v2 prefix before passing the stream"
+  },
+  {
+    "name": "id3",
+    "version": "1.17.3",
+    "license": "MIT",
+    "input_api": "Tag::read_from_path(path).title()/artist()/album()",
+    "documentation": "https://docs.rs/id3/1.17.3/id3/",
+    "scope": "ID3v2 title, artist, album",
+    "family": "id3 tag parser",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/rust/id3",
+    "verified_result": "ID3v2-tagged control: ID3v2 title, artist, album"
+  },
+  {
+    "name": "lofty",
+    "version": "0.25.5",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "read_from_path(path).primary_tag().title()/artist()/album()",
+    "documentation": "https://docs.rs/lofty/0.25.5/lofty/",
+    "scope": "ID3v2 title, artist, album",
+    "family": "Lofty MPEG/ID3 parser",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/rust/lofty",
+    "verified_result": "ID3v2-tagged control: ID3v2 title, artist, album"
+  },
+  {
+    "name": "minimp3",
+    "version": "0.6.1",
+    "license": "MIT",
+    "input_api": "Decoder::new(File).next_frame()",
+    "documentation": "https://docs.rs/minimp3/0.6.1/minimp3/",
+    "scope": "Decoded first MPEG Layer III frame",
+    "family": "minimp3 C decoder",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "decoded_samples": 576
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/rust/minimp3",
+    "verified_result": "ID3v2-tagged control: Decoded first MPEG Layer III frame"
+  },
+  {
+    "name": "mp3-duration",
+    "version": "0.1.10",
+    "license": "MIT",
+    "input_api": "from_path(path)",
+    "documentation": "https://docs.rs/mp3-duration/0.1.10/mp3_duration/",
+    "scope": "MP3 frame-derived duration",
+    "family": "mp3-duration frame scanner",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "duration_ms": 1152
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/rust/mp3_duration",
+    "verified_result": "ID3v2-tagged control: MP3 frame-derived duration"
   },
   {
     "name": "rusty_mp3",
@@ -148,6 +140,44 @@
       "sample_rate": 8000,
       "channels": 1,
       "decoded_samples": 576
-    }
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/rust/rusty_mp3",
+    "verified_result": "ID3v2-tagged control: Decoded first MPEG Layer III frame"
+  },
+  {
+    "name": "nanomp3",
+    "version": "0.2.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "decode_all::<i16>(&[u8])",
+    "documentation": "https://docs.rs/nanomp3/0.2.0/nanomp3/",
+    "scope": "Decoded MP3 samples and layer",
+    "family": "nanomp3 decoder",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "layer": 3,
+      "sample_rate": 8000,
+      "samples": 8000
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/rust/nanomp3",
+    "verified_result": "ID3v2-tagged control: Decoded MP3 samples and layer"
+  },
+  {
+    "name": "symphonium",
+    "version": "0.13.0",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "probe_from_file(path, None)",
+    "documentation": "https://docs.rs/symphonium/0.13.0/symphonium/",
+    "scope": "MP3 track header",
+    "family": "Symphonia MP3 demuxer",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/rust/symphonium",
+    "verified_result": "ID3v2-tagged control: MP3 track header"
   }
 ]

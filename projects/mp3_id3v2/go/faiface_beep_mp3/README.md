@@ -1,8 +1,8 @@
-# github.com/faiface/beep/mp3 — MP3 with ID3v2 / Go
+# github.com/faiface/beep/mp3 — MP3 / Go
 
 Pinned release: `v1.1.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/go/github-com-faiface-beep-mp3/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/go/github-com-faiface-beep-mp3/README.md)
 
 ## Run from the repository root
 

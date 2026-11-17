@@ -208,7 +208,7 @@
     "license": "BSD-3-Clause",
     "reason": "Own MPEG header reader with documented ReadFrameInfo(*os.File, int64) and FrameInfo.Size. Walking both untagged Go controls gives 11 frames/2,298 bytes at 44.1 kHz mono and 12 frames/1,254 bytes at 22.05 kHz stereo, matching check_controls.py. Excluded by the runnability gate only: both controls cover the same 14 derat/mpeg Go cover blocks (repeats identical; the Rust control pair also gives 0 difference), so the Go AFL++ bridge has no input-dependent parser feedback.",
     "source": "https://pkg.go.dev/github.com/derat/mpeg",
-    "evidence": "data/go/mp3/probes/derat_mpeg/README.md"
+    "evidence": "data/go/mp3/plain-mp3-pilot/probes/derat_mpeg/README.md"
   },
   {
     "name": "github.com/harik13/mediacommon/pkg/codecs/mpeg4audio",
@@ -272,7 +272,7 @@
     "license": "MIT",
     "reason": "Byte-identical fork of the selected tcolgate/mp3 release: 15 of its 16 files match exactly, silence.go differs only in an internal import path, and the fork adds a go.mod. The parser code and API are the same, so it is a shared-family duplicate with 2 Imported by and is not counted separately.",
     "source": "https://pkg.go.dev/github.com/fgergo/mp3",
-    "evidence": "data/go/mp3/probes/fgergo_mp3/README.md"
+    "evidence": "data/go/mp3/plain-mp3-pilot/probes/fgergo_mp3/README.md"
   },
   {
     "name": "github.com/frolovo22/tag",

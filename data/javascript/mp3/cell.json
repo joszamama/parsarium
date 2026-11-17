@@ -1,6 +1,6 @@
 {
   "ecosystem": "javascript",
-  "format": "mp3_id3v2",
+  "format": "mp3",
   "status": "curated_ten_search_bounded",
   "working_target": 10,
   "ceiling": 10,
@@ -17,12 +17,18 @@
   "search_hits_recorded": 495,
   "unique_search_hits": 447,
   "unresolved_documentation_leads": 10,
-  "uncertainty": "10 of 24 control-verified paths retain a positive numeric adoption signal under the ten-path selection policy. Search remains bounded by the recorded queries, limits and unresolved leads. The pre-curation evidence and package-level inclusion/exclusion reasons are in data/curation/preten/javascript/mp3_id3v2/ and data/curation/plan.json. One valid control does not establish complete format support or independent parser families.",
-  "third_party_evidence": "data/javascript/mp3_id3v2/parsers.json",
-  "third_party_control_results": "data/javascript/mp3_id3v2/verification.json",
-  "runtime_evidence": "data/javascript/mp3_id3v2/standard.json",
-  "registry_snapshot": "data/javascript/mp3_id3v2/registry-snapshot.json",
-  "unresolved_leads": "data/javascript/mp3_id3v2/leads.json",
+  "uncertainty": "10 MP3 paths: the ten most-adopted of the paths selected in the former MP3 with ID3v2 and plain MP3 cells, ranked by one within-ecosystem metric. 8 are verified on the ID3v2-tagged control and 2 on the untagged MPEG frame controls; each parser record states its control and verified result. Tag readers and frame decoders are not separated in the ranking. Search remains bounded by the recorded queries and limits of both former cells. Removed paths and duplicates are listed in data/curation/mp3-merge.json; plain-MP3 pilot evidence is kept in plain-mp3-pilot/. One valid control per path does not establish complete MP3 or ID3v2 support or independent parser families.",
+  "third_party_evidence": "data/javascript/mp3/parsers.json",
+  "third_party_control_results": "data/javascript/mp3/verification.json",
+  "runtime_evidence": "data/javascript/mp3/standard.json",
+  "registry_snapshot": "data/javascript/mp3/registry-snapshot.json",
+  "unresolved_leads": "data/javascript/mp3/leads.json",
   "curation_plan": "data/curation/plan.json",
-  "precuration_evidence": "data/curation/preten/javascript/mp3_id3v2"
+  "precuration_evidence": "data/curation/preten/javascript/mp3",
+  "merged_from": [
+    "mp3_id3v2",
+    "mp3"
+  ],
+  "merge_record": "data/curation/mp3-merge.json",
+  "plain_mp3_pilot_history": "data/javascript/mp3/plain-mp3-pilot"
 }

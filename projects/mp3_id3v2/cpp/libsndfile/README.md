@@ -1,8 +1,8 @@
-# libsndfile — MP3 with ID3v2 / C++
+# libsndfile — MP3 / C++
 
 Pinned release: `1.2.2`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/cpp/libsndfile/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/cpp/libsndfile/README.md)
 
 ## Run from the repository root
 

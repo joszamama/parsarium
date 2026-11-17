@@ -1,0 +1,240 @@
+[
+  {
+    "name": "mutagen",
+    "version": "1.48.1",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://pypi.org/pypi/mutagen/1.48.1/json",
+    "input_api": "mutagen.mp3.MP3(local path)",
+    "documentation": "https://mutagen.readthedocs.io/en/latest/api/wave.html",
+    "scope": "ID3v2 title, artist, album",
+    "family": "Mutagen MP3/ID3 parser",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/python/mutagen",
+    "verified_result": "ID3v2-tagged control: ID3v2 title, artist, album"
+  },
+  {
+    "name": "tinytag",
+    "version": "2.3.2",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/tinytag/2.3.2/json",
+    "input_api": "tinytag.TinyTag.get(local path)",
+    "documentation": "https://pypi.org/project/tinytag/2.3.2/",
+    "scope": "ID3v2 title, artist, album",
+    "family": "TinyTag MP3/ID3 parser",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot"
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/python/tinytag",
+    "verified_result": "ID3v2-tagged control: ID3v2 title, artist, album"
+  },
+  {
+    "name": "pydub",
+    "version": "0.25.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pydub/0.25.1/json",
+    "input_api": "pydub.AudioSegment.from_mp3(local path)",
+    "documentation": "https://github.com/jiaaro/pydub",
+    "scope": "decoded duration and audio properties",
+    "family": "pydub via FFmpeg",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "duration_ms": 1000
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/python/pydub",
+    "verified_result": "ID3v2-tagged control: decoded duration and audio properties"
+  },
+  {
+    "name": "soundfile",
+    "version": "0.14.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/soundfile/0.14.0/json",
+    "input_api": "soundfile.info(local path)",
+    "documentation": "https://python-soundfile.readthedocs.io/en/latest/",
+    "scope": "MP3 header, frame count",
+    "family": "libsndfile MP3 decoder",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 8000,
+      "format": "MP3"
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/python/soundfile",
+    "verified_result": "ID3v2-tagged control: MP3 header, frame count"
+  },
+  {
+    "name": "audioread",
+    "version": "3.1.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/audioread/3.1.0/json",
+    "input_api": "audioread.audio_open(local path)",
+    "documentation": "https://github.com/beetbox/audioread",
+    "scope": "MP3 duration and audio properties",
+    "family": "audioread via FFmpeg",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "duration_seconds": 1.0
+    },
+    "platform_note": "The pinned Linux FFmpeg backend decodes 8000 PCM samples (1.0 s); the earlier macOS backend reported 1.152 s for this control.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/python/audioread",
+    "verified_result": "ID3v2-tagged control: MP3 duration and audio properties"
+  },
+  {
+    "name": "librosa",
+    "version": "1.0.0",
+    "license": "ISC",
+    "license_evidence": "https://pypi.org/pypi/librosa/1.0.0/json",
+    "input_api": "librosa.load(local path, sr=None)",
+    "documentation": "https://librosa.org/doc/main/api/generated/librosa.load.html",
+    "scope": "decoded PCM sample count",
+    "family": "librosa via soundfile/libsndfile",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "samples": 8000
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/python/librosa",
+    "verified_result": "ID3v2-tagged control: decoded PCM sample count"
+  },
+  {
+    "name": "pygame",
+    "version": "2.6.1",
+    "license": "LGPL",
+    "license_evidence": "https://pypi.org/pypi/pygame/2.6.1/json",
+    "input_api": "pygame.mixer.Sound(local path)",
+    "documentation": "https://www.pygame.org/docs/ref/mixer.html#pygame.mixer.Sound",
+    "scope": "decoded audio duration",
+    "family": "SDL_mixer MP3 decoder",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "duration_ms": 1000
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/python/pygame",
+    "verified_result": "ID3v2-tagged control: decoded audio duration"
+  },
+  {
+    "name": "av",
+    "version": "19.0.2",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/av/19.0.2/json",
+    "input_api": "av.open(local path)",
+    "documentation": "https://pyav.org/docs/stable/api/container.html",
+    "scope": "ID3v2 tags and MP3 audio stream",
+    "family": "FFmpeg libavformat via PyAV",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "sample_rate": 8000
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/python/av",
+    "verified_result": "ID3v2-tagged control: ID3v2 tags and MP3 audio stream"
+  },
+  {
+    "name": "ffmpeg-python",
+    "version": "0.2.0",
+    "license": "Apache-2.0",
+    "license_evidence": "https://github.com/kkroening/ffmpeg-python/blob/master/LICENSE",
+    "input_api": "ffmpeg.probe(local path)",
+    "documentation": "https://github.com/kkroening/ffmpeg-python",
+    "scope": "ID3v2 tags and MPEG codec",
+    "family": "ffmpeg-python via external FFprobe",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "album": "Pilot",
+      "codec": "mp3"
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/python/ffmpeg_python",
+    "verified_result": "ID3v2-tagged control: ID3v2 tags and MPEG codec"
+  },
+  {
+    "name": "moviepy",
+    "version": "2.2.1",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/moviepy/2.2.1/json",
+    "input_api": "moviepy.AudioFileClip(local path)",
+    "documentation": "https://github.com/Zulko/moviepy/blob/master/moviepy/audio/io/AudioFileClip.py",
+    "scope": "decoded audio and duration",
+    "family": "MoviePy via bundled FFmpeg",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "duration_seconds": 1.0,
+      "decoded_audio": true
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/python/moviepy",
+    "verified_result": "ID3v2-tagged control: decoded audio and duration"
+  },
+  {
+    "name": "hachoir",
+    "version": "3.4.0",
+    "license": "GPL-2.0-only",
+    "license_evidence": "https://pypi.org/pypi/hachoir/3.4.0/json",
+    "input_api": "hachoir.parser.audio.mpeg_audio.MpegAudioFile(hachoir.stream.FileInputStream(io.BytesIO(local bytes)), validate=True)['frames'] -> frame[] field sets",
+    "documentation": "https://github.com/vstinner/hachoir/blob/3.4.0/doc/developer.rst",
+    "source": "https://files.pythonhosted.org/packages/24/3c/a1ea410b41cf69e1a2b42cb28fca44f53f567490ba398bb832315ce39d83/hachoir-3.4.0-py3-none-any.whl",
+    "source_lock": "projects/mp3/python/hachoir/source-lock.json",
+    "scope": "Untagged MPEG Layer III streams walked frame by frame by hachoir's own mpeg_audio parser: every frame[] field set decodes the 32-bit header (version, layer, bit-rate index, sampling-rate index, padding, channel mode, emphasis) and its length; the harness requires the frames to cover the whole input with one header tuple. Reports version, layer, sample rate, bitrate, channel mode, channels and frame count. No audio or side-information decoding.",
+    "family": "hachoir mpeg_audio parser",
+    "family_note": "Independent pure-Python code in hachoir/parser/audio/mpeg_audio.py on hachoir's own field/stream framework; it does not use Mutagen or TinyTag. Its ID3v1/ID3v2 parsers live in hachoir/parser/audio/id3.py; this entry requires zero id3.py lines. The parser class is chosen explicitly: hachoir's own guessParser dispatch, MIME tags and the disabled magic table are not exercised or credited.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "version": "1",
+      "layer": "III",
+      "sample_rate": 44100,
+      "bitrate": 64000,
+      "channel_mode": "Single channel",
+      "channels": 1,
+      "frames": 11,
+      "frame_bytes": 2298
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "version": "2",
+      "layer": "III",
+      "sample_rate": 22050,
+      "bitrate": 32000,
+      "channel_mode": "Joint stereo",
+      "channels": 2,
+      "frames": 12,
+      "frame_bytes": 1254
+    },
+    "independent_expectation": "controls/mp3/check_controls.py header walk (11 frames, MPEG-1, 44.1 kHz mono, 64 kbit/s; 12 frames, MPEG-2, 22.05 kHz stereo, 32 kbit/s; frame lengths sum to the file size) plus channel-mode bits read from byte 3 of every header by scripts/verify_python_mp3_hachoir_feedback.py.",
+    "project": "projects/mp3/python/hachoir",
+    "afl_feedback": "data/python/mp3/hachoir-valid-feedback.json",
+    "metric": {
+      "name": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 222718,
+      "source": "data/python/mp3/registry-snapshot.json",
+      "observed_at_utc": "2026-11-17T03:40:50Z",
+      "rechecked_at_utc": "2026-11-17T10:59:10Z",
+      "recheck_source": "https://pypistats.org/api/packages/hachoir/recent?period=month"
+    },
+    "control_kind": "untagged_frames",
+    "verified_result": "Untagged MPEG frame controls: Untagged MPEG Layer III streams walked frame by frame by hachoir's own mpeg_audio parser: every frame[] field set decodes the 32-bit header (version, layer, bit-rate index, sampling-rate index, padding, channel mode, emphasis) and its length; the harness requires the frames to cover the whole input with one header tuple. Reports version, layer, sample rate, bitrate, channel mode, channels and frame count. No audio or side-information decoding."
+  }
+]

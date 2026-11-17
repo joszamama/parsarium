@@ -1,8 +1,8 @@
-# sox — MP3 with ID3v2 / C++
+# sox — MP3 / C++
 
 Pinned release: `14.4.2`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/cpp/sox/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/cpp/sox/README.md)
 
 ## Run from the repository root
 

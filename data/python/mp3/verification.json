@@ -10,41 +10,16 @@
   "control_meaning": "valid one-second 8 kHz mono MP3 with ID3v2.3 title Parsarium, artist Control, album Pilot",
   "third_party": [
     {
-      "package": "mutagen",
-      "version": "1.48.1",
-      "scope": "ID3v2 title, artist, album",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py mutagen /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "package": "av",
+      "version": "19.0.2",
+      "scope": "ID3v2 tags and MP3 audio stream",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py av /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
       "pass": true,
       "output": {
         "album": "Pilot",
         "artist": "Control",
+        "sample_rate": 8000,
         "title": "Parsarium"
-      },
-      "error": null
-    },
-    {
-      "package": "tinytag",
-      "version": "2.3.2",
-      "scope": "ID3v2 title, artist, album",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py tinytag /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
-      "pass": true,
-      "output": {
-        "album": "Pilot",
-        "artist": "Control",
-        "title": "Parsarium"
-      },
-      "error": null
-    },
-    {
-      "package": "pydub",
-      "version": "0.25.1",
-      "scope": "decoded duration and audio properties",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py pydub /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
-      "pass": true,
-      "output": {
-        "channels": 1,
-        "duration_ms": 1000,
-        "sample_rate": 8000
       },
       "error": null
     },
@@ -63,14 +38,14 @@
       "error": null
     },
     {
-      "package": "audioread",
-      "version": "3.1.0",
-      "scope": "MP3 duration and audio properties",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py audioread /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "package": "pydub",
+      "version": "0.25.1",
+      "scope": "decoded duration and audio properties",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py pydub /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
       "pass": true,
       "output": {
         "channels": 1,
-        "duration_seconds": 1.152,
+        "duration_ms": 1000,
         "sample_rate": 8000
       },
       "error": null
@@ -84,31 +59,6 @@
       "output": {
         "sample_rate": 8000,
         "samples": 8000
-      },
-      "error": null
-    },
-    {
-      "package": "pygame",
-      "version": "2.6.1",
-      "scope": "decoded audio duration",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py pygame /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
-      "pass": true,
-      "output": {
-        "duration_ms": 1000
-      },
-      "error": null
-    },
-    {
-      "package": "av",
-      "version": "19.0.2",
-      "scope": "ID3v2 tags and MP3 audio stream",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py av /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
-      "pass": true,
-      "output": {
-        "album": "Pilot",
-        "artist": "Control",
-        "sample_rate": 8000,
-        "title": "Parsarium"
       },
       "error": null
     },
@@ -127,6 +77,32 @@
       "error": null
     },
     {
+      "package": "mutagen",
+      "version": "1.48.1",
+      "scope": "ID3v2 title, artist, album",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py mutagen /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "album": "Pilot",
+        "artist": "Control",
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "audioread",
+      "version": "3.1.0",
+      "scope": "MP3 duration and audio properties",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py audioread /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "duration_seconds": 1.152,
+        "sample_rate": 8000
+      },
+      "error": null
+    },
+    {
       "package": "moviepy",
       "version": "2.2.1",
       "scope": "decoded audio and duration",
@@ -135,6 +111,30 @@
       "output": {
         "decoded_audio": true,
         "duration_seconds": 1.0
+      },
+      "error": null
+    },
+    {
+      "package": "tinytag",
+      "version": "2.3.2",
+      "scope": "ID3v2 title, artist, album",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py tinytag /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "album": "Pilot",
+        "artist": "Control",
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "pygame",
+      "version": "2.6.1",
+      "scope": "decoded audio duration",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/.venv/bin/python /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/python/mp3_id3v2/main.py pygame /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "duration_ms": 1000
       },
       "error": null
     }

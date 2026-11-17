@@ -1,8 +1,8 @@
-# jaudiotagger — MP3 with ID3v2 / Java
+# jaudiotagger — MP3 / Java
 
 Pinned release: `3.0.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/java/jaudiotagger/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/java/jaudiotagger/README.md)
 
 ## Run from the repository root
 

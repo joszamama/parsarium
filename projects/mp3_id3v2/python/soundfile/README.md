@@ -1,8 +1,8 @@
-# soundfile — MP3 with ID3v2 / Python
+# soundfile — MP3 / Python
 
 Pinned release: `0.14.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/python/soundfile/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/python/soundfile/README.md)
 
 ## Run from the repository root
 

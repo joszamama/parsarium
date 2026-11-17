@@ -1,8 +1,8 @@
-# mp3-duration — MP3 with ID3v2 / Rust
+# mp3-duration — MP3 / Rust
 
 Pinned release: `0.1.10`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/rust/mp3-duration/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/rust/mp3-duration/README.md)
 
 ## Run from the repository root
 

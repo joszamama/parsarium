@@ -1,6 +1,6 @@
-# RUST × MP3 with ID3v2: selected parsers
+# RUST × MP3: selected parsers
 
-10 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
+10 control-verified third-party paths selected from 10 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 

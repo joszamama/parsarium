@@ -23,7 +23,7 @@
     "metric": {
       "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
       "value": 26071768,
-      "source": "data/javascript/mp3/registry-snapshot.json"
+      "source": "data/javascript/mp3/plain-mp3-pilot/registry-snapshot.json"
     },
     "project": "projects/mp3/javascript/mediabunny"
   },
@@ -123,13 +123,13 @@
     "metric": {
       "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
       "value": 9827896,
-      "source": "data/javascript/mp3/registry-snapshot.json"
+      "source": "data/javascript/mp3/plain-mp3-pilot/registry-snapshot.json"
     },
     "project": "projects/mp3/javascript/music_metadata",
     "coverage_note": "V8 on the 44.1 kHz control: 3,539 executed lines across 89 lib/ files, which is mostly module evaluation of the ~30 format parsers the package imports plus its ID3v1/ID3v2 probes; 455 of those lines are in lib/mpeg/ and 245 in lib/mpeg/MpegParser.js (format_specific_source_lines_covered). Dependency tokenizers (strtok3, token-types) are not counted.",
     "feedback_note": "AFL++ bridge scoped to lib/mpeg/: 54 parser source ranges / 74 tuples on the 44.1 kHz control (40 ranges in MpegParser.js, 6 MpegFrameHeader.js, 3 AdtsFrameHeader.js, 2 MpegLoader.js, 1 each ExtendedLameHeader.js, ReplayGainDataFormat.js, XingTag.js; several are module-evaluation ranges), identical over 3 runs; the 22.05 kHz stereo control gives 58 / 78, identical over 3 runs. It adds 4 ranges, none removed, all in sync()'s end-of-stream tail policy: MpegParser.js line 128 (`&& this.audioFrameHeader !== undefined`, `&& (!fullMpegScan || id3v1Tail)`) and lines 142-144 (`!AdtsFrameHeader.matches(...)`, `(!fullMpegScan || id3v1Tail)`). Those run only when 163 bytes or fewer remain in the lookahead, which the 104/105-byte stereo frames reach and the 208/209-byte mono frames do not. MPEG version, sample rate and channel mode are table lookups and ternaries in MpegFrameHeader.js that do not produce separate V8 block ranges on these controls, so the differential tracks frame length, not version or channel branches.",
     "frame_walk_evidence": "DEBUG=music-metadata:parser:mpeg replay logs one 'offset=… MP3 bitrate=… sample-rate=…' line per frame (11 on the 44.1 kHz control, 12 on the 22.05 kHz control) and then 'Calculate duration at EOF', so number_of_samples is frame count × samples per frame from the full walk, not the CBR file-size estimate.",
-    "feedback_differential": "data/javascript/mp3/music_metadata-feedback-differential.json"
+    "feedback_differential": "data/javascript/mp3/plain-mp3-pilot/music_metadata-feedback-differential.json"
   },
   {
     "name": "codec-parser",
@@ -159,11 +159,11 @@
     "metric": {
       "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
       "value": 2683215,
-      "source": "data/javascript/mp3/registry-snapshot.json"
+      "source": "data/javascript/mp3/plain-mp3-pilot/registry-snapshot.json"
     },
     "project": "projects/mp3/javascript/codec_parser",
     "feedback_note": "AFL++ bridge: 124 parser source ranges / 144 tuples on the 44.1 kHz control, identical on repeat; the 22.05 kHz control adds 1 range (1 tuple), the onCodecHeader block in src/codecs/HeaderCache.js setHeader. V8 reports that block separately only when its count differs from setHeader's, which happens when more than one distinct 4-byte header enters the cache after sync (the stereo control alternates padded and unpadded headers; the mono control's only unpadded header precedes sync). MPEG version, sample rate and channel mode are table lookups in MPEGHeader.js, so they do not produce separate V8 block ranges on these valid controls.",
-    "feedback_differential": "data/javascript/mp3/codec_parser-feedback-differential.json"
+    "feedback_differential": "data/javascript/mp3/plain-mp3-pilot/codec_parser-feedback-differential.json"
   },
   {
     "name": "mp3-duration",
@@ -185,7 +185,7 @@
     "metric": {
       "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
       "value": 43261,
-      "source": "data/javascript/mp3/registry-snapshot.json"
+      "source": "data/javascript/mp3/plain-mp3-pilot/registry-snapshot.json"
     },
     "project": "projects/mp3/javascript/mp3_duration",
     "verification_note": "Both untagged valid controls return 287 and 313 duration_ms, matching the independent frame-header walker (11 MPEG-1 frames of 1152 samples/44100 Hz and 12 MPEG-2 frames of 576 samples/22050 Hz, rounded to milliseconds). The package scans headers through index.js with cbrEstimate=false rather than estimating from file length; it exposes no frame metadata or audio decode. Docker V8 covers 156 own index.js lines. Opt-in AFL++ feedback uses only parseFrameHeader and frameSize range hit counts, capped at 255, giving 11 versus 12 calls with three stable repeats and zero parser features on module-load-only baseline. This tracks frame count and possibly input length; it is not new line or branch coverage. The same release is separately verified in mp3_id3v2/javascript for duration scope. Two short CBR controls do not establish VBR, free-format or other MPEG layer support; no malformed/resource-use/campaign tests were run."
@@ -219,10 +219,10 @@
     "metric": {
       "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
       "value": 40519,
-      "source": "data/javascript/mp3/registry-snapshot.json"
+      "source": "data/javascript/mp3/plain-mp3-pilot/registry-snapshot.json"
     },
     "project": "projects/mp3/javascript/mp3_parser",
     "feedback_note": "The parser-only AFL++ bridge scopes V8 ranges to lib/lib.js. Three repeats per valid control are identical: 32 source ranges and 52 AFL++ tuples on 44.1 kHz mono, 30 ranges and 50 tuples on 22.05 kHz stereo; two ranges and two tuples differ. The changed ranges map to line 44 octetToBinRep bit-4 branches on the pinned source. This is input-dependent header-bit feedback, not a claim of distinct branches for every MPEG field.",
-    "feedback_differential": "data/javascript/mp3/mp3_parser-feedback-differential.json"
+    "feedback_differential": "data/javascript/mp3/plain-mp3-pilot/mp3_parser-feedback-differential.json"
   }
 ]

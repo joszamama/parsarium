@@ -1,8 +1,8 @@
-# indiehd/audio-manipulator — MP3 with ID3v2 / PHP
+# indiehd/audio-manipulator — MP3 / PHP
 
 Pinned release: `v4.1.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/php/indiehd-audio-manipulator/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/php/indiehd-audio-manipulator/README.md)
 
 ## Run from the repository root
 

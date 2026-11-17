@@ -1,8 +1,8 @@
-# buggedcom/phpvideotoolkit — MP3 with ID3v2 / PHP
+# buggedcom/phpvideotoolkit — MP3 / PHP
 
 Pinned release: `2.2.5`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/php/buggedcom-phpvideotoolkit/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/php/buggedcom-phpvideotoolkit/README.md)
 
 ## Run from the repository root
 

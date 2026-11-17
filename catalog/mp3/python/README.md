@@ -1,0 +1,22 @@
+# MP3 / Python
+
+10 verified third-party API paths; 10 have verified Docker harnesses.
+
+[Ranking and search limits](../../../data/python/mp3/ranking.md) · [standard API inventory](../../../data/python/mp3/standard.json)
+
+## Third-party parsers
+
+- [av](av/README.md) — Docker harness ready
+- [soundfile](soundfile/README.md) — Docker harness ready
+- [pydub](pydub/README.md) — Docker harness ready
+- [librosa](librosa/README.md) — Docker harness ready
+- [ffmpeg-python](ffmpeg-python/README.md) — Docker harness ready
+- [mutagen](mutagen/README.md) — Docker harness ready
+- [audioread](audioread/README.md) — Docker harness ready
+- [moviepy](moviepy/README.md) — Docker harness ready
+- [tinytag](tinytag/README.md) — Docker harness ready
+- [pygame](pygame/README.md) — Docker harness ready
+
+## Standard and runtime APIs
+
+None documented in this inventory.

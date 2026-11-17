@@ -1,8 +1,8 @@
-# id3 — MP3 with ID3v2 / Rust
+# id3 — MP3 / Rust
 
 Pinned release: `1.17.3`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/rust/id3/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/rust/id3/README.md)
 
 ## Run from the repository root
 

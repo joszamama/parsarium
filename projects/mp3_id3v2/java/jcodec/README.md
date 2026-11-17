@@ -1,8 +1,8 @@
-# jcodec — MP3 with ID3v2 / Java
+# jcodec — MP3 / Java
 
 Pinned release: `0.2.5`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/java/jcodec/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/java/jcodec/README.md)
 
 ## Run from the repository root
 

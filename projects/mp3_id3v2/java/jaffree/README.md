@@ -1,8 +1,8 @@
-# jaffree — MP3 with ID3v2 / Java
+# jaffree — MP3 / Java
 
 Pinned release: `2024.08.29`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/java/jaffree/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/java/jaffree/README.md)
 
 ## Run from the repository root
 

@@ -1,8 +1,8 @@
-# mp3agic — MP3 with ID3v2 / Java
+# mp3agic — MP3 / Java
 
 Pinned release: `0.9.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/java/mp3agic/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/java/mp3agic/README.md)
 
 ## Run from the repository root
 

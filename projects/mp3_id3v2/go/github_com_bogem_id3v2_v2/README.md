@@ -1,8 +1,8 @@
-# github.com/bogem/id3v2/v2 — MP3 with ID3v2 / Go
+# github.com/bogem/id3v2/v2 — MP3 / Go
 
 Pinned release: `v2.1.4`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/go/github-com-bogem-id3v2-v2/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/go/github-com-bogem-id3v2-v2/README.md)
 
 ## Run from the repository root
 

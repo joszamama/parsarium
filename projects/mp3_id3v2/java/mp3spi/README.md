@@ -1,8 +1,8 @@
-# mp3spi — MP3 with ID3v2 / Java
+# mp3spi — MP3 / Java
 
 Pinned release: `1.9.5.4`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/java/mp3spi/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/java/mp3spi/README.md)
 
 ## Run from the repository root
 

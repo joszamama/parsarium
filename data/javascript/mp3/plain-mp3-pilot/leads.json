@@ -9,7 +9,7 @@
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mpg123-decoder",
     "reason": "Pinned 1.0.3 MPEGDecoder.decode(Uint8Array) directly decodes both untagged valid controls with exact sample rate and decoded samples per channel (44100/12672 and 22050/6912); the mono control produces two PCM arrays, so channel count is not claimed. It bundles a compressed 99,479-byte libmpg123 WASM binary (SHA-256 f0e9e884...), related to the selected C mpg123 family but a different build. The binary has no name, DWARF debug_info/debug_line or sourceMappingURL custom sections; Node V8 coverage sees JavaScript wrapper files and no WASM source scripts. No source-attributed parser coverage or stable parser-owned AFL feedback is established, so this path remains unselected despite its 2,505,430 npm 30-day downloads. A pinned-source Emscripten rebuild with coverage would produce a different binary whose equivalence to the shipped artifact is unverified. Only the two valid controls were run, with no malformed inputs or fuzz campaign.",
     "source": "https://github.com/eshaz/wasm-audio-decoders/tree/8f2428c1cd96b54dab74836c8471ff75fe35cbee/src/mpg123-decoder",
-    "control_evidence": "data/javascript/mp3/mpg123_decoder-feedback-blocked.json",
+    "control_evidence": "data/javascript/mp3/plain-mp3-pilot/mpg123_decoder-feedback-blocked.json",
     "reproduce": "python3 scripts/probe_javascript_mp3_mpg123_decoder.py"
   },
   {

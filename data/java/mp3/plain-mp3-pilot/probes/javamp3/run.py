@@ -91,7 +91,7 @@ def run() -> dict:
     return {"schema_version": 1, "candidate": "fr.delthas:javamp3",
             "release": RELEASE, "status": "excluded_valid_control_crash",
             "runtime_image": IMAGE, "platform": "linux/arm64",
-            "source": "data/java/mp3/probes/javamp3/Probe.java",
+            "source": "data/java/mp3/plain-mp3-pilot/probes/javamp3/Probe.java",
             "source_sha256": sha256((HERE / "Probe.java").read_bytes()).hexdigest(),
             "artifacts": {name: {"url": url, "sha256": digest}
                           for name, (url, digest) in ARTIFACTS.items()},

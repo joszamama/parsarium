@@ -1,8 +1,8 @@
-# kiwilan/php-audio — MP3 with ID3v2 / PHP
+# kiwilan/php-audio — MP3 / PHP
 
 Pinned release: `4.0.02`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/php/kiwilan-php-audio/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/php/kiwilan-php-audio/README.md)
 
 ## Run from the repository root
 

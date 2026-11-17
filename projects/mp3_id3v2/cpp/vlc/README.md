@@ -1,8 +1,8 @@
-# vlc — MP3 with ID3v2 / C++
+# vlc — MP3 / C++
 
 Pinned release: `3.0.24`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/cpp/vlc/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/cpp/vlc/README.md)
 
 ## Run from the repository root
 

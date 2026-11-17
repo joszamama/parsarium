@@ -301,7 +301,7 @@
       "standard_pending": 0
     },
     {
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "ecosystem": "c",
       "catalog_paths": 10,
       "containerized_verified": 10,
@@ -313,7 +313,7 @@
       "standard_pending": 0
     },
     {
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "ecosystem": "cpp",
       "catalog_paths": 10,
       "containerized_verified": 10,
@@ -325,7 +325,7 @@
       "standard_pending": 0
     },
     {
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "ecosystem": "go",
       "catalog_paths": 10,
       "containerized_verified": 10,
@@ -337,7 +337,7 @@
       "standard_pending": 0
     },
     {
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "ecosystem": "java",
       "catalog_paths": 10,
       "containerized_verified": 10,
@@ -349,7 +349,7 @@
       "standard_pending": 0
     },
     {
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "ecosystem": "javascript",
       "catalog_paths": 10,
       "containerized_verified": 10,
@@ -361,7 +361,7 @@
       "standard_pending": 0
     },
     {
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "ecosystem": "php",
       "catalog_paths": 10,
       "containerized_verified": 10,
@@ -373,7 +373,7 @@
       "standard_pending": 0
     },
     {
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "ecosystem": "python",
       "catalog_paths": 10,
       "containerized_verified": 10,
@@ -385,7 +385,7 @@
       "standard_pending": 0
     },
     {
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "ecosystem": "rust",
       "catalog_paths": 10,
       "containerized_verified": 10,
@@ -978,12 +978,11 @@
     "complete": false,
     "formats": [
       "json",
-      "xml",
-      "mp3"
+      "xml"
     ],
-    "cells_total": 24,
-    "catalog_paths": 168,
-    "containerized_verified": 168,
+    "cells_total": 16,
+    "catalog_paths": 137,
+    "containerized_verified": 137,
     "staged": 0,
     "standard_api_paths": 11,
     "standard_containerized_verified": 11,
@@ -1116,134 +1115,6 @@
         "status": "pilot_ten_paths_verified_search_bounded",
         "complete": false,
         "uncertainty": "Ten verified Rust JSON parser paths selected within the first 100 hits of six crates.io queries (600 hits, 476 unique), captured 2026-11-17. Ten documented leads remain unverified, so this is a bounded pilot rather than a complete top-ten ranking. ijson 0.1.7 was excluded after source inspection: it has an IValue type deserialized through serde_json::from_slice and no own local JSON parser API. Downloads are 90-day adoption proxies that include transitive pulls. Two small valid controls establish only observed RFC 8259 structure; duplicate keys, huge numbers, deep nesting and non-UTF-8 are untested."
-      },
-      {
-        "format": "mp3",
-        "ecosystem": "c",
-        "catalog_paths": 2,
-        "containerized_verified": 2,
-        "staged": 0,
-        "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
-        "standard_staged": 0,
-        "standard_pending": 0,
-        "phase": "pilot",
-        "status": "pilot_two_verified_bounded_search",
-        "complete": false,
-        "uncertainty": "Two verified paths from two independent decoder families; no lower-ranked filler entries. Search is a substring match over all Homebrew formula names and descriptions for seven queries, captured 2026-11-17; it misses header-only decoders that are not packaged there. minimp3 and dr_mp3 have no value on the primary metric, so their GitHub stars are recorded as supplemental only and are not compared with Homebrew counts. libmad needs MAD_BUFFER_GUARD (8) zero bytes appended after the input; the harness adds exactly that and counts every recoverable error except the one LOSTSYNC at the guard. Homebrew installs measure macOS/Linux package demand for whole distributions (the mpg123 player and library; the mad formula library), not direct use of the decoding API. libmpg123 is the same engine counted under mp3_id3v2/c, and libmad is the decoder behind the SoX path there. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support."
-      },
-      {
-        "format": "mp3",
-        "ecosystem": "cpp",
-        "catalog_paths": 1,
-        "containerized_verified": 1,
-        "staged": 0,
-        "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
-        "standard_staged": 0,
-        "standard_pending": 0,
-        "phase": "pilot",
-        "status": "pilot_one_verified_bounded_search",
-        "complete": false,
-        "uncertainty": "One verified path; no padding. Search is a substring match over all Homebrew formula names and descriptions for six queries, captured 2026-11-17; header-only C++ decoders and vcpkg/Conan packages were not searched. Homebrew installs measure demand for the whole TagLib distribution, mostly as a tag library, not use of its MPEG property API. TagLib parses frame headers and does not decode audio; for CBR streams without Xing/VBRI its duration comes from stream size and the first frame's bitrate. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support."
-      },
-      {
-        "format": "mp3",
-        "ecosystem": "go",
-        "catalog_paths": 7,
-        "containerized_verified": 7,
-        "staged": 0,
-        "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
-        "standard_staged": 0,
-        "standard_pending": 0,
-        "phase": "pilot",
-        "status": "pilot_seven_verified_bounded_search",
-        "complete": false,
-        "uncertainty": "Seven verified Go plain-MP3 paths; korandiz/mpa v1.0.0 is excluded by a pinned valid MPEG-2 control that yields zero frames and unexpected EOF, matching its MPEG-1-only header check; no padding. Five pkg.go.dev queries were bounded at 100 hits each (313 hits, 242 unique). Every hit with at least two Imported by packages is now a selected path or a recorded lead. Of the 13 one-importer hits, only sdobz/go-mpg123, a distinct decoder family, is recorded; the others were judged from path and synopsis only (go-mp3 or tcolgate forks by name, tag readers, a video converter, and HLS or livego copies). 39 leads are recorded: five remain unresolved (go-mp3 wrappers pipelined.dev/audio/mp3 and qiniu/audio/mp3, tcolgate wrapper sa6mwa/mp3duration, cgo minimp3 binding cowork-ai/go-minimp3 and cgo libmpg123 wrapper sdobz/go-mpg123, none harnessed), and three are unselected shared-family forks or wrappers. derat/mpeg and mattetti/audio/mp3 parse both valid controls correctly but are excluded by the feedback gate, because each control pair covers identical parser blocks. fgergo/mp3 is a byte-identical fork of tcolgate/mp3 (15 of 16 files identical) and is not counted. pkg.go.dev Imported by counts package adoption rather than MP3-specific use, and wrapper counts are not independent decoder adoption. The hajimehoshi/go-mp3 and tcolgate/mp3 families are also represented in the tagged MP3 cell; the plain-frame routes are separate format paths, not new cross-cell families. Two untagged constant-bitrate controls do not establish VBR, Xing/Info, free-format, other MPEG layers, or ID3 handling. minimp3 PCM hashes are pinned to the Clang-built linux/arm64 image, and Beep float64 sample hashes to their go-mp3 release on linux/arm64; neither is compared across toolchains or releases."
-      },
-      {
-        "format": "mp3",
-        "ecosystem": "java",
-        "catalog_paths": 5,
-        "containerized_verified": 5,
-        "staged": 0,
-        "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
-        "standard_staged": 0,
-        "standard_pending": 0,
-        "phase": "pilot",
-        "status": "pilot_five_selected_search_bounded",
-        "complete": false,
-        "uncertainty": "Five pure-Java Layer III paths verified; no padding. jaudiotagger is first-header-only and mp3agic reports only accurate header fields. Both higher-level APIs misidentify the valid 22.05 kHz control start at byte 104 and estimate 5 rather than 12 frames; mp3agic reports 261 ms versus oracle about 313 ms. These paths make no whole-file frame-count or duration claim. JavaMP3 1.0.1 decodes the mono control exactly but crashes on valid 22.05 kHz stereo input, so is excluded with a reproducible probe. Maven Central phrase queries returned no hits, so named leads were inspected via deps.dev and package documentation. deps.dev counts whole-package dependency use, not MP3-specific calls. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5 or ID3 behavior. Java SE 25 exports no MP3 reader by inventory."
-      },
-      {
-        "format": "mp3",
-        "ecosystem": "javascript",
-        "catalog_paths": 5,
-        "containerized_verified": 5,
-        "staged": 0,
-        "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
-        "standard_staged": 0,
-        "standard_pending": 0,
-        "phase": "pilot",
-        "status": "pilot_five_selected_search_bounded",
-        "complete": false,
-        "uncertainty": "Five verified paths; no padding. Search is six npm queries of 100 hits each, captured 2026-11-17; downloads were fetched for 15 hand-picked candidates, not every hit. mediabunny was found by `mp3 frame`, `mp3 duration` and `mp3 demuxer`, not the narrower queries. Download counts cover whole toolkits: mediabunny's muxing, conversion and many containers, and codec-parser's AAC, FLAC and Ogg parsers, not MP3 framing alone. The first three remain the highest-download fetched candidates; mp3-duration and mp3-parser have lower adoption. mp3-parser has 40,519 monthly downloads, below the duration-only leads, and is selected for its documented frame reader and exact whole-control walk. Its AFL++ differential is narrow: two source ranges in lib.js octetToBinRep bit extraction, not distinct version/channel branches. None decodes Layer III audio. The mpg123 WASM wrappers are recorded as shared-family leads. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, CRC-protected or ID3 support. No standard Node.js MP3 API exists. codec-parser's valid-control AFL++ differential is narrow: one header-cache range that tracks distinct frame headers, not version or channel branches. Its V8 line counts include module evaluation of imported AAC, FLAC, Opus, Vorbis and Ogg files that audio/mpeg parsing does not call. music-metadata reports MPEG version and layer only through its codec string ('MPEG 1 Layer 3'), not as separate fields, and needs duration: true for a full frame walk. Its valid-control AFL++ differential is 4 sync() tail-policy ranges that track frame length, not version or channel branches. Its V8 package line count (3,539) is mostly module evaluation; MpegParser.js alone is 245 lines. mp3-duration exposes only duration; its count-scoped AFL signal tracks 11 versus 12 frame calls and may reflect input length, not a new branch or line. The same release is also verified for tagged MP3 duration in the ID3v2 cell."
-      },
-      {
-        "format": "mp3",
-        "ecosystem": "php",
-        "catalog_paths": 2,
-        "containerized_verified": 2,
-        "staged": 0,
-        "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
-        "standard_staged": 0,
-        "standard_pending": 0,
-        "phase": "pilot",
-        "status": "pilot_two_verified_bounded_search",
-        "complete": false,
-        "uncertainty": "Two verified paths; no padding. Search is seven Packagist search.json queries capped at 50 hits each, captured 2026-11-17; package descriptions alone decided most exclusions. Packagist total downloads count Composer installs of the whole package (and wrappers pull getID3 or Mp3Info transitively), not use of the MPEG frame parser. getID3 reads the first frame header, checks sync on following frames, and derives CBR duration from audio-data bytes and the header bitrate. Mp3Info reads two headers, estimates frames from audio bytes and the computed frame length, and reports duration one frame short ((frames - 1) x 1152 / sample rate). On the MPEG-2 control it uses the MPEG-1 frame-length coefficient, misses the third frame and reads a false sync at byte 236, reporting Layer II 24 kHz mono 96 kbit/s; MPEG-2 is not covered for Mp3Info. Neither path decodes audio. PHP-MP3 (falahati/php-mp3) failed the controls: the v0.9.5-alpha2 tag does not return on PHP 8.5, and the dev-master snapshot reads the MPEG-2 control as 3 frames at 11,025 Hz (data/php/mp3/falahati-php-mp3-control-audit.md). No lead remains unresolved (data/php/mp3/lead-audit.md). debach/zend-mp3 1.8.1 walks MPEG frames itself in Zend_Media_Mpeg_Abs, but its parent class file does not compile on PHP 8 (removed $str{$i} offsets), so it returns nothing on PHP 8.5. fobilow/mp3file has no release tag or license and also fails to compile. The re-scan found a native MPEG-1 Layer III decoder in xiaosongshu/flv2mp4 v1.8.7: 12,672 samples at 44.1 kHz on the MPEG-1 control, no frames on the MPEG-2 control, and its documented API decodes in a child process. holine/mp3 copies PHP-MP3 and does not return on either control. wapmorgan/media-file, dgoriaev/mp3info and acekyd/laravelmp3 delegate to or copy Mp3Info or getID3; phpvideotoolkit, mediaprobe, mp3php and soundfile hand parsing to FFmpeg or libsndfile. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support."
-      },
-      {
-        "format": "mp3",
-        "ecosystem": "python",
-        "catalog_paths": 3,
-        "containerized_verified": 3,
-        "staged": 0,
-        "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
-        "standard_staged": 0,
-        "standard_pending": 0,
-        "phase": "pilot",
-        "status": "pilot_three_verified_bounded_search",
-        "complete": false,
-        "uncertainty": "Three verified paths; no padding. The name search is a substring filter over the PyPI Simple index (serial 43764887) captured 2026-11-17; the 'mp3' and 'mpeg' hit lists were not triaged one by one, and download numbers were fetched only for 13 named candidates, so a less obvious frame parser could be missed. Native wrappers (av, soundfile, audioread, pygame, pymediainfo, miniaudio) are unresolved, not rejected: their parsers are real but outside Python source coverage. eyed3 and pymp3 are unresolved pure-Python leads. Mutagen reads headers and checks frame syncs but does not decode audio; for CBR streams without Xing/Info/VBRI its duration is stream bytes divided by the first header's bitrate. TinyTag also only reads headers: after five equal-bitrate frames it estimates duration from stream size and mean frame length, and it does not expose MPEG version, layer or frame count. Both full-length controls run the same TinyTag lines; its feedback difference is shown with a valid three-frame prefix of the 44.1 kHz control. hachoir is called through its MpegAudioFile class directly, not guessParser, whose fallback tries every hachoir parser in set order. It walks every frame header to EOF and reports version, layer, sample rate, bitrate, channel mode and frame count. It does not decode audio or side information, and its two controls differ by only 4 mpeg_audio.py lines: the MPEG-1 versus MPEG-2 bitrate table and frame-length formula. Two untagged CBR controls do not establish VBR, free-format, Layer I/II, or MPEG-2.5 support."
-      },
-      {
-        "format": "mp3",
-        "ecosystem": "rust",
-        "catalog_paths": 6,
-        "containerized_verified": 6,
-        "staged": 0,
-        "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
-        "standard_staged": 0,
-        "standard_pending": 0,
-        "phase": "pilot",
-        "status": "pilot_six_paths_search_bounded",
-        "complete": false,
-        "uncertainty": "Six verified package paths cover four parser families on two valid untagged CBR controls: Symphonia's Rust MP3 demuxer/decoder, reached directly through symphonia-bundle-mp3 and through the symphonia facade's probe and codec registry; minimp3's C decoder through the Rust minimp3 binding and as the pure-Rust nanomp3 port; the mp3-duration frame-header scanner, which reports only a summed duration; rusty_mp3's in-house pure-Rust Layer III decoder. The symphonia facade is a separate package API over the same Symphonia family, not a new engine; nanomp3 is a separate package API over the minimp3 family (its minimp3-compatible PCM is byte-identical to scalar minimp3.h), and nanomp3-core, the decoder it re-exports, is counted only through nanomp3. Five leads remain unresolved, so the verified ranks are not a claim about all MP3 parsers. Search covers the first 100 hits of six crates.io queries (591 hits, 350 unique) captured 2026-11-17; the 'mp3' query alone reports 1119 matches. Recent downloads include transitive dependency pulls and are an adoption proxy, not evidence of direct MP3 parsing use. The two controls do not establish VBR, Xing/Info, free-format, Layer I/II or MPEG-2.5 support."
       },
       {
         "format": "xml",

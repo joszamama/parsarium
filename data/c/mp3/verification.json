@@ -108,14 +108,68 @@
   "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
   "third_party": [
     {
-      "package": "taglib",
-      "version": "2.3.2",
+      "package": "ffmpeg",
+      "version": "9.0.2",
       "control": "controls/mp3_id3v2/tone-tags.mp3",
-      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/taglib.c -I/opt/homebrew/Cellar/taglib/2.3.2/include/taglib -I/opt/homebrew/Cellar/taglib/2.3.2/include -L/opt/homebrew/Cellar/taglib/2.3.2/lib -ltag_c -ltag -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/taglib",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/taglib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/ffmpeg.c -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include -L/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib -lavformat -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/ffmpeg",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/ffmpeg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
       "output": {
         "title": "Parsarium",
-        "artist": "Control"
+        "mp3_streams": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "mpv",
+      "version": "0.42.0",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/mpv.c -I/opt/homebrew/Cellar/mpv/0.42.0/include -I/opt/homebrew/Cellar/libass/0.17.5_1/include -I/opt/homebrew/Cellar/libunibreak/8.0/include -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/opt/graphite2/include -I/opt/homebrew/Cellar/fribidi/1.0.18/include/fribidi -I/opt/homebrew/Cellar/libplacebo/7.387.0/include -I/opt/homebrew/Cellar/shaderc/2026.4/include -I/opt/homebrew/Cellar/mujs/1.3.11/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/opt/libarchive/include -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include -I/opt/homebrew/Cellar/libbluray/1.5.0/include -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libudfread/1.2.0/include -I/opt/homebrew/Cellar/luajit/2.1.1794386141/include/luajit-2.1 -I/opt/homebrew/Cellar/rubberband/4.0.0/include -I/opt/homebrew/Cellar/libsamplerate/0.2.2/include -I/opt/homebrew/Cellar/uchardet/0.0.8/include/uchardet -I/opt/homebrew/lib/pkgconfig/../../Cellar/vapoursynth/82/lib/pkgconfig/../../libexec/lib/python3.15/site-packages/vapoursynth/pkgconfig/../include -I/opt/homebrew/Cellar/zimg/3.0.6/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/vulkan-loader/1.4.363.0/../../../opt/vulkan-headers/include -L/opt/homebrew/Cellar/mpv/0.42.0/lib -lmpv -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/mpv",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/mpv /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "codec": "mp3",
+        "duration_ms": 1000
+      },
+      "pass": true
+    },
+    {
+      "package": "gstreamer",
+      "version": "1.28.9",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/gstreamer.c -I/opt/homebrew/Cellar/gstreamer/1.28.9/include/gstreamer-1.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/Cellar/orc/0.4.44/include/orc-0.4 -L/opt/homebrew/Cellar/gstreamer/1.28.9/lib -lgstpbutils-1.0 -lgstvideo-1.0 -lgstaudio-1.0 -lgstbase-1.0 -lgstreamer-1.0 -Wl,-rpath,/opt/homebrew/Cellar/gstreamer/1.28.9/lib -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/gstreamer",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/gstreamer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "sample_rate": 8000,
+        "channels": 1,
+        "audio_streams": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "sox",
+      "version": "14.4.2",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/sox.c -I/opt/homebrew/Cellar/sox/14.4.2_6/include -L/opt/homebrew/Cellar/sox/14.4.2_6/lib -lsox -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sox",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sox /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "filetype": "mp3",
+        "sample_rate": 8000,
+        "channels": 1,
+        "decoded_samples": 1
+      },
+      "pass": true
+    },
+    {
+      "package": "sdl_mixer",
+      "version": "2.8.2",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/sdl_mixer.c -I/opt/homebrew/include/SDL2 -I/opt/homebrew/include -D_THREAD_SAFE -I/opt/homebrew/Cellar/libxmp/4.7.4/include -I/opt/homebrew/Cellar/fluid-synth/2.6.2/include -I/opt/homebrew/Cellar/libsndfile/1.2.2_1/include -I/opt/homebrew/Cellar/libvorbis/1.3.7/include -I/opt/homebrew/Cellar/portaudio/19.7.0/include -I/opt/homebrew/Cellar/readline/8.3.6/include -D_DARWIN_C_SOURCE -I/opt/homebrew/Cellar/game-music-emu/0.6.5/include -I/opt/homebrew/Cellar/flac/1.5.0/include -I/opt/homebrew/Cellar/mpg123/1.33.7/include -I/opt/homebrew/Cellar/opusfile/0.12_3/include/opus -I/opt/homebrew/Cellar/libogg/1.3.6/include -I/opt/homebrew/Cellar/opus/1.6.1/include/opus -I/opt/homebrew/Cellar/wavpack/5.9.0/include -L/opt/homebrew/Cellar/sdl2_mixer/2.8.2/lib -lSDL2_mixer -L/opt/homebrew/lib -lSDL2main -lSDL2 -Wl,-framework,Cocoa -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sdl_mixer",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sdl_mixer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "artist": "Control",
+        "duration_ms": 1000
       },
       "pass": true
     },
@@ -128,18 +182,6 @@
       "output": {
         "title": "Parsarium",
         "id3v2_version": 3
-      },
-      "pass": true
-    },
-    {
-      "package": "ffmpeg",
-      "version": "9.0.2",
-      "control": "controls/mp3_id3v2/tone-tags.mp3",
-      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/ffmpeg.c -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include -L/opt/homebrew/Cellar/ffmpeg/9.0.2_1/lib -lavformat -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/ffmpeg",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/ffmpeg /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
-      "output": {
-        "title": "Parsarium",
-        "mp3_streams": 1
       },
       "pass": true
     },
@@ -159,60 +201,6 @@
       "pass": true
     },
     {
-      "package": "sdl_mixer",
-      "version": "2.8.2",
-      "control": "controls/mp3_id3v2/tone-tags.mp3",
-      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/sdl_mixer.c -I/opt/homebrew/include/SDL2 -I/opt/homebrew/include -D_THREAD_SAFE -I/opt/homebrew/Cellar/libxmp/4.7.4/include -I/opt/homebrew/Cellar/fluid-synth/2.6.2/include -I/opt/homebrew/Cellar/libsndfile/1.2.2_1/include -I/opt/homebrew/Cellar/libvorbis/1.3.7/include -I/opt/homebrew/Cellar/portaudio/19.7.0/include -I/opt/homebrew/Cellar/readline/8.3.6/include -D_DARWIN_C_SOURCE -I/opt/homebrew/Cellar/game-music-emu/0.6.5/include -I/opt/homebrew/Cellar/flac/1.5.0/include -I/opt/homebrew/Cellar/mpg123/1.33.7/include -I/opt/homebrew/Cellar/opusfile/0.12_3/include/opus -I/opt/homebrew/Cellar/libogg/1.3.6/include -I/opt/homebrew/Cellar/opus/1.6.1/include/opus -I/opt/homebrew/Cellar/wavpack/5.9.0/include -L/opt/homebrew/Cellar/sdl2_mixer/2.8.2/lib -lSDL2_mixer -L/opt/homebrew/lib -lSDL2main -lSDL2 -Wl,-framework,Cocoa -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sdl_mixer",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sdl_mixer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
-      "output": {
-        "title": "Parsarium",
-        "artist": "Control",
-        "duration_ms": 1000
-      },
-      "pass": true
-    },
-    {
-      "package": "sox",
-      "version": "14.4.2",
-      "control": "controls/mp3_id3v2/tone-tags.mp3",
-      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/sox.c -I/opt/homebrew/Cellar/sox/14.4.2_6/include -L/opt/homebrew/Cellar/sox/14.4.2_6/lib -lsox -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sox",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/sox /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
-      "output": {
-        "filetype": "mp3",
-        "sample_rate": 8000,
-        "channels": 1,
-        "decoded_samples": 1
-      },
-      "pass": true
-    },
-    {
-      "package": "gstreamer",
-      "version": "1.28.9",
-      "control": "controls/mp3_id3v2/tone-tags.mp3",
-      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/gstreamer.c -I/opt/homebrew/Cellar/gstreamer/1.28.9/include/gstreamer-1.0 -I/opt/homebrew/Cellar/glib/2.90.1/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX27.sdk/usr/include/ffi -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/Cellar/orc/0.4.44/include/orc-0.4 -L/opt/homebrew/Cellar/gstreamer/1.28.9/lib -lgstpbutils-1.0 -lgstvideo-1.0 -lgstaudio-1.0 -lgstbase-1.0 -lgstreamer-1.0 -Wl,-rpath,/opt/homebrew/Cellar/gstreamer/1.28.9/lib -L/opt/homebrew/Cellar/glib/2.90.1/lib -lgobject-2.0 -lglib-2.0 -L/opt/homebrew/opt/gettext/lib -lintl -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/gstreamer",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/gstreamer /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
-      "output": {
-        "title": "Parsarium",
-        "sample_rate": 8000,
-        "channels": 1,
-        "audio_streams": 1
-      },
-      "pass": true
-    },
-    {
-      "package": "mpv",
-      "version": "0.42.0",
-      "control": "controls/mp3_id3v2/tone-tags.mp3",
-      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/mpv.c -I/opt/homebrew/Cellar/mpv/0.42.0/include -I/opt/homebrew/Cellar/libass/0.17.5_1/include -I/opt/homebrew/Cellar/libunibreak/8.0/include -I/opt/homebrew/Cellar/harfbuzz/15.1.0/include/harfbuzz -I/opt/homebrew/Cellar/glib/2.90.1/include/glib-2.0 -I/opt/homebrew/Cellar/glib/2.90.1/lib/glib-2.0/include -I/opt/homebrew/opt/gettext/include -I/opt/homebrew/Cellar/pcre2/10.49/include -I/opt/homebrew/opt/graphite2/include -I/opt/homebrew/Cellar/fribidi/1.0.18/include/fribidi -I/opt/homebrew/Cellar/libplacebo/7.387.0/include -I/opt/homebrew/Cellar/shaderc/2026.4/include -I/opt/homebrew/Cellar/mujs/1.3.11/include -I/opt/homebrew/opt/little-cms2/include -I/opt/homebrew/opt/libarchive/include -I/opt/homebrew/Cellar/ffmpeg/9.0.2_1/include -I/opt/homebrew/Cellar/libbluray/1.5.0/include -I/opt/homebrew/Cellar/fontconfig/2.18.3/include -I/opt/homebrew/opt/freetype/include/freetype2 -I/opt/homebrew/opt/libpng/include/libpng16 -I/opt/homebrew/Cellar/brotli/1.2.1/include -I/opt/homebrew/Cellar/libudfread/1.2.0/include -I/opt/homebrew/Cellar/luajit/2.1.1794386141/include/luajit-2.1 -I/opt/homebrew/Cellar/rubberband/4.0.0/include -I/opt/homebrew/Cellar/libsamplerate/0.2.2/include -I/opt/homebrew/Cellar/uchardet/0.0.8/include/uchardet -I/opt/homebrew/lib/pkgconfig/../../Cellar/vapoursynth/82/lib/pkgconfig/../../libexec/lib/python3.15/site-packages/vapoursynth/pkgconfig/../include -I/opt/homebrew/Cellar/zimg/3.0.6/include -I/opt/homebrew/opt/jpeg-turbo/include -I/opt/homebrew/Cellar/vulkan-loader/1.4.363.0/../../../opt/vulkan-headers/include -L/opt/homebrew/Cellar/mpv/0.42.0/lib -lmpv -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/mpv",
-      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/mpv /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
-      "output": {
-        "title": "Parsarium",
-        "codec": "mp3",
-        "duration_ms": 1000
-      },
-      "pass": true
-    },
-    {
       "package": "lame",
       "version": "4.0",
       "control": "controls/mp3_id3v2/tone-tags.mp3",
@@ -223,6 +211,18 @@
         "channels": 1,
         "bitrate_kbps": 32,
         "decoded_samples": 576
+      },
+      "pass": true
+    },
+    {
+      "package": "taglib",
+      "version": "2.3.2",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "build_command": "cc -std=c11 -O2 -Wall -Wextra -Werror /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/taglib.c -I/opt/homebrew/Cellar/taglib/2.3.2/include/taglib -I/opt/homebrew/Cellar/taglib/2.3.2/include -L/opt/homebrew/Cellar/taglib/2.3.2/lib -ltag_c -ltag -o /Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/taglib",
+      "command": "/Users/c01joza/Documents/CISPA/Repositorios/parsarium/adapters/c/mp3_id3v2/target/taglib /Users/c01joza/Documents/CISPA/Repositorios/parsarium/controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "artist": "Control"
       },
       "pass": true
     },

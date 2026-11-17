@@ -1,8 +1,8 @@
-# pydub — MP3 with ID3v2 / Python
+# pydub — MP3 / Python
 
 Pinned release: `0.25.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/python/pydub/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/python/pydub/README.md)
 
 ## Run from the repository root
 

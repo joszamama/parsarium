@@ -1,8 +1,8 @@
-# mhor/php-mediainfo — MP3 with ID3v2 / PHP
+# mhor/php-mediainfo — MP3 / PHP
 
 Pinned release: `5.8.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/php/mhor-php-mediainfo/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/php/mhor-php-mediainfo/README.md)
 
 ## Run from the repository root
 

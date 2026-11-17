@@ -1,8 +1,8 @@
-# @audio/decode-mp3 — MP3 with ID3v2 / JavaScript
+# @audio/decode-mp3 — MP3 / JavaScript
 
 Pinned release: `1.3.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/javascript/audio-decode-mp3/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/javascript/audio-decode-mp3/README.md)
 
 ## Run from the repository root
 

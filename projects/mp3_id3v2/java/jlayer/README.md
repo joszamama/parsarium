@@ -1,8 +1,8 @@
-# jlayer — MP3 with ID3v2 / Java
+# jlayer — MP3 / Java
 
 Pinned release: `1.0.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/java/jlayer/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/java/jlayer/README.md)
 
 ## Run from the repository root
 

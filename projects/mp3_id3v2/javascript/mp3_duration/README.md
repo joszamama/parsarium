@@ -1,8 +1,8 @@
-# mp3-duration — MP3 with ID3v2 / JavaScript
+# mp3-duration — MP3 / JavaScript
 
 Pinned release: `1.1.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/javascript/mp3-duration/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/javascript/mp3-duration/README.md)
 
 ## Run from the repository root
 

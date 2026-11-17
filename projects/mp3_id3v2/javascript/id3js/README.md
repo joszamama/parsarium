@@ -1,8 +1,8 @@
-# id3js — MP3 with ID3v2 / JavaScript
+# id3js — MP3 / JavaScript
 
 Pinned release: `2.1.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/javascript/id3js/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/javascript/id3js/README.md)
 
 ## Run from the repository root
 

@@ -690,7 +690,7 @@
           "packagePath": "cnb.cool/svn/vdk/codec/mp3",
           "url": "https://pkg.go.dev/cnb.cool/svn/vdk/codec/mp3",
           "version": "v0.0.0-...-5b2bcd3",
-          "synopsis": "Package mp3 \u63d0\u4f9b MP3 \u97f3\u9891\u7f16\u89e3\u7801\u652f\u6301",
+          "synopsis": "Package mp3 提供 MP3 音频编解码支持",
           "license": "MIT",
           "importedByPackages": 0
         },
@@ -2191,7 +2191,7 @@
           "packagePath": "github.com/DiheMoe/gl3d",
           "url": "https://pkg.go.dev/github.com/DiheMoe/gl3d",
           "version": "v1.0.0",
-          "synopsis": "Package gl3d \u662f\u7eaf Go \u7684 MPEG-1/2/2.5 Layer III \u89e3\u7801\u5668,\u53ea\u4f9d\u8d56\u6807\u51c6\u5e93, \u6d41\u5f0f\u89e3\u7801,\u5185\u5b58\u6709\u754c\u3002",
+          "synopsis": "Package gl3d 是纯 Go 的 MPEG-1/2/2.5 Layer III 解码器,只依赖标准库, 流式解码,内存有界。",
           "license": "MIT",
           "importedByPackages": 0
         },
@@ -2966,27 +2966,40 @@
       "version": "v0.0.0-20250113165337-e36fa5d059c5",
       "license": "MIT",
       "url": "https://pkg.go.dev/honnef.co/go/id3@v0.0.0-20250113165337-e36fa5d059c5"
+    },
+    "github.com/dmulholl/mp3lib": {
+      "module": "github.com/dmulholl/mp3lib",
+      "version": "v1.0.0",
+      "license": "Unlicense",
+      "url": "https://pkg.go.dev/github.com/dmulholl/mp3lib@v1.0.0",
+      "source_sha256": "c29d82de91787cc30c6bc9c6a5d5b14e203f8765563de23aa2c242f54c3ea1d9",
+      "go_module_sum": "h1:PZq24kJBIk5zIxi/t6Qp8/EOAbAqThyrUCpkUKLBeWQ=",
+      "recorded_from": "projects/mp3/go/github_com_dmulholl_mp3lib/source-lock.json"
     }
   },
   "popularity_metric": {
     "name": "pkg.go.dev Imported by package count",
-    "captured_at_utc": "2026-11-11T19:19:51.493289+00:00",
+    "captured_at_utc": "2026-11-17T16:24:54.400655+00:00",
     "packages": {
       "github.com/faiface/beep/mp3": {
         "imported_by_packages": 444,
-        "url": "https://pkg.go.dev/github.com/faiface/beep/mp3@v1.1.0"
+        "url": "https://pkg.go.dev/github.com/faiface/beep/mp3@v1.1.0",
+        "merged_mp3_capture": true
       },
       "github.com/gopxl/beep/v2/mp3": {
         "imported_by_packages": 44,
-        "url": "https://pkg.go.dev/github.com/gopxl/beep/v2/mp3@v2.1.1"
+        "url": "https://pkg.go.dev/github.com/gopxl/beep/v2/mp3@v2.1.1",
+        "merged_mp3_capture": true
       },
       "github.com/hajimehoshi/go-mp3": {
         "imported_by_packages": 294,
-        "url": "https://pkg.go.dev/github.com/hajimehoshi/go-mp3@v0.3.4"
+        "url": "https://pkg.go.dev/github.com/hajimehoshi/go-mp3@v0.3.4",
+        "merged_mp3_capture": true
       },
       "github.com/hajimehoshi/ebiten/v2/audio/mp3": {
         "imported_by_packages": 144,
-        "url": "https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio/mp3@v2.10.6"
+        "url": "https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio/mp3@v2.10.6",
+        "merged_mp3_capture": true
       },
       "github.com/dece2183/go-stream-mp3": {
         "imported_by_packages": 2,
@@ -2994,7 +3007,8 @@
       },
       "github.com/tcolgate/mp3": {
         "imported_by_packages": 62,
-        "url": "https://pkg.go.dev/github.com/tcolgate/mp3@v0.0.0-20170426193717-e79c5a46d300"
+        "url": "https://pkg.go.dev/github.com/tcolgate/mp3@v0.0.0-20170426193717-e79c5a46d300",
+        "merged_mp3_capture": true
       },
       "github.com/fgergo/mp3": {
         "imported_by_packages": 2,
@@ -3002,7 +3016,8 @@
       },
       "github.com/tosone/minimp3": {
         "imported_by_packages": 34,
-        "url": "https://pkg.go.dev/github.com/tosone/minimp3@v1.1.0"
+        "url": "https://pkg.go.dev/github.com/tosone/minimp3@v1.1.0",
+        "merged_mp3_capture": true
       },
       "github.com/mattetti/audio/mp3": {
         "imported_by_packages": 2,
@@ -3018,11 +3033,13 @@
       },
       "github.com/bogem/id3v2/v2": {
         "imported_by_packages": 72,
-        "url": "https://pkg.go.dev/github.com/bogem/id3v2/v2@v2.1.4"
+        "url": "https://pkg.go.dev/github.com/bogem/id3v2/v2@v2.1.4",
+        "merged_mp3_capture": true
       },
       "github.com/dhowden/tag": {
         "imported_by_packages": 381,
-        "url": "https://pkg.go.dev/github.com/dhowden/tag@v0.0.0-20240417053706-3d75831295e8"
+        "url": "https://pkg.go.dev/github.com/dhowden/tag@v0.0.0-20240417053706-3d75831295e8",
+        "merged_mp3_capture": true
       },
       "github.com/gcottom/mp3meta": {
         "imported_by_packages": 2,
@@ -3042,16 +3059,92 @@
       },
       "github.com/ascherkus/go-id3/src/id3": {
         "imported_by_packages": 6,
-        "url": "https://pkg.go.dev/github.com/ascherkus/go-id3/src/id3@v0.0.0-20120522061058-b139b6a612de"
+        "url": "https://pkg.go.dev/github.com/ascherkus/go-id3/src/id3@v0.0.0-20120522061058-b139b6a612de",
+        "merged_mp3_capture": true
       },
       "github.com/dustin/go-id3": {
         "imported_by_packages": 5,
-        "url": "https://pkg.go.dev/github.com/dustin/go-id3@v0.0.0-20131108194644-73f4b1cf2a4e"
+        "url": "https://pkg.go.dev/github.com/dustin/go-id3@v0.0.0-20131108194644-73f4b1cf2a4e",
+        "merged_mp3_capture": true
       },
       "honnef.co/go/id3": {
         "imported_by_packages": 3,
         "url": "https://pkg.go.dev/honnef.co/go/id3@v0.0.0-20250113165337-e36fa5d059c5"
+      },
+      "github.com/dmulholl/mp3lib": {
+        "imported_by_packages": 9,
+        "merged_mp3_capture": true
       }
+    },
+    "merged_mp3_capture": {
+      "note": "Values for every path selected in the former MP3 with ID3v2 or plain MP3 cell come from one capture on the same day, source and window, recorded under merged_mp3_ranking_2026_11_17. Other entries keep their original capture and were already outside the ten-path selection. The window and capture fields of this block describe that capture.",
+      "captured_at_utc": "2026-11-17T16:24:54.400655+00:00",
+      "window": "point-in-time page value",
+      "source": "https://pkg.go.dev/<package>"
     }
+  },
+  "merged_mp3_ranking_2026_11_17": {
+    "metric": "pkg.go.dev Imported by package count",
+    "source": "https://pkg.go.dev/<package>",
+    "window": "point-in-time page value",
+    "captured_at_utc": "2026-11-17T16:24:54.400655+00:00",
+    "packages": {
+      "github.com/faiface/beep/mp3": {
+        "imported_by": 444,
+        "url": "https://pkg.go.dev/github.com/faiface/beep/mp3",
+        "observed_at_utc": "2026-11-17T16:24:40.384373+00:00"
+      },
+      "github.com/dhowden/tag": {
+        "imported_by": 381,
+        "url": "https://pkg.go.dev/github.com/dhowden/tag",
+        "observed_at_utc": "2026-11-17T16:24:41.687674+00:00"
+      },
+      "github.com/hajimehoshi/go-mp3": {
+        "imported_by": 294,
+        "url": "https://pkg.go.dev/github.com/hajimehoshi/go-mp3",
+        "observed_at_utc": "2026-11-17T16:24:43.011922+00:00"
+      },
+      "github.com/hajimehoshi/ebiten/v2/audio/mp3": {
+        "imported_by": 144,
+        "url": "https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio/mp3",
+        "observed_at_utc": "2026-11-17T16:24:44.313959+00:00"
+      },
+      "github.com/bogem/id3v2/v2": {
+        "imported_by": 72,
+        "url": "https://pkg.go.dev/github.com/bogem/id3v2/v2",
+        "observed_at_utc": "2026-11-17T16:24:45.728950+00:00"
+      },
+      "github.com/tcolgate/mp3": {
+        "imported_by": 62,
+        "url": "https://pkg.go.dev/github.com/tcolgate/mp3",
+        "observed_at_utc": "2026-11-17T16:24:47.035134+00:00"
+      },
+      "github.com/gopxl/beep/v2/mp3": {
+        "imported_by": 44,
+        "url": "https://pkg.go.dev/github.com/gopxl/beep/v2/mp3",
+        "observed_at_utc": "2026-11-17T16:24:48.249722+00:00"
+      },
+      "github.com/tosone/minimp3": {
+        "imported_by": 34,
+        "url": "https://pkg.go.dev/github.com/tosone/minimp3",
+        "observed_at_utc": "2026-11-17T16:24:49.561206+00:00"
+      },
+      "github.com/ascherkus/go-id3/src/id3": {
+        "imported_by": 6,
+        "url": "https://pkg.go.dev/github.com/ascherkus/go-id3/src/id3",
+        "observed_at_utc": "2026-11-17T16:24:50.889658+00:00"
+      },
+      "github.com/dustin/go-id3": {
+        "imported_by": 5,
+        "url": "https://pkg.go.dev/github.com/dustin/go-id3",
+        "observed_at_utc": "2026-11-17T16:24:52.183055+00:00"
+      },
+      "github.com/dmulholl/mp3lib": {
+        "imported_by": 9,
+        "url": "https://pkg.go.dev/github.com/dmulholl/mp3lib",
+        "observed_at_utc": "2026-11-17T16:24:53.398639+00:00"
+      }
+    },
+    "script": "scripts/snapshot_mp3_merge_metrics.py"
   }
 }

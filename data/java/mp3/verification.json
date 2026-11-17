@@ -27,77 +27,18 @@
   "control_meaning": "Valid mono 8 kHz, 44.1 kHz, and 18-second 8 kHz MP3 files with ID3v2.3 tags carrying title Parsarium, artist Control and album Pilot",
   "third_party": [
     {
-      "package": "jaudiotagger",
-      "adapter_label": "jaudiotagger",
+      "package": "jcodec",
+      "adapter_label": "jcodec",
       "control": "controls/mp3_id3v2/tone-tags.mp3",
       "output": {
-        "title": "Parsarium",
-        "artist": "Control",
-        "album": "Pilot"
+        "codec": "MP3",
+        "frame_bytes": 288,
+        "timescale": 8000
       },
       "pass": true,
       "exit_code": 0,
-      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jaudiotagger controls/mp3_id3v2/tone-tags.mp3",
-      "version": "3.0.1"
-    },
-    {
-      "package": "mp3agic",
-      "adapter_label": "mp3agic",
-      "control": "controls/mp3_id3v2/tone-tags.mp3",
-      "output": {
-        "title": "Parsarium",
-        "artist": "Control",
-        "album": "Pilot",
-        "tag_version": "3.0"
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter mp3agic controls/mp3_id3v2/tone-tags.mp3",
-      "version": "0.9.1"
-    },
-    {
-      "package": "jlayer",
-      "adapter_label": "jlayer",
-      "control": "controls/mp3_id3v2/tone-tags.mp3",
-      "output": {
-        "frequency": 8000,
-        "layer": 3,
-        "id3v2_present": true
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jlayer controls/mp3_id3v2/tone-tags.mp3",
-      "version": "1.0.1"
-    },
-    {
-      "package": "jave-core",
-      "adapter_label": "jave",
-      "control": "controls/mp3_id3v2/tone-tags.mp3",
-      "output": {
-        "format": "mp3",
-        "codec": "mp3 (mp3float)",
-        "frequency": 8000,
-        "channels": 1
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jave controls/mp3_id3v2/tone-tags.mp3",
-      "version": "4.2.0"
-    },
-    {
-      "package": "jaffree",
-      "adapter_label": "jaffree",
-      "control": "controls/mp3_id3v2/tone-tags.mp3",
-      "output": {
-        "codec": "mp3",
-        "frequency": 8000,
-        "title": "Parsarium",
-        "artist": "Control"
-      },
-      "pass": true,
-      "exit_code": 0,
-      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jaffree controls/mp3_id3v2/tone-tags.mp3",
-      "version": "2024.08.29"
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jcodec controls/mp3_id3v2/tone-tags.mp3",
+      "version": "0.2.5"
     },
     {
       "package": "mp3spi",
@@ -116,19 +57,18 @@
       "version": "1.9.5.4"
     },
     {
-      "package": "javacv",
-      "adapter_label": "javacv",
+      "package": "jlayer",
+      "adapter_label": "jlayer",
       "control": "controls/mp3_id3v2/tone-tags.mp3",
       "output": {
-        "format": "mp3",
-        "codec": "mp3float",
         "frequency": 8000,
-        "channels": 1
+        "layer": 3,
+        "id3v2_present": true
       },
       "pass": true,
       "exit_code": 0,
-      "command": "java -cp <bytedeco locked classpath> org.parsarium.BytedecoMp3Adapter javacv controls/mp3_id3v2/tone-tags.mp3",
-      "version": "1.5.14"
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jlayer controls/mp3_id3v2/tone-tags.mp3",
+      "version": "1.0.1"
     },
     {
       "package": "bytedeco-ffmpeg",
@@ -145,18 +85,33 @@
       "version": "8.1.2-1.5.14"
     },
     {
-      "package": "jcodec",
-      "adapter_label": "jcodec",
+      "package": "jaudiotagger",
+      "adapter_label": "jaudiotagger",
       "control": "controls/mp3_id3v2/tone-tags.mp3",
       "output": {
-        "codec": "MP3",
-        "frame_bytes": 288,
-        "timescale": 8000
+        "title": "Parsarium",
+        "artist": "Control",
+        "album": "Pilot"
       },
       "pass": true,
       "exit_code": 0,
-      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jcodec controls/mp3_id3v2/tone-tags.mp3",
-      "version": "0.2.5"
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jaudiotagger controls/mp3_id3v2/tone-tags.mp3",
+      "version": "3.0.1"
+    },
+    {
+      "package": "javacv",
+      "adapter_label": "javacv",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "format": "mp3",
+        "codec": "mp3float",
+        "frequency": 8000,
+        "channels": 1
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <bytedeco locked classpath> org.parsarium.BytedecoMp3Adapter javacv controls/mp3_id3v2/tone-tags.mp3",
+      "version": "1.5.14"
     },
     {
       "package": "javamp3",
@@ -171,6 +126,51 @@
       "exit_code": 0,
       "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter javamp3 controls/mp3_id3v2/tone-tags-44k.mp3",
       "version": "1.0.1"
+    },
+    {
+      "package": "mp3agic",
+      "adapter_label": "mp3agic",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "title": "Parsarium",
+        "artist": "Control",
+        "album": "Pilot",
+        "tag_version": "3.0"
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter mp3agic controls/mp3_id3v2/tone-tags.mp3",
+      "version": "0.9.1"
+    },
+    {
+      "package": "jaffree",
+      "adapter_label": "jaffree",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "codec": "mp3",
+        "frequency": 8000,
+        "title": "Parsarium",
+        "artist": "Control"
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jaffree controls/mp3_id3v2/tone-tags.mp3",
+      "version": "2024.08.29"
+    },
+    {
+      "package": "jave-core",
+      "adapter_label": "jave",
+      "control": "controls/mp3_id3v2/tone-tags.mp3",
+      "output": {
+        "format": "mp3",
+        "codec": "mp3 (mp3float)",
+        "frequency": 8000,
+        "channels": 1
+      },
+      "pass": true,
+      "exit_code": 0,
+      "command": "java -cp <main locked classpath> org.parsarium.Mp3Id3v2Adapter jave controls/mp3_id3v2/tone-tags.mp3",
+      "version": "4.2.0"
     }
   ],
   "runtime": [],

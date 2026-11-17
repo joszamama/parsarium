@@ -1,8 +1,8 @@
-# tinytag — MP3 with ID3v2 / Python
+# tinytag — MP3 / Python
 
 Pinned release: `2.3.2`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/python/tinytag/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/python/tinytag/README.md)
 
 ## Run from the repository root
 

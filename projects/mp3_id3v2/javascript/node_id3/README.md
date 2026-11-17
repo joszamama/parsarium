@@ -1,8 +1,8 @@
-# node-id3 — MP3 with ID3v2 / JavaScript
+# node-id3 — MP3 / JavaScript
 
 Pinned release: `0.2.9`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/javascript/node-id3/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/javascript/node-id3/README.md)
 
 ## Run from the repository root
 

@@ -1,8 +1,8 @@
-# mpv — MP3 with ID3v2 / C
+# mpv — MP3 / C
 
 Pinned release: `0.42.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/c/mpv/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/c/mpv/README.md)
 
 ## Run from the repository root
 

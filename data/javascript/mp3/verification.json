@@ -131,6 +131,22 @@
   },
   "third_party": [
     {
+      "package": "mediabunny",
+      "version": "1.66.0",
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "output": {
+        "format": "MP3",
+        "codec": "mp3",
+        "sample_rate": 44100,
+        "channels": 1,
+        "frames": 11,
+        "frame_bytes": 2298,
+        "samples_per_channel": 12672
+      },
+      "receipt": "projects/mp3/javascript/mediabunny/verification.json",
+      "pass": true
+    },
+    {
       "package": "music-metadata",
       "version": "12.4.0",
       "scope": "tags+audio_header",
@@ -141,6 +157,38 @@
         "artist": "Control",
         "album": "Pilot",
         "sampleRate": 8000
+      },
+      "error": null
+    },
+    {
+      "package": "codec-parser",
+      "version": "2.5.0",
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "output": {
+        "codec": "mpeg",
+        "layer": "Layer III",
+        "sample_rate": 44100,
+        "channels": 1,
+        "bitrate": 64000,
+        "frames": 11,
+        "frame_bytes": 2298,
+        "samples_per_frame": 1152,
+        "total_samples": 12672,
+        "header_variants": 1
+      },
+      "receipt": "projects/mp3/javascript/codec_parser/verification.json",
+      "pass": true
+    },
+    {
+      "package": "@audio/decode-mp3",
+      "version": "1.3.1",
+      "scope": "decoded_audio",
+      "command": "node adapters/javascript/mp3_id3v2.mjs @audio/decode-mp3 controls/mp3_id3v2/tone-tags.mp3",
+      "pass": true,
+      "output": {
+        "sampleRate": 8000,
+        "channels": 2,
+        "samples": 8000
       },
       "error": null
     },
@@ -158,20 +206,6 @@
       "error": null
     },
     {
-      "package": "jsmediatags",
-      "version": "3.9.7",
-      "scope": "tags+version",
-      "command": "node adapters/javascript/mp3_id3v2.mjs jsmediatags controls/mp3_id3v2/tone-tags.mp3",
-      "pass": true,
-      "output": {
-        "title": "Parsarium",
-        "artist": "Control",
-        "album": "Pilot",
-        "version": "2.3.0"
-      },
-      "error": null
-    },
-    {
       "package": "@audio/decode",
       "version": "4.3.0",
       "scope": "decoded_audio",
@@ -180,19 +214,6 @@
       "output": {
         "sampleRate": 8000,
         "channels": 1,
-        "samples": 8000
-      },
-      "error": null
-    },
-    {
-      "package": "@audio/decode-mp3",
-      "version": "1.3.1",
-      "scope": "decoded_audio",
-      "command": "node adapters/javascript/mp3_id3v2.mjs @audio/decode-mp3 controls/mp3_id3v2/tone-tags.mp3",
-      "pass": true,
-      "output": {
-        "sampleRate": 8000,
-        "channels": 2,
         "samples": 8000
       },
       "error": null
@@ -243,17 +264,6 @@
       "version": "1.1.0",
       "scope": "duration",
       "command": "node adapters/javascript/mp3_id3v2.mjs mp3-duration controls/mp3_id3v2/tone-tags.mp3",
-      "pass": true,
-      "output": {
-        "duration_ms": 1224
-      },
-      "error": null
-    },
-    {
-      "package": "get-mp3-duration",
-      "version": "1.0.0",
-      "scope": "duration",
-      "command": "node adapters/javascript/mp3_id3v2.mjs get-mp3-duration controls/mp3_id3v2/tone-tags.mp3",
       "pass": true,
       "output": {
         "duration_ms": 1224

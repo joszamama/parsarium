@@ -1,8 +1,8 @@
-# ffmpeg-python — MP3 with ID3v2 / Python
+# ffmpeg-python — MP3 / Python
 
 Pinned release: `0.2.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/python/ffmpeg-python/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/python/ffmpeg-python/README.md)
 
 ## Run from the repository root
 

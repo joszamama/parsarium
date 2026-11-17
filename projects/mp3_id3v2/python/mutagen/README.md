@@ -1,8 +1,8 @@
-# mutagen — MP3 with ID3v2 / Python
+# mutagen — MP3 / Python
 
 Pinned release: `1.48.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/python/mutagen/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/python/mutagen/README.md)
 
 ## Run from the repository root
 

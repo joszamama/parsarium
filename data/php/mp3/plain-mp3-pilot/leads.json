@@ -1,5 +1,5 @@
 {
-  "captured_from": "data/php/mp3/registry-snapshot.json",
+  "captured_from": "data/php/mp3/plain-mp3-pilot/registry-snapshot.json",
   "metric": "Packagist total downloads",
   "leads": [
     {
@@ -71,7 +71,7 @@
       "license": "LGPL-3.0",
       "family": "regin / thegallagher PHP-MP3 native frame-header reader; no getID3 or Mp3Info code",
       "reason": "On PHP 8.5.12 the tag never returns on either control (timeout 15 s, exit 124): since PHP 8.0, substr() past the end returns \"\", so getStart() does not stop. The dev-master snapshot matches the MPEG-1 control (11 frames, 44100 Hz, 64 kbit/s) but on the MPEG-2 control MpegAudio::fromFile()->getFrameCounts()/getFrameHeader(0) report 3 frames, 11025 Hz, 418-byte frames, first frame at byte 104. The oracle reads 12 frames, 22050 Hz, first frame at byte 0. The float key Version_25 = 2.5 is truncated to 2 and replaces the MPEG-2 sample-rate row, and the frame length uses the MPEG-1 144 coefficient. Only version, layer, bitrate and channel mode are correct on both controls. No public API gives a correct sample rate, frame count, frame bytes or duration on both.",
-      "audit": "data/php/mp3/falahati-php-mp3-control-audit.md",
+      "audit": "data/php/mp3/plain-mp3-pilot/falahati-php-mp3-control-audit.md",
       "source": "https://packagist.org/packages/falahati/php-mp3"
     },
     {
@@ -84,7 +84,7 @@
       "release": "1.8.1 (commit 17b523ad57f283ddf3a116bc0eff22cb9d1b4b27; codeload legacy.zip SHA-256 2cf59be0e16a25ff6369bada6c1e6f739a47f7eda6da3c3abc59a7e899c9ef38, as pinned in projects/mp3_id3v2/php/debach_zend_mp3)",
       "license": "BSD-3-Clause",
       "family": "Sven Vollbehr PHP Reader (Zend_Media); own MPEG audio frame walker, no getID3 or Mp3Info code",
-      "audit": "data/php/mp3/lead-audit.md"
+      "audit": "data/php/mp3/plain-mp3-pilot/lead-audit.md"
     },
     {
       "name": "nass600/get-id3",
@@ -144,7 +144,7 @@
       "release": "none: dev-master only (commit 5e0f5c7da8804a149a2bb1ca89c45ec8ea7e0388, 2013-08-22)",
       "license": "none declared (composer.json has no license; LICENSE is empty)",
       "family": "Zedwood Mp3File script",
-      "audit": "data/php/mp3/lead-audit.md"
+      "audit": "data/php/mp3/plain-mp3-pilot/lead-audit.md"
     },
     {
       "name": "plutuss/getid3-laravel",
@@ -305,7 +305,7 @@
       "release": "v1.8.7 (commit 9e84aaf8b8d74e2965b451622dce02e9fa206728, 2026-11-12)",
       "license": "Apache-2.0",
       "family": "own native PHP MPEG-1 Layer III decoder (src/Mp3/Mp3L3Decoder.php)",
-      "audit": "data/php/mp3/lead-audit.md"
+      "audit": "data/php/mp3/plain-mp3-pilot/lead-audit.md"
     },
     {
       "name": "simonsimcity/get-id3-bundle",
@@ -519,7 +519,7 @@
       "release": "0.0.1 (commit ea924ae7392a5ba916a639e2b33080a36e9929e5)",
       "license": "LGPL-3.0",
       "family": "regin / thegallagher PHP-MP3 (copy of falahati/php-mp3)",
-      "audit": "data/php/mp3/lead-audit.md"
+      "audit": "data/php/mp3/plain-mp3-pilot/lead-audit.md"
     },
     {
       "name": "orkan/winamp",

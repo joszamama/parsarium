@@ -1,8 +1,8 @@
-# christophwurst/id3parser — MP3 with ID3v2 / PHP
+# christophwurst/id3parser — MP3 / PHP
 
 Pinned release: `v0.1.4`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/php/christophwurst-id3parser/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/php/christophwurst-id3parser/README.md)
 
 ## Run from the repository root
 

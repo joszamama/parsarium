@@ -1,8 +1,8 @@
-# james-heinrich/getid3 — MP3 with ID3v2 / PHP
+# james-heinrich/getid3 — MP3 / PHP
 
 Pinned release: `v1.9.28`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/php/james-heinrich-getid3/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/php/james-heinrich-getid3/README.md)
 
 ## Run from the repository root
 

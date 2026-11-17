@@ -1,8 +1,8 @@
-# moviepy — MP3 with ID3v2 / Python
+# moviepy — MP3 / Python
 
 Pinned release: `2.2.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/python/moviepy/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/python/moviepy/README.md)
 
 ## Run from the repository root
 

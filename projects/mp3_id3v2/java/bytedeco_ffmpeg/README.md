@@ -1,8 +1,8 @@
-# bytedeco-ffmpeg — MP3 with ID3v2 / Java
+# bytedeco-ffmpeg — MP3 / Java
 
 Pinned release: `8.1.2-1.5.14`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/java/bytedeco-ffmpeg/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/java/bytedeco-ffmpeg/README.md)
 
 ## Run from the repository root
 

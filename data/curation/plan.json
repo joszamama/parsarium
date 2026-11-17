@@ -1738,26 +1738,35 @@
     },
     {
       "ecosystem": "c",
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "metric_field": "install_on_request_365d",
       "metric_metadata": {
         "metric": "Homebrew install-on-request count over 365 days",
-        "window_start": "2025-11-13",
-        "window_end": "2026-11-13",
-        "captured_at_utc": "2026-11-13T01:09:54.897282+00:00",
+        "window_start": "2025-11-17",
+        "window_end": "2026-11-17",
+        "captured_at_utc": "2026-11-17T16:24:40.002375+00:00",
         "source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
-        "limitations": "Homebrew macOS and Linux user-requested formula installs, not ecosystem-wide adoption or MP3-specific use. Packages used for other formats may rank higher. The same window is used only within each C or C++ cell."
+        "limitations": "Homebrew macOS and Linux user-requested formula installs, not ecosystem-wide adoption or MP3-specific use. Packages used for other formats may rank higher. The same window is used only within each C or C++ cell.",
+        "merged_mp3_capture": {
+          "note": "Values for every path selected in the former MP3 with ID3v2 or plain MP3 cell come from one capture on the same day, source and window, recorded under merged_mp3_ranking_2026_11_17. Other entries keep their original capture and were already outside the ten-path selection. The window and capture fields of this block describe that capture.",
+          "captured_at_utc": "2026-11-17T16:24:40.002375+00:00",
+          "window": [
+            "2025-11-17",
+            "2026-11-17"
+          ],
+          "source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json"
+        }
       },
-      "parsers_sha256": "4d58ebbf5bed0cccd59ad1b05052c7585f3bf2ade56c696cc7f479f30ff8b6a0",
-      "snapshot_sha256": "6c6c3a6c655bd20bdda5c09d04763da6b3020793f2126634c71fb3faa006f5d9",
-      "original_count": 20,
+      "parsers_sha256": "4e87f3fab69d55901c9793a61b7cf18fb458ddc04167ac231c68cf0c5c2d7ae8",
+      "snapshot_sha256": "40d292e497480b218a0e1c001048a98791bef7570d035fbb6a4f51f1a45e7b08",
+      "original_count": 11,
       "selected_count": 10,
       "selected": [
         {
           "name": "ffmpeg",
           "version": "9.0.2",
           "family": "FFmpeg libavformat MP3 demuxer and ID3v2 metadata reader",
-          "metric": 1763198,
+          "metric": 1764575,
           "selection": "primary_metric",
           "rank": 1
         },
@@ -1765,7 +1774,7 @@
           "name": "mpv",
           "version": "0.42.0",
           "family": "libmpv local media frontend over FFmpeg libavformat and libavcodec",
-          "metric": 91258,
+          "metric": 90679,
           "selection": "primary_metric",
           "rank": 2
         },
@@ -1773,7 +1782,7 @@
           "name": "gstreamer",
           "version": "1.28.9",
           "family": "GStreamer id3demux and mpegaudioparse plugins via GstDiscoverer",
-          "metric": 44909,
+          "metric": 44439,
           "selection": "primary_metric",
           "rank": 3
         },
@@ -1781,7 +1790,7 @@
           "name": "sox",
           "version": "14.4.2",
           "family": "libsox MP3 handler over libmad decoder",
-          "metric": 28127,
+          "metric": 28167,
           "selection": "primary_metric",
           "rank": 4
         },
@@ -1789,7 +1798,7 @@
           "name": "sdl_mixer",
           "version": "2.8.2",
           "family": "SDL2_mixer ID3v2 tag reader and mpg123 MP3 decoder",
-          "metric": 15365,
+          "metric": 15189,
           "selection": "primary_metric",
           "rank": 5
         },
@@ -1797,7 +1806,7 @@
           "name": "mpg123",
           "version": "1.33.7",
           "family": "libmpg123 MPEG audio and ID3v2 parser",
-          "metric": 12297,
+          "metric": 12256,
           "selection": "primary_metric",
           "rank": 6
         },
@@ -1805,7 +1814,7 @@
           "name": "libsndfile",
           "version": "1.2.2",
           "family": "libsndfile MPEG frontend over libmpg123 decoder and ID3v2 reader",
-          "metric": 9161,
+          "metric": 9138,
           "selection": "primary_metric",
           "rank": 7
         },
@@ -1813,7 +1822,7 @@
           "name": "lame",
           "version": "4.0",
           "family": "LAME HIP decoder interface over libmpg123",
-          "metric": 6924,
+          "metric": 6992,
           "selection": "primary_metric",
           "rank": 8
         },
@@ -1821,7 +1830,7 @@
           "name": "taglib",
           "version": "2.3.2",
           "family": "TagLib ID3v2 parser",
-          "metric": 4111,
+          "metric": 4118,
           "selection": "primary_metric",
           "rank": 9
         },
@@ -1840,83 +1849,12 @@
       ],
       "excluded": [
         {
-          "name": "aubio",
-          "version": "0.4.9",
-          "family": "aubio source frontend over Apple AudioToolbox or libsndfile",
-          "metric": 2212,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 10
-        },
-        {
-          "name": "csfml",
-          "version": "3.0.0",
-          "family": "CSFML wrapper over SFML SoundFileReaderMp3/minimp3",
-          "metric": 178,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 16
-        },
-        {
-          "name": "dr_libs",
-          "version": "mp3-0.7.4",
-          "family": "dr_mp3 over minimp3",
-          "metric": null,
-          "reason": "primary_metric_unavailable"
-        },
-        {
-          "name": "id3lib",
-          "version": "3.8.3",
-          "family": "id3lib ID3v2 parser",
-          "metric": 199,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 15
-        },
-        {
-          "name": "libid3tag",
-          "version": "0.16.4",
-          "family": "libid3tag ID3v2 metadata parser",
-          "metric": 479,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 13
-        },
-        {
           "name": "libmad",
           "version": "0.16.5",
           "family": "libmad MPEG audio decoder",
-          "metric": 1143,
+          "metric": 1145,
           "reason": "outside_ten_path_ceiling",
-          "rank": 12
-        },
-        {
-          "name": "libmediainfo",
-          "version": "26.10",
-          "family": "MediaInfoLib MPEG audio and ID3v2 parsers",
-          "metric": 1285,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 11
-        },
-        {
-          "name": "libmp3splt",
-          "version": "0.9.2",
-          "family": "libmp3splt MP3 plugin over libmad and libid3tag",
-          "metric": 101,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 18
-        },
-        {
-          "name": "miniaudio",
-          "version": "0.11.26",
-          "family": "miniaudio bundled dr_mp3 decoder",
-          "metric": 125,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 17
-        },
-        {
-          "name": "sdl2_sound",
-          "version": "2.0.6",
-          "family": "SDL_sound over bundled dr_mp3/minimp3",
-          "metric": 402,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 14
+          "rank": 10
         }
       ]
     },
@@ -3791,7 +3729,7 @@
     },
     {
       "ecosystem": "cpp",
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "metric_field": "install_on_request_365d",
       "metric_metadata": {
         "metric": "Homebrew install-on-request count over 365 days",
@@ -3801,9 +3739,9 @@
         "source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
         "limitations": "Homebrew macOS and Linux user-requested formula installs, not ecosystem-wide adoption or MP3-specific use. Packages used for other formats may rank higher. The same window is used only within each C or C++ cell."
       },
-      "parsers_sha256": "5a515f5fe75f67fe434cdc25f752d86eccf49a328f98280fa7082dd839097cb5",
+      "parsers_sha256": "e2531dc80a3d67ee8acfd2af9b862ced6cfbb08f6a79ceb5d4583205e88c7b98",
       "snapshot_sha256": "6fd07e62f82ac631b9a817dbd88161cf71312c797063276be21cd8e4d8b8efd7",
-      "original_count": 21,
+      "original_count": 10,
       "selected_count": 10,
       "selected": [
         {
@@ -3891,95 +3829,7 @@
           "supplemental_rank": 1
         }
       ],
-      "excluded": [
-        {
-          "name": "aubio",
-          "version": "0.4.9",
-          "family": "aubio source frontend over Apple AudioToolbox or libsndfile",
-          "metric": 2212,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 11
-        },
-        {
-          "name": "csfml",
-          "version": "3.0.0",
-          "family": "CSFML wrapper over SFML SoundFileReaderMp3/minimp3",
-          "metric": 178,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 17
-        },
-        {
-          "name": "dr_libs",
-          "version": "mp3-0.7.4",
-          "family": "dr_mp3 over minimp3",
-          "metric": null,
-          "reason": "primary_metric_unavailable"
-        },
-        {
-          "name": "id3lib",
-          "version": "3.8.3",
-          "family": "id3lib ID3v2 parser",
-          "metric": 199,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 16
-        },
-        {
-          "name": "libid3tag",
-          "version": "0.16.4",
-          "family": "libid3tag ID3v2 metadata parser",
-          "metric": 479,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 14
-        },
-        {
-          "name": "libmad",
-          "version": "0.16.5",
-          "family": "libmad MPEG audio decoder",
-          "metric": 1143,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 13
-        },
-        {
-          "name": "libmediainfo",
-          "version": "26.10",
-          "family": "MediaInfoLib MPEG audio and ID3v2 parsers",
-          "metric": 1285,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 12
-        },
-        {
-          "name": "libmp3splt",
-          "version": "0.9.2",
-          "family": "libmp3splt MP3 plugin over libmad and libid3tag",
-          "metric": 101,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 19
-        },
-        {
-          "name": "miniaudio",
-          "version": "0.11.26",
-          "family": "miniaudio bundled dr_mp3 decoder",
-          "metric": 125,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 18
-        },
-        {
-          "name": "sdl2_sound",
-          "version": "2.0.6",
-          "family": "SDL_sound over bundled dr_mp3/minimp3",
-          "metric": 402,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 15
-        },
-        {
-          "name": "sfml",
-          "version": "3.0.2",
-          "family": "SFML SoundFileReaderMp3 over bundled minimp3",
-          "metric": 3828,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 10
-        }
-      ]
+      "excluded": []
     },
     {
       "ecosystem": "go",
@@ -5561,15 +5411,21 @@
     },
     {
       "ecosystem": "go",
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "metric_field": "imported_by_packages",
       "metric_metadata": {
         "name": "pkg.go.dev Imported by package count",
-        "captured_at_utc": "2026-11-11T19:19:51.493289+00:00"
+        "captured_at_utc": "2026-11-17T16:24:54.400655+00:00",
+        "merged_mp3_capture": {
+          "note": "Values for every path selected in the former MP3 with ID3v2 or plain MP3 cell come from one capture on the same day, source and window, recorded under merged_mp3_ranking_2026_11_17. Other entries keep their original capture and were already outside the ten-path selection. The window and capture fields of this block describe that capture.",
+          "captured_at_utc": "2026-11-17T16:24:54.400655+00:00",
+          "window": "point-in-time page value",
+          "source": "https://pkg.go.dev/<package>"
+        }
       },
-      "parsers_sha256": "9a9b3e8251cffaa662f3171b915343e1d88314a0b7104672cf387fd952cede2c",
-      "snapshot_sha256": "4913d31b72d449b0ccefdf553551bc8c5a0b567bced291c097277b6a1f347d34",
-      "original_count": 20,
+      "parsers_sha256": "19e5d266bc48c4de88a04e91801869ed50137a58d12815ef855658db7861dc4e",
+      "snapshot_sha256": "f1f515022e6fa9c7ac2538b07a0fa240636b9bbaa4dd0f512150c529c5fe63f4",
+      "original_count": 11,
       "selected_count": 10,
       "selected": [
         {
@@ -5637,102 +5493,30 @@
           "rank": 8
         },
         {
-          "name": "github.com/ascherkus/go-id3/src/id3",
-          "version": "v0.0.0-20120522061058-b139b6a612de",
-          "family": "ascherkus/go-id3 lineage",
-          "metric": 6,
+          "name": "github.com/dmulholl/mp3lib",
+          "version": "v1.0.0",
+          "family": "dmulholl/mp3lib frame parser",
+          "metric": 9,
           "selection": "primary_metric",
           "rank": 9
         },
         {
-          "name": "github.com/dustin/go-id3",
-          "version": "v0.0.0-20131108194644-73f4b1cf2a4e",
+          "name": "github.com/ascherkus/go-id3/src/id3",
+          "version": "v0.0.0-20120522061058-b139b6a612de",
           "family": "ascherkus/go-id3 lineage",
-          "metric": 5,
+          "metric": 6,
           "selection": "primary_metric",
           "rank": 10
         }
       ],
       "excluded": [
         {
-          "name": "github.com/dece2183/go-stream-mp3",
-          "version": "v1.0.2",
-          "family": "hajime/go-mp3 lineage",
-          "metric": 2,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 13
-        },
-        {
-          "name": "github.com/fgergo/mp3",
-          "version": "v1.0.0",
-          "family": "tcolgate MP3 frame lineage",
-          "metric": 2,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 14
-        },
-        {
-          "name": "github.com/frolovo22/tag",
-          "version": "v0.0.2",
-          "family": "frolovo22 ID3 parser",
-          "metric": 2,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 15
-        },
-        {
-          "name": "github.com/gcottom/mp3meta",
-          "version": "v0.0.4",
-          "family": "gcottom MP3 tag reader",
-          "metric": 2,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 16
-        },
-        {
-          "name": "github.com/guregu/tag",
-          "version": "v0.0.3",
-          "family": "dhowden/tag lineage",
-          "metric": 2,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 17
-        },
-        {
-          "name": "github.com/icanhazbroccoli/tag",
-          "version": "v0.0.0-20210306220707-0c387c570328",
-          "family": "dhowden/tag lineage",
-          "metric": 4,
+          "name": "github.com/dustin/go-id3",
+          "version": "v0.0.0-20131108194644-73f4b1cf2a4e",
+          "family": "ascherkus/go-id3 lineage",
+          "metric": 5,
           "reason": "outside_ten_path_ceiling",
           "rank": 11
-        },
-        {
-          "name": "github.com/mattetti/audio/mp3",
-          "version": "v0.0.0-20240411020228-c5379f9b5b61",
-          "family": "tcolgate MP3 frame lineage",
-          "metric": 2,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 18
-        },
-        {
-          "name": "github.com/qiniu/audio/mp3",
-          "version": "v0.2.1",
-          "family": "hajime/go-mp3 wrapper",
-          "metric": 2,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 19
-        },
-        {
-          "name": "github.com/sa6mwa/mp3duration",
-          "version": "v0.0.0-20221104103912-0716b1a5de6e",
-          "family": "sa6mwa MP3 duration reader",
-          "metric": 2,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 20
-        },
-        {
-          "name": "honnef.co/go/id3",
-          "version": "v0.0.0-20250113165337-e36fa5d059c5",
-          "family": "honnef ID3 parser",
-          "metric": 3,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 12
         }
       ]
     },
@@ -7288,7 +7072,7 @@
     },
     {
       "ecosystem": "java",
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "metric_field": "direct_dependent_count",
       "metric_metadata": {
         "name": "deps.dev version-level directDependentCount",
@@ -7296,9 +7080,9 @@
         "scope": "Known public direct dependents of the exact Maven release; incomplete coverage and version-level bias",
         "captured_at_utc": "2026-11-12T14:47:39.676253+00:00"
       },
-      "parsers_sha256": "ef19fa87fcec881ee47033b492ee3dfae9090e9b80bbde30083373c6a7bc98e3",
+      "parsers_sha256": "927638ad485332d7f9c287cd4c5977d9b95a6383f5be3369e6cf2eb1cb62b9ea",
       "snapshot_sha256": "dce7e3595566846254803c127f46400fd77095fa46b89b588e4aa91944197693",
-      "original_count": 20,
+      "original_count": 10,
       "selected_count": 10,
       "selected": [
         {
@@ -7382,79 +7166,7 @@
           "rank": 10
         }
       ],
-      "excluded": [
-        {
-          "name": "bramp-ffmpeg",
-          "version": "0.9.2",
-          "family": "bramp FFprobe CLI wrapper over FFmpeg",
-          "metric": 0,
-          "reason": "zero_recorded_adoption"
-        },
-        {
-          "name": "codecmedia",
-          "version": "1.2.2",
-          "family": "CodecMedia native MP3 frame parser",
-          "metric": 0,
-          "reason": "zero_recorded_adoption"
-        },
-        {
-          "name": "imagic-ffmpeg-java",
-          "version": "0.1.2",
-          "family": "Imagic fork of bramp FFprobe CLI wrapper over FFmpeg",
-          "metric": 0,
-          "reason": "zero_recorded_adoption"
-        },
-        {
-          "name": "jid3lib",
-          "version": "0.5.4",
-          "family": "jid3lib native ID3v2 tag parser; historical ancestry shared with jaudiotagger and mp3agic",
-          "metric": 0,
-          "reason": "zero_recorded_adoption"
-        },
-        {
-          "name": "mediainfo-jna-wrapper",
-          "version": "2.1.9",
-          "family": "amilesend JNA binding to libmediainfo",
-          "metric": 0,
-          "reason": "zero_recorded_adoption"
-        },
-        {
-          "name": "taglib-java",
-          "version": "1.0.0",
-          "family": "TagLib Java adaptation with native Java MPEG and ID3v2 implementation",
-          "metric": 0,
-          "reason": "zero_recorded_adoption"
-        },
-        {
-          "name": "tianscar-mp3spi",
-          "version": "1.9.8",
-          "family": "Tianscar fork of JavaZOOM MP3SPI over JLayer and Tritonus",
-          "metric": 0,
-          "reason": "zero_recorded_adoption"
-        },
-        {
-          "name": "tika-audiovideo",
-          "version": "4.2.0",
-          "family": "Apache Tika native MP3 and ID3v2 parser",
-          "metric": 1,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 11
-        },
-        {
-          "name": "v47-jaffree",
-          "version": "2.1.0",
-          "family": "v47 fork of Jaffree FFprobe CLI wrapper over FFmpeg",
-          "metric": 0,
-          "reason": "zero_recorded_adoption"
-        },
-        {
-          "name": "vlcj-info",
-          "version": "2.0.3",
-          "family": "vlcj-info JNA binding to libmediainfo",
-          "metric": 0,
-          "reason": "zero_recorded_adoption"
-        }
-      ]
+      "excluded": []
     },
     {
       "ecosystem": "javascript",
@@ -9136,210 +8848,129 @@
     },
     {
       "ecosystem": "javascript",
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "metric_field": "downloads",
       "metric_metadata": {
         "name": "npm registry tarball downloads",
-        "window": "2026-10-11:2026-11-09"
+        "window": "2026-10-17:2026-11-15",
+        "merged_mp3_capture": {
+          "note": "Values for every path selected in the former MP3 with ID3v2 or plain MP3 cell come from one capture on the same day, source and window, recorded under merged_mp3_ranking_2026_11_17. Other entries keep their original capture and were already outside the ten-path selection. The window and capture fields of this block describe that capture.",
+          "captured_at_utc": "2026-11-17T16:25:04.378640+00:00",
+          "window": "2026-10-17:2026-11-15",
+          "source": "https://api.npmjs.org/downloads/point/"
+        },
+        "captured_at_utc": "2026-11-17T16:25:04.378640+00:00"
       },
-      "parsers_sha256": "578c6ec0e69a45b63735dbe522dfec4e6d1adecbeb6ed3acf41337ead771f695",
-      "snapshot_sha256": "14e5576684e16deda60a1be901995ed81766445089c20fe057c614173bc62af7",
-      "original_count": 24,
+      "parsers_sha256": "25b266cec505b8394efcbe8b25c0c319079c00aceca2c960f7dbc99213249b76",
+      "snapshot_sha256": "bcc682559c2d345261f0c4ee777cd35c67ca6300c21534a08236e3cc0f93b5af",
+      "original_count": 13,
       "selected_count": 10,
       "selected": [
+        {
+          "name": "mediabunny",
+          "version": "1.66.0",
+          "family": "mediabunny TypeScript MP3 demuxer",
+          "metric": 26071768,
+          "selection": "primary_metric",
+          "rank": 1
+        },
         {
           "name": "music-metadata",
           "version": "12.4.0",
           "family": "music-metadata",
-          "metric": 8670098,
+          "metric": 9827896,
           "selection": "primary_metric",
-          "rank": 1
+          "rank": 2
+        },
+        {
+          "name": "codec-parser",
+          "version": "2.5.0",
+          "family": "codec-parser JavaScript MPEG frame parser",
+          "metric": 2683215,
+          "selection": "primary_metric",
+          "rank": 3
         },
         {
           "name": "@audio/decode-mp3",
           "version": "1.3.1",
           "family": "mpg123 WASM",
-          "metric": 643313,
+          "metric": 703988,
           "selection": "primary_metric",
-          "rank": 2
+          "rank": 4
         },
         {
           "name": "mediainfo.js",
           "version": "0.3.8",
           "family": "MediaInfoLib WASM",
-          "metric": 598389,
+          "metric": 650653,
           "selection": "primary_metric",
-          "rank": 3
+          "rank": 5
         },
         {
           "name": "@audio/decode",
           "version": "4.3.0",
           "family": "mpg123 WASM",
-          "metric": 578919,
+          "metric": 621561,
           "selection": "primary_metric",
-          "rank": 4
+          "rank": 6
         },
         {
           "name": "get-audio-duration",
           "version": "4.0.1",
           "family": "FFprobe wrapper",
-          "metric": 185703,
+          "metric": 206806,
           "selection": "primary_metric",
-          "rank": 5
+          "rank": 7
         },
         {
           "name": "node-id3",
           "version": "0.2.9",
           "family": "node-id3",
-          "metric": 129133,
+          "metric": 145214,
           "selection": "primary_metric",
-          "rank": 6
+          "rank": 8
         },
         {
           "name": "id3js",
           "version": "2.1.1",
           "family": "id3js",
-          "metric": 59379,
+          "metric": 62319,
           "selection": "primary_metric",
-          "rank": 7
+          "rank": 9
         },
         {
           "name": "mp3-duration",
           "version": "1.1.0",
           "family": "mp3-duration",
-          "metric": 42570,
-          "selection": "primary_metric",
-          "rank": 8
-        },
-        {
-          "name": "jsmediatags",
-          "version": "3.9.7",
-          "family": "jsmediatags",
-          "metric": 37432,
-          "selection": "primary_metric",
-          "rank": 9
-        },
-        {
-          "name": "get-mp3-duration",
-          "version": "1.0.0",
-          "family": "get-mp3-duration",
-          "metric": 37105,
+          "metric": 43261,
           "selection": "primary_metric",
           "rank": 10
         }
       ],
       "excluded": [
         {
-          "name": "@dantheman827/taglib-ts",
-          "version": "0.1.5",
-          "family": "TagLib TypeScript port",
-          "metric": 1055,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 14
-        },
-        {
-          "name": "@shapes-org/node-id3",
-          "version": "0.2.0",
-          "family": "node-id3",
-          "metric": 32,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 21
-        },
-        {
-          "name": "audio-tag",
-          "version": "0.1.0",
-          "family": "audio-tag",
-          "metric": 343,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 16
-        },
-        {
-          "name": "audiotagr",
-          "version": "0.2.0",
-          "family": "music-metadata",
-          "metric": 301,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 17
-        },
-        {
-          "name": "id3-meta",
-          "version": "1.1.0",
-          "family": "id3-meta",
-          "metric": 32,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 22
-        },
-        {
-          "name": "id3-parser",
-          "version": "3.0.0",
-          "family": "id3-parser",
-          "metric": 2654,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 13
-        },
-        {
-          "name": "id3-reader",
-          "version": "0.0.2",
-          "family": "id3-reader",
-          "metric": 36,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 20
-        },
-        {
-          "name": "id3v2",
-          "version": "1.0.1",
-          "family": "id3v2",
-          "metric": 150,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 18
-        },
-        {
-          "name": "id3v2-parser",
-          "version": "0.3.0",
-          "family": "id3v2-parser",
-          "metric": 24,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 23
-        },
-        {
-          "name": "jamp3",
-          "version": "0.6.1",
-          "family": "jamp3",
-          "metric": 597,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 15
-        },
-        {
-          "name": "mp3-parser",
-          "version": "0.3.0",
-          "family": "mp3-parser",
-          "metric": 34404,
+          "name": "get-mp3-duration",
+          "version": "1.0.0",
+          "family": "get-mp3-duration",
+          "metric": 41334,
           "reason": "outside_ten_path_ceiling",
           "rank": 11
         },
         {
-          "name": "mp3tag",
-          "version": "1.0.5",
-          "family": "mp3tag",
-          "metric": 89,
+          "name": "jsmediatags",
+          "version": "3.9.7",
+          "family": "jsmediatags",
+          "metric": 38613,
           "reason": "outside_ten_path_ceiling",
-          "rank": 19
+          "rank": 13
         },
         {
-          "name": "mp3tag.js",
-          "version": "3.17.1",
-          "family": "mp3tag.js",
-          "metric": 19950,
+          "name": "mp3-parser",
+          "version": "0.3.0",
+          "family": "biril mp3-parser JavaScript frame-header reader",
+          "metric": 40519,
           "reason": "outside_ten_path_ceiling",
           "rank": 12
-        },
-        {
-          "name": "simple-id3.js",
-          "version": "0.1.0",
-          "family": "simple-id3.js",
-          "metric": 12,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 24
         }
       ]
     },
@@ -11015,24 +10646,30 @@
     },
     {
       "ecosystem": "python",
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "metric_field": "downloads",
       "metric_metadata": {
         "name": "PyPI Stats last_month downloads excluding known mirrors",
         "documentation": "https://pypistats.org/api/",
-        "captured_at_utc": "2026-11-11T21:13:03.878993+00:00",
-        "window": "API-defined last_month rolling period; all requests captured on the same UTC date"
+        "captured_at_utc": "2026-11-17T16:25:25.401552+00:00",
+        "window": "API-defined last_month rolling period; all requests captured on the same UTC date",
+        "merged_mp3_capture": {
+          "note": "Values for every path selected in the former MP3 with ID3v2 or plain MP3 cell come from one capture on the same day, source and window, recorded under merged_mp3_ranking_2026_11_17. Other entries keep their original capture and were already outside the ten-path selection. The window and capture fields of this block describe that capture.",
+          "captured_at_utc": "2026-11-17T16:25:25.401552+00:00",
+          "window": "API-defined last_month, captured the same UTC day",
+          "source": "https://pypistats.org/api/"
+        }
       },
-      "parsers_sha256": "30839d919d0d940fd46e650c9a9951a22cfc43007d969a844f268626e25e851e",
-      "snapshot_sha256": "b445438869ab8d92bad43fa3b59e4694973ead759e520a24a7eb2811da1694da",
-      "original_count": 20,
+      "parsers_sha256": "8afc204f9973241613619ce744a9d4cc561f640c2bb3c4245af0f06a413592f8",
+      "snapshot_sha256": "17b0026401b76799a76b58074db5e3288b555eb4fe0a480fa5a26580c71790ac",
+      "original_count": 11,
       "selected_count": 10,
       "selected": [
         {
           "name": "av",
           "version": "19.0.2",
           "family": "FFmpeg libavformat via PyAV",
-          "metric": 29885680,
+          "metric": 51162307,
           "selection": "primary_metric",
           "rank": 1
         },
@@ -11040,7 +10677,7 @@
           "name": "soundfile",
           "version": "0.14.0",
           "family": "libsndfile MP3 decoder",
-          "metric": 22760358,
+          "metric": 35041933,
           "selection": "primary_metric",
           "rank": 2
         },
@@ -11048,7 +10685,7 @@
           "name": "pydub",
           "version": "0.25.1",
           "family": "pydub via FFmpeg",
-          "metric": 17778631,
+          "metric": 16919511,
           "selection": "primary_metric",
           "rank": 3
         },
@@ -11056,7 +10693,7 @@
           "name": "librosa",
           "version": "1.0.0",
           "family": "librosa via soundfile/libsndfile",
-          "metric": 8560686,
+          "metric": 10902643,
           "selection": "primary_metric",
           "rank": 4
         },
@@ -11064,7 +10701,7 @@
           "name": "ffmpeg-python",
           "version": "0.2.0",
           "family": "ffmpeg-python via external FFprobe",
-          "metric": 7822402,
+          "metric": 10769281,
           "selection": "primary_metric",
           "rank": 5
         },
@@ -11072,7 +10709,7 @@
           "name": "mutagen",
           "version": "1.48.1",
           "family": "Mutagen MP3/ID3 parser",
-          "metric": 6946517,
+          "metric": 10748990,
           "selection": "primary_metric",
           "rank": 6
         },
@@ -11080,7 +10717,7 @@
           "name": "audioread",
           "version": "3.1.0",
           "family": "audioread via FFmpeg",
-          "metric": 6117881,
+          "metric": 7283376,
           "selection": "primary_metric",
           "rank": 7
         },
@@ -11088,7 +10725,7 @@
           "name": "moviepy",
           "version": "2.2.1",
           "family": "MoviePy via bundled FFmpeg",
-          "metric": 4209600,
+          "metric": 5465948,
           "selection": "primary_metric",
           "rank": 8
         },
@@ -11096,7 +10733,7 @@
           "name": "tinytag",
           "version": "2.3.2",
           "family": "TinyTag MP3/ID3 parser",
-          "metric": 4170323,
+          "metric": 4453166,
           "selection": "primary_metric",
           "rank": 9
         },
@@ -11104,91 +10741,19 @@
           "name": "pygame",
           "version": "2.6.1",
           "family": "SDL_mixer MP3 decoder",
-          "metric": 2227949,
+          "metric": 2704018,
           "selection": "primary_metric",
           "rank": 10
         }
       ],
       "excluded": [
         {
-          "name": "audiofile",
-          "version": "1.6.1",
-          "family": "audiofile via soundfile/libsndfile",
-          "metric": 46589,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 15
-        },
-        {
-          "name": "audiomath",
-          "version": "1.23.0",
-          "family": "audiomath via audioread/FFmpeg",
-          "metric": 124,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 18
-        },
-        {
-          "name": "chemz",
-          "version": "0.1.0",
-          "family": "chemz via Mutagen",
-          "metric": 19,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 20
-        },
-        {
-          "name": "eyed3",
-          "version": "0.9.9",
-          "family": "eyeD3 MP3/ID3 parser",
-          "metric": 68040,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 14
-        },
-        {
           "name": "hachoir",
           "version": "3.4.0",
-          "family": "Hachoir MPEG audio parser",
-          "metric": 242917,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 13
-        },
-        {
-          "name": "miniaudio",
-          "version": "1.73",
-          "family": "miniaudio native MP3 decoder",
-          "metric": 662742,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 12
-        },
-        {
-          "name": "mp3-tagger",
-          "version": "1.0",
-          "family": "mp3-tagger ID3 parser",
-          "metric": 124,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 19
-        },
-        {
-          "name": "music-tag",
-          "version": "0.4.3",
-          "family": "music-tag via Mutagen",
-          "metric": 30718,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 16
-        },
-        {
-          "name": "pymediainfo",
-          "version": "7.0.1",
-          "family": "MediaInfo native MP3 parser",
-          "metric": 2128669,
+          "family": "hachoir mpeg_audio parser",
+          "metric": 222718,
           "reason": "outside_ten_path_ceiling",
           "rank": 11
-        },
-        {
-          "name": "pytaglib",
-          "version": "3.2.0",
-          "family": "TagLib native MP3/ID3 parser",
-          "metric": 5937,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 17
         }
       ]
     },
@@ -12884,16 +12449,16 @@
     },
     {
       "ecosystem": "rust",
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "metric_field": "recent_downloads",
       "metric_metadata": {
         "name": "crates.io recent downloads (90 days)",
         "captured_at_utc": "2026-11-12T01:15:01.164806+00:00",
         "source": "https://crates.io/api/v1/crates/{name}"
       },
-      "parsers_sha256": "4fa67810e768f8bf40f4a7abc33797877a6f7c247f800b21e65f909e77dc2048",
+      "parsers_sha256": "276ef8bf5f785af5a2921c8a5d8bb79aef9b75cf45073d49419af1f673eb72dd",
       "snapshot_sha256": "c0a796b3c0f66919314f3cb0120b9322a69afbfc2033b756316c95a2fdef87ac",
-      "original_count": 20,
+      "original_count": 10,
       "selected_count": 10,
       "selected": [
         {
@@ -12977,88 +12542,7 @@
           "rank": 10
         }
       ],
-      "excluded": [
-        {
-          "name": "audio-file",
-          "version": "0.5.1",
-          "family": "audio-file via Symphonia",
-          "metric": 11692,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 14
-        },
-        {
-          "name": "audiotags",
-          "version": "0.5.0",
-          "family": "audiotags via id3",
-          "metric": 9213,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 16
-        },
-        {
-          "name": "creak",
-          "version": "0.3.0",
-          "family": "minimp3 C decoder",
-          "metric": 326,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 20
-        },
-        {
-          "name": "id3-core",
-          "version": "0.3.1",
-          "family": "id3-core tag parser",
-          "metric": 946,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 19
-        },
-        {
-          "name": "minimp3_fixed",
-          "version": "0.5.4",
-          "family": "minimp3 C decoder",
-          "metric": 25567,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 11
-        },
-        {
-          "name": "moosicbox_audiotags",
-          "version": "0.1.0",
-          "family": "moosicbox_audiotags via id3",
-          "metric": 19756,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 12
-        },
-        {
-          "name": "mp3-metadata",
-          "version": "0.4.0",
-          "family": "mp3-metadata parser",
-          "metric": 12857,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 13
-        },
-        {
-          "name": "oxideav-id3",
-          "version": "0.0.7",
-          "family": "oxideav ID3 reader",
-          "metric": 2978,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 18
-        },
-        {
-          "name": "puremp3",
-          "version": "0.1.0",
-          "family": "puremp3 decoder",
-          "metric": 10544,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 15
-        },
-        {
-          "name": "rmp3",
-          "version": "0.3.1",
-          "family": "minimp3 C decoder",
-          "metric": 5848,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 17
-        }
-      ]
+      "excluded": []
     },
     {
       "ecosystem": "php",
@@ -14566,16 +14050,16 @@
     },
     {
       "ecosystem": "php",
-      "format": "mp3_id3v2",
+      "format": "mp3",
       "metric_field": "downloads",
       "metric_metadata": {
         "name": "Packagist lifetime package downloads",
         "definition": "Total downloads of all releases of a Composer package name, not MP3 or ID3 API usage. Compared only within PHP.",
         "captured_at_utc": "2026-11-12T17:29:38.461034+00:00"
       },
-      "parsers_sha256": "876b15cf0e1a940870a8639bba9e14649c5430a7025cb622e7549612cbc6e68e",
+      "parsers_sha256": "1d575ace4ca60bdd7e612cb37a2ccd65aede3916b0979b260c2560857b5b06c7",
       "snapshot_sha256": "0b5f62b5e0da5dfe28cc6b53cdfe7da3b64a4f4574f074c88ef630531209ba6e",
-      "original_count": 20,
+      "original_count": 10,
       "selected_count": 10,
       "selected": [
         {
@@ -14659,89 +14143,9 @@
           "rank": 10
         }
       ],
-      "excluded": [
-        {
-          "name": "audiostreamify/hvap",
-          "version": "0.1.1",
-          "family": "getID3 native MP3 and ID3v2 parser",
-          "metric": 6,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 17
-        },
-        {
-          "name": "codememory/media-file-fork",
-          "version": "v1.0",
-          "family": "Mp3Info native MP3 and ID3v2 parser",
-          "metric": 13,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 16
-        },
-        {
-          "name": "dgoriaev/mp3info",
-          "version": "1.0.3",
-          "family": "Mp3Info native MP3 and ID3v2 parser",
-          "metric": 4,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 18
-        },
-        {
-          "name": "duncan3dc/meta-audio",
-          "version": "0.6.0",
-          "family": "duncan3dc MetaAudio native ID3 parser",
-          "metric": 3672,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 11
-        },
-        {
-          "name": "nicoverbruggen/mediaprobe",
-          "version": "v1.1",
-          "family": "FFmpeg native MP3 and ID3 parser",
-          "metric": 4,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 19
-        },
-        {
-          "name": "phpmlkit/soundfile",
-          "version": "1.2.0",
-          "family": "libsndfile native MP3 and ID3 parser",
-          "metric": 17,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 15
-        },
-        {
-          "name": "pyrex-fwi/id3",
-          "version": "v0.2.0",
-          "family": "MediaInfoLib native MP3 and ID3 parser",
-          "metric": 624,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 12
-        },
-        {
-          "name": "sempia/getid3",
-          "version": "2.0.0.0-p1.9.25",
-          "family": "getID3 native MP3 and ID3v2 parser",
-          "metric": 111,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 13
-        },
-        {
-          "name": "vollbehr/php-reader",
-          "version": "v2.0-rc1",
-          "family": "Sven Vollbehr PHP Reader ID3 family",
-          "metric": 0,
-          "reason": "zero_recorded_adoption"
-        },
-        {
-          "name": "wikimedia/getid3",
-          "version": "v2.0.0-beta5",
-          "family": "getID3 native MP3 and ID3v2 parser",
-          "metric": 27,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 14
-        }
-      ]
+      "excluded": []
     }
   ],
   "selected_total": 770,
-  "excluded_total": 866
+  "excluded_total": 787
 }

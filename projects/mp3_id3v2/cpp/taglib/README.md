@@ -1,8 +1,8 @@
-# taglib — MP3 with ID3v2 / C++
+# taglib — MP3 / C++
 
 Pinned release: `2.3.2`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/cpp/taglib/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/cpp/taglib/README.md)
 
 ## Run from the repository root
 

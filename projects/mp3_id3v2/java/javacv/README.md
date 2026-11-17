@@ -1,8 +1,8 @@
-# javacv — MP3 with ID3v2 / Java
+# javacv — MP3 / Java
 
 Pinned release: `1.5.14`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/java/javacv/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/java/javacv/README.md)
 
 ## Run from the repository root
 

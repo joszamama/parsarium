@@ -1,8 +1,8 @@
-# github.com/ascherkus/go-id3/src/id3 — MP3 with ID3v2 / Go
+# github.com/ascherkus/go-id3/src/id3 — MP3 / Go
 
 Pinned release: `v0.0.0-20120522061058-b139b6a612de`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/go/github-com-ascherkus-go-id3-src-id3/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/go/github-com-ascherkus-go-id3-src-id3/README.md)
 
 ## Run from the repository root
 

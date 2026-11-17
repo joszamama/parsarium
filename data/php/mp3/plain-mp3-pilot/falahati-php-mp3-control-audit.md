@@ -22,7 +22,7 @@ The README says the code is based on [thegallagher/PHP-MP3](https://github.com/t
 The probe is [`falahati-php-mp3-probe.php`](falahati-php-mp3-probe.php). It calls only `MpegAudio::fromFile()`, `getFrameCounts()`, `getTotalDuration()` and `getFrameHeader($i)` getters. Runtime: PHP 8.5.12 CLI with `error_reporting=0`. Without that setting, PHP prints `Deprecated: Implicit conversion from float 2.5 to int loses precision` for `MpegAudioFrameHeader.php` line 369.
 
 ```
-php -d error_reporting=0 data/php/mp3/falahati-php-mp3-probe.php <package root> controls/mp3/<control>.mp3
+php -d error_reporting=0 data/php/mp3/plain-mp3-pilot/falahati-php-mp3-probe.php <package root> controls/mp3/<control>.mp3
 ```
 
 **Tag v0.9.5-alpha2:** neither control finishes. Both were stopped by `timeout 15` with exit code 124. Since PHP 8.0, `substr()` past the end returns `""` instead of `false`, so the `$byte === false` exit in `getStart()` is never reached after the last frame.

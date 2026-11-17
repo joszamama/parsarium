@@ -1,8 +1,8 @@
-# jave-core — MP3 with ID3v2 / Java
+# jave-core — MP3 / Java
 
 Pinned release: `4.2.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/java/jave-core/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/java/jave-core/README.md)
 
 ## Run from the repository root
 

@@ -1,0 +1,1062 @@
+{
+  "schema_version": 1,
+  "decided_on": "2026-11-17",
+  "decision": "The MP3 with ID3v2 format and the plain MP3 pilot format were merged into one MP3 format. Each ecosystem keeps at most ten paths, chosen from the union of the paths selected in either former cell by data/curation/plan.json (scripts/plan_curated_catalog.py) under PROTOCOL.md. The same package selected in both cells counts once; the MP3 with ID3v2 project is kept.",
+  "metric_capture": "C, Go, JavaScript and Python were re-ranked from one fresh capture recorded under merged_mp3_ranking_2026_11_17 in data/<ecosystem>/mp3/registry-snapshot.json (scripts/snapshot_mp3_merge_metrics.py). In C++, Java, Rust and PHP every union package was already in the MP3 with ID3v2 cell, so its recorded capture is kept.",
+  "history": {
+    "plain_mp3_pilot_evidence": "data/<ecosystem>/mp3/plain-mp3-pilot/",
+    "mp3_id3v2_precuration": "data/curation/preten/<ecosystem>/mp3_id3v2_precuration/"
+  },
+  "cells": [
+    {
+      "ecosystem": "c",
+      "metric_field": "install_on_request_365d",
+      "metric_source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
+      "fresh_capture": true,
+      "kept": [
+        {
+          "name": "ffmpeg",
+          "version": "9.0.2",
+          "project": "projects/mp3_id3v2/c/ffmpeg",
+          "control_kind": "id3v2_tagged",
+          "metric": 1764575,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "mpv",
+          "version": "0.42.0",
+          "project": "projects/mp3_id3v2/c/mpv",
+          "control_kind": "id3v2_tagged",
+          "metric": 90679,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "gstreamer",
+          "version": "1.28.9",
+          "project": "projects/mp3_id3v2/c/gstreamer",
+          "control_kind": "id3v2_tagged",
+          "metric": 44439,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "sox",
+          "version": "14.4.2",
+          "project": "projects/mp3_id3v2/c/sox",
+          "control_kind": "id3v2_tagged",
+          "metric": 28167,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "sdl_mixer",
+          "version": "2.8.2",
+          "project": "projects/mp3_id3v2/c/sdl_mixer",
+          "control_kind": "id3v2_tagged",
+          "metric": 15189,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "mpg123",
+          "version": "1.33.7",
+          "project": "projects/mp3_id3v2/c/mpg123",
+          "control_kind": "id3v2_tagged",
+          "metric": 12256,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "libsndfile",
+          "version": "1.2.2",
+          "project": "projects/mp3_id3v2/c/libsndfile",
+          "control_kind": "id3v2_tagged",
+          "metric": 9138,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "lame",
+          "version": "4.0",
+          "project": "projects/mp3_id3v2/c/lame",
+          "control_kind": "id3v2_tagged",
+          "metric": 6992,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "taglib",
+          "version": "2.3.2",
+          "project": "projects/mp3_id3v2/c/taglib",
+          "control_kind": "id3v2_tagged",
+          "metric": 4118,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "vlc",
+          "version": "3.0.24",
+          "project": "projects/mp3_id3v2/c/vlc",
+          "control_kind": "id3v2_tagged",
+          "metric": null,
+          "selection": "supplemental_numeric_metric",
+          "supplemental_metric": 68409
+        }
+      ],
+      "removed": [
+        {
+          "name": "libmad",
+          "version": "0.16.5",
+          "project": "projects/mp3/c/libmad",
+          "control_kind": "untagged_frames",
+          "metric": 1145,
+          "status": "removed_mp3_merge_below_top10",
+          "reason": "outside_ten_path_ceiling"
+        }
+      ],
+      "duplicates": [
+        {
+          "name": "mpg123",
+          "version": "1.33.7",
+          "removed_project": "projects/mp3/c/mpg123",
+          "kept_project": "projects/mp3_id3v2/c/mpg123"
+        }
+      ]
+    },
+    {
+      "ecosystem": "cpp",
+      "metric_field": "install_on_request_365d",
+      "metric_source": "https://formulae.brew.sh/api/analytics/install-on-request/365d.json",
+      "fresh_capture": false,
+      "kept": [
+        {
+          "name": "ffmpeg",
+          "version": "9.0.2",
+          "project": "projects/mp3_id3v2/cpp/ffmpeg",
+          "control_kind": "id3v2_tagged",
+          "metric": 1763198,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "mpv",
+          "version": "0.42.0",
+          "project": "projects/mp3_id3v2/cpp/mpv",
+          "control_kind": "id3v2_tagged",
+          "metric": 91258,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "gstreamer",
+          "version": "1.28.9",
+          "project": "projects/mp3_id3v2/cpp/gstreamer",
+          "control_kind": "id3v2_tagged",
+          "metric": 44909,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "sox",
+          "version": "14.4.2",
+          "project": "projects/mp3_id3v2/cpp/sox",
+          "control_kind": "id3v2_tagged",
+          "metric": 28127,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "sdl_mixer",
+          "version": "2.8.2",
+          "project": "projects/mp3_id3v2/cpp/sdl_mixer",
+          "control_kind": "id3v2_tagged",
+          "metric": 15365,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "mpg123",
+          "version": "1.33.7",
+          "project": "projects/mp3_id3v2/cpp/mpg123",
+          "control_kind": "id3v2_tagged",
+          "metric": 12297,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "libsndfile",
+          "version": "1.2.2",
+          "project": "projects/mp3_id3v2/cpp/libsndfile",
+          "control_kind": "id3v2_tagged",
+          "metric": 9161,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "lame",
+          "version": "4.0",
+          "project": "projects/mp3_id3v2/cpp/lame",
+          "control_kind": "id3v2_tagged",
+          "metric": 6924,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "taglib",
+          "version": "2.3.2",
+          "project": "projects/mp3_id3v2/cpp/taglib",
+          "control_kind": "id3v2_tagged",
+          "metric": 4111,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "vlc",
+          "version": "3.0.24",
+          "project": "projects/mp3_id3v2/cpp/vlc",
+          "control_kind": "id3v2_tagged",
+          "metric": null,
+          "selection": "supplemental_numeric_metric",
+          "supplemental_metric": 68409
+        }
+      ],
+      "removed": [],
+      "duplicates": [
+        {
+          "name": "taglib",
+          "version": "2.3.2",
+          "removed_project": "projects/mp3/cpp/taglib",
+          "kept_project": "projects/mp3_id3v2/cpp/taglib"
+        }
+      ]
+    },
+    {
+      "ecosystem": "go",
+      "metric_field": "imported_by_packages",
+      "metric_source": "pkg.go.dev Imported by package count",
+      "fresh_capture": true,
+      "kept": [
+        {
+          "name": "github.com/faiface/beep/mp3",
+          "version": "v1.1.0",
+          "project": "projects/mp3_id3v2/go/faiface_beep_mp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 444,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "github.com/dhowden/tag",
+          "version": "v0.0.0-20240417053706-3d75831295e8",
+          "project": "projects/mp3_id3v2/go/github_com_dhowden_tag",
+          "control_kind": "id3v2_tagged",
+          "metric": 381,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "github.com/hajimehoshi/go-mp3",
+          "version": "v0.3.4",
+          "project": "projects/mp3_id3v2/go/github_com_hajimehoshi_go_mp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 294,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "github.com/hajimehoshi/ebiten/v2/audio/mp3",
+          "version": "v2.10.6",
+          "project": "projects/mp3_id3v2/go/github_com_hajimehoshi_ebiten_v2_audio_mp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 144,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "github.com/bogem/id3v2/v2",
+          "version": "v2.1.4",
+          "project": "projects/mp3_id3v2/go/github_com_bogem_id3v2_v2",
+          "control_kind": "id3v2_tagged",
+          "metric": 72,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "github.com/tcolgate/mp3",
+          "version": "v0.0.0-20170426193717-e79c5a46d300",
+          "project": "projects/mp3_id3v2/go/github_com_tcolgate_mp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 62,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "github.com/gopxl/beep/v2/mp3",
+          "version": "v2.1.1",
+          "project": "projects/mp3_id3v2/go/github_com_gopxl_beep_v2_mp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 44,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "github.com/tosone/minimp3",
+          "version": "v1.1.0",
+          "project": "projects/mp3_id3v2/go/github_com_tosone_minimp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 34,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "github.com/dmulholl/mp3lib",
+          "version": "v1.0.0",
+          "project": "projects/mp3/go/github_com_dmulholl_mp3lib",
+          "control_kind": "untagged_frames",
+          "metric": 9,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "github.com/ascherkus/go-id3/src/id3",
+          "version": "v0.0.0-20120522061058-b139b6a612de",
+          "project": "projects/mp3_id3v2/go/github_com_ascherkus_go_id3_src_id3",
+          "control_kind": "id3v2_tagged",
+          "metric": 6,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        }
+      ],
+      "removed": [
+        {
+          "name": "github.com/dustin/go-id3",
+          "version": "v0.0.0-20131108194644-73f4b1cf2a4e",
+          "project": "projects/mp3_id3v2/go/github_com_dustin_go_id3",
+          "control_kind": "id3v2_tagged",
+          "metric": 5,
+          "status": "removed_mp3_merge_below_top10",
+          "reason": "outside_ten_path_ceiling"
+        }
+      ],
+      "duplicates": [
+        {
+          "name": "github.com/faiface/beep/mp3",
+          "version": "v1.1.0",
+          "removed_project": "projects/mp3/go/github_com_faiface_beep_mp3",
+          "kept_project": "projects/mp3_id3v2/go/faiface_beep_mp3"
+        },
+        {
+          "name": "github.com/hajimehoshi/go-mp3",
+          "version": "v0.3.4",
+          "removed_project": "projects/mp3/go/github_com_hajimehoshi_go_mp3",
+          "kept_project": "projects/mp3_id3v2/go/github_com_hajimehoshi_go_mp3"
+        },
+        {
+          "name": "github.com/hajimehoshi/ebiten/v2/audio/mp3",
+          "version": "v2.10.6",
+          "removed_project": "projects/mp3/go/github_com_hajimehoshi_ebiten_v2_audio_mp3",
+          "kept_project": "projects/mp3_id3v2/go/github_com_hajimehoshi_ebiten_v2_audio_mp3"
+        },
+        {
+          "name": "github.com/tcolgate/mp3",
+          "version": "v0.0.0-20170426193717-e79c5a46d300",
+          "removed_project": "projects/mp3/go/github_com_tcolgate_mp3",
+          "kept_project": "projects/mp3_id3v2/go/github_com_tcolgate_mp3"
+        },
+        {
+          "name": "github.com/gopxl/beep/v2/mp3",
+          "version": "v2.1.1",
+          "removed_project": "projects/mp3/go/github_com_gopxl_beep_v2_mp3",
+          "kept_project": "projects/mp3_id3v2/go/github_com_gopxl_beep_v2_mp3"
+        },
+        {
+          "name": "github.com/tosone/minimp3",
+          "version": "v1.1.0",
+          "removed_project": "projects/mp3/go/github_com_tosone_minimp3",
+          "kept_project": "projects/mp3_id3v2/go/github_com_tosone_minimp3"
+        }
+      ]
+    },
+    {
+      "ecosystem": "java",
+      "metric_field": "direct_dependent_count",
+      "metric_source": "deps.dev version-level directDependentCount",
+      "fresh_capture": false,
+      "kept": [
+        {
+          "name": "jcodec",
+          "version": "0.2.5",
+          "project": "projects/mp3_id3v2/java/jcodec",
+          "control_kind": "id3v2_tagged",
+          "metric": 44,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "mp3spi",
+          "version": "1.9.5.4",
+          "project": "projects/mp3_id3v2/java/mp3spi",
+          "control_kind": "id3v2_tagged",
+          "metric": 38,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "jlayer",
+          "version": "1.0.1",
+          "project": "projects/mp3_id3v2/java/jlayer",
+          "control_kind": "id3v2_tagged",
+          "metric": 33,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "bytedeco-ffmpeg",
+          "version": "8.1.2-1.5.14",
+          "project": "projects/mp3_id3v2/java/bytedeco_ffmpeg",
+          "control_kind": "id3v2_tagged",
+          "metric": 9,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "jaudiotagger",
+          "version": "3.0.1",
+          "project": "projects/mp3_id3v2/java/jaudiotagger",
+          "control_kind": "id3v2_tagged",
+          "metric": 7,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "javacv",
+          "version": "1.5.14",
+          "project": "projects/mp3_id3v2/java/javacv",
+          "control_kind": "id3v2_tagged",
+          "metric": 4,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "javamp3",
+          "version": "1.0.1",
+          "project": "projects/mp3_id3v2/java/javamp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 4,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "mp3agic",
+          "version": "0.9.1",
+          "project": "projects/mp3_id3v2/java/mp3agic",
+          "control_kind": "id3v2_tagged",
+          "metric": 4,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "jaffree",
+          "version": "2024.08.29",
+          "project": "projects/mp3_id3v2/java/jaffree",
+          "control_kind": "id3v2_tagged",
+          "metric": 2,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "jave-core",
+          "version": "4.2.0",
+          "project": "projects/mp3_id3v2/java/jave_core",
+          "control_kind": "id3v2_tagged",
+          "metric": 2,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        }
+      ],
+      "removed": [],
+      "duplicates": [
+        {
+          "name": "jcodec",
+          "version": "0.2.5",
+          "removed_project": "projects/mp3/java/jcodec",
+          "kept_project": "projects/mp3_id3v2/java/jcodec"
+        },
+        {
+          "name": "mp3spi",
+          "version": "1.9.5.4",
+          "removed_project": "projects/mp3/java/mp3spi",
+          "kept_project": "projects/mp3_id3v2/java/mp3spi"
+        },
+        {
+          "name": "jlayer",
+          "version": "1.0.1",
+          "removed_project": "projects/mp3/java/jlayer",
+          "kept_project": "projects/mp3_id3v2/java/jlayer"
+        },
+        {
+          "name": "jaudiotagger",
+          "version": "3.0.1",
+          "removed_project": "projects/mp3/java/jaudiotagger",
+          "kept_project": "projects/mp3_id3v2/java/jaudiotagger"
+        },
+        {
+          "name": "mp3agic",
+          "version": "0.9.1",
+          "removed_project": "projects/mp3/java/mp3agic",
+          "kept_project": "projects/mp3_id3v2/java/mp3agic"
+        }
+      ]
+    },
+    {
+      "ecosystem": "javascript",
+      "metric_field": "downloads",
+      "metric_source": "npm registry tarball downloads",
+      "fresh_capture": true,
+      "kept": [
+        {
+          "name": "mediabunny",
+          "version": "1.66.0",
+          "project": "projects/mp3/javascript/mediabunny",
+          "control_kind": "untagged_frames",
+          "metric": 26071768,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "music-metadata",
+          "version": "12.4.0",
+          "project": "projects/mp3_id3v2/javascript/music_metadata",
+          "control_kind": "id3v2_tagged",
+          "metric": 9827896,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "codec-parser",
+          "version": "2.5.0",
+          "project": "projects/mp3/javascript/codec_parser",
+          "control_kind": "untagged_frames",
+          "metric": 2683215,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "@audio/decode-mp3",
+          "version": "1.3.1",
+          "project": "projects/mp3_id3v2/javascript/audio_decode_mp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 703988,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "mediainfo.js",
+          "version": "0.3.8",
+          "project": "projects/mp3_id3v2/javascript/mediainfo_js",
+          "control_kind": "id3v2_tagged",
+          "metric": 650653,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "@audio/decode",
+          "version": "4.3.0",
+          "project": "projects/mp3_id3v2/javascript/audio_decode",
+          "control_kind": "id3v2_tagged",
+          "metric": 621561,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "get-audio-duration",
+          "version": "4.0.1",
+          "project": "projects/mp3_id3v2/javascript/get_audio_duration",
+          "control_kind": "id3v2_tagged",
+          "metric": 206806,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "node-id3",
+          "version": "0.2.9",
+          "project": "projects/mp3_id3v2/javascript/node_id3",
+          "control_kind": "id3v2_tagged",
+          "metric": 145214,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "id3js",
+          "version": "2.1.1",
+          "project": "projects/mp3_id3v2/javascript/id3js",
+          "control_kind": "id3v2_tagged",
+          "metric": 62319,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "mp3-duration",
+          "version": "1.1.0",
+          "project": "projects/mp3_id3v2/javascript/mp3_duration",
+          "control_kind": "id3v2_tagged",
+          "metric": 43261,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        }
+      ],
+      "removed": [
+        {
+          "name": "get-mp3-duration",
+          "version": "1.0.0",
+          "project": "projects/mp3_id3v2/javascript/get_mp3_duration",
+          "control_kind": "id3v2_tagged",
+          "metric": 41334,
+          "status": "removed_mp3_merge_below_top10",
+          "reason": "outside_ten_path_ceiling"
+        },
+        {
+          "name": "jsmediatags",
+          "version": "3.9.7",
+          "project": "projects/mp3_id3v2/javascript/jsmediatags",
+          "control_kind": "id3v2_tagged",
+          "metric": 38613,
+          "status": "removed_mp3_merge_below_top10",
+          "reason": "outside_ten_path_ceiling"
+        },
+        {
+          "name": "mp3-parser",
+          "version": "0.3.0",
+          "project": "projects/mp3/javascript/mp3_parser",
+          "control_kind": "untagged_frames",
+          "metric": 40519,
+          "status": "removed_mp3_merge_below_top10",
+          "reason": "outside_ten_path_ceiling"
+        }
+      ],
+      "duplicates": [
+        {
+          "name": "music-metadata",
+          "version": "12.5.0",
+          "removed_project": "projects/mp3/javascript/music_metadata",
+          "kept_project": "projects/mp3_id3v2/javascript/music_metadata"
+        },
+        {
+          "name": "mp3-duration",
+          "version": "1.1.0",
+          "removed_project": "projects/mp3/javascript/mp3_duration",
+          "kept_project": "projects/mp3_id3v2/javascript/mp3_duration"
+        }
+      ]
+    },
+    {
+      "ecosystem": "python",
+      "metric_field": "downloads",
+      "metric_source": "PyPI Stats last_month downloads excluding known mirrors",
+      "fresh_capture": true,
+      "kept": [
+        {
+          "name": "av",
+          "version": "19.0.2",
+          "project": "projects/mp3_id3v2/python/av",
+          "control_kind": "id3v2_tagged",
+          "metric": 51162307,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "soundfile",
+          "version": "0.14.0",
+          "project": "projects/mp3_id3v2/python/soundfile",
+          "control_kind": "id3v2_tagged",
+          "metric": 35041933,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "pydub",
+          "version": "0.25.1",
+          "project": "projects/mp3_id3v2/python/pydub",
+          "control_kind": "id3v2_tagged",
+          "metric": 16919511,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "librosa",
+          "version": "1.0.0",
+          "project": "projects/mp3_id3v2/python/librosa",
+          "control_kind": "id3v2_tagged",
+          "metric": 10902643,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "ffmpeg-python",
+          "version": "0.2.0",
+          "project": "projects/mp3_id3v2/python/ffmpeg_python",
+          "control_kind": "id3v2_tagged",
+          "metric": 10769281,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "mutagen",
+          "version": "1.48.1",
+          "project": "projects/mp3_id3v2/python/mutagen",
+          "control_kind": "id3v2_tagged",
+          "metric": 10748990,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "audioread",
+          "version": "3.1.0",
+          "project": "projects/mp3_id3v2/python/audioread",
+          "control_kind": "id3v2_tagged",
+          "metric": 7283376,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "moviepy",
+          "version": "2.2.1",
+          "project": "projects/mp3_id3v2/python/moviepy",
+          "control_kind": "id3v2_tagged",
+          "metric": 5465948,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "tinytag",
+          "version": "2.3.2",
+          "project": "projects/mp3_id3v2/python/tinytag",
+          "control_kind": "id3v2_tagged",
+          "metric": 4453166,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "pygame",
+          "version": "2.6.1",
+          "project": "projects/mp3_id3v2/python/pygame",
+          "control_kind": "id3v2_tagged",
+          "metric": 2704018,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        }
+      ],
+      "removed": [
+        {
+          "name": "hachoir",
+          "version": "3.4.0",
+          "project": "projects/mp3/python/hachoir",
+          "control_kind": "untagged_frames",
+          "metric": 222718,
+          "status": "removed_mp3_merge_below_top10",
+          "reason": "outside_ten_path_ceiling"
+        }
+      ],
+      "duplicates": [
+        {
+          "name": "mutagen",
+          "version": "1.48.1",
+          "removed_project": "projects/mp3/python/mutagen",
+          "kept_project": "projects/mp3_id3v2/python/mutagen"
+        },
+        {
+          "name": "tinytag",
+          "version": "2.3.2",
+          "removed_project": "projects/mp3/python/tinytag",
+          "kept_project": "projects/mp3_id3v2/python/tinytag"
+        }
+      ]
+    },
+    {
+      "ecosystem": "rust",
+      "metric_field": "recent_downloads",
+      "metric_source": "https://crates.io/api/v1/crates/{name}",
+      "fresh_capture": false,
+      "kept": [
+        {
+          "name": "symphonia-metadata",
+          "version": "0.6.1",
+          "project": "projects/mp3_id3v2/rust/symphonia_metadata",
+          "control_kind": "id3v2_tagged",
+          "metric": 11287777,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "symphonia",
+          "version": "0.6.1",
+          "project": "projects/mp3_id3v2/rust/symphonia",
+          "control_kind": "id3v2_tagged",
+          "metric": 11081825,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "symphonia-bundle-mp3",
+          "version": "0.6.1",
+          "project": "projects/mp3_id3v2/rust/symphonia_bundle_mp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 10337517,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "id3",
+          "version": "1.17.3",
+          "project": "projects/mp3_id3v2/rust/id3",
+          "control_kind": "id3v2_tagged",
+          "metric": 1655284,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "lofty",
+          "version": "0.25.5",
+          "project": "projects/mp3_id3v2/rust/lofty",
+          "control_kind": "id3v2_tagged",
+          "metric": 677609,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "minimp3",
+          "version": "0.6.1",
+          "project": "projects/mp3_id3v2/rust/minimp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 156734,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "mp3-duration",
+          "version": "0.1.10",
+          "project": "projects/mp3_id3v2/rust/mp3_duration",
+          "control_kind": "id3v2_tagged",
+          "metric": 150661,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "rusty_mp3",
+          "version": "1.0.5",
+          "project": "projects/mp3_id3v2/rust/rusty_mp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 66835,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "nanomp3",
+          "version": "0.2.0",
+          "project": "projects/mp3_id3v2/rust/nanomp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 40169,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "symphonium",
+          "version": "0.13.0",
+          "project": "projects/mp3_id3v2/rust/symphonium",
+          "control_kind": "id3v2_tagged",
+          "metric": 30932,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        }
+      ],
+      "removed": [],
+      "duplicates": [
+        {
+          "name": "symphonia",
+          "version": "0.6.1",
+          "removed_project": "projects/mp3/rust/symphonia",
+          "kept_project": "projects/mp3_id3v2/rust/symphonia"
+        },
+        {
+          "name": "symphonia-bundle-mp3",
+          "version": "0.6.1",
+          "removed_project": "projects/mp3/rust/symphonia_bundle_mp3",
+          "kept_project": "projects/mp3_id3v2/rust/symphonia_bundle_mp3"
+        },
+        {
+          "name": "minimp3",
+          "version": "0.6.1",
+          "removed_project": "projects/mp3/rust/minimp3",
+          "kept_project": "projects/mp3_id3v2/rust/minimp3"
+        },
+        {
+          "name": "mp3-duration",
+          "version": "0.1.10",
+          "removed_project": "projects/mp3/rust/mp3_duration",
+          "kept_project": "projects/mp3_id3v2/rust/mp3_duration"
+        },
+        {
+          "name": "rusty_mp3",
+          "version": "1.0.6",
+          "removed_project": "projects/mp3/rust/rusty_mp3",
+          "kept_project": "projects/mp3_id3v2/rust/rusty_mp3"
+        },
+        {
+          "name": "nanomp3",
+          "version": "0.2.0",
+          "removed_project": "projects/mp3/rust/nanomp3",
+          "kept_project": "projects/mp3_id3v2/rust/nanomp3"
+        }
+      ]
+    },
+    {
+      "ecosystem": "php",
+      "metric_field": "downloads",
+      "metric_source": "Packagist lifetime package downloads",
+      "fresh_capture": false,
+      "kept": [
+        {
+          "name": "james-heinrich/getid3",
+          "version": "v1.9.28",
+          "project": "projects/mp3_id3v2/php/getid3",
+          "control_kind": "id3v2_tagged",
+          "metric": 15655021,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "wapmorgan/mp3info",
+          "version": "0.1.1",
+          "project": "projects/mp3_id3v2/php/wapmorgan_mp3info",
+          "control_kind": "id3v2_tagged",
+          "metric": 1511066,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "christophwurst/id3parser",
+          "version": "v0.1.4",
+          "project": "projects/mp3_id3v2/php/christophwurst_id3parser",
+          "control_kind": "id3v2_tagged",
+          "metric": 832987,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "mhor/php-mediainfo",
+          "version": "5.8.0",
+          "project": "projects/mp3_id3v2/php/mhor_php_mediainfo",
+          "control_kind": "id3v2_tagged",
+          "metric": 651659,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "owen-oj/laravel-getid3",
+          "version": "v2.6.0",
+          "project": "projects/mp3_id3v2/php/owen_oj_laravel_getid3",
+          "control_kind": "id3v2_tagged",
+          "metric": 590279,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "wapmorgan/media-file",
+          "version": "0.1.4",
+          "project": "projects/mp3_id3v2/php/wapmorgan_media_file",
+          "control_kind": "id3v2_tagged",
+          "metric": 248747,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "buggedcom/phpvideotoolkit",
+          "version": "2.2.5",
+          "project": "projects/mp3_id3v2/php/buggedcom_phpvideotoolkit",
+          "control_kind": "id3v2_tagged",
+          "metric": 89242,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "debach/zend-mp3",
+          "version": "1.8.1",
+          "project": "projects/mp3_id3v2/php/debach_zend_mp3",
+          "control_kind": "id3v2_tagged",
+          "metric": 45193,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "kiwilan/php-audio",
+          "version": "4.0.02",
+          "project": "projects/mp3_id3v2/php/kiwilan_php_audio",
+          "control_kind": "id3v2_tagged",
+          "metric": 20408,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        },
+        {
+          "name": "indiehd/audio-manipulator",
+          "version": "v4.1.0",
+          "project": "projects/mp3_id3v2/php/indiehd_audio_manipulator",
+          "control_kind": "id3v2_tagged",
+          "metric": 8191,
+          "selection": "primary_metric",
+          "supplemental_metric": null
+        }
+      ],
+      "removed": [],
+      "duplicates": [
+        {
+          "name": "james-heinrich/getid3",
+          "version": "v1.9.28",
+          "removed_project": "projects/mp3/php/getid3",
+          "kept_project": "projects/mp3_id3v2/php/getid3"
+        },
+        {
+          "name": "wapmorgan/mp3info",
+          "version": "0.1.1",
+          "removed_project": "projects/mp3/php/wapmorgan_mp3info",
+          "kept_project": "projects/mp3_id3v2/php/wapmorgan_mp3info"
+        }
+      ]
+    }
+  ],
+  "removed_projects": [
+    "projects/mp3/c/libmad",
+    "projects/mp3/c/mpg123",
+    "projects/mp3/cpp/taglib",
+    "projects/mp3/go/github_com_faiface_beep_mp3",
+    "projects/mp3/go/github_com_gopxl_beep_v2_mp3",
+    "projects/mp3/go/github_com_hajimehoshi_ebiten_v2_audio_mp3",
+    "projects/mp3/go/github_com_hajimehoshi_go_mp3",
+    "projects/mp3/go/github_com_tcolgate_mp3",
+    "projects/mp3/go/github_com_tosone_minimp3",
+    "projects/mp3/java/jaudiotagger",
+    "projects/mp3/java/jcodec",
+    "projects/mp3/java/jlayer",
+    "projects/mp3/java/mp3agic",
+    "projects/mp3/java/mp3spi",
+    "projects/mp3/javascript/mp3_duration",
+    "projects/mp3/javascript/mp3_parser",
+    "projects/mp3/javascript/music_metadata",
+    "projects/mp3/php/getid3",
+    "projects/mp3/php/wapmorgan_mp3info",
+    "projects/mp3/python/hachoir",
+    "projects/mp3/python/mutagen",
+    "projects/mp3/python/tinytag",
+    "projects/mp3/rust/minimp3",
+    "projects/mp3/rust/mp3_duration",
+    "projects/mp3/rust/nanomp3",
+    "projects/mp3/rust/rusty_mp3",
+    "projects/mp3/rust/symphonia",
+    "projects/mp3/rust/symphonia_bundle_mp3",
+    "projects/mp3_id3v2/go/github_com_dustin_go_id3",
+    "projects/mp3_id3v2/javascript/get_mp3_duration",
+    "projects/mp3_id3v2/javascript/jsmediatags"
+  ],
+  "kept_total": 80
+}

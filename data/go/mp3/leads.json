@@ -6,12 +6,6 @@
     "source": "https://pkg.go.dev/github.com/200sc/klangsynthese/mp3"
   },
   {
-    "name": "github.com/dmulholl/mp3lib",
-    "status": "unresolved",
-    "reason": "Documented NextID3v2Tag and NextFrame read local streams; a control adapter with a qualifying parsed field remains unchecked.",
-    "source": "https://pkg.go.dev/github.com/dmulholl/mp3lib"
-  },
-  {
     "name": "pipelined.dev/audio/mp3",
     "status": "unresolved",
     "reason": "Documented MP3 pipeline components have three visible importers; local setup and control output remain unchecked.",
@@ -64,5 +58,13 @@
     "status": "excluded",
     "reason": "The visible Go API is for LAME encoding; a documented local MP3 or ID3v2 parsing API was not established.",
     "source": "https://pkg.go.dev/github.com/sjzar/go-lame"
+  },
+  {
+    "name": "github.com/dustin/go-id3",
+    "status": "removed_mp3_merge_below_top10",
+    "version_seen": "v0.0.0-20131108194644-73f4b1cf2a4e",
+    "metric": 5,
+    "reason": "Verified and runnable before the MP3 merge (ID3v2-tagged control), but outside the ten most-adopted paths of the merged MP3 cell. Project removed; see data/curation/mp3-merge.json.",
+    "source": "https://pkg.go.dev/github.com/dustin/go-id3@v0.0.0-20131108194644-73f4b1cf2a4e"
   }
 ]

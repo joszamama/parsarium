@@ -1,0 +1,250 @@
+[
+  {
+    "name": "taglib",
+    "version": "2.3.2",
+    "license": "LGPL-2.1-only OR MPL-1.1",
+    "license_evidence": "https://taglib.org/releases/taglib-2.3.2.tar.gz",
+    "documentation": "https://taglib.org/api/",
+    "input_api": "taglib_file_new_type(local filename, TagLib_File_MPEG); taglib_tag_title/artist",
+    "adapter": "adapters/c/mp3_id3v2/taglib.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control"
+    },
+    "scope": "ID3v2 title and artist from a valid tagged MP3",
+    "family": "TagLib ID3v2 parser",
+    "family_note": "The C simple API delegates to the TagLib C++ core; C and C++ share the same ID3v2 engine.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/c/taglib",
+    "verified_result": "ID3v2-tagged control: ID3v2 title and artist from a valid tagged MP3"
+  },
+  {
+    "name": "mpg123",
+    "version": "1.33.7",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://www.mpg123.de/download/mpg123-1.33.7.tar.bz2",
+    "documentation": "https://www.mpg123.org/api/group__mpg123__metadata.shtml",
+    "input_api": "mpg123_open(local filename); mpg123_scan; mpg123_id3(v2)->title",
+    "adapter": "adapters/c/mp3_id3v2/mpg123.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "id3v2_version": 3
+    },
+    "scope": "ID3v2 title/version after scanning valid MP3 audio",
+    "family": "libmpg123 MPEG audio and ID3v2 parser",
+    "family_note": "The same C library is called from C and C++; mpg123_scan reads the audio stream and mpg123_id3 returns parsed ID3v2 fields.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/c/mpg123",
+    "verified_result": "ID3v2-tagged control: ID3v2 title/version after scanning valid MP3 audio"
+  },
+  {
+    "name": "ffmpeg",
+    "version": "9.0.2",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "https://ffmpeg.org/releases/ffmpeg-9.0.2.tar.xz",
+    "documentation": "https://ffmpeg.org/doxygen/trunk/group__lavf__decoding.html",
+    "input_api": "avformat_open_input(local filename); avformat_find_stream_info; format metadata title and MP3 stream codec",
+    "adapter": "adapters/c/mp3_id3v2/ffmpeg.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "mp3_streams": 1
+    },
+    "scope": "ID3v2 title and identified MP3 audio stream",
+    "family": "FFmpeg libavformat MP3 demuxer and ID3v2 metadata reader",
+    "family_note": "The same FFmpeg libavformat C demuxer serves C and C++ call sites. It identifies the MP3 audio stream and parses ID3v2 title metadata.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/c/ffmpeg",
+    "verified_result": "ID3v2-tagged control: ID3v2 title and identified MP3 audio stream"
+  },
+  {
+    "name": "libsndfile",
+    "version": "1.2.2",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/libsndfile/libsndfile/releases/download/1.2.2/libsndfile-1.2.2.tar.xz",
+    "documentation": "https://libsndfile.github.io/libsndfile/api.html",
+    "input_api": "sf_open(local tagged MP3 filename, SFM_READ, SF_INFO); sf_get_string(SF_STR_TITLE); sf_readf_float decoded audio frame",
+    "adapter": "adapters/c/mp3_id3v2/libsndfile.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "sample_rate": 8000,
+      "channels": 1,
+      "frames": 8000,
+      "decoded_frames": 1
+    },
+    "scope": "ID3v2 title, MPEG Layer III sample rate/channels/frame count, and one decoded audio frame",
+    "family": "libsndfile MPEG frontend over libmpg123 decoder and ID3v2 reader",
+    "family_note": "The pinned libsndfile mpeg_decode.c uses mpg123_id3 and mpg123 audio decoding. This is a distinct package input API sharing the separately counted libmpg123 syntax engine. C and C++ call sites use the same C implementation.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/c/libsndfile",
+    "verified_result": "ID3v2-tagged control: ID3v2 title, MPEG Layer III sample rate/channels/frame count, and one decoded audio frame"
+  },
+  {
+    "name": "sdl_mixer",
+    "version": "2.8.2",
+    "license": "Zlib",
+    "license_evidence": "https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.8.2/SDL2_mixer-2.8.2.tar.gz",
+    "documentation": "https://wiki.libsdl.org/SDL2_mixer/Mix_LoadMUS",
+    "input_api": "Mix_Init(MIX_INIT_MP3); Mix_OpenAudio(dummy device); Mix_LoadMUS(local filename); Mix_GetMusicType/Mix_GetMusicTitleTag/Mix_GetMusicArtistTag/Mix_MusicDuration",
+    "adapter": "adapters/c/mp3_id3v2/sdl_mixer.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "artist": "Control",
+      "duration_ms": 1000
+    },
+    "scope": "ID3v2 title and artist plus a 1-second MP3 music duration",
+    "family": "SDL2_mixer ID3v2 tag reader and mpg123 MP3 decoder",
+    "family_note": "The pinned music_mpg123.c calls mp3_read_tags from mp3utils.c and links libmpg123 for audio. C and C++ adapters use the same SDL2_mixer C API. SDL3_mixer is another major release of the same upstream package and is not separately counted.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/c/sdl_mixer",
+    "verified_result": "ID3v2-tagged control: ID3v2 title and artist plus a 1-second MP3 music duration"
+  },
+  {
+    "name": "sox",
+    "version": "14.4.2",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "license_evidence": "https://downloads.sourceforge.net/project/sox/sox/14.4.2/sox-14.4.2.tar.gz",
+    "documentation": "https://sourceforge.net/p/sox/code/ci/master/tree/src/example0.c",
+    "input_api": "sox_init; sox_open_read(local filename, NULL, NULL, NULL); sox_read decoded sample; filetype and signal fields",
+    "adapter": "adapters/c/mp3_id3v2/sox.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "filetype": "mp3",
+      "sample_rate": 8000,
+      "channels": 1,
+      "decoded_samples": 1
+    },
+    "scope": "MP3 audio parsing and one decoded sample from a valid ID3v2-tagged input; ID3v2 text is not exposed",
+    "family": "libsox MP3 handler over libmad decoder",
+    "family_note": "The pinned src/mp3.c is the MP3 format handler and the installed libsox links libmad. C and C++ call sites use the same C library. The valid ID3v2-tagged control is accepted, but libsox does not return its title.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/c/sox",
+    "verified_result": "ID3v2-tagged control: MP3 audio parsing and one decoded sample from a valid ID3v2-tagged input; ID3v2 text is not exposed"
+  },
+  {
+    "name": "gstreamer",
+    "version": "1.28.9",
+    "license": "LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT",
+    "license_evidence": "https://gitlab.freedesktop.org/gstreamer/gstreamer/-/archive/1.28.9/gstreamer-1.28.9.tar.bz2",
+    "documentation": "https://gstreamer.freedesktop.org/documentation/pbutils/gstdiscoverer.html",
+    "input_api": "gst_filename_to_uri(local filename); gst_discoverer_discover_uri; gst_discoverer_info_get_tags/audio_streams",
+    "adapter": "adapters/c/mp3_id3v2/gstreamer.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "sample_rate": 8000,
+      "channels": 1,
+      "audio_streams": 1
+    },
+    "scope": "ID3v2 title plus one parsed MPEG audio stream with sample rate and channels",
+    "family": "GStreamer id3demux and mpegaudioparse plugins via GstDiscoverer",
+    "family_note": "The C and C++ call sites use the same GStreamer C API. GstDiscoverer invokes the pinned id3demux and MPEG audio parser plugins; the monorepo and installed plugin binaries are pinned.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/c/gstreamer",
+    "verified_result": "ID3v2-tagged control: ID3v2 title plus one parsed MPEG audio stream with sample rate and channels"
+  },
+  {
+    "name": "mpv",
+    "version": "0.42.0",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/mpv-player/mpv/archive/refs/tags/v0.42.0.tar.gz",
+    "documentation": "https://mpv.io/manual/stable/",
+    "input_api": "mpv_create/initialize; mpv_command(loadfile, local filename); MPV_EVENT_FILE_LOADED; mpv_get_property metadata/by-key/title, track-list/0/codec, duration",
+    "adapter": "adapters/c/mp3_id3v2/mpv.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "codec": "mp3",
+      "duration_ms": 1000
+    },
+    "scope": "ID3v2 title, MP3 audio track codec and duration from local tagged file",
+    "family": "libmpv local media frontend over FFmpeg libavformat and libavcodec",
+    "family_note": "libmpv 0.42.0 calls FFmpeg 9.0.2 libavformat/id3v2.c and mp3dec.c, the same underlying parser family as the direct FFmpeg row and the C++ mpv row. The local-file catalog control reports the tag title, MP3 track codec, and duration. The AFL byte bridge uses mpv's fd://42 fuzz mode, disables decoding, and scopes feedback to those FFmpeg parsers and mpv's demux_lavf wrapper.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/c/mpv",
+    "verified_result": "ID3v2-tagged control: ID3v2 title, MP3 audio track codec and duration from local tagged file"
+  },
+  {
+    "name": "lame",
+    "version": "4.0",
+    "license": "LGPL-2.0-or-later",
+    "license_evidence": "https://downloads.sourceforge.net/project/lame/lame/4.0/lame-4.0.tar.gz",
+    "documentation": "https://github.com/lameproject/lame/blob/master/include/lame.h",
+    "input_api": "hip_decode_init; hip_decode1_headers(local tagged MP3 bytes); inspect mp3data_struct; hip_decode_exit",
+    "adapter": "adapters/c/mp3_id3v2/lame.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "sample_rate": 8000,
+      "channels": 1,
+      "bitrate_kbps": 32,
+      "decoded_samples": 576
+    },
+    "scope": "MP3 frame header and 576 decoded PCM samples from ID3v2-tagged local bytes; tag text is not exposed",
+    "family": "LAME HIP decoder interface over libmpg123",
+    "family_note": "The pinned LAME HIP interface accepts the full tagged control and returns MP3 frame fields; the installed libmp3lame links the separately verified libmpg123 decoder. C and C++ use one C library.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/c/lame",
+    "verified_result": "ID3v2-tagged control: MP3 frame header and 576 decoded PCM samples from ID3v2-tagged local bytes; tag text is not exposed"
+  },
+  {
+    "name": "vlc",
+    "version": "3.0.24",
+    "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+    "license_evidence": "https://get.videolan.org/vlc/3.0.24/vlc-3.0.24.tar.xz",
+    "documentation": "https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html",
+    "input_api": "libvlc_media_new_path(instance, local filename); libvlc_media_parse_with_options; libvlc_media_get_meta; libvlc_media_tracks_get",
+    "adapter": "adapters/c/mp3_id3v2/vlc.c",
+    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "expected_output": {
+      "title": "Parsarium",
+      "audio_tracks": 1,
+      "mp3_tracks": 1
+    },
+    "scope": "ID3v2 title and recognized MP3 audio track from valid local tagged MP3",
+    "family": "VLC media parser with bundled TagLib and MPEG audio plugins",
+    "family_note": "The verified Docker routes statically register filesystem, skiptags, es, packetizer_mpegaudio and taglib. Both VLC native ID3v2 code and VLC-pinned, patched TagLib 1.13.1 parse the valid tag. C and C++ call sites share this underlying parser family; the separate TagLib package paths use TagLib 2.3.2.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/c/vlc",
+    "verified_result": "ID3v2-tagged control: ID3v2 title and recognized MP3 audio track from valid local tagged MP3"
+  },
+  {
+    "name": "libmad",
+    "version": "0.16.5",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "https://codeberg.org/tenacityteam/libmad/releases/download/0.16.5/libmad-0.16.5.tar.gz (COPYING, COPYRIGHT)",
+    "input_api": "mad_stream_buffer(stream, local bytes followed by MAD_BUFFER_GUARD zero bytes, length); mad_frame_decode() until MAD_ERROR_BUFLEN; mad_synth_frame(); MAD_RECOVERABLE() error classification",
+    "documentation": "https://codeberg.org/tenacityteam/libmad/src/tag/0.16.5/include/mad.h.in",
+    "documentation_note": "libmad has no separate API manual; the public header declares the stream/frame/synth calls, error codes and MAD_BUFFER_GUARD, and examples/minimad.c shows mad_stream_buffer over an in-memory file.",
+    "source": "https://codeberg.org/tenacityteam/libmad/releases/download/0.16.5/libmad-0.16.5.tar.gz",
+    "project": "projects/mp3/c/libmad",
+    "homebrew_formula": "mad",
+    "scope": "Every MPEG Layer III frame of an untagged stream buffered from memory, decoded and synthesized: sample rate, channels, layer, frame count, decoded samples per channel, bitrate range, recoverable errors, consumed bytes",
+    "family": "libmad MPEG audio decoder",
+    "family_note": "Independent fixed-point decoder, not libmpg123. The same libmad engine is linked by the SoX path under mp3_id3v2/c and by libmp3splt and mpg321 leads here.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "layer": 3,
+      "frames": 11,
+      "decoded_samples": 12672,
+      "bit_rate_min": 64000,
+      "bit_rate_max": 64000,
+      "recoverable_errors": 0,
+      "consumed_bytes": 2298,
+      "input_bytes": 2298
+    },
+    "metric": {
+      "name": "Homebrew install-on-request count (365 days)",
+      "value": 1145,
+      "source": "data/c/mp3/registry-snapshot.json",
+      "note": "Aggregate 365-day install-on-request endpoint, window 2025-11-17 to 2026-11-17, rechecked 2026-11-17 at 1,145; the per-formula API splits it into mad 1,141 and mad --HEAD 4. It counts installs of the formula, not programs calling the decoder API."
+    },
+    "control_kind": "untagged_frames",
+    "verified_result": "Untagged MPEG frame controls: Every MPEG Layer III frame of an untagged stream buffered from memory, decoded and synthesized: sample rate, channels, layer, frame count, decoded samples per channel, bitrate range, recoverable errors, consumed bytes"
+  }
+]

@@ -1,8 +1,8 @@
-# sdl_mixer — MP3 with ID3v2 / C++
+# sdl_mixer — MP3 / C++
 
 Pinned release: `2.8.2`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/cpp/sdl-mixer/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/cpp/sdl-mixer/README.md)
 
 ## Run from the repository root
 

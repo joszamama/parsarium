@@ -1,8 +1,8 @@
-# owen-oj/laravel-getid3 — MP3 with ID3v2 / PHP
+# owen-oj/laravel-getid3 — MP3 / PHP
 
 Pinned release: `v2.6.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/php/owen-oj-laravel-getid3/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/php/owen-oj-laravel-getid3/README.md)
 
 ## Run from the repository root
 

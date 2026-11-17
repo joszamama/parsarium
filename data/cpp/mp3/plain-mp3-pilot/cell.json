@@ -34,11 +34,11 @@
   "selection": "taglib (4,118) is the only C++ library among the 25 Homebrew hits with a documented local byte/stream API that parses MPEG frame headers. Its MPEG::File over a ByteVectorStream reports version, layer, sample rate, channels, bitrate and duration for both untagged Layer III controls. Higher-ranked mpg123 (12,256) and lame (6,992) are C libraries and belong to the C cell; the C++ hits mp3val, mp3check, mp3blaster, ncmdump and mp3fs are programs without a documented library API.",
   "family": "TagLib MPEG frame-header and tag parser; the same TagLib 2.3.2 library as the active mp3_id3v2/cpp taglib entry. This is a separate plain-frame scope, not an independent parser family.",
   "uncertainty": "One verified path; no padding. Search is a substring match over all Homebrew formula names and descriptions for six queries, captured 2026-11-17; header-only C++ decoders and vcpkg/Conan packages were not searched. Homebrew installs measure demand for the whole TagLib distribution, mostly as a tag library, not use of its MPEG property API. TagLib parses frame headers and does not decode audio; for CBR streams without Xing/VBRI its duration comes from stream size and the first frame's bitrate. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support.",
-  "third_party_evidence": "data/cpp/mp3/parsers.json",
+  "third_party_evidence": "data/cpp/mp3/plain-mp3-pilot/parsers.json",
   "third_party_control_results": "projects/mp3/cpp/taglib/verification.json",
-  "afl_feedback": "data/cpp/mp3/afl-feedback.json",
-  "runtime_evidence": "data/cpp/mp3/standard.json",
-  "registry_snapshot": "data/cpp/mp3/registry-snapshot.json",
-  "unresolved_leads": "data/cpp/mp3/leads.json",
+  "afl_feedback": "data/cpp/mp3/plain-mp3-pilot/afl-feedback.json",
+  "runtime_evidence": "data/cpp/mp3/plain-mp3-pilot/standard.json",
+  "registry_snapshot": "data/cpp/mp3/plain-mp3-pilot/registry-snapshot.json",
+  "unresolved_leads": "data/cpp/mp3/plain-mp3-pilot/leads.json",
   "protocol": "catalog/mp3/PROTOCOL.md"
 }

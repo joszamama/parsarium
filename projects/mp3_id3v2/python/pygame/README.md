@@ -1,8 +1,8 @@
-# pygame — MP3 with ID3v2 / Python
+# pygame — MP3 / Python
 
 Pinned release: `2.6.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/python/pygame/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/python/pygame/README.md)
 
 ## Run from the repository root
 

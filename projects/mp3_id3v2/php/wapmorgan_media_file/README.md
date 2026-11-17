@@ -1,8 +1,8 @@
-# wapmorgan/media-file — MP3 with ID3v2 / PHP
+# wapmorgan/media-file — MP3 / PHP
 
 Pinned release: `0.1.4`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/php/wapmorgan-media-file/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/php/wapmorgan-media-file/README.md)
 
 ## Run from the repository root
 

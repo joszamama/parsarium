@@ -7,7 +7,7 @@ The pinned [probe](Probe.java) uses exactly that local stream API. [run.py](run.
 With Python 3, `curl`, Docker, and arm64 image support:
 
 ```sh
-python3 data/java/mp3/probes/javamp3/run.py --check
+python3 data/java/mp3/plain-mp3-pilot/probes/javamp3/run.py --check
 ```
 
 The recorded [result](result.json) is exact for the 44.1 kHz mono control: 44,100 Hz, one channel, 25,344 PCM bytes and 12,672 samples. Construction of `Sound` for the valid 22.05 kHz stereo control throws `ArrayIndexOutOfBoundsException: Index 2304 out of bounds for length 2304` at `Decoder.samples_III(Decoder.java:773)`. The independent control oracle expects 22,050 Hz, two channels, and 6,912 decoded samples. This release therefore fails the two-control selection gate. There is no selected parser harness, JaCoCo receipt, or AFL++ feedback claim for this lead.

@@ -1,8 +1,8 @@
-# javamp3 — MP3 with ID3v2 / Java
+# javamp3 — MP3 / Java
 
 Pinned release: `1.0.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/java/javamp3/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/java/javamp3/README.md)
 
 ## Run from the repository root
 

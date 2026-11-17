@@ -1,8 +1,8 @@
-# nanomp3 — MP3 with ID3v2 / Rust
+# nanomp3 — MP3 / Rust
 
 Pinned release: `0.2.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/rust/nanomp3/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/rust/nanomp3/README.md)
 
 ## Run from the repository root
 

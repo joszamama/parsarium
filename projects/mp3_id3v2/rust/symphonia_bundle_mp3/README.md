@@ -1,8 +1,8 @@
-# symphonia-bundle-mp3 — MP3 with ID3v2 / Rust
+# symphonia-bundle-mp3 — MP3 / Rust
 
 Pinned release: `0.6.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/mp3_id3v2/rust/symphonia-bundle-mp3/README.md)
+[API, control result, and parser family](../../../../catalog/mp3/rust/symphonia-bundle-mp3/README.md)
 
 ## Run from the repository root
 

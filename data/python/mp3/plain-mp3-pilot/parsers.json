@@ -15,7 +15,7 @@
     "metric": {
       "name": "PyPI Stats last_month downloads excluding known mirrors",
       "value": 10748990,
-      "source": "data/python/mp3/registry-snapshot.json"
+      "source": "data/python/mp3/plain-mp3-pilot/registry-snapshot.json"
     },
     "project": "projects/mp3/python/mutagen/verification.json"
   },
@@ -37,11 +37,11 @@
     "differential_expected_output": {"sample_rate": 22050, "channels": 2, "bitrate_kbps": 32.0, "duration_us": 313469},
     "independent_expectation": "controls/mp3/check_controls.py header walk: 11 frames x 1152 samples at 44.1 kHz mono, 64 kbit/s; 12 frames x 576 samples at 22.05 kHz stereo, 32 kbit/s. duration_us = round(frames x samples_per_frame / sample_rate x 10^6).",
     "project": "projects/mp3/python/tinytag/verification.json",
-    "afl_feedback": "data/python/mp3/tinytag-valid-feedback.json",
+    "afl_feedback": "data/python/mp3/plain-mp3-pilot/tinytag-valid-feedback.json",
     "metric": {
       "name": "PyPI Stats last_month downloads excluding known mirrors",
       "value": 4453166,
-      "source": "data/python/mp3/registry-snapshot.json",
+      "source": "data/python/mp3/plain-mp3-pilot/registry-snapshot.json",
       "observed_at_utc": "2026-11-17T03:40:50Z",
       "rechecked_at_utc": "2026-11-17T09:04:45Z",
       "recheck_source": "https://pypistats.org/api/packages/tinytag/recent?period=month"
@@ -65,11 +65,11 @@
     "differential_expected_output": {"version": "2", "layer": "III", "sample_rate": 22050, "bitrate": 32000, "channel_mode": "Joint stereo", "channels": 2, "frames": 12, "frame_bytes": 1254},
     "independent_expectation": "controls/mp3/check_controls.py header walk (11 frames, MPEG-1, 44.1 kHz mono, 64 kbit/s; 12 frames, MPEG-2, 22.05 kHz stereo, 32 kbit/s; frame lengths sum to the file size) plus channel-mode bits read from byte 3 of every header by scripts/verify_python_mp3_hachoir_feedback.py.",
     "project": "projects/mp3/python/hachoir/verification.json",
-    "afl_feedback": "data/python/mp3/hachoir-valid-feedback.json",
+    "afl_feedback": "data/python/mp3/plain-mp3-pilot/hachoir-valid-feedback.json",
     "metric": {
       "name": "PyPI Stats last_month downloads excluding known mirrors",
       "value": 222718,
-      "source": "data/python/mp3/registry-snapshot.json",
+      "source": "data/python/mp3/plain-mp3-pilot/registry-snapshot.json",
       "observed_at_utc": "2026-11-17T03:40:50Z",
       "rechecked_at_utc": "2026-11-17T10:59:10Z",
       "recheck_source": "https://pypistats.org/api/packages/hachoir/recent?period=month"

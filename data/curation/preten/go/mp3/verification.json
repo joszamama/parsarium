@@ -1,0 +1,153 @@
+{
+  "checked_at_utc": "2026-11-11T19:20:26.720795+00:00",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "go": "go version go1.27.1 darwin/arm64",
+  "control": "controls/mp3_id3v2/tone-tags-44k.mp3",
+  "control_sha256": "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307",
+  "control_meaning": "ID3v2.3 title Parsarium, artist Control, album Pilot; one second of 440 Hz mono MPEG-1 Layer III at 44100 Hz",
+  "control_selection": "The earlier 8000 Hz MPEG-2.5 control is retained for JavaScript; this tagged 44100 Hz MPEG-1 control exercises decoders that do not support MPEG-2.5.",
+  "third_party": [
+    {
+      "package": "github.com/faiface/beep/mp3",
+      "module": "github.com/faiface/beep",
+      "version": "v1.1.0",
+      "scope": "decoded samples and sample rate",
+      "command": "go run . github.com/faiface/beep/mp3 ../../../controls/mp3_id3v2/tone-tags-44k.mp3",
+      "pass": true,
+      "output": {
+        "sample_rate": 44100,
+        "samples": 16
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/gopxl/beep/v2/mp3",
+      "module": "github.com/gopxl/beep/v2",
+      "version": "v2.1.1",
+      "scope": "decoded samples and sample rate",
+      "command": "go run . github.com/gopxl/beep/v2/mp3 ../../../controls/mp3_id3v2/tone-tags-44k.mp3",
+      "pass": true,
+      "output": {
+        "sample_rate": 44100,
+        "samples": 16
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/hajimehoshi/go-mp3",
+      "module": "github.com/hajimehoshi/go-mp3",
+      "version": "v0.3.4",
+      "scope": "decoded PCM bytes and sample rate",
+      "command": "go run . github.com/hajimehoshi/go-mp3 ../../../controls/mp3_id3v2/tone-tags-44k.mp3",
+      "pass": true,
+      "output": {
+        "decoded_bytes": 64,
+        "sample_rate": 44100
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/hajimehoshi/ebiten/v2/audio/mp3",
+      "module": "github.com/hajimehoshi/ebiten/v2",
+      "version": "v2.10.6",
+      "scope": "decoded PCM bytes and sample rate",
+      "command": "go run . github.com/hajimehoshi/ebiten/v2/audio/mp3 ../../../controls/mp3_id3v2/tone-tags-44k.mp3",
+      "pass": true,
+      "output": {
+        "decoded_bytes": 64,
+        "sample_rate": 44100
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/tcolgate/mp3",
+      "module": "github.com/tcolgate/mp3",
+      "version": "v0.0.0-20170426193717-e79c5a46d300",
+      "scope": "MPEG frame size and samples",
+      "command": "go run . github.com/tcolgate/mp3 ../../../controls/mp3_id3v2/tone-tags-44k.mp3",
+      "pass": true,
+      "output": {
+        "frame_bytes": 208,
+        "samples": 1152
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/tosone/minimp3",
+      "module": "github.com/tosone/minimp3",
+      "version": "v1.1.0",
+      "scope": "decoded PCM bytes and audio format",
+      "command": "go run . github.com/tosone/minimp3 ../../../controls/mp3_id3v2/tone-tags-44k.mp3",
+      "pass": true,
+      "output": {
+        "channels": 1,
+        "decoded_bytes": 94464,
+        "sample_rate": 44100
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/bogem/id3v2/v2",
+      "module": "github.com/bogem/id3v2/v2",
+      "version": "v2.1.4",
+      "scope": "ID3v2.3 title",
+      "command": "go run . github.com/bogem/id3v2/v2 ../../../controls/mp3_id3v2/tone-tags-44k.mp3",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/dhowden/tag",
+      "module": "github.com/dhowden/tag",
+      "version": "v0.0.0-20240417053706-3d75831295e8",
+      "scope": "ID3v2.3 title",
+      "command": "go run . github.com/dhowden/tag ../../../controls/mp3_id3v2/tone-tags-44k.mp3",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/ascherkus/go-id3/src/id3",
+      "module": "github.com/ascherkus/go-id3",
+      "version": "v0.0.0-20120522061058-b139b6a612de",
+      "scope": "ID3v2.3 title",
+      "command": "go run . github.com/ascherkus/go-id3/src/id3 ../../../controls/mp3_id3v2/tone-tags-44k.mp3",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/dustin/go-id3",
+      "module": "github.com/dustin/go-id3",
+      "version": "v0.0.0-20131108194644-73f4b1cf2a4e",
+      "scope": "ID3v2.3 title",
+      "command": "go run . github.com/dustin/go-id3 ../../../controls/mp3_id3v2/tone-tags-44k.mp3",
+      "pass": true,
+      "output": {
+        "title": "Parsarium"
+      },
+      "error": null
+    },
+    {
+      "package": "github.com/dmulholl/mp3lib",
+      "version": "v1.0.0",
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "output": {
+        "sample_rate": 44100,
+        "channels": 1,
+        "frames": 11,
+        "frame_bytes": 2298,
+        "samples_per_frame": 1152,
+        "bitrate": 64000
+      },
+      "receipt": "projects/mp3/go/github_com_dmulholl_mp3lib/verification.json",
+      "pass": true
+    }
+  ]
+}

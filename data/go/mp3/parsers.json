@@ -12,22 +12,29 @@
       "sample_rate": 44100,
       "samples": 16
     },
-    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/go/faiface_beep_mp3",
+    "verified_result": "ID3v2-tagged control: decoded samples and sample rate",
+    "control": "controls/mp3_id3v2/tone-tags-44k.mp3"
   },
   {
-    "name": "github.com/gopxl/beep/v2/mp3",
-    "module": "github.com/gopxl/beep/v2",
-    "version": "v2.1.1",
-    "license": "MIT",
-    "input_api": "Decode(io.ReadCloser); Stream(samples)",
-    "documentation": "https://pkg.go.dev/github.com/gopxl/beep/v2/mp3@v2.1.1",
-    "scope": "decoded samples and sample rate",
-    "family": "hajime/go-mp3 via beep",
+    "name": "github.com/dhowden/tag",
+    "module": "github.com/dhowden/tag",
+    "version": "v0.0.0-20240417053706-3d75831295e8",
+    "license": "BSD-2-Clause",
+    "input_api": "ReadFrom(io.ReadSeeker).Title()",
+    "documentation": "https://pkg.go.dev/github.com/dhowden/tag@v0.0.0-20240417053706-3d75831295e8",
+    "scope": "ID3v2.3 title",
+    "family": "dhowden/tag lineage",
     "expected_output": {
-      "sample_rate": 44100,
-      "samples": 16
+      "title": "Parsarium"
     },
-    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/go/github_com_dhowden_tag",
+    "verified_result": "ID3v2-tagged control: ID3v2.3 title",
+    "control": "controls/mp3_id3v2/tone-tags-44k.mp3"
   },
   {
     "name": "github.com/hajimehoshi/go-mp3",
@@ -42,7 +49,11 @@
       "sample_rate": 44100,
       "decoded_bytes": 64
     },
-    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/go/github_com_hajimehoshi_go_mp3",
+    "verified_result": "ID3v2-tagged control: decoded PCM bytes and sample rate",
+    "control": "controls/mp3_id3v2/tone-tags-44k.mp3"
   },
   {
     "name": "github.com/hajimehoshi/ebiten/v2/audio/mp3",
@@ -57,7 +68,28 @@
       "sample_rate": 44100,
       "decoded_bytes": 64
     },
-    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/go/github_com_hajimehoshi_ebiten_v2_audio_mp3",
+    "verified_result": "ID3v2-tagged control: decoded PCM bytes and sample rate",
+    "control": "controls/mp3_id3v2/tone-tags-44k.mp3"
+  },
+  {
+    "name": "github.com/bogem/id3v2/v2",
+    "module": "github.com/bogem/id3v2/v2",
+    "version": "v2.1.4",
+    "license": "MIT",
+    "input_api": "ParseReader(io.Reader,Options{Parse:true}).Title()",
+    "documentation": "https://pkg.go.dev/github.com/bogem/id3v2/v2@v2.1.4",
+    "scope": "ID3v2.3 title",
+    "family": "bogem ID3v2 parser",
+    "expected_output": {
+      "title": "Parsarium"
+    },
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/go/github_com_bogem_id3v2_v2",
+    "verified_result": "ID3v2-tagged control: ID3v2.3 title",
+    "control": "controls/mp3_id3v2/tone-tags-44k.mp3"
   },
   {
     "name": "github.com/tcolgate/mp3",
@@ -72,7 +104,30 @@
       "frame_bytes": 208,
       "samples": 1152
     },
-    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/go/github_com_tcolgate_mp3",
+    "verified_result": "ID3v2-tagged control: MPEG frame size and samples",
+    "control": "controls/mp3_id3v2/tone-tags-44k.mp3"
+  },
+  {
+    "name": "github.com/gopxl/beep/v2/mp3",
+    "module": "github.com/gopxl/beep/v2",
+    "version": "v2.1.1",
+    "license": "MIT",
+    "input_api": "Decode(io.ReadCloser); Stream(samples)",
+    "documentation": "https://pkg.go.dev/github.com/gopxl/beep/v2/mp3@v2.1.1",
+    "scope": "decoded samples and sample rate",
+    "family": "hajime/go-mp3 via beep",
+    "expected_output": {
+      "sample_rate": 44100,
+      "samples": 16
+    },
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/go/github_com_gopxl_beep_v2_mp3",
+    "verified_result": "ID3v2-tagged control: decoded samples and sample rate",
+    "control": "controls/mp3_id3v2/tone-tags-44k.mp3"
   },
   {
     "name": "github.com/tosone/minimp3",
@@ -87,34 +142,51 @@
       "sample_rate": 44100,
       "channels": 1,
       "decoded_bytes": 94464
-    }
-  },
-  {
-    "name": "github.com/bogem/id3v2/v2",
-    "module": "github.com/bogem/id3v2/v2",
-    "version": "v2.1.4",
-    "license": "MIT",
-    "input_api": "ParseReader(io.Reader,Options{Parse:true}).Title()",
-    "documentation": "https://pkg.go.dev/github.com/bogem/id3v2/v2@v2.1.4",
-    "scope": "ID3v2.3 title",
-    "family": "bogem ID3v2 parser",
-    "expected_output": {
-      "title": "Parsarium"
-    }
-  },
-  {
-    "name": "github.com/dhowden/tag",
-    "module": "github.com/dhowden/tag",
-    "version": "v0.0.0-20240417053706-3d75831295e8",
-    "license": "BSD-2-Clause",
-    "input_api": "ReadFrom(io.ReadSeeker).Title()",
-    "documentation": "https://pkg.go.dev/github.com/dhowden/tag@v0.0.0-20240417053706-3d75831295e8",
-    "scope": "ID3v2.3 title",
-    "family": "dhowden/tag lineage",
-    "expected_output": {
-      "title": "Parsarium"
     },
-    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/go/github_com_tosone_minimp3",
+    "verified_result": "ID3v2-tagged control: decoded PCM bytes and audio format",
+    "control": "controls/mp3_id3v2/tone-tags-44k.mp3"
+  },
+  {
+    "name": "github.com/dmulholl/mp3lib",
+    "module": "github.com/dmulholl/mp3lib",
+    "version": "v1.0.0",
+    "license": "Unlicense",
+    "input_api": "NextFrame(io.Reader) *MP3Frame; MP3Frame header and frame fields",
+    "documentation": "https://pkg.go.dev/github.com/dmulholl/mp3lib@v1.0.0",
+    "source": "https://github.com/dmulholl/mp3lib/tree/v1.0.0",
+    "scope": "MPEG Layer III frame headers and frame boundaries from untagged local bytes; no PCM decoding",
+    "family": "dmulholl/mp3lib frame parser",
+    "family_note": "Independent Go MP3 frame parser; can also skip ID3 tags, but the plain MP3 controls have none. Separate from tcolgate/mp3 and hajime/go-mp3.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "samples_per_frame": 1152,
+      "bitrate": 64000
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "frame_bytes": 1254,
+      "samples_per_frame": 576,
+      "bitrate": 32000
+    },
+    "evidence": "projects/mp3/go/github_com_dmulholl_mp3lib/verification.json",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 9,
+      "source": "data/go/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/go/github_com_dmulholl_mp3lib",
+    "control_kind": "untagged_frames",
+    "verified_result": "Untagged MPEG frame controls: MPEG Layer III frame headers and frame boundaries from untagged local bytes; no PCM decoding",
+    "adapter_manifest_dir": "projects/mp3/go/github_com_dmulholl_mp3lib"
   },
   {
     "name": "github.com/ascherkus/go-id3/src/id3",
@@ -128,20 +200,10 @@
     "expected_output": {
       "title": "Parsarium"
     },
-    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
-  },
-  {
-    "name": "github.com/dustin/go-id3",
-    "module": "github.com/dustin/go-id3",
-    "version": "v0.0.0-20131108194644-73f4b1cf2a4e",
-    "license": "Apache-2.0",
-    "input_api": "Read(io.Reader).Name",
-    "documentation": "https://pkg.go.dev/github.com/dustin/go-id3@v0.0.0-20131108194644-73f4b1cf2a4e",
-    "scope": "ID3v2.3 title",
-    "family": "ascherkus/go-id3 lineage",
-    "expected_output": {
-      "title": "Parsarium"
-    },
-    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines."
+    "family_note": "Shared parser lineage; package paths do not imply independent decoder engines.",
+    "control_kind": "id3v2_tagged",
+    "project": "projects/mp3_id3v2/go/github_com_ascherkus_go_id3_src_id3",
+    "verified_result": "ID3v2-tagged control: ID3v2.3 title",
+    "control": "controls/mp3_id3v2/tone-tags-44k.mp3"
   }
 ]
