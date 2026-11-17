@@ -70,8 +70,17 @@ class Mp3MergeTest(unittest.TestCase):
             for duplicate in cell["duplicates"]:
                 self.assertIn(duplicate["name"], selected)
                 self.assertTrue((ROOT / duplicate["kept_project"] / "manifest.json").is_file())
+        kept = {item["project"]: item for cell in self.record["cells"] for item in cell["kept"]}
+        reused = set(self.record["project_move"]["reused_removed_paths"])
+        self.assertEqual(reused, set(self.record["removed_projects"]) & set(kept))
         for project in self.record["removed_projects"]:
             fmt, eco, slug = Path(project).parts[1:4]
+            if project in reused:
+                # The kept ID3v2-tagged-control project of the same package now uses this path.
+                self.assertEqual(kept[project]["control_kind"], "id3v2_tagged", project)
+                manifest = read(ROOT / project / "manifest.json")
+                self.assertTrue(manifest["control"].startswith("controls/mp3/id3v2-tagged-"), project)
+                continue
             self.assertFalse((ROOT / project).exists(), project)
             self.assertFalse((ROOT / "fuzzing/afl-native" / fmt / eco / slug).exists(), project)
 
