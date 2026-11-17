@@ -113,6 +113,17 @@
       "reason": "Spark Catalyst CatalystSqlParser.parsePlan returns a LogicalPlan; Scala artifact with a large runtime."
     },
     {
+      "name": "org.apache.flink:flink-sql-parser",
+      "status": "selected",
+      "metric_value": 188,
+      "metric_error": null,
+      "latest_release_observed": "2.3.0",
+      "family": "Calcite JavaCC grammar (Flink-generated FlinkSqlParserImpl)",
+      "documented_api_lead": "FlinkSqlParserImpl.FACTORY",
+      "reason": "Round-2 extension lead. Flink generates its own JavaCC parser from Calcite's Parser.jj template plus Flink extensions; with SqlParser.config().withParserFactory(FlinkSqlParserImpl.FACTORY) it returns Calcite SqlNode trees and Flink subclasses. 261 of its 381 grammar productions share names with calcite-core 1.42's 268; 120 are Flink-only.",
+      "selected_release": "2.3.0"
+    },
+    {
       "name": "org.apache.shardingsphere:shardingsphere-sql-parser-engine",
       "status": "unresolved",
       "metric_value": 135,

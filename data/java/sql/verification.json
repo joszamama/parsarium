@@ -739,8 +739,100 @@
       "parser_feature_difference": 1365,
       "project_receipt": "projects/sql/java/trino_parser/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/java/trino_parser/differential.json"
+    },
+    {
+      "package": "org.apache.flink:flink-sql-parser",
+      "version": "2.3.0",
+      "pass": true,
+      "input_api": "SqlParser.create(local SQL text, config with FlinkSqlParserImpl.FACTORY, FlinkSqlConformance.DEFAULT, Lex.JAVA).parseStmtList() -> SqlNodeList",
+      "dialect": "Flink SQL (FlinkSqlParserImpl.FACTORY, FlinkSqlConformance.DEFAULT, Lex.JAVA as in Flink's planner)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Apache Calcite JavaCC grammar (Flink-generated FlinkSqlParserImpl)",
+      "parser_source_files": 5,
+      "parser_source_lines_covered": 3170,
+      "afl_tuple_difference": 1724,
+      "parser_feature_difference": 1815,
+      "project_receipt": "projects/sql/java/flink_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/flink_sql_parser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:40:32.440388+00:00"
+  "checked_at_utc": "2026-11-17T20:44:08.755716+00:00"
 }
