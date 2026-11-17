@@ -293,5 +293,64 @@
       "snapshot": "data/java/json/registry-snapshot.json"
     },
     "metric_note": "The snapshot default version is an Android 8 variant; the ordinary 2.0.66 release is pinned for this Java SE harness."
+  },
+  {
+    "name": "json-smart",
+    "group": "net.minidev",
+    "artifact": "json-smart",
+    "version": "2.6.1",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; POM SHA256 in source-lock.json",
+    "input_api": "new net.minidev.json.parser.JSONParser(JSONParser.MODE_RFC4627).parse(Files.readAllBytes(local Path))",
+    "documentation": "https://repo.maven.apache.org/maven2/net/minidev/json-smart/2.6.1/json-smart-2.6.1-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/net/minidev/json-smart/2.6.1/json-smart-2.6.1-sources.jar",
+    "scope": "Valid nested RFC 4627 JSON object/array documents from local UTF-8 bytes, mapped to Map/List/String/Number/Boolean/null",
+    "family": "json-smart own JSONParser byte/stream parser",
+    "family_note": "net.minidev.json.parser contains the tokenizer and object/array parse logic. accessors-smart and ASM are runtime dependencies but not JSON tokenizers. This parser family is independent of Jackson, Gson, and fastjson2.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/json_smart",
+    "configuration_note": "Uses documented MODE_RFC4627, which accepts top-level object/array JSON and trailing whitespace. Both controls are in that scope.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 1542,
+      "max_release": "2.3",
+      "max_release_direct_dependent_count": 220,
+      "default_release_direct_dependent_count": 12,
+      "releases": 36,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/net.minidev%3Ajson-smart",
+      "captured_at_utc": "2026-11-17T03:27:34.854916+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
   }
 ]

@@ -226,9 +226,54 @@
       "afl_feedback": "data/java/json/afl-feedback.json",
       "verified_at_utc": "2026-11-17T07:32:30.775762+00:00",
       "error": null
+    },
+    {
+      "package": "json-smart",
+      "group": "net.minidev",
+      "version": "2.6.1",
+      "scope": "Valid nested RFC 4627 JSON object/array documents from local UTF-8 bytes, mapped to Map/List/String/Number/Boolean/null",
+      "command": "python3 scripts/run_project.py json java json_smart",
+      "receipt": "projects/json/java/json_smart/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 261,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T07:47:24.247481+00:00",
+      "error": null
     }
   ],
   "standard": [],
   "second_control_meaning": "Valid array root with nested objects/arrays, strings, numbers, booleans, and null; differential output and parser feedback in afl-feedback.json",
-  "updated_at_utc": "2026-11-17T07:42:03.041967+00:00"
+  "updated_at_utc": "2026-11-17T08:14:59.585341+00:00"
 }
