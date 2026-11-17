@@ -18,6 +18,7 @@ COPY --from=build /work/replay /work/fuzzer /work/
 COPY --from=build /work/source/src /work/source/src
 COPY --from=build /work/toolchain.txt /work/toolchain.txt
 COPY one-pixel.svg /work/one-pixel.svg
+COPY subpixel.svg /work/subpixel.svg
 COPY run-control.sh /work/run-control.sh
 RUN chmod +x /work/run-control.sh
 ENTRYPOINT ["/work/run-control.sh"]

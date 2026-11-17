@@ -24,8 +24,10 @@ int parsarium_parse_svg(const uint8_t *data, size_t size, struct parsarium_svg_r
   /* copy=true: ThorVG caches borrowed data by address, which would reuse a stale parse across inputs. */
   if (!picture || tvg_picture_load_data(picture, (const char *)data, (uint32_t)size, "svg", NULL, true) != TVG_RESULT_SUCCESS) goto done;
   if (tvg_picture_get_size(picture, &fw, &fh) != TVG_RESULT_SUCCESS) goto done;
-  if (!isfinite(fw) || !isfinite(fh) || fw < 1.0f || fh < 1.0f || fw > PARSARIUM_MAX_SIDE || fh > PARSARIUM_MAX_SIDE) goto done;
+  if (!isfinite(fw) || !isfinite(fh) || fw <= 0.0f || fh <= 0.0f || fw > PARSARIUM_MAX_SIDE || fh > PARSARIUM_MAX_SIDE) goto done;
   unsigned w = (unsigned)lroundf(fw), h = (unsigned)lroundf(fh);
+  if (!w) w = 1;
+  if (!h) h = 1;
   pixels = calloc((size_t)w * h, sizeof(*pixels));
   canvas = tvg_swcanvas_create(TVG_ENGINE_OPTION_DEFAULT);
   if (!pixels || !canvas) goto done;

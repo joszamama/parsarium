@@ -4,7 +4,7 @@ Pinned release: `1.1.3`. [Manifest](manifest.json) · [Docker receipt](verificat
 
 [API, control result, and parser family](../../../../catalog/svg/c/thorvg/README.md)
 
-The harness loads input bytes with `tvg_picture_load_data(..., "svg", NULL, true)`, reads `tvg_picture_get_size`, and renders through `tvg_swcanvas_create` into an `ARGB8888S` buffer. Its JSON output reports the decoded width and height, matching the catalog adapter; a valid 1×1 SVG is also accepted. ThorVG is built with Meson using only the CPU engine, the SVG loader, and the C API binding.
+The harness loads input bytes with `tvg_picture_load_data(..., "svg", NULL, true)`, reads `tvg_picture_get_size`, and renders through `tvg_swcanvas_create` into an `ARGB8888S` buffer. Its JSON output reports the decoded width and height, matching the catalog adapter. Positive finite subpixel dimensions are accepted and rendered into a target of at least 1×1 pixel. ThorVG is built with Meson using only the CPU engine, the SVG loader, and the C API binding.
 
 The valid 2×1 SVG control passed Docker replay and one-case fuzzer smoke, covering 2,476 ThorVG source lines. The source-built AFL++ overlay reported 2,057 edges on that control; repeated maps matched and a separate valid red/blue SVG changed 358 edge IDs. ThorVG's pinned global `new` uses `malloc`, so AddressSanitizer's allocation/deallocation mismatch check is disabled for the fuzzer startup. ASan's memory checks and UBSan remain enabled; this exception is bound in the manifest.
 
