@@ -358,17 +358,39 @@
     {
       "ecosystem": "rust",
       "format": "json",
-      "phase": "pilot",
-      "status": "pilot_not_started",
-      "complete": false,
+      "status": "pilot_one_path_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 0,
+      "verified_third_party_count": 1,
       "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+      "search_queries": [
+        "json",
+        "json parser",
+        "json deserialize",
+        "json decoder",
+        "json value",
+        "json streaming"
+      ],
+      "search_totals": {
+        "json": 55195,
+        "json parser": 8279,
+        "json deserialize": 6383,
+        "json decoder": 7906,
+        "json value": 25676,
+        "json streaming": 13074
+      },
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 600,
+      "unique_search_hits": 476,
+      "unresolved_documentation_leads": 20,
+      "uncertainty": "Pilot cell: one verified path, chosen as the highest crates.io 90-day download count (438,065,825) among all 476 unique search hits. 20 JSON parser leads remain unverified (top: aws-smithy-json 59,322,077, simd-json 6,730,588, jiter 5,274,664), so the count of one reflects pilot scope, not a search result. Search covers only the first 100 hits of six queries (600 hits, 476 unique) captured 2026-11-17; the 'json' query alone reports 55195 matches. Recent downloads include transitive dependency pulls and are an adoption proxy. Superset formats (JSON5, JSONC, Hjson) are excluded. Two small valid UTF-8 controls do not establish duplicate-key, large-number precision, deep-nesting limit (serde_json's default recursion limit is 128), lone-surrogate, or non-UTF-8 behaviour. The Rust 1.99.1 standard library documents no JSON API.",
+      "third_party_evidence": "data/rust/json/parsers.json",
+      "third_party_control_results": "projects/json/rust/serde_json/verification.json",
+      "runtime_evidence": "data/rust/json/standard.json",
+      "registry_snapshot": "data/rust/json/registry-snapshot.json",
+      "unresolved_leads": "data/rust/json/leads.json",
+      "phase": "pilot",
+      "complete": false
     },
     {
       "ecosystem": "rust",
@@ -451,17 +473,36 @@
     {
       "ecosystem": "php",
       "format": "json",
-      "phase": "pilot",
-      "status": "pilot_not_started",
-      "complete": false,
+      "status": "pilot_one_selected_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 0,
-      "verified_standard_or_runtime_count": 0,
-      "search_queries": [],
-      "search_limit_per_query": 0,
-      "search_hits_recorded": 0,
-      "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+      "verified_third_party_count": 1,
+      "verified_standard_or_runtime_count": 1,
+      "search_queries": [
+        "json",
+        "json parser",
+        "json decoder",
+        "json decode",
+        "json streaming parser"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 429,
+      "unique_search_hits": 314,
+      "leads_recorded": 11,
+      "leads_by_status": {
+        "unresolved": 7,
+        "excluded": 4
+      },
+      "ranking_metric": "Packagist total downloads",
+      "selection": "Highest Packagist download count among recorded hits whose own source parses JSON text: seld/jsonlint (252,371,311). Higher-download JSON helpers (nette/utils, symfony/serializer) wrap json_decode.",
+      "uncertainty": "Pilot cell: PHP JSON parsing is dominated by the bundled ext/json json_decode; most popular Packagist JSON packages wrap it. Only seld/jsonlint, the highest-download package with its own pure-PHP parser, was built and control-verified. Its downloads are inflated by Composer, which depends on it but calls json_decode first and uses JsonParser for error reports. Seven own-parser or partial-own-parser leads are logged in leads.json and are not verified or ranked; four json_decode wrappers are excluded. Non-parser hits such as JWT, JSON Schema, JSONPath, JMESPath, serializers and JSON-RPC were not treated as leads. One valid nested object control does not establish complete RFC 8259 support.",
+      "third_party_evidence": "data/php/json/parsers.json",
+      "third_party_control_results": "data/php/json/verification.json",
+      "runtime_evidence": "data/php/json/standard.json",
+      "registry_snapshot": "data/php/json/registry-snapshot.json",
+      "unresolved_leads": "data/php/json/leads.json",
+      "phase": "pilot",
+      "complete": false
     },
     {
       "ecosystem": "php",
