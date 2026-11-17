@@ -33,6 +33,189 @@
       "coverage_caveat": "llvm-cov export warned that 99 whole-extension functions had mismatched profile data. Scoped Jiter region starts, including parse.rs, were nonempty and stable across both valid controls; aggregate whole-extension coverage is not claimed."
     },
     {
+      "package": "jiter",
+      "version": "0.19.0",
+      "pass": true,
+      "input_api": "jiter.from_json(local JSON bytes)",
+      "control": "controls/json/nested-object.json",
+      "output": {
+        "root_type": "object",
+        "root_length": 7,
+        "top_level_keys": [
+          "name",
+          "version",
+          "ratio",
+          "enabled",
+          "missing",
+          "tags",
+          "nested"
+        ],
+        "kind_counts": {
+          "object": 5,
+          "array": 3,
+          "string": 5,
+          "int": 4,
+          "float": 1,
+          "bool": 2,
+          "null": 1
+        },
+        "object_members": 15,
+        "max_container_depth": 4,
+        "scalar_leaves": [
+          [
+            "/name",
+            "string",
+            "parsarium"
+          ],
+          [
+            "/version",
+            "int",
+            1
+          ],
+          [
+            "/ratio",
+            "float",
+            "-2.5"
+          ],
+          [
+            "/enabled",
+            "bool",
+            true
+          ],
+          [
+            "/missing",
+            "null",
+            null
+          ],
+          [
+            "/tags/0",
+            "string",
+            "json"
+          ],
+          [
+            "/tags/1",
+            "string",
+            "go"
+          ],
+          [
+            "/tags/2",
+            "string",
+            "rfc8259"
+          ],
+          [
+            "/nested/level",
+            "int",
+            2
+          ],
+          [
+            "/nested/items/0/id",
+            "int",
+            1
+          ],
+          [
+            "/nested/items/0/ok",
+            "bool",
+            false
+          ],
+          [
+            "/nested/items/1/id",
+            "int",
+            2
+          ],
+          [
+            "/nested/items/1/text",
+            "string",
+            "café \"quoted\""
+          ]
+        ],
+        "empty_containers": [
+          [
+            "/nested/empty",
+            "object"
+          ],
+          [
+            "/nested/list",
+            "array"
+          ]
+        ]
+      },
+      "differential_control": "controls/json/nested-array.json",
+      "differential_output": {
+        "root_type": "array",
+        "root_length": 5,
+        "kind_counts": {
+          "object": 2,
+          "array": 4,
+          "string": 2,
+          "int": 1,
+          "float": 1,
+          "bool": 2,
+          "null": 1
+        },
+        "object_members": 3,
+        "max_container_depth": 3,
+        "scalar_leaves": [
+          [
+            "/0",
+            "int",
+            1
+          ],
+          [
+            "/1",
+            "float",
+            "0.25"
+          ],
+          [
+            "/2",
+            "string",
+            "two"
+          ],
+          [
+            "/3/0",
+            "bool",
+            true
+          ],
+          [
+            "/3/1",
+            "null",
+            null
+          ],
+          [
+            "/3/2/0",
+            "bool",
+            false
+          ],
+          [
+            "/4/n/deep",
+            "string",
+            "A"
+          ]
+        ],
+        "empty_containers": [
+          [
+            "/4/k",
+            "array"
+          ]
+        ]
+      },
+      "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where jiter is not importable; exact type-tagged trees with float.hex values and object member order",
+      "oracle_tree_sha256": {
+        "control": "a8a23fb23e1c58fbcb65c789babe85f284949180a576cede88f2e787ea410d92",
+        "differential_control": "e9f1bf32886a233dfe8aa788997e3c327dcc729d2942d2b7d65db3e2f3250c0e"
+      },
+      "bytes_match_oracle": true,
+      "parser_family": "Jiter 0.19.0 Rust parser / lexical-parse-float 1.0.6 (same Jiter family as pydantic-core 2.50.4 / Jiter 0.18.0)",
+      "native_source_files": 10,
+      "native_region_start_lines": 437,
+      "parse_rs_lines": 99,
+      "lexical_parse_float_source_files": 9,
+      "lexical_parse_float_region_start_lines": 218,
+      "afl_feedback": "data/python/json/jiter-valid-feedback.json",
+      "project_receipt": "projects/json/python/jiter/verification.json",
+      "project_receipt_sha256": "c0ce0474f3eea78a909887d4c763c779f09d61c0087a48a028630dc0cbc2926d",
+      "coverage_caveat": "Source-built with Rust -C instrument-coverage and the sdist's fat-LTO release profile; the official wheel is the same source without instrumentation. llvm-cov export warned that 16 whole-extension functions had mismatched profile data; scoped Jiter crate regions were nonempty and identical on repeats, and whole-extension coverage is not claimed. The PyO3 module wrapper is excluded from parser scope. The controls do not exercise duplicate keys, large or inexact numbers, NaN/Infinity tokens, partial mode or malformed input."
+    },
+    {
       "package": "orjson",
       "version": "3.13.0",
       "pass": true,
@@ -418,11 +601,13 @@
     "standard": "linux/amd64",
     "orjson": "linux/arm64",
     "ijson": "linux/arm64",
-    "ujson": "linux/arm64"
+    "ujson": "linux/arm64",
+    "jiter": "linux/arm64"
   },
   "refreshed_projects": [
     "ujson",
-    "msgspec"
+    "msgspec",
+    "jiter"
   ],
   "retained_prior_results_checked_at_utc": "2026-11-17T05:33:30.889313+00:00"
 }

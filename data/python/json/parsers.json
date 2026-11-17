@@ -12,7 +12,7 @@
     "underlying_source_sha256": "aead3b74b68396bf0feab5d57e050b730ded7df55853c1e048a87e00aaf033c6",
     "scope": "JSON structure and values from local UTF-8 bytes; valid nested object and nested array controls",
     "family": "pydantic-core 2.50.4 / Jiter 0.18.0 Rust parser",
-    "family_note": "Pydantic TypeAdapter[Any].validate_json invokes pydantic-core SchemaValidator.validate_json. Pinned pydantic-core src/validators/mod.rs calls jiter::JsonValue::parse_with_config. The native extension is source-built with Rust LLVM coverage; Jiter parse.rs source regions, rather than Python wrapper lines, are required. Shares the Jiter parser family with the standalone jiter lead.",
+    "family_note": "Pydantic TypeAdapter[Any].validate_json invokes pydantic-core SchemaValidator.validate_json. Pinned pydantic-core src/validators/mod.rs calls jiter::JsonValue::parse_with_config. The native extension is source-built with Rust LLVM coverage; Jiter parse.rs source regions, rather than Python wrapper lines, are required. Shares the Jiter parser family with the separately verified standalone jiter package path.",
     "control": "controls/json/structure.json",
     "expected_output": {
       "root_type": "object",
@@ -35,6 +35,192 @@
       "limitation": "Package-level downloads include non-JSON usage and transitive installs."
     },
     "project": "projects/json/python/pydantic"
+  },
+  {
+    "name": "jiter",
+    "version": "0.19.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/jiter/0.19.0/json",
+    "input_api": "jiter.from_json(local JSON bytes) with documented defaults (cache_mode='all', partial_mode=False, allow_inf_nan=True, float_mode='float')",
+    "documentation": "https://github.com/pydantic/jiter/blob/v0.19.0/crates/jiter-python/README.md",
+    "source": "https://files.pythonhosted.org/packages/67/de/8dfd06a2153d8ab6a83a8ca8f8ae3ff860ce2fe324ee6a5d05294b621c2a/jiter-0.19.0.tar.gz",
+    "source_sha256": "ba3064f8be276d7cfb83c2fb85c858be533da2c2f80f9b048c3781b45a57a195",
+    "wheel_sha256": "da606acf39d7d2f2a56bfbb48a0b36f25da1d22d801cd0c9aecfce2f791e3239",
+    "dependencies": [],
+    "scope": "JSON structure and values from local bytes; valid nested-object and nested-array controls, each equal to a hand-written tree summary and an exact type-tagged CPython json oracle tree",
+    "family": "Jiter 0.19.0 Rust parser (PythonParser over jiter::parse::Parser) / lexical-parse-float 1.0.6",
+    "family_note": "jiter.from_json is the standalone PyO3 module in crates/jiter-python; it calls PythonParse::python_parse in the Jiter crate's python.rs, which drives parse.rs, string_decoder.rs and number_decoder.rs and builds Python objects directly (value.rs JsonValue is not used). Floats go through lexical-parse-float. Same Jiter parser family as the selected pydantic path (pydantic-core 2.50.4 embeds Jiter 0.18.0 and parses through JsonValue), so this is not an independent parser family and its downloads are not added to Pydantic's. crates/jiter/src is byte-identical to the crates.io jiter 0.19.0 crate used by the Rust JSON cell's jiter path. The package README recommends using jiter directly only when not using pydantic.",
+    "number_and_key_scope": "Not exercised beyond the controls; no malformed or edge-case probes were run. From the pinned source: duplicate object keys are inserted with PyDict_SetItem, so the last value wins unless catch_duplicate_keys=True; with the num-bigint feature, integers beyond i64 become arbitrary-precision Python ints; allow_inf_nan defaults to True, so the non-RFC NaN, Infinity and -Infinity tokens are accepted; nesting is limited to 200 levels (DEFAULT_RECURSION_LIMIT). The controls contain no duplicate keys (checked with the oracle's object_pairs_hook), only exactly representable floats (-0.25e1 and 2.5e-1) and small integers.",
+    "control": "controls/json/nested-object.json",
+    "differential_control": "controls/json/nested-array.json",
+    "expected_output": {
+      "root_type": "object",
+      "root_length": 7,
+      "top_level_keys": [
+        "name",
+        "version",
+        "ratio",
+        "enabled",
+        "missing",
+        "tags",
+        "nested"
+      ],
+      "kind_counts": {
+        "object": 5,
+        "array": 3,
+        "string": 5,
+        "int": 4,
+        "float": 1,
+        "bool": 2,
+        "null": 1
+      },
+      "object_members": 15,
+      "max_container_depth": 4,
+      "scalar_leaves": [
+        [
+          "/name",
+          "string",
+          "parsarium"
+        ],
+        [
+          "/version",
+          "int",
+          1
+        ],
+        [
+          "/ratio",
+          "float",
+          "-2.5"
+        ],
+        [
+          "/enabled",
+          "bool",
+          true
+        ],
+        [
+          "/missing",
+          "null",
+          null
+        ],
+        [
+          "/tags/0",
+          "string",
+          "json"
+        ],
+        [
+          "/tags/1",
+          "string",
+          "go"
+        ],
+        [
+          "/tags/2",
+          "string",
+          "rfc8259"
+        ],
+        [
+          "/nested/level",
+          "int",
+          2
+        ],
+        [
+          "/nested/items/0/id",
+          "int",
+          1
+        ],
+        [
+          "/nested/items/0/ok",
+          "bool",
+          false
+        ],
+        [
+          "/nested/items/1/id",
+          "int",
+          2
+        ],
+        [
+          "/nested/items/1/text",
+          "string",
+          "café \"quoted\""
+        ]
+      ],
+      "empty_containers": [
+        [
+          "/nested/empty",
+          "object"
+        ],
+        [
+          "/nested/list",
+          "array"
+        ]
+      ]
+    },
+    "differential_expected_output": {
+      "root_type": "array",
+      "root_length": 5,
+      "kind_counts": {
+        "object": 2,
+        "array": 4,
+        "string": 2,
+        "int": 1,
+        "float": 1,
+        "bool": 2,
+        "null": 1
+      },
+      "object_members": 3,
+      "max_container_depth": 3,
+      "scalar_leaves": [
+        [
+          "/0",
+          "int",
+          1
+        ],
+        [
+          "/1",
+          "float",
+          "0.25"
+        ],
+        [
+          "/2",
+          "string",
+          "two"
+        ],
+        [
+          "/3/0",
+          "bool",
+          true
+        ],
+        [
+          "/3/1",
+          "null",
+          null
+        ],
+        [
+          "/3/2/0",
+          "bool",
+          false
+        ],
+        [
+          "/4/n/deep",
+          "string",
+          "A"
+        ]
+      ],
+      "empty_containers": [
+        [
+          "/4/k",
+          "array"
+        ]
+      ]
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 421162504,
+      "source": "https://pypistats.org/api/packages/jiter/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/json/leads.json",
+      "limitation": "Package-level downloads include transitive installs (for example SDKs that depend on jiter for partial JSON parsing); they do not measure JSON parsing directly and are not combined with Pydantic's count."
+    },
+    "project": "projects/json/python/jiter"
   },
   {
     "name": "orjson",
