@@ -1,6 +1,6 @@
 # ASCII PNM / C++
 
-10 verified third-party API paths; 7 have verified Docker harnesses.
+10 verified third-party API paths; 9 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/cpp/ascii_pnm/ranking.md) · [standard API inventory](../../../data/cpp/ascii_pnm/standard.json)
 
@@ -13,9 +13,9 @@
 - [netpbm](netpbm/README.md) — Docker harness ready
 - [ffmpeg](ffmpeg/README.md) — Docker harness ready
 - [gstreamer](gstreamer/README.md) — Docker harness ready
-- [qtbase](qtbase/README.md) — verified API path
+- [qtbase](qtbase/README.md) — Docker harness ready
 - [wxwidgets](wxwidgets/README.md) — verified API path
-- [openimageio](openimageio/README.md) — verified API path
+- [openimageio](openimageio/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

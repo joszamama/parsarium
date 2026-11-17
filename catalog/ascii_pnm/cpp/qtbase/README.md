@@ -32,6 +32,11 @@
 
 QtBase QImageReader delegates PPM to its built-in qppmhandler; installed QtGui and QtCore frameworks are pinned by SHA-256. QtBase covers many unrelated GUI APIs, so repository stars are a broad adoption proxy.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/qtbase/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp qtbase
+python3 parsarium.py run ascii_pnm cpp qtbase controls/ascii_pnm/red-green.ppm
+```

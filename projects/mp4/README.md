@@ -6,6 +6,7 @@
 
 - [bento4 / C](c/bento4/README.md)
 - [ffmpeg / C](c/ffmpeg/README.md)
+- [gpac / C](c/gpac/README.md)
 - [gstreamer / C](c/gstreamer/README.md)
 - [libmediainfo / C](c/libmediainfo/README.md)
 - [taglib / C](c/taglib/README.md)
