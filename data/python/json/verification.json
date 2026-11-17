@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T08:51:29.991501+00:00",
+  "checked_at_utc": "2026-11-17T05:33:30.889313+00:00",
   "platform": "mixed",
   "control": {
     "path": "controls/json/structure.json",
@@ -80,6 +80,43 @@
       "parser_source_lines_covered": 140,
       "decoder_lines_covered": 101,
       "project_receipt": "projects/json/python/simplejson/verification.json"
+    },
+    {
+      "package": "ijson",
+      "version": "3.6.0",
+      "pass": true,
+      "input_api": "ijson.items(BytesIO(local JSON bytes), '') on the default yajl2_c backend",
+      "tested_backend": "yajl2_c",
+      "output": {
+        "root_type": "object",
+        "top_level_keys": [
+          "items",
+          "kind"
+        ],
+        "item_count": 2,
+        "first_id": 7,
+        "first_label": "a\nb",
+        "first_ok": true,
+        "first_value_is_null": true,
+        "second_label": "π"
+      },
+      "differential_control": "controls/json/nested-array.json",
+      "differential_output": {
+        "root_type": "array",
+        "item_count": 5,
+        "nested_arrays": 1,
+        "nested_objects": 1
+      },
+      "parser_family": "ijson yajl2_c C extension / yajl 2.1.1 (rtobar/yajl@dd88e2ea2fc3f045722f6fee362af2643b5394f5)",
+      "native_source_files": 21,
+      "native_region_start_lines": 577,
+      "yajl_source_files": 8,
+      "yajl_region_start_lines": 263,
+      "yajl_parser_c_lines": 92,
+      "afl_feedback": "data/python/json/ijson-valid-feedback.json",
+      "project_receipt": "projects/json/python/ijson/verification.json",
+      "project_receipt_sha256": "6a29ac77fe6845584ba88b4ac874db9f6dbfe80ce01da4bdf5ce41b00adf0f67",
+      "coverage_caveat": "Source-built -O0 extension with yajl embedded through ijson's IJSON_EMBED_YAJL path. Official Linux wheels link the same yajl commit as a separately built -O3 shared library, so linkage and optimisation differ. Pure-Python, ctypes and cffi backends are not covered."
     }
   ],
   "standard": [
@@ -112,6 +149,7 @@
     "pydantic": "linux/arm64",
     "simplejson": "linux/amd64",
     "standard": "linux/amd64",
-    "orjson": "linux/arm64"
+    "orjson": "linux/arm64",
+    "ijson": "linux/arm64"
   }
 }

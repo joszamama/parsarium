@@ -93,6 +93,60 @@
       "first_ok": true,
       "first_value_is_null": true,
       "second_label": "π"
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 49365386,
+      "source": "https://pypistats.org/api/packages/simplejson/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/json/leads.json",
+      "limitation": "Package-level downloads include encoding use and transitive installs; they do not measure JSON parsing directly."
     }
+  },
+  {
+    "name": "ijson",
+    "version": "3.6.0",
+    "license": "BSD-3-Clause AND ISC",
+    "license_evidence": "https://pypi.org/pypi/ijson/3.6.0/json",
+    "input_api": "ijson.items(BytesIO(local JSON bytes), '') on the default yajl2_c backend",
+    "documentation": "https://github.com/ICRAR/ijson/blob/v3.6.0/README.rst",
+    "source": "https://files.pythonhosted.org/packages/75/61/4066af787ed25bfca02c3edd2d7fd489b1b5ca27b54b400b187e5f2865e7/ijson-3.6.0.tar.gz",
+    "source_sha256": "ec8f9265524e724905ecf00bdd061c374baaa8d5045ef50425695fb06efb45f5",
+    "wheel_sha256": "a50ba1d5f8af50854243cbf523eff22a26f45f2b51a6c85177bbff48c99dfa2e",
+    "dependencies": [],
+    "underlying_source": "https://codeload.github.com/rtobar/yajl/tar.gz/dd88e2ea2fc3f045722f6fee362af2643b5394f5",
+    "underlying_source_sha256": "071d41d073c1485a37e90e41aa8917e541861b9243911d4d8ac68394ee938f07",
+    "scope": "JSON structure and values from a local binary stream; valid nested object and nested array controls",
+    "family": "ijson yajl2_c C extension / yajl 2.1.1 (rtobar fork) C parser",
+    "family_note": "ijson selects yajl2_c by default when its _yajl2 extension imports; the harness fails unless ijson.backend_name is yajl2_c. That extension drives yajl's lexer and parser and builds Python values in C. The build embeds the yajl fork commit pinned as ijson's v3.6.0 submodule, using ijson's IJSON_EMBED_YAJL path; official Linux wheels link the same commit as a bundled shared libyajl. Independent of the Jiter, simplejson and CPython json families in this cell. ijson's pure-Python, yajl (ctypes), yajl2 (ctypes) and yajl2_cffi backends are not tested.",
+    "control": "controls/json/structure.json",
+    "differential_control": "controls/json/nested-array.json",
+    "expected_output": {
+      "root_type": "object",
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
+      "item_count": 2,
+      "first_id": 7,
+      "first_label": "a\nb",
+      "first_ok": true,
+      "first_value_is_null": true,
+      "second_label": "π"
+    },
+    "differential_expected_output": {
+      "root_type": "array",
+      "item_count": 5,
+      "nested_arrays": 1,
+      "nested_objects": 1
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 46615664,
+      "source": "https://pypistats.org/api/packages/ijson/recent",
+      "observed_on_utc": "2026-11-17",
+      "limitation": "Package-level downloads include transitive installs and every ijson backend; they do not count yajl2_c use or JSON parsing specifically."
+    },
+    "project": "projects/json/python/ijson"
   }
 ]
