@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "java",
+  "package": "f3d",
+  "release": "4.0.1",
+  "catalog_parser": "data/java/ascii_ply/parsers.json",
+  "source_lock": "data/java/ascii_ply/source-lock.json",
+  "source_sha256": "336dd26581a0a9b0bf9e6e9c900e3f103cf6df58971cfd5bbaf6fa93cd285560",
+  "underlying_package": "vtk",
+  "underlying_release": "9.7.2",
+  "underlying_source_sha256": "fecef55df5caec6298ce190024060a90ce3bb515033c0f18968b9ab5c12bf796",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "files": 1,
+    "actors": 1,
+    "points": 3,
+    "cells": 1
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/f3d.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "fuzz_engine_feedback_scope": "Jazzer instruments JVM bytecode only; libf3d-java.so carries LLVM profile counters, not SanitizerCoverage, so Jazzer receives no native parser feedback",
+  "coverage": "JaCoCo coverage of the F3D 4.0.1 Java binding plus LLVM source coverage of its JNI binding, F3D's static native PLY plugin (generated PLYReader entry and vtkF3DPLYReader) and the VTK 9.7.2 vtkPLYReader and vtkPLY parser, all source-built into libf3d-java.so",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/Scene.java",
+  "underlying_coverage_subject_prefix": "/work/vtk/source/IO/PLY/vtkPLY",
+  "underlying_format_specific_coverage_file_suffix": "/vtkPLY.cxx"
+}
