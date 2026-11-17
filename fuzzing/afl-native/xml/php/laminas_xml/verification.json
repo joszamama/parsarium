@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "project": "xml/php/laminas_xml",
+  "pass": true,
+  "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+  "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c (DOMDocument::loadXML) via AFL++ allowlist; libxml2 tree, XPath and dict code, the other ext/dom classes, ext/libxml/libxml.c, the Zend engine and the interpreted laminas/laminas-xml PHP code are uninstrumented",
+  "harness": "projects/xml/php/laminas_xml/fuzz-target.php -> harness.php parsarium_parse (laminas/laminas-xml load, summary.php namespace-aware DOM walk)",
+  "parse_only_target": "DOMDocument::loadXML with LIBXML_NONET, as Security::scan calls it",
+  "base_project_receipt_sha256": "bfa8990e3fdd7ddafde99525eca15d755ce5e204d678a7c7dbc7c4f1f1a7b7fd",
+  "base_image_id": "sha256:635932e975377764267dceb3a6528cd2e1138c1bb780e6ae2b54f52725b80a0c",
+  "source_sha256": "315cb8243bde1f2dd22292cfd39aed8334e414688b2ee91053314f44685f62cf",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "runtime": {
+    "php": "8.5.12",
+    "libxml2": "2.15.4"
+  },
+  "instrumented_objects": [
+    "libxml2-2.15.4/build/.libs/libxml2_la-SAX2.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parser.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parserInternals.o",
+    "php-8.5.12/ext/dom/document.o"
+  ],
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "oracle": "controls/xml/check_controls.py summarize(): namespace-aware expat",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "package_line_coverage": {
+    "tool": "Xdebug (Ubuntu PHP 8.5.4, libxml 2.15.2), two identical replays per control",
+    "file": "src/Security.php",
+    "package_lines_differ": false,
+    "control_lines": 26,
+    "differential_lines": 26,
+    "shared_lines": 26,
+    "control_only_lines": [],
+    "differential_only_lines": [],
+    "package_lines": {
+      "control": 26,
+      "differential": 26
+    },
+    "package_files": {
+      "control": [
+        "src/Security.php"
+      ],
+      "differential": [
+        "src/Security.php"
+      ]
+    }
+  },
+  "image_id": "sha256:dccedd4764b0cf5f88190c6f794bf4e5971ac797c8ef4835342fd21f6b824347",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 65536,
+  "repeats_per_control": 5,
+  "all_repeats_identical": true,
+  "feedback_edges": 1095,
+  "differential_feedback_edges": 1217,
+  "stable_shared_edges": 976,
+  "stable_control_only_edges": 119,
+  "stable_differential_only_edges": 241,
+  "afl_tuple_difference": 360,
+  "parse_only_control_edges": 1095,
+  "parse_only_differential_edges": 1217,
+  "parse_only_tuple_difference": 360,
+  "format_dependent_parse_time_tuples": 360,
+  "format_dependent_traversal_only_tuples": 0,
+  "post_parse_control_edges": 0,
+  "post_parse_differential_edges": 0,
+  "post_parse_edges_identical": true,
+  "overlay_file_sha256": {
+    "Dockerfile": "5b4a7b11f698c2c7015d35a46089ef34f8f520116ff9866303d7037103a3f478",
+    "build.py": "0f7958d8578ddefe868d16a2684095a1f3e28e247d5c4a2f31c837371005352f"
+  }
+}

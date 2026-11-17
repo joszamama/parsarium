@@ -1,0 +1,62 @@
+{
+  "kind": "third_party",
+  "api": "Laminas\\Xml\\Security::scan(string $xml, DOMDocument $dom) on the local bytes: DOMDocument::loadXML with LIBXML_NONET and internal libxml errors, a post-parse check that no DOCTYPE declares entities (the string heuristic runs only under PHP-FPM, not in this CLI harness), and the loaded DOMDocument returned (SimpleXMLElement when no DOMDocument is passed); walked namespace-aware",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:53:36.738863+00:00",
+  "manifest": "projects/xml/php/laminas_xml/manifest.json",
+  "image_id": "sha256:635932e975377764267dceb3a6528cd2e1138c1bb780e6ae2b54f52725b80a0c",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "libxml 2.15.2"
+  ],
+  "source_sha256": "315cb8243bde1f2dd22292cfd39aed8334e414688b2ee91053314f44685f62cf",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "eb83f2a063d3b8cb5c372d87ce7b55e7a9e717ebc449ff328076cc78401110e8",
+    "autoload.php": "8eb5598070400ea8bb8fe1740a59a561b13faaad1257f471731fea5a3dc5c2c8",
+    "fuzz-target.php": "82415c86604aa1cc017d42d89d4b90a93694eba8e914a5424c4885f97a0ab16d",
+    "harness.php": "252814b2f7618c61e36282bad4728ea582f1c11cc2d46ba9e8ae9b9be4a500b7",
+    "manifest.json": "860637619c5abb0ae911c77be9c9ed17771cff8eb2a58d77f86e06cf22c5ed1c",
+    "run-control.php": "a0bb67c44815dde445074e26884948a008a396e211976143ce8d9aa8bad60176",
+    "source-lock.json": "f3709eb3dda476c06b4f6fd04ea74320347c850ef07b9d9c6797448b3d6ea36c",
+    "summary.php": "9aac002e5b4b01c71c2c99f52ffa063b5bb5662301cb189e5d41b8b4b6283bc0",
+    "target.json": "2b7f57d92dd819ece9d35b483c238fa3541db0923c608ae09479cca125a2bd1c"
+  },
+  "output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "parser_source_files": 1,
+  "parser_source_lines_covered": 26,
+  "format_specific_source_lines_covered": 26,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/php/laminas_xml/target/coverage/coverage.json",
+  "pass": true
+}

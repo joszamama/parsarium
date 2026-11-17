@@ -351,6 +351,90 @@
     ]
   },
   {
+    "name": "laminas/laminas-xml",
+    "version": "1.8.0",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://github.com/laminas/laminas-xml/blob/ca5f2b5abf47c7d955680f47c61b5a1225f61999/LICENSE.md",
+    "documentation": "https://docs.laminas.dev/laminas-xml/",
+    "source": "https://github.com/laminas/laminas-xml/tree/ca5f2b5abf47c7d955680f47c61b5a1225f61999",
+    "input_api": "Laminas\\Xml\\Security::scan(string $xml, DOMDocument $dom) on the local bytes: DOMDocument::loadXML with LIBXML_NONET and internal libxml errors, a post-parse check that no DOCTYPE declares entities (the string heuristic runs only under PHP-FPM, not in this CLI harness), and the loaded DOMDocument returned (SimpleXMLElement when no DOMDocument is passed); walked namespace-aware",
+    "parser_family": "libxml2 via PHP ext/dom DOMDocument::loadXML; shared with the standard DOMDocument path, symfony/dom-crawler, symfony/serializer and mtownsend/xml-to-array",
+    "package_own_scope": "laminas-xml's guard around DOMDocument::loadXML: internal libxml errors and a warning handler, LIBXML_NONET, a post-parse rejection of DOCTYPE nodes that declare entities, the PHP-FPM string heuristic (not reached under CLI), and the choice of returning the caller's DOMDocument or a SimpleXMLElement. Tokenizing, well-formedness, entity and character-reference decoding, CDATA and namespace binding are libxml2.",
+    "adapter": "projects/xml/php/laminas_xml/harness.php",
+    "source_lock": "projects/xml/php/laminas_xml/source-lock.json",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespace_declarations": 3,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "root": "{urn:parsarium:order}order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "family": "libxml2 via PHP DOMDocument, shared with the standard path, symfony/dom-crawler, symfony/serializer and mtownsend/xml-to-array",
+    "project": "projects/xml/php/laminas_xml/verification.json",
+    "popularity": {
+      "metric": "Packagist total package downloads",
+      "value": 3988633,
+      "source": "https://packagist.org/packages/laminas/laminas-xml",
+      "captured_at_utc": "2026-11-17T03:46:35.927344+00:00",
+      "snapshot": "data/php/xml/registry-snapshot.json",
+      "caveat": "Cumulative downloads of the whole package, rank 71 in the snapshot's 'xml' query; downloads count installs, often transitive, not XML-parsing uses. It is a DOMDocument::loadXML loader of the shared libxml2 family."
+    },
+    "caveats": [
+      "Wrapper path: the package's documented entry point loads the bytes with DOMDocument::loadXML and returns or wraps the resulting DOMDocument; the adapter walks that DOM namespace-aware (expanded names, xmlns declarations, attributes, depth, text) and both valid controls match the namespace-aware expat oracle. The package adds no tokenizer of its own.",
+      "laminas/laminas-xml is the renamed successor of zendframework/zendxml (9,276,742 downloads in the same snapshot, abandoned in favour of laminas/laminas-xml); the predecessor is not counted, following the zend-json precedent, and its downloads are not added. Like defusedxml in the Python cell, it is a guard facade, not an XML engine."
+    ]
+  },
+  {
     "name": "saloonphp/xml-wrangler",
     "version": "v1.5.0",
     "license": "MIT",

@@ -1,0 +1,89 @@
+{
+ "schema_version": 1,
+ "format": "xml",
+ "ecosystem": "php",
+ "package": "laminas/laminas-xml",
+ "release": "1.8.0",
+ "catalog_parser": "data/php/xml/parsers.json",
+ "source_lock": "projects/xml/php/laminas_xml/source-lock.json",
+ "source_sha256": "315cb8243bde1f2dd22292cfd39aed8334e414688b2ee91053314f44685f62cf",
+ "underlying_release": "libxml2 2.15.4 and PHP 8.5.12 ext/dom DOMDocument::loadXML (AFL++ overlay, source build); Ubuntu PHP 8.5.4 with libxml 2.15.2 via php8.5-xml (Xdebug coverage image)",
+ "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+ "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+ "fuzz_engine": "AFL++",
+ "fuzz_engine_release": "4.33c-1.1ubuntu1",
+ "native_campaign_supported": false,
+ "coverage_limit": "Xdebug line coverage sees only laminas/laminas-xml PHP lines and is reported separately. AFL++ feedback comes from the native overlay: libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c, instrumented through an allowlist while the same harness runs; libxml2 tree/XPath code, other ext/dom classes, ext/libxml and the interpreted laminas/laminas-xml code add no AFL++ tuples. laminas/laminas-xml is a loader over DOMDocument::loadXML (libxml2 family, shared with the standard DOMDocument path, symfony/dom-crawler, symfony/serializer and mtownsend/xml-to-array); its own lines are visible only in the Xdebug report. The pinned base image does not bundle php-fuzzer; replay is per case.",
+ "fuzz_smoke_entrypoint": "php",
+ "fuzz_smoke_args": [
+  "/work/fuzz-target.php",
+  "/input/control"
+ ],
+ "fuzz_smoke_expect": "",
+ "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+ "platform": "linux/arm64",
+ "control": "controls/xml/catalog-ns.xml",
+ "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+ "differential_control": "controls/xml/order-default-ns.xml",
+ "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+ "differential_expected_output": {
+  "attributes": [
+   "n=1",
+   "{urn:parsarium:price}currency=EUR",
+   "n=2",
+   "note=say \"hi\""
+  ],
+  "elements": [
+   "{urn:parsarium:order}order",
+   "{urn:parsarium:order}line",
+   "{urn:parsarium:order}sku",
+   "{urn:parsarium:price}amount",
+   "{urn:parsarium:order}line",
+   "plain",
+   "leaf"
+  ],
+  "max_depth": 4,
+  "namespace_declarations": 3,
+  "namespaces": [
+   "urn:parsarium:order",
+   "urn:parsarium:price"
+  ],
+  "root": "{urn:parsarium:order}order",
+  "text": [
+   "A-7",
+   "12.50 €"
+  ]
+ },
+ "expected_output": {
+  "attributes": [
+   "version=1",
+   "id=a1",
+   "{urn:parsarium:catalog}lang=es",
+   "id=b2"
+  ],
+  "elements": [
+   "{urn:parsarium:catalog}catalog",
+   "{urn:parsarium:item}item",
+   "{urn:parsarium:item}item",
+   "{urn:parsarium:item}name",
+   "{urn:parsarium:item}note"
+  ],
+  "max_depth": 3,
+  "namespace_declarations": 2,
+  "namespaces": [
+   "urn:parsarium:catalog",
+   "urn:parsarium:item"
+  ],
+  "root": "{urn:parsarium:catalog}catalog",
+  "text": [
+   "Café & té",
+   "Zürich <HQ>",
+   "x < y"
+  ]
+ },
+ "harness": "harness.php",
+ "coverage": "Xdebug executed line coverage in laminas/laminas-xml 1.8.0 PHP source while it loads the valid XML; AFL++ feedback comes from the allowlisted libxml2 XML parser and PHP ext/dom loading sources in the native overlay",
+ "coverage_subject_prefix": "/work/vendor/laminas/laminas-xml/",
+ "format_specific_coverage_file_suffix": "/src/Security.php",
+ "api": "Laminas\\Xml\\Security::scan(string $xml, DOMDocument $dom) on the local bytes: DOMDocument::loadXML with LIBXML_NONET and internal libxml errors, a post-parse check that no DOCTYPE declares entities (the string heuristic runs only under PHP-FPM, not in this CLI harness), and the loaded DOMDocument returned (SimpleXMLElement when no DOMDocument is passed); walked namespace-aware"
+}
