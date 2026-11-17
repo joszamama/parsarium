@@ -1,0 +1,25 @@
+[
+  {
+    "name": "symphonia-bundle-mp3",
+    "version": "0.6.1",
+    "license": "MPL-2.0",
+    "input_api": "MpaReader::try_new(MediaSourceStream::new(Box::new(Cursor::new(bytes)), ..), FormatOptions::default()); FormatReader::next_packet(); MpaDecoder::try_new(params, ..).decode(&packet)",
+    "documentation": "https://docs.rs/symphonia-bundle-mp3/0.6.1/symphonia_bundle_mp3/",
+    "source": "https://github.com/pdeljanov/Symphonia/tree/v0.6.1/symphonia-bundle-mp3",
+    "scope": "Every MPEG Layer III frame of an untagged stream demuxed and decoded: sample rate, channels, frame count, frame bytes, decoded samples per channel",
+    "family": "Symphonia MP3 demuxer and decoder",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "decoded_frames": 12672
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 10651437,
+      "source": "data/rust/mp3/registry-snapshot.json"
+    }
+  }
+]
