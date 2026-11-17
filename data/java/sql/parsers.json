@@ -334,5 +334,118 @@
         }
       ]
     }
+  },
+  {
+    "name": "org.apache.calcite:calcite-core",
+    "version": "1.42.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (calcite-core-1.42.0.pom: The Apache License, Version 2.0)",
+    "input_api": "SqlParser.create(local SQL text, SqlParser.config()).parseStmtList() -> SqlNodeList",
+    "documentation": "https://calcite.apache.org/javadocAggregate/org/apache/calcite/sql/parser/SqlParser.html",
+    "source": "https://repo.maven.apache.org/maven2/org/apache/calcite/calcite-core/1.42.0/calcite-core-1.42.0-sources.jar",
+    "source_sha256": "0af0fc287b26288c8354c3aa184c4216ef5ac01b9fb96883eb9afb51d3dae5bb",
+    "jar_sha256": "2ed5489201baab842001c95f939a0829849cf3cdaed9cdbf4b9078633c35792b",
+    "dependencies": [
+      "com.google.guava:failureaccess 1.0.3",
+      "com.google.guava:guava 33.4.8-jre",
+      "org.apache.calcite.avatica:avatica-core 1.28.0",
+      "org.apache.calcite:calcite-linq4j 1.42.0",
+      "org.apiguardian:apiguardian-api 1.1.2",
+      "org.checkerframework:checker-qual 3.10.0",
+      "org.slf4j:slf4j-api 1.7.25"
+    ],
+    "dialect": "SqlParser.config() default (Calcite default lexical policy and SqlConformanceEnum.DEFAULT)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other lexical policies, conformance levels and the Babel and server parsers are untested.",
+    "family": "Apache Calcite JavaCC grammar (SqlParserImpl)",
+    "family_note": "SqlParser.parseStmtList runs the JavaCC-generated SqlParserImpl (from Calcite's Parser.jj template) and returns SqlNode trees: SqlOrderBy wrapping SqlSelect for the query and SqlInsert with a VALUES call for the insert. The adapter reads those fields, walks SqlJoin and AS calls in the FROM clause for base tables, and collects SqlFunction calls and SqlCharStringLiteral/SqlNumericLiteral values with an SqlBasicVisitor. Unquoted identifiers are upper-cased by the default lexical policy; the adapter lower-cases them. Independent of jOOQ, Druid, JSqlParser and the Presto/Trino ANTLR grammars.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 1250,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.calcite%3Acalcite-core",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over 45 releases; most calcite-core dependents use its planner, adapters or JDBC driver, not only the SQL parser."
+    },
+    "project": "projects/sql/java/calcite",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

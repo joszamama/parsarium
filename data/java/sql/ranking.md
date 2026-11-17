@@ -1,6 +1,6 @@
 # Java × SQL: pilot ranking
 
-Three third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
+Four third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
 
 ## Primary within-cell adoption metric
 
@@ -11,8 +11,9 @@ deps.dev directDependentCount summed over every Maven release, captured 2026-11-
 | 1 | [org.jooq:jooq](https://www.jooq.org/doc/3.21/manual/sql-building/sql-parser/sql-parser-api/) | 3.21.9 | 4,574 | `DSL.using(SQLDialect.DEFAULT).parser().parse(local SQL text) -> Queries`; dialect: SQLDialect.DEFAULT | jOOQ hand-written recursive-descent parser (ParserImpl) and query object model |
 | 2 | [com.alibaba:druid](https://github.com/alibaba/druid/wiki/SQL-Parser) | 1.2.28 | 1,945 | `SQLUtils.parseStatements(local SQL text, DbType.mysql) -> List<SQLStatement>`; dialect: DbType.mysql | Druid hand-written SQL lexer and recursive-descent parsers |
 | 3 | [com.facebook.presto:presto-parser](https://javadoc.io/doc/com.facebook.presto/presto-parser/0.300/com/facebook/presto/sql/parser/SqlParser.html) | 0.300 | 1,453 | `SqlParser.createStatement(statement text from StatementSplitter over local SQL text, ParsingOptions with DecimalLiteralTreatment.AS_DECIMAL) -> Statement`; dialect: Presto SQL (the only grammar; ParsingOptions DecimalLiteralTreatment.AS_DECIMAL so 19.5 is a DecimalLiteral) | Presto/Trino ANTLR4 SqlBase grammar (Presto branch) |
+| 4 | [org.apache.calcite:calcite-core](https://calcite.apache.org/javadocAggregate/org/apache/calcite/sql/parser/SqlParser.html) | 1.42.0 | 1,250 | `SqlParser.create(local SQL text, SqlParser.config()).parseStmtList() -> SqlNodeList`; dialect: SqlParser.config() default (Calcite default lexical policy and SqlConformanceEnum.DEFAULT) | Apache Calcite JavaCC grammar (SqlParserImpl) |
 
-Receipts: [org.jooq:jooq](../../../projects/sql/java/jooq/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/java/jooq/differential.json), [com.alibaba:druid](../../../projects/sql/java/druid/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/java/druid/differential.json) and [com.facebook.presto:presto-parser](../../../projects/sql/java/presto_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/java/presto_parser/differential.json).
+Receipts: [org.jooq:jooq](../../../projects/sql/java/jooq/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/java/jooq/differential.json), [com.alibaba:druid](../../../projects/sql/java/druid/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/java/druid/differential.json), [com.facebook.presto:presto-parser](../../../projects/sql/java/presto_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/java/presto_parser/differential.json) and [org.apache.calcite:calcite-core](../../../projects/sql/java/calcite/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/java/calcite/differential.json).
 
 ## Leads by the same metric
 
@@ -21,7 +22,7 @@ Receipts: [org.jooq:jooq](../../../projects/sql/java/jooq/verification.json) and
 | org.jooq:jooq | 4,574 | selected | jOOQ hand-written parser |
 | com.alibaba:druid | 1,945 | selected | Druid hand-written SQL parser |
 | com.facebook.presto:presto-parser | 1,453 | selected | Presto/Trino ANTLR grammar |
-| org.apache.calcite:calcite-core | 1,250 | unresolved | Calcite JavaCC grammar |
+| org.apache.calcite:calcite-core | 1,250 | selected | Calcite JavaCC grammar |
 | com.github.jsqlparser:jsqlparser | 950 | unresolved | JSqlParser JavaCC grammar |
 | io.trino:trino-parser | 525 | unresolved | Presto/Trino ANTLR grammar |
 | io.prestosql:presto-parser | 282 | unresolved | Presto/Trino ANTLR grammar |

@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T20:02:30.016552+00:00",
+  "project": "sql/java/calcite",
+  "pass": true,
+  "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "3951927175c7e50c461d2bb33781f7118e68e43e798478ef622be301d1d00fff",
+  "overlay_receipt_sha256": "ecc36a3d7bf84d8e0a65658f1cba5adce74b552d18d8fbce07597c339d515cc1",
+  "base_image_id": "sha256:0552a6efd5036cd4bd996df271025ee8f77938ae2ad492bf05d58102824feaca",
+  "overlay_image_id": "sha256:39ab394f266ffc998eed6fe2a57d09cd8bf286f8fedc6937b8d3f83bda9e7900",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 5786,
+  "second_afl_tuples": 5322,
+  "afl_tuple_difference": 1108,
+  "first_parser_features": 5986,
+  "second_parser_features": 5481,
+  "parser_feature_difference": 1201,
+  "first_only_features_by_file": {
+    "org/apache/calcite/sql/JoinConditionType.java": 4,
+    "org/apache/calcite/sql/JoinType.java": 12,
+    "org/apache/calcite/sql/SqlBasicCall.java": 1,
+    "org/apache/calcite/sql/SqlByRewriter.java": 2,
+    "org/apache/calcite/sql/SqlFunction.java": 4,
+    "org/apache/calcite/sql/SqlIdentifier.java": 2,
+    "org/apache/calcite/sql/SqlJoin.java": 23,
+    "org/apache/calcite/sql/SqlKind.java": 1,
+    "org/apache/calcite/sql/SqlLiteral.java": 5,
+    "org/apache/calcite/sql/SqlNode.java": 1,
+    "org/apache/calcite/sql/SqlNodeList.java": 2,
+    "org/apache/calcite/sql/SqlOperator.java": 4,
+    "org/apache/calcite/sql/SqlOrderBy.java": 11,
+    "org/apache/calcite/sql/SqlSelect.java": 23,
+    "org/apache/calcite/sql/SqlSelectOperator.java": 3,
+    "org/apache/calcite/sql/SqlUnresolvedFunction.java": 2,
+    "org/apache/calcite/sql/Symbolizable.java": 1,
+    "org/apache/calcite/sql/parser/Span.java": 1,
+    "org/apache/calcite/sql/parser/SqlAbstractParserImpl.java": 4,
+    "org/apache/calcite/sql/parser/SqlParserPos.java": 8,
+    "org/apache/calcite/sql/parser/SqlParserUtil.java": 53,
+    "org/apache/calcite/sql/parser/impl/SqlParserImpl.java": 556,
+    "org/apache/calcite/sql/parser/impl/SqlParserImplTokenManager.java": 130
+  },
+  "second_only_features_by_file": {
+    "org/apache/calcite/sql/SqlBasicCall.java": 1,
+    "org/apache/calcite/sql/SqlInsert.java": 13,
+    "org/apache/calcite/sql/SqlLiteral.java": 4,
+    "org/apache/calcite/sql/SqlNodeList.java": 1,
+    "org/apache/calcite/sql/parser/SqlParserUtil.java": 1,
+    "org/apache/calcite/sql/parser/impl/SqlParserImpl.java": 291,
+    "org/apache/calcite/sql/parser/impl/SqlParserImplTokenManager.java": 37
+  }
+}
