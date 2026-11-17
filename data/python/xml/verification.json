@@ -1,0 +1,47 @@
+{
+  "checked_at_utc": "2026-11-17T02:55:49.931761+00:00",
+  "control": {
+    "path": "controls/xml/two-items.xml",
+    "sha256": "79385f09172d9386e3a5b70e162c85c9932b1e0fb7f9bdbd6246e94cf7bcc941"
+  },
+  "third_party": [
+    {
+      "package": "xmltodict",
+      "version": "1.0.4",
+      "pass": true,
+      "output": {
+        "root": "library",
+        "namespace": "urn:parsarium:xml:pilot",
+        "child_count": 2,
+        "first_item_id": "7",
+        "first_item_text": "A & B",
+        "second_item_text": "π"
+      },
+      "package_source_lines": 97,
+      "expat_source_lines": 2330,
+      "expat_xmlparse_lines": 1615,
+      "project_receipt": "projects/xml/python/xmltodict/verification.json",
+      "project_receipt_sha256": "70a2dd8cf120b99d9ba8cbda4be0b9633334c28381a7eafee8831da7837bd657"
+    }
+  ],
+  "standard": [
+    {
+      "api": "xml.etree.ElementTree.parse(BytesIO(local XML bytes)); getroot()",
+      "runtime": "CPython 3.14.4 ElementTree with Expat 2.10.0",
+      "pass": true,
+      "output": {
+        "root": "library",
+        "namespace": "urn:parsarium:xml:pilot",
+        "child_count": 2,
+        "first_item_id": "7",
+        "first_item_text": "A & B",
+        "second_item_text": "π"
+      },
+      "elementtree_source_lines": 16,
+      "expat_source_lines": 2280,
+      "expat_xmlparse_lines": 1565,
+      "project_receipt": "projects/xml/python/stdlib_elementtree/verification.json",
+      "project_receipt_sha256": "0f5e7871d31f2e1d83bbe1f17e1e723e6c706562c52dba6831b892c70c80fba7"
+    }
+  ]
+}
