@@ -1,6 +1,6 @@
 # Java × YAML: pilot ranking
 
-Five control-verified third-party paths. The ceiling is ten; the cell is not padded. Every lead ranked above the fifth path was run on the controls or read at its pinned source and failed or was excluded; the evidence is in [leads.json](leads.json).
+Six control-verified third-party paths. The ceiling is ten; the cell is not padded. Every lead ranked above the sixth path was run on the controls or read at its pinned source and failed or was excluded; the evidence is in [leads.json](leads.json).
 
 ## Primary within-cell adoption metric
 
@@ -11,10 +11,11 @@ deps.dev `directDependentCount` summed over every Maven release, captured 2026-1
 | 1 | [snakeyaml](https://javadoc.io/static/org.yaml/snakeyaml/2.7/org/yaml/snakeyaml/Yaml.html) | 2.7 | 10,859 | 119 lines / 118 tuples | SnakeYAML |
 | 2 | [snakeyaml-engine](https://javadoc.io/static/org.snakeyaml/snakeyaml-engine/3.2/org.snakeyaml.engine/org/snakeyaml/engine/v2/api/Load.html) | 3.2 | 493 | 124 lines / 122 tuples | SnakeYAML Engine |
 | 3 | [circe-yaml](https://github.com/circe/circe-yaml/blob/v0.16.1/README.md) | 0.16.1 | 127 | 113 lines / 111 tuples (wrapper 0, SnakeYAML 113) | SnakeYAML via circe-yaml (wrapper) |
-| 4 | [kjson-yaml](https://github.com/pwall567/kjson-yaml/blob/3.15/README.md) | 3.15 | 29 | 59 lines / 59 tuples | kjson-yaml |
-| 5 | [snakeyaml-engine-kmp](https://github.com/krzema12/snakeyaml-engine-kmp/blob/v5.0.0/README.md) | 5.0.0 | 27 | 112 lines / 105 tuples | SnakeYAML Engine KMP (Kotlin port) |
+| 4 | [zio-json-yaml](https://github.com/zio/zio-json/blob/v1.1.2/docs/yaml.md) | 1.1.2 | 63 | 120 lines / 116 tuples (wrapper 0, SnakeYAML 120) | SnakeYAML via zio-json-yaml (wrapper) |
+| 5 | [kjson-yaml](https://github.com/pwall567/kjson-yaml/blob/3.15/README.md) | 3.15 | 29 | 59 lines / 59 tuples | kjson-yaml |
+| 6 | [snakeyaml-engine-kmp](https://github.com/krzema12/snakeyaml-engine-kmp/blob/v5.0.0/README.md) | 5.0.0 | 27 | 112 lines / 105 tuples | SnakeYAML Engine KMP (Kotlin port) |
 
-All paths load the documents into ordered trees; aliases resolve to the anchored node. circe-yaml is a wrapper over SnakeYAML 2.2: its own lines show no control differential, and its feedback row splits wrapper and SnakeYAML lines. AFL++ feedback: [afl-feedback.json](afl-feedback.json).
+All paths load the documents into ordered trees; aliases resolve to the anchored node. circe-yaml and zio-json-yaml are wrappers over SnakeYAML 2.2 and 2.7 from separate projects: their own lines show no control differential, and their feedback rows split wrapper and SnakeYAML lines. AFL++ feedback: [afl-feedback.json](afl-feedback.json).
 
 ## Leads
 
@@ -35,6 +36,7 @@ All paths load the documents into ordered trees; aliases resolve to the anchored
 | com.sksamuel.hoplite:hoplite-yaml | fails_control | 97 | SnakeYAML events via hoplite YamlParser |
 | io.circe:circe-yaml_3 | excluded | 94 | SnakeYAML via circe-yaml (Scala 3 cross-build) |
 | com.amihaiemil.web:eo-yaml | fails_control | 89 | eo-yaml |
+| dev.zio:zio-json-yaml_2.13 | selected | 63 | SnakeYAML via zio-json-yaml (Scala wrapper) |
 | net.mamoe.yamlkt:yamlkt-jvm | fails_control | 56 | yamlkt (own Kotlin parser) |
 | com.charleskorn.kaml:kaml | excluded | 56 | SnakeYAML Engine KMP via kaml (KMP root module) |
 | org.spongepowered:configurate-yaml | fails_control | 48 | SnakeYAML (bundled) via Configurate |

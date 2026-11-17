@@ -23,13 +23,14 @@ sys.path.insert(0, str(ROOT / "controls/yaml"))
 import check_controls  # noqa: E402
 
 
-PROJECTS = ("snakeyaml", "snakeyaml_engine", "circe_yaml", "kjson_yaml", "snakeyaml_engine_kmp")
+PROJECTS = ("snakeyaml", "snakeyaml_engine", "circe_yaml", "zio_json_yaml", "kjson_yaml", "snakeyaml_engine_kmp")
 SOURCE_PREFIX = {"snakeyaml": ("org/yaml/snakeyaml/",), "snakeyaml_engine": ("org/snakeyaml/engine/",),
-                 # wrapper path: java_dual_trace.py labels circe-yaml lines wrapper/ and SnakeYAML lines core/
+                 # wrapper paths: java_dual_trace.py labels wrapper lines wrapper/ and SnakeYAML lines core/
                  "circe_yaml": ("wrapper/io/circe/yaml/", "core/org/yaml/snakeyaml/"),
+                 "zio_json_yaml": ("wrapper/zio/json/yaml/", "core/org/yaml/snakeyaml/"),
                  "kjson_yaml": ("io/kjson/yaml/",),
                  "snakeyaml_engine_kmp": ("it/krzeminski/snakeyaml/engine/kmp/",)}
-WRAPPERS = {"circe_yaml"}
+WRAPPERS = {"circe_yaml", "zio_json_yaml"}
 CONTROL = "controls/yaml/catalog.yaml"
 DIFFERENTIAL = "controls/yaml/order.yaml"
 REPEATS = 3

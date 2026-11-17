@@ -89,6 +89,16 @@ class JavaYamlPilotTest(unittest.TestCase):
                 self.assertEqual(row["wrapper_control_features"] + row["core_control_features"],
                                  row["control_parser_features"])
 
+    def test_zio_json_yaml_wraps_the_selected_snakeyaml_release(self):
+        zio = read(ROOT / "projects/yaml/java/zio_json_yaml/source-lock.json")["zio-json-yaml"]
+        snakeyaml = read(ROOT / "projects/yaml/java/snakeyaml/source-lock.json")["snakeyaml"]
+        self.assertEqual(zio["underlying"]["coordinate"], "org.yaml:snakeyaml:2.7")
+        self.assertEqual(zio["underlying"]["jar_sha256"], snakeyaml["jar_sha256"])
+        self.assertEqual(zio["underlying"]["source_sha256"], snakeyaml["source_sha256"])
+        row = self.feedback["yaml/java/zio_json_yaml"]
+        self.assertEqual(row["wrapper_feature_difference"], 0)
+        self.assertEqual(row["core_feature_difference"], row["parser_feature_difference"])
+
     def test_jackson_alias_failure_stays_a_lead(self):
         lead, = [lead for lead in read(DATA / "leads.json")
                  if lead["name"] == "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml"]

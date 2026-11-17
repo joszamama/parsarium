@@ -11,6 +11,7 @@ Five verified Java YAML paths: SnakeYAML 2.7 (YAML 1.1 SafeConstructor), SnakeYA
 - [snakeyaml](snakeyaml/README.md) — verified Docker harness
 - [snakeyaml-engine](snakeyaml-engine/README.md) — verified Docker harness
 - [circe-yaml](circe-yaml/README.md) — verified Docker harness
+- [zio-json-yaml](zio-json-yaml/README.md) — verified API path
 - [kjson-yaml](kjson-yaml/README.md) — verified Docker harness
 - [snakeyaml-engine-kmp](snakeyaml-engine-kmp/README.md) — verified Docker harness
 

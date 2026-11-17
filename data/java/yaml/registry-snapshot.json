@@ -824,6 +824,19 @@
    "default_release_direct_dependent_count": 0,
    "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/dev.dejvokep%3Aboosted-yaml",
    "observed_at_utc": "2026-11-17T20:41:18.900707+00:00"
+  },
+  "dev.zio:zio-json-yaml_2.13": {
+   "value": 63,
+   "default_version": "1.1.2",
+   "releases": 82,
+   "max_release": "0.7.3",
+   "max_release_direct_dependent_count": 2,
+   "default_release_direct_dependent_count": 1,
+   "url": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/dev.zio%3Azio-json-yaml_2.13",
+   "releases_without_dependents_data": [
+    "0.7.35"
+   ],
+   "observed_at_utc": "2026-11-17T22:36:36.732757+00:00"
   }
  },
  "leads": [
@@ -1066,6 +1079,14 @@
    "note": null,
    "found_by": "registry_search",
    "metric_value": 4
+  },
+  {
+   "name": "dev.zio:zio-json-yaml_2.13",
+   "family": "SnakeYAML via zio-json-yaml (Scala wrapper)",
+   "api_hint": "String#fromYaml[Json] (zio.json.yaml._)",
+   "note": null,
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 63
   }
  ],
  "round_2_targeted_leads": {
@@ -1098,6 +1119,14 @@
    "org.virtuslab:scala-yaml_2.13",
    "io.circe:circe-yaml-v12_2.13",
    "dev.dejvokep:boosted-yaml"
+  ]
+ },
+ "round_3_targeted_leads": {
+  "captured_at_utc": "2026-11-17T22:36:36.732757+00:00",
+  "method": "No new registry query. Round 3 read the remaining undecided hits of the recorded query yaml (first 100) and added targeted documentation leads for Scala, Kotlin and Java YAML libraries and configuration loaders outside the first 100 hits. Each lead's deps.dev directDependentCount was summed over all Maven releases with the round-1 method (scripts/capture_yaml_registry.py deps_dev); where a single release's :dependents endpoint answered 404 it was counted as 0 and listed in releases_without_dependents_data.",
+  "deps_dev_api": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/{coordinate} and .../versions/{version}:dependents",
+  "leads_added": [
+   "dev.zio:zio-json-yaml_2.13"
   ]
  }
 }
