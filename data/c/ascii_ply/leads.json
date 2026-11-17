@@ -101,7 +101,9 @@
     "status": "unresolved",
     "source": "https://github.com/renehorstmann/Plyc",
     "api_evidence": "https://github.com/renehorstmann/Plyc#loading-a-point-cloud",
-    "reason": "MIT C library documents ply_simple_load(local filename), but upstream publishes no tag or numbered release; no version-pinned control run has been recorded."
+    "reason": "MIT C library documents ply_simple_load(local filename), but upstream publishes no tag or numbered release; no version-pinned control run has been recorded.",
+    "rechecked_at_utc": "2026-11-18T00:30:00+00:00",
+    "recheck": "GitHub tags and releases API still list no tag or release; no pinned release is available."
   },
   {
     "name": "quepas/O-RPLY",
@@ -109,14 +111,18 @@
     "source": "https://github.com/quepas/O-RPLY",
     "api_evidence": "https://github.com/quepas/O-RPLY#whats-new",
     "family": "RPly 1.1.4 fork",
-    "reason": "MIT C library documents ply_open_from_memory(buffer), but upstream publishes no tag or numbered release; no version-pinned control run has been recorded."
+    "reason": "MIT C library documents ply_open_from_memory(buffer), but upstream publishes no tag or numbered release; no version-pinned control run has been recorded.",
+    "rechecked_at_utc": "2026-11-18T00:30:00+00:00",
+    "recheck": "GitHub tags and releases API still list no tag or release; no pinned release is available."
   },
   {
     "name": "maluoi/header-libs micro_ply",
     "status": "unresolved",
     "source": "https://github.com/maluoi/header-libs",
     "api_evidence": "https://github.com/maluoi/header-libs/blob/master/micro_ply.h",
-    "reason": "MIT or public-domain C header documents ply_read(local bytes, length, output), but header-libs itself publishes no tag or numbered release. A byte-identical copy in separately tagged sk_renderer v2026.11.3 passed a local ASCII PLY control and is counted under that package path, not as header-libs."
+    "reason": "MIT or public-domain C header documents ply_read(local bytes, length, output), but header-libs itself publishes no tag or numbered release. A byte-identical copy in separately tagged sk_renderer v2026.11.3 passed a local ASCII PLY control and is counted under that package path, not as header-libs.",
+    "rechecked_at_utc": "2026-11-18T00:30:00+00:00",
+    "recheck": "GitHub tags and releases API still list no tag or release; no pinned release is available."
   },
   {
     "name": "MeshInspector/MeshLib",
@@ -199,7 +205,9 @@
     "name": "capnramses/gfx_expmts apg_ply",
     "status": "unresolved",
     "source": "https://github.com/capnramses/gfx_expmts/blob/master/077_apg_ply/apg_ply.h",
-    "reason": "The public C apg_ply_read(local filename) API is documented in the header and source, but the repository has no Git tags and no numbered upstream release was identified. No pinned release or control replay."
+    "reason": "The public C apg_ply_read(local filename) API is documented in the header and source, but the repository has no Git tags and no numbered upstream release was identified. No pinned release or control replay.",
+    "rechecked_at_utc": "2026-11-18T00:30:00+00:00",
+    "recheck": "GitHub tags and releases API still list no tag or release; no pinned release is available."
   },
   {
     "name": "rib/rig rut-mesh-ply",
@@ -232,13 +240,17 @@
     "name": "EvilPudding/candle",
     "status": "unresolved",
     "source": "https://github.com/EvilPudding/candle/blob/master/formats/ply.c",
-    "reason": "MIT C game engine source exposes mesh_load_ply(local filename) and has substantial repository interest (385 stars at inspection), but upstream has no tag or numbered release; a pinned qualifying release and control replay are absent."
+    "reason": "MIT C game engine source exposes mesh_load_ply(local filename) and has substantial repository interest (385 stars at inspection), but upstream has no tag or numbered release; a pinned qualifying release and control replay are absent.",
+    "rechecked_at_utc": "2026-11-18T00:30:00+00:00",
+    "recheck": "GitHub tags and releases API still list no tag or release; no pinned release is available."
   },
   {
     "name": "synave/a2ri",
     "status": "unresolved",
     "source": "https://github.com/synave/a2ri/blob/main/src/ply.c",
-    "reason": "LGPL C library source exposes a2ri_vf_load_ply_ascii and a2ri_vef_load_ply_ascii. The archived 0.3 source tarball lacks PLY code; current PLY source labels itself 0.4 but no 0.4 package release or tag was found. No qualifying release/control replay."
+    "reason": "LGPL C library source exposes a2ri_vf_load_ply_ascii and a2ri_vef_load_ply_ascii. The archived 0.3 source tarball lacks PLY code; current PLY source labels itself 0.4 but no 0.4 package release or tag was found. No qualifying release/control replay.",
+    "rechecked_at_utc": "2026-11-18T00:30:00+00:00",
+    "recheck": "GitHub tags and releases API still list no tag or release; no pinned release is available."
   },
   {
     "name": "ros-interactive-manipulation/household_objects_database PLY module",
@@ -275,5 +287,26 @@
     "status": "excluded_duplicate",
     "source": "https://github.com/vfonov/rply/tree/1.1.4",
     "reason": "Tagged fork is a byte-identical mirror of official RPly 1.1.4 for rply.c, rply.h, and LICENSE (SHA-256 80575385..., 35fd6893..., 0ea6ddfb...). It is the same package source, so a second row would duplicate RPly."
+  },
+  {
+    "name": "draco",
+    "status": "excluded_cpp_api",
+    "source": "https://github.com/google/draco",
+    "reason": "Homebrew formula description hit in the 2026-11-18 gap round. Draco reads PLY through its C++ draco::ReadMeshFromFile / PlyDecoder API and the draco_encoder tool; no documented C input API for PLY was found, so it is outside the C cell.",
+    "checked_at_utc": "2026-11-18T00:30:00+00:00"
+  },
+  {
+    "name": "coacd",
+    "status": "excluded_no_ply_input_api",
+    "source": "https://github.com/SarahWeiii/CoACD",
+    "reason": "Homebrew formula description hit in the 2026-11-18 gap round. The documented CLI input is an .obj mesh and the C API takes in-memory vertex/index arrays; no PLY reader is documented (repository code search for 'ply' finds no PLY parser).",
+    "checked_at_utc": "2026-11-18T00:30:00+00:00"
+  },
+  {
+    "name": "opencascade",
+    "status": "excluded_no_ply_input_api",
+    "source": "https://dev.opencascade.org/doc/overview/html/occt_user_guides__de_wrapper.html",
+    "reason": "Homebrew formula description hit in the 2026-11-18 gap round. Its RWPly component is a PLY writer; no PLY import API is documented, and its API is C++.",
+    "checked_at_utc": "2026-11-18T00:30:00+00:00"
   }
 ]
