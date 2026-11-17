@@ -49,6 +49,63 @@
     "project": "projects/xml/javascript/saxes"
   },
   {
+    "name": "jsdom",
+    "version": "31.0.1",
+    "license": "MIT",
+    "npm_integrity": "sha512-CbhJL8ZQg3eKswxSZth4QO9tW0jPIhmR0vtSXQSbKSfWbwIT6hoRc17wdHIVTQ43KI0mdV5iTJr3281IDgVZ5g==",
+    "tarball_sha256": "53b0b47dbcebe37833e4cbcf162d9fc628a038eeddcb1e68255a4957381da109",
+    "input_api": "new JSDOM(text, {contentType: 'application/xml', virtualConsole}) on local bytes decoded with strict UTF-8 TextDecoder; jsdom's XML document parser runs new SaxesParser({xmlns: true, defaultXMLVersion: '1.0', forceXMLVersion: true}), throws a SyntaxError on the first saxes error, and builds the DOM; the adapter treats any jsdomError as fatal and reads window.document: element and attribute namespaceURI/localName, attribute order, and Text/CDATASection data in document order",
+    "documentation": "https://github.com/jsdom/jsdom/blob/31.0.1/README.md",
+    "source": "https://github.com/jsdom/jsdom/tree/31.0.1",
+    "scope": "One namespace-aware XML 1.0 document from locally decoded text as a jsdom XML Document with saxes-resolved element and attribute namespace URIs; comments and processing instructions are kept as DOM nodes",
+    "family": "saxes XML 1.0 + Namespaces state machine (saxes 6.0.0) under jsdom's XML document builder",
+    "family_note": "jsdom 31.0.1 has no XML tokenizer of its own: lib/jsdom/browser/parser/xml.js creates SaxesParser({xmlns: true, defaultXMLVersion: '1.0', forceXMLVersion: true}) and maps its opentag, closetag, text, cdata, comment, processinginstruction and doctype events to DOM nodes; HTML goes through parse5 instead. The package.json range saxes ^6.0.0 resolves to saxes 6.0.0, the same release and npm integrity as the selected saxes path, so the two paths share one parser family and one tokenizer source; jsdom is a separate API path with its own DOM construction. jsdom adds one extension of its own: entity declarations matching <!ENTITY name \"value\"> in the DOCTYPE text are copied into saxes' entity table. It forces XML 1.0 rules even for documents declaring version 1.1, and drops text outside the root element. DOMParser.parseFromString(text, 'application/xml') uses the same parseIntoDocument path but reports errors as a parsererror document rather than throwing; the adapter uses the JSDOM constructor.",
+    "underlying_parser": {
+      "package": "saxes",
+      "version": "6.0.0",
+      "npm_integrity": "sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==",
+      "tarball_sha256": "1cdf52fbbe1ccbd175c365d2b8e63f46e590e74aff23fa6a44a6ec51522e96db",
+      "selected_path": "projects/xml/javascript/saxes"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 587846374,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/jsdom",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/javascript/jsdom",
+    "verification_note": "jsdom is an API path over the selected saxes 6.0.0 tokenizer, not a separate parser engine; the receipt counts jsdom package lines, jsdom's own XML document parser lib/jsdom/browser/parser/xml.js alone, and saxes saxes.js lines separately. The jsdom package count is dominated by module loading and window setup; the coverage run only constructs the document and closes the window, so the adapter's DOM read-back is not counted. Both valid controls, catalog-ns.xml and order-default-ns.xml, match the expat oracle exactly, including namespace URIs, attribute order and text; comments and processing instructions remain DOM nodes and split text as in expat. AFL++ feedback spans /work/node_modules/ during construction only: saxes, jsdom XML tree construction and DOM node creation, plus input-independent module-load and window setup ranges; window named-property and id-cache updates from id attributes are input-dependent jsdom construction, and xmlchars ranges are saxes character-class checks. Scope limits: jsdom copies DOCTYPE <!ENTITY name \"value\"> declarations into saxes' entity table (a jsdom extension, not general DTD processing), forces XML 1.0 rules for version 1.1 documents, and drops text outside the root element. DOMParser.parseFromString shares parseIntoDocument but turns errors into a parsererror document; it was not the measured path. No malformed-input, resource-use, or fuzz campaign was run."
+  },
+  {
     "name": "sax",
     "version": "1.6.1",
     "license": "BlueOak-1.0.0",

@@ -1,0 +1,63 @@
+{
+  "kind": "standard",
+  "api": "xml_parser_create_ns(?string $encoding = null, string $separator = \":\"): XMLParser; xml_parse(XMLParser $parser, string $data, bool $is_final = false): int",
+  "runtime": "PHP 8.5.12 CLI (source build, --disable-all --with-libxml --enable-xml) with source-built libxml2 2.15.4",
+  "verified_at_utc": "2026-11-17T12:35:32.562089+00:00",
+  "manifest": "projects/xml/php/stdlib_xml_parser/manifest.json",
+  "image_id": "sha256:fb4a477b5568b1ec6bd406130b56a3feb2caefce0889862c3743067c6e5e20c8",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.12 (cli) (built: Nov 17 2026 12:33:45) (NTS)",
+    "libxml 2.15.4",
+    "Ubuntu clang version 21.1.8 (6ubuntu1)"
+  ],
+  "source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "017dfbe8ba7f24b7ba109505ff00264cec1dec6647951c7e2f6e69d3ed605530",
+    "fuzz-target.php": "761a42803998ac798cb2cc6cba4bb94eee00f2dcdda9a7f4668816c4063fbf06",
+    "harness.php": "7dff5b754c0d98eb9ce5d0571bec91b8fbb0e5efe3f4a246e1704a6204c5ec97",
+    "manifest.json": "9987176289c6e4cdb2d379dab47819dc709aa31761c3af85699e01618109283c",
+    "run-control.py": "8ba869bc9f2a64623af8429222553467cea1f93d88c9cff33e2b3c4cf954beb1",
+    "run-control.sh": "099eb457790c5b28da7e3e1a8bf64ddef4df07e4afdd02d081b60247f8bb3635",
+    "runtime-lock.json": "d593f33e116560c591d797a452dd984e124f5a4a7d05fa8f5e7376aca85775fc",
+    "summary.php": "9e3fe017f6dce7c0f089d22c20e8e8f74ed57201a5281d49021fcb599da9fa70",
+    "target.json": "2b7f57d92dd819ece9d35b483c238fa3541db0923c608ae09479cca125a2bd1c"
+  },
+  "output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "parser_source_files": 8,
+  "parser_source_lines_covered": 658,
+  "format_specific_source_lines_covered": 316,
+  "underlying_source_files": 61,
+  "underlying_source_lines_covered": 2632,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/php/stdlib_xml_parser/target/coverage/coverage.json",
+  "pass": true
+}

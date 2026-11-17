@@ -1,14 +1,15 @@
 [
   {
     "name": "jsdom",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "lead_kind": "delegates_to_saxes",
     "version_seen": "31.0.1",
     "license": "MIT",
     "npm_downloads_30d": 587846374,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/jsdom",
-    "reason": "DOM/browser emulation. Its XML documents (DOMParser 'application/xml', XML content types) are parsed by saxes (imports saxes ^6.0.0); HTML goes through parse5. Shares the selected saxes family; not run.",
-    "source": "https://www.npmjs.com/package/jsdom"
+    "reason": "DOM/browser emulation whose XML documents are built from saxes events (saxes ^6.0.0 resolves to 6.0.0, the selected saxes path), so it shares the saxes family; HTML goes through parse5. Its documented new JSDOM(text, {contentType: 'application/xml'}) path builds a namespace-aware DOM from strictly decoded local text. Both valid namespace-aware controls match the expat oracle, with pinned npm integrity and transitive lock, V8 coverage of the jsdom package, its XML parser file and underlying saxes counted separately, and input-dependent AFL++ feedback from construction only. jsdom copies DOCTYPE entity declarations into saxes and forces XML 1.0 rules.",
+    "source": "https://www.npmjs.com/package/jsdom",
+    "verified_evidence": "data/javascript/xml/verification.json"
   },
   {
     "name": "htmlparser2",

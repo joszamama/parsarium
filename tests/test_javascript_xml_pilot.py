@@ -24,7 +24,7 @@ class JavaScriptXmlPilotTest(unittest.TestCase):
             {lead["name"] for lead in leads if lead["status"] == "unresolved"}))
         self.assertTrue(all(lead["status"] in {"unresolved", "promoted_to_verified"} for lead in leads))
         self.assertEqual({lead["name"] for lead in leads if lead["status"] == "promoted_to_verified"},
-                         {"fast-xml-parser", "@xmldom/xmldom", "xml2js"})
+                         {"jsdom", "fast-xml-parser", "@xmldom/xmldom", "xml2js"})
         cell = read(BASE / "cell.json")
         self.assertEqual(cell["verified_third_party_count"], len(parsers))
         self.assertEqual(cell["unresolved_documentation_leads"],
@@ -73,6 +73,37 @@ class JavaScriptXmlPilotTest(unittest.TestCase):
         for dependency, entry in read(project / "source-lock.json")["xml2js"]["dependencies"].items():
             self.assertEqual(npm_lock[f"node_modules/{dependency}"]["version"], entry["release"])
             self.assertEqual(npm_lock[f"node_modules/{dependency}"]["integrity"], entry["npm_integrity"])
+
+    def test_jsdom_records_shared_saxes_family(self):
+        parsers = read(BASE / "parsers.json")
+        parser, = [entry for entry in parsers if entry["name"] == "jsdom"]
+        saxes, = [entry for entry in parsers if entry["name"] == "saxes"]
+        project = ROOT / parser["project"]
+        manifest = read(project / "manifest.json")
+        receipt = read(project / "verification.json")
+        lock = read(project / "source-lock.json")["jsdom"]
+        npm_lock = read(project / "package-lock.json")["packages"]
+        underlying = parser["underlying_parser"]
+        self.assertEqual((underlying["package"], underlying["version"]), ("saxes", saxes["version"]))
+        self.assertEqual(underlying["npm_integrity"], saxes["npm_integrity"])
+        self.assertEqual(underlying["tarball_sha256"], saxes["tarball_sha256"])
+        self.assertEqual(npm_lock["node_modules/saxes"]["integrity"], saxes["npm_integrity"])
+        self.assertEqual(manifest["underlying_npm_integrity"], saxes["npm_integrity"])
+        self.assertIn("saxes", parser["family"])
+        for dependency, entry in lock["dependencies"].items():
+            self.assertEqual(npm_lock[f"node_modules/{dependency}"]["version"], entry["release"])
+            self.assertEqual(npm_lock[f"node_modules/{dependency}"]["integrity"], entry["npm_integrity"])
+        # jsdom's own XML document parser and saxes are measured separately from the package total.
+        self.assertTrue(manifest["format_specific_coverage_file_suffix"].endswith("browser/parser/xml.js"))
+        self.assertGreater(receipt["format_specific_source_lines_covered"], 0)
+        self.assertGreater(receipt["underlying_source_lines_covered"], 0)
+        # AFL++ feedback is construction-only and changes inside saxes and jsdom's XML parser.
+        self.assertIn("constructData", (project / "fuzz.js").read_text())
+        result, = [entry for entry in read(BASE / "afl-feedback.json")["results"]
+                   if entry["project"] == "xml/javascript/jsdom"]
+        for changed in (result["control_only_features_by_file"], result["differential_only_features_by_file"]):
+            self.assertGreater(changed.get("saxes/saxes.js", 0), 0)
+            self.assertGreater(changed.get("jsdom/lib/jsdom/browser/parser/xml.js", 0), 0)
 
 
 if __name__ == "__main__":

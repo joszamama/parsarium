@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "jsdom",
+  "release": "31.0.1",
+  "catalog_parser": "data/javascript/xml/parsers.json",
+  "source_lock": "projects/xml/javascript/jsdom/source-lock.json",
+  "source_sha256": "53b0b47dbcebe37833e4cbcf162d9fc628a038eeddcb1e68255a4957381da109",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/jsdom/",
+    "--includes",
+    "/work/node_modules/saxes/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of the jsdom package during a construction-only run of the valid control (new JSDOM(text, {contentType: 'application/xml'}) then window.close(), no DOM read-back): window and document setup, the XML document parser lib/jsdom/browser/parser/xml.js over saxes events, element creation, attribute setting and node insertion. lib/jsdom/browser/parser/xml.js is also counted alone as format_specific_source_lines_covered. The underlying saxes 6.0.0 saxes.js tokenizer is counted separately under underlying_coverage_subject_prefix. Other dependencies (whatwg-url, parse5, undici, tough-cookie and the rest of the lockfile) and the adapter's TextDecoder and DOM read-back are outside both prefixes; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/jsdom/",
+  "format_specific_coverage_file_suffix": "lib/jsdom/browser/parser/xml.js",
+  "afl_coverage_subject_prefix": "/work/node_modules/",
+  "underlying_package": "saxes",
+  "underlying_release": "6.0.0",
+  "underlying_npm_integrity": "sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==",
+  "underlying_source_sha256": "1cdf52fbbe1ccbd175c365d2b8e63f46e590e74aff23fa6a44a6ec51522e96db",
+  "underlying_family": "saxes XML 1.0 + Namespaces state machine (shared with the selected saxes 6.0.0 path)",
+  "underlying_coverage_subject_prefix": "/work/node_modules/saxes/"
+}

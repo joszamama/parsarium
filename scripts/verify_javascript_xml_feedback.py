@@ -46,7 +46,7 @@ def probe(manifest: dict, image: str, case: Path, work: Path, name: str) -> tupl
 
 def main() -> None:
     cli = argparse.ArgumentParser(description=__doc__)
-    cli.add_argument("slug", nargs="?", default="saxes", choices=("saxes", "sax", "fast_xml_parser", "xmldom_xmldom", "xml2js"))
+    cli.add_argument("slug", nargs="?", default="saxes", choices=("saxes", "sax", "fast_xml_parser", "xmldom_xmldom", "xml2js", "jsdom"))
     slug = cli.parse_args().slug
     project, manifest = project_for("xml", "javascript", slug)
     relative = Path("xml/javascript") / slug
@@ -78,7 +78,7 @@ def main() -> None:
     tuple_difference = len(first[1] ^ other[1])
     if not feature_difference or not tuple_difference:
         raise RuntimeError(f"{relative}: second control did not change parser feedback")
-    prefix = manifest["coverage_subject_prefix"]
+    prefix = manifest.get("afl_coverage_subject_prefix", manifest["coverage_subject_prefix"])
     by_file = lambda items: dict(sorted({name: sum(1 for item in items if item.startswith(prefix + name + ":"))
                                          for name in {item[len(prefix):].rsplit(":", 1)[0] for item in items}}.items()))
     result = {"project": str(relative), "pass": True,
