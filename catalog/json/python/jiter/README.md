@@ -115,3 +115,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json python jiter
+python3 parsarium.py run json python jiter controls/json/nested-object.json
+```

@@ -567,10 +567,10 @@
     {
       "ecosystem": "python",
       "format": "json",
-      "status": "pilot_six_selected_search_bounded",
+      "status": "pilot_seven_selected_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 6,
+      "verified_third_party_count": 7,
       "verified_standard_or_runtime_count": 1,
       "search_queries": [
         "targeted PyPI and project-documentation lookups for nine named JSON parsers"
@@ -578,8 +578,8 @@
       "search_limit_per_query": 100,
       "search_hits_recorded": 9,
       "unique_search_hits": 9,
-      "unresolved_documentation_leads": 3,
-      "uncertainty": "Six positive-signal Python JSON third-party paths pass valid nested object and array controls with source-level parser coverage and AFL++ feedback: pydantic 2.14.3 (1,139,429,690 PyPI Stats last-month downloads), orjson 3.13.0 (218,014,317), simplejson 4.3.0 (49,365,386), ijson 3.6.0 (46,615,664), msgspec 0.22.0 (39,138,375), and ujson 6.1.0 (29,543,889). Pydantic embeds Jiter; orjson shares the yyjson C syntax-parser family but this pilot measures its Rust deserializer, not vendored C source lines. ijson uses the asserted yajl2_c backend, with pinned YAJL C tokenizer and Python extension coverage; its source-built embedded YAJL -O0 route differs from the official Linux wheel linkage and optimisation, and its other backends are untested. msgspec uses its own C JSON decoder in _core.c through untyped msgspec.json.decode; its source-built clang -O0 path differs from the official GCC wheel, typed decoding is untested, and JSON decoder sections are counted separately from other codecs in the same file. ujson uses its own UltraJSON C decoder with vendored double-conversion C++ for fractional numbers; both controls equal an exact CPython json oracle tree, and duplicate-key and edge-number behavior is recorded from source, not tested. PyPI package downloads include non-parse uses and transitive installs. Three targeted documented leads remain unverified; bounded PyPI Simple Index search has not yet been run. Python standard json is separately verified.",
+      "unresolved_documentation_leads": 2,
+      "uncertainty": "Seven positive-signal Python JSON third-party paths pass valid nested object and array controls with source-level parser coverage and AFL++ feedback: pydantic 2.14.3 (1,139,429,690 PyPI Stats last-month downloads), jiter 0.19.0 (421,162,504), orjson 3.13.0 (218,014,317), simplejson 4.3.0 (49,365,386), ijson 3.6.0 (46,615,664), msgspec 0.22.0 (39,138,375), and ujson 6.1.0 (29,543,889). Pydantic embeds Jiter 0.18.0; standalone jiter uses Jiter 0.19.0 through a distinct package API. These are shared-family paths, not independent parsers, and their package downloads are not combined; orjson shares the yyjson C syntax-parser family but this pilot measures its Rust deserializer, not vendored C source lines. ijson uses the asserted yajl2_c backend, with pinned YAJL C tokenizer and Python extension coverage; its source-built embedded YAJL -O0 route differs from the official Linux wheel linkage and optimisation, and its other backends are untested. msgspec uses its own C JSON decoder in _core.c through untyped msgspec.json.decode; its source-built clang -O0 path differs from the official GCC wheel, typed decoding is untested, and JSON decoder sections are counted separately from other codecs in the same file. ujson uses its own UltraJSON C decoder with vendored double-conversion C++ for fractional numbers; both controls equal an exact CPython json oracle tree, and duplicate-key and edge-number behavior is recorded from source, not tested. PyPI package downloads include non-parse uses and transitive installs. Two targeted documented leads remain unverified; bounded PyPI Simple Index search has not yet been run. Python standard json is separately verified.",
       "third_party_evidence": "data/python/json/parsers.json",
       "third_party_control_results": "data/python/json/verification.json",
       "runtime_evidence": "data/python/json/standard.json",
