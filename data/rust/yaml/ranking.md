@@ -1,6 +1,6 @@
 # Rust × YAML: pilot ranking
 
-Eight control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. Leads were checked in descending metric order; [leads.json](leads.json) records each decision.
+Nine control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. Leads were checked in descending metric order; [leads.json](leads.json) records each decision.
 
 ## Primary within-cell adoption metric
 
@@ -16,6 +16,7 @@ crates.io `recent_downloads` (90 days), captured 2026-11-17 ([snapshot](registry
 | 6 | [granit-parser](https://docs.rs/granit-parser/2.2.0/granit_parser/struct.Parser.html) | 2.2.0 | 14,752,724 | yaml-rust lineage (saphyr-parser fork) |
 | 7 | [saphyr-parser](https://docs.rs/saphyr-parser/0.3.4/saphyr_parser/struct.Parser.html) | 0.3.4 | 8,941,580 | yaml-rust lineage (saphyr-rs) |
 | 8 | [noyalib](https://docs.rs/noyalib/0.0.62/noyalib/fn.from_str.html) | 0.0.62 | 1,154,094 | noyalib (own parser) |
+| 9 | [dbt-yaml](https://docs.rs/dbt-yaml/0.10.8/dbt_yaml/fn.from_str.html) | 0.10.8 | 408,383 | libyaml (serde_yaml fork via unsafe-libyaml) |
 
 Every path returns the exact typed trees of [`check_controls.py`](../../../controls/yaml/check_controls.py) for [`catalog.yaml`](../../../controls/yaml/catalog.yaml) and [`order.yaml`](../../../controls/yaml/order.yaml). The unsafe-libyaml and granit-parser and saphyr-parser APIs return untyped scalars, so their harnesses type plain scalars with the YAML 1.2 core-schema patterns, as the C libyaml and C++ harnesses do.
 
@@ -30,7 +31,6 @@ Every path returns the exact typed trees of [`check_controls.py`](../../../contr
 | libyml | unresolved | 3,581,849 | unsafe-libyaml (libyaml translation) |
 | tree-sitter-yaml | unresolved | 2,452,432 | tree-sitter grammar (generated C parser) |
 | saphyr | unresolved | 1,374,356 | saphyr (yaml-rust2 lineage) |
-| dbt-yaml | unresolved | 408,383 | unsafe-libyaml (libyaml translation) |
 | yaml_parser | unresolved | 358,533 | yaml_parser (rowan CST) |
 | yaml-edit | unresolved | 274,824 | yaml-edit (rowan CST) |
 | serde_yaml_bw | unresolved | 193,796 | saphyr-parser / unsafe-libyaml-norway |

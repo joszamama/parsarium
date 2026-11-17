@@ -189,7 +189,7 @@
   },
   {
     "name": "dbt-yaml",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 408383,
     "metric_error": null,
     "family": "unsafe-libyaml (libyaml translation)",
@@ -197,7 +197,8 @@
     "note": "serde_yaml fork for dbt over unsafe-libyaml 0.2.11.",
     "found_by": "registry_search",
     "source": "https://crates.io/crates/dbt-yaml",
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "reason": "Selected. Pinned 0.10.8 parses both schema-neutral YAML controls into the exact typed trees of controls/yaml/check_controls.py; Docker coverage 862 own lines and 2002 unsafe-libyaml lines; AFL++ scoped to dbt_yaml, unsafe_libyaml: 5 identical repeats per control, 1588 vs 1589 edges, 99/100 unique.",
+    "evidence": "projects/yaml/rust/dbt_yaml/verification.json"
   },
   {
     "name": "yaml_parser",

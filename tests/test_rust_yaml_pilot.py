@@ -19,6 +19,7 @@ SLUGS = {
     "granit-parser": "granit_parser",
     "saphyr-parser": "saphyr_parser",
     "noyalib": "noyalib",
+    "dbt-yaml": "dbt_yaml",
 }
 CRATES = {
     "serde_yaml": ["serde_yaml", "unsafe_libyaml"],
@@ -29,6 +30,7 @@ CRATES = {
     "granit-parser": ["granit_parser", "parsarium_yaml_granit_parser_events"],
     "saphyr-parser": ["parsarium_yaml_saphyr_parser_events", "saphyr_parser"],
     "noyalib": ["noyalib"],
+    "dbt-yaml": ["dbt_yaml", "unsafe_libyaml"],
 }
 spec = importlib.util.spec_from_file_location("yaml_control_oracle", ROOT / "controls/yaml/check_controls.py")
 oracle = importlib.util.module_from_spec(spec)
