@@ -52,5 +52,117 @@
     "family": "POCO XML ParserEngine over bundled Expat 2.8.5 (Expat family)",
     "reason": "Technically verified locally (candidate commit 084a2e40): SAXParser::parseMemoryNP on both valid controls with stable parser feedback, but the tokenizer is bundled Expat. Not selected: libpoco-dev (190) covers the whole POCO suite; the XML-specific runtime libpocoxml100 has 887 installations (875 with no recent file use) and libpocoxml112 215, all below the PROTOCOL.md format-specific fallback of 1,000.",
     "source": "https://docs.pocoproject.org/current/Poco.XML.SAXParser.html"
+  },
+  {
+    "name": "tinyxml",
+    "status": "resolved_verified_selected",
+    "debian_source": "tinyxml",
+    "popcon_dev_package": {
+      "libtinyxml-dev": 533
+    },
+    "homebrew_install_on_request_365d": null,
+    "license": "Zlib",
+    "family": "TinyXML (version 1) own in-memory parser; TinyXML-2 is a separate rewrite (3.0% in-sequence normalized line overlap)",
+    "reason": "Verified TinyXML 2.6.2 TiXmlDocument::Parse (TIXML_USE_STL, as Debian builds it) on both shared valid controls with the exact Expat-oracle structure (namespaces resolved by the adapter), 672 TinyXML lines covered (449 in tinyxmlparser.cpp) and a stable AFL++ difference (172 tuples, 160 source lines). Rank 3 by Debian dev installations (libtinyxml-dev 533), between pugixml and TinyXML2.",
+    "source": "https://sourceforge.net/projects/tinyxml/",
+    "verification": "projects/xml/cpp/tinyxml/verification.json"
+  },
+  {
+    "name": "Boost.PropertyTree",
+    "status": "excluded",
+    "popcon_dev_package": {
+      "libboost-dev": 15812
+    },
+    "family": "RapidXML-derived copy (boost/property_tree/detail/rapidxml.hpp)",
+    "reason": "read_xml parses with Boost's embedded RapidXML derivative: in Boost 1.90.0, detail/rapidxml.hpp matches 961 of 1,142 normalized non-trivial lines (84.2%) of the selected RapidXML 1.13 rapidxml.hpp in sequence, above the ~70% overlap exclusion. libboost-dev is framework-wide, so there is also no format-specific metric.",
+    "source": "https://github.com/boostorg/property_tree/blob/boost-1.90.0/include/boost/property_tree/detail/rapidxml.hpp"
+  },
+  {
+    "name": "gSOAP",
+    "status": "unresolved",
+    "popcon_dev_package": {
+      "libgsoap-dev": 95
+    },
+    "family": "gSOAP own XML engine (stdsoap2)",
+    "reason": "SOAP/XML web-services toolkit (GPL-2.0 or commercial). It has its own XML parser and a documented generic DOM (dom.cpp, soap_dom_element), but that route needs soapcpp2-generated serializers and a soap context; not evaluated in this round. 95 dev installations would rank it after libxml++.",
+    "source": "https://www.genivia.com/doc/dom/html/index.html"
+  },
+  {
+    "name": "Arabica",
+    "status": "unresolved",
+    "popcon_dev_package": {
+      "libarabica-dev": 2
+    },
+    "family": "wrapper over expat, libxml2 or Xerces-C++ (build-time choice)",
+    "reason": "C++ SAX/DOM toolkit that delegates tokenizing to a selected C/C++ parser; two dev installations. Not built.",
+    "source": "https://github.com/jezhiggins/arabica"
+  },
+  {
+    "name": "libstudxml",
+    "status": "unresolved_no_primary_metric",
+    "popcon_dev_package": {},
+    "family": "own streaming pull API over a bundled, modified expat (expat family)",
+    "reason": "No Debian binary package in the pinned by_inst snapshot, so no primary or fallback value; it also tokenizes with bundled expat. Not built.",
+    "source": "https://codesynthesis.com/projects/libstudxml/"
+  },
+  {
+    "name": "Qt 6 XML QDomDocument",
+    "status": "unresolved_no_primary_metric",
+    "popcon_dev_package": {
+      "qt6-base-dev": 4942
+    },
+    "family": "Qt (QDomDocument over QXmlStreamReader)",
+    "reason": "The runtime libqt6xml6 is format-specific (59,785 installations) but the cell's metric is -dev installations and Qt XML's headers ship in the framework-wide qt6-base-dev; Qt 6 QDomDocument parses with QXmlStreamReader, already an unresolved lead.",
+    "source": "https://doc.qt.io/qt-6/qdomdocument.html"
+  },
+  {
+    "name": "Xalan-C++",
+    "status": "excluded",
+    "popcon_dev_package": {
+      "libxalan-c-dev": 19
+    },
+    "family": "Xerces-C++",
+    "reason": "XSLT processor; parses input through Xerces-C++.",
+    "source": "https://xalan.apache.org/xalan-c/"
+  },
+  {
+    "name": "XQilla",
+    "status": "excluded",
+    "popcon_dev_package": {
+      "libxqilla-dev": 3
+    },
+    "family": "Xerces-C++",
+    "reason": "XQuery/XPath 2 engine over Xerces-C++.",
+    "source": "https://xqilla.sourceforge.net/"
+  },
+  {
+    "name": "CodeSynthesis XSD",
+    "status": "excluded",
+    "popcon_dev_package": {
+      "xsdcxx": 40
+    },
+    "family": "Xerces-C++",
+    "reason": "XML Schema to C++ data-binding generator; needs a schema and generated code over Xerces-C++.",
+    "source": "https://codesynthesis.com/projects/xsd/"
+  },
+  {
+    "name": "XMLTooling",
+    "status": "excluded",
+    "popcon_dev_package": {
+      "libxmltooling-dev": 15
+    },
+    "family": "Xerces-C++",
+    "reason": "Shibboleth SAML/XML security tooling over Xerces-C++.",
+    "source": "https://shibboleth.atlassian.net/wiki/spaces/DEV/pages/2118451233/XMLTooling-C"
+  },
+  {
+    "name": "gdome2 C++",
+    "status": "excluded",
+    "popcon_dev_package": {
+      "libgdome2-cpp-smart-dev": 3
+    },
+    "family": "libxml2",
+    "reason": "C++ smart-pointer wrapper over the gdome2 DOM, itself built on libxml2; three dev installations.",
+    "source": "https://packages.debian.org/source/sid/gdome2-cpp-smart"
   }
 ]

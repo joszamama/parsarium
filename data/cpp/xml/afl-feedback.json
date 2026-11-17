@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "checked_at_utc": "2026-11-17T14:32:54.446410+00:00",
-  "projects_total": 5,
-  "projects_passed": 5,
+  "projects_total": 6,
+  "projects_passed": 6,
   "differential_kind": "valid namespace XML controls; Xerces-C++, libxml++ and RapidXML use parser-only probes; tinyxml2 uses the alternate no-processing-instruction second control",
-  "command": "for slug in pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done; for slug in xerces_c libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/xerces_c/verify-parser-feedback.py; python3 projects/xml/cpp/libxmlpp/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp rapidxml; python3 projects/xml/cpp/rapidxml/verify-feedback.py",
+  "command": "for slug in pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done; for slug in xerces_c libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/xerces_c/verify-parser-feedback.py; python3 projects/xml/cpp/libxmlpp/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp rapidxml; python3 projects/xml/cpp/rapidxml/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp tinyxml && python3 scripts/verify_cpp_json_feedback.py --format xml --slug tinyxml",
   "results": [
     {
       "project": "xml/cpp/xerces_c",
@@ -47,6 +47,25 @@
       "differential_afl_tuples": 906,
       "source_line_difference": 159,
       "afl_tuple_difference": 136
+    },
+    {
+      "project": "xml/cpp/tinyxml",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+      "overlay_receipt_sha256": "2fb579866205e4ac15639f8869255581f85becd76ac283f476280a5231b704ad",
+      "differential_receipt_sha256": "e955aa8401bae6ac5e0a2ad6ec9e5ab13ff99ab2500ef13ea7c196d276d7735e",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeated_control_identical": true,
+      "control_source_lines": 674,
+      "control_afl_tuples": 981,
+      "differential_source_lines": 778,
+      "differential_afl_tuples": 1031,
+      "source_line_difference": 160,
+      "afl_tuple_difference": 172,
+      "limit": "The overlay instruments TinyXML's own sources and the adapter; the shared order control is used unchanged."
     },
     {
       "project": "xml/cpp/tinyxml2",

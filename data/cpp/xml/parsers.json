@@ -110,6 +110,62 @@
     "project": "projects/xml/cpp/pugixml"
   },
   {
+    "name": "tinyxml",
+    "version": "2.6.2",
+    "license": "Zlib",
+    "license_evidence": "https://deb.debian.org/debian/pool/main/t/tinyxml/tinyxml_2.6.2.orig.tar.gz (tinyxml/tinyxml.h and every source file carry the zlib notice)",
+    "input_api": "TiXmlDocument::Parse(const char* p, TiXmlParsingData* data = 0, TiXmlEncoding encoding) on a NUL-terminated copy of the local bytes with TIXML_ENCODING_UTF8, then TiXmlDocument::Error() and RootElement(); TinyXML does no namespace processing, so the adapter resolves prefixes from in-scope xmlns attributes",
+    "documentation": "https://www.grinninglizard.com/tinyxmldocs/classTiXmlDocument.html",
+    "documentation_parser": "tinyxml/tinyxml.h in the pinned orig tarball (TiXmlDocument::Parse, TiXmlElement::FirstAttribute, TiXmlText::CDATA)",
+    "source": "https://deb.debian.org/debian/pool/main/t/tinyxml/tinyxml_2.6.2.orig.tar.gz",
+    "adapter": "projects/xml/cpp/tinyxml/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "XML 1.0 UTF-8 input through TiXmlDocument::Parse into the TinyXML (version 1) DOM; Namespaces in XML resolved by the adapter, not TinyXML; attributes sorted per element to match the control oracle",
+    "family": "TinyXML (version 1) own in-memory XML parser",
+    "family_note": "tinyxmlparser.cpp and tinyxml.cpp supply the parser and DOM with no Xerces, pugixml, libxml2 or expat dependency. TinyXML-2 is a separate rewrite by the same author, not a renamed release: in-sequence matching of normalized non-trivial source lines (tinyxmlparser.cpp + tinyxml.cpp vs tinyxml2.cpp 11.0.0) is 51 of 1,698 lines (3.0%), and only 213 lines (12.5%, mostly generic statements) occur anywhere in tinyxml2.cpp. Debian ships them as separate sources (tinyxml, tinyxml2) and -dev packages. TinyXML preserves qualified names; the adapter resolves namespace declarations and rejects unbound prefixes and duplicate expanded attributes.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 533,
+      "dev_package_installs": {
+        "libtinyxml-dev": 533
+      },
+      "popcon_source_inst": 9593,
+      "homebrew_install_on_request_365d": null,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/cpp/tinyxml",
+    "not_verified": "Two valid namespace-aware controls (the shared catalog and order controls) are used. The pinned upstream 2.6.2 omits Debian's CVE-2021-42260, CVE-2023-34194 and entity-encoding patches. DTD, XML 1.1, external entities, large inputs and malformed input remain unverified; TinyXML keeps the order control's processing instruction as a TiXmlUnknown node, which the summary does not report."
+  },
+  {
     "name": "tinyxml2",
     "version": "11.0.0",
     "license": "Zlib",

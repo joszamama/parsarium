@@ -42,6 +42,18 @@
       "homebrew_install_on_request_365d": 1270
     },
     {
+      "library": "TinyXML",
+      "debian_source": "tinyxml",
+      "popcon_source_inst": 9593,
+      "dev_packages": {
+        "libtinyxml-dev": 533
+      },
+      "dev_installs": 533,
+      "homebrew_formula": null,
+      "homebrew_install_on_request_365d": null,
+      "note": "TinyXML version 1 (2.6.2), a separate Debian source from tinyxml2. Same pinned by_inst snapshot: 'libtinyxml-dev 533 25 477 31 0'; runtime libtinyxml2.6.2v5 has 9,593 installations (the runtime's name carries the 2.6.2 version, not TinyXML-2). Added from the Debian dev-package lookup recorded in debian_dev_package_search."
+    },
+    {
       "library": "tinyxml2",
       "debian_source": "tinyxml2",
       "popcon_source_inst": 13585,
@@ -85,6 +97,7 @@
   "primary_order_by_dev_installs": [
     "Xerces-C++",
     "pugixml",
+    "TinyXML",
     "tinyxml2",
     "libxml++",
     "RapidXML"
@@ -94,5 +107,89 @@
     "pugixml",
     "Xerces-C++",
     "libxml++"
-  ]
+  ],
+  "debian_dev_package_search": {
+    "searched_at": "2026-11-18",
+    "source": "https://popcon.debian.org/by_inst.gz",
+    "snapshot_sha256": "299486c46a56fc44b390058490a50b9f1250335c7cdf6f1e02b8cee0a212a802",
+    "method": "Binary-package names in the same hashed by_inst table matched by the case-insensitive pattern (xml|xerces|tinyxml|arabica|studxml|expat|sax|markup) plus targeted C++ XML library names (cxxtools, xalan, xqilla, xsdcxx, gdome2-cpp, gsoap, boost, qt6-base, poco); every C++ XML -dev or framework package seen is listed with its decision. Limit: the first 100 'xml' name hits by installations (shared with the C cell's binary search) and the targeted names; not every C++ library is covered.",
+    "limit": 100,
+    "rows": [
+      {
+        "package": "libtinyxml-dev",
+        "installed": 533,
+        "library": "TinyXML (v1)",
+        "decision": "selected as tinyxml"
+      },
+      {
+        "package": "libgsoap-dev",
+        "installed": 95,
+        "library": "gSOAP",
+        "decision": "unresolved: SOAP/XML web-services toolkit whose generic DOM API (dom.cpp) needs soapcpp2-generated code; not evaluated in this round"
+      },
+      {
+        "package": "libcxxtools-dev",
+        "installed": 42,
+        "library": "cxxtools XmlReader",
+        "decision": "candidate: own XML pull reader inside a general C++ utility library"
+      },
+      {
+        "package": "xsdcxx",
+        "installed": 40,
+        "library": "CodeSynthesis XSD",
+        "decision": "excluded: XML Schema to C++ code generator; generated code parses through Xerces-C++"
+      },
+      {
+        "package": "libxalan-c-dev",
+        "installed": 19,
+        "library": "Xalan-C++",
+        "decision": "excluded: XSLT processor that parses through Xerces-C++"
+      },
+      {
+        "package": "libxmltooling-dev",
+        "installed": 15,
+        "library": "XMLTooling (Shibboleth)",
+        "decision": "excluded: SAML/XML security tooling over Xerces-C++"
+      },
+      {
+        "package": "libxqilla-dev",
+        "installed": 3,
+        "library": "XQilla",
+        "decision": "excluded: XQuery/XPath 2 engine over Xerces-C++"
+      },
+      {
+        "package": "libgdome2-cpp-smart-dev",
+        "installed": 3,
+        "library": "gdome2 C++ smart pointers",
+        "decision": "excluded: C++ wrapper over the gdome2 DOM, itself over libxml2"
+      },
+      {
+        "package": "libarabica-dev",
+        "installed": 2,
+        "library": "Arabica",
+        "decision": "unresolved: SAX/DOM wrapper over expat, libxml2 or Xerces-C++; two dev installations; not built"
+      },
+      {
+        "package": "libboost-dev",
+        "installed": 15812,
+        "library": "Boost.PropertyTree read_xml",
+        "decision": "excluded: framework-wide Boost package; its detail/rapidxml.hpp (Boost 1.90.0) matches 961 of 1,142 normalized non-trivial lines (84.2%) of RapidXML 1.13 in sequence"
+      },
+      {
+        "package": "qt6-base-dev",
+        "installed": 4942,
+        "library": "Qt XML QDomDocument (libqt6xml6 59,785 runtime)",
+        "decision": "unresolved_no_primary_metric: framework-wide dev package; Qt 6 QDomDocument builds on QXmlStreamReader, already an unresolved lead"
+      },
+      {
+        "package": "libpoco-dev",
+        "installed": 190,
+        "library": "POCO XML",
+        "decision": "unresolved_no_primary_metric (earlier lead)"
+      }
+    ],
+    "not_in_debian": [
+      "libstudxml (no Debian binary package in the snapshot)"
+    ]
+  }
 }
