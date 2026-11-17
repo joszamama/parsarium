@@ -478,6 +478,60 @@
    "latest_release_observed": "3.0.1",
    "url": "https://pypistats.org/api/packages/srsly/recent?period=month",
    "observed_at_utc": "2026-11-17T21:10:00+00:00"
+  },
+  "ruamel.yaml.clibz": {
+   "value": 69913,
+   "latest_release_observed": "0.3.7",
+   "url": "https://pypistats.org/api/packages/ruamel.yaml.clibz/recent?period=month",
+   "observed_at_utc": "2026-11-17T21:10:00+00:00"
+  },
+  "pyyaml-ft": {
+   "value": 4937072,
+   "latest_release_observed": "8.0.0",
+   "url": "https://pypistats.org/api/packages/pyyaml-ft/recent?period=month",
+   "observed_at_utc": "2026-11-17T21:10:00+00:00"
+  },
+  "pyyaml-env-tag": {
+   "value": 17866170,
+   "latest_release_observed": "1.1",
+   "url": "https://pypistats.org/api/packages/pyyaml-env-tag/recent?period=month",
+   "observed_at_utc": "2026-11-17T21:10:00+00:00"
+  },
+  "pydantic-yaml": {
+   "value": 3196816,
+   "latest_release_observed": "1.7.0",
+   "url": "https://pypistats.org/api/packages/pydantic-yaml/recent?period=month",
+   "observed_at_utc": "2026-11-17T21:10:00+00:00"
+  },
+  "pyyaml-include": {
+   "value": 2650203,
+   "latest_release_observed": "2.2",
+   "url": "https://pypistats.org/api/packages/pyyaml-include/recent?period=month",
+   "observed_at_utc": "2026-11-17T21:10:00+00:00"
+  },
+  "ruyaml": {
+   "value": 1762840,
+   "latest_release_observed": "0.91.0",
+   "url": "https://pypistats.org/api/packages/ruyaml/recent?period=month",
+   "observed_at_utc": "2026-11-17T21:10:00+00:00"
+  },
+  "yamlordereddictloader": {
+   "value": 345363,
+   "latest_release_observed": "0.4.2",
+   "url": "https://pypistats.org/api/packages/yamlordereddictloader/recent?period=month",
+   "observed_at_utc": "2026-11-17T21:10:00+00:00"
+  },
+  "yamlloader": {
+   "value": 250488,
+   "latest_release_observed": "1.6.0",
+   "url": "https://pypistats.org/api/packages/yamlloader/recent?period=month",
+   "observed_at_utc": "2026-11-17T21:10:00+00:00"
+  },
+  "yaml-rs": {
+   "value": 80054,
+   "latest_release_observed": "0.1.6",
+   "url": "https://pypistats.org/api/packages/yaml-rs/recent?period=month",
+   "observed_at_utc": "2026-11-17T21:10:00+00:00"
   }
  },
  "leads": [
@@ -528,6 +582,128 @@
    "note": "Python binding of C++ rapidyaml.",
    "found_by": "targeted_documentation_lead",
    "metric_value": 224758
+  },
+  {
+   "name": "PyYAML CSafeLoader (libyaml)",
+   "family": "libyaml through PyYAML's _yaml C extension",
+   "api_hint": "yaml.load(data, Loader=yaml.CSafeLoader)",
+   "note": "Separate route inside the PyYAML package: the C extension calls libyaml's scanner/parser; only the constructor and resolver stay in Python. The metric is the PyYAML package value, not a split.",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 1227712536
+  },
+  {
+   "name": "ruamel.yaml.clib",
+   "family": "libyaml-derived C loader for ruamel.yaml",
+   "api_hint": "YAML(typ='safe').load with ruamel.yaml.clib installed",
+   "note": "C extension package (_ruamel_yaml) with vendored libyaml-derived sources; ruamel.yaml uses it unless pure=True.",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 69289256
+  },
+  {
+   "name": "srsly",
+   "family": "ruamel.yaml via srsly",
+   "api_hint": "srsly.yaml_loads(str)",
+   "note": "Serialization helper package (spaCy/thinc); yaml_loads wraps ruamel.yaml YAML(typ='safe', pure=True).",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 24260205
+  },
+  {
+   "name": "ruamel.yaml.clibz",
+   "family": "ruamel.yaml.clib C sources built with setuptools-zig",
+   "api_hint": "YAML(typ='safe') with ruamel.yaml.clibz installed",
+   "note": "Zig-built variant of the ruamel.yaml.clib C loader; ruamel.yaml 0.19.1 loads ruamel.yaml.clib first.",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 69913
+  },
+  {
+   "name": "pyyaml-ft",
+   "family": "PyYAML fork for free-threaded Python (module yaml_ft)",
+   "api_hint": "yaml_ft.safe_load",
+   "note": "Fork of PyYAML published for free-threading support.",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 4937072
+  },
+  {
+   "name": "pyyaml-env-tag",
+   "family": "PyYAML constructor plugin",
+   "api_hint": "add_env_tag(Loader) / construct_env_tag",
+   "note": "Adds a !ENV tag constructor to a PyYAML loader (MkDocs).",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 17866170
+  },
+  {
+   "name": "pydantic-yaml",
+   "family": "ruamel.yaml via pydantic models",
+   "api_hint": "parse_yaml_raw_as(Model, str)",
+   "note": "Loads with ruamel.yaml YAML(typ=\"safe\", pure=True) and validates into a pydantic model.",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 3196816
+  },
+  {
+   "name": "pyyaml-include",
+   "family": "PyYAML constructor plugin",
+   "api_hint": "yaml.add_constructor(\"!inc\", yaml_include.Constructor(...))",
+   "note": "Include-tag constructor for PyYAML loaders.",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 2650203
+  },
+  {
+   "name": "ruyaml",
+   "family": "ruamel.yaml 0.17 fork",
+   "api_hint": "ruyaml.YAML(typ='safe').load",
+   "note": "Community fork of ruamel.yaml 0.17.17 (last release 0.91.0, 2021-12-07).",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 1762840
+  },
+  {
+   "name": "yamlordereddictloader",
+   "family": "PyYAML with OrderedDict mappings",
+   "api_hint": "yaml.load(s, Loader=yamlordereddictloader.SafeLoader)",
+   "note": "PyYAML Loader/SafeLoader subclasses that build OrderedDict mappings.",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 345363
+  },
+  {
+   "name": "yamlloader",
+   "family": "PyYAML with OrderedDict mappings",
+   "api_hint": "yaml.load(s, Loader=yamlloader.ordereddict.CSafeLoader)",
+   "note": "OrderedDict loader/dumper mixins for PyYAML (pure and C loaders).",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 250488
+  },
+  {
+   "name": "yaml-rs",
+   "family": "saphyr / granit-parser (Rust) via PyO3",
+   "api_hint": "yaml_rs.loads(str)",
+   "note": "Rust YAML 1.2 loader for Python (PyO3); 0.1.6.",
+   "found_by": "targeted_documentation_lead",
+   "metric_value": 80054
   }
- ]
+ ],
+ "supplementary_named_lead_check": {
+  "query": "targeted high-adoption YAML loader packages outside the first-100 name search",
+  "method": "Named PyPI projects checked one by one on 2026-11-17 (PyPI JSON metadata and pypistats.org recent?period=month): C-extension routes of selected packages, packages whose YAML API wraps a selected parser, PyYAML/ruamel.yaml forks, and loader plugins. Not a registry search; no ranking surface.",
+  "checked_at_utc": "2026-11-17T21:10:00+00:00",
+  "limit": "named projects only",
+  "hits": [
+   "ruamel.yaml.clib",
+   "ruamel.yaml.clibz",
+   "srsly",
+   "pyyaml-env-tag",
+   "pyyaml-ft",
+   "pydantic-yaml",
+   "pyyaml-include",
+   "ruyaml",
+   "yamlordereddictloader",
+   "yamlloader",
+   "yaml-rs",
+   "ryaml",
+   "saphyr"
+  ],
+  "not_found_or_negligible": {
+   "ryml": "no PyPI project (pypistats 404); the binding is published as rapidyaml",
+   "ryaml": "23,629 last-month downloads (not evaluated further)",
+   "saphyr": "11 last-month downloads"
+  }
+ }
 }

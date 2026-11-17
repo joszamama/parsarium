@@ -53,7 +53,7 @@
   },
   {
     "name": "strictyaml",
-    "status": "shared_family",
+    "status": "excluded_failed_control",
     "metric_value": 29369654,
     "metric_error": null,
     "family": "ruamel.yaml via strictyaml",
@@ -61,7 +61,7 @@
     "note": "Wraps ruamel.yaml; returns strings unless a schema types them.",
     "found_by": "targeted_documentation_lead",
     "source": "https://pypi.org/project/strictyaml/",
-    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+    "reason": "Excluded: strictyaml 1.7.3 strictyaml.load(str) rejects both valid controls before returning a tree (FlowMappingDisallowed at catalog.yaml line 11 `tags: [alpha, ...]` and order.yaml line 11 `flags: []`); strictyaml deliberately disallows flow style and anchors/aliases, and without a schema returns scalars as strings, so it cannot match the typed trees. Probe: python:3.13-slim, PyYAML 6.0.3 / ruamel.yaml 0.19.1 / strictyaml 1.7.3 from PyPI, 2026-11-17."
   },
   {
     "name": "srsly",
@@ -77,8 +77,56 @@
     "evidence": "projects/yaml/python/srsly/verification.json"
   },
   {
+    "name": "pyyaml-env-tag",
+    "status": "excluded_not_parser",
+    "metric_value": 17866170,
+    "metric_error": null,
+    "family": "PyYAML constructor plugin",
+    "api_hint": "add_env_tag(Loader) / construct_env_tag",
+    "note": "Adds a !ENV tag constructor to a PyYAML loader (MkDocs).",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/pyyaml-env-tag/",
+    "reason": "Excluded: pyyaml_env_tag 1.1 (yaml_env_tag.py, 42 lines) only defines construct_env_tag and add_env_tag(loader); it has no load API and parses nothing itself."
+  },
+  {
+    "name": "pyyaml-ft",
+    "status": "excluded_identical_fork",
+    "metric_value": 4937072,
+    "metric_error": null,
+    "family": "PyYAML fork for free-threaded Python (module yaml_ft)",
+    "api_hint": "yaml_ft.safe_load",
+    "note": "Fork of PyYAML published for free-threading support.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/PyYAML-ft/8.0.0/",
+    "reason": "Excluded as a byte-identical fork of the selected PyYAML parser (fgergo/mp3 precedent): in the PyYAML-ft 8.0.0 sdist, lib/yaml_ft/scanner.py, parser.py, composer.py, reader.py and 8 more of its 18 non-test modules are byte-identical to PyYAML 6.0.3 lib/yaml, and 2,208 of 2,398 distinct non-test lines longer than 25 characters also occur in PyYAML (the rest is free-threading registry code). Its safe_load gives the same trees on both controls (probe, Python 3.13)."
+  },
+  {
+    "name": "pydantic-yaml",
+    "status": "excluded_mapping_layer",
+    "metric_value": 3196816,
+    "metric_error": null,
+    "family": "ruamel.yaml via pydantic models",
+    "api_hint": "parse_yaml_raw_as(Model, str)",
+    "note": "Loads with ruamel.yaml YAML(typ=\"safe\", pure=True) and validates into a pydantic model.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/pydantic-yaml/1.7.0/",
+    "reason": "Excluded as a mapping layer (laravie precedent): pydantic_yaml 1.7.0 parse_yaml_raw_as(model_type, raw) calls ruamel.yaml YAML(typ=\"safe\", pure=True).load and then validates the parsed tree into the given pydantic model; its own code maps an already-parsed tree into models and its documented API requires a model type."
+  },
+  {
+    "name": "pyyaml-include",
+    "status": "excluded_not_parser",
+    "metric_value": 2650203,
+    "metric_error": null,
+    "family": "PyYAML constructor plugin",
+    "api_hint": "yaml.add_constructor(\"!inc\", yaml_include.Constructor(...))",
+    "note": "Include-tag constructor for PyYAML loaders.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/pyyaml-include/2.2/",
+    "reason": "Excluded: pyyaml-include 2.2 provides a Constructor for an !inc tag that a PyYAML Loader calls; it has no YAML parse API of its own and the controls contain no tags."
+  },
+  {
     "name": "oyaml",
-    "status": "shared_family",
+    "status": "excluded_reexport_shim",
     "metric_value": 2622495,
     "metric_error": null,
     "family": "PyYAML",
@@ -86,7 +134,43 @@
     "note": "Ordered-dict shim over PyYAML; shared family.",
     "found_by": "targeted_documentation_lead",
     "source": "https://pypi.org/project/oyaml/",
-    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+    "reason": "Excluded as an empty compatibility shim on supported Pythons: oyaml 1.0 (single 53-line oyaml.py) registers its OrderedDict map constructor only when dicts are not order-preserving (sys.version_info < 3.7) and otherwise ends with `from yaml import *`; on Python 3.13, `oyaml.safe_load is yaml.safe_load` and `oyaml.load is yaml.load` are both True, so no oyaml code runs during a load. It gives the PyYAML trees on both controls because it is PyYAML."
+  },
+  {
+    "name": "ruyaml",
+    "status": "excluded_predecessor_fork",
+    "metric_value": 1762840,
+    "metric_error": null,
+    "family": "ruamel.yaml 0.17 fork",
+    "api_hint": "ruyaml.YAML(typ='safe').load",
+    "note": "Community fork of ruamel.yaml 0.17.17 (last release 0.91.0, 2021-12-07).",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/ruyaml/0.91.0/",
+    "reason": "Excluded as a renamed predecessor of the selected ruamel.yaml parser (zend-json / trust-dns-proto precedent): ruyaml 0.91.0 forks ruamel.yaml 0.17.17 (its CHANGES stop there) under a new module name and has had no release since 2021; 1,485 of 2,081 distinct lines longer than 25 characters in its scanner/parser/composer/reader/constructor/resolver also occur in ruamel.yaml 0.19.1, the rest being four years of upstream changes."
+  },
+  {
+    "name": "yamlordereddictloader",
+    "status": "excluded_mapping_layer",
+    "metric_value": 345363,
+    "metric_error": null,
+    "family": "PyYAML with OrderedDict mappings",
+    "api_hint": "yaml.load(s, Loader=yamlordereddictloader.SafeLoader)",
+    "note": "PyYAML Loader/SafeLoader subclasses that build OrderedDict mappings.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/yamlordereddictloader/0.4.2/",
+    "reason": "Excluded as a mapping layer over PyYAML (oyaml/laravie precedent): yamlordereddictloader 0.4.2 (one 88-line module) subclasses yaml.Loader/SafeLoader and only replaces construct_mapping/construct_yaml_map to build OrderedDict instead of dict from PyYAML's composed nodes; it changes no scanning, parsing or resolution, and Python dicts already keep insertion order."
+  },
+  {
+    "name": "yamlloader",
+    "status": "excluded_mapping_layer",
+    "metric_value": 250488,
+    "metric_error": null,
+    "family": "PyYAML with OrderedDict mappings",
+    "api_hint": "yaml.load(s, Loader=yamlloader.ordereddict.CSafeLoader)",
+    "note": "OrderedDict loader/dumper mixins for PyYAML (pure and C loaders).",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/yamlloader/1.6.0/",
+    "reason": "Excluded as a mapping layer over PyYAML (oyaml/laravie precedent): yamlloader 1.6.0 ordereddict/loaders.py adds an OrderedLoaderMixin whose only code is construct_yaml_map/construct_mapping building OrderedDict from PyYAML's composed nodes, mixed into each PyYAML loader class; no scanning, parsing or resolution of its own."
   },
   {
     "name": "rapidyaml",
@@ -97,8 +181,8 @@
     "api_hint": "ryml.parse_in_arena",
     "note": "Python binding of C++ rapidyaml.",
     "found_by": "targeted_documentation_lead",
-    "source": null,
-    "reason": "Unverified lead: no pinned release, control run or harness yet."
+    "source": "https://pypi.org/project/rapidyaml/0.15.2/",
+    "reason": "Not promoted this round: the 0.15.2 Python binding (ryml) needs a SWIG/CMake build (build requires setuptools_scm, setuptools-git, ninja, cmake_build_extension, swig) to get LLVM coverage of the C++ parser, and ryml.parse_in_arena returns an untyped tree, so the harness would have to resolve scalar types itself (as projects/yaml/cpp/rapidyaml does). Remains the next native lead (rapidyaml family shared with the C++ cell)."
   },
   {
     "name": "yamlcore",
@@ -112,5 +196,29 @@
     "source": "https://pypi.org/project/yamlcore/",
     "reason": "Selected: pinned release, documented local API, both valid controls equal the hand-written typed trees through bytes, str and stream, Docker coverage and stable, input-dependent AFL++ feedback recorded.",
     "evidence": "projects/yaml/python/yamlcore/verification.json"
+  },
+  {
+    "name": "yaml-rs",
+    "status": "unresolved",
+    "metric_value": 80054,
+    "metric_error": null,
+    "family": "saphyr / granit-parser (Rust) via PyO3",
+    "api_hint": "yaml_rs.loads(str)",
+    "note": "Rust YAML 1.2 loader for Python (PyO3); 0.1.6.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/yaml-rs/0.1.6/",
+    "reason": "Not run this round (80,054 last-month downloads, below every selected path); building it with source coverage needs a nightly Rust toolchain and git-pinned pyo3, saphyr fork and granit-parser dependencies from its Cargo.toml."
+  },
+  {
+    "name": "ruamel.yaml.clibz",
+    "status": "shared_family",
+    "metric_value": 69913,
+    "metric_error": null,
+    "family": "ruamel.yaml.clib C sources built with setuptools-zig",
+    "api_hint": "YAML(typ='safe') with ruamel.yaml.clibz installed",
+    "note": "Zig-built variant of the ruamel.yaml.clib C loader; ruamel.yaml 0.19.1 loads ruamel.yaml.clib first.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://pypi.org/project/ruamel.yaml.clibz/",
+    "reason": "Not run: same C loader family as the selected ruamel.yaml.clib path built with a different toolchain; 69,913 last-month downloads."
   }
 ]
