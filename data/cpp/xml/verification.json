@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T11:07:56.465100+00:00",
+  "checked_at_utc": "2026-11-17T14:32:51.375562+00:00",
   "platform": "linux/arm64 Docker",
   "toolchain": [
     "Ubuntu clang version 21.1.8 (6ubuntu1)",
@@ -226,6 +226,74 @@
         ]
       },
       "parser_only_afl_feedback": "fuzzing/afl-native/xml/cpp/libxmlpp/differential.json",
+      "error": null
+    },
+    {
+      "package": "rapidxml",
+      "version": "1.13",
+      "scope": "xml_document<>::parse<0>(char*) in situ over a copied, zero-terminated local UTF-8 buffer with adapter-side namespace resolution",
+      "command": "python3 scripts/run_project.py xml cpp rapidxml",
+      "receipt": "projects/xml/cpp/rapidxml/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 413,
+      "format_specific_source_lines_covered": 413,
+      "second_valid_control": "controls/xml/order-default-ns.xml",
+      "second_valid_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "parser_only_afl_feedback": "fuzzing/afl-native/xml/cpp/rapidxml/differential.json",
       "error": null
     }
   ],

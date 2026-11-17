@@ -1,6 +1,6 @@
 {
   "captured_at_utc": "2026-11-17T03:42:31+00:00",
-  "search_surface": "Bounded format-specific comparison of the four named C++ XML parser libraries (tinyxml2, pugixml, Xerces-C++, libxml++) on Debian popcon dev-package installs, with Homebrew install-on-request (365d) as a second numeric metric. Whole frameworks (Qt, Boost, POCO) are not ranked.",
+  "search_surface": "Bounded format-specific comparison of the four named C++ XML parser libraries (tinyxml2, pugixml, Xerces-C++, libxml++) on Debian popcon dev-package installs, with Homebrew install-on-request (365d) as a second numeric metric. RapidXML (Debian librapidxml-dev) was added from the same snapshots after a scoped candidate passed verification. Whole frameworks (Qt, Boost, POCO) are not ranked.",
   "sources": {
     "popcon_binary_by_inst": {
       "url": "https://popcon.debian.org/by_inst.gz",
@@ -67,13 +67,27 @@
       "homebrew_version": "2.42.4",
       "homebrew_install_on_request_365d": 461,
       "note": "Source count is the runtime libxml++2.6-2v5 (79,361 of 79,794 have no recent file access); C++ wrapper over the libxml2 C parser."
+    },
+    {
+      "library": "RapidXML",
+      "debian_source": "rapidxml",
+      "popcon_source_inst": 17,
+      "dev_packages": {
+        "librapidxml-dev": 17
+      },
+      "dev_installs": 17,
+      "recent_use_votes": 0,
+      "homebrew_formula": null,
+      "homebrew_install_on_request_365d": null,
+      "note": "Added after the four-library comparison from the same pinned popcon snapshots: sourcemax row 'rapidxml 17 0 0 0 17' (data/curation/popcon-sourcemax-by_inst.gz, SHA-256 9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8) and by_inst row 'librapidxml-dev 17 0 0 0 17'. A refetch of by_inst.gz on 2026-11-17 (a newer file, Last-Modified 14:09:44 GMT) shows the same row. Debian source rapidxml builds only librapidxml-dev. No Homebrew formula; zero recent-use votes."
     }
   ],
   "primary_order_by_dev_installs": [
     "Xerces-C++",
     "pugixml",
     "tinyxml2",
-    "libxml++"
+    "libxml++",
+    "RapidXML"
   ],
   "homebrew_order_by_install_on_request": [
     "tinyxml2",

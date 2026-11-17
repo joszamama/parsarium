@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T11:25:12.195739+00:00",
-  "projects_total": 4,
-  "projects_passed": 4,
-  "differential_kind": "valid namespace XML controls; Xerces-C++ and libxml++ use parser-only probes; tinyxml2 uses the alternate no-processing-instruction second control",
-  "command": "for slug in pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done; for slug in xerces_c libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/xerces_c/verify-parser-feedback.py; python3 projects/xml/cpp/libxmlpp/verify-feedback.py",
+  "checked_at_utc": "2026-11-17T14:32:54.446410+00:00",
+  "projects_total": 5,
+  "projects_passed": 5,
+  "differential_kind": "valid namespace XML controls; Xerces-C++, libxml++ and RapidXML use parser-only probes; tinyxml2 uses the alternate no-processing-instruction second control",
+  "command": "for slug in pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done; for slug in xerces_c libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/xerces_c/verify-parser-feedback.py; python3 projects/xml/cpp/libxmlpp/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp rapidxml; python3 projects/xml/cpp/rapidxml/verify-feedback.py",
   "results": [
     {
       "project": "xml/cpp/xerces_c",
@@ -90,6 +90,26 @@
       ],
       "probe": "projects/xml/cpp/libxmlpp/parser-probe.cpp",
       "limit": "A few libxml2 parser.c line hits vary between identical process runs; reported line differences count only lines present in both runs of one control and absent in both runs of the other. AFL++ tuples repeat exactly."
+    },
+    {
+      "project": "xml/cpp/rapidxml",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_parser_header_only_edges_with_rapidxml_source_lines",
+      "overlay_receipt_sha256": "701cfa46d6ca40f8098226cec32b271087e1783df44ffd30976769043df54eab",
+      "differential_receipt_sha256": "724f45ec9739d7ab01191969331d993cb9f963ca63b8876c27128979562e967f",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeated_control_identical": true,
+      "control_source_lines": 329,
+      "control_afl_tuples": 38,
+      "differential_source_lines": 374,
+      "differential_afl_tuples": 45,
+      "source_line_difference": 117,
+      "afl_tuple_difference": 15,
+      "probe": "projects/xml/cpp/rapidxml/parser-probe.cpp",
+      "limit": "The parser-only probe calls xml_document::parse<0> and checks for a root; the AFL++ allowlist instruments only rapidxml.hpp, so adapter namespace traversal is excluded. The 138-entry map is small because RapidXML is a compact template parser."
     }
   ]
 }
