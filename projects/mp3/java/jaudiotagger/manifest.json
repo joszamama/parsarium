@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "format": "mp3",
+  "ecosystem": "java",
+  "package": "jaudiotagger",
+  "release": "3.0.1",
+  "catalog_parser": "data/java/mp3/parsers.json",
+  "source_lock": "projects/mp3/java/jaudiotagger/source-lock.json",
+  "source_sha256": "d9c79a145944e6bc37579403843c9da84cd81459e42c9877351802ee284f5858",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/mp3/tone-44k-mono.mp3",
+  "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "expected_output": {
+    "codec": "MP3",
+    "mpeg_version": "MPEG-1",
+    "layer": "Layer 3",
+    "sample_rate": 44100,
+    "channels": 1,
+    "bitrate_kbps": 64
+  },
+  "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+  "differential_control_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "differential_expected_output": {
+    "codec": "MP3",
+    "mpeg_version": "MPEG-2",
+    "layer": "Layer 3",
+    "sample_rate": 22050,
+    "channels": 2,
+    "bitrate_kbps": 32
+  },
+  "api": "MPEGFrameHeader.isMPEGFrame(ByteBuffer) and MPEGFrameHeader.parseMPEGHeader(ByteBuffer) on bytes from a local File; read only first untagged Layer III header",
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/parser.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo source lines in pinned jaudiotagger MPEGFrameHeader.java on first-header control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/org/jaudiotagger/audio/mp3/MPEGFrameHeader.java",
+  "coverage_limit": "First four-byte frame header of two valid untagged CBR MPEG Layer III files only; no frame count, frame size, duration, whole-stream consistency, PCM decode, ID3, VBR, or malformed-input claim. The higher-level MP3AudioHeader(File) misidentifies the valid 22.05 kHz control start at byte 104 and estimates 5 rather than 12 frames; MPEGFrameHeader.getFrameLength/getNoOfSamples are also wrong for that MPEG-2 header and are not reported.",
+  "fuzz_engine_sha256": "0ad74e5d67f7f7a3c8453f7dd5030d4bce5aae6e47c3e2b8ebc98699244c7e4f"
+}
