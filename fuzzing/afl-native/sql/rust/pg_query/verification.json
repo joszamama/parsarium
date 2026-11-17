@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "project": "sql/rust/pg_query",
+  "pass": true,
+  "feedback_kind": "rust_and_native_libpg_query_parser_edges",
+  "base_project_receipt_sha256": "cf29de693828fab732d6ab4025902756fde1b44a4741ca95fac1a5461ac760cc",
+  "overlay_file_sha256": {
+    "Cargo.toml": "7599a7e8398a609441c2ab013dc48c0ee4f07b3ba0fdfb8a4de3d41adfa7cb71",
+    "Cargo.lock": "0614d412ef80455a5f1f48734fe0937b1b5cd0c4349cc4076339831c62bf4e42",
+    "afl_fuzzer.rs": "0fcbee099d9ba1c95c1f7fc121350b5f650d7bd661f291de5a39e95ec702c909",
+    "c-allowlist.txt": "5097add99edb468fcfe3b69420b546bf5fc5d30aab226fc28ce9b374753ede6f",
+    "Dockerfile": "471fddd3b604d184e3fb9081670adc6e059ecd0f39241c379a05d3feefd10fd1",
+    "build.py": "26802af9272be054a317ac157ddc2ff22ed6c72ad08daa60d88296908f6256bb"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "457bfe74085c505ecaf5468416450969e2e52a66d26bc1a4b2f6944a2daee73f",
+  "native_instrumented_objects": [
+    "src_backend_parser_gram.o",
+    "src_backend_parser_parser.o",
+    "src_backend_parser_scan.o"
+  ],
+  "image_id": "sha256:a45178a6a11285c27f42ea7095cd45474dd9a181f6525a6480d680617f748b1e",
+  "platform": "linux/arm64",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo-afl v0.18.2:",
+    "clang version 23.1.3 (https://github.com/llvm/llvm-project 0d261d1ca552c95a8f007e061c787ac7132fbcbc)"
+  ],
+  "feedback_edges": 3088,
+  "afl_map_size": 149853,
+  "rust_only_feedback_edges": 2860,
+  "rust_only_afl_map_size": 146047,
+  "native_feedback_edges": 228
+}

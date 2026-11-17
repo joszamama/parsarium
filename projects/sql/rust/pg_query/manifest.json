@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "rust",
+  "pilot": true,
+  "package": "pg_query",
+  "release": "18.1.0",
+  "catalog_parser": "data/rust/sql/parsers.json",
+  "source_lock": "projects/sql/rust/pg_query/source-lock.json",
+  "source_sha256": "457bfe74085c505ecaf5468416450969e2e52a66d26bc1a4b2f6944a2daee73f",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/work/replay",
+    "/input/case"
+  ],
+  "dialect": "PostgreSQL (ParserOptions::DEFAULT, the standard top-level grammar)",
+  "parser_family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser); same family as the C libpg_query path, Go pg_query_go, Python pglast and JavaScript libpg-query",
+  "api": "pg_query::parse(local UTF-8 text, ParserOptions::DEFAULT) -> ParseResult; the harness reads the protobuf SelectStmt (target_list, where_clause, group_clause, sort_clause) and InsertStmt (relation, cols, VALUES lists) and walks the same tree, serialized through its own serde derive, for RangeVar, FuncCall, JoinExpr and A_Const nodes",
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage of the pg_query 18.1.0 binding (parse, protobuf decode and ParseResult) plus clang 23.1.3 LLVM source coverage of the libpg_query C vendored in the crate, compiled by its build script, in one profile; the build script's OUT_DIR copy is mapped back to the crate's libpg_query tree. libFuzzer sanitizer counters in the Rust crates and the C objects",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pg_query-18.1.0/src/",
+  "format_specific_coverage_file_suffix": "/src/query.rs",
+  "scope": "One SQL statement from local UTF-8 text with the default PostgreSQL grammar; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Integer constants are converted to decimal text, which equals the source text for these controls. The #line directives of the bison/flex outputs gram.c and scan.c are removed before the build so coverage maps to the pinned C files. Other parser modes are untested.",
+  "underlying_package": "libpg_query (vendored in the pg_query crate: PostgreSQL 18 parser, scanner and protobuf output)",
+  "underlying_release": "18.1.0 (vendored copy)",
+  "underlying_coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pg_query-18.1.0/libpg_query/",
+  "underlying_format_specific_coverage_file_suffix": "/src_backend_parser_gram.c"
+}

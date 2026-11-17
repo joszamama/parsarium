@@ -108,6 +108,118 @@
     }
   },
   {
+    "name": "pg_query",
+    "version": "18.1.0",
+    "license": "MIT",
+    "license_evidence": "Cargo.toml license = MIT in the pinned crate (checked in the image); the crate ships no license file. The vendored libpg_query is BSD-3-Clause upstream with PostgreSQL License code",
+    "input_api": "pg_query::parse(local UTF-8 text, ParserOptions::DEFAULT) -> ParseResult",
+    "documentation": "https://docs.rs/pg_query/18.1.0/pg_query/fn.parse.html",
+    "source": "https://static.crates.io/crates/pg_query/pg_query-18.1.0.crate",
+    "source_sha256": "457bfe74085c505ecaf5468416450969e2e52a66d26bc1a4b2f6944a2daee73f",
+    "dependencies": [
+      "libpg_query C (vendored, built by build.rs with cc)",
+      "prost 0.13.5 (protobuf decode)",
+      "itertools",
+      "serde",
+      "serde_json",
+      "thiserror",
+      "bindgen 0.66.1 (build only)"
+    ],
+    "dialect": "PostgreSQL",
+    "scope": "One SQL statement from local UTF-8 text with the default PostgreSQL grammar; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other parser modes are untested.",
+    "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+    "family_note": "pg_query::parse passes the text to the vendored libpg_query (pg_query_parse_protobuf_opts: the PostgreSQL scanner and bison grammar) and decodes the protobuf parse tree with prost. The adapter reads SelectStmt and InsertStmt fields and walks RangeVar, FuncCall, JoinExpr and A_Const nodes. Shared family with the C libpg_query path (same 18.1.0 grammar; the C control reaches the same 493 gram.c lines), Go pg_query_go, Python pglast and JavaScript libpg-query; metrics are not combined.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 2607956,
+      "source": "https://crates.io/api/v1/crates/pg_query",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Counts include pulls by dependent crates (for example Postgres tooling built on pg_query)."
+    },
+    "project": "projects/sql/rust/pg_query",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "sqlite3-parser",
     "version": "0.17.0",
     "license": "Apache-2.0/MIT",
