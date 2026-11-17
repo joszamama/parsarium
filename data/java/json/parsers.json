@@ -57,5 +57,64 @@
       "captured_at_utc": "2026-11-17T03:27:28.596128+00:00",
       "snapshot": "data/java/json/registry-snapshot.json"
     }
+  },
+  {
+    "name": "gson",
+    "group": "com.google.code.gson",
+    "artifact": "gson",
+    "version": "2.15.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses",
+    "input_api": "new Gson().fromJson(Reader, Object.class) over InputStreamReader(FileInputStream, UTF_8)",
+    "documentation": "https://javadoc.io/doc/com.google.code.gson/gson/2.15.0/com.google.gson/com/google/gson/Gson.html",
+    "source": "https://repo.maven.apache.org/maven2/com/google/code/gson/gson/2.15.0/gson-2.15.0-sources.jar",
+    "scope": "RFC 8259 JSON text mapped to untyped LinkedTreeMap/ArrayList/String/Double/Boolean/null",
+    "family": "Gson (com.google.gson.stream.JsonReader + ObjectTypeAdapter untyped mapping)",
+    "family_note": "Gson tokenizes with its own com.google.gson.stream.JsonReader and maps tokens through ObjectTypeAdapter. It shares no code with jackson-core or jackson-databind, so it is a parser family independent of the selected Jackson path.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/gson",
+    "configuration_note": "Default Gson instance (Strictness.LEGACY_STRICT, ToNumberPolicy.DOUBLE for Object targets). fromJson(Reader, ...) also checks that the document is fully consumed.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 33240,
+      "max_release": "2.10.1",
+      "max_release_direct_dependent_count": 3828,
+      "default_release_direct_dependent_count": 343,
+      "releases": 45,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.google.code.gson%3Agson",
+      "captured_at_utc": "2026-11-17T03:27:30.412679+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json"
+    }
   }
 ]

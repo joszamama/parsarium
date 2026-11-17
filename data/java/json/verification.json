@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T03:28:28.849918+00:00",
+  "checked_at_utc": "2026-11-17T03:51:55.624314+00:00",
   "platform": "linux/arm64 Docker",
   "java": "openjdk version \"25.0.5\" 2026-10-20 LTS",
   "controls": {
@@ -17,6 +17,47 @@
       "scope": "RFC 8259 JSON text mapped to untyped Map/List/String/Number/Boolean/null",
       "command": "python3 scripts/run_project.py json java jackson_databind",
       "receipt": "projects/json/java/jackson_databind/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "error": null
+    },
+    {
+      "package": "gson",
+      "group": "com.google.code.gson",
+      "version": "2.15.0",
+      "scope": "RFC 8259 JSON text mapped to untyped LinkedTreeMap/ArrayList/String/Double/Boolean/null",
+      "command": "python3 scripts/run_project.py json java gson",
+      "receipt": "projects/json/java/gson/verification.json",
       "pass": true,
       "output": {
         "arrays": 3,

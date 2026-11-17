@@ -1,16 +1,17 @@
 # JAVA × JSON: selected parsers (pilot)
 
-1 control-verified third-party path selected. The ceiling is ten; this pilot builds only the highest-adoption general-purpose parser lead and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+2 control-verified third-party paths selected. The ceiling is ten; this pilot builds the two highest-adoption general-purpose parser leads from independent parser families and does not pad the selection. jackson-core (80,053) ranks between them but is the tokenizer jackson-databind drives, so it stays a same-family lead. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
-deps.dev `directDependentCount` summed over every Maven release, captured 2026-11-17 ([snapshot](registry-snapshot.json)). A dependent is counted once per release it depends on. The default-release count alone is skewed by release age: json-simple 1.1.1 (2012, the only real release) shows 1,163 while jackson-databind 2.23.0 shows 367. The single-release maximum is recorded as a cross-check; both summed and maximum rank jackson-databind first.
+deps.dev `directDependentCount` summed over every Maven release, captured 2026-11-17 ([snapshot](registry-snapshot.json)). A dependent is counted once per release it depends on. The default-release count alone is skewed by release age: json-simple 1.1.1 (2012, the only real release) shows 1,163 while jackson-databind 2.23.0 shows 367. The single-release maximum is recorded as a cross-check; both summed and maximum rank jackson-databind first and gson second among the selected paths.
 
 | Rank | Package | Release | Metric | Max single release | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | ---: | --- | --- |
 | 1 | [jackson-databind](https://javadoc.io/static/com.fasterxml.jackson.core/jackson-databind/2.23.0/com/fasterxml/jackson/databind/ObjectMapper.html) | 2.23.0 | 162,890 | 4,098 (2.18.2) | RFC 8259 JSON text into untyped Map/List | Jackson (jackson-core streaming parser + databind untyped mapping) |
+| 2 | [gson](https://javadoc.io/doc/com.google.code.gson/gson/2.15.0/com.google.gson/com/google/gson/Gson.html) | 2.15.0 | 33,240 | 3,828 (2.10.1) | RFC 8259 JSON text into untyped Map/List | Gson (com.google.gson.stream.JsonReader + ObjectTypeAdapter untyped mapping) |
 
-The adapter disables `CANONICALIZE_FIELD_NAMES` so repeated runs produce identical parser coverage; see the [parser record](parsers.json).
+The Jackson adapter disables `CANONICALIZE_FIELD_NAMES` so repeated runs produce identical parser coverage. Gson runs `new Gson().fromJson(Reader, Object.class)` with default settings and its own `JsonReader`; it shares no code with Jackson. See the [parser records](parsers.json).
 
 ## Standard API (none)
 
@@ -23,7 +24,6 @@ Numeric leads looked up on deps.dev, not verified and not selected. Maven Centra
 | Lead | Version seen | Summed direct dependents | Max single release | Status |
 | --- | --- | ---: | ---: | --- |
 | [com.fasterxml.jackson.core:jackson-core](https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-core) | 2.23.0 | 80,053 | 1,934 | JsonFactory.createParser(File) streaming tokenizer. It is the tokenizer the selected jackson-databind path drives, so it is the same parser family; not run as a separate path. |
-| [com.google.code.gson:gson](https://central.sonatype.com/artifact/com.google.code.gson/gson) | 2.15.0 | 33,240 | 3,828 | Gson.fromJson(Reader, Object.class) / JsonParser.parseReader with its own JsonReader; control not run in this pilot. |
 | [com.alibaba:fastjson](https://central.sonatype.com/artifact/com.alibaba/fastjson) | 2.0.66 | 10,021 | 1,494 | fastjson 2.x artifact is a compatibility facade over fastjson2; JSON.parse(byte[]) control not run. |
 | [org.json:json](https://central.sonatype.com/artifact/org.json/json) | 20260814 | 6,923 | 564 | new JSONObject(JSONTokener(Reader)) over its own tokenizer; control not run. |
 | [com.alibaba.fastjson2:fastjson2](https://central.sonatype.com/artifact/com.alibaba.fastjson2/fastjson2) | 2.0.66.android8 | 2,973 | 180 | JSON.parse(byte[]) with its own JSONReader; deps.dev default release is an android8 variant. Control not run. |
