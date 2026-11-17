@@ -69,11 +69,15 @@ python3 parsarium.py build svg c libvips
 python3 parsarium.py report svg c libvips projects/svg/c/libvips/target/coverage \
   --output reports/libvips --source /work/source=vips-8.18.7.tar.xz
 python3 parsarium.py report png c libpng runs/libpng-replay --output reports/libpng-replay
+python3 parsarium.py report http11 cpp boost_beast runs/beast-afl \
+  --replay-queue --max-queue-inputs 32 --output reports/beast-queue
 ```
 
 `report` writes `index.html`, `report.json`, and one line view per parser source file under `files/`. The pages are static, need no network, and embed no input bytes. The run must match the project's current verification receipt: changed project files, coverage counts, control output, or replay image IDs stop the report. `--max-report-mib` limits the complete output, including the index and JSON.
 
 A valid-control directory from `build` gives source lines when the coverage is an `llvm-cov export` (C, C++, Rust). Line counts follow the export's segments; files outside the manifest's parser prefixes, such as adapters and harnesses, are excluded and counted. Go, Java, JavaScript, Python, and PHP projects report the receipt's covered-line totals without a line view, separating the package and underlying parser groups where present. Native binary-edge projects report edges and no source lines. Replay directories report input hashes and outcomes; they record no coverage.
+
+For a prepared AFL++ run, `--replay-queue` measures up to 128 saved queue inputs through the verified C or C++ LLVM coverage image. It merges their profiles and generates parser source-line views with input, image, profile, and export hashes. The report omits per-function and expansion records to keep the export bounded; mapped source lines remain in the export. Other ecosystems and coverage modes are labeled unsupported for queue line views, while their AFL feedback and saved-file statistics remain available.
 
 Source text appears only through `--source CONTAINER_DIR=ARCHIVE`, where the archive's SHA-256 equals the manifest's `source_sha256` or `underlying_source_sha256`. Download the pinned release archive listed in the project's source lock before using the example above. `--strip-components` (default 1) removes the archive's top directory. A file whose coverage maps lines beyond its length is shown without text. Without `--source`, line views list counts only.
 

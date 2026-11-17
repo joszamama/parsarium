@@ -392,7 +392,7 @@ class CoverageReportTest(unittest.TestCase):
                 fixture.report(self.base / "report", queue_replay=True)
             docker.assert_not_called()
 
-    def test_queue_export_objects_accepts_only_literal_full_line_maps(self):
+    def test_queue_export_objects_accepts_literal_replay_maps(self):
         fixture = self.fixture()
         script = fixture.project / "run-control.sh"
         script.write_text("llvm-cov export /work/replay -object /work/lib/libparser.so "
@@ -405,8 +405,7 @@ class CoverageReportTest(unittest.TestCase):
             queue_coverage.export_objects(fixture.project)
         script.write_text("llvm-cov export /work/replay --summary-only "
                           "-instr-profile=/coverage/control.profdata > /coverage/coverage.json\n")
-        with self.assertRaisesRegex(queue_coverage.QueueCoverageError, "full /work/replay"):
-            queue_coverage.export_objects(fixture.project)
+        self.assertEqual(queue_coverage.export_objects(fixture.project), [])
 
     def test_bounded_afl_queue_replay_aggregates_llvm_parser_lines(self):
         fixture = self.fixture()

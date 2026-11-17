@@ -99,7 +99,9 @@ def queue_files(run_dir: Path, maximum: int) -> tuple[int, list[tuple[str, Path]
 def export_objects(project: Path) -> list[str]:
     """Read literal llvm-cov object paths from the verified control script.
 
-    Dynamic shell expressions and summary-only exports are outside this pilot.
+    Dynamic shell expressions are outside this pilot. A control may request
+    --summary-only; queue replay deliberately exports the full line map from
+    the same instrumented replay binary and merged profiles.
     No project script is executed during reporting.
     """
     script = (project / "run-control.sh").read_text().replace("\\\n", " ")
@@ -110,13 +112,15 @@ def export_objects(project: Path) -> list[str]:
         tokens = shlex.split(match.group(1))
     except ValueError as error:
         raise QueueCoverageError("project llvm-cov export has dynamic or invalid quoting") from error
-    if not tokens or tokens[0] != "/work/replay" or "--summary-only" in tokens:
-        raise QueueCoverageError("project llvm-cov export is not a full /work/replay line export")
+    if not tokens or tokens[0] != "/work/replay":
+        raise QueueCoverageError("project llvm-cov export does not use /work/replay")
     objects = []
     index = 1
     while index < len(tokens):
         token = tokens[index]
-        if token == "-object" and index + 1 < len(tokens):
+        if token == "--summary-only":
+            pass
+        elif token == "-object" and index + 1 < len(tokens):
             index += 1
             value = tokens[index]
             objects.append(value)
@@ -213,6 +217,7 @@ def replay_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
         replay = {"status": "source_replay", "plan_sha256": digest(run_dir / "plan.json"),
                   "afl_image_id": plan["image_id"], "coverage_image_id": image_id,
                   "coverage_binary": "/work/replay", "llvm_cov_objects": objects,
+                  "llvm_cov_export_options": ["--skip-functions", "--skip-expansions"],
                   "queue_inputs_available": total, "queue_inputs_sampled": len(inputs),
                   "selection": "lexicographically first AFL id files across instances",
                   "timeout_seconds_per_input": timeout, "inputs": inputs}
@@ -222,7 +227,7 @@ def replay_queue(run_dir: Path, root: Path, evidence: dict, maximum: int,
         merged = scratch / "aggregate.profdata"
         exported = scratch / "coverage.json"
         script = ("llvm-profdata merge -sparse /profiles/*.profraw -o /coverage/aggregate.profdata "
-                  "&& llvm-cov export /work/replay " +
+                  "&& llvm-cov export /work/replay --skip-functions --skip-expansions " +
                   " ".join(f"-object={shlex.quote(obj)}" for obj in objects) +
                   " -instr-profile=/coverage/aggregate.profdata > /coverage/coverage.json")
         container_name = f"parsarium-report-{uuid.uuid4().hex[:16]}"
