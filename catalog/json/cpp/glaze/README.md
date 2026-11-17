@@ -1,10 +1,54 @@
 # Glaze — JSON / C++
 
-- **Pinned release:** `9.1.0`, MIT
-- **Local input API:** `glz::read_json(glz::generic_i64&, std::string)` ([pinned documentation](https://github.com/stephenberry/glaze/blob/v9.1.0/docs/generic-json.md))
-- **Parser family:** Glaze's own template-based JSON reader
-- **Valid controls:** [nested object](../../../../controls/json/nested-object.json), [nested array](../../../../controls/json/nested-array.json)
-- **Adoption:** 171 Debian source-package installations and 171 `libglaze-dev` installations in the recorded snapshot; rank 5 among comparable C++ JSON packages. [Ranking and limits](../../../../data/cpp/json/ranking.md)
-- **Evidence:** [parser record](../../../../data/cpp/json/parsers.json), [control result](../../../../data/cpp/json/verification.json), [parser-only AFL++ feedback](../../../../fuzzing/afl-native/json/cpp/glaze/differential.json)
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-The [runnable project](../../../../projects/json/cpp/glaze/README.md) contains the pinned Docker build, local-buffer harness, source-coverage check, and AFL++ target.
+- **Pinned release:** `9.1.0`
+- **License:** MIT
+- **Parser family:** Glaze own template-based JSON reader
+- **Local input API:** `glz::read_json(glz::generic_i64&, std::string) on a local byte-backed std::string, yielding an insertion-ordered generic JSON DOM with signed integer and double alternatives`
+- **Documentation:** [API reference](<https://github.com/stephenberry/glaze/blob/v9.1.0/docs/generic-json.md>)
+- **Valid control:** [`controls/json/nested-object.json`](../../../../controls/json/nested-object.json)
+- **Catalog evidence:** [parser record](../../../../data/cpp/json/parsers.json) · [control result](../../../../data/cpp/json/verification.json)
+
+## Observed control result
+
+```json
+{
+  "arrays": 3,
+  "booleans": 2,
+  "max_depth": 4,
+  "nulls": 1,
+  "numbers": [
+    -2.5,
+    1,
+    1,
+    2,
+    2
+  ],
+  "objects": 5,
+  "root": "object",
+  "strings": [
+    "café \"quoted\"",
+    "go",
+    "json",
+    "parsarium",
+    "rfc8259"
+  ],
+  "top_level_keys": [
+    "enabled",
+    "missing",
+    "name",
+    "nested",
+    "ratio",
+    "tags",
+    "version"
+  ]
+}
+```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json cpp glaze
+python3 parsarium.py run json cpp glaze controls/json/nested-object.json
+```

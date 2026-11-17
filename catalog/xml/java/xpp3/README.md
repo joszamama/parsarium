@@ -1,11 +1,50 @@
 # xpp3 — XML / Java
 
-**Verified independent parser path.** Pinned Maven release `xpp3:xpp3:1.1.4c`. The [release POM](https://repo.maven.apache.org/maven2/xpp3/xpp3/1.1.4c/xpp3-1.1.4c.pom) identifies the Indiana University Extreme! Lab Software License 1.1.1 for the parser, public-domain XmlPull API, and Apache-1.1 for the bundled `QName` class. The [pinned source JAR](https://repo.maven.apache.org/maven2/xpp3/xpp3/1.1.4c/xpp3-1.1.4c-sources.jar) documents `XmlPullParser.setInput(InputStream, String)` and contains MXParser's source/license. [Artifact hashes](../../../../projects/xml/java/xpp3/source-lock.json) bind the release and source.
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-The harness constructs `org.xmlpull.mxp1.MXParser`, enables namespace processing, calls `setInput` on a local stream, and consumes `next()` events. This is XPP3's own tokenizer. It does not delegate to SAX, DOM, StAX, or the JDK Xerces parser. The parser family is **XPP3 MXParser**.
+- **Pinned release:** `1.1.4c`
+- **License:** Indiana University Extreme! Lab Software License 1.1.1 (parser); public domain (XmlPull API); Apache-1.1 (bundled QName)
+- **Parser family:** XPP3 MXParser independent XML pull tokenizer
+- **Local input API:** `new org.xmlpull.mxp1.MXParser(); setFeature(FEATURE_PROCESS_NAMESPACES, true); setInput(Files.newInputStream(local Path), null); next() until END_DOCUMENT`
+- **Documentation:** [API reference](<https://repo.maven.apache.org/maven2/xpp3/xpp3/1.1.4c/xpp3-1.1.4c-sources.jar>)
+- **Valid control:** [`controls/xml/catalog-ns.xml`](../../../../controls/xml/catalog-ns.xml)
+- **Catalog evidence:** [parser record](../../../../data/java/xml/parsers.json) · [control result](../../../../data/java/xml/verification.json)
 
-Both [valid XML controls](../../../../controls/xml/) produce the expected namespace-aware projection. The first [control receipt](../../../../projects/xml/java/xpp3/verification.json) records 677 MXParser source lines. Three repeated valid probes per control were identical; the [differential receipt](../../../../fuzzing/afl-native/xml/java/xpp3/differential.json) records 160 changed parser features and 160 changed AFL tuples. The pinned JaCoCo agent includes `org.xmlpull.mxp1.*` only.
+## Observed control result
 
-The saved [deps.dev snapshot](../../../../data/java/xml/registry-snapshot.json) gives 285 summed direct dependents across Maven releases and 143 at release `1.1.4c`, its single-release maximum. The exact requested `1.1.3.4` artifact is unavailable from Maven Central; `1.1.4c` is a published release of the same coordinate. Package adoption is not a count of XML-specific calls.
+```json
+{
+  "attributes": [
+    "version=1",
+    "id=a1",
+    "{urn:parsarium:catalog}lang=es",
+    "id=b2"
+  ],
+  "elements": [
+    "{urn:parsarium:catalog}catalog",
+    "{urn:parsarium:item}item",
+    "{urn:parsarium:item}item",
+    "{urn:parsarium:item}name",
+    "{urn:parsarium:item}note"
+  ],
+  "max_depth": 3,
+  "namespace_declarations": 2,
+  "namespaces": [
+    "urn:parsarium:catalog",
+    "urn:parsarium:item"
+  ],
+  "root": "{urn:parsarium:catalog}catalog",
+  "text": [
+    "Café & té",
+    "Zürich <HQ>",
+    "x < y"
+  ]
+}
+```
 
-[Run this target](../../../../projects/xml/java/xpp3/README.md)
+## Run this target
+
+```sh
+python3 parsarium.py build xml java xpp3
+python3 parsarium.py run xml java xpp3 controls/xml/catalog-ns.xml
+```

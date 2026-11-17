@@ -1,6 +1,6 @@
 # minimp3 — MP3 / Rust
 
-Pinned release: `0.6.1`, with `minimp3-sys` `0.6.0` and its vendored minimp3 C decoder. [Manifest](manifest.json) · [verification receipt](verification.json) · [native AFL++ receipt](../../../../fuzzing/afl-native/mp3/rust/minimp3/verification.json)
+Pinned release: `0.6.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
 [API, control result, and parser family](../../../../catalog/mp3/rust/minimp3/README.md)
 

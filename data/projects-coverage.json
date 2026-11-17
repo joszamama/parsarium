@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 99,
-    "containerized_verified": 99,
+    "catalog_paths": 105,
+    "containerized_verified": 105,
     "staged": 0,
     "standard_api_paths": 8,
     "standard_containerized_verified": 7,
@@ -1008,8 +1008,8 @@
       {
         "format": "json",
         "ecosystem": "cpp",
-        "catalog_paths": 5,
-        "containerized_verified": 5,
+        "catalog_paths": 6,
+        "containerized_verified": 6,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1017,9 +1017,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_five_selected_search_bounded",
+        "status": "pilot_six_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Five independent C++ JSON parser families pass two valid controls and scoped parser source/AFL feedback. RapidJSON 1.1.0 is a 2016 release that needs Clang -fdelayed-template-parsing to build without source changes on this toolchain; this target uses AddressSanitizer and AFL++, without UndefinedBehaviorSanitizer. Source-package installations favor runtime packages and undercount header-only libraries; RapidJSON is header-only with 899 Debian development-package installs. Boost.JSON has no JSON-specific Debian source count, so it has no primary rank; its libboost-json-dev fallback (1,749) is not comparable to sourcemax values. Five documentation leads remain unverified. The search records 320 Debian source-name hits; no complete top-ten claim follows. JSON-specific use is unknown; valid controls do not establish complete RFC 8259 support."
+        "uncertainty": "Six C++ JSON package paths pass two valid controls with scoped parser source coverage and AFL++ feedback; Glaze uses its generic_i64 DOM and a parser-only AFL++ target. Glaze has 171 Debian source-package and libglaze-dev installations, both from the same hashed snapshot. The source-package metric favors runtime packages and undercounts header-only libraries; Boost.JSON has no JSON-specific Debian source count and remains primary-unranked. Four documentation leads remain unresolved: Qt and POCO have framework/multi-library counts, while PicoJSON and jsoncons have low or incomplete signals. The 320 JSON-name source hits exclude Glaze, found by a supplementary exact source-name lookup. No complete top-ten claim follows. Two small valid controls do not establish complete RFC 8259, numeric boundaries, or malformed-input behavior."
       },
       {
         "format": "json",
@@ -1088,8 +1088,8 @@
       {
         "format": "json",
         "ecosystem": "python",
-        "catalog_paths": 4,
-        "containerized_verified": 4,
+        "catalog_paths": 5,
+        "containerized_verified": 5,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 1,
@@ -1097,9 +1097,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_four_selected_search_bounded",
+        "status": "pilot_five_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Four positive-signal Python JSON third-party paths pass valid nested object and array controls with source-level parser coverage and AFL++ feedback: pydantic 2.14.3 (1,139,429,690 PyPI Stats last-month downloads), orjson 3.13.0 (218,014,317), simplejson 4.3.0 (49,365,386), and ijson 3.6.0 (46,615,664). Pydantic embeds Jiter; orjson shares the yyjson C syntax-parser family but this pilot measures its Rust deserializer, not vendored C source lines. ijson uses the asserted yajl2_c backend, with pinned YAJL C tokenizer and Python extension coverage; its source-built embedded YAJL -O0 route differs from the official Linux wheel linkage and optimisation, and its other backends are untested. PyPI package downloads include non-parse uses and transitive installs. Five targeted documented leads remain unverified; bounded PyPI Simple Index search has not yet been run. Python standard json is separately verified."
+        "uncertainty": "Five positive-signal Python JSON third-party paths pass valid nested object and array controls with source-level parser coverage and AFL++ feedback: pydantic 2.14.3 (1,139,429,690 PyPI Stats last-month downloads), orjson 3.13.0 (218,014,317), simplejson 4.3.0 (49,365,386), ijson 3.6.0 (46,615,664), and ujson 6.1.0 (29,543,889). Pydantic embeds Jiter; orjson shares the yyjson C syntax-parser family but this pilot measures its Rust deserializer, not vendored C source lines. ijson uses the asserted yajl2_c backend, with pinned YAJL C tokenizer and Python extension coverage; its source-built embedded YAJL -O0 route differs from the official Linux wheel linkage and optimisation, and its other backends are untested. ujson uses its own UltraJSON C decoder with vendored double-conversion C++ for fractional numbers; both controls equal an exact CPython json oracle tree, and duplicate-key and edge-number behavior is recorded from source, not tested. PyPI package downloads include non-parse uses and transitive installs. Four targeted documented leads remain unverified; bounded PyPI Simple Index search has not yet been run. Python standard json is separately verified."
       },
       {
         "format": "json",
@@ -1216,6 +1216,22 @@
       {
         "format": "mp3",
         "ecosystem": "python",
+        "catalog_paths": 3,
+        "containerized_verified": 3,
+        "staged": 0,
+        "pending": 0,
+        "standard_api_paths": 0,
+        "standard_containerized_verified": 0,
+        "standard_staged": 0,
+        "standard_pending": 0,
+        "phase": "pilot",
+        "status": "pilot_three_verified_bounded_search",
+        "complete": false,
+        "uncertainty": "Three verified paths; no padding. The name search is a substring filter over the PyPI Simple index (serial 43764887) captured 2026-11-17; the 'mp3' and 'mpeg' hit lists were not triaged one by one, and download numbers were fetched only for 13 named candidates, so a less obvious frame parser could be missed. Native wrappers (av, soundfile, audioread, pygame, pymediainfo, miniaudio) are unresolved, not rejected: their parsers are real but outside Python source coverage. eyed3 and pymp3 are unresolved pure-Python leads. Mutagen reads headers and checks frame syncs but does not decode audio; for CBR streams without Xing/Info/VBRI its duration is stream bytes divided by the first header's bitrate. TinyTag also only reads headers: after five equal-bitrate frames it estimates duration from stream size and mean frame length, and it does not expose MPEG version, layer or frame count. Both full-length controls run the same TinyTag lines; its feedback difference is shown with a valid three-frame prefix of the 44.1 kHz control. hachoir is called through its MpegAudioFile class directly, not guessParser, whose fallback tries every hachoir parser in set order. It walks every frame header to EOF and reports version, layer, sample rate, bitrate, channel mode and frame count. It does not decode audio or side information, and its two controls differ by only 4 mpeg_audio.py lines: the MPEG-1 versus MPEG-2 bitrate table and frame-length formula. Two untagged CBR controls do not establish VBR, free-format, Layer I/II, or MPEG-2.5 support."
+      },
+      {
+        "format": "mp3",
+        "ecosystem": "rust",
         "catalog_paths": 2,
         "containerized_verified": 2,
         "staged": 0,
@@ -1225,25 +1241,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_two_verified_bounded_search",
+        "status": "pilot_two_paths_search_bounded",
         "complete": false,
-        "uncertainty": "Two verified paths; no padding. The name search is a substring filter over the PyPI Simple index (serial 43764887) captured 2026-11-17; the 'mp3' and 'mpeg' hit lists were not triaged one by one, and download numbers were fetched only for 13 named candidates, so a less obvious frame parser could be missed. Native wrappers (av, soundfile, audioread, pygame, pymediainfo, miniaudio) are unresolved, not rejected: their parsers are real but outside Python source coverage. eyed3, hachoir and pymp3 are unresolved pure-Python leads. Mutagen reads headers and checks frame syncs but does not decode audio; for CBR streams without Xing/Info/VBRI its duration is stream bytes divided by the first header's bitrate. TinyTag also only reads headers: after five equal-bitrate frames it estimates duration from stream size and mean frame length, and it does not expose MPEG version, layer or frame count. Both full-length controls run the same TinyTag lines; its feedback difference is shown with a valid three-frame prefix of the 44.1 kHz control. Two untagged CBR controls do not establish VBR, free-format, Layer I/II, or MPEG-2.5 support."
-      },
-      {
-        "format": "mp3",
-        "ecosystem": "rust",
-        "catalog_paths": 1,
-        "containerized_verified": 1,
-        "staged": 0,
-        "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
-        "standard_staged": 0,
-        "standard_pending": 0,
-        "phase": "pilot",
-        "status": "pilot_one_path_search_bounded",
-        "complete": false,
-        "uncertainty": "Pilot cell: one verified path, chosen as the highest crates.io 90-day download count (10,651,437) among hits that contain an MPEG audio frame parser. The facade crate symphonia (11,469,426) ranks higher but re-exports the same family. 11 frame-level leads remain unverified, so the count of one reflects pilot scope, not a search result. Search covers only the first 100 hits of six queries (591 hits, 350 unique) captured 2026-11-17; the 'mp3' query alone reports 1119 matches. Recent downloads include transitive dependency pulls (Symphonia is a dependency of rodio and others) and are an adoption proxy, not evidence of direct MP3 parsing use. Two untagged CBR controls (MPEG-1 44.1 kHz mono, MPEG-2 22.05 kHz stereo) do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support."
+        "uncertainty": "Two independent parser families are verified on two valid untagged CBR controls: Symphonia's Rust MP3 demuxer/decoder and minimp3's C decoder through the Rust minimp3 binding. The higher-download symphonia facade re-exports the selected Symphonia family. Ten leads remain unresolved, so the verified ranks are not a claim about all MP3 parsers. Search covers the first 100 hits of six crates.io queries (591 hits, 350 unique) captured 2026-11-17; the 'mp3' query alone reports 1119 matches. Recent downloads include transitive dependency pulls and are an adoption proxy, not evidence of direct MP3 parsing use. The two controls do not establish VBR, Xing/Info, free-format, Layer I/II or MPEG-2.5 support."
       },
       {
         "format": "xml",
@@ -1296,8 +1296,8 @@
       {
         "format": "xml",
         "ecosystem": "java",
-        "catalog_paths": 7,
-        "containerized_verified": 7,
+        "catalog_paths": 9,
+        "containerized_verified": 9,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 1,
@@ -1305,9 +1305,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_seven_selected_search_bounded",
+        "status": "pilot_nine_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Seven third-party XML package paths are verified and runnable: Jackson XML, Xerces2-J, Woodstox, dom4j, XMLBeans, JDOM2, and Aalto. Xerces2-J, Woodstox, and Aalto are independent tokenizer/parser engines. Jackson XML projects Woodstox StAX events into Jackson tokens, omitting namespace URIs, root name, comments, processing instructions, and attribute origin. dom4j, XMLBeans, and JDOM2 build distinct tree APIs over JAXP SAXParserFactory, which selects the OpenJDK Xerces fork in the pinned runtime; XMLBeans 5.4.1 does not bundle the previously suspected Piccolo parser. Each wrapper has own source coverage and stable parser-derived AFL++ feedback, while underlying parser coverage is reported separately. The standard javax.xml.parsers path is counted separately and shares the Xerces2-J family. Seven documentation leads remain unresolved, including legacy dom4j:dom4j; it is not counted beside org.dom4j:dom4j. Maven Central search is bounded to 100 hits per query (345 unique hits); deps.dev summed direct dependents measure package adoption, not XML-specific use or independent tokenizer families. Two small UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, external-entity, schema, non-UTF-8, or XML 1.1 behavior."
+        "uncertainty": "Nine third-party XML package paths are verified and runnable: Jackson XML, Xerces2-J, Woodstox, dom4j, XMLBeans, JDOM2, Aalto, XOM, and XPP3. Xerces2-J, Woodstox, Aalto, and XPP3 are independent tokenizer/parser engines. Jackson XML projects Woodstox StAX into Jackson tokens; dom4j, XMLBeans, JDOM2, and XOM build distinct trees over the OpenJDK Xerces SAX fork. Each wrapper has its own source coverage and stable parser-derived AFL++ feedback, while underlying tokenizer coverage is reported separately. The standard javax.xml.parsers path shares the Xerces2-J family. Five documentation leads remain unresolved, including legacy dom4j:dom4j; it is not counted beside org.dom4j:dom4j. Maven Central search is bounded to 100 hits per query (345 unique hits); deps.dev summed direct dependents measure package adoption, not XML-specific use or independent tokenizer families. Two small UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, external-entity, schema, non-UTF-8, or XML 1.1 behavior. XOM and XPP3 control and differential results are in their project-scoped receipts and shared XML aggregates."
       },
       {
         "format": "xml",

@@ -1,11 +1,50 @@
 # xom — XML / Java
 
-**Verified third-party parsing path.** Pinned Maven release `xom:xom:1.4.6`, licensed under LGPL-2.1 in its [release POM](https://repo.maven.apache.org/maven2/xom/xom/1.4.6/xom-1.4.6.pom). The [Builder API](https://xom.nu/apidocs/nu/xom/Builder.html) documents `build(InputStream)` returning a `Document` from a local stream. The [source lock](../../../../projects/xml/java/xom/source-lock.json) records release JAR, source JAR, POM, runtime dependency and JDK source hashes.
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-XOM's `Builder.findParser` selects the OpenJDK internal Xerces SAX reader when Apache Xerces is absent. This is a distinct tree-builder package path with no independent XML tokenizer; it shares the Apache Xerces2-J family with JDOM2, dom4j, XMLBeans and the standard JDK path. The pinned release JAR lacks line tables, so its same-release sources are recompiled with `javac -g --release 8` and mapped to JaCoCo. The OpenJDK parser classes and matching sources are covered separately.
+- **Pinned release:** `1.4.6`
+- **License:** LGPL-2.1
+- **Parser family:** XOM Builder/tree over OpenJDK Xerces2-J fork
+- **Local input API:** `new nu.xom.Builder().build(Files.newInputStream(local Path)) into XOM Document`
+- **Documentation:** [API reference](<https://xom.nu/apidocs/nu/xom/Builder.html>)
+- **Valid control:** [`controls/xml/catalog-ns.xml`](../../../../controls/xml/catalog-ns.xml)
+- **Catalog evidence:** [parser record](../../../../data/java/xml/parsers.json) · [control result](../../../../data/java/xml/verification.json)
 
-The two [valid XML controls](../../../../controls/xml/) exercise namespaces, attributes, decoded references, CDATA, comment, processing instruction, and namespace undeclaration. The first produces the expected [tree result](../../../../projects/xml/java/xom/verification.json) with 579 XOM lines and 3,488 underlying JDK Xerces lines. The second matches the shared XML oracle; repeated source-line feedback is stable and [72 AFL tuples differ](../../../../fuzzing/afl-native/xml/java/xom/differential.json).
+## Observed control result
 
-The [deps.dev snapshot](../../../../data/java/xml/registry-snapshot.json) records 355 summed direct dependents across XOM Maven releases, with a maximum of 116 on release 1.2.5. This measures package adoption within the Java XML cell, not independent tokenizer adoption.
+```json
+{
+  "attributes": [
+    "version=1",
+    "id=a1",
+    "{urn:parsarium:catalog}lang=es",
+    "id=b2"
+  ],
+  "elements": [
+    "{urn:parsarium:catalog}catalog",
+    "{urn:parsarium:item}item",
+    "{urn:parsarium:item}item",
+    "{urn:parsarium:item}name",
+    "{urn:parsarium:item}note"
+  ],
+  "max_depth": 3,
+  "namespace_declarations": 2,
+  "namespaces": [
+    "urn:parsarium:catalog",
+    "urn:parsarium:item"
+  ],
+  "root": "{urn:parsarium:catalog}catalog",
+  "text": [
+    "Café & té",
+    "Zürich <HQ>",
+    "x < y"
+  ]
+}
+```
 
-[Run this target](../../../../projects/xml/java/xom/README.md)
+## Run this target
+
+```sh
+python3 parsarium.py build xml java xom
+python3 parsarium.py run xml java xom controls/xml/catalog-ns.xml
+```

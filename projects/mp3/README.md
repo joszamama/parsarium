@@ -15,6 +15,8 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [mediabunny / JavaScript](javascript/mediabunny/README.md)
 - [james-heinrich/getid3 / PHP](php/getid3/README.md)
 - [wapmorgan/mp3info / PHP](php/wapmorgan_mp3info/README.md)
+- [hachoir / Python](python/hachoir/README.md)
 - [mutagen / Python](python/mutagen/README.md)
 - [tinytag / Python](python/tinytag/README.md)
+- [minimp3 / Rust](rust/minimp3/README.md)
 - [symphonia-bundle-mp3 / Rust](rust/symphonia_bundle_mp3/README.md)

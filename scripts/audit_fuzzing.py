@@ -166,6 +166,27 @@ def main() -> None:
         assert record["image_id"] == receipt["image_id"]
         assert receipt["afl_map_size"] > 0
         assert receipt["control_sha256"] == manifest["control_sha256"]
+        if manifest.get("afl_native_c_binding"):
+            # This Rust API reaches a C decoder built with AFL++ directly. Its
+            # overlay is intentionally not the generated Rust afl crate shim.
+            assert receipt["source_sha256"] == manifest["source_sha256"]
+            assert (receipt["underlying_native_source_sha256"] ==
+                    manifest["underlying_native_source_sha256"])
+            assert receipt["afl_entrypoint"] == manifest["afl_entrypoint"]
+            assert receipt["afl_file_input"] is True
+            allowlist = project / "afl-allowlist.txt"
+            assert receipt["allowlist_sha256"] == sha256(allowlist.read_bytes()).hexdigest()
+            validation = json.loads((overlay / "feedback-validation.json").read_text())
+            assert (validation["pass"] and validation["repeat_maps_identical"]
+                    and validation["raw_repeat_maps_identical"]
+                    and validation["source_lines_identical_across_repeats"])
+            assert validation["first_native_tuples"] == receipt["feedback_edges"]
+            assert validation["first_sha256"] == manifest["control_sha256"]
+            assert validation["second_sha256"] == manifest["differential_control_sha256"]
+            assert receipt["base_project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
+            for name, digest in receipt["overlay_file_sha256"].items():
+                assert sha256((overlay / name).read_bytes()).hexdigest() == digest
+            continue
         assert receipt["parser_source_sha256"] == manifest["source_sha256"]
         assert receipt["base_project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
         if str(relative) == "ascii_pnm/rust/fltk":
