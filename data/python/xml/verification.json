@@ -444,6 +444,106 @@
       "project_receipt_sha256": "0937dfafa274364dad5367c84f0aa409058d8c675bef475489c22898c69deee1",
       "namespace_caveat": "XMLResource records xmlns declarations itself from iterparse start-ns events (get_xmlns) and keeps a per-element in-scope namespace map (get_nsmap). The summary's namespace_declarations and namespaces fields come from get_xmlns, a public method with a docstring that is not listed on the Sphinx API page; the documented get_namespaces() merges declarations into one prefix map and cannot give a per-element count. Both controls match the lxml path's full summary, including the declaration count.",
       "tree_caveat": "CPython's TreeBuilder keeps no comments or processing instructions (xmlschema receives the iterparse events and discards them); text and tail data are kept per node (CDATA included)."
+    },
+    {
+      "package": "parsel",
+      "version": "1.12.1",
+      "pass": true,
+      "input_api": "parsel.Selector(body=local XML bytes, type=\"xml\"); Selector.xpath() with get()/getall() for namespace-uri(), local-name(), namespace::*, ancestor-or-self::*, //text(), //comment() and //processing-instruction(), plus Selector.attrib for attributes",
+      "tested_parser": "parsel.selector.SafeXMLParser (lxml.etree.XMLParser subclass; _ctgroup['xml']['_parser'])",
+      "tested_root_type": "lxml.etree._Element",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "comments": [],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "processing_instructions": [],
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "root": "{urn:parsarium:catalog}catalog"
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "comments": [
+          "order receipt"
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "processing_instructions": [
+          "audit step=\"1\""
+        ],
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "root": "{urn:parsarium:order}order"
+      },
+      "differential_pass": true,
+      "oracle": "projects/xml/python/parsel/oracle.py: CPython pyexpat (expat_2.7.4) in namespace mode, no lxml or libxml2",
+      "parsel_matches_oracle": true,
+      "parser_family": "Parsel Selector over lxml 6.1.3 SafeXMLParser(recover=True, resolve_entities=False, huge_tree=True) over libxml2 2.15.4 (shared with lxml.etree and beautifulsoup4)",
+      "parsel_source_files": 1,
+      "parsel_source_lines": 100,
+      "libxml2_parser_c_source_lines": 1484,
+      "libxml2_parser_c_source_lines_range": [
+        1484,
+        1493
+      ],
+      "differential_parsel_source_lines": 100,
+      "differential_libxml2_parser_c_source_lines_range": [
+        1639,
+        1645
+      ],
+      "afl_feedback": "data/python/xml/parsel-valid-feedback.json",
+      "afl_tuple_difference": 209,
+      "parsel_feature_difference": 0,
+      "libxml2_feature_difference": 213,
+      "project_receipt": "projects/xml/python/parsel/verification.json",
+      "project_receipt_sha256": "62f9ab88d8c61c37051aa0f49ad734aef59046e347fa76348b467da957fdd46b",
+      "coverage_caveat": "libxml2 parser.c lines 8700-8720 (an address-sensitive attribute hash lookup) vary between identical replays: over three replays the catalog control's parser.c total ranged 1,484-1,493 and the order control's 1,639-1,645. The AFL++ bridge excludes that range, as in projects/xml/python/lxml and beautifulsoup4; five repeats per control then give identical features (940 and 1,039) and tuples (934 and 1,031).",
+      "feedback_caveat": "Parsel's own selector.py lines do not differ between the two valid controls (0 features); all 213 differing features and 209 differing AFL++ tuples are libxml2 parser.c regions. The path is a wrapper whose input-dependent feedback is the shared libxml2 parser's, labeled as such.",
+      "tree_caveat": "lxml's default strip_cdata turns CDATA into ordinary text and the XML declaration is not a node; namespace declarations are counted as in-scope changes through XPath namespace::*, so a redundant redeclaration would be missed (neither control has one)."
     }
   ],
   "standard": [
@@ -471,7 +571,8 @@
       "family": "libxml2 2.15.4 XML parser",
       "paths": [
         "lxml.etree",
-        "beautifulsoup4 (\"xml\" builder via lxml.etree)"
+        "beautifulsoup4 (\"xml\" builder via lxml.etree)",
+        "parsel (Selector type=\"xml\" via lxml.etree SafeXMLParser)"
       ]
     },
     {

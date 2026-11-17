@@ -169,5 +169,69 @@
     "license_member": "elementpath-5.1.4.dist-info/licenses/LICENSE, byte-identical to the sdist LICENSE; METADATA License-Expression: MIT",
     "license_sha256": "01a603b5de335fa4db21d918bfb868981e894b768d9b4e6a201488ae2ef3b9ea",
     "role": "xmlschema's only runtime dependency; latest release satisfying elementpath<6.0.0,>=5.1.3 as observed 2026-11-17"
+  },
+  "parsel": {
+    "release": "1.12.1",
+    "source_kind": "PyPI py3-none-any wheel (installed) plus sdist (parsel/ and LICENSE checked byte-identical)",
+    "url": "https://files.pythonhosted.org/packages/e9/44/2ff782553b581b3d55632eb4f9de1dc792ca99de7e47f69e22af28a9ef2d/parsel-1.12.1-py3-none-any.whl",
+    "sha256": "cf74e09857329bddc02c13ae239a9b46f410dc5bd1d05361c8c2643a1a5a7149",
+    "sdist_url": "https://files.pythonhosted.org/packages/c4/04/b7eca3afc99d9dc1178ad22b5a37597d09c259d00693052480f2b2bbca83/parsel-1.12.1.tar.gz",
+    "sdist_sha256": "f526df846f3a91e13f5499156ea3e755114834cd126b62cd1d784ef558f3a713",
+    "uploaded_utc": "2026-09-28T14:15:52Z",
+    "requires_dist": [
+      "cssselect>=1.2.0",
+      "jmespath>=1.0.0",
+      "lxml>=5.1.0",
+      "w3lib>=1.19.0"
+    ],
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/parsel/1.12.1/json",
+    "license_member": "parsel-1.12.1.dist-info/licenses/LICENSE, byte-identical to the sdist LICENSE; METADATA License-Expression: BSD-3-Clause",
+    "license_sha256": "7c9a5bce33c5cb32fd5b172f6a0bf2691e19ab11b06503eab2d826f5c6dee90d",
+    "module_sha256": {
+      "parsel/selector.py": "11a16c53cce222863980d0ec7a8c67d4d183be78704ccf53fcf66886b10211f1"
+    },
+    "lock": "projects/xml/python/parsel/runtime-requirements.lock",
+    "xml_backend": "lxml 6.1.3 and libxml2 2.15.4: same pins as the lxml and libxml2_for_lxml entries"
+  },
+  "cssselect_for_parsel": {
+    "release": "1.6.0",
+    "source_kind": "PyPI py3-none-any wheel",
+    "sha256": "6df6eab9b264c0f2092a6e386b33610e1684a25e27925ecebe25e3d97cbf3525",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/cssselect/1.6.0/json",
+    "role": "parsel runtime dependency (CSS-to-XPath translation); not used by the XML parse path"
+  },
+  "jmespath_for_parsel": {
+    "release": "1.1.0",
+    "source_kind": "PyPI py3-none-any wheel",
+    "sha256": "a5663118de4908c91729bea0acadca56526eb2698e83de10cd116ae0f4e97c64",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/jmespath/1.1.0/json",
+    "role": "parsel runtime dependency (JSON selectors); not used by the XML parse path"
+  },
+  "w3lib_for_parsel": {
+    "release": "2.6.0",
+    "source_kind": "PyPI py3-none-any wheel",
+    "sha256": "e62ce6b7f845b5e8588223d44e64990673a0fefd6815d6b3f2e6d39bf9ef308c",
+    "license": "BSD-3-Clause",
+    "license_evidence": "https://pypi.org/pypi/w3lib/2.6.0/json",
+    "role": "parsel runtime dependency (HTML/URL helpers); not used by the XML parse path"
+  },
+  "frostwork_for_parsel": {
+    "release": "0.2.2",
+    "source_kind": "PyPI cp310-abi3 manylinux2014 aarch64 wheel (prebuilt)",
+    "sha256": "98f0a24eaacffddac21abfa0ea060cc170f65cd4570f0c7fbea3eeb11230e643",
+    "license": "Apache-2.0",
+    "license_evidence": "https://pypi.org/pypi/frostwork/0.2.2/json",
+    "role": "w3lib 2.6.0 runtime dependency; prebuilt manylinux aarch64 abi3 extension imported by w3lib.html, not on the XML parse path"
+  },
+  "typing_extensions_for_parsel": {
+    "release": "4.16.0",
+    "source_kind": "PyPI py3-none-any wheel",
+    "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+    "license": "PSF-2.0",
+    "license_evidence": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
+    "role": "frostwork runtime dependency (typing backports)"
   }
 }
