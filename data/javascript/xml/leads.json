@@ -96,12 +96,12 @@
   {
     "name": "@xml-tools/parser",
     "status": "unresolved",
-    "lead_kind": "own_parser_not_selected",
+    "lead_kind": "verified_candidate_pending_selection",
     "version_seen": "1.0.12",
     "license": "Apache-2.0",
     "npm_downloads_30d": 7478313,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@xml-tools/parser",
-    "reason": "Chevrotain-generated XML CST parser for editor tooling (parse({text})); string-only and no namespace resolution in the CST. Not run.",
+    "reason": "Pinned 1.0.12 parse(text) reads strictly decoded local bytes and returns a hierarchical raw-QName XML CST on both valid controls with zero lex/parse errors. Docker covered 351 own grammar/lexer source lines and 5,225 Chevrotain engine lines; three-repeat AFL++ parser callback hit-count feedback is stable and differs by 22 features/tuples. It does not resolve namespace URIs or decode entity references in the CST; the adapter does not repair those fields. Scoped project evidence is ready for selection review.",
     "source": "https://www.npmjs.com/package/@xml-tools/parser"
   },
   {

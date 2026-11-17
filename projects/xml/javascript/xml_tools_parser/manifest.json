@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "@xml-tools/parser",
+  "release": "1.0.12",
+  "catalog_parser": "data/javascript/xml/parsers.json",
+  "source_lock": "projects/xml/javascript/xml_tools_parser/source-lock.json",
+  "source_sha256": "cd301c11544f5f4da0272f6d3623ea39cfa68c85efe92e696d6d0be0fe629a84",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "tree": {
+      "qname": "c:catalog",
+      "attributes": [
+        {
+          "qname": "xmlns:c",
+          "raw_value": "\"urn:parsarium:catalog\""
+        },
+        {
+          "qname": "xmlns",
+          "raw_value": "\"urn:parsarium:item\""
+        },
+        {
+          "qname": "version",
+          "raw_value": "\"1\""
+        }
+      ],
+      "children": [
+        {
+          "qname": "item",
+          "attributes": [
+            {
+              "qname": "id",
+              "raw_value": "\"a1\""
+            },
+            {
+              "qname": "c:lang",
+              "raw_value": "\"es\""
+            }
+          ],
+          "children": []
+        },
+        {
+          "qname": "item",
+          "attributes": [
+            {
+              "qname": "id",
+              "raw_value": "\"b2\""
+            }
+          ],
+          "children": [
+            {
+              "qname": "name",
+              "attributes": [],
+              "children": []
+            },
+            {
+              "qname": "note",
+              "attributes": [],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    "max_depth": 3,
+    "token_count": 70,
+    "lex_errors": 0,
+    "parse_errors": 0
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "tree": {
+      "qname": "order",
+      "attributes": [
+        {
+          "qname": "xmlns",
+          "raw_value": "\"urn:parsarium:order\""
+        },
+        {
+          "qname": "xmlns:p",
+          "raw_value": "\"urn:parsarium:price\""
+        }
+      ],
+      "children": [
+        {
+          "qname": "line",
+          "attributes": [
+            {
+              "qname": "n",
+              "raw_value": "'1'"
+            },
+            {
+              "qname": "p:currency",
+              "raw_value": "\"EUR\""
+            }
+          ],
+          "children": [
+            {
+              "qname": "sku",
+              "attributes": [],
+              "children": []
+            },
+            {
+              "qname": "p:amount",
+              "attributes": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "qname": "line",
+          "attributes": [
+            {
+              "qname": "n",
+              "raw_value": "\"2\""
+            },
+            {
+              "qname": "note",
+              "raw_value": "\"say &quot;hi&quot;\""
+            }
+          ],
+          "children": [
+            {
+              "qname": "plain",
+              "attributes": [
+                {
+                  "qname": "xmlns",
+                  "raw_value": "\"\""
+                }
+              ],
+              "children": [
+                {
+                  "qname": "leaf",
+                  "attributes": [],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "max_depth": 4,
+    "token_count": 85,
+    "lex_errors": 0,
+    "parse_errors": 0
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/@xml-tools/parser/",
+    "--includes",
+    "/work/node_modules/chevrotain/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of @xml-tools/parser 1.0.12 grammar/lexer and Chevrotain 7.1.1 engine, separately; excludes adapter and Jazzer.js runtime",
+  "coverage_subject_prefix": "/work/node_modules/@xml-tools/parser/lib/",
+  "afl_coverage_subject_prefix": "/work/node_modules/@xml-tools/parser/lib/parser.js",
+  "afl_js_count_ranges": true,
+  "afl_js_count_functions": [
+    "ALT"
+  ],
+  "underlying_package": "chevrotain",
+  "underlying_release": "7.1.1",
+  "underlying_npm_integrity": "sha512-wy3mC1x4ye+O+QkEinVJkPf5u2vsrDIYW9G7ZuwFl6v/Yu0LwUuT2POsb+NUWApebyxfkQq6+yDfRExbnI5rcw==",
+  "underlying_source_sha256": "9cbea943f1aef15a1054d3e3d8f0cfb3736720ae77a926df9a83207f6bf522af",
+  "underlying_family": "Chevrotain 7.1.1 lexer/CST parser with @xml-tools/parser XML grammar",
+  "underlying_coverage_subject_prefix": "/work/node_modules/chevrotain/lib/src/"
+}
