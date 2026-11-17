@@ -210,5 +210,320 @@
         }
       ]
     }
+  },
+  {
+    "name": "soundintheory/php-sql-parser",
+    "version": "1.0",
+    "license": "BSD-2-Clause",
+    "license_evidence": "BSD 2-Clause text in the header of src/PHPSQL/Parser.php in the pinned codeload archive (file SHA-256 e8d39df1315f5185bf0f22fcc5bf9f2b3d6ad3f74bfba735f2cb4b34b51f4d6e) and composer.json license BSD-2-Clause (SHA-256 0e8e12895f3bb887151ff02562a326d53c0eb1ef3a8454517e1a60ecc2fe4781); the archive has no separate LICENSE file",
+    "input_api": "(new PHPSQL\\Parser())->parse(local SQL text) -> clause-keyed array parse tree",
+    "documentation": "https://github.com/soundintheory/php-sql-parser/blob/dcb81216a13be124d21711b8fefb6e80db7af472/README.md",
+    "source": "https://codeload.github.com/soundintheory/php-sql-parser/legacy.zip/dcb81216a13be124d21711b8fefb6e80db7af472",
+    "source_sha256": "75d3ea13ba4238d034b49eeff7b995bde4a6539e63054b95da2d31b69937cbb6",
+    "composer_reference": "dcb81216a13be124d21711b8fefb6e80db7af472",
+    "dependencies": [],
+    "dialect": "MySQL-oriented (no dialect option)",
+    "scope": "One SQL statement from local text; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. The parser treats the whole input as one statement. The 2013 code runs on PHP 8.5 with compile-time warnings, which the harness sends to stderr.",
+    "family": "PHP-SQL-Parser lineage (2013 PSR-0 fork of the Google Code php-sql-parser; shared family with greenlion/php-sql-parser)",
+    "family_note": "PHPSQL\\Parser::parse runs its own lexer (PHPSQL\\Parser\\Lexer, Splitter) and one monolithic Parser class (process_select_expr, process_from, process_insert, process_values, ...) that returns a clause-keyed array of expr_type nodes. It is a fork of Justin Swanhart's Google Code project, whose maintained continuation is greenlion/php-sql-parser. The code is not a copy of greenlion v5.0.0: no file is identical after php -w stripping, and only 662 of 1,219 normalized statements (54.3%) also occur in greenlion, which split the parser into per-clause processor classes. Shared family, separate code and package API; Packagist 1.0 is its only release (2013). INSERT targets carry table and columns without an expr_type node, so the adapter reads them from the INSERT entry.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 599598,
+      "source": "https://packagist.org/packages/soundintheory/php-sql-parser.json",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/php/sql/registry-snapshot.json",
+      "limitation": "Lifetime downloads, including installs as a dependency of other tools."
+    },
+    "project": "projects/sql/php/soundintheory_php_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "sad_spirit/pg_builder",
+    "version": "v3.3.1",
+    "license": "BSD-2-Clause",
+    "license_evidence": "LICENSE in the pinned codeload archive (SHA-256 851a059de6594af1b622f15db55fba56091f7343a13a430bf13e47ea26b65d78, BSD 2-Clause); Packagist license BSD-2-Clause",
+    "input_api": "(new sad_spirit\\pg_builder\\StatementFactory())->createFromString(local SQL text) -> Statement AST",
+    "documentation": "https://github.com/sad-spirit/pg-builder/blob/2a1ff9bf16b014f37af1fce1c4b9db53782fe7f6/README.md",
+    "source": "https://codeload.github.com/sad-spirit/pg-builder/legacy.zip/2a1ff9bf16b014f37af1fce1c4b9db53782fe7f6",
+    "source_sha256": "758ca5302ecc232e3f74bfd411ca8d784b620dc7ca5dc2899e22592d36202c09",
+    "composer_reference": "2a1ff9bf16b014f37af1fce1c4b9db53782fe7f6",
+    "dependencies": [],
+    "dialect": "PostgreSQL (the only dialect; default Lexer options)",
+    "scope": "SQL text from local bytes, cut at ';' tokens from the library's own Lexer because createFromString parses one statement without a terminator; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. v3.3.1 is the latest stable release (v3.4.0-beta is a pre-release).",
+    "family": "pg_builder hand-written PostgreSQL lexer and recursive-descent parser (typed AST)",
+    "family_note": "pg_builder is a query builder whose core is a full PostgreSQL SQL parser: StatementFactory::createFromString runs sad_spirit\\pg_builder\\Lexer and Parser (a hand-written recursive-descent port of PostgreSQL's gram.y rules) and returns typed Select/Insert/Update/Delete/Values AST nodes. It parses existing SQL text, so the builder role does not exclude it. The adapter walks the AST with a subclass of the library's BlankWalker. Independent of libpg_query and of the MySQL-oriented phpMyAdmin and PHP-SQL-Parser families.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 76924,
+      "source": "https://packagist.org/packages/sad_spirit/pg_builder.json",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/php/sql/registry-snapshot.json",
+      "limitation": "Lifetime downloads, including installs as a dependency of other tools."
+    },
+    "project": "projects/sql/php/sad_spirit_pg_builder",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "crodas/sql-parser",
+    "version": "v0.1.5",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned codeload archive (SHA-256 eceb1a17a8879328c39d3bae290bbfc485007a788aa1ef7b4a92480b059846e8, MIT); Packagist license MIT",
+    "input_api": "(new SQLParser())->parse(local SQL text) -> SQL\\Statement objects",
+    "documentation": "https://github.com/crodas/SQLParser/blob/a0241cb8755ed36b2a0d0812503ee71abfbe52ac/README.md",
+    "source": "https://codeload.github.com/crodas/SQLParser/legacy.zip/a0241cb8755ed36b2a0d0812503ee71abfbe52ac",
+    "source_sha256": "cfcf15a23ea58c8891b38d092b05833896ead8cd58b6c0f4afb5a600954c64fa",
+    "composer_reference": "a0241cb8755ed36b2a0d0812503ee71abfbe52ac",
+    "dependencies": [],
+    "dialect": "MySQL-oriented (no dialect option)",
+    "scope": "SQL text from local bytes; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. The parser returns one object per ';'-terminated statement plus a null slot after the final ';', which is not counted. v0.1.5 (2016) is the latest release and runs on PHP 8.5 with deprecations, which the harness routes to stderr.",
+    "family": "crodas SQLParser Lemon-generated LALR parser (SQL\\Statement objects)",
+    "family_note": "SQLParser::parse runs its own lexer (SQLParser\\Lexer) and a parser generated by the PHP port of LEMON (SQLParser_Parser), whose reduce actions build SQL\\Select, SQL\\Insert, ... objects with SQLParser\\Stmt\\Expr, ExprList and Join nodes. The adapter uses the public getters and walks Expr members for CALL names and VALUE literals; number literals arrive as int/float and their PHP string form equals the source text for these controls. Independent code base. Low adoption (2,490 lifetime downloads) but a positive primary metric.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 2490,
+      "source": "https://packagist.org/packages/crodas/sql-parser.json",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/php/sql/registry-snapshot.json",
+      "limitation": "Lifetime downloads, including installs as a dependency of other tools."
+    },
+    "project": "projects/sql/php/crodas_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

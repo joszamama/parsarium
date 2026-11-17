@@ -1,0 +1,27 @@
+{
+  "sqloxide": {
+    "release": "0.61.1",
+    "registry_metadata": "https://pypi.org/pypi/sqloxide/0.61.1/json",
+    "uploaded_utc": "2026-04-06T04:16:52Z",
+    "sdist": "https://files.pythonhosted.org/packages/78/b4/20b2d9c217f66ea23c12052db2c47f88e968940706758e5ab15765eb78e8/sqloxide-0.61.1.tar.gz",
+    "sdist_sha256": "2ff1d48e6b59f2870e5e37d391eed82c126db001c30cd92383ea048cc69a5576",
+    "wheel_note": "The official manylinux wheels compile the same crates with optimisation; the image source-builds the pinned sdist with rustc -C instrument-coverage instead and does not install a published wheel.",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned sdist (SHA-256 4887ed0505457d387e7f7effda202be2374379f4fecf491e54ca67f59a77640b) and pyproject license = \"MIT\"",
+    "requires_python": ">=3.9",
+    "runtime_dependencies": [],
+    "lib_rs_sha256": "e0cb53c8dbf8048278fe3161168405898f4cf269450068b32f2862ef62678a36",
+    "source_sha256": "2ff1d48e6b59f2870e5e37d391eed82c126db001c30cd92383ea048cc69a5576"
+  },
+  "sqlparser": {
+    "release": "0.61.0",
+    "release_evidence": "Cargo.lock in the pinned sdist (crates.io registry source with checksum); the build runs maturin with --locked",
+    "license": "Apache-2.0",
+    "role": "SQL tokenizer and recursive-descent parser that sqloxide.parse_sql calls"
+  },
+  "build_backend": {
+    "maturin": {"release": "1.16.0", "wheel_sha256": "e285ec9eb10243d45d10417178cb2eb76e0cbb184d0aa4378b503489fa12ee78"},
+    "rust": "rust image toolchain 1.99.1 (RUSTUP_TOOLCHAIN overrides the sdist's floating rust-toolchain file)",
+    "role": "build backend only"
+  }
+}

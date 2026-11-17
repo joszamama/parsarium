@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T20:50:37.831645+00:00",
+  "project": "sql/javascript/rawsql_ts",
+  "pass": true,
+  "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+  "base_project_receipt_sha256": "be4b7f54d55574712fde0632081bf4c6c23c5f630037e26cd5b498137f0cdcd4",
+  "overlay_receipt_sha256": "d5413d871f2f086d0d3552f725c57dc8f9a963a841446b37aedd7689781f85cc",
+  "base_image_id": "sha256:004c5aa55a4b2c8a6c7b822426c75182d9dfe03650c49bc285b4f2d1e5ceedbe",
+  "overlay_image_id": "sha256:4f6d3a9058a99e007e0708324c52563883370882e1e32fcab3fb35a8cf9411f9",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 606,
+  "second_afl_tuples": 471,
+  "afl_tuple_difference": 185,
+  "first_parser_features": 588,
+  "second_parser_features": 453,
+  "parser_feature_difference": 185,
+  "first_only_features_by_file": {
+    "models/Clause.js": 9,
+    "models/HintClause.js": 1,
+    "models/KeywordTrie.js": 2,
+    "models/SelectQuery.js": 1,
+    "models/SimpleSelectQuery.js": 2,
+    "models/ValueComponent.js": 17,
+    "parsers/FromClauseParser.js": 1,
+    "parsers/FullNameParser.js": 8,
+    "parsers/FunctionExpressionParser.js": 10,
+    "parsers/GroupByParser.js": 3,
+    "parsers/JoinClauseParser.js": 11,
+    "parsers/JoinOnClauseParser.js": 1,
+    "parsers/KeywordParser.js": 5,
+    "parsers/LiteralParser.js": 1,
+    "parsers/OrderByClauseParser.js": 2,
+    "parsers/SelectClauseParser.js": 15,
+    "parsers/SelectQueryParser.js": 14,
+    "parsers/SourceAliasExpressionParser.js": 1,
+    "parsers/SourceExpressionParser.js": 1,
+    "parsers/SourceParser.js": 1,
+    "parsers/SqlParser.js": 2,
+    "parsers/ValueParser.js": 15,
+    "parsers/WhereClauseParser.js": 1,
+    "tokenReaders/CommandTokenReader.js": 2,
+    "tokenReaders/LiteralTokenReader.js": 2,
+    "tokenReaders/OperatorTokenReader.js": 7,
+    "tokenReaders/TypeTokenReader.js": 4,
+    "utils/CommentUtils.js": 5,
+    "utils/OperatorPrecedence.js": 2,
+    "utils/charLookupTable.js": 14
+  },
+  "second_only_features_by_file": {
+    "models/Clause.js": 2,
+    "models/InsertQuery.js": 1,
+    "models/SelectQuery.js": 1,
+    "models/ValueComponent.js": 1,
+    "models/ValuesQuery.js": 1,
+    "parsers/InsertQueryParser.js": 5,
+    "parsers/KeywordParser.js": 1,
+    "parsers/LiteralParser.js": 2,
+    "parsers/SourceExpressionParser.js": 1,
+    "parsers/SourceParser.js": 1,
+    "parsers/SqlParser.js": 2,
+    "parsers/ValuesQueryParser.js": 4,
+    "tokenReaders/LiteralTokenReader.js": 3
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "go",
+  "pilot": true,
+  "package": "github.com/rqlite/sql",
+  "release": "v0.0.0-20261016220845-5c0832fea6e1",
+  "catalog_parser": "data/go/sql/parsers.json",
+  "source_lock": "projects/sql/go/github_com_rqlite_sql/source-lock.json",
+  "source_sha256": "826738822b97cb48a38f4ea98f5996cdd9b12c573bdcd2639ec7fbe51d5dffec",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/work/replay",
+    "/input/case"
+  ],
+  "dialect": "SQLite (rqlite/sql follows the SQLite SQL definition; the package has no dialect option)",
+  "parser_family": "rqlite/sql hand-written recursive-descent parser and scanner (originally by Ben Johnson; SQLite grammar)",
+  "api": "sql.NewParser(io.RuneReader over local SQL bytes).ParseStatements() -> []Statement (*SelectStatement, *InsertStatement); the harness walks each statement with sql.Walk",
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzSQL",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzSQL",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go coverpkg instrumentation of the pinned github.com/rqlite/sql package source (scanner.go, parser.go, ast.go, walk.go) during valid-control replay",
+  "coverage_subject_prefix": "github.com/rqlite/sql/",
+  "format_specific_coverage_file_suffix": "/rqlite/sql/parser.go",
+  "scope": "Local SQL text parsed by rqlite/sql ParseStatements; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other SQLite syntax is untested."
+}

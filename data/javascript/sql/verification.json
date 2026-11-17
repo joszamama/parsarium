@@ -187,8 +187,744 @@
       "parser_feature_difference": 102,
       "project_receipt": "projects/sql/javascript/pgsql_ast_parser/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/javascript/pgsql_ast_parser/differential.json"
+    },
+    {
+      "package": "sql-parser-cst",
+      "version": "0.44.1",
+      "pass": true,
+      "input_api": "parse(local UTF-8 text, {dialect: 'sqlite'}) -> Program",
+      "dialect": "SQLite (dialect: 'sqlite')",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "sql-parser-cst Peggy grammar",
+      "parser_source_files": 120,
+      "parser_source_lines_covered": 24825,
+      "afl_tuple_difference": 437,
+      "parser_feature_difference": 442,
+      "project_receipt": "projects/sql/javascript/sql_parser_cst/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/javascript/sql_parser_cst/differential.json"
+    },
+    {
+      "package": "dt-sql-parser",
+      "version": "4.6.1",
+      "pass": true,
+      "input_api": "new MySQL().parse(local UTF-8 text, errorListener) -> ProgramContext",
+      "dialect": "MySQL (MySQL class)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "dt-sql-parser ANTLR4 grammars",
+      "parser_source_files": 89,
+      "parser_source_lines_covered": 51949,
+      "afl_tuple_difference": 137,
+      "parser_feature_difference": 139,
+      "project_receipt": "projects/sql/javascript/dt_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/javascript/dt_sql_parser/differential.json"
+    },
+    {
+      "package": "sqlite-parser",
+      "version": "1.0.1",
+      "pass": true,
+      "input_api": "sqliteParser(local UTF-8 text) -> statement list",
+      "dialect": "SQLite",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "sqlite-parser PEG.js grammar",
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 24,
+      "afl_tuple_difference": 53,
+      "parser_feature_difference": 53,
+      "project_receipt": "projects/sql/javascript/sqlite_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/javascript/sqlite_parser/differential.json"
+    },
+    {
+      "package": "@appland/sql-parser",
+      "version": "1.5.1",
+      "pass": true,
+      "input_api": "sqliteParser(local UTF-8 text) -> statement list",
+      "dialect": "SQLite",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "sqlite-parser PEG.js grammar (AppLand fork)",
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 24,
+      "afl_tuple_difference": 59,
+      "parser_feature_difference": 59,
+      "project_receipt": "projects/sql/javascript/appland_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/javascript/appland_sql_parser/differential.json"
+    },
+    {
+      "package": "sqllens",
+      "version": "1.11.0",
+      "pass": true,
+      "input_api": "parse(local UTF-8 text, 'postgres') -> {ast, errors, cst}",
+      "dialect": "PostgreSQL (dialect 'postgres')",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "sqllens ANTLR4 grammars (PostgreSQL grammar forked from antlr/grammars-v4)",
+      "parser_source_files": 164,
+      "parser_source_lines_covered": 169847,
+      "afl_tuple_difference": 327,
+      "parser_feature_difference": 330,
+      "project_receipt": "projects/sql/javascript/sqllens/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/javascript/sqllens/differential.json"
+    },
+    {
+      "package": "rawsql-ts",
+      "version": "0.30.1",
+      "pass": true,
+      "input_api": "SqlParser.parseMany(local UTF-8 text) -> SimpleSelectQuery | InsertQuery []",
+      "dialect": "Library default (no dialect switch; PostgreSQL-oriented)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "rawsql-ts hand-written tokenizer and recursive-descent parser",
+      "parser_source_files": 200,
+      "parser_source_lines_covered": 11242,
+      "afl_tuple_difference": 185,
+      "parser_feature_difference": 185,
+      "project_receipt": "projects/sql/javascript/rawsql_ts/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/javascript/rawsql_ts/differential.json"
+    },
+    {
+      "package": "@questdb/sql-parser",
+      "version": "0.1.22",
+      "pass": true,
+      "input_api": "parseToAst(local UTF-8 text) -> {ast: Statement[], errors}",
+      "dialect": "QuestDB SQL",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "@questdb/sql-parser Chevrotain grammar",
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 8680,
+      "afl_tuple_difference": 79,
+      "parser_feature_difference": 79,
+      "project_receipt": "projects/sql/javascript/questdb_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/javascript/questdb_sql_parser/differential.json"
+    },
+    {
+      "package": "@saralsql/tsql-parser",
+      "version": "0.4.7",
+      "pass": true,
+      "input_api": "analyze(local UTF-8 text) -> {ast: Program, issues}",
+      "dialect": "T-SQL (SQL Server)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "@saralsql/tsql-parser hand-written T-SQL parser",
+      "parser_source_files": 15,
+      "parser_source_lines_covered": 1650,
+      "afl_tuple_difference": 84,
+      "parser_feature_difference": 84,
+      "project_receipt": "projects/sql/javascript/saralsql_tsql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/javascript/saralsql_tsql_parser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T18:54:33.385546+00:00"
+  "checked_at_utc": "2026-11-17T20:52:44.831843+00:00"
 }

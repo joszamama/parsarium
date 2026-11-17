@@ -1022,6 +1022,7 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
         native_cgo_kinds = {
             "mp3/go/github_com_tosone_minimp3": "go_cgo_minimp3_native_c_parser_edges",
             "xml/go/github_com_moovweb_gokogiri": "go_cgo_libxml2_native_xml_parser_edges",
+            "sql/go/github_com_pganalyze_pg_query_go_v6": "go_cgo_libpg_query_native_sql_parser_edges",
         }
         if (overlay.get("feedback_kind") != native_cgo_kinds.get(str(project))
                 or overlay.get("afl_entrypoint") != manifest.get("afl_entrypoint")

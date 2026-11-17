@@ -1,0 +1,70 @@
+{
+  "kind": "third_party",
+  "api": "sqliteParser(local UTF-8 text) from sqlite-parser -> statement list AST",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:08:14.683230+00:00",
+  "manifest": "projects/sql/javascript/sqlite_parser/manifest.json",
+  "image_id": "sha256:c031e5a42f7d333b45f372fbbe923de4cda7769b64d4d6f988c1fab8c802a793",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-sqlite-parser-target@1.0.1 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- sqlite-parser@1.0.1"
+  ],
+  "source_sha256": "9b0b26c552f5193b1544ff2c92b0520a5ef02f19042baa63a7cff1c005828e65",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "93dec01ec1f2040d3044e27ca2a6d69fdf49fd32d3f8dd830e5001f1e23e4f28",
+    "adapter.js": "df35c2e921122bc4d77922fbcaf3bfe3b1c44b1342f392944b44b4ba8c83f930",
+    "fuzz.js": "032ca4d2574a15a43f8fc9fc6d4cfb61050fc43dcf173bb60f529405530dd0ba",
+    "harness.js": "d48f16cd0af1b41906dcc512d76d8c55c7d516a127f3218230f7f7c03eb9c4ac",
+    "manifest.json": "1e22d2b6cb6b0594b2de55f41097594b36b818001f6a1a3577db1aca0920d6b6",
+    "package-lock.json": "d9660b3d95d958b9300a107ee6749e6496bcabcd95eb39b9df39802fd0e9ced4",
+    "package.json": "12b25999ad09d0c555a121038273d95a75af0e42221b521bb66b31cd5462b728",
+    "replay.js": "065eb97ffd29b4b6fb11d021624bacecc1baa32efe0dc099927f8e756517bca5",
+    "run-control.js": "2ba12aecdbfaf355f91af026503637ec7188314ca3e7f2339745a2404da37fb9",
+    "source-lock.json": "b16110d1a7fd20cee6c37ec3687b08aa425b6631b875906d88ed1048c2c0345f"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 4,
+  "parser_source_lines_covered": 24,
+  "format_specific_source_lines_covered": null,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/javascript/sqlite_parser/target/coverage/coverage.json",
+  "pass": true
+}

@@ -1,0 +1,65 @@
+{
+  "kind": "third_party",
+  "api": "parser.Parse(local SQL text) -> statements.Statements (AST tree.Statement: *tree.Select, *tree.Insert); the harness reads Select/Insert fields and visits expressions with tree.SimpleVisit",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:40:24.353485+00:00",
+  "manifest": "projects/sql/go/github_com_cockroachdb_cockroachdb_parser_pkg_sql_parser/manifest.json",
+  "image_id": "sha256:dab2843a20dd1795ec307f23c76d7f31db45d36475f73ee322f81cbb79b611f8",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "go1.27.1"
+  ],
+  "source_sha256": "e576898c2c400b4f543a6c4a8ebdb474bc5b042b917887b1a6e64e567073ae1f",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "9792338c481413d13ada3958d5bb7b7eb309c0b14a06e879df47ab8595646d6f",
+    "go.mod": "2349fb37a41b90c6d28abf07cccb515f062d99470fa058f7dc54066c575d7890",
+    "go.sum": "334a472f54e22757d96f51bc0cf1b65b808acf42648b5dbe716bdcada125fe85",
+    "harness.go": "8014856bb893c7e2a33e3665e5ede2246a4de77d9c75210f07ee3c6d62d2a601",
+    "harness_test.go": "21ce77da5328322deba73c3efbea3a03772e530ea8f5b64b0fb3a68554f893a6",
+    "manifest.json": "cd9bb4f6d701a91c5b4ee2183dd07e47ccff79d7d489c33706192255d34c62cc",
+    "replay/main.go": "364611fd26b7de01d7bb89ecdc98cc747db4040006f73b72268b78b19470cf0e",
+    "reporter/main.go": "3c1d8074e30920decd8a04f251db3391a3cd009a65f51208e170737d26f0cae3",
+    "source-lock.json": "9c6f3094e91649f5f12577055292f2d68da5a11e455cc06b93482e82bdbf5489"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 6,
+  "parser_source_lines_covered": 565,
+  "format_specific_source_lines_covered": 40,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/go/github_com_cockroachdb_cockroachdb_parser_pkg_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}
