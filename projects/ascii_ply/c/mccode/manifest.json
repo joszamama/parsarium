@@ -15,9 +15,11 @@
   "expected_output": {"vertices": 3, "faces": 1, "length": 1.0, "width": 1.0},
   "harness": "harness.c",
   "fuzz_entry": "one-shot file target",
+  "native_campaign_supported": false,
   "afl_entrypoint": "/work/fuzzer",
   "afl_file_input": true,
   "coverage": "LLVM source coverage of tagged McCode interoff-lib C PLY reader",
+  "coverage_limit": "McCode 3.10.2 rejects valid zero-face PLY point clouds; this path accepts polygonal meshes with at least one face. The upstream parser can exit on rejected input, so execution is one file per process.",
   "coverage_subject_prefix": "/work/generated/interoff-lib.c",
   "format_specific_coverage_file_suffix": "/interoff-lib.c",
   "underlying_family": "McCode native C OFF/PLY parser (interoff-lib)"

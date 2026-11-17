@@ -20,20 +20,21 @@ int parsarium_parse_ply(const uint8_t *bytes, size_t size,
     }
     close(fd);
 
-    off_struct mesh;
+    off_struct mesh = {0};
     long faces = off_init(path, 0, 0, 0, 1, &mesh);
     unlink(path);
-    if (faces <= 0 || mesh.vtxSize <= 0 || !mesh.vtxArray || !mesh.faceArray) {
-        return 0;
+    int parsed = mesh.vtxSize > 0 && mesh.vtxArray && mesh.polySize >= 0 &&
+                 faces == mesh.polySize && (mesh.polySize == 0 || mesh.faceArray);
+    if (parsed) {
+        result->vertices = mesh.vtxSize;
+        result->faces = mesh.polySize;
+        result->length = mesh.bbmax.x - mesh.bbmin.x;
+        result->width = mesh.bbmax.y - mesh.bbmin.y;
     }
-    result->vertices = mesh.vtxSize;
-    result->faces = mesh.polySize;
-    result->length = mesh.bbmax.x - mesh.bbmin.x;
-    result->width = mesh.bbmax.y - mesh.bbmin.y;
     free(mesh.vtxArray);
     free(mesh.normalArray);
     free(mesh.DArray);
     free(mesh.faceArray);
     free(mesh.facePropArray);
-    return 1;
+    return parsed;
 }
