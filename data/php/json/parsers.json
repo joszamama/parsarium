@@ -898,5 +898,175 @@
     },
     "project": "projects/json/php/klkvsk_json_decode_stream",
     "not_verified": "Two valid nested object/array controls were run through fromString()->items() with exact ordered type-tagged trees; fromFile() and fromStream() were cross-checked outside coverage. Selectors, objectsAsAssoc, events()/tokens() layers, concatenated documents (the harness requires one), Psr7 sources, big integers, scalar roots, byte-order marks, large streaming inputs and malformed input remain unverified."
+  },
+  {
+    "name": "eftec/services_json",
+    "version": "2.5",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://github.com/EFTEC/Services_JSON/blob/4f2892bc19a3e4967d34a20cd1d3430392ffa15c/LICENSE",
+    "documentation": "https://github.com/EFTEC/Services_JSON/blob/4f2892bc19a3e4967d34a20cd1d3430392ffa15c/README.md#decode",
+    "source": "https://github.com/EFTEC/Services_JSON/tree/4f2892bc19a3e4967d34a20cd1d3430392ffa15c",
+    "input_api": "static eftec\\ServicesJson\\Services_JSON::decode(string $str) with default flags over local bytes; returns stdClass objects, PHP lists and scalars that the harness type-tags with members in returned order",
+    "adapter": "projects/json/php/eftec_services_json/harness.php",
+    "composer_lock": "projects/json/php/eftec_services_json/composer.lock",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "type": "object",
+      "members": {
+        "name": {
+          "type": "string",
+          "value": "parsarium"
+        },
+        "version": {
+          "type": "number",
+          "value": 1
+        },
+        "ratio": {
+          "type": "number",
+          "value": -2.5
+        },
+        "enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "missing": {
+          "type": "null"
+        },
+        "tags": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string",
+              "value": "json"
+            },
+            {
+              "type": "string",
+              "value": "go"
+            },
+            {
+              "type": "string",
+              "value": "rfc8259"
+            }
+          ]
+        },
+        "nested": {
+          "type": "object",
+          "members": {
+            "level": {
+              "type": "number",
+              "value": 2
+            },
+            "items": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "number",
+                      "value": 1
+                    },
+                    "ok": {
+                      "type": "boolean",
+                      "value": false
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "number",
+                      "value": 2
+                    },
+                    "text": {
+                      "type": "string",
+                      "value": "café \"quoted\""
+                    }
+                  }
+                }
+              ]
+            },
+            "empty": {
+              "type": "object",
+              "members": {}
+            },
+            "list": {
+              "type": "array",
+              "items": []
+            }
+          }
+        }
+      }
+    },
+    "differential_control": "controls/json/nested-array.json",
+    "differential_expected_output": {
+      "type": "array",
+      "items": [
+        {
+          "type": "number",
+          "value": 1
+        },
+        {
+          "type": "number",
+          "value": 0.25
+        },
+        {
+          "type": "string",
+          "value": "two"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "type": "boolean",
+                  "value": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "members": {
+            "k": {
+              "type": "array",
+              "items": []
+            },
+            "n": {
+              "type": "object",
+              "members": {
+                "deep": {
+                  "type": "string",
+                  "value": "A"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "scope": "One complete JSON text from local bytes passed to documented static Services_JSON::decode(string) with default flags (objects as stdClass); harness type-tags the returned value with members in returned order.",
+    "family": "PEAR Services_JSON decoder (eftec port)",
+    "family_note": "Pure-PHP port of the PEAR Services_JSON encoder/decoder: decode2() trims and reduces the text, then scans arrays and objects with its own character loop and a stack of positions, recursing on each slice; strings are unescaped by its own switch (UTF-16 \\u handling) and numbers are cast with (int)/(float). The pinned source contains no json_decode call. decode() returns null for text it cannot reduce instead of raising, and its flags can accept unquoted keys or values; default flags were used. Distinct from the other selected families and from ext/json.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 35783,
+      "source": "https://packagist.org/packages/eftec/services_json",
+      "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+      "snapshot": "data/php/json/registry-snapshot.json"
+    },
+    "project": "projects/json/php/eftec_services_json",
+    "not_verified": "Two valid nested object/array controls were run through decode() with default flags and gave exact ordered type-tagged trees. GET_ARRAY, DECODE_FIX_ROOT and DECODE_NO_QUOTE modes, comments, unquoted keys, \\u surrogate pairs, big integers, scalar roots, byte-order marks, deep nesting and malformed input remain unverified; invalid text can return null, so the harness cannot distinguish a rejected input from a JSON null root."
   }
 ]
