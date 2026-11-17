@@ -1,0 +1,505 @@
+{
+  "checked_at_utc": "2026-11-17T16:58:53.978515+00:00",
+  "platform": "linux/arm64 Docker",
+  "php": "PHP 8.5 (Ubuntu php8.5-cli with php8.5-xdebug)",
+  "controls": {
+    "service_config": "controls/toml/service-config.toml",
+    "typed_scalars": "controls/toml/typed-scalars.toml"
+  },
+  "control_sha256": {
+    "service_config": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+    "typed_scalars": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0"
+  },
+  "control_meaning": "TOML 1.0.0 service configuration (root keys, nested and dotted tables, inline table, array of inline tables, array of tables, escapes, non-ASCII text, integers, float, booleans, UTC offset date-time) and typed scalars (hex/octal/binary/underscored integers, exponent floats, basic/literal/multi-line strings, offset date-time with fraction and -07:00 offset, local date-time, local date, local time, quoted and dotted keys); typed trees compared with table keys sorted",
+  "third_party": [
+    {
+      "package": "internal/toml",
+      "version": "1.1.3",
+      "scope": "Own lexer, recursive-descent parser and AST; Document AST walked into the typed tree and checked against Document::toArray() on both valid controls",
+      "command": "python3 scripts/run_project.py toml php internal_toml",
+      "receipt": "projects/toml/php/internal_toml/verification.json",
+      "project_receipt": "projects/toml/php/internal_toml/verification.json",
+      "pass": true,
+      "output": {
+        "database": {
+          "limits": {
+            "max": {
+              "type": "integer",
+              "value": "10"
+            },
+            "min": {
+              "type": "integer",
+              "value": "-2"
+            }
+          },
+          "ports": [
+            {
+              "type": "integer",
+              "value": "8000"
+            },
+            {
+              "type": "integer",
+              "value": "8001"
+            },
+            {
+              "type": "integer",
+              "value": "8002"
+            }
+          ],
+          "ratio": {
+            "type": "float",
+            "value": "3.25"
+          }
+        },
+        "enabled": {
+          "type": "bool",
+          "value": "true"
+        },
+        "owner": {
+          "name": {
+            "type": "string",
+            "value": "Zoë"
+          },
+          "since": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00Z"
+          }
+        },
+        "products": [
+          {
+            "name": {
+              "type": "string",
+              "value": "Hammer"
+            },
+            "sku": {
+              "type": "integer",
+              "value": "738594937"
+            }
+          },
+          {
+            "color": {
+              "type": "string",
+              "value": "gray"
+            },
+            "name": {
+              "type": "string",
+              "value": "Nail"
+            },
+            "points": [
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "2"
+                }
+              },
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "3"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "4"
+                }
+              }
+            ]
+          }
+        ],
+        "retries": {
+          "type": "integer",
+          "value": "3"
+        },
+        "servers": {
+          "alpha": {
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.1"
+            },
+            "tags": [
+              {
+                "type": "string",
+                "value": "edge"
+              },
+              {
+                "type": "string",
+                "value": "eu"
+              }
+            ]
+          },
+          "beta": {
+            "enabled": {
+              "type": "bool",
+              "value": "false"
+            },
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.2"
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "value": "Parsarium \"service\" control"
+        }
+      },
+      "parser_source_files": 26,
+      "parser_source_lines_covered": 547,
+      "format_specific_source_lines_covered": 209,
+      "second_valid_control": "controls/toml/typed-scalars.toml",
+      "second_valid_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "second_valid_control_pass": true,
+      "feedback_receipt": "data/php/toml/internal-toml-feedback-differential.json",
+      "error": null
+    },
+    {
+      "package": "php-collective/toml",
+      "version": "0.1.5",
+      "scope": "Own lexer, parser, AST and normalizer; tryParse() AST walked into the typed tree and checked against the normalized array on both valid controls",
+      "command": "python3 scripts/run_project.py toml php php_collective_toml",
+      "receipt": "projects/toml/php/php_collective_toml/verification.json",
+      "project_receipt": "projects/toml/php/php_collective_toml/verification.json",
+      "pass": true,
+      "output": {
+        "database": {
+          "limits": {
+            "max": {
+              "type": "integer",
+              "value": "10"
+            },
+            "min": {
+              "type": "integer",
+              "value": "-2"
+            }
+          },
+          "ports": [
+            {
+              "type": "integer",
+              "value": "8000"
+            },
+            {
+              "type": "integer",
+              "value": "8001"
+            },
+            {
+              "type": "integer",
+              "value": "8002"
+            }
+          ],
+          "ratio": {
+            "type": "float",
+            "value": "3.25"
+          }
+        },
+        "enabled": {
+          "type": "bool",
+          "value": "true"
+        },
+        "owner": {
+          "name": {
+            "type": "string",
+            "value": "Zoë"
+          },
+          "since": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00Z"
+          }
+        },
+        "products": [
+          {
+            "name": {
+              "type": "string",
+              "value": "Hammer"
+            },
+            "sku": {
+              "type": "integer",
+              "value": "738594937"
+            }
+          },
+          {
+            "color": {
+              "type": "string",
+              "value": "gray"
+            },
+            "name": {
+              "type": "string",
+              "value": "Nail"
+            },
+            "points": [
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "2"
+                }
+              },
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "3"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "4"
+                }
+              }
+            ]
+          }
+        ],
+        "retries": {
+          "type": "integer",
+          "value": "3"
+        },
+        "servers": {
+          "alpha": {
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.1"
+            },
+            "tags": [
+              {
+                "type": "string",
+                "value": "edge"
+              },
+              {
+                "type": "string",
+                "value": "eu"
+              }
+            ]
+          },
+          "beta": {
+            "enabled": {
+              "type": "bool",
+              "value": "false"
+            },
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.2"
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "value": "Parsarium \"service\" control"
+        }
+      },
+      "parser_source_files": 28,
+      "parser_source_lines_covered": 825,
+      "format_specific_source_lines_covered": 170,
+      "second_valid_control": "controls/toml/typed-scalars.toml",
+      "second_valid_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "second_valid_control_pass": true,
+      "feedback_receipt": "data/php/toml/php-collective-toml-feedback-differential.json",
+      "error": null
+    }
+  ],
+  "standard": []
+}
