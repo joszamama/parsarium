@@ -23,11 +23,15 @@
       "metric_value": 28,
       "metric": "deps.dev directDependentCount summed over all releases",
       "family": "ktoml (Kotlin multiplatform)",
-      "api_lead": "Toml.parseToTomlTree / TomlParser",
+      "api_lead": "TomlParser(TomlInputConfig()).parseString(String) -> TomlFile node tree (ktoml-core-jvm; Kotlin value class)",
       "note": "Kotlin; JVM artifact ktoml-core-jvm.",
       "source": "https://github.com/orchestr7/ktoml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_partially_checked",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.7.1",
+      "version_seen": "0.7.1",
+      "evidence": "ktoml-core-jvm 0.7.1 with kotlin-stdlib 2.2.0, kotlinx-serialization-core-jvm 1.9.0 and kotlinx-datetime-jvm 0.7.1 parses both controls into its node tree: TomlKeyValuePrimitive values are TomlLong (hex/octal/binary/underscored decoded), TomlDouble (1e3 -> 1000.0), TomlBasicString/TomlLiteralString (escapes and the line-ending backslash decoded), TomlBoolean and TomlDateTime whose content is kotlin.time.Instant (offset), kotlinx.datetime.LocalDateTime, LocalDate or LocalTime, so the four kinds stay distinct; tables, dotted keys and arrays of tables appear as TomlTable/TomlArrayOfTablesElement nodes. No typed-tree harness was built: the parser entry point is a Kotlin inline value class (TomlParser.parseString compiles to the static parseString-impl), which plain Java can reach only by reflection, and the node tree needs a Kotlin-aware walker; not done in this round.",
+      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-17"
     },
     {
       "name": "io.hotmoka:toml4j",
@@ -37,19 +41,28 @@
       "api_lead": "new Toml().read(...)",
       "note": "Republished fork of toml4j.",
       "source": "https://github.com/Hotmoka/toml4j",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.7.3",
+      "version_seen": "0.7.3",
+      "jar_sha256": "2ee2d32cc685fc8f987cc0595059d187e332ca41e1ae8a515fead036fb777bc1",
+      "evidence": "Republished toml4j (same com.moandjiezana.toml package, 43 classes). new Toml().read(File) reads service-config but rejects typed-scalars with 'Invalid text after key hex on line 6. Make sure to terminate the value or add a comment (#).', the same TOML 0.4 failure as com.moandjiezana.toml:toml4j 0.7.2.",
+      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-17"
     },
     {
       "name": "net.peanuuutz.tomlkt:tomlkt",
       "metric_value": 5,
       "metric": "deps.dev directDependentCount summed over all releases",
       "family": "tomlkt (Kotlin serialization)",
-      "api_lead": "Toml.parseToTomlTable(String)",
+      "api_lead": "Toml.Default.parseToTomlTable(String) -> TomlTable of TomlLiteral(content, TomlLiteral.Type)",
       "note": "Kotlin.",
       "source": "https://github.com/Peanuuutz/tomlkt",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.5.0",
+      "version_seen": "0.5.0",
+      "evidence": "tomlkt-jvm 0.5.0: Toml.Default.parseToTomlTable gives every literal a TomlLiteral.Type and the documented converters (toLong, toDouble, toOffsetDateTime, toLocalDateTime, toLocalDate, toLocalTime) return correct values for service-config, but typed-scalars `exponent = 1e3` comes back as TomlLiteral(content \"1000\", Type.Integer): the float is typed as integer 1000 (expected float \"1000.0\"). Every other typed-scalars value matches.",
+      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-17"
     },
     {
       "name": "cc.ekblad:4koma",
@@ -57,13 +70,20 @@
       "metric": "deps.dev directDependentCount summed over all releases",
       "family": "4koma (Kotlin)",
       "api_lead": "TomlValue.from(String)",
-      "note": "deps.dev returned 404.",
+      "note": "Not on Maven Central (mvn could not resolve cc.ekblad:4koma; the project publishes through JitPack), so deps.dev has no record and there is no primary metric; not run.",
       "source": "https://github.com/valderman/4koma",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
     }
   ],
-  "excluded": [],
+  "excluded": [
+    {
+      "name": "org.apache.tuweni:toml",
+      "metric_value": null,
+      "status": "excluded",
+      "reason": "Apache Tuweni toml 1.3.0 is the retired predecessor of the selected tomlj (tomlj originated as Tuweni toml); not counted as a separate path."
+    }
+  ],
   "promoted": [
     {
       "name": "com.fasterxml.jackson.dataformat:jackson-dataformat-toml",
