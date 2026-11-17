@@ -387,6 +387,88 @@
         "repeats_per_control": 5
       },
       "package_line_note": "PHP Xdebug package lines are separate from native libxml2 AFL tuples."
+    },
+    {
+      "package": "saloonphp/xml-wrangler",
+      "version": "v1.5.0",
+      "parser_family": "libxml2 via PHP ext/xmlreader (veewee/xml Reader) and ext/dom DOMDocument::loadXML (veewee/xml xml_decode); shared with the standard libxml2 APIs, sabre/xml and symfony/dom-crawler",
+      "command": "python3 scripts/run_project.py xml php saloon_xml_wrangler",
+      "receipt": "projects/xml/php/saloon_xml_wrangler/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "c:catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "leaf_text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": [
+          "c:catalog xmlns=urn:parsarium:item",
+          "c:catalog xmlns:c=urn:parsarium:catalog"
+        ],
+        "root": "c:catalog"
+      },
+      "parser_source_lines_covered": 56,
+      "format_specific_source_lines_covered": 33,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "leaf_text": [
+          "A-7",
+          "12.50 €",
+          ""
+        ],
+        "max_depth": 4,
+        "namespace_declarations": [
+          "order xmlns=urn:parsarium:order",
+          "order xmlns:p=urn:parsarium:price"
+        ],
+        "root": "order"
+      },
+      "differential_matches_projected_expat_oracle": true,
+      "projection_limit": [
+        "Raw-name scope: element and attribute names are raw qualified names (prefix:local). The package exposes no namespace URI per element; declarations appear only as xmlns/xmlns:* attributes on the declaring element. The summary does not infer URIs.",
+        "veewee/xml's namespaces() builder drops declarations whose URI is empty, so <plain xmlns=\"\"> in order-default-ns.xml carries no attribute and is indistinguishable from an element in the inherited default namespace. Recorded as package behavior, not repaired; the oracle scope excludes undeclarations.",
+        "The package does not keep the source order of namespace declarations; the summary sorts them per element by attribute name."
+      ],
+      "afl_feedback": {
+        "report": "data/php/xml/afl-feedback.json",
+        "overlay_receipt": "fuzzing/afl-native/xml/php/saloon_xml_wrangler/verification.json",
+        "overlay_receipt_sha256": "d8a856edd48ebc89c8c7317241972e079410a251ac4bf914a8ace464ccfffdc5",
+        "feedback_kind": "native_libxml2_php_xmlreader_dom_parser_source_edges",
+        "control_afl_tuples": 1889,
+        "differential_afl_tuples": 2053,
+        "afl_tuple_difference": 414,
+        "repeats_per_control": 5
+      },
+      "package_line_note": "Saloon and veewee package Xdebug lines are distinct from native libxml2 parser feedback."
     }
   ],
   "standard": [

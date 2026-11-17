@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T14:10:30.456299+00:00",
-  "projects_total": 9,
-  "projects_passed": 9,
+  "checked_at_utc": "2026-11-17T14:23:58.022204+00:00",
+  "projects_total": 10,
+  "projects_passed": 10,
   "differential_kind": "fixed_valid_default_namespace_order",
   "results": [
     {
@@ -166,6 +166,24 @@
       "control_only_edges": 119,
       "differential_only_edges": 241,
       "afl_tuple_difference": 360
+    },
+    {
+      "project": "xml/php/saloon_xml_wrangler",
+      "pass": true,
+      "feedback_kind": "native_libxml2_php_xmlreader_dom_parser_source_edges",
+      "overlay_receipt_sha256": "d8a856edd48ebc89c8c7317241972e079410a251ac4bf914a8ace464ccfffdc5",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "control_afl_tuples": 1889,
+      "differential_afl_tuples": 2053,
+      "stable_shared_edges": 1764,
+      "control_only_edges": 125,
+      "differential_only_edges": 289,
+      "afl_tuple_difference": 414
     }
   ]
 }

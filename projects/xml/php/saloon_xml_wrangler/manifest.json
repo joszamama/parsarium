@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "php",
+  "package": "saloonphp/xml-wrangler",
+  "release": "v1.5.0",
+  "catalog_parser": "data/php/xml/parsers.json",
+  "source_lock": "projects/xml/php/saloon_xml_wrangler/source-lock.json",
+  "source_sha256": "7951d70994f5df00b173d4ee851be0b47ed6ac05f72594e005b7261f3a3abb38",
+  "underlying_package": "veewee/xml",
+  "underlying_release": "3.8.0",
+  "underlying_package_source_sha256": "37d8933c93b7f1f2ee277cf2619326282c329e914d99c2bace7d346a11f6339f",
+  "underlying_release_native": "libxml2 2.15.4 and PHP 8.5.12 ext/xmlreader + ext/dom (AFL++ overlay, source build); Ubuntu PHP 8.5.4 with libxml 2.15.2 via php8.5-xml (Xdebug coverage image)",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "native_campaign_supported": false,
+  "coverage_limit": "Xdebug line coverage is reported for two PHP groups: saloonphp/xml-wrangler src (package) and veewee/xml src (underlying delegate that drives XMLReader and decodes each matched subtree through DOMDocument). It is recorded for the fromString()->elements() call only; the fromFile/fromStream cross-check runs after coverage stops. AFL++ feedback comes from the native overlay: libxml2 2.15.4 parser.c, parserInternals.c, SAX2.c and xmlreader.c plus PHP 8.5.12 ext/xmlreader/php_xmlreader.c and ext/dom/document.c, instrumented through an allowlist while the same harness runs. libxml2 tree, save, XPath and dict code, ext/libxml, the other ext/dom classes, the Zend engine and the interpreted package PHP code add no AFL++ tuples. libxml2 parses each input twice on this path: once through XMLReader over the original bytes and once through DOMDocument::loadXML over the readOuterXml() serialization of the root element. The pinned base image does not bundle php-fuzzer; replay is per case.",
+  "fuzz_smoke_entrypoint": "php",
+  "fuzz_smoke_args": [
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "p:currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "order",
+      "line",
+      "sku",
+      "p:amount",
+      "line",
+      "plain",
+      "leaf"
+    ],
+    "leaf_text": [
+      "A-7",
+      "12.50 €",
+      ""
+    ],
+    "max_depth": 4,
+    "namespace_declarations": [
+      "order xmlns=urn:parsarium:order",
+      "order xmlns:p=urn:parsarium:price"
+    ],
+    "root": "order"
+  },
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "leaf_text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": [
+      "c:catalog xmlns=urn:parsarium:item",
+      "c:catalog xmlns:c=urn:parsarium:catalog"
+    ],
+    "root": "c:catalog"
+  },
+  "oracle": "projects/xml/php/saloon_xml_wrangler/oracle.py",
+  "harness": "harness.php",
+  "coverage": "Xdebug executed line coverage in saloonphp/xml-wrangler v1.5.0 and veewee/xml 3.8.0 PHP source during XmlReader::fromString()->elements() on a valid control; AFL++ feedback comes from the allowlisted libxml2 XML parser/reader and PHP ext/xmlreader and ext/dom loading sources in the native overlay",
+  "coverage_subject_prefix": "/work/vendor/saloonphp/xml-wrangler/",
+  "format_specific_coverage_file_suffix": "src/XmlReader.php",
+  "underlying_coverage_subject_prefix": "/work/vendor/veewee/xml/",
+  "underlying_format_specific_coverage_file_suffix": "src/Xml/Encoding/Internal/Decoder/Builder/element.php"
+}

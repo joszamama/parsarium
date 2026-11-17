@@ -1,0 +1,108 @@
+{
+  "project": "xml/php/saloon_xml_wrangler",
+  "pass": true,
+  "feedback_kind": "native_libxml2_php_xmlreader_dom_parser_source_edges",
+  "overlay_receipt_sha256": "d8a856edd48ebc89c8c7317241972e079410a251ac4bf914a8ace464ccfffdc5",
+  "base_image_id": "sha256:57697055635664274354833e3d91f59247c6bbcf5a54dd9b96470ed6988735ac",
+  "overlay_image_id": "sha256:98acd4dfbfd396f42b28122d1abdf36acaa406179dac00c4749f249b010f1fc2",
+  "release_source_sha256": "7951d70994f5df00b173d4ee851be0b47ed6ac05f72594e005b7261f3a3abb38",
+  "underlying_package_source_sha256": "37d8933c93b7f1f2ee277cf2619326282c329e914d99c2bace7d346a11f6339f",
+  "parser_source_prefix": "/work/vendor/saloonphp/xml-wrangler/",
+  "underlying_source_prefix": "/work/vendor/veewee/xml/",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential": "controls/xml/order-default-ns.xml",
+  "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "oracle": "projects/xml/php/saloon_xml_wrangler/oracle.py",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "file_and_stream_api_match": true,
+  "control_source_lines_by_file": {
+    "src/Data/Element.php": 8,
+    "src/Traits/HasAttributes.php": 11,
+    "src/Traits/HasContent.php": 4,
+    "src/XmlReader.php": 33
+  },
+  "differential_source_lines_by_file": {
+    "src/Data/Element.php": 8,
+    "src/Traits/HasAttributes.php": 11,
+    "src/Traits/HasContent.php": 4,
+    "src/XmlReader.php": 32
+  },
+  "package_line_count_difference_by_file": {
+    "src/XmlReader.php": 1
+  },
+  "control_underlying_source_lines": 298,
+  "differential_underlying_source_lines": 299,
+  "control_underlying_lines_by_file": {
+    "src/Xml/Dom/Assert/assert_dom_node_list.php": 1,
+    "src/Xml/Dom/Collection/NodeList.php": 13,
+    "src/Xml/Dom/Configurator/loader.php": 4,
+    "src/Xml/Dom/Document.php": 12,
+    "src/Xml/Dom/Loader/load.php": 7,
+    "src/Xml/Dom/Loader/xml_string_loader.php": 3,
+    "src/Xml/Dom/Locator/Attribute/xmlns_attributes_list.php": 3,
+    "src/Xml/Dom/Locator/Element/children.php": 5,
+    "src/Xml/Dom/Locator/Node/detect_document.php": 3,
+    "src/Xml/Dom/Locator/Xmlns/linked_namespaces.php": 2,
+    "src/Xml/Dom/Locator/document_element.php": 1,
+    "src/Xml/Dom/Predicate/is_document.php": 1,
+    "src/Xml/Dom/Predicate/is_element.php": 1,
+    "src/Xml/Dom/Xpath.php": 11,
+    "src/Xml/Dom/Xpath/Locator/query.php": 9,
+    "src/Xml/Encoding/Internal/Decoder/Builder/attribute.php": 1,
+    "src/Xml/Encoding/Internal/Decoder/Builder/attributes.php": 6,
+    "src/Xml/Encoding/Internal/Decoder/Builder/element.php": 13,
+    "src/Xml/Encoding/Internal/Decoder/Builder/group_child_elements.php": 9,
+    "src/Xml/Encoding/Internal/Decoder/Builder/grouped_children.php": 11,
+    "src/Xml/Encoding/Internal/Decoder/Builder/name.php": 1,
+    "src/Xml/Encoding/Internal/Decoder/Builder/namespaces.php": 7,
+    "src/Xml/Encoding/Internal/Decoder/Builder/unwrap_element.php": 1,
+    "src/Xml/Encoding/Internal/wrap_exception.php": 1,
+    "src/Xml/Encoding/xml_decode.php": 6,
+    "src/Xml/ErrorHandling/Issue/IssueCollection.php": 5,
+    "src/Xml/ErrorHandling/detect_issues.php": 7,
+    "src/Xml/ErrorHandling/disallow_issues.php": 8,
+    "src/Xml/ErrorHandling/disallow_libxml_false_returns.php": 2,
+    "src/Xml/ErrorHandling/issue_collection_from_xml_errors.php": 5,
+    "src/Xml/ErrorHandling/stop_on_first_issue.php": 17,
+    "src/Xml/Internal/configure.php": 5,
+    "src/Xml/Reader/Loader/xml_string_loader.php": 8,
+    "src/Xml/Reader/Matcher/document_element.php": 3,
+    "src/Xml/Reader/MatchingNode.php": 5,
+    "src/Xml/Reader/Node/AttributeNode.php": 13,
+    "src/Xml/Reader/Node/ElementNode.php": 15,
+    "src/Xml/Reader/Node/NodeSequence.php": 16,
+    "src/Xml/Reader/Node/Pointer.php": 18,
+    "src/Xml/Reader/Reader.php": 37,
+    "src/Xml/Reader/Signal.php": 2
+  },
+  "raw_package_view_differential": {
+    "values": {
+      "order": {
+        "line": [
+          {
+            "sku": "A-7",
+            "p:amount": "12.50 €"
+          },
+          {
+            "plain": {
+              "leaf": ""
+            }
+          }
+        ]
+      }
+    },
+    "plain_attributes": []
+  },
+  "raw_namespace_note": "values() keys are raw qualified names; <plain xmlns=\"\"> keeps no attribute, because veewee/xml drops declarations with an empty URI. Not repaired by the harness.",
+  "repeats_per_control": 3,
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_afl_tuples": 1889,
+  "differential_afl_tuples": 2053,
+  "afl_tuple_difference": 414,
+  "reader_pass_tuple_difference": 368,
+  "post_elements_edges": 0,
+  "shared_family": "libxml2 via PHP XMLReader and DOMDocument, shared with the standard XMLReader and DOMDocument paths, sabre/xml and symfony/dom-crawler"
+}

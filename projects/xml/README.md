@@ -41,6 +41,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [XMLReader::XML(string $source, ?string $encoding = null, int $flags = 0); XMLReader::read() / PHP](php/stdlib_xmlreader/README.md)
 - [mtownsend/xml-to-array / PHP](php/mtownsend_xml_to_array/README.md)
 - [sabre/xml / PHP](php/sabre_xml/README.md)
+- [saloonphp/xml-wrangler / PHP](php/saloon_xml_wrangler/README.md)
 - [simplexml_load_string(string $data, ?string $class_name = SimpleXMLElement::class, int $options = 0, string $namespace_or_prefix = "", bool $is_prefix = false) / PHP](php/stdlib_simplexml/README.md)
 - [symfony/dom-crawler / PHP](php/symfony_dom_crawler/README.md)
 - [symfony/serializer / PHP](php/symfony_serializer/README.md)
