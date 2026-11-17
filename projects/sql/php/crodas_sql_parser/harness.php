@@ -3,6 +3,9 @@ declare(strict_types=1);
 // The 2016 package emits PHP 8.5 deprecations (case-semicolon syntax, ArrayAccess return types,
 // dynamic properties); they go to stderr so stdout stays the JSON summary.
 ini_set('display_errors', 'stderr');
+// php-fuzzer's error handler throws on every error that error_reporting() allows, and the autoloader
+// compiles the deprecated package files lazily inside the fuzz target, so deprecations are not reported.
+error_reporting(E_ALL & ~E_DEPRECATED);
 require __DIR__ . '/vendor/autoload.php';
 
 use SQLParser\Stmt\{Expr, ExprList, Join};
