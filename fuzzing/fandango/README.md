@@ -9,6 +9,8 @@ python3 parsarium.py fandango generate ascii_ply c assetkit runs/ply-fandango --
 
 The generator selects the bundled spec automatically, saves its hash and generated files, and can prepare the same corpus for AFL++ with `--prepare-afl`. [The MP4 and PDF grammar details](specs/README.md) describe their scope.
 
+`parsarium.py report` can summarize the replayed inputs and outcomes. A replay does not measure source coverage; line views come from the parser's separate valid-control coverage directory after `parsarium.py build`.
+
 | Spec | Cell | Scope |
 | --- | --- | --- |
 | [`mp4.fan`](specs/mp4.fan) | `mp4` | ISO BMFF `ftyp` and a sample-free `moov`/video track with constrained box sizes; see [details](specs/README.md) |

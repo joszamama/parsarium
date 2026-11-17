@@ -74,7 +74,7 @@ python3 parsarium.py fandango generate mp4 cpp exiv2 runs/exiv2-fandango \
 
 The run directory must be new or empty, and inside this repository it must be under `runs/` or `generated/`, which Git ignores. It contains `generated/`, a copy or snapshot of the spec, and `fandango.json`. The receipt records the Fandango executable path, SHA-256, and version; the exact command and environment; the seed (`--random-seed`, also used as `PYTHONHASHSEED`); the spec hash; and each output's SHA-256 and size. `--fanbase-registry DIR` pins a local Fanbase checkout and checks the installed spec against its `index.yml`. Without it, the registry revision is not recorded; only the installed spec snapshot is. If Fandango fails, writes no files, or writes empty, oversized, or linked files, the command stops before replay or AFL++ preparation.
 
-The [fuzzing guide](fuzzing/README.md) describes feedback, run artifacts, and result interpretation.
+The [fuzzing guide](fuzzing/README.md) describes feedback, run artifacts, and result interpretation. Replay reports show per-input outcomes; source-line views come from a separate pinned valid-control build, not from the generated corpus.
 
 ## Evidence and layout
 
