@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T03:32:58.834312+00:00",
+  "checked_at_utc": "2026-11-17T03:52:38.891677+00:00",
   "platform": "linux/arm64 Docker",
   "toolchain": [
     "Ubuntu clang version 21.1.8 (6ubuntu1)",
@@ -13,7 +13,7 @@
     "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
     "nested_array_differential": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
   },
-  "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array; run-control also requires the printed json_t tree to equal the control's exact nested structure, key order, and integer/real types",
+  "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array; run-control also requires the tree printed from each parser's values (jansson json_t, json-c json_object) to equal the control's exact nested structure, key order, and integer/real types",
   "third_party": [
     {
       "package": "jansson",
@@ -55,6 +55,48 @@
       },
       "exact_nested_structure_match": true,
       "parser_source_lines_covered": 830,
+      "error": null
+    },
+    {
+      "package": "json-c",
+      "version": "0.19",
+      "scope": "RFC 8259 JSON text (object or array root, JSON_TOKENER_STRICT, trailing JSON whitespace only) decoded into a json_object tree",
+      "command": "python3 scripts/run_project.py json c json-c",
+      "receipt": "projects/json/c/json-c/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "exact_nested_structure_match": true,
+      "parser_source_lines_covered": 1092,
       "error": null
     }
   ],

@@ -1,10 +1,10 @@
 {
   "ecosystem": "c",
   "format": "json",
-  "status": "pilot_one_selected_search_bounded",
+  "status": "pilot_two_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 1,
+  "verified_third_party_count": 2,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "json",
@@ -15,13 +15,14 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 27,
   "unique_search_hits": 27,
-  "unresolved_documentation_leads": 5,
-  "uncertainty": "Pilot cell: one third-party path (jansson 2.15.1, 282,984 Debian popcon sourcemax installations, captured 2026-11-17) was built, control-verified against the exact nested structure of the control, and given native AFL++ feedback with a stable valid-control differential. Search was the Conan Center recipe-name substring 'json' (24 hits, 3 of them C JSON parsers) plus three targeted C names (jansson, jsmn, parson); adoption was compared with Debian popcon sourcemax counts. json-c (269,736) is within 5% of jansson and was not built; cJSON (150,958) and yyjson (14,868) were not built. Popcon counts Debian installations of the library packages, mostly pulled in as dependencies, not developer choice; parson has no Debian package and no comparable number. Conan and Debian do not cover vendored single-file copies (common for cJSON). ISO C documents no JSON API. Two valid controls do not establish complete RFC 8259 support.",
+  "unresolved_documentation_leads": 4,
+  "uncertainty": "Pilot cell: two third-party paths, jansson 2.15.1 (282,984 Debian popcon sourcemax installations) and json-c 0.19 (269,736), both captured 2026-11-17, were built, control-verified against the exact nested structure of the control, and given native AFL++ feedback with a stable valid-control differential. They are separate parser families: jansson's recursive-descent src/load.c and json-c's incremental state-machine json_tokener.c. Search was the Conan Center recipe-name substring 'json' (24 hits, 3 of them C JSON parsers) plus three targeted C names (jansson, jsmn, parson); adoption was compared with Debian popcon sourcemax counts. cJSON (150,958) and yyjson (14,868) were not built. Popcon counts Debian installations of the library packages, mostly pulled in as dependencies, not developer choice; the jansson/json-c gap (13,248, under 5%) is too small to read as a preference. parson has no Debian package and no comparable number. Conan and Debian do not cover vendored single-file copies (common for cJSON). ISO C documents no JSON API. Two valid controls do not establish complete RFC 8259 support.",
   "third_party_evidence": "data/c/json/parsers.json",
   "third_party_control_results": "data/c/json/verification.json",
   "runtime_evidence": "data/c/json/standard.json",
   "registry_snapshot": "data/c/json/registry-snapshot.json",
   "unresolved_leads": "data/c/json/leads.json",
   "source_lock": "projects/json/c/jansson/source-lock.json",
+  "extra_source_lock": "projects/json/c/json-c/source-lock.json",
   "afl_feedback": "data/c/json/afl-feedback.json"
 }

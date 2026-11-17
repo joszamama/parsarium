@@ -51,5 +51,58 @@
       ]
     },
     "project": "projects/json/c/jansson"
+  },
+  {
+    "name": "json-c",
+    "version": "0.19",
+    "license": "MIT",
+    "input_api": "json_tokener_parse_ex(struct json_tokener *tok, const char *str, int len)",
+    "documentation": "https://json-c.github.io/json-c/json-c-0.19/doc/html/json__tokener_8h.html",
+    "documentation_note": "The pinned tarball's json_tokener.h documents json_tokener_parse_ex (line 323), the end-of-input rule that len includes the final '\\0', trailing-byte detection via json_tokener_get_parse_end, and JSON_TOKENER_STRICT (line 159); linkhash.h documents json_global_set_string_hash (line 65).",
+    "source": "https://github.com/json-c/json-c/releases/tag/json-c-0.19-20260627",
+    "scope": "RFC 8259 JSON text (object or array root, JSON_TOKENER_STRICT, trailing JSON whitespace only) decoded into a json_object tree",
+    "family": "json-c incremental state-machine tokener (json_tokener.c)",
+    "family_note": "Own resumable character-by-character state machine in json_tokener.c building json_object values with linkhash.c tables and printbuf.c buffers; numbers via json-c's own integer parsing and strtod. Shares no code with jansson's recursive-descent src/load.c. The harness selects JSON_C_STR_HASH_PERLLIKE so object hashing has no random seed.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package json-c",
+      "value": 269736,
+      "rank": 165,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/c/json-c"
   }
 ]

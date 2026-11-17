@@ -1,7 +1,7 @@
 """Check the C JSON AFL++ overlay: both valid controls replay to their pinned outputs and
 exact nested structure, repeated probes match, and the second control changes feedback.
 
-Parser features are covered LLVM region entries inside the pinned jansson source tree
+Parser features are covered LLVM region entries inside each pinned parser source tree
 (the harness is excluded). AFL++ tuples come from afl-showmap on the overlay fuzzer.
 """
 
@@ -17,7 +17,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-SLUG = "jansson"
+SLUGS = ("jansson", "json-c")
 REPORT = ROOT / "data/c/json/afl-feedback.json"
 REPEATS = 2
 
@@ -80,15 +80,15 @@ def tuples(manifest: dict, image: str, case: Path, work: Path, name: str, map_si
     return {line.split(":", 1)[0] for line in (work / f"{name}.map").read_text().splitlines() if line}
 
 
-def main() -> None:
-    project, manifest = project_for("json", "c", SLUG)
-    relative = Path("json/c") / SLUG
+def check(slug: str) -> dict:
+    project, manifest = project_for("json", "c", slug)
+    relative = Path("json/c") / slug
     overlay = ROOT / "fuzzing/afl-native" / relative
     receipt = json.loads((overlay / "verification.json").read_text())
     base = json.loads((project / "verification.json").read_text())
     if receipt["base_project_receipt_sha256"] != sha256((project / "verification.json").read_bytes()).hexdigest():
         raise ValueError("overlay was built against a different project receipt")
-    base_image = run(["docker", "image", "inspect", f"parsarium/json-c-{SLUG}:local",
+    base_image = run(["docker", "image", "inspect", f"parsarium/json-c-{slug}:local",
                       "--format", "{{.Id}}"]).strip()
     if base_image != base["image_id"]:
         raise ValueError("local project image differs from its receipt")
@@ -136,17 +136,22 @@ def main() -> None:
               "parser_feature_difference": feature_difference, "afl_tuple_difference": tuple_difference,
               "control_only_features_by_file": by_file(first[0] - other[0]),
               "differential_only_features_by_file": by_file(other[0] - first[0])}
+    print(f"{relative}: stable repeats; {feature_difference} parser features, "
+          f"{tuple_difference} AFL++ tuples differ", flush=True)
+    return result
+
+
+def main() -> None:
+    results = [check(slug) for slug in SLUGS]
     REPORT.write_text(json.dumps({
         "schema_version": 1,
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
-        "projects_total": 1, "projects_passed": 1,
+        "projects_total": len(results), "projects_passed": len(results),
         "differential_kind": "fixed_valid_nested_array",
-        "parser_feature_scope": "covered LLVM region entries under the pinned jansson source prefix; harness excluded",
-        "afl_feedback_scope": "afl-clang-fast edges over jansson src/*.c and the harness; the AFL++ map is not split by file",
+        "parser_feature_scope": "covered LLVM region entries under each pinned parser source prefix; harness excluded",
+        "afl_feedback_scope": "afl-clang-fast edges over the compiled parser sources and the harness; the AFL++ map is not split by file",
         "standard_feedback": "none: the ISO C standard library documents no JSON API",
-        "results": [result]}, indent=2, ensure_ascii=False) + "\n")
-    print(f"{relative}: stable repeats; {feature_difference} parser features, "
-          f"{tuple_difference} AFL++ tuples differ", flush=True)
+        "results": results}, indent=2, ensure_ascii=False) + "\n")
 
 
 if __name__ == "__main__":
