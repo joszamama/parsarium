@@ -16,6 +16,35 @@
       "name": "PyPI Stats last_month downloads excluding known mirrors",
       "value": 10748990,
       "source": "data/python/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/python/mutagen/verification.json"
+  },
+  {
+    "name": "tinytag",
+    "version": "2.3.2",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/tinytag/2.3.2/json",
+    "input_api": "tinytag.TinyTag.get(file_obj=io.BytesIO(local bytes)) -> _MPEG reader",
+    "documentation": "https://github.com/tinytag/tinytag/blob/2.3.2/README.md#file-like-objects",
+    "source": "https://files.pythonhosted.org/packages/6b/54/d378858d14e5c5c7b921cb9ffccf27be3d34f3d6d010c57404ddd634685d/tinytag-2.3.2-py3-none-any.whl",
+    "source_lock": "projects/mp3/python/tinytag/source-lock.json",
+    "scope": "Untagged MPEG Layer III frame headers walked by TinyTag's own _MPEG class: sample rate, channels, mean bitrate of the first five frames, and duration estimated from stream size and mean frame length when no Xing/Info/VBRI header is present. No MPEG version, layer or frame count is exposed. No audio decoding.",
+    "family": "TinyTag MPEG frame-header reader",
+    "family_note": "Independent pure-Python code in tinytag/tinytag.py; it does not use Mutagen. Its _ID3 class handles tagged files and hands the audio to the same _MPEG class; this entry requires the untagged _MPEG path and zero _ID3 lines.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {"sample_rate": 44100, "channels": 1, "bitrate_kbps": 64.0, "duration_us": 287347},
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {"sample_rate": 22050, "channels": 2, "bitrate_kbps": 32.0, "duration_us": 313469},
+    "independent_expectation": "controls/mp3/check_controls.py header walk: 11 frames x 1152 samples at 44.1 kHz mono, 64 kbit/s; 12 frames x 576 samples at 22.05 kHz stereo, 32 kbit/s. duration_us = round(frames x samples_per_frame / sample_rate x 10^6).",
+    "project": "projects/mp3/python/tinytag/verification.json",
+    "afl_feedback": "data/python/mp3/tinytag-valid-feedback.json",
+    "metric": {
+      "name": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 4453166,
+      "source": "data/python/mp3/registry-snapshot.json",
+      "observed_at_utc": "2026-11-17T03:40:50Z",
+      "rechecked_at_utc": "2026-11-17T09:04:45Z",
+      "recheck_source": "https://pypistats.org/api/packages/tinytag/recent?period=month"
     }
   }
 ]
