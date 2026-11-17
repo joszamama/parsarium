@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "project": "dns/rust/dns_parser",
+  "pass": true,
+  "base_project_receipt_sha256": "c4481578d0e51b58190c60fc63fecdfa0fabddf7398e179f00e692d4619c7b23",
+  "overlay_file_sha256": {
+    "Cargo.toml": "81f084228a9c30ef49274dd06d587b46a5becd11b903f6babe6241c251554c24",
+    "Cargo.lock": "dd2f05aab2b71f210a7c8363587e015f3e30afb1cffe64d97dc59554dc92a255",
+    "afl_fuzzer.rs": "abebc6573b265baac60867cfff700f8daeb5e0e39c7685e28f8da4a2b5692e2a",
+    "Dockerfile": "a93515e73a8f48cb39ced25572dde72743783a5366b9b4d177da1ff948658dbd",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "c4d33be9473d06f75f58220f71f7a9317aca647dc061dbd3c361b0bef505fbea",
+  "image_id": "sha256:541b0896cf8feb92c20478be97f58207934e687115dcded055788633222bc623",
+  "platform": "linux/arm64",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "feedback_edges": 129,
+  "afl_map_size": 719,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "SanitizerCoverage only in dns_parser; serde_json, the harness crate, afl and the afl_fuzzer entry point are built without coverage",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "dns_parser"
+    ],
+    "rlib_guard_bytes": {
+      "dns_parser": 2856
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "byteorder",
+      "equivalent",
+      "foldhash",
+      "hashbrown",
+      "indexmap",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_dns_dns_parser_harness",
+      "quick_error",
+      "rustc_version",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "xdg",
+      "zmij"
+    ],
+    "binary_guards": 714
+  },
+  "rustc_wrapper_log": [
+    "instrumented dns_parser",
+    "uninstrumented afl",
+    "uninstrumented afl_fuzzer",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented byteorder",
+    "uninstrumented equivalent",
+    "uninstrumented foldhash",
+    "uninstrumented hashbrown",
+    "uninstrumented home",
+    "uninstrumented indexmap",
+    "uninstrumented itoa",
+    "uninstrumented libc",
+    "uninstrumented memchr",
+    "uninstrumented parsarium_dns_dns_parser_harness",
+    "uninstrumented quick_error",
+    "uninstrumented rustc_version",
+    "uninstrumented semver",
+    "uninstrumented serde_core",
+    "uninstrumented serde_json",
+    "uninstrumented xdg",
+    "uninstrumented zmij"
+  ]
+}
