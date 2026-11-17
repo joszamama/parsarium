@@ -432,6 +432,122 @@
         "oracle": "Instrumented-runtime and LLVM-coverage outputs on both controls equal the expat oracle (controls/xml/check_controls.py) in the overlay build"
       },
       "error": null
+    },
+    {
+      "api": "xml_parser_create_ns(?string $encoding = null, string $separator = \":\"): XMLParser; xml_parse(XMLParser $parser, string $data, bool $is_final = false): int",
+      "runtime": "PHP 8.5.12 CLI (source build, --disable-all --with-libxml --enable-xml) with source-built libxml2 2.15.4",
+      "command": "python3 scripts/run_project.py xml php stdlib_xml_parser",
+      "receipt": "projects/xml/php/stdlib_xml_parser/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 8,
+      "parser_source_lines_covered": 658,
+      "format_specific_source_lines_covered": 316,
+      "format_specific_source_file": "ext/xml/xml.c",
+      "underlying_source_files": 61,
+      "underlying_source_lines_covered": 2632,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_expat_oracle_fields": [
+        "attributes",
+        "elements",
+        "max_depth",
+        "namespace_declarations",
+        "namespaces",
+        "root",
+        "text"
+      ],
+      "observable_limits": "Event-handler summary from ext/xml with case folding off (ext/xml folds case by default, and then upper-cases the whole expanded name, namespace URI included) and the separator \"\\x01\" (not an RFC 3986 URI character and not an XML 1.0 Char, so it cannot occur in a well-formed XML 1.0 namespace or local name; ext/xml only uses the first separator byte). Character data and CDATA share the character data handler, so CDATA boundaries are not distinguished; text runs are flushed at element starts/ends, PIs and comments as in the expat oracle. ext/xml has no comment handler: comments reach the default handler as \"<!--...-->\" and only mark a text boundary. Any other default-handler data (an unexpanded user-defined entity reference, which needs a DTD) makes the harness fail rather than summarize it. ext/xml sets XML_PARSE_OLDSAX|XML_PARSE_NOENT on the libxml2 push parser and transcodes output to UTF-8. The controls are fed in one final xml_parse chunk; chunked feeding, the XML declaration (not reported) and xml_parse_into_struct are not exercised.",
+      "base_coverage_lines": {
+        "control": {
+          "parser_source_lines_covered": 658,
+          "format_specific_source_lines_covered": 316,
+          "compat_source_lines_covered": 136,
+          "underlying_source_lines_covered": 2630,
+          "underlying_parser_c_lines_covered": 1314,
+          "underlying_sax2_c_lines_covered": 0
+        },
+        "differential": {
+          "parser_source_lines_covered": 695,
+          "format_specific_source_lines_covered": 338,
+          "compat_source_lines_covered": 151,
+          "underlying_source_lines_covered": 2798,
+          "underlying_parser_c_lines_covered": 1483,
+          "underlying_sax2_c_lines_covered": 0
+        }
+      },
+      "base_coverage_note": "compat.c installs its own SAX callbacks, so libxml2 SAX2.c (the tree builder) covers 0 lines; libxml2 parser.c line counts vary by about 10 lines between identical runs (1,305 in the project receipt, 1,314 in the overlay's base replay of the same control).",
+      "afl_feedback": {
+        "command": "python3 fuzzing/afl-native/xml/php/stdlib_xml_parser/build.py",
+        "report": "data/php/xml/afl-feedback.json",
+        "overlay_receipt": "fuzzing/afl-native/xml/php/stdlib_xml_parser/verification.json",
+        "overlay_receipt_sha256": "ac2c1395e58c70850872d5d92570ebc338ccf237d4efd263bbb27cb17f5d851d",
+        "feedback_kind": "native_libxml2_php_xml_parser_source_edges",
+        "feedback_scope": "libxml2 2.15.4 parser.c (push parser), parserInternals.c and SAX2.c plus PHP 8.5.12 ext/xml/xml.c and ext/xml/compat.c (XMLParser API, expat-compatible SAX callbacks) via AFL++ allowlist; libxml2 tree, XPath and dict code, ext/libxml/libxml.c and the Zend engine are uninstrumented",
+        "fuzz_target": "projects/xml/php/stdlib_xml_parser/fuzz-target.php (xml_parser_create_ns and xml_parse with the summary event handlers, no JSON output)",
+        "control_afl_tuples": 1051,
+        "differential_afl_tuples": 1194,
+        "afl_tuple_difference": 353,
+        "full_harness_tuple_difference": 353,
+        "format_dependent_harness_only_tuples": 0,
+        "harness_note": "ext/xml builds no tree: the summary handlers run inside xml_parse, so the fuzz target runs the same handlers as the harness and only skips the JSON output; the two reach identical AFL++ maps.",
+        "repeats_per_control": 5,
+        "oracle": "Instrumented-runtime and LLVM-coverage outputs on both controls equal the expat oracle (controls/xml/check_controls.py) in the overlay build"
+      },
+      "error": null
     }
   ]
 }

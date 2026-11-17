@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T12:32:49.455191+00:00",
-  "projects_total": 5,
-  "projects_passed": 5,
+  "checked_at_utc": "2026-11-17T12:37:50.373221+00:00",
+  "projects_total": 6,
+  "projects_passed": 6,
   "differential_kind": "fixed_valid_default_namespace_order",
   "results": [
     {
@@ -58,6 +58,24 @@
       "control_only_edges": 119,
       "differential_only_edges": 241,
       "afl_tuple_difference": 360
+    },
+    {
+      "project": "xml/php/stdlib_xml_parser",
+      "pass": true,
+      "feedback_kind": "native_libxml2_php_xml_parser_source_edges",
+      "overlay_receipt_sha256": "ac2c1395e58c70850872d5d92570ebc338ccf237d4efd263bbb27cb17f5d851d",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "control_afl_tuples": 1051,
+      "differential_afl_tuples": 1194,
+      "stable_shared_edges": 946,
+      "control_only_edges": 105,
+      "differential_only_edges": 248,
+      "afl_tuple_difference": 353
     },
     {
       "project": "xml/php/sabre_xml",

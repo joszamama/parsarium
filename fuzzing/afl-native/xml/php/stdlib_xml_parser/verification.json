@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "project": "xml/php/stdlib_xml_parser",
+  "pass": true,
+  "feedback_kind": "native_libxml2_php_xml_parser_source_edges",
+  "feedback_scope": "libxml2 2.15.4 parser.c (push parser), parserInternals.c and SAX2.c plus PHP 8.5.12 ext/xml/xml.c and ext/xml/compat.c (XMLParser API, expat-compatible SAX callbacks) via AFL++ allowlist; libxml2 tree, XPath and dict code, ext/libxml/libxml.c and the Zend engine are uninstrumented",
+  "fuzz_target": "projects/xml/php/stdlib_xml_parser/fuzz-target.php (xml_parser_create_ns and xml_parse with the summary event handlers, no JSON output)",
+  "harness": "projects/xml/php/stdlib_xml_parser/harness.php (xml_parser_create_ns and xml_parse with the summary.php event handlers, then JSON output)",
+  "extension_source_sha256": {
+    "php-8.5.12/ext/xml/xml.c": "2c8dfaa09ce1721c7f95673a2b0ac7839cb22a3e6cbbf1cc3baac4148e775d3f",
+    "php-8.5.12/ext/xml/compat.c": "f4fe592aecb5a7fefbf474ab71c8d908427d2f8ed97cc12645326384782cb44e",
+    "php-8.5.12/ext/xml/expat_compat.h": "b8968870db26deb176f938a177d53ea50945272f766ee0cccc1c6123a233c74f",
+    "php-8.5.12/ext/xml/php_xml.h": "b1855d409a5a6d69420132e6cf6f68f6799963a4336d3b6cea8a8eb337e951a7"
+  },
+  "api_signature": "xml xml_parser_create_ns(?string $encoding,string $separator): XMLParser; xml xml_parse(XMLParser $parser,string $data,bool $is_final): int",
+  "base_project_receipt_sha256": "03a270041fefcbe6de1c4bb46604e0d1299ad6755de2ad00be1085fa0efa675d",
+  "base_image_id": "sha256:fb4a477b5568b1ec6bd406130b56a3feb2caefce0889862c3743067c6e5e20c8",
+  "source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "license_file_sha256": {
+    "php-8.5.12/LICENSE": "b42e4df5e50e6ecda1047d503d6d91d71032d09ed1027ba1ef29eed26f890c5a",
+    "libxml2-2.15.4/Copyright": "5d4873884a890122a4b9b20ad56ac6f7da1d796a5bfcf04a427970ac96217626"
+  },
+  "runtime": {
+    "php": "8.5.12",
+    "libxml2": "2.15.4"
+  },
+  "instrumented_objects": [
+    "libxml2-2.15.4/build/.libs/libxml2_la-SAX2.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parser.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parserInternals.o",
+    "php-8.5.12/ext/xml/compat.o",
+    "php-8.5.12/ext/xml/xml.o"
+  ],
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "oracle": "controls/xml/check_controls.py expat namespace-mode summary",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "base_coverage_lines": {
+    "control": {
+      "parser_source_lines_covered": 658,
+      "format_specific_source_lines_covered": 316,
+      "compat_source_lines_covered": 136,
+      "underlying_source_lines_covered": 2630,
+      "underlying_parser_c_lines_covered": 1314,
+      "underlying_sax2_c_lines_covered": 0
+    },
+    "differential": {
+      "parser_source_lines_covered": 695,
+      "format_specific_source_lines_covered": 338,
+      "compat_source_lines_covered": 151,
+      "underlying_source_lines_covered": 2798,
+      "underlying_parser_c_lines_covered": 1483,
+      "underlying_sax2_c_lines_covered": 0
+    }
+  },
+  "image_id": "sha256:08639c7559957149b5e083f98e257cec7c82ae4f9bd1c25733c6eb28048a225c",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 65536,
+  "repeats_per_control": 5,
+  "all_repeats_identical": true,
+  "feedback_edges": 1051,
+  "differential_feedback_edges": 1194,
+  "stable_shared_edges": 946,
+  "stable_control_only_edges": 105,
+  "stable_differential_only_edges": 248,
+  "afl_tuple_difference": 353,
+  "full_harness_control_edges": 1051,
+  "full_harness_differential_edges": 1194,
+  "full_harness_tuple_difference": 353,
+  "format_dependent_parse_time_tuples": 353,
+  "format_dependent_harness_only_tuples": 0,
+  "harness_only_control_edges": 0,
+  "harness_only_differential_edges": 0,
+  "harness_only_edges_identical": true,
+  "parse_only_edges_outside_full_harness": 0,
+  "parse_only_edges_outside_full_harness_identical": true,
+  "overlay_file_sha256": {
+    "Dockerfile": "bbf531431dd46a2291faa2ca98341955c2034f0eca7e971eeb491033dda7898e",
+    "build.py": "d420036042a8ab77fd3c193189591f71ebe3c8e09f928c4a4cf41ae85112d1fc"
+  }
+}

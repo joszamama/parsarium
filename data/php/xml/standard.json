@@ -185,17 +185,88 @@
           "12.50 €"
         ]
       }
-    }
-  ],
-  "unverified_documented_apis": [
+    },
     {
-      "api": "xml_parse(XMLParser $parser, string $data, bool $is_final = false)",
-      "documentation": "https://www.php.net/manual/en/function.xml-parse.php",
-      "status": "pending",
-      "reason": "ext/xml SAX API over libxml2; not built or run in this pilot."
+      "runtime": "PHP 8.5.12 CLI (source build, --disable-all --with-libxml --enable-xml) with source-built libxml2 2.15.4",
+      "api": "xml_parser_create_ns(?string $encoding = null, string $separator = \":\"): XMLParser; xml_parse(XMLParser $parser, string $data, bool $is_final = false): int",
+      "documentation": "https://www.php.net/manual/en/function.xml-parser-create-ns.php",
+      "documentation_parse": "https://www.php.net/manual/en/function.xml-parse.php",
+      "adapter": "projects/xml/php/stdlib_xml_parser/harness.php",
+      "input": "in-memory bytes passed to xml_parse in one call with is_final=true on a parser from xml_parser_create_ns('UTF-8', \"\\x01\"); no file or URL input, and no other parser sees the bytes",
+      "control": "controls/xml/catalog-ns.xml",
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "observable_result": "xml_parse drives libxml2's push parser through ext/xml/compat.c and calls the PHP event handlers; with case folding off and the \"\\x01\" separator, the start-element, end-element, start-namespace-declaration, character-data, PI and default (comment) handlers give a prefixed root {urn:parsarium:catalog}catalog with a default-namespace child scope, 5 elements in Clark notation, 2 namespace declarations, a prefixed attribute {urn:parsarium:catalog}lang, entity-decoded text and CDATA text, depth 3; the second control gives 7 elements, 3 declarations including the xmlns=\"\" undeclaration, char-reference-decoded text and depth 4",
+      "observable_limits": "Event-handler summary from ext/xml with case folding off (ext/xml folds case by default, and then upper-cases the whole expanded name, namespace URI included) and the separator \"\\x01\" (not an RFC 3986 URI character and not an XML 1.0 Char, so it cannot occur in a well-formed XML 1.0 namespace or local name; ext/xml only uses the first separator byte). Character data and CDATA share the character data handler, so CDATA boundaries are not distinguished; text runs are flushed at element starts/ends, PIs and comments as in the expat oracle. ext/xml has no comment handler: comments reach the default handler as \"<!--...-->\" and only mark a text boundary. Any other default-handler data (an unexpanded user-defined entity reference, which needs a DTD) makes the harness fail rather than summarize it. ext/xml sets XML_PARSE_OLDSAX|XML_PARSE_NOENT on the libxml2 push parser and transcodes output to UTF-8. The controls are fed in one final xml_parse chunk; chunked feeding, the XML declaration (not reported) and xml_parse_into_struct are not exercised.",
+      "result": "projects/xml/php/stdlib_xml_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/xml/php/stdlib_xml_parser/verification.json",
+      "license": "PHP-3.01 (PHP 8.5.12 ext/xml, ext/libxml); MIT (libxml2 2.15.4)",
+      "extension_source_sha256": {
+        "php-8.5.12/ext/xml/xml.c": "2c8dfaa09ce1721c7f95673a2b0ac7839cb22a3e6cbbf1cc3baac4148e775d3f",
+        "php-8.5.12/ext/xml/compat.c": "f4fe592aecb5a7fefbf474ab71c8d908427d2f8ed97cc12645326384782cb44e",
+        "php-8.5.12/ext/xml/expat_compat.h": "b8968870db26deb176f938a177d53ea50945272f766ee0cccc1c6123a233c74f",
+        "php-8.5.12/ext/xml/php_xml.h": "b1855d409a5a6d69420132e6cf6f68f6799963a4336d3b6cea8a8eb337e951a7"
+      },
+      "family": "libxml2 (via PHP ext/libxml)",
+      "family_note": "Same parser engine as the XMLReader::XML, DOMDocument::loadXML and simplexml_load_string entries, but a different libxml2 entry point: ext/xml (built without --with-expat) creates a push parser with xmlCreatePushParserCtxt and feeds xml_parse data through xmlParseChunk, with ext/xml/compat.c's expat-style SAX callbacks instead of the SAX2 tree builder. It is a fourth standard API over the same engine, not an independent parser.",
+      "expected": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "differential_expected": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      }
     }
   ],
+  "unverified_documented_apis": [],
   "no_api_findings": [],
-  "limit": "Two small UTF-8 namespace-aware controls without DOCTYPE verify XMLReader::XML, DOMDocument::loadXML and simplexml_load_string for this PHP 8.5.12/libxml2 2.15.4 build; they do not establish DTD, external entity, non-UTF-8 encoding, XML 1.1, validation or DOMDocument::load()/simplexml_load_file() file-input behaviour.",
-  "runtime_note": "Each verified API has its own PHP 8.5.12 source build: XMLReader with --enable-xmlreader, DOMDocument with --enable-dom, SimpleXML with --enable-simplexml; all link the same source-built libxml2 2.15.4."
+  "limit": "Two small UTF-8 namespace-aware controls without DOCTYPE verify XMLReader::XML, DOMDocument::loadXML, simplexml_load_string and xml_parser_create_ns/xml_parse for this PHP 8.5.12/libxml2 2.15.4 build; they do not establish DTD, external entity, non-UTF-8 encoding, XML 1.1, validation, DOMDocument::load()/simplexml_load_file() file-input behaviour, or chunked xml_parse feeding.",
+  "runtime_note": "Each verified API has its own PHP 8.5.12 source build: XMLReader with --enable-xmlreader, DOMDocument with --enable-dom, SimpleXML with --enable-simplexml, XML Parser with --enable-xml (libxml2 compat layer, no --with-expat); all link the same source-built libxml2 2.15.4."
 }
