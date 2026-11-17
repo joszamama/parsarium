@@ -29,6 +29,8 @@ SCOPES = {
                 "AFL++ instruments only the pinned libxml2 sources and the xmlTextReader harness; no other library is compiled into /work/fuzzer."),
     "mxml": ("afl_clang_fast_mxml_and_harness_edges",
              "AFL++ instruments only the pinned Mini-XML sources and the mxmlLoadString harness, including its namespace-resolving tree walk; no other library is compiled into /work/fuzzer."),
+    "libxmlb": ("afl_clang_fast_gmarkup_and_libxmlb_allowlisted_edges",
+                "AFL++ instruments only GLib 2.88.4's glib/gmarkup.c and libxmlb's src/xb-*.c (projects/xml/c/libxmlb/afl-allowlist.txt); the overlay build asserts with nm that no other GLib or libxmlb archive member is instrumented, and the harness is not instrumented."),
 }
 REPEATS = 5
 REPORT = ROOT / "data/c/xml/afl-feedback.json"

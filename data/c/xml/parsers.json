@@ -92,6 +92,85 @@
     "project": "projects/xml/c/libxml2/verification.json"
   },
   {
+    "name": "libxmlb",
+    "version": "0.3.30",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/hughsie/libxmlb/blob/0.3.30/LICENSE",
+    "input_api": "xb_builder_source_new(); xb_builder_source_load_xml(source, NUL-terminated copy of the local bytes, XB_BUILDER_SOURCE_FLAG_LITERAL_TEXT, &error); xb_builder_new(); xb_builder_import_source; xb_builder_compile(builder, XB_BUILDER_COMPILE_FLAG_NONE, NULL, &error); walk the XbSilo from xb_silo_get_root with xb_node_get_element, xb_node_attr_iter_init/next, xb_node_get_text, xb_node_get_child, xb_node_get_next and xb_node_get_tail",
+    "documentation": "https://github.com/hughsie/libxmlb/blob/0.3.30/src/xb-builder-source.c",
+    "documentation_note": "libxmlb documents its API in gtk-doc comments on each public function (xb_builder_source_load_xml: 'Loads XML data and begins to build a XbSilo'; xb_builder_compile; xb_silo_get_root; xb_node_*) and in the installed headers; the README describes the XML-to-silo workflow. The underlying parser is documented at https://docs.gtk.org/glib/method.MarkupParseContext.parse.html.",
+    "source": "https://github.com/hughsie/libxmlb/releases/download/0.3.30/libxmlb-0.3.30.tar.xz",
+    "scope": "libxmlb's compiled silo of one in-memory document as a raw-name path: document-order qualified element and attribute names as written, xmlns attributes, attribute order and decoded values, maximum depth, and trimmed text and tail runs between markup; no namespace URIs or expanded names",
+    "namespace_semantics": "raw_names_only",
+    "namespace_note": "Neither libxmlb 0.3.30 nor GLib's GMarkup implements Namespaces in XML: element and attribute names are stored as written (prefix:local) and xmlns/xmlns:p are ordinary attributes in the silo. The adapter reports those names unchanged and resolves nothing.",
+    "family": "GLib GMarkup (via libxmlb's XbBuilder)",
+    "family_note": "libxmlb has no tokenizer of its own: xb_builder_compile_source (src/xb-builder.c) creates g_markup_parse_context_new with G_MARKUP_TREAT_CDATA_AS_TEXT and feeds the source to g_markup_parse_context_parse; its start-element, end-element and text callbacks build XbBuilderNode trees that are compiled into the silo. Markup scanning, entity and character-reference decoding and CDATA handling are GMarkup's (glib/gmarkup.c), so this path is the GMarkup family, independent of expat, libxml2, Mini-XML and nXML. GLib is built from its pinned 2.88.4 release here. GMarkup itself is not ranked: its Debian source glib2.0 builds all of GLib.",
+    "shared_families": [
+      "GLib GMarkup"
+    ],
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "xmlns:c=urn:parsarium:catalog",
+        "xmlns=urn:parsarium:item",
+        "version=1",
+        "id=a1",
+        "c:lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "c:catalog",
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "root": "c:catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "xmlns=urn:parsarium:order",
+        "xmlns:p=urn:parsarium:price",
+        "n=1",
+        "p:currency=EUR",
+        "n=2",
+        "note=say \"hi\"",
+        "xmlns="
+      ],
+      "elements": [
+        "order",
+        "line",
+        "sku",
+        "p:amount",
+        "line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "root": "order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "oracle": "projects/xml/c/libxmlb/oracle.py (Python expat without namespace processing, ordered attributes)",
+    "verification_note": "Measured as a raw-name XML tree path, not as a namespace-aware parser. Qualified element and attribute names, attribute order and xmlns declarations are compared as strings with expat in non-namespace mode; no namespace URI, expanded name or in-scope binding is produced by libxmlb or GMarkup or inferred by the harness. Comments and processing instructions only end text runs in the oracle; libxmlb does not store them.",
+    "metric": {
+      "name": "Debian popcon installations of runtime library binary package (libxmlb2; max of libxmlb2 and libxmlb1)",
+      "value": 130663,
+      "source": "data/c/xml/registry-snapshot.json"
+    },
+    "metric_note": "libxmlb2 has 130,663 installations (98,838 regular use) and the older libxmlb1 soname 5,281 in the same by_inst file. Debian forky/sid packages libxmlb 0.3.30, the pinned release. Most installations come as a dependency of fwupd and AppStream tooling, which store AppStream and firmware metadata in libxmlb silos; it is an adoption proxy, not a count of general XML parsing.",
+    "project": "projects/xml/c/libxmlb/verification.json"
+  },
+  {
     "name": "mxml",
     "version": "4.0.6",
     "license": "Apache-2.0",

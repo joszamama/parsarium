@@ -1,0 +1,60 @@
+{
+  "kind": "third_party",
+  "api": "xb_builder_source_new(); xb_builder_source_load_xml(source, NUL-terminated copy of the local bytes, XB_BUILDER_SOURCE_FLAG_LITERAL_TEXT, &error); xb_builder_new(); xb_builder_import_source; xb_builder_compile(builder, XB_BUILDER_COMPILE_FLAG_NONE, NULL, &error); walk the XbSilo from xb_silo_get_root with xb_node_get_element, xb_node_attr_iter_init/next, xb_node_get_text, xb_node_get_child, xb_node_get_next and xb_node_get_tail",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T15:17:24.031855+00:00",
+  "manifest": "projects/xml/c/libxmlb/manifest.json",
+  "image_id": "sha256:d401224151521bc996f1412d2666e6db64f2471b19b86e6f0b58472ab4dd7b22",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "source_sha256": "2cb894b873aac5fc9e9b6228d4e795f7236d16e429ed2de8f95179a131be3a68",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "8fe0b1520960285a30aa419f5c6068deb23f30554209b62492c68cf4992e1b20",
+    "afl-allowlist.txt": "ce34700cbf4ab96507d674db8f3f03cdbf642ce36cbf1b8e516044577eef11e1",
+    "build.sh": "253a2b65695db0b877d65339f101e0d18bf10a4ee7363cd2b0ba5dea6e7033ff",
+    "harness.c": "c35d845a91af6ba68ad611608c9d608500e57f10dc712625dc2697ec7451450d",
+    "harness.h": "99dbcc465f2b85e68f0fc1dc1cbfe8dc510f6b1ff27dc391269f90bb05464a11",
+    "manifest.json": "92165c95c03d22a249bc6e9dfb567c6c4ee8268b071e036831fd297622e75d9d",
+    "oracle.py": "c20119ccfec943f3c8f2152a40e1c9fbf5b06d07facc856871b4dfffc8e0a575",
+    "replay.c": "41d2f45a610d6cbfdf68d6b99f1c0648ff5f0dabfba88d3e9611135e5f71f8af",
+    "run-control.sh": "c33abd7f263a291cfb206a07f998acd90da8c423745873cf0edc0ab9cac3c244",
+    "source-lock.json": "880cf09e4a92a8d2c458ffb987b5dbe70d754f913942fdf8bdc06ec9b7792075"
+  },
+  "output": {
+    "attributes": [
+      "xmlns:c=urn:parsarium:catalog",
+      "xmlns=urn:parsarium:item",
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "root": "c:catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "parser_source_files": 29,
+  "parser_source_lines_covered": 1381,
+  "format_specific_source_lines_covered": 466,
+  "underlying_source_files": 1,
+  "underlying_source_lines_covered": 604,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/c/libxmlb/target/coverage/coverage.json",
+  "pass": true
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "c",
+  "package": "libxmlb",
+  "release": "0.3.30",
+  "catalog_parser": "data/c/xml/parsers.json",
+  "source_lock": "projects/xml/c/libxmlb/source-lock.json",
+  "source_sha256": "2cb894b873aac5fc9e9b6228d4e795f7236d16e429ed2de8f95179a131be3a68",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "xmlns:c=urn:parsarium:catalog",
+      "xmlns=urn:parsarium:item",
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "root": "c:catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "xmlns=urn:parsarium:order",
+      "xmlns:p=urn:parsarium:price",
+      "n=1",
+      "p:currency=EUR",
+      "n=2",
+      "note=say \"hi\"",
+      "xmlns="
+    ],
+    "elements": [
+      "order",
+      "line",
+      "sku",
+      "p:amount",
+      "line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "root": "order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "oracle": "projects/xml/c/libxmlb/oracle.py (Python expat without namespace processing, ordered attributes)",
+  "namespace_resolution": false,
+  "output_name_form": "raw qualified names (prefix:local); xmlns/xmlns:* are ordinary attributes",
+  "api": "xb_builder_source_new(); xb_builder_source_load_xml(source, NUL-terminated copy of the local bytes, XB_BUILDER_SOURCE_FLAG_LITERAL_TEXT, &error); xb_builder_new(); xb_builder_import_source; xb_builder_compile(builder, XB_BUILDER_COMPILE_FLAG_NONE, NULL, &error); walk the XbSilo from xb_silo_get_root with xb_node_get_element, xb_node_attr_iter_init/next, xb_node_get_text, xb_node_get_child, xb_node_get_next and xb_node_get_tail",
+  "namespace_semantics": "Neither libxmlb 0.3.30 nor GLib's GMarkup implements Namespaces in XML: element and attribute names are stored as written (prefix:local) and xmlns/xmlns:p are ordinary attributes in the silo. The adapter reports those names unchanged and resolves nothing.",
+  "harness": "harness.c",
+  "fuzz_engine": "libFuzzer (clang -fsanitize=fuzzer)",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of libxmlb and GLib, both built static and out of tree from their pinned releases; libxmlb's src/ is the parser subject and glib/gmarkup.c the underlying tokenizer",
+  "coverage_subject_prefix": "/work/source/src/",
+  "format_specific_coverage_file_suffix": "/xb-builder.c",
+  "underlying_package": "glib (GMarkup)",
+  "underlying_release": "2.88.4",
+  "underlying_source_sha256": "25fd169f3b2f91fe2391ad297883ce0fcf30c69fc789ffd1c9672d1332b1c5a8",
+  "underlying_family": "GLib GMarkup (g_markup_parse_context_parse), the XML-subset parser bundled in GLib",
+  "underlying_coverage_subject_prefix": "/work/glib/glib/gmarkup.c",
+  "underlying_format_specific_coverage_file_suffix": "/gmarkup.c",
+  "afl_allowlist": "projects/xml/c/libxmlb/afl-allowlist.txt",
+  "pilot": "xml_c_registry_pilot",
+  "coverage_limit": "Two valid UTF-8 XML 1.0 controls without DOCTYPE establish libxmlb's element, attribute, text and tail silo for them only, as a raw-name path: qualified names, xmlns attributes, attribute order and decoded values, depth and trimmed text runs. GMarkup tokenizes the markup and decodes the predefined entities, character references and CDATA (G_MARKUP_TREAT_CDATA_AS_TEXT); libxmlb builds and compiles the silo. Comments and processing instructions are not stored. GMarkup is documented as a subset parser (no DTDs, no external entities) and is not namespace-aware; no namespace URI, expanded name or in-scope binding is reported. xb_builder_source_load_xml takes a NUL-terminated string, so bytes after a NUL are not parsed. Other encodings, XML 1.1 and well-formedness rejection are not established. The expected outputs come from oracle.py (Python pyexpat in non-namespace mode, a different family from GMarkup)."
+}

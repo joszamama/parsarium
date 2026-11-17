@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "checked_at_utc": "2026-11-17T10:27:23.736529+00:00",
-  "projects_total": 3,
-  "projects_passed": 3,
+  "checked_at_utc": "2026-11-17T15:19:17.381809+00:00",
+  "projects_total": 4,
+  "projects_passed": 4,
   "pass": true,
   "results": [
     {
@@ -149,6 +149,53 @@
       "first_afl_tuples": 380,
       "second_afl_tuples": 390,
       "afl_tuple_difference": 50
+    },
+    {
+      "project": "xml/c/libxmlb",
+      "checked_at_utc": "2026-11-17T15:19:15.436301+00:00",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_gmarkup_and_libxmlb_allowlisted_edges",
+      "feedback_scope": "AFL++ instruments only GLib 2.88.4's glib/gmarkup.c and libxmlb's src/xb-*.c (projects/xml/c/libxmlb/afl-allowlist.txt); the overlay build asserts with nm that no other GLib or libxmlb archive member is instrumented, and the harness is not instrumented.",
+      "base_project_receipt_sha256": "8ff81372099eeb4ecc72bac370b634c1648583ab98789c27dc68e4f1d8d8714f",
+      "overlay_receipt_sha256": "7a2a896e772575352d572e1743b10e8f213d41ab6235ca0c2fdd4061ebac47b3",
+      "base_image_id": "sha256:d401224151521bc996f1412d2666e6db64f2471b19b86e6f0b58472ab4dd7b22",
+      "overlay_image_id": "sha256:5c914ec7ee54aac8af3613a37ef723067ddcbcc77dd0c207fdf6997baf9331c7",
+      "repeats_per_control": 5,
+      "repeated_controls_identical": true,
+      "first_control": "controls/xml/catalog-ns.xml",
+      "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "second_control": "controls/xml/order-default-ns.xml",
+      "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "second_control_output": {
+        "attributes": [
+          "xmlns=urn:parsarium:order",
+          "xmlns:p=urn:parsarium:price",
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\"",
+          "xmlns="
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "root": "order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "second_case_kind": "valid_control",
+      "first_afl_tuples": 639,
+      "second_afl_tuples": 653,
+      "afl_tuple_difference": 32
     }
   ]
 }
