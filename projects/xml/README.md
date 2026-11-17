@@ -3,7 +3,9 @@
 Only verified Docker targets appear below; the format remains incomplete.
 
 - [expat / C](c/expat/README.md)
+- [libnxml / C](c/libnxml/README.md)
 - [libxml2 / C](c/libxml2/README.md)
+- [libxmlb / C](c/libxmlb/README.md)
 - [mxml / C](c/mxml/README.md)
 - [libxml++ / C++](cpp/libxmlpp/README.md)
 - [pugixml / C++](cpp/pugixml/README.md)
