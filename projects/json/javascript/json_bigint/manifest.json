@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "json-bigint",
+  "release": "1.0.0",
+  "catalog_parser": "data/javascript/json/parsers.json",
+  "source_lock": "projects/json/javascript/json_bigint/source-lock.json",
+  "source_sha256": "4c4f502953cfb36cfe1c6c4989676bf9b76899a253237fc0220814b88ff903b6",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "type": "object",
+    "members": {
+      "enabled": {
+        "type": "boolean",
+        "value": true
+      },
+      "missing": {
+        "type": "null"
+      },
+      "name": {
+        "type": "string",
+        "value": "parsarium"
+      },
+      "nested": {
+        "type": "object",
+        "members": {
+          "empty": {
+            "type": "object",
+            "members": {}
+          },
+          "items": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "members": {
+                  "id": {
+                    "type": "number",
+                    "value": 1
+                  },
+                  "ok": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "members": {
+                  "id": {
+                    "type": "number",
+                    "value": 2
+                  },
+                  "text": {
+                    "type": "string",
+                    "value": "café \"quoted\""
+                  }
+                }
+              }
+            ]
+          },
+          "level": {
+            "type": "number",
+            "value": 2
+          },
+          "list": {
+            "type": "array",
+            "items": []
+          }
+        }
+      },
+      "ratio": {
+        "type": "number",
+        "value": -2.5
+      },
+      "tags": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string",
+            "value": "json"
+          },
+          {
+            "type": "string",
+            "value": "go"
+          },
+          {
+            "type": "string",
+            "value": "rfc8259"
+          }
+        ]
+      },
+      "version": {
+        "type": "number",
+        "value": 1
+      }
+    }
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "type": "array",
+    "items": [
+      {
+        "type": "number",
+        "value": 1
+      },
+      {
+        "type": "number",
+        "value": 0.25
+      },
+      {
+        "type": "string",
+        "value": "two"
+      },
+      {
+        "type": "array",
+        "items": [
+          {
+            "type": "boolean",
+            "value": true
+          },
+          {
+            "type": "null"
+          },
+          {
+            "type": "array",
+            "items": [
+              {
+                "type": "boolean",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "object",
+        "members": {
+          "k": {
+            "type": "array",
+            "items": []
+          },
+          "n": {
+            "type": "object",
+            "members": {
+              "deep": {
+                "type": "string",
+                "value": "A"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/json-bigint/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of json-bigint/lib/parse.js recursive-descent parser during complete valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/json-bigint/lib/parse.js",
+  "scope": "One complete JSON text from local bytes decoded as strict UTF-8 and passed to documented JSONbig.parse(text); output is an exact type-tagged tree for both valid controls, whose numbers are all Number, not BigNumber",
+  "afl_coverage_subject_prefix": "/work/node_modules/json-bigint/lib/parse.js"
+}

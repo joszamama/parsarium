@@ -1,5 +1,118 @@
 [
   {
+    "name": "json-bigint",
+    "version": "1.0.0",
+    "license": "MIT",
+    "npm_integrity": "sha512-SiPv/8VpZuWbvLSMtTDU8hEfrZWg/mH/nV/b4o0CYbSxu1UIQPLdwKOCIyLQX+VIPO5vrLX3i8qtqFyhdPSUSQ==",
+    "tarball_sha256": "4c4f502953cfb36cfe1c6c4989676bf9b76899a253237fc0220814b88ff903b6",
+    "input_api": "JSONbig.parse(text) after decoding a local Buffer with strict UTF-8 TextDecoder; exact type-tagged tree of returned values",
+    "documentation": "https://github.com/sidorares/json-bigint/blob/390482a8b6b460f98c61c3b65915dbd91fc8e7b2/README.md",
+    "source": "https://registry.npmjs.org/json-bigint/-/json-bigint-1.0.0.tgz",
+    "scope": "One complete JSON text from local bytes decoded as strict UTF-8; default JSONbig.parse(text) returns ordinary values on the two safe-number controls. Adapter tags every returned value type and does not call JSON.parse on input.",
+    "family": "Crockford JSON.js recursive-descent parser adapted by json-bigint",
+    "family_note": "The pinned lib/parse.js credits Douglas Crockford json_parse.js (public domain), performs its own recursive-descent tokenization/value construction, and checks trailing text. It calls bignumber.js for numeric representation, not parsing JSON structure. JSON.parse appears only in lib/stringify.js, outside the selected parse path. No selected JavaScript JSON package shares this exact parser source.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 297771552,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/json-bigint",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "type": "object",
+      "members": {
+        "enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "missing": {
+          "type": "null"
+        },
+        "name": {
+          "type": "string",
+          "value": "parsarium"
+        },
+        "nested": {
+          "type": "object",
+          "members": {
+            "empty": {
+              "type": "object",
+              "members": {}
+            },
+            "items": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "number",
+                      "value": 1
+                    },
+                    "ok": {
+                      "type": "boolean",
+                      "value": false
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "number",
+                      "value": 2
+                    },
+                    "text": {
+                      "type": "string",
+                      "value": "café \"quoted\""
+                    }
+                  }
+                }
+              ]
+            },
+            "level": {
+              "type": "number",
+              "value": 2
+            },
+            "list": {
+              "type": "array",
+              "items": []
+            }
+          }
+        },
+        "ratio": {
+          "type": "number",
+          "value": -2.5
+        },
+        "tags": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string",
+              "value": "json"
+            },
+            {
+              "type": "string",
+              "value": "go"
+            },
+            {
+              "type": "string",
+              "value": "rfc8259"
+            }
+          ]
+        },
+        "version": {
+          "type": "number",
+          "value": 1
+        }
+      }
+    },
+    "project": "projects/json/javascript/json_bigint",
+    "license_evidence": "https://registry.npmjs.org/json-bigint/1.0.0",
+    "verification_note": "The documented parse(text) API receives one strict UTF-8 decoded local control. The two pinned controls contain only Number-safe numeric literals and the adapter emits exact type-tagged trees. lib/parse.js itself parses JSON syntax and rejects trailing text. Its source chooses BigNumber for finite numeric tokens whose strings exceed 15 characters by default; this source branch is not exercised by the two controls, and no large-integer behavior is claimed from a control run."
+  },
+  {
     "name": "jsonparse",
     "version": "1.3.1",
     "license": "MIT",
