@@ -15,7 +15,7 @@
   },
   {
     "name": "pcapplusplus",
-    "status": "unresolved",
+    "status": "unresolved_no_primary_metric",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": null,
     "found_by": "registry search hit",
@@ -23,7 +23,8 @@
     "input_api_lead": "pcpp::DnsLayer(uint8_t *data, size_t dataLen, Layer *prevLayer, Packet *packet)",
     "family": "PcapPlusPlus DnsLayer",
     "note": "No Debian source package; primary metric missing, so unranked under PROTOCOL.md.",
-    "api_lead_checked_against_pinned_release": false
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "No primary metric: PcapPlusPlus has no Debian source package (absent from the pinned popcon sourcemax table; sources.debian.org search for 'pcapplusplus' returned no exact or partial match on 2026-11-17), so the Debian dev-package fallback is also unavailable. GitHub stars are not allowed outside PLY cells. pcpp::DnsLayer decodes DNS from a caller-supplied buffer, but the path is not built until an allowed adoption metric exists."
   },
   {
     "name": "poco",
@@ -94,5 +95,49 @@
     "documentation": "https://doc.powerdns.com/recursor/",
     "family": "PowerDNS Recursor",
     "reason": "Resolver application, not a library."
+  },
+  {
+    "name": "libjdns",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 8,
+    "found_by": "registry search hit (debian-source:dns)",
+    "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
+    "documentation": "https://github.com/psi-im/jdns",
+    "family": "jdns / QJDns (Qt wrapper)",
+    "reason": "The C++ binary package libqjdns-qt5 wraps the jdns resolver/mDNS sessions in QJDns; the packet decoder (jdns_packet.h) is private, so no documented API parses caller-supplied message bytes."
+  },
+  {
+    "name": "kf6-kdnssd",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 29461,
+    "found_by": "registry search hit (debian-source:dns)",
+    "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
+    "documentation": "https://api.kde.org/kdnssd-index.html",
+    "family": "KDE DNSSD over Avahi",
+    "reason": "Service-discovery (browse/publish) framework over Avahi or mDNSResponder; no DNS message parser API."
+  },
+  {
+    "name": "kdnssd-kf5",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 9734,
+    "found_by": "registry search hit (debian-source:dns)",
+    "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
+    "documentation": "https://api.kde.org/kdnssd-index.html",
+    "family": "KDE DNSSD over Avahi",
+    "reason": "KF5 version of the same service-discovery framework; no DNS message parser API."
+  },
+  {
+    "name": "seastar",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": null,
+    "found_by": "project documentation",
+    "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
+    "documentation": "https://docs.seastar.io/master/namespaceseastar_1_1net.html",
+    "family": "Seastar net::dns over c-ares",
+    "reason": "No Debian source package in the pinned table (no primary metric); its seastar::net::dns resolver delegates message decoding to c-ares and documents no parser for caller-supplied message bytes."
   }
 ]

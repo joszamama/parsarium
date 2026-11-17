@@ -26,7 +26,15 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 
 ## Remaining leads
 
-None recorded.
+| Order | Lead | Metric | Input API lead | Family | Status |
+| ---: | --- | ---: | --- | --- | --- |
+| 1 | dnsjit | 4 | `Lua core.object.dns (parse) inside the dnsjit engine` | DNS-OARC dnsjit core.object.dns | unresolved |
+| 2 | mdns | missing | `` | mjansson/mdns (header-only mDNS) | unresolved_no_primary_metric |
+| 3 | pro-mdnsd | missing | `` | mdnsd (Jeremie Miller) fork | unresolved_no_primary_metric |
+
+- **dnsjit**: Not attempted this round. dnsjit is a LuaJIT engine program: Debian builds dnsjit and an Architecture: all dnsjit-dev that installs only usr/include and man3 pages, so there is no linkable C library; the documented parser is the Lua core.object.dns module, which a harness would have to drive through the dnsjit executable and a Lua script.
+- **mdns**: Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. GitHub stars are not allowed outside PLY cells.
+- **pro-mdnsd**: Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. GitHub stars are not allowed outside PLY cells.
 
 ## Checked, excluded or recorded separately
 
@@ -35,5 +43,9 @@ None recorded.
 - **bind9** (excluded): BIND 9 libdns/libisc are internal to BIND since 9.18; no development headers or documented stable message-parse API are shipped.
 - **libevent** (excluded): evdns exposes a resolver and server; message parsing is internal, with no documented API for caller-supplied message bytes.
 - **libspf2** (excluded): SPF policy library; not a DNS message parser API.
-- **glibc** (standard_runtime): C library resolver API; recorded under standard/runtime, outside third-party ranking.
+- **glibc** (standard_runtime): C library resolver API, recorded under standard/runtime outside the third-party ranking. glibc 2.43 libresolv ns_initparse/ns_parserr (Ubuntu 2.43-2ubuntu2.7 in the pinned image) passes both controls; see standard.json.
 - **musl** (standard_runtime): C library resolver API; recorded under standard/runtime, outside third-party ranking.
+- **libmicrodns** (excluded): mDNS client/announcer library. Its installed header microdns.h exports only mdns_init, mdns_destroy, mdns_entries_send, mdns_entries_print, mdns_strerror, mdns_listen, mdns_announce, mdns_serve and mdns_request_initial_announce; message parsing is internal to the socket loop, with no documented API for caller-supplied message bytes.
+- **libjdns** (excluded): Resolver/mDNS session library. src/jdns/CMakeLists.txt installs only jdns.h and jdns_export.h as public headers; the packet decoder (jdns_packet.h) is private, so no documented API parses caller-supplied message bytes.
+- **djbdns** (excluded): Server and client programs; Debian builds no library or development package, and the dns_packet_* routines are internal to the programs.
+- **mdnsresponder** (excluded): No Debian source package (no primary metric); its public dns_sd.h API registers, browses and resolves services over the daemon and documents no parser for caller-supplied message bytes.

@@ -14,9 +14,11 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 
 ## Remaining leads
 
-| Order | Lead | Metric | Input API lead | Family |
-| ---: | --- | ---: | --- | --- |
-| 1 | pcapplusplus | missing | `pcpp::DnsLayer(uint8_t *data, size_t dataLen, Layer *prevLayer, Packet *packet)` | PcapPlusPlus DnsLayer |
+| Order | Lead | Metric | Input API lead | Family | Status |
+| ---: | --- | ---: | --- | --- | --- |
+| 1 | pcapplusplus | missing | `pcpp::DnsLayer(uint8_t *data, size_t dataLen, Layer *prevLayer, Packet *packet)` | PcapPlusPlus DnsLayer | unresolved_no_primary_metric |
+
+- **pcapplusplus**: No primary metric: PcapPlusPlus has no Debian source package (absent from the pinned popcon sourcemax table; sources.debian.org search for 'pcapplusplus' returned no exact or partial match on 2026-11-17), so the Debian dev-package fallback is also unavailable. GitHub stars are not allowed outside PLY cells. pcpp::DnsLayer decodes DNS from a caller-supplied buffer, but the path is not built until an allowed adoption metric exists.
 
 ## Checked, excluded or recorded separately
 
@@ -27,3 +29,7 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 - **pdns** (excluded): Authoritative server application; its MOADNSParser is internal, not an installed library.
 - **dnsdist** (excluded): Load-balancer application, not a library.
 - **pdns-recursor** (excluded): Resolver application, not a library.
+- **libjdns** (excluded): The C++ binary package libqjdns-qt5 wraps the jdns resolver/mDNS sessions in QJDns; the packet decoder (jdns_packet.h) is private, so no documented API parses caller-supplied message bytes.
+- **kf6-kdnssd** (excluded): Service-discovery (browse/publish) framework over Avahi or mDNSResponder; no DNS message parser API.
+- **kdnssd-kf5** (excluded): KF5 version of the same service-discovery framework; no DNS message parser API.
+- **seastar** (excluded): No Debian source package in the pinned table (no primary metric); its seastar::net::dns resolver delegates message decoding to c-ares and documents no parser for caller-supplied message bytes.

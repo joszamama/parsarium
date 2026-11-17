@@ -1,9 +1,107 @@
 {
   "ecosystem": "C",
   "format": "DNS",
-  "runtime": "ISO/IEC 9899:2024 C standard library (WG14 N3220); glibc 2.42 and musl libresolv APIs inventoried separately",
-  "status": "pending",
-  "verified_apis": [],
+  "runtime": "ISO/IEC 9899:2024 C standard library (WG14 N3220); glibc 2.43 libresolv (Ubuntu 2.43-2ubuntu2.7, pinned image) verified; musl inventoried separately",
+  "status": "runtime_verified_standard_none_documented",
+  "verified_apis": [
+    {
+      "name": "glibc libresolv ns_initparse/ns_parserr",
+      "api": "ns_initparse(msg, msglen, &handle) + ns_parserr(&handle, section, index, &rr) (glibc libresolv, <arpa/nameser.h>)",
+      "runtime": "glibc 2.43 libresolv (Ubuntu 2.43-2ubuntu2.7, linux/arm64, ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96)",
+      "version": "glibc 2.43-2ubuntu2.7",
+      "documentation": "https://sourceware.org/git/?p=glibc.git;a=blob;f=resolv/arpa/nameser.h",
+      "documentation_note": "The glibc manual does not describe ns_initparse; the API is declared in <arpa/nameser.h> (BIND 8 resolver heritage, implemented in resolv/ns_parse.c) and documented by that header and the BIND resolver documentation.",
+      "input_api": "int ns_initparse(const unsigned char *msg, int msglen, ns_msg *handle); int ns_parserr(ns_msg *handle, ns_sect section, int rrnum, ns_rr *rr)",
+      "adapter": "adapters/c/dns/libresolv.c",
+      "dockerfile": "adapters/c/dns/libresolv.Dockerfile",
+      "command": "python3 scripts/run_dns_libresolv_standard.py",
+      "control": "controls/dns/response.bin",
+      "differential_control": "controls/dns/query.bin",
+      "expected_output": {
+        "id": 43981,
+        "qr": 1,
+        "opcode": 0,
+        "aa": 0,
+        "tc": 0,
+        "rd": 1,
+        "ra": 1,
+        "z": 0,
+        "rcode": 0,
+        "qdcount": 1,
+        "ancount": 4,
+        "nscount": 0,
+        "arcount": 0,
+        "questions": [
+          {
+            "name": "www.example.test.",
+            "type": 1,
+            "class": 1
+          }
+        ],
+        "answers": [
+          {
+            "name": "www.example.test.",
+            "type": 5,
+            "class": 1,
+            "ttl": 3600,
+            "rdata": "example.test."
+          },
+          {
+            "name": "example.test.",
+            "type": 1,
+            "class": 1,
+            "ttl": 300,
+            "rdata": "192.0.2.10"
+          },
+          {
+            "name": "example.test.",
+            "type": 28,
+            "class": 1,
+            "ttl": 600,
+            "rdata": "2001:db8::10"
+          },
+          {
+            "name": "example.test.",
+            "type": 15,
+            "class": 1,
+            "ttl": 7200,
+            "rdata": "10 mail.example.test."
+          }
+        ],
+        "authority": [],
+        "additional": []
+      },
+      "differential_expected_output": {
+        "id": 4660,
+        "qr": 0,
+        "opcode": 0,
+        "aa": 0,
+        "tc": 0,
+        "rd": 1,
+        "ra": 0,
+        "z": 0,
+        "rcode": 0,
+        "qdcount": 1,
+        "ancount": 0,
+        "nscount": 0,
+        "arcount": 0,
+        "questions": [
+          {
+            "name": "example.test.",
+            "type": 1,
+            "class": 1
+          }
+        ],
+        "answers": [],
+        "authority": [],
+        "additional": []
+      },
+      "result": "data/c/dns/libresolv-standard-result.json",
+      "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+      "family": "BIND 8 libresolv ns_parse (glibc resolv/ns_parse.c, ns_name.c)",
+      "note": "Names come from ns_rr_name and ns_name_uncompress, addresses from inet_ntop, the MX preference from ns_get16; ns_msg_getflag exposes ns_f_z, ns_f_ad and ns_f_cd separately, so z carries all three. glibc is the system runtime and is not source-instrumented here: no parser coverage or AFL++ feedback is claimed, and the path stays outside the third-party ranking."
+    }
+  ],
   "official_documentation_checked": [
     {
       "api": "C standard library headers, clause 7.1.2",
@@ -13,7 +111,7 @@
     {
       "api": "libresolv ns_initparse / ns_parserr (glibc <arpa/nameser.h>)",
       "url": "https://sourceware.org/git/?p=glibc.git;a=blob;f=resolv/ns_parse.c",
-      "finding": "glibc ships the BIND 8 ns_initparse/ns_parserr message parser in libresolv and declares it in <arpa/nameser.h>. The glibc manual does not document it; documentation is the BIND 8 resolver heritage and source. Recorded as a runtime lead, not run."
+      "finding": "glibc ships the BIND 8 ns_initparse/ns_parserr message parser in libresolv and declares it in <arpa/nameser.h>. The glibc manual does not document it; documentation is the header and BIND 8 resolver heritage. Verified on both controls with adapters/c/dns/libresolv.c (see verified_apis)."
     },
     {
       "api": "musl ns_initparse / ns_parserr",
@@ -21,5 +119,5 @@
       "finding": "musl provides the same interface in libc. Not run."
     }
   ],
-  "limit": "Standard/runtime libresolv APIs are documented by source and header only; no control was run. They stay outside the third-party ranking."
+  "limit": "ISO C has no DNS parser. The glibc libresolv path is a C library runtime API verified on the two valid controls only, without source instrumentation or AFL++ feedback; musl's ns_initparse was not run. Both stay outside the third-party ranking."
 }

@@ -5,7 +5,7 @@
   "working_target": 10,
   "ceiling": 10,
   "verified_third_party_count": 5,
-  "verified_standard_or_runtime_count": 0,
+  "verified_standard_or_runtime_count": 1,
   "search_queries": [
     "debian-source:dns",
     "conan:dns",
@@ -19,15 +19,17 @@
   },
   "search_hits_recorded": 117,
   "unique_search_hits": 111,
-  "unresolved_documentation_leads": 0,
-  "leads_recorded": 12,
+  "unresolved_documentation_leads": 3,
+  "leads_recorded": 19,
   "leads_by_status": {
     "resolved_verified_selected": 5,
-    "excluded": 5,
-    "standard_runtime": 2
+    "excluded": 9,
+    "standard_runtime": 2,
+    "unresolved": 1,
+    "unresolved_no_primary_metric": 2
   },
   "ranking_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
-  "uncertainty": "Pilot cell: two C paths verified, c-ares and ldns, ranked by Debian popcon sourcemax installations. bind9, unbound and libevent are excluded because they document no public parser for caller-supplied message bytes; knot, udns and getdns remain leads (getdns shares the ldns-derived gldns code). glibc and musl libresolv ns_initparse are recorded as standard/runtime leads and were not run. c-ares and ldns drop the reserved Z bit (z carries AD and CD). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: five C paths verified, c-ares, ldns, knot (libknot), udns and getdns, ranked by Debian popcon sourcemax installations from the pinned table; every C lead with a positive primary metric and a documented bytes API is now selected. getdns bundles gldns (Unbound's sldns, ldns lineage), but its own decoder files share 75 of 3,228 distinct normalized source lines (2.3%) with ldns 1.8.4, so it is kept as a distinct package API with the lineage stated. Round 2 added targeted lookups for further debian-source:dns and conan:dns hits (registry-snapshot.json round2_targeted): libmicrodns, libjdns and djbdns are excluded (no documented message-bytes API or no library), as are adns, unbound, bind9, libevent and libspf2 from round 1; dnsjit (popcon 4) stays unresolved because its parser is a Lua module inside the dnsjit engine with no linkable C library; Conan-only mdns and pro-mdnsd have no primary metric. glibc libresolv ns_initparse/ns_parserr is verified on both controls as a standard/runtime path (not instrumented, no AFL++ feedback, outside the ranking); musl was not run. c-ares, ldns and udns drop the reserved Z bit (z carries AD and CD); knot and getdns report all three bits. Harness-side RDATA formatting (lower-casing, joining the MX preference and exchange) is disclosed per path. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Popcon counts are package-level, include non-DNS use and are small below c-ares; the cell is not a definitive top ten.",
   "registry_snapshot": "data/c/dns/registry-snapshot.json",
   "unresolved_leads": "data/c/dns/leads.json",
   "runtime_evidence": "data/c/dns/standard.json",
