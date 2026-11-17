@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "format": "svg",
+  "ecosystem": "cpp",
+  "package": "librsvg",
+  "release": "2.63.4",
+  "api": "rsvg_handle_new_from_file(local filename); rsvg_handle_get_intrinsic_size_in_pixels; rsvg_handle_render_document, called from a C++17 translation unit",
+  "catalog_parser": "data/cpp/svg/parsers.json",
+  "source_lock": "data/cpp/svg/source-lock.json",
+  "source_sha256": "31f07d9350dad3f8964fd613c31309ac160fdef13dfac59df6fd082de78d6e8f",
+  "dependency_lock": "Cargo.lock inside the pinned librsvg 2.63.4 archive (cargo fetch --locked)",
+  "rust_toolchain": "1.92.0",
+  "rust_toolchain_sha256": "3e383f8b4fca710d0600d0c1de97b78281672be2cda6575ecbe1c183a12e3822",
+  "cargo_c_release": "0.10.21+cargo-0.95.0",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/svg/red-green.svg",
+  "control_sha256": "ba543b92d6a2c405691fce177270bd55fa13d9866a4128495c3dc93ed7bfd3d2",
+  "expected_output": {
+    "width": 2,
+    "height": 1,
+    "first": [
+      255,
+      0,
+      0
+    ],
+    "second": [
+      0,
+      255,
+      0
+    ]
+  },
+  "harness": "harness.cpp",
+  "language_standard": "c++17",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "afl_file_input": true,
+  "coverage": "LLVM source coverage in librsvg's Rust SVG engine reached through the C API from a C++17 call site, including the SVG XML loader",
+  "coverage_subject_prefix": "/work/librsvg/rsvg/src/",
+  "format_specific_coverage_file_suffix": "/xml/xml2_load.rs",
+  "shared_parser_family": "librsvg 2.63.4 Rust SVG engine (rsvg crate) behind the librsvg-c API",
+  "shared_parser_family_projects": [
+    "projects/svg/c/librsvg"
+  ],
+  "shared_parser_family_note": "Same pinned source archive, Cargo.lock, Rust toolchain, and Meson build as projects/svg/c/librsvg. Only the call site differs (C++17 with RAII ownership); this is not an independent parser."
+}
