@@ -21,6 +21,11 @@
 
 VLC ships its own media pipeline and bundles TagLib metadata and MPEG audio plugins. Runtime module selection for this control was not separately traced. C and C++ call sites share libVLC.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp3_id3v2/c/vlc/README.md)
+
+```sh
+python3 parsarium.py build mp3_id3v2 c vlc
+python3 parsarium.py run mp3_id3v2 c vlc controls/mp3_id3v2/tone-tags.mp3
+```

@@ -12,6 +12,7 @@
 - [sdl_mixer / C](c/sdl_mixer/README.md)
 - [sox / C](c/sox/README.md)
 - [taglib / C](c/taglib/README.md)
+- [vlc / C](c/vlc/README.md)
 - [ffmpeg / C++](cpp/ffmpeg/README.md)
 - [gstreamer / C++](cpp/gstreamer/README.md)
 - [lame / C++](cpp/lame/README.md)
