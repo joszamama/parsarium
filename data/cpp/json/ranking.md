@@ -1,6 +1,6 @@
 # C++ × JSON: selected parsers (pilot)
 
-Six independently implemented, control-verified third-party paths are selected: five ranked by the primary metric and Boost.JSON, which has no primary value. Ten is a ceiling, and four additional documentation leads remain unverified.
+Seven control-verified third-party paths are selected: five ranked by the primary metric, plus Boost.JSON and POCO JSON, whose multi-library source packages lack a JSON-specific primary value. Ten is a ceiling, and three documentation leads remain unverified.
 
 ## Adoption metric
 
@@ -14,6 +14,7 @@ The ranking uses Debian popcon `sourcemax/by_inst` installations: the maximum ov
 | 4 | [RapidJSON](https://github.com/Tencent/rapidjson/tree/v1.1.0) | 1.1.0 | 899 | 899 | RapidJSON header-only SAX/DOM parser |
 | 5 | [Glaze](https://github.com/stephenberry/glaze/tree/v9.1.0) | 9.1.0 | 171 | 171 | Glaze own template-based JSON reader |
 | — | [Boost.JSON](https://github.com/boostorg/boost/releases/tag/boost-1.92.0) | 1.92.0 | unranked (Boost-wide) | 1,749 | Boost.JSON basic_parser |
+| — | [POCO JSON](https://github.com/pocoproject/poco/releases/tag/poco-1.15.4-release) | 1.15.4 | unranked (POCO-wide) | 190 (POCO suite) | POCO ParserImpl over bundled pdjson |
 
 The source-package order differs from the dev-package view: simdjson is a runtime dependency for other Debian software, while nlohmann/json is header-only. GitHub stars are a separately recorded signal and not combined with popcon: nlohmann/json 50,894, simdjson 24,576, JsonCpp 8,916, boostorg/json 482 at the recorded snapshot. No ordering here establishes the definitive most-used C++ JSON parser.
 
@@ -27,6 +28,8 @@ Boost.JSON 1.92.0 comes from the official [Boost release archive](https://github
 
 Glaze 9.1.0 is pinned from its [official release tag](https://github.com/stephenberry/glaze/releases/tag/v9.1.0) by SHA-256 `55f8a675397c505f9bee6c160e1c26b0085868f185d04d7a7727531fdbff4bd4` (MIT). Its documented `glz::read_json(glz::generic_i64&, std::string)` reads local bytes into an insertion-ordered generic DOM with signed integers and doubles. The replay of each valid control matches the original nested structure, key order, and integer/float kinds. The base control covers 1,623 Glaze source lines, including 415 in `json/read.hpp`. The parser-only AFL++ probe calls `read_json` without serialization or DOM traversal; its feedback repeats exactly and differs by 25 reader lines and 140 AFL tuples between controls ([receipt](../../../fuzzing/afl-native/json/cpp/glaze/differential.json)). The primary 171-installation source count comes from a supplementary exact `glaze` source-name lookup in the *same hashed Debian snapshot* as the other rows. Glaze was not one of the 320 source names containing `json`; its `libglaze-dev` binary count is also 171.
 
+POCO JSON 1.15.4 comes from the official [POCO release archive](https://github.com/pocoproject/poco/releases/tag/poco-1.15.4-release), pinned by SHA-256 `525591a43d4b5e9472663f8fa5fb9b7bfbd7ec8a0abe130ef7411531a0ea55c5` (BSL-1.0). Its documented `Poco::JSON::Parser::parse(std::string)` accepts local bytes and creates an Object or Array DOM. `ParseHandler(true)` preserves key order. The two valid controls round-trip to exact nested trees with number kinds intact. The first covers 125 `ParserImpl.cpp` lines and 350 lines in bundled `pdjson.c`; POCO delegates tokenization to pdjson. A parser-only AFL++ probe has repeatable maps, with 131 differing tuples and 32 differing `pdjson.c` lines between the valid controls ([receipt](../../../fuzzing/afl-native/json/cpp/poco-json/differential.json)). POCO is unranked in the primary source metric: its Debian source `poco` (940 installations) covers many libraries, and `libpoco-dev` (190) also covers the suite. The component-specific runtime `libpocojson100` has 125 installations, all classified `no_files`. None of those numbers estimates JSON API use or compares to the dedicated-source ranking.
+
 [Parser records](parsers.json) · [control results](verification.json) · [standard API inventory](standard.json). The ISO C++ library has no JSON parser API.
 
 ## Unresolved leads
@@ -34,7 +37,6 @@ Glaze 9.1.0 is pinned from its [official release tag](https://github.com/stephen
 | Lead | Source installs | Dev installs | Status |
 | --- | ---: | ---: | --- |
 | [Qt QJsonDocument](https://doc.qt.io/qt-6/qjsondocument.html) | unavailable (Qt-wide) | unavailable | Framework-wide count is not JSON-specific; not control-tested |
-| [POCO JSON](https://docs.pocoproject.org/current/Poco.JSON.Parser.html) | unavailable (POCO-wide) | 190 | Not control-tested |
 | [PicoJSON](https://github.com/kazuho/picojson) | 16 | unavailable | Not control-tested |
 | [jsoncons](https://github.com/danielaparker/jsoncons) | 3 | 3 | Not control-tested |
 

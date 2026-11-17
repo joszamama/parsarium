@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T11:31:43.644920+00:00",
-  "projects_total": 6,
-  "projects_passed": 6,
-  "differential_kind": "two fixed valid nested JSON controls; Glaze uses a parser-only generic_i64 probe with exact DOM checks",
-  "command": "python3 scripts/build_afl_native.py json cpp glaze && python3 projects/json/cpp/glaze/verify-parser-feedback.py (earlier paths retain recorded receipts)",
+  "checked_at_utc": "2026-11-17T12:02:24.027426+00:00",
+  "projects_total": 7,
+  "projects_passed": 7,
+  "differential_kind": "two fixed valid nested JSON controls; Glaze and POCO use parser-only probes with exact DOM checks",
+  "command": "python3 projects/json/cpp/glaze/verify-parser-feedback.py and python3 projects/json/cpp/poco-json/verify-parser-feedback.py; earlier paths retain recorded receipts",
   "results": [
     {
       "project": "json/cpp/jsoncpp",
@@ -115,6 +115,32 @@
       "afl_tuple_difference": 140,
       "parser_only_probe": "projects/json/cpp/glaze/parser-probe.cpp",
       "exact_tree_outputs_verified": true
+    },
+    {
+      "project": "json/cpp/poco-json",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_parser_only_edges_with_poco_pdjson_source_lines",
+      "overlay_receipt_sha256": "8676908adb1e3badba26245026f89532819dcd48ab3eeb754dc5c0d0ba76bc53",
+      "differential_receipt_sha256": "4fcb0af3a837fd56575b45409a1df997c3d37a0e7bcf9be49b8655a0fe95fc7d",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_source_lines": 478,
+      "control_afl_tuples": 1320,
+      "differential_source_lines": 458,
+      "differential_afl_tuples": 1321,
+      "source_line_difference": 32,
+      "underlying_pdjson_line_difference": 32,
+      "afl_tuple_difference": 131,
+      "parser_only_probe": "projects/json/cpp/poco-json/parser-probe.cpp",
+      "exact_tree_outputs_verified": true
     }
-  ]
+  ],
+  "refreshed_projects": [
+    "glaze",
+    "poco-json"
+  ],
+  "retained_prior_results_checked_at_utc": "2026-11-17T11:31:43.644920+00:00"
 }
