@@ -24,7 +24,7 @@ class JavaScriptJsonPilotTest(unittest.TestCase):
             {lead["name"] for lead in leads if lead["status"] == "unresolved"}))
         self.assertTrue(all(lead["status"] in {"unresolved", "promoted_to_verified"} for lead in leads))
         self.assertEqual({lead["name"] for lead in leads if lead["status"] == "promoted_to_verified"},
-                         {"jsonparse"})
+                         {"jsonparse", "JSONStream"})
         cell = read(BASE / "cell.json")
         self.assertEqual(cell["verified_third_party_count"], len(parsers))
         self.assertEqual(cell["unresolved_documentation_leads"],
@@ -35,6 +35,9 @@ class JavaScriptJsonPilotTest(unittest.TestCase):
 
     def test_receipts_match_both_controls(self):
         feedback = {entry["project"]: entry for entry in read(BASE / "afl-feedback.json")["results"]}
+        cell = read(BASE / "cell.json")
+        additional = read(ROOT / cell["afl_feedback_additional"])
+        feedback[additional["project"]] = additional
         for parser in read(BASE / "parsers.json"):
             project = ROOT / parser["project"]
             manifest = read(project / "manifest.json")

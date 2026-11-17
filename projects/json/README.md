@@ -25,6 +25,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [json-smart / Java](java/json_smart/README.md)
 - [moshi / Java](java/moshi/README.md)
 - [@streamparser/json / JavaScript](javascript/streamparser_json/README.md)
+- [JSONStream / JavaScript](javascript/jsonstream/README.md)
 - [bfj / JavaScript](javascript/bfj/README.md)
 - [jsonparse / JavaScript](javascript/jsonparse/README.md)
 - [stream-json / JavaScript](javascript/stream_json/README.md)
