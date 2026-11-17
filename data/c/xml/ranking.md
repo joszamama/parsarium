@@ -1,9 +1,7 @@
 # C XML parser pilot
 
 This pilot has three verified third-party paths from different parser families:
-[`expat`](../../../projects/xml/c/expat/README.md) 2.10.0,
-[`libxml2`](../../../projects/xml/c/libxml2/README.md) 2.15.4 and
-[`mxml`](../../../projects/xml/c/mxml/README.md) (Mini-XML) 4.0.6. expat's
+[`expat`](../../../projects/xml/c/expat/README.md) 2.10.0, [`libxml2`](../../../projects/xml/c/libxml2/README.md) 2.15.4 and [`mxml`](../../../projects/xml/c/mxml/README.md) (Mini-XML) 4.0.6. expat's
 documented API (`XML_ParserCreateNS`, the element, namespace-declaration and
 character-data handlers, `XML_Parse` over a local buffer) and libxml2's
 (`xmlReaderForMemory` over a local buffer, then the `xmlTextReaderRead` pull
@@ -12,8 +10,7 @@ Mini-XML's `mxmlLoadString` builds a tree of the same controls, but Mini-XML
 does not implement XML namespaces: it returns names as written (`c:catalog`) and
 keeps `xmlns` declarations as attributes. Its adapter resolves the expanded
 names from that tree, and that summary matches too.
-Their runtime library packages have **297,134** (`libexpat1`), **290,724**
-(`libxml2`) and **2,054** (`libmxml1`) Debian popcon installations in the
+Their runtime library packages have **297,134** (`libexpat1`), **290,724** (`libxml2`) and **2,054** (`libmxml1`) Debian popcon installations in the
 [saved snapshot](registry-snapshot.json). That counts installations,
 mostly pulled in as a dependency; it is an adoption proxy, not a count of
 programs that call the parser.
@@ -21,9 +18,11 @@ programs that call the parser.
 ## Primary within-cell adoption metric
 
 Debian popcon installations of the lead's runtime library binary package,
-captured 2026-11-17. The source-package (sourcemax) table is not used: the
-libxml2 source now builds `libxml2-16`, so the older `libxml2` binary's
-installations are no longer attributed to it.
+captured 2026-11-17 (`by_inst.gz`, SHA-256
+`299486c46a56fc44b390058490a50b9f1250335c7cdf6f1e02b8cee0a212a802`). The
+source-package (sourcemax) table is not used for ranking: the libxml2 source now
+builds `libxml2-16`, so the older `libxml2` binary's installations are no
+longer attributed to it.
 
 | Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -32,24 +31,37 @@ installations are no longer attributed to it.
 | 3 | [mxml](https://www.msweet.org/mxml/mxml.html) | 4.0.6 | 2,054 | Element tree, attributes, depth and character data of one in-memory document; namespaces resolved by the adapter, not by Mini-XML | Mini-XML |
 
 `libmxml1` is the Mini-XML 3.x library package; the pinned 4.0.6 is the
-`mxml` source in Debian forky and sid, and its `libmxml4` package has no row in
-the snapshot. 1,842 of the 2,054 `libmxml1` installations are in popcon's
-no-files column.
+`mxml` source in Debian forky and sid. 1,842 of the 2,054 `libmxml1`
+installations are in popcon's no-files column.
 
 ## Leads
 
-One Conan recipe-name query (`xml`, 9 hits) and seven targeted C names. The
-[leads](leads.json) record each one. Apart from the three verified entries, none of them is verified.
+One Conan recipe-name query (`xml`, 9 hits), seven targeted C names, every
+Debian source name containing `xml` in the hashed sourcemax snapshot (306 hits,
+all classified in the [snapshot](registry-snapshot.json): 5 C XML parser
+libraries, 13 other C or tool packages, 21 C++ packages, 4 data packages and
+263 other-language packages) and seven targeted Debian sources. The
+[leads](leads.json) record each candidate. Apart from the three verified entries, none of them is verified.
 
-Homebrew 365-day installs, a cross-check only, give the same order for the three
-verified entries (expat 1,360,500; libxml2 564,778; libmxml 127). `libxml2-16` (9,413) is not
-added to libxml2's value because hosts may have both packages.
+Homebrew 365-day installs, a cross-check only, give the same order for expat,
+libxml2 and mxml (1,360,500; 564,778; 127). `libxml2-16` (9,413) is not added
+to libxml2's value because hosts may have both packages.
 
+- libxmlb (libxmlb2 130,663) and libnxml (libnxml0t64 104): C XML libraries
+  from the Debian search, pending verification.
+- GLib GMarkup: unranked. Its source `glib2.0` builds all of GLib, and Debian
+  has no GMarkup-specific development package for the fallback rule. It is
+  libxmlb's underlying parser.
+- iksemel (libiksemel3 4,375; source no longer in Debian): own parser, but it
+  fails `order-default-ns.xml` — character references become `?` and attribute
+  entities stay undecoded. It stays a lead.
 - libroxml, yxml, ezxml, sxmlc: no Debian package in the snapshot, so no
   primary value; not built.
-- 8 hits are excluded: six C++ parsers, the libxml++ wrapper and xmlsec, both
-  over libxml2.
+- Excluded: libgsf (schema-table wrapper over libxml2), qdbm (tokenizer helpers
+  in a database library), xmlrpc-c and xmlrpc-epi (XML-RPC), libstrophe (XMPP),
+  wbxml2 (binary XML), and 8 Conan hits (six C++ parsers, the libxml++ wrapper
+  and xmlsec, both over libxml2).
 
-This three-entry pilot is neither a top-ten ranking nor evidence that only three C
+This pilot is neither a top-ten ranking nor evidence that only these C
 XML parsers exist. The [cell record](cell.json) gives the remaining uncertainty
 and the [standard-library finding](standard.json).

@@ -151,6 +151,130 @@
       "homebrew_install_365d": null,
       "reason": "C++ parser; belongs to the C++ cell, not C.",
       "source": "https://conan.io/center/recipes/tinyxml2"
+    },
+    {
+      "name": "libxmlb",
+      "status": "unresolved",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 130663,
+      "homebrew_install_365d": null,
+      "debian_source": "libxmlb",
+      "search": "Debian sourcemax source-name substring 'xml'",
+      "reason": "Selected and verified: xb_builder_source_load_xml/xb_builder_compile matched the expat non-namespace summary of both valid controls as a raw-name path, with libxmlb and GMarkup line coverage and a stable AFL++ differential; see data/c/xml/parsers.json. GMarkup family.",
+      "source": "https://github.com/hughsie/libxmlb"
+    },
+    {
+      "name": "libnxml",
+      "status": "unresolved",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 104,
+      "homebrew_install_365d": null,
+      "debian_source": "libnxml",
+      "search": "Debian sourcemax source-name substring 'xml'",
+      "reason": "Selected and verified: nxml_parse_buffer matched the expat non-namespace summary of both valid controls as a raw-name path, with libnxml line coverage and a stable AFL++ differential; see data/c/xml/parsers.json. Own parser family.",
+      "source": "https://github.com/bakulf/libnxml"
+    },
+    {
+      "name": "iksemel",
+      "status": "unresolved_control_mismatch",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 4375,
+      "homebrew_install_365d": null,
+      "debian_source": "iksemel",
+      "search": "targeted Debian source lookup",
+      "reason": "Targeted lookup: libiksemel3 has 4,375 installations in the binary by_inst file, but the iksemel source is no longer in Debian (no sourcemax row; sources.debian.org has no current package). Own SAX/tree parser in C (iks_parse, iks_tree), not namespace-aware. A throwaway raw-name probe of the upstream iksemel-1.4.tar.gz (Google Code archive, SHA-256 458c1b8fb3349076a6cecf26c29db1d561315d84e16bfcfba419f327f502e244, LGPL-2.1) with iks_tree matched the expat non-namespace summary of catalog-ns.xml but not order-default-ns.xml: sax.c decodes only the five predefined entities in text and maps every other reference to '?' (sku text 'A?7', amount '12?50 ?'), and attribute values are not decoded at all (note='say &quot;hi&quot;'). It fails the cell's second valid control, so no project or AFL++ overlay was built.",
+      "source": "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/iksemel/iksemel-1.4.tar.gz"
+    },
+    {
+      "name": "glib2.0 (GMarkup)",
+      "status": "unresolved_no_primary_metric",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "debian_source": "glib2.0",
+      "search": "targeted Debian source lookup",
+      "reason": "Targeted lookup: GLib's GMarkup (g_markup_parse_context_parse, documented at https://docs.gtk.org/glib/method.MarkupParseContext.parse.html) is a C XML-subset parser over local buffers. Its Debian source glib2.0 builds all of GLib, so the runtime counts (libglib2.0-0t64 167,992) are not format-specific, and Debian has no GMarkup-specific development package for the protocol's fallback (libglib2.0-dev 32,154 covers all of GLib). Unranked and not selected. GMarkup is exercised and covered as the underlying parser of the libxmlb path.",
+      "source": "https://gitlab.gnome.org/GNOME/glib/-/blob/2.88.4/glib/gmarkup.c"
+    },
+    {
+      "name": "libgsf",
+      "status": "excluded",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 86874,
+      "homebrew_install_365d": null,
+      "debian_source": "libgsf",
+      "search": "targeted Debian source lookup",
+      "reason": "Targeted lookup (libgsf-1-114 86,874). Structured-file I/O library (OLE2, ZIP); its GsfXMLIn wraps libxml2's push SAX parser and dispatches only to elements declared in a caller-supplied GsfXMLInNode table, so it offers no generic element view of an arbitrary document. libxml2 family; excluded like other schema-mapping wrappers.",
+      "source": "https://gitlab.gnome.org/GNOME/libgsf"
+    },
+    {
+      "name": "qdbm (Cabin XML helpers)",
+      "status": "excluded",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 6234,
+      "homebrew_install_365d": null,
+      "debian_source": "qdbm",
+      "search": "targeted Debian source lookup",
+      "reason": "Targeted lookup (libqdbm14 6,234). Database library; its Cabin utility API has cbxmlbreak/cbxmlattrs, which split a string into tag and text tokens without nesting or tree, so it is a tokenizer helper inside a multi-purpose library, not an XML parser path.",
+      "source": "https://dbmx.net/qdbm/"
+    },
+    {
+      "name": "xmlrpc-epi",
+      "status": "excluded",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 3518,
+      "homebrew_install_365d": null,
+      "debian_source": "xmlrpc-epi",
+      "search": "Debian sourcemax source-name substring 'xml'",
+      "reason": "Debian source-name hit (libxmlrpc-epi0 3,518). XML-RPC protocol library over expat; not a general XML parser API. expat family.",
+      "source": "https://xmlrpc-epi.sourceforge.net/"
+    },
+    {
+      "name": "xmlrpc-c",
+      "status": "excluded",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 1434,
+      "homebrew_install_365d": null,
+      "debian_source": "xmlrpc-c",
+      "search": "Debian sourcemax source-name substring 'xml'",
+      "reason": "Debian source-name hit (libxmlrpc-core-c3 1,434). XML-RPC protocol library; parses XML-RPC messages through its bundled expat-derived xmlparse or libxml2; not a general XML parser API.",
+      "source": "https://xmlrpc-c.sourceforge.io/"
+    },
+    {
+      "name": "libstrophe",
+      "status": "excluded",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 213,
+      "homebrew_install_365d": null,
+      "debian_source": "libstrophe",
+      "search": "targeted Debian source lookup",
+      "reason": "Targeted lookup (libstrophe0 213). XMPP client library; XML stanzas are parsed by expat or libxml2. Protocol library, not a general XML parser API.",
+      "source": "https://strophe.im/libstrophe/"
+    },
+    {
+      "name": "wbxml2",
+      "status": "excluded",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 170,
+      "homebrew_install_365d": null,
+      "debian_source": "wbxml2",
+      "search": "Debian sourcemax source-name substring 'xml'",
+      "reason": "Debian source-name hit (libwbxml2-0 170). WBXML (binary XML) codec; textual XML goes through expat. Different format and not a general XML parser API.",
+      "source": "https://github.com/libwbxml/libwbxml"
     }
-  ]
+  ],
+  "debian_search": {
+    "snapshot": "data/c/xml/registry-snapshot.json#debian_source_search",
+    "note": "Leads above the three selected paths were added from the Debian source-name search ('xml', 306 hits, 5 C XML parser libraries) and targeted lookups; all other hits are classified in the snapshot."
+  }
 }
