@@ -11,22 +11,12 @@ import re
 from audit_projects import (browser_control_verified, native_source_control_verified,
                             macos_host_control_verified, third_party_control_verified,
                             fully_runnable)
+from format_registry import ACTIVE_FORMATS, ECOSYSTEMS, FORMAT_BY_ID, PILOT_FORMATS
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FORMATS = {
-    "png": ("PNG", "Chunked raster image"),
-    "zip": ("ZIP", "Archive with a central directory"),
-    "mp4": ("MP4", "ISO base media container"),
-    "wav": ("WAV", "RIFF audio container"),
-    "pdf": ("PDF", "Page and object document"),
-    "svg": ("SVG", "XML vector image"),
-    "http11": ("HTTP/1.1", "Text request and response protocol"),
-    "ascii_ply": ("ASCII PLY", "Text mesh geometry"),
-    "ascii_pnm": ("ASCII PNM", "Text portable image"),
-    "mp3_id3v2": ("MP3 with ID3v2", "Audio with an ID3v2 tag"),
-}
-ECOSYSTEMS = ("c", "cpp", "go", "java", "javascript", "python", "rust", "php")
+FORMATS = {fmt: (item["label"], item["description"]) for fmt, item in FORMAT_BY_ID.items()}
+ACTIVE_GUIDES = {fmt: FORMATS[fmt] for fmt in ACTIVE_FORMATS}
 ECO_LABEL = {"c": "C", "cpp": "C++", "go": "Go", "java": "Java",
              "javascript": "JavaScript", "python": "Python", "rust": "Rust", "php": "PHP"}
 
@@ -111,8 +101,11 @@ def main() -> None:
     standard_count = 0
     coverage = read(ROOT / "data/projects-coverage.json")
     by_cell = {(cell["format"], cell["ecosystem"]): cell for cell in coverage["cells"]}
+    pilot_by_cell = {(cell["format"], cell["ecosystem"]): cell
+                     for cell in coverage["pilot"]["cells"]}
+    pilot_index = []
 
-    for fmt, (format_label, description) in FORMATS.items():
+    for fmt, (format_label, description) in ACTIVE_GUIDES.items():
         format_rows = []
         format_projects = []
         for eco in ECOSYSTEMS:
@@ -288,6 +281,127 @@ def main() -> None:
              "coverage, one-input replay, and AFL++ overlays.", "",
              "## Targets", "", *project_rows, ""])
 
+    for fmt in PILOT_FORMATS:
+        format_label, description = FORMATS[fmt]
+        format_dir = ROOT / "catalog" / fmt
+        format_rows = []
+        format_projects = []
+        for eco in ECOSYSTEMS:
+            source = ROOT / "data" / eco / fmt
+            state = pilot_by_cell[(fmt, eco)]
+            cell_dir = format_dir / eco
+            entries = read(source / "parsers.json") if (source / "parsers.json").is_file() else []
+            verification = (read(source / "verification.json")
+                            if (source / "verification.json").is_file() else {})
+            names = Counter(re.sub(r"[^a-z0-9]+", "-", item["name"].lower()).strip("-") or "parser"
+                            for item in entries)
+            parser_rows = []
+            for entry in entries:
+                item_dir = cell_dir / slug(entry["name"], names)
+                readme = item_dir / "README.md"
+                control, output = verified_result(entry, verification)
+                if not control or output is None or not (ROOT / control).is_file():
+                    raise ValueError(f"pilot parser lacks a verified control: {fmt}/{eco}/{entry['name']}")
+                project = projects.get((fmt, eco, entry["name"]))
+                ready = bool(project and fully_runnable(project[0], project[1]))
+                docs = entry["documentation"]
+                docs = [docs] if isinstance(docs, str) else docs
+                lines = [f"# {entry['name']} — {format_label} / {ECO_LABEL[eco]}", "",
+                         "**Pilot / incomplete format cell.** This path is verified on its stated control; "
+                         "the format-wide search is still in progress.", "",
+                         f"- **Pinned release:** `{entry['version']}`",
+                         f"- **License:** {entry['license']}",
+                         f"- **Parser family:** {entry['family']}",
+                         f"- **Local input API:** `{entry['input_api']}`",
+                         "- **Documentation:** " + " · ".join(f"[API reference](<{url}>)" for url in docs),
+                         f"- **Valid control:** [`{control}`]({link(item_dir, ROOT / control)})",
+                         f"- **Catalog evidence:** [parser record]({link(item_dir, source / 'parsers.json')}) · "
+                         f"[control result]({link(item_dir, source / 'verification.json')})", "",
+                         "## Observed control result", "", "```json",
+                         json.dumps(output, indent=2, ensure_ascii=False), "```", ""]
+                if ready:
+                    project_path = project[0]
+                    lines += ["## Run this target", "", "```sh",
+                              f"python3 parsarium.py build {fmt} {eco} {project_path.parent.name}",
+                              f"python3 parsarium.py run {fmt} {eco} {project_path.parent.name} {control}",
+                              "```", ""]
+                    format_projects.append((eco, entry["name"], project_path.parent))
+                generated[readme] = "\n".join(lines)
+                pilot_index.append({"format": fmt, "ecosystem": eco, "name": entry["name"],
+                                    "readme": str(readme.relative_to(ROOT)), "runnable": ready,
+                                    "phase": "pilot", "complete": False})
+                parser_rows.append(f"- [{label(entry['name'])}]({link(cell_dir, readme)})" +
+                                   (" — verified Docker harness" if ready else " — verified API path"))
+            standard_file = source / "standard.json"
+            standard = read(standard_file)["verified_apis"] if standard_file.is_file() else []
+            standard_bases = Counter(re.sub(r"[^a-z0-9]+", "-", (item.get("name") or item["api"]).lower()).strip("-") or "parser"
+                                     for item in standard)
+            standard_rows = []
+            for item in standard:
+                api_name = item.get("name") or item.get("api")
+                item_dir = cell_dir / "standard" / slug(api_name, standard_bases)
+                readme = item_dir / "README.md"
+                control = item["control"]
+                docs = item.get("documentation") or item.get("official_documentation")
+                docs = [docs] if isinstance(docs, str) else docs
+                output = item.get("expected", item.get("expected_output"))
+                if not docs or output is None:
+                    raise ValueError(f"pilot standard API lacks documentation or expected result: {fmt}/{eco}/{api_name}")
+                lines = [f"# {api_name} — {format_label} / {ECO_LABEL[eco]}", "",
+                         "**Pilot / incomplete format cell.**", "",
+                         f"- **Runtime:** {item.get('runtime') or 'See standard API inventory'}",
+                         f"- **Parser family:** {item.get('family') or 'See standard API inventory'}",
+                         f"- **Official documentation:** " + " · ".join(f"[reference]({url})" for url in docs),
+                         f"- **Valid control:** [`{control}`]({link(item_dir, ROOT / control)})",
+                         f"- **Inventory:** [standard API record]({link(item_dir, standard_file)}) · "
+                         f"[saved result]({link(item_dir, ROOT / item['result'])})", "",
+                         "## Observed control result", "", "```json",
+                         json.dumps(output, indent=2, ensure_ascii=False), "```", ""]
+                standard_project = standard_projects.get((fmt, eco, item.get("api")))
+                if standard_project:
+                    slug_name = standard_project.parent.name
+                    lines += ["## Run this target", "", "```sh",
+                              f"python3 parsarium.py build {fmt} {eco} {slug_name}",
+                              f"python3 parsarium.py run {fmt} {eco} {slug_name} {control}",
+                              "```", ""]
+                    format_projects.append((eco, api_name, standard_project.parent))
+                generated[readme] = "\n".join(lines)
+                standard_rows.append(f"- [{label(api_name)}]({link(cell_dir, readme)})" +
+                                     (" — verified Docker harness" if standard_project else " — verified API path"))
+            links = []
+            if (source / "ranking.md").is_file():
+                links.append(f"[Ranking and search limits]({link(cell_dir, source / 'ranking.md')})")
+            if standard_file.is_file():
+                links.append(f"[Standard API inventory]({link(cell_dir, standard_file)})")
+            generated[cell_dir / "README.md"] = "\n".join(
+                [f"# {format_label} / {ECO_LABEL[eco]} — pilot", "",
+                 f"**Status:** {state['status']}; incomplete. "
+                 f"{state['catalog_paths']} verified third-party paths, "
+                 f"{state['standard_api_paths']} verified standard APIs, "
+                 f"{state['containerized_verified']} verified Docker harnesses.", "",
+                 state.get("uncertainty") or
+                 "No search or standard API inventory has been completed; zero is not evidence of absence.", "",
+                 " · ".join(links), "", "## Third-party parsers", "",
+                 *(parser_rows or ["None verified in this pilot cell yet."]), "",
+                 "## Standard and runtime APIs", "",
+                 *(standard_rows or ["None verified in this pilot cell yet."]), ""])
+            format_rows.append(f"| [{ECO_LABEL[eco]}]({link(format_dir, cell_dir / 'README.md')}) "
+                               f"| {state['status']} | {state['catalog_paths']} | "
+                               f"{state['containerized_verified']} |")
+        generated[format_dir / "README.md"] = "\n".join(
+            [f"# {format_label} — pilot", "", description + ".", "",
+             "This format is incomplete across the eight ecosystems. Each row reports only "
+             "documented, verified paths; zero means no verified entry yet, not absence of parsers.", "",
+             "| Ecosystem | Status | Verified paths | Docker harnesses |",
+             "| --- | --- | ---: | ---: |", *format_rows, ""])
+        project_dir = ROOT / "projects" / fmt
+        project_rows = [f"- [{label(name)} / {ECO_LABEL[eco]}]({link(project_dir, path / 'README.md')})"
+                        for eco, name, path in sorted(format_projects)]
+        generated[project_dir / "README.md"] = "\n".join(
+            [f"# {format_label} pilot targets", "",
+             "Only verified Docker targets appear below; the format remains incomplete.", "",
+             *(project_rows or ["No verified Docker targets yet."]), ""])
+
     for path in manifest_paths:
         manifest = read(path)
         if not fully_runnable(path, manifest):
@@ -295,7 +409,7 @@ def main() -> None:
         fmt, eco, slug_name = manifest["format"], manifest["ecosystem"], path.parent.name
         project_dir = path.parent
         key = (fmt, eco, manifest["package"])
-        catalog_readme = next((ROOT / item["readme"] for item in index
+        catalog_readme = next((ROOT / item["readme"] for item in [*index, *pilot_index]
                                if (item["format"], item["ecosystem"], item["name"]) == key), None)
         source_feedback = manifest.get("coverage_kind") == "native_source_afl_feedback"
         receipt_name = "control-verification.json" if source_feedback else "verification.json"
@@ -347,6 +461,9 @@ def main() -> None:
 
     index_path = ROOT / "data/parser-readmes.json"
     generated[index_path] = json.dumps({"schema_version": 1, "parsers": index}, indent=2) + "\n"
+    generated[ROOT / "data/pilot-parser-readmes.json"] = json.dumps(
+        {"schema_version": 1, "phase": "pilot", "complete": False,
+         "parsers": pilot_index}, indent=2) + "\n"
     if args.check:
         wrong = [str(path.relative_to(ROOT)) for path, content in generated.items()
                  if not path.is_file() or path.read_text(encoding="utf-8") != content]

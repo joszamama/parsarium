@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 from audit_popularity_coverage import build_report
 from build_matrix import ECOSYSTEMS, FORMATS
+from format_registry import PILOT_FORMATS
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,6 +17,119 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def read(path: str):
     return json.loads((ROOT / path).read_text())
+
+
+def validate_pilot_cells() -> None:
+    """Check pilot evidence without treating an unsearched cell as an empty result."""
+    data = read("data/pilot-cells.json")
+    expected = {(ecosystem, fmt) for ecosystem in ECOSYSTEMS for fmt in PILOT_FORMATS}
+    cells = data.get("cells", [])
+    if (data.get("phase") != "pilot" or data.get("complete") is not False or
+            len(cells) != len(expected) or
+            {(cell["ecosystem"], cell["format"]) for cell in cells} != expected):
+        raise ValueError("pilot matrix must list every ecosystem cell once as incomplete")
+    for cell in cells:
+        eco, fmt = cell["ecosystem"], cell["format"]
+        base = ROOT / "data" / eco / fmt
+        status = cell.get("status")
+        if (cell.get("phase") != "pilot" or cell.get("complete") is not False or
+                cell.get("working_target") != 10 or cell.get("ceiling") != 10):
+            raise ValueError(f"pilot cell is not explicitly incomplete: {eco}/{fmt}")
+        if status == "pilot_not_started":
+            if (cell.get("verified_third_party_count") != 0 or
+                    cell.get("verified_standard_or_runtime_count") != 0 or
+                    any((base / name).exists() for name in
+                        ("cell.json", "parsers.json", "standard.json", "verification.json"))):
+                raise ValueError(f"unreported pilot evidence or count: {eco}/{fmt}")
+            continue
+        if (not isinstance(status, str) or not status.startswith("pilot_")
+                or status == "pilot_complete"):
+            raise ValueError(f"unknown pilot status: {eco}/{fmt}/{status}")
+        source = base / "cell.json"
+        if not source.is_file():
+            raise ValueError(f"pilot cell has no source record: {eco}/{fmt}")
+        original = json.loads(source.read_text())
+        if cell != {**original, "phase": "pilot", "complete": False}:
+            raise ValueError(f"pilot matrix differs from its cell record: {eco}/{fmt}")
+        count = cell["verified_third_party_count"]
+        standard_count = cell["verified_standard_or_runtime_count"]
+        if (not isinstance(count, int) or not 0 <= count <= 10 or
+                not isinstance(standard_count, int) or standard_count < 0 or
+                not isinstance(cell.get("uncertainty"), str) or not cell["uncertainty"].strip()):
+            raise ValueError(f"pilot cell lacks bounded counts or uncertainty: {eco}/{fmt}")
+        parsers = read(f"data/{eco}/{fmt}/parsers.json") if (base / "parsers.json").is_file() else []
+        if len(parsers) != count or len({item["name"] for item in parsers}) != count:
+            raise ValueError(f"pilot parser count or deduplication differs: {eco}/{fmt}")
+        standard = read(f"data/{eco}/{fmt}/standard.json") if (base / "standard.json").is_file() else {"verified_apis": []}
+        if len(standard["verified_apis"]) != standard_count:
+            raise ValueError(f"pilot standard API count differs: {eco}/{fmt}")
+        if count or standard_count:
+            verification = (read(f"data/{eco}/{fmt}/verification.json")
+                            if (base / "verification.json").is_file() else {})
+            records = verification.get("third_party", verification.get("results", []))
+            if records and (len(records) != count or
+                            {item["package"] for item in records} !=
+                            {item["name"] for item in parsers} or
+                            not all(item.get("pass") is True for item in records)):
+                raise ValueError(f"pilot control results differ from parser list: {eco}/{fmt}")
+            results = {item["package"]: item for item in records}
+            leads_file = base / "leads.json"
+            lead_data = read(f"data/{eco}/{fmt}/leads.json") if leads_file.is_file() else []
+            leads = lead_data.get("leads", []) if isinstance(lead_data, dict) else lead_data
+            lead_by_name = {item.get("name"): item for item in leads}
+            for parser in parsers:
+                name = parser["name"]
+                control = parser.get("control")
+                if not control:
+                    controls = verification.get("controls", {})
+                    if isinstance(controls, dict):
+                        control = next((value for value in controls.values()
+                                        if isinstance(value, str) and value.startswith("controls/")), None)
+                if (not all(parser.get(field) for field in
+                            ("version", "license", "documentation", "family", "input_api"))
+                        or not control or not (ROOT / control).is_file()):
+                    raise ValueError(f"pilot parser lacks release/API/control evidence: {eco}/{fmt}/{name}")
+                result = results.get(name)
+                if result and (result.get("version") != parser["version"] or
+                               result.get("output") != parser.get("expected_output")):
+                    raise ValueError(f"pilot parser control result differs: {eco}/{fmt}/{name}")
+                receipt = (parser.get("project") or (result or {}).get("project_receipt") or
+                           (cell.get("third_party_control_results") if count == 1 else None))
+                if isinstance(receipt, str) and receipt.endswith("/verification.json"):
+                    receipt_path = ROOT / receipt
+                elif isinstance(receipt, str):
+                    receipt_path = ROOT / receipt / "verification.json"
+                else:
+                    receipt_path = None
+                if not result and not (receipt_path and receipt_path.is_file()):
+                    raise ValueError(f"pilot parser lacks control receipt: {eco}/{fmt}/{name}")
+                if receipt_path and receipt_path.is_file():
+                    observed = json.loads(receipt_path.read_text())
+                    if (observed.get("pass") is not True or
+                            observed.get("output") != parser.get("expected_output")):
+                        raise ValueError(f"pilot parser receipt differs: {eco}/{fmt}/{name}")
+                signals = [parser.get("metric"), parser.get("popularity"),
+                           parser.get("adoption_exception"), lead_by_name.get(name)]
+                numeric = any(isinstance(value, int) and not isinstance(value, bool) and value > 0
+                              for signal in signals if isinstance(signal, dict)
+                              for value in signal.values())
+                if not numeric:
+                    raise ValueError(f"pilot parser lacks a numeric adoption signal: {eco}/{fmt}/{name}")
+            for api in standard["verified_apis"]:
+                docs = api.get("documentation") or api.get("official_documentation")
+                control = api.get("control")
+                expected_output = api.get("expected", api.get("expected_output"))
+                result = api.get("result")
+                verification_result = next((item for item in verification.get("standard", [])
+                                            if item.get("api") == api.get("api")), None)
+                observed = (read(result) if isinstance(result, str) and
+                            (ROOT / result).is_file() else {})
+                if (not docs or not control or not (ROOT / control).is_file() or
+                        expected_output is None or not result or not (ROOT / result).is_file() or
+                        observed.get("pass") is not True or observed.get("output") != expected_output or
+                        (verification_result and (verification_result.get("pass") is not True or
+                                                  verification_result.get("output") != expected_output))):
+                    raise ValueError(f"pilot standard API lacks official docs/control: {eco}/{fmt}")
 
 
 def main() -> None:
@@ -278,7 +392,9 @@ def main() -> None:
                 assert runtime_results["pass"]
         assert cell["verified_standard_or_runtime_count"] == len(read(f"{key}/standard.json")["verified_apis"])
     assert read("data/popularity-coverage.json") == build_report()
-    print(f"Validated {len(matrix)} cells, {sum(c['status'] != 'not_started' for c in matrix)} with recorded evidence")
+    validate_pilot_cells()
+    print(f"Validated {len(matrix)} active cells and {len(ECOSYSTEMS) * len(PILOT_FORMATS)} "
+          "explicitly incomplete pilot cells")
 
 
 if __name__ == "__main__":

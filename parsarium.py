@@ -5,12 +5,11 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from scripts.format_registry import ALL_FORMATS, ECOSYSTEMS, phase
 
 
 ROOT = Path(__file__).resolve().parent
-FORMATS = ("png", "zip", "mp4", "wav", "pdf", "svg", "http11",
-           "ascii_ply", "ascii_pnm", "mp3_id3v2")
-ECOSYSTEMS = ("c", "cpp", "go", "java", "javascript", "python", "rust", "php")
+FORMATS = ALL_FORMATS
 
 
 def json_file(path: Path):
@@ -18,15 +17,19 @@ def json_file(path: Path):
 
 
 def rows(format_name: str | None, ecosystem: str | None) -> list[dict]:
-    cells = json_file(ROOT / "data/cells.json")["cells"]
-    coverage = json_file(ROOT / "data/projects-coverage.json")["cells"]
+    cells = [*json_file(ROOT / "data/cells.json")["cells"],
+             *json_file(ROOT / "data/pilot-cells.json")["cells"]]
+    report = json_file(ROOT / "data/projects-coverage.json")
+    coverage = [*report["cells"], *report["pilot"]["cells"]]
     covered = {(item["format"], item["ecosystem"]): item for item in coverage}
     return [{"format": cell["format"], "ecosystem": cell["ecosystem"],
+             "phase": phase(cell["format"]), "status": cell["status"],
+             "complete": cell.get("complete", True),
              "verified_third_party": cell["verified_third_party_count"],
              "verified_standard": cell["verified_standard_or_runtime_count"],
              "runnable": (covered[(cell["format"], cell["ecosystem"])]["containerized_verified"] +
                           covered[(cell["format"], cell["ecosystem"])]["standard_containerized_verified"]),
-             "unresolved_leads": cell["unresolved_documentation_leads"]}
+             "unresolved_leads": cell.get("unresolved_documentation_leads", 0)}
             for cell in cells
             if (not format_name or cell["format"] == format_name)
             and (not ecosystem or cell["ecosystem"] == ecosystem)]
@@ -44,6 +47,26 @@ def print_table(headers: tuple[str, ...], values: list[tuple]) -> None:
 
 def catalog(format_name: str, ecosystem: str, as_json: bool) -> None:
     directory = ROOT / "data" / ecosystem / format_name
+    if phase(format_name) == "pilot":
+        pilot = json_file(ROOT / "data/pilot-cells.json")["cells"]
+        cell = next(item for item in pilot
+                    if item["format"] == format_name and item["ecosystem"] == ecosystem)
+        parsers = json_file(directory / "parsers.json") if (directory / "parsers.json").is_file() else []
+        if as_json:
+            print(json.dumps({"cell": cell, "parsers": parsers}, indent=2))
+        else:
+            print(f"{format_name}/{ecosystem}: {cell['status']} (pilot; incomplete). "
+                  f"{len(parsers)} verified third-party paths; "
+                  f"{cell['verified_standard_or_runtime_count']} verified standard API paths.\n"
+                  f"{cell['uncertainty']}")
+            ranking = directory / "ranking.md"
+            if ranking.is_file():
+                print("\n" + ranking.read_text(), end="")
+            elif parsers:
+                print("\nVerified paths (no completed ranking yet):")
+                for parser in parsers:
+                    print(f"- {parser['name']} {parser['version']}")
+        return
     if as_json:
         print(json.dumps({"cell": json_file(directory / "cell.json"),
                           "parsers": json_file(directory / "parsers.json")}, indent=2))
@@ -60,6 +83,7 @@ def projects(format_name: str | None, ecosystem: str | None, as_json: bool) -> N
         if ecosystem and manifest["ecosystem"] != ecosystem:
             continue
         entries.append({"format": manifest["format"],
+                        "phase": phase(manifest["format"]),
                         "ecosystem": manifest["ecosystem"],
                         "slug": path.parent.name, "package": manifest["package"],
                         "release": manifest.get("release", manifest.get("runtime", "")),
@@ -78,6 +102,7 @@ def show(format_name: str, ecosystem: str, slug: str, as_json: bool) -> None:
 
     project, manifest = project_for(format_name, ecosystem, slug)
     info = {"project": str(project.relative_to(ROOT)),
+            "phase": phase(format_name),
             "package": manifest["package"],
             "release": manifest.get("release", manifest.get("runtime")),
             "kind": manifest.get("kind", "third_party"),
@@ -277,8 +302,9 @@ def main() -> int:
         if args.json:
             print(json.dumps(items, indent=2))
         else:
-            print_table(("FORMAT", "ECOSYSTEM", "THIRD-PARTY", "STANDARD", "RUNNABLE", "UNRESOLVED"),
-                        [(item["format"], item["ecosystem"], item["verified_third_party"],
+            print_table(("FORMAT", "ECOSYSTEM", "PHASE", "STATUS", "THIRD-PARTY", "STANDARD", "RUNNABLE", "UNRESOLVED"),
+                        [(item["format"], item["ecosystem"], item["phase"], item["status"],
+                          item["verified_third_party"],
                           item["verified_standard"], item["runnable"],
                           item["unresolved_leads"]) for item in items])
         return 0

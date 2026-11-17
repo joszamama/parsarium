@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import re
 from binary_feedback import check_binary_feedback
+from format_registry import ACTIVE_FORMATS, ECOSYSTEMS, FORMAT_BY_ID, PILOT_FORMATS
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -945,6 +946,8 @@ def main() -> None:
     catalog = {}
     for path in sorted((ROOT / "data").glob("*/*/parsers.json")):
         ecosystem, format_name = path.relative_to(ROOT / "data").parts[:2]
+        if ecosystem not in ECOSYSTEMS or format_name not in FORMAT_BY_ID:
+            raise ValueError(f"unregistered catalog cell: {path}")
         for parser in json.loads(path.read_text()):
             key = (format_name, ecosystem, parser["name"])
             if key in catalog:
@@ -955,6 +958,8 @@ def main() -> None:
     standard_catalog = {}
     for path in sorted((ROOT / "data").glob("*/*/standard.json")):
         ecosystem, format_name = path.relative_to(ROOT / "data").parts[:2]
+        if ecosystem not in ECOSYSTEMS or format_name not in FORMAT_BY_ID:
+            raise ValueError(f"unregistered standard inventory: {path}")
         inventory = json.loads(path.read_text())
         entries = inventory["verified_apis"]
         standard_by_cell[(format_name, ecosystem)] = len(entries)
@@ -969,7 +974,10 @@ def main() -> None:
                 "expected": entry.get("expected", entry.get("expected_output",
                             entry.get("result") if isinstance(entry.get("result"), dict) else None)),
             }
-    if set(standard_by_cell) != {key[:2] for key in catalog}:
+    active_cells = {(fmt, eco) for fmt in ACTIVE_FORMATS for eco in ECOSYSTEMS}
+    pilot_cells = {(fmt, eco) for fmt in PILOT_FORMATS for eco in ECOSYSTEMS}
+    if ({key for key in standard_by_cell if key in active_cells} !=
+            {key[:2] for key in catalog if key[:2] in active_cells}):
         raise ValueError("standard API inventory does not cover the catalog matrix")
 
     completed = set()
@@ -1121,30 +1129,60 @@ def main() -> None:
             raise ValueError(f"host-only control receipt mismatch: {path}")
         standard_staged.add(key)
 
-    cells = []
-    for format_name, ecosystem in sorted({key[:2] for key in catalog}):
+    def cell_report(format_name: str, ecosystem: str) -> dict:
         keys = {key for key in catalog if key[:2] == (format_name, ecosystem)}
         standard_keys = {key for key in standard_catalog if key[:2] == (format_name, ecosystem)}
-        standard_count = standard_by_cell[(format_name, ecosystem)]
-        cells.append({"format": format_name, "ecosystem": ecosystem,
-                      "catalog_paths": len(keys), "containerized_verified": len(keys & completed),
-                      "staged": len(keys & staged), "pending": len(keys - completed - staged),
-                      "standard_api_paths": standard_count,
-                      "standard_containerized_verified": len(standard_keys & standard_completed),
-                      "standard_staged": len(standard_keys & standard_staged),
-                      "standard_pending": len(standard_keys - standard_completed - standard_staged)})
-    standard_total = sum(standard_by_cell.values())
+        return {"format": format_name, "ecosystem": ecosystem,
+                "catalog_paths": len(keys), "containerized_verified": len(keys & completed),
+                "staged": len(keys & staged), "pending": len(keys - completed - staged),
+                "standard_api_paths": standard_by_cell.get((format_name, ecosystem), 0),
+                "standard_containerized_verified": len(standard_keys & standard_completed),
+                "standard_staged": len(standard_keys & standard_staged),
+                "standard_pending": len(standard_keys - standard_completed - standard_staged)}
+
+    cells = [cell_report(fmt, eco) for fmt, eco in sorted(active_cells)]
+    pilot_metadata = json.loads((ROOT / "data/pilot-cells.json").read_text())
+    pilot_by_key = {(cell["format"], cell["ecosystem"]): cell
+                    for cell in pilot_metadata["cells"]}
+    if set(pilot_by_key) != pilot_cells:
+        raise ValueError("pilot matrix does not cover every pilot ecosystem cell")
+    pilot_rows = []
+    for fmt, eco in sorted(pilot_cells):
+        cell = cell_report(fmt, eco)
+        state = pilot_by_key[(fmt, eco)]
+        if (state.get("phase") != "pilot" or state.get("complete") is not False or
+                state.get("verified_third_party_count") != cell["catalog_paths"] or
+                state.get("verified_standard_or_runtime_count") != cell["standard_api_paths"]):
+            raise ValueError(f"pilot cell evidence/count mismatch: {fmt}/{eco}")
+        pilot_rows.append({**cell, "phase": "pilot", "status": state["status"],
+                           "complete": False, "uncertainty": state["uncertainty"]})
+    active_catalog = {key for key in catalog if key[:2] in active_cells}
+    active_completed = completed & active_catalog
+    active_staged = staged & active_catalog
+    active_standard = {key for key in standard_catalog if key[:2] in active_cells}
+    active_standard_completed = standard_completed & active_standard
+    active_standard_staged = standard_staged & active_standard
+    standard_total = sum(standard_by_cell[key] for key in active_cells)
     runnable_cells = sum(cell["containerized_verified"] > 0 for cell in cells)
-    report = {"schema_version": 3, "catalog_paths": len(catalog),
+    report = {"schema_version": 4, "catalog_paths": len(active_catalog),
               "cells_total": len(cells), "cells_with_verified_project": runnable_cells,
               "cells_pending": len(cells) - runnable_cells,
-              "containerized_verified": len(completed), "staged": len(staged),
-              "pending": len(catalog) - len(completed) - len(staged),
+              "containerized_verified": len(active_completed), "staged": len(active_staged),
+              "pending": len(active_catalog) - len(active_completed) - len(active_staged),
               "standard_api_paths": standard_total,
-              "standard_containerized_verified": len(standard_completed),
-              "standard_staged": len(standard_staged),
-              "standard_pending": standard_total - len(standard_completed) - len(standard_staged),
-              "cells": cells}
+              "standard_containerized_verified": len(active_standard_completed),
+              "standard_staged": len(active_standard_staged),
+              "standard_pending": standard_total - len(active_standard_completed) - len(active_standard_staged),
+              "cells": cells,
+              "pilot": {"phase": "pilot", "complete": False,
+                        "formats": list(PILOT_FORMATS), "cells_total": len(pilot_rows),
+                        "catalog_paths": len(catalog) - len(active_catalog),
+                        "containerized_verified": len(completed) - len(active_completed),
+                        "staged": len(staged) - len(active_staged),
+                        "standard_api_paths": len(standard_catalog) - len(active_standard),
+                        "standard_containerized_verified": len(standard_completed) - len(active_standard_completed),
+                        "standard_staged": len(standard_staged) - len(active_standard_staged),
+                        "cells": pilot_rows}}
     output = ROOT / "data/projects-coverage.json"
     serialized = json.dumps(report, indent=2) + "\n"
     if args.write:
@@ -1152,9 +1190,10 @@ def main() -> None:
     if args.check and output.read_text() != serialized:
         raise ValueError("data/projects-coverage.json is stale; run --write")
     print(f"{runnable_cells}/{len(cells)} cells runnable; "
-          f"{len(completed)}/{len(catalog)} containerized parser paths verified; "
-          f"{len(staged)} staged; {report['pending']} pending; "
-          f"{len(standard_completed)}/{standard_total} standard API paths covered")
+          f"{len(active_completed)}/{len(active_catalog)} active parser paths verified; "
+          f"{len(active_staged)} staged; {report['pending']} pending; "
+          f"{len(active_standard_completed)}/{standard_total} active standard API paths covered; "
+          f"{len(pilot_rows)} pilot cells incomplete")
 
 
 if __name__ == "__main__":
