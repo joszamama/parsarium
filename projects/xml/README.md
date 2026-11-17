@@ -12,6 +12,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [github.com/beevik/etree / Go](go/github_com_beevik_etree/README.md)
 - [aalto-xml / Java](java/aalto_xml/README.md)
 - [dom4j / Java](java/dom4j/README.md)
+- [jackson-dataformat-xml / Java](java/jackson_xml/README.md)
 - [javax.xml.parsers.DocumentBuilder.parse(InputStream) / Java](java/jdk_documentbuilder/README.md)
 - [woodstox-core / Java](java/woodstox_core/README.md)
 - [xercesImpl / Java](java/xercesimpl/README.md)

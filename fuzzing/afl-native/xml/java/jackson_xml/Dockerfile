@@ -8,7 +8,7 @@ COPY fuzzing/afl-bridge/java_trace.py /work/afl_java_trace.py
 COPY fuzzing/afl-native/xml/java/jackson_xml/afl_trace /work/afl_trace
 ENV PARSARIUM_SUBJECT_PREFIX=/work/parser-source/module/
 ENV PARSARIUM_FUZZ_ENTRY=GenericHarness.fuzzerTestOneInput
-ENV PARSARIUM_JAVA_CLASSPATH=/work/classes:/work/lib/*
+ENV PARSARIUM_JAVA_CLASSPATH=/work/classes:/work/lib/jackson-dataformat-xml-2.23.0.jar:/work/lib/jackson-core-2.23.0.jar:/work/lib/jackson-databind-2.23.0.jar:/work/lib/jackson-annotations-2.23.jar:/work/lib/woodstox-core-7.3.0.jar:/work/lib/stax2-api-4.3.1.jar
 ENV PARSARIUM_TARGET_CLASS=GenericHarness
 ENV PARSARIUM_PARSER_JAR=/work/lib/jackson-dataformat-xml-2.23.0.jar
 ENV PARSARIUM_PARSER_SOURCES=/work/parser-source/module

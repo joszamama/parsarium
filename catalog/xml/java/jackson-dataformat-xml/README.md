@@ -1,21 +1,50 @@
-# Jackson XML — XML / Java
+# jackson-dataformat-xml — XML / Java
 
-**Pilot / incomplete format cell.** This path is verified on two valid XML controls.
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-- **Pinned release:** `com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.23.0`, with pinned Jackson core/databind/annotations, Woodstox 7.3.0, and StAX2 API 4.3.1. [Hashes](../../../../projects/xml/java/jackson_xml/source-lock.json).
-- **License:** Apache-2.0 in the [Jackson base POM](https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.23.0/jackson-base-2.23.0.pom) and [project README](https://github.com/FasterXML/jackson-dataformat-xml).
-- **Local API:** `new XmlFactory(new WstxInputFactory()).createParser(InputStream)` and `nextToken()` to EOF. [Release source](https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.23.0/jackson-dataformat-xml-2.23.0-sources.jar).
-- **Family:** Jackson XML token projection over Woodstox StAX. This path shares the underlying Woodstox tokenizer with the selected woodstox-core path; the module has its own `FromXmlParser` and `XmlTokenStream` source.
-- **Valid controls:** [namespace catalog](../../../../controls/xml/catalog-ns.xml) and [default namespace order](../../../../controls/xml/order-default-ns.xml).
-- **Evidence:** [parser record](../../../../data/java/xml/parsers.json), [control receipt](../../../../projects/xml/java/jackson_xml/verification.json), [AFL feedback](../../../../data/java/xml/afl-feedback.json).
+- **Pinned release:** `2.23.0`
+- **License:** Apache-2.0
+- **Parser family:** Jackson XML FromXmlParser/XmlTokenStream over Woodstox StAX tokenizer
+- **Local input API:** `new XmlFactory(new WstxInputFactory()).createParser(Files.newInputStream(local Path)); nextToken() to EOF`
+- **Documentation:** [API reference](<https://github.com/FasterXML/jackson-dataformat-xml>)
+- **Valid control:** [`controls/xml/catalog-ns.xml`](../../../../controls/xml/catalog-ns.xml)
+- **Catalog evidence:** [parser record](../../../../data/java/xml/parsers.json) · [control result](../../../../data/java/xml/verification.json)
 
-The first control yielded 22 ordered Jackson tokens, including two `item` fields and decoded `Café & té`, `Zürich <HQ>`, and `x < y` values. The second yielded 25 tokens with decoded `A-7`, `12.50 €`, and `say "hi"`. The projection omits namespace URIs, the root element name, comments, processing instructions, and attribute-versus-child origin; these are not claims of XML tree equivalence.
+## Observed control result
 
-JaCoCo covered 320 own module source lines, including `FromXmlParser` and `XmlTokenStream`, plus 832 underlying Woodstox StAX source lines. Repeated valid controls gave stable parser-source feedback; the second control changed 17 module features and 17 AFL++ tuples. The 25,682 deps.dev summed direct-dependent metric measures Jackson XML package adoption, not an independent XML tokenizer or XML-specific use by each dependent.
+```json
+{
+  "events": [
+    "START_OBJECT",
+    "FIELD_NAME:version",
+    "VALUE_STRING:1",
+    "FIELD_NAME:item",
+    "START_OBJECT",
+    "FIELD_NAME:id",
+    "VALUE_STRING:a1",
+    "FIELD_NAME:lang",
+    "VALUE_STRING:es",
+    "FIELD_NAME:",
+    "VALUE_STRING:Café & té",
+    "END_OBJECT",
+    "FIELD_NAME:item",
+    "START_OBJECT",
+    "FIELD_NAME:id",
+    "VALUE_STRING:b2",
+    "FIELD_NAME:name",
+    "VALUE_STRING:Zürich <HQ>",
+    "FIELD_NAME:note",
+    "VALUE_STRING:x < y",
+    "END_OBJECT",
+    "END_OBJECT"
+  ],
+  "token_count": 22
+}
+```
+
+## Run this target
 
 ```sh
 python3 parsarium.py build xml java jackson_xml
 python3 parsarium.py run xml java jackson_xml controls/xml/catalog-ns.xml
-python3 parsarium.py afl build xml java jackson_xml
-python3 parsarium.py afl prepare xml java jackson_xml runs/xml-jackson-xml-afl
 ```
