@@ -104,6 +104,59 @@
     "project": "projects/json/go/github_com_tidwall_gjson"
   },
   {
+    "name": "github.com/ugorji/go/codec",
+    "module": "github.com/ugorji/go/codec",
+    "version": "v1.3.2",
+    "license": "MIT",
+    "license_evidence": "LICENSE in pinned Go module zip",
+    "input_api": "codec.NewDecoderBytes([]byte, &codec.JsonHandle{}).Decode(&value)",
+    "documentation": "https://pkg.go.dev/github.com/ugorji/go/codec@v1.3.2#NewDecoderBytes",
+    "source": "https://github.com/ugorji/go/tree/codec/v1.3.2",
+    "scope": "Local JSON byte slice decoded through codec.JsonHandle into untyped Go values; observed valid control subset",
+    "family": "ugorji/go-codec JSON decoder",
+    "family_note": "The JsonHandle selects go-codec own JSON reader; JSON-specific files under codec/json.* are instrumented and mapped to AFL feedback. The package also implements binc, CBOR, MessagePack and simple, so its Imported by metric is total package adoption and does not measure JSON-specific use.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 10142,
+      "source": "https://pkg.go.dev/github.com/ugorji/go/codec?tab=importedby",
+      "captured_at_utc": "2026-11-17T02:48:38.329797+00:00",
+      "snapshot": "data/go/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "control": "controls/json/nested-object.json",
+    "project": "projects/json/go/github_com_ugorji_go_codec"
+  },
+  {
     "name": "github.com/goccy/go-json",
     "module": "github.com/goccy/go-json",
     "version": "v0.12.0",

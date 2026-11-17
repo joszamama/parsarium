@@ -11,7 +11,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("github_com_goccy_go_json", "github_com_json_iterator_go", "github_com_tidwall_gjson", "stdlib_unmarshal")
+PROJECTS = ("github_com_goccy_go_json", "github_com_json_iterator_go", "github_com_tidwall_gjson", "github_com_ugorji_go_codec", "stdlib_unmarshal")
 CONTROL = "controls/json/nested-object.json"
 DIFFERENTIAL = "controls/json/nested-array.json"
 REPORT = ROOT / "data/go/json/afl-feedback.json"
@@ -48,7 +48,7 @@ def check(slug: str) -> dict:
     overlay = ROOT / "fuzzing/afl-native" / relative
     receipt = json.loads((overlay / "verification.json").read_text())
     image = receipt["image_id"]
-    if slug == "github_com_tidwall_gjson":
+    if slug in {"github_com_tidwall_gjson", "github_com_ugorji_go_codec"}:
         base_image = f"parsarium/json-go-{slug}:local"
         run(["docker", "run", "--rm", "--platform", manifest["platform"],
              "--network", "none", "--read-only", "--cap-drop", "ALL",
@@ -89,7 +89,7 @@ def check(slug: str) -> dict:
             "parser_feature_difference": feature_difference,
             "afl_tuple_difference": tuple_difference,
             **({"differential_control_pass": True}
-               if slug == "github_com_tidwall_gjson" else {})}
+               if slug in {"github_com_tidwall_gjson", "github_com_ugorji_go_codec"} else {})}
 
 
 def main() -> None:

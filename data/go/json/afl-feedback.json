@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T05:35:16.408700+00:00",
-  "projects_total": 4,
-  "projects_passed": 4,
+  "checked_at_utc": "2026-11-17T06:59:11.505491+00:00",
+  "projects_total": 5,
+  "projects_passed": 5,
   "differential_kind": "fixed_valid_nested_array",
   "results": [
     {
@@ -55,6 +55,24 @@
       "differential_afl_tuples": 234,
       "parser_feature_difference": 39,
       "afl_tuple_difference": 39,
+      "differential_control_pass": true
+    },
+    {
+      "project": "json/go/github_com_ugorji_go_codec",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "overlay_receipt_sha256": "8d10d5b5cd81fba0017dfd72a9d673530730f0800dd03a81f8d83fef2e7193a5",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_parser_features": 258,
+      "control_afl_tuples": 278,
+      "differential_parser_features": 255,
+      "differential_afl_tuples": 275,
+      "parser_feature_difference": 3,
+      "afl_tuple_difference": 3,
       "differential_control_pass": true
     },
     {

@@ -1,6 +1,6 @@
 # GO × JSON: selected parsers (pilot)
 
-3 control-verified third-party paths selected. The ceiling is ten. GJSON is a JSON path-query parser: the harness uses its own full-document validation before traversing the parsed Result tree. The multi-format ugorji/go/codec lead (10,142) remains unverified; its package adoption count spans several formats. A path is an API or package route, not necessarily an independent parser engine.
+4 control-verified third-party paths selected. The ceiling is ten. GJSON is a JSON path-query parser: the harness uses its own full-document validation before traversing the parsed Result tree. go-codec is a multi-format package, so its Imported by count covers several formats and does not measure JSON-specific use. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -10,9 +10,12 @@ pkg.go.dev Imported by package count, from the bounded search captured 2026-11-1
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/json-iterator/go](https://pkg.go.dev/github.com/json-iterator/go@v1.1.12) | v1.1.12 | 18,454 | RFC 8259 JSON text into interface{} | json-iterator Iterator parser |
 | 2 | [github.com/tidwall/gjson](https://pkg.go.dev/github.com/tidwall/gjson@v1.20.4) | v1.20.4 | 10,420 | Validated JSON byte slice traversed through Result nodes | GJSON path-query parser |
-| 3 | [github.com/goccy/go-json](https://pkg.go.dev/github.com/goccy/go-json@v0.12.0) | v0.12.0 | 4,192 | RFC 8259 JSON text into interface{} | go-json compiled decoder |
+| 3 | [github.com/ugorji/go/codec](https://pkg.go.dev/github.com/ugorji/go/codec@v1.3.2) | v1.3.2 | 10,142 | JSON via JsonHandle into untyped values | go-codec JSON decoder |
+| 4 | [github.com/goccy/go-json](https://pkg.go.dev/github.com/goccy/go-json@v0.12.0) | v0.12.0 | 4,192 | RFC 8259 JSON text into interface{} | go-json compiled decoder |
 
 GJSON has a documented `ParseBytes([]byte)` API but does not validate input on its own. The harness calls its own `ValidBytes([]byte)` first, then traverses `Result.ForEach` over every object and array. Both valid controls pass; the second changes 39 GJSON source features and 39 AFL tuples under stable repeats. Its Imported by count is package adoption, not evidence of general-purpose JSON decoding.
+
+go-codec uses `NewDecoderBytes(data, &JsonHandle{})` and its own JSON reader. The two valid controls pass. Its AFL feedback includes only covered `codec/json.*` parser source files: 258 control features and 278 AFL tuples, with stable repeats and a three-feature/three-tuple change on the valid array. The package metric is labeled as whole-package adoption and must not be read as JSON-specific popularity.
 
 ## Standard API (unranked)
 
@@ -28,7 +31,6 @@ Numeric leads from the same snapshot, not verified and not selected. Loggers, JW
 
 | Lead | Version seen | Imported by | Status |
 | --- | --- | ---: | --- |
-| [github.com/ugorji/go/codec](https://pkg.go.dev/github.com/ugorji/go/codec) | v1.3.2 | 10,142 | Multi-format codec (msgpack, cbor, binc, simple, json); its Imported by count covers every format, so it is not comparable with JSON-only packages. JSON decoder path not run. |
 | [github.com/mailru/easyjson/jlexer](https://pkg.go.dev/github.com/mailru/easyjson/jlexer) | v0.9.2 | 3,424 | Lexer for generated easyjson code; a generic local-bytes decode into an untyped value remains unchecked. |
 | [github.com/bytedance/sonic](https://pkg.go.dev/github.com/bytedance/sonic) | v1.15.5 | 2,428 | Documentation describes JIT/SIMD paths and an encoding/json-compatible fallback on unsupported platforms; linux/arm64 parser family remains unchecked. |
 | [github.com/buger/jsonparser](https://pkg.go.dev/github.com/buger/jsonparser) | v1.6.1 | 2,171 | Byte-slice Get/ArrayEach/ObjectEach parser; control not run in this pilot. |
