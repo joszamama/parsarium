@@ -1,6 +1,6 @@
 # Python × YAML: pilot ranking
 
-Five control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection. A path is an API route, not necessarily an independent parser engine.
+Six control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection. A path is an API route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -13,6 +13,7 @@ PyPI Stats `last_month` downloads excluding known mirrors, captured 2026-11-17 (
 | 3 | [ruamel.yaml](https://yaml.dev/doc/ruamel.yaml/basicuse/) | 0.19.1 | 177,667,165 | ruamel.yaml.YAML(typ='safe', pure=True).load(local YAML bytes) | ruamel.yaml pure-Python loader (PyYAML-derived Reader/Scanner/Parser/Composer, SafeConstructor, YAML 1.2 VersionedResolver); not the ruamel.yaml.clib(z) C route |
 | 4 | [ruamel.yaml.clib](https://yaml.dev/doc/ruamel.yaml/basicuse/) | 0.2.15 | 69,289,256 | ruamel.yaml.YAML(typ='safe').load(local YAML bytes) with ruamel.yaml.clib installed (CParser) | libyaml-derived C reader/scanner/parser vendored in ruamel.yaml.clib (older libyaml snapshot) with the Cython _ruamel_yaml CParser, under ruamel.yaml's SafeConstructor and YAML 1.2 VersionedResolver; not the pure-Python ruamel.yaml route |
 | 5 | [srsly](https://github.com/explosion/srsly#yaml) | 3.0.1 | 24,260,205 | srsly.yaml_loads(local YAML text as str) | Wrapper: srsly.yaml_loads over ruamel.yaml 0.19.1 YAML(typ='safe', pure=True), the pure-Python ruamel.yaml loader; not an independent parser |
+| 6 | [yamlcore](https://pypi.org/project/yamlcore/0.1.1/) | 0.1.1 | 92,413 | yaml.load(local YAML bytes, Loader=yamlcore.CoreLoader) | yamlcore CoreLoader: PyYAML 6.0.3 pure-Python BaseLoader (Reader/Scanner/Parser/Composer) with yamlcore's YAML 1.2 core-schema resolver and constructors; not CCoreLoader (libyaml) |
 
 Both controls must equal the hand-written typed trees in [check_controls.py](../../../controls/yaml/check_controls.py); see [verification.json](verification.json).
 
@@ -23,6 +24,5 @@ Both controls must equal the hand-written typed trees in [check_controls.py](../
 | strictyaml | shared_family | 29,369,654 | ruamel.yaml via strictyaml | Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection. |
 | oyaml | shared_family | 2,622,495 | PyYAML | Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection. |
 | rapidyaml | unresolved | 224,758 | rapidyaml (ryml) | Unverified lead: no pinned release, control run or harness yet. |
-| yamlcore | shared_family | 92,413 | PyYAML with YAML 1.2 core resolver | Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection. |
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).
