@@ -62,11 +62,19 @@
       "metric_value": 408802,
       "metric": "npm downloads, last month",
       "family": "taplo (Rust, compiled to WebAssembly)",
-      "api_lead": "Taplo.initialize().then(t => t.parse...)",
-      "note": "WebAssembly build of the Rust taplo crate; V8 JavaScript coverage and the JavaScript AFL++ bridge would see only the WebAssembly glue, not parser source lines. The underlying taplo crate is now a selected Rust path (projects/toml/rust/taplo).",
+      "api_lead": "Taplo.initialize() then taplo.decode(toml: string, parse?: boolean) (TOML to JSON); format and lint are the other documented methods",
+      "note": "WebAssembly build of the Rust taplo crate (same family as the selected Rust taplo path). It fails the typed-tree controls through its only value API and is also not measurable at parser-source level as published; it is not promoted.",
       "source": "https://www.npmjs.com/package/@taplo/lib",
-      "status": "unresolved_runnability_blocker",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.5.0",
+      "source_sha256": "05866daec281ea78870304a62efa4dc6467325b0c058c6ad8a73e7d2f47268e4",
+      "npm_integrity": "sha512-+xIqpQXJco3T+VGaTTwmhxLa51qpkQxCjRwezjFZgr+l21ExlywJFcDfTrNmL6lG6tqb0h8GyJKO3UPGPtSCWg==",
+      "license": "MIT",
+      "checked_on": "2026-11-18",
+      "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64, --network none), the pinned @taplo/lib 0.5.0 tarball (gitHead 48e4c083) unpacked locally; taplo.decode(text, false) on both controls",
+      "control_result": "Both controls fail the typed tree. decode returns a JSON text in which every TOML date-time is a plain JSON string: service-config owner.since comes back as \"1979-05-27T07:32:00Z\" and typed-scalars times.offset as \"1979-05-27T00:32:00.5-07:00\", local_datetime, local_date and local_time as strings, indistinguishable from TOML strings (expected datetime, datetime-local, date-local and time-local). Integers, floats (exponent printed as 1000.0), strings, keys and tables otherwise match. The package declares no other value-tree API (index.d.ts lists format, lint, encode and decode).",
+      "runnability_blocker": "dist/index.js (35,642,470 bytes) embeds a precompiled WebAssembly build of the Rust taplo crate. V8 JavaScript coverage and the JavaScript AFL++ bridge see only the JS glue; Rust-level coverage would need a rebuild of the wasm module from the taplo repository with a wasm32 coverage runtime that the published package does not contain, so the measured binary would no longer be the pinned release."
     },
     {
       "name": "js-toml",
