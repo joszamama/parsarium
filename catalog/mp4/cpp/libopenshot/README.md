@@ -22,8 +22,15 @@
 }
 ```
 
-Distinct tagged OpenShot C++ package/API, built with tagged OpenShotAudio; FFmpegReader uses libavformat and shares the existing FFmpeg parser family.
+The verified libopenshot FFmpegReader route reaches pinned FFmpeg 9.0.2 libavformat MOV/MP4 parsing. It shares that syntax parser family with the MLT and FFmpeg package paths; libopenshot contributes a distinct documented C++ package API and reader. The AFL overlay scopes feedback to FFmpeg mov.c and libopenshot FFmpegReader.cpp.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/mp4/cpp/libopenshot/README.md)
+
+```sh
+python3 parsarium.py build mp4 cpp libopenshot
+python3 parsarium.py run mp4 cpp libopenshot controls/mp4/red-av.mp4
+```
+
+**Coverage limit:** libopenshot's FFmpegReader opens media through libavformat, so it shares the FFmpeg MOV/MP4 parser family with the FFmpeg, MLT, and other FFmpeg-backed targets. The minimal Docker build enables only the H.264 and AAC decoders the control needs; other codecs leave codec fields null or disable the stream. AFL++ runs one process per local MP4 file through the replay binary.

@@ -18,6 +18,7 @@
 - [gpac / C++](cpp/gpac/README.md)
 - [gstreamer / C++](cpp/gstreamer/README.md)
 - [libheif / C++](cpp/libheif/README.md)
+- [libopenshot / C++](cpp/libopenshot/README.md)
 - [opencv / C++](cpp/opencv/README.md)
 - [taglib / C++](cpp/taglib/README.md)
 - [vlc / C++](cpp/vlc/README.md)
