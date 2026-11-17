@@ -42,6 +42,14 @@ TARGETS = {
         'scope': ('executed LLVM source regions and branch directions of the source-built {package} {release} '
                   'extension\'s libyaml-derived C sources under {prefix} (the Cython-generated _ruamel_yaml.c is '
                   'not instrumented)')},
+    'rapidyaml': {
+        'package': 'rapidyaml', 'prefix': '/work/ryml-src/cpp/src/c4/yml/', 'platform': 'linux/arm64',
+        'required': ('parse_engine.def.hpp', 'tree.cpp'),
+        'differences': {'parse_engine_feature_difference': 'parse_engine.def.hpp:',
+                        'tree_feature_difference': 'tree.cpp:'},
+        'scope': ('executed LLVM source regions and branch directions of the C++ rapidyaml {release} sources under '
+                  '{prefix} compiled into the {package} _ryml extension (c4core helpers, the SWIG wrapper and the '
+                  'adapter\'s Python scalar typing are not counted)')},
     # Wrappers: features cover the wrapper package and the parser package it calls under site-packages.
     'srsly': {
         'package': 'srsly', 'prefix': SITE, 'platform': 'linux/amd64',

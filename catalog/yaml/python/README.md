@@ -13,6 +13,7 @@ Six verified third-party paths in PyPI last_month order: PyYAML 6.0.3 (1,227,712
 - [ruamel.yaml](ruamel-yaml/README.md) — verified Docker harness
 - [ruamel.yaml.clib](ruamel-yaml-clib/README.md) — verified Docker harness
 - [srsly](srsly/README.md) — verified Docker harness
+- [rapidyaml](rapidyaml/README.md) — verified API path
 - [yamlcore](yamlcore/README.md) — verified Docker harness
 
 ## Standard and runtime APIs

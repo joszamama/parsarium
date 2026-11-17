@@ -1,0 +1,542 @@
+{
+  "checked_at_utc": "2026-11-17T23:24:33.216737+00:00",
+  "project": "yaml/python/rapidyaml",
+  "package": "rapidyaml",
+  "release": "0.15.2",
+  "pass": true,
+  "input_kind": "two fixed valid schema-neutral YAML 1.2 controls",
+  "oracle": "hand-written typed trees in controls/yaml/check_controls.py (EXPECTED); bytes, decoded str and local binary stream inputs all equal them",
+  "control_oracle": {
+    "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+    "root": "map",
+    "nodes": {
+      "bool": 2,
+      "float": 2,
+      "int": 7,
+      "map": 7,
+      "null": 1,
+      "seq": 2,
+      "str": 13
+    },
+    "max_depth": 3,
+    "bytes_matches_oracle": true,
+    "str_matches_oracle": true,
+    "stream_matches_oracle": true
+  },
+  "variant_oracle": {
+    "tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46",
+    "root": "seq",
+    "nodes": {
+      "bool": 1,
+      "float": 2,
+      "int": 5,
+      "map": 7,
+      "null": 1,
+      "seq": 5,
+      "str": 11
+    },
+    "max_depth": 4,
+    "bytes_matches_oracle": true,
+    "str_matches_oracle": true,
+    "stream_matches_oracle": true
+  },
+  "feedback_scope": "executed LLVM source regions and branch directions of the C++ rapidyaml 0.15.2 sources under /work/ryml-src/cpp/src/c4/yml/ compiled into the rapidyaml _ryml extension (c4core helpers, the SWIG wrapper and the adapter's Python scalar typing are not counted), mapped to the AFL++ bitmap by the Parsarium LLVM region bridge",
+  "base_image_id": "sha256:a726b8565de49ad1e7bebeb0e99d547db93a28cfd18eef9f9704ac03da83073d",
+  "overlay_image_id": "sha256:ddfc734cb793101585bcda72488fca7b58b47ae79bde08ff5e8f5ecd81e6df55",
+  "overlay_receipt_sha256": "2acf09e8bbf384e15abdcd2c6dc1c8cd60431c439868cd11f9aba7b443f1d0cc",
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "variant_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+  "control_output": {
+    "root": "map",
+    "nodes": {
+      "bool": 2,
+      "float": 2,
+      "int": 7,
+      "map": 7,
+      "null": 1,
+      "seq": 2,
+      "str": 13
+    },
+    "max_depth": 3,
+    "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+    "tree": [
+      "map",
+      [
+        [
+          "kind",
+          [
+            "str",
+            "catalog"
+          ]
+        ],
+        [
+          "version",
+          [
+            "int",
+            "2"
+          ]
+        ],
+        [
+          "ratio",
+          [
+            "float",
+            "0.25"
+          ]
+        ],
+        [
+          "offset",
+          [
+            "int",
+            "-17"
+          ]
+        ],
+        [
+          "enabled",
+          [
+            "bool",
+            true
+          ]
+        ],
+        [
+          "retired",
+          [
+            "bool",
+            false
+          ]
+        ],
+        [
+          "missing",
+          [
+            "null"
+          ]
+        ],
+        [
+          "title",
+          [
+            "str",
+            "Café \"quoted\"\tend"
+          ]
+        ],
+        [
+          "single",
+          [
+            "str",
+            "it's here"
+          ]
+        ],
+        [
+          "tags",
+          [
+            "seq",
+            [
+              [
+                "str",
+                "alpha"
+              ],
+              [
+                "str",
+                "beta"
+              ],
+              [
+                "str",
+                "gamma delta"
+              ]
+            ]
+          ]
+        ],
+        [
+          "point",
+          [
+            "map",
+            [
+              [
+                "lat",
+                [
+                  "int",
+                  "1"
+                ]
+              ],
+              [
+                "lon",
+                [
+                  "float",
+                  "-2.5"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "items",
+          [
+            "seq",
+            [
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "7"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "first item"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "line one\nline two\n"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "8"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "Zürich"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "folded text\n"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "defaults",
+          [
+            "map",
+            [
+              [
+                "retries",
+                [
+                  "int",
+                  "3"
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "base"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "service",
+          [
+            "map",
+            [
+              [
+                "settings",
+                [
+                  "map",
+                  [
+                    [
+                      "retries",
+                      [
+                        "int",
+                        "3"
+                      ]
+                    ],
+                    [
+                      "label",
+                      [
+                        "str",
+                        "base"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "edge"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "variant_output": {
+    "root": "seq",
+    "nodes": {
+      "bool": 1,
+      "float": 2,
+      "int": 5,
+      "map": 7,
+      "null": 1,
+      "seq": 5,
+      "str": 11
+    },
+    "max_depth": 4,
+    "tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46",
+    "tree": [
+      "seq",
+      [
+        [
+          "map",
+          [
+            [
+              "order",
+              [
+                "str",
+                "A-7"
+              ]
+            ],
+            [
+              "lines",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "Xé-1"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "2"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "12.5"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "B '2'"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "1"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "0.75"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "flags",
+              [
+                "seq",
+                []
+              ]
+            ],
+            [
+              "meta",
+              [
+                "map",
+                []
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "seq",
+          [
+            [
+              "int",
+              "1"
+            ],
+            [
+              "seq",
+              [
+                [
+                  "int",
+                  "2"
+                ],
+                [
+                  "int",
+                  "3"
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "k",
+                  [
+                    "str",
+                    "v"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "str",
+          "plain multi word"
+        ],
+        [
+          "str",
+          "line\nbreak"
+        ],
+        [
+          "str",
+          "kept\n  indented"
+        ],
+        [
+          "null"
+        ],
+        [
+          "bool",
+          false
+        ]
+      ]
+    ]
+  },
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "control_parser_features": 2693,
+  "variant_parser_features": 2739,
+  "control_features_by_file": {
+    "common.cpp": 12,
+    "common.hpp": 27,
+    "detail/stack.hpp": 53,
+    "error.hpp": 35,
+    "event_handler_stack.hpp": 31,
+    "event_handler_tree.hpp": 127,
+    "filter_processor.hpp": 115,
+    "node_type.cpp": 21,
+    "node_type.hpp": 27,
+    "parse.cpp": 15,
+    "parse_engine.def.hpp": 1662,
+    "parse_engine.hpp": 10,
+    "parse_options.hpp": 4,
+    "parser_state.hpp": 78,
+    "reference_resolver.cpp": 133,
+    "reference_resolver.hpp": 1,
+    "tag.cpp": 4,
+    "tag.hpp": 3,
+    "tree.cpp": 183,
+    "tree.hpp": 152
+  },
+  "variant_features_by_file": {
+    "common.cpp": 12,
+    "common.hpp": 27,
+    "detail/stack.hpp": 53,
+    "error.hpp": 35,
+    "event_handler_stack.hpp": 25,
+    "event_handler_tree.hpp": 164,
+    "filter_processor.hpp": 92,
+    "node_type.cpp": 21,
+    "node_type.hpp": 30,
+    "parse.cpp": 15,
+    "parse_engine.def.hpp": 1625,
+    "parse_engine.hpp": 10,
+    "parse_options.hpp": 4,
+    "parser_state.hpp": 80,
+    "reference_resolver.cpp": 129,
+    "reference_resolver.hpp": 1,
+    "tag.cpp": 12,
+    "tag.hpp": 6,
+    "tree.cpp": 240,
+    "tree.hpp": 158
+  },
+  "parser_feature_difference": 766,
+  "parse_engine_feature_difference": 561,
+  "tree_feature_difference": 57,
+  "control_afl_tuples": 2650,
+  "variant_afl_tuples": 2692,
+  "afl_tuple_difference": 734
+}

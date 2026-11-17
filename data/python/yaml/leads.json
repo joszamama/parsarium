@@ -174,7 +174,7 @@
   },
   {
     "name": "rapidyaml",
-    "status": "unresolved",
+    "status": "selected",
     "metric_value": 224758,
     "metric_error": null,
     "family": "rapidyaml (ryml)",
@@ -182,7 +182,8 @@
     "note": "Python binding of C++ rapidyaml.",
     "found_by": "targeted_documentation_lead",
     "source": "https://pypi.org/project/rapidyaml/0.15.2/",
-    "reason": "Not promoted this round: the 0.15.2 Python binding (ryml) needs a SWIG/CMake build (build requires setuptools_scm, setuptools-git, ninja, cmake_build_extension, swig) to get LLVM coverage of the C++ parser, and ryml.parse_in_arena returns an untyped tree, so the harness would have to resolve scalar types itself (as projects/yaml/cpp/rapidyaml does). Remains the next native lead (rapidyaml family shared with the C++ cell)."
+    "reason": "Selected: pinned release, documented local API, both valid controls equal the hand-written typed trees through bytes, str and stream, Docker coverage and stable, input-dependent AFL++ feedback recorded. The 0.15.2 sdist is built with its own SWIG/CMake build and LLVM coverage of the C++ parser; scalars are typed by the adapter (core-schema patterns), as in projects/yaml/cpp/rapidyaml.",
+    "evidence": "projects/yaml/python/rapidyaml/verification.json"
   },
   {
     "name": "yamlcore",
