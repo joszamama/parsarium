@@ -1,23 +1,50 @@
 # github.com/vmware/govmomi/vim25/xml — XML / Go
 
-**Pilot / incomplete format cell.** This path is verified on two valid controls; the format-wide search remains bounded and incomplete.
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.56.2`
-- **License:** Apache-2.0 and BSD-3-Clause (forked Go tokenizer source)
-- **Parser family:** separately compiled govmomi fork of Go `encoding/xml`
-- **Local input API:** `xml.NewDecoder(io.Reader).Token()` from `github.com/vmware/govmomi/vim25/xml`
-- **API reference:** [Go Packages](https://pkg.go.dev/github.com/vmware/govmomi/vim25/xml@v0.56.2#NewDecoder)
-- **Valid controls:** [catalog with namespaces](../../../../controls/xml/catalog-ns.xml) and [order with default namespace](../../../../controls/xml/order-default-ns.xml)
-- **Evidence:** [parser record](../../../../data/go/xml/parsers.json), [control result](../../../../data/go/xml/verification.json), [AFL++ feedback](../../../../fuzzing/afl-native/xml/go/github_com_vmware_govmomi_vim25_xml/differential.json)
+- **License:** Apache-2.0, BSD-3-Clause
+- **Parser family:** govmomi/vim25/xml fork of Go encoding/xml tokenizer
+- **Local input API:** `xml.NewDecoder(io.Reader).Token() over a local byte stream, using the govmomi/vim25/xml package`
+- **Documentation:** [API reference](<https://pkg.go.dev/github.com/vmware/govmomi/vim25/xml@v0.56.2#NewDecoder>)
+- **Valid control:** [`controls/xml/catalog-ns.xml`](../../../../controls/xml/catalog-ns.xml)
+- **Catalog evidence:** [parser record](../../../../data/go/xml/parsers.json) · [control result](../../../../data/go/xml/verification.json)
 
-The observed results include expanded element and attribute names, namespace declarations, ordered elements and attributes, decoded text and CDATA, and maximum depth. The catalog control covers 290 lines in the forked `xml.go`. Repeated AFL++ traces are identical for each valid control and differ by 30 source blocks and 30 tuples on the order control; every differing block belongs to forked `xml.go`.
+## Observed control result
 
-The saved pkg.go.dev snapshot reports 163 importing packages for `vim25/xml`. The source lock pins the 12,553,438-byte whole govmomi module archive; this metric does not measure XML-specific call frequency.
+```json
+{
+  "attributes": [
+    "version=1",
+    "id=a1",
+    "{urn:parsarium:catalog}lang=es",
+    "id=b2"
+  ],
+  "elements": [
+    "{urn:parsarium:catalog}catalog",
+    "{urn:parsarium:item}item",
+    "{urn:parsarium:item}item",
+    "{urn:parsarium:item}name",
+    "{urn:parsarium:item}note"
+  ],
+  "max_depth": 3,
+  "namespace_declarations": 2,
+  "namespaces": [
+    "urn:parsarium:catalog",
+    "urn:parsarium:item"
+  ],
+  "root": "{urn:parsarium:catalog}catalog",
+  "text": [
+    "Café & té",
+    "Zürich <HQ>",
+    "x < y"
+  ]
+}
+```
 
-## Run
+## Run this target
 
 ```sh
 python3 parsarium.py build xml go github_com_vmware_govmomi_vim25_xml
 python3 parsarium.py run xml go github_com_vmware_govmomi_vim25_xml controls/xml/catalog-ns.xml
-python3 parsarium.py run xml go github_com_vmware_govmomi_vim25_xml controls/xml/order-default-ns.xml
 ```

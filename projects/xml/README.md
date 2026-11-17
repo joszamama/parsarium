@@ -15,6 +15,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [github.com/beevik/etree / Go](go/github_com_beevik_etree/README.md)
 - [github.com/clbanning/mxj / Go](go/github_com_clbanning_mxj/README.md)
 - [github.com/mmcdole/goxpp / Go](go/github_com_mmcdole_goxpp/README.md)
+- [github.com/vmware/govmomi/vim25/xml / Go](go/github_com_vmware_govmomi_vim25_xml/README.md)
 - [aalto-xml / Java](java/aalto_xml/README.md)
 - [dom4j / Java](java/dom4j/README.md)
 - [jackson-dataformat-xml / Java](java/jackson_xml/README.md)
