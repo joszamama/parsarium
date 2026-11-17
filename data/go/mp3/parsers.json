@@ -70,6 +70,39 @@
     "project": "projects/mp3/go/github_com_tcolgate_mp3"
   },
   {
+    "name": "github.com/tosone/minimp3",
+    "module": "github.com/tosone/minimp3",
+    "version": "v1.1.0",
+    "license": "MIT (Go binding); CC0-1.0 (vendored minimp3.h)",
+    "input_api": "DecodeFull([]byte) (*Decoder, []byte, error); Decoder.SampleRate and Channels",
+    "documentation": "https://pkg.go.dev/github.com/tosone/minimp3@v1.1.0",
+    "source": "https://github.com/tosone/minimp3/tree/v1.1.0",
+    "scope": "Decode untagged MPEG Layer III bytes to PCM, returning sample rate, channels, byte count and PCM hash",
+    "family": "lieff/minimp3 C decoder via tosone Go cgo binding",
+    "family_note": "Distinct decoder family from hajime/go-mp3. This package is also selected for tagged MP3 controls; the plain path uses untagged controls with native C coverage.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "decoded_bytes": 25344,
+      "pcm_sha256": "0641e37cb18148b29cfc23ffc8c479115a4e042a0952a91570e92888aec0a33e"
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "decoded_bytes": 27648,
+      "pcm_sha256": "ac01db4bb3d3c907d3b51ecaefd6497cce1a693035114377eeedef2ef5afb653"
+    },
+    "evidence": "projects/mp3/go/github_com_tosone_minimp3/verification.json",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 34,
+      "source": "data/go/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/go/github_com_tosone_minimp3"
+  },
+  {
     "name": "github.com/dmulholl/mp3lib",
     "module": "github.com/dmulholl/mp3lib",
     "version": "v1.0.0",

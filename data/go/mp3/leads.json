@@ -55,11 +55,11 @@
   },
   {
     "name": "github.com/tosone/minimp3",
-    "status": "unresolved",
+    "status": "selected",
     "imported_by_packages": 34,
     "version_seen": "v1.1.0",
     "license": "MIT",
-    "reason": "cgo binding with vendored minimp3.h (separate C decoder family); documented DecodeFull([]byte) is verified in mp3_id3v2 on a tagged control, but this pilot has not checked it on the untagged controls or bridged C source coverage.",
+    "reason": "Pinned DecodeFull([]byte) C decoder via Go binding. Both untagged valid controls match independent header-derived sample counts; package and native C source coverage plus stable native AFL++ edges are recorded in the project receipts.",
     "source": "https://pkg.go.dev/github.com/tosone/minimp3"
   },
   {

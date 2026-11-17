@@ -954,6 +954,31 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
         return False
     if not pdf_oxide_cpp_feedback_verified(path, manifest, overlay):
         return False
+    if manifest.get("afl_native_cgo"):
+        native_dir = overlay_path.parent
+        validation_path = native_dir / "feedback-validation.json"
+        allowlist_path = path.parent / "afl-allowlist.txt"
+        if not validation_path.is_file() or not allowlist_path.is_file():
+            return False
+        validation = json.loads(validation_path.read_text())
+        allowlist_hash = sha256(allowlist_path.read_bytes()).hexdigest()
+        if (str(project) != "mp3/go/github_com_tosone_minimp3"
+                or overlay.get("feedback_kind") != "go_cgo_minimp3_native_c_parser_edges"
+                or overlay.get("afl_entrypoint") != manifest.get("afl_entrypoint")
+                or overlay.get("afl_file_input") is not True
+                or overlay.get("source_sha256") != manifest["source_sha256"]
+                or overlay.get("allowlist_sha256") != allowlist_hash
+                or validation.get("allowlist_sha256") != allowlist_hash
+                or validation.get("pass") is not True
+                or validation.get("repeat_maps_identical") is not True
+                or validation.get("repeats_per_control") != 5
+                or validation.get("mutation_campaign_run") is not False
+                or validation.get("first_native_tuples") != overlay["feedback_edges"]
+                or validation.get("native_tuple_difference", 0) < 2
+                or validation.get("first_sha256") != manifest["control_sha256"]
+                or validation.get("second_sha256") != manifest["differential_control_sha256"]
+                or validation.get("second_control_output") != manifest["differential_expected_output"]):
+            return False
     if not resvg_cpp_feedback_verified(path, manifest, overlay):
         return False
     if not stereokit_ply_feedback_verified(path, manifest, overlay):
