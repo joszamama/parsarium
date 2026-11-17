@@ -1,10 +1,10 @@
 {
   "ecosystem": "c",
   "format": "json",
-  "status": "pilot_three_selected_search_bounded",
+  "status": "pilot_four_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 3,
+  "verified_third_party_count": 4,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "json",
@@ -15,8 +15,8 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 27,
   "unique_search_hits": 27,
-  "unresolved_documentation_leads": 3,
-  "uncertainty": "Three third-party parsers passed two valid JSON controls with format-aware tree results, source coverage and stable AFL++ feedback: jansson 2.15.1 (282,984 Debian popcon sourcemax installations), json-c 0.19 (269,736), and cJSON 1.7.19 (150,958). Their parser sources are distinct. The remaining positive lead yyjson (14,868) is unverified. Debian installations mostly reflect dependencies and miss vendored copies, particularly cJSON. Search remains bounded to the recorded Conan recipe queries; three valid paths do not establish the definitive top ten or full RFC 8259 compliance. ISO C documents no JSON API.",
+  "unresolved_documentation_leads": 2,
+  "uncertainty": "Four positive-signal C JSON third-party paths pass two valid controls with format-aware tree results, parser source coverage and stable AFL++ feedback: jansson 2.15.1 (282,984 Debian popcon sourcemax installations), json-c 0.19 (269,736), cJSON 1.7.19 (150,958), yyjson 0.13.0 (14,868). They have separate parser sources. Debian installations mostly reflect dependencies and miss vendored copies. Search remains bounded to the recorded Conan recipe queries; four paths do not establish the definitive top ten or full RFC 8259 compliance. ISO C documents no JSON API.",
   "third_party_evidence": "data/c/json/parsers.json",
   "third_party_control_results": "data/c/json/verification.json",
   "runtime_evidence": "data/c/json/standard.json",

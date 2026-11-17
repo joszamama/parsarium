@@ -17,7 +17,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-SLUGS = ("jansson", "json-c", "cjson")
+SLUGS = ("jansson", "json-c", "cjson", "yyjson")
 REPORT = ROOT / "data/c/json/afl-feedback.json"
 REPEATS = 2
 
@@ -87,12 +87,12 @@ def summarize_tree(tree: object) -> dict:
 
 def replay(manifest: dict, image: str, case: Path, work: Path) -> dict:
     common = sandbox(manifest, case, work)
-    if manifest["package"] == "cjson":
+    if manifest["package"] in {"cjson", "yyjson"}:
         tree = run([*common, "-e", "LLVM_PROFILE_FILE=/tmp/x.profraw",
                     "--entrypoint", "/work/replay", image, "/input/case"])
         parsed = json.loads(tree)
         if parsed != json.loads(case.read_text()):
-            raise RuntimeError(f"{case.name}: cJSON tree differs from valid control")
+            raise RuntimeError(f"{case.name}: parsed tree differs from valid control")
         return summarize_tree(parsed)
     summary = json.loads(run([*common, "-e", "LLVM_PROFILE_FILE=/tmp/x.profraw",
                               "--entrypoint", "/work/replay", image, "/input/case"]))

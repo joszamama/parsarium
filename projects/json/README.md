@@ -5,6 +5,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [cjson / C](c/cjson/README.md)
 - [jansson / C](c/jansson/README.md)
 - [json-c / C](c/json-c/README.md)
+- [yyjson / C](c/yyjson/README.md)
 - [jsoncpp / C++](cpp/jsoncpp/README.md)
 - [nlohmann-json / C++](cpp/nlohmann-json/README.md)
 - [encoding/json.Unmarshal(\[\]byte, any) / Go](go/stdlib_unmarshal/README.md)

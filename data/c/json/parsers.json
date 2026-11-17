@@ -158,5 +158,59 @@
       "snapshot": "data/c/json/registry-snapshot.json"
     },
     "project": "projects/json/c/cjson"
+  },
+  {
+    "name": "yyjson",
+    "version": "0.13.0",
+    "license": "MIT",
+    "license_evidence": "Pinned 0.13.0 LICENSE in source tarball",
+    "input_api": "yyjson_read(const char *dat, size_t len, yyjson_read_flag flg)",
+    "documentation": "https://github.com/ibireme/yyjson/blob/0.13.0/doc/API.md",
+    "documentation_note": "Pinned doc/API.md documents local UTF-8 input, byte length, and flag 0 for RFC 8259/ECMA-404-compliant reading.",
+    "source": "https://github.com/ibireme/yyjson/releases/tag/0.13.0",
+    "scope": "RFC 8259 JSON text parsed from a bounded local byte buffer into a yyjson_doc tree; observed valid control subset",
+    "family": "yyjson native reader (src/yyjson.c)",
+    "family_note": "The pinned yyjson C source implements its own reader and document representation; no jansson, json-c, or cJSON dependency.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package yyjson",
+      "value": 14868,
+      "rank": 2611,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "project": "projects/json/c/yyjson"
   }
 ]
