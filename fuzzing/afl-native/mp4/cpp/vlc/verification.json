@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "project": "mp4/cpp/vlc",
+  "pass": true,
+  "feedback_kind": "vlc_mp4_plugin_pcguard_edges",
+  "feedback_scope": "VLC 3.0.24 MP4 demuxer plugin sources (modules/demux/mp4, demux/asf/asfpacket.c) via AFL++ allowlist; libvlccore, libVLC, file access and the C++17 harness uninstrumented",
+  "shared_parser_family": "VLC 3.0.24 native MP4 demuxer plugin (modules/demux/mp4) behind the libVLC media API",
+  "shared_parser_family_projects": [
+    "projects/mp4/c/vlc"
+  ],
+  "base_project_receipt_sha256": "ab8c9df0ae8f38d1337ba801fc7d675cb0ec96d27260a7a102f29b0abbc4739a",
+  "source_sha256": "e7cab503d1d7d5849b89d2cf0e1ee60d0ef6d012407791b644b9cfc0cc225fdf",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "variant_sha256": "a153daff81e38744da7a653d44a4f381b7f4768d6f4148a00391b440af5ef308",
+  "variant_output": {
+    "title": "",
+    "video_tracks": 1,
+    "audio_tracks": 1,
+    "duration_ms": 3000,
+    "video_codec": "h264",
+    "audio_codec": "mp4a",
+    "width": 16,
+    "height": 16
+  },
+  "image_id": "sha256:adceeda013829ad8a071e9685d00f0082198532edd5ea3be19fcfc243079ca86",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "afl_map_size": 4942,
+  "repeats": 3,
+  "feedback_edges": 508,
+  "variant_feedback_edges": 535,
+  "edges_only_in_control": 12,
+  "edges_only_in_variant": 39,
+  "control_stability": {
+    "repeat_edge_counts": [
+      508,
+      508,
+      508
+    ],
+    "stable_edges": 508,
+    "union_edges": 508,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      535,
+      535,
+      535
+    ],
+    "stable_edges": 535,
+    "union_edges": 535,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "stable_variant_only_edges": 39,
+  "overlay_file_sha256": {
+    "Dockerfile": "e082ec39f7cae286a3e1973646737284c0849e6236910fb30dd11f0ca2ab4014",
+    "build.py": "ff4a2350dfc07a66bc423e7c6e85eeb6a16dc6463e5bf16b4639f25037a700be"
+  }
+}
