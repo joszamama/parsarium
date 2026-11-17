@@ -81,25 +81,20 @@
       "status": "excluded",
       "reason": "YAML deserializer.",
       "source": "https://crates.io/crates/serde-saphyr"
-    }
-  ],
-  "unresolved_leads": [
+    },
     {
       "name": "ijson",
       "version": "0.1.7",
       "recent_downloads_90d": 1818125,
-      "status": "unresolved_shared_family",
-      "reason": "Compact IValue type; decoding goes through serde Deserialize, normally driven by serde_json, so family overlap with the selected path must be checked.",
-      "source": "https://crates.io/crates/ijson"
-    },
-    {
-      "name": "json-syntax",
-      "version": "0.13.1",
-      "recent_downloads_90d": 702428,
-      "status": "unresolved",
-      "reason": "Strict JSON parser with code-mapping (json_syntax::Value::parse_str). Not run on the controls.",
-      "source": "https://crates.io/crates/json-syntax"
-    },
+      "status": "excluded_no_own_parser",
+      "reason": "Pinned 0.1.7 public API supplies IValue, serde Deserialize, and conversion of already parsed values but no own local JSON text/byte/stream parser. examples/comparison.rs invokes serde_json::from_slice to decode JSON into IValue; the underlying syntax parser is selected serde_json, so this would duplicate that parser family.",
+      "source": "https://crates.io/crates/ijson",
+      "source_archive": "https://static.crates.io/crates/ijson/ijson-0.1.7.crate",
+      "source_sha256": "aa5ce332c21eba6ae0217cd287ef06042abbb2af98e33854ba4da2c607ab3b7a",
+      "source_evidence": "ijson-0.1.7/examples/comparison.rs and src/de.rs"
+    }
+  ],
+  "unresolved_leads": [
     {
       "name": "json-event-parser",
       "version": "0.2.3",
@@ -257,6 +252,17 @@
       "record": "data/rust/json/parsers.json",
       "receipt": "projects/json/rust/gjson/verification.json",
       "scope_note": "Path-query API alone assumes validity; adapter calls gjson::valid first, then gjson::parse and Value::each for all children. Shares tidwall GJSON design/maintainer family with Go gjson, separate Rust source."
+    },
+    {
+      "name": "json-syntax",
+      "version": "0.13.1",
+      "recent_downloads_90d": 702428,
+      "status": "selected",
+      "reason": "Own documented JsonValue::parse_slice byte parser, both exact valid controls, own-source coverage and stable differential AFL++ feedback.",
+      "source": "https://crates.io/crates/json-syntax",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/json_syntax/verification.json",
+      "scope_note": "Pinned own parser builds DOM and code map; optional serde_json feature disabled; serde_json in harness serializes summary only."
     }
   ]
 }

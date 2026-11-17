@@ -431,5 +431,53 @@
       "source": "data/rust/json/registry-snapshot.json"
     },
     "project": "projects/json/rust/gjson/verification.json"
+  },
+  {
+    "name": "json-syntax",
+    "version": "0.13.1",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "JsonValue::parse_slice(&[u8]) -> Result<(JsonValue, JsonCodeMap), JsonParseError>",
+    "documentation": "https://docs.rs/json-syntax/0.13.1/json_syntax/parse/trait.JsonParse.html",
+    "source": "https://static.crates.io/crates/json-syntax/json-syntax-0.13.1.crate",
+    "scope": "One complete RFC 8259 JSON byte slice parsed to its own JsonValue tree and code map; exact root kind, object/array/boolean/null counts, nesting depth, decoded strings, numeric values and sorted top-level keys on two valid controls. Adapter bounds input at 1 MiB and traversal at 256 levels.",
+    "family": "json-syntax own strict parser and code map in src/parse; json-number dependency stores numeric lexical form; no serde_json input parser or optional serde_json feature",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 702428,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/json_syntax/verification.json"
   }
 ]

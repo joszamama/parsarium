@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "project": "json/rust/json_syntax",
+  "pass": true,
+  "base_project_receipt_sha256": "2b8b8bd47ec008ae118814b4c7df63de3ea6d6a89670812b624b8ab37e4c5b32",
+  "overlay_file_sha256": {
+    "Cargo.toml": "79f2e4a23433483f616d4e2601116b66e2bf0e778185d4117f1f2e4d4d6ea80e",
+    "Cargo.lock": "cbea51a129fc5ee4f543f2fc9b6123c62b2c558baf6801484b8a5d31f87eff5c",
+    "afl_fuzzer.rs": "d113d6a5ecc16f17ada9b5d2f10cffb095ffb2a88cafa2e9bd8973321cdc0cc4",
+    "Dockerfile": "4f50348a9da21482c01f0ebc6db13b4cf8fd5501de4629ccdfaadf0d4fd7cb31",
+    "build.py": "1b8e7c082547a080ee273dd030de1ec8a33992f258e8d79bf06e1ca2fcc8da16"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "1a77d52c04b5ef283ff6843702206599110495080b0d26aef81a3f0bbca30b16",
+  "image_id": "sha256:a9d849ad918f7d23b3177838663ca3013ec704f9cc2e0268e587e00ec5b0a313",
+  "platform": "linux/arm64",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "feedback_edges": 983,
+  "afl_map_size": 17420,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "Whole afl_fuzzer binary built by cargo-afl: json_syntax 0.13.1 parser, serde_json summary serializer, their dependencies and the harness are instrumented",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:14a83fb3bdb2b7202fe9c9ac50c5a3cc51e15a8026f889080fa2a80b99934da1",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1.0,
+      1.0,
+      2.0,
+      2.0
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "variant_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1.0
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "repeats": 3,
+  "variant_feedback_edges": 872,
+  "edges_only_in_control": 139,
+  "edges_only_in_variant": 28,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/json-syntax-0.13.1/",
+    "control_lines": {
+      "src/array.rs": 0,
+      "src/code_map.rs": 17,
+      "src/kind.rs": 0,
+      "src/lexical.rs": 0,
+      "src/lib.rs": 0,
+      "src/number.rs": 15,
+      "src/object.rs": 14,
+      "src/parse/array.rs": 27,
+      "src/parse/boolean.rs": 20,
+      "src/parse/mod.rs": 83,
+      "src/parse/null.rs": 14,
+      "src/parse/number.rs": 37,
+      "src/parse/object.rs": 35,
+      "src/parse/string.rs": 45,
+      "src/parse/value.rs": 100,
+      "src/print/mod.rs": 0,
+      "src/print/printer.rs": 0,
+      "src/print/sizes.rs": 0,
+      "src/tracing.rs": 0,
+      "src/visitor.rs": 0
+    },
+    "variant_lines": {
+      "src/array.rs": 0,
+      "src/code_map.rs": 17,
+      "src/kind.rs": 0,
+      "src/lexical.rs": 0,
+      "src/lib.rs": 0,
+      "src/number.rs": 15,
+      "src/object.rs": 14,
+      "src/parse/array.rs": 27,
+      "src/parse/boolean.rs": 20,
+      "src/parse/mod.rs": 83,
+      "src/parse/null.rs": 14,
+      "src/parse/number.rs": 35,
+      "src/parse/object.rs": 33,
+      "src/parse/string.rs": 44,
+      "src/parse/value.rs": 98,
+      "src/print/mod.rs": 0,
+      "src/print/printer.rs": 0,
+      "src/print/sizes.rs": 0,
+      "src/tracing.rs": 0,
+      "src/visitor.rs": 0
+    },
+    "files_with_different_line_counts": [
+      "src/parse/number.rs",
+      "src/parse/object.rs",
+      "src/parse/string.rs",
+      "src/parse/value.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      983,
+      983,
+      983
+    ],
+    "stable_edges": 983,
+    "union_edges": 983,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      872,
+      872,
+      872
+    ],
+    "stable_edges": 872,
+    "union_edges": 872,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}
