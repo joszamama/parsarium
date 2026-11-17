@@ -19,21 +19,29 @@ class JavaJsonPilotTest(unittest.TestCase):
         parsers = read(BASE / "parsers.json")
         leads = read(BASE / "leads.json")
         metrics = [parser["popularity"]["value"] for parser in parsers]
-        self.assertEqual([parser["name"] for parser in parsers], ["jackson-databind", "gson"])
+        self.assertEqual([parser["name"] for parser in parsers],
+                         ["jackson-databind", "jackson-core", "gson"])
         self.assertEqual(metrics, sorted(metrics, reverse=True))
-        self.assertEqual(len({parser["family"] for parser in parsers}), len(parsers))
-        self.assertTrue(all(lead["status"] == "unresolved" for lead in leads))
+        self.assertTrue(all(parser["family"].startswith("Jackson") for parser in parsers[:2]))
+        self.assertTrue(parsers[2]["family"].startswith("Gson"))
+        self.assertTrue(all(lead["status"] in {"unresolved", "promoted_to_verified"}
+                            for lead in leads))
+        self.assertEqual({lead["name"] for lead in leads
+                          if lead["status"] == "promoted_to_verified"}, {"jackson-core"})
         snapshot = read(BASE / "registry-snapshot.json")
         for parser in parsers:
-            self.assertNotIn(parser["name"], {lead["name"] for lead in leads})
+            self.assertNotIn(parser["name"],
+                             {lead["name"] for lead in leads if lead["status"] == "unresolved"})
             recorded = snapshot["popularity_metric"]["packages"][
                 f"{parser['group']}:{parser['artifact']}"]
             self.assertEqual(recorded["summed_direct_dependent_count"], parser["popularity"]["value"])
-        # Leads above the lowest selected path must be same-family, not skipped engines.
-        above = [lead["name"] for lead in leads if lead["summed_direct_dependent_count"] > metrics[-1]]
-        self.assertEqual(above, ["jackson-core"])
+        # No unresolved parser lead outranks the lowest selected path.
+        above = [lead["name"] for lead in leads if lead["status"] == "unresolved"
+                 and lead["summed_direct_dependent_count"] > metrics[-1]]
+        self.assertEqual(above, [])
         cell = read(BASE / "cell.json")
-        self.assertEqual(len(leads), cell["unresolved_documentation_leads"])
+        self.assertEqual(sum(lead["status"] == "unresolved" for lead in leads),
+                         cell["unresolved_documentation_leads"])
         self.assertEqual(len(parsers), cell["verified_third_party_count"])
 
     def test_control_receipts_match_catalog(self):

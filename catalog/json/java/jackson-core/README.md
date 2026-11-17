@@ -1,12 +1,54 @@
 # jackson-core — JSON / Java
 
-**Verified package/API path in an incomplete format cell.**
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-- **Pinned release:** `com.fasterxml.jackson.core:jackson-core:2.23.0` (Apache-2.0)
-- **Parser family:** Jackson; shares the tokenizer used by selected `jackson-databind`
-- **Local input API:** `JsonFactory.createParser(InputStream)` over a local file stream, then `JsonParser.nextToken()`
-- **Documentation:** [release API reference](https://javadoc.io/static/com.fasterxml.jackson.core/jackson-core/2.23.0/com/fasterxml/jackson/core/JsonFactory.html)
-- **Valid controls:** [nested object](../../../../controls/json/nested-object.json) and [nested array](../../../../controls/json/nested-array.json)
-- **Evidence:** [parser record](../../../../data/java/json/parsers.json), [control result](../../../../data/java/json/verification.json), [project and commands](../../../../projects/json/java/jackson_core/README.md)
+- **Pinned release:** `2.23.0`
+- **License:** Apache-2.0
+- **Parser family:** Jackson (jackson-core streaming parser)
+- **Local input API:** `JsonFactory.createParser(InputStream) over Files.newInputStream(Path), then JsonParser.nextToken()/getText()/getDoubleValue()`
+- **Documentation:** [API reference](<https://javadoc.io/static/com.fasterxml.jackson.core/jackson-core/2.23.0/com/fasterxml/jackson/core/JsonFactory.html>)
+- **Valid control:** [`controls/json/nested-object.json`](../../../../controls/json/nested-object.json)
+- **Catalog evidence:** [parser record](../../../../data/java/json/parsers.json) · [control result](../../../../data/java/json/verification.json)
 
-The adapter consumes the direct Jackson Core token stream and reports structure. On the nested-object control it observed five objects, three arrays, maximum depth four, and seven top-level keys. On the nested-array control it observed two objects, four arrays, maximum depth three, and five top-level items. JaCoCo covered 442 parser source lines; repeated control feedback was stable and differed from the second valid structure. This establishes only the tested subset.
+## Observed control result
+
+```json
+{
+  "arrays": 3,
+  "booleans": 2,
+  "max_depth": 4,
+  "nulls": 1,
+  "numbers": [
+    -2.5,
+    1,
+    1,
+    2,
+    2
+  ],
+  "objects": 5,
+  "root": "object",
+  "strings": [
+    "café \"quoted\"",
+    "go",
+    "json",
+    "parsarium",
+    "rfc8259"
+  ],
+  "top_level_keys": [
+    "enabled",
+    "missing",
+    "name",
+    "nested",
+    "ratio",
+    "tags",
+    "version"
+  ]
+}
+```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json java jackson_core
+python3 parsarium.py run json java jackson_core controls/json/nested-object.json
+```
