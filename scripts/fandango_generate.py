@@ -33,7 +33,8 @@ ECOSYSTEMS = ("c", "cpp", "go", "java", "javascript", "python", "rust", "php")
 # Fanbase spec as of index.yml schema 2 and need --spec.
 FANBASE_FORMATS = {"png": "png", "zip": "zip", "wav": "wav", "svg": "svg",
                    "mp3_id3v2": "mp3"}
-LOCAL_SPECS = {"http11": "http11_request.fan", "ascii_ply": "ascii_ply.fan",
+LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan",
+               "http11": "http11_request.fan", "ascii_ply": "ascii_ply.fan",
                "ascii_pnm": "ascii_pnm_p3.fan"}
 # Passed as -x with --spec; Fandango defaults to '.txt' for -f.
 EXTENSIONS = {"png": ".png", "zip": ".zip", "mp4": ".mp4", "wav": ".wav",

@@ -1,9 +1,18 @@
 # Fandango specs
 
-[Fandango](https://fandango-fuzzer.github.io/) 1.3.1 specs for three text formats. Each spec generates small valid inputs only. Header fields and body contents are coupled in the grammar itself, so no constraints or Python action blocks are needed.
+[Fandango](https://fandango-fuzzer.github.io/) 1.3.1 specs for five formats. MP4 and PDF use constraints to keep box sizes and offsets correct; the three text grammars keep headers and data consistent through their productions.
+
+```sh
+python3 parsarium.py fandango setup
+python3 parsarium.py fandango generate ascii_ply c assetkit runs/ply-fandango --count 100 --seed 1 --replay
+```
+
+The generator selects the bundled spec automatically, saves its hash and generated files, and can prepare the same corpus for AFL++ with `--prepare-afl`. [The MP4 and PDF grammar details](specs/README.md) describe their scope.
 
 | Spec | Cell | Scope |
 | --- | --- | --- |
+| [`mp4.fan`](specs/mp4.fan) | `mp4` | ISO BMFF `ftyp` and a sample-free `moov`/video track with constrained box sizes; see [details](specs/README.md) |
+| [`pdf.fan`](specs/pdf.fan) | `pdf` | One-page PDF with constrained xref offsets and stream length; see [details](specs/README.md) |
 | [`ascii_ply.fan`](specs/ascii_ply.fan) | `ascii_ply` | `format ascii 1.0`; 3 vertices with 1 triangle or 4 vertices with 2 triangles; `float x y z`, optionally `uchar red green blue`; face list `uchar int` or `uchar uint`; 0–2 comment lines |
 | [`ascii_pnm_p3.fan`](specs/ascii_pnm_p3.fan) | `ascii_pnm` | Plain PPM (`P3`) only; 1×1, 2×1, 1×2 or 2×2; maxval 255 or 15 with every sample at most maxval; space or newline header separators; optional comment after the magic; optional trailing newline |
 | [`http11_request.fan`](specs/http11_request.fan) | `http11` | Requests only; `GET`, `HEAD`, `OPTIONS`, `DELETE` without body, or `POST` with a matching `Content-Length` (0, 3 or 9 bytes); origin-form targets; `Host` always present; optional `User-Agent`, `Accept`, `X-Parsarium`, `Connection`, each at most once; optional whitespace after the colon; CRLF line endings |
@@ -12,7 +21,7 @@ Fanbase `ppm` covers both P3 and P6, so the PNM spec is restricted to P3. The `P
 
 ## Generate
 
-Install the tested Fandango release in a local environment:
+For direct grammar use outside Parsarium, install the tested Fandango release in a local environment:
 
 ```sh
 python3 -m venv .venv

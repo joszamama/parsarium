@@ -133,10 +133,14 @@ class FandangoGenerateTest(unittest.TestCase):
             (ROOT / "projects/png/python/stdlib_tkinter_photoimage/control-verification.json")
             .read_bytes()).hexdigest())
 
-    def test_no_bundled_mp4_spec_explains_required_option(self):
-        code, output = self.run_cli("mp4", "cpp", "exiv2", str(self.tmp / "no-spec"))
-        self.assertEqual(code, 2)
-        self.assertIn("pass --spec FILE.fan", output)
+    def test_default_local_mp4_spec_needs_no_flag(self):
+        run = self.tmp / "default-mp4"
+        code, output = self.run_cli("mp4", "cpp", "exiv2", str(run), "--count", "1")
+        self.assertEqual(code, 0, output)
+        spec = ROOT / "fuzzing/fandango/specs/mp4.fan"
+        self.assertEqual(self.receipt(run)["spec"]["sha256"], sha256(spec.read_bytes()).hexdigest())
+        self.assertEqual(json.loads(self.log.read_text())["argv"][1:4],
+                         ["-f", str(spec), "-x"])
 
     def test_pinned_registry_checks_index_hash(self):
         registry = self.tmp / "fanbase"
