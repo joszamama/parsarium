@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "java",
+  "package": "kotlin-assimp",
+  "release": "v4.0",
+  "catalog_parser": "data/java/ascii_ply/parsers.json",
+  "source_lock": "data/java/ascii_ply/kotlin-assimp-lock.json",
+  "source_sha256": "1edb9ad3b65adb721b91b02acf9014717e83c93de1dbc4b2278d4006ed043fad",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3,
+    "faces": 1,
+    "indices": [
+      0,
+      1,
+      2
+    ]
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/assimp-all.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo coverage of the kotlin-graphics JVM Assimp port (assimp.* classes from the official v4.0 assimp-all.jar, mapped to the tagged Kotlin sources) during valid ASCII PLY replay, including its own PlyLoader and PlyParser; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/PlyLoader.kt"
+}
