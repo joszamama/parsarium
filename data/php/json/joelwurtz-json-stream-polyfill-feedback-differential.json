@@ -1,0 +1,40 @@
+{
+  "project": "json/php/joelwurtz_json_stream_polyfill",
+  "pass": true,
+  "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+  "overlay_receipt_sha256": "d373c4deb4f5465cbad3f80711c24fe5119b20369022e17dbf048b7afecbbc6d",
+  "base_image_id": "sha256:b256a7d71e1232c784336da8897ac9d62ec77954bc8900faa0a73778011987cd",
+  "overlay_image_id": "sha256:0e003cf39df9b974948c1e0f001b1c039707faa47c758a12a60484c990f70945",
+  "release_source_sha256": "01b0b9aeebd069e236191cb89868f9a9cdf48c670cdeafc19e197a16a255490d",
+  "parser_source_prefix": "/work/vendor/joelwurtz/json-stream-polyfill/",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "differential": "controls/json/nested-array.json",
+  "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "ordered_members_and_number_kinds_checked": true,
+  "control_source_lines_by_file": {
+    "src/Document.php": 113,
+    "src/State.php": 81,
+    "src/functions.php": 8
+  },
+  "differential_source_lines_by_file": {
+    "src/Document.php": 113,
+    "src/State.php": 80,
+    "src/functions.php": 8
+  },
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 202,
+  "control_afl_tuples": 222,
+  "differential_parser_features": 201,
+  "differential_afl_tuples": 221,
+  "parser_feature_difference": 1,
+  "afl_tuple_difference": 1,
+  "control_only_features_by_file": {
+    "src/State.php": 1
+  },
+  "differential_only_features_by_file": {},
+  "feature_note": "Bridge features are a subset of the 223 Xdebug lines in the project receipt: php_trace.php starts coverage after harness.php has loaded the Composer autoloader and the package bootstrap.php, State.php, Document.php and functions.php, so class-file load lines are not features. The single differing feature is State.php line 237, the backslash-run loop in findStringEnd() that runs only for the escaped quotes in the object control."
+}

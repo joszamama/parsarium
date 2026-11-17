@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "php",
+  "pilot": true,
+  "package": "joelwurtz/json-stream-polyfill",
+  "release": "0.1.0",
+  "catalog_parser": "data/php/json/parsers.json",
+  "source_lock": "projects/json/php/joelwurtz_json_stream_polyfill/source-lock.json",
+  "source_sha256": "01b0b9aeebd069e236191cb89868f9a9cdf48c670cdeafc19e197a16a255490d",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "expected_output": {
+    "type": "object",
+    "members": {
+      "name": {
+        "type": "string",
+        "value": "parsarium"
+      },
+      "version": {
+        "type": "number",
+        "value": 1
+      },
+      "ratio": {
+        "type": "number",
+        "value": -2.5
+      },
+      "enabled": {
+        "type": "boolean",
+        "value": true
+      },
+      "missing": {
+        "type": "null"
+      },
+      "tags": {
+        "type": "array",
+        "items": [
+          {
+            "type": "string",
+            "value": "json"
+          },
+          {
+            "type": "string",
+            "value": "go"
+          },
+          {
+            "type": "string",
+            "value": "rfc8259"
+          }
+        ]
+      },
+      "nested": {
+        "type": "object",
+        "members": {
+          "level": {
+            "type": "number",
+            "value": 2
+          },
+          "items": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "members": {
+                  "id": {
+                    "type": "number",
+                    "value": 1
+                  },
+                  "ok": {
+                    "type": "boolean",
+                    "value": false
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "members": {
+                  "id": {
+                    "type": "number",
+                    "value": 2
+                  },
+                  "text": {
+                    "type": "string",
+                    "value": "café \"quoted\""
+                  }
+                }
+              }
+            ]
+          },
+          "empty": {
+            "type": "object",
+            "members": {}
+          },
+          "list": {
+            "type": "array",
+            "items": []
+          }
+        }
+      }
+    }
+  },
+  "differential_expected_output": {
+    "type": "array",
+    "items": [
+      {
+        "type": "number",
+        "value": 1
+      },
+      {
+        "type": "number",
+        "value": 0.25
+      },
+      {
+        "type": "string",
+        "value": "two"
+      },
+      {
+        "type": "array",
+        "items": [
+          {
+            "type": "boolean",
+            "value": true
+          },
+          {
+            "type": "null"
+          },
+          {
+            "type": "array",
+            "items": [
+              {
+                "type": "boolean",
+                "value": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "object",
+        "members": {
+          "k": {
+            "type": "array",
+            "items": []
+          },
+          "n": {
+            "type": "object",
+            "members": {
+              "deep": {
+                "type": "string",
+                "value": "A"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in joelwurtz/json-stream-polyfill PHP source (State structural scanner and Document container scan/iteration); php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/joelwurtz/json-stream-polyfill/",
+  "format_specific_coverage_file_suffix": "/src/Document.php",
+  "scope": "One complete JSON text from local bytes passed to documented json_stream_decode(string) with default options (slot mode); harness iterates the lazy JsonStream\\Document and its child Documents with foreach, reads each container kind from __debugInfo(), and type-tags the yielded values with members in returned order. Scalar and key tokens are decoded by ext/json json_decode inside the package."
+}

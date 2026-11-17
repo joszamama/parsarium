@@ -1068,5 +1068,175 @@
     },
     "project": "projects/json/php/eftec_services_json",
     "not_verified": "Two valid nested object/array controls were run through decode() with default flags and gave exact ordered type-tagged trees. GET_ARRAY, DECODE_FIX_ROOT and DECODE_NO_QUOTE modes, comments, unquoted keys, \\u surrogate pairs, big integers, scalar roots, byte-order marks, deep nesting and malformed input remain unverified; invalid text can return null, so the harness cannot distinguish a rejected input from a JSON null root."
+  },
+  {
+    "name": "joelwurtz/json-stream-polyfill",
+    "version": "0.1.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/joelwurtz/php-json-stream-polyfill/blob/0136c414d2100f779dffd8910e5d591f97845004/LICENSE",
+    "documentation": "https://github.com/joelwurtz/php-json-stream-polyfill/blob/0136c414d2100f779dffd8910e5d591f97845004/README.md#what-it-implements",
+    "source": "https://github.com/joelwurtz/php-json-stream-polyfill/tree/0136c414d2100f779dffd8910e5d591f97845004",
+    "input_api": "json_stream_decode(string $source) with default options over local bytes; returns a lazy JsonStream\\Document whose foreach iteration yields member names/indexes, scalars and child Documents for nested containers; the container kind is read from the documented __debugInfo() 'kind'. The harness type-tags the yielded tree with members in returned order and never calls toValue(). The image deletes only the package's bootstrap.php entry from the Composer-generated autoload_files.php and autoload_static.php (asserted in the Dockerfile), and harness.php loads bootstrap.php with the README-documented manual require after vendor/autoload.php, so php-fuzzer instruments the polyfill source; package files are unchanged and diffed against the pinned archive.",
+    "adapter": "projects/json/php/joelwurtz_json_stream_polyfill/harness.php",
+    "composer_lock": "projects/json/php/joelwurtz_json_stream_polyfill/composer.lock",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "type": "object",
+      "members": {
+        "name": {
+          "type": "string",
+          "value": "parsarium"
+        },
+        "version": {
+          "type": "number",
+          "value": 1
+        },
+        "ratio": {
+          "type": "number",
+          "value": -2.5
+        },
+        "enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "missing": {
+          "type": "null"
+        },
+        "tags": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string",
+              "value": "json"
+            },
+            {
+              "type": "string",
+              "value": "go"
+            },
+            {
+              "type": "string",
+              "value": "rfc8259"
+            }
+          ]
+        },
+        "nested": {
+          "type": "object",
+          "members": {
+            "level": {
+              "type": "number",
+              "value": 2
+            },
+            "items": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "number",
+                      "value": 1
+                    },
+                    "ok": {
+                      "type": "boolean",
+                      "value": false
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "number",
+                      "value": 2
+                    },
+                    "text": {
+                      "type": "string",
+                      "value": "café \"quoted\""
+                    }
+                  }
+                }
+              ]
+            },
+            "empty": {
+              "type": "object",
+              "members": {}
+            },
+            "list": {
+              "type": "array",
+              "items": []
+            }
+          }
+        }
+      }
+    },
+    "differential_control": "controls/json/nested-array.json",
+    "differential_expected_output": {
+      "type": "array",
+      "items": [
+        {
+          "type": "number",
+          "value": 1
+        },
+        {
+          "type": "number",
+          "value": 0.25
+        },
+        {
+          "type": "string",
+          "value": "two"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "type": "boolean",
+                  "value": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "members": {
+            "k": {
+              "type": "array",
+              "items": []
+            },
+            "n": {
+              "type": "object",
+              "members": {
+                "deep": {
+                  "type": "string",
+                  "value": "A"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "scope": "One complete JSON text from local bytes passed to documented json_stream_decode(string) with default options (slot mode); harness iterates the lazy JsonStream\\Document and its child Documents with foreach, reads each container kind from __debugInfo(), and type-tags the yielded values with members in returned order. Scalar and key tokens are decoded by ext/json json_decode inside the package.",
+    "family": "json_stream polyfill structural scanner (pure-PHP port of the json_stream extension) plus PHP ext/json for scalar tokens",
+    "family_note": "Pure-PHP port of the json_stream C extension's source layer and structural parser: State.php finds string ends by backslash-run parity, skips nested values by bracket-depth counting and stops scalar tokens at structural bytes; Document.php scans one container at a time (member keys, ':' and ',' separators, trailing commas, closing bracket, trailing bytes after the root) and yields a child Document for each nested object or array. Every key, string, number and literal token is decoded by one json_decode call on that token (State::decodeFragment), so scalar values share ext/json; toValue() would materialize a whole container with one json_decode call and is not used. Same rule as the boundwize/jsonrecast and klkvsk/json-decode-stream paths, but here numbers and literals also go through ext/json. Object keys follow PHP array-key semantics (numeric-string keys become integers) and duplicate keys overwrite in place. Not derived from another selected PHP family.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 20698,
+      "source": "https://packagist.org/packages/joelwurtz/json-stream-polyfill",
+      "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+      "snapshot": "data/php/json/registry-snapshot.json"
+    },
+    "project": "projects/json/php/joelwurtz_json_stream_polyfill",
+    "not_verified": "Two valid nested object/array controls were iterated in default slot mode and gave exact ordered type-tagged trees. Stream, array-of-chunks and Traversable sources, JSON_STREAM_TRANSIENT cursor mode, random dimension access, offsetExists, toValue(), numeric-string and duplicate keys, \\u surrogate pairs, big integers, scalar roots, byte-order marks, deep nesting and malformed input remain unverified. Nested containers are skipped by depth counting before their own scan, so mismatched bracket kinds inside a value that is never iterated are not diagnosed."
   }
 ]
