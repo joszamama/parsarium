@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T16:53:33.665361+00:00",
+  "checked_at_utc": "2026-11-17T17:03:53.546708+00:00",
   "platform": "linux/arm64 Docker",
   "toolchain": [
     "Ubuntu clang version 21.1.8 (6ubuntu1)",
@@ -258,6 +258,251 @@
       "afl_repeats_per_control": 3,
       "afl_tuple_difference": 134,
       "source_line_difference": 100,
+      "error": null
+    },
+    {
+      "package": "rapidyaml",
+      "version": "0.16.0",
+      "scope": "One YAML document from local bytes passed to ryml::parse_in_arena, with aliases expanded by Tree::resolve(): block and flow collections, quoted and block scalars, anchors and aliases, as a typed tree in source order. Unquoted non-null scalars are typed by the adapter with YAML 1.2 core-schema patterns and converted with c4core atoi/atod; rapidyaml itself reports scalar style and plain nulls.",
+      "command": "python3 scripts/run_project.py yaml cpp rapidyaml",
+      "receipt": "projects/yaml/cpp/rapidyaml/verification.json",
+      "pass": true,
+      "output": {
+        "tree": [
+          "map",
+          [
+            [
+              "kind",
+              [
+                "str",
+                "catalog"
+              ]
+            ],
+            [
+              "version",
+              [
+                "int",
+                "2"
+              ]
+            ],
+            [
+              "ratio",
+              [
+                "float",
+                "0.25"
+              ]
+            ],
+            [
+              "offset",
+              [
+                "int",
+                "-17"
+              ]
+            ],
+            [
+              "enabled",
+              [
+                "bool",
+                true
+              ]
+            ],
+            [
+              "retired",
+              [
+                "bool",
+                false
+              ]
+            ],
+            [
+              "missing",
+              [
+                "null"
+              ]
+            ],
+            [
+              "title",
+              [
+                "str",
+                "Café \"quoted\"\tend"
+              ]
+            ],
+            [
+              "single",
+              [
+                "str",
+                "it's here"
+              ]
+            ],
+            [
+              "tags",
+              [
+                "seq",
+                [
+                  [
+                    "str",
+                    "alpha"
+                  ],
+                  [
+                    "str",
+                    "beta"
+                  ],
+                  [
+                    "str",
+                    "gamma delta"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "point",
+              [
+                "map",
+                [
+                  [
+                    "lat",
+                    [
+                      "int",
+                      "1"
+                    ]
+                  ],
+                  [
+                    "lon",
+                    [
+                      "float",
+                      "-2.5"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "items",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "id",
+                        [
+                          "int",
+                          "7"
+                        ]
+                      ],
+                      [
+                        "name",
+                        [
+                          "str",
+                          "first item"
+                        ]
+                      ],
+                      [
+                        "note",
+                        [
+                          "str",
+                          "line one\nline two\n"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "id",
+                        [
+                          "int",
+                          "8"
+                        ]
+                      ],
+                      [
+                        "name",
+                        [
+                          "str",
+                          "Zürich"
+                        ]
+                      ],
+                      [
+                        "note",
+                        [
+                          "str",
+                          "folded text\n"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "defaults",
+              [
+                "map",
+                [
+                  [
+                    "retries",
+                    [
+                      "int",
+                      "3"
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "base"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "service",
+              [
+                "map",
+                [
+                  [
+                    "settings",
+                    [
+                      "map",
+                      [
+                        [
+                          "retries",
+                          [
+                            "int",
+                            "3"
+                          ]
+                        ],
+                        [
+                          "label",
+                          [
+                            "str",
+                            "base"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "edge"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      },
+      "parser_source_lines_covered": 3548,
+      "format_specific_source_lines_covered": 1971,
+      "afl_feedback": "fuzzing/afl-native/yaml/cpp/rapidyaml/differential.json",
+      "afl_repeats_per_control": 3,
+      "afl_tuple_difference": 355,
+      "source_line_difference": 998,
       "error": null
     }
   ],

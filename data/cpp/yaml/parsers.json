@@ -446,5 +446,455 @@
         ]
       ]
     }
+  },
+  {
+    "name": "rapidyaml",
+    "version": "0.16.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/biojppm/rapidyaml/blob/v0.16.0/LICENSE.txt (MIT); the bundled c4core sources in the release archive are MIT as well.",
+    "input_api": "ryml::parse_in_arena(ryml::csubstr) into a ryml::Tree, then Tree::resolve() for aliases; Tree::is_map/is_seq/key/val/is_val_quoted/val_is_null/has_val_tag traversal and c4::atoi/c4::atod",
+    "documentation": "https://github.com/biojppm/rapidyaml/blob/v0.16.0/src/c4/yml/parse.hpp",
+    "documentation_evidence": "parse.hpp documents the parse_in_arena overloads that copy the YAML source into the tree arena and parse it into the root node; samples/quickstart.cpp at the same tag documents Tree::resolve() for anchors and aliases and the val_is_null/is_val_quoted style queries.",
+    "source": "https://github.com/biojppm/rapidyaml/releases/tag/v0.16.0",
+    "source_sha256": "a0ce80a8f4211580c8703e57acb813a28ca6ec80908f6eb926be94be8e98d39d",
+    "adapter": "projects/yaml/cpp/rapidyaml/harness.cpp",
+    "control": "controls/yaml/catalog.yaml",
+    "scope": "One YAML document from local bytes passed to ryml::parse_in_arena, with aliases expanded by Tree::resolve(): block and flow collections, quoted and block scalars, anchors and aliases, as a typed tree in source order. Unquoted non-null scalars are typed by the adapter with YAML 1.2 core-schema patterns and converted with c4core atoi/atod; rapidyaml itself reports scalar style and plain nulls.",
+    "family": "rapidyaml (ryml) own ParseEngine over c4core",
+    "family_note": "Own event-driven ParseEngine (src/c4/yml/parse_engine.def.hpp) with a tree event handler, built from the release source archive with its bundled c4core; no delegation to libyaml or another YAML parser. The Python rapidyaml binding is the same family.",
+    "typing_note": "rapidyaml keeps scalars as text with style bits and has no core-schema typing of its own. The adapter applies the YAML 1.2 core patterns only to unquoted, non-null scalars, so quoted and block scalars stay strings. The controls contain no scalar whose type differs between the schemas.",
+    "build_note": "Built with RYML_DEFAULT_CALLBACK_USES_EXCEPTIONS so the documented default error callback throws instead of aborting.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 56,
+      "debian_source": "rapidyaml",
+      "binary_package": "libryml0.16",
+      "dev_package_installs": {
+        "libryml-dev": 4
+      },
+      "binary_counts_source": "https://popcon.debian.org/by_inst.gz (Last-Modified Tue, 17 Nov 2026 14:09:44 GMT, SHA-256 5db455a219c8c723423f7c2457b615826135ed01729ad2adff1a23f2d28cffb0); one day newer than the sourcemax snapshot",
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "source_sha256": "9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8",
+      "captured_at_utc": "2026-11-17",
+      "snapshot": "data/cpp/yaml/registry-snapshot.json",
+      "limitation": "Very weak package proxy: 56 installations (1 vote, 2 recent, 37 no_files). Not YAML-specific use; header-only and vendored use is invisible."
+    },
+    "project": "projects/yaml/cpp/rapidyaml",
+    "afl_note": "The AFL++ overlay builds the libFuzzer-style target without AddressSanitizer/UBSan: with ASan, 3 of about 4,008 tuples varied between identical replays of the primary control (allocator-dependent paths). Without ASan, eight replays per control gave identical tuple sets. The base image's standalone fuzzer keeps ASan and UBSan.",
+    "expected_output": {
+      "tree": [
+        "map",
+        [
+          [
+            "kind",
+            [
+              "str",
+              "catalog"
+            ]
+          ],
+          [
+            "version",
+            [
+              "int",
+              "2"
+            ]
+          ],
+          [
+            "ratio",
+            [
+              "float",
+              "0.25"
+            ]
+          ],
+          [
+            "offset",
+            [
+              "int",
+              "-17"
+            ]
+          ],
+          [
+            "enabled",
+            [
+              "bool",
+              true
+            ]
+          ],
+          [
+            "retired",
+            [
+              "bool",
+              false
+            ]
+          ],
+          [
+            "missing",
+            [
+              "null"
+            ]
+          ],
+          [
+            "title",
+            [
+              "str",
+              "Café \"quoted\"\tend"
+            ]
+          ],
+          [
+            "single",
+            [
+              "str",
+              "it's here"
+            ]
+          ],
+          [
+            "tags",
+            [
+              "seq",
+              [
+                [
+                  "str",
+                  "alpha"
+                ],
+                [
+                  "str",
+                  "beta"
+                ],
+                [
+                  "str",
+                  "gamma delta"
+                ]
+              ]
+            ]
+          ],
+          [
+            "point",
+            [
+              "map",
+              [
+                [
+                  "lat",
+                  [
+                    "int",
+                    "1"
+                  ]
+                ],
+                [
+                  "lon",
+                  [
+                    "float",
+                    "-2.5"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "items",
+            [
+              "seq",
+              [
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "7"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "first item"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "line one\nline two\n"
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "8"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "Zürich"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "folded text\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "defaults",
+            [
+              "map",
+              [
+                [
+                  "retries",
+                  [
+                    "int",
+                    "3"
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "base"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "service",
+            [
+              "map",
+              [
+                [
+                  "settings",
+                  [
+                    "map",
+                    [
+                      [
+                        "retries",
+                        [
+                          "int",
+                          "3"
+                        ]
+                      ],
+                      [
+                        "label",
+                        [
+                          "str",
+                          "base"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "edge"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "differential_control": "controls/yaml/order.yaml",
+    "differential_expected_output": {
+      "tree": [
+        "seq",
+        [
+          [
+            "map",
+            [
+              [
+                "order",
+                [
+                  "str",
+                  "A-7"
+                ]
+              ],
+              [
+                "lines",
+                [
+                  "seq",
+                  [
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "Xé-1"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "2"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "12.5"
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "B '2'"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "1"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "0.75"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "flags",
+                [
+                  "seq",
+                  []
+                ]
+              ],
+              [
+                "meta",
+                [
+                  "map",
+                  []
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              [
+                "int",
+                "1"
+              ],
+              [
+                "seq",
+                [
+                  [
+                    "int",
+                    "2"
+                  ],
+                  [
+                    "int",
+                    "3"
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "k",
+                    [
+                      "str",
+                      "v"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "str",
+            "plain multi word"
+          ],
+          [
+            "str",
+            "line\nbreak"
+          ],
+          [
+            "str",
+            "kept\n  indented"
+          ],
+          [
+            "null"
+          ],
+          [
+            "bool",
+            false
+          ]
+        ]
+      ]
+    }
   }
 ]
