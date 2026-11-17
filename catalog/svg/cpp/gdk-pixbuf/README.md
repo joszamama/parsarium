@@ -32,6 +32,13 @@
 
 The installed GdkPixbuf SVG loader module comes from librsvg 2.63.4, which is separately counted. This is a distinct package input API over the same librsvg SVG syntax engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/svg/cpp/gdk_pixbuf/README.md)
+
+```sh
+python3 parsarium.py build svg cpp gdk_pixbuf
+python3 parsarium.py run svg cpp gdk_pixbuf controls/svg/red-green.svg
+```
+
+**Coverage limit:** The C++17 harness calls the GDK-Pixbuf C file API. GDK-Pixbuf and its C++ wrapper share the same librsvg SVG syntax engine; the base libFuzzer target instruments the C++ harness, while AFL++ /work/replay provides librsvg parser feedback.

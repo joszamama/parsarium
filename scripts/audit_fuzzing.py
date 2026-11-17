@@ -6,13 +6,16 @@ import tomllib
 
 from build_afl_native import OVERLAYS, derived_dockerfile
 from build_afl_rust import AFL_RUST_RELEASE, dockerfile as rust_dockerfile, overlay_manifest, overlay_target
-from audit_projects import receipt_verified
+from audit_projects import fully_runnable
 from run_case import ROOT, project_for
 
 
 def main() -> None:
+    # A source-covered control may be staged before its parser-feedback overlay
+    # exists. Fuzzing receipts cover only paths with the complete run chain.
     manifests = [path for path in sorted((ROOT / "projects").glob("*/*/*/manifest.json"))
-                 if receipt_verified(path, json.loads(path.read_text()))]
+                 if ((path.parent / "verification.json").is_file()
+                     and fully_runnable(path, json.loads(path.read_text())))]
     case_report = json.loads((ROOT / "data/fuzz-case-smoke.json").read_text())
     case_records = {item["project"]: item for item in case_report["results"]}
     assert len(case_records) == len(manifests) == case_report["projects_total"]
@@ -88,7 +91,8 @@ def main() -> None:
         dockerfile = (overlay / "Dockerfile").read_bytes()
         # These SVG paths use path-local builders to instrument librsvg's Rust
         # parser; the generic C overlay cannot build that parser.
-        custom_rust_svg = str(relative) in {"svg/c/gdk_pixbuf", "svg/c/librsvg"}
+        custom_rust_svg = str(relative) in {
+            "svg/c/gdk_pixbuf", "svg/c/librsvg", "svg/cpp/gdk_pixbuf"}
         if manifest["package"] not in {"gstreamer", "netpbm", "sail"} and not custom_rust_svg:
             assert dockerfile == derived_dockerfile(project).encode()
         if custom_rust_svg:
