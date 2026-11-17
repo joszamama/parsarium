@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "project": "mp3_id3v2/c/mpv",
+  "project": "mp3/c/mpv",
   "pass": true,
   "feedback_kind": "ffmpeg_tagged_mp3_mpv_demux_lavf_pcguard_edges",
   "feedback_scope": "FFmpeg 9.0.2 libavformat/id3v2.c, mp3dec.c, id3v1.c, replaygain.c, libavcodec/mpegaudiodecheader.c, mpegaudio_parser.c and mpv 0.42.0 demux/demux_lavf.c via AFL++ allowlist; the rest of libmpv, libavformat, libavcodec, libplacebo and the C harness uninstrumented",
@@ -22,8 +22,8 @@
     "libavformat.a(replaygain.o)",
     "libmpv.a(demux_demux_lavf.c.o)"
   ],
-  "base_project_receipt_sha256": "4070a648833031f77a534285a2a2e74d4cb98a588e65b946d7239ab2b45f3d88",
-  "base_image_id": "sha256:4e5afdd8af48794ce5a8731a58c1795718b33ab1d3e6ee917f348a7bf19bc27a",
+  "base_project_receipt_sha256": "8c36137169341ef7dffe751688b82e6b5e52cc9e6991fa87208fc4597a699907",
+  "base_image_id": "sha256:44add50dd2023d7963be2b7e77ccba002900f64244fca3509d23f8b6311dd76a",
   "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
   "underlying_source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
   "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
@@ -38,7 +38,7 @@
     "codec": "mp3",
     "duration_ms": 1000
   },
-  "image_id": "sha256:39ed06b399fde0762a70aa52799a53d7aa015fc513a01fc192f26a3e89a99e3c",
+  "image_id": "sha256:248060335068084ec0813b347cf3bf58f87d5e2dd6a789ab6272103c0f3cd495",
   "platform": "linux/arm64",
   "afl_package": "4.33c-1.1ubuntu1",
   "afl_version_output": "4.33c-1.1ubuntu1",
@@ -72,7 +72,7 @@
     "all_repeats_identical": true
   },
   "source_differential": {
-    "image_id": "sha256:4e5afdd8af48794ce5a8731a58c1795718b33ab1d3e6ee917f348a7bf19bc27a",
+    "image_id": "sha256:44add50dd2023d7963be2b7e77ccba002900f64244fca3509d23f8b6311dd76a",
     "control_regions": {
       "/work/ffmpeg/libavformat/id3v2.c": 156,
       "/work/ffmpeg/libavformat/mp3dec.c": 183,
@@ -111,7 +111,7 @@
     }
   },
   "overlay_file_sha256": {
-    "Dockerfile": "7b1eca0bdb8b25e13bd03994a30e2538a71e8aa7fd5dabe0028a4f10a770eddb",
+    "Dockerfile": "1f2350deb98d915c25028262529fe2bc6b5a31350b4f61ca6ce4acf391b3ab39",
     "build.py": "5910a0b86af13d8b764305787955617eea2c6bcf3fd624067925fe4742cb2406"
   }
 }
