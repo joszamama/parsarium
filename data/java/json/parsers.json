@@ -530,5 +530,65 @@
       "captured_at_utc": "2026-11-17T03:27:35.612237+00:00",
       "snapshot": "data/java/json/registry-snapshot.json"
     }
+  },
+  {
+    "name": "parsson",
+    "group": "org.eclipse.parsson",
+    "artifact": "parsson",
+    "version": "1.1.9",
+    "license": "EPL-2.0",
+    "license_evidence": "Parent Maven POM license and release JAR META-INF/LICENSE.md; source headers also offer GPL-2.0 with Classpath Exception",
+    "input_api": "new JsonProviderImpl().createParser(Files.newInputStream(local Path)); next(), getValue(), hasNext() to EOF",
+    "documentation": "https://repo.maven.apache.org/maven2/org/eclipse/parsson/parsson/1.1.9/parsson-1.1.9-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/org/eclipse/parsson/parsson/1.1.9/parsson-1.1.9-sources.jar",
+    "scope": "Valid nested JSON object/array documents from local InputStream through JSON-P JsonParser into JsonValue",
+    "family": "Eclipse Parsson JsonParserImpl / JsonTokenizer",
+    "family_note": "Parsson implements JSON-P parsing itself. jakarta.json-api supplies interfaces and value types, not another parsing engine. No selected Java JSON package supplies its tokenizer.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/java/parsson",
+    "configuration_note": "Direct provider createParser(InputStream); adapter calls hasNext after getValue so source checks EOF.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 495,
+      "max_release": "1.1.7",
+      "max_release_direct_dependent_count": 122,
+      "default_release_direct_dependent_count": 71,
+      "releases": 16,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.eclipse.parsson%3Aparsson",
+      "captured_at_utc": "2026-11-17T03:27:35.120895+00:00",
+      "snapshot": "data/java/json/registry-snapshot.json",
+      "caveat": "Package adoption includes JSON-P API use through Parsson, not necessarily direct JsonProviderImpl use."
+    }
   }
 ]

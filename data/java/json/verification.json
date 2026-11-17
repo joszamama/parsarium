@@ -406,9 +406,54 @@
       "afl_feedback": "data/java/json/afl-feedback.json",
       "verified_at_utc": "2026-11-17T08:58:20.067457+00:00",
       "error": null
+    },
+    {
+      "package": "parsson",
+      "group": "org.eclipse.parsson",
+      "version": "1.1.9",
+      "scope": "Valid nested JSON object/array documents from local InputStream via JsonProviderImpl.createParser, getValue, and EOF check",
+      "command": "python3 scripts/run_project.py json java parsson",
+      "receipt": "projects/json/java/parsson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 10,
+      "parser_source_lines_covered": 512,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T09:05:27.945970+00:00",
+      "error": null
     }
   ],
   "standard": [],
   "second_control_meaning": "Valid array root with nested objects/arrays, strings, numbers, booleans, and null; differential output and parser feedback in afl-feedback.json",
-  "updated_at_utc": "2026-11-17T08:59:45.485822+00:00"
+  "updated_at_utc": "2026-11-17T09:06:53.959460+00:00"
 }

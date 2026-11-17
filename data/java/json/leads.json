@@ -85,13 +85,14 @@
   {
     "name": "parsson",
     "coordinate": "org.eclipse.parsson:parsson",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "1.1.9",
     "summed_direct_dependent_count": 495,
     "max_release_direct_dependent_count": 122,
     "default_release_direct_dependent_count": 71,
-    "reason": "Jakarta JSON-P implementation, Json.createReader(InputStream); control not run.",
-    "source": "https://central.sonatype.com/artifact/org.eclipse.parsson/parsson"
+    "reason": "Pinned 1.1.9 JSON-P provider creates its own JsonParserImpl/JsonTokenizer over local InputStream; both valid nested controls, own JaCoCo source lines and input-dependent AFL++ feedback passed.",
+    "source": "https://central.sonatype.com/artifact/org.eclipse.parsson/parsson",
+    "evidence": "data/java/json/parsers.json"
   },
   {
     "name": "minimal-json",
