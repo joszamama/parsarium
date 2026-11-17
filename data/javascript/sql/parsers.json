@@ -842,5 +842,111 @@
         }
       ]
     }
+  },
+  {
+    "name": "@questdb/sql-parser",
+    "version": "0.1.22",
+    "license": "Apache-2.0",
+    "license_evidence": "package.json license Apache-2.0 and the Apache License 2.0 LICENSE file in the pinned npm tarball",
+    "input_api": "parseToAst(local UTF-8 text) -> {ast: Statement[], errors}",
+    "documentation": "https://www.npmjs.com/package/@questdb/sql-parser/v/0.1.22",
+    "source": "https://registry.npmjs.org/@questdb/sql-parser/-/sql-parser-0.1.22.tgz",
+    "source_sha256": "6d2626fc7ceedbc87a8a1d222a6d46aa9f2581b077309959daf8bb3e45e07aaf",
+    "dependencies": [
+      "chevrotain"
+    ],
+    "dialect": "QuestDB SQL",
+    "scope": "SQL statements from local bytes decoded as strict UTF-8 and passed to parseToAst; any reported error rejects the input; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "@questdb/sql-parser Chevrotain grammar",
+    "family_note": "parseToAst runs the package's own Chevrotain lexer and parser rules and its CST-to-AST visitor (bundled in dist/index.cjs, about 17,000 lines; chevrotain 11.1.1 is the parsing runtime) and returns typed statements (select with columns, from tableRef and joins, where, groupBy, orderBy, function and literal nodes; insert with table, columns and value rows). Number literals keep their raw source text. Independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst, dt-sql-parser, sqlite-parser, sqllens, rawsql-ts and libpg_query.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 1470,
+      "source": "https://api.npmjs.org/downloads/point/last-month/@questdb/sql-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Captured in the round-2 extension (round_2_metric) with the same window as round 1; a small download count."
+    },
+    "project": "projects/sql/javascript/questdb_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

@@ -1,0 +1,71 @@
+{
+  "kind": "third_party",
+  "api": "parseToAst(local UTF-8 text) from @questdb/sql-parser -> {ast: Statement[], errors}",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:49:36.157440+00:00",
+  "manifest": "projects/sql/javascript/questdb_sql_parser/manifest.json",
+  "image_id": "sha256:024e90e871d8a8f117c520c349d92ec206627592e90a72b5ff0ebc4eec64e67f",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-questdb-sql-parser-target@0.1.22 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- @questdb/sql-parser@0.1.22",
+    "  `-- chevrotain@11.1.1"
+  ],
+  "source_sha256": "6d2626fc7ceedbc87a8a1d222a6d46aa9f2581b077309959daf8bb3e45e07aaf",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "7ae7fc0a9219e8c6932423cd66fe5d8b908d1b5c81042f245950c589d3635712",
+    "adapter.js": "df8adb52cebe70c0549d8f97149fada719bdb4cdefc4702972a7dfe31e0688c4",
+    "fuzz.js": "032ca4d2574a15a43f8fc9fc6d4cfb61050fc43dcf173bb60f529405530dd0ba",
+    "harness.js": "93a3b023ae9e3ace9659fc855ca4121d8cd55d005d51f0a9cb05c5ddcd408025",
+    "manifest.json": "6251ae68ba04251ba29c03fa9008b8cca5b5366cf547d105ac1282d015808399",
+    "package-lock.json": "f3555cbc0507fe9be51c7b8de873f4bafd2110d34aee9197ed161b520b86b29d",
+    "package.json": "cb6e6e7b642b10b3d8a4dff877bf806272286b1215d1d643049a09c7bd4173d7",
+    "replay.js": "065eb97ffd29b4b6fb11d021624bacecc1baa32efe0dc099927f8e756517bca5",
+    "run-control.js": "a18998da13e3b9cc6de26c5d7ffae8a6e1fdeccf46646a5410c2858781ec94c6",
+    "source-lock.json": "59dcd31583a435eb2119d46127b27b0731e97c5d56568d929551c02fe4bad645"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 1,
+  "parser_source_lines_covered": 8680,
+  "format_specific_source_lines_covered": null,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/javascript/questdb_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}

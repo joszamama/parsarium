@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "@questdb/sql-parser",
+  "release": "0.1.22",
+  "catalog_parser": "data/javascript/sql/parsers.json",
+  "source_lock": "projects/sql/javascript/questdb_sql_parser/source-lock.json",
+  "source_sha256": "6d2626fc7ceedbc87a8a1d222a6d46aa9f2581b077309959daf8bb3e45e07aaf",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/usr/local/bin/node",
+    "/work/replay.js",
+    "/input/case"
+  ],
+  "dialect": "QuestDB SQL (the package's only grammar)",
+  "parser_family": "@questdb/sql-parser Chevrotain grammar and CST-to-AST visitor (bundled dist/index.cjs) on the chevrotain runtime; independent of the other selected paths",
+  "api": "parseToAst(local UTF-8 text) from @questdb/sql-parser -> {ast: Statement[], errors}",
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/@questdb/sql-parser/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 block coverage mapped to source lines of @questdb/sql-parser/dist/index.cjs (its Chevrotain lexer, parser rules and AST builder) during valid-control replay; the chevrotain runtime is a separate package and is not counted; Jazzer.js instrumentation for the fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/@questdb/sql-parser/dist/",
+  "afl_coverage_subject_prefix": "/work/node_modules/@questdb/sql-parser/dist/",
+  "scope": "SQL statements from local bytes decoded as strict UTF-8 and passed to parseToAst; any reported error rejects the input. Valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. QuestDB-specific syntax (SAMPLE BY, LATEST ON, ASOF JOIN) and the autocomplete API are untested."
+}
