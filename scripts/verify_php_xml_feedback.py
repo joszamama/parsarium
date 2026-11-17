@@ -16,7 +16,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("stdlib_xmlreader", "stdlib_domdocument", "stdlib_simplexml", "stdlib_xml_parser", "sabre_xml", "symfony_dom_crawler", "symfony_serializer")
+PROJECTS = ("stdlib_xmlreader", "stdlib_domdocument", "stdlib_simplexml", "stdlib_xml_parser", "sabre_xml", "symfony_dom_crawler", "symfony_serializer", "veewee_xml", "mtownsend_xml_to_array")
 CONTROL = "controls/xml/catalog-ns.xml"
 DIFFERENTIAL = "controls/xml/order-default-ns.xml"
 REPORT = ROOT / "data/php/xml/afl-feedback.json"

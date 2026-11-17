@@ -240,6 +240,153 @@
         "repeats_per_control": 5
       },
       "xdebug_package_lines_note": "69 XmlEncoder.php lines on the primary control; these are distinct from native libxml2 AFL feedback."
+    },
+    {
+      "package": "veewee/xml",
+      "version": "4.14.0",
+      "parser_family": "libxml2 via PHP ext/dom Dom\\XMLDocument::createFromString; shared with the standard DOMDocument path, sabre/xml (XMLReader), symfony/dom-crawler and symfony/serializer",
+      "command": "python3 scripts/run_project.py xml php veewee_xml",
+      "receipt": "projects/xml/php/veewee_xml/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "c:catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": [
+          "0 c:catalog xmlns:c=urn:parsarium:catalog",
+          "0 c:catalog xmlns=urn:parsarium:item"
+        ],
+        "root": "c:catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 295,
+      "format_specific_source_lines_covered": 14,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": [
+          "0 order xmlns=urn:parsarium:order",
+          "0 order xmlns:p=urn:parsarium:price",
+          "5 plain xmlns="
+        ],
+        "root": "order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_projected_expat_oracle": true,
+      "projection_limit": "xml_decode keys elements and attributes by qualified name (prefix:local) and lists each element's own xmlns declarations under '@namespaces' ('' for the default namespace), including the order control's nested <plain xmlns=\"\"> undeclaration. It does not report namespace URIs per element, so the summary keeps qualified names plus indexed per-element declarations and the oracle parses without namespace processing; resolving the summary's names through its declarations reproduces expat's namespace-aware expanded names on both controls, so no namespace information is lost on them.",
+      "afl_feedback": {
+        "report": "data/php/xml/afl-feedback.json",
+        "overlay_receipt": "fuzzing/afl-native/xml/php/veewee_xml/verification.json",
+        "overlay_receipt_sha256": "00d422bde1c2dea1a6a5bc25bcbeea50d2868a49c4bc510d2a8632e2db8c3565",
+        "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+        "control_afl_tuples": 1106,
+        "differential_afl_tuples": 1229,
+        "afl_tuple_difference": 361,
+        "format_dependent_parse_time_tuples": 361,
+        "repeats_per_control": 5
+      },
+      "package_line_note": "PHP Xdebug package lines are separate from native libxml2 AFL tuples."
+    },
+    {
+      "package": "mtownsend/xml-to-array",
+      "version": "2.0.1",
+      "parser_family": "libxml2 via PHP ext/dom DOMDocument::loadXML; shared with the standard DOMDocument path, symfony/dom-crawler and symfony/serializer",
+      "command": "python3 scripts/run_project.py xml php mtownsend_xml_to_array",
+      "receipt": "projects/xml/php/mtownsend_xml_to_array/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "root": "c:catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 43,
+      "format_specific_source_lines_covered": 40,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "root": "order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_projected_expat_oracle": true,
+      "projection_limit": "convert() returns no namespace information. Element keys and '@root' are DOM tagName values (prefix:local); attribute keys come from iterating DOMElement::attributes, whose keys are local names, so c:lang and p:currency appear as lang and currency; xmlns declarations are not attributes in the DOM and are absent. Neither control's four namespace URIs appears anywhere in the raw arrays (checked by the overlay build), the order control's <plain xmlns=\"\"> undeclaration is invisible, and two attributes with the same local name in different namespaces would collapse into one key. The adapter reports these keys as returned; the oracle therefore parses without namespace processing and strips attribute prefixes rather than resolving namespaces.",
+      "afl_feedback": {
+        "report": "data/php/xml/afl-feedback.json",
+        "overlay_receipt": "fuzzing/afl-native/xml/php/mtownsend_xml_to_array/verification.json",
+        "overlay_receipt_sha256": "9358c98a3a735dc13131ce316c2d2b30d5d5cc0b1631de99c675b53d6b21faaa",
+        "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+        "control_afl_tuples": 1096,
+        "differential_afl_tuples": 1218,
+        "afl_tuple_difference": 360,
+        "format_dependent_parse_time_tuples": 360,
+        "repeats_per_control": 5
+      },
+      "package_line_note": "PHP Xdebug package lines are separate from native libxml2 AFL tuples."
     }
   ],
   "standard": [

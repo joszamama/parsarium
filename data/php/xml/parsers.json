@@ -156,5 +156,114 @@
       "snapshot": "data/php/xml/registry-snapshot.json",
       "caveat": "Cumulative package downloads are a package adoption proxy, not XML-specific uses; this package shares the libxml2/XMLReader parser family with the standard path."
     }
+  },
+  {
+    "name": "veewee/xml",
+    "version": "4.14.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/veewee/xml/blob/6345edd4afdfa188960663fe849bfe568571c84f/LICENSE",
+    "documentation": "https://github.com/veewee/xml/blob/6345edd4afdfa188960663fe849bfe568571c84f/docs/encoding.md#xml_decode",
+    "source": "https://github.com/veewee/xml/tree/6345edd4afdfa188960663fe849bfe568571c84f",
+    "input_api": "VeeWee\\Xml\\Encoding\\xml_decode(string $xml, callable ...$configurators): array, documented as \"Decodes an XML string into an array\". It loads the text with Dom\\XMLDocument::createFromString($xml, 0) inside disallow_issues (any libxml error or warning throws, wrapped as EncodingException) and converts the document element into veewee's PHP array format. The same loader backs Dom\\Document::fromXmlString; Dom\\Document::fromXmlFile and Reader::fromXmlFile/fromXmlString (XMLReader) are the documented file and streaming entry points",
+    "parser_family": "libxml2 via PHP ext/dom Dom\\XMLDocument::createFromString; shared with the standard DOMDocument path, sabre/xml (XMLReader), symfony/dom-crawler and symfony/serializer",
+    "package_own_scope": "Encoding\\Internal\\Decoder: the DOM-to-array mapping (qualified element names as keys, same-named siblings grouped into lists, '@attributes' with qualified names, '@namespaces' with each element's own xmlns declarations, '@value' for text next to attributes, leaf text via textContent) plus the Dom\\Document string loader and libxml issue collection. Tokenizing, well-formedness, entity and CDATA decoding and namespace binding are libxml2; turning xmlns declarations into attributes is PHP ext/dom.",
+    "adapter": "projects/xml/php/veewee_xml/harness.php",
+    "source_lock": "projects/xml/php/veewee_xml/source-lock.json",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "c:lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "c:catalog",
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": [
+        "0 c:catalog xmlns:c=urn:parsarium:catalog",
+        "0 c:catalog xmlns=urn:parsarium:item"
+      ],
+      "root": "c:catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "family": "libxml2 via PHP Dom\\XMLDocument, shared with the standard path, sabre/xml, symfony/dom-crawler and symfony/serializer",
+    "project": "projects/xml/php/veewee_xml/verification.json",
+    "popularity": {
+      "metric": "Packagist total package downloads",
+      "value": 8963799,
+      "source": "https://packagist.org/packages/veewee/xml",
+      "captured_at_utc": "2026-11-17T03:46:35.927344+00:00",
+      "snapshot": "data/php/xml/registry-snapshot.json",
+      "caveat": "Cumulative downloads of the whole veewee/xml package (rank 13 in the snapshot's 'xml' query, 3 in 'xml reader', 4 in 'xml decoder'). They are a package adoption proxy, not xml_decode uses: the package also covers DOM manipulation, XMLReader streaming, XMLWriter, XSD and XSLT, and many installs come through dependents such as php-soap and saloonphp/xml-wrangler. It shares the libxml2 parser family with the standard path, sabre/xml, symfony/dom-crawler and symfony/serializer."
+    },
+    "caveats": [
+      "xml_decode keys elements and attributes by qualified name (prefix:local) and lists each element's own xmlns declarations under '@namespaces' ('' for the default namespace), including the order control's nested <plain xmlns=\"\"> undeclaration. It does not report namespace URIs per element, so the summary keeps qualified names plus indexed per-element declarations and the oracle parses without namespace processing; resolving the summary's names through its declarations reproduces expat's namespace-aware expanded names on both controls, so no namespace information is lost on them.",
+      "Information xml_decode drops by design: comments and processing instructions (the order control's top-level comment and <?audit?> PI), the CDATA/text distinction (note's CDATA comes back as plain 'x < y'), text of elements that also have child elements (whitespace-only in both controls; mixed-content text would be lost), and document order of non-adjacent same-named siblings, which are grouped into one list keyed by name (adjacent in both controls). All values are strings.",
+      "The harness calls xml_decode($bytes) with no configurators. Its loader runs Dom\\XMLDocument::createFromString($xml, 0) inside disallow_issues, so any libxml error or warning raises EncodingException; it was run only on the two valid controls. The documented file and streaming APIs (Dom\\Document::fromXmlFile, Reader::fromXmlFile/fromXmlString over XMLReader) were not exercised.",
+      "Xdebug covers 295 veewee/xml lines in 186 files on both controls, with identical line sets: 161 of them are single declaration lines of function files that src/bootstrap.php loads for every use, and 77 are in Encoding/ (14 in the Decoder\\Builder\\element.php builder). Both controls take the same decoder branches, so veewee/xml's own lines do not distinguish them.",
+      "AFL++ feedback is not package-own: the native overlay runs the same xml_decode harness on PHP 8.5.12 and libxml2 2.15.4 with only libxml2 parser.c, parserInternals.c, SAX2.c and PHP ext/dom/xml_document.c and document.c instrumented. The 361 tuples that differ between the controls all also differ under a bare Dom\\XMLDocument::createFromString, and the 2 post-parse tuples are the same for both controls. ext/dom/namespace_compat.c was tried and left out: with it the maps held 1149/1273 tuples and one differing tuple appeared only when veewee's attribute traversal ran."
+    ]
+  },
+  {
+    "name": "mtownsend/xml-to-array",
+    "version": "2.0.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/mtownsend5512/xml-to-array/blob/8e4b08ae0f56f1e2a77b4b88a0e17bce0200350e/LICENSE.md",
+    "documentation": "https://github.com/mtownsend5512/xml-to-array/blob/8e4b08ae0f56f1e2a77b4b88a0e17bce0200350e/README.md",
+    "source": "https://github.com/mtownsend5512/xml-to-array/tree/8e4b08ae0f56f1e2a77b4b88a0e17bce0200350e",
+    "input_api": "XmlToArray::convert(string $xml, bool $outputRoot = false) (the README's documented entry point; the global xml_to_array() helper forwards to it), called with $outputRoot = true. It loads the string with DOMDocument::loadXML and default options, then walks the DOM from documentElement into a PHP array; '@root' holds the root tagName",
+    "parser_family": "libxml2 via PHP ext/dom DOMDocument::loadXML; shared with the standard DOMDocument path, symfony/dom-crawler and symfony/serializer",
+    "package_own_scope": "XmlToArray's DOM-to-array mapping: tagName keys, grouping same-named siblings into lists and unwrapping single children, trimmed text and CDATA as strings, '@content' next to '@attributes' for text-only elements with attributes, attribute values keyed by DOMNamedNodeMap iteration key, and the optional '@root' entry. Tokenizing, well-formedness, entity and character-reference decoding, CDATA and namespace binding are libxml2.",
+    "adapter": "projects/xml/php/mtownsend_xml_to_array/harness.php",
+    "source_lock": "projects/xml/php/mtownsend_xml_to_array/source-lock.json",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "root": "c:catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "family": "libxml2 via PHP DOMDocument, shared with the standard path, symfony/dom-crawler and symfony/serializer",
+    "project": "projects/xml/php/mtownsend_xml_to_array/verification.json",
+    "popularity": {
+      "metric": "Packagist total package downloads",
+      "value": 4956232,
+      "source": "https://packagist.org/packages/mtownsend/xml-to-array",
+      "captured_at_utc": "2026-11-17T03:46:35.927344+00:00",
+      "snapshot": "data/php/xml/registry-snapshot.json",
+      "caveat": "Cumulative downloads of the whole package, rank 30 in the snapshot's 'xml' query. The package's only function is XML-to-array conversion, but downloads count installs (often transitive, e.g. through the author's Laravel request/response XML packages), not XML-decoding uses. It shares the libxml2 parser family with the standard DOMDocument path, symfony/dom-crawler and symfony/serializer."
+    },
+    "caveats": [
+      "convert() returns no namespace information. Element keys and '@root' are DOM tagName values (prefix:local); attribute keys come from iterating DOMElement::attributes, whose keys are local names, so c:lang and p:currency appear as lang and currency; xmlns declarations are not attributes in the DOM and are absent. Neither control's four namespace URIs appears anywhere in the raw arrays (checked by the overlay build), the order control's <plain xmlns=\"\"> undeclaration is invisible, and two attributes with the same local name in different namespaces would collapse into one key. The adapter reports these keys as returned; the oracle therefore parses without namespace processing and strips attribute prefixes rather than resolving namespaces.",
+      "Same-named siblings are grouped into one list keyed by name and single children are unwrapped, so document order is recoverable only when same-named siblings are adjacent (true for both controls). Comments, processing instructions and whitespace-only text are dropped. Values stay strings.",
+      "Each element keeps at most one text string: a later non-empty text or CDATA child overwrites an earlier one, and (by source reading, not run) text before a child element turns the element into a string, so assigning the child then fails with a PHP Error. Both controls have text-only or element-only content.",
+      "loadXML runs with default options and convert() checks no error: on malformed input libxml2 warnings are emitted and documentElement is null. Only the two valid controls were run.",
+      "Xdebug covers 40 XmlToArray.php lines on catalog-ns.xml and 39 on order-default-ns.xml (43 and 42 package lines with helpers.php); 1 differs (62, the '@content' wrap for a text-only element with attributes). AFL++ feedback comes from a native overlay that runs the same convert harness on PHP 8.5.12 and libxml2 2.15.4 with only libxml2 parser.c, parserInternals.c, SAX2.c and PHP ext/dom/document.c instrumented: 1096/1218 tuples over 5 identical repeats, all 360 differing tuples also differ under a bare default-option loadXML, and the 2 post-parse tuples are the same for both controls. XmlToArray's own lines do not reach the AFL++ map; the parser family is shared with the standard DOMDocument path, symfony/dom-crawler and symfony/serializer."
+    ]
   }
 ]

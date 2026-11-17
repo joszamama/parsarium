@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "project": "xml/php/mtownsend_xml_to_array",
+  "pass": true,
+  "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+  "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c (DOMDocument::loadXML) via AFL++ allowlist; libxml2 tree, XPath and dict code, the other ext/dom classes, ext/libxml/libxml.c, the Zend engine and the interpreted XmlToArray PHP code are uninstrumented",
+  "harness": "projects/xml/php/mtownsend_xml_to_array/fuzz-target.php -> harness.php parsarium_parse (XmlToArray::convert($bytes, true), summary.php array walk)",
+  "parse_only_target": "DOMDocument::loadXML with default options, as XmlToArray::convert calls it",
+  "base_project_receipt_sha256": "8bbedbf6a9109e78ce99c6d5f2c76338202d630c9e96e4bbdbdc1b70aaf4828d",
+  "base_image_id": "sha256:83ab8742c3ff8ef1e3d9d942e042cccf44d1e8c18ffa7ffc67b0dbeee702364f",
+  "source_sha256": "57a261f641eee98d20e27600e4846ebbcb05150277a67aa167f07ab3b3ce7e2c",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "runtime": {
+    "php": "8.5.12",
+    "libxml2": "2.15.4"
+  },
+  "instrumented_objects": [
+    "libxml2-2.15.4/build/.libs/libxml2_la-SAX2.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parser.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parserInternals.o",
+    "php-8.5.12/ext/dom/document.o"
+  ],
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "oracle": "fuzzing/afl-native/xml/php/mtownsend_xml_to_array/build.py oracle(): expat without namespace processing, fields exposed by XmlToArray::convert($xml, true)",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "raw_output": {
+    "control": {
+      "item": [
+        {
+          "@content": "Café & té",
+          "@attributes": {
+            "id": "a1",
+            "lang": "es"
+          }
+        },
+        {
+          "name": "Zürich <HQ>",
+          "note": "x < y",
+          "@attributes": {
+            "id": "b2"
+          }
+        }
+      ],
+      "@attributes": {
+        "version": "1"
+      },
+      "@root": "c:catalog"
+    },
+    "differential": {
+      "line": [
+        {
+          "sku": "A-7",
+          "p:amount": "12.50 €",
+          "@attributes": {
+            "n": "1",
+            "currency": "EUR"
+          }
+        },
+        {
+          "plain": {
+            "leaf": []
+          },
+          "@attributes": {
+            "n": "2",
+            "note": "say \"hi\""
+          }
+        }
+      ],
+      "@root": "order"
+    }
+  },
+  "raw_output_carries_namespace_uris": false,
+  "package_line_coverage": {
+    "tool": "Xdebug (Ubuntu PHP 8.5.4, libxml 2.15.2), two identical replays per control",
+    "file": "src/XmlToArray.php",
+    "control_lines": 40,
+    "differential_lines": 39,
+    "shared_lines": 39,
+    "control_only_lines": [
+      62
+    ],
+    "differential_only_lines": [],
+    "package_lines": {
+      "control": 43,
+      "differential": 42
+    },
+    "package_files": {
+      "control": [
+        "src/XmlToArray.php",
+        "src/helpers.php"
+      ],
+      "differential": [
+        "src/XmlToArray.php",
+        "src/helpers.php"
+      ]
+    }
+  },
+  "image_id": "sha256:0730ff97afca81f3f8d72e67f38d6ef5654665a8090c9bb513155012b24538d7",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 65536,
+  "repeats_per_control": 5,
+  "all_repeats_identical": true,
+  "feedback_edges": 1096,
+  "differential_feedback_edges": 1218,
+  "stable_shared_edges": 977,
+  "stable_control_only_edges": 119,
+  "stable_differential_only_edges": 241,
+  "afl_tuple_difference": 360,
+  "parse_only_control_edges": 1095,
+  "parse_only_differential_edges": 1217,
+  "parse_only_tuple_difference": 360,
+  "format_dependent_parse_time_tuples": 360,
+  "format_dependent_traversal_only_tuples": 0,
+  "post_parse_control_edges": 2,
+  "post_parse_differential_edges": 2,
+  "post_parse_edges_identical": true,
+  "overlay_file_sha256": {
+    "Dockerfile": "1abbbfcc7748e609020f3bdd6a6b02c00937308938ccda162c5c8a470ccf159a",
+    "build.py": "f19bcf778154eb583c3e1147626f4658bd5094f888ec7a555f06319d8af0bc45"
+  }
+}

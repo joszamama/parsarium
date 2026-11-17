@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T13:52:45.470146+00:00",
-  "projects_total": 7,
-  "projects_passed": 7,
+  "checked_at_utc": "2026-11-17T14:10:30.456299+00:00",
+  "projects_total": 9,
+  "projects_passed": 9,
   "differential_kind": "fixed_valid_default_namespace_order",
   "results": [
     {
@@ -130,6 +130,42 @@
       "control_only_edges": 119,
       "differential_only_edges": 240,
       "afl_tuple_difference": 359
+    },
+    {
+      "project": "xml/php/veewee_xml",
+      "pass": true,
+      "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+      "overlay_receipt_sha256": "00d422bde1c2dea1a6a5bc25bcbeea50d2868a49c4bc510d2a8632e2db8c3565",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "control_afl_tuples": 1106,
+      "differential_afl_tuples": 1229,
+      "stable_shared_edges": 987,
+      "control_only_edges": 119,
+      "differential_only_edges": 242,
+      "afl_tuple_difference": 361
+    },
+    {
+      "project": "xml/php/mtownsend_xml_to_array",
+      "pass": true,
+      "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+      "overlay_receipt_sha256": "9358c98a3a735dc13131ce316c2d2b30d5d5cc0b1631de99c675b53d6b21faaa",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "control_afl_tuples": 1096,
+      "differential_afl_tuples": 1218,
+      "stable_shared_edges": 977,
+      "control_only_edges": 119,
+      "differential_only_edges": 241,
+      "afl_tuple_difference": 360
     }
   ]
 }

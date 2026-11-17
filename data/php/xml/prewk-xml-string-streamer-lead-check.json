@@ -1,0 +1,891 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T13:47:46.187398+00:00",
+  "status": "negative_lead_raw_node_string_splitter",
+  "package": "prewk/xml-string-streamer",
+  "release": "1.2.3",
+  "license": "MIT",
+  "license_evidence": "https://github.com/prewk/xml-string-streamer/blob/a1f4a5250d548d06fd385fa86241c0c2d7d607fd/LICENSE",
+  "source_url": "https://github.com/prewk/xml-string-streamer/tree/a1f4a5250d548d06fd385fa86241c0c2d7d607fd",
+  "documentation": "https://github.com/prewk/xml-string-streamer/blob/a1f4a5250d548d06fd385fa86241c0c2d7d607fd/README.md",
+  "api": "Prewk\\XmlStringStreamer::createStringWalkerParser(path|handle) and createUniqueNodeParser(path, ['uniqueNode' => name]), or new XmlStringStreamer(Parser\\StringWalker|UniqueNode, Stream\\File|Stdin); getNode() returns the next node as a string or false",
+  "composer_reference": "a1f4a5250d548d06fd385fa86241c0c2d7d607fd",
+  "composer_lock_sha256": "4c1e9c8b20fc3083fa8f79220dfedd956d1914d6953d79ca02b469a4f93a11e1",
+  "archive_url": "https://codeload.github.com/prewk/xml-string-streamer/legacy.zip/a1f4a5250d548d06fd385fa86241c0c2d7d607fd",
+  "archive_sha256": "f652cf058971933b499858ff9439fa4cef424a9377dad09218d8ddb80ee297ed",
+  "installed_source_matches_archive": true,
+  "popularity": {
+    "metric": "Packagist total downloads",
+    "value": 3642516,
+    "source": "https://packagist.org/packages/prewk/xml-string-streamer",
+    "captured_at_utc": "2026-11-17T03:46:35.927344+00:00",
+    "snapshot": "data/php/xml/registry-snapshot.json",
+    "live_recheck": {
+      "value": 3650676,
+      "source": "https://packagist.org/packages/prewk/xml-string-streamer/stats.json",
+      "captured_on": "2026-11-17"
+    }
+  },
+  "image_id": "sha256:e7e93e2fb77684bc7d50d7481de769181403475b52b05c82562ee600210ba8b2",
+  "platform": "linux/arm64",
+  "php": "8.5.4",
+  "xdebug": "3.5.0",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "probe_file_sha256": {
+    "Dockerfile": "0b5153b645fb5234365668aa1f778b510f173030827076a67f51e50a54d843d3",
+    "composer.json": "7fdce68ea7ad7c2671adfa27631c0fe23bbbdf5600ddb8f6ec66797e5baed4f9",
+    "composer.lock": "4c1e9c8b20fc3083fa8f79220dfedd956d1914d6953d79ca02b469a4f93a11e1",
+    "probe.php": "53217dbcbcd95ae79b9ea001a08c8a94baf4640ac9b42555a83a99eee596fef0"
+  },
+  "control_sha256": {
+    "catalog-ns.xml": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "order-default-ns.xml": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba"
+  },
+  "observed": [
+    {
+      "control": "catalog-ns.xml",
+      "api": "createStringWalkerParser(path)",
+      "unique_node": null,
+      "nodes": [
+        {
+          "byte_span": [
+            121,
+            172
+          ],
+          "text": "\n  <item id=\"a1\" c:lang=\"es\">Café &amp; té</item>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:item"
+            ],
+            [
+              "c",
+              "urn:parsarium:catalog"
+            ]
+          ]
+        },
+        {
+          "byte_span": [
+            172,
+            257
+          ],
+          "text": "\n  <item id=\"b2\"><name>Zürich &lt;HQ&gt;</name><note><![CDATA[x < y]]></note></item>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:item"
+            ]
+          ]
+        }
+      ],
+      "package_lines_executed": {
+        "src/XmlStringStreamer.php": [
+          39,
+          40,
+          41,
+          51,
+          52,
+          53,
+          75
+        ],
+        "src/XmlStringStreamer/Parser/StringWalker.php": [
+          18,
+          74,
+          76,
+          77,
+          94,
+          102,
+          104,
+          105,
+          107,
+          132,
+          135,
+          137,
+          140,
+          152,
+          153,
+          155,
+          156,
+          158,
+          170,
+          172,
+          174,
+          175,
+          176,
+          179,
+          181,
+          182,
+          184,
+          186,
+          194,
+          219,
+          220,
+          222,
+          223,
+          226,
+          229,
+          231,
+          232,
+          235,
+          237,
+          238,
+          240,
+          241,
+          244,
+          245,
+          248,
+          255,
+          256,
+          259,
+          261,
+          262,
+          264,
+          269,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281
+        ],
+        "src/XmlStringStreamer/ParserInterface.php": [],
+        "src/XmlStringStreamer/Stream/File.php": [
+          6,
+          15,
+          17,
+          18,
+          23,
+          26,
+          33,
+          37,
+          38,
+          39,
+          42,
+          43,
+          45,
+          49,
+          50,
+          51,
+          53,
+          57,
+          60
+        ],
+        "src/XmlStringStreamer/StreamInterface.php": []
+      }
+    },
+    {
+      "control": "catalog-ns.xml",
+      "api": "StringWalker+Stream\\File(handle)",
+      "unique_node": null,
+      "nodes": [
+        {
+          "byte_span": [
+            121,
+            172
+          ],
+          "text": "\n  <item id=\"a1\" c:lang=\"es\">Café &amp; té</item>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:item"
+            ],
+            [
+              "c",
+              "urn:parsarium:catalog"
+            ]
+          ]
+        },
+        {
+          "byte_span": [
+            172,
+            257
+          ],
+          "text": "\n  <item id=\"b2\"><name>Zürich &lt;HQ&gt;</name><note><![CDATA[x < y]]></note></item>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:item"
+            ]
+          ]
+        }
+      ],
+      "package_lines_executed": {
+        "src/XmlStringStreamer.php": [
+          39,
+          40,
+          41,
+          75
+        ],
+        "src/XmlStringStreamer/Parser/StringWalker.php": [
+          74,
+          76,
+          77,
+          94,
+          102,
+          104,
+          105,
+          107,
+          132,
+          135,
+          137,
+          140,
+          152,
+          153,
+          155,
+          156,
+          158,
+          170,
+          172,
+          174,
+          175,
+          176,
+          179,
+          181,
+          182,
+          184,
+          186,
+          194,
+          219,
+          220,
+          222,
+          223,
+          226,
+          229,
+          231,
+          232,
+          235,
+          237,
+          238,
+          240,
+          241,
+          244,
+          245,
+          248,
+          255,
+          256,
+          259,
+          261,
+          262,
+          264,
+          269,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281
+        ],
+        "src/XmlStringStreamer/Stream/File.php": [
+          15,
+          27,
+          28,
+          33,
+          37,
+          38,
+          39,
+          42,
+          43,
+          45,
+          49,
+          50,
+          51,
+          53,
+          57,
+          60
+        ]
+      }
+    },
+    {
+      "control": "catalog-ns.xml",
+      "api": "createUniqueNodeParser(path)",
+      "unique_node": "item",
+      "nodes": [
+        {
+          "byte_span": [
+            124,
+            172
+          ],
+          "text": "<item id=\"a1\" c:lang=\"es\">Café &amp; té</item>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:item"
+            ],
+            [
+              "c",
+              "urn:parsarium:catalog"
+            ]
+          ]
+        },
+        {
+          "byte_span": [
+            175,
+            257
+          ],
+          "text": "<item id=\"b2\"><name>Zürich &lt;HQ&gt;</name><note><![CDATA[x < y]]></note></item>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:item"
+            ]
+          ]
+        }
+      ],
+      "package_lines_executed": {
+        "src/XmlStringStreamer.php": [
+          39,
+          40,
+          41,
+          64,
+          65,
+          66,
+          75
+        ],
+        "src/XmlStringStreamer/Parser/UniqueNode.php": [
+          19,
+          85,
+          87,
+          88,
+          91,
+          94,
+          102,
+          103,
+          104,
+          108,
+          109,
+          112,
+          142,
+          143,
+          155,
+          164,
+          173,
+          174,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          196,
+          198,
+          201,
+          203,
+          205,
+          210,
+          214,
+          217,
+          222,
+          233,
+          235,
+          237,
+          239,
+          241,
+          247,
+          250,
+          254,
+          256,
+          257,
+          259,
+          262,
+          265,
+          266,
+          268,
+          273,
+          277,
+          305,
+          306,
+          307,
+          308,
+          309,
+          310,
+          311,
+          312,
+          313
+        ],
+        "src/XmlStringStreamer/Stream/File.php": [
+          15,
+          17,
+          18,
+          23,
+          26,
+          33,
+          37,
+          38,
+          39,
+          42,
+          43,
+          45,
+          49,
+          50,
+          51,
+          53,
+          57,
+          60
+        ]
+      }
+    },
+    {
+      "control": "order-default-ns.xml",
+      "api": "createStringWalkerParser(path)",
+      "unique_node": null,
+      "nodes": [
+        {
+          "byte_span": [
+            127,
+            148
+          ],
+          "text": "\n  <?audit step=\"1\"?>",
+          "outside_namespace_bindings_used": []
+        },
+        {
+          "byte_span": [
+            148,
+            245
+          ],
+          "text": "\n  <line n='1' p:currency=\"EUR\"><sku>A&#x2D;7</sku><p:amount>12&#46;50 &#x20AC;</p:amount></line>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:order"
+            ],
+            [
+              "p",
+              "urn:parsarium:price"
+            ]
+          ]
+        },
+        {
+          "byte_span": [
+            245,
+            324
+          ],
+          "text": "\n  <line n=\"2\" note=\"say &quot;hi&quot;\"><plain xmlns=\"\"><leaf/></plain></line>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:order"
+            ]
+          ]
+        }
+      ],
+      "package_lines_executed": {
+        "src/XmlStringStreamer.php": [
+          39,
+          40,
+          41,
+          51,
+          52,
+          53,
+          75
+        ],
+        "src/XmlStringStreamer/Parser/StringWalker.php": [
+          74,
+          76,
+          77,
+          94,
+          102,
+          104,
+          105,
+          107,
+          132,
+          135,
+          137,
+          140,
+          152,
+          153,
+          155,
+          156,
+          158,
+          170,
+          172,
+          174,
+          175,
+          176,
+          179,
+          181,
+          182,
+          184,
+          186,
+          194,
+          219,
+          220,
+          222,
+          223,
+          226,
+          229,
+          231,
+          232,
+          235,
+          237,
+          238,
+          240,
+          241,
+          244,
+          245,
+          248,
+          250,
+          251,
+          255,
+          256,
+          259,
+          261,
+          262,
+          264,
+          269,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281
+        ],
+        "src/XmlStringStreamer/Stream/File.php": [
+          15,
+          17,
+          18,
+          23,
+          26,
+          33,
+          37,
+          38,
+          39,
+          42,
+          43,
+          45,
+          49,
+          50,
+          51,
+          53,
+          57,
+          60
+        ]
+      }
+    },
+    {
+      "control": "order-default-ns.xml",
+      "api": "StringWalker+Stream\\File(handle)",
+      "unique_node": null,
+      "nodes": [
+        {
+          "byte_span": [
+            127,
+            148
+          ],
+          "text": "\n  <?audit step=\"1\"?>",
+          "outside_namespace_bindings_used": []
+        },
+        {
+          "byte_span": [
+            148,
+            245
+          ],
+          "text": "\n  <line n='1' p:currency=\"EUR\"><sku>A&#x2D;7</sku><p:amount>12&#46;50 &#x20AC;</p:amount></line>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:order"
+            ],
+            [
+              "p",
+              "urn:parsarium:price"
+            ]
+          ]
+        },
+        {
+          "byte_span": [
+            245,
+            324
+          ],
+          "text": "\n  <line n=\"2\" note=\"say &quot;hi&quot;\"><plain xmlns=\"\"><leaf/></plain></line>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:order"
+            ]
+          ]
+        }
+      ],
+      "package_lines_executed": {
+        "src/XmlStringStreamer.php": [
+          39,
+          40,
+          41,
+          75
+        ],
+        "src/XmlStringStreamer/Parser/StringWalker.php": [
+          74,
+          76,
+          77,
+          94,
+          102,
+          104,
+          105,
+          107,
+          132,
+          135,
+          137,
+          140,
+          152,
+          153,
+          155,
+          156,
+          158,
+          170,
+          172,
+          174,
+          175,
+          176,
+          179,
+          181,
+          182,
+          184,
+          186,
+          194,
+          219,
+          220,
+          222,
+          223,
+          226,
+          229,
+          231,
+          232,
+          235,
+          237,
+          238,
+          240,
+          241,
+          244,
+          245,
+          248,
+          250,
+          251,
+          255,
+          256,
+          259,
+          261,
+          262,
+          264,
+          269,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281
+        ],
+        "src/XmlStringStreamer/Stream/File.php": [
+          15,
+          27,
+          28,
+          33,
+          37,
+          38,
+          39,
+          42,
+          43,
+          45,
+          49,
+          50,
+          51,
+          53,
+          57,
+          60
+        ]
+      }
+    },
+    {
+      "control": "order-default-ns.xml",
+      "api": "createUniqueNodeParser(path)",
+      "unique_node": "line",
+      "nodes": [
+        {
+          "byte_span": [
+            151,
+            245
+          ],
+          "text": "<line n='1' p:currency=\"EUR\"><sku>A&#x2D;7</sku><p:amount>12&#46;50 &#x20AC;</p:amount></line>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:order"
+            ],
+            [
+              "p",
+              "urn:parsarium:price"
+            ]
+          ]
+        },
+        {
+          "byte_span": [
+            248,
+            324
+          ],
+          "text": "<line n=\"2\" note=\"say &quot;hi&quot;\"><plain xmlns=\"\"><leaf/></plain></line>",
+          "outside_namespace_bindings_used": [
+            [
+              "",
+              "urn:parsarium:order"
+            ]
+          ]
+        }
+      ],
+      "package_lines_executed": {
+        "src/XmlStringStreamer.php": [
+          39,
+          40,
+          41,
+          64,
+          65,
+          66,
+          75
+        ],
+        "src/XmlStringStreamer/Parser/UniqueNode.php": [
+          85,
+          87,
+          88,
+          91,
+          94,
+          102,
+          103,
+          104,
+          108,
+          109,
+          112,
+          142,
+          143,
+          155,
+          164,
+          173,
+          174,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          196,
+          198,
+          201,
+          203,
+          205,
+          210,
+          214,
+          217,
+          222,
+          233,
+          235,
+          237,
+          239,
+          241,
+          247,
+          250,
+          254,
+          256,
+          257,
+          259,
+          262,
+          265,
+          266,
+          268,
+          273,
+          277,
+          305,
+          306,
+          307,
+          308,
+          309,
+          310,
+          311,
+          312,
+          313
+        ],
+        "src/XmlStringStreamer/Stream/File.php": [
+          15,
+          17,
+          18,
+          23,
+          26,
+          33,
+          37,
+          38,
+          39,
+          42,
+          43,
+          45,
+          49,
+          50,
+          51,
+          53,
+          57,
+          60
+        ]
+      }
+    }
+  ],
+  "oracle": "Python expat in raw-name (non-namespace) mode with CurrentByteIndex offsets. StringWalker (captureDepth 2): every root-child element, processing instruction or comment, prefixed by the raw character data since the previous markup. UniqueNode: the raw byte span of each element with the given qualified name. Expected output is data[start:end] of the control.",
+  "nodes_match_byte_span_oracle": true,
+  "source_api_mentions": {
+    "preg_match": [
+      "src/XmlStringStreamer/Stream/File.php",
+      "src/XmlStringStreamer/Parser/StringWalker.php",
+      "src/XmlStringStreamer/Parser/UniqueNode.php"
+    ]
+  },
+  "splitter_line_differential": {
+    "createStringWalkerParser(path)": {
+      "lines": {
+        "catalog-ns.xml": 60,
+        "order-default-ns.xml": 61
+      },
+      "only_catalog-ns.xml": [
+        18
+      ],
+      "only_order-default-ns.xml": [
+        250,
+        251
+      ]
+    },
+    "StringWalker+Stream\\File(handle)": {
+      "lines": {
+        "catalog-ns.xml": 59,
+        "order-default-ns.xml": 61
+      },
+      "only_catalog-ns.xml": [],
+      "only_order-default-ns.xml": [
+        250,
+        251
+      ]
+    },
+    "createUniqueNodeParser(path)": {
+      "lines": {
+        "catalog-ns.xml": 60,
+        "order-default-ns.xml": 59
+      },
+      "only_catalog-ns.xml": [
+        19
+      ],
+      "only_order-default-ns.xml": []
+    }
+  },
+  "splitter_line_differential_note": "StringWalker.php 250-251 is the only input-dependent branch: the root-level <?audit step=\"1\"?> PI in order-default-ns.xml takes the self-closing capture-once path and is returned as a node. StringWalker.php 18 and UniqueNode.php 19 are class declarations that run only on first load, which is the catalog-ns.xml run.",
+  "source_reason": "StringWalker finds the next tag with preg_match('/<[^>]+>/'), classifies it by its opening and closing characters, adjusts a depth counter and copies input bytes until the capture depth is left. UniqueNode searches for '<name>' or '<name ' and the next '</name>' with preg_match and strpos. Neither reads names, attributes, text values or namespace declarations: getNode() returns verbatim input substrings, with entity and character references undecoded and prefixes whose declarations sit on the root left unbound. The README hands each node to simplexml_load_string for parsing; the package itself never calls an XML parser.",
+  "parser_family": "none: own PCRE/strpos tag-boundary splitter; no ext/libxml, XMLReader, SimpleXML, DOM or ext/xml call in src/ (only the unreleased dev-xml-reader-parser branch name suggests XMLReader)",
+  "docker_source_coverage": "run; both splitters and both stream routes executed under Xdebug on both controls",
+  "afl_feedback": "not_run: the release runs no native XML parser, so libxml2 feedback would not come from this package; the package is PHP string and PCRE code whose output is a byte copy",
+  "adapter": "lead-probes/php/xml/prewk_xml_string_streamer/probe.php",
+  "recommended_lead_status": "excluded",
+  "recommended_lead_reason": "Pinned 1.2.3 probe: getNode() returns verbatim input byte slices found by a preg_match/strpos tag-boundary splitter (StringWalker depth counter, UniqueNode name search); no names, attributes, decoded text or namespaces, and no XML parser call. Byte copying under PROTOCOL.md, not a parser. Evidence: data/php/xml/prewk-xml-string-streamer-lead-check.json."
+}
