@@ -1,0 +1,69 @@
+{
+  "kind": "third_party",
+  "api": "sqlglot.parse(local SQL text decoded from UTF-8 bytes, read=None) -> list of Expression trees; the harness walks exp.Select, exp.Insert, exp.Schema, exp.Values, exp.Table, exp.Func and exp.Literal nodes",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T16:58:04.759555+00:00",
+  "manifest": "projects/sql/python/sqlglot/manifest.json",
+  "image_id": "sha256:de047724d142fea0c2a0d61a97d4eebe0abd4e532b7331ed4fe4804306e4ec6f",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/amd64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: sqlglot",
+    "Version: 30.33.0",
+    "Name: atheris",
+    "Version: 3.1.0",
+    "2b871efe5236dcd19bb5727ad5016c31456bded3ba98c50cf169d81a536127e5  sqlglot/parser.py",
+    "93ea4dd996a6ffb9b61f77cc7900658351ca1d9b1d6cd40efddd233720d8e2be  sqlglot/tokens.py"
+  ],
+  "source_sha256": "a5b279fe7397a9fb6cdd0274a13a5fcee0fa83ac6ff617083f1f2832031e90bc",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "0c044607c0724362baf2716dbc0da2469af184611c034ceac6ce775c53e1d974",
+    "fuzz.py": "12f5329b821f28b641c53a86c55eaaf560b51775e5687ecaacc33671472c5ae8",
+    "harness.py": "080a32d05da437a2b0c5b1cbf5b055cf3ec336447a85d28cb548eab7ac9f9d5d",
+    "manifest.json": "50ff660f3a490dbb2f87739de9326ac761b76cff5cbed5c9cab3db04974b4a16",
+    "replay.py": "89e812105efc44e79e4f1260847eb11e4bb45570bb0857fd1f1eee08ae262067",
+    "run-control.py": "0957a4a93cb8ebb92c0f5e8401fe2ec51b1b7be39a1b27307012c966c78b51a4",
+    "runtime-requirements.lock": "08db4ea215eb29b93cb3c3ab4326f57890b3e07235e0df2f8d50b7bc61cdf6d4"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 9,
+  "parser_source_lines_covered": 1170,
+  "format_specific_source_lines_covered": 724,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/python/sqlglot/target/coverage/coverage.json",
+  "pass": true
+}

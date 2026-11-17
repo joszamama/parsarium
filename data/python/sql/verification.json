@@ -95,8 +95,100 @@
       "parser_feature_difference": 35,
       "project_receipt": "projects/sql/python/sqlparse/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/python/sqlparse/differential.json"
+    },
+    {
+      "package": "sqlglot",
+      "version": "30.33.0",
+      "pass": true,
+      "input_api": "sqlglot.parse(local SQL text, read=None) -> list of Expression trees",
+      "dialect": "sqlglot default dialect (read=None)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "sqlglot pure-Python tokenizer and recursive-descent parser",
+      "parser_source_files": 9,
+      "parser_source_lines_covered": 1170,
+      "afl_tuple_difference": 670,
+      "parser_feature_difference": 681,
+      "project_receipt": "projects/sql/python/sqlglot/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/python/sqlglot/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T17:01:47.036749+00:00"
+  "checked_at_utc": "2026-11-17T17:02:19.565496+00:00"
 }

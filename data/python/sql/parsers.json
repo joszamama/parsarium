@@ -103,5 +103,110 @@
         }
       ]
     }
+  },
+  {
+    "name": "sqlglot",
+    "version": "30.33.0",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned sdist (SHA-256 b0bf909b472ddf9bd4eab30f6e6fd8b33bf3997ce038b882fe0663f291958d2d)",
+    "input_api": "sqlglot.parse(local SQL text, read=None) -> list of Expression trees",
+    "documentation": "https://sqlglot.com/sqlglot.html#parse",
+    "source": "https://files.pythonhosted.org/packages/f6/4d/ce64044d87620a6cfeb0de779359400f29730ad169d7f804c050f8de7c5e/sqlglot-30.33.0.tar.gz",
+    "source_sha256": "9c007e0471c93e778d8613f25853543b959a3f793d9dadf1341b3d6bd53246a8",
+    "wheel_sha256": "a5b279fe7397a9fb6cdd0274a13a5fcee0fa83ac6ff617083f1f2832031e90bc",
+    "dependencies": [],
+    "dialect": "sqlglot default dialect (read=None)",
+    "scope": "One SQL statement from local text with the default dialect; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. The optional sqlglotc and sqlglotrs accelerators are absent; other dialects are untested.",
+    "family": "sqlglot pure-Python tokenizer and recursive-descent parser",
+    "family_note": "sqlglot.parse tokenizes with sqlglot/tokens.py and tokenizer_core.py and parses with sqlglot/parser.py into exp.Expression nodes. The adapter reads exp.Select/exp.Insert arguments and walks exp.Table, exp.Func (excluding AND/OR connectors and operators) and exp.Literal nodes. Independent of sqlparse, libpg_query and sqlparser-rs. sqlglotrs (an optional Rust tokenizer) and sqlglotc are accelerators of this family, not separate parsers.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 91735974,
+      "source": "https://pypistats.org/api/packages/sqlglot/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Package-level downloads include transpilation and data-tool dependencies, not only parse-tree use."
+    },
+    "project": "projects/sql/python/sqlglot",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

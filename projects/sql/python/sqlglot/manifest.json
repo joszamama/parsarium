@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "sqlglot",
+  "release": "30.33.0",
+  "catalog_parser": "data/python/sql/parsers.json",
+  "source_lock": "projects/sql/python/sqlglot/runtime-requirements.lock",
+  "source_sha256": "a5b279fe7397a9fb6cdd0274a13a5fcee0fa83ac6ff617083f1f2832031e90bc",
+  "sdist_sha256": "9c007e0471c93e778d8613f25853543b959a3f793d9dadf1341b3d6bd53246a8",
+  "build_note": "Installed from the pinned pure-Python py3-none-any wheel by hash; the image checks that the wheel sqlglot/ package is byte-identical to the pinned sdist, that sqlglot/parser.py, sqlglot/tokens.py and the MIT LICENSE match recorded SHA-256 values, that there are no unconditional runtime dependencies, and that the optional sqlglotc and sqlglotrs accelerators are absent, so the pure-Python tokenizer and parser run.",
+  "dependencies_note": "atheris 3.1.0 is the in-process fuzz bridge only; sqlglot has no runtime dependencies.",
+  "parser_family": "sqlglot pure-Python tokenizer (sqlglot/tokens.py, tokenizer_core.py) and recursive-descent parser (sqlglot/parser.py, sqlglot/parsers) building an Expression tree; independent of sqlparse, libpg_query and sqlparser-rs",
+  "dialect": "sqlglot default dialect (read=None), the dialect-agnostic base Dialect",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/opt/venv/bin/python",
+    "/work/replay.py",
+    "/input/case"
+  ],
+  "api": "sqlglot.parse(local SQL text decoded from UTF-8 bytes, read=None) -> list of Expression trees; the harness walks exp.Select, exp.Insert, exp.Schema, exp.Values, exp.Table, exp.Func and exp.Literal nodes",
+  "harness": "harness.py",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the sqlglot package source during valid-control replay; Atheris import instrumentation for the byte-input bridge",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/sqlglot/",
+  "format_specific_coverage_file_suffix": "/sqlglot/parser.py",
+  "scope": "One SQL statement from local text via sqlglot.parse with the default dialect; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Dialect-specific syntax, error recovery levels and the optional compiled accelerators are untested."
+}
