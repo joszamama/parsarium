@@ -39,3 +39,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build xml php pear_xml_parser
+python3 parsarium.py run xml php pear_xml_parser controls/xml/catalog-ns.xml
+```
