@@ -1,0 +1,53 @@
+[
+  {
+    "name": "github.com/beevik/etree",
+    "module": "github.com/beevik/etree",
+    "version": "v1.8.1",
+    "license": "BSD-2-Clause",
+    "input_api": "etree.NewDocument().ReadFromBytes([]byte); Element.Child walk; Element.NamespaceURI(); Attr.NamespaceURI()",
+    "documentation": "https://pkg.go.dev/github.com/beevik/etree@v1.8.1#Document.ReadFromBytes",
+    "source": "https://github.com/beevik/etree/tree/v1.8.1",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE read into an element tree: root and element expanded names in document order, maximum depth, namespace declarations and URIs, non-declaration attributes, decoded character data (predefined entity and character references, CDATA)",
+    "family": "etree element tree over Go encoding/xml Decoder tokenizer",
+    "family_note": "etree.go builds its tree from encoding/xml.Decoder.RawToken (strict mode by default) and resolves prefixes itself through Element.NamespaceURI and Attr.NamespaceURI. Lexing, entity and character-reference decoding, and CDATA handling are the standard encoding/xml code, so etree shares the Go encoding/xml Decoder tokenizer family with the unranked standard path; only tree building and namespace lookup are etree's own.",
+    "shared_families": [
+      "Go encoding/xml Decoder tokenizer"
+    ],
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 2098,
+      "source": "https://pkg.go.dev/github.com/beevik/etree?tab=importedby",
+      "captured_at_utc": "2026-11-17T03:16:02.492959+00:00",
+      "snapshot": "data/go/xml/registry-snapshot.json"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/go/github_com_beevik_etree"
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "standard",
+  "format": "xml",
+  "ecosystem": "go",
+  "package": "encoding/xml.Decoder.Token()",
+  "release": "1.27.1",
+  "api": "encoding/xml.Decoder.Token()",
+  "runtime": "Go 1.27.1 linux/arm64 standard library",
+  "standard_inventory": "data/go/xml/standard.json",
+  "runtime_lock": "runtime-lock.json",
+  "source_sha256": "41a7f2c7c910a57f70ce460cbe057a31703e11dbb169b499e50a3339a5f33bdb",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_engine_release": "1.27.1",
+  "fuzz_engine_sha256": "1675694ef690db0f18fbe7046a886170904bede1d9db6ec96ae27945c1705c64",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "harness": "harness_test.go",
+  "fuzz_entry": "FuzzParser",
+  "coverage": "Go coverpkg instrumentation of the standard encoding/xml package during namespace-resolved Decoder.Token replay",
+  "coverage_subject_prefix": "encoding/xml/"
+}
