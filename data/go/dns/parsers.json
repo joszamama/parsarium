@@ -313,5 +313,110 @@
     },
     "rank": 3,
     "afl_feedback": "data/go/dns/golang-org-x-net-dns-dnsmessage-feedback-differential.json"
+  },
+  {
+    "name": "codeberg.org/miekg/dns",
+    "module": "codeberg.org/miekg/dns",
+    "version": "v0.6.133",
+    "license": "BSD-3-Clause",
+    "license_evidence": "LICENSE in the module zip (sha256 09995409...), checked in the image; pkg.go.dev lists BSD-3-Clause",
+    "input_api": "(*dns.Msg).Unpack() error",
+    "documentation": "https://pkg.go.dev/codeberg.org/miekg/dns@v0.6.133#Msg.Unpack",
+    "source": "https://proxy.golang.org/codeberg.org/miekg/dns/@v/v0.6.133.zip",
+    "source_lock": "projects/dns/go/codeberg_org_miekg_dns/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "miekg/dns v2 rewrite (msg.go, zmsg.go, internal/unpack, pkg/dnsnet, rdata)",
+    "family_note": "Same author as the selected github.com/miekg/dns v1 but a separate module and a rewrite, not a rename: only 1,699 of the 7,165 distinct non-test source lines of its root package (23.7%) also occur in v1.1.73's root package, and the decoder moved to internal/unpack and pkg/dnsnet with rdata in its own package. Shared family with miekg/dns v1 is stated; the API differs (the caller puts the bytes in Msg.Data before Unpack, questions are RRs). It keeps the Z, AD and CD bits. Its importer count is low because it is pre-1.0 (v0.6.x).",
+    "project": "projects/dns/go/codeberg_org_miekg_dns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 39,
+      "source": "https://pkg.go.dev/codeberg.org/miekg/dns?tab=importedby",
+      "captured_at_utc": "2026-11-17T16:40:44.024574+00:00",
+      "snapshot": "data/go/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 4,
+    "afl_feedback": "data/go/dns/codeberg-org-miekg-dns-feedback-differential.json"
   }
 ]
