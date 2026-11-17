@@ -1,0 +1,752 @@
+{
+  "platform": "linux/arm64 Docker",
+  "java": "openjdk version \"25.0.5\" 2026-10-20 LTS",
+  "controls": {
+    "service_config": "controls/toml/service-config.toml",
+    "typed_scalars": "controls/toml/typed-scalars.toml"
+  },
+  "control_sha256": {
+    "service_config": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+    "typed_scalars": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0"
+  },
+  "control_meaning": "TOML 1.0.0 primary control: root keys, nested and dotted-header tables, inline table, array of inline tables, array of tables, escaped basic string, non-ASCII text, integers, a float, booleans and a UTC offset date-time; output is the typed tree of catalog/toml/PROTOCOL.md",
+  "second_control_meaning": "Fixed second control: signed/underscored/hex/octal/binary integers, fraction and exponent floats, four string forms with escapes, offset date-time with fraction and -07:00 offset, local date-time, local date, local time, quoted and dotted keys; typed tree checked in afl-feedback.json and the harness differential output",
+  "third_party": [
+    {
+      "package": "jackson-dataformat-toml",
+      "group": "com.fasterxml.jackson.dataformat",
+      "artifact": "jackson-dataformat-toml",
+      "version": "2.23.0",
+      "scope": "TOML 1.0.0 text from a local file into a Jackson JsonNode tree; with PARSE_JAVA_TIME the four date/time kinds are java.time values in POJONodes",
+      "command": "python3 scripts/run_project.py toml java jackson_dataformat_toml",
+      "project_receipt": "projects/toml/java/jackson_dataformat_toml/verification.json",
+      "pass": true,
+      "output": {
+        "database": {
+          "limits": {
+            "max": {
+              "type": "integer",
+              "value": "10"
+            },
+            "min": {
+              "type": "integer",
+              "value": "-2"
+            }
+          },
+          "ports": [
+            {
+              "type": "integer",
+              "value": "8000"
+            },
+            {
+              "type": "integer",
+              "value": "8001"
+            },
+            {
+              "type": "integer",
+              "value": "8002"
+            }
+          ],
+          "ratio": {
+            "type": "float",
+            "value": "3.25"
+          }
+        },
+        "enabled": {
+          "type": "bool",
+          "value": "true"
+        },
+        "owner": {
+          "name": {
+            "type": "string",
+            "value": "Zoë"
+          },
+          "since": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00Z"
+          }
+        },
+        "products": [
+          {
+            "name": {
+              "type": "string",
+              "value": "Hammer"
+            },
+            "sku": {
+              "type": "integer",
+              "value": "738594937"
+            }
+          },
+          {
+            "color": {
+              "type": "string",
+              "value": "gray"
+            },
+            "name": {
+              "type": "string",
+              "value": "Nail"
+            },
+            "points": [
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "2"
+                }
+              },
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "3"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "4"
+                }
+              }
+            ]
+          }
+        ],
+        "retries": {
+          "type": "integer",
+          "value": "3"
+        },
+        "servers": {
+          "alpha": {
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.1"
+            },
+            "tags": [
+              {
+                "type": "string",
+                "value": "edge"
+              },
+              {
+                "type": "string",
+                "value": "eu"
+              }
+            ]
+          },
+          "beta": {
+            "enabled": {
+              "type": "bool",
+              "value": "false"
+            },
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.2"
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "value": "Parsarium \"service\" control"
+        }
+      },
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "parser_source_files": 9,
+      "parser_source_lines_covered": 592,
+      "error": null,
+      "verified_at_utc": "2026-11-17T16:57:14.472278+00:00"
+    },
+    {
+      "package": "tomlj",
+      "group": "org.tomlj",
+      "artifact": "tomlj",
+      "version": "2.2.0",
+      "scope": "TOML 1.0.0 text from a local file into TomlTable/TomlArray with Long, Double, Boolean, String and java.time values",
+      "command": "python3 scripts/run_project.py toml java tomlj",
+      "project_receipt": "projects/toml/java/tomlj/verification.json",
+      "pass": true,
+      "output": {
+        "database": {
+          "limits": {
+            "max": {
+              "type": "integer",
+              "value": "10"
+            },
+            "min": {
+              "type": "integer",
+              "value": "-2"
+            }
+          },
+          "ports": [
+            {
+              "type": "integer",
+              "value": "8000"
+            },
+            {
+              "type": "integer",
+              "value": "8001"
+            },
+            {
+              "type": "integer",
+              "value": "8002"
+            }
+          ],
+          "ratio": {
+            "type": "float",
+            "value": "3.25"
+          }
+        },
+        "enabled": {
+          "type": "bool",
+          "value": "true"
+        },
+        "owner": {
+          "name": {
+            "type": "string",
+            "value": "Zoë"
+          },
+          "since": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00Z"
+          }
+        },
+        "products": [
+          {
+            "name": {
+              "type": "string",
+              "value": "Hammer"
+            },
+            "sku": {
+              "type": "integer",
+              "value": "738594937"
+            }
+          },
+          {
+            "color": {
+              "type": "string",
+              "value": "gray"
+            },
+            "name": {
+              "type": "string",
+              "value": "Nail"
+            },
+            "points": [
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "2"
+                }
+              },
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "3"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "4"
+                }
+              }
+            ]
+          }
+        ],
+        "retries": {
+          "type": "integer",
+          "value": "3"
+        },
+        "servers": {
+          "alpha": {
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.1"
+            },
+            "tags": [
+              {
+                "type": "string",
+                "value": "edge"
+              },
+              {
+                "type": "string",
+                "value": "eu"
+              }
+            ]
+          },
+          "beta": {
+            "enabled": {
+              "type": "bool",
+              "value": "false"
+            },
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.2"
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "value": "Parsarium \"service\" control"
+        }
+      },
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "parser_source_files": 36,
+      "parser_source_lines_covered": 1644,
+      "error": null,
+      "verified_at_utc": "2026-11-17T16:57:06.447694+00:00"
+    },
+    {
+      "package": "night-config-toml",
+      "group": "com.electronwill.night-config",
+      "artifact": "toml",
+      "version": "3.9.0",
+      "scope": "TOML 1.0.0 text from a local UTF-8 Reader into a night-config CommentedConfig (sub-tables Config, arrays List, Integer/Long, Double, Boolean, String and java.time values)",
+      "command": "python3 scripts/run_project.py toml java night_config_toml",
+      "project_receipt": "projects/toml/java/night_config_toml/verification.json",
+      "pass": true,
+      "output": {
+        "database": {
+          "limits": {
+            "max": {
+              "type": "integer",
+              "value": "10"
+            },
+            "min": {
+              "type": "integer",
+              "value": "-2"
+            }
+          },
+          "ports": [
+            {
+              "type": "integer",
+              "value": "8000"
+            },
+            {
+              "type": "integer",
+              "value": "8001"
+            },
+            {
+              "type": "integer",
+              "value": "8002"
+            }
+          ],
+          "ratio": {
+            "type": "float",
+            "value": "3.25"
+          }
+        },
+        "enabled": {
+          "type": "bool",
+          "value": "true"
+        },
+        "owner": {
+          "name": {
+            "type": "string",
+            "value": "Zoë"
+          },
+          "since": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00Z"
+          }
+        },
+        "products": [
+          {
+            "name": {
+              "type": "string",
+              "value": "Hammer"
+            },
+            "sku": {
+              "type": "integer",
+              "value": "738594937"
+            }
+          },
+          {
+            "color": {
+              "type": "string",
+              "value": "gray"
+            },
+            "name": {
+              "type": "string",
+              "value": "Nail"
+            },
+            "points": [
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "2"
+                }
+              },
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "3"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "4"
+                }
+              }
+            ]
+          }
+        ],
+        "retries": {
+          "type": "integer",
+          "value": "3"
+        },
+        "servers": {
+          "alpha": {
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.1"
+            },
+            "tags": [
+              {
+                "type": "string",
+                "value": "edge"
+              },
+              {
+                "type": "string",
+                "value": "eu"
+              }
+            ]
+          },
+          "beta": {
+            "enabled": {
+              "type": "bool",
+              "value": "false"
+            },
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.2"
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "value": "Parsarium \"service\" control"
+        }
+      },
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "parser_source_files": 9,
+      "parser_source_lines_covered": 345,
+      "error": null,
+      "verified_at_utc": "2026-11-17T16:56:30.823943+00:00"
+    }
+  ],
+  "standard": [],
+  "leads_checked": [
+    {
+      "package": "com.moandjiezana.toml:toml4j",
+      "version": "0.7.2",
+      "status": "unresolved_control_failed",
+      "probe": "data/java/toml/probes/toml4j-0.7.2.json",
+      "error": "Exception in thread \"main\" java.lang.RuntimeException: java.lang.IllegalStateException: Invalid text after key hex on line 6. Make sure to terminate the value or add a comment (#)."
+    }
+  ]
+}

@@ -4,48 +4,19 @@
   "observed": "2026-11-17",
   "leads": [
     {
-      "name": "com.fasterxml.jackson.dataformat:jackson-dataformat-toml",
-      "metric_value": 293,
-      "metric": "deps.dev directDependentCount summed over all releases",
-      "family": "Jackson TOML (own JFlex lexer and parser)",
-      "api_lead": "TomlMapper.readTree(byte[]/Reader) -> JsonNode; TomlReadFeature.PARSE_JAVA_TIME",
-      "note": "Dates are strings unless PARSE_JAVA_TIME is enabled.",
-      "source": "https://github.com/FasterXML/jackson-dataformats-text/tree/2.x/toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
       "name": "com.moandjiezana.toml:toml4j",
       "metric_value": 155,
       "metric": "deps.dev directDependentCount summed over all releases",
       "family": "toml4j (mwanji)",
-      "api_lead": "new Toml().read(String/Reader/File).toMap()",
-      "note": "TOML 0.4.0; hexadecimal/octal/binary integers and dotted keys are likely rejected.",
+      "api_lead": "new Toml().read(File).toMap()",
+      "note": "TOML 0.4.0 implementation (2017). No hexadecimal/octal/binary integers; dates must carry a Z or +hh:mm offset and are returned as java.util.Date, so local date-time, local date and local time cannot be represented.",
       "source": "https://github.com/mwanji/toml4j",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
-      "name": "org.tomlj:tomlj",
-      "metric_value": 133,
-      "metric": "deps.dev directDependentCount summed over all releases",
-      "family": "tomlj (ANTLR grammar; origin Apache Tuweni toml)",
-      "api_lead": "Toml.parse(String/Path/Reader) -> TomlParseResult",
-      "note": "TOML 1.0.0-rc.1.",
-      "source": "https://github.com/tomlj/tomlj",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
-      "name": "com.electronwill.night-config:toml",
-      "metric_value": 77,
-      "metric": "deps.dev directDependentCount summed over all releases",
-      "family": "NightConfig TOML",
-      "api_lead": "new TomlParser().parse(Reader) -> CommentedConfig",
-      "note": null,
-      "source": "https://github.com/TheElectronWill/night-config",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "version_seen": "0.7.2",
+      "checked_at_utc": "2026-11-17",
+      "probe": "data/java/toml/probes/toml4j-0.7.2.json",
+      "evidence": "service-config.toml matches the expected typed tree; typed-scalars.toml is rejected: Invalid text after key hex on line 6. Make sure to terminate the value or add a comment (#)."
     },
     {
       "name": "io.github.wasabithumb:jtoml",
@@ -103,5 +74,22 @@
       "api_lead_checked_against_pinned_release": false
     }
   ],
-  "excluded": []
+  "excluded": [],
+  "promoted": [
+    {
+      "name": "com.fasterxml.jackson.dataformat:jackson-dataformat-toml",
+      "release": "2.23.0",
+      "project": "projects/toml/java/jackson_dataformat_toml"
+    },
+    {
+      "name": "org.tomlj:tomlj",
+      "release": "2.2.0",
+      "project": "projects/toml/java/tomlj"
+    },
+    {
+      "name": "com.electronwill.night-config:toml",
+      "release": "3.9.0",
+      "project": "projects/toml/java/night_config_toml"
+    }
+  ]
 }

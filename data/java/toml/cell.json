@@ -1,10 +1,10 @@
 {
   "ecosystem": "java",
   "format": "toml",
-  "status": "pilot_search_bounded_none_verified",
+  "status": "pilot_three_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "toml",
@@ -17,9 +17,16 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 101,
   "unique_search_hits": 101,
-  "unresolved_documentation_leads": 9,
-  "uncertainty": "Bounded TOML search captured 2026-11-17: 2 queries, 101 recorded hits (101 unique), at most 100 per query. 9 parser leads are recorded and none is verified yet. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+  "unresolved_documentation_leads": 6,
+  "leads_by_status": {
+    "unresolved_control_failed": 1,
+    "unresolved_not_run": 5
+  },
+  "uncertainty": "Bounded TOML search captured 2026-11-17: 2 queries, 101 recorded hits (101 unique), at most 100 per query. Three Java TOML package/API paths are control-verified on both fixed controls and runnable: jackson-dataformat-toml 2.23.0 (own JFlex lexer and parser; jackson-core/databind are shared with the Java JSON cell, and date/time types need the documented, default-off TomlReadFeature.PARSE_JAVA_TIME), tomlj 2.2.0 (ANTLR-generated lexer/parser pinned to TOML 1.0.0; the shaded ANTLR runtime is outside the coverage scope) and night-config toml 3.9.0 (own hand-written parser over the format-neutral night-config core). They are three separate parser families. toml4j 0.7.2 (TOML 0.4.0) parses the primary control but rejects the hexadecimal integer of the second control and stays a lead; 5 lower-metric leads were not run. deps.dev counts measure package adoption, not TOML-specific use. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
   "primary_metric": "deps.dev directDependentCount summed over all releases",
+  "third_party_evidence": "data/java/toml/parsers.json",
+  "third_party_control_results": "data/java/toml/verification.json",
+  "afl_feedback": "data/java/toml/afl-feedback.json",
   "registry_snapshot": "data/java/toml/registry-snapshot.json",
   "unresolved_leads": "data/java/toml/leads.json",
   "runtime_evidence": "data/java/toml/standard.json"
