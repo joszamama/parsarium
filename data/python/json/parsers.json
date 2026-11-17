@@ -655,5 +655,51 @@
       "limitation": "Package-level downloads include encoder-only and schema-validation use and transitive installs; they do not measure JSON parsing directly."
     },
     "project": "projects/json/python/python-rapidjson"
+  },
+  {
+    "name": "pysimdjson",
+    "version": "8.0.0",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/pysimdjson/8.0.0/json",
+    "input_api": "simdjson.Parser().parse(local JSON bytes, recursive=True); Parser().load(local path, recursive=True) gives the same exact tree on both controls",
+    "documentation": "https://github.com/TkTech/pysimdjson/blob/98a6f9a84bfc0620cf8b5c450d22b8eeae313bfd/docs/native.rst",
+    "source": "https://files.pythonhosted.org/packages/51/ef/0af5d4a9f2f8440d0bff7a109639edc5b19cff9e1062cab55ff51c586d9c/pysimdjson-8.0.0.tar.gz",
+    "source_sha256": "e5669f38c3d91017361d708654c5a58130a91102dd56f001bfa4dc0f923edd00",
+    "wheel_sha256": "813288e3008dab3418f200725056db0e71a82fa034eb0a9637461f7ab0081543",
+    "dependencies": [],
+    "scope": "JSON structure and values from local bytes; valid nested object and nested array controls, each equal to an exact type-tagged CPython json oracle tree",
+    "family": "simdjson 5.1.1 C++ DOM parser (vendored amalgamation, arm64 NEON kernel on linux/arm64) / pysimdjson Cython binding",
+    "family_note": "Parser.parse calls simdjson's dom::parser (parse_into_document_unpadded) and the Cython csimdjson extension converts the DOM tape to Python dict/list/str/int/float. On linux/arm64 the build compiles the arm64 and fallback kernels and runtime dispatch selects arm64 (ARM NEON); no fallback-kernel line executed on either control. Same simdjson family as the C++ pilot path projects/json/cpp/simdjson, which pins simdjson 5.0.4; pysimdjson 8.0.0 vendors 5.1.1. Not combined with that C++ path. Independent of the CPython json, simplejson, Jiter, orjson/yyjson, yajl, msgspec and UltraJSON families in this cell. simdjson/__init__.py imports the stdlib json module only to re-export dumps/dump/JSONEncoder; stdlib decoding is disabled during the oracle comparison.",
+    "number_and_key_scope": "Not exercised beyond the controls; no malformed or edge-case probes were run. From the pinned sources and docs: recursive=True conversion keeps the last value for duplicate object keys (the lazy Object proxy keeps every field and looks up the first); integers become Python int from simdjson's int64 or uint64 tape values, and integers beyond 64 bits raise ValueError (BIGINT_ERROR) rather than becoming arbitrary-precision ints; numbers with a fraction or exponent become binary64 floats from simdjson's own number parser; NaN and Infinity tokens are not accepted. The controls contain no duplicate keys (checked with the oracle's object_pairs_hook), only exactly representable floats (1.25 and 2.5e-1) and small integers.",
+    "control": "controls/json/structure.json",
+    "differential_control": "controls/json/nested-array.json",
+    "expected_output": {
+      "root_type": "object",
+      "top_level_keys": [
+        "items",
+        "kind"
+      ],
+      "item_count": 2,
+      "first_id": 7,
+      "first_label": "a\nb",
+      "first_ok": true,
+      "first_value_is_null": true,
+      "second_label": "π"
+    },
+    "differential_expected_output": {
+      "root_type": "array",
+      "item_count": 5,
+      "nested_arrays": 1,
+      "nested_objects": 1
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 679340,
+      "source": "https://pypistats.org/api/packages/pysimdjson/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/json/leads.json",
+      "limitation": "Package-level downloads include transitive installs and uses other than parsing; they do not measure JSON parsing directly."
+    },
+    "project": "projects/json/python/pysimdjson"
   }
 ]

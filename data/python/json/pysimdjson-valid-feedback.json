@@ -1,0 +1,105 @@
+{
+  "checked_at_utc": "2026-11-17T13:13:06.742006+00:00",
+  "project": "json/python/pysimdjson",
+  "pass": true,
+  "input_kind": "two fixed valid RFC 8259 JSON controls",
+  "api": "simdjson.Parser().parse(bytes, recursive=True) and Parser().load(path, recursive=True)",
+  "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where pysimdjson is not importable; exact type-tagged trees with float.hex values and object member order. In the pysimdjson runs, stdlib json decoding entry points are replaced with a hard failure before import.",
+  "control_oracle": {
+    "oracle_python": "3.11.2",
+    "simdjson": "5.1.1",
+    "active_implementation": [
+      "arm64",
+      "ARM NEON"
+    ],
+    "compiled_implementations": [
+      "arm64",
+      "fallback"
+    ],
+    "tree_sha256": "9c83c599682c3ea110ea481bf0edd76558a719d67c1c8e331fe047a2332f6c1e",
+    "value_kinds": [
+      "array",
+      "bool",
+      "float",
+      "int",
+      "null",
+      "object",
+      "string"
+    ],
+    "object_members": 10,
+    "duplicate_keys": 0,
+    "parse_bytes_matches_oracle": true,
+    "load_path_matches_oracle": true,
+    "stdlib_decoding_disabled": true
+  },
+  "variant_oracle": {
+    "oracle_python": "3.11.2",
+    "simdjson": "5.1.1",
+    "active_implementation": [
+      "arm64",
+      "ARM NEON"
+    ],
+    "compiled_implementations": [
+      "arm64",
+      "fallback"
+    ],
+    "tree_sha256": "e9f1bf32886a233dfe8aa788997e3c327dcc729d2942d2b7d65db3e2f3250c0e",
+    "value_kinds": [
+      "array",
+      "bool",
+      "float",
+      "int",
+      "null",
+      "object",
+      "string"
+    ],
+    "object_members": 3,
+    "duplicate_keys": 0,
+    "parse_bytes_matches_oracle": true,
+    "load_path_matches_oracle": true,
+    "stdlib_decoding_disabled": true
+  },
+  "feedback_scope": "native csimdjson extension source regions and branches, split into the pysimdjson 8.0.0 wrapper (Cython-generated csimdjson.cpp, util.cpp) and vendored simdjson 5.1.1 (simdjson.cpp, simdjson.h); CPython headers excluded",
+  "base_image_id": "sha256:e4da8ebededd44881b21bc979f95d2a90c34bc8edf0e94b0ccde7ad07dbf83ea",
+  "overlay_image_id": "sha256:83733b91c6c14968f3c32bac878a7e6e6eeba1d1d87041a3e5aeae53f71090c2",
+  "overlay_receipt_sha256": "011c96e90dcf5d1f4e49b8d7b1b4f7be96b798a357c85d9d582d11502ae77703",
+  "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "root_type": "object",
+    "top_level_keys": [
+      "items",
+      "kind"
+    ],
+    "item_count": 2,
+    "first_id": 7,
+    "first_label": "a\nb",
+    "first_ok": true,
+    "first_value_is_null": true,
+    "second_label": "π"
+  },
+  "variant_output": {
+    "root_type": "array",
+    "item_count": 5,
+    "nested_arrays": 1,
+    "nested_objects": 1
+  },
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "control_parser_features": 3445,
+  "variant_parser_features": 3465,
+  "control_wrapper_features": 2593,
+  "variant_wrapper_features": 2593,
+  "control_simdjson_features": 852,
+  "variant_simdjson_features": 872,
+  "control_arm64_kernel_features": 610,
+  "variant_arm64_kernel_features": 630,
+  "fallback_kernel_features": 0,
+  "parser_feature_difference": 98,
+  "wrapper_feature_difference": 0,
+  "simdjson_feature_difference": 98,
+  "arm64_kernel_feature_difference": 98,
+  "control_afl_tuples": 3376,
+  "variant_afl_tuples": 3397,
+  "afl_tuple_difference": 93
+}

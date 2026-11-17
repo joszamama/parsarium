@@ -1,0 +1,40 @@
+{
+  "pysimdjson": {
+    "release": "8.0.0",
+    "registry_metadata": "https://pypi.org/pypi/pysimdjson/8.0.0/json",
+    "uploaded_utc": "2026-11-11T13:23:32Z",
+    "sdist": "https://files.pythonhosted.org/packages/51/ef/0af5d4a9f2f8440d0bff7a109639edc5b19cff9e1062cab55ff51c586d9c/pysimdjson-8.0.0.tar.gz",
+    "sdist_sha256": "e5669f38c3d91017361d708654c5a58130a91102dd56f001bfa4dc0f923edd00",
+    "upstream": "https://github.com/TkTech/pysimdjson",
+    "upstream_commit": "98a6f9a84bfc0620cf8b5c450d22b8eeae313bfd",
+    "upstream_commit_evidence": "GitHub tag v8.0.0; csimdjson.pyx, simdjson.cpp, simdjson.h, util.cpp, __init__.py, pyproject.toml and LICENSE at that commit are byte-identical to the sdist",
+    "api_documentation": "https://github.com/TkTech/pysimdjson/blob/98a6f9a84bfc0620cf8b5c450d22b8eeae313bfd/docs/native.rst",
+    "wheel": "https://files.pythonhosted.org/packages/63/8a/bea7f4a5e7981c95d1169dcc20c765676f966637d06a951ceb8f52dc17d1/pysimdjson-8.0.0-cp311-cp311-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl",
+    "wheel_sha256": "813288e3008dab3418f200725056db0e71a82fa034eb0a9637461f7ab0081543",
+    "wheel_note": "Matching-platform reference wheel only; it is not installed. It contains one top-level csimdjson.cpython-311-aarch64-linux-gnu.so with simdjson compiled in, no bundled shared libraries, and the same simdjson sources as the sdist.",
+    "license": "MIT",
+    "license_evidence": "PyPI License-Expression MIT and LICENSE (Copyright (c) 2019 Tyler Kennedy)",
+    "license_file_sha256": "1067c30a692a52f66c3b8c1bd6df26efdd7d84a43ef8ebe10ccb395f7e79ddec",
+    "requires_python": ">=3.11",
+    "runtime_dependencies": [],
+    "csimdjson_pyx_sha256": "3b1d9c47fc7dd5942ee540a2bbdb510dfe912cb187f814071744c7e020bb04d6",
+    "source_sha256": "e5669f38c3d91017361d708654c5a58130a91102dd56f001bfa4dc0f923edd00"
+  },
+  "simdjson": {
+    "release": "5.1.1",
+    "release_evidence": "simdjson/simdjson.h amalgamation banner 'version 5.1.1' and SIMDJSON_VERSION \"5.1.1\"; csimdjson.VERSION reports 5.1.1 at runtime",
+    "vendored_in": "pysimdjson 8.0.0 sdist (pinned by sdist SHA-256)",
+    "simdjson_cpp_sha256": "3ea5f501cef6c2e16e28095b566feeb56021ca473aaf50aad32102f45d734195",
+    "simdjson_h_sha256": "f3e5ee5f39051960b5ce65762ee4b6919caf270675eb52240ebd92f21a5bcefd",
+    "license": "Apache-2.0 OR MIT",
+    "license_evidence": "upstream simdjson LICENSE and LICENSE-MIT (same as the C++ pilot); the amalgamation ships without separate license files in the sdist",
+    "compiled_implementations_linux_arm64": ["arm64", "fallback"],
+    "active_implementation_linux_arm64": "arm64 (ARM NEON), selected by runtime dispatch; pyproject also defines SIMDJSON_IMPLEMENTATION_FALLBACK=1",
+    "cpp_pilot_relation": "Same simdjson DOM parser family as projects/json/cpp/simdjson, which pins simdjson 5.0.4; this binding vendors 5.1.1"
+  },
+  "build_backend": {
+    "setuptools": {"release": "84.2.1", "wheel_sha256": "ca140b45d5325a9478f880e351484f62fef15f336462e449ca0c03c873d589c2"},
+    "cython": {"release": "3.3.1", "wheel_sha256": "61abc7feedd20dac6c4ff7ab3a30e17136a067b242ab9253e2b4a6d9a72c2b61"},
+    "role": "build backend only (pysimdjson pyproject requires setuptools>=82.0.1 and unpinned Cython; neither has install requirements)"
+  }
+}
