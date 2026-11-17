@@ -1,14 +1,17 @@
 [
   {
     "name": "Qt QJsonDocument",
-    "status": "unresolved",
+    "status": "excluded_no_qualifying_metric",
     "debian_source": "qtbase-opensource-src / qt6-base (framework)",
     "popcon_source_inst": null,
-    "popcon_dev_package": {},
+    "popcon_dev_package": {
+      "qt6-base-dev": 4942
+    },
     "github_stars": null,
     "license": "LGPL-3.0-only OR GPL-2.0+ OR commercial",
-    "reason": "QJsonDocument::fromJson(QByteArray); Qt Core install counts (96,909 / 67,857) cover the whole framework and are not JSON-specific. Not run.",
-    "source": "https://doc.qt.io/qt-6/qjsondocument.html"
+    "reason": "QJsonDocument::fromJson(QByteArray). Metric decision 2026-11-17: Qt cannot qualify regardless of the technical blocker. QJsonDocument lives in QtCore, so the Debian sources qtbase-opensource-src (96,909) and qt6-base (67,857) cover whole multi-library frameworks and their sourcemax counts are format-ambiguous. PROTOCOL.md's fallback then needs a format-specific binary development package with at least 1,000 installations; Qt has none (qt6-base-dev 4,942 is framework-wide and libqt6core6t64 covers all of QtCore). The path was not built further. The earlier local build attempt also failed to link a parser-only target against a pinned QtCore; that blocker is recorded but is no longer the deciding reason.",
+    "source": "https://doc.qt.io/qt-6/qjsondocument.html",
+    "evidence": "data/cpp/json/qt6-jsondocument-unresolved.json"
   },
   {
     "name": "POCO JSON",

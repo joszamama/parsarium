@@ -1,6 +1,6 @@
 # C++ × JSON: selected parsers (pilot)
 
-Ten control-verified third-party paths are selected: nine ranked by the primary metric, plus Boost.JSON, whose multi-library source package lacks a JSON-specific primary value and which is kept by its JSON-specific `libboost-json-dev` fallback count. POCO JSON passed verification but was demoted for lack of a qualifying metric. All ten slots are used; one documentation lead (Qt) remains unverified. The last three ranks rest on very small installation counts.
+Ten control-verified third-party paths are selected: nine ranked by the primary metric, plus Boost.JSON, whose multi-library source package lacks a JSON-specific primary value and which is kept by its JSON-specific `libboost-json-dev` fallback count. POCO JSON passed verification but was demoted for lack of a qualifying metric. All ten slots are used; the Qt lead is excluded because it has no qualifying metric. The last three ranks rest on very small installation counts.
 
 ## Adoption metric
 
@@ -43,11 +43,13 @@ POCO JSON 1.15.4 passed the same technical gate (both exact-tree controls throug
 
 [Parser records](parsers.json) · [control results](verification.json) · [standard API inventory](standard.json). The ISO C++ library has no JSON parser API.
 
-## Unresolved leads
+## Excluded and unresolved leads
 
 | Lead | Source installs | Dev installs | Status |
 | --- | ---: | ---: | --- |
 | [POCO JSON](https://docs.pocoproject.org/current/Poco.JSON.Parser.html) | unavailable (POCO-wide 940) | 190 (suite) / 125 runtime | Verified technically; excluded: no JSON-specific metric at or above the 1,000 fallback |
-| [Qt QJsonDocument](https://doc.qt.io/qt-6/qjsondocument.html) | unavailable (Qt-wide) | unavailable | Framework-wide count is not JSON-specific; not control-tested |
+| [Qt QJsonDocument](https://doc.qt.io/qt-6/qjsondocument.html) | unavailable (Qt-wide 96,909 / 67,857) | none JSON-specific (qt6-base-dev 4,942 framework-wide) | Excluded: no JSON-specific metric for the 1,000 fallback; not control-tested |
+
+Qt QJsonDocument cannot qualify, whatever the outcome of its build blocker. It lives in QtCore, so the Debian sources `qtbase-opensource-src` and `qt6-base` count whole frameworks and are format-ambiguous. The PROTOCOL.md fallback then needs a JSON-specific binary development package with at least 1,000 installations. Qt has none: `qt6-base-dev` (4,942) covers the Qt base framework and `libqt6core6t64` covers all of QtCore. The decision and the earlier link blocker are in [qt6-jsondocument-unresolved.json](qt6-jsondocument-unresolved.json).
 
 Search: Debian source names containing `json`, limit 320, 320 hits and 320 unique; details and exclusions are preserved in the snapshot. Supplementary exact source-name lookups in the same hashed file added Glaze and cpprest; the other names looked up for the tenth slot (rapidyaml 56, a YAML library with a JSON entry point; jsonnet 60; HTTP frameworks drogon 20, pistache 9 and cpr 3; frameworks juce, wxwidgets3.2 and kcoreaddons) were not selected, with reasons in the snapshot. These valid controls establish the observed subset only, not complete RFC 8259 support.
