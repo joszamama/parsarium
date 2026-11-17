@@ -78,5 +78,17 @@
     "reason": "Found by re-scanning the 320 recorded Debian json source-name hits. Pinned taoJSON 1.0.0-beta.14 (upstream pre-release tag) tao::json::from_string on PEGTL 3.2.6 passes two valid exact-tree controls (array order and integer/float kinds; std::map objects compared as a mapping), covers 341 taoJSON lines (52 in grammar.hpp) and 389 PEGTL lines, and gives stable parser-only AFL++ feedback (344 vs 292 tuples, 166 differing). The tao-json source package has 2 Debian installations, both no_files, a very weak adoption signal.",
     "source": "https://github.com/taocpp/json",
     "verification": "projects/json/cpp/tao-json/verification.json"
+  },
+  {
+    "name": "cpprestsdk",
+    "status": "resolved_verified_selected",
+    "debian_source": "cpprest",
+    "popcon_source_inst": 813,
+    "popcon_dev_package": {},
+    "github_stars": null,
+    "license": "MIT",
+    "reason": "Found by a supplementary exact source-name lookup (cpprest, sourcemax 813, rank 7513) in the same hashed snapshot. Pinned cpprestsdk 2.10.19 web::json::value::parse with keep_object_element_order(true) passes two valid exact-tree controls (key order and integer/float kinds), covers 427 lines of its own JSON translation units (407 in json_parsing.cpp), and gives stable parser-only AFL++ feedback scoped by nm-checked allowlist to json.cpp, json_parsing.cpp and json_serialization.cpp (147 vs 134 tuples, 25 differing; 11 differing parser lines). The single-library source count covers the whole multi-purpose SDK and is not JSON-specific.",
+    "source": "https://github.com/microsoft/cpprestsdk",
+    "verification": "projects/json/cpp/cpprestsdk/verification.json"
   }
 ]

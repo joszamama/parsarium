@@ -236,6 +236,64 @@
     "not_verified": "Only two valid nested object/array controls; scalar roots, optional relaxed flags, large inputs and malformed input remain unverified."
   },
   {
+    "name": "cpprestsdk",
+    "version": "2.10.19",
+    "license": "MIT",
+    "license_evidence": "https://github.com/microsoft/cpprestsdk/blob/v2.10.19/license.txt",
+    "input_api": "web::json::value::parse(const utility::string_t&) on local bytes (utility::string_t is std::string on Linux), after the documented global web::json::keep_object_element_order(true); yields a web::json::value whose numbers report integer (is_int64/is_integral) or double kinds and whose objects keep source member order",
+    "documentation": "https://github.com/microsoft/cpprestsdk/blob/v2.10.19/Release/include/cpprest/json.h",
+    "source": "https://github.com/microsoft/cpprestsdk/archive/refs/tags/v2.10.19.tar.gz",
+    "adapter": "projects/json/cpp/cpprestsdk/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text from a local length-bounded buffer (up to 1 MiB) into web::json::value; object/array roots in the two valid controls; exact nested tree, object member order (keep_object_element_order(true)), array order and integer/float kinds checked",
+    "family": "cpprestsdk own web::json JSON_Parser",
+    "family_note": "The C++ REST SDK (Microsoft cpprestsdk, Debian source cpprest) implements its JSON tokenizer and recursive-descent parser in Release/src/json/json_parsing.cpp (details::JSON_Parser) and its value model in json.cpp, without delegating to JsonCpp, simdjson, nlohmann/json, RapidJSON, Boost.JSON, Glaze, PicoJSON, jsoncons, taoJSON or POCO/pdjson. The harness compiles only the three JSON translation units plus Release/src/utilities/asyncrt_utils.cpp (UTF and locale helpers) against a small stdafx.h shim instead of the library's HTTP/websocket precompiled header; no cpprest source is modified. Without keep_object_element_order(true) the library sorts parsed object members by key.",
+    "release_note": "v2.10.19 (2023) is the newest upstream tag. The upstream README states that cpprestsdk is in maintenance mode and is not recommended for new projects.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 813,
+      "binary_package": "libcpprest2.10 / libcpprest-dev",
+      "dev_package_installs": {},
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json",
+      "qualification": "Supplementary exact source-name lookup of cpprest in the same hashed sourcemax snapshot (rank 7513; 96 vote, 410 old, 86 recent, 221 no_files). cpprest is a single-library source, so the primary value applies, but the library is multi-purpose (HTTP client/listener, URI, websocket, streams and JSON); the count is a package adoption proxy for the whole SDK, not JSON-specific use. The binary-level split between libcpprest2.10 and libcpprest-dev is not in the saved snapshot."
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/cpprestsdk",
+    "not_verified": "Two valid controls do not establish complete RFC 8259 compliance, malformed-input handling, numeric limits, duplicate-key behavior, or all Unicode edge cases. The default sorted-key object mode, the std::istream overload, the HTTP/websocket layers and the rest of the SDK are not exercised."
+  },
+  {
     "name": "Boost.JSON",
     "version": "1.92.0",
     "license": "BSL-1.0",

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T15:10:34.689170+00:00",
-  "projects_total": 9,
-  "projects_passed": 9,
-  "differential_kind": "two fixed valid nested JSON controls; Glaze, POCO, jsoncons, PicoJSON and taoJSON use parser-only probes with exact DOM checks (PicoJSON and taoJSON objects compared by key)",
-  "command": "python3 projects/json/cpp/picojson/verify-feedback.py and python3 projects/json/cpp/tao-json/verify-feedback.py; earlier paths retain recorded receipts",
+  "checked_at_utc": "2026-11-17T22:26:19.983009+00:00",
+  "projects_total": 10,
+  "projects_passed": 10,
+  "differential_kind": "two fixed valid nested JSON controls; Glaze, POCO, jsoncons, PicoJSON, taoJSON and cpprestsdk use parser-only probes with exact DOM checks (PicoJSON and taoJSON objects compared by key)",
+  "command": "python3 projects/json/cpp/cpprestsdk/verify-feedback.py; earlier paths retain recorded receipts",
   "results": [
     {
       "project": "json/cpp/jsoncpp",
@@ -77,6 +77,26 @@
       "differential_afl_tuples": 319,
       "source_line_difference": 31,
       "afl_tuple_difference": 88
+    },
+    {
+      "project": "json/cpp/cpprestsdk",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_cpprest_json_translation_unit_edges_and_source_lines",
+      "overlay_receipt_sha256": "7a80f246a336bcf1e70da37846a8e23384d8ca1be5d98231cbbfc4d19a4b69c8",
+      "differential_receipt_sha256": "9dcc2a37316cfde5485b42777255f17da5edf2861568605c3fec6bee4ca2ab57",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_source_lines": 344,
+      "control_afl_tuples": 147,
+      "differential_source_lines": 335,
+      "differential_afl_tuples": 134,
+      "source_line_difference": 11,
+      "afl_tuple_difference": 25,
+      "parser_only_probe": "projects/json/cpp/cpprestsdk/parser-probe.cpp",
+      "exact_tree_outputs_verified": true
     },
     {
       "project": "json/cpp/boost-json",
@@ -178,8 +198,7 @@
     }
   ],
   "refreshed_projects": [
-    "picojson",
-    "tao-json"
+    "cpprestsdk"
   ],
-  "retained_prior_results_checked_at_utc": "2026-11-17T14:54:19.333162+00:00"
+  "retained_prior_results_checked_at_utc": "2026-11-17T15:10:34.689170+00:00"
 }
