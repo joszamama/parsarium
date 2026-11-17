@@ -12,12 +12,16 @@
   "variant_sha256": "9e5272dad9d3ec7e9c3a48bfcd6c7cb439ba7ed46b813020335980802975d342",
   "variant_output": {"vertex_count": 3, "face_count": 0, "first_vertex": [0.0, 0.0, 0.0], "last_vertex": [0.0, 1.0, 0.0]},
   "afl_image": "aflplusplus/aflplusplus@sha256:d3e2dcafcfbc27bf6b6890e9f9a6e3c420737bb2dc3d8c29d33a76f9c108a090",
+  "followup_checked_at_utc": "2026-11-17T03:42:44Z",
   "probes": [
     {"platform": "linux/amd64", "instrumentation": "AFL++ 5.04a QEMU", "module_preloaded": true, "timeout_ms": 30000, "result": "Valid triangle target exited SIGSEGV and the map probe timed out."},
-    {"platform": "linux/amd64", "instrumentation": "AFL++ 5.04a QEMU", "module_preloaded": false, "timeout_ms": 60000, "result": "Valid triangle target exited SIGSEGV and the map probe timed out."}
+    {"platform": "linux/amd64", "instrumentation": "AFL++ 5.04a QEMU", "module_preloaded": false, "timeout_ms": 60000, "result": "Valid triangle target exited SIGSEGV and the map probe timed out."},
+    {"platform": "linux/amd64", "instrumentation": "AFL++ 5.04a QEMU", "configuration": "AFL_QEMU_INST_RANGES=libio_base.so; AFL_QEMU_EXCLUDE_RANGES=0x400000-0xb22000", "timeout_ms": 60000, "result": "Valid triangle parse timed out and QEMU reported target SIGSEGV; the partial map had one tuple. Even import pymeshlab without a file timed out under the same QEMU configuration."},
+    {"platform": "linux/amd64", "instrumentation": "AFL++ 5.04a Frida", "configuration": "Direct /usr/bin/python3.14 under afl-showmap -O", "result": "Frida aborted before CPython executed with gum_interceptor_attach: -2; zero tuples. The same Frida binary instrumented /bin/true, isolating this startup failure to the CPython launch path."},
+    {"platform": "linux/amd64", "instrumentation": "AFL++ 5.04a Frida", "configuration": "One-shot embedded CPython 3.14 launcher; AFL_PRELOAD=libio_base.so; AFL_FRIDA_INST_RANGES=libio_base.so; AFL_INST_LIBS=1", "result": "The exact valid triangle parsed and process exited without timeout, but plugin-scoped map had zero tuples. Frida resolved libio_base.so and intersected eight executable ranges. Disabling Frida dynamic-load range updates also produced zero plugin tuples. With the module scope removed, the same launcher produced three host-executable tuples, which are excluded from parser feedback."}
   ],
   "parser_source_lines_covered": null,
   "native_feedback_edges": null,
-  "repeat_variant_map_check": "unavailable: the instrumented valid-control process did not complete",
-  "decision": "Keep this path staged as a verified Docker control. Maps from crashed or timed-out targets are excluded from feedback claims."
+  "repeat_variant_map_check": "unavailable: QEMU did not complete the valid control and Frida produced no plugin-scoped tuples on it",
+  "decision": "Keep this path staged as a verified Docker control. QEMU crashes/timeouts and Frida zero-tuple or host-only maps cannot support a native parser-feedback claim. No campaign was run."
 }
