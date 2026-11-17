@@ -335,5 +335,53 @@
       "source": "data/rust/json/registry-snapshot.json"
     },
     "project": "projects/json/rust/hifijson/verification.json"
+  },
+  {
+    "name": "miniserde",
+    "version": "0.1.46",
+    "license": "MIT OR Apache-2.0",
+    "input_api": "miniserde::json::from_str::<miniserde::json::Value>(&str) -> Result<Value>; Value::{Object, Array, String, Number, Bool, Null}",
+    "documentation": "https://docs.rs/miniserde/0.1.46/miniserde/json/fn.from_str.html",
+    "source": "https://static.crates.io/crates/miniserde/miniserde-0.1.46.crate",
+    "scope": "One RFC 8259 JSON text decoded from local UTF-8 bytes into miniserde own generic Value tree with a non-recursive deserializer; adapter iteratively reports root kind, container/scalar counts, depth, decoded value strings, numbers as f64 and top-level object keys.",
+    "family": "miniserde independent non-recursive JSON deserializer in src/json/de.rs and own Value visitor; by serde_json author but no serde_json input parser dependency",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 1335406,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/miniserde/verification.json"
   }
 ]

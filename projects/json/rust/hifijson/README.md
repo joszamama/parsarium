@@ -1,8 +1,8 @@
-# json — JSON / Rust
+# hifijson — JSON / Rust
 
 Pinned release: `0.5.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/json/rust/json/README.md)
+[API, control result, and parser family](../../../../catalog/json/rust/hifijson/README.md)
 
 ## Run from the repository root
 

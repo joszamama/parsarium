@@ -93,14 +93,6 @@
       "source": "https://crates.io/crates/ijson"
     },
     {
-      "name": "miniserde",
-      "version": "0.1.46",
-      "recent_downloads_90d": 1335406,
-      "status": "unresolved",
-      "reason": "Minimal serde-like crate by the serde_json author with its own non-recursive JSON parser (miniserde::json::from_str). Not run on the controls.",
-      "source": "https://crates.io/crates/miniserde"
-    },
-    {
       "name": "gjson",
       "version": "0.8.1",
       "recent_downloads_90d": 1151387,
@@ -251,6 +243,17 @@
       "record": "data/rust/json/parsers.json",
       "receipt": "projects/json/rust/hifijson/verification.json",
       "scope_note": "Pinned own byte-slice lexer and bounded Value parser, with exactly_one enforcing one root. Release Cargo.toml declares MIT but no LICENSE file is bundled."
+    },
+    {
+      "name": "miniserde",
+      "version": "0.1.46",
+      "recent_downloads_90d": 1335406,
+      "status": "selected",
+      "reason": "Own non-recursive JSON deserializer with generic Value path; selected after exact two-control runs, own-source coverage and stable AFL++ feedback.",
+      "source": "https://crates.io/crates/miniserde",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/miniserde/verification.json",
+      "scope_note": "Public json::from_str::<json::Value>(&str) consumes local UTF-8 text; own parser distinct from serde_json despite common author."
     }
   ]
 }
