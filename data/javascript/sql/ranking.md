@@ -29,21 +29,41 @@ Receipts: [node-sql-parser](../../../projects/sql/javascript/node_sql_parser/ver
 | node-sql-parser | 13,709,122 | selected | node-sql-parser PEG.js grammars |
 | libpg-query | 11,829,732 | unresolved_coverage_blocker | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | pgsql-ast-parser | 7,717,032 | selected | pgsql-ast-parser nearley grammar |
-| pg-query-emscripten | 1,749,295 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
-| @guanmingchiu/sqlparser-ts | 598,900 | unresolved | sqlparser-rs (WASM) |
+| @zeit/cosmosdb-query | 2,234,610 | excluded | cosmosdb-query PEG.js grammar (Cosmos DB SQL) |
+| pgsql-parser | 1,853,514 | unresolved_coverage_blocker | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| pg-query-emscripten | 1,749,295 | unresolved_coverage_blocker | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| plpgsql-parser | 1,647,873 | unresolved_coverage_blocker | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| @derekstride/tree-sitter-sql | 1,186,889 | unresolved_native_coverage_blocker | tree-sitter SQL grammar (generated C parser) |
+| @dbml/core | 841,383 | excluded | DBML parser with SQL DDL importers |
+| @guanmingchiu/sqlparser-ts | 598,900 | unresolved_coverage_blocker | sqlparser-rs (WASM) |
 | sql-parser-cst | 536,703 | selected | sql-parser-cst Peggy grammar |
 | dt-sql-parser | 364,059 | selected | dt-sql-parser ANTLR grammars |
-| js-sql-parser | 157,858 | unresolved | js-sql-parser jison grammar |
+| js-sql-parser | 157,858 | excluded_control_fails | js-sql-parser jison grammar |
+| @clickhouse/parser | 118,532 | excluded_control_fails | ClickHouse SQL parser (TypeScript port) |
+| @materializeinc/sql-parser | 112,478 | excluded | Materialize SQL parser (Rust, WASM) |
 | sqlite-parser | 85,900 | selected | sqlite-parser PEG.js grammar |
 | @appland/sql-parser | 80,224 | selected | sqlite-parser PEG.js grammar (AppLand fork) |
-| @pgsql/parser | 78,227 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
-| pg-query-parser | 31,519 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
-| sql-parser | 16,843 | unresolved | sql-parser jison grammar |
+| @pgsql/parser | 78,227 | unresolved_coverage_blocker | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| sql-parser-mistic | 68,233 | excluded_control_fails | sql-parser jison grammar (fork) |
+| postgresql-eslint-parser | 50,933 | unresolved_coverage_blocker | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| pg-query-parser | 31,519 | unresolved_native_coverage_blocker | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| @griffithswaite/ts-plsql-parser | 22,144 | excluded_control_fails | PL/SQL ANTLR4 grammar (antlr/grammars-v4 PlSql) |
+| sql-parser | 16,843 | excluded_control_fails | sql-parser jison grammar |
+| @openobserve/node-sql-parser | 15,004 | excluded_shared_family_snapshot | node-sql-parser PEG.js grammars (republished snapshot) |
+| @joe-re/sql-parser | 12,591 | excluded_control_fails | node-sql-parser PEG.js grammar (early fork, Peggy) |
 | sql-ddl-to-json-schema | 12,081 | excluded | — |
+| node-sqlparser | 11,959 | excluded_control_fails | node-sqlparser PEG.js grammar |
+| sql-surveyor | 10,436 | excluded | antlr4ts-sql grammars (wrapper) |
 | sqllens | 6,624 | selected | sqllens ANTLR4 grammars (PostgreSQL grammar forked from antlr/grammars-v4) |
+| oracle-sql-parser | 4,486 | excluded | oracle-sql-parser PEG.js grammar |
 | rawsql-ts | 1,802 | selected | rawsql-ts hand-written tokenizer and recursive-descent parser |
+| @sgress454/node-sql-parser | 1,575 | excluded_byte_identical_grammar | node-sql-parser PEG.js grammars (fork) |
 | @questdb/sql-parser | 1,470 | selected | @questdb/sql-parser Chevrotain grammar |
+| @tableland/sqlparser | 1,197 | unresolved_coverage_blocker | Tableland Go SQL parser (WASM) |
+| @deepnote/sql-parser | 911 | excluded_control_fails | node-sql-parser PEG.js grammar (early fork, via @joe-re/sql-parser) |
 | @saralsql/tsql-parser | 731 | selected | @saralsql/tsql-parser hand-written T-SQL parser |
-| @florajs/sql-parser | 640 | unresolved | node-sql-parser PEG.js (fork) |
+| @florajs/sql-parser | 640 | excluded_control_fails | node-sql-parser PEG.js (fork) |
+| sqljs | 637 | excluded | — |
+| sql-ast | 340 | excluded | sql-ast MySQL DDL parser |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).
