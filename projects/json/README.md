@@ -2,4 +2,5 @@
 
 Only verified Docker targets appear below; the format remains incomplete.
 
-No verified Docker targets yet.
+- [json.load(BytesIO(local UTF-8 bytes), cls=PurePythonJSONDecoder) / Python](python/stdlib_json/README.md)
+- [simplejson / Python](python/simplejson/README.md)

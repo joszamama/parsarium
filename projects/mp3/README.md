@@ -2,4 +2,4 @@
 
 Only verified Docker targets appear below; the format remains incomplete.
 
-No verified Docker targets yet.
+- [symphonia-bundle-mp3 / Rust](rust/symphonia_bundle_mp3/README.md)

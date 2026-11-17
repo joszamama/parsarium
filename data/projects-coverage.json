@@ -982,11 +982,11 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 0,
-    "containerized_verified": 0,
+    "catalog_paths": 4,
+    "containerized_verified": 4,
     "staged": 0,
-    "standard_api_paths": 0,
-    "standard_containerized_verified": 0,
+    "standard_api_paths": 2,
+    "standard_containerized_verified": 2,
     "standard_staged": 0,
     "cells": [
       {
@@ -1088,18 +1088,18 @@
       {
         "format": "json",
         "ecosystem": "python",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
+        "standard_api_paths": 1,
+        "standard_containerized_verified": 1,
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_one_verified_bounded_search_pending",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "This is a one-parser pilot, not a completed popularity search or top-ten claim. Nine named package leads were inspected via PyPI/project documentation; the bounded PyPI Simple Index name search remains pending. Eight leads have no pinned control result. The verified Python standard path explicitly selects the pure-Python json decoder/scanner; CPython's default built-in _json accelerator is not covered or ranked. PyPI Stats downloads are package-level adoption signals, not JSON-specific use."
       },
       {
         "format": "json",
@@ -1232,8 +1232,8 @@
       {
         "format": "mp3",
         "ecosystem": "rust",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1241,9 +1241,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_one_path_search_bounded",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "Pilot cell: one verified path, chosen as the highest crates.io 90-day download count (10,651,437) among hits that contain an MPEG audio frame parser. The facade crate symphonia (11,469,426) ranks higher but re-exports the same family. 11 frame-level leads remain unverified, so the count of one reflects pilot scope, not a search result. Search covers only the first 100 hits of six queries (591 hits, 350 unique) captured 2026-11-17; the 'mp3' query alone reports 1119 matches. Recent downloads include transitive dependency pulls (Symphonia is a dependency of rodio and others) and are an adoption proxy, not evidence of direct MP3 parsing use. Two untagged CBR controls (MPEG-1 44.1 kHz mono, MPEG-2 22.05 kHz stereo) do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support."
       },
       {
         "format": "xml",
@@ -1344,24 +1344,24 @@
       {
         "format": "xml",
         "ecosystem": "python",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
-        "standard_api_paths": 0,
-        "standard_containerized_verified": 0,
+        "standard_api_paths": 1,
+        "standard_containerized_verified": 1,
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_one_third_party_one_standard_verified_bounded_search_pending",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "This is a one-parser pilot, not a completed registry search or top-ten claim. Nine named leads were inspected from PyPI/project documentation; the bounded PyPI Simple Index search remains pending. Eight third-party leads lack pinned control checks. The standard API inventory currently verifies ElementTree only; Expat, DOM and SAX API paths remain documented leads. xmltodict and ElementTree share the Expat syntax engine. The valid control exercises a common XML 1.0 subset, not full XML 1.0 conformance. PyPI Stats package downloads are not XML-specific use."
       },
       {
         "format": "xml",
         "ecosystem": "rust",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1369,9 +1369,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_one_path_search_bounded",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "Pilot cell: one verified path, chosen as the highest crates.io 90-day download count (178,628,779) among search hits that are XML parsers. Higher-ranked or comparable hits that are not XML parsers (windows, pulldown-cmark) are excluded. 16 XML parser leads remain unverified (top: xmlparser 52,247,004, roxmltree 42,073,295, xml-rs 32,180,109), so the count of one reflects pilot scope, not a search result. Search covers only the first 100 hits of seven queries (642 hits, 483 unique) captured 2026-11-17; the 'xml' query alone reports 5931 matches. Recent downloads include transitive dependency pulls and are an adoption proxy. Two small UTF-8 controls without DOCTYPE do not establish DTD, external entity, non-UTF-8 encoding, XML 1.1, or attribute-value whitespace normalization behaviour."
       }
     ]
   }

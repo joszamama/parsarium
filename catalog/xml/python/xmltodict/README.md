@@ -1,8 +1,31 @@
 # xmltodict — XML / Python
 
-- **Pinned package:** `xmltodict` 1.0.4, [MIT license](https://pypi.org/project/xmltodict/1.0.4/).
-- **Documented input API:** [`xmltodict.parse()`](https://pypi.org/project/xmltodict/) over a local binary file-like stream, with namespace processing enabled.
-- **Valid control:** [`two-items.xml`](../../../../controls/xml/two-items.xml). The parser returns the `library` root namespace, two `item` children, first `id` `7`, decoded `A & B`, and decoded `π`.
-- **Underlying parser family:** CPython `pyexpat` over Expat 2.10.0. The [Docker receipt](../../../../projects/xml/python/xmltodict/verification.json) records 97 `xmltodict.py` lines and 2,330 Expat lines, including 1,615 in `xmlparse.c`. The [AFL++ receipt](../../../../fuzzing/afl-native/xml/python/xmltodict/verification.json) records 3,136 source-derived tuples. This family is shared with ElementTree.
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-[Runnable harness](../../../../projects/xml/python/xmltodict/README.md) · [source lock](../../../../data/python/xml/source-lock.json)
+- **Pinned release:** `1.0.4`
+- **License:** MIT
+- **Parser family:** xmltodict over CPython pyexpat / Expat
+- **Local input API:** `xmltodict.parse(BytesIO(local UTF-8 XML bytes), process_namespaces=True, disable_entities=True)`
+- **Documentation:** [API reference](<https://pypi.org/project/xmltodict/>)
+- **Valid control:** [`controls/xml/two-items.xml`](../../../../controls/xml/two-items.xml)
+- **Catalog evidence:** [parser record](../../../../data/python/xml/parsers.json) · [control result](../../../../data/python/xml/verification.json)
+
+## Observed control result
+
+```json
+{
+  "root": "library",
+  "namespace": "urn:parsarium:xml:pilot",
+  "child_count": 2,
+  "first_item_id": "7",
+  "first_item_text": "A & B",
+  "second_item_text": "π"
+}
+```
+
+## Run this target
+
+```sh
+python3 parsarium.py build xml python xmltodict
+python3 parsarium.py run xml python xmltodict controls/xml/two-items.xml
+```

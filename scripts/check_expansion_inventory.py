@@ -107,11 +107,14 @@ for fmt in FORMATS:
         if s["status"] == "none_verified_negative_probe":
             check(any(r["kind"] == "negative_probe" for r in s["receipts"]), f"{tag}: negative status without probe")
 
-# No leakage into the selected catalog
+# The research snapshot does not select packages. Later pilot selections live
+# in the separate, explicitly incomplete pilot catalog, never the active one.
 cells = json.loads((ROOT / "data/cells.json").read_text())["cells"]
 check(not any(c["format"] in FORMATS for c in cells), "expansion format leaked into data/cells.json")
-for fmt in FORMATS:
-    check(not (ROOT / "catalog" / fmt).exists(), f"catalog/{fmt} must not exist")
+pilot = json.loads((ROOT / "data/pilot-cells.json").read_text())["cells"]
+pilot_formats = {c["format"] for c in pilot}
+for fmt in ("json", "xml", "mp3"):
+    check(fmt in pilot_formats, f"{fmt} missing from incomplete pilot catalog")
 check(not (ROOT / "data/curation/preten/c/json").exists(), "expansion leaked into curation")
 
 if errors:

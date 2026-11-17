@@ -2,9 +2,9 @@
 
 Pinned release: `1.0.4`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and shared Expat family](../../../../catalog/xml/python/xmltodict/README.md)
+[API, control result, and parser family](../../../../catalog/xml/python/xmltodict/README.md)
 
-Run from the repository root:
+## Run from the repository root
 
 ```sh
 python3 parsarium.py build xml python xmltodict
@@ -14,4 +14,4 @@ python3 parsarium.py afl build xml python xmltodict
 python3 parsarium.py afl prepare xml python xmltodict runs/xml-xmltodict-afl
 ```
 
-`CORPUS_DIR` contains XML files for one-file replay. AFL++ preparation writes a run plan and seeds; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.

@@ -11,6 +11,6 @@ This format is incomplete across the eight ecosystems. Each row reports only doc
 | [Go](go/README.md) | pilot_not_started | 0 | 0 |
 | [Java](java/README.md) | pilot_not_started | 0 | 0 |
 | [JavaScript](javascript/README.md) | pilot_not_started | 0 | 0 |
-| [Python](python/README.md) | pilot_not_started | 0 | 0 |
+| [Python](python/README.md) | pilot_one_verified_bounded_search_pending | 1 | 1 |
 | [Rust](rust/README.md) | pilot_not_started | 0 | 0 |
 | [PHP](php/README.md) | pilot_not_started | 0 | 0 |

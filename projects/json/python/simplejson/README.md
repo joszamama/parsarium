@@ -2,9 +2,9 @@
 
 Pinned release: `4.3.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control, result, and parser family](../../../../catalog/json/python/simplejson/README.md)
+[API, control result, and parser family](../../../../catalog/json/python/simplejson/README.md)
 
-Run from the repository root:
+## Run from the repository root
 
 ```sh
 python3 parsarium.py build json python simplejson
@@ -14,4 +14,4 @@ python3 parsarium.py afl build json python simplejson
 python3 parsarium.py afl prepare json python simplejson runs/json-simplejson-afl
 ```
 
-`CORPUS_DIR` contains files to replay individually. The AFL++ prepare command writes a seeded run directory; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
