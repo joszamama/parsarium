@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "cpp",
+  "pilot": true,
+  "package": "duckdb",
+  "release": "2.0.0",
+  "catalog_parser": "data/cpp/sql/parsers.json",
+  "source_lock": "projects/sql/cpp/duckdb/source-lock.json",
+  "source_sha256": "7e89053255046bfb26afbd7f524a2fb84df7dbef496aa911ea35e4a1182fdc00",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/usr/bin/python3",
+    "/work/summarize.py",
+    "/input/case"
+  ],
+  "dialect": "DuckDB built-in grammar (Parser::GetBuiltinParser, default parser options; no client context)",
+  "parser_family": "DuckDB PEG parser: since v2.0.0 a packrat PEG matcher over DuckDB's own .gram grammar with its own tokenizer and transformer to ParsedExpression/TableRef/QueryNode trees; DuckDB 1.x (the libduckdb Debian packaging lineage) used a libpg_query-derived bison grammar, which v2.0.0 no longer contains",
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "oracle": "The replay walks the SQLStatement trees that Parser::ParseQuery returns (SelectNode select_list, from_table BaseTableRef/JoinRef tree, where_clause, groups, ORDER modifiers; InsertQueryNode qualified_name, columns and VALUES ExpressionListRef; FunctionExpression names; ConstantExpression literals) and prints the summary; run-control requires the hand-written oracle summary. DuckDB's transformer stores COUNT(*) as the zero-argument function count_star, which the adapter reports as count.",
+  "api": "duckdb::Parser::GetBuiltinParser(); Parser::ParseQuery(local SQL text) -> Parser::statements (vector<unique_ptr<SQLStatement>>)",
+  "coverage": "LLVM source coverage of the pinned DuckDB v2.0.0 src/parser sources reached by Parser::ParseQuery (PEG tokenizer, packrat matcher, transformer and parsed-node constructors); the core library is built without the shell, tests, unity sources and optional extensions",
+  "coverage_subject_prefix": "/work/build-cov/src/parser/",
+  "format_specific_coverage_file_suffix": "/src/parser/peg/transformer/transform_select.cpp",
+  "afl_entrypoint": "/work/parser-probe",
+  "scope": "SQL statements from local bytes parsed by duckdb::Parser with the built-in grammar and no database or client context; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Binding, planning, execution, extensions' parser hooks and dialect-specific syntax are untested."
+}

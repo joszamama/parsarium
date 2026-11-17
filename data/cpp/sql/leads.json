@@ -106,13 +106,13 @@
     },
     {
       "name": "duckdb",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 40,
       "metric_error": null,
-      "latest_release_observed": null,
-      "family": "DuckDB transformer over a libpg_query-derived PostgreSQL grammar",
+      "latest_release_observed": "2.0.0",
+      "family": "DuckDB PEG parser (own grammar and transformer)",
       "documented_api_lead": "duckdb::Parser::ParseQuery",
-      "reason": "DuckDB engine. duckdb::Parser::ParseQuery in the public parser header returns SQLStatement objects (SelectNode, TableRef, ParsedExpression trees). DuckDB uses a libpg_query-derived PostgreSQL grammar plus its own transformer, so it shares the PostgreSQL grammar family. Not yet run: a source build of the engine with coverage is large."
+      "reason": "DuckDB engine (Debian source duckdb). duckdb::Parser::GetBuiltinParser().ParseQuery parses both valid controls without a database or client context into SQLStatement trees that give the oracle summary (COUNT(*) is stored as count_star and reported as count). v2.0.0 replaced the libpg_query-derived bison grammar of DuckDB 1.x with its own PEG grammar, so it is no longer in the PostgreSQL grammar family."
     },
     {
       "name": "libodb",
