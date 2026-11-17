@@ -1,10 +1,10 @@
 {
   "ecosystem": "c",
   "format": "yaml",
-  "status": "pilot_one_verified_bounded_search",
+  "status": "pilot_two_verified_bounded_search",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 1,
+  "verified_third_party_count": 2,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "yaml"
@@ -17,16 +17,17 @@
   },
   "leads_recorded": 3,
   "leads_by_status": {
-    "selected": 1,
-    "unresolved": 2
+    "selected": 2,
+    "unresolved": 1
   },
   "ranking_metric": "Debian popcon sourcemax/by_inst installations of the lead's source package",
-  "uncertainty": "1 C YAML path(s) pass both schema-neutral YAML controls with the exact typed tree, parser source coverage and stable AFL++ feedback. C YAML libraries return scalars as text with a style and do not resolve plain scalars to types, so the harnesses type plain scalars with the YAML 1.2 core-schema patterns; structure, escapes, block scalars, document markers and alias expansion come from the parser, while the int/float/bool/null distinction is adapter-side. libyaml is the family under PyYAML's CLoader, PHP ext-yaml, Ruby Psych (the controls' cross-check) and Rust unsafe-libyaml, so it is not independent of those paths. Unselected leads: libfyaml, libcyaml (see leads.json). The bounded Debian source-name search for 'yaml' (90 hits) is in the registry snapshot. Debian installations mostly reflect dependencies and miss vendored copies. The controls do not test tags, merge keys, multi-document streams, complex keys, YAML 1.1-only scalars or malformed input. ISO C documents no YAML API.",
+  "uncertainty": "2 C YAML path(s) pass both schema-neutral YAML controls with the exact typed tree, parser source coverage and stable AFL++ feedback. C YAML libraries return scalars as text with a style and do not resolve plain scalars to types, so the harnesses type plain scalars with the YAML 1.2 core-schema patterns; structure, escapes, block scalars, document markers and alias expansion come from the parser, while the int/float/bool/null distinction is adapter-side. libyaml is the family under PyYAML's CLoader, PHP ext-yaml, Ruby Psych (the controls' cross-check) and Rust unsafe-libyaml, so it is not independent of those paths. Unselected leads: libcyaml (see leads.json). The bounded Debian source-name search for 'yaml' (90 hits) is in the registry snapshot. Debian installations mostly reflect dependencies and miss vendored copies. The controls do not test tags, merge keys, multi-document streams, complex keys, YAML 1.1-only scalars or malformed input. ISO C documents no YAML API.",
   "runtime_evidence": "data/c/yaml/standard.json",
   "registry_snapshot": "data/c/yaml/registry-snapshot.json",
   "unresolved_leads": "data/c/yaml/leads.json",
-  "selection": "Control-verified C YAML paths ranked by Debian popcon sourcemax installations from the pinned snapshot: libyaml 0.2.5 (204,120).",
+  "selection": "Control-verified C YAML paths ranked by Debian popcon sourcemax installations from the pinned snapshot: libyaml 0.2.5 (204,120), libfyaml 0.9.6 (7,482).",
   "third_party_evidence": "data/c/yaml/parsers.json",
   "third_party_control_results": "data/c/yaml/verification.json",
-  "libyaml_source_lock": "projects/yaml/c/libyaml/source-lock.json"
+  "libyaml_source_lock": "projects/yaml/c/libyaml/source-lock.json",
+  "libfyaml_source_lock": "projects/yaml/c/libfyaml/source-lock.json"
 }

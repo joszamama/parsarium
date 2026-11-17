@@ -462,5 +462,470 @@
       "limitation": "Installations of binary packages built from the libyaml source, mostly pulled in as a dependency of PyYAML, Ruby and other tools; not YAML-specific use."
     },
     "project": "projects/yaml/c/libyaml"
+  },
+  {
+    "name": "libfyaml",
+    "version": "0.9.6",
+    "license": "MIT",
+    "license_evidence": "Pinned libfyaml-0.9.6 release tarball LICENSE (MIT permission notice, copyright Pantelis Antoniou); the image build checks the notice",
+    "input_api": "struct fy_document *fy_document_build_from_string(const struct fy_parse_cfg *cfg, const char *str, size_t len) with cfg.flags = FYPCF_QUIET | FYPCF_RESOLVE_DOCUMENT | FYPCF_DEFAULT_VERSION_1_2 | FYPCF_JSON_NONE",
+    "documentation": "https://github.com/pantoniou/libfyaml/blob/v0.9.6/include/libfyaml/libfyaml-core.h",
+    "documentation_note": "The pinned libfyaml-core.h documents fy_document_build_from_string (parse the provided string as a YAML source with a parse configuration; returns the document or NULL on error) and FYPCF_RESOLVE_DOCUMENT (automatically resolve produced documents, which expands aliases), and the node accessors fy_node_get_type, fy_node_get_style, fy_node_get_scalar, fy_node_sequence_iterate and fy_node_mapping_iterate used by the replay.",
+    "source": "https://github.com/pantoniou/libfyaml/releases/download/v0.9.6/libfyaml-0.9.6.tar.gz",
+    "source_sha256": "a59cc3331e2eb903ec36933ad52a45888041cac31e44f553a00511131242c483",
+    "scope": "One YAML 1.2 document from a bounded local byte buffer built and alias-resolved by libfyaml into an fy_document tree; schema-neutral YAML 1.2 control subset only",
+    "family": "libfyaml (src/lib fy-parse/fy-input/fy-atom/fy-docbuilder/fy-doc)",
+    "family_note": "Own C scanner, parser and document builder written independently of libyaml; no selected path in another ecosystem is known to wrap it.",
+    "typing_caveat": "libfyaml returns scalar text and node style; the document API does not type plain scalars. The harness types plain scalars with the YAML 1.2 core-schema patterns (null, bool, int, float, otherwise str) and every quoted or block scalar as str. Structure, escapes, block-scalar folding and chomping, document markers and alias resolution come from libfyaml; the int/float/bool/null distinction is adapter-side.",
+    "release_note": "0.9.6 is the latest non-prerelease upstream release (2026-03-15); the 1.0.0 release candidates are prereleases. The Debian popcon value is for the libfyaml source package, whatever Debian release ships.",
+    "control": "controls/yaml/catalog.yaml",
+    "expected_output": {
+      "max_depth": 3,
+      "nodes": {
+        "bool": 2,
+        "float": 2,
+        "int": 7,
+        "map": 7,
+        "null": 1,
+        "seq": 2,
+        "str": 13
+      },
+      "root": "map",
+      "tree": [
+        "map",
+        [
+          [
+            "kind",
+            [
+              "str",
+              "catalog"
+            ]
+          ],
+          [
+            "version",
+            [
+              "int",
+              "2"
+            ]
+          ],
+          [
+            "ratio",
+            [
+              "float",
+              "0.25"
+            ]
+          ],
+          [
+            "offset",
+            [
+              "int",
+              "-17"
+            ]
+          ],
+          [
+            "enabled",
+            [
+              "bool",
+              true
+            ]
+          ],
+          [
+            "retired",
+            [
+              "bool",
+              false
+            ]
+          ],
+          [
+            "missing",
+            [
+              "null"
+            ]
+          ],
+          [
+            "title",
+            [
+              "str",
+              "Café \"quoted\"\tend"
+            ]
+          ],
+          [
+            "single",
+            [
+              "str",
+              "it's here"
+            ]
+          ],
+          [
+            "tags",
+            [
+              "seq",
+              [
+                [
+                  "str",
+                  "alpha"
+                ],
+                [
+                  "str",
+                  "beta"
+                ],
+                [
+                  "str",
+                  "gamma delta"
+                ]
+              ]
+            ]
+          ],
+          [
+            "point",
+            [
+              "map",
+              [
+                [
+                  "lat",
+                  [
+                    "int",
+                    "1"
+                  ]
+                ],
+                [
+                  "lon",
+                  [
+                    "float",
+                    "-2.5"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "items",
+            [
+              "seq",
+              [
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "7"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "first item"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "line one\nline two\n"
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "8"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "Zürich"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "folded text\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "defaults",
+            [
+              "map",
+              [
+                [
+                  "retries",
+                  [
+                    "int",
+                    "3"
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "base"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "service",
+            [
+              "map",
+              [
+                [
+                  "settings",
+                  [
+                    "map",
+                    [
+                      [
+                        "retries",
+                        [
+                          "int",
+                          "3"
+                        ]
+                      ],
+                      [
+                        "label",
+                        [
+                          "str",
+                          "base"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "edge"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ],
+      "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b"
+    },
+    "differential_control": "controls/yaml/order.yaml",
+    "differential_expected_output": {
+      "max_depth": 4,
+      "nodes": {
+        "bool": 1,
+        "float": 2,
+        "int": 5,
+        "map": 7,
+        "null": 1,
+        "seq": 5,
+        "str": 11
+      },
+      "root": "seq",
+      "tree": [
+        "seq",
+        [
+          [
+            "map",
+            [
+              [
+                "order",
+                [
+                  "str",
+                  "A-7"
+                ]
+              ],
+              [
+                "lines",
+                [
+                  "seq",
+                  [
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "Xé-1"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "2"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "12.5"
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "B '2'"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "1"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "0.75"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "flags",
+                [
+                  "seq",
+                  []
+                ]
+              ],
+              [
+                "meta",
+                [
+                  "map",
+                  []
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              [
+                "int",
+                "1"
+              ],
+              [
+                "seq",
+                [
+                  [
+                    "int",
+                    "2"
+                  ],
+                  [
+                    "int",
+                    "3"
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "k",
+                    [
+                      "str",
+                      "v"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "str",
+            "plain multi word"
+          ],
+          [
+            "str",
+            "line\nbreak"
+          ],
+          [
+            "str",
+            "kept\n  indented"
+          ],
+          [
+            "null"
+          ],
+          [
+            "bool",
+            false
+          ]
+        ]
+      ],
+      "tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46"
+    },
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package libfyaml",
+      "value": 7482,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "source_sha256": "9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8",
+      "snapshot": "data/c/yaml/registry-snapshot.json",
+      "limitation": "Installations of binary packages built from the libfyaml source, mostly as a dependency; not YAML-specific use."
+    },
+    "project": "projects/yaml/c/libfyaml"
   }
 ]
