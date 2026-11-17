@@ -15,6 +15,7 @@ Four positive-signal C JSON third-party paths pass two valid controls with forma
 - [jq](jq/README.md) — verified API path
 - [libfastjson](libfastjson/README.md) — verified API path
 - [yyjson](yyjson/README.md) — verified Docker harness
+- [json-parser](json-parser/README.md) — verified API path
 
 ## Standard and runtime APIs
 

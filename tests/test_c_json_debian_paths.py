@@ -14,6 +14,7 @@ PATHS = {
     "json-glib": ("json-glib", 163249),
     "jq": ("jq", 141218),
     "libfastjson": ("libfastjson", 91226),
+    "json-parser": ("libjsonparser", 844),
 }
 
 

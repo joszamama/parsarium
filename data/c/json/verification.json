@@ -13,7 +13,7 @@
     "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
     "nested_array_differential": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
   },
-  "control_meaning": "Valid RFC 8259 object and array controls include nested values, escapes, numbers, booleans, null and empty containers. The pinned parsers build value trees; their control output must match the exact nested JSON value. jansson and json-c also check integer/real type and key order; cJSON and yyjson are checked for semantic JSON value equality; JSON-GLib, jq and libfastjson are checked against Python json.loads with key order and integer/float kinds.",
+  "control_meaning": "Valid RFC 8259 object and array controls include nested values, escapes, numbers, booleans, null and empty containers. The pinned parsers build value trees; their control output must match the exact nested JSON value. jansson and json-c also check integer/real type and key order; cJSON and yyjson are checked for semantic JSON value equality; JSON-GLib, jq, libfastjson and json-parser are checked against Python json.loads with key order and integer/float kinds.",
   "third_party": [
     {
       "package": "jansson",
@@ -373,6 +373,70 @@
       },
       "exact_nested_structure_match": true,
       "parser_source_lines_covered": 1073,
+      "error": null
+    },
+    {
+      "package": "json-parser",
+      "version": "1.1.0",
+      "scope": "RFC 8259 JSON text parsed from a bounded local byte buffer into a json_value tree with default settings; observed valid control subset",
+      "command": "python3 scripts/run_project.py json c json-parser",
+      "receipt": "projects/json/c/json-parser/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "exact_nested_structure_match": true,
+      "parser_source_lines_covered": 446,
+      "format_specific_source_lines_covered": 446,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "strings": [
+          "A",
+          "two"
+        ],
+        "root": "array",
+        "top_level_items": 5
+      },
+      "differential_pass": true,
+      "family_status": "independent",
+      "parser_only_afl_feedback": "fuzzing/afl-native/json/c/json-parser/differential.json",
       "error": null
     }
   ],

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T15:20:06.739938+00:00",
+  "project": "json/c/json-parser",
+  "pass": true,
+  "feedback_kind": "afl_clang_fast_parser_scoped_edges_and_source_lines",
+  "probe": "projects/json/c/json-parser/parser-probe.c",
+  "probe_scope": "parse the local bytes and free the result; no tree traversal, printing, or result formatting",
+  "dom_oracle": "python_json_loads_order_and_number_kind_preserving",
+  "exact_tree_outputs_verified": true,
+  "base_project_receipt_sha256": "01fa96f9a97bc546f2aa12e73098a1dfd5a04a907436c794ab55ea39bcfc913e",
+  "overlay_receipt_sha256": "0c0fdc602bbbb244d0acf683f7749c992a1449766c34036a43ef806dce5e835c",
+  "base_image_id": "sha256:0afed30cd8c7957d30de9a88a929ed7d2973ce215063d1a41fdd159576948ce8",
+  "overlay_image_id": "sha256:b5bc293d3a6dd9101960f693c5a0f656b55ffb94db01100bd31d56458a059abb",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 297,
+  "allowlist": "projects/json/c/json-parser/afl-allowlist.txt",
+  "allowlist_entries": [
+    "src:json-parser-src/json.c"
+  ],
+  "afl_instrumented_objects": [
+    "json.o"
+  ],
+  "source_line_scope": "covered lines under /work/json-parser-src/ in the parser-only probe",
+  "repeats_per_control": 3,
+  "first_control": "controls/json/nested-object.json",
+  "second_control": "controls/json/nested-array.json",
+  "first_tree_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "root": "object",
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "second_tree_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "strings": [
+      "A",
+      "two"
+    ],
+    "root": "array",
+    "top_level_items": 5
+  },
+  "first_parser_lines": 488,
+  "second_parser_lines": 476,
+  "parser_line_difference": 30,
+  "first_only_lines_by_file": {
+    "json.c": 21
+  },
+  "second_only_lines_by_file": {
+    "json.c": 9
+  },
+  "first_afl_tuples": 113,
+  "second_afl_tuples": 108,
+  "afl_tuple_difference": 15,
+  "repeated_feedback_identical": true,
+  "second_case_kind": "valid_control"
+}

@@ -1,6 +1,6 @@
 # C × JSON: selected parsers (pilot)
 
-Seven verified third-party paths, ranked by one Debian metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Eight verified third-party paths, ranked by one Debian metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -15,6 +15,7 @@ Debian popcon `sourcemax` installations by source package, captured 2026-11-17 f
 | 5 | [jq (libjq)](https://github.com/jqlang/jq/wiki/C-API:-jv) | 1.8.2 | `jq` | 141,218 | Own `jv_parse.c` reader into `jv` values |
 | 6 | [libfastjson](https://github.com/rsyslog/libfastjson/blob/v1.2609.0/json_tokener.h) | 1.2609.0 | `libfastjson` | 91,226 | json-c tokener family (rsyslog fork) |
 | 7 | [yyjson](https://github.com/ibireme/yyjson/blob/0.13.0/doc/API.md) | 0.13.0 | `yyjson` | 14,868 | Own native reader in `src/yyjson.c` |
+| 8 | [json-parser](https://github.com/json-parser/json-parser/blob/v1.1.0/README.md) | 1.1.0 | `libjsonparser` | 844 | Own single-file `json.c` |
 
 cJSON uses its documented `cJSON_ParseWithLengthOpts` local byte-buffer API. The [pinned source archive](https://github.com/DaveGamble/cJSON/releases/tag/v1.7.19) has SHA-256 `7fa616e3046edfa7a28a32d5f9eacfd23f92900fe1f8ccd988c1662f30454562` and an MIT LICENSE. Its Docker control traverses the parsed cJSON tree and compares the full nested JSON value to the valid object control. Two repeated valid controls produce identical parser-source LLVM regions and AFL++ bitmaps; the valid nested-array control changes 39 parser features and 29 AFL tuples ([receipt](afl-feedback.json)).
 
@@ -26,13 +27,14 @@ jq 1.8.2 comes from the [official release asset](https://github.com/jqlang/jq/re
 
 libfastjson 1.2609.0 comes from the [rsyslog release download](https://download.rsyslog.com/libfastjson/libfastjson-1.2609.0.tar.gz) for tag v1.2609.0, SHA-256 `7cd6f78c1c07f4140f6976a9a0e0048bcaa7292329c6ac2c0e070383d83d8edd` (MIT). Debian forky/sid ship this version; trixie ships 1.2304.0. It is rsyslog's fork of json-c and shares the json-c tokener family with the json-c row; PROTOCOL.md allows a shared family as a separate package path when it is recorded. The harness calls the [documented](https://github.com/rsyslog/libfastjson/blob/v1.2609.0/json_tokener.h) `fjson_tokener_parse_ex` in `FJSON_TOKENER_STRICT` mode on the exact length and rejects non-whitespace after `tok->char_offset`. Its fjson_object tree matches each valid control with key order and int/double kinds. libfastjson documents that it does not support NUL inside strings. The base control covers 729 library lines (362 in `json_tokener.c`). The parser-only probe instruments `json_tokener.c`, `json_object.c`, `arraylist.c` and `printbuf.c`; three runs per control repeat exactly and the controls differ by 21 of 220/203 tuples and 15 source lines ([receipt](../../../fuzzing/afl-native/json/c/libfastjson/differential.json)).
 
+json-parser 1.1.0 (Debian source `libjsonparser`, same version) is pinned from its [release tag](https://github.com/json-parser/json-parser/releases/tag/v1.1.0) archive, SHA-256 `5c278793269dbbf98d5f1592c797234581df69088d2838a14154b4af52ebd133` (BSD-2-Clause). The harness calls the [documented](https://github.com/json-parser/json-parser/blob/v1.1.0/README.md) `json_parse_ex(settings, bytes, length, error)` with default settings. Its json_value tree keeps member order and separate `json_integer`/`json_double` kinds and equals `json.loads` for both controls. The base control covers 446 lines of its single `json.c`. The parser-only probe instruments only `json.c`; three runs per control repeat exactly and the controls differ by 15 of 113/108 tuples and 30 source lines ([receipt](../../../fuzzing/afl-native/json/c/json-parser/differential.json)). Its rank rests on 844 Debian installations.
+
 [Parser records](parsers.json) · [control results](verification.json) · [standard inventory](standard.json). ISO C documents no JSON parser API.
 
 ## Unresolved leads
 
 | Lead | Popcon installations | Status |
 | --- | ---: | --- |
-| [json-parser](https://github.com/json-parser/json-parser/releases/tag/v1.1.0) | 844 | Not control-tested |
 | [parson](https://github.com/kgabis/parson) | unavailable | Verified technically; no Debian source package |
 | [frozen](https://github.com/cesanta/frozen) | 16 | Fails the nested-object control |
 | [jsmn](https://github.com/zserge/jsmn) | 11 | Tokenizer only; not eligible for the value gate |

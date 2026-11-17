@@ -375,5 +375,59 @@
       "snapshot": "data/c/json/registry-snapshot.json"
     },
     "project": "projects/json/c/yyjson"
+  },
+  {
+    "name": "json-parser",
+    "version": "1.1.0",
+    "license": "BSD-2-Clause",
+    "license_evidence": "Pinned v1.1.0 LICENSE (BSD 2-clause) in the source archive",
+    "input_api": "json_parse_ex(json_settings *settings, const json_char *json, size_t length, char *error)",
+    "documentation": "https://github.com/json-parser/json-parser/blob/v1.1.0/README.md",
+    "documentation_note": "The pinned README documents json_parse and json_parse_ex with an explicit length and the json_value type fields (object members, arrays, json_integer, json_double, string pointer and length). Debian source libjsonparser 1.1.0 matches this release.",
+    "source": "https://github.com/json-parser/json-parser/releases/tag/v1.1.0",
+    "scope": "RFC 8259 JSON text parsed from a bounded local byte buffer into a json_value tree with default settings; observed valid control subset",
+    "family": "json-parser single-file parser (json.c)",
+    "family_note": "One C file (json.c) parses in two passes into a json_value tree with ordered object members, int64 integers and doubles. No external JSON library. Formerly udp/json-parser; Debian packages it as libjsonparser.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package libjsonparser",
+      "value": 844,
+      "rank": 7431,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "project": "projects/json/c/json-parser"
   }
 ]
