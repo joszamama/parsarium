@@ -14,6 +14,6 @@ python3 parsarium.py afl build mp3 java jaudiotagger
 python3 parsarium.py afl prepare mp3 java jaudiotagger runs/mp3-jaudiotagger-afl
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign. This harness parses the first four-byte MPEG Layer III frame header at byte zero. It reports only verified header fields and does not decode the stream.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
 
-**Coverage limit:** On the valid MPEG-2 control, jaudiotagger's higher-level `MP3AudioHeader(File)` reports start byte 104 and five estimated frames, while the independent oracle records start byte zero and 12 frames. The selected low-level header API reports correct version, layer, rate, channels, and bitrate. Frame size, sample count, duration, and whole-stream frame count are outside the claimed result.
+**Coverage limit:** First four-byte frame header of two valid untagged CBR MPEG Layer III files only; no frame count, frame size, duration, whole-stream consistency, PCM decode, ID3, VBR, or malformed-input claim. The higher-level MP3AudioHeader(File) misidentifies the valid 22.05 kHz control start at byte 104 and estimates 5 rather than 12 frames; MPEGFrameHeader.getFrameLength/getNoOfSamples are also wrong for that MPEG-2 header and are not reported.

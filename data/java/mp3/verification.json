@@ -98,6 +98,37 @@
       "parser_source_lines_covered": 1724,
       "format_specific_source_lines_covered": 656,
       "format_specific_source": "javazoom/jl/decoder/LayerIIIDecoder.java"
+    },
+    {
+      "package": "jaudiotagger",
+      "group": "net.jthink",
+      "version": "3.0.1",
+      "scope": "First four-byte MPEG Layer III frame header from local untagged bytes: version, layer, sample rate, channels and bitrate only; no whole-stream or PCM claim",
+      "command": "python3 scripts/run_project.py mp3 java jaudiotagger",
+      "receipt": "projects/mp3/java/jaudiotagger/verification.json",
+      "pass": true,
+      "output": {
+        "codec": "MP3",
+        "mpeg_version": "MPEG-1",
+        "layer": "Layer 3",
+        "sample_rate": 44100,
+        "channels": 1,
+        "bitrate_kbps": 64
+      },
+      "differential_output": {
+        "codec": "MP3",
+        "mpeg_version": "MPEG-2",
+        "layer": "Layer 3",
+        "sample_rate": 22050,
+        "channels": 2,
+        "bitrate_kbps": 32
+      },
+      "differential_receipt": "data/java/mp3/jaudiotagger-feedback-differential.json",
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 221,
+      "format_specific_source_lines_covered": 221,
+      "format_specific_source": "org/jaudiotagger/audio/mp3/MPEGFrameHeader.java",
+      "scope_limit": "First four-byte frame header of two valid untagged CBR MPEG Layer III files only; no frame count, frame size, duration, whole-stream consistency, PCM decode, ID3, VBR, or malformed-input claim. The higher-level MP3AudioHeader(File) misidentifies the valid 22.05 kHz control start at byte 104 and estimates 5 rather than 12 frames; MPEGFrameHeader.getFrameLength/getNoOfSamples are also wrong for that MPEG-2 header and are not reported."
     }
   ],
   "standard": []
