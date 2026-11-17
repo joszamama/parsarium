@@ -28,15 +28,28 @@ Receipts: [sqlparser](../../../projects/sql/rust/sqlparser/verification.json) an
 | datafusion-sql | 8,022,751 | excluded | sqlparser-rs |
 | sqlformat | 5,159,931 | excluded | — |
 | pg_query | 2,607,956 | selected | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| sqllogictest | 1,118,279 | excluded | — |
 | sqlite3-parser | 1,003,820 | selected | SQLite grammar (lemon-rs port of SQLite's Lemon parse.y) |
+| libsql-sqlite3-parser | 566,930 | excluded | SQLite grammar (lemon-rs port of SQLite's Lemon parse.y) |
 | polyglot-sql | 113,477 | unresolved | polyglot-sql |
 | gluesql-core | 83,297 | excluded | sqlparser-rs |
+| fsqlite-parser | 70,368 | excluded | fsqlite hand-written parser |
+| sqlparser-dsql | 42,811 | excluded | sqlparser-rs recursive-descent parser |
+| spacetimedb-sql-parser | 26,247 | excluded | sqlparser-rs (wrapper) |
 | sql_query_builder | 15,937 | excluded | — |
 | databend-common-ast | 6,616 | selected | Databend SQL parser (logos tokenizer, nom/pratt combinators) |
+| sqlparser-lance | 6,479 | excluded | sqlparser-rs recursive-descent parser |
 | qusql-parse | 3,272 | selected | qusql-parse hand-written lexer and recursive-descent parser |
+| typedpg_pg_query | 2,424 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | spg-sql | 2,268 | selected | spg-sql hand-written PostgreSQL-dialect lexer and recursive-descent parser |
+| oxisqlite-sqlite3-parser | 2,184 | unresolved | SQLite grammar (lemon-rs port of SQLite's Lemon parse.y) |
+| proof-of-sql-parser | 1,897 | excluded | Proof of SQL LALRPOP grammar over sqlparser-rs types |
 | sqlglot-rust | 1,707 | selected | sqlglot-rust tokenizer and recursive-descent parser (sqlglot-inspired) |
+| turso_sqlite3_parser | 1,707 | unresolved | SQLite grammar (lemon-rs port of SQLite's Lemon parse.y) |
 | nom-sql | 1,551 | selected | nom-sql nom combinator parser (MySQL subset) |
+| sql-ast | 1,472 | excluded | sqlparser-rs recursive-descent parser |
+| banshee_parser | 1,234 | unresolved | banshee recovering PostgreSQL CST parser |
+| pgmold-sqlparser | 1,015 | excluded | sqlparser-rs recursive-descent parser |
 | sql-parse | 746 | excluded | qusql-parse hand-written lexer and recursive-descent parser (predecessor) |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).
