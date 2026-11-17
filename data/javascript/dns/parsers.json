@@ -219,5 +219,116 @@
         "share_of_dnsquery": 0.298
       }
     }
+  },
+  {
+    "name": "dns2",
+    "version": "3.1.1",
+    "license": "MIT",
+    "license_evidence": "package.json \"license\": \"MIT\" and LICENSE in the npm tarball (sha256 f4e24147...), checked in the image",
+    "input_api": "Packet.parse(buffer: Buffer) -> Packet",
+    "documentation": "https://github.com/lsongdev/node-dns/blob/master/README.md",
+    "documentation_note": "The npm tarball's README.md (3.1.1) documents Packet.parse(buffer), its Packet.DecodeError and the packet.errors array; the link is to the default branch README.",
+    "source": "https://www.npmjs.com/package/dns2/v/3.1.1",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dns2 own decoder (packet.js)",
+    "family_note": "Own pure-JavaScript decoder with no dependencies (packet.js over its bit reader lib/reader.js); 5 of its 1,602 distinct non-test source lines occur in dns-packet 5.6.1. The package also ships UDP/TCP/DoH clients and servers; the harness only calls Packet.parse and constructs no client or server. dns2 decodes the reserved Z bit, AD and CD as separate header fields, which the harness packs into z. A and AAAA text are dns2's own (its toIPv6 compresses the longest zero run). The harness rejects a parse that reports per-record DecodeErrors. Because the documented entry point is require('dns2'), module-load lines of the client and server files count toward the package line total; packet.js alone covers 767 lines on the response control.",
+    "project": "projects/dns/javascript/dns2",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
+      "value": 304498,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/dns2",
+      "captured_at_utc": "2026-11-17T16:37:41.756116+00:00",
+      "snapshot": "data/javascript/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 3,
+    "afl_feedback": "data/javascript/dns/dns2-feedback-differential.json",
+    "source_overlap_with_dns_packet": {
+      "method": "distinct stripped, non-empty, non-comment lines of the non-test .js sources compared with set intersection against dns-packet 5.6.1",
+      "distinct_lines": 1602,
+      "dns_packet_distinct_lines": 1106,
+      "shared_distinct_lines": 5,
+      "share": 0.003
+    }
   }
 ]

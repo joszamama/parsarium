@@ -1,0 +1,92 @@
+{
+  "kind": "third_party",
+  "api": "Packet.parse(buffer) from dns2 (require('dns2').Packet) on a local Buffer; numeric type and class fields as decoded; no client or server is constructed",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T19:54:14.095089+00:00",
+  "manifest": "projects/dns/javascript/dns2/manifest.json",
+  "image_id": "sha256:297c74e3ef40d6bc6cad29906bb0f1cef5d2042b0f47bc210dd3e1e606100cb2",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-dns2-target@3.1.1 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- dns2@3.1.1"
+  ],
+  "source_sha256": "f4e2414760d24b67b6b1af7cc337a01a2e1914226b95521f740410100d0a843a",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "59773182711518fe4e903d145b29843e510c082d09a5c523bf9406f1342a9ee7",
+    "fuzz.js": "3db3629bd254e0ea0a79d550170272ff537a6c9e9c59f4e516b32f2ee5568476",
+    "harness.js": "b504ae4ec5082b82f738d33c507c580c131e29d177aea90f973113350206445c",
+    "manifest.json": "a16d5780cbc0dce87e784a3e6d3888acf17d0bb5afe624fb3e11804a51f4feb7",
+    "package-lock.json": "df241dd8b051955af1df5274d8d55005c8729434511a0c1e825ac938081d802d",
+    "package.json": "56a93e837e1719b1ea993261df8caae2af7ae30a59147761cbd68698f3997a71",
+    "replay.js": "4303f822c933f19d7b35d977142a94bc9f14033c57db00fb3b3ba64c2a69d31e",
+    "run-control.js": "e47fc49fbaf3993914975cdd1abf38880cdfa01e6dbeef821b17f989ad1551e4",
+    "source-lock.json": "078ffc9db3e981294409a7eef66ec6b41e4717845268657f683f838e334cd0e0"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 14,
+  "parser_source_lines_covered": 1070,
+  "format_specific_source_lines_covered": 767,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/javascript/dns2/target/coverage/coverage.json",
+  "pass": true
+}
