@@ -1,6 +1,6 @@
 # JAVASCRIPT × JSON: selected parsers (pilot)
 
-1 control-verified third-party path selected. The ceiling is ten; this pilot builds only the highest-download lead that has its own RFC 8259 parser and a documented local Buffer/stream API, and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+2 control-verified third-party paths selected. The ceiling is ten; this pilot verifies two high-download leads with their own JSON parsers and documented local stream APIs, and does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -9,6 +9,7 @@ npm downloads over 2026-10-17 to 2026-11-15 (30 days), observed 2026-11-17T03:16
 | Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [stream-json](https://github.com/uhop/stream-json/wiki/Parser) | 3.9.0 | 56,997,988 | One RFC 8259 JSON text from local bytes via parser() and Assembler | stream-json charCodeAt/regex streaming tokenizer |
+| 2 | [bfj](https://www.npmjs.com/package/bfj?activeTab=readme) | 9.1.4 | 18,016,242 | One complete JSON text from a local `Readable` via `parse(stream, {ndjson:false})` | bfj asynchronous JSON walker |
 
 ## Standard API (unranked)
 
@@ -40,8 +41,7 @@ Numeric leads from the same snapshot, not verified and not selected. Schema, poi
 | [fast-json-parse](https://www.npmjs.com/package/fast-json-parse) | 1.0.3 | 24,460,907 | delegates to json parse | parse.js wraps JSON.parse in try/catch; shares the V8 JSON.parse family. |
 | [jsonrepair](https://www.npmjs.com/package/jsonrepair) | 3.15.0 | 21,639,676 | not a value parser path | Repairs malformed JSON text into JSON text; not a value parser path. Not run. |
 | [@humanwhocodes/momoa](https://www.npmjs.com/package/@humanwhocodes/momoa) | 3.3.13 | 18,038,222 | own parser not selected | Own JSON tokenizer and AST parser (no JSON.parse call in 3.3.13); documented parse(text) takes a string. Not run. |
-| [bfj](https://www.npmjs.com/package/bfj) | 9.1.4 | 18,016,242 | own parser not selected | Own asynchronous streaming walker (no JSON.parse call in 9.1.4) with documented stream input; control not run in this one-package pilot. |
-| [@streamparser/json](https://www.npmjs.com/package/@streamparser/json) | 0.0.26 | 13,886,478 | own parser not selected | Own streaming tokenizer/parser (no JSON.parse call in 0.0.26); documented write(Uint8Array|string). Control not run in this one-package pilot. |
+| [@streamparser/json](https://www.npmjs.com/package/@streamparser/json) | 0.0.26 | 13,886,478 | own parser not selected | Own streaming tokenizer/parser (no JSON.parse call in 0.0.26); documented write(Uint8Array|string). Control not run in this two-path pilot. |
 | [lossless-json](https://www.npmjs.com/package/lossless-json) | 4.3.3 | 9,738,476 | own parser not selected | Own parser (JSON.parse appears only in a doc comment); documented parse(text) takes a string. Not run. |
 | [json-source-map](https://www.npmjs.com/package/json-source-map) | 0.6.1 | 5,940,263 | own parser not selected | Own parser producing pointer maps; string API. Not run. |
 | [clarinet](https://www.npmjs.com/package/clarinet) | 0.12.6 | 2,486,814 | own parser not selected | Own SAX-style parser; write(string) chunks. Not run. |

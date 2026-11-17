@@ -1,6 +1,7 @@
 """Check the JavaScript JSON AFL++ bridge: the second valid control replays to its pinned
 output, repeated probes match, and the second control changes parser feedback."""
 
+import argparse
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
@@ -12,7 +13,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-SLUG = "stream_json"
+SLUGS = ("stream_json", "bfj")
 REPORT = ROOT / "data/javascript/json/afl-feedback.json"
 
 
@@ -44,9 +45,9 @@ def probe(manifest: dict, image: str, case: Path, work: Path, name: str) -> tupl
     return features, tuples
 
 
-def main() -> None:
-    project, manifest = project_for("json", "javascript", SLUG)
-    relative = Path("json/javascript") / SLUG
+def verify_project(slug: str) -> dict:
+    project, manifest = project_for("json", "javascript", slug)
+    relative = Path("json/javascript") / slug
     overlay = ROOT / "fuzzing/afl-native" / relative
     receipt = json.loads((overlay / "verification.json").read_text())
     base = json.loads((project / "verification.json").read_text())
@@ -92,15 +93,30 @@ def main() -> None:
               "parser_feature_difference": feature_difference, "afl_tuple_difference": tuple_difference,
               "control_only_features_by_file": by_file(first[0] - other[0]),
               "differential_only_features_by_file": by_file(other[0] - first[0])}
+    print(f"{relative}: stable repeats; {feature_difference} parser features, "
+          f"{tuple_difference} AFL++ tuples differ", flush=True)
+    return result
+
+
+def main() -> None:
+    cli = argparse.ArgumentParser(description=__doc__)
+    cli.add_argument("--project", choices=SLUGS, help="refresh one project and retain other pinned results")
+    args = cli.parse_args()
+    checked = (args.project,) if args.project else SLUGS
+    results_by_slug = {}
+    if args.project and REPORT.is_file():
+        for item in json.loads(REPORT.read_text()).get("results", []):
+            results_by_slug[Path(item["project"]).name] = item
+    for slug in checked:
+        results_by_slug[slug] = verify_project(slug)
+    results = [results_by_slug[slug] for slug in SLUGS]
     REPORT.write_text(json.dumps({
         "schema_version": 1,
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
-        "projects_total": 1, "projects_passed": 1,
+        "projects_total": len(results), "projects_passed": len(results),
         "differential_kind": "fixed_valid_nested_array",
-        "standard_feedback": "none: JSON.parse is a native V8 builtin with no attributable JavaScript source",
-        "results": [result]}, indent=2, ensure_ascii=False) + "\n")
-    print(f"{relative}: stable repeats; {feature_difference} parser features, "
-          f"{tuple_difference} AFL++ tuples differ", flush=True)
+        "standard_feedback": "JSON.parse has staged native function-entry feedback, not JavaScript source ranges",
+        "results": results}, indent=2, ensure_ascii=False) + "\n")
 
 
 if __name__ == "__main__":

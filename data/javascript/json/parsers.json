@@ -52,5 +52,59 @@
       ]
     },
     "project": "projects/json/javascript/stream_json"
+  },
+  {
+    "name": "bfj",
+    "version": "9.1.4",
+    "license": "MIT",
+    "npm_integrity": "sha512-r4qEuACygiLfYg6KDQRfaxEwScyIUsf8ETrvS1yJQMRLEMgzV4u9wEUFjdetEOIfjDYHjhcR/fsARFcfNz0hhw==",
+    "tarball_sha256": "7a18fc2b104cf19bf94583692f229061f67097c4e6082de00971042c6b7089d3",
+    "input_api": "bfj.parse(Readable.from([local Buffer]), {ndjson:false}) returns a Promise after consuming a complete JSON stream",
+    "documentation": "https://www.npmjs.com/package/bfj?activeTab=readme",
+    "source": "https://registry.npmjs.org/bfj/-/bfj-9.1.4.tgz",
+    "scope": "One complete RFC 8259 JSON text from local bytes passed as a Readable stream; default non-NDJSON mode validates trailing input",
+    "family": "bfj asynchronous JSON walker",
+    "family_note": "src/walk.js implements its own asynchronous token state machine; src/parse.js assembles values from walker events. Default ndjson:false checks trailing non-whitespace before emitting end, and parse rejects dataError. No JSON.parse call handles the input. Distinct from stream-json.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 18016242,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/bfj",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/bfj",
+    "license_evidence": "https://registry.npmjs.org/bfj/9.1.4"
   }
 ]
