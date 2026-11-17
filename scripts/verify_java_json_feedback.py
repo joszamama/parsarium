@@ -12,7 +12,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("jackson_databind", "jackson_core", "gson")
+PROJECTS = ("jackson_databind", "jackson_core", "gson", "fastjson2")
 CONTROL = "controls/json/nested-object.json"
 DIFFERENTIAL = "controls/json/nested-array.json"
 # Structure of controls/json/nested-array.json, read off the file by hand.

@@ -136,9 +136,54 @@
       },
       "error": null,
       "verified_at_utc": "2026-11-17T03:51:55.624314+00:00"
+    },
+    {
+      "package": "fastjson2",
+      "group": "com.alibaba.fastjson2",
+      "version": "2.0.66",
+      "scope": "RFC 8259 JSON text parsed from local UTF-8 bytes into JSONObject/JSONArray/String/Number/Boolean/null with full-document check",
+      "command": "python3 scripts/run_project.py json java fastjson2",
+      "receipt": "projects/json/java/fastjson2/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 560,
+      "afl_feedback": "data/java/json/afl-feedback.json",
+      "verified_at_utc": "2026-11-17T07:32:30.775762+00:00",
+      "error": null
     }
   ],
   "standard": [],
   "second_control_meaning": "Valid array root with nested objects/arrays, strings, numbers, booleans, and null; differential output and parser feedback in afl-feedback.json",
-  "updated_at_utc": "2026-11-17T07:19:50.203444+00:00"
+  "updated_at_utc": "2026-11-17T07:34:22.373934+00:00"
 }

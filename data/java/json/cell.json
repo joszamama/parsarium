@@ -1,10 +1,10 @@
 {
   "ecosystem": "java",
   "format": "json",
-  "status": "pilot_three_selected_search_bounded",
+  "status": "pilot_four_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 3,
+  "verified_third_party_count": 4,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "json",
@@ -16,8 +16,8 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 322,
   "unique_search_hits": 322,
-  "unresolved_documentation_leads": 10,
-  "uncertainty": "Pilot cell: three high-adoption general-purpose JSON package/API paths have pinned valid-control containers and parser-derived AFL++ feedback. jackson-databind and jackson-core share the Jackson tokenizer; Gson is an independent parser family. The remaining ten numeric leads are logged in leads.json and remain unselected. Search remains bounded to 100 hits per query (322 unique hits). Downloads and dependents measure package adoption, not JSON-specific use. Valid nested controls do not establish complete RFC 8259 support.",
+  "unresolved_documentation_leads": 9,
+  "uncertainty": "Pilot cell: four high-adoption JSON package/API paths are control verified and runnable. jackson-databind and jackson-core share one tokenizer family; Gson and fastjson2 have independent parser engines. The com.alibaba:fastjson 2.x compatibility facade remains a lead in the fastjson2 family, not a separate verified engine. Nine numeric leads remain unresolved. The Maven Central search is bounded to 100 hits per query (322 unique hits); deps.dev summed direct dependents measure package adoption, not JSON-specific use. Valid nested-object and nested-array controls do not establish complete RFC 8259 support.",
   "third_party_evidence": "data/java/json/parsers.json",
   "third_party_control_results": "data/java/json/verification.json",
   "runtime_evidence": "data/java/json/standard.json",

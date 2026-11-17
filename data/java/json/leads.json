@@ -19,7 +19,7 @@
     "summed_direct_dependent_count": 10021,
     "max_release_direct_dependent_count": 1494,
     "default_release_direct_dependent_count": 48,
-    "reason": "fastjson 2.x artifact is a compatibility facade over fastjson2; JSON.parse(byte[]) control not run.",
+    "reason": "fastjson 2.x artifact is a compatibility facade over the selected fastjson2 parser engine; its separate API path has not passed the control and feedback gates. The 10,021 summed metric also includes fastjson 1.x releases with an older engine.",
     "source": "https://central.sonatype.com/artifact/com.alibaba/fastjson"
   },
   {
@@ -36,13 +36,14 @@
   {
     "name": "fastjson2",
     "coordinate": "com.alibaba.fastjson2:fastjson2",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "2.0.66.android8",
     "summed_direct_dependent_count": 2973,
     "max_release_direct_dependent_count": 180,
     "default_release_direct_dependent_count": 2,
-    "reason": "JSON.parse(byte[]) with its own JSONReader; deps.dev default release is an android8 variant. Control not run.",
-    "source": "https://central.sonatype.com/artifact/com.alibaba.fastjson2/fastjson2"
+    "reason": "Own JSONReaderUTF8 parser; pinned direct JSON.parse(byte[]) path, two valid controls, JaCoCo parser source lines, and input-dependent AFL++ feedback verified. Ordinary 2.0.66 release pinned, distinct from snapshot default Android variant.",
+    "source": "https://central.sonatype.com/artifact/com.alibaba.fastjson2/fastjson2",
+    "evidence": "data/java/json/parsers.json"
   },
   {
     "name": "json-simple",
