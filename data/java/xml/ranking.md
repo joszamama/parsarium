@@ -23,6 +23,8 @@ The xercesImpl release jar lacks line-number tables, so its pinned sources jar i
 
 All three paths map JaCoCo source lines into AFL++ tuples. Repeated control runs give identical features, and `controls/xml/order-default-ns.xml` changes them ([afl-feedback.json](afl-feedback.json)). The differential output equals the expat oracle used for the Go and Python XML cells.
 
+Woodstox feedback covers its StAX reader and scanner classes (815 pinned source lines on the first control). The SymbolTable cache is outside that feedback scope because its process-dependent paths changed across identical replays; this does not exclude reader or scanner coverage.
+
 ## Lead log
 
 Numeric leads looked up on deps.dev. Woodstox was promoted to the verified ranking above; the remaining entries are unresolved or excluded. Maven Central text search ranks by relevance, so the search hits alone do not surface adoption.

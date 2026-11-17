@@ -16,33 +16,51 @@ def read(path: Path) -> object:
 
 class JavaXmlPilotTest(unittest.TestCase):
     def test_selected_parser_is_highest_parser_engine_lead(self):
-        parser, = read(BASE / "parsers.json")
+        parsers = read(BASE / "parsers.json")
         leads = read(BASE / "leads.json")
-        metric = parser["popularity"]["value"]
-        self.assertNotIn(f"{parser['group']}:{parser['artifact']}", {lead["coordinate"] for lead in leads})
-        self.assertTrue(all(lead["status"] in {"unresolved", "not_a_parser_engine"} for lead in leads))
-        self.assertTrue(all(metric > lead["summed_direct_dependent_count"]
+        metrics = [parser["popularity"]["value"] for parser in parsers]
+        self.assertEqual(metrics, sorted(metrics, reverse=True))
+        selected = {f"{parser['group']}:{parser['artifact']}" for parser in parsers}
+        self.assertTrue(selected.isdisjoint(
+            {lead["coordinate"] for lead in leads if lead["status"] == "unresolved"}))
+        self.assertTrue(all(lead["status"] in {"unresolved", "not_a_parser_engine",
+                                               "promoted_to_verified"} for lead in leads))
+        self.assertEqual({lead["coordinate"] for lead in leads
+                          if lead["status"] == "promoted_to_verified"},
+                         {"com.fasterxml.woodstox:woodstox-core"})
+        self.assertTrue(all(min(metrics) > lead["summed_direct_dependent_count"]
                             for lead in leads if lead["status"] == "unresolved"))
         snapshot = read(BASE / "registry-snapshot.json")
-        recorded = snapshot["popularity_metric"]["packages"][f"{parser['group']}:{parser['artifact']}"]
-        self.assertEqual(recorded["summed_direct_dependent_count"], metric)
+        for parser in parsers:
+            coordinate = f"{parser['group']}:{parser['artifact']}"
+            recorded = snapshot["popularity_metric"]["packages"][coordinate]
+            self.assertEqual(recorded["summed_direct_dependent_count"],
+                             parser["popularity"]["value"])
+        xerces = next(parser for parser in parsers if parser["artifact"] == "xercesImpl")
         self.assertEqual(snapshot["releases"]["xerces:xercesImpl"]["sources_sha256"],
-                         read(ROOT / parser["project"] / "manifest.json")["source_sha256"])
+                         read(ROOT / xerces["project"] / "manifest.json")["source_sha256"])
         cell = read(BASE / "cell.json")
+        self.assertEqual(cell["verified_third_party_count"], len(parsers))
         self.assertEqual(sum(lead["status"] == "unresolved" for lead in leads),
                          cell["unresolved_documentation_leads"])
 
     def test_both_paths_share_the_xerces_family(self):
-        parser, = read(BASE / "parsers.json")
+        parsers = read(BASE / "parsers.json")
+        xerces = next(parser for parser in parsers if parser["artifact"] == "xercesImpl")
+        woodstox = next(parser for parser in parsers if parser["artifact"] == "woodstox-core")
         api, = read(BASE / "standard.json")["verified_apis"]
-        self.assertIn("Apache Xerces2-J", parser["shared_families"])
+        self.assertIn("Apache Xerces2-J", xerces["shared_families"])
+        self.assertNotIn("Apache Xerces2-J", woodstox["shared_families"])
+        self.assertIn("Woodstox", woodstox["shared_families"])
         self.assertIn("Xerces2-J", api["family"])
 
     def test_control_receipts_match_catalog(self):
-        parser, = read(BASE / "parsers.json")
+        parsers = read(BASE / "parsers.json")
         api, = read(BASE / "standard.json")["verified_apis"]
-        for slug, expected in (("xercesimpl", parser["expected_output"]),
-                               ("jdk_documentbuilder", api["expected"])):
+        paths = [(Path(parser["project"]).name, parser["expected_output"])
+                 for parser in parsers]
+        paths.append(("jdk_documentbuilder", api["expected"]))
+        for slug, expected in paths:
             project = ROOT / "projects/xml/java" / slug
             manifest = read(project / "manifest.json")
             receipt = read(project / "verification.json")
@@ -57,7 +75,10 @@ class JavaXmlPilotTest(unittest.TestCase):
     def test_feedback_is_stable_and_differential(self):
         report = read(BASE / "afl-feedback.json")
         oracle = read(ROOT / "data/go/xml/verification.json")["differential_output"]
-        self.assertEqual(report["projects_passed"], 2)
+        self.assertEqual(report["projects_passed"], len(read(BASE / "parsers.json")) + 1)
+        self.assertEqual({item["project"] for item in report["results"]},
+                         {"xml/java/xercesimpl", "xml/java/woodstox_core",
+                          "xml/java/jdk_documentbuilder"})
         for result in report["results"]:
             overlay = ROOT / "fuzzing/afl-native" / result["project"] / "verification.json"
             self.assertEqual(sha256(overlay.read_bytes()).hexdigest(), result["overlay_receipt_sha256"])

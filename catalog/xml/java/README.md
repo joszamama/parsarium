@@ -1,14 +1,15 @@
 # XML / Java — pilot
 
-**Status:** pilot_one_selected_search_bounded; incomplete. 1 verified third-party paths, 1 verified standard APIs, 1 verified Docker harnesses.
+**Status:** pilot_two_selected_search_bounded; incomplete. 2 verified third-party paths, 1 verified standard APIs, 2 verified Docker harnesses.
 
-Pilot cell: only the highest-adoption Java XML parser engine lead (xerces:xercesImpl 2.12.2, 2,474 deps.dev direct dependents summed over all releases) was built and control-verified. jackson-dataformat-xml, jsoup and xstream score higher but are a data-binding layer, an HTML parser and a serializer, and are logged as non-parser leads. dom4j (both coordinates summed: 3,189) and JDOM are tree builders over a JAXP SAX parser that defaults to the JDK Xerces fork, so they have no tokenizer of its own. The standard javax.xml.parsers path runs OpenJDK's internal repackaged Xerces fork, so both verified Java XML paths share the Apache Xerces2-J family; they are separate, diverged code copies. The xercesImpl release jar has no line tables, so its pinned sources jar is recompiled with -g for line coverage. DOM keeps no attribute order, so attributes are reported sorted per element. Maven Central text search ranks by relevance, not adoption; leads were looked up directly on deps.dev. Two small UTF-8 controls without DOCTYPE do not establish DTD, entity, schema, non-UTF-8 or XML 1.1 behaviour.
+Pilot cell: xerces:xercesImpl 2.12.2 (2,474 deps.dev summed direct dependents) and com.fasterxml.woodstox:woodstox-core 7.3.0 (1,874) are independent third-party parser families with documented local stream APIs, exact namespace-aware structural results on two valid controls, JaCoCo parser-source lines, and stable input-dependent AFL++ feedback. Jackson XML, jsoup, and XStream remain non-parser-engine leads; dom4j and JDOM build trees over a JAXP SAX parser that defaults to the JDK Xerces fork. The standard javax.xml.parsers path runs an OpenJDK Xerces fork and is counted separately. Woodstox feedback is scoped to com.ctc.wstx.sr reader/scanner classes; its symbol-table cache has process-dependent paths and is excluded from the feedback scope. Maven Central text search ranks by relevance, not adoption; deps.dev metrics are summed per release and may count one dependent repeatedly. The small UTF-8 controls without DOCTYPE do not establish DTD, entity, schema, non-UTF-8, or XML 1.1 behavior.
 
 [Ranking and search limits](../../../data/java/xml/ranking.md) · [Standard API inventory](../../../data/java/xml/standard.json)
 
 ## Third-party parsers
 
 - [xercesImpl](xercesimpl/README.md) — verified Docker harness
+- [woodstox-core](woodstox-core/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
 
