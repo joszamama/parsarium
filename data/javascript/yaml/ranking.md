@@ -1,6 +1,6 @@
 # JavaScript × YAML: selected parsers (pilot)
 
-Six control-verified third-party paths; the ceiling is ten and the cell is not padded. Each path parses both schema-neutral YAML controls to the hand-written typed tree.
+Seven control-verified third-party paths; the ceiling is ten and the cell is not padded. Each path parses both schema-neutral YAML controls to the hand-written typed tree.
 
 ## Primary within-cell adoption metric
 
@@ -14,6 +14,7 @@ npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snap
 | 4 | [@stoplight/yaml](https://github.com/stoplightio/yaml/blob/v4.3.0/README.md) | 4.3.0 | 29,327,835 | 415 / 74 | Wrapper: @stoplight/yaml walker over @stoplight/yaml-ast-parser 0.0.50 (fork of yaml-ast-parser, js-yaml 3.x lineage) |
 | 5 | [yaml-eslint-parser](https://github.com/ota-meshi/yaml-eslint-parser/blob/v2.1.0/README.md) | 2.1.0 | 15,060,019 | 747 / 139 | Wrapper: yaml-eslint-parser ESTree-style AST and value resolver over eemeli/yaml 2.9.1 Parser and Composer (shared with the selected yaml path) |
 | 6 | [yaml-js](https://github.com/connec/yaml-js/blob/0.3.1/README.md) | 0.3.1 | 1,906,159 | 439 / 50 | yaml-js (line-for-line PyYAML port: reader, scanner, parser, composer, constructor) |
+| 7 | [@visulima/yaml](https://github.com/visulima/visulima/blob/%40visulima/yaml%402.0.0/packages/data-manipulation/yaml/README.md) | 2.0.0 | 145,409 | 234 / 64 | @visulima/yaml own scanner, parser and composer |
 
 ## Leads not counted
 
