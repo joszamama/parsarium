@@ -715,6 +715,86 @@
         "repeats_per_control": 5
       },
       "package_line_note": "PHP Xdebug package lines are separate from native libxml2 AFL tuples; src/Security.php runs the same 26 lines on both controls, so the package adds no input-dependent lines of its own (wrapper path)."
+    },
+    {
+      "package": "simplesamlphp/xml-common",
+      "version": "v3.0.8",
+      "parser_family": "libxml2 via PHP ext/dom Dom\\XMLDocument::createFromString; shared with veewee/xml and the other libxml2 paths",
+      "command": "python3 scripts/run_project.py xml php simplesamlphp_xml_common",
+      "receipt": "projects/xml/php/simplesamlphp_xml_common/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 72,
+      "format_specific_source_lines_covered": 26,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_projected_expat_oracle": true,
+      "projection_limit": "None: the package returns a namespace-aware DOM, so both controls are compared with the full namespace-aware expat summary of controls/xml/check_controls.py (expanded names, xmlns declaration count and URIs, attributes, depth, text).",
+      "afl_feedback": {
+        "report": "data/php/xml/afl-feedback.json",
+        "overlay_receipt": "fuzzing/afl-native/xml/php/simplesamlphp_xml_common/verification.json",
+        "overlay_receipt_sha256": "fbddb59523da3d42946a9877bf572d5aac93aca3a7a4c7ecf10cecfb4c50382a",
+        "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+        "control_afl_tuples": 1105,
+        "differential_afl_tuples": 1229,
+        "afl_tuple_difference": 362,
+        "format_dependent_parse_time_tuples": 362,
+        "repeats_per_control": 5
+      },
+      "package_line_note": "PHP Xdebug package lines are separate from native libxml2 AFL tuples; src/XML/DOMDocumentFactory.php runs the same 26 lines on both controls, so the package adds no input-dependent lines of its own (wrapper path)."
     }
   ],
   "standard": [

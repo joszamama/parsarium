@@ -537,6 +537,90 @@
     "afl_overlay": "fuzzing/afl-native/xml/php/saloon_xml_wrangler/verification.json"
   },
   {
+    "name": "simplesamlphp/xml-common",
+    "version": "v3.0.8",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/simplesamlphp/xml-common/blob/c50b33dfc4384c772e921c6072bded9b67081c03/LICENSE",
+    "documentation": "https://github.com/simplesamlphp/xml-common/blob/c50b33dfc4384c772e921c6072bded9b67081c03/src/XML/DOMDocumentFactory.php",
+    "source": "https://github.com/simplesamlphp/xml-common/tree/c50b33dfc4384c772e921c6072bded9b67081c03",
+    "input_api": "SimpleSAML\\XML\\DOMDocumentFactory::fromString(string $xml) with its default options (LIBXML_COMPACT | LIBXML_NONET | LIBXML_NSCLEAN | LIBXML_NO_XXE): rejects whitespace-only input and DOCTYPE markup, loads the string with Dom\\XMLDocument::createFromString and returns the Dom\\XMLDocument, walked namespace-aware",
+    "parser_family": "libxml2 via PHP ext/dom Dom\\XMLDocument::createFromString; shared with veewee/xml and the other libxml2 paths",
+    "package_own_scope": "xml-common's DOMDocumentFactory: whitespace-only and DOCTYPE string rejection through simplesamlphp/assert and webmozart/assert, default libxml options, a warning-to-DOMException handler, the Dom\\XMLDocument::createFromString call and a post-parse DOCTYPE node check; the rest of the package is SimpleSAMLphp's XML element object model. Tokenizing, well-formedness, entity and character-reference decoding, CDATA and namespace binding are libxml2.",
+    "adapter": "projects/xml/php/simplesamlphp_xml_common/harness.php",
+    "source_lock": "projects/xml/php/simplesamlphp_xml_common/source-lock.json",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespace_declarations": 3,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "root": "{urn:parsarium:order}order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "family": "libxml2 via PHP Dom\\XMLDocument, shared with veewee/xml and the other libxml2 paths",
+    "project": "projects/xml/php/simplesamlphp_xml_common/verification.json",
+    "popularity": {
+      "metric": "Packagist total package downloads",
+      "value": 3504693,
+      "source": "https://packagist.org/packages/simplesamlphp/xml-common",
+      "captured_at_utc": "2026-11-17T03:46:35.927344+00:00",
+      "snapshot": "data/php/xml/registry-snapshot.json",
+      "caveat": "Cumulative downloads of the whole package, rank 66 in the snapshot's 'xml' query; downloads count installs, often transitive, not XML-parsing uses. It is a Dom\\XMLDocument::createFromString loader of the shared libxml2 family."
+    },
+    "caveats": [
+      "Wrapper path: the package's documented entry point loads the bytes with Dom\\XMLDocument::createFromString and returns the Dom\\XMLDocument; the adapter walks that DOM namespace-aware (expanded names, xmlns declarations, attributes, depth, text) and both valid controls match the namespace-aware expat oracle. The package adds no tokenizer of its own.",
+      "The package is the XML base library of the SimpleSAMLphp SAML stack, so most downloads come from SAML installations; DOMDocumentFactory::fromString is its generic string loader. It uses the PHP 8.4+ Dom\\XMLDocument API (the same loader family as veewee/xml), so the overlay instruments ext/dom/xml_document.c as well as document.c. Dependencies are simplesamlphp/assert v3.0.5 and webmozart/assert 2.1.6, resolved by hand; psr/clock and the Composer installer plugin are not loaded."
+    ]
+  },
+  {
     "name": "pear/xml_parser",
     "version": "v1.3.8",
     "license": "BSD-2-Clause",
