@@ -1,5 +1,6 @@
 """Pilot format cells remain visible without entering active aggregate gates."""
 
+import importlib.util
 import json
 from pathlib import Path
 import sys
@@ -14,7 +15,10 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import build_matrix  # noqa: E402
 import format_registry  # noqa: E402
 import validate_catalog  # noqa: E402
-import parsarium  # noqa: E402
+
+_repo_cli_spec = importlib.util.spec_from_file_location("parsarium_repo_cli", ROOT / "parsarium.py")
+parsarium = importlib.util.module_from_spec(_repo_cli_spec)
+_repo_cli_spec.loader.exec_module(parsarium)
 
 
 def write(path: Path, value: object) -> None:

@@ -5,6 +5,7 @@ Run: python3 -m unittest discover -s tests
 
 from contextlib import redirect_stderr, redirect_stdout
 from hashlib import sha256
+import importlib.util
 import io
 import json
 import os
@@ -19,6 +20,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import fandango_generate  # noqa: E402
+
+_repo_cli_spec = importlib.util.spec_from_file_location("parsarium_repo_cli", ROOT / "parsarium.py")
+repo_cli = importlib.util.module_from_spec(_repo_cli_spec)
+_repo_cli_spec.loader.exec_module(repo_cli)
 
 
 FAKE_SPEC = b"<start> ::= b'\\x89PNG'\n"
@@ -323,19 +328,15 @@ class FandangoGenerateTest(unittest.TestCase):
         run = self.tmp / "via-cli"
         argv = ["parsarium.py", "fandango", "generate", "png", "c", "lodepng", str(run),
                 "--fanbase", "png", "--count", "1", "--fandango", str(self.fake)]
-        sys.path.insert(0, str(ROOT))
-        import parsarium
         os.environ["FAKE_FANDANGO_MODE"] = ""
         with mock.patch.object(sys, "argv", argv), redirect_stdout(io.StringIO()):
-            self.assertEqual(parsarium.main(), 0)
+            self.assertEqual(repo_cli.main(), 0)
         self.assertEqual(self.receipt(run)["output_count"], 1)
 
     def test_parsarium_cli_routes_to_setup(self):
-        sys.path.insert(0, str(ROOT))
-        import parsarium
         with mock.patch.object(sys, "argv", ["parsarium.py", "fandango", "setup"]), \
              mock.patch.object(fandango_generate, "setup", return_value=0) as setup:
-            self.assertEqual(parsarium.main(), 0)
+            self.assertEqual(repo_cli.main(), 0)
             setup.assert_called_once_with()
 
 
