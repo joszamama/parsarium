@@ -130,7 +130,9 @@ def main() -> None:
         raise SystemExit("usage: verify_javascript_yaml_feedback.py SLUG --write|--check")
     slug = sys.argv[1]
     manifest = json.loads((ROOT / "projects/yaml/javascript" / slug / "manifest.json").read_text())
-    report = ROOT / "data/javascript/yaml" / f"{manifest['package']}-valid-feedback.json"
+    # Scoped npm names (@scope/name) become scope-name in the receipt file name.
+    receipt_name = manifest["package"].lstrip("@").replace("/", "-")
+    report = ROOT / "data/javascript/yaml" / f"{receipt_name}-valid-feedback.json"
     result = verify(slug)
     if sys.argv[2] == "--write":
         report.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n")

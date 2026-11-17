@@ -11,7 +11,17 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "data/javascript/yaml"
 ORACLE = runpy.run_path(str(ROOT / "controls/yaml/check_controls.py"))
 CONTROL_NAMES = {"controls/yaml/catalog.yaml": "catalog.yaml", "controls/yaml/order.yaml": "order.yaml"}
-SLUGS = {"js-yaml": "js_yaml", "yaml": "yaml"}
+SLUGS = {"js-yaml": "js_yaml", "yaml": "yaml", "yaml-ast-parser": "yaml_ast_parser",
+         "@stoplight/yaml": "stoplight_yaml", "yaml-eslint-parser": "yaml_eslint_parser",
+         "yaml-js": "yaml_js", "@visulima/yaml": "visulima_yaml", "@amritk/yaml": "amritk_yaml"}
+# Upstream tag in each pinned documentation URL.
+DOC_TAGS = {"js-yaml": "5.5.0", "yaml": "v2.9.1", "yaml-ast-parser": "0.0.43", "@stoplight/yaml": "v4.3.0",
+            "yaml-eslint-parser": "v2.1.0", "yaml-js": "0.3.1",
+            "@visulima/yaml": "%40visulima/yaml%402.0.0", "@amritk/yaml": "%40amritk/yaml%400.8.1"}
+# Documented text API each adapter calls.
+API_CALLS = {"js-yaml": "jsyaml.load(text)", "yaml": "YAML.parseDocument(text)", "yaml-ast-parser": "yaml.load(text)",
+             "@stoplight/yaml": "yaml.parseWithPointers(text)", "yaml-eslint-parser": "parseYAML(text)",
+             "yaml-js": "yaml.load(text)", "@visulima/yaml": "parseYaml(text)", "@amritk/yaml": "parseDocument(text)"}
 
 
 def read(path: Path):
@@ -56,13 +66,31 @@ class JavaScriptYamlPilotTest(unittest.TestCase):
                 self.assertEqual(npm_lock["integrity"], row["npm_integrity"])
                 self.assertEqual(lock["source_sha256"], row["tarball_sha256"])
                 self.assertIn(row["tarball_sha256"], (project / "Dockerfile").read_text())
-                self.assertIn(f"/blob/{'v' if row['name'] == 'yaml' else ''}{row['version']}/",
-                              row["documentation"])
+                self.assertIn(f"/blob/{DOC_TAGS[row['name']]}/", row["documentation"])
                 adapter = (project / "adapter.mjs").read_text()
                 self.assertIn("fatal: true", adapter)
-                self.assertIn("jsyaml.load(text)" if row["name"] == "js-yaml" else "YAML.parseDocument(text)",
-                              adapter)
+                self.assertIn(API_CALLS[row["name"]], adapter)
                 self.assertEqual(manifest["scope"], row["scope"])
+
+    def test_wrappers_pin_and_cover_their_underlying_parser(self):
+        for row in self.selected():
+            if "underlying_package" not in row:
+                continue
+            with self.subTest(package=row["name"]):
+                project = ROOT / row["project"]
+                manifest = read(project / "manifest.json")
+                receipt = read(project / "verification.json")
+                npm_lock = read(project / "package-lock.json")["packages"][f"node_modules/{row['underlying_package']}"]
+                lock = read(project / "source-lock.json")[row["underlying_package"]]
+                self.assertTrue(row["family"].startswith("Wrapper:"))
+                self.assertEqual(manifest["underlying_package"], row["underlying_package"])
+                self.assertEqual(manifest["underlying_release"], row["underlying_version"])
+                self.assertEqual(npm_lock["version"], row["underlying_version"])
+                self.assertEqual(npm_lock["integrity"], row["underlying_npm_integrity"])
+                self.assertEqual(lock["source_sha256"], row["underlying_tarball_sha256"])
+                self.assertIn(row["underlying_tarball_sha256"], (project / "Dockerfile").read_text())
+                self.assertGreater(receipt["parser_source_lines_covered"], 0)
+                self.assertGreater(receipt["underlying_source_lines_covered"], 0)
 
     def test_parser_feedback_is_stable_and_input_dependent(self):
         for row in self.selected():
@@ -92,6 +120,21 @@ class JavaScriptYamlPilotTest(unittest.TestCase):
         for row in rows:
             self.assertEqual(leads[row["name"]]["status"], "selected")
             self.assertEqual(leads[row["name"]]["metric_value"], row["popularity"]["value"])
+
+    def test_uncounted_leads_carry_evidence(self):
+        probes = BASE / "round2-lead-probes.json"
+        failing = ({item["package"] for item in read(probes)["probes"]
+                    if not all(control["matches_oracle"] for control in item["controls"].values())}
+                   if probes.is_file() else set())
+        selected = {row["name"] for row in self.selected()}
+        for lead in read(BASE / "leads.json"):
+            with self.subTest(lead=lead["name"]):
+                self.assertTrue(lead["reason"])
+                self.assertEqual(lead["status"] == "selected", lead["name"] in selected)
+                if lead.get("evidence"):
+                    self.assertTrue((ROOT / lead["evidence"]).is_file())
+                if lead["status"] == "excluded_control_failed" and lead.get("evidence") == str(probes.relative_to(ROOT)):
+                    self.assertIn(lead["name"], failing)
 
 
 if __name__ == "__main__":

@@ -1,28 +1,30 @@
 {
   "ecosystem": "javascript",
   "format": "yaml",
-  "status": "pilot_two_verified_bounded_search",
+  "status": "pilot_three_verified_bounded_search",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
-    "yaml"
+    "yaml",
+    "yaml parser"
   ],
   "search_limit_per_query": 100,
-  "search_hits_recorded": 100,
-  "unique_search_hits": 100,
+  "search_hits_recorded": 200,
+  "unique_search_hits": 167,
   "search_totals": {
-    "yaml": 41087
+    "yaml": 41087,
+    "yaml parser": 89726
   },
   "leads_recorded": 5,
   "leads_by_status": {
-    "selected": 2,
-    "shared_family": 2,
+    "selected": 3,
+    "shared_family": 1,
     "unresolved": 1
   },
   "ranking_metric": "npm downloads in the last month",
-  "uncertainty": "Two verified third-party YAML paths (js-yaml 5.5.0, yaml 2.9.1), selected in descending npm last-month order from the bounded npm search (query 'yaml', first 100 of 41087 hits) and five named leads. js-yaml 5.5.0 ships one bundled dist/js-yaml.cjs.js containing its own YAML 1.2 event parser (parseEvents) and constructor (constructFromEvents). yaml 2.9.1 has its own Lexer and Parser (dist/parse/lexer.js, parser.js) producing a CST that the Composer (dist/compose/) turns into Document nodes; toJS() resolves aliases. Each adapter decodes local bytes as strict UTF-8, calls the documented text API with default (YAML 1.2 core) options and maps the result to the Parsarium typed tree. JavaScript numbers lose YAML's int/float distinction, so a finite integral number is typed int; the controls contain no integral-valued floats or integer-like keys, so this cannot change the result. 3 leads remain unverified (yaml-ast-parser, @stoplight/yaml, yamljs); yaml-ast-parser and @stoplight/yaml are js-yaml 3.x lineage. npm downloads measure package adoption, largely transitive, not YAML parsing volume. Two schema-neutral valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed-input behavior.",
+  "uncertainty": "Three verified third-party YAML paths (js-yaml 5.5.0, yaml 2.9.1, yaml-ast-parser 0.0.43), selected in descending npm last-month order (window 2026-10-18 to 2026-11-16) from two bounded npm searches (query 'yaml', first 100 of 41087 hits; query 'yaml parser', first 100 of 89726 hits, added in round 2) and named leads. js-yaml 5.5.0 ships its own YAML 1.2 event parser and constructor in one bundled dist/js-yaml.cjs.js. eemeli/yaml 2.9.1 has its own lexer, CST parser and composer. yaml-ast-parser 0.0.43 is a js-yaml 3.x fork that builds a YAML AST (83 of its 1,451 distinct source lines shared with js-yaml 5.5.0). Each adapter decodes local bytes as strict UTF-8, calls the documented text API with default options and maps the result to the Parsarium typed tree. JavaScript numbers lose YAML's int/float distinction, so a finite integral number is typed int; the controls contain no integral-valued floats or integer-like keys, so this cannot change the result. 2 leads are not counted (see leads.json): @stoplight/yaml, yamljs. npm downloads measure package adoption, largely transitive, not YAML parsing volume. Two schema-neutral valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed-input behavior.",
   "runtime_evidence": "data/javascript/yaml/standard.json",
   "registry_snapshot": "data/javascript/yaml/registry-snapshot.json",
   "unresolved_leads": "data/javascript/yaml/leads.json",
@@ -30,6 +32,7 @@
   "third_party_control_results": "data/javascript/yaml/verification.json",
   "afl_feedback": [
     "data/javascript/yaml/js-yaml-valid-feedback.json",
-    "data/javascript/yaml/yaml-valid-feedback.json"
+    "data/javascript/yaml/yaml-valid-feedback.json",
+    "data/javascript/yaml/yaml-ast-parser-valid-feedback.json"
   ]
 }

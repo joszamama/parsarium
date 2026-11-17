@@ -27,15 +27,16 @@
   },
   {
     "name": "yaml-ast-parser",
-    "status": "shared_family",
+    "status": "selected",
     "metric_value": 88646128,
     "metric_error": null,
-    "family": "yaml-ast-parser (js-yaml fork)",
-    "api_hint": "load(string) AST",
-    "note": "Fork of js-yaml 3.x; shared lineage.",
+    "family": "yaml-ast-parser (mulesoft-labs fork of js-yaml 3.x) reader and AST builder",
+    "api_hint": "load(text)",
+    "note": null,
     "found_by": "registry_search",
     "source": "https://www.npmjs.com/package/yaml-ast-parser",
-    "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
+    "reason": "Selected: pinned 0.0.43 passes both schema-neutral YAML controls against the hand-written typed-tree oracle, with Docker V8 coverage and stable input-dependent AFL++ feedback.",
+    "evidence": "projects/yaml/javascript/yaml_ast_parser/verification.json"
   },
   {
     "name": "@stoplight/yaml",

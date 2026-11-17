@@ -1,0 +1,39 @@
+{
+  "checked_at_utc": "2026-11-17T20:13:45.369044+00:00",
+  "project": "yaml/javascript/yaml_ast_parser",
+  "pass": true,
+  "input_kind": "two fixed valid schema-neutral YAML 1.2 controls",
+  "oracle": "hand-written typed trees in controls/yaml/check_controls.py (cross-checked there with Ruby Psych/libyaml)",
+  "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+  "feedback_scope": "V8 source ranges under /work/node_modules/yaml-ast-parser/dist/src/, mapped to the AFL++ bitmap by the Parsarium JavaScript bridge",
+  "overlay_receipt_sha256": "8b1f7baad8e4a841d6b26f207042f18380c9c30e0f23e3e3da2b5d222c5cc52a",
+  "base_image_id": "sha256:036d2d8b85f3f4011bf4882bd8be0e6d1dce2c1cd0176d846119158b622ba6d2",
+  "overlay_image_id": "sha256:cebe26b30072874c1bce1696ecc28a0a38cdffb9bc7e0eaf1faf9d96c536e1e3",
+  "control": "controls/yaml/catalog.yaml",
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "differential": "controls/yaml/order.yaml",
+  "differential_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+  "control_matches_oracle": true,
+  "differential_matches_oracle": true,
+  "runs_per_control": 3,
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 369,
+  "control_afl_tuples": 389,
+  "differential_parser_features": 363,
+  "differential_afl_tuples": 383,
+  "parser_feature_difference": 74,
+  "afl_tuple_difference": 74,
+  "control_only_features_by_file": {
+    "loader.js": 25,
+    "scalarInference.js": 1,
+    "type/bool.js": 5,
+    "type/float.js": 3,
+    "type/int.js": 4,
+    "type/null.js": 2
+  },
+  "differential_only_features_by_file": {
+    "loader.js": 33,
+    "type/null.js": 1
+  }
+}
