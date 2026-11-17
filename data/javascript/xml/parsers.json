@@ -47,5 +47,55 @@
       ]
     },
     "project": "projects/xml/javascript/saxes"
+  },
+  {
+    "name": "sax",
+    "version": "1.6.1",
+    "license": "BlueOak-1.0.0",
+    "npm_integrity": "sha512-42tBVwLWnaQvW5zc4HbZrTuWccECCZfBi92FDuwtqxasH+JbPB3/FOKb1m222K42R4WxuxzzMsTswfzgtSu64Q==",
+    "tarball_sha256": "6e9abf03478608b80894bb8b6421271a0e583504f785f749a700d6bb35be85bd",
+    "input_api": "sax.parser(true, {xmlns: true, strictEntities: true}).write(string).close() after strict UTF-8 TextDecoder of local bytes; documented createStream(true, {xmlns: true}) also accepts a local file stream",
+    "documentation": "https://github.com/isaacs/sax-js/blob/v1.6.1/README.md",
+    "source": "https://github.com/isaacs/sax-js/tree/v1.6.1",
+    "scope": "One namespace-aware XML 1.0 document from local bytes as SAX events with expanded element/attribute names",
+    "family": "sax-js hand-written strict XML state machine",
+    "family_note": "sax 1.6.1 parses through lib/sax.js with its own strict SAX tokenizer, entity handling, CDATA and xmlns bindings. Saxes forked sax-js but rewrote and maintains a distinct parser implementation; the two package paths share historical lineage, not parser code.",
+    "control": "controls/xml/catalog-ns.xml",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 490225823,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/sax",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/javascript/sax",
+    "license_evidence": "https://github.com/isaacs/sax-js/blob/v1.6.1/LICENSE.md"
   }
 ]

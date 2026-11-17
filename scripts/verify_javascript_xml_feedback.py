@@ -1,6 +1,7 @@
 """Check the JavaScript XML AFL++ bridge: the second valid control replays to its pinned
 output, repeated probes match, and the second control changes parser feedback."""
 
+import argparse
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
@@ -12,7 +13,6 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-SLUG = "saxes"
 REPORT = ROOT / "data/javascript/xml/afl-feedback.json"
 
 
@@ -45,8 +45,11 @@ def probe(manifest: dict, image: str, case: Path, work: Path, name: str) -> tupl
 
 
 def main() -> None:
-    project, manifest = project_for("xml", "javascript", SLUG)
-    relative = Path("xml/javascript") / SLUG
+    cli = argparse.ArgumentParser(description=__doc__)
+    cli.add_argument("slug", nargs="?", default="saxes", choices=("saxes", "sax"))
+    slug = cli.parse_args().slug
+    project, manifest = project_for("xml", "javascript", slug)
+    relative = Path("xml/javascript") / slug
     overlay = ROOT / "fuzzing/afl-native" / relative
     receipt = json.loads((overlay / "verification.json").read_text())
     base = json.loads((project / "verification.json").read_text())
@@ -92,13 +95,17 @@ def main() -> None:
               "parser_feature_difference": feature_difference, "afl_tuple_difference": tuple_difference,
               "control_only_features_by_file": by_file(first[0] - other[0]),
               "differential_only_features_by_file": by_file(other[0] - first[0])}
+    previous = json.loads(REPORT.read_text()) if REPORT.is_file() else {"results": []}
+    results = [entry for entry in previous["results"] if entry["project"] != str(relative)]
+    results.append(result)
+    results.sort(key=lambda entry: entry["project"])
     REPORT.write_text(json.dumps({
         "schema_version": 1,
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
-        "projects_total": 1, "projects_passed": 1,
+        "projects_total": len(results), "projects_passed": len(results),
         "differential_kind": "fixed_valid_default_namespace_variant",
         "standard_feedback": "none: Node.js core ships no XML parser API",
-        "results": [result]}, indent=2, ensure_ascii=False) + "\n")
+        "results": results}, indent=2, ensure_ascii=False) + "\n")
     print(f"{relative}: stable repeats; {feature_difference} parser features, "
           f"{tuple_difference} AFL++ tuples differ", flush=True)
 
