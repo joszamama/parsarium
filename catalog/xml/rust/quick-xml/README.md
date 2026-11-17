@@ -8,7 +8,7 @@
 - **Local input API:** `quick_xml::NsReader::from_reader(&[u8]); NsReader::read_event(); NsReader::resolver().resolve_element(..)/resolve_attribute(..); Attribute::normalized_value(XmlVersion::Implicit1_0); BytesText/BytesCData::xml10_content(); BytesRef::resolve_char_ref() with escape::resolve_predefined_entity`
 - **Documentation:** [API reference](<https://docs.rs/quick-xml/0.42.0/quick_xml/reader/struct.NsReader.html>)
 - **Valid control:** [`controls/xml/catalog-ns.xml`](../../../../controls/xml/catalog-ns.xml)
-- **Catalog evidence:** [parser record](../../../../data/rust/xml/parsers.json) · [control result](../../../../data/rust/xml/verification.json)
+- **Catalog evidence:** [parser record](../../../../data/rust/xml/parsers.json) · [control result](../../../../projects/xml/rust/quick_xml/verification.json)
 
 ## Observed control result
 
