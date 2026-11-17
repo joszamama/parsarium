@@ -103,6 +103,110 @@
     "afl_feedback": "data/rust/dns/hickory-proto-feedback-differential.json"
   },
   {
+    "name": "simple-dns",
+    "version": "0.13.1",
+    "license": "MIT",
+    "license_evidence": "Cargo metadata 'MIT' and LICENSE in the crate (sha256 8aea2b78...), checked in the image",
+    "input_api": "simple_dns::Packet::parse(data: &[u8]) -> Result<Packet, SimpleDnsError>",
+    "documentation": "https://docs.rs/simple-dns/0.13.1/simple_dns/struct.Packet.html#method.parse",
+    "source": "https://crates.io/crates/simple-dns/0.13.1",
+    "source_lock": "projects/dns/rust/simple_dns/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "simple-dns (src/dns/packet.rs, header.rs, name.rs, rdata/*)",
+    "family_note": "Own pure-Rust decoder, used by mdns-sd-style service discovery crates (simple-mdns, iroh); no code from hickory-proto. It exposes AD and CD as packet flags but not the reserved Z bit, so z reports AD and CD only. A and AAAA addresses are stored as u32/u128; the harness prints them with std::net.",
+    "project": "projects/dns/rust/simple_dns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "crates.io recent_downloads (90 days)",
+      "value": 4084902,
+      "source": "https://crates.io/api/v1/crates/simple-dns",
+      "captured_at_utc": "2026-11-17T16:37:51.521485+00:00",
+      "snapshot": "data/rust/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 2,
+    "afl_feedback": "data/rust/dns/simple-dns-feedback-differential.json"
+  },
+  {
     "name": "domain",
     "version": "0.12.3",
     "license": "BSD-3-Clause",
@@ -203,7 +307,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 2,
+    "rank": 3,
     "afl_feedback": "data/rust/dns/domain-feedback-differential.json"
   },
   {
@@ -307,7 +411,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 3,
+    "rank": 4,
     "afl_feedback": "data/rust/dns/dns-parser-feedback-differential.json"
   },
   {
@@ -411,7 +515,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 4,
+    "rank": 5,
     "afl_feedback": "data/rust/dns/dns-message-parser-feedback-differential.json"
   },
   {
@@ -515,7 +619,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 5,
+    "rank": 6,
     "afl_feedback": "data/rust/dns/rustdns-feedback-differential.json"
   },
   {
@@ -619,7 +723,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 6,
+    "rank": 7,
     "afl_feedback": "data/rust/dns/rsdns-feedback-differential.json"
   }
 ]

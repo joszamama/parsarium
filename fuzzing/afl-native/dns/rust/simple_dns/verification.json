@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "project": "dns/rust/simple_dns",
+  "pass": true,
+  "base_project_receipt_sha256": "413a03a02be60545456fbdc6fe1bfaf637b02d57409e898ea588cda1117f69a2",
+  "overlay_file_sha256": {
+    "Cargo.toml": "db51fc7b67731aec5457d0a8b33d2f5c8040afd8065e4e32a0d599386cb9cae0",
+    "Cargo.lock": "96ee096f7d6e2fa45c4b9d8c2651802963247f6aedd59d918048b452bc4e4b1f",
+    "afl_fuzzer.rs": "daafc06d2e306ff312debfdff0d309e3e80e4a2577f52d93c2e7f8846a32f467",
+    "Dockerfile": "3ebe7a6ca2cc7f746c8a2115f00c2f6988affce7ded4c7987062079361df1eac",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "8aea2b78df6bbe38fb98d2c8140ada65fb63a314246a0c38626140dd21c69ff7",
+  "image_id": "sha256:a363ee78e91560ca825e2f1400ca9bb9abed2d4d67f861f6474c5610ac5fd490",
+  "platform": "linux/arm64",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "feedback_edges": 182,
+  "afl_map_size": 11498,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "SanitizerCoverage only in simple_dns; serde_json, the harness crate, afl and the afl_fuzzer entry point are built without coverage",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "simple_dns"
+    ],
+    "rlib_guard_bytes": {
+      "simple_dns": 45972
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "bitflags",
+      "equivalent",
+      "foldhash",
+      "hashbrown",
+      "indexmap",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_dns_simple_dns_harness",
+      "rustc_version",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "xdg",
+      "zmij"
+    ],
+    "binary_guards": 11493
+  },
+  "rustc_wrapper_log": [
+    "instrumented simple_dns",
+    "uninstrumented afl",
+    "uninstrumented afl_fuzzer",
+    "uninstrumented bitflags",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented build_script_build",
+    "uninstrumented equivalent",
+    "uninstrumented foldhash",
+    "uninstrumented hashbrown",
+    "uninstrumented home",
+    "uninstrumented indexmap",
+    "uninstrumented itoa",
+    "uninstrumented libc",
+    "uninstrumented memchr",
+    "uninstrumented parsarium_dns_simple_dns_harness",
+    "uninstrumented rustc_version",
+    "uninstrumented semver",
+    "uninstrumented serde_core",
+    "uninstrumented serde_json",
+    "uninstrumented xdg",
+    "uninstrumented zmij"
+  ]
+}
