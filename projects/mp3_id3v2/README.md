@@ -21,6 +21,7 @@
 - [sdl_mixer / C++](cpp/sdl_mixer/README.md)
 - [sox / C++](cpp/sox/README.md)
 - [taglib / C++](cpp/taglib/README.md)
+- [vlc / C++](cpp/vlc/README.md)
 - [github.com/ascherkus/go-id3/src/id3 / Go](go/github_com_ascherkus_go_id3_src_id3/README.md)
 - [github.com/bogem/id3v2/v2 / Go](go/github_com_bogem_id3v2_v2/README.md)
 - [github.com/dhowden/tag / Go](go/github_com_dhowden_tag/README.md)

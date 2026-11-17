@@ -378,6 +378,52 @@ def vlc_cpp_mp4_feedback_verified(path: Path, manifest: dict, overlay: dict) -> 
     )
 
 
+def vlc_cpp_mp3_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
+    """Bind C++ VLC ID3v2 edges to its native and TagLib parser modules."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) != "mp3_id3v2/cpp/vlc":
+        return True
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    variant = path.parent / manifest.get("valid_variant", "")
+    file_hashes = overlay.get("overlay_file_sha256", {})
+    control_stability = overlay.get("control_stability", {})
+    variant_stability = overlay.get("variant_stability", {})
+    build_script = (path.parent / "build.sh").read_text()
+    return (
+        overlay.get("feedback_kind") == "vlc_mp3_id3v2_parser_pcguard_edges"
+        and "TagLib 1.13.1" in overlay.get("feedback_scope", "")
+        and "VLC 3.0.24 meta_engine" in overlay.get("feedback_scope", "")
+        and "harness uninstrumented" in overlay.get("feedback_scope", "")
+        and overlay.get("shared_parser_family") == manifest.get("shared_parser_family")
+        and overlay.get("shared_parser_family_projects")
+            == manifest.get("shared_parser_family_projects")
+        and overlay.get("source_sha256") == manifest["source_sha256"]
+        and overlay.get("underlying_source_sha256") == manifest["underlying_source_sha256"]
+        and overlay.get("afl_package") == "4.33c-1.1ubuntu1"
+        and manifest.get("afl_file_input") is True
+        and variant.is_file()
+        and overlay.get("variant_sha256") == manifest.get("valid_variant_sha256")
+            == sha256(variant.read_bytes()).hexdigest()
+        and overlay.get("variant_output") == manifest.get("valid_variant_expected_output")
+        and overlay.get("repeats", 0) >= 3
+        and control_stability.get("all_repeats_identical") is True
+        and variant_stability.get("all_repeats_identical") is True
+        and control_stability.get("stable_edges") == overlay.get("feedback_edges")
+        and variant_stability.get("stable_edges") == overlay.get("variant_feedback_edges")
+        and overlay.get("stable_variant_only_edges", 0) > 0
+        and overlay.get("stable_control_only_edges", 0) > 0
+        and "AFL_LLVM_ALLOWLIST=/work/afl-allowlist.txt" in build_script
+        and "taglib-1.13.1/taglib" in build_script
+        and "meta_engine/" in build_script
+        and "demux/mpeg/" in build_script
+        and "__sancov_guards" in build_script
+        and set(file_hashes) == {"Dockerfile", "build.py"}
+        and all((overlay_dir / name).is_file()
+                and sha256((overlay_dir / name).read_bytes()).hexdigest() == digest
+                for name, digest in file_hashes.items())
+    )
+
+
 def resvg_cpp_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
     """Bind C++ resvg feedback to usvg parser guards and valid SVG probes."""
     project = path.parent.relative_to(ROOT / "projects")

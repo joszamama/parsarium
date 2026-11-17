@@ -11,6 +11,7 @@ from audit_projects import (fltk_native_feedback_verified, fully_runnable,
                             mlt_mp4_feedback_verified,
                             resvg_cpp_feedback_verified,
                             stereokit_ply_feedback_verified,
+                            vlc_cpp_mp3_feedback_verified,
                             vlc_cpp_mp4_feedback_verified)
 from run_case import ROOT, project_for
 
@@ -100,17 +101,20 @@ def main() -> None:
             "svg/c/gdk_pixbuf", "svg/c/librsvg", "svg/cpp/gdk_pixbuf",
             "svg/cpp/librsvg", "svg/c/resvg", "svg/cpp/resvg"}
         custom_vlc_mp4 = str(relative) == "mp4/cpp/vlc"
+        custom_vlc_mp3 = str(relative) == "mp3_id3v2/cpp/vlc"
         custom_stereokit_ply = str(relative) == "ascii_ply/c/stereokit"
         custom_mlt_mp4 = str(relative) == "mp4/c/mlt"
         if (manifest["package"] not in {"gstreamer", "netpbm", "sail"}
-                and not custom_rust_svg and not custom_vlc_mp4
+                and not custom_rust_svg and not custom_vlc_mp4 and not custom_vlc_mp3
                 and not custom_stereokit_ply and not custom_mlt_mp4):
             assert dockerfile == derived_dockerfile(project).encode()
-        if custom_rust_svg or custom_vlc_mp4 or custom_stereokit_ply or custom_mlt_mp4:
+        if custom_rust_svg or custom_vlc_mp4 or custom_vlc_mp3 or custom_stereokit_ply or custom_mlt_mp4:
             assert (overlay / "build.py").is_file()
             assert "build.py" in receipt.get("overlay_file_sha256", {})
         if custom_vlc_mp4:
             assert vlc_cpp_mp4_feedback_verified(path, manifest, receipt)
+        if custom_vlc_mp3:
+            assert vlc_cpp_mp3_feedback_verified(path, manifest, receipt)
         if str(relative) == "svg/cpp/resvg":
             assert resvg_cpp_feedback_verified(path, manifest, receipt)
         if custom_stereokit_ply:

@@ -179,6 +179,6 @@
     },
     "scope": "ID3v2 title and recognized MP3 audio track from valid local tagged MP3",
     "family": "VLC media parser with bundled TagLib and MPEG audio plugins",
-    "family_note": "VLC ships its own media pipeline and bundles TagLib metadata and MPEG audio plugins. Runtime module selection for this control was not separately traced. C and C++ call sites share libVLC."
+    "family_note": "The verified Docker routes statically register filesystem, skiptags, es, packetizer_mpegaudio and taglib. Both VLC native ID3v2 code and VLC-pinned, patched TagLib 1.13.1 parse the valid tag. C and C++ call sites share this underlying parser family; the separate TagLib package paths use TagLib 2.3.2."
   }
 ]

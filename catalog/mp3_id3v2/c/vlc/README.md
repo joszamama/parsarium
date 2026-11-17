@@ -19,7 +19,7 @@
 }
 ```
 
-VLC ships its own media pipeline and bundles TagLib metadata and MPEG audio plugins. Runtime module selection for this control was not separately traced. C and C++ call sites share libVLC.
+The verified Docker routes statically register filesystem, skiptags, es, packetizer_mpegaudio and taglib. Both VLC native ID3v2 code and VLC-pinned, patched TagLib 1.13.1 parse the valid tag. C and C++ call sites share this underlying parser family; the separate TagLib package paths use TagLib 2.3.2.
 
 ## Run this target
 
