@@ -24,6 +24,41 @@
       "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
       "value": 26071768,
       "source": "data/javascript/mp3/registry-snapshot.json"
-    }
+    },
+    "project": "projects/mp3/javascript/mediabunny"
+  },
+  {
+    "name": "codec-parser",
+    "version": "2.5.0",
+    "license": "LGPL-3.0-or-later",
+    "license_evidence": "https://registry.npmjs.org/codec-parser/-/codec-parser-2.5.0.tgz",
+    "input_api": "new CodecParser('audio/mpeg', { onCodecHeader }); parser.parseAll(Uint8Array) -> CodecFrame[] (header.sampleRate/channels/layer, samples, data, totalSamples)",
+    "documentation": "https://github.com/eshaz/codec-parser#readme",
+    "source": "https://github.com/eshaz/codec-parser",
+    "scope": "Every MPEG Layer III frame of an untagged stream from a local Uint8Array, split by codec-parser's own frame-header parser: codec, layer, sample rate, channels, header-table bitrate, frame count, frame bytes, samples per frame, total samples, distinct header variants; no audio decode",
+    "family": "codec-parser JavaScript MPEG frame parser",
+    "family_note": "Own frame-header parser (src/codecs/mpeg/MPEGHeader.js) and fixed-length frame sync that requires the next header at the computed frame length (src/codecs/Parser.js). The 2.5.0 tarball has no runtime dependencies and shares no code with mediabunny (separate author, repository and frame-sync design). Not one of the ten mp3_id3v2/javascript paths. Its ID3v2 probe skips tags without parsing them and is not exercised by the untagged controls. The same package also parses AAC, FLAC and Ogg; those parsers are not loaded for audio/mpeg frames beyond module import.",
+    "dependencies": [],
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "codec": "mpeg",
+      "layer": "Layer III",
+      "sample_rate": 44100,
+      "channels": 1,
+      "bitrate": 64000,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "samples_per_frame": 1152,
+      "total_samples": 12672,
+      "header_variants": 1
+    },
+    "metric": {
+      "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 2683215,
+      "source": "data/javascript/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/javascript/codec_parser",
+    "feedback_note": "AFL++ bridge: 124 parser source ranges / 144 tuples on the 44.1 kHz control, identical on repeat; the 22.05 kHz control adds 1 range (1 tuple), the onCodecHeader block in src/codecs/HeaderCache.js setHeader. V8 reports that block separately only when its count differs from setHeader's, which happens when more than one distinct 4-byte header enters the cache after sync (the stereo control alternates padded and unpadded headers; the mono control's only unpadded header precedes sync). MPEG version, sample rate and channel mode are table lookups in MPEGHeader.js, so they do not produce separate V8 block ranges on these valid controls.",
+    "feedback_differential": "data/javascript/mp3/codec_parser-feedback-differential.json"
   }
 ]

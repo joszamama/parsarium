@@ -1,19 +1,39 @@
-"""Check the JavaScript MP3 AFL++ bridge: the stereo valid control replays to its pinned
-output, repeated probes match, and the second control changes parser feedback."""
+"""Check the JavaScript MP3 AFL++ bridges: both valid controls replay to their pinned
+outputs and agree with the independent frame-header walker, repeated probes match, and
+the second control changes parser feedback."""
 
 from datetime import datetime, timezone
 from hashlib import sha256
 import json
 import os
 from pathlib import Path
+import importlib.util
 import subprocess
+import sys
 import tempfile
 
 from run_case import ROOT, project_for
 
 
-SLUG = "mediabunny"
+PROJECTS = ("mediabunny", "codec_parser")
 REPORT = ROOT / "data/javascript/mp3/afl-feedback.json"
+_walker = importlib.util.spec_from_file_location("check_controls", ROOT / "controls/mp3/check_controls.py")
+WALKER = importlib.util.module_from_spec(_walker)
+_walker.loader.exec_module(WALKER)
+
+
+def walker_agreement(path: Path, output: dict) -> dict:
+    """Compare every field the parser reports with the header walker; full input must be framed."""
+    data = path.read_bytes()
+    walked = WALKER.walk(data)
+    shared = sorted(key for key in walked if key in output)
+    if "frame_bytes" not in shared or output["frame_bytes"] != len(data):
+        raise RuntimeError(f"{path.name}: parser did not frame the full input")
+    if any(output[key] != walked[key] for key in shared):
+        raise RuntimeError(f"{path.name}: parser output differs from frame-header walker: {output}")
+    if "total_samples" in output and output["total_samples"] != walked["frames"] * walked["samples_per_frame"]:
+        raise RuntimeError(f"{path.name}: total samples differ from walker frames")
+    return {"walker_output": walked, "compared_fields": shared}
 
 
 def run(command: list[str]) -> str:
@@ -44,9 +64,9 @@ def probe(manifest: dict, image: str, case: Path, work: Path, name: str) -> tupl
     return features, tuples
 
 
-def main() -> None:
-    project, manifest = project_for("mp3", "javascript", SLUG)
-    relative = Path("mp3/javascript") / SLUG
+def check(slug: str) -> dict:
+    project, manifest = project_for("mp3", "javascript", slug)
+    relative = Path("mp3/javascript") / slug
     overlay = ROOT / "fuzzing/afl-native" / relative
     receipt = json.loads((overlay / "verification.json").read_text())
     base = json.loads((project / "verification.json").read_text())
@@ -59,8 +79,11 @@ def main() -> None:
             raise ValueError(f"control hash mismatch: {path}")
     with tempfile.TemporaryDirectory(prefix="parsarium-mp3-js-") as temporary:
         work = Path(temporary)
-        replayed = json.loads(run([*sandbox(manifest, differential, work), "--entrypoint", "node",
-                                   base["image_id"], "/work/replay.js", "/input/case"]))
+        replay = lambda case: json.loads(run([*sandbox(manifest, case, work), "--entrypoint", "node",
+                                              base["image_id"], "/work/replay.js", "/input/case"]))
+        control_output, replayed = replay(control), replay(differential)
+        if control_output != manifest["expected_output"]:
+            raise RuntimeError(f"first control output differs: {control_output}")
         if replayed != manifest["differential_expected_output"]:
             raise RuntimeError(f"second control output differs: {replayed}")
         first = probe(manifest, receipt["image_id"], control, work, "first")
@@ -86,21 +109,40 @@ def main() -> None:
               "differential": manifest["differential_control"],
               "differential_sha256": manifest["differential_control_sha256"],
               "differential_output": replayed,
+              "control_walker": walker_agreement(control, control_output),
+              "differential_walker": walker_agreement(differential, replayed),
               "repeated_control_identical": True, "repeated_differential_identical": True,
               "control_parser_features": len(first[0]), "control_afl_tuples": len(first[1]),
               "differential_parser_features": len(other[0]), "differential_afl_tuples": len(other[1]),
               "parser_feature_difference": feature_difference, "afl_tuple_difference": tuple_difference,
               "control_only_features_by_file": by_file(first[0] - other[0]),
               "differential_only_features_by_file": by_file(other[0] - first[0])}
+    print(f"{relative}: stable repeats; {feature_difference} parser features, "
+          f"{tuple_difference} AFL++ tuples differ", flush=True)
+    return result
+
+
+def main() -> None:
+    selected = tuple(sys.argv[1:]) or PROJECTS
+    if any(slug not in PROJECTS for slug in selected):
+        raise ValueError(f"unknown JavaScript MP3 project: {selected}")
+    results = [check(slug) for slug in selected]
+    if sys.argv[1:]:
+        # A scoped receipt for newly added paths; the cell aggregate is refreshed by the integrator.
+        for result in results:
+            slug = result["project"].rsplit("/", 1)[-1]
+            path = ROOT / "data/javascript/mp3" / f"{slug}-feedback-differential.json"
+            path.write_text(json.dumps({"schema_version": 1,
+                                        "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+                                        **result}, indent=2, ensure_ascii=False) + "\n")
+        return
     REPORT.write_text(json.dumps({
         "schema_version": 1,
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
-        "projects_total": 1, "projects_passed": 1,
+        "projects_total": len(results), "projects_passed": len(results),
         "differential_kind": "fixed_valid_22k_stereo_control",
         "standard_feedback": "none: Node.js documents no MPEG audio parser API",
-        "results": [result]}, indent=2, ensure_ascii=False) + "\n")
-    print(f"{relative}: stable repeats; {feature_difference} parser features, "
-          f"{tuple_difference} AFL++ tuples differ", flush=True)
+        "results": results}, indent=2, ensure_ascii=False) + "\n")
 
 
 if __name__ == "__main__":

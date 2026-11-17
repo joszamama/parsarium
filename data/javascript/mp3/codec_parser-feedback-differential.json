@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T10:58:52.425054+00:00",
+  "project": "mp3/javascript/codec_parser",
+  "pass": true,
+  "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+  "overlay_receipt_sha256": "9148ee798b7a7e2e473b37d9dcfd1ffaa3e3394f4fcb223c26d1720773617c97",
+  "base_image_id": "sha256:0318882f949912485b3d28eceeeb75e6886a303ae4c3829c68eb1f2be527775a",
+  "overlay_image_id": "sha256:e55ab23b61bb7170bc9014384cfe8c99f9e02b82d2fbc07cc472dc3871db62a7",
+  "control": "controls/mp3/tone-44k-mono.mp3",
+  "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "differential": "controls/mp3/tone-22k-stereo.mp3",
+  "differential_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "differential_output": {
+    "codec": "mpeg",
+    "layer": "Layer III",
+    "sample_rate": 22050,
+    "channels": 2,
+    "bitrate": 32000,
+    "frames": 12,
+    "frame_bytes": 1254,
+    "samples_per_frame": 576,
+    "total_samples": 6912,
+    "header_variants": 1
+  },
+  "control_walker": {
+    "walker_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "samples_per_frame": 1152,
+      "bitrate": 64000
+    },
+    "compared_fields": [
+      "bitrate",
+      "channels",
+      "frame_bytes",
+      "frames",
+      "sample_rate",
+      "samples_per_frame"
+    ]
+  },
+  "differential_walker": {
+    "walker_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "frame_bytes": 1254,
+      "samples_per_frame": 576,
+      "bitrate": 32000
+    },
+    "compared_fields": [
+      "bitrate",
+      "channels",
+      "frame_bytes",
+      "frames",
+      "sample_rate",
+      "samples_per_frame"
+    ]
+  },
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 124,
+  "control_afl_tuples": 144,
+  "differential_parser_features": 125,
+  "differential_afl_tuples": 145,
+  "parser_feature_difference": 1,
+  "afl_tuple_difference": 1,
+  "control_only_features_by_file": {},
+  "differential_only_features_by_file": {
+    "src/codecs/HeaderCache.js": 1
+  }
+}

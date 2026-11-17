@@ -1,0 +1,105 @@
+"""The JavaScript plain MP3 pilot keeps its selection, leads, receipts, and walker agreement consistent."""
+
+from collections import Counter
+from hashlib import sha256
+import importlib.util
+import json
+from pathlib import Path
+import unittest
+
+
+ROOT = Path(__file__).resolve().parents[1]
+BASE = ROOT / "data/javascript/mp3"
+_spec = importlib.util.spec_from_file_location("check_controls", ROOT / "controls/mp3/check_controls.py")
+WALKER = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(WALKER)
+
+
+def read(path: Path) -> object:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+class JavaScriptMp3PilotTest(unittest.TestCase):
+    def test_selected_parsers_are_ranked_and_kept_out_of_leads(self):
+        parsers = read(BASE / "parsers.json")
+        leads = read(BASE / "leads.json")
+        cell = read(BASE / "cell.json")
+        downloads = read(BASE / "registry-snapshot.json")["downloads"]
+        self.assertEqual([parser["name"] for parser in parsers], ["mediabunny", "codec-parser"])
+        values = [parser["metric"]["value"] for parser in parsers]
+        self.assertEqual(values, sorted(values, reverse=True))
+        for parser in parsers:
+            self.assertEqual(downloads[parser["name"]]["downloads"], parser["metric"]["value"])
+            self.assertEqual(downloads[parser["name"]]["latest_version"], parser["version"])
+        self.assertFalse({parser["name"] for parser in parsers} & {lead["name"] for lead in leads})
+        self.assertEqual(cell["verified_third_party_count"], len(parsers))
+        self.assertEqual(cell["leads_recorded"], len(leads))
+        self.assertEqual(cell["leads_by_status"], dict(Counter(lead["status"] for lead in leads)))
+        self.assertEqual(cell["third_party_control_results"],
+                         [f"{parser['project']}/verification.json" for parser in parsers])
+
+    def test_parser_families_are_independent(self):
+        parsers = read(BASE / "parsers.json")
+        self.assertEqual(len({parser["family"] for parser in parsers}), len(parsers))
+        codec_parser = next(parser for parser in parsers if parser["name"] == "codec-parser")
+        self.assertEqual(codec_parser["dependencies"], [])
+        lock = read(ROOT / codec_parser["project"] / "package-lock.json")["packages"]
+        self.assertNotIn("dependencies", lock["node_modules/codec-parser"])
+
+    def test_control_receipts_match_catalog(self):
+        for parser in read(BASE / "parsers.json"):
+            project = ROOT / parser["project"]
+            manifest = read(project / "manifest.json")
+            receipt = read(project / "verification.json")
+            lock = read(project / "source-lock.json")[parser["name"]]
+            self.assertEqual(manifest["release"], parser["version"])
+            self.assertEqual(lock["source_sha256"], manifest["source_sha256"])
+            self.assertEqual(lock["license"], parser["license"])
+            self.assertTrue(receipt["pass"])
+            self.assertEqual(receipt["output"], parser["expected_output"])
+            self.assertGreater(receipt["format_specific_source_lines_covered"], 0)
+            for key in ("control", "differential_control"):
+                self.assertEqual(sha256((ROOT / manifest[key]).read_bytes()).hexdigest(),
+                                 manifest[f"{key}_sha256"])
+            for name, digest in receipt["project_file_sha256"].items():
+                self.assertEqual(sha256((project / name).read_bytes()).hexdigest(), digest, name)
+
+    def test_codec_parser_outputs_match_frame_header_walker(self):
+        manifest = read(ROOT / "projects/mp3/javascript/codec_parser/manifest.json")
+        for control, output in ((manifest["control"], manifest["expected_output"]),
+                                (manifest["differential_control"], manifest["differential_expected_output"])):
+            data = (ROOT / control).read_bytes()
+            walked = WALKER.walk(data)
+            self.assertEqual({key: output[key] for key in walked}, walked)
+            self.assertEqual(output["frame_bytes"], len(data))
+            self.assertEqual(output["total_samples"], walked["frames"] * walked["samples_per_frame"])
+            self.assertEqual(output["header_variants"], 1)
+
+    def test_feedback_is_stable_and_differential(self):
+        # The cell aggregate is refreshed by the integrator. The new path's
+        # scoped receipt is testable before that aggregate is regenerated.
+        report = read(BASE / "afl-feedback.json")
+        scoped = read(BASE / "codec_parser-feedback-differential.json")
+        results = {item["project"]: item for item in [*report["results"], scoped]}
+        self.assertEqual(set(results), {"mp3/javascript/mediabunny", "mp3/javascript/codec_parser"})
+        for result in results.values():
+            slug = result["project"].rsplit("/", 1)[-1]
+            manifest = read(ROOT / f"projects/mp3/javascript/{slug}/manifest.json")
+            overlay = ROOT / f"fuzzing/afl-native/mp3/javascript/{slug}/verification.json"
+            self.assertEqual(sha256(overlay.read_bytes()).hexdigest(), result["overlay_receipt_sha256"])
+            self.assertTrue(result["pass"] and result["repeated_control_identical"]
+                            and result["repeated_differential_identical"])
+            self.assertGreater(result["parser_feature_difference"], 0)
+            self.assertGreater(result["afl_tuple_difference"], 0)
+            self.assertEqual(result["differential_output"], manifest["differential_expected_output"])
+        self.assertIn("frame_bytes", scoped["control_walker"]["compared_fields"])
+
+    def test_no_standard_api_is_declared_not_omitted(self):
+        standard = read(BASE / "standard.json")
+        self.assertEqual(standard["verified_apis"], [])
+        self.assertEqual(read(BASE / "cell.json")["verified_standard_or_runtime_count"], 0)
+        self.assertTrue(standard["no_api_findings"])
+
+
+if __name__ == "__main__":
+    unittest.main()
