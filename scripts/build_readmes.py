@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 
 from audit_projects import (browser_control_verified, native_source_control_verified,
+                            native_function_control_verified,
                             macos_host_control_verified, third_party_control_verified,
                             fully_runnable)
 from format_registry import ACTIVE_FORMATS, ECOSYSTEMS, FORMAT_BY_ID, PILOT_FORMATS
@@ -69,6 +70,7 @@ def main() -> None:
     standard_projects = {}
     staged_browser_projects = {}
     staged_native_source_projects = {}
+    staged_function_projects = {}
     staged_macos_projects = {}
     project_guides = 0
     for path in manifest_paths:
@@ -77,6 +79,8 @@ def main() -> None:
             staged_browser_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
         if manifest.get("kind") == "standard" and native_source_control_verified(path, manifest):
             staged_native_source_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
+        if manifest.get("kind") == "standard" and native_function_control_verified(path, manifest):
+            staged_function_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
         if (manifest.get("kind") != "standard" and manifest.get("coverage_kind") == "control_only"
                 and third_party_control_verified(path, manifest)):
             staged_third_party_projects[(manifest["format"], manifest["ecosystem"],
@@ -367,6 +371,7 @@ def main() -> None:
                          "## Observed control result", "", "```json",
                          json.dumps(output, indent=2, ensure_ascii=False), "```", ""]
                 standard_project = standard_projects.get((fmt, eco, item.get("api")))
+                staged_function = staged_function_projects.get((fmt, eco, item.get("api")))
                 if standard_project:
                     slug_name = standard_project.parent.name
                     lines += ["## Run this target", "", "```sh",
@@ -374,9 +379,16 @@ def main() -> None:
                               f"python3 parsarium.py run {fmt} {eco} {slug_name} {control}",
                               "```", ""]
                     format_projects.append((eco, api_name, standard_project.parent))
+                elif staged_function:
+                    lines += ["**Docker control:** [pinned project](" +
+                              link(item_dir, staged_function.parent / "README.md") +
+                              "). V8 JSON parser function entries were observed; "
+                              "source lines and AFL++ feedback are unavailable.", ""]
                 generated[readme] = "\n".join(lines)
                 standard_rows.append(f"- [{label(api_name)}]({link(cell_dir, readme)})" +
-                                     (" — verified Docker harness" if standard_project else " — verified API path"))
+                                     (" — verified Docker harness" if standard_project else
+                                      " — staged Docker control" if staged_function else
+                                      " — verified API path"))
             links = []
             if (source / "ranking.md").is_file():
                 links.append(f"[Ranking and search limits]({link(cell_dir, source / 'ranking.md')})")

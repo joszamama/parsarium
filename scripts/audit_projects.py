@@ -49,6 +49,58 @@ def browser_control_verified(path: Path, manifest: dict) -> bool:
     )
 
 
+def native_function_control_verified(path: Path, manifest: dict) -> bool:
+    """Keep a pinned V8 function-entry control separate from AFL feedback."""
+    if (manifest.get("coverage_kind") != "native_function_entries"
+            or manifest.get("kind") != "standard"
+            or manifest.get("fuzz_engine") is not None
+            or manifest.get("native_feedback_smoke") != "native-feedback-probe/run-smoke.sh"):
+        return False
+    receipt_path = path.parent / "verification.json"
+    if not receipt_path.is_file():
+        return False
+    receipt = json.loads(receipt_path.read_text())
+    current_files = {
+        str(file.relative_to(path.parent)): sha256(file.read_bytes()).hexdigest()
+        for file in sorted(path.parent.rglob("*"))
+        if file.is_file() and file.name not in {"verification.json", "README.md"}
+        and "target" not in file.relative_to(path.parent).parts
+        and "__pycache__" not in file.relative_to(path.parent).parts
+    }
+    feedback = receipt.get("native_feedback") or {}
+    return (
+        receipt.get("pass") is True
+        and receipt.get("kind") == "standard"
+        and receipt.get("coverage_kind") == "native_function_entries"
+        and receipt.get("api") == manifest["api"]
+        and receipt.get("runtime") == manifest["runtime"]
+        and receipt.get("manifest") == str(path.relative_to(ROOT))
+        and receipt.get("source_sha256") == manifest["source_sha256"]
+        and receipt.get("control_sha256") == manifest["control_sha256"]
+        and sha256((ROOT / manifest["control"]).read_bytes()).hexdigest()
+            == manifest["control_sha256"]
+        and sha256((path.parent / "adapter.mjs").read_bytes()).hexdigest()
+            == manifest["adapter_sha256"]
+        and receipt.get("output") == manifest["expected_output"]
+        and receipt.get("image_id", "").startswith("sha256:")
+        and receipt.get("project_file_sha256") == current_files
+        and receipt.get("parser_source_files") is None
+        and receipt.get("parser_source_lines_covered") is None
+        and receipt.get("underlying_source_lines_covered") is None
+        and receipt.get("fuzz_engine_smoke_pass") is None
+        and receipt.get("native_feedback_limit") == manifest["native_feedback_limit"]
+        and feedback.get("feedback_kind") == "native_function_entries_not_source_coverage"
+        and feedback.get("scope") == "v8::internal::JsonParser<...> text symbols in /usr/local/bin/node"
+        and feedback.get("scope_symbols", 0) >= feedback.get("control_functions", 0) >= 10
+        and feedback.get("baseline_functions") == 0
+        and feedback.get("repeat_identical") is True
+        and feedback.get("variant_differs") is True
+        and feedback.get("variant_functions", 0) > 0
+        and bool(feedback.get("control_only") or feedback.get("variant_only"))
+        and "not AFL++ feedback" in manifest["native_feedback_limit"]
+    )
+
+
 def native_source_control_verified(path: Path, manifest: dict) -> bool:
     """Validate a staged native parser source control without AFL feedback."""
     kind = manifest.get("coverage_kind")
@@ -814,6 +866,8 @@ def papers_pdf_feedback_verified(path: Path, manifest: dict, overlay: dict) -> b
 
 def fully_runnable(path: Path, manifest: dict) -> bool:
     """Require a current base receipt, AFL++ overlay, and replay plans."""
+    if manifest.get("coverage_kind") == "native_function_entries":
+        return False
     if manifest.get("coverage_kind") == "native_source_afl_feedback":
         return standard_feedback_smoke_verified(path, manifest)
     if not receipt_verified(path, manifest):
@@ -1021,6 +1075,10 @@ def main() -> None:
                     raise ValueError(f"native source AFL feedback or execution receipt mismatch: {path}")
                 pinned_fields = ("base_image", "source_sha256", "python_source_sha256",
                                  "png_reader_source_sha256")
+            elif manifest.get("coverage_kind") == "native_function_entries":
+                if not native_function_control_verified(path, manifest):
+                    raise ValueError(f"native function control receipt mismatch: {path}")
+                pinned_fields = ("base_image", "source_sha256")
             else:
                 pinned_fields = ("base_image", "source_sha256", "fuzz_engine_sha256")
             if any(manifest[field] not in docker_text for field in pinned_fields):
