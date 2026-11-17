@@ -94,6 +94,41 @@
       "complete": false
     },
     {
+      "ecosystem": "c",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 90,
+      "unique_search_hits": 90,
+      "search_totals": {
+        "yaml": 90
+      },
+      "leads_recorded": 3,
+      "leads_by_status": {
+        "selected": 2,
+        "unresolved": 1
+      },
+      "ranking_metric": "Debian popcon sourcemax/by_inst installations of the lead's source package",
+      "uncertainty": "2 C YAML path(s) pass both schema-neutral YAML controls with the exact typed tree, parser source coverage and stable AFL++ feedback. C YAML libraries return scalars as text with a style and do not resolve plain scalars to types, so the harnesses type plain scalars with the YAML 1.2 core-schema patterns; structure, escapes, block scalars, document markers and alias expansion come from the parser, while the int/float/bool/null distinction is adapter-side. libyaml is the family under PyYAML's CLoader, PHP ext-yaml, Ruby Psych (the controls' cross-check) and Rust unsafe-libyaml, so it is not independent of those paths. Unselected leads: libcyaml (see leads.json). The bounded Debian source-name search for 'yaml' (90 hits) is in the registry snapshot. Debian installations mostly reflect dependencies and miss vendored copies. The controls do not test tags, merge keys, multi-document streams, complex keys, YAML 1.1-only scalars or malformed input. ISO C documents no YAML API.",
+      "runtime_evidence": "data/c/yaml/standard.json",
+      "registry_snapshot": "data/c/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/c/yaml/leads.json",
+      "selection": "Control-verified C YAML paths ranked by Debian popcon sourcemax installations from the pinned snapshot: libyaml 0.2.5 (204,120), libfyaml 0.9.6 (7,482).",
+      "third_party_evidence": "data/c/yaml/parsers.json",
+      "third_party_control_results": "data/c/yaml/verification.json",
+      "libyaml_source_lock": "projects/yaml/c/libyaml/source-lock.json",
+      "libfyaml_source_lock": "projects/yaml/c/libfyaml/source-lock.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "cpp",
       "format": "json",
       "status": "pilot_nine_selected_search_bounded",
@@ -165,6 +200,41 @@
       "complete": false
     },
     {
+      "ecosystem": "cpp",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 90,
+      "unique_search_hits": 90,
+      "search_totals": {
+        "yaml": 90
+      },
+      "leads_recorded": 3,
+      "leads_by_status": {
+        "selected": 2,
+        "unresolved": 1
+      },
+      "ranking_metric": "Debian popcon sourcemax/by_inst installations of the lead's source package",
+      "uncertainty": "2 verified C++ YAML paths. The bounded Debian source-name search ('yaml', 90 hits in the pinned sourcemax snapshot) found yaml-cpp and rapidyaml; unresolved leads: fkyaml (fkYAML is not packaged in Debian and has no primary value). yaml-cpp keeps plain scalars untyped, so its harness types plain scalars with YAML 1.2 core-schema patterns and converts them with Node::as<T>; this is adapter-side typing. rapidyaml likewise keeps scalars as text with quote/style flags, and its harness applies the same core-schema patterns before converting with ryml's own atoi/atof; adapter-side typing. rapidyaml's 56 installations are a very weak package proxy. Package installations are not YAML-specific use. Two schema-neutral valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars, complex keys or malformed-input behavior. rapidyaml's AFL++ overlay is built without AddressSanitizer because ASan made 3 of about 4,008 tuples vary between identical replays; without it, eight replays per control repeat exactly.",
+      "runtime_evidence": "data/cpp/yaml/standard.json",
+      "registry_snapshot": "data/cpp/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/cpp/yaml/leads.json",
+      "selection": "2 control-verified C++ YAML paths ranked by Debian popcon sourcemax installations: yaml-cpp 0.9.0 (9,629), rapidyaml 0.16.0 (56). Each has its own scanner and parser; no shared family.",
+      "third_party_evidence": "data/cpp/yaml/parsers.json",
+      "third_party_control_results": "data/cpp/yaml/verification.json",
+      "source_lock": "projects/yaml/cpp/yaml-cpp/source-lock.json",
+      "rapidyaml_source_lock": "projects/yaml/cpp/rapidyaml/source-lock.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "go",
       "format": "json",
       "status": "pilot_ten_selected_search_bounded",
@@ -219,6 +289,40 @@
       "registry_snapshot": "data/go/xml/registry-snapshot.json",
       "unresolved_leads": "data/go/xml/leads.json",
       "protocol": "catalog/xml/PROTOCOL.md",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "go",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "yaml": null
+      },
+      "leads_recorded": 6,
+      "leads_by_status": {
+        "selected": 2,
+        "shared_family": 3,
+        "unresolved": 1
+      },
+      "ranking_metric": "pkg.go.dev Imported by package count",
+      "uncertainty": "Two verified Go YAML paths: gopkg.in/yaml.v2 v2.4.0 (60,161 Imported by); gopkg.in/yaml.v3 v3.0.1 (44,731 Imported by). Each decodes the two schema-neutral controls into the hand-written oracle typed tree (Psych cross-checked) with Go coverpkg source coverage of the pinned module and three identical AFL++ runs per control whose feedback differs between controls. go-yaml carries a Go translation of the libyaml scanner/parser (MIT-licensed files), so it shares lexical lineage with C libyaml and its bindings without sharing code or cgo. yaml.v2 resolves plain scalars with YAML 1.1 rules; the controls avoid every scalar where that differs from the 1.2 core schema. yaml.v2 and yaml.v3 come from the same go-yaml project and both carry Go translations of the libyaml scanner and parser, so they are one lineage with separate code bases per major version, not independent engines. github.com/goccy/go-yaml (2,983) remains an unresolved lead; ghodss/yaml, sigs.k8s.io/yaml and go.yaml.in/yaml/v3 are shared-family wrappers or continuations and are not run. The bounded search is one pkg.go.dev query (yaml, first 100 hits, captured 2026-11-17); Imported by counts package adoption, not YAML-specific use. The controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars.",
+      "third_party_evidence": "data/go/yaml/parsers.json",
+      "third_party_control_results": "data/go/yaml/verification.json",
+      "afl_feedback": "data/go/yaml/afl-feedback.json",
+      "runtime_evidence": "data/go/yaml/standard.json",
+      "registry_snapshot": "data/go/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/go/yaml/leads.json",
       "phase": "pilot",
       "complete": false
     },
@@ -278,6 +382,40 @@
       "registry_snapshot": "data/java/xml/registry-snapshot.json",
       "unresolved_leads": "data/java/xml/leads.json",
       "protocol": "catalog/xml/PROTOCOL.md",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "java",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "yaml": 855
+      },
+      "leads_recorded": 5,
+      "leads_by_status": {
+        "fails_control": 1,
+        "selected": 2,
+        "unresolved": 2
+      },
+      "ranking_metric": "deps.dev directDependentCount summed over every Maven release",
+      "uncertainty": "Two verified Java YAML paths: SnakeYAML 2.7 (YAML 1.1 SafeConstructor) and SnakeYAML Engine 3.2 (YAML 1.2, CoreSchema configured), separately maintained code bases with shared lineage. jackson-dataformat-yaml 2.23.0, the top lead by deps.dev summed dependents (32,860), parses every scalar and collection of both controls but returns aliases as anchor-name strings through YAMLMapper.readTree, so it fails the alias part of the control and stays a lead in the SnakeYAML family. SnakeYAML Engine's default JsonSchema reads ~ as a string; the selected path sets the documented CoreSchema. yamlbeans and eo-yaml (134 and 89) are not yet run. The bounded Maven Central search (query yaml, first 100 of 855 hits) and five named leads are recorded; deps.dev summed directDependentCount counts package adoption, not YAML-specific use. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars. Coverage and AFL++ feedback are SnakeYAML and Engine source lines under JaCoCo; the control differences are in the scanner, parser and constructors.",
+      "runtime_evidence": "data/java/yaml/standard.json",
+      "registry_snapshot": "data/java/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/java/yaml/leads.json",
+      "third_party_evidence": "data/java/yaml/parsers.json",
+      "third_party_control_results": "data/java/yaml/verification.json",
+      "afl_feedback": "data/java/yaml/afl-feedback.json",
       "phase": "pilot",
       "complete": false
     },
@@ -343,6 +481,43 @@
       "complete": false
     },
     {
+      "ecosystem": "javascript",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "yaml": 41087
+      },
+      "leads_recorded": 5,
+      "leads_by_status": {
+        "selected": 2,
+        "shared_family": 2,
+        "unresolved": 1
+      },
+      "ranking_metric": "npm downloads in the last month",
+      "uncertainty": "Two verified third-party YAML paths (js-yaml 5.5.0, yaml 2.9.1), selected in descending npm last-month order from the bounded npm search (query 'yaml', first 100 of 41087 hits) and five named leads. js-yaml 5.5.0 ships one bundled dist/js-yaml.cjs.js containing its own YAML 1.2 event parser (parseEvents) and constructor (constructFromEvents). yaml 2.9.1 has its own Lexer and Parser (dist/parse/lexer.js, parser.js) producing a CST that the Composer (dist/compose/) turns into Document nodes; toJS() resolves aliases. Each adapter decodes local bytes as strict UTF-8, calls the documented text API with default (YAML 1.2 core) options and maps the result to the Parsarium typed tree. JavaScript numbers lose YAML's int/float distinction, so a finite integral number is typed int; the controls contain no integral-valued floats or integer-like keys, so this cannot change the result. 3 leads remain unverified (yaml-ast-parser, @stoplight/yaml, yamljs); yaml-ast-parser and @stoplight/yaml are js-yaml 3.x lineage. npm downloads measure package adoption, largely transitive, not YAML parsing volume. Two schema-neutral valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed-input behavior.",
+      "runtime_evidence": "data/javascript/yaml/standard.json",
+      "registry_snapshot": "data/javascript/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/javascript/yaml/leads.json",
+      "third_party_evidence": "data/javascript/yaml/parsers.json",
+      "third_party_control_results": "data/javascript/yaml/verification.json",
+      "afl_feedback": [
+        "data/javascript/yaml/js-yaml-valid-feedback.json",
+        "data/javascript/yaml/yaml-valid-feedback.json"
+      ],
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "python",
       "format": "json",
       "status": "pilot_ten_selected_search_bounded",
@@ -396,6 +571,39 @@
       "registry_snapshot": "data/python/xml/leads.json",
       "unresolved_leads": "data/python/xml/leads.json",
       "source_lock": "data/python/xml/source-lock.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "python",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "project name contains 'yaml'"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "project name contains 'yaml'": 798
+      },
+      "leads_recorded": 7,
+      "leads_by_status": {
+        "selected": 2,
+        "shared_family": 3,
+        "unresolved": 2
+      },
+      "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "uncertainty": "Two verified third-party paths, in PyPI last_month order: PyYAML 6.0.3 through the pure-Python yaml.SafeLoader (1,227,712,536 last-month downloads; YAML 1.1 resolvers; the libyaml CSafeLoader route is a separate unresolved lead); ruamel.yaml 0.19.1 through YAML(typ='safe', pure=True) (177,667,165; PyYAML-derived scanner/parser lineage, YAML 1.2 resolver). Each gives the hand-written typed tree on both schema-neutral YAML controls through bytes, decoded str and a local binary stream, with Python line coverage of its own package and three identical AFL++ line-bridge runs per control whose controls differ in scanner.py and parser.py lines. ruamel.yaml derives from PyYAML's pure-Python loader, so the two selected paths share a code lineage though they are separate, separately maintained code bases. The bounded search (project name contains 'yaml'; first 100 alphabetical hits of 798, captured 2026-11-17) and named leads are recorded; remaining leads (strictyaml and oyaml/yamlcore as wrappers, rapidyaml, and PyYAML's CSafeLoader route) are unverified. Package adoption is not YAML-specific use. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys, YAML 1.1-only scalars or malformed input.",
+      "third_party_evidence": "data/python/yaml/parsers.json",
+      "third_party_control_results": "data/python/yaml/verification.json",
+      "runtime_evidence": "data/python/yaml/standard.json",
+      "registry_snapshot": "data/python/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/python/yaml/leads.json",
       "phase": "pilot",
       "complete": false
     },
@@ -499,6 +707,42 @@
       "complete": false
     },
     {
+      "ecosystem": "rust",
+      "format": "yaml",
+      "status": "pilot_two_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 2,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "yaml": 11139
+      },
+      "leads_recorded": 10,
+      "leads_by_status": {
+        "selected": 2,
+        "shared_family": 3,
+        "unresolved": 5
+      },
+      "ranking_metric": "crates.io recent_downloads (90 days)",
+      "uncertainty": "2 verified Rust YAML paths (serde_yaml, yaml-rust) out of 10 named leads from the bounded crates.io search (yaml; first 100 of 11,139 hits, captured 2026-11-17), checked in crates.io 90-day recent_downloads order. serde_yaml is in the libyaml family: it drives unsafe-libyaml, a c2rust translation of libyaml, whose lead is recorded as shared family rather than a second path; serde_yml and serde_norway are serde_yaml forks over the same family. yaml-rust has its own pure-Rust scanner and parser; yaml-rust2, saphyr and saphyr-parser continue that code base and remain unverified leads of the same lineage, as does serde-saphyr. serde_yaml is archived upstream (+deprecated) and yaml-rust is unmaintained; both still lead the download metric, which counts transitive installs, not YAML-specific use. The two schema-neutral controls do not test tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars.",
+      "third_party_evidence": "data/rust/yaml/parsers.json",
+      "third_party_control_results": [
+        "projects/yaml/rust/serde_yaml/verification.json",
+        "projects/yaml/rust/yaml_rust/verification.json"
+      ],
+      "runtime_evidence": "data/rust/yaml/standard.json",
+      "registry_snapshot": "data/rust/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/rust/yaml/leads.json",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
       "ecosystem": "php",
       "format": "json",
       "status": "pilot_nine_selected_search_bounded",
@@ -573,6 +817,39 @@
       "registry_snapshot": "data/php/xml/registry-snapshot.json",
       "unresolved_leads": "data/php/xml/leads.json",
       "protocol": "catalog/xml/PROTOCOL.md",
+      "phase": "pilot",
+      "complete": false
+    },
+    {
+      "ecosystem": "php",
+      "format": "yaml",
+      "status": "pilot_one_verified_bounded_search",
+      "working_target": 10,
+      "ceiling": 10,
+      "verified_third_party_count": 1,
+      "verified_standard_or_runtime_count": 0,
+      "search_queries": [
+        "yaml"
+      ],
+      "search_limit_per_query": 100,
+      "search_hits_recorded": 100,
+      "unique_search_hits": 100,
+      "search_totals": {
+        "yaml": 1954
+      },
+      "leads_recorded": 3,
+      "leads_by_status": {
+        "excluded": 2,
+        "unresolved": 1
+      },
+      "ranking_metric": "Packagist lifetime downloads",
+      "uncertainty": "One verified PHP YAML path. symfony/yaml v8.1.11 parses both schema-neutral valid controls through the documented Yaml::parse(string) with Yaml::PARSE_OBJECT_FOR_MAP into exact ordered typed trees; without that flag mappings become PHP arrays and {} cannot be told from []. Xdebug covers 570 package lines (365 in Parser.php); the parser-line AFL++ bridge repeats identically three times per control and the controls differ by 61 lines and 61 tuples, all in Parser.php, Inline.php and Unescaper.php. mustangostang/spyc 0.6.3 is excluded: it leaves \\u and \\t escapes undecoded, drops the final line break of clip-chomped block scalars, misreads '|-' with more-indented lines and returns '...' as a sequence item. dallgoot/yaml 1.0.1 (372,583) is excluded: it leaves \\\" and \\t escapes and the single-quoted '' escape undecoded. The PECL yaml extension (libyaml family; no Packagist metric) remains an unverified lead. The bounded Packagist search used one query ('yaml', first 100 of 1,954 hits). Packagist downloads are package adoption, mostly transitive through Symfony and Laravel, not YAML parsing frequency. Two valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed-input behavior.",
+      "runtime_evidence": "data/php/yaml/standard.json",
+      "registry_snapshot": "data/php/yaml/registry-snapshot.json",
+      "unresolved_leads": "data/php/yaml/leads.json",
+      "selection": "symfony/yaml v8.1.11 (926,050,815 Packagist downloads), the top lead, is verified: an own pure-PHP parser (Parser.php, Inline.php, Unescaper.php). mustangostang/spyc 0.6.3 (51,101,645), the second lead, is excluded after a pinned probe failed both valid controls; dallgoot/yaml 1.0.1 (372,583), the third, is excluded after failing the primary control.",
+      "third_party_evidence": "data/php/yaml/parsers.json",
+      "third_party_control_results": "data/php/yaml/verification.json",
       "phase": "pilot",
       "complete": false
     }

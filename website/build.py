@@ -704,6 +704,8 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
         rows = []
         for fmt in catalog["formats"]:
             controls = Counter(t["control"] for t in targets.values() if t["format"] == fmt["id"])
+            if not controls:
+                continue  # a newly registered format with no runnable target yet
             control = controls.most_common(1)[0][0]
             head = (ROOT / control).read_bytes()[:8]
             hexes = " ".join(f"{b:02x}" for b in head)
