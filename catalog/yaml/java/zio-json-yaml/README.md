@@ -244,3 +244,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build yaml java zio_json_yaml
+python3 parsarium.py run yaml java zio_json_yaml controls/yaml/catalog.yaml
+```

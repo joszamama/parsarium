@@ -256,3 +256,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build yaml python rapidyaml
+python3 parsarium.py run yaml python rapidyaml controls/yaml/catalog.yaml
+```
