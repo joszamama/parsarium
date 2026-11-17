@@ -1,0 +1,14 @@
+{
+  "ecosystem": "python",
+  "format": "sql",
+  "status": "none_documented_parse_tree_api",
+  "verified_apis": [],
+  "no_api_findings": [
+    {
+      "runtime": "CPython 3.14 sqlite3",
+      "official_documentation": "https://docs.python.org/3.14/library/sqlite3.html",
+      "checked_at_utc": "2026-11-17",
+      "finding": "sqlite3 is a binding to the SQLite engine. Connection.execute / sqlite3_prepare compile and run statements; complete_statement only checks for a terminating semicolon outside literals. There is no syntax tree, so it is recorded as an engine API and used only in the controls oracle (EXPLAIN prefix, authorizer callback)."
+    }
+  ]
+}

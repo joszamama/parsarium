@@ -1,0 +1,118 @@
+{
+  "captured_from": "data/rust/sql/registry-snapshot.json",
+  "metric": "crates.io recent_downloads (trailing 90 days)",
+  "captured_at_utc": "2026-11-17T16:38:18.102377+00:00",
+  "note": "Leads are not verified parsers. Ranks are assigned only among verified paths.",
+  "leads": [
+    {
+      "name": "sqlparser",
+      "status": "unresolved",
+      "metric_value": 18971518,
+      "metric_error": null,
+      "latest_release_observed": "0.64.0",
+      "family": "sqlparser-rs recursive-descent parser",
+      "documented_api_lead": "Parser::parse_sql",
+      "reason": "Parser::parse_sql(&GenericDialect, sql) returns Vec<Statement> AST."
+    },
+    {
+      "name": "sqlparser_derive",
+      "status": "excluded",
+      "metric_value": 12207766,
+      "metric_error": null,
+      "latest_release_observed": "0.7.0",
+      "family": "sqlparser-rs",
+      "documented_api_lead": null,
+      "reason": "Proc-macro helper for sqlparser's AST visitors; no parser."
+    },
+    {
+      "name": "datafusion-sql",
+      "status": "excluded",
+      "metric_value": 8022751,
+      "metric_error": null,
+      "latest_release_observed": "55.2.0",
+      "family": "sqlparser-rs",
+      "documented_api_lead": null,
+      "reason": "DataFusion SQL planner over sqlparser ASTs; shared sqlparser-rs family, no own parser."
+    },
+    {
+      "name": "sqlformat",
+      "status": "excluded",
+      "metric_value": 5159931,
+      "metric_error": null,
+      "latest_release_observed": "0.5.0",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Formatter; tokens to text, no syntax tree."
+    },
+    {
+      "name": "pg_query",
+      "status": "unresolved",
+      "metric_value": 2607956,
+      "metric_error": null,
+      "latest_release_observed": "18.1.0",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "pg_query::parse",
+      "reason": "Rust FFI binding to libpg_query; pg_query::parse returns a ParseResult protobuf tree."
+    },
+    {
+      "name": "sqlite3-parser",
+      "status": "unresolved",
+      "metric_value": 1003820,
+      "metric_error": null,
+      "latest_release_observed": "0.17.0",
+      "family": "SQLite grammar (Lemon, Rust port)",
+      "documented_api_lead": "Parser::next",
+      "reason": "Lemon-generated SQLite grammar ported to Rust; Parser yields ast::Cmd/Stmt."
+    },
+    {
+      "name": "polyglot-sql",
+      "status": "unresolved",
+      "metric_value": 113477,
+      "metric_error": null,
+      "latest_release_observed": "0.14.1",
+      "family": "polyglot-sql",
+      "documented_api_lead": "parse",
+      "reason": "SQL transpiler with its own parser."
+    },
+    {
+      "name": "gluesql-core",
+      "status": "excluded",
+      "metric_value": 83297,
+      "metric_error": null,
+      "latest_release_observed": "0.20.0",
+      "family": "sqlparser-rs",
+      "documented_api_lead": null,
+      "reason": "Database engine; parses through sqlparser-rs."
+    },
+    {
+      "name": "sql_query_builder",
+      "status": "excluded",
+      "metric_value": 15937,
+      "metric_error": null,
+      "latest_release_observed": "2.7.2",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Query builder; emits SQL."
+    },
+    {
+      "name": "nom-sql",
+      "status": "unresolved",
+      "metric_value": 1551,
+      "metric_error": null,
+      "latest_release_observed": "0.0.11",
+      "family": "nom-sql",
+      "documented_api_lead": "parse_query",
+      "reason": "nom-based MySQL subset parser (old)."
+    },
+    {
+      "name": "sql-parse",
+      "status": "unresolved",
+      "metric_value": 746,
+      "metric_error": null,
+      "latest_release_observed": "0.28.0",
+      "family": "sql-parse",
+      "documented_api_lead": "parse_statements",
+      "reason": "MySQL/MariaDB/PostgreSQL parser with its own AST."
+    }
+  ]
+}

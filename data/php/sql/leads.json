@@ -1,0 +1,68 @@
+{
+  "captured_from": "data/php/sql/registry-snapshot.json",
+  "metric": "Packagist total downloads",
+  "captured_at_utc": "2026-11-17T16:38:36.860255+00:00",
+  "note": "Leads are not verified parsers. Ranks are assigned only among verified paths.",
+  "leads": [
+    {
+      "name": "doctrine/sql-formatter",
+      "status": "excluded",
+      "metric_value": 216519891,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Formatter and highlighter; tokenizes, no syntax tree."
+    },
+    {
+      "name": "jdorn/sql-formatter",
+      "status": "excluded",
+      "metric_value": 120134108,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Formatter; no syntax tree."
+    },
+    {
+      "name": "iamcal/sql-parser",
+      "status": "excluded",
+      "metric_value": 72745721,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "iamcal/sql-parser",
+      "documented_api_lead": "SQLParser::parse",
+      "reason": "MySQL CREATE TABLE schema parser; cannot parse the SELECT or INSERT controls (scope mismatch)."
+    },
+    {
+      "name": "phpmyadmin/sql-parser",
+      "status": "unresolved",
+      "metric_value": 55800144,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "phpMyAdmin hand-written lexer and parser",
+      "documented_api_lead": "new Parser($sql)",
+      "reason": "new Parser($sql) builds statement objects (SelectStatement, InsertStatement) with components; MySQL dialect."
+    },
+    {
+      "name": "greenlion/php-sql-parser",
+      "status": "unresolved",
+      "metric_value": 13810212,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "PHP-SQL-Parser",
+      "documented_api_lead": "PHPSQLParser::parse",
+      "reason": "PHPSQLParser->parse($sql) returns a nested array parse tree (SELECT, FROM, WHERE ...)."
+    },
+    {
+      "name": "sqlftw/sqlftw",
+      "status": "unresolved",
+      "metric_value": 169733,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "SQLFTW",
+      "documented_api_lead": "Parser::parse",
+      "reason": "MySQL parser returning typed statement objects."
+    }
+  ]
+}

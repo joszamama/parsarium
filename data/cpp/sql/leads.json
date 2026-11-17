@@ -1,0 +1,88 @@
+{
+  "captured_from": "data/cpp/sql/registry-snapshot.json",
+  "metric": "Debian popcon sourcemax installations by source package (pinned snapshot)",
+  "captured_at_utc": "2026-11-17T16:38:43.983056+00:00",
+  "note": "Leads are not verified parsers. Ranks are assigned only among verified paths.",
+  "leads": [
+    {
+      "name": "soci",
+      "status": "excluded",
+      "metric_value": 518,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Database access wrapper; sends SQL to a backend and has no SQL parser."
+    },
+    {
+      "name": "mysql++",
+      "status": "excluded",
+      "metric_value": 178,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "MySQL client wrapper; no SQL parser."
+    },
+    {
+      "name": "libvsqlitepp",
+      "status": "excluded",
+      "metric_value": 111,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "SQLite",
+      "documented_api_lead": null,
+      "reason": "SQLite C++ wrapper; uses sqlite3_prepare and has no syntax tree."
+    },
+    {
+      "name": "libpg-query",
+      "status": "excluded",
+      "metric_value": 41,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": null,
+      "reason": "C library; recorded in the C cell. No C++ binding package in Debian."
+    },
+    {
+      "name": "duckdb",
+      "status": "unresolved",
+      "metric_value": 40,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "DuckDB transformer over a libpg_query-derived PostgreSQL grammar",
+      "documented_api_lead": "duckdb::Parser::ParseQuery",
+      "reason": "DuckDB engine. duckdb::Parser::ParseQuery in the public parser header returns SQLStatement objects (SelectNode, TableRef, ParsedExpression trees). DuckDB uses a libpg_query-derived PostgreSQL grammar plus its own transformer, so it shares the PostgreSQL grammar family. Not yet run: a source build of the engine with coverage is large."
+    },
+    {
+      "name": "libodb",
+      "status": "excluded",
+      "metric_value": 28,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "ODB object-relational mapper runtime; generates SQL, no parser."
+    },
+    {
+      "name": "cppdb",
+      "status": "excluded",
+      "metric_value": 15,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "SQL connectivity library; no parser."
+    },
+    {
+      "name": "hsql (hyrise/sql-parser)",
+      "status": "unresolved",
+      "metric_value": null,
+      "metric_error": "no Debian source package; no Homebrew formula",
+      "latest_release_observed": null,
+      "family": "Hyrise sql-parser (Bison/Flex)",
+      "documented_api_lead": "hsql::SQLParser::parse",
+      "reason": "hsql::SQLParser::parse returns SQLParserResult with SQLStatement trees; documented local text API. No Debian source package and no Homebrew formula, so it has no value for this cell's primary popcon metric and cannot be ranked under PROTOCOL.md (no C/C++ fallback signal)."
+    }
+  ]
+}

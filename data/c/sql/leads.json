@@ -1,0 +1,68 @@
+{
+  "captured_from": "data/c/sql/registry-snapshot.json",
+  "metric": "Debian popcon sourcemax installations by source package (pinned snapshot)",
+  "captured_at_utc": "2026-11-17T16:38:43.756941+00:00",
+  "note": "Leads are not verified parsers. Ranks are assigned only among verified paths.",
+  "leads": [
+    {
+      "name": "sqlite3",
+      "status": "excluded",
+      "metric_value": 297378,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "SQLite (Lemon-generated parse.y)",
+      "documented_api_lead": "sqlite3_prepare_v2",
+      "reason": "SQLite engine. sqlite3_prepare_v2 compiles statement text into a VDBE bytecode program; the documented C API exposes no syntax tree, so it does not give the AST summary. It is the oracle cross-check in controls/sql/check_controls.py, not a parser path."
+    },
+    {
+      "name": "postgresql-18",
+      "status": "excluded",
+      "metric_value": 104539,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": null,
+      "reason": "PostgreSQL server source package; the server parser (raw_parser) is not a documented library API outside the backend. libpg_query is the extracted library form of this grammar."
+    },
+    {
+      "name": "sqlcipher",
+      "status": "excluded",
+      "metric_value": 3786,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "SQLite (fork)",
+      "documented_api_lead": "sqlite3_prepare_v2",
+      "reason": "SQLite fork with encryption; same engine API and no syntax tree, as for sqlite3."
+    },
+    {
+      "name": "libgda5",
+      "status": "unresolved",
+      "metric_value": 2105,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "libgda Lemon-generated SQL parser",
+      "documented_api_lead": "gda_sql_parser_parse_string",
+      "reason": "GNOME Data Access 5. Its documented GdaSqlParser (gda_sql_parser_parse_string) returns a GdaStatement whose GdaSqlStatement contents are a public struct tree (select targets, FROM targets and joins, WHERE expression, GROUP BY, ORDER BY). Qualifies on documentation; not yet run. Its popcon count covers the whole data-access library, not SQL parsing."
+    },
+    {
+      "name": "libpg-query",
+      "status": "unresolved",
+      "metric_value": 41,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "pg_query_parse",
+      "reason": "libpg_query: documented pg_query_parse / pg_query_parse_protobuf return the PostgreSQL parse tree (JSON or protobuf) for local text."
+    },
+    {
+      "name": "duckdb",
+      "status": "excluded",
+      "metric_value": 40,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "DuckDB (libpg_query-derived grammar)",
+      "documented_api_lead": null,
+      "reason": "C++ library (DuckDB engine); recorded in the C++ cell."
+    }
+  ]
+}

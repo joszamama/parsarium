@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "note": "Hand-written from the statement text; not produced by any parser under test. Field definitions are in catalog/sql/PROTOCOL.md.",
+  "controls": {
+    "select-join.sql": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": ["customers", "orders"],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": ["count", "sum"],
+          "literals": [["number", "10"], ["string", "paid"]]
+        }
+      ]
+    },
+    "insert-values.sql": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": ["orders"],
+          "columns": 4,
+          "rows": 2,
+          "literals": [["number", "1"], ["number", "19.5"], ["number", "2"], ["number", "250"],
+                       ["number", "42"], ["number", "7"], ["string", "open"], ["string", "paid"]]
+        }
+      ]
+    }
+  }
+}

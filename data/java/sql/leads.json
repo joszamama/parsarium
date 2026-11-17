@@ -1,0 +1,118 @@
+{
+  "captured_from": "data/java/sql/registry-snapshot.json",
+  "metric": "deps.dev directDependentCount summed over every Maven release",
+  "captured_at_utc": "2026-11-17T16:40:16.208516+00:00",
+  "note": "Leads are not verified parsers. Ranks are assigned only among verified paths.",
+  "leads": [
+    {
+      "name": "org.jooq:jooq",
+      "status": "unresolved",
+      "metric_value": 4574,
+      "metric_error": null,
+      "latest_release_observed": "3.21.9",
+      "family": "jOOQ hand-written parser",
+      "documented_api_lead": "Parser.parseQuery",
+      "reason": "jOOQ Parser (DSL.using(dialect).parser().parseQuery) returns a Query object model traversable through the QOM $-API; documented in the jOOQ manual."
+    },
+    {
+      "name": "com.alibaba:druid",
+      "status": "unresolved",
+      "metric_value": 1945,
+      "metric_error": null,
+      "latest_release_observed": "1.2.28",
+      "family": "Druid hand-written SQL parser",
+      "documented_api_lead": "SQLUtils.parseStatements",
+      "reason": "Druid's SQL module: SQLUtils.parseStatements(sql, DbType) returns SQLStatement ASTs (SQLSelectStatement, SQLInsertStatement). The artifact also contains a JDBC connection pool."
+    },
+    {
+      "name": "com.facebook.presto:presto-parser",
+      "status": "unresolved",
+      "metric_value": 1453,
+      "metric_error": null,
+      "latest_release_observed": "0.300",
+      "family": "Presto/Trino ANTLR grammar",
+      "documented_api_lead": "SqlParser.createStatement",
+      "reason": "Presto SqlParser.createStatement returns an AST Statement (Query, Insert)."
+    },
+    {
+      "name": "org.apache.calcite:calcite-core",
+      "status": "unresolved",
+      "metric_value": 1250,
+      "metric_error": null,
+      "latest_release_observed": "1.42.0",
+      "family": "Calcite JavaCC grammar",
+      "documented_api_lead": "SqlParser.parseStmt",
+      "reason": "Calcite SqlParser.create(sql).parseStmt returns SqlNode trees."
+    },
+    {
+      "name": "com.github.jsqlparser:jsqlparser",
+      "status": "unresolved",
+      "metric_value": 950,
+      "metric_error": null,
+      "latest_release_observed": "5.4",
+      "family": "JSqlParser JavaCC grammar",
+      "documented_api_lead": "CCJSqlParserUtil.parse",
+      "reason": "CCJSqlParserUtil.parse returns Statement objects (Select/PlainSelect, Insert)."
+    },
+    {
+      "name": "io.trino:trino-parser",
+      "status": "unresolved",
+      "metric_value": 525,
+      "metric_error": null,
+      "latest_release_observed": "484",
+      "family": "Presto/Trino ANTLR grammar",
+      "documented_api_lead": "SqlParser.createStatement",
+      "reason": "Trino SqlParser.createStatement; same ANTLR lineage as presto-parser."
+    },
+    {
+      "name": "io.prestosql:presto-parser",
+      "status": "unresolved",
+      "metric_value": 282,
+      "metric_error": null,
+      "latest_release_observed": "350",
+      "family": "Presto/Trino ANTLR grammar",
+      "documented_api_lead": "SqlParser.createStatement",
+      "reason": "PrestoSQL (pre-Trino rename) parser; same lineage as trino-parser."
+    },
+    {
+      "name": "org.apache.spark:spark-catalyst_2.13",
+      "status": "unresolved",
+      "metric_value": 278,
+      "metric_error": null,
+      "latest_release_observed": "4.3.0",
+      "family": "Spark SQL ANTLR grammar",
+      "documented_api_lead": "CatalystSqlParser.parsePlan",
+      "reason": "Spark Catalyst CatalystSqlParser.parsePlan returns a LogicalPlan; Scala artifact with a large runtime."
+    },
+    {
+      "name": "org.apache.shardingsphere:shardingsphere-sql-parser-engine",
+      "status": "unresolved",
+      "metric_value": 135,
+      "metric_error": null,
+      "latest_release_observed": "5.3.2",
+      "family": "ShardingSphere ANTLR grammars",
+      "documented_api_lead": "SQLParserEngine.parse",
+      "reason": "ShardingSphere SQL parser engine (ANTLR per dialect)."
+    },
+    {
+      "name": "com.github.vertical-blank:sql-formatter",
+      "status": "excluded",
+      "metric_value": 111,
+      "metric_error": null,
+      "latest_release_observed": "2.0.5",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Formatter that returns text; no syntax tree."
+    },
+    {
+      "name": "net.sf.jsqlparser:jsqlparser",
+      "status": "excluded",
+      "metric_value": 8,
+      "metric_error": null,
+      "latest_release_observed": "0.7.0",
+      "family": "JSqlParser JavaCC grammar",
+      "documented_api_lead": null,
+      "reason": "Ancient JSqlParser coordinate (0.7.0); superseded by com.github.jsqlparser:jsqlparser."
+    }
+  ]
+}

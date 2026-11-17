@@ -1,0 +1,128 @@
+{
+  "captured_from": "data/go/sql/registry-snapshot.json",
+  "metric": "pkg.go.dev Imported by package count",
+  "captured_at_utc": "2026-11-17T16:39:35.036025+00:00",
+  "note": "Leads are not verified parsers. Ranks are assigned only among verified paths.",
+  "leads": [
+    {
+      "name": "vitess.io/vitess/go/vt/sqlparser",
+      "status": "unresolved",
+      "metric_value": 391,
+      "metric_error": null,
+      "latest_release_observed": "v0.24.5",
+      "family": "vitess MySQL grammar (goyacc)",
+      "documented_api_lead": "Parser.Parse",
+      "reason": "sqlparser.NewTestParser().Parse / Parser.Parse return an AST Statement (Select, Insert) for MySQL-dialect text."
+    },
+    {
+      "name": "github.com/pingcap/parser",
+      "status": "unresolved",
+      "metric_value": 385,
+      "metric_error": null,
+      "latest_release_observed": "v3.1.2+incompatible",
+      "family": "TiDB MySQL grammar (goyacc)",
+      "documented_api_lead": "Parser.Parse",
+      "reason": "Archived standalone TiDB parser module; parser.New().Parse returns []ast.StmtNode. Superseded by github.com/pingcap/tidb/pkg/parser."
+    },
+    {
+      "name": "github.com/xwb1989/sqlparser",
+      "status": "unresolved",
+      "metric_value": 305,
+      "metric_error": null,
+      "latest_release_observed": "v0.0.0-...-1203878",
+      "family": "vitess MySQL grammar (extracted fork)",
+      "documented_api_lead": "sqlparser.Parse",
+      "reason": "Extracted copy of an older vitess sqlparser; sqlparser.Parse returns Statement."
+    },
+    {
+      "name": "github.com/pingcap/tidb/pkg/parser",
+      "status": "unresolved",
+      "metric_value": 176,
+      "metric_error": null,
+      "latest_release_observed": "v0.0.0-...-1e84b35",
+      "family": "TiDB MySQL grammar (goyacc)",
+      "documented_api_lead": "Parser.Parse",
+      "reason": "Current TiDB parser module; parser.New().ParseOneStmt / Parse return ast.StmtNode. Same family as pingcap/parser."
+    },
+    {
+      "name": "github.com/blastrain/vitess-sqlparser/sqlparser",
+      "status": "unresolved",
+      "metric_value": 88,
+      "metric_error": null,
+      "latest_release_observed": "v0.0.0-...-a139afb",
+      "family": "vitess MySQL grammar (fork)",
+      "documented_api_lead": "sqlparser.Parse",
+      "reason": "vitess sqlparser fork with a TiDB-parser fallback; shared vitess family."
+    },
+    {
+      "name": "github.com/pganalyze/pg_query_go/v6",
+      "status": "unresolved",
+      "metric_value": 54,
+      "metric_error": null,
+      "latest_release_observed": "v6.2.5",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "pg_query.Parse",
+      "reason": "cgo binding to libpg_query; pg_query.Parse returns the PostgreSQL protobuf parse tree."
+    },
+    {
+      "name": "github.com/auxten/postgresql-parser/pkg/sql/parser",
+      "status": "unresolved",
+      "metric_value": 22,
+      "metric_error": null,
+      "latest_release_observed": "v1.0.1",
+      "family": "CockroachDB PostgreSQL-compatible grammar",
+      "documented_api_lead": "parser.Parse",
+      "reason": "Extracted CockroachDB parser; parser.Parse returns tree.Statement values."
+    },
+    {
+      "name": "github.com/rqlite/sql",
+      "status": "unresolved",
+      "metric_value": 20,
+      "metric_error": null,
+      "latest_release_observed": "v0.0.0-...-5c0832f",
+      "family": "rqlite/sql hand-written parser",
+      "documented_api_lead": "Parser.ParseStatement",
+      "reason": "SQLite-dialect parser; sql.NewParser(reader).ParseStatement."
+    },
+    {
+      "name": "github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser",
+      "status": "unresolved",
+      "metric_value": 13,
+      "metric_error": null,
+      "latest_release_observed": "v0.25.2",
+      "family": "CockroachDB PostgreSQL-compatible grammar",
+      "documented_api_lead": "parser.Parse",
+      "reason": "Official extraction of the CockroachDB SQL parser; parser.Parse returns statements."
+    },
+    {
+      "name": "github.com/AfterShip/clickhouse-sql-parser/parser",
+      "status": "unresolved",
+      "metric_value": 13,
+      "metric_error": null,
+      "latest_release_observed": "v0.5.7",
+      "family": "clickhouse-sql-parser hand-written",
+      "documented_api_lead": "Parser.ParseStmts",
+      "reason": "ClickHouse dialect parser; the PROTOCOL subset is generic, but dialect fit is untested."
+    },
+    {
+      "name": "github.com/akito0107/xsqlparser",
+      "status": "unresolved",
+      "metric_value": 7,
+      "metric_error": null,
+      "latest_release_observed": "v1.0.0",
+      "family": "sqlparser-rs port",
+      "documented_api_lead": "Parser.ParseSQL",
+      "reason": "Port of sqlparser-rs to Go."
+    },
+    {
+      "name": "github.com/krasun/gosqlparser",
+      "status": "unresolved",
+      "metric_value": 1,
+      "metric_error": null,
+      "latest_release_observed": "v1.0.5",
+      "family": "gosqlparser",
+      "documented_api_lead": "gosqlparser.Parse",
+      "reason": "Small subset parser; SELECT JOIN support unverified."
+    }
+  ]
+}

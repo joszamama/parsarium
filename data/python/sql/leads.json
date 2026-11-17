@@ -1,0 +1,148 @@
+{
+  "captured_from": "data/python/sql/registry-snapshot.json",
+  "metric": "PyPI Stats last_month downloads (mirrors excluded)",
+  "captured_at_utc": "2026-11-17T16:38:55.993433+00:00",
+  "note": "Leads are not verified parsers. Ranks are assigned only among verified paths.",
+  "leads": [
+    {
+      "name": "sqlparse",
+      "status": "unresolved",
+      "metric_value": 125550021,
+      "metric_error": null,
+      "latest_release_observed": "0.6.1",
+      "family": "sqlparse lexer and grouping engine",
+      "documented_api_lead": "sqlparse.parse",
+      "reason": "sqlparse.parse returns grouped Statement token trees; non-validating parser (see catalog/sql/PROTOCOL.md)."
+    },
+    {
+      "name": "sqlglot",
+      "status": "unresolved",
+      "metric_value": 91735974,
+      "metric_error": null,
+      "latest_release_observed": "30.33.0",
+      "family": "sqlglot tokenizer and recursive-descent parser",
+      "documented_api_lead": "sqlglot.parse",
+      "reason": "sqlglot.parse / parse_one return an Expression AST (exp.Select, exp.Insert); dialect selectable."
+    },
+    {
+      "name": "sqlfluff",
+      "status": "unresolved",
+      "metric_value": 11606805,
+      "metric_error": null,
+      "latest_release_observed": "4.5.0",
+      "family": "sqlfluff dialect grammars",
+      "documented_api_lead": "sqlfluff.parse",
+      "reason": "sqlfluff.parse(sql, dialect=...) returns a parse-tree record; documented simple API. Large linter."
+    },
+    {
+      "name": "pglast",
+      "status": "unresolved",
+      "metric_value": 10961367,
+      "metric_error": null,
+      "latest_release_observed": "8.8",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "pglast.parse_sql",
+      "reason": "pglast.parse_sql returns libpg_query parse-tree nodes via a Cython binding."
+    },
+    {
+      "name": "sql-metadata",
+      "status": "excluded",
+      "metric_value": 4518030,
+      "metric_error": null,
+      "latest_release_observed": "3.0.1",
+      "family": "sqlparse (wrapper)",
+      "documented_api_lead": null,
+      "reason": "Wrapper over sqlparse that extracts tables/columns; same sqlparse family, no own parser."
+    },
+    {
+      "name": "sqlglotrs",
+      "status": "excluded",
+      "metric_value": 4371917,
+      "metric_error": null,
+      "latest_release_observed": "0.13.0",
+      "family": "sqlglot",
+      "documented_api_lead": null,
+      "reason": "Optional Rust tokenizer for sqlglot; not a separate parser API."
+    },
+    {
+      "name": "sql-formatter",
+      "status": "excluded",
+      "metric_value": 665038,
+      "metric_error": null,
+      "latest_release_observed": "0.6.2",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Formatter; no syntax tree."
+    },
+    {
+      "name": "sqloxide",
+      "status": "unresolved",
+      "metric_value": 511801,
+      "metric_error": null,
+      "latest_release_observed": "0.61.1",
+      "family": "sqlparser-rs",
+      "documented_api_lead": "sqloxide.parse_sql",
+      "reason": "Python binding to sqlparser-rs; parse_sql returns the serialized AST."
+    },
+    {
+      "name": "moz-sql-parser",
+      "status": "excluded",
+      "metric_value": 106687,
+      "metric_error": null,
+      "latest_release_observed": "4.40.21126",
+      "family": "mo-sql-parsing",
+      "documented_api_lead": null,
+      "reason": "Superseded name of mo-sql-parsing."
+    },
+    {
+      "name": "mo-sql-parsing",
+      "status": "unresolved",
+      "metric_value": 103062,
+      "metric_error": null,
+      "latest_release_observed": "11.699.26234",
+      "family": "mo-parsing grammar",
+      "documented_api_lead": "parse",
+      "reason": "mo_sql_parsing.parse returns a JSON-like parse tree (mo-parsing combinators)."
+    },
+    {
+      "name": "simple-ddl-parser",
+      "status": "excluded",
+      "metric_value": 79894,
+      "metric_error": null,
+      "latest_release_observed": "1.13.0",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "DDL-only parser; cannot parse SELECT."
+    },
+    {
+      "name": "psqlparse",
+      "status": "unresolved",
+      "metric_value": 8870,
+      "metric_error": null,
+      "latest_release_observed": "0.2.5",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "psqlparse.parse",
+      "reason": "Old libpg_query binding."
+    },
+    {
+      "name": "sqltree",
+      "status": "unresolved",
+      "metric_value": 4432,
+      "metric_error": null,
+      "latest_release_observed": "0.3.0",
+      "family": "sqltree",
+      "documented_api_lead": "sqltree.parse",
+      "reason": "Small SQL parser/formatter."
+    },
+    {
+      "name": "pg-query",
+      "status": "unresolved",
+      "metric_value": 2220,
+      "metric_error": null,
+      "latest_release_observed": "0.29",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "parse_sql",
+      "reason": "Old libpg_query binding (pg_query package)."
+    }
+  ]
+}
