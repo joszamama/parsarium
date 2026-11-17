@@ -1,0 +1,93 @@
+{
+  "kind": "third_party",
+  "api": "dnsPacket.decode(buf) on a local Buffer; type and class names mapped to numbers with dns-packet/types toType and dns-packet/classes toClass",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T17:03:34.530107+00:00",
+  "manifest": "projects/dns/javascript/dns_packet/manifest.json",
+  "image_id": "sha256:5c46c9c0e41add440b698228f5865091d427882d37a1f5a334f80b8b3ce2f670",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-dns-packet-target@5.6.1 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- dns-packet@5.6.1",
+    "  `-- @leichtgewicht/ip-codec@2.0.5"
+  ],
+  "source_sha256": "ed3fc8a11698beae354e8086d29b6de287c978d69d066308b935af7b059cbe59",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "6a0d56b97babb601884b356d8dd039e696a58df1242ba6e77c0b30bcfa553a5a",
+    "fuzz.js": "ec133ca57de3077cbacad70917e0bb9229273688da1a91319d766ab5c6352c28",
+    "harness.js": "f646409272eaebcc545b415cda6ad88dac429568f667c0d6d2e764a915227389",
+    "manifest.json": "0fcb1a0fedc9968b59680b9a90f095fe00d2ba0d018b0479871a1b551dd853fe",
+    "package-lock.json": "6ec8b813972858c8d892e142a128562d9310de99ec2e452e19d019df261e201a",
+    "package.json": "ddd1336b8f50b7759322e6833763c2ecf39e1b8d9216a86e6466b4a4f6856444",
+    "replay.js": "4303f822c933f19d7b35d977142a94bc9f14033c57db00fb3b3ba64c2a69d31e",
+    "run-control.js": "c5479d3b739b3120492fb0d88ee347e79f5bdf3b0d57e0880daf87c5080d536a",
+    "source-lock.json": "0f6f047f779ca9f524e1988723cecfad709815071cb69911cd543e1fb69a569c"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 6,
+  "parser_source_lines_covered": 407,
+  "format_specific_source_lines_covered": 354,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/javascript/dns_packet/target/coverage/coverage.json",
+  "pass": true
+}

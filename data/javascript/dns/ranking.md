@@ -1,24 +1,31 @@
-# JavaScript × DNS: leads (pilot)
+# JavaScript × DNS: selected parsers (pilot)
 
-No path is verified yet. Leads are ordered by one adoption metric to choose what to verify first; this is not a selection.
+One verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
-npm downloads, 2026-10-17:2026-11-15 (30 days), from [registry-snapshot.json](registry-snapshot.json) captured 2026-11-17. Compared only within this cell.
+npm downloads, 2026-10-17:2026-11-15 (30 days), from [registry-snapshot.json](registry-snapshot.json) captured 2026-11-17. Package-level counts include non-DNS use and are compared only within this cell.
+
+| Rank | Package | Release | Metric | Parser family |
+| ---: | --- | --- | ---: | --- |
+| 1 | [dns-packet](https://github.com/mafintosh/dns-packet/blob/v5.6.1/README.md#packet-decodebuf-offset) | 5.6.1 | 81,519,355 | dns-packet (mafintosh) decoder, index.js |
+
+**dns-packet 5.6.1** (MIT) parses local bytes with `dnsPacket.decode(buf: Buffer) -> packet object`. Both controls match the oracle summary. The response control covers 407 library lines in 6 files. AFL++ feedback repeats 3 times per control; response and query give 45/21 parser features and 65/41 AFL++ tuples, differing by 24 features and 24 tuples ([receipt](dns-packet-feedback-differential.json)). Own JavaScript decoder (name decompression, header and per-type rdata codecs in index.js). A and AAAA text comes from its dependency @leichtgewicht/ip-codec 2.0.5. Forks @dnsquery/dns-packet and @leichtgewicht/dns-packet share this family; multicast-dns uses it for mDNS.
+
+## Remaining leads
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
-| 1 | [dns-packet](https://github.com/mafintosh/dns-packet#readme) | 81,519,355 | `dnsPacket.decode(buf)` | dns-packet (mafintosh) |
-| 2 | [@dnsquery/dns-packet](https://www.npmjs.com/package/@dnsquery/dns-packet) | 785,358 | `decode(buf)` | dns-packet fork |
-| 3 | [dns2](https://github.com/song940/node-dns#readme) | 304,498 | `Packet.parse(buffer)` | dns2 own Packet parser |
-| 4 | [@leichtgewicht/dns-packet](https://www.npmjs.com/package/@leichtgewicht/dns-packet) | 121,612 | `decode(buf)` | dns-packet fork |
-| 5 | [native-dns-packet](https://github.com/tjfontaine/native-dns-packet) | 72,104 | `Packet.parse(buffer)` | native-dns-packet |
-| 6 | [dns-js](https://github.com/mdns-js/node-dns-js) | 13,675 | `DNSPacket.parse(buffer)` | dns-js |
-| 7 | [mdns-js-packet](https://www.npmjs.com/package/mdns-js-packet) | 4,819 | `DNSPacket.parse(buffer)` | dns-js family |
-| 8 | [dns-message](https://www.npmjs.com/package/dns-message) | 127 |  |  |
-| 9 | [dnspacket-ts](https://www.npmjs.com/package/dnspacket-ts) | 98 |  |  |
-| 10 | [@serverless-dns/dns-parser](https://www.npmjs.com/package/@serverless-dns/dns-parser) | 19 |  |  |
+| 1 | @dnsquery/dns-packet | 785,358 | `decode(buf)` | dns-packet fork |
+| 2 | dns2 | 304,498 | `Packet.parse(buffer)` | dns2 own Packet parser |
+| 3 | @leichtgewicht/dns-packet | 121,612 | `decode(buf)` | dns-packet fork |
+| 4 | native-dns-packet | 72,104 | `Packet.parse(buffer)` | native-dns-packet |
+| 5 | dns-js | 13,675 | `DNSPacket.parse(buffer)` | dns-js |
+| 6 | mdns-js-packet | 4,819 | `DNSPacket.parse(buffer)` | dns-js family |
+| 7 | dns-message | 127 |  |  |
+| 8 | dnspacket-ts | 98 |  |  |
+| 9 | @serverless-dns/dns-parser | 19 |  |  |
 
-## Excluded or recorded separately
+## Checked, excluded or recorded separately
 
 - **multicast-dns** (excluded): mDNS network API over dns-packet; no own parser.

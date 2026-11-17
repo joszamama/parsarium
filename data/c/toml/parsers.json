@@ -1,1 +1,105 @@
-[]
+[
+  {
+    "name": "dns-packet",
+    "version": "5.6.1",
+    "license": "MIT",
+    "license_evidence": "package.json \"license\": \"MIT\" and LICENSE in the npm tarball (sha256 ed3fc8a1...), checked in the image",
+    "input_api": "dnsPacket.decode(buf: Buffer) -> packet object",
+    "documentation": "https://github.com/mafintosh/dns-packet/blob/v5.6.1/README.md#packet-decodebuf-offset",
+    "source": "https://www.npmjs.com/package/dns-packet/v/5.6.1",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dns-packet (mafintosh) decoder, index.js",
+    "family_note": "Own JavaScript decoder (name decompression, header and per-type rdata codecs in index.js). A and AAAA text comes from its dependency @leichtgewicht/ip-codec 2.0.5. Forks @dnsquery/dns-packet and @leichtgewicht/dns-packet share this family; multicast-dns uses it for mDNS.",
+    "project": "projects/dns/javascript/dns_packet",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
+      "value": 81519355,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/dns-packet",
+      "captured_at_utc": "2026-11-17T16:37:41.752525+00:00",
+      "snapshot": "data/javascript/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 1,
+    "afl_feedback": "data/javascript/dns/dns-packet-feedback-differential.json"
+  }
+]
