@@ -12,7 +12,7 @@
 <p>Todo parser traza una línea entre las entradas que acepta y las que rechaza. Los parsers estrictos siguen la especificación de cerca. Los permisivos intentan recuperarse de pequeños errores, algo cómodo para los usuarios y a veces sorprendente para quien revisa la seguridad. Ninguna de las dos opciones es incorrecta por sí sola; lo que importa al probar es saber dónde traza su línea cada parser y si trata de forma segura todo lo que queda del lado aceptado.</p>
 
 <h2>Cómo organiza Parsarium los parsers</h2>
-<p>Parsarium se organiza primero por <strong>formato</strong> y después por <strong>lenguaje</strong>. Un formato en un lenguaje es una <em>celda</em>: PNG en C, ZIP en Go, HTTP/1.1 en PHP. Hay diez formatos y ocho lenguajes, así que ochenta celdas.</p>
+<p>Parsarium se organiza primero por <strong>formato</strong> y después por <strong>lenguaje</strong>. Un formato en un lenguaje es una <em>celda</em>: PNG en C, ZIP en Go, HTTP/1.1 en PHP. Hay {{FORMATS}} formatos y ocho lenguajes, así que {{CELLS}} celdas.</p>
 <table>
   <thead><tr><th>Formato</th><th>Estructura</th></tr></thead>
   <tbody>
@@ -33,7 +33,7 @@
 
 <section class="recap">
 <h2>Ideas clave</h2>
-<ul><li>Un parser convierte bytes en estructura, y el resto del programa se fía de esa estructura.</li><li>Los formatos describen su propia estructura con longitudes, recuentos y desplazamientos. Los parsers actúan sobre esos números, y ahí empiezan muchos bugs.</li><li>Hay dos tipos de bugs de parser que merece la pena buscar: el manejo inseguro de una sola entrada, y dos parsers que no se ponen de acuerdo sobre la misma entrada.</li><li>Parsarium se organiza por formato y después por lenguaje. Un formato en un lenguaje es una celda; diez formatos y ocho lenguajes dan ochenta celdas.</li></ul>
+<ul><li>Un parser convierte bytes en estructura, y el resto del programa se fía de esa estructura.</li><li>Los formatos describen su propia estructura con longitudes, recuentos y desplazamientos. Los parsers actúan sobre esos números, y ahí empiezan muchos bugs.</li><li>Hay dos tipos de bugs de parser que merece la pena buscar: el manejo inseguro de una sola entrada, y dos parsers que no se ponen de acuerdo sobre la misma entrada.</li><li>Parsarium se organiza por formato y después por lenguaje. Un formato en un lenguaje es una celda; {{FORMATS}} formatos y ocho lenguajes dan {{CELLS}} celdas.</li></ul>
 </section>
 <section class="quiz">
 <div class="section-title"><h2>Comprueba lo que sabes</h2><p class="label">Responde a las cinco para ver tu resultado</p></div>
@@ -65,7 +65,7 @@
 </div>
 <div class="exercise">
   <p class="label"><span>Ejercicio 1.3</span><span class="level">Reto</span></p>
-  <p>Busca una vulnerabilidad publicada en un parser de uno de los diez formatos. La <a href="https://nvd.nist.gov/vuln/search">búsqueda de NVD</a> o los avisos de seguridad de un proyecto son buenos puntos de partida. Responde a tres preguntas: qué campo del formato controlaba el atacante, qué hacía el parser con él, y si era un bug de una sola entrada o un desacuerdo entre dos programas.</p>
+  <p>Busca una vulnerabilidad publicada en un parser de uno de los {{FORMATS}} formatos. La <a href="https://nvd.nist.gov/vuln/search">búsqueda de NVD</a> o los avisos de seguridad de un proyecto son buenos puntos de partida. Responde a tres preguntas: qué campo del formato controlaba el atacante, qué hacía el parser con él, y si era un bug de una sola entrada o un desacuerdo entre dos programas.</p>
   <details><summary>Pista</summary><p>Busca el nombre de una biblioteca junto con palabras como <em>overflow</em>, <em>out-of-bounds</em> o <em>path traversal</em>. Los avisos que incluyen un archivo de prueba de concepto son los más fáciles de analizar.</p></details>
   <details><summary>Solución</summary><p>Un ejemplo muy conocido es <a href="https://security.snyk.io/research/zip-slip-vulnerability">Zip Slip</a> (2018). El atacante controla el nombre de una entrada en un archivo ZIP y escribe nombres como <code>../../etc/cron.d/job</code>. Muchas rutinas de extracción unían ese nombre al directorio de destino sin comprobarlo, así que los archivos se escribían fuera de él. Es un bug de una sola entrada: un programa se fió de un campo que debería haber validado. Apunta tu propio ejemplo de la misma manera: campo, comportamiento, tipo.</p></details>
 </div>

@@ -1,16 +1,10 @@
 name: Publish site
 
 on:
+  # Every push to main rebuilds the site from the repository, so catalog,
+  # receipt, script and format-registry changes all reach parsarium.com.
   push:
     branches: [main]
-    paths:
-      - '.github/workflows/pages.yml'
-      - 'website/**'
-      - 'catalog/**'
-      - 'data/**'
-      - 'projects/**'
-      - 'controls/**'
-      - 'scripts/build_readmes.py'
   workflow_dispatch:
 
 permissions:

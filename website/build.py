@@ -18,6 +18,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from audit_projects import fully_runnable
+from format_registry import ECOSYSTEMS as REGISTRY_ECOSYSTEMS, FORMAT_RECORDS
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,19 +26,21 @@ SITE = Path(__file__).resolve().parent
 REPO_URL = "https://github.com/joszamama/parsarium"
 CLOUDFLARE_BEACON_TOKEN = "768b709cb62a40f8a65bacc76109381b"
 
-FORMATS = [
-    ("png", "PNG", "Image", "A tiny grid of pixels, carried in chunks."),
-    ("zip", "ZIP", "Archive", "Files within a file, with a directory at the end."),
-    ("mp4", "MP4", "Media", "Boxes that organize moving pictures and sound."),
-    ("wav", "WAV", "Audio", "A familiar RIFF wrapper around sound samples."),
-    ("pdf", "PDF", "Document", "Pages, objects, and a trail of references."),
-    ("svg", "SVG", "Vector", "Shapes described as XML."),
-    ("http11", "HTTP/1.1", "Protocol", "Requests and headers travelling as text."),
-    ("ascii_ply", "ASCII PLY", "Geometry", "Vertices and faces in a readable mesh."),
-    ("ascii_pnm", "ASCII PNM", "Image", "Plain text pixels with very little ceremony."),
-    ("mp3_id3v2", "MP3 + ID3v2", "Audio", "Compressed audio with a metadata prelude."),
-]
-ECOSYSTEMS = ["c", "cpp", "go", "java", "javascript", "python", "rust", "php"]
+def load_formats(format_ids: set[str]) -> list[tuple[str, str, str, str]]:
+    """Return display rows for every format that has catalog cells.
+
+    Order, labels and descriptions come from the repository's format registry
+    (data/formats.json). A format with cells but no registry entry still
+    appears, labelled by its id, so adding cells is enough to show a format.
+    """
+    rows = [(f["id"], f["label"], f["phase"], f["description"])
+            for f in FORMAT_RECORDS if f["id"] in format_ids]
+    known = {f["id"] for f in FORMAT_RECORDS}
+    rows += [(fmt, fmt.replace("_", " ").upper(), "", "") for fmt in sorted(format_ids - known)]
+    return rows
+
+
+ECOSYSTEMS = list(REGISTRY_ECOSYSTEMS)
 RANKING_ALIASES = {
     ("cpp", "svg", "qtbase"): "QtBase QImageReader",
     ("cpp", "svg", "qtdeclarative"): "QtDeclarative VectorImage",
@@ -217,15 +220,37 @@ def ranking_rows(path: Path) -> tuple[str, dict[str, tuple[str, str, str]]]:
     return metric, rows
 
 
+def unresolved_leads(cell: dict, eco: str, fmt: str) -> int:
+    """Use the cell's recorded count, or count unresolved entries in its leads file."""
+    if "unresolved_documentation_leads" in cell:
+        return cell["unresolved_documentation_leads"]
+    path = ROOT / f"data/{eco}/{fmt}/leads.json"
+    if not path.is_file():
+        return 0
+    leads = read_json(path)
+    items = leads if isinstance(leads, list) else leads.get("leads", [])
+    return sum(1 for lead in items if str(lead.get("status", "")).startswith("unresolved"))
+
+
 def build(output: Path) -> None:
-    cells_source = read_json(ROOT / "data/cells.json")["cells"]
+    # Active matrix cells and the pilot expansion cells are both shown; each
+    # record carries its collection so pages can tell them apart.
+    cells_source = ([{**cell, "collection": "active"} for cell in read_json(ROOT / "data/cells.json")["cells"]]
+                    + [{**cell, "collection": "pilot"} for cell in read_json(ROOT / "data/pilot-cells.json")["cells"]])
     coverage = read_json(ROOT / "data/projects-coverage.json")
-    readme_items = read_json(ROOT / "data/parser-readmes.json")["parsers"]
+    pilot_coverage = coverage.get("pilot", {})
+    totals = {key: coverage[key] + pilot_coverage.get(key, 0)
+              for key in ("catalog_paths", "cells_total", "containerized_verified", "standard_api_paths",
+                          "standard_containerized_verified")}
+    readme_items = (read_json(ROOT / "data/parser-readmes.json")["parsers"]
+                    + read_json(ROOT / "data/pilot-parser-readmes.json")["parsers"])
     readmes = {(item["format"], item["ecosystem"], item["name"]): item
                for item in readme_items}
-    if len(readmes) != coverage["catalog_paths"]:
+    if len(readmes) != totals["catalog_paths"]:
         raise ValueError("parser guides do not match catalog path count")
-    coverage_by_cell = {(c["format"], c["ecosystem"]): c for c in coverage["cells"]}
+    coverage_by_cell = {(c["format"], c["ecosystem"]): c
+                        for c in [*coverage["cells"], *pilot_coverage.get("cells", [])]}
+    FORMATS = load_formats({cell["format"] for cell in cells_source})
     active_formats = {fmt for fmt, *_ in FORMATS}
     manifests = {}
     standard_projects = {}
@@ -263,6 +288,12 @@ def build(output: Path) -> None:
             normalized = normalized_rows[re.sub(r"[^a-z0-9]", "", entry["name"].casefold())]
             if len(normalized) == 1:
                 return normalized[0]
+            # Ranking tables may shorten a module path (github.com/a/b -> a/b).
+            suffix = [row for name, row in ranks.items()
+                      if "/" in name and entry["name"].casefold().endswith("/" + name)
+                      and row[2] == entry["version"]]
+            if len(suffix) == 1:
+                return suffix[0]
             # Some ranking labels describe a binding rather than repeat the
             # catalog package name. An exact, unique release identifies it.
             same_release = rows_by_release[entry["version"]]
@@ -273,10 +304,11 @@ def build(output: Path) -> None:
         cells.append({
             "format": fmt,
             "ecosystem": eco,
+            "collection": cell["collection"],
             "verified": len(entries),
             "standard": cell["verified_standard_or_runtime_count"],
             "runnable": c["containerized_verified"] + c["standard_containerized_verified"],
-            "unresolved": cell["unresolved_documentation_leads"],
+            "unresolved": unresolved_leads(cell, eco, fmt),
             "uncertainty": cell["uncertainty"],
             "rankingUrl": repo_link(f"data/{eco}/{fmt}/ranking.md"),
             "evidenceUrl": repo_link(source),
@@ -298,9 +330,10 @@ def build(output: Path) -> None:
             record = {
                 "format": fmt,
                 "ecosystem": eco,
+                "collection": cell["collection"],
                 "name": entry["name"],
                 "version": entry["version"],
-                "scope": entry["scope"],
+                "scope": entry.get("scope") or entry.get("package_own_scope"),
                 "family": entry["family"],
                 "license": entry["license"],
                 "inputApi": entry["input_api"],
@@ -321,13 +354,13 @@ def build(output: Path) -> None:
                 record["targetId"] = f"{fmt}/{eco}/{project_path.parent.name}"
             parsers.append(record)
 
-    if len(parsers) != coverage["catalog_paths"]:
+    if len(parsers) != totals["catalog_paths"]:
         raise ValueError("catalog total does not match project coverage")
-    if len(cells) != 80:
-        raise ValueError("expected all 80 format × ecosystem cells")
-    if sum("projectUrl" in parser for parser in parsers) != coverage["containerized_verified"]:
+    if len(cells) != totals["cells_total"]:
+        raise ValueError("cells do not match the active and pilot cell totals")
+    if sum("projectUrl" in parser for parser in parsers) != totals["containerized_verified"]:
         raise ValueError("third-party project links do not match project coverage")
-    if len(standard_projects) != coverage["standard_containerized_verified"]:
+    if len(standard_projects) != totals["standard_containerized_verified"]:
         raise ValueError("standard project links do not match project coverage")
 
     standard_targets = []
@@ -416,15 +449,17 @@ def build(output: Path) -> None:
                 f"parsarium afl run {run_dir}-afl --seconds 60",
             ],
         }
-    if len(targets) != coverage["containerized_verified"] + coverage["standard_containerized_verified"]:
+    if len(targets) != totals["containerized_verified"] + totals["standard_containerized_verified"]:
         raise ValueError("run walkthrough targets do not match project coverage")
 
     format_counts = Counter(p["format"] for p in parsers)
     format_runs = Counter()
     for cell in cells:
         format_runs[cell["format"]] += cell["runnable"]
+    collection_by_format = {cell["format"]: cell["collection"] for cell in cells}
     formats = [
         {"id": fmt, "label": label, "category": category, "description": description,
+         "collection": collection_by_format[fmt],
          "verified": format_counts[fmt], "runnable": format_runs[fmt],
          "guideUrl": repo_link(f"catalog/{fmt}/README.md")}
         for fmt, label, category, description in FORMATS
@@ -481,8 +516,9 @@ def build(output: Path) -> None:
                 f"parsarium afl run {run_dir}-afl --seconds 60",
             ],
         })
-    if [demo["format"] for demo in demos] != [fmt for fmt, *_ in FORMATS]:
-        raise ValueError("run examples must cover every format in display order")
+    demo_formats = [demo["format"] for demo in demos]
+    if demo_formats != [fmt for fmt, *_ in FORMATS if fmt in demo_formats]:
+        raise ValueError("run examples must follow the format display order")
 
     families = {(p["format"], p["family"]) for p in parsers}
     afl_overlays = sum(1 for t in targets.values() if t["aflFeedback"])
@@ -492,8 +528,8 @@ def build(output: Path) -> None:
             "cells": len(cells),
             "formats": len(FORMATS),
             "ecosystems": len(ECOSYSTEMS),
-            "runnable": coverage["containerized_verified"] + coverage["standard_containerized_verified"],
-            "standard": coverage["standard_api_paths"],
+            "runnable": totals["containerized_verified"] + totals["standard_containerized_verified"],
+            "standard": totals["standard_api_paths"],
             "families": len(families),
             "aflOverlays": afl_overlays,
         },
@@ -817,6 +853,8 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
             return text.replace(",", ".") if lang == "es" else text
         values = {
             "VERIFIED": num(summary['verified']),
+            "FORMATS": num(summary['formats']),
+            "CELLS": num(summary['cells']),
             "RUNNABLE": num(summary['runnable']),
             "FAMILIES": num(summary['families']),
             "AFL": num(summary['aflOverlays']),
@@ -848,7 +886,8 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
                 raise ValueError(f"page needs a meta comment: {lang}/{name}")
             meta = json.loads(match.group(1))
             body = fill(source[match.end():], lang).replace("{{MANUAL_TOC}}", manual_toc(lang, "../" * route.count("/")))
-            page(lang, route, "manual" if name == "glossary" else name, meta["title"], meta["description"],
+            page(lang, route, "manual" if name == "glossary" else name, fill(meta["title"], lang),
+                 fill(meta["description"], lang),
                  body, page_scripts[name])
         for number, slug in enumerate(MANUAL, 1):
             meta = chapter_meta(lang, slug)

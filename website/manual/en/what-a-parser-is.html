@@ -12,7 +12,7 @@
 <p>Every parser draws a line between inputs it accepts and inputs it rejects. Strict parsers follow the specification closely. Lenient parsers try to recover from small mistakes, which is friendly to users and sometimes surprising to security reviewers. Neither choice is wrong on its own; what matters for testing is knowing where each parser draws its line and whether it handles everything on the accepting side safely.</p>
 
 <h2>How Parsarium organises parsers</h2>
-<p>Parsarium is organised by <strong>format</strong> first, then by <strong>language</strong>. One format in one language is a <em>cell</em>: PNG in C, ZIP in Go, HTTP/1.1 in PHP. There are ten formats and eight languages, so eighty cells.</p>
+<p>Parsarium is organised by <strong>format</strong> first, then by <strong>language</strong>. One format in one language is a <em>cell</em>: PNG in C, ZIP in Go, HTTP/1.1 in PHP. There are {{FORMATS}} formats and eight languages, so {{CELLS}} cells.</p>
 <table>
   <thead><tr><th>Format</th><th>Structure</th></tr></thead>
   <tbody>
@@ -33,7 +33,7 @@
 
 <section class="recap">
 <h2>Key ideas</h2>
-<ul><li>A parser turns bytes into structure, and the rest of the program trusts that structure.</li><li>Formats describe their own layout with lengths, counts, and offsets. Parsers act on those numbers, which is where many bugs start.</li><li>There are two kinds of parser bugs worth looking for: unsafe handling of a single input, and two parsers that disagree about the same input.</li><li>Parsarium is organised by format, then language. One format in one language is a cell; ten formats and eight languages make eighty cells.</li></ul>
+<ul><li>A parser turns bytes into structure, and the rest of the program trusts that structure.</li><li>Formats describe their own layout with lengths, counts, and offsets. Parsers act on those numbers, which is where many bugs start.</li><li>There are two kinds of parser bugs worth looking for: unsafe handling of a single input, and two parsers that disagree about the same input.</li><li>Parsarium is organised by format, then language. One format in one language is a cell; {{FORMATS}} formats and eight languages make {{CELLS}} cells.</li></ul>
 </section>
 <section class="quiz">
 <div class="section-title"><h2>Check yourself</h2><p class="label">Answer all five to see your score</p></div>
@@ -65,7 +65,7 @@
 </div>
 <div class="exercise">
   <p class="label"><span>Exercise 1.3</span><span class="level">Challenge</span></p>
-  <p>Find a published vulnerability in a parser for one of the ten formats. The <a href="https://nvd.nist.gov/vuln/search">NVD search</a> or a project's security advisories are good places to start. Answer three questions: which field of the format did the attacker control, what did the parser do with it, and was it a single-input bug or a disagreement between two programs?</p>
+  <p>Find a published vulnerability in a parser for one of the {{FORMATS}} formats. The <a href="https://nvd.nist.gov/vuln/search">NVD search</a> or a project's security advisories are good places to start. Answer three questions: which field of the format did the attacker control, what did the parser do with it, and was it a single-input bug or a disagreement between two programs?</p>
   <details><summary>Hint</summary><p>Search for a library name together with words like <em>overflow</em>, <em>out-of-bounds</em>, or <em>path traversal</em>. Advisories that include a proof-of-concept file are the easiest to analyse.</p></details>
   <details><summary>Solution</summary><p>One well-known example is <a href="https://security.snyk.io/research/zip-slip-vulnerability">Zip Slip</a> (2018). The attacker controls the entry name in a ZIP archive and writes names like <code>../../etc/cron.d/job</code>. Many extraction routines joined that name to the target directory without checking it, so files were written outside it. It is a single-input bug: one program trusted a field it should have validated. Write your own example down the same way: field, behaviour, kind.</p></details>
 </div>
