@@ -166,6 +166,80 @@
         "root",
         "text"
       ]
+    },
+    {
+      "package": "symfony/serializer",
+      "version": "v8.1.11",
+      "parser_family": "libxml2 via PHP ext/dom DOMDocument::loadXML; shared with the standard DOMDocument path, sabre/xml (XMLReader) and symfony/dom-crawler",
+      "command": "python3 scripts/run_project.py xml php symfony_serializer",
+      "receipt": "projects/xml/php/symfony_serializer/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "root_namespaces": {
+          "": "urn:parsarium:item",
+          "c": "urn:parsarium:catalog"
+        },
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 74,
+      "format_specific_source_lines_covered": 69,
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "root_namespaces": {
+          "": "urn:parsarium:order",
+          "p": "urn:parsarium:price"
+        },
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_projected_expat_oracle": true,
+      "projection_limit": "Root name and descendant namespace declarations are lost; only preserved qualified names, root declarations, attributes, text and depth are compared.",
+      "afl_feedback": {
+        "report": "data/php/xml/afl-feedback.json",
+        "overlay_receipt": "fuzzing/afl-native/xml/php/symfony_serializer/verification.json",
+        "overlay_receipt_sha256": "be45f40c71cb3be52858e3cfcfccb4709a8b18f23a3a80d79245660ceacd208d",
+        "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+        "control_afl_tuples": 1148,
+        "differential_afl_tuples": 1269,
+        "afl_tuple_difference": 359,
+        "format_dependent_parse_time_tuples": 359,
+        "repeats_per_control": 5
+      },
+      "xdebug_package_lines_note": "69 XmlEncoder.php lines on the primary control; these are distinct from native libxml2 AFL feedback."
     }
   ],
   "standard": [

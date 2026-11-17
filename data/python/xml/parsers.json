@@ -297,6 +297,111 @@
     }
   },
   {
+    "name": "xmlschema",
+    "version": "4.3.2",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/xmlschema/4.3.2/json (License-Expression: MIT); the wheel's xmlschema-4.3.2.dist-info/licenses/LICENSE and the sdist LICENSE are byte-identical (sha256 de71695b2db6819ee4478ef39f5f202aab9f0c8750168c2986467ea8e5fa2997, MIT License, SISSA). Source modules say 'distributed under the terms of the MIT License'.",
+    "input_api": "xmlschema.XMLResource(BytesIO(local XML bytes)) with default options (defuse='remote', lazy=False, iterparse=xml.etree.ElementTree.iterparse); XMLResource.root (Element.tag, attrib, text and tail) and XMLResource.get_xmlns(element) for each element's own xmlns declarations",
+    "documentation": "https://xmlschema.readthedocs.io/en/stable/api.html#xmlschema.XMLResource",
+    "documentation_evidence": "The stable API page (titled 'xmlschema 4.3.2 documentation' on 2026-11-17; source doc/api.rst at https://github.com/sissaschool/xmlschema/blob/v4.3.2/doc/api.rst) documents xmlschema.XMLResource(source, ...) where source is 'a string containing the XML document or file path or a URL or a file like object or an ElementTree or an Element', with root, iter() and get_namespaces(); its iterparse parameter defaults to ElementTree.iterparse. The usage guide (doc/usage.rst in the sdist) says schema and instance processing are based on XMLResource and that namespace mapping is supported by XMLResource internals.",
+    "source": "https://files.pythonhosted.org/packages/5c/fb/8be39dc47b0ed9bbc80f384906eed87fa974c9b377a7a430118c3b405550/xmlschema-4.3.2-py3-none-any.whl",
+    "source_sha256": "cf5c970a30f6ebcb3da35260e694704cc0b6794d8ace46125bb2a95e38ed9307",
+    "sdist": "https://files.pythonhosted.org/packages/55/f0/2431c2c8f77326757f2e2b1d79226c17b2abfe44a78a41c7d7b944e90732/xmlschema-4.3.2.tar.gz",
+    "sdist_sha256": "f3b33a21a2b2cdc404ddc3fb599d8bc1dee90b155d547370672e6e684746b8d6",
+    "dependencies": [
+      {
+        "package": "elementpath",
+        "release": "5.1.4",
+        "sha256": "5ec8d7bb44b16c98414a6a95e20cb150f3cbfc3cac65edc14773288c7a937376",
+        "license": "MIT",
+        "role": "xmlschema's only runtime dependency (Requires-Dist elementpath<6.0.0,>=5.1.3); imported but not executed by the XMLResource parse call on these controls"
+      },
+      {
+        "package": "expat",
+        "release": "2.10.0",
+        "sha256": "c624ba2998fc65df1163a49641ff3f9ab73138b11641d92c86bee0fb01b1bc7f",
+        "license": "MIT",
+        "role": "C XML parser loaded by CPython pyexpat, built from source"
+      }
+    ],
+    "scope": "Valid UTF-8 XML 1.0 local byte streams without DOCTYPE through xmlschema.XMLResource: namespace-expanded element tags ({uri}local) in document order, namespace-expanded attribute names and values in source order, stripped text and tail data (CDATA included), tree depth, the root tag, the number of xmlns declarations xmlschema records per element (including the xmlns=\"\" undeclaration), and the non-empty declared namespace URIs. The tree comes from CPython's TreeBuilder, which keeps no comments or processing instructions; xmlschema sees those iterparse events but does not store them.",
+    "family": "xmlschema XMLResource namespace-tracking loader over CPython xml.etree.ElementTree.iterparse (C _elementtree XMLParser/TreeBuilder) / pyexpat / Expat 2.10.0",
+    "shared_families": [
+      "Expat XML parser",
+      "CPython xml.etree.ElementTree (standard API path)"
+    ],
+    "family_note": "Not an independent XML engine. XMLResource(BytesIO(data)) opens the stream in memory and XMLResourceLoader._parse consumes xml.etree.ElementTree.iterparse(fp, ('start-ns', 'end-ns', 'start', 'comment', 'pi', 'end')): CPython's pure-Python iterparse/XMLPullParser driver feeds the C _elementtree XMLParser, which drives pyexpat and Expat 2.10.0 (tokenizing, well-formedness and {uri}local name expansion) and builds the tree with the C TreeBuilder. xmlschema's own parse-time code is the source-type dispatch, the event loop with depth and element limits, and a namespace-map stack plus per-element declaration lists built from start-ns/end-ns events. It shares the Expat family with xmltodict, untangle, defusedxml and the standard xml.etree.ElementTree path (same Expat 2.10.0 pin).",
+    "namespace_caveat": "XMLResource records xmlns declarations itself from iterparse start-ns events (get_xmlns) and keeps a per-element in-scope namespace map (get_nsmap). The summary's namespace_declarations and namespaces fields come from get_xmlns, a public method with a docstring that is not listed on the Sphinx API page; the documented get_namespaces() merges declarations into one prefix map and cannot give a per-element count. Both controls match the lxml path's full summary, including the declaration count.",
+    "parser_options_caveat": "Defaults only: defuse='remote' does not pre-scan a BytesIO source with xmlschema's SafeExpatParser, allow='all' and block=None do not apply because a BytesIO source is not a URL, lazy=False builds the full tree, and the MAX_XML_DEPTH=1000 and MAX_XML_ELEMENTS=1,000,000 limits are not reached. Raw bytes are not passed: XMLResource treats a bytes source without a newline that does not start with '<' as a URL or file path, so the harness wraps the input in BytesIO. No DTD, entity, security, limit or malformed-input behavior was tested.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 7391962,
+      "source": "https://pypistats.org/api/packages/xmlschema/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/xml/leads.json",
+      "limitation": "Package-level downloads, mostly XSD validation and decoding use (including transitive installs); they do not measure XML parsing volume or direct XMLResource use."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ],
+      "root": "{urn:parsarium:catalog}catalog"
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespace_declarations": 3,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "text": [
+        "A-7",
+        "12.50 €"
+      ],
+      "root": "{urn:parsarium:order}order"
+    },
+    "project": "projects/xml/python/xmlschema",
+    "verification_note": "Shared Expat family, not an independent XML engine: xmlschema.XMLResource(BytesIO(data)) runs XMLResourceLoader._parse over CPython's default xml.etree.ElementTree.iterparse with start-ns, end-ns, start, comment, pi and end events; the pure-Python iterparse/XMLPullParser driver feeds the C _elementtree XMLParser over pyexpat and Expat 2.10.0, and the C TreeBuilder builds the tree. xmlschema adds namespace bookkeeping of its own: a namespace-map stack, each element's in-scope map (get_nsmap) and each element's own xmlns declarations (get_xmlns), plus MAX_XML_DEPTH/MAX_XML_ELEMENTS checks. The pinned image asserts the default iterparse, the C XMLParser and TreeBuilder, and pyexpat.EXPAT_VERSION; the feedback check also asserts that the BytesIO source has no URL or file object and is neither defused nor lazy. Both shared valid namespace controls match the lxml path's full summary, including the xmlns declaration count, and an independent lxml 6.1.3/libxml2 2.15.4 oracle run in the verified lxml image; xmlschema's per-element in-scope namespace maps equal lxml's nsmap on every element (including the xmlns=\"\" undeclaration on <plain>), and the URIs of the documented get_namespaces(root_only=False) equal the declared non-empty URIs. The first control executes 110 xmlschema lines in 4 files (44 in resources/xml_loader.py, 37 in resources/xml_resource.py), 43 CPython xml/etree/ElementTree.py driver lines and 3,449 Expat lines (2,216 in xmlparse.c); the second executes 110, 51 and 3,589 (2,237). The AFL++ bridge maps the XMLResource call's Python lines, each tagged with its AFL++ hit-count bucket, plus Expat regions and branches: five identical runs of each control yield identical features, and the second control changes 611 Expat features, 14 ElementTree.py features, 20 xmlschema features and 596 AFL++ tuple IDs. xmlschema executes the same 110 lines on both controls; its differential comes from hit counts in resources/xml_loader.py: the nsmap-stack push for namespace-declaring elements (1 vs 2), start-ns appends (2 vs 3), end-ns handling and the event loop. PYTHONHASHSEED=1 is fixed because pyexpat passes CPython's hash secret to XML_SetHashSalt and a zero seed makes Expat draw a random salt. CPython's ElementTree.py, pyexpat and _elementtree are Ubuntu's distribution build; only Expat is source-built, and the C XMLParser and TreeBuilder are not covered. The harness passes BytesIO, not raw bytes: XMLResource treats a bytes source without a newline that does not start with '<' as a URL or file path. The controls do not establish DTD, entity, security, limit, non-UTF-8, XML 1.1 or malformed-input behavior; comments and processing instructions are not kept in the tree. get_xmlns, used for the declaration count, is a public method with a docstring but is not listed on the Sphinx API page. The 7,391,962 last-month PyPI downloads are package-level, mostly XSD validation and decoding use, and do not measure XMLResource parsing."
+  },
+  {
     "name": "untangle",
     "version": "1.3.1",
     "license": "MIT",

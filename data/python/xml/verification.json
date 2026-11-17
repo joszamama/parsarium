@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T07:03:52.797228+00:00",
+  "checked_at_utc": "2026-11-17T13:45:11.667966+00:00",
   "control": {
     "path": "controls/xml/two-items.xml",
     "sha256": "79385f09172d9386e3a5b70e162c85c9932b1e0fb7f9bdbd6246e94cf7bcc941"
@@ -357,6 +357,93 @@
       "project_receipt_sha256": "1785d16a7798119424f409fbc8d61fac4b454a636c99e856cb0d36c7f3d23edf",
       "namespace_caveat": "ElementTree discards xmlns declarations, so the summary has no namespace_declarations count and its namespaces field lists the URIs in expanded names. On both controls this equals the declared non-empty URIs; the comparison with the independent lxml/libxml2 oracle drops only the declaration count.",
       "tree_caveat": "The default TreeBuilder drops comments and processing instructions; text and tail data are kept per node (CDATA included)."
+    },
+    {
+      "package": "xmlschema",
+      "version": "4.3.2",
+      "pass": true,
+      "input_api": "xmlschema.XMLResource(BytesIO(local XML bytes)) with default options (defuse='remote', lazy=False, iterparse=xml.etree.ElementTree.iterparse); XMLResource.root (Element.tag, attrib, text and tail) and XMLResource.get_xmlns(element) for each element's own xmlns declarations",
+      "tested_parser": "xmlschema.resources.xml_resource.XMLResource (XMLResourceLoader._parse over default xml.etree.ElementTree.iterparse; C _elementtree XMLParser and TreeBuilder)",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "root": "{urn:parsarium:catalog}catalog"
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "root": "{urn:parsarium:order}order"
+      },
+      "differential_pass": true,
+      "oracle": "lxml 6.1.3 / libxml2 2.15.4 namespace-aware parse in the verified lxml image; full lxml-path summary including the xmlns declaration count, plus per-element nsmap",
+      "oracle_image_id": "sha256:f9e2e43218406a510c55897c22727865aeba4936b5fd315ddc82abc78dcfe37a",
+      "xmlschema_matches_oracle": true,
+      "xmlschema_nsmaps_match_lxml_nsmaps": true,
+      "parser_family": "xmlschema 4.3.2 XMLResource namespace-tracking loader over CPython 3.14 xml.etree.ElementTree.iterparse (pure-Python iterparse/XMLPullParser driver over the C _elementtree XMLParser and TreeBuilder) over pyexpat and Expat 2.10.0; shares the Expat XML parser family with projects/xml/python/xmltodict, untangle, defusedxml and the standard xml.etree.ElementTree path",
+      "package_source_files": 4,
+      "package_source_lines": 110,
+      "xmlschema_xml_loader_lines": 44,
+      "elementtree_driver_source_lines": 43,
+      "expat_source_lines": 3449,
+      "expat_xmlparse_lines": 2216,
+      "differential_package_source_lines": 110,
+      "differential_elementtree_driver_source_lines": 51,
+      "differential_expat_source_lines": 3589,
+      "differential_expat_xmlparse_lines": 2237,
+      "afl_feedback": "data/python/xml/xmlschema-valid-feedback.json",
+      "project_receipt": "projects/xml/python/xmlschema/verification.json",
+      "project_receipt_sha256": "0937dfafa274364dad5367c84f0aa409058d8c675bef475489c22898c69deee1",
+      "namespace_caveat": "XMLResource records xmlns declarations itself from iterparse start-ns events (get_xmlns) and keeps a per-element in-scope namespace map (get_nsmap). The summary's namespace_declarations and namespaces fields come from get_xmlns, a public method with a docstring that is not listed on the Sphinx API page; the documented get_namespaces() merges declarations into one prefix map and cannot give a per-element count. Both controls match the lxml path's full summary, including the declaration count.",
+      "tree_caveat": "CPython's TreeBuilder keeps no comments or processing instructions (xmlschema receives the iterparse events and discards them); text and tail data are kept per node (CDATA included)."
     }
   ],
   "standard": [
@@ -393,7 +480,8 @@
         "xmltodict",
         "xml.etree.ElementTree",
         "untangle (SAX via defusedxml DefusedExpatParser)",
-        "defusedxml (guarded pure-Python ElementTree XMLParser)"
+        "defusedxml (guarded pure-Python ElementTree XMLParser)",
+        "xmlschema (XMLResource over ElementTree.iterparse)"
       ]
     }
   ]

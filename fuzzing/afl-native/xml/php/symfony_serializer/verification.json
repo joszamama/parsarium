@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "project": "xml/php/symfony_serializer",
+  "pass": true,
+  "feedback_kind": "native_libxml2_php_dom_parser_source_edges",
+  "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c (DOMDocument::loadXML) via AFL++ allowlist; libxml2 tree, XPath and dict code, the other ext/dom classes, ext/libxml/libxml.c, the Zend engine and the interpreted XmlEncoder PHP code are uninstrumented",
+  "harness": "projects/xml/php/symfony_serializer/fuzz-target.php -> harness.php parsarium_parse (new XmlEncoder(), decode($bytes, \"xml\"), summary.php array walk)",
+  "parse_only_target": "DOMDocument::loadXML with LIBXML_NONET | LIBXML_NOBLANKS, the options XmlEncoder::decode passes by default",
+  "base_project_receipt_sha256": "b950de7541c9cea13970ea2a584d58bdd1b2b93dc41aa38c7f923087bf6b03b4",
+  "base_image_id": "sha256:cc3751e35185bd0247a62c3c5e282440a9d003c7d808470ef22c8a3ba9ea2b48",
+  "source_sha256": "146260ba0f9fe210bc69a0a29535578b1c4ac07981b9dc15f1b8fe7bb79728de",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "runtime": {
+    "php": "8.5.12",
+    "libxml2": "2.15.4"
+  },
+  "instrumented_objects": [
+    "libxml2-2.15.4/build/.libs/libxml2_la-SAX2.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parser.o",
+    "libxml2-2.15.4/build/.libs/libxml2_la-parserInternals.o",
+    "php-8.5.12/ext/dom/document.o"
+  ],
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "oracle": "fuzzing/afl-native/xml/php/symfony_serializer/build.py oracle(): expat without namespace processing, fields exposed by XmlEncoder::decode",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "package_line_coverage": {
+    "tool": "Xdebug (Ubuntu PHP 8.5.4, libxml 2.15.2), two identical replays per control",
+    "file": "Encoder/XmlEncoder.php",
+    "control_lines": 69,
+    "differential_lines": 70,
+    "shared_lines": 67,
+    "control_only_lines": [
+      245,
+      247
+    ],
+    "differential_only_lines": [
+      136,
+      300,
+      311
+    ],
+    "serializer_lines": {
+      "control": 74,
+      "differential": 75
+    },
+    "serializer_files": {
+      "control": [
+        "Encoder/DecoderInterface.php",
+        "Encoder/EncoderInterface.php",
+        "Encoder/NormalizationAwareInterface.php",
+        "Encoder/XmlEncoder.php",
+        "SerializerAwareInterface.php",
+        "SerializerAwareTrait.php"
+      ],
+      "differential": [
+        "Encoder/DecoderInterface.php",
+        "Encoder/EncoderInterface.php",
+        "Encoder/NormalizationAwareInterface.php",
+        "Encoder/XmlEncoder.php",
+        "SerializerAwareInterface.php",
+        "SerializerAwareTrait.php"
+      ]
+    }
+  },
+  "image_id": "sha256:87feac71c166a97bf870cb3826f9c4dc34cf8f250047d253d0bea73f91d59a7e",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 65536,
+  "repeats_per_control": 5,
+  "all_repeats_identical": true,
+  "feedback_edges": 1148,
+  "differential_feedback_edges": 1269,
+  "stable_shared_edges": 1029,
+  "stable_control_only_edges": 119,
+  "stable_differential_only_edges": 240,
+  "afl_tuple_difference": 359,
+  "parse_only_control_edges": 1123,
+  "parse_only_differential_edges": 1244,
+  "parse_only_tuple_difference": 359,
+  "format_dependent_parse_time_tuples": 359,
+  "format_dependent_traversal_only_tuples": 0,
+  "post_parse_control_edges": 26,
+  "post_parse_differential_edges": 26,
+  "post_parse_edges_identical": true,
+  "overlay_file_sha256": {
+    "Dockerfile": "d7f1877640d5339bc59317423e21d86298d990ad72cd724f94986993306986cc",
+    "build.py": "9da6cff05c8cc7c7c31effa682522de2c7debf06fe666e042a56f47a19d93c47"
+  }
+}
