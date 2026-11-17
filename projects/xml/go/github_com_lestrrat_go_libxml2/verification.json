@@ -1,0 +1,68 @@
+{
+  "kind": "third_party",
+  "api": "libxml2.Parse([]byte, ...parser.Option) (types.Document, error) with parser.XMLParseNoNet; Document.DocumentElement() and Element NamespaceURI/LocalName, GetNamespaces, Attributes, FirstChild/NextSibling, NodeValue",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T22:45:45.195336+00:00",
+  "manifest": "projects/xml/go/github_com_lestrrat_go_libxml2/manifest.json",
+  "image_id": "sha256:36f7ec311837915892c5eac268783fab4966efa9e9c229ca4261611e599eaf01",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "go version go1.27.1 linux/arm64"
+  ],
+  "source_sha256": "06853797762a758857acdd814eb3e634f93664d5439cfe15fc124562ab0a12ee",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "b7f8df8f5ee93d3c1f6131cab1abb49c339b0461cba84dda7c645616f3324109",
+    "afl-allowlist.txt": "ecbe45ad603a7daea1dac0c35b8465ed5c3e137293969a58b1ad6406ae801782",
+    "cgo-compat.patch": "73e32eecb64bdc702c0b1fc37dab0132bfe6a63ac2b444147b354f427f377fba",
+    "cmd/parse-only/main.go": "7de9541b70964cd7f6b246c7b275c36c2185421411c71b94ef98bcf634a8661b",
+    "cmd/replay/main.go": "36f0809c6ee5c171fd7bdac47c086db225b5a5de3eb6faa368e018a082074b4a",
+    "controls/catalog-ns.xml": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "controls/order-default-ns.xml": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+    "go.mod": "024f90f89dbd5d9d80c87e093684bee04a98a8328b05c64cda936e69a7a034f6",
+    "go.sum": "464488a5becb0b20b36551c45ade20c2e019979728c9f5eb4f645ad52f82530e",
+    "harness.go": "46f60b874de997a50be99400592ed0642c841e5ec231a2e373f87897a766e5d9",
+    "harness_test.go": "83b27e4f5bd17cebf68ba33438d3342bb4e9037cdd4d6bf05b47068e1a85eeba",
+    "manifest.json": "853bfe90796375bd67b9b26dfbce400edca60e11305dffd9072455ac5b27cd05",
+    "native_profile.go": "18e77dc5be2367760bacc459ea11c8798315c2d46d58f08b5dd4718084e69ba9",
+    "native_profile_afl.go": "1efbafd1cfcf53a46d341603c0930e0cf9c7a6911693c516198ab15c467ce9a2",
+    "report.py": "da42d38fd7a323ce8e2b26e85628dd37c9a0e4c204141dcaf482c545c24c0dcb",
+    "source-lock.json": "3ffe9389765abf34416f1a789969a95ed8131375a3f4e185b18de087e378450b"
+  },
+  "output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "parser_source_files": 10,
+  "parser_source_lines_covered": 197,
+  "format_specific_source_lines_covered": null,
+  "underlying_source_files": 3,
+  "underlying_source_lines_covered": 1789,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/go/github_com_lestrrat_go_libxml2/target/coverage/coverage.json",
+  "pass": true
+}

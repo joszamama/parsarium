@@ -1052,6 +1052,7 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
         native_cgo_kinds = {
             "mp3/go/github_com_tosone_minimp3": "go_cgo_minimp3_native_c_parser_edges",
             "xml/go/github_com_moovweb_gokogiri": "go_cgo_libxml2_native_xml_parser_edges",
+            "xml/go/github_com_lestrrat_go_libxml2": "go_cgo_libxml2_native_xml_parser_edges",
             "sql/go/github_com_pganalyze_pg_query_go_v6": "go_cgo_libpg_query_native_sql_parser_edges",
             "ascii_pnm/go/github_com_gographics_gmagick": "go_cgo_graphicsmagick_native_pnm_coder_edges",
             "ascii_pnm/go/github_com_cshum_vipsgen_vips": "go_cgo_libvips_native_ppmload_edges",
@@ -1072,7 +1073,8 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
                 or validation.get("second_sha256") != manifest["differential_control_sha256"]
                 or validation.get("second_control_output") != manifest["differential_expected_output"]):
             return False
-        if str(project) == "xml/go/github_com_moovweb_gokogiri" and (
+        if str(project) in {"xml/go/github_com_moovweb_gokogiri",
+                            "xml/go/github_com_lestrrat_go_libxml2"} and (
                 overlay.get("underlying_source_sha256") != manifest.get("underlying_source_sha256")
                 or validation.get("first_control_output") != manifest["expected_output"]
                 or validation.get("parse_only_repeat_maps_identical") is not True

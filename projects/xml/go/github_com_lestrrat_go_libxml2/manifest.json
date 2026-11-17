@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "go",
+  "package": "github.com/lestrrat-go/libxml2",
+  "release": "v0.0.0-20260709020957-3f0f7bd60b63",
+  "catalog_parser": "data/go/xml/parsers.json",
+  "source_lock": "projects/xml/go/github_com_lestrrat_go_libxml2/source-lock.json",
+  "source_sha256": "06853797762a758857acdd814eb3e634f93664d5439cfe15fc124562ab0a12ee",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "api": "libxml2.Parse([]byte, ...parser.Option) (types.Document, error) with parser.XMLParseNoNet; Document.DocumentElement() and Element NamespaceURI/LocalName, GetNamespaces, Attributes, FirstChild/NextSibling, NodeValue",
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzXML",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzXML",
+  "toolchain_entrypoint": "/usr/local/go/bin/go",
+  "toolchain_args": [
+    "version"
+  ],
+  "coverage": "Go coverpkg of the lestrrat-go/libxml2 binding packages (root, parser, dom, clib, types) and Clang/LLVM source line view of pinned libxml2 parser.c, parserInternals.c and entities.c",
+  "coverage_subject_prefix": "github.com/lestrrat-go/libxml2/",
+  "underlying_coverage_subject_prefix": "/work/libxml2-source/",
+  "underlying_format_specific_coverage_file_suffix": "/parser.c",
+  "afl_native_cgo": true,
+  "afl_entrypoint": "/work/afl-target",
+  "afl_file_input": true,
+  "coverage_limit": "Only two valid UTF-8 XML controls without DOCTYPE; compatibility patch changes one cgo variable type in clib.go (xmlParseInNodeContext list pointer) so the 2026-07 pseudo-version compiles against libxml2 2.15.4 headers. No malformed input, fuzzing campaign, DTD, XML 1.1, or non-UTF-8 validation.",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821"
+}

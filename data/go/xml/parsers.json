@@ -449,6 +449,60 @@
     "compatibility_patch": "projects/xml/go/github_com_moovweb_gokogiri/cgo-compat.patch"
   },
   {
+    "name": "github.com/lestrrat-go/libxml2",
+    "module": "github.com/lestrrat-go/libxml2",
+    "version": "v0.0.0-20260709020957-3f0f7bd60b63",
+    "license": "MIT",
+    "input_api": "libxml2.Parse([]byte, ...parser.Option) (types.Document, error) with parser.XMLParseNoNet; Document.DocumentElement() and Element NamespaceURI/LocalName, GetNamespaces, Attributes, FirstChild/NextSibling, NodeValue",
+    "documentation": "https://pkg.go.dev/github.com/lestrrat-go/libxml2@v0.0.0-20260709020957-3f0f7bd60b63#Parse",
+    "source": "https://github.com/lestrrat-go/libxml2/tree/3f0f7bd60b63",
+    "scope": "XML 1.0 UTF-8 local bytes through xmlCtxtReadMemory; namespace-aware DOM summary on both valid controls: expanded element and attribute names, per-element namespace declarations, decoded text and CDATA, tree depth; no DOCTYPE",
+    "family": "lestrrat-go/libxml2 Go cgo DOM binding over native libxml2 2.15.4",
+    "family_note": "parser.Parser.ParseString creates an xmlParserCtxt and calls C.xmlCtxtReadMemory in clib.go, so tokenization, entity and character-reference decoding and namespace resolution are native libxml2 parser code. The Go types/dom/clib binding is its own (uintptr-based node wrappers, separate from gokogiri's API), and its coverage is reported separately from libxml2 parser.c, parserInternals.c and entities.c. It shares the native libxml2 parser family with the selected moovweb/gokogiri path and with the C libxml2 and C++ libxml++ paths. A one-line cgo compatibility patch is applied for libxml2 2.15 headers. lestrrat/go-libxml2 (9 Imported by) is the pre-rename module path of the same repository and is not counted separately.",
+    "shared_families": [
+      "libxml2 XML parser"
+    ],
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 30,
+      "source": "https://pkg.go.dev/github.com/lestrrat-go/libxml2?tab=importedby",
+      "captured_at_utc": "2026-11-17T03:16:02.492959+00:00",
+      "snapshot": "data/go/xml/registry-snapshot.json",
+      "caveat": "Package importers of the root package path at any version, not installations or XML parse calls; the pre-rename github.com/lestrrat/go-libxml2 path (9) is not added."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "project": "projects/xml/go/github_com_lestrrat_go_libxml2",
+    "compatibility_patch": "projects/xml/go/github_com_lestrrat_go_libxml2/cgo-compat.patch"
+  },
+  {
     "name": "github.com/go-forks/go-pkg-xmlx",
     "module": "github.com/go-forks/go-pkg-xmlx",
     "version": "v0.0.0-20151201012946-76f54ee73233",

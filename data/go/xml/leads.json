@@ -96,12 +96,13 @@
   },
   {
     "name": "github.com/lestrrat-go/libxml2",
-    "status": "unresolved",
-    "version_seen": "v0.0.0-...-3f0f7bd",
+    "status": "promoted_to_verified",
+    "version_seen": "v0.0.0-20260709020957-3f0f7bd60b63",
     "license": "MIT",
     "imported_by": 30,
-    "reason": "cgo interface to libxml2; pseudo-version only, native build not attempted.",
-    "source": "https://pkg.go.dev/github.com/lestrrat-go/libxml2"
+    "reason": "Pinned 3f0f7bd60b63 pseudo-version libxml2.Parse([]byte) cgo route matches both namespace-aware controls over pinned libxml2 2.15.4 with a one-line cgo compatibility patch; 197 Go binding lines and 1789 libxml2 lines covered. Native parser-only AFL++ maps repeat 5x per control and differ by 368 tuples; DOM traversal adds none. Shares the libxml2 family with gokogiri.",
+    "source": "https://pkg.go.dev/github.com/lestrrat-go/libxml2",
+    "verified_evidence": "fuzzing/afl-native/xml/go/github_com_lestrrat_go_libxml2/feedback-validation.json"
   },
   {
     "name": "github.com/tdewolff/parse/v2/xml",
@@ -131,5 +132,14 @@
     "reason": "Pinned v0.11.0 NewParser().Parse([]byte) is an independent pure-Go XML parser (no encoding/xml, no cgo). Both valid controls match the expat oracle summaries; the catalog control covers 1501 helium lines in 41 files. Own AFL++ blocks repeat per control and differ by 221 features / 219 tuples between controls.",
     "source": "https://pkg.go.dev/github.com/lestrrat-go/helium",
     "verified_evidence": "fuzzing/afl-native/xml/go/github_com_lestrrat_go_helium/differential.json"
+  },
+  {
+    "name": "github.com/lestrrat/go-libxml2",
+    "status": "excluded",
+    "version_seen": "v0.0.0-...-bb78334",
+    "license": "MIT",
+    "imported_by": 9,
+    "reason": "Pre-rename module path of the same repository as the selected github.com/lestrrat-go/libxml2 (the GitHub organisation moved from lestrrat to lestrrat-go); a predecessor path of a selected package, not a separate parser. Its 9 importers are not added.",
+    "source": "https://pkg.go.dev/github.com/lestrrat/go-libxml2"
   }
 ]
