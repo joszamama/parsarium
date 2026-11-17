@@ -41,3 +41,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build xml cpp tinyxml2
+python3 parsarium.py run xml cpp tinyxml2 controls/xml/catalog-ns.xml
+```

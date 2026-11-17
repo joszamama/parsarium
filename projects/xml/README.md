@@ -5,6 +5,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [expat / C](c/expat/README.md)
 - [libxml2 / C](c/libxml2/README.md)
 - [pugixml / C++](cpp/pugixml/README.md)
+- [tinyxml2 / C++](cpp/tinyxml2/README.md)
 - [xerces-c / C++](cpp/xerces_c/README.md)
 - [encoding/xml.Decoder.Token() / Go](go/stdlib_decoder/README.md)
 - [github.com/antchfx/xmlquery / Go](go/github_com_antchfx_xmlquery/README.md)
