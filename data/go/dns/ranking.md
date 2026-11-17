@@ -1,6 +1,6 @@
 # Go × DNS: selected parsers (pilot)
 
-Six verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Seven verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -14,6 +14,7 @@ pkg.go.dev Imported by package count, from [registry-snapshot.json](registry-sna
 | 4 | [codeberg.org/miekg/dns](https://pkg.go.dev/codeberg.org/miekg/dns@v0.6.133#Msg.Unpack) | v0.6.133 | 39 | miekg/dns v2 rewrite (msg.go, zmsg.go, internal/unpack, pkg/dnsnet, rdata) |
 | 5 | [github.com/benburkert/dns](https://pkg.go.dev/github.com/benburkert/dns@v0.0.0-20190225204957-d356cf78cdfc#Message.Unpack) | v0.0.0-20190225204957-d356cf78cdfc | 20 | benburkert/dns (message.go, compression.go) |
 | 6 | [github.com/phuslu/fastdns](https://pkg.go.dev/github.com/phuslu/fastdns@v0.17.2#ParseMessage) | v0.17.2 | 9 | phuslu fastdns (message.go: ParseMessage, MessageRecords, DecodeName) |
+| 7 | [github.com/cznic/dns/msg](https://pkg.go.dev/github.com/cznic/dns@v0.0.0-20181122101858-8a2913d6a50b/msg#Message.Decode) | v0.0.0-20181122101858-8a2913d6a50b | 3 | cznic/dns (msg/message.go, rr/rr.go, wire.go) |
 
 **github.com/miekg/dns v1.1.73** (BSD-3-Clause) parses local bytes with `(*dns.Msg).Unpack(msg []byte) error`. Both controls match the oracle summary. The response control covers 207 library lines in 10 files. AFL++ feedback repeats 3 times per control; response and query give 131/73 parser features and 150/92 AFL++ tuples, differing by 60 features and 60 tuples ([receipt](github-com-miekg-dns-feedback-differential.json)). Own pure-Go decoder; CoreDNS and many Go DNS tools build on it. codeberg.org/miekg/dns is a later v2 rewrite by the same author.
 
@@ -26,6 +27,8 @@ pkg.go.dev Imported by package count, from [registry-snapshot.json](registry-sna
 **github.com/benburkert/dns v0.0.0-20190225204957-d356cf78cdfc** (MIT) parses local bytes with `(*dns.Message).Unpack(b []byte) ([]byte, error)`. Both controls match the oracle summary. The response control covers 115 library lines in 2 files. AFL++ feedback repeats 3 times per control; response and query give 77/36 parser features and 97/56 AFL++ tuples, differing by 41 features and 41 tuples ([receipt](github-com-benburkert-dns-feedback-differential.json)). Own pure-Go decoder with its own name decompressor; no code from miekg/dns or x/net. The module has no tagged release, so the pinned version is the pseudo-version of the last commit (2019-02-25). It drops the Z, AD and CD bits, so z is reported as 0. TTLs are stored as time.Duration and printed in whole seconds.
 
 **github.com/phuslu/fastdns v0.17.2** (MIT) parses local bytes with `fastdns.ParseMessage(dst *Message, payload []byte, copying bool) error; (*Message).Records() and (*Message).DecodeName(dst, name []byte)`. Both controls match the oracle summary. The response control covers 100 library lines in 4 files. AFL++ feedback repeats 3 times per control; response and query give 63/37 parser features and 83/57 AFL++ tuples, differing by 26 features and 26 tuples ([receipt](github-com-phuslu-fastdns-feedback-differential.json)). Own zero-allocation decoder written for a DNS server; no code from miekg/dns or x/net. ParseMessage decodes the header and the single question (it rejects QDCOUNT other than 1) and keeps the 3-bit Z field; Records iterates owner name, type, class, TTL and raw RDATA over all record sections in wire order, and DecodeName follows compression pointers. Harness-side formatting: the harness splits records into sections by the parsed header counts, prints A/AAAA RDATA bytes with net/netip, and reads the 16-bit MX preference from the RDATA slice before decoding the exchange name with DecodeName.
+
+**github.com/cznic/dns/msg v0.0.0-20181122101858-8a2913d6a50b** (BSD-3-Clause) parses local bytes with `(*msg.Message).Decode(b []byte, pos *int, sniffer dns.WireDecodeSniffer) error`. Both controls match the oracle summary. The response control covers 185 library lines in 3 files. AFL++ feedback repeats 3 times per control; response and query give 113/65 parser features and 133/85 AFL++ tuples, differing by 48 features and 48 tuples ([receipt](github-com-cznic-dns-msg-feedback-differential.json)). Own pure-Go decoder by Jan Mercl, written at CZ.NIC; no code from miekg/dns or x/net. The module has no tagged release (archived, pre-modules), so the pinned version is the pseudo-version of its last commit (2018-11-22). The harness passes position 0 and a nil decode sniffer. It keeps the Z, AD and CD bits. msg's package init starts an ID-generator goroutine whose first reseed raced process exit, which made two coverage blocks of msg/message.go vary between identical runs; the harness sleeps 50 ms once at start-up so that reseed always completes (parsing unchanged).
 
 ## Remaining leads
 

@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T20:08:40.922780+00:00",
+  "checked_at_utc": "2026-11-17T20:34:47.457833+00:00",
   "controls": {
     "response": "controls/dns/response.bin",
     "query_differential": "controls/dns/query.bin"
@@ -483,6 +483,85 @@
         "runs_per_control": 3
       },
       "feedback_receipt": "data/go/dns/github-com-phuslu-fastdns-feedback-differential.json"
+    },
+    {
+      "package": "github.com/cznic/dns/msg",
+      "version": "v0.0.0-20181122101858-8a2913d6a50b",
+      "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+      "command": "python3 scripts/run_project.py dns go github_com_cznic_dns_msg",
+      "feedback_command": "python3 scripts/verify_dns_feedback.py dns/go/github_com_cznic_dns_msg",
+      "receipt": "projects/dns/go/github_com_cznic_dns_msg/verification.json",
+      "control": "controls/dns/response.bin",
+      "pass": true,
+      "output": {
+        "aa": 0,
+        "additional": [],
+        "ancount": 4,
+        "answers": [
+          {
+            "class": 1,
+            "name": "www.example.test.",
+            "rdata": "example.test.",
+            "ttl": 3600,
+            "type": 5
+          },
+          {
+            "class": 1,
+            "name": "example.test.",
+            "rdata": "192.0.2.10",
+            "ttl": 300,
+            "type": 1
+          },
+          {
+            "class": 1,
+            "name": "example.test.",
+            "rdata": "2001:db8::10",
+            "ttl": 600,
+            "type": 28
+          },
+          {
+            "class": 1,
+            "name": "example.test.",
+            "rdata": "10 mail.example.test.",
+            "ttl": 7200,
+            "type": 15
+          }
+        ],
+        "arcount": 0,
+        "authority": [],
+        "id": 43981,
+        "nscount": 0,
+        "opcode": 0,
+        "qdcount": 1,
+        "qr": 1,
+        "questions": [
+          {
+            "class": 1,
+            "name": "www.example.test.",
+            "type": 1
+          }
+        ],
+        "ra": 1,
+        "rcode": 0,
+        "rd": 1,
+        "tc": 0,
+        "z": 0
+      },
+      "differential_control": "controls/dns/query.bin",
+      "differential_output_matches": true,
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 185,
+      "format_specific_source_lines_covered": 81,
+      "afl_feedback": {
+        "control_parser_features": 113,
+        "variant_parser_features": 65,
+        "parser_feature_difference": 48,
+        "control_afl_tuples": 133,
+        "variant_afl_tuples": 85,
+        "afl_tuple_difference": 48,
+        "runs_per_control": 3
+      },
+      "feedback_receipt": "data/go/dns/github-com-cznic-dns-msg-feedback-differential.json"
     }
   ]
 }
