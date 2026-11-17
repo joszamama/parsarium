@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "project": "mp3_id3v2/cpp/mpv",
+  "project": "mp3/cpp/mpv",
   "pass": true,
   "feedback_kind": "ffmpeg_tagged_mp3_mpv_demux_lavf_pcguard_edges",
   "feedback_scope": "FFmpeg 9.0.2 libavformat/id3v2.c, mp3dec.c, id3v1.c, replaygain.c, libavcodec/mpegaudiodecheader.c, mpegaudio_parser.c and mpv 0.42.0 demux/demux_lavf.c via AFL++ allowlist; the rest of libmpv, libavformat, libavcodec, libplacebo and the C++17 harness uninstrumented",
@@ -22,8 +22,8 @@
     "libavformat.a(replaygain.o)",
     "libmpv.a(demux_demux_lavf.c.o)"
   ],
-  "base_project_receipt_sha256": "6ac8f3de3974417959c882cf72b33d82489e6a43c453a5ea760fcff4ac679bd7",
-  "base_image_id": "sha256:23d8f6d2137600c8c28bbcfd026c0dc6c8745851e32606ca9816aff4ab24c342",
+  "base_project_receipt_sha256": "74b425c64204591908ef0f898072cdb4312ebaa4d59170cbaebf419b86c99cda",
+  "base_image_id": "sha256:e971c6d6a2ef7e32df30712f6360b2b81a010930e1840eb2421a7a25789ce535",
   "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
   "underlying_source_sha256": "8c3850283eb25fa026482078a04051e0be17347b09ef81a0849bec15a96e002e",
   "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
@@ -38,7 +38,7 @@
     "codec": "mp3",
     "duration_ms": 1000
   },
-  "image_id": "sha256:8be0939c250301ff55e512b3b0d7e94e9be8daa97ddc1ba4098487968d759799",
+  "image_id": "sha256:8d5fe12e73e39206603ae3ba46f4bb13b22f40c39ff8d64445a297c680600149",
   "platform": "linux/arm64",
   "afl_package": "4.33c-1.1ubuntu1",
   "afl_version_output": "4.33c-1.1ubuntu1",
@@ -72,7 +72,7 @@
     "all_repeats_identical": true
   },
   "source_differential": {
-    "image_id": "sha256:23d8f6d2137600c8c28bbcfd026c0dc6c8745851e32606ca9816aff4ab24c342",
+    "image_id": "sha256:e971c6d6a2ef7e32df30712f6360b2b81a010930e1840eb2421a7a25789ce535",
     "control_regions": {
       "/work/ffmpeg/libavformat/id3v2.c": 156,
       "/work/ffmpeg/libavformat/mp3dec.c": 183,
@@ -111,7 +111,7 @@
     }
   },
   "overlay_file_sha256": {
-    "Dockerfile": "a38ac9a731b88f0c8eca38b61473da762c3e1a8a3be86c9c1207c68f926bc7f2",
-    "build.py": "7aa80adffa561ff4bc6a0a73b729e54ee3c4c1b7e27fbea63dce20c9b0fe069b"
+    "Dockerfile": "145ef9c12355c272d9902e77b0383d19a23af0247326a55688092b5bbd5cab7c",
+    "build.py": "e47b6fcf717c1c0a536745d63b420e85f10d3ca1ec5aa4fc3ba1fde834ad739d"
   }
 }
