@@ -56,6 +56,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [boundwize/jsonrecast / PHP](php/boundwize_jsonrecast/README.md)
 - [eftec/services_json / PHP](php/eftec_services_json/README.md)
 - [halaxa/json-machine / PHP](php/halaxa_json_machine/README.md)
+- [joelwurtz/json-stream-polyfill / PHP](php/joelwurtz_json_stream_polyfill/README.md)
 - [json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0) / PHP](php/stdlib_json_decode/README.md)
 - [klkvsk/json-decode-stream / PHP](php/klkvsk_json_decode_stream/README.md)
 - [laktak/hjson / PHP](php/laktak_hjson/README.md)
