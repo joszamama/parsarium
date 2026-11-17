@@ -1,10 +1,10 @@
 {
   "ecosystem": "python",
   "format": "toml",
-  "status": "pilot_search_bounded_none_verified",
+  "status": "pilot_two_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 2,
   "verified_standard_or_runtime_count": 1,
   "search_queries": [
     "project name contains 'toml'",
@@ -16,10 +16,16 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 100,
   "unique_search_hits": 100,
-  "unresolved_documentation_leads": 8,
-  "uncertainty": "Bounded TOML search captured 2026-11-17: 1 query, 100 recorded hits (100 unique), at most 100 per query. 8 parser leads are recorded and none is verified yet. The PyPI Simple index has no relevance order; the name filter matches unrelated names (for example 'automl'), so the named leads come from targeted lookups. The standard tomllib API passed both controls on a host run. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
+  "unresolved_documentation_leads": 6,
+  "uncertainty": "Bounded TOML search captured 2026-11-17: 1 query, 100 recorded hits (100 unique), at most 100 per query; the PyPI Simple index has no relevance order and the name filter matches unrelated names, so the leads come from targeted lookups. Two third-party paths pass both valid controls with exact hand-written typed trees, parser-scoped Python line coverage and AFL++ feedback: tomlkit 0.15.2 (591,365,129 PyPI Stats last-month downloads; 845 package lines, 408 in parser.py; controls differ by 401 AFL++ tuples) and tomli 2.5.0 (263,305,223; 284 lines, 259 in _parser.py; controls differ by 137 tuples), three identical runs per control each. tomli is the same code family as the standard tomllib API (a vendored copy), so the two are not independent; the hand-written trees are tomli's independent check. Only tomli's pure-Python wheel is measured, not its mypyc-compiled wheels. tomlkit is an independent style-preserving parser; its downloads mostly reflect Poetry and other tool installs. toml 0.10.2 (145,147,540) fails typed-scalars: it drops the fractional seconds of the local time 00:32:00.25. rtoml (Rust toml crate via PyO3) was not attempted, since it needs a source build with Rust parser coverage; pytoml, pytomlpp, toml-rs and qtoml remain unrun leads. The standard tomllib API passed both controls on a host run. Two valid controls establish only the tested TOML 1.0.0 subset; malformed input, huge documents and TOML 1.1 features are untested.",
   "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
   "registry_snapshot": "data/python/toml/registry-snapshot.json",
   "unresolved_leads": "data/python/toml/leads.json",
-  "runtime_evidence": "data/python/toml/standard.json"
+  "runtime_evidence": "data/python/toml/standard.json",
+  "third_party_evidence": "data/python/toml/parsers.json",
+  "third_party_control_results": [
+    "projects/toml/python/tomlkit/verification.json",
+    "projects/toml/python/tomli/verification.json"
+  ],
+  "third_party_control_summary": "data/python/toml/verification.json"
 }

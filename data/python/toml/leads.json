@@ -4,37 +4,26 @@
   "observed": "2026-11-17",
   "leads": [
     {
-      "name": "tomlkit",
-      "metric_value": 591365129,
-      "metric": "PyPI Stats last_month downloads excluding known mirrors",
-      "family": "tomlkit (own style-preserving parser)",
-      "api_lead": "tomlkit.parse(str) -> TOMLDocument",
-      "note": null,
-      "source": "https://pypi.org/project/tomlkit/",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
-      "name": "tomli",
-      "metric_value": 263305223,
-      "metric": "PyPI Stats last_month downloads excluding known mirrors",
-      "family": "tomli (own parser; vendored as stdlib tomllib)",
-      "api_lead": "tomli.loads(str) / tomli.load(binary file)",
-      "note": "Same code family as the standard tomllib path.",
-      "source": "https://pypi.org/project/tomli/",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
       "name": "toml",
       "metric_value": 145147540,
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
       "family": "toml (uiri)",
       "api_lead": "toml.loads(str)",
-      "note": "TOML 0.5-era; may reject parts of the 1.0.0 controls.",
+      "note": "TOML 0.5-era parser; drops the fraction of a local time on the typed-scalars control, so it fails the gate. Not promoted.",
       "source": "https://pypi.org/project/toml/",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.10.2",
+      "release_wheel_sha256": "806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b",
+      "release_sdist_sha256": "b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f",
+      "license": "MIT",
+      "documentation": "https://github.com/uiri/toml/blob/0.10.2/README.rst",
+      "evidence": {
+        "checked_on_utc": "2026-11-17",
+        "run": "host CPython 3.14.7 venv, toml 0.10.2 py2.py3-none-any wheel installed by hash; toml.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
+        "service-config.toml": "matches the hand-written typed tree",
+        "typed-scalars.toml": "differs at times.local_time: toml.loads returns datetime.time(0, 32) for 00:32:00.25, so the typed value is 00:32:00 instead of 00:32:00.25 (the fractional seconds of a local time are dropped); every other value matches"
+      }
     },
     {
       "name": "rtoml",
@@ -42,10 +31,13 @@
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
       "family": "Rust toml crate via PyO3 (toml_parser family)",
       "api_lead": "rtoml.loads(str)",
-      "note": "Native extension over the Rust toml crate.",
+      "note": "PyO3 extension over the Rust toml crate: its parser source is Rust, so a path needs a source build with LLVM coverage of the Rust parser (the Python JSON jiter/orjson native route). Not attempted in this pass; the Rust toml crate family is covered by the Rust cell.",
       "source": "https://pypi.org/project/rtoml/",
       "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "api_lead_checked_against_pinned_release": false,
+      "release": "0.14.0",
+      "release_sdist_sha256": "e0f95a59e3fac6394985d59ce18a0c06f2176f2eb9dec2fb8c1105febaf05c59",
+      "license": "MIT"
     },
     {
       "name": "pytoml",
@@ -98,6 +90,20 @@
       "metric_value": 85996374,
       "status": "excluded",
       "reason": "Writer only."
+    }
+  ],
+  "promoted": [
+    {
+      "name": "tomlkit",
+      "metric_value": 591365129,
+      "status": "promoted_to_verified",
+      "project": "projects/toml/python/tomlkit"
+    },
+    {
+      "name": "tomli",
+      "metric_value": 263305223,
+      "status": "promoted_to_verified",
+      "project": "projects/toml/python/tomli"
     }
   ]
 }

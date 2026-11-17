@@ -1,0 +1,536 @@
+{
+  "checked_at_utc": "2026-11-17T17:00:15.005692+00:00",
+  "platform": "linux/amd64",
+  "control": {
+    "path": "controls/toml/service-config.toml",
+    "sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257"
+  },
+  "differential_control": {
+    "path": "controls/toml/typed-scalars.toml",
+    "sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0"
+  },
+  "third_party": [
+    {
+      "package": "tomlkit",
+      "version": "0.15.2",
+      "pass": true,
+      "input_api": "tomlkit.parse(decoded local TOML text) walked by tomlkit item type (Table, InlineTable, AoT, Array, Bool, Integer, Float, String, DateTime, Date, Time) with each scalar unwrapped; TOMLDocument.unwrap(), tomlkit.parse(bytes) and tomlkit.load(BytesIO(local bytes)) give the same typed tree on both controls",
+      "output": {
+        "database": {
+          "limits": {
+            "max": {
+              "type": "integer",
+              "value": "10"
+            },
+            "min": {
+              "type": "integer",
+              "value": "-2"
+            }
+          },
+          "ports": [
+            {
+              "type": "integer",
+              "value": "8000"
+            },
+            {
+              "type": "integer",
+              "value": "8001"
+            },
+            {
+              "type": "integer",
+              "value": "8002"
+            }
+          ],
+          "ratio": {
+            "type": "float",
+            "value": "3.25"
+          }
+        },
+        "enabled": {
+          "type": "bool",
+          "value": "true"
+        },
+        "owner": {
+          "name": {
+            "type": "string",
+            "value": "Zoë"
+          },
+          "since": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00Z"
+          }
+        },
+        "products": [
+          {
+            "name": {
+              "type": "string",
+              "value": "Hammer"
+            },
+            "sku": {
+              "type": "integer",
+              "value": "738594937"
+            }
+          },
+          {
+            "color": {
+              "type": "string",
+              "value": "gray"
+            },
+            "name": {
+              "type": "string",
+              "value": "Nail"
+            },
+            "points": [
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "2"
+                }
+              },
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "3"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "4"
+                }
+              }
+            ]
+          }
+        ],
+        "retries": {
+          "type": "integer",
+          "value": "3"
+        },
+        "servers": {
+          "alpha": {
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.1"
+            },
+            "tags": [
+              {
+                "type": "string",
+                "value": "edge"
+              },
+              {
+                "type": "string",
+                "value": "eu"
+              }
+            ]
+          },
+          "beta": {
+            "enabled": {
+              "type": "bool",
+              "value": "false"
+            },
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.2"
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "value": "Parsarium \"service\" control"
+        }
+      },
+      "differential_control": "controls/toml/typed-scalars.toml",
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "oracle": "hand-written typed trees in controls/toml/*.expected.json; every package API mode and CPython tomllib (/usr/bin/python3 -I in the same image, where the package is not importable) must equal them",
+      "stdlib_tomllib_family": "independent (tomllib is the tomli family)",
+      "typed_tree_sha256": {
+        "control": "6d2bf3f9f6f555fc84311a1e4e6af9488563c0f0e2ff06b98ba92e894db5f172",
+        "differential_control": "4718dbdbf4a674dfc79cd455be85ca64736c7a70fd6fd91e097bbc5a74626203"
+      },
+      "api_modes_matching": [
+        "tomlkit-items",
+        "tomlkit-unwrap",
+        "tomlkit-bytes",
+        "tomlkit-stream"
+      ],
+      "parser_family": "tomlkit pure-Python style-preserving recursive-descent parser (tomlkit/parser.py over tomlkit/source.py, building tomlkit items)",
+      "platform": "linux/amd64",
+      "parser_source_files": 8,
+      "parser_source_lines_covered": 845,
+      "format_parser_file": "parser.py",
+      "format_parser_lines_covered": 408,
+      "afl_feedback": "data/python/toml/tomlkit-valid-feedback.json",
+      "afl_tuples": {
+        "control": 865,
+        "differential_control": 806,
+        "difference": 401
+      },
+      "project_receipt": "projects/toml/python/tomlkit/verification.json",
+      "project_receipt_sha256": "fdfcac8510aa6df63fbe640ee0c1eac6ac6dcb95b0f34eebd29b6f57fc599ded",
+      "coverage_caveat": "Python line coverage of the installed pure-Python wheel, byte-identical to the pinned sdist package sources. The controls do not exercise malformed input, duplicate keys, large integers, special floats or TOML 1.1 syntax."
+    },
+    {
+      "package": "tomli",
+      "version": "2.5.0",
+      "pass": true,
+      "input_api": "tomli.loads(decoded local TOML text) -> dict; tomli.load(BytesIO(local bytes)) gives the same typed tree on both controls",
+      "output": {
+        "database": {
+          "limits": {
+            "max": {
+              "type": "integer",
+              "value": "10"
+            },
+            "min": {
+              "type": "integer",
+              "value": "-2"
+            }
+          },
+          "ports": [
+            {
+              "type": "integer",
+              "value": "8000"
+            },
+            {
+              "type": "integer",
+              "value": "8001"
+            },
+            {
+              "type": "integer",
+              "value": "8002"
+            }
+          ],
+          "ratio": {
+            "type": "float",
+            "value": "3.25"
+          }
+        },
+        "enabled": {
+          "type": "bool",
+          "value": "true"
+        },
+        "owner": {
+          "name": {
+            "type": "string",
+            "value": "Zoë"
+          },
+          "since": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00Z"
+          }
+        },
+        "products": [
+          {
+            "name": {
+              "type": "string",
+              "value": "Hammer"
+            },
+            "sku": {
+              "type": "integer",
+              "value": "738594937"
+            }
+          },
+          {
+            "color": {
+              "type": "string",
+              "value": "gray"
+            },
+            "name": {
+              "type": "string",
+              "value": "Nail"
+            },
+            "points": [
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "2"
+                }
+              },
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "3"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "4"
+                }
+              }
+            ]
+          }
+        ],
+        "retries": {
+          "type": "integer",
+          "value": "3"
+        },
+        "servers": {
+          "alpha": {
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.1"
+            },
+            "tags": [
+              {
+                "type": "string",
+                "value": "edge"
+              },
+              {
+                "type": "string",
+                "value": "eu"
+              }
+            ]
+          },
+          "beta": {
+            "enabled": {
+              "type": "bool",
+              "value": "false"
+            },
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.2"
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "value": "Parsarium \"service\" control"
+        }
+      },
+      "differential_control": "controls/toml/typed-scalars.toml",
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "oracle": "hand-written typed trees in controls/toml/*.expected.json; every package API mode and CPython tomllib (/usr/bin/python3 -I in the same image, where the package is not importable) must equal them",
+      "stdlib_tomllib_family": "same family (tomllib is a vendored copy of tomli); hand-written trees are the independent check",
+      "typed_tree_sha256": {
+        "control": "6d2bf3f9f6f555fc84311a1e4e6af9488563c0f0e2ff06b98ba92e894db5f172",
+        "differential_control": "4718dbdbf4a674dfc79cd455be85ca64736c7a70fd6fd91e097bbc5a74626203"
+      },
+      "api_modes_matching": [
+        "tomli-str",
+        "tomli-stream"
+      ],
+      "parser_family": "tomli pure-Python parser (tomli/_parser.py with tomli/_re.py); same code family as CPython's standard tomllib",
+      "platform": "linux/amd64",
+      "parser_source_files": 2,
+      "parser_source_lines_covered": 284,
+      "format_parser_file": "_parser.py",
+      "format_parser_lines_covered": 259,
+      "afl_feedback": "data/python/toml/tomli-valid-feedback.json",
+      "afl_tuples": {
+        "control": 304,
+        "differential_control": 291,
+        "difference": 137
+      },
+      "project_receipt": "projects/toml/python/tomli/verification.json",
+      "project_receipt_sha256": "da1edb588e8edff8de9c79028d90c842f57f97506a055c34eb3a7ae814aa07ee",
+      "coverage_caveat": "Python line coverage of the installed pure-Python wheel, byte-identical to the pinned sdist package sources. The controls do not exercise malformed input, duplicate keys, large integers, special floats or TOML 1.1 syntax."
+    }
+  ]
+}
