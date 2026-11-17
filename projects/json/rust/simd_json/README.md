@@ -1,4 +1,4 @@
-# simd_json — JSON / Rust
+# simd-json — JSON / Rust
 
 Pinned release: `0.19.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 

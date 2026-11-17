@@ -640,10 +640,10 @@
     {
       "ecosystem": "rust",
       "format": "json",
-      "status": "pilot_one_path_search_bounded",
+      "status": "pilot_two_paths_verified_search_bounded",
       "working_target": 10,
       "ceiling": 10,
-      "verified_third_party_count": 1,
+      "verified_third_party_count": 2,
       "verified_standard_or_runtime_count": 0,
       "search_queries": [
         "json",
@@ -664,10 +664,13 @@
       "search_limit_per_query": 100,
       "search_hits_recorded": 600,
       "unique_search_hits": 476,
-      "unresolved_documentation_leads": 20,
-      "uncertainty": "Pilot cell: one verified path, chosen as the highest crates.io 90-day download count (438,065,825) among all 476 unique search hits. 20 JSON parser leads remain unverified (top: aws-smithy-json 59,322,077, simd-json 6,730,588, jiter 5,274,664), so the count of one reflects pilot scope, not a search result. Search covers only the first 100 hits of six queries (600 hits, 476 unique) captured 2026-11-17; the 'json' query alone reports 55195 matches. Recent downloads include transitive dependency pulls and are an adoption proxy. Superset formats (JSON5, JSONC, Hjson) are excluded. Two small valid UTF-8 controls do not establish duplicate-key, large-number precision, deep-nesting limit (serde_json's default recursion limit is 128), lone-surrogate, or non-UTF-8 behaviour. The Rust 1.99.1 standard library documents no JSON API.",
+      "unresolved_documentation_leads": 19,
+      "uncertainty": "Two verified independent parser paths selected within the first 100 hits of six crates.io queries (600 hits, 476 unique), captured 2026-11-17. Nineteen documented JSON parser leads remain unverified, including higher-download aws-smithy-json (59,322,077), so this is a bounded pilot rather than a complete top-ten ranking. Downloads are crates.io recent 90-day counts and include transitive pulls. Superset formats are excluded. Two small valid controls establish only their observed RFC 8259 structure; duplicate keys, huge numbers, deep nesting and non-UTF-8 are untested. Rust 1.99.1 standard library documents no JSON parser.",
       "third_party_evidence": "data/rust/json/parsers.json",
-      "third_party_control_results": "projects/json/rust/serde_json/verification.json",
+      "third_party_control_results": [
+        "projects/json/rust/serde_json/verification.json",
+        "projects/json/rust/simd_json/verification.json"
+      ],
       "runtime_evidence": "data/rust/json/standard.json",
       "registry_snapshot": "data/rust/json/registry-snapshot.json",
       "unresolved_leads": "data/rust/json/leads.json",

@@ -26,3 +26,4 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [pydantic / Python](python/pydantic/README.md)
 - [simplejson / Python](python/simplejson/README.md)
 - [serde_json / Rust](rust/serde_json/README.md)
+- [simd-json / Rust](rust/simd_json/README.md)
