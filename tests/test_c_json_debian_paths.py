@@ -13,6 +13,7 @@ BASE = ROOT / "data/c/json"
 PATHS = {
     "json-glib": ("json-glib", 163249),
     "jq": ("jq", 141218),
+    "libfastjson": ("libfastjson", 91226),
 }
 
 
@@ -132,6 +133,8 @@ class CJsonDebianPathsTest(unittest.TestCase):
 
     def test_families_are_stated(self):
         parsers = {item["name"]: item for item in read(BASE / "parsers.json")}
+        self.assertIn("json-c", parsers["libfastjson"]["family"])
+        self.assertIn("fork of json-c", parsers["libfastjson"]["family_note"])
         self.assertIn("JsonScanner", parsers["json-glib"]["family"])
         self.assertIn("wiki", parsers["jq"]["documentation_note"])
         families = [item["family"] for item in parsers.values()]

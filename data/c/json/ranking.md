@@ -1,6 +1,6 @@
 # C × JSON: selected parsers (pilot)
 
-Six verified third-party paths, ranked by one Debian metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Seven verified third-party paths, ranked by one Debian metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -13,7 +13,8 @@ Debian popcon `sourcemax` installations by source package, captured 2026-11-17 f
 | 3 | [JSON-GLib](https://gnome.pages.gitlab.gnome.org/json-glib/method.Parser.load_from_data.html) | 1.10.8 | `json-glib` | 163,249 | Own JsonParser over own `json-scanner.c` |
 | 4 | [cJSON](https://github.com/DaveGamble/cJSON/blob/v1.7.19/README.md) | 1.7.19 | `cjson` | 150,958 | Own recursive-descent `cJSON.c` |
 | 5 | [jq (libjq)](https://github.com/jqlang/jq/wiki/C-API:-jv) | 1.8.2 | `jq` | 141,218 | Own `jv_parse.c` reader into `jv` values |
-| 6 | [yyjson](https://github.com/ibireme/yyjson/blob/0.13.0/doc/API.md) | 0.13.0 | `yyjson` | 14,868 | Own native reader in `src/yyjson.c` |
+| 6 | [libfastjson](https://github.com/rsyslog/libfastjson/blob/v1.2609.0/json_tokener.h) | 1.2609.0 | `libfastjson` | 91,226 | json-c tokener family (rsyslog fork) |
+| 7 | [yyjson](https://github.com/ibireme/yyjson/blob/0.13.0/doc/API.md) | 0.13.0 | `yyjson` | 14,868 | Own native reader in `src/yyjson.c` |
 
 cJSON uses its documented `cJSON_ParseWithLengthOpts` local byte-buffer API. The [pinned source archive](https://github.com/DaveGamble/cJSON/releases/tag/v1.7.19) has SHA-256 `7fa616e3046edfa7a28a32d5f9eacfd23f92900fe1f8ccd988c1662f30454562` and an MIT LICENSE. Its Docker control traverses the parsed cJSON tree and compares the full nested JSON value to the valid object control. Two repeated valid controls produce identical parser-source LLVM regions and AFL++ bitmaps; the valid nested-array control changes 39 parser features and 29 AFL tuples ([receipt](afl-feedback.json)).
 
@@ -23,13 +24,14 @@ JSON-GLib 1.10.8 comes from the [GNOME release tarball](https://download.gnome.o
 
 jq 1.8.2 comes from the [official release asset](https://github.com/jqlang/jq/releases/tag/jq-1.8.2), SHA-256 `71b8d6e8f5fe81f6c6d0d110e3892251f6ce76ed095abd315e26e6e1193af3af` (MIT; bundled decNumber under the ICU license). Debian forky/sid ship 1.8.2. The harness links libjq (built without oniguruma) and calls `jv_parse_sized(bytes, length)`. That C API is documented on jq's [project wiki](https://github.com/jqlang/jq/wiki/C-API:-jv), which calls the jv API public "mostly" without a stability commitment; the jq manual covers only the program, and the pinned `src/jv.h` declares the function. jq's own `jv_dump_string` prints the tree in object insertion order; jq has a single number kind, so the integer/float distinction checked against `json.loads` comes from jq's preserved decimal literal. The harness and probe define `arc4random()` to fix jq's per-process object hash seed, which jq does not let callers set; without it repeated AFL++ maps differed. The base control covers 1,139 libjq lines (356 in `jv_parse.c`). The parser-only probe instruments `jv_parse.c`, `jv.c`, `jv_unicode.c`, `jv_alloc.c` and `jv_dtoa.c`; three runs per control repeat exactly and the controls differ by 26 of 219/203 tuples and 44 source lines ([receipt](../../../fuzzing/afl-native/json/c/jq/differential.json)). The 141,218 count belongs to the `jq` source package, mostly the command-line program and its libjq1 dependency, not libjq API use.
 
+libfastjson 1.2609.0 comes from the [rsyslog release download](https://download.rsyslog.com/libfastjson/libfastjson-1.2609.0.tar.gz) for tag v1.2609.0, SHA-256 `7cd6f78c1c07f4140f6976a9a0e0048bcaa7292329c6ac2c0e070383d83d8edd` (MIT). Debian forky/sid ship this version; trixie ships 1.2304.0. It is rsyslog's fork of json-c and shares the json-c tokener family with the json-c row; PROTOCOL.md allows a shared family as a separate package path when it is recorded. The harness calls the [documented](https://github.com/rsyslog/libfastjson/blob/v1.2609.0/json_tokener.h) `fjson_tokener_parse_ex` in `FJSON_TOKENER_STRICT` mode on the exact length and rejects non-whitespace after `tok->char_offset`. Its fjson_object tree matches each valid control with key order and int/double kinds. libfastjson documents that it does not support NUL inside strings. The base control covers 729 library lines (362 in `json_tokener.c`). The parser-only probe instruments `json_tokener.c`, `json_object.c`, `arraylist.c` and `printbuf.c`; three runs per control repeat exactly and the controls differ by 21 of 220/203 tuples and 15 source lines ([receipt](../../../fuzzing/afl-native/json/c/libfastjson/differential.json)).
+
 [Parser records](parsers.json) · [control results](verification.json) · [standard inventory](standard.json). ISO C documents no JSON parser API.
 
 ## Unresolved leads
 
 | Lead | Popcon installations | Status |
 | --- | ---: | --- |
-| [libfastjson](https://download.rsyslog.com/libfastjson/libfastjson-1.2609.0.tar.gz) | 91,226 | Not control-tested |
 | [json-parser](https://github.com/json-parser/json-parser/releases/tag/v1.1.0) | 844 | Not control-tested |
 | [parson](https://github.com/kgabis/parson) | unavailable | Verified technically; no Debian source package |
 | [frozen](https://github.com/cesanta/frozen) | 16 | Fails the nested-object control |

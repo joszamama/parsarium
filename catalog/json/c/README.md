@@ -13,6 +13,7 @@ Four positive-signal C JSON third-party paths pass two valid controls with forma
 - [json-glib](json-glib/README.md) — verified API path
 - [cjson](cjson/README.md) — verified Docker harness
 - [jq](jq/README.md) — verified API path
+- [libfastjson](libfastjson/README.md) — verified API path
 - [yyjson](yyjson/README.md) — verified Docker harness
 
 ## Standard and runtime APIs

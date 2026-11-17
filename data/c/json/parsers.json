@@ -269,6 +269,60 @@
     "project": "projects/json/c/jq"
   },
   {
+    "name": "libfastjson",
+    "version": "1.2609.0",
+    "license": "MIT",
+    "license_evidence": "Pinned 1.2609.0 COPYING (MIT) in the rsyslog release tarball",
+    "input_api": "fjson_tokener_parse_ex(struct fjson_tokener *tok, const char *str, int len) with FJSON_TOKENER_STRICT",
+    "documentation": "https://github.com/rsyslog/libfastjson/blob/v1.2609.0/json_tokener.h",
+    "documentation_note": "The pinned json_tokener.h documents fjson_tokener_parse_ex (line 199) for a non-NUL-terminated buffer of len bytes, FJSON_TOKENER_STRICT (line 98), and trailing-byte detection through tok->char_offset. The release tarball is the official rsyslog download for tag v1.2609.0.",
+    "source": "https://download.rsyslog.com/libfastjson/libfastjson-1.2609.0.tar.gz",
+    "scope": "RFC 8259 JSON text (object or array root, FJSON_TOKENER_STRICT, trailing JSON whitespace only) decoded into an fjson_object tree; libfastjson documents no NUL support inside strings",
+    "family": "json-c tokener family: libfastjson fork (json_tokener.c)",
+    "family_note": "libfastjson is rsyslog's fork of json-c; its json_tokener.c keeps json-c's resumable state-machine tokener design and copyright lineage, with libfastjson's own object storage, iterator and number handling. It is a distinct Debian source package and library path that shares the json-c parser family with the selected json-c row (PROTOCOL.md allows shared families when recorded). Debian trixie ships 1.2304.0; forky/sid ship the pinned 1.2609.0.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package libfastjson",
+      "value": 91226,
+      "rank": 857,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "project": "projects/json/c/libfastjson"
+  },
+  {
     "name": "yyjson",
     "version": "0.13.0",
     "license": "MIT",
