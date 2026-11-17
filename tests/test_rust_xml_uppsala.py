@@ -59,7 +59,7 @@ class UppsalaEvidenceTest(unittest.TestCase):
         rows = [line for line in ranking.splitlines() if line.startswith("| ") and line[2].isdigit()]
         ranked = [int(row.split("|")[4].strip().replace(",", "")) for row in rows]
         self.assertEqual(ranked, sorted(values, reverse=True))
-        self.assertIn("| 7 | [uppsala]", ranking)
+        self.assertIn("| 8 | [uppsala]", ranking)
 
 
 if __name__ == "__main__":

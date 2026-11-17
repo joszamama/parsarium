@@ -3,16 +3,6 @@
   "metric": "crates.io recent downloads (90 days), as returned by the search API at capture time",
   "unresolved_leads": [
     {
-      "name": "RustyXML",
-      "version": "0.3.0",
-      "recent_downloads_90d": 4342774,
-      "status": "unresolved_feedback_nondeterministic",
-      "reason": "The public Parser::feed_str(&str) stream API yielded exact namespace-aware structure for both valid controls, with 285 pinned parser-source lines covered. Whole-binary AFL++ feedback varied across identical runs. A parser-crate-only sanitizer-coverage build still varied on the order control (621 edges once, 613 nine times); exact reproducible parser feedback was not established, so this lead is not selected.",
-      "source": "https://static.crates.io/crates/RustyXML/RustyXML-0.3.0.crate",
-      "audit": "data/rust/xml/rustyxml-feedback-audit.md",
-      "family_note": "RustyXML parser derives from ObjFW OFXMLParser according to the pinned src/parser.rs."
-    },
-    {
       "name": "xml-no-std",
       "version": "0.8.26",
       "recent_downloads_90d": 1648161,
@@ -192,6 +182,19 @@
       "record": "data/rust/xml/parsers.json",
       "receipt": "projects/xml/rust/uppsala/verification.json",
       "source_sha256": "95eaea4bf5a4837be1861b8c45913dd6fd33f9ae9d9fcc60716399f7ebfd2122"
+    },
+    {
+      "name": "RustyXML",
+      "version": "0.3.0",
+      "recent_downloads_90d": 4342774,
+      "status": "selected",
+      "reason": "Own ObjFW-derived streaming parser behind the documented Parser::new()/feed_str(&str) event API; selected after both shared valid controls matched the Expat oracle exactly, 285 RustyXML source lines were covered (266 in src/parser.rs on the catalog control, 281 on the order control), and RustyXML-only AFL++ feedback with fixed std HashMap RandomState keys was identical across ten afl-showmap repeats per control (668 vs 733 edges; 59 and 124 unique to each control). The earlier unresolved_feedback_nondeterministic status came from per-process RandomState keys in the crate's own HashMaps; see the feedback audit.",
+      "source": "https://crates.io/crates/RustyXML",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/rustyxml/verification.json",
+      "audit": "data/rust/xml/rustyxml-feedback-audit.md",
+      "source_sha256": "8b5ace29ee3216de37c0546865ad08edef58b0f9e76838ed8959a84a990e58c5",
+      "family_note": "RustyXML parser derives from ObjFW OFXMLParser according to the pinned src/parser.rs."
     }
   ]
 }

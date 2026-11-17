@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "project": "xml/rust/rustyxml",
+  "pass": true,
+  "base_project_receipt_sha256": "e45ef59322c429237ef46b50271f130cde69f43bb9497f9c2ddf1793a63f3d8b",
+  "overlay_file_sha256": {
+    "Cargo.toml": "14293ad11cc31f4b116ed27375fffa314fa4b9db7e6e733d5da5ac07497c272e",
+    "Cargo.lock": "3c3ddde6dba7308c64cb11b6d85e611dacacacfc6f18873db4e126190e5f9acb",
+    "afl_fuzzer.rs": "1bfe3d1a82fcfa2174233fe3135438fb37649ce3de190c81c95205af73d21808",
+    "Dockerfile": "4fb49ad0140e2f72d1fd559f1f07383199b30eede21acbb0a0b3b68ef7760eac",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "build.py": "22e917c56e8599bfe4df346e16992a5d6735b7fa5a1014f88006d3c1743dc2d4"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "8b5ace29ee3216de37c0546865ad08edef58b0f9e76838ed8959a84a990e58c5",
+  "image_id": "sha256:9e3a78cd8b338fe1072a332ea7526b061a7e3d44730311e9492987fb5f4ee80c",
+  "platform": "linux/arm64",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "feedback_edges": 668,
+  "afl_map_size": 3337,
+  "feedback_kind": "afl_rs_rustyxml_only_sancov_edges",
+  "feedback_scope": "Only RustyXML crate (lib name xml) objects carry SanitizerCoverage guards; harness, serde_json, AFL runtime and other crates are uninstrumented",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "xml"
+    ],
+    "rlib_guard_bytes": {
+      "xml": 13328
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_xml_rustyxml_harness",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "xdg"
+    ],
+    "binary_guards": 3332
+  },
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "2f06fd02b80202275342fa322885f7a67ad8a41130b0fb881b17dc5af64cf41a",
+    "reason": "RustyXML's own std HashMaps (namespace binding stack, attribute map) use RandomState; per-process getrandom keys change hashbrown probe paths monomorphized into the RustyXML crate. Constant getrandom bytes fix the keys; the parser source is unchanged.",
+    "replay_output_unchanged": true
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:1eb6d55757841179433127708e125d89d93fb5756c326cad5ef46a389a5a4bc4",
+  "variant_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "control_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "variant_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 \u20ac"
+    ]
+  },
+  "repeats": 10,
+  "variant_feedback_edges": 733,
+  "edges_only_in_control": 59,
+  "edges_only_in_variant": 124,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/RustyXML-0.3.0/",
+    "control_lines": {
+      "src/element.rs": 0,
+      "src/element_builder.rs": 0,
+      "src/lib.rs": 19,
+      "src/parser.rs": 266
+    },
+    "variant_lines": {
+      "src/element.rs": 0,
+      "src/element_builder.rs": 0,
+      "src/lib.rs": 26,
+      "src/parser.rs": 281
+    },
+    "files_with_different_line_counts": [
+      "src/lib.rs",
+      "src/parser.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      668,
+      668,
+      668,
+      668,
+      668,
+      668,
+      668,
+      668,
+      668,
+      668
+    ],
+    "stable_edges": 668,
+    "union_edges": 668,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      733,
+      733,
+      733,
+      733,
+      733,
+      733,
+      733,
+      733,
+      733,
+      733
+    ],
+    "stable_edges": 733,
+    "union_edges": 733,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

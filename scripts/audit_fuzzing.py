@@ -5,8 +5,8 @@ import json
 import tomllib
 
 from build_afl_native import OVERLAYS, derived_dockerfile
-from build_afl_rust import (AFL_RUST_RELEASE, SCOPE_CHECK, SCOPE_WRAPPER, dockerfile as rust_dockerfile,
-                            overlay_manifest, overlay_target)
+from build_afl_rust import (AFL_RUST_RELEASE, FIXED_GETRANDOM, SCOPE_CHECK, SCOPE_WRAPPER,
+                            dockerfile as rust_dockerfile, overlay_manifest, overlay_target)
 from audit_projects import (fltk_native_feedback_verified, fully_runnable,
                             lwjgl_assimp_native_feedback_verified,
                             mlt_mp4_feedback_verified,
@@ -204,6 +204,9 @@ def main() -> None:
             if manifest.get("afl_instrumented_crates"):
                 expected.update({"rustc-scope.sh": SCOPE_WRAPPER, "sancov_scope.py": SCOPE_CHECK})
                 assert receipt["sancov_scope"]["instrumented_crates"] == sorted(manifest["afl_instrumented_crates"])
+            if manifest.get("afl_fixed_hashmap_keys"):
+                expected["fixed_getrandom.c"] = FIXED_GETRANDOM
+                assert receipt["fixed_hashmap_keys"]["afl_preload"] == "/work/fixed_getrandom.so"
             for name, text in expected.items():
                 assert (overlay / name).read_text() == text
         lock = tomllib.loads((overlay / "Cargo.lock").read_text())
