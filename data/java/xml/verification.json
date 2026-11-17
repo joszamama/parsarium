@@ -258,6 +258,48 @@
       "underlying_source_lines_covered": 3733,
       "afl_feedback": "data/java/xml/afl-feedback.json",
       "error": null
+    },
+    {
+      "package": "jdom2",
+      "group": "org.jdom",
+      "version": "2.0.6.1",
+      "scope": "Namespace-aware UTF-8 XML 1.0 without DOCTYPE from local InputStream into JDOM2 Document via SAXBuilder over JDK Xerces SAX",
+      "command": "python3 scripts/run_project.py xml java jdom2",
+      "receipt": "projects/xml/java/jdom2/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 21,
+      "parser_source_lines_covered": 734,
+      "underlying_source_files": 58,
+      "underlying_source_lines_covered": 3549,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
     }
   ],
   "standard": [
@@ -299,7 +341,7 @@
     }
   ],
   "refreshed_projects": [
-    "xmlbeans"
+    "jdom2"
   ],
   "retained_prior_results_checked_at_utc": "2026-11-17T07:27:07.356019+00:00"
 }

@@ -83,13 +83,14 @@
   {
     "name": "jdom2",
     "coordinate": "org.jdom:jdom2",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "2.0.6.1",
     "summed_direct_dependent_count": 968,
     "max_release_direct_dependent_count": 451,
     "default_release_direct_dependent_count": 451,
-    "reason": "SAXBuilder.build(InputStream) builds a JDOM tree over a JAXP SAX parser (JDK Xerces fork by default); no tokenizer of its own. Control not run.",
-    "source": "https://central.sonatype.com/artifact/org.jdom/jdom2"
+    "reason": "Pinned JDOM2 2.0.6.1 SAXBuilder.build(local InputStream) and namespace-aware Document tree passed both valid controls. JDOM SAXHandler/tree lines and underlying OpenJDK Xerces SAX lines covered separately; repeated JDOM-scoped AFL feedback is stable and input-dependent. This is a format-specific wrapper path, not an independent XML tokenizer.",
+    "source": "https://central.sonatype.com/artifact/org.jdom/jdom2",
+    "evidence": "data/java/xml/parsers.json"
   },
   {
     "name": "stax2-api",
