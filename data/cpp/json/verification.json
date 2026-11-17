@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T03:51:50.103980+00:00",
+  "checked_at_utc": "2026-11-17T07:18:53.772567+00:00",
   "platform": "linux/arm64 Docker",
   "toolchain": [
     "Ubuntu clang version 21.1.8 (6ubuntu1)",
@@ -55,6 +55,49 @@
       },
       "parser_source_lines_covered": 810,
       "format_specific_source_lines_covered": 435,
+      "error": null
+    },
+    {
+      "package": "simdjson",
+      "version": "5.0.4",
+      "scope": "RFC 8259 JSON text parsed from a local pointer and byte length into a simdjson DOM element; observed valid control subset",
+      "command": "python3 scripts/run_project.py json cpp simdjson",
+      "receipt": "projects/json/cpp/simdjson/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "exact_nested_structure_match": true,
+      "parser_source_lines_covered": 1364,
+      "format_specific_source_lines_covered": 984,
       "error": null
     },
     {

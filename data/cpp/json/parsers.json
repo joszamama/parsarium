@@ -57,6 +57,63 @@
     "project": "projects/json/cpp/jsoncpp"
   },
   {
+    "name": "simdjson",
+    "version": "5.0.4",
+    "license": "Apache-2.0 OR MIT",
+    "license_evidence": "LICENSE and LICENSE-MIT in pinned v5.0.4 source archive",
+    "input_api": "simdjson::dom::parser::parse(const char *buf, size_t len) -> simdjson::dom::element",
+    "documentation": "https://github.com/simdjson/simdjson/blob/v5.0.4/doc/dom.md",
+    "source": "https://github.com/simdjson/simdjson/releases/tag/v5.0.4",
+    "adapter": "projects/json/cpp/simdjson/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text parsed from a local pointer and byte length into a simdjson DOM element; observed valid control subset",
+    "family": "simdjson ARM64 DOM parser",
+    "family_note": "Pinned v5.0.4 singleheader amalgamation contains simdjson own structural scan and DOM parser. The ARM64 Docker build runs the native ARM64 implementation; it does not delegate to JsonCpp or nlohmann/json. The pointer-and-length overload pads a temporary copy as documented.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": 2688,
+      "binary_package": "libsimdjson33",
+      "dev_package_installs": {
+        "libsimdjson-dev": 36
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/simdjson"
+  },
+  {
     "name": "nlohmann-json",
     "version": "3.12.0",
     "license": "MIT",

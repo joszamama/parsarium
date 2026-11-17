@@ -47,6 +47,37 @@ def sandbox(platform: str, mounts: list[str]) -> list[str]:
             "--tmpfs", "/tmp:rw,exec,nosuid,size=64m", *mounts]
 
 
+def summarize_tree(tree: object) -> dict:
+    counts = {"arrays": 0, "objects": 0, "booleans": 0, "nulls": 0,
+              "max_depth": 0}
+    numbers: list[int | float] = []
+    strings: list[str] = []
+
+    def walk(value: object, depth: int) -> None:
+        if isinstance(value, dict):
+            counts["objects"] += 1
+            counts["max_depth"] = max(counts["max_depth"], depth)
+            for child in value.values(): walk(child, depth + 1)
+        elif isinstance(value, list):
+            counts["arrays"] += 1
+            counts["max_depth"] = max(counts["max_depth"], depth)
+            for child in value: walk(child, depth + 1)
+        elif value is None: counts["nulls"] += 1
+        elif isinstance(value, bool): counts["booleans"] += 1
+        elif isinstance(value, (int, float)): numbers.append(value)
+        elif isinstance(value, str): strings.append(value)
+
+    walk(tree, 1)
+    result = {"arrays": counts["arrays"], "booleans": counts["booleans"],
+              "max_depth": counts["max_depth"], "nulls": counts["nulls"],
+              "numbers": sorted(numbers), "objects": counts["objects"],
+              "root": "object" if isinstance(tree, dict) else "array",
+              "strings": sorted(strings)}
+    if isinstance(tree, dict): result["top_level_keys"] = sorted(tree)
+    else: result["top_level_items"] = len(tree)
+    return result
+
+
 def main() -> None:
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("--format", default="json")
@@ -78,6 +109,10 @@ def main() -> None:
                 common = sandbox(platform, ["-v", f"{control}:/input/case:ro", "-v", f"{work}:/coverage"])
                 run([*common, "--entrypoint", "/bin/sh", base_image, "-c", LINES, "lines", name])
                 observed = json.loads((work / f"{name}.observed.json").read_text())
+                if args.slug == "simdjson":
+                    if observed != json.loads(control.read_text()):
+                        raise RuntimeError(f"{control.name}: parsed DOM differs from valid control")
+                    observed = summarize_tree(observed)
                 if observed != expected[index]:
                     raise RuntimeError(f"{control.name}: output mismatch {observed}")
                 run_lines.append(set((work / f"{name}.lines").read_text().splitlines()) - {""})

@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T03:52:12.865146+00:00",
-  "projects_total": 2,
-  "projects_passed": 2,
+  "checked_at_utc": "2026-11-17T07:18:53.776845+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
   "differential_kind": "fixed_valid_nested_array",
-  "command": "python3 scripts/build_afl_native.py json cpp jsoncpp && python3 scripts/verify_cpp_json_feedback.py && python3 scripts/build_afl_native.py json cpp nlohmann-json && python3 scripts/verify_cpp_json_feedback.py --slug nlohmann-json",
+  "command": "python3 scripts/build_afl_native.py json cpp simdjson && python3 scripts/verify_cpp_json_feedback.py --slug simdjson (earlier paths retain their recorded receipts)",
   "results": [
     {
       "project": "json/cpp/jsoncpp",
@@ -23,6 +23,24 @@
       "differential_afl_tuples": 988,
       "source_line_difference": 21,
       "afl_tuple_difference": 90
+    },
+    {
+      "project": "json/cpp/simdjson",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+      "overlay_receipt_sha256": "68c9eb15657f5d5c561c482c2430126f6fddf7701fbdbc751b3e74c3d2979c47",
+      "differential_receipt_sha256": "4280828b803938daa666b54eccbf2dcf21782a0468648d15997b8aa3c0b14059",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_source_lines": 1371,
+      "control_afl_tuples": 1154,
+      "differential_source_lines": 1315,
+      "differential_afl_tuples": 1060,
+      "source_line_difference": 166,
+      "afl_tuple_difference": 330
     },
     {
       "project": "json/cpp/nlohmann-json",
