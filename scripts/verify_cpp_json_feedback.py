@@ -47,6 +47,15 @@ def sandbox(platform: str, mounts: list[str]) -> list[str]:
             "--tmpfs", "/tmp:rw,exec,nosuid,size=64m", *mounts]
 
 
+def typed_tree(text: str) -> object:
+    """Order-preserving, kind-aware view: 1 and 1.0 or reordered keys differ."""
+    def canon(value: object) -> object:
+        if isinstance(value, tuple): return ("object", [(k, canon(v)) for k, v in value[1]])
+        if isinstance(value, list): return ("array", [canon(v) for v in value])
+        return (type(value).__name__, value)
+    return canon(json.loads(text, object_pairs_hook=lambda pairs: ("object", pairs)))
+
+
 def summarize_tree(tree: object) -> dict:
     counts = {"arrays": 0, "objects": 0, "booleans": 0, "nulls": 0,
               "max_depth": 0}
@@ -109,7 +118,10 @@ def main() -> None:
                 common = sandbox(platform, ["-v", f"{control}:/input/case:ro", "-v", f"{work}:/coverage"])
                 run([*common, "--entrypoint", "/bin/sh", base_image, "-c", LINES, "lines", name])
                 observed = json.loads((work / f"{name}.observed.json").read_text())
-                if args.slug == "simdjson":
+                if args.slug == "boost-json" and (typed_tree((work / f"{name}.observed.json").read_text())
+                                                  != typed_tree(control.read_text())):
+                    raise RuntimeError(f"{control.name}: parsed DOM order or number kinds differ")
+                if args.slug in {"simdjson", "boost-json"}:  # replay prints the full parsed DOM
                     if observed != json.loads(control.read_text()):
                         raise RuntimeError(f"{control.name}: parsed DOM differs from valid control")
                     observed = summarize_tree(observed)
@@ -165,6 +177,8 @@ def main() -> None:
         "afl_tuple_difference": map_difference,
         "second_case_kind": "valid_control",
     }
+    if args.slug == "boost-json":
+        record["dom_oracle"] = "python_json_loads_order_and_number_kind_preserving"
     (overlay / "differential.json").write_text(json.dumps(record, indent=2) + "\n")
     print(f"{relative}: {line_difference} source lines, {map_difference} AFL++ tuples differ; "
           f"{REPEATS} repeats per control identical", flush=True)

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T10:10:19.133590+00:00",
+  "project": "json/cpp/boost-json",
+  "pass": true,
+  "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+  "base_project_receipt_sha256": "895aba80a3f7754e4c0c832002aeb7105c74fc63c0bd807e1d7bbbcf86e912ef",
+  "overlay_receipt_sha256": "51518aeba31a2323e6139250ad5439632b9262d53a83ad6b1c003ec798836280",
+  "base_image_id": "sha256:0c8da89ff6105a0db311c69a5cab3394f46e862d20113776987bdee5a651db5a",
+  "overlay_image_id": "sha256:4d733be5a6aae0c93202c4a37f93807bcedd700092be628c58fcde5fc251b412",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "repeats_per_control": 2,
+  "first_control": "controls/json/nested-object.json",
+  "first_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "second_control": "controls/json/nested-array.json",
+  "second_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "second_control_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "first_source_lines": 1625,
+  "second_source_lines": 1583,
+  "source_line_difference": 140,
+  "first_only_lines_by_file": {
+    "boost/json/basic_parser_impl.hpp": 49,
+    "boost/json/detail/buffer.hpp": 12,
+    "boost/json/detail/sse2.hpp": 4,
+    "boost/json/detail/utf8.hpp": 6,
+    "boost/json/impl/object.hpp": 4,
+    "boost/json/impl/object.ipp": 5,
+    "boost/json/impl/value_stack.ipp": 11
+  },
+  "second_only_lines_by_file": {
+    "boost/json/basic_parser_impl.hpp": 40,
+    "boost/json/detail/buffer.hpp": 9
+  },
+  "first_afl_tuples": 561,
+  "second_afl_tuples": 522,
+  "afl_tuple_difference": 103,
+  "second_case_kind": "valid_control",
+  "dom_oracle": "python_json_loads_order_and_number_kind_preserving"
+}

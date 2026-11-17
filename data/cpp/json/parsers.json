@@ -234,5 +234,83 @@
     },
     "project": "projects/json/cpp/rapidjson",
     "not_verified": "Only two valid nested object/array controls; scalar roots, optional relaxed flags, large inputs and malformed input remain unverified."
+  },
+  {
+    "name": "Boost.JSON",
+    "version": "1.92.0",
+    "license": "BSL-1.0",
+    "license_evidence": "https://github.com/boostorg/json/blob/boost-1.92.0/LICENSE_1_0.txt",
+    "input_api": "boost::json::parse(string_view s, boost::system::error_code& ec, storage_ptr sp = {}, parse_options const& opt = {}) over locally supplied bytes; default options accept only standard JSON",
+    "documentation": "https://www.boost.org/doc/libs/1_92_0/libs/json/doc/html/ref/parse.html",
+    "source": "https://github.com/boostorg/boost/releases/tag/boost-1.92.0",
+    "adapter": "projects/json/cpp/boost-json/harness.cpp",
+    "control": "controls/json/nested-object.json",
+    "scope": "RFC 8259 JSON text through one-step parse(string_view, error_code&) with default strict options; object/array roots on two valid controls",
+    "family": "Boost.JSON basic_parser",
+    "family_note": "Own header-only basic_parser (boost/json/basic_parser_impl.hpp) feeding value_stack into boost::json::value; independent of JsonCpp, simdjson, nlohmann/json and RapidJSON. Built header-only from the official Boost 1.92.0 archive via boost/json/src.hpp; the other Boost headers it includes are compiled but not counted as parser source.",
+    "popularity": {
+      "metric": "Debian popcon installations, maximum over binary packages of the source package (sourcemax/by_inst)",
+      "value": null,
+      "ranked": false,
+      "unranked_reason": "Boost.JSON is built from the multi-library boost1.83 source package (sourcemax 100,348), whose count covers every Boost library; no JSON-specific source-package value exists, so no primary rank is assigned.",
+      "fallback": {
+        "label": "Separately labeled fallback, not the primary metric: Debian popcon binary-package installations of libboost-json-dev (by_inst)",
+        "value": 1749,
+        "binary_package": "libboost-json-dev",
+        "source": "https://popcon.debian.org/by_inst.gz",
+        "source_sha256": "299486c46a56fc44b390058490a50b9f1250335c7cdf6f1e02b8cee0a212a802",
+        "comparable_with": "the cell's separately labeled development-package installs (libjsoncpp-dev 2,203; nlohmann-json3-dev 1,799; rapidjson-dev 899; libsimdjson-dev 36), not with sourcemax values"
+      },
+      "dev_package_installs": {
+        "libboost-json-dev": 1749,
+        "libboost-json1.83-dev": 1654
+      },
+      "runtime_package_installs": {
+        "libboost-json1.83.0": 1798
+      },
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:25:49+00:00",
+      "snapshot": "data/cpp/json/registry-snapshot.json",
+      "github_stars": {
+        "value": 482,
+        "source": "https://api.github.com/repos/boostorg/json",
+        "captured_at_utc": "2026-11-17T03:26:07+00:00",
+        "snapshot": "data/cpp/json/registry-snapshot.json",
+        "note": "secondary signal, not the ranking metric"
+      }
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/cpp/boost-json",
+    "not_verified": "Only two valid nested object/array controls; scalar roots, stream_parser, parse_options extensions, large inputs and malformed input remain unverified."
   }
 ]

@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "cpp",
+  "package": "Boost.JSON",
+  "release": "1.92.0",
+  "pilot": true,
+  "catalog_parser": "data/cpp/json/parsers.json",
+  "source_lock": "projects/json/cpp/boost-json/source-lock.json",
+  "source_sha256": "ea7b982002cc9dfbe59b0b217b206f470dc75f3de0bb2973d844118934d82411",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "oracle": "The replay prints the parsed boost::json::value with its own walker; run-control.sh requires it to equal Python json.loads of the control with key order and int/float kinds preserved, then derives the summary.",
+  "coverage": "LLVM source coverage of Boost.JSON 1.92.0 headers (boost/json, header-only via boost/json/src.hpp) reached by boost::json::parse(string_view, error_code&)",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/boost/json/basic_parser_impl.hpp",
+  "toolchain_note": "Other Boost headers that Boost.JSON includes are compiled from the same pinned archive under /work/boost and excluded from parser line counts."
+}

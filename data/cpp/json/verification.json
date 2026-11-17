@@ -37,7 +37,7 @@
         "objects": 5,
         "root": "object",
         "strings": [
-          "café \"quoted\"",
+          "caf\u00e9 \"quoted\"",
           "go",
           "json",
           "parsarium",
@@ -79,7 +79,7 @@
         "objects": 5,
         "root": "object",
         "strings": [
-          "café \"quoted\"",
+          "caf\u00e9 \"quoted\"",
           "go",
           "json",
           "parsarium",
@@ -122,7 +122,7 @@
         "objects": 5,
         "root": "object",
         "strings": [
-          "café \"quoted\"",
+          "caf\u00e9 \"quoted\"",
           "go",
           "json",
           "parsarium",
@@ -164,7 +164,7 @@
         "objects": 5,
         "root": "object",
         "strings": [
-          "café \"quoted\"",
+          "caf\u00e9 \"quoted\"",
           "go",
           "json",
           "parsarium",
@@ -200,6 +200,70 @@
         ],
         "top_level_keys": []
       },
+      "error": null
+    },
+    {
+      "package": "Boost.JSON",
+      "version": "1.92.0",
+      "scope": "RFC 8259 JSON text through one-step parse(string_view, error_code&) with default strict options; object/array roots on two valid controls",
+      "command": "python3 scripts/run_project.py json cpp boost-json",
+      "receipt": "projects/json/cpp/boost-json/verification.json",
+      "pass": true,
+      "oracle": "exact: the replay's printed DOM equals Python json.loads of each control with key order and int/float kinds preserved",
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "caf\u00e9 \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_lines_covered": 1601,
+      "format_specific_source_lines_covered": 552,
+      "second_valid_control": "controls/json/nested-array.json",
+      "second_valid_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "differential_pass": true,
+      "family": "Boost.JSON basic_parser",
+      "family_status": "independent",
       "error": null
     }
   ],
