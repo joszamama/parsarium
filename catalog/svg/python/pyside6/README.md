@@ -32,6 +32,8 @@
 }
 ```
 
-## Runnable harness
+## Verified Docker control
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Control harness and receipt](../../../../projects/svg/python/pyside6/README.md)
+
+The pinned valid control parses successfully in Docker. Native parser source coverage and AFL++ feedback are unavailable for this path, so it remains staged.
