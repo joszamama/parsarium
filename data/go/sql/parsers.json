@@ -420,6 +420,111 @@
     }
   },
   {
+    "name": "github.com/auxten/postgresql-parser/pkg/sql/parser",
+    "version": "v1.0.1",
+    "license": "BUSL-1.1 with Change License Apache-2.0 (Change Date 2023-04-01), with BSD-style vitess portions",
+    "license_evidence": "LICENSE notice in the pinned module zip (SHA-256 8a2fba9d26592ff3538f44c96d1b894ef44649058b4d04f3fda49518a9c4ae11) says files are under the Business Source License 1.1 unless noted; parser file headers add BSD-style vitess and PostgreSQL portions. The module omits licenses/BSL.txt; the CockroachDB v20.1.11 licenses/BSL.txt (Licensed Work CockroachDB 20.1, which the README names as the source) sets Change Date 2023-04-01 and Change License Apache License 2.0, so the pinned code is under Apache-2.0 from that date.",
+    "input_api": "parser.Parse(local SQL text) -> parser.Statements",
+    "documentation": "https://pkg.go.dev/github.com/auxten/postgresql-parser@v1.0.1/pkg/sql/parser#Parse",
+    "source": "https://proxy.golang.org/github.com/auxten/postgresql-parser/@v/v1.0.1.zip",
+    "source_sha256": "87ce5aa7debce0932a7758a2bbd8c1d2cd4efe5669f37db13ccfc84533a2e1ef",
+    "go_module_sum": "h1:x+qiEHAe2cH55Kly64dWh4tGvUKEQwMmJgma7a1kbj4=",
+    "dependencies": [],
+    "dialect": "PostgreSQL (CockroachDB 20.1 grammar, no dialect option)",
+    "scope": "Local SQL text parsed by auxten/postgresql-parser parser.Parse; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other CockroachDB/PostgreSQL syntax is untested.",
+    "family": "CockroachDB PostgreSQL-compatible grammar (v20.1 extraction, goyacc sql.y) and scanner",
+    "family_note": "parser.Parse runs the package's own scanner (scan.go, lexer.go) and the goyacc parser generated from sql.y into sql.go, returning Statements whose AST values are sem/tree nodes. The module is a third-party extraction of CockroachDB v20.1.11 pkg/sql/parser and its dependencies with generated files checked in (README). The official, much newer extraction github.com/cockroachdb/cockroachdb-parser is a separate package path in the same family. The adapter reads *tree.Select (SelectClause Exprs, From join tree, Where, GroupBy; Select OrderBy) and *tree.Insert (Table, Columns, ValuesClause rows) and visits expressions with tree.SimpleVisit for FuncExpr names, NumVal source text (OrigString) and StrVal values.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 22,
+      "source": "https://pkg.go.dev/github.com/auxten/postgresql-parser/pkg/sql/parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_auxten_postgresql_parser_pkg_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "github.com/rqlite/sql",
     "version": "v0.0.0-20261016220845-5c0832fea6e1",
     "license": "MIT",
