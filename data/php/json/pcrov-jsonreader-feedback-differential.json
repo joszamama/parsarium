@@ -1,0 +1,48 @@
+{
+  "project": "json/php/pcrov_jsonreader",
+  "pass": true,
+  "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+  "overlay_receipt_sha256": "76c86625532779e296d15b9415b98aaf3470792662ffce265449b4a4afa7d5dd",
+  "base_image_id": "sha256:88441afc8029e2c755b5a3f3ee4d34ce5ed4a9def0f654b8b3391953aa0c6aff",
+  "overlay_image_id": "sha256:5f982281eeae2b1399606f38a94b419be32a9b41c9359290cf95880d33b80e89",
+  "release_source_sha256": "a0673b378c0f917c6c6ffbb1e9a41256cb37815100833f4e25ca8f3b94b59a32",
+  "parser_source_prefix": "/work/vendor/pcrov/jsonreader/",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "differential": "controls/json/nested-array.json",
+  "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "file_and_stream_api_match": true,
+  "control_source_lines_by_file": {
+    "src/InputStream/InputStream.php": 1,
+    "src/InputStream/StringInput.php": 9,
+    "src/JsonReader.php": 43,
+    "src/Parser/JsonParser.php": 70,
+    "src/Parser/Lexer.php": 132,
+    "src/Parser/Parser.php": 1,
+    "src/Parser/Tokenizer.php": 1
+  },
+  "differential_source_lines_by_file": {
+    "src/InputStream/InputStream.php": 1,
+    "src/InputStream/StringInput.php": 9,
+    "src/JsonReader.php": 43,
+    "src/Parser/JsonParser.php": 69,
+    "src/Parser/Lexer.php": 130,
+    "src/Parser/Parser.php": 1,
+    "src/Parser/Tokenizer.php": 1
+  },
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 257,
+  "control_afl_tuples": 277,
+  "differential_parser_features": 254,
+  "differential_afl_tuples": 274,
+  "parser_feature_difference": 3,
+  "afl_tuple_difference": 3,
+  "control_only_features_by_file": {
+    "src/Parser/JsonParser.php": 1,
+    "src/Parser/Lexer.php": 2
+  },
+  "differential_only_features_by_file": {}
+}
