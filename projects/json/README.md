@@ -12,6 +12,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [github.com/goccy/go-json / Go](go/github_com_goccy_go_json/README.md)
 - [github.com/json-iterator/go / Go](go/github_com_json_iterator_go/README.md)
 - [github.com/tidwall/gjson / Go](go/github_com_tidwall_gjson/README.md)
+- [github.com/ugorji/go/codec / Go](go/github_com_ugorji_go_codec/README.md)
 - [gson / Java](java/gson/README.md)
 - [jackson-databind / Java](java/jackson_databind/README.md)
 - [@streamparser/json / JavaScript](javascript/streamparser_json/README.md)

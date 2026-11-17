@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 38,
-    "containerized_verified": 38,
+    "catalog_paths": 39,
+    "containerized_verified": 39,
     "staged": 0,
     "standard_api_paths": 8,
     "standard_containerized_verified": 7,
@@ -1024,8 +1024,8 @@
       {
         "format": "json",
         "ecosystem": "go",
-        "catalog_paths": 3,
-        "containerized_verified": 3,
+        "catalog_paths": 4,
+        "containerized_verified": 4,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 1,
@@ -1033,9 +1033,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_three_selected_search_bounded",
+        "status": "pilot_four_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Three positive-signal Go JSON paths passed format-aware controls with parser source coverage and stable AFL++ feedback: json-iterator/go (18,454 Imported by), tidwall/gjson (10,420), and goccy/go-json (4,192). GJSON is a JSON path-query library; the harness calls its own ValidBytes before ParseBytes and traverses every Result, but its adoption metric does not identify general-purpose decoding use. The multi-format ugorji/go/codec (10,142) and five other numeric leads remain unverified; their rank is uncertain. Search is bounded to five pkg.go.dev queries of 100 results each. The Go standard encoding/json path is separate and unranked. The valid controls do not establish complete RFC 8259 support."
+        "uncertainty": "Four Go JSON paths passed format-aware valid controls with source-scoped coverage and stable AFL++ feedback: json-iterator/go (18,454 Imported by), tidwall/gjson (10,420), ugorji/go/codec (10,142), and goccy/go-json (4,192). GJSON is a path-query parser whose harness calls its own ValidBytes first. go-codec is multi-format: the Imported by count measures the package across JSON, CBOR, MessagePack, binc and simple, and does not reveal JSON-specific adoption; its feedback is scoped to codec/json.* files. Five numeric leads remain unverified. Search is bounded to five pkg.go.dev queries of 100 results each. The Go standard encoding/json path is separate and unranked. Valid controls do not establish complete RFC 8259 support."
       },
       {
         "format": "json",
