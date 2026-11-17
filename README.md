@@ -2,7 +2,7 @@
 
 The [website](https://parsarium.com/) helps users choose a format, find a documented parser, and open a runnable target. It is built from the committed catalog and hosted on GitHub Pages.
 
-Parsarium is a format-first catalog and target set for parser experiments. Its active collection covers ten formats across C, C++, Go, Java, JavaScript, Python, Rust, and PHP; JSON, XML, and plain MP3 are separate incomplete pilots. Selected third-party paths have containerized, instrumented harnesses that accept local inputs and generated corpora. Each verified catalog entry has a pinned release, parser API, valid control, observed result, and evidence. Popularity ranks verified third-party packages **within a format and ecosystem**; the rankings do not compare ecosystems or imply independent parser engines.
+Parsarium is a format-first catalog and target set for parser experiments. Its active collection covers ten formats across C, C++, Go, Java, JavaScript, Python, Rust, and PHP; JSON and XML are separate incomplete pilots. Selected third-party paths have containerized, instrumented harnesses that accept local inputs and generated corpora. Each verified catalog entry has a pinned release, parser API, valid control, observed result, and evidence. Popularity ranks verified third-party packages **within a format and ecosystem**; the rankings do not compare ecosystems or imply independent parser engines.
 
 The active catalog selects **770 fully runnable third-party package paths** across ten formats and eight ecosystems. Each cell has at most ten; 71 of 80 reach ten, and the other nine report the smaller supported count. Every selected path has a positive numeric adoption signal, though 48 use a separately labeled secondary source. Five adopted, control-verified candidates lack verified parser feedback and are [excluded with their blockers recorded](data/curation/feedback-exclusions.json), without filling their slots with lower-ranked leads. The [curation record](data/curation/README.md) explains metrics and remaining uncertainty. Standard/runtime APIs and the incomplete pilot formats have [separate coverage counts](data/projects-coverage.json).
 
@@ -54,7 +54,11 @@ python3 parsarium.py run-format png --file my.png --results runs/png-my-file
 
 Use `--ecosystem python` to narrow the batch. A shared file may be accepted by some parsers and rejected by others; the receipts record each outcome.
 
-Formats: `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, `mp3_id3v2`. Ecosystems: `c`, `cpp`, `go`, `java`, `javascript`, `python`, `rust`, `php`.
+Formats: `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, `mp3`, plus the `json` and `xml` pilots. Ecosystems: `c`, `cpp`, `go`, `java`, `javascript`, `python`, `rust`, `php`.
+
+### MP3 targets
+
+MP3 is one format. Each ecosystem keeps the ten most-adopted paths from the former MP3-with-ID3v2 and plain-MP3 cells ([merge record](data/curation/mp3-merge.json)). A path is verified either on the ID3v2-tagged control or on the untagged MPEG frame controls; its parser record says which. Targets verified on the tagged control keep their project directory and target name `mp3_id3v2`, because their pinned manifests and receipts record those paths, for example `python3 parsarium.py run mp3_id3v2 java jaudiotagger controls/mp3_id3v2/tone-tags.mp3`. `parsarium.py projects --format mp3` lists the untagged-control targets and `--format mp3_id3v2` the tagged ones; the website, catalog guides and the `parsarium` package list both under MP3.
 
 ## Fuzzing
 
@@ -98,9 +102,9 @@ python3 parsarium.py fandango generate png c lodepng runs/lodepng-fandango \
 python3 parsarium.py afl run runs/lodepng-fandango/afl --check
 ```
 
-Fanbase supplies the default specs for `png`, `zip`, `wav`, `svg`, `json`, `xml`, and `mp3_id3v2` (`mp3` in Fanbase, including an ID3v2.3 tag). Parsarium supplies local specs for MP4, PDF, HTTP/1.1 requests, ASCII PLY, ASCII PNM P3, and the plain-MP3 pilot. `--fanbase` selects a Fanbase variant such as `png-boundary`; `--spec` selects another local spec. All ten active formats and the JSON, XML, and plain-MP3 pilots have a default generation route. The MP4 grammar includes one decodable 2×2 H.264 video frame and no audio track. Parsers may differ in which valid grammar variations they accept; replay records each outcome.
+Fanbase supplies the default specs for `png`, `zip`, `wav`, `svg`, `json`, `xml`, and MP3 targets under `mp3_id3v2` (`mp3` in Fanbase, including an ID3v2.3 tag). Parsarium supplies local specs for MP4, PDF, HTTP/1.1 requests, ASCII PLY, ASCII PNM P3, and MP3 targets under `mp3` (untagged Layer III frames). `--fanbase` selects a Fanbase variant such as `png-boundary`; `--spec` selects another local spec. All ten active formats and the JSON and XML pilots have a default generation route. The MP4 grammar includes one decodable 2×2 H.264 video frame and no audio track. Parsers may differ in which valid grammar variations they accept; replay records each outcome.
 
-The separate plain-MP3 pilot uses a [local Layer III seed grammar](fuzzing/fandango/plain-mp3-decision.md). Fanbase's `-F mp3` grammar emits tags and Layer I/II frames, so it cannot be converted to this pilot by stripping tags.
+MP3 targets verified on untagged frames use a [local Layer III seed grammar](fuzzing/fandango/plain-mp3-decision.md). Fanbase's `-F mp3` grammar emits tags and Layer I/II frames, so it cannot be converted to those targets by stripping tags.
 
 ```sh
 python3 parsarium.py fandango generate mp4 cpp exiv2 runs/exiv2-fandango \

@@ -3,7 +3,7 @@
 The [13-format default-route smoke](default-smoke-13.md) shows one fixed valid
 generation, replay, and AFL++ preparation for each active format and pilot.
 
-[Fandango](https://fandango-fuzzer.github.io/) 1.3.1 specs for six formats. MP4 and PDF use constraints to keep box sizes and offsets correct; the three text grammars keep headers and data consistent through their productions. The plain-MP3 pilot spec reuses whole decoded frames from pinned controls.
+[Fandango](https://fandango-fuzzer.github.io/) 1.3.1 specs for six formats. MP4 and PDF use constraints to keep box sizes and offsets correct; the three text grammars keep headers and data consistent through their productions. Untagged MP3 targets spec reuses whole decoded frames from pinned controls.
 
 ```sh
 python3 parsarium.py fandango setup
@@ -12,12 +12,12 @@ python3 parsarium.py fandango generate ascii_ply c assetkit runs/ply-fandango --
 
 The generator selects the bundled spec automatically, saves its hash and generated files, and can prepare the same corpus for AFL++ with `--prepare-afl`. [The MP4 and PDF grammar details](specs/README.md) describe their scope.
 
-JSON and XML pilot targets default to Fanbase's `-F json` and `-F xml` specs. One fixed output from each was checked with Python's JSON or XML parser. The plain-MP3 pilot defaults to a [small local grammar](specs/mp3_plain.fan) over six decodable, untagged Layer III streams. Fanbase's `-F mp3` output includes ID3 tags **and** Layer I/II frames; [stripping the tags is insufficient](plain-mp3-decision.md).
+JSON and XML pilot targets default to Fanbase's `-F json` and `-F xml` specs. One fixed output from each was checked with Python's JSON or XML parser. Untagged MP3 targets (format directory `mp3`) default to a [small local grammar](specs/mp3_plain.fan) over six decodable, untagged Layer III streams. Fanbase's `-F mp3` output includes ID3 tags **and** Layer I/II frames; [stripping the tags is insufficient](plain-mp3-decision.md).
 
 ```sh
-python3 parsarium.py fandango generate mp3 go github_com_hajimehoshi_go_mp3 runs/go-mp3-fandango \
+python3 parsarium.py fandango generate mp3 go github_com_dmulholl_mp3lib runs/mp3lib-fandango \
   --count 6 --seed 7 --replay --prepare-afl
-python3 parsarium.py afl run runs/go-mp3-fandango/afl --check
+python3 parsarium.py afl run runs/mp3lib-fandango/afl --check
 ```
 
 The MP3 receipt names the local spec and hashes every generated file. Its
@@ -42,7 +42,7 @@ python3 parsarium.py fandango generate xml python xmltodict runs/xml-fandango \
 | [`ascii_ply.fan`](specs/ascii_ply.fan) | `ascii_ply` | `format ascii 1.0`; 3 vertices with 1 triangle or 4 vertices with 2 triangles; `float x y z`, optionally `uchar red green blue`; face list `uchar int` or `uchar uint`; 0–2 comment lines |
 | [`ascii_pnm_p3.fan`](specs/ascii_pnm_p3.fan) | `ascii_pnm` | Plain PPM (`P3`) only; 1×1, 2×1, 1×2 or 2×2; maxval 255 or 15 with every sample at most maxval; space or newline header separators; optional comment after the magic; optional trailing newline |
 | [`http11_request.fan`](specs/http11_request.fan) | `http11` | Requests only; `GET`, `HEAD`, `OPTIONS`, `DELETE` without body, or `POST` with a matching `Content-Length` (0, 3 or 9 bytes); origin-form targets; `Host` always present; optional `User-Agent`, `Accept`, `X-Parsarium`, `Connection`, each at most once; optional whitespace after the colon; CRLF line endings |
-| [`mp3_plain.fan`](specs/mp3_plain.fan) | `mp3` pilot | Six whole-frame prefixes from two pinned, untagged Layer III controls; no ID3 tags or mixed layers |
+| [`mp3_plain.fan`](specs/mp3_plain.fan) | `mp3` untagged targets | Six whole-frame prefixes from two pinned, untagged Layer III controls; no ID3 tags or mixed layers |
 
 Fanbase `ppm` covers both P3 and P6, so the PNM spec is restricted to P3. The `P1` and `P2` controls and HTTP responses are out of scope.
 
