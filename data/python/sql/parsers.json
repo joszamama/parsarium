@@ -432,5 +432,109 @@
         }
       ]
     }
+  },
+  {
+    "name": "sqloxide",
+    "version": "0.61.1",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned sdist (SHA-256 4887ed0505457d387e7f7effda202be2374379f4fecf491e54ca67f59a77640b); the compiled-in sqlparser 0.61.0 crate is Apache-2.0",
+    "input_api": "sqloxide.parse_sql(local SQL text, dialect=\"generic\") -> list of statement ASTs (Python dicts)",
+    "documentation": "https://pypi.org/project/sqloxide/0.61.1/",
+    "source": "https://files.pythonhosted.org/packages/78/b4/20b2d9c217f66ea23c12052db2c47f88e968940706758e5ab15765eb78e8/sqloxide-0.61.1.tar.gz",
+    "source_sha256": "2ff1d48e6b59f2870e5e37d391eed82c126db001c30cd92383ea048cc69a5576",
+    "dependencies": [],
+    "dialect": "generic (sqlparser GenericDialect)",
+    "scope": "One SQL statement from local text with the generic dialect; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Source-built with Rust coverage instead of the optimised wheel; restore_ast, the visitors and other dialects are untested.",
+    "family": "sqlparser-rs",
+    "family_note": "sqloxide is a pyo3 binding: parse_sql maps the dialect name with sqlparser's dialect_from_str, calls sqlparser 0.61.0 Parser::parse_sql and converts the AST to Python objects with pythonize. The tokenizer and parser that produce the tree are sqlparser-rs, shared with the Rust sqlparser path (0.64.0); this is a distinct Python package API over that family, and its parser feedback is sqlparser-rs code. The adapter reads Query/Select (projection, from with joins, selection, group_by), order_by, Function, Table, Value and Insert/Values nodes.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 511801,
+      "source": "https://pypistats.org/api/packages/sqloxide/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Package-level downloads of the binding; sqlparser crate downloads are counted in the Rust cell and not combined."
+    },
+    "project": "projects/sql/python/sqloxide",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

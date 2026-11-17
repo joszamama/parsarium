@@ -371,8 +371,100 @@
       "parser_feature_difference": 1137,
       "project_receipt": "projects/sql/python/pglast/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/python/pglast/differential.json"
+    },
+    {
+      "package": "sqloxide",
+      "version": "0.61.1",
+      "pass": true,
+      "input_api": "sqloxide.parse_sql(local SQL text, dialect=\"generic\") -> list of statement ASTs (Python dicts)",
+      "dialect": "generic (sqlparser GenericDialect)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "sqlparser-rs (Rust tokenizer and recursive-descent parser), shared with the Rust sqlparser path (0.64.0 there, 0.61.0 here); sqloxide's own pyo3 binding (src/lib.rs) only selects the dialect, calls Parser::parse_sql and pythonizes the AST",
+      "parser_source_files": 6,
+      "parser_source_lines_covered": 1374,
+      "afl_tuple_difference": 1425,
+      "parser_feature_difference": 1462,
+      "project_receipt": "projects/sql/python/sqloxide/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/python/sqloxide/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:50:57.852406+00:00"
+  "checked_at_utc": "2026-11-17T20:51:18.001660+00:00"
 }

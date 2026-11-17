@@ -80,13 +80,14 @@
     },
     {
       "name": "sqloxide",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 511801,
       "metric_error": null,
       "latest_release_observed": "0.61.1",
       "family": "sqlparser-rs",
       "documented_api_lead": "sqloxide.parse_sql",
-      "reason": "Python binding to sqlparser-rs; parse_sql returns the serialized AST."
+      "reason": "sqloxide.parse_sql(sql, dialect=\"generic\") calls sqlparser 0.61.0 Parser::parse_sql and pythonizes the AST. Both valid controls equal the oracle; source-built with Rust coverage (round 2). Shared sqlparser-rs family.",
+      "selected_release": "0.61.1"
     },
     {
       "name": "moz-sql-parser",

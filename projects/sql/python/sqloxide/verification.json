@@ -1,0 +1,72 @@
+{
+  "kind": "third_party",
+  "api": "sqloxide.parse_sql(local SQL text decoded from UTF-8 bytes, dialect=\"generic\") -> list of statement ASTs as Python dicts and lists; the harness walks Query/Select (projection, from, joins, selection, group_by), order_by, Function, Table, Value, Insert and Values nodes",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:25:34.172288+00:00",
+  "manifest": "projects/sql/python/sqloxide/manifest.json",
+  "image_id": "sha256:bf684ce73b9bcd977c52b975b76537afc26ab5a9a3135ba28293023e4591059b",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Python 3.11.2",
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "Name: sqloxide",
+    "Version: 0.61.1",
+    "Name: maturin",
+    "Version: 1.16.0",
+    "sqlparser 0.61.0 (crates.io, pinned by the sdist Cargo.lock)"
+  ],
+  "source_sha256": "2ff1d48e6b59f2870e5e37d391eed82c126db001c30cd92383ea048cc69a5576",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "173b96bda27f9d62924726925ab4fd86954590a80c7aa9d9d4ab964c0ef24588",
+    "build-requirements.lock": "171a9e0286be8a5d043867e5e48892fda428c382ba316c33a843be1efdb18e03",
+    "fuzz.py": "65ca7956c5833dd53b2a63cf9f60efca6b812d9f93ae04c8bd1dc28ea0d658eb",
+    "harness.py": "2a01a621e347926ab6554ae42a62740c03bb6f08f586cc32248dd001ab19c71c",
+    "manifest.json": "69c3d182235e6c9819bd785713edd4b0ab78e6601ed53f7f9f0d197707529eb8",
+    "merge-native-coverage.py": "ba0bd37ce775e469927239f04104894d4647baddf3d9bb39447b1708e457ae85",
+    "replay.py": "89e812105efc44e79e4f1260847eb11e4bb45570bb0857fd1f1eee08ae262067",
+    "run-control.py": "55b313c3431e202ec06e86c99e6f8e4641938fa30f1b5858359c843ea5dd20b6",
+    "run-control.sh": "8af06cb7494685295527d62116c2da27c840829e31c1241eb4a40f676b39e4ad",
+    "source-lock.json": "67337f4b2c1e3a58fe31fa0923ccee48f4796372e8ea61da2ee891f3c7928626"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 6,
+  "parser_source_lines_covered": 1374,
+  "format_specific_source_lines_covered": 918,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/python/sqloxide/target/coverage/coverage.json",
+  "pass": true
+}
