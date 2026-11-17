@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T13:25:55.983295+00:00",
-  "projects_total": 6,
-  "projects_passed": 6,
+  "checked_at_utc": "2026-11-17T14:34:49.691747+00:00",
+  "projects_total": 7,
+  "projects_passed": 7,
   "differential_kind": "fixed_valid_nested_array",
   "standard_feedback": "JSON.parse has AFL++ feedback from a source-built node with only V8 json-parser.cc instrumented, not JavaScript source ranges",
   "results": [
@@ -263,6 +263,86 @@
         "dist/mjs/tokenizer.js": 4,
         "dist/mjs/tokenparser.js": 5
       }
+    },
+    {
+      "project": "json/javascript/lossless_json",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "9228c83d1df9694264f9bbbed001d15432f0240bd5d476e01a4a1bb2972aaded",
+      "base_image_id": "sha256:d07ccbec758bee03229fdb6f3406360f747d1ab3ee702705172120ffce7a7ce6",
+      "overlay_image_id": "sha256:bb694728454764fe7254b9cda8d0e25685a6e851e63d90cb5c3503d8f90a69c1",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "type": "array",
+        "items": [
+          {
+            "type": "LosslessNumber",
+            "raw": "1"
+          },
+          {
+            "type": "LosslessNumber",
+            "raw": "2.5e-1"
+          },
+          {
+            "type": "string",
+            "value": "two"
+          },
+          {
+            "type": "array",
+            "items": [
+              {
+                "type": "boolean",
+                "value": true
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "boolean",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "members": {
+              "k": {
+                "type": "array",
+                "items": []
+              },
+              "n": {
+                "type": "object",
+                "members": {
+                  "deep": {
+                    "type": "string",
+                    "value": "A"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 65,
+      "control_afl_tuples": 85,
+      "differential_parser_features": 57,
+      "differential_afl_tuples": 77,
+      "parser_feature_difference": 8,
+      "afl_tuple_difference": 8,
+      "control_only_features_by_file": {
+        "": 8
+      },
+      "differential_only_features_by_file": {}
     }
   ]
 }
