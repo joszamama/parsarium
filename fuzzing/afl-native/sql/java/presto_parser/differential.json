@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T19:52:37.986802+00:00",
+  "project": "sql/java/presto_parser",
+  "pass": true,
+  "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "180f27ee705020df3370a464d61b4f14fc0e2575a11540ab7748a2b64035bb6f",
+  "overlay_receipt_sha256": "216b2879019e67ebd251157ce2f08c28313e64d6c96c9fc580a5edec51235c50",
+  "base_image_id": "sha256:01b14e7d123ff1541bbe185697ae96b271444406719b235196959029a2bb9d7c",
+  "overlay_image_id": "sha256:cac1f90a496c2bc1fd694b4cb7554c8ef53c7d25f61aceaccda2858821726d0e",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 1707,
+  "second_afl_tuples": 929,
+  "afl_tuple_difference": 1166,
+  "first_parser_features": 1715,
+  "second_parser_features": 916,
+  "parser_feature_difference": 1191,
+  "first_only_features_by_file": {
+    "com/facebook/presto/sql/parser/AstBuilder.java": 117,
+    "com/facebook/presto/sql/parser/SqlBaseBaseListener.java": 33,
+    "com/facebook/presto/sql/parser/SqlBaseBaseVisitor.java": 3,
+    "com/facebook/presto/sql/parser/SqlBaseParser.java": 566,
+    "com/facebook/presto/sql/tree/AliasedRelation.java": 11,
+    "com/facebook/presto/sql/tree/AstVisitor.java": 3,
+    "com/facebook/presto/sql/tree/ComparisonExpression.java": 24,
+    "com/facebook/presto/sql/tree/DefaultTraversalVisitor.java": 39,
+    "com/facebook/presto/sql/tree/DereferenceExpression.java": 10,
+    "com/facebook/presto/sql/tree/ExpressionRewriter.java": 4,
+    "com/facebook/presto/sql/tree/ExpressionTreeRewriter.java": 23,
+    "com/facebook/presto/sql/tree/FunctionCall.java": 22,
+    "com/facebook/presto/sql/tree/GroupBy.java": 8,
+    "com/facebook/presto/sql/tree/GroupingElement.java": 5,
+    "com/facebook/presto/sql/tree/Identifier.java": 1,
+    "com/facebook/presto/sql/tree/Join.java": 18,
+    "com/facebook/presto/sql/tree/JoinCriteria.java": 1,
+    "com/facebook/presto/sql/tree/JoinOn.java": 4,
+    "com/facebook/presto/sql/tree/LogicalBinaryExpression.java": 15,
+    "com/facebook/presto/sql/tree/OrderBy.java": 9,
+    "com/facebook/presto/sql/tree/QuerySpecification.java": 30,
+    "com/facebook/presto/sql/tree/Select.java": 8,
+    "com/facebook/presto/sql/tree/SelectItem.java": 2,
+    "com/facebook/presto/sql/tree/SimpleGroupBy.java": 8,
+    "com/facebook/presto/sql/tree/SingleColumn.java": 10,
+    "com/facebook/presto/sql/tree/SortItem.java": 13,
+    "com/facebook/presto/sql/tree/Table.java": 8
+  },
+  "second_only_features_by_file": {
+    "com/facebook/presto/sql/parser/AstBuilder.java": 18,
+    "com/facebook/presto/sql/parser/ParsingOptions.java": 1,
+    "com/facebook/presto/sql/parser/SqlBaseBaseListener.java": 6,
+    "com/facebook/presto/sql/parser/SqlBaseParser.java": 111,
+    "com/facebook/presto/sql/tree/ConstraintSpecification.java": 3,
+    "com/facebook/presto/sql/tree/DecimalLiteral.java": 7,
+    "com/facebook/presto/sql/tree/DefaultTraversalVisitor.java": 8,
+    "com/facebook/presto/sql/tree/Insert.java": 11,
+    "com/facebook/presto/sql/tree/Node.java": 1,
+    "com/facebook/presto/sql/tree/Row.java": 22,
+    "com/facebook/presto/sql/tree/Values.java": 8
+  }
+}

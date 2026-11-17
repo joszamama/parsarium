@@ -211,5 +211,128 @@
         }
       ]
     }
+  },
+  {
+    "name": "com.facebook.presto:presto-parser",
+    "version": "0.300",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (presto-root-0.300.pom: Apache License 2.0)",
+    "input_api": "SqlParser.createStatement(statement text from StatementSplitter over local SQL text, ParsingOptions with DecimalLiteralTreatment.AS_DECIMAL) -> Statement",
+    "documentation": "https://javadoc.io/doc/com.facebook.presto/presto-parser/0.300/com/facebook/presto/sql/parser/SqlParser.html",
+    "source": "https://repo.maven.apache.org/maven2/com/facebook/presto/presto-parser/0.300/presto-parser-0.300-sources.jar",
+    "source_sha256": "28c00bcb132ce292e0680b72bbccd101679dd31560c02967d60f6d58b7eda35d",
+    "jar_sha256": "bb4864fa096c702713d1ceedf7ce6930fa86c017854ea91ca0ca2c4350742329",
+    "dependencies": [
+      "com.facebook.airlift.drift:drift-api 0.231",
+      "com.facebook.airlift:log 0.231",
+      "com.facebook.airlift:units 0.231",
+      "com.facebook.presto:presto-common 0.300",
+      "com.facebook.presto:presto-spi 0.300",
+      "com.fasterxml.jackson.core:jackson-annotations 2.18.9",
+      "com.google.code.findbugs:jsr305 3.0.2",
+      "com.google.errorprone:error_prone_annotations 2.18.0",
+      "com.google.guava:failureaccess 1.0.1",
+      "com.google.guava:guava 32.1.0-jre",
+      "com.google.guava:listenablefuture 9999.0-empty-to-avoid-conflict-with-guava",
+      "com.google.j2objc:j2objc-annotations 2.8",
+      "io.airlift:slice 0.38",
+      "jakarta.inject:jakarta.inject-api 2.0.1",
+      "org.antlr:antlr4-runtime 4.13.2",
+      "org.checkerframework:checker-qual 3.33.0",
+      "org.openjdk.jol:jol-core 0.2"
+    ],
+    "dialect": "Presto SQL (the only grammar; ParsingOptions DecimalLiteralTreatment.AS_DECIMAL so 19.5 is a DecimalLiteral)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8, split by StatementSplitter; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other ParsingOptions and Presto-only syntax are untested.",
+    "family": "Presto/Trino ANTLR4 SqlBase grammar (Presto branch)",
+    "family_note": "SqlParser.createStatement runs the ANTLR4-generated SqlBaseLexer and SqlBaseParser from Presto's SqlBase.g4 and converts the parse tree with the hand-written AstBuilder into com.facebook.presto.sql.tree nodes. The adapter splits with the public StatementSplitter (which strips the terminating semicolon), reads Query/QuerySpecification and Insert/Values fields and collects Table, FunctionCall, StringLiteral, LongLiteral and DecimalLiteral nodes with a DefaultTraversalVisitor. io.trino:trino-parser and io.prestosql:presto-parser descend from the same SqlBase grammar and AstBuilder (shared family, distinct package APIs and diverged sources). Independent of jOOQ, Druid, Calcite and JSqlParser.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 1453,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.facebook.presto%3Apresto-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over 307 releases, so long-lived dependents count once per release; the newest release alone has far fewer direct dependents."
+    },
+    "project": "projects/sql/java/presto_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

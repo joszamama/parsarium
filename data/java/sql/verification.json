@@ -187,8 +187,100 @@
       "parser_feature_difference": 1614,
       "project_receipt": "projects/sql/java/druid/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/java/druid/differential.json"
+    },
+    {
+      "package": "com.facebook.presto:presto-parser",
+      "version": "0.300",
+      "pass": true,
+      "input_api": "SqlParser.createStatement(statement text from StatementSplitter over local SQL text, ParsingOptions with DecimalLiteralTreatment.AS_DECIMAL) -> Statement",
+      "dialect": "Presto SQL (the only grammar; ParsingOptions DecimalLiteralTreatment.AS_DECIMAL so 19.5 is a DecimalLiteral)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Presto/Trino ANTLR4 SqlBase grammar (Presto branch)",
+      "parser_source_files": 47,
+      "parser_source_lines_covered": 1715,
+      "afl_tuple_difference": 1166,
+      "parser_feature_difference": 1191,
+      "project_receipt": "projects/sql/java/presto_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/presto_parser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T18:53:39.230663+00:00"
+  "checked_at_utc": "2026-11-17T19:53:41.287668+00:00"
 }
