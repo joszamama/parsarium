@@ -15,5 +15,3 @@ python3 parsarium.py afl prepare json python json5 runs/json-json5-afl
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
-
-**Native engine limit:** This target starts a fresh process for each input. In-process native fuzzing is unsupported; use one-input replay or the prepared AFL++ run.

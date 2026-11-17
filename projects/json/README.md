@@ -57,6 +57,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [ijson / Python](python/ijson/README.md)
 - [jiter / Python](python/jiter/README.md)
 - [json.load(BytesIO(local UTF-8 bytes), cls=PurePythonJSONDecoder) / Python](python/stdlib_json/README.md)
+- [json5 / Python](python/json5/README.md)
 - [msgspec / Python](python/msgspec/README.md)
 - [orjson / Python](python/orjson/README.md)
 - [pydantic / Python](python/pydantic/README.md)
