@@ -1,6 +1,6 @@
 # GO × JSON: selected parsers (pilot)
 
-7 control-verified third-party paths selected. The ceiling is ten. GJSON is a JSON path-query parser: the harness uses its own full-document validation before traversing the parsed Result tree. go-codec is a multi-format package, so its Imported by count covers several formats and does not measure JSON-specific use. A path is an API or package route, not necessarily an independent parser engine.
+8 control-verified third-party paths selected. The ceiling is ten. GJSON is a JSON path-query parser: the harness uses its own full-document validation before traversing the parsed Result tree. go-codec is a multi-format package, so its Imported by count covers several formats and does not measure JSON-specific use. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -15,6 +15,7 @@ pkg.go.dev Imported by package count, from the bounded search captured 2026-11-1
 | 5 | [github.com/bytedance/sonic](https://pkg.go.dev/github.com/bytedance/sonic@v1.15.5#Unmarshal) | v1.15.5 | 2,428 | Complete local JSON bytes into untyped Go values | Sonic optimized arm64 Go optdec over native NEON parser |
 | 6 | [github.com/buger/jsonparser](https://pkg.go.dev/github.com/buger/jsonparser@v1.6.1) | v1.6.1 | 2,171 | Local JSON bytes traversed with Get/ObjectEach/ArrayEachErr | jsonparser byte scanner |
 | 7 | [github.com/valyala/fastjson](https://pkg.go.dev/github.com/valyala/fastjson@v1.6.10#Parser.ParseBytes) | v1.6.10 | 895 | Complete local JSON bytes decoded into a Value tree | fastjson own Go parser |
+| 8 | [github.com/segmentio/encoding/json](https://pkg.go.dev/github.com/segmentio/encoding/json@v0.5.4#Unmarshal) | v0.5.4 | 348 | Complete local JSON bytes decoded into untyped Go values | segmentio/encoding/json own Go parser |
 
 GJSON has a documented `ParseBytes([]byte)` API but does not validate input on its own. The harness calls its own `ValidBytes([]byte)` first, then traverses `Result.ForEach` over every object and array. Both valid controls pass; the second changes 39 GJSON source features and 39 AFL tuples under stable repeats. Its Imported by count is package adoption, not evidence of general-purpose JSON decoding.
 
@@ -25,6 +26,8 @@ buger/jsonparser is a path-query parser. The adapter recursively walks both vali
 fastjson uses the documented `Parser.ParseBytes` API and traverses the resulting `Value` tree. The complete nested object and array controls match the independent expected summaries. Go coverage reaches 257 lines in its pinned source; stable repeated controls differ by 15 parser source features and 15 AFL tuples. Its 895 Imported by count ranks seventh among verified paths.
 
 Sonic v1.15.5 uses its own decoder on pinned Linux arm64 / Go 1.27.1: the harness checks `sonic.APIKind == sonic.UseSonicJSON`. `internal/decoder/api/decoder_arm64.go` routes to `optdec.Decode`, and `optdec` calls the native NEON parser. The object control covers 289 `optdec` Go lines; repeated source-scoped AFL++ feedback differs by 35 Go parser blocks and 35 tuples on the valid nested-array control. NEON assembly instructions are outside Go line coverage and feedback here.
+
+segmentio/encoding/json uses the documented `Unmarshal([]byte, any)` API into `*any`. In the pinned v0.5.4 source, `Unmarshal` calls the package's own `Parse`, and `decodeInterface` tokenizes with `parseValue` in `parse.go` before building maps and slices in `decode.go`. It imports `encoding/json` only for shared types (`RawMessage`, `Number`, error and interface aliases) and for `Compact`/`HTMLEscape`/`Indent`, which the harness does not call. Both valid controls match an independent Python `json` oracle. Go coverage reaches 367 lines in five package files (217 in `parse.go`); stable repeated controls differ by 14 parser source features and 14 AFL tuples. Its 348 Imported by count, from the same snapshot, ranks eighth among verified paths.
 
 ## Standard API (unranked)
 

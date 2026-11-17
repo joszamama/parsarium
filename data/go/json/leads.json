@@ -36,5 +36,15 @@
     "reason": "Pinned v1.6.10 Parser.ParseBytes parses the complete local JSON byte slice into its own Value tree; both valid controls, own-source coverage and repeatable AFL differential are verified.",
     "source": "https://pkg.go.dev/github.com/valyala/fastjson",
     "verified_evidence": "projects/json/go/github_com_valyala_fastjson/verification.json"
+  },
+  {
+    "name": "github.com/segmentio/encoding/json",
+    "status": "promoted_to_verified",
+    "version_seen": "v0.5.4",
+    "license": "MIT",
+    "imported_by": 348,
+    "reason": "Pinned v0.5.4 json.Unmarshal parses the complete local JSON byte slice with the package's own parseValue/decodeInterface code (encoding/json is imported only for shared types and Compact/Indent helpers the harness does not call); both valid controls, own-source coverage and repeatable AFL differential are verified.",
+    "source": "https://pkg.go.dev/github.com/segmentio/encoding/json",
+    "verified_evidence": "projects/json/go/segmentio_encoding/verification.json"
   }
 ]
