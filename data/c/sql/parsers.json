@@ -1,5 +1,110 @@
 [
   {
+    "name": "libgda",
+    "version": "5.2.10",
+    "license": "LGPL-2.0-or-later",
+    "license_evidence": "COPYING.LIB in the pinned release tarball (GNU Library General Public License version 2 text); COPYING states the library is LGPL and only the executable tools are GPL. Source files carry the 'version 2 of the License, or (at your option) any later version' notice.",
+    "input_api": "gda_sql_parser_parse_string(GdaSqlParser*, local NUL-terminated SQL text, &remain, &error) -> GdaStatement (\"structure\": GdaSqlStatement tree)",
+    "documentation": "libgda-5.2.10.tar.xz: doc/C/html/GdaSqlParser.html (gda_sql_parser_parse_string) and doc/C/html/libgda-5.0-GdaSqlStatement.html (GdaSqlStatement, gda_sql_statement_serialize)",
+    "source": "https://download.gnome.org/sources/libgda/5.2/libgda-5.2.10.tar.xz",
+    "source_sha256": "6f6cdf7b8053f553b907e0c88a6064eb48cf2751852eb24323dcf027792334c8",
+    "dependencies": [],
+    "dialect": "libgda generic parser (gda_sql_parser_new, no provider)",
+    "scope": "SQL statements from local bytes parsed one by one with the generic GdaSqlParser; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary read from the GdaSqlStatement tree. Provider-specific parsers, GdaSqlBuilder, rendering and execution are untested.",
+    "family": "libgda Lemon-generated SQL grammar",
+    "family_note": "gda_sql_parser_parse_string runs GdaSqlParser's own tokenizer (gda-sql-parser.c) and the Lemon parser generated from libgda/sql-parser/parser.y, which builds the public GdaSqlStatement structs (GdaSqlStatementSelect fields, from targets and joins, where_cond, group_by, order_by; GdaSqlStatementInsert table, fields_list, values_list). The adapter prints that tree with the documented gda_sql_statement_serialize and reads it; libgda keeps literal values as SQL text, so a string literal is unquoted by the adapter. The grammar is libgda's own (Lemon is SQLite's parser generator, but parser.y is not SQLite's parse.y). No connection or provider is opened.",
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package libgda5",
+      "value": 2105,
+      "rank": 4973,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/c/sql/registry-snapshot.json",
+      "limitation": "Counts installs of the whole GNOME Data Access library (data models, providers, meta store), not use of its SQL parser; packaged installs only."
+    },
+    "project": "projects/sql/c/libgda",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "libpg_query",
     "version": "18.1.0",
     "license": "BSD-3-Clause",

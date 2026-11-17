@@ -36,13 +36,13 @@
     },
     {
       "name": "libgda5",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 2105,
       "metric_error": null,
-      "latest_release_observed": null,
+      "latest_release_observed": "5.2.10",
       "family": "libgda Lemon-generated SQL parser",
       "documented_api_lead": "gda_sql_parser_parse_string",
-      "reason": "GNOME Data Access 5. Its documented GdaSqlParser (gda_sql_parser_parse_string) returns a GdaStatement whose GdaSqlStatement contents are a public struct tree (select targets, FROM targets and joins, WHERE expression, GROUP BY, ORDER BY). Qualifies on documentation; not yet run. Its popcon count covers the whole data-access library, not SQL parsing. Not run in this round: a scoped source build of libgda (GLib/GObject, libxml2) under coverage and AFL++ was not attempted; it outranks the selected libpg_query by this metric and remains the next C lead."
+      "reason": "GNOME Data Access 5 (Debian source libgda5; upstream release 5.2.10 pinned). gda_sql_parser_parse_string with the generic GdaSqlParser returns a GdaStatement whose GdaSqlStatement tree (printed with gda_sql_statement_serialize) gives the oracle summary for both valid controls. The popcon count covers the whole data-access library, not SQL parsing."
     },
     {
       "name": "libpg-query",
