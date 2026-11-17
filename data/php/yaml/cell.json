@@ -1,10 +1,10 @@
 {
   "ecosystem": "php",
   "format": "yaml",
-  "status": "pilot_one_verified_bounded_search",
+  "status": "pilot_two_verified_bounded_search",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 1,
+  "verified_third_party_count": 2,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "yaml"
@@ -15,17 +15,16 @@
   "search_totals": {
     "yaml": 1954
   },
-  "leads_recorded": 3,
+  "leads_recorded": 2,
   "leads_by_status": {
-    "excluded": 2,
-    "unresolved": 1
+    "excluded": 2
   },
   "ranking_metric": "Packagist lifetime downloads",
-  "uncertainty": "One verified PHP YAML path. symfony/yaml v8.1.11 parses both schema-neutral valid controls through the documented Yaml::parse(string) with Yaml::PARSE_OBJECT_FOR_MAP into exact ordered typed trees; without that flag mappings become PHP arrays and {} cannot be told from []. Xdebug covers 570 package lines (365 in Parser.php); the parser-line AFL++ bridge repeats identically three times per control and the controls differ by 61 lines and 61 tuples, all in Parser.php, Inline.php and Unescaper.php. mustangostang/spyc 0.6.3 is excluded: it leaves \\u and \\t escapes undecoded, drops the final line break of clip-chomped block scalars, misreads '|-' with more-indented lines and returns '...' as a sequence item. dallgoot/yaml 1.0.1 (372,583) is excluded: it leaves \\\" and \\t escapes and the single-quoted '' escape undecoded. The PECL yaml extension (libyaml family; no Packagist metric) remains an unverified lead. The bounded Packagist search used one query ('yaml', first 100 of 1,954 hits). Packagist downloads are package adoption, mostly transitive through Symfony and Laravel, not YAML parsing frequency. Two valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed-input behavior.",
+  "uncertainty": "Two verified PHP YAML paths from different families. symfony/yaml v8.1.11 parses both schema-neutral valid controls through the documented Yaml::parse(string) with Yaml::PARSE_OBJECT_FOR_MAP into exact ordered typed trees; without that flag mappings become PHP arrays and {} cannot be told from []. Xdebug covers 570 package lines (365 in Parser.php); the parser-line AFL++ bridge repeats identically three times per control and the controls differ by 61 lines and 61 tuples, all in Parser.php, Inline.php and Unescaper.php. pecl/yaml 2.3.0 (the PECL yaml extension, libyaml family) parses both controls through the documented yaml_parse() with a YAML_MAP_TAG callback that keeps mappings as stdClass; LLVM covers 537 extension lines (252 in parse.c) and 1331 libyaml lines, and the native AFL++ overlay (yaml.c/parse.c/detect.c and libyaml reader/scanner/parser) repeats identically five times per control with 897/869 tuples, 196 differing. Its Packagist metric counts only PIE installs through Packagist, not PECL or distribution-package installs. mustangostang/spyc 0.6.3 is excluded: it leaves \\u and \\t escapes undecoded, drops the final line break of clip-chomped block scalars, misreads '|-' with more-indented lines and returns '...' as a sequence item. dallgoot/yaml 1.0.1 (372,583) is excluded: it leaves \\\" and \\t escapes and the single-quoted '' escape undecoded. The bounded Packagist search used one query ('yaml', first 100 of 1,954 hits). Packagist downloads are package adoption, mostly transitive through Symfony and Laravel, not YAML parsing frequency. Two valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed-input behavior.",
   "runtime_evidence": "data/php/yaml/standard.json",
   "registry_snapshot": "data/php/yaml/registry-snapshot.json",
   "unresolved_leads": "data/php/yaml/leads.json",
-  "selection": "symfony/yaml v8.1.11 (926,050,815 Packagist downloads), the top lead, is verified: an own pure-PHP parser (Parser.php, Inline.php, Unescaper.php). mustangostang/spyc 0.6.3 (51,101,645), the second lead, is excluded after a pinned probe failed both valid controls; dallgoot/yaml 1.0.1 (372,583), the third, is excluded after failing the primary control.",
+  "selection": "symfony/yaml v8.1.11 (926,050,815 Packagist downloads), the top lead, is verified: an own pure-PHP parser (Parser.php, Inline.php, Unescaper.php). mustangostang/spyc 0.6.3 (51,101,645), the second lead, is excluded after a pinned probe failed both valid controls; dallgoot/yaml 1.0.1 (372,583) is excluded after failing the primary control. pecl/yaml 2.3.0 (55,298 Packagist downloads as a php-ext/PIE package) is verified as the second path: the PECL yaml C extension over libyaml 0.2.5.",
   "third_party_evidence": "data/php/yaml/parsers.json",
   "third_party_control_results": "data/php/yaml/verification.json"
 }

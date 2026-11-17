@@ -461,6 +461,475 @@
       "format_specific_source_lines_covered": 365,
       "feedback_receipt": "data/php/yaml/symfony-yaml-feedback-differential.json",
       "error": null
+    },
+    {
+      "package": "pecl/yaml",
+      "version": "2.3.0",
+      "scope": "libyaml 0.2.5 scanner/parser behind the PECL yaml extension (yaml_parse with a YAML_MAP_TAG callback); exact ordered typed trees for the block-mapping and block-sequence controls",
+      "parser_family": "libyaml via the PECL yaml extension (C); shared with the C libyaml path, not with symfony/yaml",
+      "command": "python3 scripts/run_project.py yaml php pecl_yaml",
+      "receipt": "projects/yaml/php/pecl_yaml/verification.json",
+      "runtime": "PHP 8.5.12 CLI (source build, --disable-all) loading yaml.so 2.3.0 built with phpize against source-built libyaml 0.2.5",
+      "pass": true,
+      "output": {
+        "root": "map",
+        "nodes": {
+          "bool": 2,
+          "float": 2,
+          "int": 7,
+          "map": 7,
+          "null": 1,
+          "seq": 2,
+          "str": 13
+        },
+        "max_depth": 3,
+        "tree": [
+          "map",
+          [
+            [
+              "kind",
+              [
+                "str",
+                "catalog"
+              ]
+            ],
+            [
+              "version",
+              [
+                "int",
+                "2"
+              ]
+            ],
+            [
+              "ratio",
+              [
+                "float",
+                "0.25"
+              ]
+            ],
+            [
+              "offset",
+              [
+                "int",
+                "-17"
+              ]
+            ],
+            [
+              "enabled",
+              [
+                "bool",
+                true
+              ]
+            ],
+            [
+              "retired",
+              [
+                "bool",
+                false
+              ]
+            ],
+            [
+              "missing",
+              [
+                "null"
+              ]
+            ],
+            [
+              "title",
+              [
+                "str",
+                "Café \"quoted\"\tend"
+              ]
+            ],
+            [
+              "single",
+              [
+                "str",
+                "it's here"
+              ]
+            ],
+            [
+              "tags",
+              [
+                "seq",
+                [
+                  [
+                    "str",
+                    "alpha"
+                  ],
+                  [
+                    "str",
+                    "beta"
+                  ],
+                  [
+                    "str",
+                    "gamma delta"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "point",
+              [
+                "map",
+                [
+                  [
+                    "lat",
+                    [
+                      "int",
+                      "1"
+                    ]
+                  ],
+                  [
+                    "lon",
+                    [
+                      "float",
+                      "-2.5"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "items",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "id",
+                        [
+                          "int",
+                          "7"
+                        ]
+                      ],
+                      [
+                        "name",
+                        [
+                          "str",
+                          "first item"
+                        ]
+                      ],
+                      [
+                        "note",
+                        [
+                          "str",
+                          "line one\nline two\n"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "id",
+                        [
+                          "int",
+                          "8"
+                        ]
+                      ],
+                      [
+                        "name",
+                        [
+                          "str",
+                          "Zürich"
+                        ]
+                      ],
+                      [
+                        "note",
+                        [
+                          "str",
+                          "folded text\n"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "defaults",
+              [
+                "map",
+                [
+                  [
+                    "retries",
+                    [
+                      "int",
+                      "3"
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "base"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "service",
+              [
+                "map",
+                [
+                  [
+                    "settings",
+                    [
+                      "map",
+                      [
+                        [
+                          "retries",
+                          [
+                            "int",
+                            "3"
+                          ]
+                        ],
+                        [
+                          "label",
+                          [
+                            "str",
+                            "base"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "edge"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      },
+      "second_valid_control": "controls/yaml/order.yaml",
+      "second_valid_output": {
+        "root": "seq",
+        "nodes": {
+          "bool": 1,
+          "float": 2,
+          "int": 5,
+          "map": 7,
+          "null": 1,
+          "seq": 5,
+          "str": 11
+        },
+        "max_depth": 4,
+        "tree": [
+          "seq",
+          [
+            [
+              "map",
+              [
+                [
+                  "order",
+                  [
+                    "str",
+                    "A-7"
+                  ]
+                ],
+                [
+                  "lines",
+                  [
+                    "seq",
+                    [
+                      [
+                        "map",
+                        [
+                          [
+                            "sku",
+                            [
+                              "str",
+                              "Xé-1"
+                            ]
+                          ],
+                          [
+                            "qty",
+                            [
+                              "int",
+                              "2"
+                            ]
+                          ],
+                          [
+                            "price",
+                            [
+                              "float",
+                              "12.5"
+                            ]
+                          ]
+                        ]
+                      ],
+                      [
+                        "map",
+                        [
+                          [
+                            "sku",
+                            [
+                              "str",
+                              "B '2'"
+                            ]
+                          ],
+                          [
+                            "qty",
+                            [
+                              "int",
+                              "1"
+                            ]
+                          ],
+                          [
+                            "price",
+                            [
+                              "float",
+                              "0.75"
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "flags",
+                  [
+                    "seq",
+                    []
+                  ]
+                ],
+                [
+                  "meta",
+                  [
+                    "map",
+                    []
+                  ]
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "city",
+                  [
+                    "str",
+                    "Berlin"
+                  ]
+                ],
+                [
+                  "zip",
+                  [
+                    "str",
+                    "10115"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "city",
+                  [
+                    "str",
+                    "Berlin"
+                  ]
+                ],
+                [
+                  "zip",
+                  [
+                    "str",
+                    "10115"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "seq",
+              [
+                [
+                  "int",
+                  "1"
+                ],
+                [
+                  "seq",
+                  [
+                    [
+                      "int",
+                      "2"
+                    ],
+                    [
+                      "int",
+                      "3"
+                    ]
+                  ]
+                ],
+                [
+                  "map",
+                  [
+                    [
+                      "k",
+                      [
+                        "str",
+                        "v"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "str",
+              "plain multi word"
+            ],
+            [
+              "str",
+              "line\nbreak"
+            ],
+            [
+              "str",
+              "kept\n  indented"
+            ],
+            [
+              "null"
+            ],
+            [
+              "bool",
+              false
+            ]
+          ]
+        ]
+      },
+      "parser_source_files": 6,
+      "parser_source_lines_covered": 537,
+      "format_specific_source_lines_covered": 252,
+      "underlying_source_files": 11,
+      "underlying_source_lines_covered": 1331,
+      "second_valid_lines": {
+        "parser_source_lines_covered": 530,
+        "format_specific_source_lines_covered": 252,
+        "underlying_source_lines_covered": 1313,
+        "underlying_parser_c_lines_covered": 417,
+        "underlying_scanner_c_lines_covered": 657
+      },
+      "feedback_receipt": "data/php/yaml/pecl-yaml-feedback-differential.json",
+      "afl_feedback": {
+        "overlay_receipt": "fuzzing/afl-native/yaml/php/pecl_yaml/verification.json",
+        "feedback_kind": "native_libyaml_php_yaml_parser_source_edges",
+        "control_afl_tuples": 897,
+        "differential_afl_tuples": 869,
+        "afl_tuple_difference": 196,
+        "repeats_per_control": 5
+      },
+      "error": null
     }
   ],
   "standard": []

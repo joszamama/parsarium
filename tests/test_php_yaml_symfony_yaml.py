@@ -44,9 +44,9 @@ class PhpYamlSymfonyYamlTest(unittest.TestCase):
             self.assertEqual(target["expected_output_by_control_sha256"][manifest[hash_key]], oracle(path.name))
         self.assertTrue(feedback["control_output_matches_oracle"])
         self.assertTrue(feedback["differential_output_matches_oracle"])
-        parser, = read(BASE / "parsers.json")
+        parser, = [item for item in read(BASE / "parsers.json") if item["name"] == PACKAGE]
         self.assertEqual(parser["expected_output"], manifest["expected_output"])
-        record, = read(BASE / "verification.json")["third_party"]
+        record, = [item for item in read(BASE / "verification.json")["third_party"] if item["package"] == PACKAGE]
         self.assertEqual(record["output"], manifest["expected_output"])
         self.assertEqual(record["second_valid_output"], manifest["differential_expected_output"])
 

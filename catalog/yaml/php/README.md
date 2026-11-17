@@ -9,6 +9,7 @@ One verified PHP YAML path. symfony/yaml v8.1.11 parses both schema-neutral vali
 ## Third-party parsers
 
 - [symfony/yaml](symfony-yaml/README.md) — verified Docker harness
+- [pecl/yaml](pecl-yaml/README.md) — verified API path
 
 ## Standard and runtime APIs
 

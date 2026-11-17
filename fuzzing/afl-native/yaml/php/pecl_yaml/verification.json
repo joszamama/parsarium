@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "project": "yaml/php/pecl_yaml",
+  "pass": true,
+  "feedback_kind": "native_libyaml_php_yaml_parser_source_edges",
+  "feedback_scope": "pecl/yaml 2.3.0 yaml.c (yaml_parse), parse.c (events to PHP values, aliases, tag callbacks) and detect.c (implicit scalar typing) plus libyaml 0.2.5 reader.c, scanner.c and parser.c via AFL++ allowlist; emit.c, libyaml api/loader/emitter code and the PHP runtime are uninstrumented",
+  "fuzz_target": "projects/yaml/php/pecl_yaml/fuzz-target.php (yaml_parse with the YAML_MAP_TAG callback, no tree walk or JSON output)",
+  "harness": "projects/yaml/php/pecl_yaml/harness.php (yaml_parse with the YAML_MAP_TAG callback, then the typed-tree walk and JSON output)",
+  "extension_source_sha256": {
+    "pecl-yaml-2.3.0/yaml.c": "76fba3c58076bc9475ec4d01d051f33188df91e2eea6249d08138f00e0a48911",
+    "pecl-yaml-2.3.0/parse.c": "0c098a60d44fa19a87dc8bbf6b84be99f5a85a6eaed51945b04c923ed285309f",
+    "pecl-yaml-2.3.0/detect.c": "029b627ec215cbd840260e8592d92baa3e0287898beca28f1e766fecc1914ab0",
+    "pecl-yaml-2.3.0/php_yaml.h": "a2be077167b944f03d57c90c49a6ad8754559295a6d9a7da85061780c7f9469f",
+    "pecl-yaml-2.3.0/php_yaml_int.h": "e1a33661123589b3a4203232276b0aa58960eb4986e9585dce33f19f666f033b"
+  },
+  "api_signature": "yaml yaml_parse($input,$pos,$ndocs,array $callbacks):",
+  "base_project_receipt_sha256": "9d10f700404219ac7884a3fc3a2ffea8710c0a46d9da14ee63f8cea2e5c300eb",
+  "base_image_id": "sha256:94607da14855e74946be48d823c98a00be93e7032c5f72ef9e393aa8a3007f26",
+  "source_sha256": "3ea4d29a1454043d504d8c3dd1497e0da299e4cdb47416cde027acfc8805a04d",
+  "underlying_source_sha256": "c642ae9b75fee120b2d96c712538bd2cf283228d2337df2cf2988e3c02678ef4",
+  "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+  "license_file_sha256": {
+    "php-8.5.12/LICENSE": "b42e4df5e50e6ecda1047d503d6d91d71032d09ed1027ba1ef29eed26f890c5a",
+    "pecl-yaml-2.3.0/LICENSE": "68d9700294396c72089bfc7bf38a5b3654a53ae415f3bd37768848c14e86f338",
+    "yaml-0.2.5/License": "c40112449f254b9753045925248313e9270efa36d226b22d82d4cc6c43c57f29"
+  },
+  "runtime": {
+    "php": "8.5.12",
+    "pecl_yaml": "2.3.0",
+    "libyaml": "0.2.5"
+  },
+  "instrumented_objects": [
+    "pecl-yaml-2.3.0/.libs/detect.o",
+    "pecl-yaml-2.3.0/.libs/parse.o",
+    "pecl-yaml-2.3.0/.libs/yaml.o",
+    "yaml-0.2.5/build/src/.libs/parser.o",
+    "yaml-0.2.5/build/src/.libs/reader.o",
+    "yaml-0.2.5/build/src/.libs/scanner.o"
+  ],
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "differential_control_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+  "oracle": "controls/yaml/check_controls.py hand-written typed trees (cross-checked with Ruby Psych)",
+  "control_output_matches_oracle": true,
+  "differential_output_matches_oracle": true,
+  "base_coverage_lines": {
+    "control": {
+      "parser_source_lines_covered": 537,
+      "format_specific_source_lines_covered": 252,
+      "underlying_source_lines_covered": 1331,
+      "underlying_parser_c_lines_covered": 391,
+      "underlying_scanner_c_lines_covered": 681
+    },
+    "differential": {
+      "parser_source_lines_covered": 530,
+      "format_specific_source_lines_covered": 252,
+      "underlying_source_lines_covered": 1313,
+      "underlying_parser_c_lines_covered": 417,
+      "underlying_scanner_c_lines_covered": 657
+    }
+  },
+  "image_id": "sha256:2414dc5c061a97553051c7403af0a803aa80f5fb813e87efbb29492e034a0b53",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 65536,
+  "repeats_per_control": 5,
+  "all_repeats_identical": true,
+  "feedback_edges": 897,
+  "differential_feedback_edges": 869,
+  "stable_shared_edges": 785,
+  "stable_control_only_edges": 112,
+  "stable_differential_only_edges": 84,
+  "afl_tuple_difference": 196,
+  "full_harness_control_edges": 897,
+  "full_harness_differential_edges": 869,
+  "full_harness_tuple_difference": 196,
+  "full_harness_maps_equal_fuzz_target": true,
+  "overlay_file_sha256": {
+    "Dockerfile": "da4f16312920c51089b7880ccbbb6c790f5972f266bc057191f513598831349e",
+    "build.py": "ba64d61992c7ffe12259cfc5083a252c474d87db40d8c5c219640fe8390b672e"
+  }
+}
