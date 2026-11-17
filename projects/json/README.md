@@ -24,6 +24,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [stream-json / JavaScript](javascript/stream_json/README.md)
 - [halaxa/json-machine / PHP](php/halaxa_json_machine/README.md)
 - [json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0) / PHP](php/stdlib_json_decode/README.md)
+- [laminas/laminas-json / PHP](php/laminas_json/README.md)
 - [seld/jsonlint / PHP](php/seld_jsonlint/README.md)
 - [json.load(BytesIO(local UTF-8 bytes), cls=PurePythonJSONDecoder) / Python](python/stdlib_json/README.md)
 - [pydantic / Python](python/pydantic/README.md)

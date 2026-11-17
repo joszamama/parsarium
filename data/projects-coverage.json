@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 50,
-    "containerized_verified": 50,
+    "catalog_paths": 51,
+    "containerized_verified": 51,
     "staged": 0,
     "standard_api_paths": 8,
     "standard_containerized_verified": 7,
@@ -1072,8 +1072,8 @@
       {
         "format": "json",
         "ecosystem": "php",
-        "catalog_paths": 2,
-        "containerized_verified": 2,
+        "catalog_paths": 3,
+        "containerized_verified": 3,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 1,
@@ -1081,9 +1081,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_two_selected_search_bounded",
+        "status": "pilot_three_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Two PHP JSON third-party paths passed valid nested object controls and source-line coverage. JSON Machine also passed a valid nested array control and stable source-line AFL feedback, but it shares the PHP ext/json value decoder with the runtime path. Six own-parser or partial-own-parser leads remain unverified; four json_decode wrappers are excluded. The bounded search used five Packagist queries of at most 100 hits each. Package downloads measure overall package adoption, not JSON parsing frequency. Valid controls do not establish complete RFC 8259 support."
+        "uncertainty": "Three PHP JSON third-party paths passed valid nested object controls and source-line coverage. Laminas and JSON Machine also passed a valid nested array control and stable source-line AFL feedback. Laminas is abandoned, and its own decoder runs only when explicitly enabled; its default API route delegates to ext/json. JSON Machine shares ext/json for member decoding. Five own-parser or partial-own-parser leads remain unverified; four json_decode wrappers are excluded. The bounded search used five Packagist queries of at most 100 hits each. Package downloads measure overall/historical adoption, not JSON parsing frequency. Valid controls do not establish complete RFC 8259 support."
       },
       {
         "format": "json",
