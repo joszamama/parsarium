@@ -1,6 +1,6 @@
 # Go × YAML: selected parsers (pilot)
 
-Four control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection. The paths below the line are leads only. yaml.v2, yaml.v3 and go.yaml.in/yaml/v4 share the go-yaml lineage (Go ports of the libyaml scanner and parser, one code base per major version); goccy/go-yaml is an independent implementation.
+Four control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection, and the leads below the line are not counted (evidence: [lead-check.json](lead-check.json)). yaml.v2, yaml.v3 and go.yaml.in/yaml/v4 share the go-yaml lineage (Go ports of the libyaml scanner and parser, one code base per major version); goccy/go-yaml is an independent implementation.
 
 ## Primary within-cell adoption metric
 
@@ -17,8 +17,29 @@ pkg.go.dev Imported by package count, captured 2026-11-17 ([snapshot](registry-s
 
 | Lead | Status | Metric | Parser family |
 | --- | --- | ---: | --- |
-| github.com/ghodss/yaml | shared_family | 19,254 | go-yaml v2 via JSON conversion |
-| sigs.k8s.io/yaml | shared_family | 12,078 | go-yaml (forked goyaml.v2) via JSON conversion |
-| go.yaml.in/yaml/v3 | shared_family | 555 | go-yaml v3 |
+| github.com/ghodss/yaml | excluded_control_failed | 19,254 | go-yaml v2 via JSON conversion |
+| sigs.k8s.io/yaml | excluded_control_failed | 12,078 | go-yaml v2 (go.yaml.in/yaml/v2) via JSON conversion |
+| k8s.io/apimachinery/pkg/util/yaml | excluded_control_failed | 4,348 | sigs.k8s.io/yaml (go-yaml v2) via JSON conversion |
+| github.com/go-yaml/yaml | excluded_shared_family | 1,291 | go-yaml v2/v3 (old import path) |
+| github.com/jinzhu/configor | not_a_parser_engine | 870 | configuration loader over gopkg.in/yaml.v2 |
+| github.com/knadh/koanf/parsers/yaml | excluded_control_failed | 825 | go-yaml v3 (go.yaml.in/yaml/v3) into map[string]interface{} |
+| sigs.k8s.io/kustomize/kyaml/yaml | excluded_shared_family | 669 | go-yaml v3 (go.yaml.in/yaml/v3) wrapper |
+| github.com/projectcalico/libcalico-go/lib/numorstring | not_a_parser_engine | 621 | Calico value types |
+| github.com/elastic/go-ucfg/yaml | not_a_parser_engine | 619 | configuration loader over gopkg.in/yaml.v2 |
+| github.com/olebedev/config | not_a_parser_engine | 568 | configuration loader over gopkg.in/yaml.v2 |
+| go.yaml.in/yaml/v3 | excluded_shared_family | 555 | go-yaml v3 |
+| launchpad.net/goyaml | excluded_shared_family | 506 | go-yaml v1 (predecessor) |
+| github.com/tsuru/config | not_a_parser_engine | 368 | configuration loader over gopkg.in/yaml.v2 |
+| github.com/docker/libcompose/yaml | not_a_parser_engine | 352 | Compose field types |
+| github.com/kylelemons/go-gypsy/yaml | excluded_control_failed | 289 | go-gypsy (independent minimal YAML subset parser) |
+| github.com/coreos/yaml | excluded_duplicate_fork | 169 | go-yaml v2 fork |
+| github.com/buildkite/yaml | excluded_duplicate_fork | 118 | go-yaml v2 fork |
+| github.com/invopop/yaml | unresolved_not_run | 112 | fork of ghodss/yaml (JSON conversion) |
+| github.com/pivotal-golang/yaml | excluded_duplicate_fork | 94 | go-yaml v2 fork |
+| gopkg.in/coryb/yaml.v2 | excluded_duplicate_fork | 74 | go-yaml v2 fork |
+| cuelang.org/go/encoding/yaml | excluded | 72 | go-yaml v3 (go.yaml.in/yaml/v3) node tree mapped to CUE AST |
+| github.com/zclconf/go-cty-yaml | excluded_duplicate_fork | 71 | go-yaml v2 fork producing cty values |
+| github.com/go-faster/yaml | excluded_duplicate_fork | 40 | go-yaml v3 fork |
+| github.com/braydonk/yaml | excluded_duplicate_fork | 34 | go-yaml v3 fork (yamlfmt) |
 
 AFL++ feedback: [afl-feedback.json](afl-feedback.json). Standard and runtime APIs: none documented ([standard.json](standard.json)).

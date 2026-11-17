@@ -1,0 +1,501 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T20:10:25.884289+00:00",
+  "go_toolchain": "go version go1.27.1 darwin/arm64",
+  "probe": "lead-probes/go/yaml/wrappers",
+  "control_sha256": {
+    "catalog.yaml": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+    "order.yaml": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935"
+  },
+  "oracle": "controls/yaml/check_controls.py EXPECTED typed trees",
+  "note": "Local go toolchain probe, not a Docker harness. Go maps have no order, so map keys of map-returning APIs are reported sorted; JSON-conversion APIs are read token by token, so their typed tree keeps the key order of the JSON text they emit. Shared lines are distinct stripped non-comment lines of non-test .go files (cmd/, examples, test utilities and testdata excluded).",
+  "leads": {
+    "ghodss": {
+      "package": "github.com/ghodss/yaml",
+      "version": "v1.0.0",
+      "api": "yaml.YAMLToJSON([]byte)",
+      "controls": {
+        "catalog.yaml": {
+          "oracle_match": false,
+          "error": null,
+          "first_difference": {
+            "path": "$",
+            "observed_keys": [
+              "defaults",
+              "enabled",
+              "items",
+              "kind",
+              "missing",
+              "offset",
+              "point",
+              "ratio",
+              "retired",
+              "service",
+              "single",
+              "tags",
+              "title",
+              "version"
+            ],
+            "expected_keys": [
+              "kind",
+              "version",
+              "ratio",
+              "offset",
+              "enabled",
+              "retired",
+              "missing",
+              "title",
+              "single",
+              "tags",
+              "point",
+              "items",
+              "defaults",
+              "service"
+            ]
+          }
+        },
+        "order.yaml": {
+          "oracle_match": false,
+          "error": null,
+          "first_difference": {
+            "path": "$[0]",
+            "observed_keys": [
+              "flags",
+              "lines",
+              "meta",
+              "order"
+            ],
+            "expected_keys": [
+              "order",
+              "lines",
+              "flags",
+              "meta"
+            ]
+          }
+        }
+      },
+      "oracle_match_both": false
+    },
+    "sigs": {
+      "package": "sigs.k8s.io/yaml",
+      "version": "v1.6.0",
+      "api": "yaml.YAMLToJSON([]byte)",
+      "controls": {
+        "catalog.yaml": {
+          "oracle_match": false,
+          "error": null,
+          "first_difference": {
+            "path": "$",
+            "observed_keys": [
+              "defaults",
+              "enabled",
+              "items",
+              "kind",
+              "missing",
+              "offset",
+              "point",
+              "ratio",
+              "retired",
+              "service",
+              "single",
+              "tags",
+              "title",
+              "version"
+            ],
+            "expected_keys": [
+              "kind",
+              "version",
+              "ratio",
+              "offset",
+              "enabled",
+              "retired",
+              "missing",
+              "title",
+              "single",
+              "tags",
+              "point",
+              "items",
+              "defaults",
+              "service"
+            ]
+          }
+        },
+        "order.yaml": {
+          "oracle_match": false,
+          "error": null,
+          "first_difference": {
+            "path": "$[0]",
+            "observed_keys": [
+              "flags",
+              "lines",
+              "meta",
+              "order"
+            ],
+            "expected_keys": [
+              "order",
+              "lines",
+              "flags",
+              "meta"
+            ]
+          }
+        }
+      },
+      "oracle_match_both": false
+    },
+    "apimachinery": {
+      "package": "k8s.io/apimachinery/pkg/util/yaml",
+      "version": "v0.37.2",
+      "api": "yaml.ToJSON([]byte)",
+      "controls": {
+        "catalog.yaml": {
+          "oracle_match": false,
+          "error": null,
+          "first_difference": {
+            "path": "$",
+            "observed_keys": [
+              "defaults",
+              "enabled",
+              "items",
+              "kind",
+              "missing",
+              "offset",
+              "point",
+              "ratio",
+              "retired",
+              "service",
+              "single",
+              "tags",
+              "title",
+              "version"
+            ],
+            "expected_keys": [
+              "kind",
+              "version",
+              "ratio",
+              "offset",
+              "enabled",
+              "retired",
+              "missing",
+              "title",
+              "single",
+              "tags",
+              "point",
+              "items",
+              "defaults",
+              "service"
+            ]
+          }
+        },
+        "order.yaml": {
+          "oracle_match": false,
+          "error": null,
+          "first_difference": {
+            "path": "$[0]",
+            "observed_keys": [
+              "flags",
+              "lines",
+              "meta",
+              "order"
+            ],
+            "expected_keys": [
+              "order",
+              "lines",
+              "flags",
+              "meta"
+            ]
+          }
+        }
+      },
+      "oracle_match_both": false
+    },
+    "koanf": {
+      "package": "github.com/knadh/koanf/parsers/yaml",
+      "version": "v1.1.1",
+      "api": "yaml.Parser().Unmarshal([]byte)",
+      "controls": {
+        "catalog.yaml": {
+          "oracle_match": false,
+          "error": null,
+          "first_difference": {
+            "path": "$",
+            "observed_keys": [
+              "defaults",
+              "enabled",
+              "items",
+              "kind",
+              "missing",
+              "offset",
+              "point",
+              "ratio",
+              "retired",
+              "service",
+              "single",
+              "tags",
+              "title",
+              "version"
+            ],
+            "expected_keys": [
+              "kind",
+              "version",
+              "ratio",
+              "offset",
+              "enabled",
+              "retired",
+              "missing",
+              "title",
+              "single",
+              "tags",
+              "point",
+              "items",
+              "defaults",
+              "service"
+            ]
+          }
+        },
+        "order.yaml": {
+          "oracle_match": false,
+          "error": "yaml: unmarshal errors:\n  line 3: cannot unmarshal !!seq into map[string]interface {}",
+          "first_difference": null
+        }
+      },
+      "oracle_match_both": false
+    },
+    "gypsy": {
+      "package": "github.com/kylelemons/go-gypsy/yaml",
+      "version": "v1.0.0",
+      "api": "yaml.Parse(io.Reader)",
+      "controls": {
+        "catalog.yaml": {
+          "oracle_match": false,
+          "error": "interface conversion: yaml.Node is yaml.Scalar, not yaml.Map",
+          "first_difference": null
+        },
+        "order.yaml": {
+          "oracle_match": false,
+          "error": "interface conversion: yaml.Node is yaml.Scalar, not yaml.Map",
+          "first_difference": null
+        }
+      },
+      "oracle_match_both": false
+    },
+    "kyaml": {
+      "package": "sigs.k8s.io/kustomize/kyaml/yaml",
+      "version": "v0.21.3",
+      "api": "yaml.Parse(string) *RNode",
+      "controls": {
+        "catalog.yaml": {
+          "oracle_match": true,
+          "error": null,
+          "first_difference": null
+        },
+        "order.yaml": {
+          "oracle_match": true,
+          "error": null,
+          "first_difference": null
+        }
+      },
+      "oracle_match_both": true,
+      "source_block_feedback": {
+        "own": {
+          "prefixes": [
+            "sigs.k8s.io/kustomize/kyaml/yaml/"
+          ],
+          "repeats_identical": true,
+          "catalog_blocks": 11,
+          "order_blocks": 11,
+          "block_difference": 0
+        },
+        "underlying_go_yaml_in_v3": {
+          "prefixes": [
+            "go.yaml.in/yaml/v3/"
+          ],
+          "repeats_identical": true,
+          "catalog_blocks": 795,
+          "order_blocks": 796,
+          "block_difference": 71
+        }
+      }
+    },
+    "cue": {
+      "package": "cuelang.org/go/encoding/yaml",
+      "version": "v0.17.1",
+      "api": "yaml.Extract(filename, []byte) *ast.File",
+      "controls": {
+        "catalog.yaml": {
+          "oracle_match": true,
+          "error": null,
+          "first_difference": null
+        },
+        "order.yaml": {
+          "oracle_match": true,
+          "error": null,
+          "first_difference": null
+        }
+      },
+      "oracle_match_both": true,
+      "source_block_feedback": {
+        "own": {
+          "prefixes": [
+            "cuelang.org/go/encoding/yaml/",
+            "cuelang.org/go/internal/encoding/yaml/"
+          ],
+          "repeats_identical": true,
+          "catalog_blocks": 168,
+          "order_blocks": 165,
+          "block_difference": 11
+        },
+        "underlying_go_yaml_in_v3": {
+          "prefixes": [
+            "go.yaml.in/yaml/v3/"
+          ],
+          "repeats_identical": true,
+          "catalog_blocks": 774,
+          "order_blocks": 774,
+          "block_difference": 70
+        }
+      }
+    }
+  },
+  "source_overlap": [
+    {
+      "module": "github.com/go-yaml/yaml",
+      "version": "v2.1.0+incompatible",
+      "module_sum": "h1:RYi2hDdss1u4YE7GwixGzWwVo47T8UQwnTLB6vQiq+o=",
+      "go_mod_first_line": "module github.com/go-yaml/yaml",
+      "reference": "gopkg.in/yaml.v2@v2.4.0",
+      "distinct_non_test_lines": 3133,
+      "reference_distinct_non_test_lines": 3200,
+      "shared_distinct_lines": 3102
+    },
+    {
+      "module": "github.com/go-yaml/yaml",
+      "version": "v0.0.0-20250401170010-944c86a7d293",
+      "module_sum": "h1:iTmBPAxJhe24f5dxMmTM+ri5bps05jhRJ5gS5Q6CMtI=",
+      "go_mod_first_line": "module \"gopkg.in/yaml.v3\"",
+      "reference": "gopkg.in/yaml.v3@v3.0.1",
+      "distinct_non_test_lines": 3718,
+      "reference_distinct_non_test_lines": 3718,
+      "shared_distinct_lines": 3718
+    },
+    {
+      "module": "launchpad.net/goyaml",
+      "version": "v0.0.0-20140305200416-000000000051",
+      "module_sum": "h1:pgtOxpWGtZwl5VEGtXB3s+VPsO3QzsZPg4/AS0Ag9HI=",
+      "go_mod_first_line": "module launchpad.net/goyaml",
+      "reference": "gopkg.in/yaml.v2@v2.4.0",
+      "distinct_non_test_lines": 2842,
+      "reference_distinct_non_test_lines": 3200,
+      "shared_distinct_lines": 2601
+    },
+    {
+      "module": "go.yaml.in/yaml/v3",
+      "version": "v3.0.6",
+      "module_sum": "h1:zcDfvjXEqTQmpjniUBLc91xYJMB2c4QOFxEF/LCEckM=",
+      "go_mod_first_line": "module go.yaml.in/yaml/v3",
+      "reference": "gopkg.in/yaml.v3@v3.0.1",
+      "distinct_non_test_lines": 3741,
+      "reference_distinct_non_test_lines": 3718,
+      "shared_distinct_lines": 3710
+    },
+    {
+      "module": "go.yaml.in/yaml/v2",
+      "version": "v2.4.2",
+      "module_sum": "h1:DzmwEr2rDGHl7lsFgAHxmNz/1NlQ7xLIrlN2h5d1eGI=",
+      "go_mod_first_line": "module go.yaml.in/yaml/v2",
+      "reference": "gopkg.in/yaml.v2@v2.4.0",
+      "distinct_non_test_lines": 3200,
+      "reference_distinct_non_test_lines": 3200,
+      "shared_distinct_lines": 3200
+    },
+    {
+      "module": "github.com/coreos/yaml",
+      "version": "v0.0.0-20141224210557-6b16a5714269",
+      "module_sum": "h1:/1sjrpK5Mb6IwyFOKd+u7321tXfNAsj0Ci8CivZmSlo=",
+      "go_mod_first_line": "module github.com/coreos/yaml",
+      "reference": "gopkg.in/yaml.v2@v2.4.0",
+      "distinct_non_test_lines": 2929,
+      "reference_distinct_non_test_lines": 3200,
+      "shared_distinct_lines": 2697
+    },
+    {
+      "module": "github.com/buildkite/yaml",
+      "version": "v2.1.0+incompatible",
+      "module_sum": "h1:xirI+ql5GzfikVNDmt+yeiXpf/v1Gt03qXTtT5WXdr8=",
+      "go_mod_first_line": "module github.com/buildkite/yaml",
+      "reference": "gopkg.in/yaml.v2@v2.4.0",
+      "distinct_non_test_lines": 3133,
+      "reference_distinct_non_test_lines": 3200,
+      "shared_distinct_lines": 3102
+    },
+    {
+      "module": "github.com/pivotal-golang/yaml",
+      "version": "v0.0.0-20160414152406-8b09e4a33107",
+      "module_sum": "h1:kBhKp2TBVpAr+pDsNXKYn5NRtDGSq0G/l8b//8w1nRk=",
+      "go_mod_first_line": "module github.com/pivotal-golang/yaml",
+      "reference": "gopkg.in/yaml.v2@v2.4.0",
+      "distinct_non_test_lines": 3026,
+      "reference_distinct_non_test_lines": 3200,
+      "shared_distinct_lines": 2872
+    },
+    {
+      "module": "gopkg.in/coryb/yaml.v2",
+      "version": "v2.0.0",
+      "module_sum": "h1:ezxJa7ovlyKv+FVasqbCwJbpZzSBmoH2WhvfrehIrSc=",
+      "go_mod_first_line": "module gopkg.in/coryb/yaml.v2",
+      "reference": "gopkg.in/yaml.v2@v2.4.0",
+      "distinct_non_test_lines": 3045,
+      "reference_distinct_non_test_lines": 3200,
+      "shared_distinct_lines": 2880
+    },
+    {
+      "module": "github.com/zclconf/go-cty-yaml",
+      "version": "v1.2.0",
+      "module_sum": "h1:GDyL4+e/Qe/S0B7YaecMLbVvAR/Mp21CXMOSiCTOi1M=",
+      "go_mod_first_line": "module github.com/zclconf/go-cty-yaml",
+      "reference": "gopkg.in/yaml.v2@v2.4.0",
+      "distinct_non_test_lines": 2812,
+      "reference_distinct_non_test_lines": 3200,
+      "shared_distinct_lines": 2402
+    },
+    {
+      "module": "github.com/go-faster/yaml",
+      "version": "v0.4.6",
+      "module_sum": "h1:lOK/EhI04gCpPgPhgt0bChS6bvw7G3WwI8xxVe0sw9I=",
+      "go_mod_first_line": "module github.com/go-faster/yaml",
+      "reference": "gopkg.in/yaml.v3@v3.0.1",
+      "distinct_non_test_lines": 4020,
+      "reference_distinct_non_test_lines": 3718,
+      "shared_distinct_lines": 3507
+    },
+    {
+      "module": "github.com/braydonk/yaml",
+      "version": "v0.9.0",
+      "module_sum": "h1:ewGMrVmEVpsm3VwXQDR388sLg5+aQ8Yihp6/hc4m+h4=",
+      "go_mod_first_line": "module github.com/braydonk/yaml",
+      "reference": "gopkg.in/yaml.v3@v3.0.1",
+      "distinct_non_test_lines": 3823,
+      "reference_distinct_non_test_lines": 3718,
+      "shared_distinct_lines": 3700
+    },
+    {
+      "module": "go.yaml.in/yaml/v4",
+      "version": "v4.0.0",
+      "module_sum": "h1:/LG1pNO84Z4l603j/xMn69CcS5OYhMQ/f7l2LoQUGuw=",
+      "go_mod_first_line": "module go.yaml.in/yaml/v4",
+      "reference": "gopkg.in/yaml.v3@v3.0.1",
+      "distinct_non_test_lines": 6091,
+      "reference_distinct_non_test_lines": 3718,
+      "shared_distinct_lines": 1649
+    },
+    {
+      "module": "github.com/goccy/go-yaml",
+      "version": "v1.19.2",
+      "module_sum": "h1:PmFC1S6h8ljIz6gMRBopkjP1TVT7xuwrButHID66PoM=",
+      "go_mod_first_line": "module github.com/goccy/go-yaml",
+      "reference": "gopkg.in/yaml.v3@v3.0.1",
+      "distinct_non_test_lines": 5391,
+      "reference_distinct_non_test_lines": 3718,
+      "shared_distinct_lines": 133
+    }
+  ]
+}

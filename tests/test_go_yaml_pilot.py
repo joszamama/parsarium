@@ -81,6 +81,27 @@ class GoYamlPilotTest(unittest.TestCase):
         self.assertIn("case yaml.MapSlice:", harness)
         self.assertNotIn("gopkg.in/yaml", harness)
 
+    def test_unselected_leads_have_recorded_evidence(self):
+        leads = read(CELL / "leads.json")
+        check = read(CELL / "lead-check.json")
+        for lead in leads:
+            with self.subTest(lead=lead["name"]):
+                self.assertTrue(lead["reason"])
+                if lead.get("evidence"):
+                    self.assertTrue((ROOT / lead["evidence"]).is_file())
+        probes = check["leads"]
+        for name in ("ghodss", "sigs", "apimachinery", "koanf", "gypsy"):
+            self.assertFalse(probes[name]["oracle_match_both"])
+        for name in ("kyaml", "cue"):
+            self.assertTrue(probes[name]["oracle_match_both"])
+            self.assertGreater(probes[name]["source_block_feedback"]["underlying_go_yaml_in_v3"]["block_difference"], 0)
+        self.assertEqual(probes["kyaml"]["source_block_feedback"]["own"]["block_difference"], 0)
+        overlap = {(row["module"], row["version"]): row for row in check["source_overlap"]}
+        renamed = overlap[("go.yaml.in/yaml/v3", "v3.0.6")]
+        self.assertGreater(renamed["shared_distinct_lines"] / renamed["distinct_non_test_lines"], 0.99)
+        v4 = overlap[("go.yaml.in/yaml/v4", "v4.0.0")]
+        self.assertLess(v4["shared_distinct_lines"] / v4["distinct_non_test_lines"], 0.5)
+
     def test_v4_harness_uses_v4_load_api(self):
         if not any(row["name"] == "go.yaml.in/yaml/v4" for row in self.parsers):
             self.skipTest("go.yaml.in/yaml/v4 not selected")
