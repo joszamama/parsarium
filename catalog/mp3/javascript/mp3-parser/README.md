@@ -1,0 +1,11 @@
+# mp3-parser 0.3.0
+
+The pinned [README](https://github.com/biril/mp3-parser/blob/19761d0aa0d88bcc215fd7fbeb197f8d00229bb4/README.md#readframeview-offset-requirenextframe) documents `readFrame(DataView, offset, requireNextFrame)`. It is byte-identical to the npm tarball README. The [adapter](../../../../projects/mp3/javascript/mp3_parser/adapter.mjs) wraps local bytes in a `DataView`, calls `readFrame` at each reported frame boundary, and advances to EOF. Its output reports MPEG version bits, layer, rate, channels, bitrate, frame count and bytes, samples per frame and total samples. It does not decode Layer III audio or claim tag parsing.
+
+The 0.3.0 [npm release](https://registry.npmjs.org/mp3-parser/0.3.0) is MIT licensed and pinned by npm integrity, tarball SHA-256 and gitHead in the [source lock](../../../../projects/mp3/javascript/mp3_parser/source-lock.json). It has no runtime dependencies. `lib/lib.js` contains its own MPEG header-bit extraction, bitrate/rate tables and frame-length calculation, distinct from the other selected JavaScript MP3 parser families.
+
+Both existing untagged controls match the independent frame-header walker. The 44.1 kHz mono file yields 11 frames, 2,298 frame bytes and 12,672 samples at 64 kbit/s. The 22.05 kHz stereo file yields 12 frames, 1,254 frame bytes and 6,912 samples at 32 kbit/s. The [Docker verification](../../../../projects/mp3/javascript/mp3_parser/verification.json) marks 416 lines in `lib/lib.js` on the first control using V8 source ranges; that count includes module initialization as well as frame-reading code.
+
+The [scoped AFL++ receipt](../../../../data/javascript/mp3/mp3_parser-feedback-differential.json) repeats each valid control three times. It records 32 versus 30 parser source ranges, with two differing ranges and two differing AFL++ tuples. Both changes are the bit-4 branches of `octetToBinRep` in the pinned frame reader. This is narrow header-bit feedback. The saved 30-day npm snapshot records 40,519 package downloads, below the higher-adoption selected paths and the two duration-only leads. The two valid CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, CRC-protected or ID3 behavior. No malformed-input or campaign result is claimed.
+
+[Run commands](../../../../projects/mp3/javascript/mp3_parser/README.md)

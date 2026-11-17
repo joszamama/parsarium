@@ -1,10 +1,10 @@
 {
   "ecosystem": "javascript",
   "format": "mp3",
-  "status": "pilot_three_selected_search_bounded",
+  "status": "pilot_four_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 3,
+  "verified_third_party_count": 4,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "mp3 parser",
@@ -25,27 +25,29 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 600,
   "unique_search_hits": 465,
-  "leads_recorded": 12,
+  "leads_recorded": 11,
   "leads_by_status": {
     "unresolved_shared_family": 4,
-    "unresolved": 7,
+    "unresolved": 6,
     "excluded": 1
   },
   "ranking_metric": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
-  "selection": "mediabunny 1.66.0 (26,071,768 downloads), music-metadata 12.5.0 (9,827,896) and codec-parser 2.5.0 (2,683,215) are three JavaScript MPEG frame-header parsers with documented local byte APIs (Input with BufferSource; parseBuffer/parseFile/parseStream with duration: true; CodecParser('audio/mpeg').parseAll(Uint8Array)), exact results on both untagged controls checked against the independent frame-header walker, V8 package source coverage and stable parser-derived AFL++ feedback. mpg123-decoder (2,505,430) wraps libmpg123.",
-  "uncertainty": "Three verified paths; no padding. Search is six npm queries of 100 hits each, captured 2026-11-17; downloads were fetched for 15 hand-picked candidates, not every hit. mediabunny was found by `mp3 frame`, `mp3 duration` and `mp3 demuxer`, not the narrower queries. Download counts cover whole toolkits: mediabunny's muxing, conversion and many containers, and codec-parser's AAC, FLAC and Ogg parsers, not MP3 framing alone. The three selected paths are the top three by downloads among the fetched candidates. None decodes Layer III audio. The mpg123 WASM wrappers are recorded as shared-family leads. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, CRC-protected or ID3 support. No standard Node.js MP3 API exists. codec-parser's valid-control AFL++ differential is narrow: one header-cache range that tracks distinct frame headers, not version or channel branches. Its V8 line counts include module evaluation of imported AAC, FLAC, Opus, Vorbis and Ogg files that audio/mpeg parsing does not call. music-metadata reports MPEG version and layer only through its codec string ('MPEG 1 Layer 3'), not as separate fields, and needs duration: true for a full frame walk. Its valid-control AFL++ differential is 4 sync() tail-policy ranges that track frame length, not version or channel branches. Its V8 package line count (3,539) is mostly module evaluation; MpegParser.js alone is 245 lines.",
+  "selection": "mediabunny 1.66.0 (26,071,768 downloads), music-metadata 12.5.0 (9,827,896), codec-parser 2.5.0 (2,683,215), and mp3-parser 0.3.0 (40,519) are four verified JavaScript MPEG frame-header paths. Their documented local byte APIs parse both untagged controls to exact frame-aware results checked against the independent header walker; each has own JavaScript parser source coverage and stable parser-derived AFL++ feedback. None decodes Layer III audio. mpg123-decoder (2,505,430) wraps libmpg123.",
+  "uncertainty": "Four verified paths; no padding. Search is six npm queries of 100 hits each, captured 2026-11-17; downloads were fetched for 15 hand-picked candidates, not every hit. mediabunny was found by `mp3 frame`, `mp3 duration` and `mp3 demuxer`, not the narrower queries. Download counts cover whole toolkits: mediabunny's muxing, conversion and many containers, and codec-parser's AAC, FLAC and Ogg parsers, not MP3 framing alone. The first three remain the highest-download fetched candidates; mp3-parser has 40,519 monthly downloads, below the duration-only leads, and is selected for its documented frame reader and exact whole-control walk. Its AFL++ differential is narrow: two source ranges in lib.js octetToBinRep bit extraction, not distinct version/channel branches. None decodes Layer III audio. The mpg123 WASM wrappers are recorded as shared-family leads. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, MPEG-2.5, CRC-protected or ID3 support. No standard Node.js MP3 API exists. codec-parser's valid-control AFL++ differential is narrow: one header-cache range that tracks distinct frame headers, not version or channel branches. Its V8 line counts include module evaluation of imported AAC, FLAC, Opus, Vorbis and Ogg files that audio/mpeg parsing does not call. music-metadata reports MPEG version and layer only through its codec string ('MPEG 1 Layer 3'), not as separate fields, and needs duration: true for a full frame walk. Its valid-control AFL++ differential is 4 sync() tail-policy ranges that track frame length, not version or channel branches. Its V8 package line count (3,539) is mostly module evaluation; MpegParser.js alone is 245 lines.",
   "third_party_evidence": "data/javascript/mp3/parsers.json",
   "third_party_control_results": [
     "projects/mp3/javascript/mediabunny/verification.json",
     "projects/mp3/javascript/music_metadata/verification.json",
-    "projects/mp3/javascript/codec_parser/verification.json"
+    "projects/mp3/javascript/codec_parser/verification.json",
+    "projects/mp3/javascript/mp3_parser/verification.json"
   ],
   "afl_feedback": "data/javascript/mp3/afl-feedback.json",
   "runtime_evidence": "data/javascript/mp3/standard.json",
   "registry_snapshot": "data/javascript/mp3/registry-snapshot.json",
   "unresolved_leads": "data/javascript/mp3/leads.json",
   "protocol": "catalog/mp3/PROTOCOL.md",
-  "family_note": "mediabunny, music-metadata and codec-parser are separate parser families: different authors, repositories and frame-sync code; codec-parser 2.5.0 has no runtime dependencies. music-metadata shares its parser family with the mp3_id3v2/javascript music-metadata path (12.4.0 there, verified for ID3v2 tags); this cell verifies its MpegParser on untagged frames. Neither mediabunny nor codec-parser is among the mp3_id3v2/javascript paths.",
+  "family_note": "mediabunny, music-metadata, codec-parser and mp3-parser are separate parser families: different authors, repositories and frame-sync code; codec-parser 2.5.0 has no runtime dependencies. music-metadata shares its parser family with the mp3_id3v2/javascript music-metadata path (12.4.0 there, verified for ID3v2 tags); this cell verifies its MpegParser on untagged frames. Neither mediabunny nor codec-parser is among the mp3_id3v2/javascript paths.",
   "codec_parser_feedback_differential": "data/javascript/mp3/codec_parser-feedback-differential.json",
-  "music_metadata_feedback_differential": "data/javascript/mp3/music_metadata-feedback-differential.json"
+  "music_metadata_feedback_differential": "data/javascript/mp3/music_metadata-feedback-differential.json",
+  "mp3_parser_feedback_differential": "data/javascript/mp3/mp3_parser-feedback-differential.json"
 }
