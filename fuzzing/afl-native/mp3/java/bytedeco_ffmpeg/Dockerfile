@@ -10,9 +10,9 @@ ENV PARSARIUM_SUBJECT_PREFIX=/work/parser-source/
 ENV PARSARIUM_FUZZ_ENTRY=GenericHarness.fuzzerTestOneInput
 ENV PARSARIUM_JAVA_CLASSPATH=/work/classes:/work/lib/javacv-1.5.14.jar:/work/lib/ffmpeg-8.1.2-1.5.14.jar:/work/lib/javacpp-1.5.14.jar:/work/lib/ffmpeg-8.1.2-1.5.14-linux-arm64.jar:/work/lib/javacpp-1.5.14-linux-arm64.jar
 ENV PARSARIUM_TARGET_CLASS=GenericHarness
-ENV PARSARIUM_JACOCO_INCLUDES=*
 ENV PARSARIUM_PARSER_JAR=/work/lib/ffmpeg-8.1.2-1.5.14.jar
 ENV PARSARIUM_PARSER_SOURCES=/work/parser-source
+ENV PARSARIUM_JACOCO_INCLUDES=*
 RUN mkdir /work/afl-java-classes && javac -d /work/afl-java-classes /work/JavaCase.java
 RUN AFL_LLVM_INSTRUMENT=CLASSIC afl-clang-fast -O2 /work/afl_proxy.c -ldl -o /work/afl_proxy
 ENTRYPOINT ["/work/afl_proxy"]
