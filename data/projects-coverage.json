@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 139,
-    "containerized_verified": 139,
+    "catalog_paths": 140,
+    "containerized_verified": 140,
     "staged": 0,
     "standard_api_paths": 11,
     "standard_containerized_verified": 11,
@@ -1291,7 +1291,7 @@
         "phase": "pilot",
         "status": "pilot_seven_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Seven Go XML package paths pass two valid namespace-aware controls with parser-source coverage and stable AFL++ feedback: etree 2,098; xmlquery 627; mxj 553; beego/x2j 436; govmomi/vim25/xml 163; goxpp 132; gokogiri/xml 108 Imported by. The first four and goxpp use the Go encoding/xml runtime tokenizer through package-specific tree, map or cursor APIs. govmomi/vim25/xml contains its own compiled tokenizer fork of Go encoding/xml; the pinned v0.56.2 package imports no runtime encoding/xml and covers 290 own xml.go lines. Its parser-only AFL feedback differs by 30 fork-source blocks on the valid controls with stable repeats. Its source is a 12,553,438-byte whole govmomi module archive, though the XML package itself is much smaller. Higher-adoption goxml2json (182) and mxj/v2 (178), plus six other numeric leads, remain unverified; ranks cover selected verified paths only. mxj and x2j map routes lose namespace URIs/prefixes and mixed-content details; x2j byte/string routes alter CDATA whitespace on the valid catalog control, while its selected reader route preserves it. Gokogiri is a cgo DOM binding over pinned libxml2 2.15.4 with 93 Go binding and 1,730 native parser source lines covered; parser-only AFL feedback differs between the controls and is stable over five repeats. Six pkg.go.dev queries recorded 496 hits, 464 unique; the first 100 hits per query were captured where available. mellium.im/xmlstream was excluded after a pinned probe showed it only transforms caller-supplied XML tokens and delegates byte parsing to encoding/xml. Two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour."
+        "uncertainty": "Seven Go XML package paths pass two valid namespace-aware controls with parser-source coverage and stable AFL++ feedback: etree 2,098; xmlquery 627; mxj 553; beego/x2j 436; govmomi/vim25/xml 163; goxpp 132; gokogiri/xml 108 Imported by. The first four and goxpp use the Go encoding/xml runtime tokenizer through package-specific tree, map or cursor APIs. govmomi/vim25/xml contains its own compiled tokenizer fork of Go encoding/xml; the pinned v0.56.2 package imports no runtime encoding/xml and covers 290 own xml.go lines. Its parser-only AFL feedback differs by 30 fork-source blocks on the valid controls with stable repeats. Its source is a 12,553,438-byte whole govmomi module archive, though the XML package itself is much smaller. Higher-adoption goxml2json (182) and mxj/v2 (178), plus six other numeric leads, remain unverified; ranks cover selected verified paths only. mxj and x2j map routes lose namespace URIs/prefixes and mixed-content details; x2j byte/string routes alter CDATA whitespace on the valid catalog control, while its selected reader route preserves it. Gokogiri is a cgo DOM binding over pinned libxml2 2.15.4 with 93 Go binding and 1,730 native parser source lines covered; parser-only AFL feedback differs between the controls and is stable over five repeats. Six pkg.go.dev queries recorded 496 hits, 464 unique; the first 100 hits per query were captured where available. mellium.im/xmlstream was excluded after a pinned probe showed it only transforms caller-supplied XML tokens and delegates byte parsing to encoding/xml. aqwari.net/xml/xmltree was excluded by the same gate: its pinned probe matches an expat oracle, but its own-source AFL++ feedback is identical on the fixed valid control pair. Two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour."
       },
       {
         "format": "xml",
@@ -1360,8 +1360,8 @@
       {
         "format": "xml",
         "ecosystem": "rust",
-        "catalog_paths": 6,
-        "containerized_verified": 6,
+        "catalog_paths": 7,
+        "containerized_verified": 7,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1369,9 +1369,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_six_paths_verified_search_bounded",
+        "status": "pilot_seven_paths_verified_search_bounded",
         "complete": false,
-        "uncertainty": "Six verified XML parser implementations selected within the first 100 hits of seven crates.io queries (642 hits, 483 unique), captured 2026-11-17. Ten documented leads remain unverified. xml5ever 0.40.0 is an XML5 error-recovering superset parser: the two valid XML 1.0 controls verify namespace-aware output, but it does not establish strict XML 1.0 well-formedness, complete namespace behavior, DTD support, or other encodings. rxml 0.14.0 is a deliberately restricted XML 1.0 parser without DTDs, custom entities or processing instructions, and it rejects comments by default. It parses the shared catalog control exactly but rejects the shared order control (Error(RestrictedXml(\"comments\"))), so its second control is order-default-ns-restricted.xml without that comment and processing instruction. The xml-rs 1.0.0 package is a compatibility re-export of xml and excluded as a duplicate family. Downloads include transitive pulls and are adoption proxies; ranks compare selected independent paths only. RustyXML 0.3.0 passed valid-control parsing but exact repeatable AFL++ feedback was not established; see data/rust/xml/rustyxml-feedback-audit.md."
+        "uncertainty": "Seven verified XML parser implementations selected within the first 100 hits of seven crates.io queries (642 hits, 483 unique), captured 2026-11-17. Nine documented leads remain unverified. xml5ever 0.40.0 is an XML5 error-recovering superset parser: the two valid XML 1.0 controls verify namespace-aware output, but it does not establish strict XML 1.0 well-formedness, complete namespace behavior, DTD support, or other encodings. rxml 0.14.0 is a deliberately restricted XML 1.0 parser without DTDs, custom entities or processing instructions, and it rejects comments by default. It parses the shared catalog control exactly but rejects the shared order control (Error(RestrictedXml(\"comments\"))), so its second control is order-default-ns-restricted.xml without that comment and processing instruction. The xml-rs 1.0.0 package is a compatibility re-export of xml and excluded as a duplicate family. uppsala 0.12.1 parses both shared valid controls through its own namespace-aware DOM parser; the controls do not establish its XPath, XSD or XSLT features, DTD handling, other encodings, or complete XML 1.0 conformance. Downloads include transitive pulls and are adoption proxies; ranks compare selected independent paths only. RustyXML 0.3.0 passed valid-control parsing but exact repeatable AFL++ feedback was not established; see data/rust/xml/rustyxml-feedback-audit.md."
       }
     ]
   }
