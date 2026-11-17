@@ -22,7 +22,13 @@ from check_controls import canonical, typed  # noqa: E402
 API = {
     "smol_toml": "parse(text, { integersAsBigInt: true }) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true})",
     "toml_eslint_parser": "parseTOML(text, { tomlVersion: '1.0.0' }) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true}); typed tree from the returned syntax tree",
+    "ltd_j_toml": "TOML.parse[1.0](text, { joiner: '\\n', bigint: true }) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true})",
 }
+
+
+def report_name(package: str) -> str:
+    """Receipt file name for a package; scoped npm names lose '@' and '/' becomes '-'."""
+    return package.removeprefix("@").replace("/", "-")
 
 
 def verify(slug: str) -> Path:
@@ -51,7 +57,7 @@ def verify(slug: str) -> Path:
                             "tree_sha256": sha256(canonical(committed).encode()).hexdigest(),
                             "tree_matches_expected": True, "tree_matches_tomllib": True})
             print(f"{slug}: {path.name} typed tree matches", flush=True)
-    report = ROOT / f"data/javascript/toml/{manifest['package']}-tree-verification.json"
+    report = ROOT / f"data/javascript/toml/{report_name(manifest['package'])}-tree-verification.json"
     report.write_text(json.dumps({
         "schema_version": 1,
         "project": f"toml/javascript/{slug}",
