@@ -16,6 +16,18 @@ def json_file(path: Path):
     return json.loads(path.read_text())
 
 
+def unresolved_count(cell: dict) -> int:
+    """Read the bounded-search lead count from active or pilot cell records."""
+    direct = cell.get("unresolved_documentation_leads")
+    if type(direct) is int:
+        return direct
+    statuses = cell.get("leads_by_status")
+    if isinstance(statuses, dict) and type(statuses.get("unresolved")) is int:
+        return statuses["unresolved"]
+    direct = cell.get("unresolved_leads")
+    return direct if type(direct) is int else 0
+
+
 def rows(format_name: str | None, ecosystem: str | None) -> list[dict]:
     cells = [*json_file(ROOT / "data/cells.json")["cells"],
              *json_file(ROOT / "data/pilot-cells.json")["cells"]]
@@ -29,7 +41,7 @@ def rows(format_name: str | None, ecosystem: str | None) -> list[dict]:
              "verified_standard": cell["verified_standard_or_runtime_count"],
              "runnable": (covered[(cell["format"], cell["ecosystem"])]["containerized_verified"] +
                           covered[(cell["format"], cell["ecosystem"])]["standard_containerized_verified"]),
-             "unresolved_leads": cell.get("unresolved_documentation_leads", 0)}
+             "unresolved_leads": unresolved_count(cell)}
             for cell in cells
             if (not format_name or cell["format"] == format_name)
             and (not ecosystem or cell["ecosystem"] == ecosystem)]

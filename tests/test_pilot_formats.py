@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import build_matrix  # noqa: E402
 import format_registry  # noqa: E402
 import validate_catalog  # noqa: E402
+import parsarium  # noqa: E402
 
 
 def write(path: Path, value: object) -> None:
@@ -22,6 +23,12 @@ def write(path: Path, value: object) -> None:
 
 
 class PilotFormatTest(unittest.TestCase):
+    def test_pilot_unresolved_leads_use_status_counts(self):
+        self.assertEqual(parsarium.unresolved_count({"leads_by_status": {"unresolved": 7},
+                                                     "unresolved_leads": "data/go/mp3/leads.json"}), 7)
+        self.assertEqual(parsarium.unresolved_count({"unresolved_documentation_leads": 8}), 8)
+        self.assertEqual(parsarium.unresolved_count({"unresolved_leads": 11}), 11)
+
     def test_registry_keeps_existing_ten_active(self):
         self.assertEqual(len(format_registry.ACTIVE_FORMATS), 10)
         self.assertEqual(format_registry.PILOT_FORMATS, ("json", "xml", "mp3"))
