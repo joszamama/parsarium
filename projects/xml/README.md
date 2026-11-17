@@ -38,6 +38,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [sabre/xml / PHP](php/sabre_xml/README.md)
 - [simplexml_load_string(string $data, ?string $class_name = SimpleXMLElement::class, int $options = 0, string $namespace_or_prefix = "", bool $is_prefix = false) / PHP](php/stdlib_simplexml/README.md)
 - [symfony/dom-crawler / PHP](php/symfony_dom_crawler/README.md)
+- [xml_parser_create_ns(?string $encoding = null, string $separator = ":"): XMLParser; xml_parse(XMLParser $parser, string $data, bool $is_final = false): int / PHP](php/stdlib_xml_parser/README.md)
 - [beautifulsoup4 / Python](python/beautifulsoup4/README.md)
 - [defusedxml / Python](python/defusedxml/README.md)
 - [lxml / Python](python/lxml/README.md)
