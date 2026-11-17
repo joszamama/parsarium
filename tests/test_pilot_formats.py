@@ -37,7 +37,7 @@ class PilotFormatTest(unittest.TestCase):
         self.assertEqual(len(format_registry.ACTIVE_FORMATS), 10)
         self.assertIn("mp3", format_registry.ACTIVE_FORMATS)
         self.assertNotIn("mp3_id3v2", format_registry.FORMAT_BY_ID)
-        self.assertEqual(format_registry.PILOT_FORMATS, ("json", "xml", "yaml"))
+        self.assertEqual(format_registry.PILOT_FORMATS, ("json", "xml", "yaml", "toml"))
         self.assertEqual(format_registry.catalog_format("mp3_id3v2"), "mp3")
         self.assertEqual(len(format_registry.ECOSYSTEMS), 8)
 

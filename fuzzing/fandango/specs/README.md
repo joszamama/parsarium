@@ -11,6 +11,7 @@ It does not use Fanbase's mixed-layer, ID3-tagged `mp3` grammar.
 | `mp4.fan` | `ftyp`, `moov` (`mvhd`, one H.264 video `trak` with an `avc1` sample entry and one sample), `mdat` with one 2×2 IDR frame, optional `free` boxes | `mdat` before or after `moov`, optional access unit delimiter in the sample, optional `pasp`, compressor name, brands and compatible-brand count, timescale, duration, creation times, width/height, language, handler name, `free` payload | `mp4/c/gpac`, `mp4/cpp/opencv`, `mp4/c/bento4`, `mp4/cpp/exiv2` |
 | `pdf.fan` | one page, five objects, classic `xref` table, trailer | PDF version, MediaBox, base font, 1–4 content-stream operators, text, title | `pdf/cpp/poppler`, `pdf/c/poppler-glib`, `pdf/cpp/podofo`, `qpdf --check` |
 | `mp3_plain.fan` | untagged MPEG-1 or MPEG-2 Layer III stream | mono or stereo source, and 4, 8, or all source frames | `mp3/go/github_com_hajimehoshi_go_mp3`, `mp3/rust/symphonia_bundle_mp3` |
+| `toml.fan` | TOML 1.0.0 document: root keys, optional `[server]`, `[owner]` and `[keys]` tables, zero to three `[[products]]` | `=` spacing, every integer base, float forms, basic and literal strings with escapes, arrays, inline tables, offset and local date-times | Python `tomllib` (200 of 200 outputs from `--random-seed 1`) |
 
 Box sizes, the MP4 sample size and `stco` chunk offset, xref offsets, the stream `/Length` and `startxref` are `where` constraints of the form `<field> == f(...)`, which Fandango repairs directly during generation.
 
