@@ -1,6 +1,6 @@
 # C × DNS: selected parsers (pilot)
 
-Two verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Three verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -10,18 +10,20 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 | ---: | --- | --- | ---: | --- |
 | 1 | [c-ares](https://c-ares.org/docs/ares_dns_parse.html) | 1.34.9 | 43,027 | c-ares DNS record parser (src/lib/record/ares_dns_parse.c, ares_dns_name.c over ares_buf.c) |
 | 2 | [ldns](https://nlnetlabs.nl/documentation/ldns/wire2host_8h.html) | 1.8.4 | 1,240 | NLnet Labs ldns (wire2host.c, rr.c, packet.c, str2host/host2str for presentation) |
+| 3 | [knot](https://gitlab.nic.cz/knot/knot-dns/-/blob/v3.6.2/src/libknot/packet/pkt.h) | 3.6.2 | 483 | Knot DNS libknot (packet/pkt.c, packet/rrset-wire.c, dname.c; rrset-dump.c for presentation) |
 
 **c-ares 1.34.9** (MIT) parses local bytes with `ares_dns_parse(const unsigned char *buf, size_t buf_len, unsigned int flags, ares_dns_record_t **dnsrec)`. Both controls match the oracle summary. The response control covers 1,037 library lines in 58 files. AFL++ feedback repeats 3 times per control; response and query give 837/555 parser features and 393/272 AFL++ tuples, differing by 282 features and 125 tuples ([receipt](c-ares-feedback-differential.json)). Own C decoder; it is also the parser behind Node.js dns, pycares and many resolvers. It keeps AD/CD but not the reserved Z bit.
 
 **ldns 1.8.4** (BSD-3-Clause) parses local bytes with `ldns_status ldns_wire2pkt(ldns_pkt **packet, const uint8_t *data, size_t len)`. Both controls match the oracle summary. The response control covers 785 library lines in 42 files. AFL++ feedback repeats 3 times per control; response and query give 529/412 parser features and 406/329 AFL++ tuples, differing by 117 features and 83 tuples ([receipt](ldns-feedback-differential.json)). Own C decoder; getdns bundles gldns derived from ldns, and Unbound's internal sldns shares the lineage. Built without OpenSSL; presentation text comes from ldns_rdf2str. It has no Z getter, so z carries AD and CD only.
 
+**knot 3.6.2** (GPL-2.0-or-later) parses local bytes with `knot_pkt_t *knot_pkt_new(void *wire, uint16_t len, knot_mm_t *mm) + int knot_pkt_parse(knot_pkt_t *pkt, unsigned flags)`. Both controls match the oracle summary. The response control covers 957 library lines in 57 files. AFL++ feedback repeats 3 times per control; response and query give 875/266 parser features and 250/80 AFL++ tuples, differing by 609 features and 170 tuples ([receipt](knot-feedback-differential.json)). Own C decoder of the Knot DNS authoritative server, shipped as the libknot library (Debian source knot, binary libknot-dev). Only libknot is built (no daemon, utilities or modules); presentation text comes from knot_rrset_txt_dump_data, lower-cased by the harness. libknot exposes the reserved Z bit, AD and CD separately, so z carries all three.
+
 ## Remaining leads
 
-| Order | Lead | Metric | Input API lead | Family |
-| ---: | --- | ---: | --- | --- |
-| 1 | knot | 483 | `knot_pkt_new(wire, len, NULL) + knot_pkt_parse(pkt, 0) (libknot)` | Knot DNS libknot packet parser |
-| 2 | udns | 463 | `dns_initparse / dns_nextrr (udns)` | udns own parser |
-| 3 | getdns | 118 | `getdns_wire2msg_dict(wire, len, &dict)` | getdns over ldns-derived gldns wire code |
+| Order | Lead | Metric | Input API lead | Family | Status |
+| ---: | --- | ---: | --- | --- | --- |
+| 1 | udns | 463 | `dns_initparse / dns_nextrr (udns)` | udns own parser | unresolved |
+| 2 | getdns | 118 | `getdns_wire2msg_dict(wire, len, &dict)` | getdns over ldns-derived gldns wire code | unresolved |
 
 ## Checked, excluded or recorded separately
 

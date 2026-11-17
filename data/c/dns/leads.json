@@ -29,7 +29,7 @@
   },
   {
     "name": "knot",
-    "status": "unresolved",
+    "status": "resolved_verified_selected",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 483,
     "found_by": "registry search hit",
@@ -37,8 +37,10 @@
     "input_api_lead": "knot_pkt_new(wire, len, NULL) + knot_pkt_parse(pkt, 0) (libknot)",
     "family": "Knot DNS libknot packet parser",
     "note": "Debian popcon below 1,000; the knot source also builds the Knot DNS server.",
-    "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 3
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": 3,
+    "verification": "projects/dns/c/knot/verification.json",
+    "reason": "Pinned 3.6.2 passes both DNS controls; see parsers.json and data/c/dns/knot-feedback-differential.json."
   },
   {
     "name": "udns",

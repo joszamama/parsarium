@@ -1,0 +1,10 @@
+{
+  "knot": {
+    "release": "3.6.2",
+    "source": "https://secure.nic.cz/files/knot-dns/knot-3.6.2.tar.xz",
+    "source_sha256": "2916ac117ac77d1f2341a6562e47d797493521b791b414960a382cb5bc113e21",
+    "tag": "https://www.knot-dns.cz/download/",
+    "license": "GPL-2.0-or-later (COPYING; SPDX header in src/libknot/packet/pkt.c)",
+    "build_options": "static libknot only (make -C src libknot.la): --disable-daemon --disable-modules --disable-utilities --disable-documentation --disable-fastparser, embedded LMDB, no QUIC/XDP/Redis/systemd/D-Bus/libidn/nghttp2; GnuTLS and liburcu from the pinned Ubuntu image"
+  }
+}
