@@ -31,5 +31,42 @@
       "source": "data/go/mp3/registry-snapshot.json"
     },
     "project": "projects/mp3/go/github_com_hajimehoshi_go_mp3"
+  },
+  {
+    "name": "github.com/tcolgate/mp3",
+    "module": "github.com/tcolgate/mp3",
+    "version": "v0.0.0-20170426193717-e79c5a46d300",
+    "license": "MIT",
+    "input_api": "NewDecoder(io.Reader); Decoder.Decode(*Frame,*int); Frame.Header/Size/Samples",
+    "documentation": "https://pkg.go.dev/github.com/tcolgate/mp3@v0.0.0-20170426193717-e79c5a46d300",
+    "source": "https://github.com/tcolgate/mp3/tree/e79c5a46d300",
+    "scope": "MPEG Layer III frame headers and frame boundaries from an untagged byte stream; frame-level parsing only, no PCM decoding",
+    "family": "tcolgate/mp3 frame parser",
+    "family_note": "Independent Go frame parser. Also selected in tagged mp3_id3v2 cell; this plain MP3 path consumes untagged frames. Fork fgergo/mp3 shares its lineage.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 11,
+      "frame_bytes": 2298,
+      "samples_per_frame": 1152,
+      "bitrate": 64000
+    },
+    "differential_control": "controls/mp3/tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "channels": 2,
+      "frames": 12,
+      "frame_bytes": 1254,
+      "samples_per_frame": 576,
+      "bitrate": 32000
+    },
+    "evidence": "projects/mp3/go/github_com_tcolgate_mp3/verification.json",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 62,
+      "source": "data/go/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/go/github_com_tcolgate_mp3"
   }
 ]
