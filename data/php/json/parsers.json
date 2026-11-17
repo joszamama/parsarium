@@ -388,5 +388,175 @@
     },
     "project": "projects/json/php/pcrov_jsonreader",
     "not_verified": "Two valid nested object/array controls were run with exact type-tagged trees through json(); open() on the local control file and stream() on its file handle were cross-checked outside coverage. psr7Stream(), remote URIs, FLOATS_AS_STRINGS, value() tree building on containers, next()/name-targeted skipping, scalar roots, duplicate keys (the harness rejects them), empty or NUL member names, integers beyond PHP_INT_MAX, byte-order marks, non-UTF-8 input, large streaming inputs and malformed input remain unverified. pcrov/unicode UTF-8 validation is outside the coverage and AFL++ scope."
+  },
+  {
+    "name": "boundwize/jsonrecast",
+    "version": "1.0.37",
+    "license": "MIT",
+    "license_evidence": "https://github.com/boundwize/jsonrecast/blob/d37e0d808cd5c0a8f6e5d6f36ea363202950e399/LICENSE",
+    "documentation": "https://github.com/boundwize/jsonrecast/blob/d37e0d808cd5c0a8f6e5d6f36ea363202950e399/README.md",
+    "source": "https://github.com/boundwize/jsonrecast/tree/d37e0d808cd5c0a8f6e5d6f36ea363202950e399",
+    "input_api": "Boundwize\\JsonRecast\\JsonRecast::parse(string $source) over local bytes returns a JsonDocument AST; harness walks ObjectNode items, ArrayNode items, StringNode/BooleanNode values, NullNode and NumberNode::toIntOrFloat() into a type-tagged tree with members in source order",
+    "adapter": "projects/json/php/boundwize_jsonrecast/harness.php",
+    "composer_lock": "projects/json/php/boundwize_jsonrecast/composer.lock",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "type": "object",
+      "members": {
+        "name": {
+          "type": "string",
+          "value": "parsarium"
+        },
+        "version": {
+          "type": "number",
+          "value": 1
+        },
+        "ratio": {
+          "type": "number",
+          "value": -2.5
+        },
+        "enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "missing": {
+          "type": "null"
+        },
+        "tags": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string",
+              "value": "json"
+            },
+            {
+              "type": "string",
+              "value": "go"
+            },
+            {
+              "type": "string",
+              "value": "rfc8259"
+            }
+          ]
+        },
+        "nested": {
+          "type": "object",
+          "members": {
+            "level": {
+              "type": "number",
+              "value": 2
+            },
+            "items": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "number",
+                      "value": 1
+                    },
+                    "ok": {
+                      "type": "boolean",
+                      "value": false
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "number",
+                      "value": 2
+                    },
+                    "text": {
+                      "type": "string",
+                      "value": "café \"quoted\""
+                    }
+                  }
+                }
+              ]
+            },
+            "empty": {
+              "type": "object",
+              "members": {}
+            },
+            "list": {
+              "type": "array",
+              "items": []
+            }
+          }
+        }
+      }
+    },
+    "differential_control": "controls/json/nested-array.json",
+    "differential_expected_output": {
+      "type": "array",
+      "items": [
+        {
+          "type": "number",
+          "value": 1
+        },
+        {
+          "type": "number",
+          "value": 0.25
+        },
+        {
+          "type": "string",
+          "value": "two"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "type": "boolean",
+                  "value": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "members": {
+            "k": {
+              "type": "array",
+              "items": []
+            },
+            "n": {
+              "type": "object",
+              "members": {
+                "deep": {
+                  "type": "string",
+                  "value": "A"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "scope": "One complete JSON text from local bytes passed to documented JsonRecast::parse(string); harness walks the returned JsonDocument AST (ObjectNode/ArrayNode/StringNode/NumberNode::toIntOrFloat()/BooleanNode/NullNode) into an exact type-tagged tree with members in source order and duplicate names rejected.",
+    "family": "boundwize/jsonrecast Lexer and recursive-descent JsonParser (formatting-preserving AST)",
+    "family_note": "Own Lexer.php tokenizes the whole text (whitespace, punctuation, literals, strings) with NumberLexemeScanner for numbers, and JsonParser.php is a recursive-descent parser that builds an editable AST with offsets, whitespace and indentation metadata (IndentDetector). Each string token's text, quotes included, is decoded by ext/json json_decode for escape expansion; structure, keys order, literals and numbers stay in package code (NumberNode keeps the raw lexeme; toIntOrFloat() casts it). Distinct from seld/jsonlint, Laminas Decoder, JSON Machine, salsify, pcrov and ext/json.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 702666,
+      "source": "https://packagist.org/packages/boundwize/jsonrecast",
+      "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+      "snapshot": "data/php/json/registry-snapshot.json"
+    },
+    "project": "projects/json/php/boundwize_jsonrecast",
+    "not_verified": "Two valid nested object/array controls were run through parse(string) with exact ordered type-tagged trees. Traversal, visitors and formatting-preserving printing, maximum-depth guards, duplicate member names (the harness rejects them), scalar roots, big integers beyond PHP_INT_MAX, -0, byte-order marks, non-UTF-8 input and malformed input remain unverified. String escape decoding is ext/json on single string tokens."
   }
 ]

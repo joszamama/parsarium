@@ -1,6 +1,6 @@
 # PHP × JSON: selected parsers (pilot)
 
-5 control-verified third-party paths selected. The ceiling is ten; this pilot does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+6 control-verified third-party paths selected. The ceiling is ten; this pilot does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
 
 PHP code mostly parses JSON with the bundled `json_decode` (ext/json). The most downloaded Packagist JSON helpers wrap it, so they are excluded from the third-party ranking rather than counted as separate parsers.
 
@@ -15,8 +15,11 @@ Packagist total downloads, from the bounded search captured 2026-11-17 ([snapsho
 | 3 | [halaxa/json-machine](https://packagist.org/packages/halaxa/json-machine) | 1.2.6 | 30,443,415 | Top-level object/array members; values decoded by ext/json | JSON Machine Lexer/Parser plus PHP ext/json |
 | 4 | [salsify/json-streaming-parser](https://packagist.org/packages/salsify/json-streaming-parser) | v8.3.1 | 7,715,575 | One object/array root read from a stream; listener events built into values | salsify JsonStreamingParser state machine |
 | 5 | [pcrov/jsonreader](https://packagist.org/packages/pcrov/jsonreader) | 1.0.4 | 1,520,757 | Local JSON bytes through its pull reader; exact object and array trees | pcrov JSON lexer and reader state machine |
+| 6 | [boundwize/jsonrecast](https://packagist.org/packages/boundwize/jsonrecast) | 1.0.37 | 702,666 | One JSON text via `JsonRecast::parse(string)`; AST walked into an exact ordered type-tagged tree | boundwize/jsonrecast Lexer and recursive-descent JsonParser (formatting-preserving AST) |
 
 Composer depends on seld/jsonlint, which inflates the download count. Composer calls `json_decode` first and uses `JsonParser` to report errors. Laminas is abandoned; its default API route calls ext/json, so this adapter explicitly enables its own PHP Decoder. JSON Machine has an independent streaming parser for member boundaries, but the selected decoder delegates each member value to PHP ext/json. salsify decodes strings, escapes and numbers in its own code; the adapter supplies a listener that builds objects and lists, and rejects input that does not end exactly one document. pcrov/jsonreader has its own pull lexer and state machine; both valid controls match an independent type-tagged JSON tree, and its parser-only AFL bridge changes three source features and three tuples between them.
+
+boundwize/jsonrecast 1.0.37 documents `JsonRecast::parse(string)`, which returns an editable, formatting-preserving AST. Its own lexer, number scanner and recursive-descent parser build the tree; each string token, quotes included, is unescaped by `json_decode`, while structure, member order, literals and numbers stay in package code (`NumberNode::toIntOrFloat()` casts the raw lexeme). Both valid controls match the independent Python `json` oracle with member order and integer/float kinds. Xdebug covers 421 package lines on the object control; the parser-line AFL++ bridge is stable on repeat and differs by 35 lines and 35 tuples between the controls. 26 of those lines are in `IndentDetector`, the formatting metadata pass that `parse()` runs, and 9 in the lexer, parser and number scanner ([receipt](boundwize-jsonrecast-feedback-differential.json)). The package was first released in 2026; its download count may be driven by a few dependents.
 
 ## Standard API (unranked)
 
@@ -43,7 +46,6 @@ Numeric leads from the same snapshot, not verified and not selected. JWT, JSON S
 | [maxakawizard/json-collection-parser](https://packagist.org/packages/maxakawizard/json-collection-parser) | 1.10.1 | 966,052 | excluded | Listener over salsify/json-streaming-parser; shared selected family. |
 | [symfony/json-streamer](https://packagist.org/packages/symfony/json-streamer) | v8.1.10 | 946,545 † | excluded | Pinned probe: with the schema-free `Type::mixed()` the generated reader is one json_decode call with associative arrays; both controls lose `{}`/`[]` and run the same 129 package lines ([evidence](symfony-json-streamer-lead-check.json)). |
 | [webmozart/json](https://packagist.org/packages/webmozart/json) | 1.2.2 | 884,156 | excluded | json_decode, with seld/jsonlint only for error messages. |
-| [boundwize/jsonrecast](https://packagist.org/packages/boundwize/jsonrecast) | 1.0.37 | 702,666 | unresolved | Own lexer and recursive-descent AST parser; screening probe matched both controls exactly. |
 | [karriere/json-decoder](https://packagist.org/packages/karriere/json-decoder) | v5.1.0 | 474,219 | excluded | Maps one json_decode result onto classes. |
 | [laktak/hjson](https://packagist.org/packages/laktak/hjson) | v2.3.1 | 262,430 | unresolved | Own Hjson (JSON superset) character parser; screening probe matched both controls exactly. |
 | [kherge/json](https://packagist.org/packages/kherge/json) | 3.0.1 | 259,958 | excluded | json_decode, with seld/jsonlint only for error messages. |
