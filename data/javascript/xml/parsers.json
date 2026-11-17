@@ -146,5 +146,56 @@
       ]
     },
     "project": "projects/xml/javascript/fast_xml_parser"
+  },
+  {
+    "name": "@xmldom/xmldom",
+    "version": "0.9.12",
+    "license": "MIT",
+    "npm_integrity": "sha512-5AXjrcMClTryPe9LgZrygpB1lj7s0S9E0+W+AHaVKAVyHanafK86iPSvG5xHVSp/jC+VH1UXu0TAEmY279xH7A==",
+    "tarball_sha256": "08245e18c248b957b4c6e07f8549ad5f55ae11b7a8abd4c1113a0fd61ddc67ee",
+    "input_api": "new DOMParser({onError}).parseFromString(text, 'application/xml') on in-memory text from a strict UTF-8 TextDecoder of local bytes; the adapter's onError throws on every warning, error or fatalError; the summary reads the returned Document's namespaceURI/localName/attributes",
+    "input_note": "parseFromString accepts only a string for XML MIME types, so the adapter decodes the local bytes; under the general protocol's local in-memory text rule the package itself parses all markup structure.",
+    "documentation": "https://github.com/xmldom/xmldom/blob/0.9.12/readme.md",
+    "source": "https://github.com/xmldom/xmldom/tree/0.9.12",
+    "scope": "One namespace-aware XML 1.0 document from locally decoded text as a W3C DOM Level 2 Core Document with resolved element and attribute namespace URIs",
+    "family": "xmldom XMLReader tokenizer + DOMHandler DOM builder (jindw/xmldom lineage)",
+    "family_note": "@xmldom/xmldom 0.9.12 has no runtime dependencies. lib/sax.js holds its own XMLReader (a hand-written indexOf/regex tag scanner with namespace prefix scoping and entity decoding via lib/entities.js and lib/grammar.js); lib/dom-parser.js feeds those events to DOMHandler, which builds lib/dom.js nodes. It does not import sax-js, saxes, expat, or libxml2; its lib/sax.js is unrelated to the sax npm package despite the file name. The deprecated unscoped xmldom 0.6.0 is the predecessor of this family. Lenient by default: without onError, warnings and recoverable errors are logged and parsing continues, so the adapter makes every report fatal.",
+    "control": "controls/xml/catalog-ns.xml",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 326406305,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@xmldom/xmldom",
+      "captured_at_utc": "2026-11-17T03:39:15Z",
+      "snapshot": "data/javascript/xml/registry-snapshot.json"
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/javascript/xmldom_xmldom",
+    "license_evidence": "https://github.com/xmldom/xmldom/blob/0.9.12/LICENSE"
   }
 ]

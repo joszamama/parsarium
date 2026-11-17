@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T08:17:06.775450+00:00",
-  "projects_total": 3,
-  "projects_passed": 3,
+  "checked_at_utc": "2026-11-17T08:29:25.662351+00:00",
+  "projects_total": 4,
+  "projects_passed": 4,
   "differential_kind": "fixed_valid_default_namespace_variant",
   "standard_feedback": "none: Node.js core ships no XML parser API",
   "results": [
@@ -168,6 +168,64 @@
       },
       "differential_only_features_by_file": {
         "saxes.js": 26
+      }
+    },
+    {
+      "project": "xml/javascript/xmldom_xmldom",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "784138caa6c3b652fe4e2042b61c32be0f14b25c7793c7e9a819cfebd7b0022f",
+      "base_image_id": "sha256:ff27fbe364b1464ab94e6d4895c9cef0c2b1d2e58e48ff97935fe6de57dc4f3d",
+      "overlay_image_id": "sha256:5885c1943b4ee3526a0439e9eac9a40fecd00c339062d5bdc9f96e5242892e88",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 214,
+      "control_afl_tuples": 234,
+      "differential_parser_features": 220,
+      "differential_afl_tuples": 240,
+      "parser_feature_difference": 28,
+      "afl_tuple_difference": 28,
+      "control_only_features_by_file": {
+        "lib/dom-parser.js": 5,
+        "lib/dom.js": 4,
+        "lib/sax.js": 2
+      },
+      "differential_only_features_by_file": {
+        "lib/dom-parser.js": 1,
+        "lib/dom.js": 4,
+        "lib/sax.js": 12
       }
     }
   ]
