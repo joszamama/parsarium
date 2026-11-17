@@ -33,4 +33,5 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [quick-xml / Rust](rust/quick_xml/README.md)
 - [roxmltree / Rust](rust/roxmltree/README.md)
 - [xml / Rust](rust/xml/README.md)
+- [xml5ever / Rust](rust/xml5ever/README.md)
 - [xmlparser / Rust](rust/xmlparser/README.md)
