@@ -1,6 +1,6 @@
 # Python × YAML: pilot ranking
 
-Eight control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection. A path is an API route, not necessarily an independent parser engine.
+Nine control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection. A path is an API route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -15,7 +15,8 @@ PyPI Stats `last_month` downloads excluding known mirrors, captured 2026-11-17 (
 | 5 | [srsly](https://github.com/explosion/srsly#yaml) | 3.0.1 | 24,260,205 | srsly.yaml_loads(local YAML text as str) | Wrapper: srsly.yaml_loads over ruamel.yaml 0.19.1 YAML(typ='safe', pure=True), the pure-Python ruamel.yaml loader; not an independent parser |
 | 6 | [rapidyaml](https://github.com/biojppm/rapidyaml-python/blob/v0.15.2/README.md) | 0.15.2 | 224,758 | ryml.parse_in_arena(local YAML bytes) then Tree.resolve(); scalars typed by the adapter | rapidyaml (ryml) 0.15.2 C++ parse engine and tree, through the rapidyaml Python package's SWIG _ryml extension; same parser family as the C++ rapidyaml path (which pins 0.16.0) |
 | 7 | [yamlcore](https://pypi.org/project/yamlcore/0.1.1/) | 0.1.1 | 92,413 | yaml.load(local YAML bytes, Loader=yamlcore.CoreLoader) | yamlcore CoreLoader: PyYAML 6.0.3 pure-Python BaseLoader (Reader/Scanner/Parser/Composer) with yamlcore's YAML 1.2 core-schema resolver and constructors; not CCoreLoader (libyaml) |
-| 8 | [ryaml](https://github.com/emmatyping/ryaml/blob/v0.5.1/README.md) | 0.5.1 | 23,629 | ryaml.loads(str) on the UTF-8 decoding of local YAML bytes | serde_yaml 0.9.34 over unsafe-libyaml 0.2.11 (Rust transpilation of libyaml) through the ryaml PyO3 extension; same family as the Rust cell serde_yaml and unsafe-libyaml paths and the libyaml family |
+| 8 | [yaml-rs](https://github.com/lava-sh/yaml-rs/blob/0.1.6/README.md) | 0.1.6 | 80,054 | yaml_rs.load(local YAML bytes) | granit-parser (git e10ee63; saphyr-parser / yaml-rust lineage) with yaml-rs's own Rust loader, through the yaml-rs PyO3 extension; same parser lineage as the Rust cell granit-parser, saphyr-parser and serde-saphyr paths |
+| 9 | [ryaml](https://github.com/emmatyping/ryaml/blob/v0.5.1/README.md) | 0.5.1 | 23,629 | ryaml.loads(str) on the UTF-8 decoding of local YAML bytes | serde_yaml 0.9.34 over unsafe-libyaml 0.2.11 (Rust transpilation of libyaml) through the ryaml PyO3 extension; same family as the Rust cell serde_yaml and unsafe-libyaml paths and the libyaml family |
 
 Both controls must equal the hand-written typed trees in [check_controls.py](../../../controls/yaml/check_controls.py); see [verification.json](verification.json).
 
@@ -32,7 +33,6 @@ Both controls must equal the hand-written typed trees in [check_controls.py](../
 | ruyaml | excluded_predecessor_fork | 1,762,840 | ruamel.yaml 0.17 fork | Excluded as a renamed predecessor of the selected ruamel.yaml parser (zend-json / trust-dns-proto precedent): ruyaml 0.91.0 forks ruamel.yaml 0.17.17 (its CHANGES stop there) under a new module name and has had no release since 2021; 1,485 of 2,081 distinct lines longer than 25 characters in its scanner/parser/composer/reader/constructor/resolver also occur in ruamel.yaml 0.19.1, the rest being four years of upstream changes. |
 | yamlordereddictloader | excluded_mapping_layer | 345,363 | PyYAML with OrderedDict mappings | Excluded as a mapping layer over PyYAML (oyaml/laravie precedent): yamlordereddictloader 0.4.2 (one 88-line module) subclasses yaml.Loader/SafeLoader and only replaces construct_mapping/construct_yaml_map to build OrderedDict instead of dict from PyYAML's composed nodes; it changes no scanning, parsing or resolution, and Python dicts already keep insertion order. |
 | yamlloader | excluded_mapping_layer | 250,488 | PyYAML with OrderedDict mappings | Excluded as a mapping layer over PyYAML (oyaml/laravie precedent): yamlloader 1.6.0 ordereddict/loaders.py adds an OrderedLoaderMixin whose only code is construct_yaml_map/construct_mapping building OrderedDict from PyYAML's composed nodes, mixed into each PyYAML loader class; no scanning, parsing or resolution of its own. |
-| yaml-rs | unresolved | 80,054 | saphyr / granit-parser (Rust) via PyO3 | Not run this round (80,054 last-month downloads, below every selected path); building it with source coverage needs a nightly Rust toolchain and git-pinned pyo3, saphyr fork and granit-parser dependencies from its Cargo.toml. |
 | ruamel.yaml.clibz | shared_family | 69,913 | ruamel.yaml.clib C sources built with setuptools-zig | Not run: same C loader family as the selected ruamel.yaml.clib path built with a different toolchain; 69,913 last-month downloads. |
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).

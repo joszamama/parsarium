@@ -59,6 +59,15 @@ TARGETS = {
         'scope': ('executed LLVM source regions and branch directions of unsafe-libyaml 0.2.11 under {prefix}, compiled '
                   'into the source-built {package} {release} _ryaml extension (serde_yaml, pythonize and the PyO3 module '
                   'are not counted)')},
+    'yaml_rs': {
+        'package': 'yaml-rs',
+        'prefix': '/usr/local/cargo/git/checkouts/granit-parser-adcc536166983974/e10ee63/src/',
+        'platform': 'linux/arm64',
+        'required': ('scanner.rs', 'parser.rs'),
+        'differences': {'scanner_rs_feature_difference': 'scanner.rs:', 'parser_rs_feature_difference': 'parser.rs:'},
+        'scope': ('executed LLVM source regions and branch directions of granit-parser (git e10ee63) under {prefix}, '
+                  'compiled into the source-built {package} {release} _yaml_rs extension (yaml-rs\'s own loader, pyo3, '
+                  'saphyr and lexical-core are not counted)')},
     # Wrappers: features cover the wrapper package and the parser package it calls under site-packages.
     'srsly': {
         'package': 'srsly', 'prefix': SITE, 'platform': 'linux/amd64',

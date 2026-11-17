@@ -3329,6 +3329,473 @@
     "project": "projects/yaml/python/yamlcore"
   },
   {
+    "name": "yaml-rs",
+    "version": "0.1.6",
+    "license": "Unlicense",
+    "license_evidence": "https://pypi.org/pypi/yaml-rs/0.1.6/json (License-Expression: Unlicense; UNLICENSE in the sdist pinned by SHA-256); granit-parser MIT OR Apache-2.0 at the locked revision",
+    "input_api": "yaml_rs.load(local YAML bytes); yaml_rs.loads(the decoded str) and yaml_rs.load(local binary stream) give the same tree",
+    "documentation": "https://github.com/lava-sh/yaml-rs/blob/0.1.6/README.md",
+    "documentation_evidence": "The yaml-rs README at tag 0.1.6 (also the sdist README) documents yaml_rs.loads(str) and yaml_rs.load(...) returning Python values; py-src/yaml_rs/_lib.py defines load(fp: BinaryIO | bytes | str) (a str is a file path) and loads(s: str).",
+    "source": "https://files.pythonhosted.org/packages/9f/2a/f4bcd7aa533a49cb3fd8acb66da41926465ed3ee763db017c902be46f612/yaml_rs-0.1.6.tar.gz",
+    "source_sha256": "e57f7f8c0f78019e43833054cb8cf6354dff4e843d22ba87aa4c4d440ce617bd",
+    "dependencies": [],
+    "scope": "One YAML 1.2 document from local bytes as a typed tree on the two schema-neutral valid controls. granit-parser (git e10ee63) scans and parses into events; yaml-rs's own Rust loader builds the Python values (aliases expanded, YAML 1.2 core-schema scalar resolution in src/load/scalar.rs; parse_datetime at its default, and the controls hold no timestamps). No tags, merge keys, multi-document streams or malformed input were tested.",
+    "family": "granit-parser (git e10ee63; saphyr-parser / yaml-rust lineage) with yaml-rs's own Rust loader, through the yaml-rs PyO3 extension; same parser lineage as the Rust cell granit-parser, saphyr-parser and serde-saphyr paths",
+    "family_note": "Python binding with its own loader: yaml-rs src/load/loads.rs drives granit-parser events and builds Python objects directly, with its own alias handling, duplicate-key policy and YAML 1.2 core scalar resolution in src/load/scalar.rs. granit-parser is a saphyr-parser fork (yaml-rust lineage), shared with the Rust cell granit-parser and serde-saphyr paths; a separate PyPI package and API.",
+    "shared_families": [
+      "granit-parser (Rust cell path)",
+      "saphyr-parser / yaml-rust lineage (Rust cell paths)"
+    ],
+    "control": "controls/yaml/catalog.yaml",
+    "expected_output": {
+      "root": "map",
+      "nodes": {
+        "bool": 2,
+        "float": 2,
+        "int": 7,
+        "map": 7,
+        "null": 1,
+        "seq": 2,
+        "str": 13
+      },
+      "max_depth": 3,
+      "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+      "tree": [
+        "map",
+        [
+          [
+            "kind",
+            [
+              "str",
+              "catalog"
+            ]
+          ],
+          [
+            "version",
+            [
+              "int",
+              "2"
+            ]
+          ],
+          [
+            "ratio",
+            [
+              "float",
+              "0.25"
+            ]
+          ],
+          [
+            "offset",
+            [
+              "int",
+              "-17"
+            ]
+          ],
+          [
+            "enabled",
+            [
+              "bool",
+              true
+            ]
+          ],
+          [
+            "retired",
+            [
+              "bool",
+              false
+            ]
+          ],
+          [
+            "missing",
+            [
+              "null"
+            ]
+          ],
+          [
+            "title",
+            [
+              "str",
+              "Café \"quoted\"\tend"
+            ]
+          ],
+          [
+            "single",
+            [
+              "str",
+              "it's here"
+            ]
+          ],
+          [
+            "tags",
+            [
+              "seq",
+              [
+                [
+                  "str",
+                  "alpha"
+                ],
+                [
+                  "str",
+                  "beta"
+                ],
+                [
+                  "str",
+                  "gamma delta"
+                ]
+              ]
+            ]
+          ],
+          [
+            "point",
+            [
+              "map",
+              [
+                [
+                  "lat",
+                  [
+                    "int",
+                    "1"
+                  ]
+                ],
+                [
+                  "lon",
+                  [
+                    "float",
+                    "-2.5"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "items",
+            [
+              "seq",
+              [
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "7"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "first item"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "line one\nline two\n"
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "8"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "Zürich"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "folded text\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "defaults",
+            [
+              "map",
+              [
+                [
+                  "retries",
+                  [
+                    "int",
+                    "3"
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "base"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "service",
+            [
+              "map",
+              [
+                [
+                  "settings",
+                  [
+                    "map",
+                    [
+                      [
+                        "retries",
+                        [
+                          "int",
+                          "3"
+                        ]
+                      ],
+                      [
+                        "label",
+                        [
+                          "str",
+                          "base"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "edge"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "differential_control": "controls/yaml/order.yaml",
+    "differential_expected_output": {
+      "root": "seq",
+      "nodes": {
+        "bool": 1,
+        "float": 2,
+        "int": 5,
+        "map": 7,
+        "null": 1,
+        "seq": 5,
+        "str": 11
+      },
+      "max_depth": 4,
+      "tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46",
+      "tree": [
+        "seq",
+        [
+          [
+            "map",
+            [
+              [
+                "order",
+                [
+                  "str",
+                  "A-7"
+                ]
+              ],
+              [
+                "lines",
+                [
+                  "seq",
+                  [
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "Xé-1"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "2"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "12.5"
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "B '2'"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "1"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "0.75"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "flags",
+                [
+                  "seq",
+                  []
+                ]
+              ],
+              [
+                "meta",
+                [
+                  "map",
+                  []
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              [
+                "int",
+                "1"
+              ],
+              [
+                "seq",
+                [
+                  [
+                    "int",
+                    "2"
+                  ],
+                  [
+                    "int",
+                    "3"
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "k",
+                    [
+                      "str",
+                      "v"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "str",
+            "plain multi word"
+          ],
+          [
+            "str",
+            "line\nbreak"
+          ],
+          [
+            "str",
+            "kept\n  indented"
+          ],
+          [
+            "null"
+          ],
+          [
+            "bool",
+            false
+          ]
+        ]
+      ]
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 80054,
+      "source": "https://pypistats.org/api/packages/yaml-rs/recent?period=month",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/yaml/registry-snapshot.json"
+    },
+    "project": "projects/yaml/python/yaml_rs"
+  },
+  {
     "name": "ryaml",
     "version": "0.5.1",
     "license": "MIT",
