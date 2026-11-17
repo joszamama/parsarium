@@ -16,7 +16,7 @@ npm downloads over 2026-10-17 to 2026-11-15 (30 days), observed 2026-11-17T03:16
 | --- | --- | --- |
 | [JSON.parse(text)](https://tc39.es/ecma262/#sec-json.parse) after strict UTF-8 [TextDecoder](https://nodejs.org/download/release/v26.10.0/docs/api/util.html#class-utiltextdecoder) | Node.js 26.10.0 | V8 native JSON.parse |
 
-`JSON.parse` takes a string, so the adapter decodes bytes first. V8 implements it natively; no parser source lines or AFL++ feedback are attributed to it.
+`JSON.parse` takes a string, so the adapter decodes bytes first. V8 implements it natively. A staged AFL++ bridge maps observed `JsonParser` function entries into tuples; it does not provide parser source lines or V8 basic-block edges ([bridge receipt](../../../fuzzing/afl-native/json/javascript/stdlib_json_parse/verification.json)).
 
 ## Lead log
 
