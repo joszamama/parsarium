@@ -256,3 +256,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build yaml python ruamel_yaml_clib
+python3 parsarium.py run yaml python ruamel_yaml_clib controls/yaml/catalog.yaml
+```

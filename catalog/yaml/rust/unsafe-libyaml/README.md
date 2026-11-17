@@ -244,3 +244,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build yaml rust unsafe_libyaml
+python3 parsarium.py run yaml rust unsafe_libyaml controls/yaml/catalog.yaml
+```

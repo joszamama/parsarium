@@ -244,3 +244,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build yaml rust serde_saphyr
+python3 parsarium.py run yaml rust serde_saphyr controls/yaml/catalog.yaml
+```

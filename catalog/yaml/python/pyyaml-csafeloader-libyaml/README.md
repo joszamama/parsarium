@@ -256,3 +256,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build yaml python pyyaml_csafeloader
+python3 parsarium.py run yaml python pyyaml_csafeloader controls/yaml/catalog.yaml
+```
