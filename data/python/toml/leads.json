@@ -31,13 +31,21 @@
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
       "family": "Rust toml crate via PyO3 (toml_parser family)",
       "api_lead": "rtoml.loads(str)",
-      "note": "PyO3 extension over the Rust toml crate: its parser source is Rust, so a path needs a source build with LLVM coverage of the Rust parser (the Python JSON jiter/orjson native route). Not attempted in this pass; the Rust toml crate family is covered by the Rust cell.",
+      "note": "PyO3 extension (_rtoml cdylib) over the Rust toml crate 1.1 with preserve_order (toml_parser family, shared with the selected Rust toml and toml_edit paths).",
       "source": "https://pypi.org/project/rtoml/",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false,
+      "status": "unresolved_runnability_pending",
+      "api_lead_checked_against_pinned_release": true,
       "release": "0.14.0",
       "release_sdist_sha256": "e0f95a59e3fac6394985d59ce18a0c06f2176f2eb9dec2fb8c1105febaf05c59",
-      "license": "MIT"
+      "license": "MIT",
+      "release_wheel_sha256": "c3bccc482ab4e5a0cebff9d90b40091e89634d377fde7daed14478effc18ecc4",
+      "evidence": {
+        "checked_on_utc": "2026-11-17",
+        "run": "python:3.13-slim (sha256:1c0252262bd9a91b72301c941e478fff5c3dfeb23f146d034d590631cdc75e87, linux/arm64), rtoml 0.14.0 cp313 manylinux aarch64 wheel; rtoml.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
+        "service-config.toml": "matches the hand-written typed tree",
+        "typed-scalars.toml": "matches the hand-written typed tree",
+        "blocker": "The parser runs as compiled Rust inside the extension, so Python line coverage and the Python AFL++ bridge see none of it. A path needs a source build of the sdist with Rust instrument-coverage and SanitizerCoverage scoped to the toml/toml_parser crates inside the CPython process; that build was not done in this round."
+      }
     },
     {
       "name": "pytoml",
@@ -47,8 +55,17 @@
       "api_lead": "pytoml.loads(str)",
       "note": "Deprecated by its author.",
       "source": "https://pypi.org/project/pytoml/",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.1.21",
+      "license": "MIT",
+      "release_wheel_sha256": "57a21e6347049f73bfb62011ff34cd72774c031b9828cb628a752225136dfc33",
+      "evidence": {
+        "checked_on_utc": "2026-11-17",
+        "run": "python:3.13-slim (sha256:1c0252262bd9a91b72301c941e478fff5c3dfeb23f146d034d590631cdc75e87, linux/arm64), pytoml 0.1.21 py2.py3-none-any wheel; pytoml.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
+        "service-config.toml": "matches the hand-written typed tree",
+        "typed-scalars.toml": "rejected with TomlError '<string>(6, 8): msg' at `hex = 0xDEAD_BEEF`: the deprecated TOML 0.4 parser has no hexadecimal, octal or binary integers"
+      }
     },
     {
       "name": "pytomlpp",
@@ -56,21 +73,41 @@
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
       "family": "toml++ via pybind11",
       "api_lead": "pytomlpp.loads(str)",
-      "note": "Native extension over C++ toml++.",
+      "note": "pybind11 extension over the C++ toml++ parser (the selected C++ toml++ family).",
       "source": "https://pypi.org/project/pytomlpp/",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_runnability_pending",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "1.1.0",
+      "release_sdist_sha256": "61a0f73e7ba2fe8bba4e99ce6d2701491885850b53aad8f3e46d03c4b31e594d",
+      "evidence": {
+        "checked_on_utc": "2026-11-17",
+        "run": "python:3.13-slim (digest sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90, linux/amd64 under emulation; no linux/aarch64 wheel is published), pytomlpp 1.1.0 cp313 manylinux x86_64 wheel; pytomlpp.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
+        "service-config.toml": "matches the hand-written typed tree",
+        "typed-scalars.toml": "matches the hand-written typed tree",
+        "blocker": "No linux/aarch64 wheel exists (pip cannot build the sdist without a C++ toolchain), and the parser is compiled toml++ C++ inside the extension: Python line coverage and the Python AFL++ bridge see none of it. A path needs a source build with C++ coverage and AFL++ instrumentation of the toml++ headers inside the extension; not done in this round."
+      }
     },
     {
       "name": "toml-rs",
       "metric_value": 18062,
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
-      "family": "Rust toml crate via PyO3",
+      "family": "toml-rs (lava-sh; PyO3 extension with a Rust TOML parser from the lava-sh/toml for_python_toml_rs git branch)",
       "api_lead": "toml_rs.loads(str)",
-      "note": null,
+      "note": "PyO3 extension; its sdist Cargo.toml pulls the TOML v1.0.0 parser from the lava-sh/toml git branch for_python_toml_rs and lexical-core from git.",
       "source": "https://pypi.org/project/toml-rs/",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_runnability_pending",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.4.3",
+      "license": "Unlicense",
+      "release_sdist_sha256": "28fcd2592409f2b2e0721d58b10660f70ef8781e9e5ca45905bbcbeded9d13af",
+      "release_wheel_sha256": "ce8bfa674b5cb19a9f647acd827c81ab62647c409b129acd2f42866d935daf82",
+      "evidence": {
+        "checked_on_utc": "2026-11-17",
+        "run": "python:3.13-slim (sha256:1c0252262bd9a91b72301c941e478fff5c3dfeb23f146d034d590631cdc75e87, linux/arm64), toml-rs 0.4.3 cp313 manylinux aarch64 wheel; toml_rs.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
+        "service-config.toml": "matches the hand-written typed tree",
+        "typed-scalars.toml": "matches the hand-written typed tree",
+        "blocker": "Compiled Rust parser inside the extension (same coverage problem as rtoml), and its parser source is a git branch rather than a crates.io release; the family relation of lava-sh/toml to toml-rs/toml was not established. Not built from source in this round."
+      }
     },
     {
       "name": "qtoml",
@@ -80,8 +117,17 @@
       "api_lead": "qtoml.loads(str)",
       "note": null,
       "source": "https://pypi.org/project/qtoml/",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.3.1",
+      "license": "MIT",
+      "release_wheel_sha256": "de4ec4f759a77931cda324a06e2c2fbbb2209372c42f4741c2ab6748f15640b4",
+      "evidence": {
+        "checked_on_utc": "2026-11-17",
+        "run": "python:3.13-slim (sha256:1c0252262bd9a91b72301c941e478fff5c3dfeb23f146d034d590631cdc75e87, linux/arm64), qtoml 0.3.1 py3-none-any wheel; qtoml.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
+        "service-config.toml": "matches the hand-written typed tree",
+        "typed-scalars.toml": "rejected with TOMLDecodeError \"Didn't find expected newline (line 27, column 28)\" at `offset = 1979-05-27T00:32:00.5-07:00`: an offset date-time with fractional seconds is not accepted"
+      }
     }
   ],
   "excluded": [
