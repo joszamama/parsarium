@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "source_scope": "AFL_LLVM_ALLOWLIST=src:imagpnm.cpp",
+  "control": {
+    "path": "controls/ascii_pnm/red-green.ppm",
+    "sha256": "f1e86f7bc611601fed6f44a263d8c1f026dd1d0fd66a7dbc8530e245f5561bf1",
+    "format": "P3",
+    "feedback_edges": 44
+  },
+  "valid_variant": {
+    "path": "controls/ascii_pnm/black-white.pgm",
+    "sha256": "29f6a1ca59a8ff644dc66ce3f9b77abd50d6245fedebb35cdf18b5448547051b",
+    "format": "P2",
+    "feedback_edges": 44
+  },
+  "shared_edge_ids": 30,
+  "control_only_edge_ids": 14,
+  "variant_only_edge_ids": 14,
+  "engine": "afl-showmap 4.33c, one fixed valid input per run",
+  "command": "afl-showmap -q -m none -t 10000 -o OUTPUT -- /work/fuzzer /input/control",
+  "pass": true
+}
