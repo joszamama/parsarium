@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "pass": true,
+  "project": "mp3/rust/minimp3",
+  "feedback_scope": "AFL++ CLASSIC allowlist of 47 vendored minimp3.h C decoder functions compiled by afl-clang-fast; Rust binding, harness and std are built by rustc without AFL instrumentation",
+  "first_control": "controls/mp3/tone-44k-mono.mp3",
+  "first_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "first_control_output": {
+    "sample_rate": 44100,
+    "channels": 1,
+    "layer": 3,
+    "bitrate_kbps": 64,
+    "frames": 11,
+    "samples_per_channel": 12672,
+    "pcm_samples": 12672,
+    "pcm_sha256": "0641e37cb18148b29cfc23ffc8c479115a4e042a0952a91570e92888aec0a33e"
+  },
+  "second_control": "controls/mp3/tone-22k-stereo.mp3",
+  "second_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+  "second_control_output": {
+    "sample_rate": 22050,
+    "channels": 2,
+    "layer": 3,
+    "bitrate_kbps": 32,
+    "frames": 12,
+    "samples_per_channel": 6912,
+    "pcm_samples": 13824,
+    "pcm_sha256": "ac01db4bb3d3c907d3b51ecaefd6497cce1a693035114377eeedef2ef5afb653"
+  },
+  "repeats_per_control": 5,
+  "first_native_tuples": 93,
+  "second_native_tuples": 48,
+  "native_tuple_difference": 61,
+  "repeat_maps_identical": true,
+  "first_raw_nonzero_tuples": 381,
+  "second_raw_nonzero_tuples": 371,
+  "raw_tuple_difference": 66,
+  "raw_repeat_maps_identical": true,
+  "showmap_note": "Default afl-showmap 4.04c output (the Go minimp3 receipt method) lists a subset of the nonzero tuples that -r lists; on the primary control the listed tuples had raw hit counts 1, 2, 3, 4, 8 or 16. Both views are recorded.",
+  "source_line_repeats_per_control": 3,
+  "source_lines_identical_across_repeats": true,
+  "first_native_source_lines": 918,
+  "second_native_source_lines": 931,
+  "native_lines_only_first": 30,
+  "native_lines_only_second": 43,
+  "first_binding_source_lines": {
+    "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/minimp3-0.6.1/src/lib.rs": 54
+  },
+  "second_binding_source_lines": {
+    "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/minimp3-0.6.1/src/lib.rs": 54
+  },
+  "mutation_campaign_run": false,
+  "allowlist_sha256": "6bf7b31a0e9bda703c4e497e0cb24b5b2149a31ae6d83ffc2e8577eb72a23246"
+}

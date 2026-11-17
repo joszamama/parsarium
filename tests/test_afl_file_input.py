@@ -71,6 +71,12 @@ class AFLFileInputTest(unittest.TestCase):
             manifest = json.loads(path.read_text())
             with self.subTest(project=str(path.parent.relative_to(ROOT / "projects"))):
                 command, resume = self.command(manifest)
+                if manifest.get("afl_native_c_binding"):
+                    # Only the bound C decoder is AFL-instrumented; its target reads a file.
+                    expected = ["--", manifest["afl_entrypoint"], "@@"]
+                    self.assertEqual(command[-3:], expected)
+                    self.assertEqual(resume[-3:], expected)
+                    continue
                 self.assertEqual(command[-2:], ["--", "/work/afl_fuzzer"])
                 self.assertEqual(resume[-2:], ["--", "/work/afl_fuzzer"])
 

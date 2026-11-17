@@ -14,9 +14,10 @@
       "name": "minimp3",
       "version": "0.6.1",
       "recent_downloads_90d": 156316,
-      "status": "unresolved",
-      "reason": "Bindings to the minimp3 C decoder; Decoder::new(Cursor).next_frame() on the untagged control has not been run in this pilot.",
-      "source": "https://crates.io/crates/minimp3"
+      "status": "selected",
+      "reason": "Pinned Decoder::new(Cursor).next_frame() over the minimp3 C decoder via minimp3-sys 0.6.0. Both untagged CBR controls match independent header-walk frame and sample counts; Rust binding lines, native minimp3.h Clang source lines and stable native AFL++ edges are recorded in the project receipts. Same minimp3 C family as Go github.com/tosone/minimp3.",
+      "source": "https://crates.io/crates/minimp3",
+      "license": "MIT (crate and minimp3-sys 0.6.0); CC0-1.0 (vendored minimp3.h)"
     },
     {
       "name": "mp3-duration",

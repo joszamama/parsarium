@@ -62,6 +62,8 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
     elif php_native:
         target_args = ([manifest["afl_entrypoint"], "@@"] if manifest.get("afl_entrypoint")
                        else ["/opt/php/bin/php", "/work/fuzz-target.php", "@@"])
+    elif ecosystem == "rust" and manifest.get("afl_native_c_binding"):
+        target_args = [manifest["afl_entrypoint"], "@@"]
     elif ecosystem == "rust":
         # afl::fuzz! reads AFL shared memory, with stdin as its fallback.
         target_args = ["/work/afl_fuzzer"]
