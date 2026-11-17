@@ -1,1 +1,109 @@
-[]
+[
+  {
+    "name": "phpmyadmin/sql-parser",
+    "version": "6.0.1",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "LICENSE.txt in the pinned codeload archive (SHA-256 8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643, GNU GPL version 2); Packagist license GPL-2.0-or-later",
+    "input_api": "new PhpMyAdmin\\SqlParser\\Parser(local SQL text, strict: true) -> statements[]",
+    "documentation": "https://github.com/phpmyadmin/sql-parser/blob/6.0.1/README.md#parsing",
+    "source": "https://codeload.github.com/phpmyadmin/sql-parser/legacy.zip/ae022ff35c8107110fb73baf96c16c3ae71b9b95",
+    "source_sha256": "b5c4c8996a5bb4f31484a7314d335b42371fec5815109806d20ad9e40de0c3ec",
+    "composer_reference": "ae022ff35c8107110fb73baf96c16c3ae71b9b95",
+    "dependencies": [
+      "symfony/polyfill-mbstring v1.43.3"
+    ],
+    "dialect": "MySQL (library default context)",
+    "scope": "One SQL statement from local text in strict mode; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Functions are read from select expressions only, because the library stores WHERE conditions as text components.",
+    "family": "phpMyAdmin sql-parser hand-written lexer and statement parser",
+    "family_note": "Parser runs its own Lexer (src/Lexer.php) and per-statement parse methods (src/Statements/*, src/Parsers/*) that build Component objects. The adapter reads SelectStatement expr/from/join/where/group/order, InsertStatement into/values, and literal tokens from the parser's TokensList within each statement's first..last token range. Independent of greenlion/php-sql-parser. Debian ships it as phpmyadmin-sql-parser.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 55800144,
+      "source": "https://packagist.org/packages/phpmyadmin/sql-parser.json",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/php/sql/registry-snapshot.json",
+      "limitation": "Lifetime downloads, including installs as a phpMyAdmin dependency."
+    },
+    "project": "projects/sql/php/phpmyadmin_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+]

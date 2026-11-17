@@ -1,0 +1,67 @@
+{
+  "kind": "third_party",
+  "api": "new PhpMyAdmin\\SqlParser\\Parser(local SQL text, strict: true) -> statements[] (SelectStatement, InsertStatement) with Component objects and the parser TokensList",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T17:04:57.979089+00:00",
+  "manifest": "projects/sql/php/phpmyadmin_sql_parser/manifest.json",
+  "image_id": "sha256:b8a52a7d5e367ea0c15eed9108e6c3920340fac7fb3f81bf708515fba054e74d",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "source_sha256": "b5c4c8996a5bb4f31484a7314d335b42371fec5815109806d20ad9e40de0c3ec",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "7069b5cd44295654fef654a31866954e533b00ce27041626a7c98d033eb206df",
+    "composer.json": "901f92e9c3b3af51b61bc2f3947af5bf43cad1202422e9e35e9f0b10d8b0b1cc",
+    "composer.lock": "3c21d4341e3feba71a27ebb0e89d1cb209310f28b64f47d0e24ed2e1bdd805fb",
+    "fuzz-target.php": "d6f893b6d7cacfd04ae27ecf752b482d1039cb1c9138c397f1271b98a35f37cb",
+    "harness.php": "d63d5f170e851b0fc2e680846810006a42246bd0165dc50acc6a0faaa3143f03",
+    "manifest.json": "133d183058bd5704cc2f98c1f6a0fcbbc52271775da6e5c6566291245b0747e7",
+    "replay.php": "44ce32d4c2d4c0e07d4deed4f438cb6a7f754ba92e62f29519aafb36b1f22188",
+    "run-control.php": "a623e644ec4940a9ba2047fd7e26ccfbe40306e0ce6e71efb553e357c07680c5",
+    "source-lock.json": "a5ca1ac52d6f73a3c617cb142f3c87f8c5664206311a3fa19c3e6a6a7de742a2",
+    "target.json": "d2714407831e4cc780abbc9e83ce4e9f5bbccdb2cdbae343fcf40a6fc79d725c"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 26,
+  "parser_source_lines_covered": 794,
+  "format_specific_source_lines_covered": 48,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/php/phpmyadmin_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}

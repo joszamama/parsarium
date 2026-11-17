@@ -1,0 +1,102 @@
+{
+  "platform": "linux/amd64",
+  "control": "controls/sql/select-join.sql",
+  "differential_control": "controls/sql/insert-values.sql",
+  "oracle": "controls/sql/expected.json",
+  "third_party": [
+    {
+      "package": "phpmyadmin/sql-parser",
+      "version": "6.0.1",
+      "pass": true,
+      "input_api": "new PhpMyAdmin\\SqlParser\\Parser(local SQL text, strict: true) -> statements[]",
+      "dialect": "MySQL (library default context)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "phpMyAdmin sql-parser hand-written lexer and statement parser",
+      "parser_source_files": 26,
+      "parser_source_lines_covered": 794,
+      "afl_tuple_difference": 519,
+      "parser_feature_difference": 532,
+      "project_receipt": "projects/sql/php/phpmyadmin_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/php/phpmyadmin_sql_parser/differential.json"
+    }
+  ],
+  "standard": [],
+  "checked_at_utc": "2026-11-17T17:05:53.245060+00:00"
+}

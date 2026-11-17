@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T17:05:27.126765+00:00",
+  "project": "sql/php/phpmyadmin_sql_parser",
+  "pass": true,
+  "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "8cdf25d56f0a32025323647494106b8e76d29cc89dded8dbd87bea73b48750e2",
+  "overlay_receipt_sha256": "9fe54871ad88888e7a91cc9af343f8d1b576d0499a675e752296bb502cd5f87f",
+  "base_image_id": "sha256:b8a52a7d5e367ea0c15eed9108e6c3920340fac7fb3f81bf708515fba054e74d",
+  "overlay_image_id": "sha256:e211a5c02943b5ace9e4159b4549ec465003cc2121f89853853621c292541bcc",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 805,
+  "second_afl_tuples": 572,
+  "afl_tuple_difference": 519,
+  "first_parser_features": 794,
+  "second_parser_features": 554,
+  "parser_feature_difference": 532,
+  "first_only_features_by_file": {
+    "src/Components/Condition.php": 4,
+    "src/Components/GroupKeyword.php": 4,
+    "src/Components/JoinKeyword.php": 8,
+    "src/Components/OrderKeyword.php": 5,
+    "src/Components/OrderSortKeyword.php": 2,
+    "src/Lexer.php": 25,
+    "src/Parsers/Conditions.php": 66,
+    "src/Parsers/ExpressionArray.php": 33,
+    "src/Parsers/Expressions.php": 63,
+    "src/Parsers/GroupKeywords.php": 21,
+    "src/Parsers/JoinKeywords.php": 34,
+    "src/Parsers/OrderKeywords.php": 18,
+    "src/Statement.php": 24,
+    "src/Statements/SelectStatement.php": 50,
+    "src/TokensList.php": 10,
+    "src/Utils/Query.php": 19
+  },
+  "second_only_features_by_file": {
+    "src/Components/ArrayObj.php": 5,
+    "src/Components/IntoKeyword.php": 9,
+    "src/Lexer.php": 7,
+    "src/Parsers/Array2d.php": 27,
+    "src/Parsers/ArrayObjs.php": 38,
+    "src/Parsers/Expressions.php": 3,
+    "src/Parsers/IntoKeywords.php": 25,
+    "src/Statement.php": 2,
+    "src/Statements/InsertStatement.php": 29,
+    "src/Token.php": 1
+  }
+}
