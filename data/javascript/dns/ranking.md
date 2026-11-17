@@ -1,6 +1,6 @@
 # JavaScript × DNS: selected parsers (pilot)
 
-Six verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Seven verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -14,6 +14,7 @@ npm downloads, 2026-10-17:2026-11-15 (30 days), from [registry-snapshot.json](re
 | 4 | [native-dns-packet](https://github.com/tjfontaine/native-dns-packet/blob/master/README.md) | 0.1.1 | 72,104 | native-dns-packet (tjfontaine node-dns packet.js) |
 | 5 | [hbo-dnsd](https://github.com/hbouvier/dnsd/blob/master/README.md#example-parse-a-message) | 0.9.8 | 34,937 | dnsd (Iris Couch) decoder (parse.js, message.js) |
 | 6 | [dns-js](https://github.com/mdns-js/node-dns-js/blob/master/README.md#example) | 0.3.1 | 13,675 | dns-js (mdns-js) decoder (lib/dnspacket.js, lib/dnsrecord.js) |
+| 7 | [@gibme/dns](https://github.com/gibme-npm/dns/blob/master/README.md#decoding-a-packet) | 22.0.0 | 1,965 | @gibme/dns own decoder (dist/types, dist/encoders) |
 
 **dns-packet 5.6.1** (MIT) parses local bytes with `dnsPacket.decode(buf: Buffer) -> packet object`. Both controls match the oracle summary. The response control covers 407 library lines in 6 files. AFL++ feedback repeats 3 times per control; response and query give 45/21 parser features and 65/41 AFL++ tuples, differing by 24 features and 24 tuples ([receipt](dns-packet-feedback-differential.json)). Own JavaScript decoder (name decompression, header and per-type rdata codecs in index.js). A and AAAA text comes from its dependency @leichtgewicht/ip-codec 2.0.5. Forks @dnsquery/dns-packet and @leichtgewicht/dns-packet share this family; multicast-dns uses it for mDNS.
 
@@ -27,6 +28,8 @@ npm downloads, 2026-10-17:2026-11-15 (30 days), from [registry-snapshot.json](re
 
 **dns-js 0.3.1** (MIT) parses local bytes with `dns.DNSPacket.parse(buffer: Buffer) -> DNSPacket`. Both controls match the oracle summary. The response control covers 441 library lines in 6 files. AFL++ feedback repeats 3 times per control; response and query give 45/24 parser features and 65/44 AFL++ tuples, differing by 21 features and 21 tuples ([receipt](dns-js-feedback-differential.json)). Own JavaScript decoder written for mdns-js (lib/dnspacket.js and lib/dnsrecord.js over its BufferConsumer); its README says it borrows test fixtures and some parts from native-dns-packet, but only 40 of its 521 distinct non-test source lines (7.7%) occur in native-dns-packet 0.1.1. mdns-js-packet 0.2.0 is the same code under its earlier name (98.1% shared lines) and is not counted. dns-js keeps all three bits after RA (res1..res3, packed into z) and prints AAAA as eight uncompressed hex groups, which the harness compresses per RFC 5952. The coverage subject is the package's lib/ directory, which keeps its nested copy of the debug dependency out.
 
+**@gibme/dns 22.0.0** (MIT) parses local bytes with `new Packet(buffer: Buffer) -> Packet`. Both controls match the oracle summary. The response control covers 4006 library lines in 65 files. AFL++ feedback repeats 3 times per control; response and query give 180/165 parser features and 200/185 AFL++ tuples, differing by 15 features and 15 tuples ([receipt](gibme-dns-feedback-differential.json)). Own TypeScript-built decoder (dist/types/packet.js, answer.js, question.js and per-type dist/encoders) reading through its @gibme/bytepack Reader; 7 of its 1,215 distinct non-test source lines occur in dns-packet 5.6.1. It keeps the reserved Z bit, AD and CD as separate booleans, packed into z by the harness. Types and classes are names, mapped back to numbers with the package's own RType and RClass. AAAA text comes from its ip-address dependency in uncompressed form and is compressed by the harness per RFC 5952. The package also ships UDP/TCP/DoT/DoH clients (lookup); the harness never calls them. The coverage subject is the package's dist/ directory.
+
 ## Remaining leads
 
 | Order | Lead | Metric | Input API lead | Family |
@@ -37,15 +40,14 @@ npm downloads, 2026-10-17:2026-11-15 (30 days), from [registry-snapshot.json](re
 | 4 | dohdec | 14,724 |  | dns-packet |
 | 5 | bns | 8,888 | `wire.Message.decode(data) (not in the README)` | bns (chjj) |
 | 6 | mdns-js-packet | 4,819 | `DNSPacket.parse(buffer)` | dns-js family |
-| 7 | @gibme/dns | 1,965 | `new Packet(buffer)` | @gibme/dns |
-| 8 | @luminati-io/native-dns-packet | 1,196 |  | native-dns-packet |
-| 9 | @noelminamino/dns-packet | 754 | `decode(buf)` | dns-packet family (fork of @dnsquery/dns-packet) |
-| 10 | @portable/dns-packet | 594 | `decode(bytes)` | @portable/dns-packet |
-| 11 | dnsd | 340 | `dnsd.parse(buffer)` | dnsd (Iris Couch) |
-| 12 | native-node-dns-packet | 338 |  | native-dns-packet |
-| 13 | dns-message | 127 |  |  |
-| 14 | dnspacket-ts | 98 |  |  |
-| 15 | @serverless-dns/dns-parser | 19 |  |  |
+| 7 | @luminati-io/native-dns-packet | 1,196 |  | native-dns-packet |
+| 8 | @noelminamino/dns-packet | 754 | `decode(buf)` | dns-packet family (fork of @dnsquery/dns-packet) |
+| 9 | @portable/dns-packet | 594 | `decode(bytes)` | @portable/dns-packet |
+| 10 | dnsd | 340 | `dnsd.parse(buffer)` | dnsd (Iris Couch) |
+| 11 | native-node-dns-packet | 338 |  | native-dns-packet |
+| 12 | dns-message | 127 |  |  |
+| 13 | dnspacket-ts | 98 |  |  |
+| 14 | @serverless-dns/dns-parser | 19 |  |  |
 
 ## Checked, excluded or recorded separately
 

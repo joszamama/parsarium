@@ -657,5 +657,116 @@
       "shared_distinct_lines": 40,
       "share": 0.077
     }
+  },
+  {
+    "name": "@gibme/dns",
+    "version": "22.0.0",
+    "license": "MIT",
+    "license_evidence": "package.json \"license\": \"MIT\" and LICENSE in the npm tarball (sha256 b4d95f43...), checked in the image",
+    "input_api": "new Packet(buffer: Buffer) -> Packet",
+    "documentation": "https://github.com/gibme-npm/dns/blob/master/README.md#decoding-a-packet",
+    "documentation_note": "The npm tarball's README.md (22.0.0) documents decoding with new Packet(buffer) ('Decoding a Packet'); the link is to the default branch README.",
+    "source": "https://www.npmjs.com/package/@gibme/dns/v/22.0.0",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "@gibme/dns own decoder (dist/types, dist/encoders)",
+    "family_note": "Own TypeScript-built decoder (dist/types/packet.js, answer.js, question.js and per-type dist/encoders) reading through its @gibme/bytepack Reader; 7 of its 1,215 distinct non-test source lines occur in dns-packet 5.6.1. It keeps the reserved Z bit, AD and CD as separate booleans, packed into z by the harness. Types and classes are names, mapped back to numbers with the package's own RType and RClass. AAAA text comes from its ip-address dependency in uncompressed form and is compressed by the harness per RFC 5952. The package also ships UDP/TCP/DoT/DoH clients (lookup); the harness never calls them. The coverage subject is the package's dist/ directory.",
+    "project": "projects/dns/javascript/gibme_dns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
+      "value": 1965,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/@gibme%2Fdns",
+      "captured_at_utc": "2026-11-17T19:47:28.546004+00:00",
+      "snapshot": "data/javascript/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 7,
+    "afl_feedback": "data/javascript/dns/gibme-dns-feedback-differential.json",
+    "source_overlap_with_dns_packet": {
+      "method": "distinct stripped, non-empty, non-comment lines of the non-test .js sources compared with set intersection against dns-packet 5.6.1",
+      "distinct_lines": 1215,
+      "dns_packet_distinct_lines": 1106,
+      "shared_distinct_lines": 7,
+      "share": 0.006
+    }
   }
 ]
