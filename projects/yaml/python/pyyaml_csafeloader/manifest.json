@@ -1,0 +1,476 @@
+{
+  "schema_version": 1,
+  "format": "yaml",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "PyYAML CSafeLoader (libyaml)",
+  "release": "6.0.3",
+  "catalog_parser": "data/python/yaml/parsers.json",
+  "source_lock": "projects/yaml/python/pyyaml_csafeloader/source-lock.json",
+  "source_sha256": "d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f",
+  "underlying_release": "libyaml 0.2.5 (the release the official PyYAML 6.0.3 wheels link statically)",
+  "underlying_source_sha256": "c642ae9b75fee120b2d96c712538bd2cf283228d2337df2cf2988e3c02678ef4",
+  "build_note": "Source-built from the pinned PyYAML 6.0.3 sdist (Cython 3.3.1 generates _yaml.c from the pinned _yaml.pyx) with PYYAML_FORCE_LIBYAML=1, clang -O0 and LLVM source coverage, linked against a static PIC libyaml 0.2.5 built from the pinned tarball with the same coverage flags. The image checks that the installed yaml/*.py equal the sdist lib/yaml, that the extension has no libyaml shared-library dependency and that _yaml.get_version_string() is 0.2.5. The official aarch64 cp314 wheel compiles the same sources optimised and stripped.",
+  "dependencies_note": "No runtime dependencies; Cython and setuptools are build backend only.",
+  "parser_family": "libyaml 0.2.5 (reader.c, scanner.c, parser.c) through PyYAML's _yaml C extension (CParser composes nodes in C), with PyYAML's Python SafeConstructor and YAML 1.1 Resolver; not the pure-Python SafeLoader route",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/yaml/catalog.yaml",
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "expected_output": {
+    "root": "map",
+    "nodes": {
+      "bool": 2,
+      "float": 2,
+      "int": 7,
+      "map": 7,
+      "null": 1,
+      "seq": 2,
+      "str": 13
+    },
+    "max_depth": 3,
+    "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+    "tree": [
+      "map",
+      [
+        [
+          "kind",
+          [
+            "str",
+            "catalog"
+          ]
+        ],
+        [
+          "version",
+          [
+            "int",
+            "2"
+          ]
+        ],
+        [
+          "ratio",
+          [
+            "float",
+            "0.25"
+          ]
+        ],
+        [
+          "offset",
+          [
+            "int",
+            "-17"
+          ]
+        ],
+        [
+          "enabled",
+          [
+            "bool",
+            true
+          ]
+        ],
+        [
+          "retired",
+          [
+            "bool",
+            false
+          ]
+        ],
+        [
+          "missing",
+          [
+            "null"
+          ]
+        ],
+        [
+          "title",
+          [
+            "str",
+            "Café \"quoted\"\tend"
+          ]
+        ],
+        [
+          "single",
+          [
+            "str",
+            "it's here"
+          ]
+        ],
+        [
+          "tags",
+          [
+            "seq",
+            [
+              [
+                "str",
+                "alpha"
+              ],
+              [
+                "str",
+                "beta"
+              ],
+              [
+                "str",
+                "gamma delta"
+              ]
+            ]
+          ]
+        ],
+        [
+          "point",
+          [
+            "map",
+            [
+              [
+                "lat",
+                [
+                  "int",
+                  "1"
+                ]
+              ],
+              [
+                "lon",
+                [
+                  "float",
+                  "-2.5"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "items",
+          [
+            "seq",
+            [
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "7"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "first item"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "line one\nline two\n"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "8"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "Zürich"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "folded text\n"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "defaults",
+          [
+            "map",
+            [
+              [
+                "retries",
+                [
+                  "int",
+                  "3"
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "base"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "service",
+          [
+            "map",
+            [
+              [
+                "settings",
+                [
+                  "map",
+                  [
+                    [
+                      "retries",
+                      [
+                        "int",
+                        "3"
+                      ]
+                    ],
+                    [
+                      "label",
+                      [
+                        "str",
+                        "base"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "edge"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "differential_control": "controls/yaml/order.yaml",
+  "differential_control_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+  "differential_expected_output": {
+    "root": "seq",
+    "nodes": {
+      "bool": 1,
+      "float": 2,
+      "int": 5,
+      "map": 7,
+      "null": 1,
+      "seq": 5,
+      "str": 11
+    },
+    "max_depth": 4,
+    "tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46",
+    "tree": [
+      "seq",
+      [
+        [
+          "map",
+          [
+            [
+              "order",
+              [
+                "str",
+                "A-7"
+              ]
+            ],
+            [
+              "lines",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "Xé-1"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "2"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "12.5"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "sku",
+                        [
+                          "str",
+                          "B '2'"
+                        ]
+                      ],
+                      [
+                        "qty",
+                        [
+                          "int",
+                          "1"
+                        ]
+                      ],
+                      [
+                        "price",
+                        [
+                          "float",
+                          "0.75"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "flags",
+              [
+                "seq",
+                []
+              ]
+            ],
+            [
+              "meta",
+              [
+                "map",
+                []
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "map",
+          [
+            [
+              "city",
+              [
+                "str",
+                "Berlin"
+              ]
+            ],
+            [
+              "zip",
+              [
+                "str",
+                "10115"
+              ]
+            ]
+          ]
+        ],
+        [
+          "seq",
+          [
+            [
+              "int",
+              "1"
+            ],
+            [
+              "seq",
+              [
+                [
+                  "int",
+                  "2"
+                ],
+                [
+                  "int",
+                  "3"
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "k",
+                  [
+                    "str",
+                    "v"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "str",
+          "plain multi word"
+        ],
+        [
+          "str",
+          "line\nbreak"
+        ],
+        [
+          "str",
+          "kept\n  indented"
+        ],
+        [
+          "null"
+        ],
+        [
+          "bool",
+          false
+        ]
+      ]
+    ]
+  },
+  "api": "yaml.load(local YAML bytes, Loader=yaml.CSafeLoader), the libyaml-backed safe loader; yaml.load on the decoded str and on a local binary stream give the same tree",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "LLVM source-region coverage of the source-built libyaml 0.2.5 C sources linked into PyYAML's _yaml extension (reader.c, scanner.c, parser.c, api.c); the Cython binding and PyYAML's Python constructor/resolver are outside the counted scope",
+  "coverage_subject_prefix": "/work/libyaml-src/src/",
+  "format_specific_coverage_file_suffix": "/scanner.c",
+  "afl_coverage_subject_prefix": "/work/libyaml-src/src/",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.14/site-packages/yaml/_yaml*.so",
+  "native_campaign_supported": false,
+  "scope": "One YAML 1.2 document from local bytes as a typed tree (maps in source order, sequences, str/int/float/bool/null scalars, aliases expanded) on the two schema-neutral valid controls only; no tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed input.",
+  "afl_package_release": "4.33c-1.1ubuntu1"
+}

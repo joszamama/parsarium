@@ -14,15 +14,16 @@
   },
   {
     "name": "PyYAML CSafeLoader (libyaml)",
-    "status": "unresolved",
-    "metric_value": null,
-    "metric_error": "Same PyPI package as PyYAML; the package metric is not split by loader route.",
+    "status": "selected",
+    "metric_value": 1227712536,
+    "metric_error": null,
     "family": "libyaml through PyYAML's _yaml C extension",
     "api_hint": "yaml.load(data, Loader=yaml.CSafeLoader)",
-    "note": "Separate route inside the PyYAML package: the C extension calls libyaml's scanner/parser; only the constructor and resolver stay in Python.",
+    "note": "Separate route inside the PyYAML package: the C extension calls libyaml's scanner/parser; only the constructor and resolver stay in Python. The metric is the PyYAML package value, not a split.",
     "found_by": "targeted_documentation_lead",
     "source": "https://pyyaml.org/wiki/PyYAMLDocumentation",
-    "reason": "Not run in this round; the selected PyYAML path is the pure-Python SafeLoader. Needs native libyaml coverage to count as its own path."
+    "reason": "Selected: pinned release, documented local API, both valid controls equal the hand-written typed trees through bytes, str and stream, Docker coverage and stable, input-dependent AFL++ feedback recorded.",
+    "evidence": "projects/yaml/python/pyyaml_csafeloader/verification.json"
   },
   {
     "name": "ruamel.yaml",

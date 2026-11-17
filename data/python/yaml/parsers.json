@@ -13,7 +13,7 @@
     "dependencies": [],
     "scope": "One YAML 1.2 document from local bytes as a typed tree on the two schema-neutral valid controls. PyYAML applies YAML 1.1 implicit resolvers; the controls avoid every scalar whose type differs between YAML 1.1 and the 1.2 core schema. No tags, merge keys, multi-document streams or malformed input were tested.",
     "family": "PyYAML pure-Python loader (yaml/scanner.py, parser.py, composer.py, SafeConstructor, YAML 1.1 Resolver); not the libyaml CSafeLoader route",
-    "family_note": "Pure-Python PyYAML: yaml/reader.py decodes the bytes, scanner.py and parser.py build the event stream, composer.py builds nodes, SafeConstructor builds dict/list/scalars and resolver.py applies the YAML 1.1 implicit resolvers. The pinned manylinux wheel also ships the _yaml C extension (libyaml), but yaml.SafeLoader does not use it; yaml.CSafeLoader is the separate libyaml-family route and stays a lead. ruamel.yaml derives from this code; oyaml and yamlcore wrap it.",
+    "family_note": "Pure-Python PyYAML: yaml/reader.py decodes the bytes, scanner.py and parser.py build the event stream, composer.py builds nodes, SafeConstructor builds dict/list/scalars and resolver.py applies the YAML 1.1 implicit resolvers. The pinned manylinux wheel also ships the _yaml C extension (libyaml), but yaml.SafeLoader does not use it; yaml.CSafeLoader is the separate libyaml-family route, selected as its own path (projects/yaml/python/pyyaml_csafeloader). ruamel.yaml derives from this code; oyaml and yamlcore wrap it.",
     "shared_families": [
       "PyYAML pure-Python loader lineage (ruamel.yaml derived from it; oyaml and yamlcore wrap it)"
     ],
@@ -466,6 +466,476 @@
       "limitation": "Package-level downloads include transitive installs and dump-only use; they do not measure YAML parsing."
     },
     "project": "projects/yaml/python/pyyaml"
+  },
+  {
+    "name": "PyYAML CSafeLoader (libyaml)",
+    "version": "6.0.3",
+    "license": "MIT",
+    "license_evidence": "https://pypi.org/pypi/PyYAML/6.0.3/json (License: MIT in PKG-INFO; LICENSE in the sdist); libyaml 0.2.5 License file (MIT) pinned by SHA-256",
+    "input_api": "yaml.load(local YAML bytes, Loader=yaml.CSafeLoader); the decoded str and a local binary stream give the same tree",
+    "documentation": "https://pyyaml.org/wiki/PyYAMLDocumentation",
+    "documentation_evidence": "The PyYAML documentation describes the LibYAML bindings: CLoader/CSafeLoader are used as yaml.load(input, Loader=CSafeLoader) and parse with LibYAML; yaml.load accepts byte strings, Unicode strings and open files.",
+    "source": "https://files.pythonhosted.org/packages/05/8e/961c0007c59b8dd7729d542c61a4d537767a59645b82a0b521206e1e25c2/pyyaml-6.0.3.tar.gz",
+    "source_sha256": "d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f",
+    "underlying_source": "https://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz",
+    "underlying_source_sha256": "c642ae9b75fee120b2d96c712538bd2cf283228d2337df2cf2988e3c02678ef4",
+    "dependencies": [],
+    "scope": "One YAML 1.2 document from local bytes as a typed tree on the two schema-neutral valid controls. libyaml scans and parses; PyYAML's SafeConstructor applies YAML 1.1 implicit resolvers, which the controls make schema-neutral. No tags, merge keys, multi-document streams or malformed input were tested.",
+    "family": "libyaml 0.2.5 through PyYAML's _yaml C extension (CParser), with PyYAML's Python SafeConstructor and YAML 1.1 Resolver; not the pure-Python SafeLoader route",
+    "family_note": "Same PyPI package and release as the selected PyYAML path but a separate route and parser family, as the YAML cell protocol requires: CSafeLoader subclasses _yaml.CParser, which feeds the input to libyaml's yaml_parser_parse (reader.c, scanner.c, parser.c) and composes nodes in Cython; only SafeConstructor and the Resolver are Python. The pure-Python yaml/scanner.py and parser.py never run on this route. The image builds libyaml 0.2.5 (the release embedded in the official 6.0.3 wheels) from the pinned tarball and links it statically into _yaml. It shares the libyaml family with projects/yaml/c/libyaml and the libyaml-derived C in ruamel.yaml.clib.",
+    "shared_families": [
+      "libyaml (C libyaml cell path; ruamel.yaml.clib vendors an older libyaml snapshot)",
+      "PyYAML package (same distribution as the pure-Python SafeLoader path)"
+    ],
+    "control": "controls/yaml/catalog.yaml",
+    "differential_control": "controls/yaml/order.yaml",
+    "expected_output": {
+      "root": "map",
+      "nodes": {
+        "bool": 2,
+        "float": 2,
+        "int": 7,
+        "map": 7,
+        "null": 1,
+        "seq": 2,
+        "str": 13
+      },
+      "max_depth": 3,
+      "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+      "tree": [
+        "map",
+        [
+          [
+            "kind",
+            [
+              "str",
+              "catalog"
+            ]
+          ],
+          [
+            "version",
+            [
+              "int",
+              "2"
+            ]
+          ],
+          [
+            "ratio",
+            [
+              "float",
+              "0.25"
+            ]
+          ],
+          [
+            "offset",
+            [
+              "int",
+              "-17"
+            ]
+          ],
+          [
+            "enabled",
+            [
+              "bool",
+              true
+            ]
+          ],
+          [
+            "retired",
+            [
+              "bool",
+              false
+            ]
+          ],
+          [
+            "missing",
+            [
+              "null"
+            ]
+          ],
+          [
+            "title",
+            [
+              "str",
+              "Café \"quoted\"\tend"
+            ]
+          ],
+          [
+            "single",
+            [
+              "str",
+              "it's here"
+            ]
+          ],
+          [
+            "tags",
+            [
+              "seq",
+              [
+                [
+                  "str",
+                  "alpha"
+                ],
+                [
+                  "str",
+                  "beta"
+                ],
+                [
+                  "str",
+                  "gamma delta"
+                ]
+              ]
+            ]
+          ],
+          [
+            "point",
+            [
+              "map",
+              [
+                [
+                  "lat",
+                  [
+                    "int",
+                    "1"
+                  ]
+                ],
+                [
+                  "lon",
+                  [
+                    "float",
+                    "-2.5"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "items",
+            [
+              "seq",
+              [
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "7"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "first item"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "line one\nline two\n"
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "8"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "Zürich"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "folded text\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "defaults",
+            [
+              "map",
+              [
+                [
+                  "retries",
+                  [
+                    "int",
+                    "3"
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "base"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "service",
+            [
+              "map",
+              [
+                [
+                  "settings",
+                  [
+                    "map",
+                    [
+                      [
+                        "retries",
+                        [
+                          "int",
+                          "3"
+                        ]
+                      ],
+                      [
+                        "label",
+                        [
+                          "str",
+                          "base"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "edge"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "differential_expected_output": {
+      "root": "seq",
+      "nodes": {
+        "bool": 1,
+        "float": 2,
+        "int": 5,
+        "map": 7,
+        "null": 1,
+        "seq": 5,
+        "str": 11
+      },
+      "max_depth": 4,
+      "tree_sha256": "2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46",
+      "tree": [
+        "seq",
+        [
+          [
+            "map",
+            [
+              [
+                "order",
+                [
+                  "str",
+                  "A-7"
+                ]
+              ],
+              [
+                "lines",
+                [
+                  "seq",
+                  [
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "Xé-1"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "2"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "12.5"
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "B '2'"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "1"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "0.75"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "flags",
+                [
+                  "seq",
+                  []
+                ]
+              ],
+              [
+                "meta",
+                [
+                  "map",
+                  []
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              [
+                "int",
+                "1"
+              ],
+              [
+                "seq",
+                [
+                  [
+                    "int",
+                    "2"
+                  ],
+                  [
+                    "int",
+                    "3"
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "k",
+                    [
+                      "str",
+                      "v"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "str",
+            "plain multi word"
+          ],
+          [
+            "str",
+            "line\nbreak"
+          ],
+          [
+            "str",
+            "kept\n  indented"
+          ],
+          [
+            "null"
+          ],
+          [
+            "bool",
+            false
+          ]
+        ]
+      ]
+    },
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 1227712536,
+      "source": "https://pypistats.org/api/packages/pyyaml/recent?period=month",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/yaml/registry-snapshot.json",
+      "limitation": "Package-level downloads of the PyYAML distribution, recorded unchanged for both the pure SafeLoader and the CSafeLoader routes; PyPI does not split downloads by loader, so the figure does not measure CSafeLoader use or YAML parsing."
+    },
+    "project": "projects/yaml/python/pyyaml_csafeloader"
   },
   {
     "name": "ruamel.yaml",
