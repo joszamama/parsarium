@@ -1,0 +1,158 @@
+{
+  "kind": "third_party",
+  "api": "TomlParser(TomlInputConfig()).parseString(String) -> TomlFile (README 'Parser to AST', KDoc on TomlParser.parseString); TomlParser is a Kotlin @JvmInline value class, so the call is the public static TomlParser.parseString-impl(TomlInputConfig, String) that Kotlin callers compile to, reached from Java by reflection; the TomlFile/TomlTable (PRIMITIVE and ARRAY)/TomlArrayOfTablesElement tree is walked through getChildren() and TomlNode.getName(), TomlKeyValuePrimitive/TomlKeyValueArray values are TomlLong, TomlDouble, TomlBasicString, TomlLiteralString, TomlBoolean, TomlArray and TomlDateTime (content kotlin.time.Instant or kotlinx.datetime LocalDateTime/LocalDate/LocalTime); parse errors throw TomlDecodingException",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T22:37:35.310606+00:00",
+  "manifest": "projects/toml/java/ktoml_core/manifest.json",
+  "image_id": "sha256:14fb0202ea06a6efaf0108118bc9de64faf02e2c35dbb8e95cdee8641eabaa8f",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "837ca4a05eb4ed21a192df6ac1f2d6c7a55e6407d19f90ec2fce98843d6d4ee1",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "project_file_sha256": {
+    "Dockerfile": "4b3da9b73e96d3100587ae59974682c65033beb70417e49c54b8e5503d05f481",
+    "GenericHarness.java": "b509854e0f41bd1627e539939e56b0ba45687cbf40e8c86a62d91e81ab97671a",
+    "TomlAdapter.java": "142b46c9ec941acc3e7b34a6577e385fa81e65e7af6a248999e15cc2833a36c8",
+    "manifest.json": "6276baa31c4e711b53f0761f8a68ab6c01520da8030c7c0841bb94cce7952ec9",
+    "run-control.sh": "0e39888011338833196284c5d0e2c4f0dd52be75843b7de73700d1aec2c796b5",
+    "source-lock.json": "fb95d5e240221fe162b787e14ca27f14c8140787374b22f59c232acbf035c4a2"
+  },
+  "output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zo\u00eb"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "parser_source_files": 25,
+  "parser_source_lines_covered": 602,
+  "format_specific_source_lines_covered": null,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/toml/java/ktoml_core/target/coverage/coverage.json",
+  "pass": true
+}

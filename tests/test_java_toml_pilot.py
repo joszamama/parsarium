@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = ROOT / "data/java/toml"
 CONTROL = "controls/toml/service-config.toml"
 DIFFERENTIAL = "controls/toml/typed-scalars.toml"
-SELECTED = ["jackson-dataformat-toml", "tomlj", "night-config-toml", "jtoml"]
+SELECTED = ["jackson-dataformat-toml", "tomlj", "night-config-toml", "jtoml", "ktoml-core"]
 
 
 def read(path: Path) -> object:

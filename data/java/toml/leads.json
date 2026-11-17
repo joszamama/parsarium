@@ -16,22 +16,8 @@
       "version_seen": "0.7.2",
       "checked_at_utc": "2026-11-17",
       "probe": "data/java/toml/probes/toml4j-0.7.2.json",
-      "evidence": "service-config.toml matches the expected typed tree; typed-scalars.toml is rejected: Invalid text after key hex on line 6. Make sure to terminate the value or add a comment (#)."
-    },
-    {
-      "name": "com.akuleshov7:ktoml-core",
-      "metric_value": 28,
-      "metric": "deps.dev directDependentCount summed over all releases",
-      "family": "ktoml (Kotlin multiplatform)",
-      "api_lead": "TomlParser(TomlInputConfig()).parseString(String) -> TomlFile node tree (ktoml-core-jvm; Kotlin value class)",
-      "note": "Kotlin; JVM artifact ktoml-core-jvm.",
-      "source": "https://github.com/orchestr7/ktoml",
-      "status": "unresolved_partially_checked",
-      "api_lead_checked_against_pinned_release": true,
-      "release": "0.7.1",
-      "version_seen": "0.7.1",
-      "evidence": "ktoml-core-jvm 0.7.1 with kotlin-stdlib 2.2.0, kotlinx-serialization-core-jvm 1.9.0 and kotlinx-datetime-jvm 0.7.1 parses both controls into its node tree: TomlKeyValuePrimitive values are TomlLong (hex/octal/binary/underscored decoded), TomlDouble (1e3 -> 1000.0), TomlBasicString/TomlLiteralString (escapes and the line-ending backslash decoded), TomlBoolean and TomlDateTime whose content is kotlin.time.Instant (offset), kotlinx.datetime.LocalDateTime, LocalDate or LocalTime, so the four kinds stay distinct; tables, dotted keys and arrays of tables appear as TomlTable/TomlArrayOfTablesElement nodes. No typed-tree harness was built: the parser entry point is a Kotlin inline value class (TomlParser.parseString compiles to the static parseString-impl), which plain Java can reach only by reflection, and the node tree needs a Kotlin-aware walker; not done in this round.",
-      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-17"
+      "evidence": "service-config.toml matches the expected typed tree; typed-scalars.toml is rejected: Invalid text after key hex on line 6. Make sure to terminate the value or add a comment (#).",
+      "metric_rechecked": "deps.dev rechecked 2026-11-17 (round 3): unchanged (155)."
     },
     {
       "name": "io.hotmoka:toml4j",
@@ -47,7 +33,8 @@
       "version_seen": "0.7.3",
       "jar_sha256": "2ee2d32cc685fc8f987cc0595059d187e332ca41e1ae8a515fead036fb777bc1",
       "evidence": "Republished toml4j (same com.moandjiezana.toml package, 43 classes). new Toml().read(File) reads service-config but rejects typed-scalars with 'Invalid text after key hex on line 6. Make sure to terminate the value or add a comment (#).', the same TOML 0.4 failure as com.moandjiezana.toml:toml4j 0.7.2.",
-      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-17"
+      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-17",
+      "metric_rechecked": "deps.dev rechecked 2026-11-17 (round 3): unchanged (15)."
     },
     {
       "name": "net.peanuuutz.tomlkt:tomlkt",
@@ -62,7 +49,8 @@
       "release": "0.5.0",
       "version_seen": "0.5.0",
       "evidence": "tomlkt-jvm 0.5.0: Toml.Default.parseToTomlTable gives every literal a TomlLiteral.Type and the documented converters (toLong, toDouble, toOffsetDateTime, toLocalDateTime, toLocalDate, toLocalTime) return correct values for service-config, but typed-scalars `exponent = 1e3` comes back as TomlLiteral(content \"1000\", Type.Integer): the float is typed as integer 1000 (expected float \"1000.0\"). Every other typed-scalars value matches.",
-      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-17"
+      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-17",
+      "metric_rechecked": "deps.dev rechecked 2026-11-17 (round 3): the root coordinate net.peanuuutz.tomlkt:tomlkt still sums to 5 over 11 releases; the separately published JVM coordinate tomlkt-jvm sums to 21 and is not added. The control failure stands either way."
     },
     {
       "name": "cc.ekblad:4koma",
@@ -104,6 +92,12 @@
       "name": "io.github.wasabithumb:jtoml",
       "version": "1.8.3",
       "project": "projects/toml/java/jtoml",
+      "status": "promoted_to_verified"
+    },
+    {
+      "name": "com.akuleshov7:ktoml-core",
+      "version": "0.7.1",
+      "project": "projects/toml/java/ktoml_core",
       "status": "promoted_to_verified"
     }
   ]

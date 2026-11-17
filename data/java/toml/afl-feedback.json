@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T20:46:01.841703+00:00",
-  "projects_total": 4,
-  "projects_passed": 4,
+  "checked_at_utc": "2026-11-17T22:38:05.569667+00:00",
+  "projects_total": 5,
+  "projects_passed": 5,
   "differential_kind": "fixed_valid_typed_scalars",
   "mutation_campaign_run": false,
   "results": [
@@ -760,6 +760,186 @@
         "io/github/wasabithumb/jtoml/value/table/TomlTableLeaf.java": 9
       },
       "checked_at_utc": "2026-11-17T20:46:01.841703+00:00"
+    },
+    {
+      "project": "toml/java/ktoml_core",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "feedback_scope": "JaCoCo bytecode coverage of the com.akuleshov7.ktoml packages of ktoml-core-jvm 0.7.1 (TomlParser, the TOML string/multiline/key utilities, tree nodes and value parsers; the decoders, encoders and writers are in the package but unused by the tree route) during valid-control replay, mapped to the release sources jar placed by package declaration; Jazzer fuzz entry. kotlin-stdlib, kotlinx-serialization and kotlinx-datetime are outside the subject",
+      "base_project_receipt_sha256": "aba42e296ffaa527b6567134bf07615b3b4dda75ae0203858bccd8f48df3bc71",
+      "overlay_receipt_sha256": "8dce1ce0e5c61d12e83b2d4038f14c27927f48e83dfb08b39200885917779184",
+      "image_id": "sha256:e0b789505c9aa39631a7f2db7851e3e4f075245268599b2c93fab2804989ac21",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_lines": 602,
+      "control_afl_tuples": 620,
+      "differential_parser_lines": 562,
+      "differential_afl_tuples": 582,
+      "parser_lines_only_in_control": 179,
+      "parser_lines_only_in_differential": 139,
+      "afl_tuples_only_in_control": 177,
+      "afl_tuples_only_in_differential": 139,
+      "parser_line_difference": 318,
+      "afl_tuple_difference": 316,
+      "control_parser_lines_per_file": {
+        "com/akuleshov7/ktoml/TomlConfig.kt": 8,
+        "com/akuleshov7/ktoml/parsers/StringUtils.kt": 87,
+        "com/akuleshov7/ktoml/parsers/TomlMultilineString.kt": 11,
+        "com/akuleshov7/ktoml/parsers/TomlParser.kt": 95,
+        "com/akuleshov7/ktoml/parsers/enums/MultilineType.kt": 20,
+        "com/akuleshov7/ktoml/tree/nodes/TomlArrayOfTablesElement.kt": 6,
+        "com/akuleshov7/ktoml/tree/nodes/TomlFile.kt": 5,
+        "com/akuleshov7/ktoml/tree/nodes/TomlInlineTable.kt": 103,
+        "com/akuleshov7/ktoml/tree/nodes/TomlKeyValue.kt": 26,
+        "com/akuleshov7/ktoml/tree/nodes/TomlKeyValueArray.kt": 16,
+        "com/akuleshov7/ktoml/tree/nodes/TomlKeyValuePrimitive.kt": 16,
+        "com/akuleshov7/ktoml/tree/nodes/TomlNode.kt": 51,
+        "com/akuleshov7/ktoml/tree/nodes/TomlTable.kt": 40,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/keys/TomlKey.kt": 11,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlArray.kt": 34,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlBasicString.kt": 16,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlBoolean.kt": 4,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlDateTime.kt": 8,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlDouble.kt": 4,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlLong.kt": 10,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlUnsignedLong.kt": 2,
+        "com/akuleshov7/ktoml/utils/LinesIteratorWrapper.kt": 6,
+        "com/akuleshov7/ktoml/utils/SpecialCharacters.kt": 13,
+        "com/akuleshov7/ktoml/utils/UtilsJvm.kt": 1,
+        "com/akuleshov7/ktoml/writers/IntegerRepresentation.kt": 9
+      },
+      "differential_parser_lines_per_file": {
+        "com/akuleshov7/ktoml/TomlConfig.kt": 8,
+        "com/akuleshov7/ktoml/parsers/StringUtils.kt": 110,
+        "com/akuleshov7/ktoml/parsers/TomlMultilineString.kt": 55,
+        "com/akuleshov7/ktoml/parsers/TomlParser.kt": 91,
+        "com/akuleshov7/ktoml/parsers/enums/MultilineType.kt": 20,
+        "com/akuleshov7/ktoml/tree/nodes/TomlFile.kt": 5,
+        "com/akuleshov7/ktoml/tree/nodes/TomlKeyValue.kt": 38,
+        "com/akuleshov7/ktoml/tree/nodes/TomlKeyValuePrimitive.kt": 16,
+        "com/akuleshov7/ktoml/tree/nodes/TomlNode.kt": 49,
+        "com/akuleshov7/ktoml/tree/nodes/TomlTable.kt": 37,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/keys/TomlKey.kt": 11,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlBasicString.kt": 22,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlBoolean.kt": 4,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlDateTime.kt": 15,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlDouble.kt": 4,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlLiteralString.kt": 19,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlLong.kt": 15,
+        "com/akuleshov7/ktoml/tree/nodes/pairs/values/TomlUnsignedLong.kt": 2,
+        "com/akuleshov7/ktoml/utils/LinesIteratorWrapper.kt": 6,
+        "com/akuleshov7/ktoml/utils/SpecialCharacters.kt": 24,
+        "com/akuleshov7/ktoml/utils/UtilsJvm.kt": 2,
+        "com/akuleshov7/ktoml/writers/IntegerRepresentation.kt": 9
+      },
+      "checked_at_utc": "2026-11-17T22:38:05.569667+00:00"
     }
   ]
 }

@@ -1035,5 +1035,264 @@
       "snapshot": "data/java/toml/registry-snapshot.json",
       "captured_at_utc": "2026-11-17T16:37:52.615799+00:00"
     }
+  },
+  {
+    "name": "ktoml-core",
+    "group": "com.akuleshov7",
+    "artifact": "ktoml-core-jvm",
+    "coordinate": "com.akuleshov7:ktoml-core",
+    "version": "0.7.1",
+    "license": "MIT",
+    "license_evidence": "Maven release POM licenses (ktoml-core-jvm 0.7.1: MIT License); LICENSE at upstream tag v0.7.1",
+    "input_api": "TomlParser(TomlInputConfig()).parseString(String) -> TomlFile node tree (documented in the README 'Parser to AST' section and the TomlParser.parseString KDoc); from Java the Kotlin value-class method is the public static TomlParser.parseString-impl(TomlInputConfig, String), called by reflection; parse errors throw TomlDecodingException",
+    "documentation": "https://github.com/orchestr7/ktoml/blob/267f5dfc4b7caa667d687dce136f86cbb2f6e2ec/README.md#parser-to-ast",
+    "source": "https://repo.maven.apache.org/maven2/com/akuleshov7/ktoml-core-jvm/0.7.1/ktoml-core-jvm-0.7.1-sources.jar",
+    "scope": "TOML 1.0.0 text read from a local file into ktoml's TomlFile tree: TomlTable/TomlArrayOfTablesElement nodes and key-value nodes whose TomlLong, TomlDouble, string, TomlBoolean, TomlArray and TomlDateTime values carry Long, Double, String, Boolean and kotlin.time.Instant or kotlinx.datetime local values",
+    "family": "ktoml (orchestr7/akuleshov7 Kotlin multiplatform; own line-oriented TomlParser and value parsers in ktoml-core)",
+    "family_note": "ktoml-core 0.7.1 is a Kotlin multiplatform library; the JVM artifact ktoml-core-jvm holds its own line-oriented TomlParser (com.akuleshov7.ktoml.parsers), string/key utilities and the tree node classes whose constructors parse values. Runtime dependencies are kotlin-stdlib, kotlinx-serialization-core (used for its kotlinx.serialization decoders, not by the tree route) and kotlinx-datetime for the date-time value types. It does not reuse tomlj, Jackson TOML, NightConfig, jtoml, toml4j or tomlkt code. The deps.dev metric is that of the multiplatform root coordinate com.akuleshov7:ktoml-core (28); the separately published JVM coordinate com.akuleshov7:ktoml-core-jvm has its own count (68 summed over 25 releases on 2026-11-17), which is not added.",
+    "configuration_note": "Default TomlInputConfig() as in the README example (allows empty and null values, which the valid controls do not contain). Keys come from TomlNode.getName(), the unquoted name the library's own decoders (TomlMainDecoder, TomlMapDecoder) match: for the dotted key site.\"example.com\" the parser moves 'site' into a synthetic table and re-splits the remaining TomlKey, so getKey().last() is 'com' while the node name stays 'example.com'. Integer vs float comes from the TomlLong/TomlDouble node class; the four date-time kinds from the TomlDateTime content class (kotlin.time.Instant converted to the UTC instant from its epoch seconds and nanoseconds; kotlinx.datetime local values through kotlinx-datetime's ConvertersKt).",
+    "control": "controls/toml/service-config.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/java/ktoml_core",
+    "metric": {
+      "name": "deps.dev directDependentCount summed over all releases",
+      "value": 28,
+      "releases": 26,
+      "max_release": "0.7.1",
+      "max_release_direct_dependent_count": 6,
+      "default_release": "0.7.1",
+      "default_release_direct_dependent_count": 6,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.akuleshov7%3Aktoml-core",
+      "snapshot": "data/java/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:52.047720+00:00"
+    }
   }
 ]
