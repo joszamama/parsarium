@@ -1,4 +1,4 @@
-"""Byte-input harness for PySide6 6.12.0 on svg."""
+"""Byte-input harness for PySide6 6.12.0 QtSvg on svg."""
 import tempfile
 from pathlib import Path
 import adapter
@@ -10,7 +10,7 @@ def parse_data(data: bytes):
     with tempfile.NamedTemporaryFile(suffix=".svg") as source:
         source.write(data)
         source.flush()
-        return adapter.parse('PySide6', Path(source.name))
+        return adapter.render_svg(Path(source.name))
 
 
 def fuzz_one_input(data: bytes):

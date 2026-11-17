@@ -1,5 +1,17 @@
-# PySide6 — SVG / Python
+# PySide6 (SVG / Python)
 
-Pinned release: `6.12.0`. The [candidate manifest](manifest.json) and [catalog evidence](../../../../catalog/svg/python/pyside6/README.md) identify the local SVG API and valid control.
+PySide6 `6.12.0` provides the documented `QSvgRenderer(local path)` API. The pinned Docker harness renders the valid `2 × 1` SVG and reports red and green pixels. A second valid SVG is checked at `4 × 2`.
 
-This path has a candidate Docker harness but no verified container control or parser-feedback receipt. Python binding coverage alone does not establish coverage in QtSvg's native parser. It remains staged until a pinned container control and QtSvg parser feedback are verified.
+From the repository root:
+
+```sh
+python3 projects/svg/python/pyside6/control.py verify
+python3 projects/svg/python/pyside6/control.py run controls/svg/red-green.svg
+python3 projects/svg/python/pyside6/control.py run YOUR_LOCAL_SVG_FILE
+```
+
+The container uses an offscreen Qt GUI context. The byte-input bridge accepts up to 1 MiB and limits rendered images to 16,777,216 pixels. The Docker control and native QtSvg module hash are recorded in `control-verification.json`.
+
+This path is staged: the prebuilt PySide6 QtSvg module has no verified parser-source coverage or AFL++ feedback. The separate C++ QtSvg project uses matching 6.12.0 source, but its feedback is not attributed to this Python wheel. See `feedback-blocker.json` for the exact limit.
+
+A bounded AFL++ QEMU check on the valid control timed out before the renderer produced a result, so its map is excluded from the evidence.
