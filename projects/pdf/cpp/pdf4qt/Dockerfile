@@ -1,0 +1,44 @@
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    ca-certificates clang cmake curl libclang-rt-21-dev libfontconfig-dev \
+    libfreetype-dev libjpeg-dev liblcms2-dev libopenjp2-7-dev libpng-dev \
+    libssl-dev llvm ninja-build pkg-config python3 qt6-base-dev qt6-svg-dev \
+    qt6-tools-dev zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+RUN curl --fail --location --retry 3 \
+    https://codeload.github.com/JakubMelka/PDF4QT/tar.gz/refs/tags/v1.6.0.0 \
+    -o /work/pdf4qt.tar.gz \
+    && echo 'a5f9952723acbb8a2431207cf76e53a17941292fbd003a2ed1b79503677ab2ec  /work/pdf4qt.tar.gz' | sha256sum --check \
+    && mkdir /work/source && tar -xzf /work/pdf4qt.tar.gz -C /work/source --strip-components=1 \
+    && echo 'ff855d8b34d1c243a5917d75340ed361c8c5d2737900012e6f143e9d132bf34e  /work/source/Pdf4QtLibCore/sources/pdfdocumentreader.cpp' | sha256sum --check \
+    && echo 'd0daf4478f893c5f91f1b9be38dcfd656673ba4f20ed361a7bb8ef449fd236d7  /work/source/Pdf4QtLibCore/sources/pdfparser.cpp' | sha256sum --check \
+    && curl --fail --location --retry 3 \
+    https://codeload.github.com/blend2d/blend2d/tar.gz/6dbc2cefbc996379e07104e34519a440b49b15d7 \
+    -o /work/blend2d.tar.gz \
+    && echo '212a77ceebf8c37ad5ca7e7eac1757ce7aa911b88085b076a9ed24f6de6e36fa  /work/blend2d.tar.gz' | sha256sum --check \
+    && mkdir /work/blend2d && tar -xzf /work/blend2d.tar.gz -C /work/blend2d --strip-components=1
+COPY patch-core.py /work/patch-core.py
+RUN echo '7faf6e65c246c26d67dc62dc4ce3a1593ab25c545c3a1d6c020879061bfe3c36  /work/patch-core.py' | sha256sum --check \
+    && python3 /work/patch-core.py /work/source
+COPY harness.h harness.cpp replay.cpp build.sh afl-allowlist.txt /work/
+ENV AFL_LLVM_ALLOWLIST=/work/afl-allowlist.txt
+RUN chmod +x /work/build.sh && /work/build.sh \
+    && { clang++ --version | head -1; llvm-cov --version | head -1; pkg-config --modversion Qt6Core Qt6Svg; } > /work/toolchain.txt
+
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    libfontconfig1 libfreetype6 libjpeg8 liblcms2-2 libopenjp2-7 \
+    libpng16-16t64 libqt6core6t64 libqt6dbus6 libqt6gui6 libqt6svg6 \
+    libqt6xml6 libssl3t64 libstdc++6 llvm python3 zlib1g \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/
+COPY --from=build /work/install/lib /work/install/lib
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh /work/run-control.sh
+ENV LD_LIBRARY_PATH=/work/install/lib LLVM_PROFILE_FILE=/dev/null LANG=C.UTF-8
+RUN chmod +x /work/run-control.sh
+ENTRYPOINT ["/work/run-control.sh"]
