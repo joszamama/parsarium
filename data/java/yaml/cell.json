@@ -1,10 +1,10 @@
 {
   "ecosystem": "java",
   "format": "yaml",
-  "status": "pilot_three_verified_bounded_search",
+  "status": "pilot_four_verified_bounded_search",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 3,
+  "verified_third_party_count": 4,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "yaml"
@@ -15,14 +15,14 @@
   "search_totals": {
     "yaml": 855
   },
-  "leads_recorded": 6,
+  "leads_recorded": 7,
   "leads_by_status": {
     "fails_control": 1,
-    "selected": 3,
+    "selected": 4,
     "unresolved": 2
   },
   "ranking_metric": "deps.dev directDependentCount summed over every Maven release",
-  "uncertainty": "Three verified Java YAML paths: SnakeYAML 2.7 (YAML 1.1 SafeConstructor), SnakeYAML Engine 3.2 (YAML 1.2, CoreSchema configured) and circe-yaml 0.16.1 (Scala 2.13 wrapper: SnakeYAML 2.2 compose plus its own node-to-Json conversion). circe-yaml 0.16.1 is a clearly labelled wrapper in the SnakeYAML family: its own 72 Scala lines are identical on both controls, and the control differential (113 lines) is in the SnakeYAML 2.2 scanner, parser and reader it calls; its Json numbers carry no int/float tag, so the harness types an exact-Long number as int (the controls hold no integral-valued floats). jackson-dataformat-yaml 2.23.0, the top lead by deps.dev summed dependents (32,860), returns aliases as anchor-name strings through YAMLMapper.readTree and stays a lead. yamlbeans and eo-yaml (134 and 89) are not yet run. The bounded Maven Central search (query yaml, first 100 of 855 hits) and the named leads are recorded; deps.dev summed directDependentCount counts package adoption, not YAML-specific use, and Scala cross-builds are counted per artifact. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars. Coverage and AFL++ feedback are parser source lines under JaCoCo.",
+  "uncertainty": "Four verified Java YAML paths: SnakeYAML 2.7 (YAML 1.1 SafeConstructor), SnakeYAML Engine 3.2 (YAML 1.2, CoreSchema configured), circe-yaml 0.16.1 (Scala 2.13 wrapper over SnakeYAML 2.2) and SnakeYAML Engine KMP 5.0.0 (Kotlin port of Engine). circe-yaml 0.16.1 is a clearly labelled wrapper in the SnakeYAML family: its own 72 Scala lines are identical on both controls, and the control differential (113 lines) is in the SnakeYAML 2.2 scanner, parser and reader it calls; its Json numbers carry no int/float tag, so the harness types an exact-Long number as int (the controls hold no integral-valued floats). SnakeYAML Engine KMP 5.0.0 is a Kotlin translation of SnakeYAML Engine (same family, separate code); its default LoadSettings already use CoreSchema. jackson-dataformat-yaml 2.23.0, the top lead by deps.dev summed dependents (32,860), returns aliases as anchor-name strings through YAMLMapper.readTree and stays a lead. yamlbeans and eo-yaml (134 and 89) are not yet run. The bounded Maven Central search (query yaml, first 100 of 855 hits) and the named leads are recorded; deps.dev summed directDependentCount counts package adoption, not YAML-specific use, and Scala cross-builds are counted per artifact. The two controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars. Coverage and AFL++ feedback are parser source lines under JaCoCo.",
   "runtime_evidence": "data/java/yaml/standard.json",
   "registry_snapshot": "data/java/yaml/registry-snapshot.json",
   "unresolved_leads": "data/java/yaml/leads.json",

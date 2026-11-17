@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT / "controls/yaml"))
 import check_controls  # noqa: E402
 
 
-PROJECTS = ("snakeyaml", "snakeyaml_engine", "circe_yaml")
+PROJECTS = ("snakeyaml", "snakeyaml_engine", "circe_yaml", "snakeyaml_engine_kmp")
 SOURCE_PREFIX = {"snakeyaml": ("org/yaml/snakeyaml/",), "snakeyaml_engine": ("org/snakeyaml/engine/",),
                  # wrapper path: java_dual_trace.py labels circe-yaml lines wrapper/ and SnakeYAML lines core/
                  "circe_yaml": ("wrapper/io/circe/yaml/", "core/org/yaml/snakeyaml/"),
