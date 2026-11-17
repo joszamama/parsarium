@@ -424,6 +424,113 @@ def vlc_cpp_mp3_feedback_verified(path: Path, manifest: dict, overlay: dict) -> 
     )
 
 
+def mpv_tagged_mp3_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
+    """Bind mpv AFL feedback to FFmpeg's ID3v2 and MP3 source modules."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) not in {"mp3_id3v2/c/mpv", "mp3_id3v2/cpp/mpv"}:
+        return True
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    variant = ROOT / manifest.get("valid_variant", "")
+    if not variant.is_file():
+        variant = path.parent / manifest.get("valid_variant", "")
+    differential = overlay.get("source_differential", {})
+    control_stability = overlay.get("control_stability", {})
+    variant_stability = overlay.get("variant_stability", {})
+    file_hashes = overlay.get("overlay_file_sha256", {})
+    expected_allowlist = [
+        "src: id3v2.c", "src: mp3dec.c", "src: id3v1.c",
+        "src: replaygain.c", "src: mpegaudiodecheader.c",
+        "src: mpegaudio_parser.c", "src: *demux/demux_lavf.c",
+    ]
+    expected_members = {
+        "libavcodec.a(mpegaudio_parser.o)",
+        "libavcodec.a(mpegaudiodecheader.o)",
+        "libavformat.a(id3v1.o)", "libavformat.a(id3v2.o)",
+        "libavformat.a(mp3dec.o)", "libavformat.a(replaygain.o)",
+        "libmpv.a(demux_demux_lavf.c.o)",
+    }
+    id3v2 = "/work/ffmpeg/libavformat/id3v2.c"
+    mp3 = "/work/ffmpeg/libavformat/mp3dec.c"
+    wrapper = "/work/source/demux/demux_lavf.c"
+    return (
+        overlay.get("feedback_kind") == "ffmpeg_tagged_mp3_mpv_demux_lavf_pcguard_edges"
+        and overlay.get("afl_allowlist") == expected_allowlist
+        and set(overlay.get("afl_guarded_archive_members", [])) == expected_members
+        and "harness uninstrumented" in overlay.get("feedback_scope", "")
+        and overlay.get("source_sha256") == manifest["source_sha256"]
+        and overlay.get("underlying_source_sha256") == manifest["underlying_source_sha256"]
+        and overlay.get("afl_package") == "4.33c-1.1ubuntu1"
+        and overlay.get("afl_file_input") is manifest.get("afl_file_input") is True
+        and variant.is_file()
+        and overlay.get("variant_sha256") == manifest.get("valid_variant_sha256")
+            == sha256(variant.read_bytes()).hexdigest()
+        and overlay.get("control_output") == manifest["expected_output"]
+        and overlay.get("variant_output") == manifest["valid_variant_expected_output"]
+        and overlay.get("repeats", 0) >= 3
+        and control_stability.get("all_repeats_identical") is True
+        and variant_stability.get("all_repeats_identical") is True
+        and control_stability.get("stable_edges") == overlay.get("feedback_edges")
+        and variant_stability.get("stable_edges") == overlay.get("variant_feedback_edges")
+        and overlay.get("edges_only_in_variant", 0) > 0
+        and differential.get("image_id") == overlay.get("base_image_id")
+        and differential.get("control_regions", {}).get(id3v2, 0) > 0
+        and differential.get("control_regions", {}).get(mp3, 0) > 0
+        and differential.get("control_regions", {}).get(wrapper, 0) > 0
+        and differential.get("variant_only_regions", {}).get(id3v2, 0) > 0
+        and all(differential.get("variant_only_regions", {}).get(key, -1) == 0
+                for key in (mp3, wrapper))
+        and set(file_hashes) == {"Dockerfile", "build.py"}
+        and all((overlay_dir / name).is_file()
+                and sha256((overlay_dir / name).read_bytes()).hexdigest() == digest
+                for name, digest in file_hashes.items())
+    )
+
+
+def mpv_mp4_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
+    """Bind mpv's MP4 feedback to its pinned FFmpeg MOV parser objects."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) not in {"mp4/c/mpv", "mp4/cpp/mpv"}:
+        return True
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    variant = ROOT / manifest.get("valid_variant", "")
+    if not variant.is_file():
+        variant = path.parent / manifest.get("valid_variant", "")
+    control_stability = overlay.get("control_stability", {})
+    variant_stability = overlay.get("variant_stability", {})
+    file_hashes = overlay.get("overlay_file_sha256", {})
+    members = {
+        "libavformat.a(dovi_isom.o)", "libavformat.a(isom.o)",
+        "libavformat.a(mov.o)", "libavformat.a(mov_chan.o)",
+        "libavformat.a(mov_esds.o)",
+        "libmpv.a(demux_demux_lavf.c.o)",
+    }
+    return (
+        overlay.get("feedback_kind") == "ffmpeg_mov_mpv_demux_lavf_pcguard_edges"
+        and "libavformat/mov.c" in overlay.get("feedback_scope", "")
+        and "demux/demux_lavf.c" in overlay.get("feedback_scope", "")
+        and "harness uninstrumented" in overlay.get("feedback_scope", "")
+        and set(overlay.get("afl_guarded_archive_members", [])) == members
+        and overlay.get("source_sha256") == manifest["source_sha256"]
+        and overlay.get("underlying_source_sha256") == manifest["underlying_source_sha256"]
+        and overlay.get("afl_package") == "4.33c-1.1ubuntu1"
+        and overlay.get("afl_file_input") is manifest.get("afl_file_input") is True
+        and variant.is_file()
+        and overlay.get("variant_sha256") == manifest.get("valid_variant_sha256")
+            == sha256(variant.read_bytes()).hexdigest()
+        and overlay.get("variant_output") == manifest["valid_variant_expected_output"]
+        and overlay.get("repeats", 0) >= 3
+        and control_stability.get("all_repeats_identical") is True
+        and variant_stability.get("all_repeats_identical") is True
+        and control_stability.get("stable_edges") == overlay.get("feedback_edges")
+        and variant_stability.get("stable_edges") == overlay.get("variant_feedback_edges")
+        and overlay.get("edges_only_in_variant", 0) > 0
+        and set(file_hashes) == {"Dockerfile", "build.py"}
+        and all((overlay_dir / name).is_file()
+                and sha256((overlay_dir / name).read_bytes()).hexdigest() == digest
+                for name, digest in file_hashes.items())
+    )
+
+
 def resvg_cpp_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
     """Bind C++ resvg feedback to usvg parser guards and valid SVG probes."""
     project = path.parent.relative_to(ROOT / "projects")
@@ -727,6 +834,10 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
     if not fltk_native_feedback_verified(path, manifest, overlay):
         return False
     if not vlc_cpp_mp4_feedback_verified(path, manifest, overlay):
+        return False
+    if not mpv_tagged_mp3_feedback_verified(path, manifest, overlay):
+        return False
+    if not mpv_mp4_feedback_verified(path, manifest, overlay):
         return False
     if not pdf_oxide_cpp_feedback_verified(path, manifest, overlay):
         return False

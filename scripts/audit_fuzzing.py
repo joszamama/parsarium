@@ -9,6 +9,8 @@ from build_afl_rust import AFL_RUST_RELEASE, dockerfile as rust_dockerfile, over
 from audit_projects import (fltk_native_feedback_verified, fully_runnable,
                             lwjgl_assimp_native_feedback_verified,
                             mlt_mp4_feedback_verified,
+                            mpv_mp4_feedback_verified,
+                            mpv_tagged_mp3_feedback_verified,
                             openshot_mp4_feedback_verified,
                             papers_pdf_feedback_verified,
                             pdf_oxide_cpp_feedback_verified,
@@ -110,21 +112,27 @@ def main() -> None:
         custom_openshot_mp4 = str(relative) == "mp4/cpp/libopenshot"
         custom_papers_pdf = str(relative) == "pdf/c/gnome-papers"
         custom_rust_pdf = str(relative) == "pdf/cpp/pdf_oxide"
+        custom_mpv_mp3 = str(relative) in {"mp3_id3v2/c/mpv", "mp3_id3v2/cpp/mpv"}
+        custom_mpv_mp4 = str(relative) in {"mp4/c/mpv", "mp4/cpp/mpv"}
         if (manifest["package"] not in {"gstreamer", "netpbm", "sail"}
                 and not custom_rust_svg and not custom_vlc_mp4 and not custom_vlc_mp3
                 and not custom_stereokit_ply and not custom_mlt_mp4
                 and not custom_openshot_mp4 and not custom_papers_pdf
-                and not custom_rust_pdf):
+                and not custom_rust_pdf and not custom_mpv_mp3 and not custom_mpv_mp4):
             assert dockerfile == derived_dockerfile(project).encode()
         if (custom_rust_svg or custom_vlc_mp4 or custom_vlc_mp3 or custom_stereokit_ply
                 or custom_mlt_mp4 or custom_openshot_mp4 or custom_papers_pdf
-                or custom_rust_pdf):
+                or custom_rust_pdf or custom_mpv_mp3 or custom_mpv_mp4):
             assert (overlay / "build.py").is_file()
             assert "build.py" in receipt.get("overlay_file_sha256", {})
         if custom_vlc_mp4:
             assert vlc_cpp_mp4_feedback_verified(path, manifest, receipt)
         if custom_vlc_mp3:
             assert vlc_cpp_mp3_feedback_verified(path, manifest, receipt)
+        if custom_mpv_mp3:
+            assert mpv_tagged_mp3_feedback_verified(path, manifest, receipt)
+        if custom_mpv_mp4:
+            assert mpv_mp4_feedback_verified(path, manifest, receipt)
         if str(relative) == "svg/cpp/resvg":
             assert resvg_cpp_feedback_verified(path, manifest, receipt)
         if custom_stereokit_ply:

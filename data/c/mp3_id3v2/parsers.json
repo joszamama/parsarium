@@ -142,7 +142,7 @@
     },
     "scope": "ID3v2 title, MP3 audio track codec and duration from local tagged file",
     "family": "libmpv local media frontend over FFmpeg libavformat and libavcodec",
-    "family_note": "libmpv links the same FFmpeg libraries used by the separately counted FFmpeg row; C and C++ use the same libmpv C API. The local loadfile command returns parsed metadata and MP3 track fields without playing sound."
+    "family_note": "libmpv 0.42.0 calls FFmpeg 9.0.2 libavformat/id3v2.c and mp3dec.c, the same underlying parser family as the direct FFmpeg row and the C++ mpv row. The local-file catalog control reports the tag title, MP3 track codec, and duration. The AFL byte bridge uses mpv's fd://42 fuzz mode, disables decoding, and scopes feedback to those FFmpeg parsers and mpv's demux_lavf wrapper."
   },
   {
     "name": "lame",

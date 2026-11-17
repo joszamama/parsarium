@@ -78,7 +78,7 @@
     },
     "scope": "MP4 demuxer, title and H.264/AAC track codecs",
     "family": "libmpv over FFmpeg MOV/MP4 demuxer",
-    "family_note": "C and C++ call sites share libmpv, which links the FFmpeg package already listed directly."
+    "family_note": "The C and C++ call sites use the same libmpv 0.42.0 wrapper and FFmpeg 9.0.2 MOV/MP4 demuxer as the direct FFmpeg rows. Verified AFL feedback is scoped to FFmpeg mov.c and its MP4 helpers plus mpv demux_lavf.c. A parsed MP4 can have only video, only audio, or no media sample; absent track codec fields remain empty."
   },
   {
     "name": "vlc",
