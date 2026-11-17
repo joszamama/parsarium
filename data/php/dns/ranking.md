@@ -19,16 +19,29 @@ Packagist total downloads, from [registry-snapshot.json](registry-snapshot.json)
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
-| 1 | purplepixie/phpdns | 1,540,214 |  | PHPDNS |
-| 2 | mikepultz/netdns2 | 632,286 | `NetDNS2\Packet\Response` | Net_DNS2 |
-| 3 | jdwx/dns-query | 6,451 |  |  |
-| 4 | yswery/dns | 4,664 | `yswery\DNS\Decoder::decodeMessage($message)` | yswery DNS server decoder |
-| 5 | appserver-io/dnsserver | 2,280 |  |  |
+| 1 | utopia-php/dns | 196,676 | `Utopia\DNS\Message::decode($packet)` | Utopia DNS |
+| 2 | jdwx/dns-query | 6,451 | `new JDWX\DNSQuery\Packet\ResponsePacket($data, strlen($data))` | jdwx DNSQuery (Net_DNS2 1.x fork) |
+| 3 | yswery/dns | 4,664 | `yswery\DNS\Decoder::decodeMessage($message)` | yswery DNS server decoder |
 
 ## Checked, excluded or recorded separately
 
 - **amphp/dns** (excluded): Async resolver; message decoding is delegated to daverandom/libdns. No own documented message-bytes parser.
 - **daverandom/libdns** (unresolved_runnability_blocker): Fails the fuzz-engine gate: under nikic/php-fuzzer v0.0.11 run-single, the include-interceptor rewrite of src/Records/Types/DomainName.php line 25 (const FLAG_NO_COMPRESSION = \PHP_INT_SIZE === 4 ? -2147483648 : 0x80000000;) ends in 'PHP Fatal error: Constant expression contains invalid operations', so the project and its AFL++ bridge are not committed. The slot is left open.
 - **spatie/dns** (excluded): Runs the external dig command; excluded (external process, network).
+- **purplepixie/phpdns** (excluded): Network client only: the README describes 'a socket-level direct network DNS client'; DNSQuery parses replies inside query() through private readResponse/readRecord over the socket buffer, and no public API accepts caller-supplied message bytes.
+- **mikepultz/netdns2** (excluded): Same project as the selected pear/net_dns2: both Packagist names point to the mikepultz/netdns2 repository, Packagist marks pear/net_dns2 abandoned in favour of this name, and mikepultz/netdns2 v2.0.7 is the same commit (5353baa6...) as the pinned pear/net_dns2 v2.0.7. Its newest v2.0.8 keeps 3,157 of v2.0.7's 3,303 distinct normalized non-blank, non-comment src lines (95.6%). Not counted twice under the rename/predecessor rule; pear/net_dns2 keeps the slot as the higher-adoption name.
 - **remotelyliving/php-dns** (excluded): Resolver wrapper; network API only.
 - **badcow/dns** (excluded): Zone-file text library; not a wire-message parser.
+- **appserver-io/dnsserver** (excluded): DNS server application on appserver.io's threaded server stack (appserver-io/server, appserver-io/concurrency, PHP >=5.4 era); it documents no parser API for caller-supplied message bytes.
+- **bluelibraries/dns** (excluded): Resolver library: the README documents record retrieval through dns_get_record, dig and raw UDP/TCP queries; its Raw\RawDataResponse decoder is constructed from a RawDataRequest inside the socket handlers and is not documented for caller-supplied bytes.
+- **danog/libdns-json** (excluded): Encoder/decoder for Google's JSON DNS format on top of daverandom/libdns; not a wire-format parser.
+- **danog/dns-over-https** (excluded): DNS-over-HTTPS resolver (network API); message decoding is delegated to daverandom/libdns.
+- **icicleio/dns** (excluded): Asynchronous resolver for the Icicle framework; message decoding is delegated to daverandom/libdns 1.x.
+- **plesk/net_dns2** (excluded): Plesk's fork of the PEAR Net_DNS2 1.x code (psr-0 Net_DNS2, latest v1.5.4), i.e. the predecessor line of the selected pear/net_dns2 2.x; not counted under the predecessor rule.
+- **metaregistrar/php-dns-client** (excluded): No tagged release on Packagist (dev-master only), so no pinned release can be verified; it is a network DNS client.
+- **splitice/dns-query** (excluded): No tagged release on Packagist (dev-master only), so no pinned release can be verified.
+- **nytris/dns** (excluded): Wrapper over react/dns and react/cache (its only dependencies); no own message parser.
+- **php-standard-library/dns** (excluded): Async resolver; its wire decoder is Psl\DNS\Internal\Decoder in an internal namespace, not a documented public API.
+- **hiblaphp/dns** (excluded): Async resolver for the HiblaPHP event loop (pre-release 1.0.0-beta.2); no documented message-bytes parser API.
+- **clue/mdns-react** (excluded): Multicast DNS resolver over react/dns; no own parser.
+- **danog/libdns-native** (excluded): Converts between PHP's dns_get_record raw format and daverandom/libdns messages; not a separate wire-format parser.

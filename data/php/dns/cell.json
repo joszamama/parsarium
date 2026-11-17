@@ -19,16 +19,16 @@
   },
   "search_hits_recorded": 116,
   "unique_search_hits": 111,
-  "unresolved_documentation_leads": 5,
-  "leads_recorded": 12,
+  "unresolved_documentation_leads": 4,
+  "leads_recorded": 25,
   "leads_by_status": {
     "resolved_verified_selected": 2,
-    "excluded": 4,
+    "excluded": 19,
     "unresolved_runnability_blocker": 1,
-    "unresolved": 5
+    "unresolved": 3
   },
   "ranking_metric": "Packagist total downloads",
-  "uncertainty": "Pilot cell: two PHP paths verified, react/dns and pear/net_dns2, ranked by Packagist total downloads. daverandom/libdns parses both controls but fails the php-fuzzer gate (its rewrite breaks a constant expression), so its slot is left open; amphp/dns, spatie/dns and remotelyliving/php-dns are excluded as resolvers or wrappers. react/dns drops the Z, AD and CD bits (z reported as 0). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: two PHP paths verified, react/dns and pear/net_dns2, ranked by Packagist total downloads. daverandom/libdns parses both controls but fails the php-fuzzer gate (its rewrite breaks a constant expression), so its slot is left open; amphp/dns, spatie/dns and remotelyliving/php-dns are excluded as resolvers or wrappers. Round-2 checks: purplepixie/phpdns parses only inside its socket client; mikepultz/netdns2 is the same repository as pear/net_dns2 (identical v2.0.7 commit) and is not counted twice; the other new Packagist hits are resolvers, format adapters over LibDNS, Net_DNS2 1.x forks or unreleased packages. utopia-php/dns, jdwx/dns-query and yswery/dns remain leads. react/dns drops the Z, AD and CD bits (z reported as 0). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/php/dns/registry-snapshot.json",
   "unresolved_leads": "data/php/dns/leads.json",
   "runtime_evidence": "data/php/dns/standard.json",
