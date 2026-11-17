@@ -1,6 +1,6 @@
 # ASCII PLY / Go
 
-6 verified third-party API paths; 6 have verified Docker harnesses.
+7 verified third-party API paths; 7 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/ascii_ply/ranking.md) · [standard API inventory](../../../data/go/ascii_ply/standard.json)
 
@@ -12,6 +12,7 @@
 - [github.com/rishabh-bector/assimp-golang](github-com-rishabh-bector-assimp-golang/README.md) — Docker harness ready
 - [github.com/bloeys/assimp-go/asig](github-com-bloeys-assimp-go-asig/README.md) — Docker harness ready
 - [github.com/tbogdala/assimp-go](github-com-tbogdala-assimp-go/README.md) — Docker harness ready
+- [go.viam.com/rdk/spatialmath](go-viam-com-rdk-spatialmath/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 

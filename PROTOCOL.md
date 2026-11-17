@@ -16,7 +16,7 @@ Registry searches use the format name and relevant parser, decoder, or reader te
 
 A cell reports its actual selected count, search surface, unresolved leads, and what remains uncertain. A count below ten is acceptable when the bounded search or available adoption evidence does not support more choices. Ten paths do not establish a definitive most-used ten.
 
-After the adoption ranking, a selected third-party path also needs a pinned container control and parser-derived AFL++ feedback to remain in the runnable collection. A path that cannot meet that gate is excluded with its control and blocker evidence recorded; the slot is left open rather than filled with an unverified lower-ranked lead. This runnability gate does not change its recorded adoption metric or deny that the package parses the tested control.
+After the adoption ranking, a selected third-party path also needs a pinned container control and parser-derived AFL++ feedback to remain in the runnable collection. A path that cannot meet that gate is excluded with its control and blocker evidence recorded; the slot is left open rather than filled with an unverified lower-ranked lead. The slot may be refilled only by the next path in primary-rank order that has itself passed the container control and parser-derived AFL++ feedback gate; an unverified next-ranked path stops the refill. This runnability gate does not change its recorded adoption metric or deny that the package parses the tested control.
 
 ## Popularity
 

@@ -1,10 +1,11 @@
 {
   "schema_version": 1,
-  "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate and a pinned empty Python PDF compatibility distribution are excluded. After adoption ranking, selected paths without a verified container control and parser-derived AFL++ feedback are excluded without backfilling lower-ranked leads.",
+  "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate and a pinned empty Python PDF compatibility distribution are excluded. After adoption ranking, selected paths without a verified container control and parser-derived AFL++ feedback are excluded; a vacated slot is refilled only in primary-rank order by the next-ranked path with its own verified container control and parser-derived AFL++ feedback.",
   "supplemental_sources": {
     "popcon_snapshot_sha256": "497f958fdd1472676fce567fc9ecf2ac319b3291c4b57f9598998f181204b2b8",
-    "github_snapshot_sha256": "b2d9a4635bc15e9abe6083bdf911d229fb169776ab5fb942c25d5f2c1db2b137",
-    "feedback_exclusions_sha256": "d566b712d3e134a907634789bd1b391e5d59b0cbb8e99b3a5ecde2cc2b73d7cb"
+    "github_snapshot_sha256": "e0e7532e038a5fdab5fe93a4f58e62eb88e8fe47e52cad5d68e7b1dc135427f0",
+    "feedback_exclusions_sha256": "d566b712d3e134a907634789bd1b391e5d59b0cbb8e99b3a5ecde2cc2b73d7cb",
+    "feedback_backfills_sha256": "d9d419f60bd4cb2b24b27dd6252e5d4bcb406dc5d119b7d13d1b410dc8e297c4"
   },
   "cells": [
     {
@@ -5091,18 +5092,26 @@
         "name": "pkg.go.dev Imported by package count",
         "captured_at_utc": "2026-11-11T23:56:21.410854+00:00"
       },
-      "parsers_sha256": "b96cab39be00ea621b277589d20229b70a9502c3b3d1eb6f2ef641c22492e2ea",
-      "snapshot_sha256": "83b0c7dad67dac9e28f4c74ad1a29f5c82cdfc9b1e26ae1277d9a3526bfd82d7",
-      "original_count": 21,
-      "selected_count": 6,
+      "parsers_sha256": "9310b2a743939e32eca3440cefb1dc6be10471292a79c5cb5b8b04a051f27510",
+      "snapshot_sha256": "eaac6afbf14404942e36a1a0c34f6e83723d1f063500c8d09c795ec0b8d4a03a",
+      "original_count": 22,
+      "selected_count": 7,
       "selected": [
+        {
+          "name": "go.viam.com/rdk/spatialmath",
+          "version": "v1.17.0",
+          "family": "Viam RDK spatialmath mesh loader over goply (shared goply parser family)",
+          "metric": 44,
+          "selection": "primary_metric",
+          "rank": 1
+        },
         {
           "name": "github.com/tbogdala/assimp-go",
           "version": "v0.0.0-20160907223021-d10e2135f9fe",
           "family": "Assimp C++ importer",
           "metric": 4,
           "selection": "primary_metric",
-          "rank": 1
+          "rank": 2
         },
         {
           "name": "github.com/EliCDavis/polyform/formats/ply",
@@ -5110,7 +5119,7 @@
           "family": "polyform PLY",
           "metric": 2,
           "selection": "primary_metric",
-          "rank": 2
+          "rank": 3
         },
         {
           "name": "github.com/bloeys/assimp-go/asig",
@@ -5118,7 +5127,7 @@
           "family": "Assimp C++ importer",
           "metric": 1,
           "selection": "primary_metric",
-          "rank": 3
+          "rank": 4
         },
         {
           "name": "github.com/chenzhekl/goply",
@@ -5126,7 +5135,7 @@
           "family": "goply",
           "metric": 1,
           "selection": "primary_metric",
-          "rank": 4
+          "rank": 5
         },
         {
           "name": "github.com/rishabh-bector/assimp-golang",
@@ -5134,7 +5143,7 @@
           "family": "Assimp C++ importer",
           "metric": 1,
           "selection": "primary_metric",
-          "rank": 5
+          "rank": 6
         },
         {
           "name": "github.com/thebanri/limoni/graphics",
@@ -5142,7 +5151,7 @@
           "family": "limoni PLY",
           "metric": 1,
           "selection": "primary_metric",
-          "rank": 6
+          "rank": 7
         }
       ],
       "excluded": [
@@ -6783,7 +6792,7 @@
       "parsers_sha256": "5cf4e6824d24bc6a2e2453690703f6c9ed7e1c96f7129e7c7dfe48b40771d559",
       "snapshot_sha256": "98a28fe31f8a08edfa4271fe5cd75bfcf3194b34bf3cba04507fb7d7ba7e213b",
       "original_count": 20,
-      "selected_count": 2,
+      "selected_count": 6,
       "selected": [
         {
           "name": "lwjgl-assimp",
@@ -6800,6 +6809,54 @@
           "metric": 11,
           "selection": "primary_metric",
           "rank": 2
+        },
+        {
+          "name": "f3d",
+          "version": "4.0.1",
+          "family": "F3D native PLY plugin over VTK vtkPLYReader",
+          "metric": null,
+          "supplemental_metric": 5074,
+          "supplemental_kind": "github_source_stars",
+          "supplemental_url": "https://github.com/f3d-app/f3d",
+          "reason": "primary_metric_unavailable",
+          "selection": "supplemental_numeric_metric",
+          "supplemental_rank": 1
+        },
+        {
+          "name": "sceneview-core",
+          "version": "4.69.5",
+          "family": "SceneView Core pure Kotlin PLY parser",
+          "metric": null,
+          "supplemental_metric": 1377,
+          "supplemental_kind": "github_source_stars",
+          "supplemental_url": "https://github.com/sceneview/sceneview",
+          "reason": "primary_metric_unavailable",
+          "selection": "supplemental_numeric_metric",
+          "supplemental_rank": 2
+        },
+        {
+          "name": "jzy3d-core",
+          "version": "2.2.1",
+          "family": "Jzy3d public PLY vertex API over jPLY",
+          "metric": null,
+          "supplemental_metric": 310,
+          "supplemental_kind": "github_source_stars",
+          "supplemental_url": "https://github.com/jzy3d/jzy3d-api",
+          "reason": "primary_metric_unavailable",
+          "selection": "supplemental_numeric_metric",
+          "supplemental_rank": 3
+        },
+        {
+          "name": "kotlin-assimp",
+          "version": "v4.0",
+          "family": "Kotlin-graphics JVM Assimp port PLY importer",
+          "metric": null,
+          "supplemental_metric": 105,
+          "supplemental_kind": "github_source_stars",
+          "supplemental_url": "https://github.com/kotlin-graphics/assimp",
+          "reason": "primary_metric_unavailable",
+          "selection": "supplemental_numeric_metric",
+          "supplemental_rank": 4
         }
       ],
       "excluded": [
@@ -6808,13 +6865,9 @@
           "version": "v1.03.4",
           "family": "BTETerraRenderer Java translation of Draco PLY reader",
           "metric": null,
-          "reason": "primary_metric_unavailable"
-        },
-        {
-          "name": "f3d",
-          "version": "4.0.1",
-          "family": "F3D native PLY plugin over VTK vtkPLYReader",
-          "metric": null,
+          "supplemental_metric": 15,
+          "supplemental_kind": "github_source_stars",
+          "supplemental_url": "https://github.com/tf2mandeokyi/BTETerraRenderer",
           "reason": "primary_metric_unavailable"
         },
         {
@@ -6829,6 +6882,9 @@
           "version": "1.3.0",
           "family": "ImgLib2 Mesh public PLY API over jPLY",
           "metric": null,
+          "supplemental_metric": 4,
+          "supplemental_kind": "github_source_stars",
+          "supplemental_url": "https://github.com/imglib/imglib2-mesh",
           "reason": "primary_metric_unavailable"
         },
         {
@@ -6867,20 +6923,6 @@
           "reason": "zero_recorded_adoption"
         },
         {
-          "name": "jzy3d-core",
-          "version": "2.2.1",
-          "family": "Jzy3d public PLY vertex API over jPLY",
-          "metric": null,
-          "reason": "primary_metric_unavailable"
-        },
-        {
-          "name": "kotlin-assimp",
-          "version": "v4.0",
-          "family": "Kotlin-graphics JVM Assimp port PLY importer",
-          "metric": null,
-          "reason": "primary_metric_unavailable"
-        },
-        {
           "name": "materia-jvm",
           "version": "0.4.2.2",
           "family": "Materia Kotlin ASCII PLY loader",
@@ -6916,17 +6958,13 @@
           "reason": "zero_recorded_adoption"
         },
         {
-          "name": "sceneview-core",
-          "version": "4.69.5",
-          "family": "SceneView Core pure Kotlin PLY parser",
-          "metric": null,
-          "reason": "primary_metric_unavailable"
-        },
-        {
           "name": "vofxel",
           "version": "v0.0.2",
           "family": "Vofxel native Java colored ASCII PLY vertex reader",
           "metric": null,
+          "supplemental_metric": 5,
+          "supplemental_kind": "github_source_stars",
+          "supplemental_url": "https://github.com/iamgio/vofxel",
           "reason": "primary_metric_unavailable"
         }
       ]
@@ -8514,7 +8552,7 @@
       "parsers_sha256": "1889725b7d7ab0b7a8dacadac5b60699415da3c83bc106cf5c93a4b65a5ab2d3",
       "snapshot_sha256": "32eec99cc3e946a3c57e5e31204ee49acbc2c7f0aec11530de05550cebeda18a",
       "original_count": 20,
-      "selected_count": 9,
+      "selected_count": 10,
       "selected": [
         {
           "name": "three",
@@ -8587,6 +8625,18 @@
           "metric": 94,
           "selection": "primary_metric",
           "rank": 9
+        },
+        {
+          "name": "plyparser",
+          "version": "6.0.0",
+          "family": "plyparser",
+          "metric": 65,
+          "selection": "primary_metric",
+          "backfilled_after_feedback_exclusion": true,
+          "prior_primary_rank": 11,
+          "feedback_evidence": "fuzzing/afl-native/ascii_ply/javascript/plyparser/verification.json",
+          "feedback_evidence_sha256": "af142bb349e72004e82b1d13f166cd23e87ef6d11bea3989801833854838523b",
+          "rank": 10
         }
       ],
       "excluded": [
@@ -8650,14 +8700,6 @@
           "metric": 20,
           "reason": "outside_ten_path_ceiling",
           "rank": 16
-        },
-        {
-          "name": "plyparser",
-          "version": "6.0.0",
-          "family": "plyparser",
-          "metric": 65,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 11
         },
         {
           "name": "point-cloud-convert",
@@ -10303,7 +10345,7 @@
       "parsers_sha256": "c5264c7f1d2f40fe63ab6b0e4168cf87dfc487cdb92cb33c870ea21e3d46db18",
       "snapshot_sha256": "d52e463643808adae271ab1348be2aa4b10d1c26aa40b52c8f5da0e9310dbb0f",
       "original_count": 21,
-      "selected_count": 8,
+      "selected_count": 10,
       "selected": [
         {
           "name": "trimesh",
@@ -10368,6 +10410,30 @@
           "metric": 277643,
           "selection": "primary_metric",
           "rank": 8
+        },
+        {
+          "name": "pyntcloud",
+          "version": "0.3.1",
+          "family": "pyntcloud PLY reader",
+          "metric": 46262,
+          "selection": "primary_metric",
+          "backfilled_after_feedback_exclusion": true,
+          "prior_primary_rank": 11,
+          "feedback_evidence": "fuzzing/afl-native/ascii_ply/python/pyntcloud/verification.json",
+          "feedback_evidence_sha256": "8590be3124d8b6762f3da57849f34de3565aa81cca4e09905912765c9e3737af",
+          "rank": 9
+        },
+        {
+          "name": "pyassimp",
+          "version": "5.2.5",
+          "family": "Assimp PLY importer",
+          "metric": 46129,
+          "selection": "primary_metric",
+          "backfilled_after_feedback_exclusion": true,
+          "prior_primary_rank": 12,
+          "feedback_evidence": "fuzzing/afl-native/ascii_ply/python/pyassimp/verification.json",
+          "feedback_evidence_sha256": "89909511c96e3cf9f49ccf5f8e7c6f65b19fa7fa761232a643d711fb7356f569",
+          "rank": 10
         }
       ],
       "excluded": [
@@ -10425,14 +10491,6 @@
           "rank": 17
         },
         {
-          "name": "pyassimp",
-          "version": "5.2.5",
-          "family": "Assimp PLY importer",
-          "metric": 46129,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 12
-        },
-        {
           "name": "pymeshlab",
           "version": "2025.7.post1",
           "family": "MeshLab PLY reader",
@@ -10452,14 +10510,6 @@
           "metric": 299,
           "reason": "outside_ten_path_ceiling",
           "rank": 19
-        },
-        {
-          "name": "pyntcloud",
-          "version": "0.3.1",
-          "family": "pyntcloud PLY reader",
-          "metric": 46262,
-          "reason": "outside_ten_path_ceiling",
-          "rank": 11
         },
         {
           "name": "pyvista-miniply",
@@ -14168,6 +14218,6 @@
       "excluded": []
     }
   ],
-  "selected_total": 776,
-  "excluded_total": 785
+  "selected_total": 784,
+  "excluded_total": 778
 }

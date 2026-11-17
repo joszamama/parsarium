@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T23:29:58.245675+00:00",
-  "projects_total": 586,
-  "projects_verified": 586,
+  "checked_at_utc": "2026-11-17T23:38:00.590459+00:00",
+  "projects_total": 592,
+  "projects_verified": 592,
   "results": [
     {
       "schema_version": 1,
@@ -121,6 +121,29 @@
     },
     {
       "schema_version": 1,
+      "project": "ascii_ply/go/go_viam_com_rdk_spatialmath",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "base_project_receipt_sha256": "d36a8cfcfabad889de7ce378d827892b68c28fcac88cae7b7083d5e48e8b2689",
+      "base_image_id": "sha256:5e16d6234f54822317211505519da564182e94910bc46fcc97c4d601f4d1d7e2",
+      "image_id": "sha256:6c2f10b6588f4212f1366d28fe7243c6c32aa464dc1c2c527a064cedb2934005",
+      "platform": "linux/arm64",
+      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+      "parser_source_features": 43,
+      "feedback_edges": 63,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "aec82e23e2f1282c7c3d999d6456c8842acc7fcc1f53b921b02a6d5d930b2bbd",
+        "afl_trace": "238f0d7ec8d8676b284d9d9bf6e1f9bac23552b6f413f89cd80f957ff60cfe31"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "go_trace.py": "4e3e7f79657ee8de9ec6240dbc98074a09dc325b29f22747ed18564aae9848f5"
+      }
+    },
+    {
+      "schema_version": 1,
       "project": "ascii_ply/go/polyform_ply",
       "pass": true,
       "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
@@ -168,6 +191,134 @@
     },
     {
       "schema_version": 1,
+      "project": "ascii_ply/java/f3d",
+      "pass": true,
+      "feedback_kind": "java_native_f3d_vtk_ply_regions_to_afl_bitmap",
+      "feedback_scope": "LLVM source regions in F3D 4.0.1 native PLY plugin and VTK 9.7.2 IO/PLY; Java and JNI binding excluded",
+      "base_project_receipt_sha256": "74d16d7df68d65dccb8511ef6321d5be6ff4b3249b20a545303c539d723b0483",
+      "base_image_id": "sha256:b2555c6e5bb32458f8157450e2ec1d9285c5782411fb80bd61f6e798f8894c66",
+      "image_id": "sha256:b4dd44a6f44eb283ca6a2010212166da249d0a27fb57d8e6c4d19143fd2efc9e",
+      "platform": "linux/arm64",
+      "source_sha256": "336dd26581a0a9b0bf9e6e9c900e3f103cf6df58971cfd5bbaf6fa93cd285560",
+      "underlying_source_sha256": "fecef55df5caec6298ce190024060a90ce3bb515033c0f18968b9ab5c12bf796",
+      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+      "variant_sha256": "9e5272dad9d3ec7e9c3a48bfcd6c7cb439ba7ed46b813020335980802975d342",
+      "parser_source_features": 579,
+      "control_repeat_feature_counts": [
+        579,
+        579
+      ],
+      "stable_control_features": 579,
+      "variant_repeat_feature_counts": [
+        542,
+        542
+      ],
+      "stable_variant_only_features": 43,
+      "stable_control_only_features": 80,
+      "vtk_ply_control_features": 558,
+      "feedback_edges": 596,
+      "variant_feedback_edges": 557,
+      "afl_map_size": 65536,
+      "afl_package": "4.09c-1ubuntu3",
+      "overlay_file_sha256": {
+        "Dockerfile": "2cd49868a3943f602f33101290cc391f1dd644955ca31d6f7bf6833788c513e4",
+        "afl_trace": "c14c096477a2f3b80f68d4399654303edf76b39b26847d84f381e90634ea8865",
+        "native_trace.py": "9830fdbdbc9b3f7211c58c65029f0847907dd8aeea5ed16abd5b5cda7885624c",
+        "build.py": "130a4469e4ea483dec0e8f0f176571d29905ed39a4b724c4f46600a9dcfe86cf"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "JavaCase.java": "1b90b2fe2457060d7e6794a10a29487130bcacdd312f0ceb444b98bab7f21ad7"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "ascii_ply/java/jzy3d_core",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "5ba3b44f3dbb894ebbcee10f0807f983aa54c6137bc9d46636aa36508237747b",
+      "base_image_id": "sha256:69248fc44358f84ced87611f5ef79cb744671cdf755e55de7200e58e72594426",
+      "image_id": "sha256:ccb4888b6728a94d4be3a7b75d902c228b3a35d93fbdaba8f4e8ce42b72f8232",
+      "platform": "linux/arm64",
+      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+      "parser_source_features": 302,
+      "feedback_edges": 322,
+      "afl_map_size": 65536,
+      "afl_package": "4.09c-1ubuntu3",
+      "overlay_file_sha256": {
+        "Dockerfile": "3062ae16a258fb211043ff243ff83df75d4eda9ecfa44dee8001df932cf40884",
+        "afl_trace": "3ec41ff5f100e851c6fce298b2b8f922fb89fc083152d88688ae1285849b877f"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "JavaCase.java": "1b90b2fe2457060d7e6794a10a29487130bcacdd312f0ceb444b98bab7f21ad7",
+        "java_dual_trace.py": "4a0f40ccee9080bdadeaa24fc779ae56de261f2cbab9e6f78c11ecb996b799e6"
+      },
+      "variant_sha256": "9e5272dad9d3ec7e9c3a48bfcd6c7cb439ba7ed46b813020335980802975d342",
+      "control_repeat_feature_counts": [
+        302,
+        302
+      ],
+      "variant_repeat_feature_counts": [
+        264,
+        264
+      ],
+      "stable_variant_only_features": 0,
+      "stable_control_only_features": 38,
+      "parser_feature_difference": 38,
+      "control_repeat_edge_counts": [
+        322,
+        322
+      ],
+      "variant_feedback_edges": 284,
+      "afl_tuple_difference": 38,
+      "variant_check_sha256": "1a2d8c946bb4f31acbfb577930f91c9a837e3d43578cc61b802a862cb95e2442"
+    },
+    {
+      "schema_version": 1,
+      "project": "ascii_ply/java/kotlin_assimp",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "86c34ed7ecec4491b7beb31da6b40a2ad55b0a21d861d07c101a0c613fd3efc7",
+      "base_image_id": "sha256:ae8619b95eb64be7bec634912bb8e344e776454088ca76381353252a8f2d2456",
+      "image_id": "sha256:d87db2c3c24d3235764597d4b20a56f7bab9bbae077e74c885a09fcd98dfc5dc",
+      "platform": "linux/arm64",
+      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+      "parser_source_features": 729,
+      "feedback_edges": 747,
+      "afl_map_size": 65536,
+      "afl_package": "4.09c-1ubuntu3",
+      "overlay_file_sha256": {
+        "Dockerfile": "c4fa3be1c117287cc8168cdfb82400ae23810af3b25b81e5ba52f2f02649fbc5",
+        "afl_trace": "fe208fa37d8ee184360cf866aa4ebc41fcb241dfdc40b05e134220864306abeb"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "JavaCase.java": "1b90b2fe2457060d7e6794a10a29487130bcacdd312f0ceb444b98bab7f21ad7",
+        "java_trace.py": "4c45d741249b649dcaba4c4cec2fbe378b445aad43c513c5d87811f16e2b9c1b"
+      },
+      "variant_sha256": "9e5272dad9d3ec7e9c3a48bfcd6c7cb439ba7ed46b813020335980802975d342",
+      "control_repeat_feature_counts": [
+        729,
+        729
+      ],
+      "variant_repeat_feature_counts": [
+        512,
+        512
+      ],
+      "stable_variant_only_features": 39,
+      "stable_control_only_features": 256,
+      "parser_feature_difference": 295,
+      "control_repeat_edge_counts": [
+        747,
+        747
+      ],
+      "variant_feedback_edges": 531,
+      "afl_tuple_difference": 294,
+      "variant_check_sha256": "1a2d8c946bb4f31acbfb577930f91c9a837e3d43578cc61b802a862cb95e2442"
+    },
+    {
+      "schema_version": 1,
       "project": "ascii_ply/java/lwjgl_assimp",
       "pass": true,
       "feedback_kind": "java_native_assimp_ply_regions_to_afl_bitmap",
@@ -205,6 +356,49 @@
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
         "JavaCase.java": "1b90b2fe2457060d7e6794a10a29487130bcacdd312f0ceb444b98bab7f21ad7"
       }
+    },
+    {
+      "schema_version": 1,
+      "project": "ascii_ply/java/sceneview_core",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "b3e97ddb7cfef63826332391cd5ee97abbc0a24e14e0c3e1b6a01f0fcf6b07f6",
+      "base_image_id": "sha256:959735eb1c48c83bc668762c0fa54ae3863dec0d64a2b9de4651b2cc5e2c860f",
+      "image_id": "sha256:ec5d63531fab6b2630b7b38f6818145e784c1a7fc8d7986f37c68512418df998",
+      "platform": "linux/arm64",
+      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+      "parser_source_features": 211,
+      "feedback_edges": 231,
+      "afl_map_size": 65536,
+      "afl_package": "4.09c-1ubuntu3",
+      "overlay_file_sha256": {
+        "Dockerfile": "1fe932a4fee9b01476d42871eab567321a334361c23045bcbbe8441df93d3555",
+        "afl_trace": "fe208fa37d8ee184360cf866aa4ebc41fcb241dfdc40b05e134220864306abeb"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "JavaCase.java": "1b90b2fe2457060d7e6794a10a29487130bcacdd312f0ceb444b98bab7f21ad7",
+        "java_trace.py": "4c45d741249b649dcaba4c4cec2fbe378b445aad43c513c5d87811f16e2b9c1b"
+      },
+      "variant_sha256": "9e5272dad9d3ec7e9c3a48bfcd6c7cb439ba7ed46b813020335980802975d342",
+      "control_repeat_feature_counts": [
+        211,
+        211
+      ],
+      "variant_repeat_feature_counts": [
+        64,
+        64
+      ],
+      "stable_variant_only_features": 2,
+      "stable_control_only_features": 149,
+      "parser_feature_difference": 151,
+      "control_repeat_edge_counts": [
+        231,
+        231
+      ],
+      "variant_feedback_edges": 84,
+      "afl_tuple_difference": 151,
+      "variant_check_sha256": "1a2d8c946bb4f31acbfb577930f91c9a837e3d43578cc61b802a862cb95e2442"
     },
     {
       "schema_version": 1,
@@ -318,6 +512,30 @@
       "afl_package": "4.21c-5",
       "overlay_file_sha256": {
         "Dockerfile": "4c97c192eb4023accc357cb938fb12baf845dd93565f0006f77fa71e15870742",
+        "afl_trace": "ee21fec7be213714494ca5891e2bdc08d3780a7ae9e56f23bbea4059ee23c78b"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "javascript_child.js": "fed6297bd3d5030ec2af5789c75a667479c0def029fe3c004bfe604c6f1627a3",
+        "javascript_trace.js": "f4c505feb88ff2a90df694413f0d82ae535358840bb6062519a7cfcb661f9201"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "ascii_ply/javascript/plyparser",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "base_project_receipt_sha256": "d988f4624f24fcf2a85d32fc453267cd82b41313177e9ec4ab59a2f458fe42cc",
+      "base_image_id": "sha256:98da9d407cec0c7e2e62be0fe5d72d7d28e48e646359b536d5d601c6019d4456",
+      "image_id": "sha256:6d2e3f844421a8afa37b663e0b82e65ecaf92a36b5ee30b8dc3c5f2e47951b1f",
+      "platform": "linux/arm64",
+      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+      "parser_source_features": 47,
+      "feedback_edges": 67,
+      "afl_map_size": 65536,
+      "afl_package": "4.21c-5",
+      "overlay_file_sha256": {
+        "Dockerfile": "2104270e411dc510819517c07e63f1c76914a7e82f3faa08ebbebec02772490a",
         "afl_trace": "ee21fec7be213714494ca5891e2bdc08d3780a7ae9e56f23bbea4059ee23c78b"
       },
       "bridge_file_sha256": {
