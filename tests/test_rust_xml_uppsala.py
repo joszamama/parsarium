@@ -40,6 +40,27 @@ class UppsalaEvidenceTest(unittest.TestCase):
         self.assertGreater(feedback["edges_only_in_variant"], 0)
         self.assertIn("src/parser.rs", feedback["source_differential"]["files_with_different_line_counts"])
 
+    def test_selected_and_ranked_by_cell_metric(self):
+        cell_dir = ROOT / "data/rust/xml"
+        cell = json.loads((cell_dir / "cell.json").read_text())
+        parsers = json.loads((cell_dir / "parsers.json").read_text())
+        leads = json.loads((cell_dir / "leads.json").read_text())
+        self.assertEqual(cell["verified_third_party_count"], len(parsers))
+        self.assertIn("projects/xml/rust/uppsala/verification.json", cell["third_party_control_results"])
+        entry, = [parser for parser in parsers if parser["name"] == "uppsala"]
+        self.assertNotIn("candidate_for_selection", entry)
+        self.assertEqual(entry["expected_output"], MANIFEST["expected_output"])
+        self.assertEqual(entry["second_control_expected_output"], MANIFEST["afl_variant_expected_output"])
+        self.assertEqual(entry["metric"]["value"], 287733)
+        self.assertNotIn("uppsala", {lead["name"] for lead in leads["unresolved_leads"]})
+        self.assertIn("uppsala", {lead["name"] for lead in leads["verified_leads"]})
+        values = [parser["metric"]["value"] for parser in parsers]
+        ranking = (cell_dir / "ranking.md").read_text()
+        rows = [line for line in ranking.splitlines() if line.startswith("| ") and line[2].isdigit()]
+        ranked = [int(row.split("|")[4].strip().replace(",", "")) for row in rows]
+        self.assertEqual(ranked, sorted(values, reverse=True))
+        self.assertIn("| 7 | [uppsala]", ranking)
+
 
 if __name__ == "__main__":
     unittest.main()

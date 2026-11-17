@@ -341,12 +341,40 @@
         "x < y"
       ]
     },
+    "second_control": "controls/xml/order-default-ns.xml",
+    "second_control_expected_output": {
+      "root": "{urn:parsarium:order}order",
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespace_declarations": 3,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
     "metric": {
       "name": "crates.io recent downloads (90 days)",
       "value": 287733,
       "source": "data/rust/xml/registry-snapshot.json"
     },
-    "project": "projects/xml/rust/uppsala/verification.json",
-    "candidate_for_selection": true
+    "project": "projects/xml/rust/uppsala/verification.json"
   }
 ]

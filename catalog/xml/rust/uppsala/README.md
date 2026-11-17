@@ -1,9 +1,50 @@
-# uppsala — Rust XML
+# uppsala — XML / Rust
 
-- **Release:** `uppsala` 0.12.1, BSD-2-Clause; [pinned crate](https://static.crates.io/crates/uppsala/uppsala-0.12.1.crate) and [source lock](../../../../projects/xml/rust/uppsala/source-lock.json)
-- **Adoption:** 287,733 crates.io recent downloads in the saved 90-day Rust XML search snapshot
-- **Local API:** [`uppsala::parse_bytes(&[u8])`](https://docs.rs/uppsala/0.12.1/uppsala/fn.parse_bytes.html) returns a namespace-aware DOM
-- **Family:** Its own pure-Rust XML scanner, recursive-descent parser, namespace resolver, and DOM, with no runtime parser dependency
-- **Runnable target:** [Docker harness, exact controls, source coverage, and parser-only AFL++ feedback](../../../../projects/xml/rust/uppsala/README.md)
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
-The two valid namespace controls match the independent Expat oracle for expanded names, ordered attributes, namespace declarations, and decoded text. The AFL++ overlay restricts instrumentation to uppsala and records stable input-dependent edges. This is a verified candidate for the Rust XML selection review; the ten-path ceiling is not padded.
+- **Pinned release:** `0.12.1`
+- **License:** BSD-2-Clause
+- **Parser family:** uppsala pure-Rust XML scanner, recursive-descent parser, namespace resolver, and DOM; no external parser dependency
+- **Local input API:** `uppsala::parse_bytes(&[u8]) -> XmlResult<Document>; DOM NodeKind::Element/Text/CData and QName.namespace_uri/local_name, element.attributes and namespace_declarations`
+- **Documentation:** [API reference](<https://docs.rs/uppsala/0.12.1/uppsala/fn.parse_bytes.html>)
+- **Valid control:** [`controls/xml/catalog-ns.xml`](../../../../controls/xml/catalog-ns.xml)
+- **Catalog evidence:** [parser record](../../../../data/rust/xml/parsers.json) · [control result](../../../../projects/xml/rust/uppsala/verification.json)
+
+## Observed control result
+
+```json
+{
+  "root": "{urn:parsarium:catalog}catalog",
+  "elements": [
+    "{urn:parsarium:catalog}catalog",
+    "{urn:parsarium:item}item",
+    "{urn:parsarium:item}item",
+    "{urn:parsarium:item}name",
+    "{urn:parsarium:item}note"
+  ],
+  "max_depth": 3,
+  "namespace_declarations": 2,
+  "namespaces": [
+    "urn:parsarium:catalog",
+    "urn:parsarium:item"
+  ],
+  "attributes": [
+    "version=1",
+    "id=a1",
+    "{urn:parsarium:catalog}lang=es",
+    "id=b2"
+  ],
+  "text": [
+    "Café & té",
+    "Zürich <HQ>",
+    "x < y"
+  ]
+}
+```
+
+## Run this target
+
+```sh
+python3 parsarium.py build xml rust uppsala
+python3 parsarium.py run xml rust uppsala controls/xml/catalog-ns.xml
+```

@@ -1,10 +1,10 @@
 {
   "ecosystem": "rust",
   "format": "xml",
-  "status": "pilot_six_paths_verified_search_bounded",
+  "status": "pilot_seven_paths_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 6,
+  "verified_third_party_count": 7,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "xml",
@@ -27,8 +27,8 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 642,
   "unique_search_hits": 483,
-  "unresolved_documentation_leads": 10,
-  "uncertainty": "Six verified XML parser implementations selected within the first 100 hits of seven crates.io queries (642 hits, 483 unique), captured 2026-11-17. Ten documented leads remain unverified. xml5ever 0.40.0 is an XML5 error-recovering superset parser: the two valid XML 1.0 controls verify namespace-aware output, but it does not establish strict XML 1.0 well-formedness, complete namespace behavior, DTD support, or other encodings. rxml 0.14.0 is a deliberately restricted XML 1.0 parser without DTDs, custom entities or processing instructions, and it rejects comments by default. It parses the shared catalog control exactly but rejects the shared order control (Error(RestrictedXml(\"comments\"))), so its second control is order-default-ns-restricted.xml without that comment and processing instruction. The xml-rs 1.0.0 package is a compatibility re-export of xml and excluded as a duplicate family. Downloads include transitive pulls and are adoption proxies; ranks compare selected independent paths only. RustyXML 0.3.0 passed valid-control parsing but exact repeatable AFL++ feedback was not established; see data/rust/xml/rustyxml-feedback-audit.md.",
+  "unresolved_documentation_leads": 9,
+  "uncertainty": "Seven verified XML parser implementations selected within the first 100 hits of seven crates.io queries (642 hits, 483 unique), captured 2026-11-17. Nine documented leads remain unverified. xml5ever 0.40.0 is an XML5 error-recovering superset parser: the two valid XML 1.0 controls verify namespace-aware output, but it does not establish strict XML 1.0 well-formedness, complete namespace behavior, DTD support, or other encodings. rxml 0.14.0 is a deliberately restricted XML 1.0 parser without DTDs, custom entities or processing instructions, and it rejects comments by default. It parses the shared catalog control exactly but rejects the shared order control (Error(RestrictedXml(\"comments\"))), so its second control is order-default-ns-restricted.xml without that comment and processing instruction. The xml-rs 1.0.0 package is a compatibility re-export of xml and excluded as a duplicate family. uppsala 0.12.1 parses both shared valid controls through its own namespace-aware DOM parser; the controls do not establish its XPath, XSD or XSLT features, DTD handling, other encodings, or complete XML 1.0 conformance. Downloads include transitive pulls and are adoption proxies; ranks compare selected independent paths only. RustyXML 0.3.0 passed valid-control parsing but exact repeatable AFL++ feedback was not established; see data/rust/xml/rustyxml-feedback-audit.md.",
   "third_party_evidence": "data/rust/xml/parsers.json",
   "third_party_control_results": [
     "projects/xml/rust/quick_xml/verification.json",
@@ -36,7 +36,8 @@
     "projects/xml/rust/roxmltree/verification.json",
     "projects/xml/rust/xml/verification.json",
     "projects/xml/rust/xml5ever/verification.json",
-    "projects/xml/rust/rxml/verification.json"
+    "projects/xml/rust/rxml/verification.json",
+    "projects/xml/rust/uppsala/verification.json"
   ],
   "runtime_evidence": "data/rust/xml/standard.json",
   "registry_snapshot": "data/rust/xml/registry-snapshot.json",

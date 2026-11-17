@@ -1,6 +1,6 @@
 # RUST × XML: selected parsers
 
-6 control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. XML parser leads that have not yet been run are listed in [leads.json](leads.json).
+7 control-verified third-party paths; bounded pilot scope. The ceiling is ten and the cell is not padded. XML parser leads that have not yet been run are listed in [leads.json](leads.json).
 
 ## Primary within-cell adoption metric
 
@@ -14,8 +14,9 @@ crates.io recent downloads (90 days), from the search API in [registry-snapshot.
 | 4 | [xml5ever](https://docs.rs/xml5ever/0.40.0/xml5ever/) | 0.40.0 | 14,338,073 | XML5 recovery parser builds namespace-resolved DOM from local UTF-8 input; own tokenizer pass counts declarations | Servo xml5ever tokenizer and tree builder |
 | 5 | [xml](https://docs.rs/xml/1.4.0/xml/reader/struct.EventReader.html) | 1.4.0 | 6,413,267 | `EventReader` over local bytes: namespace-expanded elements and attributes, declarations, decoded text | xml-rs EventReader implementation |
 | 6 | [rxml](https://docs.rs/rxml/0.14.0/rxml/struct.Parser.html) | 0.14.0 | 961,809 | Restricted XML 1.0 `Parser` over local bytes: namespace-resolved events; own `RawParser` pass counts declarations | rxml lexer, raw parser and namespace resolver |
+| 7 | [uppsala](https://docs.rs/uppsala/0.12.1/uppsala/fn.parse_bytes.html) | 0.12.1 | 287,733 | `parse_bytes(&[u8])` over local bytes: namespace-aware DOM with expanded element and attribute names, declarations, decoded text | uppsala own scanner, recursive-descent parser, namespace resolver and DOM |
 
-Unverified XML parser leads, by the same metric: RustyXML 4,342,774 (feedback gate unresolved), xml-no-std 1,648,161 (shared family), minidom 984,597 (shared rxml family), instant-xml 748,214, sxd-document 647,390, libxml 621,059, minidom-14 391,747 (shared family), uppsala 287,733, hard-xml 228,546 (shared family), xot 112,374 (shared family). Recent downloads include transitive dependency pulls. windows (113,676,999) and pulldown-cmark (73,457,258) rank above several leads in the search results but are not XML parsers.
+Unverified XML parser leads, by the same metric: RustyXML 4,342,774 (feedback gate unresolved), xml-no-std 1,648,161 (shared family), minidom 984,597 (shared rxml family), instant-xml 748,214, sxd-document 647,390, libxml 621,059, minidom-14 391,747 (shared family), hard-xml 228,546 (shared family), xot 112,374 (shared family). Recent downloads include transitive dependency pulls. windows (113,676,999) and pulldown-cmark (73,457,258) rank above several leads in the search results but are not XML parsers.
 
 ## Standard library
 
@@ -30,3 +31,5 @@ RustyXML 0.3.0 passed the two valid-control parse and source-coverage checks but
 xml5ever 0.40.0 uses an XML5 recovery grammar. The two valid XML 1.0 controls give exact namespace-aware structure, but this path is not a strict XML 1.0 well-formedness validator. Its pinned README says namespace support is partial and DTD parsing is outside its scope. The separate markup5ever_rcdom dependency is only the tree sink; xml5ever owns the tokenizer and tree builder.
 
 rxml 0.14.0 parses a restricted XML 1.0 subset by design: no DTD, custom entities or processing instructions, UTF-8 only, and comments rejected unless `CommentMode::Discard` is set. It parses the shared catalog control exactly. With default options it rejects the shared order control with `RestrictedXml("comments")`; that control also contains a processing instruction. Its second control, `order-default-ns-restricted.xml`, removes only those two lines and has the same expat summary. AttrMap lists attributes by namespace URI and local name, which matches document order on both controls.
+
+uppsala 0.12.1 (BSD-2-Clause, crate SHA-256 pinned) documents `parse_bytes(&[u8])`, which detects UTF-8/UTF-16 and runs the crate's own `Parser` into a namespace-aware DOM. The pinned crate has no runtime dependencies; its scanner, recursive-descent parser (`src/parser.rs`, `src/pull.rs`) and namespace resolver do not wrap quick-xml, xmlparser, roxmltree or xml. Both shared valid controls match the Expat oracle exactly. Docker covers 909 uppsala source lines (234 in `src/parser.rs` on the catalog control, 304 on the order control). AFL++ instrumentation is restricted to the uppsala crate; repeated `afl-showmap` maps are identical (1,114 and 1,285 edges, 94 and 265 unique to each control). The crate also ships XPath, XSD and XSLT modules that these controls do not exercise.

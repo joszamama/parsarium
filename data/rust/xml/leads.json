@@ -62,14 +62,6 @@
       "source": "https://crates.io/crates/minidom-14"
     },
     {
-      "name": "uppsala",
-      "version": "0.12.1",
-      "recent_downloads_90d": 287733,
-      "status": "unresolved",
-      "reason": "Pinned BSD-2-Clause parse_bytes(&[u8]) independently matches both valid Expat XML controls exactly. Docker covers 909 own source lines; scoped AFL++ instrumentation is limited to the uppsala crate, and three valid-control runs each give stable, input-dependent edges. Project evidence is ready for selection review.",
-      "source": "https://crates.io/crates/uppsala"
-    },
-    {
       "name": "hard-xml",
       "version": "1.43.0",
       "recent_downloads_90d": 228546,
@@ -189,6 +181,17 @@
       "record": "data/rust/xml/parsers.json",
       "receipt": "projects/xml/rust/rxml/verification.json",
       "source_sha256": "4959705975475401c48b375deedd848d15b816c3915978fc617b31a1776fb60a"
+    },
+    {
+      "name": "uppsala",
+      "version": "0.12.1",
+      "recent_downloads_90d": 287733,
+      "status": "selected",
+      "reason": "Own pure-Rust XML scanner, recursive-descent parser, namespace resolver and DOM (no runtime dependencies) behind the documented parse_bytes(&[u8]) API; selected after both shared valid controls matched the Expat oracle exactly, 909 own-crate source lines were covered, and uppsala-only AFL++ feedback was identical across repeats (1,114 vs 1,285 edges; 94 and 265 unique to each control; ten further afl-showmap repeats per control were also identical).",
+      "source": "https://crates.io/crates/uppsala",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/uppsala/verification.json",
+      "source_sha256": "95eaea4bf5a4837be1861b8c45913dd6fd33f9ae9d9fcc60716399f7ebfd2122"
     }
   ]
 }
