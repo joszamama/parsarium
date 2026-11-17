@@ -1,0 +1,55 @@
+[
+  {
+    "name": "jansson",
+    "version": "2.15.1",
+    "license": "MIT",
+    "input_api": "json_loadb(const char *buffer, size_t buflen, size_t flags, json_error_t *error)",
+    "documentation": "https://jansson.readthedocs.io/en/latest/apiref.html#c.json_loadb",
+    "documentation_note": "Read the Docs serves no per-release path for 2.15.1; 'latest' rendered 'Jansson 2.15.1 documentation' on 2026-11-17. The pinned tarball's doc/apiref.rst documents json_loadb (line 1383) and json_object_seed (line 920).",
+    "source": "https://github.com/akheron/jansson/releases/tag/v2.15.1",
+    "scope": "RFC 8259 JSON text (object or array root, flags 0) decoded into a json_t tree",
+    "family": "jansson recursive-descent decoder (src/load.c)",
+    "family_note": "Own lexer and recursive-descent parser in src/load.c with UTF-8 checks in src/utf.c and number conversion via strtod in src/strconv.c. No external JSON library. The harness fixes json_object_seed(1) so object hash layout repeats.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package jansson",
+      "value": 282984,
+      "rank": 126,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/c/jansson"
+  }
+]

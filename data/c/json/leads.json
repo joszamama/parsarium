@@ -1,0 +1,52 @@
+[
+  {
+    "name": "json-c",
+    "status": "unresolved",
+    "language": "C",
+    "conan_recipe": true,
+    "popcon_installed": 269736,
+    "popcon_rank": 165,
+    "reason": "Own tokenizer json_tokener_parse_ex(tok, str, len) over a byte buffer; second-highest popcon count (gap to jansson 13,248 installs, under 5%). Not built in this one-parser pilot.",
+    "source": "https://github.com/json-c/json-c"
+  },
+  {
+    "name": "cjson",
+    "status": "unresolved",
+    "language": "C",
+    "conan_recipe": true,
+    "popcon_installed": 150958,
+    "popcon_rank": 462,
+    "reason": "Single-file parser with cJSON_ParseWithLength(value, length); most of its popcon count is in the no-files column. Not built in this pilot.",
+    "source": "https://github.com/DaveGamble/cJSON"
+  },
+  {
+    "name": "yyjson",
+    "status": "unresolved",
+    "language": "C",
+    "conan_recipe": true,
+    "popcon_installed": 14868,
+    "popcon_rank": 2611,
+    "reason": "yyjson_read(dat, len, flg) over bytes; Conan recipe present. Not built in this pilot.",
+    "source": "https://github.com/ibireme/yyjson"
+  },
+  {
+    "name": "jsmn",
+    "status": "unresolved",
+    "language": "C",
+    "conan_recipe": true,
+    "popcon_installed": 11,
+    "popcon_rank": 27685,
+    "reason": "Tokenizer only (jsmn_parse fills token spans, no value tree); popcon 11. Not built.",
+    "source": "https://github.com/zserge/jsmn"
+  },
+  {
+    "name": "parson",
+    "status": "unresolved",
+    "language": "C",
+    "conan_recipe": true,
+    "popcon_installed": null,
+    "popcon_rank": null,
+    "reason": "json_parse_string takes a NUL-terminated string, not a length-bounded buffer; Conan recipe present but no Debian source package, so no comparable popcon number. Not built.",
+    "source": "https://github.com/kgabis/parson"
+  }
+]

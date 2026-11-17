@@ -1,0 +1,20 @@
+{
+  "ecosystem": "C",
+  "format": "JSON",
+  "runtime": "ISO/IEC 9899:2024 C standard library (WG14 N3220 working draft)",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "C standard library headers, clause 7.1.2",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "The listed standard headers provide no JSON parser or JSON value type."
+    },
+    {
+      "api": "Input/output <stdio.h>, clause 7.23, and numeric conversion strtod in <stdlib.h>, clause 7.24.1",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "fread returns bytes and strtod converts one decimal number; neither recognises JSON objects, arrays, strings, or literals."
+    }
+  ],
+  "limit": "Scoped to the ISO C standard library. POSIX and platform libraries were not inventoried. No standard JSON API was documented to run."
+}
