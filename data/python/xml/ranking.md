@@ -10,3 +10,5 @@ The within-cell adoption signal is [PyPI Stats](https://pypistats.org/api/) `las
 | 2 | [xmltodict](https://pypi.org/project/xmltodict/) | 1.0.4 | 113,615,896 | XML hierarchy, namespace, attributes, decoded text | xmltodict over CPython Expat |
 
 The verified `xml.etree.ElementTree` standard API is [listed separately](standard.json). lxml and xmltodict use different underlying XML parser engines.
+
+lxml's source coverage includes libxml2 `parser.c` lines 8700–8720. Its AFL++ feedback bridge excludes that line range because an address-sensitive attribute lookup varied across identical valid replays; the five-repeat control check was stable after that exclusion.
