@@ -1,6 +1,6 @@
 # Python × SQL: pilot ranking
 
-Three third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
+Four third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
 
 ## Primary within-cell adoption metric
 
@@ -11,8 +11,9 @@ PyPI Stats last_month downloads (mirrors excluded), captured 2026-11-17 ([snapsh
 | 1 | [sqlparse](https://sqlparse.readthedocs.io/en/0.6.1/api.html#sqlparse.parse) | 0.6.1 | 125,550,021 | `sqlparse.parse(local SQL text) -> tuple of grouped Statement token trees`; dialect: none (sqlparse has no dialect option) | sqlparse regex lexer and token-grouping engine (non-validating) |
 | 2 | [sqlglot](https://sqlglot.com/sqlglot.html#parse) | 30.33.0 | 91,735,974 | `sqlglot.parse(local SQL text, read=None) -> list of Expression trees`; dialect: sqlglot default dialect (read=None) | sqlglot pure-Python tokenizer and recursive-descent parser |
 | 3 | [sqlfluff](https://docs.sqlfluff.com/en/4.5.0/reference/api.html#sqlfluff.parse) | 4.5.0 | 11,606,805 | `sqlfluff.parse(local SQL text, dialect="ansi") -> parse-tree record`; dialect: ansi | sqlfluff lexer and dialect grammar matcher |
+| 4 | [pglast](https://pglast.readthedocs.io/en/v8/parser.html#pglast.parser.parse_sql) | 8.8 | 10,961,367 | `pglast.parse_sql(local SQL text) -> tuple of pglast.ast.RawStmt nodes`; dialect: PostgreSQL 18 (libpg_query raw parser) | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 
-Receipts: [sqlparse](../../../projects/sql/python/sqlparse/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlparse/differential.json), [sqlglot](../../../projects/sql/python/sqlglot/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlglot/differential.json), [sqlfluff](../../../projects/sql/python/sqlfluff/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlfluff/differential.json).
+Receipts: [sqlparse](../../../projects/sql/python/sqlparse/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlparse/differential.json), [sqlglot](../../../projects/sql/python/sqlglot/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlglot/differential.json), [sqlfluff](../../../projects/sql/python/sqlfluff/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlfluff/differential.json), [pglast](../../../projects/sql/python/pglast/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/pglast/differential.json).
 
 ## Leads by the same metric
 
@@ -21,7 +22,7 @@ Receipts: [sqlparse](../../../projects/sql/python/sqlparse/verification.json) an
 | sqlparse | 125,550,021 | selected | sqlparse lexer and grouping engine |
 | sqlglot | 91,735,974 | selected | sqlglot tokenizer and recursive-descent parser |
 | sqlfluff | 11,606,805 | selected | sqlfluff lexer and dialect grammar matcher |
-| pglast | 10,961,367 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| pglast | 10,961,367 | selected | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | sql-metadata | 4,518,030 | excluded | sqlparse (wrapper) |
 | sqlglotrs | 4,371,917 | excluded | sqlglot |
 | sql-formatter | 665,038 | excluded | — |

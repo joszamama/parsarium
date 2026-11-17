@@ -279,8 +279,100 @@
       "parser_feature_difference": 115,
       "project_receipt": "projects/sql/python/sqlfluff/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/python/sqlfluff/differential.json"
+    },
+    {
+      "package": "pglast",
+      "version": "8.8",
+      "pass": true,
+      "input_api": "pglast.parse_sql(local SQL text) -> tuple of pglast.ast.RawStmt nodes",
+      "dialect": "PostgreSQL 18 (libpg_query raw parser)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser), shared with the C libpg_query path; pglast's own Cython layer (pglast/parser.c, from parser.pyx and ast.pyx) converts the raw C parse tree into pglast.ast nodes",
+      "parser_source_files": 37,
+      "parser_source_lines_covered": 3185,
+      "afl_tuple_difference": 1031,
+      "parser_feature_difference": 1137,
+      "project_receipt": "projects/sql/python/pglast/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/python/pglast/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:49:59.534584+00:00"
+  "checked_at_utc": "2026-11-17T20:50:57.852406+00:00"
 }

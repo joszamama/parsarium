@@ -1,0 +1,30 @@
+{
+  "pglast": {
+    "release": "8.8",
+    "registry_metadata": "https://pypi.org/pypi/pglast/8.8/json",
+    "uploaded_utc": "2026-11-13T15:01:05Z",
+    "sdist": "https://files.pythonhosted.org/packages/62/b2/fa8b837b58f352e5941ea7a8160121d32bad978a55538232d7890b8aaad5/pglast-8.8.tar.gz",
+    "sdist_sha256": "ff9998ec6bac4f30f84db6b6edb28a0fb03b1eda5c8ad211ab8362f5a08b833b",
+    "wheel": "https://files.pythonhosted.org/packages/d1/b7/9dc48ef38343fdd9fd29b61a29cffa659273f388c8ad7a4a15c704a945d6/pglast-8.8-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+    "wheel_sha256": "53af5bd79dc0b62ae7b9707c106e13f757e80bab1edea3d9ef321b5925cf5f00",
+    "wheel_note": "Reference wheel only; it is not installed. The image source-builds the pinned sdist with clang -O0 and LLVM source coverage instead of the optimised manylinux build.",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "pyproject.toml license = \"GPL-3.0-or-later\" and setup.py/README headers in the pinned sdist (the sdist ships no separate license file); vendored libpg_query LICENSE is BSD-3-Clause",
+    "requires_python": null,
+    "runtime_dependencies": [],
+    "parser_c_sha256": "e524ba6ff8c5bed3b0a9852bc2be78c44ac36c2c2563b2a032a897b7dff070d5",
+    "source_sha256": "ff9998ec6bac4f30f84db6b6edb28a0fb03b1eda5c8ad211ab8362f5a08b833b"
+  },
+  "libpg_query": {
+    "release": "18.1.0",
+    "release_evidence": "libpg_query/Makefile VERSION = 18.1.0 and PG_VERSION = 18.6 in the pinned sdist",
+    "vendored_in": "pglast 8.8 sdist (pinned by sdist SHA-256)",
+    "gram_c_sha256": "31e4e51554e858cded7d162c4f1a093855293b57143bcdbf14a1c53cfc7f1338",
+    "license": "BSD-3-Clause",
+    "license_file_sha256": "f9352c20940619a380a5e9f23cebe34d8f797cfbd747fc236a7a3e5fc8ef9b41"
+  },
+  "build_backend": {
+    "setuptools": {"release": "84.2.1", "wheel_sha256": "ca140b45d5325a9478f880e351484f62fef15f336462e449ca0c03c873d589c2"},
+    "role": "build backend only; the pre-generated Cython output pglast/parser.c is compiled directly, so Cython is not installed"
+  }
+}

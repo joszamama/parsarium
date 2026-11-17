@@ -39,13 +39,14 @@
     },
     {
       "name": "pglast",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 10961367,
       "metric_error": null,
       "latest_release_observed": "8.8",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "pglast.parse_sql",
-      "reason": "pglast.parse_sql returns libpg_query parse-tree nodes via a Cython binding."
+      "reason": "pglast.parse_sql runs the vendored libpg_query 18.1.0 raw parser and converts the C tree into pglast.ast nodes in its own Cython layer. Both valid controls equal the oracle; source-built with LLVM coverage (round 2). Shared libpg_query family.",
+      "selected_release": "8.8"
     },
     {
       "name": "sql-metadata",

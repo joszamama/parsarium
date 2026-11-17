@@ -328,5 +328,109 @@
         }
       ]
     }
+  },
+  {
+    "name": "pglast",
+    "version": "8.8",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "pyproject.toml license = \"GPL-3.0-or-later\" and source headers in the pinned sdist (no separate license file is shipped); the vendored libpg_query LICENSE is BSD-3-Clause (SHA-256 f9352c20940619a380a5e9f23cebe34d8f797cfbd747fc236a7a3e5fc8ef9b41)",
+    "input_api": "pglast.parse_sql(local SQL text) -> tuple of pglast.ast.RawStmt nodes",
+    "documentation": "https://pglast.readthedocs.io/en/v8/parser.html#pglast.parser.parse_sql",
+    "source": "https://files.pythonhosted.org/packages/62/b2/fa8b837b58f352e5941ea7a8160121d32bad978a55538232d7890b8aaad5/pglast-8.8.tar.gz",
+    "source_sha256": "ff9998ec6bac4f30f84db6b6edb28a0fb03b1eda5c8ad211ab8362f5a08b833b",
+    "dependencies": [],
+    "dialect": "PostgreSQL 18 (libpg_query raw parser)",
+    "scope": "One SQL statement from local text with the PostgreSQL 18 grammar; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Source-built with LLVM coverage instead of the optimised wheel; the prettifier and the JSON/protobuf variants are untested.",
+    "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+    "family_note": "pglast vendors libpg_query 18.1.0 (the same release as the C libpg_query path) and links it statically. parse_sql calls pg_query_raw_parse and converts the C node tree into pglast.ast objects in its own Cython layer (pglast/parser.c from parser.pyx and ast.pyx); it does not go through libpg_query's JSON or protobuf output. The adapter reads SelectStmt (targetList, fromClause, whereClause, groupClause, sortClause), InsertStmt (relation, cols, selectStmt.valuesLists), RangeVar, JoinExpr, FuncCall and A_Const nodes. Its vendored libpg_query/src tree equals the 18.1.0 release tag used by the C path except pg_query_json_plpgsql.c, the C++ protobuf output file and the PostgreSQL COPYRIGHT file, so the grammar, scanner and raw_parser sources are byte-identical; pglast's own differential is its Cython conversion layer (pglast/parser.c: 735 select-only and 161 insert-only AFL++ features). A distinct package API over the shared libpg_query family; pg_query 0.29 is its predecessor PyPI name and is not a separate path.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 10961367,
+      "source": "https://pypistats.org/api/packages/pglast/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Package-level downloads; the predecessor pg_query name (2,220) is counted separately and not combined."
+    },
+    "project": "projects/sql/python/pglast",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]
