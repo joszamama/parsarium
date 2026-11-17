@@ -16,6 +16,7 @@ SLUGS = {
     "unsafe-libyaml": "unsafe_libyaml",
     "yaml-rust2": "yaml_rust2",
     "serde-saphyr": "serde_saphyr",
+    "granit-parser": "granit_parser",
 }
 CRATES = {
     "serde_yaml": ["serde_yaml", "unsafe_libyaml"],
@@ -23,6 +24,7 @@ CRATES = {
     "unsafe-libyaml": ["unsafe_libyaml"],
     "yaml-rust2": ["yaml_rust2"],
     "serde-saphyr": ["granit_parser", "serde_saphyr"],
+    "granit-parser": ["granit_parser", "parsarium_yaml_granit_parser_events"],
 }
 spec = importlib.util.spec_from_file_location("yaml_control_oracle", ROOT / "controls/yaml/check_controls.py")
 oracle = importlib.util.module_from_spec(spec)
