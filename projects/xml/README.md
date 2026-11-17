@@ -15,6 +15,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [dom4j / Java](java/dom4j/README.md)
 - [jackson-dataformat-xml / Java](java/jackson_xml/README.md)
 - [javax.xml.parsers.DocumentBuilder.parse(InputStream) / Java](java/jdk_documentbuilder/README.md)
+- [jdom2 / Java](java/jdom2/README.md)
 - [woodstox-core / Java](java/woodstox_core/README.md)
 - [xercesImpl / Java](java/xercesimpl/README.md)
 - [xmlbeans / Java](java/xmlbeans/README.md)

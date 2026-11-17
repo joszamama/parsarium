@@ -1,6 +1,10 @@
-# JDOM2 — XML / Java
+# jdom2 — XML / Java
 
-Pinned `org.jdom:jdom2:2.0.6.1` reads local XML through `SAXBuilder.build(InputStream)` and constructs a namespace-aware JDOM tree. Its `SAXHandler` and factory build the tree from the default JAXP SAX reader; in the pinned runtime, that reader is the OpenJDK Xerces fork. [Manifest](manifest.json) · [source lock](source-lock.json) · [verification receipt](verification.json) · [API and family evidence](../../../../catalog/xml/java/jdom2/README.md).
+Pinned release: `2.0.6.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
+
+[API, control result, and parser family](../../../../catalog/xml/java/jdom2/README.md)
+
+## Run from the repository root
 
 ```sh
 python3 parsarium.py build xml java jdom2
@@ -10,4 +14,4 @@ python3 parsarium.py afl build xml java jdom2
 python3 parsarium.py afl prepare xml java jdom2 runs/xml-jdom2-afl
 ```
 
-`afl prepare` seeds a run; it does not start a campaign. The two valid controls cover a narrow UTF-8 XML 1.0 subset without DOCTYPE.
+Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
