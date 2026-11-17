@@ -29,12 +29,12 @@ SYSTEM_PACKAGES = {
     "pydub": "ffmpeg", "audioread": "ffmpeg", "pycord": "ffmpeg", "imageio": "ffmpeg", "pyqt6": "libglib2.0-0 libgl1 libegl1 libxkbcommon0 libfreetype6 libglib2.0-0 libfontconfig1 libx11-6 libxcb1 libxrender1 libxext6 libsm6 libice6",
     "pyside6": "libglib2.0-0 libgl1 libegl1 libxkbcommon0 libfreetype6 libglib2.0-0 libfontconfig1 libx11-6 libxcb1 libxrender1 libxext6 libsm6 libice6", "pyqt5": "libgl1 libegl1 libxkbcommon0 libfreetype6 libglib2.0-0 libfontconfig1 libx11-6 libxcb1 libxrender1 libxext6 libsm6 libice6",
     "librosa": "libsndfile1", "audiolab": "libsndfile1",
-    "mpl-simple-svg-parser": "libcairo2", "pymeshlab": "libgl1", "open3d": "libgl1 libegl1 libxkbcommon0 libfreetype6 libglib2.0-0 libfontconfig1 libx11-6 libxcb1 libxrender1 libxext6 libsm6 libice6",
+    "mpl-simple-svg-parser": "libcairo2", "pymeshlab": "libgl1", "pyassimp": "libassimp6=6.0.4+ds-1build1", "open3d": "libgl1 libegl1 libxkbcommon0 libfreetype6 libglib2.0-0 libfontconfig1 libx11-6 libxcb1 libxrender1 libxext6 libsm6 libice6",
 }
 EXTRA_DEPENDENCIES = {
     "pydub": ["audioop-lts"], "markitdown": ["pdfminer-six", "pdfplumber"],
     "pgm-reader": ["numpy", "matplotlib"], "resvglite": ["Pillow"], "av": ["numpy"],
-    "assimp-py": ["numpy"], "imageio": ["imageio-ffmpeg"], "resvg-py": ["Pillow"], "mpl-simple-svg-parser": ["skia-python"],
+    "assimp-py": ["numpy"], "pyassimp": ["numpy", "setuptools"], "imageio": ["imageio-ffmpeg"], "resvg-py": ["Pillow"], "mpl-simple-svg-parser": ["skia-python"],
     "music-tag": ["mutagen"], "scour": ["six", "lxml"],
     "pdfquery": ["chardet", "pdfminer-six", "pyquery", "six"], "pymp4": ["construct"],
 }
@@ -207,7 +207,7 @@ def stage(format_name: str, package: str) -> Path:
     entry = ("adapter.run" if format_name in {"png", "zip", "wav", "ascii_pnm"}
              else "adapter.parse")
     argument = ("data" if format_name == "http11" else
-                "source.name" if normalized(package) in {"audiomath", "pyntcloud", "assimp-py", "pymeshlab"} else "Path(source.name)")
+                "source.name" if normalized(package) in {"audiomath", "pyntcloud", "assimp-py", "pymeshlab", "pyassimp"} else "Path(source.name)")
     body = f'''"""Byte-input harness for {package} {parser['version']} on {format_name}."""
 import tempfile
 from pathlib import Path

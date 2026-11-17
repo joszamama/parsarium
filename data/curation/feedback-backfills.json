@@ -17,6 +17,14 @@
       "project": "ascii_ply/python/pyntcloud",
       "evidence": "fuzzing/afl-native/ascii_ply/python/pyntcloud/verification.json",
       "note": "First next-ranked PyPI path after the PyMeshLab and libigl feedback blockers (rank 11, 46,262 downloads). Pinned Docker control passes with 805 pyntcloud source lines (PLY reader pyntcloud/io/ply.py); the AFL++ Python bridge maps them to 817 tuples, repeats identically on triangle.ply and gives a different 812-tuple map on a valid coloured two-face square."
+    },
+    {
+      "ecosystem": "python",
+      "format": "ascii_ply",
+      "name": "pyassimp",
+      "project": "ascii_ply/python/pyassimp",
+      "evidence": "fuzzing/afl-native/ascii_ply/python/pyassimp/verification.json",
+      "note": "Second next-ranked PyPI path (rank 12, 46,129 downloads) after the PyMeshLab and libigl feedback blockers and pyntcloud. pyassimp 5.2.5 loads a source-built Assimp 6.0.6 (PLY importer only, LLVM coverage); the pinned Docker control passes with 667 pyassimp wrapper lines, and the AFL++ feedback maps 668 native PLY source regions (PlyLoader.cpp, PlyParser.cpp) to 686 tuples, identical on repeat, 694 and 713 tuples on a coloured square and a quad with normals and UVs."
     }
   ]
 }
