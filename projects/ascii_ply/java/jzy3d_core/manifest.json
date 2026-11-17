@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "java",
+  "package": "jzy3d-core",
+  "release": "2.2.1",
+  "catalog_parser": "data/java/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/java/jzy3d_core/source-lock.json",
+  "source_sha256": "e2b0929dc3efb13c0d5b8f318b7b0a503d26d0435d00502441bd5d0935196840",
+  "underlying_package": "jply",
+  "underlying_release": "0.2.1",
+  "underlying_source_sha256": "69f61fdd1a2f0da5c20d0f5328aafedc8070a18305183fed8556c1e8a1dddc67",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3,
+    "second_x": 1.0,
+    "third_y": 1.0
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/jzy3d-core-2.2.1.jar:/work/lib/jply-0.2.1.jar:/work/lib/log4j-api-2.17.1.jar:/work/lib/log4j-core-2.17.1.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo separate source-line coverage of the Jzy3d Core 2.2.1 Ply vertex API and the underlying jPLY 0.2.1 PlyReaderFile header and ASCII element reader during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/module/",
+  "format_specific_coverage_file_suffix": "/Ply.java",
+  "underlying_coverage_subject_prefix": "/work/parser-source/underlying/",
+  "underlying_format_specific_coverage_file_suffix": "/PlyReaderFile.java",
+  "afl_underlying_jar": "/work/underlying-lib",
+  "afl_underlying_sources": "/work/parser-source/underlying"
+}
