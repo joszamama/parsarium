@@ -213,5 +213,109 @@
         }
       ]
     }
+  },
+  {
+    "name": "sql-parser-cst",
+    "version": "0.44.1",
+    "license": "GPL-2.0-or-later",
+    "license_evidence": "package.json license GPL-2.0-or-later and the GNU GPL version 2 LICENSE text in the pinned npm tarball",
+    "input_api": "parse(local UTF-8 text, {dialect: 'sqlite'}) -> Program",
+    "documentation": "https://www.npmjs.com/package/sql-parser-cst/v/0.44.1",
+    "source": "https://registry.npmjs.org/sql-parser-cst/-/sql-parser-cst-0.44.1.tgz",
+    "source_sha256": "1dc65d972c20779a9beb6aafbc72bad16575bca83b8e09acf33aa12e7549b2af",
+    "dependencies": [],
+    "dialect": "SQLite (dialect: 'sqlite')",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8 and parsed with the sqlite dialect; the trailing empty statement after ';' is not counted. Valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "sql-parser-cst Peggy grammar",
+    "family_note": "parse runs the package's own Peggy-generated parser (lib/parser.js, about 179,000 lines) and returns a concrete syntax tree that keeps keywords, aliases and parentheses (select_stmt clauses, join_expr, alias, func_call, number_literal, string_literal; insert_clause and values_clause). The adapter reads those clauses and walks func_call and literal nodes. It has no runtime dependencies and is independent of node-sql-parser (PEG.js), pgsql-ast-parser (nearley) and libpg_query. MySQL, MariaDB, BigQuery and PostgreSQL are documented as experimental and untested here.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 536703,
+      "source": "https://api.npmjs.org/downloads/point/last-month/sql-parser-cst",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Package downloads include transitive installs (for example through prettier-plugin-sql-cst)."
+    },
+    "project": "projects/sql/javascript/sql_parser_cst",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]
