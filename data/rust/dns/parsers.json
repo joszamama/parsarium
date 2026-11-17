@@ -1,0 +1,105 @@
+[
+  {
+    "name": "hickory-proto",
+    "version": "0.26.3",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "Cargo metadata 'MIT OR Apache-2.0' and LICENSE-MIT/LICENSE-APACHE in the crate (sha256 12b92608...), checked in the image",
+    "input_api": "hickory_proto::op::Message::from_vec(buffer: &[u8]) -> Result<Message, DecodeError>",
+    "documentation": "https://docs.rs/hickory-proto/0.26.3/hickory_proto/op/struct.Message.html#method.from_vec",
+    "source": "https://crates.io/crates/hickory-proto/0.26.3",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "Hickory DNS proto (formerly trust-dns-proto): BinDecoder and Message/Record decoders",
+    "family_note": "Own pure-Rust decoder (serialize/binary/decoder.rs, op/message.rs, rr/record.rs, rr/domain/name.rs). trust-dns-proto is the same project under its earlier crate name. The crate drops the reserved Z bit, so z reports AD and CD only.",
+    "project": "projects/dns/rust/hickory_proto",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "crates.io recent_downloads (90 days)",
+      "value": 107121455,
+      "source": "https://crates.io/api/v1/crates/hickory-proto",
+      "captured_at_utc": "2026-11-17T16:37:46.299273+00:00",
+      "snapshot": "data/rust/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 1,
+    "afl_feedback": "data/rust/dns/hickory-proto-feedback-differential.json"
+  }
+]

@@ -76,9 +76,11 @@ def bridge_features(manifest: dict, overlay_image: str, case: Path, work: Path, 
 
 
 def native_features(manifest: dict, image: str, case: Path, work: Path, name: str) -> set[str]:
+    # Rust images carry the toolchain's llvm-profdata/llvm-cov in /work; C/C++ images use the system ones.
+    tools = "/work/" if manifest["ecosystem"] == "rust" else ""
     script = (f"LLVM_PROFILE_FILE=/coverage/{name}.profraw /work/replay /input/case > /dev/null && "
-              f"llvm-profdata merge -sparse /coverage/{name}.profraw -o /coverage/{name}.profdata && "
-              f"llvm-cov export /work/replay -instr-profile=/coverage/{name}.profdata "
+              f"{tools}llvm-profdata merge -sparse /coverage/{name}.profraw -o /coverage/{name}.profdata && "
+              f"{tools}llvm-cov export /work/replay -instr-profile=/coverage/{name}.profdata "
               f"> /coverage/{name}.coverage.json")
     run([*sandbox(manifest, case, work), "--entrypoint", "/bin/sh", image, "-c", script])
     coverage = json.loads((work / f"{name}.coverage.json").read_text())
@@ -91,8 +93,15 @@ def native_features(manifest: dict, image: str, case: Path, work: Path, name: st
 
 def tuples(manifest: dict, overlay_image: str, target: list[str], case: Path, work: Path,
            name: str, map_size: int) -> set[str]:
-    run([*sandbox(manifest, case, work), "-e", f"AFL_MAP_SIZE={map_size}", "--entrypoint", "afl-showmap",
-         overlay_image, "-m", "none", "-t", "120000", "-o", f"/coverage/{name}.map", "--", *target])
+    if manifest.get("afl_target_stdin"):
+        # afl.rs targets read the case from stdin; afl-showmap forwards its own stdin.
+        showmap = (f"afl-showmap -m none -t 120000 -o /coverage/{name}.map -- {' '.join(target)} "
+                   "< /input/case")
+        run([*sandbox(manifest, case, work), "-e", f"AFL_MAP_SIZE={map_size}", "--entrypoint", "/bin/sh",
+             overlay_image, "-c", showmap])
+    else:
+        run([*sandbox(manifest, case, work), "-e", f"AFL_MAP_SIZE={map_size}", "--entrypoint", "afl-showmap",
+             overlay_image, "-m", "none", "-t", "120000", "-o", f"/coverage/{name}.map", "--", *target])
     return {line.split(":", 1)[0] for line in (work / f"{name}.map").read_text().splitlines() if line}
 
 
@@ -131,7 +140,7 @@ def check(relative: str) -> dict:
         target = ["/work/afl_proxy", "/input/case"]
         kind = "parser-line AFL++ bridge features"
     elif eco == "rust":
-        target = [manifest.get("afl_target", "/work/afl_fuzzer"), "/input/case"]
+        target = [manifest.get("afl_target", "/work/afl_fuzzer")]
         kind = "LLVM source regions of the base replay under coverage_subject_prefix"
     else:
         target = ["/work/fuzzer", "/input/case"]

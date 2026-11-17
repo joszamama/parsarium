@@ -16,7 +16,7 @@ The harness reports, from the parsed message:
 - every question as `{name, type, class}`;
 - every record in `answers`, `authority` and `additional` as `{name, type, class, ttl, rdata}`.
 
-Names are lower case and absolute, with a trailing dot. Types and classes are numbers. RDATA is presentation text: a dotted quad for A, RFC 5952 text for AAAA, a name for CNAME, NS and PTR, `<preference> <exchange>` for MX, and quoted strings joined by spaces for TXT. A harness may normalise the library's own presentation (adding the trailing dot, lower case, compressing an IPv6 address from its 16 decoded bytes), but every value must come from the library's parse. If a library cannot report the `z` bits, the harness says so and the path stays a lead.
+Names are lower case and absolute, with a trailing dot. Types and classes are numbers. RDATA is presentation text: a dotted quad for A, RFC 5952 text for AAAA, a name for CNAME, NS and PTR, `<preference> <exchange>` for MX, and quoted strings joined by spaces for TXT. A harness may normalise the library's own presentation (adding the trailing dot, lower case, compressing an IPv6 address from its 16 decoded bytes), but every value must come from the library's parse. `z` holds the three bits after RA (the reserved Z bit, AD and CD). A library that drops the reserved Z bit on decode reports AD and CD only, and its record says so; both controls have all three bits clear.
 
 ## Controls
 
