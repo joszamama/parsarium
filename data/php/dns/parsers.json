@@ -105,6 +105,111 @@
     "afl_feedback": "data/php/dns/react-dns-feedback-differential.json"
   },
   {
+    "name": "daverandom/libdns",
+    "version": "v2.1.0",
+    "license": "MIT",
+    "license_evidence": "composer.json \"license\": \"MIT\" and LICENSE in the tagged source archive (sha256 224409d0...), checked in the image",
+    "composer_lock": "projects/dns/php/daverandom_libdns/composer.lock",
+    "input_api": "LibDNS\\Decoder\\Decoder::decode(string $data): LibDNS\\Messages\\Message (from (new DecoderFactory)->create(null, false))",
+    "documentation": "https://github.com/DaveRandom/LibDNS/blob/v2.1.0/examples/AQuery.php",
+    "documentation_note": "The README is one line; the bundled examples/AQuery.php and SOAQuery.php decode a response packet with (new DecoderFactory)->create()->decode($responsePacket), and Decoder::decode carries a docblock ('Decode a Message from raw network data') in the tagged source.",
+    "source": "https://github.com/DaveRandom/LibDNS/releases/tag/v2.1.0",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "LibDNS (Decoder, DecodingContext, Packets\\Packet and Records\\Types decoders)",
+    "family_note": "Own pure-PHP decoder; amphp/dns and danog's DNS packages delegate message decoding to it. It drops the Z, AD and CD bits, so z is reported as 0. php-fuzzer's include-interceptor cannot rewrite Records/Types/DomainName.php (a PHP_INT_SIZE ternary class constant), so the php-fuzzer entry loads that one file through the native file:// wrapper and re-registers the interceptor; Xdebug coverage and the AFL++ bridge count it normally.",
+    "project": "projects/dns/php/daverandom_libdns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "Packagist total downloads",
+      "value": 66619313,
+      "source": "https://packagist.org/packages/daverandom/libdns.json",
+      "captured_at_utc": "2026-11-17T16:37:38.051703+00:00",
+      "snapshot": "data/php/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 2,
+    "afl_feedback": "data/php/dns/daverandom-libdns-feedback-differential.json"
+  },
+  {
     "name": "pear/net_dns2",
     "version": "v2.0.7",
     "license": "MIT",
@@ -206,7 +311,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 2,
+    "rank": 3,
     "afl_feedback": "data/php/dns/pear-net-dns2-feedback-differential.json"
   }
 ]

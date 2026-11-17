@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "format": "dns",
+  "ecosystem": "php",
+  "pilot": true,
+  "package": "daverandom/libdns",
+  "release": "v2.1.0",
+  "catalog_parser": "data/php/dns/parsers.json",
+  "source_lock": "projects/dns/php/daverandom_libdns/source-lock.json",
+  "source_sha256": "224409d0d4bd301ab8c1c31093094f0abbfb8c12b058d2975dee382a4cdc2ea6",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/dns/response.bin",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "expected_output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "differential_control": "controls/dns/query.bin",
+  "differential_control_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "differential_expected_output": {
+    "id": 4660,
+    "qr": 0,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 0,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 0,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [],
+    "authority": [],
+    "additional": []
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "summary_command": [
+    "/usr/bin/php",
+    "/work/replay.php",
+    "/input/case"
+  ],
+  "coverage": "Xdebug executed line coverage in daverandom/libdns PHP source (Decoder, DecodingContext, Packets, Messages, Records and Types); php-fuzzer basic-block instrumentation for the fuzz entry except Records/Types/DomainName.php (see fuzz_instrumentation_note)",
+  "coverage_subject_prefix": "/work/vendor/daverandom/libdns/",
+  "format_specific_coverage_file_suffix": "/src/Decoder/Decoder.php",
+  "api": "(new LibDNS\\Decoder\\DecoderFactory())->create(null, false)->decode(string $data): LibDNS\\Messages\\Message",
+  "z_bits_note": "LibDNS's decoder keeps id, QR (message type), opcode, aa, tc, rd, ra and rcode but not the Z, AD and CD bits, so the harness reports z as 0. Both controls have all three bits clear.",
+  "scope": "One RFC 1035 DNS message from local bytes through LibDNS's Decoder only; no resolver, event loop or socket is created. A and AAAA text is LibDNS's own address formatting; names get a trailing dot and lower case.",
+  "fuzz_instrumentation_note": "php-fuzzer v0.0.11 rewrites every file:// include through nikic/include-interceptor; its rewrite of src/Records/Types/DomainName.php (const FLAG_NO_COMPRESSION = \\PHP_INT_SIZE === 4 ? -2147483648 : 0x80000000) is no longer a constant expression and PHP stops with 'Constant expression contains invalid operations'. fuzz-target.php therefore autoloads the parent class Type first, restores the native file:// wrapper for one require_once of DomainName.php and registers the interceptor's Stream wrapper again right after (the same steps as Interceptor::unwrap()/wrap()). Only that file lacks php-fuzzer edge instrumentation; harness.php and the parse path are unchanged, and Xdebug coverage and the AFL++ parser-line bridge load the file through the Composer autoloader and count its lines."
+}

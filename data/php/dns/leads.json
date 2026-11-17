@@ -25,7 +25,7 @@
   },
   {
     "name": "daverandom/libdns",
-    "status": "unresolved_runnability_blocker",
+    "status": "resolved_verified_selected",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 66619313,
     "found_by": "registry search hit",
@@ -38,7 +38,9 @@
     "checked_reference": "b84c94e8fe6b7ee4aecfe121bfe3b6177d303c8a",
     "checked_source_sha256": "224409d0d4bd301ab8c1c31093094f0abbfb8c12b058d2975dee382a4cdc2ea6",
     "control_result": "Both controls match the oracle summaries through (new DecoderFactory)->create(null, false)->decode($data) under plain PHP (Z, AD and CD are not kept, reported as 0).",
-    "reason": "Fails the fuzz-engine gate: under nikic/php-fuzzer v0.0.11 run-single, the include-interceptor rewrite of src/Records/Types/DomainName.php line 25 (const FLAG_NO_COMPRESSION = \\PHP_INT_SIZE === 4 ? -2147483648 : 0x80000000;) ends in 'PHP Fatal error: Constant expression contains invalid operations', so the project and its AFL++ bridge are not committed. The slot is left open."
+    "reason": "Pinned v2.1.0 passes both DNS controls; see parsers.json and data/php/dns/daverandom-libdns-feedback-differential.json.",
+    "verification": "projects/dns/php/daverandom_libdns/verification.json",
+    "runnability_note": "Round 1 recorded a php-fuzzer blocker: the include-interceptor rewrite of src/Records/Types/DomainName.php (a PHP_INT_SIZE ternary class constant) ends in 'Constant expression contains invalid operations'. Round 2 resolves it in fuzz-target.php only: the parent class is autoloaded first, then DomainName.php alone is required through the native file:// wrapper and the interceptor's wrapper is registered again (Interceptor::unwrap()/wrap() steps). Parsing and harness.php are unchanged; Xdebug coverage and the AFL++ bridge count DomainName.php normally."
   },
   {
     "name": "spatie/dns",

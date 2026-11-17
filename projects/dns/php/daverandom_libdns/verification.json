@@ -1,0 +1,90 @@
+{
+  "kind": "third_party",
+  "api": "(new LibDNS\\Decoder\\DecoderFactory())->create(null, false)->decode(string $data): LibDNS\\Messages\\Message",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:32:28.642603+00:00",
+  "manifest": "projects/dns/php/daverandom_libdns/manifest.json",
+  "image_id": "sha256:f60bfc856d4e3916a5b6d83f9e4a8f3d07f179fd0fb47506fe752bb56bd0f753",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "source_sha256": "224409d0d4bd301ab8c1c31093094f0abbfb8c12b058d2975dee382a4cdc2ea6",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "b4664a377de9dac186bfa6ccbf6056d61205e8fa7a8b5b7cf8ba26d53628e52e",
+    "composer.json": "633f44ea69792f96224695a713a1fccf0df08d3eaf4d8275ba99b67e901cdfcd",
+    "composer.lock": "bacae6b66b283941ba5fc061a0a20c2f2d769690936d35b19ceba459e8050e1c",
+    "fuzz-target.php": "fdb6c7caec9c85df379e86e6243c14a64d30bc23e84bcb053c6df44f0cf35545",
+    "harness.php": "b6c643f002b84950b17344bc4a4bd3edb1a067daf6d49274971b28ce8cb5a196",
+    "manifest.json": "8ffe934226ff53dcc5222acb437fce4e39f7cb8ea9e8f9729a21b15eafbe3c20",
+    "replay.php": "604f97c7fbff44f5e19be0bd953e0ffdf32e6b4e426b5a6c2d2b2619e328c632",
+    "run-control.php": "7c30d939667a950ff19f37f8c9ab03f484c91a7aac138e69439ba6c85aad28e1",
+    "source-lock.json": "b212c348a13e4a4fdc603199f1a6e76d5f2f64f55f1109bfe2aaf379d5b0fff4",
+    "target.json": "2395e9dad74b2c768014b58323aef8aefa21addec72d106336dea76576b2b587"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 40,
+  "parser_source_lines_covered": 594,
+  "format_specific_source_lines_covered": 120,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/php/daverandom_libdns/target/coverage/coverage.json",
+  "pass": true
+}
