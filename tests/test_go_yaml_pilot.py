@@ -63,7 +63,8 @@ class GoYamlPilotTest(unittest.TestCase):
                 self.assertTrue(result["repeated_control_identical"] and result["repeated_differential_identical"])
                 self.assertGreater(result["parser_feature_difference"], 0)
                 self.assertGreater(result["afl_tuple_difference"], 0)
-                self.assertTrue(set(result["difference_features_by_file"]) & {"scannerc.go", "parserc.go"})
+                self.assertTrue(set(result["difference_features_by_file"]) &
+                                {"scannerc.go", "parserc.go", "scanner.go", "parser.go"})
 
     def test_v2_harness_keeps_mapping_order(self):
         if not any(row["name"] == "gopkg.in/yaml.v2" for row in self.parsers):
@@ -71,6 +72,14 @@ class GoYamlPilotTest(unittest.TestCase):
         harness = (ROOT / "projects/yaml/go/gopkg_in_yaml_v2/harness.go").read_text()
         self.assertIn("yaml.MapSlice", harness)
         self.assertIn("UnmarshalYAML", harness)
+
+    def test_goccy_harness_keeps_mapping_order(self):
+        if not any(row["name"] == "github.com/goccy/go-yaml" for row in self.parsers):
+            self.skipTest("goccy/go-yaml not selected")
+        harness = (ROOT / "projects/yaml/go/github_com_goccy_go_yaml/harness.go").read_text()
+        self.assertIn("yaml.UseOrderedMap()", harness)
+        self.assertIn("case yaml.MapSlice:", harness)
+        self.assertNotIn("gopkg.in/yaml", harness)
 
 
 if __name__ == "__main__":

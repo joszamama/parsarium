@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T16:51:05.944662+00:00",
-  "projects_total": 2,
-  "projects_passed": 2,
+  "checked_at_utc": "2026-11-17T19:55:09.606466+00:00",
+  "projects_total": 3,
+  "projects_passed": 3,
   "differential_kind": "fixed_valid_block_sequence_yaml",
   "results": [
     {
@@ -82,6 +82,47 @@
         "parserc.go": 27,
         "scannerc.go": 38,
         "yamlprivateh.go": 5
+      }
+    },
+    {
+      "project": "yaml/go/github_com_goccy_go_yaml",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "overlay_receipt_sha256": "085bede078f4bc2600d480753bb734bda9dd83d04009db481dc7071791f7630e",
+      "control": "controls/yaml/catalog.yaml",
+      "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+      "differential": "controls/yaml/order.yaml",
+      "differential_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+      "oracle": "controls/yaml/check_controls.py EXPECTED typed trees (hand-written, Psych cross-checked)",
+      "control_tree_pass": true,
+      "differential_tree_pass": true,
+      "runs_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 947,
+      "control_afl_tuples": 961,
+      "differential_parser_features": 942,
+      "differential_afl_tuples": 954,
+      "parser_feature_difference": 101,
+      "afl_tuple_difference": 99,
+      "control_features_by_file": {
+        "ast.go": 43,
+        "context.go": 129,
+        "decode.go": 97,
+        "lexer.go": 5,
+        "node.go": 29,
+        "option.go": 2,
+        "parser.go": 207,
+        "scanner.go": 244,
+        "token.go": 188,
+        "yaml.go": 3
+      },
+      "difference_features_by_file": {
+        "ast.go": 7,
+        "context.go": 28,
+        "parser.go": 5,
+        "scanner.go": 36,
+        "token.go": 25
       }
     }
   ]

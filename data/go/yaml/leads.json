@@ -30,6 +30,21 @@
     "evidence": "projects/yaml/go/gopkg_in_yaml_v3/verification.json"
   },
   {
+    "name": "github.com/goccy/go-yaml",
+    "status": "selected",
+    "metric_value": 2983,
+    "metric_error": null,
+    "family": "goccy/go-yaml",
+    "api_hint": "yaml.UnmarshalWithOptions(..., yaml.UseOrderedMap())",
+    "note": null,
+    "found_by": "registry_search",
+    "source": "https://pkg.go.dev/github.com/goccy/go-yaml",
+    "reason": "Selected: pinned v1.19.2 module zip; yaml.UnmarshalWithOptions([]byte, *interface{}, yaml.UseOrderedMap()) over one complete local YAML byte slice gives the oracle typed tree on both controls; 1698 package lines covered; three identical AFL++ runs per control, controls differ by 101 parser blocks and 99 tuples.",
+    "version_seen": "v1.19.2",
+    "license": "MIT",
+    "evidence": "projects/yaml/go/github_com_goccy_go_yaml/verification.json"
+  },
+  {
     "name": "github.com/ghodss/yaml",
     "status": "shared_family",
     "metric_value": 19254,
@@ -52,18 +67,6 @@
     "found_by": "registry_search",
     "source": "https://pkg.go.dev/sigs.k8s.io/yaml",
     "reason": "Unverified wrapper/fork lead sharing a parser family named in the note; it needs its own pinned control run before selection."
-  },
-  {
-    "name": "github.com/goccy/go-yaml",
-    "status": "unresolved",
-    "metric_value": 2983,
-    "metric_error": null,
-    "family": "goccy/go-yaml",
-    "api_hint": "yaml.Unmarshal / parser.ParseBytes",
-    "note": null,
-    "found_by": "registry_search",
-    "source": "https://pkg.go.dev/github.com/goccy/go-yaml",
-    "reason": "Unverified lead below the selected paths in this round; no pinned control run or harness yet."
   },
   {
     "name": "go.yaml.in/yaml/v3",

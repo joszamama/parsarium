@@ -1,10 +1,10 @@
 {
   "ecosystem": "go",
   "format": "yaml",
-  "status": "pilot_two_verified_bounded_search",
+  "status": "pilot_three_verified_bounded_search",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "yaml"
@@ -17,12 +17,11 @@
   },
   "leads_recorded": 6,
   "leads_by_status": {
-    "selected": 2,
-    "shared_family": 3,
-    "unresolved": 1
+    "selected": 3,
+    "shared_family": 3
   },
   "ranking_metric": "pkg.go.dev Imported by package count",
-  "uncertainty": "Two verified Go YAML paths: gopkg.in/yaml.v2 v2.4.0 (60,161 Imported by); gopkg.in/yaml.v3 v3.0.1 (44,731 Imported by). Each decodes the two schema-neutral controls into the hand-written oracle typed tree (Psych cross-checked) with Go coverpkg source coverage of the pinned module and three identical AFL++ runs per control whose feedback differs between controls. go-yaml carries a Go translation of the libyaml scanner/parser (MIT-licensed files), so it shares lexical lineage with C libyaml and its bindings without sharing code or cgo. yaml.v2 resolves plain scalars with YAML 1.1 rules; the controls avoid every scalar where that differs from the 1.2 core schema. yaml.v2 and yaml.v3 come from the same go-yaml project and both carry Go translations of the libyaml scanner and parser, so they are one lineage with separate code bases per major version, not independent engines. github.com/goccy/go-yaml (2,983) remains an unresolved lead; ghodss/yaml, sigs.k8s.io/yaml and go.yaml.in/yaml/v3 are shared-family wrappers or continuations and are not run. The bounded search is one pkg.go.dev query (yaml, first 100 hits, captured 2026-11-17); Imported by counts package adoption, not YAML-specific use. The controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars.",
+  "uncertainty": "Three verified Go YAML paths: gopkg.in/yaml.v2 v2.4.0 (60,161 Imported by); gopkg.in/yaml.v3 v3.0.1 (44,731 Imported by); github.com/goccy/go-yaml v1.19.2 (2,983 Imported by). Each decodes the two schema-neutral controls into the hand-written oracle typed tree (Psych cross-checked) with Go coverpkg source coverage of the pinned module and three identical AFL++ runs per control whose feedback differs between controls. go-yaml carries a Go translation of the libyaml scanner/parser (MIT-licensed files), so it shares lexical lineage with C libyaml and its bindings without sharing code or cgo. yaml.v2 resolves plain scalars with YAML 1.1 rules; the controls avoid every scalar where that differs from the 1.2 core schema. yaml.v2 and yaml.v3 come from the same go-yaml project and both carry Go translations of the libyaml scanner and parser, so they are one lineage with separate code bases per major version, not independent engines. goccy/go-yaml is an independent pure-Go implementation (its own scanner, lexer, parser and AST; 133 of 5,391 distinct non-test lines also occur in yaml.v3, all trivial); its harness uses the documented UseOrderedMap option to keep mapping order. ghodss/yaml, sigs.k8s.io/yaml and go.yaml.in/yaml/v3 are shared-family wrappers or continuations and are not run. The bounded search is one pkg.go.dev query (yaml, first 100 hits, captured 2026-11-17); Imported by counts package adoption, not YAML-specific use. The controls cover a schema-neutral YAML 1.2 subset only, not tags, merge keys, multi-document streams, complex keys or YAML 1.1-only scalars.",
   "third_party_evidence": "data/go/yaml/parsers.json",
   "third_party_control_results": "data/go/yaml/verification.json",
   "afl_feedback": "data/go/yaml/afl-feedback.json",

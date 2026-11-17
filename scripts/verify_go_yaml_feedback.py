@@ -18,7 +18,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("gopkg_in_yaml_v2", "gopkg_in_yaml_v3")
+PROJECTS = ("gopkg_in_yaml_v2", "gopkg_in_yaml_v3", "github_com_goccy_go_yaml")
 CONTROL = "controls/yaml/catalog.yaml"
 DIFFERENTIAL = "controls/yaml/order.yaml"
 REPORT = ROOT / "data/go/yaml/afl-feedback.json"
