@@ -451,6 +451,29 @@ def main() -> None:
             verification = json.loads((project / "verification.json").read_text())
             assert verification["format_specific_source_lines_covered"] > 0
             assert verification["underlying_source_lines_covered"] > 0
+        elif str(relative) == "sql/php/flow_php_pg_query_ext":
+            assert manifest.get("native_campaign_supported") is False
+            assert receipt["feedback_kind"] == "native_libpg_query_php_pg_query_parser_source_edges"
+            assert receipt["instrumented_objects"] == [
+                "libpg_query-18.0.0/src/postgres/src_backend_parser_gram.o",
+                "libpg_query-18.0.0/src/postgres/src_backend_parser_parser.o",
+                "libpg_query-18.0.0/src/postgres/src_backend_parser_scan.o",
+                "pg-query-ext-0.48.0/ext/.libs/pg_query.o"]
+            assert receipt["source_sha256"] == manifest["source_sha256"]
+            assert receipt["underlying_source_sha256"] == manifest["underlying_source_sha256"]
+            assert receipt["php_source_sha256"] == manifest["php_source_sha256"]
+            assert receipt["extension_source_sha256"] == manifest["extension_source_sha256"]
+            assert receipt["differential_control_sha256"] == manifest["differential_control_sha256"]
+            assert receipt["control_output_matches_oracle"] and receipt["differential_output_matches_oracle"]
+            assert receipt["repeats_per_control"] >= 3 and receipt["all_repeats_identical"]
+            assert receipt["feedback_edges"] > 0 and receipt["afl_tuple_difference"] > 0
+            assert receipt["full_harness_maps_equal_fuzz_target"] is True
+            differential = json.loads((overlay / "differential.json").read_text())
+            assert differential["pass"] and differential["afl_tuple_difference"] > 0
+            assert differential["overlay_receipt_sha256"] == sha256((overlay / "verification.json").read_bytes()).hexdigest()
+            verification = json.loads((project / "verification.json").read_text())
+            assert verification["format_specific_source_lines_covered"] > 0
+            assert verification["underlying_source_lines_covered"] > 0
         else:
             assert receipt["feedback_edges"] > 0 and receipt["parser_source_features"] > 0
         if str(relative) == "ascii_ply/java/lwjgl_assimp":

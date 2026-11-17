@@ -373,6 +373,103 @@
       "afl_feedback": "fuzzing/afl-native/sql/php/sad_spirit_pg_builder/differential.json"
     },
     {
+      "package": "flow-php/pg-query-ext",
+      "version": "0.48.0",
+      "pass": true,
+      "input_api": "pg_query_parse(string $sql): string -> libpg_query JSON parse tree (RuntimeException on a parse error)",
+      "dialect": "PostgreSQL 18 grammar (libpg_query 18.0.0; no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "PostgreSQL grammar via libpg_query 18.0.0 (C), linked into the pg_query PHP extension; shared with the C libpg_query path",
+      "runtime": "PHP 8.5.12 CLI (source build, --disable-all) loading pg_query.so 0.48.0 built with phpize; libpg_query 18.0.0 linked statically",
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 35,
+      "underlying_source_files": 28,
+      "underlying_source_lines_covered": 2299,
+      "underlying_gram_c_lines_covered": 493,
+      "afl_tuple_difference": 131,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/php/flow_php_pg_query_ext/verification.json",
+      "afl_overlay_receipt": "fuzzing/afl-native/sql/php/flow_php_pg_query_ext/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/php/flow_php_pg_query_ext/differential.json"
+    },
+    {
       "package": "crodas/sql-parser",
       "version": "v0.1.5",
       "pass": true,
@@ -466,5 +563,5 @@
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T21:54:53.492368+00:00"
+  "checked_at_utc": "2026-11-17T22:41:43.652040+00:00"
 }

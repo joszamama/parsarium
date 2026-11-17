@@ -178,13 +178,14 @@
     },
     {
       "name": "flow-php/pg-query-ext",
-      "status": "unresolved_runnability_blocker",
+      "status": "selected",
       "metric_value": 18762,
       "metric_error": null,
-      "latest_release_observed": "0.47.0",
+      "latest_release_observed": "0.48.0",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "pg_query_parse",
-      "reason": "PHP C extension (ext/pg_query.c) linking libpg_query 18.0.0 statically; pg_query_parse($sql) returns libpg_query's JSON parse tree. The parser source is C, so parser-source coverage and AFL++ feedback need a Clang-instrumented libpg_query plus extension and an AFL++-linked PHP runtime with an allowlist (the source-built pear/xml_parser pattern) and a path-specific overlay audit; not built this round. Shared libpg_query family with the selected C libpg_query path."
+      "reason": "PHP C extension (ext/pg_query.c) linking libpg_query 18.0.0 statically; the documented pg_query_parse($sql) returns libpg_query's JSON parse tree. Built from the pinned 0.48.0 archive with phpize against a source-built PHP 8.5.12; both controls match the oracle, LLVM covers ext/pg_query.c and libpg_query, and a native AFL++ overlay (ext/pg_query.c plus gram.c, scan.c, parser.c) gives stable, control-dependent tuples. Shared libpg_query family with the C libpg_query path. The split archive has no LICENSE; MIT is pinned from the flow-php/flow monorepo LICENSE at the same tag.",
+      "selected_release": "0.48.0"
     },
     {
       "name": "tsukasa/php-sql-parser",

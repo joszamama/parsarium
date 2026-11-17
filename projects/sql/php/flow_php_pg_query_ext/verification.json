@@ -1,0 +1,68 @@
+{
+  "kind": "third_party",
+  "api": "pg_query_parse(string $sql): string -> libpg_query JSON parse tree (RuntimeException on a parse error)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T22:37:13.395980+00:00",
+  "manifest": "projects/sql/php/flow_php_pg_query_ext/manifest.json",
+  "image_id": "sha256:58b110aa0ff3246b231c30e22ca0206c581dacf162577c392673a9f9677f0c28",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.12 (cli) (built: Nov 17 2026 22:24:03) (NTS)",
+    "pg_query 0.48.0",
+    "libpg_query version => 18.0.0",
+    "Ubuntu clang version 21.1.8 (6ubuntu1)"
+  ],
+  "source_sha256": "6f984b73d57b777c240bd59e31a7f46cee03ca5e984124bc25ea57379de5b16f",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "c333c2d9f955e5681c8bfd4dd8b39e393f21478e390da4063076d9804a065330",
+    "fuzz-target.php": "2be90328d364835ac630f7d5bfc9397a4627170849bc40bc64079fedbe16e198",
+    "harness.php": "9590eb7941872810ee655adee935d37294827120031d50891ee718983f46fc4c",
+    "manifest.json": "cf0d9fe4cb8e511f618a0ea910e4cf8bc8078bf5082f0840e846d6eb88b0f8fe",
+    "run-control.py": "4fa95c97d42796c2f557ef00a4215b300372e03586de70a875df23dc994dbe9e",
+    "run-control.sh": "94ab6aa3b5ef1752bc5ffffbf6444deeb9973fa304b471b7789e82176367e422",
+    "source-lock.json": "0d7821e50e5cdefd2e0d3815f5152440b6bd2ecc4b5e58bfad9ef273c8ec7bfb",
+    "summary.php": "ce21fa1d22c1fc6bad5a399943710511719bb9d8fe0161b2b12e5ef348235898",
+    "target.json": "36c655166b9c7f1487d2234c81fa994ab8d3a46c8be13de85aa15e5c5fd1ee67"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 1,
+  "parser_source_lines_covered": 35,
+  "format_specific_source_lines_covered": 35,
+  "underlying_source_files": 28,
+  "underlying_source_lines_covered": 2299,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/php/flow_php_pg_query_ext/target/coverage/coverage.json",
+  "pass": true
+}

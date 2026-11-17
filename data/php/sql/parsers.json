@@ -422,6 +422,120 @@
     }
   },
   {
+    "name": "flow-php/pg-query-ext",
+    "version": "0.48.0",
+    "license": "MIT",
+    "license_evidence": "composer.json in the pinned codeload archive (SHA-256 6f984b73d57b777c240bd59e31a7f46cee03ca5e984124bc25ea57379de5b16f, commit 283a87e05cca599534c9c372935a60d369590a08) and Packagist declare MIT. The archive is a subtree split of flow-php/flow and has no LICENSE file; its Makefile, README.md, composer.json and ext/ sources are byte-identical to src/extension/pg-query-ext of the monorepo at tag 0.48.0 (commit 1679ceb4eefb7556a5d40f61c6bbaf2936d57b2a), whose root LICENSE is MIT (https://raw.githubusercontent.com/flow-php/flow/1679ceb4eefb7556a5d40f61c6bbaf2936d57b2a/LICENSE, SHA-256 eeb68d50be5e8cf87b1ba5fa5cff838d988dbf5f936491b191758bec3b9decc6), pinned in the image",
+    "input_api": "pg_query_parse(string $sql): string -> libpg_query JSON parse tree",
+    "documentation": "https://flow-php.com/documentation/components/extensions/pg-query-ext/",
+    "source": "https://codeload.github.com/flow-php/pg-query-ext/tar.gz/283a87e05cca599534c9c372935a60d369590a08",
+    "source_sha256": "6f984b73d57b777c240bd59e31a7f46cee03ca5e984124bc25ea57379de5b16f",
+    "packagist_source_reference": "283a87e05cca599534c9c372935a60d369590a08",
+    "dependencies": [
+      {
+        "package": "libpg_query",
+        "release": "18.0.0",
+        "source": "https://codeload.github.com/pganalyze/libpg_query/tar.gz/refs/tags/18.0.0",
+        "source_sha256": "6ad7783f272acfd116455c66a03298a0cac9a9168281df547969219112f0260f",
+        "license": "BSD-3-Clause; bundled PostgreSQL sources under the PostgreSQL License",
+        "role": "linked statically into pg_query.so at the version ext/config.m4 pins"
+      }
+    ],
+    "dialect": "PostgreSQL 18 grammar (libpg_query 18.0.0; no dialect option)",
+    "scope": "SQL text from local bytes passed to pg_query_parse() in a PHP 8.5.12 CLI built from source with the extension compiled by phpize (Packagist php-ext/PIE package); valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary after json_decode of the returned tree. 0.48.0 is the latest release (0.46.0, 0.47.0 and 0.48.0 tag the same commit).",
+    "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+    "family_note": "ext/pg_query.c is a thin binding: pg_query_parse() passes the string to libpg_query's pg_query_parse() and returns its JSON parse tree, throwing RuntimeException with the cursor position on a parse error. The parsing is libpg_query 18.0.0 (bison gram.c, flex scan.c, parser.c from PostgreSQL 18), the same family as the selected C libpg_query path (18.1.0) and the Go, Rust, Python and JavaScript bindings; metrics are not combined. LLVM line coverage and AFL++ feedback come from the native extension and libpg_query C sources, not PHP.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 18762,
+      "source": "https://packagist.org/packages/flow-php/pg-query-ext.json",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/php/sql/registry-snapshot.json",
+      "limitation": "Lifetime downloads of the php-ext (PIE) package; installs through the flow-php monorepo or a manual phpize build are not counted."
+    },
+    "project": "projects/sql/php/flow_php_pg_query_ext",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "crodas/sql-parser",
     "version": "v0.1.5",
     "license": "MIT",

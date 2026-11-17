@@ -1,0 +1,29 @@
+{
+  "flow-php/pg-query-ext": {
+    "release": "0.48.0",
+    "source_sha256": "6f984b73d57b777c240bd59e31a7f46cee03ca5e984124bc25ea57379de5b16f",
+    "packagist_type": "php-ext",
+    "packagist_source_reference": "283a87e05cca599534c9c372935a60d369590a08",
+    "license": "MIT",
+    "released_at_utc": "2026-10-04T09:40:49+00:00",
+    "archive_url": "https://codeload.github.com/flow-php/pg-query-ext/tar.gz/283a87e05cca599534c9c372935a60d369590a08",
+    "license_file_url": "https://raw.githubusercontent.com/flow-php/flow/1679ceb4eefb7556a5d40f61c6bbaf2936d57b2a/LICENSE",
+    "license_file_sha256": "eeb68d50be5e8cf87b1ba5fa5cff838d988dbf5f936491b191758bec3b9decc6",
+    "monorepo_tag_commit": "1679ceb4eefb7556a5d40f61c6bbaf2936d57b2a",
+    "role": "package API under test: the pg_query extension's pg_query_parse(), built with phpize against the source-built PHP. The package is a subtree split of flow-php/flow src/extension/pg-query-ext; its Makefile, README.md, composer.json and ext/ sources are byte-identical to the monorepo at the 0.48.0 tag, whose MIT LICENSE is pinned because the split has none"
+  },
+  "libpg_query": {
+    "release": "18.0.0",
+    "source_sha256": "6ad7783f272acfd116455c66a03298a0cac9a9168281df547969219112f0260f",
+    "license": "BSD-3-Clause (LICENSE); bundled PostgreSQL sources under the PostgreSQL License",
+    "archive_url": "https://codeload.github.com/pganalyze/libpg_query/tar.gz/refs/tags/18.0.0",
+    "role": "underlying PostgreSQL raw parser linked statically into pg_query.so, at the version config.m4 pins (the C libpg_query path pins 18.1.0); LLVM line coverage and AFL++ instrumentation of gram.c, scan.c and parser.c"
+  },
+  "php": {
+    "release": "8.5.12",
+    "source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+    "license": "PHP-3.01",
+    "archive_url": "https://www.php.net/distributions/php-8.5.12.tar.xz",
+    "role": "runtime (--disable-all CLI) that loads pg_query.so; not instrumented"
+  }
+}
