@@ -25,7 +25,7 @@ def run(command: list[str]) -> str:
 
 
 def sandbox(source: Path, scratch: Path) -> list[str]:
-    return ['docker', 'run', '--rm', '--platform', 'linux/arm64', '--network', 'none',
+    return ['docker', 'run', '--rm', '--platform', 'linux/amd64', '--network', 'none',
             '--read-only', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges',
             '--user', f'{os.getuid()}:{os.getgid()}', '--tmpfs', '/tmp:rw,exec,nosuid,size=64m',
             '-v', f'{source}:/input/case:ro', '-v', f'{scratch}:/coverage']

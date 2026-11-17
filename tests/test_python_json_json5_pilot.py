@@ -66,8 +66,10 @@ class PythonJsonJson5PilotTest(unittest.TestCase):
         self.assertEqual(parser["source_sha256"], manifest["sdist_sha256"])
         self.assertEqual(release["license_expression"], parser["license"])
         self.assertEqual(release["requires_dist"], [])
-        self.assertEqual(lock, f"json5==0.17.3 --hash=sha256:{manifest['source_sha256']}\n")
-        for digest in (manifest["source_sha256"], manifest["sdist_sha256"]):
+        self.assertEqual(lock.splitlines(), [
+            f"json5==0.17.3 --hash=sha256:{manifest['source_sha256']}",
+            f"atheris=={manifest['fuzz_engine_release']} --hash=sha256:{manifest['fuzz_engine_sha256']}"])
+        for digest in (manifest["source_sha256"], manifest["sdist_sha256"], manifest["fuzz_engine_sha256"]):
             self.assertIn(digest, dockerfile)
         self.assertIn("diff -r /work/json5-sdist/json5 /work/json5-wheel/json5", dockerfile)
 

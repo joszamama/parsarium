@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+FROM --platform=linux/amd64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
     ca-certificates curl python3 python3-venv unzip \
@@ -8,6 +8,8 @@ WORKDIR /work
 RUN mkdir /work/wheels /work/json5-sdist /work/json5-wheel \
     && curl --fail --location --retry 3 https://files.pythonhosted.org/packages/ae/39/e689b616c4279a821d5842a8a85c1874540f8d58e35028df93f2182120c2/json5-0.17.3-py3-none-any.whl --output /work/wheels/json5-0.17.3-py3-none-any.whl \
     && echo '2c8b22a893c35cd6a3c5ccbf1dd1c7d02c25dc1b5897fea658f9bf08c2e05f9a  /work/wheels/json5-0.17.3-py3-none-any.whl' | sha256sum --check \
+    && curl --fail --location --retry 3 https://files.pythonhosted.org/packages/c3/ff/ae7a5bfe99033e510bea4ed09934e636d93777317a48147369bc0dc2b71f/atheris-3.1.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl --output /work/wheels/atheris-3.1.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl \
+    && echo '315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011  /work/wheels/atheris-3.1.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl' | sha256sum --check \
     && curl --fail --location --retry 3 https://files.pythonhosted.org/packages/16/1f/58a4d7ee466f81bc3c7337036380fc6d49de3afb7855d74f8121b1e89b32/json5-0.17.3.tar.gz --output /work/json5-sdist.tar.gz \
     && echo '8d0278ad34ebaa9c3af76d9519274811830224a2d1cd5af156dbd067f461b8a4  /work/json5-sdist.tar.gz' | sha256sum --check \
     && tar -xzf /work/json5-sdist.tar.gz --strip-components=1 -C /work/json5-sdist \
@@ -26,11 +28,12 @@ RUN python3 -m venv /opt/venv \
     && /opt/venv/bin/pip install --no-index --find-links /work/wheels --no-deps --require-hashes -r /work/runtime-requirements.lock \
     && diff -r --exclude=__pycache__ /work/json5-wheel/json5 /opt/venv/lib/python3.14/site-packages/json5 \
     && /opt/venv/bin/python -c 'import json5; assert json5.__version__ == "0.17.3"; print(json5.loads(b"{\"ready\":true}"))' \
-    && { python3 --version; /opt/venv/bin/pip show json5 | grep -E '^(Name|Version):'; cd /opt/venv/lib/python3.14/site-packages && sha256sum json5/parser.py json5/lib.py; } > /work/toolchain.txt
+    && { python3 --version; /opt/venv/bin/pip show json5 atheris | grep -E '^(Name|Version):'; cd /opt/venv/lib/python3.14/site-packages && sha256sum json5/parser.py json5/lib.py; } > /work/toolchain.txt
 
-FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+FROM --platform=linux/amd64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update -qq && apt-get install -y --no-install-recommends python3 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    libstdc++6 python3 && rm -rf /var/lib/apt/lists/*
 ENV PYTHONDONTWRITEBYTECODE=1
 WORKDIR /work
 COPY --from=build /opt/venv /opt/venv
