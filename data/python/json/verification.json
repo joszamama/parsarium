@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T02:35:19.522247+00:00",
+  "checked_at_utc": "2026-11-17T03:05:44.288036+00:00",
   "platform": "linux/amd64",
   "control": {
     "path": "controls/json/structure.json",
@@ -28,6 +28,32 @@
       "parser_source_lines_covered": 140,
       "decoder_lines_covered": 101,
       "project_receipt": "projects/json/python/simplejson/verification.json"
+    }
+  ],
+  "standard": [
+    {
+      "api": "json.load(BytesIO(local UTF-8 bytes), cls=PurePythonJSONDecoder)",
+      "runtime": "CPython 3.14.4 standard library pure-Python JSON decoder",
+      "pass": true,
+      "output": {
+        "root_type": "object",
+        "top_level_keys": [
+          "items",
+          "kind"
+        ],
+        "item_count": 2,
+        "first_id": 7,
+        "first_label": "a\nb",
+        "first_ok": true,
+        "first_value_is_null": true,
+        "second_label": "π"
+      },
+      "stdlib_source_lines": 166,
+      "decoder_lines": 103,
+      "scanner_lines": 39,
+      "scope_note": "Explicit pure-Python scanner; default built-in _json accelerator not measured.",
+      "project_receipt": "projects/json/python/stdlib_json/verification.json",
+      "project_receipt_sha256": "41097ec2514625c9d2718acd2849183a10aff2603c487d8811085e2f58effdf1"
     }
   ]
 }
