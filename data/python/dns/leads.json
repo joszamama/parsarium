@@ -229,5 +229,19 @@
     "lead_adoption_order": 14,
     "verification": "projects/dns/python/dns_messages/verification.json",
     "reason": "Pinned 1.0.1 passes both DNS controls; see parsers.json and data/python/dns/dns-messages-feedback-differential.json."
+  },
+  {
+    "name": "twisted",
+    "found_by": "round-3 documentation lead (Twisted Names API reference; the package name does not contain 'dns', so the PyPI name search cannot list it); metric in registry-snapshot.json round2_targeted",
+    "documentation": "https://docs.twisted.org/en/twisted-26.10.0/api/twisted.names.dns.Message.html#fromStr",
+    "input_api_lead": "twisted.names.dns.Message().fromStr(bytes)",
+    "family": "Twisted Names (twisted/names/dns.py)",
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": 15,
+    "status": "resolved_verified_selected",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": 15068322,
+    "verification": "projects/dns/python/twisted/verification.json",
+    "reason": "Pinned 26.10.0 passes both DNS controls; see parsers.json and data/python/dns/twisted-feedback-differential.json."
   }
 ]

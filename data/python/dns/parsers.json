@@ -103,6 +103,110 @@
     "afl_feedback": "data/python/dns/dnspython-feedback-differential.json"
   },
   {
+    "name": "twisted",
+    "version": "26.10.0",
+    "license": "MIT",
+    "license_evidence": "Wheel METADATA 'License-Expression: MIT' and dist-info/licenses/LICENSE (sha256 d7a2f74f...), checked in the image",
+    "input_api": "twisted.names.dns.Message().fromStr(str: bytes) -> None (then the decoded Message fields)",
+    "documentation": "https://docs.twisted.org/en/twisted-26.10.0/api/twisted.names.dns.Message.html#fromStr",
+    "documentation_note": "The Twisted API reference documents Message.fromStr: 'Decode a byte string in the format described by RFC 1035 into this Message.'",
+    "source": "https://pypi.org/project/Twisted/26.10.0/",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "Twisted Names (twisted/names/dns.py Message.decode, Query, RRHeader, Name and per-type Record_* decoders)",
+    "family_note": "Own pure-Python decoder in Twisted's DNS package (twisted.names); it uses no other DNS library. Twisted decodes AD and CD but not the reserved Z bit, so z carries AD and CD only (both controls have all three bits clear). A text is Record_A.dottedQuad(); AAAA text is formatted by the harness from the 16 decoded address bytes (RFC 5952). Importing twisted.names.dns imports twisted.internet protocol classes but installs no reactor and opens no socket. Its PyPI count covers the whole Twisted networking framework, not only DNS use.",
+    "project": "projects/dns/python/twisted",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 15068322,
+      "source": "https://pypistats.org/api/packages/twisted/recent",
+      "captured_at_utc": "2026-11-17T22:56:57.595715+00:00",
+      "snapshot": "data/python/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 2,
+    "afl_feedback": "data/python/dns/twisted-feedback-differential.json"
+  },
+  {
     "name": "dpkt",
     "version": "1.9.8",
     "license": "BSD-3-Clause",
@@ -202,7 +306,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 2,
+    "rank": 3,
     "afl_feedback": "data/python/dns/dpkt-feedback-differential.json"
   },
   {
@@ -305,7 +409,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 3,
+    "rank": 4,
     "afl_feedback": "data/python/dns/dnslib-feedback-differential.json"
   },
   {
@@ -408,7 +512,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 4,
+    "rank": 5,
     "afl_feedback": "data/python/dns/py3dns-feedback-differential.json"
   },
   {
@@ -511,7 +615,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 5,
+    "rank": 6,
     "afl_feedback": "data/python/dns/dns-messages-feedback-differential.json"
   }
 ]

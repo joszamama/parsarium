@@ -1,6 +1,6 @@
 # Python × DNS: selected parsers (pilot)
 
-Five verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Six verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -9,12 +9,15 @@ PyPI Stats last_month downloads excluding known mirrors, from [registry-snapshot
 | Rank | Package | Release | Metric | Parser family |
 | ---: | --- | --- | ---: | --- |
 | 1 | [dnspython](https://dnspython.readthedocs.io/en/v2.9.2/message-make.html#dns.message.from_wire) | 2.9.2 | 286,812,791 | dnspython wire reader (dns/message.py _WireReader, dns/wire.py Parser, dns/name.py) |
-| 2 | [dpkt](https://kbandla.github.io/dpkt/api/api_auto.html#module-dpkt.dns) | 1.9.8 | 1,492,890 | dpkt DNS packet class (dpkt/dns.py) |
-| 3 | [dnslib](https://github.com/paulc/dnslib/blob/0.9.26/README.md) | 0.9.26 | 1,231,762 | dnslib (dnslib/dns.py DNSRecord.parse over dnslib/buffer.py and dnslib/label.py) |
-| 4 | [py3dns](https://launchpad.net/py3dns) | 4.0.2 | 129,993 | py3dns / PyDNS (DNS/Lib.py Munpacker classes and DnsResult) |
-| 5 | [dns-messages](https://github.com/wahlflo/dns-messages#parsing-dns-messages) | 1.0.1 | 46 | dns-messages (DnsMessageParser with per-type rr_data classes) |
+| 2 | [twisted](https://docs.twisted.org/en/twisted-26.10.0/api/twisted.names.dns.Message.html#fromStr) | 26.10.0 | 15,068,322 | Twisted Names (twisted/names/dns.py Message.decode, Query, RRHeader, Name and per-type Record_* decoders) |
+| 3 | [dpkt](https://kbandla.github.io/dpkt/api/api_auto.html#module-dpkt.dns) | 1.9.8 | 1,492,890 | dpkt DNS packet class (dpkt/dns.py) |
+| 4 | [dnslib](https://github.com/paulc/dnslib/blob/0.9.26/README.md) | 0.9.26 | 1,231,762 | dnslib (dnslib/dns.py DNSRecord.parse over dnslib/buffer.py and dnslib/label.py) |
+| 5 | [py3dns](https://launchpad.net/py3dns) | 4.0.2 | 129,993 | py3dns / PyDNS (DNS/Lib.py Munpacker classes and DnsResult) |
+| 6 | [dns-messages](https://github.com/wahlflo/dns-messages#parsing-dns-messages) | 1.0.1 | 46 | dns-messages (DnsMessageParser with per-type rr_data classes) |
 
 **dnspython 2.9.2** (ISC) parses local bytes with `dns.message.from_wire(wire: bytes) -> dns.message.Message`. Both controls match the oracle summary. The response control covers 665 library lines in 27 files. AFL++ feedback repeats 3 times per control; response and query give 665/216 parser features and 685/236 AFL++ tuples, differing by 449 features and 449 tuples ([receipt](dnspython-feedback-differential.json)). Own pure-Python decoder; no C extension and no other DNS library. RRsets group records by owner and type; the harness lists each rdata with its RRset's owner, type, class and TTL.
+
+**twisted 26.10.0** (MIT) parses local bytes with `twisted.names.dns.Message().fromStr(str: bytes) -> None (then the decoded Message fields)`. Both controls match the oracle summary. The response control covers 137 library lines in 1 file. AFL++ feedback repeats 3 times per control; response and query give 137/79 parser features and 157/99 AFL++ tuples, differing by 58 features and 58 tuples ([receipt](twisted-feedback-differential.json)). Own pure-Python decoder in Twisted's DNS package (twisted.names); it uses no other DNS library. Twisted decodes AD and CD but not the reserved Z bit, so z carries AD and CD only (both controls have all three bits clear). A text is Record_A.dottedQuad(); AAAA text is formatted by the harness from the 16 decoded address bytes (RFC 5952). Importing twisted.names.dns imports twisted.internet protocol classes but installs no reactor and opens no socket. Its PyPI count covers the whole Twisted networking framework, not only DNS use.
 
 **dpkt 1.9.8** (BSD-3-Clause) parses local bytes with `dpkt.dns.DNS(buf: bytes)`. Both controls match the oracle summary. The response control covers 90 library lines in 3 files. AFL++ feedback repeats 3 times per control; response and query give 90/60 parser features and 110/80 AFL++ tuples, differing by 30 features and 30 tuples ([receipt](dpkt-feedback-differential.json)). Own pure-Python decoder in a packet-parsing library; no capture or socket is used. The MX preference is kept as a 1-tuple by dpkt 1.9.8 and the harness reads its value.
 
@@ -29,6 +32,8 @@ PyPI Stats last_month downloads excluding known mirrors, from [registry-snapshot
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
 | 1 | async-dns | 6,920 | `async_dns.core.DNSMessage.parse(data)` | async_dns (async_dns/core/record.py DNSMessage/Record) |
+
+- **async-dns** (unresolved): No documented message-bytes API: the README documents only the resolver, the server and parse_hosts_file. DNSMessage.parse is exported through async_dns.core but undocumented, so it stays a lead rather than a selected path.
 
 ## Checked, excluded or recorded separately
 

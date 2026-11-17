@@ -1,0 +1,93 @@
+{
+  "kind": "third_party",
+  "api": "twisted.names.dns.Message().fromStr(local DNS message bytes)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:00:47.044462+00:00",
+  "manifest": "projects/dns/python/twisted/manifest.json",
+  "image_id": "sha256:bbd1844922d5126e9c521c78a3702d5414069a623639b1640498936e0f46bbbc",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/amd64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: Twisted",
+    "Version: 26.10.0",
+    "Name: zope.interface",
+    "Version: 8.7",
+    "Name: atheris",
+    "Version: 3.1.0",
+    "a07bd438f7c03c9382a89e6402d8be2a07c02e4fe967a9c6349dcdd17b4c328a  twisted/names/dns.py"
+  ],
+  "source_sha256": "3732f42af218925a0fe78d6668db55853f7fb532245a89a2669babe7d3000fa8",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "c1335782b1dba0032588ff497217989ba47824ebc5d9d7fca00cf218b7a74db4",
+    "fuzz.py": "12f5329b821f28b641c53a86c55eaaf560b51775e5687ecaacc33671472c5ae8",
+    "harness.py": "0b17e48c177efada4f25a67da2a98074d5825accaddb779042e799482b925658",
+    "manifest.json": "c60e88f6e724ca2e8efc3945ebeea1f375327580022702bb32809a0edbcad191",
+    "replay.py": "8469c6ca26ca57239ed03648026e14ecfa66a80aefd8448a1ebc83adfb7b5938",
+    "run-control.py": "00d47bd35ac95139535e1922544b59dd7ad008185623d7bc63a6e5a43a913268",
+    "runtime-requirements.lock": "aa388a6b727840c24ba58239aa70c277b50a3842192698bce3ca67e17a792413"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 1,
+  "parser_source_lines_covered": 137,
+  "format_specific_source_lines_covered": 137,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/python/twisted/target/coverage/coverage.json",
+  "pass": true
+}

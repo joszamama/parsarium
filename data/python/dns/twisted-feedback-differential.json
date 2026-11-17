@@ -1,0 +1,34 @@
+{
+  "checked_at_utc": "2026-11-17T23:04:40.578296+00:00",
+  "project": "dns/python/twisted",
+  "pass": true,
+  "input_kind": "two fixed valid DNS messages (RFC 1035 section 4)",
+  "oracle": "controls/dns/check_controls.py hand-written decoder; summaries pinned in controls/dns/expected.json",
+  "feature_kind": "parser-line AFL++ bridge features",
+  "subject_prefix": "/opt/venv/lib/python3.14/site-packages/twisted/names/",
+  "base_image_id": "sha256:bbd1844922d5126e9c521c78a3702d5414069a623639b1640498936e0f46bbbc",
+  "overlay_image_id": "sha256:a75c3f1b28fc8b685ef0cb5f5af634cf7e045ac18886cb200226d8eed08e6a1c",
+  "overlay_receipt_sha256": "fc4087031724ff476d92e91b12b42bf9fe4c703258628457fac37134007df3bd",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "control_output_matches": true,
+  "variant_output_matches": true,
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "afl_target": "/work/afl_proxy",
+  "afl_map_size": 65536,
+  "control_parser_features": 137,
+  "variant_parser_features": 79,
+  "parser_feature_difference": 58,
+  "control_afl_tuples": 157,
+  "variant_afl_tuples": 99,
+  "afl_tuple_difference": 58,
+  "control_features_by_file": {
+    "/opt/venv/lib/python3.14/site-packages/twisted/names/dns.py": 137
+  },
+  "variant_features_by_file": {
+    "/opt/venv/lib/python3.14/site-packages/twisted/names/dns.py": 79
+  },
+  "mutation_campaign_run": false
+}
