@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "python-rapidjson",
+  "release": "1.26",
+  "catalog_parser": "data/python/json/parsers.json",
+  "source_lock": "projects/json/python/python-rapidjson/source-lock.json",
+  "source_sha256": "db95af0b5ed5f89d4f91480477a0ea8c7646283e489dd9046e28503e85e08f98",
+  "underlying_release": "Tencent RapidJSON v1.1.0-763-g24b5e7a8 (vendored headers in the python-rapidjson sdist; SAX Reader with kParseNumbersAsStringsFlag and kParseNanAndInfFlag under the default number_mode)",
+  "build_note": "Source-built from the pinned sdist with clang/clang++ -O0 and LLVM source coverage. The official aarch64 cp311 wheel compiles the same rapidjson.cpp and vendored headers into one optimised extension; compiler flags and optimisation differ.",
+  "base_image": "debian@sha256:ec8534cda2cb30f29f44f23e135297af7a1496f2990fd8e4e84aa36b081a757a",
+  "platform": "linux/arm64",
+  "control": "controls/json/structure.json",
+  "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+  "expected_output": {
+    "root_type": "object",
+    "top_level_keys": [
+      "items",
+      "kind"
+    ],
+    "item_count": 2,
+    "first_id": 7,
+    "first_label": "a\nb",
+    "first_ok": true,
+    "first_value_is_null": true,
+    "second_label": "π"
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "root_type": "array",
+    "item_count": 5,
+    "nested_arrays": 1,
+    "nested_objects": 1
+  },
+  "api": "rapidjson.load(io.BytesIO(local JSON bytes)); rapidjson.loads(bytes) and rapidjson.loads(decoded str) are checked against the same oracle",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "LLVM source-region coverage of the source-built python-rapidjson extension: wrapper rapidjson.cpp (stream wrapper and PyHandler) and the vendored Tencent RapidJSON C++ headers instantiated by it",
+  "coverage_subject_prefix": "/work/rapidjson-source/",
+  "format_specific_coverage_file_suffix": "/rapidjson/include/rapidjson/reader.h",
+  "underlying_coverage_subject_prefix": "/work/rapidjson-source/rapidjson/include/rapidjson/",
+  "underlying_format_specific_coverage_file_suffix": "/reader.h",
+  "afl_coverage_subject_prefix": "/work/rapidjson-source/",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.11/site-packages/rapidjson*.so",
+  "native_campaign_supported": false,
+  "scope": "JSON structure and values from a local BytesIO stream via rapidjson.load; valid nested object and nested array controls only, each matching an exact type-tagged CPython json oracle tree",
+  "afl_package_release": "4.04c-4"
+}

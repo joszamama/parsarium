@@ -52,6 +52,8 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [msgspec / Python](python/msgspec/README.md)
 - [orjson / Python](python/orjson/README.md)
 - [pydantic / Python](python/pydantic/README.md)
+- [pysimdjson / Python](python/pysimdjson/README.md)
+- [python-rapidjson / Python](python/python-rapidjson/README.md)
 - [simplejson / Python](python/simplejson/README.md)
 - [ujson / Python](python/ujson/README.md)
 - [aws-smithy-json / Rust](rust/aws_smithy_json/README.md)
