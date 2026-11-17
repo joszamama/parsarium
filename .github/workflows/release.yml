@@ -27,6 +27,8 @@ jobs:
           package=$(python3 -c "import re,pathlib;print(re.search(r'__version__ = \"([^\"]+)\"', pathlib.Path('src/parsarium/__init__.py').read_text()).group(1))")
           test "$version" = "$package" || { echo "tag $version does not match package $package"; exit 1; }
           echo "VERSION=$version" >> "$GITHUB_ENV"
+      - name: Test package snapshot paths
+        run: python3 -m unittest tests.test_package_cli -q
       - name: Build snapshot
         run: python3 scripts/build_snapshot.py --version "$VERSION" --out dist-snapshot --write-package
       - name: Build package
