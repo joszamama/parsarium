@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T07:11:51.947550+00:00",
-  "projects_total": 3,
-  "projects_passed": 3,
+  "checked_at_utc": "2026-11-17T07:26:40.772265+00:00",
+  "projects_total": 4,
+  "projects_passed": 4,
   "differential_kind": "fixed_valid_default_namespace_order",
   "results": [
     {
@@ -97,6 +97,52 @@
       "afl_tuple_difference": 230
     },
     {
+      "project": "xml/java/aalto_xml",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "3c16c7b3cfb9f4e9d88ef00d719355f43a294d44b2450da786bf0c972a941cb2",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 \u20ac"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 1427,
+      "control_afl_tuples": 1430,
+      "differential_parser_features": 1503,
+      "differential_afl_tuples": 1505,
+      "parser_feature_difference": 278,
+      "afl_tuple_difference": 277
+    },
+    {
       "project": "xml/java/jdk_documentbuilder",
       "pass": true,
       "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
@@ -143,7 +189,7 @@
     }
   ],
   "refreshed_projects": [
-    "woodstox_core"
+    "aalto_xml"
   ],
   "retained_prior_results_checked_at_utc": "2026-11-17T03:42:42.669292+00:00"
 }

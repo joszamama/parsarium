@@ -110,5 +110,61 @@
       ]
     },
     "project": "projects/xml/java/woodstox_core"
+  },
+  {
+    "name": "aalto-xml",
+    "group": "com.fasterxml",
+    "artifact": "aalto-xml",
+    "version": "1.4.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses; pinned POM SHA256 in source-lock.json",
+    "input_api": "new com.fasterxml.aalto.stax.InputFactoryImpl().createXMLStreamReader(local InputStream); iterate XMLStreamReader.next()",
+    "documentation": "https://repo.maven.apache.org/maven2/com/fasterxml/aalto-xml/1.4.0/aalto-xml-1.4.0-sources.jar",
+    "source": "https://repo.maven.apache.org/maven2/com/fasterxml/aalto-xml/1.4.0/aalto-xml-1.4.0-sources.jar",
+    "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed namespace-aware through Aalto StAX: expanded element names, maximum depth, namespace declarations and URIs, sorted non-declaration attributes, and decoded character data",
+    "family": "Aalto independent StAX tokenizer/parser",
+    "family_note": "Aalto InputFactoryImpl creates its own StreamReaderImpl; the local UTF-8 InputStream control executes Utf8Scanner and StreamScanner. stax2-api contributes interfaces only. This implementation is independent of Woodstox and Xerces.",
+    "shared_families": [
+      "Aalto XML"
+    ],
+    "coverage_note": "Release jar includes line-number tables; JaCoCo instruments pinned release classes and maps lines to same-release sources jar.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 559,
+      "max_release": "1.0.0",
+      "max_release_value": 130,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/com.fasterxml%3Aaalto-xml",
+      "captured_at_utc": "2026-11-17T03:38:01.619135+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json"
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/aalto_xml"
   }
 ]

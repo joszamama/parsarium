@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T07:04:46.954687+00:00",
+  "checked_at_utc": "2026-11-17T07:27:07.356019+00:00",
   "platform": "linux/arm64 Docker",
   "java": "openjdk version \"25.0.5\" 2026-10-20 LTS",
   "controls": {
@@ -12,7 +12,7 @@
   },
   "control_meaning": "catalog-ns.xml: prefixed root namespace and default child namespace, a prefixed attribute, &amp;/&lt;/&gt; references and a CDATA section. order-default-ns.xml: comment, processing instruction, single-quoted attribute, hex and decimal character references, &quot; in an attribute, and a default namespace undeclared with xmlns=\"\". Both are UTF-8 XML 1.0 without DOCTYPE; expected outputs come from python3 -I controls/xml/check_controls.py (expat).",
   "oracle": "python3 -I controls/xml/check_controls.py",
-  "attribute_order": "DOM NamedNodeMap keeps no document order; both Java adapters sort each element's attributes by Clark name. For both controls this coincides with document order, so the outputs equal the expat oracle.",
+  "attribute_order": "The Java adapters sort each element's attributes by Clark name. For both valid controls this coincides with document order, so outputs equal the expat oracle.",
   "third_party": [
     {
       "package": "xercesImpl",
@@ -91,6 +91,46 @@
       "parser_source_lines_covered": 815,
       "afl_feedback": "data/java/xml/afl-feedback.json",
       "error": null
+    },
+    {
+      "package": "aalto-xml",
+      "group": "com.fasterxml",
+      "version": "1.4.0",
+      "scope": "XML 1.0 UTF-8 document without DOCTYPE parsed namespace-aware through Aalto StAX: expanded element names, maximum depth, namespace declarations and URIs, sorted non-declaration attributes, and decoded character data",
+      "command": "python3 scripts/run_project.py xml java aalto_xml",
+      "receipt": "projects/xml/java/aalto_xml/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 30,
+      "parser_source_lines_covered": 1427,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
     }
   ],
   "standard": [
@@ -132,7 +172,7 @@
     }
   ],
   "refreshed_projects": [
-    "woodstox_core"
+    "aalto_xml"
   ],
-  "retained_prior_results_checked_at_utc": "2026-11-17T03:41:35.987313+00:00"
+  "retained_prior_results_checked_at_utc": "2026-11-17T07:04:46.954687+00:00"
 }
