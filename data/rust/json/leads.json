@@ -93,14 +93,6 @@
       "source": "https://crates.io/crates/aws-smithy-json"
     },
     {
-      "name": "jiter",
-      "version": "0.19.0",
-      "recent_downloads_90d": 5274664,
-      "status": "unresolved",
-      "reason": "Iterable JSON parser from pydantic (JsonValue::parse(&[u8]) and the Jiter token iterator). Not run on the controls.",
-      "source": "https://crates.io/crates/jiter"
-    },
-    {
       "name": "json",
       "version": "0.12.4",
       "recent_downloads_90d": 2672413,
@@ -229,7 +221,7 @@
       "source": "https://crates.io/crates/json-deserializer"
     }
   ],
-  "note": "Unresolved leads remain unbuilt and unrun on the controls; selected simd-json and sonic-rs leads have separate pinned projects and verification receipts.",
+  "note": "Unresolved leads remain unbuilt and unrun on the controls; selected simd-json, sonic-rs and jiter leads have separate pinned projects and verification receipts.",
   "verified_leads": [
     {
       "name": "simd-json",
@@ -246,6 +238,15 @@
       "status": "selected",
       "record": "data/rust/json/parsers.json",
       "receipt": "projects/json/rust/sonic_rs/verification.json"
+    },
+    {
+      "name": "jiter",
+      "version": "0.19.0",
+      "recent_downloads_90d": 5274664,
+      "status": "selected",
+      "record": "data/rust/json/parsers.json",
+      "receipt": "projects/json/rust/jiter/verification.json",
+      "family_note": "Shared Jiter parser family with Python pydantic-core 2.50.4, which pins Jiter 0.18.0; no cross-ecosystem metric comparison."
     }
   ]
 }

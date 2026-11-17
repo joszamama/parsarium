@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "project": "json/rust/jiter",
+  "pass": true,
+  "base_project_receipt_sha256": "99b53028b7df4cb4c34ff36cd9db36d0b7979cf0c418a81aa711d1f49275c5df",
+  "overlay_file_sha256": {
+    "Cargo.toml": "4487aa6b230baf7998a3c2f326101df38870a61e72b3af2388dddbfed79ee2ef",
+    "Cargo.lock": "a6596d895bad22d66c81d31991dae7554040da0e0951775ea8e27df757bd29ed",
+    "afl_fuzzer.rs": "1af038eeee6544dd8e03d7239d423e4d68a6631944abe92a0a32aed0e03ed268",
+    "Dockerfile": "e33c6114fcedc32d2a8e913ba447c4acb5c620ab86689f3669bb67d61b0340ff",
+    "build.py": "69db25003a91ac9182e38196e80ab22dd1f960b1f0d617929daec7f613a084ef"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "4027f86130c7a1997f880ed407580e58514b867af49e7ce44370f80fa6ff999f",
+  "image_id": "sha256:81a745de57db98bad076e27f529c1204062fc991ee9ed24a50a440196d9545d4",
+  "platform": "linux/arm64",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "feedback_edges": 983,
+  "afl_map_size": 28745,
+  "feedback_kind": "afl_rs_rust_sancov_edges",
+  "feedback_scope": "Whole afl_fuzzer binary built by cargo-afl: jiter 0.19.0 parser, serde_json summary serializer, their dependencies and the harness are instrumented",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:0c5497efaef693b721ddedea74538688343001ee48791707e3e3cf8ae9d97020",
+  "variant_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "control_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1.0,
+      1.0,
+      2.0,
+      2.0
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "variant_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1.0
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_keys": []
+  },
+  "repeats": 3,
+  "variant_feedback_edges": 881,
+  "edges_only_in_control": 186,
+  "edges_only_in_variant": 84,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/jiter-0.19.0/",
+    "control_lines": {
+      "src/errors.rs": 0,
+      "src/jiter.rs": 0,
+      "src/lib.rs": 6,
+      "src/number_decoder.rs": 37,
+      "src/parse.rs": 117,
+      "src/simd/aarch64.rs": 40,
+      "src/simd/fallback_int.rs": 0,
+      "src/simd/fallback_string.rs": 0,
+      "src/simd/mod.rs": 11,
+      "src/simd/number.rs": 8,
+      "src/simd/swar_int.rs": 12,
+      "src/string_decoder.rs": 91,
+      "src/value.rs": 205
+    },
+    "variant_lines": {
+      "src/errors.rs": 0,
+      "src/jiter.rs": 0,
+      "src/lib.rs": 6,
+      "src/number_decoder.rs": 29,
+      "src/parse.rs": 115,
+      "src/simd/aarch64.rs": 40,
+      "src/simd/fallback_int.rs": 0,
+      "src/simd/fallback_string.rs": 12,
+      "src/simd/mod.rs": 11,
+      "src/simd/number.rs": 9,
+      "src/simd/swar_int.rs": 12,
+      "src/string_decoder.rs": 84,
+      "src/value.rs": 186
+    },
+    "files_with_different_line_counts": [
+      "src/number_decoder.rs",
+      "src/parse.rs",
+      "src/simd/fallback_string.rs",
+      "src/simd/number.rs",
+      "src/string_decoder.rs",
+      "src/value.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      983,
+      983,
+      983
+    ],
+    "stable_edges": 983,
+    "union_edges": 983,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      881,
+      881,
+      881
+    ],
+    "stable_edges": 881,
+    "union_edges": 881,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

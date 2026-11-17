@@ -142,5 +142,54 @@
       "source": "data/rust/json/registry-snapshot.json"
     },
     "project": "projects/json/rust/sonic_rs/verification.json"
+  },
+  {
+    "name": "jiter",
+    "version": "0.19.0",
+    "license": "MIT",
+    "input_api": "jiter::JsonValue::parse(&[u8], allow_inf_nan=false) -> Result<JsonValue, JsonError>; JsonValue::{Object, Array, Str, Int, BigInt, Float, Bool, Null}",
+    "documentation": "https://docs.rs/jiter/0.19.0/jiter/enum.JsonValue.html#method.parse",
+    "source": "https://static.crates.io/crates/jiter/jiter-0.19.0.crate",
+    "scope": "One RFC 8259 JSON text decoded from memory into an untyped jiter::JsonValue tree: root kind, object, array, boolean and null counts, container nesting depth, sorted decoded strings (escape sequences resolved), sorted numbers as f64, sorted top-level object keys",
+    "family": "Jiter Rust JSON parser (pydantic/jiter); shared underlying parser family with Python pydantic-core 2.50.4 / Jiter 0.18.0, but this standalone Rust path pins Jiter 0.19.0",
+    "family_note": "The Rust crate and Python pydantic-core call Jiter parser code in different pinned releases. This is a cross-ecosystem shared family, not a second Rust wrapper; rank by Rust crates.io metric only.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1.0,
+        1.0,
+        2.0,
+        2.0
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 5274664,
+      "source": "data/rust/json/registry-snapshot.json"
+    },
+    "project": "projects/json/rust/jiter/verification.json"
   }
 ]
