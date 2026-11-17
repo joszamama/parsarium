@@ -1,10 +1,10 @@
 {
   "ecosystem": "rust",
   "format": "sql",
-  "status": "pilot_two_selected_search_bounded",
+  "status": "pilot_three_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "sql parser",
@@ -21,14 +21,15 @@
   "unique_search_hits": 250,
   "search_captured_at_utc": "2026-11-17T16:38:13.091871+00:00",
   "primary_metric": "crates.io recent_downloads (trailing 90 days)",
-  "unresolved_documentation_leads": 4,
-  "uncertainty": "Two verified Rust SQL paths after a bounded crates.io search (three queries, first 100 hits each, 300 hits, 250 unique) and recent-download metrics captured 2026-11-17. sqlparser 0.64.0 (18,971,518 90-day downloads, GenericDialect) and sqlite3-parser 0.17.0 (1,003,820, SQLite grammar) parse both valid controls into ASTs that give the oracle summary. Downloads include transitive pulls through query engines. pg_query (libpg_query FFI) and lower leads are unverified, so this is not a top-ten ranking. sqlparser_derive, datafusion-sql and gluesql-core are sqlparser-rs family helpers or consumers, not separate parsers. Two valid controls establish only the tested dialect-neutral subset.",
+  "unresolved_documentation_leads": 3,
+  "uncertainty": "Three verified Rust SQL paths after a bounded crates.io search (three queries, first 100 hits each, 300 hits, 250 unique) and recent-download metrics captured 2026-11-17: sqlparser 0.64.0 (18,971,518, GenericDialect), sqlite3-parser 0.17.0 (1,003,820, SQLite grammar) and qusql-parse 0.12.0 (3,272, MariaDB default). Each parses both valid controls into an AST that gives the oracle summary. Downloads include transitive pulls through query engines. Higher-ranked pg_query and other leads are unverified in this commit, so this is not a top-ten ranking. Two valid controls establish only the tested dialect-neutral subset.",
   "registry_snapshot": "data/rust/sql/registry-snapshot.json",
   "unresolved_leads": "data/rust/sql/leads.json",
   "runtime_evidence": "data/rust/sql/standard.json",
   "third_party_evidence": "data/rust/sql/parsers.json",
   "third_party_control_results": [
     "projects/sql/rust/sqlparser/verification.json",
-    "projects/sql/rust/sqlite3_parser/verification.json"
+    "projects/sql/rust/sqlite3_parser/verification.json",
+    "projects/sql/rust/qusql_parse/verification.json"
   ]
 }

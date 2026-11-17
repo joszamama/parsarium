@@ -1,0 +1,66 @@
+{
+  "kind": "third_party",
+  "api": "qusql_parse::parse_statements(local UTF-8 text, &mut Issues, &ParseOptions::new()) -> Vec<Statement>; the harness rejects any error-level Issue, reads Statement::Select (select_exprs, where_, group_by, order_by) and Statement::InsertReplace (table, columns, values) and walks the tree with the crate's Visitor for TableReference::Table/Join, Function/AggregateFunction calls and literal expressions",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:23:32.912968+00:00",
+  "manifest": "projects/sql/rust/qusql_parse/manifest.json",
+  "image_id": "sha256:e7208e08789dba9d7fd81b7f1fa0b3a9c8123ebce2ce378191b71df8e6e71bff",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "fc00cde9df2d85976aa74f404cdff578f290d03daa0a7817588e2a908d7cd4b3",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Cargo.lock": "004c1caaf37dd54981ba007a2cd66396cc095fa6a0cc20292c5b9d86b8028f83",
+    "Cargo.toml": "82d5e0880083b5b9d10006b13b70900a1253a41d4c4223f1db3197a9510231f1",
+    "Dockerfile": "872ed27547dc353f6b9c2813e2a1b86b470e3c711f2c127ac1bd79d7b9e0099f",
+    "manifest.json": "53ffb6619f0c17f552fe227d9f967938ff21ab4cf71dcce1db272d4f719b146d",
+    "run-control.sh": "616455bb0792a2feb8f439a1fc1648ba56864b0500bb36d026985698a1c94a9c",
+    "source-lock.json": "7a08e17f80f1fd988b91ec3245cb8077d7762b115dd883611e86be2f8fbe853e",
+    "src/bin/fuzzer.rs": "2c29bbf6c1cbdff810a724817432af8050e489986c38a57e7e2ff9379d98f3e9",
+    "src/bin/replay.rs": "4dab571f53c8f9e5a4496f3925b984315ae6d752ccf4b89106855610e1263f52",
+    "src/lib.rs": "6cb0fe7522f3516267e439c1f6d9d79eaa619952112e3a5147bd10f3938ed5aa"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 44,
+  "parser_source_lines_covered": 749,
+  "format_specific_source_lines_covered": 151,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/rust/qusql_parse/target/coverage/coverage.json",
+  "pass": true
+}
