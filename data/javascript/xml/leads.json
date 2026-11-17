@@ -13,13 +13,13 @@
   },
   {
     "name": "htmlparser2",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "lead_kind": "html_tokenizer_not_selected",
     "version_seen": "12.0.0",
     "license": "MIT",
     "npm_downloads_30d": 526964241,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/htmlparser2",
-    "reason": "Own forgiving HTML tokenizer with an xmlMode option; it does not enforce XML well-formedness or resolve namespace URIs, so it is not an XML 1.0 + Namespaces parser. Not run.",
+    "reason": "Pinned xmlMode Parser.write/end API parses both valid XML controls into raw qualified-name events matching non-namespace Expat oracle; own tokenizer and entities source covered with stable parser-scoped AFL differential. It neither resolves namespace URIs nor enforces XML well-formedness, and package downloads mostly measure HTML use. Verified: projects/xml/javascript/htmlparser2.",
     "source": "https://www.npmjs.com/package/htmlparser2"
   },
   {
@@ -84,13 +84,13 @@
   },
   {
     "name": "xmldoc",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "lead_kind": "delegates_to_sax",
     "version_seen": "3.0.0",
     "license": "MIT",
     "npm_downloads_30d": 21414489,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xmldoc",
-    "reason": "Lightweight DOM built on sax events; shares the sax family. Not run.",
+    "reason": "Pinned XmlDocument(text) builds a raw qualified-name tree over sax 1.6.1; both valid controls match the projected non-namespace Expat oracle, with package and underlying sax coverage and stable AFL differential. Namespace URIs are not resolved. Verified: projects/xml/javascript/xmldoc.",
     "source": "https://www.npmjs.com/package/xmldoc"
   },
   {

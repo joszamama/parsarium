@@ -491,6 +491,157 @@
       },
       "differential_matches_expat_oracle": true,
       "projection_limit": "Namespace URIs are resolved by the adapter over xml-js qualified names; xml-js itself does not expose expanded URIs."
+    },
+    {
+      "package": "htmlparser2",
+      "version": "12.0.0",
+      "scope": "One UTF-8 local document through htmlparser2's xmlMode callback events: raw qualified element and attribute names (prefix:local, no namespace URIs), attribute order and decoded values, xmlns/xmlns:* as ordinary attributes, decoded text and CDATA, comments, processing instructions including the XML declaration, CDATA count, tree depth; no DOCTYPE",
+      "command": "python3 scripts/run_project.py xml javascript htmlparser2",
+      "receipt": "projects/xml/javascript/htmlparser2/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "xmlns:c=urn:parsarium:catalog",
+          "xmlns=urn:parsarium:item",
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "cdata_sections": 1,
+        "comments": [],
+        "elements": [
+          "c:catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "processing_instructions": [
+          "xml version=\"1.0\" encoding=\"UTF-8\""
+        ],
+        "root": "c:catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 1084,
+      "underlying_parser": "htmlparser2 forgiving HTML/XML tokenizer (own Tokenizer.js state machine) with entities decode trees",
+      "underlying_source_files": 10,
+      "underlying_source_lines_covered": 1055,
+      "differential_output": {
+        "attributes": [
+          "xmlns=urn:parsarium:order",
+          "xmlns:p=urn:parsarium:price",
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\"",
+          "xmlns="
+        ],
+        "cdata_sections": 0,
+        "comments": [
+          " order receipt "
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "processing_instructions": [
+          "xml version=\"1.0\" encoding=\"UTF-8\"",
+          "audit step=\"1\""
+        ],
+        "root": "order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_projected_expat_oracle": true,
+      "namespace_resolution": false,
+      "projection_limit": "Measured as a raw-name XML event path, not as a namespace-aware XML parser. htmlparser2 returns qualified names only, so prefixes, local names, attribute order and xmlns declarations are compared as raw qualified-name strings; no namespace URI, expanded name or in-scope binding is produced by the parser or inferred by the harness. The comparison oracle is expat in non-namespace mode, which exposes the same fields. Fields htmlparser2 exposes but the oracle cannot (attribute quote style, startIndex/endIndex) are not compared."
+    },
+    {
+      "package": "xmldoc",
+      "version": "3.0.0",
+      "scope": "One UTF-8 local document through xmldoc's in-memory tree: the root element and its descendants with raw qualified element and attribute names (prefix:local, no namespace URIs), attribute order and decoded values, xmlns/xmlns:* as ordinary attributes, decoded text and CDATA, comments inside the root, CDATA count, tree depth and the doctype string (empty; no DOCTYPE in either control)",
+      "command": "python3 scripts/run_project.py xml javascript xmldoc",
+      "receipt": "projects/xml/javascript/xmldoc/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "xmlns:c=urn:parsarium:catalog",
+          "xmlns=urn:parsarium:item",
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "cdata_sections": 1,
+        "comments": [],
+        "doctype": "",
+        "elements": [
+          "c:catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "root": "c:catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 290,
+      "underlying_parser": "sax-js strict XML state machine (sax 1.6.1 in non-namespace mode), shared with the selected sax path, xml2js and xml-js",
+      "underlying_source_files": 1,
+      "underlying_source_lines_covered": 870,
+      "differential_output": {
+        "attributes": [
+          "xmlns=urn:parsarium:order",
+          "xmlns:p=urn:parsarium:price",
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\"",
+          "xmlns="
+        ],
+        "cdata_sections": 0,
+        "comments": [],
+        "doctype": "",
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "root": "order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "differential_matches_projected_expat_oracle": true,
+      "namespace_resolution": false,
+      "projection_limit": "Measured as a raw-name XML tree path, not as a namespace-aware XML parser. xmldoc documents that namespaces are ignored (<office:body> becomes \"office:body\"), so prefixes, local names, attribute order and xmlns declarations are compared as raw qualified-name strings; no namespace URI, expanded name or in-scope binding is produced by xmldoc or inferred by the harness. The comparison oracle is expat in non-namespace mode restricted to what the tree keeps. Fields xmldoc exposes but the oracle cannot (line, column, position, startTagPosition, val) are not compared."
     }
   ],
   "standard": []

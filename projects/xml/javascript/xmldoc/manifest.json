@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "xmldoc",
+  "release": "3.0.0",
+  "catalog_parser": "data/javascript/xml/parsers.json",
+  "source_lock": "projects/xml/javascript/xmldoc/source-lock.json",
+  "source_sha256": "5546bf0c619adf2b7583797849d905b5e0e92ef3cfcf2b5f04bc0ca49d570e2a",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "xmlns:c=urn:parsarium:catalog",
+      "xmlns=urn:parsarium:item",
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "cdata_sections": 1,
+    "comments": [],
+    "doctype": "",
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "root": "c:catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "xmlns=urn:parsarium:order",
+      "xmlns:p=urn:parsarium:price",
+      "n=1",
+      "p:currency=EUR",
+      "n=2",
+      "note=say \"hi\"",
+      "xmlns="
+    ],
+    "cdata_sections": 0,
+    "comments": [],
+    "doctype": "",
+    "elements": [
+      "order",
+      "line",
+      "sku",
+      "p:amount",
+      "line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "root": "order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "namespace_resolution": false,
+  "output_name_form": "raw qualified names (prefix:local); xmlns/xmlns:* are ordinary attr entries",
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/xmldoc/",
+    "--includes",
+    "/work/node_modules/sax/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of the xmldoc package during a replay of the valid control through new XmlDocument(text): dist/index.js (XmlDocument/XmlElement tree building from sax events) is the package's only runtime file and is also counted alone as format_specific_source_lines_covered. The underlying sax 1.6.1 lib/sax.js strict, non-namespace tokenizer is counted separately under underlying_coverage_subject_prefix. Line counts include module-level lines executed at load. The adapter's TextDecoder and tree walk are outside both prefixes; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/xmldoc/",
+  "format_specific_coverage_file_suffix": "dist/index.js",
+  "afl_coverage_subject_prefix": "/work/node_modules/",
+  "underlying_package": "sax",
+  "underlying_release": "1.6.1",
+  "underlying_npm_integrity": "sha512-42tBVwLWnaQvW5zc4HbZrTuWccECCZfBi92FDuwtqxasH+JbPB3/FOKb1m222K42R4WxuxzzMsTswfzgtSu64Q==",
+  "underlying_source_sha256": "6e9abf03478608b80894bb8b6421271a0e583504f785f749a700d6bb35be85bd",
+  "underlying_family": "sax-js strict XML state machine (same sax 1.6.1 release as the selected sax path, here in non-namespace mode)",
+  "underlying_coverage_subject_prefix": "/work/node_modules/sax/",
+  "underlying_format_specific_coverage_file_suffix": "sax/lib/sax.js"
+}

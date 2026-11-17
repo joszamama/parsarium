@@ -1,0 +1,70 @@
+{
+  "project": "xml/javascript/htmlparser2",
+  "pass": true,
+  "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+  "namespace_resolution": false,
+  "compared_fields": [
+    "attributes",
+    "cdata_sections",
+    "comments",
+    "elements",
+    "max_depth",
+    "processing_instructions",
+    "root",
+    "text"
+  ],
+  "oracle": "projects/xml/javascript/htmlparser2/oracle.py (expat, non-namespace mode)",
+  "overlay_receipt_sha256": "b7bdf169f908e52b6166a830cf7745681bfe09e58023fe2ff499f6c4adac45bf",
+  "base_image_id": "sha256:dfd9e486ed7426713d8f0efc0900958fd9f278fd524553ce261a109e2b743008",
+  "overlay_image_id": "sha256:996e59b744ff3e7e9aeacebf293c2268f785b5ee22922dfd5a775854b9fb872a",
+  "release_tarball_sha256": "bd21df686ef9b29b6786aac9aa75a9d20e1e884ad3f3089882db1d576dd4aaa0",
+  "underlying_tarball_sha256": "e9a27d66db0d0a6f2d76454219d94f5729ae2a29f08ab06c92e5f6eaa37cbe68",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "control_output_matches_oracle": true,
+  "differential": "controls/xml/order-default-ns.xml",
+  "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_output_matches_oracle": true,
+  "control_lines_covered_by_file": {
+    "entities/dist/decode-codepoint.js": 42,
+    "entities/dist/decode.js": 443,
+    "entities/dist/encode.js": 171,
+    "entities/dist/escape.js": 81,
+    "entities/dist/generated/decode-data-html.js": 5,
+    "entities/dist/generated/decode-data-xml.js": 7,
+    "entities/dist/generated/encode-html.js": 3,
+    "entities/dist/index.js": 59,
+    "entities/dist/internal/bin-trie-flags.js": 49,
+    "entities/dist/internal/decode-shared.js": 195,
+    "htmlparser2/dist/Parser.js": 462,
+    "htmlparser2/dist/Tokenizer.js": 585,
+    "htmlparser2/dist/index.js": 37
+  },
+  "repeated_control_identical": true,
+  "repeated_differential_identical": true,
+  "control_parser_features": 219,
+  "control_afl_tuples": 239,
+  "control_features_by_package": {
+    "dom-serializer": 4,
+    "domelementtype": 2,
+    "domhandler": 2,
+    "domutils": 9,
+    "entities": 86,
+    "htmlparser2": 116
+  },
+  "differential_parser_features": 266,
+  "differential_afl_tuples": 286,
+  "parser_feature_difference": 65,
+  "afl_tuple_difference": 65,
+  "control_only_features_by_file": {
+    "entities/dist/decode.js": 4,
+    "htmlparser2/dist/Parser.js": 1,
+    "htmlparser2/dist/Tokenizer.js": 4
+  },
+  "differential_only_features_by_file": {
+    "entities/dist/decode-codepoint.js": 2,
+    "entities/dist/decode.js": 24,
+    "htmlparser2/dist/Parser.js": 10,
+    "htmlparser2/dist/Tokenizer.js": 20
+  }
+}
