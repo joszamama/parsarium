@@ -1,11 +1,11 @@
-"""One-file external fuzzer entry point; AFL++ and generators supply input paths."""
+"""Atheris input bridge; this module does not start a campaign during verification."""
 
 import sys
-from pathlib import Path
-from harness import fuzz_one_input
 
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: fuzz.py FILE")
-    else:
-        fuzz_one_input(Path(sys.argv[1]).read_bytes())
+import atheris
+
+with atheris.instrument_imports():
+    from harness import fuzz_one_input
+
+atheris.Setup(sys.argv, fuzz_one_input)
+atheris.Fuzz()
