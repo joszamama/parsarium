@@ -210,5 +210,110 @@
         }
       ]
     }
+  },
+  {
+    "name": "soundintheory/php-sql-parser",
+    "version": "1.0",
+    "license": "BSD-2-Clause",
+    "license_evidence": "BSD 2-Clause text in the header of src/PHPSQL/Parser.php in the pinned codeload archive (file SHA-256 e8d39df1315f5185bf0f22fcc5bf9f2b3d6ad3f74bfba735f2cb4b34b51f4d6e) and composer.json license BSD-2-Clause (SHA-256 0e8e12895f3bb887151ff02562a326d53c0eb1ef3a8454517e1a60ecc2fe4781); the archive has no separate LICENSE file",
+    "input_api": "(new PHPSQL\\Parser())->parse(local SQL text) -> clause-keyed array parse tree",
+    "documentation": "https://github.com/soundintheory/php-sql-parser/blob/dcb81216a13be124d21711b8fefb6e80db7af472/README.md",
+    "source": "https://codeload.github.com/soundintheory/php-sql-parser/legacy.zip/dcb81216a13be124d21711b8fefb6e80db7af472",
+    "source_sha256": "75d3ea13ba4238d034b49eeff7b995bde4a6539e63054b95da2d31b69937cbb6",
+    "composer_reference": "dcb81216a13be124d21711b8fefb6e80db7af472",
+    "dependencies": [],
+    "dialect": "MySQL-oriented (no dialect option)",
+    "scope": "One SQL statement from local text; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. The parser treats the whole input as one statement. The 2013 code runs on PHP 8.5 with compile-time warnings, which the harness sends to stderr.",
+    "family": "PHP-SQL-Parser lineage (2013 PSR-0 fork of the Google Code php-sql-parser; shared family with greenlion/php-sql-parser)",
+    "family_note": "PHPSQL\\Parser::parse runs its own lexer (PHPSQL\\Parser\\Lexer, Splitter) and one monolithic Parser class (process_select_expr, process_from, process_insert, process_values, ...) that returns a clause-keyed array of expr_type nodes. It is a fork of Justin Swanhart's Google Code project, whose maintained continuation is greenlion/php-sql-parser. The code is not a copy of greenlion v5.0.0: no file is identical after php -w stripping, and only 662 of 1,219 normalized statements (54.3%) also occur in greenlion, which split the parser into per-clause processor classes. Shared family, separate code and package API; Packagist 1.0 is its only release (2013). INSERT targets carry table and columns without an expr_type node, so the adapter reads them from the INSERT entry.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 599598,
+      "source": "https://packagist.org/packages/soundintheory/php-sql-parser.json",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/php/sql/registry-snapshot.json",
+      "limitation": "Lifetime downloads, including installs as a dependency of other tools."
+    },
+    "project": "projects/sql/php/soundintheory_php_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

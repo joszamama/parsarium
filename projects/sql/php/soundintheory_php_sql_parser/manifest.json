@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "php",
+  "pilot": true,
+  "package": "soundintheory/php-sql-parser",
+  "release": "1.0",
+  "catalog_parser": "data/php/sql/parsers.json",
+  "source_lock": "projects/sql/php/soundintheory_php_sql_parser/source-lock.json",
+  "source_sha256": "75d3ea13ba4238d034b49eeff7b995bde4a6539e63054b95da2d31b69937cbb6",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in soundintheory/php-sql-parser PHP source (PHPSQL\\Parser, lexer and splitter); php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/soundintheory/php-sql-parser/",
+  "format_specific_coverage_file_suffix": "/src/PHPSQL/Parser.php",
+  "scope": "One SQL statement from local text passed to the documented PHPSQL\\Parser::parse; the harness walks the returned clause-keyed array (expr_type table, aggregate_function/function, const and record entries; INSERT target table and columns entries). The parser treats the whole input as one statement, so statement_count is 1 by construction.",
+  "summary_command": [
+    "/usr/bin/php",
+    "/work/replay.php",
+    "/input/case"
+  ],
+  "dialect": "MySQL-oriented (PHP-SQL-Parser lineage has no dialect option)",
+  "parser_family": "PHP-SQL-Parser lineage (Justin Swanhart's Google Code php-sql-parser): 2013 PSR-0 fork with a single monolithic PHPSQL\\Parser; it shares the clause-keyed array tree format with greenlion/php-sql-parser, but only 54.3% of its normalized statements occur in greenlion v5.0.0, which split parsing into per-clause processors",
+  "api": "(new PHPSQL\\Parser())->parse(local SQL text) -> nested array parse tree keyed by clause (SELECT, FROM, WHERE, GROUP, ORDER, INSERT, VALUES)"
+}

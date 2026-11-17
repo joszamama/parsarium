@@ -187,8 +187,100 @@
       "parser_feature_difference": 461,
       "project_receipt": "projects/sql/php/greenlion_php_sql_parser/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/php/greenlion_php_sql_parser/differential.json"
+    },
+    {
+      "package": "soundintheory/php-sql-parser",
+      "version": "1.0",
+      "pass": true,
+      "input_api": "(new PHPSQL\\Parser())->parse(local SQL text) -> clause-keyed array parse tree",
+      "dialect": "MySQL-oriented (no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "PHP-SQL-Parser lineage (2013 PSR-0 fork of the Google Code php-sql-parser; shared family with greenlion/php-sql-parser)",
+      "parser_source_files": 7,
+      "parser_source_lines_covered": 659,
+      "afl_tuple_difference": 280,
+      "parser_feature_difference": 281,
+      "project_receipt": "projects/sql/php/soundintheory_php_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/php/soundintheory_php_sql_parser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T18:51:01.274480+00:00"
+  "checked_at_utc": "2026-11-17T20:03:29.544504+00:00"
 }

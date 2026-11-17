@@ -1,34 +1,43 @@
 {
   "ecosystem": "php",
   "format": "sql",
-  "status": "pilot_two_selected_search_bounded",
+  "status": "pilot_three_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "sql parser",
     "sql-parser",
-    "sqlparser"
+    "sqlparser",
+    "sql ast",
+    "mysql parser",
+    "postgresql parser",
+    "sql lexer"
   ],
   "search_totals": {
     "sql parser": 82,
     "sql-parser": 34,
-    "sqlparser": 70
+    "sqlparser": 70,
+    "sql ast": 16,
+    "mysql parser": 57,
+    "postgresql parser": 14,
+    "sql lexer": 11
   },
   "search_limit_per_query": 100,
-  "search_hits_recorded": 186,
-  "unique_search_hits": 115,
+  "search_hits_recorded": 284,
+  "unique_search_hits": 165,
   "search_captured_at_utc": "2026-11-17T16:38:36.119239+00:00",
   "primary_metric": "Packagist total downloads",
   "unresolved_documentation_leads": 1,
-  "uncertainty": "Two verified PHP SQL paths after a bounded Packagist search (three queries, 186 hits, 115 unique) and Packagist total downloads for 8 targeted leads, captured 2026-11-17. phpmyadmin/sql-parser 6.0.1 (55,800,144 total downloads) and greenlion/php-sql-parser v5.0.0 (13,810,212) parse both valid controls into structures that give the oracle summary. They are independent code bases. iamcal/sql-parser (72,745,721) ranks higher but parses only CREATE TABLE schemas, and the doctrine and jdorn packages are formatters. sqlftw/sqlftw and other leads are unverified, so this is not a top-ten ranking. greenlion treats the whole input as one statement. PDO and SQLite3 prepare are engine APIs with no syntax tree. Two valid controls establish only the tested dialect-neutral subset.",
+  "uncertainty": "Three verified PHP SQL paths after a bounded Packagist search (7 queries, 284 hits, 165 unique; round 1 on 2026-11-17 used three queries, round 2 added four) and Packagist total downloads for 35 targeted leads, captured 2026-11-17. phpmyadmin/sql-parser 6.0.1, greenlion/php-sql-parser v5.0.0 and soundintheory/php-sql-parser 1.0 parse both valid controls into structures that give the oracle summary. soundintheory is a 2013 fork of the Google Code predecessor of greenlion (shared PHP-SQL-Parser lineage, separate monolithic code: 54.3% of its normalized statements occur in greenlion v5.0.0). iamcal/sql-parser ranks higher but parses only CREATE TABLE schemas, and the doctrine and jdorn packages are formatters. Other leads are unverified, so this is not a top-ten ranking. greenlion and soundintheory treat the whole input as one statement. PDO and SQLite3 prepare are engine APIs with no syntax tree. Two valid controls establish only the tested dialect-neutral subset.",
   "registry_snapshot": "data/php/sql/registry-snapshot.json",
   "unresolved_leads": "data/php/sql/leads.json",
   "runtime_evidence": "data/php/sql/standard.json",
   "third_party_evidence": "data/php/sql/parsers.json",
   "third_party_control_results": [
     "projects/sql/php/phpmyadmin_sql_parser/verification.json",
-    "projects/sql/php/greenlion_php_sql_parser/verification.json"
+    "projects/sql/php/greenlion_php_sql_parser/verification.json",
+    "projects/sql/php/soundintheory_php_sql_parser/verification.json"
   ]
 }
