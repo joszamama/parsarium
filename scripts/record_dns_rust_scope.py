@@ -6,7 +6,7 @@ copies them into fuzzing/afl-native/dns/rust/<slug>/verification.json as
 "sancov_scope" and "rustc_wrapper_log", which audit_fuzzing.py checks against
 the manifest's afl_instrumented_crates. Run after build_afl_rust.py.
 
-Usage: python3 scripts/record_dns_rust_scope.py hickory_proto trust_dns_proto
+Usage: python3 scripts/record_dns_rust_scope.py hickory_proto
 """
 
 import json

@@ -1,0 +1,299 @@
+{
+  "name": "trust-dns-proto",
+  "demoted": true,
+  "reason": "Predecessor of the already selected hickory-proto: trust-dns-proto 0.23.2 is the last release of the same project before the rename to hickory-proto (0.24). It passed both DNS controls and the full gate, but the decoder code is largely the same: 72% of trust-dns-proto's distinct non-test lines in serialize/binary (BinDecoder), 83% in rr/domain (name decoding) and 53% in op (Message/Header) are identical in hickory-proto 0.26.3 (44% over the whole crate, which also carries resolver/runtime code). Shared family with a stronger selected path; not counted. Evidence: data/rust/dns/trust-dns-proto-demoted.json.",
+  "source_overlap": {
+    "method": "distinct stripped, non-empty, non-comment source lines; #[cfg(test)] mod tests blocks dropped; compared with set intersection",
+    "whole_src": {
+      "trust_dns_proto_0_23_2_lines": 11552,
+      "hickory_proto_0_26_3_lines": 8280,
+      "shared": 5101,
+      "share_of_trust_dns_proto": 0.442,
+      "share_of_hickory_proto": 0.616
+    },
+    "decoder_modules": {
+      "op": {
+        "trust": 1206,
+        "hickory": 1202,
+        "shared": 634,
+        "share_of_trust": 0.526
+      },
+      "serialize/binary": {
+        "trust": 475,
+        "hickory": 527,
+        "shared": 340,
+        "share_of_trust": 0.716
+      },
+      "rr/domain": {
+        "trust": 790,
+        "hickory": 797,
+        "shared": 652,
+        "share_of_trust": 0.825
+      }
+    }
+  },
+  "parser_record": {
+    "name": "trust-dns-proto",
+    "version": "0.23.2",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "Cargo metadata 'MIT OR Apache-2.0' and LICENSE-MIT/LICENSE-APACHE in the crate (sha256 31191126...), checked in the image",
+    "input_api": "trust_dns_proto::op::Message::from_vec(buffer: &[u8]) -> ProtoResult<Message>",
+    "documentation": "https://docs.rs/trust-dns-proto/0.23.2/trust_dns_proto/op/message/struct.Message.html#method.from_vec",
+    "source": "https://crates.io/crates/trust-dns-proto/0.23.2",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "Hickory DNS proto (published as trust-dns-proto before the rename)",
+    "family_note": "Shared family with hickory-proto: trust-dns-proto 0.23.2 is the last release under the old crate name of the same project (the code moved to hickory-proto in 0.24). Its decoder (BinDecoder, Message/Record read) is an older version of the same code. The crate drops the reserved Z bit, so z reports AD and CD only.",
+    "project": "projects/dns/rust/trust_dns_proto",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "crates.io recent_downloads (90 days)",
+      "value": 67753440,
+      "source": "https://crates.io/api/v1/crates/trust-dns-proto",
+      "captured_at_utc": "2026-11-17T16:37:48.112269+00:00",
+      "snapshot": "data/rust/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 2,
+    "afl_feedback": "data/rust/dns/trust-dns-proto-feedback-differential.json"
+  },
+  "verification_row": {
+    "package": "trust-dns-proto",
+    "version": "0.23.2",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "command": "python3 scripts/run_project.py dns rust trust_dns_proto",
+    "feedback_command": "python3 scripts/verify_dns_feedback.py dns/rust/trust_dns_proto",
+    "receipt": "projects/dns/rust/trust_dns_proto/verification.json",
+    "control": "controls/dns/response.bin",
+    "pass": true,
+    "output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_control": "controls/dns/query.bin",
+    "differential_output_matches": true,
+    "parser_source_files": 56,
+    "parser_source_lines_covered": 571,
+    "format_specific_source_lines_covered": 90,
+    "afl_feedback": {
+      "control_parser_features": 815,
+      "variant_parser_features": 558,
+      "parser_feature_difference": 259,
+      "control_afl_tuples": 307,
+      "variant_afl_tuples": 200,
+      "afl_tuple_difference": 107,
+      "runs_per_control": 3
+    },
+    "feedback_receipt": "data/rust/dns/trust-dns-proto-feedback-differential.json"
+  },
+  "feedback_differential": {
+    "checked_at_utc": "2026-11-17T19:27:56.387601+00:00",
+    "project": "dns/rust/trust_dns_proto",
+    "pass": true,
+    "input_kind": "two fixed valid DNS messages (RFC 1035 section 4)",
+    "oracle": "controls/dns/check_controls.py hand-written decoder; summaries pinned in controls/dns/expected.json",
+    "feature_kind": "LLVM source regions of the base replay under coverage_subject_prefix",
+    "subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/",
+    "base_image_id": "sha256:053be860a0705c00cf144e7392509b6835130235e0fe0e019fa9d0ebfb7a7a3d",
+    "overlay_image_id": "sha256:040bb89737f2355156c9c0bb711b5115e6d398b6e6df59930f79a42a9428f91b",
+    "overlay_receipt_sha256": "50dc8866523cc7361a6182f270789c261c56a6c2cb9770c9c632815875948ed0",
+    "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+    "variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+    "control_output_matches": true,
+    "variant_output_matches": true,
+    "runs_per_control": 3,
+    "control_repeat_identical": true,
+    "variant_repeat_identical": true,
+    "afl_target": "/work/afl_fuzzer",
+    "afl_map_size": 17685,
+    "control_parser_features": 815,
+    "variant_parser_features": 558,
+    "parser_feature_difference": 259,
+    "control_afl_tuples": 307,
+    "variant_afl_tuples": 200,
+    "afl_tuple_difference": 107,
+    "control_features_by_file": {
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/op/header.rs": 110,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/op/message.rs": 135,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/op/op_code.rs": 8,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/op/query.rs": 22,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/op/response_code.rs": 12,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/dns_class.rs": 14,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/domain/label.rs": 58,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/domain/name.rs": 169,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/mod.rs": 4,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/rdata/a.rs": 19,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/rdata/aaaa.rs": 54,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/rdata/mx.rs": 17,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/rdata/name.rs": 5,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/record_data.rs": 34,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/record_type.rs": 20,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/resource.rs": 56,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/serialize/binary/decoder.rs": 65,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/serialize/binary/restrict.rs": 13
+    },
+    "variant_features_by_file": {
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/op/header.rs": 110,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/op/message.rs": 124,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/op/op_code.rs": 8,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/op/query.rs": 22,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/op/response_code.rs": 12,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/dns_class.rs": 14,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/domain/label.rs": 58,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/domain/name.rs": 139,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/rr/record_type.rs": 14,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/serialize/binary/decoder.rs": 44,
+      "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/trust-dns-proto-0.23.2/src/serialize/binary/restrict.rs": 13
+    },
+    "mutation_campaign_run": false
+  },
+  "files": {
+    "projects/dns/rust/trust_dns_proto/Cargo.lock": "8d8171df91d000bd6f01d271311bc6f643a0652ae273aee48bff49fcf3065eb6",
+    "projects/dns/rust/trust_dns_proto/Cargo.toml": "782800fc26698b09c56fbc181d6147b2da7ddb821a11cd48fb11a6ea795ad23a",
+    "projects/dns/rust/trust_dns_proto/Dockerfile": "ead9c6ed1d212ea22c6fb3a9b08627eb73ea2a518194d84b0637479b5bae021a",
+    "projects/dns/rust/trust_dns_proto/README.md": "3b8aa5fcb8e63c4e3c455643e5753cc0ebd1e851a6a250d5a65c343250f40d1c",
+    "projects/dns/rust/trust_dns_proto/manifest.json": "05927122bbe72bef78482559baf12223ad84d7d46428d2b55d4765ec2bcf5a28",
+    "projects/dns/rust/trust_dns_proto/run-control.sh": "795f3b58ef79f87ccc4f3c1e59383cc50354a2e0802bd988bf43d88401a2fe2d",
+    "projects/dns/rust/trust_dns_proto/source-lock.json": "0f68846e92a3dbf90fde7c28b6b8076638fda92cba5d75866143afb4375080dc",
+    "projects/dns/rust/trust_dns_proto/src/bin/fuzzer.rs": "71caa84aff59dc70e5765753889043cae8b48651a72cac2f45319fec3b397517",
+    "projects/dns/rust/trust_dns_proto/src/bin/replay.rs": "6b5735ed275be08aa5d5df593a704696124b84fb99df30727636e83fb8ba87a3",
+    "projects/dns/rust/trust_dns_proto/src/lib.rs": "8a39b806c2fe9894321ba2558ec213a958c598d46cbe3fdfc0eb1c9c21e720b3",
+    "projects/dns/rust/trust_dns_proto/verification.json": "bdf3e849aaa5f94703a104fc23427ca9e2bf5c1e5c9ee95b0d7af708a2521d77",
+    "fuzzing/afl-native/dns/rust/trust_dns_proto/Cargo.lock": "b6b1d17ad1d67d0c555d174b361fbfe7ef80815dc505a81b892a728b642d430f",
+    "fuzzing/afl-native/dns/rust/trust_dns_proto/Cargo.toml": "9237fbf43085025aa272003a92cd76d84f50d2b2fc859e75630be54c6399f665",
+    "fuzzing/afl-native/dns/rust/trust_dns_proto/Dockerfile": "7a842f8c7c96ee2e04e921b31bdf5694b98e6bc899a77a6d7bfcba262318dae6",
+    "fuzzing/afl-native/dns/rust/trust_dns_proto/afl_fuzzer.rs": "11e907c59f9a8aaf6bc7c82952f5540b8bc92b729476d572747b96fdda4dc4b6",
+    "fuzzing/afl-native/dns/rust/trust_dns_proto/rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "fuzzing/afl-native/dns/rust/trust_dns_proto/sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "fuzzing/afl-native/dns/rust/trust_dns_proto/verification.json": "50dc8866523cc7361a6182f270789c261c56a6c2cb9770c9c632815875948ed0",
+    "catalog/dns/rust/trust-dns-proto/README.md": "2a0be54951ed0d2271a350f856ea32d4b61153bb67a797c257829e4a1e3e40a5"
+  }
+}

@@ -15,7 +15,7 @@
   },
   {
     "name": "trust-dns-proto",
-    "status": "resolved_verified_selected",
+    "status": "excluded",
     "primary_metric": "crates.io recent_downloads (90 days)",
     "primary_metric_value": 67753440,
     "found_by": "registry search hit",
@@ -24,8 +24,9 @@
     "family": "Hickory DNS proto (formerly trust-dns)",
     "api_lead_checked_against_pinned_release": false,
     "lead_adoption_order": 2,
-    "verification": "projects/dns/rust/trust_dns_proto/verification.json",
-    "reason": "Pinned 0.23.2 passes both DNS controls; see parsers.json and data/rust/dns/trust-dns-proto-feedback-differential.json."
+    "reason": "Predecessor of the already selected hickory-proto: trust-dns-proto 0.23.2 is the last release of the same project before the rename to hickory-proto (0.24). It passed both DNS controls and the full gate, but the decoder code is largely the same: 72% of trust-dns-proto's distinct non-test lines in serialize/binary (BinDecoder), 83% in rr/domain (name decoding) and 53% in op (Message/Header) are identical in hickory-proto 0.26.3 (44% over the whole crate, which also carries resolver/runtime code). Shared family with a stronger selected path; not counted. Evidence: data/rust/dns/trust-dns-proto-demoted.json.",
+    "evidence": "data/rust/dns/trust-dns-proto-demoted.json",
+    "version_seen": "0.23.2"
   },
   {
     "name": "domain",
