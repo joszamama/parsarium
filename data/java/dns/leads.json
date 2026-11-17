@@ -29,15 +29,17 @@
   },
   {
     "name": "org.pcap4j:pcap4j-core",
-    "status": "unresolved",
+    "status": "resolved_verified_selected",
     "primary_metric": "deps.dev directDependentCount summed over all releases",
     "primary_metric_value": 210,
     "found_by": "targeted documentation lead",
     "documentation": "https://javadoc.io/doc/org.pcap4j/pcap4j-core/latest/org/pcap4j/packet/DnsPacket.html",
     "input_api_lead": "DnsPacket.newPacket(byte[], int, int)",
     "family": "Pcap4J DnsPacket",
-    "api_lead_checked_against_pinned_release": false,
-    "lead_adoption_order": 3
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": 3,
+    "verification": "projects/dns/java/pcap4j_core/verification.json",
+    "reason": "Pinned 1.8.2 passes both DNS controls; see parsers.json and data/java/dns/pcap4j-core-feedback-differential.json."
   },
   {
     "name": "org.minidns:minidns-core",

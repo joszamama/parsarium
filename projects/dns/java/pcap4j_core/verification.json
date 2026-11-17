@@ -1,0 +1,85 @@
+{
+  "kind": "third_party",
+  "api": "org.pcap4j.packet.DnsPacket.newPacket(byte[], 0, length) on local message bytes (no capture handle); DnsHeader getters, DnsDomainName.decompress(message) for names, DnsRData* getters (AAAA from getAddress bytes)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:13:34.115974+00:00",
+  "manifest": "projects/dns/java/pcap4j_core/manifest.json",
+  "image_id": "sha256:b2ef03e38eb33b12bff901ab6e1d3ad5464d935ebd32ee0ef47d57f9ded79f58",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "270e89c1c4d32599ab2046f19e9977d56b51afdd402c06f4743d72cbfe88a17d",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "2cf5ebcb220cbb8e9efc346b740c02dd04e8604df1aadd4fa161d7a979624369",
+    "Pcap4jDnsHarness.java": "7130cec62f66182b090be5f74796ccb95da772b7b3d0578643a7b14c1dca5f18",
+    "manifest.json": "e3517c9afdb357f37037e7b115169e60f8db16f3f2aab9b69b32f6f66c1b5d40",
+    "run-control.sh": "28f5c58f83b51f49e65c6d2ff2b067cd7fac4509a3d05699aea0776e3de1bf37",
+    "source-lock.json": "d5ff0849f626ae2100a39b9e799f91f61d0a327a01c839346439e0dc640beaf7"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 14,
+  "parser_source_lines_covered": 575,
+  "format_specific_source_lines_covered": 68,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/java/pcap4j_core/target/coverage/coverage.json",
+  "pass": true
+}

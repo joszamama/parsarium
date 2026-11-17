@@ -210,5 +210,109 @@
     },
     "rank": 2,
     "afl_feedback": "data/java/dns/dnsjava-feedback-differential.json"
+  },
+  {
+    "name": "pcap4j-core",
+    "version": "1.8.2",
+    "license": "MIT",
+    "license_evidence": "Parent POM org.pcap4j:pcap4j:1.8.2 (sha256 a53d00da...) declares <name>MIT License</name>, checked in the image; the jars carry no license file",
+    "input_api": "org.pcap4j.packet.DnsPacket.newPacket(byte[] rawData, int offset, int length) throws IllegalRawDataException",
+    "documentation": "https://javadoc.io/doc/org.pcap4j/pcap4j-core/1.8.2/org/pcap4j/packet/DnsPacket.html",
+    "documentation_note": "The javadoc documents the static newPacket(byte[], int, int) factory, which builds a DnsPacket from raw DNS message bytes. The README documents pcap4j-packetfactory-static as the runtime packet-factory module; without it Pcap4J cannot build DNS RDATA.",
+    "source": "https://central.sonatype.com/artifact/org.pcap4j/pcap4j-core/1.8.2",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "Pcap4J DNS packet classes (DnsPacket, DnsDomainName, DnsResourceRecord, DnsRData*)",
+    "family_note": "Own Java decoder inside the Pcap4J packet library (pinned to 1.8.2, the latest non-pre-release; 2.0.0-alpha.6 is the deps.dev default). The documented DnsPacket.newPacket(byte[], int, int) decodes a DNS message from caller-supplied bytes; no capture handle, interface or libpcap call is used (JNA is on the class path but never loads a native library). RDATA comes from the documented runtime module pcap4j-packetfactory-static 1.8.2. Pcap4J keeps the reserved Z bit, AD and CD. Names are decompressed with the documented DnsDomainName.decompress(message); for a name that is only a compression pointer Pcap4J returns a leading '.', which the harness drops. AAAA text is formatted by the harness from the decoded 16 bytes (RFC 5952). Its deps.dev count covers the whole multi-protocol pcap4j-core artifact. Coverage and AFL++ features are scoped to Pcap4J's DNS classes (org.pcap4j.packet.Dns*, namednumber.Dns*, StaticDnsRDataFactory and util.ByteArrays): building the first RDATA loads the static factory binder, which initialises every protocol's named-number tables (TcpPort, UdpPort, IpNumber and others) and would otherwise make up most of the response control's features.",
+    "project": "projects/dns/java/pcap4j_core",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 210,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.pcap4j%3Apcap4j-core",
+      "captured_at_utc": "2026-11-17T16:40:22.379483+00:00",
+      "snapshot": "data/java/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 3,
+    "afl_feedback": "data/java/dns/pcap4j-core-feedback-differential.json"
   }
 ]
