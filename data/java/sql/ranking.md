@@ -26,6 +26,7 @@ Receipts: [org.jooq:jooq](../../../projects/sql/java/jooq/verification.json) and
 | Lead | Metric | Status | Parser family |
 | --- | ---: | --- | --- |
 | org.jooq:jooq | 4,574 | selected | jOOQ hand-written parser |
+| org.apache.spark:spark-sql_2.12 | 3,567 | unresolved | Spark SQL ANTLR grammar |
 | com.alibaba:druid | 1,945 | selected | Druid hand-written SQL parser |
 | com.facebook.presto:presto-parser | 1,453 | selected | Presto/Trino ANTLR grammar |
 | org.apache.calcite:calcite-core | 1,250 | selected | Calcite JavaCC grammar |
@@ -33,11 +34,21 @@ Receipts: [org.jooq:jooq](../../../projects/sql/java/jooq/verification.json) and
 | com.github.jsqlparser:jsqlparser | 950 | selected | JSqlParser JavaCC grammar |
 | org.apache.spark:spark-catalyst_2.12 | 529 | selected | Spark SQL ANTLR grammar |
 | io.trino:trino-parser | 525 | selected | Presto/Trino ANTLR grammar |
-| io.prestosql:presto-parser | 282 | unresolved | Presto/Trino ANTLR grammar |
-| org.apache.spark:spark-catalyst_2.13 | 278 | unresolved | Spark SQL ANTLR grammar |
+| io.prestosql:presto-parser | 282 | excluded | Presto/Trino ANTLR grammar |
+| org.apache.spark:spark-catalyst_2.13 | 278 | excluded | Spark SQL ANTLR grammar |
 | org.apache.flink:flink-sql-parser | 188 | selected | Calcite JavaCC grammar (Flink-generated FlinkSqlParserImpl) |
 | org.apache.shardingsphere:shardingsphere-sql-parser-engine | 135 | selected | ShardingSphere ANTLR grammars |
+| org.apache.spark:spark-sql-api_2.13 | 121 | excluded | Spark SQL ANTLR grammar |
 | com.github.vertical-blank:sql-formatter | 111 | excluded | — |
+| org.apache.shardingsphere:shardingsphere-parser-sql-engine | 64 | excluded | ShardingSphere ANTLR grammars |
+| com.google.zetasql:zetasql-client | 51 | unresolved | ZetaSQL (C++ analyzer) |
+| org.apache.shardingsphere:shardingsphere-sql-parser-mysql | 27 | excluded | ShardingSphere ANTLR grammars |
+| org.apache.calcite:calcite-babel | 16 | unresolved | Apache Calcite JavaCC grammar (Babel) |
+| org.apache.shardingsphere:shardingsphere-parser-sql-engine-core | 15 | excluded | ShardingSphere ANTLR grammars |
+| org.apache.shardingsphere:shardingsphere-parser-sql-engine-mysql | 9 | excluded | ShardingSphere ANTLR grammars |
 | net.sf.jsqlparser:jsqlparser | 8 | excluded | JSqlParser JavaCC grammar |
+| org.apache.hive:hive-parser | 0 | excluded | Apache Hive ANTLR3 HiveQL grammar |
+| io.github.melin.superior:superior-sql-parser | 0 | excluded | — |
+| com.alibaba:fastsql | — | unresolved | Druid hand-written SQL parser (fork) |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).
