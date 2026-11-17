@@ -982,11 +982,11 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 110,
-    "containerized_verified": 110,
+    "catalog_paths": 111,
+    "containerized_verified": 111,
     "staged": 0,
-    "standard_api_paths": 8,
-    "standard_containerized_verified": 7,
+    "standard_api_paths": 9,
+    "standard_containerized_verified": 8,
     "standard_staged": 1,
     "cells": [
       {
@@ -1332,20 +1332,20 @@
         "containerized_verified": 2,
         "staged": 0,
         "pending": 0,
-        "standard_api_paths": 1,
-        "standard_containerized_verified": 1,
+        "standard_api_paths": 2,
+        "standard_containerized_verified": 2,
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
         "status": "pilot_partial_search_bounded",
         "complete": false,
-        "uncertainty": "Pilot cell, two verified third-party paths. The earlier zero count wrongly excluded libxml2-family wrappers; PROTOCOL.md lets a wrapper qualify as a package API with its parser family identified, so sabre/xml is counted with family libxml2 (shared with the standard XMLReader path). symfony/dom-crawler was reassessed under the same wrapper rule and counted: its package-own scope is Crawler navigation and XPath/namespace mapping over a libxml2 DOMDocument, not tokenizing, and its Xdebug package lines differ by only one post-parse line between the two controls, so its AFL++ feedback comes from a native overlay (source-built PHP 8.5.12 and libxml2 2.15.4, allowlist limited to libxml2 parser.c/parserInternals.c/SAX2.c and ext/dom document.c plus ext/libxml) running the same Crawler harness, where the controls differ in 357 stable tuples, all arising while addXmlContent parses; its downloads are mostly HTML crawling uses. jms/serializer stays excluded because it maps an already parsed SimpleXML tree onto a target class model. The other libxml2-family wrappers (veewee/xml, mtownsend/xml-to-array, saloonphp/xml-wrangler, laravie/parser, orchestra/parser, pear/xml_parser and smaller ones) were not evaluated by the cutoff and remain unresolved, as do the own-code leads prewk/xml-string-streamer and watoki/dom. sabre/xml drops xmlns declarations and text in mixed-content elements by design, so its summary omits namespace declaration counts. Both coverage images use Ubuntu PHP 8.5.4 with libxml 2.15.2; both AFL++ overlays use the source-built PHP 8.5.12 and libxml2 2.15.4. The search covers the first 100 hits of five Packagist queries; controls are two small UTF-8 namespace-aware documents without DOCTYPE."
+        "uncertainty": "Pilot cell, two verified third-party paths. The earlier zero count wrongly excluded libxml2-family wrappers; PROTOCOL.md lets a wrapper qualify as a package API with its parser family identified, so sabre/xml is counted with family libxml2 (shared with the standard XMLReader path). symfony/dom-crawler was reassessed under the same wrapper rule and counted: its package-own scope is Crawler navigation and XPath/namespace mapping over a libxml2 DOMDocument, not tokenizing, and its Xdebug package lines differ by only one post-parse line between the two controls, so its AFL++ feedback comes from a native overlay (source-built PHP 8.5.12 and libxml2 2.15.4, allowlist limited to libxml2 parser.c/parserInternals.c/SAX2.c and ext/dom document.c plus ext/libxml) running the same Crawler harness, where the controls differ in 357 stable tuples, all arising while addXmlContent parses; its downloads are mostly HTML crawling uses. jms/serializer stays excluded because it maps an already parsed SimpleXML tree onto a target class model. The other libxml2-family wrappers (veewee/xml, mtownsend/xml-to-array, saloonphp/xml-wrangler, laravie/parser, orchestra/parser, pear/xml_parser and smaller ones) were not evaluated by the cutoff and remain unresolved, as do the own-code leads prewk/xml-string-streamer and watoki/dom. sabre/xml drops xmlns declarations and text in mixed-content elements by design, so its summary omits namespace declaration counts. Both coverage images use Ubuntu PHP 8.5.4 with libxml 2.15.2; both AFL++ overlays use the source-built PHP 8.5.12 and libxml2 2.15.4. The search covers the first 100 hits of five Packagist queries; controls are two small UTF-8 namespace-aware documents without DOCTYPE. Standard paths: XMLReader::XML and DOMDocument::loadXML are two PHP 8.5.12 runtime APIs over the same source-built libxml2 2.15.4, counted separately from the third-party paths and not ranked; DOMDocument::loadXML takes the control as an in-memory string, and its AFL++ overlay instruments only libxml2 parser.c/parserInternals.c/SAX2.c and ext/dom document.c. simplexml_load_string and xml_parse remain pending."
       },
       {
         "format": "xml",
         "ecosystem": "python",
-        "catalog_paths": 4,
-        "containerized_verified": 4,
+        "catalog_paths": 5,
+        "containerized_verified": 5,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 1,
@@ -1353,9 +1353,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_four_third_party_one_standard_verified_bounded_search_pending",
+        "status": "pilot_five_third_party_one_standard_verified_bounded_search_pending",
         "complete": false,
-        "uncertainty": "Four verified third-party paths (lxml, beautifulsoup4, xmltodict and untangle) are selected from nine named PyPI/project-documentation leads. A bounded PyPI Simple Index search remains pending; 5 leads are unresolved, so this is not a completed top-ten ranking. lxml uses source-built libxml2 2.15.4; beautifulsoup4's documented 'xml' builder runs on the same lxml 6.1.3/libxml2 2.15.4 pins (shared parser family, no independent XML tokenizer, recover=True); xmltodict, untangle (SAX via defusedxml's DefusedExpatParser) and the standard ElementTree path use Expat. untangle runs SAX without namespace processing and drops namespace URIs; its controls are checked against an lxml oracle projected to untangle's qualified-name view, not against namespace-expanded names. The lxml, beautifulsoup4 and untangle controls exercise valid UTF-8 XML 1.0 namespace structures without DOCTYPE, not full XML conformance. PyPI Stats package downloads are not XML-specific use; Beautiful Soup downloads are mostly HTML use. lxml and beautifulsoup4 AFL feedback excludes parser.c lines 8700-8720 because address-sensitive attribute hash lookups varied across identical valid replays."
+        "uncertainty": "Five verified third-party paths (lxml, beautifulsoup4, defusedxml, xmltodict and untangle) are selected from nine named PyPI/project-documentation leads. A bounded PyPI Simple Index search remains pending; 4 leads are unresolved, so this is not a completed top-ten ranking. lxml uses source-built libxml2 2.15.4; beautifulsoup4's documented 'xml' builder runs on the same lxml 6.1.3/libxml2 2.15.4 pins (shared parser family, no independent XML tokenizer, recover=True); xmltodict, defusedxml (guarded pure-Python ElementTree XMLParser), untangle (SAX via defusedxml's DefusedExpatParser) and the standard ElementTree path use Expat. defusedxml is a guard facade over CPython ElementTree, not an independent XML engine; its own code is constant on the valid controls, and ElementTree keeps no xmlns declarations, so its comparison with the lxml oracle omits the declaration count. untangle runs SAX without namespace processing and drops namespace URIs; its controls are checked against an lxml oracle projected to untangle's qualified-name view, not against namespace-expanded names. The lxml, beautifulsoup4, defusedxml and untangle controls exercise valid UTF-8 XML 1.0 namespace structures without DOCTYPE, not full XML conformance. PyPI Stats package downloads are not XML-specific use; Beautiful Soup downloads are mostly HTML use, and defusedxml downloads are largely transitive. lxml and beautifulsoup4 AFL feedback excludes parser.c lines 8700-8720 because address-sensitive attribute hash lookups varied across identical valid replays."
       },
       {
         "format": "xml",

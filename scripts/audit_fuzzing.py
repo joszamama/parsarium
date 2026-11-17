@@ -251,6 +251,23 @@ def main() -> None:
             assert receipt["feedback_edges"] > 0
             assert receipt["source_lines_covered"] is None
             assert receipt["feedback_kind"] == "underlying_shared_library_binary_edges"
+        elif str(relative) == "xml/php/stdlib_domdocument":
+            assert manifest.get("kind") == "standard"
+            assert receipt["feedback_edges"] > 0
+            assert receipt["feedback_kind"] == "native_libxml2_php_dom_parser_source_edges"
+            assert receipt["instrumented_objects"] == [
+                "libxml2-2.15.4/build/.libs/libxml2_la-SAX2.o",
+                "libxml2-2.15.4/build/.libs/libxml2_la-parser.o",
+                "libxml2-2.15.4/build/.libs/libxml2_la-parserInternals.o",
+                "php-8.5.12/ext/dom/document.o"]
+            assert receipt["source_sha256"] == manifest["source_sha256"]
+            assert receipt["underlying_source_sha256"] == manifest["underlying_source_sha256"]
+            assert receipt["differential_control_sha256"] == manifest["differential_control_sha256"]
+            assert receipt["control_output_matches_oracle"] and receipt["differential_output_matches_oracle"]
+            assert receipt["repeats_per_control"] >= 3 and receipt["all_repeats_identical"]
+            assert receipt["format_dependent_parse_time_tuples"] > 0
+            assert receipt["format_dependent_traversal_only_tuples"] == 0
+            assert receipt["post_parse_edges_identical"] is True
         elif manifest.get("kind") == "standard" and manifest["ecosystem"] == "php":
             assert receipt["feedback_edges"] > 0
             assert receipt["feedback_kind"] in {"native_php_runtime_source_edges",

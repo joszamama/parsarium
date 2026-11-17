@@ -11,6 +11,6 @@ This format is incomplete across the eight ecosystems. Each row reports only doc
 | [Go](go/README.md) | pilot_four_selected_search_bounded | 4 | 4 |
 | [Java](java/README.md) | pilot_ten_selected_search_bounded | 10 | 10 |
 | [JavaScript](javascript/README.md) | pilot_five_selected_search_bounded | 5 | 5 |
-| [Python](python/README.md) | pilot_four_third_party_one_standard_verified_bounded_search_pending | 4 | 4 |
+| [Python](python/README.md) | pilot_five_third_party_one_standard_verified_bounded_search_pending | 5 | 5 |
 | [Rust](rust/README.md) | pilot_six_paths_verified_search_bounded | 6 | 6 |
 | [PHP](php/README.md) | pilot_partial_search_bounded | 2 | 2 |
