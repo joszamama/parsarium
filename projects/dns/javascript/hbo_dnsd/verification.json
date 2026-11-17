@@ -1,0 +1,94 @@
+{
+  "kind": "third_party",
+  "api": "parse(buffer) from hbo-dnsd (dnsd API: new DNSMessage(buffer)) on a local Buffer; type/class labels mapped to numbers with its constants.js type_to_number/class_to_number, opcode names back through dnsd's own table; AAAA groups RFC 5952-compressed by the harness; no server is created",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:32:32.458959+00:00",
+  "manifest": "projects/dns/javascript/hbo_dnsd/manifest.json",
+  "image_id": "sha256:9f5b17541dd4546a8e3a706bdffff8ea2efef95b626ad5c3a0d195b55aee243c",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-hbo-dnsd-target@0.9.8 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- hbo-dnsd@0.9.8",
+    "  +-- defaultable@0.7.2",
+    "  `-- optimist@0.3.7"
+  ],
+  "source_sha256": "81e8deb17d63c3be37eba4f64aadbeeeb11db16afb38bd1645c4ed3a8f4d6bf1",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "2d93648fe38ef4f66955150ac254c7cfcba53c4856a215e5b136d5ceaba959ba",
+    "fuzz.js": "386883924ab7c8e1a69f2eafbb966e99ebba67d4faad0369dd8830b1d2fa8d23",
+    "harness.js": "2cb2011ccfabf448cb9e4638478d6cb39d6515c89354d5515444eccc3c895a4b",
+    "manifest.json": "2bea7e2425e500a32b392cf9310d9a523c36e6833826b9a41009a3b68741e848",
+    "package-lock.json": "c5280fdff6b4fbbe2620f66b17fc803e127c8e3a572c6b1ba7bbbc16ddc651b0",
+    "package.json": "a5a938f92af743a4f17fee6ae8681c8adbf5ef5bbb06244166987ec3a74502c2",
+    "replay.js": "4303f822c933f19d7b35d977142a94bc9f14033c57db00fb3b3ba64c2a69d31e",
+    "run-control.js": "0bcd699fec6cfce52cc6db66cb58ab6995ae508c68d2ede832654ac19d7a3ded",
+    "source-lock.json": "418d464b3f81fa3740169273e12ea3e5ec2ee43a21f26f8265cb36e23b241298"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 7,
+  "parser_source_lines_covered": 592,
+  "format_specific_source_lines_covered": 187,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/javascript/hbo_dnsd/target/coverage/coverage.json",
+  "pass": true
+}

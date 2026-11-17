@@ -434,5 +434,117 @@
     },
     "rank": 4,
     "afl_feedback": "data/javascript/dns/native-dns-packet-feedback-differential.json"
+  },
+  {
+    "name": "hbo-dnsd",
+    "version": "0.9.8",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE (Apache License, Version 2.0) in the npm tarball (sha256 81e8deb1...), checked in the image; package.json has no license field",
+    "input_api": "dnsd.parse(buffer: Buffer) -> DNSMessage",
+    "documentation": "https://github.com/hbouvier/dnsd/blob/master/README.md#example-parse-a-message",
+    "documentation_note": "The npm tarball's README.md (0.9.8) documents parse(msg_data) on message bytes read from a file ('Example: Parse a message'); the fork has no 0.9.8 tag, so the link is to the default branch README.",
+    "source": "https://www.npmjs.com/package/hbo-dnsd/v/0.9.8",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dnsd (Iris Couch) decoder (parse.js, message.js)",
+    "family_note": "Own JavaScript decoder from Iris Couch's dnsd (parse.js reads the header bits, sections and compressed names; message.js builds records). hbo-dnsd is a fork of dnsd 0.9.6 that shares 857 of its 876 distinct non-test source lines (97.8%); only hbo-dnsd, the more downloaded of the pair (34,937 vs 340), is counted, so the family has one path. dnsd decodes AD and CD but drops the reserved Z bit, so z carries AD and CD only (both controls have all three bits clear). It names types, classes and opcodes; the harness maps them back to numbers with the package's own constants.js and opcode table. AAAA comes as eight zero-padded hex groups, which the harness compresses per RFC 5952. The package also ships a DNS server; the harness creates none.",
+    "project": "projects/dns/javascript/hbo_dnsd",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "npm downloads, 2026-10-17:2026-11-15 (30 days)",
+      "value": 34937,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/hbo-dnsd",
+      "captured_at_utc": "2026-11-17T19:47:32.984638+00:00",
+      "snapshot": "data/javascript/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 5,
+    "afl_feedback": "data/javascript/dns/hbo-dnsd-feedback-differential.json",
+    "source_overlap_with_dnsd": {
+      "method": "distinct stripped, non-empty, non-comment lines of the non-test .js sources compared with set intersection against dnsd 0.9.6",
+      "distinct_lines": 876,
+      "dnsd_distinct_lines": 864,
+      "shared_distinct_lines": 857,
+      "share": 0.978,
+      "normalized_share": 0.979
+    }
   }
 ]
