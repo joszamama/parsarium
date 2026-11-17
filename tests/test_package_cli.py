@@ -15,7 +15,24 @@ from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from parsarium import cli, selection, snapshot  # noqa: E402
+from parsarium import catalog, cli, selection, snapshot  # noqa: E402
+
+
+class CatalogTests(unittest.TestCase):
+    def test_standard_runtime_is_release_fallback(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            project = root / "projects/png/python/stdlib_example"
+            project.mkdir(parents=True)
+            (project / "manifest.json").write_text(json.dumps({
+                "kind": "standard", "package": "stdlib.Example",
+                "runtime": "CPython 3.13.1 with bundled Tk 8.6",
+                "control": "controls/png/example.png",
+            }))
+            with mock.patch.object(catalog, "_runnable_check", return_value=lambda *_: True):
+                found = catalog._load(root)
+            self.assertEqual(len(found), 1)
+            self.assertEqual(found[0].release, "CPython 3.13.1 with bundled Tk 8.6")
 
 
 class SelectionTests(unittest.TestCase):

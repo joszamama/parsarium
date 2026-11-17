@@ -59,6 +59,9 @@ def _load(root: Path) -> tuple[Target, ...]:
         manifest = json.loads(path.read_text())
         if not fully_runnable(path, manifest):
             continue
+        release = manifest.get("release") or manifest.get("runtime")
+        if not release:
+            raise ValueError(f"runnable target has no release or runtime: {path}")
         family = manifest.get("runtime")
         input_api = manifest.get("api")
         if manifest.get("catalog_parser"):
@@ -70,7 +73,7 @@ def _load(root: Path) -> tuple[Target, ...]:
         fmt, eco, slug = path.parent.relative_to(root / "projects").parts
         found.append(Target(
             id=f"{fmt}/{eco}/{slug}", format=fmt, ecosystem=eco, slug=slug,
-            package=manifest["package"], release=manifest["release"],
+            package=manifest["package"], release=release,
             kind=manifest.get("kind", "third_party"), family=family, input_api=input_api,
             control=manifest["control"], expected_output=manifest.get("expected_output", {}),
             path=path.parent))
