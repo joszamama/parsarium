@@ -68,6 +68,13 @@ TARGETS = {
         'scope': ('executed LLVM source regions and branch directions of granit-parser (git e10ee63) under {prefix}, '
                   'compiled into the source-built {package} {release} _yaml_rs extension (yaml-rs\'s own loader, pyo3, '
                   'saphyr and lexical-core are not counted)')},
+    'libfyaml': {
+        'package': 'libfyaml', 'prefix': '/work/libfyaml-src/src/lib/', 'platform': 'linux/arm64',
+        'required': ('fy-parse.c', 'fy-input.c'),
+        'differences': {'fy_parse_c_feature_difference': 'fy-parse.c:'},
+        'scope': ('executed LLVM source regions and branch directions of the bundled libfyaml 1.0.0-rc2 core under '
+                  '{prefix}, statically linked into the source-built {package} {release} _libfyaml extension (the '
+                  'generic value builder, allocators and the binding C are not counted)')},
     # Wrappers: features cover the wrapper package and the parser package it calls under site-packages.
     'srsly': {
         'package': 'srsly', 'prefix': SITE, 'platform': 'linux/amd64',

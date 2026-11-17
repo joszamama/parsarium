@@ -1,0 +1,288 @@
+{
+  "kind": "third_party",
+  "api": "libfyaml.loads(local YAML bytes).to_python(); libfyaml.loads(the decoded str) and libfyaml.load(local binary stream) give the same tree",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:47:34.814376+00:00",
+  "manifest": "projects/yaml/python/libfyaml/manifest.json",
+  "image_id": "sha256:67f40c4d2cad7de86b3253cfdfbfed982bd5e6437e09ccdbd60663d2f54fbae7",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8",
+    "cmake version 4.2.3",
+    "Name: libfyaml",
+    "Version: 1.0.0rc2",
+    "Name: setuptools",
+    "Version: 84.2.1",
+    "1c71a7e4032140af2170ca37a305fc740491c32140d3d27f4e07dbbcc64a2049  fy-parse.c",
+    "3746a7e8dfbecf0415304169d2ef7fc08d58e2892605d8ac266a1741eee31ecf  fy-input.c"
+  ],
+  "source_sha256": "419e95961d5e0f3b82e65a65551e0c0a8f1c964163e6e44476f384bdd3ca5a0f",
+  "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "project_file_sha256": {
+    "Dockerfile": "96cf6eed4828755ca739ebd476d7e67d268b6f7a2c71042a87047db2e7e7c99e",
+    "build-requirements.lock": "513b5e2c69ecfd8bd83ae2317cfaa5a3b823a8195352770091e374c2a23283eb",
+    "expected.json": "9e867124aaeccd66e1ac2da6c61844266f1992615d79c4298a486659e5413618",
+    "fuzz.py": "65ca7956c5833dd53b2a63cf9f60efca6b812d9f93ae04c8bd1dc28ea0d658eb",
+    "harness.py": "afa2c507bc798488c6c1bdae54f001e4651b71159b3d6a1727a425dd2fd7d213",
+    "manifest.json": "b701811e9ba8115c518a753f03545a26cd56859a80db50bbb6c848c8dcc63fc4",
+    "merge-native-coverage.py": "29593ad275c53afb39b959e269c2d182008063ff5811ff3f42708b4ad8da2465",
+    "replay.py": "f0d57dbf88c4bfc8957f723e14f0f69ee7c757fc4bab506435bb90d1d8bac0f5",
+    "run-control.py": "02c433dcfc1cd91b4af4558c6996845cf43042fe67546c9770cff33f9ab59cc1",
+    "run-control.sh": "11a17c785ff04356bcdac81bd707656e8ddd5a0614b6fc584d6e692a3ebefdd5",
+    "source-lock.json": "0a5467e252f0e39052030aaa2628cdb443cdefdcfa3f8e6834f593ec7359b43c",
+    "structure.py": "822d13c7d2defb1f7ec1b59e38c658b2818436a184e62a7206f62828e1cea334"
+  },
+  "output": {
+    "root": "map",
+    "nodes": {
+      "bool": 2,
+      "float": 2,
+      "int": 7,
+      "map": 7,
+      "null": 1,
+      "seq": 2,
+      "str": 13
+    },
+    "max_depth": 3,
+    "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b",
+    "tree": [
+      "map",
+      [
+        [
+          "kind",
+          [
+            "str",
+            "catalog"
+          ]
+        ],
+        [
+          "version",
+          [
+            "int",
+            "2"
+          ]
+        ],
+        [
+          "ratio",
+          [
+            "float",
+            "0.25"
+          ]
+        ],
+        [
+          "offset",
+          [
+            "int",
+            "-17"
+          ]
+        ],
+        [
+          "enabled",
+          [
+            "bool",
+            true
+          ]
+        ],
+        [
+          "retired",
+          [
+            "bool",
+            false
+          ]
+        ],
+        [
+          "missing",
+          [
+            "null"
+          ]
+        ],
+        [
+          "title",
+          [
+            "str",
+            "Caf\u00e9 \"quoted\"\tend"
+          ]
+        ],
+        [
+          "single",
+          [
+            "str",
+            "it's here"
+          ]
+        ],
+        [
+          "tags",
+          [
+            "seq",
+            [
+              [
+                "str",
+                "alpha"
+              ],
+              [
+                "str",
+                "beta"
+              ],
+              [
+                "str",
+                "gamma delta"
+              ]
+            ]
+          ]
+        ],
+        [
+          "point",
+          [
+            "map",
+            [
+              [
+                "lat",
+                [
+                  "int",
+                  "1"
+                ]
+              ],
+              [
+                "lon",
+                [
+                  "float",
+                  "-2.5"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "items",
+          [
+            "seq",
+            [
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "7"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "first item"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "line one\nline two\n"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "id",
+                    [
+                      "int",
+                      "8"
+                    ]
+                  ],
+                  [
+                    "name",
+                    [
+                      "str",
+                      "Z\u00fcrich"
+                    ]
+                  ],
+                  [
+                    "note",
+                    [
+                      "str",
+                      "folded text\n"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "defaults",
+          [
+            "map",
+            [
+              [
+                "retries",
+                [
+                  "int",
+                  "3"
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "base"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "service",
+          [
+            "map",
+            [
+              [
+                "settings",
+                [
+                  "map",
+                  [
+                    [
+                      "retries",
+                      [
+                        "int",
+                        "3"
+                      ]
+                    ],
+                    [
+                      "label",
+                      [
+                        "str",
+                        "base"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "label",
+                [
+                  "str",
+                  "edge"
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  },
+  "parser_source_files": 19,
+  "parser_source_lines_covered": 2309,
+  "format_specific_source_lines_covered": 1091,
+  "underlying_source_files": 5,
+  "underlying_source_lines_covered": 714,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/yaml/python/libfyaml/target/coverage/coverage.json",
+  "pass": true
+}

@@ -17,6 +17,7 @@ Six verified third-party paths in PyPI last_month order: PyYAML 6.0.3 (1,227,712
 - [yamlcore](yamlcore/README.md) — verified Docker harness
 - [yaml-rs](yaml-rs/README.md) — verified API path
 - [ryaml](ryaml/README.md) — verified API path
+- [libfyaml](libfyaml/README.md) — verified API path
 
 ## Standard and runtime APIs
 

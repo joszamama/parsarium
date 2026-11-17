@@ -1,6 +1,6 @@
 # Python × YAML: pilot ranking
 
-Nine control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection. A path is an API route, not necessarily an independent parser engine.
+Ten control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection. A path is an API route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -17,6 +17,7 @@ PyPI Stats `last_month` downloads excluding known mirrors, captured 2026-11-17 (
 | 7 | [yamlcore](https://pypi.org/project/yamlcore/0.1.1/) | 0.1.1 | 92,413 | yaml.load(local YAML bytes, Loader=yamlcore.CoreLoader) | yamlcore CoreLoader: PyYAML 6.0.3 pure-Python BaseLoader (Reader/Scanner/Parser/Composer) with yamlcore's YAML 1.2 core-schema resolver and constructors; not CCoreLoader (libyaml) |
 | 8 | [yaml-rs](https://github.com/lava-sh/yaml-rs/blob/0.1.6/README.md) | 0.1.6 | 80,054 | yaml_rs.load(local YAML bytes) | granit-parser (git e10ee63; saphyr-parser / yaml-rust lineage) with yaml-rs's own Rust loader, through the yaml-rs PyO3 extension; same parser lineage as the Rust cell granit-parser, saphyr-parser and serde-saphyr paths |
 | 9 | [ryaml](https://github.com/emmatyping/ryaml/blob/v0.5.1/README.md) | 0.5.1 | 23,629 | ryaml.loads(str) on the UTF-8 decoding of local YAML bytes | serde_yaml 0.9.34 over unsafe-libyaml 0.2.11 (Rust transpilation of libyaml) through the ryaml PyO3 extension; same family as the Rust cell serde_yaml and unsafe-libyaml paths and the libyaml family |
+| 10 | [libfyaml](https://github.com/pantoniou/libfyaml/blob/v1.0.0-rc2/python-libfyaml/README.md) | 1.0.0rc2 | 407 | libfyaml.loads(local YAML bytes).to_python() | libfyaml 1.0.0-rc2 (C scanner/parser and generic value builder) through the python-libfyaml _libfyaml extension; same family as the C cell libfyaml path (0.9.6) |
 
 Both controls must equal the hand-written typed trees in [check_controls.py](../../../controls/yaml/check_controls.py); see [verification.json](verification.json).
 
