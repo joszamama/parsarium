@@ -2,6 +2,14 @@
   "captured_from": "data/php/toml/registry-snapshot.json",
   "metric": "Packagist total downloads",
   "observed": "2026-11-17",
+  "promoted": [
+    {
+      "name": "petalbranch/toml",
+      "release": "v1.2.0",
+      "project": "projects/toml/php/petalbranch_toml",
+      "status": "promoted_to_verified"
+    }
+  ],
   "leads": [
     {
       "name": "yosymfony/toml",
@@ -104,22 +112,6 @@
       "checked_at_utc": "2026-11-17",
       "checked_with": "php:8.5-cli image (sha256:50956f094e90a716d43bea28087d447555ad80510e386ab8c9c10d8c70d781a9) with gmp and bcmath added, composer install of the release",
       "evidence": "Toml::parse needs ext-gmp, which composer.json does not declare (without it typed-scalars fails with 'Call to undefined function AppHive\\Toml\\Parser\\gmp_strval()'). With gmp, integers, floats and strings of both controls are correct, but every date-time comes back as a plain string ('1979-05-27T00:32:00.5-07:00', '1979-05-27T07:32:00', '1979-05-27', '00:32:00.25'), indistinguishable from a TOML string; ParserConfig only toggles strictness, and Parser::parse() returns the same array, so no documented API keeps the four date-time kinds."
-    },
-    {
-      "name": "petalbranch/toml",
-      "metric_value": 20,
-      "metric": "Packagist total downloads",
-      "family": "petalbranch/toml",
-      "api_lead": "Parser::parseToNode(string) -> TableNodeInterface (ValueNode::getType() TomlType)",
-      "note": null,
-      "source": "https://packagist.org/packages/petalbranch/toml",
-      "status": "unresolved_partially_checked",
-      "api_lead_checked_against_pinned_release": true,
-      "release": "v1.2.0",
-      "license": "Apache-2.0",
-      "checked_at_utc": "2026-11-17",
-      "checked_with": "composer:2 image (PHP 8.5.12 CLI), composer require of the release",
-      "evidence": "Toml::parse returns correct integers, floats, strings and keys for typed-scalars, but formats all four date-time kinds back to plain strings, so the array API fails the typed tree. Its Parser::parseToNode returns a node tree whose ValueNode::getType() carries TomlType (OFFSET_DATETIME, LOCAL_DATETIME, LOCAL_DATE, LOCAL_TIME); a harness over that node tree (the round-1 php-collective/toml approach) was not built in this round."
     },
     {
       "name": "checkdomain/php-toml",

@@ -24,6 +24,7 @@ REPEATS = 3
 REPORTS = {
     "internal_toml": "internal-toml-feedback-differential.json",
     "php_collective_toml": "php-collective-toml-feedback-differential.json",
+    "petalbranch_toml": "petalbranch-toml-feedback-differential.json",
 }
 CELL_REPORT = ROOT / "data/php/toml/afl-feedback.json"
 
