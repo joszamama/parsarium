@@ -17,6 +17,7 @@ import tempfile
 from run_case import ROOT, image_for, project_for
 from run_corpus_batch import run_batch
 from binary_feedback import check_binary_feedback
+from audit_projects import lwjgl_assimp_native_feedback_verified
 
 
 MANAGED = {"go", "java", "javascript", "python", "php"}
@@ -39,7 +40,19 @@ def check_one(path: Path) -> dict:
         corpus.mkdir()
         control = ROOT / manifest["control"]
         shutil.copyfile(control, corpus / manifest["control_sha256"])
-        if binary:
+        if str(relative) == "ascii_ply/java/lwjgl_assimp":
+            overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
+            record = json.loads(overlay.read_text())
+            if (record.get("pass") is not True
+                    or record.get("base_project_receipt_sha256") !=
+                        sha256((project / "verification.json").read_bytes()).hexdigest()
+                    or record.get("control_sha256") != manifest["control_sha256"]
+                    or not lwjgl_assimp_native_feedback_verified(path, manifest, record)):
+                raise RuntimeError("native Assimp PLY feedback is not current")
+            _, image_id = image_for(project, manifest)
+            feedback = {"kind": record["feedback_kind"],
+                        "value": record["parser_source_features"]}
+        elif binary:
             overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
             record = json.loads(overlay.read_text())
             if (record.get("pass") is not True

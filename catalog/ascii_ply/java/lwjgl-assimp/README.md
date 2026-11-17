@@ -23,6 +23,11 @@
 }
 ```
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/java/lwjgl_assimp/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply java lwjgl_assimp
+python3 parsarium.py run ascii_ply java lwjgl_assimp controls/ascii_ply/triangle.ply
+```

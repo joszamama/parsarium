@@ -28,6 +28,7 @@
 - [github.com/tbogdala/assimp-go / Go](go/github_com_tbogdala_assimp_go/README.md)
 - [github.com/thebanri/limoni/graphics / Go](go/github_com_thebanri_limoni_graphics/README.md)
 - [boofcv-io / Java](java/boofcv_io/README.md)
+- [lwjgl-assimp / Java](java/lwjgl_assimp/README.md)
 - [@loaders.gl/ply / JavaScript](javascript/loaders_gl_ply/README.md)
 - [@meshioplusplus/wasm / JavaScript](javascript/meshioplusplus_wasm/README.md)
 - [meshlab-ts / JavaScript](javascript/meshlab_ts/README.md)

@@ -273,6 +273,48 @@ def smoke_rows(filename: str) -> dict[str, dict]:
     return {item["project"]: item for item in report["results"]}
 
 
+def lwjgl_assimp_native_feedback_verified(path: Path, manifest: dict,
+                                          overlay: dict) -> bool:
+    """Require native Assimp PLY features, rather than Java wrapper feedback."""
+    project = path.parent.relative_to(ROOT / "projects")
+    if str(project) != "ascii_ply/java/lwjgl_assimp":
+        return True
+    base = json.loads((path.parent / "verification.json").read_text())
+    overlay_dir = ROOT / "fuzzing/afl-native" / project
+    variant = ROOT / "controls/ascii_ply/triangle-colour.ply"
+    expected_files = {"Dockerfile", "afl_trace", "native_trace.py", "build.py"}
+    file_hashes = overlay.get("overlay_file_sha256", {})
+    feature_count = overlay.get("parser_source_features", 0)
+    variant_counts = overlay.get("variant_repeat_feature_counts")
+    return (
+        manifest.get("underlying_coverage_subject_prefix")
+            == "/work/source/code/AssetLib/Ply/"
+        and overlay.get("feedback_kind")
+            == "java_native_assimp_ply_regions_to_afl_bitmap"
+        and overlay.get("feedback_scope")
+            == "LLVM source regions in pinned Assimp PLY importer; Java wrapper excluded"
+        and overlay.get("base_image_id") == base["image_id"]
+        and overlay.get("source_sha256") == manifest["source_sha256"]
+        and overlay.get("underlying_source_sha256") == manifest["underlying_source_sha256"]
+        and variant.is_file()
+        and overlay.get("variant_sha256") == sha256(variant.read_bytes()).hexdigest()
+        and overlay.get("afl_package") == "4.09c-1ubuntu3"
+        and overlay.get("afl_map_size") == 65536
+        and feature_count > 0
+        and overlay.get("control_repeat_feature_counts") == [feature_count, feature_count]
+        and overlay.get("stable_control_features") == feature_count
+        and isinstance(variant_counts, list) and len(variant_counts) == 2
+        and variant_counts[0] == variant_counts[1] and variant_counts[0] > 0
+        and overlay.get("stable_variant_only_features", 0) > 0
+        and overlay.get("variant_feedback_edges", 0) > 1
+        and set(file_hashes) == expected_files
+        and all((overlay_dir / name).is_file()
+                and sha256((overlay_dir / name).read_bytes()).hexdigest() == digest
+                for name, digest in file_hashes.items())
+        and set(overlay.get("bridge_file_sha256", {})) == {"afl_proxy.c", "JavaCase.java"}
+    )
+
+
 def fully_runnable(path: Path, manifest: dict) -> bool:
     """Require a current base receipt, AFL++ overlay, and replay plans."""
     if manifest.get("coverage_kind") == "native_source_afl_feedback":
@@ -290,6 +332,8 @@ def fully_runnable(path: Path, manifest: dict) -> bool:
             or overlay.get("base_project_receipt_sha256") != base_sha
             or overlay.get("control_sha256") != manifest["control_sha256"]
             or overlay.get("feedback_edges", 0) < 2):
+        return False
+    if not lwjgl_assimp_native_feedback_verified(path, manifest, overlay):
         return False
     for name, digest in overlay.get("bridge_file_sha256", {}).items():
         bridge_file = ROOT / "fuzzing/afl-bridge" / name

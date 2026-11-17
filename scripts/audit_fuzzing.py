@@ -6,7 +6,7 @@ import tomllib
 
 from build_afl_native import OVERLAYS, derived_dockerfile
 from build_afl_rust import AFL_RUST_RELEASE, dockerfile as rust_dockerfile, overlay_manifest, overlay_target
-from audit_projects import fully_runnable
+from audit_projects import fully_runnable, lwjgl_assimp_native_feedback_verified
 from run_case import ROOT, project_for
 
 
@@ -151,6 +151,12 @@ def main() -> None:
             assert record["feedback_evidence"]["kind"] == "underlying_shared_library_binary_edges"
         else:
             assert record["parser_source_lines_covered"] > 0
+        if str(relative) == "ascii_ply/java/lwjgl_assimp":
+            overlay = json.loads((OVERLAYS / relative / "verification.json").read_text())
+            assert lwjgl_assimp_native_feedback_verified(path, manifest, overlay)
+            assert record["feedback_evidence"] == {
+                "kind": "java_native_assimp_ply_regions_to_afl_bitmap",
+                "value": overlay["parser_source_features"]}
         assert record["feedback_evidence"]["value"] > 0
     python_report = json.loads((ROOT / "data/afl-python-smoke.json").read_text())
     bridge_report = json.loads((ROOT / "data/afl-bridge-smoke.json").read_text())
@@ -178,6 +184,9 @@ def main() -> None:
                                                 "native_php_http_parser_source_edges"}
         else:
             assert receipt["feedback_edges"] > 0 and receipt["parser_source_features"] > 0
+        if str(relative) == "ascii_ply/java/lwjgl_assimp":
+            assert lwjgl_assimp_native_feedback_verified(path, manifest, receipt)
+            assert receipt["feedback_kind"] == "java_native_assimp_ply_regions_to_afl_bitmap"
         assert receipt["afl_map_size"] == 65536
         assert receipt["control_sha256"] == manifest["control_sha256"]
         assert receipt["base_project_receipt_sha256"] == sha256(
