@@ -121,14 +121,13 @@
     {
       "name": "json-repair",
       "last_month": 43691294,
-      "status": "lead",
-      "lead_kind": "own_repair_parser_not_selected",
+      "status": "excluded",
+      "lead_kind": "delegates_to_stdlib_json_on_valid_input",
       "version_seen": "0.64.9",
       "license": "MIT",
       "registry": "https://pypi.org/project/json-repair/",
-      "api_evidence": "https://github.com/mangiucugna/json_repair/",
-      "api_hint": "json_repair.loads(local str, skip_json_loads=True)",
-      "reason": "By default loads() first calls the standard json.loads (json_repair.py line 177), so on valid input the default API is the CPython json path. Its own lenient repair parser runs with skip_json_loads=True. A host-only probe (python3 -I, not Docker) of 0.64.9 with skip_json_loads=True gave the exact CPython json tree on both valid controls. No container harness, coverage or AFL++ feedback was built: json5 ranks higher and fills the tenth slot. If verified it would outrank msgspec, ujson, python-rapidjson and pysimdjson.",
+      "api_evidence": "https://pypi.org/project/json-repair/0.64.9/",
+      "reason": "On valid input the documented default (json_repair.loads/load/from_file with skip_json_loads=False) returns the standard json.loads result (json_repair.py line 178); a host probe (python3 -I, pinned 0.64.9 wheel) saw json.loads, JSONDecoder.decode and raw_decode called on both valid controls, so this path is the CPython json family. The package's own repair parser runs only with skip_json_loads=True, which the pinned README documents as only for inputs already known to be invalid (\"valid inputs should use the default behavior\") and warns may change valid JSON. That parser was not selected: its documented use is malformed input, outside this valid-control gate. The same probe found its output equal to the oracle tree on both controls with no json call, but no container, coverage or AFL++ feedback was built.",
       "metric_snapshot": "data/python/json/registry-snapshot.json"
     },
     {
@@ -177,21 +176,25 @@
     {
       "name": "dirtyjson",
       "last_month": 5671026,
-      "status": "lead",
-      "lead_kind": "own_parser_shared_lineage",
-      "version_seen": "1.0.8",
+      "status": "promoted_to_verified",
       "registry": "https://pypi.org/project/dirtyjson/",
-      "reason": "Own pure-Python lenient decoder (dirtyjson/loader.py) derived from the simplejson loader, per its README; would share simplejson lineage. Not run.",
+      "api_evidence": "https://pypi.org/project/dirtyjson/1.0.8/",
+      "api_hint": "dirtyjson.loads(local bytes or str); dirtyjson.load(local binary stream)",
+      "family_hint": "dirtyjson pure-Python lenient decoder (dirtyjson/loader.py), a rewritten simplejson loader (simplejson-derived lineage)",
+      "verified_evidence": "data/python/json/verification.json",
+      "native_feedback": "data/python/json/dirtyjson-valid-feedback.json",
       "metric_snapshot": "data/python/json/registry-snapshot.json"
     },
     {
       "name": "hjson",
       "last_month": 4411122,
-      "status": "lead",
-      "lead_kind": "own_parser_shared_lineage",
-      "version_seen": "3.1.0",
+      "status": "promoted_to_verified",
       "registry": "https://pypi.org/project/hjson/",
-      "reason": "Own pure-Python Hjson decoder (a JSON superset) whose source says it is based on simplejson; would share simplejson lineage. Not run.",
+      "api_evidence": "https://pypi.org/project/hjson/3.1.0/",
+      "api_hint": "hjson.loads(local bytes or str); hjson.load(local binary stream)",
+      "family_hint": "hjson-py pure-Python Hjson decoder (hjson/decoder.py), based on simplejson (simplejson-derived lineage)",
+      "verified_evidence": "data/python/json/verification.json",
+      "native_feedback": "data/python/json/hjson-valid-feedback.json",
       "metric_snapshot": "data/python/json/registry-snapshot.json"
     },
     {
@@ -200,10 +203,12 @@
       "registry": "https://pypi.org/project/python-rapidjson/",
       "api_evidence": "https://python-rapidjson.readthedocs.io/en/latest/load.html",
       "api_hint": "rapidjson.load(local binary stream)",
-      "status": "promoted_to_verified",
+      "status": "qualified_but_ten_path_ceiling",
       "family_hint": "RapidJSON C++ (Tencent; same family as the C++ RapidJSON path)",
-      "verified_evidence": "data/python/json/verification.json",
-      "native_feedback": "data/python/json/python-rapidjson-valid-feedback.json"
+      "verified_evidence": "data/python/json/ceiling-displaced.json",
+      "native_feedback": "data/python/json/python-rapidjson-valid-feedback.json",
+      "reason": "Passed every gate (both valid controls, container control, parser-source coverage, stable AFL++ feedback) as a selected path until hjson (4,411,122) was verified with more downloads; it now ranks below the ten-path ceiling (tenth: hjson 4,411,122). Catalog row, verification record and receipts are kept in ceiling-displaced.json.",
+      "ceiling_evidence": "data/python/json/ceiling-displaced.json"
     },
     {
       "name": "pyjson5",
@@ -212,7 +217,7 @@
       "lead_kind": "own_parser_not_selected",
       "version_seen": "2.0.1",
       "registry": "https://pypi.org/project/pyjson5/",
-      "reason": "Own Cython/C++ JSON5 decoder (src/_decoder.pyx), unrelated to the json5 package. Not run.",
+      "reason": "Own Cython/C++ JSON5 decoder (src/_decoder.pyx), unrelated to the json5 package. Not run: its downloads are below the tenth selected path (hjson 4,411,122), so it could not enter the ten-path ceiling even if verified.",
       "metric_snapshot": "data/python/json/registry-snapshot.json"
     },
     {
@@ -232,7 +237,7 @@
       "lead_kind": "tokenizer_backend",
       "version_seen": "0.5.5",
       "registry": "https://pypi.org/project/json-stream-rs-tokenizer/",
-      "reason": "Rust tokenizer backend for json-stream rather than a value-tree API of its own; would be evaluated through the json-stream path. Not run.",
+      "reason": "Rust tokenizer backend for json-stream rather than a value-tree API of its own; would be evaluated through the json-stream path. Not run: its downloads are below the tenth selected path (hjson 4,411,122), so it could not enter the ten-path ceiling even if verified.",
       "metric_snapshot": "data/python/json/registry-snapshot.json"
     },
     {
@@ -242,7 +247,7 @@
       "lead_kind": "own_parser_not_selected",
       "version_seen": "2.5.5",
       "registry": "https://pypi.org/project/json-stream/",
-      "reason": "Own streaming JSON reader with a pure-Python tokenizer; by default select_tokenizer.py uses the Rust tokenizer from the json-stream-rs-tokenizer dependency. Not run.",
+      "reason": "Own streaming JSON reader with a pure-Python tokenizer; by default select_tokenizer.py uses the Rust tokenizer from the json-stream-rs-tokenizer dependency. Not run: its downloads are below the tenth selected path (hjson 4,411,122), so it could not enter the ten-path ceiling even if verified.",
       "metric_snapshot": "data/python/json/registry-snapshot.json"
     },
     {
@@ -261,10 +266,12 @@
       "registry": "https://pypi.org/project/pysimdjson/",
       "api_evidence": "https://github.com/TkTech/pysimdjson/blob/98a6f9a84bfc0620cf8b5c450d22b8eeae313bfd/docs/native.rst",
       "api_hint": "simdjson.Parser().parse(local bytes, recursive=True)",
-      "status": "promoted_to_verified",
+      "status": "qualified_but_ten_path_ceiling",
       "family_hint": "simdjson 5.1.1 C++ (same family as C++ simdjson 5.0.4 pilot)",
-      "verified_evidence": "data/python/json/verification.json",
-      "native_feedback": "data/python/json/pysimdjson-valid-feedback.json"
+      "verified_evidence": "data/python/json/ceiling-displaced.json",
+      "native_feedback": "data/python/json/pysimdjson-valid-feedback.json",
+      "reason": "Passed every gate (both valid controls, container control, parser-source coverage, stable AFL++ feedback) as a selected path until dirtyjson (5,671,026) was verified with more downloads; it now ranks below the ten-path ceiling (tenth: hjson 4,411,122). Catalog row, verification record and receipts are kept in ceiling-displaced.json.",
+      "ceiling_evidence": "data/python/json/ceiling-displaced.json"
     },
     {
       "name": "demjson3",

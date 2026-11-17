@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "hjson",
+  "release": "3.1.0",
+  "catalog_parser": "data/python/json/parsers.json",
+  "source_lock": "projects/json/python/hjson/runtime-requirements.lock",
+  "source_sha256": "65713cdcf13214fb554eb8b4ef803419733f4f5e551047c9b711098ab7186b89",
+  "sdist_sha256": "55af475a27cf83a7969c808399d7bccdec8fb836a07ddbd574587593b9cdcf75",
+  "build_note": "Installed from the pinned pure-Python py3-none-any wheel by hash; the image checks that the wheel's hjson/ package is byte-identical to the pinned sdist and that hjson/decoder.py, scanner.py, __init__.py and LICENSE.txt match recorded SHA-256 values. No runtime dependencies.",
+  "dependencies_note": "atheris 3.1.0 is the in-process fuzz bridge only; hjson has no runtime dependencies.",
+  "parser_family": "hjson-py pure-Python Hjson decoder (hjson/decoder.py HjsonDecoder), based on simplejson per its README and license: simplejson-derived lineage, shared with the selected simplejson path and with dirtyjson's ancestry, not byte-shared code; it neither imports nor delegates to the standard json module",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/json/structure.json",
+  "control_sha256": "a451ad330e0499be77f2c8d632ab0fcf26b542433122488d39ff6238a6a83ba3",
+  "expected_output": {
+    "root_type": "object",
+    "top_level_keys": [
+      "items",
+      "kind"
+    ],
+    "item_count": 2,
+    "first_id": 7,
+    "first_label": "a\nb",
+    "first_ok": true,
+    "first_value_is_null": true,
+    "second_label": "π"
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "root_type": "array",
+    "item_count": 5,
+    "nested_arrays": 1,
+    "nested_objects": 1
+  },
+  "api": "hjson.loads(local JSON bytes); hjson.loads(decoded str) and hjson.load(local binary stream) are checked against the same oracle",
+  "harness": "harness.py",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of hjson package source (decoder.py, scanner.py, __init__.py) during valid-control replay; Atheris import instrumentation for the byte-input bridge",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/hjson/",
+  "format_specific_coverage_file_suffix": "/hjson/decoder.py",
+  "scope": "JSON structure and values from local bytes via hjson.loads; valid nested object and nested array controls only, each matching an exact type-tagged CPython json oracle tree. hjson parses the Hjson superset (comments, unquoted keys and strings, optional commas, multiline strings) and returns OrderedDict objects by default, so it does not reject non-RFC 8259 input."
+}

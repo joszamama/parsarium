@@ -7,6 +7,7 @@ Writes data/python/json/registry-snapshot.json.
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+import sys
 import time
 import urllib.request
 
@@ -25,7 +26,8 @@ PACKAGES = [
     "json-stream-rs-tokenizer", "jsonnet", "demjson3", "jsonslicer", "json-five", "yapic-json",
     "cysimdjson", "yyjson", "hyperjson",
 ]
-RELEASES = {"json5": "0.17.3"}
+# Pinned releases of promoted paths and of leads whose package source was inspected.
+RELEASES = {"json5": "0.17.3", "json-repair": "0.64.9", "dirtyjson": "1.0.8", "hjson": "3.1.0"}
 
 
 def get(url: str, accept: str | None = None) -> bytes:
@@ -42,7 +44,29 @@ def get(url: str, accept: str | None = None) -> bytes:
     raise RuntimeError(url)
 
 
+def capture_releases() -> dict:
+    releases = {}
+    for package, version in RELEASES.items():
+        url = f"https://pypi.org/pypi/{package}/{version}/json"
+        info = json.loads(get(url))
+        releases[package] = {"version": version, "url": url,
+                             "license_expression": info["info"].get("license_expression"),
+                             "license": info["info"].get("license") or None,
+                             "requires_dist": info["info"].get("requires_dist") or [],
+                             "files": [{"filename": item["filename"], "sha256": item["digests"]["sha256"]}
+                                       for item in info["urls"]]}
+    return releases
+
+
 def main() -> None:
+    if sys.argv[1:] == ["--releases-only"]:
+        # Refresh pinned release records without re-capturing searches or download counts.
+        snapshot = json.loads(OUT.read_text())
+        snapshot["releases"] = capture_releases()
+        snapshot["releases_captured_at_utc"] = datetime.now(timezone.utc).isoformat()
+        OUT.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n")
+        print(json.dumps(sorted(snapshot["releases"]), indent=2))
+        return
     captured = datetime.now(timezone.utc).isoformat()
     index = json.loads(get(SIMPLE, "application/vnd.pypi.simple.v1+json"))
     names = sorted((project["name"] for project in index["projects"]), key=str.lower)
@@ -60,15 +84,7 @@ def main() -> None:
         url = f"https://pypistats.org/api/packages/{package}/recent?period=month"
         packages[package] = {"downloads": json.loads(get(url))["data"]["last_month"], "url": url}
         time.sleep(1.2)
-    releases = {}
-    for package, version in RELEASES.items():
-        url = f"https://pypi.org/pypi/{package}/{version}/json"
-        info = json.loads(get(url))
-        releases[package] = {"version": version, "url": url,
-                             "license_expression": info["info"].get("license_expression"),
-                             "requires_dist": info["info"].get("requires_dist") or [],
-                             "files": [{"filename": item["filename"], "sha256": item["digests"]["sha256"]}
-                                       for item in info["urls"]]}
+    releases = capture_releases()
     snapshot = {
         "captured_at_utc": captured,
         "search_surface": "PyPI Simple JSON project-name index, filtered locally; results have no relevance ranking",

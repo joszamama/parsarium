@@ -609,10 +609,10 @@
       "coverage_caveat": "Source-built -O0 unstripped extension; the official wheel compiles the same sources and vendored double-conversion into one optimised, stripped extension. The controls do not exercise duplicate keys, large or inexact numbers, NaN/Infinity tokens or malformed input."
     },
     {
-      "package": "python-rapidjson",
-      "version": "1.26",
+      "package": "dirtyjson",
+      "version": "1.0.8",
       "pass": true,
-      "input_api": "rapidjson.load(io.BytesIO(local JSON bytes))",
+      "input_api": "dirtyjson.loads(local JSON bytes)",
       "output": {
         "root_type": "object",
         "top_level_keys": [
@@ -633,29 +633,26 @@
         "nested_arrays": 1,
         "nested_objects": 1
       },
-      "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where rapidjson is not importable; exact type-tagged trees with float.hex values and object member order",
+      "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where dirtyjson is not importable; exact type-tagged trees with float.hex values and object member order",
       "oracle_tree_sha256": {
         "control": "9c83c599682c3ea110ea481bf0edd76558a719d67c1c8e331fe047a2332f6c1e",
         "differential_control": "e9f1bf32886a233dfe8aa788997e3c327dcc729d2942d2b7d65db3e2f3250c0e"
       },
-      "stream_bytes_and_str_match_oracle": true,
-      "parser_family": "Tencent RapidJSON C++ SAX Reader (vendored v1.1.0-763-g24b5e7a8) / python-rapidjson PyHandler wrapper",
-      "native_source_files": 8,
-      "native_region_start_lines": 497,
-      "rapidjson_source_files": 7,
-      "rapidjson_region_start_lines": 242,
-      "reader_h_lines": 190,
-      "wrapper_rapidjson_cpp_lines": 255,
-      "afl_feedback": "data/python/json/python-rapidjson-valid-feedback.json",
-      "project_receipt": "projects/json/python/python-rapidjson/verification.json",
-      "project_receipt_sha256": "c7d064bd43b52da872d1eb453fbaef9a6dd3e93fff71fd217bd0add56073fe3f",
-      "coverage_caveat": "Source-built clang -O0 extension; the official wheel compiles the same rapidjson.cpp and vendored RapidJSON headers into one optimised extension. Default number_mode routes numbers through RapidJSON's NumbersAsStrings path and CPython conversion, so RapidJSON's strtod is not exercised. The controls do not exercise duplicate keys, large or inexact numbers, NaN/Infinity tokens, invalid UTF-8 or malformed input."
+      "bytes_str_and_stream_match_oracle": true,
+      "parser_family": "dirtyjson pure-Python lenient decoder (dirtyjson/loader.py), a rewritten simplejson loader (simplejson-derived lineage)",
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 156,
+      "loader_py_lines_covered": 129,
+      "afl_feedback": "data/python/json/dirtyjson-valid-feedback.json",
+      "project_receipt": "projects/json/python/dirtyjson/verification.json",
+      "project_receipt_sha256": "ff658ee9f14aa5c1b1271246dc1f0b3ad4a497eee3e871027b0c93bb8a860268",
+      "coverage_caveat": "Python line coverage of the installed pure-Python wheel; the same dirtyjson/ sources as the pinned sdist. The controls do not exercise the lenient or superset syntax, duplicate keys, large or inexact numbers or malformed input."
     },
     {
-      "package": "pysimdjson",
-      "version": "8.0.0",
+      "package": "hjson",
+      "version": "3.1.0",
       "pass": true,
-      "input_api": "simdjson.Parser().parse(local JSON bytes, recursive=True)",
+      "input_api": "hjson.loads(local JSON bytes)",
       "output": {
         "root_type": "object",
         "top_level_keys": [
@@ -676,24 +673,20 @@
         "nested_arrays": 1,
         "nested_objects": 1
       },
-      "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where pysimdjson is not importable; exact type-tagged trees with float.hex values and object member order; stdlib json decoding is disabled in the pysimdjson runs",
+      "oracle": "CPython json.loads (with _json C scanner) under /usr/bin/python3 -I in the same image, where hjson is not importable; exact type-tagged trees with float.hex values and object member order",
       "oracle_tree_sha256": {
         "control": "9c83c599682c3ea110ea481bf0edd76558a719d67c1c8e331fe047a2332f6c1e",
         "differential_control": "e9f1bf32886a233dfe8aa788997e3c327dcc729d2942d2b7d65db3e2f3250c0e"
       },
-      "parse_bytes_and_load_path_match_oracle": true,
-      "parser_family": "simdjson 5.1.1 C++ DOM parser (arm64 NEON kernel) / pysimdjson Cython binding",
-      "simdjson_active_implementation": "arm64",
-      "native_source_files": 3,
-      "native_region_start_lines": 2016,
-      "cython_wrapper_region_start_lines": 1503,
-      "simdjson_source_files": 2,
-      "simdjson_region_start_lines": 513,
-      "simdjson_cpp_lines": 375,
-      "afl_feedback": "data/python/json/pysimdjson-valid-feedback.json",
-      "project_receipt": "projects/json/python/pysimdjson/verification.json",
-      "project_receipt_sha256": "58fd4bfd04d3f00bd2d0899b1adbe77833ae46232507bb165bbd53461980f8ec",
-      "coverage_caveat": "Source-built Cython 3.3.1 / clang -O0 extension; the official aarch64 wheel compiles the same sources optimised. Wrapper lines are in Cython-generated csimdjson.cpp (including module initialisation), not mapped back to csimdjson.pyx. Wrapper feedback is identical on both controls; the input-dependent difference is entirely in simdjson's arm64 kernel. The controls do not exercise duplicate keys, integers beyond 64 bits, inexact numbers or malformed input."
+      "bytes_str_and_stream_match_oracle": true,
+      "parser_family": "hjson-py pure-Python Hjson decoder (hjson/decoder.py), based on simplejson (simplejson-derived lineage)",
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 159,
+      "decoder_py_lines_covered": 152,
+      "afl_feedback": "data/python/json/hjson-valid-feedback.json",
+      "project_receipt": "projects/json/python/hjson/verification.json",
+      "project_receipt_sha256": "39942a410ae0e17c7a3c026d1d862bb8ce93c4e96a9d0ef3519c104014204e6e",
+      "coverage_caveat": "Python line coverage of the installed pure-Python wheel; the same hjson/ sources as the pinned sdist. The controls do not exercise the lenient or superset syntax, duplicate keys, large or inexact numbers or malformed input."
     }
   ],
   "standard": [
@@ -730,16 +723,13 @@
     "ijson": "linux/arm64",
     "ujson": "linux/arm64",
     "jiter": "linux/arm64",
-    "python-rapidjson": "linux/arm64",
-    "json5": "linux/amd64"
+    "json5": "linux/amd64",
+    "dirtyjson": "linux/amd64",
+    "hjson": "linux/amd64"
   },
   "refreshed_projects": [
-    "jiter",
-    "json5",
-    "msgspec",
-    "pysimdjson",
-    "python-rapidjson",
-    "ujson"
+    "dirtyjson",
+    "hjson"
   ],
   "retained_prior_results_checked_at_utc": "2026-11-17T05:33:30.889313+00:00"
 }

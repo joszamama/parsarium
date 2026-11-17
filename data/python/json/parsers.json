@@ -657,20 +657,20 @@
     "project": "projects/json/python/ujson"
   },
   {
-    "name": "python-rapidjson",
-    "version": "1.26",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/python-rapidjson/1.26/json",
-    "input_api": "rapidjson.load(io.BytesIO(local JSON bytes)); rapidjson.loads(bytes) and rapidjson.loads(decoded str) give the same exact tree on both controls",
-    "documentation": "https://python-rapidjson.readthedocs.io/en/latest/load.html",
-    "source": "https://files.pythonhosted.org/packages/55/6e/a1f7ac71cf915cd5cd51a274c2838b69f9d8ad8a2ed1ab7a20d8e7c4edc8/python_rapidjson-1.26.tar.gz",
-    "source_sha256": "db95af0b5ed5f89d4f91480477a0ea8c7646283e489dd9046e28503e85e08f98",
-    "wheel_sha256": "0977adf883c555b0f79c2e4a5c4a8a8ab5a3ce3a313ca16131b99f7a1283b5fc",
+    "name": "dirtyjson",
+    "version": "1.0.8",
+    "license": "MIT OR AFL-2.1",
+    "license_evidence": "https://pypi.org/pypi/dirtyjson/1.0.8/json",
+    "input_api": "dirtyjson.loads(local JSON bytes); dirtyjson.loads(decoded str) and dirtyjson.load(BytesIO(local bytes)) give the same exact tree on both controls",
+    "documentation": "https://pypi.org/project/dirtyjson/1.0.8/",
+    "source": "https://files.pythonhosted.org/packages/db/04/d24f6e645ad82ba0ef092fa17d9ef7a21953781663648a01c9371d9e8e98/dirtyjson-1.0.8.tar.gz",
+    "source_sha256": "90ca4a18f3ff30ce849d100dcf4a003953c79d3a2348ef056f1d9c22231a25fd",
+    "wheel_sha256": "125e27248435a58acace26d5c2c4c11a1c0de0a9c5124c5a94ba78e517d74f53",
     "dependencies": [],
-    "scope": "JSON structure and values from a local binary stream; valid nested object and nested array controls, each equal to an exact type-tagged CPython json oracle tree",
-    "family": "Tencent RapidJSON C++ SAX Reader (vendored v1.1.0-763-g24b5e7a8) / python-rapidjson PyHandler wrapper",
-    "family_note": "rapidjson.load wraps the stream in PyReadStreamWrapper (chunked .read() calls) and drives RapidJSON's GenericReader::Parse with python-rapidjson's own PyHandler, which builds Python objects from SAX events. This is the same Tencent RapidJSON C++ parser family as the C++ RapidJSON path (projects/json/cpp/rapidjson, release 1.1.0, which reaches the same GenericReader through Document::Parse with RapidJSON's own number conversion), at a later upstream revision; it is not an independent parser from that path. Independent of the CPython json, simplejson, Jiter, orjson/yyjson, yajl, msgspec and UltraJSON families in this cell.",
-    "number_and_key_scope": "Not exercised beyond the controls; no malformed or edge-case probes were run. From the pinned rapidjson.cpp source: the default number_mode (NM_NAN) parses with kParseNumbersAsStringsFlag | kParseNanAndInfFlag, so RapidJSON's own strtod is bypassed and PyHandler::RawNumber converts integers with PyLong_FromString (arbitrary precision) and other numbers with CPython's PyOS_string_to_double; NaN, Infinity and -Infinity are accepted unless allow_nan=False. Duplicate object keys are inserted with PyDict_SetItem, so the last value wins. load() passes stream chunks to RapidJSON without kParseValidateEncodingFlag, so UTF-8 validity of bytes streams is not checked by the parser. The controls contain no duplicate keys (checked with the oracle's object_pairs_hook), only exactly representable floats (1.25 and 2.5e-1) and small integers.",
+    "scope": "JSON structure and values from local bytes; valid nested object and nested array controls, each equal to an exact type-tagged CPython json oracle tree. Lenient decoder: it accepts comments, unquoted keys, single quotes and trailing commas and so does not reject non-RFC 8259 input.",
+    "family": "dirtyjson pure-Python lenient decoder (dirtyjson/loader.py), a rewritten simplejson loader (simplejson-derived lineage)",
+    "family_note": "dirtyjson.loads builds a DirtyJSONLoader over the text (bytes are decoded as UTF-8) and returns AttributedDict/AttributedList values, dict and list subclasses that also record source positions. Its README calls it a fairly drastically rewritten version of the simplejson loader and the sdist ships simplejson's license, so it shares the simplejson pure-Python decoder lineage with the selected simplejson path and with hjson; it is a separate package and code base, not byte-shared code. It neither imports nor delegates to the standard json module (checked by blocking json during the oracle runs).",
+    "number_and_key_scope": "Not exercised beyond the controls; no malformed or edge-case probes were run. From the pinned loader.py source: integers go through Python int() and numbers with a fraction or exponent through float() unless parse_int/parse_float are given; NaN/Infinity constants are accepted; duplicate keys keep the last value in the AttributedDict. The controls contain no duplicate keys (checked with the oracle's object_pairs_hook), only exactly representable floats and small integers.",
     "control": "controls/json/structure.json",
     "differential_control": "controls/json/nested-array.json",
     "expected_output": {
@@ -694,29 +694,29 @@
     },
     "popularity": {
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
-      "value": 4066455,
-      "source": "https://pypistats.org/api/packages/python-rapidjson/recent",
+      "value": 5671026,
+      "source": "https://pypistats.org/api/packages/dirtyjson/recent",
       "observed_on_utc": "2026-11-17",
       "snapshot": "data/python/json/leads.json",
-      "limitation": "Package-level downloads include encoder-only and schema-validation use and transitive installs; they do not measure JSON parsing directly."
+      "limitation": "Package-level downloads include lenient extraction of JSON-like text and transitive installs; they do not measure strict JSON parsing directly."
     },
-    "project": "projects/json/python/python-rapidjson"
+    "project": "projects/json/python/dirtyjson"
   },
   {
-    "name": "pysimdjson",
-    "version": "8.0.0",
-    "license": "MIT",
-    "license_evidence": "https://pypi.org/pypi/pysimdjson/8.0.0/json",
-    "input_api": "simdjson.Parser().parse(local JSON bytes, recursive=True); Parser().load(local path, recursive=True) gives the same exact tree on both controls",
-    "documentation": "https://github.com/TkTech/pysimdjson/blob/98a6f9a84bfc0620cf8b5c450d22b8eeae313bfd/docs/native.rst",
-    "source": "https://files.pythonhosted.org/packages/51/ef/0af5d4a9f2f8440d0bff7a109639edc5b19cff9e1062cab55ff51c586d9c/pysimdjson-8.0.0.tar.gz",
-    "source_sha256": "e5669f38c3d91017361d708654c5a58130a91102dd56f001bfa4dc0f923edd00",
-    "wheel_sha256": "813288e3008dab3418f200725056db0e71a82fa034eb0a9637461f7ab0081543",
+    "name": "hjson",
+    "version": "3.1.0",
+    "license": "MIT OR AFL-2.1",
+    "license_evidence": "https://pypi.org/pypi/hjson/3.1.0/json",
+    "input_api": "hjson.loads(local JSON bytes); hjson.loads(decoded str) and hjson.load(BytesIO(local bytes)) give the same exact tree on both controls",
+    "documentation": "https://pypi.org/project/hjson/3.1.0/",
+    "source": "https://files.pythonhosted.org/packages/82/e5/0b56d723a76ca67abadbf7fb71609fb0ea7e6926e94fcca6c65a85b36a0e/hjson-3.1.0.tar.gz",
+    "source_sha256": "55af475a27cf83a7969c808399d7bccdec8fb836a07ddbd574587593b9cdcf75",
+    "wheel_sha256": "65713cdcf13214fb554eb8b4ef803419733f4f5e551047c9b711098ab7186b89",
     "dependencies": [],
-    "scope": "JSON structure and values from local bytes; valid nested object and nested array controls, each equal to an exact type-tagged CPython json oracle tree",
-    "family": "simdjson 5.1.1 C++ DOM parser (vendored amalgamation, arm64 NEON kernel on linux/arm64) / pysimdjson Cython binding",
-    "family_note": "Parser.parse calls simdjson's dom::parser (parse_into_document_unpadded) and the Cython csimdjson extension converts the DOM tape to Python dict/list/str/int/float. On linux/arm64 the build compiles the arm64 and fallback kernels and runtime dispatch selects arm64 (ARM NEON); no fallback-kernel line executed on either control. Same simdjson family as the C++ pilot path projects/json/cpp/simdjson, which pins simdjson 5.0.4; pysimdjson 8.0.0 vendors 5.1.1. Not combined with that C++ path. Independent of the CPython json, simplejson, Jiter, orjson/yyjson, yajl, msgspec and UltraJSON families in this cell. simdjson/__init__.py imports the stdlib json module only to re-export dumps/dump/JSONEncoder; stdlib decoding is disabled during the oracle comparison.",
-    "number_and_key_scope": "Not exercised beyond the controls; no malformed or edge-case probes were run. From the pinned sources and docs: recursive=True conversion keeps the last value for duplicate object keys (the lazy Object proxy keeps every field and looks up the first); integers become Python int from simdjson's int64 or uint64 tape values, and integers beyond 64 bits raise ValueError (BIGINT_ERROR) rather than becoming arbitrary-precision ints; numbers with a fraction or exponent become binary64 floats from simdjson's own number parser; NaN and Infinity tokens are not accepted. The controls contain no duplicate keys (checked with the oracle's object_pairs_hook), only exactly representable floats (1.25 and 2.5e-1) and small integers.",
+    "scope": "JSON structure and values from local bytes; valid nested object and nested array controls, each equal to an exact type-tagged CPython json oracle tree. Hjson superset parser: it accepts comments, unquoted keys and strings, optional commas and multiline strings and so does not reject non-RFC 8259 input.",
+    "family": "hjson-py pure-Python Hjson decoder (hjson/decoder.py), based on simplejson (simplejson-derived lineage)",
+    "family_note": "hjson.loads decodes bytes as UTF-8 and runs HjsonDecoder, whose scanner functions in decoder.py parse Hjson, a JSON superset; objects are returned as OrderedDict by default. Its README and license state it is based on simplejson, so it shares the simplejson pure-Python decoder lineage with the selected simplejson path and with dirtyjson; it is a separate package and code base, not byte-shared code. It neither imports nor delegates to the standard json module (checked by blocking json during the oracle runs).",
+    "number_and_key_scope": "Not exercised beyond the controls; no malformed or edge-case probes were run. From the pinned decoder.py source: number-like unquoted values are converted with Python int() or float() unless parse_int/parse_float are given; other unquoted values become strings; duplicate keys keep the last value through the OrderedDict pairs hook. The controls contain no duplicate keys (checked with the oracle's object_pairs_hook), only exactly representable floats and small integers.",
     "control": "controls/json/structure.json",
     "differential_control": "controls/json/nested-array.json",
     "expected_output": {
@@ -740,12 +740,12 @@
     },
     "popularity": {
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
-      "value": 679340,
-      "source": "https://pypistats.org/api/packages/pysimdjson/recent",
+      "value": 4411122,
+      "source": "https://pypistats.org/api/packages/hjson/recent",
       "observed_on_utc": "2026-11-17",
       "snapshot": "data/python/json/leads.json",
-      "limitation": "Package-level downloads include transitive installs and uses other than parsing; they do not measure JSON parsing directly."
+      "limitation": "Package-level downloads include Hjson configuration-file use and transitive installs; they do not measure strict JSON parsing directly."
     },
-    "project": "projects/json/python/pysimdjson"
+    "project": "projects/json/python/hjson"
   }
 ]

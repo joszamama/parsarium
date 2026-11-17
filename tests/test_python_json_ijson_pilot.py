@@ -23,7 +23,7 @@ class PythonJsonIjsonPilotTest(unittest.TestCase):
         cell = read(BASE / "cell.json")
         self.assertEqual([parser["name"] for parser in parsers],
                          ["pydantic", "jiter", "orjson", "json5", "simplejson", "ijson", "msgspec", "ujson",
-                          "python-rapidjson", "pysimdjson"])
+                          "dirtyjson", "hjson"])
         downloads = {lead["name"]: lead["last_month"] for lead in leads}
         metrics = [downloads[parser["name"]] for parser in parsers]
         self.assertEqual(metrics, sorted(metrics, reverse=True))
