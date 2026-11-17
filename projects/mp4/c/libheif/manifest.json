@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "format": "mp4",
+  "ecosystem": "c",
+  "package": "libheif",
+  "release": "1.23.7",
+  "api": "heif_context_read_from_file(local MP4 path); heif_context_number_of_sequence_tracks; heif_context_get_track; heif_track_get_image_resolution",
+  "catalog_parser": "data/c/mp4/parsers.json",
+  "source_lock": "projects/mp4/c/libheif/source-lock.json",
+  "source_sha256": "f7483e818503ea6224c8863e4a56ac02c7089021a98472c811c12aa19faf2475",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/mp4/red-av.mp4",
+  "control_sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+  "expected_output": {
+    "sequence_tracks": 1,
+    "video_tracks": 1,
+    "width": 2,
+    "height": 2
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "afl_file_input": true,
+  "coverage": "LLVM source coverage in the pinned libheif native ISO BMFF box and sequence-track parser (libheif/), built as a static codec-free libheif and called through heif_context_read_from_file on a local file from a C byte-input harness",
+  "parser_family": "libheif native ISO BMFF image-sequence and MP4 parser; the C++ call site (adapters/cpp/mp4/libheif) uses the same libheif C API and parser, so they are one parser family. libheif reads MP4 as an image sequence: it parses moov/trak boxes and visual sample entries, and skips audio tracks as an unsupported handler type",
+  "coverage_subject_prefix": "/work/libheif-1.23.7/libheif/",
+  "format_specific_coverage_file_suffix": "/sequences/seq_boxes.cc"
+}

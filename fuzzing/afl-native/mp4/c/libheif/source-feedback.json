@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "engine": "afl-showmap 4.33c, one fixed valid MP4 per run",
+  "command": "afl-showmap -q -m none -t 10000 -o OUTPUT -- /work/fuzzer /input/control",
+  "control": {
+    "path": "controls/mp4/red-av.mp4",
+    "sha256": "10086c39c7226726579924794cd7c0bbafe65de38021bd0f38f6da9d23d24643",
+    "feedback_edges": 3922
+  },
+  "valid_variant": {
+    "path": "controls/mp4/red-av-3s.mp4",
+    "sha256": "a153daff81e38744da7a653d44a4f381b7f4768d6f4148a00391b440af5ef308",
+    "feedback_edges": 4096
+  },
+  "shared_edge_ids": 3915,
+  "control_only_edge_ids": 7,
+  "variant_only_edge_ids": 181,
+  "pass": true
+}
