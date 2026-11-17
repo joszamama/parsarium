@@ -1,17 +1,23 @@
 # JavaScript × SQL: pilot ranking
 
-No path is verified yet, so nothing is ranked. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
+One third-party path is control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
 
 ## Primary within-cell adoption metric
 
 npm downloads, last month, captured 2026-11-17 ([snapshot](registry-snapshot.json)).
+
+| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| ---: | --- | --- | ---: | --- | --- |
+| 1 | [node-sql-parser](https://www.npmjs.com/package/node-sql-parser/v/5.4.0) | 5.4.0 | 13,709,122 | `new Parser().astify(local UTF-8 text, {database: 'postgresql'}) from node-sql-parser/build/postgresql`; dialect: PostgreSQL grammar build (database: postgresql) | node-sql-parser PEG.js grammars (one generated parser per database) |
+
+Receipts: [node-sql-parser](../../../projects/sql/javascript/node_sql_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/node_sql_parser/differential.json).
 
 ## Leads by the same metric
 
 | Lead | Metric | Status | Parser family |
 | --- | ---: | --- | --- |
 | sql-formatter | 29,933,061 | excluded | — |
-| node-sql-parser | 13,709,122 | unresolved | node-sql-parser PEG.js grammars |
+| node-sql-parser | 13,709,122 | selected | node-sql-parser PEG.js grammars |
 | libpg-query | 11,829,732 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | pgsql-ast-parser | 7,717,032 | unresolved | pgsql-ast-parser nearley grammar |
 | pg-query-emscripten | 1,749,295 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |

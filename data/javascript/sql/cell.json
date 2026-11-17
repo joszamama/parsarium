@@ -1,10 +1,10 @@
 {
   "ecosystem": "javascript",
   "format": "sql",
-  "status": "pilot_search_recorded_none_verified",
+  "status": "pilot_one_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 1,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "sql parser",
@@ -21,9 +21,13 @@
   "unique_search_hits": 236,
   "search_captured_at_utc": "2026-11-17T16:37:54.957183+00:00",
   "primary_metric": "npm downloads, last month",
-  "unresolved_documentation_leads": 13,
-  "uncertainty": "Bounded search only (npm registry search, three queries, first 100 hits each; npm last-month downloads.). 13 SQL parser leads are unresolved and none is verified yet, so zero is not evidence of absence. Registry relevance order is not adoption order, and package metrics include uses unrelated to parsing SQL text.",
+  "unresolved_documentation_leads": 12,
+  "uncertainty": "One verified JavaScript SQL path after a bounded npm search (three queries, first 100 hits each, 259 hits, 236 unique) and npm last-month downloads for 15 targeted leads, captured 2026-11-17. node-sql-parser 5.4.0 (13,709,122) parses both valid controls with its PostgreSQL grammar build into ASTs that give the oracle summary. Its parser ships minified; line coverage is mapped through the package's own source map to the PEG.js-generated grammar parser and src/*.js. sql-formatter (29,933,061) ranks higher but is a formatter. libpg-query (WASM libpg_query), pgsql-ast-parser and other leads are unverified, so this is not a top-ten ranking. node:sqlite prepare is an engine API with no syntax tree. Two valid controls establish only the tested dialect-neutral subset.",
   "registry_snapshot": "data/javascript/sql/registry-snapshot.json",
   "unresolved_leads": "data/javascript/sql/leads.json",
-  "runtime_evidence": "data/javascript/sql/standard.json"
+  "runtime_evidence": "data/javascript/sql/standard.json",
+  "third_party_evidence": "data/javascript/sql/parsers.json",
+  "third_party_control_results": [
+    "projects/sql/javascript/node_sql_parser/verification.json"
+  ]
 }

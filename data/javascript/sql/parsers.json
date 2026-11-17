@@ -1,1 +1,110 @@
-[]
+[
+  {
+    "name": "node-sql-parser",
+    "version": "5.4.0",
+    "license": "Apache-2.0",
+    "license_evidence": "package.json license Apache-2.0 and LICENSE (Apache License 2.0) in the pinned npm tarball",
+    "input_api": "new Parser().astify(local UTF-8 text, {database: 'postgresql'}) from node-sql-parser/build/postgresql",
+    "documentation": "https://www.npmjs.com/package/node-sql-parser/v/5.4.0",
+    "source": "https://registry.npmjs.org/node-sql-parser/-/node-sql-parser-5.4.0.tgz",
+    "source_sha256": "75972b4ee555ee9628bc9b89895a6909b28e879813fc492a609971a056f3a7b6",
+    "npm_integrity": "sha512-jVe6Z61gPcPjCElPZ6j8llB3wnqGcuQzefim1ERsqIakxnEy5JlzV7XKdO1KmacRG5TKwPc4vJTgSRQ0LfkbFw==",
+    "dependencies": [
+      "big-integer",
+      "@types/pegjs"
+    ],
+    "dialect": "PostgreSQL grammar build (database: postgresql)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. The package's other database grammars are untested.",
+    "family": "node-sql-parser PEG.js grammars (one generated parser per database)",
+    "family_note": "build/postgresql.js bundles the parser that PEG.js generates from pegjs/postgresql.pegjs plus the package's src helpers. astify returns plain AST objects (type select/insert, columns, from with join entries, where, groupby, orderby, values). The adapter reads those fields and walks the AST for aggr_func/function names and number/single_quote_string literals. Independent of pgsql-ast-parser (nearley) and the libpg_query WASM packages. @florajs/sql-parser is an older fork.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 13709122,
+      "source": "https://api.npmjs.org/downloads/point/last-month/node-sql-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Package downloads include all bundled database grammars and transitive installs."
+    },
+    "project": "projects/sql/javascript/node_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+]

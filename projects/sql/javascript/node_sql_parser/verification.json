@@ -1,0 +1,70 @@
+{
+  "kind": "third_party",
+  "api": "new Parser().astify(local UTF-8 text, {database: 'postgresql'}) from node-sql-parser/build/postgresql -> AST statement objects",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T17:08:12.579833+00:00",
+  "manifest": "projects/sql/javascript/node_sql_parser/manifest.json",
+  "image_id": "sha256:0943cc0a9566bc185e9db19e2638b3a899f7757aaa5aa7f20da02975fc869252",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-node-sql-parser-target@5.4.0 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- node-sql-parser@5.4.0"
+  ],
+  "source_sha256": "75972b4ee555ee9628bc9b89895a6909b28e879813fc492a609971a056f3a7b6",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "e2b81e4437b8693974fe975b8a800f62494fd92f37b9a03f297a15f76952ee34",
+    "adapter.js": "874e0d151cf4f2336b108825b206a8f13f23ea0daaae45eeb80ae2725f3035d0",
+    "fuzz.js": "032ca4d2574a15a43f8fc9fc6d4cfb61050fc43dcf173bb60f529405530dd0ba",
+    "harness.js": "16adfb12f6ae14317424db48d2038578048120709fea09ea9ac5a35e8e9ecc26",
+    "manifest.json": "e256bb5869853322df155dd3767440c07a821981cd3a68baa901c44006baefa1",
+    "package-lock.json": "7574ab7a50f33d0e479af962425736c7fe485e974f3e7282e7d130868556938d",
+    "package.json": "377a8a174e7fb74dfdbeb570ad4bf464f497470abb3741a125e9ce253b07b8a4",
+    "replay.js": "065eb97ffd29b4b6fb11d021624bacecc1baa32efe0dc099927f8e756517bca5",
+    "run-control.js": "b69c9d5c34c33212540600d94b6e197971b1bdd406caa0dbe6b5e896dc7eefa7",
+    "source-lock.json": "914b43e3544e90c974411eec4065baf857d9e2416a45f7851e7cd56f4974e4db"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 7,
+  "parser_source_lines_covered": 5739,
+  "format_specific_source_lines_covered": 5636,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/javascript/node_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}
