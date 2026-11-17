@@ -30,6 +30,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [symfony/dom-crawler / PHP](php/symfony_dom_crawler/README.md)
 - [beautifulsoup4 / Python](python/beautifulsoup4/README.md)
 - [lxml / Python](python/lxml/README.md)
+- [untangle / Python](python/untangle/README.md)
 - [xml.etree.ElementTree.parse(BytesIO(local XML bytes)); getroot() / Python](python/stdlib_elementtree/README.md)
 - [xmltodict / Python](python/xmltodict/README.md)
 - [quick-xml / Rust](rust/quick_xml/README.md)
