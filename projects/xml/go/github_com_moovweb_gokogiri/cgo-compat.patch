@@ -1,0 +1,19 @@
+--- a/xml/document.go
++++ b/xml/document.go
+@@ -330 +330 @@
+-		nodePtr.doc = (*_Ctype_struct__xmlDoc)(document.DocPtr())
++		nodePtr.doc = (*C.xmlDoc)(document.DocPtr())
+--- a/xpath/expression.go
++++ b/xpath/expression.go
+@@ -3,0 +4,2 @@
++#include <stdlib.h>
++#include <stdio.h>
+--- a/xml/node.go
++++ b/xml/node.go
+@@ -363 +363,5 @@
+-	return int(C.xmlLsCountNode(xmlNode.Ptr))
++	count := 0
++	for child := xmlNode.FirstChild(); child != nil; child = child.NextSibling() {
++		count++
++	}
++	return count
