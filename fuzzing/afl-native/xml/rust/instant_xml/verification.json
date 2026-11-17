@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "project": "xml/rust/instant_xml",
+  "pass": true,
+  "base_project_receipt_sha256": "6cb8828f7476e05fc246826dbcf38255f15bef9d33c535425ccc223df339a531",
+  "overlay_file_sha256": {
+    "Cargo.toml": "afa3018f4ffaea6b7e9458c2913a54bf415485702fcdfe19d6c1ce7ea4ffc651",
+    "Cargo.lock": "4ad7c72651f6fa6a17ea0fd56a52713c87555ed0f8df1d5e5089459b81e30518",
+    "afl_fuzzer.rs": "78b30c0ac5352fc71c1cfb26ed35230b2f028266de20a8efc2291b0804fc2d90",
+    "Dockerfile": "3d8040e15073f7f427644a951afa94edba1a0eaf4f08726a5a68ffafeda87bd8",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "build.py": "07b57c8d024632a75fd1908d0f3ae827996c9b8062a2a6420dd3e28213965c8d"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "2c32db75b7c16c5051ea7b6605eea01f7b5a25abe84c20473c9e7c7987f5850c",
+  "image_id": "sha256:d4ff16627fdc9bbdb59b96e376b168141aca1df73836efeb0651aea091d73560",
+  "platform": "linux/arm64",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "feedback_edges": 705,
+  "afl_map_size": 5539,
+  "feedback_kind": "afl_rs_instant_xml_xmlparser_only_sancov_edges",
+  "feedback_scope": "Only instant_xml and xmlparser crate objects carry SanitizerCoverage guards; harness, serde_json, the instant-xml-macros proc-macro, AFL runtime and other crates are uninstrumented",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "instant_xml",
+      "xmlparser"
+    ],
+    "rlib_guard_bytes": {
+      "instant_xml": 12284,
+      "xmlparser": 9852
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_xml_instant_xml_harness",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "xdg"
+    ],
+    "binary_guards": 5534
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:4e7623e57cba6fe95a0fe29879eb4352c49dad860453b1139115a3ef15fbb70a",
+  "variant_sha256": "b8b364b48cb3b03a82611917fd6344edfbd80789eb29203cdf6814d96f354d9b",
+  "control_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "variant_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 \u20ac"
+    ]
+  },
+  "shared_second_control_result": "UnexpectedToken(\"ProcessingInstruction { target: StrSpan(\\\"audit\\\" 132..137), content: Some(StrSpan(\\\"step=\\\\\\\"1\\\\\\\"\\\" 138..146)), span: StrSpan(\\\"<?audit step=\\\\\\\"1\\\\\\\"?>\\\" 130..148) }\")",
+  "repeats": 10,
+  "variant_feedback_edges": 796,
+  "edges_only_in_control": 64,
+  "edges_only_in_variant": 155,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/instant-xml-0.7.7/",
+    "underlying_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xmlparser-0.13.6/",
+    "control_lines": {
+      "src/any_element.rs": 40,
+      "src/de.rs": 215,
+      "src/impls.rs": 0,
+      "src/lib.rs": 6,
+      "src/ser.rs": 0
+    },
+    "variant_lines": {
+      "src/any_element.rs": 40,
+      "src/de.rs": 246,
+      "src/impls.rs": 0,
+      "src/lib.rs": 6,
+      "src/ser.rs": 0
+    },
+    "control_underlying_lines": {
+      "src/error.rs": 0,
+      "src/lib.rs": 198,
+      "src/stream.rs": 133,
+      "src/strspan.rs": 22,
+      "src/xmlchar.rs": 26
+    },
+    "variant_underlying_lines": {
+      "src/error.rs": 0,
+      "src/lib.rs": 206,
+      "src/stream.rs": 133,
+      "src/strspan.rs": 22,
+      "src/xmlchar.rs": 26
+    },
+    "files_with_different_line_counts": [
+      "src/de.rs"
+    ],
+    "underlying_files_with_different_line_counts": [
+      "src/lib.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      705,
+      705,
+      705,
+      705,
+      705,
+      705,
+      705,
+      705,
+      705,
+      705
+    ],
+    "stable_edges": 705,
+    "union_edges": 705,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      796,
+      796,
+      796,
+      796,
+      796,
+      796,
+      796,
+      796,
+      796,
+      796
+    ],
+    "stable_edges": 796,
+    "union_edges": 796,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

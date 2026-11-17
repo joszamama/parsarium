@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "rust",
+  "package": "instant-xml",
+  "release": "0.7.7",
+  "catalog_parser": "data/rust/xml/parsers.json",
+  "source_lock": "projects/xml/rust/instant_xml/source-lock.json",
+  "source_sha256": "2c32db75b7c16c5051ea7b6605eea01f7b5a25abe84c20473c9e7c7987f5850c",
+  "underlying_package": "xmlparser",
+  "underlying_release": "0.13.6",
+  "underlying_source_sha256": "66fee0b777b0f5ac1c69bb06d361268faafa61cd4682ae064a171c16c433e9e4",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "root": "{urn:parsarium:catalog}catalog",
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "afl_variant": "controls/xml/order-default-ns-no-pi.xml",
+  "afl_variant_sha256": "b8b364b48cb3b03a82611917fd6344edfbd80789eb29203cdf6814d96f354d9b",
+  "afl_variant_expected_output": {
+    "root": "{urn:parsarium:order}order",
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "harness": "src/lib.rs",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "coverage": "Rust LLVM source coverage recorded separately for instant-xml (own namespace resolution, reference decoding and AnyElement tree) and the xmlparser crate it drives (underlying tokenizer); libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/instant-xml-0.7.7/",
+  "format_specific_coverage_file_suffix": "/src/de.rs",
+  "afl_instrumented_crates": [
+    "instant_xml",
+    "xmlparser"
+  ],
+  "shared_second_control": "controls/xml/order-default-ns.xml",
+  "shared_second_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "shared_second_control_result": "UnexpectedToken(\"ProcessingInstruction { target: StrSpan(\\\"audit\\\" 132..137), content: Some(StrSpan(\\\"step=\\\\\\\"1\\\\\\\"\\\" 138..146)), span: StrSpan(\\\"<?audit step=\\\\\\\"1\\\\\\\"?>\\\" 130..148) }\")",
+  "underlying_coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/xmlparser-0.13.6/",
+  "underlying_format_specific_coverage_file_suffix": "/src/lib.rs",
+  "summary_omits": [
+    "namespace_declarations"
+  ],
+  "coverage_limit": "Typed-mapping library over the selected xmlparser tokenizer; its documented generic AnyElement view is the observed result. instant-xml resolves namespaces, decodes references and builds AnyElement itself. It consumes xmlns declarations without exposing them, so the summary has no namespace_declarations count and namespaces lists the URIs of expanded names. AnyElement keeps one text value per element (the last text node), so mixed content is not fully reported. It rejects a processing instruction inside the root element, so the second control is order-default-ns-no-pi.xml."
+}

@@ -524,5 +524,81 @@
       "source": "data/rust/xml/registry-snapshot.json"
     },
     "project": "projects/xml/rust/minidom/verification.json"
+  },
+  {
+    "name": "instant-xml",
+    "version": "0.7.7",
+    "license": "Apache-2.0 OR MIT",
+    "input_api": "instant_xml::from_str::<AnyElement>(&str) -> Result<AnyElement, Error>; AnyElement { ns, name, attributes: Vec<AnyAttribute { ns, name, value }>, text: Option<Cow<str>>, children: Vec<AnyElement> }",
+    "documentation": "https://docs.rs/instant-xml/0.7.7/instant_xml/struct.AnyElement.html",
+    "source": "https://static.crates.io/crates/instant-xml/instant-xml-0.7.7.crate",
+    "scope": "Generic element tree over locally decoded UTF-8 text: instant-xml's Context iterates the xmlparser Tokenizer and itself resolves element and attribute prefixes, decodes predefined entity and character references, and AnyElement builds the namespace-resolved tree with document-order attributes. Expanded names, depth, attributes and decoded text match the Expat oracle on the catalog control and on order-default-ns-no-pi.xml. instant-xml consumes xmlns declarations without exposing them, so the summary omits the namespace_declarations count and lists the URIs of expanded names (equal to the declared non-empty URIs on both controls). AnyElement keeps one text value per element (the last text node), so mixed content would not be fully reported; neither control has non-whitespace mixed content. A processing instruction inside the root is rejected with UnexpectedToken, so the shared order control fails and the TinyXML2 precedent's no-PI second control is used. instant-xml's primary use is typed mapping through FromXml derives; only the generic AnyElement view is tested.",
+    "family": "xmlparser (shared with the selected xmlparser path): xmlparser Tokenizer tokenizes; instant-xml adds its own namespace resolver, reference decoder and AnyElement tree builder. Not an independent tokenizer.",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "root": "{urn:parsarium:catalog}catalog",
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "second_control": "controls/xml/order-default-ns-no-pi.xml",
+    "second_control_expected_output": {
+      "root": "{urn:parsarium:order}order",
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "shared_second_control": "controls/xml/order-default-ns.xml",
+    "shared_second_control_result": "UnexpectedToken(\"ProcessingInstruction { target: StrSpan(\\\"audit\\\" 132..137), content: Some(StrSpan(\\\"step=\\\\\\\"1\\\\\\\"\\\" 138..146)), span: StrSpan(\\\"<?audit step=\\\\\\\"1\\\\\\\"?>\\\" 130..148) }\")",
+    "summary_omits": [
+      "namespace_declarations"
+    ],
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 748214,
+      "source": "data/rust/xml/registry-snapshot.json"
+    },
+    "project": "projects/xml/rust/instant_xml/verification.json"
   }
 ]

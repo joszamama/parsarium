@@ -19,14 +19,6 @@
       "family_note": "xml-rs EventReader family (selected path: xml 1.4.0); MIT license, author field Vladimir Matveev (xml-rs)."
     },
     {
-      "name": "instant-xml",
-      "version": "0.7.7",
-      "recent_downloads_90d": 748214,
-      "status": "unresolved",
-      "reason": "Typed serde-style mapping to Rust structs; needs a generic element/attribute view to qualify under this cell's observable result.",
-      "source": "https://crates.io/crates/instant-xml"
-    },
-    {
       "name": "sxd-document",
       "version": "0.3.2",
       "recent_downloads_90d": 647390,
@@ -40,32 +32,36 @@
       "version": "0.3.24",
       "recent_downloads_90d": 621059,
       "status": "unresolved",
-      "reason": "Bindings to the libxml2 C parser; would add a native libxml2 family and needs a system library pin.",
-      "source": "https://crates.io/crates/libxml"
+      "reason": "Rust bindings to the libxml2 C parser (src/bindings.rs FFI; build.rs probes the system libxml-2.0 with pkg-config or LIBXML2). It would add a native libxml2 family path, like the Go gokogiri cgo path, and would need a pinned libxml2 source build with libxml2-scoped AFL++ instrumentation. Not run: instant-xml filled the tenth and last slot of this cell (ceiling ten), and this lead ranks below it by the same metric.",
+      "source": "https://static.crates.io/crates/libxml/libxml-0.3.24.crate",
+      "source_sha256": "64c5ce920c89f6568a2ad2cf3e1df413ffeec42bb5bfc7c571c49708685dd42b"
     },
     {
       "name": "minidom-14",
       "version": "0.17.0",
       "recent_downloads_90d": 391747,
       "status": "unresolved_shared_family",
-      "reason": "Older minidom line built on quick-xml; shares the selected quick-xml family.",
-      "source": "https://crates.io/crates/minidom-14"
+      "reason": "Older minidom line; its Cargo.toml depends on quick-xml 0.36, so it shares the selected quick-xml family and would be a DOM wrapper like minidom over rxml. Not run: instant-xml filled the tenth and last slot of this cell (ceiling ten), and this lead ranks below it by the same metric.",
+      "source": "https://static.crates.io/crates/minidom-14/minidom-14-0.17.0.crate",
+      "source_sha256": "0233972f8e82ae98ec4e9fd6daa3f6e29c2732c55b3626e9a3bde856e986345c"
     },
     {
       "name": "hard-xml",
       "version": "1.43.0",
       "recent_downloads_90d": 228546,
       "status": "unresolved_shared_family",
-      "reason": "Typed mapping built on xmlparser.",
-      "source": "https://crates.io/crates/hard-xml"
+      "reason": "Typed derive-based mapping; its Cargo.toml depends on xmlparser 0.13 and hard-xml-derive, so it shares the selected xmlparser family. No generic element view was checked. Not run: instant-xml filled the tenth and last slot of this cell (ceiling ten), and this lead ranks below it by the same metric.",
+      "source": "https://static.crates.io/crates/hard-xml/hard-xml-1.43.0.crate",
+      "source_sha256": "7ffa145e7ef9b67fddc2ebf7d36e5ad431771d3c48578ccc2412296e2842643b"
     },
     {
       "name": "xot",
       "version": "0.31.2",
       "recent_downloads_90d": 112374,
       "status": "unresolved_shared_family",
-      "reason": "Tree library built on xmlparser; family overlap needs checking.",
-      "source": "https://crates.io/crates/xot"
+      "reason": "Tree library; its Cargo.toml depends on xmlparser ^0.13.6 (plus indextree, encoding_rs), so it would be a shared xmlparser-family tree wrapper. Not run: instant-xml filled the tenth and last slot of this cell (ceiling ten), and this lead ranks below it by the same metric.",
+      "source": "https://static.crates.io/crates/xot/xot-0.31.2.crate",
+      "source_sha256": "fd6d2012838b97104fc3e8d2e46c53f3d1ca98706941ff4aae37811adaa60f4e"
     }
   ],
   "excluded_high_download_hits": [
@@ -119,6 +115,20 @@
       "reason": "Compatibility re-export only: published src/lib.rs is `pub use xml1::*;`, Cargo.toml declares its only dependency as package xml version 1.0.0. The actual EventReader implementation is in the selected xml family; do not double-count this shim.",
       "source": "https://static.crates.io/crates/xml-rs/xml-rs-1.0.0.crate",
       "source_sha256": "c3a56132a0d6ecbe77352edc10232f788fc4ceefefff4cab784a98e0e16b6b51"
+    },
+    {
+      "name": "instant-xml-macros",
+      "version": "0.7.2",
+      "recent_downloads_90d": 747174,
+      "status": "excluded",
+      "reason": "Procedural macros for instant-xml's FromXml/ToXml derives; generates code and parses no XML input."
+    },
+    {
+      "name": "amxml",
+      "version": "0.5.3",
+      "recent_downloads_90d": 354,
+      "status": "not_run_below_ceiling",
+      "reason": "XML processor with XPath features and its own dom.rs/sax.rs (no dependencies, MIT OR Apache-2.0, crate SHA-256 fff6a52795f480f0449606f380612d167462c936e72dcb1700a6d4fe5b2ab068). Ranks far below the tenth selected path; not run."
     }
   ],
   "verified_leads": [
@@ -207,6 +217,48 @@
       "receipt": "projects/xml/rust/minidom/verification.json",
       "source_sha256": "50b47a02dceb0a36b59ebd5971ce47b9db62593527f9e6800d640f3677fc0021",
       "family_note": "Shares the selected rxml 0.14.0 lexer and RawParser; minidom adds TreeBuilder prefix resolution and the DOM."
+    },
+    {
+      "name": "instant-xml",
+      "version": "0.7.7",
+      "recent_downloads_90d": 748214,
+      "status": "selected_shared_family",
+      "reason": "Typed serde-style mapper with a documented generic element view, AnyElement (instant_xml::from_str::<AnyElement>(&str)); instant-xml's Context iterates the selected xmlparser Tokenizer and itself resolves prefixes, decodes references and builds the AnyElement tree. Selected after the catalog control and order-default-ns-no-pi.xml matched the Expat oracle (declaration count omitted: xmlns declarations are consumed, not exposed; the shared order control is rejected with UnexpectedToken(ProcessingInstruction ...)), Docker covered 261 instant-xml lines (215 in src/de.rs) and 379 xmlparser lines on the catalog control, and AFL++ feedback scoped to instant_xml and xmlparser was identical across ten afl-showmap repeats per control (705 vs 796 edges; 64 and 155 unique to each control; src/de.rs 215 vs 246 covered lines). AnyElement keeps only the last text node per element.",
+      "source": "https://crates.io/crates/instant-xml",
+      "record": "data/rust/xml/parsers.json",
+      "receipt": "projects/xml/rust/instant_xml/verification.json",
+      "source_sha256": "2c32db75b7c16c5051ea7b6605eea01f7b5a25abe84c20473c9e7c7987f5850c",
+      "family_note": "Shares the selected xmlparser 0.13.6 tokenizer; instant-xml adds namespace resolution, reference decoding and the AnyElement tree."
     }
-  ]
+  ],
+  "outside_bounded_search": {
+    "note": "Named in curation but absent from the first 100 hits of every recorded query, so they have no snapshot metric and are not ranked. Live crates.io crate-API values looked up on 2026-11-17 are listed for context only; they are a different capture and are not comparable with the snapshot ranks.",
+    "looked_up_utc_date": "2026-11-17",
+    "crates": [
+      {
+        "name": "serde-xml-rs",
+        "version": "0.8.2",
+        "live_recent_downloads": 8603829,
+        "verdict": "Typed serde mapper over the xml crate ^1.0; no generic element view checked. Shared xml-rs family."
+      },
+      {
+        "name": "xmltree",
+        "version": "0.12.0",
+        "live_recent_downloads": 6967352,
+        "verdict": "DOM builder over the xml crate ^1 (shared xml-rs family, like minidom over rxml). Would need a snapshot metric before ranking; a broader search could place it above instant-xml."
+      },
+      {
+        "name": "elementtree",
+        "version": "1.2.3",
+        "live_recent_downloads": 1193852,
+        "verdict": "ElementTree-style DOM over a vendored xml-rs copy in src/xml/ (lexer.rs, reader/parser/*; only dependency string_cache), so the xml-rs family. Not ranked without a snapshot metric."
+      },
+      {
+        "name": "treexml",
+        "version": "0.7.0",
+        "live_recent_downloads": 1761,
+        "verdict": "Small DOM over xml-rs ^0.8. Not ranked without a snapshot metric."
+      }
+    ]
+  }
 }

@@ -1,10 +1,10 @@
 {
   "ecosystem": "rust",
   "format": "xml",
-  "status": "pilot_nine_paths_verified_search_bounded",
+  "status": "pilot_ten_paths_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 9,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "xml",
@@ -27,8 +27,8 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 642,
   "unique_search_hits": 483,
-  "unresolved_documentation_leads": 7,
-  "uncertainty": "Nine verified XML parser paths selected within the first 100 hits of seven crates.io queries (642 hits, 483 unique), captured 2026-11-17. Seven documented leads remain unverified. xml5ever 0.40.0 is an XML5 error-recovering superset parser: the two valid XML 1.0 controls verify namespace-aware output, but it does not establish strict XML 1.0 well-formedness, complete namespace behavior, DTD support, or other encodings. rxml 0.14.0 is a deliberately restricted XML 1.0 parser without DTDs, custom entities or processing instructions, and it rejects comments by default. It parses the shared catalog control exactly but rejects the shared order control (Error(RestrictedXml(\"comments\"))), so its second control is order-default-ns-restricted.xml without that comment and processing instruction. The xml-rs 1.0.0 package is a compatibility re-export of xml and excluded as a duplicate family. minidom 0.19.0 is a DOM wrapper over the selected rxml family: rxml's RawReader lexes and parses, and minidom's own TreeBuilder resolves prefixes and builds the tree. It inherits rxml's restricted subset, so it also rejects the shared order control and uses the restricted order control; its stable AFL++ edge differential has no change in minidom source-line counts, and the differing lines are in rxml. uppsala 0.12.1 parses both shared valid controls through its own namespace-aware DOM parser; the controls do not establish its XPath, XSD or XSLT features, DTD handling, other encodings, or complete XML 1.0 conformance. Downloads include transitive pulls and are adoption proxies; ranks compare selected paths only, and the minidom and rxml counts overlap because minidom depends on rxml. RustyXML 0.3.0 parses both shared valid controls through its own ObjFW-derived streaming parser; its README lists incomplete error checking, so the controls do not establish strict XML 1.0 well-formedness checking, DTD handling or non-UTF-8 encodings. Its AFL++ overlay fixes std HashMap RandomState keys with a getrandom AFL_PRELOAD shim; see data/rust/xml/rustyxml-feedback-audit.md.",
+  "unresolved_documentation_leads": 6,
+  "uncertainty": "Ten verified XML parser paths selected, reaching the cell ceiling, within the first 100 hits of seven crates.io queries (642 hits, 483 unique), captured 2026-11-17. Six documented leads remain unverified and were not run after the tenth slot was filled. xmltree, serde-xml-rs, elementtree and treexml fall outside the first 100 hits of the recorded queries, so they have no snapshot metric and were not ranked; a live crates.io lookup on 2026-11-17 showed xmltree and elementtree (both xml-rs family) with more recent downloads than instant-xml, so a broader search could change the tenth slot. xml5ever 0.40.0 is an XML5 error-recovering superset parser: the two valid XML 1.0 controls verify namespace-aware output, but it does not establish strict XML 1.0 well-formedness, complete namespace behavior, DTD support, or other encodings. rxml 0.14.0 is a deliberately restricted XML 1.0 parser without DTDs, custom entities or processing instructions, and it rejects comments by default. It parses the shared catalog control exactly but rejects the shared order control (Error(RestrictedXml(\"comments\"))), so its second control is order-default-ns-restricted.xml without that comment and processing instruction. The xml-rs 1.0.0 package is a compatibility re-export of xml and excluded as a duplicate family. minidom 0.19.0 is a DOM wrapper over the selected rxml family: rxml's RawReader lexes and parses, and minidom's own TreeBuilder resolves prefixes and builds the tree. It inherits rxml's restricted subset, so it also rejects the shared order control and uses the restricted order control; its stable AFL++ edge differential has no change in minidom source-line counts, and the differing lines are in rxml. uppsala 0.12.1 parses both shared valid controls through its own namespace-aware DOM parser; the controls do not establish its XPath, XSD or XSLT features, DTD handling, other encodings, or complete XML 1.0 conformance. Downloads include transitive pulls and are adoption proxies; ranks compare selected paths only, and the minidom and rxml counts overlap because minidom depends on rxml. RustyXML 0.3.0 parses both shared valid controls through its own ObjFW-derived streaming parser; its README lists incomplete error checking, so the controls do not establish strict XML 1.0 well-formedness checking, DTD handling or non-UTF-8 encodings. Its AFL++ overlay fixes std HashMap RandomState keys with a getrandom AFL_PRELOAD shim; see data/rust/xml/rustyxml-feedback-audit.md. instant-xml 0.7.7 is a typed mapping library over the selected xmlparser tokenizer; only its generic AnyElement view is tested. It consumes xmlns declarations without exposing them, so its summary omits the declaration count; AnyElement keeps only the last text node per element; it rejects the processing instruction inside the shared order control's root, so its second control is order-default-ns-no-pi.xml.",
   "third_party_evidence": "data/rust/xml/parsers.json",
   "third_party_control_results": [
     "projects/xml/rust/quick_xml/verification.json",
@@ -39,7 +39,8 @@
     "projects/xml/rust/rustyxml/verification.json",
     "projects/xml/rust/minidom/verification.json",
     "projects/xml/rust/rxml/verification.json",
-    "projects/xml/rust/uppsala/verification.json"
+    "projects/xml/rust/uppsala/verification.json",
+    "projects/xml/rust/instant_xml/verification.json"
   ],
   "runtime_evidence": "data/rust/xml/standard.json",
   "registry_snapshot": "data/rust/xml/registry-snapshot.json",
