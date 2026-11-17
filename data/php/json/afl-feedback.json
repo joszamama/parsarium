@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T03:29:08.802842+00:00",
+  "projects_total": 2,
+  "projects_passed": 2,
+  "differential_kind": "fixed_valid_nested_array",
+  "results": [
+    {
+      "project": "json/php/seld_jsonlint",
+      "pass": true,
+      "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "dfe09410411255552f5285dbb40ea8deccd1e3394dd4f1f2d08e2b8a964e74a3",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_parser_features": 226,
+      "control_afl_tuples": 246,
+      "differential_parser_features": 222,
+      "differential_afl_tuples": 242,
+      "parser_feature_difference": 4,
+      "afl_tuple_difference": 4
+    },
+    {
+      "project": "json/php/stdlib_json_decode",
+      "pass": true,
+      "feedback_kind": "native_php_runtime_source_edges",
+      "overlay_receipt_sha256": "58124e26f336311becdc3147c3a31d3758e7476e5dccf654f0f43c6ed03aff59",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_parser_features": null,
+      "control_afl_tuples": 264,
+      "differential_parser_features": null,
+      "differential_afl_tuples": 236,
+      "parser_feature_difference": null,
+      "afl_tuple_difference": 66
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "checked_at_utc": "2026-11-17T03:28:33.107410+00:00",
+  "platform": "linux/arm64 Docker",
+  "php": "PHP 8.5 (Ubuntu php8.5-cli for seld/jsonlint; PHP 8.5.12 source build for json_decode)",
+  "controls": {
+    "nested_object": "controls/json/nested-object.json"
+  },
+  "control_sha256": {
+    "nested_object": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6"
+  },
+  "control_meaning": "RFC 8259 object with nested objects and arrays, string escapes (\\u00e9 and \\\"), integer, negative exponent number, true, false, null, empty object and empty array",
+  "third_party": [
+    {
+      "package": "seld/jsonlint",
+      "version": "1.12.2",
+      "scope": "RFC 8259 JSON text decoded into PHP stdClass/array/scalar values with default flags",
+      "command": "python3 scripts/run_project.py json php seld_jsonlint",
+      "receipt": "projects/json/php/seld_jsonlint/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 226,
+      "error": null
+    }
+  ],
+  "standard": [
+    {
+      "api": "json_decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0)",
+      "runtime": "PHP 8.5.12 CLI (source build, --disable-all; ext/json is always enabled)",
+      "command": "python3 scripts/run_project.py json php stdlib_json_decode",
+      "receipt": "projects/json/php/stdlib_json_decode/verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "parser_source_files": 3,
+      "parser_source_lines_covered": 751,
+      "format_specific_source_lines_covered": 232,
+      "error": null
+    }
+  ]
+}

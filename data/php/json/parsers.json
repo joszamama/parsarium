@@ -1,0 +1,57 @@
+[
+  {
+    "name": "seld/jsonlint",
+    "version": "1.12.2",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Seldaek/jsonlint/blob/4882a0459c88772e4afa3a73ee81b7824490aa9c/LICENSE",
+    "documentation": "https://github.com/Seldaek/jsonlint/blob/4882a0459c88772e4afa3a73ee81b7824490aa9c/README.md",
+    "source": "https://github.com/Seldaek/jsonlint/tree/4882a0459c88772e4afa3a73ee81b7824490aa9c",
+    "input_api": "Seld\\JsonLint\\JsonParser::parse(string $input, int $flags = 0) over local bytes; default flags decode objects to stdClass",
+    "adapter": "projects/json/php/seld_jsonlint/harness.php",
+    "composer_lock": "projects/json/php/seld_jsonlint/composer.lock",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "scope": "RFC 8259 JSON text decoded into PHP stdClass/array/scalar values with default flags",
+    "family": "seld/jsonlint Lexer and LR table parser",
+    "family_note": "Own pure-PHP Lexer.php and JsonParser.php LR parse table; the pinned source contains no json_decode call. String escapes are expanded by its own preg_replace_callback interpolation. Composer depends on it, which inflates its download count; Composer itself calls json_decode first and uses JsonParser to report errors.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 252371311,
+      "source": "https://packagist.org/packages/seld/jsonlint",
+      "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+      "snapshot": "data/php/json/registry-snapshot.json"
+    },
+    "project": "projects/json/php/seld_jsonlint",
+    "not_verified": "Only default flags on one valid UTF-8 object control were run. ALLOW_COMMENTS, duplicate-key flags, PARSE_TO_ASSOC, VALIDATE_UTF8_ENCODING, byte-order-mark input (rejected by failOnBOM), large integers, depth limits and malformed input are unverified."
+  }
+]
