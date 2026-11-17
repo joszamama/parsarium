@@ -1,0 +1,88 @@
+[
+  {
+    "name": "github.com/miekg/dns",
+    "status": "unresolved",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 16234,
+    "found_by": "registry search hit",
+    "documentation": "https://pkg.go.dev/github.com/miekg/dns#Msg.Unpack",
+    "input_api_lead": "(*dns.Msg).Unpack([]byte)",
+    "family": "miekg/dns (v1)",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 1
+  },
+  {
+    "name": "github.com/google/gopacket/layers",
+    "status": "unresolved",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 5428,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://pkg.go.dev/github.com/google/gopacket/layers#DNS.DecodeFromBytes",
+    "input_api_lead": "(*layers.DNS).DecodeFromBytes(data, gopacket.NilDecodeFeedback)",
+    "family": "gopacket DNS layer",
+    "note": "Importer count covers the whole multi-protocol layers package.",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 2
+  },
+  {
+    "name": "golang.org/x/net/dns/dnsmessage",
+    "status": "unresolved",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 1202,
+    "found_by": "registry search hit",
+    "documentation": "https://pkg.go.dev/golang.org/x/net/dns/dnsmessage#Message.Unpack",
+    "input_api_lead": "(*dnsmessage.Message).Unpack([]byte) / dnsmessage.Parser",
+    "family": "x/net dnsmessage",
+    "note": "Third-party module path maintained by the Go project; a copy is vendored into the standard library's net package but is not importable from it.",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 3
+  },
+  {
+    "name": "github.com/coredns/coredns/plugin/pkg/dnsutil",
+    "status": "excluded",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 1124,
+    "found_by": "registry search hit",
+    "documentation": "https://pkg.go.dev/github.com/coredns/coredns/plugin/pkg/dnsutil",
+    "family": "miekg/dns",
+    "reason": "Helper package over miekg/dns; no own message parser."
+  },
+  {
+    "name": "github.com/gopacket/gopacket/layers",
+    "status": "unresolved",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 171,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://pkg.go.dev/github.com/gopacket/gopacket/layers#DNS.DecodeFromBytes",
+    "input_api_lead": "(*layers.DNS).DecodeFromBytes",
+    "family": "gopacket DNS layer (community fork)",
+    "note": "Fork of google/gopacket; shared family.",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 4
+  },
+  {
+    "name": "codeberg.org/miekg/dns",
+    "status": "unresolved",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 39,
+    "found_by": "registry search hit",
+    "documentation": "https://pkg.go.dev/codeberg.org/miekg/dns",
+    "input_api_lead": "dns.Msg Unpack (v2)",
+    "family": "miekg/dns v2",
+    "note": "Rewrite by the same author; family relation to v1 to be checked.",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 5
+  },
+  {
+    "name": "github.com/phuslu/fastdns",
+    "status": "unresolved",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 9,
+    "found_by": "registry search hit",
+    "documentation": "https://pkg.go.dev/github.com/phuslu/fastdns",
+    "input_api_lead": "fastdns.ParseMessage(dst, payload, copying)",
+    "family": "phuslu fastdns",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 6
+  }
+]

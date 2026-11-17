@@ -1,0 +1,96 @@
+[
+  {
+    "name": "libtins",
+    "status": "unresolved",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 52,
+    "found_by": "registry search hit",
+    "documentation": "https://libtins.github.io/docs/latest/d0/dcd/classTins_1_1DNS.html",
+    "input_api_lead": "Tins::DNS(const uint8_t *buffer, uint32_t total_sz)",
+    "family": "libtins DNS PDU parser",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 1
+  },
+  {
+    "name": "pcapplusplus",
+    "status": "unresolved",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": null,
+    "found_by": "registry search hit",
+    "documentation": "https://pcapplusplus.github.io/api-docs/v25.05/classpcpp_1_1_dns_layer.html",
+    "input_api_lead": "pcpp::DnsLayer(uint8_t *data, size_t dataLen, Layer *prevLayer, Packet *packet)",
+    "family": "PcapPlusPlus DnsLayer",
+    "note": "No Debian source package; primary metric missing, so unranked under PROTOCOL.md.",
+    "api_lead_checked_against_pinned_release": false
+  },
+  {
+    "name": "poco",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 940,
+    "found_by": "registry search hit",
+    "documentation": "https://docs.pocoproject.org/current/Poco.Net.DNS.html",
+    "family": "Poco::Net::DNS",
+    "reason": "Resolver over getaddrinfo/gethostbyname; no DNS message bytes API."
+  },
+  {
+    "name": "qtbase-opensource-src",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 96909,
+    "found_by": "registry search hit",
+    "documentation": "https://doc.qt.io/qt-6/qdnslookup.html",
+    "family": "Qt QDnsLookup",
+    "reason": "QDnsLookup performs network lookups; it documents no parser for caller-supplied message bytes."
+  },
+  {
+    "name": "boost1.83",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 100348,
+    "found_by": "registry search hit",
+    "documentation": "https://www.boost.org/doc/libs/release/doc/html/boost_asio/reference/ip__basic_resolver.html",
+    "family": "Boost.Asio resolver",
+    "reason": "getaddrinfo wrapper; no DNS message parser."
+  },
+  {
+    "name": "asio",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 1596,
+    "found_by": "registry search hit",
+    "documentation": "https://think-async.com/Asio/",
+    "family": "Asio resolver",
+    "reason": "getaddrinfo wrapper; no DNS message parser."
+  },
+  {
+    "name": "pdns",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 550,
+    "found_by": "registry search hit",
+    "documentation": "https://doc.powerdns.com/",
+    "family": "PowerDNS",
+    "reason": "Authoritative server application; its MOADNSParser is internal, not an installed library."
+  },
+  {
+    "name": "dnsdist",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 187,
+    "found_by": "registry search hit",
+    "documentation": "https://dnsdist.org/",
+    "family": "PowerDNS dnsdist",
+    "reason": "Load-balancer application, not a library."
+  },
+  {
+    "name": "pdns-recursor",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 430,
+    "found_by": "registry search hit",
+    "documentation": "https://doc.powerdns.com/recursor/",
+    "family": "PowerDNS Recursor",
+    "reason": "Resolver application, not a library."
+  }
+]

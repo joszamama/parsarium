@@ -1,0 +1,25 @@
+{
+  "ecosystem": "C",
+  "format": "DNS",
+  "runtime": "ISO/IEC 9899:2024 C standard library (WG14 N3220); glibc 2.42 and musl libresolv APIs inventoried separately",
+  "status": "pending",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "C standard library headers, clause 7.1.2",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3220.pdf",
+      "finding": "ISO C defines no DNS message type or parser."
+    },
+    {
+      "api": "libresolv ns_initparse / ns_parserr (glibc <arpa/nameser.h>)",
+      "url": "https://sourceware.org/git/?p=glibc.git;a=blob;f=resolv/ns_parse.c",
+      "finding": "glibc ships the BIND 8 ns_initparse/ns_parserr message parser in libresolv and declares it in <arpa/nameser.h>. The glibc manual does not document it; documentation is the BIND 8 resolver heritage and source. Recorded as a runtime lead, not run."
+    },
+    {
+      "api": "musl ns_initparse / ns_parserr",
+      "url": "https://git.musl-libc.org/cgit/musl/tree/src/network/ns_parse.c",
+      "finding": "musl provides the same interface in libc. Not run."
+    }
+  ],
+  "limit": "Standard/runtime libresolv APIs are documented by source and header only; no control was run. They stay outside the third-party ranking."
+}

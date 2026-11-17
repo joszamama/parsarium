@@ -1,0 +1,136 @@
+[
+  {
+    "name": "c-ares",
+    "status": "unresolved",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 43027,
+    "found_by": "registry search hit",
+    "documentation": "https://c-ares.org/docs/ares_dns_parse.3.html",
+    "input_api_lead": "ares_dns_parse(buf, len, flags, &dnsrec) (c-ares >= 1.28)",
+    "family": "c-ares own DNS record parser (ares_dns_parse.c, ares_buf.c)",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 1
+  },
+  {
+    "name": "ldns",
+    "status": "unresolved",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 1240,
+    "found_by": "registry search hit",
+    "documentation": "https://nlnetlabs.nl/documentation/ldns/wire2host_8h.html",
+    "input_api_lead": "ldns_wire2pkt(&pkt, data, len)",
+    "family": "NLnet Labs ldns wire2host",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 2
+  },
+  {
+    "name": "knot",
+    "status": "unresolved",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 483,
+    "found_by": "registry search hit",
+    "documentation": "https://www.knot-dns.cz/docs/latest/html/",
+    "input_api_lead": "knot_pkt_new(wire, len, NULL) + knot_pkt_parse(pkt, 0) (libknot)",
+    "family": "Knot DNS libknot packet parser",
+    "note": "Debian popcon below 1,000; the knot source also builds the Knot DNS server.",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 3
+  },
+  {
+    "name": "udns",
+    "status": "unresolved",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 463,
+    "found_by": "registry search hit",
+    "documentation": "https://www.corpit.ru/mjt/udns/udns.3.html",
+    "input_api_lead": "dns_initparse / dns_nextrr (udns)",
+    "family": "udns own parser",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 4
+  },
+  {
+    "name": "getdns",
+    "status": "unresolved",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 118,
+    "found_by": "registry search hit",
+    "documentation": "https://getdnsapi.net/documentation/spec/",
+    "input_api_lead": "getdns_wire2msg_dict(wire, len, &dict)",
+    "family": "getdns over ldns-derived gldns wire code",
+    "note": "getdns bundles gldns, derived from ldns; a shared family with ldns.",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 5
+  },
+  {
+    "name": "adns",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 339,
+    "found_by": "registry search hit",
+    "documentation": "https://www.chiark.greenend.org.uk/~ian/adns/",
+    "family": "adns resolver",
+    "reason": "Resolver library; its public API submits queries and returns parsed answers but documents no parser for caller-supplied message bytes."
+  },
+  {
+    "name": "unbound",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 104684,
+    "found_by": "registry search hit",
+    "documentation": "https://nlnetlabs.nl/documentation/unbound/libunbound/",
+    "family": "Unbound sldns (internal)",
+    "reason": "libunbound's public API is a resolver (ub_resolve) that returns the raw answer packet; the sldns wire parser is internal and not installed as a public API."
+  },
+  {
+    "name": "bind9",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 280107,
+    "found_by": "registry search hit",
+    "documentation": "https://bind9.readthedocs.io/",
+    "family": "BIND 9 libdns (internal)",
+    "reason": "BIND 9 libdns/libisc are internal to BIND since 9.18; no development headers or documented stable message-parse API are shipped."
+  },
+  {
+    "name": "libevent",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 121349,
+    "found_by": "registry search hit",
+    "documentation": "https://libevent.org/doc/dns_8h.html",
+    "family": "libevent evdns (internal)",
+    "reason": "evdns exposes a resolver and server; message parsing is internal, with no documented API for caller-supplied message bytes."
+  },
+  {
+    "name": "libspf2",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 861,
+    "found_by": "registry search hit",
+    "documentation": "https://www.libspf2.org/",
+    "family": "libspf2",
+    "reason": "SPF policy library; not a DNS message parser API."
+  },
+  {
+    "name": "glibc",
+    "status": "standard_runtime",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 297819,
+    "found_by": "registry search hit",
+    "documentation": "https://sourceware.org/glibc/manual/latest/html_node/index.html",
+    "input_api_lead": "ns_initparse / ns_parserr (libresolv)",
+    "family": "BIND 8 libresolv ns_parse.c in glibc",
+    "reason": "C library resolver API; recorded under standard/runtime, outside third-party ranking."
+  },
+  {
+    "name": "musl",
+    "status": "standard_runtime",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": 2492,
+    "found_by": "registry search hit",
+    "documentation": "https://musl.libc.org/",
+    "input_api_lead": "ns_initparse / ns_parserr",
+    "family": "musl src/network/ns_parse.c",
+    "reason": "C library resolver API; recorded under standard/runtime, outside third-party ranking."
+  }
+]

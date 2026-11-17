@@ -1,0 +1,39 @@
+{
+  "ecosystem": "cpp",
+  "format": "dns",
+  "status": "pilot_search_bounded_none_verified",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 0,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "debian-source:dns",
+    "conan:dns",
+    "targeted cpp DNS message sources"
+  ],
+  "search_limit_per_query": 100,
+  "search_totals": {
+    "debian-source:dns": 128,
+    "conan:dns": 5,
+    "targeted cpp DNS message sources": 9
+  },
+  "search_hits_recorded": 114,
+  "unique_search_hits": 109,
+  "unresolved_documentation_leads": 2,
+  "leads_recorded": 9,
+  "leads_by_status": {
+    "unresolved": 2,
+    "excluded": 7
+  },
+  "ranking_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+  "uncertainty": "Pilot cell: no C++ DNS path is verified yet. The bounded searches and targeted documentation leads are recorded with one adoption metric each; leads are ordered by that metric only to decide what to verify first. Registry search order is not adoption order, and package-level metrics include non-DNS use. Zero verified paths is not evidence that no parser exists.",
+  "registry_snapshot": "data/cpp/dns/registry-snapshot.json",
+  "unresolved_leads": "data/cpp/dns/leads.json",
+  "runtime_evidence": "data/cpp/dns/standard.json",
+  "controls": {
+    "primary": "controls/dns/response.bin",
+    "differential": "controls/dns/query.bin",
+    "oracle": "controls/dns/check_controls.py",
+    "expected": "controls/dns/expected.json"
+  }
+}

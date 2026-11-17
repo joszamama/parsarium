@@ -1,0 +1,15 @@
+{
+  "ecosystem": "Go",
+  "format": "DNS",
+  "runtime": "Go 1.27.1 standard library",
+  "status": "none_documented",
+  "verified_apis": [],
+  "official_documentation_checked": [
+    {
+      "api": "package net",
+      "url": "https://pkg.go.dev/net@go1.27.1",
+      "finding": "net exposes resolver functions (LookupHost, Resolver) that query servers; it exports no parser for caller-supplied DNS message bytes. Its internal copy of golang.org/x/net/dns/dnsmessage is vendored and not importable."
+    }
+  ],
+  "limit": "Scoped to the Go standard library."
+}

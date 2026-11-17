@@ -1,0 +1,115 @@
+[
+  {
+    "name": "dnspython",
+    "status": "unresolved",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": 286812791,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://dnspython.readthedocs.io/en/stable/message-make.html#dns.message.from_wire",
+    "input_api_lead": "dns.message.from_wire(wire)",
+    "family": "dnspython",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 1
+  },
+  {
+    "name": "pycares",
+    "status": "unresolved",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": 17928720,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://pycares.readthedocs.io/",
+    "input_api_lead": "resolver API over c-ares",
+    "family": "c-ares",
+    "note": "Binding to c-ares; exposes query callbacks, not a documented parser for caller-supplied message bytes. To be checked against the pinned release.",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 2
+  },
+  {
+    "name": "aiodns",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": 17300335,
+    "found_by": "registry search hit",
+    "documentation": "https://github.com/saghul/aiodns",
+    "family": "c-ares (via pycares)",
+    "reason": "asyncio resolver over pycares; network API only."
+  },
+  {
+    "name": "scapy",
+    "status": "unresolved",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": 4173275,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://scapy.readthedocs.io/en/latest/api/scapy.layers.dns.html",
+    "input_api_lead": "scapy.layers.dns.DNS(raw_bytes)",
+    "family": "Scapy DNS layer",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 3
+  },
+  {
+    "name": "dpkt",
+    "status": "unresolved",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": 1492890,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://kbandla.github.io/dpkt/api/api_auto.html#module-dpkt.dns",
+    "input_api_lead": "dpkt.dns.DNS(buf)",
+    "family": "dpkt DNS",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 4
+  },
+  {
+    "name": "dnslib",
+    "status": "unresolved",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": 1231762,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://github.com/paulc/dnslib#readme",
+    "input_api_lead": "dnslib.DNSRecord.parse(packet)",
+    "family": "dnslib",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 5
+  },
+  {
+    "name": "py3dns",
+    "status": "unresolved",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": 129993,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://launchpad.net/py3dns",
+    "input_api_lead": "DNS.Lib.DnsResult / Munpacker",
+    "family": "py3dns",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 6
+  },
+  {
+    "name": "pypacker",
+    "status": "unresolved",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": 3765,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://gitlab.com/mike01/pypacker",
+    "family": "pypacker",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 7
+  },
+  {
+    "name": "dnserver",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": 2607,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://github.com/samuelcolvin/dnserver",
+    "family": "dnslib",
+    "reason": "DNS server built on dnslib; no own parser."
+  },
+  {
+    "name": "dnslib-ng",
+    "status": "excluded",
+    "primary_metric": "PyPI Stats last_month downloads excluding known mirrors",
+    "primary_metric_value": null,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://pypi.org/project/dnslib-ng/",
+    "reason": "Not found on PyPI Stats (404)."
+  }
+]

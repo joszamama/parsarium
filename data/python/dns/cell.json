@@ -1,0 +1,35 @@
+{
+  "ecosystem": "python",
+  "format": "dns",
+  "status": "pilot_search_bounded_none_verified",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 0,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "project name contains 'dns'"
+  ],
+  "search_limit_per_query": 100,
+  "search_totals": {
+    "project name contains 'dns'": 1074
+  },
+  "search_hits_recorded": 100,
+  "unique_search_hits": 100,
+  "unresolved_documentation_leads": 7,
+  "leads_recorded": 10,
+  "leads_by_status": {
+    "unresolved": 7,
+    "excluded": 3
+  },
+  "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
+  "uncertainty": "Pilot cell: no Python DNS path is verified yet. The bounded searches and targeted documentation leads are recorded with one adoption metric each; leads are ordered by that metric only to decide what to verify first. Registry search order is not adoption order, and package-level metrics include non-DNS use. Zero verified paths is not evidence that no parser exists.",
+  "registry_snapshot": "data/python/dns/registry-snapshot.json",
+  "unresolved_leads": "data/python/dns/leads.json",
+  "runtime_evidence": "data/python/dns/standard.json",
+  "controls": {
+    "primary": "controls/dns/response.bin",
+    "differential": "controls/dns/query.bin",
+    "oracle": "controls/dns/check_controls.py",
+    "expected": "controls/dns/expected.json"
+  }
+}

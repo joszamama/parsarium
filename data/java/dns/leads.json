@@ -1,0 +1,80 @@
+[
+  {
+    "name": "io.netty:netty-codec-dns",
+    "status": "unresolved",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 1038,
+    "found_by": "registry search hit",
+    "documentation": "https://netty.io/4.1/api/io/netty/handler/codec/dns/DatagramDnsResponseDecoder.html",
+    "input_api_lead": "DatagramDnsResponseDecoder / DatagramDnsQueryDecoder over a local DatagramPacket (EmbeddedChannel)",
+    "family": "Netty DNS codec (DnsRecordDecoder)",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 1
+  },
+  {
+    "name": "dnsjava:dnsjava",
+    "status": "unresolved",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 888,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://javadoc.io/doc/dnsjava/dnsjava/latest/org/xbill/DNS/Message.html",
+    "input_api_lead": "new org.xbill.DNS.Message(byte[])",
+    "family": "dnsjava",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 2
+  },
+  {
+    "name": "org.pcap4j:pcap4j-core",
+    "status": "unresolved",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 210,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://javadoc.io/doc/org.pcap4j/pcap4j-core/latest/org/pcap4j/packet/DnsPacket.html",
+    "input_api_lead": "DnsPacket.newPacket(byte[], int, int)",
+    "family": "Pcap4J DnsPacket",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 3
+  },
+  {
+    "name": "org.minidns:minidns-core",
+    "status": "unresolved",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 32,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://javadoc.io/doc/org.minidns/minidns-core/latest/org/minidns/dnsmessage/DnsMessage.html",
+    "input_api_lead": "new org.minidns.dnsmessage.DnsMessage(byte[])",
+    "family": "MiniDNS",
+    "api_lead_checked_against_pinned_release": false,
+    "lead_adoption_order": 4
+  },
+  {
+    "name": "de.measite.minidns:minidns-core",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 26,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://github.com/MiniDNS/minidns",
+    "family": "MiniDNS",
+    "reason": "Old Maven coordinate of MiniDNS; same family as org.minidns:minidns-core."
+  },
+  {
+    "name": "io.vertx:vertx-core",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 27070,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://vertx.io/docs/vertx-core/java/#_dns_client",
+    "family": "Netty DNS codec",
+    "reason": "The DNS client is a network API over Netty's codec; no documented message-bytes parser of its own. Its count is for all of vertx-core."
+  },
+  {
+    "name": "org.xbill:dnsjava",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": null,
+    "found_by": "targeted documentation lead",
+    "documentation": "https://github.com/dnsjava/dnsjava",
+    "family": "dnsjava",
+    "reason": "Not on deps.dev (404); the published coordinate is dnsjava:dnsjava."
+  }
+]
