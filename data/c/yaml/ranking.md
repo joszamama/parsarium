@@ -17,6 +17,11 @@ The C libraries hand back scalar text and style; plain scalars are typed by the 
 
 | Lead | Status | Installations | Reason |
 | --- | --- | ---: | --- |
-| libcyaml | unresolved | 18 | Unverified lead: schema-driven loader over libyaml (same family as the selected libyaml path) that needs a hand-written C schema per document shape, so it has no generic typed-tree API for the controls; 18 Debian installations. |
+| libcyaml 1.4.2 | excluded: no generic document API | 18 | Schema-mapping layer over libyaml events: `cyaml_load_data` needs a hand-written C schema that names every key and supplies every scalar type, and one entry schema per sequence cannot describe the mixed `order.yaml` root. The parser would not report the document; the YAML parsing is the selected libyaml's. |
+| tree-sitter-yaml | excluded: syntax tree only | 9 | Concrete-syntax-tree grammar: escapes, block-scalar folding and chomping, and aliases stay unresolved, so the harness would do the YAML semantics (jsmn tokenizer precedent). |
+
+## Round-2 search
+
+All 90 `yaml` hits are classified in the [registry snapshot](registry-snapshot.json) (`round2_debian_search`): 3 C and 2 C++ YAML libraries, 1 C syntax-tree grammar, 9 other-language bindings (several bundle a libyaml copy), 6 tools or editor modes and 69 other-language packages. The substrings `yml`, `syck`, `ryml` and `fkyaml` and exact lookups for C YAML sources without `yaml` in their names (Syck, mini-yaml) found no further C YAML parser library in the pinned snapshot.
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).

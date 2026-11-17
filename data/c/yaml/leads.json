@@ -27,14 +27,39 @@
   },
   {
     "name": "libcyaml",
-    "status": "unresolved",
+    "status": "excluded_no_generic_document_api",
     "metric_value": 18,
     "metric_error": null,
-    "family": "libyaml",
-    "api_hint": "cyaml_load_data",
-    "note": "Schema-driven loader over libyaml; needs a C schema per document shape.",
+    "family": "libyaml (src/load.c event consumer over libyaml's yaml_parser_parse)",
+    "api_hint": "cyaml_load_data(const uint8_t *input, size_t input_len, const cyaml_config_t *config, const cyaml_schema_value_t *schema, cyaml_data_t **data_out, unsigned *seq_count_out)",
+    "note": "Checked against pinned v1.4.2 (latest upstream release, 2024-08-31).",
     "found_by": "registry_search",
     "source": "https://tracker.debian.org/pkg/libcyaml",
-    "reason": "Unverified lead: schema-driven loader over libyaml (same family as the selected libyaml path) that needs a hand-written C schema per document shape, so it has no generic typed-tree API for the controls; 18 Debian installations."
+    "reason": "Excluded: libcyaml 1.4.2 has no documented route that returns the document's own typed tree. Its loader needs a hand-written C schema per document shape that supplies every key and scalar type, so the types would come from the harness, not the parser, and the heterogeneous order.yaml root sequence cannot be expressed at all (one entry schema per sequence). The YAML parsing itself is libyaml's (already selected); libcyaml is a schema-mapping layer over libyaml events, like the laravie mapping-layer precedent. 18 Debian installations.",
+    "pinned_release": "v1.4.2",
+    "pinned_source": "https://github.com/tlsa/libcyaml/archive/refs/tags/v1.4.2.tar.gz",
+    "pinned_source_sha256": "3211b2a0589ebfe02c563c96adce9246c0787be2af30353becbbd362998d16dc",
+    "documentation": "https://github.com/tlsa/libcyaml/blob/v1.4.2/include/cyaml/cyaml.h",
+    "evidence": {
+      "api": "cyaml_load_data and cyaml_load_file both require a caller-written cyaml_schema_value_t; the header's cyaml_type enum (INT, UINT, BOOL, ENUM, FLAGS, FLOAT, STRING, MAPPING, BITFIELD, SEQUENCE, SEQUENCE_FIXED, IGNORE) has no generic or variant node type.",
+      "typing": "Scalar types come from the schema entry, not from the document: a plain 2 is an int only because the caller declared CYAML_INT for that key.",
+      "mappings": "CYAML_MAPPING needs a fixed cyaml_schema_field array naming each key and its offset in a caller-defined C struct; unknown keys are an error unless ignored.",
+      "sequences": "CYAML_SEQUENCE and CYAML_SEQUENCE_FIXED take one entry schema pointer (sequence.entry), so every entry has one type. The order.yaml root sequence mixes mappings, a sequence, strings, null and false and cannot be described.",
+      "parser": "The scanner, event parser and anchor/alias handling are libyaml's (src/load.c calls yaml_parser_parse); libcyaml's own 4,853 lines of src/*.c map events onto the schema."
+    }
+  },
+  {
+    "name": "tree-sitter-yaml",
+    "status": "excluded_syntax_tree_only",
+    "metric_value": 9,
+    "metric_error": null,
+    "family": "tree-sitter-yaml (generated parser.c plus hand-written scanner.c, tree-sitter runtime)",
+    "api_hint": "ts_parser_set_language(parser, tree_sitter_yaml()); ts_parser_parse_string",
+    "note": "Upstream tree-sitter-grammars/tree-sitter-yaml v0.7.2 (latest release, 2025-10-07); the Debian source identity with that repository was not checked because the path is excluded on eligibility.",
+    "found_by": "registry_search",
+    "source": "https://tracker.debian.org/pkg/tree-sitter-yaml",
+    "documentation": "https://github.com/tree-sitter-grammars/tree-sitter-yaml/blob/v0.7.2/src/node-types.json",
+    "evidence": "src/node-types.json (sha256 1238b6c89fc6afb9723b6463a365843aa87e478025490660e5acfc9adaaf809b) names syntax nodes only: double_quote_scalar with escape_sequence children, block_scalar as one leaf, alias with alias_name, anchor, plain_scalar with integer_scalar/float_scalar/boolean_scalar/null_scalar children. Escape decoding, block-scalar indentation stripping, folding and chomping, and alias expansion are not done by the grammar.",
+    "reason": "Excluded: a concrete-syntax-tree grammar for editors, not a document parser. The harness would have to decode escapes, fold and chomp block scalars and resolve aliases itself, so the parser would not report the document (C JSON jsmn tokenizer precedent). 9 Debian installations."
   }
 ]
