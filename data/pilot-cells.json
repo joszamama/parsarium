@@ -299,8 +299,8 @@
     {
       "ecosystem": "go",
       "format": "mp3",
-      "status": "pilot_two_verified_bounded_search",
-      "verified_third_party_count": 2,
+      "status": "pilot_three_verified_bounded_search",
+      "verified_third_party_count": 3,
       "verified_standard_or_runtime_count": 0,
       "search_queries": [
         "mp3",
@@ -314,14 +314,14 @@
       "unique_search_hits": 242,
       "leads_recorded": 14,
       "leads_by_status": {
-        "shared_family": 3,
+        "shared_family": 4,
         "excluded": 4,
-        "selected": 1,
-        "unresolved": 6
+        "selected": 2,
+        "unresolved": 4
       },
       "ranking_metric": "pkg.go.dev Imported by package count",
-      "selection": "Two own-code MPEG Layer III parser paths verified: hajimehoshi/go-mp3 (294 Imported by) decodes PCM, while tcolgate/mp3 (62) parses complete frame headers and side information without PCM. Both expose documented io.Reader APIs and match two independent valid-control oracles.",
-      "uncertainty": "Two verified Go plain-MP3 paths; no padding. Five pkg.go.dev queries were bounded at 100 hits each (313 hits, 242 unique). Six leads remain unresolved and three recorded wrappers share selected parser families. pkg.go.dev Imported by counts package adoption rather than MP3-specific use. The hajimehoshi/go-mp3 family is also represented in the tagged MP3 cell, as is tcolgate/mp3; these are separate plain-frame format paths, not new families across cells. Two untagged constant-bitrate controls do not establish VBR, Xing/Info, free-format, other MPEG layers, or ID3 handling.",
+      "selection": "Three own-code MPEG Layer III parser paths verified: hajimehoshi/go-mp3 (294 Imported by) decodes PCM; tcolgate/mp3 (62) and dmulholl/mp3lib (9) parse complete frame headers and boundaries without PCM. Each uses a documented local io.Reader input API and matches both independent valid-control oracles.",
+      "uncertainty": "Three verified Go plain-MP3 paths; no padding. Five pkg.go.dev queries were bounded at 100 hits each (313 hits, 242 unique). Four leads remain unresolved and four recorded wrappers or forks share selected parser families. pkg.go.dev Imported by counts package adoption rather than MP3-specific use. The hajimehoshi/go-mp3 and tcolgate/mp3 families are also represented in the tagged MP3 cell; the plain-frame routes are separate format paths, not new cross-cell families. Two untagged constant-bitrate controls do not establish VBR, Xing/Info, free-format, other MPEG layers, or ID3 handling.",
       "third_party_evidence": "data/go/mp3/parsers.json",
       "runtime_evidence": "data/go/mp3/standard.json",
       "registry_snapshot": "data/go/mp3/registry-snapshot.json",
@@ -330,7 +330,8 @@
       "ceiling": 10,
       "third_party_control_results": [
         "projects/mp3/go/github_com_hajimehoshi_go_mp3/verification.json",
-        "projects/mp3/go/github_com_tcolgate_mp3/verification.json"
+        "projects/mp3/go/github_com_tcolgate_mp3/verification.json",
+        "projects/mp3/go/github_com_dmulholl_mp3lib/verification.json"
       ],
       "phase": "pilot",
       "complete": false
