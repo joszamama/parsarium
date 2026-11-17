@@ -1,5 +1,82 @@
 [
   {
+    "name": "json5",
+    "version": "2.2.3",
+    "license": "MIT",
+    "npm_integrity": "sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==",
+    "tarball_sha256": "08afb33db600d11fc89b98fac4054f19d5d3e0fe527063116150e1ecc2d2377b",
+    "input_api": "JSON5.parse(text) on local bytes decoded as strict UTF-8 text; summary and type-tagged tree walk the returned value",
+    "documentation": "https://github.com/json5/json5/blob/c3a75242772a5026a49c4017a16d9b3543b62776/README.md#json5parse",
+    "source": "https://registry.npmjs.org/json5/-/json5-2.2.3.tgz",
+    "scope": "One JSON text from local bytes decoded as strict UTF-8 (BOM kept) and passed once to JSON5.parse(text); json5 rejects any token after the first value. JSON5 is a superset of JSON, so this path also accepts JSON5-only syntax and is not a strict RFC 8259 validator",
+    "family": "json5 character lexer and parse-state machine",
+    "family_note": "json5 2.2.3 (main lib/index.js, no dependencies) parses with its own code in lib/parse.js: a lex() loop over code points driven by a lexStates table (default, comment, value, string, number and identifier states) and a parseStates table that builds values on its own stack with push()/pop(); lib/util.js and lib/unicode.js supply character classes. Numbers are converted with Number() on the lexed digits, strings are unescaped by its own escape()/unicodeEscape(). It does not call JSON.parse, eval or Function (JSON.parse appears in no lib/ or dist/ file). lib/ in the tarball is byte-identical to gitHead c3a75242772a5026a49c4017a16d9b3543b62776 (tag v2.2.3). Distinct from V8 native JSON.parse and from jsonparse, stream-json, momoa, bfj and @streamparser/json.",
+    "control": "controls/json/nested-object.json",
+    "popularity": {
+      "metric": "npm downloads, 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 1214931394,
+      "source": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/json5",
+      "captured_at_utc": "2026-11-17T03:16:41Z",
+      "snapshot": "data/javascript/json/registry-snapshot.json",
+      "usage_note": "The download count mainly measures JSON5 configuration-file use (for example as a dependency of Babel and other build tools reading .babelrc, tsconfig-style or JSON5 config files), not strict JSON parsing. It is ranked on the same metric as the other paths but should not be read as strict-JSON adoption."
+    },
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "project": "projects/json/javascript/json5",
+    "license_evidence": "https://registry.npmjs.org/json5/2.2.3",
+    "adoption_recheck": {
+      "checked_on": "2026-11-17",
+      "note": "Rechecked before selection; ranking still uses the 30-day snapshot window. Weekly values are the npm last-week point for every selected package, same source and window. The window has moved by one day since the momoa recheck (2026-11-09 to 2026-11-15); that record is left as captured.",
+      "npm_downloads_30d_unchanged": 1214931394,
+      "npm_last_week": {
+        "window": "2026-11-10 to 2026-11-16",
+        "source": "https://api.npmjs.org/downloads/point/last-week/<package>",
+        "values": {
+          "json5": 327119493,
+          "jsonparse": 26872711,
+          "stream-json": 15258222,
+          "JSONStream": 13886950,
+          "@humanwhocodes/momoa": 4982247,
+          "bfj": 4576119,
+          "@streamparser/json": 3885226
+        }
+      },
+      "latest_release": "2.2.3",
+      "selected_count_with_this_path": 7,
+      "ceiling": 10
+    },
+    "verification_note": "The README documents JSON5.parse(text[, reviver]) as parsing a JSON5 string and states that JSON5 is a superset of JSON (valid JSON files are valid JSON5); text input qualifies because the adapter reads the bytes locally and json5 parses their structure. README.md and lib/{index,parse,util,unicode}.js at gitHead c3a75242772a5026a49c4017a16d9b3543b62776 (tag v2.2.3) are byte-identical to the tarball. Local bytes are decoded with TextDecoder('utf-8', {fatal: true, ignoreBOM: true}); JSON5.parse is called once without a reviver, and there is no JSON.parse fallback. The adapter turns the returned value into a type-tagged tree (numbers as IEEE 754 double bits, object members in Object.keys order) and derives the summary from that tree. On both valid controls, nested-object.json and nested-array.json, the tree equals one produced by an independent Python json oracle over the same bytes and the summary equals the pinned summary (data/javascript/json/json5-tree-verification.json). From source reading, not run: the default lex state skips JSON5 whitespace (U+00A0, U+FEFF, U+2028/9, Unicode Space_Separator, \\v, \\f) and comments; the value states accept single-quoted strings, unquoted identifier keys, hexadecimal, Infinity, NaN, leading '+' and leading or trailing decimal points; trailing commas are accepted; unescaped control characters other than CR and LF are kept inside strings; unescaped U+2028/2029 in strings print a console.warn. So invalid RFC 8259 input can be accepted. Duplicate keys keep the last value, members are set with Object.defineProperty so a __proto__ key becomes an own property, and integer-like keys follow JavaScript property order in Object.keys; the controls have none of these. Only the two valid controls were run."
+  },
+  {
     "name": "json-bigint",
     "version": "1.0.0",
     "license": "MIT",

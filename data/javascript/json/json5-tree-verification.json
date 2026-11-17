@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "project": "json/javascript/json5",
+  "checked_at_utc": "2026-11-17T13:07:26.119743+00:00",
+  "base_image_id": "sha256:704fc952e8a1bad26ef8b7de163f06f93dfcee5a57f9841d9786e14d2de1a403",
+  "api": "JSON5.parse(text) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true})",
+  "oracle": "Python json.loads of the same bytes (object_pairs_hook keeps member order and rejects duplicate keys; every number as float), tagged by type with numbers as IEEE 754 double bits",
+  "pinned_trees": "projects/json/javascript/json5/expected-trees.json",
+  "results": [
+    {
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "tree_sha256": "45d4834c6feb2d0013ee1c7238992c91217922ee41f55eb0419a294f1e291910",
+      "tree_matches_oracle": true,
+      "summary_matches_pinned": true,
+      "summary": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      }
+    },
+    {
+      "control": "controls/json/nested-array.json",
+      "control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "tree_sha256": "3d2b4ad94bc6c9b5343da6ed13dffae0ffc241947be2ff86969460dbcc680e06",
+      "tree_matches_oracle": true,
+      "summary_matches_pinned": true,
+      "summary": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      }
+    }
+  ],
+  "pass": true
+}

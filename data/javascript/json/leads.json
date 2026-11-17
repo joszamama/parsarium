@@ -1,14 +1,15 @@
 [
   {
     "name": "json5",
-    "status": "unresolved",
-    "lead_kind": "own_parser_not_selected",
+    "status": "promoted_to_verified",
+    "lead_kind": "own_parser",
     "version_seen": "2.2.3",
     "license": "MIT",
     "npm_downloads_30d": 1214931394,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/json5",
-    "reason": "Own JSON5 parser (no JSON.parse call in 2.2.3 tarball). JSON5 is a superset grammar and the documented JSON5.parse(text) takes a string; not an RFC 8259 byte/stream path.",
-    "source": "https://www.npmjs.com/package/json5"
+    "reason": "Own JSON5 lexer and parse-state machine in lib/parse.js (no JSON.parse, eval or Function). JSON5 is a superset of JSON and the documented JSON5.parse(text) takes a string; the adapter decodes local bytes as strict UTF-8 and calls it once. Both valid JSON controls give a type-tagged tree equal to an independent Python json oracle and the pinned summaries, with pinned npm integrity and tarball SHA-256, V8 package-source coverage, and input-dependent AFL++ feedback verified. The path accepts JSON5-only syntax, so it does not reject invalid RFC 8259 input. Its download count mainly reflects JSON5 config-file use (e.g. via Babel), not strict JSON parsing.",
+    "source": "https://www.npmjs.com/package/json5",
+    "verified_evidence": "data/javascript/json/verification.json"
   },
   {
     "name": "parse-json",

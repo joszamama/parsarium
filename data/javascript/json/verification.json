@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T13:11:39.964860+00:00",
+  "checked_at_utc": "2026-11-17T13:21:10.178008+00:00",
   "platform": "linux/arm64 Docker",
   "node": "Node.js 26.10.0",
   "controls": {
@@ -417,6 +417,67 @@
       },
       "parser_source_files": 1,
       "parser_source_lines_covered": 293,
+      "error": null
+    },
+    {
+      "package": "json5",
+      "version": "2.2.3",
+      "scope": "One JSON text from local bytes decoded as strict UTF-8 (BOM kept) and passed once to JSON5.parse(text); json5 rejects any token after the first value but, as a JSON5 superset parser, also accepts JSON5-only syntax. The summary and a type-tagged tree are built from the returned value",
+      "command": "python3 scripts/run_project.py json javascript json5",
+      "receipt": "projects/json/javascript/json5/verification.json",
+      "tree_receipt": "data/javascript/json/json5-tree-verification.json",
+      "pass": true,
+      "output": {
+        "arrays": 3,
+        "booleans": 2,
+        "max_depth": 4,
+        "nulls": 1,
+        "numbers": [
+          -2.5,
+          1,
+          1,
+          2,
+          2
+        ],
+        "objects": 5,
+        "root": "object",
+        "strings": [
+          "café \"quoted\"",
+          "go",
+          "json",
+          "parsarium",
+          "rfc8259"
+        ],
+        "top_level_keys": [
+          "enabled",
+          "missing",
+          "name",
+          "nested",
+          "ratio",
+          "tags",
+          "version"
+        ]
+      },
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "root": "array",
+        "strings": [
+          "A",
+          "two"
+        ],
+        "top_level_items": 5
+      },
+      "parser_source_files": 5,
+      "parser_source_lines_covered": 497,
+      "format_specific_source_lines_covered": 470,
       "error": null
     }
   ],

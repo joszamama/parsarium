@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "json5",
+  "release": "2.2.3",
+  "catalog_parser": "data/javascript/json/parsers.json",
+  "source_lock": "projects/json/javascript/json5/source-lock.json",
+  "source_sha256": "08afb33db600d11fc89b98fac4054f19d5d3e0fe527063116150e1ecc2d2377b",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "café \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "oracle": "replay.js --tree prints the type-tagged tree of the value JSON5.parse returned (numbers as IEEE 754 double bits, object members in Object.keys order); run-control requires it to equal expected-trees.json, which an independent Python json oracle produced from the same control bytes, as well as the pinned summary.",
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/json5/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of the json5 package lib/ CommonJS sources (lib/parse.js lexer and parse-state machine, lib/util.js and lib/unicode.js character classes) during complete valid-control replay; Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/json5/",
+  "scope": "One JSON text from local bytes decoded as strict UTF-8 (BOM kept) and passed once to JSON5.parse(text); json5 lexes to end of input and rejects any token after the first value. JSON5 is a superset of JSON, so JSON5-only syntax is accepted too; only valid RFC 8259 controls were run",
+  "format_specific_coverage_file_suffix": "/lib/parse.js"
+}
