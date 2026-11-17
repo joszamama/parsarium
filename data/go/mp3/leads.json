@@ -66,6 +66,15 @@
     "source": "https://pkg.go.dev/github.com/tosone/minimp3"
   },
   {
+    "name": "github.com/bluenviron/gohlslib/v2",
+    "status": "excluded",
+    "imported_by_packages": 27,
+    "version_seen": "v2.4.8",
+    "license": "MIT",
+    "reason": "HLS client and muxer; it handles playlists and segments and has no documented local MP3 frame parser.",
+    "source": "https://pkg.go.dev/github.com/bluenviron/gohlslib/v2"
+  },
+  {
     "name": "github.com/sjzar/go-lame",
     "status": "excluded",
     "imported_by_packages": 26,
@@ -75,12 +84,21 @@
     "source": "https://pkg.go.dev/github.com/sjzar/go-lame"
   },
   {
+    "name": "github.com/bluenviron/gortmplib",
+    "status": "excluded",
+    "imported_by_packages": 13,
+    "version_seen": "v1.0.6",
+    "license": "MIT",
+    "reason": "RTMP protocol library; it has no documented local MP3 frame parser.",
+    "source": "https://pkg.go.dev/github.com/bluenviron/gortmplib"
+  },
+  {
     "name": "github.com/200sc/klangsynthese/mp3",
     "status": "shared_family",
     "imported_by_packages": 11,
     "version_seen": "v0.2.1",
     "license": "Apache-2.0",
-    "reason": "Load(io.ReadCloser) delegates MP3 decoding to github.com/hajimehoshi/go-mp3, which is already selected; tagged-control panic was not retried on plain controls.",
+    "reason": "Load(io.ReadCloser) decodes with github.com/hajimehoshi/go-mp3 and then calls audio.EncodeBytes, which on Linux opens an ALSA playback device (audio/encode_linux.go) before returning. A headless container therefore cannot return a parse result, consistent with the panic recorded in the tagged-MP3 cell. Not retried on the plain controls, and it adds no independent decoder.",
     "source": "https://pkg.go.dev/github.com/200sc/klangsynthese/mp3"
   },
   {
@@ -111,21 +129,230 @@
     "source": "https://pkg.go.dev/github.com/gen2brain/mpeg"
   },
   {
+    "name": "github.com/ascherkus/go-id3/src/id3",
+    "status": "excluded",
+    "imported_by_packages": 6,
+    "version_seen": "v0.0.0-...-b139b6a",
+    "license": "Apache-2.0",
+    "reason": "ID3 tag reader only; it does not read MPEG audio frames, which this cell requires.",
+    "source": "https://pkg.go.dev/github.com/ascherkus/go-id3/src/id3"
+  },
+  {
+    "name": "github.com/braheezy/shine-mp3/pkg/mp3",
+    "status": "excluded",
+    "imported_by_packages": 5,
+    "version_seen": "v0.2.0",
+    "license": "LGPL-2.0",
+    "reason": "Shine MP3 encoder port (bitstream, MDCT, subband and loop sources); the API encodes PCM and does not parse MP3.",
+    "source": "https://pkg.go.dev/github.com/braheezy/shine-mp3/pkg/mp3"
+  },
+  {
+    "name": "github.com/dustin/go-id3",
+    "status": "excluded",
+    "imported_by_packages": 5,
+    "version_seen": "v0.0.0-...-73f4b1c",
+    "license": "Apache-2.0",
+    "reason": "ID3 tag reader only (ascherkus/go-id3 lineage); it does not read MPEG audio frames.",
+    "source": "https://pkg.go.dev/github.com/dustin/go-id3"
+  },
+  {
+    "name": "github.com/gwuhaolin/livego/parser/mp3",
+    "status": "excluded",
+    "imported_by_packages": 4,
+    "version_seen": "v0.0.0-...-16c6af5",
+    "license": "MIT",
+    "reason": "FLV/RTMP helper: Parse([]byte) reads only the two sampling-frequency bits of one header and maps them with the MPEG-1 table, so by source inspection the MPEG-2 control would report 44,100 Hz instead of 22,050 Hz. It walks no frames.",
+    "source": "https://pkg.go.dev/github.com/gwuhaolin/livego/parser/mp3"
+  },
+  {
+    "name": "github.com/icanhazbroccoli/tag",
+    "status": "excluded",
+    "imported_by_packages": 4,
+    "version_seen": "v0.0.0-...-0c387c5",
+    "license": "BSD-2-Clause",
+    "reason": "dhowden/tag fork; tag metadata only, no MPEG frame result.",
+    "source": "https://pkg.go.dev/github.com/icanhazbroccoli/tag"
+  },
+  {
+    "name": "github.com/moon-wind/mediacommon/pkg/codecs/mpeg4audio",
+    "status": "excluded",
+    "imported_by_packages": 4,
+    "version_seen": "v1.0.1",
+    "license": "MIT",
+    "reason": "MPEG-4 audio (AAC) utilities, not MPEG-1/2 Layer III streams.",
+    "source": "https://pkg.go.dev/github.com/moon-wind/mediacommon/pkg/codecs/mpeg4audio"
+  },
+  {
+    "name": "go.senan.xyz/gonic",
+    "status": "excluded",
+    "imported_by_packages": 4,
+    "version_seen": "v0.23.0",
+    "license": "GPL-3.0",
+    "reason": "Music-server application module; no documented local MP3 frame parser package.",
+    "source": "https://pkg.go.dev/go.senan.xyz/gonic"
+  },
+  {
+    "name": "codeberg.org/derat/mpeg",
+    "status": "excluded",
+    "imported_by_packages": 3,
+    "version_seen": "v0.0.0-...-e65f288",
+    "license": "BSD-3-Clause",
+    "reason": "New home of github.com/derat/mpeg. ReadFrameInfo and FrameInfo.Size are unchanged apart from an error variable name, so the same feedback-gate result applies: identical covered blocks on both valid controls. Not run separately.",
+    "source": "https://pkg.go.dev/codeberg.org/derat/mpeg"
+  },
+  {
     "name": "github.com/derat/mpeg",
-    "status": "unresolved",
+    "status": "excluded",
     "imported_by_packages": 3,
     "version_seen": "v0.0.0-...-1ba0e56",
     "license": "BSD-3-Clause",
-    "reason": "Documented ReadFrameInfo reads MPEG audio frame headers from a file; control adapter remains unchecked.",
-    "source": "https://pkg.go.dev/github.com/derat/mpeg"
+    "reason": "Own MPEG header reader with documented ReadFrameInfo(*os.File, int64) and FrameInfo.Size. Walking both untagged Go controls gives 11 frames/2,298 bytes at 44.1 kHz mono and 12 frames/1,254 bytes at 22.05 kHz stereo, matching check_controls.py. Excluded by the runnability gate only: both controls cover the same 14 derat/mpeg Go cover blocks (repeats identical; the Rust control pair also gives 0 difference), so the Go AFL++ bridge has no input-dependent parser feedback.",
+    "source": "https://pkg.go.dev/github.com/derat/mpeg",
+    "evidence": "data/go/mp3/probes/derat_mpeg/README.md"
+  },
+  {
+    "name": "github.com/harik13/mediacommon/pkg/codecs/mpeg4audio",
+    "status": "excluded",
+    "imported_by_packages": 3,
+    "version_seen": "v1.12.2-5",
+    "license": "MIT",
+    "reason": "MPEG-4 audio (AAC) utilities, not MPEG-1/2 Layer III streams.",
+    "source": "https://pkg.go.dev/github.com/harik13/mediacommon/pkg/codecs/mpeg4audio"
+  },
+  {
+    "name": "github.com/hyacinthus/mp3join",
+    "status": "excluded",
+    "imported_by_packages": 3,
+    "version_seen": "v0.0.0-...-d46eaee",
+    "license": "MIT",
+    "reason": "MP3 joiner: Append concatenates input frames into an output buffer and delegates frame parsing to mp3lib under its old path github.com/dmulholland/mp3lib. It returns joined bytes, not a parse result.",
+    "source": "https://pkg.go.dev/github.com/hyacinthus/mp3join"
+  },
+  {
+    "name": "github.com/korandiz/mpseek",
+    "status": "excluded",
+    "imported_by_packages": 3,
+    "version_seen": "v1.0.0",
+    "license": "GPL-3.0",
+    "reason": "MPEG-1 seek tables. By source inspection, header.valid requires id == 1 (MPEG-1 only), like korandiz/mpa, so it cannot pass the fixed MPEG-2 control. Not run.",
+    "source": "https://pkg.go.dev/github.com/korandiz/mpseek"
+  },
+  {
+    "name": "pipelined.dev/audio/mp3",
+    "status": "unresolved",
+    "imported_by_packages": 3,
+    "version_seen": "v0.6.1",
+    "license": "MIT",
+    "reason": "Source(io.Reader) wraps github.com/hajimehoshi/go-mp3, so it would be another shared-family wrapper. The package also imports the cgo LAME binding github.com/viert/lame. No pinned container or control has been run.",
+    "source": "https://pkg.go.dev/pipelined.dev/audio/mp3"
+  },
+  {
+    "name": "github.com/cowork-ai/go-minimp3",
+    "status": "unresolved",
+    "imported_by_packages": 2,
+    "version_seen": "v1.0.1",
+    "license": "CC0-1.0",
+    "reason": "Decode([]byte) is a cgo binding to vendored minimp3.h, the same native decoder family as the selected tosone/minimp3. Native C build, coverage and AFL++ instrumentation have not been set up.",
+    "source": "https://pkg.go.dev/github.com/cowork-ai/go-minimp3"
+  },
+  {
+    "name": "github.com/dece2183/go-stream-mp3",
+    "status": "shared_family",
+    "imported_by_packages": 2,
+    "version_seen": "v1.0.2",
+    "license": "Apache-2.0",
+    "reason": "Fork of github.com/hajimehoshi/go-mp3: same copyright header and internal frame, frameheader and consts packages, adapted for streaming. Not counted separately, and code differences were not measured.",
+    "source": "https://pkg.go.dev/github.com/dece2183/go-stream-mp3"
   },
   {
     "name": "github.com/fgergo/mp3",
-    "status": "unresolved",
+    "status": "shared_family",
     "imported_by_packages": 2,
     "version_seen": "v1.0.0",
     "license": "MIT",
-    "reason": "Fork of github.com/tcolgate/mp3 frame decoder (same lineage); unchecked.",
-    "source": "https://pkg.go.dev/github.com/fgergo/mp3"
+    "reason": "Byte-identical fork of the selected tcolgate/mp3 release: 15 of its 16 files match exactly, silence.go differs only in an internal import path, and the fork adds a go.mod. The parser code and API are the same, so it is a shared-family duplicate with 2 Imported by and is not counted separately.",
+    "source": "https://pkg.go.dev/github.com/fgergo/mp3",
+    "evidence": "data/go/mp3/probes/fgergo_mp3/README.md"
+  },
+  {
+    "name": "github.com/frolovo22/tag",
+    "status": "excluded",
+    "imported_by_packages": 2,
+    "version_seen": "v0.0.2",
+    "license": "GPL-3.0",
+    "reason": "Tag metadata reader only; no MPEG frame result.",
+    "source": "https://pkg.go.dev/github.com/frolovo22/tag"
+  },
+  {
+    "name": "github.com/guregu/tag",
+    "status": "excluded",
+    "imported_by_packages": 2,
+    "version_seen": "v0.0.3",
+    "license": "BSD-2-Clause",
+    "reason": "dhowden/tag fork; tag metadata only.",
+    "source": "https://pkg.go.dev/github.com/guregu/tag"
+  },
+  {
+    "name": "github.com/jo-hoe/mp3-joiner",
+    "status": "excluded",
+    "imported_by_packages": 2,
+    "version_seen": "v0.1.0",
+    "license": "MIT",
+    "reason": "Joins and edits MP3 files by running the external ffmpeg binary; it has no in-package frame parser.",
+    "source": "https://pkg.go.dev/github.com/jo-hoe/mp3-joiner"
+  },
+  {
+    "name": "github.com/mattetti/audio/mp3",
+    "status": "excluded",
+    "imported_by_packages": 2,
+    "version_seen": "v0.0.0-...-c5379f9",
+    "license": "MIT",
+    "reason": "Own frame reader (New(io.Reader), Decoder.Next, FrameHeader). Both untagged Go controls match check_controls.py (11 frames/2,298 bytes; 12 frames/1,254 bytes). Excluded by the runnability gate only: both controls cover the same 38 Go cover blocks (repeats identical; the Rust control pair also gives 0 difference).",
+    "source": "https://pkg.go.dev/github.com/mattetti/audio/mp3"
+  },
+  {
+    "name": "github.com/pgrahamdev/go-mp3-podcast/config",
+    "status": "excluded",
+    "imported_by_packages": 2,
+    "version_seen": "v0.0.0-...-2390bf3",
+    "license": "MIT",
+    "reason": "Application configuration package; it has no MP3 parsing API.",
+    "source": "https://pkg.go.dev/github.com/pgrahamdev/go-mp3-podcast/config"
+  },
+  {
+    "name": "github.com/qiniu/audio/mp3",
+    "status": "unresolved",
+    "imported_by_packages": 2,
+    "version_seen": "v0.2.1",
+    "license": "Apache-2.0",
+    "reason": "Decode(io.ReadSeeker) wraps github.com/hajimehoshi/go-mp3, so it would be another shared-family wrapper. No pinned container or control has been run.",
+    "source": "https://pkg.go.dev/github.com/qiniu/audio/mp3"
+  },
+  {
+    "name": "github.com/sa6mwa/mp3duration",
+    "status": "unresolved",
+    "imported_by_packages": 2,
+    "version_seen": "v0.0.0-...-0716b1a",
+    "license": "MIT",
+    "reason": "Read(*os.File) counts frames and sums durations with github.com/tcolgate/mp3, so it would be a shared-family wrapper of a selected path. No pinned container or control has been run.",
+    "source": "https://pkg.go.dev/github.com/sa6mwa/mp3duration"
+  },
+  {
+    "name": "github.com/vchimishuk/chub/mp3/id3tag",
+    "status": "excluded",
+    "imported_by_packages": 2,
+    "version_seen": "v0.0.0-...-bf6d460",
+    "license": "GPL-3.0",
+    "reason": "ID3 tag parser (libid3tag binding); no MPEG frame result.",
+    "source": "https://pkg.go.dev/github.com/vchimishuk/chub/mp3/id3tag"
+  },
+  {
+    "name": "github.com/sdobz/go-mpg123",
+    "status": "unresolved",
+    "imported_by_packages": 1,
+    "version_seen": "v0.0.0-...-070e20b",
+    "license": "LGPL-2.1",
+    "reason": "Open(path) is a thin cgo wrapper around system libmpg123, an MPEG decoder family not otherwise selected in Go. It has 1 Imported by package. A pinned libmpg123 build, controls and native feedback have not been set up.",
+    "source": "https://pkg.go.dev/github.com/sdobz/go-mpg123"
   }
 ]

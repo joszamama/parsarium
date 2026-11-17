@@ -1,0 +1,21 @@
+{
+  "package": "github.com/derat/mpeg",
+  "release": "v0.0.0-20230417205750-1ba0e56ec731",
+  "license": "BSD-3-Clause",
+  "go_module_sum": "h1:Bpf0HGJMtarpt5RFdSkoKOs/1MuYl1gj0psLNDn+0NE=",
+  "module_zip_sha256": "c297a41b19f8f195be9962ba1c037337c0318089cafda880a6865d4aa01c6273",
+  "api": "ReadFrameInfo(*os.File, int64) (*FrameInfo, error); (*FrameInfo).Size",
+  "environment": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66, go1.27.1 linux/arm64",
+  "observed": [
+    {"control": "controls/mp3/go-tone-44k-mono.mp3", "sha256": "494492685c8ac5bfdbcbefa217c18a0fd4d2a44e21831e15a3fe0b0861d96c36",
+     "output": {"sample_rate": 44100, "channels": 1, "frames": 11, "frame_bytes": 2298, "samples_per_frame": 1152, "bitrate": 64000},
+     "covered_blocks": 14, "repeats_identical": true},
+    {"control": "controls/mp3/go-tone-22k-stereo.mp3", "sha256": "e14721b65abfed142af10f51b43f29993a22003091eaa29086d2e36d7157761a",
+     "output": {"sample_rate": 22050, "channels": 2, "frames": 12, "frame_bytes": 1254, "samples_per_frame": 576, "bitrate": 32000},
+     "covered_blocks": 14, "repeats_identical": true}
+  ],
+  "oracle": "controls/mp3/check_controls.py header walk: same frame counts, bytes, rates, channels and bitrates",
+  "control_block_difference": 0,
+  "alternate_valid_pair_block_difference": 0,
+  "decision": "excluded by the runnability gate: both valid controls parse correctly, but the covered derat/mpeg Go cover blocks are identical on both controls, so the Go AFL++ bridge has no input-dependent parser feedback"
+}

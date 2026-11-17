@@ -1,0 +1,22 @@
+{
+  "package": "github.com/mattetti/audio/mp3",
+  "module": "github.com/mattetti/audio",
+  "release": "v0.0.0-20240411020228-c5379f9b5b61",
+  "license": "MIT",
+  "go_module_sum": "h1:db1I7R9KTRARpVXhyd4+cGecxutdJbpx11Gun98GP7U=",
+  "module_zip_sha256": "ad0c168c6db73a17d8891adefce9340142015318491536853713890f0056dafb",
+  "api": "New(io.Reader) *Decoder; (*Decoder).Next(*Frame); FrameHeader.Layer, ChannelMode, SampleRate, BitRate, Samples, Size",
+  "environment": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66, go1.27.1 linux/arm64",
+  "observed": [
+    {"control": "controls/mp3/go-tone-44k-mono.mp3", "sha256": "494492685c8ac5bfdbcbefa217c18a0fd4d2a44e21831e15a3fe0b0861d96c36",
+     "output": {"sample_rate": 44100, "channels": 1, "frames": 11, "frame_bytes": 2298, "samples_per_frame": 1152, "bitrate": 64000},
+     "covered_blocks": 38, "repeats_identical": true},
+    {"control": "controls/mp3/go-tone-22k-stereo.mp3", "sha256": "e14721b65abfed142af10f51b43f29993a22003091eaa29086d2e36d7157761a",
+     "output": {"sample_rate": 22050, "channels": 2, "frames": 12, "frame_bytes": 1254, "samples_per_frame": 576, "bitrate": 32000},
+     "covered_blocks": 38, "repeats_identical": true}
+  ],
+  "oracle": "controls/mp3/check_controls.py header walk: same frame counts, bytes, rates, channels and bitrates",
+  "control_block_difference": 0,
+  "alternate_valid_pair_block_difference": 0,
+  "decision": "excluded by the runnability gate: both valid controls parse correctly, but the covered mattetti/audio/mp3 Go cover blocks are identical on both controls, so the Go AFL++ bridge has no input-dependent parser feedback"
+}
