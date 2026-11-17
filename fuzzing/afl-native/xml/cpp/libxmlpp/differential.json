@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T11:07:31.391162+00:00",
+  "project": "xml/cpp/libxmlpp",
+  "pass": true,
+  "feedback_kind": "native_afl_clang_fast_parser_only_edges_with_libxml2_source_lines",
+  "probe": "projects/xml/cpp/libxmlpp/parser-probe.cpp",
+  "probe_scope": "DomParser::parse_memory_raw and get_root_node only; no DOM traversal, output summarization, or adapter postprocessing",
+  "base_project_receipt_sha256": "573298ddc7e97a4ea186b2b60b51a4963846201b2e3e8fb4e38ba229b191a581",
+  "overlay_receipt_sha256": "df983c23b7380087d604f49beb93f9f974aa219ac76ad3ad8aca5ce68227102f",
+  "base_image_id": "sha256:c14539f7430a30f31c65e327a09f1a825da5e3120fd35dd86fd04bcd67d3aa62",
+  "overlay_image_id": "sha256:35536d2321228f2bbe09fc2c9d432147dddb75d944fa500b8a0ed79ce77914dd",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_map_size": 65536,
+  "repeats_per_control": 2,
+  "first_control": "controls/xml/catalog-ns.xml",
+  "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "second_control": "controls/xml/order-default-ns.xml",
+  "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "first_parser_c_lines_stable": 1332,
+  "second_parser_c_lines_stable": 1509,
+  "parser_c_line_difference": 367,
+  "parser_c_line_repeat_variation": [
+    0,
+    3
+  ],
+  "first_afl_tuples": 1924,
+  "second_afl_tuples": 2099,
+  "afl_tuple_difference": 499,
+  "repeated_afl_feedback_identical": true,
+  "second_case_kind": "valid_control"
+}

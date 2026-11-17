@@ -1,7 +1,7 @@
 [
   {
     "name": "libxml++",
-    "status": "unresolved",
+    "status": "resolved_verified_selected",
     "debian_source": "libxml++2.6 / libxml++-5.0",
     "popcon_dev_package": {
       "libxml++2.6-dev": 266,
@@ -11,7 +11,8 @@
     "homebrew_install_on_request_365d": 461,
     "license": "LGPL-2.1-or-later",
     "family": "libxml2 (GNOME) parser",
-    "reason": "xmlpp::DomParser::parse_memory_raw(const unsigned char*, size_type). Lowest of the four on both metrics. C++ wrapper: parsing is done by the libxml2 C library, so it shares the libxml2 parser family with any libxml2 path. Not built.",
-    "source": "https://github.com/libxmlplusplus/libxmlplusplus"
+    "reason": "Verified libxml++ 5.6.1 DomParser::parse_memory_raw on two valid controls with pinned, instrumented libxml2 2.15.4. Rank 4 of four by summed Debian ABI-family dev installations; the matching ABI-5 dev package has seven. Shares the libxml2 C parser family; not an independent engine.",
+    "source": "https://github.com/libxmlplusplus/libxmlplusplus",
+    "verification": "projects/xml/cpp/libxmlpp/verification.json"
   }
 ]

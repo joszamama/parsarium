@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T08:16:33.916649+00:00",
-  "projects_total": 3,
-  "projects_passed": 3,
-  "differential_kind": "valid_namespace_controls; tinyxml2 uses the alternate no-processing-instruction second control",
-  "command": "for slug in xerces_c pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done",
+  "checked_at_utc": "2026-11-17T11:07:56.465100+00:00",
+  "projects_total": 4,
+  "projects_passed": 4,
+  "differential_kind": "valid namespace XML controls; tinyxml2 uses the alternate no-processing-instruction second control; libxml++ uses a parser-only probe with native libxml2 parser.c source lines",
+  "command": "for slug in xerces_c pugixml tinyxml2 libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/libxmlpp/verify-feedback.py",
   "results": [
     {
       "project": "xml/cpp/xerces_c",
@@ -60,6 +60,30 @@
       "source_line_difference": 120,
       "afl_tuple_difference": 139,
       "limit": "TinyXML2 rejects the processing instruction in the shared second control; this alternate valid control differs only by removing it."
+    },
+    {
+      "project": "xml/cpp/libxmlpp",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_parser_only_edges_with_libxml2_source_lines",
+      "overlay_receipt_sha256": "df983c23b7380087d604f49beb93f9f974aa219ac76ad3ad8aca5ce68227102f",
+      "differential_receipt_sha256": "663ea785d1b968522b28ad9b33b412bc1a6d21c6124dad1748a755cc49956a67",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeated_control_identical": true,
+      "control_source_lines": 1332,
+      "control_afl_tuples": 1924,
+      "differential_source_lines": 1509,
+      "differential_afl_tuples": 2099,
+      "source_line_difference": 367,
+      "afl_tuple_difference": 499,
+      "parser_c_line_repeat_variation": [
+        0,
+        3
+      ],
+      "probe": "projects/xml/cpp/libxmlpp/parser-probe.cpp",
+      "limit": "A few libxml2 parser.c line hits vary between identical process runs; reported line differences count only lines present in both runs of one control and absent in both runs of the other. AFL++ tuples repeat exactly."
     }
   ]
 }

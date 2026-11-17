@@ -164,5 +164,65 @@
     },
     "project": "projects/xml/cpp/tinyxml2",
     "not_verified": "Two valid namespace-aware controls are used; the alternate second control omits a processing instruction that TinyXML2 11.0.0 rejects. Processing instructions, DTD, XML 1.1, external entities, large inputs, and malformed input remain unverified."
+  },
+  {
+    "name": "libxml++",
+    "version": "5.6.1",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://github.com/libxmlplusplus/libxmlplusplus/blob/5.6.1/COPYING",
+    "input_api": "xmlpp::DomParser::parse_memory_raw(const unsigned char*, size_type) on an in-memory local byte buffer; namespace-aware DOM via libxml2",
+    "documentation": "https://github.com/libxmlplusplus/libxmlplusplus/blob/5.6.1/libxml%2B%2B/parsers/domparser.h",
+    "documentation_parser": "https://libxmlplusplus.github.io/libxmlplusplus/reference/html/classxmlpp_1_1DomParser.html",
+    "source": "https://github.com/libxmlplusplus/libxmlplusplus/releases/download/5.6.1/libxml++-5.6.1.tar.xz",
+    "adapter": "projects/xml/cpp/libxmlpp/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "XML 1.0 UTF-8 namespace-aware DOM from local byte buffer; non-validating, no DTD loading or entity substitution, network access disabled; attributes sorted per element",
+    "family": "libxml2 XML parser (shared underlying C parser)",
+    "family_note": "libxml++ is a C++ wrapper: DomParser::parse_memory_raw delegates to libxml2 xmlReadMemory and its native parser.c. This is a distinct API/package but not an independent parser engine; native libxml2 2.15.4 source is pinned and instrumented alongside libxml++ 5.6.1.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 275,
+      "dev_package_installs": {
+        "libxml++2.6-dev": 266,
+        "libxml++-5.0-dev": 7,
+        "libxml++-4.0-dev": 2
+      },
+      "abi_5_dev_package_installs": 7,
+      "popcon_source_inst": 79794,
+      "homebrew_install_on_request_365d": 461,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json",
+      "qualification": "275 is summed across three libxml++ ABI dev packages; the ABI-5 package matching the verified release family has 7 installations. Homebrew 461 refers to formula release 2.42.4, not 5.6.1."
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/cpp/libxmlpp",
+    "not_verified": "Two small valid namespace-aware UTF-8 controls do not establish complete XML 1.0, DTD/entity, other encoding or malformed-input behavior."
   }
 ]
