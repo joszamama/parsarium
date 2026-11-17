@@ -14,12 +14,12 @@
   {
     "name": "fastjson",
     "coordinate": "com.alibaba:fastjson",
-    "status": "unresolved",
-    "version_seen": "2.0.66",
+    "status": "verified",
+    "version_seen": "1.2.83",
     "summed_direct_dependent_count": 10021,
     "max_release_direct_dependent_count": 1494,
     "default_release_direct_dependent_count": 48,
-    "reason": "fastjson 2.x artifact is a compatibility facade over the selected fastjson2 parser engine; its separate API path has not passed the control and feedback gates. The 10,021 summed metric also includes fastjson 1.x releases with an older engine.",
+    "reason": "Pinned 1.2.83 has its own DefaultJSONParser and JSONLexer, passed both valid nested controls and source-derived AFL feedback. The same coordinate at 2.x is a fastjson2 compatibility facade; the summed metric spans both engine generations.",
     "source": "https://central.sonatype.com/artifact/com.alibaba/fastjson"
   },
   {
