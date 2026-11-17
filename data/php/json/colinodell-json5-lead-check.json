@@ -1,0 +1,506 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T13:18:15.837338+00:00",
+  "status": "excluded_shared_ext_json_on_valid_json",
+  "package": "colinodell/json5",
+  "release": "v3.0.0",
+  "license": "MIT",
+  "license_evidence": "https://github.com/colinodell/json5/blob/5724d21bc5c910c2560af1b8915f0cc0163579c8/LICENSE.md",
+  "source_url": "https://github.com/colinodell/json5/tree/5724d21bc5c910c2560af1b8915f0cc0163579c8",
+  "documentation": "https://github.com/colinodell/json5/blob/5724d21bc5c910c2560af1b8915f0cc0163579c8/README.md",
+  "api": "ColinODell\\Json5\\Json5Decoder::decode(string $json) and the global json5_decode(string $json) drop-in over local JSON text",
+  "composer_reference": "5724d21bc5c910c2560af1b8915f0cc0163579c8",
+  "composer_lock_sha256": "4194494b92a3a7a1ea3550ac22fe5eae56ec11267c1015af79b4d187c6f1d8fb",
+  "archive_url": "https://codeload.github.com/colinodell/json5/legacy.zip/5724d21bc5c910c2560af1b8915f0cc0163579c8",
+  "archive_sha256": "919081aebb1a403327b833331d09b56a51ee90ccaee0f884ecd19427f5dfc858",
+  "installed_source_matches_archive": true,
+  "popularity": {
+    "metric": "Packagist total downloads",
+    "value": 32796867,
+    "source": "https://packagist.org/packages/colinodell/json5",
+    "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+    "snapshot": "data/php/json/registry-snapshot.json"
+  },
+  "image_id": "sha256:c2d0138eda270260fb846a0a309203bf17118fa22903a705aee7e33db7df05e2",
+  "platform": "linux/arm64",
+  "php": "8.5.4",
+  "xdebug": "3.5.0",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "probe_file_sha256": {
+    "Dockerfile": "353234947d8c187f65695f68800e778c12fda224e8632c14b5f8a6d1d70dc4fb",
+    "composer.json": "b25e6c7027f527f1092c8df5c6fd665aaae7f80090953484a15dd015a5173945",
+    "composer.lock": "4194494b92a3a7a1ea3550ac22fe5eae56ec11267c1015af79b4d187c6f1d8fb",
+    "probe.php": "64da864d68b44318c1b0df38a7ed591f4dc9cfb2a882862e5f8bf3224467d602"
+  },
+  "control_sha256": {
+    "nested-object.json": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+    "nested-array.json": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762"
+  },
+  "observed": [
+    {
+      "control": "nested-object.json",
+      "api": "Json5Decoder::decode",
+      "tree": {
+        "type": "object",
+        "members": [
+          [
+            "name",
+            {
+              "type": "string",
+              "value": "parsarium"
+            }
+          ],
+          [
+            "version",
+            {
+              "type": "integer",
+              "value": "1"
+            }
+          ],
+          [
+            "ratio",
+            {
+              "type": "float",
+              "value": -2.5
+            }
+          ],
+          [
+            "enabled",
+            {
+              "type": "boolean",
+              "value": true
+            }
+          ],
+          [
+            "missing",
+            {
+              "type": "null"
+            }
+          ],
+          [
+            "tags",
+            {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string",
+                  "value": "json"
+                },
+                {
+                  "type": "string",
+                  "value": "go"
+                },
+                {
+                  "type": "string",
+                  "value": "rfc8259"
+                }
+              ]
+            }
+          ],
+          [
+            "nested",
+            {
+              "type": "object",
+              "members": [
+                [
+                  "level",
+                  {
+                    "type": "integer",
+                    "value": "2"
+                  }
+                ],
+                [
+                  "items",
+                  {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object",
+                        "members": [
+                          [
+                            "id",
+                            {
+                              "type": "integer",
+                              "value": "1"
+                            }
+                          ],
+                          [
+                            "ok",
+                            {
+                              "type": "boolean",
+                              "value": false
+                            }
+                          ]
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "members": [
+                          [
+                            "id",
+                            {
+                              "type": "integer",
+                              "value": "2"
+                            }
+                          ],
+                          [
+                            "text",
+                            {
+                              "type": "string",
+                              "value": "café \"quoted\""
+                            }
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                [
+                  "empty",
+                  {
+                    "type": "object",
+                    "members": []
+                  }
+                ],
+                [
+                  "list",
+                  {
+                    "type": "array",
+                    "items": []
+                  }
+                ]
+              ]
+            }
+          ]
+        ]
+      },
+      "identical_to_json_decode": true,
+      "package_lines_executed": {
+        "src/Json5Decoder.php": [
+          56,
+          57,
+          58,
+          593
+        ]
+      }
+    },
+    {
+      "control": "nested-object.json",
+      "api": "json5_decode",
+      "tree": {
+        "type": "object",
+        "members": [
+          [
+            "name",
+            {
+              "type": "string",
+              "value": "parsarium"
+            }
+          ],
+          [
+            "version",
+            {
+              "type": "integer",
+              "value": "1"
+            }
+          ],
+          [
+            "ratio",
+            {
+              "type": "float",
+              "value": -2.5
+            }
+          ],
+          [
+            "enabled",
+            {
+              "type": "boolean",
+              "value": true
+            }
+          ],
+          [
+            "missing",
+            {
+              "type": "null"
+            }
+          ],
+          [
+            "tags",
+            {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string",
+                  "value": "json"
+                },
+                {
+                  "type": "string",
+                  "value": "go"
+                },
+                {
+                  "type": "string",
+                  "value": "rfc8259"
+                }
+              ]
+            }
+          ],
+          [
+            "nested",
+            {
+              "type": "object",
+              "members": [
+                [
+                  "level",
+                  {
+                    "type": "integer",
+                    "value": "2"
+                  }
+                ],
+                [
+                  "items",
+                  {
+                    "type": "array",
+                    "items": [
+                      {
+                        "type": "object",
+                        "members": [
+                          [
+                            "id",
+                            {
+                              "type": "integer",
+                              "value": "1"
+                            }
+                          ],
+                          [
+                            "ok",
+                            {
+                              "type": "boolean",
+                              "value": false
+                            }
+                          ]
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "members": [
+                          [
+                            "id",
+                            {
+                              "type": "integer",
+                              "value": "2"
+                            }
+                          ],
+                          [
+                            "text",
+                            {
+                              "type": "string",
+                              "value": "café \"quoted\""
+                            }
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                [
+                  "empty",
+                  {
+                    "type": "object",
+                    "members": []
+                  }
+                ],
+                [
+                  "list",
+                  {
+                    "type": "array",
+                    "items": []
+                  }
+                ]
+              ]
+            }
+          ]
+        ]
+      },
+      "identical_to_json_decode": true,
+      "package_lines_executed": {
+        "src/global.php": [
+          20
+        ],
+        "src/Json5Decoder.php": [
+          56,
+          57,
+          58
+        ]
+      }
+    },
+    {
+      "control": "nested-array.json",
+      "api": "Json5Decoder::decode",
+      "tree": {
+        "type": "array",
+        "items": [
+          {
+            "type": "integer",
+            "value": "1"
+          },
+          {
+            "type": "float",
+            "value": 0.25
+          },
+          {
+            "type": "string",
+            "value": "two"
+          },
+          {
+            "type": "array",
+            "items": [
+              {
+                "type": "boolean",
+                "value": true
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "boolean",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "members": [
+              [
+                "k",
+                {
+                  "type": "array",
+                  "items": []
+                }
+              ],
+              [
+                "n",
+                {
+                  "type": "object",
+                  "members": [
+                    [
+                      "deep",
+                      {
+                        "type": "string",
+                        "value": "A"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      "identical_to_json_decode": true,
+      "package_lines_executed": {
+        "src/Json5Decoder.php": [
+          56,
+          57,
+          58
+        ]
+      }
+    },
+    {
+      "control": "nested-array.json",
+      "api": "json5_decode",
+      "tree": {
+        "type": "array",
+        "items": [
+          {
+            "type": "integer",
+            "value": "1"
+          },
+          {
+            "type": "float",
+            "value": 0.25
+          },
+          {
+            "type": "string",
+            "value": "two"
+          },
+          {
+            "type": "array",
+            "items": [
+              {
+                "type": "boolean",
+                "value": true
+              },
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "boolean",
+                    "value": false
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "members": [
+              [
+                "k",
+                {
+                  "type": "array",
+                  "items": []
+                }
+              ],
+              [
+                "n",
+                {
+                  "type": "object",
+                  "members": [
+                    [
+                      "deep",
+                      {
+                        "type": "string",
+                        "value": "A"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      "identical_to_json_decode": true,
+      "package_lines_executed": {
+        "src/global.php": [
+          20
+        ],
+        "src/Json5Decoder.php": [
+          56,
+          57,
+          58
+        ]
+      }
+    }
+  ],
+  "oracle": "Python json.loads with ordered, duplicate-checked members, independently type-tagged",
+  "type_tagged_trees_match_oracle": true,
+  "own_parser_lines": "src/Json5Decoder.php 29-37 (constructor), 63-592 (JSON5 fallback and private parser methods)",
+  "own_parser_lines_executed": 0,
+  "source_reason": "Json5Decoder::decode calls \\json_decode first and returns its result whenever json_last_error() is JSON_ERROR_NONE (README: tries PHP's native function first, then falls back to JSON5). The constructor and parser methods are private, so no documented API reaches the package's own JSON5 parser for valid RFC 8259 JSON. Xdebug confirms only the delegation lines 56-58 ran on both controls.",
+  "parser_family": "PHP ext/json json_decode (shared with the verified stdlib_json_decode runtime path) on valid JSON; own JSON5 recursive-descent parser only after ext/json rejects the input",
+  "docker_source_coverage": "run; zero own-parser lines on both valid controls",
+  "afl_feedback": "not_run: a bridge scoped to package parser lines has no parser features on valid JSON; ext/json feedback is already covered by json/php/stdlib_json_decode",
+  "adapter": "lead-probes/php/json/colinodell_json5/probe.php"
+}

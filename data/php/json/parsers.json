@@ -218,5 +218,175 @@
     },
     "project": "projects/json/php/salsify_json_streaming_parser",
     "not_verified": "Two valid nested object/array controls were run with exact structural summaries. Scalar roots (rejected by the parser), concatenated documents (rejected by the harness), byte-order marks, custom line endings and buffer sizes, the bundled listeners, large streaming inputs, duplicate keys and malformed input remain unverified."
+  },
+  {
+    "name": "pcrov/jsonreader",
+    "version": "1.0.4",
+    "license": "MIT",
+    "license_evidence": "https://github.com/pcrov/JsonReader/blob/4d8483a62acb4595886a3ffa20bbe38a602f0544/LICENSE",
+    "documentation": "https://github.com/pcrov/JsonReader/wiki/JsonReader-API/6a5d9e3d004cde30dbcb9acd3ad69d80fb33aec6",
+    "source": "https://github.com/pcrov/JsonReader/tree/4d8483a62acb4595886a3ffa20bbe38a602f0544",
+    "input_api": "new pcrov\\JsonReader\\JsonReader() then json(string $json) over local bytes, pulled with read()/type()/name()/value()/depth(); harness builds a type-tagged tree from OBJECT/ARRAY/scalar nodes. open(string $uri) on the local control file and stream(resource) are cross-checked for the same tree",
+    "adapter": "projects/json/php/pcrov_jsonreader/harness.php",
+    "composer_lock": "projects/json/php/pcrov_jsonreader/composer.lock",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "type": "object",
+      "members": {
+        "enabled": {
+          "type": "boolean",
+          "value": true
+        },
+        "missing": {
+          "type": "null"
+        },
+        "name": {
+          "type": "string",
+          "value": "parsarium"
+        },
+        "nested": {
+          "type": "object",
+          "members": {
+            "empty": {
+              "type": "object",
+              "members": {}
+            },
+            "items": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "number",
+                      "value": 1
+                    },
+                    "ok": {
+                      "type": "boolean",
+                      "value": false
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "members": {
+                    "id": {
+                      "type": "number",
+                      "value": 2
+                    },
+                    "text": {
+                      "type": "string",
+                      "value": "café \"quoted\""
+                    }
+                  }
+                }
+              ]
+            },
+            "level": {
+              "type": "number",
+              "value": 2
+            },
+            "list": {
+              "type": "array",
+              "items": []
+            }
+          }
+        },
+        "ratio": {
+          "type": "number",
+          "value": -2.5
+        },
+        "tags": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string",
+              "value": "json"
+            },
+            {
+              "type": "string",
+              "value": "go"
+            },
+            {
+              "type": "string",
+              "value": "rfc8259"
+            }
+          ]
+        },
+        "version": {
+          "type": "number",
+          "value": 1
+        }
+      }
+    },
+    "differential_control": "controls/json/nested-array.json",
+    "differential_expected_output": {
+      "type": "array",
+      "items": [
+        {
+          "type": "number",
+          "value": 1
+        },
+        {
+          "type": "number",
+          "value": 0.25
+        },
+        {
+          "type": "string",
+          "value": "two"
+        },
+        {
+          "type": "array",
+          "items": [
+            {
+              "type": "boolean",
+              "value": true
+            },
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": [
+                {
+                  "type": "boolean",
+                  "value": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "members": {
+            "k": {
+              "type": "array",
+              "items": []
+            },
+            "n": {
+              "type": "object",
+              "members": {
+                "deep": {
+                  "type": "string",
+                  "value": "A"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "scope": "One complete UTF-8 JSON text from local bytes passed to documented JsonReader::json(string) and pulled with read()/type()/name()/value()/depth(); harness builds an exact type-tagged tree from OBJECT/ARRAY/scalar nodes. open(local file) and stream(resource) are cross-checked to yield the same tree.",
+    "family": "pcrov JsonReader Lexer and JsonParser pull state machine",
+    "family_note": "Lexer.php tokenizes bytes itself (literals, numbers, strings, escapes and \\u surrogate pairs via IntlChar); JsonParser.php is a goto state machine that emits (type, name, value, depth) nodes and rejects trailing tokens after the root. JsonReader::value() casts numbers with unary plus. The pinned package source contains no json_decode call; UTF-8 validation is delegated to the pcrov/unicode dependency (outside coverage scope). value() on containers returns objects as PHP arrays, so the harness builds objects and arrays from node types instead. Distinct from seld/jsonlint, Laminas Decoder, JSON Machine, salsify and ext/json.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 1520757,
+      "source": "https://packagist.org/packages/pcrov/jsonreader",
+      "captured_at_utc": "2026-11-17T03:23:41.796496+00:00",
+      "snapshot": "data/php/json/registry-snapshot.json"
+    },
+    "project": "projects/json/php/pcrov_jsonreader",
+    "not_verified": "Two valid nested object/array controls were run with exact type-tagged trees through json(); open() on the local control file and stream() on its file handle were cross-checked outside coverage. psr7Stream(), remote URIs, FLOATS_AS_STRINGS, value() tree building on containers, next()/name-targeted skipping, scalar roots, duplicate keys (the harness rejects them), empty or NUL member names, integers beyond PHP_INT_MAX, byte-order marks, non-UTF-8 input, large streaming inputs and malformed input remain unverified. pcrov/unicode UTF-8 validation is outside the coverage and AFL++ scope."
   }
 ]
