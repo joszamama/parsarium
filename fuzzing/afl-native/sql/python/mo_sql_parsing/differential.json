@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T20:51:16.326171+00:00",
+  "project": "sql/python/mo_sql_parsing",
+  "pass": true,
+  "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "214410d2a872adff136dc1ee125b733dbb958e5f2ef58ae4a562927d89b9d9ae",
+  "overlay_receipt_sha256": "177c7fac377ab2c24e1ddbfaf8cd18934a47333b39d75c01c46849028ddf90ee",
+  "base_image_id": "sha256:c03e752d150641eac1791c123a820c11d42aa8c092897a45aabef70926780d3d",
+  "overlay_image_id": "sha256:be06bf58a580b80ccdb0dd24711f6fba47022f29bd0a437c7bf6d5b97ccf652a",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 2715,
+  "second_afl_tuples": 2558,
+  "afl_tuple_difference": 207,
+  "first_parser_features": 2773,
+  "second_parser_features": 2612,
+  "parser_feature_difference": 211,
+  "first_only_features_by_file": {
+    "parsing/enhancement.py": 1,
+    "parsing/expressions.py": 41,
+    "parsing/infix.py": 39,
+    "parsing/results.py": 14,
+    "parsing/utils.py": 3,
+    "sql_parsing/keywords.py": 1,
+    "sql_parsing/utils.py": 87
+  },
+  "second_only_features_by_file": {
+    "future/__init__.py": 1,
+    "sql_parsing/utils.py": 24
+  }
+}

@@ -536,5 +536,115 @@
         }
       ]
     }
+  },
+  {
+    "name": "mo-sql-parsing",
+    "version": "11.699.26234",
+    "license": "MPL-2.0",
+    "license_evidence": "LICENSE in the pinned sdist (SHA-256 60222c28c1a7f6a92c7df98e5c5f4459e624e6e285e0b9b94467af5f6ab3343d, Mozilla Public License 2.0); the mo-parsing engine wheel carries an MIT LICENSE",
+    "input_api": "mo_sql_parsing.parse(local SQL text) -> JSON parse tree",
+    "documentation": "https://github.com/klahnakoski/mo-sql-parsing/blob/master/README.md#parsing-sql",
+    "source": "https://files.pythonhosted.org/packages/fd/ad/d4caf4b253ffe74021cbbe5488ceb3e66863f3581b5bc509e90537d5fd1c/mo_sql_parsing-11.699.26234.tar.gz",
+    "source_sha256": "34cae547af8c07ea33b07cc351aaacab44d8c54350351aca23ea23d9c86037f2",
+    "wheel_sha256": "b6870253593670074e91a2656b5558983befb22f77cee15fd4b26ec4ad031220",
+    "dependencies": [
+      "mo-parsing 9.3.26234",
+      "mo-dots 10.688.26234",
+      "mo-future 7.687.26234",
+      "mo-imports 7.687.26234"
+    ],
+    "dialect": "common parser (mo_sql_parsing.parse)",
+    "scope": "One SQL statement from local text with the generic parse entry point; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. The MySQL, SQL Server and BigQuery entry points are untested.",
+    "family": "mo-sql-parsing grammar on the mo-parsing engine",
+    "family_note": "mo_sql_parsing.parse runs the SQL grammar defined in mo_sql_parsing/sql_parser.py on the mo-parsing combinator engine (pyparsing-derived, same author) and returns a JSON-like tree. The adapter reads select/from/where/groupby/orderby or insert/values keys; functions are expression keys that are not in the library's operator precedence table, string literals are {\"literal\": text} nodes in expressions and plain strings in INSERT value rows, numbers are Python ints and floats whose text equals the source for these controls. moz-sql-parser is the superseded name of this package and is not a separate path. Independent of sqlparse, sqlglot, sqlfluff, libpg_query and sqlparser-rs.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 103062,
+      "source": "https://pypistats.org/api/packages/mo-sql-parsing/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Package-level downloads; the superseded moz-sql-parser name (106,687) is counted separately and not combined."
+    },
+    "project": "projects/sql/python/mo_sql_parsing",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

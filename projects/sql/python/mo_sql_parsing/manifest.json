@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "mo-sql-parsing",
+  "release": "11.699.26234",
+  "catalog_parser": "data/python/sql/parsers.json",
+  "source_lock": "projects/sql/python/mo_sql_parsing/runtime-requirements.lock",
+  "source_sha256": "b6870253593670074e91a2656b5558983befb22f77cee15fd4b26ec4ad031220",
+  "sdist_sha256": "34cae547af8c07ea33b07cc351aaacab44d8c54350351aca23ea23d9c86037f2",
+  "build_note": "Installed from the pinned pure-Python py3-none-any wheel and its four pinned dependency wheels by hash (pip --require-hashes, then pip check); the image checks that the wheel mo_sql_parsing/ package is byte-identical to the pinned sdist and that mo_sql_parsing/sql_parser.py and the MPL-2.0 LICENSE match recorded SHA-256 values.",
+  "dependencies_note": "mo-parsing 9.3.26234 (MIT) is the parsing engine that runs the mo-sql-parsing grammar; mo-dots 10.688.26234, mo-future 7.687.26234 and mo-imports 7.687.26234 are its pinned helper libraries from the same author. The fuzz entry point is an external one-file Python bridge (linux/arm64 has no Atheris 3.1.0 cp314 wheel); the parser-line AFL++ bridge runs natively on arm64 to stay within afl-showmap's 30 s per-run limit.",
+  "parser_family": "mo-sql-parsing SQL grammar (mo_sql_parsing/sql_parser.py, keywords.py, types.py) on the mo-parsing combinator engine (a pyparsing-derived library by the same author); independent of sqlparse, sqlglot, sqlfluff, libpg_query and sqlparser-rs",
+  "dialect": "mo-sql-parsing common parser (mo_sql_parsing.parse, the generic entry point; parse_mysql, parse_sqlserver and parse_bigquery are not used)",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/opt/venv/bin/python",
+    "/work/replay.py",
+    "/input/case"
+  ],
+  "api": "mo_sql_parsing.parse(local SQL text decoded from UTF-8 bytes) -> JSON parse tree (select/from/where/groupby/orderby or insert/values mappings); the harness walks those keys, {operator_or_function: arguments} expressions (operators identified by mo_sql_parsing.keywords.precedence), {\"literal\": text} strings and numeric values",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the mo_sql_parsing and mo_parsing package sources during valid-control replay; the AFL++ bridge maps the same traced lines",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/mo_",
+  "format_specific_coverage_file_suffix": "/mo_sql_parsing/sql_parser.py",
+  "scope": "One SQL statement from local text via mo_sql_parsing.parse; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. The dialect-specific entry points, the formatter and NULL/call customisation options are untested."
+}

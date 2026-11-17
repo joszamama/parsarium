@@ -463,8 +463,100 @@
       "parser_feature_difference": 1462,
       "project_receipt": "projects/sql/python/sqloxide/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/python/sqloxide/differential.json"
+    },
+    {
+      "package": "mo-sql-parsing",
+      "version": "11.699.26234",
+      "pass": true,
+      "input_api": "mo_sql_parsing.parse(local SQL text) -> JSON parse tree",
+      "dialect": "common parser (mo_sql_parsing.parse)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "mo-sql-parsing SQL grammar (mo_sql_parsing/sql_parser.py, keywords.py, types.py) on the mo-parsing combinator engine (a pyparsing-derived library by the same author); independent of sqlparse, sqlglot, sqlfluff, libpg_query and sqlparser-rs",
+      "parser_source_files": 17,
+      "parser_source_lines_covered": 2743,
+      "afl_tuple_difference": 207,
+      "parser_feature_difference": 211,
+      "project_receipt": "projects/sql/python/mo_sql_parsing/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/python/mo_sql_parsing/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:51:18.001660+00:00"
+  "checked_at_utc": "2026-11-17T20:51:45.175564+00:00"
 }

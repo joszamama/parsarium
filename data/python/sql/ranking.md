@@ -1,6 +1,6 @@
 # Python × SQL: pilot ranking
 
-Five third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
+Six third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
 
 ## Primary within-cell adoption metric
 
@@ -13,8 +13,9 @@ PyPI Stats last_month downloads (mirrors excluded), captured 2026-11-17 ([snapsh
 | 3 | [sqlfluff](https://docs.sqlfluff.com/en/4.5.0/reference/api.html#sqlfluff.parse) | 4.5.0 | 11,606,805 | `sqlfluff.parse(local SQL text, dialect="ansi") -> parse-tree record`; dialect: ansi | sqlfluff lexer and dialect grammar matcher |
 | 4 | [pglast](https://pglast.readthedocs.io/en/v8/parser.html#pglast.parser.parse_sql) | 8.8 | 10,961,367 | `pglast.parse_sql(local SQL text) -> tuple of pglast.ast.RawStmt nodes`; dialect: PostgreSQL 18 (libpg_query raw parser) | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | 5 | [sqloxide](https://pypi.org/project/sqloxide/0.61.1/) | 0.61.1 | 511,801 | `sqloxide.parse_sql(local SQL text, dialect="generic") -> list of statement ASTs (Python dicts)`; dialect: generic (sqlparser GenericDialect) | sqlparser-rs |
+| 6 | [mo-sql-parsing](https://github.com/klahnakoski/mo-sql-parsing/blob/master/README.md#parsing-sql) | 11.699.26234 | 103,062 | `mo_sql_parsing.parse(local SQL text) -> JSON parse tree`; dialect: common parser (mo_sql_parsing.parse) | mo-sql-parsing grammar on the mo-parsing engine |
 
-Receipts: [sqlparse](../../../projects/sql/python/sqlparse/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlparse/differential.json), [sqlglot](../../../projects/sql/python/sqlglot/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlglot/differential.json), [sqlfluff](../../../projects/sql/python/sqlfluff/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlfluff/differential.json), [pglast](../../../projects/sql/python/pglast/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/pglast/differential.json), [sqloxide](../../../projects/sql/python/sqloxide/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqloxide/differential.json).
+Receipts: [sqlparse](../../../projects/sql/python/sqlparse/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlparse/differential.json), [sqlglot](../../../projects/sql/python/sqlglot/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlglot/differential.json), [sqlfluff](../../../projects/sql/python/sqlfluff/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlfluff/differential.json), [pglast](../../../projects/sql/python/pglast/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/pglast/differential.json), [sqloxide](../../../projects/sql/python/sqloxide/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqloxide/differential.json), [mo-sql-parsing](../../../projects/sql/python/mo_sql_parsing/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/mo_sql_parsing/differential.json).
 
 ## Leads by the same metric
 
@@ -29,7 +30,7 @@ Receipts: [sqlparse](../../../projects/sql/python/sqlparse/verification.json) an
 | sql-formatter | 665,038 | excluded | — |
 | sqloxide | 511,801 | selected | sqlparser-rs |
 | moz-sql-parser | 106,687 | excluded | mo-sql-parsing |
-| mo-sql-parsing | 103,062 | unresolved | mo-parsing grammar |
+| mo-sql-parsing | 103,062 | selected | mo-sql-parsing grammar on the mo-parsing engine |
 | simple-ddl-parser | 79,894 | excluded | — |
 | psqlparse | 8,870 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | sqltree | 4,432 | unresolved | sqltree |
