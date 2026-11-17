@@ -463,8 +463,100 @@
       "parser_feature_difference": 1915,
       "project_receipt": "projects/sql/java/jsqlparser/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/java/jsqlparser/differential.json"
+    },
+    {
+      "package": "io.trino:trino-parser",
+      "version": "484",
+      "pass": true,
+      "input_api": "new SqlParser().createStatement(local SQL text without its terminating semicolon) -> Statement",
+      "dialect": "Trino SQL (the only grammar; no parsing options)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "Presto/Trino ANTLR4 SqlBase grammar (Trino branch)",
+      "parser_source_files": 43,
+      "parser_source_lines_covered": 1879,
+      "afl_tuple_difference": 1325,
+      "parser_feature_difference": 1365,
+      "project_receipt": "projects/sql/java/trino_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/java/trino_parser/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:11:19.751195+00:00"
+  "checked_at_utc": "2026-11-17T20:11:52.955416+00:00"
 }

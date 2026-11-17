@@ -552,5 +552,119 @@
         }
       ]
     }
+  },
+  {
+    "name": "io.trino:trino-parser",
+    "version": "484",
+    "license": "Apache-2.0",
+    "license_evidence": "Apache-2.0 (trino-root-484.pom <license><name>Apache-2.0)",
+    "input_api": "new SqlParser().createStatement(local SQL text without its terminating semicolon) -> Statement",
+    "documentation": "https://javadoc.io/doc/io.trino/trino-parser/484/io/trino/sql/parser/SqlParser.html",
+    "source": "https://repo.maven.apache.org/maven2/io/trino/trino-parser/484/trino-parser-484-sources.jar",
+    "source_sha256": "fb48151704697abceefd803651ae54a4da713d905420ebc4500151081e06eb36",
+    "jar_sha256": "aa221f5100092f54cfee2c6db59a5b67b83b003e4da88b587cafb120b4829de8",
+    "dependencies": [
+      "com.google.errorprone:error_prone_annotations 2.50.0",
+      "com.google.guava:failureaccess 1.0.3",
+      "com.google.guava:guava 33.7.2-jre",
+      "com.google.j2objc:j2objc-annotations 3.1",
+      "io.trino:trino-grammar 484",
+      "jakarta.annotation:jakarta.annotation-api 3.0.0",
+      "org.antlr:antlr4-runtime 4.13.2",
+      "org.jspecify:jspecify 1.0.1"
+    ],
+    "dialect": "Trino SQL (the only grammar; no parsing options)",
+    "scope": "One SQL statement from local bytes decoded as strict UTF-8, with one terminating semicolon removed by the adapter; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. statement_count is 1 by the single-statement API contract. Trino-only syntax is untested.",
+    "family": "Presto/Trino ANTLR4 SqlBase grammar (Trino branch)",
+    "family_note": "SqlParser.createStatement runs the ANTLR4-generated SqlBaseLexer and SqlBaseParser shipped in io.trino:trino-grammar and converts the parse tree with trino-parser's AstBuilder into io.trino.sql.tree nodes. Trino forked from Presto in 2019 (PrestoSQL, renamed Trino in 2020); its SqlBase.g4 and AstBuilder descend from the same sources as com.facebook.presto:presto-parser but have diverged (separate grammar module, different node APIs such as LongLiteral.getValue returning source text). The adapter strips one terminating semicolon because the grammar's singleStatement rule takes no terminator and trino-parser has no public splitter (the CLI's StatementSplitter is in trino-cli). Independent of jOOQ, Druid, Calcite and JSqlParser.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over every Maven release",
+      "value": 525,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/io.trino%3Atrino-parser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/java/sql/registry-snapshot.json",
+      "limitation": "Summed over 132 releases; the newest releases have few direct dependents."
+    },
+    "project": "projects/sql/java/trino_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]
