@@ -45,14 +45,15 @@
   },
   {
     "name": "mp3-duration",
-    "status": "unresolved",
-    "lead_kind": "duration_only",
+    "status": "promoted_to_verified",
+    "lead_kind": "own_frame_header_scan_duration_only",
     "version_seen": "1.1.0",
     "license": "MIT",
     "npm_downloads_30d": 43261,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/mp3-duration",
-    "reason": "Own frame-header scan that returns only a duration number; no frame metadata API. Verified in mp3_id3v2/javascript for duration scope.",
-    "source": "https://www.npmjs.com/package/mp3-duration"
+    "reason": "Pinned 1.1.0 documented mp3Duration(Buffer,false) walks MPEG frame headers to EOF and sums frame samples/sample rate, returning seconds rounded to milliseconds. Both untagged controls return 287 ms and 313 ms, exactly matching independent frame-count/sample-rate duration. Docker V8 covers its own index.js parser source. Opt-in AFL++ feedback hashes capped parser-function source-range hit counts (11 versus 12 frame calls), with three stable fresh-process repeats per control and zero parser features on a no-parse module load. This is input-length-sensitive execution feedback, not new branch or line coverage. The same package/release is verified in the MP3-with-ID3v2 cell for duration scope; no frame metadata or audio decode is exposed.",
+    "source": "https://www.npmjs.com/package/mp3-duration",
+    "verified_evidence": "projects/mp3/javascript/mp3_duration/verification.json"
   },
   {
     "name": "get-mp3-duration",

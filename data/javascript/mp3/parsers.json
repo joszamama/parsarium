@@ -166,6 +166,31 @@
     "feedback_differential": "data/javascript/mp3/codec_parser-feedback-differential.json"
   },
   {
+    "name": "mp3-duration",
+    "version": "1.1.0",
+    "license": "MIT",
+    "license_evidence": "https://registry.npmjs.org/mp3-duration/-/mp3-duration-1.1.0.tgz",
+    "npm_integrity": "sha512-5zO6ZLEHEPb1Da5p+et7zsMQ0pt0x2YCZLyUPayBqLMhLPQt3fFAXxvCyznZZQnhXCeIX99tXhvQocm8+VmpvA==",
+    "source_sha256": "9e7e9860c16e3ed7693d64a4b7a9ce0f5b7ef9c43e3fc0af7f543142add4629e",
+    "input_api": "mp3Duration(Buffer, false) Promise on local file bytes; false disables the CBR size estimate so index.js scans frame headers to EOF",
+    "documentation": "https://github.com/ddsol/mp3-duration/blob/20bda6406e92ad200f5774d3a88ae2d9dc1e2cbc/README.md",
+    "source": "https://github.com/ddsol/mp3-duration/tree/20bda6406e92ad200f5774d3a88ae2d9dc1e2cbc",
+    "scope": "Frame-derived duration in milliseconds from an untagged MPEG Layer III stream; no frame metadata, audio decode or ID3 tags exposed",
+    "family": "mp3-duration JavaScript MPEG frame-header scanner",
+    "family_note": "Own index.js parses MPEG version/layer, bitrate, sample rate, padding and frame length, advances by frameSize and sums samples/sampleRate. Bluebird and bluebird-co provide asynchronous control flow, not audio parsing. Same package/release is selected in mp3_id3v2/javascript for duration from tagged MP3; this plain-MP3 path exercises untagged frame walking.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "duration_ms": 287
+    },
+    "metric": {
+      "name": "npm downloads 2026-10-17 to 2026-11-15 (30 days)",
+      "value": 43261,
+      "source": "data/javascript/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/javascript/mp3_duration",
+    "verification_note": "Both untagged valid controls return 287 and 313 duration_ms, matching the independent frame-header walker (11 MPEG-1 frames of 1152 samples/44100 Hz and 12 MPEG-2 frames of 576 samples/22050 Hz, rounded to milliseconds). The package scans headers through index.js with cbrEstimate=false rather than estimating from file length; it exposes no frame metadata or audio decode. Docker V8 covers 156 own index.js lines. Opt-in AFL++ feedback uses only parseFrameHeader and frameSize range hit counts, capped at 255, giving 11 versus 12 calls with three stable repeats and zero parser features on module-load-only baseline. This tracks frame count and possibly input length; it is not new line or branch coverage. The same release is separately verified in mp3_id3v2/javascript for duration scope. Two short CBR controls do not establish VBR, free-format or other MPEG layer support; no malformed/resource-use/campaign tests were run."
+  },
+  {
     "name": "mp3-parser",
     "version": "0.3.0",
     "license": "MIT",
