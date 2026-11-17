@@ -10,6 +10,7 @@
 - [sdl2_image / C](c/sdl2_image/README.md)
 - [sdl3_image / C](c/sdl3_image/README.md)
 - [imagemagick / C++](cpp/imagemagick/README.md)
+- [juce / C++](cpp/juce/README.md)
 - [libvips / C++](cpp/libvips/README.md)
 - [lunasvg / C++](cpp/lunasvg/README.md)
 - [qtsvg / C++](cpp/qtsvg/README.md)

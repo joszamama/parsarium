@@ -32,6 +32,11 @@
 
 wxPNMHandler reads ASCII PNM through wxImage; pinned 3.3.4 core and base libraries are checked by SHA-256. The project handles many other formats, so repository stars are only a broad adoption proxy.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_pnm/cpp/wxwidgets/README.md)
+
+```sh
+python3 parsarium.py build ascii_pnm cpp wxwidgets
+python3 parsarium.py run ascii_pnm cpp wxwidgets controls/ascii_pnm/red-green.ppm
+```

@@ -23,6 +23,7 @@
 - [openimageio / C++](cpp/openimageio/README.md)
 - [qtbase / C++](cpp/qtbase/README.md)
 - [vips / C++](cpp/vips/README.md)
+- [wxwidgets / C++](cpp/wxwidgets/README.md)
 - [github.com/UNO-SOFT/gopnm / Go](go/github_com_uno_soft_gopnm/README.md)
 - [github.com/go-gfx/gfx/codec / Go](go/github_com_go_gfx_gfx_codec/README.md)
 - [github.com/harrydb/go/img/pnm / Go](go/github_com_harrydb_go_img_pnm/README.md)
