@@ -381,12 +381,12 @@
       "afl_plan_sha256": "1f9ac821909a505d2f6bed9faeb253a9e704983a976dca530cd1163d6b66714f"
     },
     {
-      "format": "mp3_id3v2",
-      "project": "mp3_id3v2/c/mpv",
+      "format": "mp3",
+      "project": "mp3/c/mpv",
       "status": "pass",
       "generator_exit_code": 0,
       "generator_version": "Fandango 1.3.1",
-      "generator_sha256": "9b0033ef8b15d883a90a2445d6f2e4a21fb9f56d3c802c6b0e49d5736eb80f05",
+      "generator_sha256": "179f6c5817f7ce083c75a961b1f39ca85f5d83bae7928af80ef83484df9c37cb",
       "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
       "spec": {
         "kind": "fanbase",
@@ -404,23 +404,25 @@
           "ok": 1
         },
         "image_ids": [
-          "sha256:4e5afdd8af48794ce5a8731a58c1795718b33ab1d3e6ee917f348a7bf19bc27a"
+          "sha256:44add50dd2023d7963be2b7e77ccba002900f64244fca3509d23f8b6311dd76a"
         ]
       },
       "afl": {
         "prepared": true,
-        "image_id": "sha256:39ed06b399fde0762a70aa52799a53d7aa015fc513a01fc192f26a3e89a99e3c",
+        "image_id": "sha256:248060335068084ec0813b347cf3bf58f87d5e2dd6a789ab6272103c0f3cd495",
         "feedback_kind": "ffmpeg_tagged_mp3_mpv_demux_lavf_pcguard_edges",
         "unique_seeds": 2,
         "check": {
           "exit_code": 0,
-          "result": "Ready: mp3_id3v2/c/mpv (2 seeds, ffmpeg_tagged_mp3_mpv_demux_lavf_pcguard_edges)"
+          "result": "Ready: mp3/c/mpv (2 seeds, ffmpeg_tagged_mp3_mpv_demux_lavf_pcguard_edges)"
         }
       },
       "problems": [],
-      "fandango_receipt_sha256": "857d705fc2d28d5fad94218cc39aa41a3e11c0f70ad860857767f6ee37a164e5",
-      "replay_receipt_sha256": "27b0cde97fc80f3977707ab6846fb0655ad851ce6d37a44e0edc497da7c22dec",
-      "afl_plan_sha256": "7326127d6ad1283f17a45abb35c9848777f860ab40d951ebdc847d5e97fd00d2"
+      "fandango_receipt_sha256": "dde44e723169b49a280cb756d7ef62c474dad595c1e25995d1ba36c7156b0ba4",
+      "replay_receipt_sha256": "1060ef6a1cad06e58a4359d4b47326465f3f5a0cf754485cd343cdb2652df1b0",
+      "afl_plan_sha256": "f07d0cea6ff35ff0b756c6745b7b0948918393b2ac99e8e55f6cb561127675a8",
+      "rechecked_at_utc": "2026-11-17T19:30:40.996951+00:00",
+      "recheck_reason": "MP3 targets moved to projects/mp3; default grammar now chosen per target control; the plain go-mp3 project was removed in the MP3 merge, so the untagged route is checked on the default case dmulholl/mp3lib"
     },
     {
       "format": "json",
@@ -508,12 +510,12 @@
     },
     {
       "format": "mp3",
-      "project": "mp3/go/github_com_hajimehoshi_go_mp3",
+      "project": "mp3/go/github_com_dmulholl_mp3lib",
       "status": "pass",
       "generator_exit_code": 0,
       "generator_version": "Fandango 1.3.1",
-      "generator_sha256": "9b0033ef8b15d883a90a2445d6f2e4a21fb9f56d3c802c6b0e49d5736eb80f05",
-      "source_sha256": "c14676f9e3fdafe7bbb107e1dd65953a558cbef2346e4955d993f7bf2998e311",
+      "generator_sha256": "179f6c5817f7ce083c75a961b1f39ca85f5d83bae7928af80ef83484df9c37cb",
+      "source_sha256": "c29d82de91787cc30c6bc9c6a5d5b14e203f8765563de23aa2c242f54c3ea1d9",
       "spec": {
         "kind": "file",
         "name": "fuzzing/fandango/specs/mp3_plain.fan",
@@ -536,23 +538,25 @@
           "ok": 1
         },
         "image_ids": [
-          "sha256:fd0d2cf24cea2d9874ef10037087e981b95e200e2c13d300e9da325a00868879"
+          "sha256:530cc3384da67ab153ea7e443132521476ed0f34a0a37280b03a5811f8957127"
         ]
       },
       "afl": {
         "prepared": true,
-        "image_id": "sha256:0a4b021a54f61bd375f0946d8899d4f367a0935e0c23d96a1031456fb499f60c",
+        "image_id": "sha256:59a5597eb7ea525fac45c1d5668c713c492a4a93b997a1a87d73f6f63064b705",
         "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
         "unique_seeds": 2,
         "check": {
           "exit_code": 0,
-          "result": "Ready: mp3/go/github_com_hajimehoshi_go_mp3 (2 seeds, go_parser_source_blocks_to_afl_bitmap)"
+          "result": "Ready: mp3/go/github_com_dmulholl_mp3lib (2 seeds, go_parser_source_blocks_to_afl_bitmap)"
         }
       },
       "problems": [],
-      "fandango_receipt_sha256": "04782ad54c42dd10a7dd94d35ec4e796dca7b6eb1ae4b99879101298cc1ec37b",
-      "replay_receipt_sha256": "7528df69b6181981203159738f3fa6f17d4adb836023f4d6e291f9266737e605",
-      "afl_plan_sha256": "090b3ed0286ac173e686c3409a2ab72bcb2e76de7ac824c9561c4bea52ad19b0"
+      "fandango_receipt_sha256": "66c5087a06d33ac06ac0b0f2ae5945a2aacd5177ddb4622ec53bb02418e24d6a",
+      "replay_receipt_sha256": "5fcc0c9dee1f48d413b15e68606bbe4c8c6854f960a6a57c06d13d65e391652c",
+      "afl_plan_sha256": "0a9eeb35f812c96064fbf64a66e72058c80fab70f028d986dec9d3a0af9f3015",
+      "rechecked_at_utc": "2026-11-17T19:30:40.996951+00:00",
+      "recheck_reason": "MP3 targets moved to projects/mp3; default grammar now chosen per target control; the plain go-mp3 project was removed in the MP3 merge, so the untagged route is checked on the default case dmulholl/mp3lib"
     }
   ],
   "limitations": [

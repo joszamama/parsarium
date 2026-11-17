@@ -60,7 +60,7 @@ DEMO_PROJECTS = [
     "projects/http11/go/fasthttp/manifest.json",
     "projects/ascii_ply/python/plyfile/manifest.json",
     "projects/ascii_pnm/go/gopnm/manifest.json",
-    "projects/mp3_id3v2/java/jaudiotagger/manifest.json",
+    "projects/mp3/java/jaudiotagger/manifest.json",
 ]
 
 # Each clue is searched in the exact pinned valid control used by the featured
@@ -411,8 +411,8 @@ def build(output: Path) -> None:
             receipt = project_dir / "control-verification.json"
         verification = read_json(receipt)
         control_path = ROOT / manifest["control"]
-        # Target IDs name the project directory; a merged catalog format (MP3)
-        # can keep targets under an older directory such as mp3_id3v2/.
+        # Target IDs name the project directory; a catalog format may list
+        # older project directories in data/formats.json "project_formats".
         project_format, eco, slug = target_id.split("/")
         fmt = catalog_format(project_format)
         target_args = f"{project_format} {eco} {slug}"

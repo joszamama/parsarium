@@ -52,7 +52,7 @@ def _formats(root: Path) -> tuple[str, ...]:
 
 
 def _format_aliases(root: Path) -> dict[str, str]:
-    """Map project-directory formats to catalog formats (for example mp3_id3v2 -> mp3)."""
+    """Map project-directory formats to catalog formats (an optional "project_formats" list)."""
     registry = root / "data" / "formats.json"
     if not registry.is_file():
         return {}

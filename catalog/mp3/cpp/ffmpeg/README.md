@@ -7,7 +7,7 @@
 - **Local input API:** `avformat_open_input(local filename); avformat_find_stream_info; format metadata title and MP3 stream codec`
 - **Documentation:** [API reference](<https://ffmpeg.org/doxygen/trunk/group__lavf__decoding.html>)
 - **Catalog evidence:** [parser record](../../../../data/cpp/mp3/parsers.json) · [control verification](../../../../data/cpp/mp3/verification.json) · [within-ecosystem ranking](../../../../data/cpp/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -22,9 +22,9 @@ The same FFmpeg libavformat C demuxer serves C and C++ call sites. It identifies
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/ffmpeg/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/cpp/ffmpeg/README.md)
 
 ```sh
 python3 parsarium.py build mp3 cpp ffmpeg
-python3 parsarium.py run mp3 cpp ffmpeg controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 cpp ffmpeg controls/mp3/id3v2-tagged-tone.mp3
 ```

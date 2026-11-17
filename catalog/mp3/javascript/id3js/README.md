@@ -7,7 +7,7 @@
 - **Local input API:** `fromPath(path)`
 - **Documentation:** [API reference](<https://www.npmjs.com/package/id3js>)
 - **Catalog evidence:** [parser record](../../../../data/javascript/mp3/parsers.json) · [control verification](../../../../data/javascript/mp3/verification.json) · [within-ecosystem ranking](../../../../data/javascript/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -25,9 +25,9 @@
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/javascript/id3js/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/javascript/id3js/README.md)
 
 ```sh
 python3 parsarium.py build mp3 javascript id3js
-python3 parsarium.py run mp3 javascript id3js controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 javascript id3js controls/mp3/id3v2-tagged-tone.mp3
 ```

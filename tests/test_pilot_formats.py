@@ -38,7 +38,7 @@ class PilotFormatTest(unittest.TestCase):
         self.assertIn("mp3", format_registry.ACTIVE_FORMATS)
         self.assertNotIn("mp3_id3v2", format_registry.FORMAT_BY_ID)
         self.assertEqual(format_registry.PILOT_FORMATS, ("json", "xml", "yaml", "toml", "sql", "dns"))
-        self.assertEqual(format_registry.catalog_format("mp3_id3v2"), "mp3")
+        self.assertNotIn("mp3_id3v2", format_registry.ALL_FORMATS)
         self.assertEqual(len(format_registry.ECOSYSTEMS), 8)
 
     def test_one_verified_pilot_parser_and_standard_stay_separate(self):

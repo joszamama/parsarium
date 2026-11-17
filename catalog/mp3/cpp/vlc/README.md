@@ -7,7 +7,7 @@
 - **Local input API:** `libvlc_media_new_path(instance, local filename); libvlc_media_parse_with_options; libvlc_media_get_meta; libvlc_media_tracks_get`
 - **Documentation:** [API reference](<https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html>)
 - **Catalog evidence:** [parser record](../../../../data/cpp/mp3/parsers.json) · [control verification](../../../../data/cpp/mp3/verification.json) · [within-ecosystem ranking](../../../../data/cpp/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -23,9 +23,9 @@ The verified Docker routes statically register filesystem, skiptags, es, packeti
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/vlc/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/cpp/vlc/README.md)
 
 ```sh
 python3 parsarium.py build mp3 cpp vlc
-python3 parsarium.py run mp3 cpp vlc controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 cpp vlc controls/mp3/id3v2-tagged-tone.mp3
 ```

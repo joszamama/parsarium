@@ -26,7 +26,7 @@ CASES = (
     ("http11", "cpp", "poco"),
     ("ascii_ply", "c", "assetkit"),
     ("ascii_pnm", "cpp", "openimageio"),
-    ("mp3_id3v2", "c", "mpv"),
+    ("mp3", "c", "mpv"),
     ("json", "python", "simplejson"),
     ("xml", "python", "xmltodict"),
     ("mp3", "go", "github_com_dmulholl_mp3lib"),
@@ -47,14 +47,21 @@ def main() -> int:
     parser.add_argument("run_dir", type=Path)
     parser.add_argument("--fandango", type=Path,
                         help="pinned Fandango executable; defaults to Parsarium's managed installation")
+    parser.add_argument("--case", action="append", default=[], metavar="FORMAT/ECOSYSTEM/SLUG",
+                        help="check only this default case (repeatable)")
     args = parser.parse_args()
+    cases = CASES
+    if args.case:
+        cases = tuple(case for case in CASES if "/".join(case) in args.case)
+        if len(cases) != len(set(args.case)):
+            parser.error("--case must name entries of the default case list")
     output = args.run_dir.expanduser().resolve()
     if output.exists() and any(output.iterdir()):
         parser.error("run directory must be empty")
     output.mkdir(parents=True, exist_ok=True)
     rows = []
-    for fmt, ecosystem, slug in CASES:
-        path = output / fmt
+    for fmt, ecosystem, slug in cases:
+        path = output / f"{fmt}-{ecosystem}"
         command = [sys.executable, str(ROOT / "parsarium.py"), "fandango", "generate",
                    fmt, ecosystem, slug, str(path), "--count", "1", "--seed", "7",
                    "--timeout", "120", "--replay", "--prepare-afl"]
@@ -117,7 +124,7 @@ def main() -> int:
         print(f"{fmt}: {row['status']} ({row['project']})", flush=True)
     result = {"schema_version": 1, "checked_at_utc": datetime.now(timezone.utc).isoformat(),
               "seed": 7, "count_per_format": 1, "fuzz_campaign_started": False,
-              "formats": len(CASES), "passed": sum(row["status"] == "pass" for row in rows),
+              "formats": len(cases), "passed": sum(row["status"] == "pass" for row in rows),
               "rows": rows}
     (output / "smoke.json").write_text(json.dumps(result, indent=2) + "\n")
     print(f"{result['passed']}/{result['formats']} passed; {output / 'smoke.json'}")

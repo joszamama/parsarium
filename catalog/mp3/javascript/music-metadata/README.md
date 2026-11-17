@@ -7,7 +7,7 @@
 - **Local input API:** `parseFile(path)`
 - **Documentation:** [API reference](<https://www.npmjs.com/package/music-metadata>)
 - **Catalog evidence:** [parser record](../../../../data/javascript/mp3/parsers.json) · [control verification](../../../../data/javascript/mp3/verification.json) · [within-ecosystem ranking](../../../../data/javascript/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -22,9 +22,9 @@
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/javascript/music_metadata/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/javascript/music_metadata/README.md)
 
 ```sh
 python3 parsarium.py build mp3 javascript music_metadata
-python3 parsarium.py run mp3 javascript music_metadata controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 javascript music_metadata controls/mp3/id3v2-tagged-tone.mp3
 ```

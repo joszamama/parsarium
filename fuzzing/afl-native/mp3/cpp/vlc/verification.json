@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "project": "mp3/cpp/vlc",
+  "pass": true,
+  "feedback_kind": "vlc_mp3_parser_pcguard_edges",
+  "feedback_scope": "TagLib 1.13.1 (VLC contrib pin and patches) and VLC 3.0.24 meta_engine, stream_filter, demux/mpeg and packetizer module sources via AFL++ allowlist; libvlccore, libVLC, file access and the C++17 harness uninstrumented",
+  "shared_parser_family": "VLC 3.0.24 MPEG audio ES demuxer with native ID3 headers plus the TagLib 1.13.1 meta reader, behind the libVLC media API",
+  "shared_parser_family_projects": [
+    "projects/mp3/c/vlc"
+  ],
+  "base_project_receipt_sha256": "7aa076f0db4b3a01515cf461a059d298ee98435010bc36e186ed1361ecd29a7a",
+  "source_sha256": "e7cab503d1d7d5849b89d2cf0e1ee60d0ef6d012407791b644b9cfc0cc225fdf",
+  "underlying_source_sha256": "c8da2b10f1bfec2cd7dbfcd33f4a2338db0765d851a50583d410bacf055cfd0b",
+  "control_sha256": "d61e1802a52dc55b5447356a3347fa4f9e08eb706757870f65ee0776dbf5bcad",
+  "variant_sha256": "a5337540e40f66d89398dbc29e366034d21ec5ba5f0cd539392cddb07530616d",
+  "variant_output": {
+    "title": "Parsarium",
+    "audio_tracks": 1,
+    "mp3_tracks": 1,
+    "audio_codec": "mp3 ",
+    "rate": 8000,
+    "channels": 1
+  },
+  "image_id": "sha256:c53aec2a6a52af49cb023900e3642043957c27a7d11f325d305491be1b902582",
+  "platform": "linux/arm64",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "afl_map_size": 18912,
+  "repeats": 3,
+  "feedback_edges": 640,
+  "variant_feedback_edges": 635,
+  "edges_only_in_control": 28,
+  "edges_only_in_variant": 23,
+  "control_stability": {
+    "repeat_edge_counts": [
+      640,
+      640,
+      640
+    ],
+    "stable_edges": 640,
+    "union_edges": 640,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      635,
+      635,
+      635
+    ],
+    "stable_edges": 635,
+    "union_edges": 635,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "stable_variant_only_edges": 23,
+  "stable_control_only_edges": 28,
+  "overlay_file_sha256": {
+    "Dockerfile": "83d81fd9b37eca55f3ccb279cd4cdfcae437d513c7829a98a103ab51ad12e9e0",
+    "build.py": "d543c6143ade3f2fcd0c336b84def84f10b7cf63f2ed1266505ab10c38a53328"
+  }
+}

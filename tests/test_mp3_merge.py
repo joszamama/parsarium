@@ -26,11 +26,13 @@ class Mp3MergeTest(unittest.TestCase):
         self.record = read(ROOT / "data/curation/mp3-merge.json")
         self.plan = {(c["ecosystem"], c["format"]): c for c in read(ROOT / "data/curation/plan.json")["cells"]}
 
-    def test_registry_has_one_active_mp3_format_with_a_project_alias(self):
+    def test_registry_has_one_active_mp3_format_and_no_legacy_directory(self):
         self.assertIn("mp3", format_registry.ACTIVE_FORMATS)
         self.assertNotIn("mp3_id3v2", format_registry.FORMAT_BY_ID)
-        self.assertEqual(format_registry.catalog_format("mp3_id3v2"), "mp3")
-        self.assertEqual(format_registry.resolve_data_path("data/go/mp3_id3v2/parsers.json"),
+        self.assertNotIn("mp3_id3v2", format_registry.ALL_FORMATS)
+        self.assertFalse((ROOT / "projects/mp3_id3v2").exists())
+        self.assertFalse((ROOT / "fuzzing/afl-native/mp3_id3v2").exists())
+        self.assertEqual(format_registry.resolve_data_path("data/go/mp3/parsers.json"),
                          "data/go/mp3/parsers.json")
         cells = read(ROOT / "data/cells.json")["cells"]
         self.assertEqual(sum(c["format"] == "mp3" for c in cells), 8)
@@ -52,7 +54,7 @@ class Mp3MergeTest(unittest.TestCase):
                 project = ROOT / parser["project"]
                 manifest = read(project / "manifest.json")
                 self.assertEqual(manifest["package"], parser["name"])
-                expected_dir = "mp3_id3v2" if parser["control_kind"] == "id3v2_tagged" else "mp3"
+                expected_dir = "mp3"
                 self.assertEqual(Path(parser["project"]).parts[1], expected_dir)
                 self.assertEqual(manifest["control"], parser["control"])
                 self.assertTrue(read(project / "verification.json")["pass"])
@@ -68,8 +70,17 @@ class Mp3MergeTest(unittest.TestCase):
             for duplicate in cell["duplicates"]:
                 self.assertIn(duplicate["name"], selected)
                 self.assertTrue((ROOT / duplicate["kept_project"] / "manifest.json").is_file())
+        kept = {item["project"]: item for cell in self.record["cells"] for item in cell["kept"]}
+        reused = set(self.record["project_move"]["reused_removed_paths"])
+        self.assertEqual(reused, set(self.record["removed_projects"]) & set(kept))
         for project in self.record["removed_projects"]:
             fmt, eco, slug = Path(project).parts[1:4]
+            if project in reused:
+                # The kept ID3v2-tagged-control project of the same package now uses this path.
+                self.assertEqual(kept[project]["control_kind"], "id3v2_tagged", project)
+                manifest = read(ROOT / project / "manifest.json")
+                self.assertTrue(manifest["control"].startswith("controls/mp3/id3v2-tagged-"), project)
+                continue
             self.assertFalse((ROOT / project).exists(), project)
             self.assertFalse((ROOT / "fuzzing/afl-native" / fmt / eco / slug).exists(), project)
 
@@ -84,7 +95,7 @@ class Mp3MergeTest(unittest.TestCase):
                     self.assertEqual(item["metric"], value)
 
     def test_pinned_manifest_paths_still_resolve(self):
-        for manifest_path in sorted((ROOT / "projects/mp3_id3v2").glob("*/*/manifest.json")):
+        for manifest_path in sorted((ROOT / "projects/mp3").glob("*/*/manifest.json")):
             manifest = read(manifest_path)
             for key in ("catalog_parser", "source_lock", "standard_inventory", "underlying_source_lock"):
                 value = manifest.get(key)

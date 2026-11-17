@@ -6,14 +6,14 @@ This cell applies the [general protocol](../../PROTOCOL.md) to MP3 files, with o
 
 A path qualifies on one of two controls, and its parser record names which (`control_kind`):
 
-- **ID3v2-tagged control** (`id3v2_tagged`): the path reads `controls/mp3_id3v2/tone-tags.mp3` from local bytes, a local file or a stream and reports ID3v2 fields (for example title and artist) or audio-stream properties parsed from the file.
+- **ID3v2-tagged control** (`id3v2_tagged`): the path reads `controls/mp3/id3v2-tagged-tone.mp3` from local bytes, a local file or a stream and reports ID3v2 fields (for example title and artist) or audio-stream properties parsed from the file.
 - **Untagged frame controls** (`untagged_frames`): the path reads MPEG audio frames and reports a frame-derived result such as frame count, frame bytes, sample rate, channels, decoded samples or a frame-derived duration. A result that could come from a tag or the file size alone does not count.
 
 Encoders, signature detectors and codec-string parsers are excluded. Tag readers and frame decoders share one ranking; the cell does not claim that each path parses both the tag and the audio frames.
 
 ## Controls
 
-- `controls/mp3_id3v2/tone-tags.mp3`: valid MP3 with an ID3v2.3 tag.
+- `controls/mp3/id3v2-tagged-tone.mp3`: valid MP3 with an ID3v2.3 tag.
 - `controls/mp3/tone-44k-mono.mp3`: 0.25 s of 440 Hz, MPEG-1 Layer III, 44.1 kHz mono at 64 kbit/s CBR, 11 frames in 2,298 bytes.
 - `controls/mp3/tone-22k-stereo.mp3`: the second untagged control for AFL++ feedback. 0.25 s of 660 Hz, MPEG-2 Layer III, 22.05 kHz stereo at 32 kbit/s CBR, 12 frames in 1,254 bytes.
 
@@ -25,7 +25,7 @@ Paths are ranked within one ecosystem by its registry metric, under the [ten-pat
 
 ## Target names
 
-Targets verified on the tagged control keep the project directory `projects/mp3_id3v2/` and the command-line format `mp3_id3v2`, because their pinned manifests and receipts record those paths. `data/<ecosystem>/mp3_id3v2/` holds links into this cell for those manifests; it is not a catalog cell. The evidence of the former plain-MP3 pilot is kept in `data/<ecosystem>/mp3/plain-mp3-pilot/`.
+Every MP3 target, whichever control it was verified on, lives under `projects/mp3/<ecosystem>/<slug>/` with its AFL++ overlay under `fuzzing/afl-native/mp3/` and uses the command-line format `mp3`. The tagged-control projects were moved there from the former `mp3_id3v2` directories on 2026-11-17 and re-verified in Docker. The evidence of the former plain-MP3 pilot is kept in `data/<ecosystem>/mp3/plain-mp3-pilot/`.
 
 ## AFL++
 

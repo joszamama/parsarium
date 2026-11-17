@@ -8,7 +8,7 @@
     "documentation": "https://pyav.org/docs/stable/api/container.html",
     "scope": "ID3v2 tags and MP3 audio stream",
     "family": "FFmpeg libavformat via PyAV",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "title": "Parsarium",
       "artist": "Control",
@@ -16,7 +16,7 @@
       "sample_rate": 8000
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/python/av",
+    "project": "projects/mp3/python/av",
     "verified_result": "ID3v2-tagged control: ID3v2 tags and MP3 audio stream"
   },
   {
@@ -28,7 +28,7 @@
     "documentation": "https://python-soundfile.readthedocs.io/en/latest/",
     "scope": "MP3 header, frame count",
     "family": "libsndfile MP3 decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "sample_rate": 8000,
       "channels": 1,
@@ -36,7 +36,7 @@
       "format": "MP3"
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/python/soundfile",
+    "project": "projects/mp3/python/soundfile",
     "verified_result": "ID3v2-tagged control: MP3 header, frame count"
   },
   {
@@ -48,14 +48,14 @@
     "documentation": "https://github.com/jiaaro/pydub",
     "scope": "decoded duration and audio properties",
     "family": "pydub via FFmpeg",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "sample_rate": 8000,
       "channels": 1,
       "duration_ms": 1000
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/python/pydub",
+    "project": "projects/mp3/python/pydub",
     "verified_result": "ID3v2-tagged control: decoded duration and audio properties"
   },
   {
@@ -67,13 +67,13 @@
     "documentation": "https://librosa.org/doc/main/api/generated/librosa.load.html",
     "scope": "decoded PCM sample count",
     "family": "librosa via soundfile/libsndfile",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "sample_rate": 8000,
       "samples": 8000
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/python/librosa",
+    "project": "projects/mp3/python/librosa",
     "verified_result": "ID3v2-tagged control: decoded PCM sample count"
   },
   {
@@ -85,7 +85,7 @@
     "documentation": "https://github.com/kkroening/ffmpeg-python",
     "scope": "ID3v2 tags and MPEG codec",
     "family": "ffmpeg-python via external FFprobe",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "title": "Parsarium",
       "artist": "Control",
@@ -93,7 +93,7 @@
       "codec": "mp3"
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/python/ffmpeg_python",
+    "project": "projects/mp3/python/ffmpeg_python",
     "verified_result": "ID3v2-tagged control: ID3v2 tags and MPEG codec"
   },
   {
@@ -105,14 +105,14 @@
     "documentation": "https://mutagen.readthedocs.io/en/latest/api/wave.html",
     "scope": "ID3v2 title, artist, album",
     "family": "Mutagen MP3/ID3 parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "title": "Parsarium",
       "artist": "Control",
       "album": "Pilot"
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/python/mutagen",
+    "project": "projects/mp3/python/mutagen",
     "verified_result": "ID3v2-tagged control: ID3v2 title, artist, album"
   },
   {
@@ -124,7 +124,7 @@
     "documentation": "https://github.com/beetbox/audioread",
     "scope": "MP3 duration and audio properties",
     "family": "audioread via FFmpeg",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "sample_rate": 8000,
       "channels": 1,
@@ -132,7 +132,7 @@
     },
     "platform_note": "The pinned Linux FFmpeg backend decodes 8000 PCM samples (1.0 s); the earlier macOS backend reported 1.152 s for this control.",
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/python/audioread",
+    "project": "projects/mp3/python/audioread",
     "verified_result": "ID3v2-tagged control: MP3 duration and audio properties"
   },
   {
@@ -144,13 +144,13 @@
     "documentation": "https://github.com/Zulko/moviepy/blob/master/moviepy/audio/io/AudioFileClip.py",
     "scope": "decoded audio and duration",
     "family": "MoviePy via bundled FFmpeg",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "duration_seconds": 1.0,
       "decoded_audio": true
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/python/moviepy",
+    "project": "projects/mp3/python/moviepy",
     "verified_result": "ID3v2-tagged control: decoded audio and duration"
   },
   {
@@ -162,14 +162,14 @@
     "documentation": "https://pypi.org/project/tinytag/2.3.2/",
     "scope": "ID3v2 title, artist, album",
     "family": "TinyTag MP3/ID3 parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "title": "Parsarium",
       "artist": "Control",
       "album": "Pilot"
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/python/tinytag",
+    "project": "projects/mp3/python/tinytag",
     "verified_result": "ID3v2-tagged control: ID3v2 title, artist, album"
   },
   {
@@ -181,12 +181,12 @@
     "documentation": "https://www.pygame.org/docs/ref/mixer.html#pygame.mixer.Sound",
     "scope": "decoded audio duration",
     "family": "SDL_mixer MP3 decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "duration_ms": 1000
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/python/pygame",
+    "project": "projects/mp3/python/pygame",
     "verified_result": "ID3v2-tagged control: decoded audio duration"
   }
 ]

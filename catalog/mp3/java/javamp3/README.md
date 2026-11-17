@@ -7,7 +7,7 @@
 - **Local input API:** `new Sound(BufferedInputStream localMp3), getSamplingFrequency(), isStereo(), read(byte[])`
 - **Documentation:** [API reference](<https://github.com/delthas/JavaMP3>)
 - **Catalog evidence:** [parser record](../../../../data/java/mp3/parsers.json) · [control verification](../../../../data/java/mp3/verification.json) · [within-ecosystem ranking](../../../../data/java/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags-44k.mp3`](../../../../controls/mp3_id3v2/tone-tags-44k.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone-44k.mp3`](../../../../controls/mp3/id3v2-tagged-tone-44k.mp3)
 
 ## Observed control result
 
@@ -21,9 +21,9 @@
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/java/javamp3/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/java/javamp3/README.md)
 
 ```sh
 python3 parsarium.py build mp3 java javamp3
-python3 parsarium.py run mp3 java javamp3 controls/mp3_id3v2/tone-tags-44k.mp3
+python3 parsarium.py run mp3 java javamp3 controls/mp3/id3v2-tagged-tone-44k.mp3
 ```

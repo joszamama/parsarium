@@ -18,10 +18,10 @@ plan check. No AFL++ campaign was started.
 | HTTP/1.1 | `cpp/poco` | local `http11_request.fan` | 1/1 / ready |
 | ASCII PLY | `c/assetkit` | local `ascii_ply.fan` | 1/1 / ready |
 | ASCII PNM | `cpp/openimageio` | local `ascii_pnm_p3.fan` | 1/1 / ready |
-| MP3 with ID3v2 | `c/mpv` | Fanbase `mp3` | 1/1 / ready |
+| MP3, ID3v2-tagged control | `c/mpv` | Fanbase `mp3` | 1/1 / ready |
 | JSON pilot | `python/simplejson` | Fanbase `json` | 1/1 / ready |
 | XML pilot | `python/xmltodict` | Fanbase `xml` | 1/1 / ready |
-| Plain MP3 pilot | `go/github_com_hajimehoshi_go_mp3` | local `mp3_plain.fan` | 1/1 / ready |
+| MP3, untagged controls | `go/github_com_dmulholl_mp3lib` | local `mp3_plain.fan` | 1/1 / ready |
 
 To repeat the smoke from the repository root, install the pinned Fandango
 environment and build the selected Docker and AFL++ images, then run:
@@ -45,3 +45,9 @@ Fanbase fetches; using the managed Fandango setup resolved it. A pre-existing
 PNG/LodePNG AFL image ID did not match its receipt, so the final run used the
 verified OpenCV target. WAV images had been removed locally; the selected
 `dr_wav` base and AFL images were rebuilt and their receipts refreshed.
+
+The two MP3 rows were rechecked on 17 November 2026 after the MP3 targets moved
+to `projects/mp3/` (`--case mp3/c/mpv --case mp3/go/github_com_dmulholl_mp3lib`).
+The default grammar is now chosen per MP3 target from its control. Both outputs
+are byte-identical to the first run; the untagged row now uses the default case
+`dmulholl/mp3lib`, because the plain go-mp3 project was removed in the merge.

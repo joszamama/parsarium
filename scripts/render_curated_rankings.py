@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LABELS = {"http11": "HTTP/1.1", "ascii_ply": "ASCII PLY",
-          "ascii_pnm": "ASCII PNM", "mp3_id3v2": "MP3 with ID3v2"}
+          "ascii_pnm": "ASCII PNM"}
 
 
 def label(value: str) -> str:

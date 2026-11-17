@@ -7,7 +7,7 @@
     "documentation": "https://docs.rs/symphonia-metadata/0.6.1/symphonia_metadata/",
     "scope": "ID3v2 frame keys",
     "family": "Symphonia ID3v2 reader",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "tag_count": 4,
       "keys": [
@@ -18,7 +18,7 @@
       ]
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/rust/symphonia_metadata",
+    "project": "projects/mp3/rust/symphonia_metadata",
     "verified_result": "ID3v2-tagged control: ID3v2 frame keys"
   },
   {
@@ -29,14 +29,14 @@
     "documentation": "https://docs.rs/symphonia/0.6.1/symphonia/",
     "scope": "MP3 track header and audio packet",
     "family": "Symphonia MP3 demuxer",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "sample_rate": 8000,
       "channels": 1,
       "packet_bytes": 288
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/rust/symphonia",
+    "project": "projects/mp3/rust/symphonia",
     "verified_result": "ID3v2-tagged control: MP3 track header and audio packet"
   },
   {
@@ -47,14 +47,14 @@
     "documentation": "https://docs.rs/symphonia-bundle-mp3/0.6.1/symphonia_bundle_mp3/",
     "scope": "MPEG Layer III track header and audio packet; adapter skips ID3v2 prefix before passing the stream",
     "family": "Symphonia MP3 demuxer",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "sample_rate": 8000,
       "channels": 1,
       "packet_bytes": 288
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/rust/symphonia_bundle_mp3",
+    "project": "projects/mp3/rust/symphonia_bundle_mp3",
     "verified_result": "ID3v2-tagged control: MPEG Layer III track header and audio packet; adapter skips ID3v2 prefix before passing the stream"
   },
   {
@@ -65,14 +65,14 @@
     "documentation": "https://docs.rs/id3/1.17.3/id3/",
     "scope": "ID3v2 title, artist, album",
     "family": "id3 tag parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "title": "Parsarium",
       "artist": "Control",
       "album": "Pilot"
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/rust/id3",
+    "project": "projects/mp3/rust/id3",
     "verified_result": "ID3v2-tagged control: ID3v2 title, artist, album"
   },
   {
@@ -83,14 +83,14 @@
     "documentation": "https://docs.rs/lofty/0.25.5/lofty/",
     "scope": "ID3v2 title, artist, album",
     "family": "Lofty MPEG/ID3 parser",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "title": "Parsarium",
       "artist": "Control",
       "album": "Pilot"
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/rust/lofty",
+    "project": "projects/mp3/rust/lofty",
     "verified_result": "ID3v2-tagged control: ID3v2 title, artist, album"
   },
   {
@@ -101,14 +101,14 @@
     "documentation": "https://docs.rs/minimp3/0.6.1/minimp3/",
     "scope": "Decoded first MPEG Layer III frame",
     "family": "minimp3 C decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "sample_rate": 8000,
       "channels": 1,
       "decoded_samples": 576
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/rust/minimp3",
+    "project": "projects/mp3/rust/minimp3",
     "verified_result": "ID3v2-tagged control: Decoded first MPEG Layer III frame"
   },
   {
@@ -119,12 +119,12 @@
     "documentation": "https://docs.rs/mp3-duration/0.1.10/mp3_duration/",
     "scope": "MP3 frame-derived duration",
     "family": "mp3-duration frame scanner",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "duration_ms": 1152
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/rust/mp3_duration",
+    "project": "projects/mp3/rust/mp3_duration",
     "verified_result": "ID3v2-tagged control: MP3 frame-derived duration"
   },
   {
@@ -135,14 +135,14 @@
     "documentation": "https://docs.rs/rusty_mp3/1.0.5/rusty_mp3/",
     "scope": "Decoded first MPEG Layer III frame",
     "family": "rusty_mp3 decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "sample_rate": 8000,
       "channels": 1,
       "decoded_samples": 576
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/rust/rusty_mp3",
+    "project": "projects/mp3/rust/rusty_mp3",
     "verified_result": "ID3v2-tagged control: Decoded first MPEG Layer III frame"
   },
   {
@@ -153,14 +153,14 @@
     "documentation": "https://docs.rs/nanomp3/0.2.0/nanomp3/",
     "scope": "Decoded MP3 samples and layer",
     "family": "nanomp3 decoder",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "layer": 3,
       "sample_rate": 8000,
       "samples": 8000
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/rust/nanomp3",
+    "project": "projects/mp3/rust/nanomp3",
     "verified_result": "ID3v2-tagged control: Decoded MP3 samples and layer"
   },
   {
@@ -171,13 +171,13 @@
     "documentation": "https://docs.rs/symphonium/0.13.0/symphonium/",
     "scope": "MP3 track header",
     "family": "Symphonia MP3 demuxer",
-    "control": "controls/mp3_id3v2/tone-tags.mp3",
+    "control": "controls/mp3/id3v2-tagged-tone.mp3",
     "expected_output": {
       "sample_rate": 8000,
       "channels": 1
     },
     "control_kind": "id3v2_tagged",
-    "project": "projects/mp3_id3v2/rust/symphonium",
+    "project": "projects/mp3/rust/symphonium",
     "verified_result": "ID3v2-tagged control: MP3 track header"
   }
 ]

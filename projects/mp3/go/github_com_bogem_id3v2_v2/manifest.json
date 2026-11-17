@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "format": "mp3",
+  "ecosystem": "go",
+  "package": "github.com/bogem/id3v2/v2",
+  "release": "v2.1.4",
+  "catalog_parser": "data/go/mp3/parsers.json",
+  "source_lock": "projects/mp3/go/github_com_bogem_id3v2_v2/source-lock.json",
+  "source_sha256": "b8d3bdcfaeeabeb056c190d314f7e7b29ef9ebfa11c768696434c90dee8fedab",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/mp3/id3v2-tagged-tone-44k.mp3",
+  "control_sha256": "c8ca0d2c5a224ceccf150f06b9ad4de9eca753f8ce4b4817b95de0aeb07fd307",
+  "expected_output": {
+    "title": "Parsarium"
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/bogem/id3v2/v2 during valid-control replay",
+  "coverage_subject_prefix": "github.com/bogem/id3v2/v2/"
+}

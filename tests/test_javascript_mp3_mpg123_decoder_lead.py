@@ -20,7 +20,7 @@ class Mpg123DecoderLeadTest(unittest.TestCase):
         lead, = (item for item in read(ROOT / "data/javascript/mp3/plain-mp3-pilot/leads.json")
                  if item["name"] == "mpg123-decoder")
         report = read(ROOT / lead["control_evidence"])
-        lock = read(ROOT / "projects/mp3_id3v2/javascript/audio_decode_mp3/package-lock.json")
+        lock = read(ROOT / "projects/mp3/javascript/audio_decode_mp3/package-lock.json")
         selected = {item["name"] for item in read(ROOT / "data/javascript/mp3/parsers.json")}
         snapshot = read(ROOT / "data/javascript/mp3/plain-mp3-pilot/registry-snapshot.json")
         self.assertEqual(lead["status"], "unresolved_shared_family")

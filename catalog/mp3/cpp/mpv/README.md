@@ -7,7 +7,7 @@
 - **Local input API:** `mpv_create/initialize; mpv_command(loadfile, local filename); MPV_EVENT_FILE_LOADED; mpv_get_property metadata/by-key/title, track-list/0/codec, duration`
 - **Documentation:** [API reference](<https://mpv.io/manual/stable/>)
 - **Catalog evidence:** [parser record](../../../../data/cpp/mp3/parsers.json) · [control verification](../../../../data/cpp/mp3/verification.json) · [within-ecosystem ranking](../../../../data/cpp/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -23,9 +23,9 @@ libmpv 0.42.0 calls FFmpeg 9.0.2 libavformat/id3v2.c and mp3dec.c, the same unde
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/mpv/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/cpp/mpv/README.md)
 
 ```sh
 python3 parsarium.py build mp3 cpp mpv
-python3 parsarium.py run mp3 cpp mpv controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 cpp mpv controls/mp3/id3v2-tagged-tone.mp3
 ```

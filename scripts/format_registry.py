@@ -50,9 +50,7 @@ PILOT_FORMATS = tuple(item["id"] for item in FORMAT_RECORDS if item["phase"] == 
 CATALOG_FORMATS = (*ACTIVE_FORMATS, *PILOT_FORMATS)
 
 
-# A merged catalog format may keep projects under an older format directory.
-# For example, MP3 projects verified on the ID3v2-tagged control still live in
-# projects/mp3_id3v2/; they belong to the single catalog format "mp3".
+# A catalog format may list older project directory names in "project_formats".
 PROJECT_FORMAT_TO_CATALOG = {alias: item["id"] for item in FORMAT_RECORDS
                              for alias in item.get("project_formats", [item["id"]])}
 if len(PROJECT_FORMAT_TO_CATALOG) != sum(len(item.get("project_formats", [item["id"]]))
@@ -61,7 +59,7 @@ if len(PROJECT_FORMAT_TO_CATALOG) != sum(len(item.get("project_formats", [item["
 PROJECT_FORMATS = tuple(PROJECT_FORMAT_TO_CATALOG)
 LEGACY_PROJECT_FORMATS = tuple(alias for alias, fmt in PROJECT_FORMAT_TO_CATALOG.items() if alias != fmt)
 # Format names the command line accepts: catalog formats plus target directories
-# kept under an older name (for example `parsarium run mp3_id3v2 java jaudiotagger ...`).
+# kept under an older name (none at present).
 ALL_FORMATS = (*CATALOG_FORMATS, *LEGACY_PROJECT_FORMATS)
 
 

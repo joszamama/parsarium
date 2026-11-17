@@ -26,7 +26,7 @@ BYTEDECO_LINUX_ARM64 = {
 ADAPTER_CLASSES = {"png": "PngAdapter", "zip": "ZipAdapter", "mp4": "Mp4Adapter",
                    "wav": "WavAdapter", "pdf": "PdfAdapter", "svg": "SvgAdapter",
                    "http11": "Http11Adapter", "ascii_ply": "PlyAdapter",
-                   "ascii_pnm": "PnmAdapter", "mp3_id3v2": "Mp3Id3v2Adapter"}
+                   "ascii_pnm": "PnmAdapter", "mp3": "Mp3Id3v2Adapter"}
 
 
 def stage(format_name: str, package: str) -> Path:
@@ -179,7 +179,7 @@ public final class GenericHarness {
         downloads.extend([f"    && curl --fail --location --retry 3 {jar_repository + item['repository_path']} -o /work/lib/{name} \\",
                           f"    && echo '{item['sha256']}  /work/lib/{name}' | sha256sum --check \\"])
     downloads[-1] = downloads[-1].removesuffix(" \\")
-    base_image = BASE25 if format_name in {"mp3_id3v2", "pdf"} else BASE
+    base_image = BASE25 if format_name in {"mp3", "pdf"} else BASE
     runtime_packages = (" ffmpeg" if re.search(r"ffprobe|ffmpeg|FFprobe|FFmpeg", adapter_text) else "")
     runtime_packages += (" imagemagick" if re.search(r"ImageMagick|magick|convert", adapter_text) else "")
     if package in {"vlcj-info", "mediainfo-jna-wrapper"}:

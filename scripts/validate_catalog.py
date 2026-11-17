@@ -138,9 +138,8 @@ def validate_pilot_cells() -> None:
 def adapter_format(cell: dict, parser: dict) -> str:
     """The format directory of a parser's adapters and project.
 
-    Merged cells keep each path's adapters under the format its project was
-    verified in (for example, MP3 paths on the ID3v2-tagged control use
-    adapters/<ecosystem>/mp3_id3v2/).
+    A path keeps its adapters under the format directory its project was
+    verified in (for MP3, adapters/<ecosystem>/mp3/).
     """
     project = parser.get("project", "")
     parts = project.split("/")

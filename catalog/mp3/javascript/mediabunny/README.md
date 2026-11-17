@@ -23,7 +23,7 @@
 }
 ```
 
-Own frame-header reader (dist/modules/src/mp3/mp3-reader.js, mp3-demuxer.js). Not one of the ten mp3_id3v2/javascript paths; that cell's music-metadata path is a separate MPEG frame parser and its @audio/decode paths use mpg123 WASM. mediabunny also has an ID3 reader (id3.js) that the untagged controls do not exercise.
+Own frame-header reader (dist/modules/src/mp3/mp3-reader.js, mp3-demuxer.js). Not one of the ten JavaScript paths selected in the former MP3-with-ID3v2 cell; that cell's music-metadata path is a separate MPEG frame parser and its @audio/decode paths use mpg123 WASM. mediabunny also has an ID3 reader (id3.js) that the untagged controls do not exercise.
 
 ## Run this target
 
