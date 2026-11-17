@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "cell": "mp3/c",
+  "checked_at_utc": "2026-11-17T03:35:09.634141+00:00",
+  "checks": [
+    {
+      "command": "python3 controls/mp3/check_controls.py",
+      "pass": true,
+      "result": "header walk: 11 frames (44.1 kHz mono) and 12 frames (22.05 kHz stereo), matching the mpg123 decoded frame counts"
+    },
+    {
+      "command": "python3 scripts/run_project.py mp3 c mpg123",
+      "pass": true,
+      "image_id": "sha256:b9547a155f525d473391bcd3c535b17d3914c9a2d04e4002344fcd0eafbea6d4",
+      "output": {
+        "sample_rate": 44100,
+        "channels": 1,
+        "layer": 3,
+        "frames": 11,
+        "decoded_samples": 12672
+      },
+      "parser_source_lines_covered": 2724,
+      "layer3_c_lines_covered": 904,
+      "receipt_sha256": "36be7adbcf9cea35bce74ed615d7b3d49d50647cb479726fafc0c2680349496e"
+    },
+    {
+      "command": "python3 parsarium.py run mp3 c mpg123 controls/mp3/tone-44k-mono.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 parsarium.py run mp3 c mpg123 controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "status": "ok",
+      "exit_code": 0
+    },
+    {
+      "command": "cd scripts && python3 build_afl_native.py mp3 c mpg123",
+      "pass": true,
+      "image_id": "sha256:786630925dbdedbe4f2826d765c410a54b741acc3fd1151559055d654fde92ca",
+      "feedback_edges": 626,
+      "afl_map_size": 4779,
+      "receipt_sha256": "1413f82c7853c0ff058a6d7e60382e39aef5ccd14487101cc076939ee82aaa87"
+    },
+    {
+      "command": "cd scripts && python3 verify_c_mp3_feedback.py",
+      "pass": true,
+      "first_afl_tuples": 626,
+      "second_afl_tuples": 633,
+      "afl_tuple_difference": 121,
+      "repeated_controls_identical": true,
+      "receipt_sha256": "db853f2d59b9c743ffc7e81999c8643d025964c8a16b1c7c631d28bac8865fa8"
+    },
+    {
+      "command": "python3 parsarium.py afl prepare mp3 c mpg123 runs/mp3-mpg123-afl --seed controls/mp3/tone-22k-stereo.mp3",
+      "pass": true,
+      "seeds": [
+        "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+        "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328"
+      ]
+    },
+    {
+      "command": "python3 parsarium.py afl run runs/mp3-mpg123-afl --check",
+      "pass": true,
+      "result": "Ready: 2 seeds; no campaign started"
+    },
+    {
+      "command": "python3 -m unittest discover -s tests",
+      "pass": true,
+      "result": "44 tests OK"
+    },
+    {
+      "command": "cd scripts && python3 audit_fuzzing.py",
+      "pass": true,
+      "result": "818/818 AFL++ overlays and 518/518 ecosystem feedback checks current"
+    },
+    {
+      "command": "python3 scripts/validate_catalog.py",
+      "pass": true,
+      "result": "passes only after python3 scripts/build_matrix.py adds c/mp3 to data/pilot-cells.json; that shared file was regenerated for the check and then restored, so the integrator must regenerate it"
+    }
+  ],
+  "notes": [
+    "The libFuzzer binary (-fsanitize=fuzzer) instruments only the harness: libmpg123 is compiled with LLVM coverage flags, not sanitizer coverage. Parser-level fuzz feedback comes from the AFL++ overlay, where build.sh's clang calls, including configure CC, become afl-clang-fast."
+  ],
+  "not_run": [
+    "AFL++ campaign",
+    "malformed-input or vulnerability experiments",
+    "aggregate catalog/website regeneration (build_matrix, build_readmes, audit_projects --write, refresh_smoke_batch.py, smoke reports)"
+  ]
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "mpg123",
+    "version": "1.33.7",
+    "license": "LGPL-2.1-only",
+    "license_evidence": "https://www.mpg123.de/download/mpg123-1.33.7.tar.bz2",
+    "input_api": "mpg123_open_feed(mh); mpg123_feed(mh, local bytes, size); mpg123_decode_frame() until MPG123_NEED_MORE; mpg123_getformat(); mpg123_info2()",
+    "documentation": "https://www.mpg123.de/api/group__mpg123__input.shtml",
+    "source": "https://www.mpg123.de/download/mpg123-1.33.7.tar.bz2",
+    "scope": "Every MPEG Layer III frame of an untagged stream fed from memory and decoded: sample rate, channels, layer, frame count, decoded samples per channel",
+    "family": "libmpg123 MPEG audio decoder",
+    "family_note": "Same libmpg123 engine as the mp3_id3v2/c mpg123 entry and the decoder behind libsndfile, SDL2_mixer and LAME HIP paths there; this record covers plain frame decoding through the feed API, not ID3v2.",
+    "control": "controls/mp3/tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "channels": 1,
+      "layer": 3,
+      "frames": 11,
+      "decoded_samples": 12672
+    },
+    "metric": {
+      "name": "Homebrew install-on-request count (365 days)",
+      "value": 12256,
+      "source": "data/c/mp3/registry-snapshot.json"
+    }
+  }
+]

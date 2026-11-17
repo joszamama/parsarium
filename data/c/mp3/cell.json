@@ -1,0 +1,48 @@
+{
+  "ecosystem": "c",
+  "format": "mp3",
+  "status": "pilot_one_verified_bounded_search",
+  "working_target": 10,
+  "ceiling": 10,
+  "verified_third_party_count": 1,
+  "verified_standard_or_runtime_count": 0,
+  "search_queries": [
+    "mp3",
+    "mpeg audio",
+    "mpg123",
+    "layer iii",
+    "minimp3",
+    "dr_mp3",
+    "libmad"
+  ],
+  "search_totals": {
+    "mp3": 21,
+    "mpeg audio": 5,
+    "mpg123": 1,
+    "layer iii": 1,
+    "minimp3": 0,
+    "dr_mp3": 0,
+    "libmad": 0
+  },
+  "search_hits_recorded": 28,
+  "unique_search_hits": 24,
+  "leads_recorded": 26,
+  "leads_by_status": {
+    "selected": 1,
+    "shared_family": 1,
+    "unresolved": 1,
+    "unresolved_shared_family": 1,
+    "unresolved_no_primary_metric": 2,
+    "excluded": 20
+  },
+  "ranking_metric": "Homebrew install-on-request count (365 days)",
+  "selection": "mpg123 has the highest Homebrew install-on-request count (12,256) among hits whose own C library decodes MPEG Layer III frames from a documented byte API. lame (6,992) ranks next but its HIP decoder is built over libmpg123.",
+  "uncertainty": "One verified path; no padding. Search is a substring match over all Homebrew formula names and descriptions for seven queries, captured 2026-11-17; it misses header-only decoders that are not packaged there. minimp3 and dr_mp3 have no value on the primary metric, so their GitHub stars are recorded as supplemental only and are not compared with Homebrew counts. libmad is an unresolved independent family. Homebrew installs measure macOS/Linux package demand for the whole mpg123 distribution (player and library), not direct use of the decoding API. libmpg123 is the same engine counted under mp3_id3v2/c. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support.",
+  "third_party_evidence": "data/c/mp3/parsers.json",
+  "third_party_control_results": "projects/mp3/c/mpg123/verification.json",
+  "afl_feedback": "data/c/mp3/afl-feedback.json",
+  "runtime_evidence": "data/c/mp3/standard.json",
+  "registry_snapshot": "data/c/mp3/registry-snapshot.json",
+  "unresolved_leads": "data/c/mp3/leads.json",
+  "protocol": "catalog/mp3/PROTOCOL.md"
+}
