@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "checked_at_utc": "2026-11-17T13:40:15.859465+00:00",
-  "projects_total": 8,
-  "projects_passed": 8,
+  "projects_total": 9,
+  "projects_passed": 9,
   "differential_kind": "fixed_valid_nested_array",
   "results": [
     {
@@ -125,6 +125,24 @@
       "differential_afl_tuples": 216,
       "parser_feature_difference": 13,
       "afl_tuple_difference": 13
+    },
+    {
+      "project": "json/php/klkvsk_json_decode_stream",
+      "checked_at_utc": "2026-11-17T15:45:29.006857+00:00",
+      "pass": true,
+      "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "d515496b8f8cf2bcb69c8a8edff403c419c8bb12ae6f658c88aebdba7b243c38",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "repeated_control_identical": true,
+      "control_parser_features": 358,
+      "control_afl_tuples": 378,
+      "differential_parser_features": 362,
+      "differential_afl_tuples": 382,
+      "parser_feature_difference": 22,
+      "afl_tuple_difference": 22
     },
     {
       "project": "json/php/stdlib_json_decode",
