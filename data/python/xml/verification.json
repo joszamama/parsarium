@@ -186,6 +186,93 @@
       "expat_xmlparse_lines": 1615,
       "project_receipt": "projects/xml/python/xmltodict/verification.json",
       "project_receipt_sha256": "70a2dd8cf120b99d9ba8cbda4be0b9633334c28381a7eafee8831da7837bd657"
+    },
+    {
+      "package": "untangle",
+      "version": "1.3.1",
+      "pass": true,
+      "input_api": "untangle.parse(pathlib.Path(local XML file)); Element._name, _attributes, cdata and children filled by untangle.Handler from SAX startElement/characters/endElement events",
+      "tested_sax_parser": "defusedxml.expatreader.DefusedExpatParser",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "c_catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "root": "c_catalog"
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p_amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "root": "order"
+      },
+      "differential_pass": true,
+      "oracle": "lxml 6.1.3 / libxml2 2.15.4 namespace-aware parse in the verified lxml image, projected to untangle qualified-name output with the documented \"-\", \".\", \":\" -> \"_\" rule",
+      "oracle_image_id": "sha256:f9e2e43218406a510c55897c22727865aeba4936b5fd315ddc82abc78dcfe37a",
+      "untangle_matches_projected_oracle": true,
+      "feature_namespaces_true_root_children": 0,
+      "parser_family": "untangle SAX handler over defusedxml 0.7.1 DefusedExpatParser over CPython 3.14 xml.sax/pyexpat over Expat 2.10.0 (shared with xmltodict and xml.etree.ElementTree)",
+      "package_source_files": 3,
+      "package_source_lines": 49,
+      "untangle_lines": 35,
+      "sax_driver_source_lines": 111,
+      "expat_source_lines": 2238,
+      "expat_xmlparse_lines": 1509,
+      "differential_package_source_lines": 49,
+      "differential_sax_driver_source_lines": 112,
+      "differential_expat_source_lines": 2475,
+      "differential_expat_xmlparse_lines": 1586,
+      "afl_feedback": "data/python/xml/untangle-valid-feedback.json",
+      "project_receipt": "projects/xml/python/untangle/verification.json",
+      "project_receipt_sha256": "159786639fa06012ba463f6c0fbdcb38847db996d174b544ae28f81acc64f537",
+      "namespace_caveat": "untangle drops namespace URIs. The adapter does not reconstruct them: element names are lossy (':' becomes '_', indistinguishable from '-', '.' or a literal '_'), so any URI in the summary would be adapter-side namespace processing, not untangle's parse result. Shared fields are therefore compared against the independent lxml/libxml2 oracle projected to untangle's documented naming rule, and the expanded names it loses are recorded in data/python/xml/untangle-valid-feedback.json.",
+      "tree_caveat": "untangle keeps no comments or processing instructions, concatenates each element's character data (CDATA included) into one cdata string, and lists xmlns declarations among ordinary attributes in source order."
     }
   ],
   "standard": [
@@ -220,7 +307,8 @@
       "family": "Expat XML parser",
       "paths": [
         "xmltodict",
-        "xml.etree.ElementTree"
+        "xml.etree.ElementTree",
+        "untangle (SAX via defusedxml DefusedExpatParser)"
       ]
     }
   ]

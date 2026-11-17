@@ -1,0 +1,155 @@
+{
+  "checked_at_utc": "2026-11-17T10:27:50.868321+00:00",
+  "project": "xml/python/untangle",
+  "pass": true,
+  "input_kind": "two fixed valid UTF-8 XML 1.0 namespace controls without DOCTYPE",
+  "tested_sax_parser": "defusedxml.expatreader.DefusedExpatParser",
+  "expat_version": "expat_2.10.0",
+  "feature_namespaces_true_root_children": 0,
+  "oracle": "lxml 6.1.3 / libxml2 2.15.4 namespace-aware parse in the verified lxml image, projected to untangle qualified-name output with the documented \"-\", \".\", \":\" -> \"_\" rule",
+  "oracle_image_id": "sha256:f9e2e43218406a510c55897c22727865aeba4936b5fd315ddc82abc78dcfe37a",
+  "oracle_expanded_matches_lxml_path": true,
+  "untangle_matches_projected_oracle": true,
+  "namespace_uris_dropped": {
+    "control": {
+      "elements": [
+        [
+          "{urn:parsarium:catalog}catalog",
+          "c_catalog"
+        ],
+        [
+          "{urn:parsarium:item}item",
+          "item"
+        ],
+        [
+          "{urn:parsarium:item}item",
+          "item"
+        ],
+        [
+          "{urn:parsarium:item}name",
+          "name"
+        ],
+        [
+          "{urn:parsarium:item}note",
+          "note"
+        ]
+      ],
+      "attributes": [
+        [
+          "{urn:parsarium:catalog}lang",
+          "c:lang"
+        ]
+      ]
+    },
+    "variant": {
+      "elements": [
+        [
+          "{urn:parsarium:order}order",
+          "order"
+        ],
+        [
+          "{urn:parsarium:order}line",
+          "line"
+        ],
+        [
+          "{urn:parsarium:order}sku",
+          "sku"
+        ],
+        [
+          "{urn:parsarium:price}amount",
+          "p_amount"
+        ],
+        [
+          "{urn:parsarium:order}line",
+          "line"
+        ]
+      ],
+      "attributes": [
+        [
+          "{urn:parsarium:price}currency",
+          "p:currency"
+        ]
+      ]
+    }
+  },
+  "feedback_scope": "executed Python lines of untangle 1.3.1, defusedxml 0.7.1 and CPython 3.14 xml/sax during the untangle.parse call, plus Expat 2.10.0 LLVM regions and branches under /work/expat/lib; harness and post-parse summary lines are excluded",
+  "base_image_id": "sha256:bd93a3b586e88357f3e123f71d97c5e331c8a27dd8acb2781eb6a783b756ee5a",
+  "overlay_image_id": "sha256:f10f327da63d458a275a2f98824d78ba5fa46cdfc99174e1e0908c1e59bb07df",
+  "overlay_receipt_sha256": "fb19d298ea7ed719cabed06c99cea562436934e065d943c33a584840df504b5e",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "variant_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "control_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c_catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ],
+    "root": "c_catalog"
+  },
+  "variant_output": {
+    "attributes": [
+      "n=1",
+      "p:currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "order",
+      "line",
+      "sku",
+      "p_amount",
+      "line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "text": [
+      "A-7",
+      "12.50 €"
+    ],
+    "root": "order"
+  },
+  "repeated_control_runs": 5,
+  "control_repeat_identical": true,
+  "repeated_variant_runs": 5,
+  "variant_repeat_identical": true,
+  "control_parser_features": 3121,
+  "variant_parser_features": 3467,
+  "control_package_features": 49,
+  "variant_package_features": 49,
+  "control_sax_driver_features": 111,
+  "variant_sax_driver_features": 112,
+  "control_expat_features": 2961,
+  "variant_expat_features": 3306,
+  "parser_feature_difference": 830,
+  "package_feature_difference": 0,
+  "sax_driver_feature_difference": 1,
+  "expat_feature_difference": 829,
+  "control_afl_tuples": 3038,
+  "variant_afl_tuples": 3374,
+  "afl_tuple_difference": 792
+}
