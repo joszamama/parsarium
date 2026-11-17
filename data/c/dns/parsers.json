@@ -438,5 +438,115 @@
     },
     "rank": 4,
     "afl_feedback": "data/c/dns/udns-feedback-differential.json"
+  },
+  {
+    "name": "getdns",
+    "version": "1.7.3",
+    "license": "BSD-3-Clause",
+    "license_evidence": "LICENSE in the release tarball (sha256 f1404ca2...), checked in the image",
+    "input_api": "getdns_return_t getdns_wire2msg_dict(const uint8_t *wire, size_t wire_sz, getdns_dict **msg_dict)",
+    "documentation": "https://getdnsapi.net/doxygen/group__UDNSDataConversionFunctions.html",
+    "documentation_note": "getdns API reference; the pinned tarball's installed header getdns/getdns_extra.h documents getdns_wire2msg_dict ('Convert wireformat DNS message in a getdns msg_dict representation'), and getdns/getdns.h documents the dict/list getters, getdns_convert_dns_name_to_fqdn and getdns_display_ip_address.",
+    "source": "https://getdnsapi.net/releases/getdns-1-7-3/getdns-1.7.3.tar.gz",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "getdns message-dict decoder (src/rr-iter.c, src/rr-dict.c, src/util-internal.c over the bundled gldns read helpers)",
+    "family_note": "getdns walks the message with its own rr-iter.c/rr-dict.c iterators and builds the message dict in util-internal.c; it bundles gldns, an import of Unbound's sldns (ldns lineage). Distinct normalized non-blank source lines (comments removed, gldns_ mapped to ldns_): getdns's own decoder files rr-iter.c, rr-dict.c, util-internal.c, convert.c, dict.c and list.c share 75 of 3,228 lines (2.3%) with ldns 1.8.4's *.c; the bundled gldns *.c share 1,128 of 3,610 (31.2%). Kept as a distinct package API with the shared lineage stated. Built stub-only without libunbound; no context is created. Names come from getdns_convert_dns_name_to_fqdn and addresses from getdns_display_ip_address; the harness lower-cases names and joins the MX preference and exchange. getdns reports the reserved Z bit, AD and CD separately, so z carries all three.",
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package getdns",
+      "value": 118,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "snapshot": "data/curation/popcon-sourcemax-by_inst.gz"
+    },
+    "project": "projects/dns/c/getdns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+      "value": 118,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T16:38:19.172843+00:00",
+      "snapshot": "data/c/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 5,
+    "afl_feedback": "data/c/dns/getdns-feedback-differential.json"
   }
 ]

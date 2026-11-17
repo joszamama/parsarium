@@ -1,6 +1,6 @@
 # C × DNS: selected parsers (pilot)
 
-Four verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Five verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -12,6 +12,7 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 | 2 | [ldns](https://nlnetlabs.nl/documentation/ldns/wire2host_8h.html) | 1.8.4 | 1,240 | NLnet Labs ldns (wire2host.c, rr.c, packet.c, str2host/host2str for presentation) |
 | 3 | [knot](https://gitlab.nic.cz/knot/knot-dns/-/blob/v3.6.2/src/libknot/packet/pkt.h) | 3.6.2 | 483 | Knot DNS libknot (packet/pkt.c, packet/rrset-wire.c, dname.c; rrset-dump.c for presentation) |
 | 4 | [udns](https://www.corpit.ru/mjt/udns/udns.3.html) | 0.7 | 463 | udns (Michael Tokarev) raw-packet routines (udns_parse.c, udns_dn.c, udns_XtoX.c) |
+| 5 | [getdns](https://getdnsapi.net/doxygen/group__UDNSDataConversionFunctions.html) | 1.7.3 | 118 | getdns message-dict decoder (src/rr-iter.c, src/rr-dict.c, src/util-internal.c over the bundled gldns read helpers) |
 
 **c-ares 1.34.9** (MIT) parses local bytes with `ares_dns_parse(const unsigned char *buf, size_t buf_len, unsigned int flags, ares_dns_record_t **dnsrec)`. Both controls match the oracle summary. The response control covers 1,037 library lines in 58 files. AFL++ feedback repeats 3 times per control; response and query give 837/555 parser features and 393/272 AFL++ tuples, differing by 282 features and 125 tuples ([receipt](c-ares-feedback-differential.json)). Own C decoder; it is also the parser behind Node.js dns, pycares and many resolvers. It keeps AD/CD but not the reserved Z bit.
 
@@ -21,11 +22,11 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 
 **udns 0.7** (LGPL-2.1-or-later) parses local bytes with `dns_getdn(pkt, &cur, end, dn, dnsiz) for question names, then void dns_initparse(struct dns_parse *p, dnscc_t *qdn, dnscc_t *pkt, dnscc_t *cur, dnscc_t *end) + int dns_nextrr(struct dns_parse *p, struct dns_rr *rr), with the dns_qid/dns_qr/.../dns_numar header accessors`. Both controls match the oracle summary. The response control covers 110 library lines in 4 files. AFL++ feedback repeats 3 times per control; response and query give 100/72 parser features and 110/86 AFL++ tuples, differing by 28 features and 24 tuples ([receipt](udns-feedback-differential.json)). Own C decoder of an asynchronous stub-resolver library; only its documented low-level parsing routines are called and no resolver context is created. The routines return each RR's owner, type, class, TTL and RDATA span; the harness renders RDATA with udns calls (dns_ntop for A/AAAA, dns_getdn + dns_dntop for names, dns_get16 for the MX preference) and reads authority/additional by resetting dnsp_rrl to the section count. udns has accessors for AD and CD but none for the reserved Z bit, so z carries AD and CD only.
 
+**getdns 1.7.3** (BSD-3-Clause) parses local bytes with `getdns_return_t getdns_wire2msg_dict(const uint8_t *wire, size_t wire_sz, getdns_dict **msg_dict)`. Both controls match the oracle summary. The response control covers 881 library lines in 58 files. AFL++ feedback repeats 3 times per control; response and query give 860/629 parser features and 701/533 AFL++ tuples, differing by 231 features and 168 tuples ([receipt](getdns-feedback-differential.json)). getdns walks the message with its own rr-iter.c/rr-dict.c iterators and builds the message dict in util-internal.c; it bundles gldns, an import of Unbound's sldns (ldns lineage). Distinct normalized non-blank source lines (comments removed, gldns_ mapped to ldns_): getdns's own decoder files rr-iter.c, rr-dict.c, util-internal.c, convert.c, dict.c and list.c share 75 of 3,228 lines (2.3%) with ldns 1.8.4's *.c; the bundled gldns *.c share 1,128 of 3,610 (31.2%). Kept as a distinct package API with the shared lineage stated. Built stub-only without libunbound; no context is created. Names come from getdns_convert_dns_name_to_fqdn and addresses from getdns_display_ip_address; the harness lower-cases names and joins the MX preference and exchange. getdns reports the reserved Z bit, AD and CD separately, so z carries all three.
+
 ## Remaining leads
 
-| Order | Lead | Metric | Input API lead | Family | Status |
-| ---: | --- | ---: | --- | --- | --- |
-| 1 | getdns | 118 | `getdns_wire2msg_dict(wire, len, &dict)` | getdns over ldns-derived gldns wire code | unresolved |
+None recorded.
 
 ## Checked, excluded or recorded separately
 

@@ -1,0 +1,22 @@
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends ca-certificates clang curl libclang-rt-21-dev llvm make cmake libssl-dev python3 && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+RUN curl --fail --location --retry 3 https://getdnsapi.net/releases/getdns-1-7-3/getdns-1.7.3.tar.gz --output /work/getdns.tar.gz \
+    && echo 'f1404ca250f02e37a118aa00cf0ec2cbe11896e060c6d369c6761baea7d55a2c  /work/getdns.tar.gz' | sha256sum --check \
+    && tar -xf /work/getdns.tar.gz -C /work && mv /work/getdns-1.7.3 /work/getdns-src \
+    && grep -q 'Redistribution and use in source and binary forms' /work/getdns-src/LICENSE
+COPY harness.c build.sh /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+    && { clang --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt
+
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends libssl-dev llvm python3 && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/
+COPY --from=build /work/getdns-src/src /work/getdns-src/src
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh /work/run-control.sh
+RUN chmod +x /work/run-control.sh
+ENTRYPOINT ["/work/run-control.sh"]
