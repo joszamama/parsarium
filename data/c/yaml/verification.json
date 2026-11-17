@@ -1,0 +1,272 @@
+{
+  "checked_at_utc": "2026-11-17T16:54:25.935034+00:00",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "controls": {
+    "primary": "controls/yaml/catalog.yaml",
+    "differential": "controls/yaml/order.yaml"
+  },
+  "control_meaning": "Hand-written schema-neutral YAML 1.2 documents; expected typed trees in controls/yaml/check_controls.py, cross-checked with Ruby Psych (libyaml family).",
+  "third_party": [
+    {
+      "package": "libyaml",
+      "version": "0.2.5",
+      "scope": "One YAML document from a bounded local byte buffer composed by libyaml's loader into a yaml_document_t node graph; schema-neutral YAML 1.2 control subset only",
+      "command": "python3 scripts/run_project.py yaml c libyaml",
+      "receipt": "projects/yaml/c/libyaml/verification.json",
+      "pass": true,
+      "output": {
+        "max_depth": 3,
+        "nodes": {
+          "bool": 2,
+          "float": 2,
+          "int": 7,
+          "map": 7,
+          "null": 1,
+          "seq": 2,
+          "str": 13
+        },
+        "root": "map",
+        "tree": [
+          "map",
+          [
+            [
+              "kind",
+              [
+                "str",
+                "catalog"
+              ]
+            ],
+            [
+              "version",
+              [
+                "int",
+                "2"
+              ]
+            ],
+            [
+              "ratio",
+              [
+                "float",
+                "0.25"
+              ]
+            ],
+            [
+              "offset",
+              [
+                "int",
+                "-17"
+              ]
+            ],
+            [
+              "enabled",
+              [
+                "bool",
+                true
+              ]
+            ],
+            [
+              "retired",
+              [
+                "bool",
+                false
+              ]
+            ],
+            [
+              "missing",
+              [
+                "null"
+              ]
+            ],
+            [
+              "title",
+              [
+                "str",
+                "Café \"quoted\"\tend"
+              ]
+            ],
+            [
+              "single",
+              [
+                "str",
+                "it's here"
+              ]
+            ],
+            [
+              "tags",
+              [
+                "seq",
+                [
+                  [
+                    "str",
+                    "alpha"
+                  ],
+                  [
+                    "str",
+                    "beta"
+                  ],
+                  [
+                    "str",
+                    "gamma delta"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "point",
+              [
+                "map",
+                [
+                  [
+                    "lat",
+                    [
+                      "int",
+                      "1"
+                    ]
+                  ],
+                  [
+                    "lon",
+                    [
+                      "float",
+                      "-2.5"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "items",
+              [
+                "seq",
+                [
+                  [
+                    "map",
+                    [
+                      [
+                        "id",
+                        [
+                          "int",
+                          "7"
+                        ]
+                      ],
+                      [
+                        "name",
+                        [
+                          "str",
+                          "first item"
+                        ]
+                      ],
+                      [
+                        "note",
+                        [
+                          "str",
+                          "line one\nline two\n"
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "map",
+                    [
+                      [
+                        "id",
+                        [
+                          "int",
+                          "8"
+                        ]
+                      ],
+                      [
+                        "name",
+                        [
+                          "str",
+                          "Zürich"
+                        ]
+                      ],
+                      [
+                        "note",
+                        [
+                          "str",
+                          "folded text\n"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "defaults",
+              [
+                "map",
+                [
+                  [
+                    "retries",
+                    [
+                      "int",
+                      "3"
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "base"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "service",
+              [
+                "map",
+                [
+                  [
+                    "settings",
+                    [
+                      "map",
+                      [
+                        [
+                          "retries",
+                          [
+                            "int",
+                            "3"
+                          ]
+                        ],
+                        [
+                          "label",
+                          [
+                            "str",
+                            "base"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "edge"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ],
+        "tree_sha256": "031d7bf7daeecfb14b6c5da4b93235a39776cd31b1121e350b78bd42bbcef62b"
+      },
+      "exact_typed_tree_match": true,
+      "parser_source_lines_covered": 1574,
+      "afl_feedback": "fuzzing/afl-native/yaml/c/libyaml/differential.json",
+      "afl_tuple_difference": 115,
+      "parser_line_difference": 210,
+      "error": null
+    }
+  ],
+  "standard": []
+}
