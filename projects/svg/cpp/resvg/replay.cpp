@@ -1,0 +1,22 @@
+#include "harness.h"
+#include <cstdio>
+
+int main(int argc, char **argv) {
+    if (argc != 2) return 2;
+    std::FILE *file = std::fopen(argv[1], "rb");
+    if (!file) return 3;
+    static std::uint8_t data[1u << 20];
+    std::size_t size = std::fread(data, 1, sizeof(data), file);
+    if (std::ferror(file) || (size == sizeof(data) && std::fgetc(file) != EOF)) { std::fclose(file); return 4; }
+    std::fclose(file);
+    parsarium_svg_result result;
+    if (!parsarium_parse_svg(data, size, result)) return 5;
+    std::printf("{\"width\":%u,\"height\":%u,\"first\":[%u,%u,%u],\"second\":",
+                result.width, result.height, result.first[0], result.first[1], result.first[2]);
+    if (result.second)
+        std::printf("[%u,%u,%u]", (*result.second)[0], (*result.second)[1], (*result.second)[2]);
+    else
+        std::fputs("null", stdout);
+    std::puts("}");
+    return 0;
+}
