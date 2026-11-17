@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "checked_at_utc": "2026-11-17T05:30:08.846838+00:00",
-  "projects_total": 4,
-  "projects_passed": 4,
-  "differential_kind": "fixed_valid_nested_array",
+  "projects_total": 5,
+  "projects_passed": 5,
+  "differential_kind": "fixed_valid_nested_array; JSON-GLib uses parser-only probes with parser-scoped AFL++ allowlists and three repeats per control",
   "parser_feature_scope": "covered LLVM region entries under each pinned parser source prefix; harness excluded",
-  "afl_feedback_scope": "afl-clang-fast edges over the compiled parser sources and the harness; the AFL++ map is not split by file",
+  "afl_feedback_scope": "jansson, json-c, cJSON and yyjson: afl-clang-fast edges over the compiled parser sources and the harness (map not split by file). Debian-search paths: parser-only probe with an AFL_LLVM_ALLOWLIST naming the parser and value-tree sources; the instrumented object set is checked with nm during the build.",
   "standard_feedback": "none: the ISO C standard library documents no JSON API",
   "results": [
     {
@@ -110,6 +110,54 @@
       }
     },
     {
+      "project": "json/c/json-glib",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_parser_scoped_edges_and_source_lines",
+      "overlay_receipt_sha256": "0b344b9a72a4c3f78902b22f748bf776b530a442faeed97f5b91994d93e6f446",
+      "differential_receipt_sha256": "fff4c01565878bf254e2596c18dba91b502d7148275d41a84621598391c4ebf7",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "strings": [
+          "A",
+          "two"
+        ],
+        "root": "array",
+        "top_level_items": 5
+      },
+      "exact_nested_structure_match": true,
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "afl_instrumented_objects": [
+        "json-array.c.o",
+        "json-node.c.o",
+        "json-object.c.o",
+        "json-parser.c.o",
+        "json-scanner.c.o",
+        "json-value.c.o"
+      ],
+      "control_source_lines": 983,
+      "control_afl_tuples": 304,
+      "differential_source_lines": 981,
+      "differential_afl_tuples": 298,
+      "source_line_difference": 34,
+      "afl_tuple_difference": 22,
+      "parser_only_probe": "projects/json/c/json-glib/parser-probe.c",
+      "exact_tree_outputs_verified": true
+    },
+    {
       "project": "json/c/cjson",
       "pass": true,
       "feedback_kind": "c_llvm_parser_regions_and_afl_native_edges",
@@ -200,5 +248,6 @@
         "src/yyjson.c": 190
       }
     }
-  ]
+  ],
+  "command": "python3 scripts/verify_c_json_feedback.py for jansson, json-c, cJSON and yyjson; python3 projects/json/c/<slug>/verify-feedback.py for each Debian-search path"
 }

@@ -10,6 +10,7 @@ Four positive-signal C JSON third-party paths pass two valid controls with forma
 
 - [jansson](jansson/README.md) — verified Docker harness
 - [json-c](json-c/README.md) — verified Docker harness
+- [json-glib](json-glib/README.md) — verified API path
 - [cjson](cjson/README.md) — verified Docker harness
 - [yyjson](yyjson/README.md) — verified Docker harness
 

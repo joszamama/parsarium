@@ -106,6 +106,60 @@
     "project": "projects/json/c/json-c"
   },
   {
+    "name": "json-glib",
+    "version": "1.10.8",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "Pinned 1.10.8 COPYING and SPDX headers (LGPL-2.1-or-later) in the GNOME release tarball",
+    "input_api": "json_parser_load_from_data(JsonParser *parser, const gchar *data, gssize length, GError **error) after json_parser_set_strict(parser, TRUE)",
+    "documentation": "https://gnome.pages.gitlab.gnome.org/json-glib/method.Parser.load_from_data.html",
+    "documentation_note": "The GNOME API reference documents load_from_data with a buffer length and set_strict (RFC 8259 strict mode, since 1.10). The pinned json-glib/json-parser.c carries the same gtk-doc comments (load_from_data line 1471, set_strict line 1869). The JsonObject member list is documented as insertion-ordered.",
+    "source": "https://download.gnome.org/sources/json-glib/1.10/json-glib-1.10.8.tar.xz",
+    "scope": "RFC 8259 JSON text (strict mode) parsed from a bounded local byte buffer into a JsonNode tree; observed valid control subset",
+    "family": "JSON-GLib JsonParser over its own JsonScanner",
+    "family_note": "json-glib/json-parser.c is a recursive-descent parser driven by json-glib/json-scanner.c, JSON-GLib's own tokenizer (originally forked from GLib's GScanner and rewritten for JSON). It builds JsonNode/JsonObject/JsonArray values with int64/double/string/boolean kinds. GLib supplies only containers and memory; no jansson, json-c, cJSON or yyjson code. Debian 1.10.8+ds-2 (forky/sid) matches the pinned upstream release.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "popularity": {
+      "metric": "Debian popcon sourcemax installations, source package json-glib",
+      "value": 163249,
+      "rank": 393,
+      "source": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:32:24.204601+00:00",
+      "snapshot": "data/c/json/registry-snapshot.json"
+    },
+    "project": "projects/json/c/json-glib"
+  },
+  {
     "name": "cjson",
     "version": "1.7.19",
     "license": "MIT",
