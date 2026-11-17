@@ -76,8 +76,51 @@
     "/work/adapter.mjs"
   ],
   "coverage_kind": "native_function_entries",
-  "coverage": "No parser source lines: JSON.parse is V8 C++ inside the node binary and V8 source-range coverage lists no JSON parser script (the run-control checks this). Feedback is gdb function-entry hits on v8::internal::JsonParser<...> text symbols of the pinned, unstripped node binary.",
+  "coverage": "No parser source lines on the pinned binary: JSON.parse is V8 C++ inside the node binary and V8 source-range coverage lists no JSON parser script (the run-control checks this). On the pinned, unstripped binary the project records gdb function-entry hits on v8::internal::JsonParser<...> text symbols. Parser source lines (source_feedback) and AFL++ feedback (afl_feedback) come from two separate builds of the same official Node.js 26.10.0 source.",
   "coverage_subject_prefix": "v8::internal::JsonParser<",
   "native_feedback_smoke": "native-feedback-probe/run-smoke.sh",
-  "native_feedback_limit": "The base control records one-shot JsonParser function-entry sets through gdb; that probe is not AFL++ feedback. A separate AFL++ overlay hashes these function names into its bitmap and requires SYS_PTRACE and seccomp=unconfined. Neither route measures parser source lines, basic blocks, or edges; inlined code is invisible. The probe image records Debian's gdb version but does not hash-pin its package."
+  "native_feedback_limit": "The base control records one-shot JsonParser function-entry sets through gdb on the pinned official binary; that probe is not AFL++ feedback and the AFL++ target does not use it. It measures no parser source lines, basic blocks, or edges; inlined code is invisible. The probe image records Debian's gdb version but does not hash-pin its package.",
+  "source_feedback_smoke": "source-coverage/run-smoke.sh",
+  "source_feedback": {
+    "runtime": "Node.js 26.10.0 source-built from the official tarball (V8 14.6.202.34-node.34) with Clang 20.1.8",
+    "node_source": "https://nodejs.org/dist/v26.10.0/node-v26.10.0.tar.xz",
+    "node_source_tarball_sha256": "7b3a546d33cb7e15a43bdd7a57e0be5d5fd5ffc553e6e4c120033e66f0ba20c5",
+    "release_sums": "https://nodejs.org/dist/v26.10.0/SHASUMS256.txt.asc",
+    "release_sums_signing_key": "5BE8A3F6C8A5C01D106C0AD820B1A390B168D356",
+    "official_linux_arm64_tarball_sha256": "7a6353f63eb3d04765004b4adf172616243e4522434635cb1d26288658b04ab5",
+    "official_binary_link": "bin/node in the signed linux-arm64 tarball has sha256 71b004f18a82f3ea8f26109798564a12e5e4c7989a4c35b93851830b5815dd03, the pinned binary of the base image; the source tarball is listed in the same signed SHASUMS256.",
+    "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+    "compiler": "clang-20 1:20.1.8-2ubuntu8 (official linux-arm64 release builds use Clang 20.1)",
+    "configure": "./configure --v8-enable-temporal-support --without-npm",
+    "instrumented_source": "deps/v8/src/json/json-parser.cc",
+    "reported_sources": [
+      "deps/v8/src/json/json-parser.cc",
+      "deps/v8/src/json/json-parser.h"
+    ],
+    "source_sha256": {
+      "json-parser.cc": "94147cc5b053cb77a15e0d9112d3727b523ecf7d6a4a2d75867541b9d7663192",
+      "json-parser.h": "cf8c5ec7a830a3be92cf0bff706f6b95d5bb731ebe2e18fd0d1ba7adacb8352d"
+    },
+    "instrumented_node_sha256": "6d9e19d947e41fd5a66e9a3407548f87ef3459682cf32c84fed3b44020767645",
+    "instrumented_node_note": "Two independent from-scratch Docker builds on 2026-11-17 produced this same node binary."
+  },
+  "source_feedback_limit": "Clang source-based line coverage of V8's JSON parser, measured on a Node.js 26.10.0 binary built from the official source tarball, not on the pinned official binary (whose hash differs because of the build and the instrumentation). Only deps/v8/src/json/json-parser.cc is instrumented; lines are reported for json-parser.cc and json-parser.h code compiled into that object. JSON.parse builtin glue, string internalization outside the parser, and the adapter's TextDecoder step are not counted. These are replay line counts, not AFL++ map entries; AFL++ feedback comes from a separate source build (afl_feedback).",
+  "afl_target": [
+    "/opt/node/bin/node",
+    "/work/adapter.mjs"
+  ],
+  "afl_feedback": {
+    "kind": "v8_json_parser_sancov_edges",
+    "overlay": "fuzzing/afl-native/json/javascript/stdlib_json_parse",
+    "runtime": "Node.js 26.10.0 source-built from the official tarball (V8 14.6.202.34-node.34) with Clang 20.1.8; only deps/v8/src/json/json-parser.cc compiled with -fsanitize-coverage=trace-pc-guard; node linked with the AFL++ compiler runtime",
+    "node_source_tarball_sha256": "7b3a546d33cb7e15a43bdd7a57e0be5d5fd5ffc553e6e4c120033e66f0ba20c5",
+    "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+    "compiler": "clang-20 1:20.1.8-2ubuntu8 (official linux-arm64 release builds use Clang 20.1)",
+    "configure": "./configure --v8-enable-temporal-support --without-npm",
+    "instrumented_source": "deps/v8/src/json/json-parser.cc",
+    "afl_package": "4.33c-1.1ubuntu1",
+    "instrumented_node_sha256": "0e8d211bfadcd7a9b03d189e5b095d44fe256b42c805eba6d38dcf46fa06f00d",
+    "instrumented_node_note": "Two from-scratch Docker builds on 2026-11-17 (the second with --no-cache) produced this same node binary."
+  },
+  "afl_feedback_limit": "AFL++ map entries come from SanitizerCoverage trace-pc-guard points in the one json-parser.o object of a Node.js 26.10.0 binary built from the official source tarball, not the pinned official binary (whose hash differs because of the build and the instrumentation). Map entries are guard indices with bucketed hit counts; they are not source lines and not comparable to the LLVM line counts. Code inlined from other V8 files into json-parser.o is counted; JSON.parse builtin glue, string internalization outside that object, and the adapter's TextDecoder step are not. Each case starts a fresh node process through the AFL++ fork server (no persistent mode)."
 }

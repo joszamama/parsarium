@@ -1,0 +1,44 @@
+{
+  "kind": "third_party",
+  "api": "symphonia::default::get_probe().probe(&Hint::new(), MediaSourceStream::new(Box::new(Cursor::new(bytes)), ..), FormatOptions::default(), MetadataOptions::default()); FormatReader::next_packet(); symphonia::default::get_codecs().make_audio_decoder(params, ..).decode(&packet)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T12:49:37.349181+00:00",
+  "manifest": "projects/mp3/rust/symphonia/manifest.json",
+  "image_id": "sha256:91fea643be81439fb2b18670cf7ed9a0506e659fa2b47b64844a5ce6e261b000",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "a7edef6a96b696d4e0cab5ee9ebb7ca155ed95f30a6b45bbb8b97d2727f02424",
+  "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+  "project_file_sha256": {
+    "Cargo.lock": "92810e603a7cb571a28ab67ffdce1eb5d20f8930d34786bc7f3dd28684e0957f",
+    "Cargo.toml": "b506bc9fe545434c6b6ed49329276fb3c815ed6a48ec9b3439e67a70eceab433",
+    "Dockerfile": "6e6fef9486ad359245344079e9fadac8b93887aa3928038f912411a547fa4ee5",
+    "manifest.json": "ac30faedcc19d93516cffe72791a4d24f7f4ca175bc883519b2468add9839585",
+    "run-control.sh": "2e3734e68f31872567e73ff459a0c4895f3a0e6289f2a6e4144485ea8a2ca80b",
+    "source-lock.json": "36f0da4a8a7df031f59cc995e1d8b8700b0fcf45302aa812d1bff6b31f915f6e",
+    "src/bin/fuzzer.rs": "5fbd0a82f7fe9684b6c1d0a263c89bd3f5615a77b127b8157d59a78c13cde0ba",
+    "src/bin/replay.rs": "7865e3bf79c4c4344af1e7d98129ae097d2605fc4a8884d860ed279376e173e0",
+    "src/lib.rs": "c48add339810d18e2ad20f1c56de0fc25238ed22c642ca3b41bce9a36c1c4d91"
+  },
+  "output": {
+    "channels": 1,
+    "codec": "mp3",
+    "decoded_frames": 12672,
+    "format": "mp3",
+    "frame_bytes": 2298,
+    "frames": 11,
+    "sample_rate": 44100
+  },
+  "parser_source_files": 1,
+  "parser_source_lines_covered": 23,
+  "format_specific_source_lines_covered": 23,
+  "underlying_source_files": 11,
+  "underlying_source_lines_covered": 1528,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/mp3/rust/symphonia/target/coverage/coverage.json",
+  "pass": true
+}

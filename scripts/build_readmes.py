@@ -388,6 +388,13 @@ def main() -> None:
                               f"python3 parsarium.py run {fmt} {eco} {slug_name} {control}",
                               "```", ""]
                     format_projects.append((eco, api_name, standard_project.parent))
+                elif staged_function and "source_feedback_smoke" in read(staged_function):
+                    lines += ["**Docker control:** [pinned project](" +
+                              link(item_dir, staged_function.parent / "README.md") +
+                              "). V8 JSON parser source lines were measured on Node.js built from the "
+                              "same official source, with only the parser object instrumented. The pinned "
+                              "binary gives gdb function entries. Parser-only AFL++ feedback is not verified, "
+                              "so this path is staged.", ""]
                 elif staged_function:
                     lines += ["**Docker control:** [pinned project](" +
                               link(item_dir, staged_function.parent / "README.md") +

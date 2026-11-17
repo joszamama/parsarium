@@ -46,14 +46,30 @@
         ]
       },
       "family": "V8 native JSON.parse (JsonParser)",
-      "family_note": "JSON.parse is an ECMAScript builtin implemented natively in V8 14.6.202.34-node.34 inside the node binary. A V8 coverage probe of the adapter listed 84 scripts and no JSON parser script, so no parser source lines or V8 basic-block edges are attributed. A staged AFL++ proxy maps the separately observed JsonParser function entries into tuples. The Docker project records the underlying native signal as gdb function-entry hits on the unstripped binary's v8::internal::JsonParser<...> symbols (21 of 142 for the nested-object control, 0 for a node -e 0 baseline, identical on repeat, 23 for the nested-array control). Wrapper packages that call JSON.parse (parse-json, json-parse-even-better-errors, secure-json-parse, @hapi/bourne, fast-json-parse, @discoveryjs/json-ext) share this family.",
+      "family_note": "JSON.parse is an ECMAScript builtin implemented natively in V8 14.6.202.34-node.34 inside the node binary. A V8 coverage probe of the adapter on the pinned binary listed 84 scripts and no JSON parser script. Parser source lines are measured on Node.js 26.10.0 built from the official source tarball with Clang 20.1.8, with only deps/v8/src/json/json-parser.cc instrumented: 0 lines for node -e 0 and for the adapter's decode step without JSON.parse, 865 json-parser.cc/.h lines for the nested-object control (identical per-line counts on repeat), and 756 for the nested-array control. On the pinned official binary, the Docker project records gdb function-entry hits on v8::internal::JsonParser<...> symbols (21 of 142 for the nested-object control, 0 for a node -e 0 baseline, identical on repeat, 23 for the nested-array control). AFL++ feedback comes from a second source build of the same release where only json-parser.cc carries SanitizerCoverage trace-pc-guard and node links the AFL++ runtime; the AFL++ target runs the same adapter on one local file. afl-showmap gives 0 map entries for node -e 0 and for the decode step without JSON.parse, 216 for the nested-object control and 206 for the nested-array control, identical over three runs each, with different maps. Map entries are not line counts. Wrapper packages that call JSON.parse (parse-json, json-parse-even-better-errors, secure-json-parse, @hapi/bourne, fast-json-parse, @discoveryjs/json-ext) share this family.",
       "parser_source_lines_covered": null,
-      "afl_feedback": null,
+      "afl_feedback": {
+        "kind": "v8_json_parser_sancov_edges",
+        "runtime": "Node.js 26.10.0 source-built from the official tarball with Clang 20.1.8; json-parser.cc only under -fsanitize-coverage=trace-pc-guard; AFL++ 4.33c-1.1ubuntu1 runtime",
+        "receipt": "fuzzing/afl-native/json/javascript/stdlib_json_parse/verification.json",
+        "target": "/opt/node/bin/node /work/adapter.mjs @@",
+        "scope": "deps/v8/src/json/json-parser.o trace-pc-guard points only",
+        "object_tuples": 216,
+        "array_tuples": 206
+      },
       "native_feedback": {
         "kind": "native_function_entries_not_source_coverage",
         "receipt": "projects/json/javascript/stdlib_json_parse/verification.json",
         "scope": "v8::internal::JsonParser<...> text symbols in /usr/local/bin/node (142)",
         "control_functions": 21
+      },
+      "source_feedback": {
+        "kind": "llvm_source_lines",
+        "runtime": "Node.js 26.10.0 source-built from the official tarball with Clang 20.1.8",
+        "receipt": "projects/json/javascript/stdlib_json_parse/verification.json",
+        "scope": "deps/v8/src/json/json-parser.cc object only; lines reported for json-parser.cc and json-parser.h",
+        "object_lines_covered": 865,
+        "array_lines_covered": 756
       }
     }
   ],
@@ -72,5 +88,5 @@
     }
   ],
   "no_api_findings": [],
-  "limit": "One valid nested RFC 8259 object control (plus the fixed nested-array second control) verifies JSON.parse after strict UTF-8 decoding on Node.js 26.10.0, not every JSON variant, number range, reviver use, or BOM handling. No parser-source coverage or V8 basic-block edge feedback exists for this native path. A staged AFL++ bridge hashes gdb-observed function-entry sets into tuples; it misses inlined code and says nothing about lines, blocks, or edges."
+  "limit": "One valid nested RFC 8259 object control (plus the fixed nested-array second control) verifies JSON.parse after strict UTF-8 decoding on Node.js 26.10.0, not every JSON variant, number range, reviver use, or BOM handling. V8 parser source lines and AFL++ feedback come from two source builds of the same release, not the pinned official binary. Line counts are replay counts from one build; AFL++ map entries are trace-pc-guard points in json-parser.o from the other, not lines. No fuzz campaign has been run."
 }

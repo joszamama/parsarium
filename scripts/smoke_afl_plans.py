@@ -39,6 +39,8 @@ def check(relative: Path, scratch: Path) -> dict:
     elif php_native:
         expected_tail = ([manifest["afl_entrypoint"], "@@"] if manifest.get("afl_entrypoint")
                          else ["/opt/php/bin/php", "/work/fuzz-target.php", "@@"])
+    elif manifest.get("afl_target"):
+        expected_tail = ["--", *manifest["afl_target"], "@@"]
     elif ((manifest["ecosystem"] == "go" and manifest.get("afl_native_cgo"))
           or (manifest["ecosystem"] == "rust" and manifest.get("afl_native_c_binding"))):
         expected_tail = ["--", manifest["afl_entrypoint"], "@@"]

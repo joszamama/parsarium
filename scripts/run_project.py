@@ -11,6 +11,7 @@ import shutil
 import subprocess
 from docker_slots import docker_build_slot
 from binary_feedback import check_binary_feedback
+from audit_projects import v8_json_source_feedback_ok
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -144,6 +145,7 @@ def main() -> None:
     summary = json.loads((output_dir / "summary.json").read_text())
     assert summary["control_pass"] and summary["output"] == manifest["expected_output"]
     function_feedback = None
+    source_feedback = None
     if native_entries:
         # Native runtime parser (no parser source lines): require scoped, repeatable function-entry feedback.
         assert summary["parser_source_lines_covered"] is None and summary["parser_source_files"] is None
@@ -152,6 +154,15 @@ def main() -> None:
         if smoke.returncode:
             raise RuntimeError(f"native function feedback failed:\n{smoke.stderr[-4000:]}")
         function_feedback = json.loads(smoke.stdout)
+        if "source_feedback_smoke" in manifest:
+            # Same V8 release built from source with only json-parser.cc under Clang coverage.
+            smoke = subprocess.run([str(project / manifest["source_feedback_smoke"])],
+                                   cwd=ROOT, text=True, errors="replace", capture_output=True)
+            if smoke.returncode:
+                raise RuntimeError(f"V8 JSON source feedback failed:\n{smoke.stderr[-4000:]}")
+            source_feedback = json.loads(smoke.stdout)
+            if not v8_json_source_feedback_ok(manifest, source_feedback):
+                raise RuntimeError(f"V8 JSON source feedback is not scoped and repeatable: {source_feedback}")
         if (function_feedback["feedback_kind"] != "native_function_entries_not_source_coverage"
                 or function_feedback["baseline_functions"] != 0
                 or function_feedback["repeat_identical"] is not True
@@ -249,6 +260,9 @@ def main() -> None:
             "native_feedback": function_feedback,
             "native_feedback_limit": manifest["native_feedback_limit"],
         })
+    if source_feedback is not None:
+        receipt.update({"source_feedback": source_feedback,
+                        "source_feedback_limit": manifest["source_feedback_limit"]})
     (project / "verification.json").write_text(json.dumps(receipt, indent=2) + "\n")
     if binary_feedback is not None:
         print(f"Verified {args.format}/{args.ecosystem}/{manifest['package']}: "

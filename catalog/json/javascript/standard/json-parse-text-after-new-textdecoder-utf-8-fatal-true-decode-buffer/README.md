@@ -44,4 +44,9 @@
 }
 ```
 
-**Docker control:** [pinned project](../../../../../projects/json/javascript/stdlib_json_parse/README.md). V8 JSON parser function entries were observed; source lines and AFL++ feedback are unavailable.
+## Run this target
+
+```sh
+python3 parsarium.py build json javascript stdlib_json_parse
+python3 parsarium.py run json javascript stdlib_json_parse controls/json/nested-object.json
+```

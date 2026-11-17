@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "project": "json/javascript/stdlib_json_parse",
+  "checked_at_utc": "2026-11-17T13:06:30.734000+00:00",
+  "status": "ready",
+  "prepare_command": [
+    "python3",
+    "parsarium.py",
+    "afl",
+    "prepare",
+    "json",
+    "javascript",
+    "stdlib_json_parse",
+    "RUN_DIR",
+    "--seed",
+    "controls/json/nested-array.json"
+  ],
+  "prepare_output_first_line": "Prepared 2 seeds in RUN_DIR",
+  "check_command": [
+    "python3",
+    "parsarium.py",
+    "afl",
+    "run",
+    "RUN_DIR",
+    "--check"
+  ],
+  "check_output": "Ready: json/javascript/stdlib_json_parse (2 seeds, v8_json_parser_sancov_edges)",
+  "afl_target": [
+    "/opt/node/bin/node",
+    "/work/adapter.mjs",
+    "@@"
+  ],
+  "unique_seeds": 2,
+  "feedback_kind": "v8_json_parser_sancov_edges",
+  "image_id": "sha256:ce8a61c2c4e8de2fcef5863d85604f3f5f6e53210ff4bc5017984677b5730156",
+  "campaign_started": false,
+  "overlay_receipt_sha256": "0a8012e787f88f156342a12c0bfead40fdbc9eee246200b2af36ca305a1e03da",
+  "cli_file_sha256": {
+    "parsarium.py": "79ab05d7c224aeff8bcda8bcea28a3a4b76e9967f18378c0b436c0e67a403060",
+    "scripts/prepare_afl_run.py": "bc3e3181ec3caddff9b7c9d20a5292ebc14b6d5634874e989c3c93a1d344e550",
+    "scripts/run_prepared_afl.py": "60094196498ec26876844c57c4d502388eab98272764d9863511349002e337ab"
+  }
+}
