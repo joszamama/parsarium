@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "format": "pdf",
+  "ecosystem": "cpp",
+  "package": "pdfwriter",
+  "release": "4.6.2",
+  "catalog_parser": "data/cpp/pdf/parsers.json",
+  "source_lock": "projects/pdf/cpp/pdfwriter/source-lock.json",
+  "source_sha256": "0a36815ccc9d207028567f90039785c824b211169ba5da68de84d0c15455ab62",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/pdf/one-page.pdf",
+  "control_sha256": "9bbfad1ba7ac5d0f4e25dd1d2e00c9f4cc7a493e303034b5884759f42ec5f60a",
+  "expected_output": {
+    "pages": 1
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in the pinned PDF-Writer PDFParser, tokenizer, object parser, and file input streams",
+  "parser_family": "PDF-Writer (PDFHummus) PDF parser; an independent C++ parser with its own tokenizer, object parser, and cross-reference reader, distinct from PoDoFo, Poppler, qpdf, and MuPDF",
+  "coverage_subject_prefix": "/work/source/PDFWriter/",
+  "format_specific_coverage_file_suffix": "/PDFParser.cpp"
+}
