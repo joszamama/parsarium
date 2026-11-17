@@ -289,6 +289,7 @@ def main() -> None:
         for eco in ECOSYSTEMS:
             source = ROOT / "data" / eco / fmt
             state = pilot_by_cell[(fmt, eco)]
+            cell_record = read(source / "cell.json") if (source / "cell.json").is_file() else {}
             cell_dir = format_dir / eco
             entries = read(source / "parsers.json") if (source / "parsers.json").is_file() else []
             verification = (read(source / "verification.json")
@@ -304,6 +305,14 @@ def main() -> None:
                     raise ValueError(f"pilot parser lacks a verified control: {fmt}/{eco}/{entry['name']}")
                 project = projects.get((fmt, eco, entry["name"]))
                 ready = bool(project and fully_runnable(project[0], project[1]))
+                result_path = source / "verification.json"
+                if not result_path.is_file():
+                    evidence = (entry.get("evidence") or
+                                cell_record.get("third_party_control_results") or
+                                (entry.get("project", "") + "/verification.json"))
+                    result_path = ROOT / evidence
+                if not result_path.is_file():
+                    raise ValueError(f"pilot parser lacks saved result: {fmt}/{eco}/{entry['name']}")
                 docs = entry["documentation"]
                 docs = [docs] if isinstance(docs, str) else docs
                 lines = [f"# {entry['name']} — {format_label} / {ECO_LABEL[eco]}", "",
@@ -316,7 +325,7 @@ def main() -> None:
                          "- **Documentation:** " + " · ".join(f"[API reference](<{url}>)" for url in docs),
                          f"- **Valid control:** [`{control}`]({link(item_dir, ROOT / control)})",
                          f"- **Catalog evidence:** [parser record]({link(item_dir, source / 'parsers.json')}) · "
-                         f"[control result]({link(item_dir, source / 'verification.json')})", "",
+                         f"[control result]({link(item_dir, result_path)})", "",
                          "## Observed control result", "", "```json",
                          json.dumps(output, indent=2, ensure_ascii=False), "```", ""]
                 if ready:

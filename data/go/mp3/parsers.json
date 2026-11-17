@@ -1,0 +1,35 @@
+[
+  {
+    "name": "github.com/hajimehoshi/go-mp3",
+    "module": "github.com/hajimehoshi/go-mp3",
+    "version": "v0.3.4",
+    "license": "Apache-2.0",
+    "input_api": "NewDecoder(io.Reader) (*Decoder, error); Read([]byte); SampleRate(); Length()",
+    "documentation": "https://pkg.go.dev/github.com/hajimehoshi/go-mp3@v0.3.4",
+    "source": "https://github.com/hajimehoshi/go-mp3/tree/v0.3.4",
+    "scope": "MPEG-1/2/2.5 Layer III frame headers, side info and main data decoded to 16-bit stereo PCM; untagged input only in this pilot",
+    "family": "hajime/go-mp3 lineage",
+    "family_note": "Same decoder already counted under mp3_id3v2 with a tagged control and root-package-only coverage. Wrappers faiface/beep/mp3, gopxl/beep/v2/mp3 and ebiten/v2/audio/mp3 share this decoder and are not counted here.",
+    "control": "controls/mp3/go-tone-44k-mono.mp3",
+    "expected_output": {
+      "sample_rate": 44100,
+      "length_bytes": 50688,
+      "decoded_bytes": 50688,
+      "pcm_sha256": "18a327dc0181f97f5702af2a35900734e04a0f0bee3091e77580dfe5b8397304"
+    },
+    "differential_control": "controls/mp3/go-tone-22k-stereo.mp3",
+    "differential_expected_output": {
+      "sample_rate": 22050,
+      "length_bytes": 27648,
+      "decoded_bytes": 27648,
+      "pcm_sha256": "454a8580b026f4b35026042df3e21768beb3b9fc1f1f1037701902abab2ea0a9"
+    },
+    "evidence": "projects/mp3/go/github_com_hajimehoshi_go_mp3/verification.json",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 294,
+      "source": "data/go/mp3/registry-snapshot.json"
+    },
+    "project": "projects/mp3/go/github_com_hajimehoshi_go_mp3"
+  }
+]

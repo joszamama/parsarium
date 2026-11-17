@@ -1,0 +1,128 @@
+[
+  {
+    "name": "github.com/faiface/beep/mp3",
+    "status": "shared_family",
+    "imported_by_packages": 444,
+    "version_seen": "v1.1.0",
+    "license": "MIT",
+    "reason": "Wraps github.com/hajimehoshi/go-mp3 (hajime/go-mp3 lineage); not counted as a separate plain MP3 parser in this pilot.",
+    "source": "https://pkg.go.dev/github.com/faiface/beep/mp3"
+  },
+  {
+    "name": "github.com/dhowden/tag",
+    "status": "excluded",
+    "imported_by_packages": 381,
+    "version_seen": "v0.0.0-...-3d75831",
+    "license": "BSD-2-Clause",
+    "reason": "Tag metadata reader (ID3, MP4, FLAC, OGG); does not decode MPEG audio frames, so it cannot give a frame-derived or decoded-audio result for an untagged MP3.",
+    "source": "https://pkg.go.dev/github.com/dhowden/tag"
+  },
+  {
+    "name": "github.com/hajimehoshi/ebiten/v2/audio/mp3",
+    "status": "shared_family",
+    "imported_by_packages": 144,
+    "version_seen": "v2.10.6",
+    "license": "Apache-2.0",
+    "reason": "Ebitengine audio wrapper around github.com/hajimehoshi/go-mp3; not counted separately.",
+    "source": "https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio/mp3"
+  },
+  {
+    "name": "github.com/tcolgate/mp3",
+    "status": "unresolved",
+    "imported_by_packages": 62,
+    "version_seen": "v0.0.0-...-e79c5a4",
+    "license": "MIT",
+    "reason": "Frame decoder with documented NewDecoder(io.Reader).Decode(*Frame,*int); verified in mp3_id3v2 on a tagged control, but an untagged-control adapter, source coverage and AFL++ bridge for this pilot remain unchecked.",
+    "source": "https://pkg.go.dev/github.com/tcolgate/mp3"
+  },
+  {
+    "name": "github.com/gopxl/beep/v2/mp3",
+    "status": "shared_family",
+    "imported_by_packages": 44,
+    "version_seen": "v2.1.1",
+    "license": "MIT",
+    "reason": "Fork of faiface/beep; wraps github.com/hajimehoshi/go-mp3; not counted separately.",
+    "source": "https://pkg.go.dev/github.com/gopxl/beep/v2/mp3"
+  },
+  {
+    "name": "github.com/bluenviron/mediacommon/v2/pkg/codecs/mpeg4audio",
+    "status": "excluded",
+    "imported_by_packages": 42,
+    "version_seen": "v2.10.0",
+    "license": "MIT",
+    "reason": "MPEG-4 audio (AAC) configuration utilities, not MPEG-1/2 Layer III files.",
+    "source": "https://pkg.go.dev/github.com/bluenviron/mediacommon/v2/pkg/codecs/mpeg4audio"
+  },
+  {
+    "name": "github.com/tosone/minimp3",
+    "status": "unresolved",
+    "imported_by_packages": 34,
+    "version_seen": "v1.1.0",
+    "license": "MIT",
+    "reason": "cgo binding with vendored minimp3.h (separate C decoder family); documented DecodeFull([]byte) is verified in mp3_id3v2 on a tagged control, but this pilot has not checked it on the untagged controls or bridged C source coverage.",
+    "source": "https://pkg.go.dev/github.com/tosone/minimp3"
+  },
+  {
+    "name": "github.com/sjzar/go-lame",
+    "status": "excluded",
+    "imported_by_packages": 26,
+    "version_seen": "v0.0.9",
+    "license": "MIT",
+    "reason": "LAME encoder binding; the documented API encodes PCM rather than parsing MP3 input.",
+    "source": "https://pkg.go.dev/github.com/sjzar/go-lame"
+  },
+  {
+    "name": "github.com/200sc/klangsynthese/mp3",
+    "status": "unresolved",
+    "imported_by_packages": 11,
+    "version_seen": "v0.2.1",
+    "license": "Apache-2.0",
+    "reason": "Documented Load(io.ReadCloser); its adapter panicked on the tagged mp3_id3v2 control and was not retried on the untagged controls.",
+    "source": "https://pkg.go.dev/github.com/200sc/klangsynthese/mp3"
+  },
+  {
+    "name": "github.com/dmulholl/mp3lib",
+    "status": "unresolved",
+    "imported_by_packages": 9,
+    "version_seen": "v1.0.0",
+    "license": "Unlicense",
+    "reason": "Documented NextFrame reads MPEG frames from a stream; control adapter remains unchecked.",
+    "source": "https://pkg.go.dev/github.com/dmulholl/mp3lib"
+  },
+  {
+    "name": "github.com/korandiz/mpa",
+    "status": "unresolved",
+    "imported_by_packages": 9,
+    "version_seen": "v1.0.0",
+    "license": "GPL-3.0",
+    "reason": "GPL-3.0 MPEG-1 Audio decoder (separate implementation); control adapter remains unchecked.",
+    "source": "https://pkg.go.dev/github.com/korandiz/mpa"
+  },
+  {
+    "name": "github.com/gen2brain/mpeg",
+    "status": "excluded",
+    "imported_by_packages": 7,
+    "version_seen": "v0.7.0",
+    "license": "MIT",
+    "reason": "Documented audio decoder handles MPEG-1 Layer II inside MPEG-PS, not Layer III MP3 streams.",
+    "source": "https://pkg.go.dev/github.com/gen2brain/mpeg"
+  },
+  {
+    "name": "github.com/derat/mpeg",
+    "status": "unresolved",
+    "imported_by_packages": 3,
+    "version_seen": "v0.0.0-...-1ba0e56",
+    "license": "BSD-3-Clause",
+    "reason": "Documented ReadFrameInfo reads MPEG audio frame headers from a file; control adapter remains unchecked.",
+    "source": "https://pkg.go.dev/github.com/derat/mpeg"
+  },
+  {
+    "name": "github.com/fgergo/mp3",
+    "status": "unresolved",
+    "imported_by_packages": 2,
+    "version_seen": "v1.0.0",
+    "license": "MIT",
+    "reason": "Fork of github.com/tcolgate/mp3 frame decoder (same lineage); unchecked.",
+    "source": "https://pkg.go.dev/github.com/fgergo/mp3"
+  }
+]
