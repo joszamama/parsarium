@@ -1,6 +1,6 @@
 # JavaScript × SQL: pilot ranking
 
-One third-party path is control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
+Two third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
 
 ## Primary within-cell adoption metric
 
@@ -9,8 +9,9 @@ npm downloads, last month, captured 2026-11-17 ([snapshot](registry-snapshot.jso
 | Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [node-sql-parser](https://www.npmjs.com/package/node-sql-parser/v/5.4.0) | 5.4.0 | 13,709,122 | `new Parser().astify(local UTF-8 text, {database: 'postgresql'}) from node-sql-parser/build/postgresql`; dialect: PostgreSQL grammar build (database: postgresql) | node-sql-parser PEG.js grammars (one generated parser per database) |
+| 2 | [pgsql-ast-parser](https://www.npmjs.com/package/pgsql-ast-parser/v/12.0.2) | 12.0.2 | 7,717,032 | `parse(local UTF-8 text) -> Statement[]`; dialect: PostgreSQL | pgsql-ast-parser nearley grammar and moo lexer |
 
-Receipts: [node-sql-parser](../../../projects/sql/javascript/node_sql_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/node_sql_parser/differential.json).
+Receipts: [node-sql-parser](../../../projects/sql/javascript/node_sql_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/node_sql_parser/differential.json), [pgsql-ast-parser](../../../projects/sql/javascript/pgsql_ast_parser/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/javascript/pgsql_ast_parser/differential.json).
 
 ## Leads by the same metric
 
@@ -18,8 +19,8 @@ Receipts: [node-sql-parser](../../../projects/sql/javascript/node_sql_parser/ver
 | --- | ---: | --- | --- |
 | sql-formatter | 29,933,061 | excluded | — |
 | node-sql-parser | 13,709,122 | selected | node-sql-parser PEG.js grammars |
-| libpg-query | 11,829,732 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
-| pgsql-ast-parser | 7,717,032 | unresolved | pgsql-ast-parser nearley grammar |
+| libpg-query | 11,829,732 | unresolved_coverage_blocker | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| pgsql-ast-parser | 7,717,032 | selected | pgsql-ast-parser nearley grammar |
 | pg-query-emscripten | 1,749,295 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | @guanmingchiu/sqlparser-ts | 598,900 | unresolved | sqlparser-rs (WASM) |
 | sql-parser-cst | 536,703 | unresolved | sql-parser-cst Peggy grammar |

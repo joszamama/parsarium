@@ -27,23 +27,24 @@
     },
     {
       "name": "libpg-query",
-      "status": "unresolved",
+      "status": "unresolved_coverage_blocker",
       "metric_value": 11829732,
       "metric_error": null,
       "latest_release_observed": "18.2.4",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "parse / parseSync",
-      "reason": "parse(sql) returns the PostgreSQL parse tree from a WASM build of libpg_query."
+      "reason": "parse(sql) returns the PostgreSQL parse tree from a WASM build of libpg_query. Not selected in this round: the parser runs as libpg_query compiled to WebAssembly, and Node V8 coverage does not report C source lines inside the module, so the parser-source coverage gate cannot be met with the JavaScript harness pattern."
     },
     {
       "name": "pgsql-ast-parser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 7717032,
       "metric_error": null,
       "latest_release_observed": "12.0.2",
       "family": "pgsql-ast-parser nearley grammar",
       "documented_api_lead": "parse",
-      "reason": "parse(sql) returns a typed AST (select/insert statements) from its own nearley grammar."
+      "reason": "parse(sql) returns a typed AST (select/insert statements) from its own nearley grammar.",
+      "selected_release": "12.0.2"
     },
     {
       "name": "pg-query-emscripten",

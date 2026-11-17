@@ -1,0 +1,70 @@
+{
+  "kind": "third_party",
+  "api": "parse(local UTF-8 text) from pgsql-ast-parser -> Statement[] typed AST",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T18:52:57.670708+00:00",
+  "manifest": "projects/sql/javascript/pgsql_ast_parser/manifest.json",
+  "image_id": "sha256:81f3e5244f9431fbe04f49d1f867f345cf7a4cbe1cc05e3afff6abc9e2206c46",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "v26.10.0",
+    "11.19.1",
+    "parsarium-pgsql-ast-parser-target@12.0.2 /work",
+    "+-- @jazzer.js/core@4.0.0",
+    "`-- pgsql-ast-parser@12.0.2"
+  ],
+  "source_sha256": "7eb8acd1236f60907601aa3d7d05221b72accd102f543f7a9c0b751d55abde37",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "072bbdb6926ce1c187a44604372af1b0e8876bd2a7a1c93e019e5420065b80aa",
+    "adapter.js": "0d32da49fa00f6c8b04883d21d23db427793c59fddba803ca51ff087b8755c95",
+    "fuzz.js": "032ca4d2574a15a43f8fc9fc6d4cfb61050fc43dcf173bb60f529405530dd0ba",
+    "harness.js": "d6a796853ea0b1712a535b237158d71a08c4548865142410843257d1c8ac57ed",
+    "manifest.json": "c1779ee301d5c831c99441c3e4337f20c1bc0f56acbc77a52a22ecc0f358ee9c",
+    "package-lock.json": "1d025da70dc37d0d243066baec1ad60e43dd9c40feda25fdb4cff6b24b8bb966",
+    "package.json": "be184f5ec3516937213d656113a7a263762c5f5841017767e9b90b9dcf52a70d",
+    "replay.js": "065eb97ffd29b4b6fb11d021624bacecc1baa32efe0dc099927f8e756517bca5",
+    "run-control.js": "ab7a01399f5c4ea7c7124f8fb6fd62f54a83091722fd7ed09f111c68626a1fca",
+    "source-lock.json": "a2f2d269daf9b8f34a2ec58732dc4354f92eff93dd1fc74a82764a3b0d63cf64"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 1,
+  "parser_source_lines_covered": 3035,
+  "format_specific_source_lines_covered": null,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/javascript/pgsql_ast_parser/target/coverage/coverage.json",
+  "pass": true
+}
