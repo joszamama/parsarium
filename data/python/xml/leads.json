@@ -1,11 +1,11 @@
 {
   "format": "xml",
   "ecosystem": "python",
-  "status": "targeted_documentation_leads_only",
+  "status": "bounded_pypi_name_search_and_targeted_documentation_leads",
   "observed_on_utc": "2026-11-17",
-  "search_surface": "Targeted PyPI project pages and project documentation; bounded PyPI Simple Index search remains pending",
+  "search_surface": "Targeted PyPI project pages and project documentation for the first nine leads; then the PyPI Simple JSON project-name index filtered locally (seven name queries, first 100 alphabetical hits each) with a top-15,000 PyPI package list used only to pick plausible high-adoption leads; see registry-snapshot.json",
   "search_limit_per_query": 100,
-  "searched_candidate_count": 9,
+  "searched_candidate_count": 30,
   "adoption_metric": {
     "name": "PyPI Stats last_month downloads excluding known mirrors",
     "source": "https://pypistats.org/api/",
@@ -22,6 +22,14 @@
       "status": "promoted_to_verified",
       "family_hint": "libxml2",
       "verified_evidence": "data/python/xml/verification.json"
+    },
+    {
+      "name": "et-xmlfile",
+      "last_month": 351851730,
+      "registry": "https://pypi.org/project/et-xmlfile/",
+      "status": "excluded",
+      "reason": "Incremental XML writer (an implementation of lxml.xmlfile for openpyxl); it has no API that parses XML input. Serializer, not a parser path.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
     },
     {
       "name": "beautifulsoup4",
@@ -54,6 +62,14 @@
       "family_hint": "CPython Expat"
     },
     {
+      "name": "elementpath",
+      "last_month": 7894989,
+      "registry": "https://pypi.org/project/elementpath/",
+      "status": "excluded",
+      "reason": "XPath 1.0-3.1 and XSD datatype processor over caller-supplied ElementTree or lxml trees; it does not read XML bytes. Not a parser path.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
       "name": "xmlschema",
       "last_month": 7391962,
       "registry": "https://pypi.org/project/xmlschema/",
@@ -64,13 +80,23 @@
       "verified_evidence": "data/python/xml/verification.json"
     },
     {
+      "name": "selectolax",
+      "last_month": 6339408,
+      "registry": "https://pypi.org/project/selectolax/",
+      "status": "excluded",
+      "reason": "HTML5 parser bindings (Lexbor/Modest); HTML tokenizers are excluded by the XML cell protocol.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
       "name": "scrapy",
       "last_month": 4661201,
-      "registry": "https://pypi.org/project/Scrapy/",
+      "registry": "https://pypi.org/project/scrapy/",
       "api_evidence": "https://docs.scrapy.org/en/latest/topics/selectors.html",
       "api_hint": "Selector(text=local XML, type='xml')",
-      "status": "lead",
-      "family_hint": "Parsel/lxml/libxml2"
+      "status": "excluded",
+      "family_hint": "Parsel/lxml/libxml2",
+      "reason": "scrapy.Selector is a subclass of the selected parsel.Selector; Selector(text=..., type='xml') runs the same Parsel SafeXMLParser over lxml/libxml2. Same parser path and API as the selected parsel row; not counted separately.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
     },
     {
       "name": "parsel",
@@ -88,7 +114,33 @@
       "registry": "https://pypi.org/project/xsdata/",
       "api_evidence": "https://xsdata.readthedocs.io/en/v20.9/xml.html",
       "api_hint": "XmlParser.from_bytes(local XML, with matching dataclass)",
-      "status": "lead"
+      "status": "excluded",
+      "reason": "Typed dataclass binding: XmlParser.from_bytes needs a target class generated from a schema. Its generic AnyElement is a wildcard field type, not a usable root view: XmlParser().from_bytes(control, AnyElement) raises 'Unknown property AnyElement:{urn:parsarium:item}item', and with fail_on_unknown_properties=False the root comes back with no name and no children (checked with xsdata 26.10 on the catalog control). Mapping layer requiring a caller schema (laravie precedent); not counted.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "pydantic-xml",
+      "last_month": 2948648,
+      "registry": "https://pypi.org/project/pydantic-xml/",
+      "status": "excluded",
+      "reason": "pydantic model binding: parsing requires caller-defined BaseXmlModel classes; no generic element view. Mapping layer requiring a caller schema; not counted.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "saxonche",
+      "last_month": 1978505,
+      "registry": "https://pypi.org/project/saxonche/",
+      "status": "excluded",
+      "reason": "SaxonC-HE 13 XSLT/XQuery/XPath processor shipped as a GraalVM native-image library; PySaxonProcessor.parse_xml works on bytes, but the parser is closed AOT-compiled code with no source to instrument, so it cannot meet the parser-source coverage and AFL++ runnability gate. Not counted.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "tree-sitter-xml",
+      "last_month": 1644966,
+      "registry": "https://pypi.org/project/tree-sitter-xml/",
+      "status": "excluded",
+      "reason": "tree-sitter grammar for XML and DTD: produces a concrete syntax tree of raw tokens without reference decoding or namespace processing (grammar packages are excluded by the XML cell protocol).",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
     },
     {
       "name": "pyquery",
@@ -101,6 +153,54 @@
       "verified_evidence": "data/python/xml/verification.json"
     },
     {
+      "name": "cmeel-tinyxml2",
+      "last_month": 902436,
+      "registry": "https://pypi.org/project/cmeel-tinyxml2/",
+      "status": "excluded",
+      "reason": "cmeel distribution of the TinyXML-2 C++ library (headers, shared library and CMake files for C++ builds); it exposes no Python parsing API.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "xmljson",
+      "last_month": 684142,
+      "registry": "https://pypi.org/project/xmljson/",
+      "status": "excluded",
+      "reason": "Converts caller-supplied ElementTree/lxml Element objects to dicts with several conventions; the caller parses the bytes with lxml or ElementTree. No local-bytes parse API of its own.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "alibabacloud-tea-xml",
+      "last_month": 528619,
+      "registry": "https://pypi.org/project/alibabacloud-tea-xml/",
+      "status": "excluded",
+      "reason": "Alibaba Cloud SDK helper: Client.parse_xml(body, response) runs ElementTree.fromstring and converts the tree to a dict. The README documents installation only; the method's only description is a docstring saying it parses the body into a target response model (a caller model, ignored by the 0.0.3 code). No documented generic parse API; downloads are transitive SDK installs. Not counted.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "xmltojson",
+      "last_month": 504255,
+      "registry": "https://pypi.org/project/xmltojson/",
+      "status": "excluded",
+      "reason": "Command-line wrapper: parse() calls the selected xmltodict.parse and json.dumps; no parsing code of its own. Same parser path as xmltodict; not counted.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "djangorestframework-xml",
+      "last_month": 363971,
+      "registry": "https://pypi.org/project/djangorestframework-xml/",
+      "status": "excluded",
+      "reason": "Django REST framework request parser for an ad-hoc XML payload format: XMLParser.parse drops the root name and every attribute, collapses same-name siblings (the catalog control's two item elements overwrite each other) and coerces text to int/Decimal/datetime. Fails the shared control result; not counted.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "xmldiff",
+      "last_month": 333136,
+      "registry": "https://pypi.org/project/xmldiff/",
+      "status": "excluded",
+      "reason": "Computes edit scripts between two lxml trees; a diff tool over lxml, not a parser path.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
       "name": "untangle",
       "last_month": 310666,
       "registry": "https://pypi.org/project/untangle/",
@@ -111,6 +211,38 @@
       "verified_evidence": "data/python/xml/verification.json"
     },
     {
+      "name": "pandas-read-xml",
+      "last_month": 264115,
+      "registry": "https://pypi.org/project/pandas-read-xml/",
+      "status": "excluded",
+      "reason": "Reads XML into pandas DataFrames through xmltodict (a declared dependency); no parser of its own. Not counted.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "pyaxmlparser",
+      "last_month": 202177,
+      "registry": "https://pypi.org/project/pyaxmlparser/",
+      "status": "excluded",
+      "reason": "Parses Android binary AXML from APK files, not XML 1.0 text. Out of format scope.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "mwxml",
+      "last_month": 161887,
+      "registry": "https://pypi.org/project/mwxml/",
+      "status": "excluded",
+      "reason": "Iterator over the MediaWiki XML dump schema (pages, revisions); schema-specific, not a generic XML element view.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "beautifulsoup",
+      "last_month": 153746,
+      "registry": "https://pypi.org/project/beautifulsoup/",
+      "status": "excluded",
+      "reason": "Beautiful Soup 3.2.2 (Python 2 only), the predecessor of the selected beautifulsoup4; it does not install on the cell's Python 3.14 runtime. Predecessor path; not counted.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
       "name": "jxmlease",
       "last_month": 118785,
       "registry": "https://pypi.org/project/jxmlease/",
@@ -119,6 +251,33 @@
       "status": "promoted_to_verified",
       "family_hint": "jxmlease node builder over CPython pyexpat / Expat (raw names; shared with xmltodict, untangle and ElementTree)",
       "verified_evidence": "data/python/xml/verification.json"
+    },
+    {
+      "name": "xml-python",
+      "last_month": 114355,
+      "registry": "https://pypi.org/project/xml-python/",
+      "status": "excluded",
+      "reason": "Builder objects map tags to caller-supplied parser and maker functions (xml_python.Builder); without that caller mapping it reports nothing. Mapping layer requiring a caller schema; not counted.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "rapidxml",
+      "last_month": 8139,
+      "registry": "https://pypi.org/project/rapidxml/",
+      "status": "excluded",
+      "reason": "RapidXml 2.1.4 (Python C++ extension over bundled RapidXML 1.13, the RapidXML family of the C++ cell) fails both valid controls through its documented RapidXml(bytes) API: the default flags (parse_no_data_nodes | parse_no_utf8) drop the catalog control's CDATA text 'x < y', and on the order control the decimal/hex character reference for the euro sign is stored as non-UTF-8 bytes, so reading the values raises SystemError over UnicodeDecodeError. The undocumented parse_cdata=True keyword switches to parse_declaration_node and parses both controls to the raw-name summary, but it is not part of the documented API. Not promoted in this round. Evidence: data/python/xml/rapidxml-lead-check.json.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json",
+      "evidence": "data/python/xml/rapidxml-lead-check.json",
+      "api_hint": "rapidxml.RapidXml(local XML bytes)"
+    },
+    {
+      "name": "pygixml",
+      "last_month": 7239,
+      "registry": "https://pypi.org/project/pygixml/",
+      "status": "excluded",
+      "reason": "Cython bindings over pugixml and yxml, but the published license adds a usage condition to the MIT text ('To use this software, you must star the project on GitHub'), so it is not an open-source license as written; it also ships no aarch64 Linux wheel. Not counted.",
+      "metric_snapshot": "data/python/xml/registry-snapshot.json"
     }
-  ]
+  ],
+  "registry_snapshot": "data/python/xml/registry-snapshot.json"
 }

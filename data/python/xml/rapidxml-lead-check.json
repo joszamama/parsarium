@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T23:20:25.483600+00:00",
+  "package": "RapidXml (PyPI rapidxml)",
+  "release": "2.1.4",
+  "sdist_sha256": "aae02d75c98c062927d1a5c40f07838c65760b144fd0d7322f097a27a081205d",
+  "license": "MIT",
+  "image_id": "sha256:5166cec2a64af2d0a313b7614ace8db90b3e3385b4f98780d718013bd933d9e6",
+  "api": "rapidxml.RapidXml(bytes) as documented in the README; parse_cdata=True is an undocumented keyword of the C extension",
+  "family": "Python C++ extension over bundled RapidXML 1.13 headers (same RapidXML family as the C++ XML cell's RapidXML path)",
+  "probe_file_sha256": {
+    "Dockerfile": "bf5ceac020eb4cda070fd93b8e9bebbe1e5f195fa68c0ccb33d991401618d029",
+    "probe.py": "ac5937af5d156662e4da013fd06ba5c06434ad93db1cdb8f3badc609f6d93bf6",
+    "check.py": "759ead130ffed9f80434ed31b44be1611d425e724a88abe2b9dd6f6e356c5cbb"
+  },
+  "control_sha256": {
+    "controls/xml/catalog-ns.xml": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "controls/xml/order-default-ns.xml": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba"
+  },
+  "observed": {
+    "controls/xml/catalog-ns.xml": {
+      "default": {
+        "ok": true,
+        "attributes": [
+          "xmlns:c=urn:parsarium:catalog",
+          "xmlns=urn:parsarium:item",
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "c:catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "text": [],
+        "element_values": [
+          "item=Café & té",
+          "name=Zürich <HQ>"
+        ]
+      },
+      "parse_cdata": {
+        "ok": true,
+        "attributes": [
+          "xmlns:c=urn:parsarium:catalog",
+          "xmlns=urn:parsarium:item",
+          "version=1",
+          "id=a1",
+          "c:lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "c:catalog",
+          "item",
+          "item",
+          "name",
+          "note"
+        ],
+        "max_depth": 3,
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "element_values": [
+          "item=Café & té",
+          "name=Zürich <HQ>"
+        ]
+      }
+    },
+    "controls/xml/order-default-ns.xml": {
+      "default": {
+        "ok": false,
+        "error": "SystemError: <built-in function repr> returned a result with an exception set"
+      },
+      "parse_cdata": {
+        "ok": true,
+        "attributes": [
+          "xmlns=urn:parsarium:order",
+          "xmlns:p=urn:parsarium:price",
+          "n=1",
+          "p:currency=EUR",
+          "n=2",
+          "note=say \"hi\"",
+          "xmlns="
+        ],
+        "elements": [
+          "order",
+          "line",
+          "sku",
+          "p:amount",
+          "line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "element_values": [
+          "sku=A-7",
+          "p:amount=12.50 €"
+        ]
+      }
+    }
+  }
+}
