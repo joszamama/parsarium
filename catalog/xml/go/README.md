@@ -1,8 +1,8 @@
 # XML / Go — pilot
 
-**Status:** pilot_four_selected_search_bounded; incomplete. 4 verified third-party paths, 1 verified standard APIs, 4 verified Docker harnesses.
+**Status:** pilot_five_selected_search_bounded; incomplete. 5 verified third-party paths, 1 verified standard APIs, 5 verified Docker harnesses.
 
-Pilot cell: the four highest Imported-by XML parser leads (etree 2,098; xmlquery 627; mxj 553; beego/x2j 436) were built and control-verified. All four use the Go encoding/xml Decoder tokenizer and build their own trees or maps; none is an independent tokenizer. mxj's map drops namespace URIs and prefixes, order between differently named siblings, comments, processing instructions and mixed-content runs, so only its map paths, attribute keys and trimmed text are claimed. beego/x2j has the same map losses; in addition its []byte/string APIs delete whitespace before every '<' in the raw document, which changes CDATA content on the valid catalog control ('x < y' becomes 'x< y'), and its io.Reader API keeps indentation as '#text' entries. x2j is pinned at its only pseudo-version (a 2013 fork of clbanning/x2j); its own AFL++ blocks differ between the two controls by only one block, while its encoding/xml blocks differ by 30. 12 further numeric leads remain unresolved and are not selected or ranked. The first 100 hits of six queries were captured (xml dom returned 68; xml reader 28). The two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour.
+Five Go XML package paths pass two valid namespace-aware controls with parser and underlying source coverage plus stable AFL++ feedback: etree 2,098; xmlquery 627; mxj 553; beego/x2j 436; goxpp 132 Imported by. All five use Go encoding/xml Decoder as their tokenizer. goxpp builds a pull cursor with its own depth/namespace state; its valid controls differ by three own-source AFL++ blocks, all in comment event handling, and 32 encoding/xml blocks, with stable repeats. Higher-adoption goxml2json (182), mxj/v2 (178), and govmomi XML (163), plus eight other numeric leads, remain unverified; ranks cover selected verified paths only. mxj and x2j map routes lose namespace URIs/prefixes and mixed-content details; x2j byte/string routes also alter CDATA whitespace on the valid catalog control, while its selected reader route preserves it. Six pkg.go.dev queries recorded 496 hits, 464 unique; the first 100 hits per query were captured where available. Two small valid UTF-8 XML 1.0 controls without DOCTYPE do not establish DTD, entity declaration, non-UTF-8 encoding, XML 1.1, or attribute-value normalization behaviour.
 
 [Ranking and search limits](../../../data/go/xml/ranking.md) · [Standard API inventory](../../../data/go/xml/standard.json)
 
@@ -12,6 +12,7 @@ Pilot cell: the four highest Imported-by XML parser leads (etree 2,098; xmlquery
 - [github.com/antchfx/xmlquery](github-com-antchfx-xmlquery/README.md) — verified Docker harness
 - [github.com/clbanning/mxj](github-com-clbanning-mxj/README.md) — verified Docker harness
 - [github.com/beego/x2j](github-com-beego-x2j/README.md) — verified Docker harness
+- [github.com/mmcdole/goxpp](github-com-mmcdole-goxpp/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
 

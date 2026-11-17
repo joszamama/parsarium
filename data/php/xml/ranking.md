@@ -17,8 +17,9 @@ Packagist total downloads, from the bounded search captured 2026-11-17 ([snapsho
 | --- | --- | --- |
 | [XMLReader::XML()](https://www.php.net/manual/en/xmlreader.xml.php) | PHP 8.5.12 with libxml2 2.15.4 | libxml2 (via PHP ext/libxml) |
 | [DOMDocument::loadXML()](https://www.php.net/manual/en/domdocument.loadxml.php) | PHP 8.5.12 with libxml2 2.15.4 | libxml2 (via PHP ext/libxml) |
+| [simplexml_load_string()](https://www.php.net/manual/en/function.simplexml-load-string.php) | PHP 8.5.12 with libxml2 2.15.4 | libxml2 (via PHP ext/libxml) |
 
-SimpleXML and xml_parser_create use the same libxml2 parser and are listed as pending documented APIs in [standard.json](standard.json).
+xml_parser_create/xml_parse uses the same libxml2 parser and is listed as a pending documented API in [standard.json](standard.json).
 
 ## Lead log
 

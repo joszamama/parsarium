@@ -18,10 +18,9 @@ class JavaMp3PilotTest(unittest.TestCase):
     def test_selected_parsers_have_recorded_metrics_and_stay_out_of_leads(self):
         parsers = read(BASE / "parsers.json")
         leads = read(BASE / "leads.json")
-        self.assertEqual([parser["name"] for parser in parsers], ["jcodec", "jlayer"])
+        self.assertEqual([parser["name"] for parser in parsers], ["jcodec", "mp3spi", "jlayer"])
         self.assertTrue(all(lead["status"].startswith(("unresolved", "excluded")) for lead in leads))
-        # The highest selected pure-Java path outranks unresolved leads, while
-        # the higher-count mp3spi wrapper remains unresolved above JLayer.
+        # The highest selected pure-Java path outranks remaining unresolved leads.
         self.assertTrue(all(parsers[0]["popularity"]["value"] > lead["summed_direct_dependent_count"] for lead in leads
                             if lead["status"] != "excluded_native_wrapper"))
         snapshot = read(BASE / "registry-snapshot.json")
@@ -42,6 +41,10 @@ class JavaMp3PilotTest(unittest.TestCase):
         self.assertEqual(parser["family"], tagged["family"])
         jlayer = next(item for item in read(BASE / "parsers.json") if item["name"] == "jlayer")
         self.assertNotEqual(parser["family"], jlayer["family"])
+        mp3spi = next(item for item in read(BASE / "parsers.json") if item["name"] == "mp3spi")
+        self.assertIn("same JLayer decoder lineage", mp3spi["family_note"])
+        self.assertEqual(mp3spi["underlying_family"], jlayer["underlying_family"])
+        self.assertGreater(read(ROOT / mp3spi["project"] / "verification.json")["underlying_source_lines_covered"], 0)
 
     def test_control_receipts_match_catalog(self):
         for parser in read(BASE / "parsers.json"):
@@ -62,9 +65,10 @@ class JavaMp3PilotTest(unittest.TestCase):
         report = read(BASE / "afl-feedback.json")
         # The cell aggregate is refreshed by the integrator. The new path's
         # scoped receipt is testable before that aggregate is regenerated.
-        scoped = read(ROOT / "data/java/mp3/jlayer-feedback-differential.json")
-        results = {item["project"]: item for item in [*report["results"], scoped]}
-        self.assertEqual(set(results), {"mp3/java/jcodec", "mp3/java/jlayer"})
+        scoped = [read(ROOT / f"data/java/mp3/{slug}-feedback-differential.json")
+                  for slug in ("jlayer", "mp3spi")]
+        results = {item["project"]: item for item in [*report["results"], *scoped]}
+        self.assertEqual(set(results), {"mp3/java/jcodec", "mp3/java/jlayer", "mp3/java/mp3spi"})
         for result in results.values():
             slug = result["project"].rsplit("/", 1)[-1]
             manifest = read(ROOT / f"projects/mp3/java/{slug}/manifest.json")
@@ -74,6 +78,9 @@ class JavaMp3PilotTest(unittest.TestCase):
             self.assertGreater(result["parser_feature_difference"], 0)
             self.assertGreater(result["afl_tuple_difference"], 0)
             self.assertEqual(result["differential_output"], manifest["differential_expected_output"])
+        mp3spi_groups = results["mp3/java/mp3spi"]["source_groups"]
+        self.assertGreater(mp3spi_groups["wrapper"]["control_features"], 0)
+        self.assertGreater(mp3spi_groups["core"]["feature_difference"], 0)
 
     def test_no_standard_api_is_declared_not_omitted(self):
         standard = read(BASE / "standard.json")

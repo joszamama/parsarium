@@ -12,7 +12,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("jcodec", "jlayer")
+PROJECTS = ("jcodec", "mp3spi", "jlayer")
 CONTROL = "controls/mp3/tone-44k-mono.mp3"
 DIFFERENTIAL = "controls/mp3/tone-22k-stereo.mp3"
 # MPEG-2 22.05 kHz stereo; libmpg123 reports the same frames and samples
@@ -79,6 +79,17 @@ def check(slug: str) -> dict:
                            {item.split(":", 1)[0] for item in other[1]})
     if not feature_difference or not tuple_difference:
         raise RuntimeError(f"{relative}: differential input did not change parser feedback")
+    groups = {}
+    if slug == "mp3spi":
+        for group in ("wrapper", "core"):
+            prefix = group + "/"
+            control_features = {item for item in first[0] if item.startswith(prefix)}
+            other_features = {item for item in other[0] if item.startswith(prefix)}
+            if not control_features or not other_features:
+                raise RuntimeError(f"{relative}: {group} parser features absent")
+            groups[group] = {"control_features": len(control_features),
+                             "differential_features": len(other_features),
+                             "feature_difference": len(control_features ^ other_features)}
     print(f"{relative}: stable repeat; {feature_difference} parser features, "
           f"{tuple_difference} AFL++ tuples differ", flush=True)
     return {"project": str(relative), "pass": True,
@@ -95,7 +106,8 @@ def check(slug: str) -> dict:
             "differential_parser_features": len(other[0]),
             "differential_afl_tuples": len(other[1]),
             "parser_feature_difference": feature_difference,
-            "afl_tuple_difference": tuple_difference}
+            "afl_tuple_difference": tuple_difference,
+            **({"source_groups": groups} if groups else {})}
 
 
 def main() -> None:
@@ -108,6 +120,15 @@ def main() -> None:
             slug = result["project"].rsplit("/", 1)[-1]
             path = ROOT / "data/java/mp3" / f"{slug}-feedback-differential.json"
             path.write_text(json.dumps({"schema_version": 1, **result}, indent=2) + "\n")
+        kept = json.loads(REPORT.read_text())["results"] if REPORT.is_file() else []
+        rows = {item["project"]: item for item in kept} | {item["project"]: item for item in results}
+        results = [rows[f"mp3/java/{slug}"] for slug in PROJECTS if f"mp3/java/{slug}" in rows]
+        REPORT.write_text(json.dumps({
+            "schema_version": 1,
+            "checked_at_utc": datetime.now(timezone.utc).isoformat(),
+            "projects_total": len(results), "projects_passed": len(results),
+            "differential_kind": "fixed_valid_mpeg2_stereo",
+            "results": results}, indent=2) + "\n")
         print(json.dumps(results, indent=2))
         return
     REPORT.write_text(json.dumps({

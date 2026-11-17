@@ -110,15 +110,84 @@
           "12.50 €"
         ]
       }
+    },
+    {
+      "runtime": "PHP 8.5.12 CLI (source build, --disable-all --with-libxml --enable-simplexml) with source-built libxml2 2.15.4",
+      "api": "simplexml_load_string(string $data, ?string $class_name = SimpleXMLElement::class, int $options = 0, string $namespace_or_prefix = \"\", bool $is_prefix = false)",
+      "documentation": "https://www.php.net/manual/en/function.simplexml-load-string.php",
+      "adapter": "projects/xml/php/stdlib_simplexml/harness.php",
+      "input": "in-memory string (control bytes passed to simplexml_load_string with LIBXML_NONET); simplexml_load_file() file/URL input is not counted",
+      "control": "controls/xml/catalog-ns.xml",
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "observable_result": "simplexml_load_string returns the root SimpleXMLElement over a libxml2 tree; walking it with SimpleXML methods only (xpath('*') and xpath('@*') for document order, getNamespaces(false) with a self::*[namespace-uri()] check for the element namespace, getDocNamespaces(false, false) for each element's own declarations, string casts for text) gives a prefixed root {urn:parsarium:catalog}catalog with a default-namespace child scope, 5 elements in Clark notation, 2 namespace declarations, a prefixed attribute {urn:parsarium:catalog}lang, entity-decoded text and CDATA text, depth 3; the second control gives 7 elements, 3 declarations including the xmlns=\"\" undeclaration, char-reference-decoded text and depth 4",
+      "observable_limits": "SimpleXML exposes no text-node or comment/PI accessor: (string) of an element concatenates its direct text and CDATA, so character-data runs split by child elements, comments or PIs inside one element are merged and ordered before the element's children. Comments, PIs and the XML declaration are not exposed. Element namespace URIs and document-order children/attributes come from SimpleXMLElement::xpath. Neither control has non-whitespace mixed content, so the summary equals the expat oracle on both.",
+      "result": "projects/xml/php/stdlib_simplexml/verification.json",
+      "afl_feedback": "fuzzing/afl-native/xml/php/stdlib_simplexml/verification.json",
+      "license": "PHP-3.01 (PHP 8.5.12 ext/simplexml, ext/libxml); MIT (libxml2 2.15.4)",
+      "extension_source_sha256": {
+        "php-8.5.12/ext/simplexml/simplexml.c": "342123418c4a6828600ae439032948d59116edbe80752f422eec085bc546dd06",
+        "php-8.5.12/ext/simplexml/php_simplexml.h": "27c0da51229290a2acc425fc9d1b2dcf21e9a672a2b039027c560f9196cacd5c"
+      },
+      "family": "libxml2 (via PHP ext/libxml)",
+      "family_note": "Same parser family as the XMLReader::XML and DOMDocument::loadXML entries: ext/simplexml hands the string to libxml2 (xmlReadMemory with the SAX2 tree builder) and wraps the root element. It is a third standard API over the same engine, not an independent parser.",
+      "expected": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "differential_expected": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      }
     }
   ],
   "unverified_documented_apis": [
-    {
-      "api": "simplexml_load_string(string $data, ...)",
-      "documentation": "https://www.php.net/manual/en/function.simplexml-load-string.php",
-      "status": "pending",
-      "reason": "Same libxml2 parser family; ext/simplexml not built or run in this pilot."
-    },
     {
       "api": "xml_parse(XMLParser $parser, string $data, bool $is_final = false)",
       "documentation": "https://www.php.net/manual/en/function.xml-parse.php",
@@ -127,6 +196,6 @@
     }
   ],
   "no_api_findings": [],
-  "limit": "Two small UTF-8 namespace-aware controls without DOCTYPE verify XMLReader::XML and DOMDocument::loadXML for this PHP 8.5.12/libxml2 2.15.4 build; they do not establish DTD, external entity, non-UTF-8 encoding, XML 1.1, validation or DOMDocument::load() file-input behaviour.",
-  "runtime_note": "Each verified API has its own PHP 8.5.12 source build: XMLReader with --enable-xmlreader, DOMDocument with --enable-dom; both link the same source-built libxml2 2.15.4."
+  "limit": "Two small UTF-8 namespace-aware controls without DOCTYPE verify XMLReader::XML, DOMDocument::loadXML and simplexml_load_string for this PHP 8.5.12/libxml2 2.15.4 build; they do not establish DTD, external entity, non-UTF-8 encoding, XML 1.1, validation or DOMDocument::load()/simplexml_load_file() file-input behaviour.",
+  "runtime_note": "Each verified API has its own PHP 8.5.12 source build: XMLReader with --enable-xmlreader, DOMDocument with --enable-dom, SimpleXML with --enable-simplexml; all link the same source-built libxml2 2.15.4."
 }

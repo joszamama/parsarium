@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-17T12:30:16.521282+00:00",
+  "status": "unresolved_not_selected_shared_oracle_mismatch",
+  "package": "github.com/basgys/goxml2json",
+  "release": "v1.1.0",
+  "license": "MIT",
+  "api": "xml2json.Convert(io.Reader) over local XML bytes",
+  "api_reference": "https://pkg.go.dev/github.com/basgys/goxml2json@v1.1.0#Convert",
+  "source_url": "https://github.com/basgys/goxml2json/tree/v1.1.0",
+  "module_zip_sha256": "2f7b5f64b31f00193bf1a848d2aacf9d2a555f22076d52c31957c59d7a20ca77",
+  "module_sum": "h1:4ln5i4rseYfXNd86lGEB+Vi652IsIXIvggKM/BhUKVw=",
+  "go_toolchain": "go version go1.27.1 darwin/arm64",
+  "control_sha256": {
+    "catalog-ns.xml": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+    "order-default-ns.xml": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba"
+  },
+  "observed_conversion": {
+    "catalog-ns.xml": {
+      "catalog": {
+        "-c": "urn:parsarium:catalog",
+        "-version": "1",
+        "-xmlns": "urn:parsarium:item",
+        "item": [
+          {
+            "#content": "Café & té",
+            "-id": "a1",
+            "-lang": "es"
+          },
+          {
+            "-id": "b2",
+            "name": "Zürich <HQ>",
+            "note": "x < y"
+          }
+        ]
+      }
+    },
+    "order-default-ns.xml": {
+      "order": {
+        "-p": "urn:parsarium:price",
+        "-xmlns": "urn:parsarium:order",
+        "line": [
+          {
+            "-currency": "EUR",
+            "-n": "1",
+            "amount": "12.50 €",
+            "sku": "A-7"
+          },
+          {
+            "-n": "2",
+            "-note": "say \"hi\"",
+            "plain": {
+              "-xmlns": "",
+              "leaf": ""
+            }
+          }
+        ]
+      }
+    }
+  },
+  "shared_oracle_mismatch": [
+    {
+      "control": "catalog-ns.xml",
+      "field": "root expanded name",
+      "required": "{urn:parsarium:catalog}catalog",
+      "observed": "catalog"
+    },
+    {
+      "control": "catalog-ns.xml",
+      "field": "c:lang attribute expanded name",
+      "required": "{urn:parsarium:catalog}lang",
+      "observed": "-lang"
+    },
+    {
+      "control": "order-default-ns.xml",
+      "field": "p:amount expanded name",
+      "required": "{urn:parsarium:price}amount",
+      "observed": "amount"
+    },
+    {
+      "control": "order-default-ns.xml",
+      "field": "p:currency attribute expanded name",
+      "required": "{urn:parsarium:price}currency",
+      "observed": "-currency"
+    }
+  ],
+  "source_reason": "decoder.go labels elements with se.Name.Local and attributes with a.Name.Local; Name.Space is discarded. Node.Children is a map keyed by those labels. The JSON output cannot identify which namespace an element or attribute name used.",
+  "parser_family": "XML-to-JSON tree conversion over Go encoding/xml.Decoder.Token",
+  "docker_source_coverage": "not_run_after_shared_oracle_failure",
+  "afl_feedback": "not_run_after_shared_oracle_failure",
+  "adapter": "lead-probes/go/xml/goxml2json/main.go"
+}

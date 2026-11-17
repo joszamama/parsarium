@@ -73,7 +73,8 @@ class GoXmlMxjPilotTest(unittest.TestCase):
         self.assertIn(f"{PACKAGE}/v2", leads)
         cell = read(BASE / "cell.json")
         self.assertEqual(cell["verified_third_party_count"], len(read(BASE / "parsers.json")))
-        self.assertEqual(cell["unresolved_documentation_leads"], len(leads))
+        self.assertEqual(cell["unresolved_documentation_leads"],
+                         sum(item["status"] == "unresolved" for item in read(BASE / "leads.json")))
 
     def test_feedback_is_stable_and_differential(self):
         report = read(BASE / "afl-feedback.json")

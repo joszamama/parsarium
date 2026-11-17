@@ -5,8 +5,9 @@
     "version_seen": "v1.1.0",
     "license": "MIT",
     "imported_by": 182,
-    "reason": "XML-to-JSON converter over an io.Reader; not run.",
-    "source": "https://pkg.go.dev/github.com/basgys/goxml2json"
+    "reason": "Pinned v1.1.0 Convert(io.Reader) parses both valid XML controls through encoding/xml, but decoder.go uses Name.Local for element and attribute labels. The JSON output loses expanded namespace names: c:catalog -> catalog, c:lang -> -lang, p:amount -> amount, p:currency -> -currency. It fails the shared namespace-aware result; no raw-XML reconstruction, Docker selection, or AFL feedback was added.",
+    "source": "https://pkg.go.dev/github.com/basgys/goxml2json",
+    "probe_evidence": "data/go/xml/goxml2json-lead-check.json"
   },
   {
     "name": "github.com/clbanning/mxj/v2",
@@ -28,12 +29,13 @@
   },
   {
     "name": "github.com/mmcdole/goxpp",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "v1.3.0",
     "license": "MIT",
     "imported_by": 132,
-    "reason": "XML pull parser API; its tokenizer source was not checked and no control was run.",
-    "source": "https://pkg.go.dev/github.com/mmcdole/goxpp"
+    "reason": "Pinned v1.3.0 NewXMLPullParser(io.Reader) and NextToken() pass both valid XML controls with goxpp and encoding/xml source coverage and repeatable AFL++ feedback.",
+    "source": "https://pkg.go.dev/github.com/mmcdole/goxpp",
+    "verified_evidence": "projects/xml/go/github_com_mmcdole_goxpp/verification.json"
   },
   {
     "name": "github.com/moovweb/gokogiri/xml",
