@@ -24,7 +24,7 @@ class JavaScriptXmlPilotTest(unittest.TestCase):
             {lead["name"] for lead in leads if lead["status"] == "unresolved"}))
         self.assertTrue(all(lead["status"] in {"unresolved", "promoted_to_verified"} for lead in leads))
         self.assertEqual({lead["name"] for lead in leads if lead["status"] == "promoted_to_verified"},
-                         {"fast-xml-parser", "@xmldom/xmldom"})
+                         {"fast-xml-parser", "@xmldom/xmldom", "xml2js"})
         cell = read(BASE / "cell.json")
         self.assertEqual(cell["verified_third_party_count"], len(parsers))
         self.assertEqual(cell["unresolved_documentation_leads"],
@@ -51,6 +51,28 @@ class JavaScriptXmlPilotTest(unittest.TestCase):
             self.assertTrue(result["repeated_control_identical"] and result["repeated_differential_identical"])
             self.assertGreater(result["parser_feature_difference"], 0)
             self.assertGreater(result["afl_tuple_difference"], 0)
+
+    def test_xml2js_records_shared_sax_family(self):
+        parser, = [entry for entry in read(BASE / "parsers.json") if entry["name"] == "xml2js"]
+        sax, = [entry for entry in read(BASE / "parsers.json") if entry["name"] == "sax"]
+        project = ROOT / parser["project"]
+        manifest = read(project / "manifest.json")
+        receipt = read(project / "verification.json")
+        lock = read(project / "source-lock.json")["xml2js"]["dependencies"]["sax"]
+        npm_lock = read(project / "package-lock.json")["packages"]
+        underlying = parser["underlying_parser"]
+        self.assertEqual((underlying["package"], underlying["version"]), ("sax", sax["version"]))
+        self.assertEqual(underlying["npm_integrity"], sax["npm_integrity"])
+        self.assertEqual(underlying["tarball_sha256"], sax["tarball_sha256"])
+        self.assertEqual(lock["npm_integrity"], sax["npm_integrity"])
+        self.assertEqual(npm_lock["node_modules/sax"]["integrity"], sax["npm_integrity"])
+        self.assertEqual(manifest["underlying_npm_integrity"], sax["npm_integrity"])
+        self.assertIn("sax-js", parser["family"])
+        self.assertGreater(receipt["underlying_source_lines_covered"], 0)
+        self.assertGreater(receipt["parser_source_lines_covered"], 0)
+        for dependency, entry in read(project / "source-lock.json")["xml2js"]["dependencies"].items():
+            self.assertEqual(npm_lock[f"node_modules/{dependency}"]["version"], entry["release"])
+            self.assertEqual(npm_lock[f"node_modules/{dependency}"]["integrity"], entry["npm_integrity"])
 
 
 if __name__ == "__main__":

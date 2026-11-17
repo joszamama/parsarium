@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T08:41:01.205183+00:00",
-  "projects_total": 4,
-  "projects_passed": 4,
+  "checked_at_utc": "2026-11-17T08:47:47.053867+00:00",
+  "projects_total": 5,
+  "projects_passed": 5,
   "differential_kind": "fixed_valid_default_namespace_variant",
   "standard_feedback": "none: Node.js core ships no XML parser API",
   "results": [
@@ -168,6 +168,62 @@
       },
       "differential_only_features_by_file": {
         "saxes.js": 26
+      }
+    },
+    {
+      "project": "xml/javascript/xml2js",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "3b6179e91d35ea9c5102d381e68de9c2da63deda08dd6bbc809cc50786fe142b",
+      "base_image_id": "sha256:c2648b4d21896fed1e2dd48b2005fb9c1d8080147ed5b8d29364ea56e2c55695",
+      "overlay_image_id": "sha256:8a7519a8452a189a9574a1ae1b35f93f427cf8ec9af53b5106d18bc52cd45e72",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 324,
+      "control_afl_tuples": 344,
+      "differential_parser_features": 343,
+      "differential_afl_tuples": 363,
+      "parser_feature_difference": 47,
+      "afl_tuple_difference": 47,
+      "control_only_features_by_file": {
+        "sax/lib/sax.js": 11,
+        "xml2js/lib/parser.js": 3
+      },
+      "differential_only_features_by_file": {
+        "sax/lib/sax.js": 32,
+        "xml2js/lib/parser.js": 1
       }
     },
     {

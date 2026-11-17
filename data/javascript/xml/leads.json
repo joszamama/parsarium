@@ -47,14 +47,15 @@
   },
   {
     "name": "xml2js",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "lead_kind": "delegates_to_sax",
     "version_seen": "0.6.2",
     "license": "MIT",
     "npm_downloads_30d": 237465764,
     "downloads_url": "https://api.npmjs.org/downloads/point/2026-10-17:2026-11-15/xml2js",
-    "reason": "Imports sax and builds objects from its events; shares the sax family. Not run.",
-    "source": "https://www.npmjs.com/package/xml2js"
+    "reason": "Object-tree builder over sax events (sax >=0.6.0 resolves to 1.6.1, the selected sax path), so it shares the sax family; its documented Parser({xmlns: true, explicitChildren: true, preserveChildrenOrder: true, charsAsChildren: true}) tree keeps sax-resolved URIs and ordered children. Both valid namespace-aware controls match the expat oracle, with pinned npm integrity, V8 xml2js and underlying sax source coverage, and input-dependent AFL++ feedback verified. Comments and processing instructions are dropped, so text split only by them merges.",
+    "source": "https://www.npmjs.com/package/xml2js",
+    "verified_evidence": "data/javascript/xml/verification.json"
   },
   {
     "name": "xmlbuilder2",
