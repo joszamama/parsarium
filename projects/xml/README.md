@@ -4,6 +4,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 
 - [expat / C](c/expat/README.md)
 - [libxml2 / C](c/libxml2/README.md)
+- [mxml / C](c/mxml/README.md)
 - [pugixml / C++](cpp/pugixml/README.md)
 - [tinyxml2 / C++](cpp/tinyxml2/README.md)
 - [xerces-c / C++](cpp/xerces_c/README.md)
