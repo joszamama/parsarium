@@ -11,6 +11,7 @@
 - [serde_yaml](serde-yaml/README.md) — verified Docker harness
 - [unsafe-libyaml](unsafe-libyaml/README.md) — verified API path
 - [yaml-rust](yaml-rust/README.md) — verified Docker harness
+- [yaml-rust2](yaml-rust2/README.md) — verified API path
 
 ## Standard and runtime APIs
 

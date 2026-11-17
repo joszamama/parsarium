@@ -1,0 +1,246 @@
+# yaml-rust2 — YAML / Rust
+
+**Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
+
+- **Pinned release:** `0.13.0`
+- **License:** MIT OR Apache-2.0
+- **Parser family:** yaml-rust lineage: yaml-rust2 is the maintained fork of the selected yaml-rust (README: 'based on yaml-rust with fixes towards being compliant to the YAML test suite'). 708 of its 1,914 distinct non-test source lines longer than 25 characters also occur in yaml-rust 0.4.5 (37.0%; 63.2% of yaml-rust's 1,121). saphyr and saphyr-parser continue it.
+- **Local input API:** `yaml_rust2::YamlLoader::load_from_str(&str) -> Result<Vec<Yaml>, ScanError>; Yaml::{Real, Integer, String, Boolean, Array, Hash, Alias, Null, BadValue}`
+- **Documentation:** [API reference](<https://docs.rs/yaml-rust2/0.13.0/yaml_rust2/yaml/struct.YamlLoader.html>)
+- **Valid control:** [`controls/yaml/catalog.yaml`](../../../../controls/yaml/catalog.yaml)
+- **Catalog evidence:** [parser record](../../../../data/rust/yaml/parsers.json) · [control result](../../../../data/rust/yaml/verification.json)
+
+## Observed control result
+
+```json
+{
+  "tree": [
+    "map",
+    [
+      [
+        "kind",
+        [
+          "str",
+          "catalog"
+        ]
+      ],
+      [
+        "version",
+        [
+          "int",
+          "2"
+        ]
+      ],
+      [
+        "ratio",
+        [
+          "float",
+          "0.25"
+        ]
+      ],
+      [
+        "offset",
+        [
+          "int",
+          "-17"
+        ]
+      ],
+      [
+        "enabled",
+        [
+          "bool",
+          true
+        ]
+      ],
+      [
+        "retired",
+        [
+          "bool",
+          false
+        ]
+      ],
+      [
+        "missing",
+        [
+          "null"
+        ]
+      ],
+      [
+        "title",
+        [
+          "str",
+          "Café \"quoted\"\tend"
+        ]
+      ],
+      [
+        "single",
+        [
+          "str",
+          "it's here"
+        ]
+      ],
+      [
+        "tags",
+        [
+          "seq",
+          [
+            [
+              "str",
+              "alpha"
+            ],
+            [
+              "str",
+              "beta"
+            ],
+            [
+              "str",
+              "gamma delta"
+            ]
+          ]
+        ]
+      ],
+      [
+        "point",
+        [
+          "map",
+          [
+            [
+              "lat",
+              [
+                "int",
+                "1"
+              ]
+            ],
+            [
+              "lon",
+              [
+                "float",
+                "-2.5"
+              ]
+            ]
+          ]
+        ]
+      ],
+      [
+        "items",
+        [
+          "seq",
+          [
+            [
+              "map",
+              [
+                [
+                  "id",
+                  [
+                    "int",
+                    "7"
+                  ]
+                ],
+                [
+                  "name",
+                  [
+                    "str",
+                    "first item"
+                  ]
+                ],
+                [
+                  "note",
+                  [
+                    "str",
+                    "line one\nline two\n"
+                  ]
+                ]
+              ]
+            ],
+            [
+              "map",
+              [
+                [
+                  "id",
+                  [
+                    "int",
+                    "8"
+                  ]
+                ],
+                [
+                  "name",
+                  [
+                    "str",
+                    "Zürich"
+                  ]
+                ],
+                [
+                  "note",
+                  [
+                    "str",
+                    "folded text\n"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ],
+      [
+        "defaults",
+        [
+          "map",
+          [
+            [
+              "retries",
+              [
+                "int",
+                "3"
+              ]
+            ],
+            [
+              "label",
+              [
+                "str",
+                "base"
+              ]
+            ]
+          ]
+        ]
+      ],
+      [
+        "service",
+        [
+          "map",
+          [
+            [
+              "settings",
+              [
+                "map",
+                [
+                  [
+                    "retries",
+                    [
+                      "int",
+                      "3"
+                    ]
+                  ],
+                  [
+                    "label",
+                    [
+                      "str",
+                      "base"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "label",
+              [
+                "str",
+                "edge"
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+}
+```
