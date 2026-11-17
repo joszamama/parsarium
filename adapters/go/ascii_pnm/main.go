@@ -17,6 +17,7 @@ import (
 	hexaflex "github.com/hexaflex/pnm"
 	jbuchbinder "github.com/jbuchbinder/gopnm"
 	jcbritobr "github.com/jcbritobr/pnm"
+	kovidimaging "github.com/kovidgoyal/imaging"
 	kovid "github.com/kovidgoyal/imaging/netpbm"
 	ncruces "github.com/ncruces/go-pnm"
 	peterh "github.com/peterh/go/img/pnm"
@@ -58,6 +59,8 @@ func run(name string, data []byte) (map[string]any, error) {
 		img, err = peterh.Decode(r)
 	case "github.com/571451370/go-media/image/pnm":
 		img, err = media.Decode(r)
+	case "github.com/kovidgoyal/imaging":
+		img, err = kovidimaging.Decode(r, kovidimaging.Backends(kovidimaging.GO_IMAGE))
 	case "github.com/kovidgoyal/imaging/netpbm":
 		img, err = kovid.Decode(r)
 	case "codeberg.org/rabenauge/picsetgo/formats/netpbm":
