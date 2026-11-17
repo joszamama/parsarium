@@ -600,6 +600,58 @@ class CoverageReportTest(unittest.TestCase):
         self.assertEqual(replay["trace_script_sha256"], digest(script.read_bytes()))
         self.assertIn("Node V8 coverage", replay["mechanism"])
 
+    def test_bounded_go_queue_replay_uses_one_fuzz_corpus_per_input(self):
+        fixture = self.fixture()
+        fixture.afl_plan()
+        fixture.manifest.update({
+            "ecosystem": "go", "fuzz_smoke_entrypoint": "/work/harness.test",
+            "coverage_subject_prefix": "github.com/example/parser/",
+        })
+        (fixture.project / "harness_test.go").write_text(
+            "package parser\nfunc FuzzParser(f *testing.F) {\n"
+            "  f.Fuzz(func(t *testing.T, data []byte) {})\n}\n")
+        source_overlay = fixture.root / "fuzzing/afl-native/png/c/demo/verification.json"
+        overlay = fixture.root / "fuzzing/afl-native/png/go/demo/verification.json"
+        overlay.parent.mkdir(parents=True)
+        overlay.write_bytes(source_overlay.read_bytes())
+        plan_path = fixture.run_dir / "plan.json"
+        plan = json.loads(plan_path.read_text())
+        plan["project"] = "png/go/demo"
+        plan["overlay_receipt_sha256"] = digest(overlay.read_bytes())
+        fixture.write_json(plan_path, plan)
+        evidence = {
+            "identity": {"format": "png", "ecosystem": "go", "slug": "demo"},
+            "manifest": fixture.manifest, "project": fixture.project,
+            "receipt": fixture.receipt,
+            "evidence": {"receipt_sha256": digest((fixture.project / "verification.json").read_bytes())},
+            "feedback": {"coverage_kind": "source_lines"},
+        }
+
+        def docker(command, **_):
+            if command[1:3] == ["image", "inspect"]:
+                return subprocess.CompletedProcess(command, 0, f"{IMAGE} linux/arm64\n", "")
+            self.assertIn("-test.run=^FuzzParser$", command)
+            case_mount = next(item for item in command if item.endswith(":/input:ro"))
+            corpus = Path(case_mount.removesuffix(":/input:ro")) / \
+                "testdata/fuzz/FuzzParser/seed"
+            self.assertTrue(corpus.read_bytes().startswith(b"go test fuzz v1\n[]byte(\""))
+            profile_mount = next(item for item in command if item.endswith(":/coverage"))
+            profile_dir = Path(profile_mount.removesuffix(":/coverage"))
+            name = command[-1].split("/")[-1]
+            line = 4 if name == "000.out" else 5
+            (profile_dir / name).write_text(
+                f"mode: set\ngithub.com/example/parser/parser.go:2.1,2.8 1 1\n"
+                f"github.com/example/parser/parser.go:{line}.1,{line}.8 1 1\n")
+            return subprocess.CompletedProcess(command, 0)
+
+        with mock.patch.object(queue_coverage.subprocess, "run", side_effect=docker):
+            replay, coverage = queue_coverage.replay_go_queue(
+                fixture.run_dir, fixture.root, evidence, 2, 15)
+        self.assertEqual(replay["queue_inputs_sampled"], 2)
+        self.assertEqual([item["profile_files"] for item in replay["inputs"]], [1, 1])
+        self.assertEqual(coverage["data"][0]["files"][0]["executed_lines"], [2, 4, 5])
+        self.assertEqual(replay["fuzz_test"], "FuzzParser")
+
     def test_afl_queue_source_scope_and_input_limits_are_honest(self):
         fixture = self.fixture("native_binary_edges")
         queue = fixture.afl_plan()

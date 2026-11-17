@@ -26,7 +26,7 @@ import zipfile
 import run_case
 from run_case import MAX_CASE_BYTES, project_for
 from queue_coverage import (QueueCoverageError, export_objects, plan_for, queue_files,
-                            replay_interpreted_queue, replay_queue)
+                            replay_go_queue, replay_interpreted_queue, replay_queue)
 
 
 LLVM_EXPORT_TYPE = "llvm.coverage.json.export"
@@ -378,10 +378,10 @@ def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
     if not replay:
         return run, None
     ecosystem = evidence["identity"]["ecosystem"]
-    if ecosystem not in {"c", "cpp", "python", "php", "javascript"} or \
+    if ecosystem not in {"c", "cpp", "go", "python", "php", "javascript"} or \
             evidence["feedback"]["coverage_kind"] != "source_lines":
         run["queue_replay_unsupported"] = (
-            "Source replay currently supports LLVM-covered C/C++ and Python/PHP/JavaScript source-line projects; "
+            "Source replay currently supports LLVM-covered C/C++, Go, and Python/PHP/JavaScript source-line projects; "
             "this project's saved AFL++ feedback remains separately documented.")
         return run, None
     if ecosystem in {"c", "cpp"}:
@@ -391,6 +391,16 @@ def afl_run(run_dir: Path, root: Path, evidence: dict, replay: bool,
             run["queue_replay_unsupported"] = str(error)
             return run, None
         sample, coverage = replay_queue(run_dir, root, evidence, sample_limit, timeout)
+    elif ecosystem == "go":
+        try:
+            sample, coverage = replay_go_queue(run_dir, root, evidence,
+                                               sample_limit, timeout)
+        except QueueCoverageError as error:
+            if "no supported Go coverage harness" in str(error) or \
+                    "no single seed-free Go fuzz test" in str(error):
+                run["queue_replay_unsupported"] = str(error)
+                return run, None
+            raise
     else:
         try:
             sample, coverage = replay_interpreted_queue(run_dir, root, evidence,
@@ -665,8 +675,11 @@ def index_page(report: dict) -> str:
             "queue_inputs_sampled": sample["queue_inputs_sampled"] if sample else 0,
             "coverage_image_id": sample["coverage_image_id"] if sample else None,
             "coverage_binary": sample["coverage_binary"] if sample else None,
+            "source_replay_mechanism": sample.get("mechanism") if sample else None,
+            "go_fuzz_test": sample.get("fuzz_test") if sample else None,
             "llvm_cov_objects": sample["llvm_cov_objects"] if sample else None,
             "profdata_sha256": sample.get("profdata_sha256") if sample else None,
+            "trace_script_sha256": sample.get("trace_script_sha256") if sample else None,
             "coverage_json_sha256": sample.get("coverage_sha256") if sample else None,
             "selection": sample["selection"] if sample else None,
             "timeout_seconds_per_input": sample["timeout_seconds_per_input"] if sample else None,
@@ -850,6 +863,12 @@ def build_report(root: Path, format_name: str, ecosystem: str, slug: str, run_di
         if run["kind"] == "afl" and ecosystem == "javascript":
             warnings.append("V8 source ranges use the same line conversion as the valid-control "
                             "project; comment lines inside executed ranges may be counted.")
+        if run["kind"] == "afl" and ecosystem == "go":
+            warnings.append("Go coverprofile blocks are expanded to executed line spans; "
+                            "this is a line view without an uncovered-line denominator.")
+            if run.get("queue_sample", {}).get("native_underlying_unsupported"):
+                warnings.append("The Go queue line view omits native underlying parser code; "
+                                "its valid-control source receipt and AFL feedback remain separate.")
         if any(entry["source"]["status"] == "rejected_line_mismatch" for entry in files):
             warnings.append(f"Some {language} source files were rejected because executed lines exceed "
                             "the pinned archive length.")
