@@ -29,11 +29,9 @@ deps.dev directDependentCount summed over all releases, from [registry-snapshot.
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
 | 1 | org.apache.directory.server:apacheds-protocol-dns | 75 | `new DnsMessageDecoder().decode(IoBuffer)` | ApacheDS DNS protocol (DnsMessageDecoder) |
-| 2 | cc.otavia:otavia-codec-dns_3 | 7 |  | otavia (Scala) |
-| 3 | com.github.greysoft.naf:greynaf-dns | 0 |  | Greysoft NAF |
+| 2 | com.github.greysoft.naf:greynaf-dns | 0 |  | Greysoft NAF |
 
-- **org.apache.directory.server:apacheds-protocol-dns** (unresolved): Fails the response control by source inspection of the pinned 2.0.0.AM27 sources jar (not run): DnsMessageDecoder registers record decoders only for A, NS, MX and AAAA and throws IllegalArgumentException (I18n ERR_600) for any other type, so the CNAME answer of controls/dns/response.bin cannot be decoded. It also decodes no Z, AD or CD bits. The artifact is part of the ApacheDS server (compile dependencies on apacheds-core, MINA and the LDAP API).
-- **cc.otavia:otavia-codec-dns_3** (unresolved): Not tried: a Scala 3 network-framework codec (7 direct dependents summed); same Scala-in-Java-cell question as dns4s.
+- **org.apache.directory.server:apacheds-protocol-dns** (unresolved_control_failure): Fails the response control (run, not only source inspection): DnsMessageDecoder registers record decoders only for A, NS, MX and AAAA and throws IllegalArgumentException (ERR_600 Decoder unavailable for CNAME) on the CNAME answer of controls/dns/response.bin. It also decodes no Z, AD or CD bits. The artifact is part of the ApacheDS server (compile dependencies on apacheds-core, MINA and the LDAP API).
 - **com.github.greysoft.naf:greynaf-dns** (unresolved): Not tried: zero deps.dev direct dependents, so it has no positive primary metric and is not added.
 
 ## Checked, excluded or recorded separately
@@ -48,3 +46,7 @@ deps.dev directDependentCount summed over all releases, from [registry-snapshot.
 - **org.nhind:dns** (excluded): Direct Project DNS server application (9.0.0 jar: DNSServer, UDPServer, TCPServer, Spring Boot autoconfiguration); no documented API that parses caller-supplied message bytes.
 - **com.qiniu:happy-dns** (excluded): Resolver library; its wire parser com.qiniu.android.dns.dns.DnsResponse is package-private (2.0.1 sources), so there is no public API for caller-supplied message bytes.
 - **com.davfx.ninio:ninio-dns** (excluded): Asynchronous DNS client (3.0.50 sources: DnsClient, DnsConnecter, DnsRequestBuilder); network API with no documented message-bytes parser.
+- **cc.otavia:otavia-codec-dns_3** (excluded): No DNS message decoder: the 0.4.5 sources jar holds only cc.otavia.dns.DatagramDnsQueryResolver and codec/DnsQueryEncoder (a query encoder for otavia's resolver), so it cannot parse caller-supplied message bytes. Scala 3 framework codec; Scala artifacts would otherwise count in this cell.
+- **com.github.mkroli:dns4s-core_3** (excluded): Scala 3 build of the same dns4s core sources as the selected dns4s-core_2.13; one Scala binary-version coordinate is counted.
+- **org.jmdns:jmdns** (excluded): Multicast DNS service-discovery library. Its message reader javax.jmdns.impl.DNSIncoming sits in the implementation package (the documented API is JmDNS/ServiceInfo discovery), and by source inspection of 3.6.5 it handles only A, AAAA, CNAME, PTR, TXT, SRV, HINFO and OPT: the MX answer of controls/dns/response.bin falls to the default branch and is skipped, so the control cannot be reproduced.
+- **org.apache.pekko:pekko-actor_2.13** (excluded): The DNS message codec in Pekko's actor IO module (org.apache.pekko.io.dns.internal.Message.parse in the 2.0.0 sources) is declared private[internal] and annotated @InternalApi ('INTERNAL API'); the documented API is the async DNS resolver extension, not a message-bytes parser. No metric looked up.
