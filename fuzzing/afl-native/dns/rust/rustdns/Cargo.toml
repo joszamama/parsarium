@@ -1,0 +1,26 @@
+[package]
+name = "parsarium-dns-rustdns-harness"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+afl = "=0.18.2"
+rustdns = { version = "=0.7.0", default-features = false }
+serde_json = { version = "=1.0.154", features = ["preserve_order"] }
+libfuzzer-sys = { version = "=0.4.13", optional = true }
+
+[features]
+fuzzing = ["dep:libfuzzer-sys"]
+
+[[bin]]
+name = "replay"
+path = "src/bin/replay.rs"
+
+[[bin]]
+name = "fuzzer"
+path = "src/bin/fuzzer.rs"
+required-features = ["fuzzing"]
+
+[[bin]]
+name = "afl_fuzzer"
+path = "src/bin/afl_fuzzer.rs"

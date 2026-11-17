@@ -1,0 +1,89 @@
+{
+  "kind": "third_party",
+  "api": "rustdns::Message::from_slice(&[u8]) on local bytes; public header fields, questions, answers, authoritys and additionals",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:37:20.789628+00:00",
+  "manifest": "projects/dns/rust/rustdns/manifest.json",
+  "image_id": "sha256:5a721340c193cec747da968ddf293fa534530790b257b0e75f1e8be581d9ad0b",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "60dd90c5556e58609d8d5588d5a64399bea436b6864a1a2f0be627297c592752",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Cargo.lock": "997b229263b6f854c4c3f6bc3344482b698a8b2f73b5502816355d4826958a6c",
+    "Cargo.toml": "1b794a4cb97ef798423f2d7f65c8251a2ac4208ec248ca00811420970a9a4ba4",
+    "Dockerfile": "571dc8f469582b895cd811b540ecc706480438d585085e0ec9f6a90d6b6357a9",
+    "manifest.json": "79f24cf39bdbf373992bc1b190d370e167b21a66ecedc9555867c7326c732358",
+    "run-control.sh": "da6003975c62b7464b454bffc91659f46660c8e0b6d52bba4dbd83a64216eff1",
+    "source-lock.json": "3061a519c00427571e557873ae4044bd7183eeb0cbf00a2cda50bc99bd204043",
+    "src/bin/fuzzer.rs": "46213b19f71fda362b970304469766698b6e86e090781ce896b889abf45cca82",
+    "src/bin/replay.rs": "3e94c82d60c53cbe31f16ba8338d0f09983e4ca38102eac76a703bd11397eb76",
+    "src/lib.rs": "b1807e24abde47b842f698e5ed50c80db8523443e5730707443bb647887a3d97"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 9,
+  "parser_source_lines_covered": 221,
+  "format_specific_source_lines_covered": 93,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/rust/rustdns/target/coverage/coverage.json",
+  "pass": true
+}

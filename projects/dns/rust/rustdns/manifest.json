@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "format": "dns",
+  "ecosystem": "rust",
+  "pilot": true,
+  "package": "rustdns",
+  "release": "0.7.0",
+  "catalog_parser": "data/rust/dns/parsers.json",
+  "source_lock": "projects/dns/rust/rustdns/source-lock.json",
+  "source_sha256": "60dd90c5556e58609d8d5588d5a64399bea436b6864a1a2f0be627297c592752",
+  "base_image": "rust@sha256:f2c004e3d2d8b547e8cf7ffbc29205385f4e71d23e53e4e383065db5e9f822cd",
+  "runtime_base_image": "debian@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc",
+  "platform": "linux/arm64",
+  "control": "controls/dns/response.bin",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "expected_output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "differential_control": "controls/dns/query.bin",
+  "differential_control_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "differential_expected_output": {
+    "id": 4660,
+    "qr": 0,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 0,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 0,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [],
+    "authority": [],
+    "additional": []
+  },
+  "afl_variant": "controls/dns/query.bin",
+  "afl_variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "harness": "src/lib.rs",
+  "api": "rustdns::Message::from_slice(&[u8]) on local bytes; public header fields, questions, answers, authoritys and additionals",
+  "fuzz_engine": "libFuzzer via libfuzzer-sys 0.4.13",
+  "fuzz_entry": "src/bin/fuzzer.rs",
+  "summary_command": [
+    "/work/replay",
+    "/input/case"
+  ],
+  "afl_target_stdin": true,
+  "coverage": "Rust LLVM source coverage of the rustdns crate during Message::from_slice; libFuzzer sanitizer counters",
+  "coverage_subject_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustdns-0.7.0/",
+  "format_specific_coverage_file_suffix": "/src/dns.rs",
+  "z_bits_note": "rustdns 0.7.0 keeps the reserved Z bit, AD and CD as Message fields, so the harness reports z as (Z<<2)|(AD<<1)|CD. Both controls have all three bits clear.",
+  "afl_instrumented_crates": [
+    "rustdns"
+  ],
+  "afl_scope_note": "cargo-afl SanitizerCoverage is kept only for the rustdns crate(s), as for hickory-proto: the serde_json/indexmap summary encoder hashes with a random std RandomState, which makes whole-binary afl-showmap maps vary between identical runs."
+}
