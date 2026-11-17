@@ -2,7 +2,7 @@
 
 Pinned release: `6.0.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[Selection, leads, and standard API inventory](../../../../data/javascript/xml/ranking.md)
+[API, control result, and parser family](../../../../catalog/xml/javascript/saxes/README.md)
 
 ## Run from the repository root
 
