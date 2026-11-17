@@ -17,6 +17,7 @@
 - [imagemagick / C++](cpp/imagemagick/README.md)
 - [libvips / C++](cpp/libvips/README.md)
 - [mupdf / C++](cpp/mupdf/README.md)
+- [pdf4qt / C++](cpp/pdf4qt/README.md)
 - [pdf_oxide / C++](cpp/pdf_oxide/README.md)
 - [pdfwriter / C++](cpp/pdfwriter/README.md)
 - [podofo / C++](cpp/podofo/README.md)

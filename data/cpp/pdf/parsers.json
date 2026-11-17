@@ -112,7 +112,8 @@
     },
     "scope": "PDF document page count",
     "family": "PDF4QT PDF engine",
-    "family_note": "Native PDF4QT C++ document reader built from pinned v1.6.0.0 source. Its pinned Blend2D dependency uses NO_JIT. A recorded patch enables core-only building with Qt 6.12 on macOS and replaces parallel-policy calls with sequential algorithms for Apple libc++; the adapter uses C++20."
+    "family_note": "Native PDF4QT C++ document reader built from pinned v1.6.0.0 source. Its pinned Blend2D dependency uses NO_JIT. A recorded patch enables core-only building with Qt 6.12 on macOS and replaces parallel-policy calls with sequential algorithms for Apple libc++; the adapter uses C++20.",
+    "harness_note": "The pinned Docker build applies the SHA-recorded project-local core-library compatibility patch before compilation. It guards an editor-only translation target, uses sequential STL calls in two core headers, and links Fontconfig. The pinned PDF reader and parser source files are unchanged."
   },
   {
     "name": "imagemagick",
