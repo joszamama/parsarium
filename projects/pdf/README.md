@@ -6,11 +6,13 @@
 
 - [ghostscript / C](c/ghostscript/README.md)
 - [graphicsmagick / C](c/graphicsmagick/README.md)
+- [imagemagick / C](c/imagemagick/README.md)
 - [libvips / C](c/libvips/README.md)
 - [mupdf / C](c/mupdf/README.md)
 - [poppler-glib / C](c/poppler-glib/README.md)
 - [qpdf / C](c/qpdf/README.md)
 - [ghostscript / C++](cpp/ghostscript/README.md)
+- [imagemagick / C++](cpp/imagemagick/README.md)
 - [libvips / C++](cpp/libvips/README.md)
 - [mupdf / C++](cpp/mupdf/README.md)
 - [pdfwriter / C++](cpp/pdfwriter/README.md)
