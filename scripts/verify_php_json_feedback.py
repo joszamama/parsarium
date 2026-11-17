@@ -12,7 +12,7 @@ from run_case import ROOT, project_for
 
 
 PROJECTS = ("seld_jsonlint", "laminas_json", "halaxa_json_machine", "salsify_json_streaming_parser",
-            "pcrov_jsonreader", "boundwize_jsonrecast",
+            "pcrov_jsonreader", "boundwize_jsonrecast", "laktak_hjson",
             "stdlib_json_decode")
 CONTROL = "controls/json/nested-object.json"
 DIFFERENTIAL = "controls/json/nested-array.json"

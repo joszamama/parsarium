@@ -1,6 +1,6 @@
 # PHP × JSON: selected parsers (pilot)
 
-6 control-verified third-party paths selected. The ceiling is ten; this pilot does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
+7 control-verified third-party paths selected. The ceiling is ten; this pilot does not pad the selection. A path is an API or package route, not necessarily an independent parser engine.
 
 PHP code mostly parses JSON with the bundled `json_decode` (ext/json). The most downloaded Packagist JSON helpers wrap it, so they are excluded from the third-party ranking rather than counted as separate parsers.
 
@@ -16,10 +16,13 @@ Packagist total downloads, from the bounded search captured 2026-11-17 ([snapsho
 | 4 | [salsify/json-streaming-parser](https://packagist.org/packages/salsify/json-streaming-parser) | v8.3.1 | 7,715,575 | One object/array root read from a stream; listener events built into values | salsify JsonStreamingParser state machine |
 | 5 | [pcrov/jsonreader](https://packagist.org/packages/pcrov/jsonreader) | 1.0.4 | 1,520,757 | Local JSON bytes through its pull reader; exact object and array trees | pcrov JSON lexer and reader state machine |
 | 6 | [boundwize/jsonrecast](https://packagist.org/packages/boundwize/jsonrecast) | 1.0.37 | 702,666 | One JSON text via `JsonRecast::parse(string)`; AST walked into an exact ordered type-tagged tree | boundwize/jsonrecast Lexer and recursive-descent JsonParser (formatting-preserving AST) |
+| 7 | [laktak/hjson](https://packagist.org/packages/laktak/hjson) | v2.3.1 | 262,430 | One JSON text via `HJSONParser::parse(string)`, default options; exact ordered type-tagged tree | hjson-php HJSONParser (port of hjson-js) recursive character parser |
 
 Composer depends on seld/jsonlint, which inflates the download count. Composer calls `json_decode` first and uses `JsonParser` to report errors. Laminas is abandoned; its default API route calls ext/json, so this adapter explicitly enables its own PHP Decoder. JSON Machine has an independent streaming parser for member boundaries, but the selected decoder delegates each member value to PHP ext/json. salsify decodes strings, escapes and numbers in its own code; the adapter supplies a listener that builds objects and lists, and rejects input that does not end exactly one document. pcrov/jsonreader has its own pull lexer and state machine; both valid controls match an independent type-tagged JSON tree, and its parser-only AFL bridge changes three source features and three tuples between them.
 
 boundwize/jsonrecast 1.0.37 documents `JsonRecast::parse(string)`, which returns an editable, formatting-preserving AST. Its own lexer, number scanner and recursive-descent parser build the tree; each string token, quotes included, is unescaped by `json_decode`, while structure, member order, literals and numbers stay in package code (`NumberNode::toIntOrFloat()` casts the raw lexeme). Both valid controls match the independent Python `json` oracle with member order and integer/float kinds. Xdebug covers 421 package lines on the object control; the parser-line AFL++ bridge is stable on repeat and differs by 35 lines and 35 tuples between the controls. 26 of those lines are in `IndentDetector`, the formatting metadata pass that `parse()` runs, and 9 in the lexer, parser and number scanner ([receipt](boundwize-jsonrecast-feedback-differential.json)). The package was first released in 2026; its download count may be driven by a few dependents.
+
+laktak/hjson v2.3.1 (hjson-php, a port of hjson-js) documents `HJSONParser::parse($text)` for JSON or Hjson text. Its own recursive parser walks UTF-8 characters, decodes escapes and `\u` sequences itself and reads numbers with `HJSONUtils::tryParseNumber`; with default options it never calls `json_decode`. Both valid controls match the independent Python `json` oracle with member order and integer/float kinds. Hjson is a superset of JSON (quoteless strings, comments, optional commas and root braces), so this path parses valid JSON but does not reject invalid RFC 8259 input, and the download count mainly reflects configuration-file use. Xdebug covers 201 package lines on the object control; the parser-line AFL++ bridge is stable on repeat and differs by 13 lines and 13 tuples, all in `HJSONParser.php` and `HJSONUtils.php` ([receipt](laktak-hjson-feedback-differential.json)).
 
 ## Standard API (unranked)
 
@@ -47,7 +50,6 @@ Numeric leads from the same snapshot, not verified and not selected. JWT, JSON S
 | [symfony/json-streamer](https://packagist.org/packages/symfony/json-streamer) | v8.1.10 | 946,545 † | excluded | Pinned probe: with the schema-free `Type::mixed()` the generated reader is one json_decode call with associative arrays; both controls lose `{}`/`[]` and run the same 129 package lines ([evidence](symfony-json-streamer-lead-check.json)). |
 | [webmozart/json](https://packagist.org/packages/webmozart/json) | 1.2.2 | 884,156 | excluded | json_decode, with seld/jsonlint only for error messages. |
 | [karriere/json-decoder](https://packagist.org/packages/karriere/json-decoder) | v5.1.0 | 474,219 | excluded | Maps one json_decode result onto classes. |
-| [laktak/hjson](https://packagist.org/packages/laktak/hjson) | v2.3.1 | 262,430 | unresolved | Own Hjson (JSON superset) character parser; screening probe matched both controls exactly. |
 | [kherge/json](https://packagist.org/packages/kherge/json) | 3.0.1 | 259,958 | excluded | json_decode, with seld/jsonlint only for error messages. |
 | [clue/json-stream](https://packagist.org/packages/clue/json-stream) | v0.1.1 | 249,068 | excluded | Buffers to a closing bracket and calls json_decode. |
 | [rodenastyle/stream-parser](https://packagist.org/packages/rodenastyle/stream-parser) | v2.0.3 | 213,447 | excluded | JSON through maxakawizard/json-collection-parser, so salsify. |
