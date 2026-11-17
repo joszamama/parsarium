@@ -29,3 +29,5 @@ jobs:
         run: python3 scripts/audit_fuzzing.py
       - name: Test catalog, package paths, and fuzz tooling
         run: python3 -m unittest discover -s tests -q
+      - name: Build the catalog website
+        run: python3 website/build.py --output /tmp/parsarium-site

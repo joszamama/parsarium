@@ -186,6 +186,13 @@ def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def project_release(manifest: dict) -> str:
+    release = manifest.get("release") or manifest.get("runtime")
+    if not isinstance(release, str) or not release:
+        raise ValueError(f"project has no pinned release or runtime: {manifest.get('package')}")
+    return release
+
+
 def repo_link(path: str) -> str:
     return f"{REPO_URL}/blob/main/{path}"
 
@@ -219,13 +226,15 @@ def build(output: Path) -> None:
     if len(readmes) != coverage["catalog_paths"]:
         raise ValueError("parser guides do not match catalog path count")
     coverage_by_cell = {(c["format"], c["ecosystem"]): c for c in coverage["cells"]}
+    active_formats = {fmt for fmt, *_ in FORMATS}
     manifests = {}
     standard_projects = {}
     for path in sorted((ROOT / "projects").glob("*/*/*/manifest.json")):
         manifest = read_json(path)
-        key = (manifest["format"], manifest["ecosystem"], manifest["package"], manifest["release"])
+        key = (manifest["format"], manifest["ecosystem"], manifest["package"], project_release(manifest))
         manifests[key] = (path, manifest)
-        if manifest.get("kind") == "standard" and fully_runnable(path, manifest):
+        if (manifest.get("kind") == "standard" and manifest["format"] in active_formats
+                and fully_runnable(path, manifest)):
             standard_projects[(manifest["format"], manifest["ecosystem"], manifest["api"])] = path
 
     parsers = []
@@ -343,7 +352,7 @@ def build(output: Path) -> None:
             "format": fmt,
             "ecosystem": eco,
             "name": manifest["package"],
-            "version": manifest["release"],
+            "version": project_release(manifest),
             "scope": "format-aware runtime API",
             "family": manifest["runtime"],
             "inputApi": manifest["api"],
@@ -362,7 +371,10 @@ def build(output: Path) -> None:
             continue
         project_dir = ROOT / record["project"]
         manifest = read_json(project_dir / "manifest.json")
-        verification = read_json(project_dir / "verification.json")
+        receipt = project_dir / "verification.json"
+        if not receipt.is_file():
+            receipt = project_dir / "control-verification.json"
+        verification = read_json(receipt)
         control_path = ROOT / manifest["control"]
         fmt, eco, slug = target_id.split("/")
         target_args = f"{fmt} {eco} {slug}"
@@ -375,7 +387,7 @@ def build(output: Path) -> None:
             "slug": slug,
             "type": record.get("type", "package"),
             "package": manifest["package"],
-            "release": manifest["release"],
+            "release": project_release(manifest),
             "family": record["family"],
             "rank": record.get("rank"),
             "verifiedAt": verification.get("verified_at_utc"),
@@ -429,7 +441,7 @@ def build(output: Path) -> None:
         parser_record = next(
             (record for record in parsers if record["format"] == fmt
              and record["ecosystem"] == eco and record["name"] == manifest["package"]
-             and record["version"] == manifest["release"]),
+             and record["version"] == project_release(manifest)),
             None,
         )
         if parser_record is None or not parser_record.get("targetId"):
@@ -447,7 +459,7 @@ def build(output: Path) -> None:
             "format": fmt,
             "ecosystem": eco,
             "package": manifest["package"],
-            "release": manifest["release"],
+            "release": project_release(manifest),
             "inputApi": parser_record["inputApi"],
             "control": manifest["control"],
             "controlUrl": str(destination.relative_to(output)),
