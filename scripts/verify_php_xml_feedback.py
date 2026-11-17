@@ -11,7 +11,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("stdlib_xmlreader",)
+PROJECTS = ("stdlib_xmlreader", "sabre_xml")
 CONTROL = "controls/xml/catalog-ns.xml"
 DIFFERENTIAL = "controls/xml/order-default-ns.xml"
 REPORT = ROOT / "data/php/xml/afl-feedback.json"

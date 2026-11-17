@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "php",
+  "package": "sabre/xml",
+  "release": "4.1.0",
+  "catalog_parser": "data/php/xml/parsers.json",
+  "source_lock": "projects/xml/php/sabre_xml/source-lock.json",
+  "source_sha256": "ff780dcb7389d1c8c2974d858140c6bef427b097e84ae1995ead20f1cf5b9fa3",
+  "underlying_release": "libxml2 2.15.4 (AFL overlay, source build); Ubuntu PHP 8.5.4 libxml 2.15.2 (coverage image)",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "fuzz_engine": "AFL++",
+  "fuzz_engine_release": "4.33c-1.1ubuntu1",
+  "fuzz_smoke_entrypoint": "php",
+  "fuzz_smoke_args": [
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "harness": "harness.php",
+  "coverage": "Xdebug executed line coverage in sabre/xml 4.1.0 PHP source (lib/) during valid namespace-aware XML replay; AFL++ feedback comes from the libxml2 parser family via the native overlay",
+  "coverage_subject_prefix": "/work/vendor/sabre/xml/lib/"
+}

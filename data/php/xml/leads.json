@@ -5,7 +5,7 @@
     "version_seen": "v8.2.0-BETA1",
     "license": "MIT",
     "packagist_downloads": 443886072,
-    "reason": "Crawler loads XML with DOMDocument::loadXML; libxml2 family wrapper, and a navigation tool rather than its own parser.",
+    "reason": "Crawler::addXmlContent(string) hands the bytes to DOMDocument::loadXML and then only navigates/filters the already parsed DOM; no format-specific parse result of its own.",
     "source": "https://packagist.org/packages/symfony/dom-crawler"
   },
   {
@@ -14,43 +14,43 @@
     "version_seen": "3.32.9",
     "license": "MIT",
     "packagist_downloads": 153868960,
-    "reason": "Typed serializer; XML deserialization calls simplexml_load_string / DOMDocument (libxml2 family). Serializers are outside the XML cell protocol.",
+    "reason": "deserialize($xml, $type, 'xml') loads SimpleXMLElement and then maps the already parsed tree onto typed objects through class metadata; it needs a target class model rather than producing a generic XML parse result.",
     "source": "https://packagist.org/packages/jms/serializer"
   },
   {
     "name": "sabre/xml",
-    "status": "excluded",
+    "status": "selected",
     "version_seen": "4.1.0",
     "license": "BSD-3-Clause",
     "packagist_downloads": 39858833,
-    "reason": "Sabre\\Xml\\Reader extends PHP's XMLReader; shares the verified libxml2 family and is not an independent parser engine.",
+    "reason": "Package API: Sabre\\Xml\\Reader::XML(string) + parse() (Service::parse also takes a string or stream) builds its own Clark-notation element tree with attributes and leaf text. Parser family libxml2 via XMLReader, shared with the standard path. Verified: projects/xml/php/sabre_xml.",
     "source": "https://packagist.org/packages/sabre/xml"
   },
   {
     "name": "veewee/xml",
-    "status": "excluded",
+    "status": "unresolved",
     "version_seen": "4.14.0",
     "license": "MIT",
     "packagist_downloads": 8963799,
-    "reason": "Functional wrappers over Dom\\XMLDocument, DOMDocument::loadXML and XMLReader::fromString; libxml2 family.",
+    "reason": "libxml2-family wrapper (Functional wrappers over Dom\\XMLDocument, DOMDocument::loadXML and XMLReader::fromString). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
     "source": "https://packagist.org/packages/veewee/xml"
   },
   {
     "name": "mtownsend/xml-to-array",
-    "status": "excluded",
+    "status": "unresolved",
     "version_seen": "2.0.1",
     "license": "MIT",
     "packagist_downloads": 4956232,
-    "reason": "Converts XML to arrays through DOMDocument::loadXML; libxml2 family.",
+    "reason": "libxml2-family wrapper (Converts XML to arrays through DOMDocument::loadXML). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
     "source": "https://packagist.org/packages/mtownsend/xml-to-array"
   },
   {
     "name": "saloonphp/xml-wrangler",
-    "status": "excluded",
+    "status": "unresolved",
     "version_seen": "v1.5.0",
     "license": "MIT",
     "packagist_downloads": 3754849,
-    "reason": "Requires veewee/xml for reading; libxml2 family through that wrapper.",
+    "reason": "libxml2-family wrapper (Requires veewee/xml for reading). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
     "source": "https://packagist.org/packages/saloonphp/xml-wrangler"
   },
   {
@@ -64,56 +64,56 @@
   },
   {
     "name": "laravie/parser",
-    "status": "excluded",
+    "status": "unresolved",
     "version_seen": "v3.0.0",
     "license": "MIT",
     "packagist_downloads": 2274560,
-    "reason": "Document reader built on simplexml_load_string / simplexml_load_file; libxml2 family.",
+    "reason": "libxml2-family wrapper (Document reader built on simplexml_load_string / simplexml_load_file). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
     "source": "https://packagist.org/packages/laravie/parser"
   },
   {
     "name": "orchestra/parser",
-    "status": "excluded",
+    "status": "unresolved",
     "version_seen": "v10.0.0",
     "license": "MIT",
     "packagist_downloads": 1844336,
-    "reason": "Laravel bridge that requires laravie/parser; libxml2 family through SimpleXML.",
+    "reason": "libxml2-family wrapper (Laravel bridge that requires laravie/parser). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
     "source": "https://packagist.org/packages/orchestra/parser"
   },
   {
     "name": "pear/xml_parser",
-    "status": "excluded",
+    "status": "unresolved",
     "version_seen": "v1.3.8",
     "license": "BSD-2-Clause",
     "packagist_downloads": 1819294,
-    "reason": "SAX wrapper over xml_parser_create (PHP ext/xml, libxml2-based); not an independent engine.",
+    "reason": "libxml2-family wrapper (SAX wrapper over xml_parser_create (PHP ext/xml, libxml2-based)). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
     "source": "https://packagist.org/packages/pear/xml_parser"
   },
   {
     "name": "jtrumbull/xml-parser",
-    "status": "excluded",
+    "status": "unresolved",
     "version_seen": "v1.0.2",
     "license": "MIT",
     "packagist_downloads": 62346,
-    "reason": "Source calls xml_parser_create (ext/xml, libxml2 family).",
+    "reason": "libxml2-family wrapper (Source calls xml_parser_create (ext/xml, libxml2 family)). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
     "source": "https://packagist.org/packages/jtrumbull/xml-parser"
   },
   {
     "name": "alex.oleshkevich/fast-xml-parser",
-    "status": "excluded",
+    "status": "unresolved",
     "version_seen": "1.0",
     "license": "MIT",
     "packagist_downloads": 31174,
-    "reason": "FastXml\\Parser calls xml_parser_create (ext/xml, libxml2 family).",
+    "reason": "libxml2-family wrapper (FastXml\\Parser calls xml_parser_create (ext/xml, libxml2 family)). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
     "source": "https://packagist.org/packages/alex.oleshkevich/fast-xml-parser"
   },
   {
     "name": "atk14/xmole",
-    "status": "excluded",
+    "status": "unresolved",
     "version_seen": "v1.0.4",
     "license": "MIT",
     "packagist_downloads": 27890,
-    "reason": "XMole calls xml_parser_create (ext/xml, libxml2 family).",
+    "reason": "libxml2-family wrapper (XMole calls xml_parser_create (ext/xml, libxml2 family)). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
     "source": "https://packagist.org/packages/atk14/xmole"
   },
   {
@@ -127,11 +127,11 @@
   },
   {
     "name": "arc/xml",
-    "status": "excluded",
+    "status": "unresolved",
     "version_seen": "3.0",
     "license": "MIT",
     "packagist_downloads": 660,
-    "reason": "Ariadne arc\\xml\\Parser builds on SimpleXMLElement/DOM; libxml2 family.",
+    "reason": "libxml2-family wrapper (Ariadne arc\\xml\\Parser builds on SimpleXMLElement/DOM). Sharing libxml2 is not an exclusion under PROTOCOL.md; package-API qualification and controls not evaluated by the 2026-11-17 cutoff.",
     "source": "https://packagist.org/packages/arc/xml"
   }
 ]

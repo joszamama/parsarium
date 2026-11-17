@@ -1,10 +1,10 @@
 {
   "ecosystem": "php",
   "format": "xml",
-  "status": "pilot_zero_selected_search_bounded",
+  "status": "pilot_partial_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 1,
   "verified_standard_or_runtime_count": 1,
   "search_queries": [
     "xml",
@@ -18,12 +18,13 @@
   "unique_search_hits": 301,
   "leads_recorded": 15,
   "leads_by_status": {
-    "unresolved": 2,
-    "excluded": 13
+    "excluded": 2,
+    "selected": 1,
+    "unresolved": 12
   },
   "ranking_metric": "Packagist total downloads",
-  "selection": "None. Every recorded high-download XML reading package checked (sabre/xml 39,858,833; veewee/xml 8,963,799; mtownsend/xml-to-array 4,956,232; laravie/parser 2,274,560; pear/xml_parser 1,819,294 and others) parses through PHP's libxml2-backed XMLReader, DOM, SimpleXML or ext/xml, so it shares the verified standard family and is not counted as an independent parser engine.",
-  "uncertainty": "Pilot cell: no third-party path met the protocol, so the count is zero rather than padded. Thirteen libxml2-family wrappers are excluded in leads.json. Two own-code leads remain unresolved and unrun: prewk/xml-string-streamer (3,642,516 downloads) splits streams into raw node strings without namespace or entity decoding, and watoki/dom (12,999) has its own finite-state markup parser without observed namespace, CDATA or entity handling. The search covers the first 100 hits of five Packagist queries ('xml decoder' returned 23 and 'xml streaming parser' 8); lower-ranked or differently described pure-PHP XML parsers may exist. The standard XMLReader path is verified on two small UTF-8 namespace-aware controls without DOCTYPE, which do not establish DTD, external entity, non-UTF-8 encoding, XML 1.1 or validation behaviour.",
+  "selection": "sabre/xml 4.1.0 (Packagist 39,858,833), a package API over the libxml2 family: Sabre\\Xml\\Reader extends XMLReader and builds its own Clark-notation element tree. Both valid controls match the expat oracle on elements, attributes, depth, root and text.",
+  "uncertainty": "Pilot cell, one verified third-party path. The earlier zero count wrongly excluded libxml2-family wrappers; PROTOCOL.md lets a wrapper qualify as a package API with its parser family identified, so sabre/xml is counted with family libxml2 (shared with the standard XMLReader path). symfony/dom-crawler and jms/serializer stay excluded because they only navigate or map an already parsed DOM/SimpleXML tree. The other libxml2-family wrappers (veewee/xml, mtownsend/xml-to-array, saloonphp/xml-wrangler, laravie/parser, orchestra/parser, pear/xml_parser and smaller ones) were not evaluated by the cutoff and remain unresolved, as do the own-code leads prewk/xml-string-streamer and watoki/dom. sabre/xml drops xmlns declarations and text in mixed-content elements by design, so its summary omits namespace declaration counts. Its coverage image uses Ubuntu PHP 8.5.4 with libxml 2.15.2; its AFL++ overlay uses the source-built PHP 8.5.12 and libxml2 2.15.4. The search covers the first 100 hits of five Packagist queries; controls are two small UTF-8 namespace-aware documents without DOCTYPE.",
   "third_party_evidence": "data/php/xml/parsers.json",
   "third_party_control_results": "data/php/xml/verification.json",
   "runtime_evidence": "data/php/xml/standard.json",
