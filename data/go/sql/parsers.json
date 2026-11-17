@@ -105,6 +105,111 @@
     }
   },
   {
+    "name": "github.com/xwb1989/sqlparser",
+    "version": "v0.0.0-20180606152119-120387863bf2",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE.md in the pinned module zip (SHA-256 43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1, Apache License 2.0)",
+    "input_api": "sqlparser.SplitStatementToPieces and sqlparser.Parse(local SQL text) -> Statement",
+    "documentation": "https://pkg.go.dev/github.com/xwb1989/sqlparser@v0.0.0-20180606152119-120387863bf2#Parse",
+    "source": "https://proxy.golang.org/github.com/xwb1989/sqlparser/@v/v0.0.0-20180606152119-120387863bf2.zip",
+    "source_sha256": "9ebb970f2006a76b86f8cfb4fe58e3618d6a37055dd1f70a4f1415d428dba728",
+    "go_module_sum": "h1:zzrxE1FKn5ryBNl9eKOeqQ58Y/Qpo3Q9QNxKHX5uzzQ=",
+    "dependencies": [],
+    "dialect": "MySQL (vitess-derived grammar, no dialect option)",
+    "scope": "Local SQL text split and parsed by xwb1989/sqlparser; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Other MySQL syntax is untested.",
+    "family": "vitess MySQL grammar (2018 extracted fork, goyacc sql.y) and tokenizer",
+    "family_note": "sqlparser.Parse runs the package's own tokenizer (token.go) and the goyacc parser generated from sql.y into sql.go. The package is a 2018 extraction of vitess's go/vt/sqlparser with vitess dependencies vendored under dependency/. Overlap with the selected vitess.io/vitess v0.24.5 sqlparser was measured on non-test .go/.y files: 12 file names in common, none byte-identical, and 4,596 of 19,192 lines (23.9%) in matching blocks of same-named files, so it is a separate package path in the shared vitess family, not a byte-identical copy. The adapter splits with SplitStatementToPieces, reads *Select (SelectExprs, From join tree, Where, GroupBy, OrderBy) and *Insert (Table, Columns, Values) and walks the tree with sqlparser.Walk for AliasedTableExpr base tables, FuncExpr names and SQLVal values. The module has no tagged releases; the pin is the proxy pseudo-version of the last commit, 120387863bf2.",
+    "popularity": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 305,
+      "source": "https://pkg.go.dev/github.com/xwb1989/sqlparser",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/go/sql/registry-snapshot.json",
+      "limitation": "Importer count of this package path; forks and vendored copies are counted separately."
+    },
+    "project": "projects/sql/go/github_com_xwb1989_sqlparser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "github.com/pingcap/tidb/pkg/parser",
     "version": "v0.0.0-20261117145351-1e84b3595a3e",
     "license": "Apache-2.0",

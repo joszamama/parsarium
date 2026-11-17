@@ -60,13 +60,14 @@
     },
     {
       "name": "github.com/xwb1989/sqlparser",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 305,
       "metric_error": null,
       "latest_release_observed": "v0.0.0-...-1203878",
       "family": "vitess MySQL grammar (extracted fork)",
       "documented_api_lead": "sqlparser.Parse",
-      "reason": "Extracted copy of an older vitess sqlparser; sqlparser.Parse returns Statement. Not run in this round; next Go lead by metric after pingcap/parser."
+      "reason": "2018 extraction of vitess go/vt/sqlparser (untagged; pinned to pseudo-version 120387863bf2). Not byte-identical to the selected vitess v0.24.5 sqlparser: 0 of 12 same-named non-test source files identical, 23.9% of its 19,192 lines in matching blocks. SplitStatementToPieces and Parse give the oracle summary on both controls; selected as a separate path in the vitess family.",
+      "selected_release": "v0.0.0-20180606152119-120387863bf2"
     },
     {
       "name": "github.com/pingcap/tidb/pkg/parser",

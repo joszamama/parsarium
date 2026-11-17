@@ -97,6 +97,98 @@
       "afl_feedback": "fuzzing/afl-native/sql/go/vitess_io_vitess_go_vt_sqlparser/differential.json"
     },
     {
+      "package": "github.com/xwb1989/sqlparser",
+      "version": "v0.0.0-20180606152119-120387863bf2",
+      "pass": true,
+      "input_api": "sqlparser.SplitStatementToPieces and sqlparser.Parse(local SQL text) -> Statement",
+      "dialect": "MySQL (vitess-derived grammar, no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "vitess MySQL grammar (2018 extracted fork, goyacc sql.y) and tokenizer",
+      "parser_source_files": 4,
+      "parser_source_lines_covered": 463,
+      "afl_tuple_difference": 182,
+      "parser_feature_difference": 182,
+      "project_receipt": "projects/sql/go/github_com_xwb1989_sqlparser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/go/github_com_xwb1989_sqlparser/differential.json"
+    },
+    {
       "package": "github.com/pingcap/tidb/pkg/parser",
       "version": "v0.0.0-20261117145351-1e84b3595a3e",
       "pass": true,
@@ -190,5 +282,5 @@
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T19:58:32.906598+00:00"
+  "checked_at_utc": "2026-11-17T20:12:22.766376+00:00"
 }
