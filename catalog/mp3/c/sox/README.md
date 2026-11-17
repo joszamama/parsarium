@@ -7,7 +7,7 @@
 - **Local input API:** `sox_init; sox_open_read(local filename, NULL, NULL, NULL); sox_read decoded sample; filetype and signal fields`
 - **Documentation:** [API reference](<https://sourceforge.net/p/sox/code/ci/master/tree/src/example0.c>)
 - **Catalog evidence:** [parser record](../../../../data/c/mp3/parsers.json) · [control verification](../../../../data/c/mp3/verification.json) · [within-ecosystem ranking](../../../../data/c/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -24,9 +24,9 @@ The pinned src/mp3.c is the MP3 format handler and the installed libsox links li
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/c/sox/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/c/sox/README.md)
 
 ```sh
 python3 parsarium.py build mp3 c sox
-python3 parsarium.py run mp3 c sox controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 c sox controls/mp3/id3v2-tagged-tone.mp3
 ```

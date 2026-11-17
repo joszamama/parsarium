@@ -7,7 +7,7 @@
 - **Local input API:** `MediaFile::open(local tagged MP3 path); isAudio and getAudio sample rate/bit rate`
 - **Documentation:** [API reference](<https://github.com/wapmorgan/MediaFile/blob/263f773696e02d173fb9636c9a8111ac84032292/README.md>)
 - **Catalog evidence:** [parser record](../../../../data/php/mp3/parsers.json) · [control verification](../../../../data/php/mp3/verification.json) · [within-ecosystem ranking](../../../../data/php/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -23,9 +23,9 @@ MediaFile wraps the pinned wapmorgan/mp3info parser in its isolated lock. This a
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/wapmorgan_media_file/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/php/wapmorgan_media_file/README.md)
 
 ```sh
 python3 parsarium.py build mp3 php wapmorgan_media_file
-python3 parsarium.py run mp3 php wapmorgan_media_file controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 php wapmorgan_media_file controls/mp3/id3v2-tagged-tone.mp3
 ```

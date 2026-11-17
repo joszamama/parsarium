@@ -7,7 +7,7 @@
 - **Local input API:** `AudioFileIO.read(File), MP3File.getID3v2Tag(), Tag.getFirst(FieldKey)`
 - **Documentation:** [API reference](<https://www.jthink.net/jaudiotagger/examples_id3.jsp>)
 - **Catalog evidence:** [parser record](../../../../data/java/mp3/parsers.json) · [control verification](../../../../data/java/mp3/verification.json) · [within-ecosystem ranking](../../../../data/java/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -23,9 +23,9 @@ jid3lib's project README identifies jaudiotagger as a fork in the same historica
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/java/jaudiotagger/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/java/jaudiotagger/README.md)
 
 ```sh
 python3 parsarium.py build mp3 java jaudiotagger
-python3 parsarium.py run mp3 java jaudiotagger controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 java jaudiotagger controls/mp3/id3v2-tagged-tone.mp3
 ```

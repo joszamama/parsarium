@@ -7,7 +7,7 @@
 - **Local input API:** `Mix_Init(MIX_INIT_MP3); Mix_OpenAudio(dummy device); Mix_LoadMUS(local filename); Mix_GetMusicType/Mix_GetMusicTitleTag/Mix_GetMusicArtistTag/Mix_MusicDuration`
 - **Documentation:** [API reference](<https://wiki.libsdl.org/SDL2_mixer/Mix_LoadMUS>)
 - **Catalog evidence:** [parser record](../../../../data/c/mp3/parsers.json) · [control verification](../../../../data/c/mp3/verification.json) · [within-ecosystem ranking](../../../../data/c/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -23,9 +23,9 @@ The pinned music_mpg123.c calls mp3_read_tags from mp3utils.c and links libmpg12
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/c/sdl_mixer/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/c/sdl_mixer/README.md)
 
 ```sh
 python3 parsarium.py build mp3 c sdl_mixer
-python3 parsarium.py run mp3 c sdl_mixer controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 c sdl_mixer controls/mp3/id3v2-tagged-tone.mp3
 ```

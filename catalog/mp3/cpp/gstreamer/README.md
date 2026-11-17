@@ -7,7 +7,7 @@
 - **Local input API:** `gst_filename_to_uri(local filename); gst_discoverer_discover_uri; gst_discoverer_info_get_tags/audio_streams`
 - **Documentation:** [API reference](<https://gstreamer.freedesktop.org/documentation/pbutils/gstdiscoverer.html>)
 - **Catalog evidence:** [parser record](../../../../data/cpp/mp3/parsers.json) · [control verification](../../../../data/cpp/mp3/verification.json) · [within-ecosystem ranking](../../../../data/cpp/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -24,9 +24,9 @@ The C and C++ call sites use the same GStreamer C API. GstDiscoverer invokes the
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/cpp/gstreamer/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/cpp/gstreamer/README.md)
 
 ```sh
 python3 parsarium.py build mp3 cpp gstreamer
-python3 parsarium.py run mp3 cpp gstreamer controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 cpp gstreamer controls/mp3/id3v2-tagged-tone.mp3
 ```

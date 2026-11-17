@@ -7,11 +7,11 @@ Pinned release: `1.0.1`. [Manifest](manifest.json) · [verification receipt](ver
 ## Run from the repository root
 
 ```sh
-python3 parsarium.py build mp3_id3v2 java javamp3
-python3 parsarium.py run mp3_id3v2 java javamp3 controls/mp3_id3v2/tone-tags-44k.mp3
-python3 parsarium.py replay mp3_id3v2 java javamp3 CORPUS_DIR runs/mp3_id3v2-javamp3-replay
-python3 parsarium.py afl build mp3_id3v2 java javamp3
-python3 parsarium.py afl prepare mp3_id3v2 java javamp3 runs/mp3_id3v2-javamp3-afl
+python3 parsarium.py build mp3 java javamp3
+python3 parsarium.py run mp3 java javamp3 controls/mp3/id3v2-tagged-tone-44k.mp3
+python3 parsarium.py replay mp3 java javamp3 CORPUS_DIR runs/mp3-javamp3-replay
+python3 parsarium.py afl build mp3 java javamp3
+python3 parsarium.py afl prepare mp3 java javamp3 runs/mp3-javamp3-afl
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.

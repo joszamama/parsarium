@@ -7,7 +7,7 @@
 - **Local input API:** `PHPVideoToolkit\MediaParser::getFileInformation(local tagged MP3 path); metadata title/artist/album and audio sample rate/codec`
 - **Documentation:** [API reference](<https://github.com/buggedcom/phpvideotoolkit-v2/blob/383a5b2c0ee7f4de4efea9a9154bb693630bbe0f/README.md>)
 - **Catalog evidence:** [parser record](../../../../data/php/mp3/parsers.json) · [control verification](../../../../data/php/mp3/verification.json) · [within-ecosystem ranking](../../../../data/php/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -25,9 +25,9 @@ Composer package delegates to the local FFmpeg/FFprobe backend; separate PHP wra
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/buggedcom_phpvideotoolkit/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/php/buggedcom_phpvideotoolkit/README.md)
 
 ```sh
 python3 parsarium.py build mp3 php buggedcom_phpvideotoolkit
-python3 parsarium.py run mp3 php buggedcom_phpvideotoolkit controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 php buggedcom_phpvideotoolkit controls/mp3/id3v2-tagged-tone.mp3
 ```

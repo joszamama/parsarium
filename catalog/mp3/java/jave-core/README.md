@@ -7,7 +7,7 @@
 - **Local input API:** `new MultimediaObject(File).getInfo().getAudio()`
 - **Documentation:** [API reference](<https://repo.maven.apache.org/maven2/ws/schild/jave-core/4.2.0/jave-core-4.2.0-sources.jar>)
 - **Catalog evidence:** [parser record](../../../../data/java/mp3/parsers.json) · [control verification](../../../../data/java/mp3/verification.json) · [within-ecosystem ranking](../../../../data/java/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -22,9 +22,9 @@
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/java/jave_core/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/java/jave_core/README.md)
 
 ```sh
 python3 parsarium.py build mp3 java jave_core
-python3 parsarium.py run mp3 java jave_core controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 java jave_core controls/mp3/id3v2-tagged-tone.mp3
 ```

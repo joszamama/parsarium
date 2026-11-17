@@ -7,7 +7,7 @@
 - **Local input API:** `sf_open(local tagged MP3 filename, SFM_READ, SF_INFO); sf_get_string(SF_STR_TITLE); sf_readf_float decoded audio frame`
 - **Documentation:** [API reference](<https://libsndfile.github.io/libsndfile/api.html>)
 - **Catalog evidence:** [parser record](../../../../data/c/mp3/parsers.json) · [control verification](../../../../data/c/mp3/verification.json) · [within-ecosystem ranking](../../../../data/c/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -25,9 +25,9 @@ The pinned libsndfile mpeg_decode.c uses mpg123_id3 and mpg123 audio decoding. T
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/c/libsndfile/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/c/libsndfile/README.md)
 
 ```sh
 python3 parsarium.py build mp3 c libsndfile
-python3 parsarium.py run mp3 c libsndfile controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 c libsndfile controls/mp3/id3v2-tagged-tone.mp3
 ```

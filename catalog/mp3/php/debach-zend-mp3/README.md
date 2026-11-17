@@ -7,7 +7,7 @@
 - **Local input API:** `Zend_Media_Id3v2(local tagged MP3 path); getFramesByIdentifier(TIT2/TPE1/TALB) and frame getText()`
 - **Documentation:** [API reference](<https://github.com/debach/zend-mp3/blob/17b523ad57f283ddf3a116bc0eff22cb9d1b4b27/README.md>)
 - **Catalog evidence:** [parser record](../../../../data/php/mp3/parsers.json) · [control verification](../../../../data/php/mp3/verification.json) · [within-ecosystem ranking](../../../../data/php/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -23,9 +23,9 @@ Composer fork of Sven Vollbehr PHP Reader; its ID3 parser shares source lineage 
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/php/debach_zend_mp3/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/php/debach_zend_mp3/README.md)
 
 ```sh
 python3 parsarium.py build mp3 php debach_zend_mp3
-python3 parsarium.py run mp3 php debach_zend_mp3 controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 php debach_zend_mp3 controls/mp3/id3v2-tagged-tone.mp3
 ```

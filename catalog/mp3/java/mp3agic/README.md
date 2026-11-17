@@ -7,7 +7,7 @@
 - **Local input API:** `new Mp3File(Path), hasId3v2Tag(), getId3v2Tag()`
 - **Documentation:** [API reference](<https://github.com/mpatric/mp3agic/blob/master/readme.md>)
 - **Catalog evidence:** [parser record](../../../../data/java/mp3/parsers.json) · [control verification](../../../../data/java/mp3/verification.json) · [within-ecosystem ranking](../../../../data/java/mp3/ranking.md)
-- **Valid control:** [`controls/mp3_id3v2/tone-tags.mp3`](../../../../controls/mp3_id3v2/tone-tags.mp3)
+- **Valid control:** [`controls/mp3/id3v2-tagged-tone.mp3`](../../../../controls/mp3/id3v2-tagged-tone.mp3)
 
 ## Observed control result
 
@@ -24,9 +24,9 @@ jid3lib's project README identifies mp3agic as a fork in the same historical lin
 
 ## Run this target
 
-[Docker harness and verification receipt](../../../../projects/mp3_id3v2/java/mp3agic/README.md)
+[Docker harness and verification receipt](../../../../projects/mp3/java/mp3agic/README.md)
 
 ```sh
 python3 parsarium.py build mp3 java mp3agic
-python3 parsarium.py run mp3 java mp3agic controls/mp3_id3v2/tone-tags.mp3
+python3 parsarium.py run mp3 java mp3agic controls/mp3/id3v2-tagged-tone.mp3
 ```

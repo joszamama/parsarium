@@ -26,7 +26,7 @@
 }
 ```
 
-Own frame-header parser (src/codecs/mpeg/MPEGHeader.js) and fixed-length frame sync that requires the next header at the computed frame length (src/codecs/Parser.js). The 2.5.0 tarball has no runtime dependencies and shares no code with mediabunny (separate author, repository and frame-sync design). Not one of the ten mp3_id3v2/javascript paths. Its ID3v2 probe skips tags without parsing them and is not exercised by the untagged controls. The same package also parses AAC, FLAC and Ogg; those parsers are not loaded for audio/mpeg frames beyond module import.
+Own frame-header parser (src/codecs/mpeg/MPEGHeader.js) and fixed-length frame sync that requires the next header at the computed frame length (src/codecs/Parser.js). The 2.5.0 tarball has no runtime dependencies and shares no code with mediabunny (separate author, repository and frame-sync design). Not one of the ten JavaScript paths selected in the former MP3-with-ID3v2 cell. Its ID3v2 probe skips tags without parsing them and is not exercised by the untagged controls. The same package also parses AAC, FLAC and Ogg; those parsers are not loaded for audio/mpeg frames beyond module import.
 
 ## Run this target
 
