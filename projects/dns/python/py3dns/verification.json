@@ -1,0 +1,93 @@
+{
+  "kind": "third_party",
+  "api": "DNS.Lib.DnsResult(DNS.Lib.MunpackerText(local DNS message bytes), {})",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:04:50.991514+00:00",
+  "manifest": "projects/dns/python/py3dns/manifest.json",
+  "image_id": "sha256:2938853fb5ab4bac0d00f7d0db933c4f6583a199b684f684a30d0cdf2adab30a",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/amd64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: py3dns",
+    "Version: 4.0.2",
+    "Name: atheris",
+    "Version: 3.1.0",
+    "d7ccd961e0bcb42662183f8d403bd906d3a5f0d8c6ea3986252b0f9a04f8ddb0  DNS/Lib.py",
+    "e68a32a4734451a20cd0324b941b67d0c6d7e3b9808e033f2d5829e7ea4c3c74  DNS/Base.py",
+    "ad70b1344da3ab6fe461fec7a53ae82273f59ad257744776b4f366b38a1c28ed  DNS/__init__.py"
+  ],
+  "source_sha256": "36bffe62b59a72cfa09c03f0bd3473e0126f20ee4285d14c07415dbf6f5fd571",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "a80fc4a56fadb977605a13f56afc163b15bf6544f16ba4ab7b2ad49a88a964fc",
+    "fuzz.py": "12f5329b821f28b641c53a86c55eaaf560b51775e5687ecaacc33671472c5ae8",
+    "harness.py": "e906444537e9bf3e2d9f68e437be7824b8b7455f228a33ca991e9e9908a8fa85",
+    "manifest.json": "16e4ab28b95c77c7c0fdab8ca647d865e3ba1232b6337a5b6746b13161473506",
+    "replay.py": "8469c6ca26ca57239ed03648026e14ecfa66a80aefd8448a1ebc83adfb7b5938",
+    "run-control.py": "f12521abffd1ea1d0325c5af6b7dfd3103ffc567138d8c2a8783a4f4b62145c8",
+    "runtime-requirements.lock": "db5d25a6e7768e6b523aa15138e51a43c422532d1d703762ce028cf783baee7b"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 5,
+  "parser_source_lines_covered": 113,
+  "format_specific_source_lines_covered": 109,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/python/py3dns/target/coverage/coverage.json",
+  "pass": true
+}

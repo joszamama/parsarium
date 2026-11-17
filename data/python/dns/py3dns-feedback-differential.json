@@ -1,0 +1,42 @@
+{
+  "checked_at_utc": "2026-11-17T20:09:46.977769+00:00",
+  "project": "dns/python/py3dns",
+  "pass": true,
+  "input_kind": "two fixed valid DNS messages (RFC 1035 section 4)",
+  "oracle": "controls/dns/check_controls.py hand-written decoder; summaries pinned in controls/dns/expected.json",
+  "feature_kind": "parser-line AFL++ bridge features",
+  "subject_prefix": "/opt/venv/lib/python3.14/site-packages/DNS/",
+  "base_image_id": "sha256:2938853fb5ab4bac0d00f7d0db933c4f6583a199b684f684a30d0cdf2adab30a",
+  "overlay_image_id": "sha256:1ca7f0ae531fa55e57352d2aa5a138234f8a1d0a8e3ac4d26aa382af81a9029e",
+  "overlay_receipt_sha256": "c4e6a16ae92b46845430290d9e1200877c13618694d59dcbbcb422962195915a",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "control_output_matches": true,
+  "variant_output_matches": true,
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "afl_target": "/work/afl_proxy",
+  "afl_map_size": 65536,
+  "control_parser_features": 113,
+  "variant_parser_features": 74,
+  "parser_feature_difference": 39,
+  "control_afl_tuples": 133,
+  "variant_afl_tuples": 94,
+  "afl_tuple_difference": 39,
+  "control_features_by_file": {
+    "/opt/venv/lib/python3.14/site-packages/DNS/Class.py": 1,
+    "/opt/venv/lib/python3.14/site-packages/DNS/Lib.py": 109,
+    "/opt/venv/lib/python3.14/site-packages/DNS/Opcode.py": 1,
+    "/opt/venv/lib/python3.14/site-packages/DNS/Status.py": 1,
+    "/opt/venv/lib/python3.14/site-packages/DNS/Type.py": 1
+  },
+  "variant_features_by_file": {
+    "/opt/venv/lib/python3.14/site-packages/DNS/Class.py": 1,
+    "/opt/venv/lib/python3.14/site-packages/DNS/Lib.py": 70,
+    "/opt/venv/lib/python3.14/site-packages/DNS/Opcode.py": 1,
+    "/opt/venv/lib/python3.14/site-packages/DNS/Status.py": 1,
+    "/opt/venv/lib/python3.14/site-packages/DNS/Type.py": 1
+  },
+  "mutation_campaign_run": false
+}

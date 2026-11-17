@@ -307,5 +307,108 @@
     },
     "rank": 3,
     "afl_feedback": "data/python/dns/dnslib-feedback-differential.json"
+  },
+  {
+    "name": "py3dns",
+    "version": "4.0.2",
+    "license": "CNRI-Python",
+    "license_evidence": "Wheel METADATA classifier 'License :: OSI Approved :: Python License (CNRI Python License)' and dist-info/LICENSE (CNRI license agreement for PyDNS, sha256 d1f23c3e...), checked in the image",
+    "input_api": "DNS.Lib.DnsResult(u: DNS.Lib.MunpackerText(buf: bytes), args: dict)",
+    "documentation": "https://launchpad.net/py3dns",
+    "source": "https://pypi.org/project/py3dns/4.0.2/",
+    "scope": "RFC 1035 message from local bytes: header flags and counts, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "py3dns / PyDNS (DNS/Lib.py Munpacker classes and DnsResult)",
+    "family_note": "Own pure-Python decoder: the Python 3 port of Guido van Rossum's PyDNS (the older pydns distribution is its predecessor). py3dns ships no API reference; the README points to the library code and the bundled DNS/tests/testPackers.py, which drive the same DNS.Lib unpackers on byte strings, and DnsRequest itself decodes replies with DnsResult(MunpackerText(reply)). Importing DNS reads /etc/resolv.conf as a local file; no socket is created. The harness joins the MX (preference, exchange) tuple and adds trailing dots.",
+    "project": "projects/dns/python/py3dns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 129993,
+      "source": "https://pypistats.org/api/packages/py3dns/recent",
+      "captured_at_utc": "2026-11-17T16:39:00.378578+00:00",
+      "snapshot": "data/python/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 4,
+    "afl_feedback": "data/python/dns/py3dns-feedback-differential.json"
   }
 ]
