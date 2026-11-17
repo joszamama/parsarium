@@ -1,0 +1,66 @@
+{
+  "kind": "third_party",
+  "api": "spg_sql::parser::parse_statement(local UTF-8 text) -> Statement; the harness reads Statement::Select (items, FromClause primary and joins, where_, group_by, order_by) and Statement::Insert (table, columns, rows) and walks Expr for FunctionCall names and Literal values",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T20:37:31.829660+00:00",
+  "manifest": "projects/sql/rust/spg_sql/manifest.json",
+  "image_id": "sha256:68098ed2c8cc03d3e7f78438e76ea879d82925fc753cd231f9b3e8af41f733a9",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo 1.99.1 (5f94df478 2026-08-27)"
+  ],
+  "source_sha256": "28ffd7d07a8f5e36eaac21bc860606dd58a4767fd1036b860d0e02fc7cd18553",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Cargo.lock": "5df86eedf2c51f0ff600caff544c7e582b09a7b4a267700ff11a4c2a95fe1bcb",
+    "Cargo.toml": "8958d77e0ab8bfcb0f8d46364bb0e841724316f27aef5811bed2c0fa843e90f7",
+    "Dockerfile": "69bab07af8459acc61c869526ebd1d4154f1b68933e8981a79b4af5cb2152bfd",
+    "manifest.json": "271f98b8bcbf0d20fa202cc0bf7677a3d63fe69088df85d20db3a3f211d55c48",
+    "run-control.sh": "51ecd82fb1304702502a1d517b5d328c11b38dbdf4f3c0e1feb8a9d326ae5e13",
+    "source-lock.json": "72ea8aec9669a503b6aa5d03ea73fd33ed224d0ba2fac7c6927566598a8c44b2",
+    "src/bin/fuzzer.rs": "83b0323d68ab2138b1f8279ef70815a8e67351dee1efad68509c0101769ac70c",
+    "src/bin/replay.rs": "47c7815c0edd497b660321ffac1787a4baab440e8ec34ee1b21f23af4ba1d62e",
+    "src/lib.rs": "5406e8917ace170ae9646d549bfd5b834bb524e5e312f6f1bfff29df19d65589"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "group_by": 1,
+        "joins": 1,
+        "kind": "select",
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ],
+        "order_by": 1,
+        "select_items": 3,
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "where": true
+      }
+    ]
+  },
+  "parser_source_files": 7,
+  "parser_source_lines_covered": 1159,
+  "format_specific_source_lines_covered": 851,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/rust/spg_sql/target/coverage/coverage.json",
+  "pass": true
+}

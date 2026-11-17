@@ -322,5 +322,109 @@
         }
       ]
     }
+  },
+  {
+    "name": "spg-sql",
+    "version": "9.1.0",
+    "license": "MIT OR Apache-2.0",
+    "license_evidence": "Cargo.toml license = MIT OR Apache-2.0 in the pinned crate (checked in the image); the crate ships no license file",
+    "input_api": "parser::parse_statement(local UTF-8 text) -> Statement",
+    "documentation": "https://docs.rs/spg-sql/9.1.0/spg_sql/parser/fn.parse_statement.html",
+    "source": "https://static.crates.io/crates/spg-sql/spg-sql-9.1.0.crate",
+    "source_sha256": "28ffd7d07a8f5e36eaac21bc860606dd58a4767fd1036b860d0e02fc7cd18553",
+    "dependencies": [],
+    "dialect": "PostgreSQL",
+    "scope": "One SQL statement from local UTF-8 text with the crate's PostgreSQL-dialect grammar; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. Other syntax is untested.",
+    "family": "spg-sql hand-written PostgreSQL-dialect lexer and recursive-descent parser",
+    "family_note": "parse_statement runs the crate's own lexer (src/lexer.rs) and parser (src/parser.rs) into its AST (src/ast.rs); it has no dependencies and does not use libpg_query or sqlparser-rs. It is the SQL front-end of the SPG database, published as a separate no_std crate. The adapter reads Select and Insert fields and walks Expr; COUNT(*) appears as a FunctionCall named count_star.",
+    "popularity": {
+      "metric": "crates.io recent_downloads (trailing 90 days)",
+      "value": 2268,
+      "source": "https://crates.io/api/v1/crates/spg-sql",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/rust/sql/registry-snapshot.json",
+      "limitation": "Small absolute count; most downloads likely come from the SPG database crates."
+    },
+    "project": "projects/sql/rust/spg_sql",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]
