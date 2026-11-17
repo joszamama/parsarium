@@ -738,5 +738,109 @@
         }
       ]
     }
+  },
+  {
+    "name": "rawsql-ts",
+    "version": "0.30.1",
+    "license": "MIT",
+    "license_evidence": "package.json license MIT and the MIT LICENSE file in the pinned npm tarball",
+    "input_api": "SqlParser.parseMany(local UTF-8 text) -> SimpleSelectQuery | InsertQuery []",
+    "documentation": "https://www.npmjs.com/package/rawsql-ts/v/0.30.1",
+    "source": "https://registry.npmjs.org/rawsql-ts/-/rawsql-ts-0.30.1.tgz",
+    "source_sha256": "58b26135ec392a37c532b30decb316e85e1a681389803ac704d12199eece4107",
+    "dependencies": [],
+    "dialect": "Library default (no dialect switch; PostgreSQL-oriented)",
+    "scope": "SQL statements from local bytes decoded as strict UTF-8 and passed to SqlParser.parseMany; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary.",
+    "family": "rawsql-ts hand-written tokenizer and recursive-descent parser",
+    "family_note": "SqlParser.parseMany splits the text with the package's own SqlTokenizer and dispatches each statement to its recursive-descent parsers, which build typed models (SimpleSelectQuery with SelectClause, FromClause and JoinClause, WhereClause, GroupByClause, OrderByClause, FunctionCall and LiteralValue; InsertQuery with InsertClause and a ValuesQuery of TupleExpression rows). The adapter reads those models; numeric LiteralValue values are JavaScript numbers converted with String(), which equals the source text for both controls. No runtime dependencies; independent of node-sql-parser, pgsql-ast-parser, sql-parser-cst, dt-sql-parser, sqlite-parser, sqllens and libpg_query.",
+    "popularity": {
+      "metric": "npm downloads, last month",
+      "value": 1802,
+      "source": "https://api.npmjs.org/downloads/point/last-month/rawsql-ts",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/javascript/sql/registry-snapshot.json",
+      "limitation": "Captured in the round-2 extension (round_2_metric) with the same window as round 1; a small download count."
+    },
+    "project": "projects/sql/javascript/rawsql_ts",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]
