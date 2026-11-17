@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 17,
-    "containerized_verified": 17,
+    "catalog_paths": 20,
+    "containerized_verified": 20,
     "staged": 0,
     "standard_api_paths": 7,
     "standard_containerized_verified": 6,
@@ -1136,8 +1136,8 @@
       {
         "format": "mp3",
         "ecosystem": "cpp",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1145,9 +1145,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_one_verified_bounded_search",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "One verified path; no padding. Search is a substring match over all Homebrew formula names and descriptions for six queries, captured 2026-11-17; header-only C++ decoders and vcpkg/Conan packages were not searched. Homebrew installs measure demand for the whole TagLib distribution, mostly as a tag library, not use of its MPEG property API. TagLib parses frame headers and does not decode audio; for CBR streams without Xing/VBRI its duration comes from stream size and the first frame's bitrate. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support."
       },
       {
         "format": "mp3",
@@ -1184,8 +1184,8 @@
       {
         "format": "mp3",
         "ecosystem": "javascript",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1193,9 +1193,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_one_selected_search_bounded",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "One verified path; no padding. Search is six npm queries of 100 hits each, captured 2026-11-17; downloads were fetched for 15 hand-picked candidates, not every hit. mediabunny was found by `mp3 frame`, `mp3 duration` and `mp3 demuxer`, not the narrower queries. Its download count covers the whole media toolkit (muxing, conversion, many containers), not MP3 demuxing alone. The path demuxes frames and reads headers but does not decode Layer III audio (that would need WebCodecs). mediabunny is not among the mp3_id3v2/javascript paths; music-metadata and the mpg123 WASM wrappers are recorded as shared-family leads. Two untagged CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support. No standard Node.js MP3 API exists."
       },
       {
         "format": "mp3",
@@ -1216,8 +1216,8 @@
       {
         "format": "mp3",
         "ecosystem": "python",
-        "catalog_paths": 0,
-        "containerized_verified": 0,
+        "catalog_paths": 1,
+        "containerized_verified": 1,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1225,9 +1225,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_not_started",
+        "status": "pilot_one_verified_bounded_search",
         "complete": false,
-        "uncertainty": "No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence."
+        "uncertainty": "One verified path; no padding. The name search is a substring filter over the PyPI Simple index (serial 43764887) captured 2026-11-17; the 'mp3' and 'mpeg' hit lists were not triaged one by one, and download numbers were fetched only for 13 named candidates, so a less obvious frame parser could be missed. Native wrappers (av, soundfile, audioread, pygame, pymediainfo, miniaudio) are unresolved, not rejected: their parsers are real but outside Python source coverage. tinytag, eyed3, hachoir and pymp3 are unresolved pure-Python leads. Mutagen reads headers and checks frame syncs but does not decode audio; for CBR streams without Xing/Info/VBRI its duration is stream bytes divided by the first header's bitrate. Two untagged CBR controls do not establish VBR, free-format, Layer I/II, or MPEG-2.5 support."
       },
       {
         "format": "mp3",

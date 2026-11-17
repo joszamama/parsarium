@@ -1,14 +1,14 @@
 # MP3 / Python — pilot
 
-**Status:** pilot_not_started; incomplete. 0 verified third-party paths, 0 verified standard APIs, 0 verified Docker harnesses.
+**Status:** pilot_one_verified_bounded_search; incomplete. 1 verified third-party paths, 0 verified standard APIs, 1 verified Docker harnesses.
 
-No search or standard/runtime inventory has been performed. This pilot cell is incomplete; zero is not evidence of absence.
+One verified path; no padding. The name search is a substring filter over the PyPI Simple index (serial 43764887) captured 2026-11-17; the 'mp3' and 'mpeg' hit lists were not triaged one by one, and download numbers were fetched only for 13 named candidates, so a less obvious frame parser could be missed. Native wrappers (av, soundfile, audioread, pygame, pymediainfo, miniaudio) are unresolved, not rejected: their parsers are real but outside Python source coverage. tinytag, eyed3, hachoir and pymp3 are unresolved pure-Python leads. Mutagen reads headers and checks frame syncs but does not decode audio; for CBR streams without Xing/Info/VBRI its duration is stream bytes divided by the first header's bitrate. Two untagged CBR controls do not establish VBR, free-format, Layer I/II, or MPEG-2.5 support.
 
-
+[Ranking and search limits](../../../data/python/mp3/ranking.md) · [Standard API inventory](../../../data/python/mp3/standard.json)
 
 ## Third-party parsers
 
-None verified in this pilot cell yet.
+- [mutagen](mutagen/README.md) — verified Docker harness
 
 ## Standard and runtime APIs
 

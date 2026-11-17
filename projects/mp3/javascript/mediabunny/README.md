@@ -2,7 +2,7 @@
 
 Pinned release: `1.66.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-Untagged MPEG Layer III frames reach mediabunny's own MP3 demuxer through `Input` with a `BufferSource`. The harness counts frames as encoded packets and reads sample rate, channel count and duration from the track; it does not decode audio.
+[API, control result, and parser family](../../../../catalog/mp3/javascript/mediabunny/README.md)
 
 ## Run from the repository root
 
@@ -15,3 +15,5 @@ python3 parsarium.py afl prepare mp3 javascript mediabunny runs/mp3-mediabunny-a
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Coverage limit:** Untagged MPEG Layer III only; two valid CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support. mediabunny demuxes frames and reads headers; it does not decode MP3 audio without WebCodecs, which this path does not use.

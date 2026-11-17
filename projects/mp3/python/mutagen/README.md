@@ -15,3 +15,5 @@ python3 parsarium.py afl prepare mp3 python mutagen runs/mp3-mutagen-afl
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Coverage limit:** Untagged MPEG Layer III only. Mutagen reads the first frame header, checks following frame syncs, and looks for Xing/Info/VBRI; without them it estimates duration from stream bytes and the header bitrate. It does not decode audio. Two valid CBR controls do not establish VBR, free-format, Layer I/II, or MPEG-2.5 support. Same Mutagen package and mp3 module as the mp3_id3v2/python mutagen entry.
