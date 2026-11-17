@@ -25,9 +25,33 @@ Receipts: [phpmyadmin/sql-parser](../../../projects/sql/php/phpmyadmin_sql_parse
 | iamcal/sql-parser | 72,745,721 | excluded | iamcal/sql-parser |
 | phpmyadmin/sql-parser | 55,800,144 | selected | phpMyAdmin hand-written lexer and parser |
 | greenlion/php-sql-parser | 13,810,212 | selected | PHP-SQL-Parser |
+| nilportugues/sql-query-formatter | 1,321,928 | excluded | — |
+| staabm/sql-parser-util | 1,271,938 | excluded | — |
 | soundintheory/php-sql-parser | 599,598 | selected | PHP-SQL-Parser lineage (2013 fork; shared with greenlion) |
-| sqlftw/sqlftw | 169,733 | unresolved | SQLFTW |
+| jasny/persist-sql-query | 578,756 | excluded | — |
+| sqlftw/sqlftw | 169,733 | excluded | SQLFTW |
 | sad_spirit/pg_builder | 76,924 | selected | pg_builder hand-written PostgreSQL parser |
+| getdkan/sql-parser | 66,786 | excluded | DKAN state-machine validator |
+| manticoresoftware/php-sql-parser | 63,809 | excluded | PHP-SQL-Parser (greenlion fork) |
+| marcocesarato/sqlparser | 50,961 | excluded | — |
+| flow-php/postgresql | 45,374 | unresolved_runnability_blocker | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| intersvyaz/yii2-sqlparser | 30,004 | excluded | — |
+| jasny/dbquery-mysql | 27,582 | excluded | — |
+| flow-php/pg-query-ext | 18,762 | unresolved_runnability_blocker | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| tsukasa/php-sql-parser | 14,933 | excluded | PHP-SQL-Parser (greenlion fork) |
+| udan11/sql-parser | 9,823 | excluded | phpMyAdmin hand-written lexer and parser |
+| processfast/php-sql-parser | 8,250 | excluded | PHP-SQL-Parser (greenlion fork) |
+| liquipedia/sqllint | 5,398 | excluded | phpMyAdmin hand-written lexer and parser |
 | crodas/sql-parser | 2,490 | selected | crodas SQLParser Lemon-generated parser |
+| michabbb/php-sql-parser | 2,299 | excluded | PHP-SQL-Parser (greenlion fork) |
+| fmizzell/sql-parser | 1,367 | excluded | DKAN state-machine validator |
+| aitradeinc/php-sql-parser | 399 | excluded | PHP-SQL-Parser (greenlion fork) |
+| offsite-solutions/eisodos-sqlparser | 181 | excluded | — |
+| codexsoft/sql-parser | 46 | excluded | — |
+| subapp/sql | 19 | unresolved_blocked | subapp/sql lexer and parser |
+| xp-forge/sql-parser | 4 | excluded | xp-forge Pratt parser |
+| cadfael/mysql-antlr4-parser | 2 | excluded | ANTLR MySQL grammar |
+| inilim/sqlite-parser | 1 | unresolved | inilim/sqlite-parser phplrt grammar (typed SQLite AST) |
+| k-kinzal/sql-parser | 0 | excluded | — |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).

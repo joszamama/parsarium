@@ -57,6 +57,26 @@
       "selected_release": "v5.0.0"
     },
     {
+      "name": "nilportugues/sql-query-formatter",
+      "status": "excluded",
+      "metric_value": 1321928,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Formatter that returns text; no syntax tree."
+    },
+    {
+      "name": "staabm/sql-parser-util",
+      "status": "excluded",
+      "metric_value": 1271938,
+      "metric_error": null,
+      "latest_release_observed": "1.0",
+      "family": null,
+      "documented_api_lead": "SQLParserUtils::expandListParameters",
+      "reason": "Utility extracted from doctrine/dbal 2.13 SQLParserUtils that rewrites named and list parameters into positional ones; it returns SQL text and parameters, no syntax tree."
+    },
+    {
       "name": "soundintheory/php-sql-parser",
       "status": "selected",
       "metric_value": 599598,
@@ -67,14 +87,24 @@
       "reason": "(new PHPSQL\\Parser())->parse($sql) returns the clause-keyed array tree of the PHP-SQL-Parser lineage. 2013 PSR-0 fork of the Google Code project whose continuation is greenlion; no file identical to greenlion v5.0.0 after php -w, 54.3% of normalized statements shared. Verified with both controls; runs on PHP 8.5 with compile-time warnings."
     },
     {
+      "name": "jasny/persist-sql-query",
+      "status": "excluded",
+      "metric_value": 578756,
+      "metric_error": null,
+      "latest_release_observed": "v3.0.0-alpha1",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Query builder; its QuerySplitter cuts SQL into clause strings with regular expressions and returns text parts, not a tree with functions or literals."
+    },
+    {
       "name": "sqlftw/sqlftw",
-      "status": "unresolved",
+      "status": "excluded",
       "metric_value": 169733,
       "metric_error": null,
-      "latest_release_observed": null,
+      "latest_release_observed": "v0.1.17",
       "family": "SQLFTW",
       "documented_api_lead": "Parser::parse",
-      "reason": "MySQL parser returning typed statement objects."
+      "reason": "Not open source: composer.json at v0.1.17 (codeberg.org/paranoiq/sqlftw, commit 75ad341c) declares license [\"proprietary\"], and the repository root checked on 2026-11-17 has no LICENSE file (README.md, build, composer.json, doc, rector.php, sources, tests). The protocol requires an open-source release."
     },
     {
       "name": "sad_spirit/pg_builder",
@@ -87,6 +117,116 @@
       "reason": "Query builder backed by a full PostgreSQL parser: createFromString($sql) returns a typed Select/Insert AST walked with the library BlankWalker. One statement per call (a trailing \";\" is rejected), so the adapter splits at the library Lexer's \";\" tokens. Verified with both controls."
     },
     {
+      "name": "getdkan/sql-parser",
+      "status": "excluded",
+      "metric_value": 66786,
+      "metric_error": null,
+      "latest_release_observed": "2.1.0",
+      "family": "DKAN state-machine validator",
+      "documented_api_lead": "SqlParser::validate",
+      "reason": "Abandoned state-machine validator for DKAN's bracketed SQL-like query strings ([SELECT ...][WHERE ...]); validate() returns a boolean and there is no statement tree. Requires PHP < 8.2."
+    },
+    {
+      "name": "manticoresoftware/php-sql-parser",
+      "status": "excluded",
+      "metric_value": 63809,
+      "metric_error": null,
+      "latest_release_observed": "v4.6.0-patch16",
+      "family": "PHP-SQL-Parser (greenlion fork)",
+      "documented_api_lead": "PHPSQLParser::parse",
+      "reason": "Near-identical fork of the selected greenlion/php-sql-parser: 5,030 of 5,157 normalized statements (97.5%) also occur in greenlion v5.0.0 and 145 of 177 files are identical after php -w; it lacks greenlion's window-function processors and adds Manticore-specific Add/Alter/Source processors. A spot check gives the greenlion tree for both controls. Not promoted to avoid counting one parser twice."
+    },
+    {
+      "name": "marcocesarato/sqlparser",
+      "status": "excluded",
+      "metric_value": 50961,
+      "metric_error": null,
+      "latest_release_observed": "0.2.106",
+      "family": null,
+      "documented_api_lead": "LightSQLParser",
+      "reason": "LightSQLParser exposes only getMethod, getFields, getTable and getAllQueries (regular-expression extraction); no join, function or literal structure for the summary."
+    },
+    {
+      "name": "flow-php/postgresql",
+      "status": "unresolved_runnability_blocker",
+      "metric_value": 45374,
+      "metric_error": null,
+      "latest_release_observed": "0.47.0",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "Flow\\PostgreSql parser (pg_query_parse_protobuf)",
+      "reason": "PostgreSQL client library whose SQL parsing calls the flow-php/pg-query-ext native extension (libpg_query) and maps its protobuf tree to PHP objects (requires google/protobuf). Same native blocker as flow-php/pg-query-ext; not built this round."
+    },
+    {
+      "name": "intersvyaz/yii2-sqlparser",
+      "status": "excluded",
+      "metric_value": 30004,
+      "metric_error": null,
+      "latest_release_observed": "1.5.1",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Preprocessor for yii\\db\\Command SQL templates: expands special /*name ... */ and --*name comments and array parameters, returns SQL text; no syntax tree."
+    },
+    {
+      "name": "jasny/dbquery-mysql",
+      "status": "excluded",
+      "metric_value": 27582,
+      "metric_error": null,
+      "latest_release_observed": "v2.0.0",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Abandoned on Packagist in favour of jasny/persist-sql-query; query builder with the same clause splitter design."
+    },
+    {
+      "name": "flow-php/pg-query-ext",
+      "status": "unresolved_runnability_blocker",
+      "metric_value": 18762,
+      "metric_error": null,
+      "latest_release_observed": "0.47.0",
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": "pg_query_parse",
+      "reason": "PHP C extension (ext/pg_query.c) linking libpg_query 18.0.0 statically; pg_query_parse($sql) returns libpg_query's JSON parse tree. The parser source is C, so parser-source coverage and AFL++ feedback need a Clang-instrumented libpg_query plus extension and an AFL++-linked PHP runtime with an allowlist (the source-built pear/xml_parser pattern) and a path-specific overlay audit; not built this round. Shared libpg_query family with the selected C libpg_query path."
+    },
+    {
+      "name": "tsukasa/php-sql-parser",
+      "status": "excluded",
+      "metric_value": 14933,
+      "metric_error": null,
+      "latest_release_observed": "v4.5.2",
+      "family": "PHP-SQL-Parser (greenlion fork)",
+      "documented_api_lead": "PHPSQLParser::parse",
+      "reason": "Code-style reformat of greenlion 4.x: 4,549 of 4,922 normalized statements (92.4%) occur in greenlion v5.0.0, and the sampled differences are cosmetic (else if to elseif, closing tags, array syntax)."
+    },
+    {
+      "name": "udan11/sql-parser",
+      "status": "excluded",
+      "metric_value": 9823,
+      "metric_error": null,
+      "latest_release_observed": "6.0.x-dev",
+      "family": "phpMyAdmin hand-written lexer and parser",
+      "documented_api_lead": null,
+      "reason": "Predecessor name of the selected phpmyadmin/sql-parser: Packagist marks it abandoned in favour of phpmyadmin/sql-parser and its repository is github.com/phpmyadmin/sql-parser (rename precedent: zend-json, trust-dns-proto)."
+    },
+    {
+      "name": "processfast/php-sql-parser",
+      "status": "excluded",
+      "metric_value": 8250,
+      "metric_error": null,
+      "latest_release_observed": "4.1.4",
+      "family": "PHP-SQL-Parser (greenlion fork)",
+      "documented_api_lead": "PHPSQLParser::parse",
+      "reason": "Near-identical greenlion fork (2019): 4,764 of 4,825 normalized statements (98.7%) occur in greenlion v5.0.0, 132 of 170 files identical after php -w."
+    },
+    {
+      "name": "liquipedia/sqllint",
+      "status": "excluded",
+      "metric_value": 5398,
+      "metric_error": null,
+      "latest_release_observed": "1.2.1",
+      "family": "phpMyAdmin hand-written lexer and parser",
+      "documented_api_lead": null,
+      "reason": "Lint wrapper around phpmyadmin/sql-parser that reports errors; no own tree and no summary beyond the selected phpMyAdmin parser."
+    },
+    {
       "name": "crodas/sql-parser",
       "status": "selected",
       "metric_value": 2490,
@@ -95,6 +235,106 @@
       "family": "crodas SQLParser Lemon-generated parser",
       "documented_api_lead": "SQLParser::parse",
       "reason": "(new SQLParser)->parse($sql) returns SQL\\Select/SQL\\Insert objects built by a PHP LEMON-generated parser; public getters expose tables, joins, columns, where, group, order, fields and values. Verified with both controls; 2016 code runs on PHP 8.5 with deprecations."
+    },
+    {
+      "name": "michabbb/php-sql-parser",
+      "status": "excluded",
+      "metric_value": 2299,
+      "metric_error": null,
+      "latest_release_observed": "v4.0.0",
+      "family": "PHP-SQL-Parser (greenlion fork)",
+      "documented_api_lead": "PHPSQLParser::parse",
+      "reason": "2014 snapshot of greenlion 4.0.0 (self-described fork); 4,204 of 4,985 normalized statements (84.3%) occur in greenlion v5.0.0, the remainder being older code of the same project."
+    },
+    {
+      "name": "fmizzell/sql-parser",
+      "status": "excluded",
+      "metric_value": 1367,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "DKAN state-machine validator",
+      "documented_api_lead": null,
+      "reason": "Same package description and repository (github.com/GetDKAN/sql-parser) as getdkan/sql-parser; validator for DKAN query strings, no statement tree."
+    },
+    {
+      "name": "aitradeinc/php-sql-parser",
+      "status": "excluded",
+      "metric_value": 399,
+      "metric_error": null,
+      "latest_release_observed": "0.3",
+      "family": "PHP-SQL-Parser (greenlion fork)",
+      "documented_api_lead": "PHPSQLParser::parse",
+      "reason": "Near-identical greenlion copy: 4,826 of 4,852 normalized statements (99.5%) occur in greenlion v5.0.0."
+    },
+    {
+      "name": "offsite-solutions/eisodos-sqlparser",
+      "status": "excluded",
+      "metric_value": 181,
+      "metric_error": null,
+      "latest_release_observed": "1.0.7",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Eisodos framework template renderer for <%SQL%...%SQL%> blocks (returns rendered text); not an SQL syntax parser."
+    },
+    {
+      "name": "codexsoft/sql-parser",
+      "status": "excluded",
+      "metric_value": 46,
+      "metric_error": null,
+      "latest_release_observed": "v1.1.0",
+      "family": null,
+      "documented_api_lead": "SqlParser::parseString",
+      "reason": "Statement splitter: parseString strips comment lines and explodes the text into statement strings; no syntax tree."
+    },
+    {
+      "name": "subapp/sql",
+      "status": "unresolved_blocked",
+      "metric_value": 19,
+      "metric_error": null,
+      "latest_release_observed": "1.2.2",
+      "family": "subapp/sql lexer and parser",
+      "documented_api_lead": "Sql::getInstance()->getProcessor()->parse",
+      "reason": "README documents an AST parser, but 1.2.2 requires symfony/yaml 4.2.0-BETA2, which Composer 2.11 refuses to install because of five Packagist security advisories (PKSA-nktx-f1n1-b4yd and others). The advisory block was not overridden, so the controls were not run."
+    },
+    {
+      "name": "xp-forge/sql-parser",
+      "status": "excluded",
+      "metric_value": 4,
+      "metric_error": null,
+      "latest_release_observed": "v0.4.0",
+      "family": "xp-forge Pratt parser",
+      "documented_api_lead": "text\\sql\\Parser::parse",
+      "reason": "Primary control fails in v0.4.0 (README: not yet complete): Parser->parse(...)->tree() throws text\\sql\\parse\\Expecting \"Expecting ; or (eof), have AS on line 2\" at the table alias; the INSERT control parses."
+    },
+    {
+      "name": "cadfael/mysql-antlr4-parser",
+      "status": "excluded",
+      "metric_value": 2,
+      "metric_error": null,
+      "latest_release_observed": "dev-main",
+      "family": "ANTLR MySQL grammar",
+      "documented_api_lead": null,
+      "reason": "No tagged release on Packagist (dev-main only), so no release can be pinned; 2 lifetime downloads."
+    },
+    {
+      "name": "inilim/sqlite-parser",
+      "status": "unresolved",
+      "metric_value": 1,
+      "metric_error": null,
+      "latest_release_observed": "0.1.20261110",
+      "family": "inilim/sqlite-parser phplrt grammar (typed SQLite AST)",
+      "documented_api_lead": "Inilim\\SqliteParser\\Parser\\Parser::parse",
+      "reason": "Spot check: Parser::parse returns a Script whose SelectStatement carries columns, from, joins, where, groupBy and orderBy for the primary control. Not promoted this round: the only release (2026-11-10, 1 lifetime download) has neither LICENSE nor README in its archive (composer.json declares MIT; the README exists only on main after the tag)."
+    },
+    {
+      "name": "k-kinzal/sql-parser",
+      "status": "excluded",
+      "metric_value": 0,
+      "metric_error": null,
+      "latest_release_observed": "dev-main",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Zero Packagist downloads and no tagged release (dev-main only)."
     }
   ]
 }
