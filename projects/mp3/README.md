@@ -9,6 +9,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [github.com/hajimehoshi/go-mp3 / Go](go/github_com_hajimehoshi_go_mp3/README.md)
 - [github.com/tcolgate/mp3 / Go](go/github_com_tcolgate_mp3/README.md)
 - [jcodec / Java](java/jcodec/README.md)
+- [jlayer / Java](java/jlayer/README.md)
 - [mediabunny / JavaScript](javascript/mediabunny/README.md)
 - [james-heinrich/getid3 / PHP](php/getid3/README.md)
 - [mutagen / Python](python/mutagen/README.md)

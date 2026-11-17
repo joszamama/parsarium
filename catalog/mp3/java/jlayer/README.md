@@ -21,3 +21,10 @@
   "decoded_samples": 12672
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build mp3 java jlayer
+python3 parsarium.py run mp3 java jlayer controls/mp3/tone-44k-mono.mp3
+```

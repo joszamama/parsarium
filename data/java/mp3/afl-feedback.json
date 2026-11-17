@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T03:44:25.826948+00:00",
-  "projects_total": 1,
-  "projects_passed": 1,
+  "checked_at_utc": "2026-11-17T10:30:25.571545+00:00",
+  "projects_total": 2,
+  "projects_passed": 2,
   "differential_kind": "fixed_valid_mpeg2_stereo",
   "results": [
     {
       "project": "mp3/java/jcodec",
       "pass": true,
       "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
-      "overlay_receipt_sha256": "7b9f91c3cba909dc4a3b4e400e9c5ad887dd70c0e03b3fd96749199097725c32",
+      "overlay_receipt_sha256": "4cc45bea577f89b1d6b7adca6fc9901d1ab503c2460a765d8f48e417516651c1",
       "control": "controls/mp3/tone-44k-mono.mp3",
       "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
       "differential": "controls/mp3/tone-22k-stereo.mp3",
@@ -23,11 +23,35 @@
       },
       "repeated_control_identical": true,
       "control_parser_features": 1142,
-      "control_afl_tuples": 1155,
+      "control_afl_tuples": 1156,
       "differential_parser_features": 1136,
-      "differential_afl_tuples": 1148,
+      "differential_afl_tuples": 1149,
       "parser_feature_difference": 186,
       "afl_tuple_difference": 185
+    },
+    {
+      "project": "mp3/java/jlayer",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "46bf2b20e6258255a20c6fe27d740490c1570db9a3dc77901a944f735d0936c4",
+      "control": "controls/mp3/tone-44k-mono.mp3",
+      "control_sha256": "9bcbe84e7a36645c09464e671b81af90766e569d07f1b4e214b8cf87b46bf328",
+      "differential": "controls/mp3/tone-22k-stereo.mp3",
+      "differential_sha256": "871bfdb49897b4e2e1994987862aca928f4f6438f731831e3c7662579fb8c000",
+      "differential_output": {
+        "codec": "MP3",
+        "sample_rate": 22050,
+        "channels": 2,
+        "frames": 12,
+        "decoded_samples": 6912
+      },
+      "repeated_control_identical": true,
+      "control_parser_features": 1724,
+      "control_afl_tuples": 1720,
+      "differential_parser_features": 1718,
+      "differential_afl_tuples": 1713,
+      "parser_feature_difference": 240,
+      "afl_tuple_difference": 239
     }
   ]
 }
