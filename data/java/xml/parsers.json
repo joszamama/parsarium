@@ -229,6 +229,63 @@
     "project": "projects/xml/java/dom4j"
   },
   {
+    "name": "xmlbeans",
+    "group": "org.apache.xmlbeans",
+    "artifact": "xmlbeans",
+    "version": "5.4.1",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM license and source headers; pinned POM hash in source-lock.json",
+    "input_api": "XmlObject.Factory.parse(Files.newInputStream(local Path)); XmlObject.newCursor() traverses XML infoset",
+    "documentation": "https://xmlbeans.apache.org/docs/5.0.0/org/apache/xmlbeans/XmlObject.html",
+    "source": "https://repo.maven.apache.org/maven2/org/apache/xmlbeans/xmlbeans/5.4.1/xmlbeans-5.4.1-sources.jar",
+    "scope": "Valid UTF-8 XML 1.0 without DOCTYPE into XMLBeans cursor tree: expanded element names, attributes, namespace declarations and URIs, depth, and decoded text",
+    "family": "XMLBeans SAX-to-cursor tree over OpenJDK Xerces2-J fork",
+    "family_note": "Release 5.4.1 Locale.parseToXmlObject(InputStream) uses getSaxLoader and SAXHelper.newXMLReader, which calls JAXP SAXParserFactory.newInstance(). No Piccolo-derived tokenizer is bundled in this release; it shares the OpenJDK Xerces SAX parser family with the standard API and dom4j wrapper path. XMLBeans own tree/store lines and underlying JDK parser lines are reported separately.",
+    "shared_families": [
+      "OpenJDK Xerces2-J fork"
+    ],
+    "coverage_note": "Pinned XMLBeans release jar has line tables; JaCoCo maps its store/Locale source separately from the matching OpenJDK java.xml internal Xerces fork.",
+    "popularity": {
+      "metric": "deps.dev directDependentCount summed over all Maven releases",
+      "value": 1433,
+      "max_release": "3.1.0",
+      "max_release_value": 319,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/org.apache.xmlbeans%3Axmlbeans",
+      "captured_at_utc": "2026-11-17T03:38:01.364453+00:00",
+      "snapshot": "data/java/xml/registry-snapshot.json",
+      "caveat": "Maven coordinate adoption, not XML-specific use or an independent tokenizer count."
+    },
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "project": "projects/xml/java/xmlbeans"
+  },
+  {
     "name": "aalto-xml",
     "group": "com.fasterxml",
     "artifact": "aalto-xml",

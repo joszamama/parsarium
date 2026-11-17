@@ -71,13 +71,14 @@
   {
     "name": "xmlbeans",
     "coordinate": "org.apache.xmlbeans:xmlbeans",
-    "status": "unresolved",
+    "status": "promoted_to_verified",
     "version_seen": "5.4.1",
     "summed_direct_dependent_count": 1433,
     "max_release_direct_dependent_count": 319,
     "default_release_direct_dependent_count": 19,
-    "reason": "Schema-bound XML binding; XmlObject.Factory.parse(InputStream) parses through its own Piccolo-derived/SAX layer. Control not run.",
-    "source": "https://central.sonatype.com/artifact/org.apache.xmlbeans/xmlbeans"
+    "reason": "Pinned XMLBeans 5.4.1 XmlObject.Factory.parse(local InputStream) and XmlCursor tree passed both valid namespace-aware controls. Source audit shows Locale.getSaxLoader uses SAXHelper.newXMLReader -> JAXP SAXParserFactory, not a bundled Piccolo tokenizer. XMLBeans own store/SAX helper and underlying OpenJDK Xerces source lines are separately instrumented; AFL feedback from XMLBeans lines is stable and input-dependent.",
+    "source": "https://central.sonatype.com/artifact/org.apache.xmlbeans/xmlbeans",
+    "evidence": "data/java/xml/parsers.json"
   },
   {
     "name": "jdom2",

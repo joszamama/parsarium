@@ -216,6 +216,48 @@
       "underlying_source_lines_covered": 832,
       "afl_feedback": "data/java/xml/afl-feedback.json",
       "error": null
+    },
+    {
+      "package": "xmlbeans",
+      "group": "org.apache.xmlbeans",
+      "version": "5.4.1",
+      "scope": "Valid UTF-8 XML 1.0 without DOCTYPE from local InputStream into XMLBeans cursor tree over JDK Xerces SAX parser",
+      "command": "python3 scripts/run_project.py xml java xmlbeans",
+      "receipt": "projects/xml/java/xmlbeans/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_files": 12,
+      "parser_source_lines_covered": 1004,
+      "underlying_source_files": 60,
+      "underlying_source_lines_covered": 3733,
+      "afl_feedback": "data/java/xml/afl-feedback.json",
+      "error": null
     }
   ],
   "standard": [
@@ -257,7 +299,7 @@
     }
   ],
   "refreshed_projects": [
-    "jackson_xml"
+    "xmlbeans"
   ],
   "retained_prior_results_checked_at_utc": "2026-11-17T07:27:07.356019+00:00"
 }

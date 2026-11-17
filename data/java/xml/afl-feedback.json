@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "checked_at_utc": "2026-11-17T09:26:32.850869+00:00",
-  "projects_total": 6,
-  "projects_passed": 6,
+  "projects_total": 7,
+  "projects_passed": 7,
   "differential_kind": "fixed_valid_default_namespace_order",
   "results": [
     {
@@ -39,7 +39,7 @@
         "root": "{urn:parsarium:order}order",
         "text": [
           "A-7",
-          "12.50 \u20ac"
+          "12.50 €"
         ]
       },
       "repeated_control_identical": true,
@@ -84,7 +84,7 @@
         "root": "{urn:parsarium:order}order",
         "text": [
           "A-7",
-          "12.50 \u20ac"
+          "12.50 €"
         ]
       },
       "repeated_control_identical": true,
@@ -130,7 +130,7 @@
         "root": "{urn:parsarium:order}order",
         "text": [
           "A-7",
-          "12.50 \u20ac"
+          "12.50 €"
         ]
       },
       "repeated_control_identical": true,
@@ -176,7 +176,7 @@
         "root": "{urn:parsarium:order}order",
         "text": [
           "A-7",
-          "12.50 \u20ac"
+          "12.50 €"
         ]
       },
       "repeated_control_identical": true,
@@ -222,7 +222,7 @@
         "root": "{urn:parsarium:order}order",
         "text": [
           "A-7",
-          "12.50 \u20ac"
+          "12.50 €"
         ]
       },
       "repeated_control_identical": true,
@@ -254,7 +254,7 @@
           "FIELD_NAME:sku",
           "VALUE_STRING:A-7",
           "FIELD_NAME:amount",
-          "VALUE_STRING:12.50 \u20ac",
+          "VALUE_STRING:12.50 €",
           "END_OBJECT",
           "FIELD_NAME:line",
           "START_OBJECT",
@@ -280,10 +280,56 @@
       "differential_afl_tuples": 339,
       "parser_feature_difference": 17,
       "afl_tuple_difference": 17
+    },
+    {
+      "project": "xml/java/xmlbeans",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "overlay_receipt_sha256": "cea66781363aeb4c927c518773e551ca3929c7b2e572227596dfb36a3d77e11f",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 1004,
+      "control_afl_tuples": 1021,
+      "differential_parser_features": 1028,
+      "differential_afl_tuples": 1046,
+      "parser_feature_difference": 90,
+      "afl_tuple_difference": 89
     }
   ],
   "refreshed_projects": [
-    "jackson_xml"
+    "xmlbeans"
   ],
   "retained_prior_results_checked_at_utc": "2026-11-17T03:42:42.669292+00:00"
 }

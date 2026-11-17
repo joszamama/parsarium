@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "java",
+  "package": "xmlbeans",
+  "release": "5.4.1",
+  "source_sha256": "d50cbd466adec89811bc5797325e09279e3894387db59434dd99322ff774ee70",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_engine_sha256": "0ad74e5d67f7f7a3c8453f7dd5030d4bce5aae6e47c3e2b8ebc98699244c7e4f",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/*",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo XMLBeans 5.4.1 store/Locale SAX tree builder source lines and separately OpenJDK 25.0.5 java.xml Xerces SAX parser source lines; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/module/",
+  "catalog_parser": "data/java/xml/parsers.json",
+  "source_lock": "projects/xml/java/xmlbeans/source-lock.json",
+  "underlying_coverage_subject_prefix": "/work/parser-source/underlying/",
+  "scope": "Valid UTF-8 XML 1.0 without DOCTYPE parsed by XmlObject.Factory.parse(local InputStream) into XMLBeans cursor tree; underlying tokenizer is the OpenJDK java.xml Xerces SAX implementation"
+}
