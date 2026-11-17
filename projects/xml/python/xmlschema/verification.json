@@ -1,0 +1,71 @@
+{
+  "kind": "third_party",
+  "api": "xmlschema.XMLResource(BytesIO(local XML bytes)) with default options (defuse='remote', lazy=False, iterparse=xml.etree.ElementTree.iterparse); XMLResource.root (Element.tag, attrib, text and tail) and XMLResource.get_xmlns(element) for each element's own xmlns declarations",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T13:17:20.191472+00:00",
+  "manifest": "projects/xml/python/xmlschema/manifest.json",
+  "image_id": "sha256:1c3a4ca8d4160ec19b9852a256e5960ecb6a8996601dce9c63aeebbd2aebc656",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: xmlschema",
+    "Version: 4.3.2",
+    "Name: elementpath",
+    "Version: 5.1.4",
+    "expat_2.10.0",
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8",
+    "9443794afe78dfab5cccf27e803b30359a55dbf9eaadbd54297522b72356833c  /work/expat/lib/xmlparse.c",
+    "99eadf28f2f686c6297730d83dd662477fbbe94beb1d1d9557e1cd8a84f8ab77  xmlschema/resources/xml_resource.py",
+    "c9b940df0fb9b9462c76d4a5bc0b675da0c035b484a4454c2424b5321b7353e1  xmlschema/resources/xml_loader.py",
+    "c0219b8554532be939142b7ac4247158433b936e880a420f48be34145b43e5b0  /usr/lib/python3.14/xml/etree/ElementTree.py"
+  ],
+  "source_sha256": "cf5c970a30f6ebcb3da35260e694704cc0b6794d8ace46125bb2a95e38ed9307",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "43ffc0d65ff31432dd3db5d2fd613adc1e8bd7e8e38e3ee225f0ea17e33bb9c3",
+    "fuzz.py": "99c99847c048d23e6f6c2da4a14f5851797903948af5c191e996dc75c1de0515",
+    "harness.py": "3d7101f6909e7d180b675a4a3d10b9b34c0cbb313523e5593be2a5f1d9aa418f",
+    "manifest.json": "42f4f209f4d03cbf7024f217254b04c8ca954e3526d9d58dd914f410f681b9f8",
+    "replay.py": "8adef6d3d4dcba9d934a13cff0577339179afb4f263e954fed54c4b6a9d0e2f7",
+    "run-control.py": "4785960e4f8f1d509098bd1dc05ec2bad814f717ad6f06e8019cbf49522798c6",
+    "runtime-requirements.lock": "ab911238c6394f0e4f0f6c037dda48e16833213cef9684b873d33e7491608a36",
+    "target.json": "3d4cac28785eb8622c2a33762ae0512fdca1c1fc3ef98d383f953a43ca409433"
+  },
+  "output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ],
+    "root": "{urn:parsarium:catalog}catalog"
+  },
+  "parser_source_files": 4,
+  "parser_source_lines_covered": 110,
+  "format_specific_source_lines_covered": 44,
+  "underlying_source_files": 19,
+  "underlying_source_lines_covered": 3449,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/python/xmlschema/target/coverage/coverage.json",
+  "pass": true
+}

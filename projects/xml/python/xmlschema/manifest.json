@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "xmlschema",
+  "release": "4.3.2",
+  "catalog_parser": "data/python/xml/parsers.json",
+  "source_lock": "projects/xml/python/xmlschema/runtime-requirements.lock",
+  "source_sha256": "cf5c970a30f6ebcb3da35260e694704cc0b6794d8ace46125bb2a95e38ed9307",
+  "sdist_sha256": "f3b33a21a2b2cdc404ddc3fb599d8bc1dee90b155d547370672e6e684746b8d6",
+  "dependencies": [
+    {
+      "package": "elementpath",
+      "release": "5.1.4",
+      "sha256": "5ec8d7bb44b16c98414a6a95e20cb150f3cbfc3cac65edc14773288c7a937376"
+    }
+  ],
+  "dependency_sdist_sha256": {
+    "elementpath": "3c912a9c41311ac5244c038867670d7c0b0fec0e444813608e5b846dbb3428ac"
+  },
+  "tested_parser": "xmlschema.resources.xml_resource.XMLResource (subclass of xmlschema.resources.xml_loader.XMLResourceLoader, whose _parse loop consumes xml.etree.ElementTree.iterparse events); default iterparse and C _elementtree XMLParser/TreeBuilder asserted in the image and in the feedback check",
+  "parser_family": "xmlschema 4.3.2 XMLResource namespace-tracking loader over CPython 3.14 xml.etree.ElementTree.iterparse (pure-Python iterparse/XMLPullParser driver over the C _elementtree XMLParser and TreeBuilder) over pyexpat and Expat 2.10.0; shares the Expat XML parser family with projects/xml/python/xmltodict, untangle, defusedxml and the standard xml.etree.ElementTree path",
+  "underlying_release": "Expat 2.10.0",
+  "underlying_source_sha256": "c624ba2998fc65df1163a49641ff3f9ab73138b11641d92c86bee0fb01b1bc7f",
+  "build_note": "xmlschema and elementpath are installed by hash from their pinned py3-none-any wheels; each package directory and LICENSE is checked byte-identical to its sdist. Ubuntu's CPython 3.14 pyexpat loads Expat 2.10.0 built from source with clang LLVM source coverage (same Expat pin as projects/xml/python/xmltodict, untangle and defusedxml) through LD_LIBRARY_PATH; pyexpat.EXPAT_VERSION is asserted. CPython's ElementTree.py, pyexpat and _elementtree are Ubuntu's distribution build, not source-built; only ElementTree.py lines are traced, and the C XMLParser/TreeBuilder that sit between iterparse and pyexpat are not covered.",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ],
+    "root": "{urn:parsarium:catalog}catalog"
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "text": [
+      "A-7",
+      "12.50 €"
+    ],
+    "root": "{urn:parsarium:order}order"
+  },
+  "api": "xmlschema.XMLResource(BytesIO(local XML bytes)) with default options (defuse='remote', lazy=False, iterparse=xml.etree.ElementTree.iterparse); XMLResource.root (Element.tag, attrib, text and tail) and XMLResource.get_xmlns(element) for each element's own xmlns declarations",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the XMLResource(BytesIO(data)) call (xmlschema's resources/xml_resource.py, resources/xml_loader.py, arguments.py and utils, plus CPython's xml/etree/ElementTree.py iterparse driver reported separately) and LLVM source coverage of source-built Expat 2.10.0 reached through pyexpat",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/",
+  "format_specific_coverage_file_suffix": "/xmlschema/resources/xml_loader.py",
+  "underlying_coverage_subject_prefix": "/work/expat/lib/",
+  "underlying_format_specific_coverage_file_suffix": "xmlparse.c",
+  "afl_llvm_module_glob": "/opt/expat/lib/libexpat.so.1",
+  "afl_coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/",
+  "afl_python_entrypoint": "/opt/venv/bin/python",
+  "afl_feature_only_proxy": true,
+  "native_campaign_supported": false,
+  "scope": "Valid UTF-8 XML 1.0 local byte streams without DOCTYPE through xmlschema.XMLResource: namespace-expanded element tags ({uri}local) in document order, namespace-expanded attribute names and values in source order, stripped text and tail data (CDATA included), tree depth, the root tag, the number of xmlns declarations xmlschema records per element (including the xmlns=\"\" undeclaration), and the non-empty declared namespace URIs. The tree comes from CPython's TreeBuilder, which keeps no comments or processing instructions; xmlschema sees those iterparse events but does not store them.",
+  "namespace_caveat": "XMLResource records xmlns declarations itself from iterparse start-ns events (get_xmlns) and keeps a per-element in-scope namespace map (get_nsmap). The summary's namespace_declarations and namespaces fields come from get_xmlns, a public method with a docstring that is not listed on the Sphinx API page; the documented get_namespaces() merges declarations into one prefix map and cannot give a per-element count. Both controls match the lxml path's full summary, including the declaration count.",
+  "parser_options_caveat": "Defaults only: defuse='remote' does not pre-scan a BytesIO source with xmlschema's SafeExpatParser, allow='all' and block=None do not apply because a BytesIO source is not a URL, lazy=False builds the full tree, and the MAX_XML_DEPTH=1000 and MAX_XML_ELEMENTS=1,000,000 limits are not reached. Raw bytes are not passed: XMLResource treats a bytes source without a newline that does not start with '<' as a URL or file path, so the harness wraps the input in BytesIO. No DTD, entity, security, limit or malformed-input behavior was tested.",
+  "family_caveat": "Not an independent XML engine. Expat tokenizes and checks well-formedness, the C _elementtree XMLParser expands names and the C TreeBuilder builds the tree; xmlschema's own parse-time code is source-type dispatch, the iterparse event loop that tracks depth and element limits, and the namespace-map stack and per-element declaration lists built from start-ns/end-ns events.",
+  "afl_package_release": "4.33c-1.1ubuntu1"
+}
