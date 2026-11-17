@@ -21,7 +21,7 @@ class JavaJsonPilotTest(unittest.TestCase):
         metrics = [parser["popularity"]["value"] for parser in parsers]
         self.assertEqual([parser["name"] for parser in parsers],
                          ["jackson-databind", "jackson-core", "gson", "fastjson", "json",
-                          "fastjson2", "json-simple", "json-smart", "moshi"])
+                          "fastjson2", "json-simple", "json-smart", "moshi", "parsson"])
         self.assertEqual(metrics, sorted(metrics, reverse=True))
         self.assertTrue(all(parser["family"].startswith("Jackson") for parser in parsers[:2]))
         self.assertTrue(parsers[2]["family"].startswith("Gson"))
@@ -31,11 +31,12 @@ class JavaJsonPilotTest(unittest.TestCase):
         self.assertTrue(parsers[6]["family"].startswith("json-simple"))
         self.assertTrue(parsers[7]["family"].startswith("json-smart"))
         self.assertTrue(parsers[8]["family"].startswith("Moshi"))
+        self.assertTrue(parsers[9]["family"].startswith("Eclipse Parsson"))
         self.assertTrue(all(lead["status"] in {"unresolved", "promoted_to_verified"}
                             for lead in leads))
         self.assertEqual({lead["name"] for lead in leads
                           if lead["status"] == "promoted_to_verified"},
-                         {"jackson-core", "fastjson", "json", "fastjson2", "json-simple", "json-smart", "moshi"})
+                         {"jackson-core", "fastjson", "json", "fastjson2", "json-simple", "json-smart", "moshi", "parsson"})
         snapshot = read(BASE / "registry-snapshot.json")
         for parser in parsers:
             self.assertNotIn(parser["name"],
