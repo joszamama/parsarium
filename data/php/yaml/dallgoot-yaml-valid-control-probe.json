@@ -1,0 +1,20 @@
+{
+  "package": "dallgoot/yaml",
+  "release": "1.0.1",
+  "composer_reference": "973c8a646bbb984d93fd26166b1fcfe639bb9da5",
+  "license": "Apache-2.0 (Packagist metadata)",
+  "api": "Dallgoot\\Yaml\\Yaml::parse(string) over the local control text",
+  "runtime": "host PHP 8.5.12 (cli, NTS), macOS, Composer install of 1.0.1; probe only, no Docker image",
+  "observed_at_utc": "2026-11-17T16:53:31.702900+00:00",
+  "pass": false,
+  "observed_scalars": {
+    "catalog.yaml $.title": "Café \\\"quoted\\\"\\tend",
+    "catalog.yaml $.single": "it''s here"
+  },
+  "mismatches_against_oracle": [
+    "catalog.yaml $.title: the double-quoted escapes \\\" and \\t are left as backslash sequences (only \\u00e9 is decoded)",
+    "catalog.yaml $.single: the single-quoted '' escape is not reduced to one quote ('it''s here')"
+  ],
+  "other_observations": "Flow collections return Dallgoot\\Yaml\\Types\\Compact (ArrayIterator over an object), which emits an ArrayIterator deprecation on PHP 8.5.",
+  "decision": "Excluded from selection: the pinned release does not reproduce the primary valid control's typed tree. No harness, coverage or AFL++ overlay was built."
+}

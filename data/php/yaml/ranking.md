@@ -15,7 +15,7 @@ Packagist lifetime downloads, captured 2026-11-17 ([snapshot](registry-snapshot.
 | Lead | Status | Metric | Parser family |
 | --- | --- | ---: | --- |
 | mustangostang/spyc | excluded | 51,101,645 | Spyc |
-| dallgoot/yaml | unresolved | 372,583 | dallgoot/yaml |
+| dallgoot/yaml | excluded | 372,583 | dallgoot/yaml |
 | pecl/yaml | unresolved | n/a | libyaml via PECL ext-yaml |
 
-mustangostang/spyc fails both valid controls ([probe](spyc-valid-control-probe.json)). Standard and runtime APIs: none documented ([standard.json](standard.json)).
+mustangostang/spyc fails both valid controls ([probe](spyc-valid-control-probe.json)); dallgoot/yaml fails the primary control ([probe](dallgoot-yaml-valid-control-probe.json)). Standard and runtime APIs: none documented ([standard.json](standard.json)).
