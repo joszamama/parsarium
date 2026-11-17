@@ -15,3 +15,5 @@ python3 parsarium.py afl prepare mp3 c mpg123 runs/mp3-mpg123-afl
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Coverage limit:** Untagged MPEG Layer III only; two valid CBR controls do not establish VBR, Xing/Info, free-format, Layer I/II, or MPEG-2.5 support. libmpg123 is also counted under mp3_id3v2/c for ID3v2 scope; this path is the plain-frame decoder scope.

@@ -2,6 +2,7 @@
 
 Only verified Docker targets appear below; the format remains incomplete.
 
+- [jansson / C](c/jansson/README.md)
 - [jsoncpp / C++](cpp/jsoncpp/README.md)
 - [encoding/json.Unmarshal(\[\]byte, any) / Go](go/stdlib_unmarshal/README.md)
 - [github.com/json-iterator/go / Go](go/github_com_json_iterator_go/README.md)

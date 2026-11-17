@@ -2,5 +2,6 @@
 
 Only verified Docker targets appear below; the format remains incomplete.
 
+- [mpg123 / C](c/mpg123/README.md)
 - [github.com/hajimehoshi/go-mp3 / Go](go/github_com_hajimehoshi_go_mp3/README.md)
 - [symphonia-bundle-mp3 / Rust](rust/symphonia_bundle_mp3/README.md)
