@@ -1,0 +1,46 @@
+{
+  "toml_edit": {
+    "release": "0.25.19+spec-1.1.0",
+    "source_sha256": "dd43688c4858d7264ae1cf9a9f874a67c3feb74a883b1cd7bebd6a4ea8307218",
+    "license": "MIT OR Apache-2.0",
+    "license_files": {
+      "LICENSE-MIT": "6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+      "LICENSE-APACHE": "249fdb6694467dd615b259f7ddde07be3f8ae5a72cecebb0e24f6629af4215fe"
+    },
+    "license_evidence": "Cargo.toml license = \"MIT OR Apache-2.0\" in the published crate; LICENSE-MIT and LICENSE-APACHE ship in the .crate (hashes above)",
+    "source": "https://static.crates.io/crates/toml_edit/toml_edit-0.25.19+spec-1.1.0.crate",
+    "repository": "https://github.com/toml-rs/toml",
+    "vcs_commit": "563cb1a5d133e39d1008d4d4148ef35d3bba379f",
+    "cargo_lock_checksum": "dd43688c4858d7264ae1cf9a9f874a67c3feb74a883b1cd7bebd6a4ea8307218",
+    "dependencies": {
+      "toml_parser": "1.1.5 (locked 1.1.5+spec-1.1.0)",
+      "toml_datetime": "1.1.3 (locked 1.1.3+spec-1.1.0)",
+      "indexmap": "2.13.0 (locked 2.14.2)",
+      "winnow": "1.0.0 (locked 1.0.5; token-slice combinators over toml_parser events)",
+      "toml_writer": "1.2.0 (locked 1.2.0+spec-1.1.0; display feature, not used by the harness)"
+    }
+  },
+  "toml_parser": {
+    "release": "1.1.5+spec-1.1.0",
+    "source_sha256": "baa693a8032d7e1cada7d0041e96126df243179ff061456783ac7f12bda4744c",
+    "license": "MIT OR Apache-2.0",
+    "license_files": {
+      "LICENSE-MIT": "6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+      "LICENSE-APACHE": "249fdb6694467dd615b259f7ddde07be3f8ae5a72cecebb0e24f6629af4215fe"
+    },
+    "source": "https://static.crates.io/crates/toml_parser/toml_parser-1.1.5+spec-1.1.0.crate",
+    "repository": "https://github.com/toml-rs/toml",
+    "vcs_commit": "ceac6e4412420d5a5c19e4f7293ad005cf1a31b2",
+    "role": "Lexer and event parser that toml_edit drives; shared with toml"
+  },
+  "toml_datetime": {
+    "release": "1.1.3+spec-1.1.0",
+    "source_sha256": "173f25c883cd2176a2d8212155638c0a60d484a9d84546d270866f40f56b6e49",
+    "license": "MIT OR Apache-2.0",
+    "license_files": {
+      "LICENSE-MIT": "6efb0476a1cc085077ed49357026d8c173bf33017278ef440f222fb9cbcb66e6",
+      "LICENSE-APACHE": "249fdb6694467dd615b259f7ddde07be3f8ae5a72cecebb0e24f6629af4215fe"
+    },
+    "role": "Datetime value type (date, time and offset parts) returned by both toml and toml_edit; parses the date-time text token handed over by the toml_parser lexer"
+  }
+}
