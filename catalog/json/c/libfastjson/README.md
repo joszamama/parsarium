@@ -45,3 +45,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build json c libfastjson
+python3 parsarium.py run json c libfastjson controls/json/nested-object.json
+```

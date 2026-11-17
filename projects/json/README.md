@@ -4,7 +4,11 @@ Only verified Docker targets appear below; the format remains incomplete.
 
 - [cjson / C](c/cjson/README.md)
 - [jansson / C](c/jansson/README.md)
+- [jq / C](c/jq/README.md)
 - [json-c / C](c/json-c/README.md)
+- [json-glib / C](c/json-glib/README.md)
+- [json-parser / C](c/json-parser/README.md)
+- [libfastjson / C](c/libfastjson/README.md)
 - [yyjson / C](c/yyjson/README.md)
 - [Boost.JSON / C++](cpp/boost-json/README.md)
 - [Glaze / C++](cpp/glaze/README.md)

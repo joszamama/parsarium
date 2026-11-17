@@ -982,8 +982,8 @@
       "mp3"
     ],
     "cells_total": 24,
-    "catalog_paths": 158,
-    "containerized_verified": 158,
+    "catalog_paths": 162,
+    "containerized_verified": 162,
     "staged": 0,
     "standard_api_paths": 11,
     "standard_containerized_verified": 11,
@@ -992,8 +992,8 @@
       {
         "format": "json",
         "ecosystem": "c",
-        "catalog_paths": 4,
-        "containerized_verified": 4,
+        "catalog_paths": 8,
+        "containerized_verified": 8,
         "staged": 0,
         "pending": 0,
         "standard_api_paths": 0,
@@ -1001,9 +1001,9 @@
         "standard_staged": 0,
         "standard_pending": 0,
         "phase": "pilot",
-        "status": "pilot_four_selected_search_bounded",
+        "status": "pilot_eight_selected_search_bounded",
         "complete": false,
-        "uncertainty": "Four positive-signal C JSON third-party paths pass two valid controls with format-aware tree results, parser source coverage and stable AFL++ feedback: jansson 2.15.1 (282,984 Debian popcon sourcemax installations), json-c 0.19 (269,736), cJSON 1.7.19 (150,958), yyjson 0.13.0 (14,868). They have separate parser sources. Debian installations mostly reflect dependencies and miss vendored copies. Search remains bounded to the recorded Conan recipe queries; four paths do not establish the definitive top ten or full RFC 8259 compliance. ISO C documents no JSON API."
+        "uncertainty": "Eight C JSON third-party paths pass two valid controls with format-aware tree results, parser source coverage and stable AFL++ feedback. The original Conan recipe search missed Debian-packaged C parsers; a bounded Debian source-name search for 'json' (320 hits) plus exact lookups for jansson, jq, frozen, jsmn and parson in the same hashed popcon snapshot found the Debian-packaged C parser leads. libfastjson is a json-c fork and shares the json-c tokener family; jq's count is the jq source package (mostly the command-line program), and its jv C API is documented on the project wiki without a stability commitment; jq numbers have one kind, so integer/float in its tree comes from the preserved decimal literal. frozen fails the nested-object control (\\u00e9 decoded to one Latin-1 byte), jsmn is tokenizer-only, and liblaxjson (1 installation) and parson (no Debian source) remain unselected. Debian installations mostly reflect dependencies and miss vendored copies. These paths do not establish a definitive top ten or full RFC 8259 compliance. ISO C documents no JSON API."
       },
       {
         "format": "json",
