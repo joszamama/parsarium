@@ -6,7 +6,7 @@
 
 Homebrew install-on-request count over 365 days.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Homebrew installs (365 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [vtk](https://examples.vtk.org/site/Cxx/IO/ReadPLY/) | 9.7.2 | 11,283 | three vertices, one polygon and its three indices | VTK vtkPLYReader over bundled vtkPLY syntax parser |
 | 2 | [assimp](https://github.com/assimp/assimp-docs/blob/master/source/usage/use_the_lib.rst) | 6.0.6 | 7,646 | three vertices and one triangular face from ASCII PLY | Assimp native PLY loader |
@@ -22,8 +22,8 @@ These paths lack a positive primary metric. Their figures are reported separatel
 
 | Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
 | ---: | --- | --- | --- | ---: | --- | --- |
-| 1 | [libigl](https://libigl.github.io/dox/readPLY_8h.html) | 2.6.4 | [GitHub upstream stars](https://github.com/libigl/libigl) | 5,127 | three vertex positions and one triangle face matrix | libigl readPLY over bundled tinyply 2.3.2 |
-| 2 | [libpointmatcher](https://github.com/norlab-ulaval/libpointmatcher/blob/1.4.4/pointmatcher/IO.h) | 1.4.4 | [GitHub upstream stars](https://github.com/norlab-ulaval/libpointmatcher) | 1,845 | three parsed point-cloud vertices with x/y/z coordinate sums from ASCII PLY | libpointmatcher native PLY point-cloud parser |
-| 3 | [easy3d](https://github.com/LiangliangNan/Easy3D/blob/v2.6.1/easy3d/fileio/surface_mesh_io.h) | 2.6.1 | [GitHub upstream stars](https://github.com/LiangliangNan/Easy3D) | 1,660 | three mesh vertices and one triangle face with indices from ASCII PLY | Easy3D PLY reader over bundled RPly 1.1.4 |
+| 1 | [libigl](https://libigl.github.io/dox/readPLY_8h.html) | 2.6.4 | [GitHub stars](https://github.com/libigl/libigl) | 5,127 | three vertex positions and one triangle face matrix | libigl readPLY over bundled tinyply 2.3.2 |
+| 2 | [libpointmatcher](https://github.com/norlab-ulaval/libpointmatcher/blob/1.4.4/pointmatcher/IO.h) | 1.4.4 | [GitHub stars](https://github.com/norlab-ulaval/libpointmatcher) | 1,845 | three parsed point-cloud vertices with x/y/z coordinate sums from ASCII PLY | libpointmatcher native PLY point-cloud parser |
+| 3 | [easy3d](https://github.com/LiangliangNan/Easy3D/blob/v2.6.1/easy3d/fileio/surface_mesh_io.h) | 2.6.1 | [GitHub stars](https://github.com/LiangliangNan/Easy3D) | 1,660 | three mesh vertices and one triangle face with indices from ASCII PLY | Easy3D PLY reader over bundled RPly 1.1.4 |
 
 The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

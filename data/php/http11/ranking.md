@@ -6,7 +6,7 @@
 
 Packagist lifetime package downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [guzzlehttp/psr7](https://github.com/guzzle/psr7/blob/8b0a7e7db965a687eebe18333a128edac95db246/src/Message.php) | 3.3.0 | 1,188,876,960 | single valid GET request line and Host, X-Parsarium, Connection headers | Guzzle PSR-7 HTTP message parser |
 | 2 | [laminas/laminas-diactoros](https://github.com/laminas/laminas-diactoros/blob/5939fbc03e9043e5d27050ed584de263b869c57f/src/Request/Serializer.php) | 3.10.0 | 135,663,542 | single valid GET request line and Host, X-Parsarium, Connection headers | Diactoros HTTP message parser lineage |

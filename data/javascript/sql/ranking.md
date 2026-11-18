@@ -6,7 +6,7 @@ Ten third-party paths are control verified against the hand-written oracle in [c
 
 npm downloads, last month, captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [node-sql-parser](https://www.npmjs.com/package/node-sql-parser/v/5.4.0) | 5.4.0 | 13,709,122 | `new Parser().astify(local UTF-8 text, {database: 'postgresql'}) from node-sql-parser/build/postgresql`; dialect: PostgreSQL grammar build (database: postgresql) | node-sql-parser PEG.js grammars (one generated parser per database) |
 | 2 | [pgsql-ast-parser](https://www.npmjs.com/package/pgsql-ast-parser/v/12.0.2) | 12.0.2 | 7,717,032 | `parse(local UTF-8 text) -> Statement[]`; dialect: PostgreSQL | pgsql-ast-parser nearley grammar and moo lexer |

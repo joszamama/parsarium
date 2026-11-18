@@ -6,7 +6,7 @@
 
 deps.dev version-level directDependentCount.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [jsvg](https://github.com/weisJ/jsvg) | 2.0.0 | 26 | Rendered SVG pixels | JSVG |
 | 2 | [batik-transcoder](https://xmlgraphics.apache.org/batik/using/transcoder.html) | 1.20 | 11 | Rendered SVG pixels | Apache Batik SVG renderer, using batik-codec for PNG output |

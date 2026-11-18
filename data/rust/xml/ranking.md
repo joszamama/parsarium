@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days), from the search API in [registry-snapshot.json](registry-snapshot.json), captured 2026-11-17.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [quick-xml](https://docs.rs/quick-xml/0.42.0/quick_xml/) | 0.42.0 | 178,628,779 | Namespace-resolved event stream: element and attribute expanded names, namespace declarations, decoded text and CDATA | quick-xml pull reader |
 | 2 | [xmlparser](https://docs.rs/xmlparser/0.13.6/xmlparser/struct.Tokenizer.html) | 0.13.6 | 52,247,004 | `Tokenizer::from` over local UTF-8 text; adapter resolves namespace names, references and depth | xmlparser low-level tokenizer |

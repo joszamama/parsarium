@@ -6,7 +6,7 @@
 
 exact primary GitHub repository stars.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | GitHub stars | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [imagemagick](https://imagemagick.org/formats/) | 7.1.2-35 | 17,852 | parsed SVG dimensions and rendered red/green rectangle pixels | ImageMagick internal MSVG renderer with libxml2 |
 | 2 | [libvips](https://www.libvips.org/API/current/ctor.Image.svgload.html) | 8.18.7 | 11,801 | parsed SVG dimensions and rendered red/green rectangle pixels | libvips SVG loader over librsvg |
@@ -22,8 +22,8 @@ These paths lack a positive primary metric. Their figures are reported separatel
 
 | Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
 | ---: | --- | --- | --- | ---: | --- | --- |
-| 1 | [gdk-pixbuf](https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html) | 2.44.8 | [Debian source installed count](https://sources.debian.org/src/gdk-pixbuf/) | 198,025 | parsed SVG dimensions and rendered red/green RGBA pixels | GdkPixbuf loader API with librsvg SVG plugin |
-| 2 | [librsvg](https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/class.Handle.html) | 2.63.4 | [Debian source installed count](https://sources.debian.org/src/librsvg/) | 192,430 | parsed SVG dimensions and rendered red/green rectangle pixels | librsvg Rust SVG engine through C API |
-| 3 | [qtsvg](https://doc.qt.io/qt-6/qsvgrenderer.html) | 6.12.0 | [Debian source installed count](https://sources.debian.org/src/qtsvg-opensource-src/) | 99,129 | parsed SVG dimensions and rendered red/green rectangle pixels | QtSvg QSvgRenderer document parser and Qt painter |
+| 1 | [gdk-pixbuf](https://docs.gtk.org/gdk-pixbuf/ctor.Pixbuf.new_from_file.html) | 2.44.8 | [Debian installations (popcon)](https://sources.debian.org/src/gdk-pixbuf/) | 198,025 | parsed SVG dimensions and rendered red/green RGBA pixels | GdkPixbuf loader API with librsvg SVG plugin |
+| 2 | [librsvg](https://gnome.pages.gitlab.gnome.org/librsvg/Rsvg-2.0/class.Handle.html) | 2.63.4 | [Debian installations (popcon)](https://sources.debian.org/src/librsvg/) | 192,430 | parsed SVG dimensions and rendered red/green rectangle pixels | librsvg Rust SVG engine through C API |
+| 3 | [qtsvg](https://doc.qt.io/qt-6/qsvgrenderer.html) | 6.12.0 | [Debian installations (popcon)](https://sources.debian.org/src/qtsvg-opensource-src/) | 99,129 | parsed SVG dimensions and rendered red/green rectangle pixels | QtSvg QSvgRenderer document parser and Qt painter |
 
 The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

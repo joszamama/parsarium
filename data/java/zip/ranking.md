@@ -6,7 +6,7 @@
 
 deps.dev version-level directDependentCount.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [commons-compress](https://commons.apache.org/proper/commons-compress/apidocs/org/apache/commons/compress/archivers/zip/ZipFile.html) | 1.28.0 | 1,402 | ZIP entry name and decompressed content from a local archive | Apache Commons Compress ZIP parser |
 | 2 | [ant](https://ant.apache.org/manual/api/org/apache/tools/zip/ZipFile.html) | 1.10.18 | 124 | ZIP entry name and decompressed content from a local archive | Apache Ant ZIP reader; historically related to Commons Compress |

@@ -24,7 +24,7 @@ source-package (sourcemax) table is not used for ranking: the libxml2 source now
 builds `libxml2-16`, so the older `libxml2` binary's installations are no
 longer attributed to it.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Debian installations (popcon) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [expat](https://libexpat.github.io/doc/api/latest/) | 2.10.0 | 297,134 | Namespace-resolved elements, attributes, declarations, depth and character data of one in-memory document | expat |
 | 2 | [libxml2](https://gnome.pages.gitlab.gnome.org/libxml2/html/xmlreader_8h.html) | 2.15.4 | 290,724 | Namespace-resolved elements, attributes, declarations, depth and character data of one in-memory document | libxml2 |

@@ -6,7 +6,7 @@ Seven verified third-party path(s), ranked by one metric. The ceiling is ten; th
 
 deps.dev directDependentCount summed over all releases, from [registry-snapshot.json](registry-snapshot.json) captured 2026-11-17. Package-level counts include non-DNS use and are compared only within this cell.
 
-| Rank | Package | Release | Metric | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Parser family |
 | ---: | --- | --- | ---: | --- |
 | 1 | [netty-codec-dns](https://netty.io/4.2/api/io/netty/handler/codec/dns/DatagramDnsResponseDecoder.html) | 4.2.21.Final | 1,038 | Netty DNS codec (DnsResponseDecoder, DnsMessageUtil, DefaultDnsRecordDecoder, DnsCodecUtil) |
 | 2 | [dnsjava](https://javadoc.io/doc/dnsjava/dnsjava/3.7.1/org/xbill/DNS/Message.html#%3Cinit%3E(byte%5B%5D)) | 3.7.1 | 888 | dnsjava (org.xbill.DNS Message, Header, DNSInput, Name and per-type rrFromWire) |

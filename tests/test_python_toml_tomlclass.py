@@ -41,7 +41,7 @@ class PythonTomlTomlclassPilotTest(unittest.TestCase):
             self.assertEqual(parser["metric"]["value"], packages[parser["name"]]["value"])
         self.assertEqual(self.parser()["metric"]["value"], METRIC)
         ranking = (BASE / "ranking.md").read_text(encoding="utf-8")
-        self.assertIn("| Rank | Package | Release | Metric | Parsed scope | Parser family |", ranking)
+        self.assertIn("| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |", ranking)
         self.assertIn(f"[{SLUG}](", ranking)
 
     def test_release_lock_matches_manifest_and_dockerfile(self):

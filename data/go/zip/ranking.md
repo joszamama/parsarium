@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/klauspost/compress/zip](https://pkg.go.dev/github.com/klauspost/compress/zip@v1.20.4) | v1.20.4 | 246 | entry_name+decompressed_text | Go archive/zip fork |
 | 2 | [github.com/mholt/archives](https://pkg.go.dev/github.com/mholt/archives@v0.1.5) | v0.1.5 | 228 | entry_name+decompressed_text | mholt/archives/STARRY-S zip |

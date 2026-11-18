@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [symphonia](https://docs.rs/symphonia/0.6.1/symphonia/) | 0.6.1 | 11,081,825 | WAV track metadata and audio packet | Symphonia WAV demuxer |
 | 2 | [symphonia-format-riff](https://docs.rs/symphonia-format-riff/0.6.1/symphonia_format_riff/) | 0.6.1 | 9,031,513 | WAV track metadata and audio packet | Symphonia WAV demuxer |

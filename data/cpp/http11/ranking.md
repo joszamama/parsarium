@@ -6,7 +6,7 @@
 
 GitHub stars of primary upstream repository.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | GitHub stars | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [mongoose](https://mongoose.ws/docs/api/http/#mg_http_parse) | 7.23 | 13,131 | HTTP/1.1 GET request method, target, query and version | Mongoose C HTTP request parser; related to CivetWeb and LibHTTP ancestry |
 | 2 | [h2o](https://github.com/h2o/h2o/blob/v2.2.6/deps/picohttpparser/README.md) | 2.2.6 | 11,568 | HTTP/1.1 GET request method, target, version and headers from local byte buffer via H2O-bundled parser | H2O 2.2.6 bundles PicoHTTPParser as its HTTP/1 parser; separate tagged H2O package distribution but same underlying parser family as h2o/picohttpparser 1.5, not an independent engine |
@@ -22,8 +22,8 @@ These paths lack a positive primary metric. Their figures are reported separatel
 
 | Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
 | ---: | --- | --- | --- | ---: | --- | --- |
-| 1 | [libsoup](https://libsoup.gnome.org/libsoup-3.0/func.headers_parse_request.html) | 3.8.1 | [Debian source installed count](https://sources.debian.org/src/libsoup/) | 137,466 | HTTP/1.1 GET request-head method, target, version and Host header from local byte buffer | GNOME libsoup 3 HTTP/1 request-head parser, independent from llhttp and PicoHTTPParser |
-| 2 | [serf](https://github.com/apache/serf/blob/1.3.10/serf_bucket_types.h) | 1.3.10 | [Debian source installed count](https://sources.debian.org/src/serf/) | 19,931 | HTTP/1.1 response status, reason, Content-Type, Content-Length and body from local byte buffer | Apache Serf C HTTP/1 response bucket state machine; independent from libsoup and llhttp |
-| 3 | [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.pdf) | 1.0.10 | [Debian source installed count](https://sources.debian.org/src/libmicrohttpd/) | 5,678 | HTTP/1.1 GET request method, path, query argument and version from local socket stream | GNU libmicrohttpd HTTP/1 request parser in an embedded C server, separate from llhttp and PicoHTTPParser |
+| 1 | [libsoup](https://libsoup.gnome.org/libsoup-3.0/func.headers_parse_request.html) | 3.8.1 | [Debian installations (popcon)](https://sources.debian.org/src/libsoup/) | 137,466 | HTTP/1.1 GET request-head method, target, version and Host header from local byte buffer | GNOME libsoup 3 HTTP/1 request-head parser, independent from llhttp and PicoHTTPParser |
+| 2 | [serf](https://github.com/apache/serf/blob/1.3.10/serf_bucket_types.h) | 1.3.10 | [Debian installations (popcon)](https://sources.debian.org/src/serf/) | 19,931 | HTTP/1.1 response status, reason, Content-Type, Content-Length and body from local byte buffer | Apache Serf C HTTP/1 response bucket state machine; independent from libsoup and llhttp |
+| 3 | [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.pdf) | 1.0.10 | [Debian installations (popcon)](https://sources.debian.org/src/libmicrohttpd/) | 5,678 | HTTP/1.1 GET request method, path, query argument and version from local socket stream | GNU libmicrohttpd HTTP/1 request parser in an embedded C server, separate from llhttp and PicoHTTPParser |
 
 The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

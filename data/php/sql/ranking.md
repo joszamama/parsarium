@@ -6,7 +6,7 @@ Ten third-party paths are control verified against the hand-written oracle in [c
 
 Packagist total downloads, captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [phpmyadmin/sql-parser](https://github.com/phpmyadmin/sql-parser/blob/6.0.1/README.md#parsing) | 6.0.1 | 55,800,144 | `new PhpMyAdmin\SqlParser\Parser(local SQL text, strict: true) -> statements[]`; dialect: MySQL (library default context) | phpMyAdmin sql-parser hand-written lexer and statement parser |
 | 2 | [greenlion/php-sql-parser](https://github.com/greenlion/PHP-SQL-Parser/blob/7a4701b71f7786e8518a9412f3c552ae4550d314/README.md) | v5.0.0 | 13,810,212 | `(new PHPSQLParser\PHPSQLParser())->parse(local SQL text) -> clause-keyed array parse tree`; dialect: MySQL-oriented (no dialect option) | PHP-SQL-Parser lexer and clause processors (nested array parse tree) |

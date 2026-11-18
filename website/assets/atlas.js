@@ -23,6 +23,16 @@
     "Lifetime downloads": "descargas totales", "Homebrew requested installs (365d)": "instalaciones solicitadas en Homebrew (365 días)",
     "Requested installs (365d)": "instalaciones solicitadas (365 días)", "Stars": "estrellas",
     "Packagist lifetime downloads": "descargas totales en Packagist",
+    "Debian installations (popcon)": "instalaciones en Debian (popcon)",
+    "Imported by (pkg.go.dev)": "importado por (pkg.go.dev)",
+    "Direct dependents (deps.dev)": "dependientes directos (deps.dev)",
+    "npm downloads (last month)": "descargas en npm (último mes)",
+    "PyPI downloads (last month)": "descargas en PyPI (último mes)",
+    "crates.io downloads (90 days)": "descargas en crates.io (90 días)",
+    "Packagist downloads (all time)": "descargas en Packagist (totales)",
+    "Homebrew installs (365 days)": "instalaciones en Homebrew (365 días)",
+    "GitHub stars": "estrellas en GitHub",
+    "Debian development-package installations (popcon)": "instalaciones del paquete de desarrollo en Debian (popcon)",
   };
   const metricName = (m) => !m ? "" : es ? (METRIC_ES[m] || m) : m;
   const metricValue = (v) => es && /^[\d,]+$/.test(v || "") ? v.replace(/,/g, ".") : v;

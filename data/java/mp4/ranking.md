@@ -6,7 +6,7 @@
 
 deps.dev exact-version directDependentCount.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [jcodec](https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar) | 0.2.5 | 44 | track count and video dimensions | JCodec MP4 box parser |
 | 2 | [old-isoparser](https://repo.maven.apache.org/maven2/com/googlecode/mp4parser/isoparser/1.1.22/isoparser-1.1.22-javadoc.jar) | 1.1.22 | 11 | movie track count and timescale | older CoreMedia/sannies MP4Parser ISO BMFF parser |

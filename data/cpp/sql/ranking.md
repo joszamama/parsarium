@@ -6,7 +6,7 @@ Two third-party paths are control verified against the hand-written oracle in [c
 
 Debian popcon sourcemax installations by source package (pinned snapshot), captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Debian installations (popcon) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [duckdb](https://github.com/duckdb/duckdb/blob/v2.0.0/src/include/duckdb/parser/parser.hpp) | 2.0.0 | 40 | `duckdb::Parser::GetBuiltinParser(); Parser::ParseQuery(local SQL text) -> Parser::statements (SQLStatement trees)`; dialect: DuckDB built-in grammar (Parser::GetBuiltinParser; no client context) | DuckDB PEG parser (own grammar and transformer) |
 

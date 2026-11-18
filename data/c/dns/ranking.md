@@ -6,7 +6,7 @@ Six verified third-party path(s): five ranked by the primary metric, then one st
 
 Debian popcon sourcemax installations (max over binary packages built from the source package), from [registry-snapshot.json](registry-snapshot.json) captured 2026-11-17. Package-level counts include non-DNS use and are compared only within this cell.
 
-| Rank | Package | Release | Metric | Parser family |
+| Rank | Package | Release | Debian installations (popcon) | Parser family |
 | ---: | --- | --- | ---: | --- |
 | 1 | [c-ares](https://c-ares.org/docs/ares_dns_parse.html) | 1.34.9 | 43,027 | c-ares DNS record parser (src/lib/record/ares_dns_parse.c, ares_dns_name.c over ares_buf.c) |
 | 2 | [ldns](https://nlnetlabs.nl/documentation/ldns/wire2host_8h.html) | 1.8.4 | 1,240 | NLnet Labs ldns (wire2host.c, rr.c, packet.c, str2host/host2str for presentation) |

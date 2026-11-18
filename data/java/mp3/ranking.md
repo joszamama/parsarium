@@ -6,7 +6,7 @@
 
 deps.dev version-level directDependentCount.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [jcodec](https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar) | 0.2.5 | 44 | first MP3 audio frame codec, byte length and timescale from local tagged MP3 | JCodec native MPEG audio demuxer |
 | 2 | [mp3spi](https://repo.maven.apache.org/maven2/com/googlecode/soundlibs/mp3spi/1.9.5.4/mp3spi-1.9.5.4-sources.jar) | 1.9.5.4 | 38 | local tagged MP3 type, ID3v2 title, artist, album and tag version | soundlibs MP3SPI Java Sound provider over its JLayer fork |

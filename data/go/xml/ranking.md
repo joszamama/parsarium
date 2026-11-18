@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count, from the bounded search captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/beevik/etree](https://pkg.go.dev/github.com/beevik/etree@v1.8.1) | v1.8.1 | 2,098 | XML 1.0 UTF-8 document into an element tree with namespace lookup | etree element tree over Go encoding/xml Decoder tokenizer |
 | 2 | [github.com/antchfx/xmlquery](https://pkg.go.dev/github.com/antchfx/xmlquery@v1.5.2) | v1.5.2 | 627 | XML 1.0 UTF-8 document into an XPath-ready DOM with expanded names | xmlquery DOM over Go encoding/xml Decoder tokenizer |

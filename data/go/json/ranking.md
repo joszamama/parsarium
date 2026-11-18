@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count, from the bounded search captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/json-iterator/go](https://pkg.go.dev/github.com/json-iterator/go@v1.1.12) | v1.1.12 | 18,454 | RFC 8259 JSON text into interface{} | json-iterator Iterator parser |
 | 2 | [github.com/tidwall/gjson](https://pkg.go.dev/github.com/tidwall/gjson@v1.20.4) | v1.20.4 | 10,420 | Validated JSON byte slice traversed through Result nodes | GJSON path-query parser |

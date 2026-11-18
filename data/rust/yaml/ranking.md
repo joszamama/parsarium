@@ -6,7 +6,7 @@ Ten control-verified third-party paths; bounded pilot scope. The ceiling is ten 
 
 crates.io `recent_downloads` (90 days), captured 2026-11-17 ([snapshot](registry-snapshot.json)). Values are package adoption, not YAML-specific use, and are compared only within this cell. The named leads (serde_yaml_ng, granit-parser, yaml_serde, libyml, tree-sitter-yaml, noyalib, dbt-yaml, yaml_parser, yaml-edit, serde_yaml_bw) take the `recent_downloads` value of their hit in the same recorded first-100 search.
 
-| Rank | Package | Release | Metric | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parser family |
 | ---: | --- | --- | ---: | --- |
 | 1 | [serde_yaml](https://docs.rs/serde_yaml/0.9.34+deprecated/serde_yaml/fn.from_str.html) | 0.9.34+deprecated | 100,619,896 | libyaml (via unsafe-libyaml) |
 | 2 | [unsafe-libyaml](https://docs.rs/unsafe-libyaml/0.2.11/unsafe_libyaml/fn.yaml_parser_load.html) | 0.2.11 | 91,340,058 | libyaml (c2rust translation) |

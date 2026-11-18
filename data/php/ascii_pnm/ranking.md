@@ -6,7 +6,7 @@
 
 Packagist lifetime package downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [intervention/image](https://github.com/Intervention/image/blob/3a47838f2e0f4ec6c8c9b43a5d73ac985b975830/src/ImageManager.php) | 4.4.1 | 240,839,091 | decoded image dimensions | libvips PPM/PNM decoder |
 | 2 | [imagine/imagine](https://github.com/php-imagine/Imagine/blob/dd57a4c290ff4d223d17bcd219dac9ac8bf1cc16/src/Imagick/Imagine.php) | 1.5.4 | 81,891,624 | decoded image dimensions | ImageMagick PNM decoder |

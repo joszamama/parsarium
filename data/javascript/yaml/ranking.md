@@ -6,7 +6,7 @@ Ten control-verified third-party paths; the cell is at the ten-path ceiling and 
 
 npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snapshot](registry-snapshot.json)). Package adoption, largely transitive, not YAML-specific use. Values for the second search query, the metric sweep, the named lookups and the further discovery leads use the same window through the explicit-range endpoint.
 
-| Rank | Package | Release | Metric | AFL++ parser ranges (control / differing) | Parser family |
+| Rank | Package | Release | npm downloads (last month) | AFL++ parser ranges (control / differing) | Parser family |
 | ---: | --- | --- | ---: | ---: | --- |
 | 1 | [js-yaml](https://github.com/nodeca/js-yaml/blob/5.5.0/docs/usage.md) | 5.5.0 | 1,533,329,423 | 387 / 102 | js-yaml (nodeca) event parser and constructor |
 | 2 | [yaml](https://github.com/eemeli/yaml/blob/v2.9.1/docs/04_documents.md) | 2.9.1 | 1,224,431,010 | 618 / 110 | eemeli/yaml lexer, CST parser and composer |

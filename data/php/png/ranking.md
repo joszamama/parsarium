@@ -6,7 +6,7 @@
 
 Packagist package lifetime downloads, all versions.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [nette/utils](https://github.com/nette/utils/blob/6bf24518accf32cf845bca305e0b92078700fd01/src/Utils/Image.php) | v4.1.6 | 510,750,784 | decoded dimensions and PNG type | PHP GD PNG decoder |
 | 2 | [intervention/image](https://github.com/Intervention/image/blob/3a47838f2e0f4ec6c8c9b43a5d73ac985b975830/readme.md) | 4.4.1 | 240,574,329 | decoded image dimensions | PHP GD PNG decoder |

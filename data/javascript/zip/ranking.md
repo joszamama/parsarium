@@ -6,7 +6,7 @@
 
 npm registry tarball downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [fflate](https://www.npmjs.com/package/fflate) | 0.8.3 | 510,564,404 | entries_and_content | fflate |
 | 2 | [yauzl](https://www.npmjs.com/package/yauzl) | 3.4.0 | 250,080,200 | entries_and_content | yauzl |

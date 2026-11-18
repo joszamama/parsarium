@@ -6,7 +6,7 @@ Ten third-party paths are control verified against the hand-written oracle in [c
 
 pkg.go.dev Imported by package count, captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [vitess.io/vitess/go/vt/sqlparser](https://pkg.go.dev/vitess.io/vitess@v0.24.5/go/vt/sqlparser#Parser.Parse) | v0.24.5 | 391 | `sqlparser.New(sqlparser.Options{}); Parser.SplitStatementToPieces and Parser.Parse(local SQL text) -> Statement`; dialect: MySQL (library default MySQL server version) | vitess MySQL grammar (goyacc sql.y) and tokenizer |
 | 2 | [github.com/xwb1989/sqlparser](https://pkg.go.dev/github.com/xwb1989/sqlparser@v0.0.0-20180606152119-120387863bf2#Parse) | v0.0.0-20180606152119-120387863bf2 | 305 | `sqlparser.SplitStatementToPieces and sqlparser.Parse(local SQL text) -> Statement`; dialect: MySQL (vitess-derived grammar, no dialect option) | vitess MySQL grammar (2018 extracted fork, goyacc sql.y) and tokenizer |

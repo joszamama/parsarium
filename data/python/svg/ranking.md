@@ -6,7 +6,7 @@
 
 PyPI Stats last_month downloads excluding known mirrors.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [PyMuPDF](https://pymupdf.readthedocs.io/en/latest/how-to-open-a-file.html) | 2.1 | 83,199,606 | SVG document page and dimensions | MuPDF SVG document parser |
 | 2 | [CairoSVG](https://cairosvg.org/documentation/index.html) | 2.9.1 | 13,091,552 | SVG rendering with dimensions and colored pixels | CairoSVG Python SVG parser plus Cairo renderer |

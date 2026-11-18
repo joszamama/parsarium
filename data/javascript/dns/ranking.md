@@ -6,7 +6,7 @@ Ten verified third-party path(s), ranked by one metric. The ceiling is ten; the 
 
 npm downloads, 2026-10-17:2026-11-15 (30 days), from [registry-snapshot.json](registry-snapshot.json) captured 2026-11-17. Package-level counts include non-DNS use and are compared only within this cell.
 
-| Rank | Package | Release | Metric | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parser family |
 | ---: | --- | --- | ---: | --- |
 | 1 | [dns-packet](https://github.com/mafintosh/dns-packet/blob/v5.6.1/README.md#packet-decodebuf-offset) | 5.6.1 | 81,519,355 | dns-packet (mafintosh) decoder, index.js |
 | 2 | [@dnsquery/dns-packet](https://github.com/dnsquery/dns-packet/blob/main/README.md#packet-decodebuf-offset) | 6.1.1 | 785,358 | dns-packet family (fork of mafintosh dns-packet) |

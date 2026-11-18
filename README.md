@@ -1,6 +1,26 @@
 # Parsarium
 
-The [website](https://parsarium.com/) helps users choose a format, find a documented parser, and open a runnable target. It is built from the committed catalog and hosted on GitHub Pages.
+**An open testbed of real parsers.** Pinned, verified Docker harnesses for 1,163 open-source parser paths across 16 file formats and protocols in eight languages, ready to run, compare, and fuzz with AFL++ and Fandango.
+
+<p align="center">
+  <a href="https://parsarium.com/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset=".github/assets/readme-hero-dark.png">
+      <img alt="The 71-byte red-green.png control as a hexdump, next to the list of programs that read it and the width and height each one reports." src=".github/assets/readme-hero-light.png" width="900">
+    </picture>
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://parsarium.com/">Website</a> ·
+  <a href="https://parsarium.com/bench/">Bench</a> ·
+  <a href="https://parsarium.com/atlas/">Atlas</a> ·
+  <a href="https://parsarium.com/manual/">Manual</a> ·
+  <a href="PROTOCOL.md">Selection protocol</a> ·
+  <a href="ETHICS.md">Ethics</a>
+</p>
+
+The [website](https://parsarium.com/) is built from this repository on every push: it helps you choose a format, find a documented parser, and assemble a runnable target set.
 
 Parsarium is a format-first catalog and target set for parser experiments. Its active collection covers ten formats across C, C++, Go, Java, JavaScript, Python, Rust, and PHP. Six more formats (JSON, XML, YAML, TOML, SQL, and DNS messages) are pilots with their own counts. Selected third-party paths have containerized, instrumented harnesses that accept local inputs and generated corpora. Each verified catalog entry has a pinned release, parser API, valid control, observed result, and evidence. Popularity ranks verified third-party packages **within a format and ecosystem**; the rankings do not compare ecosystems or imply independent parser engines.
 

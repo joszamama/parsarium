@@ -88,7 +88,7 @@ class CppTomlToml11PilotTest(unittest.TestCase):
         self.assertEqual(ranked, sorted(ranked, reverse=True))
         self.assertEqual([item["name"] for item in parsers].index(PACKAGE) + 1, RANK)
         ranking = (BASE / "ranking.md").read_text(encoding="utf-8")
-        self.assertIn("| Rank | Package | Release | Metric | Parsed scope | Parser family |", ranking)
+        self.assertIn("| Rank | Package | Release | Debian installations (popcon) | Parsed scope | Parser family |", ranking)
         self.assertIn(f"| {RANK} | [toml11]", ranking)
 
     def test_family_is_independent_and_lead_resolved(self):

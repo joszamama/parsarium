@@ -6,7 +6,7 @@
 
 deps.dev version-level directDependentCount.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [commons-httpclient](https://hc.apache.org/httpclient-legacy/apidocs/org/apache/commons/httpclient/HttpParser.html) | 3.1 | 1,484 | HTTP/1.1 response status line and headers from local stream | Apache Commons HttpClient 3.x native HTTP response-head parser |
 | 2 | [httpcore](https://hc.apache.org/httpcomponents-core-4.4.x/current/httpcore/apidocs/org/apache/http/impl/io/DefaultHttpRequestParser.html) | 4.4.16 | 1,414 | HTTP/1.1 request line and headers from local stream | Apache HttpComponents Core HTTP/1.1 parser, 4.x branch; shared upstream with httpcore5 |

@@ -6,7 +6,7 @@
 
 GitHub stars of primary upstream repository, where package-specific and available.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | GitHub stars | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [sqlite](https://www.sqlite.org/zipfile.html) | 3.54.1 | 10,998 | entry name and decompressed entry bytes | SQLite Zipfile virtual table with zlib DEFLATE |
 | 2 | [poco](https://github.com/pocoproject/poco/blob/poco-1.15.4-release/Zip/include/Poco/Zip/ZipArchive.h) | 1.15.4 | 9,499 | entry name and decompressed entry bytes | POCO Zip reader |
@@ -23,7 +23,7 @@ These paths lack a positive primary metric. Their figures are reported separatel
 
 | Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
 | ---: | --- | --- | --- | ---: | --- | --- |
-| 1 | [libgsf](https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html) | 1.14.60 | [Debian source installed count](https://sources.debian.org/src/libgsf/) | 86,949 | entry name and decompressed entry bytes | libgsf ZIP reader |
-| 2 | [karchive](https://api.kde.org/kzip.html) | 6.31.0 | [Debian source installed count](https://sources.debian.org/src/karchive/) | 44,046 | entry name and decompressed entry bytes | KArchive KZip reader |
+| 1 | [libgsf](https://gnome.pages.gitlab.gnome.org/libgsf/api/gsf-Zip.html) | 1.14.60 | [Debian installations (popcon)](https://sources.debian.org/src/libgsf/) | 86,949 | entry name and decompressed entry bytes | libgsf ZIP reader |
+| 2 | [karchive](https://api.kde.org/kzip.html) | 6.31.0 | [Debian installations (popcon)](https://sources.debian.org/src/karchive/) | 44,046 | entry name and decompressed entry bytes | KArchive KZip reader |
 
 The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

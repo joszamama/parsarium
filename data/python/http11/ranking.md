@@ -6,7 +6,7 @@
 
 PyPI Stats last_month downloads excluding known mirrors.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [h11](https://pypi.org/project/h11/0.16.0/) | 0.16.0 | 713,263,467 | HTTP/1.1 request head | h11 state-machine parser |
 | 2 | [websockets](https://websockets.readthedocs.io/en/stable/reference/datastructures.html) | 17.3 | 401,505,282 | HTTP/1.1 handshake request head | websockets Python HTTP/1.1 parser |

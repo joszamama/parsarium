@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/fogleman/fauxgl](https://pkg.go.dev/github.com/fogleman/fauxgl@v0.0.0-20250110135958-abf826acbbbd#LoadPLY) | v0.0.0-20250110135958-abf826acbbbd | 303 | ASCII PLY header, vertex x/y/z rows and vertex_indices face rows converted to a triangle mesh | fauxgl native Go PLY reader (ply.go) |
 | 2 | [go.viam.com/rdk/spatialmath](https://pkg.go.dev/go.viam.com/rdk@v1.17.0/spatialmath#NewMeshFromPLYFile) | v1.17.0 | 44 | ASCII PLY triangle faces converted to millimetre-scaled triangles | Viam RDK spatialmath mesh loader over goply (shared goply parser family) |

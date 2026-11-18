@@ -6,7 +6,7 @@
 
 deps.dev version-level directDependentCount.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [pdfbox](https://javadoc.io/static/org.apache.pdfbox/pdfbox/3.0.8/org/apache/pdfbox/Loader.html) | 3.0.8 | 119 | PDF page count | Apache PDFBox |
 | 2 | [itextpdf](https://javadoc.io/static/com.itextpdf/itextpdf/5.5.13/com/itextpdf/text/pdf/PdfReader.html) | 5.5.13 | 80 | PDF page count | iText 5 PDF reader |

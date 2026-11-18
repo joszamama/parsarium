@@ -105,7 +105,7 @@ class TomlCrateEvidenceTest(unittest.TestCase):
         self.assertEqual(entry["metric"]["value"], hit["recent_downloads"])
         self.assertNotIn(PACKAGE, {lead["name"] for lead in leads["leads"]})
         ranking = (cell_dir / "ranking.md").read_text()
-        self.assertIn("| Rank | Package | Release | Metric | Parsed scope | Parser family |", ranking)
+        self.assertIn("| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |", ranking)
         rows = [line for line in ranking.splitlines() if line.startswith("| ") and line[2].isdigit()]
         ranked = [int(row.split("|")[4].strip().replace(",", "")) for row in rows]
         self.assertEqual(ranked, sorted((parser["metric"]["value"] for parser in parsers), reverse=True))

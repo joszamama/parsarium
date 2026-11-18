@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days), from the search API in [registry-snapshot.json](registry-snapshot.json), captured 2026-11-17; the four paths ranked 6 to 9 were found by targeted lookups of the same API on 2026-11-18 (`round_4_targeted_lookups`). Ranks 6 to 9 rest on small counts (700 down to 46).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [toml](https://docs.rs/toml/1.2.1+spec-1.1.0/toml/fn.from_str.html) | 1.2.1+spec-1.1.0 | 323,348,893 | `from_str::<toml::Table>(&str)` over locally decoded UTF-8 text: Table/Value tree with typed scalars and `toml_datetime` date, time and offset parts | toml_parser 1.1.5 lexer and event parser (shared with toml_edit); toml's own DeTable/DeValue and Table/Value builder |
 | 2 | [toml_edit](https://docs.rs/toml_edit/0.25.19+spec-1.1.0/toml_edit/struct.DocumentMut.html) | 0.25.19+spec-1.1.0 | 292,512,904 | `str::parse::<DocumentMut>()` over locally decoded UTF-8 text: format-preserving Item/Value tree; decoded values observed through `Formatted::value()` | toml_parser 1.1.5 lexer and event parser (shared with toml); toml_edit's own format-preserving Document/Item/Value builder |

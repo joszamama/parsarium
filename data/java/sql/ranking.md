@@ -6,7 +6,7 @@ Ten third-party paths are control verified against the hand-written oracle in [c
 
 deps.dev directDependentCount summed over every Maven release, captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [org.jooq:jooq](https://www.jooq.org/doc/3.21/manual/sql-building/sql-parser/sql-parser-api/) | 3.21.9 | 4,574 | `DSL.using(SQLDialect.DEFAULT).parser().parse(local SQL text) -> Queries`; dialect: SQLDialect.DEFAULT | jOOQ hand-written recursive-descent parser (ParserImpl) and query object model |
 | 2 | [com.alibaba:druid](https://github.com/alibaba/druid/wiki/SQL-Parser) | 1.2.28 | 1,945 | `SQLUtils.parseStatements(local SQL text, DbType.mysql) -> List<SQLStatement>`; dialect: DbType.mysql | Druid hand-written SQL lexer and recursive-descent parsers |

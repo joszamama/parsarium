@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/tdewolff/minify/v2/svg](https://pkg.go.dev/github.com/tdewolff/minify/v2/svg@v2.24.25) | v2.24.25 | 159 | SVG-aware transformed colors and markup | tdewolff SVG minifier |
 | 2 | [github.com/srwiley/oksvg](https://pkg.go.dev/github.com/srwiley/oksvg@v0.0.0-20221011165216-be6e8873101c) | v0.0.0-20221011165216-be6e8873101c | 130 | paths, width | oksvg lineage |

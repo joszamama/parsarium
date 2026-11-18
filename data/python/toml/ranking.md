@@ -4,7 +4,7 @@ Seven third-party paths are control verified. This is a bounded pilot cell, not 
 
 The within-cell metric is [PyPI Stats](https://pypistats.org/api/) `last_month` package downloads excluding known mirrors, captured 2026-11-17 in the [registry snapshot](registry-snapshot.json). It counts whole-package installs, including transitive installs and uses unrelated to parsing.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [tomlkit](https://github.com/python-poetry/tomlkit/blob/0.15.2/docs/api.rst) | 0.15.2 | 591,365,129 | TOML 1.0.0 document from local text via `tomlkit.parse`, walked by tomlkit item type with each scalar unwrapped | tomlkit pure-Python style-preserving recursive-descent parser (`parser.py` over `source.py`) |
 | 2 | [tomli](https://github.com/hukkin/tomli/blob/2.5.0/README.md) | 2.5.0 | 263,305,223 | TOML 1.0.0 document from local text via `tomli.loads` (plain dict) | tomli pure-Python parser (`_parser.py`, `_re.py`); same family as the standard `tomllib` |

@@ -8,7 +8,7 @@ PHP code mostly parses JSON with the bundled `json_decode` (ext/json). The most 
 
 Packagist total downloads, from the bounded search captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [seld/jsonlint](https://packagist.org/packages/seld/jsonlint) | 1.12.2 | 252,371,311 | JSON text into stdClass/array/scalars | seld/jsonlint Lexer and LR table parser |
 | 2 | [laminas/laminas-json](https://packagist.org/packages/laminas/laminas-json) | 3.8.0 | 35,102,503 | JSON text decoded with explicitly enabled own PHP Decoder | Laminas JSON Decoder (Zend lineage) |

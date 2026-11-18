@@ -6,7 +6,7 @@
 
 Packagist lifetime package downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [dompdf/php-svg-lib](https://github.com/dompdf/php-svg-lib/blob/8259ffb930817e72b1ff1caef5d226501f3dfeb1/src/Svg/Document.php) | 1.0.2 | 80,006,827 | Root SVG dimensions; full raster rendering not exercised. | dompdf php-svg-lib XML/SVG parser |
 | 2 | [enshrined/svg-sanitize](https://github.com/darylldoyle/svg-sanitizer/blob/1976ff93c8d8a234cdd3ff99626bd43ecf11bf49/README.md) | 1.1.1 | 55,204,366 | Valid two-rectangle SVG accepted by SVG sanitizer; parsed output retains rect and fill attributes. | enshrined SVG sanitizer over libxml DOM |

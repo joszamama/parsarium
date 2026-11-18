@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [gopkg.in/gographics/imagick.v3/imagick](https://pkg.go.dev/gopkg.in/gographics/imagick.v3/imagick@v3.7.3) | v3.7.3 | 309 | P3 dimensions | ImageMagick |
 | 2 | [github.com/jbuchbinder/gopnm](https://pkg.go.dev/github.com/jbuchbinder/gopnm@v0.0.0-20251119211316-bb594e0d2e34) | v0.0.0-20251119211316-bb594e0d2e34 | 42 | P3 pixels and dimensions | gopnm lineage |

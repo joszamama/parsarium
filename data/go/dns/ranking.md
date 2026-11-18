@@ -6,7 +6,7 @@ Ten verified third-party path(s), ranked by one metric. The cell is at its ceili
 
 pkg.go.dev Imported by package count, from [registry-snapshot.json](registry-snapshot.json) captured 2026-11-17 (targeted lookups under `round2_targeted`, same source and day; further lookups under `round3_search`, `round4_targeted` and `round5_targeted`, same source). Package-level counts include non-DNS use and are compared only within this cell.
 
-| Rank | Package | Release | Metric | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parser family |
 | ---: | --- | --- | ---: | --- |
 | 1 | [github.com/miekg/dns](https://pkg.go.dev/github.com/miekg/dns@v1.1.73#Msg.Unpack) | v1.1.73 | 16,234 | miekg/dns v1 (msg.go, msg_helpers.go, zmsg.go generated rdata unpackers) |
 | 2 | [github.com/google/gopacket/layers](https://pkg.go.dev/github.com/google/gopacket@v1.1.19/layers#DNS.DecodeFromBytes) | v1.1.19 | 5,428 | gopacket DNS layer (layers/dns.go) |

@@ -6,7 +6,7 @@
 
 Packagist lifetime package downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [php-ffmpeg/php-ffmpeg](https://github.com/PHP-FFMpeg/PHP-FFMpeg/blob/41fa00949ea2758cd34f076a8030df7198d57759/README.md) | v1.4.0 | 28,405,236 | 2 × 2 H.264/AVC video in MP4 | FFmpeg native MOV/MP4 parser |
 | 2 | [james-heinrich/getid3](https://github.com/JamesHeinrich/getID3/blob/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd/README.md) | v1.9.28 | 15,655,021 | 2 × 2 H.264 video in MP4 with one AAC mono audio stream | getID3 native QuickTime/MP4 parser |

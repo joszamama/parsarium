@@ -6,7 +6,7 @@
 
 Homebrew install-on-request count over 365 days.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Homebrew installs (365 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [ffmpeg](https://ffmpeg.org/doxygen/trunk/group__lavf__decoding.html) | 9.0.2 | 1,763,198 | ID3v2 title and identified MP3 audio stream | FFmpeg libavformat MP3 demuxer and ID3v2 metadata reader |
 | 2 | [mpv](https://mpv.io/manual/stable/) | 0.42.0 | 91,258 | ID3v2 title, MP3 audio track codec and duration from local tagged file | libmpv local media frontend over FFmpeg libavformat and libavcodec |
@@ -24,6 +24,6 @@ These paths lack a positive primary metric. Their figures are reported separatel
 
 | Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
 | ---: | --- | --- | --- | ---: | --- | --- |
-| 1 | [vlc](https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html) | 3.0.24 | [Debian source installed count](https://sources.debian.org/src/vlc/) | 68,409 | ID3v2 title and recognized MP3 audio track from valid local tagged MP3 | VLC media parser with bundled TagLib and MPEG audio plugins |
+| 1 | [vlc](https://www.videolan.org/developers/vlc/doc/doxygen/html/group__libvlc__media.html) | 3.0.24 | [Debian installations (popcon)](https://sources.debian.org/src/vlc/) | 68,409 | ID3v2 title and recognized MP3 audio track from valid local tagged MP3 | VLC media parser with bundled TagLib and MPEG audio plugins |
 
 The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

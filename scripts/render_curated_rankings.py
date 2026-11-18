@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from metric_labels import SUPPLEMENTAL_BY_KIND, primary_label
+
 
 ROOT = Path(__file__).resolve().parents[1]
 LABELS = {"http11": "HTTP/1.1", "ascii_ply": "ASCII PLY",
@@ -33,7 +35,7 @@ def cell_text(choice: dict) -> str:
              "## Primary within-cell adoption metric", "",
              (f"{metadata.get('name', metadata.get('metric', choice['metric_field']))}. "
               f"{metadata.get('limitation', '')}").rstrip(), "",
-             "| Rank | Package | Release | Metric | Parsed scope | Parser family |",
+             f"| Rank | Package | Release | {primary_label(ecosystem, choice['metric_field'])} | Parsed scope | Parser family |",
              "| ---: | --- | --- | ---: | --- | --- |"]
     if not primary:
         lines.append("| — | No selected path with a positive primary metric | — | — | — | — |")
@@ -50,8 +52,7 @@ def cell_text(choice: dict) -> str:
                       "| ---: | --- | --- | --- | ---: | --- | --- |"])
         for item in secondary:
             parser = parsers[item["name"]]
-            kind = ("Debian source installed count" if item["supplemental_kind"] ==
-                    "debian_source_installed" else "GitHub upstream stars")
+            kind = SUPPLEMENTAL_BY_KIND[item["supplemental_kind"]]
             lines.append(f"| {item['supplemental_rank']} | "
                          f"[{item['name']}]({parser['documentation']}) | "
                          f"{item['version']} | [{kind}]({item['supplemental_url']}) | "

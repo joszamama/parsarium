@@ -6,7 +6,7 @@
 
 PyPI Stats last_month downloads excluding known mirrors.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [scipy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.wavfile.read.html) | 1.18.1 | 292,476,549 | PCM samples | SciPy WAV parser |
 | 2 | [av](https://pyav.org/docs/stable/api/container.html) | 19.0.2 | 29,885,680 | PCM samples | FFmpeg libavformat/libavcodec via PyAV |

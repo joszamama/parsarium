@@ -6,7 +6,7 @@
 
 deps.dev `directDependentCount` summed over every Maven release, captured 2026-11-17 ([snapshot](registry-snapshot.json)). A dependent is counted once per release it depends on. The default-release count alone is skewed by release age: json-simple 1.1.1 (2012) shows 1,163 while jackson-databind 2.23.0 shows 367. The single-release maximum is a cross-check; summed counts rank the ten selected package paths as shown. The `com.alibaba:fastjson` coordinate total spans both 1.x and 2.x; only the pinned 1.x release is selected here, and its 2.x releases are a fastjson2 facade. Package adoption is not JSON-specific use.
 
-| Rank | Package | Release | Metric | Max single release | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Max single release | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | ---: | --- | --- |
 | 1 | [jackson-databind](https://javadoc.io/static/com.fasterxml.jackson.core/jackson-databind/2.23.0/com/fasterxml/jackson/databind/ObjectMapper.html) | 2.23.0 | 162,890 | 4,098 (2.18.2) | RFC 8259 JSON text into untyped Map/List | Jackson (jackson-core streaming parser + databind untyped mapping) |
 | 2 | [jackson-core](https://javadoc.io/static/com.fasterxml.jackson.core/jackson-core/2.23.0/com/fasterxml/jackson/core/JsonFactory.html) | 2.23.0 | 80,053 | 1,934 (2.18.2) | RFC 8259 JSON text from local InputStream into streaming tokens | Jackson (same tokenizer driven by jackson-databind) |

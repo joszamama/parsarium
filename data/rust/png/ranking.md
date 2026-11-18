@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [png](https://docs.rs/png/0.18.1/png/) | 0.18.1 | 113,671,971 | Decoded PNG dimensions and first pixel | image-rs PNG lineage |
 | 2 | [image](https://docs.rs/image/0.25.10/image/) | 0.25.10 | 79,812,514 | Decoded PNG dimensions and first pixel | image-rs PNG lineage |

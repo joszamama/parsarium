@@ -6,7 +6,7 @@ Three control-verified third-party paths are selected. The ceiling is ten; the c
 
 Packagist lifetime downloads, captured 2026-11-17 (purrphp/yaml: targeted lookup, 2026-11-18) ([snapshot](registry-snapshot.json)). Values are package adoption, mostly transitive, not YAML-specific use, and are compared only within this cell. pecl/yaml is a php-ext (PIE) package: its count covers installs through Packagist only, not PECL or distribution packages.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [symfony/yaml](https://symfony.com/doc/8.1/components/yaml.html) | v8.1.11 | 926,050,815 | One YAML document via `Yaml::parse(string, Yaml::PARSE_OBJECT_FOR_MAP)` into an exact ordered typed tree | Symfony Yaml own Parser/Inline/Unescaper |
 | 2 | [pecl/yaml](https://www.php.net/manual/en/function.yaml-parse.php) | 2.3.0 | 55,298 | One YAML document via `yaml_parse(string)` with a `YAML_MAP_TAG` callback into an exact ordered typed tree | libyaml via the PECL yaml C extension |

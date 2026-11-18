@@ -6,7 +6,7 @@
 
 npm downloads over 2026-10-17 to 2026-11-15 (30 days), observed 2026-11-17T03:16:41Z ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [json5](https://github.com/json5/json5/blob/c3a75242772a5026a49c4017a16d9b3543b62776/README.md#json5parse) | 2.2.3 | 1,214,931,394 | One JSON text from local bytes decoded as strict UTF-8 and passed to `JSON5.parse(text)`; trailing tokens rejected, JSON5-only syntax also accepted | json5 character lexer and parse-state machine |
 | 2 | [jsonc-parser](https://github.com/microsoft/node-jsonc-parser/blob/v3.3.1/README.md#parser) | 3.3.1 | 401,936,432 | One strict UTF-8 local JSON text via `parseTree(text, errors, strictOptions)`; zero errors and exact type-tagged AST tree | Microsoft jsonc-parser scanner and event/tree parser |

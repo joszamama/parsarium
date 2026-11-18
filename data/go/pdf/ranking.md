@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/ledongthuc/pdf](https://pkg.go.dev/github.com/ledongthuc/pdf@v0.0.0-20261020125853-5e46805f718e) | v0.0.0-20261020125853-5e46805f718e | 358 | page count | rsc PDF reader lineage |
 | 2 | [github.com/pdfcpu/pdfcpu/pkg/api](https://pkg.go.dev/github.com/pdfcpu/pdfcpu/pkg/api@v0.16.4) | v0.16.4 | 291 | page count | pdfcpu PDF processor |

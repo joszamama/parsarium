@@ -19,6 +19,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from audit_projects import fully_runnable
 from audit_upstream_repositories import load_rows as load_upstream, registry_name
+from metric_labels import GENERIC_HEADERS, normalize
 from format_registry import (ECOSYSTEMS as REGISTRY_ECOSYSTEMS, FORMAT_RECORDS, catalog_format,
                              resolve_data_path)
 
@@ -202,24 +203,46 @@ def repo_link(path: str) -> str:
     return f"{REPO_URL}/blob/main/{path}"
 
 
-def ranking_rows(path: Path) -> tuple[str, dict[str, tuple[str, str, str]]]:
-    """Read the recorded within-cell metric without inferring missing values."""
-    metric = "recorded adoption metric"
+def ranking_rows(path: Path, ecosystem: str) -> dict[str, tuple[str, str, str, str]]:
+    """Read each ranked row's value and the name of the metric it counts.
+
+    Ranking tables differ in their columns. The value is the first numeric
+    column after the release; its header names the metric unless the header is
+    generic, in which case a Signal column (supplemental rows) or the cell's
+    primary metric names it. Missing values are never inferred.
+    """
     rows = {}
+    header: list[str] = []
+    numeric = re.compile(r"^\*{0,2}(\d[\d,\.]*)\*{0,2}(?:\s|$)")
     for line in path.read_text(encoding="utf-8").splitlines():
         if not line.startswith("|"):
             continue
         columns = [part.strip() for part in line.strip("|").split("|")]
         if len(columns) < 4:
             continue
-        if columns[0] == "Rank":
-            metric = columns[3]
+        if columns[0].casefold().startswith(("rank", "supplemental rank")):
+            header = columns
             continue
-        package = re.search(r"\[([^\]]+)\]\([^)]+\)", columns[1])
-        if package and (columns[0].rstrip("=").isdigit() or columns[0] in {"unranked", "—"}):
-            rank = "unranked" if columns[0] == "—" else columns[0]
-            rows[package.group(1).casefold()] = (rank, columns[3], columns[2])
-    return metric, rows
+        linked_name = re.search(r"\[([^\]]+)\]\([^)]+\)", columns[1])
+        name = linked_name.group(1) if linked_name else columns[1].strip("`* ")
+        if not (name and (columns[0].rstrip("=").isdigit() or columns[0] in {"unranked", "—"})):
+            continue
+        index = next((i for i in range(3, len(columns)) if numeric.match(columns[i])), None)
+        if index is None:
+            continue
+        label = header[index] if index < len(header) else ""
+        if label.casefold() in GENERIC_HEADERS or not label:
+            signal = next((columns[i] for i, name in enumerate(header)
+                           if name.casefold() == "signal" and i < len(columns)), "")
+            linked = re.search(r"\[([^\]]+)\]", signal)
+            label = linked.group(1) if linked else (signal or "metric")
+        label = normalize(ecosystem, label)
+        if "github stars" in columns[index].casefold():
+            label = "GitHub stars"
+        rank = "unranked" if columns[0] == "—" else columns[0]
+        value = numeric.match(columns[index]).group(1)
+        rows[name.casefold()] = (rank, value, columns[2], label)
+    return rows
 
 
 def unresolved_leads(cell: dict, eco: str, fmt: str) -> int:
@@ -274,7 +297,7 @@ def build(output: Path) -> None:
         entries = read_json(ROOT / source)
         if len(entries) != cell["verified_third_party_count"]:
             raise ValueError(f"count mismatch in {source}")
-        metric, ranks = ranking_rows(ROOT / f"data/{eco}/{fmt}/ranking.md")
+        ranks = ranking_rows(ROOT / f"data/{eco}/{fmt}/ranking.md", eco)
         normalized_rows = defaultdict(list)
         rows_by_release = defaultdict(list)
         for ranking_name, ranked_row in ranks.items():
@@ -357,7 +380,7 @@ def build(output: Path) -> None:
             ranked = rank_for(entry)
             if ranked:
                 record["rank"] = ranked[0]
-                record["popularityMetric"] = metric
+                record["popularityMetric"] = ranked[3]
                 record["metricValue"] = ranked[1]
             if project:
                 project_path, _ = project

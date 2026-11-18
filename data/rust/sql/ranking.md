@@ -6,7 +6,7 @@ Ten third-party paths are control verified against the hand-written oracle in [c
 
 crates.io recent_downloads (trailing 90 days), captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [sqlparser](https://docs.rs/sqlparser/0.64.0/sqlparser/parser/struct.Parser.html#method.parse_sql) | 0.64.0 | 18,971,518 | `Parser::parse_sql(&GenericDialect, local UTF-8 text) -> Vec<Statement>`; dialect: GenericDialect | sqlparser-rs tokenizer and recursive-descent parser |
 | 2 | [pg_query](https://docs.rs/pg_query/18.1.0/pg_query/fn.parse.html) | 18.1.0 | 2,607,956 | `pg_query::parse(local UTF-8 text, ParserOptions::DEFAULT) -> ParseResult`; dialect: PostgreSQL | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |

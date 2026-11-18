@@ -6,7 +6,7 @@ Five verified third-party path(s), ranked by one metric. The ceiling is ten; the
 
 Packagist total downloads, from [registry-snapshot.json](registry-snapshot.json) captured 2026-11-17. Package-level counts include non-DNS use and are compared only within this cell.
 
-| Rank | Package | Release | Metric | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parser family |
 | ---: | --- | --- | ---: | --- |
 | 1 | [react/dns](https://github.com/reactphp/dns/blob/v1.14.0/src/Protocol/Parser.php#L16-L35) | v1.14.0 | 179,404,103 | ReactPHP DNS protocol Parser (src/Protocol/Parser.php) |
 | 2 | [daverandom/libdns](https://github.com/DaveRandom/LibDNS/blob/v2.1.0/examples/AQuery.php) | v2.1.0 | 66,619,313 | LibDNS (Decoder, DecodingContext, Packets\Packet and Records\Types decoders) |

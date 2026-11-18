@@ -6,7 +6,7 @@ Ten third-party paths are control verified against the hand-written oracle in [c
 
 PyPI Stats last_month downloads (mirrors excluded), captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [sqlparse](https://sqlparse.readthedocs.io/en/0.6.1/api.html#sqlparse.parse) | 0.6.1 | 125,550,021 | `sqlparse.parse(local SQL text) -> tuple of grouped Statement token trees`; dialect: none (sqlparse has no dialect option) | sqlparse regex lexer and token-grouping engine (non-validating) |
 | 2 | [sqlglot](https://sqlglot.com/sqlglot.html#parse) | 30.33.0 | 91,735,974 | `sqlglot.parse(local SQL text, read=None) -> list of Expression trees`; dialect: sqlglot default dialect (read=None) | sqlglot pure-Python tokenizer and recursive-descent parser |

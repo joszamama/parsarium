@@ -6,7 +6,7 @@ Ten verified third-party path(s), ranked by one metric. The cell is at its ceili
 
 PyPI Stats last_month downloads excluding known mirrors, from [registry-snapshot.json](registry-snapshot.json) captured 2026-11-17 (namespy, pydns3 and pyasyncdns on 2026-11-18, under `round4_targeted` and `round5_targeted`). Package-level counts include non-DNS use and are compared only within this cell.
 
-| Rank | Package | Release | Metric | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parser family |
 | ---: | --- | --- | ---: | --- |
 | 1 | [dnspython](https://dnspython.readthedocs.io/en/v2.9.2/message-make.html#dns.message.from_wire) | 2.9.2 | 286,812,791 | dnspython wire reader (dns/message.py _WireReader, dns/wire.py Parser, dns/name.py) |
 | 2 | [twisted](https://docs.twisted.org/en/twisted-26.10.0/api/twisted.names.dns.Message.html#fromStr) | 26.10.0 | 15,068,322 | Twisted Names (twisted/names/dns.py Message.decode, Query, RRHeader, Name and per-type Record_* decoders) |

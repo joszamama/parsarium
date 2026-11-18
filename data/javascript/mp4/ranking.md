@@ -6,7 +6,7 @@
 
 npm registry tarball downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [mediabunny](https://www.npmjs.com/package/mediabunny) | 1.65.2 | 22,132,891 | tracks+duration | mediabunny |
 | 2 | [music-metadata](https://www.npmjs.com/package/music-metadata) | 12.4.0 | 8,670,098 | tracks+title | music-metadata/ISO BMFF reader |

@@ -6,7 +6,7 @@ Six control-verified third-party paths. The ceiling is ten; the cell is not padd
 
 deps.dev `directDependentCount` summed over every Maven release, captured 2026-11-17 ([snapshot](registry-snapshot.json)), the metric of the Java JSON cell. Package adoption, not YAML-specific use. Scala cross-builds are separate Maven artifacts; the pinned artifact's own count is used and the others are not summed.
 
-| Rank | Package | Release | Metric | Control feedback difference | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Control feedback difference | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [snakeyaml](https://javadoc.io/static/org.yaml/snakeyaml/2.7/org/yaml/snakeyaml/Yaml.html) | 2.7 | 10,859 | 119 lines / 118 tuples | SnakeYAML |
 | 2 | [snakeyaml-engine](https://javadoc.io/static/org.snakeyaml/snakeyaml-engine/3.2/org.snakeyaml.engine/org/snakeyaml/engine/v2/api/Load.html) | 3.2 | 493 | 124 lines / 122 tuples | SnakeYAML Engine |

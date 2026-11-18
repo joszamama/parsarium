@@ -6,7 +6,7 @@
 
 Homebrew install-on-request count over 365 days.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Homebrew installs (365 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [imagemagick](https://imagemagick.org/magick-wand/) | 7.1.2-35 | 778,693 | Rendered PDF page sequence and first page dimensions | ImageMagick PDF coder + Ghostscript PDF interpreter |
 | 2 | [poppler-glib](https://poppler.freedesktop.org/api/glib/PopplerDocument.html) | 26.11.0 | 688,177 | PDF document page count | Poppler PDF parser, GLib C frontend |
@@ -24,6 +24,6 @@ These paths lack a positive primary metric. Their figures are reported separatel
 
 | Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
 | ---: | --- | --- | --- | ---: | --- | --- |
-| 1 | [atril](https://github.com/mate-desktop/atril/blob/v1.28.2/libdocument/ev-document-factory.h) | 1.28.2 | [Debian source installed count](https://sources.debian.org/src/atril/) | 35,152 | PDF page count through Atril libdocument C API | Atril PDF backend over Poppler GLib |
+| 1 | [atril](https://github.com/mate-desktop/atril/blob/v1.28.2/libdocument/ev-document-factory.h) | 1.28.2 | [Debian installations (popcon)](https://sources.debian.org/src/atril/) | 35,152 | PDF page count through Atril libdocument C API | Atril PDF backend over Poppler GLib |
 
 The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

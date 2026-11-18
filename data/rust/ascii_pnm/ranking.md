@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [image](https://docs.rs/image/0.25.10/image/fn.load_from_memory_with_format.html) | 0.25.10 | 79,503,423 | P3 ASCII PPM RGB pixels | image-rs PNM decoder |
 | 2 | [imagesize](https://docs.rs/imagesize/0.15.0/imagesize/fn.blob_size.html) | 0.15.0 | 20,457,593 | P3 ASCII PPM header dimensions only; raster samples are not decoded | imagesize PNM header reader |

@@ -6,7 +6,7 @@
 
 npm registry tarball downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [image-size](https://github.com/image-size/image-size#usage) | 2.1.0 | 139,419,348 | P3 header dimensions and PNM type | image-size PNM header reader |
 | 2 | [image-meta](https://www.npmjs.com/package/image-meta) | 0.2.2 | 12,071,030 | P3 header dimensions and PNM type | image-meta reader based on image-size |

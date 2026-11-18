@@ -6,7 +6,7 @@
 
 npm registry tarball downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [mediabunny](https://mediabunny.dev/guide/reading-media-files) | 1.66.0 | 26,071,768 | Every MPEG Layer III frame of an untagged stream from local bytes, demuxed by mediabunny's own frame-header reader: format, codec, sample rate, channels, frame count, frame bytes, samples per channel (from duration); no audio decode | mediabunny TypeScript MP3 demuxer |
 | 2 | [music-metadata](https://www.npmjs.com/package/music-metadata) | 12.4.0 | 9,827,896 | tags+audio_header | music-metadata |

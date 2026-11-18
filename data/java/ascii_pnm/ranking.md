@@ -6,7 +6,7 @@
 
 deps.dev version-level directDependentCount.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [jai-imageio-core](https://github.com/jai-imageio/jai-imageio-core#jai-imageio-core-standalone) | 1.4.0 | 64 | ASCII PPM dimensions and red/green pixels | JAI ImageIO PNM plugin |
 | 2 | [im4java](https://im4java.sourceforge.net/docs/dev-guide.html) | 1.4.0 | 37 | ASCII P3 PPM format and dimensions | im4java wrapper over host ImageMagick Netpbm decoder |

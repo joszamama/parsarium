@@ -79,7 +79,7 @@ class CTomlPathsTest(unittest.TestCase):
         values = [item["supplemental_metric"]["value"] for item in parsers]
         self.assertEqual(values, sorted(values, reverse=True))
         ranking = (BASE / "ranking.md").read_text(encoding="utf-8")
-        self.assertIn("| Rank | Package | Release | Metric | Parsed scope | Parser family |", ranking)
+        self.assertIn("| Rank | Package | Release | GitHub stars (star fallback) | Parsed scope | Parser family |", ranking)
         for rank, item in enumerate(parsers, 1):
             stars = PATHS[item["name"]][1]
             self.assertIsNone(item["metric"]["value"])

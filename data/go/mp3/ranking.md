@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/faiface/beep/mp3](https://pkg.go.dev/github.com/faiface/beep/mp3@v1.1.0) | v1.1.0 | 444 | decoded samples and sample rate | hajime/go-mp3 via beep |
 | 2 | [github.com/dhowden/tag](https://pkg.go.dev/github.com/dhowden/tag@v0.0.0-20240417053706-3d75831295e8) | v0.0.0-20240417053706-3d75831295e8 | 381 | ID3v2.3 title | dhowden/tag lineage |

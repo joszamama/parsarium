@@ -6,7 +6,7 @@
 
 npm registry tarball downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [music-metadata](https://www.npmjs.com/package/music-metadata) | 12.4.0 | 8,670,098 | header | music-metadata |
 | 2 | [audio-decode](https://www.npmjs.com/package/audio-decode) | 3.12.0 | 1,452,126 | samples | audiojs/decode |

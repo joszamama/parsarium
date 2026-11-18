@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [ply-rs-bw](https://docs.rs/ply-rs-bw/4.0.1/ply_rs_bw/) | 4.0.1 | 732,866 | complete ASCII PLY: header, vertices, faces | ply-rs fork |
 | 2 | [ply-rs](https://docs.rs/ply-rs/0.1.3/ply_rs/) | 0.1.3 | 191,394 | complete ASCII PLY: header, vertices, faces | ply-rs lineage |

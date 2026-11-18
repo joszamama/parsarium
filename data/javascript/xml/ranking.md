@@ -6,7 +6,7 @@
 
 npm downloads over 2026-10-17 to 2026-11-15 (30 days), observed 2026-11-17T03:39:15Z ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [saxes](https://github.com/lddubeau/saxes/blob/v6.0.0/README.md) | 6.0.0 | 601,886,067 | One namespace-aware XML 1.0 document from local bytes as SAX events | saxes XML 1.0 + Namespaces state machine |
 | 2 | [jsdom](https://github.com/jsdom/jsdom/blob/31.0.1/README.md) | 31.0.1 | 587,846,374 | One namespace-aware XML 1.0 document from locally decoded text as a jsdom XML DOM | saxes state machine (saxes 6.0.0, shared with rank 1) under jsdom's XML document builder |

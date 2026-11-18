@@ -6,7 +6,7 @@
 
 PyPI Stats last_month downloads excluding known mirrors.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [pypdf](https://pypdf.readthedocs.io/en/latest/modules/PdfReader.html) | 7.0.1 | 125,991,621 | page text | pypdf pure Python |
 | 2 | [PyMuPDF](https://pymupdf.readthedocs.io/en/latest/how-to-open-a-file.html) | 2.1 | 83,199,606 | page text | MuPDF |

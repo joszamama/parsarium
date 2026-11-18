@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [httparse](https://docs.rs/httparse/1.10.1/httparse/) | 1.10.1 | 230,801,924 | request head: method, target, HTTP minor version, headers | httparse core |
 | 2 | [async-h1](https://docs.rs/async-h1/2.3.4/async_h1/) | 2.3.4 | 585,900 | async response: status, body | httparse core |

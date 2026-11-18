@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [svgtypes](https://docs.rs/svgtypes/0.16.2/svgtypes/) | 0.16.2 | 16,856,466 | SVG path command grammar | svgtypes lineage |
 | 2 | [usvg](https://docs.rs/usvg/0.50.0/usvg/) | 0.50.0 | 16,434,417 | SVG document tree and dimensions | usvg lineage |

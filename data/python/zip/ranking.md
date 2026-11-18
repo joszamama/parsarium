@@ -6,7 +6,7 @@
 
 PyPI Stats last_month downloads excluding known mirrors.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [fsspec](https://filesystem-spec.readthedocs.io/en/latest/api.html#fsspec.implementations.zip.ZipFileSystem) | 2026.9.0 | 556,880,889 | DEFLATE ZIP entry name and content | fsspec ZipFileSystem via CPython zipfile |
 | 2 | [zipp](https://zipp.readthedocs.io/en/latest/) | 4.1.2 | 366,031,309 | DEFLATE ZIP entry name and content | zipp via CPython zipfile |

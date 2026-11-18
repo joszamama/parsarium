@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/valyala/fasthttp](https://pkg.go.dev/github.com/valyala/fasthttp@v1.78.0) | v1.78.0 | 9,851 | request message | fasthttp HTTP/1 parser |
 | 2 | [github.com/gobwas/httphead](https://pkg.go.dev/github.com/gobwas/httphead@v0.1.0) | v0.1.0 | 145 | request line only | gobwas HTTP request-line parser |

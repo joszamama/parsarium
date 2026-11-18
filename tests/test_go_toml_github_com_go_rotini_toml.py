@@ -86,7 +86,7 @@ class GoTomlGoRotiniTest(unittest.TestCase):
         self.assertNotIn(PACKAGE, {lead["name"] for lead in leads})
         self.assertIn(f"[{PACKAGE}](", (BASE / "ranking.md").read_text())
         self.assertTrue((BASE / "ranking.md").read_text().count(
-            "| Rank | Package | Release | Metric | Parsed scope | Parser family |") == 1)
+            "| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |") == 1)
 
     def test_feedback_is_stable_and_differential(self):
         result, = [item for item in read(BASE / "afl-feedback.json")["results"]

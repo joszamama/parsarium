@@ -6,7 +6,7 @@
 
 npm registry tarball downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [http-parser-js](https://github.com/creationix/http-parser-js) | 0.5.10 | 140,107,873 | request | http-parser-js |
 | 2 | [http-z](https://www.npmjs.com/package/http-z) | 8.1.1 | 4,112,287 | request | http-z |

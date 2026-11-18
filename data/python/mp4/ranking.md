@@ -6,7 +6,7 @@
 
 PyPI Stats last_month downloads excluding known mirrors.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [imageio](https://imageio.readthedocs.io/en/stable/reference/userapi.html) | 2.38.1 | 37,144,291 | decoded video frame and codec | ImageIO via imageio-ffmpeg/FFmpeg |
 | 2 | [opencv-python-headless](https://pypi.org/project/opencv-python-headless/5.0.0.93/) | 5.0.0.93 | 37,125,554 | decoded video frame | OpenCV FFmpeg video backend |

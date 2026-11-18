@@ -156,7 +156,7 @@ class JavaTomlPilotTest(unittest.TestCase):
 
     def test_ranking_table_header_and_rows(self):
         text = (BASE / "ranking.md").read_text(encoding="utf-8")
-        self.assertIn("| Rank | Package | Release | Metric | Parsed scope | Parser family |", text)
+        self.assertIn("| Rank | Package | Release | Direct dependents (deps.dev) | Parsed scope | Parser family |", text)
         for rank, parser in enumerate(read(BASE / "parsers.json"), 1):
             self.assertIn(f"| {rank} | [{parser['name']}]({parser['documentation']}) | {parser['version']} | "
                           f"{parser['metric']['value']:,} |", text)

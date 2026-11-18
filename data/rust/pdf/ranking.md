@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [lopdf](https://docs.rs/lopdf/0.47.0/lopdf/) | 0.47.0 | 14,326,139 | PDF page tree | lopdf |
 | 2 | [pdf-extract](https://docs.rs/pdf-extract/0.12.1/pdf_extract/) | 0.12.1 | 4,133,418 | PDF text extraction | lopdf |

@@ -6,7 +6,7 @@ Seven control-verified third-party paths. The ceiling is ten; this pilot does no
 
 pkg.go.dev Imported by package count, captured 2026-11-17 for the 'yaml' query and the routes in [round4-lead-check.json](round4-lead-check.json), and 2026-11-18 for the searches in [round6-lead-check.json](round6-lead-check.json) and [round7-lead-check.json](round7-lead-check.json) ([snapshot](registry-snapshot.json)). Package adoption, not YAML-specific use.
 
-| Rank | Package | Release | Metric | Local input API | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Local input API | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [gopkg.in/yaml.v2](https://pkg.go.dev/gopkg.in/yaml.v2@v2.4.0#Unmarshal) | v2.4.0 | 60,161 | yaml.Unmarshal([]byte, out) over one complete local YAML byte slice | go-yaml v2 |
 | 2 | [gopkg.in/yaml.v3](https://pkg.go.dev/gopkg.in/yaml.v3@v3.0.1#Node) | v3.0.1 | 44,731 | yaml.Unmarshal([]byte, *yaml.Node) over one complete local YAML byte slice | go-yaml v3 |

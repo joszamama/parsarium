@@ -6,7 +6,7 @@
 
 deps.dev `directDependentCount` summed over every Maven release, captured 2026-11-17 ([snapshot](registry-snapshot.json)). A dependent is counted once per release it depends on. The single-release maximum is recorded as a cross-check.
 
-| Rank | Package | Release | Metric | Max single release | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Max single release | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | ---: | --- | --- |
 | 1 | [jackson-dataformat-xml](https://github.com/FasterXML/jackson-dataformat-xml) | 2.23.0 | 25,682 | 725 (2.14.2) | Valid XML 1.0 from local InputStream projected to ordered Jackson tokens | Jackson XML projection over Woodstox StAX |
 | 2 | [xercesImpl](https://xerces.apache.org/xerces2-j/javadocs/xerces2/org/apache/xerces/parsers/DOMParser.html) | 2.12.2 | 2,474 | 549 (2.12.2) | Namespace-aware XML 1.0 into a W3C DOM | Apache Xerces2-J |

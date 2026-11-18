@@ -6,7 +6,7 @@
 
 npm registry tarball downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [sharp](https://sharp.pixelplumbing.com/api-constructor/) | 0.35.5 | 556,685,199 | pixels | libvips |
 | 2 | [pngjs](https://github.com/pngjs/pngjs/blob/main/README.md) | 7.0.0 | 349,449,466 | pixels | pngjs |

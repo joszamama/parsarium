@@ -6,7 +6,7 @@
 
 PyPI Stats last_month downloads excluding known mirrors.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [trimesh](https://trimesh.org/trimesh.html) | 5.2.0 | 9,032,509 | ASCII PLY triangle vertices and face count | trimesh PLY loader |
 | 2 | [vtk](https://vtk.org/doc/nightly/html/classvtkPLYReader.html) | 9.7.2 | 3,081,825 | ASCII PLY triangle vertices and face count | VTK PLYReader |

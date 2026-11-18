@@ -6,7 +6,7 @@
 
 GitHub stars of primary upstream repository.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | GitHub stars | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [ffmpeg](https://ffmpeg.org/doxygen/9.0/group__lavf__decoding.html) | 9.0.2 | 67,107 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | FFmpeg WAV demuxer and PCM decoder |
 | 2 | [raylib](https://github.com/raysan5/raylib/blob/6.2/src/raylib.h) | 6.2 | 35,640 | WAV sample rate, channel and frame counts, plus first four decoded PCM samples | raylib bundled dr_wav decoder |
@@ -24,6 +24,6 @@ These paths lack a positive primary metric. Their figures are reported separatel
 
 | Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
 | ---: | --- | --- | --- | ---: | --- | --- |
-| 1 | [gstreamer](https://gstreamer.freedesktop.org/documentation/wavparse/index.html) | 1.28.9 | [Debian source installed count](https://sources.debian.org/src/gstreamer1.0/) | 172,612 | explicit wavparse element interprets WAV and emits caps plus four PCM sample values | GStreamer wavparse plugin |
+| 1 | [gstreamer](https://gstreamer.freedesktop.org/documentation/wavparse/index.html) | 1.28.9 | [Debian installations (popcon)](https://sources.debian.org/src/gstreamer1.0/) | 172,612 | explicit wavparse element interprets WAV and emits caps plus four PCM sample values | GStreamer wavparse plugin |
 
 The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

@@ -2,7 +2,7 @@
 
 Three control-verified third-party paths are selected and ranked by Debian popcon installations of the source package (`sourcemax/by_inst`), with the binary package recorded beside it. The [snapshot](registry-snapshot.json) was captured 2026-11-17. Counts are a package adoption proxy and favor libraries with runtime packages; header-only libraries such as toml11 and cpptoml ship only `-dev` packages. Seven of ten slots are open.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Debian installations (popcon) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [toml++](https://github.com/marzer/tomlplusplus/tree/v3.4.0) | 3.4.0 | 3,536 | TOML 1.0.0 text from an in-memory std::string_view parsed into a toml::table node tree (header-only build, exceptions enabled) | toml++ (marzer/tomlplusplus) |
 | 2 | [toml11](https://github.com/ToruNiina/toml11/tree/v4.4.0) | 4.4.0 | 15 | TOML 1.0.0 text from an in-memory std::string parsed with spec v1.0.0 into a toml::value tree (header-only build) | toml11 (ToruNiina) |

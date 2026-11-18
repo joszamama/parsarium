@@ -6,7 +6,7 @@
 
 npm registry tarball downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [three](https://www.npmjs.com/package/three/v/0.187.0) | 0.187.0 | 115,315,336 | triangle mesh | Three.js PLYLoader family |
 | 2 | [three-stdlib](https://www.npmjs.com/package/three-stdlib/v/2.36.1) | 2.36.1 | 21,408,970 | triangle mesh | Three.js PLYLoader family |

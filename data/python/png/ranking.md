@@ -6,7 +6,7 @@
 
 PyPI Stats last_month downloads excluding known mirrors.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [Pillow](https://pillow.readthedocs.io/en/stable/reference/open_files.html) | 13.0.0 | 436,470,920 | pixels | Pillow PNG |
 | 2 | [matplotlib](https://matplotlib.org/stable/api/image_api.html) | 3.11.2 | 159,227,526 | pixels | Matplotlib via Pillow |

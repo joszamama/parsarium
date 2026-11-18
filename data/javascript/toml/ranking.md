@@ -6,7 +6,7 @@
 
 npm downloads over the last month (2026-10-18 to 2026-11-16), captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [smol-toml](https://github.com/squirrelchat/smol-toml/blob/v1.9.1/README.md#usage) | 1.9.1 | 252,264,468 | One TOML 1.0.0 document from local bytes decoded as strict UTF-8 via `parse(text, { integersAsBigInt: true })`; integers are BigInt, floats Number, date-times TomlDate with kind flags | smol-toml (own hand-written parser) |
 | 2 | [toml-eslint-parser](https://github.com/ota-meshi/toml-eslint-parser/blob/6008e35499342f1116262162d16dbcab0c84760c/README.md#usage-for-directly) | 1.0.3 | 7,684,028 | One TOML 1.0.0 document from local bytes decoded as strict UTF-8 via `parseTOML(text, { tomlVersion: '1.0.0' })`; typed tree from the syntax tree's resolved table keys and typed value nodes | toml-eslint-parser (own tokenizer and syntax-tree parser) |

@@ -6,7 +6,7 @@
 
 Packagist lifetime package downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [php-ffmpeg/php-ffmpeg](https://github.com/PHP-FFMpeg/PHP-FFMpeg/blob/41fa00949ea2758cd34f076a8030df7198d57759/README.md) | v1.4.0 | 28,405,236 | PCM16 codec, 8 kHz sample rate, mono channel count, 16-bit depth | FFmpeg native RIFF/WAVE parser |
 | 2 | [james-heinrich/getid3](https://github.com/JamesHeinrich/getID3/blob/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd/README.md) | v1.9.28 | 15,655,021 | RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count | getID3 native RIFF/WAVE parser |

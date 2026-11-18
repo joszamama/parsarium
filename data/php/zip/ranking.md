@@ -6,7 +6,7 @@
 
 Packagist lifetime package downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [alchemy/zippy](https://github.com/alchemy-fr/Zippy/blob/3546ecd8ad5a1a1efb13315a5ea8ff1c7a1d5ef8/src/Zippy.php) | 2.0.0 | 24,569,178 | entry name and decompressed entry bytes | Alchemy Zippy wrapper over PHP ZipArchive |
 | 2 | [pclzip/pclzip](https://github.com/ivanlanin/pclzip/blob/19dd1de9d3f5fc4d7d70175b4c344dee329f45fd/pclzip.lib.php) | 2.8.2 | 14,662,965 | entry name and decompressed entry bytes | PclZip PHP ZIP reader |

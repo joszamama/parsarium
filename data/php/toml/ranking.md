@@ -6,7 +6,7 @@
 
 Packagist total downloads, from the bounded search captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [internal/toml](https://packagist.org/packages/internal/toml) | 1.1.3 | 325,891 | One TOML document via `Toml::parse(string)`; Document AST walked into the typed tree and checked against `Document::toArray()` | internal/toml Lexer, recursive-descent Parser and AST |
 | 2 | [php-collective/toml](https://packagist.org/packages/php-collective/toml) | 0.1.5 | 28,378 | One TOML document via `Toml::tryParse(string)` (same Parser and Normalizer as `decode()`); AST walked into the typed tree and checked against the normalized array | php-collective/toml Lexer, Parser, AST and Normalizer |

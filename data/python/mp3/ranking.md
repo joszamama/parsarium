@@ -6,7 +6,7 @@
 
 PyPI Stats last_month downloads excluding known mirrors.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | PyPI downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [av](https://pyav.org/docs/stable/api/container.html) | 19.0.2 | 51,162,307 | ID3v2 tags and MP3 audio stream | FFmpeg libavformat via PyAV |
 | 2 | [soundfile](https://python-soundfile.readthedocs.io/en/latest/) | 0.14.0 | 35,041,933 | MP3 header, frame count | libsndfile MP3 decoder |

@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/go-audio/wav](https://pkg.go.dev/github.com/go-audio/wav@v1.1.0) | v1.1.0 | 314 | signs | mattetti/go-audio WAV lineage |
 | 2 | [github.com/faiface/beep/wav](https://pkg.go.dev/github.com/faiface/beep/wav@v1.1.0) | v1.1.0 | 223 | signs | beep WAV lineage |

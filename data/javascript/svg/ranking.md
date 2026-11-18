@@ -6,7 +6,7 @@
 
 npm registry tarball downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [sharp](https://sharp.pixelplumbing.com/api-input/) | 0.35.5 | 556,685,199 | dimensions | libvips/librsvg |
 | 2 | [svgo](https://svgo.dev/docs/introduction/) | 4.1.0 | 177,387,135 | optimized_paths | SVGO |

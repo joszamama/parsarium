@@ -6,7 +6,7 @@
 
 deps.dev `directDependentCount` summed over every Maven release, captured 2026-11-17 ([snapshot](registry-snapshot.json)). A dependent is counted once per release it depends on. Package adoption is not TOML-specific use.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [jackson-dataformat-toml](https://javadoc.io/doc/com.fasterxml.jackson.dataformat/jackson-dataformat-toml/2.23.0/com/fasterxml/jackson/dataformat/toml/TomlMapper.html) | 2.23.0 | 293 | TOML 1.0.0 text from a local file into a Jackson JsonNode tree; with PARSE_JAVA_TIME the four date/time kinds are java.time values in POJONodes | Jackson TOML (own JFlex Lexer and recursive Parser in com.fasterxml.jackson.dataformat.toml) |
 | 2 | [tomlj](https://javadoc.io/doc/org.tomlj/tomlj/2.2.0/org/tomlj/Toml.html) | 2.2.0 | 133 | TOML 1.0.0 text from a local file into TomlTable/TomlArray with Long, Double, Boolean, String and java.time values | tomlj (ANTLR 4 grammar TomlLexer.g4/TomlParser.g4 with generated lexer/parser and own visitors; origin Apache Tuweni toml) |

@@ -6,7 +6,7 @@
 
 Packagist lifetime package downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [james-heinrich/getid3](https://github.com/JamesHeinrich/getID3/blob/be83ea6ffbdac0301d83bee0d42f09e2a41bd0dd/README.md) | v1.9.28 | 15,655,021 | ID3v2.3 title, artist, album, and major version | getID3 native MP3 and ID3v2 parser |
 | 2 | [wapmorgan/mp3info](https://github.com/wapmorgan/Mp3Info/blob/e532c2e1997874f9c672c7810ce90ef15004ef94/README.md) | 0.1.1 | 1,511,066 | ID3v2.3 title, artist, album, and major version | Mp3Info native MP3 and ID3v2 parser |

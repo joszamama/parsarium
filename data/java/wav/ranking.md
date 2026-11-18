@@ -6,7 +6,7 @@
 
 deps.dev exact-version directDependentCount.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Direct dependents (deps.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [jcodec](https://repo.maven.apache.org/maven2/org/jcodec/jcodec/0.2.5/jcodec-0.2.5-javadoc.jar) | 0.2.5 | 44 | WAV sample rate, channels and bit depth | JCodec WAV demuxer |
 | 2 | [metadata-extractor](https://repo.maven.apache.org/maven2/com/drewnoakes/metadata-extractor/2.19.0/metadata-extractor-2.19.0-javadoc.jar) | 2.19.0 | 38 | WAV sample rate, channels and bit depth | metadata-extractor RIFF/WAV metadata reader |

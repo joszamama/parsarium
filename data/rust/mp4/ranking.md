@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [symphonia](https://docs.rs/symphonia/0.6.1/symphonia/) | 0.6.1 | 11,081,825 | MP4 AAC track and first packet | Symphonia ISO-MP4 demuxer |
 | 2 | [symphonia-format-isomp4](https://docs.rs/symphonia-format-isomp4/0.6.1/symphonia_format_isomp4/) | 0.6.1 | 6,908,572 | MP4 AAC track and first packet | Symphonia ISO-MP4 demuxer |

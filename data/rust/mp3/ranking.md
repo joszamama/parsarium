@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [symphonia-metadata](https://docs.rs/symphonia-metadata/0.6.1/symphonia_metadata/) | 0.6.1 | 11,287,777 | ID3v2 frame keys | Symphonia ID3v2 reader |
 | 2 | [symphonia](https://docs.rs/symphonia/0.6.1/symphonia/) | 0.6.1 | 11,081,825 | MP3 track header and audio packet | Symphonia MP3 demuxer |

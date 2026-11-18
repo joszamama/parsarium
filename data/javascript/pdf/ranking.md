@@ -6,7 +6,7 @@
 
 npm registry tarball downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | npm downloads (last month) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [pdfjs-dist](https://mozilla.github.io/pdf.js/api/draft/module-pdfjsLib.html) | 6.5.438 | 180,124,613 | text | mozilla/pdf.js |
 | 2 | [pdf-lib](https://pdf-lib.js.org/docs/api/classes/pdfdocument) | 1.17.1 | 100,208,095 | page_metadata | pdf-lib |

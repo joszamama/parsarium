@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days), from the search API in [registry-snapshot.json](registry-snapshot.json), captured 2026-11-17.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [serde_json](https://docs.rs/serde_json/1.0.154/serde_json/) | 1.0.154 | 438,065,825 | `from_slice` into an untyped `Value` tree: root kind, container and scalar counts, nesting depth, decoded strings, numbers, top-level keys | serde_json deserializer |
 | 2 | [aws-smithy-json](https://docs.rs/aws-smithy-json/0.65.1/aws_smithy_json/deserialize/fn.json_token_iter.html) | 0.65.1 | 59,322,077 | `json_token_iter` from local bytes; adapter builds the same exact structure summary from token events | aws-smithy-json token iterator |

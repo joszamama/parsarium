@@ -6,7 +6,7 @@ Ten verified third-party path(s), ranked by one metric. The ceiling is ten; the 
 
 crates.io recent_downloads (90 days), from [registry-snapshot.json](registry-snapshot.json) captured 2026-11-17 (targeted lookups under `round2_targeted`, same source and day). Package-level counts include non-DNS use and are compared only within this cell.
 
-| Rank | Package | Release | Metric | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parser family |
 | ---: | --- | --- | ---: | --- |
 | 1 | [hickory-proto](https://docs.rs/hickory-proto/0.26.3/hickory_proto/op/struct.Message.html#method.from_vec) | 0.26.3 | 36,097,977 | Hickory DNS proto (formerly trust-dns-proto): BinDecoder and Message/Record decoders |
 | 2 | [simple-dns](https://docs.rs/simple-dns/0.13.1/simple_dns/struct.Packet.html#method.parse) | 0.13.1 | 4,084,902 | simple-dns (src/dns/packet.rs, header.rs, name.rs, rdata/*) |

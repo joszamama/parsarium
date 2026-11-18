@@ -10,7 +10,7 @@ Debian popcon installations ([registry-snapshot.json](registry-snapshot.json), c
 
 Since 2026-11-18, C and C++ cells may fill slots left empty after primary and Debian paths with pinned tagged releases of format-specific upstream repositories that have at least 100 GitHub stars ([PROTOCOL.md](../../../PROTOCOL.md)). Stars measure repository interest, not downloads or installations; they are ranked separately and are not comparable with popcon values. The counts come from the GitHub repos API, captured 2026-11-18 with response hashes in the snapshot's `round_6_star_fallback` record.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | GitHub stars (star fallback) | Parsed scope | Parser family |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [tomlc17](https://github.com/cktan/tomlc17/blob/R261116/API.md#toml_parse) | R261116 | 201 GitHub stars (secondary, repository interest, not downloads; popcon: not packaged) | TOML 1.0.0 byte buffer via `toml_parse(src, len)` into a `toml_datum_t` tree | tomlc17 (own single-file `src/tomlc17.c`) |
 

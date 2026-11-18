@@ -6,7 +6,7 @@
 
 GitHub stars of primary upstream repository.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | GitHub stars | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [imagemagick](https://imagemagick.org/magick++/) | 7.1.2-35 | 17,852 | Rendered PDF page sequence and first page dimensions | ImageMagick PDF coder + Ghostscript PDF interpreter |
 | 2 | [libvips](https://www.libvips.org/API/current/ctor.Image.pdfload.html) | 8.18.7 | 11,801 | PDF page count and first page dimensions from PDF loader header | libvips vips-poppler module over Poppler PDF parser |
@@ -22,8 +22,8 @@ These paths lack a positive primary metric. Their figures are reported separatel
 
 | Supplemental rank | Package | Release | Signal | Value | Parsed scope | Parser family |
 | ---: | --- | --- | --- | ---: | --- | --- |
-| 1 | [ghostscript](https://ghostscript.readthedocs.io/en/master/Language.html) | 10.08.0 | [Debian source installed count](https://sources.debian.org/src/ghostscript/) | 165,837 | PDF interpreter NumPages metadata | Ghostscript PDF interpreter |
-| 2 | [poppler](https://poppler.freedesktop.org/api/cpp/classpoppler_1_1document.html) | 26.11.0 | [Debian source installed count](https://sources.debian.org/src/poppler/) | 141,779 | PDF document page count | Poppler PDF parser, C++ frontend |
-| 3 | [mupdf](https://mupdf.readthedocs.io/en/1.28.6/cookbook/c/example.html) | 1.28.6 | [Debian source installed count](https://sources.debian.org/src/mupdf/) | 20,144 | PDF document page count | MuPDF C document parser |
+| 1 | [ghostscript](https://ghostscript.readthedocs.io/en/master/Language.html) | 10.08.0 | [Debian installations (popcon)](https://sources.debian.org/src/ghostscript/) | 165,837 | PDF interpreter NumPages metadata | Ghostscript PDF interpreter |
+| 2 | [poppler](https://poppler.freedesktop.org/api/cpp/classpoppler_1_1document.html) | 26.11.0 | [Debian installations (popcon)](https://sources.debian.org/src/poppler/) | 141,779 | PDF document page count | Poppler PDF parser, C++ frontend |
+| 3 | [mupdf](https://mupdf.readthedocs.io/en/1.28.6/cookbook/c/example.html) | 1.28.6 | [Debian installations (popcon)](https://sources.debian.org/src/mupdf/) | 20,144 | PDF document page count | MuPDF C document parser |
 
 The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

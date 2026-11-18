@@ -6,7 +6,7 @@
 
 crates.io recent downloads (90 days).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | crates.io downloads (90 days) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [zip](https://docs.rs/zip/9.5.1/zip/) | 9.5.1 | 102,480,927 | Entry name and decompressed text | zip-rs lineage |
 | 2 | [async_zip](https://docs.rs/async_zip/0.0.19/async_zip/) | 0.0.19 | 2,587,792 | Entry name and decompressed text via deprecated memory API | rs-async-zip lineage |

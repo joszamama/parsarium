@@ -6,7 +6,7 @@
 
 Packagist lifetime package downloads.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Packagist downloads (all time) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [setasign/fpdi](https://github.com/Setasign/FPDI/blob/be29a9d43c64f06569c1075f181e43d829a3d5bb/README.md) | v2.6.10 | 186,481,910 | One PDF page, 216 × 279 mm rounded imported MediaBox | FPDI native PHP PDF object reader |
 | 2 | [smalot/pdfparser](https://github.com/smalot/pdfparser/blob/a71c6dd38e60a995fdb4d36e4433b8b3557c65dc/README.md) | v2.13.1 | 58,449,535 | One PDF page and embedded Parsarium text | Smalot native PHP PDF parser |

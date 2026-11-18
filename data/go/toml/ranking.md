@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count, from the bounded search captured 2026-11-17 ([snapshot](registry-snapshot.json)).
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/BurntSushi/toml](https://pkg.go.dev/github.com/BurntSushi/toml@v1.6.0#Decode) | v1.6.0 | 38,240 | TOML 1.0.0 document decoded into map[string]any; local date-times, dates and times are time.Time values in the fixed zones datetime-local, date-local and time-local | BurntSushi/toml lexer and parser |
 | 2 | [github.com/pelletier/go-toml/v2](https://pkg.go.dev/github.com/pelletier/go-toml/v2@v2.4.3#Unmarshal) | v2.4.3 | 1,986 | TOML 1.0.0 document decoded into map[string]any; local date-times, dates and times are toml.LocalDateTime, toml.LocalDate and toml.LocalTime values and offset date-times are time.Time | go-toml v2 (pelletier) unstable.Parser |

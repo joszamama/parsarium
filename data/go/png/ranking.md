@@ -6,7 +6,7 @@
 
 pkg.go.dev Imported by package count.
 
-| Rank | Package | Release | Metric | Parsed scope | Parser family |
+| Rank | Package | Release | Imported by (pkg.go.dev) | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [github.com/disintegration/imaging](https://pkg.go.dev/github.com/disintegration/imaging@v1.6.2) | v1.6.2 | 3,155 | pixels | Go image/png wrapper |
 | 2 | [github.com/fogleman/gg](https://pkg.go.dev/github.com/fogleman/gg@v1.3.0) | v1.3.0 | 1,942 | pixels | Go image/png wrapper |

@@ -6,7 +6,7 @@ One verified third-party path(s), ranked by one metric. The ceiling is ten; the 
 
 Debian popcon sourcemax installations (max over binary packages built from the source package), from [registry-snapshot.json](registry-snapshot.json) captured 2026-11-17. Package-level counts include non-DNS use and are compared only within this cell.
 
-| Rank | Package | Release | Metric | Parser family |
+| Rank | Package | Release | Debian installations (popcon) | Parser family |
 | ---: | --- | --- | ---: | --- |
 | 1 | [libtins](https://libtins.github.io/docs/latest/d0/dcd/classTins_1_1DNS.html) | 4.6 | 52 | libtins DNS PDU (src/dns.cpp with its Memory::InputMemoryStream reader) |
 
