@@ -735,6 +735,111 @@
     "afl_feedback": "data/go/dns/github-com-cznic-dns-msg-feedback-differential.json"
   },
   {
+    "name": "github.com/shadowy-pycoder/mshark/layers",
+    "module": "github.com/shadowy-pycoder/mshark",
+    "version": "v0.0.32",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the module zip (MIT text), checked in the image; pkg.go.dev lists MIT",
+    "input_api": "(*layers.DNSMessage).Parse(data []byte) error (UnmarshalBinary), then DNSMessage.TransactionID, Flags (QR, OPCode, AA, TC, RD, RA, Z, AU, NA, RCode), Questions ([]*QueryEntry) and AnswerRRs/AuthorityRRs/AdditionalRRs ([]*ResourceRecord with typed RDataA, RDataAAAA, RDataCNAME, RDataMX)",
+    "documentation": "https://pkg.go.dev/github.com/shadowy-pycoder/mshark@v0.0.32/layers#DNSMessage.Parse",
+    "source": "https://proxy.golang.org/github.com/shadowy-pycoder/mshark/@v/v0.0.32.zip",
+    "source_lock": "projects/dns/go/github_com_shadowy_pycoder_mshark_layers/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "mshark layers (dns.go UnmarshalBinary, extractDomain, parseRData)",
+    "family_note": "Own pure-Go DNS layer of the mshark packet analyser by shadowy-pycoder (MIT, tagged v0.0.32): UnmarshalBinary reads the header with encoding/binary, extractDomain follows compression pointers recursively, and parseRData builds typed A, NS, CNAME, SOA, MX, TXT, AAAA, OPT and HTTPS values. It imports neither miekg/dns, x/net dnsmessage nor gopacket for DNS, so it is a separate family. The layer is one of the package's protocol decoders (Ethernet, ARP, IPv4/6, TCP, UDP, ICMP, TLS, HTTP, SSH, SNMP, FTP), so the package-level importer count covers all of them; its three known importing packages are the author's own arpspoof, ndpspoof and go-http-proxy-to-socks modules (separate modules, as for dnsmsg and magna). DNSFlags keeps the reserved Z bit and AD/CD as Z, AU and NA, so z is Z<<2|AU<<1|NA. A/AAAA RDATA are the parser's netip.Addr values printed with String (harness-side formatting, disclosed); names gain the trailing dot in the harness. Found in round 5 through a pkg.go.dev symbol search (DNSMessage).",
+    "project": "projects/dns/go/github_com_shadowy_pycoder_mshark_layers",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 3,
+      "source": "https://pkg.go.dev/github.com/shadowy-pycoder/mshark/layers?tab=importedby",
+      "captured_at_utc": "2026-11-18T01:09:59.327114+00:00",
+      "snapshot": "data/go/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "afl_feedback": "data/go/dns/github-com-shadowy-pycoder-mshark-layers-feedback-differential.json",
+    "rank": 8
+  },
+  {
     "name": "github.com/mateusz834/dnsmsg",
     "module": "github.com/mateusz834/dnsmsg",
     "version": "v0.0.0-20231225175121-c6b857669b66",
@@ -837,7 +942,7 @@
       "additional": []
     },
     "afl_feedback": "data/go/dns/github-com-mateusz834-dnsmsg-feedback-differential.json",
-    "rank": 8
+    "rank": 9
   },
   {
     "name": "tangled.sh/seiso.moe/magna",
@@ -941,7 +1046,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 9,
+    "rank": 10,
     "afl_feedback": "data/go/dns/tangled-sh-seiso-moe-magna-feedback-differential.json"
   }
 ]
