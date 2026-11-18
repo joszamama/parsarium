@@ -9,26 +9,28 @@
   "search_queries": [
     "debian-source:dns",
     "conan:dns",
-    "targeted cpp DNS message sources"
+    "targeted cpp DNS message sources",
+    "github star-fallback (language:C++ stars:>=100)"
   ],
   "search_limit_per_query": 100,
   "search_totals": {
     "debian-source:dns": 128,
     "conan:dns": 5,
-    "targeted cpp DNS message sources": 9
+    "targeted cpp DNS message sources": 9,
+    "github star-fallback (language:C++ stars:>=100)": 27
   },
   "search_hits_recorded": 114,
   "unique_search_hits": 109,
-  "unresolved_documentation_leads": 5,
-  "leads_recorded": 17,
+  "unresolved_documentation_leads": 3,
+  "leads_recorded": 20,
   "leads_by_status": {
     "resolved_verified_selected": 1,
-    "unresolved_no_primary_metric": 4,
-    "excluded": 11,
-    "unresolved_control_failure": 1
+    "excluded": 16,
+    "unresolved_control_failure": 1,
+    "unresolved_no_primary_metric": 2
   },
   "ranking_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
-  "uncertainty": "Pilot cell: one C++ path verified, libtins, ranked by Debian popcon sourcemax installations; the cell stays at one because no other C++ DNS message library with a documented bytes API, a Debian metric and a passing response control was found. PcapPlusPlus (pcpp::DnsLayer over a caller-supplied buffer) stays a lead without a primary metric: it has no Debian source package (absent from the pinned table; sources.debian.org search returned no match on 2026-11-17), so the Debian dev-package fallback is unavailable too, and GitHub stars are not allowed outside PLY cells. Round 2 checked the remaining C++ debian-source:dns hits and Seastar (registry-snapshot.json round2_targeted): libjdns/QJDns keeps its packet decoder private, kf6-kdnssd and kdnssd-kf5 are service-discovery frameworks, and Seastar's resolver delegates decoding to c-ares; POCO, Qt QDnsLookup, Boost/asio and the PowerDNS applications stay excluded from round 1. Round 3 read all 128 debian-source:dns names and checked ISC Kea: kea-dev installs libkea-dns++ (Message::fromWire), but Kea 3.0.4 registers no CNAME or MX RDATA decoder, so the response control fails. Round 4 searched beyond the registry windows (registry-snapshot.json round4_discovery): GitHub repository searches for C++ (dns parser, dns packet, dns message, topic:dns, rfc1035, dns codec, dns decoder, dns wire format; first 100 each), packet libraries with a DNS layer, Debian package lists and awesome lists. The C++ DNS message libraries it found (libcrafter, mnezerka dnslib, libdnspacket, packetzero dnsparser) have no Debian source package and so no primary metric, so the cell stays at one. libtins parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Its popcon count (52) is weak and package-level; the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: one C++ path verified, libtins, ranked by Debian popcon sourcemax installations; the cell stays at one because no other C++ DNS message library with a documented bytes API, a Debian metric and a passing response control was found. PcapPlusPlus (pcpp::DnsLayer over a caller-supplied buffer) stays a lead without a primary metric: it has no Debian source package (absent from the pinned table; sources.debian.org search returned no match on 2026-11-17), so the Debian dev-package fallback is unavailable too. Round 2 checked the remaining C++ debian-source:dns hits and Seastar (registry-snapshot.json round2_targeted): libjdns/QJDns keeps its packet decoder private, kf6-kdnssd and kdnssd-kf5 are service-discovery frameworks, and Seastar's resolver delegates decoding to c-ares; POCO, Qt QDnsLookup, Boost/asio and the PowerDNS applications stay excluded from round 1. Round 3 read all 128 debian-source:dns names and checked ISC Kea: kea-dev installs libkea-dns++ (Message::fromWire), but Kea 3.0.4 registers no CNAME or MX RDATA decoder, so the response control fails. Round 4 searched beyond the registry windows (registry-snapshot.json round4_discovery): GitHub repository searches for C++ (dns parser, dns packet, dns message, topic:dns, rfc1035, dns codec, dns decoder, dns wire format; first 100 each), packet libraries with a DNS layer, Debian package lists and awesome lists. The C++ DNS message libraries it found (libcrafter, mnezerka dnslib, libdnspacket, packetzero dnsparser) have no Debian source package and so no primary metric. Round 6 (registry-snapshot.json round_6_star_fallback) applied the 2026-11-18 star fallback for C and C++ cells: twelve GitHub repository searches restricted to language:C++ and stars:>=100 (first 100 hits each), with stars, fork flags and tags captured from the GitHub REST API. No candidate qualifies: PcapPlusPlus (3,174 stars) and libcrafter (312) are multi-protocol packet libraries whose stars reflect other features; hello-dns (654) has no tagged release; AdGuard DnsLibs (120) is a DNS proxy and filtering library that parses with ldns; bundy (138) is a server suite in the Kea libdns++ lineage; PowerDNS is an application; mnezerka dnslib (65), packetzero dnsparser (35) and libdnspacket (31) are below 100 stars. The cell stays at one. libtins parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Its popcon count (52) is weak and package-level; the cell is not a definitive top ten.",
   "registry_snapshot": "data/cpp/dns/registry-snapshot.json",
   "unresolved_leads": "data/cpp/dns/leads.json",
   "runtime_evidence": "data/cpp/dns/standard.json",

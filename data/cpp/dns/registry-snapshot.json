@@ -2569,5 +2569,455 @@
         "reason": "no Debian source package"
       }
     }
+  },
+  "round_6_star_fallback": {
+    "note": "Round-6 star-fallback discovery (2026-11-18): GitHub repository searches restricted to language:C++ and stars:>=100 (first 100 hits each, sorted by stars), plus the cell's earlier GitHub-only leads. stargazers_count, fork flag and tags captured from the GitHub REST API (star_captures, with the response SHA-256). No C++ candidate qualifies: the two above 100 stars with a DNS layer are multi-protocol packet libraries, the others are applications, a multi-purpose proxy library, an untagged tutorial, or below 100 stars.",
+    "rule": "PROTOCOL.md star fallback (2026-11-18): C/C++ slots left empty after primary-metric and Debian-fallback paths may be filled by pinned tagged releases of upstream, format-specific GitHub repositories with stargazers_count >= 100; packet and multi-purpose libraries whose stars reflect other features do not qualify.",
+    "github_repository_search": [
+      {
+        "query": "dns parser language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns parser language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 0,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:10:03Z",
+        "hits": []
+      },
+      {
+        "query": "dns packet language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns packet language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 0,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:10:12Z",
+        "hits": []
+      },
+      {
+        "query": "dns message language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns message language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 0,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:10:21Z",
+        "hits": []
+      },
+      {
+        "query": "dns library language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns library language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 3,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:10:29Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "khoih-prog/ESP_WiFiManager",
+            "stars": 406
+          },
+          {
+            "rank": 2,
+            "repository": "khoih-prog/ESPAsync_WiFiManager",
+            "stars": 310
+          },
+          {
+            "rank": 3,
+            "repository": "AdguardTeam/DnsLibs",
+            "stars": 120
+          }
+        ]
+      },
+      {
+        "query": "dns decoder language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns decoder language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 0,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:10:38Z",
+        "hits": []
+      },
+      {
+        "query": "rfc1035 language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "rfc1035 language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 0,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:10:47Z",
+        "hits": []
+      },
+      {
+        "query": "dns wire language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns wire language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 0,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:10:55Z",
+        "hits": []
+      },
+      {
+        "query": "topic:dns language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "topic:dns language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 10,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:11:04Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "PowerDNS/pdns",
+            "stars": 4524
+          },
+          {
+            "rank": 2,
+            "repository": "M-Abozaid/esp32-c3-adblock",
+            "stars": 3602
+          },
+          {
+            "rank": 3,
+            "repository": "khoih-prog/ESP_WiFiManager",
+            "stars": 406
+          },
+          {
+            "rank": 4,
+            "repository": "DNS-OARC/flamethrower",
+            "stars": 336
+          },
+          {
+            "rank": 5,
+            "repository": "stealth/fraud-bridge",
+            "stars": 234
+          },
+          {
+            "rank": 6,
+            "repository": "zachmorr/esper",
+            "stars": 176
+          },
+          {
+            "rank": 7,
+            "repository": "LyndLabs/DNS-DriveBy",
+            "stars": 162
+          },
+          {
+            "rank": 8,
+            "repository": "bundy-dns/bundy",
+            "stars": 138
+          },
+          {
+            "rank": 9,
+            "repository": "liulilittle/openppp2",
+            "stars": 128
+          },
+          {
+            "rank": 10,
+            "repository": "cr0mll/deserter",
+            "stars": 126
+          }
+        ]
+      },
+      {
+        "query": "dns resolver library language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns resolver library language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 0,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:11:13Z",
+        "hits": []
+      },
+      {
+        "query": "mdns language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "mdns language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 2,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:11:22Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "x-tools-author/x-tools",
+            "stars": 1099
+          },
+          {
+            "rank": 2,
+            "repository": "vanvught/rpidmx512",
+            "stars": 446
+          }
+        ]
+      },
+      {
+        "query": "dns in:name language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns in:name language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 9,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:11:56Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "Habbie/hello-dns",
+            "stars": 654
+          },
+          {
+            "rank": 2,
+            "repository": "codingo/DNSCewl",
+            "stars": 366
+          },
+          {
+            "rank": 3,
+            "repository": "DNS-OARC/flamethrower",
+            "stars": 336
+          },
+          {
+            "rank": 4,
+            "repository": "0x09AL/DNS-Persist",
+            "stars": 207
+          },
+          {
+            "rank": 5,
+            "repository": "LyndLabs/DNS-DriveBy",
+            "stars": 162
+          },
+          {
+            "rank": 6,
+            "repository": "Faisal-P27/WAREED-DNS-C2",
+            "stars": 150
+          },
+          {
+            "rank": 7,
+            "repository": "bundy-dns/bundy",
+            "stars": 138
+          },
+          {
+            "rank": 8,
+            "repository": "Lyoko-Jeremie/Pcap_DNSProxy",
+            "stars": 136
+          },
+          {
+            "rank": 9,
+            "repository": "AdguardTeam/DnsLibs",
+            "stars": 120
+          }
+        ]
+      },
+      {
+        "query": "dns in:description library language:C++ stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns in:description library language:C++ stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 3,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:12:05Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "khoih-prog/ESP_WiFiManager",
+            "stars": 406
+          },
+          {
+            "rank": 2,
+            "repository": "khoih-prog/ESPAsync_WiFiManager",
+            "stars": 310
+          },
+          {
+            "rank": 3,
+            "repository": "AdguardTeam/DnsLibs",
+            "stars": 120
+          }
+        ]
+      }
+    ],
+    "search_limit_per_query": 100,
+    "star_captures": {
+      "seladb/PcapPlusPlus": {
+        "api_url": "https://api.github.com/repos/seladb/PcapPlusPlus",
+        "resolved_url": "https://github.com/seladb/PcapPlusPlus",
+        "stargazers_count": 3174,
+        "fork": false,
+        "archived": false,
+        "license": "Unlicense",
+        "tag_count_first_100": 16,
+        "latest_tags": [
+          "v26.07",
+          "v25.05",
+          "v24.09"
+        ],
+        "captured_at_utc": "2026-11-18T07:18:07.015395+00:00",
+        "response_sha256": "de6947da02084e107781462818a78bd7369911c225f98622f91f436885c0674e"
+      },
+      "pellegre/libcrafter": {
+        "api_url": "https://api.github.com/repos/pellegre/libcrafter",
+        "resolved_url": "https://github.com/pellegre/libcrafter",
+        "stargazers_count": 312,
+        "fork": false,
+        "archived": false,
+        "license": "MIT",
+        "tag_count_first_100": 6,
+        "latest_tags": [
+          "v0.3.5",
+          "v0.3.4",
+          "v0.3.3"
+        ],
+        "captured_at_utc": "2026-11-18T07:18:08.421474+00:00",
+        "response_sha256": "f6fc5d44b118acdb6db26c87c73d079d22771fe2ea9844cb71e8f26d88eacffa"
+      },
+      "mnezerka/dnslib": {
+        "api_url": "https://api.github.com/repos/mnezerka/dnslib",
+        "resolved_url": "https://github.com/mnezerka/dnslib",
+        "stargazers_count": 65,
+        "fork": false,
+        "archived": false,
+        "license": null,
+        "tag_count_first_100": 0,
+        "latest_tags": [],
+        "captured_at_utc": "2026-11-18T07:18:09.943431+00:00",
+        "response_sha256": "1577f9c465739ae960ad535b157ff17bd28ed3dfe93a7bfe8e944e116d4d7635"
+      },
+      "bughandler/libdnspacket": {
+        "api_url": "https://api.github.com/repos/bughandler/libdnspacket",
+        "resolved_url": "https://github.com/bughandler/libdnspacket",
+        "stargazers_count": 31,
+        "fork": false,
+        "archived": false,
+        "license": "MIT",
+        "tag_count_first_100": 2,
+        "latest_tags": [
+          "1.0.1",
+          "1.0.0"
+        ],
+        "captured_at_utc": "2026-11-18T07:18:11.239516+00:00",
+        "response_sha256": "39a1d8a3756bb1a1664613ccfbfc117feb27e9a088049d89ed3e9eb57872b25b"
+      },
+      "packetzero/dnsparser": {
+        "api_url": "https://api.github.com/repos/packetzero/dnsparser",
+        "resolved_url": "https://github.com/packetzero/dnsparser",
+        "stargazers_count": 35,
+        "fork": false,
+        "archived": false,
+        "license": null,
+        "tag_count_first_100": 2,
+        "latest_tags": [
+          "1.1",
+          "1.0"
+        ],
+        "captured_at_utc": "2026-11-18T07:18:12.654451+00:00",
+        "response_sha256": "352ec6e32bc237258ff7161037935da4e997ec17339e2e110be75ac7bdc7e250"
+      },
+      "Habbie/hello-dns": {
+        "api_url": "https://api.github.com/repos/Habbie/hello-dns",
+        "resolved_url": "https://github.com/Habbie/hello-dns",
+        "stargazers_count": 654,
+        "fork": false,
+        "archived": false,
+        "license": "MIT",
+        "tag_count_first_100": 0,
+        "latest_tags": [],
+        "captured_at_utc": "2026-11-18T07:18:14.066205+00:00",
+        "response_sha256": "62572926b3b2c1ebd1d055ec09be7759ea2c527c13042c9b6a052381498cc0d2"
+      },
+      "AdguardTeam/DnsLibs": {
+        "api_url": "https://api.github.com/repos/AdguardTeam/DnsLibs",
+        "resolved_url": "https://github.com/AdguardTeam/DnsLibs",
+        "stargazers_count": 120,
+        "fork": false,
+        "archived": false,
+        "license": "Apache-2.0",
+        "tag_count_first_100": 100,
+        "latest_tags": [
+          "v2.11.0-alpha.1",
+          "v2.10.2",
+          "v2.10.1"
+        ],
+        "captured_at_utc": "2026-11-18T07:18:15.671222+00:00",
+        "response_sha256": "c7d8c35fd59ba822691527bf5b1c762170560af4016caec13e5983ab70cd4440"
+      },
+      "bundy-dns/bundy": {
+        "api_url": "https://api.github.com/repos/bundy-dns/bundy",
+        "resolved_url": "https://github.com/bundy-dns/bundy",
+        "stargazers_count": 138,
+        "fork": false,
+        "archived": false,
+        "license": "NOASSERTION",
+        "tag_count_first_100": 24,
+        "latest_tags": [
+          "trac2487_base",
+          "trac2406_base",
+          "trac2402_base"
+        ],
+        "captured_at_utc": "2026-11-18T07:18:16.988061+00:00",
+        "response_sha256": "771f56023b4f6a0f5ee0a8d40287a9cecc40d6a1a73b73e1db7fa8d0e74540cf"
+      },
+      "PowerDNS/pdns": {
+        "api_url": "https://api.github.com/repos/PowerDNS/pdns",
+        "resolved_url": "https://github.com/PowerDNS/pdns",
+        "stargazers_count": 4524,
+        "fork": false,
+        "archived": false,
+        "license": "GPL-2.0",
+        "tag_count_first_100": 100,
+        "latest_tags": [
+          "rec-5.5.0-beta1",
+          "rec-5.5.0-alpha2",
+          "rec-5.5.0-alpha1"
+        ],
+        "captured_at_utc": "2026-11-18T07:18:18.447652+00:00",
+        "response_sha256": "32a311bb1591c83cf7dcd39bf5cb45b49a63526d2f8385c434da6ceff1381ed9"
+      }
+    },
+    "decisions": {
+      "seladb/PcapPlusPlus": "excluded (3,174 stars): multi-protocol packet capture, parsing and crafting library; its stars reflect capture and many protocols, so it does not qualify under the format-specific repository rule.",
+      "pellegre/libcrafter": "excluded (312 stars): multi-protocol packet crafting and decoding library; not format-specific.",
+      "Habbie/hello-dns": "excluded (654 stars): DNS teaching documents with the tdns example code; no tagged release.",
+      "AdguardTeam/DnsLibs": "excluded (120 stars): DNS proxy and filtering library (DoH/DoT/DNSCrypt upstreams, filtering engine); multi-purpose, and its message handling uses ldns (conanfile.py v2.10.2 requires ldns), already counted in the C cell.",
+      "bundy-dns/bundy": "excluded (138 stars): authoritative server suite (BIND 10 successor); its libdns++ is the same lineage as Kea libdns++ (response-control failure) and only development-branch tags exist, no release tags.",
+      "PowerDNS/pdns": "excluded (4,524 stars): server applications; MOADNSParser is internal (round 1).",
+      "mnezerka/dnslib": "below the star threshold (65 stars) and no tagged release.",
+      "packetzero/dnsparser": "below the star threshold (35 stars).",
+      "bughandler/libdnspacket": "below the star threshold (31 stars)."
+    }
   }
 }
