@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "project": "toml/rust/tomlproc",
+  "pass": true,
+  "base_project_receipt_sha256": "acf5180d51ef4c3ca5c056f63c8fc8df15c1206e460aa61d367c3450ea33912f",
+  "overlay_file_sha256": {
+    "Cargo.toml": "b222e217d16977606db14411866e8ff15a95a1e460066b45db59c5ee2d3cdfa8",
+    "Cargo.lock": "1783ab4603437ab981075e4964962fb0d93488917d3be67650f1dbb283e41408",
+    "afl_fuzzer.rs": "e0d6708ef7b680207c6e95534e55a5faaea7508892cbe15003abacd5d9302134",
+    "Dockerfile": "43b2a7b1383babcf31fa20da2aeb6cd60ed116a442343d4e363a3c16c5dcf13e",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "build.py": "235514fd41f63df0c32d8fa6f7e647035606a3e30e250c16fe2bf39ead666f71"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "fdaa26ea6e6449a29de3913e3486e59cd22aa9d1fd8f48789e48f6200095bba0",
+  "image_id": "sha256:59263a4558b0513fe66af548a96d878afd60e8ada9deb03a03cbe2e8f6a77add",
+  "platform": "linux/arm64",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "feedback_edges": 991,
+  "afl_map_size": 6023,
+  "feedback_kind": "afl_rs_tomlproc_only_sancov_edges",
+  "feedback_scope": "Only tomlproc crate objects carry SanitizerCoverage guards; harness, serde_json, AFL runtime and std are uninstrumented; hash seeds are fixed by the getrandom AFL_PRELOAD shim",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "tomlproc"
+    ],
+    "rlib_guard_bytes": {
+      "tomlproc": 24072
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_toml_tomlproc_harness",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "xdg"
+    ],
+    "binary_guards": 6018
+  },
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "reason": "no std HashMap is expected in tomlproc (its Table is an ordered map); constant getrandom bytes fix any getrandom-derived seed in the harness process; the parser source is unchanged.",
+    "replay_output_unchanged": true
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:b234ef8c6688c2d096cf959e14bb1237070b1ace16e06c6fb479fc32d4ed11cb",
+  "variant_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "control_output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "variant_output": {
+    "floats": {
+      "exponent": {
+        "type": "float",
+        "value": "1000.0"
+      },
+      "fraction": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "mixed": {
+        "type": "float",
+        "value": "0.015625"
+      },
+      "negative": {
+        "type": "float",
+        "value": "-0.5"
+      }
+    },
+    "integers": {
+      "binary": {
+        "type": "integer",
+        "value": "13"
+      },
+      "decimal": {
+        "type": "integer",
+        "value": "99"
+      },
+      "hex": {
+        "type": "integer",
+        "value": "3735928559"
+      },
+      "negative": {
+        "type": "integer",
+        "value": "-17"
+      },
+      "octal": {
+        "type": "integer",
+        "value": "493"
+      },
+      "underscored": {
+        "type": "integer",
+        "value": "1000000"
+      }
+    },
+    "keys": {
+      "a": {
+        "b": {
+          "c": {
+            "type": "integer",
+            "value": "1"
+          }
+        }
+      },
+      "quoted key": {
+        "type": "string",
+        "value": "q"
+      },
+      "site": {
+        "example.com": {
+          "type": "bool",
+          "value": "true"
+        }
+      }
+    },
+    "strings": {
+      "escapes": {
+        "type": "string",
+        "value": "tab\tquote\"backslash\\ é"
+      },
+      "literal": {
+        "type": "string",
+        "value": "C:\\Users\\parsarium"
+      },
+      "multiline": {
+        "type": "string",
+        "value": "first second"
+      },
+      "raw_multiline": {
+        "type": "string",
+        "value": "line one\nline two"
+      }
+    },
+    "times": {
+      "local_date": {
+        "type": "date-local",
+        "value": "1979-05-27"
+      },
+      "local_datetime": {
+        "type": "datetime-local",
+        "value": "1979-05-27T07:32:00"
+      },
+      "local_time": {
+        "type": "time-local",
+        "value": "00:32:00.25"
+      },
+      "offset": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00.5Z"
+      }
+    }
+  },
+  "repeats": 10,
+  "variant_feedback_edges": 1024,
+  "edges_only_in_control": 248,
+  "edges_only_in_variant": 281,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tomlproc-0.1.2/",
+    "control_lines": {
+      "src/datetime.rs": 74,
+      "src/error.rs": 0,
+      "src/lib.rs": 3,
+      "src/map.rs": 34,
+      "src/parser.rs": 453,
+      "src/ser.rs": 0,
+      "src/span.rs": 0,
+      "src/value.rs": 3
+    },
+    "variant_lines": {
+      "src/datetime.rs": 114,
+      "src/error.rs": 0,
+      "src/lib.rs": 3,
+      "src/map.rs": 28,
+      "src/parser.rs": 456,
+      "src/ser.rs": 0,
+      "src/span.rs": 0,
+      "src/value.rs": 3
+    },
+    "files_with_different_line_counts": [
+      "src/datetime.rs",
+      "src/map.rs",
+      "src/parser.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      991,
+      991,
+      991,
+      991,
+      991,
+      991,
+      991,
+      991,
+      991,
+      991
+    ],
+    "stable_edges": 991,
+    "union_edges": 991,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024,
+      1024
+    ],
+    "stable_edges": 1024,
+    "union_edges": 1024,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}
