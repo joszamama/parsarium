@@ -252,5 +252,103 @@
     "api_lead_checked_against_pinned_release": true,
     "verification": "projects/dns/java/taxonomy_scodec/verification.json",
     "reason": "Pinned 1.0.0 passes both DNS controls; see parsers.json and data/java/dns/taxonomy-scodec-feedback-differential.json."
+  },
+  {
+    "name": "com.typesafe.akka:akka-actor_2.13",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 2312,
+    "found_by": "round-4 discovery: JVM network frameworks with DNS codecs (Akka, predecessor of the excluded Pekko); metric in registry-snapshot.json round4_targeted",
+    "documentation": "https://doc.akka.io/libraries/akka-core/current/io-dns.html",
+    "input_api_lead": "akka.io.dns.internal.Message.parse(ByteString)",
+    "family": "Akka async DNS (akka.io.dns.internal)",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "Same codec as the excluded Pekko DNS: the message parser sits in akka.io.dns.internal and is marked @InternalApi, private to Akka's async DNS resolver, whose documented API is a network lookup. No documented message-bytes API; the actor artifact's count covers all of Akka actors."
+  },
+  {
+    "name": "com.squareup.okhttp3:okhttp-dnsoverhttps",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 52,
+    "found_by": "round-4 discovery: DNS-over-HTTPS clients with a wire decoder; metric in registry-snapshot.json round4_targeted",
+    "documentation": "https://square.github.io/okhttp/5.x/okhttp-dnsoverhttps/okhttp3.dnsoverhttps/-dns-over-https/index.html",
+    "input_api_lead": "okhttp3.dnsoverhttps.DnsRecordCodec.decodeAnswers(hostname, ByteString)",
+    "family": "OkHttp DnsRecordCodec",
+    "version_seen": "5.3.2",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "The public API is DnsOverHttps, a network Dns lookup. Its wire decoder DnsRecordCodec is a Kotlin internal object whose decodeAnswers returns only the A/AAAA addresses as InetAddress values (CNAME and MX are skipped), so there is no documented message-bytes API and the response control cannot be reproduced."
+  },
+  {
+    "name": "fr.davit:taxonomy-scodec_3",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 3,
+    "found_by": "round-4 discovery: other Scala builds of the selected taxonomy-scodec; metric in registry-snapshot.json round4_targeted",
+    "documentation": "https://github.com/RustedBones/taxonomy",
+    "input_api_lead": "fr.davit.taxonomy.scodec.DnsCodec.dnsMessage",
+    "family": "taxonomy",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "Scala 3 build of the selected taxonomy-scodec decoder (same DnsCodec source); not counted separately, as dns4s-core_3 is not."
+  },
+  {
+    "name": "fr.davit:scout_2.13",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 0,
+    "found_by": "round-4 discovery: taxonomy README ('Based on taxonomy'); metric in registry-snapshot.json round4_targeted",
+    "documentation": "https://github.com/RustedBones/scout",
+    "input_api_lead": "",
+    "family": "taxonomy",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "Zeroconf DNS-SD client and server built on taxonomy (selected) for message encoding and decoding; no own parser and no positive primary metric (scout_3 also 0)."
+  },
+  {
+    "name": "net.straylightlabs:hola",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 1,
+    "found_by": "round-4 discovery: mDNS libraries that decode standard messages from bytes; metric in registry-snapshot.json round4_targeted",
+    "documentation": "https://github.com/fflewddur/hola",
+    "input_api_lead": "net.straylightlabs.hola.dns.Response.createFrom(DatagramPacket)",
+    "family": "Hola",
+    "version_seen": "0.2.3",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "Fails the response control by source inspection: Record.fromBuffer builds typed records only for A, AAAA, PTR, SRV and TXT; CNAME and MX become UnknownRecord raw data, so their names cannot come from the library's parse. Its input is a DatagramPacket from the mDNS querier."
+  },
+  {
+    "name": "cn.rtast.nmdns:native-mdns",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 0,
+    "found_by": "round-4 discovery: GitHub repository search (topic:dns language:Kotlin); metric in registry-snapshot.json round4_targeted",
+    "documentation": "https://github.com/RTAkland/native-mdns",
+    "input_api_lead": "",
+    "family": "native-mdns",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "Kotlin Multiplatform mDNS announcer (broadcast only) supporting A, PTR, SRV and TXT records, no AAAA; no documented decoder for caller-supplied messages and no positive primary metric."
+  },
+  {
+    "name": "com.github.connecttag:packet-dissector-lib-kmp",
+    "status": "unresolved_no_primary_metric",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": null,
+    "found_by": "round-4 discovery: GitHub repository search (language:Kotlin, 'dns packet')",
+    "documentation": "https://github.com/connecttag/packet-dissector-lib-kmp",
+    "input_api_lead": "",
+    "family": "packet-dissector-lib-kmp",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "Kotlin Multiplatform packet dissector advertising a DNS wire parser, published only through JitPack (com.github.connecttag:packet-dissector-lib-kmp); it is not on Maven Central (Solr search: 0 hits), so deps.dev has no direct-dependent count and the primary metric is missing. Not attempted."
+  },
+  {
+    "name": "timboudreau/netty-dns-support",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": null,
+    "found_by": "round-4 discovery: Netty-adjacent DNS codecs (GitHub topic:dns language:Java)",
+    "documentation": "https://github.com/timboudreau/netty-dns-support",
+    "input_api_lead": "TypedDnsRecordDecoder",
+    "family": "Netty codec-dns (unmerged fork)",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "Record codecs layered on an unmerged fork of Netty's codec-dns (the README requires the author's dns-server-41 branch); no Maven Central release (Solr search: 0 hits), so no pinned release or primary metric, and its message decoding is the selected Netty family."
   }
 ]

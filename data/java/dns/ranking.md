@@ -33,9 +33,11 @@ deps.dev directDependentCount summed over all releases, from [registry-snapshot.
 | ---: | --- | ---: | --- | --- |
 | 1 | org.apache.directory.server:apacheds-protocol-dns | 75 | `new DnsMessageDecoder().decode(IoBuffer)` | ApacheDS DNS protocol (DnsMessageDecoder) |
 | 2 | com.github.greysoft.naf:greynaf-dns | 0 |  | Greysoft NAF |
+| 3 | com.github.connecttag:packet-dissector-lib-kmp | — | — | packet-dissector-lib-kmp |
 
 - **org.apache.directory.server:apacheds-protocol-dns** (unresolved_control_failure): Fails the response control (run, not only source inspection): DnsMessageDecoder registers record decoders only for A, NS, MX and AAAA and throws IllegalArgumentException (ERR_600 Decoder unavailable for CNAME) on the CNAME answer of controls/dns/response.bin. It also decodes no Z, AD or CD bits. The artifact is part of the ApacheDS server (compile dependencies on apacheds-core, MINA and the LDAP API).
 - **com.github.greysoft.naf:greynaf-dns** (unresolved): Not tried: zero deps.dev direct dependents, so it has no positive primary metric and is not added.
+- **com.github.connecttag:packet-dissector-lib-kmp** (unresolved_no_primary_metric): Kotlin Multiplatform packet dissector advertising a DNS wire parser, published only through JitPack (com.github.connecttag:packet-dissector-lib-kmp); it is not on Maven Central (Solr search: 0 hits), so deps.dev has no direct-dependent count and the primary metric is missing. Not attempted.
 
 ## Checked, excluded or recorded separately
 
@@ -53,3 +55,10 @@ deps.dev directDependentCount summed over all releases, from [registry-snapshot.
 - **com.github.mkroli:dns4s-core_3** (excluded): Scala 3 build of the same dns4s core sources as the selected dns4s-core_2.13; one Scala binary-version coordinate is counted.
 - **org.jmdns:jmdns** (excluded): Multicast DNS service-discovery library. Its message reader javax.jmdns.impl.DNSIncoming sits in the implementation package (the documented API is JmDNS/ServiceInfo discovery), and by source inspection of 3.6.5 it handles only A, AAAA, CNAME, PTR, TXT, SRV, HINFO and OPT: the MX answer of controls/dns/response.bin falls to the default branch and is skipped, so the control cannot be reproduced.
 - **org.apache.pekko:pekko-actor_2.13** (excluded): The DNS message codec in Pekko's actor IO module (org.apache.pekko.io.dns.internal.Message.parse in the 2.0.0 sources) is declared private[internal] and annotated @InternalApi ('INTERNAL API'); the documented API is the async DNS resolver extension, not a message-bytes parser. No metric looked up.
+- **com.typesafe.akka:akka-actor_2.13** (excluded): Same codec as the excluded Pekko DNS: the message parser sits in akka.io.dns.internal and is marked @InternalApi, private to Akka's async DNS resolver, whose documented API is a network lookup. No documented message-bytes API; the actor artifact's count covers all of Akka actors.
+- **com.squareup.okhttp3:okhttp-dnsoverhttps** (excluded): The public API is DnsOverHttps, a network Dns lookup. Its wire decoder DnsRecordCodec is a Kotlin internal object whose decodeAnswers returns only the A/AAAA addresses as InetAddress values (CNAME and MX are skipped), so there is no documented message-bytes API and the response control cannot be reproduced.
+- **fr.davit:taxonomy-scodec_3** (excluded): Scala 3 build of the selected taxonomy-scodec decoder (same DnsCodec source); not counted separately, as dns4s-core_3 is not.
+- **fr.davit:scout_2.13** (excluded): Zeroconf DNS-SD client and server built on taxonomy (selected) for message encoding and decoding; no own parser and no positive primary metric (scout_3 also 0).
+- **net.straylightlabs:hola** (excluded): Fails the response control by source inspection: Record.fromBuffer builds typed records only for A, AAAA, PTR, SRV and TXT; CNAME and MX become UnknownRecord raw data, so their names cannot come from the library's parse. Its input is a DatagramPacket from the mDNS querier.
+- **cn.rtast.nmdns:native-mdns** (excluded): Kotlin Multiplatform mDNS announcer (broadcast only) supporting A, PTR, SRV and TXT records, no AAAA; no documented decoder for caller-supplied messages and no positive primary metric.
+- **timboudreau/netty-dns-support** (excluded): Record codecs layered on an unmerged fork of Netty's codec-dns (the README requires the author's dns-server-41 branch); no Maven Central release (Solr search: 0 hits), so no pinned release or primary metric, and its message decoding is the selected Netty family.
