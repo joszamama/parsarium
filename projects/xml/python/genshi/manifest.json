@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "genshi",
+  "release": "0.7.12",
+  "catalog_parser": "data/python/xml/parsers.json",
+  "source_lock": "projects/xml/python/genshi/runtime-requirements.lock",
+  "source_sha256": "81a7852f935eaa317d4c55a15c12286e995c94f1ce9d1088bbce8690ac76c61b",
+  "sdist_sha256": "4bca21a5a2515dabf985176be897a5b3b624626b4a9fcb648720b7c5fab71627",
+  "parser_family": "Genshi markup-stream builder (genshi.input.XMLParser) over CPython 3.14 pyexpat over Expat 2.10.0 in namespace mode; shares the Expat XML parser family with projects/xml/python/xmltodict, untangle, defusedxml, xmlschema, jxmlease and the standard xml.etree.ElementTree path",
+  "underlying_release": "Expat 2.10.0",
+  "underlying_source_sha256": "c624ba2998fc65df1163a49641ff3f9ab73138b11641d92c86bee0fb01b1bc7f",
+  "build_note": "Genshi is installed from the pinned py3-none-any wheel (pure Python; genshi/ checked byte-identical to the sdist apart from the optional C speedups source the wheel does not build); it has no runtime dependencies on Python >= 3.9. Ubuntu's CPython 3.14 pyexpat loads Expat 2.10.0 built from source with clang LLVM source coverage (same Expat pin as xmltodict, untangle and jxmlease) through LD_LIBRARY_PATH; pyexpat.EXPAT_VERSION is asserted.",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "api": "genshi.input.XMLParser(BytesIO(bytes of a local XML file), filename) iterated to the end; the documented markup-stream events START (QName, Attrs), END, TEXT, START_NS (prefix, uri), COMMENT and PI are read through QName.namespace/localname",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the XMLParser iteration (genshi/input.py, core.py and the stream helpers it calls) and LLVM source coverage of source-built Expat 2.10.0 reached through pyexpat",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/",
+  "format_specific_coverage_file_suffix": "/genshi/input.py",
+  "underlying_coverage_subject_prefix": "/work/expat/lib/",
+  "underlying_format_specific_coverage_file_suffix": "xmlparse.c",
+  "afl_llvm_module_glob": "/opt/expat/lib/libexpat.so.1",
+  "afl_coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/",
+  "afl_python_entrypoint": "/opt/venv/bin/python",
+  "afl_feature_only_proxy": true,
+  "native_campaign_supported": false,
+  "scope": "Valid UTF-8 XML 1.0 local files without DOCTYPE through genshi.input.XMLParser: expanded {uri}local element and attribute names from Genshi's QNames (Expat namespace mode), xmlns declarations counted from START_NS events and the distinct non-empty URIs they bind, attributes sorted per element, maximum depth, and trimmed character and CDATA runs between markup events (comments and processing instructions end a run).",
+  "parser_options_caveat": "XMLParser's fixed setup was used: Expat namespace mode with '}' separator, buffer_text, parameter-entity parsing ALWAYS and UseForeignDTD with Genshi's own external DTD of HTML entity names, which Expat loads for every document. No DOCTYPE, entity, malformed-input or chunked-input behaviour beyond the controls was tested.",
+  "afl_package_release": "4.33c-1.1ubuntu1",
+  "license_sha256": "f45b614f8b1e759011de9310edc60c27bcc382a857bfae8fdf57c840e901e6ab",
+  "tested_parser": "genshi.input.XMLParser creating xml.parsers.expat.ParserCreate(encoding, '}') itself (asserted in the image)",
+  "oracle": "controls/xml/check_controls.py (expat, namespace-aware shared summary) and the verified lxml/libxml2 path's expected outputs in scripts/verify_python_xml_genshi_feedback.py"
+}

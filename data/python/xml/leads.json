@@ -5,7 +5,7 @@
   "observed_on_utc": "2026-11-17",
   "search_surface": "Targeted PyPI project pages and project documentation for the first nine leads; then the PyPI Simple JSON project-name index filtered locally (seven name queries, first 100 alphabetical hits each) with a top-15,000 PyPI package list used only to pick plausible high-adoption leads; see registry-snapshot.json",
   "search_limit_per_query": 100,
-  "searched_candidate_count": 30,
+  "searched_candidate_count": 34,
   "adoption_metric": {
     "name": "PyPI Stats last_month downloads excluding known mirrors",
     "source": "https://pypistats.org/api/",
@@ -268,7 +268,8 @@
       "reason": "RapidXml 2.1.4 (Python C++ extension over bundled RapidXML 1.13, the RapidXML family of the C++ cell) fails both valid controls through its documented RapidXml(bytes) API: the default flags (parse_no_data_nodes | parse_no_utf8) drop the catalog control's CDATA text 'x < y', and on the order control the decimal/hex character reference for the euro sign is stored as non-UTF-8 bytes, so reading the values raises SystemError over UnicodeDecodeError. The undocumented parse_cdata=True keyword switches to parse_declaration_node and parses both controls to the raw-name summary, but it is not part of the documented API. Not promoted in this round. Evidence: data/python/xml/rapidxml-lead-check.json.",
       "metric_snapshot": "data/python/xml/registry-snapshot.json",
       "evidence": "data/python/xml/rapidxml-lead-check.json",
-      "api_hint": "rapidxml.RapidXml(local XML bytes)"
+      "api_hint": "rapidxml.RapidXml(local XML bytes)",
+      "round_4_recheck": "2026-11-18: the 2.1.4 sdist was re-read. README.md documents only RapidXml(bytes) and RapidXml(path, from_file=True); no docstring or document mentions parse_cdata, which appears only as a keyword of RapidXml.__init__ in rapidxml/rapidxml.py and in the C extension's kwlist (document_object.cpp). It stays excluded."
     },
     {
       "name": "pygixml",
@@ -277,6 +278,41 @@
       "status": "excluded",
       "reason": "Cython bindings over pugixml and yxml, but the published license adds a usage condition to the MIT text ('To use this software, you must star the project on GitHub'), so it is not an open-source license as written; it also ships no aarch64 Linux wheel. Not counted.",
       "metric_snapshot": "data/python/xml/registry-snapshot.json"
+    },
+    {
+      "name": "genshi",
+      "last_month": 188414,
+      "observed_on_utc": "2026-11-18",
+      "registry": "https://pypi.org/project/Genshi/",
+      "api_evidence": "https://genshi.edgewall.org/wiki/ApiDocs/genshi.input",
+      "api_hint": "genshi.input.XMLParser(file-like local XML bytes) / genshi.input.XML(text)",
+      "status": "promoted_to_verified",
+      "family_hint": "Genshi stream builder over CPython pyexpat / Expat in namespace mode (shared with xmltodict, untangle, jxmlease and ElementTree)",
+      "verified_evidence": "data/python/xml/verification.json"
+    },
+    {
+      "name": "suds-community",
+      "last_month": 3228766,
+      "observed_on_utc": "2026-11-18",
+      "registry": "https://pypi.org/project/suds-community/",
+      "status": "excluded",
+      "reason": "Round 4: SOAP client (suds-community 1.2.0). Its suds.sax.parser.Parser builds suds' own Element tree from xml.sax events, but it is an internal module: the PyPI description and project documentation document only the WSDL Client API, not a local XML parse API. Not built."
+    },
+    {
+      "name": "twisted",
+      "last_month": 15068322,
+      "observed_on_utc": "2026-11-18",
+      "registry": "https://pypi.org/project/Twisted/",
+      "status": "excluded",
+      "reason": "Round 4: twisted.words.xish.domish.elementStream() is an XMPP stream element builder over pyexpat: it reports the stream root as a start event and delivers each top-level child as a separate element event instead of one document tree. A protocol library's stream framing, not a general XML parser API (the C cell's libstrophe precedent). Not built."
+    },
+    {
+      "name": "xmltodict-rs",
+      "last_month": 16768,
+      "observed_on_utc": "2026-11-18",
+      "registry": "https://pypi.org/project/xmltodict-rs/",
+      "status": "unresolved_below_ceiling",
+      "reason": "Round 4: Rust/PyO3 xmltodict-compatible converter (0.13.10, quick-xml family, its own engine). Its 16,768 last-month downloads rank below jxmlease (118,785), the tenth path, so with the cell at its ten-path ceiling it was not built."
     }
   ],
   "registry_snapshot": "data/python/xml/registry-snapshot.json"

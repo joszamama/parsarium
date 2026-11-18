@@ -2061,7 +2061,47 @@
       "rapidxml": {
         "downloads": 8139,
         "url": "https://pypistats.org/api/packages/rapidxml/recent?period=month"
+      },
+      "genshi": {
+        "downloads": 188414,
+        "url": "https://pypistats.org/api/packages/genshi/recent",
+        "captured_at_utc": "2026-11-18T00:43:58Z",
+        "note": "round-4 capture, one day after the 2026-11-17 values"
+      },
+      "suds-community": {
+        "downloads": 3228766,
+        "url": "https://pypistats.org/api/packages/suds-community/recent",
+        "captured_at_utc": "2026-11-18T00:43:58Z",
+        "note": "round-4 capture, one day after the 2026-11-17 values"
+      },
+      "twisted": {
+        "downloads": 15068322,
+        "url": "https://pypistats.org/api/packages/twisted/recent",
+        "captured_at_utc": "2026-11-18T00:43:58Z",
+        "note": "round-4 capture, one day after the 2026-11-17 values"
+      },
+      "xmltodict-rs": {
+        "downloads": 16768,
+        "url": "https://pypistats.org/api/packages/xmltodict-rs/recent",
+        "captured_at_utc": "2026-11-18T00:43:58Z",
+        "note": "round-4 capture, one day after the 2026-11-17 values"
       }
+    },
+    "round_4_window": "genshi, suds-community, twisted and xmltodict-rs were captured from the same API on 2026-11-18 (00:43 UTC), one day after the other values. genshi's 188,414 sits between untangle (310,666) and jxmlease (118,785) by margins far larger than a one-day shift."
+  },
+  "round_4_discovery": {
+    "searched_at": "2026-11-18",
+    "routes": [
+      "XML parsers whose PyPI names lack 'xml' and so fall outside the name queries: template and markup toolkits with an XML input module (Genshi), SOAP and XMPP stacks with internal XML builders (suds-community, Twisted words.xish)",
+      "Rust-backed XML-to-dict packages (xmltodict-rs)",
+      "re-check of the RapidXml 2.1.4 sdist documentation for parse_cdata"
+    ],
+    "decisions": {
+      "genshi": "promoted (namespace-aware Expat-family stream builder)",
+      "suds-community": "excluded (SOAP client; suds.sax.parser is internal, no documented local XML parse API)",
+      "twisted": "excluded (twisted.words.xish.domish is an XMPP stream element builder; protocol library)",
+      "xmltodict-rs": "unresolved_below_ceiling (16,768; below the tenth path)",
+      "rapidxml": "stays excluded (parse_cdata undocumented in 2.1.4)"
     }
   }
 }

@@ -1,0 +1,68 @@
+{
+  "kind": "third_party",
+  "api": "genshi.input.XMLParser(BytesIO(bytes of a local XML file), filename) iterated to the end; the documented markup-stream events START (QName, Attrs), END, TEXT, START_NS (prefix, uri), COMMENT and PI are read through QName.namespace/localname",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T00:47:23.330639+00:00",
+  "manifest": "projects/xml/python/genshi/manifest.json",
+  "image_id": "sha256:48719925e5cbbf37b27d60a1f307a4ef6781ccee56613a6cb40d423f0440c687",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: Genshi",
+    "Version: 0.7.12",
+    "expat_2.10.0",
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8",
+    "9443794afe78dfab5cccf27e803b30359a55dbf9eaadbd54297522b72356833c  /work/expat/lib/xmlparse.c",
+    "837a57d3edde2e72618b2aed6fbd47d9a70bc4c7448787caeeeff2aa7c568dca  genshi/input.py",
+    "ca5b24a453d8f70510c5fcd6936f5292eca83cd0408554761fa1f30e7c8b33ea  genshi/core.py"
+  ],
+  "source_sha256": "81a7852f935eaa317d4c55a15c12286e995c94f1ce9d1088bbce8690ac76c61b",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "9591924e3a8149cafae23598a1cae474fb77b369a89c0120fe1c7f4be36ff561",
+    "fuzz.py": "99c99847c048d23e6f6c2da4a14f5851797903948af5c191e996dc75c1de0515",
+    "harness.py": "dcaf140c9ef54da31bc8b1c1ece2377c47be540f01e32cc342a37c82a6c916ba",
+    "manifest.json": "31db124d96191330b29e5f3fac10f53e957244bae3d7cb17e8465e433c30e841",
+    "replay.py": "32f4550b807bbec4bd761a0ebf97dba143cd6045f9cc77383b7ad5a1ecb0cfc8",
+    "run-control.py": "52d99f0445c0dbf12e440cb291eb1eacc13630720fe2247f05b9750b3abdf2b0",
+    "runtime-requirements.lock": "adbc565b2113292e4852a44f495c49d9490f880ea6713608d6c9fe8c50ffd694",
+    "target.json": "5813c4cad0bd2b39a225b44033a308df37412a6be27f93fe9f166ec69c646bef"
+  },
+  "output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ],
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog"
+  },
+  "parser_source_files": 2,
+  "parser_source_lines_covered": 105,
+  "format_specific_source_lines_covered": 84,
+  "underlying_source_files": 19,
+  "underlying_source_lines_covered": 3217,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/python/genshi/target/coverage/coverage.json",
+  "pass": true
+}

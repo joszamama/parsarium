@@ -628,6 +628,87 @@
       "tree_caveat": "untangle keeps no comments or processing instructions, concatenates each element's character data (CDATA included) into one cdata string, and lists xmlns declarations among ordinary attributes in source order."
     },
     {
+      "package": "genshi",
+      "version": "0.7.12",
+      "pass": true,
+      "input_api": "genshi.input.XMLParser(BytesIO(bytes of a local XML file), filename) iterated to the end; the documented markup-stream events START (QName, Attrs), END, TEXT, START_NS (prefix, uri), COMMENT and PI are read through QName.namespace/localname",
+      "tested_parser": "genshi.input.XMLParser creating xml.parsers.expat.ParserCreate(encoding, '}') itself (asserted in the image)",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ],
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog"
+      },
+      "differential_control": "controls/xml/order-default-ns.xml",
+      "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "differential_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "text": [
+          "A-7",
+          "12.50 €"
+        ],
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order"
+      },
+      "differential_pass": true,
+      "view": "namespace-expanded {uri}local names from Genshi QNames; declarations counted from START_NS events",
+      "oracle": "controls/xml/check_controls.py (expat, namespace-aware shared summary) and the verified lxml/libxml2 path's expected outputs in scripts/verify_python_xml_genshi_feedback.py",
+      "genshi_matches_oracles": true,
+      "parser_family": "Genshi markup-stream builder (genshi.input.XMLParser) over CPython 3.14 pyexpat over Expat 2.10.0 in namespace mode; shares the Expat XML parser family with projects/xml/python/xmltodict, untangle, defusedxml, xmlschema, jxmlease and the standard xml.etree.ElementTree path",
+      "genshi_source_files": 2,
+      "genshi_source_lines": 105,
+      "expat_source_lines": 3217,
+      "afl_feedback": "data/python/xml/genshi-valid-feedback.json",
+      "afl_tuple_difference": 631,
+      "genshi_feature_difference": 4,
+      "expat_feature_difference": 669,
+      "project_receipt": "projects/xml/python/genshi/verification.json",
+      "feedback_caveat": "Genshi's own lines differ by 4 features between the two valid controls (comment, PI and CDATA handlers); 669 differing features and 631 differing AFL++ tuples come from Expat regions. Mainly shared Expat feedback, labelled as such.",
+      "project_receipt_sha256": "0153c29dea037fbb727e38d4ce656892ff6ee6a99313b13cc001453695de4b3c"
+    },
+    {
       "package": "jxmlease",
       "version": "1.0.3",
       "pass": true,
@@ -742,7 +823,8 @@
         "untangle (SAX via defusedxml DefusedExpatParser)",
         "defusedxml (guarded pure-Python ElementTree XMLParser)",
         "xmlschema (XMLResource over ElementTree.iterparse)",
-        "jxmlease (own pyexpat parser, namespace processing off; raw names)"
+        "jxmlease (own pyexpat parser, namespace processing off; raw names)",
+        "genshi (own pyexpat parser in namespace mode; Genshi stream events)"
       ]
     }
   ]
