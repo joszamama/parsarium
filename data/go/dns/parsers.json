@@ -735,6 +735,111 @@
     "afl_feedback": "data/go/dns/github-com-cznic-dns-msg-feedback-differential.json"
   },
   {
+    "name": "github.com/mateusz834/dnsmsg",
+    "module": "github.com/mateusz834/dnsmsg",
+    "version": "v0.0.0-20231225175121-c6b857669b66",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the module zip (MIT text, sha256 e3c12b6e...), checked in the image; pkg.go.dev lists MIT",
+    "input_api": "dnsmsg.Parse(msg []byte) (dnsmsg.Parser, dnsmsg.Header, error), then Parser.Question, StartAnswers/StartAuthorities/StartAdditionals, ResourceHeader, ResourceA/ResourceAAAA/ResourceCNAME/ResourceMX and End",
+    "documentation": "https://pkg.go.dev/github.com/mateusz834/dnsmsg@v0.0.0-20231225175121-c6b857669b66#Parse",
+    "source": "https://proxy.golang.org/github.com/mateusz834/dnsmsg/@v/v0.0.0-20231225175121-c6b857669b66.zip",
+    "source_lock": "projects/dns/go/github_com_mateusz834_dnsmsg/source-lock.json",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dnsmsg (parser.go incremental Parser, name.go Name.unpack, types.go Header/Flags)",
+    "family_note": "Own pure-Go incremental, non-allocating parser by Mateusz Poliwczak. Its Parser API resembles golang.org/x/net/dns/dnsmessage (Parse, section Start* calls, per-type resource methods), but the code is separate: 82 of its 1,178 distinct non-comment source lines (7.0%) also occur in x/net dnsmessage v0.63.0 message.go. No tagged release (pinned Go pseudo-version, as for benburkert/dns and cznic/dns). The library defines AD and CD flag bits but no constant for the reserved Z bit, so z carries AD and CD only (both controls have all three bits clear). A/AAAA RDATA are the parser's [4]byte/[16]byte values printed with net/netip (harness-side formatting, disclosed). Its two known importing packages are in the author's own myresolver module. Found in round 4 through a GitHub repository search (language:Go, 'dns parser').",
+    "project": "projects/dns/go/github_com_mateusz834_dnsmsg",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "pkg.go.dev Imported by package count",
+      "value": 2,
+      "source": "https://pkg.go.dev/github.com/mateusz834/dnsmsg?tab=importedby",
+      "captured_at_utc": "2026-11-18T00:24:45.580033+00:00",
+      "snapshot": "data/go/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "afl_feedback": "data/go/dns/github-com-mateusz834-dnsmsg-feedback-differential.json",
+    "rank": 8
+  },
+  {
     "name": "tangled.sh/seiso.moe/magna",
     "module": "tangled.sh/seiso.moe/magna",
     "version": "v0.0.2",
@@ -836,7 +941,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 8,
+    "rank": 9,
     "afl_feedback": "data/go/dns/tangled-sh-seiso-moe-magna-feedback-differential.json"
   }
 ]

@@ -1,0 +1,87 @@
+{
+  "kind": "third_party",
+  "api": "dnsmsg.Parse(local DNS message bytes) then the incremental Parser (Question, ResourceHeader, ResourceA/AAAA/CNAME/MX, End)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T00:25:20.743318+00:00",
+  "manifest": "projects/dns/go/github_com_mateusz834_dnsmsg/manifest.json",
+  "image_id": "sha256:c6d78f7f0b597160263a37470c12dca065e7b52793e6cbc72b1cb8816f0ab743",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "go1.27.1"
+  ],
+  "source_sha256": "5625dd9c0c4b3d3c6f615ce0c125e6dcf48a2bc3982d8bb0189ba5187e103c9a",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "04154b136b6f035cc6800e0ee924d32f7d699b206ab5ebd5686acdf585ce3e2e",
+    "go.mod": "60b10aff53a9313e02d65765e50e2a8c9389165e62137f322e54d57042780960",
+    "go.sum": "53cfdbb248390248315c8d06e9d15dce52e47b49a1d028b07ad828b7e5c22c1c",
+    "harness.go": "11e5d8c9e7a7357479da1c299ac262aaec210d821548395bba35656d1909fb1d",
+    "harness_test.go": "41da0ba99c951ea4c3961e524e8d04e9d3330d126bca035e91844edc70541315",
+    "manifest.json": "afdebd6552bed4ec28143a977ad9518590a73c22c1ef7e88bd9c1f97694579cb",
+    "reporter/main.go": "d83749ca59e9582ad4b3fd36829e28bc37a110463951ca8604ced4ff529246e2",
+    "source-lock.json": "1d201c8b60726d9a40a36dbbbe8fffcc69217ee7acc6f9d65829dd84d3e1adb5"
+  },
+  "output": {
+    "aa": 0,
+    "additional": [],
+    "ancount": 4,
+    "answers": [
+      {
+        "class": 1,
+        "name": "www.example.test.",
+        "rdata": "example.test.",
+        "ttl": 3600,
+        "type": 5
+      },
+      {
+        "class": 1,
+        "name": "example.test.",
+        "rdata": "192.0.2.10",
+        "ttl": 300,
+        "type": 1
+      },
+      {
+        "class": 1,
+        "name": "example.test.",
+        "rdata": "2001:db8::10",
+        "ttl": 600,
+        "type": 28
+      },
+      {
+        "class": 1,
+        "name": "example.test.",
+        "rdata": "10 mail.example.test.",
+        "ttl": 7200,
+        "type": 15
+      }
+    ],
+    "arcount": 0,
+    "authority": [],
+    "id": 43981,
+    "nscount": 0,
+    "opcode": 0,
+    "qdcount": 1,
+    "qr": 1,
+    "questions": [
+      {
+        "class": 1,
+        "name": "www.example.test.",
+        "type": 1
+      }
+    ],
+    "ra": 1,
+    "rcode": 0,
+    "rd": 1,
+    "tc": 0,
+    "z": 0
+  },
+  "parser_source_files": 4,
+  "parser_source_lines_covered": 161,
+  "format_specific_source_lines_covered": 101,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/go/github_com_mateusz834_dnsmsg/target/coverage/coverage.json",
+  "pass": true
+}

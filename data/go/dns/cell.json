@@ -1,10 +1,10 @@
 {
   "ecosystem": "go",
   "format": "dns",
-  "status": "pilot_eight_verified_search_bounded",
+  "status": "pilot_nine_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 8,
+  "verified_third_party_count": 9,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "dns",
@@ -22,14 +22,14 @@
   "search_hits_recorded": 284,
   "unique_search_hits": 276,
   "unresolved_documentation_leads": 2,
-  "leads_recorded": 29,
+  "leads_recorded": 30,
   "leads_by_status": {
-    "resolved_verified_selected": 8,
+    "resolved_verified_selected": 9,
     "excluded": 19,
     "unresolved_control_failure": 2
   },
   "ranking_metric": "pkg.go.dev Imported by package count",
-  "uncertainty": "Pilot cell: eight Go paths verified (github.com/miekg/dns, github.com/google/gopacket/layers, golang.org/x/net/dns/dnsmessage, codeberg.org/miekg/dns, github.com/benburkert/dns, github.com/phuslu/fastdns, github.com/cznic/dns/msg, tangled.sh/seiso.moe/magna), ranked by pkg.go.dev Imported by package count. Remaining leads: www.bamsoftware.com/git/dnstt.git/dns (unresolved_control_failure), github.com/cybergarage/go-mdns/mdns/dns (unresolved_control_failure). Excluded after checking: github.com/coredns/coredns/plugin/pkg/dnsutil, github.com/gopacket/gopacket/layers, github.com/zmap/dns, github.com/mr-torgue/dns, github.com/pion/mdns, github.com/ncruces/go-dns, github.com/eycorsican/go-tun2socks/common/dns, github.com/hashicorp/mdns, github.com/micro/mdns, github.com/whyrusleeping/mdns, github.com/pion/mdns/v2, github.com/cznic/dns/rr, github.com/asciimoth/gonnect/dns, github.com/bassosimone/dnscodec, github.com/bassosimone/minest, github.com/dmachard/go-netutils, github.com/xtls/xray-core/transport/internet/finalmask/xdns, github.com/Packet-Clearing-House/DNSAuth/libs/dnsdist, github.com/presotto/go-mdns-sd/go_dns (reasons in leads.json). Round 3 added pkg.go.dev searches with the same surface and metric (dns wire, dns codec, dns decode, dns unpack, dnsmessage, mdns, dns rr; first 100 each, under round3_search in the snapshot). The positive-count hits that were opened (the three most-imported mDNS libraries, pion/mdns/v2, codec, wire and tunnel helpers listed in leads.json) either wrap an already selected decoder (miekg/dns, x/net dnsmessage, gopacket, cznic/dns), copy the dnstt control failure, or are not wire parsers; the remaining round-3 hits are mostly go-micro/libp2p service-discovery registry plugins and forks, recognised by package path and not opened. The one new family found (a copy of Go's old net/dnsmsg.go inside go-mdns-sd) has no known importers. The cell therefore stays at eight: no further Go package with a positive pkg.go.dev importer count and its own documented message-bytes decoder was found within the bounded search. gopacket's count covers its whole multi-protocol layers package. The standard library exports no DNS message parser (its net resolver vendors x/net dnsmessage without exporting it). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: nine Go paths verified (github.com/miekg/dns, github.com/google/gopacket/layers, golang.org/x/net/dns/dnsmessage, codeberg.org/miekg/dns, github.com/benburkert/dns, github.com/phuslu/fastdns, github.com/cznic/dns/msg, github.com/mateusz834/dnsmsg, tangled.sh/seiso.moe/magna), ranked by pkg.go.dev Imported by package count. Remaining leads: www.bamsoftware.com/git/dnstt.git/dns (unresolved_control_failure), github.com/cybergarage/go-mdns/mdns/dns (unresolved_control_failure). Excluded after checking: github.com/coredns/coredns/plugin/pkg/dnsutil, github.com/gopacket/gopacket/layers, github.com/zmap/dns, github.com/mr-torgue/dns, github.com/pion/mdns, github.com/ncruces/go-dns, github.com/eycorsican/go-tun2socks/common/dns, github.com/hashicorp/mdns, github.com/micro/mdns, github.com/whyrusleeping/mdns, github.com/pion/mdns/v2, github.com/cznic/dns/rr, github.com/asciimoth/gonnect/dns, github.com/bassosimone/dnscodec, github.com/bassosimone/minest, github.com/dmachard/go-netutils, github.com/xtls/xray-core/transport/internet/finalmask/xdns, github.com/Packet-Clearing-House/DNSAuth/libs/dnsdist, github.com/presotto/go-mdns-sd/go_dns (reasons in leads.json). Round 3 added pkg.go.dev searches with the same surface and metric (dns wire, dns codec, dns decode, dns unpack, dnsmessage, mdns, dns rr; first 100 each, under round3_search in the snapshot). The positive-count hits that were opened (the three most-imported mDNS libraries, pion/mdns/v2, codec, wire and tunnel helpers listed in leads.json) either wrap an already selected decoder (miekg/dns, x/net dnsmessage, gopacket, cznic/dns), copy the dnstt control failure, or are not wire parsers; the remaining round-3 hits are mostly go-micro/libp2p service-discovery registry plugins and forks, recognised by package path and not opened. The one new family found (a copy of Go's old net/dnsmsg.go inside go-mdns-sd) has no known importers. The cell therefore stays at eight: no further Go package with a positive pkg.go.dev importer count and its own documented message-bytes decoder was found within the bounded search. gopacket's count covers its whole multi-protocol layers package. The standard library exports no DNS message parser (its net resolver vendors x/net dnsmessage without exporting it). Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/go/dns/registry-snapshot.json",
   "unresolved_leads": "data/go/dns/leads.json",
   "runtime_evidence": "data/go/dns/standard.json",
@@ -41,5 +41,5 @@
   },
   "third_party_evidence": "data/go/dns/parsers.json",
   "third_party_control_results": "data/go/dns/verification.json",
-  "selection": "Eight control-verified Go DNS path(s), ranked by pkg.go.dev Imported by package count: github.com/miekg/dns v1.1.73 (16,234), github.com/google/gopacket/layers v1.1.19 (5,428), golang.org/x/net/dns/dnsmessage v0.63.0 (1,202), codeberg.org/miekg/dns v0.6.133 (39), github.com/benburkert/dns v0.0.0-20190225204957-d356cf78cdfc (20), github.com/phuslu/fastdns v0.17.2 (9), github.com/cznic/dns/msg v0.0.0-20181122101858-8a2913d6a50b (3), tangled.sh/seiso.moe/magna v0.0.2 (1)."
+  "selection": "Nine control-verified Go DNS path(s), ranked by pkg.go.dev Imported by package count: github.com/miekg/dns v1.1.73 (16,234), github.com/google/gopacket/layers v1.1.19 (5,428), golang.org/x/net/dns/dnsmessage v0.63.0 (1,202), codeberg.org/miekg/dns v0.6.133 (39), github.com/benburkert/dns v0.0.0-20190225204957-d356cf78cdfc (20), github.com/phuslu/fastdns v0.17.2 (9), github.com/cznic/dns/msg v0.0.0-20181122101858-8a2913d6a50b (3), github.com/mateusz834/dnsmsg v0.0.0-20231225175121-c6b857669b66 (2), tangled.sh/seiso.moe/magna v0.0.2 (1)."
 }

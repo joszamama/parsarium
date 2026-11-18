@@ -383,5 +383,18 @@
     "api_lead_checked_against_pinned_release": true,
     "version_seen": "v0.0.0-20151103061658-343772046ec1",
     "reason": "Copy of Go's pre-2017 net/dnsmsg.go (Msg.Unpack with RR_A/RR_CNAME/RR_MX structs; the Go authors' BSD licence), a family not otherwise selected, but the go_dns package itself has 0 known importers on pkg.go.dev (the 11 recorded for the parent mdns package count the mDNS API, which documents no bytes parser), so it has no positive primary metric. Msg.Unpack also has no doc comment. github.com/vanadium/go-mdns-sd/go_dns is the same code (non-test files identical) and pkg.go.dev reports no importer count for it."
+  },
+  {
+    "name": "github.com/mateusz834/dnsmsg",
+    "status": "resolved_verified_selected",
+    "primary_metric": "pkg.go.dev Imported by package count",
+    "primary_metric_value": 2,
+    "found_by": "round-4 discovery: GitHub repository search (language:Go, 'dns parser'); metric in registry-snapshot.json round4_targeted",
+    "documentation": "https://pkg.go.dev/github.com/mateusz834/dnsmsg#Parse",
+    "input_api_lead": "dnsmsg.Parse(msg []byte) (Parser, Header, error)",
+    "family": "dnsmsg",
+    "api_lead_checked_against_pinned_release": true,
+    "verification": "projects/dns/go/github_com_mateusz834_dnsmsg/verification.json",
+    "reason": "Pinned v0.0.0-20231225175121-c6b857669b66 passes both DNS controls; see parsers.json and data/go/dns/github-com-mateusz834-dnsmsg-feedback-differential.json."
   }
 ]
