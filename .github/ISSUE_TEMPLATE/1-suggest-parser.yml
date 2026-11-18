@@ -1,0 +1,57 @@
+name: Suggest a parser
+description: Propose an open-source parser package for a format and language.
+title: "[parser] <package> (<format>, <language>)"
+labels: ["parser suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! A suggestion becomes a catalog path only if it passes every rule in [PROTOCOL.md](https://github.com/joszamama/parsarium/blob/main/PROTOCOL.md). Packages that miss a rule are still recorded as leads with the reason, so incomplete information is fine.
+  - type: input
+    id: package
+    attributes:
+      label: Package
+      description: Name as published in its registry, and a link to it.
+      placeholder: "serde_json — https://crates.io/crates/serde_json"
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: Format
+      options: [PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY, ASCII PNM, MP3, JSON, XML, YAML, TOML, SQL, DNS messages, "Other (explain below)"]
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      options: [C, C++, Go, Java, JavaScript, Python, Rust, PHP, "Other (explain below)"]
+    validations:
+      required: true
+  - type: input
+    id: api
+    attributes:
+      label: Documented input API
+      description: Link to the documentation of the function or class that parses local bytes or a local file.
+    validations:
+      required: true
+  - type: input
+    id: release
+    attributes:
+      label: Latest release
+      description: Version and link to the tagged release or registry version.
+  - type: input
+    id: adoption
+    attributes:
+      label: Adoption
+      description: The language's adoption metric if you know it (PROTOCOL.md lists them, for example crates.io downloads, deps.dev dependents or Debian installations).
+  - type: textarea
+    id: family
+    attributes:
+      label: Parser engine
+      description: Does it have its own parser, or does it wrap another library (for example libxml2, expat, libpng)? Is it a fork of another package?
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else

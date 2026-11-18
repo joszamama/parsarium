@@ -1,0 +1,30 @@
+name: Maintainer request
+description: You maintain a listed package and want it described differently, linked to your security policy, or removed.
+title: "[maintainer] <package>"
+labels: ["maintainer request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reaching out. We act on maintainer requests promptly; see [ETHICS.md](https://github.com/joszamama/parsarium/blob/main/ETHICS.md).
+  - type: input
+    id: package
+    attributes:
+      label: Package and target IDs
+      description: The package name and, if you know them, its target IDs (format/language/slug).
+    validations:
+      required: true
+  - type: dropdown
+    id: request
+    attributes:
+      label: Request
+      options: [Change how the package is described, Link our security policy, Remove the package from the catalog, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What should change. To help us confirm the request, mention your role in the project (for example a link to your maintainer profile).
+    validations:
+      required: true

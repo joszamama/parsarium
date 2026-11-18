@@ -1,0 +1,28 @@
+name: Report a wrong catalog record
+description: A release, license, parser family, adoption number, link or ranking looks wrong.
+title: "[record] <format>/<language>/<package>: <what is wrong>"
+labels: ["catalog record"]
+body:
+  - type: input
+    id: target
+    attributes:
+      label: Target
+      description: The target ID (format/language/slug) or the atlas or bench link.
+      placeholder: "png/rust/png"
+    validations:
+      required: true
+  - type: dropdown
+    id: field
+    attributes:
+      label: What is wrong
+      multiple: true
+      options: [Release or version, License, Parser family or shared engine, Input API, Adoption metric or ranking, Repository or registry link, Control result or receipt, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What it should be, and the evidence
+      description: Links to the registry, release page, source or documentation that show the correct value.
+    validations:
+      required: true

@@ -1,0 +1,37 @@
+name: Report a bug in Parsarium
+description: A command, harness, Docker build, website page or the Python package does not work as documented.
+title: "[bug] <short description>"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form is for problems in Parsarium itself. If a **third-party parser** crashes or misbehaves on an input, report that to its own maintainers ([why](https://github.com/joszamama/parsarium/blob/main/ETHICS.md)). Security problems in Parsarium go through [private reporting](https://github.com/joszamama/parsarium/security/advisories/new).
+  - type: textarea
+    id: command
+    attributes:
+      label: What you ran
+      description: The exact command, or the page and what you clicked.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What happened, and what you expected
+      description: Paste the error or the relevant part of the receipt.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Output of `parsarium --version`, or the commit if you use a clone.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, CPU architecture, Python version and Docker version.
+      placeholder: "macOS 16 arm64, Python 3.13.1, Docker 29.1"
