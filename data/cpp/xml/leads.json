@@ -221,5 +221,15 @@
     "family": "Xerces-C++",
     "reason": "Round 4 Debian -dev lookup: ACE's XML_Utils (libace-xml-utils-dev 3) are helper classes that parse through Xerces-C++ for ACE/TAO configuration; no parser of their own.",
     "source": "https://packages.debian.org/source/sid/ace"
+  },
+  {
+    "name": "libSBML",
+    "status": "unresolved",
+    "popcon_dev_package": {
+      "libsbml5-dev": 121
+    },
+    "family": "libxml2 (Debian builds libSBML's XML layer over libxml2; expat and Xerces-C++ are build options)",
+    "reason": "Found after the round-4 C++ cell closed, by the parent's review of the pinned by_inst snapshot (libsbml5-dev 121, libsbml5t64 124): the name and description of the Debian -dev package do not contain 'xml', so the round-4 -dev search missed it. libSBML is a Systems Biology Markup Language library; its public XML layer (XMLInputStream, XMLToken, XMLNode::convertStringToXMLNode) is documented in the libSBML API reference as low-level support for SBML and wraps libxml2, expat or Xerces-C++. Not evaluated: whether that layer is a documented generic element view rather than SBML support classes, and its differential over libxml2, are open. If it qualified, 121 would rank between libxml++ (275) and gSOAP (95) and displace the tenth path (libcutl, 3).",
+    "source": "https://sbml.org/software/libsbml/libsbml-docs/api/cpp/class_x_m_l_input_stream.html"
   }
 ]
