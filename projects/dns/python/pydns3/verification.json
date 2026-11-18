@@ -1,0 +1,101 @@
+{
+  "kind": "third_party",
+  "api": "pydns.Message.unpack(local DNS message bytes) -> Message (id, Flags, questions, answers, authority, additional with typed A/AAAA/CNAME/MX content)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T01:22:48.371156+00:00",
+  "manifest": "projects/dns/python/pydns3/manifest.json",
+  "image_id": "sha256:4e407ff5636a6cdd6a4771f432db6074335c9f4e3753a84548e2672cdb0da1f4",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/amd64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: pydns3",
+    "Version: 0.0.10",
+    "Name: pystructs3",
+    "Version: 0.0.8",
+    "Name: pyderive3",
+    "Version: 0.0.8",
+    "Name: typing_extensions",
+    "Version: 4.16.0",
+    "Name: atheris",
+    "Version: 3.1.0",
+    "0b15afb2c99f80e4b6a0c31222eaeeb344ef9d7a862987b8157daf3693f37081  pydns/message.py",
+    "b7092462e188ede13834796e27582aead4a4affa348ad63fd419ef0ae01447f6  pydns/answer.py",
+    "41014a66a849cb1e5999eb589d38057c31f9da3f41818ba64d8c756c318b5955  pydns/content.py",
+    "ecfa250297bf0ce19ee4d4daf45b263305cd4e46fa4cda47be03b86de28b7769  pystructs/std.py",
+    "36eedaf4b358ee90fae5516e7b5f30cf25888f95c6acf7251271b2a538dca92c  pystructs/struct.py"
+  ],
+  "source_sha256": "63b811a301edc8f1d3ac0db95bd4140c469418e1dfd8945653c1322e8e74debf",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "50cad28e5fec9758bc3616544fc75bd7a3d152e0a9762cfb8009129bffbe40ca",
+    "fuzz.py": "12f5329b821f28b641c53a86c55eaaf560b51775e5687ecaacc33671472c5ae8",
+    "harness.py": "d9ac6801a201595ecf4046b3280e5ef1a4930587c3af8695d5bfac3bcedbe196",
+    "manifest.json": "62474eab390db7e16375491744b240d7e606e2b9ff998d95a8a7f244f24554a4",
+    "replay.py": "8469c6ca26ca57239ed03648026e14ecfa66a80aefd8448a1ebc83adfb7b5938",
+    "run-control.py": "6c71353b8bc9678670addf747ce7c9b4265c7bc1c16fa6cc9890ff303fe9f746",
+    "runtime-requirements.lock": "0f749a8eadd9346af21288b8c1d4f4e239c59907739964b4dfa2d3e080391c0f"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 3,
+  "parser_source_lines_covered": 40,
+  "format_specific_source_lines_covered": 17,
+  "underlying_source_files": 4,
+  "underlying_source_lines_covered": 42,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/python/pydns3/target/coverage/coverage.json",
+  "pass": true
+}

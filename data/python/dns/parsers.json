@@ -723,6 +723,109 @@
     "afl_feedback": "data/python/dns/namespy-feedback-differential.json"
   },
   {
+    "name": "pydns3",
+    "version": "0.0.10",
+    "license": "MIT",
+    "license_evidence": "Wheel METADATA classifier 'License :: OSI Approved :: MIT License', MIT licence text in the License field and dist-info/LICENSE (sha256 e6b7a7d9...), checked in the image; pystructs3 0.0.8 carries the same MIT LICENSE",
+    "input_api": "pydns.Message.unpack(raw: bytes, ctx: Optional[pystructs.Context] = None) -> Message (fields id, flags, questions, answers, authority, additional; Answer.content typed A/AAAA/CNAME/MX/NS/PTR/SOA/TXT/SRV)",
+    "documentation": "https://github.com/imgurbot12/pydns/blob/master/README.md",
+    "source": "https://pypi.org/project/pydns3/0.0.10/",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "pydns3 (message.py Message.unpack, answer.py, content.py) over pystructs3 (std.py Domain name codec, struct.py Struct)",
+    "family_note": "Own pure-Python message codec by Andrew C Scott: pydns declares the header, question, answer and per-type content layouts as pystructs Struct classes, and pystructs3 (the same author's serialization library) unpacks them, including Domain name compression. It uses no other DNS library and is unrelated to the Python 2 PyDNS/py3dns line (it installs the top-level package 'pydns', not 'DNS'). The README's 'Packet Parsing' example documents Message.unpack(raw) on bytes. pydns.Flags keeps AD and CD but not the reserved Z bit, so z carries AD and CD only (both controls have all three bits clear). Message.unpack passes Message itself, not Answer, as the class for non-OPT additional records, so additional records other than OPT would not parse; the controls have none. Only pystructs3, pyderive3 and typing-extensions are installed besides the wheel: pypool3 and pyserve3 are required only by the client and server modules. Found in round 5 through an ecosyste.ms keyword listing (PyPI packages tagged 'dns'), not through the round-3 PyPI name list check. Low adoption (59 downloads in the window).",
+    "project": "projects/dns/python/pydns3",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 59,
+      "source": "https://pypistats.org/api/packages/pydns3/recent",
+      "captured_at_utc": "2026-11-18T01:17:18.846626+00:00",
+      "snapshot": "data/python/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 8,
+    "afl_feedback": "data/python/dns/pydns3-feedback-differential.json"
+  },
+  {
     "name": "dns-messages",
     "version": "1.0.1",
     "license": "MIT",
@@ -822,7 +925,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 8,
+    "rank": 9,
     "afl_feedback": "data/python/dns/dns-messages-feedback-differential.json"
   }
 ]

@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "format": "dns",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "pydns3",
+  "release": "0.0.10",
+  "catalog_parser": "data/python/dns/parsers.json",
+  "source_lock": "projects/dns/python/pydns3/runtime-requirements.lock",
+  "source_sha256": "63b811a301edc8f1d3ac0db95bd4140c469418e1dfd8945653c1322e8e74debf",
+  "sdist_sha256": "c33402db6e0e6ad2076790c1aa621eb3e9dca807c6e96d7f52d5de03f2dda5a2",
+  "build_note": "Installed from pinned pure-Python py3-none-any wheels by hash (--no-deps). The image checks that the pydns/ and pystructs/ packages of the pydns3 0.0.10 and pystructs3 0.0.8 wheels are byte-identical to their pinned sdists, that both declare the MIT licence classifier, and that the codec sources and LICENSE files match recorded SHA-256 values.",
+  "dependencies_note": "Only the modules that pydns.Message imports are installed: pystructs3 0.0.8 (the same author's struct library that holds the Domain name codec), pyderive3 0.0.8 (the same author's dataclass helper) and typing-extensions 4.16.0. pypool3 and pyserve3, which pydns3 requires only for its client and server modules, are not installed (pyserve3 is sdist-only); importing pydns does not import them. atheris 3.1.0 is the in-process fuzz bridge only.",
+  "parser_family": "pydns3 (message.py Message.unpack, answer.py Answer.unpack, content.py typed RDATA classes, flags.py) over pystructs3 (struct.py Struct, std.py Domain name compression codec), both by Andrew C Scott",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/dns/response.bin",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "expected_output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "differential_control": "controls/dns/query.bin",
+  "differential_control_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "differential_expected_output": {
+    "id": 4660,
+    "qr": 0,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 0,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 0,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [],
+    "authority": [],
+    "additional": []
+  },
+  "api": "pydns.Message.unpack(local DNS message bytes) -> Message (id, Flags, questions, answers, authority, additional with typed A/AAAA/CNAME/MX content)",
+  "harness": "harness.py",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the installed pydns package (parser lines) and of pystructs (underlying struct and Domain name codec, reported separately) during valid-control replay; Atheris import instrumentation for the byte-input bridge",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/pydns/",
+  "format_specific_coverage_file_suffix": "/pydns/message.py",
+  "scope": "One RFC 1035 DNS message from local bytes via pydns.Message.unpack (the packet-parsing example of the README): header flags (pydns.Flags keeps AD and CD but drops the reserved Z bit, so z carries AD and CD only), questions, and CNAME/A/AAAA/MX answers with compressed names decoded by pystructs Domain; valid response and query controls only. RDATA values are the fields of the typed content objects (ip, name, preference, exchange); the harness decodes the ASCII name bytes, lower-cases them and adds the trailing dot, and prints the ipaddress values with str. The client and server modules are not imported.",
+  "summary_command": [
+    "/opt/venv/bin/python",
+    "/work/replay.py",
+    "/input/case"
+  ],
+  "underlying_coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/pystructs/",
+  "underlying_format_specific_coverage_file_suffix": "/pystructs/std.py"
+}
