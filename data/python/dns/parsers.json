@@ -927,5 +927,108 @@
     },
     "rank": 9,
     "afl_feedback": "data/python/dns/dns-messages-feedback-differential.json"
+  },
+  {
+    "name": "pyasyncdns",
+    "version": "1.0.0",
+    "license": "GPL-3.0-or-later",
+    "license_evidence": "sdist PKG-INFO classifier 'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)' and License field 'GPL-3.0 License', LICENSE.txt (GPL v3 text, sha256 81cbae84...), checked in the image",
+    "input_api": "PyAsyncDNS.codec.DNSCodec().decode(data: bytes) -> DNSMessage (also the module-level PyAsyncDNS.codec.codec instance)",
+    "documentation": "https://mauricelambert.github.io/info/python/security/PyAsyncDNS/codec.html",
+    "source": "https://pypi.org/project/PyAsyncDNS/1.0.0/",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "PyAsyncDNS (codec.py DNSCodec.decode, decode_name and per-type RDATA decoders over datatypes.py)",
+    "family_note": "Own pure-Python, transport-agnostic wire codec by Maurice Lambert (codec.py: 'Completely decoupled from any socket/transport layer'); it uses no other DNS library. DNSFlags keeps the full 3-bit z field. A/AAAA address text comes from the codec's decoders (socket.inet_ntoa/inet_ntop on the RDATA bytes); a decoder that raises falls back to raw bytes, which the harness rejects. The package also ships an asyncio DNS client and server and a DNS data-exfiltration client/server; importing the package imports them, but the harness starts none of them and the container has no network. Published as an sdist only (built offline in the image). Found in round 5 through an ecosyste.ms keyword listing (PyPI packages tagged 'dns-server'); its distribution name contains 'dns', so it was in the round-3 name list but not looked up then. Very low adoption (14 downloads in the window).",
+    "project": "projects/dns/python/pyasyncdns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 14,
+      "source": "https://pypistats.org/api/packages/pyasyncdns/recent",
+      "captured_at_utc": "2026-11-18T01:26:54.341655+00:00",
+      "snapshot": "data/python/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 10,
+    "afl_feedback": "data/python/dns/pyasyncdns-feedback-differential.json"
   }
 ]

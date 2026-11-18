@@ -1,0 +1,92 @@
+{
+  "kind": "third_party",
+  "api": "PyAsyncDNS.codec.DNSCodec().decode(local DNS message bytes) -> DNSMessage (header with DNSFlags, questions, answers, authorities, additionals with typed ARecord/AAAARecord/CNAMERecord/MXRecord)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T01:32:19.024622+00:00",
+  "manifest": "projects/dns/python/pyasyncdns/manifest.json",
+  "image_id": "sha256:afe185efa83932c6a3848bbd3fd90c6829eb0ad3d733c4586718910a8f0975fa",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/amd64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: PyAsyncDNS",
+    "Version: 1.0.0",
+    "Name: atheris",
+    "Version: 3.1.0",
+    "0be32438c5ce03faa46c08bdb3562b6fdb0ea849284f2dd284ed8b3a55219cbf  PyAsyncDNS/codec.py",
+    "0587d7ca3e05bea0a391ef99c43664f805b8534b2370d44b2f1f5d1553f406ce  PyAsyncDNS/datatypes.py"
+  ],
+  "source_sha256": "379e299887712e67a6f5b02d90b0be07d0c9bcb95ad3542a35a5830acaec079d",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "97b744d572e55962ae3e3eae64406819efe6eb5d9176d0cefc7d09301921b5f8",
+    "fuzz.py": "12f5329b821f28b641c53a86c55eaaf560b51775e5687ecaacc33671472c5ae8",
+    "harness.py": "8536a2f46cec7ec1c761dc585e16f10de106b7e31f5ef675dfc56288ca811dec",
+    "manifest.json": "95d92d177c8e405d0aa172e9bb281e0d2cf49152eec49476e0b4cb05deb68892",
+    "replay.py": "8469c6ca26ca57239ed03648026e14ecfa66a80aefd8448a1ebc83adfb7b5938",
+    "run-control.py": "896655c3f23a7f5a9f3b58b0b42b0f9e54f97ae2ff1af9e7f22259298e7d4862",
+    "runtime-requirements.lock": "b2a545a7823f656047f7b0b0e2526c71b4d73348a0e781ac86c2c8a553c256f3"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 2,
+  "parser_source_lines_covered": 78,
+  "format_specific_source_lines_covered": 61,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/python/pyasyncdns/target/coverage/coverage.json",
+  "pass": true
+}
