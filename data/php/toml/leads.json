@@ -194,7 +194,7 @@
       "api_lead": "TomlFactory::fromString(string) -> Toml; Toml::getData() -> TomlTable of TomlValue(ValueType, value)",
       "status": "unresolved_datetime_source_text",
       "checked_at_utc": "2026-11-18",
-      "found_by": "round-4 GitHub repository search \"toml parser language:php\" (repository hypnotox/php-toml, Packagist name hypnotox/toml)",
+      "found_by": "GitHub repository search \"toml parser language:php\" (repository hypnotox/php-toml, Packagist name hypnotox/toml)",
       "evidence": "Run on the host (PHP 8.5.12, composer) against v1.0.1 (dist reference 9b40f89d, MIT): toArray() returns every date-time as a string, and the documented node tree keeps a ValueType enum with the four date-time kinds but stores each date-time value as its validated source text (Parser::parseAndValidateDatetime returns the string), so the offset date-time UTC instant would have to be computed by parsing that text in the harness, which the TOML protocol excludes. Integers, floats and strings are typed correctly on both controls."
     },
     {
@@ -205,8 +205,8 @@
       "family": "safeaccess/inline (own internal TomlParser)",
       "api_lead": "internal TomlParser (marked @internal)",
       "status": "unresolved_datetime_source_text",
-      "evidence": "Round-6 GitHub code search hit; the parser's docblock says date-times are preserved as strings and the class is marked @internal, so it has neither typed date-times nor a documented public value API. Not run.",
-      "found_by": "round-6 GitHub code search 'class TomlParser language:PHP'",
+      "evidence": "GitHub code search hit; the parser's docblock says date-times are preserved as strings and the class is marked @internal, so it has neither typed date-times nor a documented public value API. Not run.",
+      "found_by": "GitHub code search 'class TomlParser language:PHP'",
       "metric": "Packagist total downloads",
       "checked_at_utc": "2026-11-18"
     }
@@ -246,19 +246,19 @@
       "name": "kmvan/prober",
       "metric_value": 41,
       "status": "excluded",
-      "reason": "Round 6: a server-probe application with a line-based UtilsTomlParser and no date-time handling."
+      "reason": "A server-probe application with a line-based UtilsTomlParser and no date-time handling."
     },
     {
       "name": "aedart/athenaeum-config",
       "metric_value": 3201,
       "status": "excluded",
-      "reason": "Round 6: config loader that delegates to devium/toml."
+      "reason": "Config loader that delegates to devium/toml."
     },
     {
       "name": "phlak/config",
       "metric_value": 355546,
       "status": "excluded",
-      "reason": "Round 6: config loader that requires the selected internal/toml."
+      "reason": "Config loader that requires the selected internal/toml."
     }
   ],
   "round_4": {
@@ -268,7 +268,7 @@
       "Packagist search pages 2-3 of \"toml\" (page 4 onward returns no results) and the queries \"toml decoder\", \"toml decode\", \"toml reader\", \"toml lexer\", \"tomlparser\": no unrecorded TOML package",
       "GitHub repository search \"toml parser language:php\" (62 repositories): hypnotox/toml is the only unrecorded parser with a Packagist release; withinboredom/toml, malofan/toml-php, nxu/php-toml, thomasdotusername/TOML-parser, GiovanniSalmeri/yellow-toml and jphenow/tomlrs-php are not on Packagist"
     ],
-    "result": "No new path qualifies; the cell stays at 3.",
+    "result": "No further path qualifies; the cell has three paths.",
     "packagist_queries": [
       {
         "query": "toml",

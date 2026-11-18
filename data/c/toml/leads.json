@@ -84,7 +84,7 @@
       "name": "fwm",
       "source": "https://github.com/iluaii/fwm",
       "stars": 187,
-      "found_by": "GitHub search 'toml language:C' (round 6 star fallback)",
+      "found_by": "GitHub star-fallback search 'toml language:C'",
       "reason": "Wayland compositor, not a TOML parser library; its stars reflect the compositor."
     }
   ],
@@ -125,7 +125,7 @@
         "tomlplusplus"
       ]
     },
-    "finding": "No C TOML library is packaged in Debian or listed in Conan Center: the only C/C++ hits are the three selected C++ libraries. tomlc17 and toml-c therefore stay unresolved_no_primary_metric (GitHub stars were then a fallback only in PLY cells; the 2026-11-18 star fallback later admitted tomlc17), and the C cell stays at 0 selected."
+    "finding": "No C TOML library is packaged in Debian or listed in Conan Center: the only C/C++ hits are the three selected C++ libraries. Neither tomlc17 nor toml-c has the primary metric; tomlc17 is selected only under the star-fallback rule for C and C++ cells (2026-11-18), and toml-c stays unresolved_no_primary_metric."
   },
   "round_4": {
     "checked_at_utc": "2026-11-18",
@@ -140,7 +140,7 @@
       "toml-lang/toml wiki lists (C: toml-c and tomlc17, both recorded leads; Old: tomlc99, libtoml, tomlc)",
       "Debian popcon source and binary tables searched for tomlc, tomlc17, tomlc99, toml-c and libtoml in addition to the \"toml\" substring"
     ],
-    "result": "No C TOML library is packaged in Debian (libtoml-* hits are Perl modules); the cell stays at 0 with tomlc17 and toml-c as control-verified leads without a primary metric."
+    "result": "No C TOML library is packaged in Debian (libtoml-* hits are Perl modules); tomlc17 and toml-c are control-verified but have no primary metric."
   },
   "resolved_promoted": [
     {
@@ -171,6 +171,6 @@
     "excluded": [
       "fwm (Wayland compositor)"
     ],
-    "result": "One C TOML repository with at least 100 stargazers has a tagged release and a format-specific parser: tomlc17. The cell goes from 0 to 1 and cannot reach ten on this surface."
+    "result": "One C TOML repository with at least 100 stargazers has a tagged release and a format-specific parser: tomlc17. It is the cell's one path, and this surface cannot reach ten."
   }
 }

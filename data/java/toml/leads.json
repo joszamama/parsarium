@@ -17,7 +17,7 @@
       "checked_at_utc": "2026-11-17",
       "probe": "data/java/toml/probes/toml4j-0.7.2.json",
       "evidence": "service-config.toml matches the expected typed tree; typed-scalars.toml is rejected: Invalid text after key hex on line 6. Make sure to terminate the value or add a comment (#).",
-      "metric_rechecked": "deps.dev rechecked 2026-11-17 (round 3): unchanged (155)."
+      "metric_rechecked": "deps.dev rechecked 2026-11-17: unchanged (155)."
     },
     {
       "name": "io.hotmoka:toml4j",
@@ -34,7 +34,7 @@
       "jar_sha256": "2ee2d32cc685fc8f987cc0595059d187e332ca41e1ae8a515fead036fb777bc1",
       "evidence": "Republished toml4j (same com.moandjiezana.toml package, 43 classes). new Toml().read(File) reads service-config but rejects typed-scalars with 'Invalid text after key hex on line 6. Make sure to terminate the value or add a comment (#).', the same TOML 0.4 failure as com.moandjiezana.toml:toml4j 0.7.2.",
       "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-17",
-      "metric_rechecked": "deps.dev rechecked 2026-11-17 (round 3): unchanged (15)."
+      "metric_rechecked": "deps.dev rechecked 2026-11-17: unchanged (15)."
     },
     {
       "name": "net.peanuuutz.tomlkt:tomlkt",
@@ -50,7 +50,7 @@
       "version_seen": "0.5.0",
       "evidence": "tomlkt-jvm 0.5.0: Toml.Default.parseToTomlTable gives every literal a TomlLiteral.Type and the documented converters (toLong, toDouble, toOffsetDateTime, toLocalDateTime, toLocalDate, toLocalTime) return correct values for service-config, but typed-scalars `exponent = 1e3` comes back as TomlLiteral(content \"1000\", Type.Integer): the float is typed as integer 1000 (expected float \"1000.0\"). Every other typed-scalars value matches.",
       "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-17",
-      "metric_rechecked": "deps.dev rechecked 2026-11-17 (round 3): the root coordinate net.peanuuutz.tomlkt:tomlkt still sums to 5 over 11 releases; the separately published JVM coordinate tomlkt-jvm sums to 21 and is not added. The control failure stands either way."
+      "metric_rechecked": "deps.dev rechecked 2026-11-17: the root coordinate net.peanuuutz.tomlkt:tomlkt still sums to 5 over 11 releases; the separately published JVM coordinate tomlkt-jvm sums to 21 and is not added. The control failure stands either way."
     },
     {
       "name": "cc.ekblad:4koma",
@@ -69,7 +69,7 @@
       "metric": "deps.dev directDependentCount summed over all releases",
       "family": "OpenRewrite TOML (own ANTLR grammar in org.openrewrite.toml.internal.grammar, lossless syntax tree)",
       "api_lead": "TomlParser.builder().build().parse(String...) -> Toml.Document of Toml.Table/Toml.KeyValue/Toml.Array/Toml.Literal (TomlType.Primitive and getValue())",
-      "note": "OpenRewrite's TOML LST for refactoring recipes. Highest round-4 value; three of 206 releases have no deps.dev :dependents record and count as 0.",
+      "note": "OpenRewrite's TOML LST for refactoring recipes. Highest value among the Maven Central 'toml' results 101-335 and toml-lang wiki lookups; three of 206 releases have no deps.dev :dependents record and count as 0.",
       "source": "https://github.com/openrewrite/rewrite/tree/main/rewrite-toml",
       "status": "unresolved_control_failed",
       "api_lead_checked_against_pinned_release": true,
@@ -184,7 +184,7 @@
       "jar_sha256": "9a85c6f00142c5d6e0345510121972e7bc94e3e62f52f585cc0dfece143d6ffe",
       "status": "unresolved_control_failed",
       "evidence": "Run on the host (Temurin 21.0.2) with hutool-setting, hutool-core and hutool-log 6.0.0-M22 (every org.dromara.hutool release is a milestone): service-config gives the expected structure (Integer/Double, ZonedDateTime), but typed-scalars is rejected with SettingException 'Invalid value: \"0xDEADBEEF\" at line 6'. The class comment credits TheElectronWill/TOML-javalib and documents only LocalDate, LocalDateTime and ZonedDateTime (no local time). The 5.x coordinate cn.hutool:hutool-setting (871) has no TOML package.",
-      "found_by": "round-6 Maven Central class-name search c:TomlReader",
+      "found_by": "Maven Central class-name search c:TomlReader",
       "metric": "deps.dev directDependentCount summed over all releases",
       "checked_at_utc": "2026-11-18"
     }
@@ -278,13 +278,13 @@
       "name": "top.redscorpion.means:redscorpion-means-setting",
       "metric_value": 72,
       "status": "excluded",
-      "reason": "Round 6: ships the same setting.toml Toml/TomlReader/TomlWriter class set as hutool-setting (Hutool-derived TOML-javalib copy); not run."
+      "reason": "Ships the same setting.toml Toml/TomlReader/TomlWriter class set as hutool-setting (Hutool-derived TOML-javalib copy); not run."
     },
     {
       "name": "Scala/Kotlin and small JVM TOML coordinates with no dependents",
       "metric_value": 0,
       "status": "excluded",
-      "reason": "Round 6: stoml (me.vican.jorge, com.github.jvican), com.indoorvivants toml, io.macgyver.tomlson, org.scalameta moped-toml, dev.denux dtp (alpha only) and io.github.xtomlj xtomlj (tomlj fork) all have a deps.dev summed directDependentCount of 0, so no positive primary metric."
+      "reason": "Stoml (me.vican.jorge, com.github.jvican), com.indoorvivants toml, io.macgyver.tomlson, org.scalameta moped-toml, dev.denux dtp (alpha only) and io.github.xtomlj xtomlj (tomlj fork) all have a deps.dev summed directDependentCount of 0, so no positive primary metric."
     }
   ],
   "promoted": [
@@ -340,7 +340,7 @@
     "routes": [
       "toml-lang/toml-test-matrix parser list (commit 71475d29): no JVM entry",
       "Maven Central class-name searches c:TomlParser (2,257 classes), c:TomlReader (76), c:TomlLexer (761), c:Toml (2,419), c:TomlDecoder (30), c:TomlTable (960), c:TomlValue (178), c:TomlDocument (0), c:TomlScanner, c:TomlTokenizer and c:TomlDeserializer (no new library), c:TomlMapper (909; the Jackson TOML module and applications shading it): finds TOML parsers shipped inside larger libraries and Kotlin/Scala artifacts",
-      "deps.dev summed directDependentCount for every new coordinate"
+      "deps.dev summed directDependentCount for every coordinate found on these routes"
     ],
     "promoted": [],
     "new_leads": [

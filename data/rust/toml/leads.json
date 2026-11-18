@@ -78,7 +78,7 @@
       "release": "0.10.2",
       "family": "deser-toml (mitsuhiko/deser; own from-scratch TOML 1.1 scanner and parser)",
       "api_lead": "deser_toml::from_str::<T: deser::Deserialize>(&str)",
-      "note": "Found in the \"toml deserialize\" query. An independent parser (src/scan.rs, parser.rs, document.rs; normal dependencies deser-core, itoa, simdutf8, zmij). Its documented API deserializes into typed deser targets; deser-core 0.10.2 has no generic value type, and date-times reach generic targets as a Datetime extension that falls back to strings, so a typed tree with the four date-time kinds needs a harness-side deser visitor that was not written in this round; not run.",
+      "note": "Found in the \"toml deserialize\" query. An independent parser (src/scan.rs, parser.rs, document.rs; normal dependencies deser-core, itoa, simdutf8, zmij). Its documented API deserializes into typed deser targets; deser-core 0.10.2 has no generic value type, and date-times reach generic targets as a Datetime extension that falls back to strings, so a typed tree with the four date-time kinds needs a harness-side deser visitor, which has not been written; not run.",
       "status": "excluded_no_generic_value_view",
       "metric_value": 12002,
       "metric": "crates.io recent downloads (90 days)",
@@ -101,7 +101,7 @@
       "search_rank": 1,
       "status": "excluded_flat_items_harness_tables",
       "checked_at_utc": "2026-11-18",
-      "evidence": "Run in round 4 (crate sha256 f6d21f9d..., Apache-2.0): parse(&str) returns flat assignments with typed values (i64, the underscore-free float token, toml_datetime::Datetime) and [table]/[[array]] headers in source order, and its README leaves table nesting and duplicate-key semantics to the consumer. A harness that nested the items reproduced both hand-written trees, with 606 crate lines and stable AFL++ feedback (3,589 vs 3,028 edges), but placing assignments under headers and merging dotted keys and arrays of tables is harness interpretation of TOML table semantics. Under the concrete-syntax-tree rule in catalog/toml/PROTOCOL.md (a tree that leaves dotted keys and table headers unmerged does not qualify) it was demoted at integrator review; the project and overlay were removed and are reproducible from these pins."
+      "evidence": "Run (crate sha256 f6d21f9d..., Apache-2.0): parse(&str) returns flat assignments with typed values (i64, the underscore-free float token, toml_datetime::Datetime) and [table]/[[array]] headers in source order, and its README leaves table nesting and duplicate-key semantics to the consumer. A harness that nested the items reproduced both hand-written trees, with 606 crate lines and stable AFL++ feedback (3,589 vs 3,028 edges), but placing assignments under headers and merging dotted keys and arrays of tables is harness interpretation of TOML table semantics. Under the concrete-syntax-tree rule in catalog/toml/PROTOCOL.md (a tree that leaves dotted keys and table headers unmerged does not qualify) it stays a lead after review; no project or overlay is kept, and both are reproducible from these pins."
     },
     {
       "name": "fig-toml",
@@ -113,7 +113,7 @@
       "evidence": "Checked 2026-11-18 against fig 7.0.0 and fig-toml 7.0.0 sources: fig::Value keeps TOML date-times as a format-specific Ext scalar of an ExtKind (OffsetDateTime, LocalDateTime, LocalDate, LocalTime) carried verbatim as source text, and the serde path reads them as plain strings. The offset kind therefore has no decoded instant; the harness would have to parse the date-time text itself, which the TOML protocol excludes. Not run.",
       "metric": "crates.io recent downloads (90 days)",
       "source": "https://crates.io/crates/fig-toml",
-      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "found_by": "crates.io targeted lookups (registry-snapshot round_4_targeted_lookups)",
       "checked_at_utc": "2026-11-18"
     },
     {
@@ -125,7 +125,7 @@
       "evidence": "Its only TOML dependency is toml_edit ^0.25 (the selected toml_edit path); a document editor over toml_edit, not a parser.",
       "metric": "crates.io recent downloads (90 days)",
       "source": "https://crates.io/crates/flyleaf-core",
-      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "found_by": "crates.io targeted lookups (registry-snapshot round_4_targeted_lookups)",
       "checked_at_utc": "2026-11-18"
     },
     {
@@ -138,7 +138,7 @@
       "evidence": "Checked 2026-11-18: oak-toml 0.0.11 TomlValue::DateTime(String) holds the date-time as a string with no kind, so the four TOML date-time kinds cannot be told apart. Not run.",
       "metric": "crates.io recent downloads (90 days)",
       "source": "https://crates.io/crates/oak-toml",
-      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "found_by": "crates.io targeted lookups (registry-snapshot round_4_targeted_lookups)",
       "checked_at_utc": "2026-11-18"
     },
     {
@@ -151,7 +151,7 @@
       "evidence": "Checked 2026-11-18 against the 0.4.1 source: SemanticValue::DateTime holds a DateTimeValue with only a kind, the raw source spelling and a canonical spelling (raw with T/Z and seconds normalized); no date, time or offset fields are decoded. The offset date-time UTC instant would have to be computed by parsing that source text in the harness, which the TOML protocol excludes. Integers, floats and strings are decoded. Not run.",
       "metric": "crates.io recent downloads (90 days)",
       "source": "https://crates.io/crates/tomlsmith",
-      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "found_by": "crates.io targeted lookups (registry-snapshot round_4_targeted_lookups)",
       "checked_at_utc": "2026-11-18"
     },
     {
@@ -163,7 +163,7 @@
       "evidence": "olpat-cli describes the olpat toolkit as \"a maintained fork of taplo\"; the 0.14.0 crate has taplo's dependency set (logos, rowan, ahash, time). Excluded as a fork of the selected taplo path.",
       "metric": "crates.io recent downloads (90 days)",
       "source": "https://crates.io/crates/olpat",
-      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "found_by": "crates.io targeted lookups (registry-snapshot round_4_targeted_lookups)",
       "checked_at_utc": "2026-11-18"
     },
     {
@@ -176,7 +176,7 @@
       "evidence": "Checked 2026-11-18 against the 0.3.0 source: Node::Datetime(TomlDatetime { kind, raw }) keeps only the kind and the raw source text; no date, time or offset fields are decoded, so the offset UTC instant would need harness-side parsing of the source text. Not run.",
       "metric": "crates.io recent downloads (90 days)",
       "source": "https://crates.io/crates/babbel_toml",
-      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "found_by": "crates.io targeted lookups (registry-snapshot round_4_targeted_lookups)",
       "checked_at_utc": "2026-11-18"
     },
     {
@@ -189,7 +189,7 @@
       "crate_sha256": "5c44be5e98455007e277a9eab15569ae0a38989fe8424b0cc34009e620b700ee",
       "status": "unresolved_control_failed",
       "evidence": "Run on the host (cargo 1.99.1, default features off plus std): the Value tree has distinct Integer/Float variants and a Datetime with public date, time and offset fields, but tomling::parse rejects both controls with Parse(ParseError { context: [] }). A one-line document title = \"x \\\"y\\\" z\" is rejected the same way, so basic strings with escaped quotes (service-config line 2) fail; a bare a = 1 parses. The README marks the crate abandoned as of 2025-07-09 in favour of toml.",
-      "found_by": "round-6 crates.io reverse dependencies of toml-test-harness",
+      "found_by": "crates.io reverse dependencies of toml-test-harness",
       "metric": "crates.io recent downloads (90 days)",
       "checked_at_utc": "2026-11-18"
     },
@@ -204,7 +204,7 @@
       "evidence": "Checked against the 0.1.2 source (src/types.rs): Value::Integer and Value::Float hold the source text (Cow<str>), Value::String keeps the undecoded contents with a StrType tag, and DateTime always carries a date, so a TOML 1.0 local time has no representation (the crate targets the TOML 0.4 ABNF). Its README also needs the beta-only regex_macros. Not run.",
       "metric": "crates.io recent downloads (90 days)",
       "checked_at_utc": "2026-11-18",
-      "found_by": "round-6 targeted lookups (registry-snapshot round_6_targeted_lookups)"
+      "found_by": "targeted lookups (registry-snapshot round_6_targeted_lookups)"
     }
   ],
   "excluded": [
@@ -290,25 +290,25 @@
       "name": "toml-parse",
       "metric_value": 172,
       "status": "excluded",
-      "reason": "Round 6: 0.2.11 (2020) returns only a rowan concrete syntax tree for formatting and sorting; tables, dotted keys and string escapes stay unresolved, so it is a syntax-tree-only lead under the concrete-syntax-tree rule."
+      "reason": "0.2.11 (2020) returns only a rowan concrete syntax tree for formatting and sorting; tables, dotted keys and string escapes stay unresolved, so it is a syntax-tree-only lead under the concrete-syntax-tree rule."
     },
     {
       "name": "toml_reader",
       "metric_value": 69,
       "status": "excluded",
-      "reason": "Round 6: config loader whose only TOML dependency is the selected toml crate."
+      "reason": "Config loader whose only TOML dependency is the selected toml crate."
     },
     {
       "name": "env_toml",
       "metric_value": 41,
       "status": "excluded",
-      "reason": "Round 6: version 0.2.5+upstream-1.1.6 is a fork of the toml crate with an env_toml_parser fork of toml_parser (toml_parser family)."
+      "reason": "Version 0.2.5+upstream-1.1.6 is a fork of the toml crate with an env_toml_parser fork of toml_parser (toml_parser family)."
     },
     {
       "name": "picotoml",
       "metric_value": 8,
       "status": "excluded",
-      "reason": "Round 6: no_std serde deserializer over a logos lexer with no documented generic value type."
+      "reason": "No_std serde deserializer over a logos lexer with no documented generic value type."
     }
   ],
   "promoted": [
@@ -378,7 +378,7 @@
       "kosmetic-syntax 0.1.0 (49; lossless syntax tree for a linter, no value API)",
       "tomllib 0.1.2 (98; 2016 nom 1 parser, TOML 0.4-era)"
     ],
-    "note": "The cell holds nine verified paths. Own-parser crates ranked below kabosu (46 recent downloads) were listed but not run before the antlr-rust-toml-parser demotion; they remain unrun leads. Configuration loaders, toml/toml_edit wrappers, Cargo.toml tools, converters, tree-sitter grammars and other formats in the keyword listing are not parsers of their own.",
+    "note": "The cell holds nine verified paths. Own-parser crates ranked below kabosu (46 recent downloads) were listed but not run; they remain unrun leads. Configuration loaders, toml/toml_edit wrappers, Cargo.toml tools, converters, tree-sitter grammars and other formats in the keyword listing are not parsers of their own.",
     "demoted_at_review": [
       "antlr-rust-toml-parser 0.34.0 (flat items; table semantics would be harness interpretation)"
     ]
@@ -389,7 +389,7 @@
       "toml-lang/toml-test-matrix parser list (commit 71475d29, 2025-04-25; 36 parser scripts): every Rust entry (basic-toml, boml, taplo, toml, toml_edit) is already selected or decided",
       "crates.io reverse dependencies of the toml-test tooling crates toml-test-harness (4), toml-test-data (6) and toml-test (2): toml, toml_edit, tomling, env_toml, toml-shelby and the tooling crates themselves",
       "crates.io name lookups for 39 unrecorded TOML parser names (toml-parse, toml_parse, tomlparse, microtoml, tiny-toml, toml-lite, picotoml, toml_reader, toml-ast, toml-decoder, toml-core and others); 5 exist",
-      "unrun round-4 own-parser crates above or near kabosu's 46 recent downloads (tomllib 99, toml_document 41, tomling 30) after the antlr-rust-toml-parser demotion reopened the tenth slot"
+      "own-parser crates listed but not run in round_4_targeted_lookups, above or near kabosu's 46 recent downloads (tomllib 99, toml_document 41, tomling 30), checked for the tenth slot left open by antlr-rust-toml-parser"
     ],
     "promoted": [],
     "new_leads": [

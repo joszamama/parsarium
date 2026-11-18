@@ -75,7 +75,7 @@
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
       "source": "https://pypi.org/project/toml.py/",
       "checked_at_utc": "2026-11-18",
-      "found_by": "round-4 screening of the PyPI Simple index names and the toml-lang wiki lists"
+      "found_by": "screening of the PyPI Simple index names and the toml-lang wiki lists (registry-snapshot round_4_targeted_lookups)"
     },
     {
       "name": "toml-python",
@@ -87,7 +87,7 @@
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
       "source": "https://pypi.org/project/toml-python/",
       "checked_at_utc": "2026-11-18",
-      "found_by": "round-4 screening of the PyPI Simple index names and the toml-lang wiki lists"
+      "found_by": "screening of the PyPI Simple index names and the toml-lang wiki lists (registry-snapshot round_4_targeted_lookups)"
     },
     {
       "name": "contoml",
@@ -99,7 +99,7 @@
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
       "source": "https://pypi.org/project/contoml/",
       "checked_at_utc": "2026-11-18",
-      "found_by": "round-4 screening of the PyPI Simple index names and the toml-lang wiki lists"
+      "found_by": "screening of the PyPI Simple index names and the toml-lang wiki lists (registry-snapshot round_4_targeted_lookups)"
     },
     {
       "name": "libtoml",
@@ -111,7 +111,7 @@
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
       "source": "https://pypi.org/project/libtoml/",
       "checked_at_utc": "2026-11-18",
-      "found_by": "round-4 screening of the PyPI Simple index names and the toml-lang wiki lists"
+      "found_by": "screening of the PyPI Simple index names and the toml-lang wiki lists (registry-snapshot round_4_targeted_lookups)"
     },
     {
       "name": "fasttoml",
@@ -123,7 +123,7 @@
       "metric": "PyPI Stats last_month downloads excluding known mirrors",
       "source": "https://pypi.org/project/fasttoml/",
       "checked_at_utc": "2026-11-18",
-      "found_by": "round-4 screening of the PyPI Simple index names and the toml-lang wiki lists"
+      "found_by": "screening of the PyPI Simple index names and the toml-lang wiki lists (registry-snapshot round_4_targeted_lookups)"
     }
   ],
   "excluded": [
@@ -152,7 +152,7 @@
         "run": "python:3.13-slim (sha256:1c0252262bd9a91b72301c941e478fff5c3dfeb23f146d034d590631cdc75e87, linux/arm64), toml-rs 0.4.3 cp313 manylinux aarch64 wheel; toml_rs.loads(text) converted with the controls/toml/check_controls.py typed-tree rules",
         "service-config.toml": "matches the hand-written typed tree",
         "typed-scalars.toml": "matches the hand-written typed tree",
-        "blocker": "Compiled Rust parser inside the extension (same coverage problem as rtoml), and its parser source is a git branch rather than a crates.io release; the family relation of lava-sh/toml to toml-rs/toml was not established. Not built from source in this round."
+        "blocker": "Compiled Rust parser inside the extension (same coverage problem as rtoml), and its parser source is a git branch rather than a crates.io release; the family relation of lava-sh/toml to toml-rs/toml was not established. Not built from source."
       },
       "reason": "Its parser is not an independent code base: the sdist Cargo.toml takes toml, toml_parser and toml_edit from git forks of toml-rs/toml (lava-sh/toml rev b1581597 for TOML 1.0.0, toml_parser 1.0.5+spec-1.0.0; rev b3ab4b9d for TOML 1.1.0, toml_parser 1.1.5+spec-1.1.0), not from crates.io releases. Their toml_parser src/ shares 94.1% and 97.3% of distinct non-comment lines (>25 chars) with crates.io toml_parser 1.1.5, and their toml src/ 95.3% and 96.5% with crates.io toml 1.2.1, above the ~70% fork-exclusion threshold. The toml_parser family is already selected in this cell through rtoml (upstream toml 1.1.8 over toml_parser 1.1.5), so toml-rs would add a near-identical fork rather than a new parser.",
       "fork_overlap_evidence": {
@@ -291,7 +291,7 @@
     "observed": "2026-11-18",
     "routes": [
       "toml-lang/toml-test-matrix parser list (commit 71475d29, 2025-04-25; 36 parser scripts): every Python entry (toml, tomli, tomlkit, tomllib) is already selected or decided",
-      "PyPI JSON lookups for 56 binding-style and alternative names (toml-rs, tomli-rs, pytomlc99, tomlc99, ctoml, toml-c, tomlc17, toml-cpp, tomlplusplus, toml11, fasttoml, taplo, tombi, toml-parser, tomledit, xtoml, toml-config, tomlconfig, qtoml, toml.py and others); every existing name is already in the round-1 to round-4 records",
+      "PyPI JSON lookups for 56 binding-style and alternative names (toml-rs, tomli-rs, pytomlc99, tomlc99, ctoml, toml-c, tomlc17, toml-cpp, tomlplusplus, toml11, fasttoml, taplo, tombi, toml-parser, tomledit, xtoml, toml-config, tomlconfig, qtoml, toml.py and others); every existing name is already recorded in the snapshot or leads",
       "TOML parsers shipped as sub-modules of larger libraries: pip and setuptools vendor tomli, poetry-core and pipenv vendor tomlkit, dynaconf vendors toml and a tomli copy; these are copies of decided families, and msgspec, cattrs, mashumaro, pyserde and pydantic-settings delegate to tomllib/tomli/tomlkit"
     ],
     "promoted": [],

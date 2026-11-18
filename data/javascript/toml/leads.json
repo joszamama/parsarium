@@ -120,7 +120,7 @@
       "release": "0.4.1",
       "license": "MIT",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "service-config.toml matches. typed-scalars.toml fails: parse returns TOML integers and floats as plain Numbers with no typing option, so typed-scalars float `exponent = 1e3` is the Number 1000, the same value as integer 1000 (its README states that it does not preserve integer vs float). Date-times are TomlDate objects with a kind symbol.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install @gulujs/toml@0.4.1 on 2026-11-18"
     },
@@ -153,7 +153,7 @@
       "release": "2.2.4",
       "license": "ISC",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "service-config.toml parses with plain Numbers and __tomlInline markers on inline tables. typed-scalars.toml is rejected at row 30 (`local_time = 00:32:00.25`); it would also return 1e3 as the Number 1000.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install @tauri-apps/toml@2.2.4 on 2026-11-18"
     },
@@ -170,7 +170,7 @@
       "release": "0.5.22",
       "license": "MIT",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "typed-scalars.toml parses but the plugin returns TOML integers and floats as plain Numbers with no typing option, so typed-scalars float `exponent = 1e3` is the Number 1000, the same value as integer 1000; date-times are Dates with a __toml__ kind marker.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install @tabnas/toml@0.5.22 on 2026-11-18"
     },
@@ -187,7 +187,7 @@
       "release": "0.1.1",
       "license": "MIT",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "service-config.toml throws ('Expected property name or '}' in JSON'). typed-scalars.toml returns hex as the string '0xDEAD_BEEF', date-times as strings, undecoded or truncated strings and unsplit dotted keys.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install markty-toml@0.1.1 on 2026-11-18"
     },
@@ -201,7 +201,7 @@
       "source": "https://www.npmjs.com/package/toml.min",
       "status": "unresolved_datetime_source_text",
       "checked_at_utc": "2026-11-18",
-      "evidence": "Run in round 4: integers (BigInt), floats and the offset date-time (a Date) are typed, and both controls gave the hand-written trees, but the three local date-time kinds come back as LocalDateOrTime holding a kind tag and the accepted source text, with no decoded date or time fields. Consistent with the round-4 decisions for fig-toml, tomlsmith, babbel_toml and hypnotox/toml and the round-1 toml 5.0.1 precedent (local dates as strings), the local values would be harness readings of source text, so it was demoted at integrator review; project, overlay and tree receipt were removed and are reproducible from the pinned release."
+      "evidence": "Run against both controls: integers (BigInt), floats and the offset date-time (a Date) are typed, and both controls gave the hand-written trees, but the three local date-time kinds come back as LocalDateOrTime holding a kind tag and the accepted source text, with no decoded date or time fields. Consistent with the decisions for fig-toml, tomlsmith, babbel_toml and hypnotox/toml and the toml 5.0.1 precedent (local dates as strings), the local values would be harness readings of source text, so it stays a lead after review; no project, overlay or tree receipt is kept, and all three are reproducible from the pinned release."
     },
     {
       "name": "@sylphx/synth-toml",
@@ -216,7 +216,7 @@
       "release": "0.2.3",
       "license": "MIT",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "Not runnable as published: package.json main/exports point to ./dist/index.js, but the 0.2.3 tarball holds only src/*.ts, so import fails ('Cannot find module .../dist/index.js').",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install @sylphx/synth-toml@0.2.3 on 2026-11-18"
     },
@@ -232,7 +232,7 @@
       "api_lead_checked_against_pinned_release": true,
       "release": "0.0.8",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "service-config.toml is rejected ('[products is overriding existing value') and typed-scalars.toml throws 'Invalid or unexpected token'.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-js@0.0.8 on 2026-11-18"
     },
@@ -249,7 +249,7 @@
       "release": "1.0.0",
       "license": "MIT",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "service-config.toml matches. typed-scalars.toml fails: parse returns TOML integers and floats as plain Numbers with no typing option, so typed-scalars float `exponent = 1e3` is the Number 1000, the same value as integer 1000. Its exported OffsetDateTime, LocalDateTime, LocalDate and LocalTime classes keep the date-time kinds.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-v1@1.0.0 on 2026-11-18"
     },
@@ -266,7 +266,7 @@
       "release": "1.1.4",
       "license": "ISC",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "Splits lines and returns most values as raw text: '+99', '0xDEAD_BEEF', '1e3', date-times and escaped strings as written, unsplit quoted/dotted keys; both controls fail.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-json@1.1.4 on 2026-11-18"
     },
@@ -283,7 +283,7 @@
       "release": "0.1.1",
       "license": "MIT",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "Returns every date-time as a plain string (owner.since '1979-05-27T07:32:00Z'), so both controls fail; it also returns TOML integers and floats as plain Numbers with no typing option, so typed-scalars float `exponent = 1e3` is the Number 1000, the same value as integer 1000.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install tomlite@0.1.1 on 2026-11-18"
     },
@@ -300,7 +300,7 @@
       "release": "0.4.2",
       "license": "MIT",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "Date-times come back as { $__toml_private_datetime: text } objects with no kind, and integers and floats as plain Numbers (1e3 as 1000); both controls fail, and its parser is precompiled WebAssembly that JavaScript coverage cannot reach.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install @aduh95/toml@0.4.2 on 2026-11-18"
     },
@@ -317,7 +317,7 @@
       "release": "1.0.0-next.3",
       "license": "ISC",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "Pre-release only. Keeps iarna's date classes (FloatingDateTime, isDate, isTime) but returns TOML integers and floats as plain Numbers with no typing option, so typed-scalars float `exponent = 1e3` is the Number 1000, the same value as integer 1000.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install @flourd/toml@1.0.0-next.3 on 2026-11-18"
     },
@@ -334,7 +334,7 @@
       "release": "0.0.7",
       "license": "MIT",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "dist/index.js bundles smol-toml and calls it without integersAsBigInt, so integers and floats are plain Numbers and typed-scalars `exponent = 1e3` is the Number 1000; same failure as the confbox lead.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install @structium/toml@0.0.7 on 2026-11-18"
     },
@@ -350,7 +350,7 @@
       "api_lead_checked_against_pinned_release": true,
       "release": "0.3.1",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "Both controls are rejected: 'Invalid primitive type' on line 13 of service-config.toml and line 3 of typed-scalars.toml.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install topl@0.3.1 on 2026-11-18"
     },
@@ -366,7 +366,7 @@
       "api_lead_checked_against_pinned_release": true,
       "release": "0.0.7",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "Returns only { title } for service-config.toml and an object without the typed-scalars tables; both controls fail.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-parser@0.0.7 on 2026-11-18"
     },
@@ -376,14 +376,14 @@
       "metric": "npm downloads, last month",
       "family": "toml-nodejs (huan231; own decoder)",
       "api_lead": "decode(string)",
-      "note": "Listed in the toml-lang wiki Old.md (huan231/toml-nodejs); named round-4 lookup.",
+      "note": "Listed in the toml-lang wiki Old.md (huan231/toml-nodejs); looked up by name.",
       "source": "https://www.npmjs.com/package/toml-nodejs",
       "status": "unresolved_control_failed",
       "api_lead_checked_against_pinned_release": true,
       "release": "0.3.1",
       "license": "MIT",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "service-config.toml matches (integers are BigInt). typed-scalars.toml fails on local_time: `00:32:00.25` is decoded as LocalTime millisecond 25 (it parses the digits after the dot as an integer), i.e. 00:32:00.025.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-nodejs@0.3.1 on 2026-11-18"
     },
@@ -400,7 +400,7 @@
       "release": "0.1.3",
       "license": "MIT",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "service-config.toml loses structure (inline table flattened, '[products' read as a key, points array flattened); typed-scalars.toml returns nothing usable.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install tomljs@0.1.3 on 2026-11-18"
     },
@@ -417,7 +417,7 @@
       "release": "1.0.1",
       "license": "MIT",
       "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)",
       "control_result": "Returns values as raw TOML text (quoted strings with their quotes, '[8000, 8001, 8002]', '0xDEAD_BEEF', '1e3') and unsplit keys; both controls fail.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-parse@1.0.1 on 2026-11-18"
     },
@@ -429,8 +429,8 @@
       "family": "JOSL (jarenjs; own line-oriented machine for a TOML 1.0 superset)",
       "api_lead": "parseToml(text) (strict TOML 1.0 mode); LocalDate, LocalTime, LocalDateTime classes",
       "status": "unresolved_control_failed",
-      "evidence": "Run in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64, Node v26.10.0) on 2026-11-18: service-config matches, but integers are parsed through BigInt and downgraded to Numbers when safe, so typed-scalars float exponent = 1e3 is the Number 1000, the same value as an integer 1000 (no typing option; the round-1 toml and @iarna/toml precedent). Local date-times are decoded LocalDate/LocalTime/LocalDateTime objects and the offset date-time a Date.",
-      "found_by": "round-6 npm search 'keywords:toml'",
+      "evidence": "Run in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64, Node v26.10.0) on 2026-11-18: service-config matches, but integers are parsed through BigInt and downgraded to Numbers when safe, so typed-scalars float exponent = 1e3 is the Number 1000, the same value as an integer 1000 (no typing option; same as the toml and @iarna/toml leads). Local date-times are decoded LocalDate/LocalTime/LocalDateTime objects and the offset date-time a Date.",
+      "found_by": "npm search 'keywords:toml'",
       "metric": "npm downloads, last month",
       "checked_at_utc": "2026-11-18"
     },
@@ -443,7 +443,7 @@
       "api_lead": "tomlDecode(Uint8Array) -> Value {t: 'int'|'float'|'datetime', ...}",
       "status": "unresolved_datetime_source_text",
       "evidence": "Checked against the 0.1.0 type declarations (dist/cjs/value.d.ts): integers and floats are distinct, but a datetime value is {kind, raw} where raw is the exact source text for TOML decode, so the offset instant would need harness-side parsing (toml.min precedent). Not run.",
-      "found_by": "round-6 npm search 'keywords:toml'",
+      "found_by": "npm search 'keywords:toml'",
       "metric": "npm downloads, last month",
       "checked_at_utc": "2026-11-18"
     },
@@ -456,7 +456,7 @@
       "api_lead": "ION.parse(text)",
       "status": "unresolved_control_failed",
       "evidence": "Run in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64, Node v26.10.0) on 2026-11-18: service-config parses, typed-scalars is rejected at line 34 (site.\"example.com\" = true, a quoted dotted key), the fast-toml failure; numbers are plain Numbers.",
-      "found_by": "round-6 npm search 'keywords:toml'",
+      "found_by": "npm search 'keywords:toml'",
       "metric": "npm downloads, last month",
       "checked_at_utc": "2026-11-18"
     }
@@ -569,183 +569,183 @@
       "metric_value": 400040,
       "status": "excluded",
       "reason": "Replaces values in TOML text by JSON path using @iarna/toml and toml-eslint-parser; an editing utility, not its own parser.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@ast-grep/lang-toml",
       "metric_value": 242025,
       "status": "excluded",
       "reason": "Tree-sitter TOML grammar for ast-grep; syntax tree only.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@so1ve/prettier-plugin-toml",
       "metric_value": 20369,
       "status": "excluded",
       "reason": "Formatter plugin.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@toml-tools/parser",
       "metric_value": 17600,
       "status": "excluded",
       "reason": "Chevrotain concrete syntax tree whose leaves are token images (no decoded strings, numbers or date-times); the parser under prettier-plugin-toml. A typed tree would need the harness to decode literals itself.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@toml-tools/lexer",
       "metric_value": 17597,
       "status": "excluded",
       "reason": "Lexer only.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "toml-require",
       "metric_value": 14985,
       "status": "excluded",
       "reason": "require() hook delegating to the toml package.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@arborium/toml",
       "metric_value": 14401,
       "status": "excluded",
       "reason": "Syntax-highlighting grammar (WebAssembly).",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@putout/processor-toml",
       "metric_value": 13017,
       "status": "excluded",
       "reason": "putout processor delegating to a TOML parser.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@twinkleplop/toml",
       "metric_value": 12850,
       "status": "excluded",
       "reason": "Syntax-highlighting grammar and tokenizer (grammar, tokenize); no value API.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "iarna-toml-esm",
       "metric_value": 9086,
       "status": "excluded",
       "reason": "ESM republication of @iarna/toml 3.0.0 (duplicate fork of an existing lead that fails typed-scalars).",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "lezer-toml",
       "metric_value": 8940,
       "status": "excluded",
       "reason": "Lezer grammar for CodeMirror; syntax tree only.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@motherload/toml",
       "metric_value": 3518,
       "status": "excluded",
       "reason": "Import loader that reads TOML with smol-toml.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "toml-patch",
       "metric_value": 1667,
       "status": "excluded",
       "reason": "Tim Hall's original toml-patch 0.2.3, the predecessor of the selected @decimalturn/toml-patch; not counted separately.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@treelight/toml",
       "metric_value": 1660,
       "status": "excluded",
       "reason": "Syntax-highlighting language module.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@hoodmane/toml-j0.4",
       "metric_value": 826,
       "status": "excluded",
       "reason": "Republication of the toml-j0.4 lead (TOML 0.4.0, rejects hexadecimal integers).",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@yaebal/toml",
       "metric_value": 548,
       "status": "excluded",
       "reason": "Bot route loader that reads TOML with smol-toml.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@tuzig/toml",
       "metric_value": 296,
       "status": "excluded",
       "reason": "Browser republication of @iarna/toml 3.0.0 (fork of an existing lead).",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "utils-toml-parse",
       "metric_value": 143,
       "status": "excluded",
       "reason": "try/catch wrapper around toml.parse (toml lead).",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "ntoml",
       "metric_value": 28,
       "status": "excluded",
       "reason": "Wrapper around the toml and tomlifer packages.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "toml-ast",
       "metric_value": 55,
       "status": "excluded",
       "reason": "Syntax tree whose DateTimeValue nodes keep only the source text (no instant or fields) and whose tables carry no resolved paths; converting offset date-times to the UTC instant would require the harness to parse date-time text. Not run as a path (55 downloads).",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@std/toml",
       "metric_value": null,
       "status": "excluded",
       "reason": "Deno standard library TOML module (toml-lang wiki Old.md, jsr.io/@std/toml) is published on JSR only; npm has no @std/toml or @jsr/std__toml package, so there is no npm download value.",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "teptris",
       "metric_value": 5743,
       "status": "excluded",
-      "reason": "Round 6: WebAssembly build of the libteptris native parser with no JavaScript fallback; JavaScript coverage cannot reach the parser (@taplo/lib precedent)."
+      "reason": "WebAssembly build of the libteptris native parser with no JavaScript fallback; JavaScript coverage cannot reach the parser (@taplo/lib precedent)."
     },
     {
       "name": "@kronajs/core",
       "metric_value": 315,
       "status": "excluded",
-      "reason": "Round 6: line-based document model for a config viewer; no typed TOML value tree."
+      "reason": "Line-based document model for a config viewer; no typed TOML value tree."
     },
     {
       "name": "@omnist-dev/omnist",
       "metric_value": 241,
       "status": "excluded",
-      "reason": "Round 6: only a pre-release (0.10.1-alpha) is published."
+      "reason": "Only a pre-release (0.10.1-alpha) is published."
     },
     {
       "name": "@leonsilicon/confbox",
       "metric_value": 439,
       "status": "excluded",
-      "reason": "Round 6: republication of confbox (bundled smol-toml)."
+      "reason": "Republication of confbox (bundled smol-toml)."
     },
     {
       "name": "@temporalio/envconfig",
       "metric_value": null,
       "status": "excluded",
-      "reason": "Round 6: depends on smol-toml for TOML."
+      "reason": "Depends on smol-toml for TOML."
     },
     {
       "name": "@alint-js/config",
       "metric_value": null,
       "status": "excluded",
-      "reason": "Round 6: config loader over smol-toml."
+      "reason": "Config loader over smol-toml."
     }
   ],
   "promoted": [
@@ -778,20 +778,20 @@
       "version": "0.20.0",
       "project": "projects/toml/javascript/effected_toml",
       "status": "promoted_to_verified",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     },
     {
       "name": "@sgarciac/bombadil",
       "version": "2.3.0",
       "project": "projects/toml/javascript/sgarciac_bombadil",
       "status": "promoted_to_verified",
-      "found_by": "round_4_targeted_lookup"
+      "found_by": "targeted lookup (registry-snapshot.json round_4_targeted_lookups)"
     }
   ],
   "round_4": {
     "observed": "2026-11-18",
     "routes": [
-      "every TOML-named hit of the three recorded npm searches without a round-1-3 decision",
+      "every TOML-named hit of the three recorded npm searches that had no lead decision",
       "toml-lang wiki Home.md and Old.md JavaScript entries (toml-nodejs, @std/toml, bombadil, topl, toml-js, tomljs, markty-toml)",
       "npm download values recorded in registry-snapshot.json round_4_targeted_lookups"
     ],
