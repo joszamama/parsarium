@@ -2,9 +2,9 @@
 
 The [website](https://parsarium.com/) helps users choose a format, find a documented parser, and open a runnable target. It is built from the committed catalog and hosted on GitHub Pages.
 
-Parsarium is a format-first catalog and target set for parser experiments. Its active collection covers ten formats across C, C++, Go, Java, JavaScript, Python, Rust, and PHP; JSON and XML are separate incomplete pilots. Selected third-party paths have containerized, instrumented harnesses that accept local inputs and generated corpora. Each verified catalog entry has a pinned release, parser API, valid control, observed result, and evidence. Popularity ranks verified third-party packages **within a format and ecosystem**; the rankings do not compare ecosystems or imply independent parser engines.
+Parsarium is a format-first catalog and target set for parser experiments. Its active collection covers ten formats across C, C++, Go, Java, JavaScript, Python, Rust, and PHP. Six more formats (JSON, XML, YAML, TOML, SQL, and DNS messages) are pilots with their own counts. Selected third-party paths have containerized, instrumented harnesses that accept local inputs and generated corpora. Each verified catalog entry has a pinned release, parser API, valid control, observed result, and evidence. Popularity ranks verified third-party packages **within a format and ecosystem**; the rankings do not compare ecosystems or imply independent parser engines.
 
-The active catalog selects **791 fully runnable third-party package paths** across ten formats and eight ecosystems. Each cell has at most ten; 77 of 80 reach ten, and the other three report the smaller supported count. Every selected path has a positive numeric adoption signal, though 53 use a separately labeled secondary source. Three adopted, control-verified candidates lack verified parser feedback and are [excluded with their blockers recorded](data/curation/feedback-exclusions.json), without filling their slots with lower-ranked leads. The [curation record](data/curation/README.md) explains metrics and remaining uncertainty. Standard/runtime APIs and the incomplete pilot formats have [separate coverage counts](data/projects-coverage.json).
+The active catalog selects **791 fully runnable third-party package paths** across ten formats and eight ecosystems. Each cell has at most ten; 77 of 80 reach ten, and the other three report the smaller supported count. Every selected path has a positive numeric adoption signal, though 53 use a separately labeled secondary source. Three adopted, control-verified candidates lack verified parser feedback and are [excluded with their blockers recorded](data/curation/feedback-exclusions.json), without filling their slots with lower-ranked leads. The [curation record](data/curation/README.md) explains metrics and remaining uncertainty. The six pilot formats add 372 selected paths in 48 cells, 28 of which reach ten. Standard/runtime APIs and the pilot formats have [separate coverage counts](data/projects-coverage.json). Cells below ten record their search limits and blockers rather than filling slots with unqualified packages.
 
 ## Install
 
@@ -54,7 +54,7 @@ python3 parsarium.py run-format png --file my.png --results runs/png-my-file
 
 Use `--ecosystem python` to narrow the batch. A shared file may be accepted by some parsers and rejected by others; the receipts record each outcome.
 
-Formats: `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, `mp3`, plus the `json` and `xml` pilots. Ecosystems: `c`, `cpp`, `go`, `java`, `javascript`, `python`, `rust`, `php`.
+Formats: `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, `mp3`, plus the `json`, `xml`, `yaml`, `toml`, `sql`, and `dns` pilots. Ecosystems: `c`, `cpp`, `go`, `java`, `javascript`, `python`, `rust`, `php`.
 
 ### MP3 targets
 
@@ -102,7 +102,7 @@ python3 parsarium.py fandango generate png c lodepng runs/lodepng-fandango \
 python3 parsarium.py afl run runs/lodepng-fandango/afl --check
 ```
 
-Fanbase supplies the default specs for `png`, `zip`, `wav`, `svg`, `json`, `xml`, and MP3 targets verified on the ID3v2-tagged control (`mp3` in Fanbase, including an ID3v2.3 tag). Parsarium supplies local specs for MP4, PDF, HTTP/1.1 requests, ASCII PLY, ASCII PNM P3, and MP3 targets verified on untagged Layer III frames. `--fanbase` selects a Fanbase variant such as `png-boundary`; `--spec` selects another local spec. All ten active formats and the JSON and XML pilots have a default generation route. The MP4 grammar includes one decodable 2×2 H.264 video frame and no audio track. Parsers may differ in which valid grammar variations they accept; replay records each outcome.
+Fanbase supplies the default specs for `png`, `zip`, `wav`, `svg`, `json`, `xml`, and MP3 targets verified on the ID3v2-tagged control (`mp3` in Fanbase, including an ID3v2.3 tag). Parsarium supplies local specs for MP4, PDF, HTTP/1.1 requests, ASCII PLY, ASCII PNM P3, YAML, TOML, SQL, DNS messages, and MP3 targets verified on untagged Layer III frames. `--fanbase` selects a Fanbase variant such as `png-boundary`; `--spec` selects another local spec. Every format, active or pilot, has a default generation route. The MP4 grammar includes one decodable 2×2 H.264 video frame and no audio track. Parsers may differ in which valid grammar variations they accept; replay records each outcome.
 
 MP3 targets verified on untagged frames use a [local Layer III seed grammar](fuzzing/fandango/plain-mp3-decision.md). Fanbase's `-F mp3` grammar emits tags and Layer I/II frames, so it cannot be converted to those targets by stripping tags.
 
@@ -135,10 +135,11 @@ The valid controls cover specific format subsets. A successful control does not 
 
 Parsarium is licensed under the [Apache License 2.0](LICENSE). Each parser keeps its own license, recorded in the catalog.
 
-## Releasing the package
+## Project documents
 
-`.github/workflows/release.yml` publishes on a version tag. It builds the snapshot from the tagged commit with `scripts/build_snapshot.py` (byte-reproducible), embeds the snapshot and its SHA-256 in the wheel, smoke-tests the installed wheel outside the checkout, and uploads it to PyPI with trusted publishing.
+- [PROTOCOL.md](PROTOCOL.md): parser eligibility, ranking, adoption metrics, stopping rules.
+- [ETHICS.md](ETHICS.md): what Parsarium is for, how to handle findings, and what it does not do.
+- [AGENTS.md](AGENTS.md): repository map and working rules for automated contributors.
+- [CITATION.cff](CITATION.cff): how to cite Parsarium.
 
-1. Once: on PyPI, add a trusted publisher for project `parsarium`, owner `joszamama`, repository `parsarium`, workflow `release.yml`, environment `pypi`. On GitHub, create the `pypi` environment under Settings → Environments.
-2. Set `__version__` in `src/parsarium/__init__.py` (calendar versions, such as `2026.11.16`), commit, and push.
-3. Tag and push: `git tag v2026.11.16 && git push origin v2026.11.16`.
+Releases are published to PyPI from version tags by `.github/workflows/release.yml`, which builds a byte-reproducible snapshot with `scripts/build_snapshot.py` and smoke-tests the wheel before upload.
