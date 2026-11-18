@@ -12,11 +12,15 @@ fn parse_package(package: &str, path: &std::path::Path) -> Result<serde_json::Va
     match name.as_str() {
         "gufo-png" => {
             let image = gufo_png::Png::new(bytes).map_err(|error| format!("{error:?}"))?;
-            let title = image.chunks().into_iter()
-                .find(|chunk| chunk.chunk_type() == gufo_png::ChunkType::tEXt)
-                .ok_or("missing PNG tEXt chunk")?;
+            // The first tEXt chunk, when the file has one; an empty object otherwise.
+            let Some(title) = image.chunks().into_iter()
+                .find(|chunk| chunk.chunk_type() == gufo_png::ChunkType::tEXt) else {
+                return Ok(serde_json::json!({}));
+            };
             let (key, value) = title.text()?;
-            return Ok(serde_json::from_str(&format!("{{\"key\":\"{}\",\"value\":\"{}\"}}", String::from_utf8_lossy(key), String::from_utf8_lossy(value)))?);
+            // tEXt keywords and text are ISO 8859-1.
+            let latin1 = |bytes: &[u8]| bytes.iter().map(|&byte| byte as char).collect::<String>();
+            return Ok(serde_json::json!({"key": latin1(key), "value": latin1(value)}));
         }
         _ => return Err(format!("unknown PNG package: {name}").into()),
     }

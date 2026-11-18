@@ -5,15 +5,35 @@ import sys
 from pathlib import Path
 
 
-def pixels(width, height, first, second):
-    def rgba(values):
-        values = [float(value) for value in values]
-        if max(values) <= 1:
-            values = [value * 255 for value in values]
-        return [round(value) for value in values[:4]]
+def rgba(value):
+    """One decoded pixel as 8-bit RGBA, expanded per PNG convention.
 
-    return {"width": int(width), "height": int(height),
-            "rgba0": rgba(first), "rgba1": rgba(second)}
+    Gray repeats into r, g and b; a missing alpha is 255; 16-bit samples keep
+    their high byte; float samples in 0..1 are scaled by 255.
+    """
+    dtype = getattr(value, "dtype", None)
+    if hasattr(value, "tolist"):
+        value = value.tolist()
+    values = [value] if isinstance(value, (int, float)) else list(value)
+    if dtype is not None and dtype.kind == "u" and dtype.itemsize == 2:
+        values = [int(sample) >> 8 for sample in values]
+    elif any(isinstance(sample, float) for sample in values):
+        values = [float(sample) for sample in values]
+        if max(values) <= 1:
+            values = [sample * 255 for sample in values]
+    if len(values) in (1, 2):
+        values = values[:1] * 3 + values[1:]
+    if len(values) == 3:
+        values = values + [255]
+    return [round(sample) for sample in values[:4]]
+
+
+def pixels(width, height, at):
+    """Report the size, pixel (0,0) and, when the image has one, pixel (1,0)."""
+    result = {"width": int(width), "height": int(height), "rgba0": rgba(at(0))}
+    if int(width) > 1:
+        result["rgba1"] = rgba(at(1))
+    return result
 
 
 def run(name: str, path: Path):
@@ -22,42 +42,52 @@ def run(name: str, path: Path):
         from PIL import Image
         with Image.open(path) as img:
             img.load()
-            return pixels(*img.size, img.getpixel((0, 0)), img.getpixel((1, 0)))
+            img = img.convert("RGBA")
+            return pixels(*img.size, lambda x: img.getpixel((x, 0)))
     if name == "opencv-python-headless":
         import cv2
         img = cv2.imread(str(path), cv2.IMREAD_UNCHANGED)
-        return pixels(img.shape[1], img.shape[0], img[0, 0][[2, 1, 0, 3]], img[0, 1][[2, 1, 0, 3]])
+        if img is None:
+            raise ValueError("OpenCV did not decode the PNG")
+
+        def at(x):
+            pixel = img[0, x]
+            if img.ndim == 3 and img.shape[2] >= 3:
+                # OpenCV stores color samples as BGR or BGRA.
+                pixel = pixel[[2, 1, 0, 3] if img.shape[2] == 4 else [2, 1, 0]]
+            return pixel
+        return pixels(img.shape[1], img.shape[0], at)
     if name == "imageio":
         import imageio.v3 as imageio
         img = imageio.imread(path)
-        return pixels(img.shape[1], img.shape[0], img[0, 0], img[0, 1])
+        return pixels(img.shape[1], img.shape[0], lambda x: img[0, x])
     if name == "scikit-image":
         from skimage import io
         img = io.imread(path)
-        return pixels(img.shape[1], img.shape[0], img[0, 0], img[0, 1])
+        return pixels(img.shape[1], img.shape[0], lambda x: img[0, x])
     if name == "matplotlib":
         from matplotlib import image
         img = image.imread(str(path))
-        return pixels(img.shape[1], img.shape[0], img[0, 0], img[0, 1])
+        return pixels(img.shape[1], img.shape[0], lambda x: img[0, x])
     if name == "pypng":
         import png
         width, height, rows, _ = png.Reader(filename=str(path)).asRGBA8()
         row = next(iter(rows))
-        return pixels(width, height, row[:4], row[4:8])
+        return pixels(width, height, lambda x: row[4 * x:4 * x + 4])
     if name == "imagecodecs":
         import imagecodecs
         img = imagecodecs.png_decode(data)
-        return pixels(img.shape[1], img.shape[0], img[0, 0], img[0, 1])
+        return pixels(img.shape[1], img.shape[0], lambda x: img[0, x])
     if name == "pyvips":
         import pyvips
         img = pyvips.Image.new_from_file(str(path))
         raw = bytes(img.write_to_memory())
-        return pixels(img.width, img.height, raw[:4], raw[4:8])
+        return pixels(img.width, img.height, lambda x: raw[4 * x:4 * x + 4])
     if name == "Wand":
         from wand.image import Image
         with Image(filename=str(path)) as img:
             raw = img.export_pixels(channel_map="RGBA")
-            return pixels(img.width, img.height, raw[:4], raw[4:8])
+            return pixels(img.width, img.height, lambda x: raw[4 * x:4 * x + 4])
     if name == "Willow":
         from willow.image import Image
         with path.open("rb") as stream:
@@ -69,16 +99,28 @@ def run(name: str, path: Path):
         raw = bytes(img.get_data())
         first = [raw[2], raw[1], raw[0], raw[3]]
         second = [raw[6], raw[5], raw[4], raw[7]]
-        return pixels(img.get_width(), img.get_height(), first, second)
+        return pixels(img.get_width(), img.get_height(), lambda x: second if x else first)
     if name == "pygame":
         import pygame
         img = pygame.image.load(str(path))
-        return pixels(*img.get_size(), img.get_at((0, 0)), img.get_at((1, 0)))
+        return pixels(*img.get_size(), lambda x: img.get_at((x, 0)))
     if name == "rasterio":
         import rasterio
         with rasterio.open(path) as img:
             raw = img.read()
-            return pixels(img.width, img.height, raw[:, 0, 0], raw[:, 0, 1])
+            colormap = None
+            if img.count == 1 and img.colorinterp[0].name == "palette":
+                colormap = img.colormap(1)
+            # GDAL keeps 1, 2 and 4-bit samples unscaled and reports their depth as NBITS.
+            nbits = int(img.tags(1, ns="IMAGE_STRUCTURE").get("NBITS", 8))
+
+            def at(x):
+                if colormap is not None:
+                    return list(colormap[int(raw[0, 0, x])])
+                if nbits < 8:
+                    return [int(sample) * 255 // ((1 << nbits) - 1) for sample in raw[:, 0, x]]
+                return raw[:, 0, x]
+            return pixels(img.width, img.height, at)
     if name == "imagesize":
         import imagesize
         width, height = imagesize.get(str(path))
@@ -95,11 +137,11 @@ def run(name: str, path: Path):
     if name == "imgio":
         import imgio
         img, _ = imgio.imread(path)
-        return pixels(img.shape[1], img.shape[0], img[0, 0], img[0, 1])
+        return pixels(img.shape[1], img.shape[0], lambda x: img[0, x])
     if name == "simpleimageio":
         import simpleimageio
         img = simpleimageio.read(str(path))
-        return pixels(img.shape[1], img.shape[0], img[0, 0], img[0, 1])
+        return pixels(img.shape[1], img.shape[0], lambda x: img[0, x])
     if name == "OpenImageIO":
         import OpenImageIO
         reader = OpenImageIO.ImageInput.open(str(path))
@@ -108,7 +150,7 @@ def run(name: str, path: Path):
         try:
             spec = reader.spec()
             img = reader.read_image()
-            return pixels(spec.width, spec.height, img[0, 0], img[0, 1])
+            return pixels(spec.width, spec.height, lambda x: img[0, x])
         finally:
             reader.close()
     if name == "pngmeta":
