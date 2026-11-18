@@ -507,5 +507,65 @@
     "family": "minimal DNS-SD client for Android",
     "api_lead_checked_against_pinned_release": false,
     "reason": "minimal DNS-SD client for Android. Not tried: zero deps.dev direct dependents over all releases, so it has no positive primary metric and is not added."
+  },
+  {
+    "name": "io.vproxy:vproxy-base",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 1,
+    "found_by": "round-7 discovery: Maven Central Solr g:io.vproxy (JVM network frameworks); metric in registry-snapshot.json round7_targeted",
+    "documentation": "https://central.sonatype.com/artifact/io.vproxy/vproxy-base/1.0.0-BETA-12",
+    "input_api_lead": "io.vproxy.vpacket.dns.Formatter.parsePackets(io.vproxy.base.util.ByteArray)",
+    "family": "vproxy vpacket DNS (own decoder in the vproxy networking toolkit)",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "Fails the response control by source inspection of the 1.0.0-BETA-12 sources jar (the only release, a pre-release): DNSType lists only A, CNAME, PTR, TXT, AAAA, SRV, OPT and query-only types, so Formatter.parseResource maps the MX record's type 15 to DNSType.OTHER (code -1, the number is lost) and RData.newRData returns null for it, leaving the MX rdata undecoded. Its one direct dependent is the same project's vproxy-adaptor-netty."
+  },
+  {
+    "name": "io.github.androidpoet:dns",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 1,
+    "found_by": "round-7 discovery: GitHub 'dns kotlin multiplatform' (AndroidPoet/dns-kmp) mapped to Maven Central; metric in registry-snapshot.json round7_targeted",
+    "documentation": "https://github.com/AndroidPoet/dns-kmp",
+    "input_api_lead": null,
+    "family": "androidpoet dns (Kotlin Multiplatform encrypted-DNS resolver over a native library)",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "Resolver, not a message parser: the 0.1.0 JVM sources (dns-jvm) hold DnsResolver, Upstream, DnsAnswer and RecordType in commonMain and an internal DnsBridge/NativeLibrary JNI bridge; queries go to DoH/DoT/DoQ upstreams through the native library and no public API decodes caller-supplied message bytes."
+  },
+  {
+    "name": "org.onosproject:onlab-misc",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 9058,
+    "found_by": "round-7 discovery: JVM SDN packet libraries (ONOS org.onlab.packet); metric in registry-snapshot.json round7_targeted",
+    "documentation": "https://central.sonatype.com/artifact/org.onosproject/onlab-misc/2.7.0",
+    "input_api_lead": null,
+    "family": "ONOS onlab packet library",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "No DNS decoder: the 2.7.0 jar has no class or package with DNS in its name (org.onlab.packet covers Ethernet, IP, ARP, DHCP, LLDP and other protocols); its count is for the whole ONOS utility artifact."
+  },
+  {
+    "name": "io.netty:netty-all",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 7045,
+    "found_by": "round-7 discovery: deps.dev reverse dependencies and Netty coordinates; metric in registry-snapshot.json round7_targeted",
+    "documentation": "https://central.sonatype.com/artifact/io.netty/netty-all",
+    "input_api_lead": "io.netty.handler.codec.dns (same classes as netty-codec-dns)",
+    "family": "Netty DNS codec",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "Aggregator of all Netty modules, including the selected netty-codec-dns: its DNS classes are the selected codec, not a separate parser, and its count covers all of Netty."
+  },
+  {
+    "name": "net.rpcnet.securitytoolkit:dns",
+    "status": "excluded",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 3,
+    "found_by": "round-7 discovery: deps.dev reverse dependencies of dnsjava (also a round-6 Solr 'dns' hit); metric in registry-snapshot.json round7_targeted",
+    "documentation": "https://central.sonatype.com/artifact/net.rpcnet.securitytoolkit/dns/1.0.2",
+    "input_api_lead": null,
+    "family": "dnsjava",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "Security-toolkit module whose 1.0.2 jar holds only a ZoneTransferChecker interface and whose POM depends on dnsjava (selected); no own message parser."
   }
 ]
