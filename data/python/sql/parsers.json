@@ -754,5 +754,111 @@
         }
       ]
     }
+  },
+  {
+    "name": "mindsdb-sql-parser",
+    "version": "0.13.8",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned sdist (MIT License, Copyright (c) 2024 MindsDB Inc; SHA-256 9fab7ef7...) and __license__ = 'MIT' in mindsdb_sql_parser/__about__.py",
+    "input_api": "mindsdb_sql_parser.parse_sql(sql: str) -> ASTNode",
+    "documentation": "https://github.com/mindsdb/mindsdb_sql_parser#how-to-use (README in the pinned sdist: parse_sql returns the abstract syntax tree)",
+    "source": "https://files.pythonhosted.org/packages/f8/b6/4e28de83d1cc4b62d540fee2d5cdd71f46a69698c254fe107532e4b7ab09/mindsdb_sql_parser-0.13.8.tar.gz",
+    "source_sha256": "2c077a92883c11a6ccfe0f7095e5e575d2c58a4fdaa53fa7867a0d9c4ad563e3",
+    "dependencies": [
+      "SLY 0.5 (vendored in the same distribution)"
+    ],
+    "dialect": "MindsDB SQL",
+    "scope": "One SQL statement from local text via mindsdb_sql_parser.parse_sql (parse_sql returns a single statement object; both controls hold one statement); valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Numeric constants are Python int/float values converted to text, which equals the source text for these controls. MindsDB-specific statements and to_string rendering are untested.",
+    "family": "mindsdb_sql_parser SLY grammar",
+    "family_note": "parse_sql runs the package's SLY lexer and LALR grammar (mindsdb_sql_parser/lexer.py, parser.py with its parser.json tables) and builds the package's own AST classes. Independent of the other selected Python SQL parsers. The superseded mindsdb_sql package (GPL-3.0, last release 0.21.0 in 2024; PyPI Stats last_month 7,674) carried the earlier version of this parser: 63.9% of mindsdb_sql_parser 0.13.8's non-comment source lines (multiset) also occur in mindsdb_sql 0.21.0. It is recorded as the predecessor name and not counted.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 2499,
+      "source": "https://pypistats.org/api/packages/mindsdb-sql-parser/recent",
+      "observed_on_utc": "2026-11-18",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Small absolute count; most downloads likely come from MindsDB installs. The predecessor mindsdb-sql (7,674) is counted separately and not combined."
+    },
+    "project": "projects/sql/python/mindsdb_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

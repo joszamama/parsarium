@@ -1,0 +1,68 @@
+{
+  "kind": "third_party",
+  "api": "mindsdb_sql_parser.parse_sql(local SQL text decoded from UTF-8 bytes) -> AST statement object (Select, Insert, ...); the harness walks Select targets, from_table Join/Identifier tree, where, group_by, order_by, Function and Constant nodes, and Insert table, columns and values",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T00:04:08.670064+00:00",
+  "manifest": "projects/sql/python/mindsdb_sql_parser/manifest.json",
+  "image_id": "sha256:c992995e5033a2db48a32b5221e349a600de017b2ffa02f730c51dddeb9553e6",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Python 3.11.2",
+    "Name: mindsdb_sql_parser",
+    "Version: 0.13.8",
+    "Name: setuptools",
+    "Version: 80.9.0"
+  ],
+  "source_sha256": "2c077a92883c11a6ccfe0f7095e5e575d2c58a4fdaa53fa7867a0d9c4ad563e3",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "8235dc991765ba25cf336229f2e4383e9ddf3e56f982d8c60a5f2a20f80e7923",
+    "build-requirements.lock": "88252a1aed2c38462b103cab33eb96ebd948fac170ffef3de7391da0823c2f36",
+    "fuzz.py": "65ca7956c5833dd53b2a63cf9f60efca6b812d9f93ae04c8bd1dc28ea0d658eb",
+    "harness.py": "155db3eccfbfe7ef308cfdefe94efdd74a8a05a194b0a121556831ed0f64cdd4",
+    "manifest.json": "66f4595c4a652aed576b8ed12533a30a76664461a83162f769eb83ecc41736d6",
+    "replay.py": "89e812105efc44e79e4f1260847eb11e4bb45570bb0857fd1f1eee08ae262067",
+    "run-control.py": "3871b72e7f8d17acc8e6c8c1bf4907126c77d6b1cb3a0f0f34535f966043d179",
+    "source-lock.json": "fdb2d43622cd4d5260924a482bf044c83d42d0bdbd009602abf27aad37c287fb"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 15,
+  "parser_source_lines_covered": 1820,
+  "format_specific_source_lines_covered": 788,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/python/mindsdb_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}

@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "mindsdb-sql-parser",
+  "release": "0.13.8",
+  "catalog_parser": "data/python/sql/parsers.json",
+  "source_lock": "projects/sql/python/mindsdb_sql_parser/source-lock.json",
+  "source_sha256": "2c077a92883c11a6ccfe0f7095e5e575d2c58a4fdaa53fa7867a0d9c4ad563e3",
+  "build_note": "Built from the pinned pure-Python sdist (PyPI has no wheel) on Debian bookworm Python 3.11 with pinned setuptools; the installed mindsdb_sql_parser and sly packages are checked byte-identical to the sdist.",
+  "dependencies_note": "No runtime dependencies: the SLY 0.5 lexer/LALR library is vendored in the same distribution (top-level sly package) and is traced with the parser. The fuzz entry point is an external one-file Python bridge, not Atheris.",
+  "parser_family": "mindsdb_sql_parser SQL grammar (mindsdb_sql_parser/lexer.py and parser.py) on the SLY lexer/LALR engine; independent of sqlparse, sqlglot, sqlfluff, mo-sql-parsing, libpg_query and sqlparser-rs. Successor of the mindsdb_sql package's parser (mindsdb-sql is recorded as its predecessor name and excluded)",
+  "dialect": "MindsDB SQL dialect (mindsdb_sql_parser.parse_sql default; the only dialect of 0.13.8)",
+  "base_image": "debian@sha256:ec8534cda2cb30f29f44f23e135297af7a1496f2990fd8e4e84aa36b081a757a",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/opt/venv/bin/python",
+    "/work/replay.py",
+    "/input/case"
+  ],
+  "api": "mindsdb_sql_parser.parse_sql(local SQL text decoded from UTF-8 bytes) -> AST statement object (Select, Insert, ...); the harness walks Select targets, from_table Join/Identifier tree, where, group_by, order_by, Function and Constant nodes, and Insert table, columns and values",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the mindsdb_sql_parser package and its vendored SLY library during valid-control replay",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.11/site-packages/",
+  "format_specific_coverage_file_suffix": "/mindsdb_sql_parser/parser.py",
+  "scope": "One SQL statement from local text via mindsdb_sql_parser.parse_sql (parse_sql returns a single statement object; both controls hold one statement); valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Numeric constants are Python int/float values converted to text, which equals the source text for these controls. MindsDB-specific statements and to_string rendering are untested.",
+  "native_campaign_supported": false,
+  "afl_python_entrypoint": "/opt/venv/bin/python",
+  "afl_package_release": "4.04c-4"
+}

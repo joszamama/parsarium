@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-18T00:04:31.356586+00:00",
+  "project": "sql/python/mindsdb_sql_parser",
+  "pass": true,
+  "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "7400a49b4805da46df5c7662f8c4f52e375568598157aad1f79e33cd5920c2a3",
+  "overlay_receipt_sha256": "7615d175f77caecc5bdbb75bf06a679fdd6c86e04518b304eb68417f9f09ca68",
+  "base_image_id": "sha256:c992995e5033a2db48a32b5221e349a600de017b2ffa02f730c51dddeb9553e6",
+  "overlay_image_id": "sha256:5950833d4bdcc526d4f84f448aecf7d2d24c09c8ec0570f735489dd3b2e0ef2e",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 1805,
+  "second_afl_tuples": 1695,
+  "afl_tuple_difference": 170,
+  "first_parser_features": 1825,
+  "second_parser_features": 1716,
+  "parser_feature_difference": 171,
+  "first_only_features_by_file": {
+    "mindsdb_sql_parser/ast/select/identifier.py": 2,
+    "mindsdb_sql_parser/ast/select/join.py": 8,
+    "mindsdb_sql_parser/ast/select/operation.py": 10,
+    "mindsdb_sql_parser/ast/select/order_by.py": 4,
+    "mindsdb_sql_parser/ast/select/select.py": 17,
+    "mindsdb_sql_parser/ast/select/star.py": 2,
+    "mindsdb_sql_parser/parser.py": 75,
+    "mindsdb_sql_parser/utils.py": 21,
+    "sly/yacc.py": 1
+  },
+  "second_only_features_by_file": {
+    "mindsdb_sql_parser/ast/create.py": 7,
+    "mindsdb_sql_parser/ast/insert.py": 11,
+    "mindsdb_sql_parser/lexer.py": 1,
+    "mindsdb_sql_parser/parser.py": 12
+  }
+}
