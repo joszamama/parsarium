@@ -1,4 +1,4 @@
-"""PHP XML DOM-loader wrapper paths (QueryPath, laminas-xml, xml-common) keep their oracle, pins, adoption and feedback consistent."""
+"""PHP XML DOM-loader wrapper paths (QueryPath, laminas-xml, xml-common, DiDOM) keep their oracle, pins, adoption and feedback consistent."""
 
 from hashlib import sha256
 import importlib.util
@@ -13,6 +13,7 @@ PATHS = {
     "querypath": ("querypath/querypath", "src/QueryPath/DOMQuery.php", "MIT"),
     "laminas_xml": ("laminas/laminas-xml", "src/Security.php", "BSD-3-Clause"),
     "simplesamlphp_xml_common": ("simplesamlphp/xml-common", "src/XML/DOMDocumentFactory.php", "LGPL-2.1-or-later"),
+    "didom": ("imangazaliev/didom", "src/DiDom/Document.php", "MIT"),
 }
 
 _spec = importlib.util.spec_from_file_location("xml_check_controls", ROOT / "controls/xml/check_controls.py")

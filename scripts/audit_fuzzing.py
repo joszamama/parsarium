@@ -387,7 +387,7 @@ def main() -> None:
             assert receipt["post_parse_edges_identical"] is True
             assert json.loads((project / "verification.json").read_text())[
                 "format_specific_source_lines_covered"] > 0
-        elif str(relative) in {"xml/php/querypath", "xml/php/laminas_xml", "xml/php/simplesamlphp_xml_common"}:
+        elif str(relative) in {"xml/php/querypath", "xml/php/laminas_xml", "xml/php/simplesamlphp_xml_common", "xml/php/didom"}:
             # DOM loader wrappers: the package parses through libxml2 and returns or wraps the DOM.
             assert manifest.get("native_campaign_supported") is False
             assert receipt["feedback_kind"] == "native_libxml2_php_dom_parser_source_edges"

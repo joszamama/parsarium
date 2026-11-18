@@ -1,0 +1,62 @@
+{
+  "kind": "third_party",
+  "api": "new DiDom\\Document(string $xml, false, 'UTF-8', Document::TYPE_XML) on the local bytes (the constructor sets preserveWhiteSpace = false; Document::load trims the string and calls DOMDocument::loadXML with LIBXML_HTML_NODEFDTD); Document::getDocument() returns that DOMDocument, walked namespace-aware",
+  "runtime": null,
+  "verified_at_utc": "2026-11-17T23:54:56.596216+00:00",
+  "manifest": "projects/xml/php/didom/manifest.json",
+  "image_id": "sha256:1dbbda336ff28b6aeb186146fb4d7f0261275dda8cbdf9a59638c3df71130266",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "libxml 2.15.2"
+  ],
+  "source_sha256": "35124c32ae958be5b73e46c2f8e4cf8fd65e5b64c0e83d7fe72de5eea48cf762",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "3260c1a51b599015c539943eb6c028c0502b6c96aacd5d30bc54e613fe77aa23",
+    "autoload.php": "8231ca8d7e8ae5c293c7b8ba13daed3e5fa37e5889312daeee7c22f203206b43",
+    "fuzz-target.php": "82415c86604aa1cc017d42d89d4b90a93694eba8e914a5424c4885f97a0ab16d",
+    "harness.php": "0a776d6d28fb29eff47b29c2485757b73e5be8cd0a6687b92ff96e4f97b2afc0",
+    "manifest.json": "ab3066073ef22c31e7c7386101fb9886c70ced1c0e215a9f0387ddc81521aa7a",
+    "run-control.php": "f8debfc18f165b1503da193ede0a9410af854a3e6ec84a96dd6b9d5374d49b5a",
+    "source-lock.json": "bb424b81dbd85168faa602a33bf3f4aa820963eea8090637d3d406b6b7fcdeb3",
+    "summary.php": "9aac002e5b4b01c71c2c99f52ffa063b5bb5662301cb189e5d41b8b4b6283bc0",
+    "target.json": "2b7f57d92dd819ece9d35b483c238fa3541db0923c608ae09479cca125a2bd1c"
+  },
+  "output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "parser_source_files": 2,
+  "parser_source_lines_covered": 33,
+  "format_specific_source_lines_covered": 24,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/php/didom/target/coverage/coverage.json",
+  "pass": true
+}

@@ -621,6 +621,90 @@
     ]
   },
   {
+    "name": "imangazaliev/didom",
+    "version": "2.0.1",
+    "license": "MIT",
+    "license_evidence": "https://github.com/Imangazaliev/DiDOM/blob/50fa6595d14f22c0c984efed5c818485cf548136/LICENSE",
+    "documentation": "https://github.com/Imangazaliev/DiDOM/blob/50fa6595d14f22c0c984efed5c818485cf548136/README.md",
+    "source": "https://github.com/Imangazaliev/DiDOM/tree/50fa6595d14f22c0c984efed5c818485cf548136",
+    "input_api": "new DiDom\\Document(string $xml, false, 'UTF-8', Document::TYPE_XML) on the local bytes (the constructor sets preserveWhiteSpace = false; Document::load trims the string and calls DOMDocument::loadXML with LIBXML_HTML_NODEFDTD); Document::getDocument() returns that DOMDocument, walked namespace-aware",
+    "parser_family": "libxml2 via PHP ext/dom DOMDocument::loadXML; shared with the standard DOMDocument path, symfony/dom-crawler, symfony/serializer and mtownsend/xml-to-array",
+    "package_own_scope": "DiDom's Document::load: type selection (XML vs HTML), trimming the string, LIBXML_HTML_NODEFDTD as default options, libxml error suppression, and the Document/Element wrappers for CSS/XPath queries. Tokenizing, well-formedness, entity and character-reference decoding, CDATA and namespace binding are libxml2.",
+    "adapter": "projects/xml/php/didom/harness.php",
+    "source_lock": "projects/xml/php/didom/source-lock.json",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespace_declarations": 3,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "root": "{urn:parsarium:order}order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "family": "libxml2 via PHP DOMDocument, shared with the standard path, symfony/dom-crawler, symfony/serializer and mtownsend/xml-to-array",
+    "project": "projects/xml/php/didom/verification.json",
+    "popularity": {
+      "metric": "Packagist total package downloads",
+      "value": 2799556,
+      "source": "https://packagist.org/packages/imangazaliev/didom",
+      "captured_at_utc": "2026-11-17T03:46:35.927344+00:00",
+      "snapshot": "data/php/xml/registry-snapshot.json",
+      "caveat": "Cumulative downloads of the whole package, rank 24 in the snapshot's 'xml' query and 2 in 'xml parser'; downloads count installs, often transitive, not XML-parsing uses. It is a DOMDocument::loadXML loader of the shared libxml2 family."
+    },
+    "caveats": [
+      "Wrapper path: the package's documented entry point loads the bytes with DOMDocument::loadXML and returns or wraps the resulting DOMDocument; the adapter walks that DOM namespace-aware (expanded names, xmlns declarations, attributes, depth, text) and both valid controls match the namespace-aware expat oracle. The package adds no tokenizer of its own.",
+      "DiDOM is described as an HTML parser and most downloads are HTML scraping uses; the XML route is Document::TYPE_XML. DiDOM 2.0.1 (2023) emits PHP 8.5 deprecation notices for implicitly nullable parameters, kept off the output with error_reporting(E_ALL & ~E_DEPRECATED)."
+    ]
+  },
+  {
     "name": "pear/xml_parser",
     "version": "v1.3.8",
     "license": "BSD-2-Clause",
