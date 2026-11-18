@@ -178,6 +178,33 @@
       "source": "https://crates.io/crates/babbel_toml",
       "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
       "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "tomling",
+      "release": "0.3.0",
+      "metric_value": 30,
+      "family": "tomling (zeenix; own winnow-based parser, Datetime type adapted from toml_datetime)",
+      "api_lead": "tomling::parse(&str) -> Table<'_> of Value (Integer, Float, Datetime{date, time, offset})",
+      "license": "MIT",
+      "crate_sha256": "5c44be5e98455007e277a9eab15569ae0a38989fe8424b0cc34009e620b700ee",
+      "status": "unresolved_control_failed",
+      "evidence": "Run on the host (cargo 1.99.1, default features off plus std): the Value tree has distinct Integer/Float variants and a Datetime with public date, time and offset fields, but tomling::parse rejects both controls with Parse(ParseError { context: [] }). A one-line document title = \"x \\\"y\\\" z\" is rejected the same way, so basic strings with escaped quotes (service-config line 2) fail; a bare a = 1 parses. The README marks the crate abandoned as of 2025-07-09 in favour of toml.",
+      "found_by": "round-6 crates.io reverse dependencies of toml-test-harness",
+      "metric": "crates.io recent downloads (90 days)",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "tomllib",
+      "release": "0.1.2",
+      "metric_value": 99,
+      "family": "tomllib (joelself; own nom 1 parser, 2016)",
+      "api_lead": "tomllib::TOMLParser::parse(&str) -> (TOMLParser, ParseResult); get_value(key) -> Value",
+      "crate_sha256": "1ec06a1682e040cb25420b275807c92f53beb040a510fac7ede29697b00e700e",
+      "status": "unresolved_api_gap",
+      "evidence": "Checked against the 0.1.2 source (src/types.rs): Value::Integer and Value::Float hold the source text (Cow<str>), Value::String keeps the undecoded contents with a StrType tag, and DateTime always carries a date, so a TOML 1.0 local time has no representation (the crate targets the TOML 0.4 ABNF). Its README also needs the beta-only regex_macros. Not run.",
+      "metric": "crates.io recent downloads (90 days)",
+      "checked_at_utc": "2026-11-18",
+      "found_by": "round-6 targeted lookups (registry-snapshot round_6_targeted_lookups)"
     }
   ],
   "excluded": [
@@ -258,6 +285,30 @@
       "metric_value": 22508,
       "status": "excluded",
       "reason": "Tree-sitter grammar; syntax tree only."
+    },
+    {
+      "name": "toml-parse",
+      "metric_value": 172,
+      "status": "excluded",
+      "reason": "Round 6: 0.2.11 (2020) returns only a rowan concrete syntax tree for formatting and sorting; tables, dotted keys and string escapes stay unresolved, so it is a syntax-tree-only lead under the concrete-syntax-tree rule."
+    },
+    {
+      "name": "toml_reader",
+      "metric_value": 69,
+      "status": "excluded",
+      "reason": "Round 6: config loader whose only TOML dependency is the selected toml crate."
+    },
+    {
+      "name": "env_toml",
+      "metric_value": 41,
+      "status": "excluded",
+      "reason": "Round 6: version 0.2.5+upstream-1.1.6 is a fork of the toml crate with an env_toml_parser fork of toml_parser (toml_parser family)."
+    },
+    {
+      "name": "picotoml",
+      "metric_value": 8,
+      "status": "excluded",
+      "reason": "Round 6: no_std serde deserializer over a logos lexer with no documented generic value type."
     }
   ],
   "promoted": [
@@ -330,6 +381,26 @@
     "note": "The cell holds nine verified paths. Own-parser crates ranked below kabosu (46 recent downloads) were listed but not run before the antlr-rust-toml-parser demotion; they remain unrun leads. Configuration loaders, toml/toml_edit wrappers, Cargo.toml tools, converters, tree-sitter grammars and other formats in the keyword listing are not parsers of their own.",
     "demoted_at_review": [
       "antlr-rust-toml-parser 0.34.0 (flat items; table semantics would be harness interpretation)"
+    ]
+  },
+  "round_6": {
+    "observed": "2026-11-18",
+    "routes": [
+      "toml-lang/toml-test-matrix parser list (commit 71475d29, 2025-04-25; 36 parser scripts): every Rust entry (basic-toml, boml, taplo, toml, toml_edit) is already selected or decided",
+      "crates.io reverse dependencies of the toml-test tooling crates toml-test-harness (4), toml-test-data (6) and toml-test (2): toml, toml_edit, tomling, env_toml, toml-shelby and the tooling crates themselves",
+      "crates.io name lookups for 39 unrecorded TOML parser names (toml-parse, toml_parse, tomlparse, microtoml, tiny-toml, toml-lite, picotoml, toml_reader, toml-ast, toml-decoder, toml-core and others); 5 exist",
+      "unrun round-4 own-parser crates above or near kabosu's 46 recent downloads (tomllib 99, toml_document 41, tomling 30) after the antlr-rust-toml-parser demotion reopened the tenth slot"
+    ],
+    "promoted": [],
+    "new_leads": [
+      "tomling",
+      "tomllib"
+    ],
+    "excluded": [
+      "toml-parse",
+      "toml_reader",
+      "env_toml",
+      "picotoml"
     ]
   }
 }
