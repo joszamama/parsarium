@@ -18,9 +18,15 @@ Receipts: [libgda](../../../projects/sql/c/libgda/verification.json) and its [AF
 | Lead | Metric | Status | Parser family |
 | --- | ---: | --- | --- |
 | sqlite3 | 297,378 | excluded | SQLite (Lemon-generated parse.y) |
+| mariadb | 119,017 | excluded | MariaDB server and client source package |
 | postgresql-18 | 104,539 | excluded | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| unixodbc | 58,128 | excluded | unixODBC driver manager |
+| spatialite | 30,735 | excluded | SpatiaLite SQLite extension |
+| freetds | 8,190 | excluded | FreeTDS TDS client library |
 | sqlcipher | 3,786 | excluded | SQLite (fork) |
 | libgda5 | 2,105 | selected | libgda Lemon-generated SQL parser |
+| psqlodbc | 1,581 | excluded | PostgreSQL ODBC driver |
+| mdbtools | 579 | excluded | libmdbsql lex/yacc grammar for Access databases |
 | libpg-query | 41 | selected | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | duckdb | 40 | excluded | DuckDB PEG parser (own grammar since 2.0.0; 1.x used a libpg_query-derived grammar) |
 

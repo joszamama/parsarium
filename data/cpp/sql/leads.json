@@ -143,6 +143,26 @@
       "family": "Hyrise sql-parser (Bison/Flex)",
       "documented_api_lead": "hsql::SQLParser::parse",
       "reason": "hsql::SQLParser::parse returns SQLParserResult with SQLStatement trees; documented local text API. No Debian source package in the pinned popcon snapshot (rechecked 2026-11-17 for hsql, hyrise and sql-parser source names), so it has no value for this cell's primary popcon metric and no Debian dev-package fallback; GitHub stars are not allowed outside PLY cells."
+    },
+    {
+      "name": "qgis",
+      "status": "excluded",
+      "metric_value": 1927,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "QGIS QgsSQLStatement bison grammar",
+      "documented_api_lead": "QgsSQLStatement",
+      "reason": "Round 3 targeted lookup. QGIS core's QgsSQLStatement parses SELECT statements for OGC filter translation, but its grammar (src/core/qgssqlstatementparser.yy at tag final-3_40_0) declares SELECT, JOIN, WHERE and ORDER BY and has no GROUP BY or INSERT, so it cannot parse either control. The popcon count is for the whole QGIS application. Debian popcon sourcemax rank 5,103, 1,927 installations (pinned snapshot)."
+    },
+    {
+      "name": "futuresql",
+      "status": "excluded",
+      "metric_value": 24225,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "KDE FutureSQL asynchronous database wrapper",
+      "documented_api_lead": null,
+      "reason": "Round 3 targeted lookup. Asynchronous Qt database access library (QtSql drivers underneath); it passes statement text to the database driver and has no SQL parser. Debian popcon sourcemax rank 1,911, 24,225 installations (pinned snapshot)."
     }
   ]
 }

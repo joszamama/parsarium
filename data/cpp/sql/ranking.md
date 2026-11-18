@@ -18,8 +18,10 @@ Receipts: [duckdb](../../../projects/sql/cpp/duckdb/verification.json) and its [
 | --- | ---: | --- | --- |
 | libreoffice | 128,949 | excluded | LibreOffice SQL parser (connectivity OSQLParser, bison) |
 | gdal | 39,199 | excluded | GDAL OGR SQL (swq) parser |
+| futuresql | 24,225 | excluded | KDE FutureSQL asynchronous database wrapper |
 | antlr4-cpp-runtime | 6,770 | excluded | — |
 | sqlitebrowser | 5,167 | excluded | DB Browser for SQLite internal SQLite schema parser |
+| qgis | 1,927 | excluded | QGIS QgsSQLStatement bison grammar |
 | soci | 518 | excluded | — |
 | kdb | 237 | excluded | KDb SQL parser (bison) |
 | mysql++ | 178 | excluded | — |

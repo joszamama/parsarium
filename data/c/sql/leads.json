@@ -64,6 +64,66 @@
       "family": "DuckDB PEG parser (own grammar since 2.0.0; 1.x used a libpg_query-derived grammar)",
       "documented_api_lead": null,
       "reason": "C++ library (DuckDB engine); recorded and selected in the C++ cell (duckdb::Parser, DuckDB 2.0.0)."
+    },
+    {
+      "name": "mariadb",
+      "status": "excluded",
+      "metric_value": 119017,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "MariaDB server and client source package",
+      "documented_api_lead": null,
+      "reason": "Round 3 targeted lookup in the pinned popcon snapshot. Database server and client: the server's SQL grammar (sql/sql_yacc.yy) is compiled into mysqld and is not a documented library API, and the libmariadb client sends statement text to a server. Engine/driver exclusion, as for mysql-defaults and postgresql-18. Debian popcon sourcemax rank 707, 119,017 installations (pinned snapshot)."
+    },
+    {
+      "name": "unixodbc",
+      "status": "excluded",
+      "metric_value": 58128,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "unixODBC driver manager",
+      "documented_api_lead": null,
+      "reason": "Round 3 targeted lookup. ODBC driver manager: it forwards statement text to the loaded driver and offers no SQL syntax-tree API. Debian popcon sourcemax rank 1,103, 58,128 installations (pinned snapshot)."
+    },
+    {
+      "name": "spatialite",
+      "status": "excluded",
+      "metric_value": 30735,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "SpatiaLite SQLite extension",
+      "documented_api_lead": null,
+      "reason": "Round 3 targeted lookup. Spatial extension library for SQLite; SQL is compiled by the SQLite engine (no public syntax tree), as for sqlite3. Debian popcon sourcemax rank 1,673, 30,735 installations (pinned snapshot)."
+    },
+    {
+      "name": "freetds",
+      "status": "excluded",
+      "metric_value": 8190,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "FreeTDS TDS client library",
+      "documented_api_lead": null,
+      "reason": "Round 3 targeted lookup. Client implementation of the TDS wire protocol (db-lib/CT-lib/ODBC); it sends SQL text to a server and has no parser API. Debian popcon sourcemax rank 3,176, 8,190 installations (pinned snapshot)."
+    },
+    {
+      "name": "psqlodbc",
+      "status": "excluded",
+      "metric_value": 1581,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "PostgreSQL ODBC driver",
+      "documented_api_lead": null,
+      "reason": "Round 3 targeted lookup. ODBC driver; its statement scanning for parameter markers and result columns is internal to the driver and not a documented library API returning a statement tree. Debian popcon sourcemax rank 5,697, 1,581 installations (pinned snapshot)."
+    },
+    {
+      "name": "mdbtools",
+      "status": "excluded",
+      "metric_value": 579,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "libmdbsql lex/yacc grammar for Access databases",
+      "documented_api_lead": "mdb_sql_run_query",
+      "reason": "Round 3 targeted lookup. libmdbsql parses a small SQL subset to query an opened .mdb file: its grammar (src/sql/parser.y at tag v1.0.1) declares SELECT, FROM, WHERE, LIMIT and TOP but no JOIN, GROUP BY, ORDER BY or INSERT, so it cannot parse either control, and its query entry point runs against a database handle. Debian popcon sourcemax rank 8,360, 579 installations (pinned snapshot)."
     }
   ]
 }
