@@ -1,6 +1,6 @@
 # ASCII PLY / Java
 
-6 verified third-party API paths; 6 have verified Docker harnesses.
+7 verified third-party API paths; 7 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/java/ascii_ply/ranking.md) · [standard API inventory](../../../data/java/ascii_ply/standard.json)
 
@@ -12,6 +12,7 @@
 - [kotlin-assimp](kotlin-assimp/README.md) — Docker harness ready
 - [boofcv-io](boofcv-io/README.md) — Docker harness ready
 - [jzy3d-core](jzy3d-core/README.md) — Docker harness ready
+- [scalismo_3](scalismo-3/README.md) — Docker harness ready
 
 ## Standard and runtime APIs
 
