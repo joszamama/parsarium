@@ -36,6 +36,27 @@
     "source": "https://packagist.org/packages/sabre/xml"
   },
   {
+    "name": "codeception/lib-xml",
+    "status": "excluded",
+    "packagist_downloads": 14739396,
+    "reason": "Test-framework support code (XmlBuilder, XmlStructure assertions, Util\\Xml::toXml loading through DOMDocument); no documented general XML parse API.",
+    "source": "https://packagist.org/packages/codeception/lib-xml"
+  },
+  {
+    "name": "hassankhan/config",
+    "status": "excluded",
+    "packagist_downloads": 14255356,
+    "reason": "Multi-format config loader; Parser\\Xml::parseString is simplexml_load_string plus json_encode/json_decode, the same round trip as the excluded jtrumbull/xml-parser (loses the root name, CDATA and attributes of text-only elements).",
+    "source": "https://packagist.org/packages/hassankhan/config"
+  },
+  {
+    "name": "zendframework/zendxml",
+    "status": "excluded",
+    "packagist_downloads": 9276742,
+    "reason": "Abandoned predecessor of laminas/laminas-xml (Packagist abandoned -> laminas/laminas-xml); not counted separately, following the zend-json precedent.",
+    "source": "https://packagist.org/packages/zendframework/zendxml"
+  },
+  {
     "name": "veewee/xml",
     "status": "selected",
     "version_seen": "4.14.0",
@@ -45,6 +66,15 @@
     "source": "https://packagist.org/packages/veewee/xml"
   },
   {
+    "name": "querypath/querypath",
+    "status": "selected",
+    "version_seen": "3.0.5",
+    "license": "MIT",
+    "packagist_downloads": 7319575,
+    "reason": "Documented qp(string)/QueryPath::with loads an XML-declared string with DOMDocument::loadXML (DOMQuery::parseXMLString) and DOMQuery::document() returns the DOMDocument. Both valid controls match the namespace-aware expat oracle. Wrapper path, libxml2 family: its DOMQuery.php lines are identical on both controls; all 360 differing native AFL++ tuples arise at parse time. Last release 2016; PHP 8.5 deprecations kept off output. Verified: projects/xml/php/querypath.",
+    "source": "https://packagist.org/packages/querypath/querypath"
+  },
+  {
     "name": "mtownsend/xml-to-array",
     "status": "selected",
     "version_seen": "2.0.1",
@@ -52,6 +82,22 @@
     "packagist_downloads": 4956232,
     "reason": "Documented package XML-to-array API over PHP DOMDocument/libxml2. Both valid controls match the independently projected Expat oracle for the package's preserved fields; native parser-only AFL feedback changes stably. Projection and shared-family limits are in the parser record. Verified: projects/xml/php/mtownsend_xml_to_array.",
     "source": "https://packagist.org/packages/mtownsend/xml-to-array"
+  },
+  {
+    "name": "php-soap/xml",
+    "status": "excluded",
+    "packagist_downloads": 4814954,
+    "reason": "SOAP envelope locators, XPath presets and header builders over veewee/xml (already selected); no XML input API of its own.",
+    "source": "https://packagist.org/packages/php-soap/xml"
+  },
+  {
+    "name": "laminas/laminas-xml",
+    "status": "selected",
+    "version_seen": "1.8.0",
+    "license": "BSD-3-Clause",
+    "packagist_downloads": 3988633,
+    "reason": "Documented Security::scan(string, DOMDocument) loads with DOMDocument::loadXML and LIBXML_NONET, rejects entity-declaring DOCTYPEs and returns the DOMDocument. Both valid controls match the namespace-aware expat oracle. Guard facade (like Python's defusedxml), libxml2 family; its lines are identical on both controls; 360 parse-time AFL++ tuples. Successor of zendframework/zendxml. Verified: projects/xml/php/laminas_xml.",
+    "source": "https://packagist.org/packages/laminas/laminas-xml"
   },
   {
     "name": "saloonphp/xml-wrangler",
@@ -72,6 +118,31 @@
     "source": "https://packagist.org/packages/prewk/xml-string-streamer"
   },
   {
+    "name": "simplesamlphp/xml-common",
+    "status": "selected",
+    "version_seen": "v3.0.8",
+    "license": "LGPL-2.1-or-later",
+    "packagist_downloads": 3504693,
+    "reason": "DOMDocumentFactory::fromString(string) rejects whitespace-only and DOCTYPE input and returns a Dom\\XMLDocument from createFromString. Both valid controls match the namespace-aware expat oracle. Wrapper path, libxml2 family (Dom\\XMLDocument, as veewee/xml); 362 parse-time AFL++ tuples. Downloads come mostly from SimpleSAMLphp. Verified: projects/xml/php/simplesamlphp_xml_common.",
+    "source": "https://packagist.org/packages/simplesamlphp/xml-common"
+  },
+  {
+    "name": "imangazaliev/didom",
+    "status": "selected",
+    "version_seen": "2.0.1",
+    "license": "MIT",
+    "packagist_downloads": 2799556,
+    "reason": "new Document($xml, false, 'UTF-8', Document::TYPE_XML) trims the string and loads it with DOMDocument::loadXML (preserveWhiteSpace off, LIBXML_HTML_NODEFDTD); getDocument() returns the DOMDocument. Both valid controls match the namespace-aware expat oracle. Wrapper path, libxml2 family; 361 parse-time AFL++ tuples. Downloads are mostly HTML scraping. Tenth by downloads. Verified: projects/xml/php/didom.",
+    "source": "https://packagist.org/packages/imangazaliev/didom"
+  },
+  {
+    "name": "digitickets/lalit",
+    "status": "unresolved_below_ceiling",
+    "packagist_downloads": 2446737,
+    "reason": "LaLit XML2Array::createArray over DOMDocument::loadXML (qualified names, prefixed attributes and xmlns declarations kept; a local probe ran on both controls, xmlns=\"\" on plain is lost). Not built: with 2,446,737 downloads it would rank eleventh, below the ten selected paths.",
+    "source": "https://packagist.org/packages/digitickets/lalit"
+  },
+  {
     "name": "laravie/parser",
     "status": "excluded",
     "version_seen": "v3.0.0",
@@ -79,6 +150,13 @@
     "packagist_downloads": 2274560,
     "reason": "Pinned v3.0.0 (MIT) probe (local candidate commit e293b060) matched an expat oracle evaluating the same fixed schema, but Reader::load is simplexml_load_file and Document::parse only maps the already parsed SimpleXML tree onto a caller-provided schema; all 359 differing libxml2 tuples also differ under a bare simplexml_load_file and the full and parse-only maps are identical. Treated like the excluded serializer mapping layers; not counted.",
     "source": "https://packagist.org/packages/laravie/parser"
+  },
+  {
+    "name": "gravitypdf/querypath",
+    "status": "unresolved_below_ceiling",
+    "packagist_downloads": 2098757,
+    "reason": "Maintained fork of QueryPath (4.2.0); 45.4% of its normalized source lines occur in querypath/querypath 3.0.5 (35.2% in sequence by file name), so it is not excluded as a byte-identical fork, but with 2,098,757 downloads it would rank below the ten selected paths. Not built.",
+    "source": "https://packagist.org/packages/gravitypdf/querypath"
   },
   {
     "name": "orchestra/parser",
@@ -91,11 +169,11 @@
   },
   {
     "name": "pear/xml_parser",
-    "status": "selected",
+    "status": "qualified_but_ten_path_ceiling",
     "version_seen": "v1.3.8",
     "license": "BSD-2-Clause",
     "packagist_downloads": 1819294,
-    "reason": "Documented XML_Parser setInputString()/setInputFile()/setInput() plus setHandlerObj() and parse() drives ext/xml xml_parser_create/xml_parse (libxml2 push parser via compat.c) and delivers SAX events to a handler object. Both valid controls match a raw-name Expat oracle (no namespace mode; xmlns declarations are attributes; documented $folding set to false). Xdebug covers 56 package lines and LLVM about 2,070 libxml2 lines (parser.c 956); native parser-scoped AFL changes 299 stable tuples, all also differing under a bare xml_parse baseline, so the package drives the parse but adds no own tuples. Packagist marks it abandoned; PHP 8.5 deprecation notices recorded. Verified: projects/xml/php/pear_xml_parser.",
+    "reason": "Qualified (raw-name SAX wrapper over ext/xml; see data/php/xml/ceiling-displaced.json for its full catalog row and receipts) but eleventh by Packagist downloads (1,819,294) after querypath/querypath, laminas/laminas-xml, simplesamlphp/xml-common and imangazaliev/didom were verified from the same snapshot; displaced at the ten-path ceiling. Project, overlay, verify script and test removed.",
     "source": "https://packagist.org/packages/pear/xml_parser"
   },
   {

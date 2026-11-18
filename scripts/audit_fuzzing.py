@@ -429,29 +429,6 @@ def main() -> None:
             assert receipt["elements_only_maps_equal_full_harness"] is True
             assert json.loads((project / "verification.json").read_text())[
                 "format_specific_source_lines_covered"] > 0
-        elif str(relative) == "xml/php/pear_xml_parser":
-            assert manifest.get("native_campaign_supported") is False
-            assert receipt["feedback_kind"] == "native_libxml2_php_xml_parser_source_edges"
-            assert receipt["instrumented_objects"] == [
-                "libxml2-2.15.4/build/.libs/libxml2_la-SAX2.o",
-                "libxml2-2.15.4/build/.libs/libxml2_la-parser.o",
-                "libxml2-2.15.4/build/.libs/libxml2_la-parserInternals.o",
-                "php-8.5.12/ext/xml/compat.o",
-                "php-8.5.12/ext/xml/xml.o"]
-            assert receipt["source_sha256"] == manifest["source_sha256"]
-            assert receipt["underlying_source_sha256"] == manifest["underlying_source_sha256"]
-            assert receipt["php_source_sha256"] == manifest["php_source_sha256"]
-            assert receipt["extension_source_sha256"] == manifest["extension_source_sha256"]
-            assert receipt["differential_control_sha256"] == manifest["differential_control_sha256"]
-            assert receipt["control_output_matches_oracle"] and receipt["differential_output_matches_oracle"]
-            assert receipt["repeats_per_control"] >= 3 and receipt["all_repeats_identical"]
-            assert receipt["format_dependent_parse_time_tuples"] > 0
-            assert receipt["format_dependent_harness_only_tuples"] == 0
-            assert receipt["harness_only_edges_identical"] is True
-            assert receipt["differing_tuples_subset_of_bare_baseline"] is True
-            verification = json.loads((project / "verification.json").read_text())
-            assert verification["format_specific_source_lines_covered"] > 0
-            assert verification["underlying_source_lines_covered"] > 0
         elif str(relative) == "yaml/php/pecl_yaml":
             assert manifest.get("native_campaign_supported") is False
             assert receipt["feedback_kind"] == "native_libyaml_php_yaml_parser_source_edges"
