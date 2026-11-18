@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-18T00:06:25.873215+00:00",
-  "projects_total": 601,
-  "projects_verified": 601,
+  "checked_at_utc": "2026-11-18T00:32:23.958559+00:00",
+  "projects_total": 604,
+  "projects_verified": 604,
   "results": [
     {
       "schema_version": 1,
@@ -9034,6 +9034,29 @@
     },
     {
       "schema_version": 1,
+      "project": "sql/php/bleksak_sqlite_toolkit",
+      "pass": true,
+      "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+      "base_project_receipt_sha256": "a8bff2fc7ff0a793cd4fbc11f5141d4a2448e5ca7dcfb57bdf84489e82c47231",
+      "base_image_id": "sha256:8105ca513bd0dc45a187ca8d86fb667c3172b1e8fa098485b344e9a47c77c781",
+      "image_id": "sha256:8151659a418e8823dd53019b19cfd80624ac0f3dc0978b8970c228981d3bf5b7",
+      "platform": "linux/arm64",
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "parser_source_features": 1072,
+      "feedback_edges": 1086,
+      "afl_map_size": 65536,
+      "afl_package": "4.33c-1.1ubuntu1",
+      "overlay_file_sha256": {
+        "Dockerfile": "c7188af9feadd30f9ca5286f09f931abe421cfbb13e2715876b00ba3ba52ad3b",
+        "afl_trace": "cc3dc001b6ca76e67bb1a3a8144c7a689556d6491eb34ea53758d9f421a7ebd8"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "php_trace.php": "23e82e01ddc08e6b188c5de7910c33363de2ab0a94688e638b21eca346bf5a03"
+      }
+    },
+    {
+      "schema_version": 1,
       "project": "sql/php/crodas_sql_parser",
       "pass": true,
       "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
@@ -9053,6 +9076,275 @@
       "bridge_file_sha256": {
         "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
         "php_trace.php": "23e82e01ddc08e6b188c5de7910c33363de2ab0a94688e638b21eca346bf5a03"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/php/flow_php_pg_query_ext",
+      "pass": true,
+      "feedback_kind": "native_libpg_query_php_pg_query_parser_source_edges",
+      "feedback_scope": "flow-php/pg-query-ext 0.48.0 ext/pg_query.c (pg_query_parse) plus libpg_query 18.0.0 src_backend_parser_gram.c, src_backend_parser_scan.c and src_backend_parser_parser.c via AFL++ allowlist; the JSON output functions, the rest of libpg_query and the PHP runtime are uninstrumented",
+      "fuzz_target": "projects/sql/php/flow_php_pg_query_ext/fuzz-target.php (pg_query_parse only, no JSON decode or summary)",
+      "harness": "projects/sql/php/flow_php_pg_query_ext/harness.php (pg_query_parse, then json_decode and the oracle summary walk)",
+      "extension_source_sha256": {
+        "pg-query-ext-0.48.0/ext/pg_query.c": "7807aeb690abcba4e74faeac547f7d490485f7a1df2cf52bf7c89def65d5b9d8",
+        "pg-query-ext-0.48.0/ext/php_pg_query.h": "63aaaf3a025c8c4e4b195ff09dd586edc2bd3a3af469cd5fc8013978a737b0cb",
+        "pg-query-ext-0.48.0/ext/pg_query_arginfo.h": "7853d5d86c2895f456cb282c70d77db55a7f9d1f2a2162275972295fa6e0f0d5",
+        "pg-query-ext-0.48.0/ext/config.m4": "9f945856f840cebabfcc3cbd3c328cd3aea30a11ad7baf4a5d343858e4651ae3"
+      },
+      "api_signature": "pg_query pg_query_parse(string $sql): string",
+      "base_project_receipt_sha256": "971f5e461fcad48090a3e401980c3ea78d2bf7eaa5ce4300b4c8403128f63f4c",
+      "base_image_id": "sha256:58b110aa0ff3246b231c30e22ca0206c581dacf162577c392673a9f9677f0c28",
+      "source_sha256": "6f984b73d57b777c240bd59e31a7f46cee03ca5e984124bc25ea57379de5b16f",
+      "underlying_source_sha256": "6ad7783f272acfd116455c66a03298a0cac9a9168281df547969219112f0260f",
+      "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+      "license_file_sha256": {
+        "php-8.5.12/LICENSE": "b42e4df5e50e6ecda1047d503d6d91d71032d09ed1027ba1ef29eed26f890c5a",
+        "pg-query-ext-0.48.0/LICENSE.flow-monorepo": "eeb68d50be5e8cf87b1ba5fa5cff838d988dbf5f936491b191758bec3b9decc6",
+        "libpg_query-18.0.0/LICENSE": "f9352c20940619a380a5e9f23cebe34d8f797cfbd747fc236a7a3e5fc8ef9b41"
+      },
+      "runtime": {
+        "php": "8.5.12",
+        "pg_query_ext": "0.48.0",
+        "libpg_query": "18.0.0"
+      },
+      "instrumented_objects": [
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_gram.o",
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_parser.o",
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_scan.o",
+        "pg-query-ext-0.48.0/ext/.libs/pg_query.o"
+      ],
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+      "oracle": "controls/sql/expected.json hand-written summaries (cross-checked with SQLite by controls/sql/check_controls.py)",
+      "control_output_matches_oracle": true,
+      "differential_output_matches_oracle": true,
+      "base_coverage_lines": {
+        "control": {
+          "parser_source_lines_covered": 35,
+          "format_specific_source_lines_covered": 35,
+          "underlying_source_lines_covered": 2299,
+          "underlying_gram_c_lines_covered": 493,
+          "underlying_scan_c_lines_covered": 321
+        },
+        "differential": {
+          "parser_source_lines_covered": 35,
+          "format_specific_source_lines_covered": 35,
+          "underlying_source_lines_covered": 1833,
+          "underlying_gram_c_lines_covered": 310,
+          "underlying_scan_c_lines_covered": 321
+        }
+      },
+      "control_libpg_query_lines_by_file": {
+        "libpg_query-18.0.0/src/include/pg_query_enum_defs.c": 40,
+        "libpg_query-18.0.0/src/include/pg_query_json_helper.c": 24,
+        "libpg_query-18.0.0/src/include/pg_query_outfuncs_defs.c": 93,
+        "libpg_query-18.0.0/src/pg_query.c": 24,
+        "libpg_query-18.0.0/src/pg_query_outfuncs_json.c": 62,
+        "libpg_query-18.0.0/src/pg_query_parse.c": 48,
+        "libpg_query-18.0.0/src/postgres/include/common/kwlookup.h": 3,
+        "libpg_query-18.0.0/src/postgres/include/kwlist_d.h": 138,
+        "libpg_query-18.0.0/src/postgres/include/nodes/nodes.h": 7,
+        "libpg_query-18.0.0/src/postgres/include/nodes/pg_list.h": 15,
+        "libpg_query-18.0.0/src/postgres/include/port/pg_bitutils.h": 10,
+        "libpg_query-18.0.0/src/postgres/include/utils/memutils_memorychunk.h": 21,
+        "libpg_query-18.0.0/src/postgres/include/utils/palloc.h": 5,
+        "libpg_query-18.0.0/src/postgres/src_backend_nodes_list.c": 65,
+        "libpg_query-18.0.0/src/postgres/src_backend_nodes_makefuncs.c": 48,
+        "libpg_query-18.0.0/src/postgres/src_backend_nodes_value.c": 5,
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_gram.c": 493,
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_parser.c": 28,
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_scan.c": 321,
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_scansup.c": 20,
+        "libpg_query-18.0.0/src/postgres/src_backend_utils_adt_numutils.c": 27,
+        "libpg_query-18.0.0/src/postgres/src_backend_utils_mb_mbutils.c": 11,
+        "libpg_query-18.0.0/src/postgres/src_backend_utils_mmgr_aset.c": 266,
+        "libpg_query-18.0.0/src/postgres/src_backend_utils_mmgr_mcxt.c": 148,
+        "libpg_query-18.0.0/src/postgres/src_common_kwlookup.c": 21,
+        "libpg_query-18.0.0/src/postgres/src_common_psprintf.c": 8,
+        "libpg_query-18.0.0/src/postgres/src_common_stringinfo.c": 74,
+        "libpg_query-18.0.0/src/postgres/src_port_snprintf.c": 274
+      },
+      "differential_libpg_query_lines_by_file": {
+        "libpg_query-18.0.0/src/include/pg_query_enum_defs.c": 15,
+        "libpg_query-18.0.0/src/include/pg_query_json_helper.c": 23,
+        "libpg_query-18.0.0/src/include/pg_query_outfuncs_defs.c": 50,
+        "libpg_query-18.0.0/src/pg_query.c": 24,
+        "libpg_query-18.0.0/src/pg_query_outfuncs_json.c": 86,
+        "libpg_query-18.0.0/src/pg_query_parse.c": 48,
+        "libpg_query-18.0.0/src/postgres/include/common/kwlookup.h": 3,
+        "libpg_query-18.0.0/src/postgres/include/kwlist_d.h": 138,
+        "libpg_query-18.0.0/src/postgres/include/nodes/nodes.h": 7,
+        "libpg_query-18.0.0/src/postgres/include/nodes/pg_list.h": 11,
+        "libpg_query-18.0.0/src/postgres/include/port/pg_bitutils.h": 10,
+        "libpg_query-18.0.0/src/postgres/include/utils/memutils_memorychunk.h": 21,
+        "libpg_query-18.0.0/src/postgres/include/utils/palloc.h": 5,
+        "libpg_query-18.0.0/src/postgres/src_backend_nodes_list.c": 34,
+        "libpg_query-18.0.0/src/postgres/src_backend_nodes_makefuncs.c": 18,
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_gram.c": 310,
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_parser.c": 28,
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_scan.c": 321,
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_scansup.c": 19,
+        "libpg_query-18.0.0/src/postgres/src_backend_utils_adt_numutils.c": 27,
+        "libpg_query-18.0.0/src/postgres/src_backend_utils_mb_mbutils.c": 11,
+        "libpg_query-18.0.0/src/postgres/src_backend_utils_mmgr_aset.c": 174,
+        "libpg_query-18.0.0/src/postgres/src_backend_utils_mmgr_mcxt.c": 160,
+        "libpg_query-18.0.0/src/postgres/src_common_kwlookup.c": 20,
+        "libpg_query-18.0.0/src/postgres/src_common_psprintf.c": 8,
+        "libpg_query-18.0.0/src/postgres/src_common_stringinfo.c": 65,
+        "libpg_query-18.0.0/src/postgres/src_port_snprintf.c": 197
+      },
+      "image_id": "sha256:fa9da734b9c198de91326e62ca87086707008bbe63d8a1d4a3ee88f371e3c209",
+      "platform": "linux/arm64",
+      "afl_package": "4.33c-1.1ubuntu1",
+      "afl_map_size": 65536,
+      "repeats_per_control": 3,
+      "all_repeats_identical": true,
+      "feedback_edges": 239,
+      "differential_feedback_edges": 168,
+      "stable_shared_edges": 138,
+      "stable_control_only_edges": 101,
+      "stable_differential_only_edges": 30,
+      "afl_tuple_difference": 131,
+      "full_harness_control_edges": 239,
+      "full_harness_differential_edges": 168,
+      "full_harness_tuple_difference": 131,
+      "full_harness_maps_equal_fuzz_target": true,
+      "overlay_file_sha256": {
+        "Dockerfile": "4c774916462ecc468d2b49470047aaa27acd38cf66e6e208e04022fa3e834895",
+        "build.py": "f2fdc9391cdcd8ad6edafb9dcb7981005bd59bd4cde76a099a89a31870c14b94"
+      }
+    },
+    {
+      "schema_version": 1,
+      "project": "sql/php/flow_php_postgresql",
+      "pass": true,
+      "feedback_kind": "native_libpg_query_php_pg_query_parser_source_edges",
+      "feedback_scope": "pg-query-ext 0.48.0 ext/pg_query.c (pg_query_parse_protobuf) plus libpg_query 18.0.0 src_backend_parser_gram.c, src_backend_parser_scan.c and src_backend_parser_parser.c via AFL++ allowlist while flow-php/postgresql decodes the protobuf tree in PHP; the protobuf output functions, the rest of libpg_query, the PHP runtime and the interpreted package and google/protobuf code are uninstrumented (package lines: /work/afl_trace)",
+      "fuzz_target": "projects/sql/php/flow_php_postgresql/fuzz-target.php (sql_parse only: native parse and protobuf decode into the package AST classes, no Traverser summary)",
+      "harness": "projects/sql/php/flow_php_postgresql/harness.php (sql_parse, then the package Traverser with the summary NodeVisitor)",
+      "extension_source_sha256": {
+        "pg-query-ext-0.48.0/ext/pg_query.c": "7807aeb690abcba4e74faeac547f7d490485f7a1df2cf52bf7c89def65d5b9d8",
+        "pg-query-ext-0.48.0/ext/php_pg_query.h": "63aaaf3a025c8c4e4b195ff09dd586edc2bd3a3af469cd5fc8013978a737b0cb",
+        "pg-query-ext-0.48.0/ext/pg_query_arginfo.h": "7853d5d86c2895f456cb282c70d77db55a7f9d1f2a2162275972295fa6e0f0d5",
+        "pg-query-ext-0.48.0/ext/config.m4": "9f945856f840cebabfcc3cbd3c328cd3aea30a11ad7baf4a5d343858e4651ae3"
+      },
+      "api_signature": "pg_query pg_query_parse_protobuf(string $sql): string; Flow\\PostgreSql\\DSL\\sql_parse(string $sql): Flow\\PostgreSql\\ParsedQuery",
+      "base_project_receipt_sha256": "11136d1a51c73b370b33f462e3a7b676d14fadcddeff5294b2721139b58d1f65",
+      "base_image_id": "sha256:a3f8dad76b80dd233692a9dcdf63ad74225786cc8890cbbc64d63ed2d3deefc2",
+      "source_sha256": "31f8f0d3f67c2c1c8907ce5591fbfd6f5738fa6161c22018251d25a886cd99b2",
+      "underlying_source_sha256": "6ad7783f272acfd116455c66a03298a0cac9a9168281df547969219112f0260f",
+      "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
+      "license_file_sha256": {
+        "php-8.5.12/LICENSE": "b42e4df5e50e6ecda1047d503d6d91d71032d09ed1027ba1ef29eed26f890c5a",
+        "libpg_query-18.0.0/LICENSE": "f9352c20940619a380a5e9f23cebe34d8f797cfbd747fc236a7a3e5fc8ef9b41"
+      },
+      "runtime": {
+        "php": "8.5.12",
+        "pg_query_ext": "0.48.0",
+        "libpg_query": "18.0.0",
+        "flow_php_postgresql": "0.48.0",
+        "google_protobuf": "v5.36.2"
+      },
+      "package_license_file_sha256": {
+        "/work/vendor/flow-php/postgresql/LICENSE": "e40cd978cf6dff6edceb34e2d2a9fa1f353778229081a0c2838f4d42438d1cc3"
+      },
+      "instrumented_objects": [
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_gram.o",
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_parser.o",
+        "libpg_query-18.0.0/src/postgres/src_backend_parser_scan.o",
+        "pg-query-ext-0.48.0/ext/.libs/pg_query.o"
+      ],
+      "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+      "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+      "oracle": "controls/sql/expected.json hand-written summaries (cross-checked with SQLite by controls/sql/check_controls.py)",
+      "control_output_matches_oracle": true,
+      "differential_output_matches_oracle": true,
+      "base_coverage_lines": {
+        "control": {
+          "parser_source_lines_covered": 383,
+          "format_specific_source_lines_covered": 6,
+          "support_source_lines_covered": 1297,
+          "extension_source_lines_covered": 37,
+          "underlying_source_lines_covered": 2196,
+          "underlying_libpg_query_lines_covered": 2159,
+          "underlying_gram_c_lines_covered": 493
+        },
+        "differential": {
+          "parser_source_lines_covered": 275,
+          "format_specific_source_lines_covered": 6,
+          "support_source_lines_covered": 1295,
+          "extension_source_lines_covered": 37,
+          "underlying_source_lines_covered": 1833,
+          "underlying_libpg_query_lines_covered": 1796,
+          "underlying_gram_c_lines_covered": 310
+        }
+      },
+      "control_package_lines_by_file": {
+        "src/Flow/PostgreSql/AST/ModificationContext.php": 4,
+        "src/Flow/PostgreSql/AST/Traverser.php": 67,
+        "src/Flow/PostgreSql/DSL/parser.php": 1,
+        "src/Flow/PostgreSql/ParsedQuery.php": 6,
+        "src/Flow/PostgreSql/Parser.php": 6,
+        "src/Flow/PostgreSql/Protobuf/AST/A_Const.php": 16,
+        "src/Flow/PostgreSql/Protobuf/AST/A_Expr.php": 19,
+        "src/Flow/PostgreSql/Protobuf/AST/Alias.php": 10,
+        "src/Flow/PostgreSql/Protobuf/AST/BoolExpr.php": 14,
+        "src/Flow/PostgreSql/Protobuf/AST/ColumnRef.php": 10,
+        "src/Flow/PostgreSql/Protobuf/AST/FuncCall.php": 25,
+        "src/Flow/PostgreSql/Protobuf/AST/Integer.php": 7,
+        "src/Flow/PostgreSql/Protobuf/AST/JoinExpr.php": 21,
+        "src/Flow/PostgreSql/Protobuf/AST/Node.php": 37,
+        "src/Flow/PostgreSql/Protobuf/AST/PBString.php": 7,
+        "src/Flow/PostgreSql/Protobuf/AST/ParseResult.php": 11,
+        "src/Flow/PostgreSql/Protobuf/AST/RangeVar.php": 18,
+        "src/Flow/PostgreSql/Protobuf/AST/RawStmt.php": 9,
+        "src/Flow/PostgreSql/Protobuf/AST/ResTarget.php": 16,
+        "src/Flow/PostgreSql/Protobuf/AST/SelectStmt.php": 52,
+        "src/Flow/PostgreSql/Protobuf/AST/SortBy.php": 19,
+        "src/Flow/PostgreSql/Protobuf/Metadata/PgQuery.php": 8
+      },
+      "differential_package_lines_by_file": {
+        "src/Flow/PostgreSql/AST/ModificationContext.php": 4,
+        "src/Flow/PostgreSql/AST/Traverser.php": 67,
+        "src/Flow/PostgreSql/DSL/parser.php": 1,
+        "src/Flow/PostgreSql/ParsedQuery.php": 6,
+        "src/Flow/PostgreSql/Parser.php": 6,
+        "src/Flow/PostgreSql/Protobuf/AST/A_Const.php": 18,
+        "src/Flow/PostgreSql/Protobuf/AST/InsertStmt.php": 19,
+        "src/Flow/PostgreSql/Protobuf/AST/Integer.php": 7,
+        "src/Flow/PostgreSql/Protobuf/AST/Node.php": 19,
+        "src/Flow/PostgreSql/Protobuf/AST/PBFloat.php": 7,
+        "src/Flow/PostgreSql/Protobuf/AST/PBList.php": 7,
+        "src/Flow/PostgreSql/Protobuf/AST/PBString.php": 7,
+        "src/Flow/PostgreSql/Protobuf/AST/ParseResult.php": 11,
+        "src/Flow/PostgreSql/Protobuf/AST/RangeVar.php": 16,
+        "src/Flow/PostgreSql/Protobuf/AST/RawStmt.php": 9,
+        "src/Flow/PostgreSql/Protobuf/AST/ResTarget.php": 14,
+        "src/Flow/PostgreSql/Protobuf/AST/SelectStmt.php": 49,
+        "src/Flow/PostgreSql/Protobuf/Metadata/PgQuery.php": 8
+      },
+      "image_id": "sha256:10efd90e3b7bd077198d39cb606924512b0b70cf4daddb0a7a6129abe9c23aef",
+      "platform": "linux/arm64",
+      "afl_package": "4.33c-1.1ubuntu1",
+      "afl_map_size": 65536,
+      "repeats_per_control": 3,
+      "all_repeats_identical": true,
+      "feedback_edges": 240,
+      "differential_feedback_edges": 169,
+      "stable_shared_edges": 139,
+      "stable_control_only_edges": 101,
+      "stable_differential_only_edges": 30,
+      "afl_tuple_difference": 131,
+      "full_harness_control_edges": 240,
+      "full_harness_differential_edges": 169,
+      "full_harness_tuple_difference": 131,
+      "full_harness_maps_equal_fuzz_target": true,
+      "overlay_file_sha256": {
+        "Dockerfile": "09428b26b342ff6846207f7ea902226bca65058ca03d6c269ffda79a59275d6c",
+        "build.py": "32d1dac81b0a7a5a0634aa886de065a9e8b9351167af41ea15bc7623b7c2d092",
+        "afl_trace": "63a19b1a5b67ba840986c70ccb1ca0ef799878f1e426f80c2cc8f8e1bef65f05",
+        "afl_trace.php": "c0049603fabd1a36846122d8b5a3aa06e8da88e8f770565ef256547fb722b072"
       }
     },
     {
