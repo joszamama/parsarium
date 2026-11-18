@@ -203,13 +203,14 @@
     },
     {
       "name": "polyglot-sql",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 9851,
       "metric_error": null,
       "latest_release_observed": "0.14.1",
       "family": "polyglot-sql tokenizer and recursive-descent parser (sqlglot-style)",
       "documented_api_lead": "polyglot_sql.parse",
-      "reason": "Round-3 hit of the 'polyglot-sql' and 'sqlglot'-adjacent search (PyPI Stats last_month 9,851, captured 2026-11-18). pyo3 binding over the polyglot-sql Rust crate; the sdist's crates/polyglot-sql/src equals the crates.io polyglot-sql 0.14.1 crate selected in the Rust cell (shared family). Evaluated in round 3."
+      "reason": "Round-3 hit of the 'polyglot-sql' query (PyPI Stats last_month 9,851, captured 2026-11-18). polyglot_sql.parse runs the polyglot-sql Rust parser through the package's pyo3 binding and returns Expression objects; both valid controls equal the oracle. Source-built from the pinned sdist with Rust coverage (2,994 parser-crate lines in 11 files, 218 binding lines); the AFL++ bridge gives 5,724 tuples and the controls differ by 2,574 tuples. Same polyglot-sql 0.14.1 crate source as the Rust polyglot-sql path (shared family).",
+      "selected_release": "0.14.1"
     },
     {
       "name": "bigquery-sql-parser",

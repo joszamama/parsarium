@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "polyglot-sql",
+  "release": "0.14.1",
+  "catalog_parser": "data/python/sql/parsers.json",
+  "source_lock": "projects/sql/python/polyglot_sql/source-lock.json",
+  "source_sha256": "7f39f90c307336177576f7ce3a83a53567c0a9578b7ff3cbf04d76546932b0ab",
+  "build_note": "Source-built from the pinned sdist with maturin 1.16.0 (--locked) and rustc 1.99.1 -C instrument-coverage, codegen-units=1, LTO off, release debug info and no stripping (python_release profile overrides). The sdist Cargo.lock also lists crates of workspace members the sdist does not ship; cargo prunes them on the first fetch and the image checks that the pruned lock is a strict subset of the shipped one. The official wheels compile the same crates with optimisation.",
+  "dependencies_note": "No Python runtime dependencies. Rust crates polyglot-sql 0.14.1 (in the sdist), pyo3 0.28.2 and pythonize 0.28 are compiled in from the sdist Cargo.lock. The fuzz entry point is an external one-file Python bridge, not Atheris.",
+  "parser_family": "polyglot-sql (Rust tokenizer and recursive-descent parser modelled on sqlglot), the same polyglot-sql 0.14.1 crate source as the Rust polyglot-sql path; the package's own pyo3 binding (crates/polyglot-sql-python) wraps the parsed Expression tree as Python Expression objects",
+  "dialect": "generic (polyglot_sql.parse(sql, dialect=\"generic\"))",
+  "base_image": "debian@sha256:ec8534cda2cb30f29f44f23e135297af7a1496f2990fd8e4e84aa36b081a757a",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/opt/venv/bin/python",
+    "/work/replay.py",
+    "/input/case"
+  ],
+  "api": "polyglot_sql.parse(local SQL text decoded from UTF-8 bytes, dialect=\"generic\") -> list of polyglot_sql Expression objects; the harness reads Select and Insert argument records and walks Table, Function, typed aggregate (Count, Sum) and Literal nodes with Expression.walk()",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "LLVM source-range coverage of the source-built polyglot-sql extension: the polyglot-sql 0.14.1 parser crate sources (the crates/polyglot-sql-python pyo3 binding is required to execute and reported separately)",
+  "coverage_subject_prefix": "/work/polyglot-source/crates/polyglot-sql/src/",
+  "format_specific_coverage_file_suffix": "/src/parser.rs",
+  "scope": "One SQL statement from local text via polyglot_sql.parse with the generic dialect; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Transpile, generate, format, validate, lineage, other dialects and the optimised wheel build are untested.",
+  "afl_coverage_subject_prefix": "/work/polyglot-source/crates/polyglot-sql/src/",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.11/site-packages/polyglot_sql/_polyglot_sql*.so",
+  "afl_package_release": "4.04c-4",
+  "native_campaign_supported": false
+}

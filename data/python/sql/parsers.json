@@ -648,6 +648,114 @@
     }
   },
   {
+    "name": "polyglot-sql",
+    "version": "0.14.1",
+    "license": "MIT",
+    "license_evidence": "pyproject.toml license = { text = \"MIT\" } and workspace Cargo.toml license = \"MIT\" in the pinned sdist (checked in the image); the sdist ships no licence file",
+    "input_api": "polyglot_sql.parse(sql: str, dialect: str = \"generic\") -> list[Expression]",
+    "documentation": "https://polyglot.gh.tobilg.com (README in the pinned sdist: parse(sql, dialect) and parse_one)",
+    "source": "https://files.pythonhosted.org/packages/0d/6f/49d1a02cc143a2f23dc3b0a835682e8024139e3f2832529fc1e4d2df82a8/polyglot_sql-0.14.1.tar.gz",
+    "source_sha256": "7f39f90c307336177576f7ce3a83a53567c0a9578b7ff3cbf04d76546932b0ab",
+    "dependencies": [
+      "polyglot-sql 0.14.1 Rust crate (in the sdist)",
+      "pyo3 0.28.2",
+      "pythonize 0.28"
+    ],
+    "dialect": "generic",
+    "scope": "One SQL statement from local text via polyglot_sql.parse with the generic dialect; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Transpile, generate, format, validate, lineage, other dialects and the optimised wheel build are untested.",
+    "family": "polyglot-sql tokenizer and recursive-descent parser (sqlglot-style)",
+    "family_note": "polyglot_sql.parse runs the polyglot-sql Rust tokenizer and parser through the package's pyo3 binding and returns Python Expression objects. The crates/polyglot-sql/src tree in the sdist is identical to the crates.io polyglot-sql 0.14.1 crate selected in the Rust cell (shared family, same parser source; separate package path with its own binding). Not derived from Python sqlglot code. Metrics are not combined.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 9851,
+      "source": "https://pypistats.org/api/packages/polyglot-sql/recent",
+      "observed_on_utc": "2026-11-18",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Package-level downloads of the binding; crates.io downloads of polyglot-sql are counted in the Rust cell and not combined."
+    },
+    "project": "projects/sql/python/polyglot_sql",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "psqlparse2",
     "version": "0.0.17",
     "license": "BSD-3-Clause",

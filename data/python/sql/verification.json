@@ -557,6 +557,98 @@
       "afl_feedback": "fuzzing/afl-native/sql/python/mo_sql_parsing/differential.json"
     },
     {
+      "package": "polyglot-sql",
+      "version": "0.14.1",
+      "pass": true,
+      "input_api": "polyglot_sql.parse(sql: str, dialect: str = \"generic\") -> list[Expression]",
+      "dialect": "generic (polyglot_sql.parse(sql, dialect=\"generic\"))",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "polyglot-sql (Rust tokenizer and recursive-descent parser modelled on sqlglot), the same polyglot-sql 0.14.1 crate source as the Rust polyglot-sql path; the package's own pyo3 binding (crates/polyglot-sql-python) wraps the parsed Expression tree as Python Expression objects",
+      "parser_source_files": 11,
+      "parser_source_lines_covered": 2994,
+      "afl_tuple_difference": 2574,
+      "parser_feature_difference": 2751,
+      "project_receipt": "projects/sql/python/polyglot_sql/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/python/polyglot_sql/differential.json"
+    },
+    {
       "package": "psqlparse2",
       "version": "0.0.17",
       "pass": true,
