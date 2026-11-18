@@ -148,6 +148,23 @@ class JavaYamlPilotTest(unittest.TestCase):
             self.assertEqual(metric["value"], 0, name)
             self.assertNotIn(name, decisions)
 
+    def test_round_four_discovery_routes_are_decided(self):
+        leads = read(DATA / "leads.json")
+        snapshot = read(DATA / "registry-snapshot.json")
+        decisions = {lead["name"]: lead for lead in leads}
+        round4 = snapshot["round_4_targeted_leads"]
+        for name in round4["leads_added"]:
+            self.assertIn(name, decisions)
+            self.assertIn(decisions[name]["status"], {"fails_control", "excluded"}, name)
+            self.assertTrue(decisions[name]["note"].startswith("Discovery route: round 4"), name)
+        for name in ("org.apache.groovy:groovy-yaml", "org.openrewrite:rewrite-yaml", "org.jruby:yecht",
+                     "dev.hnaderi:yaml4s-snake_2.13", "org.jruby.extras:jvyamlb"):
+            self.assertEqual(decisions[name]["status"], "fails_control", name)
+        for name, metric in round4["zero_metric_hits_not_leads"].items():
+            self.assertEqual(metric["value"], 0, name)
+            self.assertNotIn(name, decisions)
+        self.assertIn("Round 4", self.cell["uncertainty"])
+
 
 if __name__ == "__main__":
     unittest.main()

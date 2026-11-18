@@ -60,6 +60,21 @@
     "evidence": "local probe 2026-11-17 on Temurin 21 with the pinned jar and its Maven-resolved dependencies; not harnessed"
   },
   {
+    "name": "org.apache.groovy:groovy-yaml",
+    "status": "fails_control",
+    "metric_value": 4090,
+    "metric_error": null,
+    "family": "SnakeYAML via Jackson YAMLFactory via Groovy YamlSlurper (wrapper)",
+    "api_hint": "groovy.yaml.YamlSlurper.parseText(String)",
+    "note": "Discovery route: round 4: deps.dev reverse-dependency samples (directSample of every release) of org.yaml:snakeyaml, org.snakeyaml:snakeyaml-engine and com.fasterxml.jackson.dataformat:jackson-dataformat-yaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/org.apache.groovy/groovy-yaml",
+    "reason": "Ran YamlSlurper.parseText of 5.0.3 (jar SHA-256 0de6e9b45978389bcb84a40906bdc8726f0d214f200003c479bbc3a1c1498ce0; jackson-dataformat-yaml 2.20.1, SnakeYAML 2.6): YamlConverter reads the document with ObjectMapper.readValues over Jackson's YAMLFactory and re-parses the JSON text with JsonSlurper, so aliases come back as their anchor names (service.settings is \"base\", order.yaml item 3 is \"shared\"), the Jackson 2.x alias limitation recorded for jackson-dataformat-yaml. The deps.dev default 6.0.0 has the same YamlConverter (sources jar read; Jackson 2.22.2). Not counted.",
+    "version_seen": "6.0.0",
+    "license": "Apache-2.0",
+    "evidence": "local probe 2026-11-18 on Temurin JDK 21 with the pinned Maven Central jars and their Maven-resolved dependencies against controls/yaml (catalog.yaml, order.yaml); not harnessed; 6.0.0 sources jar (SHA-256 1bc81a1b69ca73b0...) read for YamlConverter"
+  },
+  {
     "name": "org.apache.commons:commons-configuration2",
     "status": "fails_control",
     "metric_value": 3072,
@@ -73,6 +88,21 @@
     "version_seen": "2.15.1",
     "license": "Apache-2.0",
     "evidence": "source read at the pinned Maven Central sources jar, 2026-11-17 (YAMLConfiguration.read and AbstractYAMLBasedConfiguration.load, 2.15.1)"
+  },
+  {
+    "name": "org.openrewrite:rewrite-yaml",
+    "status": "fails_control",
+    "metric_value": 2501,
+    "metric_error": null,
+    "family": "SnakeYAML events via OpenRewrite YamlParser (lossless source tree)",
+    "api_hint": "org.openrewrite.yaml.YamlParser.parse(ExecutionContext, String...)",
+    "note": "Discovery route: round 4: deps.dev reverse-dependency samples (directSample of every release) of org.yaml:snakeyaml, org.snakeyaml:snakeyaml-engine and com.fasterxml.jackson.dataformat:jackson-dataformat-yaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/org.openrewrite/rewrite-yaml",
+    "reason": "Ran YamlParser.parse of 8.90.4 (jar SHA-256 4a13a672601e4018...; SnakeYAML 2.6 runtime) and walked the tree with YamlIsoVisitor: a format-preserving refactoring tree whose Yaml.Scalar holds only style, explicit tag and raw source text (2 and true are untyped strings, \"Caf\\u00e9\" keeps the escape, block scalars keep indentation, the flow mapping {lat: 1, lon: -2.5} is one plain scalar) and Yaml.Alias keeps the anchor reference. No typed load API. Not counted.",
+    "version_seen": "8.90.4",
+    "license": "Apache-2.0",
+    "evidence": "local probe 2026-11-18 on Temurin JDK 21 with the pinned Maven Central jars and their Maven-resolved dependencies against controls/yaml (catalog.yaml, order.yaml); not harnessed"
   },
   {
     "name": "org.noear:solon-config-yaml",
@@ -390,6 +420,36 @@
     "evidence": "source read at the pinned Maven Central sources jar, 2026-11-17 (com/networknt/rule/RuleMapper.java)"
   },
   {
+    "name": "io.avaje:avaje-config",
+    "status": "excluded",
+    "metric_value": 75,
+    "metric_error": null,
+    "family": "avaje-config YamlLoaderSimple / YamlLoaderSnake (configuration loader)",
+    "api_hint": "io.avaje.config.Configuration (loads application.yaml into properties)",
+    "note": "Discovery route: round 4: awesome-java YAML/configuration entries.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/io.avaje/avaje-config",
+    "reason": "Configuration library: its own package-private YamlLoaderSimple (or SnakeYAML when present) flattens a YAML file into a Map<String, String> of dotted keys; no public YAML document API and scalars are stringified (solon/helidon configuration-loader precedent).",
+    "version_seen": "5.2",
+    "license": "Apache-2.0",
+    "evidence": "source read at the pinned Maven Central 5.2 sources jar, 2026-11-18 (io/avaje/config/YamlLoaderSimple.java load)"
+  },
+  {
+    "name": "io.jenkins.plugins:snakeyaml-api",
+    "status": "excluded",
+    "metric_value": 74,
+    "metric_error": null,
+    "family": "SnakeYAML (Jenkins library-plugin repackaging)",
+    "api_hint": "org.yaml.snakeyaml.Yaml (bundled)",
+    "note": "Discovery route: round 4: deps.dev reverse-dependency samples (directSample of every release) of org.yaml:snakeyaml, org.snakeyaml:snakeyaml-engine and com.fasterxml.jackson.dataformat:jackson-dataformat-yaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://plugins.jenkins.io/snakeyaml-api/",
+    "reason": "Jenkins library plugin that bundles SnakeYAML 2.7 for other plugins; no parse code of its own (OSGi repackaging precedent, org.wso2.orbit.org.yaml:snakeyaml).",
+    "version_seen": "2.7-152.vc672728cf536",
+    "license": "MIT",
+    "evidence": "Jenkins Maven repository POM (MIT; sole dependency org.yaml:snakeyaml 2.7), 2026-11-18"
+  },
+  {
     "name": "io.ktor:ktor-server-config-yaml-jvm",
     "status": "excluded",
     "metric_value": 72,
@@ -403,6 +463,21 @@
     "version_seen": "3.6.1",
     "license": "Apache-2.0",
     "evidence": "source read at the pinned Maven Central sources jar, 2026-11-17 (jvmAndPosixMain/io/ktor/server/config/yaml/YamlConfig.kt; POM runtime kaml-jvm 0.79.0)"
+  },
+  {
+    "name": "org.http4k:http4k-format-moshi-yaml",
+    "status": "excluded",
+    "metric_value": 66,
+    "metric_error": null,
+    "family": "SnakeYAML via Moshi via http4k (message-format lens)",
+    "api_hint": "org.http4k.format.MoshiYaml.asA(String, KClass)",
+    "note": "Discovery route: round 4: deps.dev reverse-dependency samples (directSample of every release) of org.yaml:snakeyaml, org.snakeyaml:snakeyaml-engine and com.fasterxml.jackson.dataformat:jackson-dataformat-yaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/org.http4k/http4k-format-moshi-yaml",
+    "reason": "Auto-marshalling format: ConfigurableMoshiYaml.asA loads the input with SnakeYAML as Map<String, Any>, re-serialises it as JSON and binds it to a target class through Moshi; a mapping layer with a mapping-only root (http4k-format-jackson-yaml precedent).",
+    "version_seen": "6.61.0.0",
+    "license": "Apache-2.0",
+    "evidence": "source read at the pinned Maven Central 6.61.0.0 sources jar, 2026-11-18 (org/http4k/format/ConfigurableMoshiYaml.kt)"
   },
   {
     "name": "dev.zio:zio-json-yaml_2.13",
@@ -448,6 +523,21 @@
     "version_seen": "0.104.0",
     "license": "Apache-2.0",
     "evidence": "Maven Central POM/Gradle module metadata checked 2026-11-17"
+  },
+  {
+    "name": "org.codehaus.groovy:groovy-yaml",
+    "status": "excluded",
+    "metric_value": 49,
+    "metric_error": null,
+    "family": "SnakeYAML via Jackson YAMLFactory via Groovy YamlSlurper (Groovy 3 coordinate)",
+    "api_hint": "groovy.yaml.YamlSlurper.parseText(String)",
+    "note": "Discovery route: round 4: deps.dev reverse-dependency samples (directSample of every release) of org.yaml:snakeyaml, org.snakeyaml:snakeyaml-engine and com.fasterxml.jackson.dataformat:jackson-dataformat-yaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/org.codehaus.groovy/groovy-yaml",
+    "reason": "Groovy 3 coordinate of the same groovy-yaml module before the org.apache.groovy group rename (predecessor coordinate); same Jackson-based YamlConverter that fails the controls on aliases.",
+    "version_seen": "3.0.25",
+    "license": "Apache-2.0",
+    "evidence": "same source as org.apache.groovy:groovy-yaml"
   },
   {
     "name": "org.spongepowered:configurate-yaml",
@@ -660,6 +750,21 @@
     "evidence": "source read at the pinned Maven Central sources jar, 2026-11-17 (com/uchuhimo/konf/source/yaml/YamlProvider.kt YamlConstructor)"
   },
   {
+    "name": "com.github.sbaudoin:yamllint",
+    "status": "excluded",
+    "metric_value": 17,
+    "metric_error": null,
+    "family": "SnakeYAML tokens via yamllint (linter)",
+    "api_hint": "com.github.sbaudoin.yamllint.Linter.run(String, YamlLintConfig)",
+    "note": "Discovery route: round 4: deps.dev reverse-dependency samples (directSample of every release) of org.yaml:snakeyaml, org.snakeyaml:snakeyaml-engine and com.fasterxml.jackson.dataformat:jackson-dataformat-yaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/com.github.sbaudoin/yamllint",
+    "reason": "Java port of the yamllint linter: returns lint problems from SnakeYAML tokens, no document tree.",
+    "version_seen": "1.6.1",
+    "license": "Apache-2.0",
+    "evidence": "Maven Central POM and README, 2026-11-18"
+  },
+  {
     "name": "dev.zio:zio-json-yaml_2.12",
     "status": "excluded",
     "metric_value": 16,
@@ -720,6 +825,21 @@
     "evidence": "local probe 2026-11-17 (pinned Maven Central jars, Temurin JDK 21) against controls/yaml/check_controls.py"
   },
   {
+    "name": "org.jruby.extras:jvyamlb",
+    "status": "fails_control",
+    "metric_value": 11,
+    "metric_error": null,
+    "family": "JvYAML (PyYAML-derived Java port; byte-oriented JRuby variant)",
+    "api_hint": "org.jvyamlb.YAML.load(InputStream)",
+    "note": "Discovery route: round 4: GitHub repository search 'yaml parser' (languages java, kotlin, scala, clojure, groovy), then Maven Central coordinate lookup (jruby/yecht neighbour; JRuby YAML engines).",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/org.jruby.extras/jvyamlb",
+    "reason": "Ran YAML.load(InputStream) of 0.2.6 (jar SHA-256 df2aa5392818eb5b547a9b0e9d95ebb5bd1bfc8d411252a53629c6d382d7c6f8, bytelist 1.0.3, jcodings 1.0.2): mappings are HashMaps, so key order is lost, and the double-quoted \\u00e9 escape decodes to a single 0xE9 byte instead of UTF-8 \"é\". Not counted; no sources jar is published.",
+    "version_seen": "0.2.6",
+    "license": "MIT",
+    "evidence": "local probe 2026-11-18 on Temurin JDK 21 with the pinned Maven Central jars and their Maven-resolved dependencies against controls/yaml (catalog.yaml, order.yaml); not harnessed"
+  },
+  {
     "name": "com.github.pureconfig:pureconfig-yaml_2.13",
     "status": "fails_control",
     "metric_value": 10,
@@ -750,6 +870,36 @@
     "evidence": "source read at the pinned Maven Central sources jar, 2026-11-17 (net/pwall/yaml/*)"
   },
   {
+    "name": "dev.hnaderi:yaml4s-snake_2.13",
+    "status": "fails_control",
+    "metric_value": 9,
+    "metric_error": null,
+    "family": "SnakeYAML Engine via yaml4s-snake (Scala wrapper; converter shared with circe-yaml-v12)",
+    "api_hint": "dev.hnaderi.yaml4s.SnakeYaml.parse[YAML](String)",
+    "note": "Discovery route: round 4: deps.dev reverse-dependency samples (directSample of every release) of org.yaml:snakeyaml, org.snakeyaml:snakeyaml-engine and com.fasterxml.jackson.dataformat:jackson-dataformat-yaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/dev.hnaderi/yaml4s-snake_2.13",
+    "reason": "Ran SnakeYaml.parse with YAML.writerInstance on 0.3.3 (jar SHA-256 7da35c01c39333ec...; SnakeYAML Engine 3.0.1): default LoadSettings keep the JSON schema, so order.yaml's ~ is the string \"~\" (the circe-yaml-v12 failure; its convertScalarNode is the same converter), the YObj mapping comes back in hash order, and YNumber keeps no int/float tag. Not counted.",
+    "version_seen": "0.3.3",
+    "license": "Apache-2.0",
+    "evidence": "local probe 2026-11-18 on Temurin JDK 21 with the pinned Maven Central jars and their Maven-resolved dependencies against controls/yaml (catalog.yaml, order.yaml); not harnessed"
+  },
+  {
+    "name": "dev.hnaderi:yaml4s-snake_3",
+    "status": "excluded",
+    "metric_value": 9,
+    "metric_error": null,
+    "family": "SnakeYAML Engine via yaml4s-snake (Scala 3 cross-build)",
+    "api_hint": "dev.hnaderi.yaml4s.SnakeYaml.parse[YAML](String)",
+    "note": "Discovery route: round 4: deps.dev reverse-dependency samples (directSample of every release) of org.yaml:snakeyaml, org.snakeyaml:snakeyaml-engine and com.fasterxml.jackson.dataformat:jackson-dataformat-yaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/dev.hnaderi/yaml4s-snake_3",
+    "reason": "Scala 3 cross-build of the failing yaml4s-snake_2.13 source.",
+    "version_seen": "0.3.3",
+    "license": "Apache-2.0",
+    "evidence": "same source as dev.hnaderi:yaml4s-snake_2.13"
+  },
+  {
     "name": "it.krzeminski:snakeyaml-engine-kmp",
     "status": "excluded",
     "metric_value": 8,
@@ -778,6 +928,21 @@
     "version_seen": "0.4.2",
     "license": "MIT",
     "evidence": "same source as net.jcazevedo:moultingyaml_2.12"
+  },
+  {
+    "name": "dev.hnaderi:yaml4s-snake_2.12",
+    "status": "excluded",
+    "metric_value": 8,
+    "metric_error": null,
+    "family": "SnakeYAML Engine via yaml4s-snake (Scala 2.12 cross-build)",
+    "api_hint": "dev.hnaderi.yaml4s.SnakeYaml.parse[YAML](String)",
+    "note": "Discovery route: round 4: deps.dev reverse-dependency samples (directSample of every release) of org.yaml:snakeyaml, org.snakeyaml:snakeyaml-engine and com.fasterxml.jackson.dataformat:jackson-dataformat-yaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/dev.hnaderi/yaml4s-snake_2.12",
+    "reason": "Scala 2.12 cross-build of the failing yaml4s-snake_2.13 source.",
+    "version_seen": "0.3.2",
+    "license": "Apache-2.0",
+    "evidence": "same source as dev.hnaderi:yaml4s-snake_2.13"
   },
   {
     "name": "io.github.yaml-path:yaml-path",
@@ -823,6 +988,21 @@
     "version_seen": "0.16.1",
     "license": "Apache-2.0",
     "evidence": "local probe 2026-11-17 (pinned Maven Central jars, Temurin JDK 21) against controls/yaml/check_controls.py; overlap measured on the 0.16.1 sources jars"
+  },
+  {
+    "name": "net.java.dev:jvyaml",
+    "status": "fails_control",
+    "metric_value": 6,
+    "metric_error": null,
+    "family": "JvYAML (PyYAML-derived Java port)",
+    "api_hint": "org.jvyaml.YAML.load(Reader)",
+    "note": "Discovery route: round 4: GitHub repository search 'yaml parser' (languages java, kotlin, scala, clojure, groovy), then Maven Central coordinate lookup (JRuby YAML engines).",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/net.java.dev/jvyaml",
+    "reason": "Ran YAML.load(Reader) of 0.2.1 (jar SHA-256 7529d5e8b56610379f6fec4f13f4efd53ac5cb9f43bb220e9a5172b9fe84de4b): \\u00e9 becomes \"233\", lon -2.5 loses its sign, literal and folded block scalars lose the final newline, mappings are HashMaps. Not counted; the POM carries no license and no sources jar is published.",
+    "version_seen": "0.2.1",
+    "license": null,
+    "evidence": "local probe 2026-11-18 on Temurin JDK 21 with the pinned Maven Central jars and their Maven-resolved dependencies against controls/yaml (catalog.yaml, order.yaml); not harnessed"
   },
   {
     "name": "dev.dejvokep:boosted-yaml",
@@ -898,6 +1078,21 @@
     "version_seen": "7.0.8",
     "license": null,
     "evidence": "sources jars of both 7.0.8 releases compared 2026-11-17"
+  },
+  {
+    "name": "org.jruby:yecht",
+    "status": "fails_control",
+    "metric_value": 4,
+    "metric_error": null,
+    "family": "Syck (Java port of the C Syck parser, YAML 1.0)",
+    "api_hint": "org.yecht.Parser.newParser() + NodeHandler, parse()",
+    "note": "Discovery route: round 4: GitHub repository search 'yaml parser' (languages java, kotlin, scala, clojure, groovy), then Maven Central coordinate lookup.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/org.jruby/yecht",
+    "reason": "Ran Parser.parse of 1.1 (jar SHA-256 c2c290eb0fe491e5db4f1dff4ac3eaa98b8c06821ad19b9dd99dd1ca46fdf550) with implicit typing and a NodeHandler that keeps mapping order: every other node matches the oracle (implicit types int, float#fix, bool#yes/no, null; aliases resolved), but the YAML 1.0 scanner leaves the double-quoted \\u00e9 escape as the literal text \"\\u00e9\" in title. Not counted.",
+    "version_seen": "1.1",
+    "license": null,
+    "evidence": "local probe 2026-11-18 on Temurin JDK 21 with the pinned Maven Central jars and their Maven-resolved dependencies against controls/yaml (catalog.yaml, order.yaml); not harnessed"
   },
   {
     "name": "io.maryk:yaml-jvm",
@@ -1005,6 +1200,21 @@
     "evidence": "local probe 2026-11-17 (pinned Maven Central jars, Temurin JDK 21) against controls/yaml/check_controls.py"
   },
   {
+    "name": "org.embulk:embulk-util-snakeyaml",
+    "status": "excluded",
+    "metric_value": 2,
+    "metric_error": null,
+    "family": "SnakeYAML tag resolver helper for Embulk",
+    "api_hint": "org.embulk.util.snakeyaml.EmbulkYamlTagResolver",
+    "note": "Discovery route: round 4: deps.dev reverse-dependency samples (directSample of every release) of org.yaml:snakeyaml, org.snakeyaml:snakeyaml-engine and com.fasterxml.jackson.dataformat:jackson-dataformat-yaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/org.embulk/embulk-util-snakeyaml",
+    "reason": "A single SnakeYAML Resolver subclass for Embulk configuration; no parse step of its own.",
+    "version_seen": "0.1.0",
+    "license": "Apache-2.0",
+    "evidence": "jar listing of the pinned 0.1.0 jar, 2026-11-18"
+  },
+  {
     "name": "io.ktor:ktor-server-config-yaml",
     "status": "excluded",
     "metric_value": 1,
@@ -1063,5 +1273,35 @@
     "version_seen": "1.3.0",
     "license": null,
     "evidence": "source read at the pinned Maven Central sources jar, 2026-11-17 (org/elypia/yaml4deltaspike/YamlConfigSource.java)"
+  },
+  {
+    "name": "com.github.mhshams:dahgan-core",
+    "status": "excluded",
+    "metric_value": 1,
+    "metric_error": null,
+    "family": "dahgan (Kotlin port of the YAML 1.2 reference parser, tokenizer module)",
+    "api_hint": "io.dahgan.SpecKt tokenizer",
+    "note": "Discovery route: round 4: GitHub repository search 'yaml parser' (languages java, kotlin, scala, clojure, groovy), then Maven Central coordinate lookup.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/com.github.mhshams/dahgan-core",
+    "reason": "Token-stream module of dahgan: emits YAML 1.2 spec production tokens, no loaded tree. The loading API is the separate dahgan-loader artifact, which has no deps.dev dependents (0) and so gets no slot.",
+    "version_seen": "0.6.0",
+    "license": "Apache-2.0",
+    "evidence": "jar listing of the pinned 0.6.0 jars, 2026-11-18"
+  },
+  {
+    "name": "com.dnanexus:dxyaml",
+    "status": "fails_control",
+    "metric_value": 1,
+    "metric_error": null,
+    "family": "SnakeYAML Engine via dxYaml (moultingyaml-derived Scala wrapper)",
+    "api_hint": "dx.yaml.StringWithYaml.parseYaml",
+    "note": "Discovery route: round 4: deps.dev reverse-dependency samples (directSample of every release) of org.yaml:snakeyaml, org.snakeyaml:snakeyaml-engine and com.fasterxml.jackson.dataformat:jackson-dataformat-yaml.",
+    "found_by": "targeted_documentation_lead",
+    "source": "https://central.sonatype.com/artifact/com.dnanexus/dxyaml",
+    "reason": "Ran String#parseYaml of 0.1.0 (jar SHA-256 803973b8b36c98e3...; SnakeYAML Engine 2.3) by reflection: YamlObject is an immutable Scala Map built with toMap, so key order is hash order (the moultingyaml failure), and ~ is the string \"~\" under SnakeYAML Engine's default JSON schema. Not counted.",
+    "version_seen": "0.1.0",
+    "license": "Apache-2.0",
+    "evidence": "local probe 2026-11-18 on Temurin JDK 21 with the pinned Maven Central jars and their Maven-resolved dependencies against controls/yaml (catalog.yaml, order.yaml); not harnessed"
   }
 ]

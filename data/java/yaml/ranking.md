@@ -25,7 +25,9 @@ All paths load the documents into ordered trees; aliases resolve to the anchored
 | com.fasterxml.jackson.dataformat:jackson-dataformat-yaml | fails_control | 32,860 | SnakeYAML (Engine in 3.x) via Jackson |
 | org.yaml:snakeyaml | selected | 10,859 | SnakeYAML |
 | tools.jackson.dataformat:jackson-dataformat-yaml | fails_control | 5,346 | SnakeYAML Engine via Jackson 3 |
+| org.apache.groovy:groovy-yaml | fails_control | 4,090 | SnakeYAML via Jackson YAMLFactory via Groovy YamlSlurper (wrapper) |
 | org.apache.commons:commons-configuration2 | fails_control | 3,072 | SnakeYAML via Commons Configuration YAMLConfiguration (configuration library) |
+| org.openrewrite:rewrite-yaml | fails_control | 2,501 | SnakeYAML events via OpenRewrite YamlParser (lossless source tree) |
 | org.noear:solon-config-yaml | excluded | 1,582 | SnakeYAML via Solon PropertiesYaml (configuration loader) |
 | org.noear:solon.config.yaml | excluded | 1,549 | empty compatibility artifact for org.noear:solon-config-yaml |
 | io.helidon.config:helidon-config-yaml | excluded | 910 | SnakeYAML via Helidon YamlConfigParser (configuration loader) |
@@ -47,10 +49,14 @@ All paths load the documents into ordered trees; aliases resolve to the anchored
 | io.circe:circe-yaml_3 | excluded | 94 | SnakeYAML via circe-yaml (Scala 3 cross-build) |
 | com.amihaiemil.web:eo-yaml | fails_control | 89 | eo-yaml |
 | com.networknt:yaml-rule | excluded | 78 | SnakeYAML via Jackson YAMLMapper (rule-engine mapping) |
+| io.avaje:avaje-config | excluded | 75 | avaje-config YamlLoaderSimple / YamlLoaderSnake (configuration loader) |
+| io.jenkins.plugins:snakeyaml-api | excluded | 74 | SnakeYAML (Jenkins library-plugin repackaging) |
 | io.ktor:ktor-server-config-yaml-jvm | excluded | 72 | kaml via Ktor YamlConfig (server configuration) |
+| org.http4k:http4k-format-moshi-yaml | excluded | 66 | SnakeYAML via Moshi via http4k (message-format lens) |
 | dev.zio:zio-json-yaml_2.13 | selected | 63 | SnakeYAML via zio-json-yaml (Scala wrapper) |
 | net.mamoe.yamlkt:yamlkt-jvm | fails_control | 56 | yamlkt (own Kotlin parser) |
 | com.charleskorn.kaml:kaml | excluded | 56 | SnakeYAML Engine KMP via kaml (KMP root module) |
+| org.codehaus.groovy:groovy-yaml | excluded | 49 | SnakeYAML via Jackson YAMLFactory via Groovy YamlSlurper (Groovy 3 coordinate) |
 | org.spongepowered:configurate-yaml | fails_control | 48 | SnakeYAML (bundled) via Configurate |
 | io.maryk:maryk-yaml-jvm | fails_control | 45 | maryk-yaml (own Kotlin token reader) |
 | io.maryk:maryk-yaml | excluded | 45 | maryk-yaml (KMP root module) |
@@ -65,22 +71,29 @@ All paths load the documents into ordered trees; aliases resolve to the anchored
 | com.electronwill.night-config:yaml | fails_control | 21 | SnakeYAML 1.33 via NightConfig |
 | dev.zio:zio-config-yaml_2.13 | excluded | 18 | SnakeYAML Engine via ZIO Config (Scala 2.13 cross-build) |
 | com.uchuhimo:konf-yaml | fails_control | 18 | SnakeYAML via konf YamlProvider (configuration library) |
+| com.github.sbaudoin:yamllint | excluded | 17 | SnakeYAML tokens via yamllint (linter) |
 | dev.zio:zio-json-yaml_2.12 | excluded | 16 | SnakeYAML via zio-json-yaml (Scala 2.12 cross-build) |
 | dev.zio:zio-json-yaml_3 | excluded | 14 | SnakeYAML via zio-json-yaml (Scala 3 cross-build) |
 | org.bspfsystems:yamlconfiguration | fails_control | 13 | SnakeYAML via Bukkit-style YamlConfiguration (configuration library) |
 | net.jcazevedo:moultingyaml_2.12 | fails_control | 12 | SnakeYAML via moultingyaml (Scala) |
+| org.jruby.extras:jvyamlb | fails_control | 11 | JvYAML (PyYAML-derived Java port; byte-oriented JRuby variant) |
 | com.github.pureconfig:pureconfig-yaml_2.13 | fails_control | 10 | SnakeYAML via PureConfig YamlConfigSource (configuration library) |
 | net.pwall.yaml:yaml-base | excluded | 9 | yaml-simple node classes |
+| dev.hnaderi:yaml4s-snake_2.13 | fails_control | 9 | SnakeYAML Engine via yaml4s-snake (Scala wrapper; converter shared with circe-yaml-v12) |
+| dev.hnaderi:yaml4s-snake_3 | excluded | 9 | SnakeYAML Engine via yaml4s-snake (Scala 3 cross-build) |
 | it.krzeminski:snakeyaml-engine-kmp | excluded | 8 | SnakeYAML Engine KMP (KMP root module) |
 | net.jcazevedo:moultingyaml_2.11 | excluded | 8 | SnakeYAML via moultingyaml (Scala 2.11 cross-build) |
+| dev.hnaderi:yaml4s-snake_2.12 | excluded | 8 | SnakeYAML Engine via yaml4s-snake (Scala 2.12 cross-build) |
 | io.github.yaml-path:yaml-path | excluded | 7 | SnakeYAML via Jackson YAMLMapper (path query layer) |
 | org.virtuslab:scala-yaml_2.13 | excluded | 6 | scala-yaml (Scala 2.13 cross-build) |
 | io.circe:circe-yaml-v12_2.13 | fails_control | 6 | SnakeYAML Engine via circe-yaml-v12 (Scala wrapper; same project as circe-yaml) |
+| net.java.dev:jvyaml | fails_control | 6 | JvYAML (PyYAML-derived Java port) |
 | dev.dejvokep:boosted-yaml | fails_control | 4 | SnakeYAML Engine (relocated copy) via boosted-yaml (configuration library) |
 | io.circe:circe-yaml-v12_3 | excluded | 4 | SnakeYAML Engine via circe-yaml-v12 (Scala 3 cross-build) |
 | io.basc.framework:yaml | excluded | 4 | SnakeYAML via basc YamlProcessor (properties loader) |
 | io.sourceforge.github.components:yaml-snakeyaml | excluded | 4 | empty SnakeYAML dependency artifact |
 | org.treblereel.gwt.yaml:eo-yaml | excluded | 4 | eo-yaml (GWT fork) |
+| org.jruby:yecht | fails_control | 4 | Syck (Java port of the C Syck parser, YAML 1.0) |
 | io.maryk:yaml-jvm | excluded | 3 | maryk-yaml predecessor coordinate |
 | io.maryk:yaml | excluded | 3 | maryk-yaml predecessor coordinate (KMP root) |
 | net.jcazevedo:moultingyaml_2.13 | excluded | 3 | SnakeYAML via moultingyaml (Scala 2.13 cross-build) |
@@ -88,9 +101,12 @@ All paths load the documents into ordered trees; aliases resolve to the anchored
 | io.circe:circe-yaml-v12_2.12 | excluded | 2 | SnakeYAML Engine via circe-yaml-v12 (Scala 2.12 cross-build) |
 | com.github.siroshun09.configapi:yaml | excluded | 2 | SnakeYAML via ConfigAPI YamlConfiguration (configuration library) |
 | com.github.autermann:yaml | fails_control | 2 | SnakeYAML via autermann YamlNode tree |
+| org.embulk:embulk-util-snakeyaml | excluded | 2 | SnakeYAML tag resolver helper for Embulk |
 | io.ktor:ktor-server-config-yaml | excluded | 1 | kaml via Ktor YamlConfig (KMP root module) |
 | io.circe:circe-yaml-scalayaml_3 | excluded | 1 | scala-yaml via circe-yaml-scalayaml (Scala wrapper) |
 | org.asux:yaml | excluded | 1 | ASUX YAML command-line processor |
 | org.elypia.yaml4deltaspike:yaml4deltaspike | excluded | 1 | SnakeYAML via DeltaSpike YamlConfigSource (configuration source) |
+| com.github.mhshams:dahgan-core | excluded | 1 | dahgan (Kotlin port of the YAML 1.2 reference parser, tokenizer module) |
+| com.dnanexus:dxyaml | fails_control | 1 | SnakeYAML Engine via dxYaml (moultingyaml-derived Scala wrapper) |
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).
