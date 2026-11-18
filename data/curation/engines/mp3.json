@@ -59,7 +59,8 @@
     "jlayer": {
       "name": "JLayer (javazoom)",
       "language": "java",
-      "repository": "http://www.javazoom.net/javalayer/javalayer.html"
+      "repository": null,
+      "repository_note": "No reachable source repository; the project page http://www.javazoom.net/javalayer/javalayer.html serves no https."
     },
     "libmad": {
       "name": "libmad (MAD MPEG audio decoder)",
@@ -548,7 +549,7 @@
     {
       "path": "java/mp3/jaffree",
       "engine": "ffmpeg",
-      "relation": "binding",
+      "relation": "subprocess",
       "chain": [
         "jaffree",
         "ffprobe CLI"
@@ -560,7 +561,7 @@
     {
       "path": "java/mp3/jave-core",
       "engine": "ffmpeg",
-      "relation": "binding",
+      "relation": "subprocess",
       "chain": [
         "jave-core",
         "bundled ffmpeg executable"
@@ -632,7 +633,7 @@
     {
       "path": "javascript/mp3/get-audio-duration",
       "engine": "ffmpeg",
-      "relation": "binding",
+      "relation": "subprocess",
       "chain": [
         "get-audio-duration",
         "@ffprobe-installer ffprobe"
@@ -695,7 +696,7 @@
     {
       "path": "php/mp3/mhor/php-mediainfo",
       "engine": "mediainfolib",
-      "relation": "binding",
+      "relation": "subprocess",
       "chain": [
         "php-mediainfo",
         "mediainfo CLI"
@@ -729,7 +730,7 @@
     {
       "path": "php/mp3/buggedcom/phpvideotoolkit",
       "engine": "ffmpeg",
-      "relation": "binding",
+      "relation": "subprocess",
       "chain": [
         "phpvideotoolkit",
         "ffmpeg/ffprobe CLI"
@@ -798,7 +799,7 @@
     {
       "path": "python/mp3/pydub",
       "engine": "ffmpeg",
-      "relation": "binding",
+      "relation": "subprocess",
       "chain": [
         "pydub",
         "ffmpeg CLI"
@@ -824,7 +825,7 @@
     {
       "path": "python/mp3/ffmpeg-python",
       "engine": "ffmpeg",
-      "relation": "binding",
+      "relation": "subprocess",
       "chain": [
         "ffmpeg-python",
         "ffprobe CLI"
@@ -844,7 +845,7 @@
     {
       "path": "python/mp3/audioread",
       "engine": "ffmpeg",
-      "relation": "binding",
+      "relation": "subprocess",
       "chain": [
         "audioread ffdec",
         "ffmpeg CLI"
@@ -856,7 +857,7 @@
     {
       "path": "python/mp3/moviepy",
       "engine": "ffmpeg",
-      "relation": "binding",
+      "relation": "subprocess",
       "chain": [
         "moviepy",
         "imageio-ffmpeg bundled ffmpeg CLI"

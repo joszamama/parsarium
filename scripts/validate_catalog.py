@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 from audit_popularity_coverage import build_report
 from audit_upstream_repositories import parser_keys, problems as upstream_problems
+from audit_engines import load as load_engines, problems as engine_problems
 from build_matrix import ECOSYSTEMS, FORMATS
 from format_registry import PILOT_FORMATS
 
@@ -432,6 +433,9 @@ def main() -> None:
     upstream = upstream_problems(read("data/curation/upstream-repositories.json"), parser_keys())
     if upstream:
         raise ValueError("upstream repository links: " + "; ".join(upstream[:5]))
+    engines = engine_problems(load_engines(), parser_keys())
+    if engines:
+        raise ValueError("engine maps: " + "; ".join(engines[:5]))
     print(f"Validated {len(matrix)} active cells and {len(ECOSYSTEMS) * len(PILOT_FORMATS)} "
           "explicitly incomplete pilot cells")
 

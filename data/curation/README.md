@@ -68,3 +68,7 @@ re-ranked from one fresh capture
 (`scripts/snapshot_mp3_merge_metrics.py`). The [merge record](mp3-merge.json)
 lists every kept path, the 6 paths removed below the top ten, and the 25
 duplicate package paths removed in favour of the ID3v2-control project.
+
+## Engines and fuzzing exposure
+
+[`engines/<format>.json`](engines/) maps every selected path to the engine that parses the format's bytes (for example a PHP image library to libpng through GD), with its relation to that engine (own, wrapper, binding, subprocess, wasm, port, vendored or fork), the layers in between, the evidence and a confidence level. `scripts/audit_engines.py` checks it during validation. [`fuzzing-exposure.json`](fuzzing-exposure.json) records, per path, whether its upstream project is in OSS-Fuzz (from a pinned google/oss-fuzz commit) and whether its repository contains fuzz harnesses (file-name rules over one tree listing per GitHub repository; a heuristic, with its rules in `scripts/capture_fuzzing_exposure.py`).
