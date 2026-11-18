@@ -1,10 +1,10 @@
 {
   "ecosystem": "python",
   "format": "sql",
-  "status": "pilot_eight_selected_search_bounded",
+  "status": "pilot_nine_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 8,
+  "verified_third_party_count": 9,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "sqlpars",
@@ -35,8 +35,8 @@
   "unique_search_hits": 60,
   "search_captured_at_utc": "2026-11-17T16:38:50.403959+00:00",
   "primary_metric": "PyPI Stats last_month downloads (mirrors excluded)",
-  "unresolved_documentation_leads": 6,
-  "uncertainty": "Eight verified Python SQL paths after a bounded PyPI Simple index name search (rounds 1-2: five normalized-name queries, 41 hits; round 3 on 2026-11-18: five more queries, 28 hits; all hits kept) and PyPI Stats last_month metrics for targeted leads (rounds 1-2 captured 2026-11-17, round 3 on 2026-11-18 from the same source, compared with that one-day offset). Selected: sqlparse 0.6.1 (125,550,021; sqlparse regex lexer and token-grouping engine (non-validating)); sqlglot 30.33.0 (91,735,974; sqlglot pure-Python tokenizer and recursive-descent parser); sqlfluff 4.5.0 (11,606,805; sqlfluff lexer and dialect grammar matcher); pglast 8.8 (10,961,367; PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)); sqloxide 0.61.1 (511,801; sqlparser-rs); mo-sql-parsing 11.699.26234 (103,062; mo-sql-parsing grammar on the mo-parsing engine); psqlparse2 0.0.17 (3,025; PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)); mindsdb-sql-parser 0.13.8 (2,499; mindsdb_sql_parser SLY grammar). sqlparse is non-validating (it accepts invalid SQL). sqlfluff is a linter whose documented sqlfluff.parse returns the ansi parse tree. pglast is source-built with LLVM coverage instead of the optimised wheel and shares the libpg_query family with the C cell. sqloxide is source-built with Rust coverage; its parser is sqlparser-rs 0.61.0, the family of the Rust sqlparser path. mo-sql-parsing runs on its mo-parsing engine. psqlparse2 (round 3) is source-built from its sdist with LLVM coverage of its Cython wrapper and its vendored libpg_query 16-5.1.0, a second libpg_query-family path beside pglast. mindsdb-sql-parser (round 3) is pure Python on its vendored SLY engine; its predecessor mindsdb-sql is excluded. Remaining leads are recorded in leads.json. Counts below 10,000 are weak adoption evidence; this is not a definitive top-ten ranking. CPython sqlite3 is an engine binding with no syntax tree and is recorded, not counted. Two valid controls establish only the tested dialect-neutral subset.",
+  "unresolved_documentation_leads": 5,
+  "uncertainty": "Nine verified Python SQL paths after a bounded PyPI Simple index name search (rounds 1-2: five normalized-name queries, 41 hits; round 3 on 2026-11-18: five more queries, 28 hits; all hits kept) and PyPI Stats last_month metrics for targeted leads (rounds 1-2 captured 2026-11-17, round 3 on 2026-11-18 from the same source, compared with that one-day offset). Selected: sqlparse 0.6.1 (125,550,021; sqlparse regex lexer and token-grouping engine (non-validating)); sqlglot 30.33.0 (91,735,974; sqlglot pure-Python tokenizer and recursive-descent parser); sqlfluff 4.5.0 (11,606,805; sqlfluff lexer and dialect grammar matcher); pglast 8.8 (10,961,367; PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)); sqloxide 0.61.1 (511,801; sqlparser-rs); mo-sql-parsing 11.699.26234 (103,062; mo-sql-parsing grammar on the mo-parsing engine); psqlparse2 0.0.17 (3,025; PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)); mindsdb-sql-parser 0.13.8 (2,499; mindsdb_sql_parser SLY grammar); antlr-tsql 0.12.6 (126; antlr-tsql ANTLR 4 T-SQL grammar with antlr-ast tree shaping). sqlparse is non-validating (it accepts invalid SQL). sqlfluff is a linter whose documented sqlfluff.parse returns the ansi parse tree. pglast is source-built with LLVM coverage instead of the optimised wheel and shares the libpg_query family with the C cell. sqloxide is source-built with Rust coverage; its parser is sqlparser-rs 0.61.0, the family of the Rust sqlparser path. mo-sql-parsing runs on its mo-parsing engine. psqlparse2 (round 3) is source-built from its sdist with LLVM coverage of its Cython wrapper and its vendored libpg_query 16-5.1.0, a second libpg_query-family path beside pglast. mindsdb-sql-parser (round 3) is pure Python on its vendored SLY engine; its predecessor mindsdb-sql is excluded. antlr-tsql (round 3) is an ANTLR 4 T-SQL grammar on the antlr4 Python runtime; its tree does not type literals, so the adapter classifies constant terminals by their quotes (greenlion precedent), and its metric is very small. Remaining leads are recorded in leads.json. Counts below 10,000 are weak adoption evidence; this is not a definitive top-ten ranking. CPython sqlite3 is an engine binding with no syntax tree and is recorded, not counted. Two valid controls establish only the tested dialect-neutral subset.",
   "registry_snapshot": "data/python/sql/registry-snapshot.json",
   "unresolved_leads": "data/python/sql/leads.json",
   "runtime_evidence": "data/python/sql/standard.json",
@@ -49,6 +49,7 @@
     "projects/sql/python/sqloxide/verification.json",
     "projects/sql/python/mo_sql_parsing/verification.json",
     "projects/sql/python/psqlparse2/verification.json",
-    "projects/sql/python/mindsdb_sql_parser/verification.json"
+    "projects/sql/python/mindsdb_sql_parser/verification.json",
+    "projects/sql/python/antlr_tsql/verification.json"
   ]
 }

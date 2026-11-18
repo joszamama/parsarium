@@ -860,5 +860,113 @@
         }
       ]
     }
+  },
+  {
+    "name": "antlr-tsql",
+    "version": "0.12.6",
+    "license": "AGPL-3.0",
+    "license_evidence": "LICENSE in the pinned sdist (GNU Affero General Public License version 3 text; SHA-256 8486a10c...)",
+    "input_api": "antlr_tsql.ast.parse(sql_text: str) -> Script",
+    "documentation": "https://github.com/datacamp/antlr-tsql#set-up-the-python-module (README in the pinned sdist: from antlr_tsql import ast; ast.parse(...))",
+    "source": "https://files.pythonhosted.org/packages/6d/ef/9c5be4cbe024ebacd45b4c6c7e6418b847ba5b081bfb627b833853a83eb4/antlr-tsql-0.12.6.tar.gz",
+    "source_sha256": "8b3a41da30b7b8299e316abb08e815e6bfd89e06fa86121ce2da00318605c5f9",
+    "dependencies": [
+      "antlr4-python3-runtime 4.7.2",
+      "antlr-ast 0.7.0",
+      "PyYAML 5.4.1"
+    ],
+    "dialect": "T-SQL",
+    "scope": "One SQL statement from local text via antlr_tsql.ast.parse (T-SQL grammar); valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. The tree does not type constants: the adapter reads constant Terminals in expression positions and treats a quoted token as a string (unquoted) and a decimal token as a number, as for the PHP greenlion parser's untyped constants. The AST viewer, speaker and other start rules are untested.",
+    "family": "antlr-tsql ANTLR 4 T-SQL grammar with antlr-ast tree shaping",
+    "family_note": "ast.parse runs the ANTLR 4 generated T-SQL lexer and parser shipped in the sdist (antlr_tsql/antlr_py, 25,211-line tsqlParser.py) on the antlr4 Python runtime and shapes the parse tree with antlr-ast into the package's own node classes. Independent of the other selected Python SQL parsers.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 126,
+      "source": "https://pypistats.org/api/packages/antlr-tsql/recent",
+      "observed_on_utc": "2026-11-18",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Very small absolute count for a 2019 release; weak adoption evidence."
+    },
+    "project": "projects/sql/python/antlr_tsql",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

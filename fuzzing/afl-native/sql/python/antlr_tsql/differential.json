@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-18T00:08:39.333721+00:00",
+  "project": "sql/python/antlr_tsql",
+  "pass": true,
+  "feedback_kind": "python_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "94d09f122057b9ed26553be4bf4e5582487650c05f1501d1b7490a5a7b2204c8",
+  "overlay_receipt_sha256": "bc08625248090f8e4a2a1bd7d84f213ca7826cdde29eb28b38d8e8aea1254734",
+  "base_image_id": "sha256:4767e7ff0d69f9299601b7c8580ad8c494e4da70a8f16265be752d650f4df63d",
+  "overlay_image_id": "sha256:707376ab3d664bcca75d14edc18ee9a6456dd73e930b404b226ffa3c865eb88a",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 2851,
+  "second_afl_tuples": 2132,
+  "afl_tuple_difference": 1219,
+  "first_parser_features": 2895,
+  "second_parser_features": 2153,
+  "parser_feature_difference": 1270,
+  "first_only_features_by_file": {
+    "antlr4/BufferedTokenStream.py": 1,
+    "antlr4/LL1Analyzer.py": 10,
+    "antlr4/Parser.py": 12,
+    "antlr4/ParserRuleContext.py": 3,
+    "antlr4/PredictionContext.py": 5,
+    "antlr4/RuleContext.py": 5,
+    "antlr4/atn/ATN.py": 2,
+    "antlr4/atn/ParserATNSimulator.py": 93,
+    "antlr4/atn/PredictionMode.py": 2,
+    "antlr4/atn/SemanticContext.py": 4,
+    "antlr4/dfa/DFAState.py": 2,
+    "antlr4/error/ErrorListener.py": 3,
+    "antlr_ast/ast.py": 15,
+    "antlr_tsql/antlr_py/tsqlParser.py": 815,
+    "antlr_tsql/ast.py": 34
+  },
+  "second_only_features_by_file": {
+    "antlr_ast/ast.py": 3,
+    "antlr_tsql/antlr_py/tsqlParser.py": 260,
+    "antlr_tsql/ast.py": 1
+  }
+}

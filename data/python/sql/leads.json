@@ -254,13 +254,14 @@
     },
     {
       "name": "antlr-tsql",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 126,
       "metric_error": null,
       "latest_release_observed": "0.12.6",
       "family": "antlr-tsql ANTLR 4 T-SQL grammar with antlr-ast tree shaping",
       "documented_api_lead": "antlr_tsql.ast.parse",
-      "reason": "Round-3 lead (PyPI Stats last_month 126, captured 2026-11-18); AGPL-3.0 sdist with an ANTLR 4 generated T-SQL parser and an antlr-ast transformer. Evaluated in round 3."
+      "reason": "Round-3 lead (PyPI Stats last_month 126, captured 2026-11-18). antlr_tsql.ast.parse runs the ANTLR 4 generated T-SQL parser on the antlr4 Python runtime and shapes the tree with antlr-ast; both valid controls equal the oracle (constant Terminals classified by their quotes). Built from pinned sdists; Python line tracing covers 2,893 lines of antlr_tsql, antlr-ast and the antlr4 runtime; the AFL++ line bridge gives 2,851 tuples and the controls differ by 1,219 tuples. Independent family; very weak metric.",
+      "selected_release": "0.12.6"
     }
   ]
 }

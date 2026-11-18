@@ -739,6 +739,98 @@
       "parser_feature_difference": 171,
       "project_receipt": "projects/sql/python/mindsdb_sql_parser/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/python/mindsdb_sql_parser/differential.json"
+    },
+    {
+      "package": "antlr-tsql",
+      "version": "0.12.6",
+      "pass": true,
+      "input_api": "antlr_tsql.ast.parse(sql_text: str) -> Script",
+      "dialect": "T-SQL (the package's only grammar; ast.parse start rule tsql_file)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "antlr-tsql ANTLR 4 T-SQL grammar (generated antlr_tsql/antlr_py lexer and parser) on the antlr4 Python runtime, shaped by antlr-ast; independent of the other selected Python SQL parsers",
+      "parser_source_files": 35,
+      "parser_source_lines_covered": 2893,
+      "afl_tuple_difference": 1219,
+      "parser_feature_difference": 1270,
+      "project_receipt": "projects/sql/python/antlr_tsql/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/python/antlr_tsql/differential.json"
     }
   ],
   "standard": [],

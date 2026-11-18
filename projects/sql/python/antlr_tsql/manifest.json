@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "antlr-tsql",
+  "release": "0.12.6",
+  "catalog_parser": "data/python/sql/parsers.json",
+  "source_lock": "projects/sql/python/antlr_tsql/source-lock.json",
+  "source_sha256": "8b3a41da30b7b8299e316abb08e815e6bfd89e06fa86121ce2da00318605c5f9",
+  "build_note": "Built from the pinned sdists (PyPI has no wheel) on Debian bookworm Python 3.11: PyYAML 5.4.1 (pure-Python build with Cython 0.29.37, since it predates Cython 3), antlr4-python3-runtime 4.7.2, antlr-ast 0.7.0 and antlr-tsql 0.12.6, each pinned by SHA-256 and installed without build isolation or dependency resolution, then pip check; the installed antlr_tsql package is checked byte-identical to the sdist.",
+  "dependencies_note": "antlr4-python3-runtime 4.7.2 (BSD) executes the generated parser; antlr-ast 0.7.0 (AGPL-3.0, same DataCamp authors) shapes the parse tree into the AST classes; PyYAML 5.4.1 and setuptools' pkg_resources are imported by antlr_tsql.ast. The fuzz entry point is an external one-file Python bridge, not Atheris.",
+  "parser_family": "antlr-tsql ANTLR 4 T-SQL grammar (generated antlr_tsql/antlr_py lexer and parser) on the antlr4 Python runtime, shaped by antlr-ast; independent of the other selected Python SQL parsers",
+  "dialect": "T-SQL (the package's only grammar; ast.parse start rule tsql_file)",
+  "base_image": "debian@sha256:ec8534cda2cb30f29f44f23e135297af7a1496f2990fd8e4e84aa36b081a757a",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/opt/venv/bin/python",
+    "/work/replay.py",
+    "/input/case"
+  ],
+  "api": "antlr_tsql.ast.parse(local SQL text decoded from UTF-8 bytes) -> Script AST; the harness walks Batch statements, SelectStmt (target_list, from_clause JoinExpr and relation Identifiers, where_clause, group_by_clause, order_by_clause, Call nodes) and InsertStmt (target, column_names, values_clause ValueLists); constant Terminals are classified by their quotes",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the antlr_tsql package (generated T-SQL lexer and parser, AST transformer), antlr-ast and the antlr4 Python runtime during valid-control replay",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.11/site-packages/",
+  "format_specific_coverage_file_suffix": "/antlr_tsql/antlr_py/tsqlParser.py",
+  "scope": "One SQL statement from local text via antlr_tsql.ast.parse (T-SQL grammar); valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. The tree does not type constants: the adapter reads constant Terminals in expression positions and treats a quoted token as a string (unquoted) and a decimal token as a number, as for the PHP greenlion parser's untyped constants. The AST viewer, speaker and other start rules are untested.",
+  "native_campaign_supported": false,
+  "afl_python_entrypoint": "/opt/venv/bin/python",
+  "afl_package_release": "4.04c-4"
+}
