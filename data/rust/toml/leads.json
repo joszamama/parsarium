@@ -90,6 +90,20 @@
       "round_4_decision": "Checked 2026-11-18 against deser-toml 0.10.2, deser 0.10.2 and deser-core 0.10.2: the crate exports only from_str/from_slice/from_reader into deser::Deserialize targets; its own document model (src/document.rs) is private, and neither deser nor deser-core ships a generic value type. A typed tree would need a harness-written Deserialize sink, which is not a documented generic value view (catalog/toml/PROTOCOL.md). Not run."
     },
     {
+      "name": "antlr-rust-toml-parser",
+      "release": "0.34.0",
+      "metric_value": 7967,
+      "metric": "crates.io recent downloads (90 days)",
+      "family": "antlr-rust-toml-parser (ANTLR v4 generated TOML lexer/parser with own decoder; date-time text via toml_datetime)",
+      "api_lead": "antlr_rust_toml_parser::parse(&str) -> Document { items: [Assignment | TableHeader] }",
+      "source": "https://crates.io/crates/antlr-rust-toml-parser",
+      "search_query": "toml parser",
+      "search_rank": 1,
+      "status": "excluded_flat_items_harness_tables",
+      "checked_at_utc": "2026-11-18",
+      "evidence": "Run in round 4 (crate sha256 f6d21f9d..., Apache-2.0): parse(&str) returns flat assignments with typed values (i64, the underscore-free float token, toml_datetime::Datetime) and [table]/[[array]] headers in source order, and its README leaves table nesting and duplicate-key semantics to the consumer. A harness that nested the items reproduced both hand-written trees, with 606 crate lines and stable AFL++ feedback (3,589 vs 3,028 edges), but placing assignments under headers and merging dotted keys and arrays of tables is harness interpretation of TOML table semantics. Under the concrete-syntax-tree rule in catalog/toml/PROTOCOL.md (a tree that leaves dotted keys and table headers unmerged does not qualify) it was demoted at integrator review; the project and overlay were removed and are reproducible from these pins."
+    },
+    {
       "name": "fig-toml",
       "release": "7.0.0",
       "metric_value": 1397,
@@ -266,12 +280,6 @@
       "status": "promoted_to_verified"
     },
     {
-      "name": "antlr-rust-toml-parser",
-      "version": "0.34.0",
-      "project": "projects/toml/rust/antlr_rust_toml_parser",
-      "status": "promoted_to_verified"
-    },
-    {
       "name": "tomlproc",
       "version": "0.1.2",
       "project": "projects/toml/rust/tomlproc",
@@ -303,7 +311,6 @@
       "crates.io search API beyond the recorded windows: download-sorted \"toml\" and \"toml parser\", page 2 of \"toml parser\", \"toml\" keyword pages 1-5 (all 451 crates), parser-implementations category with \"toml\""
     ],
     "promoted": [
-      "antlr-rust-toml-parser 0.34.0",
       "tomlproc 0.1.2",
       "soml 0.2.0",
       "toml_dom 0.6.0",
@@ -320,6 +327,9 @@
       "kosmetic-syntax 0.1.0 (49; lossless syntax tree for a linter, no value API)",
       "tomllib 0.1.2 (98; 2016 nom 1 parser, TOML 0.4-era)"
     ],
-    "note": "With kabosu the cell holds ten verified paths; own-parser crates ranked below kabosu (46 recent downloads) were not run. Configuration loaders, toml/toml_edit wrappers, Cargo.toml tools, converters, tree-sitter grammars and other formats in the keyword listing are not parsers of their own."
+    "note": "The cell holds nine verified paths. Own-parser crates ranked below kabosu (46 recent downloads) were listed but not run before the antlr-rust-toml-parser demotion; they remain unrun leads. Configuration loaders, toml/toml_edit wrappers, Cargo.toml tools, converters, tree-sitter grammars and other formats in the keyword listing are not parsers of their own.",
+    "demoted_at_review": [
+      "antlr-rust-toml-parser 0.34.0 (flat items; table semantics would be harness interpretation)"
+    ]
   }
 }
