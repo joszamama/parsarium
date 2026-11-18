@@ -8,6 +8,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [yaml-cpp / C++](cpp/yaml-cpp/README.md)
 - [github.com/go-rotini/yaml / Go](go/github_com_go_rotini_yaml/README.md)
 - [github.com/goccy/go-yaml / Go](go/github_com_goccy_go_yaml/README.md)
+- [github.com/tabnas/yaml/go / Go](go/github_com_tabnas_yaml_go/README.md)
 - [github.com/yongjohnlee80/golib/parse/yaml / Go](go/github_com_yongjohnlee80_golib_parse_yaml/README.md)
 - [go.yaml.in/yaml/v4 / Go](go/go_yaml_in_yaml_v4/README.md)
 - [gopkg.in/yaml.v2 / Go](go/gopkg_in_yaml_v2/README.md)

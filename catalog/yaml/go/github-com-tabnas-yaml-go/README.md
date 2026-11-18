@@ -244,3 +244,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build yaml go github_com_tabnas_yaml_go
+python3 parsarium.py run yaml go github_com_tabnas_yaml_go controls/yaml/catalog.yaml
+```
