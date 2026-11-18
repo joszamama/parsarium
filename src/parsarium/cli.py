@@ -70,18 +70,20 @@ def _selection_command(argv: list[str]) -> int:
         description="Run every target of a selection manifest saved from parsarium.com/bench.")
     parser.add_argument("manifest", type=Path)
     parser.add_argument("--mode", choices=selection.MODES, default="control",
-                        help="control files, your own files, a corpus, or AFL++ (default: control)")
+                        help="control files, your own files, a corpus, AFL++, or Fandango generation with replay (default: control)")
     parser.add_argument("--input", type=Path,
                         help="file or directory for --mode file/replay; with several formats, "
                              "one subdirectory per format (e.g. DIR/png/)")
     parser.add_argument("--out", type=Path, help="results directory (default: runs/<selection id>)")
     parser.add_argument("--seconds", type=int, default=3600, help="AFL++ budget per target")
+    parser.add_argument("--count", type=int, default=100, help="Fandango inputs per target")
+    parser.add_argument("--seed", type=int, default=42, help="Fandango random seed")
     parser.add_argument("--dry-run", action="store_true", help="print the commands without running them")
     parser.add_argument("--allow-mismatch", action="store_true",
                         help="accept commit or target pin differences; print every difference")
     args = parser.parse_args(argv)
     return selection.run(args.manifest, home(), args.mode, args.input, args.out,
-                         args.seconds, args.dry_run, args.allow_mismatch)
+                         args.seconds, args.dry_run, args.allow_mismatch, args.count, args.seed)
 
 
 def main(argv: list[str] | None = None) -> int:

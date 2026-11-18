@@ -7,14 +7,14 @@
     families: "familias", id: "ID", none: "Ningún target coincide con esta selección.",
     cols: ["Formato", "Lenguaje", "Paquete", "Familia", "API de entrada", "Rango", "Feedback AFL++"],
     showAll: (n) => `Mostrar los ${n} targets`, std: "estándar",
-    modes: { control: "Controles", file: "Mis archivos", replay: "Corpus", afl: "AFL++" },
+    modes: { control: "Controles", file: "Mis archivos", replay: "Corpus", afl: "AFL++", fandango: "Fandango" },
     unranked: "—",
   } : {
     loading: "Loading the catalog…", targets: "targets", formats: "formats", ecosystems: "languages",
     families: "families", id: "ID", none: "No target matches this selection.",
     cols: ["Format", "Language", "Package", "Family", "Input API", "Rank", "AFL++ feedback"],
     showAll: (n) => `Show all ${n} targets`, std: "standard",
-    modes: { control: "Controls", file: "My files", replay: "Corpus", afl: "AFL++" },
+    modes: { control: "Controls", file: "My files", replay: "Corpus", afl: "AFL++", fandango: "Fandango" },
     unranked: "—",
   };
   const ECO = { c: "C", cpp: "C++", go: "Go", java: "Java", javascript: "JavaScript", python: "Python", rust: "Rust", php: "PHP" };
@@ -52,7 +52,7 @@
     family: params.get("family") === "1",
     std: params.get("std") !== "0",
     native: params.get("native") === "1",
-    mode: ["control", "file", "replay", "afl"].includes(params.get("mode")) ? params.get("mode") : "control",
+    mode: ["control", "file", "replay", "afl", "fandango"].includes(params.get("mode")) ? params.get("mode") : "control",
     tab: params.get("tab") || "targets",
     expanded: false,
   };
@@ -174,6 +174,8 @@
         : 'CORPUS="${1:?usage: run-selection.sh CORPUS_DIR  (one subdirectory per format, e.g. CORPUS_DIR/png/)}"');
     } else if (state.mode === "afl") {
       lines.push('SECONDS_PER_TARGET="${SECONDS_PER_TARGET:-3600}"');
+    } else if (state.mode === "fandango") {
+      lines.push('COUNT="${COUNT:-100}"', 'SEED="${SEED:-42}"', "parsarium fandango setup || exit 1");
     }
     lines.push('PARSARIUM="${PARSARIUM:-$(parsarium home --path)}"', 'mkdir -p "$OUT"', "", "TARGETS=(");
     for (const t of picked) lines.push(`  "${t.format} ${t.ecosystem} ${t.slug} ${t.control}"`);
@@ -188,6 +190,8 @@
     } else if (state.mode === "replay") {
       const dir = single ? '"$CORPUS"' : '"$CORPUS/$fmt"';
       lines.push(`  parsarium replay "$fmt" "$eco" "$slug" ${dir} "$OUT/$name" ${fail}`);
+    } else if (state.mode === "fandango") {
+      lines.push(`  parsarium fandango generate "$fmt" "$eco" "$slug" "$OUT/$name" --count "$COUNT" --seed "$SEED" --replay ${fail}`);
     } else {
       lines.push('  parsarium afl build "$fmt" "$eco" "$slug" || { echo "$name" >> "$OUT/failed.txt"; continue; }',
         '  parsarium afl prepare "$fmt" "$eco" "$slug" "$OUT/$name" || { echo "$name" >> "$OUT/failed.txt"; continue; }',
@@ -300,7 +304,7 @@
     root.querySelector('[data-out="script"]').textContent = script;
     root.querySelector('[data-out="manifest"]').textContent = manifest;
     root.querySelector('[data-out="runcmd"]').innerHTML =
-      `<span class="p">$ </span>parsarium run-selection ${id}.json --mode ${state.mode}${state.mode === "afl" ? " --seconds 3600" : ""}${["file", "replay"].includes(state.mode) ? " --input PATH" : ""}`;
+      `<span class="p">$ </span>parsarium run-selection ${id}.json --mode ${state.mode}${state.mode === "afl" ? " --seconds 3600" : ""}${state.mode === "fandango" ? " --count 100 --seed 42" : ""}${["file", "replay"].includes(state.mode) ? " --input PATH" : ""}`;
     root.querySelector('[data-out="report"]').textContent = report;
     setDownload("script", "run-selection.sh", script, "text/x-shellscript");
     setDownload("manifest", `${id}.json`, manifest, "application/json");

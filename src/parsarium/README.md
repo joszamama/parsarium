@@ -32,6 +32,7 @@ Run a selection saved from the [bench](https://parsarium.com/bench/):
 ```sh
 parsarium run-selection sel-90378f4e58.json --mode control
 parsarium run-selection sel-90378f4e58.json --mode afl --seconds 600
+parsarium run-selection sel-90378f4e58.json --mode fandango --count 100 --seed 42
 ```
 
 `parsarium home` shows where the snapshot lives. Set `PARSARIUM_HOME` to a clone of the repository to use it instead of the bundled snapshot.

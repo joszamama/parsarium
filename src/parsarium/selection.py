@@ -8,7 +8,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-MODES = ("control", "file", "replay", "afl")
+MODES = ("control", "file", "replay", "afl", "fandango")
 
 
 def load(manifest_path: Path) -> dict:
@@ -90,7 +90,7 @@ def _validate_pins(manifest: dict, root: Path, allow_mismatch: bool) -> dict[str
 
 def run(manifest_path: Path, root: Path, mode: str, input_path: Path | None,
         out: Path | None, seconds: int, dry_run: bool = False,
-        allow_mismatch: bool = False) -> int:
+        allow_mismatch: bool = False, count: int = 100, seed: int = 42) -> int:
     manifest = load(manifest_path)
     current = _validate_pins(manifest, root, allow_mismatch)
     formats = sorted({t["format"] for t in manifest["targets"]})
@@ -106,6 +106,12 @@ def run(manifest_path: Path, root: Path, mode: str, input_path: Path | None,
         return input_path if len(formats) == 1 else input_path / fmt
 
     failed = []
+    if mode == "fandango":
+        # Install the hash-locked Fandango once; every target then uses its format's default spec.
+        if dry_run:
+            print("   parsarium fandango setup")
+        elif subprocess.call([*entry, "fandango", "setup"]) != 0:
+            raise ValueError("parsarium fandango setup failed")
     for t in manifest["targets"]:
         fmt, eco, slug = t["id"].split("/")
         name = f"{fmt}-{eco}-{slug}"
@@ -119,6 +125,9 @@ def run(manifest_path: Path, root: Path, mode: str, input_path: Path | None,
             steps = [["run", fmt, eco, slug, str(f), "--results", str(dest / f.name)] for f in files]
         elif mode == "replay":
             steps = [["replay", fmt, eco, slug, str(per_format(fmt)), str(dest)]]
+        elif mode == "fandango":
+            steps = [["fandango", "generate", fmt, eco, slug, str(dest),
+                      "--count", str(count), "--seed", str(seed), "--replay"]]
         else:
             steps = [["afl", "build", fmt, eco, slug],
                      ["afl", "prepare", fmt, eco, slug, str(dest)],

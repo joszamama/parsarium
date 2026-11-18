@@ -559,6 +559,39 @@ def build(output: Path) -> None:
           f"{len(manifests)} projects, {len(families)} families")
 
 
+
+def icon_png(size: int, background: tuple[int, int, int] | None = None) -> bytes:
+    """Raster copy of favicon.svg: red and green squares side by side, for browsers without SVG icons."""
+    import struct
+    import zlib
+    red, green = (0xD4, 0x2A, 0x1F), (0x0F, 0x7D, 0x46)
+    top, bottom = round(size * 17 / 64), round(size * 47 / 64)
+    left, middle, right = round(size * 2 / 64), size // 2, round(size * 62 / 64)
+    clear = (*background, 255) if background else (0, 0, 0, 0)
+    rows = []
+    for y in range(size):
+        row = bytearray(b"\0")
+        for x in range(size):
+            if top <= y < bottom and left <= x < middle:
+                row += bytes((*red, 255))
+            elif top <= y < bottom and middle <= x < right:
+                row += bytes((*green, 255))
+            else:
+                row += bytes(clear)
+        rows.append(bytes(row))
+
+    def chunk(kind: bytes, data: bytes) -> bytes:
+        return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", zlib.crc32(kind + data) & 0xFFFFFFFF)
+    header = struct.pack(">IIBBBBB", size, size, 8, 6, 0, 0, 0)
+    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", header)
+            + chunk(b"IDAT", zlib.compress(b"".join(rows), 9)) + chunk(b"IEND", b""))
+
+
+def icon_ico(png: bytes, size: int) -> bytes:
+    import struct
+    return (struct.pack("<HHH", 0, 1, 1)
+            + struct.pack("<BBBBHHII", size % 256, size % 256, 0, 0, 1, 32, len(png), 22) + png)
+
 # --------------------------------------------------------------------------
 # Rendering
 
@@ -566,8 +599,8 @@ ECO_LABELS = {"c": "C", "cpp": "C++", "go": "Go", "java": "Java", "javascript": 
               "python": "Python", "rust": "Rust", "php": "PHP"}
 
 NAV = {
-    "en": [("bench", "Bench"), ("atlas", "Atlas"), ("manual", "Manual"), ("about", "About")],
-    "es": [("bench", "Banco"), ("atlas", "Atlas"), ("manual", "Manual"), ("about", "Acerca de")],
+    "en": [("", "Home"), ("bench", "Bench"), ("atlas", "Atlas"), ("manual", "Manual"), ("about", "About")],
+    "es": [("", "Inicio"), ("bench", "Banco"), ("atlas", "Atlas"), ("manual", "Manual"), ("about", "Acerca de")],
 }
 
 STRINGS = {
@@ -678,6 +711,7 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
     summary = catalog["summary"]
     commit = catalog["commit"]
     built_on = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    icon_version = hashlib.sha256((SITE / "favicon.svg").read_bytes()).hexdigest()[:10]
 
     # Home hero: the PNG control and every target that reads it.
     hero_control = "controls/png/red-green.png"
@@ -767,7 +801,7 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
     def header(lang: str, root: str, asset_root: str, active: str, route: str) -> str:
         s = STRINGS[lang]
         links = "".join(
-            f'<a href="{root}{key}/"{" aria-current=page" if key == active else ""}>{label}</a>'
+            f'<a href="{root + key + "/" if key else (root or "./")}"{" aria-current=page" if (key or "index") == active else ""}>{label}</a>'
             for key, label in NAV[lang])
         other = "es" if lang == "en" else "en"
         other_url = f"{asset_root}es/{route}" if lang == "en" else f"{asset_root}{route}"
@@ -825,7 +859,9 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
 <meta name="theme-color" content="#14130f" media="(prefers-color-scheme: dark)">
 <title>{html.escape(title)}</title>
 <script>document.documentElement.classList.add("js")</script>
-<link rel="icon" type="image/svg+xml" href="{asset_root}favicon.svg">
+<link rel="icon" type="image/svg+xml" href="{asset_root}favicon.svg?v={icon_version}">
+<link rel="icon" type="image/png" sizes="32x32" href="{asset_root}favicon-32.png?v={icon_version}">
+<link rel="apple-touch-icon" href="{asset_root}apple-touch-icon.png?v={icon_version}">
 {fonts}
 <link rel="stylesheet" href="{asset_root}assets/styles.css">
 <link rel="canonical" href="{canonical_es if lang == "es" else canonical_en}">
@@ -942,6 +978,10 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
             redirect(lang, old, new)
 
     shutil.copyfile(SITE / "favicon.svg", output / "favicon.svg")
+    small = icon_png(32)
+    (output / "favicon-32.png").write_bytes(small)
+    (output / "favicon.ico").write_bytes(icon_ico(small, 32))
+    (output / "apple-touch-icon.png").write_bytes(icon_png(180, (0xF3, 0xF0, 0xE8)))
     assets = output / "assets"
     if assets.exists():
         shutil.rmtree(assets)

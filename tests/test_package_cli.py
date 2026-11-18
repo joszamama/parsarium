@@ -82,6 +82,20 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(warnings, "")
         self.assertFalse(self.out.exists())
 
+    def test_fandango_mode_dry_run(self) -> None:
+        self.save()
+        stdout = io.StringIO()
+        with mock.patch.object(selection.subprocess, "call") as run, contextlib.redirect_stdout(stdout):
+            result = selection.run(self.manifest, self.root, "fandango", None, self.out, 10,
+                                   dry_run=True, count=7, seed=3)
+            run.assert_not_called()
+        self.assertEqual(result, 0)
+        lines = stdout.getvalue().splitlines()
+        self.assertEqual(lines[0].strip(), "parsarium fandango setup")
+        generate = [line for line in lines if "fandango generate" in line]
+        self.assertEqual(len(generate), len(self.saved["targets"]))
+        self.assertIn("--count 7 --seed 3 --replay", generate[0])
+
     def test_changed_release_fails_before_running(self) -> None:
         self.saved["targets"][0]["release"] = "9.9.9"
         self.save()
