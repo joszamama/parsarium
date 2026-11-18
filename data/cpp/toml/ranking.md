@@ -16,4 +16,15 @@ Each harness walks the library's own value tree and prints the [typed tree](../.
 
 **cpptoml 0.1.1** ([source](https://github.com/skystrife/cpptoml/tree/v0.1.1), MIT, archive SHA-256 `23af72468cfd4040984d46a0dd2a609538579c78ddc429d6b8fd7a10a6e24403`). API: cpptoml::parser(std::istream&).parse() -> std::shared_ptr<cpptoml::table> (throws cpptoml::parse_exception), walked through cpptoml::base is_table/is_array/is_table_array and as<T>() for std::string, int64_t, double, bool, local_date, local_time, local_datetime and offset_datetime. Debian source `cpptoml` 5 (binary `libcpptoml-dev`; dev installs `libcpptoml-dev` 5). The service-config control covers 908 library lines in 1 files (908 in `include/cpptoml.h`). The parser-only probe covers 697 and 696 library lines on the two controls (383 differ) and yields 452 and 444 AFL++ tuples (136 only on service-config, 128 only on typed-scalars); three repeats per control are identical ([feedback](../../../fuzzing/afl-native/toml/cpp/cpptoml/differential.json)). Own single-header recursive-descent parser (class cpptoml::parser in include/cpptoml.h); no delegation to another TOML parser. Shares no parser code with toml++ or toml11.
 
-No unverified leads remain: every C++ TOML library found by the bounded Debian and Conan Center searches was tried and verified.
+Every C++ TOML library found by the bounded Debian and Conan Center searches was tried and verified.
+
+## GitHub-star fallback (secondary)
+
+Since 2026-11-18, C and C++ cells may fill slots left empty after primary and Debian paths with pinned tagged releases of format-specific upstream repositories that have at least 100 GitHub stars, ranked separately ([PROTOCOL.md](../../../PROTOCOL.md)). Three GitHub repository searches on 2026-11-18 (first 100 hits by stars; [snapshot](registry-snapshot.json) `round_6_star_fallback`) found ten C++ repositories with at least 100 stars, and none adds a path:
+
+- toml++, toml11 and cpptoml are already selected on the primary metric.
+- glaze, reflect-cpp (TOML through toml++), figcone and serdepp (TOML through toml11) are multi-format libraries, so their stars do not count for TOML. cmkr and cforge are build tools configured in TOML.
+- tinytoml (177 stars) has only tag v0.4 (2018). It implements TOML 0.4.0 and stores every date-time in one `system_clock::time_point` type, so it cannot report the controls' four date-time kinds exactly.
+- The tomlc17 C++ header `tomlcpp.hpp` (201 stars, same repository as the C path) is a thin layer over `tomlc17.c`. It documents no way to list a table's keys, so walking an unknown document means reading the C `toml_datum_t` fields, which is the C path.
+
+Seven of ten slots stay open. Lead decisions are in [leads.json](leads.json).

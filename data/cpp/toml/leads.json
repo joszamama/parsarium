@@ -14,7 +14,8 @@
       "status": "unresolved_api_gap",
       "checked_at_utc": "2026-11-18",
       "found_by": "toml-lang/toml wiki TOML 1.1 list; Debian source package glaze has no \"toml\" in its name, so the recorded name search missed it",
-      "evidence": "Not run. glaze 9.1.0 docs/toml.md: the schema-less TOML targets (glz::generic, glz::generic_i64, glz::generic_u64 and variants) detect only strings, booleans, arrays, floats and integers; the four TOML date-time kinds are read only into typed std::chrono fields of a known schema (local date-times default to UTC), so no documented generic value view can report the four date-time kinds of an unknown document. Its source-package count also covers the JSON-first library, not TOML use."
+      "evidence": "Not run. glaze 9.1.0 docs/toml.md: the schema-less TOML targets (glz::generic, glz::generic_i64, glz::generic_u64 and variants) detect only strings, booleans, arrays, floats and integers; the four TOML date-time kinds are read only into typed std::chrono fields of a known schema (local date-times default to UTC), so no documented generic value view can report the four date-time kinds of an unknown document. Its source-package count also covers the JSON-first library, not TOML use.",
+      "star_fallback": "not eligible: multi-format serialization/reflection/RPC library whose stars reflect JSON and other features (GMarkup rule); also its schema-less TOML targets have no date-time kinds (existing unresolved_api_gap lead)"
     },
     {
       "name": "erbsland-qt-toml",
@@ -23,7 +24,8 @@
       "checked_at_utc": "2026-11-18",
       "source": "https://github.com/erbsland-dev/erbsland-qt-toml",
       "found_by": "toml-lang/toml wiki TOML 1.1 list",
-      "evidence": "No Debian source or binary package in the popcon tables; no primary metric and no Debian fallback. Not run."
+      "evidence": "No Debian source or binary package in the popcon tables; no primary metric and no Debian fallback. Not run.",
+      "star_fallback": "Not eligible: 14 GitHub stars (2026-11-18), below 100."
     },
     {
       "name": "nullptr-0/toml",
@@ -32,19 +34,70 @@
       "checked_at_utc": "2026-11-18",
       "source": "https://github.com/nullptr-0/toml",
       "found_by": "toml-lang/toml wiki TOML 1.0 list",
-      "evidence": "Not packaged in Debian; no primary metric. Not run."
+      "evidence": "Not packaged in Debian; no primary metric. Not run.",
+      "star_fallback": "Not eligible: 2 GitHub stars (2026-11-18), below 100, and no tagged release."
     },
     {
       "name": "tomlc17 (C++ binding)",
       "metric_value": null,
-      "status": "unresolved_no_primary_metric",
+      "status": "unresolved_api_gap",
       "checked_at_utc": "2026-11-18",
       "source": "https://github.com/cktan/tomlc17",
       "found_by": "toml-lang/toml wiki TOML 1.1 list (\"binding of tomlc17\")",
-      "evidence": "Same tomlc17 family as the C lead; not packaged in Debian, so no primary metric. Not run."
+      "evidence": "Same tomlc17 family as the C lead; not packaged in Debian, so no primary metric. Not run.",
+      "github_stargazers_reference_only": 201,
+      "star_fallback": "C++ binding src/tomlcpp.hpp (239 lines) over the same src/tomlc17.c selected in the C cell; the documented C++ API (README_CXX.md) reads known keys through get/seek and typed as_* accessors and documents no key enumeration, so a generic walk of an unknown document would read the inherited C toml_datum_t fields, i.e. the C path. Kept as an unresolved_api_gap lead, not a separate C++ path"
+    },
+    {
+      "name": "tinytoml",
+      "metric_value": null,
+      "status": "unresolved_api_gap",
+      "checked_at_utc": "2026-11-18",
+      "source": "https://github.com/mayah/tinytoml",
+      "release": "v0.4 (commit ea34092df86a50284abddd915e399374c44ace11, 2018-12-18)",
+      "github_stargazers_reference_only": 177,
+      "found_by": "GitHub search 'toml language:C++' (round 6 star fallback)",
+      "family": "tinytoml (mayah; header-only include/toml/toml.h)",
+      "evidence": "Not run. README: \"This parser is based on TOML v0.4.0\". include/toml/toml.h at v0.4 has a single TIME_TYPE holding std::chrono::system_clock::time_point, so the four TOML 1.0.0 date-time kinds of the controls cannot be reported with their exact types; TOML 0.4.0 also lacks the hexadecimal, octal and binary integers and dotted keys of the second control. Not in Debian; 177 stars would meet the star threshold, but the API cannot give the exact typed tree."
     }
   ],
-  "excluded": [],
+  "excluded": [
+    {
+      "name": "reflect-cpp",
+      "source": "https://github.com/munich-data-engineering/reflect-cpp",
+      "stars": 1969,
+      "found_by": "GitHub repository search (round 6 star fallback)",
+      "reason": "not eligible: multi-format reflection/serialization library; its README lists toml++ as the TOML backend (delegates to a selected parser)"
+    },
+    {
+      "name": "cmkr",
+      "source": "https://github.com/build-cpp/cmkr",
+      "stars": 638,
+      "found_by": "GitHub repository search (round 6 star fallback)",
+      "reason": "not a TOML library: CMake build system configured by cmake.toml; README lists toml11 as a dependency"
+    },
+    {
+      "name": "cforge",
+      "source": "https://github.com/ChaseSunstrom/cforge",
+      "stars": 190,
+      "found_by": "GitHub repository search (round 6 star fallback)",
+      "reason": "not a TOML library: C/C++ build tool configured by cforge.toml"
+    },
+    {
+      "name": "figcone",
+      "source": "https://github.com/kamchatka-volcano/figcone",
+      "stars": 119,
+      "found_by": "GitHub repository search (round 6 star fallback)",
+      "reason": "not eligible: multi-format configuration reader (JSON, YAML, TOML, XML, INI); README: TOML support is provided by toml11 through figcone_toml"
+    },
+    {
+      "name": "serdepp",
+      "source": "https://github.com/injae/serdepp",
+      "stars": 110,
+      "found_by": "GitHub repository search (round 6 star fallback)",
+      "reason": "not eligible: serialization adaptor library; README: TOML through the optional toml11 adaptor"
+    }
+  ],
   "resolved_promoted": [
     {
       "name": "toml++",
@@ -131,5 +184,26 @@
     "promoted": [],
     "new_leads": [],
     "excluded": []
+  },
+  "round_6_star_fallback": {
+    "checked_at_utc": "2026-11-18T07:09:20.778606+00:00",
+    "routes": [
+      "GitHub repository search 'toml language:C++' (sorted by stars, first 100 hits; 232 total)",
+      "GitHub repository search 'toml parser language:C++' (sorted by stars, first 100 hits; 57 total)",
+      "GitHub repository search 'topic:toml language:C++' (sorted by stars, first 100 hits; 64 total)",
+      "existing unresolved leads (glaze, erbsland-qt-toml, nullptr-0/toml, tomlc17 C++ binding)"
+    ],
+    "promoted": [],
+    "new_leads": [
+      "tinytoml"
+    ],
+    "excluded": [
+      "reflect-cpp",
+      "cmkr",
+      "cforge",
+      "figcone",
+      "serdepp"
+    ],
+    "result": "Ten repositories with at least 100 stars: three are the selected primary-metric paths, five are multi-format libraries or build tools, tinytoml targets TOML 0.4.0 with one untyped time kind, and the tomlc17 C++ binding is a thin layer over the C path. The cell stays at three."
   }
 }
