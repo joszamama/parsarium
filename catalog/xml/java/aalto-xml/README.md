@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.4.0`
+- **Upstream:** [source repository](<https://github.com/FasterXML/aalto-xml>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml/aalto-xml>)
 - **License:** Apache-2.0
 - **Parser family:** Aalto independent StAX tokenizer/parser
 - **Local input API:** `new com.fasterxml.aalto.stax.InputFactoryImpl().createXMLStreamReader(local InputStream); iterate XMLStreamReader.next()`

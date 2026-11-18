@@ -1,6 +1,7 @@
 # raylib — PNG / C++
 
 - **Pinned release:** `6.2`
+- **Upstream:** [source repository](<https://github.com/raysan5/raylib>) · [Debian](<https://tracker.debian.org/pkg/raylib>)
 - **License:** Zlib
 - **Parsed scope:** pixels
 - **Underlying family:** raylib bundled stb_image PNG decoder

@@ -1,6 +1,7 @@
 # tiny-image-size — ASCII PNM / JavaScript
 
 - **Pinned release:** `1.0.0`
+- **Upstream:** [source repository](<https://github.com/pengzhanbo/tiny-image-size>) · [npm](<https://www.npmjs.com/package/tiny-image-size>)
 - **License:** MIT
 - **Parsed scope:** P3 header dimensions and PNM type
 - **Underlying family:** tiny-image-size PNM header reader

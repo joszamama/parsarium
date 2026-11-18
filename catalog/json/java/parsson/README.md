@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.1.9`
+- **Upstream:** [source repository](<https://github.com/eclipse-ee4j/parsson>) · [Maven Central](<https://central.sonatype.com/artifact/org.eclipse.parsson/parsson>)
 - **License:** EPL-2.0
 - **Parser family:** Eclipse Parsson JsonParserImpl / JsonTokenizer
 - **Local input API:** `new JsonProviderImpl().createParser(Files.newInputStream(local Path)); next(), getValue(), hasNext() to EOF`

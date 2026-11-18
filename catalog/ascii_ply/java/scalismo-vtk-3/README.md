@@ -1,6 +1,7 @@
 # scalismo-vtk_3 — ASCII PLY / Java
 
 - **Pinned release:** `1.0-RC1`
+- **Upstream:** [source repository](<https://github.com/unibas-gravis/scalismo-vtk>) · [Maven Central](<https://central.sonatype.com/artifact/ch.unibas.cs.gravis/scalismo-vtk_3>)
 - **License:** Apache-2.0
 - **Parsed scope:** ASCII PLY triangle vertices, face list and parsed point ids
 - **Underlying family:** VTK vtkPLYReader via the scalismo-vtk Scala binding (VTK 9.1 Java natives)

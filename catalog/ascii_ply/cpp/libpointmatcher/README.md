@@ -1,6 +1,7 @@
 # libpointmatcher — ASCII PLY / C++
 
 - **Pinned release:** `1.4.4`
+- **Upstream:** [source repository](<https://github.com/norlab-ulaval/libpointmatcher>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** three parsed point-cloud vertices with x/y/z coordinate sums from ASCII PLY
 - **Underlying family:** libpointmatcher native PLY point-cloud parser

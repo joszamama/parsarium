@@ -1,6 +1,7 @@
 # node-wav — WAV / JavaScript
 
 - **Pinned release:** `0.0.2`
+- **Upstream:** [source repository](<https://github.com/andreasgal/node-wav>) · [npm](<https://www.npmjs.com/package/node-wav>)
 - **License:** MIT
 - **Parsed scope:** samples
 - **Underlying family:** node-wav

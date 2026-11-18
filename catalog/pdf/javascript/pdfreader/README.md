@@ -1,6 +1,7 @@
 # pdfreader — PDF / JavaScript
 
 - **Pinned release:** `3.0.8`
+- **Upstream:** [source repository](<https://github.com/adrienjoly/npm-pdfreader>) · [npm](<https://www.npmjs.com/package/pdfreader>)
 - **License:** MIT
 - **Parsed scope:** text
 - **Underlying family:** mozilla/pdf.js

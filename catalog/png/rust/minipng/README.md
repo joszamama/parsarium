@@ -1,6 +1,7 @@
 # minipng — PNG / Rust
 
 - **Pinned release:** `1.0.0`
+- **Upstream:** [source repository](<https://github.com/pommicket/minipng>) · [crates.io](<https://crates.io/crates/minipng>)
 - **License:** 0BSD
 - **Parsed scope:** Decoded PNG dimensions and first pixel
 - **Underlying family:** minipng decoder

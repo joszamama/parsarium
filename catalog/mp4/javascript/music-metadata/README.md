@@ -1,6 +1,7 @@
 # music-metadata — MP4 / JavaScript
 
 - **Pinned release:** `12.4.0`
+- **Upstream:** [source repository](<https://github.com/Borewit/music-metadata>) · [npm](<https://www.npmjs.com/package/music-metadata>)
 - **License:** MIT
 - **Parsed scope:** tracks+title
 - **Underlying family:** music-metadata/ISO BMFF reader

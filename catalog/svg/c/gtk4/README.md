@@ -1,6 +1,7 @@
 # gtk4 — SVG / C
 
 - **Pinned release:** `4.24.1`
+- **Upstream:** [source repository](<https://gitlab.gnome.org/GNOME/gtk>) · [Debian](<https://tracker.debian.org/pkg/gtk4>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** SVG root dimensions parsed by GtkSvg from local file bytes
 - **Underlying family:** GTK 4 native GtkSvg parser

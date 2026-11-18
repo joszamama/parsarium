@@ -1,6 +1,7 @@
 # aubio — WAV / C++
 
 - **Pinned release:** `0.4.9`
+- **Upstream:** [source repository](<https://github.com/aubio/aubio>) · [Debian](<https://tracker.debian.org/pkg/aubio>)
 - **License:** GPL-3.0-or-later
 - **Parsed scope:** WAV sample rate, channel and frame counts, plus first four decoded PCM samples
 - **Underlying family:** aubio source abstraction

@@ -1,6 +1,7 @@
 # libmediainfo — MP4 / C
 
 - **Pinned release:** `26.10`
+- **Upstream:** [source repository](<https://github.com/MediaArea/MediaInfoLib>) · [Debian](<https://tracker.debian.org/pkg/libmediainfo>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** MPEG-4 container, title, AVC video and AAC audio, 2x2 video dimensions
 - **Underlying family:** MediaInfoLib native MPEG-4 parser

@@ -1,6 +1,7 @@
 # bytedeco-ffmpeg — ASCII PNM / Java
 
 - **Pinned release:** `8.1.2-1.5.14`
+- **Upstream:** [source repository](<https://github.com/bytedeco/javacpp-presets>) · [Maven Central](<https://central.sonatype.com/artifact/org.bytedeco/ffmpeg>)
 - **License:** Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception
 - **Parsed scope:** ASCII P3 PPM codec and dimensions parsed from stream
 - **Underlying family:** Bytedeco binding to native FFmpeg PPM decoder

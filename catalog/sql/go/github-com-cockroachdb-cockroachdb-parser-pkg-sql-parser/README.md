@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.25.2`
+- **Upstream:** [source repository](<https://github.com/cockroachdb/cockroachdb-parser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser>)
 - **License:** Apache-2.0
 - **Parser family:** CockroachDB PostgreSQL-compatible grammar (official v25.2 extraction, goyacc sql.y) and scanner
 - **Local input API:** `parser.Parse(local SQL text) -> statements.Statements`

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.13.1`
+- **Upstream:** [source repository](<https://github.com/timothee-haudebourg/json-syntax>) · [crates.io](<https://crates.io/crates/json-syntax>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** json-syntax own strict parser and code map in src/parse; json-number dependency stores numeric lexical form; no serde_json input parser or optional serde_json feature
 - **Local input API:** `JsonValue::parse_slice(&[u8]) -> Result<(JsonValue, JsonCodeMap), JsonParseError>`

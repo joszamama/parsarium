@@ -1,6 +1,7 @@
 # @resvg/resvg-wasm — SVG / JavaScript
 
 - **Pinned release:** `2.6.2`
+- **Upstream:** [source repository](<https://github.com/thx/resvg-js>) · [npm](<https://www.npmjs.com/package/@resvg/resvg-wasm>)
 - **License:** MPL-2.0
 - **Parsed scope:** pixels
 - **Underlying family:** resvg

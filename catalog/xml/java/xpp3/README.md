@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.1.4c`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/xpp3/xpp3>)
 - **License:** Indiana University Extreme! Lab Software License 1.1.1 (parser); public domain (XmlPull API); Apache-1.1 (bundled QName)
 - **Parser family:** XPP3 MXParser independent XML pull tokenizer
 - **Local input API:** `new org.xmlpull.mxp1.MXParser(); setFeature(FEATURE_PROCESS_NAMESPACES, true); setInput(Files.newInputStream(local Path), null); next() until END_DOCUMENT`

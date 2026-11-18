@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.8.3`
+- **Upstream:** [source repository](<https://github.com/WasabiThumb/jtoml>) · [Maven Central](<https://central.sonatype.com/artifact/io.github.wasabithumb/jtoml>)
 - **License:** Apache-2.0
 - **Parser family:** jtoml (WasabiThumb; own hand-written reader and expression parser in jtoml-internals, value model in jtoml-api)
 - **Local input API:** `JToml.jToml().read(Path) -> TomlDocument (TomlTable); TomlPrimitive typed accessors; parse errors throw TomlParseException`

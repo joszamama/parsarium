@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.0.0`
+- **Upstream:** [source repository](<https://github.com/nfarina/xmldoc>) · [npm](<https://www.npmjs.com/package/xmldoc>)
 - **License:** MIT
 - **Parser family:** sax-js strict XML state machine (sax 1.6.1 in non-namespace mode), shared with the selected sax path, xml2js and xml-js
 - **Local input API:** `new XmlDocument(xml: string) (ESM import { XmlDocument } from 'xmldoc'), after strict UTF-8 TextDecoder of local bytes; the result is read through the documented members name, attr and children (type element, text, cdata, comment) and doctype`

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.6.0`
+- **Upstream:** [source repository](<https://github.com/ICRAR/ijson>) · [PyPI](<https://pypi.org/project/ijson/>)
 - **License:** BSD-3-Clause AND ISC
 - **Parser family:** ijson yajl2_c C extension / yajl 2.1.1 (rtobar fork) C parser
 - **Local input API:** `ijson.items(BytesIO(local JSON bytes), '') on the default yajl2_c backend`

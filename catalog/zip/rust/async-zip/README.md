@@ -1,6 +1,7 @@
 # async_zip — ZIP / Rust
 
 - **Pinned release:** `0.0.19`
+- **Upstream:** [source repository](<https://github.com/Majored/rs-async-zip>) · [crates.io](<https://crates.io/crates/async_zip>)
 - **License:** MIT
 - **Parsed scope:** Entry name and decompressed text via deprecated memory API
 - **Underlying family:** rs-async-zip lineage

@@ -1,6 +1,7 @@
 # github.com/faiface/beep/mp3 — MP3 / Go
 
 - **Pinned release:** `v1.1.0`
+- **Upstream:** [source repository](<https://github.com/faiface/beep>) · [pkg.go.dev](<https://pkg.go.dev/github.com/faiface/beep/mp3>)
 - **License:** MIT
 - **Parsed scope:** decoded samples and sample rate
 - **Underlying family:** hajime/go-mp3 via beep

@@ -8,16 +8,16 @@ Ten verified JavaScript SQL paths, the ceiling, after a bounded npm search (thre
 
 ## Third-party parsers
 
-- [node-sql-parser](node-sql-parser/README.md) — verified Docker harness
-- [pgsql-ast-parser](pgsql-ast-parser/README.md) — verified Docker harness
-- [sql-parser-cst](sql-parser-cst/README.md) — verified Docker harness
-- [dt-sql-parser](dt-sql-parser/README.md) — verified Docker harness
-- [sqlite-parser](sqlite-parser/README.md) — verified Docker harness
-- [@appland/sql-parser](appland-sql-parser/README.md) — verified Docker harness
-- [sqllens](sqllens/README.md) — verified Docker harness
-- [rawsql-ts](rawsql-ts/README.md) — verified Docker harness
-- [@questdb/sql-parser](questdb-sql-parser/README.md) — verified Docker harness
-- [@saralsql/tsql-parser](saralsql-tsql-parser/README.md) — verified Docker harness
+- [node-sql-parser](node-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/taozhi8833998/node-sql-parser>) · [npm](<https://www.npmjs.com/package/node-sql-parser>)
+- [pgsql-ast-parser](pgsql-ast-parser/README.md) — verified Docker harness · [source repository](<https://github.com/oguimbal/pgsql-ast-parser>) · [npm](<https://www.npmjs.com/package/pgsql-ast-parser>)
+- [sql-parser-cst](sql-parser-cst/README.md) — verified Docker harness · [source repository](<https://github.com/nene/sql-parser-cst>) · [npm](<https://www.npmjs.com/package/sql-parser-cst>)
+- [dt-sql-parser](dt-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/DTStack/dt-sql-parser>) · [npm](<https://www.npmjs.com/package/dt-sql-parser>)
+- [sqlite-parser](sqlite-parser/README.md) — verified Docker harness · [source repository](<https://github.com/codeschool/sqlite-parser>) · [npm](<https://www.npmjs.com/package/sqlite-parser>)
+- [@appland/sql-parser](appland-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/getappmap/sql-parser>) · [npm](<https://www.npmjs.com/package/@appland/sql-parser>)
+- [sqllens](sqllens/README.md) — verified Docker harness · [source repository](<https://github.com/NiclasOlofsson/sqllens>) · [npm](<https://www.npmjs.com/package/sqllens>)
+- [rawsql-ts](rawsql-ts/README.md) — verified Docker harness · [source repository](<https://github.com/mk3008/rawsql-ts>) · [npm](<https://www.npmjs.com/package/rawsql-ts>)
+- [@questdb/sql-parser](questdb-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/questdb/sql-parser>) · [npm](<https://www.npmjs.com/package/@questdb/sql-parser>)
+- [@saralsql/tsql-parser](saralsql-tsql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/saralstalin/saralsqlparser>) · [npm](<https://www.npmjs.com/package/@saralsql/tsql-parser>)
 
 ## Standard and runtime APIs
 

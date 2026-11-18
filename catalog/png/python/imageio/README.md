@@ -1,6 +1,7 @@
 # imageio — PNG / Python
 
 - **Pinned release:** `2.38.1`
+- **Upstream:** [source repository](<https://github.com/imageio/imageio>) · [PyPI](<https://pypi.org/project/imageio/>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** pixels
 - **Underlying family:** ImageIO via Pillow

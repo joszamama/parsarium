@@ -1,6 +1,7 @@
 # mediabunny — MP3 / JavaScript
 
 - **Pinned release:** `1.66.0`
+- **Upstream:** [source repository](<https://github.com/Vanilagy/mediabunny>) · [npm](<https://www.npmjs.com/package/mediabunny>)
 - **License:** MPL-2.0
 - **Parsed scope:** Every MPEG Layer III frame of an untagged stream from local bytes, demuxed by mediabunny's own frame-header reader: format, codec, sample rate, channels, frame count, frame bytes, samples per channel (from duration); no audio decode
 - **Underlying family:** mediabunny TypeScript MP3 demuxer

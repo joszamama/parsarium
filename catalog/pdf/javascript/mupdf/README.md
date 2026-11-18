@@ -1,6 +1,7 @@
 # mupdf — PDF / JavaScript
 
 - **Pinned release:** `1.28.6`
+- **Upstream:** [npm](<https://www.npmjs.com/package/mupdf>)
 - **License:** AGPL-3.0-or-later
 - **Parsed scope:** text
 - **Underlying family:** MuPDF

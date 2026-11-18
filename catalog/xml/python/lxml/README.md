@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `6.1.3`
+- **Upstream:** [source repository](<https://github.com/lxml/lxml>) · [PyPI](<https://pypi.org/project/lxml/>)
 - **License:** BSD-3-Clause
 - **Parser family:** lxml.etree binding over libxml2 2.15.4 XML parser
 - **Local input API:** `lxml.etree.parse(BytesIO(local XML bytes), XMLParser(resolve_entities=False, no_network=True, recover=False)).getroot(); Element.tag, attrib, nsmap, text and tail`

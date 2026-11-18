@@ -1,6 +1,7 @@
 # Twisted — HTTP/1.1 / Python
 
 - **Pinned release:** `26.10.0`
+- **Upstream:** [source repository](<https://github.com/twisted/twisted>) · [PyPI](<https://pypi.org/project/Twisted/>)
 - **License:** MIT
 - **Parsed scope:** HTTP/1.1 request head
 - **Underlying family:** Twisted HTTPChannel parser

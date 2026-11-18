@@ -1,6 +1,7 @@
 # pdfminer.six — PDF / Python
 
 - **Pinned release:** `20260107`
+- **Upstream:** [source repository](<https://github.com/pdfminer/pdfminer.six>) · [PyPI](<https://pypi.org/project/pdfminer.six/>)
 - **License:** MIT
 - **Parsed scope:** page text
 - **Underlying family:** pdfminer.six

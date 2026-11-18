@@ -1,6 +1,7 @@
 # github.com/ascherkus/go-id3/src/id3 — MP3 / Go
 
 - **Pinned release:** `v0.0.0-20120522061058-b139b6a612de`
+- **Upstream:** [source repository](<https://github.com/ascherkus/go-id3>) · [pkg.go.dev](<https://pkg.go.dev/github.com/ascherkus/go-id3/src/id3>)
 - **License:** Apache-2.0
 - **Parsed scope:** ID3v2.3 title
 - **Underlying family:** ascherkus/go-id3 lineage

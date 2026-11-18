@@ -1,6 +1,7 @@
 # chumper/zipper — ZIP / PHP
 
 - **Pinned release:** `v1.0.3`
+- **Upstream:** [source repository](<https://github.com/Chumper/Zipper>) · [Packagist](<https://packagist.org/packages/chumper/zipper>)
 - **License:** Apache2
 - **Parsed scope:** decompressed bytes of a named entry
 - **Underlying family:** Chumper Zipper over PHP ZipArchive

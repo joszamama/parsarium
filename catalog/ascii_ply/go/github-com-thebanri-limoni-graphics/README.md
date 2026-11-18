@@ -1,6 +1,7 @@
 # github.com/thebanri/limoni/graphics — ASCII PLY / Go
 
 - **Pinned release:** `v0.16.0`
+- **Upstream:** [source repository](<https://github.com/thebanri/limoni>) · [pkg.go.dev](<https://pkg.go.dev/github.com/thebanri/limoni/graphics>)
 - **License:** Apache-2.0
 - **Parsed scope:** ASCII PLY vertex and face counts
 - **Underlying family:** limoni PLY

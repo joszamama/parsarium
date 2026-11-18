@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.5.2`
+- **Upstream:** [source repository](<https://github.com/antchfx/xmlquery>) · [pkg.go.dev](<https://pkg.go.dev/github.com/antchfx/xmlquery>)
 - **License:** MIT
 - **Parser family:** xmlquery DOM over Go encoding/xml Decoder tokenizer
 - **Local input API:** `xmlquery.Parse(io.Reader); Node.FirstChild/NextSibling DOM walk; Node.NamespaceURI and Attr.NamespaceURI`

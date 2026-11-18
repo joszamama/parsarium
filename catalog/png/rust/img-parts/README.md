@@ -1,6 +1,7 @@
 # img-parts — PNG / Rust
 
 - **Pinned release:** `0.4.2`
+- **Upstream:** [source repository](<https://github.com/paolobarbolini/img-parts>) · [crates.io](<https://crates.io/crates/img-parts>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** PNG chunk structure and IHDR dimensions
 - **Underlying family:** img-parts PNG chunk reader

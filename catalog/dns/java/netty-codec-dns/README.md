@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.2.21.Final`
+- **Upstream:** [source repository](<https://github.com/netty/netty>) · [Maven Central](<https://central.sonatype.com/artifact/io.netty/netty-codec-dns>)
 - **License:** Apache-2.0
 - **Parser family:** Netty DNS codec (DnsResponseDecoder, DnsMessageUtil, DefaultDnsRecordDecoder, DnsCodecUtil)
 - **Local input API:** `new DatagramDnsResponseDecoder() / new DatagramDnsQueryDecoder() in an EmbeddedChannel, fed new DatagramPacket(ByteBuf, recipient, sender)`

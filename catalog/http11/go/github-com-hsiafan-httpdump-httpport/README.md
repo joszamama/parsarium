@@ -1,6 +1,7 @@
 # github.com/hsiafan/httpdump/httpport — HTTP/1.1 / Go
 
 - **Pinned release:** `v0.0.0-20231019014708-4fd809447b59`
+- **Upstream:** [source repository](<https://github.com/hsiafan/httpdump>) · [pkg.go.dev](<https://pkg.go.dev/github.com/hsiafan/httpdump/httpport>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** request message
 - **Underlying family:** Go net/http port

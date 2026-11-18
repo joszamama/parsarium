@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.2.6`
+- **Upstream:** [source repository](<https://github.com/halaxa/json-machine>) · [Packagist](<https://packagist.org/packages/halaxa/json-machine>)
 - **License:** Apache-2.0
 - **Parser family:** JSON Machine Lexer/Parser plus PHP ext/json member decoder
 - **Local input API:** `JsonMachine\Items::fromString(string $input, array $options) over local JSON text; iteration yields top-level members; ExtJsonDecoder decodes each value`

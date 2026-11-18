@@ -1,6 +1,7 @@
 # threejs-ply-loader — ASCII PLY / JavaScript
 
 - **Pinned release:** `1.2.2`
+- **Upstream:** [source repository](<https://github.com/lanceschi/threejs-ply-loader>) · [npm](<https://www.npmjs.com/package/threejs-ply-loader>)
 - **License:** MIT
 - **Parsed scope:** triangle mesh
 - **Underlying family:** Three.js PLYLoader family

@@ -1,6 +1,7 @@
 # jcodec — PNG / Java
 
 - **Pinned release:** `0.2.5`
+- **Upstream:** [source repository](<https://github.com/jcodec/jcodec>) · [Maven Central](<https://central.sonatype.com/artifact/org.jcodec/jcodec>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** PNG dimensions
 - **Underlying family:** JCodec core PNG decoder

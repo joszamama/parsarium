@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.2`
+- **Upstream:** [source repository](<https://github.com/KarpelesLab/tomlproc>) · [crates.io](<https://crates.io/crates/tomlproc>)
 - **License:** MIT
 - **Parser family:** tomlproc (KarpelesLab): own dependency-free parser, value tree and Datetime type; no dependency on toml_parser, toml, toml_edit, taplo, boml, toml-spanner or any other TOML crate.
 - **Local input API:** `tomlproc::parse(&str) -> Result<Table, Error>; Table::iter() over (key, Value) with Value::{String, Integer(i64), Float(f64), Boolean, Datetime, Array, Table}; Datetime { date: Option<Date>, time: Option<Time>, offset: Option<Offset> }`

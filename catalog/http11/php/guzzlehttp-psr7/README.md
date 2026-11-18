@@ -1,6 +1,7 @@
 # guzzlehttp/psr7 — HTTP/1.1 / PHP
 
 - **Pinned release:** `3.3.0`
+- **Upstream:** [source repository](<https://github.com/guzzle/psr7>) · [Packagist](<https://packagist.org/packages/guzzlehttp/psr7>)
 - **License:** MIT
 - **Parsed scope:** single valid GET request line and Host, X-Parsarium, Connection headers
 - **Underlying family:** Guzzle PSR-7 HTTP message parser

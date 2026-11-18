@@ -1,6 +1,7 @@
 # patool — ZIP / Python
 
 - **Pinned release:** `4.1.0`
+- **Upstream:** [source repository](<https://github.com/wummel/patool>) · [PyPI](<https://pypi.org/project/patool/>)
 - **License:** GPL-3.0-only
 - **Parsed scope:** DEFLATE ZIP entry name and content
 - **Underlying family:** patool via local unzip utility

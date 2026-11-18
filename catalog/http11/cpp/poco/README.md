@@ -1,6 +1,7 @@
 # poco — HTTP/1.1 / C++
 
 - **Pinned release:** `1.15.4`
+- **Upstream:** [source repository](<https://github.com/pocoproject/poco>) · [Debian](<https://tracker.debian.org/pkg/poco>)
 - **License:** BSL-1.0
 - **Parsed scope:** HTTP/1.1 request method, URI, version, and Host header
 - **Underlying family:** Poco.Net HTTPRequest parser

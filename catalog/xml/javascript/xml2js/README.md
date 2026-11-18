@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.6.2`
+- **Upstream:** [source repository](<https://github.com/Leonidas-from-XIV/node-xml2js>) · [npm](<https://www.npmjs.com/package/xml2js>)
 - **License:** MIT
 - **Parser family:** sax-js strict XML state machine (sax 1.6.1) under the xml2js object builder
 - **Local input API:** `new xml2js.Parser({xmlns: true, explicitChildren: true, preserveChildrenOrder: true, charsAsChildren: true, includeWhiteChars: true, charkey: '#text'}).parseStringPromise(text) on local bytes decoded with strict UTF-8 TextDecoder; xml2js runs sax.parser(strict=true, {xmlns: true}) and the adapter reads the resulting object tree: $ns element URIs and local names, sax attribute objects under $, and document-ordered element and text children under $$`

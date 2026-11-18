@@ -1,6 +1,7 @@
 # github.com/fogleman/fauxgl — ASCII PLY / Go
 
 - **Pinned release:** `v0.0.0-20250110135958-abf826acbbbd`
+- **Upstream:** [source repository](<https://github.com/fogleman/fauxgl>) · [pkg.go.dev](<https://pkg.go.dev/github.com/fogleman/fauxgl>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY header, vertex x/y/z rows and vertex_indices face rows converted to a triangle mesh
 - **Underlying family:** fauxgl native Go PLY reader (ply.go)

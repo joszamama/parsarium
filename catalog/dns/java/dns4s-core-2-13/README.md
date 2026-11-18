@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.21.0`
+- **Upstream:** [source repository](<https://github.com/mkroli/dns4s>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.mkroli/dns4s-core_2.13>)
 - **License:** Apache-2.0
 - **Parser family:** dns4s (Scala: Message, MessageBuffer, HeaderSection, QuestionSection, ResourceRecord and section.resource decoders)
 - **Local input API:** `com.github.mkroli.dns4s.Message.apply(bytes: MessageBuffer): Message, with MessageBuffer.apply(buf: java.nio.ByteBuffer) (Scala companion objects, called from Java as Message$.MODULE$ and MessageBuffer$.MODULE$)`

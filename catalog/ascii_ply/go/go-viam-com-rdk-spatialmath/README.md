@@ -1,6 +1,7 @@
 # go.viam.com/rdk/spatialmath — ASCII PLY / Go
 
 - **Pinned release:** `v1.17.0`
+- **Upstream:** [source repository](<https://github.com/viamrobotics/rdk>) · [pkg.go.dev](<https://pkg.go.dev/go.viam.com/rdk/spatialmath>)
 - **License:** AGPL-3.0
 - **Parsed scope:** ASCII PLY triangle faces converted to millimetre-scaled triangles
 - **Underlying family:** Viam RDK spatialmath mesh loader over goply (shared goply parser family)

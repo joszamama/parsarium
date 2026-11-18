@@ -1,6 +1,7 @@
 # smalot/pdfparser — PDF / PHP
 
 - **Pinned release:** `v2.13.1`
+- **Upstream:** [source repository](<https://github.com/smalot/pdfparser>) · [Packagist](<https://packagist.org/packages/smalot/pdfparser>)
 - **License:** LGPL-3.0
 - **Parsed scope:** One PDF page and embedded Parsarium text
 - **Underlying family:** Smalot native PHP PDF parser

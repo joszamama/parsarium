@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.8`
+- **Upstream:** [source repository](<https://github.com/codecobblers/dirtyjson>) · [PyPI](<https://pypi.org/project/dirtyjson/>)
 - **License:** MIT OR AFL-2.1
 - **Parser family:** dirtyjson pure-Python lenient decoder (dirtyjson/loader.py), a rewritten simplejson loader (simplejson-derived lineage)
 - **Local input API:** `dirtyjson.loads(local JSON bytes); dirtyjson.loads(decoded str) and dirtyjson.load(BytesIO(local bytes)) give the same exact tree on both controls`

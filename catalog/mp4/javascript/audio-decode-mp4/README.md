@@ -1,6 +1,7 @@
 # @audio/decode-mp4 — MP4 / JavaScript
 
 - **Pinned release:** `1.3.1`
+- **Upstream:** [source repository](<https://github.com/audiojs/decode>) · [npm](<https://www.npmjs.com/package/@audio/decode-mp4>)
 - **License:** MIT
 - **Parsed scope:** audio_samples
 - **Underlying family:** @audio/decode-mp4

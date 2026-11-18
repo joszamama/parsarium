@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.3.0`
+- **Upstream:** [source repository](<https://github.com/kazuho/picojson>)
 - **License:** BSD-2-Clause
 - **Parser family:** PicoJSON own header-only recursive-descent parser
 - **Local input API:** `picojson::parse(picojson::value&, const std::string&) on local bytes, compiled with the documented PICOJSON_USE_INT64 option so integers stay int64_t and other numbers stay double; objects are std::map with sorted keys`

@@ -1,6 +1,7 @@
 # wav — WAV / Rust
 
 - **Pinned release:** `1.0.1`
+- **Upstream:** [crates.io](<https://crates.io/crates/wav>)
 - **License:** LGPL-3.0
 - **Parsed scope:** Decoded PCM sample values and WAV metadata
 - **Underlying family:** wav legacy reader

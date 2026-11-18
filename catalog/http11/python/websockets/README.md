@@ -1,6 +1,7 @@
 # websockets — HTTP/1.1 / Python
 
 - **Pinned release:** `17.3`
+- **Upstream:** [source repository](<https://github.com/python-websockets/websockets>) · [PyPI](<https://pypi.org/project/websockets/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** HTTP/1.1 handshake request head
 - **Underlying family:** websockets Python HTTP/1.1 parser

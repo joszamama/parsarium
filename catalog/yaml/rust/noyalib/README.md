@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.0.62`
+- **Upstream:** [source repository](<https://github.com/sebastienrousseau/noyalib>) · [crates.io](<https://crates.io/crates/noyalib>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** noyalib: own pure-Rust scanner, parser and loader (forbid(unsafe_code)); at most 187 of its 23,954 distinct non-test source lines longer than 25 characters also occur in serde_yaml (0.8%) and 40 in yaml-rust2. serde_yml 0.0.13 only re-exports its serde_yaml compatibility module.
 - **Local input API:** `noyalib::from_str::<noyalib::Value>(&str) -> Result<Value, Error>; Value::{Null, Bool, Number(Number::{Integer, Float}), String, Sequence, Mapping, Tagged}`

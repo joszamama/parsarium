@@ -8,16 +8,16 @@ Ten verified Rust JSON parser paths selected within the first 100 hits of six cr
 
 ## Third-party parsers
 
-- [serde_json](serde-json/README.md) — verified Docker harness
-- [simd-json](simd-json/README.md) — verified Docker harness
-- [sonic-rs](sonic-rs/README.md) — verified Docker harness
-- [jiter](jiter/README.md) — verified Docker harness
-- [json](json/README.md) — verified Docker harness
-- [aws-smithy-json](aws-smithy-json/README.md) — verified Docker harness
-- [hifijson](hifijson/README.md) — verified Docker harness
-- [miniserde](miniserde/README.md) — verified Docker harness
-- [gjson](gjson/README.md) — verified Docker harness
-- [json-syntax](json-syntax/README.md) — verified Docker harness
+- [serde_json](serde-json/README.md) — verified Docker harness · [source repository](<https://github.com/serde-rs/json>) · [crates.io](<https://crates.io/crates/serde_json>)
+- [simd-json](simd-json/README.md) — verified Docker harness · [source repository](<https://github.com/simd-lite/simd-json>) · [crates.io](<https://crates.io/crates/simd-json>)
+- [sonic-rs](sonic-rs/README.md) — verified Docker harness · [source repository](<https://github.com/cloudwego/sonic-rs>) · [crates.io](<https://crates.io/crates/sonic-rs>)
+- [jiter](jiter/README.md) — verified Docker harness · [source repository](<https://github.com/pydantic/jiter>) · [crates.io](<https://crates.io/crates/jiter>)
+- [json](json/README.md) — verified Docker harness · [source repository](<https://github.com/maciejhirsz/json-rust>) · [crates.io](<https://crates.io/crates/json>)
+- [aws-smithy-json](aws-smithy-json/README.md) — verified Docker harness · [source repository](<https://github.com/smithy-lang/smithy-rs>) · [crates.io](<https://crates.io/crates/aws-smithy-json>)
+- [hifijson](hifijson/README.md) — verified Docker harness · [source repository](<https://github.com/01mf02/hifijson>) · [crates.io](<https://crates.io/crates/hifijson>)
+- [miniserde](miniserde/README.md) — verified Docker harness · [source repository](<https://github.com/dtolnay/miniserde>) · [crates.io](<https://crates.io/crates/miniserde>)
+- [gjson](gjson/README.md) — verified Docker harness · [source repository](<https://github.com/tidwall/gjson.rs>) · [crates.io](<https://crates.io/crates/gjson>)
+- [json-syntax](json-syntax/README.md) — verified Docker harness · [source repository](<https://github.com/timothee-haudebourg/json-syntax>) · [crates.io](<https://crates.io/crates/json-syntax>)
 
 ## Standard and runtime APIs
 

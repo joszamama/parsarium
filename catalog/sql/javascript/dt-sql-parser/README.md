@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.6.1`
+- **Upstream:** [source repository](<https://github.com/DTStack/dt-sql-parser>) · [npm](<https://www.npmjs.com/package/dt-sql-parser>)
 - **License:** MIT
 - **Parser family:** dt-sql-parser ANTLR4 grammars
 - **Local input API:** `new MySQL().parse(local UTF-8 text, errorListener) -> ProgramContext`

@@ -6,16 +6,16 @@
 
 ## Third-party parsers
 
-- [sharp](sharp/README.md) — Docker harness ready
-- [image-size](image-size/README.md) — Docker harness ready
-- [probe-image-size](probe-image-size/README.md) — Docker harness ready
-- [@napi-rs/canvas](napi-rs-canvas/README.md) — Docker harness ready
-- [canvas](canvas/README.md) — Docker harness ready
-- [svg-parser](svg-parser/README.md) — Docker harness ready
-- [canvg](canvg/README.md) — Docker harness ready
-- [@resvg/resvg-js](resvg-resvg-js/README.md) — Docker harness ready
-- [@resvg/resvg-wasm](resvg-resvg-wasm/README.md) — Docker harness ready
-- [svgo](svgo/README.md) — Docker harness ready
+- [sharp](sharp/README.md) — Docker harness ready · [source repository](<https://github.com/lovell/sharp>) · [npm](<https://www.npmjs.com/package/sharp>)
+- [image-size](image-size/README.md) — Docker harness ready · [source repository](<https://codeberg.org/image-size/image-size>) · [npm](<https://www.npmjs.com/package/image-size>)
+- [probe-image-size](probe-image-size/README.md) — Docker harness ready · [source repository](<https://github.com/nodeca/probe-image-size>) · [npm](<https://www.npmjs.com/package/probe-image-size>)
+- [@napi-rs/canvas](napi-rs-canvas/README.md) — Docker harness ready · [source repository](<https://github.com/Brooooooklyn/canvas>) · [npm](<https://www.npmjs.com/package/@napi-rs/canvas>)
+- [canvas](canvas/README.md) — Docker harness ready · [source repository](<https://github.com/Automattic/node-canvas>) · [npm](<https://www.npmjs.com/package/canvas>)
+- [svg-parser](svg-parser/README.md) — Docker harness ready · [source repository](<https://github.com/Rich-Harris/svg-parser>) · [npm](<https://www.npmjs.com/package/svg-parser>)
+- [canvg](canvg/README.md) — Docker harness ready · [source repository](<https://github.com/canvg/canvg>) · [npm](<https://www.npmjs.com/package/canvg>)
+- [@resvg/resvg-js](resvg-resvg-js/README.md) — Docker harness ready · [source repository](<https://github.com/thx/resvg-js>) · [npm](<https://www.npmjs.com/package/@resvg/resvg-js>)
+- [@resvg/resvg-wasm](resvg-resvg-wasm/README.md) — Docker harness ready · [source repository](<https://github.com/thx/resvg-js>) · [npm](<https://www.npmjs.com/package/@resvg/resvg-wasm>)
+- [svgo](svgo/README.md) — Docker harness ready · [source repository](<https://github.com/svg/svgo>) · [npm](<https://www.npmjs.com/package/svgo>)
 
 ## Standard and runtime APIs
 

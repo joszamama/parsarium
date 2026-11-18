@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.2.1+spec-1.1.0`
+- **Upstream:** [source repository](<https://github.com/toml-rs/toml>) · [crates.io](<https://crates.io/crates/toml>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** toml_parser (toml-rs): toml_parser 1.1.5 lexes and emits parse events; toml assembles its own DeTable/DeValue and Table/Value tree from those events. Shared with the selected toml_edit path; not an independent lexer or parser.
 - **Local input API:** `toml::from_str::<toml::Table>(&str) -> Result<Table, de::Error>; Table = Map<String, Value>; Value::{String, Integer(i64), Float(f64), Boolean, Datetime(toml_datetime::Datetime { date, time, offset }), Array, Table}`

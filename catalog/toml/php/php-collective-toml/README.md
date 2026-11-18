@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.5`
+- **Upstream:** [source repository](<https://github.com/php-collective/toml>) · [Packagist](<https://packagist.org/packages/php-collective/toml>)
 - **License:** MIT
 - **Parser family:** php-collective/toml Lexer, Parser, AST and Normalizer
 - **Local input API:** `PhpCollective\Toml\Toml::tryParse(string $input): ParseResult (documented 'Parse without exceptions and keep diagnostics + partial AST'; same Parser and Normalizer as Toml::decode), rejected unless isValid(); getDocument() is walked through Document->items (KeyValue, Table {key->parts, isArrayTable, items}) and typed value nodes StringValue, IntegerValue, FloatValue, BoolValue, OffsetDateTime {DateTimeImmutable}, LocalDateTime, LocalDate, LocalTime {string}, ArrayValue and InlineTable; the walk's getValue() results must equal getValue() of the ParseResult. Toml::decode(string) and Toml::decodeFile(path) are cross-checked for the same array`

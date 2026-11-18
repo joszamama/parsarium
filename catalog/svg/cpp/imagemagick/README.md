@@ -1,6 +1,7 @@
 # imagemagick — SVG / C++
 
 - **Pinned release:** `7.1.2-35`
+- **Upstream:** [source repository](<https://github.com/ImageMagick/ImageMagick>) · [Debian](<https://tracker.debian.org/pkg/imagemagick>)
 - **License:** ImageMagick
 - **Parsed scope:** parsed SVG dimensions and rendered red/green rectangle pixels
 - **Underlying family:** ImageMagick internal MSVG renderer with libxml2

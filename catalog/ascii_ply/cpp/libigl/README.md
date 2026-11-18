@@ -1,6 +1,7 @@
 # libigl — ASCII PLY / C++
 
 - **Pinned release:** `2.6.4`
+- **Upstream:** [source repository](<https://github.com/libigl/libigl>)
 - **License:** MPL-2.0
 - **Parsed scope:** three vertex positions and one triangle face matrix
 - **Underlying family:** libigl readPLY over bundled tinyply 2.3.2

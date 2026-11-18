@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.17.2`
+- **Upstream:** [source repository](<https://github.com/phuslu/fastdns>) · [pkg.go.dev](<https://pkg.go.dev/github.com/phuslu/fastdns>)
 - **License:** MIT
 - **Parser family:** phuslu fastdns (message.go: ParseMessage, MessageRecords, DecodeName)
 - **Local input API:** `fastdns.ParseMessage(dst *Message, payload []byte, copying bool) error; (*Message).Records() and (*Message).DecodeName(dst, name []byte)`

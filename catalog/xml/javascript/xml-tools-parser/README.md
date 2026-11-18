@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.12`
+- **Upstream:** [source repository](<https://github.com/SAP/app-studio-toolkit>) · [npm](<https://www.npmjs.com/package/@xml-tools/parser>)
 - **License:** Apache-2.0
 - **Parser family:** @xml-tools/parser XML lexer and grammar over Chevrotain 7.1.1 CST engine
 - **Local input API:** `parse(text) on strictly UTF-8 decoded local bytes; returns Chevrotain XML CST, token vector, lexErrors and parseErrors`

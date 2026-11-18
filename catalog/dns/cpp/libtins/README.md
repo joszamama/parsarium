@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.6`
+- **Upstream:** [source repository](<https://github.com/mfontanini/libtins>) · [Debian](<https://tracker.debian.org/pkg/libtins>)
 - **License:** BSD-2-Clause
 - **Parser family:** libtins DNS PDU (src/dns.cpp with its Memory::InputMemoryStream reader)
 - **Local input API:** `Tins::DNS::DNS(const uint8_t *buffer, uint32_t total_sz); queries(), answers(), authority(), additional() and header getters`

@@ -1,6 +1,7 @@
 # vlc — MP3 / C
 
 - **Pinned release:** `3.0.24`
+- **Upstream:** [source repository](<https://code.videolan.org/videolan/vlc>) · [Debian](<https://tracker.debian.org/pkg/vlc>)
 - **License:** GPL-2.0-or-later AND LGPL-2.1-or-later
 - **Parsed scope:** ID3v2 title and recognized MP3 audio track from valid local tagged MP3
 - **Underlying family:** VLC media parser with bundled TagLib and MPEG audio plugins

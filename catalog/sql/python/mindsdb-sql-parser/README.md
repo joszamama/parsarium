@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.13.8`
+- **Upstream:** [source repository](<https://github.com/mindsdb/mindsdb_sql_parser>) · [PyPI](<https://pypi.org/project/mindsdb-sql-parser/>)
 - **License:** MIT
 - **Parser family:** mindsdb_sql_parser SLY grammar
 - **Local input API:** `mindsdb_sql_parser.parse_sql(sql: str) -> ASTNode`

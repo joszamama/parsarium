@@ -1,6 +1,7 @@
 # vips — PNG / C
 
 - **Pinned release:** `8.18.7`
+- **Upstream:** [source repository](<https://github.com/libvips/libvips>) · [Debian](<https://tracker.debian.org/pkg/vips>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** pixels
 - **Underlying family:** libvips PNG loader (libpng-backed)

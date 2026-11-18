@@ -1,6 +1,7 @@
 # vello_svg — SVG / Rust
 
 - **Pinned release:** `0.11.0`
+- **Upstream:** [source repository](<https://github.com/linebender/vello_svg>) · [crates.io](<https://crates.io/crates/vello_svg>)
 - **License:** Apache-2.0 OR MIT
 - **Parsed scope:** SVG render path encoding
 - **Underlying family:** usvg lineage via vello_svg

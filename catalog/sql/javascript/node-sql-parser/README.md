@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `5.4.0`
+- **Upstream:** [source repository](<https://github.com/taozhi8833998/node-sql-parser>) · [npm](<https://www.npmjs.com/package/node-sql-parser>)
 - **License:** Apache-2.0
 - **Parser family:** node-sql-parser PEG.js grammars (one generated parser per database)
 - **Local input API:** `new Parser().astify(local UTF-8 text, {database: 'postgresql'}) from node-sql-parser/build/postgresql`

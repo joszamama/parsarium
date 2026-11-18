@@ -1,6 +1,7 @@
 # commons-imaging — ASCII PNM / Java
 
 - **Pinned release:** `1.0.0-alpha6`
+- **Upstream:** [source repository](<https://gitbox.apache.org/repos/asf?p=commons-imaging.git>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.commons/commons-imaging>)
 - **License:** Apache-2.0
 - **Parsed scope:** ASCII PPM dimensions and red/green pixels
 - **Underlying family:** Apache Commons Imaging PNM decoder

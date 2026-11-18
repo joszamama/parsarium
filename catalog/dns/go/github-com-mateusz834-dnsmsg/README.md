@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.0.0-20231225175121-c6b857669b66`
+- **Upstream:** [source repository](<https://github.com/mateusz834/dnsmsg>) · [pkg.go.dev](<https://pkg.go.dev/github.com/mateusz834/dnsmsg>)
 - **License:** MIT
 - **Parser family:** dnsmsg (parser.go incremental Parser, name.go Name.unpack, types.go Header/Flags)
 - **Local input API:** `dnsmsg.Parse(msg []byte) (dnsmsg.Parser, dnsmsg.Header, error), then Parser.Question, StartAnswers/StartAuthorities/StartAdditionals, ResourceHeader, ResourceA/ResourceAAAA/ResourceCNAME/ResourceMX and End`

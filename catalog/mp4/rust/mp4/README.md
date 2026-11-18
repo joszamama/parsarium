@@ -1,6 +1,7 @@
 # mp4 — MP4 / Rust
 
 - **Pinned release:** `0.14.0`
+- **Upstream:** [source repository](<https://github.com/alfg/mp4-rust>) · [crates.io](<https://crates.io/crates/mp4>)
 - **License:** MIT
 - **Parsed scope:** MP4 movie track table
 - **Underlying family:** mp4-rs container parser

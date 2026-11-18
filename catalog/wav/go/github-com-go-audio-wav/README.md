@@ -1,6 +1,7 @@
 # github.com/go-audio/wav — WAV / Go
 
 - **Pinned release:** `v1.1.0`
+- **Upstream:** [source repository](<https://github.com/go-audio/wav>) · [pkg.go.dev](<https://pkg.go.dev/github.com/go-audio/wav>)
 - **License:** Apache-2.0
 - **Parsed scope:** signs
 - **Underlying family:** mattetti/go-audio WAV lineage

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.30.1`
+- **Upstream:** [source repository](<https://github.com/mk3008/rawsql-ts>) · [npm](<https://www.npmjs.com/package/rawsql-ts>)
 - **License:** MIT
 - **Parser family:** rawsql-ts hand-written tokenizer and recursive-descent parser
 - **Local input API:** `SqlParser.parseMany(local UTF-8 text) -> SimpleSelectQuery | InsertQuery []`

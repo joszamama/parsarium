@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.20.4`
+- **Upstream:** [source repository](<https://github.com/tidwall/gjson>) · [pkg.go.dev](<https://pkg.go.dev/github.com/tidwall/gjson>)
 - **License:** MIT
 - **Parser family:** tidwall/gjson path-query parser
 - **Local input API:** `gjson.ValidBytes([]byte) then gjson.ParseBytes([]byte); Result.ForEach traverses objects and arrays`

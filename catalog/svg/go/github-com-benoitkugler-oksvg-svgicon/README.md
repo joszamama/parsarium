@@ -1,6 +1,7 @@
 # github.com/benoitkugler/oksvg/svgicon — SVG / Go
 
 - **Pinned release:** `v0.0.0-20230818175515-13805796eb24`
+- **Upstream:** [source repository](<https://github.com/benoitkugler/oksvg>) · [pkg.go.dev](<https://pkg.go.dev/github.com/benoitkugler/oksvg/svgicon>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** paths, width
 - **Underlying family:** oksvg lineage

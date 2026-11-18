@@ -1,6 +1,7 @@
 # imagesize — ASCII PNM / Rust
 
 - **Pinned release:** `0.15.0`
+- **Upstream:** [source repository](<https://github.com/Roughsketch/imagesize>) · [crates.io](<https://crates.io/crates/imagesize>)
 - **License:** MIT
 - **Parsed scope:** P3 ASCII PPM header dimensions only; raster samples are not decoded
 - **Underlying family:** imagesize PNM header reader

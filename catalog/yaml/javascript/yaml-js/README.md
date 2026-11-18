@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.3.1`
+- **Upstream:** [source repository](<https://github.com/connec/yaml-js>) · [npm](<https://www.npmjs.com/package/yaml-js>)
 - **License:** WTFPL
 - **Parser family:** yaml-js (line-for-line PyYAML port: reader, scanner, parser, composer, constructor)
 - **Local input API:** `load(text) after strict UTF-8 decoding of a local Buffer; a YAMLError rejects the input; the constructed value is mapped to the Parsarium typed YAML tree`

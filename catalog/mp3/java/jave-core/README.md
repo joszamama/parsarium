@@ -1,6 +1,7 @@
 # jave-core — MP3 / Java
 
 - **Pinned release:** `4.2.0`
+- **Upstream:** [source repository](<https://github.com/a-schild/jave2>) · [Maven Central](<https://central.sonatype.com/artifact/ws.schild/jave-core>)
 - **License:** GPL-3.0-only
 - **Parsed scope:** local tagged MP3 format, codec, sample rate and channels
 - **Underlying family:** JAVE2 wrapper over bundled FFmpeg MP3 demuxer

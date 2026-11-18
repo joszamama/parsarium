@@ -8,16 +8,16 @@ Ten verified Python SQL paths after a bounded PyPI Simple index name search (ten
 
 ## Third-party parsers
 
-- [sqlparse](sqlparse/README.md) — verified Docker harness
-- [sqlglot](sqlglot/README.md) — verified Docker harness
-- [sqlfluff](sqlfluff/README.md) — verified Docker harness
-- [pglast](pglast/README.md) — verified Docker harness
-- [sqloxide](sqloxide/README.md) — verified Docker harness
-- [mo-sql-parsing](mo-sql-parsing/README.md) — verified Docker harness
-- [polyglot-sql](polyglot-sql/README.md) — verified Docker harness
-- [psqlparse2](psqlparse2/README.md) — verified Docker harness
-- [mindsdb-sql-parser](mindsdb-sql-parser/README.md) — verified Docker harness
-- [antlr-tsql](antlr-tsql/README.md) — verified Docker harness
+- [sqlparse](sqlparse/README.md) — verified Docker harness · [source repository](<https://github.com/andialbrecht/sqlparse>) · [PyPI](<https://pypi.org/project/sqlparse/>)
+- [sqlglot](sqlglot/README.md) — verified Docker harness · [source repository](<https://github.com/tobymao/sqlglot>) · [PyPI](<https://pypi.org/project/sqlglot/>)
+- [sqlfluff](sqlfluff/README.md) — verified Docker harness · [source repository](<https://github.com/sqlfluff/sqlfluff>) · [PyPI](<https://pypi.org/project/sqlfluff/>)
+- [pglast](pglast/README.md) — verified Docker harness · [source repository](<https://github.com/lelit/pglast>) · [PyPI](<https://pypi.org/project/pglast/>)
+- [sqloxide](sqloxide/README.md) — verified Docker harness · [source repository](<https://github.com/wseaton/sqloxide>) · [PyPI](<https://pypi.org/project/sqloxide/>)
+- [mo-sql-parsing](mo-sql-parsing/README.md) — verified Docker harness · [source repository](<https://github.com/klahnakoski/mo-sql-parsing>) · [PyPI](<https://pypi.org/project/mo-sql-parsing/>)
+- [polyglot-sql](polyglot-sql/README.md) — verified Docker harness · [source repository](<https://github.com/tobilg/polyglot>) · [PyPI](<https://pypi.org/project/polyglot-sql/>)
+- [psqlparse2](psqlparse2/README.md) — verified Docker harness · [source repository](<https://github.com/dani-maarouf/psqlparse2>) · [PyPI](<https://pypi.org/project/psqlparse2/>)
+- [mindsdb-sql-parser](mindsdb-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/mindsdb/mindsdb_sql_parser>) · [PyPI](<https://pypi.org/project/mindsdb-sql-parser/>)
+- [antlr-tsql](antlr-tsql/README.md) — verified Docker harness · [source repository](<https://github.com/datacamp/antlr-tsql>) · [PyPI](<https://pypi.org/project/antlr-tsql/>)
 
 ## Standard and runtime APIs
 

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.44.1`
+- **Upstream:** [source repository](<https://github.com/nene/sql-parser-cst>) · [npm](<https://www.npmjs.com/package/sql-parser-cst>)
 - **License:** GPL-2.0-or-later
 - **Parser family:** sql-parser-cst Peggy grammar
 - **Local input API:** `parse(local UTF-8 text, {dialect: 'sqlite'}) -> Program`

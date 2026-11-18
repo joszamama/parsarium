@@ -1,6 +1,7 @@
 # svg — SVG / Rust
 
 - **Pinned release:** `0.18.0`
+- **Upstream:** [source repository](<https://github.com/bodoni/svg>) · [crates.io](<https://crates.io/crates/svg>)
 - **License:** Apache-2.0 OR MIT
 - **Parsed scope:** SVG element event parsing
 - **Underlying family:** svg crate parser

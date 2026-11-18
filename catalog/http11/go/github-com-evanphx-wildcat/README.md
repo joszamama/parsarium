@@ -1,6 +1,7 @@
 # github.com/evanphx/wildcat — HTTP/1.1 / Go
 
 - **Pinned release:** `v0.0.0-20141114174135-e7012f664567`
+- **Upstream:** [source repository](<https://github.com/evanphx/wildcat>) · [pkg.go.dev](<https://pkg.go.dev/github.com/evanphx/wildcat>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** request head
 - **Underlying family:** wildcat HTTP parser

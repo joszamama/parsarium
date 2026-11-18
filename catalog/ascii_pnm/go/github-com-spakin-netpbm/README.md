@@ -1,6 +1,7 @@
 # github.com/spakin/netpbm — ASCII PNM / Go
 
 - **Pinned release:** `v1.3.2`
+- **Upstream:** [source repository](<https://github.com/spakin/netpbm>) · [pkg.go.dev](<https://pkg.go.dev/github.com/spakin/netpbm>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** P3 pixels and dimensions
 - **Underlying family:** spakin Netpbm

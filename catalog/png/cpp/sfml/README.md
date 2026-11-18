@@ -1,6 +1,7 @@
 # sfml — PNG / C++
 
 - **Pinned release:** `3.0.2`
+- **Upstream:** [source repository](<https://github.com/SFML/SFML>)
 - **License:** Zlib
 - **Parsed scope:** RGBA pixels
 - **Underlying family:** SFML bundled stb_image PNG decoder

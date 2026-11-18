@@ -1,6 +1,7 @@
 # itext-svg — SVG / Java
 
 - **Pinned release:** `9.8.0`
+- **Upstream:** [source repository](<https://github.com/itext/itext-java>) · [Maven Central](<https://central.sonatype.com/artifact/com.itextpdf/svg>)
 - **License:** AGPL-3.0-or-later
 - **Parsed scope:** SVG XObject dimensions
 - **Underlying family:** iText SVG parser and PDF renderer

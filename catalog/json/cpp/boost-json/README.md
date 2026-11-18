@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.92.0`
+- **Upstream:** [source repository](<https://github.com/boostorg/boost>)
 - **License:** BSL-1.0
 - **Parser family:** Boost.JSON basic_parser
 - **Local input API:** `boost::json::parse(string_view s, boost::system::error_code& ec, storage_ptr sp = {}, parse_options const& opt = {}) over locally supplied bytes; default options accept only standard JSON`

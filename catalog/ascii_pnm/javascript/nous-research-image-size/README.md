@@ -1,6 +1,7 @@
 # @nous-research/image-size — ASCII PNM / JavaScript
 
 - **Pinned release:** `2.0.3`
+- **Upstream:** [source repository](<https://github.com/image-size/image-size>) · [npm](<https://www.npmjs.com/package/@nous-research/image-size>)
 - **License:** MIT
 - **Parsed scope:** P3 header dimensions and PNM type
 - **Underlying family:** image-size fork

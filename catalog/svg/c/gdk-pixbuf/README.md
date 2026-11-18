@@ -1,6 +1,7 @@
 # gdk-pixbuf — SVG / C
 
 - **Pinned release:** `2.44.8`
+- **Upstream:** [source repository](<https://gitlab.gnome.org/GNOME/gdk-pixbuf>) · [Debian](<https://tracker.debian.org/pkg/gdk-pixbuf>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** parsed SVG dimensions and rendered red/green RGBA pixels
 - **Underlying family:** GdkPixbuf loader API with librsvg SVG plugin

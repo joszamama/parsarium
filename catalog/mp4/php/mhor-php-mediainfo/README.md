@@ -1,6 +1,7 @@
 # mhor/php-mediainfo — MP4 / PHP
 
 - **Pinned release:** `5.8.0`
+- **Upstream:** [source repository](<https://github.com/mhor/php-mediainfo>) · [Packagist](<https://packagist.org/packages/mhor/php-mediainfo>)
 - **License:** MIT
 - **Parsed scope:** 2 × 2 H.264/AVC video in MP4
 - **Underlying family:** MediaInfoLib native MPEG-4 parser

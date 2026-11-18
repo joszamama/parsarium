@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.3`
+- **Upstream:** [source repository](<https://github.com/Juniper/jxmlease>) · [PyPI](<https://pypi.org/project/jxmlease/>)
 - **License:** MIT
 - **Parser family:** jxmlease node builder over CPython pyexpat / Expat 2.10.0 (raw names, namespace processing off)
 - **Local input API:** `jxmlease.parse(bytes of a local XML file) with default settings; returned XMLDictNode / XMLListNode / XMLCDATANode tree read through tag, get_xml_attrs() and get_cdata()`

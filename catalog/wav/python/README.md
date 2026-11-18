@@ -6,16 +6,16 @@
 
 ## Third-party parsers
 
-- [scipy](scipy/README.md) — Docker harness ready
-- [soundfile](soundfile/README.md) — Docker harness ready
-- [librosa](librosa/README.md) — Docker harness ready
-- [audioread](audioread/README.md) — Docker harness ready
-- [pydub](pydub/README.md) — Docker harness ready
-- [tinytag](tinytag/README.md) — Docker harness ready
-- [mutagen](mutagen/README.md) — Docker harness ready
-- [pygame](pygame/README.md) — Docker harness ready
-- [av](av/README.md) — Docker harness ready
-- [pymediainfo](pymediainfo/README.md) — Docker harness ready
+- [scipy](scipy/README.md) — Docker harness ready · [source repository](<https://github.com/scipy/scipy>) · [PyPI](<https://pypi.org/project/scipy/>)
+- [soundfile](soundfile/README.md) — Docker harness ready · [source repository](<https://github.com/bastibe/python-soundfile>) · [PyPI](<https://pypi.org/project/soundfile/>)
+- [librosa](librosa/README.md) — Docker harness ready · [source repository](<https://github.com/librosa/librosa>) · [PyPI](<https://pypi.org/project/librosa/>)
+- [audioread](audioread/README.md) — Docker harness ready · [source repository](<https://github.com/beetbox/audioread>) · [PyPI](<https://pypi.org/project/audioread/>)
+- [pydub](pydub/README.md) — Docker harness ready · [source repository](<https://github.com/jiaaro/pydub>) · [PyPI](<https://pypi.org/project/pydub/>)
+- [tinytag](tinytag/README.md) — Docker harness ready · [source repository](<https://github.com/tinytag/tinytag>) · [PyPI](<https://pypi.org/project/tinytag/>)
+- [mutagen](mutagen/README.md) — Docker harness ready · [source repository](<https://github.com/quodlibet/mutagen>) · [PyPI](<https://pypi.org/project/mutagen/>)
+- [pygame](pygame/README.md) — Docker harness ready · [source repository](<https://github.com/pygame/pygame>) · [PyPI](<https://pypi.org/project/pygame/>)
+- [av](av/README.md) — Docker harness ready · [source repository](<https://github.com/PyAV-Org/PyAV>) · [PyPI](<https://pypi.org/project/av/>)
+- [pymediainfo](pymediainfo/README.md) — Docker harness ready · [source repository](<https://github.com/sbraz/pymediainfo>) · [PyPI](<https://pypi.org/project/pymediainfo/>)
 
 ## Standard and runtime APIs
 

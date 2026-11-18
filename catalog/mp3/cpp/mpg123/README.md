@@ -1,6 +1,7 @@
 # mpg123 — MP3 / C++
 
 - **Pinned release:** `1.33.7`
+- **Upstream:** [Debian](<https://tracker.debian.org/pkg/mpg123>)
 - **License:** LGPL-2.1-only
 - **Parsed scope:** ID3v2 title/version after scanning valid MP3 audio
 - **Underlying family:** libmpg123 MPEG audio and ID3v2 parser

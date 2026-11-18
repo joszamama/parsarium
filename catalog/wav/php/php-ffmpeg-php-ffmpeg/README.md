@@ -1,6 +1,7 @@
 # php-ffmpeg/php-ffmpeg — WAV / PHP
 
 - **Pinned release:** `v1.4.0`
+- **Upstream:** [source repository](<https://github.com/PHP-FFMpeg/PHP-FFMpeg>) · [Packagist](<https://packagist.org/packages/php-ffmpeg/php-ffmpeg>)
 - **License:** MIT
 - **Parsed scope:** PCM16 codec, 8 kHz sample rate, mono channel count, 16-bit depth
 - **Underlying family:** FFmpeg native RIFF/WAVE parser

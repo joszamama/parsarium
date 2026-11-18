@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.5`
+- **Upstream:** [source repository](<https://github.com/EFTEC/Services_JSON>) · [Packagist](<https://packagist.org/packages/eftec/services_json>)
 - **License:** BSD-2-Clause
 - **Parser family:** PEAR Services_JSON decoder (eftec port)
 - **Local input API:** `static eftec\ServicesJson\Services_JSON::decode(string $str) with default flags over local bytes; returns stdClass objects, PHP lists and scalars that the harness type-tags with members in returned order`

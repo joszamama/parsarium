@@ -1,6 +1,7 @@
 # http-parser — HTTP/1.1 / C++
 
 - **Pinned release:** `2.9.4`
+- **Upstream:** [source repository](<https://github.com/nodejs/http-parser>) · [Debian](<https://tracker.debian.org/pkg/http-parser>)
 - **License:** MIT
 - **Parsed scope:** HTTP/1.1 GET request method, target and version after complete header parse
 - **Underlying family:** Node http-parser C state machine, predecessor design to llhttp

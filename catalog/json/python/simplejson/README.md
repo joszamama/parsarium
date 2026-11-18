@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.3.0`
+- **Upstream:** [source repository](<https://github.com/simplejson/simplejson>) · [PyPI](<https://pypi.org/project/simplejson/>)
 - **License:** MIT OR AFL-2.1
 - **Parser family:** simplejson pure-Python JSON decoder
 - **Local input API:** `simplejson.load(BytesIO(local UTF-8 JSON bytes), allow_nan=False)`

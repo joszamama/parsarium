@@ -1,6 +1,7 @@
 # http-headers — HTTP/1.1 / JavaScript
 
 - **Pinned release:** `3.0.2`
+- **Upstream:** [source repository](<https://github.com/watson/http-headers>) · [npm](<https://www.npmjs.com/package/http-headers>)
 - **License:** MIT
 - **Parsed scope:** request
 - **Underlying family:** http-headers

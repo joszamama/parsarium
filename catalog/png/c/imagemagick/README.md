@@ -1,6 +1,7 @@
 # imagemagick — PNG / C
 
 - **Pinned release:** `7.1.2-35`
+- **Upstream:** [source repository](<https://github.com/ImageMagick/ImageMagick>) · [Debian](<https://tracker.debian.org/pkg/imagemagick>)
 - **License:** ImageMagick
 - **Parsed scope:** pixels
 - **Underlying family:** ImageMagick PNG coder (libpng-backed)

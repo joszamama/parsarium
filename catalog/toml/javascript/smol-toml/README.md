@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.9.1`
+- **Upstream:** [source repository](<https://github.com/squirrelchat/smol-toml>) · [npm](<https://www.npmjs.com/package/smol-toml>)
 - **License:** BSD-3-Clause
 - **Parser family:** smol-toml (own hand-written TOML parser)
 - **Local input API:** `parse(text, { integersAsBigInt: true }) on local bytes decoded as strict UTF-8 text; the typed tree walks the returned TomlTable (BigInt integers, Number floats, TomlDate date-times)`

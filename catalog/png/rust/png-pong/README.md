@@ -1,6 +1,7 @@
 # png_pong — PNG / Rust
 
 - **Pinned release:** `0.12.0`
+- **Upstream:** [source repository](<https://github.com/AldaronLau/png_pong>) · [crates.io](<https://crates.io/crates/png_pong>)
 - **License:** (Apache-2.0 OR BSL-1.0 OR MIT) AND Zlib
 - **Parsed scope:** Decoded PNG frame dimensions
 - **Underlying family:** png_pong decoder

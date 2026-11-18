@@ -1,6 +1,7 @@
 # jlayer — MP3 / Java
 
 - **Pinned release:** `1.0.1`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/javazoom/jlayer>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** local tagged MP3 frame frequency and layer, plus ID3v2 presence
 - **Underlying family:** JLayer native MP3 frame decoder with raw ID3v2 access

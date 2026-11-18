@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.3.4`
+- **Upstream:** [source repository](<https://github.com/saphyr-rs/saphyr-parser>) · [crates.io](<https://crates.io/crates/saphyr-parser>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** yaml-rust lineage: saphyr-parser is the parser half of the saphyr-rs project, which continues yaml-rust2; 965 of its 1,889 distinct non-test source lines longer than 25 characters also occur in yaml-rust2 0.13.0 (51.1%) and 348 in yaml-rust 0.4.5 (18.4%).
 - **Local input API:** `saphyr_parser::Parser::new_from_str(&str) and Parser::next_event() -> Option<Result<(Event, Span), ScanError>>; Event::{StreamStart, DocumentStart, Scalar(text, ScalarStyle, anchor_id, tag), SequenceStart, MappingStart, Alias(anchor_id), ...}`

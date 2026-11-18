@@ -1,6 +1,7 @@
 # openpdf — PDF / Java
 
 - **Pinned release:** `3.0.5`
+- **Upstream:** [source repository](<https://github.com/LibrePDF/OpenPDF>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.librepdf/openpdf>)
 - **License:** LGPL-2.1-or-later OR MPL-2.0
 - **Parsed scope:** PDF page count
 - **Underlying family:** OpenPDF PDF reader (iText lineage)

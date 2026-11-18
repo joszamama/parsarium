@@ -1,6 +1,7 @@
 # tinytag — MP3 / Python
 
 - **Pinned release:** `2.3.2`
+- **Upstream:** [source repository](<https://github.com/tinytag/tinytag>) · [PyPI](<https://pypi.org/project/tinytag/>)
 - **License:** MIT
 - **Parsed scope:** ID3v2 title, artist, album
 - **Underlying family:** TinyTag MP3/ID3 parser

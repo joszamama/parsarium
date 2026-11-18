@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `18.1.0`
+- **Upstream:** [source repository](<https://github.com/pganalyze/pg_query.rs>) · [crates.io](<https://crates.io/crates/pg_query>)
 - **License:** MIT
 - **Parser family:** PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)
 - **Local input API:** `pg_query::parse(local UTF-8 text, ParserOptions::DEFAULT) -> ParseResult`

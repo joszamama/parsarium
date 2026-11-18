@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.5.0`
+- **Upstream:** [source repository](<https://github.com/01mf02/hifijson>) · [crates.io](<https://crates.io/crates/hifijson>)
 - **License:** MIT (SPDX declared in release Cargo.toml; no LICENSE file bundled)
 - **Parser family:** hifijson independent byte-slice lexer and recursive value parser in src/value.rs, src/token.rs, src/num.rs and src/str.rs; serde_json used only for summary encoding
 - **Local input API:** `hifijson::SliceLexer::new(&[u8]); Lex::exactly_one(Lex::ws_peek, |next, lexer| value::parse_bounded(256, next, lexer)) -> Result<Value<_,_>, Error>`

@@ -1,6 +1,7 @@
 # async-http-codec — HTTP/1.1 / Rust
 
 - **Pinned release:** `0.8.0`
+- **Upstream:** [crates.io](<https://crates.io/crates/async-http-codec>)
 - **License:** Apache-2.0 OR MIT
 - **Parsed scope:** async request head: method, URI, version, fields
 - **Underlying family:** httparse core

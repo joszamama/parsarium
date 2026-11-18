@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.10.0`
+- **Upstream:** [source repository](<https://github.com/libexpat/libexpat>) · [Debian](<https://tracker.debian.org/pkg/expat>)
 - **License:** MIT
 - **Parser family:** expat (James Clark's expat, maintained as libexpat)
 - **Local input API:** `XML_ParserCreateNS("UTF-8", ' '); XML_SetHashSalt(parser, fixed non-zero salt); element, namespace-declaration, character-data, comment and processing-instruction handlers; XML_Parse(parser, local bytes, size, XML_TRUE)`

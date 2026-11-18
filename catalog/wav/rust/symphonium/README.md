@@ -1,6 +1,7 @@
 # symphonium — WAV / Rust
 
 - **Pinned release:** `0.13.0`
+- **Upstream:** [source repository](<https://codeberg.org/Meadowlark/symphonium>) · [crates.io](<https://crates.io/crates/symphonium>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** WAV track metadata and declared frames
 - **Underlying family:** Symphonia WAV demuxer

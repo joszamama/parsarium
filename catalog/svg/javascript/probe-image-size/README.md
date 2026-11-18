@@ -1,6 +1,7 @@
 # probe-image-size — SVG / JavaScript
 
 - **Pinned release:** `7.5.0`
+- **Upstream:** [source repository](<https://github.com/nodeca/probe-image-size>) · [npm](<https://www.npmjs.com/package/probe-image-size>)
 - **License:** MIT
 - **Parsed scope:** dimensions
 - **Underlying family:** probe-image-size SVG reader

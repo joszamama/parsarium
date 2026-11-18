@@ -1,6 +1,7 @@
 # scalismo_3 — ASCII PLY / Java
 
 - **Pinned release:** `1.0-RC1`
+- **Upstream:** [source repository](<https://github.com/unibas-gravis/scalismo>) · [Maven Central](<https://central.sonatype.com/artifact/ch.unibas.cs.gravis/scalismo_3>)
 - **License:** Apache-2.0
 - **Parsed scope:** ASCII PLY triangle vertices, face list and parsed point ids
 - **Underlying family:** Scalismo pure Scala PLY reader (scalismo.io.ply)

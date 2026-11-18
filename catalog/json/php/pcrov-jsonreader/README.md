@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.4`
+- **Upstream:** [source repository](<https://github.com/pcrov/JsonReader>) · [Packagist](<https://packagist.org/packages/pcrov/jsonreader>)
 - **License:** MIT
 - **Parser family:** pcrov JsonReader Lexer and JsonParser pull state machine
 - **Local input API:** `new pcrov\JsonReader\JsonReader() then json(string $json) over local bytes, pulled with read()/type()/name()/value()/depth(); harness builds a type-tagged tree from OBJECT/ARRAY/scalar nodes. open(string $uri) on the local control file and stream(resource) are cross-checked for the same tree`

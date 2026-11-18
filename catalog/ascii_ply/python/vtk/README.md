@@ -1,6 +1,7 @@
 # vtk — ASCII PLY / Python
 
 - **Pinned release:** `9.7.2`
+- **Upstream:** [PyPI](<https://pypi.org/project/vtk/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** ASCII PLY triangle vertices and face count
 - **Underlying family:** VTK PLYReader

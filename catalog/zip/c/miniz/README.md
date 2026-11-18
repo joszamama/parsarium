@@ -1,6 +1,7 @@
 # miniz — ZIP / C
 
 - **Pinned release:** `3.1.2`
+- **Upstream:** [source repository](<https://github.com/richgel999/miniz>)
 - **License:** MIT
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** miniz ZIP reader

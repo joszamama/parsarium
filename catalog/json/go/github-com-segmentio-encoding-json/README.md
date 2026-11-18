@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.5.4`
+- **Upstream:** [source repository](<https://github.com/segmentio/encoding>) · [pkg.go.dev](<https://pkg.go.dev/github.com/segmentio/encoding/json>)
 - **License:** MIT
 - **Parser family:** segmentio/encoding/json own Go parser (parseValue + reflection codec)
 - **Local input API:** `json.Unmarshal([]byte, *any) over one complete local JSON byte slice`

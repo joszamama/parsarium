@@ -1,6 +1,7 @@
 # github.com/youpy/go-wav — WAV / Go
 
 - **Pinned release:** `v0.3.2`
+- **Upstream:** [source repository](<https://github.com/youpy/go-wav>) · [pkg.go.dev](<https://pkg.go.dev/github.com/youpy/go-wav>)
 - **License:** ISC
 - **Parsed scope:** signs
 - **Underlying family:** youpy WAV reader

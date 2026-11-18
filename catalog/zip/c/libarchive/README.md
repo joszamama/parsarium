@@ -1,6 +1,7 @@
 # libarchive — ZIP / C
 
 - **Pinned release:** `3.8.11`
+- **Upstream:** [source repository](<https://github.com/libarchive/libarchive>) · [Debian](<https://tracker.debian.org/pkg/libarchive>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** libarchive ZIP reader

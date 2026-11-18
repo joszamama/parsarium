@@ -8,16 +8,16 @@ Ten C++ JSON package paths pass two valid controls with scoped parser source cov
 
 ## Third-party parsers
 
-- [jsoncpp](jsoncpp/README.md) — verified Docker harness
-- [simdjson](simdjson/README.md) — verified Docker harness
-- [nlohmann-json](nlohmann-json/README.md) — verified Docker harness
-- [RapidJSON](rapidjson/README.md) — verified Docker harness
-- [cpprestsdk](cpprestsdk/README.md) — verified Docker harness
-- [Boost.JSON](boost-json/README.md) — verified Docker harness
-- [Glaze](glaze/README.md) — verified Docker harness
-- [PicoJSON](picojson/README.md) — verified Docker harness
-- [jsoncons](jsoncons/README.md) — verified Docker harness
-- [taoJSON](taojson/README.md) — verified Docker harness
+- [jsoncpp](jsoncpp/README.md) — verified Docker harness · [source repository](<https://github.com/open-source-parsers/jsoncpp>)
+- [simdjson](simdjson/README.md) — verified Docker harness · [source repository](<https://github.com/simdjson/simdjson>) · [Debian](<https://tracker.debian.org/pkg/simdjson>)
+- [nlohmann-json](nlohmann-json/README.md) — verified Docker harness · [source repository](<https://github.com/nlohmann/json>)
+- [RapidJSON](rapidjson/README.md) — verified Docker harness · [source repository](<https://github.com/Tencent/rapidjson>)
+- [cpprestsdk](cpprestsdk/README.md) — verified Docker harness · [source repository](<https://github.com/microsoft/cpprestsdk>)
+- [Boost.JSON](boost-json/README.md) — verified Docker harness · [source repository](<https://github.com/boostorg/boost>)
+- [Glaze](glaze/README.md) — verified Docker harness · [source repository](<https://github.com/stephenberry/glaze>)
+- [PicoJSON](picojson/README.md) — verified Docker harness · [source repository](<https://github.com/kazuho/picojson>)
+- [jsoncons](jsoncons/README.md) — verified Docker harness · [source repository](<https://github.com/danielaparker/jsoncons>) · [Debian](<https://tracker.debian.org/pkg/jsoncons>)
+- [taoJSON](taojson/README.md) — verified Docker harness · [source repository](<https://github.com/taocpp/json>)
 
 ## Standard and runtime APIs
 

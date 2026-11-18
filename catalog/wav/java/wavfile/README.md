@@ -1,6 +1,7 @@
 # wavfile — WAV / Java
 
 - **Pinned release:** `1.0.0`
+- **Upstream:** [source repository](<https://github.com/psambit9791/wavfile>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.psambit9791/wavfile>)
 - **License:** MIT
 - **Parsed scope:** sample rate, channels, frame count and four PCM samples
 - **Underlying family:** wavfile Java WAV reader

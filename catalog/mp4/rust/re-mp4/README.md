@@ -1,6 +1,7 @@
 # re_mp4 — MP4 / Rust
 
 - **Pinned release:** `0.5.1`
+- **Upstream:** [source repository](<https://github.com/rerun-io/re_mp4>) · [crates.io](<https://crates.io/crates/re_mp4>)
 - **License:** MIT
 - **Parsed scope:** MP4 movie track table
 - **Underlying family:** mp4-rs-derived Rerun parser

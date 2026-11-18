@@ -1,6 +1,7 @@
 # imlib2 — PNG / C++
 
 - **Pinned release:** `1.12.7`
+- **Upstream:** [source repository](<https://sourceforge.net/projects/enlightenment/>) · [Debian](<https://tracker.debian.org/pkg/imlib2>)
 - **License:** Imlib2
 - **Parsed scope:** pixels
 - **Underlying family:** Imlib2 PNG loader (libpng-backed)

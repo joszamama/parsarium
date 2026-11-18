@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.7.3`
+- **Upstream:** [source repository](<https://github.com/getdnsapi/getdns>) · [Debian](<https://tracker.debian.org/pkg/getdns>)
 - **License:** BSD-3-Clause
 - **Parser family:** getdns message-dict decoder (src/rr-iter.c, src/rr-dict.c, src/util-internal.c over the bundled gldns read helpers)
 - **Local input API:** `getdns_return_t getdns_wire2msg_dict(const uint8_t *wire, size_t wire_sz, getdns_dict **msg_dict)`

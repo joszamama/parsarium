@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.12.0`
+- **Upstream:** [source repository](<https://github.com/goccy/go-json>) · [pkg.go.dev](<https://pkg.go.dev/github.com/goccy/go-json>)
 - **License:** MIT
 - **Parser family:** go-json compiled decoder
 - **Local input API:** `gojson.Unmarshal([]byte, interface{})`

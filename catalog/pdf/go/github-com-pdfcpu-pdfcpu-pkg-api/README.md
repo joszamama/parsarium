@@ -1,6 +1,7 @@
 # github.com/pdfcpu/pdfcpu/pkg/api — PDF / Go
 
 - **Pinned release:** `v0.16.4`
+- **Upstream:** [source repository](<https://github.com/pdfcpu/pdfcpu>) · [pkg.go.dev](<https://pkg.go.dev/github.com/pdfcpu/pdfcpu/pkg/api>)
 - **License:** Apache-2.0
 - **Parsed scope:** page count
 - **Underlying family:** pdfcpu PDF processor

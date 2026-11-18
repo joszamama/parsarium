@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.9.34+deprecated`
+- **Upstream:** [source repository](<https://github.com/dtolnay/serde-yaml>) · [crates.io](<https://crates.io/crates/serde_yaml>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** libyaml (via unsafe-libyaml 0.2.11, a c2rust translation of libyaml at upstream commit 2c891fc7): unsafe-libyaml scans and parses events; serde_yaml adds its own event loader, alias expansion, plain-scalar resolution and Value deserializer. Shared libyaml family with C libyaml, PyYAML's CLoader and PHP ext-yaml.
 - **Local input API:** `serde_yaml::from_str::<serde_yaml::Value>(&str) -> Result<Value, Error>; Value::{Null, Bool, Number, String, Sequence, Mapping, Tagged}`

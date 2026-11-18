@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.4.0`
+- **Upstream:** [source repository](<https://github.com/kornelski/xml-rs>) · [crates.io](<https://crates.io/crates/xml>)
 - **License:** MIT
 - **Parser family:** xml-rs EventReader implementation in xml 1.4.0; xml-rs 1.0.0 is a re-export shim that depends on xml and is not a separate family
 - **Local input API:** `xml::reader::EventReader::new(&[u8]); EventReader::next() -> Result<XmlEvent>; StartElement yields namespace-resolved OwnedName, attributes, and namespace map`

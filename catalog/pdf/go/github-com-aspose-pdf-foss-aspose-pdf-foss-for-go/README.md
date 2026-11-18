@@ -1,6 +1,7 @@
 # github.com/aspose-pdf-foss/aspose-pdf-foss-for-go — PDF / Go
 
 - **Pinned release:** `v0.16.0`
+- **Upstream:** [source repository](<https://github.com/aspose-pdf-foss/Aspose-PDF-FOSS-for-Go>) · [pkg.go.dev](<https://pkg.go.dev/github.com/aspose-pdf-foss/aspose-pdf-foss-for-go>)
 - **License:** MIT
 - **Parsed scope:** page count
 - **Underlying family:** Aspose PDF FOSS

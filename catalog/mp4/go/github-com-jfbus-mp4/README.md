@@ -1,6 +1,7 @@
 # github.com/jfbus/mp4 — MP4 / Go
 
 - **Pinned release:** `v0.0.0-20150401112544-b5bc0819ce33`
+- **Upstream:** [source repository](<https://github.com/jfbus/mp4>) · [pkg.go.dev](<https://pkg.go.dev/github.com/jfbus/mp4>)
 - **License:** MIT
 - **Parsed scope:** ftyp brand only
 - **Underlying family:** jfbus MP4 lineage

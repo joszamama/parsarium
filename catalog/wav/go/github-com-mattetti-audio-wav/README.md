@@ -1,6 +1,7 @@
 # github.com/mattetti/audio/wav — WAV / Go
 
 - **Pinned release:** `v0.0.0-20240411020228-c5379f9b5b61`
+- **Upstream:** [source repository](<https://github.com/mattetti/audio>) · [pkg.go.dev](<https://pkg.go.dev/github.com/mattetti/audio/wav>)
 - **License:** MIT
 - **Parsed scope:** signs
 - **Underlying family:** mattetti/go-audio WAV lineage

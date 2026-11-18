@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.0.26`
+- **Upstream:** [source repository](<https://github.com/juanjoDiaz/streamparser-json>) · [npm](<https://www.npmjs.com/package/@streamparser/json>)
 - **License:** MIT
 - **Parser family:** @streamparser/json TypeScript tokenizer and token parser
 - **Local input API:** `new JSONParser({keepStack:true}).write(local Uint8Array); onValue root; end()`

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `5.4.1`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/org.apache.xmlbeans/xmlbeans>)
 - **License:** Apache-2.0
 - **Parser family:** XMLBeans SAX-to-cursor tree over OpenJDK Xerces2-J fork
 - **Local input API:** `XmlObject.Factory.parse(Files.newInputStream(local Path)); XmlObject.newCursor() traverses XML infoset`

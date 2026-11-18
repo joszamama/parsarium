@@ -1,6 +1,7 @@
 # sail — ASCII PNM / C
 
 - **Pinned release:** `1.3.1`
+- **Upstream:** [source repository](<https://github.com/HappySeaFox/sail>) · [Debian](<https://tracker.debian.org/pkg/sail>)
 - **License:** MIT
 - **Parsed scope:** P3 dimensions and two decoded RGB pixels
 - **Underlying family:** SAIL native PNM codec

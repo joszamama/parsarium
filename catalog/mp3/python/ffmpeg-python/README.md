@@ -1,6 +1,7 @@
 # ffmpeg-python — MP3 / Python
 
 - **Pinned release:** `0.2.0`
+- **Upstream:** [source repository](<https://github.com/kkroening/ffmpeg-python>) · [PyPI](<https://pypi.org/project/ffmpeg-python/>)
 - **License:** Apache-2.0
 - **Parsed scope:** ID3v2 tags and MPEG codec
 - **Underlying family:** ffmpeg-python via external FFprobe

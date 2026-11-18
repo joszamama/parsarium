@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.26.3`
+- **Upstream:** [source repository](<https://github.com/hickory-dns/hickory-dns>) · [crates.io](<https://crates.io/crates/hickory-proto>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** Hickory DNS proto (formerly trust-dns-proto): BinDecoder and Message/Record decoders
 - **Local input API:** `hickory_proto::op::Message::from_vec(buffer: &[u8]) -> Result<Message, DecodeError>`

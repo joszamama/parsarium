@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.0.32`
+- **Upstream:** [source repository](<https://github.com/shadowy-pycoder/mshark>) · [pkg.go.dev](<https://pkg.go.dev/github.com/shadowy-pycoder/mshark/layers>)
 - **License:** MIT
 - **Parser family:** mshark layers (dns.go UnmarshalBinary, extractDomain, parseRData)
 - **Local input API:** `(*layers.DNSMessage).Parse(data []byte) error (UnmarshalBinary), then DNSMessage.TransactionID, Flags (QR, OPCode, AA, TC, RD, RA, Z, AU, NA, RCode), Questions ([]*QueryEntry) and AnswerRRs/AuthorityRRs/AdditionalRRs ([]*ResourceRecord with typed RDataA, RDataAAAA, RDataCNAME, RDataMX)`

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.3.1`
+- **Upstream:** [PyPI](<https://pypi.org/project/untangle/>)
 - **License:** MIT
 - **Parser family:** untangle SAX handler over defusedxml DefusedExpatParser over CPython xml.sax/pyexpat over Expat 2.10.0
 - **Local input API:** `untangle.parse(pathlib.Path(local XML file)); Element._name, _attributes, cdata and children filled by untangle.Handler from SAX startElement/characters/endElement events`

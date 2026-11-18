@@ -8,12 +8,12 @@ Bounded TOML search captured 2026-11-17: 2 queries, 101 recorded hits (101 uniqu
 
 ## Third-party parsers
 
-- [jackson-dataformat-toml](jackson-dataformat-toml/README.md) — verified Docker harness
-- [tomlj](tomlj/README.md) — verified Docker harness
-- [night-config-toml](night-config-toml/README.md) — verified Docker harness
-- [jtoml](jtoml/README.md) — verified Docker harness
-- [ktoml-core](ktoml-core/README.md) — verified Docker harness
-- [toml-java](toml-java/README.md) — verified Docker harness
+- [jackson-dataformat-toml](jackson-dataformat-toml/README.md) — verified Docker harness · [source repository](<https://github.com/FasterXML/jackson-dataformats-text>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-toml>)
+- [tomlj](tomlj/README.md) — verified Docker harness · [source repository](<https://github.com/tomlj/tomlj>) · [Maven Central](<https://central.sonatype.com/artifact/org.tomlj/tomlj>)
+- [night-config-toml](night-config-toml/README.md) — verified Docker harness · [source repository](<https://github.com/TheElectronWill/night-config>) · [Maven Central](<https://central.sonatype.com/artifact/com.electronwill.night-config/toml>)
+- [jtoml](jtoml/README.md) — verified Docker harness · [source repository](<https://github.com/WasabiThumb/jtoml>) · [Maven Central](<https://central.sonatype.com/artifact/io.github.wasabithumb/jtoml>)
+- [ktoml-core](ktoml-core/README.md) — verified Docker harness · [source repository](<https://github.com/orchestr7/ktoml>) · [Maven Central](<https://central.sonatype.com/artifact/com.akuleshov7/ktoml-core-jvm>)
+- [toml-java](toml-java/README.md) — verified Docker harness · [source repository](<https://github.com/vieiro/toml-java>) · [Maven Central](<https://central.sonatype.com/artifact/net.vieiro/toml-java>)
 
 ## Standard and runtime APIs
 

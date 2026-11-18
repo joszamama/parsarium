@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.19.2`
+- **Upstream:** [source repository](<https://github.com/goccy/go-yaml>) · [pkg.go.dev](<https://pkg.go.dev/github.com/goccy/go-yaml>)
 - **License:** MIT
 - **Parser family:** goccy/go-yaml: independent pure-Go scanner, lexer, parser, AST and decoder (not a libyaml port)
 - **Local input API:** `yaml.UnmarshalWithOptions([]byte, *interface{}, yaml.UseOrderedMap()) over one complete local YAML byte slice; every mapping decodes into yaml.MapSlice in source order, scalars into string, int64/uint64, float64, bool or nil`

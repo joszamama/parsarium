@@ -1,6 +1,7 @@
 # pygame — PNG / Python
 
 - **Pinned release:** `2.6.1`
+- **Upstream:** [source repository](<https://github.com/pygame/pygame>) · [PyPI](<https://pypi.org/project/pygame/>)
 - **License:** LGPL
 - **Parsed scope:** pixels
 - **Underlying family:** SDL_image/libpng

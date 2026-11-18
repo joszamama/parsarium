@@ -1,6 +1,7 @@
 # id3 — MP3 / Rust
 
 - **Pinned release:** `1.17.3`
+- **Upstream:** [source repository](<https://codeberg.org/polyfloyd/rust-id3>) · [crates.io](<https://crates.io/crates/id3>)
 - **License:** MIT
 - **Parsed scope:** ID3v2 title, artist, album
 - **Underlying family:** id3 tag parser

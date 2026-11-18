@@ -1,6 +1,7 @@
 # darylldoyle/safe-svg — SVG / PHP
 
 - **Pinned release:** `2.5.2`
+- **Upstream:** [source repository](<https://github.com/10up/safe-svg>) · [Packagist](<https://packagist.org/packages/darylldoyle/safe-svg>)
 - **License:** GPL-2.0-or-later
 - **Parsed scope:** Standalone public helper replay with WordPress default option/filter behavior supplied by adapter; no full WordPress install claim.
 - **Underlying family:** enshrined SVG sanitizer over libxml DOM

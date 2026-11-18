@@ -1,6 +1,7 @@
 # nanohttpd — HTTP/1.1 / Java
 
 - **Pinned release:** `2.3.1`
+- **Upstream:** [source repository](<https://github.com/NanoHttpd/nanohttpd>) · [Maven Central](<https://central.sonatype.com/artifact/org.nanohttpd/nanohttpd>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** HTTP/1.1 request method, target, Host and X-Parsarium headers from local stream; protocol version is internal and not reported
 - **Underlying family:** NanoHTTPD native HTTP request parser

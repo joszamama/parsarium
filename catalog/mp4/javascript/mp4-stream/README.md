@@ -1,6 +1,7 @@
 # mp4-stream — MP4 / JavaScript
 
 - **Pinned release:** `3.1.3`
+- **Upstream:** [source repository](<https://github.com/mafintosh/mp4-stream>) · [npm](<https://www.npmjs.com/package/mp4-stream>)
 - **License:** MIT
 - **Parsed scope:** box_headers
 - **Underlying family:** mp4-stream

@@ -1,6 +1,7 @@
 # online-3d-viewer — ASCII PLY / JavaScript
 
 - **Pinned release:** `0.18.0`
+- **Upstream:** [source repository](<https://github.com/kovacsv/Online3DViewer>) · [npm](<https://www.npmjs.com/package/online-3d-viewer>)
 - **License:** MIT
 - **Parsed scope:** triangle mesh
 - **Underlying family:** Online3DViewer PLY importer

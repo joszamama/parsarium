@@ -8,16 +8,16 @@ Ten verified PHP SQL paths. Search: a bounded Packagist search of 75 queries and
 
 ## Third-party parsers
 
-- [phpmyadmin/sql-parser](phpmyadmin-sql-parser/README.md) — verified Docker harness
-- [greenlion/php-sql-parser](greenlion-php-sql-parser/README.md) — verified Docker harness
-- [soundintheory/php-sql-parser](soundintheory-php-sql-parser/README.md) — verified Docker harness
-- [vimeo/php-mysql-engine](vimeo-php-mysql-engine/README.md) — verified Docker harness
-- [sad_spirit/pg_builder](sad-spirit-pg-builder/README.md) — verified Docker harness
-- [flow-php/postgresql](flow-php-postgresql/README.md) — verified Docker harness
-- [flow-php/pg-query-ext](flow-php-pg-query-ext/README.md) — verified Docker harness
-- [crodas/sql-parser](crodas-sql-parser/README.md) — verified Docker harness
-- [kwasii/laravel-sql-parser](kwasii-laravel-sql-parser/README.md) — verified Docker harness
-- [bleksak/sqlite-toolkit](bleksak-sqlite-toolkit/README.md) — verified Docker harness
+- [phpmyadmin/sql-parser](phpmyadmin-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/phpmyadmin/sql-parser>) · [Packagist](<https://packagist.org/packages/phpmyadmin/sql-parser>)
+- [greenlion/php-sql-parser](greenlion-php-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/greenlion/PHP-SQL-Parser>) · [Packagist](<https://packagist.org/packages/greenlion/php-sql-parser>)
+- [soundintheory/php-sql-parser](soundintheory-php-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/soundintheory/php-sql-parser>) · [Packagist](<https://packagist.org/packages/soundintheory/php-sql-parser>)
+- [vimeo/php-mysql-engine](vimeo-php-mysql-engine/README.md) — verified Docker harness · [source repository](<https://github.com/vimeo/php-mysql-engine>) · [Packagist](<https://packagist.org/packages/vimeo/php-mysql-engine>)
+- [sad_spirit/pg_builder](sad-spirit-pg-builder/README.md) — verified Docker harness · [source repository](<https://github.com/sad-spirit/pg-builder>) · [Packagist](<https://packagist.org/packages/sad_spirit/pg_builder>)
+- [flow-php/postgresql](flow-php-postgresql/README.md) — verified Docker harness · [source repository](<https://github.com/flow-php/postgresql>) · [Packagist](<https://packagist.org/packages/flow-php/postgresql>)
+- [flow-php/pg-query-ext](flow-php-pg-query-ext/README.md) — verified Docker harness · [source repository](<https://github.com/flow-php/pg-query-ext>) · [Packagist](<https://packagist.org/packages/flow-php/pg-query-ext>)
+- [crodas/sql-parser](crodas-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/crodas/SQLParser>) · [Packagist](<https://packagist.org/packages/crodas/sql-parser>)
+- [kwasii/laravel-sql-parser](kwasii-laravel-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/kwasii1/laravel-sql-parser>) · [Packagist](<https://packagist.org/packages/kwasii/laravel-sql-parser>)
+- [bleksak/sqlite-toolkit](bleksak-sqlite-toolkit/README.md) — verified Docker harness · [source repository](<https://github.com/Bleksak/sqlite-toolkit>) · [Packagist](<https://packagist.org/packages/bleksak/sqlite-toolkit>)
 
 ## Standard and runtime APIs
 

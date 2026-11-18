@@ -1,6 +1,7 @@
 # proxy.py — HTTP/1.1 / Python
 
 - **Pinned release:** `2.4.10`
+- **Upstream:** [source repository](<https://github.com/abhinavsingh/proxy.py>) · [PyPI](<https://pypi.org/project/proxy.py/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** HTTP/1.1 request head
 - **Underlying family:** proxy.py Python HTTP parser

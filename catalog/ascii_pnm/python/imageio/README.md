@@ -1,6 +1,7 @@
 # imageio — ASCII PNM / Python
 
 - **Pinned release:** `2.38.1`
+- **Upstream:** [source repository](<https://github.com/imageio/imageio>) · [PyPI](<https://pypi.org/project/imageio/>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** P3 pixels
 - **Underlying family:** ImageIO via Pillow PPM

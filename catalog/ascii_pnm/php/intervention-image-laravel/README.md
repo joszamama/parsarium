@@ -1,6 +1,7 @@
 # intervention/image-laravel — ASCII PNM / PHP
 
 - **Pinned release:** `4.1.1`
+- **Upstream:** [source repository](<https://github.com/Intervention/image-laravel>) · [Packagist](<https://packagist.org/packages/intervention/image-laravel>)
 - **License:** MIT
 - **Parsed scope:** decoded image dimensions
 - **Underlying family:** ImageMagick PNM decoder

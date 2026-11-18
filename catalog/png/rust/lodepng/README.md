@@ -1,6 +1,7 @@
 # lodepng — PNG / Rust
 
 - **Pinned release:** `3.12.2`
+- **Upstream:** [source repository](<https://github.com/kornelski/lodepng-rust>) · [crates.io](<https://crates.io/crates/lodepng>)
 - **License:** Zlib
 - **Parsed scope:** Decoded PNG dimensions and first pixel
 - **Underlying family:** LodePNG family

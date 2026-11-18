@@ -1,6 +1,7 @@
 # github.com/digitorus/pdf — PDF / Go
 
 - **Pinned release:** `v0.3.0`
+- **Upstream:** [source repository](<https://github.com/digitorus/pdf>) · [pkg.go.dev](<https://pkg.go.dev/github.com/digitorus/pdf>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** page count
 - **Underlying family:** rsc PDF reader lineage

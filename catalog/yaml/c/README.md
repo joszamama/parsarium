@@ -8,8 +8,8 @@
 
 ## Third-party parsers
 
-- [libyaml](libyaml/README.md) — verified Docker harness
-- [libfyaml](libfyaml/README.md) — verified Docker harness
+- [libyaml](libyaml/README.md) — verified Docker harness · [source repository](<https://github.com/yaml/libyaml>) · [Debian](<https://tracker.debian.org/pkg/libyaml>)
+- [libfyaml](libfyaml/README.md) — verified Docker harness · [source repository](<https://github.com/pantoniou/libfyaml>) · [Debian](<https://tracker.debian.org/pkg/libfyaml>)
 
 ## Standard and runtime APIs
 

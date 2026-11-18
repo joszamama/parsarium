@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.3.3`
+- **Upstream:** [source repository](<https://github.com/josdejong/lossless-json>) · [npm](<https://www.npmjs.com/package/lossless-json>)
 - **License:** MIT
 - **Parser family:** lossless-json own recursive-descent JSON value parser
 - **Local input API:** `parse(text) from the pinned ESM export after strict UTF-8 TextDecoder of local bytes; returns LosslessNumber objects for every JSON numeric token`

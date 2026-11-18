@@ -1,6 +1,7 @@
 # cumulus3d-core — ASCII PLY / Rust
 
 - **Pinned release:** `0.11.1`
+- **Upstream:** [source repository](<https://github.com/AH100-1/cumulus3d>) · [crates.io](<https://crates.io/crates/cumulus3d-core>)
 - **License:** Apache-2.0
 - **Parsed scope:** ASCII PLY vertex cloud
 - **Underlying family:** cumulus3d-core PLY reader

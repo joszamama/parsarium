@@ -1,6 +1,7 @@
 # markitdown — PDF / Python
 
 - **Pinned release:** `0.1.9`
+- **Upstream:** [source repository](<https://github.com/microsoft/markitdown>) · [PyPI](<https://pypi.org/project/markitdown/>)
 - **License:** MIT
 - **Parsed scope:** page text as Markdown
 - **Underlying family:** MarkItDown via pdfplumber/pdfminer.six

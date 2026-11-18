@@ -1,6 +1,7 @@
 # http-parser-js — HTTP/1.1 / JavaScript
 
 - **Pinned release:** `0.5.10`
+- **Upstream:** [source repository](<https://github.com/creationix/http-parser-js>) · [npm](<https://www.npmjs.com/package/http-parser-js>)
 - **License:** MIT
 - **Parsed scope:** request
 - **Underlying family:** http-parser-js

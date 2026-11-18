@@ -1,6 +1,7 @@
 # libsndfile — WAV / C
 
 - **Pinned release:** `1.2.2`
+- **Upstream:** [source repository](<https://github.com/libsndfile/libsndfile>) · [Conan Center](<https://conan.io/center/recipes/libsndfile>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** WAV sample rate, channel and frame counts, plus first four decoded PCM samples
 - **Underlying family:** libsndfile WAV decoder

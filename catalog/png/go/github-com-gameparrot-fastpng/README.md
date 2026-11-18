@@ -1,6 +1,7 @@
 # github.com/gameparrot/fastpng — PNG / Go
 
 - **Pinned release:** `v0.0.0-20250305185850-d72e123a2123`
+- **Upstream:** [source repository](<https://github.com/GameParrot/fastpng>) · [pkg.go.dev](<https://pkg.go.dev/github.com/gameparrot/fastpng>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** pixels
 - **Underlying family:** Go image/png-derived decoder

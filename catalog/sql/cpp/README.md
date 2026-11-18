@@ -8,8 +8,8 @@ Two verified C++ SQL paths, one ranked by popcon and one by the GitHub-star fall
 
 ## Third-party parsers
 
-- [duckdb](duckdb/README.md) — verified Docker harness
-- [googlesql](googlesql/README.md) — verified Docker harness
+- [duckdb](duckdb/README.md) — verified Docker harness · [source repository](<https://github.com/duckdb/duckdb>) · [Debian](<https://tracker.debian.org/pkg/duckdb>)
+- [googlesql](googlesql/README.md) — verified Docker harness · [source repository](<https://github.com/google/googlesql>)
 
 ## Standard and runtime APIs
 

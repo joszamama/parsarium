@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.0.0`
+- **Upstream:** [source repository](<https://github.com/visulima/visulima>) · [npm](<https://www.npmjs.com/package/@visulima/yaml>)
 - **License:** MIT
 - **Parser family:** @visulima/yaml own scanner, parser and composer
 - **Local input API:** `parse(text) with default options (YAML 1.2, core schema, strict) after strict UTF-8 decoding of a local Buffer; a YAMLError rejects the input; the returned value is mapped to the Parsarium typed YAML tree`

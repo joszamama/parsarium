@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v8.1.11`
+- **Upstream:** [source repository](<https://github.com/symfony/serializer>) · [Packagist](<https://packagist.org/packages/symfony/serializer>)
 - **License:** MIT
 - **Parser family:** libxml2 via PHP DOMDocument, shared with the standard path, sabre/xml and symfony/dom-crawler
 - **Local input API:** `new XmlEncoder() then XmlEncoder::decode(string $data, 'xml') (DecoderInterface; Serializer::decode delegates to it). With the default context it calls DOMDocument::loadXML with LIBXML_NONET | LIBXML_NOBLANKS, rejects any libxml error or a DOCTYPE, skips comments and processing instructions, and returns the root element's content as a PHP array`

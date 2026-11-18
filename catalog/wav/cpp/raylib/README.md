@@ -1,6 +1,7 @@
 # raylib — WAV / C++
 
 - **Pinned release:** `6.2`
+- **Upstream:** [source repository](<https://github.com/raysan5/raylib>) · [Debian](<https://tracker.debian.org/pkg/raylib>)
 - **License:** Zlib
 - **Parsed scope:** WAV sample rate, channel and frame counts, plus first four decoded PCM samples
 - **Underlying family:** raylib bundled dr_wav decoder

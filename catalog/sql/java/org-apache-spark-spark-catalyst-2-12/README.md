@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.5.9`
+- **Upstream:** [source repository](<https://github.com/apache/spark>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.spark/spark-catalyst_2.12>)
 - **License:** Apache-2.0
 - **Parser family:** Spark SQL ANTLR4 SqlBase grammar (AstBuilder to unresolved LogicalPlan)
 - **Local input API:** `CatalystSqlParser.parsePlan(local SQL text) -> LogicalPlan`

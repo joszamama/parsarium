@@ -1,6 +1,7 @@
 # httptools — HTTP/1.1 / Python
 
 - **Pinned release:** `0.9.0`
+- **Upstream:** [source repository](<https://github.com/MagicStack/httptools>) · [PyPI](<https://pypi.org/project/httptools/>)
 - **License:** MIT
 - **Parsed scope:** HTTP/1.1 request head
 - **Underlying family:** llhttp C parser

@@ -1,6 +1,7 @@
 # intervention/image-laravel — PNG / PHP
 
 - **Pinned release:** `4.1.1`
+- **Upstream:** [source repository](<https://github.com/Intervention/image-laravel>) · [Packagist](<https://packagist.org/packages/intervention/image-laravel>)
 - **License:** MIT
 - **Parsed scope:** decoded image dimensions
 - **Underlying family:** Intervention Image 4 / PHP GD PNG decoder

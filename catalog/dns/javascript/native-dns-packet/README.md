@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.1`
+- **Upstream:** [source repository](<https://github.com/tjfontaine/native-dns-packet>) · [npm](<https://www.npmjs.com/package/native-dns-packet>)
 - **License:** MIT
 - **Parser family:** native-dns-packet (tjfontaine node-dns packet.js)
 - **Local input API:** `Packet.parse(buffer: Buffer) -> Packet`

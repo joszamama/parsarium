@@ -1,6 +1,7 @@
 # fop-core — SVG / Java
 
 - **Pinned release:** `2.12`
+- **Upstream:** [source repository](<https://github.com/apache/xmlgraphics-fop>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.xmlgraphics/fop-core>)
 - **License:** Apache-2.0
 - **Parsed scope:** PDF page dimensions and SVG-derived red/green drawing operations
 - **Underlying family:** Apache FOP SVG-to-PDF transcoder using Apache Batik

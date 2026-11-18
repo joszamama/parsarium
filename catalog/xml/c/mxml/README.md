@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.0.6`
+- **Upstream:** [source repository](<https://github.com/michaelrsweet/mxml>) · [Debian](<https://tracker.debian.org/pkg/mxml>)
 - **License:** Apache-2.0
 - **Parser family:** Mini-XML (Michael R Sweet's mxml)
 - **Local input API:** `mxmlOptionsNew(); mxmlOptionsSetTypeValue(options, MXML_TYPE_OPAQUE); mxmlOptionsSetErrorCallback; mxmlLoadString(NULL, options, NUL-terminated copy of the local bytes); tree walk with mxmlGetType, mxmlGetFirstChild, mxmlGetNextSibling, mxmlGetParent, mxmlGetElement, mxmlElementGetAttrCount, mxmlElementGetAttrByIndex, mxmlGetOpaque, mxmlGetCDATA. Namespace resolution is done by the adapter, not by mxml`

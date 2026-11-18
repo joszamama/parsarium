@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `18.1.0`
+- **Upstream:** [source repository](<https://github.com/pganalyze/libpg_query>) · [Debian](<https://tracker.debian.org/pkg/libpg-query>)
 - **License:** BSD-3-Clause
 - **Parser family:** PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)
 - **Local input API:** `pg_query_parse(local NUL-terminated SQL text) -> PgQueryParseResult (JSON parse tree)`

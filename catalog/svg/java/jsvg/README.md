@@ -1,6 +1,7 @@
 # jsvg — SVG / Java
 
 - **Pinned release:** `2.0.0`
+- **Upstream:** [source repository](<https://github.com/weisJ/jsvg>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.weisj/jsvg>)
 - **License:** MIT
 - **Parsed scope:** Rendered SVG pixels
 - **Underlying family:** JSVG

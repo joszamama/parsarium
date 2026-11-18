@@ -1,6 +1,7 @@
 # pymediainfo — WAV / Python
 
 - **Pinned release:** `7.0.1`
+- **Upstream:** [source repository](<https://github.com/sbraz/pymediainfo>) · [PyPI](<https://pypi.org/project/pymediainfo/>)
 - **License:** MIT
 - **Parsed scope:** WAV header/audio metadata
 - **Underlying family:** MediaInfo native WAV parser

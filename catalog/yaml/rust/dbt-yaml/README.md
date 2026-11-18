@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.10.8`
+- **Upstream:** [source repository](<https://github.com/sdf-labs/dbt-yaml>) · [crates.io](<https://crates.io/crates/dbt-yaml>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** libyaml (via unsafe-libyaml 0.2.11, the same crate as the selected serde_yaml and unsafe-libyaml paths): dbt-yaml is dbt Labs' fork of serde_yaml with spans, verbatim strings and a reworked Value deserializer; 2,561 of its 5,151 distinct non-test source lines longer than 25 characters also occur in serde_yaml 0.9.34 (49.7%).
 - **Local input API:** `dbt_yaml::from_str::<dbt_yaml::Value>(&str) -> Result<Value, Error>; Value::{Null, Bool, Number, String, Sequence, Mapping, Tagged}, each with a Span`

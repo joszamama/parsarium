@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.1`
+- **Upstream:** [source repository](<https://github.com/wahlflo/dns-messages>) · [PyPI](<https://pypi.org/project/dns-messages/>)
 - **License:** MIT
 - **Parser family:** dns-messages (DnsMessageParser with per-type rr_data classes)
 - **Local input API:** `dns_messages.DnsMessage.from_bytes(raw_bytes: bytes) -> DnsMessage`

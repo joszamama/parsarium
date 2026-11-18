@@ -1,6 +1,7 @@
 # av — MP3 / Python
 
 - **Pinned release:** `19.0.2`
+- **Upstream:** [source repository](<https://github.com/PyAV-Org/PyAV>) · [PyPI](<https://pypi.org/project/av/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** ID3v2 tags and MP3 audio stream
 - **Underlying family:** FFmpeg libavformat via PyAV

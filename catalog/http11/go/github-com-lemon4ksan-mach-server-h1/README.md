@@ -1,6 +1,7 @@
 # github.com/lemon4ksan/mach/server/h1 — HTTP/1.1 / Go
 
 - **Pinned release:** `v0.2.0`
+- **Upstream:** [source repository](<https://github.com/Lemon4ksan/mach>) · [pkg.go.dev](<https://pkg.go.dev/github.com/lemon4ksan/mach/server/h1>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** request message
 - **Underlying family:** mach H1 parser

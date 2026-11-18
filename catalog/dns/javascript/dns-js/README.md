@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.3.1`
+- **Upstream:** [source repository](<https://github.com/mdns-js/node-dns-js>) · [npm](<https://www.npmjs.com/package/dns-js>)
 - **License:** MIT
 - **Parser family:** dns-js (mdns-js) decoder (lib/dnspacket.js, lib/dnsrecord.js)
 - **Local input API:** `dns.DNSPacket.parse(buffer: Buffer) -> DNSPacket`

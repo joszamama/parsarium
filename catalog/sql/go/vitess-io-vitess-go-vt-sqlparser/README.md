@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.24.5`
+- **Upstream:** [source repository](<https://github.com/vitessio/vitess>) · [pkg.go.dev](<https://pkg.go.dev/vitess.io/vitess/go/vt/sqlparser>)
 - **License:** Apache-2.0
 - **Parser family:** vitess MySQL grammar (goyacc sql.y) and tokenizer
 - **Local input API:** `sqlparser.New(sqlparser.Options{}); Parser.SplitStatementToPieces and Parser.Parse(local SQL text) -> Statement`

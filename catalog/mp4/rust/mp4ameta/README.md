@@ -1,6 +1,7 @@
 # mp4ameta — MP4 / Rust
 
 - **Pinned release:** `0.13.0`
+- **Upstream:** [source repository](<https://github.com/saecki/mp4ameta>) · [crates.io](<https://crates.io/crates/mp4ameta>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** MP4 title metadata
 - **Underlying family:** mp4ameta iTunes atom parser

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.3.5`
+- **Upstream:** [source repository](<https://github.com/dominictarr/JSONStream>) · [npm](<https://www.npmjs.com/package/JSONStream>)
 - **License:** (MIT OR Apache-2.0)
 - **Parser family:** jsonparse byte-level tokenizer and stack value builder (via JSONStream path filter)
 - **Local input API:** `stream = JSONStream.parse([]); stream.on('data'|'error'|'end'); stream.end(local Buffer)`

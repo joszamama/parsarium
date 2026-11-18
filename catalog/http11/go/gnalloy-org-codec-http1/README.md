@@ -1,6 +1,7 @@
 # gnalloy.org/codec-http1 — HTTP/1.1 / Go
 
 - **Pinned release:** `v0.0.0-20261006130159-161e7f51078b`
+- **Upstream:** [source repository](<https://gitsbyte.com/gnalloy/codec-http1>) · [pkg.go.dev](<https://pkg.go.dev/gnalloy.org/codec-http1>)
 - **License:** Apache-2.0
 - **Parsed scope:** request message
 - **Underlying family:** gnalloy codec-http1 parser

@@ -1,6 +1,7 @@
 # github.com/gen2brain/go-fitz — PDF / Go
 
 - **Pinned release:** `v1.28.2`
+- **Upstream:** [source repository](<https://github.com/gen2brain/go-fitz>) · [pkg.go.dev](<https://pkg.go.dev/github.com/gen2brain/go-fitz>)
 - **License:** AGPL-3.0
 - **Parsed scope:** page count
 - **Underlying family:** MuPDF via go-fitz

@@ -1,6 +1,7 @@
 # char0n/ffmpeg-php — MP4 / PHP
 
 - **Pinned release:** `3.2.2`
+- **Upstream:** [source repository](<https://github.com/char0n/ffmpeg-php>) · [Packagist](<https://packagist.org/packages/char0n/ffmpeg-php>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** H.264 video and one-second duration
 - **Underlying family:** FFmpeg native MOV/MP4 parser

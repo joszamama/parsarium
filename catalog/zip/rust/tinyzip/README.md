@@ -1,6 +1,7 @@
 # tinyzip — ZIP / Rust
 
 - **Pinned release:** `0.4.0`
+- **Upstream:** [source repository](<https://github.com/lovasoa/tinyzip>) · [crates.io](<https://crates.io/crates/tinyzip>)
 - **License:** MIT
 - **Parsed scope:** Entry name and externally DEFLATE-decoded text
 - **Underlying family:** tinyzip engine

@@ -1,6 +1,7 @@
 # github.com/gopxl/beep/v2/wav — WAV / Go
 
 - **Pinned release:** `v2.1.1`
+- **Upstream:** [source repository](<https://github.com/gopxl/beep>) · [pkg.go.dev](<https://pkg.go.dev/github.com/gopxl/beep/v2/wav>)
 - **License:** MIT
 - **Parsed scope:** signs
 - **Underlying family:** beep WAV lineage

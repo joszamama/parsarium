@@ -1,6 +1,7 @@
 # qpdf — PDF / C++
 
 - **Pinned release:** `12.4.2`
+- **Upstream:** [source repository](<https://github.com/qpdf/qpdf>) · [Debian](<https://tracker.debian.org/pkg/qpdf>)
 - **License:** Apache-2.0
 - **Parsed scope:** PDF document page count
 - **Underlying family:** qpdf C++ PDF parser

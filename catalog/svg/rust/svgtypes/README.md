@@ -1,6 +1,7 @@
 # svgtypes — SVG / Rust
 
 - **Pinned release:** `0.16.2`
+- **Upstream:** [source repository](<https://github.com/linebender/svgtypes>) · [crates.io](<https://crates.io/crates/svgtypes>)
 - **License:** Apache-2.0 OR MIT
 - **Parsed scope:** SVG path command grammar
 - **Underlying family:** svgtypes lineage

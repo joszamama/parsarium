@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.1.0`
+- **Upstream:** [source repository](<https://github.com/utopia-php/dns>) · [Packagist](<https://packagist.org/packages/utopia-php/dns>)
 - **License:** MIT
 - **Parser family:** Utopia DNS (Message, Message/Header, Question, Record and Domain decoders)
 - **Local input API:** `Utopia\DNS\Message::decode(string $packet): Message`

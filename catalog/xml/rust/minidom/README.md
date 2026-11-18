@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.19.0`
+- **Upstream:** [source repository](<https://gitlab.com/xmpp-rs/xmpp-rs>) · [crates.io](<https://crates.io/crates/minidom>)
 - **License:** MPL-2.0
 - **Parser family:** rxml (shared with the selected rxml path): rxml lexer and RawParser via RawReader; minidom adds its own TreeBuilder prefix resolution and DOM. Not an independent tokenizer.
 - **Local input API:** `minidom::Element::from_reader(impl BufRead) -> Result<Element>; Element::name()/ns()/attrs() (rxml AttrMap keyed by namespace URI and local name), Element::prefixes.declared_prefixes(), Element::nodes() -> Node::Element/Node::Text`

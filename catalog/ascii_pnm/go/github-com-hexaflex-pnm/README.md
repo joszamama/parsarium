@@ -1,6 +1,7 @@
 # github.com/hexaflex/pnm — ASCII PNM / Go
 
 - **Pinned release:** `v0.0.0-20200810192450-e891a41ac33b`
+- **Upstream:** [source repository](<https://github.com/hexaflex-zz/pnm>) · [pkg.go.dev](<https://pkg.go.dev/github.com/hexaflex/pnm>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** P3 pixels and dimensions
 - **Underlying family:** hexaflex PNM

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.2.0`
+- **Upstream:** [source repository](<https://github.com/tomlj/tomlj>) · [Maven Central](<https://central.sonatype.com/artifact/org.tomlj/tomlj>)
 - **License:** Apache-2.0
 - **Parser family:** tomlj (ANTLR 4 grammar TomlLexer.g4/TomlParser.g4 with generated lexer/parser and own visitors; origin Apache Tuweni toml)
 - **Local input API:** `Toml.parse(Path, TomlVersion.V1_0_0) -> TomlParseResult (TomlTable); hasErrors() must be false`

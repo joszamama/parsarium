@@ -1,6 +1,7 @@
 # github.com/dmulholl/mp3lib — MP3 / Go
 
 - **Pinned release:** `v1.0.0`
+- **Upstream:** [source repository](<https://github.com/dmulholl/mp3lib>) · [pkg.go.dev](<https://pkg.go.dev/github.com/dmulholl/mp3lib>)
 - **License:** Unlicense
 - **Parsed scope:** MPEG Layer III frame headers and frame boundaries from untagged local bytes; no PCM decoding
 - **Underlying family:** dmulholl/mp3lib frame parser

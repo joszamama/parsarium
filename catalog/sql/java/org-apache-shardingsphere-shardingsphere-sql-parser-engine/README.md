@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `5.3.2`
+- **Upstream:** [source repository](<https://github.com/apache/shardingsphere>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.shardingsphere/shardingsphere-sql-parser-engine>)
 - **License:** Apache-2.0
 - **Parser family:** Apache ShardingSphere ANTLR4 dialect grammars (MySQL module)
 - **Local input API:** `SQLParserEngine("MySQL", CacheOption).parse(local SQL text, false) -> ParseASTNode; SQLVisitorEngine("MySQL", "STATEMENT", false, Properties).visit(tree) -> SQLStatement`

@@ -1,6 +1,7 @@
 # pdf.js-extract — PDF / JavaScript
 
 - **Pinned release:** `1.0.1`
+- **Upstream:** [source repository](<https://github.com/ffalt/pdf.js-extract>) · [npm](<https://www.npmjs.com/package/pdf.js-extract>)
 - **License:** MIT
 - **Parsed scope:** text
 - **Underlying family:** mozilla/pdf.js

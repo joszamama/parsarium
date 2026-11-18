@@ -1,6 +1,7 @@
 # karchive — ZIP / C++
 
 - **Pinned release:** `6.31.0`
+- **Upstream:** [source repository](<https://invent.kde.org/frameworks/karchive>) · [Debian](<https://tracker.debian.org/pkg/karchive>)
 - **License:** BSD-2-Clause AND LGPL-2.0-only AND LGPL-2.0-or-later AND (LGPL-2.0-only OR LGPL-3.0-only)
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** KArchive KZip reader

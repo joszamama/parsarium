@@ -1,6 +1,7 @@
 # openpdf-renderer — PDF / Java
 
 - **Pinned release:** `3.0.5`
+- **Upstream:** [source repository](<https://github.com/LibrePDF/OpenPDF>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.librepdf/openpdf-renderer>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** PDF page count
 - **Underlying family:** OpenPDF renderer (Sun PDF Renderer lineage)

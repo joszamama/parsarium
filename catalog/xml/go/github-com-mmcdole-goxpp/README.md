@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.3.0`
+- **Upstream:** [source repository](<https://github.com/mmcdole/goxpp>) · [pkg.go.dev](<https://pkg.go.dev/github.com/mmcdole/goxpp>)
 - **License:** MIT
 - **Parser family:** goxpp XML pull cursor over Go encoding/xml Decoder.Token tokenizer
 - **Local input API:** `xpp.NewXMLPullParser(io.Reader, true, nil) over a local byte stream, then XMLPullParser.NextToken() events`

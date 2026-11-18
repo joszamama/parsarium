@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `26.10.0`
+- **Upstream:** [source repository](<https://github.com/twisted/twisted>) · [PyPI](<https://pypi.org/project/twisted/>)
 - **License:** MIT
 - **Parser family:** Twisted Names (twisted/names/dns.py Message.decode, Query, RRHeader, Name and per-type Record_* decoders)
 - **Local input API:** `twisted.names.dns.Message().fromStr(str: bytes) -> None (then the decoded Message fields)`

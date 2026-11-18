@@ -1,6 +1,7 @@
 # grizzly-http — HTTP/1.1 / Java
 
 - **Pinned release:** `5.0.3`
+- **Upstream:** [source repository](<https://github.com/eclipse-ee4j/glassfish-grizzly>) · [Maven Central](<https://central.sonatype.com/artifact/org.glassfish.grizzly/grizzly-http>)
 - **License:** EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
 - **Parsed scope:** HTTP/1.1 request line and headers from local bytes
 - **Underlying family:** Grizzly native HTTP server codec

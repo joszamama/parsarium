@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.12.4`
+- **Upstream:** [source repository](<https://github.com/maciejhirsz/json-rust>) · [crates.io](<https://crates.io/crates/json>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** json-rust 0.12.4 own parser.rs and JsonValue tree (maciejhirsz/json-rust); no serde_json parse dependency
 - **Local input API:** `json::parse(&str) -> Result<json::JsonValue>; JsonValue::{Object, Array, Short, String, Number, Boolean, Null}; JsonValue::entries()/as_f64()/as_str()`

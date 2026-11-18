@@ -1,6 +1,7 @@
 # libarchive-c — ZIP / Python
 
 - **Pinned release:** `5.3`
+- **Upstream:** [source repository](<https://github.com/Changaco/python-libarchive-c>) · [PyPI](<https://pypi.org/project/libarchive-c/>)
 - **License:** CC0-1.0
 - **Parsed scope:** DEFLATE ZIP entry name and content
 - **Underlying family:** native libarchive

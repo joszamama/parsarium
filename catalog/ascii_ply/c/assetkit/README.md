@@ -1,6 +1,7 @@
 # assetkit — ASCII PLY / C
 
 - **Pinned release:** `0.7.4`
+- **Upstream:** [source repository](<https://github.com/recp/AssetKit>)
 - **License:** Apache-2.0
 - **Parsed scope:** three vertices and one triangular face with parsed indices from ASCII PLY
 - **Underlying family:** AssetKit native ASCII PLY importer

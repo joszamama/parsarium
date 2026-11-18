@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.0.5`
+- **Upstream:** [source repository](<https://github.com/thijsmie/pytoml11>) · [PyPI](<https://pypi.org/project/pytoml11/>)
 - **License:** MIT
 - **Parser family:** toml11 family: vendored toml11 4.2.0 single header via pybind11, shared with the C++ toml11 path
 - **Local input API:** `pytoml11.loads(decoded local TOML text) -> pytoml11.Table of Item objects (Table, Array, Integer, Float, String, Boolean, DateTime, Date, Time) read through their documented value property; pytoml11.load(local file path) gives the same typed tree`

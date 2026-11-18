@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v2.0.7`
+- **Upstream:** [source repository](<https://github.com/mikepultz/netdns2>) · [Packagist](<https://packagist.org/packages/pear/net_dns2>)
 - **License:** MIT
 - **Parser family:** Net_DNS2 / NetDNS2 (Packet, Header, Question and per-type RR rrSet decoders)
 - **Local input API:** `NetDNS2\Packet\Response::__construct(string $_data, int $_size)`

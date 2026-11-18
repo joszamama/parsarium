@@ -1,6 +1,7 @@
 # netty5-codec-http — HTTP/1.1 / Java
 
 - **Pinned release:** `5.0.0.Alpha5`
+- **Upstream:** [source repository](<https://github.com/netty/netty>) · [Maven Central](<https://central.sonatype.com/artifact/io.netty/netty5-codec-http>)
 - **License:** Apache-2.0
 - **Parsed scope:** HTTP/1.1 request line and headers from local bytes
 - **Underlying family:** Netty 5 HTTP request decoder, alpha branch; shares project ancestry with Netty 3 and 4

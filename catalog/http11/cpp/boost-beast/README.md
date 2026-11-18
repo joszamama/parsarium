@@ -1,6 +1,7 @@
 # boost_beast — HTTP/1.1 / C++
 
 - **Pinned release:** `1.92.0`
+- **Upstream:** [source repository](<https://github.com/boostorg/beast>)
 - **License:** BSL-1.0
 - **Parsed scope:** HTTP/1.1 request method, target, version, and Host header
 - **Underlying family:** Boost.Beast native HTTP parser

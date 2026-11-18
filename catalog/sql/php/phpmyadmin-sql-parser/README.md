@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `6.0.1`
+- **Upstream:** [source repository](<https://github.com/phpmyadmin/sql-parser>) · [Packagist](<https://packagist.org/packages/phpmyadmin/sql-parser>)
 - **License:** GPL-2.0-or-later
 - **Parser family:** phpMyAdmin sql-parser hand-written lexer and statement parser
 - **Local input API:** `new PhpMyAdmin\SqlParser\Parser(local SQL text, strict: true) -> statements[]`

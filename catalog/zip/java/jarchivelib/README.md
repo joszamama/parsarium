@@ -1,6 +1,7 @@
 # jarchivelib — ZIP / Java
 
 - **Pinned release:** `1.2.0`
+- **Upstream:** [source repository](<https://github.com/thrau/jarchivelib>) · [Maven Central](<https://central.sonatype.com/artifact/org.rauschig/jarchivelib>)
 - **License:** Apache-2.0
 - **Parsed scope:** ZIP entry name and decompressed content from a local archive
 - **Underlying family:** JArchiveLib wrapper over Commons Compress

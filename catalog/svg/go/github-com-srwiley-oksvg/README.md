@@ -1,6 +1,7 @@
 # github.com/srwiley/oksvg — SVG / Go
 
 - **Pinned release:** `v0.0.0-20221011165216-be6e8873101c`
+- **Upstream:** [source repository](<https://github.com/srwiley/oksvg>) · [pkg.go.dev](<https://pkg.go.dev/github.com/srwiley/oksvg>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** paths, width
 - **Underlying family:** oksvg lineage

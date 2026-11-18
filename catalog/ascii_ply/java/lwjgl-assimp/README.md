@@ -1,6 +1,7 @@
 # lwjgl-assimp — ASCII PLY / Java
 
 - **Pinned release:** `3.4.3`
+- **Upstream:** [source repository](<https://github.com/LWJGL/lwjgl3>) · [Maven Central](<https://central.sonatype.com/artifact/org.lwjgl/lwjgl-assimp>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** ASCII PLY triangle vertex and face counts, parsed face indices
 - **Underlying family:** LWJGL Java binding over native Assimp PLY importer; same Assimp parser family as C++ path

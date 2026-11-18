@@ -1,6 +1,7 @@
 # fs — ZIP / Python
 
 - **Pinned release:** `2.4.16`
+- **Upstream:** [source repository](<https://github.com/PyFilesystem/pyfilesystem2>) · [PyPI](<https://pypi.org/project/fs/>)
 - **License:** MIT
 - **Parsed scope:** DEFLATE ZIP entry name and content
 - **Underlying family:** PyFilesystem ZipFS via CPython zipfile

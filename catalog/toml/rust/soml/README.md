@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.2.0`
+- **Upstream:** [source repository](<https://github.com/staticintlucas/soml>) · [crates.io](<https://crates.io/crates/soml>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** soml (staticintlucas, "smol toml"): own lightweight parser and serde deserializer with its own Value and Datetime types; API-compatible with the toml crate by design but shares no code with toml_parser, toml or toml_edit (no dependency on any TOML crate).
 - **Local input API:** `soml::from_str::<soml::Table>(&str) -> Result<Table, Error>; Table iteration over (String, Value) with Value::{String, Integer(i64), Float(f64), Boolean, Datetime, Array, Table} (default datetime feature); value::Datetime { date: Option<LocalDate>, time: Option<LocalTime>, offset: Option<Offset> }`

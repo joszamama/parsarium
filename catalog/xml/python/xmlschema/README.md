@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.3.2`
+- **Upstream:** [source repository](<https://github.com/sissaschool/xmlschema>) · [PyPI](<https://pypi.org/project/xmlschema/>)
 - **License:** MIT
 - **Parser family:** xmlschema XMLResource namespace-tracking loader over CPython xml.etree.ElementTree.iterparse (C _elementtree XMLParser/TreeBuilder) / pyexpat / Expat 2.10.0
 - **Local input API:** `xmlschema.XMLResource(BytesIO(local XML bytes)) with default options (defuse='remote', lazy=False, iterparse=xml.etree.ElementTree.iterparse); XMLResource.root (Element.tag, attrib, text and tail) and XMLResource.get_xmlns(element) for each element's own xmlns declarations`

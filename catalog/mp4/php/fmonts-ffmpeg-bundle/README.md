@@ -1,6 +1,7 @@
 # fmonts/ffmpeg-bundle — MP4 / PHP
 
 - **Pinned release:** `0.8.7`
+- **Upstream:** [source repository](<https://github.com/fmonts/ffmpeg-bundle>) · [Packagist](<https://packagist.org/packages/fmonts/ffmpeg-bundle>)
 - **License:** MIT
 - **Parsed scope:** 2 × 2 H.264 video in MP4
 - **Underlying family:** FFmpeg native MOV/MP4 parser

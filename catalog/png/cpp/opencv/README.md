@@ -1,6 +1,7 @@
 # opencv — PNG / C++
 
 - **Pinned release:** `5.1.0`
+- **Upstream:** [source repository](<https://github.com/opencv/opencv>) · [Debian](<https://tracker.debian.org/pkg/opencv>)
 - **License:** Apache-2.0
 - **Parsed scope:** RGBA pixels
 - **Underlying family:** OpenCV imgcodecs PNG loader over linked libpng

@@ -1,6 +1,7 @@
 # exiv2 — MP4 / C++
 
 - **Pinned release:** `0.28.9`
+- **Upstream:** [source repository](<https://github.com/Exiv2/exiv2>) · [Debian](<https://tracker.debian.org/pkg/exiv2>)
 - **License:** GPL-2.0-or-later
 - **Parsed scope:** MP4 major brand and video dimensions from parsed QuickTime XMP metadata
 - **Underlying family:** Exiv2 native QuickTime/MP4 metadata parser

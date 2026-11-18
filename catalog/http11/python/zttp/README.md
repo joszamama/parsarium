@@ -1,6 +1,7 @@
 # zttp — HTTP/1.1 / Python
 
 - **Pinned release:** `0.0.35`
+- **Upstream:** [source repository](<https://github.com/Kludex/zttp>) · [PyPI](<https://pypi.org/project/zttp/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** HTTP/1.1 request head
 - **Underlying family:** zttp Zig parser

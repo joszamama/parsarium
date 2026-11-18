@@ -1,6 +1,7 @@
 # pdf2image — PDF / Python
 
 - **Pinned release:** `1.17.0`
+- **Upstream:** [source repository](<https://github.com/Belval/pdf2image>) · [PyPI](<https://pypi.org/project/pdf2image/>)
 - **License:** MIT
 - **Parsed scope:** rendered page dimensions
 - **Underlying family:** Poppler pdftoppm subprocess

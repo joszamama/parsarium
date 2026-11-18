@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `12.0.2`
+- **Upstream:** [source repository](<https://github.com/oguimbal/pgsql-ast-parser>) · [npm](<https://www.npmjs.com/package/pgsql-ast-parser>)
 - **License:** MIT
 - **Parser family:** pgsql-ast-parser nearley grammar and moo lexer
 - **Local input API:** `parse(local UTF-8 text) -> Statement[]`

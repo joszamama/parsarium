@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `9.1.0`
+- **Upstream:** [source repository](<https://github.com/goliajp/spg>) · [crates.io](<https://crates.io/crates/spg-sql>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** spg-sql hand-written PostgreSQL-dialect lexer and recursive-descent parser
 - **Local input API:** `parser::parse_statement(local UTF-8 text) -> Statement`

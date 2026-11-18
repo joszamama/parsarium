@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.2.6`
+- **Upstream:** [source repository](<https://github.com/go-rotini/yaml>) · [pkg.go.dev](<https://pkg.go.dev/github.com/go-rotini/yaml>)
 - **License:** MIT
 - **Parser family:** go-rotini/yaml: independent pure-Go YAML 1.2.2 scanner, parser and decoder (not a libyaml port)
 - **Local input API:** `yaml.UnmarshalWithOptions([]byte, *interface{}, yaml.WithOrderedMap()) over one complete local YAML byte slice; every mapping decodes into yaml.MapSlice in source order, scalars into Go string, integer, float64, bool or nil values`

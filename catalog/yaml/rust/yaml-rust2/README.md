@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.13.0`
+- **Upstream:** [source repository](<https://github.com/Ethiraric/yaml-rust2>) · [crates.io](<https://crates.io/crates/yaml-rust2>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** yaml-rust lineage: yaml-rust2 is the maintained fork of the selected yaml-rust (README: 'based on yaml-rust with fixes towards being compliant to the YAML test suite'). 708 of its 1,914 distinct non-test source lines longer than 25 characters also occur in yaml-rust 0.4.5 (37.0%; 63.2% of yaml-rust's 1,121). saphyr and saphyr-parser continue it.
 - **Local input API:** `yaml_rust2::YamlLoader::load_from_str(&str) -> Result<Vec<Yaml>, ScanError>; Yaml::{Real, Integer, String, Boolean, Array, Hash, Alias, Null, BadValue}`

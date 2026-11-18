@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.1.1`
+- **Upstream:** [source repository](<https://github.com/kitten/dns-message>) · [npm](<https://www.npmjs.com/package/dns-message>)
 - **License:** MIT
 - **Parser family:** dns-message (DataView rewrite derived from dns-packet)
 - **Local input API:** `decode(bytes: ArrayBufferView | ArrayBufferLike) -> Packet`

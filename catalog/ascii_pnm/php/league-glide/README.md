@@ -1,6 +1,7 @@
 # league/glide — ASCII PNM / PHP
 
 - **Pinned release:** `4.2.0`
+- **Upstream:** [source repository](<https://github.com/thephpleague/glide>) · [Packagist](<https://packagist.org/packages/league/glide>)
 - **License:** MIT
 - **Parsed scope:** converted PNG dimensions and MIME
 - **Underlying family:** ImageMagick PNM decoder

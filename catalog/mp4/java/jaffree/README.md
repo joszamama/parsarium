@@ -1,6 +1,7 @@
 # jaffree — MP4 / Java
 
 - **Pinned release:** `2024.08.29`
+- **Upstream:** [source repository](<https://github.com/kokorin/Jaffree>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.kokorin.jaffree/jaffree>)
 - **License:** Apache-2.0
 - **Parsed scope:** MP4 H.264/AAC stream codecs, video dimensions and audio rate
 - **Underlying family:** Jaffree wrapper over local FFprobe/FFmpeg

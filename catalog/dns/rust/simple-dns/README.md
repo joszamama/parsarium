@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.13.1`
+- **Upstream:** [source repository](<https://github.com/balliegojr/simple-dns>) · [crates.io](<https://crates.io/crates/simple-dns>)
 - **License:** MIT
 - **Parser family:** simple-dns (src/dns/packet.rs, header.rs, name.rs, rdata/*)
 - **Local input API:** `simple_dns::Packet::parse(data: &[u8]) -> Result<Packet, SimpleDnsError>`

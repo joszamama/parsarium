@@ -1,6 +1,7 @@
 # pdf — PDF / Rust
 
 - **Pinned release:** `0.10.0`
+- **Upstream:** [source repository](<https://github.com/pdf-rs/pdf>) · [crates.io](<https://crates.io/crates/pdf>)
 - **License:** MIT
 - **Parsed scope:** PDF page tree
 - **Underlying family:** pdf-rs parser

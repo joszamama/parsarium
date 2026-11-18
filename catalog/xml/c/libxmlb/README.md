@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.3.30`
+- **Upstream:** [source repository](<https://github.com/hughsie/libxmlb>) · [Debian](<https://tracker.debian.org/pkg/libxmlb>)
 - **License:** LGPL-2.1-or-later
 - **Parser family:** GLib GMarkup (via libxmlb's XbBuilder)
 - **Local input API:** `xb_builder_source_new(); xb_builder_source_load_xml(source, NUL-terminated copy of the local bytes, XB_BUILDER_SOURCE_FLAG_LITERAL_TEXT, &error); xb_builder_new(); xb_builder_import_source; xb_builder_compile(builder, XB_BUILDER_COMPILE_FLAG_NONE, NULL, &error); walk the XbSilo from xb_silo_get_root with xb_node_get_element, xb_node_attr_iter_init/next, xb_node_get_text, xb_node_get_child, xb_node_get_next and xb_node_get_tail`

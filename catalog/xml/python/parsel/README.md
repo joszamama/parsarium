@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.12.1`
+- **Upstream:** [source repository](<https://github.com/scrapy/parsel>) · [PyPI](<https://pypi.org/project/parsel/>)
 - **License:** BSD-3-Clause
 - **Parser family:** Parsel Selector over lxml.etree XMLParser (SafeXMLParser) over libxml2 2.15.4 XML parser
 - **Local input API:** `parsel.Selector(body=local XML bytes, type="xml"); Selector.xpath() with get()/getall() for namespace-uri(), local-name(), namespace::*, ancestor-or-self::*, //text(), //comment() and //processing-instruction(), plus Selector.attrib for attributes`

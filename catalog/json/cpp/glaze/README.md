@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `9.1.0`
+- **Upstream:** [source repository](<https://github.com/stephenberry/glaze>)
 - **License:** MIT
 - **Parser family:** Glaze own template-based JSON reader
 - **Local input API:** `glz::read_json(glz::generic_i64&, std::string) on a local byte-backed std::string, yielding an insertion-ordered generic JSON DOM with signed integer and double alternatives`

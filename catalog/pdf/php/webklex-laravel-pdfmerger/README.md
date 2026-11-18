@@ -1,6 +1,7 @@
 # webklex/laravel-pdfmerger — PDF / PHP
 
 - **Pinned release:** `1.3.2`
+- **Upstream:** [source repository](<https://github.com/Webklex/laravel-pdfmerger>) · [Packagist](<https://packagist.org/packages/webklex/laravel-pdfmerger>)
 - **License:** MIT
 - **Parsed scope:** One imported page object in emitted PDF
 - **Underlying family:** FPDI native PHP PDF object reader

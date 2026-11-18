@@ -1,6 +1,7 @@
 # github.com/lafriks/go-svg — SVG / Go
 
 - **Pinned release:** `v0.5.1`
+- **Upstream:** [source repository](<https://github.com/lafriks/go-svg>) · [pkg.go.dev](<https://pkg.go.dev/github.com/lafriks/go-svg>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** paths, width
 - **Underlying family:** oksvg lineage

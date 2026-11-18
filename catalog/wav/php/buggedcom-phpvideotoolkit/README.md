@@ -1,6 +1,7 @@
 # buggedcom/phpvideotoolkit — WAV / PHP
 
 - **Pinned release:** `2.2.5`
+- **Upstream:** [source repository](<https://github.com/buggedcom/phpvideotoolkit-v2>) · [Packagist](<https://packagist.org/packages/buggedcom/phpvideotoolkit>)
 - **License:** MIT
 - **Parsed scope:** 8 kHz mono PCM signed 16-bit WAV audio
 - **Underlying family:** FFmpeg native RIFF/WAVE parser

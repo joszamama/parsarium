@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `11.0.0`
+- **Upstream:** [source repository](<https://github.com/leethomason/tinyxml2>) · [Debian](<https://tracker.debian.org/pkg/tinyxml2>)
 - **License:** Zlib
 - **Parser family:** TinyXML2 own in-memory XML parser
 - **Local input API:** `tinyxml2::XMLDocument::Parse(const char* xml, size_t nBytes) over a local byte buffer; TinyXML2 does no namespace processing, so the adapter resolves prefixes from in-scope xmlns attributes`

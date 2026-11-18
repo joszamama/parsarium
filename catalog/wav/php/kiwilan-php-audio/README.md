@@ -1,6 +1,7 @@
 # kiwilan/php-audio — WAV / PHP
 
 - **Pinned release:** `4.0.02`
+- **Upstream:** [source repository](<https://github.com/kiwilan/php-audio>) · [Packagist](<https://packagist.org/packages/kiwilan/php-audio>)
 - **License:** MIT
 - **Parsed scope:** RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count and PCM codec
 - **Underlying family:** getID3 native RIFF/WAVE parser

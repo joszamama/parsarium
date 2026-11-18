@@ -1,6 +1,7 @@
 # alchemy/zippy — ZIP / PHP
 
 - **Pinned release:** `2.0.0`
+- **Upstream:** [source repository](<https://github.com/alchemy-fr/Zippy>) · [Packagist](<https://packagist.org/packages/alchemy/zippy>)
 - **License:** MIT
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** Alchemy Zippy wrapper over PHP ZipArchive

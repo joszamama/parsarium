@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.0.1`
+- **Upstream:** [source repository](<https://github.com/auxten/postgresql-parser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/auxten/postgresql-parser/pkg/sql/parser>)
 - **License:** BUSL-1.1 with Change License Apache-2.0 (Change Date 2023-04-01), with BSD-style vitess portions
 - **Parser family:** CockroachDB PostgreSQL-compatible grammar (v20.1 extraction, goyacc sql.y) and scanner
 - **Local input API:** `parser.Parse(local SQL text) -> parser.Statements`

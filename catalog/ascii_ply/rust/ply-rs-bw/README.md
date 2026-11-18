@@ -1,6 +1,7 @@
 # ply-rs-bw — ASCII PLY / Rust
 
 - **Pinned release:** `4.0.1`
+- **Upstream:** [source repository](<https://github.com/bourumir-wyngs/ply-rs>) · [crates.io](<https://crates.io/crates/ply-rs-bw>)
 - **License:** MIT
 - **Parsed scope:** complete ASCII PLY: header, vertices, faces
 - **Underlying family:** ply-rs fork

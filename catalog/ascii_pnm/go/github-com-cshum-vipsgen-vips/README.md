@@ -1,6 +1,7 @@
 # github.com/cshum/vipsgen/vips — ASCII PNM / Go
 
 - **Pinned release:** `v1.3.11`
+- **Upstream:** [source repository](<https://github.com/cshum/vipsgen>) · [pkg.go.dev](<https://pkg.go.dev/github.com/cshum/vipsgen/vips>)
 - **License:** MIT
 - **Parsed scope:** P3 pixels and dimensions
 - **Underlying family:** libvips ppmload

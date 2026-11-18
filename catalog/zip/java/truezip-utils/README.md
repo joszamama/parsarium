@@ -1,6 +1,7 @@
 # truezip-utils — ZIP / Java
 
 - **Pinned release:** `1.2`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/org.codehaus.mojo/truezip-utils>)
 - **License:** Apache-2.0
 - **Parsed scope:** ZIP entry name and decompressed content from a local archive
 - **Underlying family:** MojoHaus TrueZIP wrapper over TrueZIP ZIP driver

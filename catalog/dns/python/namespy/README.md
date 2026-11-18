@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.0`
+- **Upstream:** [source repository](<https://github.com/b1tninja/namespy>) · [PyPI](<https://pypi.org/project/namespy/>)
 - **License:** Apache-2.0
 - **Parser family:** namespy (packet.py DnsPacket over names.py DomainName and rdata.py RData classes)
 - **Local input API:** `namespy.DnsPacket.parse(data: bytes, offset: int = 0, *, strict: bool = True) -> tuple[DnsPacket, int]`

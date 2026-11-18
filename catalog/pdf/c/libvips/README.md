@@ -1,6 +1,7 @@
 # libvips — PDF / C
 
 - **Pinned release:** `8.18.7`
+- **Upstream:** [source repository](<https://github.com/libvips/libvips>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** PDF page count and first page dimensions from PDF loader header
 - **Underlying family:** libvips vips-poppler module over Poppler PDF parser

@@ -1,6 +1,7 @@
 # libagar — ASCII PLY / C
 
 - **Pinned release:** `1.7.1`
+- **Upstream:** [source repository](<https://github.com/JulNadeauCA/libagar>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** three vertices and one triangular facet with parsed vertex ids from ASCII PLY
 - **Underlying family:** Agar-SG native PLY loader (sg/sg_load_ply.c)

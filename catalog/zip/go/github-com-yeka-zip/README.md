@@ -1,6 +1,7 @@
 # github.com/yeka/zip — ZIP / Go
 
 - **Pinned release:** `v0.0.0-20231116150916-03d6312748a9`
+- **Upstream:** [source repository](<https://github.com/yeka/zip>) · [pkg.go.dev](<https://pkg.go.dev/github.com/yeka/zip>)
 - **License:** MIT
 - **Parsed scope:** entry_name+decompressed_text
 - **Underlying family:** yeka/alexmullins ZIP lineage

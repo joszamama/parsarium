@@ -1,6 +1,7 @@
 # github.com/unixpickle/model3d/model3d — ASCII PLY / Go
 
 - **Pinned release:** `v0.4.23`
+- **Upstream:** [source repository](<https://github.com/unixpickle/model3d>) · [pkg.go.dev](<https://pkg.go.dev/github.com/unixpickle/model3d/model3d>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** ASCII PLY with x/y/z (optional red/green/blue) vertices and a vertex_index triangle face list, returned as triangles and a vertex colour map
 - **Underlying family:** model3d mesh reader over the model3d fileformats PLYReader (shared model3d PLY parser family)

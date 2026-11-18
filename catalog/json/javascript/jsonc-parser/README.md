@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.3.1`
+- **Upstream:** [source repository](<https://github.com/microsoft/node-jsonc-parser>) · [npm](<https://www.npmjs.com/package/jsonc-parser>)
 - **License:** MIT
 - **Parser family:** Microsoft jsonc-parser scanner and event/tree parser
 - **Local input API:** `parseTree(text, errors, {disallowComments:true, allowTrailingComma:false, allowEmptyContent:false}) after strict UTF-8 decoding of local Buffer; zero errors required; exact type-tagged AST projection`

@@ -1,6 +1,7 @@
 # mikehaertl/php-pdftk — PDF / PHP
 
 - **Pinned release:** `0.14.4`
+- **Upstream:** [source repository](<https://github.com/mikehaertl/php-pdftk>) · [Packagist](<https://packagist.org/packages/mikehaertl/php-pdftk>)
 - **License:** MIT
 - **Parsed scope:** One PDF page and document title
 - **Underlying family:** pdftk-java PDF parser

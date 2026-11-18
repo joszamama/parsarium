@@ -8,16 +8,16 @@ Ten verified XML parser paths selected, reaching the cell ceiling, within the fi
 
 ## Third-party parsers
 
-- [quick-xml](quick-xml/README.md) — verified Docker harness
-- [roxmltree](roxmltree/README.md) — verified Docker harness
-- [xml](xml/README.md) — verified Docker harness
-- [xmlparser](xmlparser/README.md) — verified Docker harness
-- [xml5ever](xml5ever/README.md) — verified Docker harness
-- [rxml](rxml/README.md) — verified Docker harness
-- [uppsala](uppsala/README.md) — verified Docker harness
-- [RustyXML](rustyxml/README.md) — verified Docker harness
-- [minidom](minidom/README.md) — verified Docker harness
-- [instant-xml](instant-xml/README.md) — verified Docker harness
+- [quick-xml](quick-xml/README.md) — verified Docker harness · [source repository](<https://github.com/tafia/quick-xml>) · [crates.io](<https://crates.io/crates/quick-xml>)
+- [roxmltree](roxmltree/README.md) — verified Docker harness · [source repository](<https://github.com/RazrFalcon/roxmltree>) · [crates.io](<https://crates.io/crates/roxmltree>)
+- [xml](xml/README.md) — verified Docker harness · [source repository](<https://github.com/kornelski/xml-rs>) · [crates.io](<https://crates.io/crates/xml>)
+- [xmlparser](xmlparser/README.md) — verified Docker harness · [source repository](<https://github.com/RazrFalcon/xmlparser>) · [crates.io](<https://crates.io/crates/xmlparser>)
+- [xml5ever](xml5ever/README.md) — verified Docker harness · [source repository](<https://github.com/servo/html5ever>) · [crates.io](<https://crates.io/crates/xml5ever>)
+- [rxml](rxml/README.md) — verified Docker harness · [source repository](<https://codeberg.org/jssfr/rxml>) · [crates.io](<https://crates.io/crates/rxml>)
+- [uppsala](uppsala/README.md) — verified Docker harness · [source repository](<https://github.com/kushaldas/uppsala>) · [crates.io](<https://crates.io/crates/uppsala>)
+- [RustyXML](rustyxml/README.md) — verified Docker harness · [source repository](<https://github.com/Florob/RustyXML>) · [crates.io](<https://crates.io/crates/RustyXML>)
+- [minidom](minidom/README.md) — verified Docker harness · [source repository](<https://gitlab.com/xmpp-rs/xmpp-rs>) · [crates.io](<https://crates.io/crates/minidom>)
+- [instant-xml](instant-xml/README.md) — verified Docker harness · [source repository](<https://github.com/djc/instant-xml>) · [crates.io](<https://crates.io/crates/instant-xml>)
 
 ## Standard and runtime APIs
 

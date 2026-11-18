@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.2.3`
+- **Upstream:** [source repository](<https://github.com/json5/json5>) · [npm](<https://www.npmjs.com/package/json5>)
 - **License:** MIT
 - **Parser family:** json5 character lexer and parse-state machine
 - **Local input API:** `JSON5.parse(text) on local bytes decoded as strict UTF-8 text; summary and type-tagged tree walk the returned value`

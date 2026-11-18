@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.8`
+- **Upstream:** [source repository](<https://github.com/svenshi/oxidns>) · [crates.io](<https://crates.io/crates/oxidns-proto>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** oxidns-proto wire codec (src/wire/codec.rs, name.rs, rdata/*)
 - **Local input API:** `oxidns_proto::Message::from_bytes(bytes: &[u8]) -> Result<Message>`

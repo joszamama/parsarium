@@ -1,6 +1,7 @@
 # node-video-lib — MP4 / JavaScript
 
 - **Pinned release:** `2.5.0`
+- **Upstream:** [source repository](<https://github.com/gkozlenko/node-video-lib>) · [npm](<https://www.npmjs.com/package/node-video-lib>)
 - **License:** MIT
 - **Parsed scope:** duration+tracks
 - **Underlying family:** node-video-lib

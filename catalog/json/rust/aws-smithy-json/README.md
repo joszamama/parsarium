@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.65.1`
+- **Upstream:** [source repository](<https://github.com/smithy-lang/smithy-rs>) · [crates.io](<https://crates.io/crates/aws-smithy-json>)
 - **License:** Apache-2.0
 - **Parser family:** aws-smithy-json token-stream parser (smithy-rs), used by generated AWS SDK deserializers; own src/deserialize.rs
 - **Local input API:** `aws_smithy_json::deserialize::json_token_iter(&[u8]) -> Iterator<Item=Result<Token, DeserializeError>>; Token::{StartObject, EndObject, ObjectKey, StartArray, EndArray, ValueString, ValueNumber, ValueBool, ValueNull}; EscapedStr::to_unescaped()`

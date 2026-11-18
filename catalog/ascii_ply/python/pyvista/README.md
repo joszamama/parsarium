@@ -1,6 +1,7 @@
 # pyvista — ASCII PLY / Python
 
 - **Pinned release:** `0.49.2`
+- **Upstream:** [source repository](<https://github.com/pyvista/pyvista>) · [PyPI](<https://pypi.org/project/pyvista/>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY triangle vertices and face count
 - **Underlying family:** VTK PLYReader

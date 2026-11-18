@@ -1,6 +1,7 @@
 # Pillow — PNG / Python
 
 - **Pinned release:** `13.0.0`
+- **Upstream:** [source repository](<https://github.com/python-pillow/Pillow>) · [PyPI](<https://pypi.org/project/Pillow/>)
 - **License:** MIT-CMU
 - **Parsed scope:** pixels
 - **Underlying family:** Pillow PNG

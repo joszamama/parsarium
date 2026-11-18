@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v3.0.8`
+- **Upstream:** [source repository](<https://github.com/simplesamlphp/xml-common>) · [Packagist](<https://packagist.org/packages/simplesamlphp/xml-common>)
 - **License:** LGPL-2.1-or-later
 - **Parser family:** libxml2 via PHP Dom\XMLDocument, shared with veewee/xml and the other libxml2 paths
 - **Local input API:** `SimpleSAML\XML\DOMDocumentFactory::fromString(string $xml) with its default options (LIBXML_COMPACT | LIBXML_NONET | LIBXML_NSCLEAN | LIBXML_NO_XXE): rejects whitespace-only input and DOCTYPE markup, loads the string with Dom\XMLDocument::createFromString and returns the Dom\XMLDocument, walked namespace-aware`

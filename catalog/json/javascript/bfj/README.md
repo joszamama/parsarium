@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `9.1.4`
+- **Upstream:** [source repository](<https://gitlab.com/philbooth/bfj>) · [npm](<https://www.npmjs.com/package/bfj>)
 - **License:** MIT
 - **Parser family:** bfj asynchronous JSON walker
 - **Local input API:** `bfj.parse(Readable.from([local Buffer]), {ndjson:false}) returns a Promise after consuming a complete JSON stream`

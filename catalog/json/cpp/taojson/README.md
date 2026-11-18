@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.0-beta.14`
+- **Upstream:** [source repository](<https://github.com/taocpp/json>)
 - **License:** MIT
 - **Parser family:** taoJSON own JSON grammar on the PEGTL engine
 - **Local input API:** `tao::json::from_string(const char*, std::size_t, source) on local bytes, yielding a tao::json::value with signed, unsigned and double number kinds; objects are std::map with sorted keys`

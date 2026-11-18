@@ -1,6 +1,7 @@
 # zendframework/zend-http — HTTP/1.1 / PHP
 
 - **Pinned release:** `2.11.2`
+- **Upstream:** [source repository](<https://github.com/zendframework/zend-http>) · [Packagist](<https://packagist.org/packages/zendframework/zend-http>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** single valid GET request line and Host, X-Parsarium, Connection headers
 - **Underlying family:** Zend/Laminas HTTP message parser lineage

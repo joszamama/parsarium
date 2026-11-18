@@ -1,6 +1,7 @@
 # open3d — ASCII PLY / Python
 
 - **Pinned release:** `0.20.0`
+- **Upstream:** [source repository](<https://github.com/isl-org/Open3D>) · [PyPI](<https://pypi.org/project/open3d/>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY triangle vertices and face count
 - **Underlying family:** Open3D PLY reader

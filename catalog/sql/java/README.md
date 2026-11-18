@@ -8,16 +8,16 @@ Ten verified Java SQL paths, the ceiling, after a bounded Maven Central search (
 
 ## Third-party parsers
 
-- [org.jooq:jooq](org-jooq-jooq/README.md) — verified Docker harness
-- [com.alibaba:druid](com-alibaba-druid/README.md) — verified Docker harness
-- [com.facebook.presto:presto-parser](com-facebook-presto-presto-parser/README.md) — verified Docker harness
-- [org.apache.calcite:calcite-core](org-apache-calcite-calcite-core/README.md) — verified Docker harness
-- [org.apache.hive:hive-exec](org-apache-hive-hive-exec/README.md) — verified Docker harness
-- [com.github.jsqlparser:jsqlparser](com-github-jsqlparser-jsqlparser/README.md) — verified Docker harness
-- [org.apache.spark:spark-catalyst_2.12](org-apache-spark-spark-catalyst-2-12/README.md) — verified Docker harness
-- [io.trino:trino-parser](io-trino-trino-parser/README.md) — verified Docker harness
-- [org.apache.flink:flink-sql-parser](org-apache-flink-flink-sql-parser/README.md) — verified Docker harness
-- [org.apache.shardingsphere:shardingsphere-sql-parser-engine](org-apache-shardingsphere-shardingsphere-sql-parser-engine/README.md) — verified Docker harness
+- [org.jooq:jooq](org-jooq-jooq/README.md) — verified Docker harness · [source repository](<https://github.com/jOOQ/jOOQ>) · [Maven Central](<https://central.sonatype.com/artifact/org.jooq/jooq>)
+- [com.alibaba:druid](com-alibaba-druid/README.md) — verified Docker harness · [source repository](<https://github.com/alibaba/druid>) · [Maven Central](<https://central.sonatype.com/artifact/com.alibaba/druid>)
+- [com.facebook.presto:presto-parser](com-facebook-presto-presto-parser/README.md) — verified Docker harness · [source repository](<https://github.com/prestodb/presto>) · [Maven Central](<https://central.sonatype.com/artifact/com.facebook.presto/presto-parser>)
+- [org.apache.calcite:calcite-core](org-apache-calcite-calcite-core/README.md) — verified Docker harness · [source repository](<https://github.com/apache/calcite>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.calcite/calcite-core>)
+- [org.apache.hive:hive-exec](org-apache-hive-hive-exec/README.md) — verified Docker harness · [Maven Central](<https://central.sonatype.com/artifact/org.apache.hive/hive-parser>)
+- [com.github.jsqlparser:jsqlparser](com-github-jsqlparser-jsqlparser/README.md) — verified Docker harness · [source repository](<https://github.com/JSQLParser/JSqlParser>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.jsqlparser/jsqlparser>)
+- [org.apache.spark:spark-catalyst_2.12](org-apache-spark-spark-catalyst-2-12/README.md) — verified Docker harness · [source repository](<https://github.com/apache/spark>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.spark/spark-catalyst_2.12>)
+- [io.trino:trino-parser](io-trino-trino-parser/README.md) — verified Docker harness · [source repository](<https://github.com/trinodb/trino>) · [Maven Central](<https://central.sonatype.com/artifact/io.trino/trino-parser>)
+- [org.apache.flink:flink-sql-parser](org-apache-flink-flink-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/apache/flink>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.flink/flink-sql-parser>)
+- [org.apache.shardingsphere:shardingsphere-sql-parser-engine](org-apache-shardingsphere-shardingsphere-sql-parser-engine/README.md) — verified Docker harness · [source repository](<https://github.com/apache/shardingsphere>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.shardingsphere/shardingsphere-sql-parser-engine>)
 
 ## Standard and runtime APIs
 

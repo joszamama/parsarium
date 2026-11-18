@@ -1,6 +1,7 @@
 # buggedcom/phpvideotoolkit — MP3 / PHP
 
 - **Pinned release:** `2.2.5`
+- **Upstream:** [source repository](<https://github.com/buggedcom/phpvideotoolkit-v2>) · [Packagist](<https://packagist.org/packages/buggedcom/phpvideotoolkit>)
 - **License:** MIT
 - **Parsed scope:** ID3v2.3 text fields and MP3 audio codec/sample rate
 - **Underlying family:** FFmpeg native MP3 and ID3 parser

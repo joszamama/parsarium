@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.5.0`
+- **Upstream:** [source repository](<https://github.com/fktn-k/fkYAML>)
 - **License:** MIT
 - **Parser family:** fkYAML (own header-only lexer, scalar scanner/parser and deserializer)
 - **Local input API:** `fkyaml::basic_node<std::vector, fkyaml::ordered_map>::deserialize(ItrType begin, ItrType end); is_mapping/is_sequence/is_null/is_boolean/is_integer/is_float_number/is_string with as_map/as_seq/as_bool/as_int/as_float/as_str`

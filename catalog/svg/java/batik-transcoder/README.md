@@ -1,6 +1,7 @@
 # batik-transcoder — SVG / Java
 
 - **Pinned release:** `1.20`
+- **Upstream:** [source repository](<https://github.com/apache/xmlgraphics-batik>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.xmlgraphics/batik-transcoder>)
 - **License:** Apache-2.0
 - **Parsed scope:** Rendered SVG pixels
 - **Underlying family:** Apache Batik SVG renderer, using batik-codec for PNG output

@@ -1,6 +1,7 @@
 # laminas/laminas-diactoros — HTTP/1.1 / PHP
 
 - **Pinned release:** `3.10.0`
+- **Upstream:** [source repository](<https://github.com/laminas/laminas-diactoros>) · [Packagist](<https://packagist.org/packages/laminas/laminas-diactoros>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** single valid GET request line and Host, X-Parsarium, Connection headers
 - **Underlying family:** Diactoros HTTP message parser lineage

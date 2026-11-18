@@ -1,6 +1,7 @@
 # zip4j — ZIP / Java
 
 - **Pinned release:** `2.11.6`
+- **Upstream:** [source repository](<https://github.com/srikanth-lingala/zip4j>) · [Maven Central](<https://central.sonatype.com/artifact/net.lingala.zip4j/zip4j>)
 - **License:** Apache-2.0
 - **Parsed scope:** ZIP entry name and decompressed content from a local archive
 - **Underlying family:** zip4j ZIP parser

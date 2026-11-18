@@ -1,6 +1,7 @@
 # pyntcloud — ASCII PLY / Python
 
 - **Pinned release:** `0.3.1`
+- **Upstream:** [source repository](<https://github.com/daavoo/pyntcloud>) · [PyPI](<https://pypi.org/project/pyntcloud/>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY triangle vertices and face count
 - **Underlying family:** pyntcloud PLY reader

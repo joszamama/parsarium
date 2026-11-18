@@ -1,6 +1,7 @@
 # svgpathtools — SVG / Python
 
 - **Pinned release:** `1.8.0`
+- **Upstream:** [source repository](<https://github.com/mathandy/svgpathtools>) · [PyPI](<https://pypi.org/project/svgpathtools/>)
 - **License:** MIT
 - **Parsed scope:** SVG path and shape geometry
 - **Underlying family:** svgpathtools SVG path and shape reader

@@ -1,6 +1,7 @@
 # sfml — WAV / C++
 
 - **Pinned release:** `3.0.2`
+- **Upstream:** [source repository](<https://github.com/SFML/SFML>)
 - **License:** Zlib
 - **Parsed scope:** WAV sample rate, channels, frame count and four decoded PCM samples
 - **Underlying family:** SFML audio sound-file decoder

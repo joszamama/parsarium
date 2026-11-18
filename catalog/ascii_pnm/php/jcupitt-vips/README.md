@@ -1,6 +1,7 @@
 # jcupitt/vips — ASCII PNM / PHP
 
 - **Pinned release:** `v2.6.1`
+- **Upstream:** [source repository](<https://github.com/libvips/php-vips>) · [Packagist](<https://packagist.org/packages/jcupitt/vips>)
 - **License:** MIT
 - **Parsed scope:** decoded dimensions and RGB pixels
 - **Underlying family:** libvips PPM/PNM decoder

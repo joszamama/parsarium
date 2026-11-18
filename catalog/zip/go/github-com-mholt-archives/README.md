@@ -1,6 +1,7 @@
 # github.com/mholt/archives — ZIP / Go
 
 - **Pinned release:** `v0.1.5`
+- **Upstream:** [source repository](<https://github.com/mholt/archives>) · [pkg.go.dev](<https://pkg.go.dev/github.com/mholt/archives>)
 - **License:** MIT
 - **Parsed scope:** entry_name+decompressed_text
 - **Underlying family:** mholt/archives/STARRY-S zip

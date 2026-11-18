@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.61.1`
+- **Upstream:** [source repository](<https://github.com/wseaton/sqloxide>) · [PyPI](<https://pypi.org/project/sqloxide/>)
 - **License:** MIT
 - **Parser family:** sqlparser-rs
 - **Local input API:** `sqloxide.parse_sql(local SQL text, dialect="generic") -> list of statement ASTs (Python dicts)`

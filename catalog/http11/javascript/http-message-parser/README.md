@@ -1,6 +1,7 @@
 # http-message-parser — HTTP/1.1 / JavaScript
 
 - **Pinned release:** `0.0.34`
+- **Upstream:** [source repository](<https://github.com/miguelmota/http-message-parser>) · [npm](<https://www.npmjs.com/package/http-message-parser>)
 - **License:** MIT
 - **Parsed scope:** request
 - **Underlying family:** http-message-parser

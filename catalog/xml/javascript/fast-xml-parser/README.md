@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `5.12.1`
+- **Upstream:** [source repository](<https://github.com/NaturalIntelligence/fast-xml-parser>) · [npm](<https://www.npmjs.com/package/fast-xml-parser>)
 - **License:** MIT
 - **Parser family:** fast-xml-parser own string scanner (OrderedObjParser + XMLValidator)
 - **Local input API:** `new XMLParser({preserveOrder: true, ignoreAttributes: false, commentPropName: '#comment', trimValues: false, parseTagValue: false, htmlEntities: true}).parse(Buffer, true) on local bytes; the package decodes the Buffer with Buffer#toString and runs its own XMLValidator first. fast-xml-parser does no namespace processing, so the adapter resolves element and attribute prefixes from in-scope xmlns attributes and rejects unbound prefixes and duplicate expanded attributes`

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.1.0`
+- **Upstream:** [source repository](<https://github.com/bobfang1992/pytomlpp>) · [PyPI](<https://pypi.org/project/pytomlpp/>)
 - **License:** MIT
 - **Parser family:** toml++ (marzer/tomlplusplus) via pybind11: vendored toml++ snapshot (lib_version 3.4.0); shared with the C++ toml++ path
 - **Local input API:** `pytomlpp.loads(decoded local TOML text) -> dict; pytomlpp.load(pathlib.Path) and pytomlpp.load(local binary stream, mode="rb") give the same typed tree on both controls`

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.14.3`
+- **Upstream:** [source repository](<https://github.com/pydantic/pydantic>) · [PyPI](<https://pypi.org/project/pydantic/>)
 - **License:** MIT
 - **Parser family:** pydantic-core 2.50.4 / Jiter 0.18.0 Rust parser
 - **Local input API:** `TypeAdapter[Any].validate_json(local UTF-8 bytes)`

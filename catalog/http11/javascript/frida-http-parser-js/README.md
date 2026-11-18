@@ -1,6 +1,7 @@
 # @frida/http-parser-js — HTTP/1.1 / JavaScript
 
 - **Pinned release:** `1.1.0`
+- **Upstream:** [source repository](<https://github.com/frida-packages/gumjs-http-parser>) · [npm](<https://www.npmjs.com/package/@frida/http-parser-js>)
 - **License:** MIT
 - **Parsed scope:** request
 - **Underlying family:** http-parser-js

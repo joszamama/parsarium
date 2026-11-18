@@ -1,6 +1,7 @@
 # mediabunny — MP4 / JavaScript
 
 - **Pinned release:** `1.65.2`
+- **Upstream:** [source repository](<https://github.com/Vanilagy/mediabunny>) · [npm](<https://www.npmjs.com/package/mediabunny>)
 - **License:** MPL-2.0
 - **Parsed scope:** tracks+duration
 - **Underlying family:** mediabunny

@@ -1,6 +1,7 @@
 # yauzl — ZIP / JavaScript
 
 - **Pinned release:** `3.4.0`
+- **Upstream:** [source repository](<https://github.com/thejoshwolfe/yauzl>) · [npm](<https://www.npmjs.com/package/yauzl>)
 - **License:** MIT
 - **Parsed scope:** entries_and_content
 - **Underlying family:** yauzl

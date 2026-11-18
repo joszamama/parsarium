@@ -1,6 +1,7 @@
 # propa/tcpdi — PDF / PHP
 
 - **Pinned release:** `v1.3.5`
+- **Upstream:** [source repository](<https://github.com/kulbakin/tcpdi>) · [Packagist](<https://packagist.org/packages/propa/tcpdi>)
 - **License:** Apache-2.0
 - **Parsed scope:** One PDF page, 216 × 279 mm rounded imported MediaBox
 - **Underlying family:** TCPDI FPDI-derived PHP PDF parser

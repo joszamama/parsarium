@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.3.2`
+- **Upstream:** [source repository](<https://github.com/ugorji/go>) · [pkg.go.dev](<https://pkg.go.dev/github.com/ugorji/go/codec>)
 - **License:** MIT
 - **Parser family:** ugorji/go-codec JSON decoder
 - **Local input API:** `codec.NewDecoderBytes([]byte, &codec.JsonHandle{}).Decode(&value)`

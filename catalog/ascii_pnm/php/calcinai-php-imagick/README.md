@@ -1,6 +1,7 @@
 # calcinai/php-imagick — ASCII PNM / PHP
 
 - **Pinned release:** `v0.1.2`
+- **Upstream:** [source repository](<https://github.com/calcinai/php-imagick>) · [Packagist](<https://packagist.org/packages/calcinai/php-imagick>)
 - **License:** MIT
 - **Parsed scope:** decoded P6 dimensions and RGB pixels
 - **Underlying family:** ImageMagick PNM decoder

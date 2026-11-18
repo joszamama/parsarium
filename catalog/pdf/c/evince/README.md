@@ -1,6 +1,7 @@
 # evince — PDF / C
 
 - **Pinned release:** `48.4`
+- **Upstream:** [source repository](<https://gitlab.gnome.org/GNOME/evince>) · [Debian](<https://tracker.debian.org/pkg/evince>)
 - **License:** GPL-2.0-or-later
 - **Parsed scope:** PDF page count through Evince libdocument C API
 - **Underlying family:** Evince PDF backend over Poppler GLib

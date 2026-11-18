@@ -1,6 +1,7 @@
 # github.com/valyala/fasthttp — HTTP/1.1 / Go
 
 - **Pinned release:** `v1.78.0`
+- **Upstream:** [source repository](<https://github.com/valyala/fasthttp>) · [pkg.go.dev](<https://pkg.go.dev/github.com/valyala/fasthttp>)
 - **License:** MIT
 - **Parsed scope:** request message
 - **Underlying family:** fasthttp HTTP/1 parser

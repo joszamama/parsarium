@@ -1,6 +1,7 @@
 # indiehd/audio-manipulator — MP3 / PHP
 
 - **Pinned release:** `v4.1.0`
+- **Upstream:** [source repository](<https://github.com/indiehd/audio-manipulator>) · [Packagist](<https://packagist.org/packages/indiehd/audio-manipulator>)
 - **License:** MIT
 - **Parsed scope:** ID3v2.3 title, artist, album, and major version
 - **Underlying family:** getID3 native MP3 and ID3v2 parser

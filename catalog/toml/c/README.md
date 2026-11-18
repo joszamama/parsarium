@@ -8,7 +8,7 @@ Bounded TOML search captured 2026-11-17: 3 queries, 100 recorded hits (86 unique
 
 ## Third-party parsers
 
-- [tomlc17](tomlc17/README.md) — verified Docker harness
+- [tomlc17](tomlc17/README.md) — verified Docker harness · [source repository](<https://github.com/cktan/tomlc17>)
 
 ## Standard and runtime APIs
 

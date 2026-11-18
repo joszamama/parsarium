@@ -1,6 +1,7 @@
 # scipy — WAV / Python
 
 - **Pinned release:** `1.18.1`
+- **Upstream:** [source repository](<https://github.com/scipy/scipy>) · [PyPI](<https://pypi.org/project/scipy/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** PCM samples
 - **Underlying family:** SciPy WAV parser

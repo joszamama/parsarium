@@ -1,6 +1,7 @@
 # pdf-inspector — PDF / Rust
 
 - **Pinned release:** `1.25.2`
+- **Upstream:** [source repository](<https://github.com/firecrawl/pdf-inspector>) · [crates.io](<https://crates.io/crates/pdf-inspector>)
 - **License:** MIT
 - **Parsed scope:** PDF page count and Info title
 - **Underlying family:** lopdf

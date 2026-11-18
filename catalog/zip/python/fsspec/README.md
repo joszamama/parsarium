@@ -1,6 +1,7 @@
 # fsspec — ZIP / Python
 
 - **Pinned release:** `2026.9.0`
+- **Upstream:** [source repository](<https://github.com/fsspec/filesystem_spec>) · [PyPI](<https://pypi.org/project/fsspec/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** DEFLATE ZIP entry name and content
 - **Underlying family:** fsspec ZipFileSystem via CPython zipfile

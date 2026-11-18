@@ -8,16 +8,16 @@ Ten verified Go SQL paths after a bounded pkg.go.dev search (three queries, firs
 
 ## Third-party parsers
 
-- [vitess.io/vitess/go/vt/sqlparser](vitess-io-vitess-go-vt-sqlparser/README.md) — verified Docker harness
-- [github.com/xwb1989/sqlparser](github-com-xwb1989-sqlparser/README.md) — verified Docker harness
-- [github.com/pingcap/tidb/pkg/parser](github-com-pingcap-tidb-pkg-parser/README.md) — verified Docker harness
-- [github.com/blastrain/vitess-sqlparser/sqlparser](github-com-blastrain-vitess-sqlparser-sqlparser/README.md) — verified Docker harness
-- [github.com/pganalyze/pg_query_go/v6](github-com-pganalyze-pg-query-go-v6/README.md) — verified Docker harness
-- [github.com/auxten/postgresql-parser/pkg/sql/parser](github-com-auxten-postgresql-parser-pkg-sql-parser/README.md) — verified Docker harness
-- [github.com/rqlite/sql](github-com-rqlite-sql/README.md) — verified Docker harness
-- [github.com/AfterShip/clickhouse-sql-parser/parser](github-com-aftership-clickhouse-sql-parser-parser/README.md) — verified Docker harness
-- [github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser](github-com-cockroachdb-cockroachdb-parser-pkg-sql-parser/README.md) — verified Docker harness
-- [github.com/akito0107/xsqlparser](github-com-akito0107-xsqlparser/README.md) — verified Docker harness
+- [vitess.io/vitess/go/vt/sqlparser](vitess-io-vitess-go-vt-sqlparser/README.md) — verified Docker harness · [source repository](<https://github.com/vitessio/vitess>) · [pkg.go.dev](<https://pkg.go.dev/vitess.io/vitess/go/vt/sqlparser>)
+- [github.com/xwb1989/sqlparser](github-com-xwb1989-sqlparser/README.md) — verified Docker harness · [source repository](<https://github.com/xwb1989/sqlparser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/xwb1989/sqlparser>)
+- [github.com/pingcap/tidb/pkg/parser](github-com-pingcap-tidb-pkg-parser/README.md) — verified Docker harness · [source repository](<https://github.com/pingcap/tidb>) · [pkg.go.dev](<https://pkg.go.dev/github.com/pingcap/tidb/pkg/parser>)
+- [github.com/blastrain/vitess-sqlparser/sqlparser](github-com-blastrain-vitess-sqlparser-sqlparser/README.md) — verified Docker harness · [source repository](<https://github.com/blastrain/vitess-sqlparser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/blastrain/vitess-sqlparser/sqlparser>)
+- [github.com/pganalyze/pg_query_go/v6](github-com-pganalyze-pg-query-go-v6/README.md) — verified Docker harness · [source repository](<https://github.com/pganalyze/pg_query_go>) · [pkg.go.dev](<https://pkg.go.dev/github.com/pganalyze/pg_query_go/v6>)
+- [github.com/auxten/postgresql-parser/pkg/sql/parser](github-com-auxten-postgresql-parser-pkg-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/auxten/postgresql-parser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/auxten/postgresql-parser/pkg/sql/parser>)
+- [github.com/rqlite/sql](github-com-rqlite-sql/README.md) — verified Docker harness · [source repository](<https://github.com/rqlite/sql>) · [pkg.go.dev](<https://pkg.go.dev/github.com/rqlite/sql>)
+- [github.com/AfterShip/clickhouse-sql-parser/parser](github-com-aftership-clickhouse-sql-parser-parser/README.md) — verified Docker harness · [source repository](<https://github.com/AfterShip/clickhouse-sql-parser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/AfterShip/clickhouse-sql-parser/parser>)
+- [github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser](github-com-cockroachdb-cockroachdb-parser-pkg-sql-parser/README.md) — verified Docker harness · [source repository](<https://github.com/cockroachdb/cockroachdb-parser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/cockroachdb/cockroachdb-parser/pkg/sql/parser>)
+- [github.com/akito0107/xsqlparser](github-com-akito0107-xsqlparser/README.md) — verified Docker harness · [source repository](<https://github.com/akito0107/xsqlparser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/akito0107/xsqlparser>)
 
 ## Standard and runtime APIs
 

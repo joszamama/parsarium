@@ -1,6 +1,7 @@
 # libmicrohttpd — HTTP/1.1 / C
 
 - **Pinned release:** `1.0.10`
+- **Upstream:** [Debian](<https://tracker.debian.org/pkg/libmicrohttpd>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** HTTP/1.1 GET request method, path, query argument and version from local socket stream
 - **Underlying family:** GNU libmicrohttpd HTTP/1 request parser in an embedded C server, separate from llhttp and PicoHTTPParser

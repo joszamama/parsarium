@@ -1,6 +1,7 @@
 # threecrate-io — ASCII PLY / Rust
 
 - **Pinned release:** `0.12.1`
+- **Upstream:** [source repository](<https://github.com/rajgandhi1/threecrate>) · [crates.io](<https://crates.io/crates/threecrate-io>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** complete ASCII PLY: header, vertices, faces
 - **Underlying family:** threecrate RobustPlyReader

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.0.0`
+- **Upstream:** [source repository](<https://github.com/akito0107/xsqlparser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/akito0107/xsqlparser>)
 - **License:** Apache-2.0
 - **Parser family:** xsqlparser recursive-descent parser and tokenizer (Go port of early sqlparser-rs)
 - **Local input API:** `xsqlparser.NewParser(reader, &dialect.GenericSQLDialect{}).ParseSQL() -> []sqlast.Stmt`

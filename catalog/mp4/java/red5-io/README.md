@@ -1,6 +1,7 @@
 # red5-io — MP4 / Java
 
 - **Pinned release:** `2.0.40`
+- **Upstream:** [source repository](<https://github.com/Red5/red5-parent>) · [Maven Central](<https://central.sonatype.com/artifact/org.red5/red5-io>)
 - **License:** Apache-2.0
 - **Parsed scope:** MP4 video presence, parsed keyframe count and H.264/AAC codec identifiers
 - **Underlying family:** Red5 MP4Reader over JCodec MP4 demuxer

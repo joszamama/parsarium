@@ -1,6 +1,7 @@
 # gstreamer — MP4 / C
 
 - **Pinned release:** `1.28.9`
+- **Upstream:** [source repository](<https://gitlab.freedesktop.org/gstreamer/gstreamer>)
 - **License:** LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT
 - **Parsed scope:** MP4 title, video/audio streams and 2x2 video dimensions
 - **Underlying family:** GStreamer isomp4/qtdemux plugin

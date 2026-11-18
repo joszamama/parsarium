@@ -1,6 +1,7 @@
 # fast-png — PNG / JavaScript
 
 - **Pinned release:** `8.0.0`
+- **Upstream:** [source repository](<https://github.com/image-js/fast-png>) · [npm](<https://www.npmjs.com/package/fast-png>)
 - **License:** MIT
 - **Parsed scope:** pixels
 - **Underlying family:** fast-png

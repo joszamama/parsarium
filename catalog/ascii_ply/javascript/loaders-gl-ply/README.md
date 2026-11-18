@@ -1,6 +1,7 @@
 # @loaders.gl/ply — ASCII PLY / JavaScript
 
 - **Pinned release:** `4.5.4`
+- **Upstream:** [source repository](<https://github.com/visgl/loaders.gl>) · [npm](<https://www.npmjs.com/package/@loaders.gl/ply>)
 - **License:** MIT
 - **Parsed scope:** triangle mesh
 - **Underlying family:** loaders.gl PLY family

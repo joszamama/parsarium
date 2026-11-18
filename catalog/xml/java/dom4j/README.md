@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.2.0`
+- **Upstream:** [source repository](<https://github.com/dom4j/dom4j>) · [Maven Central](<https://central.sonatype.com/artifact/org.dom4j/dom4j>)
 - **License:** BSD-3-Clause
 - **Parser family:** dom4j SAX tree builder over the JAXP default SAX parser (OpenJDK java.xml Xerces2-J fork)
 - **Local input API:** `org.dom4j.io.SAXReader.createDefault().read(local InputStream) returns an org.dom4j.Document; walk Element.content()`

@@ -8,9 +8,9 @@ Bounded TOML search captured 2026-11-17: 3 pkg.go.dev queries, 300 recorded hits
 
 ## Third-party parsers
 
-- [github.com/BurntSushi/toml](github-com-burntsushi-toml/README.md) — verified Docker harness
-- [github.com/pelletier/go-toml/v2](github-com-pelletier-go-toml-v2/README.md) — verified Docker harness
-- [github.com/go-rotini/toml](github-com-go-rotini-toml/README.md) — verified Docker harness
+- [github.com/BurntSushi/toml](github-com-burntsushi-toml/README.md) — verified Docker harness · [source repository](<https://github.com/BurntSushi/toml>) · [pkg.go.dev](<https://pkg.go.dev/github.com/BurntSushi/toml>)
+- [github.com/pelletier/go-toml/v2](github-com-pelletier-go-toml-v2/README.md) — verified Docker harness · [source repository](<https://github.com/pelletier/go-toml>) · [pkg.go.dev](<https://pkg.go.dev/github.com/pelletier/go-toml/v2>)
+- [github.com/go-rotini/toml](github-com-go-rotini-toml/README.md) — verified Docker harness · [source repository](<https://github.com/go-rotini/toml>) · [pkg.go.dev](<https://pkg.go.dev/github.com/go-rotini/toml>)
 
 ## Standard and runtime APIs
 

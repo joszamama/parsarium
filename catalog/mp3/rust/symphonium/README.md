@@ -1,6 +1,7 @@
 # symphonium — MP3 / Rust
 
 - **Pinned release:** `0.13.0`
+- **Upstream:** [source repository](<https://codeberg.org/Meadowlark/symphonium>) · [crates.io](<https://crates.io/crates/symphonium>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** MP3 track header
 - **Underlying family:** Symphonia MP3 demuxer

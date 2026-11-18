@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.3.3`
+- **Upstream:** [source repository](<https://github.com/DecimalTurn/toml-patch>) · [npm](<https://www.npmjs.com/package/@decimalturn/toml-patch>)
 - **License:** MIT
 - **Parser family:** toml-patch (Tim Hall's format-preserving TOML parser, maintained fork by DecimalTurn)
 - **Local input API:** `parse(text, { integersAsBigInt: true }) on local bytes decoded as strict UTF-8 text; returns plain objects with BigInt integers, Number floats and the exported OffsetDateTime/LocalDateTime/LocalDate/LocalTime Date subclasses`

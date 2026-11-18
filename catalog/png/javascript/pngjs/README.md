@@ -1,6 +1,7 @@
 # pngjs — PNG / JavaScript
 
 - **Pinned release:** `7.0.0`
+- **Upstream:** [source repository](<https://github.com/pngjs/pngjs>) · [npm](<https://www.npmjs.com/package/pngjs>)
 - **License:** MIT
 - **Parsed scope:** pixels
 - **Underlying family:** pngjs

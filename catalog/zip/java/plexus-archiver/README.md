@@ -1,6 +1,7 @@
 # plexus-archiver — ZIP / Java
 
 - **Pinned release:** `4.15.0`
+- **Upstream:** [source repository](<https://github.com/codehaus-plexus/plexus-archiver>) · [Maven Central](<https://central.sonatype.com/artifact/org.codehaus.plexus/plexus-archiver>)
 - **License:** Apache-2.0
 - **Parsed scope:** ZIP entry name and decompressed content from a local archive
 - **Underlying family:** Plexus Archiver wrapper over Commons Compress

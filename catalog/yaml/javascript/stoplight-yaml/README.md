@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.3.0`
+- **Upstream:** [source repository](<https://github.com/stoplightio/yaml>) · [npm](<https://www.npmjs.com/package/@stoplight/yaml>)
 - **License:** Apache-2.0
 - **Parser family:** Wrapper: @stoplight/yaml walker over @stoplight/yaml-ast-parser 0.0.50 (fork of yaml-ast-parser, js-yaml 3.x lineage)
 - **Local input API:** `parseWithPointers(text) with default options after strict UTF-8 decoding of a local Buffer; zero diagnostics required; the returned data mapped to the Parsarium typed YAML tree`

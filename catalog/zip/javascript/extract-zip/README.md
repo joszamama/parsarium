@@ -1,6 +1,7 @@
 # extract-zip — ZIP / JavaScript
 
 - **Pinned release:** `2.0.1`
+- **Upstream:** [source repository](<https://github.com/max-mapper/extract-zip>) · [npm](<https://www.npmjs.com/package/extract-zip>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** entries_and_content
 - **Underlying family:** yauzl

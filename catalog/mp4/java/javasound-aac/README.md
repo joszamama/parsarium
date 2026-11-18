@@ -1,6 +1,7 @@
 # javasound-aac — MP4 / Java
 
 - **Pinned release:** `0.9.8`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/com.tianscar.javasound/javasound-aac>)
 - **License:** Apache-2.0
 - **Parsed scope:** MP4 track count, AAC codec, sample rate and channels
 - **Underlying family:** Tianscar fork of JAAD pure Java MP4 demultiplexer

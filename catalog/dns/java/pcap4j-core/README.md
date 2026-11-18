@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.8.2`
+- **Upstream:** [source repository](<https://github.com/kaitoy/pcap4j>) · [Maven Central](<https://central.sonatype.com/artifact/org.pcap4j/pcap4j-core>)
 - **License:** MIT
 - **Parser family:** Pcap4J DNS packet classes (DnsPacket, DnsDomainName, DnsResourceRecord, DnsRData*)
 - **Local input API:** `org.pcap4j.packet.DnsPacket.newPacket(byte[] rawData, int offset, int length) throws IllegalRawDataException`

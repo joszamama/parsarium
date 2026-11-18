@@ -1,6 +1,7 @@
 # f3d — ASCII PLY / C++
 
 - **Pinned release:** `4.0.1`
+- **Upstream:** [source repository](<https://github.com/f3d-app/f3d>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** ASCII triangle produced three parsed points and one cell
 - **Underlying family:** F3D native PLY plugin over VTK vtkPLYReader

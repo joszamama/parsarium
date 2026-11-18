@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v2.1.0`
+- **Upstream:** [source repository](<https://github.com/DaveRandom/LibDNS>) · [Packagist](<https://packagist.org/packages/daverandom/libdns>)
 - **License:** MIT
 - **Parser family:** LibDNS (Decoder, DecodingContext, Packets\Packet and Records\Types decoders)
 - **Local input API:** `LibDNS\Decoder\Decoder::decode(string $data): LibDNS\Messages\Message (from (new DecoderFactory)->create(null, false))`

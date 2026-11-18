@@ -1,6 +1,7 @@
 # pygame — ASCII PNM / Python
 
 - **Pinned release:** `2.6.1`
+- **Upstream:** [source repository](<https://github.com/pygame/pygame>) · [PyPI](<https://pypi.org/project/pygame/>)
 - **License:** LGPL
 - **Parsed scope:** P3 pixels
 - **Underlying family:** pygame image PNM loader

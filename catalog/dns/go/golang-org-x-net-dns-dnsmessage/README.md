@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.63.0`
+- **Upstream:** [source repository](<https://go.googlesource.com/net>) · [pkg.go.dev](<https://pkg.go.dev/golang.org/x/net/dns/dnsmessage>)
 - **License:** BSD-3-Clause
 - **Parser family:** Go x/net dnsmessage (dns/dnsmessage/message.go)
 - **Local input API:** `(*dnsmessage.Message).Unpack(msg []byte) error`

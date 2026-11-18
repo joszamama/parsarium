@@ -1,6 +1,7 @@
 # lopdf — PDF / Rust
 
 - **Pinned release:** `0.47.0`
+- **Upstream:** [source repository](<https://github.com/J-F-Liu/lopdf>) · [crates.io](<https://crates.io/crates/lopdf>)
 - **License:** MIT
 - **Parsed scope:** PDF page tree
 - **Underlying family:** lopdf

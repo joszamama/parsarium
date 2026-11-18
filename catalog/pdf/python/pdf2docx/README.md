@@ -1,6 +1,7 @@
 # pdf2docx — PDF / Python
 
 - **Pinned release:** `0.5.13`
+- **Upstream:** [source repository](<https://github.com/ArtifexSoftware/pdf2docx>) · [PyPI](<https://pypi.org/project/pdf2docx/>)
 - **License:** MIT
 - **Parsed scope:** parsed page sections
 - **Underlying family:** pdf2docx layout over MuPDF

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.8.4`
+- **Upstream:** [Debian](<https://tracker.debian.org/pkg/ldns>)
 - **License:** BSD-3-Clause
 - **Parser family:** NLnet Labs ldns (wire2host.c, rr.c, packet.c, str2host/host2str for presentation)
 - **Local input API:** `ldns_status ldns_wire2pkt(ldns_pkt **packet, const uint8_t *data, size_t len)`

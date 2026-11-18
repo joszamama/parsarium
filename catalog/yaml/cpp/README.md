@@ -8,9 +8,9 @@
 
 ## Third-party parsers
 
-- [yaml-cpp](yaml-cpp/README.md) — verified Docker harness
-- [rapidyaml](rapidyaml/README.md) — verified Docker harness
-- [fkyaml](fkyaml/README.md) — verified Docker harness
+- [yaml-cpp](yaml-cpp/README.md) — verified Docker harness · [source repository](<https://github.com/jbeder/yaml-cpp>) · [Debian](<https://tracker.debian.org/pkg/yaml-cpp>)
+- [rapidyaml](rapidyaml/README.md) — verified Docker harness · [source repository](<https://github.com/biojppm/rapidyaml>) · [Debian](<https://tracker.debian.org/pkg/rapidyaml>)
+- [fkyaml](fkyaml/README.md) — verified Docker harness · [source repository](<https://github.com/fktn-k/fkYAML>)
 
 ## Standard and runtime APIs
 

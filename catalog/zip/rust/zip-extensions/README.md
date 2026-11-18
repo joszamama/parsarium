@@ -1,6 +1,7 @@
 # zip-extensions — ZIP / Rust
 
 - **Pinned release:** `0.14.1`
+- **Upstream:** [source repository](<https://github.com/matzefriedrich/zip-extensions-rs>) · [crates.io](<https://crates.io/crates/zip-extensions>)
 - **License:** MIT
 - **Parsed scope:** Decompressed named ZIP entry
 - **Underlying family:** zip-rs lineage

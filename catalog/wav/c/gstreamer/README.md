@@ -1,6 +1,7 @@
 # gstreamer — WAV / C
 
 - **Pinned release:** `1.28.9`
+- **Upstream:** [source repository](<https://gitlab.freedesktop.org/gstreamer/gstreamer>) · [Debian](<https://tracker.debian.org/pkg/gstreamer1.0>)
 - **License:** LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT
 - **Parsed scope:** explicit wavparse element interprets WAV and emits caps plus four PCM sample values
 - **Underlying family:** GStreamer wavparse plugin

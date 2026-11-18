@@ -1,6 +1,7 @@
 # zelon88/hrconvert2 — ASCII PLY / PHP
 
 - **Pinned release:** `v4.0.0`
+- **Upstream:** [source repository](<https://github.com/zelon88/HRConvert2>) · [Packagist](<https://packagist.org/packages/zelon88/hrconvert2>)
 - **License:** GPL-3.0
 - **Parsed scope:** One valid ASCII PLY triangle converted through real PyMeshLab and Assimp stages; OBJ geometry and both stage outputs observed
 - **Underlying family:** HRConvert2 PHP Model pipeline over PyMeshLab PLY reader and Assimp exporter

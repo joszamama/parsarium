@@ -1,6 +1,7 @@
 # itext-kernel — PDF / Java
 
 - **Pinned release:** `9.8.0`
+- **Upstream:** [source repository](<https://github.com/itext/itext-java>) · [Maven Central](<https://central.sonatype.com/artifact/com.itextpdf/kernel>)
 - **License:** AGPL-3.0
 - **Parsed scope:** PDF page count
 - **Underlying family:** iText 7/9 kernel PDF reader

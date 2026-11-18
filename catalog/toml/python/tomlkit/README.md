@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.15.2`
+- **Upstream:** [source repository](<https://github.com/python-poetry/tomlkit>) · [PyPI](<https://pypi.org/project/tomlkit/>)
 - **License:** MIT
 - **Parser family:** tomlkit pure-Python style-preserving recursive-descent parser (tomlkit/parser.py over tomlkit/source.py, building tomlkit items)
 - **Local input API:** `tomlkit.parse(decoded local TOML text) walked by tomlkit item type (Table, InlineTable, AoT, Array, Bool, Integer, Float, String, DateTime, Date, Time) with each scalar unwrapped; TOMLDocument.unwrap(), tomlkit.parse(bytes) and tomlkit.load(BytesIO(local bytes)) give the same typed tree on both controls`

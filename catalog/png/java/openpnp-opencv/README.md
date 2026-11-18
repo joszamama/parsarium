@@ -1,6 +1,7 @@
 # openpnp-opencv — PNG / Java
 
 - **Pinned release:** `4.9.0-0`
+- **Upstream:** [source repository](<https://github.com/openpnp/opencv>) · [Maven Central](<https://central.sonatype.com/artifact/org.openpnp/opencv>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** PNG dimensions
 - **Underlying family:** OpenPnP Java JNI packaging of native OpenCV image decoder

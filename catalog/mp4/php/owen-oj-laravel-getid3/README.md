@@ -1,6 +1,7 @@
 # owen-oj/laravel-getid3 — MP4 / PHP
 
 - **Pinned release:** `v2.6.0`
+- **Upstream:** [source repository](<https://github.com/Owen-oj/laravel-getid3>) · [Packagist](<https://packagist.org/packages/owen-oj/laravel-getid3>)
 - **License:** MIT
 - **Parsed scope:** 2 × 2 H.264/AVC video in MP4
 - **Underlying family:** getID3 native QuickTime/MP4 parser

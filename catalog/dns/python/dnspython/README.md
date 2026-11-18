@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.9.2`
+- **Upstream:** [source repository](<https://github.com/rthalley/dnspython>) · [PyPI](<https://pypi.org/project/dnspython/>)
 - **License:** ISC
 - **Parser family:** dnspython wire reader (dns/message.py _WireReader, dns/wire.py Parser, dns/name.py)
 - **Local input API:** `dns.message.from_wire(wire: bytes) -> dns.message.Message`

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.4.1`
+- **Upstream:** [source repository](<https://github.com/tomlclass/tomlclass>) · [PyPI](<https://pypi.org/project/tomlclass/>)
 - **License:** MIT
 - **Parser family:** tomlclass pure-Python parser (tomlclass/parser.py with a lossless node tree)
 - **Local input API:** `tomlclass.loads(decoded local TOML text, toml_version="1.0") -> dict; tomlclass.load(BytesIO(local bytes), toml_version="1.0") gives the same typed tree on both controls`

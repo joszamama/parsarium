@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.19.0`
+- **Upstream:** [source repository](<https://github.com/simd-lite/simd-json>) · [crates.io](<https://crates.io/crates/simd-json>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** simd-json Rust SIMD/SWAR port of simdjson; own Deserializer stage1/stage2 and OwnedValue DOM, distinct from serde_json parser
 - **Local input API:** `simd_json::to_owned_value(&mut [u8]) -> Result<OwnedValue>; OwnedValue::{Object, Array, String, Static}`

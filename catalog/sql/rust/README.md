@@ -8,16 +8,16 @@ Ten verified Rust SQL paths, the ceiling, after a bounded crates.io search (thre
 
 ## Third-party parsers
 
-- [sqlparser](sqlparser/README.md) — verified Docker harness
-- [pg_query](pg-query/README.md) — verified Docker harness
-- [sqlite3-parser](sqlite3-parser/README.md) — verified Docker harness
-- [polyglot-sql](polyglot-sql/README.md) — verified Docker harness
-- [databend-common-ast](databend-common-ast/README.md) — verified Docker harness
-- [qusql-parse](qusql-parse/README.md) — verified Docker harness
-- [typedpg_pg_query](typedpg-pg-query/README.md) — verified Docker harness
-- [spg-sql](spg-sql/README.md) — verified Docker harness
-- [sqlglot-rust](sqlglot-rust/README.md) — verified Docker harness
-- [nom-sql](nom-sql/README.md) — verified Docker harness
+- [sqlparser](sqlparser/README.md) — verified Docker harness · [source repository](<https://github.com/apache/datafusion-sqlparser-rs>) · [crates.io](<https://crates.io/crates/sqlparser>)
+- [pg_query](pg-query/README.md) — verified Docker harness · [source repository](<https://github.com/pganalyze/pg_query.rs>) · [crates.io](<https://crates.io/crates/pg_query>)
+- [sqlite3-parser](sqlite3-parser/README.md) — verified Docker harness · [source repository](<https://github.com/gwenn/lemon-rs>) · [crates.io](<https://crates.io/crates/sqlite3-parser>)
+- [polyglot-sql](polyglot-sql/README.md) — verified Docker harness · [source repository](<https://github.com/tobilg/polyglot>) · [crates.io](<https://crates.io/crates/polyglot-sql>)
+- [databend-common-ast](databend-common-ast/README.md) — verified Docker harness · [source repository](<https://github.com/databendlabs/databend>) · [crates.io](<https://crates.io/crates/databend-common-ast>)
+- [qusql-parse](qusql-parse/README.md) — verified Docker harness · [source repository](<https://github.com/antialize/qusql>) · [crates.io](<https://crates.io/crates/qusql-parse>)
+- [typedpg_pg_query](typedpg-pg-query/README.md) — verified Docker harness · [source repository](<https://github.com/cubos/typedpg>) · [crates.io](<https://crates.io/crates/typedpg_pg_query>)
+- [spg-sql](spg-sql/README.md) — verified Docker harness · [source repository](<https://github.com/goliajp/spg>) · [crates.io](<https://crates.io/crates/spg-sql>)
+- [sqlglot-rust](sqlglot-rust/README.md) — verified Docker harness · [source repository](<https://github.com/protegrity/sql-glot-rust>) · [crates.io](<https://crates.io/crates/sqlglot-rust>)
+- [nom-sql](nom-sql/README.md) — verified Docker harness · [source repository](<https://github.com/ms705/nom-sql>) · [crates.io](<https://crates.io/crates/nom-sql>)
 
 ## Standard and runtime APIs
 

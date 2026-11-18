@@ -1,6 +1,7 @@
 # github.com/phpdave11/gofpdi — PDF / Go
 
 - **Pinned release:** `v1.0.16`
+- **Upstream:** [source repository](<https://github.com/phpdave11/gofpdi>) · [pkg.go.dev](<https://pkg.go.dev/github.com/phpdave11/gofpdi>)
 - **License:** MIT
 - **Parsed scope:** page count
 - **Underlying family:** gofpdi importer

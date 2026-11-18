@@ -1,6 +1,7 @@
 # jaudiotagger — WAV / Java
 
 - **Pinned release:** `3.0.1`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/net.jthink/jaudiotagger>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** WAV header sample rate, channels and bit depth
 - **Underlying family:** jaudiotagger WAV reader

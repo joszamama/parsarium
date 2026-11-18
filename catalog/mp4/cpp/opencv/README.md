@@ -1,6 +1,7 @@
 # opencv — MP4 / C++
 
 - **Pinned release:** `5.1.0`
+- **Upstream:** [source repository](<https://github.com/opencv/opencv>) · [Debian](<https://tracker.debian.org/pkg/opencv>)
 - **License:** Apache-2.0
 - **Parsed scope:** MP4 video dimensions, frame count and frame rate from FFmpeg-backed VideoCapture
 - **Underlying family:** OpenCV VideoCapture wrapper over FFmpeg MOV/MP4 demuxer

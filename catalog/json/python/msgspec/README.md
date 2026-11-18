@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.22.0`
+- **Upstream:** [source repository](<https://github.com/msgspec/msgspec>) · [PyPI](<https://pypi.org/project/msgspec/>)
 - **License:** BSD-3-Clause
 - **Parser family:** msgspec hand-written C JSON decoder (src/msgspec/_core.c)
 - **Local input API:** `msgspec.json.decode(local JSON bytes) with the default type=Any`

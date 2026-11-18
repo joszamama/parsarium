@@ -1,6 +1,7 @@
 # taglib — MP4 / C++
 
 - **Pinned release:** `2.3.2`
+- **Upstream:** [source repository](<https://github.com/taglib/taglib>) · [Debian](<https://tracker.debian.org/pkg/taglib>)
 - **License:** LGPL-2.1-only OR MPL-1.1
 - **Parsed scope:** MP4 title metadata and one-second duration
 - **Underlying family:** TagLib native MP4 metadata parser

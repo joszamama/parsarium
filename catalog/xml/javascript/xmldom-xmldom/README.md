@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.9.12`
+- **Upstream:** [source repository](<https://github.com/xmldom/xmldom>) · [npm](<https://www.npmjs.com/package/@xmldom/xmldom>)
 - **License:** MIT
 - **Parser family:** xmldom XMLReader tokenizer + DOMHandler DOM builder (jindw/xmldom lineage)
 - **Local input API:** `new DOMParser({onError}).parseFromString(text, 'application/xml') on in-memory text from a strict UTF-8 TextDecoder of local bytes; the adapter's onError throws on every warning, error or fatalError; the summary reads the returned Document's namespaceURI/localName/attributes`

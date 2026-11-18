@@ -1,6 +1,7 @@
 # ij — PNG / Java
 
 - **Pinned release:** `1.54p`
+- **Upstream:** [source repository](<https://github.com/imagej/ImageJ>) · [Maven Central](<https://central.sonatype.com/artifact/net.imagej/ij>)
 - **License:** Public domain
 - **Parsed scope:** RGBA pixels
 - **Underlying family:** ImageJ image opener

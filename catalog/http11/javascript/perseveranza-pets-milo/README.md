@@ -1,6 +1,7 @@
 # @perseveranza-pets/milo — HTTP/1.1 / JavaScript
 
 - **Pinned release:** `0.9.0`
+- **Upstream:** [source repository](<https://github.com/ShogunPanda/milo>) · [npm](<https://www.npmjs.com/package/@perseveranza-pets/milo>)
 - **License:** ISC
 - **Parsed scope:** request
 - **Underlying family:** milo

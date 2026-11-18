@@ -1,6 +1,7 @@
 # fltk — ASCII PNM / Rust
 
 - **Pinned release:** `1.5.23`
+- **Upstream:** [source repository](<https://github.com/fltk-rs/fltk-rs>) · [crates.io](<https://crates.io/crates/fltk>)
 - **License:** MIT
 - **Parsed scope:** P3 ASCII PPM RGB pixels
 - **Underlying family:** FLTK C++ PNM image loader

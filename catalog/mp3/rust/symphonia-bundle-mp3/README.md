@@ -1,6 +1,7 @@
 # symphonia-bundle-mp3 — MP3 / Rust
 
 - **Pinned release:** `0.6.1`
+- **Upstream:** [source repository](<https://github.com/pdeljanov/Symphonia>) · [crates.io](<https://crates.io/crates/symphonia-bundle-mp3>)
 - **License:** MPL-2.0
 - **Parsed scope:** MPEG Layer III track header and audio packet; adapter skips ID3v2 prefix before passing the stream
 - **Underlying family:** Symphonia MP3 demuxer

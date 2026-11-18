@@ -1,6 +1,7 @@
 # github.com/gen2brain/svg — SVG / Go
 
 - **Pinned release:** `v0.1.0`
+- **Upstream:** [source repository](<https://github.com/gen2brain/svg>) · [pkg.go.dev](<https://pkg.go.dev/github.com/gen2brain/svg>)
 - **License:** MIT
 - **Parsed scope:** height, width
 - **Underlying family:** gen2brain SVG decoder

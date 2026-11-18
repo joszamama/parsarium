@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.6.2`
+- **Upstream:** [source repository](<https://gitlab.nic.cz/knot/knot-dns>) · [Debian](<https://tracker.debian.org/pkg/knot>)
 - **License:** GPL-2.0-or-later
 - **Parser family:** Knot DNS libknot (packet/pkt.c, packet/rrset-wire.c, dname.c; rrset-dump.c for presentation)
 - **Local input API:** `knot_pkt_t *knot_pkt_new(void *wire, uint16_t len, knot_mm_t *mm) + int knot_pkt_parse(knot_pkt_t *pkt, unsigned flags)`

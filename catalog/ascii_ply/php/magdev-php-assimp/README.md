@@ -1,6 +1,7 @@
 # magdev/php-assimp — ASCII PLY / PHP
 
 - **Pinned release:** `0.3.2`
+- **Upstream:** [source repository](<https://github.com/magdev/php-assimp>) · [Packagist](<https://packagist.org/packages/magdev/php-assimp>)
 - **License:** MIT
 - **Parsed scope:** One mesh with three vertices and one face reported from a valid local ASCII PLY triangle
 - **Underlying family:** Assimp native PLY loader through magdev/php-assimp CLI wrapper

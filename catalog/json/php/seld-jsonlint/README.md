@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.12.2`
+- **Upstream:** [source repository](<https://github.com/Seldaek/jsonlint>) · [Packagist](<https://packagist.org/packages/seld/jsonlint>)
 - **License:** MIT
 - **Parser family:** seld/jsonlint Lexer and LR table parser
 - **Local input API:** `Seld\JsonLint\JsonParser::parse(string $input, int $flags = 0) over local bytes; default flags decode objects to stdClass`

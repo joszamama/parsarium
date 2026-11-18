@@ -6,9 +6,9 @@
 
 ## Third-party parsers
 
-- [magdev/php-assimp](magdev-php-assimp/README.md) — Docker harness ready
-- [collectiveaccess/providence](collectiveaccess-providence/README.md) — Docker harness ready
-- [zelon88/hrconvert2](zelon88-hrconvert2/README.md) — Docker harness ready
+- [magdev/php-assimp](magdev-php-assimp/README.md) — Docker harness ready · [source repository](<https://github.com/magdev/php-assimp>) · [Packagist](<https://packagist.org/packages/magdev/php-assimp>)
+- [collectiveaccess/providence](collectiveaccess-providence/README.md) — Docker harness ready · [source repository](<https://github.com/collectiveaccess/providence>) · [Packagist](<https://packagist.org/packages/collectiveaccess/providence>)
+- [zelon88/hrconvert2](zelon88-hrconvert2/README.md) — Docker harness ready · [source repository](<https://github.com/zelon88/HRConvert2>) · [Packagist](<https://packagist.org/packages/zelon88/hrconvert2>)
 
 ## Standard and runtime APIs
 

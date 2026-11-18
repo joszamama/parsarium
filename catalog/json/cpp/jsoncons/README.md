@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.10.0`
+- **Upstream:** [source repository](<https://github.com/danielaparker/jsoncons>) · [Debian](<https://tracker.debian.org/pkg/jsoncons>)
 - **License:** BSL-1.0
 - **Parser family:** jsoncons own basic_json_parser
 - **Local input API:** `jsoncons::ojson::parse(const char*, std::size_t) on local bytes, yielding an insertion-ordered basic_json tree with integer and double kinds`

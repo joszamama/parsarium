@@ -1,6 +1,7 @@
 # debach/zend-mp3 — MP3 / PHP
 
 - **Pinned release:** `1.8.1`
+- **Upstream:** [source repository](<https://github.com/debach/zend-mp3>) · [Packagist](<https://packagist.org/packages/debach/zend-mp3>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** ID3v2.3 title, artist, and album
 - **Underlying family:** Sven Vollbehr PHP Reader ID3 family

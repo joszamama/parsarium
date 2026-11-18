@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.0.6.1`
+- **Upstream:** [source repository](<https://github.com/hunterhacker/jdom>) · [Maven Central](<https://central.sonatype.com/artifact/org.jdom/jdom2>)
 - **License:** JDOM license
 - **Parser family:** JDOM2 SAXHandler/tree over OpenJDK Xerces2-J fork
 - **Local input API:** `new SAXBuilder().build(Files.newInputStream(local Path)) into JDOM Document`

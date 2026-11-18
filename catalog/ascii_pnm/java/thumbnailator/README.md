@@ -1,6 +1,7 @@
 # thumbnailator — ASCII PNM / Java
 
 - **Pinned release:** `0.4.21`
+- **Upstream:** [source repository](<https://github.com/coobird/thumbnailator>) · [Maven Central](<https://central.sonatype.com/artifact/net.coobird/thumbnailator>)
 - **License:** MIT
 - **Parsed scope:** ASCII PPM dimensions and red/green pixels
 - **Underlying family:** Thumbnailator wrapper over ImageIO PNM provider (TwelveMonkeys or JAI)

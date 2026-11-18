@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.6.1`
+- **Upstream:** [source repository](<https://github.com/buger/jsonparser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/buger/jsonparser>)
 - **License:** MIT
 - **Parser family:** buger/jsonparser byte scanner
 - **Local input API:** `jsonparser.Get([]byte) plus ObjectEach and ArrayEachErr over local byte slices`

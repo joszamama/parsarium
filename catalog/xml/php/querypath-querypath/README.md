@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.0.5`
+- **Upstream:** [source repository](<https://github.com/technosophos/querypath>) · [Packagist](<https://packagist.org/packages/querypath/querypath>)
 - **License:** MIT
 - **Parser family:** libxml2 via PHP DOMDocument, shared with the standard path, symfony/dom-crawler, symfony/serializer and mtownsend/xml-to-array
 - **Local input API:** `qp(string $xml) (QueryPath::with) on the local bytes, which DOMQuery::parseXMLString loads with DOMDocument::loadXML because the string starts with an XML declaration; DOMQuery::document() returns that DOMDocument, walked namespace-aware`

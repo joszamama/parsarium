@@ -1,6 +1,7 @@
 # github.com/ledongthuc/pdf — PDF / Go
 
 - **Pinned release:** `v0.0.0-20261020125853-5e46805f718e`
+- **Upstream:** [source repository](<https://github.com/ledongthuc/pdf>) · [pkg.go.dev](<https://pkg.go.dev/github.com/ledongthuc/pdf>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** page count
 - **Underlying family:** rsc PDF reader lineage

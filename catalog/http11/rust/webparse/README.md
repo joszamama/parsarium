@@ -1,6 +1,7 @@
 # webparse — HTTP/1.1 / Rust
 
 - **Pinned release:** `0.3.1`
+- **Upstream:** [source repository](<https://github.com/tickbh/webparse>) · [crates.io](<https://crates.io/crates/webparse>)
 - **License:** Apache-2.0
 - **Parsed scope:** request: method, URL, consumed bytes
 - **Underlying family:** webparse

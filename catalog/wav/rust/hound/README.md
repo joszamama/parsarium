@@ -1,6 +1,7 @@
 # hound — WAV / Rust
 
 - **Pinned release:** `3.5.1`
+- **Upstream:** [source repository](<https://github.com/ruuda/hound>) · [crates.io](<https://crates.io/crates/hound>)
 - **License:** Apache-2.0
 - **Parsed scope:** Decoded PCM sample values and WAV metadata
 - **Underlying family:** Hound WAV reader

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.1.0`
+- **Upstream:** [source repository](<https://github.com/sabre-io/xml>) · [Packagist](<https://packagist.org/packages/sabre/xml>)
 - **License:** BSD-3-Clause
 - **Parser family:** libxml2 via PHP XMLReader, shared with the standard XMLReader API
 - **Local input API:** `Sabre\Xml\Service::getReader() then Sabre\Xml\Reader::XML(string) and Reader::parse(): builds a Clark-notation {namespace}local element tree with attributes and leaf text (Service::parse also accepts a string or stream resource)`

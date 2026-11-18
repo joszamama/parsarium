@@ -1,6 +1,7 @@
 # pdf-extract — PDF / Rust
 
 - **Pinned release:** `0.12.1`
+- **Upstream:** [source repository](<https://github.com/jrmuizel/pdf-extract>) · [crates.io](<https://crates.io/crates/pdf-extract>)
 - **License:** MIT
 - **Parsed scope:** PDF text extraction
 - **Underlying family:** lopdf

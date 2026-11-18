@@ -1,6 +1,7 @@
 # symphonia — MP3 / Rust
 
 - **Pinned release:** `0.6.1`
+- **Upstream:** [source repository](<https://github.com/pdeljanov/Symphonia>) · [crates.io](<https://crates.io/crates/symphonia>)
 - **License:** MPL-2.0
 - **Parsed scope:** MP3 track header and audio packet
 - **Underlying family:** Symphonia MP3 demuxer

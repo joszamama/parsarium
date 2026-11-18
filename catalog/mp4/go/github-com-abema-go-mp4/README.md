@@ -1,6 +1,7 @@
 # github.com/abema/go-mp4 — MP4 / Go
 
 - **Pinned release:** `v1.7.4`
+- **Upstream:** [source repository](<https://github.com/abema/go-mp4>) · [pkg.go.dev](<https://pkg.go.dev/github.com/abema/go-mp4>)
 - **License:** MIT
 - **Parsed scope:** movie box
 - **Underlying family:** go-mp4 box parser

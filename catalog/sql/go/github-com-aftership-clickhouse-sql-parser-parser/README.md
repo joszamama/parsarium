@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.5.7`
+- **Upstream:** [source repository](<https://github.com/AfterShip/clickhouse-sql-parser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/AfterShip/clickhouse-sql-parser/parser>)
 - **License:** MIT
 - **Parser family:** clickhouse-sql-parser hand-written recursive-descent parser and lexer
 - **Local input API:** `parser.NewParser(local SQL text).ParseStmts() -> []parser.Expr`

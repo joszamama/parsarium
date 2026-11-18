@@ -8,15 +8,15 @@ Pilot cell: nine third-party paths; the tenth slot is open. expat 2.10.0, libxml
 
 ## Third-party parsers
 
-- [expat](expat/README.md) — verified Docker harness
-- [libxml2](libxml2/README.md) — verified Docker harness
-- [libxmlb](libxmlb/README.md) — verified Docker harness
-- [ixml](ixml/README.md) — verified Docker harness
-- [mxml](mxml/README.md) — verified Docker harness
-- [gdome2](gdome2/README.md) — verified Docker harness
-- [libnxml](libnxml/README.md) — verified Docker harness
+- [expat](expat/README.md) — verified Docker harness · [source repository](<https://github.com/libexpat/libexpat>) · [Debian](<https://tracker.debian.org/pkg/expat>)
+- [libxml2](libxml2/README.md) — verified Docker harness · [source repository](<https://gitlab.gnome.org/GNOME/libxml2>) · [Debian](<https://tracker.debian.org/pkg/libxml2>)
+- [libxmlb](libxmlb/README.md) — verified Docker harness · [source repository](<https://github.com/hughsie/libxmlb>) · [Debian](<https://tracker.debian.org/pkg/libxmlb>)
+- [ixml](ixml/README.md) — verified Docker harness · [source repository](<https://github.com/pupnp/pupnp>)
+- [mxml](mxml/README.md) — verified Docker harness · [source repository](<https://github.com/michaelrsweet/mxml>) · [Debian](<https://tracker.debian.org/pkg/mxml>)
+- [gdome2](gdome2/README.md) — verified Docker harness · [Debian](<https://tracker.debian.org/pkg/gdome2>)
+- [libnxml](libnxml/README.md) — verified Docker harness · [source repository](<https://github.com/bakulf/libnxml>) · [Debian](<https://tracker.debian.org/pkg/libnxml>)
 - [libucw-xml](libucw-xml/README.md) — verified Docker harness
-- [rxp](rxp/README.md) — verified Docker harness
+- [rxp](rxp/README.md) — verified Docker harness · [Debian](<https://tracker.debian.org/pkg/rxp>)
 
 ## Standard and runtime APIs
 

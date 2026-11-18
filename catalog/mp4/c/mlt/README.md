@@ -1,6 +1,7 @@
 # mlt — MP4 / C
 
 - **Pinned release:** `7.42.0`
+- **Upstream:** [source repository](<https://github.com/mltframework/mlt>) · [Debian](<https://tracker.debian.org/pkg/mlt>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** AVFormat producer parsed MP4 video/audio codecs and 2x2 video dimensions
 - **Underlying family:** MLT avformat producer over FFmpeg MOV/MP4 demuxer

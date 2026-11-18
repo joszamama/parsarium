@@ -1,6 +1,7 @@
 # zipp — ZIP / Python
 
 - **Pinned release:** `4.1.2`
+- **Upstream:** [source repository](<https://github.com/jaraco/zipp>) · [PyPI](<https://pypi.org/project/zipp/>)
 - **License:** MIT
 - **Parsed scope:** DEFLATE ZIP entry name and content
 - **Underlying family:** zipp via CPython zipfile

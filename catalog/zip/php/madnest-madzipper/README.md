@@ -1,6 +1,7 @@
 # madnest/madzipper — ZIP / PHP
 
 - **Pinned release:** `1.6.0`
+- **Upstream:** [source repository](<https://github.com/madnest/madzipper>) · [Packagist](<https://packagist.org/packages/madnest/madzipper>)
 - **License:** MIT
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** Madnest Madzipper over PHP ZipArchive

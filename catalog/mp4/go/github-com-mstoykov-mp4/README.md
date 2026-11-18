@@ -1,6 +1,7 @@
 # github.com/MStoykov/mp4 — MP4 / Go
 
 - **Pinned release:** `v0.1.4`
+- **Upstream:** [source repository](<https://github.com/mstoykov/mp4>) · [pkg.go.dev](<https://pkg.go.dev/github.com/MStoykov/mp4>)
 - **License:** MIT
 - **Parsed scope:** major brand
 - **Underlying family:** jfbus MP4 lineage

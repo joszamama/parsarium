@@ -1,6 +1,7 @@
 # indiehd/audio-manipulator — WAV / PHP
 
 - **Pinned release:** `v4.1.0`
+- **Upstream:** [source repository](<https://github.com/indiehd/audio-manipulator>) · [Packagist](<https://packagist.org/packages/indiehd/audio-manipulator>)
 - **License:** MIT
 - **Parsed scope:** RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count
 - **Underlying family:** getID3 native RIFF/WAVE parser

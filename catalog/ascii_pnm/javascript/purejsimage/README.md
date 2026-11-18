@@ -1,6 +1,7 @@
 # purejsimage — ASCII PNM / JavaScript
 
 - **Pinned release:** `0.17.0`
+- **Upstream:** [source repository](<https://github.com/a-r-d/PureJsImage>) · [npm](<https://www.npmjs.com/package/purejsimage>)
 - **License:** MIT
 - **Parsed scope:** P3 parsed format metadata and dimensions
 - **Underlying family:** PureJsImage Netpbm codec

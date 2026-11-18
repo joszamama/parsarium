@@ -1,6 +1,7 @@
 # wav-decoder — WAV / JavaScript
 
 - **Pinned release:** `1.3.0`
+- **Upstream:** [source repository](<https://github.com/mohayonao/wav-decoder>) · [npm](<https://www.npmjs.com/package/wav-decoder>)
 - **License:** MIT
 - **Parsed scope:** samples
 - **Underlying family:** wav-decoder

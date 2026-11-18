@@ -1,6 +1,7 @@
 # symphonia-metadata — MP3 / Rust
 
 - **Pinned release:** `0.6.1`
+- **Upstream:** [source repository](<https://github.com/pdeljanov/Symphonia>) · [crates.io](<https://crates.io/crates/symphonia-metadata>)
 - **License:** MPL-2.0
 - **Parsed scope:** ID3v2 frame keys
 - **Underlying family:** Symphonia ID3v2 reader

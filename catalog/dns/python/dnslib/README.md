@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.9.26`
+- **Upstream:** [source repository](<https://github.com/paulc/dnslib>) · [PyPI](<https://pypi.org/project/dnslib/>)
 - **License:** BSD-2-Clause
 - **Parser family:** dnslib (dnslib/dns.py DNSRecord.parse over dnslib/buffer.py and dnslib/label.py)
 - **Local input API:** `dnslib.DNSRecord.parse(packet: bytes) -> dnslib.DNSRecord`

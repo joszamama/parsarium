@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.64.0`
+- **Upstream:** [source repository](<https://github.com/apache/datafusion-sqlparser-rs>) · [crates.io](<https://crates.io/crates/sqlparser>)
 - **License:** Apache-2.0
 - **Parser family:** sqlparser-rs tokenizer and recursive-descent parser
 - **Local input API:** `Parser::parse_sql(&GenericDialect, local UTF-8 text) -> Vec<Statement>`

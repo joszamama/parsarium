@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `7.3.0`
+- **Upstream:** [source repository](<https://github.com/FasterXML/woodstox>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml.woodstox/woodstox-core>)
 - **License:** Apache-2.0
 - **Parser family:** Woodstox independent StAX tokenizer/parser
 - **Local input API:** `new com.ctc.wstx.stax.WstxInputFactory().createXMLStreamReader(local InputStream), namespace-aware; iterate XMLStreamReader.next()`

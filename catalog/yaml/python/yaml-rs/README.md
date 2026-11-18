@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.6`
+- **Upstream:** [source repository](<https://github.com/lava-sh/yaml-rs>) · [PyPI](<https://pypi.org/project/yaml-rs/>)
 - **License:** Unlicense
 - **Parser family:** granit-parser (git e10ee63; saphyr-parser / yaml-rust lineage) with yaml-rs's own Rust loader, through the yaml-rs PyO3 extension; same parser lineage as the Rust cell granit-parser, saphyr-parser and serde-saphyr paths
 - **Local input API:** `yaml_rs.load(local YAML bytes); yaml_rs.loads(the decoded str) and yaml_rs.load(local binary stream) give the same tree`

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.5.2`
+- **Upstream:** [Debian](<https://tracker.debian.org/pkg/opensp>)
 - **License:** MIT
 - **Parser family:** OpenSP (James Clark's SP) own SGML/XML parser
 - **Local input API:** `ParserEventGeneratorKit with addCatalog=pubtext/xml.soc (SGMLDECL xml.dcl) and enableWarning 'xml' and 'no-valid', SP_CHARSET_FIXED=YES and SP_ENCODING=XML as doc/xml.htm documents; makeEventGenerator over the local bytes written to a private temporary file, then EventGenerator::run(SGMLApplication&) with startElement (gi, specified attributes and CDATA chunks), endElement, data, pi and error callbacks`

@@ -1,6 +1,7 @@
 # async-h1 — HTTP/1.1 / Rust
 
 - **Pinned release:** `2.3.4`
+- **Upstream:** [source repository](<https://github.com/http-rs/async-h1>) · [crates.io](<https://crates.io/crates/async-h1>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** async response: status, body
 - **Underlying family:** httparse core

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `7.1.1`
+- **Upstream:** [source repository](<https://github.com/NoelMinamino/dns-packet>) · [npm](<https://www.npmjs.com/package/@noelminamino/dns-packet>)
 - **License:** MIT
 - **Parser family:** dns-packet family (fork of @dnsquery/dns-packet)
 - **Local input API:** `decode(buf: Uint8Array | Buffer) -> packet object`

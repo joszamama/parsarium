@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `6.1.0`
+- **Upstream:** [source repository](<https://github.com/ultrajson/ultrajson>) · [PyPI](<https://pypi.org/project/ujson/>)
 - **License:** BSD-3-Clause AND TCL
 - **Parser family:** UltraJSON C decoder (ujson decode.c) / vendored double-conversion 3.2.0 C++ string-to-double
 - **Local input API:** `ujson.loads(local JSON bytes); ujson.loads(decoded str) gives the same exact tree on both controls`

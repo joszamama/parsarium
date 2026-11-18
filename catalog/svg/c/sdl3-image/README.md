@@ -1,6 +1,7 @@
 # sdl3_image — SVG / C
 
 - **Pinned release:** `3.4.8`
+- **Upstream:** [source repository](<https://github.com/libsdl-org/SDL_image>)
 - **License:** Zlib
 - **Parsed scope:** parsed SVG dimensions and rendered red/green RGBA pixels
 - **Underlying family:** SDL3_image SVG loader with embedded NanoSVG parser/rasterizer

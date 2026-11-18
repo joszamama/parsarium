@@ -1,6 +1,7 @@
 # owen-oj/laravel-getid3 — MP3 / PHP
 
 - **Pinned release:** `v2.6.0`
+- **Upstream:** [source repository](<https://github.com/Owen-oj/laravel-getid3>) · [Packagist](<https://packagist.org/packages/owen-oj/laravel-getid3>)
 - **License:** MIT
 - **Parsed scope:** ID3v2.3 title, artist, album, and major version
 - **Underlying family:** getID3 native MP3 and ID3v2 parser

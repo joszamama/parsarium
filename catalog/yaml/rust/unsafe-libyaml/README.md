@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.2.11`
+- **Upstream:** [source repository](<https://github.com/dtolnay/unsafe-libyaml>) · [crates.io](<https://crates.io/crates/unsafe-libyaml>)
 - **License:** MIT
 - **Parser family:** libyaml: unsafe-libyaml 0.2.11 is a c2rust translation of libyaml at upstream commit 2c891fc7 and is the same crate the selected serde_yaml path drives (serde_yaml uses its yaml_parser_parse event interface with its own loader; this path uses libyaml's own yaml_parser_load composer). Shared libyaml family with serde_yaml, C libyaml, PyYAML's CLoader and PHP ext-yaml.
 - **Local input API:** `unsafe_libyaml::{yaml_parser_initialize, yaml_parser_set_input_string(*mut yaml_parser_t, *const u8, u64), yaml_parser_load(*mut yaml_parser_t, *mut yaml_document_t) -> Success, yaml_document_get_root_node, yaml_document_get_node, yaml_document_delete, yaml_parser_delete}; yaml_node_t scalar (value, length, style), sequence items and mapping pairs`

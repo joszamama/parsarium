@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.154`
+- **Upstream:** [source repository](<https://github.com/serde-rs/json>) · [crates.io](<https://crates.io/crates/serde_json>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** serde_json recursive-descent deserializer (serde-rs/json)
 - **Local input API:** `serde_json::from_slice::<serde_json::Value>(&[u8]); serde_json::Value::{Object, Array, String, Number, Bool, Null}; Number::as_f64(); Map::keys()`

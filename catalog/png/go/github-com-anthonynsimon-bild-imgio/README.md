@@ -1,6 +1,7 @@
 # github.com/anthonynsimon/bild/imgio — PNG / Go
 
 - **Pinned release:** `v0.17.1`
+- **Upstream:** [source repository](<https://github.com/anthonynsimon/bild>) · [pkg.go.dev](<https://pkg.go.dev/github.com/anthonynsimon/bild/imgio>)
 - **License:** MIT
 - **Parsed scope:** pixels
 - **Underlying family:** Go image/png wrapper

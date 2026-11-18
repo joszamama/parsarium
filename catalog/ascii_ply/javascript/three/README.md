@@ -1,6 +1,7 @@
 # three — ASCII PLY / JavaScript
 
 - **Pinned release:** `0.187.0`
+- **Upstream:** [source repository](<https://github.com/mrdoob/three.js>) · [npm](<https://www.npmjs.com/package/three>)
 - **License:** MIT
 - **Parsed scope:** triangle mesh
 - **Underlying family:** Three.js PLYLoader family

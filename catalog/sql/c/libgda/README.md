@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `5.2.10`
+- **Upstream:** [source repository](<https://gitlab.gnome.org/GNOME/libgda>) · [Debian](<https://tracker.debian.org/pkg/libgda5>)
 - **License:** LGPL-2.0-or-later
 - **Parser family:** libgda Lemon-generated SQL grammar
 - **Local input API:** `gda_sql_parser_parse_string(GdaSqlParser*, local NUL-terminated SQL text, &remain, &error) -> GdaStatement ("structure": GdaSqlStatement tree)`

@@ -1,6 +1,7 @@
 # @achingbrain/http-parser-js — HTTP/1.1 / JavaScript
 
 - **Pinned release:** `0.5.9`
+- **Upstream:** [source repository](<https://github.com/creationix/http-parser-js>) · [npm](<https://www.npmjs.com/package/@achingbrain/http-parser-js>)
 - **License:** MIT
 - **Parsed scope:** request
 - **Underlying family:** http-parser-js

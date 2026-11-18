@@ -1,6 +1,7 @@
 # mp4box — MP4 / JavaScript
 
 - **Pinned release:** `2.5.0`
+- **Upstream:** [source repository](<https://github.com/gpac/mp4box.js>) · [npm](<https://www.npmjs.com/package/mp4box>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** tracks+brand
 - **Underlying family:** GPAC MP4Box.js

@@ -1,6 +1,7 @@
 # libvips — SVG / C++
 
 - **Pinned release:** `8.18.7`
+- **Upstream:** [source repository](<https://github.com/libvips/libvips>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** parsed SVG dimensions and rendered red/green rectangle pixels
 - **Underlying family:** libvips SVG loader over librsvg

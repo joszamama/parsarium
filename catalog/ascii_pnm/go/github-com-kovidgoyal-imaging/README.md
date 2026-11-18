@@ -1,6 +1,7 @@
 # github.com/kovidgoyal/imaging — ASCII PNM / Go
 
 - **Pinned release:** `v1.9.0`
+- **Upstream:** [source repository](<https://github.com/kovidgoyal/imaging>) · [pkg.go.dev](<https://pkg.go.dev/github.com/kovidgoyal/imaging>)
 - **License:** MIT
 - **Parsed scope:** P3 pixels and dimensions
 - **Underlying family:** kovidgoyal Netpbm (imaging.Decode wrapper over imaging/netpbm)

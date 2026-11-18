@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.8.1`
+- **Upstream:** [source repository](<https://github.com/amritk/mjst>) · [npm](<https://www.npmjs.com/package/@amritk/yaml>)
 - **License:** MIT
 - **Parser family:** @amritk/yaml own single-pass scanner and tree builder
 - **Local input API:** `parseDocument(text) with default options after strict UTF-8 decoding of a local Buffer; zero errors and warnings required; Document.toJS() mapped to the Parsarium typed YAML tree`

@@ -1,6 +1,7 @@
 # mp3spi — MP3 / Java
 
 - **Pinned release:** `1.9.5.4`
+- **Upstream:** [source repository](<https://github.com/pdudits/soundlibs>) · [Maven Central](<https://central.sonatype.com/artifact/com.googlecode.soundlibs/mp3spi>)
 - **License:** LGPL-2.0-or-later
 - **Parsed scope:** local tagged MP3 type, ID3v2 title, artist, album and tag version
 - **Underlying family:** soundlibs MP3SPI Java Sound provider over its JLayer fork

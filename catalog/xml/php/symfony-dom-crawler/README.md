@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v8.1.10`
+- **Upstream:** [source repository](<https://github.com/symfony/dom-crawler>) · [Packagist](<https://packagist.org/packages/symfony/dom-crawler>)
 - **License:** MIT
 - **Parser family:** libxml2 via PHP DOMDocument, shared with the standard path and sabre/xml
 - **Local input API:** `new Crawler() then Crawler::addXmlContent(string) (DOMDocument::loadXML with LIBXML_NONET always added); the XML-mode Crawler is traversed with children(), each(), nodeName(), attr(), text() and filterXPath() with namespace discovery and registerNamespace()`

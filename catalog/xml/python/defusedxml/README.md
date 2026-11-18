@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.7.1`
+- **Upstream:** [source repository](<https://github.com/tiran/defusedxml>) · [PyPI](<https://pypi.org/project/defusedxml/>)
 - **License:** PSF-2.0
 - **Parser family:** defusedxml guarded ElementTree facade over CPython xml.etree.ElementTree XMLParser/pyexpat over Expat 2.10.0
 - **Local input API:** `defusedxml.ElementTree.parse(BytesIO(local XML bytes)) with default forbid_dtd=False, forbid_entities=True, forbid_external=True; getroot(); Element.tag, attrib, text and tail`

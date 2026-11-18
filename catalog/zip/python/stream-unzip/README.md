@@ -1,6 +1,7 @@
 # stream-unzip — ZIP / Python
 
 - **Pinned release:** `0.0.101`
+- **Upstream:** [source repository](<https://github.com/uktrade/stream-unzip>) · [PyPI](<https://pypi.org/project/stream-unzip/>)
 - **License:** MIT
 - **Parsed scope:** DEFLATE ZIP entry name and content
 - **Underlying family:** stream-unzip native Python parser

@@ -1,6 +1,7 @@
 # clawpdf — PDF / JavaScript
 
 - **Pinned release:** `0.3.2`
+- **Upstream:** [source repository](<https://github.com/openclaw/clawpdf>) · [npm](<https://www.npmjs.com/package/clawpdf>)
 - **License:** MIT
 - **Parsed scope:** text
 - **Underlying family:** PDFium

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.3`
+- **Upstream:** [source repository](<https://github.com/ota-meshi/toml-eslint-parser>) · [npm](<https://www.npmjs.com/package/toml-eslint-parser>)
 - **License:** MIT
 - **Parser family:** toml-eslint-parser (own code-point tokenizer and syntax-tree parser)
 - **Local input API:** `parseTOML(text, { tomlVersion: '1.0.0' }) on local bytes decoded as strict UTF-8 text; the typed tree walks the returned TOML syntax tree (TOMLTable resolvedKey, TOMLKeyValue keys via getStaticTOMLValue, TOMLValue kind and value)`

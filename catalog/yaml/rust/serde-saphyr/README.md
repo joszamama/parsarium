@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.1.1`
+- **Upstream:** [source repository](<https://github.com/bourumir-wyngs/serde-saphyr>) · [crates.io](<https://crates.io/crates/serde-saphyr>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** granit-parser / yaml-rust lineage: serde-saphyr 2.x drives granit-parser 2.2.0 (the same author's fork of saphyr-parser) for events and adds its own deserializer, anchor replay and scalar resolution (38 of its 14,737 distinct non-test source lines longer than 25 characters also occur in granit-parser).
 - **Local input API:** `serde_saphyr::from_str::<T: Deserialize>(&str) -> Result<T, Error>, here with a harness Deserialize type whose visitor uses deserialize_any (visit_bool/i64/u64/f64/str/unit/seq/map)`

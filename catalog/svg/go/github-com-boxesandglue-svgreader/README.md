@@ -1,6 +1,7 @@
 # github.com/boxesandglue/svgreader — SVG / Go
 
 - **Pinned release:** `v0.0.9`
+- **Upstream:** [source repository](<https://github.com/boxesandglue/svgreader>) · [pkg.go.dev](<https://pkg.go.dev/github.com/boxesandglue/svgreader>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** elements
 - **Underlying family:** boxesandglue SVG reader

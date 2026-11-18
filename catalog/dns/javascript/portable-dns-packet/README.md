@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.0`
+- **Upstream:** [source repository](<https://github.com/portablejs/portable>) · [npm](<https://www.npmjs.com/package/@portable/dns-packet>)
 - **License:** MIT
 - **Parser family:** @portable/dns-packet own decoder (dist/packet.js, wire.js, records.js)
 - **Local input API:** `decode(bytes: Uint8Array, options?) -> DecodedPacket`

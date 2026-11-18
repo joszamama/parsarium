@@ -1,6 +1,7 @@
 # libwebsockets — HTTP/1.1 / C++
 
 - **Pinned release:** `5.0.0`
+- **Upstream:** [source repository](<https://github.com/warmcat/libwebsockets>)
 - **License:** MIT
 - **Parsed scope:** HTTP/1.1 GET request method, path, query argument and Host header from local read buffer
 - **Underlying family:** libwebsockets C HTTP/1 parser in the server adoption path; independent from llhttp and LibHTP

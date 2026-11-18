@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `rel-20160808`
+- **Upstream:** [source repository](<https://github.com/wahern/dns>)
 - **License:** MIT
 - **Parser family:** dns.c (William Ahern) single-file packet decoder (src/dns.c)
 - **Local input API:** `struct dns_packet *dns_p_make(size_t, int *) filled with the message bytes (P->data, P->end), int dns_p_study(struct dns_packet *), dns_header(P) and dns_p_count(P, section), then dns_rr_grep via dns_rr_foreach(&rr, P, .section = ..., .sort = dns_rr_i_packet); names from dns_d_expand, RDATA from dns_any_parse + dns_any_print`

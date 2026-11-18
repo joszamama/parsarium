@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.15.5`
+- **Upstream:** [source repository](<https://github.com/bytedance/sonic>) · [pkg.go.dev](<https://pkg.go.dev/github.com/bytedance/sonic>)
 - **License:** Apache-2.0
 - **Parser family:** Sonic optimized arm64 decoder: Go optdec over native NEON parser
 - **Local input API:** `sonic.Unmarshal([]byte, *any) over one complete local JSON byte slice`

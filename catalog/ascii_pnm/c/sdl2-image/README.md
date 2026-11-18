@@ -1,6 +1,7 @@
 # sdl2_image — ASCII PNM / C
 
 - **Pinned release:** `2.8.12`
+- **Upstream:** [source repository](<https://github.com/libsdl-org/SDL_image>)
 - **License:** Zlib
 - **Parsed scope:** P3 dimensions and two decoded RGBA pixels
 - **Underlying family:** SDL_image PNM decoder lineage

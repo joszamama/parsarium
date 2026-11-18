@@ -8,16 +8,16 @@ Ten positive-signal Python JSON third-party paths pass valid nested object and a
 
 ## Third-party parsers
 
-- [pydantic](pydantic/README.md) — verified Docker harness
-- [jiter](jiter/README.md) — verified Docker harness
-- [orjson](orjson/README.md) — verified Docker harness
-- [json5](json5/README.md) — verified Docker harness
-- [simplejson](simplejson/README.md) — verified Docker harness
-- [ijson](ijson/README.md) — verified Docker harness
-- [msgspec](msgspec/README.md) — verified Docker harness
-- [ujson](ujson/README.md) — verified Docker harness
-- [dirtyjson](dirtyjson/README.md) — verified Docker harness
-- [hjson](hjson/README.md) — verified Docker harness
+- [pydantic](pydantic/README.md) — verified Docker harness · [source repository](<https://github.com/pydantic/pydantic>) · [PyPI](<https://pypi.org/project/pydantic/>)
+- [jiter](jiter/README.md) — verified Docker harness · [source repository](<https://github.com/pydantic/jiter>) · [PyPI](<https://pypi.org/project/jiter/>)
+- [orjson](orjson/README.md) — verified Docker harness · [source repository](<https://github.com/ijl/orjson>) · [PyPI](<https://pypi.org/project/orjson/>)
+- [json5](json5/README.md) — verified Docker harness · [source repository](<https://github.com/dpranke/pyjson5>) · [PyPI](<https://pypi.org/project/json5/>)
+- [simplejson](simplejson/README.md) — verified Docker harness · [source repository](<https://github.com/simplejson/simplejson>) · [PyPI](<https://pypi.org/project/simplejson/>)
+- [ijson](ijson/README.md) — verified Docker harness · [source repository](<https://github.com/ICRAR/ijson>) · [PyPI](<https://pypi.org/project/ijson/>)
+- [msgspec](msgspec/README.md) — verified Docker harness · [source repository](<https://github.com/msgspec/msgspec>) · [PyPI](<https://pypi.org/project/msgspec/>)
+- [ujson](ujson/README.md) — verified Docker harness · [source repository](<https://github.com/ultrajson/ultrajson>) · [PyPI](<https://pypi.org/project/ujson/>)
+- [dirtyjson](dirtyjson/README.md) — verified Docker harness · [source repository](<https://github.com/codecobblers/dirtyjson>) · [PyPI](<https://pypi.org/project/dirtyjson/>)
+- [hjson](hjson/README.md) — verified Docker harness · [source repository](<https://github.com/hjson/hjson-py>) · [PyPI](<https://pypi.org/project/hjson/>)
 
 ## Standard and runtime APIs
 

@@ -1,6 +1,7 @@
 # github.com/bogem/id3v2/v2 — MP3 / Go
 
 - **Pinned release:** `v2.1.4`
+- **Upstream:** [source repository](<https://github.com/n10v/id3v2>) · [pkg.go.dev](<https://pkg.go.dev/github.com/bogem/id3v2/v2>)
 - **License:** MIT
 - **Parsed scope:** ID3v2.3 title
 - **Underlying family:** bogem ID3v2 parser

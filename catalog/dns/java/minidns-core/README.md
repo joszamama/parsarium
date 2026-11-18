@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.1.3`
+- **Upstream:** [source repository](<https://github.com/MiniDNS/minidns>) · [Maven Central](<https://central.sonatype.com/artifact/org.minidns/minidns-core>)
 - **License:** Apache-2.0
 - **Parser family:** MiniDNS (org.minidns DnsMessage, Question, Record, DnsName)
 - **Local input API:** `org.minidns.dnsmessage.DnsMessage(byte[] data) throws IOException`

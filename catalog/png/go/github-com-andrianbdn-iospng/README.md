@@ -1,6 +1,7 @@
 # github.com/andrianbdn/iospng — PNG / Go
 
 - **Pinned release:** `v0.0.0-20180730113000-dccef1992541`
+- **Upstream:** [source repository](<https://github.com/AndrianBdn/iospng>) · [pkg.go.dev](<https://pkg.go.dev/github.com/andrianbdn/iospng>)
 - **License:** MIT
 - **Parsed scope:** dimensions+converted_bytes
 - **Underlying family:** iOS PNG converter

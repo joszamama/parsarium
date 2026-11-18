@@ -1,6 +1,7 @@
 # github.com/rishabh-bector/assimp-golang — ASCII PLY / Go
 
 - **Pinned release:** `v0.0.0-20190130041627-cbac4dcfdaf3`
+- **Upstream:** [source repository](<https://github.com/rishabh-bector/assimp-golang>) · [pkg.go.dev](<https://pkg.go.dev/github.com/rishabh-bector/assimp-golang>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY mesh, vertex, and face counts
 - **Underlying family:** Assimp C++ importer

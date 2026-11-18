@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `5.0.4`
+- **Upstream:** [source repository](<https://github.com/simdjson/simdjson>) · [Debian](<https://tracker.debian.org/pkg/simdjson>)
 - **License:** Apache-2.0 OR MIT
 - **Parser family:** simdjson ARM64 DOM parser
 - **Local input API:** `simdjson::dom::parser::parse(const char *buf, size_t len) -> simdjson::dom::element`

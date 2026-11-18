@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.1.5`
+- **Upstream:** [source repository](<https://github.com/crodas/SQLParser>) · [Packagist](<https://packagist.org/packages/crodas/sql-parser>)
 - **License:** MIT
 - **Parser family:** crodas SQLParser Lemon-generated LALR parser (SQL\Statement objects)
 - **Local input API:** `(new SQLParser())->parse(local SQL text) -> SQL\Statement objects`

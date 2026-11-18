@@ -1,6 +1,7 @@
 # mediainfo.js — MP4 / JavaScript
 
 - **Pinned release:** `0.3.8`
+- **Upstream:** [source repository](<https://github.com/buzz/mediainfo.js>) · [npm](<https://www.npmjs.com/package/mediainfo.js>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** tracks+title
 - **Underlying family:** MediaInfoLib WASM

@@ -1,6 +1,7 @@
 # kotlin-assimp — ASCII PLY / Java
 
 - **Pinned release:** `v4.0`
+- **Upstream:** [source repository](<https://github.com/kotlin-graphics/assimp>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** ASCII PLY triangle, three vertices, one face, parsed indices [0,1,2]
 - **Underlying family:** Kotlin-graphics JVM Assimp port PLY importer

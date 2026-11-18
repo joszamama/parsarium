@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.2.0`
+- **Upstream:** [source repository](<https://github.com/go-faster/jx>) · [pkg.go.dev](<https://pkg.go.dev/github.com/go-faster/jx>)
 - **License:** MIT
 - **Parser family:** go-faster/jx own Go decoder (lightweight fork of json-iterator)
 - **Local input API:** `jx.DecodeBytes([]byte) Decoder walked with Next/Obj/Arr/Str/Float64/Bool/Null over one complete local JSON byte slice; a final Skip must return io.EOF`

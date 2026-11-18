@@ -8,12 +8,12 @@ Bounded TOML search captured 2026-11-17: 3 npm queries, 300 recorded hits (239 u
 
 ## Third-party parsers
 
-- [smol-toml](smol-toml/README.md) — verified Docker harness
-- [toml-eslint-parser](toml-eslint-parser/README.md) — verified Docker harness
-- [@ltd/j-toml](ltd-j-toml/README.md) — verified Docker harness
-- [@decimalturn/toml-patch](decimalturn-toml-patch/README.md) — verified Docker harness
-- [@effected/toml](effected-toml/README.md) — verified Docker harness
-- [@sgarciac/bombadil](sgarciac-bombadil/README.md) — verified Docker harness
+- [smol-toml](smol-toml/README.md) — verified Docker harness · [source repository](<https://github.com/squirrelchat/smol-toml>) · [npm](<https://www.npmjs.com/package/smol-toml>)
+- [toml-eslint-parser](toml-eslint-parser/README.md) — verified Docker harness · [source repository](<https://github.com/ota-meshi/toml-eslint-parser>) · [npm](<https://www.npmjs.com/package/toml-eslint-parser>)
+- [@ltd/j-toml](ltd-j-toml/README.md) — verified Docker harness · [source repository](<https://github.com/LongTengDao/j-toml>) · [npm](<https://www.npmjs.com/package/@ltd/j-toml>)
+- [@decimalturn/toml-patch](decimalturn-toml-patch/README.md) — verified Docker harness · [source repository](<https://github.com/DecimalTurn/toml-patch>) · [npm](<https://www.npmjs.com/package/@decimalturn/toml-patch>)
+- [@effected/toml](effected-toml/README.md) — verified Docker harness · [source repository](<https://github.com/spencerbeggs/effected>) · [npm](<https://www.npmjs.com/package/@effected/toml>)
+- [@sgarciac/bombadil](sgarciac-bombadil/README.md) — verified Docker harness · [npm](<https://www.npmjs.com/package/@sgarciac/bombadil>)
 
 ## Standard and runtime APIs
 

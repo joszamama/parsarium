@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.4.0`
+- **Upstream:** [source repository](<https://github.com/marzer/tomlplusplus>) · [Debian](<https://tracker.debian.org/pkg/tomlplusplus>)
 - **License:** MIT
 - **Parser family:** toml++ (marzer/tomlplusplus)
 - **Local input API:** `toml::parse(std::string_view doc) -> toml::table (exceptions enabled; throws toml::parse_error), walked through toml::node / toml::table / toml::array / toml::value<T> and toml::date_time {date, time, optional<time_offset>}`

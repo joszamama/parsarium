@@ -1,6 +1,7 @@
 # wapmorgan/media-file — MP3 / PHP
 
 - **Pinned release:** `0.1.4`
+- **Upstream:** [source repository](<https://github.com/wapmorgan/MediaFile>) · [Packagist](<https://packagist.org/packages/wapmorgan/media-file>)
 - **License:** MIT
 - **Parsed scope:** MP3 audio type, 8 kHz sample rate, and 32 kb/s bit rate on an ID3v2.3-tagged control
 - **Underlying family:** Mp3Info native MP3 and ID3v2 parser

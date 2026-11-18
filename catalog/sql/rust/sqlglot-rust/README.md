@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.11.2`
+- **Upstream:** [source repository](<https://github.com/protegrity/sql-glot-rust>) · [crates.io](<https://crates.io/crates/sqlglot-rust>)
 - **License:** MIT
 - **Parser family:** sqlglot-rust tokenizer and recursive-descent parser (sqlglot-inspired)
 - **Local input API:** `parser::parse_statements(local UTF-8 text, Dialect::Ansi) -> Vec<Statement>`

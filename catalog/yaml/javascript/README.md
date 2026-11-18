@@ -8,16 +8,16 @@ Ten verified third-party YAML paths (js-yaml 5.5.0, yaml 2.9.1, yaml-ast-parser 
 
 ## Third-party parsers
 
-- [js-yaml](js-yaml/README.md) — verified Docker harness
-- [yaml](yaml/README.md) — verified Docker harness
-- [yaml-ast-parser](yaml-ast-parser/README.md) — verified Docker harness
-- [@stoplight/yaml](stoplight-yaml/README.md) — verified Docker harness
-- [yaml-eslint-parser](yaml-eslint-parser/README.md) — verified Docker harness
-- [yaml-js](yaml-js/README.md) — verified Docker harness
-- [yaml-to-momoa](yaml-to-momoa/README.md) — verified Docker harness
-- [@visulima/yaml](visulima-yaml/README.md) — verified Docker harness
-- [@amritk/yaml](amritk-yaml/README.md) — verified Docker harness
-- [yaml.min](yaml-min/README.md) — verified Docker harness
+- [js-yaml](js-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/nodeca/js-yaml>) · [npm](<https://www.npmjs.com/package/js-yaml>)
+- [yaml](yaml/README.md) — verified Docker harness · [source repository](<https://github.com/eemeli/yaml>) · [npm](<https://www.npmjs.com/package/yaml>)
+- [yaml-ast-parser](yaml-ast-parser/README.md) — verified Docker harness · [source repository](<https://github.com/mulesoft-labs/yaml-ast-parser>) · [npm](<https://www.npmjs.com/package/yaml-ast-parser>)
+- [@stoplight/yaml](stoplight-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/stoplightio/yaml>) · [npm](<https://www.npmjs.com/package/@stoplight/yaml>)
+- [yaml-eslint-parser](yaml-eslint-parser/README.md) — verified Docker harness · [source repository](<https://github.com/ota-meshi/yaml-eslint-parser>) · [npm](<https://www.npmjs.com/package/yaml-eslint-parser>)
+- [yaml-js](yaml-js/README.md) — verified Docker harness · [source repository](<https://github.com/connec/yaml-js>) · [npm](<https://www.npmjs.com/package/yaml-js>)
+- [yaml-to-momoa](yaml-to-momoa/README.md) — verified Docker harness · [source repository](<https://github.com/drwpow/yaml-to-momoa>) · [npm](<https://www.npmjs.com/package/yaml-to-momoa>)
+- [@visulima/yaml](visulima-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/visulima/visulima>) · [npm](<https://www.npmjs.com/package/@visulima/yaml>)
+- [@amritk/yaml](amritk-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/amritk/mjst>) · [npm](<https://www.npmjs.com/package/@amritk/yaml>)
+- [yaml.min](yaml-min/README.md) — verified Docker harness · [source repository](<https://github.com/wellwelwel/yaml.min>) · [npm](<https://www.npmjs.com/package/yaml.min>)
 
 ## Standard and runtime APIs
 

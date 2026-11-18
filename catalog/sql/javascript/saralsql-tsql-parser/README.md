@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.4.7`
+- **Upstream:** [source repository](<https://github.com/saralstalin/saralsqlparser>) · [npm](<https://www.npmjs.com/package/@saralsql/tsql-parser>)
 - **License:** MIT
 - **Parser family:** @saralsql/tsql-parser hand-written T-SQL parser
 - **Local input API:** `analyze(local UTF-8 text) -> {ast: Program, issues}`

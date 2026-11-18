@@ -1,6 +1,7 @@
 # wavers — WAV / Rust
 
 - **Pinned release:** `1.5.1`
+- **Upstream:** [source repository](<https://github.com/jmg049/wavers>) · [crates.io](<https://crates.io/crates/wavers>)
 - **License:** MIT
 - **Parsed scope:** Decoded PCM sample values and WAV metadata
 - **Underlying family:** wavers reader

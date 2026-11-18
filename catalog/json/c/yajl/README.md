@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.1.0`
+- **Upstream:** [source repository](<https://github.com/lloyd/yajl>) · [Debian](<https://tracker.debian.org/pkg/yajl>)
 - **License:** ISC
 - **Parser family:** yajl own lexer and event parser (yajl_lex.c, yajl_parser.c)
 - **Local input API:** `yajl_alloc(const yajl_callbacks *, yajl_alloc_funcs *, void *ctx); yajl_parse(yajl_handle, const unsigned char *jsonText, size_t jsonTextLength); yajl_complete_parse(yajl_handle)`

@@ -1,6 +1,7 @@
 # printpdf — PDF / Rust
 
 - **Pinned release:** `0.12.9`
+- **Upstream:** [source repository](<https://github.com/fschutt/printpdf>) · [crates.io](<https://crates.io/crates/printpdf>)
 - **License:** MIT
 - **Parsed scope:** PDF page model
 - **Underlying family:** lopdf

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.25.19+spec-1.1.0`
+- **Upstream:** [source repository](<https://github.com/toml-rs/toml>) · [crates.io](<https://crates.io/crates/toml_edit>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** toml_parser (toml-rs): toml_parser 1.1.5 lexes and emits parse events; toml_edit assembles its own format-preserving Document/Item/Value tree from those events. Shared with the selected toml path; not an independent lexer or parser.
 - **Local input API:** `str::parse::<toml_edit::DocumentMut>() -> Result<DocumentMut, TomlError>; DocumentMut derefs to Table of Item::{None, Value, Table, ArrayOfTables}; Value::{String, Integer, Float, Boolean, Datetime (Formatted<toml_datetime::Datetime>), Array, InlineTable}`

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v2.3.1`
+- **Upstream:** [source repository](<https://github.com/hjson/hjson-php>) · [Packagist](<https://packagist.org/packages/laktak/hjson>)
 - **License:** MIT
 - **Parser family:** hjson-php HJSONParser (port of hjson-js) recursive character parser
 - **Local input API:** `new HJSON\HJSONParser() then parse(string $text) with default options over local UTF-8 bytes; returns stdClass objects, PHP lists and scalars that the harness type-tags with members in returned order`

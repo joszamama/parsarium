@@ -8,9 +8,9 @@ Three verified C SQL paths. Search: a bounded Debian popcon source-name search (
 
 ## Third-party parsers
 
-- [libgda](libgda/README.md) — verified Docker harness
-- [libpg_query](libpg-query/README.md) — verified Docker harness
-- [tree-sitter-sql](tree-sitter-sql/README.md) — verified Docker harness
+- [libgda](libgda/README.md) — verified Docker harness · [source repository](<https://gitlab.gnome.org/GNOME/libgda>) · [Debian](<https://tracker.debian.org/pkg/libgda5>)
+- [libpg_query](libpg-query/README.md) — verified Docker harness · [source repository](<https://github.com/pganalyze/libpg_query>) · [Debian](<https://tracker.debian.org/pkg/libpg-query>)
+- [tree-sitter-sql](tree-sitter-sql/README.md) — verified Docker harness · [source repository](<https://github.com/DerekStride/tree-sitter-sql>) · [Debian](<https://tracker.debian.org/pkg/tree-sitter-sql>)
 
 ## Standard and runtime APIs
 

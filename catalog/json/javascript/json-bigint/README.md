@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.0`
+- **Upstream:** [source repository](<https://github.com/sidorares/json-bigint>) · [npm](<https://www.npmjs.com/package/json-bigint>)
 - **License:** MIT
 - **Parser family:** Crockford JSON.js recursive-descent parser adapted by json-bigint
 - **Local input API:** `JSONbig.parse(text) after decoding a local Buffer with strict UTF-8 TextDecoder; exact type-tagged tree of returned values`

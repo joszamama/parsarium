@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.9.0`
+- **Upstream:** [source repository](<https://github.com/uhop/stream-json>) · [npm](<https://www.npmjs.com/package/stream-json>)
 - **License:** BSD-3-Clause
 - **Parser family:** stream-json charCodeAt/regex streaming tokenizer
 - **Local input API:** `chain([Readable.from([Buffer]), parser()]) with Assembler.connectTo(pipeline, {onDone})`

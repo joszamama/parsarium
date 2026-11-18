@@ -1,6 +1,7 @@
 # svg-hush — SVG / Rust
 
 - **Pinned release:** `0.9.7`
+- **Upstream:** [source repository](<https://github.com/cloudflare/svg-hush>) · [crates.io](<https://crates.io/crates/svg-hush>)
 - **License:** Apache-2.0 OR MIT
 - **Parsed scope:** SVG-aware stream filtering
 - **Underlying family:** svg-hush SVG filter

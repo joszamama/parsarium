@@ -1,6 +1,7 @@
 # resvg — SVG / C++
 
 - **Pinned release:** `0.50.0`
+- **Upstream:** [source repository](<https://github.com/linebender/resvg>) · [Debian](<https://tracker.debian.org/pkg/resvg>)
 - **License:** Apache-2.0 OR MIT
 - **Parsed scope:** parsed SVG dimensions and rendered red/green rectangle pixels
 - **Underlying family:** resvg/usvg Rust SVG parser and tiny-skia renderer through C API

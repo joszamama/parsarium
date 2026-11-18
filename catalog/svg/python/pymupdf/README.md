@@ -1,6 +1,7 @@
 # PyMuPDF — SVG / Python
 
 - **Pinned release:** `2.1`
+- **Upstream:** [source repository](<https://github.com/pymupdf/PyMuPDF>) · [PyPI](<https://pypi.org/project/PyMuPDF/>)
 - **License:** AGPL-3.0-only
 - **Parsed scope:** SVG document page and dimensions
 - **Underlying family:** MuPDF SVG document parser

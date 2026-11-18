@@ -1,6 +1,7 @@
 # zziplib — ZIP / C
 
 - **Pinned release:** `0.13.80`
+- **Upstream:** [source repository](<https://github.com/gdraheim/zziplib>) · [Debian](<https://tracker.debian.org/pkg/zziplib>)
 - **License:** GPL-2.0-or-later
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** ZZIPlib ZIP reader

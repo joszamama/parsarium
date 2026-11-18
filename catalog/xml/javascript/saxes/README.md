@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `6.0.0`
+- **Upstream:** [source repository](<https://github.com/lddubeau/saxes>) · [npm](<https://www.npmjs.com/package/saxes>)
 - **License:** ISC
 - **Parser family:** saxes hand-written XML 1.0 + Namespaces state machine (sax-js fork)
 - **Local input API:** `new SaxesParser({xmlns: true}); on('opentag'|'closetag'|'text'|'cdata'|'comment'|'processinginstruction'|'error'); write(string).close() after strict UTF-8 TextDecoder of local bytes`

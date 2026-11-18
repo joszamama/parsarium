@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.18.6`
+- **Upstream:** [source repository](<https://github.com/bakulf/libnxml>) · [Debian](<https://tracker.debian.org/pkg/libnxml>)
 - **License:** LGPL-2.1-or-later
 - **Parser family:** nXML (Andrea Marchesini's libnxml)
 - **Local input API:** `nxml_new(&doc); nxml_parse_buffer(doc, copy of the local bytes, size); walk doc->data and each nxml_data_t's children/next with type, value, ns and the attributes list (name, value, ns); nxml_free(doc)`

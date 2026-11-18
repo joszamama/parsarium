@@ -1,6 +1,7 @@
 # dompdf/php-svg-lib — SVG / PHP
 
 - **Pinned release:** `1.0.2`
+- **Upstream:** [source repository](<https://github.com/dompdf/php-svg-lib>) · [Packagist](<https://packagist.org/packages/dompdf/php-svg-lib>)
 - **License:** LGPL-3.0-or-later
 - **Parsed scope:** Root SVG dimensions; full raster rendering not exercised.
 - **Underlying family:** dompdf php-svg-lib XML/SVG parser

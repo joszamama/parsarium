@@ -1,6 +1,7 @@
 # zipfile36 — ZIP / Python
 
 - **Pinned release:** `0.1.3`
+- **Upstream:** [source repository](<https://gitlab.com/takluyver/zipfile36>) · [PyPI](<https://pypi.org/project/zipfile36/>)
 - **License:** PSF-2.0
 - **Parsed scope:** DEFLATE ZIP entry name and content
 - **Underlying family:** CPython zipfile 3.6 backport

@@ -1,6 +1,7 @@
 # github.com/tcolgate/mp3 — MP3 / Go
 
 - **Pinned release:** `v0.0.0-20170426193717-e79c5a46d300`
+- **Upstream:** [source repository](<https://github.com/tcolgate/mp3>) · [pkg.go.dev](<https://pkg.go.dev/github.com/tcolgate/mp3>)
 - **License:** MIT
 - **Parsed scope:** MPEG frame size and samples
 - **Underlying family:** tcolgate MP3 frame lineage

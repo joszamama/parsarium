@@ -1,6 +1,7 @@
 # aminyazdanpanah/php-ffmpeg-video-streaming — MP4 / PHP
 
 - **Pinned release:** `v1.3.1`
+- **Upstream:** [source repository](<https://github.com/quasarstream/PHP-FFmpeg-video-streaming>) · [Packagist](<https://packagist.org/packages/aminyazdanpanah/php-ffmpeg-video-streaming>)
 - **License:** MIT
 - **Parsed scope:** 2 × 2 H.264 video in MP4
 - **Underlying family:** FFmpeg native MOV/MP4 parser

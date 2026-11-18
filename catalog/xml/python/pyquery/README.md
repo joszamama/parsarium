@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.1.0`
+- **Upstream:** [source repository](<https://github.com/gawel/pyquery>) · [PyPI](<https://pypi.org/project/pyquery/>)
 - **License:** BSD-3-Clause
 - **Parser family:** pyquery PyQuery over lxml.etree.fromstring (default XMLParser) over libxml2 2.15.4 XML parser
 - **Local input API:** `pyquery.PyQuery(local XML bytes, parser="xml"); PyQuery.contents() recursion (child text nodes and child elements) over the returned lxml elements' tag, attrib and nsmap`

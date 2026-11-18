@@ -1,6 +1,7 @@
 # http-z — HTTP/1.1 / JavaScript
 
 - **Pinned release:** `8.1.1`
+- **Upstream:** [source repository](<https://github.com/AlexanderMac/http-z>) · [npm](<https://www.npmjs.com/package/http-z>)
 - **License:** MIT
 - **Parsed scope:** request
 - **Underlying family:** http-z

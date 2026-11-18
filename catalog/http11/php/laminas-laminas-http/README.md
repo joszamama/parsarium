@@ -1,6 +1,7 @@
 # laminas/laminas-http — HTTP/1.1 / PHP
 
 - **Pinned release:** `2.23.0`
+- **Upstream:** [source repository](<https://github.com/laminas/laminas-http>) · [Packagist](<https://packagist.org/packages/laminas/laminas-http>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** single valid GET request line and Host, X-Parsarium, Connection headers
 - **Underlying family:** Zend/Laminas HTTP message parser lineage

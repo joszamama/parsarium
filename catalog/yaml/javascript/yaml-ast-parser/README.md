@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.0.43`
+- **Upstream:** [source repository](<https://github.com/mulesoft-labs/yaml-ast-parser>) · [npm](<https://www.npmjs.com/package/yaml-ast-parser>)
 - **License:** Apache-2.0
 - **Parser family:** yaml-ast-parser (mulesoft-labs fork of js-yaml 3.x) reader and AST builder
 - **Local input API:** `load(text) after strict UTF-8 decoding of a local Buffer; zero errors on the returned root node required; the documented AST (YamlMap.mappings, YAMLSequence.items, YAMLAnchorReference.value, YAMLScalar.value typed by determineScalarType with parseYamlBoolean/parseYamlInteger/parseYamlFloat) mapped to the Parsarium typed YAML tree`

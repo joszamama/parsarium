@@ -1,6 +1,7 @@
 # gpac — MP4 / C
 
 - **Pinned release:** `26.07.0`
+- **Upstream:** [source repository](<https://github.com/gpac/gpac>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** two ISO media tracks, 2x2 video dimensions and duration
 - **Underlying family:** GPAC native ISO media parser

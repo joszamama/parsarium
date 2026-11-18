@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.5.0`
+- **Upstream:** [source repository](<https://github.com/hukkin/tomli>) · [PyPI](<https://pypi.org/project/tomli/>)
 - **License:** MIT
 - **Parser family:** tomli pure-Python parser (tomli/_parser.py with tomli/_re.py); same code family as CPython's standard tomllib
 - **Local input API:** `tomli.loads(decoded local TOML text) -> dict; tomli.load(BytesIO(local bytes)) gives the same typed tree on both controls`

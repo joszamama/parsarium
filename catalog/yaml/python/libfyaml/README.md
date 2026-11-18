@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.0rc2`
+- **Upstream:** [source repository](<https://github.com/pantoniou/libfyaml>) · [PyPI](<https://pypi.org/project/libfyaml/>)
 - **License:** MIT
 - **Parser family:** libfyaml 1.0.0-rc2 (C scanner/parser and generic value builder) through the python-libfyaml _libfyaml extension; same family as the C cell libfyaml path (0.9.6)
 - **Local input API:** `libfyaml.loads(local YAML bytes).to_python(); libfyaml.loads(the decoded str) and libfyaml.load(local binary stream) give the same tree`

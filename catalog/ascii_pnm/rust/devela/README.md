@@ -1,6 +1,7 @@
 # devela — ASCII PNM / Rust
 
 - **Pinned release:** `0.30.0`
+- **Upstream:** [source repository](<https://github.com/andamira/devela>) · [crates.io](<https://crates.io/crates/devela>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** P3 ASCII PPM RGB pixels
 - **Underlying family:** devela PNM decoder

@@ -1,6 +1,7 @@
 # ffmpeg — ASCII PNM / C++
 
 - **Pinned release:** `9.0.2`
+- **Upstream:** [source repository](<https://github.com/FFmpeg/FFmpeg>) · [Debian](<https://tracker.debian.org/pkg/ffmpeg>)
 - **License:** GPL-3.0-or-later
 - **Parsed scope:** P3 codec identification, dimensions, and two decoded RGB pixels
 - **Underlying family:** FFmpeg native PNM decoder

@@ -1,6 +1,7 @@
 # mathiasreker/php-svg-optimizer — SVG / PHP
 
 - **Pinned release:** `10.0.0`
+- **Upstream:** [source repository](<https://github.com/MathiasReker/php-svg-optimizer>) · [Packagist](<https://packagist.org/packages/mathiasreker/php-svg-optimizer>)
 - **License:** MIT
 - **Parsed scope:** One SVG document with two rectangles; first fill normalized from #ff0000 to red.
 - **Underlying family:** MathiasReker native PHP SVG optimizer over libxml DOM

@@ -1,6 +1,7 @@
 # t3g/svg-sanitize-elts7 — SVG / PHP
 
 - **Pinned release:** `0.15.4.1`
+- **Upstream:** [source repository](<https://github.com/TYPO3GmbH/svg-sanitize-elts7>) · [Packagist](<https://packagist.org/packages/t3g/svg-sanitize-elts7>)
 - **License:** GPL-2.0-or-later
 - **Parsed scope:** Valid two-rectangle SVG on PHP 7.4; no full TYPO3 installation exercised.
 - **Underlying family:** enshrined SVG sanitizer over libxml DOM

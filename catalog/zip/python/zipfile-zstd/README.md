@@ -1,6 +1,7 @@
 # zipfile-zstd — ZIP / Python
 
 - **Pinned release:** `0.0.4`
+- **Upstream:** [source repository](<https://github.com/taisei-project/python-zipfile-zstd>) · [PyPI](<https://pypi.org/project/zipfile-zstd/>)
 - **License:** MIT
 - **Parsed scope:** Zstandard ZIP method 93 entry name and content
 - **Underlying family:** CPython zipfile plus zstandard codec

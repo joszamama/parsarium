@@ -1,6 +1,7 @@
 # char0n/ffmpeg-php — WAV / PHP
 
 - **Pinned release:** `3.2.2`
+- **Upstream:** [source repository](<https://github.com/char0n/ffmpeg-php>) · [Packagist](<https://packagist.org/packages/char0n/ffmpeg-php>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** PCM16 audio codec, 8 kHz mono audio, rounded 30 ms duration
 - **Underlying family:** FFmpeg native RIFF/WAVE parser

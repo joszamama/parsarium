@@ -1,6 +1,7 @@
 # github.com/evilsocket/islazy/zip — ZIP / Go
 
 - **Pinned release:** `v1.11.0`
+- **Upstream:** [source repository](<https://github.com/evilsocket/islazy>) · [pkg.go.dev](<https://pkg.go.dev/github.com/evilsocket/islazy/zip>)
 - **License:** GPL-3.0
 - **Parsed scope:** entry_name+decompressed_text
 - **Underlying family:** Go archive/zip wrapper

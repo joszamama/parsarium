@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.0.1`
+- **Upstream:** [source repository](<https://github.com/mtownsend5512/xml-to-array>) · [Packagist](<https://packagist.org/packages/mtownsend/xml-to-array>)
 - **License:** MIT
 - **Parser family:** libxml2 via PHP DOMDocument, shared with the standard path, symfony/dom-crawler and symfony/serializer
 - **Local input API:** `XmlToArray::convert(string $xml, bool $outputRoot = false) (the README's documented entry point; the global xml_to_array() helper forwards to it), called with $outputRoot = true. It loads the string with DOMDocument::loadXML and default options, then walks the DOM from documentElement into a PHP array; '@root' holds the root tagName`

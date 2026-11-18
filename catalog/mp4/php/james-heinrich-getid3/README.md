@@ -1,6 +1,7 @@
 # james-heinrich/getid3 — MP4 / PHP
 
 - **Pinned release:** `v1.9.28`
+- **Upstream:** [source repository](<https://github.com/JamesHeinrich/getID3>) · [Packagist](<https://packagist.org/packages/james-heinrich/getid3>)
 - **License:** GPL-1.0-or-later OR LGPL-3.0-only OR MPL-2.0
 - **Parsed scope:** 2 × 2 H.264 video in MP4 with one AAC mono audio stream
 - **Underlying family:** getID3 native QuickTime/MP4 parser

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.4.6`
+- **Upstream:** [source repository](<https://github.com/elharo/xom>) · [Maven Central](<https://central.sonatype.com/artifact/xom/xom>)
 - **License:** LGPL-2.1
 - **Parser family:** XOM Builder/tree over OpenJDK Xerces2-J fork
 - **Local input API:** `new nu.xom.Builder().build(Files.newInputStream(local Path)) into XOM Document`

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.2.20`
+- **Upstream:** [source repository](<https://github.com/SIDN/dns-lib>) · [Maven Central](<https://central.sonatype.com/artifact/nl.sidnlabs/dnslib>)
 - **License:** GPL-3.0
 - **Parser family:** SIDN dnslib (ENTRADA: Message, Header, Question, RRset, ResourceRecordFactory per-type decoders, DNSStringUtil, NetworkData)
 - **Local input API:** `nl.sidnlabs.dnslib.message.Message(NetworkData data) with nl.sidnlabs.dnslib.message.util.NetworkData(byte[] data)`

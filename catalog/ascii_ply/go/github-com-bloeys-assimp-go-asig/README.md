@@ -1,6 +1,7 @@
 # github.com/bloeys/assimp-go/asig — ASCII PLY / Go
 
 - **Pinned release:** `v0.6.0`
+- **Upstream:** [source repository](<https://github.com/bloeys/assimp-go>) · [pkg.go.dev](<https://pkg.go.dev/github.com/bloeys/assimp-go/asig>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY mesh, vertex, and face counts
 - **Underlying family:** Assimp C++ importer

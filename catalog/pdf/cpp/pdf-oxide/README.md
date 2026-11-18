@@ -1,6 +1,7 @@
 # pdf_oxide — PDF / C++
 
 - **Pinned release:** `0.3.78`
+- **Upstream:** [source repository](<https://github.com/yfedoseev/pdf_oxide>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** parsed PDF page count
 - **Underlying family:** pdf_oxide Rust PDF parser via C ABI

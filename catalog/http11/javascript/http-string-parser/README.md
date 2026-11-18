@@ -1,6 +1,7 @@
 # http-string-parser — HTTP/1.1 / JavaScript
 
 - **Pinned release:** `0.0.6`
+- **Upstream:** [source repository](<https://github.com/apiaryio/http-string-parser>) · [npm](<https://www.npmjs.com/package/http-string-parser>)
 - **License:** MIT
 - **Parsed scope:** request
 - **Underlying family:** http-string-parser

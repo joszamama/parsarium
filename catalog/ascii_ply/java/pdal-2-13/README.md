@@ -1,6 +1,7 @@
 # pdal_2.13 — ASCII PLY / Java
 
 - **Pinned release:** `2.10.0`
+- **Upstream:** [source repository](<https://github.com/PDAL/java>) · [Maven Central](<https://central.sonatype.com/artifact/io.pdal/pdal_2.13>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** ASCII PLY point-cloud subset: three parsed vertex coordinates through PDAL readers.ply; the face element is parsed past but PDAL exposes no mesh from readers.ply
 - **Underlying family:** PDAL native PLY reader (readers.ply) via the PDAL JNI binding

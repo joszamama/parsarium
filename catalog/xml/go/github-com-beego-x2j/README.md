@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.0.0-20131220205130-a0352aadc542`
+- **Upstream:** [source repository](<https://github.com/beego/x2j>) · [pkg.go.dev](<https://pkg.go.dev/github.com/beego/x2j>)
 - **License:** BSD-3-Clause
 - **Parser family:** x2j map conversion over Go encoding/xml Decoder tokenizer
 - **Local input API:** `Primary oracle-matching route: x2j.ToMap(io.Reader) on a local byte stream. The harness also records x2j.Unmarshal([]byte, &map[string]interface{}), ByteDocToMap([]byte), and DocToMap(string) as auxiliary routes; those three agree with one another but alter CDATA whitespace on the first valid control.`

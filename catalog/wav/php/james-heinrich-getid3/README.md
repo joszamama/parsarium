@@ -1,6 +1,7 @@
 # james-heinrich/getid3 — WAV / PHP
 
 - **Pinned release:** `v1.9.28`
+- **Upstream:** [source repository](<https://github.com/JamesHeinrich/getID3>) · [Packagist](<https://packagist.org/packages/james-heinrich/getid3>)
 - **License:** GPL-1.0-or-later OR LGPL-3.0-only OR MPL-2.0
 - **Parsed scope:** RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count
 - **Underlying family:** getID3 native RIFF/WAVE parser

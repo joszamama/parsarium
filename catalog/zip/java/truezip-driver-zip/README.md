@@ -1,6 +1,7 @@
 # truezip-driver-zip — ZIP / Java
 
 - **Pinned release:** `7.7.10`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/de.schlichtherle.truezip/truezip-driver-zip>)
 - **License:** EPL-1.0
 - **Parsed scope:** ZIP entry name and decompressed content from a local archive
 - **Underlying family:** TrueZIP ZIP driver

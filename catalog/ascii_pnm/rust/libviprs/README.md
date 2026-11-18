@@ -1,6 +1,7 @@
 # libviprs — ASCII PNM / Rust
 
 - **Pinned release:** `0.6.1`
+- **Upstream:** [source repository](<https://github.com/libviprs/libviprs>) · [crates.io](<https://crates.io/crates/libviprs>)
 - **License:** MIT
 - **Parsed scope:** P3 ASCII PPM RGB pixels
 - **Underlying family:** libviprs Netpbm decoder

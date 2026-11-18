@@ -1,6 +1,7 @@
 # aurora-tools-svg-transcoder-desktop — SVG / Java
 
 - **Pinned release:** `1.3.0`
+- **Upstream:** [source repository](<https://github.com/kirill-grouchnikov/aurora>) · [Maven Central](<https://central.sonatype.com/artifact/org.pushing-pixels/aurora-tools-svg-transcoder-desktop>)
 - **License:** Apache-2.0
 - **Parsed scope:** SVG DOM dimensions and rectangle elements after rendering tree construction
 - **Underlying family:** Aurora SVG-to-Compose transcoder using Apache Batik

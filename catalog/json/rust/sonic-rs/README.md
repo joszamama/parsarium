@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.5.11`
+- **Upstream:** [source repository](<https://github.com/cloudwego/sonic-rs>) · [crates.io](<https://crates.io/crates/sonic-rs>)
 - **License:** Apache-2.0
 - **Parser family:** sonic-rs SIMD JSON parser and own arena-backed Value DOM, with sonic-simd/sonic-number dependencies; separate implementation from serde_json and simd-json, with documented simdjson/other code references
 - **Local input API:** `sonic_rs::from_slice::<sonic_rs::Value>(&[u8]); Value::as_ref() -> ValueRef; Object::iter(); Array::iter(); JsonNumberTrait::as_f64()`

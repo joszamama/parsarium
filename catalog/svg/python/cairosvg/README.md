@@ -1,6 +1,7 @@
 # CairoSVG — SVG / Python
 
 - **Pinned release:** `2.9.1`
+- **Upstream:** [source repository](<https://github.com/Kozea/CairoSVG>) · [PyPI](<https://pypi.org/project/CairoSVG/>)
 - **License:** LGPL-3.0-or-later
 - **Parsed scope:** SVG rendering with dimensions and colored pixels
 - **Underlying family:** CairoSVG Python SVG parser plus Cairo renderer

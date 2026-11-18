@@ -1,6 +1,7 @@
 # pdf_oxide — PDF / Rust
 
 - **Pinned release:** `0.3.78`
+- **Upstream:** [source repository](<https://github.com/yfedoseev/pdf_oxide>) · [crates.io](<https://crates.io/crates/pdf_oxide>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** PDF page tree
 - **Underlying family:** PDF Oxide parser

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.2.5`
+- **Upstream:** [source repository](<https://github.com/databendlabs/databend>) · [crates.io](<https://crates.io/crates/databend-common-ast>)
 - **License:** Apache-2.0
 - **Parser family:** Databend SQL parser (logos tokenizer, nom/pratt combinators)
 - **Local input API:** `parser::tokenize_sql(local UTF-8 text) and parser::parse_sql(&tokens, Dialect::PostgreSQL) -> (Statement, Option<String>)`

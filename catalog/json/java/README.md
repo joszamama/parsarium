@@ -8,16 +8,16 @@ Pilot cell: ten JSON package/API paths are control-verified and runnable. Jackso
 
 ## Third-party parsers
 
-- [jackson-databind](jackson-databind/README.md) — verified Docker harness
-- [jackson-core](jackson-core/README.md) — verified Docker harness
-- [gson](gson/README.md) — verified Docker harness
-- [fastjson](fastjson/README.md) — verified Docker harness
-- [json](json/README.md) — verified Docker harness
-- [fastjson2](fastjson2/README.md) — verified Docker harness
-- [json-simple](json-simple/README.md) — verified Docker harness
-- [json-smart](json-smart/README.md) — verified Docker harness
-- [moshi](moshi/README.md) — verified Docker harness
-- [parsson](parsson/README.md) — verified Docker harness
+- [jackson-databind](jackson-databind/README.md) — verified Docker harness · [source repository](<https://github.com/FasterXML/jackson-databind>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-databind>)
+- [jackson-core](jackson-core/README.md) — verified Docker harness · [source repository](<https://github.com/FasterXML/jackson-core>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-core>)
+- [gson](gson/README.md) — verified Docker harness · [source repository](<https://github.com/google/gson>) · [Maven Central](<https://central.sonatype.com/artifact/com.google.code.gson/gson>)
+- [fastjson](fastjson/README.md) — verified Docker harness · [source repository](<https://github.com/alibaba/fastjson>) · [Maven Central](<https://central.sonatype.com/artifact/com.alibaba/fastjson>)
+- [json](json/README.md) — verified Docker harness · [source repository](<https://github.com/stleary/JSON-java>) · [Maven Central](<https://central.sonatype.com/artifact/org.json/json>)
+- [fastjson2](fastjson2/README.md) — verified Docker harness · [source repository](<https://github.com/alibaba/fastjson2>) · [Maven Central](<https://central.sonatype.com/artifact/com.alibaba.fastjson2/fastjson2>)
+- [json-simple](json-simple/README.md) — verified Docker harness · [Maven Central](<https://central.sonatype.com/artifact/com.googlecode.json-simple/json-simple>)
+- [json-smart](json-smart/README.md) — verified Docker harness · [source repository](<https://github.com/netplex/json-smart-v2>) · [Maven Central](<https://central.sonatype.com/artifact/net.minidev/json-smart>)
+- [moshi](moshi/README.md) — verified Docker harness · [source repository](<https://github.com/square/moshi>) · [Maven Central](<https://central.sonatype.com/artifact/com.squareup.moshi/moshi>)
+- [parsson](parsson/README.md) — verified Docker harness · [source repository](<https://github.com/eclipse-ee4j/parsson>) · [Maven Central](<https://central.sonatype.com/artifact/org.eclipse.parsson/parsson>)
 
 ## Standard and runtime APIs
 

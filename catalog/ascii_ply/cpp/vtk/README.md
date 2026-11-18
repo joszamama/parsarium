@@ -1,6 +1,7 @@
 # vtk — ASCII PLY / C++
 
 - **Pinned release:** `9.7.2`
+- **Upstream:** [source repository](<https://github.com/Kitware/VTK>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** three vertices, one polygon and its three indices
 - **Underlying family:** VTK vtkPLYReader over bundled vtkPLY syntax parser

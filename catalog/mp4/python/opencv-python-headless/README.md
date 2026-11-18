@@ -1,6 +1,7 @@
 # opencv-python-headless — MP4 / Python
 
 - **Pinned release:** `5.0.0.93`
+- **Upstream:** [source repository](<https://github.com/opencv/opencv-python>) · [PyPI](<https://pypi.org/project/opencv-python-headless/>)
 - **License:** Apache-2.0
 - **Parsed scope:** decoded video frame
 - **Underlying family:** OpenCV FFmpeg video backend

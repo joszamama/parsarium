@@ -1,6 +1,7 @@
 # github.com/JoshVarga/svgparser — SVG / Go
 
 - **Pinned release:** `v0.0.0-20200804023048-5eaba627a7d1`
+- **Upstream:** [source repository](<https://github.com/JoshVarga/svgparser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/JoshVarga/svgparser>)
 - **License:** MIT
 - **Parsed scope:** rects, root
 - **Underlying family:** JoshVarga SVG tree parser

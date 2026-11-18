@@ -1,6 +1,7 @@
 # resvg_py — SVG / Python
 
 - **Pinned release:** `0.5.0`
+- **Upstream:** [source repository](<https://github.com/baseplate-admin/resvg-py>) · [PyPI](<https://pypi.org/project/resvg_py/>)
 - **License:** MIT
 - **Parsed scope:** SVG rendering with dimensions and colored pixels
 - **Underlying family:** Rust resvg/usvg through resvg_py

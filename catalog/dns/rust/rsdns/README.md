@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.23.0`
+- **Upstream:** [source repository](<https://github.com/r-bk/rsdns>) · [crates.io](<https://crates.io/crates/rsdns>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** rsdns message reader (src/message/reader/*, bytes/cursor, names, records/data)
 - **Local input API:** `rsdns::message::reader::MessageIterator::new(buf: &[u8]) -> Result<MessageIterator>; header(), questions(), records()`

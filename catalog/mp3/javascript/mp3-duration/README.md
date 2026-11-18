@@ -1,6 +1,7 @@
 # mp3-duration — MP3 / JavaScript
 
 - **Pinned release:** `1.1.0`
+- **Upstream:** [source repository](<https://github.com/ddsol/mp3-duration>) · [npm](<https://www.npmjs.com/package/mp3-duration>)
 - **License:** MIT
 - **Parsed scope:** duration
 - **Underlying family:** mp3-duration

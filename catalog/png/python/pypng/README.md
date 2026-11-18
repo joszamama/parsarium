@@ -1,6 +1,7 @@
 # pypng — PNG / Python
 
 - **Pinned release:** `0.20220715.0`
+- **Upstream:** [source repository](<https://gitlab.com/drj11/pypng>) · [PyPI](<https://pypi.org/project/pypng/>)
 - **License:** MIT
 - **Parsed scope:** pixels
 - **Underlying family:** PyPNG

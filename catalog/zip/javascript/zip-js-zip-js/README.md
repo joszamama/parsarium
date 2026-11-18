@@ -1,6 +1,7 @@
 # @zip.js/zip.js — ZIP / JavaScript
 
 - **Pinned release:** `2.24.0`
+- **Upstream:** [source repository](<https://github.com/gildas-lormeau/zip.js>) · [npm](<https://www.npmjs.com/package/@zip.js/zip.js>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** entries_and_content
 - **Underlying family:** zip.js

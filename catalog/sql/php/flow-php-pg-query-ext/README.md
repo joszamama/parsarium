@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.48.0`
+- **Upstream:** [source repository](<https://github.com/flow-php/pg-query-ext>) · [Packagist](<https://packagist.org/packages/flow-php/pg-query-ext>)
 - **License:** MIT
 - **Parser family:** PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)
 - **Local input API:** `pg_query_parse(string $sql): string -> libpg_query JSON parse tree`

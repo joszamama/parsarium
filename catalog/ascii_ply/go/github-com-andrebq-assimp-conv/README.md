@@ -1,6 +1,7 @@
 # github.com/andrebq/assimp/conv — ASCII PLY / Go
 
 - **Pinned release:** `v0.0.0-20121130215243-a775ba6866d8`
+- **Upstream:** [source repository](<https://github.com/andrebq/assimp>) · [pkg.go.dev](<https://pkg.go.dev/github.com/andrebq/assimp/conv>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY mesh, vertex, and face counts
 - **Underlying family:** Assimp C++ importer

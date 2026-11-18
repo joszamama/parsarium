@@ -1,6 +1,7 @@
 # wapmorgan/mp3info — MP3 / PHP
 
 - **Pinned release:** `0.1.1`
+- **Upstream:** [source repository](<https://github.com/wapmorgan/Mp3Info>) · [Packagist](<https://packagist.org/packages/wapmorgan/mp3info>)
 - **License:** LGPL-3.0
 - **Parsed scope:** ID3v2.3 title, artist, album, and major version
 - **Underlying family:** Mp3Info native MP3 and ID3v2 parser

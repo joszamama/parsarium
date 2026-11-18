@@ -1,6 +1,7 @@
 # wuffs — PNG / C
 
 - **Pinned release:** `0.3.6`
+- **Upstream:** [source repository](<https://github.com/google/wuffs>)
 - **License:** Apache-2.0
 - **Parsed scope:** PNG image configuration
 - **Underlying family:** Wuffs PNG decoder

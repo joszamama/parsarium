@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.13.0`
+- **Upstream:** [source repository](<https://github.com/ibireme/yyjson>) · [Debian](<https://tracker.debian.org/pkg/yyjson>)
 - **License:** MIT
 - **Parser family:** yyjson native reader (src/yyjson.c)
 - **Local input API:** `yyjson_read(const char *dat, size_t len, yyjson_read_flag flg)`

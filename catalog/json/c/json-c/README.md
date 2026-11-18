@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.19`
+- **Upstream:** [source repository](<https://github.com/json-c/json-c>) · [Debian](<https://tracker.debian.org/pkg/json-c>)
 - **License:** MIT
 - **Parser family:** json-c incremental state-machine tokener (json_tokener.c)
 - **Local input API:** `json_tokener_parse_ex(struct json_tokener *tok, const char *str, int len)`

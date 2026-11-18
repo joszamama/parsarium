@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.3.0`
+- **Upstream:** [source repository](<https://github.com/apache/xerces-c>) · [Debian](<https://tracker.debian.org/pkg/xerces-c>)
 - **License:** Apache-2.0
 - **Parser family:** Apache Xerces-C++ scanner (IGXMLScanner)
 - **Local input API:** `xercesc::XercesDOMParser::parse(const InputSource&) with xercesc::MemBufInputSource(const XMLByte*, XMLSize_t, ...) and setDoNamespaces(true), validation off, external DTD loading off`

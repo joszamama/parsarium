@@ -8,16 +8,16 @@ Pilot cell at the ten-path ceiling, ranked by npm 30-day downloads (2026-10-17 t
 
 ## Third-party parsers
 
-- [dns-packet](dns-packet/README.md) — verified Docker harness
-- [@dnsquery/dns-packet](dnsquery-dns-packet/README.md) — verified Docker harness
-- [dns2](dns2/README.md) — verified Docker harness
-- [native-dns-packet](native-dns-packet/README.md) — verified Docker harness
-- [hbo-dnsd](hbo-dnsd/README.md) — verified Docker harness
-- [dns-js](dns-js/README.md) — verified Docker harness
-- [@gibme/dns](gibme-dns/README.md) — verified Docker harness
-- [@noelminamino/dns-packet](noelminamino-dns-packet/README.md) — verified Docker harness
-- [@portable/dns-packet](portable-dns-packet/README.md) — verified Docker harness
-- [dns-message](dns-message/README.md) — verified Docker harness
+- [dns-packet](dns-packet/README.md) — verified Docker harness · [source repository](<https://github.com/mafintosh/dns-packet>) · [npm](<https://www.npmjs.com/package/dns-packet>)
+- [@dnsquery/dns-packet](dnsquery-dns-packet/README.md) — verified Docker harness · [source repository](<https://github.com/dnsquery/dns-packet>) · [npm](<https://www.npmjs.com/package/@dnsquery/dns-packet>)
+- [dns2](dns2/README.md) — verified Docker harness · [source repository](<https://github.com/lsongdev/node-dns>) · [npm](<https://www.npmjs.com/package/dns2>)
+- [native-dns-packet](native-dns-packet/README.md) — verified Docker harness · [source repository](<https://github.com/tjfontaine/native-dns-packet>) · [npm](<https://www.npmjs.com/package/native-dns-packet>)
+- [hbo-dnsd](hbo-dnsd/README.md) — verified Docker harness · [source repository](<https://github.com/hbouvier/dnsd>) · [npm](<https://www.npmjs.com/package/hbo-dnsd>)
+- [dns-js](dns-js/README.md) — verified Docker harness · [source repository](<https://github.com/mdns-js/node-dns-js>) · [npm](<https://www.npmjs.com/package/dns-js>)
+- [@gibme/dns](gibme-dns/README.md) — verified Docker harness · [source repository](<https://github.com/gibme-npm/dns>) · [npm](<https://www.npmjs.com/package/@gibme/dns>)
+- [@noelminamino/dns-packet](noelminamino-dns-packet/README.md) — verified Docker harness · [source repository](<https://github.com/NoelMinamino/dns-packet>) · [npm](<https://www.npmjs.com/package/@noelminamino/dns-packet>)
+- [@portable/dns-packet](portable-dns-packet/README.md) — verified Docker harness · [source repository](<https://github.com/portablejs/portable>) · [npm](<https://www.npmjs.com/package/@portable/dns-packet>)
+- [dns-message](dns-message/README.md) — verified Docker harness · [source repository](<https://github.com/kitten/dns-message>) · [npm](<https://www.npmjs.com/package/dns-message>)
 
 ## Standard and runtime APIs
 

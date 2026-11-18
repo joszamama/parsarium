@@ -1,6 +1,7 @@
 # bitandblack/image-information — SVG / PHP
 
 - **Pinned release:** `3.3.0`
+- **Upstream:** [source repository](<https://bitbucket.org/wirbelwild/imageinformation>) · [Packagist](<https://packagist.org/packages/bitandblack/image-information>)
 - **License:** MIT
 - **Parsed scope:** SVG dimension reader only; PECL Imagick 3.8.1 parses via ImageMagick delegate.
 - **Underlying family:** ImageMagick SVG reader via PECL Imagick

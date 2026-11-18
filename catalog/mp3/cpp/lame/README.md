@@ -1,6 +1,7 @@
 # lame — MP3 / C++
 
 - **Pinned release:** `4.0`
+- **Upstream:** [source repository](<https://github.com/lameproject/lame>) · [Debian](<https://tracker.debian.org/pkg/lame>)
 - **License:** LGPL-2.0-or-later
 - **Parsed scope:** MP3 frame header and 576 decoded PCM samples from ID3v2-tagged local bytes; tag text is not exposed
 - **Underlying family:** LAME HIP decoder interface over libmpg123

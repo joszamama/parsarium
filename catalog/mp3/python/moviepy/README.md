@@ -1,6 +1,7 @@
 # moviepy — MP3 / Python
 
 - **Pinned release:** `2.2.1`
+- **Upstream:** [source repository](<https://github.com/Zulko/moviepy>) · [PyPI](<https://pypi.org/project/moviepy/>)
 - **License:** MIT
 - **Parsed scope:** decoded audio and duration
 - **Underlying family:** MoviePy via bundled FFmpeg

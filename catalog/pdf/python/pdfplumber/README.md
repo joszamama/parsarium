@@ -1,6 +1,7 @@
 # pdfplumber — PDF / Python
 
 - **Pinned release:** `0.11.10`
+- **Upstream:** [source repository](<https://github.com/jsvine/pdfplumber>) · [PyPI](<https://pypi.org/project/pdfplumber/>)
 - **License:** MIT
 - **Parsed scope:** page text
 - **Underlying family:** pdfplumber via pdfminer.six

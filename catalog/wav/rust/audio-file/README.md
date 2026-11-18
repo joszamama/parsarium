@@ -1,6 +1,7 @@
 # audio-file — WAV / Rust
 
 - **Pinned release:** `0.5.1`
+- **Upstream:** [source repository](<https://github.com/neodsp/audio-file>) · [crates.io](<https://crates.io/crates/audio-file>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** Decoded PCM sample count and WAV metadata
 - **Underlying family:** audio-file native WAV reader

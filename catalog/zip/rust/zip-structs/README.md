@@ -1,6 +1,7 @@
 # zip_structs — ZIP / Rust
 
 - **Pinned release:** `0.2.1`
+- **Upstream:** [source repository](<https://github.com/tats-u/rust-zip-structs>) · [crates.io](<https://crates.io/crates/zip_structs>)
 - **License:** MIT
 - **Parsed scope:** ZIP local-header entry name and declared size
 - **Underlying family:** zip_structs header reader

@@ -1,6 +1,7 @@
 # @meshioplusplus/wasm — ASCII PLY / JavaScript
 
 - **Pinned release:** `20.0.0`
+- **Upstream:** [source repository](<https://github.com/loumalouomega/meshioplusplus>) · [npm](<https://www.npmjs.com/package/@meshioplusplus/wasm>)
 - **License:** MIT AND (LGPL-2.1-only WITH OCCT-exception-1.0) AND LGPL-2.1-only AND LGPL-3.0-or-later
 - **Parsed scope:** triangle mesh
 - **Underlying family:** meshio++ WASM

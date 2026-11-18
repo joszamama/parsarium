@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `13.5.1`
+- **Upstream:** [source repository](<https://github.com/vieiro/toml-java>) · [Maven Central](<https://central.sonatype.com/artifact/net.vieiro/toml-java>)
 - **License:** Apache-2.0
 - **Parser family:** toml-java (Antonio Vieiro; own ANTLR 4 grammar from the antlr/grammars-v4 TOML grammar, generated lexer/parser and own visitors)
 - **Local input API:** `TOMLParser.parseFromInputStream(InputStream) -> TOML (README 'Basic usage'); TOML.getErrors() empty and TOML.getRoot() a Map<String, Object> tree of Map, List, Long, Double, Boolean, String, OffsetDateTime, LocalDateTime, LocalDate and LocalTime values (README 'Type mapping')`

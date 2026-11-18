@@ -8,16 +8,16 @@ Ten verified third-party paths, in PyPI Stats last_month order (2026-11-17; Gens
 
 ## Third-party parsers
 
-- [lxml](lxml/README.md) — verified Docker harness
-- [beautifulsoup4](beautifulsoup4/README.md) — verified Docker harness
-- [defusedxml](defusedxml/README.md) — verified Docker harness
-- [xmltodict](xmltodict/README.md) — verified Docker harness
-- [xmlschema](xmlschema/README.md) — verified Docker harness
-- [parsel](parsel/README.md) — verified Docker harness
-- [pyquery](pyquery/README.md) — verified Docker harness
-- [untangle](untangle/README.md) — verified Docker harness
-- [genshi](genshi/README.md) — verified Docker harness
-- [jxmlease](jxmlease/README.md) — verified Docker harness
+- [lxml](lxml/README.md) — verified Docker harness · [source repository](<https://github.com/lxml/lxml>) · [PyPI](<https://pypi.org/project/lxml/>)
+- [beautifulsoup4](beautifulsoup4/README.md) — verified Docker harness · [PyPI](<https://pypi.org/project/beautifulsoup4/>)
+- [defusedxml](defusedxml/README.md) — verified Docker harness · [source repository](<https://github.com/tiran/defusedxml>) · [PyPI](<https://pypi.org/project/defusedxml/>)
+- [xmltodict](xmltodict/README.md) — verified Docker harness · [source repository](<https://github.com/martinblech/xmltodict>) · [PyPI](<https://pypi.org/project/xmltodict/>)
+- [xmlschema](xmlschema/README.md) — verified Docker harness · [source repository](<https://github.com/sissaschool/xmlschema>) · [PyPI](<https://pypi.org/project/xmlschema/>)
+- [parsel](parsel/README.md) — verified Docker harness · [source repository](<https://github.com/scrapy/parsel>) · [PyPI](<https://pypi.org/project/parsel/>)
+- [pyquery](pyquery/README.md) — verified Docker harness · [source repository](<https://github.com/gawel/pyquery>) · [PyPI](<https://pypi.org/project/pyquery/>)
+- [untangle](untangle/README.md) — verified Docker harness · [PyPI](<https://pypi.org/project/untangle/>)
+- [genshi](genshi/README.md) — verified Docker harness · [source repository](<https://github.com/edgewall/genshi>) · [PyPI](<https://pypi.org/project/genshi/>)
+- [jxmlease](jxmlease/README.md) — verified Docker harness · [source repository](<https://github.com/Juniper/jxmlease>) · [PyPI](<https://pypi.org/project/jxmlease/>)
 
 ## Standard and runtime APIs
 

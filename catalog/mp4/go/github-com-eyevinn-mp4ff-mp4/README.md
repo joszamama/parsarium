@@ -1,6 +1,7 @@
 # github.com/Eyevinn/mp4ff/mp4 — MP4 / Go
 
 - **Pinned release:** `v0.62.1`
+- **Upstream:** [source repository](<https://github.com/Eyevinn/mp4ff>) · [pkg.go.dev](<https://pkg.go.dev/github.com/Eyevinn/mp4ff/mp4>)
 - **License:** MIT, MIT
 - **Parsed scope:** brand and track count
 - **Underlying family:** mp4ff lineage

@@ -1,6 +1,7 @@
 # audioread — WAV / Python
 
 - **Pinned release:** `3.1.0`
+- **Upstream:** [source repository](<https://github.com/beetbox/audioread>) · [PyPI](<https://pypi.org/project/audioread/>)
 - **License:** MIT
 - **Parsed scope:** PCM samples
 - **Underlying family:** audioread rawread via CPython wave

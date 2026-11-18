@@ -1,6 +1,7 @@
 # gunicorn-h1c — HTTP/1.1 / Python
 
 - **Pinned release:** `0.6.14`
+- **Upstream:** [source repository](<https://github.com/benoitc/gunicorn_h1c>) · [PyPI](<https://pypi.org/project/gunicorn-h1c/>)
 - **License:** MIT
 - **Parsed scope:** HTTP/1.1 request head
 - **Underlying family:** picohttpparser C binding

@@ -1,6 +1,7 @@
 # imageio — MP4 / Python
 
 - **Pinned release:** `2.38.1`
+- **Upstream:** [source repository](<https://github.com/imageio/imageio>) · [PyPI](<https://pypi.org/project/imageio/>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** decoded video frame and codec
 - **Underlying family:** ImageIO via imageio-ffmpeg/FFmpeg

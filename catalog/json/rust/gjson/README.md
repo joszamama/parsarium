@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.8.1`
+- **Upstream:** [source repository](<https://github.com/tidwall/gjson.rs>) · [crates.io](<https://crates.io/crates/gjson>)
 - **License:** MIT
 - **Parser family:** tidwall GJSON path-query family: separate Rust gjson.rs implementation with same maintainer and path syntax as Go tidwall/gjson; Rust source owns its valid.rs validator and lib.rs lazy scanner
 - **Local input API:** `gjson::valid(&str) -> bool; gjson::parse(&str) -> Value; Value::each(callback) and Value::{kind,str,f64,json} traverse all children`

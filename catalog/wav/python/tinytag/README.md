@@ -1,6 +1,7 @@
 # tinytag — WAV / Python
 
 - **Pinned release:** `2.3.2`
+- **Upstream:** [source repository](<https://github.com/tinytag/tinytag>) · [PyPI](<https://pypi.org/project/tinytag/>)
 - **License:** MIT
 - **Parsed scope:** WAV header/audio metadata
 - **Underlying family:** tinytag RIFF/WAV metadata parser

@@ -1,6 +1,7 @@
 # github.com/tosone/minimp3 — MP3 / Go
 
 - **Pinned release:** `v1.1.0`
+- **Upstream:** [source repository](<https://github.com/tosone/minimp3>) · [pkg.go.dev](<https://pkg.go.dev/github.com/tosone/minimp3>)
 - **License:** MIT
 - **Parsed scope:** decoded PCM bytes and audio format
 - **Underlying family:** minimp3 decoder

@@ -1,6 +1,7 @@
 # mp3agic — MP3 / Java
 
 - **Pinned release:** `0.9.1`
+- **Upstream:** [source repository](<https://github.com/mpatric/mp3agic>) · [Maven Central](<https://central.sonatype.com/artifact/com.mpatric/mp3agic>)
 - **License:** MIT
 - **Parsed scope:** local MP3 frames and ID3v2 title, artist, album and API tag version
 - **Underlying family:** mp3agic native MP3 frame and ID3v2 reader

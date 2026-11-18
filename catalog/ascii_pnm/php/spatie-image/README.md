@@ -1,6 +1,7 @@
 # spatie/image — ASCII PNM / PHP
 
 - **Pinned release:** `3.9.10`
+- **Upstream:** [source repository](<https://github.com/spatie/image>) · [Packagist](<https://packagist.org/packages/spatie/image>)
 - **License:** MIT
 - **Parsed scope:** decoded image dimensions
 - **Underlying family:** libvips PPM/PNM decoder

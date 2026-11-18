@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.0.2`
+- **Upstream:** [source repository](<https://launchpad.net/py3dns>) · [PyPI](<https://pypi.org/project/py3dns/>)
 - **License:** CNRI-Python
 - **Parser family:** py3dns / PyDNS (DNS/Lib.py Munpacker classes and DnsResult)
 - **Local input API:** `DNS.Lib.DnsResult(u: DNS.Lib.MunpackerText(buf: bytes), args: dict)`

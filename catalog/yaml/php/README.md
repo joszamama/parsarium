@@ -8,9 +8,9 @@ Three verified PHP YAML paths from different families. symfony/yaml v8.1.11 pars
 
 ## Third-party parsers
 
-- [symfony/yaml](symfony-yaml/README.md) — verified Docker harness
-- [pecl/yaml](pecl-yaml/README.md) — verified Docker harness
-- [purrphp/yaml](purrphp-yaml/README.md) — verified Docker harness
+- [symfony/yaml](symfony-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/symfony/yaml>) · [Packagist](<https://packagist.org/packages/symfony/yaml>)
+- [pecl/yaml](pecl-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/php/pecl-file_formats-yaml>) · [Packagist](<https://packagist.org/packages/pecl/yaml>)
+- [purrphp/yaml](purrphp-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/PurrPHP/yaml>) · [Packagist](<https://packagist.org/packages/purrphp/yaml>)
 
 ## Standard and runtime APIs
 

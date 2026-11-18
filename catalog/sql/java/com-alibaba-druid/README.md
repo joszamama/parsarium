@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.2.28`
+- **Upstream:** [source repository](<https://github.com/alibaba/druid>) · [Maven Central](<https://central.sonatype.com/artifact/com.alibaba/druid>)
 - **License:** Apache-2.0
 - **Parser family:** Druid hand-written SQL lexer and recursive-descent parsers
 - **Local input API:** `SQLUtils.parseStatements(local SQL text, DbType.mysql) -> List<SQLStatement>`

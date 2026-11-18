@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.14.0`
+- **Upstream:** [source repository](<https://codeberg.org/jssfr/rxml>) · [crates.io](<https://crates.io/crates/rxml>)
 - **License:** MIT
 - **Parser family:** rxml (Jonas Schäfer) own lexer, raw parser and namespace resolver, with the same-author rxml_validation crate for name and character classes; minidom 0.19 is built on rxml and is not a separate family
 - **Local input API:** `rxml::Parser::new() + rxml::Parse::parse_all(&mut &[u8], at_eof = true, FnMut(Event)) -> namespace-resolved events; rxml::RawParser::new() + parse_all -> raw attribute events`

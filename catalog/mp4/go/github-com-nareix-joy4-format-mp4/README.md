@@ -1,6 +1,7 @@
 # github.com/nareix/joy4/format/mp4 — MP4 / Go
 
 - **Pinned release:** `v0.0.0-20200507095837-05a4ffbb5369`
+- **Upstream:** [source repository](<https://github.com/nareix/joy4>) · [pkg.go.dev](<https://pkg.go.dev/github.com/nareix/joy4/format/mp4>)
 - **License:** MIT
 - **Parsed scope:** stream count
 - **Underlying family:** joy4 MP4 lineage

@@ -1,6 +1,7 @@
 # bento4 — MP4 / C
 
 - **Pinned release:** `1.6.0-641`
+- **Upstream:** [source repository](<https://github.com/axiomatic-systems/Bento4>)
 - **License:** GPL-2.0-or-later
 - **Parsed scope:** MP4 major brand, two audio/video tracks and one-second duration
 - **Underlying family:** Bento4 AP4 ISO BMFF core

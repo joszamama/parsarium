@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `5.0.0`
+- **Upstream:** [source repository](<https://github.com/krzema12/snakeyaml-engine-kmp>) · [Maven Central](<https://central.sonatype.com/artifact/it.krzeminski/snakeyaml-engine-kmp-jvm>)
 - **License:** Apache-2.0
 - **Parser family:** SnakeYAML Engine KMP (Kotlin Multiplatform port of SnakeYAML Engine: own Kotlin reader, scanner, parser, composer and schema resolvers)
 - **Local input API:** `new Load(new LoadSettings()).loadOne(InputStream) over Files.newInputStream(Path)`

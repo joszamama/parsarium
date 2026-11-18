@@ -1,6 +1,7 @@
 # netpbm — ASCII PNM / C++
 
 - **Pinned release:** `11.02.30`
+- **Upstream:** [source repository](<https://sourceforge.net/projects/netpbm/>) · [Debian](<https://tracker.debian.org/pkg/netpbm-free>)
 - **License:** Netpbm mixed open-source
 - **Parsed scope:** P3 dimensions, maxval, and two decoded RGB pixels
 - **Underlying family:** Netpbm libppm parser

@@ -1,6 +1,7 @@
 # pdfbox — PNG / Java
 
 - **Pinned release:** `3.0.8`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/org.apache.pdfbox/pdfbox>)
 - **License:** Apache-2.0
 - **Parsed scope:** PNG dimensions
 - **Underlying family:** Apache PDFBox image embedding path

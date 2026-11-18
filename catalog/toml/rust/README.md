@@ -8,15 +8,15 @@ Bounded TOML search captured 2026-11-17: 3 crates.io queries, 300 recorded hits 
 
 ## Third-party parsers
 
-- [toml](toml/README.md) — verified Docker harness
-- [toml_edit](toml-edit/README.md) — verified Docker harness
-- [taplo](taplo/README.md) — verified Docker harness
-- [boml](boml/README.md) — verified Docker harness
-- [toml-spanner](toml-spanner/README.md) — verified Docker harness
-- [tomlproc](tomlproc/README.md) — verified Docker harness
-- [soml](soml/README.md) — verified Docker harness
-- [toml_dom](toml-dom/README.md) — verified Docker harness
-- [kabosu](kabosu/README.md) — verified Docker harness
+- [toml](toml/README.md) — verified Docker harness · [source repository](<https://github.com/toml-rs/toml>) · [crates.io](<https://crates.io/crates/toml>)
+- [toml_edit](toml-edit/README.md) — verified Docker harness · [source repository](<https://github.com/toml-rs/toml>) · [crates.io](<https://crates.io/crates/toml_edit>)
+- [taplo](taplo/README.md) — verified Docker harness · [source repository](<https://github.com/tamasfe/taplo>) · [crates.io](<https://crates.io/crates/taplo>)
+- [boml](boml/README.md) — verified Docker harness · [source repository](<https://codeberg.org/brightshard/boml>) · [crates.io](<https://crates.io/crates/boml>)
+- [toml-spanner](toml-spanner/README.md) — verified Docker harness · [source repository](<https://github.com/exrok/toml-spanner>) · [crates.io](<https://crates.io/crates/toml-spanner>)
+- [tomlproc](tomlproc/README.md) — verified Docker harness · [source repository](<https://github.com/KarpelesLab/tomlproc>) · [crates.io](<https://crates.io/crates/tomlproc>)
+- [soml](soml/README.md) — verified Docker harness · [source repository](<https://github.com/staticintlucas/soml>) · [crates.io](<https://crates.io/crates/soml>)
+- [toml_dom](toml-dom/README.md) — verified Docker harness · [source repository](<https://github.com/kathrinmotzkus/toml_dom>) · [crates.io](<https://crates.io/crates/toml_dom>)
+- [kabosu](kabosu/README.md) — verified Docker harness · [source repository](<https://github.com/ai-implementer/setoka>) · [crates.io](<https://crates.io/crates/kabosu>)
 
 ## Standard and runtime APIs
 

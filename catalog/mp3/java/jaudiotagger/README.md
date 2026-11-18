@@ -1,6 +1,7 @@
 # jaudiotagger — MP3 / Java
 
 - **Pinned release:** `3.0.1`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/net.jthink/jaudiotagger>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** local MP3 identification and ID3v2 title, artist and album
 - **Underlying family:** jaudiotagger native MP3 and ID3v2 reader

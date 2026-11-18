@@ -8,16 +8,16 @@ Pilot cell: ten Rust paths verified (hickory-proto, simple-dns, domain, dns-pars
 
 ## Third-party parsers
 
-- [hickory-proto](hickory-proto/README.md) — verified Docker harness
-- [simple-dns](simple-dns/README.md) — verified Docker harness
-- [domain](domain/README.md) — verified Docker harness
-- [dns-parser](dns-parser/README.md) — verified Docker harness
-- [dns-message-parser](dns-message-parser/README.md) — verified Docker harness
-- [rustdns](rustdns/README.md) — verified Docker harness
-- [rsdns](rsdns/README.md) — verified Docker harness
-- [packet-dissector-dns](packet-dissector-dns/README.md) — verified Docker harness
-- [hns-dns-wire](hns-dns-wire/README.md) — verified Docker harness
-- [oxidns-proto](oxidns-proto/README.md) — verified Docker harness
+- [hickory-proto](hickory-proto/README.md) — verified Docker harness · [source repository](<https://github.com/hickory-dns/hickory-dns>) · [crates.io](<https://crates.io/crates/hickory-proto>)
+- [simple-dns](simple-dns/README.md) — verified Docker harness · [source repository](<https://github.com/balliegojr/simple-dns>) · [crates.io](<https://crates.io/crates/simple-dns>)
+- [domain](domain/README.md) — verified Docker harness · [source repository](<https://github.com/NLnetLabs/domain>) · [crates.io](<https://crates.io/crates/domain>)
+- [dns-parser](dns-parser/README.md) — verified Docker harness · [source repository](<https://github.com/tailhook/dns-parser>) · [crates.io](<https://crates.io/crates/dns-parser>)
+- [dns-message-parser](dns-message-parser/README.md) — verified Docker harness · [source repository](<https://github.com/LinkTed/dns-message-parser>) · [crates.io](<https://crates.io/crates/dns-message-parser>)
+- [rustdns](rustdns/README.md) — verified Docker harness · [source repository](<https://github.com/bramp/rustdns>) · [crates.io](<https://crates.io/crates/rustdns>)
+- [rsdns](rsdns/README.md) — verified Docker harness · [source repository](<https://github.com/r-bk/rsdns>) · [crates.io](<https://crates.io/crates/rsdns>)
+- [packet-dissector-dns](packet-dissector-dns/README.md) — verified Docker harness · [source repository](<https://github.com/higebu/packet-dissector>) · [crates.io](<https://crates.io/crates/packet-dissector-dns>)
+- [hns-dns-wire](hns-dns-wire/README.md) — verified Docker harness · [source repository](<https://github.com/handshake-rs/hns-dane-engine>) · [crates.io](<https://crates.io/crates/hns-dns-wire>)
+- [oxidns-proto](oxidns-proto/README.md) — verified Docker harness · [source repository](<https://github.com/svenshi/oxidns>) · [crates.io](<https://crates.io/crates/oxidns-proto>)
 
 ## Standard and runtime APIs
 

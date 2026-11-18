@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.0`
+- **Upstream:** [source repository](<https://github.com/joelwurtz/php-json-stream-polyfill>) · [Packagist](<https://packagist.org/packages/joelwurtz/json-stream-polyfill>)
 - **License:** MIT
 - **Parser family:** json_stream polyfill structural scanner (pure-PHP port of the json_stream extension) plus PHP ext/json for scalar tokens
 - **Local input API:** `json_stream_decode(string $source) with default options over local bytes; returns a lazy JsonStream\Document whose foreach iteration yields member names/indexes, scalars and child Documents for nested containers; the container kind is read from the documented __debugInfo() 'kind'. The harness type-tags the yielded tree with members in returned order and never calls toValue(). The image deletes only the package's bootstrap.php entry from the Composer-generated autoload_files.php and autoload_static.php (asserted in the Dockerfile), and harness.php loads bootstrap.php with the README-documented manual require after vendor/autoload.php, so php-fuzzer instruments the polyfill source; package files are unchanged and diffed against the pinned archive.`

@@ -1,6 +1,7 @@
 # maximal/audio-waveform — WAV / PHP
 
 - **Pinned release:** `1.2.1`
+- **Upstream:** [source repository](<https://github.com/maximal/audio-waveform-php>) · [Packagist](<https://packagist.org/packages/maximal/audio-waveform>)
 - **License:** MIT
 - **Parsed scope:** Mono WAV sample amplitudes decoded into positive and negative waveform values
 - **Underlying family:** SoX native RIFF/WAVE parser

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.6.2`
+- **Upstream:** [source repository](<https://sourceforge.net/projects/tinyxml/>) · [Debian](<https://tracker.debian.org/pkg/tinyxml>)
 - **License:** Zlib
 - **Parser family:** TinyXML (version 1) own in-memory XML parser
 - **Local input API:** `TiXmlDocument::Parse(const char* p, TiXmlParsingData* data = 0, TiXmlEncoding encoding) on a NUL-terminated copy of the local bytes with TIXML_ENCODING_UTF8, then TiXmlDocument::Error() and RootElement(); TinyXML does no namespace processing, so the adapter resolves prefixes from in-scope xmlns attributes`

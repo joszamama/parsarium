@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.13`
+- **Upstream:** [Debian](<https://tracker.debian.org/pkg/rapidxml>)
 - **License:** BSL-1.0 OR MIT
 - **Parser family:** RapidXML own in-situ DOM parser (rapidxml.hpp)
 - **Local input API:** `rapidxml::xml_document<>::parse<0>(char*) on a mutable, zero-terminated local byte buffer; RapidXML parses in situ (it modifies the buffer) and does no namespace processing, so the adapter copies the input, appends the terminator and resolves prefixes from in-scope xmlns attributes`

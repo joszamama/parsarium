@@ -1,6 +1,7 @@
 # github.com/gobwas/httphead — HTTP/1.1 / Go
 
 - **Pinned release:** `v0.1.0`
+- **Upstream:** [source repository](<https://github.com/gobwas/httphead>) · [pkg.go.dev](<https://pkg.go.dev/github.com/gobwas/httphead>)
 - **License:** MIT
 - **Parsed scope:** request line only
 - **Underlying family:** gobwas HTTP request-line parser

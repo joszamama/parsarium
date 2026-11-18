@@ -1,6 +1,7 @@
 # pdfwriter — PDF / C++
 
 - **Pinned release:** `4.6.2`
+- **Upstream:** [source repository](<https://github.com/galkahana/PDF-Writer>)
 - **License:** Apache-2.0
 - **Parsed scope:** PDF document page count
 - **Underlying family:** PDF-Writer (PDFHummus) PDF parser

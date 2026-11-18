@@ -8,16 +8,16 @@ Ten PHP JSON third-party paths passed valid nested object controls and source-li
 
 ## Third-party parsers
 
-- [seld/jsonlint](seld-jsonlint/README.md) — verified Docker harness
-- [laminas/laminas-json](laminas-laminas-json/README.md) — verified Docker harness
-- [halaxa/json-machine](halaxa-json-machine/README.md) — verified Docker harness
-- [salsify/json-streaming-parser](salsify-json-streaming-parser/README.md) — verified Docker harness
-- [pcrov/jsonreader](pcrov-jsonreader/README.md) — verified Docker harness
-- [boundwize/jsonrecast](boundwize-jsonrecast/README.md) — verified Docker harness
-- [laktak/hjson](laktak-hjson/README.md) — verified Docker harness
-- [klkvsk/json-decode-stream](klkvsk-json-decode-stream/README.md) — verified Docker harness
-- [eftec/services_json](eftec-services-json/README.md) — verified Docker harness
-- [joelwurtz/json-stream-polyfill](joelwurtz-json-stream-polyfill/README.md) — verified Docker harness
+- [seld/jsonlint](seld-jsonlint/README.md) — verified Docker harness · [source repository](<https://github.com/Seldaek/jsonlint>) · [Packagist](<https://packagist.org/packages/seld/jsonlint>)
+- [laminas/laminas-json](laminas-laminas-json/README.md) — verified Docker harness · [source repository](<https://github.com/laminas/laminas-json>) · [Packagist](<https://packagist.org/packages/laminas/laminas-json>)
+- [halaxa/json-machine](halaxa-json-machine/README.md) — verified Docker harness · [source repository](<https://github.com/halaxa/json-machine>) · [Packagist](<https://packagist.org/packages/halaxa/json-machine>)
+- [salsify/json-streaming-parser](salsify-json-streaming-parser/README.md) — verified Docker harness · [source repository](<https://github.com/salsify/jsonstreamingparser>) · [Packagist](<https://packagist.org/packages/salsify/json-streaming-parser>)
+- [pcrov/jsonreader](pcrov-jsonreader/README.md) — verified Docker harness · [source repository](<https://github.com/pcrov/JsonReader>) · [Packagist](<https://packagist.org/packages/pcrov/jsonreader>)
+- [boundwize/jsonrecast](boundwize-jsonrecast/README.md) — verified Docker harness · [source repository](<https://github.com/boundwize/jsonrecast>) · [Packagist](<https://packagist.org/packages/boundwize/jsonrecast>)
+- [laktak/hjson](laktak-hjson/README.md) — verified Docker harness · [source repository](<https://github.com/hjson/hjson-php>) · [Packagist](<https://packagist.org/packages/laktak/hjson>)
+- [klkvsk/json-decode-stream](klkvsk-json-decode-stream/README.md) — verified Docker harness · [source repository](<https://github.com/klkvsk/json-decode-stream>) · [Packagist](<https://packagist.org/packages/klkvsk/json-decode-stream>)
+- [eftec/services_json](eftec-services-json/README.md) — verified Docker harness · [source repository](<https://github.com/EFTEC/Services_JSON>) · [Packagist](<https://packagist.org/packages/eftec/services_json>)
+- [joelwurtz/json-stream-polyfill](joelwurtz-json-stream-polyfill/README.md) — verified Docker harness · [source repository](<https://github.com/joelwurtz/php-json-stream-polyfill>) · [Packagist](<https://packagist.org/packages/joelwurtz/json-stream-polyfill>)
 
 ## Standard and runtime APIs
 

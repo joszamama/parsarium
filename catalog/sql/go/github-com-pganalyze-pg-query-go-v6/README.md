@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v6.2.5`
+- **Upstream:** [source repository](<https://github.com/pganalyze/pg_query_go>) · [pkg.go.dev](<https://pkg.go.dev/github.com/pganalyze/pg_query_go/v6>)
 - **License:** BSD-3-Clause AND PostgreSQL
 - **Parser family:** PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser), cgo binding
 - **Local input API:** `pg_query.Parse(local SQL text) -> *pg_query.ParseResult`

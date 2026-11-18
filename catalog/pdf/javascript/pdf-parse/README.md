@@ -1,6 +1,7 @@
 # pdf-parse — PDF / JavaScript
 
 - **Pinned release:** `2.4.5`
+- **Upstream:** [source repository](<https://github.com/mehmet-kozan/pdf-parse>) · [npm](<https://www.npmjs.com/package/pdf-parse>)
 - **License:** Apache-2.0
 - **Parsed scope:** text
 - **Underlying family:** mozilla/pdf.js

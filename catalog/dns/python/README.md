@@ -8,16 +8,16 @@ Pilot cell at the ten-path ceiling: dnspython, Twisted (twisted.names.dns), mitm
 
 ## Third-party parsers
 
-- [dnspython](dnspython/README.md) — verified Docker harness
-- [twisted](twisted/README.md) — verified Docker harness
-- [mitmproxy](mitmproxy/README.md) — verified Docker harness
-- [dpkt](dpkt/README.md) — verified Docker harness
-- [dnslib](dnslib/README.md) — verified Docker harness
-- [py3dns](py3dns/README.md) — verified Docker harness
-- [namespy](namespy/README.md) — verified Docker harness
-- [pydns3](pydns3/README.md) — verified Docker harness
-- [dns-messages](dns-messages/README.md) — verified Docker harness
-- [pyasyncdns](pyasyncdns/README.md) — verified Docker harness
+- [dnspython](dnspython/README.md) — verified Docker harness · [source repository](<https://github.com/rthalley/dnspython>) · [PyPI](<https://pypi.org/project/dnspython/>)
+- [twisted](twisted/README.md) — verified Docker harness · [source repository](<https://github.com/twisted/twisted>) · [PyPI](<https://pypi.org/project/twisted/>)
+- [mitmproxy](mitmproxy/README.md) — verified Docker harness · [source repository](<https://github.com/mitmproxy/mitmproxy>) · [PyPI](<https://pypi.org/project/mitmproxy/>)
+- [dpkt](dpkt/README.md) — verified Docker harness · [source repository](<https://github.com/kbandla/dpkt>) · [PyPI](<https://pypi.org/project/dpkt/>)
+- [dnslib](dnslib/README.md) — verified Docker harness · [source repository](<https://github.com/paulc/dnslib>) · [PyPI](<https://pypi.org/project/dnslib/>)
+- [py3dns](py3dns/README.md) — verified Docker harness · [source repository](<https://launchpad.net/py3dns>) · [PyPI](<https://pypi.org/project/py3dns/>)
+- [namespy](namespy/README.md) — verified Docker harness · [source repository](<https://github.com/b1tninja/namespy>) · [PyPI](<https://pypi.org/project/namespy/>)
+- [pydns3](pydns3/README.md) — verified Docker harness · [source repository](<https://github.com/imgurbot12/pydns>) · [PyPI](<https://pypi.org/project/pydns3/>)
+- [dns-messages](dns-messages/README.md) — verified Docker harness · [source repository](<https://github.com/wahlflo/dns-messages>) · [PyPI](<https://pypi.org/project/dns-messages/>)
+- [pyasyncdns](pyasyncdns/README.md) — verified Docker harness · [source repository](<https://github.com/mauricelambert/PyAsyncDNS>) · [PyPI](<https://pypi.org/project/pyasyncdns/>)
 
 ## Standard and runtime APIs
 

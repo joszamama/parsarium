@@ -1,6 +1,7 @@
 # mpv — MP3 / C++
 
 - **Pinned release:** `0.42.0`
+- **Upstream:** [source repository](<https://github.com/mpv-player/mpv>) · [Debian](<https://tracker.debian.org/pkg/mpv>)
 - **License:** GPL-2.0-or-later AND LGPL-2.1-or-later
 - **Parsed scope:** ID3v2 title, MP3 audio track codec and duration from local tagged file
 - **Underlying family:** libmpv local media frontend over FFmpeg libavformat and libavcodec

@@ -1,6 +1,7 @@
 # pydub — WAV / Python
 
 - **Pinned release:** `0.25.1`
+- **Upstream:** [source repository](<https://github.com/jiaaro/pydub>) · [PyPI](<https://pypi.org/project/pydub/>)
 - **License:** MIT
 - **Parsed scope:** PCM samples
 - **Underlying family:** pydub native WAV header parser

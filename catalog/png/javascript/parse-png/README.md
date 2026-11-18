@@ -1,6 +1,7 @@
 # parse-png — PNG / JavaScript
 
 - **Pinned release:** `2.1.0`
+- **Upstream:** [source repository](<https://github.com/kevva/parse-png>) · [npm](<https://www.npmjs.com/package/parse-png>)
 - **License:** MIT
 - **Parsed scope:** pixels
 - **Underlying family:** pngjs

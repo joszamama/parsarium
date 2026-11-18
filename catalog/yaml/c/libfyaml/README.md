@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.9.6`
+- **Upstream:** [source repository](<https://github.com/pantoniou/libfyaml>) · [Debian](<https://tracker.debian.org/pkg/libfyaml>)
 - **License:** MIT
 - **Parser family:** libfyaml (src/lib fy-parse/fy-input/fy-atom/fy-docbuilder/fy-doc)
 - **Local input API:** `struct fy_document *fy_document_build_from_string(const struct fy_parse_cfg *cfg, const char *str, size_t len) with cfg.flags = FYPCF_QUIET | FYPCF_RESOLVE_DOCUMENT | FYPCF_DEFAULT_VERSION_1_2 | FYPCF_JSON_NONE`

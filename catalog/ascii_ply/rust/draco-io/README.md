@@ -1,6 +1,7 @@
 # draco-io — ASCII PLY / Rust
 
 - **Pinned release:** `0.6.1`
+- **Upstream:** [source repository](<https://github.com/Filyus/draco-rust>) · [crates.io](<https://crates.io/crates/draco-io>)
 - **License:** Apache-2.0
 - **Parsed scope:** ASCII PLY vertex positions
 - **Underlying family:** draco-io PLY reader

@@ -1,6 +1,7 @@
 # github.com/EliCDavis/polyform/formats/ply — ASCII PLY / Go
 
 - **Pinned release:** `v0.44.0`
+- **Upstream:** [source repository](<https://github.com/EliCDavis/polyform>) · [pkg.go.dev](<https://pkg.go.dev/github.com/EliCDavis/polyform/formats/ply>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY vertex and face counts
 - **Underlying family:** polyform PLY

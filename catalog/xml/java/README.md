@@ -8,16 +8,16 @@ Ten third-party XML package paths are verified and runnable, reaching this cell'
 
 ## Third-party parsers
 
-- [jackson-dataformat-xml](jackson-dataformat-xml/README.md) — verified Docker harness
-- [xercesImpl](xercesimpl/README.md) — verified Docker harness
-- [woodstox-core](woodstox-core/README.md) — verified Docker harness
-- [dom4j](dom4j/README.md) — verified Docker harness
-- [xmlbeans](xmlbeans/README.md) — verified Docker harness
-- [jdom2](jdom2/README.md) — verified Docker harness
-- [aalto-xml](aalto-xml/README.md) — verified Docker harness
-- [xom](xom/README.md) — verified Docker harness
-- [xpp3](xpp3/README.md) — verified Docker harness
-- [kxml2](kxml2/README.md) — verified Docker harness
+- [jackson-dataformat-xml](jackson-dataformat-xml/README.md) — verified Docker harness · [source repository](<https://github.com/FasterXML/jackson-dataformat-xml>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml>)
+- [xercesImpl](xercesimpl/README.md) — verified Docker harness · [Maven Central](<https://central.sonatype.com/artifact/xerces/xercesImpl>)
+- [woodstox-core](woodstox-core/README.md) — verified Docker harness · [source repository](<https://github.com/FasterXML/woodstox>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml.woodstox/woodstox-core>)
+- [dom4j](dom4j/README.md) — verified Docker harness · [source repository](<https://github.com/dom4j/dom4j>) · [Maven Central](<https://central.sonatype.com/artifact/org.dom4j/dom4j>)
+- [xmlbeans](xmlbeans/README.md) — verified Docker harness · [Maven Central](<https://central.sonatype.com/artifact/org.apache.xmlbeans/xmlbeans>)
+- [jdom2](jdom2/README.md) — verified Docker harness · [source repository](<https://github.com/hunterhacker/jdom>) · [Maven Central](<https://central.sonatype.com/artifact/org.jdom/jdom2>)
+- [aalto-xml](aalto-xml/README.md) — verified Docker harness · [source repository](<https://github.com/FasterXML/aalto-xml>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml/aalto-xml>)
+- [xom](xom/README.md) — verified Docker harness · [source repository](<https://github.com/elharo/xom>) · [Maven Central](<https://central.sonatype.com/artifact/xom/xom>)
+- [xpp3](xpp3/README.md) — verified Docker harness · [Maven Central](<https://central.sonatype.com/artifact/xpp3/xpp3>)
+- [kxml2](kxml2/README.md) — verified Docker harness · [Maven Central](<https://central.sonatype.com/artifact/net.sf.kxml/kxml2>)
 
 ## Standard and runtime APIs
 

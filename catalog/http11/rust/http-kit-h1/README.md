@@ -1,6 +1,7 @@
 # http-kit-h1 — HTTP/1.1 / Rust
 
 - **Pinned release:** `0.6.2`
+- **Upstream:** [source repository](<https://github.com/zen-rs/http-kit>) · [crates.io](<https://crates.io/crates/http-kit-h1>)
 - **License:** MIT
 - **Parsed scope:** request head: method, URI, connection semantics
 - **Underlying family:** httparse core

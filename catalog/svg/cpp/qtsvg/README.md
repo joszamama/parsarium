@@ -1,6 +1,7 @@
 # qtsvg — SVG / C++
 
 - **Pinned release:** `6.12.0`
+- **Upstream:** [source repository](<https://code.qt.io/cgit/qt/qtsvg.git/>) · [Debian](<https://tracker.debian.org/pkg/qtsvg-opensource-src>)
 - **License:** LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
 - **Parsed scope:** parsed SVG dimensions and rendered red/green rectangle pixels
 - **Underlying family:** QtSvg QSvgRenderer document parser and Qt painter

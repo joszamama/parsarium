@@ -8,16 +8,16 @@ Ten Go JSON package paths pass two valid structure-aware controls with parser-so
 
 ## Third-party parsers
 
-- [github.com/json-iterator/go](github-com-json-iterator-go/README.md) — verified Docker harness
-- [github.com/tidwall/gjson](github-com-tidwall-gjson/README.md) — verified Docker harness
-- [github.com/ugorji/go/codec](github-com-ugorji-go-codec/README.md) — verified Docker harness
-- [github.com/goccy/go-json](github-com-goccy-go-json/README.md) — verified Docker harness
-- [github.com/buger/jsonparser](github-com-buger-jsonparser/README.md) — verified Docker harness
-- [github.com/valyala/fastjson](github-com-valyala-fastjson/README.md) — verified Docker harness
-- [github.com/bytedance/sonic](github-com-bytedance-sonic/README.md) — verified Docker harness
-- [github.com/segmentio/encoding/json](github-com-segmentio-encoding-json/README.md) — verified Docker harness
-- [github.com/mailru/easyjson/jlexer](github-com-mailru-easyjson-jlexer/README.md) — verified Docker harness
-- [github.com/go-faster/jx](github-com-go-faster-jx/README.md) — verified Docker harness
+- [github.com/json-iterator/go](github-com-json-iterator-go/README.md) — verified Docker harness · [source repository](<https://github.com/json-iterator/go>) · [pkg.go.dev](<https://pkg.go.dev/github.com/json-iterator/go>)
+- [github.com/tidwall/gjson](github-com-tidwall-gjson/README.md) — verified Docker harness · [source repository](<https://github.com/tidwall/gjson>) · [pkg.go.dev](<https://pkg.go.dev/github.com/tidwall/gjson>)
+- [github.com/ugorji/go/codec](github-com-ugorji-go-codec/README.md) — verified Docker harness · [source repository](<https://github.com/ugorji/go>) · [pkg.go.dev](<https://pkg.go.dev/github.com/ugorji/go/codec>)
+- [github.com/goccy/go-json](github-com-goccy-go-json/README.md) — verified Docker harness · [source repository](<https://github.com/goccy/go-json>) · [pkg.go.dev](<https://pkg.go.dev/github.com/goccy/go-json>)
+- [github.com/buger/jsonparser](github-com-buger-jsonparser/README.md) — verified Docker harness · [source repository](<https://github.com/buger/jsonparser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/buger/jsonparser>)
+- [github.com/valyala/fastjson](github-com-valyala-fastjson/README.md) — verified Docker harness · [source repository](<https://github.com/valyala/fastjson>) · [pkg.go.dev](<https://pkg.go.dev/github.com/valyala/fastjson>)
+- [github.com/bytedance/sonic](github-com-bytedance-sonic/README.md) — verified Docker harness · [source repository](<https://github.com/bytedance/sonic>) · [pkg.go.dev](<https://pkg.go.dev/github.com/bytedance/sonic>)
+- [github.com/segmentio/encoding/json](github-com-segmentio-encoding-json/README.md) — verified Docker harness · [source repository](<https://github.com/segmentio/encoding>) · [pkg.go.dev](<https://pkg.go.dev/github.com/segmentio/encoding/json>)
+- [github.com/mailru/easyjson/jlexer](github-com-mailru-easyjson-jlexer/README.md) — verified Docker harness · [source repository](<https://github.com/mailru/easyjson>) · [pkg.go.dev](<https://pkg.go.dev/github.com/mailru/easyjson/jlexer>)
+- [github.com/go-faster/jx](github-com-go-faster-jx/README.md) — verified Docker harness · [source repository](<https://github.com/go-faster/jx>) · [pkg.go.dev](<https://pkg.go.dev/github.com/go-faster/jx>)
 
 ## Standard and runtime APIs
 

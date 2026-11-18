@@ -1,6 +1,7 @@
 # music-metadata — WAV / JavaScript
 
 - **Pinned release:** `12.4.0`
+- **Upstream:** [source repository](<https://github.com/Borewit/music-metadata>) · [npm](<https://www.npmjs.com/package/music-metadata>)
 - **License:** MIT
 - **Parsed scope:** header
 - **Underlying family:** music-metadata

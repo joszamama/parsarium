@@ -1,6 +1,7 @@
 # geogram — ASCII PLY / C++
 
 - **Pinned release:** `1.10.1`
+- **Upstream:** [source repository](<https://github.com/BrunoLevy/geogram>) · [Debian](<https://tracker.debian.org/pkg/geogram>)
 - **License:** BSD-3-Clause AND MIT
 - **Parsed scope:** three parsed mesh vertices and one triangle facet with indices
 - **Underlying family:** Geogram PLYIOHandler over bundled RPly 1.1.4

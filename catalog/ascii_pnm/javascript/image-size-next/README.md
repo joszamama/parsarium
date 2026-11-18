@@ -1,6 +1,7 @@
 # image-size-next — ASCII PNM / JavaScript
 
 - **Pinned release:** `2.1.1`
+- **Upstream:** [source repository](<https://github.com/lcf2212dev/image-size-next>) · [npm](<https://www.npmjs.com/package/image-size-next>)
 - **License:** MIT
 - **Parsed scope:** P3 header dimensions and PNM type
 - **Underlying family:** image-size fork

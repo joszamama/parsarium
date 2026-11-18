@@ -1,6 +1,7 @@
 # mp4-atom — MP4 / Rust
 
 - **Pinned release:** `0.17.1`
+- **Upstream:** [source repository](<https://github.com/kixelated/mp4-atom>) · [crates.io](<https://crates.io/crates/mp4-atom>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** Typed MP4 file-type atom
 - **Underlying family:** mp4-atom ISO-BMFF atom parser

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.4`
+- **Upstream:** [source repository](<https://github.com/martinblech/xmltodict>) · [PyPI](<https://pypi.org/project/xmltodict/>)
 - **License:** MIT
 - **Parser family:** xmltodict over CPython pyexpat / Expat
 - **Local input API:** `xmltodict.parse(BytesIO(local UTF-8 XML bytes), process_namespaces=True, disable_entities=True)`

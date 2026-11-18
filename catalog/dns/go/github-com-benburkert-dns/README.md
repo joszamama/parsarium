@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.0.0-20190225204957-d356cf78cdfc`
+- **Upstream:** [source repository](<https://github.com/benburkert/dns>) · [pkg.go.dev](<https://pkg.go.dev/github.com/benburkert/dns>)
 - **License:** MIT
 - **Parser family:** benburkert/dns (message.go, compression.go)
 - **Local input API:** `(*dns.Message).Unpack(b []byte) ([]byte, error)`

@@ -1,6 +1,7 @@
 # azul3d.org/engine/audio/wav — WAV / Go
 
 - **Pinned release:** `v0.0.0-20211024043305-793ea6c2839d`
+- **Upstream:** [pkg.go.dev](<https://pkg.go.dev/azul3d.org/engine/audio/wav>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** format
 - **Underlying family:** azul3d WAV decoder

@@ -1,6 +1,7 @@
 # github.com/harrydb/go/img/pnm — ASCII PNM / Go
 
 - **Pinned release:** `v0.0.0-20160105214235-0ff7a05d1aa4`
+- **Upstream:** [source repository](<https://github.com/harrydb/go>) · [pkg.go.dev](<https://pkg.go.dev/github.com/harrydb/go/img/pnm>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** P3 pixels and dimensions
 - **Underlying family:** peterh/go PNM lineage

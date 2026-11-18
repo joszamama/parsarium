@@ -1,6 +1,7 @@
 # stb — PNG / C++
 
 - **Pinned release:** `cci.20261021`
+- **Upstream:** [source repository](<https://github.com/nothings/stb>)
 - **License:** MIT OR Unlicense
 - **Parsed scope:** pixels
 - **Underlying family:** stb_image

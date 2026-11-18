@@ -1,6 +1,7 @@
 # svg_path_ops — SVG / Rust
 
 - **Pinned release:** `0.12.0`
+- **Upstream:** [source repository](<https://github.com/orhanbalci/rough-rs>) · [crates.io](<https://crates.io/crates/svg_path_ops>)
 - **License:** MIT
 - **Parsed scope:** SVG path command grammar and serialization
 - **Underlying family:** svgtypes lineage via svg_path_ops

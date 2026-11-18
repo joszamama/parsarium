@@ -1,6 +1,7 @@
 # @audio/decode — MP3 / JavaScript
 
 - **Pinned release:** `4.3.0`
+- **Upstream:** [source repository](<https://github.com/audiojs/decode>) · [npm](<https://www.npmjs.com/package/@audio/decode>)
 - **License:** MIT
 - **Parsed scope:** decoded_audio
 - **Underlying family:** mpg123 WASM

@@ -1,6 +1,7 @@
 # kiwilan/php-audio — MP3 / PHP
 
 - **Pinned release:** `4.0.02`
+- **Upstream:** [source repository](<https://github.com/kiwilan/php-audio>) · [Packagist](<https://packagist.org/packages/kiwilan/php-audio>)
 - **License:** MIT
 - **Parsed scope:** ID3v2.3 title, artist, and album
 - **Underlying family:** getID3 native MP3 and ID3v2 parser

@@ -1,6 +1,7 @@
 # itextpdf — PDF / Java
 
 - **Pinned release:** `5.5.13`
+- **Upstream:** [source repository](<https://github.com/itext/itextpdf>) · [Maven Central](<https://central.sonatype.com/artifact/com.itextpdf/itextpdf>)
 - **License:** AGPL-3.0
 - **Parsed scope:** PDF page count
 - **Underlying family:** iText 5 PDF reader

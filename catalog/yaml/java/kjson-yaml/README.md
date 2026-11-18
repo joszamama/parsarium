@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.15`
+- **Upstream:** [source repository](<https://github.com/pwall567/kjson-yaml>) · [Maven Central](<https://central.sonatype.com/artifact/io.kjson/kjson-yaml>)
 - **License:** MIT
 - **Parser family:** kjson-yaml (own Kotlin YAML parser by Peter Wall, YAML 1.2 core-schema typing into kjson-core values)
 - **Local input API:** `YAML.parse(InputStream, UTF-8).rootNode over Files.newInputStream(Path)`

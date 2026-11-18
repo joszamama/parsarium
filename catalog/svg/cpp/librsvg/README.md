@@ -1,6 +1,7 @@
 # librsvg — SVG / C++
 
 - **Pinned release:** `2.63.4`
+- **Upstream:** [source repository](<https://gitlab.gnome.org/GNOME/librsvg>) · [Debian](<https://tracker.debian.org/pkg/librsvg>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** parsed SVG dimensions and rendered red/green rectangle pixels
 - **Underlying family:** librsvg Rust SVG engine through C API

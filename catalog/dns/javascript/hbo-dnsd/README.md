@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.9.8`
+- **Upstream:** [source repository](<https://github.com/hbouvier/dnsd>) · [npm](<https://www.npmjs.com/package/hbo-dnsd>)
 - **License:** Apache-2.0
 - **Parser family:** dnsd (Iris Couch) decoder (parse.js, message.js)
 - **Local input API:** `dnsd.parse(buffer: Buffer) -> DNSMessage`

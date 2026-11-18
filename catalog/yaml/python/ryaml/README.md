@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.5.1`
+- **Upstream:** [source repository](<https://github.com/emmatyping/ryaml>) · [PyPI](<https://pypi.org/project/ryaml/>)
 - **License:** MIT
 - **Parser family:** serde_yaml 0.9.34 over unsafe-libyaml 0.2.11 (Rust transpilation of libyaml) through the ryaml PyO3 extension; same family as the Rust cell serde_yaml and unsafe-libyaml paths and the libyaml family
 - **Local input API:** `ryaml.loads(str) on the strict UTF-8 decoding of local YAML bytes; ryaml.load(local binary stream) gives the same tree (the binding has no bytes API)`

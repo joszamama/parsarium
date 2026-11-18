@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.0.0-20180713195410-a1a828153468`
+- **Upstream:** [source repository](<https://github.com/moovweb/gokogiri>) · [pkg.go.dev](<https://pkg.go.dev/github.com/moovweb/gokogiri/xml>)
 - **License:** MIT
 - **Parser family:** gokogiri Go cgo DOM binding over native libxml2 2.15.4
 - **Local input API:** `xml.Parse(content []byte, inEncoding []byte, url []byte, options ParseOption, outEncoding []byte) (*XmlDocument, error); Root() and DOM node APIs`

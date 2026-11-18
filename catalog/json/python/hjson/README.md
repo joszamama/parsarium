@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.1.0`
+- **Upstream:** [source repository](<https://github.com/hjson/hjson-py>) · [PyPI](<https://pypi.org/project/hjson/>)
 - **License:** MIT OR AFL-2.1
 - **Parser family:** hjson-py pure-Python Hjson decoder (hjson/decoder.py), based on simplejson (simplejson-derived lineage)
 - **Local input API:** `hjson.loads(local JSON bytes); hjson.loads(decoded str) and hjson.load(BytesIO(local bytes)) give the same exact tree on both controls`

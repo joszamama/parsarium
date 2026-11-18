@@ -1,6 +1,7 @@
 # splitbrain/php-archive — ZIP / PHP
 
 - **Pinned release:** `1.5.1`
+- **Upstream:** [source repository](<https://github.com/splitbrain/php-archive>) · [Packagist](<https://packagist.org/packages/splitbrain/php-archive>)
 - **License:** MIT
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** splitbrain PHP ZIP reader

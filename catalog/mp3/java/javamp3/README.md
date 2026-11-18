@@ -1,6 +1,7 @@
 # javamp3 — MP3 / Java
 
 - **Pinned release:** `1.0.1`
+- **Upstream:** [source repository](<https://github.com/delthas/JavaMP3>) · [Maven Central](<https://central.sonatype.com/artifact/fr.delthas/javamp3>)
 - **License:** MIT
 - **Parsed scope:** 44.1 kHz tagged MP3 sample rate, channel mode and 32 decoded PCM bytes
 - **Underlying family:** JavaMP3 native MPEG audio decoder

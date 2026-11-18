@@ -1,6 +1,7 @@
 # dr_wav — WAV / C
 
 - **Pinned release:** `wav-0.14.6`
+- **Upstream:** [source repository](<https://github.com/mackron/dr_libs>) · [Conan Center](<https://conan.io/center/recipes/drwav>)
 - **License:** MIT-0
 - **Parsed scope:** WAV sample rate, channel and frame counts, plus first four decoded PCM samples
 - **Underlying family:** dr_wav C WAV decoder

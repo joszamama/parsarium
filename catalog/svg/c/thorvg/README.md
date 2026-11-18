@@ -1,6 +1,7 @@
 # thorvg — SVG / C
 
 - **Pinned release:** `1.1.3`
+- **Upstream:** [source repository](<https://github.com/thorvg/thorvg>) · [Debian](<https://tracker.debian.org/pkg/thorvg>)
 - **License:** MIT
 - **Parsed scope:** parsed SVG document dimensions
 - **Underlying family:** ThorVG SVG loader and native vector engine

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.0.0-20261117145351-1e84b3595a3e`
+- **Upstream:** [source repository](<https://github.com/pingcap/tidb>) · [pkg.go.dev](<https://pkg.go.dev/github.com/pingcap/tidb/pkg/parser>)
 - **License:** Apache-2.0
 - **Parser family:** TiDB MySQL grammar (goyacc parser.y) and lexer
 - **Local input API:** `parser.New().Parse(local SQL text, "", "") -> []ast.StmtNode`

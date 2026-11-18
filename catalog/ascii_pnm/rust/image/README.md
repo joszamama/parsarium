@@ -1,6 +1,7 @@
 # image — ASCII PNM / Rust
 
 - **Pinned release:** `0.25.10`
+- **Upstream:** [source repository](<https://github.com/image-rs/image>) · [crates.io](<https://crates.io/crates/image>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** P3 ASCII PPM RGB pixels
 - **Underlying family:** image-rs PNM decoder

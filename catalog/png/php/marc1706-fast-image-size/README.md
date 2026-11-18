@@ -1,6 +1,7 @@
 # marc1706/fast-image-size — PNG / PHP
 
 - **Pinned release:** `v1.3.1`
+- **Upstream:** [source repository](<https://github.com/marc1706/fast-image-size>) · [Packagist](<https://packagist.org/packages/marc1706/fast-image-size>)
 - **License:** MIT
 - **Parsed scope:** PNG dimensions and format type
 - **Underlying family:** FastImageSize PNG header reader

@@ -1,6 +1,7 @@
 # wav — WAV / JavaScript
 
 - **Pinned release:** `1.0.2`
+- **Upstream:** [source repository](<https://github.com/TooTallNate/node-wav>) · [npm](<https://www.npmjs.com/package/wav>)
 - **License:** MIT
 - **Parsed scope:** header
 - **Underlying family:** node-wav-stream

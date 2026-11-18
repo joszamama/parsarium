@@ -1,6 +1,7 @@
 # mp4-box-encoding — MP4 / JavaScript
 
 - **Pinned release:** `1.4.1`
+- **Upstream:** [source repository](<https://github.com/jhiesey/mp4-box-encoding>) · [npm](<https://www.npmjs.com/package/mp4-box-encoding>)
 - **License:** MIT
 - **Parsed scope:** ftyp
 - **Underlying family:** mp4-box-encoding

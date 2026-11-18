@@ -1,6 +1,7 @@
 # meyfa/php-svg — SVG / PHP
 
 - **Pinned release:** `v0.16.1`
+- **Upstream:** [source repository](<https://github.com/meyfa/php-svg>) · [Packagist](<https://packagist.org/packages/meyfa/php-svg>)
 - **License:** MIT
 - **Parsed scope:** One SVG document with two rectangle elements; no rasterization claim.
 - **Underlying family:** meyfa PHP-SVG typed document parser

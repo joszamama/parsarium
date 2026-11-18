@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.7.19`
+- **Upstream:** [source repository](<https://github.com/DaveGamble/cJSON>) · [Debian](<https://tracker.debian.org/pkg/cjson>)
 - **License:** MIT
 - **Parser family:** cJSON recursive-descent parser (cJSON.c)
 - **Local input API:** `cJSON_ParseWithLengthOpts(const char *value, size_t buffer_length, const char **return_parse_end, cJSON_bool require_null_terminated)`

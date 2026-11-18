@@ -1,6 +1,7 @@
 # pdfbox — PDF / Java
 
 - **Pinned release:** `3.0.8`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/org.apache.pdfbox/pdfbox>)
 - **License:** Apache-2.0
 - **Parsed scope:** PDF page count
 - **Underlying family:** Apache PDFBox

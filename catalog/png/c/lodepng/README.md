@@ -1,6 +1,7 @@
 # lodepng — PNG / C
 
 - **Pinned release:** `cci.20260102`
+- **Upstream:** [source repository](<https://github.com/lvandeve/lodepng>) · [Conan Center](<https://conan.io/center/recipes/lodepng>)
 - **License:** Zlib
 - **Parsed scope:** pixels
 - **Underlying family:** LodePNG

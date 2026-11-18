@@ -1,6 +1,7 @@
 # github.com/klauspost/compress/zip — ZIP / Go
 
 - **Pinned release:** `v1.20.4`
+- **Upstream:** [source repository](<https://github.com/klauspost/compress>) · [pkg.go.dev](<https://pkg.go.dev/github.com/klauspost/compress/zip>)
 - **License:** Apache-2.0, BSD-3-Clause, MIT
 - **Parsed scope:** entry_name+decompressed_text
 - **Underlying family:** Go archive/zip fork

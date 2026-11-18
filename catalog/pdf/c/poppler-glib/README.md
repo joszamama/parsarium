@@ -1,6 +1,7 @@
 # poppler-glib — PDF / C
 
 - **Pinned release:** `26.11.0`
+- **Upstream:** [source repository](<https://gitlab.freedesktop.org/poppler/poppler>)
 - **License:** GPL-2.0-only OR GPL-3.0-only
 - **Parsed scope:** PDF document page count
 - **Underlying family:** Poppler PDF parser, GLib C frontend

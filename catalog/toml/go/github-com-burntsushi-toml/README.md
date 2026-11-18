@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.6.0`
+- **Upstream:** [source repository](<https://github.com/BurntSushi/toml>) · [pkg.go.dev](<https://pkg.go.dev/github.com/BurntSushi/toml>)
 - **License:** MIT
 - **Parser family:** BurntSushi/toml lexer and parser
 - **Local input API:** `toml.Decode(string, &map[string]any) (MetaData, error)`

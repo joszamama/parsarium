@@ -1,6 +1,7 @@
 # gstreamer — MP3 / C++
 
 - **Pinned release:** `1.28.9`
+- **Upstream:** [source repository](<https://gitlab.freedesktop.org/gstreamer/gstreamer>)
 - **License:** LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT
 - **Parsed scope:** ID3v2 title plus one parsed MPEG audio stream with sample rate and channels
 - **Underlying family:** GStreamer id3demux and mpegaudioparse plugins via GstDiscoverer

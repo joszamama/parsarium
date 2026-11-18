@@ -1,6 +1,7 @@
 # plyparser — ASCII PLY / JavaScript
 
 - **Pinned release:** `6.0.0`
+- **Upstream:** [source repository](<https://github.com/HimalayanSeer/PLYParser>) · [npm](<https://www.npmjs.com/package/plyparser>)
 - **License:** ISC
 - **Parsed scope:** triangle mesh
 - **Underlying family:** plyparser

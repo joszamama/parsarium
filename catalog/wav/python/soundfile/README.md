@@ -1,6 +1,7 @@
 # soundfile — WAV / Python
 
 - **Pinned release:** `0.14.0`
+- **Upstream:** [source repository](<https://github.com/bastibe/python-soundfile>) · [PyPI](<https://pypi.org/project/soundfile/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** PCM samples
 - **Underlying family:** libsndfile

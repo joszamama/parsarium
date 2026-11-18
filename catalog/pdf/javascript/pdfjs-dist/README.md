@@ -1,6 +1,7 @@
 # pdfjs-dist — PDF / JavaScript
 
 - **Pinned release:** `6.5.438`
+- **Upstream:** [source repository](<https://github.com/mozilla/pdf.js>) · [npm](<https://www.npmjs.com/package/pdfjs-dist>)
 - **License:** Apache-2.0
 - **Parsed scope:** text
 - **Underlying family:** mozilla/pdf.js

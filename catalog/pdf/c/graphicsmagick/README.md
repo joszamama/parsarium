@@ -1,6 +1,7 @@
 # graphicsmagick — PDF / C
 
 - **Pinned release:** `1.3.49`
+- **Upstream:** [source repository](<https://sourceforge.net/projects/graphicsmagick/>) · [Debian](<https://tracker.debian.org/pkg/graphicsmagick>)
 - **License:** MIT
 - **Parsed scope:** Rendered PDF page sequence and first page dimensions
 - **Underlying family:** GraphicsMagick PDF coder + Ghostscript PDF interpreter

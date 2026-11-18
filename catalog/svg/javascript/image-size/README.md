@@ -1,6 +1,7 @@
 # image-size — SVG / JavaScript
 
 - **Pinned release:** `2.1.0`
+- **Upstream:** [source repository](<https://codeberg.org/image-size/image-size>) · [npm](<https://www.npmjs.com/package/image-size>)
 - **License:** MIT
 - **Parsed scope:** dimensions
 - **Underlying family:** image-size SVG reader

@@ -1,6 +1,7 @@
 # @xhmikosr/decompress-unzip — ZIP / JavaScript
 
 - **Pinned release:** `8.2.1`
+- **Upstream:** [source repository](<https://github.com/XhmikosR/decompress-unzip>) · [npm](<https://www.npmjs.com/package/@xhmikosr/decompress-unzip>)
 - **License:** MIT
 - **Parsed scope:** entries_and_content
 - **Underlying family:** yauzl

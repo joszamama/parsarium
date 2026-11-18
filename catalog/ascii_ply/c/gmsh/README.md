@@ -1,6 +1,7 @@
 # gmsh — ASCII PLY / C
 
 - **Pinned release:** `4.15.2`
+- **Upstream:** [source repository](<https://github.com/gmsh-project/gmsh>) · [Debian](<https://tracker.debian.org/pkg/gmsh>)
 - **License:** GPL-2.0-or-later with listed linking exception
 - **Parsed scope:** One valid local ASCII PLY triangle; three parsed positions, one triangle and three node references through the C API
 - **Underlying family:** Gmsh native PLY reader

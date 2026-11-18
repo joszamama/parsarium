@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.19.0`
+- **Upstream:** [source repository](<https://github.com/pydantic/jiter>) · [crates.io](<https://crates.io/crates/jiter>)
 - **License:** MIT
 - **Parser family:** Jiter Rust JSON parser (pydantic/jiter); shared underlying parser family with Python pydantic-core 2.50.4 / Jiter 0.18.0, but this standalone Rust path pins Jiter 0.19.0
 - **Local input API:** `jiter::JsonValue::parse(&[u8], allow_inf_nan=false) -> Result<JsonValue, JsonError>; JsonValue::{Object, Array, Str, Int, BigInt, Float, Bool, Null}`

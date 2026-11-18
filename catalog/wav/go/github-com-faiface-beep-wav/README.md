@@ -1,6 +1,7 @@
 # github.com/faiface/beep/wav — WAV / Go
 
 - **Pinned release:** `v1.1.0`
+- **Upstream:** [source repository](<https://github.com/faiface/beep>) · [pkg.go.dev](<https://pkg.go.dev/github.com/faiface/beep/wav>)
 - **License:** MIT
 - **Parsed scope:** signs
 - **Underlying family:** beep WAV lineage

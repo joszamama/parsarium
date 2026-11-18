@@ -1,6 +1,7 @@
 # officeparser — PDF / JavaScript
 
 - **Pinned release:** `8.4.0`
+- **Upstream:** [source repository](<https://github.com/harshankur/officeParser>) · [npm](<https://www.npmjs.com/package/officeparser>)
 - **License:** MIT
 - **Parsed scope:** text
 - **Underlying family:** mozilla/pdf.js

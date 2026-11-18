@@ -1,6 +1,7 @@
 # github.com/antlabs/httparser — HTTP/1.1 / Go
 
 - **Pinned release:** `v0.0.11`
+- **Upstream:** [source repository](<https://github.com/antlabs/httparser>) · [pkg.go.dev](<https://pkg.go.dev/github.com/antlabs/httparser>)
 - **License:** Apache-2.0
 - **Parsed scope:** request message
 - **Underlying family:** antlabs httparser

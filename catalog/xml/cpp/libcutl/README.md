@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.10.0+ds1`
+- **Upstream:** [Debian](<https://tracker.debian.org/pkg/libcutl>)
 - **License:** MIT
 - **Parser family:** Expat family: libcutl's own pull-event layer (cutl/xml/parser.cxx) over Expat
 - **Local input API:** `cutl::xml::parser(std::istream&, input_name, receive_elements | receive_characters | receive_attributes_event | receive_namespace_decls) over a std::istringstream of the local bytes; next() until eof; qname().namespace_()/name() for start_element and start_attribute, value() for characters (inside start_attribute/end_attribute: the attribute value), start_namespace_decl events for xmlns declarations`

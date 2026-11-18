@@ -1,6 +1,7 @@
 # pypdf — PDF / Python
 
 - **Pinned release:** `7.0.1`
+- **Upstream:** [source repository](<https://github.com/py-pdf/pypdf>) · [PyPI](<https://pypi.org/project/pypdf/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** page text
 - **Underlying family:** pypdf pure Python

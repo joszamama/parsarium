@@ -1,6 +1,7 @@
 # mhor/php-mediainfo — MP3 / PHP
 
 - **Pinned release:** `5.8.0`
+- **Upstream:** [source repository](<https://github.com/mhor/php-mediainfo>) · [Packagist](<https://packagist.org/packages/mhor/php-mediainfo>)
 - **License:** MIT
 - **Parsed scope:** ID3v2.3 title, performer, and album on an 18-second MP3
 - **Underlying family:** MediaInfoLib native MP3 and ID3 parser

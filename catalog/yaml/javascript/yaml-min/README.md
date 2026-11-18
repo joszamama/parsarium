@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.0.0`
+- **Upstream:** [source repository](<https://github.com/wellwelwel/yaml.min>) · [npm](<https://www.npmjs.com/package/yaml.min>)
 - **License:** MIT
 - **Parser family:** yaml.min own zero-dependency scanner and parser
 - **Local input API:** `parse(source) with default options after strict UTF-8 decoding of a local Buffer; a thrown YamlError rejects the input; the returned plain values are mapped to the Parsarium typed YAML tree`

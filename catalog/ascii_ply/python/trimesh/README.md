@@ -1,6 +1,7 @@
 # trimesh — ASCII PLY / Python
 
 - **Pinned release:** `5.2.0`
+- **Upstream:** [source repository](<https://github.com/mikedh/trimesh>) · [PyPI](<https://pypi.org/project/trimesh/>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY triangle vertices and face count
 - **Underlying family:** trimesh PLY loader

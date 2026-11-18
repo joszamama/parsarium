@@ -1,6 +1,7 @@
 # ply-rs — ASCII PLY / Rust
 
 - **Pinned release:** `0.1.3`
+- **Upstream:** [source repository](<https://github.com/Fluci/ply-rs>) · [crates.io](<https://crates.io/crates/ply-rs>)
 - **License:** MIT
 - **Parsed scope:** complete ASCII PLY: header, vertices, faces
 - **Underlying family:** ply-rs lineage

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.0.0`
+- **Upstream:** [source repository](<https://github.com/duckdb/duckdb>) · [Debian](<https://tracker.debian.org/pkg/duckdb>)
 - **License:** MIT
 - **Parser family:** DuckDB PEG parser (own grammar and transformer)
 - **Local input API:** `duckdb::Parser::GetBuiltinParser(); Parser::ParseQuery(local SQL text) -> Parser::statements (SQLStatement trees)`

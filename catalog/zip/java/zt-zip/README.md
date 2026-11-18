@@ -1,6 +1,7 @@
 # zt-zip — ZIP / Java
 
 - **Pinned release:** `1.18.2`
+- **Upstream:** [source repository](<https://github.com/zeroturnaround/zt-zip>) · [Maven Central](<https://central.sonatype.com/artifact/org.zeroturnaround/zt-zip>)
 - **License:** Apache-2.0
 - **Parsed scope:** ZIP entry name and decompressed content from a local archive
 - **Underlying family:** zt-zip wrapper over JDK ZipFile

@@ -1,6 +1,7 @@
 # physfs — ZIP / C
 
 - **Pinned release:** `3.2.0`
+- **Upstream:** [source repository](<https://github.com/icculus/physfs>)
 - **License:** Zlib
 - **Parsed scope:** mounted ZIP entry name and decompressed entry bytes
 - **Underlying family:** PhysicsFS ZIP archiver

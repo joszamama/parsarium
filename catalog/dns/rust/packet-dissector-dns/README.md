@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.6.3`
+- **Upstream:** [source repository](<https://github.com/higebu/packet-dissector>) · [crates.io](<https://crates.io/crates/packet-dissector-dns>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** packet-dissector DNS dissector (packet-dissector-dns src/lib.rs over packet-dissector-core field tree)
 - **Local input API:** `packet_dissector_dns::DnsDissector.dissect(data: &[u8], buf: &mut DissectBuffer, offset: 0) -> Result<DissectResult, PacketError> (packet_dissector_core::dissector::Dissector); names via the crate's pub fn write_dns_name`

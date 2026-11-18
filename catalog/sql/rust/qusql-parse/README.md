@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.12.0`
+- **Upstream:** [source repository](<https://github.com/antialize/qusql>) · [crates.io](<https://crates.io/crates/qusql-parse>)
 - **License:** Apache-2.0
 - **Parser family:** qusql-parse hand-written lexer and recursive-descent parser
 - **Local input API:** `parse_statements(local UTF-8 text, &mut Issues, &ParseOptions::new()) -> Vec<Statement>`

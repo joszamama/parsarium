@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.10.19`
+- **Upstream:** [source repository](<https://github.com/microsoft/cpprestsdk>)
 - **License:** MIT
 - **Parser family:** cpprestsdk own web::json JSON_Parser
 - **Local input API:** `web::json::value::parse(const utility::string_t&) on local bytes (utility::string_t is std::string on Linux), after the documented global web::json::keep_object_element_order(true); yields a web::json::value whose numbers report integer (is_int64/is_integral) or double kinds and whose objects keep source member order`

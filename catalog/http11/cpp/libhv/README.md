@@ -1,6 +1,7 @@
 # libhv — HTTP/1.1 / C++
 
 - **Pinned release:** `1.3.1`
+- **Upstream:** [source repository](<https://github.com/ithewei/libhv>)
 - **License:** BSD-3-Clause AND MIT
 - **Parsed scope:** HTTP/1.1 GET request method, target and version after complete header parse from local bytes
 - **Underlying family:** libhv bundles a modified Node http-parser 2.9.1 C engine; separate tagged library distribution but shared parser family with Node http-parser 2.9.4, not an independent engine

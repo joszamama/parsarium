@@ -1,6 +1,7 @@
 # guzzle/guzzle — HTTP/1.1 / PHP
 
 - **Pinned release:** `v3.9.3`
+- **Upstream:** [source repository](<https://github.com/guzzle/guzzle3>) · [Packagist](<https://packagist.org/packages/guzzle/guzzle>)
 - **License:** MIT
 - **Parsed scope:** single valid GET request line and Host, X-Parsarium, Connection headers
 - **Underlying family:** Guzzle 3 HTTP message parser

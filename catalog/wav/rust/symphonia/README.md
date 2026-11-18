@@ -1,6 +1,7 @@
 # symphonia — WAV / Rust
 
 - **Pinned release:** `0.6.1`
+- **Upstream:** [source repository](<https://github.com/pdeljanov/Symphonia>) · [crates.io](<https://crates.io/crates/symphonia>)
 - **License:** MPL-2.0
 - **Parsed scope:** WAV track metadata and audio packet
 - **Underlying family:** Symphonia WAV demuxer

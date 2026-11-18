@@ -1,6 +1,7 @@
 # javacv — ASCII PNM / Java
 
 - **Pinned release:** `1.5.14`
+- **Upstream:** [source repository](<https://github.com/bytedeco/javacv>) · [Maven Central](<https://central.sonatype.com/artifact/org.bytedeco/javacv>)
 - **License:** Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception
 - **Parsed scope:** ASCII P3 PPM decoded frame, codec and dimensions; pixel values not inspected
 - **Underlying family:** JavaCV wrapper over native FFmpeg PPM decoder

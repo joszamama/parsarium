@@ -1,6 +1,7 @@
 # pycairo — PNG / Python
 
 - **Pinned release:** `1.29.2`
+- **Upstream:** [source repository](<https://github.com/pygobject/pycairo>) · [PyPI](<https://pypi.org/project/pycairo/>)
 - **License:** LGPL-2.1-only OR MPL-1.1
 - **Parsed scope:** pixels
 - **Underlying family:** Cairo/libpng

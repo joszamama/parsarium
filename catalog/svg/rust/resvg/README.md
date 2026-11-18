@@ -1,6 +1,7 @@
 # resvg — SVG / Rust
 
 - **Pinned release:** `0.50.0`
+- **Upstream:** [source repository](<https://github.com/linebender/resvg>) · [crates.io](<https://crates.io/crates/resvg>)
 - **License:** Apache-2.0 OR MIT
 - **Parsed scope:** SVG raster rendering
 - **Underlying family:** usvg lineage

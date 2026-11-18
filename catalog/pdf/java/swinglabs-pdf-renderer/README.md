@@ -1,6 +1,7 @@
 # swinglabs-pdf-renderer — PDF / Java
 
 - **Pinned release:** `1.0.5`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/org.swinglabs/pdf-renderer>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** PDF page count
 - **Underlying family:** Sun PDF Renderer

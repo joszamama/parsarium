@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v4.0.0`
+- **Upstream:** [source repository](<https://github.com/yaml/go-yaml>) · [pkg.go.dev](<https://pkg.go.dev/go.yaml.in/yaml/v4>)
 - **License:** Apache-2.0 AND MIT
 - **Parser family:** go-yaml v4: Go port of libyaml scanner/parser (internal/libyaml scanner.go, parser.go, reader.go) with new v4 composer, resolver and constructor stages
 - **Local input API:** `yaml.Load([]byte, *yaml.Node) with the default v4 options over one complete local YAML byte slice; Node.ShortTag() resolves each scalar and Node.Load decodes it`

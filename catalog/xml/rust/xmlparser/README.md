@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.13.6`
+- **Upstream:** [source repository](<https://github.com/RazrFalcon/xmlparser>) · [crates.io](<https://crates.io/crates/xmlparser>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** xmlparser 0.13.6 own low-level XML tokenizer; distinct pinned source from roxmltree 0.21.2 internal tokenizer, with documented historical relationship
 - **Local input API:** `xmlparser::Tokenizer::from(&str) -> Iterator<Item=Result<Token, Error>>; Token::{ElementStart, Attribute, ElementEnd, Text, Cdata}`

@@ -1,6 +1,7 @@
 # go4.org/media/heif/bmff — MP4 / Go
 
 - **Pinned release:** `v0.0.0-20261028031214-ed6929a230fe`
+- **Upstream:** [source repository](<https://github.com/go4org/go4>) · [pkg.go.dev](<https://pkg.go.dev/go4.org/media/heif/bmff>)
 - **License:** Apache-2.0
 - **Parsed scope:** ftyp brand only
 - **Underlying family:** go4 ISO BMFF reader

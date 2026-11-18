@@ -1,6 +1,7 @@
 # numpy-stl — ASCII PLY / Python
 
 - **Pinned release:** `4.1.3`
+- **Upstream:** [source repository](<https://github.com/wolph/numpy-stl>) · [PyPI](<https://pypi.org/project/numpy-stl/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** ASCII PLY triangle vertices and face count
 - **Underlying family:** numpy-stl PLY reader

@@ -1,6 +1,7 @@
 # zendframework/zend-diactoros — HTTP/1.1 / PHP
 
 - **Pinned release:** `2.2.1`
+- **Upstream:** [source repository](<https://github.com/zendframework/zend-diactoros>) · [Packagist](<https://packagist.org/packages/zendframework/zend-diactoros>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** single valid GET request line and Host, X-Parsarium, Connection headers
 - **Underlying family:** Diactoros HTTP message parser lineage

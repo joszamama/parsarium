@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.0.17`
+- **Upstream:** [source repository](<https://github.com/dani-maarouf/psqlparse2>) · [PyPI](<https://pypi.org/project/psqlparse2/>)
 - **License:** BSD-3-Clause
 - **Parser family:** PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)
 - **Local input API:** `psqlparse2.query_to_pb(sql: str) -> psqlparse2.pb.pg_query_pb2.ParseResult`

@@ -1,6 +1,7 @@
 # rhukster/dom-sanitizer — SVG / PHP
 
 - **Pinned release:** `1.0.20`
+- **Upstream:** [source repository](<https://github.com/rhukster/dom-sanitizer>) · [Packagist](<https://packagist.org/packages/rhukster/dom-sanitizer>)
 - **License:** MIT
 - **Parsed scope:** Valid two-rectangle SVG accepted with SVG-specific sanitizer profile.
 - **Underlying family:** Rhukster DOM/SVG sanitizer over libxml DOM

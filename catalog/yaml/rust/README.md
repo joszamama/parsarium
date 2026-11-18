@@ -8,16 +8,16 @@
 
 ## Third-party parsers
 
-- [serde_yaml](serde-yaml/README.md) — verified Docker harness
-- [unsafe-libyaml](unsafe-libyaml/README.md) — verified Docker harness
-- [yaml-rust](yaml-rust/README.md) — verified Docker harness
-- [yaml-rust2](yaml-rust2/README.md) — verified Docker harness
-- [serde-saphyr](serde-saphyr/README.md) — verified Docker harness
-- [granit-parser](granit-parser/README.md) — verified Docker harness
-- [saphyr-parser](saphyr-parser/README.md) — verified Docker harness
-- [saphyr](saphyr/README.md) — verified Docker harness
-- [noyalib](noyalib/README.md) — verified Docker harness
-- [dbt-yaml](dbt-yaml/README.md) — verified Docker harness
+- [serde_yaml](serde-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/dtolnay/serde-yaml>) · [crates.io](<https://crates.io/crates/serde_yaml>)
+- [unsafe-libyaml](unsafe-libyaml/README.md) — verified Docker harness · [source repository](<https://github.com/dtolnay/unsafe-libyaml>) · [crates.io](<https://crates.io/crates/unsafe-libyaml>)
+- [yaml-rust](yaml-rust/README.md) — verified Docker harness · [source repository](<https://github.com/chyh1990/yaml-rust>) · [crates.io](<https://crates.io/crates/yaml-rust>)
+- [yaml-rust2](yaml-rust2/README.md) — verified Docker harness · [source repository](<https://github.com/Ethiraric/yaml-rust2>) · [crates.io](<https://crates.io/crates/yaml-rust2>)
+- [serde-saphyr](serde-saphyr/README.md) — verified Docker harness · [source repository](<https://github.com/bourumir-wyngs/serde-saphyr>) · [crates.io](<https://crates.io/crates/serde-saphyr>)
+- [granit-parser](granit-parser/README.md) — verified Docker harness · [source repository](<https://github.com/bourumir-wyngs/granit-parser>) · [crates.io](<https://crates.io/crates/granit-parser>)
+- [saphyr-parser](saphyr-parser/README.md) — verified Docker harness · [source repository](<https://github.com/saphyr-rs/saphyr-parser>) · [crates.io](<https://crates.io/crates/saphyr-parser>)
+- [saphyr](saphyr/README.md) — verified Docker harness · [source repository](<https://github.com/saphyr-rs/saphyr>) · [crates.io](<https://crates.io/crates/saphyr>)
+- [noyalib](noyalib/README.md) — verified Docker harness · [source repository](<https://github.com/sebastienrousseau/noyalib>) · [crates.io](<https://crates.io/crates/noyalib>)
+- [dbt-yaml](dbt-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/sdf-labs/dbt-yaml>) · [crates.io](<https://crates.io/crates/dbt-yaml>)
 
 ## Standard and runtime APIs
 

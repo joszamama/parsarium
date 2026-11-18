@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.2.5`
+- **Upstream:** [source repository](<https://github.com/yaml/libyaml>) · [Debian](<https://tracker.debian.org/pkg/libyaml>)
 - **License:** MIT
 - **Parser family:** libyaml (reader.c/scanner.c/parser.c/loader.c)
 - **Local input API:** `yaml_parser_initialize; yaml_parser_set_input_string(yaml_parser_t *parser, const unsigned char *input, size_t size); yaml_parser_load(yaml_parser_t *parser, yaml_document_t *document)`

@@ -1,6 +1,7 @@
 # easy3d — ASCII PLY / C++
 
 - **Pinned release:** `2.6.1`
+- **Upstream:** [source repository](<https://github.com/LiangliangNan/Easy3D>)
 - **License:** GPL-3.0-only AND MIT
 - **Parsed scope:** three mesh vertices and one triangle face with indices from ASCII PLY
 - **Underlying family:** Easy3D PLY reader over bundled RPly 1.1.4

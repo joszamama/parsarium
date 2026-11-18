@@ -1,6 +1,7 @@
 # @xhmikosr/decompress — ZIP / JavaScript
 
 - **Pinned release:** `11.1.4`
+- **Upstream:** [source repository](<https://github.com/XhmikosR/decompress>) · [npm](<https://www.npmjs.com/package/@xhmikosr/decompress>)
 - **License:** MIT
 - **Parsed scope:** entries_and_content
 - **Underlying family:** yauzl

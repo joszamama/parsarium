@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.9.0`
+- **Upstream:** [source repository](<https://github.com/jbeder/yaml-cpp>) · [Debian](<https://tracker.debian.org/pkg/yaml-cpp>)
 - **License:** MIT
 - **Parser family:** yaml-cpp own scanner and SingleDocParser
 - **Local input API:** `YAML::Load(const std::string&) into a YAML::Node tree; Node::Type(), Node::Tag(), Node::Scalar(), map/sequence iteration and Node::as<bool|long long|double>`

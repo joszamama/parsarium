@@ -1,6 +1,7 @@
 # id3js — MP3 / JavaScript
 
 - **Pinned release:** `2.1.1`
+- **Upstream:** [source repository](<https://github.com/43081j/id3>) · [npm](<https://www.npmjs.com/package/id3js>)
 - **License:** MIT
 - **Parsed scope:** tags+version
 - **Underlying family:** id3js

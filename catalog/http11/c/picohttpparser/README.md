@@ -1,6 +1,7 @@
 # picohttpparser — HTTP/1.1 / C
 
 - **Pinned release:** `1.5`
+- **Upstream:** [source repository](<https://github.com/h2o/picohttpparser>)
 - **License:** MIT
 - **Parsed scope:** HTTP/1.1 GET request method, target and version after complete header parse
 - **Underlying family:** PicoHTTPParser C request parser, used by H2O

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.20.0`
+- **Upstream:** [source repository](<https://github.com/spencerbeggs/effected>) · [npm](<https://www.npmjs.com/package/@effected/toml>)
 - **License:** MIT
 - **Parser family:** @effected/toml (spencerbeggs; own hand-written scanner, lossless syntax-tree parser and semantic analysis)
 - **Local input API:** `TomlVisitor.visit(text) on local bytes decoded as strict UTF-8 text, collected with Effect.runSync(Stream.runCollect(...)); returns TableStart/ArrayTableStart events with resolved table paths and KeyValue events with resolved key paths and typed value nodes (TomlString, TomlInteger, TomlFloat, TomlBoolean, TomlDateTimeLiteral, TomlArray, TomlInlineTable)`

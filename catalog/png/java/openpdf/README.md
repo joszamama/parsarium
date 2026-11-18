@@ -1,6 +1,7 @@
 # openpdf — PNG / Java
 
 - **Pinned release:** `3.0.5`
+- **Upstream:** [source repository](<https://github.com/LibrePDF/OpenPDF>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.librepdf/openpdf>)
 - **License:** MPL-2.0 OR LGPL-2.1+
 - **Parsed scope:** PNG dimensions
 - **Underlying family:** OpenPDF fork of iText; current PNG path over Java ImageIO

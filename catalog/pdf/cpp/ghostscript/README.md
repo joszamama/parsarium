@@ -1,6 +1,7 @@
 # ghostscript — PDF / C++
 
 - **Pinned release:** `10.08.0`
+- **Upstream:** [source repository](<https://github.com/ArtifexSoftware/ghostpdl-downloads>) · [Debian](<https://tracker.debian.org/pkg/ghostscript>)
 - **License:** AGPL-3.0-or-later
 - **Parsed scope:** PDF interpreter NumPages metadata
 - **Underlying family:** Ghostscript PDF interpreter

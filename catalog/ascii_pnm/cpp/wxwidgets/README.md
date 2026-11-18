@@ -1,6 +1,7 @@
 # wxwidgets — ASCII PNM / C++
 
 - **Pinned release:** `3.3.4`
+- **Upstream:** [source repository](<https://github.com/wxWidgets/wxWidgets>)
 - **License:** LGPL-2.0-or-later WITH WxWindows-exception-3.1
 - **Parsed scope:** P3 dimensions and two decoded RGBA pixels
 - **Underlying family:** wxWidgets native PNM handler

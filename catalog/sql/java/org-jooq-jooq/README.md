@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.21.9`
+- **Upstream:** [source repository](<https://github.com/jOOQ/jOOQ>) · [Maven Central](<https://central.sonatype.com/artifact/org.jooq/jooq>)
 - **License:** Apache-2.0
 - **Parser family:** jOOQ hand-written recursive-descent parser (ParserImpl) and query object model
 - **Local input API:** `DSL.using(SQLDialect.DEFAULT).parser().parse(local SQL text) -> Queries`

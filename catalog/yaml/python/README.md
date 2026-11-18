@@ -8,16 +8,16 @@ Ten verified third-party paths in PyPI last_month order: PyYAML 6.0.3 (1,227,712
 
 ## Third-party parsers
 
-- [PyYAML](pyyaml/README.md) — verified Docker harness
-- [PyYAML CSafeLoader (libyaml)](pyyaml-csafeloader-libyaml/README.md) — verified Docker harness
-- [ruamel.yaml](ruamel-yaml/README.md) — verified Docker harness
-- [ruamel.yaml.clib](ruamel-yaml-clib/README.md) — verified Docker harness
-- [srsly](srsly/README.md) — verified Docker harness
-- [rapidyaml](rapidyaml/README.md) — verified Docker harness
-- [yamlcore](yamlcore/README.md) — verified Docker harness
-- [yaml-rs](yaml-rs/README.md) — verified Docker harness
-- [ryaml](ryaml/README.md) — verified Docker harness
-- [libfyaml](libfyaml/README.md) — verified Docker harness
+- [PyYAML](pyyaml/README.md) — verified Docker harness · [source repository](<https://github.com/yaml/pyyaml>) · [PyPI](<https://pypi.org/project/PyYAML/>)
+- [PyYAML CSafeLoader (libyaml)](pyyaml-csafeloader-libyaml/README.md) — verified Docker harness · [source repository](<https://github.com/yaml/pyyaml>) · [PyPI](<https://pypi.org/project/PyYAML/>)
+- [ruamel.yaml](ruamel-yaml/README.md) — verified Docker harness · [source repository](<https://sourceforge.net/projects/ruamel-yaml/>) · [PyPI](<https://pypi.org/project/ruamel.yaml/>)
+- [ruamel.yaml.clib](ruamel-yaml-clib/README.md) — verified Docker harness · [source repository](<https://sourceforge.net/projects/ruamel-yaml-clib/>) · [PyPI](<https://pypi.org/project/ruamel.yaml.clib/>)
+- [srsly](srsly/README.md) — verified Docker harness · [source repository](<https://github.com/explosion/srsly>) · [PyPI](<https://pypi.org/project/srsly/>)
+- [rapidyaml](rapidyaml/README.md) — verified Docker harness · [source repository](<https://github.com/biojppm/rapidyaml-python>) · [PyPI](<https://pypi.org/project/rapidyaml/>)
+- [yamlcore](yamlcore/README.md) — verified Docker harness · [source repository](<https://github.com/perlpunk/pyyaml-core>) · [PyPI](<https://pypi.org/project/yamlcore/>)
+- [yaml-rs](yaml-rs/README.md) — verified Docker harness · [source repository](<https://github.com/lava-sh/yaml-rs>) · [PyPI](<https://pypi.org/project/yaml-rs/>)
+- [ryaml](ryaml/README.md) — verified Docker harness · [source repository](<https://github.com/emmatyping/ryaml>) · [PyPI](<https://pypi.org/project/ryaml/>)
+- [libfyaml](libfyaml/README.md) — verified Docker harness · [source repository](<https://github.com/pantoniou/libfyaml>) · [PyPI](<https://pypi.org/project/libfyaml/>)
 
 ## Standard and runtime APIs
 

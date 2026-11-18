@@ -1,6 +1,7 @@
 # Pillow — ASCII PNM / Python
 
 - **Pinned release:** `13.0.0`
+- **Upstream:** [source repository](<https://github.com/python-pillow/Pillow>) · [PyPI](<https://pypi.org/project/Pillow/>)
 - **License:** MIT-CMU
 - **Parsed scope:** P3 pixels
 - **Underlying family:** Pillow PPM

@@ -8,16 +8,16 @@ Pilot cell at the ten-path ceiling: github.com/miekg/dns, github.com/google/gopa
 
 ## Third-party parsers
 
-- [github.com/miekg/dns](github-com-miekg-dns/README.md) — verified Docker harness
-- [github.com/google/gopacket/layers](github-com-google-gopacket-layers/README.md) — verified Docker harness
-- [golang.org/x/net/dns/dnsmessage](golang-org-x-net-dns-dnsmessage/README.md) — verified Docker harness
-- [codeberg.org/miekg/dns](codeberg-org-miekg-dns/README.md) — verified Docker harness
-- [github.com/benburkert/dns](github-com-benburkert-dns/README.md) — verified Docker harness
-- [github.com/phuslu/fastdns](github-com-phuslu-fastdns/README.md) — verified Docker harness
-- [github.com/cznic/dns/msg](github-com-cznic-dns-msg/README.md) — verified Docker harness
-- [github.com/shadowy-pycoder/mshark/layers](github-com-shadowy-pycoder-mshark-layers/README.md) — verified Docker harness
-- [github.com/mateusz834/dnsmsg](github-com-mateusz834-dnsmsg/README.md) — verified Docker harness
-- [tangled.sh/seiso.moe/magna](tangled-sh-seiso-moe-magna/README.md) — verified Docker harness
+- [github.com/miekg/dns](github-com-miekg-dns/README.md) — verified Docker harness · [source repository](<https://github.com/miekg/dns>) · [pkg.go.dev](<https://pkg.go.dev/github.com/miekg/dns>)
+- [github.com/google/gopacket/layers](github-com-google-gopacket-layers/README.md) — verified Docker harness · [source repository](<https://github.com/google/gopacket>) · [pkg.go.dev](<https://pkg.go.dev/github.com/google/gopacket/layers>)
+- [golang.org/x/net/dns/dnsmessage](golang-org-x-net-dns-dnsmessage/README.md) — verified Docker harness · [source repository](<https://go.googlesource.com/net>) · [pkg.go.dev](<https://pkg.go.dev/golang.org/x/net/dns/dnsmessage>)
+- [codeberg.org/miekg/dns](codeberg-org-miekg-dns/README.md) — verified Docker harness · [source repository](<https://codeberg.org/miekg/dns>) · [pkg.go.dev](<https://pkg.go.dev/codeberg.org/miekg/dns>)
+- [github.com/benburkert/dns](github-com-benburkert-dns/README.md) — verified Docker harness · [source repository](<https://github.com/benburkert/dns>) · [pkg.go.dev](<https://pkg.go.dev/github.com/benburkert/dns>)
+- [github.com/phuslu/fastdns](github-com-phuslu-fastdns/README.md) — verified Docker harness · [source repository](<https://github.com/phuslu/fastdns>) · [pkg.go.dev](<https://pkg.go.dev/github.com/phuslu/fastdns>)
+- [github.com/cznic/dns/msg](github-com-cznic-dns-msg/README.md) — verified Docker harness · [source repository](<https://github.com/cznic/dns>) · [pkg.go.dev](<https://pkg.go.dev/github.com/cznic/dns/msg>)
+- [github.com/shadowy-pycoder/mshark/layers](github-com-shadowy-pycoder-mshark-layers/README.md) — verified Docker harness · [source repository](<https://github.com/shadowy-pycoder/mshark>) · [pkg.go.dev](<https://pkg.go.dev/github.com/shadowy-pycoder/mshark/layers>)
+- [github.com/mateusz834/dnsmsg](github-com-mateusz834-dnsmsg/README.md) — verified Docker harness · [source repository](<https://github.com/mateusz834/dnsmsg>) · [pkg.go.dev](<https://pkg.go.dev/github.com/mateusz834/dnsmsg>)
+- [tangled.sh/seiso.moe/magna](tangled-sh-seiso-moe-magna/README.md) — verified Docker harness · [pkg.go.dev](<https://pkg.go.dev/tangled.sh/seiso.moe/magna>)
 
 ## Standard and runtime APIs
 

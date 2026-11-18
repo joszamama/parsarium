@@ -1,6 +1,7 @@
 # unpdf — PDF / JavaScript
 
 - **Pinned release:** `2.1.0`
+- **Upstream:** [source repository](<https://github.com/unjs/unpdf>) · [npm](<https://www.npmjs.com/package/unpdf>)
 - **License:** MIT
 - **Parsed scope:** text
 - **Underlying family:** mozilla/pdf.js

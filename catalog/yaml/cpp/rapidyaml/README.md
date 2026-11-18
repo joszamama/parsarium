@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.16.0`
+- **Upstream:** [source repository](<https://github.com/biojppm/rapidyaml>) · [Debian](<https://tracker.debian.org/pkg/rapidyaml>)
 - **License:** MIT
 - **Parser family:** rapidyaml (ryml) own ParseEngine over c4core
 - **Local input API:** `ryml::parse_in_arena(ryml::csubstr) into a ryml::Tree, then Tree::resolve() for aliases; Tree::is_map/is_seq/key/val/is_val_quoted/val_is_null/has_val_tag traversal and c4::atoi/c4::atod`

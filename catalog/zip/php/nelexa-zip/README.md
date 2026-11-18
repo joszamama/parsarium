@@ -1,6 +1,7 @@
 # nelexa/zip — ZIP / PHP
 
 - **Pinned release:** `4.0.2`
+- **Upstream:** [source repository](<https://github.com/Ne-Lexa/php-zip>) · [Packagist](<https://packagist.org/packages/nelexa/zip>)
 - **License:** MIT
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** Ne-Lexa pure PHP ZIP reader

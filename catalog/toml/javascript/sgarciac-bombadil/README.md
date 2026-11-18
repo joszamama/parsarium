@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.3.0`
+- **Upstream:** [npm](<https://www.npmjs.com/package/@sgarciac/bombadil>)
 - **License:** Artistic-2.0
 - **Parser family:** bombadil (sgarciac; own chevrotain TOML 0.5.0 lexer and grammar)
 - **Local input API:** `new TomlReader().readToml(text, true) on local bytes decoded as strict UTF-8 text; result holds tables { type: 'table', content }, arrays and typed primitives { type, image, value } (README 'Full typing information'); errors holds lexer, parser and table-loading errors`

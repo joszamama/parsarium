@@ -1,6 +1,7 @@
 # kiwilan/php-audio — MP4 / PHP
 
 - **Pinned release:** `4.0.02`
+- **Upstream:** [source repository](<https://github.com/kiwilan/php-audio>) · [Packagist](<https://packagist.org/packages/kiwilan/php-audio>)
 - **License:** MIT
 - **Parsed scope:** MP4 container and 8 kHz mono AAC audio track
 - **Underlying family:** getID3 native QuickTime/MP4 parser

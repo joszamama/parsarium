@@ -1,6 +1,7 @@
 # facil-legacy — HTTP/1.1 / C
 
 - **Pinned release:** `0.7.6`
+- **Upstream:** [source repository](<https://github.com/boazsegev/facil.io>)
 - **License:** MIT
 - **Parsed scope:** HTTP/1.1 GET request method, path, query, version and Host header after complete local-byte parse
 - **Underlying family:** facil.io 0.7 HTTP/1 parser, earlier distinct distribution and API of the facil.io family later developed as C STL 0.8; these two package paths share lineage

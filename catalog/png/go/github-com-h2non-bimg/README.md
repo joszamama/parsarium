@@ -1,6 +1,7 @@
 # github.com/h2non/bimg — PNG / Go
 
 - **Pinned release:** `v1.1.9`
+- **Upstream:** [source repository](<https://github.com/h2non/bimg>) · [pkg.go.dev](<https://pkg.go.dev/github.com/h2non/bimg>)
 - **License:** MIT
 - **Parsed scope:** dimensions
 - **Underlying family:** libvips

@@ -1,6 +1,7 @@
 # github.com/dhowden/tag — MP3 / Go
 
 - **Pinned release:** `v0.0.0-20240417053706-3d75831295e8`
+- **Upstream:** [source repository](<https://github.com/dhowden/tag>) · [pkg.go.dev](<https://pkg.go.dev/github.com/dhowden/tag>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** ID3v2.3 title
 - **Underlying family:** dhowden/tag lineage

@@ -1,6 +1,7 @@
 # meshlab-ts — ASCII PLY / JavaScript
 
 - **Pinned release:** `2026.8.3`
+- **Upstream:** [source repository](<https://github.com/yuyakinjo/meshlab-ts>) · [npm](<https://www.npmjs.com/package/meshlab-ts>)
 - **License:** GPL-3.0-or-later
 - **Parsed scope:** triangle mesh
 - **Underlying family:** meshlab-ts PLY reader

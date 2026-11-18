@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.11.0`
+- **Upstream:** [source repository](<https://github.com/NiclasOlofsson/sqllens>) · [npm](<https://www.npmjs.com/package/sqllens>)
 - **License:** MIT
 - **Parser family:** sqllens ANTLR4 grammars (PostgreSQL grammar forked from antlr/grammars-v4)
 - **Local input API:** `parse(local UTF-8 text, 'postgres') -> {ast, errors, cst}`

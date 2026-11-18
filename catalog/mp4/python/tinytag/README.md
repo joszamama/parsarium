@@ -1,6 +1,7 @@
 # tinytag — MP4 / Python
 
 - **Pinned release:** `2.3.2`
+- **Upstream:** [source repository](<https://github.com/tinytag/tinytag>) · [PyPI](<https://pypi.org/project/tinytag/>)
 - **License:** MIT
 - **Parsed scope:** MP4 title and duration
 - **Underlying family:** TinyTag MP4 parser

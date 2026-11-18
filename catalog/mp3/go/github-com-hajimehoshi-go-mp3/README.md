@@ -1,6 +1,7 @@
 # github.com/hajimehoshi/go-mp3 — MP3 / Go
 
 - **Pinned release:** `v0.3.4`
+- **Upstream:** [source repository](<https://github.com/hajimehoshi/go-mp3>) · [pkg.go.dev](<https://pkg.go.dev/github.com/hajimehoshi/go-mp3>)
 - **License:** Apache-2.0
 - **Parsed scope:** decoded PCM bytes and sample rate
 - **Underlying family:** hajime/go-mp3 lineage

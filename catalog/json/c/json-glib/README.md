@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.10.8`
+- **Upstream:** [source repository](<https://gitlab.gnome.org/GNOME/json-glib>) · [Debian](<https://tracker.debian.org/pkg/json-glib>)
 - **License:** LGPL-2.1-or-later
 - **Parser family:** JSON-GLib JsonParser over its own JsonScanner
 - **Local input API:** `json_parser_load_from_data(JsonParser *parser, const gchar *data, gssize length, GError **error) after json_parser_set_strict(parser, TRUE)`

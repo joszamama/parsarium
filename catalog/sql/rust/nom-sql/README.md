@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.0.11`
+- **Upstream:** [source repository](<https://github.com/ms705/nom-sql>) · [crates.io](<https://crates.io/crates/nom-sql>)
 - **License:** MIT
 - **Parser family:** nom-sql nom combinator parser (MySQL subset)
 - **Local input API:** `parse_query_bytes(local bytes) -> SqlQuery`

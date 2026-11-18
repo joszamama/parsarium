@@ -8,7 +8,7 @@ Pilot cell: one C++ path verified, libtins, ranked by Debian popcon sourcemax in
 
 ## Third-party parsers
 
-- [libtins](libtins/README.md) — verified Docker harness
+- [libtins](libtins/README.md) — verified Docker harness · [source repository](<https://github.com/mfontanini/libtins>) · [Debian](<https://tracker.debian.org/pkg/libtins>)
 
 ## Standard and runtime APIs
 

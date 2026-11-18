@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.4.0`
+- **Upstream:** [source repository](<https://github.com/ToruNiina/toml11>) · [Debian](<https://tracker.debian.org/pkg/toml11>)
 - **License:** MIT
 - **Parser family:** toml11 (ToruNiina)
 - **Local input API:** `toml::parse_str(std::string, toml::spec::v(1,0,0)) -> toml::value (throws toml::syntax_error), walked through toml::value::type(), as_table()/as_array()/as_integer()/as_floating()/as_string()/as_boolean() and toml::offset_datetime/local_datetime/local_date/local_time fields`

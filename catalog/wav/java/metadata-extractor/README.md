@@ -1,6 +1,7 @@
 # metadata-extractor — WAV / Java
 
 - **Pinned release:** `2.19.0`
+- **Upstream:** [source repository](<https://github.com/drewnoakes/metadata-extractor>) · [Maven Central](<https://central.sonatype.com/artifact/com.drewnoakes/metadata-extractor>)
 - **License:** Apache-2.0
 - **Parsed scope:** WAV sample rate, channels and bit depth
 - **Underlying family:** metadata-extractor RIFF/WAV metadata reader

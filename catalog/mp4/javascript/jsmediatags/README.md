@@ -1,6 +1,7 @@
 # jsmediatags — MP4 / JavaScript
 
 - **Pinned release:** `3.9.7`
+- **Upstream:** [source repository](<https://github.com/aadsm/jsmediatags>) · [npm](<https://www.npmjs.com/package/jsmediatags>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** tags
 - **Underlying family:** jsmediatags

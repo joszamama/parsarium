@@ -1,6 +1,7 @@
 # github.com/moutend/go-wav — WAV / Go
 
 - **Pinned release:** `v0.0.0-20170820031854-56127fbbb7ba`
+- **Upstream:** [source repository](<https://github.com/moutend/go-wav>) · [pkg.go.dev](<https://pkg.go.dev/github.com/moutend/go-wav>)
 - **License:** MIT
 - **Parsed scope:** signs
 - **Underlying family:** moutend WAV reader

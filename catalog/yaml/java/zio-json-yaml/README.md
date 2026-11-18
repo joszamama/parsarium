@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.1.2`
+- **Upstream:** [source repository](<https://github.com/zio/zio-json>) · [Maven Central](<https://central.sonatype.com/artifact/dev.zio/zio-json-yaml_2.13>)
 - **License:** Apache-2.0
 - **Parser family:** SnakeYAML via zio-json-yaml (Scala wrapper: SnakeYAML 2.7 compose plus zio-json-yaml node-to-Json conversion)
 - **Local input API:** `String#fromYaml[Json] from zio.json.yaml._ (compiled package$DecoderYamlOps$.fromYaml$extension) over Files.readString(Path, UTF-8)`

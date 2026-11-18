@@ -1,6 +1,7 @@
 # zune-png — PNG / Rust
 
 - **Pinned release:** `0.5.2`
+- **Upstream:** [source repository](<https://github.com/etemesi254/zune-image>) · [crates.io](<https://crates.io/crates/zune-png>)
 - **License:** MIT OR Apache-2.0 OR Zlib
 - **Parsed scope:** Decoded PNG dimensions and first pixel
 - **Underlying family:** zune-png family

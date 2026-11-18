@@ -8,12 +8,12 @@ Pilot cell: six C paths verified. c-ares, ldns, knot (libknot), udns and getdns 
 
 ## Third-party parsers
 
-- [c-ares](c-ares/README.md) — verified Docker harness
-- [ldns](ldns/README.md) — verified Docker harness
-- [knot](knot/README.md) — verified Docker harness
-- [udns](udns/README.md) — verified Docker harness
-- [getdns](getdns/README.md) — verified Docker harness
-- [wahern-dns](wahern-dns/README.md) — verified Docker harness
+- [c-ares](c-ares/README.md) — verified Docker harness · [source repository](<https://github.com/c-ares/c-ares>) · [Debian](<https://tracker.debian.org/pkg/c-ares>)
+- [ldns](ldns/README.md) — verified Docker harness · [Debian](<https://tracker.debian.org/pkg/ldns>)
+- [knot](knot/README.md) — verified Docker harness · [source repository](<https://gitlab.nic.cz/knot/knot-dns>) · [Debian](<https://tracker.debian.org/pkg/knot>)
+- [udns](udns/README.md) — verified Docker harness · [Debian](<https://tracker.debian.org/pkg/udns>)
+- [getdns](getdns/README.md) — verified Docker harness · [source repository](<https://github.com/getdnsapi/getdns>) · [Debian](<https://tracker.debian.org/pkg/getdns>)
+- [wahern-dns](wahern-dns/README.md) — verified Docker harness · [source repository](<https://github.com/wahern/dns>)
 
 ## Standard and runtime APIs
 

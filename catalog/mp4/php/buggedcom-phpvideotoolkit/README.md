@@ -1,6 +1,7 @@
 # buggedcom/phpvideotoolkit — MP4 / PHP
 
 - **Pinned release:** `2.2.5`
+- **Upstream:** [source repository](<https://github.com/buggedcom/phpvideotoolkit-v2>) · [Packagist](<https://packagist.org/packages/buggedcom/phpvideotoolkit>)
 - **License:** MIT
 - **Parsed scope:** 2 × 2 H.264/AVC video in MP4
 - **Underlying family:** FFmpeg native MOV/MP4 parser

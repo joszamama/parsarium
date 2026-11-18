@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.1`
+- **Upstream:** [source repository](<https://github.com/codeschool/sqlite-parser>) · [npm](<https://www.npmjs.com/package/sqlite-parser>)
 - **License:** MIT
 - **Parser family:** sqlite-parser PEG.js grammar
 - **Local input API:** `sqliteParser(local UTF-8 text) -> statement list`

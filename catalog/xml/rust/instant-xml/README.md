@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.7.7`
+- **Upstream:** [source repository](<https://github.com/djc/instant-xml>) · [crates.io](<https://crates.io/crates/instant-xml>)
 - **License:** Apache-2.0 OR MIT
 - **Parser family:** xmlparser (shared with the selected xmlparser path): xmlparser Tokenizer tokenizes; instant-xml adds its own namespace resolver, reference decoder and AnyElement tree builder. Not an independent tokenizer.
 - **Local input API:** `instant_xml::from_str::<AnyElement>(&str) -> Result<AnyElement, Error>; AnyElement { ns, name, attributes: Vec<AnyAttribute { ns, name, value }>, text: Option<Cow<str>>, children: Vec<AnyElement> }`

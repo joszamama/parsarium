@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.3.4`
+- **Upstream:** [source repository](<https://github.com/saphyr-rs/saphyr>) · [crates.io](<https://crates.io/crates/saphyr>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** yaml-rust lineage: saphyr is the loader half of the saphyr-rs project that continues yaml-rust2; it drives the selected saphyr-parser 0.3.4 for events and adds its own loader, scalar resolution and Yaml tree (265 of its 1,663 distinct non-test source lines longer than 25 characters also occur in yaml-rust2 0.13.0, 15.9%).
 - **Local input API:** `saphyr::Yaml::load_from_str(&str) -> Result<Vec<Yaml>, ScanError> (LoadableYamlNode); Yaml::{Value(Scalar::{Null, Boolean, Integer, FloatingPoint, String}), Sequence, Mapping, Tagged, Representation, Alias, BadValue}`

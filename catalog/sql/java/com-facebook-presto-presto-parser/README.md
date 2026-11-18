@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.300`
+- **Upstream:** [source repository](<https://github.com/prestodb/presto>) · [Maven Central](<https://central.sonatype.com/artifact/com.facebook.presto/presto-parser>)
 - **License:** Apache-2.0
 - **Parser family:** Presto/Trino ANTLR4 SqlBase grammar (Presto branch)
 - **Local input API:** `SqlParser.createStatement(statement text from StatementSplitter over local SQL text, ParsingOptions with DecimalLiteralTreatment.AS_DECIMAL) -> Statement`

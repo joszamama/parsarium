@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v2.0.11`
+- **Upstream:** [source repository](<https://github.com/jdwx/dns-query>) · [Packagist](<https://packagist.org/packages/jdwx/dns-query>)
 - **License:** BSD-2-Clause
 - **Parser family:** jdwx DNSQuery (Net_DNS2 1.x fork: Packet, Header, Question and per-type RR rrSet decoders)
 - **Local input API:** `JDWX\DNSQuery\Packet\ResponsePacket::__construct(string $i_data, int $i_size)`

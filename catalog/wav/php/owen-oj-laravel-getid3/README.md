@@ -1,6 +1,7 @@
 # owen-oj/laravel-getid3 — WAV / PHP
 
 - **Pinned release:** `v2.6.0`
+- **Upstream:** [source repository](<https://github.com/Owen-oj/laravel-getid3>) · [Packagist](<https://packagist.org/packages/owen-oj/laravel-getid3>)
 - **License:** MIT
 - **Parsed scope:** RIFF/WAVE PCM16 format, 8 kHz sample rate, mono channel count
 - **Underlying family:** getID3 native RIFF/WAVE parser

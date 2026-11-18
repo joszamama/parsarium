@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `11.699.26234`
+- **Upstream:** [source repository](<https://github.com/klahnakoski/mo-sql-parsing>) · [PyPI](<https://pypi.org/project/mo-sql-parsing/>)
 - **License:** MPL-2.0
 - **Parser family:** mo-sql-parsing grammar on the mo-parsing engine
 - **Local input API:** `mo_sql_parsing.parse(local SQL text) -> JSON parse tree`

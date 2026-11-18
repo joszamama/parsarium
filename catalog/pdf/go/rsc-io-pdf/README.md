@@ -1,6 +1,7 @@
 # rsc.io/pdf — PDF / Go
 
 - **Pinned release:** `v0.1.1`
+- **Upstream:** [source repository](<https://github.com/rsc/pdf>) · [pkg.go.dev](<https://pkg.go.dev/rsc.io/pdf>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** page count
 - **Underlying family:** rsc PDF reader lineage

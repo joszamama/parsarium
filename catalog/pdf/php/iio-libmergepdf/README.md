@@ -1,6 +1,7 @@
 # iio/libmergepdf — PDF / PHP
 
 - **Pinned release:** `4.0.4`
+- **Upstream:** [source repository](<https://github.com/hanneskod/libmergepdf>) · [Packagist](<https://packagist.org/packages/iio/libmergepdf>)
 - **License:** WTFPL
 - **Parsed scope:** One imported PDF page object in emitted PDF
 - **Underlying family:** FPDI native PHP PDF object reader

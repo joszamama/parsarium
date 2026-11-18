@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.1`
+- **Upstream:** [source repository](<https://github.com/perlpunk/pyyaml-core>) · [PyPI](<https://pypi.org/project/yamlcore/>)
 - **License:** MIT
 - **Parser family:** yamlcore CoreLoader: PyYAML 6.0.3 pure-Python BaseLoader (Reader/Scanner/Parser/Composer) with yamlcore's YAML 1.2 core-schema resolver and constructors; not CCoreLoader (libyaml)
 - **Local input API:** `yaml.load(local YAML bytes, Loader=yamlcore.CoreLoader); the decoded str and a local binary stream give the same tree`

@@ -1,6 +1,7 @@
 # netty — HTTP/1.1 / Java
 
 - **Pinned release:** `3.10.6.Final`
+- **Upstream:** [source repository](<https://github.com/netty/netty>) · [Maven Central](<https://central.sonatype.com/artifact/io.netty/netty>)
 - **License:** Apache-2.0
 - **Parsed scope:** HTTP/1.1 request line and headers from local bytes
 - **Underlying family:** Netty 3 HTTP request decoder; prior major branch of netty-codec-http

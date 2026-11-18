@@ -1,6 +1,7 @@
 # lunasvg — SVG / C++
 
 - **Pinned release:** `3.5.0`
+- **Upstream:** [source repository](<https://github.com/sammycage/lunasvg>)
 - **License:** MIT
 - **Parsed scope:** parsed SVG dimensions and rendered red/green rectangle pixels
 - **Underlying family:** LunaSVG C++ document parser with PlutoVG rasterizer

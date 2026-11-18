@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.0.3`
+- **Upstream:** [source repository](<https://github.com/klkvsk/json-decode-stream>) · [Packagist](<https://packagist.org/packages/klkvsk/json-decode-stream>)
 - **License:** MIT
 - **Parser family:** klkvsk json-decode-stream Tokenizer, event Parser and Collector
 - **Local input API:** `JsonDecodeStream\Parser::fromString(string) then items() with no selector over local bytes, yielding each complete top-level document (objects as stdClass); harness requires exactly one document and type-tags it. Parser::fromFile(string $path) and Parser::fromStream(resource) are cross-checked for the same tree`

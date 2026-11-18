@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `R261116`
+- **Upstream:** [source repository](<https://github.com/cktan/tomlc17>)
 - **License:** MIT
 - **Parser family:** tomlc17 (cktan; single-file scanner and parser in src/tomlc17.c)
 - **Local input API:** `toml_parse(const char *src, int len) -> toml_result_t; walk result.toptab (toml_datum_t: type, u.tab, u.arr, u.str, u.int64, u.fp64, u.boolean, u.ts)`

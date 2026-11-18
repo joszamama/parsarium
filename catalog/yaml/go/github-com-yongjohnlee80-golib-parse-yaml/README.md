@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.8.62`
+- **Upstream:** [source repository](<https://github.com/yongjohnlee80/golib>) · [pkg.go.dev](<https://pkg.go.dev/github.com/yongjohnlee80/golib/parse/yaml>)
 - **License:** Apache-2.0
 - **Parser family:** golib parse/yaml: independent pure-Go YAML 1.2 scanner, parser and composer, with the same module's golib/yaml Core-schema evaluator (not a libyaml port)
 - **Local input API:** `pyaml.Parse([]byte) from github.com/yongjohnlee80/golib/parse/yaml over one complete local YAML byte slice (one document required in Stream.Docs), then yaml.Evaluate(doc, yaml.Core) from the same module's github.com/yongjohnlee80/golib/yaml; mappings become yaml.Map (ordered []MapItem{Key, Value}), scalars nil, bool, int64, float64 or string`

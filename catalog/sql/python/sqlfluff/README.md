@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.5.0`
+- **Upstream:** [source repository](<https://github.com/sqlfluff/sqlfluff>) · [PyPI](<https://pypi.org/project/sqlfluff/>)
 - **License:** MIT
 - **Parser family:** sqlfluff lexer and dialect grammar matcher
 - **Local input API:** `sqlfluff.parse(local SQL text, dialect="ansi") -> parse-tree record`

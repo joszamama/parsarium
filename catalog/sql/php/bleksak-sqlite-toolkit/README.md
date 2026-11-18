@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.4`
+- **Upstream:** [source repository](<https://github.com/Bleksak/sqlite-toolkit>) · [Packagist](<https://packagist.org/packages/bleksak/sqlite-toolkit>)
 - **License:** MIT
 - **Parser family:** bleksak/sqlite-toolkit hand-written SQLite state-machine parser (typed AST)
 - **Local input API:** `(new Bleksak\SqliteToolkit\Parser())->parse(local SQL text) -> list of AST statement nodes (Ast\Select, Ast\Insert, ...)`

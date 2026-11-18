@@ -1,6 +1,7 @@
 # github.com/alexmullins/zip — ZIP / Go
 
 - **Pinned release:** `v0.0.0-20180717182244-4affb64b04d0`
+- **Upstream:** [source repository](<https://github.com/alexmullins/zip>) · [pkg.go.dev](<https://pkg.go.dev/github.com/alexmullins/zip>)
 - **License:** MIT
 - **Parsed scope:** entry_name+decompressed_text
 - **Underlying family:** yeka/alexmullins ZIP lineage

@@ -1,6 +1,7 @@
 # allegro — WAV / C++
 
 - **Pinned release:** `5.2.11.3`
+- **Upstream:** [source repository](<https://github.com/liballeg/allegro5>)
 - **License:** Zlib
 - **Parsed scope:** WAV sample rate, channel and frame counts, plus first four decoded PCM samples
 - **Underlying family:** Allegro audio codec WAV loader

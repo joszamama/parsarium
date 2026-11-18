@@ -1,6 +1,7 @@
 # orbitale/imagemagick-php — ASCII PNM / PHP
 
 - **Pinned release:** `v3.3.5`
+- **Upstream:** [source repository](<https://github.com/Orbitale/ImageMagickPHP>) · [Packagist](<https://packagist.org/packages/orbitale/imagemagick-php>)
 - **License:** MIT
 - **Parsed scope:** identified PPM type and dimensions
 - **Underlying family:** ImageMagick PNM decoder

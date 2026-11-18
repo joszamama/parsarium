@@ -1,6 +1,7 @@
 # opencv-python-headless — PNG / Python
 
 - **Pinned release:** `5.0.0.93`
+- **Upstream:** [source repository](<https://github.com/opencv/opencv-python>) · [PyPI](<https://pypi.org/project/opencv-python-headless/>)
 - **License:** Apache-2.0
 - **Parsed scope:** pixels
 - **Underlying family:** OpenCV imgcodecs

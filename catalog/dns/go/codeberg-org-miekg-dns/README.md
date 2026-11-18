@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.6.133`
+- **Upstream:** [source repository](<https://codeberg.org/miekg/dns>) · [pkg.go.dev](<https://pkg.go.dev/codeberg.org/miekg/dns>)
 - **License:** BSD-3-Clause
 - **Parser family:** miekg/dns v2 rewrite (msg.go, zmsg.go, internal/unpack, pkg/dnsnet, rdata)
 - **Local input API:** `(*dns.Msg).Unpack() error`

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.8.0`
+- **Upstream:** [source repository](<https://github.com/laminas/laminas-xml>) · [Packagist](<https://packagist.org/packages/laminas/laminas-xml>)
 - **License:** BSD-3-Clause
 - **Parser family:** libxml2 via PHP DOMDocument, shared with the standard path, symfony/dom-crawler, symfony/serializer and mtownsend/xml-to-array
 - **Local input API:** `Laminas\Xml\Security::scan(string $xml, DOMDocument $dom) on the local bytes: DOMDocument::loadXML with LIBXML_NONET and internal libxml errors, a post-parse check that no DOCTYPE declares entities (the string heuristic runs only under PHP-FPM, not in this CLI harness), and the loaded DOMDocument returned (SimpleXMLElement when no DOMDocument is passed); walked namespace-aware`

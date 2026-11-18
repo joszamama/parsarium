@@ -1,6 +1,7 @@
 # mp4san — MP4 / Rust
 
 - **Pinned release:** `0.5.4`
+- **Upstream:** [source repository](<https://github.com/signalapp/mp4san>) · [crates.io](<https://crates.io/crates/mp4san>)
 - **License:** MIT
 - **Parsed scope:** MP4 presentation metadata and media-data span
 - **Underlying family:** mp4san parser

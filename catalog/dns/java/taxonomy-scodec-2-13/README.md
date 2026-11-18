@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.0`
+- **Upstream:** [source repository](<https://github.com/RustedBones/taxonomy>) · [Maven Central](<https://central.sonatype.com/artifact/fr.davit/taxonomy-scodec_2.13>)
 - **License:** Apache-2.0
 - **Parser family:** taxonomy (Scala, scodec: scodec/DnsCodec.scala DnsMessageDecoder over the taxonomy-model DnsMessage classes)
 - **Local input API:** `fr.davit.taxonomy.scodec.DnsCodec.dnsMessage: scodec.Codec[DnsMessage], decode(bits: scodec.bits.BitVector): Attempt[DecodeResult[DnsMessage]] (Scala object, called from Java as DnsCodec$.MODULE$.dnsMessage() with BitVector$.MODULE$.apply(byte[]))`

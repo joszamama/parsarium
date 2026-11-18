@@ -1,6 +1,7 @@
 # codec-parser — MP3 / JavaScript
 
 - **Pinned release:** `2.5.0`
+- **Upstream:** [source repository](<https://github.com/eshaz/codec-parser>) · [npm](<https://www.npmjs.com/package/codec-parser>)
 - **License:** LGPL-3.0-or-later
 - **Parsed scope:** Every MPEG Layer III frame of an untagged stream from a local Uint8Array, split by codec-parser's own frame-header parser: codec, layer, sample rate, channels, header-table bitrate, frame count, frame bytes, samples per frame, total samples, distinct header variants; no audio decode
 - **Underlying family:** codec-parser JavaScript MPEG frame parser

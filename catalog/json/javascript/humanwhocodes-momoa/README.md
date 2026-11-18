@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.3.13`
+- **Upstream:** [source repository](<https://github.com/humanwhocodes/momoa>) · [npm](<https://www.npmjs.com/package/@humanwhocodes/momoa>)
 - **License:** Apache-2.0
 - **Parser family:** momoa tokenizer and recursive-descent AST parser
 - **Local input API:** `parse(text, {mode: 'json'}) on local bytes decoded as strict UTF-8 text; summary walks the returned Document AST`

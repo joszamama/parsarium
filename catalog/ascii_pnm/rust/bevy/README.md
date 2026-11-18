@@ -1,6 +1,7 @@
 # bevy — ASCII PNM / Rust
 
 - **Pinned release:** `0.20.1`
+- **Upstream:** [source repository](<https://github.com/bevyengine/bevy>) · [crates.io](<https://crates.io/crates/bevy>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** P3 ASCII PPM expanded RGBA pixels
 - **Underlying family:** Bevy re-export of bevy_image over image-rs PNM

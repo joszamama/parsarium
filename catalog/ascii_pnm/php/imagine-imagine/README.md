@@ -1,6 +1,7 @@
 # imagine/imagine — ASCII PNM / PHP
 
 - **Pinned release:** `1.5.4`
+- **Upstream:** [source repository](<https://github.com/php-imagine/Imagine>) · [Packagist](<https://packagist.org/packages/imagine/imagine>)
 - **License:** MIT
 - **Parsed scope:** decoded image dimensions
 - **Underlying family:** ImageMagick PNM decoder

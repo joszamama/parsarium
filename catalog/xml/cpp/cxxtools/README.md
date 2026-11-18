@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.0.0`
+- **Upstream:** [source repository](<https://github.com/maekitalo/cxxtools>) · [Debian](<https://tracker.debian.org/pkg/cxxtools>)
 - **License:** LGPL-2.1-or-later
 - **Parser family:** cxxtools XmlReader own state-machine parser
 - **Local input API:** `cxxtools::xml::XmlReader(std::istream&) over a std::istringstream of the local bytes; XmlReader::get() then next() until Node::EndDocument; StartElement::name() and attributes() (Attribute::name()/value()), Characters::content(); cxxtools::String converted with Utf8Codec::encode`

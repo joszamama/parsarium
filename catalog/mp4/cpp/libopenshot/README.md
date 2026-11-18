@@ -1,6 +1,7 @@
 # libopenshot — MP4 / C++
 
 - **Pinned release:** `1.1.1`
+- **Upstream:** [source repository](<https://github.com/OpenShot/libopenshot>) · [Debian](<https://tracker.debian.org/pkg/libopenshot>)
 - **License:** LGPL-3.0-or-later
 - **Parsed scope:** FFmpegReader opened a valid MP4, reporting H.264 video, AAC audio and 2x2 dimensions
 - **Underlying family:** OpenShot FFmpegReader over FFmpeg MOV/MP4 demuxer

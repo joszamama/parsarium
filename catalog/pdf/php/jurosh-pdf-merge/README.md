@@ -1,6 +1,7 @@
 # jurosh/pdf-merge — PDF / PHP
 
 - **Pinned release:** `2.1.0`
+- **Upstream:** [source repository](<https://github.com/jurosh/php-pdf-merge>) · [Packagist](<https://packagist.org/packages/jurosh/pdf-merge>)
 - **License:** Apache-2.0
 - **Parsed scope:** One imported page object in emitted PDF
 - **Underlying family:** FPDI native PHP PDF object reader

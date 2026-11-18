@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.3.0`
+- **Upstream:** [source repository](<https://github.com/apache/flink>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.flink/flink-sql-parser>)
 - **License:** Apache-2.0
 - **Parser family:** Apache Calcite JavaCC grammar (Flink-generated FlinkSqlParserImpl)
 - **Local input API:** `SqlParser.create(local SQL text, config with FlinkSqlParserImpl.FACTORY, FlinkSqlConformance.DEFAULT, Lex.JAVA).parseStmtList() -> SqlNodeList`

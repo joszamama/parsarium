@@ -1,6 +1,7 @@
 # imagemagick — PDF / C++
 
 - **Pinned release:** `7.1.2-35`
+- **Upstream:** [source repository](<https://github.com/ImageMagick/ImageMagick>) · [Debian](<https://tracker.debian.org/pkg/imagemagick>)
 - **License:** ImageMagick
 - **Parsed scope:** Rendered PDF page sequence and first page dimensions
 - **Underlying family:** ImageMagick PDF coder + Ghostscript PDF interpreter

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.5.32`
+- **Upstream:** [source repository](<https://github.com/tabnas/yaml>) · [pkg.go.dev](<https://pkg.go.dev/github.com/tabnas/yaml/go>)
 - **License:** MIT
 - **Parser family:** tabnas/yaml: independent YAML grammar plugin for the tabnas (jsonic) parser engine, Go port of the @tabnas/yaml TypeScript plugin (not a libyaml port)
 - **Local input API:** `tabnasyaml.Parse(string) (any, error) from github.com/tabnas/yaml/go over one complete local YAML text (the local file bytes as a Go string); mappings come back as *tabnas.OrderedMap (Keys in source order, Vals), sequences []any, scalars string, bool, nil or float64 (every number)`

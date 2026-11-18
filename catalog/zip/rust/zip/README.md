@@ -1,6 +1,7 @@
 # zip — ZIP / Rust
 
 - **Pinned release:** `9.5.1`
+- **Upstream:** [source repository](<https://github.com/zip-rs/zip2>) · [crates.io](<https://crates.io/crates/zip>)
 - **License:** MIT
 - **Parsed scope:** Entry name and decompressed text
 - **Underlying family:** zip-rs lineage

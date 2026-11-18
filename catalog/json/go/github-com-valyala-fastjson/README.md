@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.6.10`
+- **Upstream:** [source repository](<https://github.com/valyala/fastjson>) · [pkg.go.dev](<https://pkg.go.dev/github.com/valyala/fastjson>)
 - **License:** MIT
 - **Parser family:** valyala/fastjson own Go recursive-descent parser
 - **Local input API:** `fastjson.Parser.ParseBytes([]byte) over one complete local JSON byte slice`

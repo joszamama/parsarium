@@ -1,6 +1,7 @@
 # librosa — WAV / Python
 
 - **Pinned release:** `1.0.0`
+- **Upstream:** [source repository](<https://github.com/librosa/librosa>) · [PyPI](<https://pypi.org/project/librosa/>)
 - **License:** ISC
 - **Parsed scope:** PCM samples
 - **Underlying family:** librosa via soundfile/libsndfile

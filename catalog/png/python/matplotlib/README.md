@@ -1,6 +1,7 @@
 # matplotlib — PNG / Python
 
 - **Pinned release:** `3.11.2`
+- **Upstream:** [source repository](<https://github.com/matplotlib/matplotlib>) · [PyPI](<https://pypi.org/project/matplotlib/>)
 - **License:** Matplotlib License 1.3
 - **Parsed scope:** pixels
 - **Underlying family:** Matplotlib via Pillow

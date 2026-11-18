@@ -1,6 +1,7 @@
 # av — MP4 / Python
 
 - **Pinned release:** `19.0.2`
+- **Upstream:** [source repository](<https://github.com/PyAV-Org/PyAV>) · [PyPI](<https://pypi.org/project/av/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** video/audio tracks and title
 - **Underlying family:** FFmpeg libavformat via PyAV

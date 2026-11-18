@@ -1,6 +1,7 @@
 # eazip — ZIP / Rust
 
 - **Pinned release:** `0.2.7`
+- **Upstream:** [source repository](<https://github.com/a1phyr/eazip>) · [crates.io](<https://crates.io/crates/eazip>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** Entry name and decompressed text
 - **Underlying family:** eazip engine

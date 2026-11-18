@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.14.0`
+- **Upstream:** [source repository](<https://github.com/tamasfe/taplo>) · [crates.io](<https://crates.io/crates/taplo>)
 - **License:** MIT
 - **Parser family:** taplo (tamasfe): own logos-derived lexer, recursive-descent parser over a rowan syntax tree and DOM builder; independent of toml_parser, toml and toml_edit (no dependency on them). Its date-time tokens are decoded with the time crate.
 - **Local input API:** `taplo::parser::parse(&str) -> Parse { green_node, errors }; Parse::into_dom() -> taplo::dom::Node::{Table, Array, Bool, Str, Integer (IntegerValue::{Positive(u64), Negative(i64)}), Float (f64), Date (DateTimeValue::{OffsetDateTime, LocalDateTime, Date, Time} over the time crate), Invalid}; Node::validate() reports semantic errors`

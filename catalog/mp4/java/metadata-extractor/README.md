@@ -1,6 +1,7 @@
 # metadata-extractor — MP4 / Java
 
 - **Pinned release:** `2.22.0`
+- **Upstream:** [source repository](<https://github.com/drewnoakes/metadata-extractor>) · [Maven Central](<https://central.sonatype.com/artifact/com.drewnoakes/metadata-extractor>)
 - **License:** Apache-2.0
 - **Parsed scope:** parsed video width and height
 - **Underlying family:** metadata-extractor MP4 box reader

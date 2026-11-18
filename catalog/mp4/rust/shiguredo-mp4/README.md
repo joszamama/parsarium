@@ -1,6 +1,7 @@
 # shiguredo_mp4 — MP4 / Rust
 
 - **Pinned release:** `2026.6.0-canary.2`
+- **Upstream:** [source repository](<https://github.com/shiguredo/mp4-rs>) · [crates.io](<https://crates.io/crates/shiguredo_mp4>)
 - **License:** Apache-2.0
 - **Parsed scope:** Typed MP4 top-level boxes
 - **Underlying family:** Shiguredo MP4 parser

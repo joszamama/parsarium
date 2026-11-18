@@ -1,6 +1,7 @@
 # usvg — SVG / Rust
 
 - **Pinned release:** `0.50.0`
+- **Upstream:** [source repository](<https://github.com/linebender/resvg>) · [crates.io](<https://crates.io/crates/usvg>)
 - **License:** Apache-2.0 OR MIT
 - **Parsed scope:** SVG document tree and dimensions
 - **Underlying family:** usvg lineage

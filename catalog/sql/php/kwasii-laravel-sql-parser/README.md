@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.1.0`
+- **Upstream:** [source repository](<https://github.com/kwasii1/laravel-sql-parser>) · [Packagist](<https://packagist.org/packages/kwasii/laravel-sql-parser>)
 - **License:** MIT
 - **Parser family:** sqlglot family: PHP port of sqlglot 30.21.0 (own tokenizer, recursive-descent parser and expression classes)
 - **Local input API:** `Kwasii\LaravelSqlParser\Dialects\Dialect::get(null)->parse(local SQL text) -> list of Expression trees (Expressions\Select, Expressions\Insert, ...)`

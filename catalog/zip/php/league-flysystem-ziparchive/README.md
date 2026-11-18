@@ -1,6 +1,7 @@
 # league/flysystem-ziparchive — ZIP / PHP
 
 - **Pinned release:** `3.31.0`
+- **Upstream:** [source repository](<https://github.com/thephpleague/flysystem-ziparchive>) · [Packagist](<https://packagist.org/packages/league/flysystem-ziparchive>)
 - **License:** MIT
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** Flysystem ZIP adapter over PHP ZipArchive

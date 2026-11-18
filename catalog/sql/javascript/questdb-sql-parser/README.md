@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.22`
+- **Upstream:** [source repository](<https://github.com/questdb/sql-parser>) · [npm](<https://www.npmjs.com/package/@questdb/sql-parser>)
 - **License:** Apache-2.0
 - **Parser family:** @questdb/sql-parser Chevrotain grammar
 - **Local input API:** `parseToAst(local UTF-8 text) -> {ast: Statement[], errors}`

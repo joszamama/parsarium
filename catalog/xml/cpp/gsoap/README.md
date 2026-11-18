@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.8.142`
+- **Upstream:** [Debian](<https://tracker.debian.org/pkg/gsoap>)
 - **License:** GPL-2.0
 - **Parser family:** gSOAP own XML engine (stdsoap2.cpp tokenizer and namespace stack) with its DOM parser (dom.cpp)
 - **Local input API:** `xsd__anyType dom(ctx) with ctx = soap_new1(SOAP_C_UTFSTRING | SOAP_DOM_TREE), then std::istream >> dom over a std::istringstream of the local bytes and a check of ctx->error; the DOM is walked through soap_dom_element (name, nstr, atts, elts, text) and soap_dom_attribute (name, nstr, text); soap_destroy/soap_end/soap_free`

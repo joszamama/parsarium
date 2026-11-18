@@ -1,6 +1,7 @@
 # rokka/imagine-vips — ASCII PNM / PHP
 
 - **Pinned release:** `0.42.0`
+- **Upstream:** [source repository](<https://github.com/rokka-io/imagine-vips>) · [Packagist](<https://packagist.org/packages/rokka/imagine-vips>)
 - **License:** MIT
 - **Parsed scope:** decoded image dimensions
 - **Underlying family:** libvips PPM/PNM decoder

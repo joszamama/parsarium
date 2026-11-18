@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.0.0-20260709020957-3f0f7bd60b63`
+- **Upstream:** [source repository](<https://github.com/lestrrat-go/libxml2>) · [pkg.go.dev](<https://pkg.go.dev/github.com/lestrrat-go/libxml2>)
 - **License:** MIT
 - **Parser family:** lestrrat-go/libxml2 Go cgo DOM binding over native libxml2 2.15.4
 - **Local input API:** `libxml2.Parse([]byte, ...parser.Option) (types.Document, error) with parser.XMLParseNoNet; Document.DocumentElement() and Element NamespaceURI/LocalName, GetNamespaces, Attributes, FirstChild/NextSibling, NodeValue`

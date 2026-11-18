@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.0`
+- **Upstream:** [source repository](<https://github.com/PurrPHP/yaml>) · [Packagist](<https://packagist.org/packages/purrphp/yaml>)
 - **License:** MIT
 - **Parser family:** PurrPHP Yaml own line reader, block Parser.php, InlineParser.php flow/scalar parser and CoreSchema resolver
 - **Local input API:** `Purr\Yaml\YamlStreamSingle::fromString(string) over local bytes; the documented node model (MappingNode entries, SequenceNode items, AliasNode targets) is walked in source order and each scalar is typed by the package's Schema\CoreSchema::resolve`

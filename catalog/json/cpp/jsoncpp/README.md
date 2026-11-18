@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.9.8`
+- **Upstream:** [source repository](<https://github.com/open-source-parsers/jsoncpp>)
 - **License:** MIT OR LicenseRef-Public-Domain
 - **Parser family:** JsonCpp OurReader
 - **Local input API:** `Json::CharReaderBuilder::newCharReader()->parse(const char* begin, const char* end, Json::Value*, std::string*) with CharReaderBuilder::strictMode`

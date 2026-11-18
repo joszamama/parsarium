@@ -1,6 +1,7 @@
 # cgal — ASCII PLY / C++
 
 - **Pinned release:** `6.2.1`
+- **Upstream:** [source repository](<https://github.com/CGAL/cgal>) · [Debian](<https://tracker.debian.org/pkg/cgal>)
 - **License:** GPL-3.0-or-later
 - **Parsed scope:** three vertices and one face in a parsed Surface_mesh
 - **Underlying family:** CGAL Surface_mesh PLY reader

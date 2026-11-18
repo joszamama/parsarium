@@ -1,6 +1,7 @@
 # mp4parse — MP4 / Rust
 
 - **Pinned release:** `0.17.0`
+- **Upstream:** [source repository](<https://github.com/mozilla/mp4parse-rust>) · [crates.io](<https://crates.io/crates/mp4parse>)
 - **License:** MPL-2.0
 - **Parsed scope:** ISO-BMFF movie track table
 - **Underlying family:** Mozilla mp4parse

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `pre-ai`
+- **Upstream:** [source repository](<https://github.com/sheredom/json.h>)
 - **License:** Unlicense
 - **Parser family:** json.h header-only parser (sheredom/json.h)
 - **Local input API:** `json_parse(const void *src, size_t src_size)`

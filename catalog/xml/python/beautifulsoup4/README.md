@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.15.0`
+- **Upstream:** [PyPI](<https://pypi.org/project/beautifulsoup4/>)
 - **License:** MIT
 - **Parser family:** Beautiful Soup bs4 tree builder over lxml.etree XMLParser over libxml2 2.15.4 XML parser
 - **Local input API:** `bs4.BeautifulSoup(local XML bytes, "xml"); Tag.namespace, Tag.name, NamespacedAttribute.namespace/name, NavigableString, Comment and XMLProcessingInstruction children of the resulting bs4 tree`

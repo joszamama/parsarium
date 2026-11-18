@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.9.0`
+- **Upstream:** [source repository](<https://github.com/TheElectronWill/night-config>) · [Maven Central](<https://central.sonatype.com/artifact/com.electronwill.night-config/toml>)
 - **License:** LGPL-3.0
 - **Parser family:** NightConfig TOML (own hand-written TomlParser/TableParser/ValueParser over night-config core CharacterInput)
 - **Local input API:** `new TomlParser().parse(Reader) on a local UTF-8 file -> CommentedConfig`

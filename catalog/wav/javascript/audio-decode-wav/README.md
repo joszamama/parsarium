@@ -1,6 +1,7 @@
 # @audio/decode-wav — WAV / JavaScript
 
 - **Pinned release:** `2.0.0`
+- **Upstream:** [source repository](<https://github.com/audiojs/decode>) · [npm](<https://www.npmjs.com/package/@audio/decode-wav>)
 - **License:** MIT
 - **Parsed scope:** samples
 - **Underlying family:** audiojs/decode

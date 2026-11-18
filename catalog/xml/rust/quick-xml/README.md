@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.42.0`
+- **Upstream:** [source repository](<https://github.com/tafia/quick-xml>) · [crates.io](<https://crates.io/crates/quick-xml>)
 - **License:** MIT
 - **Parser family:** quick-xml pull reader (tafia/quick-xml)
 - **Local input API:** `quick_xml::NsReader::from_reader(&[u8]); NsReader::read_event(); NsReader::resolver().resolve_element(..)/resolve_attribute(..); Attribute::normalized_value(XmlVersion::Implicit1_0); BytesText/BytesCData::xml10_content(); BytesRef::resolve_char_ref() with escape::resolve_predefined_entity`

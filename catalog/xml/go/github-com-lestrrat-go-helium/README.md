@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.11.0`
+- **Upstream:** [source repository](<https://github.com/lestrrat-go/helium>) · [pkg.go.dev](<https://pkg.go.dev/github.com/lestrrat-go/helium>)
 - **License:** MIT
 - **Parser family:** helium pure-Go XML parser (libxml2-style port; independent of encoding/xml)
 - **Local input API:** `helium.NewParser().Parse(context.Context, []byte) (*Document, error) with default settings; Document.DocumentElement() DOM walk over Element.URI/LocalName, Element.Namespaces, Element.Attributes (Attribute.URI/LocalName/Value) and FirstChild/NextSibling text, CDATA, comment and PI nodes`

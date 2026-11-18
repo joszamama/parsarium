@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `12.0.0`
+- **Upstream:** [source repository](<https://github.com/fb55/htmlparser2>) · [npm](<https://www.npmjs.com/package/htmlparser2>)
 - **License:** MIT
 - **Parser family:** htmlparser2 forgiving HTML/XML tokenizer (own Tokenizer.js state machine) with entities decode trees
 - **Local input API:** `new Parser(handler, {xmlMode: true}).write(string) then end(), after strict UTF-8 TextDecoder of local bytes; handler callbacks onopentagname, onattribute, onclosetag, ontext, oncdatastart, oncomment/oncommentend, onprocessinginstruction, onerror`

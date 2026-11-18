@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.46`
+- **Upstream:** [source repository](<https://github.com/dtolnay/miniserde>) · [crates.io](<https://crates.io/crates/miniserde>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** miniserde independent non-recursive JSON deserializer in src/json/de.rs and own Value visitor; by serde_json author but no serde_json input parser dependency
 - **Local input API:** `miniserde::json::from_str::<miniserde::json::Value>(&str) -> Result<Value>; Value::{Object, Array, String, Number, Bool, Null}`

@@ -1,6 +1,7 @@
 # oxideav-io — ASCII PNM / Rust
 
 - **Pinned release:** `0.1.2`
+- **Upstream:** [source repository](<https://github.com/OxideAV/oxideav-io>) · [crates.io](<https://crates.io/crates/oxideav-io>)
 - **License:** MIT
 - **Parsed scope:** P3 ASCII PPM RGB pixels
 - **Underlying family:** OxideAV I/O gateway over oxideav-image and oxideav-pbm

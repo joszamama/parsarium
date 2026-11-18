@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.2.1`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/org.apache.hive/hive-parser>)
 - **License:** Apache-2.0
 - **Parser family:** Apache Hive ANTLR3 HiveQL grammar (HiveParser)
 - **Local input API:** `new ParseDriver().parse(local SQL text without its terminating semicolon).getTree() -> ASTNode`

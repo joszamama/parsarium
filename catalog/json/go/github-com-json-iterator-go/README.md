@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.1.12`
+- **Upstream:** [source repository](<https://github.com/json-iterator/go>) · [pkg.go.dev](<https://pkg.go.dev/github.com/json-iterator/go>)
 - **License:** MIT
 - **Parser family:** json-iterator Iterator parser
 - **Local input API:** `jsoniter.Unmarshal([]byte, interface{})`

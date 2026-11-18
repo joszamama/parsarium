@@ -8,16 +8,16 @@ Pilot cell at the ten-path ceiling. PROTOCOL.md lets a libxml2-family wrapper qu
 
 ## Third-party parsers
 
-- [symfony/dom-crawler](symfony-dom-crawler/README.md) — verified Docker harness
-- [symfony/serializer](symfony-serializer/README.md) — verified Docker harness
-- [sabre/xml](sabre-xml/README.md) — verified Docker harness
-- [veewee/xml](veewee-xml/README.md) — verified Docker harness
-- [querypath/querypath](querypath-querypath/README.md) — verified Docker harness
-- [mtownsend/xml-to-array](mtownsend-xml-to-array/README.md) — verified Docker harness
-- [laminas/laminas-xml](laminas-laminas-xml/README.md) — verified Docker harness
-- [saloonphp/xml-wrangler](saloonphp-xml-wrangler/README.md) — verified Docker harness
-- [simplesamlphp/xml-common](simplesamlphp-xml-common/README.md) — verified Docker harness
-- [imangazaliev/didom](imangazaliev-didom/README.md) — verified Docker harness
+- [symfony/dom-crawler](symfony-dom-crawler/README.md) — verified Docker harness · [source repository](<https://github.com/symfony/dom-crawler>) · [Packagist](<https://packagist.org/packages/symfony/dom-crawler>)
+- [symfony/serializer](symfony-serializer/README.md) — verified Docker harness · [source repository](<https://github.com/symfony/serializer>) · [Packagist](<https://packagist.org/packages/symfony/serializer>)
+- [sabre/xml](sabre-xml/README.md) — verified Docker harness · [source repository](<https://github.com/sabre-io/xml>) · [Packagist](<https://packagist.org/packages/sabre/xml>)
+- [veewee/xml](veewee-xml/README.md) — verified Docker harness · [source repository](<https://github.com/veewee/xml>) · [Packagist](<https://packagist.org/packages/veewee/xml>)
+- [querypath/querypath](querypath-querypath/README.md) — verified Docker harness · [source repository](<https://github.com/technosophos/querypath>) · [Packagist](<https://packagist.org/packages/querypath/querypath>)
+- [mtownsend/xml-to-array](mtownsend-xml-to-array/README.md) — verified Docker harness · [source repository](<https://github.com/mtownsend5512/xml-to-array>) · [Packagist](<https://packagist.org/packages/mtownsend/xml-to-array>)
+- [laminas/laminas-xml](laminas-laminas-xml/README.md) — verified Docker harness · [source repository](<https://github.com/laminas/laminas-xml>) · [Packagist](<https://packagist.org/packages/laminas/laminas-xml>)
+- [saloonphp/xml-wrangler](saloonphp-xml-wrangler/README.md) — verified Docker harness · [source repository](<https://github.com/saloonphp/xml-wrangler>) · [Packagist](<https://packagist.org/packages/saloonphp/xml-wrangler>)
+- [simplesamlphp/xml-common](simplesamlphp-xml-common/README.md) — verified Docker harness · [source repository](<https://github.com/simplesamlphp/xml-common>) · [Packagist](<https://packagist.org/packages/simplesamlphp/xml-common>)
+- [imangazaliev/didom](imangazaliev-didom/README.md) — verified Docker harness · [source repository](<https://github.com/Imangazaliev/DiDOM>) · [Packagist](<https://packagist.org/packages/imangazaliev/didom>)
 
 ## Standard and runtime APIs
 

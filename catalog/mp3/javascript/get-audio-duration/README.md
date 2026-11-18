@@ -1,6 +1,7 @@
 # get-audio-duration — MP3 / JavaScript
 
 - **Pinned release:** `4.0.1`
+- **Upstream:** [source repository](<https://github.com/caffco/get-audio-duration>) · [npm](<https://www.npmjs.com/package/get-audio-duration>)
 - **License:** MIT
 - **Parsed scope:** duration
 - **Underlying family:** FFprobe wrapper

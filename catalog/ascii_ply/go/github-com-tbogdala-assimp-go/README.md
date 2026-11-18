@@ -1,6 +1,7 @@
 # github.com/tbogdala/assimp-go — ASCII PLY / Go
 
 - **Pinned release:** `v0.0.0-20160907223021-d10e2135f9fe`
+- **Upstream:** [source repository](<https://github.com/tbogdala/assimp-go>) · [pkg.go.dev](<https://pkg.go.dev/github.com/tbogdala/assimp-go>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** ASCII PLY mesh, vertex, and face counts
 - **Underlying family:** Assimp C++ importer

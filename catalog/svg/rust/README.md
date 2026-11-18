@@ -6,16 +6,16 @@
 
 ## Third-party parsers
 
-- [svgtypes](svgtypes/README.md) — Docker harness ready
-- [usvg](usvg/README.md) — Docker harness ready
-- [resvg](resvg/README.md) — Docker harness ready
-- [svg](svg/README.md) — Docker harness ready
-- [usvg-parser](usvg-parser/README.md) — Docker harness ready
-- [svg-hush](svg-hush/README.md) — Docker harness ready
-- [spreet](spreet/README.md) — Docker harness ready
-- [vello_svg](vello-svg/README.md) — Docker harness ready
-- [anyrender_svg](anyrender-svg/README.md) — Docker harness ready
-- [svg_path_ops](svg-path-ops/README.md) — Docker harness ready
+- [svgtypes](svgtypes/README.md) — Docker harness ready · [source repository](<https://github.com/linebender/svgtypes>) · [crates.io](<https://crates.io/crates/svgtypes>)
+- [usvg](usvg/README.md) — Docker harness ready · [source repository](<https://github.com/linebender/resvg>) · [crates.io](<https://crates.io/crates/usvg>)
+- [resvg](resvg/README.md) — Docker harness ready · [source repository](<https://github.com/linebender/resvg>) · [crates.io](<https://crates.io/crates/resvg>)
+- [svg](svg/README.md) — Docker harness ready · [source repository](<https://github.com/bodoni/svg>) · [crates.io](<https://crates.io/crates/svg>)
+- [usvg-parser](usvg-parser/README.md) — Docker harness ready · [source repository](<https://github.com/linebender/resvg>) · [crates.io](<https://crates.io/crates/usvg-parser>)
+- [svg-hush](svg-hush/README.md) — Docker harness ready · [source repository](<https://github.com/cloudflare/svg-hush>) · [crates.io](<https://crates.io/crates/svg-hush>)
+- [spreet](spreet/README.md) — Docker harness ready · [source repository](<https://github.com/flother/spreet>) · [crates.io](<https://crates.io/crates/spreet>)
+- [vello_svg](vello-svg/README.md) — Docker harness ready · [source repository](<https://github.com/linebender/vello_svg>) · [crates.io](<https://crates.io/crates/vello_svg>)
+- [anyrender_svg](anyrender-svg/README.md) — Docker harness ready · [source repository](<https://github.com/DioxusLabs/anyrender>) · [crates.io](<https://crates.io/crates/anyrender_svg>)
+- [svg_path_ops](svg-path-ops/README.md) — Docker harness ready · [source repository](<https://github.com/orhanbalci/rough-rs>) · [crates.io](<https://crates.io/crates/svg_path_ops>)
 
 ## Standard and runtime APIs
 

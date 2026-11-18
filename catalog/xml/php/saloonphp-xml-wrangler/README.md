@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.5.0`
+- **Upstream:** [source repository](<https://github.com/saloonphp/xml-wrangler>) · [Packagist](<https://packagist.org/packages/saloonphp/xml-wrangler>)
 - **License:** MIT
 - **Parser family:** libxml2 via PHP XMLReader and DOMDocument, shared with the standard path, sabre/xml and symfony/dom-crawler
 - **Local input API:** `XmlReader::fromString(string) then elements() (documented; returns Element DTOs keyed by element name); fromFile(path) and fromStream(resource) are cross-checked for the same summary`

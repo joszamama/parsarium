@@ -1,6 +1,7 @@
 # wapmorgan/unified-archive — ZIP / PHP
 
 - **Pinned release:** `1.3.1`
+- **Upstream:** [source repository](<https://github.com/wapmorgan/UnifiedArchive>) · [Packagist](<https://packagist.org/packages/wapmorgan/unified-archive>)
 - **License:** MIT
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** UnifiedArchive ZIP driver over PHP ZipArchive

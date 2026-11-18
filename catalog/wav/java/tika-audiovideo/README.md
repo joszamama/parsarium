@@ -1,6 +1,7 @@
 # tika-audiovideo — WAV / Java
 
 - **Pinned release:** `4.2.0`
+- **Upstream:** [source repository](<https://github.com/apache/tika>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.tika/tika-parser-audiovideo-module>)
 - **License:** Apache-2.0
 - **Parsed scope:** WAV sample rate and channels in parsed metadata
 - **Underlying family:** Apache Tika AudioParser over Java Sound SPI

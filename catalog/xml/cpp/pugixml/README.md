@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.16`
+- **Upstream:** [source repository](<https://github.com/zeux/pugixml>) · [Debian](<https://tracker.debian.org/pkg/pugixml>)
 - **License:** MIT
 - **Parser family:** pugixml own recursive-descent parser (pugi::impl::xml_parser)
 - **Local input API:** `pugi::xml_document::load_buffer(const void*, size_t, parse_default, encoding_utf8); pugixml does no namespace processing, so the adapter resolves prefixes from in-scope xmlns attributes and rejects unbound prefixes and duplicate expanded attributes`

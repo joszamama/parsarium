@@ -8,16 +8,16 @@ Ten paths, the ceiling. Seven C++ XML paths pass the namespace-aware catalog con
 
 ## Third-party parsers
 
-- [xerces-c](xerces-c/README.md) — verified Docker harness
-- [pugixml](pugixml/README.md) — verified Docker harness
-- [tinyxml](tinyxml/README.md) — verified Docker harness
-- [tinyxml2](tinyxml2/README.md) — verified Docker harness
-- [libxml++](libxml/README.md) — verified Docker harness
-- [gsoap](gsoap/README.md) — verified Docker harness
-- [opensp](opensp/README.md) — verified Docker harness
-- [cxxtools](cxxtools/README.md) — verified Docker harness
-- [rapidxml](rapidxml/README.md) — verified Docker harness
-- [libcutl](libcutl/README.md) — verified Docker harness
+- [xerces-c](xerces-c/README.md) — verified Docker harness · [source repository](<https://github.com/apache/xerces-c>) · [Debian](<https://tracker.debian.org/pkg/xerces-c>)
+- [pugixml](pugixml/README.md) — verified Docker harness · [source repository](<https://github.com/zeux/pugixml>) · [Debian](<https://tracker.debian.org/pkg/pugixml>)
+- [tinyxml](tinyxml/README.md) — verified Docker harness · [source repository](<https://sourceforge.net/projects/tinyxml/>) · [Debian](<https://tracker.debian.org/pkg/tinyxml>)
+- [tinyxml2](tinyxml2/README.md) — verified Docker harness · [source repository](<https://github.com/leethomason/tinyxml2>) · [Debian](<https://tracker.debian.org/pkg/tinyxml2>)
+- [libxml++](libxml/README.md) — verified Docker harness · [source repository](<https://github.com/libxmlplusplus/libxmlplusplus>)
+- [gsoap](gsoap/README.md) — verified Docker harness · [Debian](<https://tracker.debian.org/pkg/gsoap>)
+- [opensp](opensp/README.md) — verified Docker harness · [Debian](<https://tracker.debian.org/pkg/opensp>)
+- [cxxtools](cxxtools/README.md) — verified Docker harness · [source repository](<https://github.com/maekitalo/cxxtools>) · [Debian](<https://tracker.debian.org/pkg/cxxtools>)
+- [rapidxml](rapidxml/README.md) — verified Docker harness · [Debian](<https://tracker.debian.org/pkg/rapidxml>)
+- [libcutl](libcutl/README.md) — verified Docker harness · [Debian](<https://tracker.debian.org/pkg/libcutl>)
 
 ## Standard and runtime APIs
 

@@ -1,6 +1,7 @@
 # rosell-dk/webp-convert — PNG / PHP
 
 - **Pinned release:** `2.9.5`
+- **Upstream:** [source repository](<https://github.com/rosell-dk/webp-convert>) · [Packagist](<https://packagist.org/packages/rosell-dk/webp-convert>)
 - **License:** MIT
 - **Parsed scope:** PNG decoded to WebP with dimensions
 - **Underlying family:** PHP GD PNG decoder

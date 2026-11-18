@@ -1,6 +1,7 @@
 # moviepy — MP4 / Python
 
 - **Pinned release:** `2.2.1`
+- **Upstream:** [source repository](<https://github.com/Zulko/moviepy>) · [PyPI](<https://pypi.org/project/moviepy/>)
 - **License:** MIT
 - **Parsed scope:** decoded video frame and duration
 - **Underlying family:** MoviePy via FFmpeg

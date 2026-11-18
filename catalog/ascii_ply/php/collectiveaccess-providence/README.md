@@ -1,6 +1,7 @@
 # collectiveaccess/providence — ASCII PLY / PHP
 
 - **Pinned release:** `2.0.12`
+- **Upstream:** [source repository](<https://github.com/collectiveaccess/providence>) · [Packagist](<https://packagist.org/packages/collectiveaccess/providence>)
 - **License:** GPL-3.0
 - **Parsed scope:** One valid ASCII PLY triangle; converted STL contains one parsed facet, three vertices and the second X coordinate
 - **Underlying family:** CollectiveAccess Providence native PHP PlyToStl

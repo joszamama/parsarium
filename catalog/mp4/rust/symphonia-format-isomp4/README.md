@@ -1,6 +1,7 @@
 # symphonia-format-isomp4 — MP4 / Rust
 
 - **Pinned release:** `0.6.1`
+- **Upstream:** [source repository](<https://github.com/pdeljanov/Symphonia>) · [crates.io](<https://crates.io/crates/symphonia-format-isomp4>)
 - **License:** MPL-2.0
 - **Parsed scope:** MP4 AAC track and first packet
 - **Underlying family:** Symphonia ISO-MP4 demuxer

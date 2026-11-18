@@ -1,6 +1,7 @@
 # matomo/decompress — ZIP / PHP
 
 - **Pinned release:** `3.0.0`
+- **Upstream:** [source repository](<https://github.com/matomo-org/component-decompress>) · [Packagist](<https://packagist.org/packages/matomo/decompress>)
 - **License:** LGPL-3.0
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** Matomo extractor over PHP ZipArchive

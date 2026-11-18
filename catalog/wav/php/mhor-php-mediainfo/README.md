@@ -1,6 +1,7 @@
 # mhor/php-mediainfo — WAV / PHP
 
 - **Pinned release:** `5.8.0`
+- **Upstream:** [source repository](<https://github.com/mhor/php-mediainfo>) · [Packagist](<https://packagist.org/packages/mhor/php-mediainfo>)
 - **License:** MIT
 - **Parsed scope:** PCM format, 8 kHz sample rate, mono channel count, 16-bit depth
 - **Underlying family:** MediaInfoLib native RIFF/WAVE parser

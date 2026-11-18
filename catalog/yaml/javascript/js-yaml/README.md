@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `5.5.0`
+- **Upstream:** [source repository](<https://github.com/nodeca/js-yaml>) · [npm](<https://www.npmjs.com/package/js-yaml>)
 - **License:** MIT
 - **Parser family:** js-yaml (nodeca) event parser and constructor
 - **Local input API:** `load(text) with the default CORE_SCHEMA after strict UTF-8 decoding of a local Buffer; YAMLException rejects the input; the returned value is mapped to the Parsarium typed YAML tree`

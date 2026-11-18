@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.21.2`
+- **Upstream:** [source repository](<https://github.com/RazrFalcon/roxmltree>) · [crates.io](<https://crates.io/crates/roxmltree>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** roxmltree 0.21.2 internal tokenizer and namespace-resolving tree builder; no xmlparser crate dependency in pinned source (historical xmlparser relationship recorded in lead)
 - **Local input API:** `roxmltree::Document::parse(&str) -> Result<Document, Error>; Document::descendants(); Node::tag_name()/attributes()/namespaces()/text()`

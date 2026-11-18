@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.23.0`
+- **Upstream:** [source repository](<https://github.com/FasterXML/jackson-dataformats-text>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-toml>)
 - **License:** Apache-2.0
 - **Parser family:** Jackson TOML (own JFlex Lexer and recursive Parser in com.fasterxml.jackson.dataformat.toml)
 - **Local input API:** `TomlMapper.builder().enable(TomlReadFeature.PARSE_JAVA_TIME).build().readTree(File) -> JsonNode`

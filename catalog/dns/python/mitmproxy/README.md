@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `12.3.1`
+- **Upstream:** [source repository](<https://github.com/mitmproxy/mitmproxy>) · [PyPI](<https://pypi.org/project/mitmproxy/>)
 - **License:** MIT
 - **Parser family:** mitmproxy DNS (mitmproxy/dns.py DNSMessage.unpack_from over mitmproxy/net/dns/domain_names.py)
 - **Local input API:** `mitmproxy.dns.DNSMessage.unpack(buffer: bytes, timestamp: float | None = None) -> DNSMessage`

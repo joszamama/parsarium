@@ -1,6 +1,7 @@
 # riff-wave — WAV / Rust
 
 - **Pinned release:** `0.1.3`
+- **Upstream:** [source repository](<https://github.com/Digipom/riff-wave>) · [crates.io](<https://crates.io/crates/riff-wave>)
 - **License:** Apache-2.0
 - **Parsed scope:** Decoded PCM sample values and WAV metadata
 - **Underlying family:** riff-wave reader

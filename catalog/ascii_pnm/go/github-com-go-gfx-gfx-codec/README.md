@@ -1,6 +1,7 @@
 # github.com/go-gfx/gfx/codec — ASCII PNM / Go
 
 - **Pinned release:** `v0.41.0`
+- **Upstream:** [source repository](<https://github.com/go-gfx/gfx>) · [pkg.go.dev](<https://pkg.go.dev/github.com/go-gfx/gfx/codec>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** P3 pixels and dimensions
 - **Underlying family:** go-gfx PNM decoder

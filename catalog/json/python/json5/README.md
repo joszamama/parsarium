@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.17.3`
+- **Upstream:** [source repository](<https://github.com/dpranke/pyjson5>) · [PyPI](<https://pypi.org/project/json5/>)
 - **License:** Apache-2.0
 - **Parser family:** json5 pure-Python PEG parser (glop-generated json5/parser.py) with AST conversion in json5/lib.py
 - **Local input API:** `json5.loads(local JSON bytes); json5.loads(decoded str) and json5.load(BytesIO(local bytes)) give the same exact tree on both controls`

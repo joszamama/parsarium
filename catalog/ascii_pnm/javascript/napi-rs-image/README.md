@@ -1,6 +1,7 @@
 # @napi-rs/image — ASCII PNM / JavaScript
 
 - **Pinned release:** `1.16.0`
+- **Upstream:** [source repository](<https://github.com/Brooooooklyn/Image>) · [npm](<https://www.npmjs.com/package/@napi-rs/image>)
 - **License:** MIT
 - **Parsed scope:** P3 header dimensions and PNM type
 - **Underlying family:** napi-rs/image Rust image crate PNM decoder

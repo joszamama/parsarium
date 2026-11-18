@@ -1,6 +1,7 @@
 # svgelements — SVG / Python
 
 - **Pinned release:** `1.9.6`
+- **Upstream:** [source repository](<https://github.com/meerk40t/svgelements>) · [PyPI](<https://pypi.org/project/svgelements/>)
 - **License:** MIT
 - **Parsed scope:** SVG geometry elements and dimensions
 - **Underlying family:** svgelements Python SVG geometry parser

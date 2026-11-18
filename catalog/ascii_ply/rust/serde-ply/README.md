@@ -1,6 +1,7 @@
 # serde-ply — ASCII PLY / Rust
 
 - **Pinned release:** `0.2.2`
+- **Upstream:** [source repository](<https://github.com/ArthurBrussee/serde_ply>) · [crates.io](<https://crates.io/crates/serde-ply>)
 - **License:** Apache-2.0
 - **Parsed scope:** typed ASCII PLY vertices and face indices
 - **Underlying family:** serde-ply

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.1.1`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/com.googlecode.json-simple/json-simple>)
 - **License:** Apache-2.0
 - **Parser family:** json-simple JSONParser with generated JFlex Yylex lexer
 - **Local input API:** `new org.json.simple.parser.JSONParser().parse(InputStreamReader(FileInputStream, UTF_8))`

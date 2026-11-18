@@ -1,6 +1,7 @@
 # jave-core — MP4 / Java
 
 - **Pinned release:** `4.2.0`
+- **Upstream:** [source repository](<https://github.com/a-schild/jave2>) · [Maven Central](<https://central.sonatype.com/artifact/ws.schild/jave-core>)
 - **License:** GPL-3.0-only
 - **Parsed scope:** MP4 format, video dimensions, audio rate and channels
 - **Underlying family:** JAVE2 wrapper over bundled FFmpeg

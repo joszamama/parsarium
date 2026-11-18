@@ -1,6 +1,7 @@
 # nette/utils — PNG / PHP
 
 - **Pinned release:** `v4.1.6`
+- **Upstream:** [source repository](<https://github.com/nette/utils>) · [Packagist](<https://packagist.org/packages/nette/utils>)
 - **License:** BSD-3-Clause OR GPL-2.0-only OR GPL-3.0-only
 - **Parsed scope:** decoded dimensions and PNG type
 - **Underlying family:** PHP GD PNG decoder

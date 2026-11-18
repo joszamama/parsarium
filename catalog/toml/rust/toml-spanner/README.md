@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.3`
+- **Upstream:** [source repository](<https://github.com/exrok/toml-spanner>) · [crates.io](<https://crates.io/crates/toml-spanner>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** toml-spanner (exrok): own byte-level parser and Item tree; independent of toml_parser, toml, toml_edit, taplo and boml (no dependency on them).
 - **Local input API:** `toml_spanner::parse(&str, &Arena) -> Result<Document, Error>; Document derefs to Table of Item with Item::value() -> Value::{String, Integer, Float, Boolean, DateTime, Array, Table}; DateTime::{date(), time(), offset()}`

@@ -8,13 +8,13 @@ Pilot cell: seven JVM paths verified, netty-codec-dns, dnsjava, pcap4j-core, min
 
 ## Third-party parsers
 
-- [netty-codec-dns](netty-codec-dns/README.md) — verified Docker harness
-- [dnsjava](dnsjava/README.md) — verified Docker harness
-- [pcap4j-core](pcap4j-core/README.md) — verified Docker harness
-- [minidns-core](minidns-core/README.md) — verified Docker harness
-- [dns4s-core_2.13](dns4s-core-2-13/README.md) — verified Docker harness
-- [dnslib](dnslib/README.md) — verified Docker harness
-- [taxonomy-scodec_2.13](taxonomy-scodec-2-13/README.md) — verified Docker harness
+- [netty-codec-dns](netty-codec-dns/README.md) — verified Docker harness · [source repository](<https://github.com/netty/netty>) · [Maven Central](<https://central.sonatype.com/artifact/io.netty/netty-codec-dns>)
+- [dnsjava](dnsjava/README.md) — verified Docker harness · [source repository](<https://github.com/dnsjava/dnsjava>) · [Maven Central](<https://central.sonatype.com/artifact/dnsjava/dnsjava>)
+- [pcap4j-core](pcap4j-core/README.md) — verified Docker harness · [source repository](<https://github.com/kaitoy/pcap4j>) · [Maven Central](<https://central.sonatype.com/artifact/org.pcap4j/pcap4j-core>)
+- [minidns-core](minidns-core/README.md) — verified Docker harness · [source repository](<https://github.com/MiniDNS/minidns>) · [Maven Central](<https://central.sonatype.com/artifact/org.minidns/minidns-core>)
+- [dns4s-core_2.13](dns4s-core-2-13/README.md) — verified Docker harness · [source repository](<https://github.com/mkroli/dns4s>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.mkroli/dns4s-core_2.13>)
+- [dnslib](dnslib/README.md) — verified Docker harness · [source repository](<https://github.com/SIDN/dns-lib>) · [Maven Central](<https://central.sonatype.com/artifact/nl.sidnlabs/dnslib>)
+- [taxonomy-scodec_2.13](taxonomy-scodec-2-13/README.md) — verified Docker harness · [source repository](<https://github.com/RustedBones/taxonomy>) · [Maven Central](<https://central.sonatype.com/artifact/fr.davit/taxonomy-scodec_2.13>)
 
 ## Standard and runtime APIs
 

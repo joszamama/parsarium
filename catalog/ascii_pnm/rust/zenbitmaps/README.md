@@ -1,6 +1,7 @@
 # zenbitmaps — ASCII PNM / Rust
 
 - **Pinned release:** `0.1.5`
+- **Upstream:** [source repository](<https://github.com/imazen/zenbitmaps>) · [crates.io](<https://crates.io/crates/zenbitmaps>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** P3 ASCII PPM RGB pixels
 - **Underlying family:** zenbitmaps PNM decoder

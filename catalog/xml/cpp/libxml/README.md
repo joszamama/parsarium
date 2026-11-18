@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `5.6.1`
+- **Upstream:** [source repository](<https://github.com/libxmlplusplus/libxmlplusplus>)
 - **License:** LGPL-2.1-or-later
 - **Parser family:** libxml2 XML parser (shared underlying C parser)
 - **Local input API:** `xmlpp::DomParser::parse_memory_raw(const unsigned char*, size_type) on an in-memory local byte buffer; namespace-aware DOM via libxml2`

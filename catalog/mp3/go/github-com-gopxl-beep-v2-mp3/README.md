@@ -1,6 +1,7 @@
 # github.com/gopxl/beep/v2/mp3 — MP3 / Go
 
 - **Pinned release:** `v2.1.1`
+- **Upstream:** [source repository](<https://github.com/gopxl/beep>) · [pkg.go.dev](<https://pkg.go.dev/github.com/gopxl/beep/v2/mp3>)
 - **License:** MIT
 - **Parsed scope:** decoded samples and sample rate
 - **Underlying family:** hajime/go-mp3 via beep

@@ -1,6 +1,7 @@
 # mccode — ASCII PLY / C
 
 - **Pinned release:** `3.10.2`
+- **Upstream:** [source repository](<https://github.com/mccode-dev/McCode>) · [Debian](<https://tracker.debian.org/pkg/mccode>)
 - **License:** GPL-3.0
 - **Parsed scope:** One valid ASCII PLY triangle; C runtime parsed three vertices and one polygon and computed 1.0 by 1.0 bounding box
 - **Underlying family:** McCode native C OFF/PLY parser (interoff-lib)

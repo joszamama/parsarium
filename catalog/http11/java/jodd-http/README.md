@@ -1,6 +1,7 @@
 # jodd-http — HTTP/1.1 / Java
 
 - **Pinned release:** `6.3.0`
+- **Upstream:** [source repository](<https://github.com/oblac/jodd-http>) · [Maven Central](<https://central.sonatype.com/artifact/org.jodd/jodd-http>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** HTTP/1.1 request line and headers from local stream
 - **Underlying family:** Jodd HTTP native request parser

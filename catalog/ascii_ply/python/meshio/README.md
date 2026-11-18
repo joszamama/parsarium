@@ -1,6 +1,7 @@
 # meshio — ASCII PLY / Python
 
 - **Pinned release:** `5.3.5`
+- **Upstream:** [source repository](<https://github.com/nschloe/meshio>) · [PyPI](<https://pypi.org/project/meshio/>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY triangle vertices and face count
 - **Underlying family:** meshio PLY reader

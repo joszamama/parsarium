@@ -1,6 +1,7 @@
 # ppm — ASCII PNM / JavaScript
 
 - **Pinned release:** `0.0.0`
+- **Upstream:** [source repository](<https://github.com/mikolalysenko/ppm>) · [npm](<https://www.npmjs.com/package/ppm>)
 - **License:** BSD
 - **Parsed scope:** P3 RGB pixels and dimensions
 - **Underlying family:** ppm streaming parser

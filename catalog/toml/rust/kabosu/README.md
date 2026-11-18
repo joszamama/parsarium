@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.2.1`
+- **Upstream:** [source repository](<https://github.com/ai-implementer/setoka>) · [crates.io](<https://crates.io/crates/kabosu>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** kabosu (ai-implementer/yuzu monorepo): own dependency-free lexer, parser and span-carrying model; its README says its value interpretation is differential-tested against the toml crate, but it shares no code with toml_parser, toml or toml_edit (no dependencies at all).
 - **Local input API:** `kabosu::Document::parse(&str) -> Result<Document, ParseError>; Document::root() -> &Table; Table::entries() -> Entry { key(), node() }; Node::value() -> Value::{String, Integer(i64), Float(f64), Boolean, Datetime, Array, Table}; Datetime::{date(), time(), offset()}`

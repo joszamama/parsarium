@@ -1,6 +1,7 @@
 # mpv — MP4 / C
 
 - **Pinned release:** `0.42.0`
+- **Upstream:** [source repository](<https://github.com/mpv-player/mpv>) · [Debian](<https://tracker.debian.org/pkg/mpv>)
 - **License:** GPL-2.0-or-later AND LGPL-2.1-or-later
 - **Parsed scope:** MP4 demuxer, title and H.264/AAC track codecs
 - **Underlying family:** libmpv over FFmpeg MOV/MP4 demuxer

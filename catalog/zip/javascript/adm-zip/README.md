@@ -1,6 +1,7 @@
 # adm-zip — ZIP / JavaScript
 
 - **Pinned release:** `0.6.1`
+- **Upstream:** [source repository](<https://github.com/cthackers/adm-zip>) · [npm](<https://www.npmjs.com/package/adm-zip>)
 - **License:** MIT
 - **Parsed scope:** entries_and_content
 - **Underlying family:** ADM-ZIP

@@ -1,6 +1,7 @@
 # load_image — PNG / Rust
 
 - **Pinned release:** `3.5.0`
+- **Upstream:** [source repository](<https://codeberg.org/kornelski/load_image>) · [crates.io](<https://crates.io/crates/load_image>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** Decoded PNG dimensions via LodePNG
 - **Underlying family:** LodePNG family

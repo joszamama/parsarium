@@ -1,6 +1,7 @@
 # httpcore-nio — HTTP/1.1 / Java
 
 - **Pinned release:** `4.4.16`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/org.apache.httpcomponents/httpcore-nio>)
 - **License:** Apache-2.0
 - **Parsed scope:** HTTP/1.1 request line and headers from local channel
 - **Underlying family:** Apache HttpComponents Core 4.x NIO request parser

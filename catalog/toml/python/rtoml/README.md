@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.14.0`
+- **Upstream:** [source repository](<https://github.com/samuelcolvin/rtoml>) · [PyPI](<https://pypi.org/project/rtoml/>)
 - **License:** MIT
 - **Parser family:** toml_parser (toml-rs) via PyO3: toml 1.1.8 Deserializer over toml_parser 1.1.5; shared with the Rust toml and toml_edit paths
 - **Local input API:** `rtoml.loads(decoded local TOML text) -> dict; rtoml.load(pathlib.Path) and rtoml.load(local text stream) give the same typed tree on both controls`

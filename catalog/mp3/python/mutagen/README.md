@@ -1,6 +1,7 @@
 # mutagen — MP3 / Python
 
 - **Pinned release:** `1.48.1`
+- **Upstream:** [source repository](<https://github.com/quodlibet/mutagen>) · [PyPI](<https://pypi.org/project/mutagen/>)
 - **License:** GPL-2.0-or-later
 - **Parsed scope:** ID3v2 title, artist, album
 - **Underlying family:** Mutagen MP3/ID3 parser

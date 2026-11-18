@@ -1,6 +1,7 @@
 # imagesize — PNG / Python
 
 - **Pinned release:** `2.0.1`
+- **Upstream:** [source repository](<https://github.com/shibukawa/imagesize_py>) · [PyPI](<https://pypi.org/project/imagesize/>)
 - **License:** MIT
 - **Parsed scope:** dimensions
 - **Underlying family:** imagesize PNG header

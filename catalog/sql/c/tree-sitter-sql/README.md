@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.3.11`
+- **Upstream:** [source repository](<https://github.com/DerekStride/tree-sitter-sql>) · [Debian](<https://tracker.debian.org/pkg/tree-sitter-sql>)
 - **License:** MIT
 - **Parser family:** tree-sitter-sql grammar on the tree-sitter C runtime
 - **Local input API:** `ts_parser_new(); ts_parser_set_language(parser, tree_sitter_sql()); ts_parser_parse_string(parser, NULL, local SQL text, length) -> TSTree (concrete syntax tree; ts_node_has_error false)`

@@ -1,6 +1,7 @@
 # vlc — MP4 / C
 
 - **Pinned release:** `3.0.24`
+- **Upstream:** [source repository](<https://code.videolan.org/videolan/vlc>) · [Debian](<https://tracker.debian.org/pkg/vlc>)
 - **License:** GPL-2.0-or-later AND LGPL-2.1-or-later
 - **Parsed scope:** MP4 title, video/audio tracks and one-second duration
 - **Underlying family:** VLC native MP4 demuxer plugin

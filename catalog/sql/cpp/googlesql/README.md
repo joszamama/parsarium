@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2026.11.2`
+- **Upstream:** [source repository](<https://github.com/google/googlesql>)
 - **License:** Apache-2.0
 - **Parser family:** GoogleSQL (formerly ZetaSQL) Textmapper-generated parser
 - **Local input API:** `googlesql::ParseNextStatement(ParseResumeLocation over local SQL text, ParserOptions{LanguageOptions()}, &ParserOutput, &at_end_of_input) -> ParserOutput::statement() (ASTStatement tree)`

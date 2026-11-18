@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.14.0`
+- **Upstream:** [source repository](<https://github.com/reactphp/dns>) · [Packagist](<https://packagist.org/packages/react/dns>)
 - **License:** MIT
 - **Parser family:** ReactPHP DNS protocol Parser (src/Protocol/Parser.php)
 - **Local input API:** `React\Dns\Protocol\Parser::parseMessage(string $data): Message`

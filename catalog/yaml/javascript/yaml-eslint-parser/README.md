@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.1.0`
+- **Upstream:** [source repository](<https://github.com/ota-meshi/yaml-eslint-parser>) · [npm](<https://www.npmjs.com/package/yaml-eslint-parser>)
 - **License:** MIT
 - **Parser family:** Wrapper: yaml-eslint-parser ESTree-style AST and value resolver over eemeli/yaml 2.9.1 Parser and Composer (shared with the selected yaml path)
 - **Local input API:** `parseYAML(text) after strict UTF-8 decoding of a local Buffer; a ParseError or more than one document rejects the input; getStaticYAMLValue(ast) mapped to the Parsarium typed YAML tree`

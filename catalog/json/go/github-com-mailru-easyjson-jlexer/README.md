@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.9.2`
+- **Upstream:** [source repository](<https://github.com/mailru/easyjson>) · [pkg.go.dev](<https://pkg.go.dev/github.com/mailru/easyjson/jlexer>)
 - **License:** MIT
 - **Parser family:** easyjson jlexer own Go tokenizer
 - **Local input API:** `jlexer.Lexer{Data: []byte}.Interface() over one complete local JSON byte slice, then Lexer.Consumed() and Lexer.Error()`

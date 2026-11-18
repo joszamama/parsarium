@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.42.0`
+- **Upstream:** [source repository](<https://github.com/apache/calcite>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.calcite/calcite-core>)
 - **License:** Apache-2.0
 - **Parser family:** Apache Calcite JavaCC grammar (SqlParserImpl)
 - **Local input API:** `SqlParser.create(local SQL text, SqlParser.config()).parseStmtList() -> SqlNodeList`

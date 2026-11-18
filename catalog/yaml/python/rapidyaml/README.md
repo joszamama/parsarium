@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.15.2`
+- **Upstream:** [source repository](<https://github.com/biojppm/rapidyaml-python>) · [PyPI](<https://pypi.org/project/rapidyaml/>)
 - **License:** MIT
 - **Parser family:** rapidyaml (ryml) 0.15.2 C++ parse engine and tree, through the rapidyaml Python package's SWIG _ryml extension; same parser family as the C++ rapidyaml path (which pins 0.16.0)
 - **Local input API:** `ryml.parse_in_arena(local YAML bytes) then Tree.resolve(); the decoded str and the bytes read from a local binary stream give the same tree (the binding has no stream API)`

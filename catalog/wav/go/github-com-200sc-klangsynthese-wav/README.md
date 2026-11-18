@@ -1,6 +1,7 @@
 # github.com/200sc/klangsynthese/wav — WAV / Go
 
 - **Pinned release:** `v0.2.1`
+- **Upstream:** [source repository](<https://github.com/200sc/klangsynthese>) · [pkg.go.dev](<https://pkg.go.dev/github.com/200sc/klangsynthese/wav>)
 - **License:** Apache-2.0
 - **Parsed scope:** data_bytes
 - **Underlying family:** klangsynthese WAV reader

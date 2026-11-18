@@ -1,6 +1,7 @@
 # netty-codec-http — HTTP/1.1 / Java
 
 - **Pinned release:** `4.2.20.Final`
+- **Upstream:** [source repository](<https://github.com/netty/netty>) · [Maven Central](<https://central.sonatype.com/artifact/io.netty/netty-codec-http>)
 - **License:** Apache-2.0
 - **Parsed scope:** HTTP/1.1 request line and headers from local bytes
 - **Underlying family:** Netty 4 HTTP request decoder

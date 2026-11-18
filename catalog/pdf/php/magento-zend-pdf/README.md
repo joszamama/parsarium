@@ -1,6 +1,7 @@
 # magento/zend-pdf — PDF / PHP
 
 - **Pinned release:** `1.16.7`
+- **Upstream:** [source repository](<https://github.com/magento/magento-zend-pdf>) · [Packagist](<https://packagist.org/packages/magento/zend-pdf>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** One PDF page and document title
 - **Underlying family:** Zend PDF native PHP parser

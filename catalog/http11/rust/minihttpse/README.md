@@ -1,6 +1,7 @@
 # minihttpse — HTTP/1.1 / Rust
 
 - **Pinned release:** `0.1.6`
+- **Upstream:** [crates.io](<https://crates.io/crates/minihttpse>)
 - **License:** MIT/Apache-2.0
 - **Parsed scope:** response: status, reason, body
 - **Underlying family:** minihttpse

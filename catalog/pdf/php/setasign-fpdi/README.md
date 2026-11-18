@@ -1,6 +1,7 @@
 # setasign/fpdi — PDF / PHP
 
 - **Pinned release:** `v2.6.10`
+- **Upstream:** [source repository](<https://github.com/Setasign/FPDI>) · [Packagist](<https://packagist.org/packages/setasign/fpdi>)
 - **License:** MIT
 - **Parsed scope:** One PDF page, 216 × 279 mm rounded imported MediaBox
 - **Underlying family:** FPDI native PHP PDF object reader

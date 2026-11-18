@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v2.4.0`
+- **Upstream:** [source repository](<https://github.com/go-yaml/yaml>) · [pkg.go.dev](<https://pkg.go.dev/gopkg.in/yaml.v2>)
 - **License:** Apache-2.0 AND MIT
 - **Parser family:** go-yaml v2: Go port of libyaml scanner/parser (scannerc.go, parserc.go, readerc.go) with go-yaml resolve.go/decode.go
 - **Local input API:** `yaml.Unmarshal([]byte, out) over one complete local YAML byte slice; out is a harness type implementing the documented yaml.Unmarshaler hook, which decodes sequences into a slice of itself, mappings into yaml.MapSlice (source order) and scalars into interface{}`

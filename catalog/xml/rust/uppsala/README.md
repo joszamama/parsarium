@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.12.1`
+- **Upstream:** [source repository](<https://github.com/kushaldas/uppsala>) · [crates.io](<https://crates.io/crates/uppsala>)
 - **License:** BSD-2-Clause
 - **Parser family:** uppsala pure-Rust XML scanner, recursive-descent parser, namespace resolver, and DOM; no external parser dependency
 - **Local input API:** `uppsala::parse_bytes(&[u8]) -> XmlResult<Document>; DOM NodeKind::Element/Text/CData and QName.namespace_uri/local_name, element.attributes and namespace_declarations`

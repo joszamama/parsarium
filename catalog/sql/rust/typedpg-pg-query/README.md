@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.7.3`
+- **Upstream:** [source repository](<https://github.com/cubos/typedpg>) · [crates.io](<https://crates.io/crates/typedpg_pg_query>)
 - **License:** MIT AND BSD-3-Clause AND PostgreSQL
 - **Parser family:** PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)
 - **Local input API:** `typedpg_pg_query::parse(local UTF-8 text) -> ParseResult`

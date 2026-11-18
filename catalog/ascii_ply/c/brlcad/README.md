@@ -1,6 +1,7 @@
 # brlcad — ASCII PLY / C
 
 - **Pinned release:** `7.46.0`
+- **Upstream:** [source repository](<https://github.com/BRL-CAD/brlcad>)
 - **License:** LGPL-2.1-only AND MIT
 - **Parsed scope:** three vertices, one face, triangle indices and BRL-CAD default scaled coordinate from local ASCII PLY
 - **Underlying family:** BRL-CAD gcv-ply plugin over bundled RPly 1.1.4

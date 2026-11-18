@@ -1,6 +1,7 @@
 # enshrined/svg-sanitize — SVG / PHP
 
 - **Pinned release:** `1.1.1`
+- **Upstream:** [source repository](<https://github.com/darylldoyle/svg-sanitizer>) · [Packagist](<https://packagist.org/packages/enshrined/svg-sanitize>)
 - **License:** GPL-2.0-or-later
 - **Parsed scope:** Valid two-rectangle SVG accepted by SVG sanitizer; parsed output retains rect and fill attributes.
 - **Underlying family:** enshrined SVG sanitizer over libxml DOM

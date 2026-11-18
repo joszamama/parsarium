@@ -1,6 +1,7 @@
 # taglib — MP3 / C++
 
 - **Pinned release:** `2.3.2`
+- **Upstream:** [source repository](<https://github.com/taglib/taglib>) · [Debian](<https://tracker.debian.org/pkg/taglib>)
 - **License:** LGPL-2.1-only OR MPL-1.1
 - **Parsed scope:** ID3v2 title and artist from a valid tagged MP3
 - **Underlying family:** TagLib ID3v2 parser

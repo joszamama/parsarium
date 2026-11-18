@@ -1,6 +1,7 @@
 # cogentcore.org/core/svg — SVG / Go
 
 - **Pinned release:** `v0.5.30`
+- **Upstream:** [source repository](<https://github.com/cogentcore/core>) · [pkg.go.dev](<https://pkg.go.dev/cogentcore.org/core/svg>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** parsed viewBox and two rectangle elements
 - **Underlying family:** Goki/Cogent SVG lineage

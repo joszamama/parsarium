@@ -1,6 +1,7 @@
 # Wand — SVG / Python
 
 - **Pinned release:** `0.7.2`
+- **Upstream:** [source repository](<https://github.com/emcconville/wand>) · [PyPI](<https://pypi.org/project/Wand/>)
 - **License:** MIT
 - **Parsed scope:** SVG rendering with dimensions and colored pixels
 - **Underlying family:** ImageMagick SVG coder through Wand

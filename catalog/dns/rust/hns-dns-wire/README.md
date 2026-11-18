@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.2.2`
+- **Upstream:** [source repository](<https://github.com/handshake-rs/hns-dane-engine>) · [crates.io](<https://crates.io/crates/hns-dns-wire>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** hns-dns-wire (single-file strict decoder, src/lib.rs)
 - **Local input API:** `hns_dns_wire::Message::parse(message: &[u8]) -> Result<Message, Error>`

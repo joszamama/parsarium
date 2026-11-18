@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.19.1`
+- **Upstream:** [source repository](<https://sourceforge.net/projects/ruamel-yaml/>) · [PyPI](<https://pypi.org/project/ruamel.yaml/>)
 - **License:** MIT
 - **Parser family:** ruamel.yaml pure-Python loader (PyYAML-derived Reader/Scanner/Parser/Composer, SafeConstructor, YAML 1.2 VersionedResolver); not the ruamel.yaml.clib(z) C route
 - **Local input API:** `ruamel.yaml.YAML(typ='safe', pure=True).load(local YAML bytes); the decoded str and a local binary stream give the same tree`

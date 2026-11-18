@@ -1,6 +1,7 @@
 # rs-read-trimesh — ASCII PLY / Rust
 
 - **Pinned release:** `2.1.1`
+- **Upstream:** [source repository](<https://github.com/bourumir-wyngs/rs-read-trimesh>) · [crates.io](<https://crates.io/crates/rs-read-trimesh>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY triangle mesh vertices and faces
 - **Underlying family:** ply-rs-bw fork

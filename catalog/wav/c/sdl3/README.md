@@ -1,6 +1,7 @@
 # sdl3 — WAV / C
 
 - **Pinned release:** `3.4.20`
+- **Upstream:** [source repository](<https://github.com/libsdl-org/SDL>) · [Conan Center](<https://conan.io/center/recipes/sdl>)
 - **License:** Zlib
 - **Parsed scope:** WAV sample rate, channel and frame counts, plus first four decoded PCM samples
 - **Underlying family:** SDL3 WAV loader

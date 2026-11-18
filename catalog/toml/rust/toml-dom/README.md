@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.6.0`
+- **Upstream:** [source repository](<https://github.com/kathrinmotzkus/toml_dom>) · [crates.io](<https://crates.io/crates/toml_dom>)
 - **License:** MIT
 - **Parser family:** toml_dom (kathrinmotzkus): own parser, CST and DOM with ATML extensions; no dependency on toml_parser, toml, toml_edit, taplo or any other TOML crate.
 - **Local input API:** `toml_dom::Document::parse(&str) -> Result<Document, TomlError>; Document::root() -> &Table; Table::iter() over (&str, &Value) with Value::{String, Integer(i64), Float(f64), Boolean, OffsetDateTime, LocalDateTime, LocalDate, LocalTime, Array, Table, ...ATML variants}`

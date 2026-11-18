@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.7.1`
+- **Upstream:** [source repository](<https://github.com/dnsjava/dnsjava>) · [Maven Central](<https://central.sonatype.com/artifact/dnsjava/dnsjava>)
 - **License:** BSD-3-Clause
 - **Parser family:** dnsjava (org.xbill.DNS Message, Header, DNSInput, Name and per-type rrFromWire)
 - **Local input API:** `org.xbill.DNS.Message(byte[] b) throws IOException`

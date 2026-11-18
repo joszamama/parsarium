@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `22.2.1`
+- **Upstream:** [source repository](<https://github.com/pupnp/pupnp>)
 - **License:** BSD-3-Clause
 - **Parser family:** IXML (Intel/pupnp DOM parser)
 - **Local input API:** `ixmlParseBufferEx(NUL-terminated copy of the local bytes, &doc); walk the DOM from ixmlNode_getFirstChild(doc) with ixmlNode_getNodeType, ixmlNode_getNodeName, ixmlNode_getNodeValue, ixmlNode_getAttributes/ixmlNamedNodeMap_item, ixmlNode_getFirstChild and ixmlNode_getNextSibling; ixmlDocument_free(doc)`

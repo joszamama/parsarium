@@ -1,6 +1,7 @@
 # pdf-text-extract — PDF / Rust
 
 - **Pinned release:** `0.2.0`
+- **Upstream:** [source repository](<https://github.com/yosephbernandus/pdf-parser>) · [crates.io](<https://crates.io/crates/pdf-text-extract>)
 - **License:** MIT
 - **Parsed scope:** PDF xref, catalog, and page count
 - **Underlying family:** pdf-text-extract parser

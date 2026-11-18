@@ -1,6 +1,7 @@
 # github.com/UNO-SOFT/gopnm — ASCII PNM / Go
 
 - **Pinned release:** `v0.0.2`
+- **Upstream:** [source repository](<https://github.com/UNO-SOFT/gopnm>) · [pkg.go.dev](<https://pkg.go.dev/github.com/UNO-SOFT/gopnm>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** P3 pixels and dimensions
 - **Underlying family:** gopnm lineage

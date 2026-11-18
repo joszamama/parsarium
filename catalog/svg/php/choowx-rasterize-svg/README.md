@@ -1,6 +1,7 @@
 # choowx/rasterize-svg — SVG / PHP
 
 - **Pinned release:** `v0.1.2`
+- **Upstream:** [source repository](<https://github.com/choowx/rasterize-svg>) · [Packagist](<https://packagist.org/packages/choowx/rasterize-svg>)
 - **License:** MIT
 - **Parsed scope:** Rendered simple two-rectangle SVG to 2 × 1 PNG; sharp 0.35.5 is pinned by repository package-lock.json.
 - **Underlying family:** sharp/libvips SVG renderer

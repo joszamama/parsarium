@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.2.0`
+- **Upstream:** [source repository](<https://github.com/PetalBranch/toml>) · [Packagist](<https://packagist.org/packages/petalbranch/toml>)
 - **License:** Apache-2.0
 - **Parser family:** petalbranch/toml Lexer, LazyTokenStream, Parser and node tree
 - **Local input API:** `Petalbranch\Toml\Parser\Parser::parseToNode(string $toml): TableNodeInterface, constructed as new Parser(new Lexer()) (documented in the README 'Lossless Round-Trip' section; Parser::parse() and Toml::parse() return this tree's getValue()); walked through TableNode/InlineTableNode::getEntries() (Entry {key, value}), ArrayNode::getElements() and ValueNode::getType() (TomlType STRING, INTEGER, FLOAT, BOOLEAN, OFFSET_DATETIME, LOCAL_DATETIME, LOCAL_DATE, LOCAL_TIME) with getValue(). Toml::parse(string) and Toml::parseFile(path) are cross-checked against the tree's getValue()`

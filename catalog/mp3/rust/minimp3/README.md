@@ -1,6 +1,7 @@
 # minimp3 — MP3 / Rust
 
 - **Pinned release:** `0.6.1`
+- **Upstream:** [source repository](<https://github.com/germangb/minimp3-rs>) · [crates.io](<https://crates.io/crates/minimp3>)
 - **License:** MIT
 - **Parsed scope:** Decoded first MPEG Layer III frame
 - **Underlying family:** minimp3 C decoder

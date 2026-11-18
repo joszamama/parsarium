@@ -1,6 +1,7 @@
 # juce — SVG / C++
 
 - **Pinned release:** `9.0.5`
+- **Upstream:** [source repository](<https://github.com/juce-framework/JUCE>) · [Debian](<https://tracker.debian.org/pkg/juce>)
 - **License:** AGPL-3.0-only
 - **Parsed scope:** parsed SVG drawable bounds from local file
 - **Underlying family:** JUCE juce_graphics over bundled LunaSVG

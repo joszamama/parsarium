@@ -1,6 +1,7 @@
 # boofcv-io — ASCII PLY / Java
 
 - **Pinned release:** `1.6.0`
+- **Upstream:** [source repository](<https://github.com/lessthanoptimal/BoofCV>) · [Maven Central](<https://central.sonatype.com/artifact/org.boofcv/boofcv-io>)
 - **License:** Apache-2.0
 - **Parsed scope:** ASCII triangle, three vertices, one face, parsed indices [0,1,2]
 - **Underlying family:** BoofCV native Java PLY mesh reader

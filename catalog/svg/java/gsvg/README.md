@@ -1,6 +1,7 @@
 # gsvg — SVG / Java
 
 - **Pinned release:** `1.2.0`
+- **Upstream:** [source repository](<https://github.com/Alipsa/gsvg>) · [Maven Central](<https://central.sonatype.com/artifact/se.alipsa.groovy/gsvg>)
 - **License:** MIT
 - **Parsed scope:** Typed SVG dimensions, rectangle elements, and fill attributes
 - **Underlying family:** gsvg typed SVG model (Groovy library callable from Java)

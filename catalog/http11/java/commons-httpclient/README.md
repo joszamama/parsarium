@@ -1,6 +1,7 @@
 # commons-httpclient — HTTP/1.1 / Java
 
 - **Pinned release:** `3.1`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/commons-httpclient/commons-httpclient>)
 - **License:** Apache-2.0
 - **Parsed scope:** HTTP/1.1 response status line and headers from local stream
 - **Underlying family:** Apache Commons HttpClient 3.x native HTTP response-head parser

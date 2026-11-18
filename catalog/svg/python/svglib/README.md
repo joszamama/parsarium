@@ -1,6 +1,7 @@
 # svglib — SVG / Python
 
 - **Pinned release:** `2.4.0`
+- **Upstream:** [source repository](<https://github.com/deeplook/svglib>) · [PyPI](<https://pypi.org/project/svglib/>)
 - **License:** LGPL-3.0-or-later
 - **Parsed scope:** SVG-to-ReportLab drawing geometry
 - **Underlying family:** svglib SVG-to-ReportLab converter

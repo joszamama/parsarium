@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.17.0`
+- **Upstream:** [source repository](<https://github.com/gwenn/lemon-rs>) · [crates.io](<https://crates.io/crates/sqlite3-parser>)
 - **License:** Apache-2.0/MIT
 - **Parser family:** SQLite grammar (lemon-rs port of SQLite's Lemon parse.y)
 - **Local input API:** `lexer::sql::Parser::new(&Bump, local bytes) and FallibleIterator::next -> Option<Cmd>`

@@ -1,6 +1,7 @@
 # jzy3d-core — ASCII PLY / Java
 
 - **Pinned release:** `2.2.1`
+- **Upstream:** [source repository](<https://github.com/jzy3d/jzy3d-api>) · [Maven Central](<https://central.sonatype.com/artifact/org.jzy3d/jzy3d-core>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** ASCII triangle vertex positions (three vertices, second X and third Y); faces not exposed by this API
 - **Underlying family:** Jzy3d public PLY vertex API over jPLY

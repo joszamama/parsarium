@@ -1,6 +1,7 @@
 # thumbnailator — PNG / Java
 
 - **Pinned release:** `0.4.21`
+- **Upstream:** [source repository](<https://github.com/coobird/thumbnailator>) · [Maven Central](<https://central.sonatype.com/artifact/net.coobird/thumbnailator>)
 - **License:** MIT
 - **Parsed scope:** RGBA pixels
 - **Underlying family:** Thumbnailator image reader over Java ImageIO

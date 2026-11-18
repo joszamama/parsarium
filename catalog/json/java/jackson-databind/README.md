@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.23.0`
+- **Upstream:** [source repository](<https://github.com/FasterXML/jackson-databind>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-databind>)
 - **License:** Apache-2.0
 - **Parser family:** Jackson (jackson-core streaming parser + databind untyped mapping)
 - **Local input API:** `ObjectMapper(JsonFactory with CANONICALIZE_FIELD_NAMES disabled).readValue(File, Object.class)`

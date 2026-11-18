@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.8.4`
+- **Upstream:** [source repository](<https://github.com/clbanning/mxj>) · [pkg.go.dev](<https://pkg.go.dev/github.com/clbanning/mxj>)
 - **License:** MIT, with BSD-3-Clause Go Authors notice
 - **Parser family:** mxj map conversion over Go encoding/xml Decoder tokenizer
 - **Local input API:** `mxj.NewMapXml([]byte) and mxj.NewMapXmlReader(io.Reader), each returning mxj.Map (map[string]interface{}); the harness requires both maps to agree and walks the map keys`

@@ -1,6 +1,7 @@
 # pyzipper — ZIP / Python
 
 - **Pinned release:** `0.4.0`
+- **Upstream:** [source repository](<https://github.com/danifus/pyzipper>) · [PyPI](<https://pypi.org/project/pyzipper/>)
 - **License:** MIT
 - **Parsed scope:** DEFLATE ZIP entry name and content
 - **Underlying family:** pyzipper fork of CPython zipfile 3.7

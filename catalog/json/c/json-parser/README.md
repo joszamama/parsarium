@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.1.0`
+- **Upstream:** [source repository](<https://github.com/json-parser/json-parser>) · [Debian](<https://tracker.debian.org/pkg/libjsonparser>)
 - **License:** BSD-2-Clause
 - **Parser family:** json-parser single-file parser (json.c)
 - **Local input API:** `json_parse_ex(json_settings *settings, const json_char *json, size_t length, char *error)`

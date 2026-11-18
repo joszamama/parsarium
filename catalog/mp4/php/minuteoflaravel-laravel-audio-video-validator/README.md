@@ -1,6 +1,7 @@
 # minuteoflaravel/laravel-audio-video-validator — MP4 / PHP
 
 - **Pinned release:** `1.1`
+- **Upstream:** [source repository](<https://github.com/minuteoflaravel/laravel-audio-video-validator>) · [Packagist](<https://packagist.org/packages/minuteoflaravel/laravel-audio-video-validator>)
 - **License:** MIT
 - **Parsed scope:** 2 × 2 H.264 video in MP4
 - **Underlying family:** FFmpeg native MOV/MP4 parser

@@ -1,6 +1,7 @@
 # leptonica — ASCII PNM / C
 
 - **Pinned release:** `1.87.0`
+- **Upstream:** [source repository](<https://github.com/DanBloomberg/leptonica>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** P3 dimensions and two decoded RGB pixels
 - **Underlying family:** Leptonica PNM reader

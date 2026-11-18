@@ -1,6 +1,7 @@
 # nanosvg — SVG / C
 
 - **Pinned release:** `2023-12-29`
+- **Upstream:** [source repository](<https://github.com/memononen/nanosvg>)
 - **License:** Zlib
 - **Parsed scope:** SVG root dimensions and two parsed rectangle shapes with paths
 - **Underlying family:** NanoSVG native SVG parser

@@ -1,6 +1,7 @@
 # brepkit-io — ASCII PLY / Rust
 
 - **Pinned release:** `4.11.3`
+- **Upstream:** [source repository](<https://github.com/andymai/brepkit>) · [crates.io](<https://crates.io/crates/brepkit-io>)
 - **License:** AGPL-3.0-only
 - **Parsed scope:** ASCII PLY triangle mesh vertices and faces
 - **Underlying family:** brepkit PLY reader

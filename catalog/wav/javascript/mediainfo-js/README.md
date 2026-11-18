@@ -1,6 +1,7 @@
 # mediainfo.js — WAV / JavaScript
 
 - **Pinned release:** `0.3.8`
+- **Upstream:** [source repository](<https://github.com/buzz/mediainfo.js>) · [npm](<https://www.npmjs.com/package/mediainfo.js>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** header
 - **Underlying family:** MediaInfoLib

@@ -1,6 +1,7 @@
 # usvg-parser — SVG / Rust
 
 - **Pinned release:** `0.38.0`
+- **Upstream:** [source repository](<https://github.com/linebender/resvg>) · [crates.io](<https://crates.io/crates/usvg-parser>)
 - **License:** MPL-2.0
 - **Parsed scope:** SVG document tree and dimensions
 - **Underlying family:** usvg lineage

@@ -1,6 +1,7 @@
 # rusty_mp3 — MP3 / Rust
 
 - **Pinned release:** `1.0.5`
+- **Upstream:** [source repository](<https://github.com/Remade-With-Rust/remade_ffmpeg_rs>) · [crates.io](<https://crates.io/crates/rusty_mp3>)
 - **License:** Apache-2.0
 - **Parsed scope:** Decoded first MPEG Layer III frame
 - **Underlying family:** rusty_mp3 decoder

@@ -1,6 +1,7 @@
 # mediashowroom/php-svg — SVG / PHP
 
 - **Pinned release:** `v0.7.0`
+- **Upstream:** [source repository](<https://github.com/mediashowroom/php-svg>) · [Packagist](<https://packagist.org/packages/mediashowroom/php-svg>)
 - **License:** MIT
 - **Parsed scope:** Typed SVG document root and two direct rectangle child nodes.
 - **Underlying family:** mediashowroom PHP-SVG typed document parser

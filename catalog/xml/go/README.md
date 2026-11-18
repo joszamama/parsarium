@@ -8,16 +8,16 @@ Ten Go XML package paths pass two valid namespace-aware controls with parser-sou
 
 ## Third-party parsers
 
-- [github.com/beevik/etree](github-com-beevik-etree/README.md) — verified Docker harness
-- [github.com/antchfx/xmlquery](github-com-antchfx-xmlquery/README.md) — verified Docker harness
-- [github.com/clbanning/mxj](github-com-clbanning-mxj/README.md) — verified Docker harness
-- [github.com/beego/x2j](github-com-beego-x2j/README.md) — verified Docker harness
-- [github.com/vmware/govmomi/vim25/xml](github-com-vmware-govmomi-vim25-xml/README.md) — verified Docker harness
-- [github.com/mmcdole/goxpp](github-com-mmcdole-goxpp/README.md) — verified Docker harness
-- [github.com/moovweb/gokogiri/xml](github-com-moovweb-gokogiri-xml/README.md) — verified Docker harness
-- [github.com/lestrrat-go/libxml2](github-com-lestrrat-go-libxml2/README.md) — verified Docker harness
-- [github.com/go-forks/go-pkg-xmlx](github-com-go-forks-go-pkg-xmlx/README.md) — verified Docker harness
-- [github.com/lestrrat-go/helium](github-com-lestrrat-go-helium/README.md) — verified Docker harness
+- [github.com/beevik/etree](github-com-beevik-etree/README.md) — verified Docker harness · [source repository](<https://github.com/beevik/etree>) · [pkg.go.dev](<https://pkg.go.dev/github.com/beevik/etree>)
+- [github.com/antchfx/xmlquery](github-com-antchfx-xmlquery/README.md) — verified Docker harness · [source repository](<https://github.com/antchfx/xmlquery>) · [pkg.go.dev](<https://pkg.go.dev/github.com/antchfx/xmlquery>)
+- [github.com/clbanning/mxj](github-com-clbanning-mxj/README.md) — verified Docker harness · [source repository](<https://github.com/clbanning/mxj>) · [pkg.go.dev](<https://pkg.go.dev/github.com/clbanning/mxj>)
+- [github.com/beego/x2j](github-com-beego-x2j/README.md) — verified Docker harness · [source repository](<https://github.com/beego/x2j>) · [pkg.go.dev](<https://pkg.go.dev/github.com/beego/x2j>)
+- [github.com/vmware/govmomi/vim25/xml](github-com-vmware-govmomi-vim25-xml/README.md) — verified Docker harness · [source repository](<https://github.com/vmware/govmomi>) · [pkg.go.dev](<https://pkg.go.dev/github.com/vmware/govmomi/vim25/xml>)
+- [github.com/mmcdole/goxpp](github-com-mmcdole-goxpp/README.md) — verified Docker harness · [source repository](<https://github.com/mmcdole/goxpp>) · [pkg.go.dev](<https://pkg.go.dev/github.com/mmcdole/goxpp>)
+- [github.com/moovweb/gokogiri/xml](github-com-moovweb-gokogiri-xml/README.md) — verified Docker harness · [source repository](<https://github.com/moovweb/gokogiri>) · [pkg.go.dev](<https://pkg.go.dev/github.com/moovweb/gokogiri/xml>)
+- [github.com/lestrrat-go/libxml2](github-com-lestrrat-go-libxml2/README.md) — verified Docker harness · [source repository](<https://github.com/lestrrat-go/libxml2>) · [pkg.go.dev](<https://pkg.go.dev/github.com/lestrrat-go/libxml2>)
+- [github.com/go-forks/go-pkg-xmlx](github-com-go-forks-go-pkg-xmlx/README.md) — verified Docker harness · [source repository](<https://github.com/go-forks/go-pkg-xmlx>) · [pkg.go.dev](<https://pkg.go.dev/github.com/go-forks/go-pkg-xmlx>)
+- [github.com/lestrrat-go/helium](github-com-lestrrat-go-helium/README.md) — verified Docker harness · [source repository](<https://github.com/lestrrat-go/helium>) · [pkg.go.dev](<https://pkg.go.dev/github.com/lestrrat-go/helium>)
 
 ## Standard and runtime APIs
 

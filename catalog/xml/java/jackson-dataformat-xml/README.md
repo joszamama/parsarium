@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.23.0`
+- **Upstream:** [source repository](<https://github.com/FasterXML/jackson-dataformat-xml>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml>)
 - **License:** Apache-2.0
 - **Parser family:** Jackson XML FromXmlParser/XmlTokenStream over Woodstox StAX tokenizer
 - **Local input API:** `new XmlFactory(new WstxInputFactory()).createParser(Files.newInputStream(local Path)); nextToken() to EOF`

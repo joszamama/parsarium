@@ -1,6 +1,7 @@
 # image-size-safe — ASCII PNM / JavaScript
 
 - **Pinned release:** `2.0.3`
+- **Upstream:** [source repository](<https://github.com/nhasoenhasan/image-size-safe>) · [npm](<https://www.npmjs.com/package/image-size-safe>)
 - **License:** MIT
 - **Parsed scope:** P3 header dimensions and PNM type
 - **Underlying family:** image-size fork

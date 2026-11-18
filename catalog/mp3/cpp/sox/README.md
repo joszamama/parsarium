@@ -1,6 +1,7 @@
 # sox — MP3 / C++
 
 - **Pinned release:** `14.4.2`
+- **Upstream:** [source repository](<https://sourceforge.net/projects/sox/>) · [Debian](<https://tracker.debian.org/pkg/sox>)
 - **License:** GPL-2.0-or-later AND LGPL-2.1-or-later
 - **Parsed scope:** MP3 audio parsing and one decoded sample from a valid ID3v2-tagged input; ID3v2 text is not exposed
 - **Underlying family:** libsox MP3 handler over libmad decoder

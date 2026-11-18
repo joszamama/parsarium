@@ -1,6 +1,7 @@
 # stereokit — ASCII PLY / C
 
 - **Pinned release:** `v0.3.11`
+- **Upstream:** [source repository](<https://github.com/StereoKit/StereoKit>)
 - **License:** MIT
 - **Parsed scope:** One valid ASCII PLY triangle through the full native C ABI in offscreen Mesa mode; vertices and face indices observed
 - **Underlying family:** StereoKit model PLY loader over bundled micro_ply

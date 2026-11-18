@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.0.2`
+- **Upstream:** [pkg.go.dev](<https://pkg.go.dev/tangled.sh/seiso.moe/magna>)
 - **License:** MIT
 - **Parser family:** magna (message.go, header.go, question.go, domain_name.go, resource_record.go)
 - **Local input API:** `(*magna.Message).Decode(buf []byte) error`

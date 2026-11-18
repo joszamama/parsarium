@@ -1,6 +1,7 @@
 # gdk-pixbuf — ASCII PNM / C
 
 - **Pinned release:** `2.44.8`
+- **Upstream:** [source repository](<https://gitlab.gnome.org/GNOME/gdk-pixbuf>) · [Debian](<https://tracker.debian.org/pkg/gdk-pixbuf>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** P3 dimensions and two decoded RGB pixels
 - **Underlying family:** GdkPixbuf PNM loader

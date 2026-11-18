@@ -1,6 +1,7 @@
 # github.com/lesismal/nbio/nbhttp — HTTP/1.1 / Go
 
 - **Pinned release:** `v1.7.1`
+- **Upstream:** [source repository](<https://github.com/lesismal/nbio>) · [pkg.go.dev](<https://pkg.go.dev/github.com/lesismal/nbio/nbhttp>)
 - **License:** MIT
 - **Parsed scope:** request message
 - **Underlying family:** nbio HTTP parser

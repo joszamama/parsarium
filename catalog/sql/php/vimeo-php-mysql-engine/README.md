@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.7.15`
+- **Upstream:** [source repository](<https://github.com/vimeo/php-mysql-engine>) · [Packagist](<https://packagist.org/packages/vimeo/php-mysql-engine>)
 - **License:** MIT
 - **Parser family:** vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)
 - **Local input API:** `Vimeo\MysqlEngine\Parser\SQLParser::parse(local SQL text of one statement) -> SelectQuery | InsertQuery | UpdateQuery | ... query object`

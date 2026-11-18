@@ -1,6 +1,7 @@
 # PyQt6 — SVG / Python
 
 - **Pinned release:** `6.12.0`
+- **Upstream:** [PyPI](<https://pypi.org/project/PyQt6/>)
 - **License:** GPL-3.0-only
 - **Parsed scope:** SVG rendering with dimensions and colored pixels
 - **Underlying family:** QtSvg QSvgRenderer through PyQt6

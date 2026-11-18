@@ -1,6 +1,7 @@
 # protonemedia/php-ffmpeg — WAV / PHP
 
 - **Pinned release:** `v1.2.0`
+- **Upstream:** [source repository](<https://github.com/protonemedia/PHP-FFMpeg>) · [Packagist](<https://packagist.org/packages/protonemedia/php-ffmpeg>)
 - **License:** MIT
 - **Parsed scope:** PCM16 codec, 8 kHz sample rate, mono channel count, 16-bit depth
 - **Underlying family:** FFmpeg native RIFF/WAVE parser

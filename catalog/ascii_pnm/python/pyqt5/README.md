@@ -1,6 +1,7 @@
 # PyQt5 — ASCII PNM / Python
 
 - **Pinned release:** `5.15.11`
+- **Upstream:** [PyPI](<https://pypi.org/project/PyQt5/>)
 - **License:** GPL-3.0-only
 - **Parsed scope:** P3 pixels
 - **Underlying family:** Qt PPM image plugin

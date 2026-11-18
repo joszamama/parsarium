@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.7.1`
+- **Upstream:** [source repository](<https://github.com/orchestr7/ktoml>) · [Maven Central](<https://central.sonatype.com/artifact/com.akuleshov7/ktoml-core-jvm>)
 - **License:** MIT
 - **Parser family:** ktoml (orchestr7/akuleshov7 Kotlin multiplatform; own line-oriented TomlParser and value parsers in ktoml-core)
 - **Local input API:** `TomlParser(TomlInputConfig()).parseString(String) -> TomlFile node tree (documented in the README 'Parser to AST' section and the TomlParser.parseString KDoc); from Java the Kotlin value-class method is the public static TomlParser.parseString-impl(TomlInputConfig, String), called by reflection; parse errors throw TomlDecodingException`

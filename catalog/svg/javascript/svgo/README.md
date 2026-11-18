@@ -1,6 +1,7 @@
 # svgo — SVG / JavaScript
 
 - **Pinned release:** `4.1.0`
+- **Upstream:** [source repository](<https://github.com/svg/svgo>) · [npm](<https://www.npmjs.com/package/svgo>)
 - **License:** MIT
 - **Parsed scope:** optimized_paths
 - **Underlying family:** SVGO

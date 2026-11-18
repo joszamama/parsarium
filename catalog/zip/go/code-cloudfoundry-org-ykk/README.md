@@ -1,6 +1,7 @@
 # code.cloudfoundry.org/ykk — ZIP / Go
 
 - **Pinned release:** `v0.0.0-20170424192843-e4df4ce2fd4d`
+- **Upstream:** [source repository](<https://github.com/cloudfoundry/ykk>) · [pkg.go.dev](<https://pkg.go.dev/code.cloudfoundry.org/ykk>)
 - **License:** Apache-2.0
 - **Parsed scope:** entry_name+decompressed_text
 - **Underlying family:** Go archive/zip wrapper

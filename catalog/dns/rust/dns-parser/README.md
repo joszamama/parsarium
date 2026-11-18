@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.8.0`
+- **Upstream:** [source repository](<https://github.com/tailhook/dns-parser>) · [crates.io](<https://crates.io/crates/dns-parser>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** dns-parser (src/parser.rs, header.rs, name.rs, rdata/*)
 - **Local input API:** `dns_parser::Packet::parse(data: &[u8]) -> Result<Packet, Error>`

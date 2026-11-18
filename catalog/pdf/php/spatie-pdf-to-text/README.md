@@ -1,6 +1,7 @@
 # spatie/pdf-to-text — PDF / PHP
 
 - **Pinned release:** `1.55.0`
+- **Upstream:** [source repository](<https://github.com/spatie/pdf-to-text>) · [Packagist](<https://packagist.org/packages/spatie/pdf-to-text>)
 - **License:** MIT
 - **Parsed scope:** Embedded Parsarium text extracted from PDF
 - **Underlying family:** Poppler pdftotext PDF parser

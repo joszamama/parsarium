@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.0.0-20261016220845-5c0832fea6e1`
+- **Upstream:** [source repository](<https://github.com/rqlite/sql>) · [pkg.go.dev](<https://pkg.go.dev/github.com/rqlite/sql>)
 - **License:** MIT
 - **Parser family:** rqlite/sql hand-written recursive-descent parser and scanner
 - **Local input API:** `sql.NewParser(reader).ParseStatements() -> []sql.Statement`

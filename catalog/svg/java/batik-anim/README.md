@@ -1,6 +1,7 @@
 # batik-anim — SVG / Java
 
 - **Pinned release:** `1.20`
+- **Upstream:** [source repository](<https://github.com/apache/xmlgraphics-batik>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.xmlgraphics/batik-anim>)
 - **License:** Apache-2.0
 - **Parsed scope:** SVG DOM dimensions and rectangle elements
 - **Underlying family:** Apache Batik SVG DOM

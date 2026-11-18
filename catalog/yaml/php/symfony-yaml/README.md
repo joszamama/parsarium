@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v8.1.11`
+- **Upstream:** [source repository](<https://github.com/symfony/yaml>) · [Packagist](<https://packagist.org/packages/symfony/yaml>)
 - **License:** MIT
 - **Parser family:** Symfony Yaml Parser (own line-based block Parser.php, Inline.php flow/scalar parser and Unescaper.php)
 - **Local input API:** `Symfony\Component\Yaml\Yaml::parse(string $input, Yaml::PARSE_OBJECT_FOR_MAP) over local bytes; mappings return as stdClass objects in source order and sequences as PHP lists, walked into the shared typed tree`

@@ -1,6 +1,7 @@
 # zenpng — PNG / Rust
 
 - **Pinned release:** `0.1.4`
+- **Upstream:** [source repository](<https://github.com/imazen/zenpng>) · [crates.io](<https://crates.io/crates/zenpng>)
 - **License:** AGPL-3.0-only OR LicenseRef-Imazen-Commercial
 - **Parsed scope:** Decoded PNG dimensions
 - **Underlying family:** zenpng engine

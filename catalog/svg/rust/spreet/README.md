@@ -1,6 +1,7 @@
 # spreet — SVG / Rust
 
 - **Pinned release:** `0.14.0`
+- **Upstream:** [source repository](<https://github.com/flother/spreet>) · [crates.io](<https://crates.io/crates/spreet>)
 - **License:** MIT
 - **Parsed scope:** SVG document tree and dimensions
 - **Underlying family:** usvg lineage via resvg

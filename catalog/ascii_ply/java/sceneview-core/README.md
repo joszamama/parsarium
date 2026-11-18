@@ -1,6 +1,7 @@
 # sceneview-core — ASCII PLY / Java
 
 - **Pinned release:** `4.69.5`
+- **Upstream:** [source repository](<https://github.com/sceneview/sceneview>) · [Maven Central](<https://central.sonatype.com/artifact/io.github.sceneview/sceneview-core-android>)
 - **License:** Apache-2.0
 - **Parsed scope:** ASCII PLY triangle vertices, triangulated face and parsed indices
 - **Underlying family:** SceneView Core pure Kotlin PLY parser

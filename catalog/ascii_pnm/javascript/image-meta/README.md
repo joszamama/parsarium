@@ -1,6 +1,7 @@
 # image-meta — ASCII PNM / JavaScript
 
 - **Pinned release:** `0.2.2`
+- **Upstream:** [source repository](<https://github.com/unjs/image-meta>) · [npm](<https://www.npmjs.com/package/image-meta>)
 - **License:** MIT
 - **Parsed scope:** P3 header dimensions and PNM type
 - **Underlying family:** image-meta reader based on image-size

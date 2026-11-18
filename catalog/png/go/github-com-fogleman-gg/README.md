@@ -1,6 +1,7 @@
 # github.com/fogleman/gg — PNG / Go
 
 - **Pinned release:** `v1.3.0`
+- **Upstream:** [source repository](<https://github.com/fogleman/gg>) · [pkg.go.dev](<https://pkg.go.dev/github.com/fogleman/gg>)
 - **License:** MIT
 - **Parsed scope:** pixels
 - **Underlying family:** Go image/png wrapper

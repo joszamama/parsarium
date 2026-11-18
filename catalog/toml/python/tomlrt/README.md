@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.3.3`
+- **Upstream:** [source repository](<https://github.com/dimbleby/tomlrt>) · [PyPI](<https://pypi.org/project/tomlrt/>)
 - **License:** MIT
 - **Parser family:** tomlrt pure-Python format-preserving reader (own scanner, parser and scalar decoders)
 - **Local input API:** `tomlrt.loads(decoded local TOML text) -> Document (dict subclass with dict/list views and plain scalars); tomlrt.load(BytesIO(local bytes)) gives the same typed tree on both controls`

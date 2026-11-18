@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.6.1`
+- **Upstream:** [source repository](<https://github.com/isaacs/sax-js>) · [npm](<https://www.npmjs.com/package/sax>)
 - **License:** BlueOak-1.0.0
 - **Parser family:** sax-js hand-written strict XML state machine
 - **Local input API:** `sax.parser(true, {xmlns: true, strictEntities: true}).write(string).close() after strict UTF-8 TextDecoder of local bytes; documented createStream(true, {xmlns: true}) also accepts a local file stream`

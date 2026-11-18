@@ -1,6 +1,7 @@
 # PySide6 — SVG / Python
 
 - **Pinned release:** `6.12.0`
+- **Upstream:** [source repository](<https://code.qt.io/cgit/pyside/pyside-setup.git/>) · [PyPI](<https://pypi.org/project/PySide6/>)
 - **License:** LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
 - **Parsed scope:** SVG rendering with dimensions and colored pixels
 - **Underlying family:** QtSvg QSvgRenderer through PySide6

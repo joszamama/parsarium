@@ -1,6 +1,7 @@
 # sdl2 — WAV / C
 
 - **Pinned release:** `2.32.10`
+- **Upstream:** [source repository](<https://github.com/libsdl-org/SDL>)
 - **License:** Zlib
 - **Parsed scope:** WAV sample rate, channel and frame counts, plus four decoded PCM samples
 - **Underlying family:** native SDL2 WAV reader

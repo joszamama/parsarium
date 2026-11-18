@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.9.8`
+- **Upstream:** [source repository](<https://github.com/kbandla/dpkt>) · [PyPI](<https://pypi.org/project/dpkt/>)
 - **License:** BSD-3-Clause
 - **Parser family:** dpkt DNS packet class (dpkt/dns.py)
 - **Local input API:** `dpkt.dns.DNS(buf: bytes)`

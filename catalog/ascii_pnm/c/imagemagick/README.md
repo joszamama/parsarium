@@ -1,6 +1,7 @@
 # imagemagick — ASCII PNM / C
 
 - **Pinned release:** `7.1.2-35`
+- **Upstream:** [source repository](<https://github.com/ImageMagick/ImageMagick>) · [Debian](<https://tracker.debian.org/pkg/imagemagick>)
 - **License:** ImageMagick
 - **Parsed scope:** P3 dimensions and two decoded RGBA pixels
 - **Underlying family:** ImageMagick PNM coder

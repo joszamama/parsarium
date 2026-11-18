@@ -1,6 +1,7 @@
 # ffmpeg — WAV / C
 
 - **Pinned release:** `9.0.2`
+- **Upstream:** [source repository](<https://github.com/FFmpeg/FFmpeg>) · [Conan Center](<https://conan.io/center/recipes/ffmpeg>)
 - **License:** GPL-3.0-or-later
 - **Parsed scope:** WAV sample rate, channel and frame counts, plus first four decoded PCM samples
 - **Underlying family:** FFmpeg WAV demuxer and PCM decoder

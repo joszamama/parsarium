@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `5.4`
+- **Upstream:** [source repository](<https://github.com/JSQLParser/JSqlParser>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.jsqlparser/jsqlparser>)
 - **License:** LGPL-2.1-only OR Apache-2.0
 - **Parser family:** JSqlParser JavaCC grammar (CCJSqlParser)
 - **Local input API:** `CCJSqlParserUtil.parseStatements(local SQL text) -> Statements`

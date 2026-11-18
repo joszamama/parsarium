@@ -1,6 +1,7 @@
 # pikepdf — PDF / Python
 
 - **Pinned release:** `10.18.0`
+- **Upstream:** [source repository](<https://github.com/pikepdf/pikepdf>) · [PyPI](<https://pypi.org/project/pikepdf/>)
 - **License:** MPL-2.0
 - **Parsed scope:** page count and document title
 - **Underlying family:** QPDF

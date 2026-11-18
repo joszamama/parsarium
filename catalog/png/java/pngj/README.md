@@ -1,6 +1,7 @@
 # pngj — PNG / Java
 
 - **Pinned release:** `2.1.0`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/ar.com.hjg/pngj>)
 - **License:** Apache-2.0
 - **Parsed scope:** RGBA pixels
 - **Underlying family:** PNGJ PNG decoder

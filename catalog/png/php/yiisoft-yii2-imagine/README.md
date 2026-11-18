@@ -1,6 +1,7 @@
 # yiisoft/yii2-imagine — PNG / PHP
 
 - **Pinned release:** `2.3.1`
+- **Upstream:** [source repository](<https://github.com/yiisoft/yii2-imagine>) · [Packagist](<https://packagist.org/packages/yiisoft/yii2-imagine>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** decoded PNG dimensions after thumbnail
 - **Underlying family:** Imagine / PHP GD PNG decoder

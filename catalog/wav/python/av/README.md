@@ -1,6 +1,7 @@
 # av — WAV / Python
 
 - **Pinned release:** `19.0.2`
+- **Upstream:** [source repository](<https://github.com/PyAV-Org/PyAV>) · [PyPI](<https://pypi.org/project/av/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** PCM samples
 - **Underlying family:** FFmpeg libavformat/libavcodec via PyAV

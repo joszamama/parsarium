@@ -1,6 +1,7 @@
 # http-parser — HTTP/1.1 / Python
 
 - **Pinned release:** `0.9.0`
+- **Upstream:** [source repository](<https://github.com/benoitc/http-parser>) · [PyPI](<https://pypi.org/project/http-parser/>)
 - **License:** MIT
 - **Parsed scope:** HTTP/1.1 request head
 - **Underlying family:** node http-parser C binding

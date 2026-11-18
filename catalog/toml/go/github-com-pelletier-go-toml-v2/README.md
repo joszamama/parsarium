@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v2.4.3`
+- **Upstream:** [source repository](<https://github.com/pelletier/go-toml>) · [pkg.go.dev](<https://pkg.go.dev/github.com/pelletier/go-toml/v2>)
 - **License:** MIT
 - **Parser family:** go-toml v2 (pelletier) unstable.Parser
 - **Local input API:** `toml.Unmarshal([]byte, &map[string]any) error`

@@ -1,6 +1,7 @@
 # @pdf-lib/upng — PNG / JavaScript
 
 - **Pinned release:** `1.0.1`
+- **Upstream:** [source repository](<https://github.com/Hopding/upng>) · [npm](<https://www.npmjs.com/package/@pdf-lib/upng>)
 - **License:** MIT
 - **Parsed scope:** pixels
 - **Underlying family:** UPNG.js

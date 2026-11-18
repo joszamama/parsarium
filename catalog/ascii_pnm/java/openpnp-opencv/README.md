@@ -1,6 +1,7 @@
 # openpnp-opencv — ASCII PNM / Java
 
 - **Pinned release:** `4.9.0-0`
+- **Upstream:** [source repository](<https://github.com/openpnp/opencv>) · [Maven Central](<https://central.sonatype.com/artifact/org.openpnp/opencv>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** ASCII PPM dimensions and red/green pixels
 - **Underlying family:** OpenPnP Java binding over native OpenCV PNM decoder

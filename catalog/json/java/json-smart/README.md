@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.6.1`
+- **Upstream:** [source repository](<https://github.com/netplex/json-smart-v2>) · [Maven Central](<https://central.sonatype.com/artifact/net.minidev/json-smart>)
 - **License:** Apache-2.0
 - **Parser family:** json-smart own JSONParser byte/stream parser
 - **Local input API:** `new net.minidev.json.parser.JSONParser(JSONParser.MODE_RFC4627).parse(Files.readAllBytes(local Path))`

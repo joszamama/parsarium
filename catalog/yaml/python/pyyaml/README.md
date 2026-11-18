@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `6.0.3`
+- **Upstream:** [source repository](<https://github.com/yaml/pyyaml>) · [PyPI](<https://pypi.org/project/PyYAML/>)
 - **License:** MIT
 - **Parser family:** PyYAML pure-Python loader (yaml/scanner.py, parser.py, composer.py, SafeConstructor, YAML 1.1 Resolver); not the libyaml CSafeLoader route
 - **Local input API:** `yaml.load(local YAML bytes, Loader=yaml.SafeLoader), the pure-Python safe loader; the decoded str and a local binary stream give the same tree`

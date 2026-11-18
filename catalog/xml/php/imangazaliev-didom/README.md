@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.0.1`
+- **Upstream:** [source repository](<https://github.com/Imangazaliev/DiDOM>) · [Packagist](<https://packagist.org/packages/imangazaliev/didom>)
 - **License:** MIT
 - **Parser family:** libxml2 via PHP DOMDocument, shared with the standard path, symfony/dom-crawler, symfony/serializer and mtownsend/xml-to-array
 - **Local input API:** `new DiDom\Document(string $xml, false, 'UTF-8', Document::TYPE_XML) on the local bytes (the constructor sets preserveWhiteSpace = false; Document::load trims the string and calls DOMDocument::loadXML with LIBXML_HTML_NODEFDTD); Document::getDocument() returns that DOMDocument, walked namespace-aware`

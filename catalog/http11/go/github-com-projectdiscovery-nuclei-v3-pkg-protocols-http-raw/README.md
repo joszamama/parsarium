@@ -1,6 +1,7 @@
 # github.com/projectdiscovery/nuclei/v3/pkg/protocols/http/raw — HTTP/1.1 / Go
 
 - **Pinned release:** `v3.11.1`
+- **Upstream:** [source repository](<https://github.com/projectdiscovery/nuclei>) · [pkg.go.dev](<https://pkg.go.dev/github.com/projectdiscovery/nuclei/v3/pkg/protocols/http/raw>)
 - **License:** MIT
 - **Parsed scope:** raw request message
 - **Underlying family:** nuclei raw HTTP parser

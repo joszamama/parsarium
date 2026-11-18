@@ -1,6 +1,7 @@
 # libzip — ZIP / C++
 
 - **Pinned release:** `1.12.1`
+- **Upstream:** [source repository](<https://github.com/nih-at/libzip>) · [Debian](<https://tracker.debian.org/pkg/libzip>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** libzip ZIP reader

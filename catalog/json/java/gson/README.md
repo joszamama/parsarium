@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.15.0`
+- **Upstream:** [source repository](<https://github.com/google/gson>) · [Maven Central](<https://central.sonatype.com/artifact/com.google.code.gson/gson>)
 - **License:** Apache-2.0
 - **Parser family:** Gson (com.google.gson.stream.JsonReader + ObjectTypeAdapter untyped mapping)
 - **Local input API:** `new Gson().fromJson(Reader, Object.class) over InputStreamReader(FileInputStream, UTF_8)`

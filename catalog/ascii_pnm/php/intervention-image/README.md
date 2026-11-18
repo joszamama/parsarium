@@ -1,6 +1,7 @@
 # intervention/image — ASCII PNM / PHP
 
 - **Pinned release:** `4.4.1`
+- **Upstream:** [source repository](<https://github.com/Intervention/image>) · [Packagist](<https://packagist.org/packages/intervention/image>)
 - **License:** MIT
 - **Parsed scope:** decoded image dimensions
 - **Underlying family:** libvips PPM/PNM decoder

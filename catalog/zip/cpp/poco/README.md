@@ -1,6 +1,7 @@
 # poco — ZIP / C++
 
 - **Pinned release:** `1.15.4`
+- **Upstream:** [source repository](<https://github.com/pocoproject/poco>) · [Debian](<https://tracker.debian.org/pkg/poco>)
 - **License:** BSL-1.0
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** POCO Zip reader

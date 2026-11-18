@@ -8,16 +8,16 @@ Nine C JSON third-party paths pass two valid controls with format-aware tree res
 
 ## Third-party parsers
 
-- [jansson](jansson/README.md) — verified Docker harness
-- [json-c](json-c/README.md) — verified Docker harness
-- [json-glib](json-glib/README.md) — verified Docker harness
-- [yajl](yajl/README.md) — verified Docker harness
-- [cjson](cjson/README.md) — verified Docker harness
-- [jq](jq/README.md) — verified Docker harness
-- [libfastjson](libfastjson/README.md) — verified Docker harness
-- [yyjson](yyjson/README.md) — verified Docker harness
-- [json-parser](json-parser/README.md) — verified Docker harness
-- [json.h](json-h/README.md) — verified Docker harness
+- [jansson](jansson/README.md) — verified Docker harness · [source repository](<https://github.com/akheron/jansson>) · [Debian](<https://tracker.debian.org/pkg/jansson>)
+- [json-c](json-c/README.md) — verified Docker harness · [source repository](<https://github.com/json-c/json-c>) · [Debian](<https://tracker.debian.org/pkg/json-c>)
+- [json-glib](json-glib/README.md) — verified Docker harness · [source repository](<https://gitlab.gnome.org/GNOME/json-glib>) · [Debian](<https://tracker.debian.org/pkg/json-glib>)
+- [yajl](yajl/README.md) — verified Docker harness · [source repository](<https://github.com/lloyd/yajl>) · [Debian](<https://tracker.debian.org/pkg/yajl>)
+- [cjson](cjson/README.md) — verified Docker harness · [source repository](<https://github.com/DaveGamble/cJSON>) · [Debian](<https://tracker.debian.org/pkg/cjson>)
+- [jq](jq/README.md) — verified Docker harness · [source repository](<https://github.com/jqlang/jq>) · [Debian](<https://tracker.debian.org/pkg/jq>)
+- [libfastjson](libfastjson/README.md) — verified Docker harness · [source repository](<https://github.com/rsyslog/libfastjson>) · [Debian](<https://tracker.debian.org/pkg/libfastjson>)
+- [yyjson](yyjson/README.md) — verified Docker harness · [source repository](<https://github.com/ibireme/yyjson>) · [Debian](<https://tracker.debian.org/pkg/yyjson>)
+- [json-parser](json-parser/README.md) — verified Docker harness · [source repository](<https://github.com/json-parser/json-parser>) · [Debian](<https://tracker.debian.org/pkg/libjsonparser>)
+- [json.h](json-h/README.md) — verified Docker harness · [source repository](<https://github.com/sheredom/json.h>)
 
 ## Standard and runtime APIs
 

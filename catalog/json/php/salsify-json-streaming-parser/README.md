@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v8.3.1`
+- **Upstream:** [source repository](<https://github.com/salsify/jsonstreamingparser>) · [Packagist](<https://packagist.org/packages/salsify/json-streaming-parser>)
 - **License:** MIT
 - **Parser family:** salsify JsonStreamingParser character state machine (SAX-style listener)
 - **Local input API:** `new JsonStreamingParser\Parser(resource $stream, ListenerInterface $listener) then parse() over a php://memory stream holding local JSON text; harness listener builds stdClass/list values from startObject/startArray/key/value events`

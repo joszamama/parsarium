@@ -1,6 +1,7 @@
 # mongoose — HTTP/1.1 / C++
 
 - **Pinned release:** `7.23`
+- **Upstream:** [source repository](<https://github.com/cesanta/mongoose>) · [Debian](<https://tracker.debian.org/pkg/mongoose>)
 - **License:** GPL-2.0-only
 - **Parsed scope:** HTTP/1.1 GET request method, target, query and version
 - **Underlying family:** Mongoose C HTTP request parser; related to CivetWeb and LibHTTP ancestry

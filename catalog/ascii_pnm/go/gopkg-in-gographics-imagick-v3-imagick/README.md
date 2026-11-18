@@ -1,6 +1,7 @@
 # gopkg.in/gographics/imagick.v3/imagick — ASCII PNM / Go
 
 - **Pinned release:** `v3.7.3`
+- **Upstream:** [source repository](<https://github.com/gographics/imagick>) · [pkg.go.dev](<https://pkg.go.dev/gopkg.in/gographics/imagick.v3/imagick>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** P3 dimensions
 - **Underlying family:** ImageMagick

@@ -8,12 +8,12 @@ Six verified Java YAML paths: SnakeYAML 2.7 (YAML 1.1 SafeConstructor), SnakeYAM
 
 ## Third-party parsers
 
-- [snakeyaml](snakeyaml/README.md) — verified Docker harness
-- [snakeyaml-engine](snakeyaml-engine/README.md) — verified Docker harness
-- [circe-yaml](circe-yaml/README.md) — verified Docker harness
-- [zio-json-yaml](zio-json-yaml/README.md) — verified Docker harness
-- [kjson-yaml](kjson-yaml/README.md) — verified Docker harness
-- [snakeyaml-engine-kmp](snakeyaml-engine-kmp/README.md) — verified Docker harness
+- [snakeyaml](snakeyaml/README.md) — verified Docker harness · [source repository](<https://codeberg.org/snakeyaml/snakeyaml>) · [Maven Central](<https://central.sonatype.com/artifact/org.yaml/snakeyaml>)
+- [snakeyaml-engine](snakeyaml-engine/README.md) — verified Docker harness · [source repository](<https://codeberg.org/snakeyaml/snakeyaml-engine>) · [Maven Central](<https://central.sonatype.com/artifact/org.snakeyaml/snakeyaml-engine>)
+- [circe-yaml](circe-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/circe/circe-yaml>) · [Maven Central](<https://central.sonatype.com/artifact/io.circe/circe-yaml_2.13>)
+- [zio-json-yaml](zio-json-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/zio/zio-json>) · [Maven Central](<https://central.sonatype.com/artifact/dev.zio/zio-json-yaml_2.13>)
+- [kjson-yaml](kjson-yaml/README.md) — verified Docker harness · [source repository](<https://github.com/pwall567/kjson-yaml>) · [Maven Central](<https://central.sonatype.com/artifact/io.kjson/kjson-yaml>)
+- [snakeyaml-engine-kmp](snakeyaml-engine-kmp/README.md) — verified Docker harness · [source repository](<https://github.com/krzema12/snakeyaml-engine-kmp>) · [Maven Central](<https://central.sonatype.com/artifact/it.krzeminski/snakeyaml-engine-kmp-jvm>)
 
 ## Standard and runtime APIs
 

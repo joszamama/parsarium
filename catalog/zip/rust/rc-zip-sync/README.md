@@ -1,6 +1,7 @@
 # rc-zip-sync — ZIP / Rust
 
 - **Pinned release:** `4.4.2`
+- **Upstream:** [source repository](<https://github.com/bearcove/rc-zip>) · [crates.io](<https://crates.io/crates/rc-zip-sync>)
 - **License:** Apache-2.0 OR MIT
 - **Parsed scope:** Entry name and decompressed text
 - **Underlying family:** rc-zip engine

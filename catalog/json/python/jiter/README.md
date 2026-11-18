@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.19.0`
+- **Upstream:** [source repository](<https://github.com/pydantic/jiter>) · [PyPI](<https://pypi.org/project/jiter/>)
 - **License:** MIT
 - **Parser family:** Jiter 0.19.0 Rust parser (PythonParser over jiter::parse::Parser) / lexical-parse-float 1.0.6
 - **Local input API:** `jiter.from_json(local JSON bytes) with documented defaults (cache_mode='all', partial_mode=False, allow_inf_nan=True, float_mode='float')`

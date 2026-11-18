@@ -1,6 +1,7 @@
 # php-ffmpeg/php-ffmpeg — MP4 / PHP
 
 - **Pinned release:** `v1.4.0`
+- **Upstream:** [source repository](<https://github.com/PHP-FFMpeg/PHP-FFMpeg>) · [Packagist](<https://packagist.org/packages/php-ffmpeg/php-ffmpeg>)
 - **License:** MIT
 - **Parsed scope:** 2 × 2 H.264/AVC video in MP4
 - **Underlying family:** FFmpeg native MOV/MP4 parser

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.2`
+- **Upstream:** [source repository](<https://codeberg.org/snakeyaml/snakeyaml-engine>) · [Maven Central](<https://central.sonatype.com/artifact/org.snakeyaml/snakeyaml-engine>)
 - **License:** Apache-2.0
 - **Parser family:** SnakeYAML Engine (YAML 1.2 rewrite of SnakeYAML: own reader, scanner, parser, composer and schema resolvers)
 - **Local input API:** `new Load(LoadSettings.builder().setSchema(new CoreSchema()).build()).loadFromInputStream(InputStream) over Files.newInputStream(Path)`

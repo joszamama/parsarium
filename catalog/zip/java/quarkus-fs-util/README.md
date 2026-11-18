@@ -1,6 +1,7 @@
 # quarkus-fs-util — ZIP / Java
 
 - **Pinned release:** `1.4.2`
+- **Upstream:** [source repository](<https://github.com/quarkusio/quarkus-fs-util>) · [Maven Central](<https://central.sonatype.com/artifact/io.quarkus/quarkus-fs-util>)
 - **License:** Apache-2.0
 - **Parsed scope:** ZIP entry name and decompressed content from a local archive
 - **Underlying family:** Quarkus read-only ZIP filesystem parser

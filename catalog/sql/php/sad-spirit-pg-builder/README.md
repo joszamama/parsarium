@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v3.3.1`
+- **Upstream:** [source repository](<https://github.com/sad-spirit/pg-builder>) · [Packagist](<https://packagist.org/packages/sad_spirit/pg_builder>)
 - **License:** BSD-2-Clause
 - **Parser family:** pg_builder hand-written PostgreSQL lexer and recursive-descent parser (typed AST)
 - **Local input API:** `(new sad_spirit\pg_builder\StatementFactory())->createFromString(local SQL text) -> Statement AST`

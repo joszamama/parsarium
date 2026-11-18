@@ -1,6 +1,7 @@
 # pdf4qt — PDF / C++
 
 - **Pinned release:** `1.6.0.0`
+- **Upstream:** [source repository](<https://github.com/JakubMelka/PDF4QT>)
 - **License:** MIT
 - **Parsed scope:** PDF document page count
 - **Underlying family:** PDF4QT PDF engine

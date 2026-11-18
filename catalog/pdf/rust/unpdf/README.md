@@ -1,6 +1,7 @@
 # unpdf — PDF / Rust
 
 - **Pinned release:** `0.54.0`
+- **Upstream:** [source repository](<https://github.com/iyulab/unpdf>) · [crates.io](<https://crates.io/crates/unpdf>)
 - **License:** MIT
 - **Parsed scope:** PDF page tree
 - **Underlying family:** unpdf parser

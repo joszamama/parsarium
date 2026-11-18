@@ -1,6 +1,7 @@
 # serf — HTTP/1.1 / C
 
 - **Pinned release:** `1.3.10`
+- **Upstream:** [source repository](<https://github.com/apache/serf>) · [Debian](<https://tracker.debian.org/pkg/serf>)
 - **License:** Apache-2.0
 - **Parsed scope:** HTTP/1.1 response status, reason, Content-Type, Content-Length and body from local byte buffer
 - **Underlying family:** Apache Serf C HTTP/1 response bucket state machine; independent from libsoup and llhttp

@@ -1,6 +1,7 @@
 # gufo-png — PNG / Rust
 
 - **Pinned release:** `0.5.0`
+- **Upstream:** [source repository](<https://github.com/gufo-rs/gufo>) · [crates.io](<https://crates.io/crates/gufo-png>)
 - **License:** MPL-2.0 OR LGPL-2.1-or-later
 - **Parsed scope:** PNG tEXt Title metadata
 - **Underlying family:** gufo-png chunk reader

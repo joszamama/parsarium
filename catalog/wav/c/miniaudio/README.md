@@ -1,6 +1,7 @@
 # miniaudio — WAV / C
 
 - **Pinned release:** `0.11.26`
+- **Upstream:** [source repository](<https://github.com/mackron/miniaudio>) · [Conan Center](<https://conan.io/center/recipes/miniaudio>)
 - **License:** MIT-0
 - **Parsed scope:** WAV sample rate, channel and frame counts, plus first four decoded PCM samples
 - **Underlying family:** miniaudio bundled dr_wav decoder

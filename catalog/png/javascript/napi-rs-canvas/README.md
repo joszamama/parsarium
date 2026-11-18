@@ -1,6 +1,7 @@
 # @napi-rs/canvas — PNG / JavaScript
 
 - **Pinned release:** `1.1.0`
+- **Upstream:** [source repository](<https://github.com/Brooooooklyn/canvas>) · [npm](<https://www.npmjs.com/package/@napi-rs/canvas>)
 - **License:** MIT
 - **Parsed scope:** pixels
 - **Underlying family:** Skia

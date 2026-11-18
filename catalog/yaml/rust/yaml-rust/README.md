@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.4.5`
+- **Upstream:** [source repository](<https://github.com/chyh1990/yaml-rust>) · [crates.io](<https://crates.io/crates/yaml-rust>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** yaml-rust (own pure-Rust scanner, parser and loader, a port of libyaml's design without shared code); yaml-rust2 and saphyr continue this code base and are separate leads of the same lineage.
 - **Local input API:** `yaml_rust::YamlLoader::load_from_str(&str) -> Result<Vec<Yaml>, ScanError>; Yaml::{Real, Integer, String, Boolean, Array, Hash, Alias, Null, BadValue}`

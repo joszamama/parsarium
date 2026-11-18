@@ -1,6 +1,7 @@
 # PyMuPDF — PDF / Python
 
 - **Pinned release:** `2.1`
+- **Upstream:** [source repository](<https://github.com/pymupdf/PyMuPDF>) · [PyPI](<https://pypi.org/project/PyMuPDF/>)
 - **License:** AGPL-3.0-or-later
 - **Parsed scope:** page text
 - **Underlying family:** MuPDF

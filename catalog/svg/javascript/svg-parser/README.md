@@ -1,6 +1,7 @@
 # svg-parser — SVG / JavaScript
 
 - **Pinned release:** `2.1.0`
+- **Upstream:** [source repository](<https://github.com/Rich-Harris/svg-parser>) · [npm](<https://www.npmjs.com/package/svg-parser>)
 - **License:** MIT
 - **Parsed scope:** structure
 - **Underlying family:** svg-parser

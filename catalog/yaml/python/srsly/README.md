@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.0.1`
+- **Upstream:** [source repository](<https://github.com/explosion/srsly>) · [PyPI](<https://pypi.org/project/srsly/>)
 - **License:** MIT
 - **Parser family:** Wrapper: srsly.yaml_loads over ruamel.yaml 0.19.1 YAML(typ='safe', pure=True), the pure-Python ruamel.yaml loader; not an independent parser
 - **Local input API:** `srsly.yaml_loads(local YAML text as str); the raw bytes and a local binary stream, passed unchanged to ruamel.yaml, give the same tree`

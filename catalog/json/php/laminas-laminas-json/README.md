@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.8.0`
+- **Upstream:** [source repository](<https://github.com/laminas/laminas-json>) · [Packagist](<https://packagist.org/packages/laminas/laminas-json>)
 - **License:** BSD-3-Clause
 - **Parser family:** Laminas Json Decoder pure-PHP parser (Zend JSON lineage)
 - **Local input API:** `Set Laminas\Json\Json::$useBuiltinEncoderDecoder = true, then Json::decode(string $input) over local JSON text; forces package Decoder instead of ext/json`

@@ -1,6 +1,7 @@
 # nanomp3 — MP3 / Rust
 
 - **Pinned release:** `0.2.0`
+- **Upstream:** [source repository](<https://github.com/robbie01/nanomp3>) · [crates.io](<https://crates.io/crates/nanomp3>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** Decoded MP3 samples and layer
 - **Underlying family:** nanomp3 decoder

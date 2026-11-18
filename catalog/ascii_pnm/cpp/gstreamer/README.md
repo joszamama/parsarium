@@ -1,6 +1,7 @@
 # gstreamer — ASCII PNM / C++
 
 - **Pinned release:** `1.28.9`
+- **Upstream:** [source repository](<https://gitlab.freedesktop.org/gstreamer/gstreamer>) · [Debian](<https://tracker.debian.org/pkg/gstreamer1.0>)
 - **License:** LGPL-2.0-or-later AND LGPL-2.1-or-later AND MIT
 - **Parsed scope:** P3 dimensions, RGB caps, and two decoded pixels
 - **Underlying family:** GStreamer gst-plugins-bad pnmdec

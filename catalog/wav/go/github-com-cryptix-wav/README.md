@@ -1,6 +1,7 @@
 # github.com/cryptix/wav — WAV / Go
 
 - **Pinned release:** `v0.0.0-20180415113528-8bdace674401`
+- **Upstream:** [source repository](<https://github.com/cryptix/wav>) · [pkg.go.dev](<https://pkg.go.dev/github.com/cryptix/wav>)
 - **License:** GPL-2.0
 - **Parsed scope:** sample_count
 - **Underlying family:** cryptix WAV reader

@@ -1,6 +1,7 @@
 # node-stream-zip — ZIP / JavaScript
 
 - **Pinned release:** `1.16.0`
+- **Upstream:** [source repository](<https://github.com/antelle/node-stream-zip>) · [npm](<https://www.npmjs.com/package/node-stream-zip>)
 - **License:** MIT
 - **Parsed scope:** entries_and_content
 - **Underlying family:** node-stream-zip

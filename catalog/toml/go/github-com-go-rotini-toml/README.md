@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.2.2`
+- **Upstream:** [source repository](<https://github.com/go-rotini/toml>) · [pkg.go.dev](<https://pkg.go.dev/github.com/go-rotini/toml>)
 - **License:** MIT
 - **Parser family:** go-rotini/toml scanner and parser
 - **Local input API:** `toml.Unmarshal([]byte, &map[string]any) error`

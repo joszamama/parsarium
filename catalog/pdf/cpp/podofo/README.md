@@ -1,6 +1,7 @@
 # podofo — PDF / C++
 
 - **Pinned release:** `1.1.2`
+- **Upstream:** [source repository](<https://github.com/podofo/podofo>)
 - **License:** LGPL-2.0-or-later OR MPL-2.0
 - **Parsed scope:** PDF document page count
 - **Underlying family:** PoDoFo PDF parser

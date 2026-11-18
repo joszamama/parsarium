@@ -1,6 +1,7 @@
 # cairo — PNG / C
 
 - **Pinned release:** `1.18.6`
+- **Upstream:** [source repository](<https://gitlab.freedesktop.org/cairo/cairo>) · [Debian](<https://tracker.debian.org/pkg/cairo>)
 - **License:** LGPL-2.1-only OR MPL-1.1
 - **Parsed scope:** pixels
 - **Underlying family:** Cairo PNG surface loader (libpng-backed)

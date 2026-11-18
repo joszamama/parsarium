@@ -1,6 +1,7 @@
 # qtbase — ASCII PNM / C++
 
 - **Pinned release:** `6.12.0`
+- **Upstream:** [source repository](<https://github.com/qt/qtbase>)
 - **License:** LGPL-3.0-only
 - **Parsed scope:** P3 dimensions and two decoded RGBA pixels
 - **Underlying family:** QtBase native QPPMHandler

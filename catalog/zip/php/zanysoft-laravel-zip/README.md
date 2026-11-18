@@ -1,6 +1,7 @@
 # zanysoft/laravel-zip — ZIP / PHP
 
 - **Pinned release:** `3.1.0`
+- **Upstream:** [source repository](<https://github.com/zanysoft/laravel-zip>) · [Packagist](<https://packagist.org/packages/zanysoft/laravel-zip>)
 - **License:** MIT
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** ZanySoft ZIP wrapper over PHP ZipArchive

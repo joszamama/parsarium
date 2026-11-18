@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.0.0-20181122101858-8a2913d6a50b`
+- **Upstream:** [source repository](<https://github.com/cznic/dns>) · [pkg.go.dev](<https://pkg.go.dev/github.com/cznic/dns/msg>)
 - **License:** BSD-3-Clause
 - **Parser family:** cznic/dns (msg/message.go, rr/rr.go, wire.go)
 - **Local input API:** `(*msg.Message).Decode(b []byte, pos *int, sniffer dns.WireDecodeSniffer) error`

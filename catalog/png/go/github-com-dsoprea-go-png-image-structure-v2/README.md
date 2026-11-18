@@ -1,6 +1,7 @@
 # github.com/dsoprea/go-png-image-structure/v2 — PNG / Go
 
 - **Pinned release:** `v2.0.0-20210512210324-29b889a6093d`
+- **Upstream:** [source repository](<https://github.com/dsoprea/go-png-image-structure>) · [pkg.go.dev](<https://pkg.go.dev/github.com/dsoprea/go-png-image-structure/v2>)
 - **License:** MIT
 - **Parsed scope:** chunks+dimensions
 - **Underlying family:** PNG chunk structure parser

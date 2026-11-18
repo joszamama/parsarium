@@ -1,6 +1,7 @@
 # http-muncher — HTTP/1.1 / Rust
 
 - **Pinned release:** `0.3.2`
+- **Upstream:** [source repository](<https://github.com/nbaksalyar/rust-streaming-http-parser>) · [crates.io](<https://crates.io/crates/http-muncher>)
 - **License:** MIT
 - **Parsed scope:** streaming request: method, target, version, consumed bytes
 - **Underlying family:** node/http-parser C binding

@@ -1,6 +1,7 @@
 # mupdf — PDF / C++
 
 - **Pinned release:** `1.28.6`
+- **Upstream:** [source repository](<https://github.com/ArtifexSoftware/mupdf>) · [Debian](<https://tracker.debian.org/pkg/mupdf>)
 - **License:** AGPL-3.0-or-later
 - **Parsed scope:** PDF document page count
 - **Underlying family:** MuPDF C document parser

@@ -1,6 +1,7 @@
 # github.com/gographics/gmagick — ASCII PNM / Go
 
 - **Pinned release:** `v1.0.0`
+- **Upstream:** [source repository](<https://github.com/gographics/gmagick>) · [pkg.go.dev](<https://pkg.go.dev/github.com/gographics/gmagick>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** P3 dimensions, format and color count
 - **Underlying family:** GraphicsMagick

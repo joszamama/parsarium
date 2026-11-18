@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.34.9`
+- **Upstream:** [source repository](<https://github.com/c-ares/c-ares>) · [Debian](<https://tracker.debian.org/pkg/c-ares>)
 - **License:** MIT
 - **Parser family:** c-ares DNS record parser (src/lib/record/ares_dns_parse.c, ares_dns_name.c over ares_buf.c)
 - **Local input API:** `ares_dns_parse(const unsigned char *buf, size_t buf_len, unsigned int flags, ares_dns_record_t **dnsrec)`

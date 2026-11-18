@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `8.8`
+- **Upstream:** [source repository](<https://github.com/lelit/pglast>) · [PyPI](<https://pypi.org/project/pglast/>)
 - **License:** GPL-3.0-or-later
 - **Parser family:** PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)
 - **Local input API:** `pglast.parse_sql(local SQL text) -> tuple of pglast.ast.RawStmt nodes`

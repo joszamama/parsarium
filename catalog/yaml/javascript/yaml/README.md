@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.9.1`
+- **Upstream:** [source repository](<https://github.com/eemeli/yaml>) · [npm](<https://www.npmjs.com/package/yaml>)
 - **License:** ISC
 - **Parser family:** eemeli/yaml lexer, CST parser and composer
 - **Local input API:** `parseDocument(text) with default options (YAML 1.2 core schema) after strict UTF-8 decoding of a local Buffer; zero errors and warnings required; Document.toJS() mapped to the Parsarium typed YAML tree`

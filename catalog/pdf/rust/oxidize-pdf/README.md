@@ -1,6 +1,7 @@
 # oxidize-pdf — PDF / Rust
 
 - **Pinned release:** `5.5.7`
+- **Upstream:** [source repository](<https://github.com/bzsanti/oxidizePdf>) · [crates.io](<https://crates.io/crates/oxidize-pdf>)
 - **License:** MIT
 - **Parsed scope:** PDF page tree
 - **Underlying family:** oxidize-pdf parser

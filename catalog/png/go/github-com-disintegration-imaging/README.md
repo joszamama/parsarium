@@ -1,6 +1,7 @@
 # github.com/disintegration/imaging — PNG / Go
 
 - **Pinned release:** `v1.6.2`
+- **Upstream:** [source repository](<https://github.com/disintegration/imaging>) · [pkg.go.dev](<https://pkg.go.dev/github.com/disintegration/imaging>)
 - **License:** MIT
 - **Parsed scope:** pixels
 - **Underlying family:** Go image/png wrapper

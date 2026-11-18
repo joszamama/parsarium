@@ -1,6 +1,7 @@
 # github.com/rustyoz/svg — SVG / Go
 
 - **Pinned release:** `v0.0.0-20260625015314-1aeec84fa7e2`
+- **Upstream:** [source repository](<https://github.com/rustyoz/svg>) · [pkg.go.dev](<https://pkg.go.dev/github.com/rustyoz/svg>)
 - **License:** MIT
 - **Parsed scope:** height, width
 - **Underlying family:** rustyoz SVG parser

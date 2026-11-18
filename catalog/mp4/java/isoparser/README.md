@@ -1,6 +1,7 @@
 # isoparser — MP4 / Java
 
 - **Pinned release:** `1.9.56`
+- **Upstream:** [source repository](<https://github.com/sannies/mp4parser>) · [Maven Central](<https://central.sonatype.com/artifact/org.mp4parser/isoparser>)
 - **License:** Apache-2.0
 - **Parsed scope:** movie track count and timescale
 - **Underlying family:** sannies MP4Parser ISO BMFF box parser

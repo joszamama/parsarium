@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.0.0-20151201012946-76f54ee73233`
+- **Upstream:** [source repository](<https://github.com/go-forks/go-pkg-xmlx>) · [pkg.go.dev](<https://pkg.go.dev/github.com/go-forks/go-pkg-xmlx>)
 - **License:** CC0-1.0
 - **Parser family:** go-pkg-xmlx node tree over Go encoding/xml Decoder tokenizer
 - **Local input API:** `xmlx.New() then Document.LoadBytes([]byte, nil) (LoadStream over a local byte buffer); Document.Root node tree walk over Node.Type, Node.Name, Node.Attributes, Node.Value and Node.Children`

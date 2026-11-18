@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.7.0`
+- **Upstream:** [source repository](<https://github.com/bramp/rustdns>) · [crates.io](<https://crates.io/crates/rustdns>)
 - **License:** Apache-2.0
 - **Parser family:** rustdns (src/dns.rs MessageParser, types.rs, resource.rs)
 - **Local input API:** `rustdns::Message::from_slice(buf: &[u8]) -> io::Result<Message>`

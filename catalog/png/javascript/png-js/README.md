@@ -1,6 +1,7 @@
 # png-js — PNG / JavaScript
 
 - **Pinned release:** `2.0.0`
+- **Upstream:** [source repository](<https://github.com/foliojs/png.js>) · [npm](<https://www.npmjs.com/package/png-js>)
 - **License:** MIT (upstream LICENSE; npm metadata omits license)
 - **Parsed scope:** pixels
 - **Underlying family:** png.js

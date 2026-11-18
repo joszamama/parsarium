@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.40.0`
+- **Upstream:** [source repository](<https://github.com/servo/html5ever>) · [crates.io](<https://crates.io/crates/xml5ever>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** Servo xml5ever XML5 tokenizer and tree builder; shares markup5ever primitives and design lineage with html5ever, but has own XML5 parser modules; markup5ever_rcdom is only a tree sink
 - **Local input API:** `xml5ever::driver::parse_document(RcDom, XmlParseOpts) -> XmlParser<RcDom>; TendrilSink::one(&str) -> RcDom; xml5ever::tokenizer::XmlTokenizer::feed(BufferQueue) -> token events`

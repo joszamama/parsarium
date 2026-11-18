@@ -1,6 +1,7 @@
 # unarr — ZIP / C
 
 - **Pinned release:** `1.2.0`
+- **Upstream:** [source repository](<https://github.com/selmf/unarr>) · [Debian](<https://tracker.debian.org/pkg/unarr>)
 - **License:** LGPL-3.0-only
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** unarr ZIP reader

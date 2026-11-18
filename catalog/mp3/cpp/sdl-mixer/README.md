@@ -1,6 +1,7 @@
 # sdl_mixer — MP3 / C++
 
 - **Pinned release:** `2.8.2`
+- **Upstream:** [source repository](<https://github.com/libsdl-org/SDL_mixer>)
 - **License:** Zlib
 - **Parsed scope:** ID3v2 title and artist plus a 1-second MP3 music duration
 - **Underlying family:** SDL2_mixer ID3v2 tag reader and mpg123 MP3 decoder

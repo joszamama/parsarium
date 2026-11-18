@@ -1,6 +1,7 @@
 # mdal — ASCII PLY / C
 
 - **Pinned release:** `1.3.3`
+- **Upstream:** [source repository](<https://github.com/lutraconsulting/MDAL>)
 - **License:** MIT
 - **Parsed scope:** Three parsed vertices, one face and face indices
 - **Underlying family:** MDAL PLY driver over bundled libplyxx

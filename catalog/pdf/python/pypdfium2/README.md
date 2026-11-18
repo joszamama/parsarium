@@ -1,6 +1,7 @@
 # pypdfium2 — PDF / Python
 
 - **Pinned release:** `5.10.1`
+- **Upstream:** [source repository](<https://github.com/pypdfium2-team/pypdfium2>) · [PyPI](<https://pypi.org/project/pypdfium2/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** page text
 - **Underlying family:** PDFium

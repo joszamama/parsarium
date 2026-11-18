@@ -1,6 +1,7 @@
 # node-id3 — MP3 / JavaScript
 
 - **Pinned release:** `0.2.9`
+- **Upstream:** [source repository](<https://github.com/Zazama/node-id3>) · [npm](<https://www.npmjs.com/package/node-id3>)
 - **License:** MIT
 - **Parsed scope:** tags
 - **Underlying family:** node-id3

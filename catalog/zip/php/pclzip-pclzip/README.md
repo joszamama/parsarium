@@ -1,6 +1,7 @@
 # pclzip/pclzip — ZIP / PHP
 
 - **Pinned release:** `2.8.2`
+- **Upstream:** [source repository](<https://github.com/ivanlanin/pclzip>) · [Packagist](<https://packagist.org/packages/pclzip/pclzip>)
 - **License:** LGPL-2.1
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** PclZip PHP ZIP reader

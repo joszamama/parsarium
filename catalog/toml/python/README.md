@@ -8,13 +8,13 @@ Bounded TOML search captured 2026-11-17: 1 query, 100 recorded hits (100 unique)
 
 ## Third-party parsers
 
-- [tomlkit](tomlkit/README.md) — verified Docker harness
-- [tomli](tomli/README.md) — verified Docker harness
-- [rtoml](rtoml/README.md) — verified Docker harness
-- [tomlrt](tomlrt/README.md) — verified Docker harness
-- [pytomlpp](pytomlpp/README.md) — verified Docker harness
-- [tomlclass](tomlclass/README.md) — verified Docker harness
-- [pytoml11](pytoml11/README.md) — verified Docker harness
+- [tomlkit](tomlkit/README.md) — verified Docker harness · [source repository](<https://github.com/python-poetry/tomlkit>) · [PyPI](<https://pypi.org/project/tomlkit/>)
+- [tomli](tomli/README.md) — verified Docker harness · [source repository](<https://github.com/hukkin/tomli>) · [PyPI](<https://pypi.org/project/tomli/>)
+- [rtoml](rtoml/README.md) — verified Docker harness · [source repository](<https://github.com/samuelcolvin/rtoml>) · [PyPI](<https://pypi.org/project/rtoml/>)
+- [tomlrt](tomlrt/README.md) — verified Docker harness · [source repository](<https://github.com/dimbleby/tomlrt>) · [PyPI](<https://pypi.org/project/tomlrt/>)
+- [pytomlpp](pytomlpp/README.md) — verified Docker harness · [source repository](<https://github.com/bobfang1992/pytomlpp>) · [PyPI](<https://pypi.org/project/pytomlpp/>)
+- [tomlclass](tomlclass/README.md) — verified Docker harness · [source repository](<https://github.com/tomlclass/tomlclass>) · [PyPI](<https://pypi.org/project/tomlclass/>)
+- [pytoml11](pytoml11/README.md) — verified Docker harness · [source repository](<https://github.com/thijsmie/pytoml11>) · [PyPI](<https://pypi.org/project/pytoml11/>)
 
 ## Standard and runtime APIs
 

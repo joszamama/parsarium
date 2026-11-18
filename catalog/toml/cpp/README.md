@@ -8,9 +8,9 @@ Bounded TOML search captured 2026-11-17: 3 queries, 100 recorded hits (86 unique
 
 ## Third-party parsers
 
-- [tomlplusplus](tomlplusplus/README.md) — verified Docker harness
-- [toml11](toml11/README.md) — verified Docker harness
-- [cpptoml](cpptoml/README.md) — verified Docker harness
+- [tomlplusplus](tomlplusplus/README.md) — verified Docker harness · [source repository](<https://github.com/marzer/tomlplusplus>) · [Debian](<https://tracker.debian.org/pkg/tomlplusplus>)
+- [toml11](toml11/README.md) — verified Docker harness · [source repository](<https://github.com/ToruNiina/toml11>) · [Debian](<https://tracker.debian.org/pkg/toml11>)
+- [cpptoml](cpptoml/README.md) — verified Docker harness · [source repository](<https://github.com/skystrife/cpptoml>) · [Debian](<https://tracker.debian.org/pkg/cpptoml>)
 
 ## Standard and runtime APIs
 

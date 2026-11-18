@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.5.0`
+- **Upstream:** [Debian](<https://tracker.debian.org/pkg/rxp>)
 - **License:** GPL-2.0
 - **Parser family:** RXP (Edinburgh LTG)
 - **Local input API:** `init_parser(); NewParser(); ParserSetFlag(p, XMLNamespaces, 1); ParserSetFlag(p, ReturnComments, 1); ParserSetWarningCallback; NewExternalEntity(0, 0, local file, 0, 0); EntityOpen; ParserPush; ReadXBit until XBIT_eof (XBIT_start/empty: element_definition, ns_element_definition, attributes with definition/ns_definition/value; XBIT_end; XBIT_pcdata; XBIT_cdsect; XBIT_comment; XBIT_pi); FreeXBit; FreeDtd; FreeParser; FreeEntity`

@@ -1,6 +1,7 @@
 # pcl — ASCII PLY / C++
 
 - **Pinned release:** `1.15.1`
+- **Upstream:** [source repository](<https://github.com/PointCloudLibrary/pcl>) · [Debian](<https://tracker.debian.org/pkg/pcl>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** three vertices, one polygon and its three indices
 - **Underlying family:** PCL PLYReader native implementation

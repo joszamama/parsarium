@@ -8,9 +8,9 @@ Bounded TOML search captured 2026-11-17: 2 queries, 183 recorded hits (162 uniqu
 
 ## Third-party parsers
 
-- [internal/toml](internal-toml/README.md) — verified Docker harness
-- [php-collective/toml](php-collective-toml/README.md) — verified Docker harness
-- [petalbranch/toml](petalbranch-toml/README.md) — verified Docker harness
+- [internal/toml](internal-toml/README.md) — verified Docker harness · [source repository](<https://github.com/php-internal/toml>) · [Packagist](<https://packagist.org/packages/internal/toml>)
+- [php-collective/toml](php-collective-toml/README.md) — verified Docker harness · [source repository](<https://github.com/php-collective/toml>) · [Packagist](<https://packagist.org/packages/php-collective/toml>)
+- [petalbranch/toml](petalbranch-toml/README.md) — verified Docker harness · [source repository](<https://github.com/PetalBranch/toml>) · [Packagist](<https://packagist.org/packages/petalbranch/toml>)
 
 ## Standard and runtime APIs
 

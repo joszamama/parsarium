@@ -1,6 +1,7 @@
 # @browsery/http-parser — HTTP/1.1 / JavaScript
 
 - **Pinned release:** `0.5.10-rev.1`
+- **Upstream:** [source repository](<https://github.com/panates/browsery>) · [npm](<https://www.npmjs.com/package/@browsery/http-parser>)
 - **License:** MIT
 - **Parsed scope:** request
 - **Underlying family:** http-parser-js

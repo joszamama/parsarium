@@ -1,6 +1,7 @@
 # sqlite — ZIP / C++
 
 - **Pinned release:** `3.54.1`
+- **Upstream:** [source repository](<https://github.com/sqlite/sqlite>)
 - **License:** Public-Domain
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** SQLite Zipfile virtual table with zlib DEFLATE

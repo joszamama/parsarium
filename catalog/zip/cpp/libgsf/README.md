@@ -1,6 +1,7 @@
 # libgsf — ZIP / C++
 
 - **Pinned release:** `1.14.60`
+- **Upstream:** [source repository](<https://gitlab.gnome.org/GNOME/libgsf>) · [Debian](<https://tracker.debian.org/pkg/libgsf>)
 - **License:** LGPL-2.1-only
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** libgsf ZIP reader

@@ -1,6 +1,7 @@
 # httparse — HTTP/1.1 / Rust
 
 - **Pinned release:** `1.10.1`
+- **Upstream:** [source repository](<https://github.com/seanmonstar/httparse>) · [crates.io](<https://crates.io/crates/httparse>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** request head: method, target, HTTP minor version, headers
 - **Underlying family:** httparse core

@@ -1,6 +1,7 @@
 # pdfplumber — PDF / Rust
 
 - **Pinned release:** `0.4.1`
+- **Upstream:** [source repository](<https://github.com/developer0hye/pdfplumber-rs>) · [crates.io](<https://crates.io/crates/pdfplumber>)
 - **License:** Apache-2.0
 - **Parsed scope:** PDF page model
 - **Underlying family:** lopdf + pdfplumber-parse

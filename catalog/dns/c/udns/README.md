@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.7`
+- **Upstream:** [Debian](<https://tracker.debian.org/pkg/udns>)
 - **License:** LGPL-2.1-or-later
 - **Parser family:** udns (Michael Tokarev) raw-packet routines (udns_parse.c, udns_dn.c, udns_XtoX.c)
 - **Local input API:** `dns_getdn(pkt, &cur, end, dn, dnsiz) for question names, then void dns_initparse(struct dns_parse *p, dnscc_t *qdn, dnscc_t *pkt, dnscc_t *cur, dnscc_t *end) + int dns_nextrr(struct dns_parse *p, struct dns_rr *rr), with the dns_qid/dns_qr/.../dns_numar header accessors`

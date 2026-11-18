@@ -1,6 +1,7 @@
 # javacv — WAV / Java
 
 - **Pinned release:** `1.5.14`
+- **Upstream:** [source repository](<https://github.com/bytedeco/javacv>) · [Maven Central](<https://central.sonatype.com/artifact/org.bytedeco/javacv>)
 - **License:** Apache-2.0 OR GPL-2.0-or-later OR GPL-2.0-with-classpath-exception
 - **Parsed scope:** WAV format, PCM codec, sample rate and channels
 - **Underlying family:** JavaCV wrapper over FFmpeg demuxer

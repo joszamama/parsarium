@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `5.6.1`
+- **Upstream:** [source repository](<https://github.com/mafintosh/dns-packet>) · [npm](<https://www.npmjs.com/package/dns-packet>)
 - **License:** MIT
 - **Parser family:** dns-packet (mafintosh) decoder, index.js
 - **Local input API:** `dnsPacket.decode(buf: Buffer) -> packet object`

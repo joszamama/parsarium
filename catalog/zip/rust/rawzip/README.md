@@ -1,6 +1,7 @@
 # rawzip — ZIP / Rust
 
 - **Pinned release:** `0.5.2`
+- **Upstream:** [source repository](<https://github.com/nickbabcock/rawzip>) · [crates.io](<https://crates.io/crates/rawzip>)
 - **License:** MIT
 - **Parsed scope:** Entry name and externally DEFLATE-decoded text
 - **Underlying family:** rawzip engine

@@ -1,6 +1,7 @@
 # github.com/davidbyttow/govips/v2/vips — PNG / Go
 
 - **Pinned release:** `v2.20.0`
+- **Upstream:** [source repository](<https://github.com/davidbyttow/govips>) · [pkg.go.dev](<https://pkg.go.dev/github.com/davidbyttow/govips/v2/vips>)
 - **License:** MIT
 - **Parsed scope:** dimensions
 - **Underlying family:** libvips

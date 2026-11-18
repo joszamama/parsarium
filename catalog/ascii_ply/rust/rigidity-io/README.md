@@ -1,6 +1,7 @@
 # rigidity-io — ASCII PLY / Rust
 
 - **Pinned release:** `0.2.0`
+- **Upstream:** [source repository](<https://github.com/Dmitrii173173/rigidity>) · [crates.io](<https://crates.io/crates/rigidity-io>)
 - **License:** AGPL-3.0-only
 - **Parsed scope:** ASCII PLY vertex cloud; faces not interpreted
 - **Underlying family:** rigidity-io PLY reader

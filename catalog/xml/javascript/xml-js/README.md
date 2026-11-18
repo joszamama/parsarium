@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.6.11`
+- **Upstream:** [source repository](<https://github.com/nashwaan/xml-js>) · [npm](<https://www.npmjs.com/package/xml-js>)
 - **License:** MIT
 - **Parser family:** sax-js strict XML state machine (sax 1.6.1) under xml-js tree builder
 - **Local input API:** `xmljs.xml2js(text, {compact:false, captureSpacesBetweenElements:true, alwaysChildren:true}) on strictly UTF-8 decoded local bytes; ordered tree builder over strict sax.parser(true) events`

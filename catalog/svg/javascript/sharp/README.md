@@ -1,6 +1,7 @@
 # sharp — SVG / JavaScript
 
 - **Pinned release:** `0.35.5`
+- **Upstream:** [source repository](<https://github.com/lovell/sharp>) · [npm](<https://www.npmjs.com/package/sharp>)
 - **License:** Apache-2.0
 - **Parsed scope:** dimensions
 - **Underlying family:** libvips/librsvg

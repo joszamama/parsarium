@@ -1,6 +1,7 @@
 # amphp/http-server — HTTP/1.1 / PHP
 
 - **Pinned release:** `v3.4.8`
+- **Upstream:** [source repository](<https://github.com/amphp/http-server>) · [Packagist](<https://packagist.org/packages/amphp/http-server>)
 - **License:** MIT
 - **Parsed scope:** single valid GET request line and Host, X-Parsarium, Connection headers
 - **Underlying family:** Amp native HTTP server parser

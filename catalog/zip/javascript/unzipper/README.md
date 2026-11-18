@@ -1,6 +1,7 @@
 # unzipper — ZIP / JavaScript
 
 - **Pinned release:** `0.12.5`
+- **Upstream:** [source repository](<https://github.com/ZJONSSON/node-unzipper>) · [npm](<https://www.npmjs.com/package/unzipper>)
 - **License:** MIT
 - **Parsed scope:** entries_and_content
 - **Underlying family:** unzipper

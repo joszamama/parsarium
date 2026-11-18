@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.2609.0`
+- **Upstream:** [source repository](<https://github.com/rsyslog/libfastjson>) · [Debian](<https://tracker.debian.org/pkg/libfastjson>)
 - **License:** MIT
 - **Parser family:** json-c tokener family: libfastjson fork (json_tokener.c)
 - **Local input API:** `fjson_tokener_parse_ex(struct fjson_tokener *tok, const char *str, int len) with FJSON_TOKENER_STRICT`

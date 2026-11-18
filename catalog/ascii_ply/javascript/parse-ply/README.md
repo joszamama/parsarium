@@ -1,6 +1,7 @@
 # parse-ply — ASCII PLY / JavaScript
 
 - **Pinned release:** `0.1.0`
+- **Upstream:** [source repository](<https://github.com/mikolalysenko/parse-ply>) · [npm](<https://www.npmjs.com/package/parse-ply>)
 - **License:** MIT
 - **Parsed scope:** triangle mesh
 - **Underlying family:** parse-ply

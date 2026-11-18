@@ -1,6 +1,7 @@
 # sdl2_image — SVG / C
 
 - **Pinned release:** `2.8.12`
+- **Upstream:** [source repository](<https://github.com/libsdl-org/SDL_image>)
 - **License:** Zlib
 - **Parsed scope:** SVG dimensions and two rendered RGBA pixels through SDL2_image's format-specific reader
 - **Underlying family:** SDL2_image SVG loader embedding NanoSVG

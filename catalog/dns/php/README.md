@@ -8,11 +8,11 @@ Pilot cell: five PHP paths verified, react/dns, daverandom/libdns, pear/net_dns2
 
 ## Third-party parsers
 
-- [react/dns](react-dns/README.md) — verified Docker harness
-- [daverandom/libdns](daverandom-libdns/README.md) — verified Docker harness
-- [pear/net_dns2](pear-net-dns2/README.md) — verified Docker harness
-- [utopia-php/dns](utopia-php-dns/README.md) — verified Docker harness
-- [jdwx/dns-query](jdwx-dns-query/README.md) — verified Docker harness
+- [react/dns](react-dns/README.md) — verified Docker harness · [source repository](<https://github.com/reactphp/dns>) · [Packagist](<https://packagist.org/packages/react/dns>)
+- [daverandom/libdns](daverandom-libdns/README.md) — verified Docker harness · [source repository](<https://github.com/DaveRandom/LibDNS>) · [Packagist](<https://packagist.org/packages/daverandom/libdns>)
+- [pear/net_dns2](pear-net-dns2/README.md) — verified Docker harness · [source repository](<https://github.com/mikepultz/netdns2>) · [Packagist](<https://packagist.org/packages/pear/net_dns2>)
+- [utopia-php/dns](utopia-php-dns/README.md) — verified Docker harness · [source repository](<https://github.com/utopia-php/dns>) · [Packagist](<https://packagist.org/packages/utopia-php/dns>)
+- [jdwx/dns-query](jdwx-dns-query/README.md) — verified Docker harness · [source repository](<https://github.com/jdwx/dns-query>) · [Packagist](<https://packagist.org/packages/jdwx/dns-query>)
 
 ## Standard and runtime APIs
 

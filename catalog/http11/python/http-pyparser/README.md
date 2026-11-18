@@ -1,6 +1,7 @@
 # http-pyparser — HTTP/1.1 / Python
 
 - **Pinned release:** `0.5.1`
+- **Upstream:** [source repository](<https://github.com/jaedsonpys/http-pyparser>) · [PyPI](<https://pypi.org/project/http-pyparser/>)
 - **License:** Apache-2.0
 - **Parsed scope:** HTTP/1.1 request method, target and Host
 - **Underlying family:** http-pyparser Python parser

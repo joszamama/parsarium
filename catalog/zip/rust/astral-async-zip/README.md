@@ -1,6 +1,7 @@
 # astral_async_zip — ZIP / Rust
 
 - **Pinned release:** `0.0.22`
+- **Upstream:** [source repository](<https://github.com/astral-sh/rs-async-zip>) · [crates.io](<https://crates.io/crates/astral_async_zip>)
 - **License:** MIT
 - **Parsed scope:** Entry name and decompressed text
 - **Underlying family:** rs-async-zip lineage

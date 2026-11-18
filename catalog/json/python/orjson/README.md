@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.13.0`
+- **Upstream:** [source repository](<https://github.com/ijl/orjson>) · [PyPI](<https://pypi.org/project/orjson/>)
 - **License:** MPL-2.0 AND (Apache-2.0 OR MIT)
 - **Parser family:** orjson Rust deserializer backed by vendored yyjson 0.12.0 C parser
 - **Local input API:** `orjson.loads(local UTF-8 bytes)`

@@ -1,6 +1,7 @@
 # fflate — ZIP / JavaScript
 
 - **Pinned release:** `0.8.3`
+- **Upstream:** [source repository](<https://github.com/101arrowz/fflate>) · [npm](<https://www.npmjs.com/package/fflate>)
 - **License:** MIT
 - **Parsed scope:** entries_and_content
 - **Underlying family:** fflate

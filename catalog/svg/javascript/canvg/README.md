@@ -1,6 +1,7 @@
 # canvg — SVG / JavaScript
 
 - **Pinned release:** `4.0.3`
+- **Upstream:** [source repository](<https://github.com/canvg/canvg>) · [npm](<https://www.npmjs.com/package/canvg>)
 - **License:** MIT
 - **Parsed scope:** pixels
 - **Underlying family:** canvg

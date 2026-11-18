@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v0.56.2`
+- **Upstream:** [source repository](<https://github.com/vmware/govmomi>) · [pkg.go.dev](<https://pkg.go.dev/github.com/vmware/govmomi/vim25/xml>)
 - **License:** Apache-2.0, BSD-3-Clause
 - **Parser family:** govmomi/vim25/xml fork of Go encoding/xml tokenizer
 - **Local input API:** `xml.NewDecoder(io.Reader).Token() over a local byte stream, using the govmomi/vim25/xml package`

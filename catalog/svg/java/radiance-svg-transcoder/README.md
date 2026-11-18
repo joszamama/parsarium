@@ -1,6 +1,7 @@
 # radiance-svg-transcoder — SVG / Java
 
 - **Pinned release:** `7.5.0`
+- **Upstream:** [source repository](<https://github.com/kirill-grouchnikov/radiance>) · [Maven Central](<https://central.sonatype.com/artifact/org.pushing-pixels/radiance-svg-transcoder>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** Generated Java2D drawing code with SVG dimensions and colors
 - **Underlying family:** Radiance SVG-to-Java2D transcoder using Apache Batik

@@ -1,6 +1,7 @@
 # point-cloud-utils — ASCII PLY / Python
 
 - **Pinned release:** `0.34.0`
+- **Upstream:** [source repository](<https://github.com/fwilliams/point-cloud-utils>) · [PyPI](<https://pypi.org/project/point-cloud-utils/>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY triangle vertices and face count
 - **Underlying family:** point-cloud-utils native PLY reader

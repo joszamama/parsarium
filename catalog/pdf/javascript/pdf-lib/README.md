@@ -1,6 +1,7 @@
 # pdf-lib — PDF / JavaScript
 
 - **Pinned release:** `1.17.1`
+- **Upstream:** [source repository](<https://github.com/Hopding/pdf-lib>) · [npm](<https://www.npmjs.com/package/pdf-lib>)
 - **License:** MIT
 - **Parsed scope:** page_metadata
 - **Underlying family:** pdf-lib

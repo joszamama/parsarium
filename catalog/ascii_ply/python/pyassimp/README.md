@@ -1,6 +1,7 @@
 # pyassimp — ASCII PLY / Python
 
 - **Pinned release:** `5.2.5`
+- **Upstream:** [source repository](<https://github.com/assimp/assimp>) · [PyPI](<https://pypi.org/project/pyassimp/>)
 - **License:** ISC
 - **Parsed scope:** ASCII PLY triangle vertices and face count
 - **Underlying family:** Assimp PLY importer

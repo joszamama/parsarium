@@ -1,6 +1,7 @@
 # pyunpack — ZIP / Python
 
 - **Pinned release:** `0.3`
+- **Upstream:** [source repository](<https://github.com/ponty/pyunpack>) · [PyPI](<https://pypi.org/project/pyunpack/>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** DEFLATE ZIP entry name and content
 - **Underlying family:** pyunpack via CPython zipfile

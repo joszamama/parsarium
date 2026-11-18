@@ -1,6 +1,7 @@
 # github.com/cloudwego/hertz/pkg/protocol/http1/req — HTTP/1.1 / Go
 
 - **Pinned release:** `v0.10.6`
+- **Upstream:** [source repository](<https://github.com/cloudwego/hertz>) · [pkg.go.dev](<https://pkg.go.dev/github.com/cloudwego/hertz/pkg/protocol/http1/req>)
 - **License:** Apache-2.0
 - **Parsed scope:** request message
 - **Underlying family:** Hertz / fasthttp lineage

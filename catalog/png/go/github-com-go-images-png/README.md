@@ -1,6 +1,7 @@
 # github.com/go-images/png — PNG / Go
 
 - **Pinned release:** `v0.2.0`
+- **Upstream:** [source repository](<https://github.com/go-images/png>) · [pkg.go.dev](<https://pkg.go.dev/github.com/go-images/png>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** pixels
 - **Underlying family:** Go image/png fork

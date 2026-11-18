@@ -1,6 +1,7 @@
 # jszip — ZIP / JavaScript
 
 - **Pinned release:** `3.10.2`
+- **Upstream:** [source repository](<https://github.com/Stuk/jszip>) · [npm](<https://www.npmjs.com/package/jszip>)
 - **License:** MIT OR GPL-3.0-or-later
 - **Parsed scope:** entries_and_content
 - **Underlying family:** JSZip

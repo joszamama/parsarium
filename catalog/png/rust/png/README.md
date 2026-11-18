@@ -1,6 +1,7 @@
 # png — PNG / Rust
 
 - **Pinned release:** `0.18.1`
+- **Upstream:** [source repository](<https://github.com/image-rs/image-png>) · [crates.io](<https://crates.io/crates/png>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** Decoded PNG dimensions and first pixel
 - **Underlying family:** image-rs PNG lineage

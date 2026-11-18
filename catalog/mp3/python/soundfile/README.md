@@ -1,6 +1,7 @@
 # soundfile — MP3 / Python
 
 - **Pinned release:** `0.14.0`
+- **Upstream:** [source repository](<https://github.com/bastibe/python-soundfile>) · [PyPI](<https://pypi.org/project/soundfile/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** MP3 header, frame count
 - **Underlying family:** libsndfile MP3 decoder

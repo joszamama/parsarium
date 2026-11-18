@@ -1,6 +1,7 @@
 # bit7z — ZIP / C++
 
 - **Pinned release:** `4.1.0`
+- **Upstream:** [source repository](<https://github.com/rikyoz/bit7z>)
 - **License:** MPL-2.0
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** bit7z wrapper over SevenZip ZIP reader

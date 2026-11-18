@@ -8,16 +8,16 @@ Pilot cell with ten verified third-party paths: saxes 6.0.0, jsdom 31.0.1, sax 1
 
 ## Third-party parsers
 
-- [saxes](saxes/README.md) — verified Docker harness
-- [jsdom](jsdom/README.md) — verified Docker harness
-- [htmlparser2](htmlparser2/README.md) — verified Docker harness
-- [sax](sax/README.md) — verified Docker harness
-- [fast-xml-parser](fast-xml-parser/README.md) — verified Docker harness
-- [@xmldom/xmldom](xmldom-xmldom/README.md) — verified Docker harness
-- [xml2js](xml2js/README.md) — verified Docker harness
-- [xml-js](xml-js/README.md) — verified Docker harness
-- [xmldoc](xmldoc/README.md) — verified Docker harness
-- [@xml-tools/parser](xml-tools-parser/README.md) — verified Docker harness
+- [saxes](saxes/README.md) — verified Docker harness · [source repository](<https://github.com/lddubeau/saxes>) · [npm](<https://www.npmjs.com/package/saxes>)
+- [jsdom](jsdom/README.md) — verified Docker harness · [source repository](<https://github.com/jsdom/jsdom>) · [npm](<https://www.npmjs.com/package/jsdom>)
+- [htmlparser2](htmlparser2/README.md) — verified Docker harness · [source repository](<https://github.com/fb55/htmlparser2>) · [npm](<https://www.npmjs.com/package/htmlparser2>)
+- [sax](sax/README.md) — verified Docker harness · [source repository](<https://github.com/isaacs/sax-js>) · [npm](<https://www.npmjs.com/package/sax>)
+- [fast-xml-parser](fast-xml-parser/README.md) — verified Docker harness · [source repository](<https://github.com/NaturalIntelligence/fast-xml-parser>) · [npm](<https://www.npmjs.com/package/fast-xml-parser>)
+- [@xmldom/xmldom](xmldom-xmldom/README.md) — verified Docker harness · [source repository](<https://github.com/xmldom/xmldom>) · [npm](<https://www.npmjs.com/package/@xmldom/xmldom>)
+- [xml2js](xml2js/README.md) — verified Docker harness · [source repository](<https://github.com/Leonidas-from-XIV/node-xml2js>) · [npm](<https://www.npmjs.com/package/xml2js>)
+- [xml-js](xml-js/README.md) — verified Docker harness · [source repository](<https://github.com/nashwaan/xml-js>) · [npm](<https://www.npmjs.com/package/xml-js>)
+- [xmldoc](xmldoc/README.md) — verified Docker harness · [source repository](<https://github.com/nfarina/xmldoc>) · [npm](<https://www.npmjs.com/package/xmldoc>)
+- [@xml-tools/parser](xml-tools-parser/README.md) — verified Docker harness · [source repository](<https://github.com/SAP/app-studio-toolkit>) · [npm](<https://www.npmjs.com/package/@xml-tools/parser>)
 
 ## Standard and runtime APIs
 

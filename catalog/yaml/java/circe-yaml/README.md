@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.16.1`
+- **Upstream:** [source repository](<https://github.com/circe/circe-yaml>) · [Maven Central](<https://central.sonatype.com/artifact/io.circe/circe-yaml_2.13>)
 - **License:** Apache-2.0
 - **Parser family:** SnakeYAML via circe-yaml (Scala wrapper: SnakeYAML 2.2 compose plus circe-yaml node-to-Json conversion)
 - **Local input API:** `io.circe.yaml.parser.parse(Reader) over Files.newBufferedReader(Path, UTF-8)`

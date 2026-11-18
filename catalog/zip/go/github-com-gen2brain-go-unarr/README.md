@@ -1,6 +1,7 @@
 # github.com/gen2brain/go-unarr — ZIP / Go
 
 - **Pinned release:** `v0.2.4`
+- **Upstream:** [source repository](<https://github.com/gen2brain/go-unarr>) · [pkg.go.dev](<https://pkg.go.dev/github.com/gen2brain/go-unarr>)
 - **License:** Zlib
 - **Parsed scope:** entry_name+decompressed_text
 - **Underlying family:** unarr archive backend

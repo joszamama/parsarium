@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.0`
+- **Upstream:** [source repository](<https://github.com/mauricelambert/PyAsyncDNS>) · [PyPI](<https://pypi.org/project/pyasyncdns/>)
 - **License:** GPL-3.0-or-later
 - **Parser family:** PyAsyncDNS (codec.py DNSCodec.decode, decode_name and per-type RDATA decoders over datatypes.py)
 - **Local input API:** `PyAsyncDNS.codec.DNSCodec().decode(data: bytes) -> DNSMessage (also the module-level PyAsyncDNS.codec.codec instance)`

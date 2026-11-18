@@ -1,6 +1,7 @@
 # jai-imageio-core — ASCII PNM / Java
 
 - **Pinned release:** `1.4.0`
+- **Upstream:** [source repository](<https://github.com/jai-imageio/jai-imageio-core>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.jai-imageio/jai-imageio-core>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** ASCII PPM dimensions and red/green pixels
 - **Underlying family:** JAI ImageIO PNM plugin

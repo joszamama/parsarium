@@ -1,6 +1,7 @@
 # jaffree — ASCII PNM / Java
 
 - **Pinned release:** `2024.08.29`
+- **Upstream:** [source repository](<https://github.com/kokorin/Jaffree>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.kokorin.jaffree/jaffree>)
 - **License:** Apache-2.0
 - **Parsed scope:** ASCII P3 PPM codec and 2x1 dimensions parsed from FFprobe stream
 - **Underlying family:** Jaffree wrapper over local FFprobe/FFmpeg

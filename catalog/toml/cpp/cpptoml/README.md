@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.1.1`
+- **Upstream:** [source repository](<https://github.com/skystrife/cpptoml>) · [Debian](<https://tracker.debian.org/pkg/cpptoml>)
 - **License:** MIT
 - **Parser family:** cpptoml (skystrife)
 - **Local input API:** `cpptoml::parser(std::istream&).parse() -> std::shared_ptr<cpptoml::table> (throws cpptoml::parse_exception), walked through cpptoml::base is_table/is_array/is_table_array and as<T>() for std::string, int64_t, double, bool, local_date, local_time, local_datetime and offset_datetime`

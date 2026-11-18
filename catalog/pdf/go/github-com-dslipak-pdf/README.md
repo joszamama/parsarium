@@ -1,6 +1,7 @@
 # github.com/dslipak/pdf — PDF / Go
 
 - **Pinned release:** `v0.0.2`
+- **Upstream:** [source repository](<https://github.com/dslipak/pdf>) · [pkg.go.dev](<https://pkg.go.dev/github.com/dslipak/pdf>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** page count
 - **Underlying family:** rsc PDF reader lineage

@@ -1,6 +1,7 @@
 # waveadapter — WAV / Rust
 
 - **Pinned release:** `0.3.1`
+- **Upstream:** [source repository](<https://github.com/HEnquist/waveadapter>) · [crates.io](<https://crates.io/crates/waveadapter>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** WAV metadata and declared frame length
 - **Underlying family:** waveadapter reader

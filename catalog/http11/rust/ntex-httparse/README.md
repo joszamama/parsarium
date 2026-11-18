@@ -1,6 +1,7 @@
 # ntex-httparse — HTTP/1.1 / Rust
 
 - **Pinned release:** `2.4.0`
+- **Upstream:** [source repository](<https://github.com/ntex-rs/ntex-httparse>) · [crates.io](<https://crates.io/crates/ntex-httparse>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** request line: method, target, HTTP minor version
 - **Underlying family:** ntex-httparse fork

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.2.0`
+- **Upstream:** [source repository](<https://github.com/bourumir-wyngs/granit-parser>) · [crates.io](<https://crates.io/crates/granit-parser>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** yaml-rust lineage: granit-parser started as a fork of saphyr-parser and is maintained independently (README); 1,125 of its 5,855 distinct non-test source lines longer than 25 characters also occur in saphyr-parser 0.3.4 (19.2%; 59.6% of saphyr-parser's 1,889). It is the event parser under the selected serde-saphyr.
 - **Local input API:** `granit_parser::Parser::new_from_str(&str) and Parser::next_event() -> Option<Result<(Event, Span), ScanError>>; Event::{StreamStart, DocumentStart, Scalar(text, ScalarStyle, anchor_id, tag), SequenceStart, MappingStart, Alias(anchor_id), ...}`

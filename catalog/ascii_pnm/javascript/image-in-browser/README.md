@@ -1,6 +1,7 @@
 # image-in-browser — ASCII PNM / JavaScript
 
 - **Pinned release:** `3.7.0`
+- **Upstream:** [source repository](<https://github.com/yegor-pelykh/image-in-browser>) · [npm](<https://www.npmjs.com/package/image-in-browser>)
 - **License:** MIT
 - **Parsed scope:** P3 RGB pixels and dimensions
 - **Underlying family:** image-in-browser PNM decoder

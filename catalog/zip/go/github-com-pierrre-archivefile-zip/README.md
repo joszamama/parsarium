@@ -1,6 +1,7 @@
 # github.com/pierrre/archivefile/zip — ZIP / Go
 
 - **Pinned release:** `v0.0.0-20170218184037-e2d100bc74f5`
+- **Upstream:** [source repository](<https://github.com/pierrre/archivefile>) · [pkg.go.dev](<https://pkg.go.dev/github.com/pierrre/archivefile/zip>)
 - **License:** MIT
 - **Parsed scope:** entry_name+decompressed_text
 - **Underlying family:** Go archive/zip wrapper

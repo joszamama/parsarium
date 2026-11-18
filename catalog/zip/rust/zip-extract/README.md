@@ -1,6 +1,7 @@
 # zip-extract — ZIP / Rust
 
 - **Pinned release:** `0.4.1`
+- **Upstream:** [source repository](<https://github.com/MCOfficer/zip-extract>) · [crates.io](<https://crates.io/crates/zip-extract>)
 - **License:** MIT
 - **Parsed scope:** Extracted entry name and text
 - **Underlying family:** zip-rs lineage

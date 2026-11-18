@@ -1,6 +1,7 @@
 # h2o — HTTP/1.1 / C++
 
 - **Pinned release:** `2.2.6`
+- **Upstream:** [source repository](<https://github.com/h2o/h2o>) · [Debian](<https://tracker.debian.org/pkg/h2o>)
 - **License:** MIT
 - **Parsed scope:** HTTP/1.1 GET request method, target, version and headers from local byte buffer via H2O-bundled parser
 - **Underlying family:** H2O 2.2.6 bundles PicoHTTPParser as its HTTP/1 parser; separate tagged H2O package distribution but same underlying parser family as h2o/picohttpparser 1.5, not an independent engine

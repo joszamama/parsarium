@@ -1,6 +1,7 @@
 # github.com/alfg/mp4 — MP4 / Go
 
 - **Pinned release:** `v0.0.0-20210728035756-55ea58c08aeb`
+- **Upstream:** [source repository](<https://github.com/alfg/mp4>) · [pkg.go.dev](<https://pkg.go.dev/github.com/alfg/mp4>)
 - **License:** MIT
 - **Parsed scope:** major brand
 - **Underlying family:** alfg MP4 reader

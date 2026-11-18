@@ -1,6 +1,7 @@
 # plyfile — ASCII PLY / Python
 
 - **Pinned release:** `1.1.5`
+- **Upstream:** [source repository](<https://github.com/dranjan/python-plyfile>) · [PyPI](<https://pypi.org/project/plyfile/>)
 - **License:** GPL-3.0-or-later
 - **Parsed scope:** ASCII PLY triangle vertices and face count
 - **Underlying family:** plyfile PLY reader

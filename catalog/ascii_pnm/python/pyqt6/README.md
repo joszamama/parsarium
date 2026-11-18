@@ -1,6 +1,7 @@
 # PyQt6 — ASCII PNM / Python
 
 - **Pinned release:** `6.12.0`
+- **Upstream:** [PyPI](<https://pypi.org/project/PyQt6/>)
 - **License:** GPL-3.0-only
 - **Parsed scope:** P3 pixels
 - **Underlying family:** Qt PPM image plugin

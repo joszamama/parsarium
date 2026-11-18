@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `20260814`
+- **Upstream:** [source repository](<https://github.com/stleary/JSON-java>) · [Maven Central](<https://central.sonatype.com/artifact/org.json/json>)
 - **License:** Public Domain
 - **Parser family:** org.json JSONTokener with JSONObject/JSONArray builders
 - **Local input API:** `new JSONTokener(InputStreamReader(FileInputStream, UTF_8), new JSONParserConfiguration().withStrictMode()).nextValue(); nextClean() checks end of local document`

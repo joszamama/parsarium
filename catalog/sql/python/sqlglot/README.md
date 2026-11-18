@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `30.33.0`
+- **Upstream:** [source repository](<https://github.com/tobymao/sqlglot>) · [PyPI](<https://pypi.org/project/sqlglot/>)
 - **License:** MIT
 - **Parser family:** sqlglot pure-Python tokenizer and recursive-descent parser
 - **Local input API:** `sqlglot.parse(local SQL text, read=None) -> list of Expression trees`

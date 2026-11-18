@@ -1,6 +1,7 @@
 # audioread — MP3 / Python
 
 - **Pinned release:** `3.1.0`
+- **Upstream:** [source repository](<https://github.com/beetbox/audioread>) · [PyPI](<https://pypi.org/project/audioread/>)
 - **License:** MIT
 - **Parsed scope:** MP3 duration and audio properties
 - **Underlying family:** audioread via FFmpeg

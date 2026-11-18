@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.14.1`
+- **Upstream:** [source repository](<https://github.com/tobilg/polyglot>) · [crates.io](<https://crates.io/crates/polyglot-sql>)
 - **License:** MIT
 - **Parser family:** polyglot-sql tokenizer and recursive-descent parser (sqlglot-style)
 - **Local input API:** `polyglot_sql::parse(local UTF-8 text, DialectType::Generic) -> Vec<Expression>`

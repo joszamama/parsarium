@@ -1,6 +1,7 @@
 # kuba-zip — ZIP / C++
 
 - **Pinned release:** `0.3.2`
+- **Upstream:** [source repository](<https://github.com/kuba--/zip>)
 - **License:** Unlicense
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** kuba-zip wrapper over bundled miniz

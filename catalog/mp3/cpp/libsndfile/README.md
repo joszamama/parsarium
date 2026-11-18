@@ -1,6 +1,7 @@
 # libsndfile — MP3 / C++
 
 - **Pinned release:** `1.2.2`
+- **Upstream:** [source repository](<https://github.com/libsndfile/libsndfile>) · [Debian](<https://tracker.debian.org/pkg/libsndfile>)
 - **License:** LGPL-2.1-or-later
 - **Parsed scope:** ID3v2 title, MPEG Layer III sample rate/channels/frame count, and one decoded audio frame
 - **Underlying family:** libsndfile MPEG frontend over libmpg123 decoder and ID3v2 reader

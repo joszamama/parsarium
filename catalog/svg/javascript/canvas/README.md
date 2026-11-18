@@ -1,6 +1,7 @@
 # canvas — SVG / JavaScript
 
 - **Pinned release:** `3.2.3`
+- **Upstream:** [source repository](<https://github.com/Automattic/node-canvas>) · [npm](<https://www.npmjs.com/package/canvas>)
 - **License:** MIT
 - **Parsed scope:** pixels
 - **Underlying family:** Cairo/librsvg

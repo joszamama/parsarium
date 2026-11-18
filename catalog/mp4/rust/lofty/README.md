@@ -1,6 +1,7 @@
 # lofty — MP4 / Rust
 
 - **Pinned release:** `0.25.5`
+- **Upstream:** [source repository](<https://github.com/Serial-ATA/lofty-rs>) · [crates.io](<https://crates.io/crates/lofty>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** MP4 title metadata
 - **Underlying family:** Lofty MP4 metadata parser

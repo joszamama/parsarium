@@ -1,6 +1,7 @@
 # icepdf-core — PDF / Java
 
 - **Pinned release:** `6.2.2`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/org.icepdf.os/icepdf-core>)
 - **License:** Apache-2.0
 - **Parsed scope:** PDF page count
 - **Underlying family:** ICEpdf 6 core

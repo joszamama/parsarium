@@ -1,6 +1,7 @@
 # karriere/pdf-merge — PDF / PHP
 
 - **Pinned release:** `v3.4.0`
+- **Upstream:** [source repository](<https://github.com/karriereat/pdf-merge>) · [Packagist](<https://packagist.org/packages/karriere/pdf-merge>)
 - **License:** Apache-2.0
 - **Parsed scope:** One imported page object in emitted PDF
 - **Underlying family:** TCPDI FPDI-derived PHP PDF parser

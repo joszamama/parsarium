@@ -1,6 +1,7 @@
 # mutagen — MP4 / Python
 
 - **Pinned release:** `1.48.1`
+- **Upstream:** [source repository](<https://github.com/quodlibet/mutagen>) · [PyPI](<https://pypi.org/project/mutagen/>)
 - **License:** GPL-2.0-or-later
 - **Parsed scope:** MP4 title metadata
 - **Underlying family:** Mutagen MP4 parser

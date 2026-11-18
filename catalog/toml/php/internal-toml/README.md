@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.1.3`
+- **Upstream:** [source repository](<https://github.com/php-internal/toml>) · [Packagist](<https://packagist.org/packages/internal/toml>)
 - **License:** BSD-3-Clause
 - **Parser family:** internal/toml (php-internal/toml) Lexer, recursive-descent Parser and AST
 - **Local input API:** `Internal\Toml\Toml::parse(string $toml): Document (documented 'Working with AST'), walked through Document->nodes (Entry, Table, TableArray with Key->segments) and typed value nodes StringValue, IntegerValue, FloatValue, BooleanValue, DateTimeValue {value: DateTimeImmutable, type: DateTimeType::OffsetDatetime|LocalDatetime|LocalDate}, LocalTimeValue {value: string}, ArrayValue and InlineTableValue; the walk's PHP values must equal Document::toArray(). Toml::parseToArray(string) is cross-checked against Document::toArray()`

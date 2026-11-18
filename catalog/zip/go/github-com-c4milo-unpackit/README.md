@@ -1,6 +1,7 @@
 # github.com/c4milo/unpackit — ZIP / Go
 
 - **Pinned release:** `v1.0.0`
+- **Upstream:** [source repository](<https://github.com/c4milo/unpackit>) · [pkg.go.dev](<https://pkg.go.dev/github.com/c4milo/unpackit>)
 - **License:** MPL-2.0
 - **Parsed scope:** entry_name+decompressed_text
 - **Underlying family:** Go archive/zip wrapper

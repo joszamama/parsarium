@@ -1,6 +1,7 @@
 # github.com/yapingcat/gomedia/go-mp4 — MP4 / Go
 
 - **Pinned release:** `v0.0.0-20240906162731-17feea57090c`
+- **Upstream:** [source repository](<https://github.com/yapingcat/gomedia>) · [pkg.go.dev](<https://pkg.go.dev/github.com/yapingcat/gomedia/go-mp4>)
 - **License:** MIT
 - **Parsed scope:** track count
 - **Underlying family:** gomedia MP4 lineage

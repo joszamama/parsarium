@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.15.1`
+- **Upstream:** [source repository](<https://github.com/akheron/jansson>) · [Debian](<https://tracker.debian.org/pkg/jansson>)
 - **License:** MIT
 - **Parser family:** jansson recursive-descent decoder (src/load.c)
 - **Local input API:** `json_loadb(const char *buffer, size_t buflen, size_t flags, json_error_t *error)`

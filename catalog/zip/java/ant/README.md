@@ -1,6 +1,7 @@
 # ant — ZIP / Java
 
 - **Pinned release:** `1.10.18`
+- **Upstream:** [source repository](<https://gitbox.apache.org/repos/asf?p=ant.git>) · [Maven Central](<https://central.sonatype.com/artifact/org.apache.ant/ant>)
 - **License:** Apache-2.0
 - **Parsed scope:** ZIP entry name and decompressed content from a local archive
 - **Underlying family:** Apache Ant ZIP reader; historically related to Commons Compress

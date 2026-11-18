@@ -1,6 +1,7 @@
 # terrio — ASCII PLY / Rust
 
 - **Pinned release:** `0.8.0`
+- **Upstream:** [source repository](<https://github.com/opengeos/terrio>) · [crates.io](<https://crates.io/crates/terrio>)
 - **License:** MIT AND MPL-2.0 AND Apache-2.0
 - **Parsed scope:** ASCII PLY vertex cloud
 - **Underlying family:** terrio PLY reader

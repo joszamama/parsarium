@@ -1,6 +1,7 @@
 # jhove-modules — WAV / Java
 
 - **Pinned release:** `1.20.1`
+- **Upstream:** [source repository](<https://github.com/openpreserve/jhove>) · [Maven Central](<https://central.sonatype.com/artifact/org.openpreservation.jhove/jhove-modules>)
 - **License:** LGPL-2.1
 - **Parsed scope:** WAVE identification, sample rate and channels
 - **Underlying family:** JHOVE WAVE-hul module

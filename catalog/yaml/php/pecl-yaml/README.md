@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.3.0`
+- **Upstream:** [source repository](<https://github.com/php/pecl-file_formats-yaml>) · [Packagist](<https://packagist.org/packages/pecl/yaml>)
 - **License:** MIT
 - **Parser family:** libyaml (C scanner/parser) via the PECL yaml extension
 - **Local input API:** `yaml_parse(string $input, 0, $ndocs, [YAML_MAP_TAG => fn (array $m) => (object) $m]) over local bytes; mappings return as stdClass objects in source order and sequences as PHP lists, walked into the shared typed tree; the harness requires ndocs = 1`

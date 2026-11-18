@@ -8,16 +8,16 @@ Pilot cell: ten high-download package/API paths have valid nested-object and nes
 
 ## Third-party parsers
 
-- [json5](json5/README.md) — verified Docker harness
-- [jsonc-parser](jsonc-parser/README.md) — verified Docker harness
-- [json-bigint](json-bigint/README.md) — verified Docker harness
-- [jsonparse](jsonparse/README.md) — verified Docker harness
-- [stream-json](stream-json/README.md) — verified Docker harness
-- [JSONStream](jsonstream/README.md) — verified Docker harness
-- [@humanwhocodes/momoa](humanwhocodes-momoa/README.md) — verified Docker harness
-- [bfj](bfj/README.md) — verified Docker harness
-- [@streamparser/json](streamparser-json/README.md) — verified Docker harness
-- [lossless-json](lossless-json/README.md) — verified Docker harness
+- [json5](json5/README.md) — verified Docker harness · [source repository](<https://github.com/json5/json5>) · [npm](<https://www.npmjs.com/package/json5>)
+- [jsonc-parser](jsonc-parser/README.md) — verified Docker harness · [source repository](<https://github.com/microsoft/node-jsonc-parser>) · [npm](<https://www.npmjs.com/package/jsonc-parser>)
+- [json-bigint](json-bigint/README.md) — verified Docker harness · [source repository](<https://github.com/sidorares/json-bigint>) · [npm](<https://www.npmjs.com/package/json-bigint>)
+- [jsonparse](jsonparse/README.md) — verified Docker harness · [source repository](<https://github.com/creationix/jsonparse>) · [npm](<https://www.npmjs.com/package/jsonparse>)
+- [stream-json](stream-json/README.md) — verified Docker harness · [source repository](<https://github.com/uhop/stream-json>) · [npm](<https://www.npmjs.com/package/stream-json>)
+- [JSONStream](jsonstream/README.md) — verified Docker harness · [source repository](<https://github.com/dominictarr/JSONStream>) · [npm](<https://www.npmjs.com/package/JSONStream>)
+- [@humanwhocodes/momoa](humanwhocodes-momoa/README.md) — verified Docker harness · [source repository](<https://github.com/humanwhocodes/momoa>) · [npm](<https://www.npmjs.com/package/@humanwhocodes/momoa>)
+- [bfj](bfj/README.md) — verified Docker harness · [source repository](<https://gitlab.com/philbooth/bfj>) · [npm](<https://www.npmjs.com/package/bfj>)
+- [@streamparser/json](streamparser-json/README.md) — verified Docker harness · [source repository](<https://github.com/juanjoDiaz/streamparser-json>) · [npm](<https://www.npmjs.com/package/@streamparser/json>)
+- [lossless-json](lossless-json/README.md) — verified Docker harness · [source repository](<https://github.com/josdejong/lossless-json>) · [npm](<https://www.npmjs.com/package/lossless-json>)
 
 ## Standard and runtime APIs
 

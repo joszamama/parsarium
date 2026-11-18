@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `4.14.0`
+- **Upstream:** [source repository](<https://github.com/veewee/xml>) · [Packagist](<https://packagist.org/packages/veewee/xml>)
 - **License:** MIT
 - **Parser family:** libxml2 via PHP Dom\XMLDocument, shared with the standard path, sabre/xml, symfony/dom-crawler and symfony/serializer
 - **Local input API:** `VeeWee\Xml\Encoding\xml_decode(string $xml, callable ...$configurators): array, documented as "Decodes an XML string into an array". It loads the text with Dom\XMLDocument::createFromString($xml, 0) inside disallow_issues (any libxml error or warning throws, wrapped as EncodingException) and converts the document element into veewee's PHP array format. The same loader backs Dom\Document::fromXmlString; Dom\Document::fromXmlFile and Reader::fromXmlFile/fromXmlString (XMLReader) are the documented file and streaming entry points`

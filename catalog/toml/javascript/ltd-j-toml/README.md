@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.38.0`
+- **Upstream:** [source repository](<https://github.com/LongTengDao/j-toml>) · [npm](<https://www.npmjs.com/package/@ltd/j-toml>)
 - **License:** LGPL-3.0
 - **Parser family:** j-toml (LongTengDao; own line-iterator TOML parser)
 - **Local input API:** `TOML.parse[1.0](text, { joiner: '\n', bigint: true }) on local bytes decoded as strict UTF-8 text; returns nested tables with BigInt integers, Number floats and OffsetDateTime/LocalDateTime/LocalDate/LocalTime objects`

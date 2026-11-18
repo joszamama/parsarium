@@ -1,6 +1,7 @@
 # github.com/deepch/vdk/format/mp4 — MP4 / Go
 
 - **Pinned release:** `v0.0.27`
+- **Upstream:** [source repository](<https://github.com/deepch/vdk>) · [pkg.go.dev](<https://pkg.go.dev/github.com/deepch/vdk/format/mp4>)
 - **License:** MIT
 - **Parsed scope:** stream count
 - **Underlying family:** joy4 MP4 lineage

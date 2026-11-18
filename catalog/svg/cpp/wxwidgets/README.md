@@ -1,6 +1,7 @@
 # wxwidgets — SVG / C++
 
 - **Pinned release:** `3.3.4`
+- **Upstream:** [source repository](<https://github.com/wxWidgets/wxWidgets>)
 - **License:** LGPL-2.0-or-later WITH WxWindows-exception-3.1
 - **Parsed scope:** SVG dimensions and two rendered RGB pixels
 - **Underlying family:** wxWidgets wxBitmapBundle over bundled NanoSVG

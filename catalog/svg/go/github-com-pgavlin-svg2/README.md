@@ -1,6 +1,7 @@
 # github.com/pgavlin/svg2 — SVG / Go
 
 - **Pinned release:** `v0.0.0-20210919231505-4ace7308edc1`
+- **Upstream:** [source repository](<https://github.com/pgavlin/svg2>) · [pkg.go.dev](<https://pkg.go.dev/github.com/pgavlin/svg2>)
 - **License:** MIT
 - **Parsed scope:** height, width
 - **Underlying family:** pgavlin SVG2 decoder

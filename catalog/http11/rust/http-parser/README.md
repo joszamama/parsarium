@@ -1,6 +1,7 @@
 # http_parser — HTTP/1.1 / Rust
 
 - **Pinned release:** `0.0.2`
+- **Upstream:** [source repository](<https://github.com/magic003/http-parser-rs>) · [crates.io](<https://crates.io/crates/http_parser>)
 - **License:** MIT
 - **Parsed scope:** streaming request: method, target, version, consumed bytes
 - **Underlying family:** node/http-parser Rust port

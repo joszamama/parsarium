@@ -1,6 +1,7 @@
 # christophwurst/id3parser — MP3 / PHP
 
 - **Pinned release:** `v0.1.4`
+- **Upstream:** [source repository](<https://github.com/ChristophWurst/ID3Parser>) · [Packagist](<https://packagist.org/packages/christophwurst/id3parser>)
 - **License:** GPL-3.0-or-later
 - **Parsed scope:** ID3v2.3 title, artist, album, and major version
 - **Underlying family:** getID3-derived ID3 tag parser

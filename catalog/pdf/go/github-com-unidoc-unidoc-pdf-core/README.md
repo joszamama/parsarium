@@ -1,6 +1,7 @@
 # github.com/unidoc/unidoc/pdf/core — PDF / Go
 
 - **Pinned release:** `v2.2.0+incompatible`
+- **Upstream:** [source repository](<https://github.com/unidoc/unidoc>) · [pkg.go.dev](<https://pkg.go.dev/github.com/unidoc/unidoc/pdf/core>)
 - **License:** AGPL-3.0 or commercial (AGPL option used for open-source qualification)
 - **Parsed scope:** PDF indirect object count
 - **Underlying family:** UniDoc core

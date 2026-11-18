@@ -6,16 +6,16 @@
 
 ## Third-party parsers
 
-- [plyfile](plyfile/README.md) — Docker harness ready
-- [trimesh](trimesh/README.md) — Docker harness ready
-- [meshio](meshio/README.md) — Docker harness ready
-- [pyntcloud](pyntcloud/README.md) — Docker harness ready
-- [pyvista](pyvista/README.md) — Docker harness ready
-- [vtk](vtk/README.md) — Docker harness ready
-- [open3d](open3d/README.md) — Docker harness ready
-- [point-cloud-utils](point-cloud-utils/README.md) — Docker harness ready
-- [numpy-stl](numpy-stl/README.md) — Docker harness ready
-- [pyassimp](pyassimp/README.md) — Docker harness ready
+- [plyfile](plyfile/README.md) — Docker harness ready · [source repository](<https://github.com/dranjan/python-plyfile>) · [PyPI](<https://pypi.org/project/plyfile/>)
+- [trimesh](trimesh/README.md) — Docker harness ready · [source repository](<https://github.com/mikedh/trimesh>) · [PyPI](<https://pypi.org/project/trimesh/>)
+- [meshio](meshio/README.md) — Docker harness ready · [source repository](<https://github.com/nschloe/meshio>) · [PyPI](<https://pypi.org/project/meshio/>)
+- [pyntcloud](pyntcloud/README.md) — Docker harness ready · [source repository](<https://github.com/daavoo/pyntcloud>) · [PyPI](<https://pypi.org/project/pyntcloud/>)
+- [pyvista](pyvista/README.md) — Docker harness ready · [source repository](<https://github.com/pyvista/pyvista>) · [PyPI](<https://pypi.org/project/pyvista/>)
+- [vtk](vtk/README.md) — Docker harness ready · [PyPI](<https://pypi.org/project/vtk/>)
+- [open3d](open3d/README.md) — Docker harness ready · [source repository](<https://github.com/isl-org/Open3D>) · [PyPI](<https://pypi.org/project/open3d/>)
+- [point-cloud-utils](point-cloud-utils/README.md) — Docker harness ready · [source repository](<https://github.com/fwilliams/point-cloud-utils>) · [PyPI](<https://pypi.org/project/point-cloud-utils/>)
+- [numpy-stl](numpy-stl/README.md) — Docker harness ready · [source repository](<https://github.com/wolph/numpy-stl>) · [PyPI](<https://pypi.org/project/numpy-stl/>)
+- [pyassimp](pyassimp/README.md) — Docker harness ready · [source repository](<https://github.com/assimp/assimp>) · [PyPI](<https://pypi.org/project/pyassimp/>)
 
 ## Standard and runtime APIs
 

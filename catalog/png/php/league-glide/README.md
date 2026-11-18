@@ -1,6 +1,7 @@
 # league/glide — PNG / PHP
 
 - **Pinned release:** `4.1.0`
+- **Upstream:** [source repository](<https://github.com/thephpleague/glide>) · [Packagist](<https://packagist.org/packages/league/glide>)
 - **License:** MIT
 - **Parsed scope:** decoded and re-encoded PNG dimensions
 - **Underlying family:** Intervention Image / PHP GD PNG decoder

@@ -1,6 +1,7 @@
 # verapdf-parser — PDF / Java
 
 - **Pinned release:** `1.30.4`
+- **Upstream:** [source repository](<https://github.com/veraPDF/veraPDF-parser>) · [Maven Central](<https://central.sonatype.com/artifact/org.verapdf/parser>)
 - **License:** MPL-2.0 OR GPL-3.0-or-later
 - **Parsed scope:** PDF page count
 - **Underlying family:** veraPDF parser

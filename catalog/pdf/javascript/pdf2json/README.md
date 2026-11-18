@@ -1,6 +1,7 @@
 # pdf2json — PDF / JavaScript
 
 - **Pinned release:** `4.1.1`
+- **Upstream:** [source repository](<https://github.com/modesty/pdf2json>) · [npm](<https://www.npmjs.com/package/pdf2json>)
 - **License:** Apache-2.0
 - **Parsed scope:** text
 - **Underlying family:** mozilla/pdf.js

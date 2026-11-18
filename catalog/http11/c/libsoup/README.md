@@ -1,6 +1,7 @@
 # libsoup — HTTP/1.1 / C
 
 - **Pinned release:** `3.8.1`
+- **Upstream:** [source repository](<https://gitlab.gnome.org/GNOME/libsoup>) · [Debian](<https://tracker.debian.org/pkg/libsoup>)
 - **License:** LGPL-2.0-or-later
 - **Parsed scope:** HTTP/1.1 GET request-head method, target, version and Host header from local byte buffer
 - **Underlying family:** GNOME libsoup 3 HTTP/1 request-head parser, independent from llhttp and PicoHTTPParser

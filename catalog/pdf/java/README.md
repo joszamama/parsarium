@@ -6,16 +6,16 @@
 
 ## Third-party parsers
 
-- [pdfbox](pdfbox/README.md) — Docker harness ready
-- [itextpdf](itextpdf/README.md) — Docker harness ready
-- [openpdf](openpdf/README.md) — Docker harness ready
-- [itext-kernel](itext-kernel/README.md) — Docker harness ready
-- [icepdf-core](icepdf-core/README.md) — Docker harness ready
-- [pdfbox-preflight](pdfbox-preflight/README.md) — Docker harness ready
-- [openpdf-renderer](openpdf-renderer/README.md) — Docker harness ready
-- [verapdf-parser](verapdf-parser/README.md) — Docker harness ready
-- [swinglabs-pdf-renderer](swinglabs-pdf-renderer/README.md) — Docker harness ready
-- [tess4j-pdfbox](tess4j-pdfbox/README.md) — Docker harness ready
+- [pdfbox](pdfbox/README.md) — Docker harness ready · [Maven Central](<https://central.sonatype.com/artifact/org.apache.pdfbox/pdfbox>)
+- [itextpdf](itextpdf/README.md) — Docker harness ready · [source repository](<https://github.com/itext/itextpdf>) · [Maven Central](<https://central.sonatype.com/artifact/com.itextpdf/itextpdf>)
+- [openpdf](openpdf/README.md) — Docker harness ready · [source repository](<https://github.com/LibrePDF/OpenPDF>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.librepdf/openpdf>)
+- [itext-kernel](itext-kernel/README.md) — Docker harness ready · [source repository](<https://github.com/itext/itext-java>) · [Maven Central](<https://central.sonatype.com/artifact/com.itextpdf/kernel>)
+- [icepdf-core](icepdf-core/README.md) — Docker harness ready · [Maven Central](<https://central.sonatype.com/artifact/org.icepdf.os/icepdf-core>)
+- [pdfbox-preflight](pdfbox-preflight/README.md) — Docker harness ready · [Maven Central](<https://central.sonatype.com/artifact/org.apache.pdfbox/preflight>)
+- [openpdf-renderer](openpdf-renderer/README.md) — Docker harness ready · [source repository](<https://github.com/LibrePDF/OpenPDF>) · [Maven Central](<https://central.sonatype.com/artifact/com.github.librepdf/openpdf-renderer>)
+- [verapdf-parser](verapdf-parser/README.md) — Docker harness ready · [source repository](<https://github.com/veraPDF/veraPDF-parser>) · [Maven Central](<https://central.sonatype.com/artifact/org.verapdf/parser>)
+- [swinglabs-pdf-renderer](swinglabs-pdf-renderer/README.md) — Docker harness ready · [Maven Central](<https://central.sonatype.com/artifact/org.swinglabs/pdf-renderer>)
+- [tess4j-pdfbox](tess4j-pdfbox/README.md) — Docker harness ready · [source repository](<https://github.com/nguyenq/tess4j>) · [Maven Central](<https://central.sonatype.com/artifact/net.sourceforge.tess4j/tess4j>)
 
 ## Standard and runtime APIs
 

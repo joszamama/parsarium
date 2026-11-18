@@ -1,6 +1,7 @@
 # assimp — ASCII PLY / C
 
 - **Pinned release:** `6.0.6`
+- **Upstream:** [source repository](<https://github.com/assimp/assimp>) · [Debian](<https://tracker.debian.org/pkg/assimp>)
 - **License:** BSD-3-Clause AND CC-PDDC AND MIT AND BSL-1.0 AND Unlicense AND Zlib
 - **Parsed scope:** three vertices and one triangular face from ASCII PLY
 - **Underlying family:** Assimp native PLY loader

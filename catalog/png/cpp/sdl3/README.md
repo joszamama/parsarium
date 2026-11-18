@@ -1,6 +1,7 @@
 # sdl3 — PNG / C++
 
 - **Pinned release:** `3.4.20`
+- **Upstream:** [source repository](<https://github.com/libsdl-org/SDL>)
 - **License:** Zlib
 - **Parsed scope:** pixels
 - **Underlying family:** SDL3 bundled stb_image PNG decoder

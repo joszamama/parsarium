@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.23.0`
+- **Upstream:** [source repository](<https://github.com/FasterXML/jackson-core>) · [Maven Central](<https://central.sonatype.com/artifact/com.fasterxml.jackson.core/jackson-core>)
 - **License:** Apache-2.0
 - **Parser family:** Jackson (jackson-core streaming parser)
 - **Local input API:** `JsonFactory.createParser(InputStream) over Files.newInputStream(Path), then JsonParser.nextToken()/getText()/getDoubleValue()`

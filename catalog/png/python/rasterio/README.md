@@ -1,6 +1,7 @@
 # rasterio — PNG / Python
 
 - **Pinned release:** `1.5.2`
+- **Upstream:** [source repository](<https://github.com/rasterio/rasterio>) · [PyPI](<https://pypi.org/project/rasterio/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** pixels
 - **Underlying family:** GDAL PNG

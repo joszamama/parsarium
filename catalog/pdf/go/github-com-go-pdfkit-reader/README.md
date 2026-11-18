@@ -1,6 +1,7 @@
 # github.com/go-pdfkit/reader — PDF / Go
 
 - **Pinned release:** `v0.10.0`
+- **Upstream:** [source repository](<https://github.com/go-pdfkit/reader>) · [pkg.go.dev](<https://pkg.go.dev/github.com/go-pdfkit/reader>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** page count
 - **Underlying family:** go-pdfkit reader family

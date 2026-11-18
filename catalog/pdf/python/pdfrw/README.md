@@ -1,6 +1,7 @@
 # pdfrw — PDF / Python
 
 - **Pinned release:** `0.4`
+- **Upstream:** [source repository](<https://github.com/pmaupin/pdfrw>) · [PyPI](<https://pypi.org/project/pdfrw/>)
 - **License:** MIT
 - **Parsed scope:** page count and document title
 - **Underlying family:** pdfrw parser

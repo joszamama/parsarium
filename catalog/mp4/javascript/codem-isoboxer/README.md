@@ -1,6 +1,7 @@
 # codem-isoboxer — MP4 / JavaScript
 
 - **Pinned release:** `0.3.10`
+- **Upstream:** [source repository](<https://github.com/Dash-Industry-Forum/codem-isoboxer>) · [npm](<https://www.npmjs.com/package/codem-isoboxer>)
 - **License:** MIT
 - **Parsed scope:** boxes+brand
 - **Underlying family:** codem-isoboxer

@@ -1,6 +1,7 @@
 # parse-raw-http — HTTP/1.1 / JavaScript
 
 - **Pinned release:** `0.0.1`
+- **Upstream:** [source repository](<https://github.com/andrewschaaf/node-parse-raw-http>) · [npm](<https://www.npmjs.com/package/parse-raw-http>)
 - **License:** MIT
 - **Parsed scope:** response
 - **Underlying family:** parse-raw-http

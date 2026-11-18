@@ -1,6 +1,7 @@
 # github.com/chenzhekl/goply — ASCII PLY / Go
 
 - **Pinned release:** `v0.0.0-20190930133256-258c2381defd`
+- **Upstream:** [source repository](<https://github.com/chenzhekl/goply>) · [pkg.go.dev](<https://pkg.go.dev/github.com/chenzhekl/goply>)
 - **License:** MIT
 - **Parsed scope:** ASCII PLY vertex and face counts
 - **Underlying family:** goply

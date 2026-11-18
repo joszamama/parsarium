@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.12.2`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/xerces/xercesImpl>)
 - **License:** Apache-2.0
 - **Parser family:** Apache Xerces2-J
 - **Local input API:** `new org.apache.xerces.parsers.DOMParser() with http://xml.org/sax/features/namespaces on; parse(InputSource(ByteArrayInputStream)); getDocument()`

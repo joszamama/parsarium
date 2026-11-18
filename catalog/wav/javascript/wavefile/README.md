@@ -1,6 +1,7 @@
 # wavefile — WAV / JavaScript
 
 - **Pinned release:** `11.0.0`
+- **Upstream:** [source repository](<https://github.com/rochars/wavefile>) · [npm](<https://www.npmjs.com/package/wavefile>)
 - **License:** MIT
 - **Parsed scope:** header
 - **Underlying family:** rochars/wavefile

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.1.1`
+- **Upstream:** [source repository](<https://github.com/lsongdev/node-dns>) · [npm](<https://www.npmjs.com/package/dns2>)
 - **License:** MIT
 - **Parser family:** dns2 own decoder (packet.js)
 - **Local input API:** `Packet.parse(buffer: Buffer) -> Packet`

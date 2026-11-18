@@ -1,6 +1,7 @@
 # github.com/daaku/go.zipexe — ZIP / Go
 
 - **Pinned release:** `v1.0.2`
+- **Upstream:** [source repository](<https://github.com/daaku/go.zipexe>) · [pkg.go.dev](<https://pkg.go.dev/github.com/daaku/go.zipexe>)
 - **License:** MIT
 - **Parsed scope:** entry_name+decompressed_text
 - **Underlying family:** Go archive/zip wrapper

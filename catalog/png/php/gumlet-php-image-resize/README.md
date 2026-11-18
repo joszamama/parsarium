@@ -1,6 +1,7 @@
 # gumlet/php-image-resize — PNG / PHP
 
 - **Pinned release:** `3.0.1`
+- **Upstream:** [source repository](<https://github.com/gumlet/php-image-resize>) · [Packagist](<https://packagist.org/packages/gumlet/php-image-resize>)
 - **License:** MIT
 - **Parsed scope:** decoded image dimensions
 - **Underlying family:** PHP GD PNG decoder

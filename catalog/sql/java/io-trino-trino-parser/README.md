@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `484`
+- **Upstream:** [source repository](<https://github.com/trinodb/trino>) · [Maven Central](<https://central.sonatype.com/artifact/io.trino/trino-parser>)
 - **License:** Apache-2.0
 - **Parser family:** Presto/Trino ANTLR4 SqlBase grammar (Trino branch)
 - **Local input API:** `new SqlParser().createStatement(local SQL text without its terminating semicolon) -> Statement`

@@ -1,6 +1,7 @@
 # scikit-image — ASCII PNM / Python
 
 - **Pinned release:** `0.26.0`
+- **Upstream:** [source repository](<https://github.com/scikit-image/scikit-image>) · [PyPI](<https://pypi.org/project/scikit-image/>)
 - **License:** BSD-3-Clause
 - **Parsed scope:** P3 pixels
 - **Underlying family:** scikit-image via ImageIO/Pillow PPM

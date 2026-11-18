@@ -1,6 +1,7 @@
 # github.com/hajimehoshi/ebiten/v2/audio/wav — WAV / Go
 
 - **Pinned release:** `v2.10.6`
+- **Upstream:** [source repository](<https://github.com/hajimehoshi/ebiten>) · [pkg.go.dev](<https://pkg.go.dev/github.com/hajimehoshi/ebiten/v2/audio/wav>)
 - **License:** Apache-2.0
 - **Parsed scope:** decoded_stereo_bytes
 - **Underlying family:** Ebitengine WAV decoder

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.3.0`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/net.sf.kxml/kxml2>)
 - **License:** BSD-style (org.kxml2 parser); public domain (bundled XmlPull API)
 - **Parser family:** kXML2 KXmlParser independent XML pull tokenizer
 - **Local input API:** `new org.kxml2.io.KXmlParser(); setFeature(FEATURE_PROCESS_NAMESPACES, true); setInput(Files.newInputStream(local Path), null); next() until END_DOCUMENT`

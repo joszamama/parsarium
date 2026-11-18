@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.15.4`
+- **Upstream:** [source repository](<https://gitlab.gnome.org/GNOME/libxml2>) · [Debian](<https://tracker.debian.org/pkg/libxml2>)
 - **License:** MIT
 - **Parser family:** libxml2 (GNOME libxml2, Daniel Veillard's parser)
 - **Local input API:** `xmlReaderForMemory(local bytes, size, NULL, "UTF-8", XML_PARSE_NONET | XML_PARSE_NO_XXE); xmlTextReaderRead loop; xmlTextReaderNodeType, xmlTextReaderConstNamespaceUri, xmlTextReaderConstLocalName, xmlTextReaderMoveToNextAttribute, xmlTextReaderConstValue, xmlTextReaderDepth`

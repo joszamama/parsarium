@@ -1,6 +1,7 @@
 # anyrender_svg — SVG / Rust
 
 - **Pinned release:** `0.15.0`
+- **Upstream:** [source repository](<https://github.com/DioxusLabs/anyrender>) · [crates.io](<https://crates.io/crates/anyrender_svg>)
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** SVG rendering scene commands
 - **Underlying family:** usvg lineage via anyrender_svg

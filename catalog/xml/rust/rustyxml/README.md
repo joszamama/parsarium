@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.3.0`
+- **Upstream:** [source repository](<https://github.com/Florob/RustyXML>) · [crates.io](<https://crates.io/crates/RustyXML>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** RustyXML (crate lib name xml; unrelated to the selected xml/xml-rs crate) own state-machine parser derived from ObjFW OFXMLParser per src/parser.rs; no runtime dependencies
 - **Local input API:** `xml::Parser::new() + Parser::feed_str(&str), then Iterator<Item = Result<xml::Event, ParserError>>; Event::ElementStart(StartTag { name, ns, prefix, attributes: HashMap<(String, Option<String>), String> }), ElementEnd, Characters, CDATA, Comment, PI`

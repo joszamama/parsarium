@@ -1,6 +1,7 @@
 # tess4j-pdfbox — PDF / Java
 
 - **Pinned release:** `5.20.0`
+- **Upstream:** [source repository](<https://github.com/nguyenq/tess4j>) · [Maven Central](<https://central.sonatype.com/artifact/net.sourceforge.tess4j/tess4j>)
 - **License:** Apache-2.0
 - **Parsed scope:** PDF page count
 - **Underlying family:** Tess4J PDF utility over PDFBox

@@ -1,6 +1,7 @@
 # php-ffmpeg/php-ffmpeg — ASCII PNM / PHP
 
 - **Pinned release:** `v1.4.0`
+- **Upstream:** [source repository](<https://github.com/PHP-FFMpeg/PHP-FFMpeg>) · [Packagist](<https://packagist.org/packages/php-ffmpeg/php-ffmpeg>)
 - **License:** MIT
 - **Parsed scope:** identified PPM codec and decoded dimensions
 - **Underlying family:** FFmpeg PPM decoder

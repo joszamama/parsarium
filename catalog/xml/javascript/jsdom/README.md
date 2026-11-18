@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `31.0.1`
+- **Upstream:** [source repository](<https://github.com/jsdom/jsdom>) · [npm](<https://www.npmjs.com/package/jsdom>)
 - **License:** MIT
 - **Parser family:** saxes XML 1.0 + Namespaces state machine (saxes 6.0.0) under jsdom's XML document builder
 - **Local input API:** `new JSDOM(text, {contentType: 'application/xml', virtualConsole}) on local bytes decoded with strict UTF-8 TextDecoder; jsdom's XML document parser runs new SaxesParser({xmlns: true, defaultXMLVersion: '1.0', forceXMLVersion: true}), throws a SyntaxError on the first saxes error, and builds the DOM; the adapter treats any jsdomError as fatal and reads window.document: element and attribute namespaceURI/localName, attribute order, and Text/CDATASection data in document order`

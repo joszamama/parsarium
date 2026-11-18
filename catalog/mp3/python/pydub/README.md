@@ -1,6 +1,7 @@
 # pydub — MP3 / Python
 
 - **Pinned release:** `0.25.1`
+- **Upstream:** [source repository](<https://github.com/jiaaro/pydub>) · [PyPI](<https://pypi.org/project/pydub/>)
 - **License:** MIT
 - **Parsed scope:** decoded duration and audio properties
 - **Underlying family:** pydub via FFmpeg

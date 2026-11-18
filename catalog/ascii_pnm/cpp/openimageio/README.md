@@ -1,6 +1,7 @@
 # openimageio — ASCII PNM / C++
 
 - **Pinned release:** `3.2.2.0`
+- **Upstream:** [source repository](<https://github.com/AcademySoftwareFoundation/OpenImageIO>) · [Debian](<https://tracker.debian.org/pkg/openimageio>)
 - **License:** Apache-2.0
 - **Parsed scope:** P3 format identification, ASCII encoding flag, dimensions, and two decoded RGB pixels
 - **Underlying family:** OpenImageIO native PNM plugin

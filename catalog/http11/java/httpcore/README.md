@@ -1,6 +1,7 @@
 # httpcore — HTTP/1.1 / Java
 
 - **Pinned release:** `4.4.16`
+- **Upstream:** [Maven Central](<https://central.sonatype.com/artifact/org.apache.httpcomponents/httpcore>)
 - **License:** Apache-2.0
 - **Parsed scope:** HTTP/1.1 request line and headers from local stream
 - **Underlying family:** Apache HttpComponents Core HTTP/1.1 parser, 4.x branch; shared upstream with httpcore5

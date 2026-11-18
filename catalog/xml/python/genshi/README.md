@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.7.12`
+- **Upstream:** [source repository](<https://github.com/edgewall/genshi>) · [PyPI](<https://pypi.org/project/genshi/>)
 - **License:** BSD-3-Clause
 - **Parser family:** Genshi markup-stream builder over CPython pyexpat / Expat 2.10.0 (namespace mode)
 - **Local input API:** `genshi.input.XMLParser(BytesIO(bytes of a local XML file), filename) iterated to the end; the documented markup-stream events START (QName, Attrs), END, TEXT, START_NS (prefix, uri), COMMENT and PI are read through QName.namespace/localname`

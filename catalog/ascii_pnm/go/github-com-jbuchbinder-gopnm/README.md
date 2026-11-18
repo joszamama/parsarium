@@ -1,6 +1,7 @@
 # github.com/jbuchbinder/gopnm — ASCII PNM / Go
 
 - **Pinned release:** `v0.0.0-20251119211316-bb594e0d2e34`
+- **Upstream:** [source repository](<https://github.com/jbuchbinder/gopnm>) · [pkg.go.dev](<https://pkg.go.dev/github.com/jbuchbinder/gopnm>)
 - **License:** BSD-2-Clause
 - **Parsed scope:** P3 pixels and dimensions
 - **Underlying family:** gopnm lineage

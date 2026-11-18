@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0`
+- **Upstream:** [source repository](<https://github.com/soundintheory/php-sql-parser>) · [Packagist](<https://packagist.org/packages/soundintheory/php-sql-parser>)
 - **License:** BSD-2-Clause
 - **Parser family:** PHP-SQL-Parser lineage (2013 PSR-0 fork of the Google Code php-sql-parser; shared family with greenlion/php-sql-parser)
 - **Local input API:** `(new PHPSQL\Parser())->parse(local SQL text) -> clause-keyed array parse tree`

@@ -1,6 +1,7 @@
 # im4java — ASCII PNM / Java
 
 - **Pinned release:** `1.4.0`
+- **Upstream:** [source repository](<https://sourceforge.net/projects/im4java/>) · [Maven Central](<https://central.sonatype.com/artifact/org.im4java/im4java>)
 - **License:** LGPL-2.1
 - **Parsed scope:** ASCII P3 PPM format and dimensions
 - **Underlying family:** im4java wrapper over host ImageMagick Netpbm decoder

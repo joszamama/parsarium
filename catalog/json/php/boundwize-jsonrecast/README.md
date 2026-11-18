@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `1.0.37`
+- **Upstream:** [source repository](<https://github.com/boundwize/jsonrecast>) · [Packagist](<https://packagist.org/packages/boundwize/jsonrecast>)
 - **License:** MIT
 - **Parser family:** boundwize/jsonrecast Lexer and recursive-descent JsonParser (formatting-preserving AST)
 - **Local input API:** `Boundwize\JsonRecast\JsonRecast::parse(string $source) over local bytes returns a JsonDocument AST; harness walks ObjectNode items, ArrayNode items, StringNode/BooleanNode values, NullNode and NumberNode::toIntOrFloat() into a type-tagged tree with members in source order`

@@ -1,6 +1,7 @@
 # tornado — HTTP/1.1 / Python
 
 - **Pinned release:** `6.6.1`
+- **Upstream:** [source repository](<https://github.com/tornadoweb/tornado>) · [PyPI](<https://pypi.org/project/tornado/>)
 - **License:** Apache-2.0
 - **Parsed scope:** HTTP/1.1 response status, headers and body
 - **Underlying family:** Tornado Python HTTP/1 parser

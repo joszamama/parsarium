@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.9.0`
+- **Upstream:** [source repository](<https://github.com/LinkTed/dns-message-parser>) · [crates.io](<https://crates.io/crates/dns-message-parser>)
 - **License:** BSD-3-Clause
 - **Parser family:** dns-message-parser (src/decode/*: decoder, dns, domain_name, rr)
 - **Local input API:** `dns_message_parser::Dns::decode(bytes: Bytes) -> DecodeResult<Dns>`

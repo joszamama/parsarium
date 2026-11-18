@@ -1,6 +1,7 @@
 # mp3-duration — MP3 / Rust
 
 - **Pinned release:** `0.1.10`
+- **Upstream:** [source repository](<https://github.com/agersant/mp3-duration>) · [crates.io](<https://crates.io/crates/mp3-duration>)
 - **License:** MIT
 - **Parsed scope:** MP3 frame-derived duration
 - **Underlying family:** mp3-duration frame scanner

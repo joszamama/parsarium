@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.1.19`
+- **Upstream:** [source repository](<https://github.com/google/gopacket>) · [pkg.go.dev](<https://pkg.go.dev/github.com/google/gopacket/layers>)
 - **License:** BSD-3-Clause
 - **Parser family:** gopacket DNS layer (layers/dns.go)
 - **Local input API:** `(*layers.DNS).DecodeFromBytes(data []byte, df gopacket.DecodeFeedback) error`

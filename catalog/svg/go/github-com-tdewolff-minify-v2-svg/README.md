@@ -1,6 +1,7 @@
 # github.com/tdewolff/minify/v2/svg — SVG / Go
 
 - **Pinned release:** `v2.24.25`
+- **Upstream:** [source repository](<https://github.com/tdewolff/minify>) · [pkg.go.dev](<https://pkg.go.dev/github.com/tdewolff/minify/v2/svg>)
 - **License:** MIT
 - **Parsed scope:** SVG-aware transformed colors and markup
 - **Underlying family:** tdewolff SVG minifier

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.12.3`
+- **Upstream:** [source repository](<https://github.com/NLnetLabs/domain>) · [crates.io](<https://crates.io/crates/domain>)
 - **License:** BSD-3-Clause
 - **Parser family:** NLnet Labs domain (base/message.rs, base/name/parsed.rs, base/record.rs, rdata)
 - **Local input API:** `domain::base::Message::from_slice(slice: &[u8]) -> Result<&Message<[u8]>, ShortMessage>`

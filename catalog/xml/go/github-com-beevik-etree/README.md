@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `v1.8.1`
+- **Upstream:** [source repository](<https://github.com/beevik/etree>) · [pkg.go.dev](<https://pkg.go.dev/github.com/beevik/etree>)
 - **License:** BSD-2-Clause
 - **Parser family:** etree element tree over Go encoding/xml Decoder tokenizer
 - **Local input API:** `etree.NewDocument().ReadFromBytes([]byte); Element.Child walk; Element.NamespaceURI(); Attr.NamespaceURI()`

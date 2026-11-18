@@ -1,6 +1,7 @@
 # libheif — MP4 / C
 
 - **Pinned release:** `1.23.7`
+- **Upstream:** [source repository](<https://github.com/strukturag/libheif>) · [Debian](<https://tracker.debian.org/pkg/libheif>)
 - **License:** LGPL-3.0-or-later
 - **Parsed scope:** MP4 video sequence track and 2x2 image resolution; the library does not expose the audio track through this sequence API
 - **Underlying family:** libheif native ISO BMFF image-sequence and MP4 parser

@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.12.6`
+- **Upstream:** [source repository](<https://github.com/datacamp/antlr-tsql>) · [PyPI](<https://pypi.org/project/antlr-tsql/>)
 - **License:** AGPL-3.0
 - **Parser family:** antlr-tsql ANTLR 4 T-SQL grammar with antlr-ast tree shaping
 - **Local input API:** `antlr_tsql.ast.parse(sql_text: str) -> Script`

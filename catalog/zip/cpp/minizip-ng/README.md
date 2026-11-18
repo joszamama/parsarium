@@ -1,6 +1,7 @@
 # minizip-ng — ZIP / C++
 
 - **Pinned release:** `4.2.2`
+- **Upstream:** [source repository](<https://github.com/zlib-ng/minizip-ng>) · [Debian](<https://tracker.debian.org/pkg/minizip-ng>)
 - **License:** Zlib
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** MiniZip lineage

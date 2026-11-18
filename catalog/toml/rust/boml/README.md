@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.0.1`
+- **Upstream:** [source repository](<https://codeberg.org/brightshard/boml>) · [crates.io](<https://crates.io/crates/boml>)
 - **License:** MIT OR Apache-2.0
 - **Parser family:** boml (brightshard, codeberg.org): own dependency-free scanner and parser; independent of toml_parser, toml, toml_edit and taplo (no dependency on them).
 - **Local input API:** `boml::parse(&str) -> Result<boml::Toml, Error>; Toml derefs to TomlTable of TomlValue::{String, Integer (i64), Float (f64), Boolean, OffsetDateTime, DateTime, Date, Time, Array, Table}`

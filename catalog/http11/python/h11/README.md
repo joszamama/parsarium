@@ -1,6 +1,7 @@
 # h11 — HTTP/1.1 / Python
 
 - **Pinned release:** `0.16.0`
+- **Upstream:** [source repository](<https://github.com/python-hyper/h11>) · [PyPI](<https://pypi.org/project/h11/>)
 - **License:** MIT
 - **Parsed scope:** HTTP/1.1 request head
 - **Underlying family:** h11 state-machine parser

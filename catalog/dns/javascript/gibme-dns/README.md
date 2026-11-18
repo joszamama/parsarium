@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `22.0.0`
+- **Upstream:** [source repository](<https://github.com/gibme-npm/dns>) · [npm](<https://www.npmjs.com/package/@gibme/dns>)
 - **License:** MIT
 - **Parser family:** @gibme/dns own decoder (dist/types, dist/encoders)
 - **Local input API:** `new Packet(buffer: Buffer) -> Packet`

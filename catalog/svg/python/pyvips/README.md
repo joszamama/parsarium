@@ -1,6 +1,7 @@
 # pyvips — SVG / Python
 
 - **Pinned release:** `3.2.0`
+- **Upstream:** [source repository](<https://github.com/libvips/pyvips>) · [PyPI](<https://pypi.org/project/pyvips/>)
 - **License:** MIT
 - **Parsed scope:** SVG rendering with dimensions and colored pixels
 - **Underlying family:** libvips SVG loader (librsvg)

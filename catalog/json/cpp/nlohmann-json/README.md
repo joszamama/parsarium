@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `3.12.0`
+- **Upstream:** [source repository](<https://github.com/nlohmann/json>)
 - **License:** MIT
 - **Parser family:** nlohmann/json lexer and parser
 - **Local input API:** `nlohmann::json::parse(IteratorType first, IteratorType last, parser_callback_t cb = nullptr, bool allow_exceptions = true, bool ignore_comments = false) called on the byte range with allow_exceptions=false and ignore_comments=false`

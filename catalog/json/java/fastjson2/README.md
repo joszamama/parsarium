@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `2.0.66`
+- **Upstream:** [source repository](<https://github.com/alibaba/fastjson2>) · [Maven Central](<https://central.sonatype.com/artifact/com.alibaba.fastjson2/fastjson2>)
 - **License:** Apache-2.0
 - **Parser family:** fastjson2 (JSONReaderUTF8 parser plus object mapping)
 - **Local input API:** `com.alibaba.fastjson2.JSON.parse(Files.readAllBytes(local Path))`

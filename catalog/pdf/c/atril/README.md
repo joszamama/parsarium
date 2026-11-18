@@ -1,6 +1,7 @@
 # atril — PDF / C
 
 - **Pinned release:** `1.28.2`
+- **Upstream:** [source repository](<https://github.com/mate-desktop/atril>) · [Debian](<https://tracker.debian.org/pkg/atril>)
 - **License:** GPL-2.0-or-later
 - **Parsed scope:** PDF page count through Atril libdocument C API
 - **Underlying family:** Atril PDF backend over Poppler GLib

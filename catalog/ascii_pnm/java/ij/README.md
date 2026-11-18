@@ -1,6 +1,7 @@
 # ij — ASCII PNM / Java
 
 - **Pinned release:** `1.54p`
+- **Upstream:** [source repository](<https://github.com/imagej/ImageJ>) · [Maven Central](<https://central.sonatype.com/artifact/net.imagej/ij>)
 - **License:** Public domain
 - **Parsed scope:** ASCII PPM dimensions and red/green pixels
 - **Underlying family:** ImageJ PGM/PPM reader

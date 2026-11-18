@@ -3,6 +3,7 @@
 **Pilot / incomplete format cell.** This path is verified on its stated control; the format-wide search is still in progress.
 
 - **Pinned release:** `0.0.10`
+- **Upstream:** [source repository](<https://github.com/imgurbot12/pydns>) · [PyPI](<https://pypi.org/project/pydns3/>)
 - **License:** MIT
 - **Parser family:** pydns3 (message.py Message.unpack, answer.py, content.py) over pystructs3 (std.py Domain name codec, struct.py Struct)
 - **Local input API:** `pydns.Message.unpack(raw: bytes, ctx: Optional[pystructs.Context] = None) -> Message (fields id, flags, questions, answers, authority, additional; Answer.content typed A/AAAA/CNAME/MX/NS/PTR/SOA/TXT/SRV)`
