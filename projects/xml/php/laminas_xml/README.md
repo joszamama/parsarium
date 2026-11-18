@@ -2,7 +2,7 @@
 
 Pinned release: `1.8.0`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/xml/php/laminas-xml/README.md)
+[API, control result, and parser family](../../../../catalog/xml/php/laminas-laminas-xml/README.md)
 
 ## Run from the repository root
 

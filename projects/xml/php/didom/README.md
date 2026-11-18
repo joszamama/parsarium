@@ -2,7 +2,7 @@
 
 Pinned release: `2.0.1`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/xml/php/didom/README.md)
+[API, control result, and parser family](../../../../catalog/xml/php/imangazaliev-didom/README.md)
 
 ## Run from the repository root
 

@@ -2,7 +2,7 @@
 
 Pinned release: `3.0.5`. [Manifest](manifest.json) · [verification receipt](verification.json)
 
-[API, control result, and parser family](../../../../catalog/xml/php/querypath/README.md)
+[API, control result, and parser family](../../../../catalog/xml/php/querypath-querypath/README.md)
 
 ## Run from the repository root
 

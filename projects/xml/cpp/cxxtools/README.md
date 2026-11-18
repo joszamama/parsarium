@@ -15,3 +15,5 @@ python3 parsarium.py afl prepare xml cpp cxxtools runs/xml-cxxtools-afl
 ```
 
 Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+
+**Coverage limit:** Two valid UTF-8 XML 1.0 controls without DOCTYPE establish cxxtools XmlReader's element, attribute, comment, processing-instruction, CDATA and character events for them only, as a raw-name path: qualified names, xmlns attributes, attribute order and decoded values, depth and trimmed text runs. No namespace URI, expanded name or in-scope binding is reported. Coverage counts every libcxxtools line reached (string, codec and stream helpers included); the XML reader's own lines are reported separately. DTDs, entities beyond the controls' references, other encodings, XML 1.1 and well-formedness rejection are not established. The expected outputs come from oracle.py (Python pyexpat in non-namespace mode, a different family from cxxtools).
