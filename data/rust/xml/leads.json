@@ -198,7 +198,7 @@
       "version": "0.3.0",
       "recent_downloads_90d": 4342774,
       "status": "selected",
-      "reason": "Own ObjFW-derived streaming parser behind the documented Parser::new()/feed_str(&str) event API; selected after both shared valid controls matched the Expat oracle exactly, 285 RustyXML source lines were covered (266 in src/parser.rs on the catalog control, 281 on the order control), and RustyXML-only AFL++ feedback with fixed std HashMap RandomState keys was identical across ten afl-showmap repeats per control (668 vs 733 edges; 59 and 124 unique to each control). The earlier unresolved_feedback_nondeterministic status came from per-process RandomState keys in the crate's own HashMaps; see the feedback audit.",
+      "reason": "Own ObjFW-derived streaming parser behind the documented Parser::new()/feed_str(&str) event API; selected after both shared valid controls matched the Expat oracle exactly, 285 RustyXML source lines were covered (266 in src/parser.rs on the catalog control, 281 on the order control), and RustyXML-only AFL++ feedback with fixed std HashMap RandomState keys was identical across ten afl-showmap repeats per control (668 vs 733 edges; 59 and 124 unique to each control). Without the shim, per-process RandomState keys in the crate's own HashMaps make the feedback vary between runs; see the feedback audit.",
       "source": "https://crates.io/crates/RustyXML",
       "record": "data/rust/xml/parsers.json",
       "receipt": "projects/xml/rust/rustyxml/verification.json",

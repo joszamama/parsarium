@@ -265,7 +265,7 @@
       "last_month": 8139,
       "registry": "https://pypi.org/project/rapidxml/",
       "status": "excluded",
-      "reason": "RapidXml 2.1.4 (Python C++ extension over bundled RapidXML 1.13, the RapidXML family of the C++ cell) fails both valid controls through its documented RapidXml(bytes) API: the default flags (parse_no_data_nodes | parse_no_utf8) drop the catalog control's CDATA text 'x < y', and on the order control the decimal/hex character reference for the euro sign is stored as non-UTF-8 bytes, so reading the values raises SystemError over UnicodeDecodeError. The undocumented parse_cdata=True keyword switches to parse_declaration_node and parses both controls to the raw-name summary, but it is not part of the documented API. Not promoted in this round. Evidence: data/python/xml/rapidxml-lead-check.json.",
+      "reason": "RapidXml 2.1.4 (Python C++ extension over bundled RapidXML 1.13, the RapidXML family of the C++ cell) fails both valid controls through its documented RapidXml(bytes) API: the default flags (parse_no_data_nodes | parse_no_utf8) drop the catalog control's CDATA text 'x < y', and on the order control the decimal/hex character reference for the euro sign is stored as non-UTF-8 bytes, so reading the values raises SystemError over UnicodeDecodeError. The undocumented parse_cdata=True keyword switches to parse_declaration_node and parses both controls to the raw-name summary, but it is not part of the documented API. Not selected. Evidence: data/python/xml/rapidxml-lead-check.json.",
       "metric_snapshot": "data/python/xml/registry-snapshot.json",
       "evidence": "data/python/xml/rapidxml-lead-check.json",
       "api_hint": "rapidxml.RapidXml(local XML bytes)",
@@ -296,7 +296,7 @@
       "observed_on_utc": "2026-11-18",
       "registry": "https://pypi.org/project/suds-community/",
       "status": "excluded",
-      "reason": "Round 4: SOAP client (suds-community 1.2.0). Its suds.sax.parser.Parser builds suds' own Element tree from xml.sax events, but it is an internal module: the PyPI description and project documentation document only the WSDL Client API, not a local XML parse API. Not built."
+      "reason": "SOAP client (suds-community 1.2.0). Its suds.sax.parser.Parser builds suds' own Element tree from xml.sax events, but it is an internal module: the PyPI description and project documentation document only the WSDL Client API, not a local XML parse API. Not built."
     },
     {
       "name": "twisted",
@@ -304,7 +304,7 @@
       "observed_on_utc": "2026-11-18",
       "registry": "https://pypi.org/project/Twisted/",
       "status": "excluded",
-      "reason": "Round 4: twisted.words.xish.domish.elementStream() is an XMPP stream element builder over pyexpat: it reports the stream root as a start event and delivers each top-level child as a separate element event instead of one document tree. A protocol library's stream framing, not a general XML parser API (the C cell's libstrophe precedent). Not built."
+      "reason": "twisted.words.xish.domish.elementStream() is an XMPP stream element builder over pyexpat: it reports the stream root as a start event and delivers each top-level child as a separate element event instead of one document tree. A protocol library's stream framing, not a general XML parser API (the C cell's libstrophe precedent). Not built."
     },
     {
       "name": "xmltodict-rs",
@@ -312,7 +312,7 @@
       "observed_on_utc": "2026-11-18",
       "registry": "https://pypi.org/project/xmltodict-rs/",
       "status": "unresolved_below_ceiling",
-      "reason": "Round 4: Rust/PyO3 xmltodict-compatible converter (0.13.10, quick-xml family, its own engine). Its 16,768 last-month downloads rank below jxmlease (118,785), the tenth path, so with the cell at its ten-path ceiling it was not built."
+      "reason": "Rust/PyO3 xmltodict-compatible converter (0.13.10, quick-xml family, its own engine). Its 16,768 last-month downloads rank below jxmlease (118,785), the tenth path, so with the cell at its ten-path ceiling it was not built."
     }
   ],
   "registry_snapshot": "data/python/xml/registry-snapshot.json"

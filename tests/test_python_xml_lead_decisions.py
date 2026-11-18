@@ -45,7 +45,7 @@ class PythonXmlLeadDecisionTest(unittest.TestCase):
         self.assertEqual(selected, {lead["name"] for lead in self.leads if lead["status"] == "promoted_to_verified"})
         cell = read(BASE / "cell.json")
         self.assertEqual(cell["verified_third_party_count"], len(self.parsers))
-        self.assertIn("filled the tenth slot with Genshi", cell["uncertainty"])
+        self.assertIn("Genshi 0.7.12 (checked 2026-11-18) comes from a search", cell["uncertainty"])
 
     def test_rapidxml_probe_matches_reason(self):
         receipt = read(BASE / "rapidxml-lead-check.json")

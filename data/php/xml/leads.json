@@ -5,7 +5,7 @@
     "version_seen": "v8.1.10",
     "license": "MIT",
     "packagist_downloads": 443886072,
-    "reason": "Package API (reassessed): Crawler::addXmlContent(string) loads the text with DOMDocument::loadXML (LIBXML_NONET forced) and the XML-mode Crawler exposes children()/nodeName()/attr()/text() traversal and filterXPath() with its own namespace discovery. Parser family libxml2 via DOMDocument, shared with the standard path and sabre/xml; package-own scope is navigation and XPath/namespace mapping, not tokenizing. v8.1.10 is the newest stable release (v8.2.0-BETA1 not used). Both shared controls match the expat oracle; Native AFL++ feedback from instrumented libxml2 parser and PHP ext/dom loading sources differs in 357 stable parse-time tuples between the controls. Downloads are mostly HTML crawling uses. Verified: projects/xml/php/symfony_dom_crawler.",
+    "reason": "Package API: Crawler::addXmlContent(string) loads the text with DOMDocument::loadXML (LIBXML_NONET forced) and the XML-mode Crawler exposes children()/nodeName()/attr()/text() traversal and filterXPath() with its own namespace discovery. Parser family libxml2 via DOMDocument, shared with the standard path and sabre/xml; package-own scope is navigation and XPath/namespace mapping, not tokenizing. v8.1.10 is the newest stable release (v8.2.0-BETA1 not used). Both shared controls match the expat oracle; Native AFL++ feedback from instrumented libxml2 parser and PHP ext/dom loading sources differs in 357 stable parse-time tuples between the controls. Downloads are mostly HTML crawling uses. Verified: projects/xml/php/symfony_dom_crawler.",
     "source": "https://packagist.org/packages/symfony/dom-crawler"
   },
   {
@@ -148,7 +148,7 @@
     "version_seen": "v3.0.0",
     "license": "MIT",
     "packagist_downloads": 2274560,
-    "reason": "Pinned v3.0.0 (MIT) probe (local candidate commit e293b060) matched an expat oracle evaluating the same fixed schema, but Reader::load is simplexml_load_file and Document::parse only maps the already parsed SimpleXML tree onto a caller-provided schema; all 359 differing libxml2 tuples also differ under a bare simplexml_load_file and the full and parse-only maps are identical. Treated like the excluded serializer mapping layers; not counted.",
+    "reason": "Pinned v3.0.0 (MIT) probe matched an expat oracle evaluating the same fixed schema, but Reader::load is simplexml_load_file and Document::parse only maps the already parsed SimpleXML tree onto a caller-provided schema; all 359 differing libxml2 tuples also differ under a bare simplexml_load_file and the full and parse-only maps are identical. Treated like the excluded serializer mapping layers; not counted.",
     "source": "https://packagist.org/packages/laravie/parser"
   },
   {
@@ -182,7 +182,7 @@
     "version_seen": "v1.0.2",
     "license": "MIT",
     "packagist_downloads": 62346,
-    "reason": "Pinned v1.0.2 (MIT) probe: documented XMLParser::decode() is new SimpleXMLElement($xml) plus json_decode(json_encode(...)), mostly an array-to-XML encoder package; the source has no xml_parser_create call (the earlier note was wrong). On both valid controls decode() output is identical to the bare SimpleXML JSON round trip and loses the root name, CDATA text, attributes of text-only elements and the prefixed p:amount child. No parsing route of its own; not counted. Evidence: data/php/xml/jtrumbull-xml-parser-lead-check.json.",
+    "reason": "Pinned v1.0.2 (MIT) probe: documented XMLParser::decode() is new SimpleXMLElement($xml) plus json_decode(json_encode(...)), mostly an array-to-XML encoder package; the source has no xml_parser_create call. On both valid controls decode() output is identical to the bare SimpleXML JSON round trip and loses the root name, CDATA text, attributes of text-only elements and the prefixed p:amount child. No parsing route of its own; not counted. Evidence: data/php/xml/jtrumbull-xml-parser-lead-check.json.",
     "source": "https://packagist.org/packages/jtrumbull/xml-parser"
   },
   {

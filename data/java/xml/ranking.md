@@ -39,7 +39,7 @@ kXML2 feedback is scoped to `org.kxml2.io` KXmlParser tokenizer lines. Three tra
 
 ## Lead log
 
-Numeric leads looked up on deps.dev. Jackson XML, Woodstox, dom4j (org.dom4j:dom4j), XMLBeans, JDOM2, Aalto, XOM, XPP3, and kXML2 were promoted to the verified ranking above; the remaining entries are unresolved or excluded. Maven Central text search ranks by relevance, so the search hits alone do not surface adoption.
+Numeric leads looked up on deps.dev. Jackson XML, Woodstox, dom4j (org.dom4j:dom4j), XMLBeans, JDOM2, Aalto, XOM, XPP3, and kXML2 are in the verified ranking above; the remaining entries are unresolved or excluded. Maven Central text search ranks by relevance, so the search hits alone do not surface adoption.
 
 | Lead | Version seen | Summed direct dependents | Max single release | Status | Note |
 | --- | --- | ---: | ---: | --- | --- |

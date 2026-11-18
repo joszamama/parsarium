@@ -296,7 +296,7 @@
       "popcon_installed": 518,
       "homebrew_install_365d": null,
       "debian_source": "gdome2; binary libgdome2-0",
-      "search": "round-4 targeted Debian binary lookup (C DOM libraries over a selected parser)",
+      "search": "targeted Debian binary lookup (C DOM libraries over a selected parser; registry-snapshot.json round_4_targeted_binary_lookups)",
       "reason": "Selected and verified: gdome2 0.8.1+debian-10 gdome_di_createDocFromMemory gave the exact namespace-resolved summary of both valid controls through its DOM Level 2 accessors, with 744 gdome2 lines and 3,207 libxml2 lines covered and a stable AFL++ differential (1,389 vs 1,490 tuples, 259 differing); libxml2 family. See data/c/xml/parsers.json.",
       "source": "https://sources.debian.org/src/gdome2/0.8.1%2Bdebian-10/"
     },
@@ -308,7 +308,7 @@
       "popcon_installed": null,
       "homebrew_install_365d": null,
       "debian_source": "neon27; binaries libneon27t64 95,819, libneon27 33,175, libneon27-dev 1,390",
-      "search": "round-4 targeted Debian binary lookup",
+      "search": "targeted Debian binary lookup (registry-snapshot.json round_4_targeted_binary_lookups)",
       "reason": "Technically verified in a scratch build on 2026-11-18 (not committed as a project): neon 0.37.1 (notroj.github.io release tarball, SHA-256 a99b7262525a454d1065cf76dd17240fd808dfc4ef15636990ff83a5d0d9e740, LGPL-2.0-or-later) ne_xml_create/ne_xml_push_handler/ne_xml_parse over the pinned libxml2 2.15.4 (Debian builds neon27 --with-libxml2) gave the exact namespace-resolved summary of both controls; neon's ne_xml.c lines are the same on both controls (334 libxml2 parser.c line starts differ), so it would be a libxml2-family wrapper. Not ranked: libneon27t64 is the whole HTTP/WebDAV client library and Debian has no XML-specific neon package, so by the rule this cell applies to GLib's GMarkup its count is not format-specific; libneon27-dev (1,390) is not format-specific either.",
       "source": "https://notroj.github.io/neon/"
     },
@@ -320,7 +320,7 @@
       "popcon_installed": null,
       "homebrew_install_365d": null,
       "debian_source": "apr-util 1.6.6-1; binaries libaprutil1t64 76,853, libaprutil1 58,436, libaprutil1-dev 1,831",
-      "search": "round-4 targeted Debian binary lookup",
+      "search": "targeted Debian binary lookup (registry-snapshot.json round_4_targeted_binary_lookups)",
       "reason": "APR-util's documented apr_xml_parser_create/apr_xml_parser_feed/apr_xml_parser_done builds an apr_xml_doc tree over expat with its own namespace scoping. Not built: libaprutil1t64 is the whole APR utility library and Debian has no XML-specific package, so by the GMarkup rule its count is not format-specific; libaprutil1-dev (1,831) is not format-specific either. Its public tree also hides namespace declarations (apr_xml_ns_scope is private) and stores attributes in reverse order.",
       "source": "https://apr.apache.org/docs/apr-util/1.6/group___a_p_r___util___x_m_l.html"
     },
@@ -332,7 +332,7 @@
       "popcon_installed": 143,
       "homebrew_install_365d": null,
       "debian_source": "libxmltok 1.2-4 (removed; libxmltok1 143, libxmltok1t64 5)",
-      "search": "Debian by_inst binary-package-name substring 'xml' (round-4 continuation)",
+      "search": "Debian by_inst binary-package-name substring 'xml', positions 101-1208 (registry-snapshot.json debian_binary_search.round_4_continuation)",
       "reason": "libxmltok_1.2.orig.tar.gz (snapshot.debian.org SHA-1 5dab2918859febf67e0192e0347ad5ca864baa67) unpacks to expat-1.2: James Clark's expat 1.2 (xmltok, xmlrole, xmlparse), the predecessor release of the selected expat with the same XML_Parser API. Whitespace- and comment-normalized non-trivial lines matching expat 2.10.0 in sequence: 3,134 of 6,328 (49.5%; xmltok_impl.c 77.5%, xmlparse.c 35.7%). Below the ~70% fork threshold only because expat 2 was rewritten around the same code; it is the same project at a 2000 release, not a distinct package API, so it is excluded rather than counted as a second expat-family path.",
       "source": "https://snapshot.debian.org/package/libxmltok/1.2-4/"
     },
@@ -344,7 +344,7 @@
       "popcon_installed": 20,
       "homebrew_install_365d": null,
       "debian_source": "libxml (removed; libxml1 20, libxml-dev 4)",
-      "search": "Debian by_inst binary-package-name substring 'xml' (round-4 continuation)",
+      "search": "Debian by_inst binary-package-name substring 'xml', positions 101-1208 (registry-snapshot.json debian_binary_search.round_4_continuation)",
       "reason": "GNOME libxml 1.x, the predecessor of the selected libxml2; no current source. Predecessor path; not counted.",
       "source": "https://snapshot.debian.org/binary/libxml1/"
     },
@@ -356,7 +356,7 @@
       "popcon_installed": 60,
       "homebrew_install_365d": null,
       "debian_source": "none (upstream-built libucw-xml-6.5)",
-      "search": "Debian by_inst binary-package-name substring 'xml' (round-4 continuation)",
+      "search": "Debian by_inst binary-package-name substring 'xml', positions 101-1208 (registry-snapshot.json debian_binary_search.round_4_continuation)",
       "reason": "Selected and verified: LibUCW 6.5 ucw-xml (xml_init, xml_ns_enable, xml_push_fastbuf, xml_next pull loop) gave the exact namespace-resolved summary of both valid controls; 804 ucw-xml lines covered (387 in parse.c); stable AFL++ differential (501 vs 544 tuples, 87 differing). Own parser family.",
       "source": "https://www.ucw.cz/libucw/"
     },
@@ -368,7 +368,7 @@
       "popcon_installed": 16,
       "homebrew_install_365d": null,
       "debian_source": "rxp 1.5.0-3.1; binaries librxp0t64 16, librxp0 10, rxp 25",
-      "search": "round-4 targeted Debian binary lookup (C parsers named in XML parser comparisons)",
+      "search": "targeted Debian binary lookup (C parsers named in XML parser comparisons; registry-snapshot.json round_4_targeted_binary_lookups)",
       "reason": "Selected and verified: RXP 1.5.0 (Debian orig plus Debian patches) NewParser/ParserSetFlag(XMLNamespaces)/ReadXBit gave the shared namespace-resolved summary of both valid controls without a declaration count (RXP returns no xmlns declarations); 2,544 RXP lines covered (987 in xmlparser.c); stable AFL++ differential (903 vs 942 tuples, 119 differing). Own parser family; 16 installations are a very weak signal.",
       "source": "https://www.ltg.ed.ac.uk/~richard/rxp.html"
     },
@@ -386,8 +386,8 @@
   ],
   "debian_search": {
     "snapshot": "data/c/xml/registry-snapshot.json#debian_source_search",
-    "note": "Leads above the three selected paths were added from the Debian source-name search ('xml', 306 hits, 5 C XML parser libraries) and targeted lookups; all other hits are classified in the snapshot.",
+    "note": "Leads after the first three selected paths come from the Debian source-name search ('xml', 306 hits, 5 C XML parser libraries) and targeted lookups; all other hits are classified in the snapshot.",
     "binary_snapshot": "data/c/xml/registry-snapshot.json#debian_binary_search",
-    "binary_note": "The Debian binary-package-name search ('xml', 1,208 hits, first 100 classified) added one C XML parser lead, pupnp's IXML (libixml11t64 46,966), now selected; its other C parser hits are the selected libxml2, libxmlb and mxml runtimes."
+    "binary_note": "The Debian binary-package-name search ('xml', 1,208 hits, first 100 classified) adds one C XML parser lead, pupnp's IXML (libixml11t64 46,966), which is selected; its other C parser hits are the selected libxml2, libxmlb and mxml runtimes."
   }
 }
