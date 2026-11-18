@@ -1,0 +1,68 @@
+{
+  "checked_at_utc": "2026-11-18T01:11:36.532972+00:00",
+  "project": "toml/python/tomlclass",
+  "pass": true,
+  "input_kind": "two fixed valid TOML 1.0.0 controls",
+  "oracle": "hand-written typed trees in controls/toml/*.expected.json; every package API mode and CPython tomllib (/usr/bin/python3 -I in the same image, where the package is not importable) must equal them",
+  "control_oracle": {
+    "modes_matching_expected_tree": [
+      "tomlclass-str",
+      "tomlclass-stream"
+    ],
+    "stdlib_tomllib_python": "3.14.4",
+    "stdlib_tomllib_matches": true,
+    "stdlib_tomllib_family": "independent (tomllib is the tomli family; tomlclass has its own parser)",
+    "package_version": "0.4.1",
+    "tree_sha256": "6d2bf3f9f6f555fc84311a1e4e6af9488563c0f0e2ff06b98ba92e894db5f172"
+  },
+  "variant_oracle": {
+    "modes_matching_expected_tree": [
+      "tomlclass-str",
+      "tomlclass-stream"
+    ],
+    "stdlib_tomllib_python": "3.14.4",
+    "stdlib_tomllib_matches": true,
+    "stdlib_tomllib_family": "independent (tomllib is the tomli family; tomlclass has its own parser)",
+    "package_version": "0.4.1",
+    "tree_sha256": "4718dbdbf4a674dfc79cd455be85ca64736c7a70fd6fd91e097bbc5a74626203"
+  },
+  "feedback_scope": "executed Python source lines of the installed tomlclass 0.4.1 package under /opt/venv/lib/python3.14/site-packages/tomlclass/, mapped to the AFL++ bitmap by the Parsarium Python line bridge",
+  "base_image_id": "sha256:8f75d73beca9f5f561259e87254c2b87cb2184f2a339a54760c0e3edf9b7285b",
+  "overlay_image_id": "sha256:a75047adc152f78f75777384cb1ca01c6abf80cdcae228405c0bb4f798cdf2bb",
+  "overlay_receipt_sha256": "fe58f6e061c7e65c67bcb5472f25c0bbb8edc5950ef1a2fe2f3678af1f3a42b1",
+  "control": "controls/toml/service-config.toml",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "variant": "controls/toml/typed-scalars.toml",
+  "variant_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "control_output_sha256": "6d2bf3f9f6f555fc84311a1e4e6af9488563c0f0e2ff06b98ba92e894db5f172",
+  "variant_output_sha256": "4718dbdbf4a674dfc79cd455be85ca64736c7a70fd6fd91e097bbc5a74626203",
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "control_parser_features": 402,
+  "variant_parser_features": 425,
+  "control_parser_lines_per_file": {
+    "__init__.py": 7,
+    "_document.py": 25,
+    "nodes.py": 47,
+    "parser.py": 323
+  },
+  "variant_parser_lines_per_file": {
+    "__init__.py": 7,
+    "_document.py": 26,
+    "nodes.py": 25,
+    "parser.py": 367
+  },
+  "format_parser_file": "parser.py",
+  "control_format_parser_features": 323,
+  "variant_format_parser_features": 367,
+  "control_only_features": 122,
+  "variant_only_features": 145,
+  "parser_feature_difference": 267,
+  "format_parser_feature_difference": 238,
+  "control_afl_tuples": 422,
+  "variant_afl_tuples": 445,
+  "control_only_afl_tuples": 122,
+  "variant_only_afl_tuples": 145,
+  "afl_tuple_difference": 267
+}
