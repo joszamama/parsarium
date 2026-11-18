@@ -420,6 +420,45 @@
       "found_by": "round_4_targeted_lookup",
       "control_result": "Returns values as raw TOML text (quoted strings with their quotes, '[8000, 8001, 8002]', '0xDEAD_BEEF', '1e3') and unsplit keys; both controls fail.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-parse@1.0.1 on 2026-11-18"
+    },
+    {
+      "name": "@jarenjs/josl",
+      "release": "0.91.4",
+      "metric_value": 259,
+      "license": "MIT",
+      "family": "JOSL (jarenjs; own line-oriented machine for a TOML 1.0 superset)",
+      "api_lead": "parseToml(text) (strict TOML 1.0 mode); LocalDate, LocalTime, LocalDateTime classes",
+      "status": "unresolved_control_failed",
+      "evidence": "Run in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64, Node v26.10.0) on 2026-11-18: service-config matches, but integers are parsed through BigInt and downgraded to Numbers when safe, so typed-scalars float exponent = 1e3 is the Number 1000, the same value as an integer 1000 (no typing option; the round-1 toml and @iarna/toml precedent). Local date-times are decoded LocalDate/LocalTime/LocalDateTime objects and the offset date-time a Date.",
+      "found_by": "round-6 npm search 'keywords:toml'",
+      "metric": "npm downloads, last month",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "lombokserde",
+      "release": "0.1.0",
+      "metric_value": 359,
+      "license": "Apache-2.0",
+      "family": "lombokserde (own JSON, TOML and MessagePack codecs)",
+      "api_lead": "tomlDecode(Uint8Array) -> Value {t: 'int'|'float'|'datetime', ...}",
+      "status": "unresolved_datetime_source_text",
+      "evidence": "Checked against the 0.1.0 type declarations (dist/cjs/value.d.ts): integers and floats are distinct, but a datetime value is {kind, raw} where raw is the exact source text for TOML decode, so the offset instant would need harness-side parsing (toml.min precedent). Not run.",
+      "found_by": "round-6 npm search 'keywords:toml'",
+      "metric": "npm downloads, last month",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "ion-parser",
+      "release": "0.5.2",
+      "metric_value": 167,
+      "license": "MIT",
+      "family": "ion-parser (Lepzulnag; TOML/ION parser by the fast-toml author)",
+      "api_lead": "ION.parse(text)",
+      "status": "unresolved_control_failed",
+      "evidence": "Run in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64, Node v26.10.0) on 2026-11-18: service-config parses, typed-scalars is rejected at line 34 (site.\"example.com\" = true, a quoted dotted key), the fast-toml failure; numbers are plain Numbers.",
+      "found_by": "round-6 npm search 'keywords:toml'",
+      "metric": "npm downloads, last month",
+      "checked_at_utc": "2026-11-18"
     }
   ],
   "excluded": [
@@ -671,6 +710,42 @@
       "status": "excluded",
       "reason": "Deno standard library TOML module (toml-lang wiki Old.md, jsr.io/@std/toml) is published on JSR only; npm has no @std/toml or @jsr/std__toml package, so there is no npm download value.",
       "found_by": "round_4_targeted_lookup"
+    },
+    {
+      "name": "teptris",
+      "metric_value": 5743,
+      "status": "excluded",
+      "reason": "Round 6: WebAssembly build of the libteptris native parser with no JavaScript fallback; JavaScript coverage cannot reach the parser (@taplo/lib precedent)."
+    },
+    {
+      "name": "@kronajs/core",
+      "metric_value": 315,
+      "status": "excluded",
+      "reason": "Round 6: line-based document model for a config viewer; no typed TOML value tree."
+    },
+    {
+      "name": "@omnist-dev/omnist",
+      "metric_value": 241,
+      "status": "excluded",
+      "reason": "Round 6: only a pre-release (0.10.1-alpha) is published."
+    },
+    {
+      "name": "@leonsilicon/confbox",
+      "metric_value": 439,
+      "status": "excluded",
+      "reason": "Round 6: republication of confbox (bundled smol-toml)."
+    },
+    {
+      "name": "@temporalio/envconfig",
+      "metric_value": null,
+      "status": "excluded",
+      "reason": "Round 6: depends on smol-toml for TOML."
+    },
+    {
+      "name": "@alint-js/config",
+      "metric_value": null,
+      "status": "excluded",
+      "reason": "Round 6: config loader over smol-toml."
     }
   ],
   "promoted": [
@@ -724,6 +799,28 @@
       "@effected/toml",
       "toml.min",
       "@sgarciac/bombadil"
+    ]
+  },
+  "round_6": {
+    "observed": "2026-11-18",
+    "routes": [
+      "toml-lang/toml-test-matrix parser list (commit 71475d29, 2025-04-25; 36 parser scripts): every JavaScript entry (deno-toml (@std/toml, JSR only), j-toml, smol-toml, toml-eslint-parser) is already selected or decided",
+      "npm search 'toml-test' and 'keywords:toml-test' (toml-test runner wrapper and @dral/toml-tests, which wrap smol-toml), 'toml 1.0.0 compliant', 'toml spec compliant'",
+      "npm search 'toml parser typescript', 'toml ast', 'toml decode', 'keywords:toml', 'toml lexer' (250 per page, two pages each), keeping TOML hits not named in the recorded snapshot or leads"
+    ],
+    "promoted": [],
+    "new_leads": [
+      "@jarenjs/josl",
+      "lombokserde",
+      "ion-parser"
+    ],
+    "excluded": [
+      "teptris",
+      "@kronajs/core",
+      "@omnist-dev/omnist",
+      "@leonsilicon/confbox",
+      "@temporalio/envconfig",
+      "@alint-js/config"
     ]
   }
 }
