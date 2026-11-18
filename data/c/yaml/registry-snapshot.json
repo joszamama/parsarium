@@ -2144,5 +2144,165 @@
   },
   "decision": "tree-sitter-yaml stays excluded (syntax tree only)",
   "evidence": "See data/c/yaml/leads.json tree-sitter-yaml (round_5): escapes, block scalars and aliases are left to the harness."
+ },
+ "round_6_star_fallback": {
+  "rule": "PROTOCOL.md (2026-11-18): C and C++ cells may fill slots left empty after primary-metric and Debian-fallback paths with pinned tagged releases of format-specific upstream GitHub repositories with at least 100 stars; ranked separately after the Debian paths.",
+  "metric": "GitHub stars (secondary, repository interest, not downloads)",
+  "threshold": 100,
+  "search_note": "GitHub search API, sorted by stars, first 100 results per query (every query returned fewer). Plus 'yaml in:name stars:>=100' (117 hits, two pages, all inspected) and 'libyaml stars:>=100' (6 hits: libyaml, Ruby psych, Lua lyaml binding, YAML.framework, Swift Yams, a dotfile repo). 'yml language:C stars:>=100' and 'yml language:C++ stars:>=100' returned 0 hits.",
+  "github_search": [
+   {
+    "query": "yaml language:C stars:>=100",
+    "sort": "stars",
+    "limit": 100,
+    "url": "https://api.github.com/search/repositories",
+    "captured_at_utc": "2026-11-18T07:07:33Z",
+    "total_count": 5,
+    "response_sha256": "c9844bee1d899b44f168faffe3398e52f94a1b935ea4b0659d15b45d37260a8a",
+    "hits": [
+     "yaml/libyaml (1175)",
+     "pantoniou/libfyaml (348)",
+     "tlsa/libcyaml (333)",
+     "r-lib/yaml (169)",
+     "ElectricRCAircraftGuy/eRCaGuy_hello_world (157)"
+    ]
+   },
+   {
+    "query": "yaml parser language:C stars:>=100",
+    "sort": "stars",
+    "limit": 100,
+    "url": "https://api.github.com/search/repositories",
+    "captured_at_utc": "2026-11-18T07:07:33Z",
+    "total_count": 1,
+    "response_sha256": "cf9bc5d4cd0fc389556f85233e01e32af3c2682bf63788d5555f628df8e97690",
+    "hits": [
+     "pantoniou/libfyaml (348)"
+    ]
+   },
+   {
+    "query": "topic:yaml language:C stars:>=100",
+    "sort": "stars",
+    "limit": 100,
+    "url": "https://api.github.com/search/repositories",
+    "captured_at_utc": "2026-11-18T07:07:34Z",
+    "total_count": 4,
+    "response_sha256": "b6d799807a3a350111c03f8cd1e62cee1b84b159f131d97aec39cd53d25d7d0b",
+    "hits": [
+     "yaml/libyaml (1175)",
+     "tlsa/libcyaml (333)",
+     "r-lib/yaml (169)",
+     "ElectricRCAircraftGuy/eRCaGuy_hello_world (157)"
+    ]
+   },
+   {
+    "query": "yaml in:name stars:>=100",
+    "page": 1,
+    "per_page": 100,
+    "captured_at_utc": "2026-11-18T07:07:54Z",
+    "total_count": 117,
+    "response_sha256": "e0775bc766a96096cafa1b9748b9f2dc09224ab10608c48251679eb1b2409487",
+    "hits_in_scope_language": [
+     "yaml/libyaml (1175)",
+     "r-lib/yaml (169)"
+    ]
+   },
+   {
+    "query": "yaml in:name stars:>=100",
+    "page": 2,
+    "per_page": 100,
+    "captured_at_utc": "2026-11-18T07:13:40Z",
+    "total_count": 117,
+    "response_sha256": "86355fa282186d73ef2031426c085647da2b98b6be30ae6616ac46d50e97a0ee",
+    "hits_in_scope_language": []
+   }
+  ],
+  "candidate_star_captures": [
+   {
+    "repository": "tlsa/libcyaml",
+    "api_url": "https://api.github.com/repos/tlsa/libcyaml",
+    "stargazers_count": 333,
+    "fork": false,
+    "archived": false,
+    "language": "C",
+    "latest_tags": [
+     "v1.4.2",
+     "v1.4.1",
+     "v1.4.0",
+     "v1.3.1",
+     "v1.3.0"
+    ],
+    "captured_at_utc": "2026-11-18T07:13:04.297414+00:00",
+    "response_sha256": "b712df06fceb245a881c7a24eb26e97ca027b7385d12839f3e9da92b1f3aa947"
+   },
+   {
+    "repository": "r-lib/yaml",
+    "api_url": "https://api.github.com/repos/r-lib/yaml",
+    "stargazers_count": 169,
+    "fork": false,
+    "archived": false,
+    "language": "C",
+    "latest_tags": [
+     "v2.3.10",
+     "v2.3.9",
+     "v2.3.7",
+     "v2.3.6",
+     "v2.3.5"
+    ],
+    "captured_at_utc": "2026-11-18T07:13:05.495304+00:00",
+    "response_sha256": "6f4eef70f50986bcef966425ea685c2d6029bde27eb12e242727ba9492b8eb9f"
+   },
+   {
+    "repository": "ElectricRCAircraftGuy/eRCaGuy_hello_world",
+    "api_url": "https://api.github.com/repos/ElectricRCAircraftGuy/eRCaGuy_hello_world",
+    "stargazers_count": 157,
+    "fork": false,
+    "archived": false,
+    "language": "C",
+    "latest_tags": [
+     "v0.3.0",
+     "v0.2.0"
+    ],
+    "captured_at_utc": "2026-11-18T07:13:23.770246+00:00",
+    "response_sha256": "bbf52887be6f55f1fd41d125289088adf3301039d9c150597be8e7472ad2f937"
+   },
+   {
+    "repository": "yaml/libyaml",
+    "api_url": "https://api.github.com/repos/yaml/libyaml",
+    "stargazers_count": 1175,
+    "fork": false,
+    "archived": false,
+    "language": "C",
+    "latest_tags": [
+     "dist-0.2.4",
+     "dist-0.2.3",
+     "dist-0.2.2",
+     "dist-0.2.1",
+     "0.2.6-rc.1"
+    ],
+    "captured_at_utc": "2026-11-18T07:13:24.822753+00:00",
+    "response_sha256": "8e45be334471bc91f3531d531e27e15ad98a4e2896e3ceba1d89fecbe4e842a7"
+   },
+   {
+    "repository": "pantoniou/libfyaml",
+    "api_url": "https://api.github.com/repos/pantoniou/libfyaml",
+    "stargazers_count": 348,
+    "fork": false,
+    "archived": false,
+    "language": "C",
+    "latest_tags": [
+     "v1.0.0-rc2",
+     "v1.0.0-rc1",
+     "v1.0.0-beta2",
+     "v1.0.0-beta1",
+     "v1.0.0-alpha8"
+    ],
+    "captured_at_utc": "2026-11-18T07:13:25.974633+00:00",
+    "response_sha256": "71312c089a9c386ac3b5253147c3601be03d0dd109aa91a12ff84ff9bbdfdac1"
+   }
+  ],
+  "other_hits": [
+   "gvvaughan/lyaml (229 stars at search time, from 'libyaml stars:>=100'): Lua binding over libyaml"
+  ],
+  "result": "No new qualifying C path. libyaml and libfyaml are already selected on Debian popcon; libcyaml (333 stars) stays excluded as a caller-schema mapping layer over libyaml; r-lib/yaml is the R package (bundled libyaml with R glue); eRCaGuy_hello_world is a demo collection; lyaml is a Lua binding. The cell stays at two."
  }
 }

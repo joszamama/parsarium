@@ -46,7 +46,8 @@
       "mappings": "CYAML_MAPPING needs a fixed cyaml_schema_field array naming each key and its offset in a caller-defined C struct; unknown keys are an error unless ignored.",
       "sequences": "CYAML_SEQUENCE and CYAML_SEQUENCE_FIXED take one entry schema pointer (sequence.entry), so every entry has one type. The order.yaml root sequence mixes mappings, a sequence, strings, null and false and cannot be described.",
       "parser": "The scanner, event parser and anchor/alias handling are libyaml's (src/load.c calls yaml_parser_parse); libcyaml's own 4,853 lines of src/*.c map events onto the schema."
-    }
+    },
+    "round_6": "Rechecked 2026-11-18 under the C/C++ star fallback: tlsa/libcyaml has 333 GitHub stars and tagged v1.4.2, but the exclusion is on eligibility (caller-schema mapping layer over libyaml, no generic document API), so stars do not change it."
   },
   {
     "name": "tree-sitter-yaml",
@@ -62,5 +63,44 @@
     "evidence": "src/node-types.json (sha256 1238b6c89fc6afb9723b6463a365843aa87e478025490660e5acfc9adaaf809b) names syntax nodes only: double_quote_scalar with escape_sequence children, block_scalar as one leaf, alias with alias_name, anchor, plain_scalar with integer_scalar/float_scalar/boolean_scalar/null_scalar children. Escape decoding, block-scalar indentation stripping, folding and chomping, and alias expansion are not done by the grammar.",
     "reason": "Excluded: a concrete-syntax-tree grammar for editors, not a document parser. The harness would have to decode escapes, fold and chomp block scalars and resolve aliases itself, so the parser would not report the document (C JSON jsmn tokenizer precedent). 9 Debian installations.",
     "round_5": "Rechecked 2026-11-18 under the tree-sitter rule in PROTOCOL.md after tree-sitter-sql was accepted in C SQL: the exclusion stands. Debian ships tree-sitter-yaml 0.7.2-3 (upstream v0.7.2). The SQL summary only reads node kinds and token text, while both YAML controls need escape decoding (\\\", \\t, \\n), literal and folded block-scalar indentation stripping, folding and chomping, and alias expansion (*base), none of which the grammar does. Typing plain scalars from their text, as the libyaml and libfyaml adapters do, would have been accepted."
+  },
+  {
+    "name": "r-yaml",
+    "status": "excluded_other_language_binding",
+    "metric_value": 169,
+    "metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "metric_error": null,
+    "family": "libyaml (bundled copy) with R glue",
+    "api_hint": null,
+    "note": "Round 6 GitHub star-fallback search (2026-11-18); latest tags ['v2.3.10', 'v2.3.9'].",
+    "found_by": "round_6_github_star_search",
+    "source": "https://github.com/r-lib/yaml",
+    "reason": "Excluded: the R package 'yaml' (R glue over a bundled libyaml copy); not a C parser library, and its parser is the selected libyaml family."
+  },
+  {
+    "name": "ercaguy_hello_world",
+    "status": "excluded_not_a_parser_library",
+    "metric_value": 157,
+    "metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "metric_error": null,
+    "family": "demo collection",
+    "api_hint": null,
+    "note": "Round 6 GitHub star-fallback search (2026-11-18); latest tags ['v0.3.0', 'v0.2.0'].",
+    "found_by": "round_6_github_star_search",
+    "source": "https://github.com/ElectricRCAircraftGuy/eRCaGuy_hello_world",
+    "reason": "Excluded: collection of beginner demos and templates in several languages; not a YAML parser library."
+  },
+  {
+    "name": "lyaml",
+    "status": "excluded_other_language_binding",
+    "metric_value": 229,
+    "metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "metric_error": "stars read from the search response ('libyaml stars:>=100'), not a repository capture",
+    "family": "libyaml",
+    "api_hint": null,
+    "note": "Round 6 GitHub star-fallback search (2026-11-18).",
+    "found_by": "round_6_github_star_search",
+    "source": "https://github.com/gvvaughan/lyaml",
+    "reason": "Excluded: Lua binding over libyaml; not a C parser library, and its parser is the selected libyaml."
   }
 ]

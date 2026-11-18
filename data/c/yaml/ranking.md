@@ -27,3 +27,5 @@ All 90 `yaml` hits are classified in the [registry snapshot](registry-snapshot.j
 Standard and runtime APIs: none documented ([standard.json](standard.json)).
 
 Round 4 (2026-11-18): yaml-runtimes, Debian apt-cache search, vcpkg/Homebrew/Conan lists and a GitHub C search found no further C YAML library with a Debian source ([snapshot](registry-snapshot.json), `round_4_discovery`).
+
+Round 6 (2026-11-18): bounded GitHub star search for C YAML libraries with at least 100 stars ([snapshot](registry-snapshot.json), `round_6_star_fallback`) found no new qualifying library. libcyaml (333 stars) stays excluded on eligibility; r-lib/yaml (R package), lyaml (Lua binding) and a demo collection are not C parser libraries ([leads.json](leads.json)).
