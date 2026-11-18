@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "project": "toml/rust/antlr_rust_toml_parser",
+  "pass": true,
+  "base_project_receipt_sha256": "b043397e21aacc7f9cfbb7179d4891bae00afd1ded818ac9f91e08f0c9b6b94c",
+  "overlay_file_sha256": {
+    "Cargo.toml": "0c25a391b1b7260079b6a481803cca011ec849b2bd4014a5e5d034e189d67eba",
+    "Cargo.lock": "9417ee73f729d32a6bc07fb3c38595be9c91db330ddce10d5ff21d0ea2abfe3a",
+    "afl_fuzzer.rs": "6498e04b6251d59ad0cd59a645a605f3f325c9e342c04cfde93fe74b8743570c",
+    "Dockerfile": "e5902616380ff6a4924c03655b70bf804d2f5cc5d2d6690176cb9e0aa73c6352",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "build.py": "5a9355b8a1f72179244a69efedd642fb1a0390a80ef2beae59afa40eb5c00d18"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "f6d21f9d6a267d1d574edb0f9499353d2d4ce3a2132972e84c64628726053c86",
+  "image_id": "sha256:2f40c6fd0853eeb0e4b33854b66a9a5bfb7fcce76f2b2de82f282c52b8fd7ae6",
+  "platform": "linux/arm64",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "feedback_edges": 3589,
+  "afl_map_size": 32882,
+  "feedback_kind": "afl_rs_antlr_rust_toml_parser_only_sancov_edges",
+  "feedback_scope": "Only antlr_rust_toml_parser crate objects carry SanitizerCoverage guards; harness, antlr-rust-runtime, toml_datetime, serde_json, AFL runtime and std are uninstrumented; hash seeds are fixed by the getrandom AFL_PRELOAD shim",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "antlr_rust_toml_parser"
+    ],
+    "rlib_guard_bytes": {
+      "antlr_rust_toml_parser": 131508
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "antlr4_runtime",
+      "cfg_if",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_toml_antlr_rust_toml_parser_harness",
+      "psm",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "stacker",
+      "thiserror",
+      "toml_datetime",
+      "xdg"
+    ],
+    "binary_guards": 32877
+  },
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "reason": "antlr-rust-runtime keeps std HashMap/HashSet caches (DFA, prediction and ATN state); constant getrandom bytes fix their RandomState seeds; the parser source is unchanged.",
+    "replay_output_unchanged": true
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:68cedc678809026d6a1f3c05d8cc2c91b76e761ab01af804b2d8334a69b0c892",
+  "variant_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "control_output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "variant_output": {
+    "floats": {
+      "exponent": {
+        "type": "float",
+        "value": "1000.0"
+      },
+      "fraction": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "mixed": {
+        "type": "float",
+        "value": "0.015625"
+      },
+      "negative": {
+        "type": "float",
+        "value": "-0.5"
+      }
+    },
+    "integers": {
+      "binary": {
+        "type": "integer",
+        "value": "13"
+      },
+      "decimal": {
+        "type": "integer",
+        "value": "99"
+      },
+      "hex": {
+        "type": "integer",
+        "value": "3735928559"
+      },
+      "negative": {
+        "type": "integer",
+        "value": "-17"
+      },
+      "octal": {
+        "type": "integer",
+        "value": "493"
+      },
+      "underscored": {
+        "type": "integer",
+        "value": "1000000"
+      }
+    },
+    "keys": {
+      "a": {
+        "b": {
+          "c": {
+            "type": "integer",
+            "value": "1"
+          }
+        }
+      },
+      "quoted key": {
+        "type": "string",
+        "value": "q"
+      },
+      "site": {
+        "example.com": {
+          "type": "bool",
+          "value": "true"
+        }
+      }
+    },
+    "strings": {
+      "escapes": {
+        "type": "string",
+        "value": "tab\tquote\"backslash\\ é"
+      },
+      "literal": {
+        "type": "string",
+        "value": "C:\\Users\\parsarium"
+      },
+      "multiline": {
+        "type": "string",
+        "value": "first second"
+      },
+      "raw_multiline": {
+        "type": "string",
+        "value": "line one\nline two"
+      }
+    },
+    "times": {
+      "local_date": {
+        "type": "date-local",
+        "value": "1979-05-27"
+      },
+      "local_datetime": {
+        "type": "datetime-local",
+        "value": "1979-05-27T07:32:00"
+      },
+      "local_time": {
+        "type": "time-local",
+        "value": "00:32:00.25"
+      },
+      "offset": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00.5Z"
+      }
+    }
+  },
+  "repeats": 10,
+  "variant_feedback_edges": 3028,
+  "edges_only_in_control": 810,
+  "edges_only_in_variant": 249,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/antlr-rust-toml-parser-0.34.0/",
+    "control_lines": {
+      "src/ast.rs": 30,
+      "src/decode.rs": 242,
+      "src/generated/toml_lexer.rs": 27,
+      "src/generated/toml_parser.rs": 261,
+      "src/string.rs": 46
+    },
+    "variant_lines": {
+      "src/ast.rs": 30,
+      "src/decode.rs": 205,
+      "src/generated/toml_lexer.rs": 27,
+      "src/generated/toml_parser.rs": 208,
+      "src/string.rs": 95
+    },
+    "files_with_different_line_counts": [
+      "src/decode.rs",
+      "src/generated/toml_parser.rs",
+      "src/string.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      3589,
+      3589,
+      3589,
+      3589,
+      3589,
+      3589,
+      3589,
+      3589,
+      3589,
+      3589
+    ],
+    "stable_edges": 3589,
+    "union_edges": 3589,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      3028,
+      3028,
+      3028,
+      3028,
+      3028,
+      3028,
+      3028,
+      3028,
+      3028,
+      3028
+    ],
+    "stable_edges": 3028,
+    "union_edges": 3028,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}

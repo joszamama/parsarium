@@ -1233,5 +1233,252 @@
       "captured_at_utc": "2026-11-17T16:36:50.418362+00:00"
     },
     "project": "projects/toml/rust/toml_spanner/verification.json"
+  },
+  {
+    "name": "antlr-rust-toml-parser",
+    "version": "0.34.0",
+    "license": "Apache-2.0",
+    "input_api": "antlr_rust_toml_parser::parse(&str) -> Result<Document, Error>; Document::items() -> [Item::{Assignment, Table}]; Assignment::{key().segments(), value()} with Value::{String, Integer(i64), Float(String), Boolean, DateTime(toml_datetime::Datetime), Array, InlineTable}; TableHeader::{key(), is_array()}",
+    "documentation": "https://docs.rs/antlr-rust-toml-parser/0.34.0/antlr_rust_toml_parser/fn.parse.html",
+    "source": "https://static.crates.io/crates/antlr-rust-toml-parser/antlr-rust-toml-parser-0.34.0.crate",
+    "scope": "Flat typed items over locally decoded UTF-8 text from antlr_rust_toml_parser::parse: the crate's checked-in ANTLR-generated lexer and parser recognize the document and its decoder returns key/value assignments with typed values (integers decoded to i64, floats as the underscore-free float token, date-times as toml_datetime::Datetime) and [table]/[[array]] headers in source order. As its README documents, table nesting and duplicate-key semantics are left to the consumer, so the harness nests assignments under the most recent header; the float payload is read with str::parse::<f64> (the crate's own test shows it is directly parseable) and offset date-times are converted to the UTC instant arithmetically. Both valid controls match the hand-written typed trees exactly; only the TOML 1.0.0 subset in the two controls is tested.",
+    "family": "antlr-rust-toml-parser (ophi-dev antlr-rust-runtime workspace): own ANTLR v4 TOML grammar with a checked-in generated lexer and parser and its own typed-value decoder, run on the generic antlr-rust-runtime crate; independent of toml_parser, toml, toml_edit, taplo, boml and toml-spanner. Date-time token text is decoded with toml_datetime 1.1.1 from the toml-rs project (the date-time type crate the toml family also uses); no toml-rs lexer or parser is involved.",
+    "control": "controls/toml/service-config.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "second_control": "controls/toml/typed-scalars.toml",
+    "second_control_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "metric": {
+      "name": "crates.io recent downloads (90 days)",
+      "value": 7967,
+      "source": "data/rust/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:36:52.319028+00:00"
+    },
+    "project": "projects/toml/rust/antlr_rust_toml_parser/verification.json"
   }
 ]

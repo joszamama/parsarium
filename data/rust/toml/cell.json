@@ -1,10 +1,10 @@
 {
   "ecosystem": "rust",
   "format": "toml",
-  "status": "pilot_five_selected_search_bounded",
+  "status": "pilot_six_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 5,
+  "verified_third_party_count": 6,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "toml",
@@ -19,7 +19,7 @@
   "search_limit_per_query": 100,
   "search_hits_recorded": 300,
   "unique_search_hits": 283,
-  "unresolved_documentation_leads": 7,
+  "unresolved_documentation_leads": 6,
   "uncertainty": "Bounded TOML search captured 2026-11-17: 3 crates.io queries, 300 recorded hits (283 unique), at most 100 per query. Five paths are verified. toml 1.2.1+spec-1.1.0 and toml_edit 0.25.19+spec-1.1.0 both lex and parse through the same toml_parser 1.1.5 crate and build their own trees from its events, so they are one parser family with two tree builders, not two independent parsers; their coverage is recorded separately for the own crate and for toml_parser. boml 2.0.1 (136,881 recent downloads) is verified as an independent parser family: 446 own lines on service-config and 566 on typed-scalars; AFL++ edges scoped to the boml crate repeat identically over ten runs per control (596 vs 693, 453 differ) with getrandom fixed by the AFL_PRELOAD shim. toml-spanner 1.0.3 (44,429 recent downloads) is verified as an independent parser family: 1,222 own lines on service-config and 1,108 on typed-scalars; AFL++ edges scoped to the toml_spanner crate repeat identically over ten runs per control (689 vs 644, 427 differ) with getrandom fixed by the AFL_PRELOAD shim. taplo 0.14.0 (703,745 recent downloads) is verified as an independent parser family: 884 own lines on service-config and 896 on typed-scalars; AFL++ edges scoped to the taplo crate repeat identically over ten runs per control (2,278 vs 2,552, 1,366 differ) once the harness installs a fixed ahash seed source (ahash otherwise seeds each DOM lookup map from ASLR-dependent addresses, and repeats varied between 2,287 and 2,301 edges) and the AFL_PRELOAD shim fixes getrandom. basic-toml 0.1.10 and toml-span 0.7.2 have no datetime type and reject both controls at the first offset date-time, so they stay leads. nanoserde 0.2.1 rejects the hexadecimal integer and has a single f64 number type. 7 leads remain. A 2026-11-18 pass over the recorded snapshot added three unrun leads from the 'toml parser' and 'toml deserialize' queries: facet-toml 0.46.1 (24,074; a further tree builder over toml_parser), deser-toml 0.10.2 (12,002; an independent TOML 1.1 parser whose documented API is typed deserialization only, with date-times falling back to strings) and antlr-rust-toml-parser 0.34.0 (7,967; described as internal to antlr-rust-codegen). The other hits in the 300-hit surface are unrelated crates, configuration loaders over toml, or tree-sitter grammars, so the cell stays at 5 below the ten-path ceiling until those leads are run. The pinned releases implement TOML 1.1.0; two valid TOML 1.0.0 controls establish only the tested subset; malformed input, huge documents and TOML 1.1 features are untested. Recent downloads include transitive dependency pulls (Cargo itself depends on toml and toml_edit). toml_edit stores tables in IndexMaps with std RandomState hashing; without the overlay's getrandom AFL_PRELOAD shim, 1 of 5 afl-showmap runs on service-config.toml gave 1,546 instead of 1,530 tuples (checked 2026-11-17), so its overlay fixes the hash keys (afl_fixed_hashmap_keys) and then repeats are identical.",
   "primary_metric": "crates.io recent downloads (90 days)",
   "registry_snapshot": "data/rust/toml/registry-snapshot.json",
@@ -31,7 +31,8 @@
     "projects/toml/rust/toml_edit/verification.json",
     "projects/toml/rust/boml/verification.json",
     "projects/toml/rust/toml_spanner/verification.json",
-    "projects/toml/rust/taplo/verification.json"
+    "projects/toml/rust/taplo/verification.json",
+    "projects/toml/rust/antlr_rust_toml_parser/verification.json"
   ],
   "protocol": "catalog/toml/PROTOCOL.md"
 }
