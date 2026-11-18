@@ -167,7 +167,7 @@ def main() -> None:
         raise ValueError(f"unknown JavaScript MP3 project: {selected}")
     results = [check(slug) for slug in selected]
     if sys.argv[1:]:
-        # A scoped receipt for newly added paths; the cell aggregate is refreshed by the integrator.
+        # A scoped receipt for newly added paths; the cell aggregate is refreshed separately.
         for result in results:
             slug = result["project"].rsplit("/", 1)[-1]
             path = ROOT / "data/javascript/mp3" / f"{slug}-feedback-differential.json"
