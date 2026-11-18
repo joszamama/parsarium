@@ -20,11 +20,11 @@
   <a href="ETHICS.md">Ethics</a>
 </p>
 
-The [website](https://parsarium.com/) is built from this repository on every push: it helps you choose a format, find a documented parser, and assemble a runnable target set.
-
 Parsarium is a format-first catalog and target set for parser experiments. Its active collection covers ten formats across C, C++, Go, Java, JavaScript, Python, Rust, and PHP. Six more formats (JSON, XML, YAML, TOML, SQL, and DNS messages) are pilots with their own counts. Selected third-party paths have containerized, instrumented harnesses that accept local inputs and generated corpora. Each verified catalog entry has a pinned release, parser API, valid control, observed result, and evidence. Popularity ranks verified third-party packages **within a format and ecosystem**; the rankings do not compare ecosystems or imply independent parser engines.
 
 The active catalog selects **791 fully runnable third-party package paths** across ten formats and eight ecosystems. Each cell has at most ten; 77 of 80 reach ten, and the other three report the smaller supported count. Every selected path has a positive numeric adoption signal, though 53 use a separately labeled secondary source. Three adopted, control-verified candidates lack verified parser feedback and are [excluded with their blockers recorded](data/curation/feedback-exclusions.json), without filling their slots with lower-ranked leads. The [curation record](data/curation/README.md) explains metrics and remaining uncertainty. The six pilot formats add 372 selected paths in 48 cells, 28 of which reach ten. Standard/runtime APIs and the pilot formats have [separate coverage counts](data/projects-coverage.json). Cells below ten record their search limits and blockers rather than filling slots with unqualified packages.
+
+The [website](https://parsarium.com/) is built from this repository on every push: it helps you choose a format, find a documented parser, and assemble a runnable target set.
 
 ## Install
 
