@@ -3986,5 +3986,53 @@
       "jaula": 21
     },
     "result": "No new C JSON value library with a Debian source: every C library in the apt-cache list is selected or already decided (libcjson, libfastjson, libjansson, libjq, libjsmn, libjson-c, libjson-glib, libjsonparser, liblaxjson, libyajl, libyyjson); the others are C++ (jaula, jsoncpp, jsoncons, simdjson, glaze, boost-json, POCO, univalue), Objective-C (sbjson), JSON-RPC, JWT, schema-validator, Telegram or Jsonnet libraries. sqlite3 (297,378) parses JSON only through its SQL json functions inside a multi-purpose engine, the same rule as systemd sd-json. vcpkg adds nanojsonc and parson, and GitHub C parsers (lwjson, pdjson, centijson, sj.h, json.h, tiny-json, nxjson, mjson) are not packaged in Debian, so they have no primary metric."
+  },
+  "round_5_tree_sitter": {
+    "rule": "PROTOCOL.md (Eligibility): a concrete-syntax-tree grammar qualifies only if the harness can produce the cell result by reading node kinds and text, typing scalar tokens from their literal text at most; it does not qualify if the harness would have to decode escapes or references, fold block scalars, resolve aliases, merge TOML tables or resolve namespaces itself",
+    "debian_search": {
+      "query": "https://sources.debian.org/api/search/tree-sitter/",
+      "checked_at_utc": "2026-11-18",
+      "tree_sitter_sources": [
+        "tree-sitter",
+        "tree-sitter-asm",
+        "tree-sitter-bash",
+        "tree-sitter-c",
+        "tree-sitter-cpp",
+        "tree-sitter-go",
+        "tree-sitter-ini",
+        "tree-sitter-java",
+        "tree-sitter-json",
+        "tree-sitter-lua",
+        "tree-sitter-markdown",
+        "tree-sitter-php",
+        "tree-sitter-powershell",
+        "tree-sitter-query",
+        "tree-sitter-ruby",
+        "tree-sitter-rust-orchard",
+        "tree-sitter-sdml",
+        "tree-sitter-sql",
+        "tree-sitter-verilog",
+        "tree-sitter-vim",
+        "tree-sitter-vimdoc",
+        "tree-sitter-yaml"
+      ],
+      "format_grammars": {
+        "json": "tree-sitter-json 0.24.8-3 (forky, sid)",
+        "yaml": "tree-sitter-yaml 0.7.2-3 (forky, sid)",
+        "xml": "none (sources.debian.org/api/src/tree-sitter-xml/ returns 404)",
+        "toml": "none (sources.debian.org/api/src/tree-sitter-toml/ returns 404)",
+        "json5": "none (sources.debian.org/api/src/tree-sitter-json5/ returns 404)"
+      },
+      "popcon_sourcemax": {
+        "snapshot": "data/curation/popcon-sourcemax-by_inst.gz (sourcemax by_inst, SHA-256 9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8)",
+        "tree-sitter-json": 7,
+        "tree-sitter-yaml": 9,
+        "tree-sitter-sql": 8,
+        "tree-sitter (runtime)": 15318,
+        "note": "No tree-sitter XML or TOML grammar row exists in the snapshot."
+      }
+    },
+    "decision": "tree-sitter-json excluded (syntax tree only)",
+    "evidence": "Debian tree-sitter-json 0.24.8-3 src/node-types.json (SHA-256 620b6f5d38676a97526e9d128972d4b156ddbdf6e130cd7e6b9c35e6823e943f): a string node has only string_content and escape_sequence children and a number node is one leaf; document allows several top-level values. Both controls contain escapes (\\u00e9, \\\", \\u0041) whose decoded value the run-control compares, so the harness would decode JSON string escapes itself. Typing numbers from their token text alone would have been accepted."
   }
 }

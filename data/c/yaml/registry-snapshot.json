@@ -2096,5 +2096,53 @@
    "libsyck": null
   },
   "result": "No new C YAML parser with a Debian source: apt-cache lists only libyaml, libfyaml and libcyaml (excluded mapping layer) as C YAML libraries; Ruby, Perl, Erlang, Lua and PHP packages are bindings without a C API. vcpkg/Homebrew/Conan add only portable-libyaml (a relocatable Homebrew build of libyaml 0.2.5). GitHub C parsers (andrewmd5/cyaml, hekemen/mini_yaml, mwri/libeasyyaml and others) are not packaged in Debian, so they have no primary metric; GitHub stars are allowed only in PLY cells."
+ },
+ "round_5_tree_sitter": {
+  "rule": "PROTOCOL.md (Eligibility): a concrete-syntax-tree grammar qualifies only if the harness can produce the cell result by reading node kinds and text, typing scalar tokens from their literal text at most; it does not qualify if the harness would have to decode escapes or references, fold block scalars, resolve aliases, merge TOML tables or resolve namespaces itself",
+  "debian_search": {
+   "query": "https://sources.debian.org/api/search/tree-sitter/",
+   "checked_at_utc": "2026-11-18",
+   "tree_sitter_sources": [
+    "tree-sitter",
+    "tree-sitter-asm",
+    "tree-sitter-bash",
+    "tree-sitter-c",
+    "tree-sitter-cpp",
+    "tree-sitter-go",
+    "tree-sitter-ini",
+    "tree-sitter-java",
+    "tree-sitter-json",
+    "tree-sitter-lua",
+    "tree-sitter-markdown",
+    "tree-sitter-php",
+    "tree-sitter-powershell",
+    "tree-sitter-query",
+    "tree-sitter-ruby",
+    "tree-sitter-rust-orchard",
+    "tree-sitter-sdml",
+    "tree-sitter-sql",
+    "tree-sitter-verilog",
+    "tree-sitter-vim",
+    "tree-sitter-vimdoc",
+    "tree-sitter-yaml"
+   ],
+   "format_grammars": {
+    "json": "tree-sitter-json 0.24.8-3 (forky, sid)",
+    "yaml": "tree-sitter-yaml 0.7.2-3 (forky, sid)",
+    "xml": "none (sources.debian.org/api/src/tree-sitter-xml/ returns 404)",
+    "toml": "none (sources.debian.org/api/src/tree-sitter-toml/ returns 404)",
+    "json5": "none (sources.debian.org/api/src/tree-sitter-json5/ returns 404)"
+   },
+   "popcon_sourcemax": {
+    "snapshot": "data/curation/popcon-sourcemax-by_inst.gz (sourcemax by_inst, SHA-256 9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8)",
+    "tree-sitter-json": 7,
+    "tree-sitter-yaml": 9,
+    "tree-sitter-sql": 8,
+    "tree-sitter (runtime)": 15318,
+    "note": "No tree-sitter XML or TOML grammar row exists in the snapshot."
+   }
+  },
+  "decision": "tree-sitter-yaml stays excluded (syntax tree only)",
+  "evidence": "See data/c/yaml/leads.json tree-sitter-yaml (round_5): escapes, block scalars and aliases are left to the harness."
  }
 }
