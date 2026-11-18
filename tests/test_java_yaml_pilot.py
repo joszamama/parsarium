@@ -165,6 +165,26 @@ class JavaYamlPilotTest(unittest.TestCase):
             self.assertNotIn(name, decisions)
         self.assertIn("Round 4", self.cell["uncertainty"])
 
+    def test_round_six_discovery_routes_are_decided(self):
+        leads = read(DATA / "leads.json")
+        snapshot = read(DATA / "registry-snapshot.json")
+        decisions = {lead["name"]: lead for lead in leads}
+        round6 = snapshot["round_6_targeted_leads"]
+        for name in round6["leads_added"]:
+            self.assertIn(decisions[name]["status"], {"fails_control", "excluded"}, name)
+            self.assertTrue(decisions[name]["note"].startswith("Discovery route: round 6"), name)
+            self.assertGreater(decisions[name]["metric_value"], 0, name)
+        for name in ("com.soywiz.korlibs.korio:korio-jvm", "com.soywiz.korge:korlibs-serialization-yaml"):
+            self.assertEqual(decisions[name]["status"], "fails_control", name)
+        # yagi passes the controls but documents no input API, so it is not a selected path.
+        self.assertEqual(decisions["org.raml:yagi"]["status"], "excluded")
+        probes = read(DATA / "round6-lead-probes.json")["probes"]
+        self.assertTrue(all(c["matches_oracle"] for c in probes[0]["controls"].values()))
+        for name, metric in round6["zero_metric_hits_not_leads"].items():
+            self.assertEqual(metric["value"], 0, name)
+            self.assertNotIn(name, decisions)
+        self.assertIn("Round 6", self.cell["uncertainty"])
+
 
 if __name__ == "__main__":
     unittest.main()

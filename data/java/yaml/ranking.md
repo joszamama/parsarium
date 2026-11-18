@@ -39,6 +39,8 @@ All paths load the documents into ordered trees; aliases resolve to the anchored
 | org.apache.camel:camel-snakeyaml | excluded | 426 | SnakeYAML via Camel SnakeYAMLDataFormat (integration data format) |
 | no.nav.common:yaml | excluded | 275 | SnakeYAML via Jackson YAMLFactory (NAV common utility) |
 | io.smallrye.config:smallrye-config-source-yaml | excluded | 249 | SnakeYAML via SmallRye Config YamlConfigSource (configuration source) |
+| com.soywiz.korlibs.korio:korio | excluded | 214 | korlibs Yaml (korio KMP root module) |
+| com.soywiz.korlibs.korio:korio-jvm | fails_control | 212 | korlibs Yaml (own minimal Kotlin reader, korio) |
 | org.apache.camel:camel-yaml-io | excluded | 178 | Camel route model YAML writer |
 | org.citrusframework:citrus-yaml | excluded | 171 | SnakeYAML via Citrus YAML test DSL |
 | io.circe:circe-yaml_2.12 | excluded | 170 | SnakeYAML via circe-yaml (Scala 2.12 cross-build) |
@@ -53,16 +55,20 @@ All paths load the documents into ordered trees; aliases resolve to the anchored
 | io.jenkins.plugins:snakeyaml-api | excluded | 74 | SnakeYAML (Jenkins library-plugin repackaging) |
 | io.ktor:ktor-server-config-yaml-jvm | excluded | 72 | kaml via Ktor YamlConfig (server configuration) |
 | org.http4k:http4k-format-moshi-yaml | excluded | 66 | SnakeYAML via Moshi via http4k (message-format lens) |
+| org.netbeans.api:org-netbeans-libs-snakeyaml_engine | excluded | 64 | SnakeYAML Engine (NetBeans library wrapper module) |
 | dev.zio:zio-json-yaml_2.13 | selected | 63 | SnakeYAML via zio-json-yaml (Scala wrapper) |
+| ch.exense.step:step-plans-yaml-parser | excluded | 61 | Jackson YAML via Step plan reader |
 | net.mamoe.yamlkt:yamlkt-jvm | fails_control | 56 | yamlkt (own Kotlin parser) |
 | com.charleskorn.kaml:kaml | excluded | 56 | SnakeYAML Engine KMP via kaml (KMP root module) |
 | org.codehaus.groovy:groovy-yaml | excluded | 49 | SnakeYAML via Jackson YAMLFactory via Groovy YamlSlurper (Groovy 3 coordinate) |
 | org.spongepowered:configurate-yaml | fails_control | 48 | SnakeYAML (bundled) via Configurate |
 | io.maryk:maryk-yaml-jvm | fails_control | 45 | maryk-yaml (own Kotlin token reader) |
 | io.maryk:maryk-yaml | excluded | 45 | maryk-yaml (KMP root module) |
+| org.jboss.forge.addon:parser-yaml | excluded | 45 | SnakeYAML via JBoss Forge YamlResource (Forge addon) |
 | io.takari.polyglot:polyglot-yaml | excluded | 38 | SnakeYAML via Maven Polyglot (POM model mapping) |
 | dev.zio:zio-config-yaml_3 | excluded | 38 | SnakeYAML Engine via ZIO Config YamlConfigProvider (configuration loader) |
 | net.pwall.yaml:yaml-simple | fails_control | 36 | kjson-yaml predecessor (own Kotlin parser) |
+| org.raml:yagi | excluded | 32 | SnakeYAML 1.23 via RAML yagi node tree (wrapper) |
 | org.jyaml:jyaml | fails_control | 31 | JYaml |
 | io.kjson:kjson-yaml | selected | 29 | kjson-yaml (own Kotlin parser) |
 | org.virtuslab:scala-yaml_3 | fails_control | 28 | scala-yaml (own Scala 3 parser) |
@@ -77,6 +83,8 @@ All paths load the documents into ordered trees; aliases resolve to the anchored
 | org.bspfsystems:yamlconfiguration | fails_control | 13 | SnakeYAML via Bukkit-style YamlConfiguration (configuration library) |
 | net.jcazevedo:moultingyaml_2.12 | fails_control | 12 | SnakeYAML via moultingyaml (Scala) |
 | org.jruby.extras:jvyamlb | fails_control | 11 | JvYAML (PyYAML-derived Java port; byte-oriented JRuby variant) |
+| io.github.woody230.ktx:serialization-yaml | excluded | 11 | yamlkt via ktx serialization-yaml |
+| org.yamlscript:yamlscript | excluded | 11 | libyamlscript (GraalVM native image) via JNA |
 | com.github.pureconfig:pureconfig-yaml_2.13 | fails_control | 10 | SnakeYAML via PureConfig YamlConfigSource (configuration library) |
 | net.pwall.yaml:yaml-base | excluded | 9 | yaml-simple node classes |
 | dev.hnaderi:yaml4s-snake_2.13 | fails_control | 9 | SnakeYAML Engine via yaml4s-snake (Scala wrapper; converter shared with circe-yaml-v12) |
@@ -85,6 +93,7 @@ All paths load the documents into ordered trees; aliases resolve to the anchored
 | net.jcazevedo:moultingyaml_2.11 | excluded | 8 | SnakeYAML via moultingyaml (Scala 2.11 cross-build) |
 | dev.hnaderi:yaml4s-snake_2.12 | excluded | 8 | SnakeYAML Engine via yaml4s-snake (Scala 2.12 cross-build) |
 | io.github.yaml-path:yaml-path | excluded | 7 | SnakeYAML via Jackson YAMLMapper (path query layer) |
+| com.soywiz:korlibs-serialization-yaml | excluded | 7 | korlibs Yaml (KMP root, pre-releases only) |
 | org.virtuslab:scala-yaml_2.13 | excluded | 6 | scala-yaml (Scala 2.13 cross-build) |
 | io.circe:circe-yaml-v12_2.13 | fails_control | 6 | SnakeYAML Engine via circe-yaml-v12 (Scala wrapper; same project as circe-yaml) |
 | net.java.dev:jvyaml | fails_control | 6 | JvYAML (PyYAML-derived Java port) |
@@ -98,15 +107,23 @@ All paths load the documents into ordered trees; aliases resolve to the anchored
 | io.maryk:yaml | excluded | 3 | maryk-yaml predecessor coordinate (KMP root) |
 | net.jcazevedo:moultingyaml_2.13 | excluded | 3 | SnakeYAML via moultingyaml (Scala 2.13 cross-build) |
 | ninja.leaping.configurate:configurate-yaml | excluded | 3 | SnakeYAML via Configurate (predecessor coordinate) |
+| org.apiaddicts.apitools.dosonarapi.sslr:sslr-yaml-parser | excluded | 3 | Jackson YAML via SSLR grammar toolkit |
+| pl.droidsonroids.yaml:snakeyaml | excluded | 3 | SnakeYAML 1.18 fork (Android) |
 | io.circe:circe-yaml-v12_2.12 | excluded | 2 | SnakeYAML Engine via circe-yaml-v12 (Scala 2.12 cross-build) |
 | com.github.siroshun09.configapi:yaml | excluded | 2 | SnakeYAML via ConfigAPI YamlConfiguration (configuration library) |
 | com.github.autermann:yaml | fails_control | 2 | SnakeYAML via autermann YamlNode tree |
 | org.embulk:embulk-util-snakeyaml | excluded | 2 | SnakeYAML tag resolver helper for Embulk |
+| com.soywiz.korge:korlibs-serialization-yaml | fails_control | 2 | korlibs Yaml (korge split module) |
+| io.github.behzodhalil:blahblah-yaml | excluded | 2 | yamlkt via blahblah dataset provider |
 | io.ktor:ktor-server-config-yaml | excluded | 1 | kaml via Ktor YamlConfig (KMP root module) |
 | io.circe:circe-yaml-scalayaml_3 | excluded | 1 | scala-yaml via circe-yaml-scalayaml (Scala wrapper) |
 | org.asux:yaml | excluded | 1 | ASUX YAML command-line processor |
 | org.elypia.yaml4deltaspike:yaml4deltaspike | excluded | 1 | SnakeYAML via DeltaSpike YamlConfigSource (configuration source) |
 | com.github.mhshams:dahgan-core | excluded | 1 | dahgan (Kotlin port of the YAML 1.2 reference parser, tokenizer module) |
 | com.dnanexus:dxyaml | fails_control | 1 | SnakeYAML Engine via dxYaml (moultingyaml-derived Scala wrapper) |
+| com.societegenerale.sonar.sslr:sslr-yaml-parser | excluded | 1 | Jackson YAML via SSLR grammar toolkit |
+| space.kscience:dataforge-io-yaml | excluded | 1 | yamlkt via DataForge meta format |
+
+Round 6 (2026-11-18) searched Maven Central further ('yaml parser', 'yaml-parser', 'yml', 'snakeyaml', 'a:yaml', 'yaml kotlin', 'yaml scala') and named JVM leads; no lead qualifies ([probes](round6-lead-probes.json)). org.raml:yagi passes both controls but documents no input API.
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).

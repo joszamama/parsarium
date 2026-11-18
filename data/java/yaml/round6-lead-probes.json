@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-11-18",
+  "environment": "local OpenJDK 21.0.2 (macOS arm64), Maven Central jars with Maven-resolved dependencies; exploratory probes on both valid controls, not pinned harnesses",
+  "oracle": "hand-written typed trees in controls/yaml/check_controls.py",
+  "probes": [
+    {
+      "coordinate": "org.raml:yagi:1.0.51",
+      "jar_sha256": "197b8d82dc422f3a0cbfaf73defbc431cf92e62e514422720f734e69258406cf",
+      "sources_sha256": "063f8df2936d71ef6d005d902bae8e13742bc50f66b1fd16e64105dcd8931c91",
+      "underlying": "org.yaml:snakeyaml:1.23",
+      "call": "NodeParser.parse(null, path, text); ObjectNode/KeyValueNode, ArrayNode, StringNode, IntegerNode, FloatingNode, BooleanNode, NullNode walked in order",
+      "controls": {
+        "catalog.yaml": {
+          "matches_oracle": true
+        },
+        "order.yaml": {
+          "matches_oracle": true
+        }
+      },
+      "decision": "excluded: no documented input API"
+    },
+    {
+      "coordinate": "com.soywiz.korlibs.korio:korio-jvm:4.0.10",
+      "call": "korlibs.io.serialization.yaml.Yaml.INSTANCE.decode(text)",
+      "controls": {
+        "catalog.yaml": {
+          "matches_oracle": false,
+          "observed": "{retries=3, label=base}"
+        },
+        "order.yaml": {
+          "matches_oracle": false,
+          "observed": "..."
+        }
+      }
+    },
+    {
+      "coordinate": "com.soywiz.korge:korlibs-serialization-yaml-jvm:5.4.0",
+      "call": "korlibs.io.serialization.yaml.Yaml.INSTANCE.decode(text)",
+      "controls": {
+        "catalog.yaml": {
+          "matches_oracle": false,
+          "observed": "{retries=3, label=base}"
+        },
+        "order.yaml": {
+          "matches_oracle": false,
+          "observed": "..."
+        }
+      }
+    }
+  ]
+}
