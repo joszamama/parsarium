@@ -41,6 +41,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [flow-php/pg-query-ext / PHP](php/flow_php_pg_query_ext/README.md)
 - [flow-php/postgresql / PHP](php/flow_php_postgresql/README.md)
 - [greenlion/php-sql-parser / PHP](php/greenlion_php_sql_parser/README.md)
+- [kwasii/laravel-sql-parser / PHP](php/kwasii_laravel_sql_parser/README.md)
 - [phpmyadmin/sql-parser / PHP](php/phpmyadmin_sql_parser/README.md)
 - [sad_spirit/pg_builder / PHP](php/sad_spirit_pg_builder/README.md)
 - [soundintheory/php-sql-parser / PHP](php/soundintheory_php_sql_parser/README.md)
