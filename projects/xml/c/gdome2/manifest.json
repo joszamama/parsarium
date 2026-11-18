@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "c",
+  "package": "gdome2",
+  "release": "0.8.1+debian-10",
+  "catalog_parser": "data/c/xml/parsers.json",
+  "source_lock": "projects/xml/c/gdome2/source-lock.json",
+  "source_sha256": "f4bb80a2ef8e5fd9397ab8aa36d059d0b32e98c4bcf185c7952a7e3874d1d543",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "oracle": "controls/xml/check_controls.py (Python pyexpat with namespace processing, a different family from libxml2)",
+  "namespace_resolution": true,
+  "api": "gdome_di_mkref(); gdome_di_createDocFromMemory(impl, NUL-terminated copy of the local bytes, GDOME_LOAD_PARSING, &exc); walk from gdome_doc_documentElement with gdome_n_nodeType, gdome_n_namespaceURI, gdome_n_localName, gdome_n_nodeName, gdome_n_nodeValue, gdome_n_attributes/gdome_nnm_length/gdome_nnm_item, gdome_n_firstChild and gdome_n_nextSibling; gdome_doc_unref, gdome_di_unref",
+  "namespace_semantics": "gdome2 implements DOM Level 2 Core namespaces over libxml2's tree: gdome_n_namespaceURI and gdome_n_localName give each element's and prefixed attribute's expanded name (no URI for unprefixed attributes and for elements under xmlns=\"\"), and libxml2's namespace definitions appear in the attribute map as attributes in the http://www.w3.org/2000/xmlns/ namespace. harness.c counts those declaration attributes, collects their non-empty values as bound URIs and reports the remaining attributes by namespaceURI and localName.",
+  "harness": "harness.c",
+  "fuzz_engine": "libFuzzer (clang -fsanitize=fuzzer)",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of gdome2's library sources (Debian 0.8.1+debian-10: upstream 0.8.1 plus its two source patches, compiled directly into a static archive; system GLib uninstrumented) and of the pinned libxml2 2.15.4 it parses with",
+  "coverage_subject_prefix": "/work/source/libgdome/",
+  "format_specific_coverage_file_suffix": "/gdome-xml-domimpl.c",
+  "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
+  "underlying_coverage_subject_prefix": "/work/libxml2-source/",
+  "underlying_format_specific_coverage_file_suffix": "/parser.c",
+  "pilot": "xml_c_registry_pilot",
+  "coverage_limit": "Two valid UTF-8 XML 1.0 controls without DOCTYPE establish gdome2's namespace-aware DOM Level 2 view (element and attribute namespaceURI/localName, namespace declarations exposed as attributes in the xmlns namespace, attribute order and decoded values, depth, text and CDATA nodes) for them only. gdome2 builds its DOM over libxml2's tree (xmlParseMemory), so this is a libxml2-family path: the input-dependent feedback comes mostly from libxml2, with gdome2's own node, element and attribute-map lines also differing between the controls. Comments and processing instructions are DOM nodes but are not reported; the order control's sit in whitespace-only runs. DTDs, entities beyond the controls' references, other encodings, XML 1.1 and well-formedness rejection are not established. The expected outputs come from controls/xml/check_controls.py (Python pyexpat, a different family)."
+}

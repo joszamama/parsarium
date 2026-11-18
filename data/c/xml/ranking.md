@@ -1,7 +1,7 @@
 # C XML parser pilot
 
-This pilot has six verified third-party paths from different parser families:
-[`expat`](../../../projects/xml/c/expat/README.md) 2.10.0, [`libxml2`](../../../projects/xml/c/libxml2/README.md) 2.15.4, [`libxmlb`](../../../projects/xml/c/libxmlb/README.md) 0.3.30, [`ixml`](../../../projects/xml/c/ixml/README.md) (pupnp IXML) 22.2.1, [`mxml`](../../../projects/xml/c/mxml/README.md) (Mini-XML) 4.0.6 and [`libnxml`](../../../projects/xml/c/libnxml/README.md) 0.18.6. expat's
+This pilot has seven verified third-party paths:
+[`expat`](../../../projects/xml/c/expat/README.md) 2.10.0, [`libxml2`](../../../projects/xml/c/libxml2/README.md) 2.15.4, [`libxmlb`](../../../projects/xml/c/libxmlb/README.md) 0.3.30, [`ixml`](../../../projects/xml/c/ixml/README.md) (pupnp IXML) 22.2.1, [`mxml`](../../../projects/xml/c/mxml/README.md) (Mini-XML) 4.0.6, [`gdome2`](../../../projects/xml/c/gdome2/README.md) 0.8.1+debian-10 (a DOM over libxml2) and [`libnxml`](../../../projects/xml/c/libnxml/README.md) 0.18.6. expat's
 documented API (`XML_ParserCreateNS`, the element, namespace-declaration and
 character-data handlers, `XML_Parse` over a local buffer) and libxml2's
 (`xmlReaderForMemory` over a local buffer, then the `xmlTextReaderRead` pull
@@ -10,7 +10,7 @@ Mini-XML's `mxmlLoadString` builds a tree of the same controls, but Mini-XML
 does not implement XML namespaces: it returns names as written (`c:catalog`) and
 keeps `xmlns` declarations as attributes. Its adapter resolves the expanded
 names from that tree, and that summary matches too.
-Their runtime library packages have **297,134** (`libexpat1`), **290,724** (`libxml2`), **130,663** (`libxmlb2`), **46,966** (`libixml11t64`), **2,054** (`libmxml1`) and **104** (`libnxml0t64`) Debian popcon installations in the
+Their runtime library packages have **297,134** (`libexpat1`), **290,724** (`libxml2`), **130,663** (`libxmlb2`), **46,966** (`libixml11t64`), **2,054** (`libmxml1`), **518** (`libgdome2-0`) and **104** (`libnxml0t64`) Debian popcon installations in the
 [saved snapshot](registry-snapshot.json). That counts installations,
 mostly pulled in as a dependency; it is an adoption proxy, not a count of
 programs that call the parser.
@@ -31,7 +31,8 @@ longer attributed to it.
 | 3 | [libxmlb](https://github.com/hughsie/libxmlb/blob/0.3.30/src/xb-builder-source.c) | 0.3.30 | 130,663 | Raw-name element and attribute tree, depth and text of one in-memory document; no namespace URIs | GLib GMarkup |
 | 4 | [ixml](https://github.com/pupnp/pupnp/blob/release-22.2.1/ixml/inc/ixml.h) | 22.2.1 | 46,966 | Raw-name element and attribute DOM, depth and text of one in-memory document; no namespace URIs | IXML (pupnp) |
 | 5 | [mxml](https://www.msweet.org/mxml/mxml.html) | 4.0.6 | 2,054 | Element tree, attributes, depth and character data of one in-memory document; namespaces resolved by the adapter, not by Mini-XML | Mini-XML |
-| 6 | [libnxml](https://github.com/bakulf/libnxml/blob/0.18.6/src/nxml.h.in) | 0.18.6 | 104 | Raw-name element and attribute tree, depth and text of one in-memory document; no namespace URIs | nXML |
+| 6 | [gdome2](https://sources.debian.org/src/gdome2/0.8.1%2Bdebian-10/gtk-doc/html/gdome2-gdomedomimplementation.html) | 0.8.1+debian-10 | 518 | Namespace-resolved DOM Level 2 elements, attributes, declarations, depth and text of one in-memory document | libxml2 (gdome2 DOM layer) |
+| 7 | [libnxml](https://github.com/bakulf/libnxml/blob/0.18.6/src/nxml.h.in) | 0.18.6 | 104 | Raw-name element and attribute tree, depth and text of one in-memory document; no namespace URIs | nXML |
 
 `libmxml1` is the Mini-XML 3.x library package; the pinned 4.0.6 is the
 `mxml` source in Debian forky and sid. 1,842 of the 2,054 `libmxml1`
@@ -72,6 +73,15 @@ instructions. Only the IXML static library is built; the first control covers 1,
 `ixmlparser.c`) and the AFL++ maps (433 vs 449 tuples, 82 differing) repeat exactly over five runs.
 Almost all of its installations come from UPnP/DLNA media software that depends on it.
 
+gdome2 0.8.1+debian-10 ([Debian orig tarball](https://deb.debian.org/debian/pool/main/g/gdome2/), SHA-256
+`f4bb80a2ef8e5fd9397ab8aa36d059d0b32e98c4bcf185c7952a7e3874d1d543`, with Debian's two source patches; LGPL-2.1-or-later)
+is a C DOM Level 2 implementation over libxml2. `gdome_di_createDocFromMemory` parses with libxml2's `xmlParseMemory`;
+gdome2's `namespaceURI`/`localName` accessors and the `xmlns` declaration attributes it exposes give the exact
+namespace-resolved summary of both controls, so it is measured against the shared expat oracle. It is a **libxml2-family**
+path, built over the same pinned libxml2 2.15.4: the first control covers 744 gdome2 and 3,207 libxml2 lines, 22 gdome2 and
+334 libxml2 `parser.c` line starts differ between the controls, and the AFL++ maps (1,389 vs 1,490 tuples, 259 differing)
+repeat exactly. Its 518 installations come from software that depends on it.
+
 ## Leads
 
 One Conan recipe-name query (`xml`, 9 hits), seven targeted C names, every
@@ -81,8 +91,11 @@ libraries, 13 other C or tool packages, 21 C++ packages, 4 data packages and
 263 other-language packages) and seven targeted Debian sources. A second Debian query takes binary-package names containing `xml`
 in the primary-metric `by_inst` table (1,208 hits; the first 100 by installations are classified in the
 snapshot): it adds pupnp's IXML and otherwise only selected runtimes, wrappers, tools, C++ modules and
-other-language packages. The
-[leads](leads.json) record each candidate. Apart from the six verified entries, none of them is verified.
+other-language packages. In round 4 the remaining 1,108 hits were classified too
+(`round_4_continuation` in the snapshot): libxmltok (expat 1.2) and libxml1 (libxml 1.x) are predecessors of the selected
+expat and libxml2, libucw-xml is a lead, and libxmlbird and GXml are Vala libraries. Targeted lookups of C libraries with a
+documented XML API whose binary names lack `xml` added gdome2. The
+[leads](leads.json) record each candidate. Apart from the seven verified entries, none of them is verified.
 
 Homebrew 365-day installs, a cross-check only, give the same order for expat,
 libxml2 and mxml (1,360,500; 564,778; 127). `libxml2-16` (9,413) is not added
@@ -91,6 +104,10 @@ to libxml2's value because hosts may have both packages.
 - GLib GMarkup: unranked. Its source `glib2.0` builds all of GLib, and Debian
   has no GMarkup-specific development package for the fallback rule. It is
   libxmlb's underlying parser.
+- neon (libneon27t64 95,819) and APR-util (libaprutil1t64 76,853): documented generic XML APIs (`ne_xml` over libxml2,
+  `apr_xml` over expat; neon passed both controls in a scratch build), but unranked by the GMarkup rule: their runtime and
+  development packages are whole HTTP or utility libraries, not XML-specific.
+- libxmltok (libxmltok1 143) is expat 1.2 and libxml1 (20) is libxml 1.x: predecessors of selected paths, excluded.
 - iksemel (libiksemel3 4,375; source no longer in Debian): own parser, but it
   fails `order-default-ns.xml` — character references become `?` and attribute
   entities stay undecoded. It stays a lead.

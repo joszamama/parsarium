@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "checked_at_utc": "2026-11-17T23:29:40.635740+00:00",
-  "projects_total": 6,
-  "projects_passed": 6,
+  "checked_at_utc": "2026-11-18T00:56:26.201066+00:00",
+  "projects_total": 7,
+  "projects_passed": 7,
   "pass": true,
   "results": [
     {
@@ -290,6 +290,55 @@
       "first_afl_tuples": 433,
       "second_afl_tuples": 449,
       "afl_tuple_difference": 82
+    },
+    {
+      "project": "xml/c/gdome2",
+      "checked_at_utc": "2026-11-18T00:56:26.200625+00:00",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_gdome2_libxml2_and_harness_edges",
+      "feedback_scope": "AFL++ instruments gdome2's library sources, the pinned libxml2 it parses with, and the gdome_di_createDocFromMemory harness with its DOM walk; system GLib is linked uninstrumented. Input-dependent tuples come mostly from libxml2 (libxml2 family), with gdome2's own node and attribute-map lines also differing between the controls.",
+      "base_project_receipt_sha256": "7fbbe146f841692ecb7922a19b408372ee141e803b281cfde54fb5d0226e4b15",
+      "overlay_receipt_sha256": "cc96feb5fd060af2a8ba2000f0e4da8976db4d7c37ace498b22e9873228a696e",
+      "base_image_id": "sha256:5b7ccce77cda8383a7b04573a515cb64a11089eb1870e77e0001a22757ea5426",
+      "overlay_image_id": "sha256:921473dc3560eb08a1dcd531a81d51daba645b3bcc8a4aa6b404b89e51785cd3",
+      "repeats_per_control": 5,
+      "repeated_controls_identical": true,
+      "first_control": "controls/xml/catalog-ns.xml",
+      "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "second_control": "controls/xml/order-default-ns.xml",
+      "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "second_control_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "second_case_kind": "valid_control",
+      "first_afl_tuples": 1389,
+      "second_afl_tuples": 1490,
+      "afl_tuple_difference": 259
     }
   ]
 }

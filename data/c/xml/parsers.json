@@ -295,6 +295,90 @@
     "project": "projects/xml/c/mxml/verification.json"
   },
   {
+    "name": "gdome2",
+    "version": "0.8.1+debian-10",
+    "license": "LGPL-2.1-or-later",
+    "license_evidence": "https://sources.debian.org/src/gdome2/0.8.1%2Bdebian-10/debian/copyright/",
+    "input_api": "gdome_di_mkref(); gdome_di_createDocFromMemory(impl, NUL-terminated copy of the local bytes, GDOME_LOAD_PARSING, &exc); walk from gdome_doc_documentElement with gdome_n_nodeType, gdome_n_namespaceURI, gdome_n_localName, gdome_n_nodeName, gdome_n_nodeValue, gdome_n_attributes/gdome_nnm_length/gdome_nnm_item, gdome_n_firstChild and gdome_n_nextSibling; gdome_doc_unref, gdome_di_unref",
+    "documentation": "https://sources.debian.org/src/gdome2/0.8.1%2Bdebian-10/gtk-doc/html/gdome2-gdomedomimplementation.html",
+    "documentation_note": "gdome2's gtk-doc reference (shipped in the source and as libgdome2-dev's HTML docs) documents gdome_di_createDocFromMemory with GDOME_LOAD_PARSING and the DOM Level 2 node, element, attribute and named-node-map calls used here.",
+    "source": "https://deb.debian.org/debian/pool/main/g/gdome2/gdome2_0.8.1+debian.orig.tar.gz",
+    "scope": "gdome2's DOM Level 2 tree of one in-memory document: document-order namespace-resolved element and attribute names, attribute order and decoded values, namespace-declaration count and distinct bound URIs, maximum depth, and trimmed text and CDATA runs between markup",
+    "namespace_semantics": "namespace_resolved_by_package",
+    "namespace_note": "gdome2 implements DOM Level 2 Core namespaces over libxml2's tree: gdome_n_namespaceURI and gdome_n_localName give each element's and prefixed attribute's expanded name (no URI for unprefixed attributes and for elements under xmlns=\"\"), and libxml2's namespace definitions appear in the attribute map as attributes in the http://www.w3.org/2000/xmlns/ namespace. harness.c counts those declaration attributes, collects their non-empty values as bound URIs and reports the remaining attributes by namespaceURI and localName.",
+    "family": "libxml2 (via gdome2's DOM Level 2 layer)",
+    "family_note": "gdome2 has no tokenizer of its own: gdome_di_createDocFromMemory calls libxml2's xmlParseMemory and wraps the resulting xmlNode tree in DOM Level 2 objects (gdomecore/gdome-xml-*.c), so markup scanning, reference decoding and namespace binding are libxml2's. It is a distinct package API (a C DOM implementation) over the libxml2 family, like libxml++ in the C++ cell. libxml2 is built from the same pinned 2.15.4 release as the libxml2 path. Between the controls 22 gdome2 line starts (gdome.c, gdome-xml-element.c, gdome-xml-node.c) and 334 libxml2 parser.c line starts differ; the AFL++ map instruments both.",
+    "shared_families": [
+      "libxml2"
+    ],
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespace_declarations": 3,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "root": "{urn:parsarium:order}order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "oracle": "controls/xml/check_controls.py (Python pyexpat with namespace processing; a different family from libxml2)",
+    "verification_note": "Namespace-aware path: both valid controls give the exact shared summary, including the declaration count, from gdome2's own namespaceURI/localName accessors and its xmlns-namespace declaration attributes.",
+    "metric": {
+      "name": "Debian popcon installations of runtime library binary package (libgdome2-0)",
+      "value": 518,
+      "source": "data/c/xml/registry-snapshot.json"
+    },
+    "metric_note": "libgdome2-0 has 518 installations (73 regular use, 433 in the no-files column) in the same hashed by_inst file; libgdome2-dev has 12. The binary is the gdome2 DOM library only, so the count is format-specific, but it reflects packages that depend on gdome2 (mostly old GNOME-era MathML and XML tools), not direct parser use.",
+    "project": "projects/xml/c/gdome2/verification.json"
+  },
+  {
     "name": "libnxml",
     "version": "0.18.6",
     "license": "LGPL-2.1-or-later",

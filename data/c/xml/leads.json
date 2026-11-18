@@ -283,6 +283,66 @@
       "search": "Debian by_inst binary-package-name substring 'xml' (first 100 hits)",
       "reason": "Selected and verified: pupnp 22.2.1 ixmlParseBufferEx matched the expat non-namespace summary of both valid controls as a raw-name path (IXML's own namespaceURI fields are not conformant on the controls), with 1,428 IXML lines covered (908 in ixmlparser.c) and a stable AFL++ differential (433 vs 449 tuples, 82 differing); see data/c/xml/parsers.json. Own parser family.",
       "source": "https://github.com/pupnp/pupnp"
+    },
+    {
+      "name": "gdome2",
+      "status": "selected",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 518,
+      "homebrew_install_365d": null,
+      "debian_source": "gdome2; binary libgdome2-0",
+      "search": "round-4 targeted Debian binary lookup (C DOM libraries over a selected parser)",
+      "reason": "Selected and verified: gdome2 0.8.1+debian-10 gdome_di_createDocFromMemory gave the exact namespace-resolved summary of both valid controls through its DOM Level 2 accessors, with 744 gdome2 lines and 3,207 libxml2 lines covered and a stable AFL++ differential (1,389 vs 1,490 tuples, 259 differing); libxml2 family. See data/c/xml/parsers.json.",
+      "source": "https://sources.debian.org/src/gdome2/0.8.1%2Bdebian-10/"
+    },
+    {
+      "name": "neon",
+      "status": "unresolved_no_primary_metric",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "debian_source": "neon27; binaries libneon27t64 95,819, libneon27 33,175, libneon27-dev 1,390",
+      "search": "round-4 targeted Debian binary lookup",
+      "reason": "Technically verified in a scratch build on 2026-11-18 (not committed as a project): neon 0.37.1 (notroj.github.io release tarball, SHA-256 a99b7262525a454d1065cf76dd17240fd808dfc4ef15636990ff83a5d0d9e740, LGPL-2.0-or-later) ne_xml_create/ne_xml_push_handler/ne_xml_parse over the pinned libxml2 2.15.4 (Debian builds neon27 --with-libxml2) gave the exact namespace-resolved summary of both controls; neon's ne_xml.c lines are the same on both controls (334 libxml2 parser.c line starts differ), so it would be a libxml2-family wrapper. Not ranked: libneon27t64 is the whole HTTP/WebDAV client library and Debian has no XML-specific neon package, so by the rule this cell applies to GLib's GMarkup its count is not format-specific; libneon27-dev (1,390) is not format-specific either.",
+      "source": "https://notroj.github.io/neon/"
+    },
+    {
+      "name": "apr-util (apr_xml)",
+      "status": "unresolved_no_primary_metric",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "debian_source": "apr-util 1.6.6-1; binaries libaprutil1t64 76,853, libaprutil1 58,436, libaprutil1-dev 1,831",
+      "search": "round-4 targeted Debian binary lookup",
+      "reason": "APR-util's documented apr_xml_parser_create/apr_xml_parser_feed/apr_xml_parser_done builds an apr_xml_doc tree over expat with its own namespace scoping. Not built: libaprutil1t64 is the whole APR utility library and Debian has no XML-specific package, so by the GMarkup rule its count is not format-specific; libaprutil1-dev (1,831) is not format-specific either. Its public tree also hides namespace declarations (apr_xml_ns_scope is private) and stores attributes in reverse order.",
+      "source": "https://apr.apache.org/docs/apr-util/1.6/group___a_p_r___util___x_m_l.html"
+    },
+    {
+      "name": "libxmltok (expat 1.2)",
+      "status": "excluded",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 143,
+      "homebrew_install_365d": null,
+      "debian_source": "libxmltok 1.2-4 (removed; libxmltok1 143, libxmltok1t64 5)",
+      "search": "Debian by_inst binary-package-name substring 'xml' (round-4 continuation)",
+      "reason": "libxmltok_1.2.orig.tar.gz (snapshot.debian.org SHA-1 5dab2918859febf67e0192e0347ad5ca864baa67) unpacks to expat-1.2: James Clark's expat 1.2 (xmltok, xmlrole, xmlparse), the predecessor release of the selected expat with the same XML_Parser API. Whitespace- and comment-normalized non-trivial lines matching expat 2.10.0 in sequence: 3,134 of 6,328 (49.5%; xmltok_impl.c 77.5%, xmlparse.c 35.7%). Below the ~70% fork threshold only because expat 2 was rewritten around the same code; it is the same project at a 2000 release, not a distinct package API, so it is excluded rather than counted as a second expat-family path.",
+      "source": "https://snapshot.debian.org/package/libxmltok/1.2-4/"
+    },
+    {
+      "name": "libxml (1.x)",
+      "status": "excluded",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 20,
+      "homebrew_install_365d": null,
+      "debian_source": "libxml (removed; libxml1 20, libxml-dev 4)",
+      "search": "Debian by_inst binary-package-name substring 'xml' (round-4 continuation)",
+      "reason": "GNOME libxml 1.x, the predecessor of the selected libxml2; no current source. Predecessor path; not counted.",
+      "source": "https://snapshot.debian.org/binary/libxml1/"
     }
   ],
   "debian_search": {

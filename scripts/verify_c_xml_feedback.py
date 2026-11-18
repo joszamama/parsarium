@@ -35,6 +35,8 @@ SCOPES = {
                 "AFL++ instruments only the pinned libnxml sources and the nxml_parse_buffer harness, including its raw-name tree walk; libcurl is linked uninstrumented and never called."),
     "ixml": ("afl_clang_fast_ixml_and_harness_edges",
              "AFL++ instruments only pupnp's IXML sources (static libixml.a; the UPnP library is not built) and the ixmlParseBufferEx harness, including its raw-name DOM walk; no other library is compiled into /work/fuzzer."),
+    "gdome2": ("afl_clang_fast_gdome2_libxml2_and_harness_edges",
+               "AFL++ instruments gdome2's library sources, the pinned libxml2 it parses with, and the gdome_di_createDocFromMemory harness with its DOM walk; system GLib is linked uninstrumented. Input-dependent tuples come mostly from libxml2 (libxml2 family), with gdome2's own node and attribute-map lines also differing between the controls."),
 }
 REPEATS = 5
 REPORT = ROOT / "data/c/xml/afl-feedback.json"
