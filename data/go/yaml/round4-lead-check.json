@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-18T00:18:33.406660+00:00",
+  "method": "Round 4, beyond the recorded pkg.go.dev 'yaml' window. Discovery routes: (1) perlpunk/yaml-runtimes list.yaml and the YAML test-suite matrix (matrix.yaml.info) name only go-yaml for Go (selected); (2) awesome-go YAML and configuration entries (configuration loaders and tools over yaml.v2/v3, none with an own typed parser); (3) GitHub repository search 'yaml parser' (language go), each hit looked up on pkg.go.dev; plus the gopkg.in/yaml.v1 import path of the go-yaml project. Metric: pkg.go.dev Imported by from the package page (round-1 regex). Fork overlap: distinct stripped non-comment lines of non-test .go files (round-2 method of lead-check.json). goyaml2 was run on the two valid controls with Go 1.27.1 (local probe, no Docker harness, no malformed input). GitHub stars were not used.",
+  "go_toolchain": "go version go1.27.1 darwin/arm64",
+  "control_sha256": {
+    "catalog.yaml": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+    "order.yaml": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935"
+  },
+  "metrics": {
+    "gopkg.in/yaml.v1": {
+      "url": "https://pkg.go.dev/gopkg.in/yaml.v1",
+      "observed_at_utc": "2026-11-18T00:18:33.406660+00:00",
+      "value": 1009,
+      "license": null,
+      "source": "package page"
+    },
+    "github.com/beego/goyaml2": {
+      "url": "https://pkg.go.dev/github.com/beego/goyaml2",
+      "observed_at_utc": "2026-11-18T00:18:47.520248+00:00",
+      "value": 433,
+      "license": null,
+      "source": "package page"
+    },
+    "github.com/smacker/go-tree-sitter/yaml": {
+      "url": "https://pkg.go.dev/github.com/smacker/go-tree-sitter/yaml",
+      "observed_at_utc": "2026-11-18T00:21:39.564884+00:00",
+      "value": 15,
+      "license": null,
+      "source": "package page"
+    },
+    "github.com/oasdiff/yaml3": {
+      "url": "https://pkg.go.dev/github.com/oasdiff/yaml3",
+      "observed_at_utc": "2026-11-18T00:18:54.516126+00:00",
+      "value": 7,
+      "license": null,
+      "source": "package page"
+    },
+    "github.com/koykov/yamlvector": {
+      "url": "https://pkg.go.dev/github.com/koykov/yamlvector",
+      "observed_at_utc": "2026-11-18T00:21:46.294902+00:00",
+      "value": 2,
+      "license": null,
+      "source": "package page"
+    }
+  },
+  "source_overlap": [
+    {
+      "module": "gopkg.in/yaml.v1",
+      "version": "v1.0.0-20140924161607-9f9df34309c0",
+      "module_sum": "h1:POO/ycCATvegFmVuPpQzZFJ+pGZeX22Ufu6fibxDVjU=",
+      "go_mod_first_line": null,
+      "license_files": [
+        "LICENSE",
+        "LICENSE.libyaml"
+      ],
+      "reference": "gopkg.in/yaml.v2@v2.4.0",
+      "distinct_non_test_lines": 2921,
+      "reference_distinct_non_test_lines": 3200,
+      "shared_distinct_lines": 2701,
+      "share": 0.925
+    },
+    {
+      "module": "github.com/oasdiff/yaml3",
+      "version": "v0.0.16",
+      "module_sum": "h1:NlDF/1oIOhmOvrEb9eH6Sbuubp3gZNS4A+MKST5/p0Q=",
+      "go_mod_first_line": "module github.com/oasdiff/yaml3",
+      "license_files": [
+        "LICENSE",
+        "NOTICE"
+      ],
+      "reference": "gopkg.in/yaml.v3@v3.0.1",
+      "distinct_non_test_lines": 3839,
+      "reference_distinct_non_test_lines": 3718,
+      "shared_distinct_lines": 3696,
+      "share": 0.963
+    }
+  ],
+  "probes": {
+    "github.com/beego/goyaml2": {
+      "version": "v0.0.0-20130207012346-5545475820dd",
+      "module_sum": "h1:jZtX5jh5IOMu0fpOTC3ayh6QGSPJ/KWOv1lgPvbRw1M=",
+      "api": "goyaml2.Read(io.Reader) (interface{}, error)",
+      "controls": {
+        "catalog.yaml": {
+          "oracle_match": false,
+          "error": "line 15 >> Bad Indent"
+        },
+        "order.yaml": {
+          "oracle_match": false,
+          "error": "line 4 >> Bad Indent"
+        }
+      }
+    }
+  },
+  "zero_metric_hits_not_leads": {
+    "github.com/shapestone/shape-yaml/pkg/yaml": {
+      "url": "https://pkg.go.dev/github.com/shapestone/shape-yaml/pkg/yaml",
+      "observed_at_utc": "2026-11-18T00:21:34.879735+00:00",
+      "value": 0,
+      "license": null,
+      "source": "package page"
+    },
+    "github.com/rubenv/fastyaml": {
+      "url": "https://pkg.go.dev/github.com/rubenv/fastyaml",
+      "observed_at_utc": "2026-11-18T00:21:41.774746+00:00",
+      "value": 0,
+      "license": null,
+      "source": "package page"
+    },
+    "github.com/boynton/yaml": {
+      "url": "https://pkg.go.dev/github.com/boynton/yaml",
+      "observed_at_utc": "2026-11-18T00:21:44.024228+00:00",
+      "value": 0,
+      "license": null,
+      "source": "package page"
+    },
+    "github.com/hypnguyen1209/goyml": {
+      "url": "https://pkg.go.dev/github.com/hypnguyen1209/goyml",
+      "observed_at_utc": "2026-11-18T00:18:45.213899+00:00",
+      "value": 0,
+      "license": null,
+      "source": "package page"
+    },
+    "github.com/kohkimakimoto/gluayaml": {
+      "url": "https://pkg.go.dev/github.com/kohkimakimoto/gluayaml",
+      "observed_at_utc": "2026-11-18T00:18:49.807392+00:00",
+      "value": 0,
+      "license": null,
+      "source": "package page"
+    },
+    "github.com/m4l1c1ou5/gyaml": {
+      "url": "https://pkg.go.dev/github.com/m4l1c1ou5/gyaml",
+      "observed_at_utc": "2026-11-18T00:18:52.061223+00:00",
+      "value": 0,
+      "license": null,
+      "source": "package page"
+    },
+    "github.com/ennesuysal/yaml-parser": {
+      "url": "https://pkg.go.dev/github.com/ennesuysal/yaml-parser",
+      "observed_at_utc": "2026-11-18T00:18:59.169894+00:00",
+      "value": 0,
+      "license": null,
+      "source": "package page"
+    },
+    "github.com/J5ive/yaml": {
+      "url": "https://pkg.go.dev/github.com/J5ive/yaml",
+      "observed_at_utc": "2026-11-18T00:19:01.445987+00:00",
+      "value": 0,
+      "license": null,
+      "source": "package page"
+    }
+  },
+  "no_pkg_go_dev_package": {
+    "github.com/nporsche/goyaml": "HTTP 404",
+    "github.com/AjdinHalac/yaml": "HTTP 404",
+    "github.com/atomicswe/gyparse": "HTTP 404"
+  },
+  "not_separate": {
+    "github.com/goccy/go-yaml/parser": "subpackage of the selected github.com/goccy/go-yaml module (117 Imported by), not a separate path"
+  }
+}

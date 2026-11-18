@@ -21,6 +21,7 @@ pkg.go.dev Imported by package count, captured 2026-11-17 ([snapshot](registry-s
 | sigs.k8s.io/yaml | excluded_control_failed | 12,078 | go-yaml v2 (go.yaml.in/yaml/v2) via JSON conversion |
 | k8s.io/apimachinery/pkg/util/yaml | excluded_control_failed | 4,348 | sigs.k8s.io/yaml (go-yaml v2) via JSON conversion |
 | github.com/go-yaml/yaml | excluded_shared_family | 1,291 | go-yaml v2/v3 (old import path) |
+| gopkg.in/yaml.v1 | excluded_shared_family | 1,009 | go-yaml v1 (predecessor) |
 | github.com/jinzhu/configor | not_a_parser_engine | 870 | configuration loader over gopkg.in/yaml.v2 |
 | github.com/knadh/koanf/parsers/yaml | excluded_control_failed | 825 | go-yaml v3 (go.yaml.in/yaml/v3) into map[string]interface{} |
 | sigs.k8s.io/kustomize/kyaml/yaml | excluded_shared_family | 669 | go-yaml v3 (go.yaml.in/yaml/v3) wrapper |
@@ -29,6 +30,7 @@ pkg.go.dev Imported by package count, captured 2026-11-17 ([snapshot](registry-s
 | github.com/olebedev/config | not_a_parser_engine | 568 | configuration loader over gopkg.in/yaml.v2 |
 | go.yaml.in/yaml/v3 | excluded_shared_family | 555 | go-yaml v3 |
 | launchpad.net/goyaml | excluded_shared_family | 506 | go-yaml v1 (predecessor) |
+| github.com/beego/goyaml2 | excluded_control_failed | 433 | goyaml2 (independent minimal YAML reader, beego) |
 | github.com/tsuru/config | not_a_parser_engine | 368 | configuration loader over gopkg.in/yaml.v2 |
 | github.com/docker/libcompose/yaml | not_a_parser_engine | 352 | Compose field types |
 | github.com/kylelemons/go-gypsy/yaml | excluded_control_failed | 289 | go-gypsy (independent minimal YAML subset parser) |
@@ -41,5 +43,8 @@ pkg.go.dev Imported by package count, captured 2026-11-17 ([snapshot](registry-s
 | github.com/zclconf/go-cty-yaml | excluded_duplicate_fork | 71 | go-yaml v2 fork producing cty values |
 | github.com/go-faster/yaml | excluded_duplicate_fork | 40 | go-yaml v3 fork |
 | github.com/braydonk/yaml | excluded_duplicate_fork | 34 | go-yaml v3 fork (yamlfmt) |
+| github.com/smacker/go-tree-sitter/yaml | excluded | 15 | tree-sitter-yaml grammar via go-tree-sitter (cgo) |
+| github.com/oasdiff/yaml3 | excluded_duplicate_fork | 7 | go-yaml v3 fork (oasdiff) |
+| github.com/koykov/yamlvector | excluded | 2 | yamlvector (koykov vector-API YAML parser) |
 
 AFL++ feedback: [afl-feedback.json](afl-feedback.json). Standard and runtime APIs: none documented ([standard.json](standard.json)).

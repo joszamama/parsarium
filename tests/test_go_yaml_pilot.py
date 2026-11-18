@@ -112,6 +112,27 @@ class GoYamlPilotTest(unittest.TestCase):
         manifest = read(ROOT / "projects/yaml/go/go_yaml_in_yaml_v4/manifest.json")
         self.assertEqual(manifest["coverage_subject_prefix"], "go.yaml.in/yaml/v4/")
 
+    def test_round_four_leads_are_decided(self):
+        leads = {lead["name"]: lead for lead in read(CELL / "leads.json")}
+        check = read(CELL / "round4-lead-check.json")
+        self.assertEqual(self.cell["leads_recorded"], len(leads))
+        lowest = min(row["popularity"]["value"] for row in self.parsers)
+        for name, metric in check["metrics"].items():
+            with self.subTest(lead=name):
+                lead = leads[name]
+                self.assertNotEqual(lead["status"], "selected")
+                self.assertEqual(lead["metric_value"], metric["value"])
+                self.assertEqual(lead["evidence"], "data/go/yaml/round4-lead-check.json")
+        above = [name for name in check["metrics"] if leads[name]["metric_value"] > lowest]
+        self.assertEqual(sorted(above), ["github.com/beego/goyaml2", "gopkg.in/yaml.v1"])
+        for row in check["source_overlap"]:
+            self.assertGreater(row["shared_distinct_lines"] / row["distinct_non_test_lines"], 0.9)
+        for probe in check["probes"].values():
+            self.assertFalse(any(result["oracle_match"] for result in probe["controls"].values()))
+        for name, metric in check["zero_metric_hits_not_leads"].items():
+            self.assertEqual(metric["value"], 0)
+            self.assertNotIn(name, leads)
+
 
 if __name__ == "__main__":
     unittest.main()
