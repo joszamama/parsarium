@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "go",
+  "package": "github.com/fogleman/fauxgl",
+  "release": "v0.0.0-20250110135958-abf826acbbbd",
+  "catalog_parser": "data/go/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/go/github_com_fogleman_fauxgl/source-lock.json",
+  "source_sha256": "b3d1397b93e47bee18034c085c1841691edfcc25971809384ac824c0285da58c",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "triangles": 1,
+    "first_triangle": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ]
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of the github.com/fogleman/fauxgl package (its own PLY reader in ply.go) during valid-control replay",
+  "coverage_subject_prefix": "github.com/fogleman/fauxgl/",
+  "format_specific_coverage_file_suffix": "/fauxgl/ply.go"
+}
