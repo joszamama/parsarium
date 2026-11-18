@@ -79,17 +79,21 @@ def check_one(path: Path) -> dict:
                                  if record.get("feedback_kind") == "php_parser_source_lines_to_afl_bitmap"
                                  else "native_php_parser_afl_feedback_edges"),
                         "value": record["feedback_edges"]}
-        elif (ecosystem == "python" and manifest.get("native_campaign_supported") is False
-              and manifest.get("afl_llvm_module_glob")):
+        elif ecosystem == "python" and manifest.get("native_campaign_supported") is False:
+            # One-shot AFL++ bridge paths without an in-process engine: native LLVM regions
+            # (afl_llvm_module_glob) or pure-Python parser lines through the external bridge.
+            native = bool(manifest.get("afl_llvm_module_glob"))
             _, image_id = image_for(project, manifest)
             overlay = ROOT / "fuzzing/afl-native" / relative / "verification.json"
             record = json.loads(overlay.read_text())
             if (record.get("pass") is not True or record.get("feedback_edges", 0) <= 0
-                    or record.get("feedback_kind") != "llvm_native_parser_regions_to_afl_bitmap"
+                    or record.get("feedback_kind") != ("llvm_native_parser_regions_to_afl_bitmap" if native
+                                                       else "python_parser_source_lines_to_afl_bitmap")
                     or record.get("base_project_receipt_sha256") !=
                     sha256((project / "verification.json").read_bytes()).hexdigest()):
-                raise RuntimeError("native Python parser AFL++ feedback is not current")
-            feedback = {"kind": "llvm_native_parser_afl_feedback_edges",
+                raise RuntimeError("Python parser AFL++ feedback is not current")
+            feedback = {"kind": ("llvm_native_parser_afl_feedback_edges" if native
+                                 else "python_parser_source_lines_to_afl_bitmap"),
                         "value": record["feedback_edges"]}
         elif ecosystem == "php":
             report = scratch / "report"

@@ -85,8 +85,10 @@ def main() -> None:
             assert entry["status"] == "ready" and entry["unique_seeds"] == 1
         assert entry["control_sha256"] == manifest["control_sha256"]
         assert entry["project_receipt_sha256"] == sha256((project / "verification.json").read_bytes()).hexdigest()
-        native_override = (manifest["ecosystem"] == "php" and
-                           (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")))
+        # A rejected (unsupported) native plan records the base project image.
+        native_override = (manifest["ecosystem"] == "php"
+                           and manifest.get("native_campaign_supported") is not False
+                           and (manifest.get("kind") == "standard" or manifest.get("afl_entrypoint")))
         expected_image = (json.loads((OVERLAYS / relative / "verification.json").read_text())["image_id"]
                           if native_override else json.loads((project / "verification.json").read_text())["image_id"])
         assert entry["image_id"] == expected_image
