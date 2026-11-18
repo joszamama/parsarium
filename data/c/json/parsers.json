@@ -483,5 +483,63 @@
       "snapshot": "data/c/json/registry-snapshot.json"
     },
     "project": "projects/json/c/json-parser"
+  },
+  {
+    "name": "json.h",
+    "version": "pre-ai",
+    "license": "Unlicense",
+    "license_evidence": "Pinned pre-ai tag LICENSE (The Unlicense) in the source archive",
+    "input_api": "json_parse(const void *src, size_t src_size)",
+    "documentation": "https://github.com/sheredom/json.h/blob/pre-ai/README.md",
+    "documentation_note": "The pinned README documents json_parse(src, src_size) on a UTF-8 buffer with explicit size, the json_value_s DOM (type and payload), json_object_s/json_object_element_s and json_array_s/json_array_element_s linked lists, decoded json_string_s and json_number_s, which keeps the number's text. json.h is header-only and versionless; pre-ai is the repository's only tag and GitHub release.",
+    "source": "https://github.com/sheredom/json.h/releases/tag/pre-ai",
+    "scope": "RFC 8259 JSON text parsed from a bounded local byte buffer into a single-allocation json_value_s DOM with default flags; observed valid control subset",
+    "family": "json.h header-only parser (sheredom/json.h)",
+    "family_note": "One header (json.h) holds its own two-pass parser (get_*_size then parse_*) into a single allocation. No external JSON library. Numbers are kept as their source text, so integer versus float kind comes from the literal json.h stored; string escapes, including \\u escapes, are decoded by json.h.",
+    "control": "controls/json/nested-object.json",
+    "expected_output": {
+      "arrays": 3,
+      "booleans": 2,
+      "max_depth": 4,
+      "nulls": 1,
+      "numbers": [
+        -2.5,
+        1,
+        1,
+        2,
+        2
+      ],
+      "objects": 5,
+      "root": "object",
+      "strings": [
+        "café \"quoted\"",
+        "go",
+        "json",
+        "parsarium",
+        "rfc8259"
+      ],
+      "top_level_keys": [
+        "enabled",
+        "missing",
+        "name",
+        "nested",
+        "ratio",
+        "tags",
+        "version"
+      ]
+    },
+    "selection": "supplemental",
+    "popularity": {
+      "metric": "GitHub stars (secondary, repository interest, not downloads)",
+      "value": 846,
+      "rank": null,
+      "supplemental_rank": 1,
+      "source": "https://api.github.com/repos/sheredom/json.h",
+      "captured_at_utc": "2026-11-18T07:12:20Z",
+      "response_sha256": "2d0e1dec6b326f2a155b27341af02a20a9bb22de25597fa841aaaf1e74771fe5",
+      "snapshot": "data/c/json/registry-snapshot.json",
+      "note": "No Debian source package in the hashed popcon snapshot. Star-fallback slot (PROTOCOL.md): fills only the tenth slot left open after the nine Debian-ranked paths; not comparable to their installation counts."
+    },
+    "project": "projects/json/c/json-h"
   }
 ]

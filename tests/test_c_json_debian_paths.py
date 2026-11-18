@@ -120,7 +120,10 @@ class CJsonDebianPathsTest(unittest.TestCase):
     def test_metric_matches_snapshot_and_rank_order(self):
         rows = popcon_rows()
         parsers = read(BASE / "parsers.json")
-        values = [item["popularity"]["value"] for item in parsers]
+        # Debian-ranked paths come first in rank order; star-fallback paths are ranked separately after them.
+        debian = [item for item in parsers if item.get("selection") != "supplemental"]
+        self.assertEqual(parsers[:len(debian)], debian)
+        values = [item["popularity"]["value"] for item in debian]
         self.assertEqual(values, sorted(values, reverse=True))
         ranking = (BASE / "ranking.md").read_text(encoding="utf-8")
         by_name = {item["name"]: item for item in parsers}

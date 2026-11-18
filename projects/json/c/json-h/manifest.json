@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "format": "json",
+  "ecosystem": "c",
+  "pilot": true,
+  "package": "json.h",
+  "release": "pre-ai",
+  "catalog_parser": "data/c/json/parsers.json",
+  "source_lock": "projects/json/c/json-h/source-lock.json",
+  "source_sha256": "d1a94a3ae5109e27306e21e6639aeacfdaebc497d135c5cc96766f6778ae83b0",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/json/nested-object.json",
+  "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+  "expected_output": {
+    "arrays": 3,
+    "booleans": 2,
+    "max_depth": 4,
+    "nulls": 1,
+    "numbers": [
+      -2.5,
+      1,
+      1,
+      2,
+      2
+    ],
+    "objects": 5,
+    "root": "object",
+    "strings": [
+      "caf\u00e9 \"quoted\"",
+      "go",
+      "json",
+      "parsarium",
+      "rfc8259"
+    ],
+    "top_level_keys": [
+      "enabled",
+      "missing",
+      "name",
+      "nested",
+      "ratio",
+      "tags",
+      "version"
+    ]
+  },
+  "differential_control": "controls/json/nested-array.json",
+  "differential_control_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+  "differential_expected_output": {
+    "arrays": 4,
+    "booleans": 2,
+    "max_depth": 3,
+    "nulls": 1,
+    "numbers": [
+      0.25,
+      1
+    ],
+    "objects": 2,
+    "root": "array",
+    "strings": [
+      "A",
+      "two"
+    ],
+    "top_level_items": 5
+  },
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "oracle": "The replay prints the parsed json.h DOM (object elements in order, decoded strings, number text as stored by json.h); run-control requires exact JSON tree equality with the control, preserving object order and integer versus float kinds read from the stored number literal, then checks the format-aware summary.",
+  "coverage": "LLVM source coverage of the pinned header-only json.h reached by json_parse(src, src_size)",
+  "coverage_subject_prefix": "/work/jsonh-src/",
+  "format_specific_coverage_file_suffix": "/jsonh-src/json.h",
+  "afl_entrypoint": "/work/parser-probe",
+  "afl_map_size": 65536
+}

@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "checked_at_utc": "2026-11-17T05:30:08.846838+00:00",
-  "projects_total": 9,
-  "projects_passed": 9,
-  "differential_kind": "fixed_valid_nested_array; JSON-GLib, jq, libfastjson, json-parser and yajl use parser-only probes with parser-scoped AFL++ allowlists and three repeats per control",
+  "projects_total": 10,
+  "projects_passed": 10,
+  "differential_kind": "fixed_valid_nested_array; JSON-GLib, jq, libfastjson, json-parser, yajl and json.h use parser-only probes with parser-scoped AFL++ allowlists and three repeats per control",
   "parser_feature_scope": "covered LLVM region entries under each pinned parser source prefix; harness excluded",
-  "afl_feedback_scope": "jansson, json-c, cJSON and yyjson: afl-clang-fast edges over the compiled parser sources and the harness (map not split by file). Debian-search paths: parser-only probe with an AFL_LLVM_ALLOWLIST naming the parser and value-tree sources; the instrumented object set is checked with nm during the build.",
+  "afl_feedback_scope": "jansson, json-c, cJSON and yyjson: afl-clang-fast edges over the compiled parser sources and the harness (map not split by file). Debian-search paths: parser-only probe with an AFL_LLVM_ALLOWLIST naming the parser and value-tree sources; the instrumented object set is checked with nm during the build. json.h (header-only star-fallback path): the allowlist names json.h and AFL++ selects functions by their json.h debug location; the same probe built without the json_parse call maps no tuples.",
   "standard_feedback": "none: the ISO C standard library documents no JSON API",
   "results": [
     {
@@ -432,6 +432,54 @@
       "parser_only_probe": "projects/json/c/yajl/parser-probe.c",
       "exact_tree_outputs_verified": true,
       "afl_instrumentation_mode": "CLASSIC (AFL_LLVM_INSTRUMENT=CLASSIC; the default PCGUARD build of yajl_do_parse crashed on both valid controls on arm64)"
+    },
+    {
+      "project": "json/c/json-h",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_parser_scoped_edges_and_source_lines",
+      "overlay_receipt_sha256": "e9ec78fb6071f8f3b8820d0ea7a005978ab1a2f9a803ab8a77bc32629ebb6d1b",
+      "differential_receipt_sha256": "8b31f2383e1e31177b6fd39d8b57e864b07be61220d445e8bfa71fd126ebea1a",
+      "control": "controls/json/nested-object.json",
+      "control_sha256": "e34763bc2e9ed908c41c6e16fcd03b566cef4681b3948ba897643743a0a1ecc6",
+      "differential": "controls/json/nested-array.json",
+      "differential_sha256": "a54ab095e6fd9281696c461d7385b759b99129ccd14d5242de084e5868dc7762",
+      "differential_output": {
+        "arrays": 4,
+        "booleans": 2,
+        "max_depth": 3,
+        "nulls": 1,
+        "numbers": [
+          0.25,
+          1
+        ],
+        "objects": 2,
+        "strings": [
+          "A",
+          "two"
+        ],
+        "root": "array",
+        "top_level_items": 5
+      },
+      "exact_nested_structure_match": true,
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "afl_instrumented_objects": [
+        "parser-probe.c (json.h functions only; allowlist src:jsonh-src/json.h matched by debug location)"
+      ],
+      "no_parse_probe_tuples_per_control": [
+        0,
+        0
+      ],
+      "control_source_lines": 620,
+      "control_afl_tuples": 156,
+      "differential_source_lines": 590,
+      "differential_afl_tuples": 146,
+      "source_line_difference": 32,
+      "afl_tuple_difference": 12,
+      "parser_only_probe": "projects/json/c/json-h/parser-probe.c",
+      "exact_tree_outputs_verified": true,
+      "afl_map_size_note": "AFL_DUMP_MAP_SIZE printed nothing for this probe, so the manifest pins afl_map_size 65536."
     }
   ],
   "command": "python3 scripts/verify_c_json_feedback.py for jansson, json-c, cJSON and yyjson; python3 projects/json/c/<slug>/verify-feedback.py for each Debian-search path"

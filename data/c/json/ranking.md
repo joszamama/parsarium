@@ -1,6 +1,6 @@
 # C × JSON: selected parsers (pilot)
 
-Nine verified third-party paths, ranked by one Debian metric. The ceiling is ten. The tenth slot stays open: no remaining lead with a positive Debian count passes the valid controls, and parson has no Debian source (stars are allowed only in PLY cells).
+Ten verified third-party paths. Nine are ranked by one Debian metric. No remaining lead with a positive Debian count passes the valid controls, so the tenth slot is filled under the C/C++ GitHub-star fallback in [PROTOCOL.md](../../../PROTOCOL.md) by json.h, ranked separately. The ceiling is ten.
 
 ## Adoption metric
 
@@ -17,6 +17,18 @@ Debian popcon `sourcemax` installations by source package, captured 2026-11-17 f
 | 7 | [libfastjson](https://github.com/rsyslog/libfastjson/blob/v1.2609.0/json_tokener.h) | 1.2609.0 | `libfastjson` | 91,226 | json-c tokener family (rsyslog fork) |
 | 8 | [yyjson](https://github.com/ibireme/yyjson/blob/0.13.0/doc/API.md) | 0.13.0 | `yyjson` | 14,868 | Own native reader in `src/yyjson.c` |
 | 9 | [json-parser](https://github.com/json-parser/json-parser/blob/v1.1.0/README.md) | 1.1.0 | `libjsonparser` | 844 | Own single-file `json.c` |
+
+## Star fallback (separately ranked)
+
+GitHub stars are repository interest, not downloads. They are captured from the GitHub API with a timestamp and response hash in the [snapshot](registry-snapshot.json) (`round_6_star_fallback`) and are not comparable to the Debian counts above.
+
+| Rank | Package | Release | Repository | Stars | Parser family |
+| ---: | --- | --- | --- | ---: | --- |
+| 1 | [json.h](https://github.com/sheredom/json.h/blob/pre-ai/README.md) | pre-ai | [sheredom/json.h](https://github.com/sheredom/json.h) | 846 | Own header-only parser (`json.h`) |
+
+json.h is a single header with its own two-pass parser into one allocation. It has no version number; `pre-ai` is the repository's only tag and GitHub release (2026-05-22, commit `33cbab1d`). The [tag archive](https://github.com/sheredom/json.h/releases/tag/pre-ai) has SHA-256 `d1a94a3ae5109e27306e21e6639aeacfdaebc497d135c5cc96766f6778ae83b0` and the Unlicense. The harness calls the documented `json_parse(src, src_size)` with default flags and walks the `json_value_s` DOM: object elements in order, decoded strings (including `é`), and numbers as the text json.h stored, so the integer/float kinds checked against `json.loads` come from that literal. Both valid controls match. The base control covers 678 json.h lines. The parser-only probe allowlists `json.h`; because the header compiles into the probe, AFL++ selects functions by their json.h debug location, and the same probe built without the `json_parse` call maps no tuples. Three runs per control repeat exactly and the controls differ by 12 of 156/146 tuples and 32 source lines ([receipt](../../../fuzzing/afl-native/json/c/json-h/differential.json)).
+
+Higher-starred leads did not qualify: jsmn (4,215) is a tokenizer, rxi/sj.h (1,556) and parson (1,481) publish no tag or release, and lua-cjson (1,001) is a Lua module.
 
 cJSON uses its documented `cJSON_ParseWithLengthOpts` local byte-buffer API. The [pinned source archive](https://github.com/DaveGamble/cJSON/releases/tag/v1.7.19) has SHA-256 `7fa616e3046edfa7a28a32d5f9eacfd23f92900fe1f8ccd988c1662f30454562` and an MIT LICENSE. Its Docker control traverses the parsed cJSON tree and compares the full nested JSON value to the valid object control. Two repeated valid controls produce identical parser-source LLVM regions and AFL++ bitmaps; the valid nested-array control changes 39 parser features and 29 AFL tuples ([receipt](afl-feedback.json)).
 
@@ -38,15 +50,17 @@ yajl 2.1.0 (Debian source `yajl`, same version; the last upstream release, from 
 
 | Lead | Popcon installations | Status |
 | --- | ---: | --- |
-| [parson](https://github.com/kgabis/parson) | unavailable | Verified technically; no Debian source package |
+| [parson](https://github.com/kgabis/parson) | unavailable | Verified technically; no Debian source package and no tagged release (star fallback needs one) |
 | [frozen](https://github.com/cesanta/frozen) | 16 | Fails the nested-object control |
 | [jsmn](https://github.com/zserge/jsmn) | 11 | Tokenizer only; not eligible for the value gate |
 | [liblaxjson](https://github.com/andrewrk/liblaxjson) | 1 | Fails the nested-object control; numbers only as doubles ([evidence](liblaxjson-lead-check.json)) |
 
-frozen 1.7's `json_walk` types tokens but leaves values as raw spans; its `json_unescape` turns the control's `\u00e9` into the single byte 0xE9 rather than UTF-8, so the nested-object control cannot match. liblaxjson 1.0.5 (MIT, archive SHA-256 `ffc495b5…`) rejects the nested-object control at `-0.25e1`, because its exponent state requires an explicit `+` or `-`, and delivers every number through a single `atof()` double callback, so integer/float kinds cannot be observed. jsmn reports only object/array/string/primitive token spans without decoding strings or typing primitives, so the harness would have to interpret JSON itself. parson 1.5.4 passed both controls, 530 own lines and 34 stable AFL++ tuple differences in candidate commit 271447a6, but has no Debian source package and so no primary value; stars are not an allowed fallback outside PLY cells.
+frozen 1.7's `json_walk` types tokens but leaves values as raw spans; its `json_unescape` turns the control's `\u00e9` into the single byte 0xE9 rather than UTF-8, so the nested-object control cannot match. liblaxjson 1.0.5 (MIT, archive SHA-256 `ffc495b5…`) rejects the nested-object control at `-0.25e1`, because its exponent state requires an explicit `+` or `-`, and delivers every number through a single `atof()` double callback, so integer/float kinds cannot be observed. jsmn reports only object/array/string/primitive token spans without decoding strings or typing primitives, so the harness would have to interpret JSON itself. parson 1.5.4 passed both controls, 530 own lines and 34 stable AFL++ tuple differences in candidate commit 271447a6, but has no Debian source package and so no primary value. Under the C/C++ star fallback it would rank above json.h (1,481 stars), but kgabis/parson publishes no git tag or GitHub release, so only an untagged master commit could be pinned and the rule requires a tagged release.
 
 ## Search
 
 Conan Center search: recipe-name substring `json` (24 hits) plus `jansson`, `jsmn`, `parson` targeted names (3 hits), at most 100 results per query; 27 recorded hits, 27 unique. That surface missed Debian-packaged C parsers, so the same hashed popcon snapshot was searched on 2026-11-17 for Debian source names containing `json`: 320 hits, 320 unique, all recorded and classified in the [snapshot](registry-snapshot.json). C JSON parser libraries among them are json-c, JSON-GLib, cJSON, libfastjson, yyjson, libjsonparser and liblaxjson; jsonrpc-glib, lua-cjson, tree-sitter-json, wal2json, lz4json and gjh-asl-json are C code but not separate JSON value libraries, and the rest are other languages, tools or C++ (picojson belongs to the C++ cell). Exact source-name lookups in the same file add jansson, jq (141,218), frozen (16) and jsmn (11); parson has no Debian source. A second exact-lookup pass on 2026-11-17 added yajl (152,183, selected) and decided ten other names: mongo-c-driver (libbson's JSON reader in a multi-library source), libwebsockets, systemd, ell and libfyaml (JSON is one module or a YAML subset, so the counts are not JSON-specific), `ucl` (the UCL compression library, not the libucl configuration parser), and cjose, jshon and jsonrpc-glib (built on jansson or JSON-GLib); wjelement, jsonsl, nxjson, mjson, ccan, libucl, tiny-json, microjson, sajson and json11 have no Debian source in the snapshot. The pinned releases and valid controls support only the observed JSON subset; a complete RFC 8259 implementation claim would need more evidence.
 
-Round 4 (2026-11-18): Debian apt-cache search, vcpkg/Homebrew/Conan lists and a GitHub C search found no further C JSON value library with a Debian source; the tenth slot stays open ([snapshot](registry-snapshot.json), `round_4_discovery`).
+Round 4 (2026-11-18): Debian apt-cache search, vcpkg/Homebrew/Conan lists and a GitHub C search found no further C JSON value library with a Debian source ([snapshot](registry-snapshot.json), `round_4_discovery`).
+
+Round 6 (2026-11-18): bounded GitHub repository searches for the C/C++ star fallback (`json parser language:C stars:>=100` 28 hits, `json language:C stars:>=100` 121 hits with the first 100 inspected, `jsmn OR parson OR cjson language:C stars:>=100` 7 hits) give json.h as the highest-starred format-specific C JSON parser with a tagged release that is not already selected; it fills the tenth slot. Barenboim/json-parser (700), mjson (473) and lower leads were not built. Each candidate's stars, tags and decision are in the [snapshot](registry-snapshot.json) (`round_6_star_fallback`) and the [leads](leads.json).
