@@ -177,6 +177,8 @@ Parsarium is licensed under the [Apache License 2.0](LICENSE). Each parser keeps
 
 - [PROTOCOL.md](PROTOCOL.md): parser eligibility, ranking, adoption metrics, stopping rules.
 - [ETHICS.md](ETHICS.md): what Parsarium is for, how to handle findings, and what it does not do.
+- [CONTRIBUTING.md](CONTRIBUTING.md): suggesting parsers, reporting wrong records, and the checks a pull request must pass.
+- [SECURITY.md](SECURITY.md): reporting a vulnerability in Parsarium itself.
 - [AGENTS.md](AGENTS.md): repository map and working rules for automated contributors.
 - [CITATION.cff](CITATION.cff): how to cite Parsarium.
 

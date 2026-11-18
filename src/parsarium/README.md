@@ -1,6 +1,6 @@
 # Parsarium
 
-An open testbed of real parsers. Parsarium covers ten core formats (PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY, ASCII PNM, and MP3 with ID3v2) and is piloting JSON, XML, and plain MP3 across C, C++, Go, Java, JavaScript, Python, Rust, and PHP. Verified runnable targets have a pinned release, a documented input API, a valid control file, a Docker harness, and an AFL++ overlay. The catalog marks paths that are still under investigation.
+An open testbed of real parsers: 1,163 open-source parser packages for 16 file formats and protocols (PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1, ASCII PLY, ASCII PNM, MP3, JSON, XML, YAML, TOML, SQL and DNS messages) in C, C++, Go, Java, JavaScript, Python, Rust and PHP. Each target has a pinned release, a documented input API, a Docker harness checked against valid control files, and an AFL++ overlay, and can be fed inputs that Fandango generates from the format's grammar.
 
 Website, atlas, and manual: [parsarium.com](https://parsarium.com)
 
@@ -16,15 +16,15 @@ Requires Python 3.11+ and Docker for running targets. Release wheels include thi
 
 ```sh
 parsarium list --format png
-parsarium show png c libpng
-parsarium run png c libpng my.png --results runs/libpng
+parsarium show png c lodepng
+parsarium run png c lodepng my.png --results runs/lodepng
 parsarium run-format png --file my.png --results runs/png-my-file
-parsarium afl build png c libpng
-parsarium afl prepare png c libpng runs/libpng-afl
-parsarium afl run runs/libpng-afl --seconds 3600
+parsarium afl build png c lodepng
+parsarium afl prepare png c lodepng runs/lodepng-afl
+parsarium afl run runs/lodepng-afl --seconds 3600
 parsarium fandango setup
-parsarium fandango generate png c libpng runs/libpng-fandango --count 100 --seed 42 --replay --prepare-afl
-parsarium afl run runs/libpng-fandango/afl --check
+parsarium fandango generate png c lodepng runs/lodepng-fandango --count 100 --seed 42 --replay --prepare-afl
+parsarium afl run runs/lodepng-fandango/afl --check
 ```
 
 Run a selection saved from the [bench](https://parsarium.com/bench/):
@@ -48,7 +48,7 @@ for t in catalog.targets(format="png", ecosystem="rust"):
 
 ## License
 
-Apache-2.0.
+Apache-2.0. Each parser keeps its own license, recorded in the catalog. Please read the [ethics and responsible-use notes](https://github.com/joszamama/parsarium/blob/main/ETHICS.md) before publishing findings.
 
 ## Citing
 

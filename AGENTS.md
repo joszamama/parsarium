@@ -69,5 +69,6 @@ Code must run on Python 3.11: no backslashes inside f-string expressions.
 
 - Docker builds target Linux amd64 and arm64. A project's `verification.json` records the image ID and toolchain it was verified with.
 - Adoption metrics are captured with timestamps and response hashes; recapture rather than editing numbers.
+- Recorded commands in receipts write the repository root as `$PARSARIUM_HOME`; never commit absolute paths from your machine.
 - Some managed-language overlays fix hash seeds or random sources so AFL++ feedback is repeatable. Each one is disclosed in its receipt; keep that disclosure when you touch the overlay.
 - The website reads everything from the repository. To preview: `python3 website/build.py` and serve `website/dist`.

@@ -372,5 +372,25 @@ class SelectionModeTests(unittest.TestCase):
             selection.run(self.manifest, self.root, "control", None, self.out, 5, dry_run=True)
 
 
+class DocumentationExampleTests(unittest.TestCase):
+    """Commands shown to users must name targets that exist."""
+
+    ROOT = Path(__file__).resolve().parents[1]
+
+    def test_readme_examples_name_real_targets(self) -> None:
+        import re
+        pattern = re.compile(r"parsarium(?:\.py)? (?:show|run|build|replay|afl build|afl prepare|fandango generate|native prepare|report) "
+                             r"([a-z0-9_]+) (c|cpp|go|java|javascript|python|rust|php) ([A-Za-z0-9_.-]+)")
+        checked = 0
+        docs = ["README.md", "src/parsarium/README.md", "projects/README.md", "fuzzing/README.md", "AGENTS.md"]
+        docs += [str(p.relative_to(self.ROOT)) for p in sorted((self.ROOT / "website").glob("*/*/*.html"))]
+        for doc in docs:
+            for fmt, eco, slug in pattern.findall((self.ROOT / doc).read_text()):
+                checked += 1
+                self.assertTrue((self.ROOT / "projects" / fmt / eco / slug / "manifest.json").is_file(),
+                                f"{doc} names a missing target: {fmt}/{eco}/{slug}")
+        self.assertGreater(checked, 5)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -5,8 +5,8 @@ Every project accepts a local byte input. The [main CLI](../README.md) lists run
 ## One input or an external corpus
 
 ```sh
-python3 parsarium.py run png c libpng controls/png/red-green.png
-python3 parsarium.py replay png c libpng generated/png runs/libpng-replay \
+python3 parsarium.py run png c lodepng controls/png/red-green.png
+python3 parsarium.py replay png c lodepng generated/png runs/lodepng-replay \
   --generator Fandango --spec png
 ```
 
@@ -33,11 +33,11 @@ Fully verified projects have an AFL++ overlay; the [current audit](../data/proje
 For Go, Java, JavaScript, Python, and PHP, a small instrumented proxy maps parser features into AFL++'s shared feedback map. The parser packages remain unchanged. These bridges are slower than native instrumentation, and their feature and tuple counts are not comparable across ecosystems. Hash collisions in the 64 KiB map are possible. The PHP bridge treats ordinary `Exception` values as parser rejections; PHP `Error` values and process failures remain fatal.
 
 ```sh
-python3 parsarium.py afl build ascii_ply java jply
-python3 parsarium.py afl prepare ascii_ply java jply runs/jply-afl
-python3 parsarium.py afl run runs/jply-afl --check
-python3 parsarium.py afl run runs/jply-afl --seconds 3600
-python3 parsarium.py afl summary runs/jply-afl
+python3 parsarium.py afl build png java pngj
+python3 parsarium.py afl prepare png java pngj runs/pngj-afl
+python3 parsarium.py afl run runs/pngj-afl --check
+python3 parsarium.py afl run runs/pngj-afl --seconds 3600
+python3 parsarium.py afl summary runs/pngj-afl
 ```
 
 `afl build` creates the selected local image and verifies its parser coverage. A fresh checkout needs this step before preparation. `afl prepare` copies the project's valid control into `seeds/`, checks the overlay receipt and local image, and writes `plan.json`. Additional inputs enter with repeated `--seed FILE` or `--seed-dir DIRECTORY`. `afl run` checks the plan, image, and seed hashes before starting a time-bounded campaign. `--resume` continues the same `afl-out/` directory. `afl summary` inventories queue, crash, and hang files with hashes and reads AFL++'s `fuzzer_stats`.
@@ -68,7 +68,7 @@ python3 parsarium.py native run runs/pngjs-native
 python3 parsarium.py build svg c libvips
 python3 parsarium.py report svg c libvips projects/svg/c/libvips/target/coverage \
   --output reports/libvips --source /work/source=vips-8.18.7.tar.xz
-python3 parsarium.py report png c libpng runs/libpng-replay --output reports/libpng-replay
+python3 parsarium.py report png c lodepng runs/lodepng-replay --output reports/lodepng-replay
 python3 parsarium.py report http11 cpp boost_beast runs/beast-afl \
   --replay-queue --max-queue-inputs 32 --output reports/beast-queue
 ```
