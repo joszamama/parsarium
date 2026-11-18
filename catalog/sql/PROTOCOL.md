@@ -44,6 +44,8 @@ The harness walks the parser's own tree and reports, per statement:
 
 An adapter may convert a parser's numeric value to text only if the result equals the source text for these controls. A harness that only reports accept/reject does not qualify.
 
+Under the concrete-syntax-tree rule in the [general protocol](../../PROTOCOL.md), C tree-sitter-sql qualifies: its summary reads statement, relation, join, clause, invocation and literal node kinds and token text, and only strips the quotes from string literals. The controls contain no doubled quotes or other escapes.
+
 ## Controls
 
 - `controls/sql/select-join.sql`: the primary control, 212 bytes, SHA-256 `331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca`.

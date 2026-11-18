@@ -8,6 +8,8 @@ A parser must be an open-source, pinned library release or a documented standard
 
 An empty compatibility distribution that only installs another selected parser package is not a separate parser path, even if importing the installed dependency succeeds.
 
+A concrete-syntax-tree grammar, such as a tree-sitter grammar on the tree-sitter runtime, qualifies only if the harness can produce the cell's observable result by reading node kinds and node text from the tree. The harness may do what accepted adapters already do: read token text, strip literal delimiters, and type scalar tokens from their literal text. The grammar does not qualify if the harness would have to supply format semantics that the library leaves out, such as decoding string escapes or entity and character references, folding or chomping block scalars, resolving aliases, merging dotted keys and table headers into one tree, or resolving namespaces beyond the raw-name precedent. Such a grammar stays a lead under the tokenizer precedent of C JSON jsmn.
+
 Each accepted path records its release and license evidence, documented input API, control, expected output, adapter, observed result, and environment. A registry hit or project name remains a *lead* until these checks pass. The valid control establishes only the tested format subset.
 
 ## Discovery and stopping

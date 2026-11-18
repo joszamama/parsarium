@@ -6,6 +6,8 @@ This cell applies the [general protocol](../../PROTOCOL.md) to TOML 1.0.0 docume
 
 A path qualifies only if it reads TOML text from a local file, byte buffer, stream, or in-memory string and returns what it parsed. The package API itself has to tokenize and parse the document. Serializers and writers (for example `tomli-w`), schema validators, formatters and linters without a documented value or syntax-tree API, configuration loaders that only delegate to a selected parser, and CLIs are excluded or left as leads in `data/<ecosystem>/toml/leads.json`. A typed mapping library counts only when it exposes a documented generic value view (a table/value tree, a dynamic map, or a syntax tree with typed values).
 
+A syntax tree counts only under the concrete-syntax-tree rule in the [general protocol](../../PROTOCOL.md). A grammar whose tree leaves dotted keys and table headers unmerged, or strings undecoded, does not qualify, because the harness would build the TOML table tree itself. Debian packages no tree-sitter TOML grammar.
+
 A wrapper over another selected parser can be its own package path, but its family is recorded. An empty compatibility distribution that only installs another parser is not a separate path. Standard and runtime APIs are recorded separately in `standard.json`. Python's `tomllib` (3.11+) is a standard API path, not a third-party one; it is a vendored copy of `tomli`, so the two share one family.
 
 ## Observed result: the typed tree

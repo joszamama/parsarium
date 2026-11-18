@@ -6,6 +6,8 @@ This cell applies the [general protocol](../../PROTOCOL.md) to YAML 1.2 document
 
 A path qualifies only if it parses YAML text from local bytes, a string, a file or a stream and returns the document it parsed: a node tree, native values, or an event stream that the harness assembles. Emitters and serializers, schema validators without their own parse step, YAML-front-matter splitters, CLI-only tools and remote services are excluded. A wrapper qualifies as a package API with its underlying parser family stated, for example `sigs.k8s.io/yaml` over a go-yaml fork, `jackson-dataformat-yaml` over SnakeYAML, `strictyaml` over ruamel.yaml, or PHP ext-yaml (PECL) over libyaml. Python PyYAML's pure-Python `SafeLoader` and its libyaml-backed `CSafeLoader` are separate paths with separate families, and each project states which one it runs.
 
+Under the concrete-syntax-tree rule in the [general protocol](../../PROTOCOL.md), C tree-sitter-yaml stays excluded. Its tree keeps escapes, block scalars and aliases as written, so the harness would have to decode, fold, chomp and expand them itself. Typing plain scalars from their text, as the libyaml and libfyaml adapters do, would be allowed.
+
 The harness reports the whole document as a typed tree in source order: `["map", [[key, node], ...]]`, `["seq", [node, ...]]`, `["str", text]`, `["int", decimal]`, `["float", shortest round-trip decimal]`, `["bool", true|false]` and `["null"]`. Aliases are expanded to their anchored node. Where an API returns native values that do not keep the int/float distinction (JavaScript numbers), the harness types a finite integral number as `int`; the controls contain no integral-valued floats, so this is recorded but cannot change the result.
 
 ## Controls
