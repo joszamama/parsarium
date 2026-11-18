@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-18T00:20:25.236685+00:00",
-  "projects_total": 6,
-  "projects_passed": 6,
+  "checked_at_utc": "2026-11-18T00:23:26.048662+00:00",
+  "projects_total": 7,
+  "projects_passed": 7,
   "differential_kind": "fixed_valid_typed_scalars",
   "results": [
     {
@@ -326,6 +326,70 @@
       },
       "differential_only_parser_source_lines_by_file": {
         "lib/index.js": 171
+      }
+    },
+    {
+      "project": "toml/javascript/sgarciac_bombadil",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "01e62fdf312a351dbb71da9869ebf28620f20ba117c0559e3dcd749633eb5019",
+      "base_project_receipt_sha256": "4870ad40fc0ff3c21f742fbbd90e5818623e8db8670f57b1904d9187bf0029c9",
+      "base_image_id": "sha256:03ce75739799fedf8745f7a9a8ef698d2447a492a79f29fe79da1876ee7194cb",
+      "overlay_image_id": "sha256:84abdd08b9a5e648a33120ba2a80f5f29a6d4c153154b29243c8b2d1d250e92a",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_output_matches_expected": true,
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 114,
+      "control_afl_tuples": 134,
+      "differential_parser_features": 113,
+      "differential_afl_tuples": 133,
+      "parser_feature_difference": 73,
+      "afl_tuple_difference": 73,
+      "control_only_afl_tuples": 37,
+      "differential_only_afl_tuples": 36,
+      "control_only_features_by_file": {
+        "lib/AST.js": 3,
+        "lib/parser.js": 12,
+        "lib/tables.js": 20,
+        "lib/tools.js": 2
+      },
+      "differential_only_features_by_file": {
+        "lib/AST.js": 3,
+        "lib/parser.js": 18,
+        "lib/tables.js": 2,
+        "lib/tools.js": 13
+      },
+      "control_parser_source_lines_by_file": {
+        "lib/AST.js": 100,
+        "lib/bombadil.js": 10,
+        "lib/lexer.js": 320,
+        "lib/parser.js": 274,
+        "lib/tables.js": 218,
+        "lib/tools.js": 42
+      },
+      "differential_parser_source_lines_by_file": {
+        "lib/AST.js": 100,
+        "lib/bombadil.js": 10,
+        "lib/lexer.js": 320,
+        "lib/parser.js": 292,
+        "lib/tables.js": 173,
+        "lib/tools.js": 87
+      },
+      "control_only_parser_source_lines_by_file": {
+        "lib/AST.js": 9,
+        "lib/parser.js": 50,
+        "lib/tables.js": 47
+      },
+      "differential_only_parser_source_lines_by_file": {
+        "lib/AST.js": 9,
+        "lib/parser.js": 68,
+        "lib/tables.js": 2,
+        "lib/tools.js": 45
       }
     }
   ]

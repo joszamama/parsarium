@@ -26,6 +26,7 @@ API = {
     "decimalturn_toml_patch": "parse(text, { integersAsBigInt: true }) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true})",
     "effected_toml": "TomlVisitor.visit(text) collected with Effect.runSync(Stream.runCollect(...)) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true}); typed tree from the returned events and value nodes",
     "toml_min": "parse(text, { bigint: true }) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true})",
+    "sgarciac_bombadil": "new TomlReader().readToml(text, true) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true}); typed tree from the returned type tags and values",
 }
 
 
