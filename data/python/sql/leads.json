@@ -34,7 +34,7 @@
       "latest_release_observed": "4.5.0",
       "family": "sqlfluff lexer and dialect grammar matcher",
       "documented_api_lead": "sqlfluff.parse",
-      "reason": "sqlfluff.parse(sql, dialect=\"ansi\") is a documented parse API that returns the full segment parse tree as nested records; it raises APIParsingError on unparsable input. Both valid controls equal the oracle (round 2).",
+      "reason": "sqlfluff.parse(sql, dialect=\"ansi\") is a documented parse API that returns the full segment parse tree as nested records; it raises APIParsingError on unparsable input. Both valid controls equal the oracle.",
       "selected_release": "4.5.0"
     },
     {
@@ -45,7 +45,7 @@
       "latest_release_observed": "8.8",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "pglast.parse_sql",
-      "reason": "pglast.parse_sql runs the vendored libpg_query 18.1.0 raw parser and converts the C tree into pglast.ast nodes in its own Cython layer. Both valid controls equal the oracle; source-built with LLVM coverage (round 2). Shared libpg_query family.",
+      "reason": "pglast.parse_sql runs the vendored libpg_query 18.1.0 raw parser and converts the C tree into pglast.ast nodes in its own Cython layer. Both valid controls equal the oracle; source-built with LLVM coverage. Shared libpg_query family.",
       "selected_release": "8.8"
     },
     {
@@ -56,7 +56,7 @@
       "latest_release_observed": "3.0.1",
       "family": "sqlglot (wrapper)",
       "documented_api_lead": "sql_metadata.Parser",
-      "reason": "Re-checked in round 2: sql-metadata 3.0.1 depends on sqlglot>=30.12,<31 (not sqlparse, as recorded in round 1) and Parser(sql) exposes metadata only: query_type, tables, columns, columns_dict, columns_aliases, tables_aliases, values and values_dict. On controls/sql/select-join.sql it reports tables ['customers', 'orders'] and columns_dict select ['customers.region', 'orders.total', '*'], but no join count, no function names and no SELECT literals, so the protocol summary cannot be read from its documented API; reading its private sqlglot tree would be the selected sqlglot path. Excluded as a metadata wrapper over the sqlglot family, not padded under the Parsel precedent."
+      "reason": "sql-metadata 3.0.1 depends on sqlglot>=30.12,<31 (not sqlparse) and Parser(sql) exposes metadata only: query_type, tables, columns, columns_dict, columns_aliases, tables_aliases, values and values_dict. On controls/sql/select-join.sql it reports tables ['customers', 'orders'] and columns_dict select ['customers.region', 'orders.total', '*'], but no join count, no function names and no SELECT literals, so the protocol summary cannot be read from its documented API; reading its private sqlglot tree would be the selected sqlglot path. Excluded as a metadata wrapper over the sqlglot family, not padded under the Parsel precedent."
     },
     {
       "name": "sqlglotrs",
@@ -76,7 +76,7 @@
       "latest_release_observed": "1.5.9",
       "family": "sqlparse and sqlfluff (wrapper)",
       "documented_api_lead": "LineageRunner",
-      "reason": "Round-2 extension lead (PyPI Stats last_month 1,022,544, captured 2026-11-17). SQL lineage analyser that depends on sqlparse and sqlfluff (both selected) and reports source/target tables and column lineage, not a statement tree with the protocol summary. Excluded as a wrapper."
+      "reason": "Targeted lead (PyPI Stats last_month 1,022,544, captured 2026-11-17). SQL lineage analyser that depends on sqlparse and sqlfluff (both selected) and reports source/target tables and column lineage, not a statement tree with the protocol summary. Excluded as a wrapper."
     },
     {
       "name": "sql-formatter",
@@ -96,7 +96,7 @@
       "latest_release_observed": "0.61.1",
       "family": "sqlparser-rs",
       "documented_api_lead": "sqloxide.parse_sql",
-      "reason": "sqloxide.parse_sql(sql, dialect=\"generic\") calls sqlparser 0.61.0 Parser::parse_sql and pythonizes the AST. Both valid controls equal the oracle; source-built with Rust coverage (round 2). Shared sqlparser-rs family.",
+      "reason": "sqloxide.parse_sql(sql, dialect=\"generic\") calls sqlparser 0.61.0 Parser::parse_sql and pythonizes the AST. Both valid controls equal the oracle; source-built with Rust coverage. Shared sqlparser-rs family.",
       "selected_release": "0.61.1"
     },
     {
@@ -117,7 +117,7 @@
       "latest_release_observed": "0.0.20",
       "family": "sqlvalidator hand-written lexer and parser",
       "documented_api_lead": "sqlvalidator.parse",
-      "reason": "Round-2 extension lead (PyPI Stats last_month 104,072, captured 2026-11-17). sqlvalidator.parse(text).sql_query builds a SelectStatement tree for controls/sql/select-join.sql, but its SQLStatementParser raises ParsingError on controls/sql/insert-values.sql (it parses SELECT statements only), so the fixed second control fails."
+      "reason": "Targeted lead (PyPI Stats last_month 104,072, captured 2026-11-17). sqlvalidator.parse(text).sql_query builds a SelectStatement tree for controls/sql/select-join.sql, but its SQLStatementParser raises ParsingError on controls/sql/insert-values.sql (it parses SELECT statements only), so the fixed second control fails."
     },
     {
       "name": "mo-sql-parsing",
@@ -127,7 +127,7 @@
       "latest_release_observed": "11.699.26234",
       "family": "mo-sql-parsing grammar on the mo-parsing engine",
       "documented_api_lead": "parse",
-      "reason": "mo_sql_parsing.parse returns a JSON parse tree from its grammar on the mo-parsing engine. Both valid controls equal the oracle (round 2).",
+      "reason": "mo_sql_parsing.parse returns a JSON parse tree from its grammar on the mo-parsing engine. Both valid controls equal the oracle.",
       "selected_release": "11.699.26234"
     },
     {
@@ -138,7 +138,7 @@
       "latest_release_observed": "1.13.0",
       "family": "simple-ddl-parser PLY grammar",
       "documented_api_lead": "DDLParser(...).run()",
-      "reason": "DDL-only parser, confirmed in round 2: simple-ddl-parser 1.13.0 DDLParser(text, silent=True).run() returns [] for both controls/sql/select-join.sql and controls/sql/insert-values.sql (no statement is recognised), so it cannot give the SELECT or INSERT summary."
+      "reason": "DDL-only parser: simple-ddl-parser 1.13.0 DDLParser(text, silent=True).run() returns [] for both controls/sql/select-join.sql and controls/sql/insert-values.sql (no statement is recognised), so it cannot give the SELECT or INSERT summary."
     },
     {
       "name": "pg-query-python",
@@ -148,7 +148,7 @@
       "latest_release_observed": "0.1.3",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "pg_query.parse",
-      "reason": "Round 3: not a pinned parser source. pg-query-python 0.1.3 ships no libpg_query sources: its sdist (88 kB) setup.py runs 'git clone --depth 1 --branch $LIBPG_QUERY_TAG' (default the moving branch 16-latest) of github.com/pganalyze/libpg_query at build time, and its wheels bundle a prebuilt libpg_query.so whose libpg_query tag is recorded nowhere in the package (the package __version__ string is 17.0.0 while setup.py defaults to 16-latest). The parser source therefore cannot be pinned by the package, the ground on which psqlparse was also left unresolved; source coverage of a self-chosen libpg_query tag would not establish what the published wheels run. The ctypes binding and protobuf decoding are pinned, but they are not the parser."
+      "reason": "Not a pinned parser source. pg-query-python 0.1.3 ships no libpg_query sources: its sdist (88 kB) setup.py runs 'git clone --depth 1 --branch $LIBPG_QUERY_TAG' (default the moving branch 16-latest) of github.com/pganalyze/libpg_query at build time, and its wheels bundle a prebuilt libpg_query.so whose libpg_query tag is recorded nowhere in the package (the package __version__ string is 17.0.0 while setup.py defaults to 16-latest). The parser source therefore cannot be pinned by the package, the ground on which psqlparse was also left unresolved; source coverage of a self-chosen libpg_query tag would not establish what the published wheels run. The ctypes binding and protobuf decoding are pinned, but they are not the parser."
     },
     {
       "name": "psqlparse",
@@ -178,7 +178,7 @@
       "latest_release_observed": "0.0.17",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "psqlparse2.parse",
-      "reason": "Round-2 lead (PyPI Stats last_month 3,025), evaluated in round 3. psqlparse2.query_to_pb runs the Cython wrapper over its vendored libpg_query 16-5.1.0 (PostgreSQL 16.1 grammar) and decodes the protobuf into its generated pg_query_pb2 messages; both valid controls equal the oracle. Source-built from the pinned sdist with LLVM coverage (1,897 lines in 43 files, 1,240 in libpg_query); the AFL++ bridge maps wrapper and grammar/scanner/raw_parser regions (215 tuples and 228 features differ between controls). Shared libpg_query family with pglast; own wrapper and an older vendored release.",
+      "reason": "Targeted lead (PyPI Stats last_month 3,025, captured 2026-11-17). psqlparse2.query_to_pb runs the Cython wrapper over its vendored libpg_query 16-5.1.0 (PostgreSQL 16.1 grammar) and decodes the protobuf into its generated pg_query_pb2 messages; both valid controls equal the oracle. Source-built from the pinned sdist with LLVM coverage (1,897 lines in 43 files, 1,240 in libpg_query); the AFL++ bridge maps wrapper and grammar/scanner/raw_parser regions (215 tuples and 228 features differ between controls). Shared libpg_query family with pglast; own wrapper and an older vendored release.",
       "selected_release": "0.0.17"
     },
     {
@@ -199,7 +199,7 @@
       "latest_release_observed": "0.0.9",
       "family": "sqlparser 0.0.9 SQL-file runner",
       "documented_api_lead": "sqlparser.SqlParser",
-      "reason": "Round-2 hit of the 'sqlpars' query (PyPI Stats last_month 2,053), checked in round 3. The 0.0.9 wheel's single module SqlParser.py imports jaydebeapi and pandas, splits SQL files on a '--:--' comment marker into setup, extract and cleanup strings and runs them over a JDBC connection; it builds no syntax tree, and running statements against a database is outside the protocol. The wheel has no licence text (License: UNKNOWN; LGPL only as a classifier)."
+      "reason": "Hit of the 'sqlpars' query (PyPI Stats last_month 2,053, captured 2026-11-17). The 0.0.9 wheel's single module SqlParser.py imports jaydebeapi and pandas, splits SQL files on a '--:--' comment marker into setup, extract and cleanup strings and runs them over a JDBC connection; it builds no syntax tree, and running statements against a database is outside the protocol. The wheel has no licence text (License: UNKNOWN; LGPL only as a classifier)."
     },
     {
       "name": "polyglot-sql",
@@ -209,7 +209,7 @@
       "latest_release_observed": "0.14.1",
       "family": "polyglot-sql tokenizer and recursive-descent parser (sqlglot-style)",
       "documented_api_lead": "polyglot_sql.parse",
-      "reason": "Round-3 hit of the 'polyglot-sql' query (PyPI Stats last_month 9,851, captured 2026-11-18). polyglot_sql.parse runs the polyglot-sql Rust parser through the package's pyo3 binding and returns Expression objects; both valid controls equal the oracle. Source-built from the pinned sdist with Rust coverage (2,994 parser-crate lines in 11 files, 218 binding lines); the AFL++ bridge gives 5,724 tuples and the controls differ by 2,574 tuples. Same polyglot-sql 0.14.1 crate source as the Rust polyglot-sql path (shared family).",
+      "reason": "Hit of the 'polyglot-sql' query (PyPI Stats last_month 9,851, captured 2026-11-18). polyglot_sql.parse runs the polyglot-sql Rust parser through the package's pyo3 binding and returns Expression objects; both valid controls equal the oracle. Source-built from the pinned sdist with Rust coverage (2,994 parser-crate lines in 11 files, 218 binding lines); the AFL++ bridge gives 5,724 tuples and the controls differ by 2,574 tuples. Same polyglot-sql 0.14.1 crate source as the Rust polyglot-sql path (shared family).",
       "selected_release": "0.14.1"
     },
     {
@@ -220,7 +220,7 @@
       "latest_release_observed": "0.1.4",
       "family": "bigquery-sql-parser regular-expression extraction",
       "documented_api_lead": "bigquery_sql_parser.query.Query",
-      "reason": "Round-3 hit of the 'sql-pars' query (PyPI Stats last_month 8,116, captured 2026-11-18). 0.1.4 (2022, single py2.py3 wheel) splits the text with regular expressions: Query exposes columns from a regex over the SELECT list and full_table_ids from a FROM/JOIN pattern that requires project.dataset.table names; there is no join, function, predicate, grouping or literal structure and no INSERT support, so it cannot give the summary (same ground as marcocesarato/sqlparser in the PHP cell)."
+      "reason": "Hit of the 'sql-pars' query (PyPI Stats last_month 8,116, captured 2026-11-18). 0.1.4 (2022, single py2.py3 wheel) splits the text with regular expressions: Query exposes columns from a regex over the SELECT list and full_table_ids from a FROM/JOIN pattern that requires project.dataset.table names; there is no join, function, predicate, grouping or literal structure and no INSERT support, so it cannot give the summary (same ground as marcocesarato/sqlparser in the PHP cell)."
     },
     {
       "name": "mindsdb-sql",
@@ -230,7 +230,7 @@
       "latest_release_observed": "0.21.0",
       "family": "mindsdb_sql SLY grammar (predecessor of mindsdb_sql_parser)",
       "documented_api_lead": "mindsdb_sql.parse_sql",
-      "reason": "Round-3 hit of the 'mindsdb-sql' query (PyPI Stats last_month 7,674, captured 2026-11-18). Predecessor package of mindsdb-sql-parser: GPL-3.0, last release 0.21.0 (2024-11-14) with a sqlalchemy dependency, superseded by the MIT mindsdb_sql_parser repository of the same organisation; 63.9% of mindsdb_sql_parser 0.13.8's non-comment source lines (multiset) occur in mindsdb_sql 0.21.0. Predecessor names are not counted (pg_query/pglast and moz-sql-parser/mo-sql-parsing precedent); its metric is not combined with the successor's."
+      "reason": "Hit of the 'mindsdb-sql' query (PyPI Stats last_month 7,674, captured 2026-11-18). Predecessor package of mindsdb-sql-parser: GPL-3.0, last release 0.21.0 (2024-11-14) with a sqlalchemy dependency, superseded by the MIT mindsdb_sql_parser repository of the same organisation; 63.9% of mindsdb_sql_parser 0.13.8's non-comment source lines (multiset) occur in mindsdb_sql 0.21.0. Predecessor names are not counted (pg_query/pglast and moz-sql-parser/mo-sql-parsing precedent); its metric is not combined with the successor's."
     },
     {
       "name": "mindsdb-sql-parser",
@@ -240,7 +240,7 @@
       "latest_release_observed": "0.13.8",
       "family": "mindsdb_sql_parser SLY grammar",
       "documented_api_lead": "mindsdb_sql_parser.parse_sql",
-      "reason": "Round-3 hit of the 'sql-pars' query (PyPI Stats last_month 2,499, captured 2026-11-18). mindsdb_sql_parser.parse_sql runs its SLY lexer and LALR grammar into its own AST (Select, Insert, Join, Function, Constant); both valid controls equal the oracle. Pure-Python sdist (no wheel) installed byte-identical; Python line tracing covers 1,820 lines in mindsdb_sql_parser and its vendored SLY; the AFL++ line bridge gives 1,805 tuples and the controls differ by 170 tuples. Independent family; mindsdb-sql is its excluded predecessor.",
+      "reason": "Hit of the 'sql-pars' query (PyPI Stats last_month 2,499, captured 2026-11-18). mindsdb_sql_parser.parse_sql runs its SLY lexer and LALR grammar into its own AST (Select, Insert, Join, Function, Constant); both valid controls equal the oracle. Pure-Python sdist (no wheel) installed byte-identical; Python line tracing covers 1,820 lines in mindsdb_sql_parser and its vendored SLY; the AFL++ line bridge gives 1,805 tuples and the controls differ by 170 tuples. Independent family; mindsdb-sql is its excluded predecessor.",
       "selected_release": "0.13.8"
     },
     {
@@ -251,7 +251,7 @@
       "latest_release_observed": "1.0.4",
       "family": "TWSqlParser two-way SQL template expander",
       "documented_api_lead": "twsqlparser.parse_file",
-      "reason": "Round-3 hit of the 'sqlparser' query (PyPI Stats last_month 419, captured 2026-11-18). Two-way SQL template expander (README in the 1.0.4 wheel: builds dynamic SQL from SQL files by expanding comment directives and parameters, and returns SQL text without validating it); no statement tree, so it cannot give the summary."
+      "reason": "Hit of the 'sqlparser' query (PyPI Stats last_month 419, captured 2026-11-18). Two-way SQL template expander (README in the 1.0.4 wheel: builds dynamic SQL from SQL files by expanding comment directives and parameters, and returns SQL text without validating it); no statement tree, so it cannot give the summary."
     },
     {
       "name": "antlr-tsql",
@@ -261,7 +261,7 @@
       "latest_release_observed": "0.12.6",
       "family": "antlr-tsql ANTLR 4 T-SQL grammar with antlr-ast tree shaping",
       "documented_api_lead": "antlr_tsql.ast.parse",
-      "reason": "Round-3 lead (PyPI Stats last_month 126, captured 2026-11-18). antlr_tsql.ast.parse runs the ANTLR 4 generated T-SQL parser on the antlr4 Python runtime and shapes the tree with antlr-ast; both valid controls equal the oracle (constant Terminals classified by their quotes). Built from pinned sdists; Python line tracing covers 2,893 lines of antlr_tsql, antlr-ast and the antlr4 runtime; the AFL++ line bridge gives 2,851 tuples and the controls differ by 1,219 tuples. Independent family; very weak metric.",
+      "reason": "Targeted lead (PyPI Stats last_month 126, captured 2026-11-18). antlr_tsql.ast.parse runs the ANTLR 4 generated T-SQL parser on the antlr4 Python runtime and shapes the tree with antlr-ast; both valid controls equal the oracle (constant Terminals classified by their quotes). Built from pinned sdists; Python line tracing covers 2,893 lines of antlr_tsql, antlr-ast and the antlr4 runtime; the AFL++ line bridge gives 2,851 tuples and the controls differ by 1,219 tuples. Independent family; very weak metric.",
       "selected_release": "0.12.6"
     }
   ]

@@ -142,7 +142,7 @@
       "latest_release_observed": null,
       "family": "Hyrise sql-parser (Bison/Flex)",
       "documented_api_lead": "hsql::SQLParser::parse",
-      "reason": "hsql::SQLParser::parse returns SQLParserResult with SQLStatement trees; documented local text API. No Debian source package in the pinned popcon snapshot (rechecked 2026-11-17 for hsql, hyrise and sql-parser source names), so it has no value for this cell's primary popcon metric and no Debian dev-package fallback; GitHub stars are not allowed outside PLY cells. Round 6 (2026-11-18, C/C++ star fallback): 813 GitHub stars, but the repository has no git tag and no GitHub release (tags and releases API both empty), so there is no pinned tagged upstream release and the star fallback does not apply.",
+      "reason": "hsql::SQLParser::parse returns SQLParserResult with SQLStatement trees; documented local text API. No Debian source package in the pinned popcon snapshot (rechecked 2026-11-17 for hsql, hyrise and sql-parser source names), so it has no value for this cell's primary popcon metric and no Debian dev-package fallback; Under the C/C++ star fallback (2026-11-18) it has 813 GitHub stars, but the repository has no git tag and no GitHub release (tags and releases API both empty), so there is no pinned tagged upstream release and the star fallback does not apply.",
       "github_stars": 813,
       "github_stars_observed_at_utc": "2026-11-18T07:14:34.280489+00:00"
     },
@@ -154,7 +154,7 @@
       "latest_release_observed": null,
       "family": "QGIS QgsSQLStatement bison grammar",
       "documented_api_lead": "QgsSQLStatement",
-      "reason": "Round 3 targeted lookup. QGIS core's QgsSQLStatement parses SELECT statements for OGC filter translation, but its grammar (src/core/qgssqlstatementparser.yy at tag final-3_40_0) declares SELECT, JOIN, WHERE and ORDER BY and has no GROUP BY or INSERT, so it cannot parse either control. The popcon count is for the whole QGIS application. Debian popcon sourcemax rank 5,103, 1,927 installations (pinned snapshot)."
+      "reason": "Targeted lookup. QGIS core's QgsSQLStatement parses SELECT statements for OGC filter translation, but its grammar (src/core/qgssqlstatementparser.yy at tag final-3_40_0) declares SELECT, JOIN, WHERE and ORDER BY and has no GROUP BY or INSERT, so it cannot parse either control. The popcon count is for the whole QGIS application. Debian popcon sourcemax rank 5,103, 1,927 installations (pinned snapshot)."
     },
     {
       "name": "futuresql",
@@ -164,7 +164,7 @@
       "latest_release_observed": null,
       "family": "KDE FutureSQL asynchronous database wrapper",
       "documented_api_lead": null,
-      "reason": "Round 3 targeted lookup. Asynchronous Qt database access library (QtSql drivers underneath); it passes statement text to the database driver and has no SQL parser. Debian popcon sourcemax rank 1,911, 24,225 installations (pinned snapshot)."
+      "reason": "Targeted lookup. Asynchronous Qt database access library (QtSql drivers underneath); it passes statement text to the database driver and has no SQL parser. Debian popcon sourcemax rank 1,911, 24,225 installations (pinned snapshot)."
     },
     {
       "name": "mysql-9.7",
@@ -174,7 +174,7 @@
       "latest_release_observed": null,
       "family": "MySQL server grammar (sql_yacc.yy)",
       "documented_api_lead": null,
-      "reason": "Round-4 targeted lookup. MySQL server and client source package: the server's bison grammar is compiled into mysqld and is not a documented library API (same grounds as mariadb in the C cell). Debian popcon sourcemax rank 3,576, 5,827 installations (pinned snapshot)."
+      "reason": "Targeted lookup. MySQL server and client source package: the server's bison grammar is compiled into mysqld and is not a documented library API (same grounds as mariadb in the C cell). Debian popcon sourcemax rank 3,576, 5,827 installations (pinned snapshot)."
     },
     {
       "name": "firebird4.0",
@@ -184,7 +184,7 @@
       "latest_release_observed": null,
       "family": "Firebird DSQL parser (internal)",
       "documented_api_lead": null,
-      "reason": "Round-4 targeted lookup. Firebird database engine; its DSQL parser is internal to the engine and has no documented library syntax-tree API. Debian popcon sourcemax rank 2,441, 18,423 installations (pinned snapshot)."
+      "reason": "Targeted lookup. Firebird database engine; its DSQL parser is internal to the engine and has no documented library syntax-tree API. Debian popcon sourcemax rank 2,441, 18,423 installations (pinned snapshot)."
     },
     {
       "name": "firebird3.0",
@@ -194,7 +194,7 @@
       "latest_release_observed": null,
       "family": "Firebird DSQL parser (internal)",
       "documented_api_lead": null,
-      "reason": "Round-4 targeted lookup. Older Firebird engine series; same grounds as firebird4.0. Debian popcon sourcemax rank 2,864, 11,394 installations (pinned snapshot)."
+      "reason": "Targeted lookup. Older Firebird engine series; same grounds as firebird4.0. Debian popcon sourcemax rank 2,864, 11,394 installations (pinned snapshot)."
     },
     {
       "name": "apache-arrow",
@@ -204,7 +204,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 targeted lookup. Columnar data libraries; Acero executes Substrait or builder-made plans and Arrow ships no SQL parser. Debian popcon sourcemax rank 3,604, 5,700 installations (pinned snapshot)."
+      "reason": "Targeted lookup. Columnar data libraries; Acero executes Substrait or builder-made plans and Arrow ships no SQL parser. Debian popcon sourcemax rank 3,604, 5,700 installations (pinned snapshot)."
     },
     {
       "name": "mysql-connector-c++",
@@ -214,7 +214,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 targeted lookup. MySQL client library; the X DevAPI parses CRUD condition expressions, not SQL statements, and the classic API sends SQL text to the server. Debian popcon sourcemax rank 15,101, 125 installations (pinned snapshot)."
+      "reason": "Targeted lookup. MySQL client library; the X DevAPI parses CRUD condition expressions, not SQL statements, and the classic API sends SQL text to the server. Debian popcon sourcemax rank 15,101, 125 installations (pinned snapshot)."
     },
     {
       "name": "sqlsmith",
@@ -224,7 +224,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 targeted lookup. Random SQL query generator for testing servers; it emits SQL and has no parser API. Debian popcon sourcemax rank 33,355, 5 installations (pinned snapshot)."
+      "reason": "Targeted lookup. Random SQL query generator for testing servers; it emits SQL and has no parser API. Debian popcon sourcemax rank 33,355, 5 installations (pinned snapshot)."
     },
     {
       "name": "usql",
@@ -234,7 +234,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 targeted lookup. The Debian source usql is xo/usql (Go command-line SQL client; Homepage and XS-Go-Import-Path github.com/xo/usql in debian/control), not the C++ cybergarage/usql parser; an identical short name does not establish source identity. Debian popcon sourcemax rank 33,394, 5 installations (pinned snapshot)."
+      "reason": "Targeted lookup. The Debian source usql is xo/usql (Go command-line SQL client; Homepage and XS-Go-Import-Path github.com/xo/usql in debian/control), not the C++ cybergarage/usql parser; an identical short name does not establish source identity. Debian popcon sourcemax rank 33,394, 5 installations (pinned snapshot)."
     },
     {
       "name": "cybergarage/usql",
@@ -244,7 +244,7 @@
       "latest_release_observed": null,
       "family": "cybergarage uSQL parser",
       "documented_api_lead": null,
-      "reason": "Round-4 GitHub discovery (search 'sql parser language:C++', 2026-11-18; stars are not used). BSD-3-Clause C++ SQL parser (tags up to 0.8.2). No Debian source package (Debian 'usql' is the unrelated Go client) and no vcpkg or Conan Center port, so it has no admissible metric and was not built. Round 6: 55 GitHub stars, below the 100-star threshold.",
+      "reason": "GitHub discovery (search 'sql parser language:C++', 2026-11-18). BSD-3-Clause C++ SQL parser (tags up to 0.8.2). No Debian source package (Debian 'usql' is the unrelated Go client) and no vcpkg or Conan Center port, so it has no admissible metric and was not built. Under the C/C++ star fallback: 55 GitHub stars, below the 100-star threshold.",
       "github_stars": 55,
       "github_stars_observed_at_utc": "2026-11-18T07:14:38.647676+00:00"
     },
@@ -256,7 +256,7 @@
       "latest_release_observed": null,
       "family": "sqltoast hand-written C++ parser",
       "documented_api_lead": null,
-      "reason": "Round-4 GitHub discovery. Apache-2.0 C++ SQL parser with one tag (0.1) and no change since 2021. No Debian source package, vcpkg or Conan Center port, so it has no admissible metric and was not built. Round 6: 33 GitHub stars, below the 100-star threshold.",
+      "reason": "GitHub discovery. Apache-2.0 C++ SQL parser with one tag (0.1) and no change since 2021. No Debian source package, vcpkg or Conan Center port, so it has no admissible metric and was not built. Under the C/C++ star fallback: 33 GitHub stars, below the 100-star threshold.",
       "github_stars": 33,
       "github_stars_observed_at_utc": "2026-11-18T07:14:39.786920+00:00"
     },
@@ -268,7 +268,7 @@
       "latest_release_observed": "2026.11.2",
       "family": "GoogleSQL (formerly ZetaSQL) Textmapper-generated parser",
       "documented_api_lead": "https://github.com/google/googlesql/blob/2026.11.2/googlesql/parser/parser.h",
-      "reason": "Round-4 lead (task list: ZetaSQL). Apache-2.0 C++ SQL parser and analyzer (release 2026.11.2). No Debian source package in the pinned snapshot and no vcpkg or Conan Center port, so it has no admissible metric and was not built. Round 6 (2026-11-18): selected as a star-fallback path (google/zetasql now resolves to google/googlesql, 2,642 stars, tag 2026.11.2). The repository is GoogleSQL's parser and analyzer, so its stars are SQL-specific; verified as data/cpp/sql/parsers.json 'googlesql'.",
+      "reason": "Known project lead (ZetaSQL). Apache-2.0 C++ SQL parser and analyzer (release 2026.11.2). No Debian source package in the pinned snapshot and no vcpkg or Conan Center port, so it has no popcon metric. Selected as a star-fallback path (2026-11-18) (google/zetasql now resolves to google/googlesql, 2,642 stars, tag 2026.11.2). The repository is GoogleSQL's parser and analyzer, so its stars are SQL-specific; verified as data/cpp/sql/parsers.json 'googlesql'.",
       "github_stars": 2642,
       "github_stars_observed_at_utc": "2026-11-18T07:14:32.956170+00:00"
     },
@@ -280,7 +280,7 @@
       "latest_release_observed": null,
       "family": "ClickHouse server parser (internal)",
       "documented_api_lead": null,
-      "reason": "Round-4 lead (task list: ClickHouse parser libs). ClickHouse's SQL parser (src/Parsers) is part of the server source and is not released as a standalone library; no clickhouse source package is in the pinned popcon snapshot, and vcpkg's clickhouse-cpp is a client without a parser."
+      "reason": "Known project lead (ClickHouse parser libraries). ClickHouse's SQL parser (src/Parsers) is part of the server source and is not released as a standalone library; no clickhouse source package is in the pinned popcon snapshot, and vcpkg's clickhouse-cpp is a client without a parser."
     },
     {
       "name": "sqlcheck (jarulraj/sqlcheck)",
@@ -292,7 +292,7 @@
       "documented_api_lead": null,
       "github_stars": 2520,
       "github_stars_observed_at_utc": "2026-11-18T07:14:36.470261+00:00",
-      "reason": "Round-6 GitHub discovery ('sql language:C++' by stars; 2,520 stars, tag v1.3). Anti-pattern checker: src/checker.cpp matches std::regex patterns against statement text and prints hints; there is no parser or statement tree."
+      "reason": "Star-fallback GitHub discovery ('sql language:C++' by stars; 2,520 stars, tag v1.3). Anti-pattern checker: src/checker.cpp matches std::regex patterns against statement text and prints hints; there is no parser or statement tree."
     },
     {
       "name": "SQLines (dmtolpeko/sqlines)",
@@ -304,7 +304,7 @@
       "documented_api_lead": null,
       "github_stars": 432,
       "github_stars_observed_at_utc": "2026-11-18T07:14:37.539498+00:00",
-      "reason": "Round-6 GitHub discovery ('sql language:C++' by stars; 432 stars). Database migration command-line tool that converts SQL text between dialects with its own token rewriter; no tag or release and no documented library syntax-tree API."
+      "reason": "Star-fallback GitHub discovery ('sql language:C++' by stars; 432 stars). Database migration command-line tool that converts SQL text between dialects with its own token rewriter; no tag or release and no documented library syntax-tree API."
     },
     {
       "name": "constexpr-sql (mkitzan/constexpr-sql)",
@@ -316,7 +316,7 @@
       "documented_api_lead": null,
       "github_stars": 142,
       "github_stars_observed_at_utc": "2026-11-18T07:14:35.325201+00:00",
-      "reason": "Round-6 GitHub discovery ('sql parser language:C++', topic sql-parser; 142 stars). Header-only template library that parses a query string literal at compile time; it cannot read SQL text from a local file at run time, and the repository has no tag or release."
+      "reason": "Star-fallback GitHub discovery ('sql parser language:C++', topic sql-parser; 142 stars). Header-only template library that parses a query string literal at compile time; it cannot read SQL text from a local file at run time, and the repository has no tag or release."
     },
     {
       "name": "Hyrise (hyrise/hyrise)",
@@ -328,7 +328,7 @@
       "documented_api_lead": null,
       "github_stars": null,
       "github_stars_observed_at_utc": null,
-      "reason": "Round-6 GitHub discovery ('sql language:C++' by stars; 872 stars). Research database engine that embeds hyrise/sql-parser; its stars reflect the engine."
+      "reason": "Star-fallback GitHub discovery ('sql language:C++' by stars; 872 stars). Research database engine that embeds hyrise/sql-parser; its stars reflect the engine."
     }
   ]
 }

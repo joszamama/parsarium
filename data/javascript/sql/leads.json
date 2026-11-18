@@ -33,7 +33,7 @@
       "latest_release_observed": "18.2.4",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "parse / parseSync",
-      "reason": "parse(sql) returns the PostgreSQL parse tree from a WASM build of libpg_query 18. Rechecked in round 2: the package runs libpg_query compiled to WebAssembly (wasm/index.cjs loads the module), and Node V8 coverage reports only JavaScript ranges, never the C source lines inside the module; the npm build ships no DWARF or source map that would map module offsets back to the pinned C files. A C-coverage route would need a separately instrumented libpg_query build, which would no longer be the published package bytes. The parser-source coverage gate cannot be met, so it stays a coverage blocker; the C library itself is selected in the C cell."
+      "reason": "parse(sql) returns the PostgreSQL parse tree from a WASM build of libpg_query 18. Rechecked: the package runs libpg_query compiled to WebAssembly (wasm/index.cjs loads the module), and Node V8 coverage reports only JavaScript ranges, never the C source lines inside the module; the npm build ships no DWARF or source map that would map module offsets back to the pinned C files. A C-coverage route would need a separately instrumented libpg_query build, which would no longer be the published package bytes. The parser-source coverage gate cannot be met, so it stays a coverage blocker; the C library itself is selected in the C cell."
     },
     {
       "name": "pgsql-ast-parser",
@@ -76,7 +76,7 @@
       "latest_release_observed": "5.1.0",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "parse",
-      "reason": "pg-query-emscripten 5.1.0 (MIT) wraps an Emscripten build of libpg_query. Round 2 inspected the tarball (sha256 d598a66f...): pg_query.js is wasm2js output (it defines a JavaScript WebAssembly polyfill and runs the translated module as about 2.5 MB of generated JavaScript), and pg_query_wasm.js embeds the module as a base64 data URI. V8 coverage would report lines of translated machine code, not the libpg_query C sources, and no source map is shipped; same family and blocker as libpg-query."
+      "reason": "pg-query-emscripten 5.1.0 (MIT) wraps an Emscripten build of libpg_query. Tarball inspection (sha256 d598a66f...): pg_query.js is wasm2js output (it defines a JavaScript WebAssembly polyfill and runs the translated module as about 2.5 MB of generated JavaScript), and pg_query_wasm.js embeds the module as a base64 data URI. V8 coverage would report lines of translated machine code, not the libpg_query C sources, and no source map is shipped; same family and blocker as libpg-query."
     },
     {
       "name": "plpgsql-parser",
@@ -97,7 +97,7 @@
       "latest_release_observed": "0.3.13",
       "family": "tree-sitter SQL grammar (generated C parser)",
       "documented_api_lead": "tree-sitter Parser.setLanguage + parse",
-      "reason": "tree-sitter-sql 0.3.13 (MIT) is a tree-sitter grammar whose generated parser is C (src/parser.c) loaded as a node-addon-api binding (node-gyp-build) by the separate tree-sitter runtime package. The concrete syntax tree could give the summary, but the parser runs as native code: V8 coverage cannot see it, and parser-source coverage plus AFL++ feedback would need the addon rebuilt with LLVM coverage and AFL++ instrumentation inside Node. Not attempted in round 2; it stays an unrun lead with that blocker.",
+      "reason": "tree-sitter-sql 0.3.13 (MIT) is a tree-sitter grammar whose generated parser is C (src/parser.c) loaded as a node-addon-api binding (node-gyp-build) by the separate tree-sitter runtime package. The concrete syntax tree could give the summary, but the parser runs as native code: V8 coverage cannot see it, and parser-source coverage plus AFL++ feedback would need the addon rebuilt with LLVM coverage and AFL++ instrumentation inside Node. Not attempted; it stays an unrun lead with that blocker.",
       "metric_snapshot": "round_2_metric"
     },
     {
@@ -238,7 +238,7 @@
       "latest_release_observed": "0.3.0",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "parse",
-      "reason": "pg-query-parser 0.3.0 (BSD-3-Clause, 2021) parses through its dependency pg-query-native, a node-gyp addon over an old libpg_query (PostgreSQL 10). The parser runs as native C inside the addon; V8 coverage cannot see it, and a coverage or AFL++ build would have to rebuild the addon with instrumentation. Not attempted in round 2; libpg_query is selected in the C cell."
+      "reason": "pg-query-parser 0.3.0 (BSD-3-Clause, 2021) parses through its dependency pg-query-native, a node-gyp addon over an old libpg_query (PostgreSQL 10). The parser runs as native C inside the addon; V8 coverage cannot see it, and a coverage or AFL++ build would have to rebuild the addon with instrumentation. Not attempted; libpg_query is selected in the C cell."
     },
     {
       "name": "@griffithswaite/ts-plsql-parser",
@@ -381,7 +381,7 @@
       "latest_release_observed": "1.4.1",
       "family": "Tableland Go SQL parser (WASM)",
       "documented_api_lead": "normalize",
-      "reason": "@tableland/sqlparser 1.4.1 ships a Go parser compiled to WebAssembly (main.wasm loaded through Go's wasm_exec glue in esm/out.js) and has no license field in package.json. V8 coverage does not report the Go source lines inside the module; not a candidate in this round.",
+      "reason": "@tableland/sqlparser 1.4.1 ships a Go parser compiled to WebAssembly (main.wasm loaded through Go's wasm_exec glue in esm/out.js) and has no license field in package.json. V8 coverage does not report the Go source lines inside the module; not a candidate.",
       "metric_snapshot": "round_2_metric"
     },
     {

@@ -23,7 +23,7 @@
       "latest_release_observed": "3.5.9",
       "family": "Spark SQL ANTLR grammar",
       "documented_api_lead": "SparkSqlParser.parsePlan",
-      "reason": "Round-2 extension lead, not run. spark-sql is Spark's whole SQL engine (SparkSession, DataFrames, execution); its parser entry point SparkSqlParser (internal org.apache.spark.sql.execution package) extends the selected spark-catalyst AstBuilder with command rules and would parse both controls through the same grammar and AstBuilder, so it would be a same-family wrapper with no own differential for these controls. Its metric counts engine users, not parser users. Accepting it under the wrapper rule would displace the tenth path; left for a user decision."
+      "reason": "Lead, not run. spark-sql is Spark's whole SQL engine (SparkSession, DataFrames, execution); its parser entry point SparkSqlParser (internal org.apache.spark.sql.execution package) extends the selected spark-catalyst AstBuilder with command rules and would parse both controls through the same grammar and AstBuilder, so it would be a same-family wrapper with no own differential for these controls. Its metric counts engine users, not parser users. Accepting it under the wrapper rule would displace the tenth path; left for a user decision."
     },
     {
       "name": "com.alibaba:druid",
@@ -66,7 +66,7 @@
       "latest_release_observed": "4.2.1",
       "family": "Apache Hive ANTLR3 HiveQL grammar",
       "documented_api_lead": "ParseDriver.parse",
-      "reason": "Round-2 extension lead. ParseDriver.parse(command) returns a ParseResult whose getTree() is the HiveQL ASTNode tree (TOK_QUERY, TOK_FROM, TOK_JOIN, TOK_INSERT_INTO, ...); documented in the Hive 4.2.1 Javadocs. The parser classes ship in the hive-exec uber jar.",
+      "reason": "ParseDriver.parse(command) returns a ParseResult whose getTree() is the HiveQL ASTNode tree (TOK_QUERY, TOK_FROM, TOK_JOIN, TOK_INSERT_INTO, ...); documented in the Hive 4.2.1 Javadocs. The parser classes ship in the hive-exec uber jar.",
       "selected_release": "4.2.1"
     },
     {
@@ -88,7 +88,7 @@
       "latest_release_observed": "3.5.9",
       "family": "Spark SQL ANTLR grammar",
       "documented_api_lead": "CatalystSqlParser.parsePlan",
-      "reason": "Round-2 extension lead: Scala 2.12 coordinate of spark-catalyst. CatalystSqlParser.parsePlan returns the unresolved LogicalPlan built by AstBuilder before analysis, which is the parser's syntax tree.",
+      "reason": "Scala 2.12 coordinate of spark-catalyst. CatalystSqlParser.parsePlan returns the unresolved LogicalPlan built by AstBuilder before analysis, which is the parser's syntax tree.",
       "selected_release": "3.5.9"
     },
     {
@@ -130,7 +130,7 @@
       "latest_release_observed": "2.3.0",
       "family": "Calcite JavaCC grammar (Flink-generated FlinkSqlParserImpl)",
       "documented_api_lead": "FlinkSqlParserImpl.FACTORY",
-      "reason": "Round-2 extension lead. Flink generates its own JavaCC parser from Calcite's Parser.jj template plus Flink extensions; with SqlParser.config().withParserFactory(FlinkSqlParserImpl.FACTORY) it returns Calcite SqlNode trees and Flink subclasses. 261 of its 381 grammar productions share names with calcite-core 1.42's 268; 120 are Flink-only.",
+      "reason": "Flink generates its own JavaCC parser from Calcite's Parser.jj template plus Flink extensions; with SqlParser.config().withParserFactory(FlinkSqlParserImpl.FACTORY) it returns Calcite SqlNode trees and Flink subclasses. 261 of its 381 grammar productions share names with calcite-core 1.42's 268; 120 are Flink-only.",
       "selected_release": "2.3.0"
     },
     {
@@ -152,7 +152,7 @@
       "latest_release_observed": "4.3.0",
       "family": "Spark SQL ANTLR grammar",
       "documented_api_lead": null,
-      "reason": "Round-2 extension lead. Spark module that holds the ANTLR-generated SqlBaseLexer/SqlBaseParser and data-type parsing, but not the statement AstBuilder (CatalystSqlParser is in spark-catalyst). Covered by the selected spark-catalyst path; shared family."
+      "reason": "Spark module that holds the ANTLR-generated SqlBaseLexer/SqlBaseParser and data-type parsing, but not the statement AstBuilder (CatalystSqlParser is in spark-catalyst). Covered by the selected spark-catalyst path; shared family."
     },
     {
       "name": "com.github.vertical-blank:sql-formatter",
@@ -172,7 +172,7 @@
       "latest_release_observed": "5.5.3",
       "family": "ShardingSphere ANTLR grammars",
       "documented_api_lead": null,
-      "reason": "Round-2 extension lead. 5.4+ name of the selected shardingsphere-sql-parser-engine; in 5.5.3 it is a pom aggregator (modules core and dialect) with no classes. Same project as the selected pre-rename coordinate; not added."
+      "reason": "5.4+ name of the selected shardingsphere-sql-parser-engine; in 5.5.3 it is a pom aggregator (modules core and dialect) with no classes. Same project as the selected pre-rename coordinate; not added."
     },
     {
       "name": "com.google.zetasql:zetasql-client",
@@ -182,7 +182,7 @@
       "latest_release_observed": "2025.12.1",
       "family": "ZetaSQL (C++ analyzer)",
       "documented_api_lead": "Parser/Analyzer via the local ZetaSQL service",
-      "reason": "Round-2 extension lead, not run. The Java client delegates parsing and analysis to the native C++ ZetaSQL library through a local service, so Java line coverage would not reach the parser; needs native coverage. Below the ten-path ceiling."
+      "reason": "Lead, not run. The Java client delegates parsing and analysis to the native C++ ZetaSQL library through a local service, so Java line coverage would not reach the parser; needs native coverage. Below the ten-path ceiling."
     },
     {
       "name": "org.apache.shardingsphere:shardingsphere-sql-parser-mysql",
@@ -192,7 +192,7 @@
       "latest_release_observed": "5.3.2",
       "family": "ShardingSphere ANTLR grammars",
       "documented_api_lead": null,
-      "reason": "Round-2 extension lead. MySQL dialect module loaded through SPI by the selected shardingsphere-sql-parser-engine path (pinned as its dependency); not a separate parser path."
+      "reason": "MySQL dialect module loaded through SPI by the selected shardingsphere-sql-parser-engine path (pinned as its dependency); not a separate parser path."
     },
     {
       "name": "org.apache.calcite:calcite-babel",
@@ -202,7 +202,7 @@
       "latest_release_observed": "1.42.0",
       "family": "Apache Calcite JavaCC grammar (Babel)",
       "documented_api_lead": "SqlBabelParserImpl.FACTORY",
-      "reason": "Round-2 extension lead, not run. Calcite's Babel parser is a separately generated parser from the same template as calcite-core (shared family). Below the ten-path ceiling."
+      "reason": "Lead, not run. Calcite's Babel parser is a separately generated parser from the same template as calcite-core (shared family). Below the ten-path ceiling."
     },
     {
       "name": "org.apache.shardingsphere:shardingsphere-parser-sql-engine-core",
@@ -212,7 +212,7 @@
       "latest_release_observed": "5.5.3",
       "family": "ShardingSphere ANTLR grammars",
       "documented_api_lead": "SQLParserEngine.parse",
-      "reason": "Round-2 extension lead. Renamed successor of the selected shardingsphere-sql-parser-engine (same SQLParserEngine API); not a separate parser path."
+      "reason": "Renamed successor of the selected shardingsphere-sql-parser-engine (same SQLParserEngine API); not a separate parser path."
     },
     {
       "name": "org.apache.shardingsphere:shardingsphere-parser-sql-engine-mysql",
@@ -222,7 +222,7 @@
       "latest_release_observed": "5.5.3",
       "family": "ShardingSphere ANTLR grammars",
       "documented_api_lead": null,
-      "reason": "Round-2 extension lead. Renamed successor of the MySQL dialect module used by the selected path; a dialect plug-in, not a separate parser path."
+      "reason": "Renamed successor of the MySQL dialect module used by the selected path; a dialect plug-in, not a separate parser path."
     },
     {
       "name": "net.sf.jsqlparser:jsqlparser",
@@ -242,7 +242,7 @@
       "latest_release_observed": "4.2.1",
       "family": "Apache Hive ANTLR3 HiveQL grammar",
       "documented_api_lead": "ParseDriver.parse",
-      "reason": "Round-2 extension lead. The Hive module whose parser classes ship inside the selected hive-exec uber jar; 0 direct dependents. Its sources jar supplies the selected path's coverage sources."
+      "reason": "The Hive module whose parser classes ship inside the selected hive-exec uber jar; 0 direct dependents. Its sources jar supplies the selected path's coverage sources."
     },
     {
       "name": "io.github.melin.superior:superior-sql-parser",
@@ -252,7 +252,7 @@
       "latest_release_observed": "4.0.23",
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-2 extension lead (Maven search hit). Zero deps.dev direct dependents; not added."
+      "reason": "Maven search hit. Zero deps.dev direct dependents; not added."
     },
     {
       "name": "com.alibaba:fastsql",
@@ -262,7 +262,7 @@
       "latest_release_observed": null,
       "family": "Druid hand-written SQL parser (fork)",
       "documented_api_lead": null,
-      "reason": "Round-2 extension lead. Druid's SQL parser published separately; no metric in the snapshot source, so it stays unranked."
+      "reason": "Druid's SQL parser published separately; no metric in the snapshot source, so it stays unranked."
     }
   ]
 }

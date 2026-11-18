@@ -165,7 +165,7 @@
       "latest_release_observed": "1.0.6",
       "family": "greenlion PHP-SQL-Parser consumer",
       "documented_api_lead": null,
-      "reason": "Converter that emits Laravel query-builder PHP code: 1.0.6 requires greenlion/php-sql-parser ^4.4 and turns its clause-array tree into builder method calls (text output, no own SQL parser). Not a separate parser path. Round-3 search hit (2026-11-18)."
+      "reason": "Converter that emits Laravel query-builder PHP code: 1.0.6 requires greenlion/php-sql-parser ^4.4 and turns its clause-array tree into builder method calls (text output, no own SQL parser). Not a separate parser path. Packagist search hit (2026-11-18)."
     },
     {
       "name": "nextras/multi-query-parser",
@@ -175,7 +175,7 @@
       "latest_release_observed": "v2.1.0",
       "family": null,
       "documented_api_lead": null,
-      "reason": "Splits an SQL file into statement strings (multi-query file loader for migrations); no syntax tree. Round-3 search hit (2026-11-18)."
+      "reason": "Splits an SQL file into statement strings (multi-query file loader for migrations); no syntax tree. Packagist search hit (2026-11-18)."
     },
     {
       "name": "intersvyaz/yii2-sqlparser",
@@ -205,7 +205,7 @@
       "latest_release_observed": "v1.0.0",
       "family": "pg_builder hand-written PostgreSQL parser",
       "documented_api_lead": null,
-      "reason": "Parses the schema of plain-text pg_dump output (DDL) on top of sad_spirit/pg_builder ^3.3; schema-only scope, and its SQL parsing is the already selected pg_builder. Round-3 search hit (2026-11-18)."
+      "reason": "Parses the schema of plain-text pg_dump output (DDL) on top of sad_spirit/pg_builder ^3.3; schema-only scope, and its SQL parsing is the already selected pg_builder. Packagist search hit (2026-11-18)."
     },
     {
       "name": "flow-php/pg-query-ext",
@@ -296,7 +296,7 @@
       "latest_release_observed": "4.0.4",
       "family": null,
       "documented_api_lead": null,
-      "reason": "SQLite table schema parser (CREATE TABLE column and constraint definitions); schema-only, cannot parse the SELECT or INSERT controls (scope mismatch, like iamcal/sql-parser). Round-3 search hit (2026-11-18)."
+      "reason": "SQLite table schema parser (CREATE TABLE column and constraint definitions); schema-only, cannot parse the SELECT or INSERT controls (scope mismatch, like iamcal/sql-parser). Packagist search hit (2026-11-18)."
     },
     {
       "name": "aitradeinc/php-sql-parser",
@@ -326,7 +326,7 @@
       "latest_release_observed": "v1.0.9",
       "family": null,
       "documented_api_lead": null,
-      "reason": "Manages SELECT statements as clause strings (GetWhereClause, GetOrderByClause, AddTable, SetLimits); returns and rewrites text clauses, no tree with joins, functions or literals. Round-3 search hit (2026-11-18)."
+      "reason": "Manages SELECT statements as clause strings (GetWhereClause, GetOrderByClause, AddTable, SetLimits); returns and rewrites text clauses, no tree with joins, functions or literals. Packagist search hit (2026-11-18)."
     },
     {
       "name": "codexsoft/sql-parser",
@@ -356,7 +356,7 @@
       "latest_release_observed": "1.0.4",
       "family": "bleksak/sqlite-toolkit hand-written SQLite state-machine parser",
       "documented_api_lead": "Parser::parse",
-      "reason": "Round-3 search hit (\"sqlite parser\", 2026-11-18). (new Parser())->parse($sql) runs the package lexer and a token-at-a-time state machine for the SQLite 3.54.0 grammar and returns typed Ast\\Select and Ast\\Insert nodes (MIT LICENSE in the archive). Verified with both controls; Xdebug covers 1073 package lines and the parser-line AFL++ bridge differs by 983 tuples. Independent of inilim/sqlite-parser (phplrt grammar). Very low adoption (14 lifetime downloads).",
+      "reason": "Packagist search hit (\"sqlite parser\", 2026-11-18). (new Parser())->parse($sql) runs the package lexer and a token-at-a-time state machine for the SQLite 3.54.0 grammar and returns typed Ast\\Select and Ast\\Insert nodes (MIT LICENSE in the archive). Verified with both controls; Xdebug covers 1073 package lines and the parser-line AFL++ bridge differs by 983 tuples. Independent of inilim/sqlite-parser (phplrt grammar). Very low adoption (14 lifetime downloads).",
       "selected_release": "1.0.4"
     },
     {
@@ -367,7 +367,7 @@
       "latest_release_observed": "v1.0.2",
       "family": null,
       "documented_api_lead": null,
-      "reason": "Lexer/parser for a single SQL INSERT statement only (package description); cannot parse the SELECT control. Round-3 search hit (2026-11-18)."
+      "reason": "Lexer/parser for a single SQL INSERT statement only (package description); cannot parse the SELECT control. Packagist search hit (2026-11-18)."
     },
     {
       "name": "ozh/sqltableextractor",
@@ -377,7 +377,7 @@
       "latest_release_observed": "v1.0.1",
       "family": null,
       "documented_api_lead": null,
-      "reason": "Extracts table names from SQL queries; no statement tree, joins, functions or literals. Round-3 search hit (2026-11-18)."
+      "reason": "Extracts table names from SQL queries; no statement tree, joins, functions or literals. Packagist search hit (2026-11-18)."
     },
     {
       "name": "xp-forge/sql-parser",
@@ -407,7 +407,7 @@
       "latest_release_observed": "0.1.20261110",
       "family": "inilim/sqlite-parser phplrt grammar (typed SQLite AST)",
       "documented_api_lead": "Inilim\\SqliteParser\\Parser\\Parser::parse",
-      "reason": "Spot check: Parser::parse returns a Script whose SelectStatement carries columns, from, joins, where, groupBy and orderBy for the primary control. Not promoted this round: the only release (2026-11-10, 1 lifetime download) has neither LICENSE nor README in its archive (composer.json declares MIT; the README exists only on main after the tag). Re-checked 2026-11-18: 0.1.20261110 (commit 807a841c) is still the only release; its codeload archive (SHA-256 6de5b61be341eee4f6baa60aa0c46f6574889a940898d49c6c238cbd55c4f30b) holds only composer.json and src/, and the repository main branch has no LICENSE file (README.md, composer.json, grammar, src, tests, ...), so the MIT declaration has no licence text; Packagist total still 1. Left unresolved, not promoted."
+      "reason": "Spot check: Parser::parse returns a Script whose SelectStatement carries columns, from, joins, where, groupBy and orderBy for the primary control. Not promoted: the only release (2026-11-10, 1 lifetime download) has neither LICENSE nor README in its archive (composer.json declares MIT; the README exists only on main after the tag). Re-checked 2026-11-18: 0.1.20261110 (commit 807a841c) is still the only release; its codeload archive (SHA-256 6de5b61be341eee4f6baa60aa0c46f6574889a940898d49c6c238cbd55c4f30b) holds only composer.json and src/, and the repository main branch has no LICENSE file (README.md, composer.json, grammar, src, tests, ...), so the MIT declaration has no licence text; Packagist total still 1. Left unresolved, not promoted."
     },
     {
       "name": "k-kinzal/sql-parser",
@@ -427,7 +427,7 @@
       "latest_release_observed": "0.7.15",
       "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
       "documented_api_lead": "https://github.com/vimeo/php-mysql-engine/blob/780c49d233834dc91d5b5624c0a709080e238682/src/Parser/SQLParser.php",
-      "reason": "Round-4 search hit (\"mysql engine\", 2026-11-18). In-memory MySQL simulation for tests whose README says it parses SELECT, INSERT, UPDATE and DELETE with a validating query parser. The public final class Vimeo\\MysqlEngine\\Parser\\SQLParser::parse($sql) (docblock-typed; not described in the README) returns SelectQuery/InsertQuery objects with FromClause tables, expression trees, groupBy and orderBy; it is called directly, without FakePdo, so nothing is executed. Both valid controls equal the oracle (the adapter cuts at the package SQLLexer's ';' lexemes because parse() rejects the terminator after INSERT or FROM). Engine-with-public-parser precedent: DuckDB in the C++ cell."
+      "reason": "Packagist search hit (\"mysql engine\", 2026-11-18). In-memory MySQL simulation for tests whose README says it parses SELECT, INSERT, UPDATE and DELETE with a validating query parser. The public final class Vimeo\\MysqlEngine\\Parser\\SQLParser::parse($sql) (docblock-typed; not described in the README) returns SelectQuery/InsertQuery objects with FromClause tables, expression trees, groupBy and orderBy; it is called directly, without FakePdo, so nothing is executed. Both valid controls equal the oracle (the adapter cuts at the package SQLLexer's ';' lexemes because parse() rejects the terminator after INSERT or FROM). Engine-with-public-parser precedent: DuckDB in the C++ cell."
     },
     {
       "name": "cweiske/php-sqllint",
@@ -437,7 +437,7 @@
       "latest_release_observed": null,
       "family": "phpMyAdmin hand-written lexer and parser",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (\"sql validator\"). Command-line syntax checker (AGPL-3.0) whose v0.2.3 composer.json requires phpmyadmin/sql-parser ^4.1.1; it reports the phpMyAdmin parser's errors and has no own tree, like liquipedia/sqllint."
+      "reason": "Packagist search hit (\"sql validator\"). Command-line syntax checker (AGPL-3.0) whose v0.2.3 composer.json requires phpmyadmin/sql-parser ^4.1.1; it reports the phpMyAdmin parser's errors and has no own tree, like liquipedia/sqllint."
     },
     {
       "name": "jimbojsb/pseudo",
@@ -447,7 +447,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 hit (\"pdo mock\"). PDO mocking library: Pseudo\\Pdo::mock() registers SQL strings with result arrays and query() looks the text up (README 0.5); no SQL parser or tree."
+      "reason": "Packagist search hit (\"pdo mock\"). PDO mocking library: Pseudo\\Pdo::mock() registers SQL strings with result arrays and query() looks the text up (README 0.5); no SQL parser or tree."
     },
     {
       "name": "slack/hack-sql-fake",
@@ -457,7 +457,7 @@
       "latest_release_observed": null,
       "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (\"sql fake\"). Hack-language (HHVM) testing library, not PHP; it is the origin named by the selected vimeo/php-mysql-engine README."
+      "reason": "Packagist search hit (\"sql fake\"). Hack-language (HHVM) testing library, not PHP; it is the origin named by the selected vimeo/php-mysql-engine README."
     },
     {
       "name": "vdauchy/sql-analyzer",
@@ -467,7 +467,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 hit (\"sql analyzer\"). Laravel query analyzer (0.4.1, requires ext-pdo and illuminate/database): src/analyzers/MySql.php and SQLite.php inspect EXPLAIN rows returned by the database; it has no SQL parser."
+      "reason": "Packagist search hit (\"sql analyzer\"). Laravel query analyzer (0.4.1, requires ext-pdo and illuminate/database): src/analyzers/MySql.php and SQLite.php inspect EXPLAIN rows returned by the database; it has no SQL parser."
     },
     {
       "name": "pierresh/phpstan-pdo-mysql",
@@ -477,7 +477,7 @@
       "latest_release_observed": null,
       "family": "SQLFTW",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (\"sql validator\"). PHPStan rules for PDO/MySQL code; 2.1.6 requires sqlftw/sqlftw ^0.1 for SQL syntax, which is excluded as proprietary in this cell; no own parser."
+      "reason": "Packagist search hit (\"sql validator\"). PHPStan rules for PDO/MySQL code; 2.1.6 requires sqlftw/sqlftw ^0.1 for SQL syntax, which is excluded as proprietary in this cell; no own parser."
     },
     {
       "name": "zent/php-sql-parser",
@@ -487,7 +487,7 @@
       "latest_release_observed": null,
       "family": "PHP-SQL-Parser (greenlion fork)",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (tag parser, q sql). Self-described PHP-SQL-Parser copy (v4.1.3, 2018): 7,047 of 7,111 normalized statements (99.1%) occur in greenlion v5.0.0 and 137 of 177 files are identical after php -w (round-4 check, same method as the earlier greenlion forks)."
+      "reason": "Packagist search hit (tag parser, q sql). Self-described PHP-SQL-Parser copy (v4.1.3, 2018): 7,047 of 7,111 normalized statements (99.1%) occur in greenlion v5.0.0 and 137 of 177 files are identical after php -w (same method as for the other greenlion forks)."
     },
     {
       "name": "k-kinzal/sql-faker",
@@ -497,7 +497,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 hit (\"sql grammar\"). Grammar-based SQL generator (FakerPHP provider); it emits SQL text and does not parse it."
+      "reason": "Packagist search hit (\"sql grammar\"). Grammar-based SQL generator (FakerPHP provider); it emits SQL text and does not parse it."
     },
     {
       "name": "chh/sirel",
@@ -507,7 +507,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 hit (\"sql syntax tree\"). SQL builder that builds its own AST from method calls and dumps SQL; no tagged release on Packagist and no SQL text input."
+      "reason": "Packagist search hit (\"sql syntax tree\"). SQL builder that builds its own AST from method calls and dumps SQL; no tagged release on Packagist and no SQL text input."
     },
     {
       "name": "janfish/phpmyadmin-sql-parser",
@@ -517,7 +517,7 @@
       "latest_release_observed": null,
       "family": "phpMyAdmin hand-written lexer and parser",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (tag parser, q sql). Copy of phpmyadmin/sql-parser 5.4.2 under another name: 5,101 of 5,104 normalized statements (99.9%) occur in phpmyadmin/sql-parser 5.4.2 and 85 of 86 files are identical after php -w."
+      "reason": "Packagist search hit (tag parser, q sql). Copy of phpmyadmin/sql-parser 5.4.2 under another name: 5,101 of 5,104 normalized statements (99.9%) occur in phpmyadmin/sql-parser 5.4.2 and 85 of 86 files are identical after php -w."
     },
     {
       "name": "dmitry-php/sql-parser",
@@ -527,7 +527,7 @@
       "latest_release_observed": null,
       "family": "phpMyAdmin hand-written lexer and parser",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (tag lexer, q sql). Same description as phpmyadmin/sql-parser; no tagged release on Packagist (targeted lookup 2026-11-18), so no release can be pinned."
+      "reason": "Packagist search hit (tag lexer, q sql). Same description as phpmyadmin/sql-parser; no tagged release on Packagist (targeted lookup 2026-11-18), so no release can be pinned."
     },
     {
       "name": "tiny/sql",
@@ -537,7 +537,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 hit (\"sql parse\"). Described as an SQL parsing library, but Packagist lists no tagged release (targeted lookup 2026-11-18), so no release can be pinned."
+      "reason": "Packagist search hit (\"sql parse\"). Described as an SQL parsing library, but Packagist lists no tagged release (targeted lookup 2026-11-18), so no release can be pinned."
     },
     {
       "name": "jtfnetoo/sql-parser",
@@ -547,7 +547,7 @@
       "latest_release_observed": null,
       "family": "phpMyAdmin hand-written lexer and parser",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (tag parser, q sql). Self-described fork of phpmyadmin/sql-parser (v4.1.6, 2017): 4,125 of 4,127 normalized statements (100.0%) occur in phpmyadmin/sql-parser v4.1.6 and 73 of 74 files are identical after php -w."
+      "reason": "Packagist search hit (tag parser, q sql). Self-described fork of phpmyadmin/sql-parser (v4.1.6, 2017): 4,125 of 4,127 normalized statements (100.0%) occur in phpmyadmin/sql-parser v4.1.6 and 73 of 74 files are identical after php -w."
     },
     {
       "name": "dottwatson/php-mysql-engine",
@@ -557,7 +557,7 @@
       "latest_release_observed": null,
       "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (\"mysql engine\"). Fork of the selected vimeo/php-mysql-engine with the same description (1.1, 2024): 5,903 of 6,740 normalized statements (87.6%) occur in vimeo 0.7.15 and 132 of 148 files are identical after php -w; the additions are data-source adapters (dottwatson/simple-data, justinrainbow/json-schema), not a separate parser. Not promoted to avoid counting one parser twice."
+      "reason": "Packagist search hit (\"mysql engine\"). Fork of the selected vimeo/php-mysql-engine with the same description (1.1, 2024): 5,903 of 6,740 normalized statements (87.6%) occur in vimeo 0.7.15 and 132 of 148 files are identical after php -w; the additions are data-source adapters (dottwatson/simple-data, justinrainbow/json-schema), not a separate parser. Not promoted to avoid counting one parser twice."
     },
     {
       "name": "erkineren/sql-manipulator",
@@ -567,7 +567,7 @@
       "latest_release_observed": null,
       "family": "greenlion PHP-SQL-Parser consumer",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (tag parser, q sql). SQL string manipulator whose 1.0.0 requires greenlion/php-sql-parser ^4.3; no own parser."
+      "reason": "Packagist search hit (tag parser, q sql). SQL string manipulator whose 1.0.0 requires greenlion/php-sql-parser ^4.3; no own parser."
     },
     {
       "name": "dottwatson/fpdo",
@@ -577,7 +577,7 @@
       "latest_release_observed": null,
       "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (tag parser, q sql). PDO wrapper whose 1.1 requires dottwatson/php-mysql-engine (a vimeo fork); no own parser."
+      "reason": "Packagist search hit (tag parser, q sql). PDO wrapper whose 1.1 requires dottwatson/php-mysql-engine (a vimeo fork); no own parser."
     },
     {
       "name": "bleksak/mago-pdo-extension",
@@ -587,7 +587,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 hit (\"sql validator\"). Mago static-analysis extension whose 0.0.6 requires phpmyadmin/sql-parser ^6.0 and bleksak/sqlite-toolkit ^1.0, both already selected; no own parser."
+      "reason": "Packagist search hit (\"sql validator\"). Mago static-analysis extension whose 0.0.6 requires phpmyadmin/sql-parser ^6.0 and bleksak/sqlite-toolkit ^1.0, both already selected; no own parser."
     },
     {
       "name": "rob-lester-jr04/php-sql-parser",
@@ -597,7 +597,7 @@
       "latest_release_observed": null,
       "family": "PHP-SQL-Parser (greenlion fork)",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (tag parser, q sql). Self-described PHP-SQL-Parser copy (v4.4.0, 2021): 7,111 of 7,137 normalized statements (99.6%) occur in greenlion v5.0.0 and 151 of 177 files are identical after php -w."
+      "reason": "Packagist search hit (tag parser, q sql). Self-described PHP-SQL-Parser copy (v4.4.0, 2021): 7,111 of 7,137 normalized statements (99.6%) occur in greenlion v5.0.0 and 151 of 177 files are identical after php -w."
     },
     {
       "name": "zqx/sql-translation",
@@ -607,7 +607,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 hit (tag parser, q sql). Translates custom bracketed formula expressions (for example date_diff([a],[b])) into MySQL or PostgreSQL expression text (README v1.2); not a statement parser."
+      "reason": "Packagist search hit (tag parser, q sql). Translates custom bracketed formula expressions (for example date_diff([a],[b])) into MySQL or PostgreSQL expression text (README v1.2); not a statement parser."
     },
     {
       "name": "jozefhornik/php-mysql-engine",
@@ -617,7 +617,7 @@
       "latest_release_observed": null,
       "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (\"mysql engine\"). Copy of vimeo/php-mysql-engine with the same description and no tagged release on Packagist (targeted lookup 2026-11-18)."
+      "reason": "Packagist search hit (\"mysql engine\"). Copy of vimeo/php-mysql-engine with the same description and no tagged release on Packagist (targeted lookup 2026-11-18)."
     },
     {
       "name": "fuwasegu/php-sql-snapshot",
@@ -627,7 +627,7 @@
       "latest_release_observed": null,
       "family": "greenlion PHP-SQL-Parser consumer",
       "documented_api_lead": null,
-      "reason": "Round-4 hit (tag ast, q sql). PHPUnit extension that compares SQL through greenlion/php-sql-parser ^4.0 trees; no own parser."
+      "reason": "Packagist search hit (tag ast, q sql). PHPUnit extension that compares SQL through greenlion/php-sql-parser ^4.0 trees; no own parser."
     },
     {
       "name": "wordpress/mysql-on-sqlite",
@@ -637,7 +637,7 @@
       "latest_release_observed": null,
       "family": "WordPress MySQL-on-SQLite grammar-driven parser (MySQL Workbench grammar)",
       "documented_api_lead": null,
-      "reason": "Round-4 lead from the \"wordpress mysql parser\" and \"sqlite database integration\" queries (both returned no Packagist package). WordPress/sqlite-database-integration (v3.1.3, 2026-11-03) contains a grammar-driven MySQL lexer and parser (packages/mysql-on-sqlite/src/mysql/class-wp-mysql-parser.php, grammar from MySQL Workbench MySQLParser.g4) whose composer.json names wordpress/mysql-on-sqlite, but neither that name nor wordpress/sqlite-database-integration is published on Packagist (HTTP 404, 2026-11-18). No primary metric, so not verified or ranked."
+      "reason": "Lead from the \"wordpress mysql parser\" and \"sqlite database integration\" queries (both returned no Packagist package). WordPress/sqlite-database-integration (v3.1.3, 2026-11-03) contains a grammar-driven MySQL lexer and parser (packages/mysql-on-sqlite/src/mysql/class-wp-mysql-parser.php, grammar from MySQL Workbench MySQLParser.g4) whose composer.json names wordpress/mysql-on-sqlite, but neither that name nor wordpress/sqlite-database-integration is published on Packagist (HTTP 404, 2026-11-18). No primary metric, so not verified or ranked."
     },
     {
       "name": "kwasii/laravel-sql-parser",
@@ -647,7 +647,7 @@
       "latest_release_observed": "v0.1.0",
       "family": "sqlglot family (PHP port of sqlglot 30.21.0)",
       "documented_api_lead": "https://github.com/kwasii1/laravel-sql-parser/blob/17aa576c47feb38ef3b66b11d0cca449730f7b96/README.md#parsing",
-      "reason": "Round-5 GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist; also the 33rd hit of the round-1 'sql parser' query, where its description (\"Fast SQL Parser for PHP Laravel\") was not followed up. README-documented parse API (Sql::parse(), and Dialect::get(...)->parseOne() without Laravel) returning sqlglot-style expression trees. Dialect::get(null)->parse() on both valid controls gives the oracle summary from Select/Insert, Table, Join, Func and Literal nodes; 1155 package lines covered in 63 files; parser-line AFL++ bridge identical over three repeats, 1168/828 tuples, 766 tuples differ. MIT, only release v0.1.0 (2026-10-10). Requires illuminate/* for its Laravel integration only. Port of Python sqlglot (shared design lineage across ecosystems); independent of the other PHP code bases."
+      "reason": "GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist; also the 33rd hit of the Packagist 'sql parser' query, where its description (\"Fast SQL Parser for PHP Laravel\") alone did not flag it as a parser path. README-documented parse API (Sql::parse(), and Dialect::get(...)->parseOne() without Laravel) returning sqlglot-style expression trees. Dialect::get(null)->parse() on both valid controls gives the oracle summary from Select/Insert, Table, Join, Func and Literal nodes; 1155 package lines covered in 63 files; parser-line AFL++ bridge identical over three repeats, 1168/828 tuples, 766 tuples differ. MIT, only release v0.1.0 (2026-10-10). Requires illuminate/* for its Laravel integration only. Port of Python sqlglot (shared design lineage across ecosystems); independent of the other PHP code bases."
     },
     {
       "name": "liquiddesign/php-sql-parser",
@@ -657,7 +657,7 @@
       "latest_release_observed": "v1.0.8",
       "family": "PHP-SQL-Parser lineage (soundintheory fork)",
       "documented_api_lead": "PHPSQL\\Parser::parse",
-      "reason": "Round-1 'sql parser' hit (rank 46) checked in round 5. Self-described fork of the selected soundintheory/php-sql-parser (README: 'A fork of https://github.com/soundintheory/php-sql-parser', with Creator and HAVING fixes): 1,606 of 1,635 normalized statements (98.2%) occur in soundintheory 1.0, and only Creator.php and Parser.php differ. Near-identical fork."
+      "reason": "Packagist 'sql parser' hit (rank 46). Self-described fork of the selected soundintheory/php-sql-parser (README: 'A fork of https://github.com/soundintheory/php-sql-parser', with Creator and HAVING fixes): 1,606 of 1,635 normalized statements (98.2%) occur in soundintheory 1.0, and only Creator.php and Parser.php differ. Near-identical fork."
     },
     {
       "name": "foolfish3/clickhousesqlparser",
@@ -667,7 +667,7 @@
       "latest_release_observed": "0.5.7",
       "family": "foolfish3 ClickHouseSQLParser (single-file tokenizer and expression parser)",
       "documented_api_lead": null,
-      "reason": "Round-1 'sql parser' hit (rank 40) checked in round 5. composer.json declares MIT, but the 0.5.7 dist archive (SHA-256 817ac1a7ee9a5474354bf331285577e260e7019db29f1d244de122461cd1e121, reference 9b1e6872) contains only composer.json and src/ with no licence text, and the package has no README or documented parse API. Same licence blocker as inilim/sqlite-parser; ClickHouse dialect. Not built."
+      "reason": "Packagist 'sql parser' hit (rank 40). composer.json declares MIT, but the 0.5.7 dist archive (SHA-256 817ac1a7ee9a5474354bf331285577e260e7019db29f1d244de122461cd1e121, reference 9b1e6872) contains only composer.json and src/ with no licence text, and the package has no README or documented parse API. Same licence blocker as inilim/sqlite-parser; ClickHouse dialect. Not built."
     },
     {
       "name": "moledet/database-change-log",
@@ -677,7 +677,7 @@
       "latest_release_observed": "v1.0.3",
       "family": "greenlion PHP-SQL-Parser consumer",
       "documented_api_lead": null,
-      "reason": "Round-5 GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist. Data-change logger whose v1.0.3 requires greenlion/php-sql-parser 4.6.0 to read SQL; no own parser."
+      "reason": "GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist. Data-change logger whose v1.0.3 requires greenlion/php-sql-parser 4.6.0 to read SQL; no own parser."
     },
     {
       "name": "apility/elasticsearch-sql-parser",
@@ -687,7 +687,7 @@
       "latest_release_observed": "v1.0.7",
       "family": "greenlion PHP-SQL-Parser consumer",
       "documented_api_lead": null,
-      "reason": "Round-1 'sql parser' hit checked in round 5. SQL-to-Elasticsearch-DSL converter whose v1.0.7 requires greenlion/php-sql-parser ^4.5; no own parser."
+      "reason": "Packagist 'sql parser' hit. SQL-to-Elasticsearch-DSL converter whose v1.0.7 requires greenlion/php-sql-parser ^4.5; no own parser."
     },
     {
       "name": "graze/morphism",
@@ -697,7 +697,7 @@
       "latest_release_observed": "v7.1.0",
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-5 GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist. MySQL schema migration tool: its Parse namespace (v7.1.0) has CreateDatabase, CreateTable, ColumnDefinition, IndexDefinition and MysqlDump only, so it parses DDL from mysqldump files and cannot parse the SELECT or INSERT controls (schema-only, like iamcal/sql-parser)."
+      "reason": "GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist. MySQL schema migration tool: its Parse namespace (v7.1.0) has CreateDatabase, CreateTable, ColumnDefinition, IndexDefinition and MysqlDump only, so it parses DDL from mysqldump files and cannot parse the SELECT or INSERT controls (schema-only, like iamcal/sql-parser)."
     },
     {
       "name": "aaronidas/apm-sql-lexer",
@@ -707,7 +707,7 @@
       "latest_release_observed": "v0.0.2",
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-5 GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist (AaronBernabeu/apm-sql-lexer) and a round-1 'sql lexer' hit. SQL lexer for APM query obfuscation; it returns tokens, no syntax tree (tokenizer rule)."
+      "reason": "GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist (AaronBernabeu/apm-sql-lexer) and a Packagist 'sql lexer' hit. SQL lexer for APM query obfuscation; it returns tokens, no syntax tree (tokenizer rule)."
     },
     {
       "name": "wolfans/usql-parser",
@@ -717,7 +717,7 @@
       "latest_release_observed": "v2.0",
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-1 'sql parser' hit checked in round 5. SQL style checker whose Packagist licence is 'Private Protocol'; not open source."
+      "reason": "Packagist 'sql parser' hit. SQL style checker whose Packagist licence is 'Private Protocol'; not open source."
     },
     {
       "name": "qieangel2013/esparser",
@@ -727,7 +727,7 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-5 GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist (qieangel2013/EsParser). SQL-to-Elasticsearch converter with no tagged release on Packagist, so no release can be pinned."
+      "reason": "GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist (qieangel2013/EsParser). SQL-to-Elasticsearch converter with no tagged release on Packagist, so no release can be pinned."
     }
   ]
 }

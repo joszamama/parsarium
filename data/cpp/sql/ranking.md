@@ -58,4 +58,4 @@ Receipts: [duckdb](../../../projects/sql/cpp/duckdb/verification.json) and its [
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).
 
-Round 6 (2026-11-18) applied the C and C++ GitHub-star fallback; star counts in the table above are GitHub `stargazers_count` from the [snapshot](registry-snapshot.json) (`round_6_star_fallback`), not popcon values. Twenty bounded repository searches with `stars:>=100` are recorded there.
+The C and C++ GitHub-star fallback (2026-11-18) applies to this cell; star counts in the table above are GitHub `stargazers_count` from the [snapshot](registry-snapshot.json) (`round_6_star_fallback`), not popcon values. Twenty bounded repository searches with `stars:>=100` are recorded there.
