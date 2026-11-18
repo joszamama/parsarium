@@ -188,6 +188,23 @@
       },
       "error": null,
       "native_environment": "pure Go (CGO_ENABLED=0); model3d fileformats PLYReader is the underlying parser"
+    },
+    {
+      "package": "github.com/andrebq/assimp/conv",
+      "module": "github.com/andrebq/assimp",
+      "version": "v0.0.0-20121130215243-a775ba6866d8",
+      "scope": "ASCII PLY mesh, vertex, and face counts",
+      "command": "python3 parsarium.py build ascii_ply go github_com_andrebq_assimp_conv (Go 1.27.1, Debian libassimp-dev/libassimp5, 2026-11-18)",
+      "control": "controls/ascii_ply/triangle.ply",
+      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+      "pass": true,
+      "output": {
+        "faces": 1,
+        "meshes": 1,
+        "vertices": 3
+      },
+      "error": null,
+      "native_environment": "cgo with pkg-config assimp (Debian libassimp-dev in the build stage, libassimp5 at run time); conv.LoadAsset calls aiImportFile through the package C helpers"
     }
   ]
 }

@@ -194,5 +194,24 @@
       "coloured_vertices": 3
     },
     "adapter_manifest_dir": "projects/ascii_ply/go/github_com_unixpickle_model3d_model3d"
+  },
+  {
+    "name": "github.com/andrebq/assimp/conv",
+    "module": "github.com/andrebq/assimp",
+    "version": "v0.0.0-20121130215243-a775ba6866d8",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the module zip (MIT text, Copyright (c) 2012 Andre Luiz Alves Moraes), checked in the image",
+    "input_api": "conv.LoadAsset(path string) (*assimp.Scene, error)",
+    "documentation": "https://pkg.go.dev/github.com/andrebq/assimp@v0.0.0-20121130215243-a775ba6866d8/conv#LoadAsset",
+    "scope": "ASCII PLY mesh, vertex, and face counts",
+    "family": "Assimp C++ importer",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "meshes": 1,
+      "vertices": 3,
+      "faces": 1
+    },
+    "family_note": "Go wrapper over Assimp (cgo, pkg-config assimp): LoadAsset calls aiImportFile through its own C helpers (aiw_*.c) and converts vertices, normals, colours, UVs and faces to Go structs. Fourth path of the Assimp family after tbogdala/assimp-go, bloeys/assimp-go and rishabh-bector/assimp-golang; its 2012 binding code is its own, but the PLY text is parsed by the same Assimp PLY importer (Debian libassimp5 in the image), so the package count does not imply an independent parser engine. No tagged release (pinned pseudo-version, 2012-11-30). Found in round 5 through a pkg.go.dev package search ('assimp').",
+    "adapter_manifest_dir": "projects/ascii_ply/go/github_com_andrebq_assimp_conv"
   }
 ]

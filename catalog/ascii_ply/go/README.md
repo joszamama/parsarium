@@ -1,6 +1,6 @@
 # ASCII PLY / Go
 
-9 verified third-party API paths; 9 have verified Docker harnesses.
+10 verified third-party API paths; 9 have verified Docker harnesses.
 
 [Ranking and search limits](../../../data/go/ascii_ply/ranking.md) · [standard API inventory](../../../data/go/ascii_ply/standard.json)
 
@@ -15,6 +15,7 @@
 - [go.viam.com/rdk/spatialmath](go-viam-com-rdk-spatialmath/README.md) — Docker harness ready
 - [github.com/fogleman/fauxgl](github-com-fogleman-fauxgl/README.md) — Docker harness ready
 - [github.com/unixpickle/model3d/model3d](github-com-unixpickle-model3d-model3d/README.md) — Docker harness ready
+- [github.com/andrebq/assimp/conv](github-com-andrebq-assimp-conv/README.md) — verified API path
 
 ## Standard and runtime APIs
 

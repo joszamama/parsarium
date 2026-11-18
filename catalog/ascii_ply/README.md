@@ -2,13 +2,13 @@
 
 Text mesh geometry.
 
-The catalog records 67 verified third-party API paths across eight ecosystems. Each parser page names its pinned release, documented input API, valid control, observed result, family, and harness status.
+The catalog records 68 verified third-party API paths across eight ecosystems. Each parser page names its pinned release, documented input API, valid control, observed result, family, and harness status.
 
 | Ecosystem | Verified paths | Docker harnesses |
 | --- | ---: | ---: |
 | [C](c/README.md) | 8 | 8 |
 | [C++](cpp/README.md) | 10 | 10 |
-| [Go](go/README.md) | 9 | 9 |
+| [Go](go/README.md) | 10 | 9 |
 | [Java](java/README.md) | 7 | 7 |
 | [JavaScript](javascript/README.md) | 10 | 10 |
 | [Python](python/README.md) | 10 | 10 |
