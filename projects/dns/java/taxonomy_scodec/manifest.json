@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "format": "dns",
+  "ecosystem": "java",
+  "pilot": true,
+  "package": "taxonomy-scodec_2.13",
+  "release": "1.0.0",
+  "catalog_parser": "data/java/dns/parsers.json",
+  "source_lock": "projects/dns/java/taxonomy_scodec/source-lock.json",
+  "source_sha256": "c99db51feb2bb2cb3b88509e4f02e7efb7399c3c07983f7306aafba21071b65b",
+  "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/dns/response.bin",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "expected_output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "differential_control": "controls/dns/query.bin",
+  "differential_control_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "differential_expected_output": {
+    "id": 4660,
+    "qr": 0,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 0,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 0,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [],
+    "authority": [],
+    "additional": []
+  },
+  "harness": "TaxonomyHarness.java",
+  "api": "fr.davit.taxonomy.scodec.DnsCodec.dnsMessage().decode(BitVector.apply(bytes)).require() on local bytes (Scala object called from Java); DnsMessage header, questions and answers/authorities/additionals with typed record data (DnsARecordData/DnsAAAARecordData InetAddress, DnsCNAMERecordData.cname, DnsMXRecordData preference/exchange)",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "TaxonomyHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/taxonomy-scodec_2.13-1.0.0.jar:/work/lib/taxonomy-model_2.13-1.0.0.jar:/work/lib/scodec-core_2.13-1.11.7.jar:/work/lib/scodec-bits_2.13-1.1.14.jar:/work/lib/shapeless_2.13-2.3.3.jar:/work/lib/enumeratum_2.13-1.6.1.jar:/work/lib/enumeratum-macros_2.13-1.6.1.jar:/work/lib/scala-library-2.13.5.jar",
+    "--target_class=TaxonomyHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "summary_command": [
+    "java",
+    "-cp",
+    "/work/classes:/work/lib/*",
+    "TaxonomyHarness",
+    "/input/case"
+  ],
+  "coverage": "JaCoCo bytecode coverage of fr.davit:taxonomy-scodec_2.13:1.0.0 and taxonomy-model_2.13:1.0.0 (fr.davit.taxonomy, Scala sources) during valid-control replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/DnsCodec.scala"
+}

@@ -1,0 +1,85 @@
+{
+  "kind": "third_party",
+  "api": "fr.davit.taxonomy.scodec.DnsCodec.dnsMessage().decode(BitVector.apply(bytes)).require() on local bytes (Scala object called from Java); DnsMessage header, questions and answers/authorities/additionals with typed record data (DnsARecordData/DnsAAAARecordData InetAddress, DnsCNAMERecordData.cname, DnsMXRecordData preference/exchange)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T00:31:32.863372+00:00",
+  "manifest": "projects/dns/java/taxonomy_scodec/manifest.json",
+  "image_id": "sha256:0b0ac2274cac29cd7f6af49c387d12b8aa65cc1d9aafca6553cc7cb1d9a7d0ed",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "c99db51feb2bb2cb3b88509e4f02e7efb7399c3c07983f7306aafba21071b65b",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "993960f27dd79602be1c4f7b5b4f359c461565efaa0aabb4e77a2918b76c1b5d",
+    "TaxonomyHarness.java": "277f3927e12fd45dec75b11409df8d4765dd5de4cd97dd5ea30cb8cbe5449d4a",
+    "manifest.json": "7864dfe5d15965713de2beac3ee8d79767c82bf22a811bf478bfbf0517865a98",
+    "run-control.sh": "b8e410cedd760351fab68a71d134845d317a103701f64368e31d981614586c40",
+    "source-lock.json": "cfa5127ed3194bcba724c6662a2a499bd0ec5a1fa6ffc9c413e8cbe226cd93b8"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 6,
+  "parser_source_lines_covered": 281,
+  "format_specific_source_lines_covered": 118,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/java/taxonomy_scodec/target/coverage/coverage.json",
+  "pass": true
+}

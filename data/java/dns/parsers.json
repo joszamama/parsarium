@@ -522,5 +522,109 @@
     },
     "rank": 5,
     "afl_feedback": "data/java/dns/dns4s-core-feedback-differential.json"
+  },
+  {
+    "name": "taxonomy-scodec_2.13",
+    "version": "1.0.0",
+    "license": "Apache-2.0",
+    "license_evidence": "POMs fr.davit:taxonomy-scodec_2.13:1.0.0 (sha256 2a5a7ba7...) and taxonomy-model_2.13:1.0.0 (sha256 64e86b0c...) declare Apache-2.0, checked in the image; scodec-core/scodec-bits are BSD-3-Clause, shapeless and scala-library Apache-2.0, enumeratum MIT; the jars carry no license file",
+    "input_api": "fr.davit.taxonomy.scodec.DnsCodec.dnsMessage: scodec.Codec[DnsMessage], decode(bits: scodec.bits.BitVector): Attempt[DecodeResult[DnsMessage]] (Scala object, called from Java as DnsCodec$.MODULE$.dnsMessage() with BitVector$.MODULE$.apply(byte[]))",
+    "documentation": "https://github.com/RustedBones/taxonomy/blob/v1.0.0/README.md",
+    "source": "https://central.sonatype.com/artifact/fr.davit/taxonomy-scodec_2.13/1.0.0",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "taxonomy (Scala, scodec: scodec/DnsCodec.scala DnsMessageDecoder over the taxonomy-model DnsMessage classes)",
+    "family_note": "Own Scala scodec decoder of the taxonomy project (Michel Davit), counted in the Java cell as a JVM library, as dns4s is; it uses no other DNS library (scodec-core is a generic binary codec combinator library). Its DnsMessageDecoder follows compression pointers itself. The Scala 2.13 build is pinned and ranked by its own coordinate (taxonomy-scodec_3 is the Scala 3 build of the same code and is not counted separately); the fs2 network module is not loaded. The header codec reads the three bits after RA as a lenient constant, so none of Z, AD and CD is kept and z is reported as 0 (both controls have all three bits clear). Question and record classes are decoded as a 1-bit mDNS flag (unicast-response/cache-flush, false for both controls) plus a 15-bit class. A/AAAA are java.net.Inet4Address/Inet6Address built from the decoded bytes: A text is getHostAddress(), AAAA text is formatted by the harness from getAddress() (RFC 5952). Low adoption: deps.dev counts 4 direct dependents over its releases, the author's own fs2 and scout modules among them. Found in round 4 through a GitHub topic search (topic:dns language:Scala).",
+    "project": "projects/dns/java/taxonomy_scodec",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 4,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/fr.davit%3Ataxonomy-scodec_2.13",
+      "captured_at_utc": "2026-11-18T00:31:00.819035+00:00",
+      "snapshot": "data/java/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "afl_feedback": "data/java/dns/taxonomy-scodec-feedback-differential.json",
+    "documentation_note": "The README documents the taxonomy-scodec artifact as 'the binary protocol with scodec' and its example binds DnsCodec.dnsMessage as the given Codec[DnsMessage] for the fs2 lookup; the harness calls the same codec's decode on local bytes instead of a socket.",
+    "rank": 6
   }
 ]

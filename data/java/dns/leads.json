@@ -239,5 +239,18 @@
     "reason": "The DNS message codec in Pekko's actor IO module (org.apache.pekko.io.dns.internal.Message.parse in the 2.0.0 sources) is declared private[internal] and annotated @InternalApi ('INTERNAL API'); the documented API is the async DNS resolver extension, not a message-bytes parser. No metric looked up.",
     "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 7
+  },
+  {
+    "name": "fr.davit:taxonomy-scodec_2.13",
+    "status": "resolved_verified_selected",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 4,
+    "found_by": "round-4 discovery: GitHub repository search (topic:dns language:Scala); metric in registry-snapshot.json round4_targeted",
+    "documentation": "https://github.com/RustedBones/taxonomy/blob/v1.0.0/README.md",
+    "input_api_lead": "fr.davit.taxonomy.scodec.DnsCodec.dnsMessage.decode(BitVector)",
+    "family": "taxonomy",
+    "api_lead_checked_against_pinned_release": true,
+    "verification": "projects/dns/java/taxonomy_scodec/verification.json",
+    "reason": "Pinned 1.0.0 passes both DNS controls; see parsers.json and data/java/dns/taxonomy-scodec-feedback-differential.json."
   }
 ]
