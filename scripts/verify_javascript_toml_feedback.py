@@ -14,7 +14,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-SLUGS = ("smol_toml", "toml_eslint_parser", "ltd_j_toml", "decimalturn_toml_patch", "effected_toml", "toml_min", "sgarciac_bombadil")
+SLUGS = ("smol_toml", "toml_eslint_parser", "ltd_j_toml", "decimalturn_toml_patch", "effected_toml", "sgarciac_bombadil")
 REPORT = ROOT / "data/javascript/toml/afl-feedback.json"
 REPEATS = 3
 

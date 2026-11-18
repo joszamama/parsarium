@@ -108,22 +108,6 @@
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-j0.4@1.1.1"
     },
     {
-      "name": "fast-toml",
-      "metric_value": 23058,
-      "metric": "npm downloads, last month",
-      "family": "fast-toml",
-      "api_lead": "parse(string)",
-      "note": "TOML 0.5.",
-      "source": "https://www.npmjs.com/package/fast-toml",
-      "status": "unresolved_control_failed",
-      "api_lead_checked_against_pinned_release": true,
-      "release": "0.5.4",
-      "license": "MIT",
-      "checked_on": "2026-11-17",
-      "control_result": "service-config.toml parses. typed-scalars.toml is rejected at line 34 (`site.\"example.com\" = true`) with 'Unexpected \"': the TOML 0.5 parser does not accept a quoted segment in a dotted key. It also returns integers and floats as plain Numbers.",
-      "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install fast-toml@0.5.4"
-    },
-    {
       "name": "@gulujs/toml",
       "metric_value": 25032,
       "metric": "npm downloads, last month",
@@ -139,6 +123,22 @@
       "found_by": "round_4_targeted_lookup",
       "control_result": "service-config.toml matches. typed-scalars.toml fails: parse returns TOML integers and floats as plain Numbers with no typing option, so typed-scalars float `exponent = 1e3` is the Number 1000, the same value as integer 1000 (its README states that it does not preserve integer vs float). Date-times are TomlDate objects with a kind symbol.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install @gulujs/toml@0.4.1 on 2026-11-18"
+    },
+    {
+      "name": "fast-toml",
+      "metric_value": 23058,
+      "metric": "npm downloads, last month",
+      "family": "fast-toml",
+      "api_lead": "parse(string)",
+      "note": "TOML 0.5.",
+      "source": "https://www.npmjs.com/package/fast-toml",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.5.4",
+      "license": "MIT",
+      "checked_on": "2026-11-17",
+      "control_result": "service-config.toml parses. typed-scalars.toml is rejected at line 34 (`site.\"example.com\" = true`) with 'Unexpected \"': the TOML 0.5 parser does not accept a quoted segment in a dotted key. It also returns integers and floats as plain Numbers.",
+      "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install fast-toml@0.5.4"
     },
     {
       "name": "@tauri-apps/toml",
@@ -190,6 +190,18 @@
       "found_by": "round_4_targeted_lookup",
       "control_result": "service-config.toml throws ('Expected property name or '}' in JSON'). typed-scalars.toml returns hex as the string '0xDEAD_BEEF', date-times as strings, undecoded or truncated strings and unsplit dotted keys.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install markty-toml@0.1.1 on 2026-11-18"
+    },
+    {
+      "name": "toml.min",
+      "release": "2.0.1",
+      "metric_value": 3671,
+      "metric": "npm downloads, last month",
+      "family": "toml.min (wellwelwel; own scanner, value decoders and table builder in lib/index.js)",
+      "api_lead": "parse(text, { bigint: true }); OffsetDateTime (Date) and LocalDateOrTime { kind, text }",
+      "source": "https://www.npmjs.com/package/toml.min",
+      "status": "unresolved_datetime_source_text",
+      "checked_at_utc": "2026-11-18",
+      "evidence": "Run in round 4: integers (BigInt), floats and the offset date-time (a Date) are typed, and both controls gave the hand-written trees, but the three local date-time kinds come back as LocalDateOrTime holding a kind tag and the accepted source text, with no decoded date or time fields. Consistent with the round-4 decisions for fig-toml, tomlsmith, babbel_toml and hypnotox/toml and the round-1 toml 5.0.1 precedent (local dates as strings), the local values would be harness readings of source text, so it was demoted at integrator review; project, overlay and tree receipt were removed and are reproducible from the pinned release."
     },
     {
       "name": "@sylphx/synth-toml",
@@ -343,6 +355,22 @@
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install topl@0.3.1 on 2026-11-18"
     },
     {
+      "name": "toml-parser",
+      "metric_value": 94,
+      "metric": "npm downloads, last month",
+      "family": "toml-parser (aaronblohowiak)",
+      "api_lead": "default export(string)",
+      "note": null,
+      "source": "https://www.npmjs.com/package/toml-parser",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.0.7",
+      "checked_on": "2026-11-18",
+      "found_by": "round_4_targeted_lookup",
+      "control_result": "Returns only { title } for service-config.toml and an object without the typed-scalars tables; both controls fail.",
+      "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-parser@0.0.7 on 2026-11-18"
+    },
+    {
       "name": "toml-nodejs",
       "metric_value": 91,
       "metric": "npm downloads, last month",
@@ -358,22 +386,6 @@
       "found_by": "round_4_targeted_lookup",
       "control_result": "service-config.toml matches (integers are BigInt). typed-scalars.toml fails on local_time: `00:32:00.25` is decoded as LocalTime millisecond 25 (it parses the digits after the dot as an integer), i.e. 00:32:00.025.",
       "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-nodejs@0.3.1 on 2026-11-18"
-    },
-    {
-      "name": "toml-parser",
-      "metric_value": 94,
-      "metric": "npm downloads, last month",
-      "family": "toml-parser (aaronblohowiak)",
-      "api_lead": "default export(string)",
-      "note": null,
-      "source": "https://www.npmjs.com/package/toml-parser",
-      "status": "unresolved_control_failed",
-      "api_lead_checked_against_pinned_release": true,
-      "release": "0.0.7",
-      "checked_on": "2026-11-18",
-      "found_by": "round_4_targeted_lookup",
-      "control_result": "Returns only { title } for service-config.toml and an object without the typed-scalars tables; both controls fail.",
-      "run": "Node v26.10.0 in node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (linux/arm64), npm install toml-parser@0.0.7 on 2026-11-18"
     },
     {
       "name": "tomljs",
@@ -685,13 +697,6 @@
       "version": "3.3.3",
       "project": "projects/toml/javascript/decimalturn_toml_patch",
       "status": "promoted_to_verified"
-    },
-    {
-      "name": "toml.min",
-      "version": "2.0.1",
-      "project": "projects/toml/javascript/toml_min",
-      "status": "promoted_to_verified",
-      "found_by": "round_4_targeted_lookup"
     },
     {
       "name": "@effected/toml",
