@@ -612,6 +612,159 @@
     "verification_note": "The package type declarations (dist/toml-patch.d.ts in the 3.3.3 tarball) document parse(value, options?) with ParseOptions.integersAsBigInt (true returns every integer as bigint; the default 'asNeeded' returns safe integers as Numbers, which would make integer 1000 and float 1e3 indistinguishable) and the exported Date subclasses LocalDate, LocalTime, LocalDateTime and OffsetDateTime. The adapter decodes the bytes with TextDecoder('utf-8', {fatal: true, ignoreBOM: true}), calls parse once with integersAsBigInt true, and walks the result: date kinds from the exported classes, their fields through Date.prototype.toISOString (millisecond precision; local kinds are stored in the Date's UTC fields, the offset date-time Date is the instant), floats as shortest round-trip digits written positionally. It never re-parses the text. The published bundle is minified into 83 long lines, so its line counts understate the code reached. Both controls match the expected typed trees exactly (data/javascript/toml/decimalturn-toml-patch-tree-verification.json). Only valid controls were run."
   },
   {
+    "name": "@effected/toml",
+    "version": "0.20.0",
+    "license": "MIT",
+    "npm_integrity": "sha512-ZMVdf+t07n3afvF6yy938Ir17ex6lNbl4YQzdpW8Hg4Q40soWWwzzemdM09tBb/ZYmylTy/QsItJvrWOM0W4ZA==",
+    "tarball_sha256": "fb600ca853a0a52176cee2551f273e2b6a21dbec6ec405026f86d6ea91bc8bce",
+    "source": "https://registry.npmjs.org/@effected/toml/-/toml-0.20.0.tgz",
+    "license_evidence": "https://registry.npmjs.org/@effected/toml/0.20.0 (license MIT; LICENSE file in the tarball)",
+    "documentation": "https://www.npmjs.com/package/@effected/toml/v/0.20.0",
+    "input_api": "TomlVisitor.visit(text) on local bytes decoded as strict UTF-8 text, collected with Effect.runSync(Stream.runCollect(...)); returns TableStart/ArrayTableStart events with resolved table paths and KeyValue events with resolved key paths and typed value nodes (TomlString, TomlInteger, TomlFloat, TomlBoolean, TomlDateTimeLiteral, TomlArray, TomlInlineTable)",
+    "scope": "One TOML document from local bytes decoded as strict UTF-8 (BOM kept) and passed once to TomlVisitor.visit(text); the typed tree is assembled from the returned events' resolved paths and the parser's typed value nodes. Only the two valid TOML 1.0.0 controls were run",
+    "family": "@effected/toml (spencerbeggs; own hand-written scanner, lossless syntax-tree parser and semantic analysis)",
+    "family_note": "@effected/toml 0.20.0 (github.com/spencerbeggs/effected, packages/toml) is a from-scratch TOML 1.1.0 engine written against Effect: internal/scanner.js, internal/parser.js (a lossless linear syntax tree whose spans tile the source) and internal/semantic.js (table and key resolution, duplicate checks). Its README states it vendors no upstream code; its runtime dependencies are @effected/source (source-text positions) and the effect peer dependency. It calls no other TOML parser and shares no code with smol-toml, toml-eslint-parser, j-toml, toml-patch or toml.min. Its value-level Toml.parse returns safe integers as Numbers (so integer 1000 and float 1e3 would be the same Number); the documented TomlVisitor keeps the parser's TomlInteger and TomlFloat nodes apart.",
+    "shared_family_statement": "Own family; no code shared with smol-toml, toml-eslint-parser, j-toml, toml-patch or toml.min.",
+    "control": "controls/toml/service-config.toml",
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "metric": {
+      "name": "npm downloads, last month",
+      "value": 9990,
+      "window": "2026-10-18 to 2026-11-16",
+      "source": "https://api.npmjs.org/downloads/point/2026-10-18:2026-11-16/@effected/toml",
+      "snapshot": "data/javascript/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-18T00:15:08+00:00"
+    },
+    "project": "projects/toml/javascript/effected_toml",
+    "verification_note": "The 0.20.0 README and type declarations (index.d.ts) document TomlVisitor.visit(text): a Stream of TomlVisitorEvent in document order, with TableStart (path), ArrayTableStart (path and 0-based index), KeyValue (path including the final key, and the parsed TomlKeyValue node) and Comment events, failing with TomlParseError on lex, parse or semantic violations. The value-level Toml.parse is not used because it returns safe integers as plain Numbers. The adapter decodes the bytes with TextDecoder('utf-8', {fatal: true, ignoreBOM: true}), collects the events once with Effect.runSync(Stream.runCollect(...)) and assembles the tree: tables from the resolved paths (an array of tables resolves to the element its latest ArrayTableStart opened), scalars from the typed nodes, inline tables from their entries' decoded key paths, date-times formatted from the TomlOffsetDateTime/TomlLocalDateTime/TomlLocalDate/TomlLocalTime fields (offset date-times shifted by offsetMinutes to the UTC instant, nanosecond field kept). It never re-parses the text. Found by the round-4 targeted lookup of npm search hits without a lead decision. Both controls match the expected typed trees exactly (data/javascript/toml/effected-toml-tree-verification.json). Only valid controls were run."
+  },
+  {
     "name": "toml.min",
     "version": "2.0.1",
     "license": "MIT",
