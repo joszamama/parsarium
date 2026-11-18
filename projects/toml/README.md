@@ -2,6 +2,7 @@
 
 Only verified Docker targets appear below; the format remains incomplete.
 
+- [tomlc17 / C](c/tomlc17/README.md)
 - [cpptoml / C++](cpp/cpptoml/README.md)
 - [toml11 / C++](cpp/toml11/README.md)
 - [tomlplusplus / C++](cpp/tomlplusplus/README.md)

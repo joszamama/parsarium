@@ -116,16 +116,19 @@ def validate_pilot_cells() -> None:
                     numeric = (isinstance(value, int) and not isinstance(value, bool) and value >= 1000
                                and isinstance(fallback.get("binary_package"), str)
                                and isinstance(fallback.get("source_sha256"), str))
-                stars = parser.get("supplemental_metric")
-                if not numeric and eco in {"c", "cpp"} and isinstance(stars, dict):
-                    # PROTOCOL.md GitHub-star fallback (2026-11-18): >= 100 stars of the pinned
-                    # tagged upstream repository, captured with a response hash.
-                    value = stars.get("value")
-                    numeric = (parser.get("selection") == "supplemental"
-                               and str(stars.get("name", "")).startswith("GitHub stars")
-                               and isinstance(value, int) and not isinstance(value, bool) and value >= 100
-                               and isinstance(stars.get("release_tag"), str)
-                               and isinstance(stars.get("response_sha256"), str))
+                # PROTOCOL.md GitHub-star fallback (2026-11-18): C/C++ only, >= 100 stars of the
+                # pinned upstream repository, captured with a response hash, selected separately.
+                star_signals = [signal for signal in (parser.get("supplemental_metric"), popularity)
+                                if isinstance(signal, dict) and str(signal.get("name") or signal.get("metric")
+                                                                    or "").startswith("GitHub stars")]
+                for signal in star_signals:
+                    value = signal.get("value")
+                    selection = parser.get("selection") or signal.get("selection")
+                    if not (eco in {"c", "cpp"} and selection == "supplemental"
+                            and isinstance(value, int) and not isinstance(value, bool) and value >= 100
+                            and isinstance(signal.get("response_sha256"), str)):
+                        raise ValueError(f"pilot GitHub-star signal breaks the fallback rule: {eco}/{fmt}/{name}")
+                    numeric = True
                 if not numeric:
                     raise ValueError(f"pilot parser lacks a numeric adoption signal: {eco}/{fmt}/{name}")
             for api in standard["verified_apis"]:

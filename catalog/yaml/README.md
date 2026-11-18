@@ -7,7 +7,7 @@ This format is incomplete across the eight ecosystems. Each row reports only doc
 | Ecosystem | Status | Verified paths | Docker harnesses |
 | --- | --- | ---: | ---: |
 | [C](c/README.md) | pilot_two_verified_bounded_search | 2 | 2 |
-| [C++](cpp/README.md) | pilot_two_verified_bounded_search | 2 | 2 |
+| [C++](cpp/README.md) | pilot_three_verified_bounded_search | 3 | 3 |
 | [Go](go/README.md) | pilot_seven_verified_bounded_search | 7 | 7 |
 | [Java](java/README.md) | pilot_six_verified_bounded_search | 6 | 6 |
 | [JavaScript](javascript/README.md) | pilot_ten_verified_bounded_search | 10 | 10 |

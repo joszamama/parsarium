@@ -4,6 +4,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 
 - [libfyaml / C](c/libfyaml/README.md)
 - [libyaml / C](c/libyaml/README.md)
+- [fkyaml / C++](cpp/fkyaml/README.md)
 - [rapidyaml / C++](cpp/rapidyaml/README.md)
 - [yaml-cpp / C++](cpp/yaml-cpp/README.md)
 - [github.com/go-rotini/yaml / Go](go/github_com_go_rotini_yaml/README.md)

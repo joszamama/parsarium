@@ -8,6 +8,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [json-c / C](c/json-c/README.md)
 - [json-glib / C](c/json-glib/README.md)
 - [json-parser / C](c/json-parser/README.md)
+- [json.h / C](c/json-h/README.md)
 - [libfastjson / C](c/libfastjson/README.md)
 - [yajl / C](c/yajl/README.md)
 - [yyjson / C](c/yyjson/README.md)
