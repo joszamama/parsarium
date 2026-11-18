@@ -140,5 +140,133 @@
     "status": "excluded_zero_recorded_adoption",
     "reason": "pkg.go.dev 'ply file'/'ply loader' hit with 0 importers and no synopsis; no positive primary metric.",
     "checked_at_utc": "2026-11-18T00:45:00+00:00"
+  },
+  {
+    "name": "github.com/jglenc/Test",
+    "status": "excluded_duplicate",
+    "reason": "pkg.go.dev reports 17 importers and the same LoadPLY(path) signature as fauxgl. Its ply.go differs from the selected fogleman/fauxgl ply.go only in the package clause (package Test); it is a copied fauxgl tree (repository created 2019-10-03, 1 star), so it is not a separate parser path.",
+    "source": "https://pkg.go.dev/github.com/jglenc/Test",
+    "discovery_route": "pkg.go.dev symbol search LoadPLY (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/realkanchi/fauxgl",
+    "status": "excluded_duplicate",
+    "reason": "GitHub fork of fogleman/fauxgl with 8 pkg.go.dev importers; its ply.go blob (3ef1840cca3941c81f7b40e9ba5822ed90261cac) is byte-identical to the selected fauxgl ply.go.",
+    "source": "https://pkg.go.dev/github.com/realkanchi/fauxgl",
+    "discovery_route": "pkg.go.dev symbol search LoadPLY (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/nomnom-ray/fauxgl",
+    "status": "excluded_duplicate",
+    "reason": "GitHub fork of fogleman/fauxgl with 2 pkg.go.dev importers; its ply.go blob (3ef1840cca3941c81f7b40e9ba5822ed90261cac) is byte-identical to the selected fauxgl ply.go.",
+    "source": "https://pkg.go.dev/github.com/nomnom-ray/fauxgl",
+    "discovery_route": "pkg.go.dev symbol search LoadPLY (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "fauxgl forks with zero importers",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "The LoadPLY symbol search lists 14 further fauxgl copies or forks (A-MAGDY200/FAUXGL, FOGLEMAN/FAUXGL, JoyTeam/fauxgl, Maker-Management-Platform/fauxgl, Megidd/fauxgl, a-magdy200/fauxgl, clems71/fauxgl, duswie/fauxgl, hehongyuanlove/fauxgl, jglenc/test, joyteam/fauxgl, megidd/fauxgl, mr-ikar/fauxgl, sauterp/fauxgl) and palmdalian/fauxgl v1.0.0, all with 0 importers; they share the selected fauxgl PLY family and have no positive primary metric.",
+    "source": "https://pkg.go.dev/search?q=LoadPLY&m=symbol&limit=100",
+    "discovery_route": "pkg.go.dev symbol search LoadPLY (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/unixpickle/model3d/fileformats (round-4 note)",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "Recheck in round 4: the fileformats PLYReader still records 0 importers; its parser is now counted through the selected model3d/model3d ReadColorPLY wrapper (23 importers), which uses a vertex_index control.",
+    "source": "https://pkg.go.dev/github.com/unixpickle/model3d@v0.4.23/fileformats",
+    "discovery_route": "pkg.go.dev symbol search PLYReader (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/3zcurdia/odx/parsers",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "LoadPLY(filename) MIT reader with 0 pkg.go.dev importers and no tagged release (pseudo-version only).",
+    "source": "https://pkg.go.dev/github.com/3zcurdia/odx/parsers",
+    "discovery_route": "GitHub code search \"func LoadPLY\" language:Go; pkg.go.dev symbol search LoadPLY (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/arata-nvm/poly/poly",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "Tagged v0.0.2 package with a LoadPLY reader (poly/ply.go) but 0 pkg.go.dev importers.",
+    "source": "https://pkg.go.dev/github.com/arata-nvm/poly/poly",
+    "discovery_route": "GitHub code search \"func LoadPLY\" language:Go (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/jurgen-kluft/c3dff/go/g3dff",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "Go PLY reader (go/g3dff/ply.go) with 0 pkg.go.dev importers and no tagged release.",
+    "source": "https://pkg.go.dev/github.com/jurgen-kluft/c3dff/go/g3dff",
+    "discovery_route": "GitHub code search \"func LoadPLY\" language:Go (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/fogleman/pack3d/pack3d",
+    "status": "excluded_no_ply_input_api",
+    "reason": "27 importers, but the pack3d package exposes no file loader; its commands call fauxgl.LoadMesh (the selected fauxgl path) from cmd/ main packages.",
+    "source": "https://pkg.go.dev/github.com/fogleman/pack3d/pack3d",
+    "discovery_route": "pkg.go.dev importers of fogleman/fauxgl (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/fogleman/pt/pt",
+    "status": "excluded_no_ply_support",
+    "reason": "19 importers; the path tracer's package loads OBJ and STL meshes, and its module has no PLY reader (no PLY header parsing in the module source).",
+    "source": "https://pkg.go.dev/github.com/fogleman/pt/pt",
+    "discovery_route": "GitHub code search in fogleman repositories (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/netisu/aeno",
+    "status": "excluded_no_ply_support",
+    "reason": "Renderer with LoadMesh(path) and 2 importers; its v0.1.69 tree has obj.go and gltf.go but no PLY reader.",
+    "source": "https://pkg.go.dev/github.com/netisu/aeno",
+    "discovery_route": "pkg.go.dev symbol search LoadMesh (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/flywave/go-tin",
+    "status": "excluded_no_ply_input_api",
+    "reason": "2 importers; the PLY code is RasterMesh.ExportToPLY, a writer. No PLY input API.",
+    "source": "https://pkg.go.dev/github.com/flywave/go-tin",
+    "discovery_route": "GitHub code search \"end_header\" language:Go (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/fcvarela/gosg/core",
+    "status": "excluded_no_ply_input_api",
+    "reason": "LoadModel(name, res) with 7 importers reads gosg's own serialized model resources, not PLY; the module source has no PLY reader.",
+    "source": "https://pkg.go.dev/github.com/fcvarela/gosg/core",
+    "discovery_route": "pkg.go.dev symbol search LoadModel (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "raylib-go LoadModel/LoadMesh packages",
+    "status": "excluded_no_ply_support",
+    "reason": "github.com/gen2brain/raylib-go/raylib (2,716 importers) and its forks wrap raylib model loading, which supports OBJ, IQM, glTF, VOX and M3D files but not PLY.",
+    "source": "https://pkg.go.dev/search?q=LoadModel&m=symbol&limit=100",
+    "discovery_route": "pkg.go.dev symbol searches LoadModel and LoadMesh (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "Go 3D modules without a PLY reader (round 4)",
+    "status": "excluded_no_ply_support",
+    "reason": "Module source grep for PLY header parsing found none in deadsy/sdfx (sdf 187 importers), soypat/gsdf, solarlune/tetra3d, g3n/engine, ezrec/uv3dp, xyproto/pixelpusher, erh/vmodutils, vibrantgio/seen, alexozer/go-mesh, soypat/three, fogleman/simplify, qmuntal/gltf and hongping1224/lidario; go.viam.com/rdk has no PLY API beyond the selected spatialmath.NewMeshFromPLYFile.",
+    "source": "https://proxy.golang.org/",
+    "discovery_route": "pkg.go.dev package searches (3d mesh, 3d model, 3d renderer, software renderer, voxel, lidar, point cloud, 3d file format) and module zip grep (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/gotoeasy/gsbox",
+    "status": "excluded_no_importable_package",
+    "reason": "196-star 3D Gaussian Splatting conversion CLI that reads splat PLY files; pkg.go.dev has no importable package page for the repository path and the project documents a command-line tool, not a Go library API.",
+    "source": "https://github.com/gotoeasy/gsbox",
+    "discovery_route": "GitHub repository search ply language:Go (round 4)",
+    "round": "2026-11-18 round 4"
   }
 ]
