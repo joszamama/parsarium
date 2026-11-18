@@ -37,9 +37,11 @@ PyPI Stats last_month downloads excluding known mirrors, from [registry-snapshot
 
 | Order | Lead | Metric | Input API lead | Family |
 | ---: | --- | ---: | --- | --- |
-| 1 | async-dns | 6,920 | `async_dns.core.DNSMessage.parse(data)` | async_dns (async_dns/core/record.py DNSMessage/Record) |
-| 2 | dns-client | 1,213 | `dns_client.Packet.read_from(fp)` | dns_client (protocol.py Packet/Record) |
+| 1 | netius | 13,177 | `netius.clients.dns.DNSResponse(data).parse()` | netius (clients/dns.py DNSResponse) |
+| 2 | async-dns | 6,920 | `async_dns.core.DNSMessage.parse(data)` | async_dns (async_dns/core/record.py DNSMessage/Record) |
+| 3 | dns-client | 1,213 | `dns_client.Packet.read_from(fp)` | dns_client (protocol.py Packet/Record) |
 
+- **netius** (unresolved): Own decoder inside the asynchronous DNS client module, documented only by that module's docstring ('Encodes and decodes the wire format of DNS messages using the request and response abstractions defined in this module'). DNSResponse.parse keeps the header flags as two raw octets (first_flags, second_flags), so QR, opcode, AA, TC, RD, RA and RCODE would have to be split out by the harness; it reports types and classes as lower-case names and parses only the question and answer sections. Not verified; kept as a lead.
 - **async-dns** (unresolved): No documented message-bytes API: the README documents only the resolver, the server and parse_hosts_file. DNSMessage.parse is exported through async_dns.core but undocumented, so it stays a lead rather than a selected path.
 - **dns-client** (unresolved): Exports Packet, Header, Question and Record with a read_from(fp) classmethod, but the README documents only the network DNSClient (query over UDP/TLS). Packet.parse also decodes only the answer section (a TODO notes that authority and additional are not read). Kept as a lead, like async-dns, rather than selected.
 
@@ -65,3 +67,13 @@ PyPI Stats last_month downloads excluding known mirrors, from [registry-snapshot
 - **asyncdns2** (excluded): Pure-Python asynchronous resolver: the documentation covers Query, Resolver and Reply objects returned by lookups; replies are decoded inside the resolver's DNSProtocol, with no documented API for caller-supplied message bytes.
 - **dnspythonchia** (excluded): Chia's fork of dnspython 2.2.0 (same DNS toolkit and extras); same family as the selected dnspython.
 - **dnslib3** (excluded): Fork of the selected dnslib: the 0.10.0 wheel installs the same top-level package name dnslib, and 2,100 of the 3,187 distinct non-blank, non-comment source lines of dnslib 0.9.26 (65.9%) also occur in it. Metric 20.
+- **pyatv** (excluded): Fails the response control by source inspection: the Apple TV client's own mDNS decoder (pyatv.support.dns, an internal support module) types only A, PTR, TXT and SRV records (QueryType); CNAME, AAAA and MX RDATA stay raw bytes, so the oracle summary cannot come from its parse.
+- **kamene** (excluded): The scapy3k fork (formerly scapy-python3) of the excluded scapy. Its RDataField decodes A, NS/CNAME, PTR, TXT and AAAA RDATA but leaves MX as raw bytes, so the response control fails by source inspection; scapy's own DNS layer is excluded under the no-socket rule.
+- **scapy-python3** (excluded): Placeholder distribution: 0.26 ships only scapy/all.py, which prints a notice that scapy3k was renamed to kamene and raises an exception. No parser.
+- **construct** (excluded): A DNS struct exists only in the old 2.5.x protocols gallery (construct/protocols/application/dns.py, dropped from current releases). It does not follow compression pointers (owner names are a CString ending at 0xc0) and keeps CNAME and MX RDATA as raw bytes, so the response control fails by source inspection. The package metric covers the generic binary-struct library.
+- **strangle** (excluded): Python 2-era distutils C extension that wraps the obsolete BIND 8 libbind message parser (setup.py links -lbind); no current libbind exists to build against, and its parser family is BIND's ns_parse, which glibc's libresolv standard path already covers.
+- **pypcapkit** (excluded): Packet analysis library without a DNS protocol class: 'dns' occurs only in port, application-type and Mobility Header status-code registries. No DNS message parser.
+- **pycrate** (excluded): Telecom and protocol format suite without a DNS message structure: 'dns' occurs only in mobile, Diameter and IKEv2 identifiers and in its Ethernet tests. No DNS message parser.
+- **hachoir** (excluded): Binary file parser collection without a DNS parser: its tcpdump capture parser only names UDP port 53. No DNS message parser.
+- **aiozeroconf** (excluded): asyncio port of python-zeroconf (excluded): DNSIncoming.read_others builds records only for A, CNAME/PTR, TXT, SRV, HINFO and AAAA; the MX answer is not decoded, so the response control fails by source inspection.
+- **kydns** (excluded): DNS client whose record classes decode only A, AAAA and NS RDATA; CNAME and MX answers are not decoded, so the response control fails by source inspection.
