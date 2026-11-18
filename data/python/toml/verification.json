@@ -796,6 +796,266 @@
       "coverage_caveat": "LLVM source-region coverage of a source build of the pinned sdist (Rust -C instrument-coverage, fat LTO kept), scoped to toml_parser 1.1.5 with toml 1.1.8 as underlying source and toml_datetime 1.1.2 counted separately; the official wheel is not instrumented. The controls do not exercise malformed input, duplicate keys, large integers, special floats or TOML 1.1 syntax."
     },
     {
+      "package": "tomlrt",
+      "version": "2.3.3",
+      "pass": true,
+      "input_api": "tomlrt.loads(decoded local TOML text) -> Document (dict subclass with dict/list views and plain scalars); tomlrt.load(BytesIO(local bytes)) gives the same typed tree on both controls",
+      "output": {
+        "database": {
+          "limits": {
+            "max": {
+              "type": "integer",
+              "value": "10"
+            },
+            "min": {
+              "type": "integer",
+              "value": "-2"
+            }
+          },
+          "ports": [
+            {
+              "type": "integer",
+              "value": "8000"
+            },
+            {
+              "type": "integer",
+              "value": "8001"
+            },
+            {
+              "type": "integer",
+              "value": "8002"
+            }
+          ],
+          "ratio": {
+            "type": "float",
+            "value": "3.25"
+          }
+        },
+        "enabled": {
+          "type": "bool",
+          "value": "true"
+        },
+        "owner": {
+          "name": {
+            "type": "string",
+            "value": "Zoë"
+          },
+          "since": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00Z"
+          }
+        },
+        "products": [
+          {
+            "name": {
+              "type": "string",
+              "value": "Hammer"
+            },
+            "sku": {
+              "type": "integer",
+              "value": "738594937"
+            }
+          },
+          {
+            "color": {
+              "type": "string",
+              "value": "gray"
+            },
+            "name": {
+              "type": "string",
+              "value": "Nail"
+            },
+            "points": [
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "2"
+                }
+              },
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "3"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "4"
+                }
+              }
+            ]
+          }
+        ],
+        "retries": {
+          "type": "integer",
+          "value": "3"
+        },
+        "servers": {
+          "alpha": {
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.1"
+            },
+            "tags": [
+              {
+                "type": "string",
+                "value": "edge"
+              },
+              {
+                "type": "string",
+                "value": "eu"
+              }
+            ]
+          },
+          "beta": {
+            "enabled": {
+              "type": "bool",
+              "value": "false"
+            },
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.2"
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "value": "Parsarium \"service\" control"
+        }
+      },
+      "differential_control": "controls/toml/typed-scalars.toml",
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "oracle": "hand-written typed trees in controls/toml/*.expected.json; every package API mode and CPython tomllib (/usr/bin/python3 -I in the same image, where the package is not importable) must equal them",
+      "stdlib_tomllib_family": "independent (tomllib is the tomli family; tomlrt has its own scanner and parser)",
+      "typed_tree_sha256": {
+        "control": "6d2bf3f9f6f555fc84311a1e4e6af9488563c0f0e2ff06b98ba92e894db5f172",
+        "differential_control": "4718dbdbf4a674dfc79cd455be85ca64736c7a70fd6fd91e097bbc5a74626203"
+      },
+      "api_modes_matching": [
+        "tomlrt-str",
+        "tomlrt-stream"
+      ],
+      "parser_family": "tomlrt pure-Python format-preserving reader (own scanner, parser and scalar decoders)",
+      "platform": "linux/amd64",
+      "parser_source_files": 12,
+      "parser_source_lines_covered": 739,
+      "format_parser_file": "_parser.py",
+      "format_parser_lines_covered": 172,
+      "afl_feedback": "data/python/toml/tomlrt-valid-feedback.json",
+      "afl_tuples": {
+        "control": 751,
+        "differential_control": 672,
+        "difference": 333
+      },
+      "project_receipt": "projects/toml/python/tomlrt/verification.json",
+      "project_receipt_sha256": "e451ea5b5b8c93514ab6b4b7c1228bc2d68705cdadea10009a50441ebca2a521",
+      "coverage_caveat": "Python line coverage of the installed pure-Python wheel, byte-identical to the pinned sdist src/tomlrt. The controls do not exercise malformed input, duplicate keys, large integers, special floats, comment or layout preservation, or TOML 1.1 syntax."
+    },
+    {
       "package": "pytomlpp",
       "version": "1.1.0",
       "pass": true,

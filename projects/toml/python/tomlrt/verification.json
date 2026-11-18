@@ -1,0 +1,171 @@
+{
+  "kind": "third_party",
+  "api": "tomlrt.loads(decoded local TOML text) -> Document (a dict subclass); tomlrt.load(local binary stream) gives the same typed tree",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T01:08:48.843411+00:00",
+  "manifest": "projects/toml/python/tomlrt/manifest.json",
+  "image_id": "sha256:16e96fb631e63d7bb03b597a0b79f0cb397652cd3a5546eaa0a1bf9c1d229918",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/amd64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: tomlrt",
+    "Version: 2.3.3",
+    "Name: atheris",
+    "Version: 3.1.0",
+    "f37616527d5b95b9c252014a618f3d0fc035efe7716f5e00943b5079a85c1141  tomlrt/_parser.py",
+    "da6dc8f0b16dfdf066e14b2e676477751beec47aaa42e82293a8644851657c3c  tomlrt/_scanner.py",
+    "04b78e1cd291404933411696f5d814c25d241d47429c778cb6b87935fe3e3a6d  tomlrt/_scalar.py",
+    "ee1ed5fd980250f06582b6bd41b89c06eaada2ba574ebd348cd5d82e1fc042db  tomlrt/_public.py",
+    "780461fb6e04d3752b1f3e38abc891572b1544a0921f557cdb2d209b40b556cb  tomlrt/__init__.py"
+  ],
+  "source_sha256": "40a4c27d11566f1746673dd1693fec4f31d7f2e45a22483ec93d9a3a8554f63e",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "project_file_sha256": {
+    "Dockerfile": "2dc282b61efa7a9d9fe81c88b85b598586264707702a6b9df7dc49836f2e516f",
+    "expected/service-config.expected.json": "1c2ff48212a50e4bab4450ce6a5794bf92f1edd041899442fbb444abdc9a7377",
+    "expected/typed-scalars.expected.json": "a7f06b70970441ae94f5ee45c1c881b5eaf2d461792ed93710459fa131adc00d",
+    "fuzz.py": "12f5329b821f28b641c53a86c55eaaf560b51775e5687ecaacc33671472c5ae8",
+    "harness.py": "e9e2e9e3dbda1a4c7310af37439523d02f445b112c97473cead8b800743dc161",
+    "manifest.json": "c176490eda057b98d51a39931ee7678db772f2e60fcf16f748388c232df5a015",
+    "replay.py": "33a8821895ae0823a83c916f581021f352b63c9bf248ed43317b7eb563b56b51",
+    "run-control.py": "d31489faaaf9f24154dab239bb3fb7781e21dc2b8693b4713a282a89398ce9de",
+    "runtime-requirements.lock": "d421f05588bea227740f5e42ea2131c4e148828f8383407bb9af89526820ae2a",
+    "source-lock.json": "d84997b34422866e3b4f5df2f2462d5df043d73976211dba23856e619425ceee",
+    "structure.py": "e6c7439b345795987a57681c6dd4e90151e0d992d46c07c84a87551fde7bc82c"
+  },
+  "output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zo\u00eb"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "parser_source_files": 12,
+  "parser_source_lines_covered": 739,
+  "format_specific_source_lines_covered": 172,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/toml/python/tomlrt/target/coverage/coverage.json",
+  "pass": true
+}
