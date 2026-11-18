@@ -153,5 +153,41 @@
     "primary_metric_value": 516,
     "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 2
+  },
+  {
+    "name": "libcrafter",
+    "status": "unresolved_no_primary_metric",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": null,
+    "found_by": "round-4 discovery: packet/protocol libraries with a DNS layer (C++ packet crafting)",
+    "documentation": "https://github.com/pellegre/libcrafter",
+    "input_api_lead": "Crafter::DNS (packet layer built from raw bytes)",
+    "family": "libcrafter",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "C++ packet crafting and decoding library with a DNS layer, but no Debian source package (sources.debian.org 404), so no primary metric and no Debian dev-package fallback. Not attempted."
+  },
+  {
+    "name": "dnslib-cpp",
+    "status": "unresolved_no_primary_metric",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": null,
+    "found_by": "round-4 discovery: GitHub repository search (language:C++, 'dns packet' and 'dns codec': mnezerka/dnslib and its fork wxiaoguang/dnslib-cpp)",
+    "documentation": "https://github.com/mnezerka/dnslib",
+    "input_api_lead": "",
+    "family": "mnezerka dnslib",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "Small C++ DNS encode/decode library (and a fork of it) on GitHub with no Debian source package, so no primary metric. Not attempted."
+  },
+  {
+    "name": "libdnspacket",
+    "status": "unresolved_no_primary_metric",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": null,
+    "found_by": "round-4 discovery: GitHub repository search (language:C++, 'dns parser': bughandler/libdnspacket; also packetzero/dnsparser and ElNeMeR70/cpp-dns-encode)",
+    "documentation": "https://github.com/bughandler/libdnspacket",
+    "input_api_lead": "",
+    "family": "libdnspacket (header-only C++17)",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "Header-only C++17 DNS packet parser/builder on GitHub; neither it nor the other GitHub-only C++ parsers found in round 4 (packetzero/dnsparser, ElNeMeR70/cpp-dns-encode) has a Debian source package, so none has a primary metric. Not attempted."
   }
 ]

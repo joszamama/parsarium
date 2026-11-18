@@ -18,9 +18,15 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 | ---: | --- | ---: | --- | --- | --- |
 | 1 | isc-kea | 516 | `isc::dns::Message(Message::PARSE).fromWire(isc::util::InputBuffer&) (kea/dns/message.h)` | Kea libdns++ (BIND 10 lineage) | unresolved_control_failure |
 | 2 | pcapplusplus | missing | `pcpp::DnsLayer(uint8_t *data, size_t dataLen, Layer *prevLayer, Packet *packet)` | PcapPlusPlus DnsLayer | unresolved_no_primary_metric |
+| 3 | libcrafter | missing | `Crafter::DNS (packet layer built from raw bytes)` | libcrafter | unresolved_no_primary_metric |
+| 4 | dnslib-cpp | missing | `` | mnezerka dnslib | unresolved_no_primary_metric |
+| 5 | libdnspacket | missing | `` | libdnspacket (header-only C++17) | unresolved_no_primary_metric |
 
 - **isc-kea**: Debian's kea-dev installs libkea-dns++ with kea/dns/message.h (Message::fromWire parses a wire message), but by source inspection of upstream 3.0.4 (kea-3.0.4.tar.xz, sha256 62d32494...) src/lib/dns/rrparamregistry.cc registers RDATA factories only for TSIG, A, NS, SOA, PTR, TXT, AAAA, OPT, RRSIG, DHCID and TKEY; CNAME and MX are type names only, so their RDATA stays generic (raw) and the names inside them are not decoded by the library.
 - **pcapplusplus**: No primary metric: PcapPlusPlus has no Debian source package (absent from the pinned popcon sourcemax table; sources.debian.org search for 'pcapplusplus' returned no exact or partial match on 2026-11-17), so the Debian dev-package fallback is also unavailable. GitHub stars are not allowed outside PLY cells. pcpp::DnsLayer decodes DNS from a caller-supplied buffer, but the path is not built until an allowed adoption metric exists.
+- **libcrafter**: C++ packet crafting and decoding library with a DNS layer, but no Debian source package (sources.debian.org 404), so no primary metric and no Debian dev-package fallback. Not attempted.
+- **dnslib-cpp**: Small C++ DNS encode/decode library (and a fork of it) on GitHub with no Debian source package, so no primary metric. Not attempted.
+- **libdnspacket**: Header-only C++17 DNS packet parser/builder on GitHub; neither it nor the other GitHub-only C++ parsers found in round 4 (packetzero/dnsparser, ElNeMeR70/cpp-dns-encode) has a Debian source package, so none has a primary metric. Not attempted.
 
 ## Checked, excluded or recorded separately
 
