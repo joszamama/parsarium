@@ -9,13 +9,14 @@ rename($temporary, $zipPath);
 try {
     if (!copy($path, $zipPath)) { throw new RuntimeException('cannot copy ZIP control'); }
     $archive = new PharData($zipPath);
-    $entries = count($archive);
-    $name = null; $content = null;
-    foreach ($archive as $member) {
-        $name = $member->getFilename();
-        $content = $member->getContent();
-        break;
+    $observed = ['entries'=>count($archive)];
+    // Read every member PharData lists (directories are traversed, not read);
+    // report the first member in PharData's own iteration order.
+    $members = new RecursiveIteratorIterator($archive, RecursiveIteratorIterator::SELF_FIRST);
+    foreach ($members as $member) {
+        $name = substr($member->getPathname(), strlen('phar://' . $zipPath . '/'));
+        $content = $member->isDir() ? '' : $member->getContent();
+        if (!array_key_exists('name', $observed)) { $observed['name'] = $name; $observed['content'] = $content; }
     }
-    if ($entries !== 1 || $name === null || $content === null) { throw new RuntimeException('PharData did not decode ZIP member'); }
-    echo json_encode(['entries'=>$entries, 'name'=>$name, 'content'=>$content], JSON_THROW_ON_ERROR), "\n";
+    echo json_encode($observed, JSON_THROW_ON_ERROR), "\n";
 } finally { @unlink($zipPath); }

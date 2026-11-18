@@ -20,15 +20,32 @@ fn parse_package(package: &str, path: &std::path::Path) -> Result<serde_json::Va
         "rawzip" => {
             let archive = rawzip::ZipArchive::from_slice(&bytes)?;
             let mut entries = archive.entries();
-            let entry = entries.next_entry()?.ok_or("no ZIP entry")?;
-            let normalized = entry.file_path().try_normalize()?;
-            let name = normalized.as_ref().to_string();
-            let size = entry.uncompressed_size_hint();
-            let local = archive.get_entry(entry.wayfinder())?;
-            let decoder = flate2::bufread::DeflateDecoder::new(local.data());
-            let mut content = String::new();
-            local.verifying_reader(decoder).read_to_string(&mut content)?;
-            return Ok(output(&name, Some(&content), size));
+            // Read every entry in central-directory order; report the first one.
+            let mut first: Option<(String, Vec<u8>, u64)> = None;
+            while let Some(entry) = entries.next_entry()? {
+                let normalized = entry.file_path().try_normalize()?;
+                let name = normalized.as_ref().to_string();
+                let size = entry.uncompressed_size_hint();
+                let method = entry.compression_method();
+                let local = archive.get_entry(entry.wayfinder())?;
+                let mut content = Vec::new();
+                // rawzip leaves decompression to the caller: inflate deflated
+                // entries and pass stored entries through, as its docs show.
+                if method == rawzip::CompressionMethod::STORE {
+                    local.verifying_reader(local.data()).read_to_end(&mut content)?;
+                } else if method == rawzip::CompressionMethod::DEFLATE {
+                    let decoder = flate2::bufread::DeflateDecoder::new(local.data());
+                    local.verifying_reader(decoder).read_to_end(&mut content)?;
+                } else {
+                    return Err(format!("unsupported ZIP compression method {method:?}").into());
+                }
+                if first.is_none() {
+                    first = Some((name, content, size));
+                }
+            }
+            let (name, content, size) = first.ok_or("no ZIP entry")?;
+            let content = String::from_utf8(content).ok();
+            return Ok(output(&name, content.as_deref(), size));
         }
         other => return Err(format!("unknown ZIP package: {other}").into()),
     }

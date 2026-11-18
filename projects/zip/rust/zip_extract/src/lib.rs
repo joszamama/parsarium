@@ -20,16 +20,60 @@ fn parse_package(package: &str, path: &std::path::Path) -> Result<serde_json::Va
         "zip-extract" => {
             let root = tempfile::tempdir()?;
             let destination = root.path().join("out");
+            install_logger();
+            extracted().clear();
             #[allow(deprecated)]
-            zip_extract::extract(Cursor::new(&bytes), &destination, false)?;
-            let entry = fs::read_dir(&destination)?.next().ok_or("no extracted ZIP entry")??;
-            let name = entry.file_name().to_string_lossy().to_string();
-            let content = fs::read_to_string(entry.path())?;
-            return Ok(output(&name, Some(&content), content.len() as u64));
+            let result = zip_extract::extract(Cursor::new(&bytes), &destination, false);
+            let visited = std::mem::take(&mut *extracted());
+            result?;
+            // zip-extract writes every entry and traces each one, in archive
+            // order, as "Extracting NAME to PATH"; report the first entry.
+            let first = visited.first().ok_or("zip-extract extracted no entry")?;
+            let marker = format!(" to {}", destination.display());
+            let split = first.find(&marker).ok_or("unexpected zip-extract trace")?;
+            let name = first["Extracting ".len()..split].to_string();
+            let target = std::path::PathBuf::from(&first[split + " to ".len()..]);
+            if target.is_dir() {
+                return Ok(output(&name, Some(""), 0));
+            }
+            let content = fs::read(&target)?;
+            let size = content.len() as u64;
+            let text = String::from_utf8(content).ok();
+            return Ok(output(&name, text.as_deref(), size));
         }
         other => return Err(format!("unknown ZIP package: {other}").into()),
     }
     Err("parser produced no result".into())
+}
+
+struct ExtractLog;
+
+impl log::Log for ExtractLog {
+    fn enabled(&self, metadata: &log::Metadata) -> bool {
+        metadata.target() == "zip_extract"
+    }
+    fn log(&self, record: &log::Record) {
+        if record.target() == "zip_extract" && record.level() == log::Level::Trace {
+            let message = record.args().to_string();
+            if message.starts_with("Extracting ") {
+                extracted().push(message);
+            }
+        }
+    }
+    fn flush(&self) {}
+}
+
+static EXTRACT_LOG: ExtractLog = ExtractLog;
+static EXTRACTED: std::sync::Mutex<Vec<String>> = std::sync::Mutex::new(Vec::new());
+
+fn extracted() -> std::sync::MutexGuard<'static, Vec<String>> {
+    EXTRACTED.lock().unwrap_or_else(|poisoned| poisoned.into_inner())
+}
+
+fn install_logger() {
+    if log::set_logger(&EXTRACT_LOG).is_ok() {
+        log::set_max_level(log::LevelFilter::Trace);
+    }
 }
 
 use std::sync::atomic::{AtomicU64, Ordering};

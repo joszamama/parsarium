@@ -246,11 +246,22 @@ public final class ZipAdapter {
                 try {
                     var archiver = new org.codehaus.plexus.archiver.zip.ZipUnArchiver(path.toFile());
                     archiver.setDestDirectory(destination.toFile());
+                    // Record every entry plexus-archiver visits, in its own (physical) order.
+                    var visited = new java.util.ArrayList<org.codehaus.plexus.components.io.fileselectors.FileInfo>();
+                    archiver.setFileSelectors(new org.codehaus.plexus.components.io.fileselectors.FileSelector[] {
+                            info -> visited.add(info)});
                     archiver.extract();
-                    yield new Parsed("hello.txt", Files.readAllBytes(destination.resolve("hello.txt")));
+                    if (visited.isEmpty()) throw new IllegalStateException("plexus-archiver extracted no entry");
+                    var first = visited.get(0);
+                    byte[] content = first.isDirectory() ? new byte[0]
+                            : Files.readAllBytes(destination.resolve(first.getName()));
+                    yield new Parsed(first.getName(), content);
                 } finally {
-                    Files.deleteIfExists(destination.resolve("hello.txt"));
-                    Files.deleteIfExists(destination);
+                    try (var walk = Files.walk(destination)) {
+                        for (Path item : walk.sorted(java.util.Comparator.reverseOrder()).toList()) {
+                            Files.deleteIfExists(item);
+                        }
+                    }
                 }
             }
             default -> throw new IllegalArgumentException("unknown API: " + args[0]);
