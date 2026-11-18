@@ -25,8 +25,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO = "https://github.com/joszamama/parsarium"
-PATHS = ["parsarium.py", "LICENSE", "README.md", "PROTOCOL.md", "adapters", "catalog", "controls",
-         "data", "fuzzing", "projects", "scripts", "sources"]
+PATHS = ["parsarium.py", "LICENSE", "README.md", "PROTOCOL.md", "ETHICS.md", "CITATION.cff", "adapters", "catalog", "controls",
+         "data", "fuzzing", "projects", "scripts"]
 
 
 def git(*args: str) -> bytes:
