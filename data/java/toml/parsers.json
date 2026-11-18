@@ -1294,5 +1294,264 @@
       "snapshot": "data/java/toml/registry-snapshot.json",
       "captured_at_utc": "2026-11-17T16:37:52.047720+00:00"
     }
+  },
+  {
+    "name": "toml-java",
+    "group": "net.vieiro",
+    "artifact": "toml-java",
+    "coordinate": "net.vieiro:toml-java",
+    "version": "13.5.1",
+    "license": "Apache-2.0",
+    "license_evidence": "Maven release POM licenses (toml-java 13.5.1: Apache License, Version 2.0); Apache-2.0 source headers",
+    "input_api": "TOMLParser.parseFromInputStream(InputStream) -> TOML (README 'Basic usage'); TOML.getErrors() empty and TOML.getRoot() a Map<String, Object> tree of Map, List, Long, Double, Boolean, String, OffsetDateTime, LocalDateTime, LocalDate and LocalTime values (README 'Type mapping')",
+    "documentation": "https://javadoc.io/doc/net.vieiro/toml-java/13.5.1/net/vieiro/toml/TOMLParser.html",
+    "source": "https://repo.maven.apache.org/maven2/net/vieiro/toml-java/13.5.1/toml-java-13.5.1-sources.jar",
+    "scope": "TOML 1.0.0 text from a local file (strict UTF-8 decoding inside the library) into the Map/List object tree of TOML.getRoot() with Long, Double, Boolean, String and java.time values",
+    "family": "toml-java (Antonio Vieiro; own ANTLR 4 grammar from the antlr/grammars-v4 TOML grammar, generated lexer/parser and own visitors)",
+    "family_note": "toml-java 13.5.1 (github.com/vieiro/toml-java, used by Apache NetBeans' TOML support) ships its own TOMLAntlrLexer.g4/TOMLAntlrParser.g4 grammar (the lexer header names its origin, the antlr/grammars-v4 toml grammar, Apache-2.0), the generated TOMLAntlrLexer/TOMLAntlrParser, and its own TOMLVisitor/TOMLStringVisitor that build the Java object tree and decode strings, numbers and date-times; the only runtime dependency is antlr4-runtime 4.13.1 (outside the coverage subject). tomlj also uses ANTLR, but with a different grammar (Apache Tuweni's TomlLexer.g4/TomlParser.g4: rule names toml/expression/keyval/val versus grammars-v4's document/expression/key_value/value) and its own visitors, so the two share no code; it shares none with Jackson TOML, NightConfig, jtoml or ktoml either.",
+    "configuration_note": "No options. Errors are collected in TOML.getErrors() rather than thrown, so the adapter requires the list to be empty. Integer vs float and the four date-time kinds come from the documented Java types (Long, Double, OffsetDateTime, LocalDateTime, LocalDate, LocalTime).",
+    "control": "controls/toml/service-config.toml",
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/java/vieiro_toml_java",
+    "metric": {
+      "name": "deps.dev directDependentCount summed over all releases",
+      "value": 4,
+      "releases": 7,
+      "max_release": "13.5.1",
+      "max_release_direct_dependent_count": 2,
+      "default_release": "13.5.1",
+      "default_release_direct_dependent_count": 2,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/net.vieiro%3Atoml-java",
+      "snapshot": "data/java/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-18T00:29:30.584575+00:00"
+    }
   }
 ]

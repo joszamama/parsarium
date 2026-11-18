@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T22:38:05.569667+00:00",
-  "projects_total": 5,
-  "projects_passed": 5,
+  "checked_at_utc": "2026-11-18T00:30:38.769630+00:00",
+  "projects_total": 6,
+  "projects_passed": 6,
   "differential_kind": "fixed_valid_typed_scalars",
   "mutation_campaign_run": false,
   "results": [
@@ -940,6 +940,151 @@
         "com/akuleshov7/ktoml/writers/IntegerRepresentation.kt": 9
       },
       "checked_at_utc": "2026-11-17T22:38:05.569667+00:00"
+    },
+    {
+      "project": "toml/java/vieiro_toml_java",
+      "pass": true,
+      "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
+      "feedback_scope": "JaCoCo bytecode coverage of the net.vieiro.toml packages of net.vieiro:toml-java 13.5.1 (the TOMLAntlrLexer/TOMLAntlrParser generated from the library's own grammar in net.vieiro.toml.antlr4, the TOMLParser entry point and the TOMLVisitor/TOMLStringVisitor value builders) during valid-control replay, mapped to the release sources jar; the antlr4-runtime 4.13.1 dependency is outside the subject; Jazzer fuzz entry",
+      "base_project_receipt_sha256": "a60315dee37606d70d1cc7731a232b3526f3c8511042440864b515b432b5a780",
+      "overlay_receipt_sha256": "738cd0b14aa0403b0c2db286aec0048cd43d9cfeb53b26474ddcb3f34ba30da3",
+      "image_id": "sha256:35633f425c9cbe9508237b7d402033dba09376f4184e424f99ea25e18fa1c3a8",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_output": {
+        "floats": {
+          "exponent": {
+            "type": "float",
+            "value": "1000.0"
+          },
+          "fraction": {
+            "type": "float",
+            "value": "3.25"
+          },
+          "mixed": {
+            "type": "float",
+            "value": "0.015625"
+          },
+          "negative": {
+            "type": "float",
+            "value": "-0.5"
+          }
+        },
+        "integers": {
+          "binary": {
+            "type": "integer",
+            "value": "13"
+          },
+          "decimal": {
+            "type": "integer",
+            "value": "99"
+          },
+          "hex": {
+            "type": "integer",
+            "value": "3735928559"
+          },
+          "negative": {
+            "type": "integer",
+            "value": "-17"
+          },
+          "octal": {
+            "type": "integer",
+            "value": "493"
+          },
+          "underscored": {
+            "type": "integer",
+            "value": "1000000"
+          }
+        },
+        "keys": {
+          "a": {
+            "b": {
+              "c": {
+                "type": "integer",
+                "value": "1"
+              }
+            }
+          },
+          "quoted key": {
+            "type": "string",
+            "value": "q"
+          },
+          "site": {
+            "example.com": {
+              "type": "bool",
+              "value": "true"
+            }
+          }
+        },
+        "strings": {
+          "escapes": {
+            "type": "string",
+            "value": "tab\tquote\"backslash\\ é"
+          },
+          "literal": {
+            "type": "string",
+            "value": "C:\\Users\\parsarium"
+          },
+          "multiline": {
+            "type": "string",
+            "value": "first second"
+          },
+          "raw_multiline": {
+            "type": "string",
+            "value": "line one\nline two"
+          }
+        },
+        "times": {
+          "local_date": {
+            "type": "date-local",
+            "value": "1979-05-27"
+          },
+          "local_datetime": {
+            "type": "datetime-local",
+            "value": "1979-05-27T07:32:00"
+          },
+          "local_time": {
+            "type": "time-local",
+            "value": "00:32:00.25"
+          },
+          "offset": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00.5Z"
+          }
+        }
+      },
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_lines": 730,
+      "control_afl_tuples": 750,
+      "differential_parser_lines": 607,
+      "differential_afl_tuples": 625,
+      "parser_lines_only_in_control": 241,
+      "parser_lines_only_in_differential": 118,
+      "afl_tuples_only_in_control": 241,
+      "afl_tuples_only_in_differential": 116,
+      "parser_line_difference": 359,
+      "afl_tuple_difference": 357,
+      "control_parser_lines_per_file": {
+        "net/vieiro/toml/TOML.java": 6,
+        "net/vieiro/toml/TOMLParser.java": 15,
+        "net/vieiro/toml/TOMLStringVisitor.java": 31,
+        "net/vieiro/toml/TOMLVisitor.java": 171,
+        "net/vieiro/toml/antlr4/TOMLAntlrLexer.java": 27,
+        "net/vieiro/toml/antlr4/TOMLAntlrParser.java": 480
+      },
+      "differential_parser_lines_per_file": {
+        "net/vieiro/toml/TOML.java": 6,
+        "net/vieiro/toml/TOMLParser.java": 15,
+        "net/vieiro/toml/TOMLStringVisitor.java": 85,
+        "net/vieiro/toml/TOMLVisitor.java": 125,
+        "net/vieiro/toml/antlr4/TOMLAntlrLexer.java": 34,
+        "net/vieiro/toml/antlr4/TOMLAntlrParser.java": 342
+      },
+      "checked_at_utc": "2026-11-18T00:30:38.769630+00:00"
     }
   ]
 }

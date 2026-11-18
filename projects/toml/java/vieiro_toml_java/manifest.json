@@ -1,0 +1,261 @@
+{
+ "schema_version": 1,
+ "format": "toml",
+ "ecosystem": "java",
+ "package": "toml-java",
+ "release": "13.5.1",
+ "catalog_parser": "data/java/toml/parsers.json",
+ "source_lock": "projects/toml/java/vieiro_toml_java/source-lock.json",
+ "source_sha256": "2ab8209096ef082b6c0f030c9c8034bd823e58d695975d5f346e3465ef15c407",
+ "base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+ "runtime_base_image": "eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d",
+ "platform": "linux/arm64",
+ "tmpfs_exec": true,
+ "control": "controls/toml/service-config.toml",
+ "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+ "expected_output": {
+  "database": {
+   "limits": {
+    "max": {
+     "type": "integer",
+     "value": "10"
+    },
+    "min": {
+     "type": "integer",
+     "value": "-2"
+    }
+   },
+   "ports": [
+    {
+     "type": "integer",
+     "value": "8000"
+    },
+    {
+     "type": "integer",
+     "value": "8001"
+    },
+    {
+     "type": "integer",
+     "value": "8002"
+    }
+   ],
+   "ratio": {
+    "type": "float",
+    "value": "3.25"
+   }
+  },
+  "enabled": {
+   "type": "bool",
+   "value": "true"
+  },
+  "owner": {
+   "name": {
+    "type": "string",
+    "value": "Zoë"
+   },
+   "since": {
+    "type": "datetime",
+    "value": "1979-05-27T07:32:00Z"
+   }
+  },
+  "products": [
+   {
+    "name": {
+     "type": "string",
+     "value": "Hammer"
+    },
+    "sku": {
+     "type": "integer",
+     "value": "738594937"
+    }
+   },
+   {
+    "color": {
+     "type": "string",
+     "value": "gray"
+    },
+    "name": {
+     "type": "string",
+     "value": "Nail"
+    },
+    "points": [
+     {
+      "x": {
+       "type": "integer",
+       "value": "1"
+      },
+      "y": {
+       "type": "integer",
+       "value": "2"
+      }
+     },
+     {
+      "x": {
+       "type": "integer",
+       "value": "3"
+      },
+      "y": {
+       "type": "integer",
+       "value": "4"
+      }
+     }
+    ]
+   }
+  ],
+  "retries": {
+   "type": "integer",
+   "value": "3"
+  },
+  "servers": {
+   "alpha": {
+    "ip": {
+     "type": "string",
+     "value": "10.0.0.1"
+    },
+    "tags": [
+     {
+      "type": "string",
+      "value": "edge"
+     },
+     {
+      "type": "string",
+      "value": "eu"
+     }
+    ]
+   },
+   "beta": {
+    "enabled": {
+     "type": "bool",
+     "value": "false"
+    },
+    "ip": {
+     "type": "string",
+     "value": "10.0.0.2"
+    }
+   }
+  },
+  "title": {
+   "type": "string",
+   "value": "Parsarium \"service\" control"
+  }
+ },
+ "differential_control": "controls/toml/typed-scalars.toml",
+ "differential_control_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+ "differential_expected_output": {
+  "floats": {
+   "exponent": {
+    "type": "float",
+    "value": "1000.0"
+   },
+   "fraction": {
+    "type": "float",
+    "value": "3.25"
+   },
+   "mixed": {
+    "type": "float",
+    "value": "0.015625"
+   },
+   "negative": {
+    "type": "float",
+    "value": "-0.5"
+   }
+  },
+  "integers": {
+   "binary": {
+    "type": "integer",
+    "value": "13"
+   },
+   "decimal": {
+    "type": "integer",
+    "value": "99"
+   },
+   "hex": {
+    "type": "integer",
+    "value": "3735928559"
+   },
+   "negative": {
+    "type": "integer",
+    "value": "-17"
+   },
+   "octal": {
+    "type": "integer",
+    "value": "493"
+   },
+   "underscored": {
+    "type": "integer",
+    "value": "1000000"
+   }
+  },
+  "keys": {
+   "a": {
+    "b": {
+     "c": {
+      "type": "integer",
+      "value": "1"
+     }
+    }
+   },
+   "quoted key": {
+    "type": "string",
+    "value": "q"
+   },
+   "site": {
+    "example.com": {
+     "type": "bool",
+     "value": "true"
+    }
+   }
+  },
+  "strings": {
+   "escapes": {
+    "type": "string",
+    "value": "tab\tquote\"backslash\\ é"
+   },
+   "literal": {
+    "type": "string",
+    "value": "C:\\Users\\parsarium"
+   },
+   "multiline": {
+    "type": "string",
+    "value": "first second"
+   },
+   "raw_multiline": {
+    "type": "string",
+    "value": "line one\nline two"
+   }
+  },
+  "times": {
+   "local_date": {
+    "type": "date-local",
+    "value": "1979-05-27"
+   },
+   "local_datetime": {
+    "type": "datetime-local",
+    "value": "1979-05-27T07:32:00"
+   },
+   "local_time": {
+    "type": "time-local",
+    "value": "00:32:00.25"
+   },
+   "offset": {
+    "type": "datetime",
+    "value": "1979-05-27T07:32:00.5Z"
+   }
+  }
+ },
+ "api": "TOMLParser.parseFromInputStream(InputStream) -> TOML (README 'Basic usage'); TOML.getErrors() must be empty and TOML.getRoot() is the Map<String, Object> tree with Map tables, List arrays, Long, Double, Boolean, String, OffsetDateTime, LocalDateTime, LocalDate and LocalTime values (README 'Type mapping')",
+ "harness": "GenericHarness.java",
+ "fuzz_engine": "Jazzer",
+ "fuzz_engine_release": "v0.26.0",
+ "fuzz_engine_sha256": "0ad74e5d67f7f7a3c8453f7dd5030d4bce5aae6e47c3e2b8ebc98699244c7e4f",
+ "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+ "fuzz_smoke_entrypoint": "/work/jazzer",
+ "fuzz_smoke_args": [
+  "--cp=/work/classes:/work/lib/toml-java-13.5.1.jar:/work/lib/antlr4-runtime-4.13.1.jar",
+  "--target_class=GenericHarness",
+  "-help=1"
+ ],
+ "fuzz_smoke_expect": "Usage:",
+ "coverage": "JaCoCo bytecode coverage of the net.vieiro.toml packages of net.vieiro:toml-java 13.5.1 (the TOMLAntlrLexer/TOMLAntlrParser generated from the library's own grammar in net.vieiro.toml.antlr4, the TOMLParser entry point and the TOMLVisitor/TOMLStringVisitor value builders) during valid-control replay, mapped to the release sources jar; the antlr4-runtime 4.13.1 dependency is outside the subject; Jazzer fuzz entry",
+ "coverage_subject_prefix": "/work/parser-source/"
+}

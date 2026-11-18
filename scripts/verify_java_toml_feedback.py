@@ -21,7 +21,7 @@ import tempfile
 from run_case import ROOT, project_for
 
 
-PROJECTS = ("jackson_dataformat_toml", "tomlj", "night_config_toml", "jtoml", "ktoml_core")
+PROJECTS = ("jackson_dataformat_toml", "tomlj", "night_config_toml", "jtoml", "ktoml_core", "vieiro_toml_java")
 CONTROL = "controls/toml/service-config.toml"
 DIFFERENTIAL = "controls/toml/typed-scalars.toml"
 REPEATS = 3
