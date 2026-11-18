@@ -1,0 +1,982 @@
+{
+  "format": "mp3",
+  "engines": {
+    "codec-parser": {
+      "name": "codec-parser",
+      "language": "javascript",
+      "repository": "https://github.com/eshaz/codec-parser"
+    },
+    "dhowden-tag": {
+      "name": "dhowden/tag",
+      "language": "go",
+      "repository": "https://github.com/dhowden/tag"
+    },
+    "ffmpeg": {
+      "name": "FFmpeg (libavformat mp3dec/id3v2)",
+      "language": "c",
+      "repository": "https://github.com/FFmpeg/FFmpeg"
+    },
+    "getid3": {
+      "name": "getID3",
+      "language": "php",
+      "repository": "https://github.com/JamesHeinrich/getID3"
+    },
+    "go-id3": {
+      "name": "ascherkus/go-id3",
+      "language": "go",
+      "repository": "https://github.com/ascherkus/go-id3"
+    },
+    "go-mp3": {
+      "name": "hajimehoshi/go-mp3",
+      "language": "go",
+      "repository": "https://github.com/hajimehoshi/go-mp3"
+    },
+    "gstreamer": {
+      "name": "GStreamer (id3demux, mpegaudioparse)",
+      "language": "c",
+      "repository": "https://gitlab.freedesktop.org/gstreamer/gstreamer"
+    },
+    "id3js": {
+      "name": "id3js",
+      "language": "javascript",
+      "repository": "https://github.com/43081j/id3"
+    },
+    "jaudiotagger": {
+      "name": "jaudiotagger",
+      "language": "java",
+      "repository": null
+    },
+    "javamp3": {
+      "name": "JavaMP3",
+      "language": "java",
+      "repository": "https://github.com/delthas/JavaMP3"
+    },
+    "jcodec": {
+      "name": "JCodec",
+      "language": "java",
+      "repository": "https://github.com/jcodec/jcodec"
+    },
+    "jlayer": {
+      "name": "JLayer (javazoom)",
+      "language": "java",
+      "repository": "http://www.javazoom.net/javalayer/javalayer.html"
+    },
+    "libmad": {
+      "name": "libmad (MAD MPEG audio decoder)",
+      "language": "c",
+      "repository": "https://www.underbit.com/products/mad/"
+    },
+    "libmpg123": {
+      "name": "libmpg123 (mpg123)",
+      "language": "c",
+      "repository": "https://www.mpg123.de/"
+    },
+    "lofty": {
+      "name": "Lofty",
+      "language": "rust",
+      "repository": "https://github.com/Serial-ATA/lofty-rs"
+    },
+    "mediabunny": {
+      "name": "mediabunny",
+      "language": "javascript",
+      "repository": "https://github.com/Vanilagy/mediabunny"
+    },
+    "mediainfolib": {
+      "name": "MediaInfoLib",
+      "language": "cpp",
+      "repository": "https://github.com/MediaArea/MediaInfoLib"
+    },
+    "minimp3": {
+      "name": "minimp3",
+      "language": "c",
+      "repository": "https://github.com/lieff/minimp3"
+    },
+    "mp3-duration": {
+      "name": "mp3-duration (npm)",
+      "language": "javascript",
+      "repository": "https://github.com/ddsol/mp3-duration"
+    },
+    "mp3-duration-rs": {
+      "name": "mp3-duration (crate)",
+      "language": "rust",
+      "repository": "https://github.com/agersant/mp3-duration"
+    },
+    "mp3agic": {
+      "name": "mp3agic",
+      "language": "java",
+      "repository": "https://github.com/mpatric/mp3agic"
+    },
+    "mp3info": {
+      "name": "wapmorgan/Mp3Info",
+      "language": "php",
+      "repository": "https://github.com/wapmorgan/Mp3Info"
+    },
+    "mp3lib": {
+      "name": "dmulholl/mp3lib",
+      "language": "go",
+      "repository": "https://github.com/dmulholl/mp3lib"
+    },
+    "music-metadata": {
+      "name": "music-metadata",
+      "language": "javascript",
+      "repository": "https://github.com/Borewit/music-metadata"
+    },
+    "mutagen": {
+      "name": "Mutagen",
+      "language": "python",
+      "repository": "https://github.com/quodlibet/mutagen"
+    },
+    "n10v-id3v2": {
+      "name": "id3v2 (bogem, now n10v)",
+      "language": "go",
+      "repository": "https://github.com/n10v/id3v2"
+    },
+    "node-id3": {
+      "name": "node-id3",
+      "language": "javascript",
+      "repository": "https://github.com/Zazama/node-id3"
+    },
+    "php-reader": {
+      "name": "PHP Reader (Sven Vollbehr, Zend_Media)",
+      "language": "php",
+      "repository": "https://github.com/vollbehr/php-reader"
+    },
+    "rust-id3": {
+      "name": "rust-id3 (id3 crate)",
+      "language": "rust",
+      "repository": "https://codeberg.org/polyfloyd/rust-id3"
+    },
+    "rusty-mp3": {
+      "name": "rusty_mp3",
+      "language": "rust",
+      "repository": "https://github.com/Remade-With-Rust/remade_ffmpeg_rs"
+    },
+    "symphonia": {
+      "name": "Symphonia",
+      "language": "rust",
+      "repository": "https://github.com/pdeljanov/Symphonia"
+    },
+    "taglib": {
+      "name": "TagLib",
+      "language": "cpp",
+      "repository": "https://github.com/taglib/taglib"
+    },
+    "tcolgate-mp3": {
+      "name": "tcolgate/mp3",
+      "language": "go",
+      "repository": "https://github.com/tcolgate/mp3"
+    },
+    "tinytag": {
+      "name": "tinytag",
+      "language": "python",
+      "repository": "https://github.com/tinytag/tinytag"
+    },
+    "vlc": {
+      "name": "VLC (es demux, mpegaudio packetizer, ID3Tag.h)",
+      "language": "c",
+      "repository": "https://code.videolan.org/videolan/vlc"
+    }
+  },
+  "paths": [
+    {
+      "path": "c/mp3/ffmpeg",
+      "engine": "ffmpeg",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "c/mp3/mpv",
+      "engine": "ffmpeg",
+      "relation": "wrapper",
+      "chain": [
+        "libmpv demux_lavf",
+        "ffmpeg"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "c/mp3/gstreamer",
+      "engine": "gstreamer",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "c/mp3/sox",
+      "engine": "libmad",
+      "relation": "wrapper",
+      "chain": [
+        "libsox src/mp3.c",
+        "libmad"
+      ],
+      "evidence": "parsers.json family/family_note; projects/mp3/c/sox/Dockerfile installs libmad0",
+      "confidence": "medium",
+      "note": "SoX's own mp3.c handler does frame/tag handling around libmad decoding (and libid3tag for tags); the audio decode is libmad"
+    },
+    {
+      "path": "c/mp3/sdl_mixer",
+      "engine": "minimp3",
+      "relation": "vendored",
+      "chain": [
+        "SDL2_mixer music_minimp3.c",
+        "minimp3"
+      ],
+      "evidence": "projects/mp3/c/sdl_mixer/build.sh (-DSDL2MIXER_MP3_MINIMP3=ON -DSDL2MIXER_MP3_MPG123=OFF); manifest coverage file music_minimp3.c",
+      "confidence": "medium",
+      "note": "Catalog family text says mpg123, but the pinned build disables mpg123 and uses the bundled minimp3 decoder; ID3v2 title comes from SDL_mixer's own mp3utils.c"
+    },
+    {
+      "path": "c/mp3/mpg123",
+      "engine": "libmpg123",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "c/mp3/libsndfile",
+      "engine": "libmpg123",
+      "relation": "wrapper",
+      "chain": [
+        "libsndfile mpeg_decode.c",
+        "libmpg123"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "c/mp3/lame",
+      "engine": "libmpg123",
+      "relation": "wrapper",
+      "chain": [
+        "libmp3lame HIP (mpglib_interface.c)",
+        "libmpg123"
+      ],
+      "evidence": "parsers.json family/family_note; projects/mp3/c/lame/Dockerfile links libmpg123",
+      "confidence": "high"
+    },
+    {
+      "path": "c/mp3/taglib",
+      "engine": "taglib",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "C path uses TagLib's own C binding (taglib_c) over the C++ core"
+    },
+    {
+      "path": "c/mp3/vlc",
+      "engine": "vlc",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note; projects/mp3/c/vlc/manifest.json coverage",
+      "confidence": "medium",
+      "note": "VLC's own ID3Tag.h reader and the vendored, patched TagLib 1.13.1 meta reader both parse the tag; VLC's own demux/packetizer parse the frames"
+    },
+    {
+      "path": "cpp/mp3/ffmpeg",
+      "engine": "ffmpeg",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/mp3/mpv",
+      "engine": "ffmpeg",
+      "relation": "wrapper",
+      "chain": [
+        "libmpv demux_lavf",
+        "ffmpeg"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/mp3/gstreamer",
+      "engine": "gstreamer",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/mp3/sox",
+      "engine": "libmad",
+      "relation": "wrapper",
+      "chain": [
+        "libsox src/mp3.c",
+        "libmad"
+      ],
+      "evidence": "parsers.json family/family_note; projects/mp3/cpp/sox/Dockerfile installs libmad0",
+      "confidence": "medium",
+      "note": "SoX's own mp3.c handler does frame/tag handling around libmad decoding (and libid3tag for tags); the audio decode is libmad"
+    },
+    {
+      "path": "cpp/mp3/sdl_mixer",
+      "engine": "minimp3",
+      "relation": "vendored",
+      "chain": [
+        "SDL2_mixer music_minimp3.c",
+        "minimp3"
+      ],
+      "evidence": "projects/mp3/cpp/sdl_mixer/build.sh (-DSDL2MIXER_MP3_MINIMP3=ON -DSDL2MIXER_MP3_MPG123=OFF); manifest coverage file music_minimp3.c",
+      "confidence": "medium",
+      "note": "Catalog family text says mpg123, but the pinned build disables mpg123 and uses the bundled minimp3 decoder; ID3v2 title comes from SDL_mixer's own mp3utils.c"
+    },
+    {
+      "path": "cpp/mp3/mpg123",
+      "engine": "libmpg123",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/mp3/libsndfile",
+      "engine": "libmpg123",
+      "relation": "wrapper",
+      "chain": [
+        "libsndfile mpeg_decode.c",
+        "libmpg123"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/mp3/lame",
+      "engine": "libmpg123",
+      "relation": "wrapper",
+      "chain": [
+        "libmp3lame HIP (mpglib_interface.c)",
+        "libmpg123"
+      ],
+      "evidence": "parsers.json family/family_note; projects/mp3/cpp/lame/Dockerfile links libmpg123",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/mp3/taglib",
+      "engine": "taglib",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/mp3/vlc",
+      "engine": "vlc",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note; projects/mp3/cpp/vlc/manifest.json coverage",
+      "confidence": "medium",
+      "note": "VLC's own ID3Tag.h reader and the vendored, patched TagLib 1.13.1 meta reader both parse the tag; VLC's own demux/packetizer parse the frames"
+    },
+    {
+      "path": "go/mp3/github.com/faiface/beep/mp3",
+      "engine": "go-mp3",
+      "relation": "wrapper",
+      "chain": [
+        "beep/mp3",
+        "go-mp3"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "go/mp3/github.com/dhowden/tag",
+      "engine": "dhowden-tag",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "go/mp3/github.com/hajimehoshi/go-mp3",
+      "engine": "go-mp3",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "go/mp3/github.com/hajimehoshi/ebiten/v2/audio/mp3",
+      "engine": "go-mp3",
+      "relation": "wrapper",
+      "chain": [
+        "ebiten audio/mp3",
+        "go-mp3"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "go/mp3/github.com/bogem/id3v2/v2",
+      "engine": "n10v-id3v2",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "go/mp3/github.com/tcolgate/mp3",
+      "engine": "tcolgate-mp3",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "go/mp3/github.com/gopxl/beep/v2/mp3",
+      "engine": "go-mp3",
+      "relation": "wrapper",
+      "chain": [
+        "gopxl/beep mp3",
+        "go-mp3"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "go/mp3/github.com/tosone/minimp3",
+      "engine": "minimp3",
+      "relation": "binding",
+      "chain": [
+        "tosone/minimp3 (cgo)",
+        "minimp3"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "cgo binding with a vendored minimp3.h"
+    },
+    {
+      "path": "go/mp3/github.com/dmulholl/mp3lib",
+      "engine": "mp3lib",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "go/mp3/github.com/ascherkus/go-id3/src/id3",
+      "engine": "go-id3",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "java/mp3/jcodec",
+      "engine": "jcodec",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "java/mp3/mp3spi",
+      "engine": "jlayer",
+      "relation": "wrapper",
+      "chain": [
+        "mp3spi MpegAudioFileReader",
+        "soundlibs jlayer (JLayer fork)"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "medium",
+      "note": "Frame headers parsed by the soundlibs fork of JLayer; MP3SPI adds its own ID3/property handling"
+    },
+    {
+      "path": "java/mp3/jlayer",
+      "engine": "jlayer",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "java/mp3/bytedeco-ffmpeg",
+      "engine": "ffmpeg",
+      "relation": "binding",
+      "chain": [
+        "bytedeco ffmpeg (JNI)",
+        "ffmpeg"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "java/mp3/jaudiotagger",
+      "engine": "jaudiotagger",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "medium",
+      "note": "family_note cites jid3lib's README placing jaudiotagger in the jid3lib fork lineage; treated as its own engine"
+    },
+    {
+      "path": "java/mp3/javacv",
+      "engine": "ffmpeg",
+      "relation": "binding",
+      "chain": [
+        "javacv FFmpegFrameGrabber",
+        "bytedeco ffmpeg (JNI)",
+        "ffmpeg"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "java/mp3/javamp3",
+      "engine": "javamp3",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "java/mp3/mp3agic",
+      "engine": "mp3agic",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "medium",
+      "note": "family_note cites jid3lib's README placing mp3agic in the jid3lib lineage; no shared code recorded in the repo, treated as its own engine"
+    },
+    {
+      "path": "java/mp3/jaffree",
+      "engine": "ffmpeg",
+      "relation": "binding",
+      "chain": [
+        "jaffree",
+        "ffprobe CLI"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "subprocess to a native CLI; no in-process FFI"
+    },
+    {
+      "path": "java/mp3/jave-core",
+      "engine": "ffmpeg",
+      "relation": "binding",
+      "chain": [
+        "jave-core",
+        "bundled ffmpeg executable"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "subprocess to a native CLI; no in-process FFI"
+    },
+    {
+      "path": "javascript/mp3/mediabunny",
+      "engine": "mediabunny",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/mp3/music-metadata",
+      "engine": "music-metadata",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/mp3/codec-parser",
+      "engine": "codec-parser",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/mp3/@audio/decode-mp3",
+      "engine": "libmpg123",
+      "relation": "wasm",
+      "chain": [
+        "@audio/decode-mp3",
+        "mpg123-decoder (WASM)",
+        "libmpg123"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/mp3/mediainfo.js",
+      "engine": "mediainfolib",
+      "relation": "wasm",
+      "chain": [
+        "mediainfo.js",
+        "MediaInfoLib (WASM)"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/mp3/@audio/decode",
+      "engine": "libmpg123",
+      "relation": "wasm",
+      "chain": [
+        "@audio/decode",
+        "@audio/decode-mp3",
+        "mpg123-decoder (WASM)",
+        "libmpg123"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/mp3/get-audio-duration",
+      "engine": "ffmpeg",
+      "relation": "binding",
+      "chain": [
+        "get-audio-duration",
+        "@ffprobe-installer ffprobe"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "subprocess to a native CLI; no in-process FFI"
+    },
+    {
+      "path": "javascript/mp3/node-id3",
+      "engine": "node-id3",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/mp3/id3js",
+      "engine": "id3js",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/mp3/mp3-duration",
+      "engine": "mp3-duration",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "php/mp3/james-heinrich/getid3",
+      "engine": "getid3",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "php/mp3/wapmorgan/mp3info",
+      "engine": "mp3info",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "php/mp3/christophwurst/id3parser",
+      "engine": "getid3",
+      "relation": "fork",
+      "chain": [
+        "christophwurst/id3parser (stripped getID3 copy)"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "Vendors a stripped-down getID3 ID3 implementation"
+    },
+    {
+      "path": "php/mp3/mhor/php-mediainfo",
+      "engine": "mediainfolib",
+      "relation": "binding",
+      "chain": [
+        "php-mediainfo",
+        "mediainfo CLI"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "subprocess to a native CLI; no in-process FFI"
+    },
+    {
+      "path": "php/mp3/owen-oj/laravel-getid3",
+      "engine": "getid3",
+      "relation": "wrapper",
+      "chain": [
+        "laravel-getid3",
+        "getid3"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "php/mp3/wapmorgan/media-file",
+      "engine": "mp3info",
+      "relation": "wrapper",
+      "chain": [
+        "media-file",
+        "mp3info"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "php/mp3/buggedcom/phpvideotoolkit",
+      "engine": "ffmpeg",
+      "relation": "binding",
+      "chain": [
+        "phpvideotoolkit",
+        "ffmpeg/ffprobe CLI"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "subprocess to a native CLI; no in-process FFI"
+    },
+    {
+      "path": "php/mp3/debach/zend-mp3",
+      "engine": "php-reader",
+      "relation": "fork",
+      "chain": [
+        "debach/zend-mp3"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "Composer fork of Sven Vollbehr's PHP Reader (Zend_Media_Id3v2)"
+    },
+    {
+      "path": "php/mp3/kiwilan/php-audio",
+      "engine": "getid3",
+      "relation": "wrapper",
+      "chain": [
+        "php-audio",
+        "getid3"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "php/mp3/indiehd/audio-manipulator",
+      "engine": "getid3",
+      "relation": "wrapper",
+      "chain": [
+        "audio-manipulator",
+        "getid3"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "python/mp3/av",
+      "engine": "ffmpeg",
+      "relation": "binding",
+      "chain": [
+        "PyAV (Cython)",
+        "ffmpeg"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "python/mp3/soundfile",
+      "engine": "libmpg123",
+      "relation": "binding",
+      "chain": [
+        "soundfile (cffi)",
+        "libsndfile",
+        "libmpg123"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "medium",
+      "note": "Family names libsndfile; libsndfile's MPEG support (mpeg_decode.c) parses through libmpg123, as recorded for the C libsndfile path"
+    },
+    {
+      "path": "python/mp3/pydub",
+      "engine": "ffmpeg",
+      "relation": "binding",
+      "chain": [
+        "pydub",
+        "ffmpeg CLI"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "subprocess to a native CLI; no in-process FFI"
+    },
+    {
+      "path": "python/mp3/librosa",
+      "engine": "libmpg123",
+      "relation": "binding",
+      "chain": [
+        "librosa",
+        "soundfile (cffi)",
+        "libsndfile",
+        "libmpg123"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "medium",
+      "note": "Family names soundfile/libsndfile; libsndfile reads MP3 through libmpg123"
+    },
+    {
+      "path": "python/mp3/ffmpeg-python",
+      "engine": "ffmpeg",
+      "relation": "binding",
+      "chain": [
+        "ffmpeg-python",
+        "ffprobe CLI"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "subprocess to a native CLI; no in-process FFI"
+    },
+    {
+      "path": "python/mp3/mutagen",
+      "engine": "mutagen",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "python/mp3/audioread",
+      "engine": "ffmpeg",
+      "relation": "binding",
+      "chain": [
+        "audioread ffdec",
+        "ffmpeg CLI"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "subprocess to a native CLI; no in-process FFI"
+    },
+    {
+      "path": "python/mp3/moviepy",
+      "engine": "ffmpeg",
+      "relation": "binding",
+      "chain": [
+        "moviepy",
+        "imageio-ffmpeg bundled ffmpeg CLI"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "subprocess to a native CLI; no in-process FFI"
+    },
+    {
+      "path": "python/mp3/tinytag",
+      "engine": "tinytag",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "python/mp3/pygame",
+      "engine": "libmpg123",
+      "relation": "binding",
+      "chain": [
+        "pygame.mixer",
+        "SDL2_mixer",
+        "libmpg123"
+      ],
+      "evidence": "projects/mp3/python/pygame/manifest.json binary_feedback_module libmpg123 in pygame.libs",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/mp3/symphonia-metadata",
+      "engine": "symphonia",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "Symphonia ID3v2 reader"
+    },
+    {
+      "path": "rust/mp3/symphonia",
+      "engine": "symphonia",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high",
+      "note": "Umbrella crate of the Symphonia project"
+    },
+    {
+      "path": "rust/mp3/symphonia-bundle-mp3",
+      "engine": "symphonia",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/mp3/id3",
+      "engine": "rust-id3",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/mp3/lofty",
+      "engine": "lofty",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/mp3/minimp3",
+      "engine": "minimp3",
+      "relation": "binding",
+      "chain": [
+        "minimp3 crate",
+        "minimp3-sys (FFI)",
+        "minimp3"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/mp3/mp3-duration",
+      "engine": "mp3-duration-rs",
+      "relation": "own",
+      "chain": [],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/mp3/rusty_mp3",
+      "engine": "rusty-mp3",
+      "relation": "own",
+      "chain": [],
+      "evidence": "crate rusty_mp3 1.0.5 Cargo.toml/README: pure Rust, no deps",
+      "confidence": "medium",
+      "note": "Upstream claims bit-exact output vs FFmpeg but does not state a port; treated as own"
+    },
+    {
+      "path": "rust/mp3/nanomp3",
+      "engine": "minimp3",
+      "relation": "port",
+      "chain": [
+        "nanomp3",
+        "nanomp3-core"
+      ],
+      "evidence": "data/rust/mp3/registry-snapshot.json: nanomp3-core described as a bit-exact safe Rust port of minimp3",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/mp3/symphonium",
+      "engine": "symphonia",
+      "relation": "wrapper",
+      "chain": [
+        "symphonium",
+        "symphonia"
+      ],
+      "evidence": "parsers.json family/family_note",
+      "confidence": "high"
+    }
+  ]
+}
