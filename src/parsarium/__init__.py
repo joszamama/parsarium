@@ -5,7 +5,7 @@ harnesses, controls, and catalog data live in a versioned snapshot bundled in
 the release wheel and checked on first use. See https://parsarium.com.
 """
 
-__version__ = "2026.11.18.2"
+__version__ = "2026.11.18.3"
 
 from .snapshot import home  # noqa: E402
 
