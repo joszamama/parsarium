@@ -1,0 +1,358 @@
+{
+  "schema_version": 1,
+  "project": "toml/rust/kabosu",
+  "pass": true,
+  "base_project_receipt_sha256": "2e6be481626577397bb78c339690a348146303defc821f4d356bea0afb08cff6",
+  "overlay_file_sha256": {
+    "Cargo.toml": "fb9af0aa29a3497fa65ed881ad8349bc35ca0f72513756ae1b57890abf0dd3ca",
+    "Cargo.lock": "5ae93903f4e18d72b7dcf4000f3b252fe41ebd513dfdb29c20b6fafc321a64ef",
+    "afl_fuzzer.rs": "98dd5c73e47d237dda661d28b5e5278dd21505fd1333c42ce53085a46a920b64",
+    "Dockerfile": "c0e2628c77ed73170b3b77565f26d704e9785a6985c00bba534cc77e3f40f939",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "build.py": "9c61c8b9134c8330be7e0591df61bda9bafbcc190e992b0e1298a8f61618021d"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "a01bcacf046e6d9545b69d7ed87df3bd667f4f1621298182e50fe474b9333385",
+  "image_id": "sha256:3b6afd011e52b30f9f411669839ea230e5becea88dd3556a3d28a46f76ffa94d",
+  "platform": "linux/arm64",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "feedback_edges": 790,
+  "afl_map_size": 4575,
+  "feedback_kind": "afl_rs_kabosu_only_sancov_edges",
+  "feedback_scope": "Only kabosu crate objects carry SanitizerCoverage guards; harness, serde_json, AFL runtime and std are uninstrumented; hash seeds are fixed by the getrandom AFL_PRELOAD shim",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "kabosu"
+    ],
+    "rlib_guard_bytes": {
+      "kabosu": 18280
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "itoa",
+      "libc",
+      "memchr",
+      "parsarium_toml_kabosu_harness",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "xdg"
+    ],
+    "binary_guards": 4570
+  },
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "reason": "kabosu indexes tables in a BTreeMap and has no hashing; constant getrandom bytes fix any getrandom-derived seed in the harness process; the parser source is unchanged.",
+    "replay_output_unchanged": true
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:d239ebc92b18f6c079d82b19e677c8212579c1250dd78d8eb1c11228d893f7eb",
+  "variant_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "control_output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "variant_output": {
+    "floats": {
+      "exponent": {
+        "type": "float",
+        "value": "1000.0"
+      },
+      "fraction": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "mixed": {
+        "type": "float",
+        "value": "0.015625"
+      },
+      "negative": {
+        "type": "float",
+        "value": "-0.5"
+      }
+    },
+    "integers": {
+      "binary": {
+        "type": "integer",
+        "value": "13"
+      },
+      "decimal": {
+        "type": "integer",
+        "value": "99"
+      },
+      "hex": {
+        "type": "integer",
+        "value": "3735928559"
+      },
+      "negative": {
+        "type": "integer",
+        "value": "-17"
+      },
+      "octal": {
+        "type": "integer",
+        "value": "493"
+      },
+      "underscored": {
+        "type": "integer",
+        "value": "1000000"
+      }
+    },
+    "keys": {
+      "a": {
+        "b": {
+          "c": {
+            "type": "integer",
+            "value": "1"
+          }
+        }
+      },
+      "quoted key": {
+        "type": "string",
+        "value": "q"
+      },
+      "site": {
+        "example.com": {
+          "type": "bool",
+          "value": "true"
+        }
+      }
+    },
+    "strings": {
+      "escapes": {
+        "type": "string",
+        "value": "tab\tquote\"backslash\\ é"
+      },
+      "literal": {
+        "type": "string",
+        "value": "C:\\Users\\parsarium"
+      },
+      "multiline": {
+        "type": "string",
+        "value": "first second"
+      },
+      "raw_multiline": {
+        "type": "string",
+        "value": "line one\nline two"
+      }
+    },
+    "times": {
+      "local_date": {
+        "type": "date-local",
+        "value": "1979-05-27"
+      },
+      "local_datetime": {
+        "type": "datetime-local",
+        "value": "1979-05-27T07:32:00"
+      },
+      "local_time": {
+        "type": "time-local",
+        "value": "00:32:00.25"
+      },
+      "offset": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00.5Z"
+      }
+    }
+  },
+  "repeats": 10,
+  "variant_feedback_edges": 969,
+  "edges_only_in_control": 153,
+  "edges_only_in_variant": 332,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/kabosu-0.2.1/",
+    "control_lines": {
+      "src/datetime.rs": 62,
+      "src/decode.rs": 0,
+      "src/encode.rs": 0,
+      "src/error.rs": 0,
+      "src/lexer.rs": 281,
+      "src/lib.rs": 0,
+      "src/model.rs": 81,
+      "src/normalize.rs": 0,
+      "src/parser.rs": 303
+    },
+    "variant_lines": {
+      "src/datetime.rs": 88,
+      "src/decode.rs": 0,
+      "src/encode.rs": 0,
+      "src/error.rs": 0,
+      "src/lexer.rs": 439,
+      "src/lib.rs": 0,
+      "src/model.rs": 75,
+      "src/normalize.rs": 0,
+      "src/parser.rs": 176
+    },
+    "files_with_different_line_counts": [
+      "src/datetime.rs",
+      "src/lexer.rs",
+      "src/model.rs",
+      "src/parser.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      790,
+      790,
+      790,
+      790,
+      790,
+      790,
+      790,
+      790,
+      790,
+      790
+    ],
+    "stable_edges": 790,
+    "union_edges": 790,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      969,
+      969,
+      969,
+      969,
+      969,
+      969,
+      969,
+      969,
+      969,
+      969
+    ],
+    "stable_edges": 969,
+    "union_edges": 969,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}
