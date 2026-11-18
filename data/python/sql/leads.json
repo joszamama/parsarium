@@ -142,13 +142,13 @@
     },
     {
       "name": "pg-query-python",
-      "status": "unresolved",
+      "status": "unresolved_blocked",
       "metric_value": 16148,
       "metric_error": null,
       "latest_release_observed": "0.1.3",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "pg_query.parse",
-      "reason": "Round-2 extension lead (PyPI Stats last_month 16,148, captured 2026-11-17). ctypes binding (BSD-3-Clause, 2026-03-25 sdist and cp311-cp313 wheels, no cp314 wheel) that loads a bundled libpg_query shared library and decodes its protobuf parse output with the protobuf runtime. Same libpg_query family as pglast; a coverage build would rebuild that library from the sdist with LLVM coverage plus line tracing of the Python decoder. Not run in this round."
+      "reason": "Round 3: not a pinned parser source. pg-query-python 0.1.3 ships no libpg_query sources: its sdist (88 kB) setup.py runs 'git clone --depth 1 --branch $LIBPG_QUERY_TAG' (default the moving branch 16-latest) of github.com/pganalyze/libpg_query at build time, and its wheels bundle a prebuilt libpg_query.so whose libpg_query tag is recorded nowhere in the package (the package __version__ string is 17.0.0 while setup.py defaults to 16-latest). The parser source therefore cannot be pinned by the package, the ground on which psqlparse was also left unresolved; source coverage of a self-chosen libpg_query tag would not establish what the published wheels run. The ctypes binding and protobuf decoding are pinned, but they are not the parser."
     },
     {
       "name": "psqlparse",
@@ -192,13 +192,73 @@
     },
     {
       "name": "sqlparser",
-      "status": "unresolved",
+      "status": "excluded",
       "metric_value": 2053,
       "metric_error": null,
       "latest_release_observed": "0.0.9",
-      "family": null,
-      "documented_api_lead": null,
-      "reason": "Round-2 extension hit from the recorded 'sqlpars' query (PyPI Stats last_month 2,053, captured 2026-11-17). 2018 py3-none-any wheel whose summary says it parses and executes SQL queries, with no license field; no documented syntax-tree API was found. Not run."
+      "family": "sqlparser 0.0.9 SQL-file runner",
+      "documented_api_lead": "sqlparser.SqlParser",
+      "reason": "Round-2 hit of the 'sqlpars' query (PyPI Stats last_month 2,053), checked in round 3. The 0.0.9 wheel's single module SqlParser.py imports jaydebeapi and pandas, splits SQL files on a '--:--' comment marker into setup, extract and cleanup strings and runs them over a JDBC connection; it builds no syntax tree, and running statements against a database is outside the protocol. The wheel has no licence text (License: UNKNOWN; LGPL only as a classifier)."
+    },
+    {
+      "name": "polyglot-sql",
+      "status": "unresolved",
+      "metric_value": 9851,
+      "metric_error": null,
+      "latest_release_observed": "0.14.1",
+      "family": "polyglot-sql tokenizer and recursive-descent parser (sqlglot-style)",
+      "documented_api_lead": "polyglot_sql.parse",
+      "reason": "Round-3 hit of the 'polyglot-sql' and 'sqlglot'-adjacent search (PyPI Stats last_month 9,851, captured 2026-11-18). pyo3 binding over the polyglot-sql Rust crate; the sdist's crates/polyglot-sql/src equals the crates.io polyglot-sql 0.14.1 crate selected in the Rust cell (shared family). Evaluated in round 3."
+    },
+    {
+      "name": "bigquery-sql-parser",
+      "status": "excluded",
+      "metric_value": 8116,
+      "metric_error": null,
+      "latest_release_observed": "0.1.4",
+      "family": "bigquery-sql-parser regular-expression extraction",
+      "documented_api_lead": "bigquery_sql_parser.query.Query",
+      "reason": "Round-3 hit of the 'sql-pars' query (PyPI Stats last_month 8,116, captured 2026-11-18). 0.1.4 (2022, single py2.py3 wheel) splits the text with regular expressions: Query exposes columns from a regex over the SELECT list and full_table_ids from a FROM/JOIN pattern that requires project.dataset.table names; there is no join, function, predicate, grouping or literal structure and no INSERT support, so it cannot give the summary (same ground as marcocesarato/sqlparser in the PHP cell)."
+    },
+    {
+      "name": "mindsdb-sql",
+      "status": "excluded",
+      "metric_value": 7674,
+      "metric_error": null,
+      "latest_release_observed": "0.21.0",
+      "family": "mindsdb_sql SLY grammar (predecessor of mindsdb_sql_parser)",
+      "documented_api_lead": "mindsdb_sql.parse_sql",
+      "reason": "Round-3 hit of the 'mindsdb-sql' query (PyPI Stats last_month 7,674, captured 2026-11-18). Predecessor package of mindsdb-sql-parser: GPL-3.0, last release 0.21.0 (2024-11-14) with a sqlalchemy dependency, superseded by the MIT mindsdb_sql_parser repository of the same organisation; 63.9% of mindsdb_sql_parser 0.13.8's non-comment source lines (multiset) occur in mindsdb_sql 0.21.0. Predecessor names are not counted (pg_query/pglast and moz-sql-parser/mo-sql-parsing precedent); its metric is not combined with the successor's."
+    },
+    {
+      "name": "mindsdb-sql-parser",
+      "status": "unresolved",
+      "metric_value": 2499,
+      "metric_error": null,
+      "latest_release_observed": "0.13.8",
+      "family": "mindsdb_sql_parser SLY grammar",
+      "documented_api_lead": "mindsdb_sql_parser.parse_sql",
+      "reason": "Round-3 hit of the 'sql-pars' query (PyPI Stats last_month 2,499, captured 2026-11-18). MIT; pure-Python sdist with its own SLY lexer and LALR grammar and AST classes. Evaluated in round 3."
+    },
+    {
+      "name": "twsqlparser",
+      "status": "excluded",
+      "metric_value": 419,
+      "metric_error": null,
+      "latest_release_observed": "1.0.4",
+      "family": "TWSqlParser two-way SQL template expander",
+      "documented_api_lead": "twsqlparser.parse_file",
+      "reason": "Round-3 hit of the 'sqlparser' query (PyPI Stats last_month 419, captured 2026-11-18). Two-way SQL template expander (README in the 1.0.4 wheel: builds dynamic SQL from SQL files by expanding comment directives and parameters, and returns SQL text without validating it); no statement tree, so it cannot give the summary."
+    },
+    {
+      "name": "antlr-tsql",
+      "status": "unresolved",
+      "metric_value": 126,
+      "metric_error": null,
+      "latest_release_observed": "0.12.6",
+      "family": "antlr-tsql ANTLR 4 T-SQL grammar with antlr-ast tree shaping",
+      "documented_api_lead": "antlr_tsql.ast.parse",
+      "reason": "Round-3 lead (PyPI Stats last_month 126, captured 2026-11-18); AGPL-3.0 sdist with an ANTLR 4 generated T-SQL parser and an antlr-ast transformer. Evaluated in round 3."
     }
   ]
 }
