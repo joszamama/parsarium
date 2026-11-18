@@ -78,6 +78,7 @@ def plan() -> dict:
         measured = []
         zero_or_missing = []
         supplemental = []
+        star_fill = []
         ineligible = []
         for parser in parsers:
             value = values.get(parser["name"], {}).get(field)
@@ -90,13 +91,14 @@ def plan() -> dict:
             supplemental_value = None
             supplemental_kind = None
             supplemental_url = None
-            if value is None and ecosystem in {"c", "cpp"} and format_name != "ascii_ply":
-                source = popcon["packages"].get(parser["name"])
-                if source:
-                    supplemental_value = source["installed"]
-                    supplemental_kind = "debian_source_installed"
-                    supplemental_url = source["source_identity"]
-            elif value is None and format_name == "ascii_ply":
+            popcon_source = (popcon["packages"].get(parser["name"])
+                             if value is None and ecosystem in {"c", "cpp"}
+                             and format_name != "ascii_ply" else None)
+            if popcon_source:
+                supplemental_value = popcon_source["installed"]
+                supplemental_kind = "debian_source_installed"
+                supplemental_url = popcon_source["source_identity"]
+            elif value is None and (format_name == "ascii_ply" or ecosystem in {"c", "cpp"}):
                 source = github_rows.get((ecosystem, parser["name"]))
                 if source:
                     supplemental_value = source["stars"]
@@ -123,16 +125,19 @@ def plan() -> dict:
             elif kind == "debian_source_installed" and score >= POPCON_MIN_INSTALLS:
                 supplemental.append(item)
             elif kind == "github_source_stars" and score >= GITHUB_MIN_STARS:
-                supplemental.append(item)
-        supplemental.sort(key=lambda item: (-item["supplemental_metric"],
-                                             item["name"].casefold()))
-        supplement_limit = (max(0, LIMIT - len(measured)) if format_name == "ascii_ply"
-                            else POPCON_SLOTS)
-        chosen_supplemental = supplemental[:min(supplement_limit, LIMIT)]
+                star_fill.append(item)
+        rank_key = lambda item: (-item["supplemental_metric"], item["name"].casefold())
+        supplemental.sort(key=rank_key)
+        star_fill.sort(key=rank_key)
+        chosen_supplemental = supplemental[:min(POPCON_SLOTS, LIMIT)]
         primary_limit = LIMIT - len(chosen_supplemental)
         chosen_primary = measured[:primary_limit]
         if len(chosen_primary) < primary_limit:
             chosen_supplemental = supplemental[:LIMIT - len(chosen_primary)]
+        # GitHub stars never displace a primary or Debian path: they only fill
+        # slots that remain empty after both (PLY cells, and C/C++ cells).
+        open_slots = max(0, LIMIT - len(chosen_primary) - len(chosen_supplemental))
+        chosen_supplemental = chosen_supplemental + star_fill[:open_slots]
         selected = [{**item, "selection": "primary_metric", "rank": index}
                     for index, item in enumerate(chosen_primary, 1)]
         selected.extend({**item, "selection": "supplemental_numeric_metric",
@@ -229,7 +234,7 @@ def plan() -> dict:
         raise ValueError(f"feedback exclusion is not an adopted selected path: {set(feedback_by_key) - feedback_seen}")
     return {
         "schema_version": 1,
-        "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate and a pinned empty Python PDF compatibility distribution are excluded. After adoption ranking, selected paths without a verified container control and parser-derived AFL++ feedback are excluded; a vacated slot is refilled only in primary-rank order by the next-ranked path with its own verified container control and parser-derived AFL++ feedback.",
+        "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling only slots left empty after primary and Debian paths in PLY and C/C++ cells). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate and a pinned empty Python PDF compatibility distribution are excluded. After adoption ranking, selected paths without a verified container control and parser-derived AFL++ feedback are excluded; a vacated slot is refilled only in primary-rank order by the next-ranked path with its own verified container control and parser-derived AFL++ feedback.",
         "supplemental_sources": {
             "popcon_snapshot_sha256": sha256(popcon_file.read_bytes()).hexdigest(),
             "github_snapshot_sha256": sha256(github_file.read_bytes()).hexdigest(),

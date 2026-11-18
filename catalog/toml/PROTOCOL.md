@@ -40,7 +40,7 @@ Paths are ranked within one ecosystem by the primary metric its JSON and XML pil
 
 | Ecosystem | Primary metric |
 | --- | --- |
-| C | Debian popcon installations; no C TOML library is packaged in Debian or Conan Center, so no C path has the primary metric or a Debian fallback of at least 1,000. GitHub stars are a fallback only in PLY cells, so control-verified C paths stay `unresolved_no_primary_metric` leads |
+| C | Debian popcon installations; no C TOML library is packaged in Debian or Conan Center, so no C path has the primary metric or a Debian fallback of at least 1,000. Paths without either may fill the remaining slots with GitHub stars of at least 100 (PROTOCOL.md star fallback, 2026-11-18), ranked separately |
 | C++ | Debian popcon installations (source-package `sourcemax/by_inst`, binary package recorded beside it) |
 | Go | pkg.go.dev "Imported by" count |
 | Java | deps.dev `directDependentCount` summed over all Maven releases |

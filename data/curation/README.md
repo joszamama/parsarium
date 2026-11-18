@@ -46,7 +46,9 @@ counts are from [Popularity Contest](popcon-snapshot.json) and its pinned
 [`by_inst.gz`](popcon-sourcemax-by_inst.gz) snapshot; they measure installed
 source packages among volunteers, not format-specific use. GitHub stars are
 from [captured upstream repositories](github-supplemental-stars.json); they
-measure repository interest, not package downloads. Neither signal is
+measure repository interest, not package downloads. Since 2026-11-18 they may also fill
+C and C++ slots left empty after the primary and Debian paths, in every format; they never
+displace a ranked path. Neither signal is
 comparable to another ecosystem's metric. A missing or zero primary value is
 never silently replaced by an invented count.
 
