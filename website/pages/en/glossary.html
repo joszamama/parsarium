@@ -23,6 +23,7 @@
       <dt id="differential">Differential testing</dt><dd>Sending the same input to several implementations and comparing their answers. <a href="{{ROOT}}manual/differential-testing/">Ch. 6</a></dd>
       <dt id="edge">Edge</dt><dd>A transition between two code locations. AFL++ counts edges in its map to measure coverage. <a href="{{ROOT}}manual/coverage-feedback/">Ch. 5</a></dd>
       <dt id="family">Parser family</dt><dd>The code that actually reads the format behind a package. Many packages can share one family. <a href="{{ROOT}}manual/choosing-targets/">Ch. 4</a></dd>
+      <dt id="fandango">Fandango</dt><dd>A fuzzer that generates inputs from a grammar of the format, with constraints such as lengths and checksums. Every format in Parsarium has a default grammar, and generated inputs can be replayed or used as AFL++ seeds. <a href="{{ROOT}}manual/fuzzing-at-scale/">Ch. 7</a></dd>
       <dt id="feedback">Feedback kind</dt><dd>How a target reports coverage to AFL++: compiled edges, or a bridge for a given language. <a href="{{ROOT}}manual/coverage-feedback/">Ch. 5</a></dd>
       <dt id="grammar">Grammar</dt><dd>A description of the parts of an input and their order and nesting. <a href="{{ROOT}}manual/formats-and-grammars/">Ch. 2</a></dd>
       <dt id="harness">Harness</dt><dd>The small program that reads one input, calls the parser's documented API, and prints what it observed. Each target's harness runs in a pinned Docker image. <a href="{{ROOT}}manual/controls-and-receipts/">Ch. 3</a></dd>
