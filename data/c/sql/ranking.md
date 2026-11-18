@@ -40,7 +40,15 @@ Receipts: [libgda](../../../projects/sql/c/libgda/verification.json) and its [AF
 | tarantool | 24 | excluded | Tarantool SQL (SQLite-derived front end) |
 | libcypher-parser | 22 | excluded | — |
 | tree-sitter-sql | 8 | selected | tree-sitter-sql grammar on the tree-sitter C runtime |
-| liteparser (sqliteai/liteparser) | n/a | unresolved_no_primary_metric | SQLite grammar (Lemon parse.y extraction) |
-| libinjection | n/a | excluded | — |
+| liteparser (sqliteai/liteparser) | n/a (35 stars) | excluded_below_threshold | SQLite grammar (Lemon parse.y extraction) |
+| libinjection | n/a (1,031 stars) | excluded | — |
+| pg_query_go and pg_query (pganalyze) | n/a (869/887 stars) | excluded_wrong_ecosystem | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| zsv (liquidaty/zsv) | n/a (416 stars) | excluded_wrong_topic | — |
+| MySQL-Syncer (Terry-Mao/MySQL-Syncer) | n/a (338 stars) | excluded_not_parser | — |
+| KunlunBase (zettadb/kunlun) | n/a (149 stars) | excluded | PostgreSQL grammar (copy compiled into the server) |
+| sqlite-createtable-parser (marcobambini/sqlite-createtable-parser) | n/a (138 stars) | excluded | sqlite-createtable-parser hand-written CREATE TABLE parser |
+| myanon (ppomes/myanon) | n/a (137 stars) | excluded_no_library_api | — |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).
+
+Round 6 (2026-11-18) applied the C and C++ GitHub-star fallback; star counts in the table above are GitHub `stargazers_count` from the [snapshot](registry-snapshot.json) (`round_6_star_fallback`), not popcon values. Twenty bounded repository searches with `stars:>=100` are recorded there.

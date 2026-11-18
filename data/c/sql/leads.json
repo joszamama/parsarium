@@ -228,13 +228,15 @@
     },
     {
       "name": "liteparser (sqliteai/liteparser)",
-      "status": "unresolved_no_primary_metric",
+      "status": "excluded_below_threshold",
       "metric_value": null,
       "metric_error": null,
-      "latest_release_observed": null,
+      "latest_release_observed": "1.0.0",
       "family": "SQLite grammar (Lemon parse.y extraction)",
       "documented_api_lead": null,
-      "reason": "Round-4 GitHub discovery (search 'sql parser language:C', 2026-11-18; stars are not used). Apache-2.0 C library, tag 1.0.0, whose README documents an AST with JSON serialization from a Lemon grammar extracted from SQLite parse.y. No Debian source package in the pinned popcon snapshot and no vcpkg or Conan Center port, so it has no admissible metric and was not built."
+      "reason": "Round-4 GitHub discovery (search 'sql parser language:C', 2026-11-18; stars are not used). Apache-2.0 C library, tag 1.0.0, whose README documents an AST with JSON serialization from a Lemon grammar extracted from SQLite parse.y. No Debian source package in the pinned popcon snapshot and no vcpkg or Conan Center port, so it has no admissible metric and was not built. Round 6 (2026-11-18, C/C++ star fallback): 35 GitHub stars, below the 100-star threshold, so it still has no admissible metric and was not built.",
+      "github_stars": 35,
+      "github_stars_observed_at_utc": "2026-11-18T07:14:41.003772+00:00"
     },
     {
       "name": "libinjection",
@@ -244,7 +246,81 @@
       "latest_release_observed": null,
       "family": null,
       "documented_api_lead": null,
-      "reason": "Round-4 GitHub discovery (search 'sql parser language:C'). SQL-injection detector that tokenizes and fingerprints input; no statement tree. No Debian source package in the pinned snapshot."
+      "reason": "Round-4 GitHub discovery (search 'sql parser language:C'). SQL-injection detector that tokenizes and fingerprints input; no statement tree. No Debian source package in the pinned snapshot. Round 6: client9/libinjection (1,031 stars, tag v3.10.0) and its successor libinjection/libinjection (246 stars, tag v4.0.2) clear the star threshold, but the library returns a token fingerprint and an is-injection verdict, not a statement tree, so the star fallback does not apply.",
+      "github_stars": 1031,
+      "github_stars_observed_at_utc": "2026-11-18T07:14:43.312932+00:00"
+    },
+    {
+      "name": "sqlite-createtable-parser (marcobambini/sqlite-createtable-parser)",
+      "status": "excluded",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": "v1.0.0",
+      "family": "sqlite-createtable-parser hand-written CREATE TABLE parser",
+      "documented_api_lead": null,
+      "github_stars": 138,
+      "github_stars_observed_at_utc": "2026-11-18T07:14:42.158285+00:00",
+      "reason": "Round-6 GitHub discovery ('sql parse language:C', 'sqlite parser language:C'; 138 stars, MIT, tag v1.0.0). Schema-only parser: its API parses one CREATE TABLE statement into a table/column/constraint structure and cannot read the SELECT or INSERT control (catalog/sql/PROTOCOL.md excludes schema-only parsers)."
+    },
+    {
+      "name": "pg_query_go and pg_query (pganalyze)",
+      "status": "excluded_wrong_ecosystem",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+      "documented_api_lead": null,
+      "github_stars": null,
+      "github_stars_observed_at_utc": null,
+      "reason": "Round-6 GitHub discovery ('sql parser language:C'; 869 and 887 stars). GitHub labels them C because they vendor libpg_query, but they are the Go and Ruby bindings of libpg_query, which is already selected in this cell by Debian popcon; not C libraries of their own."
+    },
+    {
+      "name": "MySQL-Syncer (Terry-Mao/MySQL-Syncer)",
+      "status": "excluded_not_parser",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "github_stars": null,
+      "github_stars_observed_at_utc": null,
+      "reason": "Round-6 GitHub discovery ('sql parser language:C', 338 stars). Reads MySQL binlog events and replays them into other stores; it does not parse SQL statement text into a tree."
+    },
+    {
+      "name": "myanon (ppomes/myanon)",
+      "status": "excluded_no_library_api",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "github_stars": null,
+      "github_stars_observed_at_utc": null,
+      "reason": "Round-6 GitHub discovery ('sql parser language:C', 137 stars). mysqldump anonymizer command-line tool with an internal flex/bison scanner for dump INSERT lines; no documented library API or statement tree."
+    },
+    {
+      "name": "zsv (liquidaty/zsv)",
+      "status": "excluded_wrong_topic",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "github_stars": null,
+      "github_stars_observed_at_utc": null,
+      "reason": "Round-6 GitHub discovery ('sql parser language:C', 416 stars). CSV parser and CLI; the SQL hit is a CLI subcommand that runs queries through SQLite, not an SQL parser."
+    },
+    {
+      "name": "KunlunBase (zettadb/kunlun)",
+      "status": "excluded",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "PostgreSQL grammar (copy compiled into the server)",
+      "documented_api_lead": null,
+      "github_stars": null,
+      "github_stars_observed_at_utc": null,
+      "reason": "Round-6 GitHub discovery ('sql grammar language:C', 149 stars). Distributed database server with an internal PostgreSQL-derived grammar; no library syntax-tree API."
     }
   ]
 }
