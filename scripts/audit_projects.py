@@ -510,10 +510,17 @@ def fltk_native_feedback_verified(path: Path, manifest: dict, overlay: dict) -> 
     )
 
 
+RUST_LIBPG_QUERY_PROJECTS = {"sql/rust/pg_query", "sql/rust/typedpg_pg_query"}
+
+
 def rust_pg_query_native_feedback_verified(path: Path, manifest: dict, overlay: dict) -> bool:
-    """Require the vendored libpg_query parser objects to contribute AFL++ feedback."""
+    """Require the vendored libpg_query parser objects to contribute AFL++ feedback.
+
+    Applies to the Rust libpg_query bindings (pg_query and typedpg_pg_query), whose hand-written
+    overlays instrument the Rust crates with cargo-afl and gram.c, scan.c and parser.c with clang.
+    """
     project = path.parent.relative_to(ROOT / "projects")
-    if str(project) != "sql/rust/pg_query":
+    if str(project) not in RUST_LIBPG_QUERY_PROJECTS:
         return True
     overlay_dir = ROOT / "fuzzing/afl-native" / project
     file_hashes = overlay.get("overlay_file_sha256", {})

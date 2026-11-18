@@ -198,7 +198,7 @@ def main() -> None:
         if str(relative) == "ascii_pnm/rust/fltk":
             assert fltk_native_feedback_verified(path, manifest, receipt)
             assert (overlay / "build.py").is_file()
-        elif str(relative) == "sql/rust/pg_query":
+        elif str(relative) in {"sql/rust/pg_query", "sql/rust/typedpg_pg_query"}:
             assert rust_pg_query_native_feedback_verified(path, manifest, receipt)
             assert (overlay / "build.py").is_file()
         else:
