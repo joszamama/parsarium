@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "psqlparse2",
+  "release": "0.0.17",
+  "catalog_parser": "data/python/sql/parsers.json",
+  "source_lock": "projects/sql/python/psqlparse2/source-lock.json",
+  "source_sha256": "a2dc5674eb6300aa48fc236a013939c455d795ef5294b6994480c92781079443",
+  "build_note": "Source-built from the pinned sdist on Debian 12 (Python 3.11, clang 14): setup.py's generate step runs libpg_query's own make clean/all with DEBUG=1 (-O0) under LLVM source coverage (bison/flex #line directives removed first), then Cython 3.0.10 compiles the wrapper src/pg_query/__init__.py into src/pg_query/__init__.c, which clang compiles with LLVM coverage and links against libpg_query.a. The official wheels compile the same sources.",
+  "dependencies_note": "protobuf 5.29.5 (runtime: decodes the libpg_query protobuf bytes into psqlparse2.pb.pg_query_pb2 messages); Cython, setuptools, wheel, setuptools-scm and packaging are build-only. The fuzz entry point is an external one-file Python bridge, not Atheris.",
+  "parser_family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser), shared with the C libpg_query path, Python pglast and Rust pg_query; psqlparse2 vendors its own libpg_query 16-5.1.0 (PostgreSQL 16.1 grammar) behind a Cython wrapper and generated Python protobuf types",
+  "dialect": "PostgreSQL 16 (libpg_query 16-5.1.0 pg_query_parse_protobuf, default parse mode)",
+  "base_image": "debian@sha256:ec8534cda2cb30f29f44f23e135297af7a1496f2990fd8e4e84aa36b081a757a",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/opt/venv/bin/python",
+    "/work/replay.py",
+    "/input/case"
+  ],
+  "api": "psqlparse2.query_to_pb(local SQL text decoded from UTF-8 bytes) -> psqlparse2.pb.pg_query_pb2.ParseResult; the harness walks the protobuf RawStmt list and SelectStmt, InsertStmt, RangeVar, JoinExpr, FuncCall and A_Const messages",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "LLVM source-region coverage (macro expansions skipped) of the source-built psqlparse2 extension: the Cython-generated wrapper src/pg_query/__init__.c and the statically linked libpg_query 16-5.1.0 sources; the AFL++ bridge maps regions and branches of the wrapper and the libpg_query grammar, scanner, raw_parser and protobuf output files",
+  "coverage_subject_prefix": "/work/psqlparse2-source/",
+  "format_specific_coverage_file_suffix": "/src_backend_parser_gram.c",
+  "scope": "One SQL statement from local text via psqlparse2.query_to_pb (PostgreSQL 16 grammar); valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Deparse, normalize, JSON parse and the optimised wheel build are untested.",
+  "underlying_release": "libpg_query 16-5.1.0 (vendored in the psqlparse2 sdist; PostgreSQL 16.1 raw parser, scanner and protobuf output)",
+  "underlying_coverage_subject_prefix": "/work/psqlparse2-source/libpg_query/",
+  "underlying_format_specific_coverage_file_suffix": "/src_backend_parser_gram.c",
+  "afl_coverage_subject_prefix": "/work/psqlparse2-source/",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.11/site-packages/pg_query.cpython-*.so",
+  "native_campaign_supported": false,
+  "afl_python_entrypoint": "/opt/venv/bin/python",
+  "afl_feature_only_proxy": true,
+  "afl_package_release": "4.04c-4"
+}

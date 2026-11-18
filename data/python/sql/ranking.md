@@ -1,6 +1,6 @@
 # Python × SQL: pilot ranking
 
-Six third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
+Seven third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
 
 ## Primary within-cell adoption metric
 
@@ -14,8 +14,9 @@ PyPI Stats last_month downloads (mirrors excluded), captured 2026-11-17 ([snapsh
 | 4 | [pglast](https://pglast.readthedocs.io/en/v8/parser.html#pglast.parser.parse_sql) | 8.8 | 10,961,367 | `pglast.parse_sql(local SQL text) -> tuple of pglast.ast.RawStmt nodes`; dialect: PostgreSQL 18 (libpg_query raw parser) | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | 5 | [sqloxide](https://pypi.org/project/sqloxide/0.61.1/) | 0.61.1 | 511,801 | `sqloxide.parse_sql(local SQL text, dialect="generic") -> list of statement ASTs (Python dicts)`; dialect: generic (sqlparser GenericDialect) | sqlparser-rs |
 | 6 | [mo-sql-parsing](https://github.com/klahnakoski/mo-sql-parsing/blob/master/README.md#parsing-sql) | 11.699.26234 | 103,062 | `mo_sql_parsing.parse(local SQL text) -> JSON parse tree`; dialect: common parser (mo_sql_parsing.parse) | mo-sql-parsing grammar on the mo-parsing engine |
+| 7 | [psqlparse2](https://github.com/dani-maarouf/psqlparse2#overview) | 0.0.17 | 3,025 | `psqlparse2.query_to_pb(sql: str) -> psqlparse2.pb.pg_query_pb2.ParseResult`; dialect: PostgreSQL | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 
-Receipts: [sqlparse](../../../projects/sql/python/sqlparse/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlparse/differential.json), [sqlglot](../../../projects/sql/python/sqlglot/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlglot/differential.json), [sqlfluff](../../../projects/sql/python/sqlfluff/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlfluff/differential.json), [pglast](../../../projects/sql/python/pglast/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/pglast/differential.json), [sqloxide](../../../projects/sql/python/sqloxide/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqloxide/differential.json), [mo-sql-parsing](../../../projects/sql/python/mo_sql_parsing/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/mo_sql_parsing/differential.json).
+Receipts: [sqlparse](../../../projects/sql/python/sqlparse/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlparse/differential.json), [sqlglot](../../../projects/sql/python/sqlglot/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlglot/differential.json), [sqlfluff](../../../projects/sql/python/sqlfluff/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqlfluff/differential.json), [pglast](../../../projects/sql/python/pglast/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/pglast/differential.json), [sqloxide](../../../projects/sql/python/sqloxide/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/sqloxide/differential.json), [mo-sql-parsing](../../../projects/sql/python/mo_sql_parsing/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/mo_sql_parsing/differential.json), [psqlparse2](../../../projects/sql/python/psqlparse2/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/python/psqlparse2/differential.json).
 
 ## Leads by the same metric
 
@@ -34,11 +35,17 @@ Receipts: [sqlparse](../../../projects/sql/python/sqlparse/verification.json) an
 | sqlvalidator | 104,072 | unresolved_blocked | sqlvalidator hand-written lexer and parser |
 | mo-sql-parsing | 103,062 | selected | mo-sql-parsing grammar on the mo-parsing engine |
 | simple-ddl-parser | 79,894 | excluded | simple-ddl-parser PLY grammar |
-| pg-query-python | 16,148 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| pg-query-python | 16,148 | unresolved_blocked | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| polyglot-sql | 9,851 | unresolved | polyglot-sql tokenizer and recursive-descent parser (sqlglot-style) |
 | psqlparse | 8,870 | unresolved_blocked | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| bigquery-sql-parser | 8,116 | excluded | bigquery-sql-parser regular-expression extraction |
+| mindsdb-sql | 7,674 | excluded | mindsdb_sql SLY grammar (predecessor of mindsdb_sql_parser) |
 | sqltree | 4,432 | unresolved_blocked | sqltree hand-written tokenizer and parser |
-| psqlparse2 | 3,025 | unresolved | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| psqlparse2 | 3,025 | selected | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
+| mindsdb-sql-parser | 2,499 | unresolved | mindsdb_sql_parser SLY grammar |
 | pg-query | 2,220 | excluded | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
-| sqlparser | 2,053 | unresolved | — |
+| sqlparser | 2,053 | excluded | sqlparser 0.0.9 SQL-file runner |
+| twsqlparser | 419 | excluded | TWSqlParser two-way SQL template expander |
+| antlr-tsql | 126 | unresolved | antlr-tsql ANTLR 4 T-SQL grammar with antlr-ast tree shaping |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).

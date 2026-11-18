@@ -555,6 +555,98 @@
       "parser_feature_difference": 211,
       "project_receipt": "projects/sql/python/mo_sql_parsing/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/python/mo_sql_parsing/differential.json"
+    },
+    {
+      "package": "psqlparse2",
+      "version": "0.0.17",
+      "pass": true,
+      "input_api": "psqlparse2.query_to_pb(sql: str) -> psqlparse2.pb.pg_query_pb2.ParseResult",
+      "dialect": "PostgreSQL 16 (libpg_query 16-5.1.0 pg_query_parse_protobuf, default parse mode)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser), shared with the C libpg_query path, Python pglast and Rust pg_query; psqlparse2 vendors its own libpg_query 16-5.1.0 (PostgreSQL 16.1 grammar) behind a Cython wrapper and generated Python protobuf types",
+      "parser_source_files": 43,
+      "parser_source_lines_covered": 1897,
+      "afl_tuple_difference": 215,
+      "parser_feature_difference": 228,
+      "project_receipt": "projects/sql/python/psqlparse2/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/python/psqlparse2/differential.json"
     }
   ],
   "standard": [],

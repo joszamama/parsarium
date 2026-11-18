@@ -646,5 +646,113 @@
         }
       ]
     }
+  },
+  {
+    "name": "psqlparse2",
+    "version": "0.0.17",
+    "license": "BSD-3-Clause",
+    "license_evidence": "LICENSE in the pinned sdist (BSD 3-clause text, Copyright (c) 2024, Dani Maarouf; SHA-256 fc47bbe6...) and the 'License :: OSI Approved :: BSD License' classifier; vendored libpg_query LICENSE is BSD-3-Clause",
+    "input_api": "psqlparse2.query_to_pb(sql: str) -> psqlparse2.pb.pg_query_pb2.ParseResult",
+    "documentation": "https://github.com/dani-maarouf/psqlparse2#overview (README: query_to_pb / pb_to_query over pg_query_parse_protobuf)",
+    "source": "https://files.pythonhosted.org/packages/cf/4e/0a642acfdc92ba7ab5a14c020d840dd57562d5f32ee41c647520dbea080f/psqlparse2-0.0.17.tar.gz",
+    "source_sha256": "a2dc5674eb6300aa48fc236a013939c455d795ef5294b6994480c92781079443",
+    "dependencies": [
+      "libpg_query 16-5.1.0 C (vendored, built by setup.py's generate step)",
+      "Cython 3.0.10 (build only)",
+      "protobuf 5.29.5 (runtime decode)"
+    ],
+    "dialect": "PostgreSQL",
+    "scope": "One SQL statement from local text via psqlparse2.query_to_pb (PostgreSQL 16 grammar); valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Deparse, normalize, JSON parse and the optimised wheel build are untested.",
+    "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
+    "family_note": "psqlparse2.query_to_pb calls its Cython wrapper pg_query.query_parse_protobuf, which runs the vendored libpg_query 16-5.1.0 (PostgreSQL 16.1 scanner and bison grammar, pg_query_parse_protobuf) and decodes the bytes into the package's generated pg_query_pb2 messages with the protobuf runtime. Shared libpg_query family with the C libpg_query path, Python pglast (18.1.0, own Cython conversion), Rust pg_query and typedpg_pg_query, Go pg_query_go and JavaScript libpg-query; an older vendored libpg_query release (16-5.1.0) and its own wrapper. Inspired by the abandoned psqlparse (separate lead, unbuildable), not a fork of it. Metrics are not combined.",
+    "popularity": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 3025,
+      "source": "https://pypistats.org/api/packages/psqlparse2/recent",
+      "observed_on_utc": "2026-11-17",
+      "snapshot": "data/python/sql/registry-snapshot.json",
+      "limitation": "Small absolute count; package-level downloads."
+    },
+    "project": "projects/sql/python/psqlparse2",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

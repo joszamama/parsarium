@@ -172,13 +172,14 @@
     },
     {
       "name": "psqlparse2",
-      "status": "unresolved",
+      "status": "selected",
       "metric_value": 3025,
       "metric_error": null,
       "latest_release_observed": "0.0.17",
       "family": "PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser)",
       "documented_api_lead": "psqlparse2.parse",
-      "reason": "Round-2 extension lead (PyPI Stats last_month 3,025, captured 2026-11-17). libpg_query wrapper with protobuf output (2024-11-22 sdist and wheels); same family as pglast. Not run in this round."
+      "reason": "Round-2 lead (PyPI Stats last_month 3,025), evaluated in round 3. psqlparse2.query_to_pb runs the Cython wrapper over its vendored libpg_query 16-5.1.0 (PostgreSQL 16.1 grammar) and decodes the protobuf into its generated pg_query_pb2 messages; both valid controls equal the oracle. Source-built from the pinned sdist with LLVM coverage (1,897 lines in 43 files, 1,240 in libpg_query); the AFL++ bridge maps wrapper and grammar/scanner/raw_parser regions (215 tuples and 228 features differ between controls). Shared libpg_query family with pglast; own wrapper and an older vendored release.",
+      "selected_release": "0.0.17"
     },
     {
       "name": "pg-query",
