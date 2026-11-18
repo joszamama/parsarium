@@ -36,6 +36,7 @@ pkg.go.dev Imported by package count, captured 2026-11-17 (rounds 1-4) and 2026-
 | github.com/tsuru/config | not_a_parser_engine | 368 | configuration loader over gopkg.in/yaml.v2 |
 | github.com/docker/libcompose/yaml | not_a_parser_engine | 352 | Compose field types |
 | github.com/kylelemons/go-gypsy/yaml | excluded_control_failed | 289 | go-gypsy (independent minimal YAML subset parser) |
+| go.yaml.in/yaml/v2 | excluded_shared_family | 175 | go-yaml v2 (YAML organization rename) |
 | github.com/coreos/yaml | excluded_duplicate_fork | 169 | go-yaml v2 fork |
 | github.com/buildkite/yaml | excluded_duplicate_fork | 118 | go-yaml v2 fork |
 | github.com/invopop/yaml | unresolved_not_run | 112 | fork of ghodss/yaml (JSON conversion) |
@@ -46,7 +47,25 @@ pkg.go.dev Imported by package count, captured 2026-11-17 (rounds 1-4) and 2026-
 | github.com/go-faster/yaml | excluded_duplicate_fork | 40 | go-yaml v3 fork |
 | github.com/braydonk/yaml | excluded_duplicate_fork | 34 | go-yaml v3 fork (yamlfmt) |
 | github.com/smacker/go-tree-sitter/yaml | excluded | 15 | tree-sitter-yaml grammar via go-tree-sitter (cgo) |
+| github.com/geofffranks/yaml | excluded_duplicate_fork | 12 | go-yaml v2 fork |
+| github.com/sensu/yaml | excluded_duplicate_fork | 9 | go-yaml v2 fork |
+| github.com/cortexlabs/yaml | excluded_duplicate_fork | 8 | go-yaml v2 fork |
+| gopkg.in/ghodss/yaml.v1 | excluded_duplicate_fork | 8 | ghodss/yaml fork (go-yaml v2 via JSON conversion) |
 | github.com/oasdiff/yaml3 | excluded_duplicate_fork | 7 | go-yaml v3 fork (oasdiff) |
+| github.com/gigforks/yaml | excluded_duplicate_fork | 7 | go-yaml v2 fork |
+| github.com/lyraproj/dgoyaml/yaml | excluded | 7 | go-yaml v3 (gopkg.in/yaml.v3) node tree mapped to dgo values |
+| github.com/advance512/yaml | excluded_duplicate_fork | 6 | go-yaml v2 fork |
+| github.com/flanksource/yaml | excluded_duplicate_fork | 6 | go-yaml v2 fork |
+| github.com/hairyhenderson/yaml | excluded_duplicate_fork | 6 | go-yaml v2 fork |
+| github.com/wangyysde/yaml | excluded_duplicate_fork | 6 | ghodss/yaml fork (go-yaml v2 via JSON conversion) |
+| github.com/adjust/go-gypsy/yaml | excluded_duplicate_fork | 5 | go-gypsy fork |
+| github.com/tsaikd/yaml | excluded_duplicate_fork | 5 | go-yaml v2 fork |
 | github.com/koykov/yamlvector | excluded | 2 | yamlvector (koykov vector-API YAML parser) |
+| github.com/faustbrian/go-wire/v3/yamlwire | excluded_shared_family | 2 | go-yaml v4 (go.yaml.in/yaml/v4) wrapper |
+| github.com/itchyny/go-yaml | excluded | 2 | itchyny/go-yaml |
+| github.com/yaml/yamlstar-go | excluded | 1 | YAMLStar (libyamlstar shared library via cgo) |
+| github.com/yamlstar/yamlstar-plugin-parser-reference/parser | excluded_control_failed | 1 | YAML reference parser (yaml/yaml-reference-parser-clj 0.2.6, Glojure-generated Go) |
+
+Round 6 ([round6-lead-check.json](round6-lead-check.json)) searched pkg.go.dev for 'yaml parser', 'yaml decoder', 'yaml 1.2', 'yaml lexer', 'yaml ast' and 'yaml unmarshal'. It selected go-rotini/yaml and golib parse/yaml and recorded 95 further positive-metric hits as leads (34 go-yaml forks, 8 ghodss/yaml forks, 6 go-gypsy forks, wrappers, paths without a tagged release, the failing YAML reference parser, and configuration loaders or type helpers); the table lists those with at least 5 Imported by and the parser-like ones. goccy/go-yaml's ast, parser and lexer subpackages belong to the selected module.
 
 AFL++ feedback: [afl-feedback.json](afl-feedback.json). Standard and runtime APIs: none documented ([standard.json](standard.json)).

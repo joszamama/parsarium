@@ -1,0 +1,6306 @@
+{
+ "schema_version": 1,
+ "checked_at_utc": "2026-11-18T02:12:01.573447+00:00",
+ "method": "Round 6, a wider pkg.go.dev window: six package searches ('yaml parser', 'yaml decoder', 'yaml 1.2', 'yaml lexer', 'yaml ast', 'yaml unmarshal'; first 100 hits each, 'yaml lexer' and 'yaml ast' return 21 and 19), captured 2026-11-18 between 01:37 and 01:39 UTC. Metric: pkg.go.dev Imported by from the search snippet (round-1 source). Hits already in the round-1 snapshot or leads.json are not repeated. Every new hit with a positive value is decided: (1) fork overlap with the round-3 method (module zips from proxy.golang.org, @latest unless noted; distinct stripped non-comment lines of top-level non-test .go files) against gopkg.in/yaml.v2 v2.4.0 and gopkg.in/yaml.v3 v3.0.1, against github.com/ghodss/yaml v1.0.0 for ghodss-like modules, and against github.com/kylelemons/go-gypsy v1.0.0 yaml/ for go-gypsy forks; (2) the YAML/JSON imports of the remaining hits from their pkg.go.dev imports tab; (3) module zips read for the named candidates; (4) proxy.golang.org version lists for release pins. Two hits passed both controls and are promoted (go-rotini/yaml, golib parse/yaml; their projects carry the Docker and AFL++ receipts). The YAML reference parser was inspected with a local Go 1.27.1 event dump on the two valid controls (no Docker harness, no malformed input).",
+ "go_toolchain": "go version go1.27.1 darwin/arm64",
+ "control_sha256": {
+  "catalog.yaml": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+  "order.yaml": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935"
+ },
+ "searches": [
+  {
+   "query": "yaml parser",
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "captured_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "limit": 100,
+   "hits_recorded": 100,
+   "hits": [
+    {
+     "rank": 1,
+     "name": "github.com/knadh/koanf/parsers/yaml",
+     "imported_by": 825
+    },
+    {
+     "rank": 2,
+     "name": "github.com/kylelemons/go-gypsy/yaml",
+     "imported_by": 289
+    },
+    {
+     "rank": 3,
+     "name": "github.com/goccy/go-yaml/parser",
+     "imported_by": 117
+    },
+    {
+     "rank": 4,
+     "name": "github.com/CharLemAznable/gokits",
+     "imported_by": 20
+    },
+    {
+     "rank": 5,
+     "name": "github.com/peterbourgon/ff/v4/ffyaml",
+     "imported_by": 4
+    },
+    {
+     "rank": 6,
+     "name": "gitlab.com/gitlab-org/gitlab-runner/helpers/gitlab_ci_yaml_parser",
+     "imported_by": 32
+    },
+    {
+     "rank": 7,
+     "name": "github.com/dipdup-io/go-lib/config",
+     "imported_by": 14
+    },
+    {
+     "rank": 8,
+     "name": "github.com/qri-io/starlib/encoding/yaml",
+     "imported_by": 10
+    },
+    {
+     "rank": 9,
+     "name": "github.com/go-faster/yaml",
+     "imported_by": 40
+    },
+    {
+     "rank": 10,
+     "name": "github.com/james4k/fmatter",
+     "imported_by": 5
+    },
+    {
+     "rank": 11,
+     "name": "github.com/oblq/swap",
+     "imported_by": 3
+    },
+    {
+     "rank": 12,
+     "name": "github.com/adjust/go-gypsy/yaml",
+     "imported_by": 5
+    },
+    {
+     "rank": 13,
+     "name": "github.com/romshark/yamagiconf",
+     "imported_by": 3
+    },
+    {
+     "rank": 14,
+     "name": "github.com/oblq/sprbox",
+     "imported_by": 2
+    },
+    {
+     "rank": 15,
+     "name": "github.com/leopardslab/Dunner/pkg/config",
+     "imported_by": 3
+    },
+    {
+     "rank": 16,
+     "name": "github.com/yamlstar/yamlstar-plugin-parser-reference/parser",
+     "imported_by": 1
+    },
+    {
+     "rank": 17,
+     "name": "github.com/supakeen/yamlplus",
+     "imported_by": 1
+    },
+    {
+     "rank": 18,
+     "name": "github.com/yixy/fmatter",
+     "imported_by": 1
+    },
+    {
+     "rank": 19,
+     "name": "github.com/an-repository/config/parsers/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 20,
+     "name": "github.com/open-policy-agent/conftest/parser/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 21,
+     "name": "github.com/bingoohuang/gg/pkg/yaml/parser",
+     "imported_by": 1
+    },
+    {
+     "rank": 22,
+     "name": "github.com/gofuego/fuego/parsers/markdown",
+     "imported_by": 2
+    },
+    {
+     "rank": 23,
+     "name": "github.com/juanvillacortac/ditto/pkg/parser/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 24,
+     "name": "github.com/Checkmarx/kics/v2/pkg/parser/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 25,
+     "name": "github.com/lijiang2014/yamlast",
+     "imported_by": 1
+    },
+    {
+     "rank": 26,
+     "name": "github.com/pjdufour/go-gypsy/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 27,
+     "name": "github.com/scottkiss/go-gypsy/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 28,
+     "name": "github.com/jtaekema/go-gypsy/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 29,
+     "name": "github.com/pingdomserver/go-gypsy/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 30,
+     "name": "github.com/erh/go-gypsy/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 31,
+     "name": "bitbucket.org/zombiezen/goray/yaml/parser",
+     "imported_by": 1
+    },
+    {
+     "rank": 32,
+     "name": "gitlab.com/gitlab-org/gitlab-ci-multi-runner/helpers/gitlab_ci_yaml_parser",
+     "imported_by": 1
+    },
+    {
+     "rank": 33,
+     "name": "github.com/0xalexb/hjarta-di/config/parser/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 34,
+     "name": "github.com/sv-tools/conf-parser-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 35,
+     "name": "go.krak3n.codes/gofig/parsers/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 36,
+     "name": "github.com/ArmanAvanesyan/go-config/providers/parser/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 37,
+     "name": "github.com/go-openapi/go-yaml/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 38,
+     "name": "github.com/katydid/parser-go-yaml/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 39,
+     "name": "github.com/ercross/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 40,
+     "name": "github.com/superops-team/hyperops/pkg/ops/starlib/encoding/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 41,
+     "name": "github.com/zchee/go-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 42,
+     "name": "github.com/boynton/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 43,
+     "name": "github.com/knadh/modtest/parsers/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 44,
+     "name": "github.com/Clever/koanf/parsers/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 45,
+     "name": "github.com/ivangsm/koanf/parsers/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 46,
+     "name": "zeroparse.dev/alpha-parsers/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 47,
+     "name": "github.com/rubenv/fastyaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 48,
+     "name": "github.com/gmlewis/rtc/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 49,
+     "name": "github.com/mattfarina/yamljsonperftest",
+     "imported_by": 0
+    },
+    {
+     "rank": 50,
+     "name": "github.com/forkedagain/go-gypsy/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 51,
+     "name": "github.com/PaulSonOfLars/go-gypsy/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 52,
+     "name": "github.com/zdz1715/yaml-parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 53,
+     "name": "github.com/statisticsnorway/drone-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 54,
+     "name": "github.com/ctpeter/drone-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 55,
+     "name": "github.com/drone/drone-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 56,
+     "name": "github.com/primait/drone-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 57,
+     "name": "git.awesome-for.me/liuzhiguo/drone-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 58,
+     "name": "github.com/btoll/go-yaml-parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 59,
+     "name": "github.com/backbone81/golr/pkg/parsergen/backend/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 60,
+     "name": "github.com/ennesuysal/yaml-parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 61,
+     "name": "github.com/msuozzo/bonsai/bonsai-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 62,
+     "name": "github.com/unsubble/goml",
+     "imported_by": 0
+    },
+    {
+     "rank": 63,
+     "name": "github.com/vikingpingvin/yml2env",
+     "imported_by": 0
+    },
+    {
+     "rank": 64,
+     "name": "github.com/Instituto-Atlantico/janus/pkg/yaml_parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 65,
+     "name": "github.com/nobl9/go-yaml/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 66,
+     "name": "github.com/dmlyons/go-yaml/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 67,
+     "name": "github.com/korylprince/go-yaml/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 68,
+     "name": "github.com/xaaha/hulak/pkg/actions",
+     "imported_by": 0
+    },
+    {
+     "rank": 69,
+     "name": "github.com/danyel/dot-files/yaml_parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 70,
+     "name": "github.com/gateway-fm/warp_swagger/yaml_parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 71,
+     "name": "gitlab.com/devowl.io/gitlab-runner/helpers/gitlab_ci_yaml_parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 72,
+     "name": "github.com/masenocturnal/go-yaml/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 73,
+     "name": "github.com/go-kure/launcher/pkg/oam",
+     "imported_by": 0
+    },
+    {
+     "rank": 74,
+     "name": "github.com/ChristopherHX/gitea-actions-runner",
+     "imported_by": 0
+    },
+    {
+     "rank": 75,
+     "name": "github.com/coxley/go-yaml/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 76,
+     "name": "github.com/fe3dback/go-yaml/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 77,
+     "name": "github.com/adamgilman/idiomatic/config",
+     "imported_by": 0
+    },
+    {
+     "rank": 78,
+     "name": "github.com/aixj1984/go-yaml/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 79,
+     "name": "github.com/farrukhny/config/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 80,
+     "name": "github.com/pkazmier/ffyaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 81,
+     "name": "github.com/malcolmston/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 82,
+     "name": "github.com/amp-labs/amp-yaml-validator/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 83,
+     "name": "github.com/jkratz55/koanfext/parsers/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 84,
+     "name": "github.com/shapestone/shape-core/pkg/data",
+     "imported_by": 0
+    },
+    {
+     "rank": 85,
+     "name": "github.com/dyllew3/PerfMeasurer/parser/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 86,
+     "name": "github.com/YangTaeyoung/yaml-diff-reporter/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 87,
+     "name": "github.com/nstogner/conftest/parser/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 88,
+     "name": "github.com/gopi-frame/config/parser/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 89,
+     "name": "github.com/jm-positron/go-yaml/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 90,
+     "name": "github.com/LittlePeter52012/skill-router/pkg/frontmatter",
+     "imported_by": 0
+    },
+    {
+     "rank": 91,
+     "name": "github.com/illuminarean-labs/yaml-diff-reporter/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 92,
+     "name": "github.com/yamlstar/yamlstar-plugin-parser-json-comments/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 93,
+     "name": "github.com/gmoyal-r7/fanal/config/parser/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 94,
+     "name": "github.com/elioetibr/golang-yaml/pkg/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 95,
+     "name": "github.com/vibrantgio/markdown/obsidian",
+     "imported_by": 0
+    },
+    {
+     "rank": 96,
+     "name": "github.com/an-repository/eckmuhl/config/parsers/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 97,
+     "name": "github.com/PowerDNS/lightningstream/config",
+     "imported_by": 0
+    },
+    {
+     "rank": 98,
+     "name": "github.com/go-pa/ff/ffyaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 99,
+     "name": "github.com/infobloxopen/themis/pdp/ast/yast",
+     "imported_by": 0
+    },
+    {
+     "rank": 100,
+     "name": "github.com/kooshapari/nanovms/pkg/config",
+     "imported_by": 0
+    }
+   ]
+  },
+  {
+   "query": "yaml decoder",
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "captured_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "limit": 100,
+   "hits_recorded": 100,
+   "hits": [
+    {
+     "rank": 1,
+     "name": "go.yaml.in/yaml/v4",
+     "imported_by": 376
+    },
+    {
+     "rank": 2,
+     "name": "github.com/tliron/yamlkeys",
+     "imported_by": 25
+    },
+    {
+     "rank": 3,
+     "name": "gopkg.in/yaml.v3",
+     "imported_by": 44731
+    },
+    {
+     "rank": 4,
+     "name": "github.com/vadv/gopher-lua-libs/yaml",
+     "imported_by": 12
+    },
+    {
+     "rank": 5,
+     "name": "github.com/faustbrian/go-wire/v3/yamlwire",
+     "imported_by": 2
+    },
+    {
+     "rank": 6,
+     "name": "github.com/turbinelabs/codec",
+     "imported_by": 20
+    },
+    {
+     "rank": 7,
+     "name": "github.com/buildkite/go-pipeline/ordered",
+     "imported_by": 5
+    },
+    {
+     "rank": 8,
+     "name": "cloudeng.io/cmdutil/cmdtypes",
+     "imported_by": 4
+    },
+    {
+     "rank": 9,
+     "name": "github.com/goschtalt/yaml-decoder",
+     "imported_by": 3
+    },
+    {
+     "rank": 10,
+     "name": "github.com/go-yaml/yaml",
+     "imported_by": 1291
+    },
+    {
+     "rank": 11,
+     "name": "github.com/go-rotini/yaml",
+     "imported_by": 2
+    },
+    {
+     "rank": 12,
+     "name": "github.com/itchyny/go-yaml",
+     "imported_by": 2
+    },
+    {
+     "rank": 13,
+     "name": "github.com/starpkg/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 14,
+     "name": "github.com/uber/cadence/common/config/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 15,
+     "name": "github.com/schmidtw/goschtalt/extensions/decoders/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 16,
+     "name": "github.com/crispuscrew/zinc/common/domain/schema/inherit",
+     "imported_by": 1
+    },
+    {
+     "rank": 17,
+     "name": "github.com/buildkite/yaml",
+     "imported_by": 118
+    },
+    {
+     "rank": 18,
+     "name": "github.com/pivotal-golang/yaml",
+     "imported_by": 94
+    },
+    {
+     "rank": 19,
+     "name": "github.com/egustafson/sandbox/go/yaml-scalar-decode",
+     "imported_by": 0
+    },
+    {
+     "rank": 20,
+     "name": "github.com/kittomic/cascadingconfig/format/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 21,
+     "name": "github.com/alex-poliushkin/theater/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 22,
+     "name": "github.com/lovercode/gopher-lua-libs/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 23,
+     "name": "github.com/metafates/mangal-lua-libs/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 24,
+     "name": "github.com/alexjx/gopher-lua-libs/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 25,
+     "name": "github.com/luevano/mangal-lua-libs/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 26,
+     "name": "github.com/venerasf/go-lua-libs/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 27,
+     "name": "github.com/Adam-445/configr/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 28,
+     "name": "github.com/nextpkg/typedcfg/adapters/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 29,
+     "name": "github.com/artificial-polyglot/arti/decode_yaml/request",
+     "imported_by": 0
+    },
+    {
+     "rank": 30,
+     "name": "github.com/faithcomesbyhearing/fcbh-dataset-io/decode_yaml/request",
+     "imported_by": 0
+    },
+    {
+     "rank": 31,
+     "name": "github.com/yongshengli/gopher-lua-libs/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 32,
+     "name": "github.com/hollowtoque/go-don/encoding/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 33,
+     "name": "github.com/natalie-o-perret/go-data/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 34,
+     "name": "github.com/abemedia/go-don/encoding/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 35,
+     "name": "github.com/delayedbedr/go-don/encoding/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 36,
+     "name": "github.com/inference-sim/blis-vllm/rules/engineconfig",
+     "imported_by": 0
+    },
+    {
+     "rank": 37,
+     "name": "github.com/conways-glider/ct/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 38,
+     "name": "github.com/conga-sh/conga/decoder/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 39,
+     "name": "github.com/warthog618/config/blob/decoder/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 40,
+     "name": "github.com/getplumber/plumber/capability/capdecl",
+     "imported_by": 0
+    },
+    {
+     "rank": 41,
+     "name": "github.com/nexssp/flow/extensions/config_yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 42,
+     "name": "sigs.k8s.io/kwok/pkg/utils/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 43,
+     "name": "github.com/kwok-ci/kectl/pkg/utils/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 44,
+     "name": "github.com/MontFerret/contrib/modules/yaml/core",
+     "imported_by": 0
+    },
+    {
+     "rank": 45,
+     "name": "gitlab.com/so_literate/fconfig/decoder/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 46,
+     "name": "github.com/terramate-io/terramate/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 47,
+     "name": "github.com/NobleFactor/devlore-cli/pkg/op/provider/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 48,
+     "name": "go.gala.fyi/stdlib/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 49,
+     "name": "github.com/KSpaceer/yamly/engines/yayamls/decode",
+     "imported_by": 0
+    },
+    {
+     "rank": 50,
+     "name": "github.com/goloop/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 51,
+     "name": "github.com/kjanat/go-yaml/v4",
+     "imported_by": 0
+    },
+    {
+     "rank": 52,
+     "name": "github.com/pb33f/go-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 53,
+     "name": "github.com/szkiba/xk6-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 54,
+     "name": "go-yaml.in/yaml/v4",
+     "imported_by": 0
+    },
+    {
+     "rank": 55,
+     "name": "github.com/tommie/protoyaml-go",
+     "imported_by": 0
+    },
+    {
+     "rank": 56,
+     "name": "github.com/cloudposse/atmos/pkg/yaml/scalar",
+     "imported_by": 0
+    },
+    {
+     "rank": 57,
+     "name": "github.com/dbakhtin/gyaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 58,
+     "name": "github.com/thesatellite-ai/lore/logic/yamlerr",
+     "imported_by": 0
+    },
+    {
+     "rank": 59,
+     "name": "github.com/cybervask/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 60,
+     "name": "github.com/milagre/zote/pulumi/cloud",
+     "imported_by": 0
+    },
+    {
+     "rank": 61,
+     "name": "github.com/stacklok/toolhive/pkg/yamlutil",
+     "imported_by": 0
+    },
+    {
+     "rank": 62,
+     "name": "github.com/nethinwei/sql-mcp-server/x/configyaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 63,
+     "name": "github.com/poruru-code/aws-sam-parser-go/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 64,
+     "name": "github.com/jeduden/mdsmith/cue/cuelite/yamltime",
+     "imported_by": 0
+    },
+    {
+     "rank": 65,
+     "name": "github.com/idelchi/godyl/pkg/unmarshal",
+     "imported_by": 0
+    },
+    {
+     "rank": 66,
+     "name": "github.com/stigmer/stigmer/client-apps/cli/pkg/yamlutil",
+     "imported_by": 0
+    },
+    {
+     "rank": 67,
+     "name": "git.sr.ht/~errnoh/yamlc",
+     "imported_by": 0
+    },
+    {
+     "rank": 68,
+     "name": "github.com/faustbrian/golib/pkg/wire/yamlwire",
+     "imported_by": 0
+    },
+    {
+     "rank": 69,
+     "name": "github.com/mikl0s/debateos/resolver/parse",
+     "imported_by": 0
+    },
+    {
+     "rank": 70,
+     "name": "github.com/qiangli/yoke/pkg/lens/provider",
+     "imported_by": 0
+    },
+    {
+     "rank": 71,
+     "name": "github.com/Mundo-Dolphins/phins-news-engine/infra/dictionaryfile",
+     "imported_by": 0
+    },
+    {
+     "rank": 72,
+     "name": "codeberg.org/mhdbox/config",
+     "imported_by": 0
+    },
+    {
+     "rank": 73,
+     "name": "github.com/OwnSecurityGuard/gametrace/sdk/contract",
+     "imported_by": 0
+    },
+    {
+     "rank": 74,
+     "name": "github.com/gookit/taskrun/formats",
+     "imported_by": 0
+    },
+    {
+     "rank": 75,
+     "name": "github.com/OwnSecurityGuard/gt-plugin-sdk/contract",
+     "imported_by": 0
+    },
+    {
+     "rank": 76,
+     "name": "latere.ai/x/lux/manifest",
+     "imported_by": 0
+    },
+    {
+     "rank": 77,
+     "name": "github.com/woozymasta/jamle",
+     "imported_by": 0
+    },
+    {
+     "rank": 78,
+     "name": "github.com/release-argus/Argus/config/decode",
+     "imported_by": 0
+    },
+    {
+     "rank": 79,
+     "name": "github.com/KirkDiggler/rpg-toolkit/encounter/dungeonspec",
+     "imported_by": 0
+    },
+    {
+     "rank": 80,
+     "name": "github.com/mobiledgex/yaml/v2",
+     "imported_by": 20
+    },
+    {
+     "rank": 81,
+     "name": "github.com/sanathkr/go-yaml",
+     "imported_by": 36
+    },
+    {
+     "rank": 82,
+     "name": "github.com/kohkimakimoto/gopher-lua-libs/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 83,
+     "name": "github.com/vigolium/vigolium/pkg/utils/yamlschema",
+     "imported_by": 0
+    },
+    {
+     "rank": 84,
+     "name": "github.com/medici-finance/assay/containers/k8s",
+     "imported_by": 0
+    },
+    {
+     "rank": 85,
+     "name": "github.com/jesseduffield/yaml",
+     "imported_by": 27
+    },
+    {
+     "rank": 86,
+     "name": "github.com/zacheddy/kind/pkg/cluster/config/encoding",
+     "imported_by": 0
+    },
+    {
+     "rank": 87,
+     "name": "github.com/gopherex/xconf/contrib/sources/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 88,
+     "name": "github.com/mergetb/yaml/v3",
+     "imported_by": 12
+    },
+    {
+     "rank": 89,
+     "name": "github.com/jyang234/verdi/docs/spikes/self-governance/_scratch/oq2decode",
+     "imported_by": 0
+    },
+    {
+     "rank": 90,
+     "name": "github.com/dyammarcano/encoder",
+     "imported_by": 0
+    },
+    {
+     "rank": 91,
+     "name": "gopkg.in/specgen-io/yaml.v3",
+     "imported_by": 10
+    },
+    {
+     "rank": 92,
+     "name": "github.com/replicatedhq/yaml/v3",
+     "imported_by": 7
+    },
+    {
+     "rank": 93,
+     "name": "github.com/mozilla-services/yaml",
+     "imported_by": 14
+    },
+    {
+     "rank": 94,
+     "name": "github.com/jsccast/yaml",
+     "imported_by": 14
+    },
+    {
+     "rank": 95,
+     "name": "github.com/insei/tinyconf/v2/drivers/format",
+     "imported_by": 0
+    },
+    {
+     "rank": 96,
+     "name": "github.com/geofffranks/yaml",
+     "imported_by": 12
+    },
+    {
+     "rank": 97,
+     "name": "github.com/coreos/yaml",
+     "imported_by": 169
+    },
+    {
+     "rank": 98,
+     "name": "github.com/tsaikd/yaml",
+     "imported_by": 5
+    },
+    {
+     "rank": 99,
+     "name": "github.com/sensu/yaml",
+     "imported_by": 9
+    },
+    {
+     "rank": 100,
+     "name": "github.com/mikefarah/yaml/v2",
+     "imported_by": 4
+    }
+   ]
+  },
+  {
+   "query": "yaml 1.2",
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "captured_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "limit": 100,
+   "hits_recorded": 100,
+   "hits": [
+    {
+     "rank": 1,
+     "name": "github.com/faustbrian/go-wire/v3/yamlwire",
+     "imported_by": 2
+    },
+    {
+     "rank": 2,
+     "name": "gopkg.in/yaml.v3",
+     "imported_by": 44731
+    },
+    {
+     "rank": 3,
+     "name": "github.com/yongjohnlee80/golib/parse/yaml",
+     "imported_by": 2
+    },
+    {
+     "rank": 4,
+     "name": "github.com/yaml/yamlstar-go",
+     "imported_by": 1
+    },
+    {
+     "rank": 5,
+     "name": "czechia.dev/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 6,
+     "name": "github.com/kart-io/goagent/codec/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 7,
+     "name": "github.com/ercross/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 8,
+     "name": "github.com/kittomic/cascadingconfig/format/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 9,
+     "name": "github.com/vasileknik76/tql/formats/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 10,
+     "name": "github.com/malcolmston/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 11,
+     "name": "github.com/yaml/yamlstar",
+     "imported_by": 0
+    },
+    {
+     "rank": 12,
+     "name": "github.com/J466Y/WhiteTower/test/conformance/manifest",
+     "imported_by": 0
+    },
+    {
+     "rank": 13,
+     "name": "github.com/faustbrian/golib/pkg/wire/yamlwire",
+     "imported_by": 0
+    },
+    {
+     "rank": 14,
+     "name": "github.com/go-yaml/yaml",
+     "imported_by": 1291
+    },
+    {
+     "rank": 15,
+     "name": "go.yaml.in/yaml/v2",
+     "imported_by": 175
+    },
+    {
+     "rank": 16,
+     "name": "github.com/go-faster/yaml",
+     "imported_by": 40
+    },
+    {
+     "rank": 17,
+     "name": "github.com/mrpicc0lo/yaml-go",
+     "imported_by": 0
+    },
+    {
+     "rank": 18,
+     "name": "github.com/buildkite/yaml",
+     "imported_by": 118
+    },
+    {
+     "rank": 19,
+     "name": "github.com/pivotal-golang/yaml",
+     "imported_by": 94
+    },
+    {
+     "rank": 20,
+     "name": "oneyaml.dev/go",
+     "imported_by": 0
+    },
+    {
+     "rank": 21,
+     "name": "github.com/mobiledgex/yaml/v2",
+     "imported_by": 20
+    },
+    {
+     "rank": 22,
+     "name": "gopkg.in/specgen-io/yaml.v3",
+     "imported_by": 10
+    },
+    {
+     "rank": 23,
+     "name": "github.com/sanathkr/go-yaml",
+     "imported_by": 36
+    },
+    {
+     "rank": 24,
+     "name": "github.com/jesseduffield/yaml",
+     "imported_by": 27
+    },
+    {
+     "rank": 25,
+     "name": "github.com/mergetb/yaml/v3",
+     "imported_by": 12
+    },
+    {
+     "rank": 26,
+     "name": "github.com/replicatedhq/yaml/v3",
+     "imported_by": 7
+    },
+    {
+     "rank": 27,
+     "name": "github.com/hurricanehrndz/caddy-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 28,
+     "name": "github.com/jsccast/yaml",
+     "imported_by": 14
+    },
+    {
+     "rank": 29,
+     "name": "github.com/mozilla-services/yaml",
+     "imported_by": 14
+    },
+    {
+     "rank": 30,
+     "name": "github.com/geofffranks/yaml",
+     "imported_by": 12
+    },
+    {
+     "rank": 31,
+     "name": "github.com/tsaikd/yaml",
+     "imported_by": 5
+    },
+    {
+     "rank": 32,
+     "name": "gopkg.in/laverya/yaml.v3",
+     "imported_by": 3
+    },
+    {
+     "rank": 33,
+     "name": "github.com/sensu/yaml",
+     "imported_by": 9
+    },
+    {
+     "rank": 34,
+     "name": "github.com/mikefarah/yaml/v2",
+     "imported_by": 4
+    },
+    {
+     "rank": 35,
+     "name": "github.com/cortexlabs/yaml",
+     "imported_by": 8
+    },
+    {
+     "rank": 36,
+     "name": "github.com/gigforks/yaml",
+     "imported_by": 7
+    },
+    {
+     "rank": 37,
+     "name": "github.com/vjorlikowski/yaml",
+     "imported_by": 2
+    },
+    {
+     "rank": 38,
+     "name": "github.com/setrofim/yaml",
+     "imported_by": 2
+    },
+    {
+     "rank": 39,
+     "name": "github.com/taubyte/go-seer",
+     "imported_by": 16
+    },
+    {
+     "rank": 40,
+     "name": "github.com/hairyhenderson/yaml",
+     "imported_by": 6
+    },
+    {
+     "rank": 41,
+     "name": "github.com/flanksource/yaml",
+     "imported_by": 6
+    },
+    {
+     "rank": 42,
+     "name": "github.com/advance512/yaml",
+     "imported_by": 6
+    },
+    {
+     "rank": 43,
+     "name": "github.com/xyproto/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 44,
+     "name": "github.com/kralicky/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 45,
+     "name": "github.com/davidmdm/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 46,
+     "name": "github.com/timfpark/yaml",
+     "imported_by": 4
+    },
+    {
+     "rank": 47,
+     "name": "github.com/VictorLowther/yaml",
+     "imported_by": 3
+    },
+    {
+     "rank": 48,
+     "name": "github.com/Velocidex/yaml",
+     "imported_by": 3
+    },
+    {
+     "rank": 49,
+     "name": "github.com/zrepl/yaml-config",
+     "imported_by": 3
+    },
+    {
+     "rank": 50,
+     "name": "github.com/buddhamagnet/yaml",
+     "imported_by": 3
+    },
+    {
+     "rank": 51,
+     "name": "github.com/xebialabs/yaml",
+     "imported_by": 3
+    },
+    {
+     "rank": 52,
+     "name": "github.com/Clever/yaml",
+     "imported_by": 3
+    },
+    {
+     "rank": 53,
+     "name": "github.com/Shopify/yaml",
+     "imported_by": 3
+    },
+    {
+     "rank": 54,
+     "name": "gitlab.com/phpboyscout/go/config-toml",
+     "imported_by": 1
+    },
+    {
+     "rank": 55,
+     "name": "github.com/essentialkaos/yaml/v2",
+     "imported_by": 1
+    },
+    {
+     "rank": 56,
+     "name": "github.com/kubecfg/yaml/v2",
+     "imported_by": 1
+    },
+    {
+     "rank": 57,
+     "name": "github.com/Intellection/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 58,
+     "name": "github.com/tommyknows/yaml/v2",
+     "imported_by": 1
+    },
+    {
+     "rank": 59,
+     "name": "github.com/sithembiso-mashinini/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 60,
+     "name": "github.com/evanlouie/yaml/v2",
+     "imported_by": 1
+    },
+    {
+     "rank": 61,
+     "name": "github.com/gidoichi/yaml/v2",
+     "imported_by": 1
+    },
+    {
+     "rank": 62,
+     "name": "github.com/WinnerSoftLab/yaml3",
+     "imported_by": 0
+    },
+    {
+     "rank": 63,
+     "name": "github.com/lispad/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 64,
+     "name": "github.com/tudyzhb/yaml",
+     "imported_by": 2
+    },
+    {
+     "rank": 65,
+     "name": "github.com/helmutkemper/yaml",
+     "imported_by": 2
+    },
+    {
+     "rank": 66,
+     "name": "github.com/sipt/yaml",
+     "imported_by": 2
+    },
+    {
+     "rank": 67,
+     "name": "github.com/go-gitea/yaml",
+     "imported_by": 2
+    },
+    {
+     "rank": 68,
+     "name": "github.com/superwhiskers/yaml",
+     "imported_by": 2
+    },
+    {
+     "rank": 69,
+     "name": "github.com/MengJiapeng/goyaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 70,
+     "name": "github.com/SCP002/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 71,
+     "name": "github.com/go-yml/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 72,
+     "name": "github.com/01ne/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 73,
+     "name": "github.com/permafrost-dev/go-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 74,
+     "name": "gopkg.in/joanayma/yaml.v2",
+     "imported_by": 0
+    },
+    {
+     "rank": 75,
+     "name": "github.com/putao520/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 76,
+     "name": "github.com/dgrapes/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 77,
+     "name": "github.com/ContextLogic/wish-yaml-go/v3",
+     "imported_by": 0
+    },
+    {
+     "rank": 78,
+     "name": "github.com/qingxuecc/yaml/v3",
+     "imported_by": 0
+    },
+    {
+     "rank": 79,
+     "name": "github.com/telnet2/go-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 80,
+     "name": "github.com/overjetdental/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 81,
+     "name": "gopkg.in/WhiteRaven777/yaml.v3",
+     "imported_by": 0
+    },
+    {
+     "rank": 82,
+     "name": "github.com/vbasem/yaml/v3",
+     "imported_by": 0
+    },
+    {
+     "rank": 83,
+     "name": "github.com/evijayan2/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 84,
+     "name": "github.com/damn-at/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 85,
+     "name": "github.com/humandad/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 86,
+     "name": "github.com/willabides/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 87,
+     "name": "github.com/scallister/yaml/v3",
+     "imported_by": 0
+    },
+    {
+     "rank": 88,
+     "name": "github.com/rick-kilgore/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 89,
+     "name": "github.com/rayshoo/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 90,
+     "name": "github.com/gf-third/yaml/v3",
+     "imported_by": 0
+    },
+    {
+     "rank": 91,
+     "name": "github.com/hfd94/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 92,
+     "name": "github.com/iamshivamnanda/yaml/v3",
+     "imported_by": 0
+    },
+    {
+     "rank": 93,
+     "name": "github.com/lrita/yaml/v3",
+     "imported_by": 0
+    },
+    {
+     "rank": 94,
+     "name": "github.com/secondsightsolutions/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 95,
+     "name": "github.com/polkeli/yaml/v3",
+     "imported_by": 0
+    },
+    {
+     "rank": 96,
+     "name": "github.com/andydunstall/go-humanize",
+     "imported_by": 0
+    },
+    {
+     "rank": 97,
+     "name": "github.com/lyoung-confluent/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 98,
+     "name": "gopkg.in/naturalwarren/yaml.v3",
+     "imported_by": 0
+    },
+    {
+     "rank": 99,
+     "name": "github.com/lelvisl/yaml/v3",
+     "imported_by": 0
+    },
+    {
+     "rank": 100,
+     "name": "github.com/danrubel/yaml_go",
+     "imported_by": 0
+    }
+   ]
+  },
+  {
+   "query": "yaml lexer",
+   "url": "https://pkg.go.dev/search?q=yaml%20lexer&limit=100&m=package",
+   "captured_at_utc": "2026-11-18T01:38:32.850157+00:00",
+   "limit": 100,
+   "hits_recorded": 21,
+   "hits": [
+    {
+     "rank": 1,
+     "name": "github.com/goccy/go-yaml/lexer",
+     "imported_by": 69
+    },
+    {
+     "rank": 2,
+     "name": "github.com/bingoohuang/gg/pkg/yaml/lexer",
+     "imported_by": 2
+    },
+    {
+     "rank": 3,
+     "name": "github.com/tuigoff/tuigoff/pkg/highlight",
+     "imported_by": 2
+    },
+    {
+     "rank": 4,
+     "name": "github.com/go-openapi/core/json/lexers/yaml-lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 5,
+     "name": "github.com/fredbi/core/json/benchmarks/lexers",
+     "imported_by": 0
+    },
+    {
+     "rank": 6,
+     "name": "github.com/dmlyons/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 7,
+     "name": "github.com/fe3dback/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 8,
+     "name": "github.com/coxley/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 9,
+     "name": "github.com/aixj1984/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 10,
+     "name": "github.com/korylprince/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 11,
+     "name": "go.jacobcolvin.com/niceyaml/tokens",
+     "imported_by": 0
+    },
+    {
+     "rank": 12,
+     "name": "github.com/jm-positron/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 13,
+     "name": "github.com/elioetibr/golang-yaml/pkg/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 14,
+     "name": "jacobcolvin.com/niceyaml/lexers",
+     "imported_by": 0
+    },
+    {
+     "rank": 15,
+     "name": "github.com/staspiter/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 16,
+     "name": "github.com/nobl9/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 17,
+     "name": "git.xdol.org/xdol/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 18,
+     "name": "github.com/pgeiem/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 19,
+     "name": "github.com/masenocturnal/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 20,
+     "name": "github.com/scriptory/go-yaml/lexer",
+     "imported_by": 0
+    },
+    {
+     "rank": 21,
+     "name": "github.com/go-widgets/toolkit/rougelex",
+     "imported_by": 0
+    }
+   ]
+  },
+  {
+   "query": "yaml ast",
+   "url": "https://pkg.go.dev/search?q=yaml%20ast&limit=100&m=package",
+   "captured_at_utc": "2026-11-18T01:38:43.198046+00:00",
+   "limit": 100,
+   "hits_recorded": 19,
+   "hits": [
+    {
+     "rank": 1,
+     "name": "github.com/aquaproj/aqua/v2/pkg/ast",
+     "imported_by": 1
+    },
+    {
+     "rank": 2,
+     "name": "github.com/lijiang2014/yamlast",
+     "imported_by": 1
+    },
+    {
+     "rank": 3,
+     "name": "github.com/zchee/go-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 4,
+     "name": "github.com/KSpaceer/yamly/engines/yayamls/ast",
+     "imported_by": 0
+    },
+    {
+     "rank": 5,
+     "name": "github.com/shapestone/shape-yaml/pkg/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 6,
+     "name": "github.com/infobloxopen/themis/pdp/ast/yast",
+     "imported_by": 0
+    },
+    {
+     "rank": 7,
+     "name": "github.com/andrew-grechkin/update-yaml/pkg/ast",
+     "imported_by": 0
+    },
+    {
+     "rank": 8,
+     "name": "github.com/ake-98/migrate",
+     "imported_by": 0
+    },
+    {
+     "rank": 9,
+     "name": "github.com/AndroidGoLab/ndk/tools/pkg/headerspec",
+     "imported_by": 0
+    },
+    {
+     "rank": 10,
+     "name": "github.com/lczyk/goruby/cmd/parse-dump",
+     "imported_by": 0
+    },
+    {
+     "rank": 11,
+     "name": "github.com/jbrekelmans/go-edityaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 12,
+     "name": "github.com/thenativeweb/esdm/parser",
+     "imported_by": 0
+    },
+    {
+     "rank": 13,
+     "name": "github.com/buchanae/yamlast",
+     "imported_by": 0
+    },
+    {
+     "rank": 14,
+     "name": "github.com/dimitropoulos/yaml-ast",
+     "imported_by": 0
+    },
+    {
+     "rank": 15,
+     "name": "github.com/korylprince/go-adm/schema",
+     "imported_by": 0
+    },
+    {
+     "rank": 16,
+     "name": "github.com/authplane/authserver/tools/docsgen/cmd",
+     "imported_by": 0
+    },
+    {
+     "rank": 17,
+     "name": "github.com/goccy/go-yaml/ast",
+     "imported_by": 181
+    },
+    {
+     "rank": 18,
+     "name": "sigs.k8s.io/prow/pkg/genyaml",
+     "imported_by": 4
+    },
+    {
+     "rank": 19,
+     "name": "github.com/aixj1984/go-yaml/ast",
+     "imported_by": 0
+    }
+   ]
+  },
+  {
+   "query": "yaml unmarshal",
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "captured_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "limit": 100,
+   "hits_recorded": 100,
+   "hits": [
+    {
+     "rank": 1,
+     "name": "sigs.k8s.io/yaml",
+     "imported_by": 12078
+    },
+    {
+     "rank": 2,
+     "name": "github.com/ghodss/yaml",
+     "imported_by": 19254
+    },
+    {
+     "rank": 3,
+     "name": "github.com/zclconf/go-cty-yaml",
+     "imported_by": 71
+    },
+    {
+     "rank": 4,
+     "name": "github.com/projectcalico/go-yaml-wrapper",
+     "imported_by": 91
+    },
+    {
+     "rank": 5,
+     "name": "github.com/Symantec/scotty/lib/yamlutil",
+     "imported_by": 69
+    },
+    {
+     "rank": 6,
+     "name": "github.com/sanathkr/yaml",
+     "imported_by": 54
+    },
+    {
+     "rank": 7,
+     "name": "github.com/rancher/wrangler/v3/pkg/yaml",
+     "imported_by": 20
+    },
+    {
+     "rank": 8,
+     "name": "github.com/knadh/koanf/maps",
+     "imported_by": 105
+    },
+    {
+     "rank": 9,
+     "name": "buf.build/go/protoyaml",
+     "imported_by": 21
+    },
+    {
+     "rank": 10,
+     "name": "github.com/lyraproj/dgoyaml/yaml",
+     "imported_by": 7
+    },
+    {
+     "rank": 11,
+     "name": "github.com/wangyysde/yaml",
+     "imported_by": 6
+    },
+    {
+     "rank": 12,
+     "name": "github.com/invopop/yaml",
+     "imported_by": 112
+    },
+    {
+     "rank": 13,
+     "name": "gopkg.in/ghodss/yaml.v1",
+     "imported_by": 8
+    },
+    {
+     "rank": 14,
+     "name": "github.com/sebidude/configparser",
+     "imported_by": 4
+    },
+    {
+     "rank": 15,
+     "name": "github.com/antihax/goesi/notification",
+     "imported_by": 2
+    },
+    {
+     "rank": 16,
+     "name": "github.com/knadh/koanf-test/maps",
+     "imported_by": 6
+    },
+    {
+     "rank": 17,
+     "name": "github.com/onemoreteam/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 18,
+     "name": "github.com/gozelle/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 19,
+     "name": "github.com/csmith/config",
+     "imported_by": 1
+    },
+    {
+     "rank": 20,
+     "name": "github.com/sapcc/go-bits/regexpext",
+     "imported_by": 1
+    },
+    {
+     "rank": 21,
+     "name": "github.com/moznion/go-yaml-nillable",
+     "imported_by": 1
+    },
+    {
+     "rank": 22,
+     "name": "github.com/aquasecurity/yaml",
+     "imported_by": 2
+    },
+    {
+     "rank": 23,
+     "name": "github.com/oasdiff/yaml",
+     "imported_by": 16
+    },
+    {
+     "rank": 24,
+     "name": "github.com/phenixrizen/koanf/maps",
+     "imported_by": 4
+    },
+    {
+     "rank": 25,
+     "name": "github.com/haraldrudell/parl/yamlo",
+     "imported_by": 1
+    },
+    {
+     "rank": 26,
+     "name": "github.com/rockbears/yaml",
+     "imported_by": 15
+    },
+    {
+     "rank": 27,
+     "name": "github.com/wryun/yaml-1",
+     "imported_by": 1
+    },
+    {
+     "rank": 28,
+     "name": "github.com/AndiBrunner/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 29,
+     "name": "github.com/projectcalico/yaml",
+     "imported_by": 1
+    },
+    {
+     "rank": 30,
+     "name": "github.com/teler-sh/teler-waf/option",
+     "imported_by": 2
+    },
+    {
+     "rank": 31,
+     "name": "czechia.dev/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 32,
+     "name": "github.com/kubernot/wrangler/pkg/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 33,
+     "name": "github.com/mrpicc0lo/yaml-go",
+     "imported_by": 0
+    },
+    {
+     "rank": 34,
+     "name": "github.com/idelchi/godyl/pkg/unmarshal",
+     "imported_by": 0
+    },
+    {
+     "rank": 35,
+     "name": "shoecat.cz/yaml/v2",
+     "imported_by": 0
+    },
+    {
+     "rank": 36,
+     "name": "github.com/scryinfo/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 37,
+     "name": "github.com/nholuongut/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 38,
+     "name": "github.com/karlschriek/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 39,
+     "name": "github.com/graveland/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 40,
+     "name": "github.com/sithembiso-mashinini/kubernetes-sigs-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 41,
+     "name": "github.com/SekiBetu/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 42,
+     "name": "github.com/Intellection/kubernetes-sigs-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 43,
+     "name": "github.com/devantler-tech/ksail-go/pkg/io/marshaller/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 44,
+     "name": "github.com/henriquemps/gyaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 45,
+     "name": "github.com/abcxyz/abc/templates/model/header",
+     "imported_by": 0
+    },
+    {
+     "rank": 46,
+     "name": "github.com/dvormagic/gsy/secretstring",
+     "imported_by": 0
+    },
+    {
+     "rank": 47,
+     "name": "github.com/idelchi/aura/pkg/yamlutil",
+     "imported_by": 0
+    },
+    {
+     "rank": 48,
+     "name": "github.com/Danny5487401/go_package_example/21_viper/04_yaml/01_unmarshal",
+     "imported_by": 0
+    },
+    {
+     "rank": 49,
+     "name": "github.com/kernel-panic-team/goesi/notification",
+     "imported_by": 0
+    },
+    {
+     "rank": 50,
+     "name": "github.com/ptdave20/goesi/notification",
+     "imported_by": 0
+    },
+    {
+     "rank": 51,
+     "name": "github.com/L1nch-lab/goesi/notification",
+     "imported_by": 0
+    },
+    {
+     "rank": 52,
+     "name": "github.com/MrLeeZ/goesi/notification",
+     "imported_by": 0
+    },
+    {
+     "rank": 53,
+     "name": "github.com/conformize/conformize/serialization/unmarshal/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 54,
+     "name": "github.com/siderolabs/talos/pkg/machinery/yamlutils",
+     "imported_by": 0
+    },
+    {
+     "rank": 55,
+     "name": "gitlab.com/wiggins.jonathan/plutus/ingest",
+     "imported_by": 0
+    },
+    {
+     "rank": 56,
+     "name": "github.com/wiggins-jonathan/plutus/ingest",
+     "imported_by": 0
+    },
+    {
+     "rank": 57,
+     "name": "github.com/zneix/yec",
+     "imported_by": 0
+    },
+    {
+     "rank": 58,
+     "name": "github.com/vine-io/vine/util/yamlpb",
+     "imported_by": 0
+    },
+    {
+     "rank": 59,
+     "name": "github.com/gkstretton/dark/services/goo/util/protoyaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 60,
+     "name": "github.com/cloud-foundations/scotty/lib/yamlutil",
+     "imported_by": 0
+    },
+    {
+     "rank": 61,
+     "name": "github.com/Cloud-Foundations/scotty/lib/yamlutil",
+     "imported_by": 0
+    },
+    {
+     "rank": 62,
+     "name": "github.com/rgooch/scotty/lib/yamlutil",
+     "imported_by": 0
+    },
+    {
+     "rank": 63,
+     "name": "github.com/symantec/scotty/lib/yamlutil",
+     "imported_by": 0
+    },
+    {
+     "rank": 64,
+     "name": "github.com/keep94/scotty/lib/yamlutil",
+     "imported_by": 0
+    },
+    {
+     "rank": 65,
+     "name": "github.com/digitalrebar/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 66,
+     "name": "github.com/tanner-bruce/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 67,
+     "name": "github.com/gsoc2/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 68,
+     "name": "github.com/andibrunner/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 69,
+     "name": "github.com/upcload/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 70,
+     "name": "github.com/diamondburned/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 71,
+     "name": "github.heygears.com/ghodss/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 72,
+     "name": "git.k2software.cn/go/k8s-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 73,
+     "name": "git.k2software.com.cn/go/k8s-yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 74,
+     "name": "github.com/gracig/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 75,
+     "name": "github.com/grantbow/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 76,
+     "name": "github.com/Ghodss/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 77,
+     "name": "github.com/silasdavis/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 78,
+     "name": "github.com/scalock/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 79,
+     "name": "github.com/mbilski/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 80,
+     "name": "github.com/suhasanand/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 81,
+     "name": "github.com/1533-systems/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 82,
+     "name": "github.com/bradfitz/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 83,
+     "name": "github.com/xingxing/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 84,
+     "name": "github.com/ghodss/yAML",
+     "imported_by": 0
+    },
+    {
+     "rank": 85,
+     "name": "github.com/glycerine/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 86,
+     "name": "github.com/sourcegraph/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 87,
+     "name": "github.com/intrising/yaml-json",
+     "imported_by": 0
+    },
+    {
+     "rank": 88,
+     "name": "github.com/Intrising/yaml-json",
+     "imported_by": 0
+    },
+    {
+     "rank": 89,
+     "name": "github.com/boazy/yaml-thru-json",
+     "imported_by": 0
+    },
+    {
+     "rank": 90,
+     "name": "github.com/zzsnn/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 91,
+     "name": "github.com/yogoloth/yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 92,
+     "name": "github.com/anthonydambrosio/transmog",
+     "imported_by": 0
+    },
+    {
+     "rank": 93,
+     "name": "github.com/mattfarina/yamlbench",
+     "imported_by": 0
+    },
+    {
+     "rank": 94,
+     "name": "github.com/Ghodss/Yaml",
+     "imported_by": 0
+    },
+    {
+     "rank": 95,
+     "name": "github.com/wryun/Yaml-1",
+     "imported_by": 0
+    },
+    {
+     "rank": 96,
+     "name": "gopkg.in/flant/ghodss-yaml.v1",
+     "imported_by": 0
+    },
+    {
+     "rank": 97,
+     "name": "github.com/yaowenjun1314/ymal",
+     "imported_by": 0
+    },
+    {
+     "rank": 98,
+     "name": "github.com/mtibben/yamljsonmap",
+     "imported_by": 0
+    },
+    {
+     "rank": 99,
+     "name": "github.com/icza/dyno",
+     "imported_by": 127
+    },
+    {
+     "rank": 100,
+     "name": "github.com/golanghelper/conf-loader",
+     "imported_by": 0
+    }
+   ]
+  }
+ ],
+ "hit_counts": {
+  "recorded": 440,
+  "unique": 412,
+  "new": 378,
+  "new_positive_metric": 100,
+  "new_zero_metric": 278
+ },
+ "selected": {
+  "github.com/go-rotini/yaml": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 11,
+   "project": "projects/yaml/go/github_com_go_rotini_yaml"
+  },
+  "github.com/yongjohnlee80/golib/parse/yaml": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 3,
+   "project": "projects/yaml/go/github_com_yongjohnlee80_golib_parse_yaml"
+  }
+ },
+ "metrics": {
+  "go.yaml.in/yaml/v2": {
+   "value": 175,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 15
+  },
+  "github.com/icza/dyno": {
+   "value": 127,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 99
+  },
+  "gitlab.com/gitlab-org/gitlab-runner/helpers/gitlab_ci_yaml_parser": {
+   "value": 32,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 6
+  },
+  "github.com/turbinelabs/codec": {
+   "value": 20,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 6
+  },
+  "github.com/dipdup-io/go-lib/config": {
+   "value": 14,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 7
+  },
+  "github.com/geofffranks/yaml": {
+   "value": 12,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 96
+  },
+  "github.com/sensu/yaml": {
+   "value": 9,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 99
+  },
+  "github.com/cortexlabs/yaml": {
+   "value": 8,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 35
+  },
+  "gopkg.in/ghodss/yaml.v1": {
+   "value": 8,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 13
+  },
+  "github.com/gigforks/yaml": {
+   "value": 7,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 36
+  },
+  "github.com/lyraproj/dgoyaml/yaml": {
+   "value": 7,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 10
+  },
+  "github.com/advance512/yaml": {
+   "value": 6,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 42
+  },
+  "github.com/flanksource/yaml": {
+   "value": 6,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 41
+  },
+  "github.com/hairyhenderson/yaml": {
+   "value": 6,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 40
+  },
+  "github.com/knadh/koanf-test/maps": {
+   "value": 6,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 16
+  },
+  "github.com/wangyysde/yaml": {
+   "value": 6,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 11
+  },
+  "github.com/adjust/go-gypsy/yaml": {
+   "value": 5,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 12
+  },
+  "github.com/buildkite/go-pipeline/ordered": {
+   "value": 5,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 7
+  },
+  "github.com/james4k/fmatter": {
+   "value": 5,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 10
+  },
+  "github.com/tsaikd/yaml": {
+   "value": 5,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 98
+  },
+  "cloudeng.io/cmdutil/cmdtypes": {
+   "value": 4,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 8
+  },
+  "github.com/mikefarah/yaml/v2": {
+   "value": 4,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 100
+  },
+  "github.com/peterbourgon/ff/v4/ffyaml": {
+   "value": 4,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 5
+  },
+  "github.com/phenixrizen/koanf/maps": {
+   "value": 4,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 24
+  },
+  "github.com/sebidude/configparser": {
+   "value": 4,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 14
+  },
+  "github.com/timfpark/yaml": {
+   "value": 4,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 46
+  },
+  "sigs.k8s.io/prow/pkg/genyaml": {
+   "value": 4,
+   "url": "https://pkg.go.dev/search?q=yaml%20ast&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:43.198046+00:00",
+   "query": "yaml ast",
+   "rank": 18
+  },
+  "github.com/Clever/yaml": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 52
+  },
+  "github.com/Shopify/yaml": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 53
+  },
+  "github.com/Velocidex/yaml": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 48
+  },
+  "github.com/VictorLowther/yaml": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 47
+  },
+  "github.com/buddhamagnet/yaml": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 50
+  },
+  "github.com/goschtalt/yaml-decoder": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 9
+  },
+  "github.com/leopardslab/Dunner/pkg/config": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 15
+  },
+  "github.com/oblq/swap": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 11
+  },
+  "github.com/romshark/yamagiconf": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 13
+  },
+  "github.com/xebialabs/yaml": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 51
+  },
+  "github.com/zrepl/yaml-config": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 49
+  },
+  "gopkg.in/laverya/yaml.v3": {
+   "value": 3,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 32
+  },
+  "github.com/antihax/goesi/notification": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 15
+  },
+  "github.com/aquasecurity/yaml": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 22
+  },
+  "github.com/bingoohuang/gg/pkg/yaml/lexer": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%20lexer&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:32.850157+00:00",
+   "query": "yaml lexer",
+   "rank": 2
+  },
+  "github.com/faustbrian/go-wire/v3/yamlwire": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 5
+  },
+  "github.com/go-gitea/yaml": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 67
+  },
+  "github.com/gofuego/fuego/parsers/markdown": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 22
+  },
+  "github.com/helmutkemper/yaml": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 65
+  },
+  "github.com/itchyny/go-yaml": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 12
+  },
+  "github.com/oblq/sprbox": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 14
+  },
+  "github.com/setrofim/yaml": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 38
+  },
+  "github.com/sipt/yaml": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 66
+  },
+  "github.com/superwhiskers/yaml": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 68
+  },
+  "github.com/teler-sh/teler-waf/option": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 30
+  },
+  "github.com/tudyzhb/yaml": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 64
+  },
+  "github.com/tuigoff/tuigoff/pkg/highlight": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%20lexer&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:32.850157+00:00",
+   "query": "yaml lexer",
+   "rank": 3
+  },
+  "github.com/vjorlikowski/yaml": {
+   "value": 2,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 37
+  },
+  "bitbucket.org/zombiezen/goray/yaml/parser": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 31
+  },
+  "github.com/AndiBrunner/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 28
+  },
+  "github.com/Intellection/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 57
+  },
+  "github.com/an-repository/config/parsers/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 19
+  },
+  "github.com/aquaproj/aqua/v2/pkg/ast": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20ast&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:43.198046+00:00",
+   "query": "yaml ast",
+   "rank": 1
+  },
+  "github.com/bingoohuang/gg/pkg/yaml/parser": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 21
+  },
+  "github.com/crispuscrew/zinc/common/domain/schema/inherit": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 16
+  },
+  "github.com/csmith/config": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 19
+  },
+  "github.com/davidmdm/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 45
+  },
+  "github.com/erh/go-gypsy/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 30
+  },
+  "github.com/essentialkaos/yaml/v2": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 55
+  },
+  "github.com/evanlouie/yaml/v2": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 60
+  },
+  "github.com/gidoichi/yaml/v2": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 61
+  },
+  "github.com/gozelle/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 18
+  },
+  "github.com/haraldrudell/parl/yamlo": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 25
+  },
+  "github.com/jtaekema/go-gypsy/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 28
+  },
+  "github.com/juanvillacortac/ditto/pkg/parser/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 23
+  },
+  "github.com/kubecfg/yaml/v2": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 56
+  },
+  "github.com/lijiang2014/yamlast": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 25
+  },
+  "github.com/moznion/go-yaml-nillable": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 21
+  },
+  "github.com/onemoreteam/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 17
+  },
+  "github.com/open-policy-agent/conftest/parser/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 20
+  },
+  "github.com/pingdomserver/go-gypsy/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 29
+  },
+  "github.com/pjdufour/go-gypsy/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 26
+  },
+  "github.com/projectcalico/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 29
+  },
+  "github.com/sapcc/go-bits/regexpext": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 20
+  },
+  "github.com/schmidtw/goschtalt/extensions/decoders/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 15
+  },
+  "github.com/scottkiss/go-gypsy/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 27
+  },
+  "github.com/sithembiso-mashinini/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 59
+  },
+  "github.com/starpkg/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 13
+  },
+  "github.com/supakeen/yamlplus": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 17
+  },
+  "github.com/tommyknows/yaml/v2": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 58
+  },
+  "github.com/uber/cadence/common/config/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20decoder&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:10.951173+00:00",
+   "query": "yaml decoder",
+   "rank": 14
+  },
+  "github.com/wryun/yaml-1": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20unmarshal&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:53.929268+00:00",
+   "query": "yaml unmarshal",
+   "rank": 27
+  },
+  "github.com/xyproto/yaml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 43
+  },
+  "github.com/yaml/yamlstar-go": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 4
+  },
+  "github.com/yamlstar/yamlstar-plugin-parser-reference/parser": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 16
+  },
+  "github.com/yixy/fmatter": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 18
+  },
+  "gitlab.com/gitlab-org/gitlab-ci-multi-runner/helpers/gitlab_ci_yaml_parser": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%20parser&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:37:59.407485+00:00",
+   "query": "yaml parser",
+   "rank": 32
+  },
+  "gitlab.com/phpboyscout/go/config-toml": {
+   "value": 1,
+   "url": "https://pkg.go.dev/search?q=yaml%201.2&limit=100&m=package",
+   "source": "search snippet",
+   "observed_at_utc": "2026-11-18T01:38:22.594581+00:00",
+   "query": "yaml 1.2",
+   "rank": 54
+  }
+ },
+ "source_overlap": [
+  {
+   "module": "github.com/adjust/go-gypsy",
+   "package": "github.com/adjust/go-gypsy/yaml",
+   "version": "v0.0.0-20230814113021-31311805923a",
+   "module_sum": "h1:maG7xvzq71XC3ATST9ShqAzrfMFnv85/jHjA9+Qj/0s=",
+   "reference": "github.com/kylelemons/go-gypsy/yaml@v1.0.0",
+   "distinct_non_test_lines": 311,
+   "reference_distinct_non_test_lines": 334,
+   "shared_distinct_lines": 299,
+   "share": 0.961,
+   "kind": "go-gypsy fork"
+  },
+  {
+   "module": "github.com/pjdufour/go-gypsy",
+   "package": "github.com/pjdufour/go-gypsy/yaml",
+   "version": "v0.0.0-20170109033110-249a7d8469d6",
+   "module_sum": "h1:gfgk+Npfo/fjnpNeRTlVZlZ2d61pNCW+nvm0gPbZAA0=",
+   "reference": "github.com/kylelemons/go-gypsy/yaml@v1.0.0",
+   "distinct_non_test_lines": 337,
+   "reference_distinct_non_test_lines": 334,
+   "shared_distinct_lines": 333,
+   "share": 0.988,
+   "kind": "go-gypsy fork"
+  },
+  {
+   "module": "github.com/scottkiss/go-gypsy",
+   "package": "github.com/scottkiss/go-gypsy/yaml",
+   "version": "v0.0.0-20130730174344-0ddb27ce74ad",
+   "module_sum": "h1:ZPffXPj+m5vY0he2CLAtPntv14pWggPsTtyu+NdBzoY=",
+   "reference": "github.com/kylelemons/go-gypsy/yaml@v1.0.0",
+   "distinct_non_test_lines": 335,
+   "reference_distinct_non_test_lines": 334,
+   "shared_distinct_lines": 334,
+   "share": 0.997,
+   "kind": "go-gypsy fork"
+  },
+  {
+   "module": "github.com/jtaekema/go-gypsy",
+   "package": "github.com/jtaekema/go-gypsy/yaml",
+   "version": "v0.0.0-20131007033705-ecdb3f751f16",
+   "module_sum": "h1:XdgcDpAqiuCSh3zCImds7Kizh+q7Y0HO3llxWLglVZw=",
+   "reference": "github.com/kylelemons/go-gypsy/yaml@v1.0.0",
+   "distinct_non_test_lines": 371,
+   "reference_distinct_non_test_lines": 334,
+   "shared_distinct_lines": 322,
+   "share": 0.868,
+   "kind": "go-gypsy fork"
+  },
+  {
+   "module": "github.com/pingdomserver/go-gypsy",
+   "package": "github.com/pingdomserver/go-gypsy/yaml",
+   "version": "v0.0.0-20141210191237-42fc2c7ee9b8",
+   "module_sum": "h1:4xQVZgM0g1u7q3I60iq1bTCXXqv/i//muZfhbFMEZoE=",
+   "reference": "github.com/kylelemons/go-gypsy/yaml@v1.0.0",
+   "distinct_non_test_lines": 335,
+   "reference_distinct_non_test_lines": 334,
+   "shared_distinct_lines": 334,
+   "share": 0.997,
+   "kind": "go-gypsy fork"
+  },
+  {
+   "module": "github.com/erh/go-gypsy",
+   "package": "github.com/erh/go-gypsy/yaml",
+   "version": "v0.0.0-20130315034859-9505fa93c871",
+   "module_sum": "h1:YoSDfp7vpfUZWUr4hS9BFFEuXm6ecmwvHbxzoyW59/Q=",
+   "reference": "github.com/kylelemons/go-gypsy/yaml@v1.0.0",
+   "distinct_non_test_lines": 336,
+   "reference_distinct_non_test_lines": 334,
+   "shared_distinct_lines": 324,
+   "share": 0.964,
+   "kind": "go-gypsy fork"
+  },
+  {
+   "module": "github.com/geofffranks/yaml",
+   "version": "v0.0.0-20161117152608-9f2fe4b6f295",
+   "module_sum": "h1:CxigGHNaNtLTrnMveo9CjJjgXTuZpbLvuOvY/+c1v8g=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3027,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 2872,
+   "share": 0.949,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/tsaikd/yaml",
+   "version": "v0.0.0-20211113074828-0ecf20ee031c",
+   "module_sum": "h1:wlwtgWy0wwgZPH4ZQoxII8kPvdad8riISemqvzRmZvg=",
+   "go_mod_first_line": "module github.com/tsaikd/yaml",
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3205,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3130,
+   "share": 0.977,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/sensu/yaml",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:czp9SVrnke+9BT9YG8L0O2ZVPY5z/gFQqOqkWeock+4=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/mikefarah/yaml/v2",
+   "version": "v2.4.0",
+   "module_sum": "h1:eYqfooY0BnvKTJxr7+ABJs13n3dg9n347GScDaU2Lww=",
+   "go_mod_first_line": "module \"github.com/mikefarah/yaml/v2\"",
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3149,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3127,
+   "share": 0.993,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "gopkg.in/laverya/yaml.v3",
+   "version": "v3.0.0-beta5",
+   "module_sum": "h1:aj2CWA/LBANwygIs4Kp6BAMVa8eiOyScfZLwnSismws=",
+   "go_mod_first_line": "module gopkg.in/laverya/yaml.v3",
+   "license_files": [
+    "LICENSE",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v3@v3.0.1",
+   "distinct_non_test_lines": 3670,
+   "reference_distinct_non_test_lines": 3718,
+   "shared_distinct_lines": 3587,
+   "share": 0.977,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/cortexlabs/yaml",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:P6MR8e+whkb1c5N4toKQEgmh0wOnX0yOfIZxtG4CGqQ=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/gigforks/yaml",
+   "version": "v0.0.0-20160510064715-3396035bfe07",
+   "module_sum": "h1:YIlUaVcCYrJFoPwl/BSFClF5hFaU3pzsqJTxCODSadI=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3052,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 2873,
+   "share": 0.941,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/vjorlikowski/yaml",
+   "version": "v0.1.0",
+   "module_sum": "h1:/qgLANk+9anrRPuaqvY9f17xwKOrGLMwtCFe9NalLgg=",
+   "go_mod_first_line": "module github.com/vjorlikowski/yaml",
+   "license_files": [
+    "LICENSE",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v3@v3.0.1",
+   "distinct_non_test_lines": 3725,
+   "reference_distinct_non_test_lines": 3718,
+   "shared_distinct_lines": 3717,
+   "share": 0.998,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/setrofim/yaml",
+   "version": "v0.0.0-20240711085607-eeec3325703e",
+   "module_sum": "h1:X8qV7GLs8by5cpxASGUaRX9OjU82PR6OXutS5L1znwY=",
+   "go_mod_first_line": "module \"gopkg.in/yaml.v3\"",
+   "license_files": [
+    "LICENSE",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v3@v3.0.1",
+   "distinct_non_test_lines": 3718,
+   "reference_distinct_non_test_lines": 3718,
+   "shared_distinct_lines": 3717,
+   "share": 1.0,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/hairyhenderson/yaml",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:7VxcV0eaG+8Du4HvuOBrhz2f2D3Q2Q8l3Z+Nye/yA64=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/flanksource/yaml",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:/0ff1FEJ94yBnB5HnA0MfvSUPiqtPLbjhEJb7ul9ZAk=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/advance512/yaml",
+   "version": "v0.0.0-20141213031416-e401b2b02685",
+   "module_sum": "h1:E3sodk5n6oc2m4jArEWS10WlSIfGrEFfUpe6oY9FHWc=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3022,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 2818,
+   "share": 0.932,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/xyproto/yaml",
+   "version": "v1.2.0",
+   "module_sum": "h1:Afx3sN2rxLuGCTb9fPFsIWHyYrrOEufyQfUc3MV5z1M=",
+   "go_mod_first_line": "module github.com/xyproto/yaml",
+   "license_files": [
+    "LICENSE",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 14,
+   "reference": "gopkg.in/yaml.v3@v3.0.1",
+   "distinct_non_test_lines": 3736,
+   "reference_distinct_non_test_lines": 3718,
+   "shared_distinct_lines": 3713,
+   "share": 0.994,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/davidmdm/yaml",
+   "version": "v0.0.1",
+   "module_sum": "h1:ZGMFoyT8nWdvaVtY7gVcDj69+Teipo7OXqCGOOVX+vU=",
+   "go_mod_first_line": "module github.com/davidmdm/yaml",
+   "license_files": [
+    "LICENSE",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v3@v3.0.1",
+   "distinct_non_test_lines": 3723,
+   "reference_distinct_non_test_lines": 3718,
+   "shared_distinct_lines": 3710,
+   "share": 0.997,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/timfpark/yaml",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:FXUnmnOKA6R+rIep380FiAXNBZIjh+DteiACPDBrdvk=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/VictorLowther/yaml",
+   "version": "v0.0.0-20150624102902-7ad95dd0798a",
+   "module_sum": "h1:uiTydrt9uavKbpPB9Oy6BAdC6gF/OCyFNiNeoilSBJ8=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3023,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 2864,
+   "share": 0.947,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/Velocidex/yaml",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:XtpJSzJ95+UbheJ5ZwHZOUH8sHhYpypGaL3zmaL2klc=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/zrepl/yaml-config",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:YxCdeAQVrKf2GrYG0g5s+6LBZi5wAr7gB5+YFslo9Y8=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/buddhamagnet/yaml",
+   "version": "v0.0.0-20150805165337-8e72a68a3483",
+   "module_sum": "h1:Xt+DsJo7PQ0heFmUODJCjTyla9z6Um8UPYwHjsaoZS0=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3022,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 2818,
+   "share": 0.932,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/xebialabs/yaml",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:lm5o2BiziTT0CUgKp2+53nAC8gfPV4hGM3YpQWt8L2Y=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/Clever/yaml",
+   "version": "v0.0.0-20251203004140-ddd1ab933d1f",
+   "module_sum": "h1:cU9Ijjsw7Twu7YbjpGGRKQe9rNtqUDKbLx2YDWmAj9s=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3027,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 2873,
+   "share": 0.949,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/Shopify/yaml",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:Y7Wj6eQo5Byeaxb2M9FiPdKBQ3ooLsRIEmUZMMxCI8g=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/essentialkaos/yaml/v2",
+   "version": "v2.4.1",
+   "module_sum": "h1:smhmufQ6t+QYu1k3/rUPQ35qf3ymWoRUaQEOiBuTrIg=",
+   "go_mod_first_line": "module github.com/essentialkaos/yaml/v2",
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3200,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3200,
+   "share": 1.0,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/kubecfg/yaml/v2",
+   "version": "v2.4.2",
+   "module_sum": "h1:eyCOIzzAX1FEf9lcDOsIvUX+oBVm9bHlg9vVHhBCEVY=",
+   "go_mod_first_line": "module github.com/kubecfg/yaml/v2",
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3204,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3200,
+   "share": 0.999,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/Intellection/yaml",
+   "version": "v1.0.1",
+   "module_sum": "h1:2dajju3vJX8jYdlnSqU3H+jeVzuKCO7YONZ7Q3Lzxrg=",
+   "go_mod_first_line": "module github.com/Intellection/yaml",
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3203,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3200,
+   "share": 0.999,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/tommyknows/yaml/v2",
+   "version": "v2.3.2",
+   "module_sum": "h1:sR5U08XNKKp0GE3SY3jj4TUMb8ZsrVdWN1IidtVtVVc=",
+   "go_mod_first_line": "module \"github.com/tommyknows/yaml/v2\"",
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3149,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3127,
+   "share": 0.993,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/sithembiso-mashinini/yaml",
+   "version": "v1.0.1",
+   "module_sum": "h1:qqERyMKCBxKhgwxxvpOJIFN98ZY8GcVOpnI+gBy1vDg=",
+   "go_mod_first_line": "module github.com/sithembiso-mashinini/yaml",
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3200,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3199,
+   "share": 1.0,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/evanlouie/yaml/v2",
+   "version": "v2.2.9",
+   "module_sum": "h1:xxcVGHLHOk/IFVJCHxWQxYjrLwkaSuIcLCDTCtP5Tus=",
+   "go_mod_first_line": "module github.com/evanlouie/yaml/v2",
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3196,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3195,
+   "share": 1.0,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/gidoichi/yaml/v2",
+   "version": "v2.5.1",
+   "module_sum": "h1:yuSZ7oHGWVD9bzHvmXjwcQC32wpitusC9lLtieExZHU=",
+   "go_mod_first_line": "module github.com/gidoichi/yaml/v2",
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3244,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3200,
+   "share": 0.986,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/tudyzhb/yaml",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:fk+ZqxNHesMErGCOAhKQkEZUUwk6Ky4AvGP13hvGWeI=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/helmutkemper/yaml",
+   "version": "v0.0.0-20170208141851-a3f3340b5840",
+   "module_sum": "h1:g1aJPEP9KonKxTYdRUGwAcZbAikUfa5R0gtZMy30jeQ=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3029,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 2874,
+   "share": 0.949,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/sipt/yaml",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:9gMyHKKX5nAPPl6K48nROwxUh/5t69pOhfwwySxeVk0=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/go-gitea/yaml",
+   "version": "v0.0.0-20170812160011-eb3733d160e7",
+   "module_sum": "h1:/FEVbfrJ50yBk73Lyq1oCZ4VaCc0g1xd9xLHjz+Znf8=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3038,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 2892,
+   "share": 0.952,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/superwhiskers/yaml",
+   "version": "v2.1.0+incompatible",
+   "module_sum": "h1:6KD3QOK66pEujIWSGtThHOKTayP+rYzgZJ7xKYYed1g=",
+   "go_mod_first_line": null,
+   "license_files": [
+    "LICENSE",
+    "LICENSE.libyaml",
+    "NOTICE"
+   ],
+   "top_level_non_test_go_files": 13,
+   "reference": "gopkg.in/yaml.v2@v2.4.0",
+   "distinct_non_test_lines": 3133,
+   "reference_distinct_non_test_lines": 3200,
+   "shared_distinct_lines": 3102,
+   "share": 0.99,
+   "kind": "go-yaml fork"
+  },
+  {
+   "module": "github.com/wangyysde/yaml",
+   "version": "v1.5.0",
+   "module_sum": "h1:HzSSgQrde9qVTfFpz/7q5NDh+/6G46r6UTV5kgxn/OU=",
+   "imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "reference": "github.com/ghodss/yaml@v1.0.0",
+   "distinct_non_test_lines": 378,
+   "shared_distinct_lines": 328,
+   "share": 0.868,
+   "files": [
+    "fields.go",
+    "yaml.go",
+    "yaml_go110.go",
+    "yaml_go110_test.go",
+    "yaml_test.go"
+   ],
+   "kind": "ghodss/yaml fork"
+  },
+  {
+   "module": "gopkg.in/ghodss/yaml.v1",
+   "version": "v1.0.0",
+   "module_sum": "h1:JlY4R6oVz+ZSvcDhVfNQ/k/8Xo6yb2s1PBhslPZPX4c=",
+   "imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "reference": "github.com/ghodss/yaml@v1.0.0",
+   "distinct_non_test_lines": 335,
+   "shared_distinct_lines": 335,
+   "share": 1.0,
+   "files": [
+    "fields.go",
+    "yaml.go",
+    "yaml_test.go"
+   ],
+   "kind": "ghodss/yaml fork"
+  },
+  {
+   "module": "github.com/onemoreteam/yaml",
+   "version": "v1.0.2",
+   "module_sum": "h1:xID6oy1u8ncnpU12BzqzGIoTychZ2fQjZFBo4cL3BtQ=",
+   "imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "reference": "github.com/ghodss/yaml@v1.0.0",
+   "distinct_non_test_lines": 354,
+   "shared_distinct_lines": 329,
+   "share": 0.929,
+   "files": [
+    "fields.go",
+    "yaml.go",
+    "yaml_go110.go",
+    "yaml_go110_test.go",
+    "yaml_test.go"
+   ],
+   "kind": "ghodss/yaml fork"
+  },
+  {
+   "module": "github.com/gozelle/yaml",
+   "version": "v0.0.0-20230127161149-50ad9e131615",
+   "module_sum": "h1:3K+DRahbfKjbVTfUjyENvuGfrZ+TES0ttWjdpwN6WEU=",
+   "imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "reference": "github.com/ghodss/yaml@v1.0.0",
+   "distinct_non_test_lines": 354,
+   "shared_distinct_lines": 329,
+   "share": 0.929,
+   "files": [
+    "fields.go",
+    "yaml.go",
+    "yaml_go110.go",
+    "yaml_go110_test.go",
+    "yaml_test.go"
+   ],
+   "kind": "ghodss/yaml fork"
+  },
+  {
+   "module": "github.com/aquasecurity/yaml",
+   "version": "v0.0.0-20150909031657-73d445a93680",
+   "module_sum": "h1:r544bZoLby0h9PQx82KZkU06PZVWzwS/K2wMnZknNq8=",
+   "imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "reference": "github.com/ghodss/yaml@v1.0.0",
+   "distinct_non_test_lines": 333,
+   "shared_distinct_lines": 331,
+   "share": 0.994,
+   "files": [
+    "fields.go",
+    "yaml.go",
+    "yaml_test.go"
+   ],
+   "kind": "ghodss/yaml fork"
+  },
+  {
+   "module": "github.com/wryun/yaml-1",
+   "version": "v1.0.0",
+   "module_sum": "h1:7OqUxpwY2oY5Wh/b3xCWQc5XWSAhHDSSA9S/YB313yI=",
+   "imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "reference": "github.com/ghodss/yaml@v1.0.0",
+   "distinct_non_test_lines": 335,
+   "shared_distinct_lines": 335,
+   "share": 1.0,
+   "files": [
+    "fields.go",
+    "yaml.go",
+    "yaml_test.go"
+   ],
+   "kind": "ghodss/yaml fork"
+  },
+  {
+   "module": "github.com/AndiBrunner/yaml",
+   "version": "v1.0.0",
+   "module_sum": "h1:JqdTtzW6sB8AJMIi0l73gSHW3G5Xes1LVeOntqmGUTo=",
+   "imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "reference": "github.com/ghodss/yaml@v1.0.0",
+   "distinct_non_test_lines": 335,
+   "shared_distinct_lines": 335,
+   "share": 1.0,
+   "files": [
+    "fields.go",
+    "yaml.go",
+    "yaml_test.go"
+   ],
+   "kind": "ghodss/yaml fork"
+  },
+  {
+   "module": "github.com/projectcalico/yaml",
+   "version": "v0.0.0-20191112210931-090425220c54",
+   "module_sum": "h1:7fkfk2hVUiVzl1v3KqlN0VzzAVobNP/34U5GU4kd0Hc=",
+   "imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "reference": "github.com/ghodss/yaml@v1.0.0",
+   "distinct_non_test_lines": 336,
+   "shared_distinct_lines": 328,
+   "share": 0.976,
+   "files": [
+    "fields.go",
+    "yaml.go",
+    "yaml_test.go"
+   ],
+   "kind": "ghodss/yaml fork"
+  }
+ ],
+ "probes": {
+  "github.com/yamlstar/yamlstar-plugin-parser-reference/parser": {
+   "version": "v0.2.6",
+   "module_sum": "h1:GVwbB6hfBBhWO+B3SnpgMcKCjWg403YIyvt2uixVJDc=",
+   "api": "parser.Parse([]byte) ([]parser.Event, error)",
+   "runtime": "generated Go (Glojure AOT) of yaml/yaml-reference-parser-clj 0.2.6 on github.com/glojurelang/glojure v0.7.15",
+   "controls": {
+    "catalog.yaml": {
+     "oracle_match": false,
+     "observed": "the double-quoted title \"Caf\\u00e9 \\\"quoted\\\"\\tend\" arrives as the scalar event value 'Caf233 \"quoted\"\\tend': the \\u00e9 escape becomes the decimal text 233 instead of U+00E9"
+    },
+    "order.yaml": {
+     "oracle_match": null,
+     "observed": "event values and styles agree with the oracle by inspection; no typed tree was assembled because the primary control already fails"
+    }
+   }
+  }
+ },
+ "release_pins": {
+  "github.com/itchyny/go-yaml": {
+   "@v/list": [],
+   "@latest": "error: HTTP Error 404: Not Found",
+   "observed_at_utc": "2026-11-18T02:00:53.400384+00:00"
+  },
+  "github.com/lijiang2014/yamlast": {
+   "@v/list": [],
+   "@latest": {
+    "Version": "v0.0.0-20160529193950-1f01fc418da0",
+    "Time": "2016-05-29T19:39:50Z"
+   },
+   "observed_at_utc": "2026-11-18T02:00:53.812167+00:00"
+  },
+  "bitbucket.org/zombiezen/goray/yaml/parser": {
+   "@v/list": [],
+   "@latest": {
+    "Version": "v0.0.0-20121214013838-ec9fd1c7a474",
+    "Time": "2012-12-14T01:38:38Z"
+   },
+   "observed_at_utc": "2026-11-18T02:00:54.112630+00:00"
+  },
+  "github.com/bingoohuang/gg/pkg/yaml/lexer": {
+   "@v/list": [],
+   "@latest": {
+    "Version": "v0.0.0-20240822023057-9d953357a953",
+    "Time": "2024-08-22T02:30:57Z",
+    "Origin": {
+     "VCS": "git",
+     "URL": "https://github.com/bingoohuang/gg",
+     "Hash": "9d953357a9531131c424a249750750fc50339372"
+    }
+   },
+   "observed_at_utc": "2026-11-18T02:00:54.505382+00:00"
+  },
+  "github.com/yamlstar/yamlstar-plugin-parser-reference/parser": {
+   "@v/list": [
+    "v0.2.5",
+    "v0.2.6"
+   ],
+   "@latest": {
+    "Version": "v0.2.6",
+    "Time": "2026-10-22T13:55:06Z",
+    "Origin": {
+     "VCS": "git",
+     "URL": "https://github.com/yamlstar/yamlstar-plugin-parser-reference",
+     "Hash": "8f894684b3bc813b3a1cc949c486eb9ab946a65f",
+     "Ref": "refs/tags/v0.2.6"
+    }
+   },
+   "observed_at_utc": "2026-11-18T02:00:54.927159+00:00"
+  },
+  "github.com/yaml/yamlstar-go": {
+   "@v/list": [
+    "v0.1.3",
+    "v0.1.20",
+    "v0.1.17",
+    "v0.1.24",
+    "v0.1.2",
+    "v0.1.11",
+    "v0.1.23",
+    "v0.1.0",
+    "v0.1.25",
+    "v0.1.28",
+    "v0.1.19",
+    "v0.1.21",
+    "v0.1.18",
+    "v0.1.26"
+   ],
+   "@latest": {
+    "Version": "v0.1.11",
+    "Time": "2026-06-23T14:19:31Z",
+    "Origin": {
+     "VCS": "git",
+     "URL": "https://github.com/yaml/yamlstar-go",
+     "Hash": "acfee82804434ff3e4b7816f8829b45717d092f6",
+     "Ref": "refs/tags/v0.1.11"
+    }
+   },
+   "observed_at_utc": "2026-11-18T02:00:55.228784+00:00"
+  },
+  "github.com/timfpark/yaml": {
+   "@v/list": [
+    "v2.2.2+incompatible",
+    "v2.1.0+incompatible",
+    "v2.0.0+incompatible"
+   ],
+   "@latest": {
+    "Version": "v0.0.0-20190612232118-2e9e29c9df01",
+    "Time": "2019-06-12T23:21:18Z"
+   },
+   "observed_at_utc": "2026-11-18T02:00:53.066387+00:00"
+  }
+ },
+ "hit_imports": {
+  "bitbucket.org/zombiezen/goray/yaml/parser": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/bitbucket.org/zombiezen/goray/yaml/parser?tab=imports",
+   "error": null,
+   "imports": [
+    "bitbucket.org/zombiezen/goray/yaml/scanner",
+    "bitbucket.org/zombiezen/goray/yaml/token",
+    "container/list",
+    "errors",
+    "fmt",
+    "io"
+   ],
+   "yaml_or_json_imports": [
+    "bitbucket.org/zombiezen/goray/yaml/scanner",
+    "bitbucket.org/zombiezen/goray/yaml/token"
+   ],
+   "observed_at_utc": "2026-11-18T02:09:18.606997+00:00"
+  },
+  "cloudeng.io/cmdutil/cmdtypes": {
+   "imported_by": 4,
+   "url": "https://pkg.go.dev/cloudeng.io/cmdutil/cmdtypes?tab=imports",
+   "error": null,
+   "imports": [
+    "encoding/json",
+    "errors",
+    "fmt",
+    "io/fs",
+    "math",
+    "math/bits",
+    "regexp",
+    "strconv",
+    "strings",
+    "time"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json"
+   ],
+   "observed_at_utc": "2026-11-18T02:05:48.191212+00:00"
+  },
+  "github.com/AndiBrunner/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/AndiBrunner/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/json",
+    "fmt",
+    "gopkg.in/yaml.v2",
+    "reflect",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:11:06.297532+00:00"
+  },
+  "github.com/Clever/yaml": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/github.com/Clever/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "os",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:06:56.731177+00:00"
+  },
+  "github.com/Intellection/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/Intellection/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:10:10.058170+00:00"
+  },
+  "github.com/Shopify/yaml": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/github.com/Shopify/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:07:01.019301+00:00"
+  },
+  "github.com/Velocidex/yaml": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/github.com/Velocidex/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:06:39.594084+00:00"
+  },
+  "github.com/VictorLowther/yaml": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/github.com/VictorLowther/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "os",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:06:35.310879+00:00"
+  },
+  "github.com/adjust/go-gypsy/yaml": {
+   "imported_by": 5,
+   "url": "https://pkg.go.dev/github.com/adjust/go-gypsy/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bufio",
+    "bytes",
+    "errors",
+    "fmt",
+    "io",
+    "os",
+    "sort",
+    "strconv",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:05:31.103849+00:00"
+  },
+  "github.com/advance512/yaml": {
+   "imported_by": 6,
+   "url": "https://pkg.go.dev/github.com/advance512/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "os",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:05:13.875515+00:00"
+  },
+  "github.com/an-repository/config/parsers/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/an-repository/config/parsers/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "gopkg.in/yaml.v3"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:08:35.564370+00:00"
+  },
+  "github.com/antihax/goesi/notification": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/antihax/goesi/notification?tab=imports",
+   "error": null,
+   "imports": [
+    "github.com/antihax/goesi"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:08:09.785001+00:00"
+  },
+  "github.com/aquaproj/aqua/v2/pkg/ast": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/aquaproj/aqua/v2/pkg/ast?tab=imports",
+   "error": null,
+   "imports": [
+    "errors",
+    "github.com/goccy/go-yaml/ast"
+   ],
+   "yaml_or_json_imports": [
+    "github.com/goccy/go-yaml/ast"
+   ],
+   "observed_at_utc": "2026-11-18T02:10:31.685896+00:00"
+  },
+  "github.com/aquasecurity/yaml": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/aquasecurity/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/json",
+    "fmt",
+    "gopkg.in/yaml.v2",
+    "reflect",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:08:14.025948+00:00"
+  },
+  "github.com/bingoohuang/gg/pkg/yaml/lexer": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/bingoohuang/gg/pkg/yaml/lexer?tab=imports",
+   "error": null,
+   "imports": [
+    "github.com/bingoohuang/gg/pkg/yaml/scanner",
+    "github.com/bingoohuang/gg/pkg/yaml/token",
+    "io"
+   ],
+   "yaml_or_json_imports": [
+    "github.com/bingoohuang/gg/pkg/yaml/scanner",
+    "github.com/bingoohuang/gg/pkg/yaml/token"
+   ],
+   "observed_at_utc": "2026-11-18T02:08:01.081980+00:00"
+  },
+  "github.com/bingoohuang/gg/pkg/yaml/parser": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/bingoohuang/gg/pkg/yaml/parser?tab=imports",
+   "error": null,
+   "imports": [
+    "fmt",
+    "github.com/bingoohuang/gg/pkg/yaml/ast",
+    "github.com/bingoohuang/gg/pkg/yaml/internal/errors",
+    "github.com/bingoohuang/gg/pkg/yaml/lexer",
+    "github.com/bingoohuang/gg/pkg/yaml/token",
+    "golang.org/x/xerrors",
+    "io/ioutil",
+    "strings"
+   ],
+   "yaml_or_json_imports": [
+    "github.com/bingoohuang/gg/pkg/yaml/ast",
+    "github.com/bingoohuang/gg/pkg/yaml/internal/errors",
+    "github.com/bingoohuang/gg/pkg/yaml/lexer",
+    "github.com/bingoohuang/gg/pkg/yaml/token"
+   ],
+   "observed_at_utc": "2026-11-18T02:08:44.216465+00:00"
+  },
+  "github.com/buddhamagnet/yaml": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/github.com/buddhamagnet/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "os",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:06:48.190656+00:00"
+  },
+  "github.com/buildkite/go-pipeline/ordered": {
+   "imported_by": 5,
+   "url": "https://pkg.go.dev/github.com/buildkite/go-pipeline/ordered?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding/json",
+    "errors",
+    "fmt",
+    "github.com/buildkite/go-pipeline/warning",
+    "github.com/google/go-cmp/cmp",
+    "gopkg.in/yaml.v3",
+    "maps",
+    "math",
+    "reflect",
+    "strings"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:05:35.388547+00:00"
+  },
+  "github.com/cortexlabs/yaml": {
+   "imported_by": 8,
+   "url": "https://pkg.go.dev/github.com/cortexlabs/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:04:48.260587+00:00"
+  },
+  "github.com/crispuscrew/zinc/common/domain/schema/inherit": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/crispuscrew/zinc/common/domain/schema/inherit?tab=imports",
+   "error": null,
+   "imports": [
+    "fmt",
+    "github.com/crispuscrew/zinc/common/domain/schema",
+    "gopkg.in/yaml.v3",
+    "regexp",
+    "strings"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:09:40.010575+00:00"
+  },
+  "github.com/csmith/config": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/csmith/config?tab=imports",
+   "error": null,
+   "imports": [
+    "errors",
+    "github.com/goccy/go-yaml",
+    "io",
+    "os",
+    "path/filepath"
+   ],
+   "yaml_or_json_imports": [
+    "github.com/goccy/go-yaml"
+   ],
+   "observed_at_utc": "2026-11-18T02:10:44.835225+00:00"
+  },
+  "github.com/davidmdm/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/davidmdm/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:09:53.056397+00:00"
+  },
+  "github.com/dipdup-io/go-lib/config": {
+   "imported_by": 14,
+   "url": "https://pkg.go.dev/github.com/dipdup-io/go-lib/config?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "github.com/go-playground/validator/v10",
+    "github.com/pkg/errors",
+    "golang.org/x/text/transform",
+    "gopkg.in/yaml.v3",
+    "io",
+    "os"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:04:35.404532+00:00"
+  },
+  "github.com/erh/go-gypsy/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/erh/go-gypsy/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bufio",
+    "bytes",
+    "errors",
+    "fmt",
+    "io",
+    "os",
+    "sort",
+    "strconv",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:09:14.324348+00:00"
+  },
+  "github.com/essentialkaos/yaml/v2": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/essentialkaos/yaml/v2?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:10:01.560442+00:00"
+  },
+  "github.com/evanlouie/yaml/v2": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/evanlouie/yaml/v2?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:10:23.107939+00:00"
+  },
+  "github.com/faustbrian/go-wire/v3/yamlwire": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/faustbrian/go-wire/v3/yamlwire?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "errors",
+    "github.com/faustbrian/go-wire/v3",
+    "github.com/faustbrian/go-wire/v3/internal/outputlimit",
+    "github.com/faustbrian/go-wire/v3/internal/valuecheck",
+    "go.yaml.in/yaml/v4",
+    "go.yaml.in/yaml/v4/plugin/limit",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "strings"
+   ],
+   "yaml_or_json_imports": [
+    "go.yaml.in/yaml/v4",
+    "go.yaml.in/yaml/v4/plugin/limit"
+   ],
+   "observed_at_utc": "2026-11-18T02:07:13.896042+00:00"
+  },
+  "github.com/flanksource/yaml": {
+   "imported_by": 6,
+   "url": "https://pkg.go.dev/github.com/flanksource/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:05:09.587430+00:00"
+  },
+  "github.com/geofffranks/yaml": {
+   "imported_by": 12,
+   "url": "https://pkg.go.dev/github.com/geofffranks/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "os",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:04:39.687658+00:00"
+  },
+  "github.com/gidoichi/yaml/v2": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/gidoichi/yaml/v2?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:10:27.403174+00:00"
+  },
+  "github.com/gigforks/yaml": {
+   "imported_by": 7,
+   "url": "https://pkg.go.dev/github.com/gigforks/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "os",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:04:56.828952+00:00"
+  },
+  "github.com/go-gitea/yaml": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/go-gitea/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "os",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:07:52.466992+00:00"
+  },
+  "github.com/gofuego/fuego/parsers/markdown": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/gofuego/fuego/parsers/markdown?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "github.com/gofuego/fuego/core",
+    "github.com/yuin/goldmark",
+    "github.com/yuin/goldmark/extension"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:07:09.595254+00:00"
+  },
+  "github.com/goschtalt/yaml-decoder": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/github.com/goschtalt/yaml-decoder?tab=imports",
+   "error": null,
+   "imports": [
+    "github.com/goschtalt/goschtalt",
+    "github.com/goschtalt/goschtalt/pkg/decoder",
+    "github.com/goschtalt/goschtalt/pkg/meta",
+    "gopkg.in/yaml.v3"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:06:26.793339+00:00"
+  },
+  "github.com/gozelle/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/gozelle/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/json",
+    "fmt",
+    "gopkg.in/yaml.v2",
+    "io",
+    "reflect",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:10:40.434093+00:00"
+  },
+  "github.com/hairyhenderson/yaml": {
+   "imported_by": 6,
+   "url": "https://pkg.go.dev/github.com/hairyhenderson/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:05:05.350509+00:00"
+  },
+  "github.com/haraldrudell/parl/yamlo": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/haraldrudell/parl/yamlo?tab=imports",
+   "error": null,
+   "imports": [
+    "errors",
+    "fmt",
+    "github.com/haraldrudell/parl",
+    "github.com/haraldrudell/parl/perrors",
+    "github.com/haraldrudell/parl/pflags",
+    "github.com/haraldrudell/parl/pfs",
+    "github.com/haraldrudell/parl/pos",
+    "io/fs",
+    "os",
+    "path",
+    "path/filepath",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:10:57.646831+00:00"
+  },
+  "github.com/helmutkemper/yaml": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/helmutkemper/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "os",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:07:43.788814+00:00"
+  },
+  "github.com/icza/dyno": {
+   "imported_by": 127,
+   "url": "https://pkg.go.dev/github.com/icza/dyno?tab=imports",
+   "error": null,
+   "imports": [
+    "fmt"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:04:14.111938+00:00"
+  },
+  "github.com/itchyny/go-yaml": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/itchyny/go-yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "errors",
+    "fmt",
+    "github.com/itchyny/go-yaml/internal/libyaml",
+    "github.com/itchyny/go-yaml/internal/plugin",
+    "github.com/itchyny/go-yaml/plugin/errorformat/v3",
+    "github.com/itchyny/go-yaml/plugin/errorformat/v4",
+    "github.com/itchyny/go-yaml/plugin/loaderlimits",
+    "io"
+   ],
+   "yaml_or_json_imports": [
+    "github.com/itchyny/go-yaml/internal/libyaml",
+    "github.com/itchyny/go-yaml/internal/plugin",
+    "github.com/itchyny/go-yaml/plugin/errorformat/v3",
+    "github.com/itchyny/go-yaml/plugin/errorformat/v4",
+    "github.com/itchyny/go-yaml/plugin/loaderlimits"
+   ],
+   "observed_at_utc": "2026-11-18T02:07:22.481454+00:00"
+  },
+  "github.com/james4k/fmatter": {
+   "imported_by": 5,
+   "url": "https://pkg.go.dev/github.com/james4k/fmatter?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "gopkg.in/yaml.v2",
+    "io",
+    "io/ioutil",
+    "strings",
+    "unicode"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:05:26.804012+00:00"
+  },
+  "github.com/jtaekema/go-gypsy/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/jtaekema/go-gypsy/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bufio",
+    "bytes",
+    "fmt",
+    "io",
+    "os",
+    "path/filepath",
+    "sort",
+    "strconv",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:09:05.722726+00:00"
+  },
+  "github.com/juanvillacortac/ditto/pkg/parser/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/juanvillacortac/ditto/pkg/parser/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "fmt",
+    "github.com/juanvillacortac/ditto/pkg/ast",
+    "github.com/juanvillacortac/ditto/pkg/utils",
+    "gopkg.in/yaml.v2",
+    "io"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:08:48.503332+00:00"
+  },
+  "github.com/knadh/koanf-test/maps": {
+   "imported_by": 6,
+   "url": "https://pkg.go.dev/github.com/knadh/koanf-test/maps?tab=imports",
+   "error": null,
+   "imports": [
+    "fmt",
+    "github.com/mitchellh/copystructure",
+    "reflect",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:05:22.471455+00:00"
+  },
+  "github.com/kubecfg/yaml/v2": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/kubecfg/yaml/v2?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:10:05.807847+00:00"
+  },
+  "github.com/leopardslab/Dunner/pkg/config": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/github.com/leopardslab/Dunner/pkg/config?tab=imports",
+   "error": null,
+   "imports": [
+    "context",
+    "fmt",
+    "github.com/docker/docker/api/types/mount",
+    "github.com/go-playground/locales/en",
+    "github.com/go-playground/universal-translator",
+    "github.com/joho/godotenv",
+    "github.com/leopardslab/dunner/internal/logger",
+    "github.com/leopardslab/dunner/internal/util",
+    "github.com/leopardslab/dunner/pkg/docker",
+    "github.com/spf13/viper",
+    "gopkg.in/go-playground/validator.v9",
+    "gopkg.in/go-playground/validator.v9/translations/en",
+    "gopkg.in/yaml.v2",
+    "io/ioutil",
+    "os",
+    "path",
+    "path/filepath",
+    "reflect",
+    "regexp",
+    "strings"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:06:22.502029+00:00"
+  },
+  "github.com/lijiang2014/yamlast": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/lijiang2014/yamlast?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "errors",
+    "fmt",
+    "io",
+    "regexp",
+    "strconv",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:08:52.796864+00:00"
+  },
+  "github.com/lyraproj/dgoyaml/yaml": {
+   "imported_by": 7,
+   "url": "https://pkg.go.dev/github.com/lyraproj/dgoyaml/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "fmt",
+    "github.com/lyraproj/dgo/dgo",
+    "github.com/lyraproj/dgo/tf",
+    "github.com/lyraproj/dgo/vf",
+    "gopkg.in/yaml.v3",
+    "time"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:05:01.114537+00:00"
+  },
+  "github.com/mikefarah/yaml/v2": {
+   "imported_by": 4,
+   "url": "https://pkg.go.dev/github.com/mikefarah/yaml/v2?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:05:52.446650+00:00"
+  },
+  "github.com/moznion/go-yaml-nillable": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/moznion/go-yaml-nillable?tab=imports",
+   "error": null,
+   "imports": [],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:10:53.369565+00:00"
+  },
+  "github.com/oblq/sprbox": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/oblq/sprbox?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding/json",
+    "errors",
+    "fmt",
+    "github.com/BurntSushi/toml",
+    "gopkg.in/yaml.v2",
+    "io/ioutil",
+    "net/http",
+    "os",
+    "os/exec",
+    "path/filepath",
+    "reflect",
+    "regexp",
+    "strings",
+    "sync",
+    "text/template"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:07:05.340197+00:00"
+  },
+  "github.com/oblq/swap": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/github.com/oblq/swap?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding/json",
+    "errors",
+    "fmt",
+    "github.com/BurntSushi/toml",
+    "github.com/oblq/swap/internal/logger",
+    "gopkg.in/yaml.v3",
+    "io/ioutil",
+    "math",
+    "os",
+    "os/exec",
+    "path/filepath",
+    "reflect",
+    "regexp",
+    "strings",
+    "sync",
+    "text/template"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:06:13.942280+00:00"
+  },
+  "github.com/onemoreteam/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/onemoreteam/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/json",
+    "fmt",
+    "gopkg.in/yaml.v2",
+    "io",
+    "reflect",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:10:36.028685+00:00"
+  },
+  "github.com/open-policy-agent/conftest/parser/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/open-policy-agent/conftest/parser/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "fmt",
+    "sigs.k8s.io/yaml",
+    "slices"
+   ],
+   "yaml_or_json_imports": [
+    "sigs.k8s.io/yaml"
+   ],
+   "observed_at_utc": "2026-11-18T02:08:39.900790+00:00"
+  },
+  "github.com/peterbourgon/ff/v4/ffyaml": {
+   "imported_by": 4,
+   "url": "https://pkg.go.dev/github.com/peterbourgon/ff/v4/ffyaml?tab=imports",
+   "error": null,
+   "imports": [
+    "errors",
+    "github.com/peterbourgon/ff/v4/internal/ffdata",
+    "gopkg.in/yaml.v2",
+    "io"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:05:43.948995+00:00"
+  },
+  "github.com/phenixrizen/koanf/maps": {
+   "imported_by": 4,
+   "url": "https://pkg.go.dev/github.com/phenixrizen/koanf/maps?tab=imports",
+   "error": null,
+   "imports": [
+    "fmt",
+    "github.com/mitchellh/copystructure",
+    "reflect",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:06:09.660091+00:00"
+  },
+  "github.com/pingdomserver/go-gypsy/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/pingdomserver/go-gypsy/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bufio",
+    "bytes",
+    "errors",
+    "fmt",
+    "io",
+    "os",
+    "sort",
+    "strconv",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:09:10.040749+00:00"
+  },
+  "github.com/pjdufour/go-gypsy/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/pjdufour/go-gypsy/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bufio",
+    "bytes",
+    "errors",
+    "fmt",
+    "io",
+    "os",
+    "sort",
+    "strconv",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:08:57.093969+00:00"
+  },
+  "github.com/projectcalico/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/projectcalico/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "fmt",
+    "github.com/projectcalico/go-json/json",
+    "gopkg.in/yaml.v2",
+    "reflect",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [
+    "github.com/projectcalico/go-json/json",
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:11:10.522700+00:00"
+  },
+  "github.com/romshark/yamagiconf": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/github.com/romshark/yamagiconf?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "errors",
+    "fmt",
+    "github.com/go-playground/validator/v10",
+    "go.yaml.in/yaml/v4",
+    "io",
+    "os",
+    "reflect",
+    "regexp",
+    "slices",
+    "sort",
+    "strconv",
+    "strings",
+    "time"
+   ],
+   "yaml_or_json_imports": [
+    "go.yaml.in/yaml/v4"
+   ],
+   "observed_at_utc": "2026-11-18T02:06:18.184954+00:00"
+  },
+  "github.com/sapcc/go-bits/regexpext": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/sapcc/go-bits/regexpext?tab=imports",
+   "error": null,
+   "imports": [
+    "encoding/json",
+    "fmt",
+    "github.com/hashicorp/golang-lru/v2",
+    "go.xyrillian.de/gg/option",
+    "regexp",
+    "strings"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json"
+   ],
+   "observed_at_utc": "2026-11-18T02:10:49.088997+00:00"
+  },
+  "github.com/schmidtw/goschtalt/extensions/decoders/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/schmidtw/goschtalt/extensions/decoders/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "github.com/schmidtw/goschtalt",
+    "github.com/schmidtw/goschtalt/pkg/decoder",
+    "github.com/schmidtw/goschtalt/pkg/meta",
+    "gopkg.in/yaml.v3"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:09:35.713533+00:00"
+  },
+  "github.com/scottkiss/go-gypsy/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/scottkiss/go-gypsy/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bufio",
+    "bytes",
+    "errors",
+    "fmt",
+    "io",
+    "os",
+    "sort",
+    "strconv",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:09:01.420980+00:00"
+  },
+  "github.com/sebidude/configparser": {
+   "imported_by": 4,
+   "url": "https://pkg.go.dev/github.com/sebidude/configparser?tab=imports",
+   "error": null,
+   "imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v3",
+    "os",
+    "reflect",
+    "strconv",
+    "strings"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:06:05.293198+00:00"
+  },
+  "github.com/sensu/yaml": {
+   "imported_by": 9,
+   "url": "https://pkg.go.dev/github.com/sensu/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:04:43.987999+00:00"
+  },
+  "github.com/setrofim/yaml": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/setrofim/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:07:35.219638+00:00"
+  },
+  "github.com/sipt/yaml": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/sipt/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:07:48.176670+00:00"
+  },
+  "github.com/sithembiso-mashinini/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/sithembiso-mashinini/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:10:18.821939+00:00"
+  },
+  "github.com/starpkg/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/starpkg/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "errors",
+    "fmt",
+    "github.com/1set/starlet",
+    "github.com/1set/starlet/dataconv",
+    "github.com/1set/starlet/dataconv/types",
+    "github.com/starpkg/base",
+    "github.com/starpkg/base/util",
+    "go.starlark.net/lib/time",
+    "go.starlark.net/starlark",
+    "gopkg.in/yaml.v3",
+    "math/big",
+    "sort",
+    "strings",
+    "time"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:09:27.118975+00:00"
+  },
+  "github.com/supakeen/yamlplus": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/supakeen/yamlplus?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "fmt",
+    "go.yaml.in/yaml/v3",
+    "io",
+    "io/fs",
+    "path",
+    "strings"
+   ],
+   "yaml_or_json_imports": [
+    "go.yaml.in/yaml/v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:08:27.018591+00:00"
+  },
+  "github.com/superwhiskers/yaml": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/superwhiskers/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:07:56.765976+00:00"
+  },
+  "github.com/teler-sh/teler-waf/option": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/teler-sh/teler-waf/option?tab=imports",
+   "error": null,
+   "imports": [
+    "fmt",
+    "github.com/bytedance/sonic",
+    "github.com/teler-sh/teler-waf",
+    "gopkg.in/yaml.v3",
+    "os"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:08:18.554310+00:00"
+  },
+  "github.com/timfpark/yaml": {
+   "imported_by": 4,
+   "url": "https://pkg.go.dev/github.com/timfpark/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:05:56.807089+00:00"
+  },
+  "github.com/tommyknows/yaml/v2": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/tommyknows/yaml/v2?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:10:14.527608+00:00"
+  },
+  "github.com/tsaikd/yaml": {
+   "imported_by": 5,
+   "url": "https://pkg.go.dev/github.com/tsaikd/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:05:39.668541+00:00"
+  },
+  "github.com/tudyzhb/yaml": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/tudyzhb/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:07:39.505820+00:00"
+  },
+  "github.com/tuigoff/tuigoff/pkg/highlight": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/tuigoff/tuigoff/pkg/highlight?tab=imports",
+   "error": null,
+   "imports": [
+    "charm.land/lipgloss/v2",
+    "github.com/alecthomas/chroma/v2",
+    "github.com/alecthomas/chroma/v2/lexers",
+    "github.com/alecthomas/chroma/v2/styles",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:08:05.372808+00:00"
+  },
+  "github.com/turbinelabs/codec": {
+   "imported_by": 20,
+   "url": "https://pkg.go.dev/github.com/turbinelabs/codec?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding/json",
+    "fmt",
+    "github.com/ghodss/yaml",
+    "github.com/golang/mock/gomock",
+    "github.com/turbinelabs/nonstdlib/flag",
+    "io",
+    "io/ioutil",
+    "reflect"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "github.com/ghodss/yaml"
+   ],
+   "observed_at_utc": "2026-11-18T02:04:31.123253+00:00"
+  },
+  "github.com/uber/cadence/common/config/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/uber/cadence/common/config/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "fmt",
+    "gopkg.in/yaml.v2"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:09:31.411115+00:00"
+  },
+  "github.com/vjorlikowski/yaml": {
+   "imported_by": 2,
+   "url": "https://pkg.go.dev/github.com/vjorlikowski/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:07:30.989690+00:00"
+  },
+  "github.com/wangyysde/yaml": {
+   "imported_by": 6,
+   "url": "https://pkg.go.dev/github.com/wangyysde/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/json",
+    "fmt",
+    "gopkg.in/yaml.v2",
+    "io",
+    "reflect",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:05:18.162092+00:00"
+  },
+  "github.com/wryun/yaml-1": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/wryun/yaml-1?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/json",
+    "fmt",
+    "gopkg.in/yaml.v2",
+    "reflect",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:11:01.928901+00:00"
+  },
+  "github.com/xebialabs/yaml": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/github.com/xebialabs/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:06:52.469384+00:00"
+  },
+  "github.com/xyproto/yaml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/xyproto/yaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:09:48.761602+00:00"
+  },
+  "github.com/yaml/yamlstar-go": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/yaml/yamlstar-go?tab=imports",
+   "error": null,
+   "imports": [
+    "C",
+    "encoding/json",
+    "errors",
+    "fmt",
+    "runtime",
+    "unsafe"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json"
+   ],
+   "observed_at_utc": "2026-11-18T02:09:44.462439+00:00"
+  },
+  "github.com/yamlstar/yamlstar-plugin-parser-reference/parser": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/yamlstar/yamlstar-plugin-parser-reference/parser?tab=imports",
+   "error": null,
+   "imports": [
+    "fmt",
+    "github.com/glojurelang/glojure/pkg/glj",
+    "github.com/glojurelang/glojure/pkg/lang",
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/canonical",
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/core",
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/grammar",
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/parser",
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/prelude",
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/receiver",
+    "sync",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/canonical",
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/core",
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/grammar",
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/parser",
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/prelude",
+    "github.com/yamlstar/yamlstar-plugin-parser-reference/internal/glojure/pkg/yaml_parser/receiver"
+   ],
+   "observed_at_utc": "2026-11-18T02:08:22.790619+00:00"
+  },
+  "github.com/yixy/fmatter": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/github.com/yixy/fmatter?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "gopkg.in/yaml.v2",
+    "io",
+    "io/ioutil",
+    "strings",
+    "unicode"
+   ],
+   "yaml_or_json_imports": [
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:08:31.332887+00:00"
+  },
+  "github.com/zrepl/yaml-config": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/github.com/zrepl/yaml-config?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:06:43.891974+00:00"
+  },
+  "gitlab.com/gitlab-org/gitlab-ci-multi-runner/helpers/gitlab_ci_yaml_parser": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/gitlab.com/gitlab-org/gitlab-ci-multi-runner/helpers/gitlab_ci_yaml_parser?tab=imports",
+   "error": null,
+   "imports": [
+    "encoding/json",
+    "errors",
+    "fmt",
+    "gitlab.com/gitlab-org/gitlab-runner/common",
+    "gitlab.com/gitlab-org/gitlab-runner/helpers",
+    "gopkg.in/yaml.v2",
+    "io/ioutil",
+    "strconv",
+    "strings"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:09:22.856947+00:00"
+  },
+  "gitlab.com/gitlab-org/gitlab-runner/helpers/gitlab_ci_yaml_parser": {
+   "imported_by": 32,
+   "url": "https://pkg.go.dev/gitlab.com/gitlab-org/gitlab-runner/helpers/gitlab_ci_yaml_parser?tab=imports",
+   "error": null,
+   "imports": [
+    "encoding/json",
+    "errors",
+    "fmt",
+    "gitlab.com/gitlab-org/gitlab-runner/common",
+    "gitlab.com/gitlab-org/gitlab-runner/helpers",
+    "gopkg.in/yaml.v2",
+    "io/ioutil",
+    "strconv",
+    "strings"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:04:26.936464+00:00"
+  },
+  "gitlab.com/phpboyscout/go/config-toml": {
+   "imported_by": 1,
+   "url": "https://pkg.go.dev/gitlab.com/phpboyscout/go/config-toml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "fmt",
+    "github.com/pelletier/go-toml/v2",
+    "github.com/pelletier/go-toml/v2/unstable",
+    "gitlab.com/phpboyscout/go/config",
+    "strconv",
+    "strings"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:09:57.316561+00:00"
+  },
+  "go.yaml.in/yaml/v2": {
+   "imported_by": 175,
+   "url": "https://pkg.go.dev/go.yaml.in/yaml/v2?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:04:09.876447+00:00"
+  },
+  "gopkg.in/ghodss/yaml.v1": {
+   "imported_by": 8,
+   "url": "https://pkg.go.dev/gopkg.in/ghodss/yaml.v1?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/json",
+    "fmt",
+    "gopkg.in/yaml.v2",
+    "reflect",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "gopkg.in/yaml.v2"
+   ],
+   "observed_at_utc": "2026-11-18T02:04:52.546017+00:00"
+  },
+  "gopkg.in/laverya/yaml.v3": {
+   "imported_by": 3,
+   "url": "https://pkg.go.dev/gopkg.in/laverya/yaml.v3?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding",
+    "encoding/base64",
+    "errors",
+    "fmt",
+    "io",
+    "math",
+    "reflect",
+    "regexp",
+    "sort",
+    "strconv",
+    "strings",
+    "sync",
+    "time",
+    "unicode",
+    "unicode/utf8"
+   ],
+   "yaml_or_json_imports": [],
+   "observed_at_utc": "2026-11-18T02:06:31.033427+00:00"
+  },
+  "sigs.k8s.io/prow/pkg/genyaml": {
+   "imported_by": 4,
+   "url": "https://pkg.go.dev/sigs.k8s.io/prow/pkg/genyaml?tab=imports",
+   "error": null,
+   "imports": [
+    "bytes",
+    "encoding/json",
+    "errors",
+    "fmt",
+    "github.com/clarketm/json",
+    "github.com/sirupsen/logrus",
+    "go.yaml.in/yaml/v3",
+    "go/ast",
+    "go/doc",
+    "go/parser",
+    "go/token",
+    "k8s.io/apimachinery/pkg/util/sets",
+    "maps",
+    "path/filepath",
+    "reflect",
+    "regexp",
+    "strings",
+    "sync",
+    "unicode"
+   ],
+   "yaml_or_json_imports": [
+    "encoding/json",
+    "github.com/clarketm/json",
+    "go.yaml.in/yaml/v3"
+   ],
+   "observed_at_utc": "2026-11-18T02:06:01.050535+00:00"
+  }
+ },
+ "not_separate": {
+  "github.com/goccy/go-yaml/ast": "subpackage of the selected github.com/goccy/go-yaml module (AST types), not a separate path",
+  "github.com/goccy/go-yaml/parser": "subpackage of the selected github.com/goccy/go-yaml module, not a separate path",
+  "github.com/goccy/go-yaml/lexer": "subpackage of the selected github.com/goccy/go-yaml module, not a separate path"
+ },
+ "zero_metric_hits_not_leads": [
+  "codeberg.org/mhdbox/config",
+  "czechia.dev/yaml",
+  "git.awesome-for.me/liuzhiguo/drone-yaml",
+  "git.k2software.cn/go/k8s-yaml",
+  "git.k2software.com.cn/go/k8s-yaml",
+  "git.sr.ht/~errnoh/yamlc",
+  "git.xdol.org/xdol/go-yaml/lexer",
+  "github.com/01ne/yaml",
+  "github.com/0xalexb/hjarta-di/config/parser/yaml",
+  "github.com/1533-systems/yaml",
+  "github.com/Adam-445/configr/yaml",
+  "github.com/AndroidGoLab/ndk/tools/pkg/headerspec",
+  "github.com/ArmanAvanesyan/go-config/providers/parser/yaml",
+  "github.com/Checkmarx/kics/v2/pkg/parser/yaml",
+  "github.com/ChristopherHX/gitea-actions-runner",
+  "github.com/Clever/koanf/parsers/yaml",
+  "github.com/Cloud-Foundations/scotty/lib/yamlutil",
+  "github.com/ContextLogic/wish-yaml-go/v3",
+  "github.com/Danny5487401/go_package_example/21_viper/04_yaml/01_unmarshal",
+  "github.com/Ghodss/Yaml",
+  "github.com/Ghodss/yaml",
+  "github.com/Instituto-Atlantico/janus/pkg/yaml_parser",
+  "github.com/Intellection/kubernetes-sigs-yaml",
+  "github.com/Intrising/yaml-json",
+  "github.com/J466Y/WhiteTower/test/conformance/manifest",
+  "github.com/KSpaceer/yamly/engines/yayamls/ast",
+  "github.com/KSpaceer/yamly/engines/yayamls/decode",
+  "github.com/KirkDiggler/rpg-toolkit/encounter/dungeonspec",
+  "github.com/L1nch-lab/goesi/notification",
+  "github.com/LittlePeter52012/skill-router/pkg/frontmatter",
+  "github.com/MengJiapeng/goyaml",
+  "github.com/MontFerret/contrib/modules/yaml/core",
+  "github.com/MrLeeZ/goesi/notification",
+  "github.com/Mundo-Dolphins/phins-news-engine/infra/dictionaryfile",
+  "github.com/NobleFactor/devlore-cli/pkg/op/provider/yaml",
+  "github.com/OwnSecurityGuard/gametrace/sdk/contract",
+  "github.com/OwnSecurityGuard/gt-plugin-sdk/contract",
+  "github.com/PaulSonOfLars/go-gypsy/yaml",
+  "github.com/PowerDNS/lightningstream/config",
+  "github.com/SCP002/yaml",
+  "github.com/SekiBetu/yaml",
+  "github.com/WinnerSoftLab/yaml3",
+  "github.com/YangTaeyoung/yaml-diff-reporter/parser",
+  "github.com/abcxyz/abc/templates/model/header",
+  "github.com/abemedia/go-don/encoding/yaml",
+  "github.com/adamgilman/idiomatic/config",
+  "github.com/aixj1984/go-yaml/ast",
+  "github.com/aixj1984/go-yaml/lexer",
+  "github.com/aixj1984/go-yaml/parser",
+  "github.com/ake-98/migrate",
+  "github.com/alex-poliushkin/theater/yaml",
+  "github.com/alexjx/gopher-lua-libs/yaml",
+  "github.com/amp-labs/amp-yaml-validator/parser",
+  "github.com/an-repository/eckmuhl/config/parsers/yaml",
+  "github.com/andibrunner/yaml",
+  "github.com/andrew-grechkin/update-yaml/pkg/ast",
+  "github.com/andydunstall/go-humanize",
+  "github.com/anthonydambrosio/transmog",
+  "github.com/artificial-polyglot/arti/decode_yaml/request",
+  "github.com/authplane/authserver/tools/docsgen/cmd",
+  "github.com/backbone81/golr/pkg/parsergen/backend/yaml",
+  "github.com/boazy/yaml-thru-json",
+  "github.com/boynton/yaml",
+  "github.com/bradfitz/yaml",
+  "github.com/btoll/go-yaml-parser",
+  "github.com/buchanae/yamlast",
+  "github.com/cloud-foundations/scotty/lib/yamlutil",
+  "github.com/cloudposse/atmos/pkg/yaml/scalar",
+  "github.com/conformize/conformize/serialization/unmarshal/yaml",
+  "github.com/conga-sh/conga/decoder/yaml",
+  "github.com/conways-glider/ct/yaml",
+  "github.com/coxley/go-yaml/lexer",
+  "github.com/coxley/go-yaml/parser",
+  "github.com/ctpeter/drone-yaml",
+  "github.com/cybervask/yaml",
+  "github.com/damn-at/yaml",
+  "github.com/danrubel/yaml_go",
+  "github.com/danyel/dot-files/yaml_parser",
+  "github.com/dbakhtin/gyaml",
+  "github.com/delayedbedr/go-don/encoding/yaml",
+  "github.com/devantler-tech/ksail-go/pkg/io/marshaller/yaml",
+  "github.com/dgrapes/yaml",
+  "github.com/diamondburned/yaml",
+  "github.com/digitalrebar/yaml",
+  "github.com/dimitropoulos/yaml-ast",
+  "github.com/dmlyons/go-yaml/lexer",
+  "github.com/dmlyons/go-yaml/parser",
+  "github.com/drone/drone-yaml",
+  "github.com/dvormagic/gsy/secretstring",
+  "github.com/dyammarcano/encoder",
+  "github.com/dyllew3/PerfMeasurer/parser/yaml",
+  "github.com/egustafson/sandbox/go/yaml-scalar-decode",
+  "github.com/elioetibr/golang-yaml/pkg/lexer",
+  "github.com/elioetibr/golang-yaml/pkg/parser",
+  "github.com/ennesuysal/yaml-parser",
+  "github.com/ercross/yaml",
+  "github.com/evijayan2/yaml",
+  "github.com/faithcomesbyhearing/fcbh-dataset-io/decode_yaml/request",
+  "github.com/farrukhny/config/yaml",
+  "github.com/faustbrian/golib/pkg/wire/yamlwire",
+  "github.com/fe3dback/go-yaml/lexer",
+  "github.com/fe3dback/go-yaml/parser",
+  "github.com/forkedagain/go-gypsy/yaml",
+  "github.com/fredbi/core/json/benchmarks/lexers",
+  "github.com/gateway-fm/warp_swagger/yaml_parser",
+  "github.com/getplumber/plumber/capability/capdecl",
+  "github.com/gf-third/yaml/v3",
+  "github.com/ghodss/yAML",
+  "github.com/gkstretton/dark/services/goo/util/protoyaml",
+  "github.com/glycerine/yaml",
+  "github.com/gmlewis/rtc/yaml",
+  "github.com/gmoyal-r7/fanal/config/parser/yaml",
+  "github.com/go-kure/launcher/pkg/oam",
+  "github.com/go-openapi/core/json/lexers/yaml-lexer",
+  "github.com/go-openapi/go-yaml/parser",
+  "github.com/go-pa/ff/ffyaml",
+  "github.com/go-widgets/toolkit/rougelex",
+  "github.com/go-yml/yaml",
+  "github.com/golanghelper/conf-loader",
+  "github.com/goloop/yaml",
+  "github.com/gookit/taskrun/formats",
+  "github.com/gopherex/xconf/contrib/sources/yaml",
+  "github.com/gopi-frame/config/parser/yaml",
+  "github.com/gracig/yaml",
+  "github.com/grantbow/yaml",
+  "github.com/graveland/yaml",
+  "github.com/gsoc2/yaml",
+  "github.com/henriquemps/gyaml",
+  "github.com/hfd94/yaml",
+  "github.com/hollowtoque/go-don/encoding/yaml",
+  "github.com/humandad/yaml",
+  "github.com/hurricanehrndz/caddy-yaml",
+  "github.com/iamshivamnanda/yaml/v3",
+  "github.com/idelchi/aura/pkg/yamlutil",
+  "github.com/idelchi/godyl/pkg/unmarshal",
+  "github.com/illuminarean-labs/yaml-diff-reporter/parser",
+  "github.com/inference-sim/blis-vllm/rules/engineconfig",
+  "github.com/infobloxopen/themis/pdp/ast/yast",
+  "github.com/insei/tinyconf/v2/drivers/format",
+  "github.com/intrising/yaml-json",
+  "github.com/ivangsm/koanf/parsers/yaml",
+  "github.com/jbrekelmans/go-edityaml",
+  "github.com/jeduden/mdsmith/cue/cuelite/yamltime",
+  "github.com/jkratz55/koanfext/parsers/yaml",
+  "github.com/jm-positron/go-yaml/lexer",
+  "github.com/jm-positron/go-yaml/parser",
+  "github.com/jyang234/verdi/docs/spikes/self-governance/_scratch/oq2decode",
+  "github.com/karlschriek/yaml",
+  "github.com/kart-io/goagent/codec/yaml",
+  "github.com/katydid/parser-go-yaml/yaml",
+  "github.com/keep94/scotty/lib/yamlutil",
+  "github.com/kernel-panic-team/goesi/notification",
+  "github.com/kittomic/cascadingconfig/format/yaml",
+  "github.com/kjanat/go-yaml/v4",
+  "github.com/knadh/modtest/parsers/yaml",
+  "github.com/kohkimakimoto/gopher-lua-libs/yaml",
+  "github.com/kooshapari/nanovms/pkg/config",
+  "github.com/korylprince/go-adm/schema",
+  "github.com/korylprince/go-yaml/lexer",
+  "github.com/korylprince/go-yaml/parser",
+  "github.com/kralicky/yaml",
+  "github.com/kubernot/wrangler/pkg/yaml",
+  "github.com/kwok-ci/kectl/pkg/utils/yaml",
+  "github.com/lczyk/goruby/cmd/parse-dump",
+  "github.com/lelvisl/yaml/v3",
+  "github.com/lispad/yaml",
+  "github.com/lovercode/gopher-lua-libs/yaml",
+  "github.com/lrita/yaml/v3",
+  "github.com/luevano/mangal-lua-libs/yaml",
+  "github.com/lyoung-confluent/yaml",
+  "github.com/malcolmston/yaml",
+  "github.com/masenocturnal/go-yaml/lexer",
+  "github.com/masenocturnal/go-yaml/parser",
+  "github.com/mattfarina/yamlbench",
+  "github.com/mattfarina/yamljsonperftest",
+  "github.com/mbilski/yaml",
+  "github.com/medici-finance/assay/containers/k8s",
+  "github.com/metafates/mangal-lua-libs/yaml",
+  "github.com/mikl0s/debateos/resolver/parse",
+  "github.com/milagre/zote/pulumi/cloud",
+  "github.com/mrpicc0lo/yaml-go",
+  "github.com/msuozzo/bonsai/bonsai-yaml",
+  "github.com/mtibben/yamljsonmap",
+  "github.com/natalie-o-perret/go-data/yaml",
+  "github.com/nethinwei/sql-mcp-server/x/configyaml",
+  "github.com/nexssp/flow/extensions/config_yaml",
+  "github.com/nextpkg/typedcfg/adapters/yaml",
+  "github.com/nholuongut/yaml",
+  "github.com/nobl9/go-yaml/lexer",
+  "github.com/nobl9/go-yaml/parser",
+  "github.com/nstogner/conftest/parser/yaml",
+  "github.com/overjetdental/yaml",
+  "github.com/pb33f/go-yaml",
+  "github.com/permafrost-dev/go-yaml",
+  "github.com/pgeiem/go-yaml/lexer",
+  "github.com/pkazmier/ffyaml",
+  "github.com/polkeli/yaml/v3",
+  "github.com/poruru-code/aws-sam-parser-go/parser",
+  "github.com/primait/drone-yaml",
+  "github.com/ptdave20/goesi/notification",
+  "github.com/putao520/yaml",
+  "github.com/qiangli/yoke/pkg/lens/provider",
+  "github.com/qingxuecc/yaml/v3",
+  "github.com/rayshoo/yaml",
+  "github.com/release-argus/Argus/config/decode",
+  "github.com/rgooch/scotty/lib/yamlutil",
+  "github.com/rick-kilgore/yaml",
+  "github.com/rubenv/fastyaml",
+  "github.com/scallister/yaml/v3",
+  "github.com/scalock/yaml",
+  "github.com/scriptory/go-yaml/lexer",
+  "github.com/scryinfo/yaml",
+  "github.com/secondsightsolutions/yaml",
+  "github.com/shapestone/shape-core/pkg/data",
+  "github.com/shapestone/shape-yaml/pkg/yaml",
+  "github.com/siderolabs/talos/pkg/machinery/yamlutils",
+  "github.com/silasdavis/yaml",
+  "github.com/sithembiso-mashinini/kubernetes-sigs-yaml",
+  "github.com/sourcegraph/yaml",
+  "github.com/stacklok/toolhive/pkg/yamlutil",
+  "github.com/staspiter/go-yaml/lexer",
+  "github.com/statisticsnorway/drone-yaml",
+  "github.com/stigmer/stigmer/client-apps/cli/pkg/yamlutil",
+  "github.com/suhasanand/yaml",
+  "github.com/superops-team/hyperops/pkg/ops/starlib/encoding/yaml",
+  "github.com/sv-tools/conf-parser-yaml",
+  "github.com/symantec/scotty/lib/yamlutil",
+  "github.com/szkiba/xk6-yaml",
+  "github.com/tanner-bruce/yaml",
+  "github.com/telnet2/go-yaml",
+  "github.com/terramate-io/terramate/yaml",
+  "github.com/thenativeweb/esdm/parser",
+  "github.com/thesatellite-ai/lore/logic/yamlerr",
+  "github.com/tommie/protoyaml-go",
+  "github.com/unsubble/goml",
+  "github.com/upcload/yaml",
+  "github.com/vasileknik76/tql/formats/yaml",
+  "github.com/vbasem/yaml/v3",
+  "github.com/venerasf/go-lua-libs/yaml",
+  "github.com/vibrantgio/markdown/obsidian",
+  "github.com/vigolium/vigolium/pkg/utils/yamlschema",
+  "github.com/vikingpingvin/yml2env",
+  "github.com/vine-io/vine/util/yamlpb",
+  "github.com/warthog618/config/blob/decoder/yaml",
+  "github.com/wiggins-jonathan/plutus/ingest",
+  "github.com/willabides/yaml",
+  "github.com/woozymasta/jamle",
+  "github.com/wryun/Yaml-1",
+  "github.com/xaaha/hulak/pkg/actions",
+  "github.com/xingxing/yaml",
+  "github.com/yaml/yamlstar",
+  "github.com/yamlstar/yamlstar-plugin-parser-json-comments/parser",
+  "github.com/yaowenjun1314/ymal",
+  "github.com/yogoloth/yaml",
+  "github.com/yongshengli/gopher-lua-libs/yaml",
+  "github.com/zacheddy/kind/pkg/cluster/config/encoding",
+  "github.com/zchee/go-yaml",
+  "github.com/zdz1715/yaml-parser",
+  "github.com/zneix/yec",
+  "github.com/zzsnn/yaml",
+  "github.heygears.com/ghodss/yaml",
+  "gitlab.com/devowl.io/gitlab-runner/helpers/gitlab_ci_yaml_parser",
+  "gitlab.com/so_literate/fconfig/decoder/yaml",
+  "gitlab.com/wiggins.jonathan/plutus/ingest",
+  "go-yaml.in/yaml/v4",
+  "go.gala.fyi/stdlib/yaml",
+  "go.jacobcolvin.com/niceyaml/tokens",
+  "go.krak3n.codes/gofig/parsers/yaml",
+  "gopkg.in/WhiteRaven777/yaml.v3",
+  "gopkg.in/flant/ghodss-yaml.v1",
+  "gopkg.in/joanayma/yaml.v2",
+  "gopkg.in/naturalwarren/yaml.v3",
+  "jacobcolvin.com/niceyaml/lexers",
+  "latere.ai/x/lux/manifest",
+  "oneyaml.dev/go",
+  "shoecat.cz/yaml/v2",
+  "sigs.k8s.io/kwok/pkg/utils/yaml",
+  "zeroparse.dev/alpha-parsers/yaml"
+ ]
+}

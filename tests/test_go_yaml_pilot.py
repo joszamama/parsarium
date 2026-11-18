@@ -180,6 +180,46 @@ class GoYamlPilotTest(unittest.TestCase):
             self.assertEqual(metric["value"], 0)
             self.assertNotIn(name, leads)
 
+    def test_round_six_leads_are_decided(self):
+        leads = {lead["name"]: lead for lead in read(CELL / "leads.json")}
+        check = read(CELL / "round6-lead-check.json")
+        self.assertEqual(self.cell["leads_recorded"], len(leads))
+        self.assertEqual({s["query"] for s in check["searches"]},
+                         {"yaml parser", "yaml decoder", "yaml 1.2", "yaml lexer", "yaml ast", "yaml unmarshal"})
+        for search in check["searches"]:
+            self.assertEqual(search["hits_recorded"], len(search["hits"]))
+            self.assertLessEqual(len(search["hits"]), 100)
+        selected = {row["name"]: row for row in self.parsers}
+        for name, metric in check["selected"].items():
+            with self.subTest(selected=name):
+                self.assertEqual(leads[name]["status"], "selected")
+                self.assertEqual(selected[name]["popularity"]["value"], metric["value"])
+                self.assertEqual(selected[name]["project"], metric["project"])
+        for name, metric in check["metrics"].items():
+            with self.subTest(lead=name):
+                lead = leads[name]
+                self.assertNotEqual(lead["status"], "selected")
+                self.assertEqual(lead["metric_value"], metric["value"])
+                self.assertEqual(lead["evidence"], "data/go/yaml/round6-lead-check.json")
+                self.assertTrue(lead["reason"])
+        # Every new hit with a positive value is decided: selected, a lead, or a subpackage of a selected module.
+        hits = {hit["name"]: hit["imported_by"] for search in check["searches"] for hit in search["hits"]}
+        decided = set(check["selected"]) | set(check["metrics"]) | set(check["not_separate"])
+        for name in decided:
+            self.assertGreater(hits[name], 0)
+        self.assertEqual(len(decided), check["hit_counts"]["new_positive_metric"])
+        for name in check["zero_metric_hits_not_leads"]:
+            self.assertEqual(hits[name], 0)
+            self.assertNotIn(name, leads)
+        for row in check["source_overlap"]:
+            with self.subTest(fork=row["module"]):
+                self.assertGreater(row["shared_distinct_lines"] / row["distinct_non_test_lines"], 0.85)
+                self.assertEqual(leads[row.get("package", row["module"])]["status"], "excluded_duplicate_fork")
+        reference = check["probes"]["github.com/yamlstar/yamlstar-plugin-parser-reference/parser"]
+        self.assertFalse(reference["controls"]["catalog.yaml"]["oracle_match"])
+        self.assertEqual(leads["github.com/yamlstar/yamlstar-plugin-parser-reference/parser"]["status"],
+                         "excluded_control_failed")
+
 
 if __name__ == "__main__":
     unittest.main()
