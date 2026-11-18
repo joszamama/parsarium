@@ -317,6 +317,114 @@
     }
   },
   {
+    "name": "vimeo/php-mysql-engine",
+    "version": "0.7.15",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned codeload archive (SHA-256 5a31d047f8817951cb1428324e80541966264eda3f04923b3fbcbaf7372bd4fd; LICENSE SHA-256 bf6f19584a4c7404a901d5580b6d48025a9dd0cc597f397dac01b4e0987ff783, MIT, copyright Scott Sandler, Slack Technologies and Matt Brown); Packagist license MIT",
+    "input_api": "Vimeo\\MysqlEngine\\Parser\\SQLParser::parse(local SQL text of one statement) -> SelectQuery | InsertQuery | UpdateQuery | ... query object",
+    "documentation": "https://github.com/vimeo/php-mysql-engine/blob/780c49d233834dc91d5b5624c0a709080e238682/src/Parser/SQLParser.php",
+    "source": "https://codeload.github.com/vimeo/php-mysql-engine/legacy.zip/780c49d233834dc91d5b5624c0a709080e238682",
+    "source_sha256": "5a31d047f8817951cb1428324e80541966264eda3f04923b3fbcbaf7372bd4fd",
+    "composer_reference": "780c49d233834dc91d5b5624c0a709080e238682",
+    "dependencies": [
+      "nyholm/dsn 2.0.1",
+      "symfony/polyfill-php73 v1.37.0"
+    ],
+    "dialect": "MySQL 5.6 subset (the only dialect; no option)",
+    "scope": "SQL text from local bytes; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. 0.7.15 (2026-07-17) is the latest release. The package is an in-memory MySQL simulation for tests; its README documents the FakePdo entry and states that it parses SELECT, INSERT, UPDATE and DELETE queries with a validating query parser. The parser entry used here, the public final class SQLParser with its static parse() method, is documented only by its docblock return types in the pinned source, not in the README. The harness never constructs FakePdo and nothing is executed. SQLParser::parse() reads one statement and rejects a ';' terminator after INSERT or FROM, so the adapter cuts the input at the package SQLLexer's ';' lexemes.",
+    "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
+    "family_note": "SQLLexer splits the text with a regular expression and groups quoted tokens; SQLParser dispatches to SelectParser, FromParser, ExpressionParser, OrderByParser and InsertParser, which build SelectQuery, FromClause, InsertQuery and Expression objects (BinaryOperatorExpression, FunctionExpression, ConstantExpression, ColumnExpression). The README names Slack's Hack SQL Fake (Hack language) as its origin. Independent of the phpMyAdmin, PHP-SQL-Parser, pg_builder, crodas, libpg_query and bleksak code bases. Copies under other names (dottwatson/php-mysql-engine, dottwatson/fpdo, jozefhornik/php-mysql-engine) are excluded as forks.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 312980,
+      "source": "https://packagist.org/packages/vimeo/php-mysql-engine.json",
+      "observed_on_utc": "2026-11-18",
+      "snapshot": "data/php/sql/registry-snapshot.json",
+      "limitation": "Lifetime downloads of a test-time MySQL simulation; installs count use of the whole engine, not of its parser on its own."
+    },
+    "project": "projects/sql/php/vimeo_php_mysql_engine",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "sad_spirit/pg_builder",
     "version": "v3.3.1",
     "license": "BSD-2-Clause",
@@ -790,114 +898,6 @@
       "limitation": "Lifetime downloads; a 2026 package with very little adoption."
     },
     "project": "projects/sql/php/bleksak_sqlite_toolkit",
-    "control": "controls/sql/select-join.sql",
-    "differential_control": "controls/sql/insert-values.sql",
-    "expected_output": {
-      "statement_count": 1,
-      "statements": [
-        {
-          "kind": "select",
-          "tables": [
-            "customers",
-            "orders"
-          ],
-          "select_items": 3,
-          "joins": 1,
-          "where": true,
-          "group_by": 1,
-          "order_by": 1,
-          "functions": [
-            "count",
-            "sum"
-          ],
-          "literals": [
-            [
-              "number",
-              "10"
-            ],
-            [
-              "string",
-              "paid"
-            ]
-          ]
-        }
-      ]
-    },
-    "differential_expected_output": {
-      "statement_count": 1,
-      "statements": [
-        {
-          "kind": "insert",
-          "tables": [
-            "orders"
-          ],
-          "columns": 4,
-          "rows": 2,
-          "literals": [
-            [
-              "number",
-              "1"
-            ],
-            [
-              "number",
-              "19.5"
-            ],
-            [
-              "number",
-              "2"
-            ],
-            [
-              "number",
-              "250"
-            ],
-            [
-              "number",
-              "42"
-            ],
-            [
-              "number",
-              "7"
-            ],
-            [
-              "string",
-              "open"
-            ],
-            [
-              "string",
-              "paid"
-            ]
-          ]
-        }
-      ]
-    }
-  },
-  {
-    "name": "vimeo/php-mysql-engine",
-    "version": "0.7.15",
-    "license": "MIT",
-    "license_evidence": "LICENSE in the pinned codeload archive (SHA-256 5a31d047f8817951cb1428324e80541966264eda3f04923b3fbcbaf7372bd4fd; LICENSE SHA-256 bf6f19584a4c7404a901d5580b6d48025a9dd0cc597f397dac01b4e0987ff783, MIT, copyright Scott Sandler, Slack Technologies and Matt Brown); Packagist license MIT",
-    "input_api": "Vimeo\\MysqlEngine\\Parser\\SQLParser::parse(local SQL text of one statement) -> SelectQuery | InsertQuery | UpdateQuery | ... query object",
-    "documentation": "https://github.com/vimeo/php-mysql-engine/blob/780c49d233834dc91d5b5624c0a709080e238682/src/Parser/SQLParser.php",
-    "source": "https://codeload.github.com/vimeo/php-mysql-engine/legacy.zip/780c49d233834dc91d5b5624c0a709080e238682",
-    "source_sha256": "5a31d047f8817951cb1428324e80541966264eda3f04923b3fbcbaf7372bd4fd",
-    "composer_reference": "780c49d233834dc91d5b5624c0a709080e238682",
-    "dependencies": [
-      "nyholm/dsn 2.0.1",
-      "symfony/polyfill-php73 v1.37.0"
-    ],
-    "dialect": "MySQL 5.6 subset (the only dialect; no option)",
-    "scope": "SQL text from local bytes; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. 0.7.15 (2026-07-17) is the latest release. The package is an in-memory MySQL simulation for tests; its README documents the FakePdo entry and states that it parses SELECT, INSERT, UPDATE and DELETE queries with a validating query parser. The parser entry used here, the public final class SQLParser with its static parse() method, is documented only by its docblock return types in the pinned source, not in the README. The harness never constructs FakePdo and nothing is executed. SQLParser::parse() reads one statement and rejects a ';' terminator after INSERT or FROM, so the adapter cuts the input at the package SQLLexer's ';' lexemes.",
-    "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
-    "family_note": "SQLLexer splits the text with a regular expression and groups quoted tokens; SQLParser dispatches to SelectParser, FromParser, ExpressionParser, OrderByParser and InsertParser, which build SelectQuery, FromClause, InsertQuery and Expression objects (BinaryOperatorExpression, FunctionExpression, ConstantExpression, ColumnExpression). The README names Slack's Hack SQL Fake (Hack language) as its origin. Independent of the phpMyAdmin, PHP-SQL-Parser, pg_builder, crodas, libpg_query and bleksak code bases. Copies under other names (dottwatson/php-mysql-engine, dottwatson/fpdo, jozefhornik/php-mysql-engine) are excluded as forks.",
-    "popularity": {
-      "metric": "Packagist total downloads",
-      "value": 312980,
-      "source": "https://packagist.org/packages/vimeo/php-mysql-engine.json",
-      "observed_on_utc": "2026-11-18",
-      "snapshot": "data/php/sql/registry-snapshot.json",
-      "limitation": "Lifetime downloads of a test-time MySQL simulation; installs count use of the whole engine, not of its parser on its own."
-    },
-    "project": "projects/sql/php/vimeo_php_mysql_engine",
     "control": "controls/sql/select-join.sql",
     "differential_control": "controls/sql/insert-values.sql",
     "expected_output": {
