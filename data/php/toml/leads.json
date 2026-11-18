@@ -196,6 +196,19 @@
       "checked_at_utc": "2026-11-18",
       "found_by": "round-4 GitHub repository search \"toml parser language:php\" (repository hypnotox/php-toml, Packagist name hypnotox/toml)",
       "evidence": "Run on the host (PHP 8.5.12, composer) against v1.0.1 (dist reference 9b40f89d, MIT): toArray() returns every date-time as a string, and the documented node tree keeps a ValueType enum with the four date-time kinds but stores each date-time value as its validated source text (Parser::parseAndValidateDatetime returns the string), so the offset date-time UTC instant would have to be computed by parsing that text in the harness, which the TOML protocol excludes. Integers, floats and strings are typed correctly on both controls."
+    },
+    {
+      "name": "safeaccess/inline",
+      "release": "0.2.2",
+      "metric_value": 22,
+      "license": "MIT",
+      "family": "safeaccess/inline (own internal TomlParser)",
+      "api_lead": "internal TomlParser (marked @internal)",
+      "status": "unresolved_datetime_source_text",
+      "evidence": "Round-6 GitHub code search hit; the parser's docblock says date-times are preserved as strings and the class is marked @internal, so it has neither typed date-times nor a documented public value API. Not run.",
+      "found_by": "round-6 GitHub code search 'class TomlParser language:PHP'",
+      "metric": "Packagist total downloads",
+      "checked_at_utc": "2026-11-18"
     }
   ],
   "excluded": [
@@ -228,6 +241,24 @@
       "metric_value": 13074,
       "status": "excluded",
       "reason": "Code-style fixers; not a parser API."
+    },
+    {
+      "name": "kmvan/prober",
+      "metric_value": 41,
+      "status": "excluded",
+      "reason": "Round 6: a server-probe application with a line-based UtilsTomlParser and no date-time handling."
+    },
+    {
+      "name": "aedart/athenaeum-config",
+      "metric_value": 3201,
+      "status": "excluded",
+      "reason": "Round 6: config loader that delegates to devium/toml."
+    },
+    {
+      "name": "phlak/config",
+      "metric_value": 355546,
+      "status": "excluded",
+      "reason": "Round 6: config loader that requires the selected internal/toml."
     }
   ],
   "round_4": {
@@ -313,5 +344,23 @@
       }
     ],
     "packagist_hits": "data/php/toml/registry-snapshot.json round_4_targeted_lookups"
+  },
+  "round_6": {
+    "observed": "2026-11-18",
+    "routes": [
+      "toml-lang/toml-test-matrix parser list (commit 71475d29): no PHP entry",
+      "Packagist search.json queries tags=toml (37), q=toml&type=library (11,019; first 300), 'toml 1.0' (9), 'toml parse' (106), 'toml config' (208), 'toml file' (690; first 300), 'toml encoder' (14), 'toml serializer' (21), 'toml format' (96), 'toml spec' (203), 'toml ast' (16), 'toml datetime' (5), 'toml-test' (2): no unrecorded package with TOML in its name or description",
+      "full Packagist name list (packages/list.json, 476,141 names): 59 names contain 'toml', every real TOML package already recorded",
+      "GitHub code search 'LocalTime toml language:PHP' (1,486), '\"datetime-local\" \"date-local\" language:PHP' (20), 'toml LocalDate language:PHP' (277), '\"toml\" \"offset date-time\" language:PHP' (4), 'class TomlParser language:PHP' (38); repository searches 'toml in:name,description language:PHP' (61) and 'topic:toml language:PHP' (15)"
+    ],
+    "promoted": [],
+    "new_leads": [
+      "safeaccess/inline"
+    ],
+    "excluded": [
+      "kmvan/prober",
+      "aedart/athenaeum-config",
+      "phlak/config"
+    ]
   }
 }
