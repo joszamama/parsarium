@@ -191,14 +191,19 @@
   },
   {
     "name": "mdns",
-    "status": "unresolved_no_primary_metric",
+    "status": "excluded",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": null,
     "found_by": "registry search hit (conan:dns)",
     "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
     "documentation": "https://github.com/mjansson/mdns",
     "family": "mjansson/mdns (header-only mDNS)",
-    "reason": "Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. GitHub stars are not allowed outside PLY cells."
+    "reason": "No primary metric (Conan only, no Debian source package). Star fallback checked in round 6: mjansson/mdns has 598 stars and tag 1.4.3 (archive sha256 be1fd8e3...), but by source inspection of mdns.h 1.4.3 the message header, questions and records are decoded only inside the socket receive functions (mdns_query_recv, mdns_discovery_recv and mdns_socket_listen call recvfrom), and the documented record helpers decode PTR, SRV, A, AAAA and TXT RDATA only (no MX). There is no documented API for caller-supplied message bytes, and the harness may not open a socket.",
+    "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "supplemental_metric_value": 598,
+    "checked_version": "1.4.3",
+    "api_lead_checked_against_pinned_release": true,
+    "input_api_lead": "mdns_query_recv / mdns_discovery_recv / mdns_socket_listen (socket receive + record callback); mdns_record_parse_ptr/srv/a/aaaa/txt"
   },
   {
     "name": "mdnsresponder",
@@ -220,7 +225,9 @@
     "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
     "documentation": "https://github.com/Pro/mdnsd",
     "family": "mdnsd (Jeremie Miller) fork",
-    "reason": "Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. GitHub stars are not allowed outside PLY cells."
+    "reason": "Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. Star fallback (round 6, 2026-11-18): Pro/mdnsd has 11 GitHub stars, below the 100-star threshold, and is a GitHub fork (fork: true) of mdnsd; registry-snapshot.json round_6_star_fallback.",
+    "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "supplemental_metric_value": 11
   },
   {
     "name": "mdnsd",
@@ -231,7 +238,7 @@
     "documentation": "https://packages.debian.org/sid/libmdnsd-dev",
     "input_api_lead": "int message_parse(struct message *m, unsigned char *packet) (libmdnsd/1035.h)",
     "api_lead_checked_against_pinned_release": true,
-    "reason": "Debian builds libmdnsd-dev with libmdnsd/1035.h, whose message_parse decodes the header, questions and records of caller-supplied bytes, but by source inspection of v1.2 (libmdnsd/1035.c) the record parser decodes only A, AAAA, NS, CNAME, PTR, SRV and TXT RDATA; the MX answer of controls/dns/response.bin keeps raw RDATA, so its exchange name is not decoded by the library.",
+    "reason": "Debian builds libmdnsd-dev with libmdnsd/1035.h, whose message_parse decodes the header, questions and records of caller-supplied bytes, but by source inspection of v1.2 (libmdnsd/1035.c) the record parser decodes only A, AAAA, NS, CNAME, PTR, SRV and TXT RDATA; the MX answer of controls/dns/response.bin keeps raw RDATA, so its exchange name is not decoded by the library. Round 6: troglobit/mdnsd has 75 GitHub stars, below the star-fallback threshold as well.",
     "primary_metric_value": 28,
     "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 6
@@ -475,7 +482,9 @@
     "input_api_lead": "",
     "family": "firedns",
     "api_lead_checked_against_pinned_release": false,
-    "reason": "Asynchronous resolver library last packaged in Debian jessie (0.9.12); absent from the pinned popcon table, so no primary metric and no Debian dev-package fallback. Not attempted."
+    "reason": "Asynchronous resolver library last packaged in Debian jessie (0.9.12); absent from the pinned popcon table, so no primary metric and no Debian dev-package fallback. Not attempted. Star fallback (round 6, 2026-11-18): rofl0r/firedns has 18 GitHub stars, below the 100-star threshold, and has no tagged release; registry-snapshot.json round_6_star_fallback.",
+    "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "supplemental_metric_value": 18
   },
   {
     "name": "s6-dns",
@@ -487,7 +496,9 @@
     "input_api_lead": "s6dns_message_parse_init / s6dns_message_parse_next and per-type s6dns_message_get_* (libs6dns)",
     "family": "skarnet s6-dns",
     "api_lead_checked_against_pinned_release": false,
-    "reason": "skarnet's libs6dns documents message-parsing functions and is packaged in Alpine, but Debian has no s6-dns source package (sources.debian.org 404; only skalibs), so there is no primary metric and no Debian dev-package fallback. Not attempted."
+    "reason": "skarnet's libs6dns documents message-parsing functions and is packaged in Alpine, but Debian has no s6-dns source package (sources.debian.org 404; only skalibs), so there is no primary metric and no Debian dev-package fallback. Not attempted. Star fallback (round 6, 2026-11-18): skarnet/s6-dns has 47 GitHub stars, below the 100-star threshold; registry-snapshot.json round_6_star_fallback.",
+    "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "supplemental_metric_value": 47
   },
   {
     "name": "wdns",
@@ -499,7 +510,9 @@
     "input_api_lead": "wdns_parse_message(wdns_message_t *m, const uint8_t *pkt, size_t len)",
     "family": "Farsight wdns",
     "api_lead_checked_against_pinned_release": false,
-    "reason": "Farsight Security's low-level DNS wire library, distributed through Farsight's own package repository; no Debian source package, so no primary metric. Not attempted."
+    "reason": "Farsight Security's low-level DNS wire library, distributed through Farsight's own package repository; no Debian source package, so no primary metric. Not attempted. Star fallback (round 6, 2026-11-18): farsightsec/wdns has 20 GitHub stars, below the 100-star threshold; registry-snapshot.json round_6_star_fallback.",
+    "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "supplemental_metric_value": 20
   },
   {
     "name": "dnsparse",
@@ -511,7 +524,9 @@
     "input_api_lead": "",
     "family": "dnsparse (Robert Graham)",
     "api_lead_checked_against_pinned_release": false,
-    "reason": "Stand-alone DNS response parser on GitHub with no Debian source package; no primary metric. Not attempted."
+    "reason": "Stand-alone DNS response parser on GitHub with no Debian source package; no primary metric. Not attempted. Star fallback (round 6, 2026-11-18): robertdavidgraham/dnsparse has 24 GitHub stars, below the 100-star threshold, and has no tagged release; registry-snapshot.json round_6_star_fallback.",
+    "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "supplemental_metric_value": 24
   },
   {
     "name": "wahern-dns",
@@ -532,5 +547,33 @@
     "supplemental_rank": 1,
     "verification": "projects/dns/c/wahern-dns/verification.json",
     "reason": "Pinned rel-20160808 passes both DNS controls; star-fallback path (273 stars) ranked after the five Debian-ranked paths; see parsers.json and data/c/dns/wahern-dns-feedback-differential.json."
+  },
+  {
+    "name": "simdzone",
+    "status": "excluded",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": null,
+    "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "supplemental_metric_value": 140,
+    "found_by": "round-6 star-fallback GitHub search ('dns parser language:C stars:>=100')",
+    "documentation": "https://github.com/NLnetLabs/simdzone",
+    "input_api_lead": "",
+    "family": "NLnet Labs simdzone",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "Zone-file (presentation format) parser, not a wire-format message decoder; out of scope under catalog/dns/PROTOCOL.md."
+  },
+  {
+    "name": "spcdns",
+    "status": "unresolved_no_primary_metric",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": null,
+    "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "supplemental_metric_value": 84,
+    "found_by": "round-6 star-fallback lookup of known C DNS codec libraries",
+    "documentation": "https://github.com/spc476/SPCDNS",
+    "input_api_lead": "dns_decode(dns_decoded_t *, size_t *, const dns_packet_t *, size_t) (dns.h)",
+    "family": "SPCDNS (Sean Conner)",
+    "api_lead_checked_against_pinned_release": false,
+    "reason": "DNS encode/decode library with tagged releases, but no Debian source package (no primary metric) and 84 GitHub stars, below the 100-star fallback threshold. Not attempted."
   }
 ]
