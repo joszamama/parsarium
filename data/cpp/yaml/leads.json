@@ -27,18 +27,18 @@
   },
   {
     "name": "fkyaml",
-    "status": "unresolved_no_primary_metric",
-    "metric_value": null,
-    "metric_error": "no Debian source package for fkYAML in the pinned sourcemax snapshot (exact names fkyaml, libfkyaml and substring 'fkyaml' checked); no Debian development package for the fallback",
+    "status": "selected",
+    "metric_value": 153,
+    "metric_error": null,
     "family": "fkYAML (own header-only lexer, parser and basic_node tree)",
     "api_hint": "fkyaml::basic_node<std::vector, fkyaml::ordered_map>::deserialize(std::string); is_mapping/is_sequence/is_null/is_boolean/is_integer/is_float_number/is_string with as_map/as_seq/as_bool/as_int/as_float/as_str",
-    "note": "Header-only, not packaged in Debian. PROTOCOL.md allows GitHub stars only in PLY cells (C JSON Parson, C MP3 minimp3/dr_mp3, C TOML tomlc17 precedents).",
+    "note": "Header-only, not packaged in Debian (no popcon value or development-package fallback). Selected on 2026-11-18 under the C/C++ GitHub-star fallback (PROTOCOL.md): 153 stars captured 2026-11-18T07:13:02.150202+00:00, ranked after the Debian paths.",
     "found_by": "targeted_documentation_lead",
     "source": "https://github.com/fktn-k/fkYAML",
-    "reason": "Unresolved, no primary metric: fkYAML v0.5.0 parses both controls to the exact typed trees with its own scalar typing (host check), but it has no Debian source or development package, so there is no popcon value or Debian fallback, and GitHub stars are not allowed outside PLY cells.",
+    "reason": "Selected (star fallback): pinned v0.5.0 tag source archive passes both YAML controls with fkYAML's own scalar typing and alias resolution in the Docker harness, with parser source coverage and stable, control-dependent AFL++ feedback.",
     "pinned_release": "v0.5.0",
-    "pinned_source": "https://github.com/fktn-k/fkYAML/releases/download/v0.5.0/fkYAML_single_header.zip",
-    "pinned_source_sha256": "beb472e6bcf3b5a972e499af1c1c3faec63d984b609d9ef05b51d2368b79e4f0",
+    "pinned_source": "https://github.com/fktn-k/fkYAML/archive/refs/tags/v0.5.0.tar.gz",
+    "pinned_source_sha256": "eaab648ff79d4688a8fb41f36a83211e56df3287e1d7ccfb2d09c5daed318143",
     "license": "MIT",
     "documentation": "https://fktn-k.github.io/fkYAML/api/basic_node/deserialize/",
     "control_check": {
@@ -47,7 +47,11 @@
       "order.yaml": "exact expected typed tree (tree_sha256 2d1f195f5bb3ec258e4741d08e02e32a39c77cdc6c43fca4e961de09180f5f46)",
       "typing": "fkYAML resolves plain scalars itself (is_integer/is_float_number/is_boolean/is_null); the harness only prints them. Source key order needs the documented fkyaml::ordered_map mapping type (the default basic_node uses std::map).",
       "build_note": "The v0.5.0 single header uses std::streamsize without including <ios>; under libc++ the harness includes <ios> first."
-    }
+    },
+    "metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "selection": "supplemental",
+    "pinned_source_note": "The Docker harness builds the multi-header include/ tree of the tag source archive; the earlier host check used the release asset fkYAML_single_header.zip (sha256 beb472e6bcf3b5a972e499af1c1c3faec63d984b609d9ef05b51d2368b79e4f0).",
+    "evidence": "projects/yaml/cpp/fkyaml/verification.json"
   },
   {
     "name": "opencv",

@@ -896,5 +896,450 @@
         ]
       ]
     }
+  },
+  {
+    "name": "fkyaml",
+    "version": "0.5.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/fktn-k/fkYAML/blob/v0.5.0/LICENSE.txt (MIT, Copyright (c) 2023-2026 Kensuke Fukutani).",
+    "input_api": "fkyaml::basic_node<std::vector, fkyaml::ordered_map>::deserialize(ItrType begin, ItrType end); is_mapping/is_sequence/is_null/is_boolean/is_integer/is_float_number/is_string with as_map/as_seq/as_bool/as_int/as_float/as_str",
+    "documentation": "https://fktn-k.github.io/fkYAML/api/basic_node/deserialize/",
+    "documentation_evidence": "The basic_node::deserialize page documents parsing YAML from strings, streams, files and iterator ranges into a basic_node tree; the is_*/as_* pages document node type queries and value access, and the ordered_map page documents the insertion-order mapping type usable as basic_node's MappingType.",
+    "source": "https://github.com/fktn-k/fkYAML/releases/tag/v0.5.0",
+    "source_sha256": "eaab648ff79d4688a8fb41f36a83211e56df3287e1d7ccfb2d09c5daed318143",
+    "adapter": "projects/yaml/cpp/fkyaml/harness.cpp",
+    "control": "controls/yaml/catalog.yaml",
+    "scope": "One YAML document from local bytes passed to basic_node::deserialize: block and flow collections, quoted and block scalars, anchors and aliases, as a typed tree in source order. fkYAML types plain scalars itself and resolves aliases to their anchored node; the harness only walks the tree.",
+    "family": "fkYAML (own header-only lexer, scalar scanner/parser and deserializer)",
+    "family_note": "Own lexical_analyzer.hpp, scalar_scanner.hpp/scalar_parser.hpp and deserializer.hpp under include/fkYAML/detail/input; no delegation to libyaml, yaml-cpp, rapidyaml or another YAML parser. Built from the v0.5.0 tag source archive (multi-header include/ tree, not the single-header amalgamation).",
+    "typing_note": "fkYAML resolves plain scalars itself (is_null/is_boolean/is_integer/is_float_number/is_string) and expands aliases through basic_node reference resolution; the harness only walks and prints the tree. Mappings use the documented fkyaml::ordered_map to keep source key order.",
+    "build_note": "Header-only; the harness includes <ios> before fkYAML because the v0.5.0 headers use std::streamsize without including it (needed under libc++; harmless under libstdc++).",
+    "popularity": {
+      "metric": "GitHub stars (secondary, repository interest, not downloads)",
+      "selection": "supplemental",
+      "value": 153,
+      "repository": "fktn-k/fkYAML",
+      "source": "https://api.github.com/repos/fktn-k/fkYAML",
+      "response_sha256": "53f9d71caee8c2ce3c2efca5d0a652244e1eb9c20fc5d888fb3e0af4db2e340a",
+      "captured_at_utc": "2026-11-18T07:13:02.150202+00:00",
+      "snapshot": "data/cpp/yaml/registry-snapshot.json",
+      "limitation": "Star fallback under PROTOCOL.md (C/C++ cells, at least 100 stars, pinned tagged release, format-specific upstream repository): fills a slot left empty after the Debian-ranked paths and is ranked separately after them; not comparable to popcon installations and not YAML-use evidence. Not packaged in Debian (no popcon value)."
+    },
+    "project": "projects/yaml/cpp/fkyaml",
+    "expected_output": {
+      "tree": [
+        "map",
+        [
+          [
+            "kind",
+            [
+              "str",
+              "catalog"
+            ]
+          ],
+          [
+            "version",
+            [
+              "int",
+              "2"
+            ]
+          ],
+          [
+            "ratio",
+            [
+              "float",
+              "0.25"
+            ]
+          ],
+          [
+            "offset",
+            [
+              "int",
+              "-17"
+            ]
+          ],
+          [
+            "enabled",
+            [
+              "bool",
+              true
+            ]
+          ],
+          [
+            "retired",
+            [
+              "bool",
+              false
+            ]
+          ],
+          [
+            "missing",
+            [
+              "null"
+            ]
+          ],
+          [
+            "title",
+            [
+              "str",
+              "Café \"quoted\"\tend"
+            ]
+          ],
+          [
+            "single",
+            [
+              "str",
+              "it's here"
+            ]
+          ],
+          [
+            "tags",
+            [
+              "seq",
+              [
+                [
+                  "str",
+                  "alpha"
+                ],
+                [
+                  "str",
+                  "beta"
+                ],
+                [
+                  "str",
+                  "gamma delta"
+                ]
+              ]
+            ]
+          ],
+          [
+            "point",
+            [
+              "map",
+              [
+                [
+                  "lat",
+                  [
+                    "int",
+                    "1"
+                  ]
+                ],
+                [
+                  "lon",
+                  [
+                    "float",
+                    "-2.5"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "items",
+            [
+              "seq",
+              [
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "7"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "first item"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "line one\nline two\n"
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "8"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "Zürich"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "folded text\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "defaults",
+            [
+              "map",
+              [
+                [
+                  "retries",
+                  [
+                    "int",
+                    "3"
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "base"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "service",
+            [
+              "map",
+              [
+                [
+                  "settings",
+                  [
+                    "map",
+                    [
+                      [
+                        "retries",
+                        [
+                          "int",
+                          "3"
+                        ]
+                      ],
+                      [
+                        "label",
+                        [
+                          "str",
+                          "base"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "edge"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "differential_control": "controls/yaml/order.yaml",
+    "differential_expected_output": {
+      "tree": [
+        "seq",
+        [
+          [
+            "map",
+            [
+              [
+                "order",
+                [
+                  "str",
+                  "A-7"
+                ]
+              ],
+              [
+                "lines",
+                [
+                  "seq",
+                  [
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "Xé-1"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "2"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "12.5"
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "B '2'"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "1"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "0.75"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "flags",
+                [
+                  "seq",
+                  []
+                ]
+              ],
+              [
+                "meta",
+                [
+                  "map",
+                  []
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              [
+                "int",
+                "1"
+              ],
+              [
+                "seq",
+                [
+                  [
+                    "int",
+                    "2"
+                  ],
+                  [
+                    "int",
+                    "3"
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "k",
+                    [
+                      "str",
+                      "v"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "str",
+            "plain multi word"
+          ],
+          [
+            "str",
+            "line\nbreak"
+          ],
+          [
+            "str",
+            "kept\n  indented"
+          ],
+          [
+            "null"
+          ],
+          [
+            "bool",
+            false
+          ]
+        ]
+      ]
+    }
   }
 ]

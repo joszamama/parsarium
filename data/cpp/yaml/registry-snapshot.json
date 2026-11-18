@@ -2102,5 +2102,26 @@
    "mrpt": 39
   },
   "result": "No new C++ YAML parser with a Debian source: apt-cache lists only libyaml-cpp and libryml as C++ YAML libraries. vcpkg adds fkyaml (already an unresolved lead) and ryml/yaml-cpp; Conan adds simple-yaml (Rechip, a C++20 code-structure binding for configuration files, a mapping layer, not in Debian). GitHub C++ parsers (femtoyaml, wsjcpp-yaml, Tiny_Yaml and others) are not packaged in Debian, so they have no primary metric."
+ },
+ "round_6_star_fallback": {
+  "rule": "PROTOCOL.md (2026-11-18): C and C++ cells may fill slots left empty after primary-metric and Debian-fallback paths with pinned tagged releases of format-specific upstream GitHub repositories with at least 100 stars; ranked separately after the Debian paths.",
+  "metric": "GitHub stars (secondary, repository interest, not downloads)",
+  "source": "GitHub REST API GET /repos/{owner}/{repo} stargazers_count",
+  "threshold": 100,
+  "selected_star_paths": [
+   {
+    "name": "fkyaml",
+    "repository": "fktn-k/fkYAML",
+    "api_url": "https://api.github.com/repos/fktn-k/fkYAML",
+    "stargazers_count": 153,
+    "captured_at_utc": "2026-11-18T07:13:02.150202+00:00",
+    "response_sha256": "53f9d71caee8c2ce3c2efca5d0a652244e1eb9c20fc5d888fb3e0af4db2e340a",
+    "fork": false,
+    "archived": false,
+    "pinned_tag": "v0.5.0",
+    "rank": 3,
+    "selection": "supplemental"
+   }
+  ]
  }
 }

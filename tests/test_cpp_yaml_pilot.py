@@ -37,12 +37,31 @@ class CppYamlPilotTest(unittest.TestCase):
         cell = read(BASE / "cell.json")
         self.assertEqual(cell["verified_third_party_count"], len(self.parsers))
         self.assertGreaterEqual(len(self.parsers), 1)
-        values = [item["popularity"]["value"] for item in self.parsers]
-        self.assertEqual(values, sorted(values, reverse=True))
-        for parser in self.parsers:
+        # Debian-ranked paths first, then GitHub-star fallback paths ranked
+        # separately (PROTOCOL.md); the two metrics are never mixed.
+        star = [item for item in self.parsers if item["popularity"].get("selection") == "supplemental"]
+        debian = [item for item in self.parsers if item not in star]
+        self.assertEqual(self.parsers, debian + star)
+        for group in (debian, star):
+            values = [item["popularity"]["value"] for item in group]
+            self.assertEqual(values, sorted(values, reverse=True))
+        for parser in debian:
             popularity = parser["popularity"]
             self.assertEqual(popularity["source_sha256"], sha256(POPCON.read_bytes()).hexdigest())
             self.assertEqual(popularity["value"], sourcemax(popularity["debian_source"]))
+        captured = {row["name"]: row for row in
+                    read(BASE / "registry-snapshot.json").get("round_6_star_fallback", {})
+                    .get("selected_star_paths", [])}
+        for parser in star:
+            popularity = parser["popularity"]
+            self.assertEqual(popularity["metric"],
+                             "GitHub stars (secondary, repository interest, not downloads)")
+            self.assertGreaterEqual(popularity["value"], 100)
+            row = captured[parser["name"]]
+            self.assertEqual((row["stargazers_count"], row["response_sha256"], row["captured_at_utc"]),
+                             (popularity["value"], popularity["response_sha256"],
+                              popularity["captured_at_utc"]))
+            self.assertFalse(row["fork"])
 
     def test_pins_oracle_receipts_and_feedback(self):
         for parser in self.parsers:
@@ -85,11 +104,18 @@ class CppYamlPilotTest(unittest.TestCase):
                 self.assertEqual(diff["second_control_output"], manifest["differential_expected_output"])
 
     def test_plain_scalars_are_typed_by_core_schema_patterns(self):
+        # fkYAML resolves plain scalars itself; the other C++ libraries keep
+        # them as text and their harnesses apply the core-schema patterns.
+        self_typing = {"fkyaml"}
         for parser in self.parsers:
             harness = (ROOT / parser["project"] / "harness.cpp").read_text()
+            self.assertIn("typing_note", parser)
+            if parser["name"] in self_typing:
+                self.assertNotIn("std::regex", harness)
+                self.assertIn("is_integer()", harness)
+                continue
             self.assertIn("[-+]?[0-9]+", harness)
             self.assertIn("true|True|TRUE|false|False|FALSE", harness)
-            self.assertIn("typing_note", parser)
 
 
 if __name__ == "__main__":
