@@ -1,1 +1,267 @@
-[]
+[
+  {
+    "name": "tomlc17",
+    "version": "R261116",
+    "license": "MIT",
+    "license_evidence": "LICENSE in the pinned R261116 archive (MIT, Copyright (c) 2024-2026, CK Tan)",
+    "input_api": "toml_parse(const char *src, int len) -> toml_result_t; walk result.toptab (toml_datum_t: type, u.tab, u.arr, u.str, u.int64, u.fp64, u.boolean, u.ts)",
+    "documentation": "https://github.com/cktan/tomlc17/blob/R261116/API.md#toml_parse",
+    "documentation_note": "API.md at tag R261116 documents toml_parse, toml_free and the toml_datum_t fields; src/tomlc17.h in the pinned archive declares them with the same comments.",
+    "source": "https://github.com/cktan/tomlc17/releases/tag/R261116",
+    "scope": "TOML 1.0.0 document from an in-memory byte buffer of explicit length, default options, decoded into a toml_datum_t tree",
+    "family": "tomlc17 (cktan; single-file scanner and parser in src/tomlc17.c)",
+    "family_note": "tomlc17 is a separate rewrite by the author of tomlc99 with its own scanner and datum tree; it shares no parser source with tomlc99 or its toml-c fork. Its compat/tomlc99 directory is an API shim over tomlc17 and is not compiled here.",
+    "control": "controls/toml/service-config.toml",
+    "differential_control": "controls/toml/typed-scalars.toml",
+    "metric": {
+      "name": "Debian popcon installations",
+      "value": null,
+      "ranked": false,
+      "reason": "No C TOML library is packaged in Debian (popcon source/binary substring search) or Conan Center, so the primary C metric has no value and no Debian fallback applies.",
+      "snapshot": "data/c/toml/registry-snapshot.json",
+      "captured_at_utc": "2026-11-17T16:37:12.747400+00:00"
+    },
+    "selection": "supplemental",
+    "supplemental_metric": {
+      "name": "GitHub stars (secondary, repository interest, not downloads)",
+      "value": 201,
+      "rank": 1,
+      "rule": "PROTOCOL.md star fallback (2026-11-18): C and C++ slots left empty after primary and Debian paths; pinned tagged upstream release, at least 100 stargazers; ranked separately",
+      "repository": "https://github.com/cktan/tomlc17",
+      "release_tag": "R261116",
+      "source": "https://api.github.com/repos/cktan/tomlc17",
+      "captured_at_utc": "2026-11-18T07:11:50.475255+00:00",
+      "response_sha256": "aa9da5e33915a723ed334a8ab2746596bca9e308d6f20a39a15ab7f5348962c8",
+      "snapshot": "data/c/toml/registry-snapshot.json (round_6_star_fallback)"
+    },
+    "expected_output": {
+      "database": {
+        "limits": {
+          "max": {
+            "type": "integer",
+            "value": "10"
+          },
+          "min": {
+            "type": "integer",
+            "value": "-2"
+          }
+        },
+        "ports": [
+          {
+            "type": "integer",
+            "value": "8000"
+          },
+          {
+            "type": "integer",
+            "value": "8001"
+          },
+          {
+            "type": "integer",
+            "value": "8002"
+          }
+        ],
+        "ratio": {
+          "type": "float",
+          "value": "3.25"
+        }
+      },
+      "enabled": {
+        "type": "bool",
+        "value": "true"
+      },
+      "owner": {
+        "name": {
+          "type": "string",
+          "value": "Zoë"
+        },
+        "since": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00Z"
+        }
+      },
+      "products": [
+        {
+          "name": {
+            "type": "string",
+            "value": "Hammer"
+          },
+          "sku": {
+            "type": "integer",
+            "value": "738594937"
+          }
+        },
+        {
+          "color": {
+            "type": "string",
+            "value": "gray"
+          },
+          "name": {
+            "type": "string",
+            "value": "Nail"
+          },
+          "points": [
+            {
+              "x": {
+                "type": "integer",
+                "value": "1"
+              },
+              "y": {
+                "type": "integer",
+                "value": "2"
+              }
+            },
+            {
+              "x": {
+                "type": "integer",
+                "value": "3"
+              },
+              "y": {
+                "type": "integer",
+                "value": "4"
+              }
+            }
+          ]
+        }
+      ],
+      "retries": {
+        "type": "integer",
+        "value": "3"
+      },
+      "servers": {
+        "alpha": {
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.1"
+          },
+          "tags": [
+            {
+              "type": "string",
+              "value": "edge"
+            },
+            {
+              "type": "string",
+              "value": "eu"
+            }
+          ]
+        },
+        "beta": {
+          "enabled": {
+            "type": "bool",
+            "value": "false"
+          },
+          "ip": {
+            "type": "string",
+            "value": "10.0.0.2"
+          }
+        }
+      },
+      "title": {
+        "type": "string",
+        "value": "Parsarium \"service\" control"
+      }
+    },
+    "differential_expected_output": {
+      "floats": {
+        "exponent": {
+          "type": "float",
+          "value": "1000.0"
+        },
+        "fraction": {
+          "type": "float",
+          "value": "3.25"
+        },
+        "mixed": {
+          "type": "float",
+          "value": "0.015625"
+        },
+        "negative": {
+          "type": "float",
+          "value": "-0.5"
+        }
+      },
+      "integers": {
+        "binary": {
+          "type": "integer",
+          "value": "13"
+        },
+        "decimal": {
+          "type": "integer",
+          "value": "99"
+        },
+        "hex": {
+          "type": "integer",
+          "value": "3735928559"
+        },
+        "negative": {
+          "type": "integer",
+          "value": "-17"
+        },
+        "octal": {
+          "type": "integer",
+          "value": "493"
+        },
+        "underscored": {
+          "type": "integer",
+          "value": "1000000"
+        }
+      },
+      "keys": {
+        "a": {
+          "b": {
+            "c": {
+              "type": "integer",
+              "value": "1"
+            }
+          }
+        },
+        "quoted key": {
+          "type": "string",
+          "value": "q"
+        },
+        "site": {
+          "example.com": {
+            "type": "bool",
+            "value": "true"
+          }
+        }
+      },
+      "strings": {
+        "escapes": {
+          "type": "string",
+          "value": "tab\tquote\"backslash\\ é"
+        },
+        "literal": {
+          "type": "string",
+          "value": "C:\\Users\\parsarium"
+        },
+        "multiline": {
+          "type": "string",
+          "value": "first second"
+        },
+        "raw_multiline": {
+          "type": "string",
+          "value": "line one\nline two"
+        }
+      },
+      "times": {
+        "local_date": {
+          "type": "date-local",
+          "value": "1979-05-27"
+        },
+        "local_datetime": {
+          "type": "datetime-local",
+          "value": "1979-05-27T07:32:00"
+        },
+        "local_time": {
+          "type": "time-local",
+          "value": "00:32:00.25"
+        },
+        "offset": {
+          "type": "datetime",
+          "value": "1979-05-27T07:32:00.5Z"
+        }
+      }
+    },
+    "project": "projects/toml/c/tomlc17"
+  }
+]

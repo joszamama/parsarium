@@ -1,28 +1,43 @@
 {
   "ecosystem": "c",
   "format": "toml",
-  "status": "pilot_search_bounded_none_selected",
+  "status": "pilot_one_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 0,
+  "verified_third_party_count": 1,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "toml (case-insensitive substring 'toml' in Debian source-package names)",
     "toml (case-insensitive substring 'toml' in Debian binary-package names)",
-    "toml (case-insensitive Conan Center recipe-name substring)"
+    "toml (case-insensitive Conan Center recipe-name substring)",
+    "toml language:C (GitHub repositories, stars desc)",
+    "toml parser language:C (GitHub repositories, stars desc)",
+    "topic:toml language:C (GitHub repositories, stars desc)"
   ],
   "search_totals": {
     "toml (case-insensitive substring 'toml' in Debian source-package names)": 40,
     "toml (case-insensitive substring 'toml' in Debian binary-package names)": 57,
-    "toml (case-insensitive Conan Center recipe-name substring)": 3
+    "toml (case-insensitive Conan Center recipe-name substring)": 3,
+    "toml language:C (GitHub repositories, stars desc)": 132,
+    "toml parser language:C (GitHub repositories, stars desc)": 45,
+    "topic:toml language:C (GitHub repositories, stars desc)": 27
   },
   "search_limit_per_query": 100,
   "search_hits_recorded": 100,
   "unique_search_hits": 86,
-  "unresolved_documentation_leads": 4,
-  "uncertainty": "Bounded TOML search captured 2026-11-17: 3 queries, 100 recorded hits (86 unique), at most 100 per query. No C TOML library appears in Debian popcon or Conan Center, so no C path has the primary metric or a Debian fallback of at least 1,000, and none is selected. tomlc17 R261116 and toml-c (tomlc99 fork, commit 6a38d404) passed both valid controls with exact typed trees, parser coverage and stable AFL++ feedback; they stay unresolved_no_primary_metric leads with that evidence. tomlc99 (commit 62ce93ce) rejects the second control (\"expect hex char\" on a lowercase \\u escape); libtoml targets TOML 0.4.0 and was not run. Zero selected is not evidence that no C TOML parser is used. A recheck on 2026-11-17 (Debian sourcemax and binary popcon tables, 40 and 57 toml hits, and all 1,981 Conan Center recipe names) again found no C TOML library, so the cell cannot reach 10 under the C primary metric or its Debian fallback; it stays at 0 rather than ranking unmetricked leads. Round 4 (2026-11-18) rechecked the toml-lang wiki C entries (toml-c, tomlc17, tomlc99, libtoml) against the Debian popcon source and binary tables (sourcemax SHA-256 7a460f12): none is packaged, so the cell still has no path with the primary metric or a Debian fallback and stays at 0. Round 5 (2026-11-18) checked tree-sitter grammars: Debian packages no TOML grammar, so the cell still has no C TOML library with a Debian count, and under the tree-sitter rule in PROTOCOL.md the harness would also have to merge dotted keys and tables and decode escapes itself. It stays at 0 (registry snapshot, round_5_tree_sitter).",
-  "primary_metric": "Debian popcon installations (none packaged)",
+  "unresolved_documentation_leads": 3,
+  "uncertainty": "Bounded TOML search captured 2026-11-17: 3 queries, 100 recorded hits (86 unique), at most 100 per query. No C TOML library appears in Debian popcon or Conan Center, so no C path has the primary metric or a Debian fallback of at least 1,000, and none is selected. tomlc17 R261116 and toml-c (tomlc99 fork, commit 6a38d404) passed both valid controls with exact typed trees, parser coverage and stable AFL++ feedback; they stay unresolved_no_primary_metric leads with that evidence. tomlc99 (commit 62ce93ce) rejects the second control (\"expect hex char\" on a lowercase \\u escape); libtoml targets TOML 0.4.0 and was not run. Zero selected is not evidence that no C TOML parser is used. A recheck on 2026-11-17 (Debian sourcemax and binary popcon tables, 40 and 57 toml hits, and all 1,981 Conan Center recipe names) again found no C TOML library, so the cell cannot reach 10 under the C primary metric or its Debian fallback; it stays at 0 rather than ranking unmetricked leads. Round 4 (2026-11-18) rechecked the toml-lang wiki C entries (toml-c, tomlc17, tomlc99, libtoml) against the Debian popcon source and binary tables (sourcemax SHA-256 7a460f12): none is packaged, so the cell still has no path with the primary metric or a Debian fallback and stays at 0. Round 5 (2026-11-18) checked tree-sitter grammars: Debian packages no TOML grammar, so the cell still has no C TOML library with a Debian count, and under the tree-sitter rule in PROTOCOL.md the harness would also have to merge dotted keys and tables and decode escapes itself. It stays at 0 (registry snapshot, round_5_tree_sitter). Round 6 star fallback (2026-11-18): PROTOCOL.md now lets C and C++ cells fill slots left empty after primary and Debian paths with pinned tagged releases of format-specific upstream repositories with at least 100 GitHub stars, ranked separately. Three GitHub repository searches (toml language:C, toml parser language:C, topic:toml language:C; first 100 hits by stars) found five repositories with at least 100 stars. tomlc17 R261116 (201 stars) was rebuilt from its pinned tag on current main and again printed the exact typed tree for both controls (1034 and 1105 tomlc17.c lines in the parser-only probe, 268/368 AFL++ tuples, 216 differ, three identical repeats); it is selected as a supplemental star path. toml-c (114 stars, tomlc99 fork), tomlc99 (664) and libtoml (125) have no tagged release, so the fallback does not apply; tomlc99 also fails the second control. fwm is a Wayland compositor. Stars measure repository interest, not installations, and are not comparable with popcon values. The cell stays at one.",
+  "primary_metric": "Debian popcon installations (none packaged); star fallback: GitHub stars (secondary, repository interest, not downloads)",
   "registry_snapshot": "data/c/toml/registry-snapshot.json",
   "unresolved_leads": "data/c/toml/leads.json",
-  "runtime_evidence": "data/c/toml/standard.json"
+  "runtime_evidence": "data/c/toml/standard.json",
+  "third_party_evidence": "data/c/toml/parsers.json",
+  "third_party_control_results": [
+    "projects/toml/c/tomlc17/verification.json"
+  ],
+  "third_party_verification": "data/c/toml/verification.json",
+  "afl_feedback": "data/c/toml/afl-feedback.json",
+  "source_lock": "projects/toml/c/tomlc17/source-lock.json",
+  "ranking_metric": "GitHub stars (secondary, repository interest, not downloads); primary popcon metric absent",
+  "selection": "One control-verified C TOML path. No C TOML library is packaged in Debian or Conan Center, so the primary popcon metric is absent (null, not ranked); tomlc17 R261116 fills a slot through the 2026-11-18 GitHub-star fallback with 201 stars (selection supplemental, ranked separately)."
 }

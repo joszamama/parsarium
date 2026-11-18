@@ -1,988 +1,1163 @@
 {
- "ecosystem": "c",
- "format": "toml",
- "captured_at_utc": "2026-11-17T16:37:12.747400+00:00",
- "search_limit_per_query": 100,
- "note": "Search hits and leads are not verified parsers.",
- "search_surface": "Debian popcon source (sourcemax) and binary installation tables plus Conan Center recipe names; shared by the C and C++ cells",
- "adoption_metric": {
-  "name": "Debian popcon installations (sourcemax/by_inst for source packages; by_inst for binary packages)",
-  "sources": [
-   {
-    "url": "https://popcon.debian.org/sourcemax/by_inst.gz",
-    "sha256": "e705de234f0afd147ed9f758304bbe491ea03fce9ac5395a4b83cd9a8de15411",
-    "rows": 42332
-   },
-   {
-    "url": "https://popcon.debian.org/by_inst.gz",
-    "sha256": "534c7b64e3dc2980d1a62f74bd2a073a2ba5b88df5d4cc0bd4e7c1c2d3bd3ac3",
-    "rows": 228354
-   }
-  ]
- },
- "search": [
-  {
-   "query": "toml",
-   "method": "case-insensitive substring 'toml' in Debian source-package names; ordered by popcon installations",
-   "url": "https://popcon.debian.org/sourcemax/by_inst.gz",
-   "snapshot_sha256": "e705de234f0afd147ed9f758304bbe491ea03fce9ac5395a4b83cd9a8de15411",
-   "total": 40,
-   "limit": 100,
-   "hits": [
-    {
-     "rank": 3205,
-     "name": "python-tomlkit",
-     "inst": 7996,
-     "vote": 1650,
-     "old": 5243,
-     "recent": 1103,
-     "no_files": 0
-    },
-    {
-     "rank": 3539,
-     "name": "python-tomli",
-     "inst": 6035,
-     "vote": 903,
-     "old": 4578,
-     "recent": 553,
-     "no_files": 1
-    },
-    {
-     "rank": 3716,
-     "name": "python-toml",
-     "inst": 5160,
-     "vote": 126,
-     "old": 4864,
-     "recent": 166,
-     "no_files": 4
-    },
-    {
-     "rank": 4173,
-     "name": "tomlplusplus",
-     "inst": 3536,
-     "vote": 683,
-     "old": 435,
-     "recent": 179,
-     "no_files": 2239
-    },
-    {
-     "rank": 5840,
-     "name": "r-cran-rcpptoml",
-     "inst": 1539,
-     "vote": 207,
-     "old": 1211,
-     "recent": 120,
-     "no_files": 1
-    },
-    {
-     "rank": 7604,
-     "name": "libtoml-tiny-perl",
-     "inst": 780,
-     "vote": 49,
-     "old": 698,
-     "recent": 33,
-     "no_files": 0
-    },
-    {
-     "rank": 8104,
-     "name": "python-tomli-w",
-     "inst": 637,
-     "vote": 83,
-     "old": 487,
-     "recent": 67,
-     "no_files": 0
-    },
-    {
-     "rank": 8468,
-     "name": "gap-tomlib",
-     "inst": 558,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 558
-    },
-    {
-     "rank": 8905,
-     "name": "ruby-tomlrb",
-     "inst": 494,
-     "vote": 96,
-     "old": 285,
-     "recent": 113,
-     "no_files": 0
-    },
-    {
-     "rank": 11904,
-     "name": "rust-toml-datetime",
-     "inst": 222,
-     "vote": 11,
-     "old": 120,
-     "recent": 37,
-     "no_files": 54
-    },
-    {
-     "rank": 11929,
-     "name": "rust-toml",
-     "inst": 221,
-     "vote": 12,
-     "old": 147,
-     "recent": 38,
-     "no_files": 24
-    },
-    {
-     "rank": 12035,
-     "name": "rust-toml-edit",
-     "inst": 215,
-     "vote": 2,
-     "old": 13,
-     "recent": 8,
-     "no_files": 192
-    },
-    {
-     "rank": 15215,
-     "name": "golang-toml",
-     "inst": 123,
-     "vote": 1,
-     "old": 17,
-     "recent": 1,
-     "no_files": 104
-    },
-    {
-     "rank": 15583,
-     "name": "libtoml-parser-perl",
-     "inst": 115,
-     "vote": 13,
-     "old": 101,
-     "recent": 1,
-     "no_files": 0
-    },
-    {
-     "rank": 16036,
-     "name": "libtoml-perl",
-     "inst": 106,
-     "vote": 8,
-     "old": 97,
-     "recent": 1,
-     "no_files": 0
-    },
-    {
-     "rank": 16467,
-     "name": "rust-toml-parser",
-     "inst": 98,
-     "vote": 5,
-     "old": 38,
-     "recent": 28,
-     "no_files": 27
-    },
-    {
-     "rank": 16468,
-     "name": "rust-toml-writer",
-     "inst": 98,
-     "vote": 5,
-     "old": 38,
-     "recent": 28,
-     "no_files": 27
-    },
-    {
-     "rank": 16485,
-     "name": "golang-github-pelletier-go-toml",
-     "inst": 97,
-     "vote": 2,
-     "old": 15,
-     "recent": 2,
-     "no_files": 78
-    },
-    {
-     "rank": 16689,
-     "name": "golang-github-pelletier-go-toml.v2",
-     "inst": 93,
-     "vote": 2,
-     "old": 22,
-     "recent": 2,
-     "no_files": 67
-    },
-    {
-     "rank": 20537,
-     "name": "haskell-toml-parser",
-     "inst": 44,
-     "vote": 5,
-     "old": 36,
-     "recent": 2,
-     "no_files": 14
-    },
-    {
-     "rank": 21673,
-     "name": "rust-toml-datetime-0.6",
-     "inst": 35,
-     "vote": 1,
-     "old": 1,
-     "recent": 3,
-     "no_files": 30
-    },
-    {
-     "rank": 21947,
-     "name": "rust-toml-edit-0.22",
-     "inst": 33,
-     "vote": 1,
-     "old": 1,
-     "recent": 3,
-     "no_files": 28
-    },
-    {
-     "rank": 22259,
-     "name": "ruby-toml",
-     "inst": 31,
-     "vote": 1,
-     "old": 28,
-     "recent": 2,
-     "no_files": 0
-    },
-    {
-     "rank": 23016,
-     "name": "rust-toml-0.5",
-     "inst": 27,
-     "vote": 1,
-     "old": 3,
-     "recent": 3,
-     "no_files": 20
-    },
-    {
-     "rank": 25517,
-     "name": "rust-toml-0.8",
-     "inst": 17,
-     "vote": 0,
-     "old": 0,
-     "recent": 3,
-     "no_files": 14
-    },
-    {
-     "rank": 26225,
-     "name": "toml11",
-     "inst": 15,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 15
-    },
-    {
-     "rank": 27413,
-     "name": "ruby-toml-rb",
-     "inst": 12,
-     "vote": 1,
-     "old": 9,
-     "recent": 2,
-     "no_files": 0
-    },
-    {
-     "rank": 29235,
-     "name": "python-dom-toml",
-     "inst": 9,
-     "vote": 0,
-     "old": 9,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 30040,
-     "name": "rust-basic-toml",
-     "inst": 8,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 8
-    },
-    {
-     "rank": 30107,
-     "name": "rust-toml2json",
-     "inst": 8,
-     "vote": 0,
-     "old": 7,
-     "recent": 1,
-     "no_files": 0
-    },
-    {
-     "rank": 32045,
-     "name": "rust-pyproject-toml",
-     "inst": 6,
-     "vote": 1,
-     "old": 1,
-     "recent": 3,
-     "no_files": 1
-    },
-    {
-     "rank": 32220,
-     "name": "cpptoml",
-     "inst": 5,
-     "vote": 1,
-     "old": 4,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 32281,
-     "name": "fortran-toml",
-     "inst": 5,
-     "vote": 0,
-     "old": 1,
-     "recent": 0,
-     "no_files": 4
-    },
-    {
-     "rank": 34626,
-     "name": "rust-cargo-toml",
-     "inst": 4,
-     "vote": 1,
-     "old": 1,
-     "recent": 2,
-     "no_files": 0
-    },
-    {
-     "rank": 34959,
-     "name": "rust-toml-span",
-     "inst": 4,
-     "vote": 0,
-     "old": 2,
-     "recent": 0,
-     "no_files": 2
-    },
-    {
-     "rank": 35459,
-     "name": "golang-github-naoina-toml",
-     "inst": 3,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 3
-    },
-    {
-     "rank": 36571,
-     "name": "rust-cargo-toml-edit",
-     "inst": 3,
-     "vote": 1,
-     "old": 0,
-     "recent": 2,
-     "no_files": 0
-    },
-    {
-     "rank": 37810,
-     "name": "golang-github-influxdata-toml",
-     "inst": 2,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 2
-    },
-    {
-     "rank": 37866,
-     "name": "golang-github-komkom-toml",
-     "inst": 2,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 2
-    },
-    {
-     "rank": 41276,
-     "name": "ruby-perfect-toml",
-     "inst": 1,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 1
-    }
-   ]
+  "ecosystem": "c",
+  "format": "toml",
+  "captured_at_utc": "2026-11-17T16:37:12.747400+00:00",
+  "search_limit_per_query": 100,
+  "note": "Search hits and leads are not verified parsers.",
+  "search_surface": "Debian popcon source (sourcemax) and binary installation tables plus Conan Center recipe names; shared by the C and C++ cells",
+  "adoption_metric": {
+    "name": "Debian popcon installations (sourcemax/by_inst for source packages; by_inst for binary packages)",
+    "sources": [
+      {
+        "url": "https://popcon.debian.org/sourcemax/by_inst.gz",
+        "sha256": "e705de234f0afd147ed9f758304bbe491ea03fce9ac5395a4b83cd9a8de15411",
+        "rows": 42332
+      },
+      {
+        "url": "https://popcon.debian.org/by_inst.gz",
+        "sha256": "534c7b64e3dc2980d1a62f74bd2a073a2ba5b88df5d4cc0bd4e7c1c2d3bd3ac3",
+        "rows": 228354
+      }
+    ]
   },
-  {
-   "query": "toml",
-   "method": "case-insensitive substring 'toml' in Debian binary-package names; ordered by popcon installations",
-   "url": "https://popcon.debian.org/by_inst.gz",
-   "snapshot_sha256": "534c7b64e3dc2980d1a62f74bd2a073a2ba5b88df5d4cc0bd4e7c1c2d3bd3ac3",
-   "total": 57,
-   "limit": 100,
-   "hits": [
+  "search": [
     {
-     "rank": 6227,
-     "name": "python3-tomlkit",
-     "inst": 7996,
-     "vote": 1650,
-     "old": 5243,
-     "recent": 1103,
-     "no_files": 0
+      "query": "toml",
+      "method": "case-insensitive substring 'toml' in Debian source-package names; ordered by popcon installations",
+      "url": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "snapshot_sha256": "e705de234f0afd147ed9f758304bbe491ea03fce9ac5395a4b83cd9a8de15411",
+      "total": 40,
+      "limit": 100,
+      "hits": [
+        {
+          "rank": 3205,
+          "name": "python-tomlkit",
+          "inst": 7996,
+          "vote": 1650,
+          "old": 5243,
+          "recent": 1103,
+          "no_files": 0
+        },
+        {
+          "rank": 3539,
+          "name": "python-tomli",
+          "inst": 6035,
+          "vote": 903,
+          "old": 4578,
+          "recent": 553,
+          "no_files": 1
+        },
+        {
+          "rank": 3716,
+          "name": "python-toml",
+          "inst": 5160,
+          "vote": 126,
+          "old": 4864,
+          "recent": 166,
+          "no_files": 4
+        },
+        {
+          "rank": 4173,
+          "name": "tomlplusplus",
+          "inst": 3536,
+          "vote": 683,
+          "old": 435,
+          "recent": 179,
+          "no_files": 2239
+        },
+        {
+          "rank": 5840,
+          "name": "r-cran-rcpptoml",
+          "inst": 1539,
+          "vote": 207,
+          "old": 1211,
+          "recent": 120,
+          "no_files": 1
+        },
+        {
+          "rank": 7604,
+          "name": "libtoml-tiny-perl",
+          "inst": 780,
+          "vote": 49,
+          "old": 698,
+          "recent": 33,
+          "no_files": 0
+        },
+        {
+          "rank": 8104,
+          "name": "python-tomli-w",
+          "inst": 637,
+          "vote": 83,
+          "old": 487,
+          "recent": 67,
+          "no_files": 0
+        },
+        {
+          "rank": 8468,
+          "name": "gap-tomlib",
+          "inst": 558,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 558
+        },
+        {
+          "rank": 8905,
+          "name": "ruby-tomlrb",
+          "inst": 494,
+          "vote": 96,
+          "old": 285,
+          "recent": 113,
+          "no_files": 0
+        },
+        {
+          "rank": 11904,
+          "name": "rust-toml-datetime",
+          "inst": 222,
+          "vote": 11,
+          "old": 120,
+          "recent": 37,
+          "no_files": 54
+        },
+        {
+          "rank": 11929,
+          "name": "rust-toml",
+          "inst": 221,
+          "vote": 12,
+          "old": 147,
+          "recent": 38,
+          "no_files": 24
+        },
+        {
+          "rank": 12035,
+          "name": "rust-toml-edit",
+          "inst": 215,
+          "vote": 2,
+          "old": 13,
+          "recent": 8,
+          "no_files": 192
+        },
+        {
+          "rank": 15215,
+          "name": "golang-toml",
+          "inst": 123,
+          "vote": 1,
+          "old": 17,
+          "recent": 1,
+          "no_files": 104
+        },
+        {
+          "rank": 15583,
+          "name": "libtoml-parser-perl",
+          "inst": 115,
+          "vote": 13,
+          "old": 101,
+          "recent": 1,
+          "no_files": 0
+        },
+        {
+          "rank": 16036,
+          "name": "libtoml-perl",
+          "inst": 106,
+          "vote": 8,
+          "old": 97,
+          "recent": 1,
+          "no_files": 0
+        },
+        {
+          "rank": 16467,
+          "name": "rust-toml-parser",
+          "inst": 98,
+          "vote": 5,
+          "old": 38,
+          "recent": 28,
+          "no_files": 27
+        },
+        {
+          "rank": 16468,
+          "name": "rust-toml-writer",
+          "inst": 98,
+          "vote": 5,
+          "old": 38,
+          "recent": 28,
+          "no_files": 27
+        },
+        {
+          "rank": 16485,
+          "name": "golang-github-pelletier-go-toml",
+          "inst": 97,
+          "vote": 2,
+          "old": 15,
+          "recent": 2,
+          "no_files": 78
+        },
+        {
+          "rank": 16689,
+          "name": "golang-github-pelletier-go-toml.v2",
+          "inst": 93,
+          "vote": 2,
+          "old": 22,
+          "recent": 2,
+          "no_files": 67
+        },
+        {
+          "rank": 20537,
+          "name": "haskell-toml-parser",
+          "inst": 44,
+          "vote": 5,
+          "old": 36,
+          "recent": 2,
+          "no_files": 14
+        },
+        {
+          "rank": 21673,
+          "name": "rust-toml-datetime-0.6",
+          "inst": 35,
+          "vote": 1,
+          "old": 1,
+          "recent": 3,
+          "no_files": 30
+        },
+        {
+          "rank": 21947,
+          "name": "rust-toml-edit-0.22",
+          "inst": 33,
+          "vote": 1,
+          "old": 1,
+          "recent": 3,
+          "no_files": 28
+        },
+        {
+          "rank": 22259,
+          "name": "ruby-toml",
+          "inst": 31,
+          "vote": 1,
+          "old": 28,
+          "recent": 2,
+          "no_files": 0
+        },
+        {
+          "rank": 23016,
+          "name": "rust-toml-0.5",
+          "inst": 27,
+          "vote": 1,
+          "old": 3,
+          "recent": 3,
+          "no_files": 20
+        },
+        {
+          "rank": 25517,
+          "name": "rust-toml-0.8",
+          "inst": 17,
+          "vote": 0,
+          "old": 0,
+          "recent": 3,
+          "no_files": 14
+        },
+        {
+          "rank": 26225,
+          "name": "toml11",
+          "inst": 15,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 15
+        },
+        {
+          "rank": 27413,
+          "name": "ruby-toml-rb",
+          "inst": 12,
+          "vote": 1,
+          "old": 9,
+          "recent": 2,
+          "no_files": 0
+        },
+        {
+          "rank": 29235,
+          "name": "python-dom-toml",
+          "inst": 9,
+          "vote": 0,
+          "old": 9,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 30040,
+          "name": "rust-basic-toml",
+          "inst": 8,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 8
+        },
+        {
+          "rank": 30107,
+          "name": "rust-toml2json",
+          "inst": 8,
+          "vote": 0,
+          "old": 7,
+          "recent": 1,
+          "no_files": 0
+        },
+        {
+          "rank": 32045,
+          "name": "rust-pyproject-toml",
+          "inst": 6,
+          "vote": 1,
+          "old": 1,
+          "recent": 3,
+          "no_files": 1
+        },
+        {
+          "rank": 32220,
+          "name": "cpptoml",
+          "inst": 5,
+          "vote": 1,
+          "old": 4,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 32281,
+          "name": "fortran-toml",
+          "inst": 5,
+          "vote": 0,
+          "old": 1,
+          "recent": 0,
+          "no_files": 4
+        },
+        {
+          "rank": 34626,
+          "name": "rust-cargo-toml",
+          "inst": 4,
+          "vote": 1,
+          "old": 1,
+          "recent": 2,
+          "no_files": 0
+        },
+        {
+          "rank": 34959,
+          "name": "rust-toml-span",
+          "inst": 4,
+          "vote": 0,
+          "old": 2,
+          "recent": 0,
+          "no_files": 2
+        },
+        {
+          "rank": 35459,
+          "name": "golang-github-naoina-toml",
+          "inst": 3,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 3
+        },
+        {
+          "rank": 36571,
+          "name": "rust-cargo-toml-edit",
+          "inst": 3,
+          "vote": 1,
+          "old": 0,
+          "recent": 2,
+          "no_files": 0
+        },
+        {
+          "rank": 37810,
+          "name": "golang-github-influxdata-toml",
+          "inst": 2,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 2
+        },
+        {
+          "rank": 37866,
+          "name": "golang-github-komkom-toml",
+          "inst": 2,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 2
+        },
+        {
+          "rank": 41276,
+          "name": "ruby-perfect-toml",
+          "inst": 1,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 1
+        }
+      ]
     },
     {
-     "rank": 7159,
-     "name": "python3-tomli",
-     "inst": 6035,
-     "vote": 903,
-     "old": 4578,
-     "recent": 553,
-     "no_files": 1
+      "query": "toml",
+      "method": "case-insensitive substring 'toml' in Debian binary-package names; ordered by popcon installations",
+      "url": "https://popcon.debian.org/by_inst.gz",
+      "snapshot_sha256": "534c7b64e3dc2980d1a62f74bd2a073a2ba5b88df5d4cc0bd4e7c1c2d3bd3ac3",
+      "total": 57,
+      "limit": 100,
+      "hits": [
+        {
+          "rank": 6227,
+          "name": "python3-tomlkit",
+          "inst": 7996,
+          "vote": 1650,
+          "old": 5243,
+          "recent": 1103,
+          "no_files": 0
+        },
+        {
+          "rank": 7159,
+          "name": "python3-tomli",
+          "inst": 6035,
+          "vote": 903,
+          "old": 4578,
+          "recent": 553,
+          "no_files": 1
+        },
+        {
+          "rank": 7633,
+          "name": "python3-toml",
+          "inst": 5160,
+          "vote": 126,
+          "old": 4864,
+          "recent": 166,
+          "no_files": 4
+        },
+        {
+          "rank": 8874,
+          "name": "libtomlplusplus3t64",
+          "inst": 3536,
+          "vote": 683,
+          "old": 435,
+          "recent": 179,
+          "no_files": 2239
+        },
+        {
+          "rank": 12706,
+          "name": "r-cran-rcpptoml",
+          "inst": 1539,
+          "vote": 207,
+          "old": 1211,
+          "recent": 120,
+          "no_files": 1
+        },
+        {
+          "rank": 16773,
+          "name": "libtoml-tiny-perl",
+          "inst": 780,
+          "vote": 49,
+          "old": 698,
+          "recent": 33,
+          "no_files": 0
+        },
+        {
+          "rank": 17985,
+          "name": "python3-tomli-w",
+          "inst": 637,
+          "vote": 83,
+          "old": 487,
+          "recent": 67,
+          "no_files": 0
+        },
+        {
+          "rank": 19838,
+          "name": "ruby-tomlrb",
+          "inst": 494,
+          "vote": 96,
+          "old": 285,
+          "recent": 113,
+          "no_files": 0
+        },
+        {
+          "rank": 23978,
+          "name": "libtomlplusplus-dev",
+          "inst": 315,
+          "vote": 14,
+          "old": 269,
+          "recent": 32,
+          "no_files": 0
+        },
+        {
+          "rank": 27817,
+          "name": "librust-toml-datetime-dev",
+          "inst": 222,
+          "vote": 11,
+          "old": 120,
+          "recent": 37,
+          "no_files": 54
+        },
+        {
+          "rank": 27871,
+          "name": "librust-toml-dev",
+          "inst": 221,
+          "vote": 12,
+          "old": 147,
+          "recent": 38,
+          "no_files": 24
+        },
+        {
+          "rank": 28132,
+          "name": "librust-toml-edit-dev",
+          "inst": 215,
+          "vote": 2,
+          "old": 13,
+          "recent": 8,
+          "no_files": 192
+        },
+        {
+          "rank": 35702,
+          "name": "golang-github-burntsushi-toml-dev",
+          "inst": 123,
+          "vote": 1,
+          "old": 17,
+          "recent": 1,
+          "no_files": 104
+        },
+        {
+          "rank": 36660,
+          "name": "libtoml-parser-perl",
+          "inst": 115,
+          "vote": 13,
+          "old": 101,
+          "recent": 1,
+          "no_files": 0
+        },
+        {
+          "rank": 37987,
+          "name": "libtoml-perl",
+          "inst": 106,
+          "vote": 8,
+          "old": 97,
+          "recent": 1,
+          "no_files": 0
+        },
+        {
+          "rank": 39087,
+          "name": "librust-toml-parser-dev",
+          "inst": 98,
+          "vote": 5,
+          "old": 38,
+          "recent": 28,
+          "no_files": 27
+        },
+        {
+          "rank": 39088,
+          "name": "librust-toml-writer-dev",
+          "inst": 98,
+          "vote": 5,
+          "old": 38,
+          "recent": 28,
+          "no_files": 27
+        },
+        {
+          "rank": 39160,
+          "name": "golang-github-pelletier-go-toml-dev",
+          "inst": 97,
+          "vote": 2,
+          "old": 15,
+          "recent": 2,
+          "no_files": 78
+        },
+        {
+          "rank": 39748,
+          "name": "golang-github-pelletier-go-toml.v2-dev",
+          "inst": 93,
+          "vote": 2,
+          "old": 22,
+          "recent": 2,
+          "no_files": 67
+        },
+        {
+          "rank": 51745,
+          "name": "libghc-toml-parser-dev",
+          "inst": 44,
+          "vote": 5,
+          "old": 36,
+          "recent": 2,
+          "no_files": 1
+        },
+        {
+          "rank": 54131,
+          "name": "libtomlplusplus3",
+          "inst": 38,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 38
+        },
+        {
+          "rank": 55574,
+          "name": "librust-toml-datetime-0.6-dev",
+          "inst": 35,
+          "vote": 1,
+          "old": 1,
+          "recent": 3,
+          "no_files": 30
+        },
+        {
+          "rank": 56561,
+          "name": "librust-toml-edit-0.22-dev",
+          "inst": 33,
+          "vote": 1,
+          "old": 1,
+          "recent": 3,
+          "no_files": 28
+        },
+        {
+          "rank": 57977,
+          "name": "ruby-toml",
+          "inst": 31,
+          "vote": 1,
+          "old": 28,
+          "recent": 2,
+          "no_files": 0
+        },
+        {
+          "rank": 60443,
+          "name": "librust-toml-0.5-dev",
+          "inst": 27,
+          "vote": 1,
+          "old": 3,
+          "recent": 3,
+          "no_files": 20
+        },
+        {
+          "rank": 67568,
+          "name": "python3-pytoml",
+          "inst": 19,
+          "vote": 0,
+          "old": 19,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 69800,
+          "name": "librust-toml-0.8-dev",
+          "inst": 17,
+          "vote": 0,
+          "old": 0,
+          "recent": 3,
+          "no_files": 14
+        },
+        {
+          "rank": 72275,
+          "name": "libghc-toml-parser-doc",
+          "inst": 15,
+          "vote": 2,
+          "old": 12,
+          "recent": 1,
+          "no_files": 0
+        },
+        {
+          "rank": 72611,
+          "name": "libtoml11-dev",
+          "inst": 15,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 15
+        },
+        {
+          "rank": 73854,
+          "name": "libghc-toml-parser-prof",
+          "inst": 14,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 14
+        },
+        {
+          "rank": 77335,
+          "name": "golang-github-pelletier-go-toml",
+          "inst": 12,
+          "vote": 1,
+          "old": 9,
+          "recent": 2,
+          "no_files": 0
+        },
+        {
+          "rank": 78822,
+          "name": "ruby-toml-rb",
+          "inst": 12,
+          "vote": 1,
+          "old": 9,
+          "recent": 2,
+          "no_files": 0
+        },
+        {
+          "rank": 87330,
+          "name": "python3-dom-toml",
+          "inst": 9,
+          "vote": 0,
+          "old": 9,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 89535,
+          "name": "librust-basic-toml-dev",
+          "inst": 8,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 8
+        },
+        {
+          "rank": 90927,
+          "name": "rust-toml2json",
+          "inst": 8,
+          "vote": 0,
+          "old": 7,
+          "recent": 1,
+          "no_files": 0
+        },
+        {
+          "rank": 97053,
+          "name": "golang-toml-dev",
+          "inst": 6,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 6
+        },
+        {
+          "rank": 98907,
+          "name": "librust-pyproject-toml-dev",
+          "inst": 6,
+          "vote": 1,
+          "old": 1,
+          "recent": 3,
+          "no_files": 1
+        },
+        {
+          "rank": 103923,
+          "name": "libcpptoml-dev",
+          "inst": 5,
+          "vote": 1,
+          "old": 4,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 104092,
+          "name": "libfortran-toml-0",
+          "inst": 5,
+          "vote": 0,
+          "old": 1,
+          "recent": 0,
+          "no_files": 4
+        },
+        {
+          "rank": 113398,
+          "name": "librust-cargo-toml-dev",
+          "inst": 4,
+          "vote": 1,
+          "old": 1,
+          "recent": 2,
+          "no_files": 0
+        },
+        {
+          "rank": 113764,
+          "name": "librust-toml-span-dev",
+          "inst": 4,
+          "vote": 0,
+          "old": 2,
+          "recent": 0,
+          "no_files": 2
+        },
+        {
+          "rank": 116037,
+          "name": "python-pytoml",
+          "inst": 4,
+          "vote": 0,
+          "old": 4,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 119985,
+          "name": "golang-github-naoina-toml-dev",
+          "inst": 3,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 3
+        },
+        {
+          "rank": 124112,
+          "name": "librust-cargo-toml-edit-dev",
+          "inst": 3,
+          "vote": 1,
+          "old": 0,
+          "recent": 2,
+          "no_files": 0
+        },
+        {
+          "rank": 125371,
+          "name": "libtoml++-dev",
+          "inst": 3,
+          "vote": 2,
+          "old": 1,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 128745,
+          "name": "python-toml",
+          "inst": 3,
+          "vote": 0,
+          "old": 3,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 135302,
+          "name": "golang-github-influxdata-toml-dev",
+          "inst": 2,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 2
+        },
+        {
+          "rank": 135360,
+          "name": "golang-github-komkom-toml-dev",
+          "inst": 2,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 2
+        },
+        {
+          "rank": 138442,
+          "name": "libfortran-toml-dev",
+          "inst": 2,
+          "vote": 0,
+          "old": 1,
+          "recent": 0,
+          "no_files": 1
+        },
+        {
+          "rank": 164694,
+          "name": "freemelt-tomlconfig",
+          "inst": 1,
+          "vote": 1,
+          "old": 0,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 175056,
+          "name": "libapp-tomlutils-perl",
+          "inst": 1,
+          "vote": 0,
+          "old": 1,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 175949,
+          "name": "libbencher-scenario-tomlparsingmodules-perl",
+          "inst": 1,
+          "vote": 0,
+          "old": 1,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 178827,
+          "name": "libdist-zilla-plugin-customlicense-perl",
+          "inst": 1,
+          "vote": 0,
+          "old": 1,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 189953,
+          "name": "librex-cmdb-toml-perl",
+          "inst": 1,
+          "vote": 0,
+          "old": 1,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 193767,
+          "name": "libtoml-examples-perl",
+          "inst": 1,
+          "vote": 0,
+          "old": 1,
+          "recent": 0,
+          "no_files": 0
+        },
+        {
+          "rank": 219967,
+          "name": "ruby-perfect-toml",
+          "inst": 1,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 1
+        },
+        {
+          "rank": 225723,
+          "name": "vim-toml",
+          "inst": 1,
+          "vote": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 1
+        }
+      ]
     },
     {
-     "rank": 7633,
-     "name": "python3-toml",
-     "inst": 5160,
-     "vote": 126,
-     "old": 4864,
-     "recent": 166,
-     "no_files": 4
-    },
-    {
-     "rank": 8874,
-     "name": "libtomlplusplus3t64",
-     "inst": 3536,
-     "vote": 683,
-     "old": 435,
-     "recent": 179,
-     "no_files": 2239
-    },
-    {
-     "rank": 12706,
-     "name": "r-cran-rcpptoml",
-     "inst": 1539,
-     "vote": 207,
-     "old": 1211,
-     "recent": 120,
-     "no_files": 1
-    },
-    {
-     "rank": 16773,
-     "name": "libtoml-tiny-perl",
-     "inst": 780,
-     "vote": 49,
-     "old": 698,
-     "recent": 33,
-     "no_files": 0
-    },
-    {
-     "rank": 17985,
-     "name": "python3-tomli-w",
-     "inst": 637,
-     "vote": 83,
-     "old": 487,
-     "recent": 67,
-     "no_files": 0
-    },
-    {
-     "rank": 19838,
-     "name": "ruby-tomlrb",
-     "inst": 494,
-     "vote": 96,
-     "old": 285,
-     "recent": 113,
-     "no_files": 0
-    },
-    {
-     "rank": 23978,
-     "name": "libtomlplusplus-dev",
-     "inst": 315,
-     "vote": 14,
-     "old": 269,
-     "recent": 32,
-     "no_files": 0
-    },
-    {
-     "rank": 27817,
-     "name": "librust-toml-datetime-dev",
-     "inst": 222,
-     "vote": 11,
-     "old": 120,
-     "recent": 37,
-     "no_files": 54
-    },
-    {
-     "rank": 27871,
-     "name": "librust-toml-dev",
-     "inst": 221,
-     "vote": 12,
-     "old": 147,
-     "recent": 38,
-     "no_files": 24
-    },
-    {
-     "rank": 28132,
-     "name": "librust-toml-edit-dev",
-     "inst": 215,
-     "vote": 2,
-     "old": 13,
-     "recent": 8,
-     "no_files": 192
-    },
-    {
-     "rank": 35702,
-     "name": "golang-github-burntsushi-toml-dev",
-     "inst": 123,
-     "vote": 1,
-     "old": 17,
-     "recent": 1,
-     "no_files": 104
-    },
-    {
-     "rank": 36660,
-     "name": "libtoml-parser-perl",
-     "inst": 115,
-     "vote": 13,
-     "old": 101,
-     "recent": 1,
-     "no_files": 0
-    },
-    {
-     "rank": 37987,
-     "name": "libtoml-perl",
-     "inst": 106,
-     "vote": 8,
-     "old": 97,
-     "recent": 1,
-     "no_files": 0
-    },
-    {
-     "rank": 39087,
-     "name": "librust-toml-parser-dev",
-     "inst": 98,
-     "vote": 5,
-     "old": 38,
-     "recent": 28,
-     "no_files": 27
-    },
-    {
-     "rank": 39088,
-     "name": "librust-toml-writer-dev",
-     "inst": 98,
-     "vote": 5,
-     "old": 38,
-     "recent": 28,
-     "no_files": 27
-    },
-    {
-     "rank": 39160,
-     "name": "golang-github-pelletier-go-toml-dev",
-     "inst": 97,
-     "vote": 2,
-     "old": 15,
-     "recent": 2,
-     "no_files": 78
-    },
-    {
-     "rank": 39748,
-     "name": "golang-github-pelletier-go-toml.v2-dev",
-     "inst": 93,
-     "vote": 2,
-     "old": 22,
-     "recent": 2,
-     "no_files": 67
-    },
-    {
-     "rank": 51745,
-     "name": "libghc-toml-parser-dev",
-     "inst": 44,
-     "vote": 5,
-     "old": 36,
-     "recent": 2,
-     "no_files": 1
-    },
-    {
-     "rank": 54131,
-     "name": "libtomlplusplus3",
-     "inst": 38,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 38
-    },
-    {
-     "rank": 55574,
-     "name": "librust-toml-datetime-0.6-dev",
-     "inst": 35,
-     "vote": 1,
-     "old": 1,
-     "recent": 3,
-     "no_files": 30
-    },
-    {
-     "rank": 56561,
-     "name": "librust-toml-edit-0.22-dev",
-     "inst": 33,
-     "vote": 1,
-     "old": 1,
-     "recent": 3,
-     "no_files": 28
-    },
-    {
-     "rank": 57977,
-     "name": "ruby-toml",
-     "inst": 31,
-     "vote": 1,
-     "old": 28,
-     "recent": 2,
-     "no_files": 0
-    },
-    {
-     "rank": 60443,
-     "name": "librust-toml-0.5-dev",
-     "inst": 27,
-     "vote": 1,
-     "old": 3,
-     "recent": 3,
-     "no_files": 20
-    },
-    {
-     "rank": 67568,
-     "name": "python3-pytoml",
-     "inst": 19,
-     "vote": 0,
-     "old": 19,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 69800,
-     "name": "librust-toml-0.8-dev",
-     "inst": 17,
-     "vote": 0,
-     "old": 0,
-     "recent": 3,
-     "no_files": 14
-    },
-    {
-     "rank": 72275,
-     "name": "libghc-toml-parser-doc",
-     "inst": 15,
-     "vote": 2,
-     "old": 12,
-     "recent": 1,
-     "no_files": 0
-    },
-    {
-     "rank": 72611,
-     "name": "libtoml11-dev",
-     "inst": 15,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 15
-    },
-    {
-     "rank": 73854,
-     "name": "libghc-toml-parser-prof",
-     "inst": 14,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 14
-    },
-    {
-     "rank": 77335,
-     "name": "golang-github-pelletier-go-toml",
-     "inst": 12,
-     "vote": 1,
-     "old": 9,
-     "recent": 2,
-     "no_files": 0
-    },
-    {
-     "rank": 78822,
-     "name": "ruby-toml-rb",
-     "inst": 12,
-     "vote": 1,
-     "old": 9,
-     "recent": 2,
-     "no_files": 0
-    },
-    {
-     "rank": 87330,
-     "name": "python3-dom-toml",
-     "inst": 9,
-     "vote": 0,
-     "old": 9,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 89535,
-     "name": "librust-basic-toml-dev",
-     "inst": 8,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 8
-    },
-    {
-     "rank": 90927,
-     "name": "rust-toml2json",
-     "inst": 8,
-     "vote": 0,
-     "old": 7,
-     "recent": 1,
-     "no_files": 0
-    },
-    {
-     "rank": 97053,
-     "name": "golang-toml-dev",
-     "inst": 6,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 6
-    },
-    {
-     "rank": 98907,
-     "name": "librust-pyproject-toml-dev",
-     "inst": 6,
-     "vote": 1,
-     "old": 1,
-     "recent": 3,
-     "no_files": 1
-    },
-    {
-     "rank": 103923,
-     "name": "libcpptoml-dev",
-     "inst": 5,
-     "vote": 1,
-     "old": 4,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 104092,
-     "name": "libfortran-toml-0",
-     "inst": 5,
-     "vote": 0,
-     "old": 1,
-     "recent": 0,
-     "no_files": 4
-    },
-    {
-     "rank": 113398,
-     "name": "librust-cargo-toml-dev",
-     "inst": 4,
-     "vote": 1,
-     "old": 1,
-     "recent": 2,
-     "no_files": 0
-    },
-    {
-     "rank": 113764,
-     "name": "librust-toml-span-dev",
-     "inst": 4,
-     "vote": 0,
-     "old": 2,
-     "recent": 0,
-     "no_files": 2
-    },
-    {
-     "rank": 116037,
-     "name": "python-pytoml",
-     "inst": 4,
-     "vote": 0,
-     "old": 4,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 119985,
-     "name": "golang-github-naoina-toml-dev",
-     "inst": 3,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 3
-    },
-    {
-     "rank": 124112,
-     "name": "librust-cargo-toml-edit-dev",
-     "inst": 3,
-     "vote": 1,
-     "old": 0,
-     "recent": 2,
-     "no_files": 0
-    },
-    {
-     "rank": 125371,
-     "name": "libtoml++-dev",
-     "inst": 3,
-     "vote": 2,
-     "old": 1,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 128745,
-     "name": "python-toml",
-     "inst": 3,
-     "vote": 0,
-     "old": 3,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 135302,
-     "name": "golang-github-influxdata-toml-dev",
-     "inst": 2,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 2
-    },
-    {
-     "rank": 135360,
-     "name": "golang-github-komkom-toml-dev",
-     "inst": 2,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 2
-    },
-    {
-     "rank": 138442,
-     "name": "libfortran-toml-dev",
-     "inst": 2,
-     "vote": 0,
-     "old": 1,
-     "recent": 0,
-     "no_files": 1
-    },
-    {
-     "rank": 164694,
-     "name": "freemelt-tomlconfig",
-     "inst": 1,
-     "vote": 1,
-     "old": 0,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 175056,
-     "name": "libapp-tomlutils-perl",
-     "inst": 1,
-     "vote": 0,
-     "old": 1,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 175949,
-     "name": "libbencher-scenario-tomlparsingmodules-perl",
-     "inst": 1,
-     "vote": 0,
-     "old": 1,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 178827,
-     "name": "libdist-zilla-plugin-customlicense-perl",
-     "inst": 1,
-     "vote": 0,
-     "old": 1,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 189953,
-     "name": "librex-cmdb-toml-perl",
-     "inst": 1,
-     "vote": 0,
-     "old": 1,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 193767,
-     "name": "libtoml-examples-perl",
-     "inst": 1,
-     "vote": 0,
-     "old": 1,
-     "recent": 0,
-     "no_files": 0
-    },
-    {
-     "rank": 219967,
-     "name": "ruby-perfect-toml",
-     "inst": 1,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 1
-    },
-    {
-     "rank": 225723,
-     "name": "vim-toml",
-     "inst": 1,
-     "vote": 0,
-     "old": 0,
-     "recent": 0,
-     "no_files": 1
+      "query": "toml",
+      "method": "case-insensitive Conan Center recipe-name substring; alphabetic, not usage ranked (discovery only)",
+      "url": "https://github.com/conan-io/conan-center-index/tree/master/recipes",
+      "index_tree_sha": "27212b999e941c00137085f031c55f5bc9c854d5",
+      "total": 3,
+      "limit": 100,
+      "hits": [
+        {
+          "rank": 1,
+          "name": "cpptoml"
+        },
+        {
+          "rank": 2,
+          "name": "toml11"
+        },
+        {
+          "rank": 3,
+          "name": "tomlplusplus"
+        }
+      ]
     }
-   ]
+  ],
+  "round_5_tree_sitter": {
+    "rule": "PROTOCOL.md (Eligibility): a concrete-syntax-tree grammar qualifies only if the harness can produce the cell result by reading node kinds and text, typing scalar tokens from their literal text at most; it does not qualify if the harness would have to decode escapes or references, fold block scalars, resolve aliases, merge TOML tables or resolve namespaces itself",
+    "debian_search": {
+      "query": "https://sources.debian.org/api/search/tree-sitter/",
+      "checked_at_utc": "2026-11-18",
+      "tree_sitter_sources": [
+        "tree-sitter",
+        "tree-sitter-asm",
+        "tree-sitter-bash",
+        "tree-sitter-c",
+        "tree-sitter-cpp",
+        "tree-sitter-go",
+        "tree-sitter-ini",
+        "tree-sitter-java",
+        "tree-sitter-json",
+        "tree-sitter-lua",
+        "tree-sitter-markdown",
+        "tree-sitter-php",
+        "tree-sitter-powershell",
+        "tree-sitter-query",
+        "tree-sitter-ruby",
+        "tree-sitter-rust-orchard",
+        "tree-sitter-sdml",
+        "tree-sitter-sql",
+        "tree-sitter-verilog",
+        "tree-sitter-vim",
+        "tree-sitter-vimdoc",
+        "tree-sitter-yaml"
+      ],
+      "format_grammars": {
+        "json": "tree-sitter-json 0.24.8-3 (forky, sid)",
+        "yaml": "tree-sitter-yaml 0.7.2-3 (forky, sid)",
+        "xml": "none (sources.debian.org/api/src/tree-sitter-xml/ returns 404)",
+        "toml": "none (sources.debian.org/api/src/tree-sitter-toml/ returns 404)",
+        "json5": "none (sources.debian.org/api/src/tree-sitter-json5/ returns 404)"
+      },
+      "popcon_sourcemax": {
+        "snapshot": "data/curation/popcon-sourcemax-by_inst.gz (sourcemax by_inst, SHA-256 9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8)",
+        "tree-sitter-json": 7,
+        "tree-sitter-yaml": 9,
+        "tree-sitter-sql": 8,
+        "tree-sitter (runtime)": 15318,
+        "note": "No tree-sitter XML or TOML grammar row exists in the snapshot."
+      }
+    },
+    "decision": "no candidate",
+    "evidence": "Debian has no tree-sitter TOML grammar (no source package, no popcon row), so it adds no C TOML metric. Under the tree-sitter rule a grammar would also leave escape decoding, merging dotted keys and [table]/[[array]] headers into one tree, and date-time normalization to the harness."
   },
-  {
-   "query": "toml",
-   "method": "case-insensitive Conan Center recipe-name substring; alphabetic, not usage ranked (discovery only)",
-   "url": "https://github.com/conan-io/conan-center-index/tree/master/recipes",
-   "index_tree_sha": "27212b999e941c00137085f031c55f5bc9c854d5",
-   "total": 3,
-   "limit": 100,
-   "hits": [
-    {
-     "rank": 1,
-     "name": "cpptoml"
+  "round_6_star_fallback": {
+    "rule": "PROTOCOL.md star fallback (2026-11-18): C and C++ slots left empty after primary and Debian paths may be filled by pinned tagged releases of upstream, format-specific parser repositories with at least 100 GitHub stargazers, ranked separately by stars; frameworks, engines and multi-purpose libraries do not qualify; forks and predecessor copies are excluded",
+    "metric": "GitHub stars (secondary, repository interest, not downloads): stargazers_count from the GitHub REST repos API",
+    "search": [
+      {
+        "query": "toml language:C",
+        "url": "https://api.github.com/search/repositories?q=toml+language%3AC&sort=stars&order=desc&per_page=100",
+        "captured_at_utc": "2026-11-18T07:09:00.387416+00:00",
+        "response_sha256": "158d4fa890d2a296e0e203e1302b5b2821657553ff9ca5bdada596f51cea70ba",
+        "total": 132,
+        "limit": 100,
+        "sort": "stars desc",
+        "hits_inspected": 100,
+        "hits_at_least_100_stars": [
+          {
+            "repository": "cktan/tomlc99",
+            "stars": 664,
+            "fork": false,
+            "description": "TOML C library"
+          },
+          {
+            "repository": "cktan/tomlc17",
+            "stars": 201,
+            "fork": false,
+            "description": "Lightweight, strictly compliant TOML v1.1 parser for C and C++. "
+          },
+          {
+            "repository": "iluaii/fwm",
+            "stars": 187,
+            "fork": false,
+            "description": "A Wayland compositor you don't have to assemble: launcher, screenshots, mixer, visualiser, wallpapers and session restore built in, one TOML config, every setting live over IPC. Each desktop is tiling, floating or physics — windows you can throw. C/wlroots."
+          },
+          {
+            "repository": "arp242/toml-c",
+            "stars": 114,
+            "fork": false,
+            "description": "TOML C library"
+          }
+        ]
+      },
+      {
+        "query": "toml parser language:C",
+        "url": "https://api.github.com/search/repositories?q=toml+parser+language%3AC&sort=stars&order=desc&per_page=100",
+        "captured_at_utc": "2026-11-18T07:09:09.108142+00:00",
+        "response_sha256": "7e8d43c7c762c2911662de1c27872b4f9930ca7bb4ff9ea56c1305f4438c2050",
+        "total": 45,
+        "limit": 100,
+        "sort": "stars desc",
+        "hits_inspected": 45,
+        "hits_at_least_100_stars": [
+          {
+            "repository": "cktan/tomlc17",
+            "stars": 201,
+            "fork": false,
+            "description": "Lightweight, strictly compliant TOML v1.1 parser for C and C++. "
+          }
+        ]
+      },
+      {
+        "query": "topic:toml language:C",
+        "url": "https://api.github.com/search/repositories?q=topic%3Atoml+language%3AC&sort=stars&order=desc&per_page=100",
+        "captured_at_utc": "2026-11-18T07:10:46.235047+00:00",
+        "response_sha256": "0004aeaa9f31a703885bf5d92d04d3713bc587ec4918112783a53b0fbd3cc963",
+        "total": 27,
+        "limit": 100,
+        "sort": "stars desc",
+        "hits_inspected": 27,
+        "hits_at_least_100_stars": [
+          {
+            "repository": "cktan/tomlc99",
+            "stars": 664,
+            "fork": false,
+            "description": "TOML C library"
+          },
+          {
+            "repository": "cktan/tomlc17",
+            "stars": 201,
+            "fork": false,
+            "description": "Lightweight, strictly compliant TOML v1.1 parser for C and C++. "
+          }
+        ]
+      }
+    ],
+    "repositories": {
+      "cktan/tomlc17": {
+        "url": "https://api.github.com/repos/cktan/tomlc17",
+        "captured_at_utc": "2026-11-18T07:11:50.475255+00:00",
+        "response_sha256": "aa9da5e33915a723ed334a8ab2746596bca9e308d6f20a39a15ab7f5348962c8",
+        "stargazers_count": 201,
+        "fork": false,
+        "archived": false,
+        "license_spdx": "MIT",
+        "pushed_at": "2026-11-17T00:06:00Z",
+        "tags_url": "https://api.github.com/repos/cktan/tomlc17/tags?per_page=100",
+        "tags_response_sha256": "51cbee1105d71f39e1b14e85a9e5914835aabb427121604052794a977a931cda",
+        "tag_count": 26,
+        "tags_first": [
+          "R20260515",
+          "R20260501",
+          "R261116",
+          "R261109",
+          "R261003"
+        ]
+      },
+      "cktan/tomlc99": {
+        "url": "https://api.github.com/repos/cktan/tomlc99",
+        "captured_at_utc": "2026-11-18T07:11:51.330990+00:00",
+        "response_sha256": "41ef74b5731a274ae6261c2cd01ea7fc763334adad4d7bcc517a9f79d7672cba",
+        "stargazers_count": 664,
+        "fork": false,
+        "archived": false,
+        "license_spdx": "NOASSERTION",
+        "pushed_at": "2026-11-04T09:26:02Z",
+        "tags_url": "https://api.github.com/repos/cktan/tomlc99/tags?per_page=100",
+        "tags_response_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tag_count": 0,
+        "tags_first": []
+      },
+      "arp242/toml-c": {
+        "url": "https://api.github.com/repos/arp242/toml-c",
+        "captured_at_utc": "2026-11-18T07:11:52.064365+00:00",
+        "response_sha256": "4c2d6d414925fc71d6956f778bd113a7325a74ac9ef7d79d463fc6b2260812ab",
+        "stargazers_count": 114,
+        "fork": false,
+        "archived": false,
+        "license_spdx": "NOASSERTION",
+        "pushed_at": "2025-12-18T14:25:14Z",
+        "tags_url": "https://api.github.com/repos/arp242/toml-c/tags?per_page=100",
+        "tags_response_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tag_count": 0,
+        "tags_first": []
+      },
+      "ajwans/libtoml": {
+        "url": "https://api.github.com/repos/ajwans/libtoml",
+        "captured_at_utc": "2026-11-18T07:11:52.798698+00:00",
+        "response_sha256": "66e9aa298d3416a778286f0723cf59eef3bb79ea5d30988cdb09bd40bee37eab",
+        "stargazers_count": 125,
+        "fork": false,
+        "archived": false,
+        "license_spdx": "BSD-3-Clause",
+        "pushed_at": "2019-03-14T22:24:30Z",
+        "tags_url": "https://api.github.com/repos/ajwans/libtoml/tags?per_page=100",
+        "tags_response_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "tag_count": 0,
+        "tags_first": []
+      },
+      "iluaii/fwm": {
+        "url": "https://api.github.com/repos/iluaii/fwm",
+        "captured_at_utc": "2026-11-18T07:11:53.534081+00:00",
+        "response_sha256": "6a5b590ded121d84f6afe0d526832f2c3caac5a683896073be77ccda0a333dae",
+        "stargazers_count": 187,
+        "fork": false,
+        "archived": false,
+        "license_spdx": "GPL-2.0",
+        "pushed_at": "2026-10-21T12:37:24Z",
+        "tags_url": "https://api.github.com/repos/iluaii/fwm/tags?per_page=100",
+        "tags_response_sha256": "1dc239526d085be000acc553fe15a29f42be29e49585863324d8d83de27f7dd0",
+        "tag_count": 8,
+        "tags_first": [
+          "v0.6.0",
+          "v0.5.0",
+          "v0.4.0",
+          "v0.3.0",
+          "v0.2.0"
+        ]
+      }
     },
-    {
-     "rank": 2,
-     "name": "toml11"
-    },
-    {
-     "rank": 3,
-     "name": "tomlplusplus"
+    "decisions": {
+      "cktan/tomlc17": "selected (star rank 1): tag R261116 is the latest release (2026-11-16); format-specific TOML parser library; own parser in src/tomlc17.c",
+      "cktan/tomlc99": "not eligible: no tagged release (0 tags; the fallback needs a pinned tag) and the latest commit rejects the second control (lowercase \\u escape); README declares it obsolete in favour of tomlc17",
+      "arp242/toml-c": "not eligible: no tagged release (0 tags); passed both controls at commit 6a38d404 on 2026-11-17, kept as a lead; tomlc99 family fork",
+      "ajwans/libtoml": "not eligible: no tagged release (0 tags); targets TOML 0.4.0 (no dotted keys, non-decimal integers or local date/time types)",
+      "iluaii/fwm": "not a TOML library: a Wayland compositor whose description mentions TOML configuration"
     }
-   ]
   }
- ],
- "round_5_tree_sitter": {
-  "rule": "PROTOCOL.md (Eligibility): a concrete-syntax-tree grammar qualifies only if the harness can produce the cell result by reading node kinds and text, typing scalar tokens from their literal text at most; it does not qualify if the harness would have to decode escapes or references, fold block scalars, resolve aliases, merge TOML tables or resolve namespaces itself",
-  "debian_search": {
-   "query": "https://sources.debian.org/api/search/tree-sitter/",
-   "checked_at_utc": "2026-11-18",
-   "tree_sitter_sources": [
-    "tree-sitter",
-    "tree-sitter-asm",
-    "tree-sitter-bash",
-    "tree-sitter-c",
-    "tree-sitter-cpp",
-    "tree-sitter-go",
-    "tree-sitter-ini",
-    "tree-sitter-java",
-    "tree-sitter-json",
-    "tree-sitter-lua",
-    "tree-sitter-markdown",
-    "tree-sitter-php",
-    "tree-sitter-powershell",
-    "tree-sitter-query",
-    "tree-sitter-ruby",
-    "tree-sitter-rust-orchard",
-    "tree-sitter-sdml",
-    "tree-sitter-sql",
-    "tree-sitter-verilog",
-    "tree-sitter-vim",
-    "tree-sitter-vimdoc",
-    "tree-sitter-yaml"
-   ],
-   "format_grammars": {
-    "json": "tree-sitter-json 0.24.8-3 (forky, sid)",
-    "yaml": "tree-sitter-yaml 0.7.2-3 (forky, sid)",
-    "xml": "none (sources.debian.org/api/src/tree-sitter-xml/ returns 404)",
-    "toml": "none (sources.debian.org/api/src/tree-sitter-toml/ returns 404)",
-    "json5": "none (sources.debian.org/api/src/tree-sitter-json5/ returns 404)"
-   },
-   "popcon_sourcemax": {
-    "snapshot": "data/curation/popcon-sourcemax-by_inst.gz (sourcemax by_inst, SHA-256 9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8)",
-    "tree-sitter-json": 7,
-    "tree-sitter-yaml": 9,
-    "tree-sitter-sql": 8,
-    "tree-sitter (runtime)": 15318,
-    "note": "No tree-sitter XML or TOML grammar row exists in the snapshot."
-   }
-  },
-  "decision": "no candidate",
-  "evidence": "Debian has no tree-sitter TOML grammar (no source package, no popcon row), so it adds no C TOML metric. Under the tree-sitter rule a grammar would also leave escape decoding, merging dotted keys and [table]/[[array]] headers into one tree, and date-time normalization to the harness."
- }
 }

@@ -1,151 +1,176 @@
 {
- "captured_from": "data/c/toml/registry-snapshot.json",
- "metric": "Debian popcon installations (no C TOML library packaged; no primary metric)",
- "observed": "2026-11-17",
- "leads": [
-  {
-   "name": "tomlc17",
-   "metric_value": null,
-   "metric": "Debian popcon installations (none packaged); fallback: pinned upstream GitHub stargazers, labeled adoption exception",
-   "github_stargazers_reference_only": 201,
-   "family": "tomlc17 (cktan; single-file scanner and parser in src/tomlc17.c)",
-   "family_note": "tomlc17 is a separate rewrite by the author of tomlc99 with its own scanner and datum tree; it shares no parser source with tomlc99 or its toml-c fork. Its compat/tomlc99 directory is an API shim over tomlc17 and is not compiled here.",
-   "api_lead": "toml_parse(const char *src, int len) -> toml_result_t; walk result.toptab (toml_datum_t: type, u.tab, u.arr, u.str, u.int64, u.fp64, u.boolean, u.ts)",
-   "documentation": "https://github.com/cktan/tomlc17/blob/R261116/API.md#toml_parse",
-   "source": "https://github.com/cktan/tomlc17/releases/tag/R261116",
-   "status": "unresolved_no_primary_metric",
-   "api_lead_checked_against_pinned_release": true,
-   "pinned_release": "R261116",
-   "pinned_source_sha256": "0a9fd8636cf79a08a01e75cb04a1a62b7e0e689576c2407cc1d571e92df7df4b",
-   "license": "MIT",
-   "reason": "Passed the technical gate on 2026-11-17 but has no primary adoption metric: no C TOML library is packaged in Debian (popcon) or Conan Center, so there is no Debian fallback of at least 1,000. PROTOCOL.md allows GitHub stars only in PLY cells, so it is not selected (as C JSON Parson and C MP3 minimp3/dr_mp3). Evidence: release R261116, source sha256 0a9fd8636cf79a08a01e75cb04a1a62b7e0e689576c2407cc1d571e92df7df4b, license MIT; API toml_parse(const char *src, int len) -> toml_result_t; walk result.toptab (toml_datum_t: type, u.tab, u.arr, u.str, u.int64, u.fp64, u.boolean, u.ts); both controls produced the exact expected typed trees; Docker receipt image sha256:3c363b4ff71cfbcd9992d7f67134cc3738591a83f83d55b6b5418f5e57052303 covered 1034 parser source lines; AFL++ overlay (map 1381) gave 268 tuples on service-config and 368 on typed-scalars (216 differ), 3 identical repeats per control; parser-only probe lines 1034 / 1105. Upstream GitHub stargazers 201 (2026-11-17) recorded for reference only. Project, overlay and catalog files were removed from the branch; they are reproducible from these pins."
-  },
-  {
-   "name": "toml-c",
-   "metric_value": null,
-   "metric": "Debian popcon installations (none packaged); fallback: pinned upstream GitHub stargazers, labeled adoption exception",
-   "github_stargazers_reference_only": 114,
-   "family": "tomlc99 family (arp242 toml-c fork)",
-   "family_note": "toml-c is a fork of cktan/tomlc99 (README: \"This is a fork of https://github.com/cktan/tomlc99\") with an incompatible API and TOML 1.1 changes; it shares tomlc99 parser lineage. tomlc99 itself remains a lead because its pinned commit rejects lowercase \\u escapes in the second control. tomlc17 is a separate rewrite.",
-   "api_lead": "toml_parse(char *toml, char *errbuf, int errbufsz) on a NUL-terminated copy; walk with toml_table_len/toml_table_key and toml_table_*/toml_array_* accessors",
-   "documentation": "https://github.com/arp242/toml-c/blob/6a38d404184a3b399d61821dbfff229579d59a00/toml.h",
-   "source": "https://github.com/arp242/toml-c/tree/6a38d404184a3b399d61821dbfff229579d59a00",
-   "status": "unresolved_no_primary_metric",
-   "api_lead_checked_against_pinned_release": true,
-   "pinned_release": "2025-12-18",
-   "pinned_source_sha256": "a51cd54aee07ce02c3bdfa603003fad678d51172bf81a29501f8c9b1ff335f9e",
-   "license": "MIT",
-   "reason": "Passed the technical gate on 2026-11-17 but has no primary adoption metric: no C TOML library is packaged in Debian (popcon) or Conan Center, so there is no Debian fallback of at least 1,000. PROTOCOL.md allows GitHub stars only in PLY cells, so it is not selected (as C JSON Parson and C MP3 minimp3/dr_mp3). Evidence: release 2025-12-18, source sha256 a51cd54aee07ce02c3bdfa603003fad678d51172bf81a29501f8c9b1ff335f9e, license MIT; API toml_parse(char *toml, char *errbuf, int errbufsz) on a NUL-terminated copy; walk with toml_table_len/toml_table_key and toml_table_*/toml_array_* accessors; both controls produced the exact expected typed trees; Docker receipt image sha256:aa7bebc6c25bbc04bb3e12da4201053362be4287bb225cd058650abd865e4c11 covered 868 parser source lines; AFL++ overlay (map 993) gave 233 tuples on service-config and 193 on typed-scalars (156 differ), 3 identical repeats per control; parser-only probe lines 630 / 512. Upstream GitHub stargazers 114 (2026-11-17) recorded for reference only. Project, overlay and catalog files were removed from the branch; they are reproducible from these pins."
-  },
-  {
-   "name": "tomlc99",
-   "metric_value": 664,
-   "metric": "GitHub stargazers (reference only; not an adoption metric in this cell)",
-   "family": "tomlc99 (cktan)",
-   "api_lead": "toml_parse(char*, errbuf, len) / toml_parse_file(FILE*); toml_table_t accessors",
-   "note": "README at the pinned commit (2026-11-04) declares the library obsolete and points to tomlc17. No tagged releases.",
-   "source": "https://github.com/cktan/tomlc99",
-   "status": "unresolved_control_failed",
-   "api_lead_checked_against_pinned_release": true,
-   "github": {
-    "stargazers_count": 664,
-    "archived": false,
-    "license_spdx": "NOASSERTION",
-    "pushed_at": "2026-11-04T09:26:02Z",
-    "language": "C",
-    "url": "https://api.github.com/repos/cktan/tomlc99",
-    "captured_at_utc": "2026-11-17T16:41:53.383778+00:00"
-   },
-   "pinned_commit": "62ce93ceb713dc49909d0fef1411f9d37bef83f2",
-   "pinned_source": "https://codeload.github.com/cktan/tomlc99/tar.gz/62ce93ceb713dc49909d0fef1411f9d37bef83f2",
-   "pinned_source_sha256": "158dbe2b3a98923277db182ec6151ef39fbd3a70f6cc4a6b0460bbcd02ad9a50",
-   "license_checked": "LICENSE in the pinned archive is the MIT License text (Copyright (c) CK Tan); GitHub reports NOASSERTION.",
-   "evidence": {
-    "checked_at_utc": "2026-11-17",
-    "api": "toml_parse(char *conf, char *errbuf, int errbufsz) on a NUL-terminated copy; toml_key_in/toml_*_in/toml_*_at accessors",
-    "service_config": "pass: typed tree equals controls/toml/service-config.expected.json",
-    "typed_scalars": "fail: toml_parse returns NULL",
-    "error": "line 17: expect hex char",
-    "cause": "toml.c (scan_string, lines 1695-1699 and 1744-1748) accepts only uppercase hex digits after \\u/\\U (\"0123456789ABCDEF\"); the control writes \\u00e9, which TOML 1.0.0 HEXDIG allows. A diagnostic copy with \\u00E9 (control unchanged) produced the expected tree, so this is the only difference on the two controls.",
-    "harness_route": "local clang build of the same typed-tree harness used for the promoted C paths; no Docker receipt recorded"
-   }
-  },
-  {
-   "name": "libtoml",
-   "metric_value": 125,
-   "metric": "GitHub stargazers (reference only; not an adoption metric in this cell)",
-   "family": "libtoml (ajwans; Ragel state machine)",
-   "api_lead": "toml_parse(struct toml_node*, char*, int)",
-   "note": "README at the latest commit 03e8a3ab1d4d014e63a2befe8a48e74783a81521 (2016-06-06) states \"Currently targetted at TOML v0.4.0\"; building needs ragel and ICU. TOML 0.4.0 has no dotted keys, hex/octal/binary integers or local date/time types, all of which the second control uses. Not run within this bounded pass.",
-   "source": "https://github.com/ajwans/libtoml",
-   "status": "unresolved_not_run",
-   "api_lead_checked_against_pinned_release": false,
-   "github": {
-    "stargazers_count": 125,
-    "archived": false,
-    "license_spdx": "BSD-3-Clause",
-    "pushed_at": "2019-03-14T22:24:30Z",
-    "language": "C",
-    "url": "https://api.github.com/repos/ajwans/libtoml",
-    "captured_at_utc": "2026-11-17T16:41:54.862087+00:00"
-   },
-   "pinned_source_checked": "https://codeload.github.com/ajwans/libtoml/tar.gz/03e8a3ab1d4d014e63a2befe8a48e74783a81521",
-   "pinned_source_sha256_checked": "9b5ff5c7e4468f1401efb294369a78a8ce89b41c704abecc9d9954ccae674b2c"
-  }
- ],
- "excluded": [],
- "search_recheck": {
-  "checked_at_utc": "2026-11-17T22:55:46Z",
-  "debian_source_packages": {
-   "url": "https://popcon.debian.org/sourcemax/by_inst.gz",
-   "snapshot_sha256": "7a460f12225a77951379ff4e02d58004166294ba839d2af7ab6f178ea7f22f53",
-   "query": "case-insensitive substring 'toml' in source-package names",
-   "hits": 40,
-   "c_or_cpp_libraries": [
-    "tomlplusplus (3,536; C++)",
-    "toml11 (15; C++)",
-    "cpptoml (5; C++)"
-   ],
-   "other_hits": "Python (python-tomlkit, python-tomli, python-toml, python-tomli-w, python-dom-toml), R (r-cran-rcpptoml: an R package that bundles toml++, not a C++ library API), Perl, Ruby, Rust, Go, Haskell, GAP (gap-tomlib) and Fortran (fortran-toml: toml-f) packages"
-  },
-  "debian_binary_packages": {
-   "url": "https://popcon.debian.org/by_inst.gz",
-   "snapshot_sha256": "5db455a219c8c723423f7c2457b615826135ed01729ad2adff1a23f2d28cffb0",
-   "query": "case-insensitive substring 'toml' in binary-package names",
-   "hits": 57,
-   "c_or_cpp_libraries": [
-    "libtomlplusplus3t64 (3,536)",
-    "libtomlplusplus-dev (315)",
-    "libtomlplusplus3 (38, not in sid)",
-    "libtoml11-dev (15)",
-    "libcpptoml-dev (5)",
-    "libtoml++-dev (3, not in sid)"
-   ]
-  },
-  "conan_center_recipes": {
-   "url": "https://github.com/conan-io/conan-center-index/tree/master/recipes",
-   "query": "case-insensitive substring 'toml' in the 1,981 recipe directory names",
-   "hits": [
-    "cpptoml",
-    "toml11",
-    "tomlplusplus"
-   ]
-  },
-  "finding": "No C TOML library is packaged in Debian or listed in Conan Center: the only C/C++ hits are the three selected C++ libraries. tomlc17 and toml-c therefore stay unresolved_no_primary_metric (GitHub stars are a fallback only in PLY cells), and the C cell stays at 0 selected."
- },
- "round_4": {
-  "checked_at_utc": "2026-11-18",
-  "popcon_lookup": {
-   "url": "https://popcon.debian.org/sourcemax/by_inst.gz",
-   "sha256": "7a460f12225a77951379ff4e02d58004166294ba839d2af7ab6f178ea7f22f53",
-   "binary_url": "https://popcon.debian.org/by_inst.gz",
-   "binary_sha256": "5db455a219c8c723423f7c2457b615826135ed01729ad2adff1a23f2d28cffb0",
-   "note": "Same sourcemax file as the 2026-11-17 search_recheck (identical SHA-256)."
-  },
-  "routes": [
-   "toml-lang/toml wiki lists (C: toml-c and tomlc17, both recorded leads; Old: tomlc99, libtoml, tomlc)",
-   "Debian popcon source and binary tables searched for tomlc, tomlc17, tomlc99, toml-c and libtoml in addition to the \"toml\" substring"
+  "captured_from": "data/c/toml/registry-snapshot.json",
+  "metric": "Debian popcon installations (no C TOML library packaged; no primary metric)",
+  "observed": "2026-11-17",
+  "leads": [
+    {
+      "name": "toml-c",
+      "metric_value": null,
+      "metric": "Debian popcon installations (none packaged); GitHub stars recorded, but the star fallback needs a pinned tagged release",
+      "github_stargazers_reference_only": 114,
+      "family": "tomlc99 family (arp242 toml-c fork)",
+      "family_note": "toml-c is a fork of cktan/tomlc99 (README: \"This is a fork of https://github.com/cktan/tomlc99\") with an incompatible API and TOML 1.1 changes; it shares tomlc99 parser lineage. tomlc99 itself remains a lead because its pinned commit rejects lowercase \\u escapes in the second control. tomlc17 is a separate rewrite.",
+      "api_lead": "toml_parse(char *toml, char *errbuf, int errbufsz) on a NUL-terminated copy; walk with toml_table_len/toml_table_key and toml_table_*/toml_array_* accessors",
+      "documentation": "https://github.com/arp242/toml-c/blob/6a38d404184a3b399d61821dbfff229579d59a00/toml.h",
+      "source": "https://github.com/arp242/toml-c/tree/6a38d404184a3b399d61821dbfff229579d59a00",
+      "status": "unresolved_star_fallback_untagged",
+      "api_lead_checked_against_pinned_release": true,
+      "pinned_release": "2025-12-18",
+      "pinned_source_sha256": "a51cd54aee07ce02c3bdfa603003fad678d51172bf81a29501f8c9b1ff335f9e",
+      "license": "MIT",
+      "reason": "Passed the technical gate on 2026-11-17 at commit 6a38d404 (both controls exact, Docker receipt image sha256:aa7bebc6c25bbc04bb3e12da4201053362be4287bb225cd058650abd865e4c11, 868 toml.c lines, AFL++ 233/193 tuples with 156 differing, 3 identical repeats). No C TOML library is packaged in Debian or Conan Center. The 2026-11-18 star fallback (PROTOCOL.md) would admit 114 stargazers, but it requires a pinned tagged upstream release and arp242/toml-c has none (GitHub tags API: 0 tags, captured in registry-snapshot.json round_6_star_fallback). It stays a lead; a future tag would make it eligible, with its tomlc99 family stated."
+    },
+    {
+      "name": "tomlc99",
+      "metric_value": 664,
+      "metric": "GitHub stargazers (reference only; not an adoption metric in this cell)",
+      "family": "tomlc99 (cktan)",
+      "api_lead": "toml_parse(char*, errbuf, len) / toml_parse_file(FILE*); toml_table_t accessors",
+      "note": "README at the pinned commit (2026-11-04) declares the library obsolete and points to tomlc17. No tagged releases.",
+      "source": "https://github.com/cktan/tomlc99",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "github": {
+        "stargazers_count": 664,
+        "archived": false,
+        "license_spdx": "NOASSERTION",
+        "pushed_at": "2026-11-04T09:26:02Z",
+        "language": "C",
+        "url": "https://api.github.com/repos/cktan/tomlc99",
+        "captured_at_utc": "2026-11-17T16:41:53.383778+00:00",
+        "stargazers_count_round_6": 664
+      },
+      "pinned_commit": "62ce93ceb713dc49909d0fef1411f9d37bef83f2",
+      "pinned_source": "https://codeload.github.com/cktan/tomlc99/tar.gz/62ce93ceb713dc49909d0fef1411f9d37bef83f2",
+      "pinned_source_sha256": "158dbe2b3a98923277db182ec6151ef39fbd3a70f6cc4a6b0460bbcd02ad9a50",
+      "license_checked": "LICENSE in the pinned archive is the MIT License text (Copyright (c) CK Tan); GitHub reports NOASSERTION.",
+      "evidence": {
+        "checked_at_utc": "2026-11-17",
+        "api": "toml_parse(char *conf, char *errbuf, int errbufsz) on a NUL-terminated copy; toml_key_in/toml_*_in/toml_*_at accessors",
+        "service_config": "pass: typed tree equals controls/toml/service-config.expected.json",
+        "typed_scalars": "fail: toml_parse returns NULL",
+        "error": "line 17: expect hex char",
+        "cause": "toml.c (scan_string, lines 1695-1699 and 1744-1748) accepts only uppercase hex digits after \\u/\\U (\"0123456789ABCDEF\"); the control writes \\u00e9, which TOML 1.0.0 HEXDIG allows. A diagnostic copy with \\u00E9 (control unchanged) produced the expected tree, so this is the only difference on the two controls.",
+        "harness_route": "local clang build of the same typed-tree harness used for the promoted C paths; no Docker receipt recorded"
+      },
+      "star_fallback": "Not eligible for the 2026-11-18 star fallback: 664 stargazers but no tagged release (0 tags), and the latest commit fails the second control."
+    },
+    {
+      "name": "libtoml",
+      "metric_value": 125,
+      "metric": "GitHub stargazers (reference only; not an adoption metric in this cell)",
+      "family": "libtoml (ajwans; Ragel state machine)",
+      "api_lead": "toml_parse(struct toml_node*, char*, int)",
+      "note": "README at the latest commit 03e8a3ab1d4d014e63a2befe8a48e74783a81521 (2016-06-06) states \"Currently targetted at TOML v0.4.0\"; building needs ragel and ICU. TOML 0.4.0 has no dotted keys, hex/octal/binary integers or local date/time types, all of which the second control uses. Not run within this bounded pass.",
+      "source": "https://github.com/ajwans/libtoml",
+      "status": "unresolved_not_run",
+      "api_lead_checked_against_pinned_release": false,
+      "github": {
+        "stargazers_count": 125,
+        "archived": false,
+        "license_spdx": "BSD-3-Clause",
+        "pushed_at": "2019-03-14T22:24:30Z",
+        "language": "C",
+        "url": "https://api.github.com/repos/ajwans/libtoml",
+        "captured_at_utc": "2026-11-17T16:41:54.862087+00:00"
+      },
+      "pinned_source_checked": "https://codeload.github.com/ajwans/libtoml/tar.gz/03e8a3ab1d4d014e63a2befe8a48e74783a81521",
+      "pinned_source_sha256_checked": "9b5ff5c7e4468f1401efb294369a78a8ce89b41c704abecc9d9954ccae674b2c",
+      "star_fallback": "Not eligible for the 2026-11-18 star fallback: 125 stargazers but no tagged release (0 tags); it also targets TOML 0.4.0."
+    }
   ],
-  "result": "No C TOML library is packaged in Debian (libtoml-* hits are Perl modules); the cell stays at 0 with tomlc17 and toml-c as control-verified leads without a primary metric."
- }
+  "excluded": [
+    {
+      "name": "fwm",
+      "source": "https://github.com/iluaii/fwm",
+      "stars": 187,
+      "found_by": "GitHub search 'toml language:C' (round 6 star fallback)",
+      "reason": "Wayland compositor, not a TOML parser library; its stars reflect the compositor."
+    }
+  ],
+  "search_recheck": {
+    "checked_at_utc": "2026-11-17T22:55:46Z",
+    "debian_source_packages": {
+      "url": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "snapshot_sha256": "7a460f12225a77951379ff4e02d58004166294ba839d2af7ab6f178ea7f22f53",
+      "query": "case-insensitive substring 'toml' in source-package names",
+      "hits": 40,
+      "c_or_cpp_libraries": [
+        "tomlplusplus (3,536; C++)",
+        "toml11 (15; C++)",
+        "cpptoml (5; C++)"
+      ],
+      "other_hits": "Python (python-tomlkit, python-tomli, python-toml, python-tomli-w, python-dom-toml), R (r-cran-rcpptoml: an R package that bundles toml++, not a C++ library API), Perl, Ruby, Rust, Go, Haskell, GAP (gap-tomlib) and Fortran (fortran-toml: toml-f) packages"
+    },
+    "debian_binary_packages": {
+      "url": "https://popcon.debian.org/by_inst.gz",
+      "snapshot_sha256": "5db455a219c8c723423f7c2457b615826135ed01729ad2adff1a23f2d28cffb0",
+      "query": "case-insensitive substring 'toml' in binary-package names",
+      "hits": 57,
+      "c_or_cpp_libraries": [
+        "libtomlplusplus3t64 (3,536)",
+        "libtomlplusplus-dev (315)",
+        "libtomlplusplus3 (38, not in sid)",
+        "libtoml11-dev (15)",
+        "libcpptoml-dev (5)",
+        "libtoml++-dev (3, not in sid)"
+      ]
+    },
+    "conan_center_recipes": {
+      "url": "https://github.com/conan-io/conan-center-index/tree/master/recipes",
+      "query": "case-insensitive substring 'toml' in the 1,981 recipe directory names",
+      "hits": [
+        "cpptoml",
+        "toml11",
+        "tomlplusplus"
+      ]
+    },
+    "finding": "No C TOML library is packaged in Debian or listed in Conan Center: the only C/C++ hits are the three selected C++ libraries. tomlc17 and toml-c therefore stay unresolved_no_primary_metric (GitHub stars were then a fallback only in PLY cells; the 2026-11-18 star fallback later admitted tomlc17), and the C cell stays at 0 selected."
+  },
+  "round_4": {
+    "checked_at_utc": "2026-11-18",
+    "popcon_lookup": {
+      "url": "https://popcon.debian.org/sourcemax/by_inst.gz",
+      "sha256": "7a460f12225a77951379ff4e02d58004166294ba839d2af7ab6f178ea7f22f53",
+      "binary_url": "https://popcon.debian.org/by_inst.gz",
+      "binary_sha256": "5db455a219c8c723423f7c2457b615826135ed01729ad2adff1a23f2d28cffb0",
+      "note": "Same sourcemax file as the 2026-11-17 search_recheck (identical SHA-256)."
+    },
+    "routes": [
+      "toml-lang/toml wiki lists (C: toml-c and tomlc17, both recorded leads; Old: tomlc99, libtoml, tomlc)",
+      "Debian popcon source and binary tables searched for tomlc, tomlc17, tomlc99, toml-c and libtoml in addition to the \"toml\" substring"
+    ],
+    "result": "No C TOML library is packaged in Debian (libtoml-* hits are Perl modules); the cell stays at 0 with tomlc17 and toml-c as control-verified leads without a primary metric."
+  },
+  "resolved_promoted": [
+    {
+      "name": "tomlc17",
+      "release": "R261116",
+      "promoted_at_utc": "2026-11-18T07:13:02.927365+00:00",
+      "selection": "supplemental",
+      "metric": "GitHub stars (secondary, repository interest, not downloads): 201",
+      "evidence": "data/c/toml/parsers.json, projects/toml/c/tomlc17/verification.json, fuzzing/afl-native/toml/c/tomlc17/differential.json"
+    }
+  ],
+  "round_6_star_fallback": {
+    "checked_at_utc": "2026-11-18T07:09:00.387416+00:00",
+    "routes": [
+      "GitHub repository search 'toml language:C' (sorted by stars, first 100 hits; 132 total)",
+      "GitHub repository search 'toml parser language:C' (sorted by stars, first 100 hits; 45 total)",
+      "GitHub repository search 'topic:toml language:C' (sorted by stars, first 100 hits; 27 total)",
+      "existing unresolved_no_primary_metric leads (tomlc17, toml-c) and the other recorded leads (tomlc99, libtoml)"
+    ],
+    "promoted": [
+      "tomlc17"
+    ],
+    "not_eligible": {
+      "toml-c": "no tagged release",
+      "tomlc99": "no tagged release; fails the second control",
+      "libtoml": "no tagged release; TOML 0.4.0"
+    },
+    "excluded": [
+      "fwm (Wayland compositor)"
+    ],
+    "result": "One C TOML repository with at least 100 stargazers has a tagged release and a format-specific parser: tomlc17. The cell goes from 0 to 1 and cannot reach ten on this surface."
+  }
 }
