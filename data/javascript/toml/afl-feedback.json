@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-17T20:08:42.647234+00:00",
-  "projects_total": 4,
-  "projects_passed": 4,
+  "checked_at_utc": "2026-11-18T00:14:21.207024+00:00",
+  "projects_total": 5,
+  "projects_passed": 5,
   "differential_kind": "fixed_valid_typed_scalars",
   "results": [
     {
@@ -201,6 +201,49 @@
       "control_only_parser_source_lines_by_file": {},
       "differential_only_parser_source_lines_by_file": {
         "dist/toml-patch.js": 3
+      }
+    },
+    {
+      "project": "toml/javascript/toml_min",
+      "pass": true,
+      "feedback_kind": "javascript_parser_source_ranges_to_afl_bitmap",
+      "overlay_receipt_sha256": "efc03ec412aa99d3c3a40c58ff419023f18e3e2f55e415f11f16fbfa8cdfb538",
+      "base_project_receipt_sha256": "d953545f4e621f262b0f0eeb6dff40b23cf5ca7cf099294d9734aa39a4c5770b",
+      "base_image_id": "sha256:c22f36a52f918cc428355a08d60d113700951e53422648fe20953b93646479d8",
+      "overlay_image_id": "sha256:3ea20225b70594b0cfeff9ec02a2f6c0acb666876929b792ed0f8a9844a64f88",
+      "control": "controls/toml/service-config.toml",
+      "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+      "differential": "controls/toml/typed-scalars.toml",
+      "differential_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+      "differential_output_matches_expected": true,
+      "repeats_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 159,
+      "control_afl_tuples": 179,
+      "differential_parser_features": 228,
+      "differential_afl_tuples": 248,
+      "parser_feature_difference": 145,
+      "afl_tuple_difference": 145,
+      "control_only_afl_tuples": 38,
+      "differential_only_afl_tuples": 107,
+      "control_only_features_by_file": {
+        "lib/index.js": 38
+      },
+      "differential_only_features_by_file": {
+        "lib/index.js": 107
+      },
+      "control_parser_source_lines_by_file": {
+        "lib/index.js": 792
+      },
+      "differential_parser_source_lines_by_file": {
+        "lib/index.js": 853
+      },
+      "control_only_parser_source_lines_by_file": {
+        "lib/index.js": 110
+      },
+      "differential_only_parser_source_lines_by_file": {
+        "lib/index.js": 171
       }
     }
   ]

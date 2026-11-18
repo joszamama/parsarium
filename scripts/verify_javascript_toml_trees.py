@@ -24,6 +24,7 @@ API = {
     "toml_eslint_parser": "parseTOML(text, { tomlVersion: '1.0.0' }) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true}); typed tree from the returned syntax tree",
     "ltd_j_toml": "TOML.parse[1.0](text, { joiner: '\\n', bigint: true }) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true})",
     "decimalturn_toml_patch": "parse(text, { integersAsBigInt: true }) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true})",
+    "toml_min": "parse(text, { bigint: true }) after TextDecoder('utf-8', {fatal: true, ignoreBOM: true})",
 }
 
 

@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "format": "toml",
+  "ecosystem": "javascript",
+  "pilot": true,
+  "package": "toml.min",
+  "release": "2.0.1",
+  "catalog_parser": "data/javascript/toml/parsers.json",
+  "source_lock": "projects/toml/javascript/toml_min/source-lock.json",
+  "source_sha256": "51cb9b0275d7146806baee193b375648a69cf9a72958dcf6082eb6f711a1aca4",
+  "base_image": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47",
+  "platform": "linux/arm64",
+  "control": "controls/toml/service-config.toml",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "expected_output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "differential_control": "controls/toml/typed-scalars.toml",
+  "differential_control_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "differential_expected_output": {
+    "floats": {
+      "exponent": {
+        "type": "float",
+        "value": "1000.0"
+      },
+      "fraction": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "mixed": {
+        "type": "float",
+        "value": "0.015625"
+      },
+      "negative": {
+        "type": "float",
+        "value": "-0.5"
+      }
+    },
+    "integers": {
+      "binary": {
+        "type": "integer",
+        "value": "13"
+      },
+      "decimal": {
+        "type": "integer",
+        "value": "99"
+      },
+      "hex": {
+        "type": "integer",
+        "value": "3735928559"
+      },
+      "negative": {
+        "type": "integer",
+        "value": "-17"
+      },
+      "octal": {
+        "type": "integer",
+        "value": "493"
+      },
+      "underscored": {
+        "type": "integer",
+        "value": "1000000"
+      }
+    },
+    "keys": {
+      "a": {
+        "b": {
+          "c": {
+            "type": "integer",
+            "value": "1"
+          }
+        }
+      },
+      "quoted key": {
+        "type": "string",
+        "value": "q"
+      },
+      "site": {
+        "example.com": {
+          "type": "bool",
+          "value": "true"
+        }
+      }
+    },
+    "strings": {
+      "escapes": {
+        "type": "string",
+        "value": "tab\tquote\"backslash\\ é"
+      },
+      "literal": {
+        "type": "string",
+        "value": "C:\\Users\\parsarium"
+      },
+      "multiline": {
+        "type": "string",
+        "value": "first second"
+      },
+      "raw_multiline": {
+        "type": "string",
+        "value": "line one\nline two"
+      }
+    },
+    "times": {
+      "local_date": {
+        "type": "date-local",
+        "value": "1979-05-27"
+      },
+      "local_datetime": {
+        "type": "datetime-local",
+        "value": "1979-05-27T07:32:00"
+      },
+      "local_time": {
+        "type": "time-local",
+        "value": "00:32:00.25"
+      },
+      "offset": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00.5Z"
+      }
+    }
+  },
+  "oracle": "replay.js prints the typed tree built from the values parse(text, { bigint: true }) returned (integer BigInt, float Number, string, boolean, the exported OffsetDateTime Date subclass read through Date.prototype.toISOString, the exported LocalDateOrTime read through its documented kind and text, tables and arrays); run-control requires it to equal expected-trees.json, a copy of controls/toml/*.expected.json written by hand from the TOML 1.0.0 specification and checked against Python tomllib by controls/toml/check_controls.py",
+  "harness": "harness.js",
+  "fuzz_engine": "Jazzer.js",
+  "fuzz_engine_release": "4.0.0",
+  "fuzz_entry": "fuzz.js",
+  "fuzz_smoke_entrypoint": "/usr/local/bin/node",
+  "fuzz_smoke_args": [
+    "/work/node_modules/@jazzer.js/core/dist/cli.js",
+    "/work/fuzz.js",
+    "--includes",
+    "/work/node_modules/toml.min/",
+    "--",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Node V8 source-range coverage of the toml.min package (lib/index.js: its hand-written scanner, value decoders and table builder) during complete valid-control replay. Jazzer.js instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/node_modules/toml.min/",
+  "scope": "One TOML document from local bytes decoded as strict UTF-8 (BOM kept) and passed once to parse(text, { bigint: true }); the package scans the whole document, decodes every value and builds the table tree, throwing a TomlError on invalid TOML. Offset date-times are observed with millisecond precision; local date-times, dates and times keep the text the parser accepted. Only the two valid TOML 1.0.0 controls were run",
+  "format_specific_coverage_file_suffix": "/lib/index.js"
+}

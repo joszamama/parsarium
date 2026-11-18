@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-17T20:08:48.418218+00:00",
+  "checked_at_utc": "2026-11-18T00:14:48.137540+00:00",
   "platform": "linux/arm64 Docker",
   "node": "v26.10.0",
   "controls": {
@@ -779,6 +779,147 @@
       "parser_source_lines_covered": 51,
       "format_specific_source_lines_covered": 51,
       "differential_parser_source_lines_covered": 54,
+      "error": null
+    },
+    {
+      "package": "toml.min",
+      "version": "2.0.1",
+      "scope": "One TOML document from local bytes decoded as strict UTF-8 (BOM kept) and passed once to parse(text, { bigint: true }); the typed tree is built from the returned objects, arrays and typed values. Offset date-times are observed with millisecond precision. Only the two valid TOML 1.0.0 controls were run",
+      "command": "python3 scripts/run_project.py toml javascript toml_min",
+      "receipt": "projects/toml/javascript/toml_min/verification.json",
+      "project_receipt": "projects/toml/javascript/toml_min/verification.json",
+      "tree_receipt": "data/javascript/toml/toml.min-tree-verification.json",
+      "pass": true,
+      "output": {
+        "database": {
+          "limits": {
+            "max": {
+              "type": "integer",
+              "value": "10"
+            },
+            "min": {
+              "type": "integer",
+              "value": "-2"
+            }
+          },
+          "ports": [
+            {
+              "type": "integer",
+              "value": "8000"
+            },
+            {
+              "type": "integer",
+              "value": "8001"
+            },
+            {
+              "type": "integer",
+              "value": "8002"
+            }
+          ],
+          "ratio": {
+            "type": "float",
+            "value": "3.25"
+          }
+        },
+        "enabled": {
+          "type": "bool",
+          "value": "true"
+        },
+        "owner": {
+          "name": {
+            "type": "string",
+            "value": "Zoë"
+          },
+          "since": {
+            "type": "datetime",
+            "value": "1979-05-27T07:32:00Z"
+          }
+        },
+        "products": [
+          {
+            "name": {
+              "type": "string",
+              "value": "Hammer"
+            },
+            "sku": {
+              "type": "integer",
+              "value": "738594937"
+            }
+          },
+          {
+            "color": {
+              "type": "string",
+              "value": "gray"
+            },
+            "name": {
+              "type": "string",
+              "value": "Nail"
+            },
+            "points": [
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "1"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "2"
+                }
+              },
+              {
+                "x": {
+                  "type": "integer",
+                  "value": "3"
+                },
+                "y": {
+                  "type": "integer",
+                  "value": "4"
+                }
+              }
+            ]
+          }
+        ],
+        "retries": {
+          "type": "integer",
+          "value": "3"
+        },
+        "servers": {
+          "alpha": {
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.1"
+            },
+            "tags": [
+              {
+                "type": "string",
+                "value": "edge"
+              },
+              {
+                "type": "string",
+                "value": "eu"
+              }
+            ]
+          },
+          "beta": {
+            "enabled": {
+              "type": "bool",
+              "value": "false"
+            },
+            "ip": {
+              "type": "string",
+              "value": "10.0.0.2"
+            }
+          }
+        },
+        "title": {
+          "type": "string",
+          "value": "Parsarium \"service\" control"
+        }
+      },
+      "parser_source_files": 1,
+      "parser_source_lines_covered": 792,
+      "format_specific_source_lines_covered": 792,
+      "differential_parser_source_lines_covered": 853,
       "error": null
     }
   ],
