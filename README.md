@@ -1,5 +1,14 @@
 # Parsarium
 
+<p align="center">
+  <a href="https://github.com/joszamama/parsarium/actions/workflows/verify.yml"><img alt="Verify catalog and tooling" src="https://github.com/joszamama/parsarium/actions/workflows/verify.yml/badge.svg?branch=main"></a>
+  <a href="https://github.com/joszamama/parsarium/actions/workflows/pages.yml"><img alt="Publish site" src="https://github.com/joszamama/parsarium/actions/workflows/pages.yml/badge.svg?branch=main"></a>
+  <a href="https://pypi.org/project/parsarium/"><img alt="PyPI version" src="https://img.shields.io/pypi/v/parsarium"></a>
+  <a href="https://pypi.org/project/parsarium/"><img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue"></a>
+  <a href="LICENSE"><img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-blue"></a>
+  <a href="https://parsarium.com/"><img alt="Website: parsarium.com" src="https://img.shields.io/badge/website-parsarium.com-0f7d46"></a>
+</p>
+
 **An open testbed of real parsers.** Pinned, verified Docker harnesses for 1,163 open-source parser paths across 16 file formats and protocols in eight languages, ready to run, compare, and fuzz with AFL++ and Fandango.
 
 <p align="center">
