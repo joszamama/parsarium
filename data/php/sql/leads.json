@@ -648,6 +648,86 @@
       "family": "sqlglot family (PHP port of sqlglot 30.21.0)",
       "documented_api_lead": "https://github.com/kwasii1/laravel-sql-parser/blob/17aa576c47feb38ef3b66b11d0cca449730f7b96/README.md#parsing",
       "reason": "Round-5 GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist; also the 33rd hit of the round-1 'sql parser' query, where its description (\"Fast SQL Parser for PHP Laravel\") was not followed up. README-documented parse API (Sql::parse(), and Dialect::get(...)->parseOne() without Laravel) returning sqlglot-style expression trees. Dialect::get(null)->parse() on both valid controls gives the oracle summary from Select/Insert, Table, Join, Func and Literal nodes; 1155 package lines covered in 63 files; parser-line AFL++ bridge identical over three repeats, 1168/828 tuples, 766 tuples differ. MIT, only release v0.1.0 (2026-10-10). Requires illuminate/* for its Laravel integration only. Port of Python sqlglot (shared design lineage across ecosystems); independent of the other PHP code bases."
+    },
+    {
+      "name": "liquiddesign/php-sql-parser",
+      "status": "excluded",
+      "metric_value": 901,
+      "metric_error": null,
+      "latest_release_observed": "v1.0.8",
+      "family": "PHP-SQL-Parser lineage (soundintheory fork)",
+      "documented_api_lead": "PHPSQL\\Parser::parse",
+      "reason": "Round-1 'sql parser' hit (rank 46) checked in round 5. Self-described fork of the selected soundintheory/php-sql-parser (README: 'A fork of https://github.com/soundintheory/php-sql-parser', with Creator and HAVING fixes): 1,606 of 1,635 normalized statements (98.2%) occur in soundintheory 1.0, and only Creator.php and Parser.php differ. Near-identical fork."
+    },
+    {
+      "name": "foolfish3/clickhousesqlparser",
+      "status": "unresolved",
+      "metric_value": 24,
+      "metric_error": null,
+      "latest_release_observed": "0.5.7",
+      "family": "foolfish3 ClickHouseSQLParser (single-file tokenizer and expression parser)",
+      "documented_api_lead": null,
+      "reason": "Round-1 'sql parser' hit (rank 40) checked in round 5. composer.json declares MIT, but the 0.5.7 dist archive (SHA-256 817ac1a7ee9a5474354bf331285577e260e7019db29f1d244de122461cd1e121, reference 9b1e6872) contains only composer.json and src/ with no licence text, and the package has no README or documented parse API. Same licence blocker as inilim/sqlite-parser; ClickHouse dialect. Not built."
+    },
+    {
+      "name": "moledet/database-change-log",
+      "status": "excluded",
+      "metric_value": 7245,
+      "metric_error": null,
+      "latest_release_observed": "v1.0.3",
+      "family": "greenlion PHP-SQL-Parser consumer",
+      "documented_api_lead": null,
+      "reason": "Round-5 GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist. Data-change logger whose v1.0.3 requires greenlion/php-sql-parser 4.6.0 to read SQL; no own parser."
+    },
+    {
+      "name": "apility/elasticsearch-sql-parser",
+      "status": "excluded",
+      "metric_value": 21,
+      "metric_error": null,
+      "latest_release_observed": "v1.0.7",
+      "family": "greenlion PHP-SQL-Parser consumer",
+      "documented_api_lead": null,
+      "reason": "Round-1 'sql parser' hit checked in round 5. SQL-to-Elasticsearch-DSL converter whose v1.0.7 requires greenlion/php-sql-parser ^4.5; no own parser."
+    },
+    {
+      "name": "graze/morphism",
+      "status": "excluded",
+      "metric_value": 3473,
+      "metric_error": null,
+      "latest_release_observed": "v7.1.0",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-5 GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist. MySQL schema migration tool: its Parse namespace (v7.1.0) has CreateDatabase, CreateTable, ColumnDefinition, IndexDefinition and MysqlDump only, so it parses DDL from mysqldump files and cannot parse the SELECT or INSERT controls (schema-only, like iamcal/sql-parser)."
+    },
+    {
+      "name": "aaronidas/apm-sql-lexer",
+      "status": "excluded",
+      "metric_value": 93241,
+      "metric_error": null,
+      "latest_release_observed": "v0.0.2",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-5 GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist (AaronBernabeu/apm-sql-lexer) and a round-1 'sql lexer' hit. SQL lexer for APM query obfuscation; it returns tokens, no syntax tree (tokenizer rule)."
+    },
+    {
+      "name": "wolfans/usql-parser",
+      "status": "excluded",
+      "metric_value": 26,
+      "metric_error": null,
+      "latest_release_observed": "v2.0",
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-1 'sql parser' hit checked in round 5. SQL style checker whose Packagist licence is 'Private Protocol'; not open source."
+    },
+    {
+      "name": "qieangel2013/esparser",
+      "status": "excluded",
+      "metric_value": 3432,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-5 GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist (qieangel2013/EsParser). SQL-to-Elasticsearch converter with no tagged release on Packagist, so no release can be pinned."
     }
   ]
 }

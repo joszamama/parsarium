@@ -37,6 +37,7 @@ Receipts: [phpmyadmin/sql-parser](../../../projects/sql/php/phpmyadmin_sql_parse
 | vimeo/php-mysql-engine | 312,980 | selected | vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake) |
 | sqlftw/sqlftw | 169,733 | excluded | SQLFTW |
 | cweiske/php-sqllint | 95,400 | excluded | phpMyAdmin hand-written lexer and parser |
+| aaronidas/apm-sql-lexer | 93,241 | excluded | — |
 | jimbojsb/pseudo | 88,995 | excluded | — |
 | sad_spirit/pg_builder | 76,924 | selected | pg_builder hand-written PostgreSQL parser |
 | getdkan/sql-parser | 66,786 | excluded | DKAN state-machine validator |
@@ -52,13 +53,17 @@ Receipts: [phpmyadmin/sql-parser](../../../projects/sql/php/phpmyadmin_sql_parse
 | tsukasa/php-sql-parser | 14,933 | excluded | PHP-SQL-Parser (greenlion fork) |
 | udan11/sql-parser | 9,823 | excluded | phpMyAdmin hand-written lexer and parser |
 | processfast/php-sql-parser | 8,250 | excluded | PHP-SQL-Parser (greenlion fork) |
+| moledet/database-change-log | 7,245 | excluded | greenlion PHP-SQL-Parser consumer |
 | liquipedia/sqllint | 5,398 | excluded | phpMyAdmin hand-written lexer and parser |
 | slack/hack-sql-fake | 3,838 | excluded | vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake) |
+| graze/morphism | 3,473 | excluded | — |
+| qieangel2013/esparser | 3,432 | excluded | — |
 | crodas/sql-parser | 2,490 | selected | crodas SQLParser Lemon-generated parser |
 | michabbb/php-sql-parser | 2,299 | excluded | PHP-SQL-Parser (greenlion fork) |
 | vdauchy/sql-analyzer | 1,674 | excluded | — |
 | fmizzell/sql-parser | 1,367 | excluded | DKAN state-machine validator |
 | maghead/sqlite-parser | 937 | excluded | — |
+| liquiddesign/php-sql-parser | 901 | excluded | PHP-SQL-Parser lineage (soundintheory fork) |
 | pierresh/phpstan-pdo-mysql | 672 | excluded | SQLFTW |
 | aitradeinc/php-sql-parser | 399 | excluded | PHP-SQL-Parser (greenlion fork) |
 | zent/php-sql-parser | 239 | excluded | PHP-SQL-Parser (greenlion fork) |
@@ -69,7 +74,10 @@ Receipts: [phpmyadmin/sql-parser](../../../projects/sql/php/phpmyadmin_sql_parse
 | janfish/phpmyadmin-sql-parser | 56 | excluded | phpMyAdmin hand-written lexer and parser |
 | kwasii/laravel-sql-parser | 51 | selected | sqlglot family (PHP port of sqlglot 30.21.0) |
 | codexsoft/sql-parser | 46 | excluded | — |
+| wolfans/usql-parser | 26 | excluded | — |
 | dmitry-php/sql-parser | 25 | excluded | phpMyAdmin hand-written lexer and parser |
+| foolfish3/clickhousesqlparser | 24 | unresolved | foolfish3 ClickHouseSQLParser |
+| apility/elasticsearch-sql-parser | 21 | excluded | greenlion PHP-SQL-Parser consumer |
 | subapp/sql | 19 | unresolved_blocked | subapp/sql lexer and parser |
 | tiny/sql | 19 | excluded | — |
 | jtfnetoo/sql-parser | 18 | excluded | phpMyAdmin hand-written lexer and parser |
