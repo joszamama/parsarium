@@ -70,3 +70,12 @@ Packagist total downloads, from [registry-snapshot.json](registry-snapshot.json)
 - **arrayaccess/dns-client** (excluded): Resolver client: the README documents only lookup(); packet classes are used internally by the resolver.
 - **thruster/dns** (excluded): Port of an early ReactPHP DNS component to the Thruster event loop (its Parser::parseChunk mirrors react/dns's old chunked parser); resolver API only, 38 downloads.
 - **ipokbr/dns** (excluded): Parses dig text output lines (Aux_Func::fill_dns_array splits host/ttl/class/type/data), not DNS wire messages.
+- **kakserpom/phpdaemon** (excluded): Asynchronous application framework (pre-release v1.0-beta2); its DNS client parses replies in Clients\DNS\Connection::onUdpPacket, a connection callback that resolves the pending request's callback, with no documented API for caller-supplied message bytes. The download count covers the whole framework.
+- **sirmonti/doh** (excluded): DNS-over-HTTPS resolver for Google and Cloudflare: the README documents only static dns($name, $type) lookups over HTTPS returning answer arrays; no wire-format message parser for caller-supplied bytes.
+- **yocto/yoclib-dns** (excluded): RDATA codec only: the README documents deserialising one record's RDATA from wire or presentation format by class and type; there is no message, header, question or name-compression decoder.
+- **horde/dns** (excluded): Zone and record management backends (Bind9, Rdo database, Mock); no tagged release on Packagist and no wire-format parser.
+- **yggverse/net** (excluded): Network helpers whose Dig::records runs the external dig command (+short); no message parser.
+- **chielteuben/php-dns-extended** (excluded): Maintained fork of the excluded remotelyliving/php-dns resolver wrapper; network API only.
+- **php-standard-library/dnssec** (excluded): DNSSEC validator built on the excluded php-standard-library/dns resolver, whose wire decoder is internal API; no own documented message parser.
+- **anquanssl/dns** (excluded): GitHub fork of the excluded bluelibraries/dns resolver library; same code base, resolver API only.
+- **bluelibraries/php5-dns** (excluded): PHP 5 edition of the excluded bluelibraries/dns resolver library; resolver API only.

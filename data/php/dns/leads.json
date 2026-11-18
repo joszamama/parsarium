@@ -484,5 +484,113 @@
     "primary_metric_value": 8,
     "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 37
+  },
+  {
+    "name": "kakserpom/phpdaemon",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "primary_metric_value": 41424,
+    "found_by": "round-6 discovery: GitHub code search (qdcount ancount nscount arcount language:PHP); metric in registry-snapshot.json round6_targeted",
+    "documentation": "https://github.com/kakserpom/phpdaemon",
+    "input_api_lead": "PHPDaemon\\Clients\\DNS\\Connection::onUdpPacket($pct)",
+    "family": "phpDaemon DNS client",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "Asynchronous application framework (pre-release v1.0-beta2); its DNS client parses replies in Clients\\DNS\\Connection::onUdpPacket, a connection callback that resolves the pending request's callback, with no documented API for caller-supplied message bytes. The download count covers the whole framework."
+  },
+  {
+    "name": "sirmonti/doh",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "primary_metric_value": 35,
+    "found_by": "round-6 discovery: GitHub repository search (dns client language:PHP); metric in registry-snapshot.json round6_targeted",
+    "documentation": "https://github.com/sirmonti/DOH/blob/3.0.0/README.md",
+    "input_api_lead": "DOHGG::dns($name, $type)",
+    "family": "sirmonti DOH",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "DNS-over-HTTPS resolver for Google and Cloudflare: the README documents only static dns($name, $type) lookups over HTTPS returning answer arrays; no wire-format message parser for caller-supplied bytes."
+  },
+  {
+    "name": "yocto/yoclib-dns",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "primary_metric_value": 814,
+    "found_by": "round-6 discovery: Packagist search (dnssd, dnssec); metric in registry-snapshot.json round6_targeted",
+    "documentation": "https://github.com/yocto/yoclib-dns-php/blob/master/README.md",
+    "input_api_lead": "TypeHelper::deserializeFromWireFormatByClassAndType($rdata, $class, $type)",
+    "family": "yocLib DNS",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "RDATA codec only: the README documents deserialising one record's RDATA from wire or presentation format by class and type; there is no message, header, question or name-compression decoder."
+  },
+  {
+    "name": "horde/dns",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "primary_metric_value": 37,
+    "found_by": "round-6 discovery: Packagist search (domain name system); metric in registry-snapshot.json round6_targeted",
+    "documentation": "https://github.com/horde/dns",
+    "input_api_lead": "Horde_Dns backends",
+    "family": "Horde DNS",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "Zone and record management backends (Bind9, Rdo database, Mock); no tagged release on Packagist and no wire-format parser."
+  },
+  {
+    "name": "yggverse/net",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "primary_metric_value": 66,
+    "found_by": "round-6 discovery: GitHub repository search (dns library language:PHP); metric in registry-snapshot.json round6_targeted",
+    "documentation": "https://github.com/YGGverse/net-php",
+    "input_api_lead": "Yggverse\\Net\\Dig::records(...)",
+    "family": "",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "Network helpers whose Dig::records runs the external dig command (+short); no message parser."
+  },
+  {
+    "name": "chielteuben/php-dns-extended",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "primary_metric_value": 14,
+    "found_by": "round-6 discovery: GitHub repository search (dns library language:PHP); metric in registry-snapshot.json round6_targeted",
+    "documentation": "https://github.com/chielteuben/php-dns-extended",
+    "input_api_lead": "",
+    "family": "remotelyliving/php-dns fork",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "Maintained fork of the excluded remotelyliving/php-dns resolver wrapper; network API only."
+  },
+  {
+    "name": "php-standard-library/dnssec",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "primary_metric_value": 6,
+    "found_by": "round-6 discovery: Packagist search (dnssd, dnssec); metric in registry-snapshot.json round6_targeted",
+    "documentation": "https://github.com/php-standard-library/dnssec",
+    "input_api_lead": "",
+    "family": "PSL DNS",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "DNSSEC validator built on the excluded php-standard-library/dns resolver, whose wire decoder is internal API; no own documented message parser."
+  },
+  {
+    "name": "anquanssl/dns",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "primary_metric_value": 35,
+    "found_by": "round-6 discovery: Packagist search (dns record); metric in registry-snapshot.json round6_targeted",
+    "documentation": "https://github.com/anquanssl/dns",
+    "input_api_lead": "",
+    "family": "bluelibraries/dns fork",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "GitHub fork of the excluded bluelibraries/dns resolver library; same code base, resolver API only."
+  },
+  {
+    "name": "bluelibraries/php5-dns",
+    "status": "excluded",
+    "primary_metric": "Packagist total downloads",
+    "primary_metric_value": 21,
+    "found_by": "round-6 discovery: Packagist search (dns record); metric in registry-snapshot.json round6_targeted",
+    "documentation": "https://github.com/bluelibraries/php5-dns",
+    "input_api_lead": "",
+    "family": "bluelibraries/dns",
+    "api_lead_checked_against_pinned_release": true,
+    "reason": "PHP 5 edition of the excluded bluelibraries/dns resolver library; resolver API only."
   }
 ]
