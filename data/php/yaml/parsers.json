@@ -932,5 +932,471 @@
       ]
     },
     "not_verified": "Two schema-neutral valid YAML 1.2 controls were parsed with a YAML_MAP_TAG callback into exact ordered typed trees. YAML 1.1-only scalars (yes/no/on/off, octal/hex/sexagesimal numbers, timestamps), tags and other callbacks, merge keys, multi-document streams and the pos argument, integer-like mapping keys, yaml_parse_file/yaml_parse_url, the yaml.decode_* ini settings, the emitter, the default array-for-map result (where {} and [] both become an empty array) and malformed input were not tested."
+  },
+  {
+    "name": "purrphp/yaml",
+    "version": "1.0.0",
+    "license": "MIT",
+    "license_evidence": "https://github.com/PurrPHP/yaml/blob/c069a72e06e5a11a725b50226122f1eb26eb64fe/LICENSE (MIT, Copyright (c) 2026 PurrPHP; composer.lock license [\"MIT\"]; the image diffs the codeload archive of tag 1.0.0, LICENSE included, against the Composer-installed package)",
+    "documentation": [
+      "https://github.com/PurrPHP/yaml/blob/c069a72e06e5a11a725b50226122f1eb26eb64fe/README.md"
+    ],
+    "documentation_evidence": "The pinned README documents YamlStreamSingle (expects exactly one document and throws InvalidDocumentsCountException otherwise), fromString() returning the parsed model, the node classes (MappingNode/MappingEntry, SequenceNode, ScalarNode, AliasNode linked to its anchored node) with getEntries()/getItems()/getTarget(), and that scalar typing is driven by a Schema, with CoreSchema implementing the YAML 1.2 core schema (resolve(ScalarNode)).",
+    "source": "https://github.com/PurrPHP/yaml/tree/c069a72e06e5a11a725b50226122f1eb26eb64fe",
+    "input_api": "Purr\\Yaml\\YamlStreamSingle::fromString(string) over local bytes; the documented node model (MappingNode entries, SequenceNode items, AliasNode targets) is walked in source order and each scalar is typed by the package's Schema\\CoreSchema::resolve",
+    "adapter": "projects/yaml/php/purrphp_yaml/harness.php",
+    "composer_lock": "projects/yaml/php/purrphp_yaml/composer.lock",
+    "control": "controls/yaml/catalog.yaml",
+    "differential_control": "controls/yaml/order.yaml",
+    "scope": "One YAML document from local bytes passed to the documented YamlStreamSingle::fromString(string), which throws unless the source holds exactly one document; the harness walks the documented node model (MappingNode entries in source order, SequenceNode items, AliasNode targets) and types each scalar with the package's documented YAML 1.2 CoreSchema::resolve, giving the shared exact typed tree (map/seq/str/int/float/bool/null, aliases expanded) with node counts and maximum depth.",
+    "family": "PurrPHP Yaml own line reader, block Parser.php, InlineParser.php flow/scalar parser and CoreSchema resolver",
+    "family_note": "Pure-PHP YAML 1.2 parser (2026) with no libyaml, ext-yaml or symfony/yaml dependency: LineReader.php and Parser.php build the block structure, InlineParser.php parses flow collections and quoted scalars, BlockScalarParser.php handles literal and folded scalars, AnchorRegistry.php links aliases, and Schema/CoreSchema.php types scalars; purrphp/pure-collection supplies typed list classes only. No other selected PHP YAML path shares this code.",
+    "popularity": {
+      "metric": "Packagist lifetime downloads",
+      "value": 1088,
+      "source": "https://packagist.org/packages/purrphp/yaml/stats.json",
+      "captured_at_utc": "2026-11-18T00:48:18.314405+00:00",
+      "snapshot": "data/php/yaml/registry-snapshot.json",
+      "limitation": "Package downloads of a 2026 release; a very weak adoption proxy, not YAML parsing frequency.",
+      "capture_note": "Round-4 targeted lookup of a lead found by a GitHub 'yaml parser' search for PHP repositories (same Packagist stats.json source as the cell's other values)."
+    },
+    "project": "projects/yaml/php/purrphp_yaml",
+    "expected_output": {
+      "root": "map",
+      "nodes": {
+        "bool": 2,
+        "float": 2,
+        "int": 7,
+        "map": 7,
+        "null": 1,
+        "seq": 2,
+        "str": 13
+      },
+      "max_depth": 3,
+      "tree": [
+        "map",
+        [
+          [
+            "kind",
+            [
+              "str",
+              "catalog"
+            ]
+          ],
+          [
+            "version",
+            [
+              "int",
+              "2"
+            ]
+          ],
+          [
+            "ratio",
+            [
+              "float",
+              "0.25"
+            ]
+          ],
+          [
+            "offset",
+            [
+              "int",
+              "-17"
+            ]
+          ],
+          [
+            "enabled",
+            [
+              "bool",
+              true
+            ]
+          ],
+          [
+            "retired",
+            [
+              "bool",
+              false
+            ]
+          ],
+          [
+            "missing",
+            [
+              "null"
+            ]
+          ],
+          [
+            "title",
+            [
+              "str",
+              "Café \"quoted\"\tend"
+            ]
+          ],
+          [
+            "single",
+            [
+              "str",
+              "it's here"
+            ]
+          ],
+          [
+            "tags",
+            [
+              "seq",
+              [
+                [
+                  "str",
+                  "alpha"
+                ],
+                [
+                  "str",
+                  "beta"
+                ],
+                [
+                  "str",
+                  "gamma delta"
+                ]
+              ]
+            ]
+          ],
+          [
+            "point",
+            [
+              "map",
+              [
+                [
+                  "lat",
+                  [
+                    "int",
+                    "1"
+                  ]
+                ],
+                [
+                  "lon",
+                  [
+                    "float",
+                    "-2.5"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "items",
+            [
+              "seq",
+              [
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "7"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "first item"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "line one\nline two\n"
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "map",
+                  [
+                    [
+                      "id",
+                      [
+                        "int",
+                        "8"
+                      ]
+                    ],
+                    [
+                      "name",
+                      [
+                        "str",
+                        "Zürich"
+                      ]
+                    ],
+                    [
+                      "note",
+                      [
+                        "str",
+                        "folded text\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "defaults",
+            [
+              "map",
+              [
+                [
+                  "retries",
+                  [
+                    "int",
+                    "3"
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "base"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "service",
+            [
+              "map",
+              [
+                [
+                  "settings",
+                  [
+                    "map",
+                    [
+                      [
+                        "retries",
+                        [
+                          "int",
+                          "3"
+                        ]
+                      ],
+                      [
+                        "label",
+                        [
+                          "str",
+                          "base"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "label",
+                  [
+                    "str",
+                    "edge"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "differential_expected_output": {
+      "root": "seq",
+      "nodes": {
+        "bool": 1,
+        "float": 2,
+        "int": 5,
+        "map": 7,
+        "null": 1,
+        "seq": 5,
+        "str": 11
+      },
+      "max_depth": 4,
+      "tree": [
+        "seq",
+        [
+          [
+            "map",
+            [
+              [
+                "order",
+                [
+                  "str",
+                  "A-7"
+                ]
+              ],
+              [
+                "lines",
+                [
+                  "seq",
+                  [
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "Xé-1"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "2"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "12.5"
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "map",
+                      [
+                        [
+                          "sku",
+                          [
+                            "str",
+                            "B '2'"
+                          ]
+                        ],
+                        [
+                          "qty",
+                          [
+                            "int",
+                            "1"
+                          ]
+                        ],
+                        [
+                          "price",
+                          [
+                            "float",
+                            "0.75"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "flags",
+                [
+                  "seq",
+                  []
+                ]
+              ],
+              [
+                "meta",
+                [
+                  "map",
+                  []
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "map",
+            [
+              [
+                "city",
+                [
+                  "str",
+                  "Berlin"
+                ]
+              ],
+              [
+                "zip",
+                [
+                  "str",
+                  "10115"
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              [
+                "int",
+                "1"
+              ],
+              [
+                "seq",
+                [
+                  [
+                    "int",
+                    "2"
+                  ],
+                  [
+                    "int",
+                    "3"
+                  ]
+                ]
+              ],
+              [
+                "map",
+                [
+                  [
+                    "k",
+                    [
+                      "str",
+                      "v"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "str",
+            "plain multi word"
+          ],
+          [
+            "str",
+            "line\nbreak"
+          ],
+          [
+            "str",
+            "kept\n  indented"
+          ],
+          [
+            "null"
+          ],
+          [
+            "bool",
+            false
+          ]
+        ]
+      ]
+    },
+    "not_verified": "Two schema-neutral valid YAML 1.2 controls were parsed into exact ordered typed trees through the node model and CoreSchema. Tags, merge keys, multi-document streams (YamlStream), complex or non-string keys, YAML 1.1-only scalars, toPlainArray (where {} and [] both become PHP arrays), the dumper and malformed input were not tested."
   }
 ]

@@ -1,15 +1,16 @@
 # PHP × YAML: selected parsers (pilot)
 
-Two control-verified third-party paths are selected. The ceiling is ten; the cell is not padded.
+Three control-verified third-party paths are selected. The ceiling is ten; the cell is not padded.
 
 ## Primary within-cell adoption metric
 
-Packagist lifetime downloads, captured 2026-11-17 ([snapshot](registry-snapshot.json)). Values are package adoption, mostly transitive, not YAML-specific use, and are compared only within this cell. pecl/yaml is a php-ext (PIE) package: its count covers installs through Packagist only, not PECL or distribution packages.
+Packagist lifetime downloads, captured 2026-11-17 (purrphp/yaml: round-4 targeted lookup, 2026-11-18) ([snapshot](registry-snapshot.json)). Values are package adoption, mostly transitive, not YAML-specific use, and are compared only within this cell. pecl/yaml is a php-ext (PIE) package: its count covers installs through Packagist only, not PECL or distribution packages.
 
 | Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [symfony/yaml](https://symfony.com/doc/8.1/components/yaml.html) | v8.1.11 | 926,050,815 | One YAML document via `Yaml::parse(string, Yaml::PARSE_OBJECT_FOR_MAP)` into an exact ordered typed tree | Symfony Yaml own Parser/Inline/Unescaper |
 | 2 | [pecl/yaml](https://www.php.net/manual/en/function.yaml-parse.php) | 2.3.0 | 55,298 | One YAML document via `yaml_parse(string)` with a `YAML_MAP_TAG` callback into an exact ordered typed tree | libyaml via the PECL yaml C extension |
+| 3 | [purrphp/yaml](https://github.com/PurrPHP/yaml/blob/c069a72e06e5a11a725b50226122f1eb26eb64fe/README.md) | 1.0.0 | 1,088 | One YAML document via `YamlStreamSingle::fromString(string)`; node model walked in source order, scalars typed by the package's `CoreSchema::resolve` | PurrPHP Yaml own line reader, Parser/InlineParser and CoreSchema |
 
 ## Leads (unverified or excluded)
 

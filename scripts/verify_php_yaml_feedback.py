@@ -22,6 +22,7 @@ from verify_php_json_line_feedback import replay
 ROOT = Path(__file__).resolve().parents[1]
 REPORTS = {
     "symfony_yaml": "symfony-yaml-feedback-differential.json",
+    "purrphp_yaml": "purrphp-yaml-feedback-differential.json",
 }
 REPEATS = 3
 

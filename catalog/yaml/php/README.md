@@ -10,6 +10,7 @@ Two verified PHP YAML paths from different families. symfony/yaml v8.1.11 parses
 
 - [symfony/yaml](symfony-yaml/README.md) — verified Docker harness
 - [pecl/yaml](pecl-yaml/README.md) — verified Docker harness
+- [purrphp/yaml](purrphp-yaml/README.md) — verified API path
 
 ## Standard and runtime APIs
 
