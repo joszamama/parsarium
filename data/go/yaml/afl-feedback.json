@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-18T01:59:33.388214+00:00",
-  "projects_total": 6,
-  "projects_passed": 6,
+  "checked_at_utc": "2026-11-18T03:01:21.406143+00:00",
+  "projects_total": 7,
+  "projects_passed": 7,
   "differential_kind": "fixed_valid_block_sequence_yaml",
   "results": [
     {
@@ -241,6 +241,60 @@
         "parser.go": 19,
         "resolve.go": 2,
         "scanner.go": 21
+      }
+    },
+    {
+      "project": "yaml/go/github_com_tabnas_yaml_go",
+      "pass": true,
+      "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
+      "overlay_receipt_sha256": "b9fdc77e3a27fd695368d3384cc6244cc0fef7ded5ad8703033a9aef3de844b5",
+      "control": "controls/yaml/catalog.yaml",
+      "control_sha256": "b574210db4f284734fe62b59833b24f53c99e6b5948d9d5e379f1c1439ac8d5d",
+      "differential": "controls/yaml/order.yaml",
+      "differential_sha256": "a7d81a704bf582a1f54b1bcb4dfe1c68a62718e5cfc3196ccd406e4ec36bc935",
+      "oracle": "controls/yaml/check_controls.py EXPECTED typed trees (hand-written, Psych cross-checked)",
+      "control_tree_pass": true,
+      "differential_tree_pass": true,
+      "runs_per_control": 3,
+      "repeated_control_identical": true,
+      "repeated_differential_identical": true,
+      "control_parser_features": 2314,
+      "control_afl_tuples": 2284,
+      "differential_parser_features": 2290,
+      "differential_afl_tuples": 2259,
+      "parser_feature_difference": 134,
+      "afl_tuple_difference": 133,
+      "control_features_by_file": {
+        "altindex.go": 37,
+        "builtins.go": 24,
+        "grammar.go": 107,
+        "grammarspec.go": 186,
+        "json.go": 7,
+        "jsonic.go": 19,
+        "lexer.go": 307,
+        "matchers.go": 1,
+        "nodecell.go": 4,
+        "options.go": 182,
+        "orderedmap.go": 7,
+        "parser.go": 114,
+        "plugin.go": 107,
+        "rule.go": 294,
+        "scan.go": 48,
+        "source.go": 100,
+        "token.go": 4,
+        "unprintable.go": 19,
+        "utility.go": 101,
+        "window.go": 7,
+        "yaml.go": 639
+      },
+      "difference_features_by_file": {
+        "grammar.go": 2,
+        "lexer.go": 2,
+        "parser.go": 1,
+        "rule.go": 1,
+        "source.go": 16,
+        "window.go": 2,
+        "yaml.go": 110
       }
     }
   ]

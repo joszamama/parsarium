@@ -12,6 +12,7 @@ Six verified Go YAML paths: gopkg.in/yaml.v2 v2.4.0 (60,161 Imported by); gopkg.
 - [gopkg.in/yaml.v3](gopkg-in-yaml-v3/README.md) — verified Docker harness
 - [github.com/goccy/go-yaml](github-com-goccy-go-yaml/README.md) — verified Docker harness
 - [go.yaml.in/yaml/v4](go-yaml-in-yaml-v4/README.md) — verified Docker harness
+- [github.com/tabnas/yaml/go](github-com-tabnas-yaml-go/README.md) — verified API path
 - [github.com/go-rotini/yaml](github-com-go-rotini-yaml/README.md) — verified Docker harness
 - [github.com/yongjohnlee80/golib/parse/yaml](github-com-yongjohnlee80-golib-parse-yaml/README.md) — verified Docker harness
 

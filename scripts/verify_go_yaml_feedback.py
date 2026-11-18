@@ -20,7 +20,7 @@ from run_case import ROOT, project_for
 
 PROJECTS = ("gopkg_in_yaml_v2", "gopkg_in_yaml_v3", "github_com_goccy_go_yaml",
             "go_yaml_in_yaml_v4", "github_com_go_rotini_yaml",
-            "github_com_yongjohnlee80_golib_parse_yaml")
+            "github_com_yongjohnlee80_golib_parse_yaml", "github_com_tabnas_yaml_go")
 CONTROL = "controls/yaml/catalog.yaml"
 DIFFERENTIAL = "controls/yaml/order.yaml"
 REPORT = ROOT / "data/go/yaml/afl-feedback.json"

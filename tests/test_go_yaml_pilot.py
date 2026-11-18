@@ -157,13 +157,46 @@ class GoYamlPilotTest(unittest.TestCase):
         names = [row["name"] for row in self.parsers]
         self.assertLess(names.index("github.com/go-rotini/yaml"), names.index(name))
 
+    def test_tabnas_harness_keeps_order_and_types_float64_numbers(self):
+        name = "github.com/tabnas/yaml/go"
+        if not any(row["name"] == name for row in self.parsers):
+            self.skipTest("tabnas/yaml not selected")
+        project = ROOT / "projects/yaml/go/github_com_tabnas_yaml_go"
+        harness = (project / "harness.go").read_text()
+        self.assertIn('tabnasyaml "github.com/tabnas/yaml/go"', harness)
+        self.assertIn("tabnasyaml.Parse(string(data))", harness)
+        self.assertIn("case *tabnas.OrderedMap:", harness)
+        self.assertIn("range node.Keys", harness)
+        # Every number is float64; only finite integral values become int, and no control holds an integral float.
+        self.assertIn("node == math.Trunc(node)", harness)
+        self.assertNotIn("goccy", harness)
+        # Coverage and AFL++ feedback cover the plugin and the three tabnas modules it parses with, all pinned.
+        dockerfile = (project / "Dockerfile").read_text()
+        self.assertIn("-coverpkg=github.com/tabnas/yaml/go,github.com/tabnas/jsonic/go,"
+                      "github.com/tabnas/parser/go,github.com/tabnas/json/go ", dockerfile)
+        lock = read(project / "source-lock.json")
+        go_sum = (project / "go.sum").read_text()
+        for module, pin in lock.items():
+            with self.subTest(module=module):
+                self.assertIn(pin["source_sha256"], dockerfile)
+                self.assertIn(f"{module} {pin['release']} {pin['go_module_sum']}", go_sum)
+                self.assertEqual(pin["license"], "MIT")
+        self.assertEqual(read(project / "manifest.json")["coverage_subject_prefix"], "github.com/tabnas/")
+        feedback = self.feedback["yaml/go/github_com_tabnas_yaml_go"]
+        self.assertIn("yaml.go", feedback["difference_features_by_file"])
+        row = next(row for row in self.parsers if row["name"] == name)
+        self.assertEqual(row["popularity"]["value"], 3)
+        self.assertIn("jsonic", row["family"])
+        names = [row["name"] for row in self.parsers]
+        self.assertLess(names.index(name), names.index("github.com/go-rotini/yaml"))
+
     def test_round_four_leads_are_decided(self):
         leads = {lead["name"]: lead for lead in read(CELL / "leads.json")}
         check = read(CELL / "round4-lead-check.json")
         self.assertEqual(self.cell["leads_recorded"], len(leads))
         # Paths promoted in later rounds rank below every round-4 lead; compare with the round-4 selection.
         lowest = min(row["popularity"]["value"] for row in self.parsers
-                     if not leads[row["name"]]["found_by"].endswith("_round_6"))
+                     if not leads[row["name"]]["found_by"].endswith(("_round_6", "_round_7")))
         for name, metric in check["metrics"].items():
             with self.subTest(lead=name):
                 lead = leads[name]
