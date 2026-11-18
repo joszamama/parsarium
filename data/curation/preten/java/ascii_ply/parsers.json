@@ -524,5 +524,34 @@
     "adapter": "adapters/java/ascii_ply/pdal/src/main/java/org/parsarium/PdalPlyAdapter.java",
     "source_lock": "projects/ascii_ply/java/pdal/source-lock.json",
     "adapter_module": "pdal"
+  },
+  {
+    "name": "scalismo-vtk_3",
+    "group": "ch.unibas.cs.gravis",
+    "artifact": "scalismo-vtk_3",
+    "version": "1.0-RC1",
+    "license": "Apache-2.0",
+    "license_evidence": "Pinned Maven POM licenses section (Apache-2.0) and https://github.com/unibas-gravis/scalismo-vtk/blob/v1.0-RC1/build.sbt",
+    "documentation": "https://github.com/unibas-gravis/scalismo-vtk/blob/v1.0-RC1/src/main/scala/scalismo/vtk/io/MeshIO.scala",
+    "input_api_evidence": "https://github.com/unibas-gravis/scalismo-vtk/blob/v1.0-RC1/src/main/scala/scalismo/vtk/initialize.scala",
+    "input_api": "scalismo.vtk.initialize(false, 0) then scalismo.vtk.io.MeshIO.readMesh(File) on a local .ply path, returning Try[TriangleMesh[_3D]] (point count, triangle count, first triangle point ids)",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "ASCII PLY triangle vertices, face list and parsed point ids",
+    "family": "VTK vtkPLYReader via the scalismo-vtk Scala binding (VTK 9.1 Java natives)",
+    "family_note": "scalismo-vtk is a separate unibas-gravis repository and Maven artifact from the selected scalismo_3 (whose 1.0 PLY reader is pure Scala). Its MeshIO.readPLY scans the header in Scala, then parses through VTK's vtkPLYReader from the vtkjavanatives VTK 9.1 Java build; the VTK PLY family is shared with the f3d Java path, so it is not an independent engine.",
+    "release_note": "1.0-RC1 is the newest Maven Central release of ch.unibas.cs.gravis:scalismo-vtk_3 (Git tag v1.0-RC1); release candidates are accepted as pinned releases (scalismo_3 precedent). The natives jar is linux x86_64 only for Linux, so the harness is linux/amd64.",
+    "adapter_manifest_dir": "projects/ascii_ply/java/scalismo_vtk",
+    "adapter": "adapters/java/ascii_ply/scalismo_vtk/src/main/java/org/parsarium/ScalismoVtkPlyAdapter.java",
+    "adapter_module": "scalismo_vtk",
+    "source_lock": "projects/ascii_ply/java/scalismo_vtk/source-lock.json"
   }
 ]

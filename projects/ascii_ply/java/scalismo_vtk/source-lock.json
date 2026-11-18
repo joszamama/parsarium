@@ -1,0 +1,37 @@
+{
+  "scalismo-vtk_3": {
+    "release": "1.0-RC1",
+    "artifact": "ch.unibas.cs.gravis:scalismo-vtk_3:1.0-RC1",
+    "source_sha256": "392a407074fc3f9be865737d1cb41cc33db93ee5afee95777dc3ca38c0182e81",
+    "jar_sha256": "144efa53c1500fc38b64172e840366edff1e9548dd1208ce7ca2018209973fbf",
+    "pom_sha256": "6114559b2f43b1be8d85c1bd3aaf9ff8d71615bf117948e352eb30f3a099dea2",
+    "source_url": "https://repo.maven.apache.org/maven2/ch/unibas/cs/gravis/scalismo-vtk_3/1.0-RC1/scalismo-vtk_3-1.0-RC1-sources.jar",
+    "vcs_tag": "https://github.com/unibas-gravis/scalismo-vtk/tree/v1.0-RC1",
+    "license": "Apache-2.0",
+    "runtime_dependencies": {
+      "ch.unibas.cs.gravis:scalismo_3:1.0-RC1 and its 36-jar closure": "pinned as in projects/ascii_ply/java/scalismo/source-lock.json",
+      "ch.unibas.cs.gravis:vtkjavanatives:0.2-RC1": "2636d0e0282c996610f8510db62fae10251ff4ce21b59bba2d2a1987ce39328b",
+      "ch.unibas.cs.gravis:vtkjavanativesvtkjar:0.2-RC1": "ae1ab89d1b9f61f218715ab19057dd668b0a22c2b3a939871001b8674ebf1dce",
+      "ch.unibas.cs.gravis:vtkjavanativesjogljar:0.2-RC1": "69a1139f2546d78cb5bc195bb3397a91071ea5481851229825f7b9c3b6583c64",
+      "ch.unibas.cs.gravis:vtkjavanativesgluegenjar:0.2-RC1": "1a196212a1dd07b708d5039805a040f00b2b3b975ad332009ac5fc8b4d2b418f",
+      "ch.unibas.cs.gravis:vtkjavanativeslinuximpl:0.2-RC1": "8d87b0bfb08886052eb491be73e560ca561e74d7d371c616c06d5beab26982f4"
+    },
+    "runtime_closure_note": "scalismo-vtk_3 depends on scalismo_3 1.0-RC1 and vtkjavanativesall 0.2-RC1 (an empty aggregator of the Linux, Windows and two macOS impl jars). Only the Linux impl jar is fetched; scalatest is test scope.",
+    "stock_natives_linux": {
+      "libvtkIOPLY-9.1.so": {
+        "soname": "libvtkIOPLY-9.1.so.1",
+        "compiler_comment": "GCC: (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0",
+        "origin": "impl jar README: jzy3d/vtk-java-wrapper VTK 9.1 Java build"
+      }
+    },
+    "underlying_source": {
+      "package": "VTK",
+      "release": "9.1.0",
+      "archive_url": "https://www.vtk.org/files/release/9.1/VTK-9.1.0.tar.gz",
+      "archive_sha256": "8fed42f4f8f1eb8083107b68eaa9ad71da07110161a3116ad807f43e5ca5ce96",
+      "license": "BSD-3-Clause",
+      "parser_source": "IO/PLY/vtkPLYReader.cxx and IO/PLY/vtkPLY.cxx",
+      "abi_note": "build-native.sh rebuilds only libvtkIOPLY-9.1.so with LLVM coverage, checks the soname, that it exports every stock export, and that every VTK symbol it imports is defined by the stock libraries it loads with; run-control.sh requires the stock and rebuilt natives to give the same control result."
+    }
+  }
+}
