@@ -1,0 +1,662 @@
+{
+  "format": "yaml",
+  "engines": {
+    "amritk-yaml": {
+      "name": "@amritk/yaml",
+      "language": "javascript",
+      "repository": "https://github.com/amritk/mjst"
+    },
+    "eemeli-yaml": {
+      "name": "yaml (eemeli/yaml)",
+      "language": "javascript",
+      "repository": "https://github.com/eemeli/yaml"
+    },
+    "fkyaml": {
+      "name": "fkYAML",
+      "language": "cpp",
+      "repository": "https://github.com/fktn-k/fkYAML"
+    },
+    "go-rotini-yaml": {
+      "name": "go-rotini/yaml",
+      "language": "go",
+      "repository": "https://github.com/go-rotini/yaml"
+    },
+    "goccy-go-yaml": {
+      "name": "goccy/go-yaml",
+      "language": "go",
+      "repository": "https://github.com/goccy/go-yaml"
+    },
+    "golib-yaml": {
+      "name": "golib parse/yaml",
+      "language": "go",
+      "repository": "https://github.com/yongjohnlee80/golib"
+    },
+    "js-yaml": {
+      "name": "js-yaml",
+      "language": "javascript",
+      "repository": "https://github.com/nodeca/js-yaml"
+    },
+    "kjson-yaml": {
+      "name": "kjson-yaml",
+      "language": "other:kotlin",
+      "repository": "https://github.com/pwall567/kjson-yaml"
+    },
+    "libfyaml": {
+      "name": "libfyaml",
+      "language": "c",
+      "repository": "https://github.com/pantoniou/libfyaml"
+    },
+    "libyaml": {
+      "name": "LibYAML",
+      "language": "c",
+      "repository": "https://github.com/yaml/libyaml"
+    },
+    "noyalib": {
+      "name": "noyalib",
+      "language": "rust",
+      "repository": "https://github.com/sebastienrousseau/noyalib"
+    },
+    "purrphp-yaml": {
+      "name": "PurrPHP Yaml",
+      "language": "php",
+      "repository": "https://github.com/PurrPHP/yaml"
+    },
+    "pyyaml": {
+      "name": "PyYAML (pure-Python loader)",
+      "language": "python",
+      "repository": "https://github.com/yaml/pyyaml"
+    },
+    "rapidyaml": {
+      "name": "rapidyaml (ryml)",
+      "language": "cpp",
+      "repository": "https://github.com/biojppm/rapidyaml"
+    },
+    "snakeyaml": {
+      "name": "SnakeYAML",
+      "language": "java",
+      "repository": "https://codeberg.org/snakeyaml/snakeyaml"
+    },
+    "snakeyaml-engine": {
+      "name": "SnakeYAML Engine",
+      "language": "java",
+      "repository": "https://codeberg.org/snakeyaml/snakeyaml-engine"
+    },
+    "symfony-yaml": {
+      "name": "Symfony Yaml",
+      "language": "php",
+      "repository": "https://github.com/symfony/yaml"
+    },
+    "tabnas-yaml": {
+      "name": "tabnas/yaml (Go)",
+      "language": "go",
+      "repository": "https://github.com/tabnas/yaml"
+    },
+    "visulima-yaml": {
+      "name": "@visulima/yaml",
+      "language": "javascript",
+      "repository": "https://github.com/visulima/visulima"
+    },
+    "yaml-cpp": {
+      "name": "yaml-cpp",
+      "language": "cpp",
+      "repository": "https://github.com/jbeder/yaml-cpp"
+    },
+    "yaml-min": {
+      "name": "yaml.min",
+      "language": "javascript",
+      "repository": "https://github.com/wellwelwel/yaml.min"
+    },
+    "yaml-rust": {
+      "name": "yaml-rust",
+      "language": "rust",
+      "repository": "https://github.com/chyh1990/yaml-rust"
+    }
+  },
+  "paths": [
+    {
+      "path": "c/yaml/libyaml",
+      "engine": "libyaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/c/yaml/parsers.json [libyaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "c/yaml/libfyaml",
+      "engine": "libfyaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/c/yaml/parsers.json [libfyaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/yaml/yaml-cpp",
+      "engine": "yaml-cpp",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/cpp/yaml/parsers.json [yaml-cpp] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/yaml/rapidyaml",
+      "engine": "rapidyaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/cpp/yaml/parsers.json [rapidyaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/yaml/fkyaml",
+      "engine": "fkyaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/cpp/yaml/parsers.json [fkyaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "go/yaml/gopkg.in/yaml.v2",
+      "engine": "libyaml",
+      "relation": "port",
+      "chain": [
+        "gopkg.in/yaml.v2",
+        "libyaml"
+      ],
+      "evidence": "data/go/yaml/parsers.json [gopkg.in/yaml.v2] family/family_note",
+      "confidence": "high",
+      "note": "scannerc.go/parserc.go/readerc.go are a Go translation of libyaml; decoder is go-yaml code."
+    },
+    {
+      "path": "go/yaml/gopkg.in/yaml.v3",
+      "engine": "libyaml",
+      "relation": "port",
+      "chain": [
+        "gopkg.in/yaml.v3",
+        "libyaml"
+      ],
+      "evidence": "data/go/yaml/parsers.json [gopkg.in/yaml.v3] family/family_note",
+      "confidence": "high",
+      "note": "Go translation of libyaml scanner/parser; separate code base from v2."
+    },
+    {
+      "path": "go/yaml/github.com/goccy/go-yaml",
+      "engine": "goccy-go-yaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/go/yaml/parsers.json [github.com/goccy/go-yaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "go/yaml/go.yaml.in/yaml/v4",
+      "engine": "libyaml",
+      "relation": "port",
+      "chain": [
+        "go.yaml.in/yaml/v4",
+        "libyaml"
+      ],
+      "evidence": "data/go/yaml/parsers.json [go.yaml.in/yaml/v4] family/family_note",
+      "confidence": "high",
+      "note": "internal/libyaml is the Go translation of libyaml; new composer/resolver/constructor stages."
+    },
+    {
+      "path": "go/yaml/github.com/tabnas/yaml/go",
+      "engine": "tabnas-yaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/go/yaml/parsers.json [github.com/tabnas/yaml/go] family/family_note",
+      "confidence": "medium",
+      "note": "YAML grammar plugin on the tabnas jsonic lexer/rule engine (tabnas/parser, jsonic, json Go modules); Go port of the @tabnas/yaml TypeScript plugin, which is not a selected path."
+    },
+    {
+      "path": "go/yaml/github.com/go-rotini/yaml",
+      "engine": "go-rotini-yaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/go/yaml/parsers.json [github.com/go-rotini/yaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "go/yaml/github.com/yongjohnlee80/golib/parse/yaml",
+      "engine": "golib-yaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/go/yaml/parsers.json [github.com/yongjohnlee80/golib/parse/yaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "java/yaml/snakeyaml",
+      "engine": "snakeyaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/java/yaml/parsers.json [snakeyaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "java/yaml/snakeyaml-engine",
+      "engine": "snakeyaml-engine",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/java/yaml/parsers.json [snakeyaml-engine] family/family_note",
+      "confidence": "high",
+      "note": "Lineage: snakeyaml (separately maintained YAML 1.2 code base, not shared code)."
+    },
+    {
+      "path": "java/yaml/circe-yaml",
+      "engine": "snakeyaml",
+      "relation": "wrapper",
+      "chain": [
+        "circe-yaml",
+        "snakeyaml"
+      ],
+      "evidence": "data/java/yaml/parsers.json [circe-yaml] family/family_note",
+      "confidence": "high",
+      "note": "Scala over Java on the JVM; SnakeYAML 2.2."
+    },
+    {
+      "path": "java/yaml/zio-json-yaml",
+      "engine": "snakeyaml",
+      "relation": "wrapper",
+      "chain": [
+        "zio-json-yaml",
+        "snakeyaml"
+      ],
+      "evidence": "data/java/yaml/parsers.json [zio-json-yaml] family/family_note",
+      "confidence": "high",
+      "note": "Scala over Java on the JVM; SnakeYAML 2.7."
+    },
+    {
+      "path": "java/yaml/kjson-yaml",
+      "engine": "kjson-yaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/java/yaml/parsers.json [kjson-yaml] family/family_note",
+      "confidence": "high",
+      "note": "Kotlin."
+    },
+    {
+      "path": "java/yaml/snakeyaml-engine-kmp",
+      "engine": "snakeyaml-engine",
+      "relation": "port",
+      "chain": [
+        "snakeyaml-engine-kmp",
+        "snakeyaml-engine"
+      ],
+      "evidence": "data/java/yaml/parsers.json [snakeyaml-engine-kmp] family/family_note",
+      "confidence": "high",
+      "note": "Kotlin Multiplatform translation of SnakeYAML Engine; no Java source bundled."
+    },
+    {
+      "path": "javascript/yaml/js-yaml",
+      "engine": "js-yaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/javascript/yaml/parsers.json [js-yaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/yaml/yaml",
+      "engine": "eemeli-yaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/javascript/yaml/parsers.json [yaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/yaml/yaml-ast-parser",
+      "engine": "js-yaml",
+      "relation": "fork",
+      "chain": [
+        "yaml-ast-parser",
+        "js-yaml"
+      ],
+      "evidence": "data/javascript/yaml/parsers.json [yaml-ast-parser] family/family_note",
+      "confidence": "high",
+      "note": "Fork of js-yaml 3.x: 718 of 1,451 distinct lines shared with js-yaml 3.14.1 (83 with the selected 5.5.0 rewrite)."
+    },
+    {
+      "path": "javascript/yaml/@stoplight/yaml",
+      "engine": "js-yaml",
+      "relation": "wrapper",
+      "chain": [
+        "@stoplight/yaml",
+        "@stoplight/yaml-ast-parser",
+        "yaml-ast-parser",
+        "js-yaml"
+      ],
+      "evidence": "data/javascript/yaml/parsers.json [@stoplight/yaml] family/family_note",
+      "confidence": "high",
+      "note": "@stoplight/yaml-ast-parser 0.0.50 is a near-identical fork of yaml-ast-parser, itself a js-yaml 3.x fork; engine mapped to the lineage root."
+    },
+    {
+      "path": "javascript/yaml/yaml-eslint-parser",
+      "engine": "eemeli-yaml",
+      "relation": "wrapper",
+      "chain": [
+        "yaml-eslint-parser",
+        "yaml"
+      ],
+      "evidence": "data/javascript/yaml/parsers.json [yaml-eslint-parser] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/yaml/yaml-js",
+      "engine": "pyyaml",
+      "relation": "port",
+      "chain": [
+        "yaml-js",
+        "pyyaml"
+      ],
+      "evidence": "data/javascript/yaml/parsers.json [yaml-js] family/family_note",
+      "confidence": "high",
+      "note": "Line-for-line JavaScript port of the PyYAML pure-Python loader."
+    },
+    {
+      "path": "javascript/yaml/yaml-to-momoa",
+      "engine": "eemeli-yaml",
+      "relation": "wrapper",
+      "chain": [
+        "yaml-to-momoa",
+        "yaml"
+      ],
+      "evidence": "data/javascript/yaml/parsers.json [yaml-to-momoa] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/yaml/@visulima/yaml",
+      "engine": "visulima-yaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/javascript/yaml/parsers.json [@visulima/yaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/yaml/@amritk/yaml",
+      "engine": "amritk-yaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/javascript/yaml/parsers.json [@amritk/yaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/yaml/yaml.min",
+      "engine": "yaml-min",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/javascript/yaml/parsers.json [yaml.min] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "php/yaml/symfony/yaml",
+      "engine": "symfony-yaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/php/yaml/parsers.json [symfony/yaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "php/yaml/pecl/yaml",
+      "engine": "libyaml",
+      "relation": "binding",
+      "chain": [
+        "pecl/yaml",
+        "libyaml"
+      ],
+      "evidence": "data/php/yaml/parsers.json [pecl/yaml] family/family_note",
+      "confidence": "high",
+      "note": "PHP C extension over libyaml 0.2.5."
+    },
+    {
+      "path": "php/yaml/purrphp/yaml",
+      "engine": "purrphp-yaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/php/yaml/parsers.json [purrphp/yaml] family/family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "python/yaml/PyYAML",
+      "engine": "pyyaml",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/python/yaml/parsers.json [PyYAML] family/family_note/shared_families",
+      "confidence": "high"
+    },
+    {
+      "path": "python/yaml/PyYAML CSafeLoader (libyaml)",
+      "engine": "libyaml",
+      "relation": "binding",
+      "chain": [
+        "PyYAML CSafeLoader",
+        "_yaml CParser",
+        "libyaml"
+      ],
+      "evidence": "data/python/yaml/parsers.json [PyYAML CSafeLoader (libyaml)] family/family_note/shared_families",
+      "confidence": "high",
+      "note": "libyaml 0.2.5 statically linked into PyYAML _yaml."
+    },
+    {
+      "path": "python/yaml/ruamel.yaml",
+      "engine": "pyyaml",
+      "relation": "fork",
+      "chain": [
+        "ruamel.yaml",
+        "pyyaml"
+      ],
+      "evidence": "data/python/yaml/parsers.json [ruamel.yaml] family/family_note/shared_families",
+      "confidence": "high",
+      "note": "PyYAML fork with separately maintained Reader/Scanner/Parser/Composer (YAML 1.2)."
+    },
+    {
+      "path": "python/yaml/ruamel.yaml.clib",
+      "engine": "libyaml",
+      "relation": "vendored",
+      "chain": [
+        "ruamel.yaml.clib",
+        "libyaml"
+      ],
+      "evidence": "data/python/yaml/parsers.json [ruamel.yaml.clib] family/family_note/shared_families",
+      "confidence": "high",
+      "note": "Vendors an older libyaml snapshot (2,001 of 2,082 distinct lines also in libyaml 0.2.5); Cython CParser binding."
+    },
+    {
+      "path": "python/yaml/srsly",
+      "engine": "pyyaml",
+      "relation": "wrapper",
+      "chain": [
+        "srsly",
+        "ruamel.yaml",
+        "pyyaml"
+      ],
+      "evidence": "data/python/yaml/parsers.json [srsly] family/family_note/shared_families",
+      "confidence": "high",
+      "note": "Runs the pure-Python ruamel.yaml loader (a PyYAML fork); engine mapped to the lineage root."
+    },
+    {
+      "path": "python/yaml/rapidyaml",
+      "engine": "rapidyaml",
+      "relation": "binding",
+      "chain": [
+        "rapidyaml (Python)",
+        "rapidyaml"
+      ],
+      "evidence": "data/python/yaml/parsers.json [rapidyaml] family/family_note/shared_families",
+      "confidence": "high",
+      "note": "SWIG extension; rapidyaml 0.15.2."
+    },
+    {
+      "path": "python/yaml/yamlcore",
+      "engine": "pyyaml",
+      "relation": "wrapper",
+      "chain": [
+        "yamlcore",
+        "PyYAML BaseLoader",
+        "pyyaml"
+      ],
+      "evidence": "data/python/yaml/parsers.json [yamlcore] family/family_note/shared_families",
+      "confidence": "high"
+    },
+    {
+      "path": "python/yaml/yaml-rs",
+      "engine": "yaml-rust",
+      "relation": "binding",
+      "chain": [
+        "yaml-rs",
+        "granit-parser",
+        "saphyr-parser",
+        "yaml-rust2",
+        "yaml-rust"
+      ],
+      "evidence": "data/python/yaml/parsers.json [yaml-rs] family/family_note/shared_families",
+      "confidence": "medium",
+      "note": "PyO3 extension over granit-parser (git e10ee63). Lineage root yaml-rust; forks are mapped to the root engine with intermediate forks in chain."
+    },
+    {
+      "path": "python/yaml/ryaml",
+      "engine": "libyaml",
+      "relation": "binding",
+      "chain": [
+        "ryaml",
+        "serde_yaml",
+        "unsafe-libyaml",
+        "libyaml"
+      ],
+      "evidence": "data/python/yaml/parsers.json [ryaml] family/family_note/shared_families",
+      "confidence": "high",
+      "note": "PyO3 extension; executed parser is unsafe-libyaml, a c2rust translation of libyaml."
+    },
+    {
+      "path": "python/yaml/libfyaml",
+      "engine": "libfyaml",
+      "relation": "binding",
+      "chain": [
+        "libfyaml (Python)",
+        "libfyaml"
+      ],
+      "evidence": "data/python/yaml/parsers.json [libfyaml] family/family_note/shared_families",
+      "confidence": "high",
+      "note": "Extension bundles libfyaml 1.0.0-rc2."
+    },
+    {
+      "path": "rust/yaml/serde_yaml",
+      "engine": "libyaml",
+      "relation": "wrapper",
+      "chain": [
+        "serde_yaml",
+        "unsafe-libyaml",
+        "libyaml"
+      ],
+      "evidence": "data/rust/yaml/parsers.json [serde_yaml] family",
+      "confidence": "high",
+      "note": "Parses through the unsafe-libyaml crate, a c2rust translation of libyaml."
+    },
+    {
+      "path": "rust/yaml/unsafe-libyaml",
+      "engine": "libyaml",
+      "relation": "port",
+      "chain": [
+        "unsafe-libyaml",
+        "libyaml"
+      ],
+      "evidence": "data/rust/yaml/parsers.json [unsafe-libyaml] family",
+      "confidence": "high",
+      "note": "c2rust translation of libyaml at upstream commit 2c891fc7."
+    },
+    {
+      "path": "rust/yaml/yaml-rust",
+      "engine": "yaml-rust",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/rust/yaml/parsers.json [yaml-rust] family",
+      "confidence": "high",
+      "note": "Lineage: libyaml (design port without shared code)."
+    },
+    {
+      "path": "rust/yaml/yaml-rust2",
+      "engine": "yaml-rust",
+      "relation": "fork",
+      "chain": [
+        "yaml-rust2",
+        "yaml-rust"
+      ],
+      "evidence": "data/rust/yaml/parsers.json [yaml-rust2] family",
+      "confidence": "high",
+      "note": "708 of 1,914 distinct lines shared with yaml-rust 0.4.5."
+    },
+    {
+      "path": "rust/yaml/serde-saphyr",
+      "engine": "yaml-rust",
+      "relation": "wrapper",
+      "chain": [
+        "serde-saphyr",
+        "granit-parser",
+        "saphyr-parser",
+        "yaml-rust2",
+        "yaml-rust"
+      ],
+      "evidence": "data/rust/yaml/parsers.json [serde-saphyr] family",
+      "confidence": "medium",
+      "note": "Drives granit-parser 2.2.0. Lineage root yaml-rust; forks are mapped to the root engine with intermediate forks in chain."
+    },
+    {
+      "path": "rust/yaml/granit-parser",
+      "engine": "yaml-rust",
+      "relation": "fork",
+      "chain": [
+        "granit-parser",
+        "saphyr-parser",
+        "yaml-rust2",
+        "yaml-rust"
+      ],
+      "evidence": "data/rust/yaml/parsers.json [granit-parser] family",
+      "confidence": "medium",
+      "note": "Fork of saphyr-parser, independently maintained; 1,125 of 5,855 distinct lines shared with saphyr-parser 0.3.4. Lineage root yaml-rust; forks are mapped to the root engine with intermediate forks in chain."
+    },
+    {
+      "path": "rust/yaml/saphyr-parser",
+      "engine": "yaml-rust",
+      "relation": "fork",
+      "chain": [
+        "saphyr-parser",
+        "yaml-rust2",
+        "yaml-rust"
+      ],
+      "evidence": "data/rust/yaml/parsers.json [saphyr-parser] family",
+      "confidence": "high",
+      "note": "965 of 1,889 distinct lines shared with yaml-rust2 0.13.0. Lineage root yaml-rust; forks are mapped to the root engine with intermediate forks in chain."
+    },
+    {
+      "path": "rust/yaml/saphyr",
+      "engine": "yaml-rust",
+      "relation": "wrapper",
+      "chain": [
+        "saphyr",
+        "saphyr-parser",
+        "yaml-rust2",
+        "yaml-rust"
+      ],
+      "evidence": "data/rust/yaml/parsers.json [saphyr] family",
+      "confidence": "high",
+      "note": "Loader over saphyr-parser 0.3.4. Lineage root yaml-rust; forks are mapped to the root engine with intermediate forks in chain."
+    },
+    {
+      "path": "rust/yaml/noyalib",
+      "engine": "noyalib",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/rust/yaml/parsers.json [noyalib] family",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/yaml/dbt-yaml",
+      "engine": "libyaml",
+      "relation": "wrapper",
+      "chain": [
+        "dbt-yaml",
+        "unsafe-libyaml",
+        "libyaml"
+      ],
+      "evidence": "data/rust/yaml/parsers.json [dbt-yaml] family",
+      "confidence": "high",
+      "note": "Fork of serde_yaml (49.7% shared lines) parsing through unsafe-libyaml, a c2rust translation of libyaml."
+    }
+  ]
+}
