@@ -1,0 +1,28 @@
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96 AS build
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends build-essential ca-certificates clang curl libclang-rt-21-dev llvm python3 python-is-python3 unzip zip && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+# Bazel 9.3.2 (the release's .bazelversion), official linux-arm64 binary.
+RUN curl --fail --location --retry 3 https://github.com/bazelbuild/bazel/releases/download/9.3.2/bazel-9.3.2-linux-arm64 --output /usr/local/bin/bazel \
+    && echo '13d5677509ac5e52f28139d76b1343e8a4aa494451558222599abbb86bff92cb  /usr/local/bin/bazel' | sha256sum --check \
+    && chmod +x /usr/local/bin/bazel
+# GoogleSQL 2026.11.2 release-tag archive (Apache-2.0); Bazel modules resolve from MODULE.bazel.
+RUN curl --fail --location --retry 3 https://codeload.github.com/google/googlesql/tar.gz/refs/tags/2026.11.2 --output /work/googlesql.tar.gz \
+    && echo '51be892b9e917034f5a843610aa6af14df8ff73eaa901edd7109588fdbb9e1af  /work/googlesql.tar.gz' | sha256sum --check \
+    && tar -xf /work/googlesql.tar.gz -C /work && mv /work/googlesql-2026.11.2 /work/googlesql \
+    && grep -q 'Apache License' /work/googlesql/LICENSE
+COPY harness.cc parser-probe.cc fuzzer.cc BUILD.parsarium build.sh afl-allowlist.txt /work/
+RUN chmod +x /work/build.sh && /work/build.sh \
+    && { clang --version | head -1; llvm-cov --version | head -1; bazel --version; } > /work/toolchain.txt \
+    && rm -rf /work/bazel-root
+
+FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends llvm python3 && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+COPY --from=build /work/replay /work/fuzzer /work/parser-probe /work/afl-instrumented-objects.txt /work/
+COPY --from=build /work/googlesql/googlesql/parser /work/googlesql/googlesql/parser
+COPY --from=build /work/toolchain.txt /work/toolchain.txt
+COPY run-control.sh summarize.py manifest.json /work/
+RUN chmod +x /work/run-control.sh
+ENTRYPOINT ["/work/run-control.sh"]

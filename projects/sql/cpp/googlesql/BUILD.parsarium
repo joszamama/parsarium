@@ -1,0 +1,38 @@
+# Parsarium harness targets, placed inside the //googlesql/... package group so the
+# implementation-visible //googlesql/parser target is reachable.
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
+
+DEPS = [
+    "//googlesql/parser",
+    "//googlesql/public:language_options",
+    "//googlesql/public:parse_resume_location",
+    "@com_google_absl//absl/status",
+    "@com_google_absl//absl/strings",
+]
+
+cc_library(
+    name = "harness_text",
+    textual_hdrs = ["harness.cc"],
+    deps = DEPS,
+)
+
+cc_binary(
+    name = "replay",
+    srcs = ["harness.cc"],
+    deps = DEPS,
+)
+
+cc_binary(
+    name = "parser-probe",
+    srcs = ["parser-probe.cc"],
+    deps = [":harness_text"],
+)
+
+cc_binary(
+    name = "fuzzer",
+    srcs = ["fuzzer.cc"],
+    copts = ["-fsanitize=fuzzer-no-link"],
+    linkopts = ["-fsanitize=fuzzer"],
+    deps = [":harness_text"],
+)

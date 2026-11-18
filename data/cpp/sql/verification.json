@@ -95,8 +95,100 @@
       "parser_feature_difference": null,
       "project_receipt": "projects/sql/cpp/duckdb/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/cpp/duckdb/differential.json"
+    },
+    {
+      "package": "googlesql",
+      "version": "2026.11.2",
+      "pass": true,
+      "input_api": "googlesql::ParseNextStatement(ParseResumeLocation over local SQL text, ParserOptions{LanguageOptions()}, &ParserOutput, &at_end_of_input) -> ParserOutput::statement() (ASTStatement tree)",
+      "dialect": "GoogleSQL default grammar (ParserOptions with default LanguageOptions; no catalog, no analyzer, no macro expansion)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "GoogleSQL (formerly ZetaSQL) Textmapper-generated parser",
+      "parser_source_files": 28,
+      "parser_source_lines_covered": 2400,
+      "afl_tuple_difference": 875,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/cpp/googlesql/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/cpp/googlesql/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:50:39.814584+00:00"
+  "checked_at_utc": "2026-11-18T07:37:29.463227+00:00"
 }

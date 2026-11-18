@@ -1,6 +1,6 @@
 # C++ × SQL: pilot ranking
 
-One third-party path is control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
+Two third-party paths are control verified against the hand-written oracle in [controls/sql/expected.json](../../../controls/sql/expected.json), with a pinned Docker harness, parser-source coverage and stable AFL++ feedback that differs between the two controls. Paths are ranked only among verified paths in this cell. The ceiling is ten, and the cell is not padded. The scope, controls and oracle are in [catalog/sql/PROTOCOL.md](../../../catalog/sql/PROTOCOL.md).
 
 ## Primary within-cell adoption metric
 
@@ -10,7 +10,15 @@ Debian popcon sourcemax installations by source package (pinned snapshot), captu
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [duckdb](https://github.com/duckdb/duckdb/blob/v2.0.0/src/include/duckdb/parser/parser.hpp) | 2.0.0 | 40 | `duckdb::Parser::GetBuiltinParser(); Parser::ParseQuery(local SQL text) -> Parser::statements (SQLStatement trees)`; dialect: DuckDB built-in grammar (Parser::GetBuiltinParser; no client context) | DuckDB PEG parser (own grammar and transformer) |
 
-Receipts: [duckdb](../../../projects/sql/cpp/duckdb/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/cpp/duckdb/differential.json).
+## Supplemental star-fallback ranking
+
+GitHub stars (secondary, repository interest, not downloads), from the GitHub REST API on 2026-11-18 ([snapshot](registry-snapshot.json), key `round_6_star_fallback`). These paths fill slots left after the popcon path, are ranked only among themselves, and are never compared with popcon counts.
+
+| Rank | Package | Release | Stars | Parsed scope | Parser family |
+| ---: | --- | --- | ---: | --- | --- |
+| 1 | [googlesql](https://github.com/google/googlesql/blob/2026.11.2/googlesql/parser/parser.h) | 2026.11.2 | 2,642 | `googlesql::ParseNextStatement(local SQL text, ParserOptions{LanguageOptions()}) -> ParserOutput::statement() (ASTStatement tree)`; dialect: GoogleSQL default grammar (no catalog, no analyzer) | GoogleSQL (formerly ZetaSQL) Textmapper-generated parser |
+
+Receipts: [duckdb](../../../projects/sql/cpp/duckdb/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/cpp/duckdb/differential.json); [googlesql](../../../projects/sql/cpp/googlesql/verification.json) and its [AFL++ differential](../../../fuzzing/afl-native/sql/cpp/googlesql/differential.json).
 
 ## Leads by the same metric
 
@@ -41,7 +49,7 @@ Receipts: [duckdb](../../../projects/sql/cpp/duckdb/verification.json) and its [
 | hsql (hyrise/sql-parser) | n/a | unresolved | Hyrise sql-parser (Bison/Flex) |
 | cybergarage/usql | n/a | unresolved_no_primary_metric | cybergarage uSQL parser |
 | sqltoast (jaypipes/sqltoast) | n/a | unresolved_no_primary_metric | sqltoast hand-written C++ parser |
-| GoogleSQL (google/zetasql) | n/a | unresolved_no_primary_metric | GoogleSQL/ZetaSQL analyzer front end |
+| GoogleSQL (google/zetasql) | n/a (2,642 stars) | selected | GoogleSQL (formerly ZetaSQL) Textmapper-generated parser |
 | ClickHouse parsers | n/a | excluded | ClickHouse server parser (internal) |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).

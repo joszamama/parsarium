@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "cpp",
+  "pilot": true,
+  "package": "googlesql",
+  "release": "2026.11.2",
+  "catalog_parser": "data/cpp/sql/parsers.json",
+  "source_lock": "projects/sql/cpp/googlesql/source-lock.json",
+  "source_sha256": "51be892b9e917034f5a843610aa6af14df8ff73eaa901edd7109588fdbb9e1af",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/usr/bin/python3",
+    "/work/summarize.py",
+    "/input/case"
+  ],
+  "dialect": "GoogleSQL default grammar (ParserOptions with default LanguageOptions; no catalog, no analyzer, no macro expansion)",
+  "parser_family": "GoogleSQL (formerly ZetaSQL) parser: Textmapper-generated LALR parser (googlesql.tm) with its own tokenizer, lookahead transformer and generated ASTNode classes; independent of the PostgreSQL, SQLite, DuckDB, libgda and tree-sitter-sql grammars",
+  "harness": "harness.cc",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "oracle": "The replay parses every statement with ParseNextStatement and walks the returned AST (ASTSelect select_list, where_clause and group_by grouping_items; ASTOrderBy ordering_expressions; ASTJoin nodes; ASTTablePathExpression and ASTInsertStatement target paths; ASTInsertStatement column_list and ASTInsertValuesRowList rows; ASTFunctionCall names; ASTStringLiteral string_value; ASTIntLiteral and ASTFloatLiteral images) and prints the summary; run-control requires the hand-written oracle summary.",
+  "api": "googlesql::ParseNextStatement(ParseResumeLocation over local SQL text, ParserOptions{LanguageOptions()}, &ParserOutput, &at_end_of_input) -> ParserOutput::statement() (ASTStatement tree)",
+  "coverage": "LLVM source coverage of the pinned GoogleSQL 2026.11.2 googlesql/parser sources reached by ParseNextStatement: the hand-written tokenizer, lookahead transformer, parser driver and AST code plus the Bazel-generated Textmapper lexer and parser (tm_lexer.cc, tm_parser.cc) and AST headers, mapped under one prefix; abseil, protobuf, ICU and the rest of GoogleSQL are built without coverage",
+  "coverage_subject_prefix": "/work/googlesql/googlesql/parser/",
+  "format_specific_coverage_file_suffix": "/googlesql/parser/tm_parser.cc",
+  "afl_entrypoint": "/work/parser-probe",
+  "scope": "SQL statements from local bytes parsed by googlesql::ParseNextStatement with default LanguageOptions and no catalog; valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. Name resolution, the analyzer (resolved AST), the reference evaluator and dialect-specific syntax are untested."
+}

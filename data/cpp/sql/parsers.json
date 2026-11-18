@@ -103,5 +103,112 @@
         }
       ]
     }
+  },
+  {
+    "name": "googlesql",
+    "version": "2026.11.2",
+    "license": "Apache-2.0",
+    "license_evidence": "LICENSE in the pinned 2026.11.2 release-tag archive (Apache License, Version 2.0)",
+    "input_api": "googlesql::ParseNextStatement(ParseResumeLocation over local SQL text, ParserOptions{LanguageOptions()}, &ParserOutput, &at_end_of_input) -> ParserOutput::statement() (ASTStatement tree)",
+    "documentation": "https://github.com/google/googlesql/blob/2026.11.2/googlesql/parser/parser.h",
+    "source": "https://codeload.github.com/google/googlesql/tar.gz/refs/tags/2026.11.2",
+    "source_sha256": "51be892b9e917034f5a843610aa6af14df8ff73eaa901edd7109588fdbb9e1af",
+    "dependencies": [],
+    "dialect": "GoogleSQL default grammar (ParserOptions with default LanguageOptions; no catalog, no analyzer, no macro expansion)",
+    "scope": "SQL statements from local bytes parsed by googlesql::ParseNextStatement with default LanguageOptions and no catalog; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary read from the AST. Name resolution, the analyzer, the reference evaluator and dialect-specific syntax are untested.",
+    "family": "GoogleSQL (formerly ZetaSQL) Textmapper-generated parser",
+    "family_note": "ParseNextStatement runs GoogleSQL's tokenizer and lookahead transformer and the LALR parser that Textmapper generates from googlesql/parser/googlesql.tm at build time, which builds generated ASTNode classes. The adapter walks ASTSelect select_list, where_clause and group_by, ASTOrderBy ordering_expressions, ASTJoin nodes, ASTTablePathExpression and ASTInsertStatement target paths, the INSERT column list and ASTInsertValuesRowList rows, ASTFunctionCall names, ASTStringLiteral values and ASTIntLiteral/ASTFloatLiteral images. Own grammar, independent of the PostgreSQL (libpg_query), DuckDB PEG, libgda, SQLite and tree-sitter-sql grammars. Upstream calls googlesql/parser semi-public because parse trees are not a stable API, and the //googlesql/parser Bazel target is visible only inside //googlesql/..., so the harness is built as a package in that tree. The repository was named google/zetasql until 2026; the GitHub API resolves both names to google/googlesql.",
+    "popularity": {
+      "metric": "GitHub stars (secondary, repository interest, not downloads)",
+      "selection": "supplemental",
+      "value": 2642,
+      "rank": 1,
+      "source": "https://api.github.com/repos/google/googlesql",
+      "observed_at_utc": "2026-11-18T07:14:32.956170+00:00",
+      "response_sha256": "9fb61a663df40f367c94fa1a343ef3cf18ecea1ecdb2631f9a175b0b6e06936f",
+      "snapshot": "data/cpp/sql/registry-snapshot.json",
+      "limitation": "Star-fallback path (C and C++ rule of 2026-11-18): GoogleSQL has no Debian source or development package in the pinned popcon snapshot and no vcpkg or Conan port, so it has no primary or Debian-fallback value. Stars measure interest in the whole GoogleSQL repository (parser, analyzer, reference implementation and Java/Go front ends), not installs or use of its parser; they are ranked separately, after the popcon-ranked path, and never compared with popcon counts."
+    },
+    "project": "projects/sql/cpp/googlesql",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
   }
 ]

@@ -1,0 +1,69 @@
+{
+  "kind": "third_party",
+  "api": "googlesql::ParseNextStatement(ParseResumeLocation over local SQL text, ParserOptions{LanguageOptions()}, &ParserOutput, &at_end_of_input) -> ParserOutput::statement() (ASTStatement tree)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T07:30:43.415034+00:00",
+  "manifest": "projects/sql/cpp/googlesql/manifest.json",
+  "image_id": "sha256:2fb7e4781da06244cadc31475f766595498a7b9418ae93ff17ade54e8634c68b",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8",
+    "bazel 9.3.2"
+  ],
+  "source_sha256": "51be892b9e917034f5a843610aa6af14df8ff73eaa901edd7109588fdbb9e1af",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "BUILD.parsarium": "51f01920a361447927870079afd06bae3eafcb20f5eacc5d1ba8fce154c0ef2a",
+    "Dockerfile": "bc12b367497afdd36d59593d198567438ce71f08ebdebc36f973acd7cc45a26f",
+    "afl-allowlist.txt": "ef100313eadc06ad1aaf6ca35b61a6563fc3b8873be18172506e1afc9db47bf3",
+    "build.sh": "a986a2dba34ca89a1c316fd0faa6ed789774d00504e74a9b91d66375b466b404",
+    "fuzzer.cc": "0183cd46d923408e00568955420981b89c5c313d54511e87b75f9091eea53b97",
+    "harness.cc": "fc6e1769cd22735270232d7d57e3bca31ad9c42a2292f0a2219772c73ff88d71",
+    "manifest.json": "91ea8c0b124833b0cf17f077daec416b78f8ea85955585b04df48e0493f3b182",
+    "parser-probe.cc": "8b38be87c35c7ec191d92d152e08a887c8f38c4ca3ca984fbd51cdc7952f23ea",
+    "run-control.sh": "ab4c3e6e30f5649d85c0aa8d60a4866c035aefc547121fbc28a532e3286319ca",
+    "source-lock.json": "511e5bec53ebb253332be3f92499b8c95b2c987facf0e19a257910065808ae0c",
+    "summarize.py": "1853594870d8d3aa450f6cb8f32d61bbf124f1ff165911dbd11f99c59f1a5bc3"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 28,
+  "parser_source_lines_covered": 2400,
+  "format_specific_source_lines_covered": 1016,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/cpp/googlesql/target/coverage/coverage.json",
+  "pass": true
+}
