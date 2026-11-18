@@ -192,5 +192,13 @@
     "source": "https://packagist.org/search.json?q=model+viewer&per_page=100",
     "discovery_route": "Packagist queries model viewer, 3d model; GitHub repository search 3d viewer language:PHP (round 4)",
     "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "PHP round-6 discovery (Packagist and GitHub code search)",
+    "status": "excluded_no_ply_input_api",
+    "reason": "Packagist queries 'ffi assimp', 'ffi mesh', gltf, three.js, threejs, '3d asset', 'mesh loader', '3d scanner', 'point cloud ply', 'las lidar', '3d geometry', 'geometry mesh', wavefront, 'obj loader', 'model 3d', stanford, polygon and vertex returned no PHP PLY parser: hits are glTF/three.js viewer embeds, STL or OBJ parsers (chubv/php-stl, redcrackle/model3d), WKT geometry and unrelated packages. GitHub code searches for PHP code calling PLY-capable tools (ctmconv, pdal with ply, CloudCompare, Blender import_mesh.ply, trimesh, open3d, f3d, assimp with ply, PotreeConverter, model/x-ply) found only the already-selected HRConvert2 pipeline and substring false positives.",
+    "source": "https://packagist.org/search.json?q=mesh+loader",
+    "discovery_route": "Packagist search API (first 100 hits per query) and GitHub code search language:PHP (round 6)",
+    "round": "2026-11-18 round 6"
   }
 ]
