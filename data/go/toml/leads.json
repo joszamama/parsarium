@@ -104,6 +104,21 @@
       "run": "Go 1.27.1 (darwin/arm64 host triage module, go get @latest on 2026-11-17)"
     },
     {
+      "name": "github.com/achun/tom-toml",
+      "metric_value": 6,
+      "metric": "pkg.go.dev Imported by package count",
+      "note": "Module v0.2.0 (TOML 0.2-era own parser, 2014-2015) requires no TOML library; likely fails the TOML 1.0 controls. Not run in this round.",
+      "source": "https://pkg.go.dev/github.com/achun/tom-toml",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v0.2.0",
+      "release_time_utc": "2014-05-02T10:39:24Z",
+      "family": "achun/tom-toml (TOML 0.2.0 parser)",
+      "api_lead": "toml.Parse([]byte) (Toml, error)",
+      "checked_at_utc": "2026-11-18",
+      "evidence": "Run on the host against v0.2.0 (README: supports TOML v0.2.0): toml.Parse rejects both controls with \"roles does not match one of stageValues\" (inline tables and later syntax are not in TOML 0.2.0)."
+    },
+    {
       "name": "github.com/lixenwraith/toml",
       "metric_value": 5,
       "metric": "pkg.go.dev Imported by package count",
@@ -117,6 +132,17 @@
       "checked_at_utc": "2026-11-17",
       "evidence": "toml.Unmarshal rejects service-config with 'expected newline at line 8' (`since = 1979-05-27T07:32:00Z`) and typed-scalars with 'expected newline at line 5' (`underscored = 1_000_000`): the subset has no date-time values or underscored integers.",
       "run": "Go 1.27.1 (darwin/arm64 host triage module, go get @latest on 2026-11-17)"
+    },
+    {
+      "name": "github.com/laurent22/toml-go",
+      "metric_value": 4,
+      "release": "v0.0.0-20140919090424-fa06a499644c",
+      "status": "unresolved_api_gap",
+      "evidence": "A 2014 parser listed on the toml-lang wiki Old page; its Document/Value accessors expose a single GetDate/AsDate time.Time type, so the four TOML 1.0 date-time kinds cannot be told apart. Not run.",
+      "metric": "pkg.go.dev Imported by package count",
+      "source": "https://pkg.go.dev/github.com/laurent22/toml-go",
+      "found_by": "round-4 GitHub repository search (toml parser language:go) and pkg.go.dev queries",
+      "checked_at_utc": "2026-11-18"
     },
     {
       "name": "github.com/kezhuw/toml",
@@ -135,17 +161,14 @@
       "metric": "pkg.go.dev Imported by package count",
       "note": "Module github.com/tabnas/toml/go v0.5.22 requires no TOML library, so it may be an own parser; Imported-by 2. Not run in this round.",
       "source": "https://pkg.go.dev/github.com/tabnas/toml/go",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
-    },
-    {
-      "name": "github.com/achun/tom-toml",
-      "metric_value": 6,
-      "metric": "pkg.go.dev Imported by package count",
-      "note": "Module v0.2.0 (TOML 0.2-era own parser, 2014-2015) requires no TOML library; likely fails the TOML 1.0 controls. Not run in this round.",
-      "source": "https://pkg.go.dev/github.com/achun/tom-toml",
-      "status": "unresolved_not_run",
-      "api_lead_checked_against_pinned_release": false
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "v0.5.22",
+      "release_time_utc": "2026-11-10T18:48:23Z",
+      "family": "tabnas/toml (Go port of the @tabnas/toml Jsonic grammar plugin, on tabnas/parser and tabnas/jsonic)",
+      "api_lead": "tabnastoml.Parse(string) (any, error) -> *tabnas.OrderedMap",
+      "checked_at_utc": "2026-11-18",
+      "evidence": "Run on the host (go 1.27.1) against v0.5.22: both controls parse, but the README states and the run confirms that every number, integers included, comes back as float64 (integers.hex 3.735928559e+09, floats.exponent 1000), so the typed-scalars control cannot tell the integer kind from the float kind. Date-times are *TomlTime with a kind tag and the original source text. Fails the typed tree."
     }
   ],
   "excluded": [
@@ -214,6 +237,78 @@
       "metric_value": 2,
       "status": "excluded",
       "reason": "CUE encoder/decoder over the selected go-toml v2 unstable parser."
+    },
+    {
+      "name": "github.com/andrewz1/xtoml",
+      "metric_value": 12,
+      "release": "v0.0.7",
+      "status": "excluded_wrapper",
+      "evidence": "Configuration loader (LoadConf/LoadConfTree) over the pelletier/go-toml v1 *toml.Tree; no own parser.",
+      "metric": "pkg.go.dev Imported by package count",
+      "source": "https://pkg.go.dev/github.com/andrewz1/xtoml",
+      "found_by": "round-4 GitHub repository search (toml parser language:go) and pkg.go.dev queries",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "github.com/shafreeck/toml",
+      "metric_value": 2,
+      "release": "v0.0.0-20190326060449-44ad86712acc",
+      "status": "excluded_fork",
+      "evidence": "README: \"an modification version of toml parser\" for configo; the module keeps naoina/toml's parse.peg, parse.peg.go and ast package, so it is a naoina/toml fork (naoina/toml itself fails a control).",
+      "metric": "pkg.go.dev Imported by package count",
+      "source": "https://pkg.go.dev/github.com/shafreeck/toml",
+      "found_by": "round-4 GitHub repository search (toml parser language:go) and pkg.go.dev queries",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "github.com/creachadair/tomledit",
+      "metric_value": 48,
+      "status": "excluded_same_family",
+      "evidence": "The editing package over the already decided github.com/creachadair/tomledit/parser lead (raw token text only).",
+      "metric": "pkg.go.dev Imported by package count",
+      "source": "https://pkg.go.dev/github.com/creachadair/tomledit",
+      "found_by": "round-4 GitHub repository search (toml parser language:go) and pkg.go.dev queries",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "github.com/nlink-jp/toml",
+      "metric_value": 0,
+      "status": "excluded_no_positive_metric",
+      "evidence": "pkg.go.dev reports no importers.",
+      "metric": "pkg.go.dev Imported by package count",
+      "source": "https://pkg.go.dev/github.com/nlink-jp/toml",
+      "found_by": "round-4 GitHub repository search (toml parser language:go) and pkg.go.dev queries",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "github.com/jean0t/tommy",
+      "metric_value": 0,
+      "status": "excluded_no_positive_metric",
+      "evidence": "pkg.go.dev reports no importers.",
+      "metric": "pkg.go.dev Imported by package count",
+      "source": "https://pkg.go.dev/github.com/jean0t/tommy",
+      "found_by": "round-4 GitHub repository search (toml parser language:go) and pkg.go.dev queries",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "github.com/shellyln/go-loose-json-parser",
+      "metric_value": 0,
+      "status": "excluded_no_positive_metric",
+      "evidence": "pkg.go.dev reports no importers of the module root.",
+      "metric": "pkg.go.dev Imported by package count",
+      "source": "https://pkg.go.dev/github.com/shellyln/go-loose-json-parser",
+      "found_by": "round-4 GitHub repository search (toml parser language:go) and pkg.go.dev queries",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "github.com/Subhanmalik138/go-toml-parser",
+      "metric_value": null,
+      "status": "excluded_no_pinned_release",
+      "evidence": "Not on pkg.go.dev or the Go module proxy (HTTP 404).",
+      "metric": "pkg.go.dev Imported by package count",
+      "source": "https://pkg.go.dev/github.com/Subhanmalik138/go-toml-parser",
+      "found_by": "round-4 GitHub repository search (toml parser language:go) and pkg.go.dev queries",
+      "checked_at_utc": "2026-11-18"
     }
   ],
   "promoted": [
@@ -494,5 +589,15 @@
       }
     ],
     "finding": "Packages that require a TOML library are configuration loaders or wrappers over an already examined parser and are not separate paths. Among the rest, most modules named */toml with v0.3.x/v0.4.x tags (go-forks, patrickhaller, lxlxw, reusee, zannen, jonsen, cxzgb123, cloudradar-monitoring, ando-masaki, FireworkMC, Oneledger, morgulbrut, timob, gozelle, arkdep, go-xe2/third, kcl-go 3rdparty) carry BurntSushi/toml-era version numbers and are forks or vendored copies of BurntSushi/toml or of go-toml v1 (kjzz, winstonprivacyinc, yesnault, gopkg.in/pelletier/go-toml.v1), each with Imported-by 1-6; others are not TOML parsers (go-output, varfmt, tinybind configbind, go-loose-json-parser, Psiphon configloader, Shopify ecfg, stvp/go-toml-config flag loader, vuvuzela encoding). These were classified from module metadata only and were not run."
+  },
+  "round_4": {
+    "checked_at_utc": "2026-11-18",
+    "routes": [
+      "toml-lang/toml wiki implementation lists (Go entries BurntSushi/toml and pelletier/go-toml; Old page: komkom/toml, kezhuw/toml, naoina/toml, achun/tom-toml, laurent22/toml-go)",
+      "pkg.go.dev search beyond the recorded queries: 'toml unmarshal', 'toml lexer', 'toml 1.0', 'toml ast', 'parse toml', 'toml document'",
+      "GitHub repository search \"toml parser language:go\" (63 repositories), with pkg.go.dev Imported-by lookups of every plausible own parser",
+      "the two recorded unrun leads tabnas/toml/go and achun/tom-toml were run"
+    ],
+    "result": "No new path qualifies: the two run leads fail the typed tree, and the remaining own parsers have no positive Imported-by count, no pinned module, a single date-time type, or are forks and loaders."
   }
 }
