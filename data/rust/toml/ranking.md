@@ -4,7 +4,7 @@
 
 ## Primary within-cell adoption metric
 
-crates.io recent downloads (90 days), from the search API in [registry-snapshot.json](registry-snapshot.json), captured 2026-11-17.
+crates.io recent downloads (90 days), from the search API in [registry-snapshot.json](registry-snapshot.json), captured 2026-11-17; the five paths ranked 6 to 10 were found or measured by round-4 lookups of the same API on 2026-11-18 (`round_4_targeted_lookups`). Ranks 6 to 10 rest on small counts (7,967 down to 46).
 
 | Rank | Package | Release | Metric | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -35,7 +35,7 @@ crates.io recent downloads (90 days), from the search API in [registry-snapshot.
 
 **kabosu 0.2.1** ([crate](https://static.crates.io/crates/kabosu/kabosu-0.2.1.crate), MIT OR Apache-2.0). kabosu (ai-implementer/yuzu): own dependency-free lexer, parser and span-carrying model; its README states value interpretation is differential-tested against the toml crate, but it shares no code with it (no dependencies). The service-config control covers 727 kabosu lines (303 in `src/parser.rs`) and typed-scalars 778. AFL++ instruments only the kabosu crate; with getrandom fixed by the overlay's AFL_PRELOAD shim, ten afl-showmap repeats per control are identical: 790 and 969 edges, 153 only on service-config and 332 only on typed-scalars ([receipt](../../../fuzzing/afl-native/toml/rust/kabosu/verification.json)). Metric: crates.io 46 recent downloads, a round-4 targeted lookup (2026-11-18).
 
-Unverified TOML parser leads, by the same metric: toml_parser 197,554,106 (lexer and event parser without a value tree; covered as the underlying parser of both selected paths), basic-toml 20,713,123 (control failed: release 0.1.10 has no datetime type and rejects both controls at the first offset date-time with "invalid number at line 8 column 9" and "invalid number at line 27 column 10"), toml-span 6,719,423 (control failed: release 0.7.2 has no datetime variant and rejects both controls with `InvalidNumber` at the first offset date-time) and nanoserde 488,505 (control failed: 0.2.1 rejects `0xDEAD_BEEF` and has one f64 number type). See [leads.json](leads.json). Recent downloads include transitive dependency pulls; Cargo itself depends on toml and toml_edit, and the two counts overlap.
+Unverified TOML parser leads, by the same metric: toml_parser 197,554,106 (lexer and event parser without a value tree; covered as the underlying parser of both selected paths), basic-toml 20,713,123 (control failed: release 0.1.10 has no datetime type and rejects both controls at the first offset date-time with "invalid number at line 8 column 9" and "invalid number at line 27 column 10"), toml-span 6,719,423 (control failed: release 0.7.2 has no datetime variant and rejects both controls with `InvalidNumber` at the first offset date-time) nanoserde 488,505 (control failed: 0.2.1 rejects `0xDEAD_BEEF` and has one f64 number type), facet-toml 24,074 (a third tree builder over toml_parser that passes date-times on as strings), deser-toml 12,002 (no documented generic value view) and, from round 4, fig-toml 1,397, oak-toml 990, tomlsmith 493 and babbel_toml 133 (each keeps date-times only as source text, so the offset instant would need harness-side text parsing). olpat (a taplo fork) and flyleaf-core (over toml_edit) are excluded. See [leads.json](leads.json). Recent downloads include transitive dependency pulls; Cargo itself depends on toml and toml_edit, and the two counts overlap.
 
 ## Standard library
 

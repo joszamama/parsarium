@@ -63,14 +63,15 @@
       "family": "toml_parser (toml-rs) via facet reflection",
       "api_lead": "facet_toml::from_str::<T: Facet>(&str)",
       "note": "Found in the \"toml parser\" query of the recorded snapshot. Its normal dependencies at 0.46.1 are toml_parser plus the facet reflection crates (no toml or toml_edit), so it is a third tree builder over the toml_parser family already selected through toml and toml_edit. Whether a documented generic value view (facet_value) keeps the four TOML date-time kinds and int/float apart was not established; not run.",
-      "status": "unresolved_not_run",
+      "status": "excluded_family_and_datetime_strings",
       "metric_value": 24074,
       "metric": "crates.io recent downloads (90 days)",
       "search_query": "toml deserialize",
       "search_rank": 38,
       "source": "https://crates.io/crates/facet-toml",
       "api_lead_checked_against_pinned_release": false,
-      "checked_on": "2026-11-18"
+      "checked_on": "2026-11-18",
+      "round_4_decision": "Checked 2026-11-18 against the 0.46.1 crate source: its only normal TOML dependency is toml_parser (a third tree builder over the toml_parser family already selected twice through toml and toml_edit), and src/parser.rs passes every date-time to facet-reflect as a plain string (\"Keep as string, let facet-reflect handle datetime types\"), so a generic facet value cannot tell the four date-time kinds apart without the harness re-reading the text. Not run."
     },
     {
       "name": "deser-toml",
@@ -78,14 +79,91 @@
       "family": "deser-toml (mitsuhiko/deser; own from-scratch TOML 1.1 scanner and parser)",
       "api_lead": "deser_toml::from_str::<T: deser::Deserialize>(&str)",
       "note": "Found in the \"toml deserialize\" query. An independent parser (src/scan.rs, parser.rs, document.rs; normal dependencies deser-core, itoa, simdutf8, zmij). Its documented API deserializes into typed deser targets; deser-core 0.10.2 has no generic value type, and date-times reach generic targets as a Datetime extension that falls back to strings, so a typed tree with the four date-time kinds needs a harness-side deser visitor that was not written in this round; not run.",
-      "status": "unresolved_not_run",
+      "status": "excluded_no_generic_value_view",
       "metric_value": 12002,
       "metric": "crates.io recent downloads (90 days)",
       "search_query": "toml deserialize",
       "search_rank": 2,
       "source": "https://crates.io/crates/deser-toml",
       "api_lead_checked_against_pinned_release": false,
-      "checked_on": "2026-11-18"
+      "checked_on": "2026-11-18",
+      "round_4_decision": "Checked 2026-11-18 against deser-toml 0.10.2, deser 0.10.2 and deser-core 0.10.2: the crate exports only from_str/from_slice/from_reader into deser::Deserialize targets; its own document model (src/document.rs) is private, and neither deser nor deser-core ships a generic value type. A typed tree would need a harness-written Deserialize sink, which is not a documented generic value view (catalog/toml/PROTOCOL.md). Not run."
+    },
+    {
+      "name": "fig-toml",
+      "release": "7.0.0",
+      "metric_value": 1397,
+      "family": "fig-toml (diaryx-org fig language; own tokenizer and parser on fig-kit)",
+      "api_lead": "fig::Document::parse(bytes, fig_toml::format()?).to_value() -> fig::Value",
+      "status": "unresolved_datetime_source_text",
+      "evidence": "Checked 2026-11-18 against fig 7.0.0 and fig-toml 7.0.0 sources: fig::Value keeps TOML date-times as a format-specific Ext scalar of an ExtKind (OffsetDateTime, LocalDateTime, LocalDate, LocalTime) carried verbatim as source text, and the serde path reads them as plain strings. The offset kind therefore has no decoded instant; the harness would have to parse the date-time text itself, which the TOML protocol excludes. Not run.",
+      "metric": "crates.io recent downloads (90 days)",
+      "source": "https://crates.io/crates/fig-toml",
+      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "flyleaf-core",
+      "release": "0.2.8",
+      "metric_value": 1163,
+      "family": "toml_parser family via toml_edit",
+      "status": "excluded_wrapper",
+      "evidence": "Its only TOML dependency is toml_edit ^0.25 (the selected toml_edit path); a document editor over toml_edit, not a parser.",
+      "metric": "crates.io recent downloads (90 days)",
+      "source": "https://crates.io/crates/flyleaf-core",
+      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "oak-toml",
+      "release": "0.0.11",
+      "metric_value": 990,
+      "family": "oak-toml (ygg-lang oaks framework grammar)",
+      "api_lead": "oak-toml TomlValue tree",
+      "status": "unresolved_datetime_source_text",
+      "evidence": "Checked 2026-11-18: oak-toml 0.0.11 TomlValue::DateTime(String) holds the date-time as a string with no kind, so the four TOML date-time kinds cannot be told apart. Not run.",
+      "metric": "crates.io recent downloads (90 days)",
+      "source": "https://crates.io/crates/oak-toml",
+      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "tomlsmith",
+      "release": "0.4.1",
+      "metric_value": 493,
+      "family": "tomlsmith (own rowan-based lossless parser)",
+      "api_lead": "tomlsmith::Document::parse_as(text, TomlVersion::V1_0).semantics().root() -> SemanticTable of SemanticValue",
+      "status": "unresolved_datetime_source_text",
+      "evidence": "Checked 2026-11-18 against the 0.4.1 source: SemanticValue::DateTime holds a DateTimeValue with only a kind, the raw source spelling and a canonical spelling (raw with T/Z and seconds normalized); no date, time or offset fields are decoded. The offset date-time UTC instant would have to be computed by parsing that source text in the harness, which the TOML protocol excludes. Integers, floats and strings are decoded. Not run.",
+      "metric": "crates.io recent downloads (90 days)",
+      "source": "https://crates.io/crates/tomlsmith",
+      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "olpat",
+      "release": "0.14.0",
+      "metric_value": 491,
+      "family": "taplo family (olpat is described as a maintained fork of taplo)",
+      "status": "excluded_fork",
+      "evidence": "olpat-cli describes the olpat toolkit as \"a maintained fork of taplo\"; the 0.14.0 crate has taplo's dependency set (logos, rowan, ahash, time). Excluded as a fork of the selected taplo path.",
+      "metric": "crates.io recent downloads (90 days)",
+      "source": "https://crates.io/crates/olpat",
+      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "babbel_toml",
+      "release": "0.3.0",
+      "metric_value": 133,
+      "family": "babbel_toml (clockworkengineer babbel; own lexer and parser)",
+      "api_lead": "babbel_toml::from_str(&str) -> Node",
+      "status": "unresolved_datetime_source_text",
+      "evidence": "Checked 2026-11-18 against the 0.3.0 source: Node::Datetime(TomlDatetime { kind, raw }) keeps only the kind and the raw source text; no date, time or offset fields are decoded, so the offset UTC instant would need harness-side parsing of the source text. Not run.",
+      "metric": "crates.io recent downloads (90 days)",
+      "source": "https://crates.io/crates/babbel_toml",
+      "found_by": "round-4 crates.io lookups (registry-snapshot round_4_targeted_lookups)",
+      "checked_at_utc": "2026-11-18"
     }
   ],
   "excluded": [
@@ -217,5 +295,31 @@
       "project": "projects/toml/rust/kabosu",
       "status": "promoted_to_verified"
     }
-  ]
+  ],
+  "round_4": {
+    "checked_at_utc": "2026-11-18",
+    "routes": [
+      "toml-lang/toml wiki implementation lists (TOML 1.1/1.0/0.5/0.4 and Old pages): Rust entries toml-rs, toml-span and toml-spanner already decided",
+      "crates.io search API beyond the recorded windows: download-sorted \"toml\" and \"toml parser\", page 2 of \"toml parser\", \"toml\" keyword pages 1-5 (all 451 crates), parser-implementations category with \"toml\""
+    ],
+    "promoted": [
+      "antlr-rust-toml-parser 0.34.0",
+      "tomlproc 0.1.2",
+      "soml 0.2.0",
+      "toml_dom 0.6.0",
+      "kabosu 0.2.1"
+    ],
+    "below_ceiling_not_run": [
+      "toml_document 0.1.3 (41; 2016, TOML 0.4-era format-preserving parser)",
+      "tomling 0.3.0 (28; winnow-based)",
+      "tomboy-toml-dom 0.1.21 (25; 2020)",
+      "toml-shelby 0.1.0 (17; type-driven derive parser)",
+      "tommy 0.1.26 (7)",
+      "brittle 0.1.1 (7; regex-based, 2020)",
+      "neco-toml 0.1.0 (36; documented as a TOML subset)",
+      "kosmetic-syntax 0.1.0 (49; lossless syntax tree for a linter, no value API)",
+      "tomllib 0.1.2 (98; 2016 nom 1 parser, TOML 0.4-era)"
+    ],
+    "note": "With kabosu the cell holds ten verified paths; own-parser crates ranked below kabosu (46 recent downloads) were not run. Configuration loaders, toml/toml_edit wrappers, Cargo.toml tools, converters, tree-sitter grammars and other formats in the keyword listing are not parsers of their own."
+  }
 }
