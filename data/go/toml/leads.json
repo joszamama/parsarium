@@ -309,6 +309,30 @@
       "source": "https://pkg.go.dev/github.com/Subhanmalik138/go-toml-parser",
       "found_by": "round-4 GitHub repository search (toml parser language:go) and pkg.go.dev queries",
       "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "github.com/zhangdapeng520/zdpgo_toml",
+      "metric_value": 2,
+      "status": "excluded",
+      "reason": "Round 6: v0.1.0 (module zip sha256 3958b269...) shares 5,090 of 5,097 non-test lines with pelletier/go-toml/v2 v2.2.2, scanner and unstable parser included: a rename copy of a selected path. Both importers are the same author's modules."
+    },
+    {
+      "name": "github.com/prakash-p-3121/tomllib",
+      "metric_value": 2,
+      "status": "excluded",
+      "reason": "Round 6: a single serialize.go over pelletier/go-toml/v2."
+    },
+    {
+      "name": "github.com/kkyr/fig",
+      "metric_value": 78,
+      "status": "excluded",
+      "reason": "Round 6: config loader over BurntSushi/toml."
+    },
+    {
+      "name": "Own-parser Go modules with no importers",
+      "metric_value": 0,
+      "status": "excluded",
+      "reason": "Round 6: amarbel-llc/tommy v0.6.0 (own lexer and CST), client9/tojson v1.2.0, ClarkQAQ/toml v0.0.2, stricttools/go-toml-edit v0.8.0, zchee/go-toml v0.1.0, npikall/toml-edit v0.1.0 and gnolang/gno tm2/pkg/toml (pelletier v1 fork) have Imported by 0; git.sr.ht/~ixoh/toml and jinycoo/go-quake core/toml have no tagged release; jsonicjs/toml/go and liamg/oriel are not on pkg.go.dev."
     }
   ],
   "promoted": [
@@ -599,5 +623,24 @@
       "the two recorded unrun leads tabnas/toml/go and achun/tom-toml were run"
     ],
     "result": "No new path qualifies: the two run leads fail the typed tree, and the remaining own parsers have no positive Imported-by count, no pinned module, a single date-time type, or are forks and loaders."
+  },
+  "round_6": {
+    "observed": "2026-11-18",
+    "routes": [
+      "toml-lang/toml-test-matrix parser list (commit 71475d29, 2025-04-25; 36 parser scripts): every Go entry (BurntSushi/toml, pelletier/go-toml) is already selected or decided",
+      "pkg.go.dev Imported by tab of github.com/toml-lang/toml-test, toml-test/v2, toml-test/cmd/toml-test and github.com/BurntSushi/toml-test: no known importers (test-only imports are not counted)",
+      "GitHub code search for toml-test in go.mod files (10, 35 and 24 results): stricttools/go-toml-edit, zchee/go-toml, npikall/toml-edit all Imported by 0",
+      "pkg.go.dev package searches 'toml tokenizer', 'toml reader', 'toml codec', 'toml marshal', 'toml encoding', 'toml spec', 'toml v1.0.0', 'toml tree', 'toml value', 'toml library', 'toml config parser', 'tomlv', 'toml-test', 'toml datetime', 'toml local date' (first 100 each): about 31 unrecorded packages with importers, all loaders or codecs over BurntSushi, pelletier v1/v2 or naoina, other formats, tree-sitter bindings or untagged",
+      "pkg.go.dev symbol search #LocalDateTime (91), #LocalTime (58), #LocalDate (99)",
+      "GitHub code search '\"datetime-local\" \"time-local\" language:Go' (2,332) and 'LocalDate LocalTime toml language:Go' (493); repository searches 'toml in:name,description language:Go' (627) and 'topic:toml language:Go' (203)"
+    ],
+    "promoted": [],
+    "new_leads": [],
+    "excluded": [
+      "github.com/zhangdapeng520/zdpgo_toml",
+      "github.com/prakash-p-3121/tomllib",
+      "github.com/kkyr/fig",
+      "Own-parser Go modules with no importers"
+    ]
   }
 }
