@@ -34,3 +34,5 @@ All 90 `yaml` hits are classified in the [registry snapshot](registry-snapshot.j
 Standard and runtime APIs: none documented ([standard.json](standard.json)).
 
 Round 4 (2026-11-18): yaml-runtimes, Debian apt-cache search, vcpkg/Homebrew/Conan lists and a GitHub C++ search found no further C++ YAML library with a Debian source ([snapshot](registry-snapshot.json), `round_4_discovery`).
+
+Round 6 (2026-11-18): bounded GitHub star search for C++ YAML libraries with at least 100 stars ([snapshot](registry-snapshot.json), `round_6_star_fallback`). fkYAML (153) was selected. mini-yaml (244) has no tagged release. Glaze, reflect-cpp, xpack, figcone, config-loader, serdepp and easy_reflection_cpp are multi-format serialization or caller-schema mapping libraries; ESPHome and Conduit are frameworks; rAthena, Doxide, VJE and three other hits are applications. All are recorded in [leads.json](leads.json).
