@@ -562,6 +562,85 @@
         "runs_per_control": 3
       },
       "feedback_receipt": "data/python/dns/mitmproxy-feedback-differential.json"
+    },
+    {
+      "package": "namespy",
+      "version": "0.1.0",
+      "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+      "command": "python3 scripts/run_project.py dns python namespy",
+      "feedback_command": "python3 scripts/verify_dns_feedback.py dns/python/namespy",
+      "receipt": "projects/dns/python/namespy/verification.json",
+      "control": "controls/dns/response.bin",
+      "pass": true,
+      "output": {
+        "id": 43981,
+        "qr": 1,
+        "opcode": 0,
+        "aa": 0,
+        "tc": 0,
+        "rd": 1,
+        "ra": 1,
+        "z": 0,
+        "rcode": 0,
+        "qdcount": 1,
+        "ancount": 4,
+        "nscount": 0,
+        "arcount": 0,
+        "questions": [
+          {
+            "name": "www.example.test.",
+            "type": 1,
+            "class": 1
+          }
+        ],
+        "answers": [
+          {
+            "name": "www.example.test.",
+            "type": 5,
+            "class": 1,
+            "ttl": 3600,
+            "rdata": "example.test."
+          },
+          {
+            "name": "example.test.",
+            "type": 1,
+            "class": 1,
+            "ttl": 300,
+            "rdata": "192.0.2.10"
+          },
+          {
+            "name": "example.test.",
+            "type": 28,
+            "class": 1,
+            "ttl": 600,
+            "rdata": "2001:db8::10"
+          },
+          {
+            "name": "example.test.",
+            "type": 15,
+            "class": 1,
+            "ttl": 7200,
+            "rdata": "10 mail.example.test."
+          }
+        ],
+        "authority": [],
+        "additional": []
+      },
+      "differential_control": "controls/dns/query.bin",
+      "differential_output_matches": true,
+      "parser_source_files": 5,
+      "parser_source_lines_covered": 285,
+      "format_specific_source_lines_covered": 129,
+      "afl_feedback": {
+        "control_parser_features": 285,
+        "variant_parser_features": 150,
+        "parser_feature_difference": 135,
+        "control_afl_tuples": 303,
+        "variant_afl_tuples": 169,
+        "afl_tuple_difference": 134,
+        "runs_per_control": 3
+      },
+      "feedback_receipt": "data/python/dns/namespy-feedback-differential.json"
     }
   ]
 }

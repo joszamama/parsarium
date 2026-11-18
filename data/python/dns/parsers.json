@@ -620,6 +620,109 @@
     "afl_feedback": "data/python/dns/py3dns-feedback-differential.json"
   },
   {
+    "name": "namespy",
+    "version": "0.1.0",
+    "license": "Apache-2.0",
+    "license_evidence": "Wheel METADATA 'License-Expression: Apache-2.0' and dist-info/licenses/LICENSE (Apache License 2.0 text, sha256 2e29e7ec...), checked in the image",
+    "input_api": "namespy.DnsPacket.parse(data: bytes, offset: int = 0, *, strict: bool = True) -> tuple[DnsPacket, int]",
+    "documentation": "https://github.com/b1tninja/namespy/blob/main/README.md",
+    "source": "https://pypi.org/project/namespy/0.1.0/",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "namespy (packet.py DnsPacket over names.py DomainName and rdata.py RData classes)",
+    "family_note": "Own pure-Python wire codec (the README calls it a wire codec that survives malformed input; it was formerly imported as aiodns/dnspy but is unrelated to the PyPI aiodns resolver); it uses no other DNS library. It models the reserved Z bit, AD and CD as separate header fields; the harness joins them into z. RDATA text is the library's RData.to_presentation(). Importing namespy imports the socket module, but an instrumented run of both controls created no socket and opened no file. Found in round 4 through a GitHub repository search (language:Python, 'dns parser'/'dns packet'), not through the PyPI 'dns' name list: the distribution name lacks 'dns'. Released 2026-11-08; low adoption (160 downloads in the window).",
+    "project": "projects/dns/python/namespy",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "value": 160,
+      "source": "https://pypistats.org/api/packages/namespy/recent",
+      "captured_at_utc": "2026-11-18T00:15:27.827083+00:00",
+      "snapshot": "data/python/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "rank": 7,
+    "afl_feedback": "data/python/dns/namespy-feedback-differential.json"
+  },
+  {
     "name": "dns-messages",
     "version": "1.0.1",
     "license": "MIT",
@@ -719,7 +822,7 @@
       "authority": [],
       "additional": []
     },
-    "rank": 7,
+    "rank": 8,
     "afl_feedback": "data/python/dns/dns-messages-feedback-differential.json"
   }
 ]

@@ -1,0 +1,94 @@
+{
+  "kind": "third_party",
+  "api": "namespy.DnsPacket.parse(local DNS message bytes) -> (DnsPacket, octets consumed)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T00:16:39.187452+00:00",
+  "manifest": "projects/dns/python/namespy/manifest.json",
+  "image_id": "sha256:f22ec027eaa84daf3377db8aa2ddc51da64ec724805f98b7eb5816e1b46a00f4",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/amd64",
+  "toolchain": [
+    "Python 3.14.4",
+    "Name: namespy",
+    "Version: 0.1.0",
+    "Name: atheris",
+    "Version: 3.1.0",
+    "7542c7a90b63a9c1dae4debca71a972bc22b386467d339ea3406d171ad536660  namespy/packet.py",
+    "84f1de2e5c79428714ea9dd9dc4ca9e3e0f30d5204832f1fe6a313fff6a3bef1  namespy/wire.py",
+    "9625d099be05a91794e7989eaefd36c665a915506e190b16bf0294ce65111bd2  namespy/names.py",
+    "a681093b33f95ab5f82119fd73f8b9c101f8fc23ebdee1ca4a1c856f87f68cf8  namespy/rdata.py"
+  ],
+  "source_sha256": "9a3f20e38d60f38aa5536ef6704aa4c08e73c229bbc9637605f299ccb38d4fa2",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "08d94e6bbc7e8577db4fd2523d9b281ec899f72abc7d0ebd3a7a2e95d529c1ba",
+    "fuzz.py": "12f5329b821f28b641c53a86c55eaaf560b51775e5687ecaacc33671472c5ae8",
+    "harness.py": "f0046765640c2159e57c09dc6a46a63111c64badf48ce1e0b9a15abca7d888e4",
+    "manifest.json": "3ad4b105d4008e28661e30b2936162259cf2f1177f952195a020032d1e3ffe09",
+    "replay.py": "8469c6ca26ca57239ed03648026e14ecfa66a80aefd8448a1ebc83adfb7b5938",
+    "run-control.py": "10382ed1a6603b9111b87da31558d8efc7f5dc2765feaea69ce4df6e920ffe11",
+    "runtime-requirements.lock": "b7d2994b8ea7d222211257f2bf877d9887a62058472f13fd92f0962a0561e61c"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 5,
+  "parser_source_lines_covered": 285,
+  "format_specific_source_lines_covered": 129,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/python/namespy/target/coverage/coverage.json",
+  "pass": true
+}

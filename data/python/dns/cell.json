@@ -1,10 +1,10 @@
 {
   "ecosystem": "python",
   "format": "dns",
-  "status": "pilot_seven_verified_search_bounded",
+  "status": "pilot_eight_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 7,
+  "verified_third_party_count": 8,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "project name contains 'dns'"
@@ -16,14 +16,14 @@
   "search_hits_recorded": 100,
   "unique_search_hits": 100,
   "unresolved_documentation_leads": 2,
-  "leads_recorded": 29,
+  "leads_recorded": 30,
   "leads_by_status": {
-    "resolved_verified_selected": 7,
+    "resolved_verified_selected": 8,
     "excluded": 20,
     "unresolved": 2
   },
   "ranking_metric": "PyPI Stats last_month downloads excluding known mirrors",
-  "uncertainty": "Pilot cell: seven Python paths verified, dnspython, Twisted (twisted.names.dns), mitmproxy (mitmproxy.dns), dpkt, dnslib, py3dns and dns-messages, ranked by PyPI Stats last-month downloads; the cell stays below ten because no further qualifying path was found. Twisted's and mitmproxy's counts cover the whole networking framework and interception proxy, not only their DNS packages; importing mitmproxy.dns pulls in mitmproxy's flow model and its full dependency set, but an instrumented run of both controls created no socket in either image. py3dns has no API reference (README and bundled unpacker tests only) and its import reads /etc/resolv.conf as a local file. pycares is excluded (c-ares channel API, no bytes parser) and scapy is excluded under this pilot's no-socket rule (its import opens AF_NETLINK sockets). Round-2 checks: zeroconf, impacket and pypacker fail the response control (MX or AAAA/CNAME rdata not decoded by the library); pyshark wraps tshark; pydns is py3dns's predecessor. Round 3 read all 1,074 PyPI names containing 'dns' (round 1 inspected the first 100 alphabetically) and looked up the plausible ones: PythonDNS and microdns wrap dnslib, dnsq wraps dnspython, dnspython3 and dnspythonchia are dnspython's older line and fork, dnslib3 is a dnslib fork (65.9% shared lines, same import name), aiodnsresolver keeps its parser private, asyncdns2 and dnsmock are resolvers. async-dns and dns-client decode messages through exported but undocumented classes and stay leads. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: eight Python paths verified, dnspython, Twisted (twisted.names.dns), mitmproxy (mitmproxy.dns), dpkt, dnslib, py3dns, namespy and dns-messages, ranked by PyPI Stats last-month downloads; the cell stays below ten because no further qualifying path was found. Twisted's and mitmproxy's counts cover the whole networking framework and interception proxy, not only their DNS packages; importing mitmproxy.dns pulls in mitmproxy's flow model and its full dependency set, but an instrumented run of both controls created no socket in either image. py3dns has no API reference (README and bundled unpacker tests only) and its import reads /etc/resolv.conf as a local file. pycares is excluded (c-ares channel API, no bytes parser) and scapy is excluded under this pilot's no-socket rule (its import opens AF_NETLINK sockets). Round-2 checks: zeroconf, impacket and pypacker fail the response control (MX or AAAA/CNAME rdata not decoded by the library); pyshark wraps tshark; pydns is py3dns's predecessor. Round 3 read all 1,074 PyPI names containing 'dns' (round 1 inspected the first 100 alphabetically) and looked up the plausible ones: PythonDNS and microdns wrap dnslib, dnsq wraps dnspython, dnspython3 and dnspythonchia are dnspython's older line and fork, dnslib3 is a dnslib fork (65.9% shared lines, same import name), aiodnsresolver keeps its parser private, asyncdns2 and dnsmock are resolvers. async-dns and dns-client decode messages through exported but undocumented classes and stay leads. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Package-level adoption metrics include non-DNS use; the remaining leads are unverified, and the cell is not a definitive top ten.",
   "registry_snapshot": "data/python/dns/registry-snapshot.json",
   "unresolved_leads": "data/python/dns/leads.json",
   "runtime_evidence": "data/python/dns/standard.json",
@@ -35,5 +35,5 @@
   },
   "third_party_evidence": "data/python/dns/parsers.json",
   "third_party_control_results": "data/python/dns/verification.json",
-  "selection": "Seven control-verified Python DNS path(s), ranked by PyPI Stats last_month downloads excluding known mirrors: dnspython 2.9.2 (286,812,791), twisted 26.10.0 (15,068,322), mitmproxy 12.3.1 (4,113,220), dpkt 1.9.8 (1,492,890), dnslib 0.9.26 (1,231,762), py3dns 4.0.2 (129,993), dns-messages 1.0.1 (46)."
+  "selection": "Eight control-verified Python DNS path(s), ranked by PyPI Stats last_month downloads excluding known mirrors: dnspython 2.9.2 (286,812,791), twisted 26.10.0 (15,068,322), mitmproxy 12.3.1 (4,113,220), dpkt 1.9.8 (1,492,890), dnslib 0.9.26 (1,231,762), py3dns 4.0.2 (129,993), namespy 0.1.0 (160), dns-messages 1.0.1 (46)."
 }

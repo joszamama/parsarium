@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "format": "dns",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "namespy",
+  "release": "0.1.0",
+  "catalog_parser": "data/python/dns/parsers.json",
+  "source_lock": "projects/dns/python/namespy/runtime-requirements.lock",
+  "source_sha256": "9a3f20e38d60f38aa5536ef6704aa4c08e73c229bbc9637605f299ccb38d4fa2",
+  "sdist_sha256": "535d1f60f0b62e780c9f809d1a7ff7d8b490914af0e2d52ad8f506e0c6b4b070",
+  "build_note": "Installed from the pinned pure-Python py3-none-any wheel by hash; the image checks that the wheel's namespy/ package is byte-identical to the pinned sdist, that the wheel declares only optional (extra) requirements, and that packet.py, wire.py, names.py, rdata.py and the LICENSE match recorded SHA-256 values. No runtime dependencies.",
+  "dependencies_note": "atheris 3.1.0 is the in-process fuzz bridge only; namespy 0.1.0 has no runtime dependencies (its crypto, doh and dev extras are not installed).",
+  "parser_family": "namespy (packet.py DnsPacket/DnsRecord over wire.py, names.py DomainName decompression and rdata.py per-type RData classes)",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/amd64",
+  "control": "controls/dns/response.bin",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "expected_output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "differential_control": "controls/dns/query.bin",
+  "differential_control_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "differential_expected_output": {
+    "id": 4660,
+    "qr": 0,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 0,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 0,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [],
+    "authority": [],
+    "additional": []
+  },
+  "api": "namespy.DnsPacket.parse(local DNS message bytes) -> (DnsPacket, octets consumed)",
+  "harness": "harness.py",
+  "fuzz_engine": "atheris",
+  "fuzz_engine_release": "3.1.0",
+  "fuzz_engine_sha256": "315a0b5c819852b1ffe1ca72efc389c7724881f2c33e4aacb8c6bcec49bd5011",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "Python line tracing of the installed namespy package during valid-control replay; Atheris import instrumentation for the byte-input bridge",
+  "coverage_subject_prefix": "/opt/venv/lib/python3.14/site-packages/namespy/",
+  "format_specific_coverage_file_suffix": "/namespy/packet.py",
+  "scope": "One RFC 1035 DNS message from local bytes via namespy.DnsPacket.parse (strict mode): header flags (the reserved Z bit, AD and CD are separate library fields joined into z), questions, and CNAME/A/AAAA/MX answers with compressed names; valid response and query controls only. RDATA text is the library's RData.to_presentation(); the harness only lower-cases names and checks the trailing dot. Importing namespy imports the socket module, but an instrumented run of both controls created no socket and opened no file; the resolver, server and DoH modules are never started.",
+  "summary_command": [
+    "/opt/venv/bin/python",
+    "/work/replay.py",
+    "/input/case"
+  ]
+}
