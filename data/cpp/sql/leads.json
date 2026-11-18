@@ -136,13 +136,15 @@
     },
     {
       "name": "hsql (hyrise/sql-parser)",
-      "status": "unresolved",
+      "status": "excluded_no_release",
       "metric_value": null,
       "metric_error": "no Debian source package; no Homebrew formula",
       "latest_release_observed": null,
       "family": "Hyrise sql-parser (Bison/Flex)",
       "documented_api_lead": "hsql::SQLParser::parse",
-      "reason": "hsql::SQLParser::parse returns SQLParserResult with SQLStatement trees; documented local text API. No Debian source package in the pinned popcon snapshot (rechecked 2026-11-17 for hsql, hyrise and sql-parser source names), so it has no value for this cell's primary popcon metric and no Debian dev-package fallback; GitHub stars are not allowed outside PLY cells."
+      "reason": "hsql::SQLParser::parse returns SQLParserResult with SQLStatement trees; documented local text API. No Debian source package in the pinned popcon snapshot (rechecked 2026-11-17 for hsql, hyrise and sql-parser source names), so it has no value for this cell's primary popcon metric and no Debian dev-package fallback; GitHub stars are not allowed outside PLY cells. Round 6 (2026-11-18, C/C++ star fallback): 813 GitHub stars, but the repository has no git tag and no GitHub release (tags and releases API both empty), so there is no pinned tagged upstream release and the star fallback does not apply.",
+      "github_stars": 813,
+      "github_stars_observed_at_utc": "2026-11-18T07:14:34.280489+00:00"
     },
     {
       "name": "qgis",
@@ -236,23 +238,27 @@
     },
     {
       "name": "cybergarage/usql",
-      "status": "unresolved_no_primary_metric",
+      "status": "excluded_below_threshold",
       "metric_value": null,
       "metric_error": null,
       "latest_release_observed": null,
       "family": "cybergarage uSQL parser",
       "documented_api_lead": null,
-      "reason": "Round-4 GitHub discovery (search 'sql parser language:C++', 2026-11-18; stars are not used). BSD-3-Clause C++ SQL parser (tags up to 0.8.2). No Debian source package (Debian 'usql' is the unrelated Go client) and no vcpkg or Conan Center port, so it has no admissible metric and was not built."
+      "reason": "Round-4 GitHub discovery (search 'sql parser language:C++', 2026-11-18; stars are not used). BSD-3-Clause C++ SQL parser (tags up to 0.8.2). No Debian source package (Debian 'usql' is the unrelated Go client) and no vcpkg or Conan Center port, so it has no admissible metric and was not built. Round 6: 55 GitHub stars, below the 100-star threshold.",
+      "github_stars": 55,
+      "github_stars_observed_at_utc": "2026-11-18T07:14:38.647676+00:00"
     },
     {
       "name": "sqltoast (jaypipes/sqltoast)",
-      "status": "unresolved_no_primary_metric",
+      "status": "excluded_below_threshold",
       "metric_value": null,
       "metric_error": null,
       "latest_release_observed": null,
       "family": "sqltoast hand-written C++ parser",
       "documented_api_lead": null,
-      "reason": "Round-4 GitHub discovery. Apache-2.0 C++ SQL parser with one tag (0.1) and no change since 2021. No Debian source package, vcpkg or Conan Center port, so it has no admissible metric and was not built."
+      "reason": "Round-4 GitHub discovery. Apache-2.0 C++ SQL parser with one tag (0.1) and no change since 2021. No Debian source package, vcpkg or Conan Center port, so it has no admissible metric and was not built. Round 6: 33 GitHub stars, below the 100-star threshold.",
+      "github_stars": 33,
+      "github_stars_observed_at_utc": "2026-11-18T07:14:39.786920+00:00"
     },
     {
       "name": "GoogleSQL (google/zetasql)",
@@ -275,6 +281,54 @@
       "family": "ClickHouse server parser (internal)",
       "documented_api_lead": null,
       "reason": "Round-4 lead (task list: ClickHouse parser libs). ClickHouse's SQL parser (src/Parsers) is part of the server source and is not released as a standalone library; no clickhouse source package is in the pinned popcon snapshot, and vcpkg's clickhouse-cpp is a client without a parser."
+    },
+    {
+      "name": "sqlcheck (jarulraj/sqlcheck)",
+      "status": "excluded_not_parser",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": "v1.3",
+      "family": null,
+      "documented_api_lead": null,
+      "github_stars": 2520,
+      "github_stars_observed_at_utc": "2026-11-18T07:14:36.470261+00:00",
+      "reason": "Round-6 GitHub discovery ('sql language:C++' by stars; 2,520 stars, tag v1.3). Anti-pattern checker: src/checker.cpp matches std::regex patterns against statement text and prints hints; there is no parser or statement tree."
+    },
+    {
+      "name": "SQLines (dmtolpeko/sqlines)",
+      "status": "excluded_no_release",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "github_stars": 432,
+      "github_stars_observed_at_utc": "2026-11-18T07:14:37.539498+00:00",
+      "reason": "Round-6 GitHub discovery ('sql language:C++' by stars; 432 stars). Database migration command-line tool that converts SQL text between dialects with its own token rewriter; no tag or release and no documented library syntax-tree API."
+    },
+    {
+      "name": "constexpr-sql (mkitzan/constexpr-sql)",
+      "status": "excluded_no_release",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "constexpr-sql compile-time parser",
+      "documented_api_lead": null,
+      "github_stars": 142,
+      "github_stars_observed_at_utc": "2026-11-18T07:14:35.325201+00:00",
+      "reason": "Round-6 GitHub discovery ('sql parser language:C++', topic sql-parser; 142 stars). Header-only template library that parses a query string literal at compile time; it cannot read SQL text from a local file at run time, and the repository has no tag or release."
+    },
+    {
+      "name": "Hyrise (hyrise/hyrise)",
+      "status": "excluded",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "Hyrise sql-parser (Bison/Flex)",
+      "documented_api_lead": null,
+      "github_stars": null,
+      "github_stars_observed_at_utc": null,
+      "reason": "Round-6 GitHub discovery ('sql language:C++' by stars; 872 stars). Research database engine that embeds hyrise/sql-parser; its stars reflect the engine."
     }
   ]
 }

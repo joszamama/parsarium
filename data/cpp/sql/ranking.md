@@ -46,10 +46,16 @@ Receipts: [duckdb](../../../projects/sql/cpp/duckdb/verification.json) and its [
 | cppdb | 15 | excluded | — |
 | sqlsmith | 5 | excluded | — |
 | usql | 5 | excluded | — |
-| hsql (hyrise/sql-parser) | n/a | unresolved | Hyrise sql-parser (Bison/Flex) |
-| cybergarage/usql | n/a | unresolved_no_primary_metric | cybergarage uSQL parser |
-| sqltoast (jaypipes/sqltoast) | n/a | unresolved_no_primary_metric | sqltoast hand-written C++ parser |
+| hsql (hyrise/sql-parser) | n/a (813 stars) | excluded_no_release | Hyrise sql-parser (Bison/Flex) |
+| cybergarage/usql | n/a (55 stars) | excluded_below_threshold | cybergarage uSQL parser |
+| sqltoast (jaypipes/sqltoast) | n/a (33 stars) | excluded_below_threshold | sqltoast hand-written C++ parser |
 | GoogleSQL (google/zetasql) | n/a (2,642 stars) | selected | GoogleSQL (formerly ZetaSQL) Textmapper-generated parser |
 | ClickHouse parsers | n/a | excluded | ClickHouse server parser (internal) |
+| sqlcheck (jarulraj/sqlcheck) | n/a (2,520 stars) | excluded_not_parser | — |
+| Hyrise (hyrise/hyrise) | n/a (872 stars) | excluded | Hyrise sql-parser (Bison/Flex) |
+| SQLines (dmtolpeko/sqlines) | n/a (432 stars) | excluded_no_release | — |
+| constexpr-sql (mkitzan/constexpr-sql) | n/a (142 stars) | excluded_no_release | constexpr-sql compile-time parser |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).
+
+Round 6 (2026-11-18) applied the C and C++ GitHub-star fallback; star counts in the table above are GitHub `stargazers_count` from the [snapshot](registry-snapshot.json) (`round_6_star_fallback`), not popcon values. Twenty bounded repository searches with `stars:>=100` are recorded there.
