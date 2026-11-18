@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "format": "toml",
+  "ecosystem": "python",
+  "pilot": true,
+  "package": "pytoml11",
+  "release": "0.0.5",
+  "catalog_parser": "data/python/toml/parsers.json",
+  "source_lock": "projects/toml/python/pytoml11/source-lock.json",
+  "source_sha256": "22ee71a9094052cd3b049e787709ba807646fdd02a1447782cdd23d40b0c5af9",
+  "sdist_sha256": "22ee71a9094052cd3b049e787709ba807646fdd02a1447782cdd23d40b0c5af9",
+  "underlying_release": "toml11 4.2.0 vendored in the sdist as the single header src/toml.hpp (TOML11_VERSION 4.2.0)",
+  "build_note": "Source-built from the pinned sdist with clang 16 -O0 and LLVM source coverage on every translation unit (clang 16 because the vendored toml11 uses std::source_location, which clang 14 cannot compile with libstdc++ 12; llvm-16 tools read the profiles; scikit-build-core 0.11.6 with packaging 25.0 and pathspec 0.12.1, pybind11 2.13.6 and Debian cmake, pinned by hash where installed from PyPI). PyPI publishes linux/aarch64 wheels, but they carry no coverage instrumentation.",
+  "dependencies_note": "pytoml11 has no Python runtime dependencies; pybind11 is a build-time header library. The toml11 parser is vendored in the sdist, not fetched separately.",
+  "parser_family": "toml11 (ToruNiina/toml11), C++: pytoml11's pybind11 _value.loads calls toml::parse_str<toml::ordered_type_config> from the single-header toml11 4.2.0 vendored in the sdist (src/toml.hpp) and wraps the toml11 value in its own Item classes. Same parser family as the selected C++ toml11 4.4.0 path (two minor releases older); independent of tomli/tomllib, tomlkit, tomlrt, tomlclass, the Rust toml_parser family of rtoml and the toml++ family of pytomlpp.",
+  "base_image": "debian@sha256:ec8534cda2cb30f29f44f23e135297af7a1496f2990fd8e4e84aa36b081a757a",
+  "platform": "linux/arm64",
+  "control": "controls/toml/service-config.toml",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "expected_output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "differential_control": "controls/toml/typed-scalars.toml",
+  "differential_control_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "differential_expected_output": {
+    "floats": {
+      "exponent": {
+        "type": "float",
+        "value": "1000.0"
+      },
+      "fraction": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "mixed": {
+        "type": "float",
+        "value": "0.015625"
+      },
+      "negative": {
+        "type": "float",
+        "value": "-0.5"
+      }
+    },
+    "integers": {
+      "binary": {
+        "type": "integer",
+        "value": "13"
+      },
+      "decimal": {
+        "type": "integer",
+        "value": "99"
+      },
+      "hex": {
+        "type": "integer",
+        "value": "3735928559"
+      },
+      "negative": {
+        "type": "integer",
+        "value": "-17"
+      },
+      "octal": {
+        "type": "integer",
+        "value": "493"
+      },
+      "underscored": {
+        "type": "integer",
+        "value": "1000000"
+      }
+    },
+    "keys": {
+      "a": {
+        "b": {
+          "c": {
+            "type": "integer",
+            "value": "1"
+          }
+        }
+      },
+      "quoted key": {
+        "type": "string",
+        "value": "q"
+      },
+      "site": {
+        "example.com": {
+          "type": "bool",
+          "value": "true"
+        }
+      }
+    },
+    "strings": {
+      "escapes": {
+        "type": "string",
+        "value": "tab\tquote\"backslash\\ é"
+      },
+      "literal": {
+        "type": "string",
+        "value": "C:\\Users\\parsarium"
+      },
+      "multiline": {
+        "type": "string",
+        "value": "first second"
+      },
+      "raw_multiline": {
+        "type": "string",
+        "value": "line one\nline two"
+      }
+    },
+    "times": {
+      "local_date": {
+        "type": "date-local",
+        "value": "1979-05-27"
+      },
+      "local_datetime": {
+        "type": "datetime-local",
+        "value": "1979-05-27T07:32:00"
+      },
+      "local_time": {
+        "type": "time-local",
+        "value": "00:32:00.25"
+      },
+      "offset": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00.5Z"
+      }
+    }
+  },
+  "api": "pytoml11.loads(decoded local TOML text) -> pytoml11.Table of Item objects (Table, Array, Integer, Float, String, Boolean, DateTime, Date, Time) read through their documented value property; pytoml11.load(local file path) gives the same typed tree",
+  "harness": "harness.py",
+  "fuzz_engine": "external one-file Python bridge for AFL++ and generator replay",
+  "fuzz_smoke_entrypoint": "/opt/venv/bin/python",
+  "fuzz_smoke_args": [
+    "/work/fuzz.py"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "LLVM source-region coverage of the source-built pytoml11 _value extension, scoped to the vendored toml11 header (src/toml.hpp); pytoml11's own pybind11 source (src/pytoml11.cpp) is counted only as wrapper lines and pybind11, libstdc++ and system headers are left out",
+  "coverage_subject_prefix": "/work/pytoml11-source/src/",
+  "format_specific_coverage_file_suffix": "/toml.hpp",
+  "afl_llvm_module_glob": "/opt/venv/lib/python3.11/site-packages/pytoml11/_value*.so",
+  "native_campaign_supported": false,
+  "scope": "TOML 1.0.0 documents from local text via pytoml11.loads; the two valid controls only (service-config and typed-scalars), each equal to its hand-written typed tree and to CPython tomllib (an independent family) in the same image. Coverage and AFL++ feedback cover the vendored toml11 header. Malformed input, comment-preserving edits and TOML 1.1 features are untested.",
+  "afl_package_release": "4.04c-4",
+  "afl_coverage_subject_prefix": "/work/pytoml11-source/src/toml.hpp"
+}

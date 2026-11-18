@@ -1,0 +1,62 @@
+{
+  "checked_at_utc": "2026-11-18T01:18:47.957594+00:00",
+  "project": "toml/python/pytoml11",
+  "pass": true,
+  "input_kind": "two fixed valid TOML 1.0.0 controls",
+  "oracle": "hand-written typed trees in controls/toml/*.expected.json; every package API mode and CPython tomllib (/usr/bin/python3 -I in the same image, where the package is not importable) must equal them",
+  "control_oracle": {
+    "modes_matching_expected_tree": [
+      "pytoml11-str",
+      "pytoml11-path"
+    ],
+    "stdlib_tomllib_python": "3.11.2",
+    "stdlib_tomllib_matches": true,
+    "stdlib_tomllib_family": "independent (tomllib is the tomli family; pytoml11 is the C++ toml11 family)",
+    "package_version": "0.0.5",
+    "tree_sha256": "6d2bf3f9f6f555fc84311a1e4e6af9488563c0f0e2ff06b98ba92e894db5f172"
+  },
+  "variant_oracle": {
+    "modes_matching_expected_tree": [
+      "pytoml11-str",
+      "pytoml11-path"
+    ],
+    "stdlib_tomllib_python": "3.11.2",
+    "stdlib_tomllib_matches": true,
+    "stdlib_tomllib_family": "independent (tomllib is the tomli family; pytoml11 is the C++ toml11 family)",
+    "package_version": "0.0.5",
+    "tree_sha256": "4718dbdbf4a674dfc79cd455be85ca64736c7a70fd6fd91e097bbc5a74626203"
+  },
+  "feedback_scope": "executed LLVM source regions and branch directions of the toml11 4.2.0 single header /work/pytoml11-source/src/toml.hpp, compiled into the source-built pytoml11 0.0.5 _value extension, mapped to the AFL++ bitmap by the Parsarium LLVM region bridge",
+  "base_image_id": "sha256:c14371d502c6706a14c008a919ddef61947a64af78c1f3347cf4e614b3ae4043",
+  "overlay_image_id": "sha256:7da03c9e389e5221b0ce708049c520794d342979297c3d7ba0ec3f12d9416970",
+  "overlay_receipt_sha256": "6012077ed0afbf9e7693001844df401055d9401291d707987a2f03a81280916d",
+  "control": "controls/toml/service-config.toml",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "variant": "controls/toml/typed-scalars.toml",
+  "variant_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "control_output_sha256": "6d2bf3f9f6f555fc84311a1e4e6af9488563c0f0e2ff06b98ba92e894db5f172",
+  "variant_output_sha256": "4718dbdbf4a674dfc79cd455be85ca64736c7a70fd6fd91e097bbc5a74626203",
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "control_parser_features": 1460,
+  "variant_parser_features": 1550,
+  "control_parser_lines_per_file": {
+    "toml.hpp": 1460
+  },
+  "variant_parser_lines_per_file": {
+    "toml.hpp": 1550
+  },
+  "format_parser_file": "toml.hpp",
+  "control_format_parser_features": 1460,
+  "variant_format_parser_features": 1550,
+  "control_only_features": 261,
+  "variant_only_features": 351,
+  "parser_feature_difference": 612,
+  "format_parser_feature_difference": 612,
+  "control_afl_tuples": 1459,
+  "variant_afl_tuples": 1549,
+  "control_only_afl_tuples": 255,
+  "variant_only_afl_tuples": 345,
+  "afl_tuple_difference": 600
+}

@@ -41,6 +41,11 @@ PACKAGES = {
               "native": ("executed LLVM source regions and branch directions of the toml 1.1.8, toml_parser 1.1.5 "
                          "and toml_datetime 1.1.2 crate sources under {prefix}, compiled into the source-built "
                          "rtoml {release} _rtoml extension")},
+    "pytoml11": {"modes": ("pytoml11-str", "pytoml11-path"),
+                 "parser_file": "toml.hpp",
+                 "stdlib_family": "independent (tomllib is the tomli family; pytoml11 is the C++ toml11 family)",
+                 "native": ("executed LLVM source regions and branch directions of the toml11 4.2.0 single header "
+                            "{prefix}, compiled into the source-built pytoml11 {release} _value extension")},
     "pytomlpp": {"modes": ("pytomlpp-str", "pytomlpp-path", "pytomlpp-stream"),
                  "parser_file": "impl/parser.inl",
                  "stdlib_family": "independent (tomllib is the tomli family; pytomlpp is the C++ toml++ family)",
@@ -87,6 +92,11 @@ def oracle(slug: str, platform: str, image: str, source: Path, expected, scratch
             'tree_sha256': canonical_sha(expected)}
 
 
+def parser_feature_prefix(prefix: str, parser_file: str) -> str:
+    """Feature prefix of the format parser file; the subject prefix may already name that file."""
+    return prefix + ':' if prefix.endswith('/' + parser_file) else prefix + parser_file + ':'
+
+
 def probe(platform: str, image: str, prefix: str, parser_file: str,
           source: Path, scratch: Path, label: str) -> tuple[frozenset, frozenset]:
     base = sandbox(platform, source, scratch)
@@ -100,7 +110,7 @@ def probe(platform: str, image: str, prefix: str, parser_file: str,
                        (scratch / f'{label}.map').read_text().splitlines() if line)
     if not features or not tuples or any(not value.startswith(prefix) for value in features):
         raise RuntimeError('feedback is empty or outside the package source')
-    if not any(value.startswith(prefix + parser_file + ':') for value in features):
+    if not any(value.startswith(parser_feature_prefix(prefix, parser_file)) for value in features):
         raise RuntimeError(f'{parser_file} has no feedback')
     return features, tuples
 
@@ -154,7 +164,7 @@ def main() -> None:
     if any(item != firsts[0] for item in firsts) or any(item != others[0] for item in others):
         raise RuntimeError(f'repeated {slug} source feedback is unstable')
     (first, first_tuples), (other, other_tuples) = firsts[0], others[0]
-    parser_prefix = prefix + parser_file + ':'
+    parser_prefix = parser_feature_prefix(prefix, parser_file)
     feature_diff = len(first ^ other)
     tuple_diff = len(first_tuples ^ other_tuples)
     parser_diff = len({value for value in first ^ other if value.startswith(parser_prefix)})
