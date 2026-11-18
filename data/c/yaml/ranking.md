@@ -25,3 +25,5 @@ The C libraries hand back scalar text and style; plain scalars are typed by the 
 All 90 `yaml` hits are classified in the [registry snapshot](registry-snapshot.json) (`round2_debian_search`): 3 C and 2 C++ YAML libraries, 1 C syntax-tree grammar, 9 other-language bindings (several bundle a libyaml copy), 6 tools or editor modes and 69 other-language packages. The substrings `yml`, `syck`, `ryml` and `fkyaml` and exact lookups for C YAML sources without `yaml` in their names (Syck, mini-yaml) found no further C YAML parser library in the pinned snapshot.
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).
+
+Round 4 (2026-11-18): yaml-runtimes, Debian apt-cache search, vcpkg/Homebrew/Conan lists and a GitHub C search found no further C YAML library with a Debian source ([snapshot](registry-snapshot.json), `round_4_discovery`).

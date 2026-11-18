@@ -25,3 +25,5 @@ Both controls ([catalog.yaml](../../../controls/yaml/catalog.yaml), [order.yaml]
 All 90 `yaml` hits are classified in the [registry snapshot](registry-snapshot.json) (`round2_debian_search`). The substrings `yml`, `syck`, `ryml` and `fkyaml` and exact lookups for C++ YAML sources without `yaml` in their names (`opencv`, `fkyaml`, `libfkyaml`, `mini-yaml`, `yaml-cpp0.3`) found no further C++ YAML parser with a YAML-specific Debian count.
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).
+
+Round 4 (2026-11-18): yaml-runtimes, Debian apt-cache search, vcpkg/Homebrew/Conan lists and a GitHub C++ search found no further C++ YAML library with a Debian source ([snapshot](registry-snapshot.json), `round_4_discovery`).
