@@ -139,6 +139,40 @@
       "checked_at_utc": "2026-11-18T00:28:25Z",
       "source_lock": "projects/ascii_ply/java/scalismo/source-lock.json",
       "underlying_family": "Scalismo pure Scala PLY reader (scalismo.io.ply)"
+    },
+    {
+      "package": "pdal_2.13",
+      "version": "2.10.0",
+      "control": "controls/ascii_ply/triangle.ply",
+      "output": {
+        "points": 3,
+        "second_x": 1.0,
+        "last_y": 1.0
+      },
+      "pass": true,
+      "command": "python3 scripts/run_project.py ascii_ply java pdal (pinned Docker control, linux/amd64, OpenJDK 21.0.13, PDAL 2.10.2 release source)",
+      "checked_at_utc": "2026-11-18T02:44:47Z",
+      "source_lock": "projects/ascii_ply/java/pdal/source-lock.json",
+      "underlying_family": "PDAL native PLY reader (readers.ply)"
+    },
+    {
+      "package": "scalismo-vtk_3",
+      "version": "1.0-RC1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "indices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true,
+      "command": "python3 scripts/run_project.py ascii_ply java scalismo_vtk (pinned Docker control, linux/amd64, OpenJDK 21.0.13; stock and VTK 9.1.0 coverage natives)",
+      "checked_at_utc": "2026-11-18T03:57:22Z",
+      "source_lock": "projects/ascii_ply/java/scalismo_vtk/source-lock.json",
+      "underlying_family": "VTK vtkPLYReader"
     }
   ],
   "runtime": [],

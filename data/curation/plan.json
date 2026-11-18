@@ -3,7 +3,7 @@
   "policy": "At most ten paths per cell. Rank positive primary adoption metrics only within a cell. A limited number of primary-unranked paths may qualify through separately recorded numeric evidence: Debian source-package installations (at least 1000, at most three slots per C/C++ non-PLY cell) or GitHub upstream stars (at least 100, filling remaining PLY slots). Different metrics are never combined into one rank. Zero primary values and missing values do not fill slots without supplemental evidence. A byte-identical lower-adoption PHP PLY family duplicate and a pinned empty Python PDF compatibility distribution are excluded. After adoption ranking, selected paths without a verified container control and parser-derived AFL++ feedback are excluded; a vacated slot is refilled only in primary-rank order by the next-ranked path with its own verified container control and parser-derived AFL++ feedback.",
   "supplemental_sources": {
     "popcon_snapshot_sha256": "497f958fdd1472676fce567fc9ecf2ac319b3291c4b57f9598998f181204b2b8",
-    "github_snapshot_sha256": "e0e7532e038a5fdab5fe93a4f58e62eb88e8fe47e52cad5d68e7b1dc135427f0",
+    "github_snapshot_sha256": "bbdba6f8a9b27db1d150a20f8d628f9f051093b565abf336a995b29b051c4853",
     "feedback_exclusions_sha256": "d566b712d3e134a907634789bd1b391e5d59b0cbb8e99b3a5ecde2cc2b73d7cb",
     "feedback_backfills_sha256": "d9d419f60bd4cb2b24b27dd6252e5d4bcb406dc5d119b7d13d1b410dc8e297c4"
   },
@@ -1328,10 +1328,10 @@
         "scope": "Formula installations requested by users, not PLY-specific use; compare only within this ecosystem and exact window.",
         "observed_at_utc": "2026-11-14"
       },
-      "parsers_sha256": "ed3ec4469112059417625bc1f90590594c187d475004d543ebdc3e006db909aa",
-      "snapshot_sha256": "a6b2d7c6e65edd1910dcb83b4fac5ceff7f96a229b69158fa7b990ac0acfdbdd",
-      "original_count": 20,
-      "selected_count": 8,
+      "parsers_sha256": "87279f0a857efbefe93d1f651f27b5b1edda74ab734f47254d5bf96136742ace",
+      "snapshot_sha256": "2d58da11dfc2d0beac7c9302f3423ba7d1986f6db80493200bb2b9f31a1c32fe",
+      "original_count": 21,
+      "selected_count": 9,
       "selected": [
         {
           "name": "assimp",
@@ -1382,6 +1382,18 @@
           "supplemental_rank": 2
         },
         {
+          "name": "libagar",
+          "version": "1.7.1",
+          "family": "Agar-SG native PLY loader (sg/sg_load_ply.c)",
+          "metric": null,
+          "supplemental_metric": 465,
+          "supplemental_kind": "github_source_stars",
+          "supplemental_url": "https://github.com/JulNadeauCA/libagar",
+          "reason": "primary_metric_unavailable",
+          "selection": "supplemental_numeric_metric",
+          "supplemental_rank": 3
+        },
+        {
           "name": "assetkit",
           "version": "0.7.4",
           "family": "AssetKit native ASCII PLY importer",
@@ -1391,7 +1403,7 @@
           "supplemental_url": "https://github.com/recp/AssetKit",
           "reason": "primary_metric_unavailable",
           "selection": "supplemental_numeric_metric",
-          "supplemental_rank": 3
+          "supplemental_rank": 4
         },
         {
           "name": "mdal",
@@ -1403,7 +1415,7 @@
           "supplemental_url": "https://github.com/lutraconsulting/MDAL",
           "reason": "primary_metric_unavailable",
           "selection": "supplemental_numeric_metric",
-          "supplemental_rank": 4
+          "supplemental_rank": 5
         },
         {
           "name": "mccode",
@@ -1415,7 +1427,7 @@
           "supplemental_url": "https://github.com/mccode-dev/McCode",
           "reason": "primary_metric_unavailable",
           "selection": "supplemental_numeric_metric",
-          "supplemental_rank": 5
+          "supplemental_rank": 6
         }
       ],
       "excluded": [
@@ -6813,10 +6825,10 @@
         "scope": "Known public exact-release direct dependents; incomplete coverage and version-age bias",
         "captured_at_utc": "2026-11-13T07:16:44.759731+00:00"
       },
-      "parsers_sha256": "e7728151461584d1f3622e0996422bb7b8bbddb41c0eabf755f0b689e916e303",
-      "snapshot_sha256": "acb65c1102abd25d23e82132abf89daa2bcbed57a1b75bcdd0fbf1d6d95445d1",
-      "original_count": 21,
-      "selected_count": 7,
+      "parsers_sha256": "718e44daf5b931500c1893840af66783ed452875a106e967388cc1a7a85725f4",
+      "snapshot_sha256": "74c67faac8fa97f3821ddf644828de76684926127a18e719e187687a3125b875",
+      "original_count": 23,
+      "selected_count": 9,
       "selected": [
         {
           "name": "lwjgl-assimp",
@@ -6835,12 +6847,28 @@
           "rank": 2
         },
         {
+          "name": "scalismo-vtk_3",
+          "version": "1.0-RC1",
+          "family": "VTK vtkPLYReader via the scalismo-vtk Scala binding (VTK 9.1 Java natives)",
+          "metric": 2,
+          "selection": "primary_metric",
+          "rank": 3
+        },
+        {
           "name": "scalismo_3",
           "version": "1.0-RC1",
           "family": "Scalismo pure Scala PLY reader (scalismo.io.ply)",
           "metric": 2,
           "selection": "primary_metric",
-          "rank": 3
+          "rank": 4
+        },
+        {
+          "name": "pdal_2.13",
+          "version": "2.10.0",
+          "family": "PDAL native PLY reader (readers.ply) via the PDAL JNI binding",
+          "metric": 1,
+          "selection": "primary_metric",
+          "rank": 5
         },
         {
           "name": "f3d",
@@ -14250,6 +14278,6 @@
       "excluded": []
     }
   ],
-  "selected_total": 788,
+  "selected_total": 791,
   "excluded_total": 778
 }

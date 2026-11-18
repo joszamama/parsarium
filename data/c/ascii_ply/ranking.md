@@ -1,6 +1,6 @@
 # C × ASCII PLY: selected parsers
 
-8 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
+9 control-verified third-party paths selected from 21 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -20,8 +20,9 @@ These paths lack a positive primary metric. Their figures are reported separatel
 | ---: | --- | --- | --- | ---: | --- | --- |
 | 1 | [stereokit](https://stereokit.net/Pages/StereoKit/Model.html) | v0.3.11 | [GitHub upstream stars](https://github.com/StereoKit/StereoKit) | 1,093 | One valid ASCII PLY triangle through the full native C ABI in offscreen Mesa mode; vertices and face indices observed | StereoKit model PLY loader over bundled micro_ply |
 | 2 | [brlcad](https://brlcad.org/docs/html/articles/gcv.html) | 7.46.0 | [GitHub upstream stars](https://github.com/BRL-CAD/brlcad) | 1,045 | three vertices, one face, triangle indices and BRL-CAD default scaled coordinate from local ASCII PLY | BRL-CAD gcv-ply plugin over bundled RPly 1.1.4 |
-| 3 | [assetkit](https://github.com/recp/AssetKit/blob/v0.7.4/samples/read_meshes.c) | 0.7.4 | [GitHub upstream stars](https://github.com/recp/AssetKit) | 217 | three vertices and one triangular face with parsed indices from ASCII PLY | AssetKit native ASCII PLY importer |
-| 4 | [mdal](https://github.com/lutraconsulting/MDAL/blob/release-1.3.3/mdal/api/mdal.h) | 1.3.3 | [GitHub upstream stars](https://github.com/lutraconsulting/MDAL) | 190 | Three parsed vertices, one face and face indices | MDAL PLY driver over bundled libplyxx |
-| 5 | [mccode](https://github.com/mccode-dev/McCode/blob/v3.10.2/mcstas-comps/optics/Guide_anyshape.comp) | 3.10.2 | [GitHub upstream stars](https://github.com/mccode-dev/McCode) | 100 | One valid ASCII PLY triangle; C runtime parsed three vertices and one polygon and computed 1.0 by 1.0 bounding box | McCode native C OFF/PLY parser (interoff-lib) |
+| 3 | [libagar](https://github.com/JulNadeauCA/libagar/blob/release-1.7.1/sg/SG_Object.3) | 1.7.1 | [GitHub upstream stars](https://github.com/JulNadeauCA/libagar) | 465 | three vertices and one triangular facet with parsed vertex ids from ASCII PLY | Agar-SG native PLY loader (sg/sg_load_ply.c) |
+| 4 | [assetkit](https://github.com/recp/AssetKit/blob/v0.7.4/samples/read_meshes.c) | 0.7.4 | [GitHub upstream stars](https://github.com/recp/AssetKit) | 217 | three vertices and one triangular face with parsed indices from ASCII PLY | AssetKit native ASCII PLY importer |
+| 5 | [mdal](https://github.com/lutraconsulting/MDAL/blob/release-1.3.3/mdal/api/mdal.h) | 1.3.3 | [GitHub upstream stars](https://github.com/lutraconsulting/MDAL) | 190 | Three parsed vertices, one face and face indices | MDAL PLY driver over bundled libplyxx |
+| 6 | [mccode](https://github.com/mccode-dev/McCode/blob/v3.10.2/mcstas-comps/optics/Guide_anyshape.comp) | 3.10.2 | [GitHub upstream stars](https://github.com/mccode-dev/McCode) | 100 | One valid ASCII PLY triangle; C runtime parsed three vertices and one polygon and computed 1.0 by 1.0 bounding box | McCode native C OFF/PLY parser (interoff-lib) |
 
 The [selection plan](../../curation/plan.json) records all exclusions and original snapshot hashes. The [metric exception report](../../curation/metric-exceptions.json) lists missing and zero adoption signals. Search limits and unresolved leads remain in `cell.json` and `registry-snapshot.json`.

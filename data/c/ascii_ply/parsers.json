@@ -175,5 +175,28 @@
     "scope": "One valid local ASCII PLY triangle; three parsed positions, one triangle and three node references through the C API",
     "family": "Gmsh native PLY reader",
     "family_note": "Gmsh uses its own GModelIO_PLY reader. Its C API calls the C++ implementation in the same released library; this is one package path, independent of the RPly and micro_ply families."
+  },
+  {
+    "name": "libagar",
+    "version": "1.7.1",
+    "license": "BSD-2-Clause",
+    "license_evidence": "https://github.com/JulNadeauCA/libagar/blob/release-1.7.1/LICENSE",
+    "documentation": "https://github.com/JulNadeauCA/libagar/blob/release-1.7.1/sg/SG_Object.3",
+    "input_api_evidence": "https://github.com/JulNadeauCA/libagar/blob/release-1.7.1/sg/sg_load_ply.h",
+    "input_api": "SG_ObjectNew(NULL, name); SG_ObjectLoadPLY(SG_Object *, local .ply path, 0) after AG_InitCore and SG_InitSubsystem; vertex count from nVtx, facets from facetTbl, first facet vertex ids from its half-edges",
+    "adapter": "projects/ascii_ply/c/libagar/harness.c",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "three vertices and one triangular facet with parsed vertex ids from ASCII PLY",
+    "family": "Agar-SG native PLY loader (sg/sg_load_ply.c)",
+    "family_note": "Agar's scene-graph library ships its own ASCII and binary PLY header, element and property parser behind SG_ObjectLoadPLY(3); it does not bundle RPly, Greg Turk ply.c or another counted C PLY engine. The library is part of the Agar GUI toolkit; no display driver is opened."
   }
 ]

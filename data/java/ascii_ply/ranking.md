@@ -1,6 +1,6 @@
 # JAVA × ASCII PLY: selected parsers
 
-7 control-verified third-party paths selected from 21 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
+9 control-verified third-party paths selected from 23 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -10,7 +10,9 @@ deps.dev version-level directDependentCount.
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [lwjgl-assimp](https://javadoc.lwjgl.org/org/lwjgl/assimp/Assimp.html) | 3.4.3 | 13 | ASCII PLY triangle vertex and face counts, parsed face indices | LWJGL Java binding over native Assimp PLY importer; same Assimp parser family as C++ path |
 | 2 | [boofcv-io](https://boofcv.org/index.php?title=Example_Load_and_Save_Point_Clouds) | 1.6.0 | 11 | ASCII triangle, three vertices, one face, parsed indices [0,1,2] | BoofCV native Java PLY mesh reader |
-| 3 | [scalismo_3](https://github.com/unibas-gravis/scalismo/blob/v1.0-RC1/src/main/scala/scalismo/io/MeshIO.scala) | 1.0-RC1 | 2 | ASCII PLY triangle vertices, face list and parsed point ids | Scalismo pure Scala PLY reader (scalismo.io.ply) |
+| 3 | [scalismo-vtk_3](https://github.com/unibas-gravis/scalismo-vtk/blob/v1.0-RC1/src/main/scala/scalismo/vtk/io/MeshIO.scala) | 1.0-RC1 | 2 | ASCII PLY triangle vertices, face list and parsed point ids | VTK vtkPLYReader via the scalismo-vtk Scala binding (VTK 9.1 Java natives) |
+| 4 | [scalismo_3](https://github.com/unibas-gravis/scalismo/blob/v1.0-RC1/src/main/scala/scalismo/io/MeshIO.scala) | 1.0-RC1 | 2 | ASCII PLY triangle vertices, face list and parsed point ids | Scalismo pure Scala PLY reader (scalismo.io.ply) |
+| 5 | [pdal_2.13](https://github.com/PDAL/java/blob/v2.10.0/README.md) | 2.10.0 | 1 | ASCII PLY point-cloud subset: three parsed vertex coordinates through PDAL readers.ply; the face element is parsed past but PDAL exposes no mesh from readers.ply | PDAL native PLY reader (readers.ply) via the PDAL JNI binding |
 
 ## Supplemental numeric evidence
 
