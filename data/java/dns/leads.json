@@ -350,5 +350,18 @@
     "family": "Netty codec-dns (unmerged fork)",
     "api_lead_checked_against_pinned_release": false,
     "reason": "Record codecs layered on an unmerged fork of Netty's codec-dns (the README requires the author's dns-server-41 branch); no Maven Central release (Solr search: 0 hits), so no pinned release or primary metric, and its message decoding is the selected Netty family."
+  },
+  {
+    "name": "nl.sidnlabs:dnslib",
+    "status": "resolved_verified_selected",
+    "primary_metric": "deps.dev directDependentCount summed over all releases",
+    "primary_metric_value": 13,
+    "found_by": "round-6 discovery: Maven Central Solr artifact-id prefix search (a:dns*); metric in registry-snapshot.json round6_targeted",
+    "documentation": "https://github.com/SIDN/dns-lib/blob/dnslib-0.2.20/src/main/java/nl/sidnlabs/dnslib/message/Message.java",
+    "input_api_lead": "new nl.sidnlabs.dnslib.message.Message(new NetworkData(byte[]))",
+    "family": "SIDN dnslib (ENTRADA)",
+    "api_lead_checked_against_pinned_release": true,
+    "verification": "projects/dns/java/sidn_dnslib/verification.json",
+    "reason": "Pinned 0.2.20 passes both DNS controls; see parsers.json and data/java/dns/sidn-dnslib-feedback-differential.json."
   }
 ]

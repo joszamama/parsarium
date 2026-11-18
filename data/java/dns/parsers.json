@@ -524,6 +524,110 @@
     "afl_feedback": "data/java/dns/dns4s-core-feedback-differential.json"
   },
   {
+    "name": "dnslib",
+    "version": "0.2.20",
+    "license": "GPL-3.0",
+    "license_evidence": "POM nl.sidnlabs:dnslib:0.2.20 (sha256 b035fa49...) declares 'GNU General Public License, version 3', checked in the image; the upstream SIDN/dns-lib repository's LICENSE is GPL-3.0 and the source headers carry the GPL-3.0 notice. Dependencies commons-lang3, commons-codec, guava (with failureaccess) and log4j-core/log4j-api are Apache-2.0",
+    "input_api": "nl.sidnlabs.dnslib.message.Message(NetworkData data) with nl.sidnlabs.dnslib.message.util.NetworkData(byte[] data)",
+    "documentation": "https://github.com/SIDN/dns-lib/blob/dnslib-0.2.20/src/main/java/nl/sidnlabs/dnslib/message/Message.java",
+    "source": "https://central.sonatype.com/artifact/nl.sidnlabs/dnslib/0.2.20",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "SIDN dnslib (ENTRADA: Message, Header, Question, RRset, ResourceRecordFactory per-type decoders, DNSStringUtil, NetworkData)",
+    "family_note": "Own Java decoder of SIDN Labs (the .nl registry), written for its ENTRADA DNS analytics platform and published separately as nl.sidnlabs:dnslib; it uses no other DNS library (Guava's InetAddresses only formats the decoded IPv6 address, commons-codec only encodes DNSSEC and TXT fields). The harness constructs NetworkData over the caller's bytes and calls the Message constructor; no ENTRADA, pcap or network code is loaded. dnslib keeps the reserved Z bit, AD and CD. Each section is held as RRsets keyed by owner, class and type in first-seen order; the harness lists the records of each RRset in order (the controls have one record per RRset) and reports the section counts from those lists. OPT records are moved out of the additional section into the message's pseudo field (the controls have none). Types and classes are the raw values the library read; names are the library's lower-case text, to which the harness adds the trailing dot. A text is InetAddress.getHostAddress() and AAAA text is the library's own Guava InetAddresses.toAddrString (RFC 5952). Low adoption: deps.dev counts 13 direct dependents over its releases. Found in round 6 through a Maven Central artifact-id prefix search (a:dns*).",
+    "project": "projects/dns/java/sidn_dnslib",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "value": 13,
+      "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/nl.sidnlabs%3Adnslib",
+      "captured_at_utc": "2026-11-18T01:40:28.629204+00:00",
+      "snapshot": "data/java/dns/registry-snapshot.json"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "afl_feedback": "data/java/dns/sidn-dnslib-feedback-differential.json",
+    "documentation_note": "The upstream README describes the library as 'used to read DNS wire format data', and the public Message(NetworkData, boolean, boolean) constructor's Javadoc reads 'Decode network bytes into a DNS Message'; Message(NetworkData) calls it with partial and allowFail false.",
+    "rank": 6
+  },
+  {
     "name": "taxonomy-scodec_2.13",
     "version": "1.0.0",
     "license": "Apache-2.0",
@@ -625,6 +729,6 @@
     },
     "afl_feedback": "data/java/dns/taxonomy-scodec-feedback-differential.json",
     "documentation_note": "The README documents the taxonomy-scodec artifact as 'the binary protocol with scodec' and its example binds DnsCodec.dnsMessage as the given Codec[DnsMessage] for the fs2 lookup; the harness calls the same codec's decode on local bytes instead of a socket.",
-    "rank": 6
+    "rank": 7
   }
 ]

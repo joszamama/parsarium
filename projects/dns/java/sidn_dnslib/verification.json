@@ -1,0 +1,85 @@
+{
+  "kind": "third_party",
+  "api": "new nl.sidnlabs.dnslib.message.Message(new nl.sidnlabs.dnslib.message.util.NetworkData(byte[])) on local bytes; Header getters (id, qr, raw opcode/rcode, aa, tc, rd, ra, z, ad, cd), Question getters, section RRsets flattened in order with each record's raw type/class, ttl and typed fields (A/AAAA getAddress, CNAME getCname, MX getPreference/getExchange)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T01:49:46.344733+00:00",
+  "manifest": "projects/dns/java/sidn_dnslib/manifest.json",
+  "image_id": "sha256:1cdd12c556e0c476e99b89865cfe83137f05f196a7fb38f66a085c5c42581fff",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "openjdk version \"25.0.5\" 2026-10-20 LTS",
+    "Jazzer v0.26.0"
+  ],
+  "source_sha256": "87478ae9851b7debef9a5a68b4ebac42382d6159eb87574263489d9ea8abb5ea",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "project_file_sha256": {
+    "Dockerfile": "433b0a5bcaf5639102798a05189ff2a90daae9655725ac57e11c2732bf376910",
+    "SidnDnslibHarness.java": "931b9e1b084aacfc126ada8df32b5f83e75270aad8892b8002f80c213276d28b",
+    "manifest.json": "0d202b8d85c0f7b2f1331cb397a3d6f58ddd3fa00750b45d511364ce74f8efa3",
+    "run-control.sh": "be66f7846c75603650fee54cc003133329cc8abfa66afb9f2fe22636dff96b88",
+    "source-lock.json": "814e520be8a4c48616c9d347a8022b9ade6ad26b0effe2a32d38a000e88d5320"
+  },
+  "output": {
+    "id": 43981,
+    "qr": 1,
+    "opcode": 0,
+    "aa": 0,
+    "tc": 0,
+    "rd": 1,
+    "ra": 1,
+    "z": 0,
+    "rcode": 0,
+    "qdcount": 1,
+    "ancount": 4,
+    "nscount": 0,
+    "arcount": 0,
+    "questions": [
+      {
+        "name": "www.example.test.",
+        "type": 1,
+        "class": 1
+      }
+    ],
+    "answers": [
+      {
+        "name": "www.example.test.",
+        "type": 5,
+        "class": 1,
+        "ttl": 3600,
+        "rdata": "example.test."
+      },
+      {
+        "name": "example.test.",
+        "type": 1,
+        "class": 1,
+        "ttl": 300,
+        "rdata": "192.0.2.10"
+      },
+      {
+        "name": "example.test.",
+        "type": 28,
+        "class": 1,
+        "ttl": 600,
+        "rdata": "2001:db8::10"
+      },
+      {
+        "name": "example.test.",
+        "type": 15,
+        "class": 1,
+        "ttl": 7200,
+        "rdata": "10 mail.example.test."
+      }
+    ],
+    "authority": [],
+    "additional": []
+  },
+  "parser_source_files": 17,
+  "parser_source_lines_covered": 445,
+  "format_specific_source_lines_covered": 71,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/dns/java/sidn_dnslib/target/coverage/coverage.json",
+  "pass": true
+}
