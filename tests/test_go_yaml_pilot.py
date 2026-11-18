@@ -46,7 +46,8 @@ class GoYamlPilotTest(unittest.TestCase):
                 self.assertGreater(receipt["parser_source_lines_covered"], 0)
                 self.assertEqual(manifest["control_sha256"],
                                  sha256((ROOT / manifest["control"]).read_bytes()).hexdigest())
-                lock = read(project / "source-lock.json")[row["module"]]
+                lock = read(project / "source-lock.json")[row["name"]]
+                self.assertEqual(lock.get("go_module", row["name"]), row["module"])
                 self.assertEqual(lock["source_sha256"], manifest["source_sha256"])
                 self.assertIn(manifest["source_sha256"], (project / "Dockerfile").read_text())
                 self.assertIn(f"{row['module']} {row['version']} {lock['go_module_sum']}",
@@ -112,11 +113,29 @@ class GoYamlPilotTest(unittest.TestCase):
         manifest = read(ROOT / "projects/yaml/go/go_yaml_in_yaml_v4/manifest.json")
         self.assertEqual(manifest["coverage_subject_prefix"], "go.yaml.in/yaml/v4/")
 
+    def test_go_rotini_harness_keeps_mapping_order(self):
+        if not any(row["name"] == "github.com/go-rotini/yaml" for row in self.parsers):
+            self.skipTest("go-rotini/yaml not selected")
+        project = ROOT / "projects/yaml/go/github_com_go_rotini_yaml"
+        harness = (project / "harness.go").read_text()
+        self.assertIn('"github.com/go-rotini/yaml"', harness)
+        self.assertIn("yaml.WithOrderedMap()", harness)
+        self.assertIn("case yaml.MapSlice:", harness)
+        self.assertNotIn("goccy", harness)
+        self.assertIn("-coverpkg=github.com/go-rotini/yaml/...", (project / "Dockerfile").read_text())
+        manifest = read(project / "manifest.json")
+        self.assertEqual(manifest["coverage_subject_prefix"], "github.com/go-rotini/yaml/")
+        row = next(row for row in self.parsers if row["name"] == "github.com/go-rotini/yaml")
+        self.assertEqual(row["popularity"]["value"], 2)
+        self.assertIn("independent", row["family"])
+
     def test_round_four_leads_are_decided(self):
         leads = {lead["name"]: lead for lead in read(CELL / "leads.json")}
         check = read(CELL / "round4-lead-check.json")
         self.assertEqual(self.cell["leads_recorded"], len(leads))
-        lowest = min(row["popularity"]["value"] for row in self.parsers)
+        # Paths promoted in later rounds rank below every round-4 lead; compare with the round-4 selection.
+        lowest = min(row["popularity"]["value"] for row in self.parsers
+                     if not leads[row["name"]]["found_by"].endswith("_round_6"))
         for name, metric in check["metrics"].items():
             with self.subTest(lead=name):
                 lead = leads[name]

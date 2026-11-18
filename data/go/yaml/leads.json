@@ -60,6 +60,21 @@
     "evidence": "projects/yaml/go/go_yaml_in_yaml_v4/verification.json"
   },
   {
+    "name": "github.com/go-rotini/yaml",
+    "status": "selected",
+    "metric_value": 2,
+    "metric_error": null,
+    "family": "go-rotini/yaml",
+    "api_hint": "yaml.UnmarshalWithOptions(..., yaml.WithOrderedMap())",
+    "note": "Round 6: pkg.go.dev search 'yaml decoder' hit rank 11 (2 Imported by); own pure-Go YAML 1.2.2 implementation.",
+    "found_by": "registry_search_round_6",
+    "source": "https://pkg.go.dev/github.com/go-rotini/yaml",
+    "reason": "Selected: pinned v1.2.6 module zip; yaml.UnmarshalWithOptions([]byte, *interface{}, yaml.WithOrderedMap()) over one complete local YAML byte slice gives the oracle typed tree on both controls; 1062 package lines covered; three identical AFL++ runs per control, controls differ by 62 parser blocks and 61 tuples.",
+    "version_seen": "v1.2.6",
+    "license": "MIT",
+    "evidence": "projects/yaml/go/github_com_go_rotini_yaml/verification.json"
+  },
+  {
     "name": "github.com/ghodss/yaml",
     "status": "excluded_control_failed",
     "metric_value": 19254,

@@ -1,10 +1,10 @@
 # Go × YAML: selected parsers (pilot)
 
-Four control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection, and the leads below the line are not counted (evidence: [lead-check.json](lead-check.json)). yaml.v2, yaml.v3 and go.yaml.in/yaml/v4 share the go-yaml lineage (Go ports of the libyaml scanner and parser, one code base per major version); goccy/go-yaml is an independent implementation.
+Five control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection, and the leads below the line are not counted (evidence: [lead-check.json](lead-check.json)). yaml.v2, yaml.v3 and go.yaml.in/yaml/v4 share the go-yaml lineage (Go ports of the libyaml scanner and parser, one code base per major version); goccy/go-yaml and go-rotini/yaml are independent implementations.
 
 ## Primary within-cell adoption metric
 
-pkg.go.dev Imported by package count, captured 2026-11-17 ([snapshot](registry-snapshot.json)). Package adoption, not YAML-specific use.
+pkg.go.dev Imported by package count, captured 2026-11-17 (rounds 1-4) and 2026-11-18 (round 6) ([snapshot](registry-snapshot.json)). Package adoption, not YAML-specific use.
 
 | Rank | Package | Release | Metric | Local input API | Parser family |
 | ---: | --- | --- | ---: | --- | --- |
@@ -12,6 +12,7 @@ pkg.go.dev Imported by package count, captured 2026-11-17 ([snapshot](registry-s
 | 2 | [gopkg.in/yaml.v3](https://pkg.go.dev/gopkg.in/yaml.v3@v3.0.1#Node) | v3.0.1 | 44,731 | yaml.Unmarshal([]byte, *yaml.Node) over one complete local YAML byte slice | go-yaml v3 |
 | 3 | [github.com/goccy/go-yaml](https://pkg.go.dev/github.com/goccy/go-yaml@v1.19.2#UnmarshalWithOptions) | v1.19.2 | 2,983 | yaml.UnmarshalWithOptions([]byte, *interface{}, yaml.UseOrderedMap()) over one complete local YAML byte slice | goccy/go-yaml |
 | 4 | [go.yaml.in/yaml/v4](https://pkg.go.dev/go.yaml.in/yaml/v4@v4.0.0#Load) | v4.0.0 | 376 | yaml.Load([]byte, *yaml.Node) with the default v4 options over one complete local YAML byte slice | go-yaml v4 |
+| 5 | [github.com/go-rotini/yaml](https://pkg.go.dev/github.com/go-rotini/yaml@v1.2.6#UnmarshalWithOptions) | v1.2.6 | 2 | yaml.UnmarshalWithOptions([]byte, *interface{}, yaml.WithOrderedMap()) over one complete local YAML byte slice | go-rotini/yaml |
 
 ## Unselected leads
 
