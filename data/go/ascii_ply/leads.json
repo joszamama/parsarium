@@ -268,5 +268,85 @@
     "source": "https://github.com/gotoeasy/gsbox",
     "discovery_route": "GitHub repository search ply language:Go (round 4)",
     "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "github.com/flywave/go-assimp",
+    "status": "excluded_no_license",
+    "reason": "1 importer (flywave/go-3dasset). Assimp binding with a prebuilt static libassimp.a; the module has no LICENSE file and pkg.go.dev reports 'License: None detected', so there is no open-source licence evidence. Its ImportFile API derives from the selected bloeys/assimp-go asig (401 of asig v0.6.0's 695 distinct non-test lines, 57.7%, occur in it).",
+    "source": "https://pkg.go.dev/github.com/flywave/go-assimp",
+    "discovery_route": "pkg.go.dev package search 'assimp' (round 5)",
+    "round": "2026-11-18 round 5"
+  },
+  {
+    "name": "github.com/bloeys/nmage/meshes",
+    "status": "excluded_wrapper_of_selected_path",
+    "reason": "3 importers (the author's flappy-nmage and nterm modules). meshes.NewMesh(name, path, flags) calls the selected github.com/bloeys/assimp-go asig.ImportFile and uploads the result to OpenGL vertex/index buffers (it needs a GL context); it has no PLY parsing of its own and adds no parser beyond the already selected binding, so it is not a separate parser path.",
+    "source": "https://pkg.go.dev/github.com/bloeys/nmage/meshes",
+    "discovery_route": "pkg.go.dev package search 'mesh' (round 5)",
+    "round": "2026-11-18 round 5"
+  },
+  {
+    "name": "github.com/Adi146/goggle-engine/Core/Mesh",
+    "status": "excluded_dependency_does_not_build",
+    "reason": "8 importers; its model loading imports github.com/Adi146/assimp, the binding already recorded as not building (C.MAXLEN unavailable in its headers).",
+    "source": "https://pkg.go.dev/github.com/Adi146/goggle-engine/Core/Mesh",
+    "discovery_route": "pkg.go.dev package search 'mesh' (round 5)",
+    "round": "2026-11-18 round 5"
+  },
+  {
+    "name": "github.com/omustardo/gome/model/mesh",
+    "status": "excluded_no_ply_support",
+    "reason": "16 importers; game-engine mesh package of a module without any PLY reader (no PLY header parsing in the module source).",
+    "source": "https://pkg.go.dev/github.com/omustardo/gome/model/mesh",
+    "discovery_route": "pkg.go.dev package search 'mesh' (round 5)",
+    "round": "2026-11-18 round 5"
+  },
+  {
+    "name": "github.com/Patch2PDF/GDTF-Mesh-Reader/v2",
+    "status": "excluded_no_ply_support",
+    "reason": "4 importers; reads the meshes embedded in GDTF fixture archives; the module has no PLY reader.",
+    "source": "https://pkg.go.dev/github.com/Patch2PDF/GDTF-Mesh-Reader/v2",
+    "discovery_route": "pkg.go.dev package search 'mesh' (round 5)",
+    "round": "2026-11-18 round 5"
+  },
+  {
+    "name": "github.com/galaco/lambda-core/mesh",
+    "status": "excluded_no_ply_support",
+    "reason": "2 importers; Source-engine (BSP/MDL) mesh types; the module has no PLY reader.",
+    "source": "https://pkg.go.dev/github.com/galaco/lambda-core/mesh",
+    "discovery_route": "pkg.go.dev package search 'mesh' (round 5)",
+    "round": "2026-11-18 round 5"
+  },
+  {
+    "name": "github.com/adamcolton/geom/d3/solid/mesh",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "0 importers on pkg.go.dev, and the module has no PLY reader.",
+    "source": "https://pkg.go.dev/github.com/adamcolton/geom/d3/solid/mesh",
+    "discovery_route": "pkg.go.dev package search 'mesh' (round 5)",
+    "round": "2026-11-18 round 5"
+  },
+  {
+    "name": "github.com/flywave/go-ply",
+    "status": "excluded_no_importable_package",
+    "reason": "GitHub repository listed in the round-4 search; pkg.go.dev returns 404 for the path (no indexed package page or importer count), so there is no primary metric.",
+    "source": "https://github.com/flywave/go-ply",
+    "discovery_route": "pkg.go.dev imported-by lookup (round 5)",
+    "round": "2026-11-18 round 5"
+  },
+  {
+    "name": "github.com/Carmen-Shannon/oxy-go/engine/loader",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "pkg.go.dev reports 'No known importers for this package'; a game-engine loader interface found by the '3d model loader' search.",
+    "source": "https://pkg.go.dev/github.com/Carmen-Shannon/oxy-go/engine/loader",
+    "discovery_route": "pkg.go.dev package search '3d model loader' (round 5)",
+    "round": "2026-11-18 round 5"
+  },
+  {
+    "name": "github.com/andrebq/assimp",
+    "status": "excluded_same_path_family",
+    "reason": "1 importer; the root package holds only the Go scene types that conv.LoadAsset fills. The selected path is github.com/andrebq/assimp/conv (2 importers), which is the package with the PLY input API.",
+    "source": "https://pkg.go.dev/github.com/andrebq/assimp",
+    "discovery_route": "pkg.go.dev package search 'assimp' (round 5)",
+    "round": "2026-11-18 round 5"
   }
 ]
