@@ -9,8 +9,8 @@ This format is incomplete across the eight ecosystems. Each row reports only doc
 | [C](c/README.md) | pilot_search_bounded_none_selected | 0 | 0 |
 | [C++](cpp/README.md) | pilot_three_selected_search_bounded | 3 | 3 |
 | [Go](go/README.md) | pilot_three_selected_search_bounded | 3 | 3 |
-| [Java](java/README.md) | pilot_five_selected_search_bounded | 5 | 5 |
-| [JavaScript](javascript/README.md) | pilot_four_selected_search_bounded | 4 | 4 |
-| [Python](python/README.md) | pilot_four_selected_search_bounded | 4 | 4 |
-| [Rust](rust/README.md) | pilot_five_selected_search_bounded | 5 | 5 |
+| [Java](java/README.md) | pilot_six_selected_search_bounded | 6 | 6 |
+| [JavaScript](javascript/README.md) | pilot_six_selected_search_bounded | 6 | 6 |
+| [Python](python/README.md) | pilot_seven_selected_search_bounded | 7 | 7 |
+| [Rust](rust/README.md) | pilot_nine_selected_search_bounded | 9 | 9 |
 | [PHP](php/README.md) | pilot_three_selected_search_bounded | 3 | 3 |
