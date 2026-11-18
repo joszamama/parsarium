@@ -255,3 +255,10 @@
   ]
 }
 ```
+
+## Run this target
+
+```sh
+python3 parsarium.py build yaml php purrphp_yaml
+python3 parsarium.py run yaml php purrphp_yaml controls/yaml/catalog.yaml
+```

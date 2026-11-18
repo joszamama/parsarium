@@ -248,3 +248,10 @@
 ## Verification scope
 
 Both valid schema-neutral YAML 1.2 controls give exact typed trees equal to the hand-written expected trees in controls/yaml/check_controls.py (cross-checked there with Ruby Psych/libyaml), with no YamlError. The controls avoid integral-valued floats and integer-like keys, so the JavaScript number and key-order limits cannot change the result. They do not test tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed input.
+
+## Run this target
+
+```sh
+python3 parsarium.py build yaml javascript yaml_min
+python3 parsarium.py run yaml javascript yaml_min controls/yaml/catalog.yaml
+```
