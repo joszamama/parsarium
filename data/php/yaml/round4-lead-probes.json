@@ -1,0 +1,34 @@
+{
+ "checked_at": "2026-11-18",
+ "environment": "composer:2 image (PHP 8.5.12 CLI, linux/arm64); exploratory probes on both valid controls, not pinned harnesses (purrphp/yaml is gated separately in projects/yaml/php/purrphp_yaml)",
+ "oracle": "hand-written typed trees in controls/yaml/check_controls.py; mappings must arrive as stdClass or a node type distinct from sequences",
+ "probes": [
+  {
+   "package": "purrphp/yaml",
+   "version": "1.0.0",
+   "call": "(new YamlStreamSingle())->fromString(text) node model + CoreSchema::resolve",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": true
+    },
+    "order.yaml": {
+     "matches_oracle": true
+    }
+   }
+  },
+  {
+   "package": "taufik-nurrohman/y-a-m-l",
+   "version": "v2.0.3",
+   "call": "x\\y_a_m_l\\from(text)",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": true
+    },
+    "order.yaml": {
+     "matches_oracle": false,
+     "difference": "document wrapped in an extra list; '|-' block loses the more-indented line's indentation"
+    }
+   }
+  }
+ ]
+}

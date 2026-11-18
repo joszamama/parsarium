@@ -148,6 +148,19 @@
     "evidence": "data/php/yaml/round2-lead-probes.json"
   },
   {
+    "name": "webignition/yaml-document-set-parser",
+    "status": "excluded",
+    "metric_value": 84925,
+    "metric_error": null,
+    "family": "document splitter (no YAML parser)",
+    "api_hint": "Parser::parse(string)",
+    "note": null,
+    "found_by": "round_4_github_search",
+    "source": "https://packagist.org/packages/webignition/yaml-document-set-parser",
+    "reason": "Not a YAML parser: 2.0 src/Parser.php trims the text, checks the '---'/'...' markers and explode()s it into a list of document strings; it requires no YAML library and returns no values. Not run.",
+    "version_seen": "2.0"
+  },
+  {
     "name": "xp-forge/yaml",
     "status": "excluded",
     "metric_value": 36737,
@@ -188,6 +201,19 @@
     "reason": "Concrete-syntax-tree and patching library over libtree-sitter and tree-sitter-yaml through ext-ffi; it returns CST nodes and mapping-pair indexes, not the document's values (no scalar typing or alias expansion), so it has no documented value-tree API for the typed-tree control. Not probed."
   },
   {
+    "name": "eureka/component-yaml",
+    "status": "excluded",
+    "metric_value": 3704,
+    "metric_error": null,
+    "family": "Spyc 0.5.1 (renamed copy)",
+    "api_hint": "Yaml::loadString(string)",
+    "note": null,
+    "found_by": "round_4_github_search",
+    "source": "https://packagist.org/packages/eureka/component-yaml",
+    "reason": "Not counted: 1.1.1 src/Yaml.php is Spyc 0.5.1 renamed for the Eureka framework (its header credits Spyc's authors, links mustangostang/spyc and states 'Rename class / methods'); Spyc fails both controls (spyc-valid-control-probe.json). Not run.",
+    "version_seen": "1.1.1"
+  },
+  {
     "name": "secondparty/dipper",
     "status": "excluded",
     "metric_value": 2553,
@@ -200,6 +226,19 @@
     "reason": "Own subset parser that fails both controls: quoted scalars keep their quotes and escapes, anchors/aliases are not supported, and the block-sequence root of order.yaml is misread as a mapping.",
     "version_probed": "v0.5.2",
     "evidence": "data/php/yaml/round2-lead-probes.json"
+  },
+  {
+    "name": "yalesov/yaml",
+    "status": "excluded",
+    "metric_value": 1694,
+    "metric_error": null,
+    "family": "symfony/yaml (Yaml::parse into PHP arrays)",
+    "api_hint": "Yaml::parse(file)",
+    "note": null,
+    "found_by": "round_4_github_search",
+    "source": "https://packagist.org/packages/yalesov/yaml",
+    "reason": "Not counted: wrapper around symfony/yaml (composer require symfony/yaml) that adds __DIR__ substitution; it returns Yaml::parse PHP arrays, so {} and [] cannot be told apart (round-2 mapping-layer rule). Not run.",
+    "version_seen": "v2.0.4"
   },
   {
     "name": "charcoal-dev/yaml",
@@ -216,6 +255,18 @@
     "evidence": "data/php/yaml/round2-lead-probes.json"
   },
   {
+    "name": "klausi/yaml_comments",
+    "status": "excluded",
+    "metric_value": 1482,
+    "metric_error": null,
+    "family": "Symfony Yaml fork (comment-preserving)",
+    "api_hint": "Yaml parse with comments",
+    "note": null,
+    "found_by": "round_4_github_search",
+    "source": "https://packagist.org/packages/klausi/yaml_comments",
+    "reason": "Not counted: no tagged release on Packagist (only 0.x-dev and a branch), so no pinned release exists; it is a GPLv2+ Symfony Yaml derivative that keeps comment lines. Not run."
+  },
+  {
     "name": "comely-io/yaml",
     "status": "excluded",
     "metric_value": 1445,
@@ -228,6 +279,31 @@
     "reason": "Own line parser that fails both controls: a TypeError on catalog.yaml and a flattened, string-valued tree for order.yaml.",
     "version_probed": "2.0.0",
     "evidence": "data/php/yaml/round2-lead-probes.json"
+  },
+  {
+    "name": "sndsgd/yaml",
+    "status": "excluded",
+    "metric_value": 1298,
+    "metric_error": null,
+    "family": "libyaml via ext-yaml (pecl/yaml family)",
+    "api_hint": "yaml_parse wrapper",
+    "note": null,
+    "found_by": "round_4_github_search",
+    "source": "https://packagist.org/packages/sndsgd/yaml",
+    "reason": "Not counted: requires ext-yaml and wraps yaml_parse with callbacks and file helpers; the parse step is the selected pecl/yaml path over libyaml. Not run.",
+    "version_seen": "v0.0.7"
+  },
+  {
+    "name": "pieter/yaml",
+    "status": "excluded",
+    "metric_value": 1276,
+    "metric_error": null,
+    "family": "symfony/yaml 2.5.5 via a Laravel 4 loader",
+    "api_hint": "Laravel config loader",
+    "note": null,
+    "found_by": "round_4_github_search",
+    "source": "https://packagist.org/packages/pieter/yaml",
+    "reason": "Not counted: Laravel 4 service provider over symfony/yaml 2.5.5 (l4yaml); configuration loader returning PHP arrays (round-2 mapping-layer rule) with no tagged release. Not run."
   },
   {
     "name": "phpalchemy/yaml",
@@ -270,6 +346,19 @@
     "evidence": "data/php/yaml/round2-lead-probes.json"
   },
   {
+    "name": "aeliot/yaml-token",
+    "status": "excluded",
+    "metric_value": 352,
+    "metric_error": null,
+    "family": "yaml-token own lexer and node/token tree",
+    "api_hint": "undocumented",
+    "note": null,
+    "found_by": "round_4_github_search",
+    "source": "https://packagist.org/packages/aeliot/yaml-token",
+    "reason": "Not counted: 0.1.0 builds a lossless node and token structure of the source text for analysis and editing; the README documents no parse entry point or value API and nodes carry raw token text rather than typed values (syntax-tree rule, like tree-sitter-yaml). Not run.",
+    "version_seen": "0.1.0"
+  },
+  {
     "name": "maxbeckers/php-yaml-parser",
     "status": "excluded",
     "metric_value": 309,
@@ -284,6 +373,19 @@
     "evidence": "data/php/yaml/round2-lead-probes.json"
   },
   {
+    "name": "atphp/yaml",
+    "status": "excluded",
+    "metric_value": 257,
+    "metric_error": null,
+    "family": "wrapper over several YAML parsers",
+    "api_hint": "Yaml::parse",
+    "note": null,
+    "found_by": "round_4_github_search",
+    "source": "https://packagist.org/packages/atphp/yaml",
+    "reason": "Not counted: wrapper that dispatches to other YAML parsers (its description: 'Wrapper for various Yaml parser/dumper'); no parser of its own. Not run.",
+    "version_seen": "v0.1.1"
+  },
+  {
     "name": "gijsbos/yamlspeed",
     "status": "excluded",
     "metric_value": 132,
@@ -296,6 +398,46 @@
     "reason": "Own parser that fails both controls: \\u escapes stay undecoded and the folded scalar loses its line break (catalog.yaml); '---' adds a null item, the alias is null and the flow sequence becomes a mapping (order.yaml).",
     "version_probed": "1.1.3",
     "evidence": "data/php/yaml/round2-lead-probes.json"
+  },
+  {
+    "name": "rindow/rindow-module-yaml",
+    "status": "excluded",
+    "metric_value": 78,
+    "metric_error": null,
+    "family": "symfony/yaml via a Rindow module",
+    "api_hint": "configuration loader",
+    "note": null,
+    "found_by": "round_4_github_search",
+    "source": "https://packagist.org/packages/rindow/rindow-module-yaml",
+    "reason": "Not counted: Rindow framework module that requires symfony/yaml and returns its PHP arrays (mapping-layer rule). Not run.",
+    "version_seen": "1.0.0"
+  },
+  {
+    "name": "nigatedev/yaml",
+    "status": "excluded",
+    "metric_value": 28,
+    "metric_error": null,
+    "family": "symfony/yaml v5.3.6",
+    "api_hint": "Yaml parse wrapper",
+    "note": null,
+    "found_by": "round_4_github_search",
+    "source": "https://packagist.org/packages/nigatedev/yaml",
+    "reason": "Not counted: requires symfony/yaml v5.3.6 and returns its PHP arrays (mapping-layer rule). Not run.",
+    "version_seen": "v1.0.1"
+  },
+  {
+    "name": "taufik-nurrohman/y-a-m-l",
+    "status": "excluded",
+    "metric_value": 27,
+    "metric_error": null,
+    "family": "y-a-m-l own pure-PHP converter (Mecha CMS)",
+    "api_hint": "x\\y_a_m_l\\from(string)",
+    "note": null,
+    "found_by": "round_4_github_search",
+    "source": "https://packagist.org/packages/taufik-nurrohman/y-a-m-l",
+    "reason": "Pinned v2.0.3 (standalone version of the excluded mecha-cms/x.y-a-m-l) matches catalog.yaml through the documented from(string) but fails order.yaml: the '---'...'...' document is wrapped in an extra list, and the more-indented line of the strip-chomped literal block loses its indentation ('kept\\nindented').",
+    "version_probed": "v2.0.3",
+    "evidence": "data/php/yaml/round4-lead-probes.json"
   },
   {
     "name": "tbela99/yaml",
