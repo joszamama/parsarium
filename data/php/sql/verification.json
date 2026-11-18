@@ -749,8 +749,100 @@
       "parser_feature_difference": 995,
       "project_receipt": "projects/sql/php/bleksak_sqlite_toolkit/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/php/bleksak_sqlite_toolkit/differential.json"
+    },
+    {
+      "package": "vimeo/php-mysql-engine",
+      "version": "0.7.15",
+      "pass": true,
+      "input_api": "Vimeo\\MysqlEngine\\Parser\\SQLParser::parse(local SQL text of one statement) -> SelectQuery | InsertQuery | UpdateQuery | ... query object",
+      "dialect": "MySQL 5.6 subset (the only dialect; no option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
+      "parser_source_files": 17,
+      "parser_source_lines_covered": 534,
+      "afl_tuple_difference": 442,
+      "parser_feature_difference": 448,
+      "project_receipt": "projects/sql/php/vimeo_php_mysql_engine/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/php/vimeo_php_mysql_engine/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T23:31:54.841896+00:00"
+  "checked_at_utc": "2026-11-18T00:44:10.657679+00:00"
 }

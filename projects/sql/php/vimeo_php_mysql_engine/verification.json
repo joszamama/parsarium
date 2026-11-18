@@ -1,0 +1,67 @@
+{
+  "kind": "third_party",
+  "api": "Vimeo\\MysqlEngine\\Parser\\SQLParser::parse(local SQL text of one statement) -> SelectQuery | InsertQuery | UpdateQuery | ... query object",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T00:43:37.664939+00:00",
+  "manifest": "projects/sql/php/vimeo_php_mysql_engine/manifest.json",
+  "image_id": "sha256:f92bd95e8bfee9acb480c3033371bfc56e33d8e8df83f1074280b37e9bdc4cd4",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "source_sha256": "5a31d047f8817951cb1428324e80541966264eda3f04923b3fbcbaf7372bd4fd",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "8067319f35f7b5f774a790f0e35fd4befaffdedc6ad899122e0ed74a6c802e52",
+    "composer.json": "32ddaf3d763672aa9468068935e269729e1a13d902328e27d21f0c19d4b3bf2f",
+    "composer.lock": "7b68f58b9c24872858160bec80b9fbf18dabeac76490971edd4dd9fa1a514223",
+    "fuzz-target.php": "ce06aa611e84b8baa762a0943ec8119dee8da50fb90b3aad5a9142de98d474a2",
+    "harness.php": "df395940fceece9e92551d2f1a7754bcd9c43a59c8103dbd9636a3e9a0d6686a",
+    "manifest.json": "293e6e81470866ccdbd7c56a2123a78e154e8ced5fc3e3d394b4220d644825af",
+    "replay.php": "44ce32d4c2d4c0e07d4deed4f438cb6a7f754ba92e62f29519aafb36b1f22188",
+    "run-control.php": "ef9cda24b7d9ca9f7d420ff634e948a5d54446563a4a3ec71035cf95b38ad9d3",
+    "source-lock.json": "717e5027da05d4a855049e2fa9afa99c2d12a6f54cb1db3da787e9a38ad63783",
+    "target.json": "63cfe259f6c38914b48989f42613b0fdaaceed0ed8d8098bd7962766a8eb081c"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 17,
+  "parser_source_lines_covered": 534,
+  "format_specific_source_lines_covered": 99,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/php/vimeo_php_mysql_engine/target/coverage/coverage.json",
+  "pass": true
+}

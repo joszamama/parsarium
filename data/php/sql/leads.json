@@ -418,6 +418,16 @@
       "family": null,
       "documented_api_lead": null,
       "reason": "Zero Packagist downloads and no tagged release (dev-main only)."
+    },
+    {
+      "name": "vimeo/php-mysql-engine",
+      "status": "selected",
+      "metric_value": 312980,
+      "metric_error": null,
+      "latest_release_observed": "0.7.15",
+      "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
+      "documented_api_lead": "https://github.com/vimeo/php-mysql-engine/blob/780c49d233834dc91d5b5624c0a709080e238682/src/Parser/SQLParser.php",
+      "reason": "Round-4 search hit (\"mysql engine\", 2026-11-18). In-memory MySQL simulation for tests whose README says it parses SELECT, INSERT, UPDATE and DELETE with a validating query parser. The public final class Vimeo\\MysqlEngine\\Parser\\SQLParser::parse($sql) (docblock-typed; not described in the README) returns SelectQuery/InsertQuery objects with FromClause tables, expression trees, groupBy and orderBy; it is called directly, without FakePdo, so nothing is executed. Both valid controls equal the oracle (the adapter cuts at the package SQLLexer's ';' lexemes because parse() rejects the terminator after INSERT or FROM). Engine-with-public-parser precedent: DuckDB in the C++ cell."
     }
   ]
 }

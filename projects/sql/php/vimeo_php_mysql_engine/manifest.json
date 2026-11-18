@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "php",
+  "pilot": true,
+  "package": "vimeo/php-mysql-engine",
+  "release": "0.7.15",
+  "catalog_parser": "data/php/sql/parsers.json",
+  "source_lock": "projects/sql/php/vimeo_php_mysql_engine/source-lock.json",
+  "source_sha256": "5a31d047f8817951cb1428324e80541966264eda3f04923b3fbcbaf7372bd4fd",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in vimeo/php-mysql-engine PHP source (SQLLexer, SQLParser and the Select/From/Insert/Expression/OrderBy parsers and Query classes); php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/vimeo/php-mysql-engine/",
+  "format_specific_coverage_file_suffix": "/src/Parser/SQLParser.php",
+  "scope": "SQL text from local bytes, cut at each ';' lexeme of the package SQLLexer (the ';' is dropped and whitespace-only pieces are skipped), each piece passed to SQLParser::parse(), which returns one query object per statement (SelectQuery, InsertQuery). The harness reads SelectQuery selectExpressions, whereClause, groupBy and orderBy and InsertQuery table, insertColumns and values rows, and walks the public properties of the query and expression objects (each object once) for FromClause table names and joined tables, FunctionExpression names and string/numeric ConstantExpression values (numbers converted from the parser's int/float to text, which equals the source text for the controls). The FakePdo engine is not used; nothing is executed.",
+  "summary_command": [
+    "/usr/bin/php",
+    "/work/replay.php",
+    "/input/case"
+  ],
+  "dialect": "MySQL 5.6 subset (the only dialect; no option)",
+  "parser_family": "vimeo/php-mysql-engine: hand-written MySQL lexer and recursive parsers producing query and expression objects, a PHP port of Slack's Hack SQL Fake (hack-sql-fake, Hack); independent of the phpMyAdmin, PHP-SQL-Parser, pg_builder, crodas, libpg_query and bleksak code bases",
+  "api": "Vimeo\\MysqlEngine\\Parser\\SQLParser::parse(local SQL text of one statement) -> SelectQuery | InsertQuery | UpdateQuery | ... query object"
+}
