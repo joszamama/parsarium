@@ -8,6 +8,7 @@ import tomllib
 import xml.etree.ElementTree as ET
 
 from audit_popularity_coverage import build_report
+from audit_upstream_repositories import parser_keys, problems as upstream_problems
 from build_matrix import ECOSYSTEMS, FORMATS
 from format_registry import PILOT_FORMATS
 
@@ -428,6 +429,9 @@ def main() -> None:
         assert cell["verified_standard_or_runtime_count"] == len(read(f"{key}/standard.json")["verified_apis"])
     assert read("data/popularity-coverage.json") == build_report()
     validate_pilot_cells()
+    upstream = upstream_problems(read("data/curation/upstream-repositories.json"), parser_keys())
+    if upstream:
+        raise ValueError("upstream repository links: " + "; ".join(upstream[:5]))
     print(f"Validated {len(matrix)} active cells and {len(ECOSYSTEMS) * len(PILOT_FORMATS)} "
           "explicitly incomplete pilot cells")
 
