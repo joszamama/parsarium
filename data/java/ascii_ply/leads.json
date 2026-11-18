@@ -3,7 +3,13 @@
     "name": "Ardor3D PlyImporter",
     "status": "unresolved",
     "source": "https://jogamp.org/deployment/ardor3d/javadoc/com/ardor3d/extension/model/ply/PlyImporter.BinaryPlyReader.html",
-    "reason": "JogAmp Javadoc documents a PlyImporter, but the tagged upstream Ardor3D 1.6.0 tree lacks that class; the documented JogAmp build is a 1.0-SNAPSHOT continuation. A pinned released artifact containing the importer and an ASCII control run remain unestablished."
+    "reason": "JogAmp Javadoc documents a PlyImporter, but no tagged release contains it. Round 6: Renanse/Ardor3D's newest tag is still v1.6.0 (no PlyImporter in that repository), the JogAmp ardor3d.git refs list only the old v0.8 and v0.9 tags (the importer is in the 1.0-SNAPSHOT continuation), and Maven Central com.ardor3d stops at 1.0.0. The JogAmp tree pages sit behind a proof-of-work bot check, which was not bypassed. A pinned released artifact containing the importer remains unestablished.",
+    "round": "2026-11-18 round 6",
+    "round6_evidence": [
+      "https://api.github.com/repos/Renanse/Ardor3D/tags",
+      "https://jogamp.org/cgit/ardor3d.git/refs/",
+      "https://search.maven.org/solrsearch/select?q=a:ardor3d-extras&core=gav"
+    ]
   },
   {
     "name": "ArtiSynth Maspack PlyReader",
@@ -54,7 +60,8 @@
     "reason": "unibas-gravis/scalismo-faces (123 stars, Apache-2.0) ships its own Scala PLY reader (scalismo.faces.io.ply.PlyMeshReader), but deps.dev records 0 direct dependents for the exact Maven Central releases ch.unibas.cs.gravis:scalismo-faces_2.13:0.90.0 and _2.12:0.90.0. A recorded zero is not a missing value, so the star fallback does not apply.",
     "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/ch.unibas.cs.gravis%3Ascalismo-faces_2.13/versions/0.90.0:dependents",
     "discovery_route": "GitHub code search \"end_header\" language:Scala (round 4)",
-    "round": "2026-11-18 round 4"
+    "round": "2026-11-18 round 4",
+    "round6_note": "Unchanged in round 6: the cell treats a recorded 0 as zero adoption (plan reason zero_recorded_adoption); the PLY star fallback applies only when the primary value is missing (null)."
   },
   {
     "name": "scalismo_2.13 0.91.1",
@@ -67,10 +74,16 @@
   {
     "name": "ShapeNet/shapenet-viewer PLYLoader",
     "status": "unresolved",
-    "reason": "MIT application (190 stars, tag v0.1.0) with a jME3 AssetLoader, edu.stanford.graphics.shapenet.jme3.plugins.PLYLoader, that parses PLY through jPLY 0.2.0 (the jPLY family already counted via jzy3d-core). No library artifact is published, and the tag's pinned com.jme3:jme3-core 3.0.10 resolves only from the offline updates.jmonkeyengine.org repository (HTTP 404 on Maven Central), so the tagged loader cannot be rebuilt as pinned.",
+    "reason": "MIT application (190 stars, tag v0.1.0) with a jME3 AssetLoader, edu.stanford.graphics.shapenet.jme3.plugins.PLYLoader, that parses PLY through jPLY 0.2.0 (the jPLY family already counted via jzy3d-core). No library artifact is published. Round 6 rechecked the tag's pinned com.jme3 3.0.10 dependencies (jme3-core, -plugins, -effects, -jbullet, -niftygui, -desktop, -lwjgl): Maven Central has no com.jme3 group (org.jmonkeyengine starts at 3.1.0-alpha), jcenter.bintray.com now redirects to Maven Central (404), maven.scijava.org, maven.imagej.net, jitpack.io and dl.bintray.com return 404, and jMonkeyEngine/jmonkeyengine has no 3.0.x tag or release asset. The Internet Archive holds listings and javadoc jars of the retired updates.jmonkeyengine.org/maven repository, but the service was offline during the check and an archived copy is not a registry release, so the tagged loader still cannot be rebuilt as pinned.",
     "source": "https://github.com/ShapeNet/shapenet-viewer/blob/v0.1.0/src/main/java/edu/stanford/graphics/shapenet/jme3/plugins/PLYLoader.java",
-    "discovery_route": "GitHub code search PlyReader language:Java (round 4)",
-    "round": "2026-11-18 round 4"
+    "discovery_route": "GitHub code search PlyReader language:Java (round 4); dependency mirrors rechecked in round 6",
+    "round": "2026-11-18 round 6",
+    "round6_evidence": [
+      "https://repo1.maven.org/maven2/com/jme3/jme3-core/3.0.10/ (404)",
+      "https://jcenter.bintray.com/com/jme3/jme3-core/3.0.10/ (redirect to Maven Central, 404)",
+      "https://maven.scijava.org/content/groups/public/com/jme3/jme3-core/3.0.10/jme3-core-3.0.10.pom (404)",
+      "https://web.archive.org/cdx/search/cdx?url=updates.jmonkeyengine.org/maven/com/jme3/jme3-core/3.0.10/*"
+    ]
   },
   {
     "name": "dbrant/ModelViewer3D PlyModel",
@@ -111,5 +124,85 @@
     "source": "https://github.com/bytedeco/javacpp-presets/tree/master/opencv/src/gen/java/org/bytedeco/opencv/global",
     "discovery_route": "Maven/deps.dev check of OpenCV Java bindings (round 4)",
     "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "io.pdal:pdal_2.13 2.10.0",
+    "status": "verified",
+    "reason": "Promoted in round 6: PDAL/java Scala API over the pdal-native JNI glue and PDAL readers.ply; 1 deps.dev direct dependent (io.pdal:pdal-scala_2.13); pinned linux/amd64 Docker control and native PlyReader AFL++ feedback passed.",
+    "source": "https://github.com/PDAL/java/tree/v2.10.0",
+    "discovery_route": "Maven Central search g:io.pdal (round 6, point-cloud stacks)",
+    "round": "2026-11-18 round 6"
+  },
+  {
+    "name": "ch.unibas.cs.gravis:scalismo-vtk_3 1.0-RC1",
+    "status": "verified",
+    "reason": "Promoted in round 6: separate unibas-gravis repository and artifact whose MeshIO.readMesh parses PLY through VTK vtkPLYReader (VTK 9.1 Java natives); 2 deps.dev direct dependents (scalismo-asm_3, scalismo-ui_3); pinned linux/amd64 Docker control (stock and VTK 9.1.0 coverage natives) and native IO/PLY AFL++ feedback passed.",
+    "source": "https://github.com/unibas-gravis/scalismo-vtk/tree/v1.0-RC1",
+    "discovery_route": "Maven Central classname search c:vtkPLYReader (round 6)",
+    "round": "2026-11-18 round 6"
+  },
+  {
+    "name": "edu.jhuapl.ses.vtk:vtk-java 9.2.6.0",
+    "status": "excluded_no_public_source_release",
+    "reason": "JHU APL's Maven Central packaging of the VTK 9.2.6 Java wrapper (MIT POM; vtk.vtkPLYReader in vtk-java-generic, natives in vtk-java-linux-x86-64, a fork of the vtkjavanatives loader in vtk-java-selector). Its POM SCM is a placeholder (https://placeholder.com/not-a-public-site.git): there is no public source repository, tag or documentation for the packaging. The deps.dev dependents of every artifact are only the packaging's own sibling artifacts (vtk-java-generic 6: the five platform jars and vtk-java-all; vtk-java-all 1: vtk-java-example), so no external adoption is recorded either. Not pursued; the VTK parser family is already represented by f3d and scalismo-vtk_3.",
+    "source": "https://repo1.maven.org/maven2/edu/jhuapl/ses/vtk/vtk-java/9.2.6.0/vtk-java-9.2.6.0.pom",
+    "discovery_route": "Maven Central search 'vtk' and classname search c:vtkPLYReader (round 6)",
+    "round": "2026-11-18 round 6"
+  },
+  {
+    "name": "net.haesleinhuepf:clupath 0.5.0.1",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "Maven Central classname search c:PlyReader lists this CLIJ QuPath bundle; deps.dev records 0 direct dependents for its only release, so the star fallback does not apply.",
+    "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/net.haesleinhuepf%3Aclupath/versions/0.5.0.1:dependents",
+    "discovery_route": "Maven Central classname search c:PlyReader (round 6)",
+    "round": "2026-11-18 round 6"
+  },
+  {
+    "name": "org.hipparchus:hipparchus-geometry PLYParser",
+    "status": "excluded_test_only",
+    "reason": "Classname search c:PLYParser hits org.hipparchus.geometry.euclidean.threed.PLYParser, but the class and its pentomino .ply fixtures are only in the -tests classifier jar (checked in 4.0.1); the main hipparchus-geometry jar has no PLY API.",
+    "source": "https://repo1.maven.org/maven2/org/hipparchus/hipparchus-geometry/4.0.1/",
+    "discovery_route": "Maven Central classname search c:PlyParser (round 6)",
+    "round": "2026-11-18 round 6"
+  },
+  {
+    "name": "com.guicedee.services:commons-math3 PLYParser",
+    "status": "excluded_test_only",
+    "reason": "Classname search hit for a repackaged Apache Commons Math 3; the inspected 1.0.8.5 main jar has no PLYParser (the upstream class is a commons-math3 test helper).",
+    "source": "https://repo1.maven.org/maven2/com/guicedee/services/commons-math3/1.0.8.5/",
+    "discovery_route": "Maven Central classname search c:PlyParser (round 6)",
+    "round": "2026-11-18 round 6"
+  },
+  {
+    "name": "org.treblereel.gwt:three4g-extensions PLYLoader",
+    "status": "excluded_wrong_runtime",
+    "reason": "GWT JsInterop binding to three.js's JavaScript PLYLoader; it runs in a browser after GWT compilation, not as a JVM parser.",
+    "source": "https://search.maven.org/search?q=c:PLYLoader",
+    "discovery_route": "Maven Central classname search c:PlyLoader (round 6)",
+    "round": "2026-11-18 round 6"
+  },
+  {
+    "name": "guru.nidi.simple-3d:simple-3d-jvm",
+    "status": "excluded_no_ply_input_api",
+    "reason": "Classname search lists only a PlyWriter for this artifact; no PLY reader class is published (deps.dev also has no record of 0.1.0).",
+    "source": "https://repo1.maven.org/maven2/guru/nidi/simple-3d/simple-3d-jvm/",
+    "discovery_route": "Maven Central classname search c:PlyWriter (round 6)",
+    "round": "2026-11-18 round 6"
+  },
+  {
+    "name": "Java PLY importers below threshold (round 6)",
+    "status": "excluded_below_threshold",
+    "reason": "GitHub code search 'PlyImporter' language:Java found makiam/Tokonga PLYImporter (Art of Illusion fork, 1 star, GPL-2.0, no Maven release), ljramones/DynamisFX PlyImporter (0 stars, no tag), fwzhuangCg/3D_face_meshmodel (6 stars, no license or tag) and ArmadilloGameStudios/RavenEngine (0 stars). None has a primary value or 100 stars.",
+    "source": "https://github.com/search?q=PlyImporter+language%3AJava&type=code",
+    "discovery_route": "GitHub code search PlyImporter language:Java (round 6)",
+    "round": "2026-11-18 round 6"
+  },
+  {
+    "name": "JVM 3D libraries without a PLY reader (round 6)",
+    "status": "excluded_no_ply_support",
+    "reason": "org.fxyz3d:fxyz3d-importers 0.6.0 (1 deps.dev dependent) imports Maya and OBJ but has no PLY importer; graphics.scenery:scenery 0.11.2 and Apache Commons Geometry IO read OBJ/STL only; com.ripplargames:mesh_io is the meshio artifact under another name (deps.dev 404).",
+    "source": "https://github.com/FXyz/FXyz/tree/master/FXyz-Importers/src/main/java/org/fxyz3d/importers",
+    "discovery_route": "Maven Central search g:org.fxyz3d, g:graphics.scenery and classname searches (round 6)",
+    "round": "2026-11-18 round 6"
   }
 ]
