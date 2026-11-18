@@ -509,6 +509,24 @@
       },
       "pass": true,
       "note": "Gmsh's C gmshOpen parsed the local ASCII PLY triangle; mesh getters returned three coordinates, one triangle and its three node references."
+    },
+    {
+      "package": "libagar",
+      "version": "1.7.1",
+      "control": "controls/ascii_ply/triangle.ply",
+      "output": {
+        "vertices": 3,
+        "faces": 1,
+        "indices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "pass": true,
+      "command": "python3 scripts/run_project.py ascii_ply c libagar (pinned Docker control, release-1.7.1 source built with clang LLVM coverage)",
+      "checked_at_utc": "2026-11-18T02:46:02Z",
+      "note": "SG_ObjectLoadPLY parsed the ASCII header, three vertex rows and the triangle face row of the valid local control."
     }
   ],
   "runtime": []

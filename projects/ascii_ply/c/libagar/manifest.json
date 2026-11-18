@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "c",
+  "package": "libagar",
+  "release": "1.7.1",
+  "catalog_parser": "data/c/ascii_ply/parsers.json",
+  "source_lock": "data/c/ascii_ply/source-lock.json",
+  "source_sha256": "4a376c420a3c7509a15486845dbf0868f300632b00d916d1e18484c3448cab5b",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {"vertices": 3, "faces": 1, "indices": [0, 1, 2]},
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of Agar-SG's native PLY loader (sg/sg_load_ply.c) from the documented SG_ObjectLoadPLY local file API",
+  "coverage_subject_prefix": "/work/source/sg/sg_load_ply",
+  "format_specific_coverage_file_suffix": "/sg/sg_load_ply.c"
+}

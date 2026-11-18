@@ -479,5 +479,22 @@
     },
     "adapter_sha256": "76f6689d05cc161ff6ecec852a31e7aa6c05d4c59c797f31e7fe8e97d675790b",
     "build_note": "Official source tarball and MacOS ARM SDK are SHA-256 pinned. The SDK C header is byte-identical to the source release header. The C11 adapter links the released libgmsh; the full library is not built locally."
+  },
+  "libagar": {
+    "release": "1.7.1",
+    "release_tag": "release-1.7.1",
+    "release_commit": "9d2053d2f72f3b2e7aebe96540f8b5dd962c84cf",
+    "license": "BSD-2-Clause",
+    "source_url": "https://github.com/JulNadeauCA/libagar/archive/refs/tags/release-1.7.1.tar.gz",
+    "source_sha256": "4a376c420a3c7509a15486845dbf0868f300632b00d916d1e18484c3448cab5b",
+    "source_members": {
+      "libagar-release-1.7.1/sg/sg_load_ply.c": "48243663d25c06c57f8b4d010d7a076476a8953a3a63994827913e3029b0f7eb",
+      "libagar-release-1.7.1/sg/sg_load_ply.h": "f959537b966d9e5a891b420567918c4b3d73d414abbc3948dad914ac62f26068",
+      "libagar-release-1.7.1/sg/SG_Object.3": "0edffecb7ba04d86377125981cf9de5d67502abe6785760f48ce20eb14428668",
+      "libagar-release-1.7.1/sg/sg_object.c": "b6d8578df6d889c4dd1b15442cdb26be3a3661c387da822fe8afd0f6ae71aa0c",
+      "libagar-release-1.7.1/configure": "7569feb75b21560850f1b3a82f32f4eee5b129f4e7419aa13adc62580d028693",
+      "libagar-release-1.7.1/LICENSE": "276c2661740eb43f20b27a749a9ae01737e1f441c951e87f03c72371187a4501"
+    },
+    "build_note": "Upstream BSDBuild configure route (INSTALL.md) with --disable-shared, GUI/MATH/SG on and NET/SK/VG/AU/MAP off, no FreeType, X11 or SDL driver. The CMake route of this release does not define HAVE_GLU (it tests OpenGL_GLU_FOUND), so sg_image.c compiles empty and libag_sg fails to link; it is not used."
   }
 }
