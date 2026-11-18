@@ -1,7 +1,7 @@
 # C XML parser pilot
 
-This pilot has eight verified third-party paths:
-[`expat`](../../../projects/xml/c/expat/README.md) 2.10.0, [`libxml2`](../../../projects/xml/c/libxml2/README.md) 2.15.4, [`libxmlb`](../../../projects/xml/c/libxmlb/README.md) 0.3.30, [`ixml`](../../../projects/xml/c/ixml/README.md) (pupnp IXML) 22.2.1, [`mxml`](../../../projects/xml/c/mxml/README.md) (Mini-XML) 4.0.6, [`gdome2`](../../../projects/xml/c/gdome2/README.md) 0.8.1+debian-10 (a DOM over libxml2), [`libnxml`](../../../projects/xml/c/libnxml/README.md) 0.18.6 and [`libucw-xml`](../../../projects/xml/c/libucw_xml/README.md) 6.5. expat's
+This pilot has nine verified third-party paths:
+[`expat`](../../../projects/xml/c/expat/README.md) 2.10.0, [`libxml2`](../../../projects/xml/c/libxml2/README.md) 2.15.4, [`libxmlb`](../../../projects/xml/c/libxmlb/README.md) 0.3.30, [`ixml`](../../../projects/xml/c/ixml/README.md) (pupnp IXML) 22.2.1, [`mxml`](../../../projects/xml/c/mxml/README.md) (Mini-XML) 4.0.6, [`gdome2`](../../../projects/xml/c/gdome2/README.md) 0.8.1+debian-10 (a DOM over libxml2), [`libnxml`](../../../projects/xml/c/libnxml/README.md) 0.18.6, [`libucw-xml`](../../../projects/xml/c/libucw_xml/README.md) 6.5 and [`rxp`](../../../projects/xml/c/rxp/README.md) 1.5.0. expat's
 documented API (`XML_ParserCreateNS`, the element, namespace-declaration and
 character-data handlers, `XML_Parse` over a local buffer) and libxml2's
 (`xmlReaderForMemory` over a local buffer, then the `xmlTextReaderRead` pull
@@ -34,6 +34,7 @@ longer attributed to it.
 | 6 | [gdome2](https://sources.debian.org/src/gdome2/0.8.1%2Bdebian-10/gtk-doc/html/gdome2-gdomedomimplementation.html) | 0.8.1+debian-10 | 518 | Namespace-resolved DOM Level 2 elements, attributes, declarations, depth and text of one in-memory document | libxml2 (gdome2 DOM layer) |
 | 7 | [libnxml](https://github.com/bakulf/libnxml/blob/0.18.6/src/nxml.h.in) | 0.18.6 | 104 | Raw-name element and attribute tree, depth and text of one in-memory document; no namespace URIs | nXML |
 | 8 | [libucw-xml](https://www.ucw.cz/libucw/doc/ucw-xml/) | 6.5 | 60 | Namespace-resolved elements, attributes, declarations, depth and character data of one in-memory document | LibUCW ucw-xml |
+| 9 | [rxp](https://sources.debian.org/src/rxp/1.5.0-3.1/doc/Manual/) | 1.5.0 | 16 | Namespace-resolved elements, attributes, depth and character data of one local document; no declaration count | RXP |
 
 `libmxml1` is the Mini-XML 3.x library package; the pinned 4.0.6 is the
 `mxml` source in Debian forky and sid. 1,842 of the 2,054 `libmxml1`
@@ -96,7 +97,7 @@ other-language packages. In round 4 the remaining 1,108 hits were classified too
 (`round_4_continuation` in the snapshot): libxmltok (expat 1.2) and libxml1 (libxml 1.x) are predecessors of the selected
 expat and libxml2, libucw-xml is selected (below), and libxmlbird and GXml are Vala libraries. Targeted lookups of C libraries with a
 documented XML API whose binary names lack `xml` added gdome2. The
-[leads](leads.json) record each candidate. Apart from the eight verified entries, none of them is verified.
+[leads](leads.json) record each candidate. Apart from the nine verified entries, none of them is verified.
 
 Homebrew 365-day installs, a cross-check only, give the same order for expat,
 libxml2 and mxml (1,360,500; 564,778; 127). `libxml2-16` (9,413) is not added
@@ -124,6 +125,6 @@ XML parsers exist. The [cell record](cell.json) gives the remaining uncertainty
 and the [standard-library finding](standard.json).
 
 <!-- round-4 ucw/rxp -->
-## Round 4: LibUCW
+## Round 4: LibUCW and RXP
 
-libucw-xml 6.5 (LibUCW's own ucw-xml parser; upstream tarball, LGPL-2.0-or-later) has 60 installations of libucw-xml-6.5, a binary name produced by the tarball's own debian/ packaging; LibUCW is not in the Debian archive, so these are upstream-built packages and a very weak signal. With xml_ns_enable it gives the exact shared namespace-resolved summary of both controls (804 ucw-xml lines, 387 in parse.c; AFL++ 501 vs 544 tuples, 87 differing, stable). Its 2015 build needs PERL5LIB, hand-set CPU variables on aarch64 and make -k (the bundled test programs no longer link). The cell stays below ten: the remaining format-specific C XML binaries in the snapshot are predecessors (libxmltok, libxml1), Vala libraries (libxmlbird, GXml), wrappers without a generic element view, protocol libraries, or packages with no installations; neon and APR-util are unranked by the GMarkup rule; libroxml, yxml, ezxml and sxmlc have no Debian package; iksemel fails the second control.
+libucw-xml 6.5 (LibUCW's own ucw-xml parser; upstream tarball, LGPL-2.0-or-later) has 60 installations of libucw-xml-6.5, a binary name produced by the tarball's own debian/ packaging; LibUCW is not in the Debian archive, so these are upstream-built packages and a very weak signal. With xml_ns_enable it gives the exact shared namespace-resolved summary of both controls (804 ucw-xml lines, 387 in parse.c; AFL++ 501 vs 544 tuples, 87 differing, stable). Its 2015 build needs PERL5LIB, hand-set CPU variables on aarch64 and make -k (the bundled test programs no longer link). RXP 1.5.0 (Edinburgh LTG's own validating parser; Debian orig plus Debian 1.5.0-3.1 patches, GPL-2.0; librxp0t64 16, a very weak signal) resolves namespaces with XMLNamespaces but returns no xmlns declarations and documents no binding list, so its summary has no declaration count; unprefixed attributes, which RXP files under the element's namespace, are reported with none, and its reversed attribute lists are put back in source order. 2,544 RXP lines (987 in xmlparser.c); AFL++ 903 vs 942 tuples, 119 differing, stable. The input is written to a private temporary file because RXP opens documents by system identifier. The cell stays below ten: the remaining format-specific C XML binaries in the snapshot are predecessors (libxmltok, libxml1), Vala libraries (libxmlbird, GXml), wrappers without a generic element view, protocol libraries, or packages with no installations; neon and APR-util are unranked by the GMarkup rule; libroxml, yxml, ezxml and sxmlc have no Debian package; iksemel fails the second control.

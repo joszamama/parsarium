@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "c",
+  "package": "rxp",
+  "release": "1.5.0",
+  "catalog_parser": "data/c/xml/parsers.json",
+  "source_lock": "projects/xml/c/rxp/source-lock.json",
+  "source_sha256": "a6deff92086018f2b9b53c2ecc37ead94adaaf1e60c1df82ed447e6e462e6678",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "api": "init_parser(); NewParser(); ParserSetFlag(p, XMLNamespaces, 1); ParserSetFlag(p, ReturnComments, 1); ParserSetWarningCallback; NewExternalEntity(0, 0, local file, 0, 0); EntityOpen; ParserPush; ReadXBit until XBIT_eof (XBIT_start/empty: element_definition, ns_element_definition, attributes with definition/ns_definition/value; XBIT_end; XBIT_pcdata; XBIT_cdsect; XBIT_comment; XBIT_pi); FreeXBit; FreeDtd; FreeParser; FreeEntity",
+  "harness": "harness.c",
+  "fuzz_engine": "libFuzzer (clang -fsanitize=fuzzer)",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of RXP 1.5.0's library sources (src/ and catalog/, librxp_la_SOURCES of Debian's patched Makefile.am; the rxp program is not built), from Debian's orig tarball with Debian 1.5.0-3.1's patches",
+  "coverage_subject_prefix": "/work/source/",
+  "format_specific_coverage_file_suffix": "/src/xmlparser.c",
+  "pilot": "xml_c_registry_pilot",
+  "coverage_limit": "Two valid UTF-8 XML 1.0 controls without DOCTYPE establish RXP's namespace-resolved element, attribute and character-data bits for them only (no validation, no DTD processing beyond defaults). No xmlns declaration count is reported. RXP opens documents by system identifier, so the harness writes the local bytes to a private temporary file. The library includes an HTTP storage layer (src/http.c) that local files do not use. The expected outputs come from controls/xml/check_controls.py (pyexpat), a different family.",
+  "debian_patches_sha256": "1f438b4fc517e7e9160a8e4a1b9db854f2a5fc405e810683677525e1697dbbd3",
+  "oracle": "controls/xml/check_controls.py (Python pyexpat, namespace-aware) without namespace_declarations",
+  "namespace_resolution": true,
+  "namespace_semantics": "RXP 1.5.0 resolves namespaces itself when XMLNamespaces is set (doc/Manual): a start bit's ns_element_definition and each attribute's ns_definition carry the namespace URI (nsname) and local name. RXP files unprefixed attributes as per-element-type attributes under the element's namespace (their NSAttributeDefinition has a non-null element field); the harness reports those by local name with no namespace, as Namespaces in XML requires, and keeps RXP's URI for prefixed (global) attributes. Namespace declarations are not returned as attributes and the binding list (ns_dict) is documented as 'not yet documented', so no declaration count is reported; 'namespaces' lists the URIs carried by expanded names. RXP links attributes in reverse source order (each is prepended); the harness reverses each element's run back to source order."
+}

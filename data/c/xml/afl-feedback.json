@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
   "checked_at_utc": "2026-11-18T01:06:50.054327+00:00",
-  "projects_total": 8,
-  "projects_passed": 8,
+  "projects_total": 9,
+  "projects_passed": 9,
   "pass": true,
   "results": [
     {
@@ -388,6 +388,54 @@
       "first_afl_tuples": 501,
       "second_afl_tuples": 544,
       "afl_tuple_difference": 87
+    },
+    {
+      "project": "xml/c/rxp",
+      "checked_at_utc": "2026-11-18T01:06:48.808544+00:00",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_rxp_and_harness_edges",
+      "feedback_scope": "AFL++ instruments only RXP 1.5.0's library sources (librxp_la_SOURCES) and the ReadXBit harness; no other XML library is linked.",
+      "base_project_receipt_sha256": "a61aff4817075d7376cb3c973a5c04e45c361e797bf8ea540025224bdcb9d314",
+      "overlay_receipt_sha256": "6683833f3dab60db13b40c020df7e075203ac4ded4a355d0bad22c4a61737f03",
+      "base_image_id": "sha256:48ae31d81af9d543aa12a98f6b77631ec4c699361d17d0f44ee41e32b18bcf2a",
+      "overlay_image_id": "sha256:0bda29a3c83479a83cfc10623563e14e1f43a4c00569cee849ca5205572300ae",
+      "repeats_per_control": 5,
+      "repeated_controls_identical": true,
+      "first_control": "controls/xml/catalog-ns.xml",
+      "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "second_control": "controls/xml/order-default-ns.xml",
+      "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "second_control_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "second_case_kind": "valid_control",
+      "first_afl_tuples": 903,
+      "second_afl_tuples": 942,
+      "afl_tuple_difference": 119
     }
   ]
 }

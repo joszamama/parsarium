@@ -1,0 +1,60 @@
+{
+  "kind": "third_party",
+  "api": "init_parser(); NewParser(); ParserSetFlag(p, XMLNamespaces, 1); ParserSetFlag(p, ReturnComments, 1); ParserSetWarningCallback; NewExternalEntity(0, 0, local file, 0, 0); EntityOpen; ParserPush; ReadXBit until XBIT_eof (XBIT_start/empty: element_definition, ns_element_definition, attributes with definition/ns_definition/value; XBIT_end; XBIT_pcdata; XBIT_cdsect; XBIT_comment; XBIT_pi); FreeXBit; FreeDtd; FreeParser; FreeEntity",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T01:06:29.223123+00:00",
+  "manifest": "projects/xml/c/rxp/manifest.json",
+  "image_id": "sha256:48ae31d81af9d543aa12a98f6b77631ec4c699361d17d0f44ee41e32b18bcf2a",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "source_sha256": "a6deff92086018f2b9b53c2ecc37ead94adaaf1e60c1df82ed447e6e462e6678",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "0c394516e644be2a0da3e79001e344261443687a27938ce910ea4e00bed76376",
+    "build.sh": "c78c9de4fdcd3300e3631f3c6372325bd40d648c5bb76e7edf7a0c01cb3974a3",
+    "harness.c": "c222e08b8a02962236811afe3058d1f1be63aecf17ce52fa1f8c977a4429f968",
+    "harness.h": "c93be7201031075a1643fb66f11076e0d2a16e222dda63ea554862fda76be1ca",
+    "manifest.json": "6aa0b3d0d27c472246e6471b5b50c4be68189d5a3ee101e0e2a6db0d2e9c7314",
+    "replay.c": "41d2f45a610d6cbfdf68d6b99f1c0648ff5f0dabfba88d3e9611135e5f71f8af",
+    "run-control.sh": "4560a295f0a51e218742f3365cc431b4eb15269b3e498f803631f59db7f25f69",
+    "source-lock.json": "2fd7f36a6afd32e79b447cde1a0655851b02eb8b0497a884f171b86816008e79"
+  },
+  "output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "parser_source_files": 20,
+  "parser_source_lines_covered": 2544,
+  "format_specific_source_lines_covered": 987,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/c/rxp/target/coverage/coverage.json",
+  "pass": true
+}

@@ -355,6 +355,18 @@
       "search": "Debian by_inst binary-package-name substring 'xml' (round-4 continuation)",
       "reason": "Selected and verified: LibUCW 6.5 ucw-xml (xml_init, xml_ns_enable, xml_push_fastbuf, xml_next pull loop) gave the exact namespace-resolved summary of both valid controls; 804 ucw-xml lines covered (387 in parse.c); stable AFL++ differential (501 vs 544 tuples, 87 differing). Own parser family.",
       "source": "https://www.ucw.cz/libucw/"
+    },
+    {
+      "name": "rxp",
+      "status": "selected",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": 16,
+      "homebrew_install_365d": null,
+      "debian_source": "rxp 1.5.0-3.1; binaries librxp0t64 16, librxp0 10, rxp 25",
+      "search": "round-4 targeted Debian binary lookup (C parsers named in XML parser comparisons)",
+      "reason": "Selected and verified: RXP 1.5.0 (Debian orig plus Debian patches) NewParser/ParserSetFlag(XMLNamespaces)/ReadXBit gave the shared namespace-resolved summary of both valid controls without a declaration count (RXP returns no xmlns declarations); 2,544 RXP lines covered (987 in xmlparser.c); stable AFL++ differential (903 vs 942 tuples, 119 differing). Own parser family; 16 installations are a very weak signal.",
+      "source": "https://www.ltg.ed.ac.uk/~richard/rxp.html"
     }
   ],
   "debian_search": {

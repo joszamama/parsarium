@@ -533,5 +533,84 @@
     },
     "metric_note": "libucw-xml-6.5 has 60 installations (all in the no-files column) in the same hashed by_inst file; libucw-xml-dev also 60. LibUCW is not in the Debian archive: the binary name is the one produced by the release tarball's own debian/ packaging (libucw-xml@UCW_ABI_SUFFIX@ with UCW_ABI_SUFFIX -6.5), so these are installations of upstream-built packages. Format-specific (ucw-xml only) but a very weak signal.",
     "project": "projects/xml/c/libucw_xml/verification.json"
+  },
+  {
+    "name": "rxp",
+    "version": "1.5.0",
+    "license": "GPL-2.0",
+    "license_evidence": "https://sources.debian.org/src/rxp/1.5.0-3.1/debian/copyright/",
+    "input_api": "init_parser(); NewParser(); ParserSetFlag(p, XMLNamespaces, 1); ParserSetFlag(p, ReturnComments, 1); ParserSetWarningCallback; NewExternalEntity(0, 0, local file, 0, 0); EntityOpen; ParserPush; ReadXBit until XBIT_eof (XBIT_start/empty: element_definition, ns_element_definition, attributes with definition/ns_definition/value; XBIT_end; XBIT_pcdata; XBIT_cdsect; XBIT_comment; XBIT_pi); FreeXBit; FreeDtd; FreeParser; FreeEntity",
+    "documentation": "https://sources.debian.org/src/rxp/1.5.0-3.1/doc/Manual/",
+    "documentation_note": "RXP's doc/Manual documents the library API (xmlparser.h: NewParser, ParserSetFlag with XMLNamespaces, ParserPush, ReadXBit and the XBit types; namespaces.h: NSElementDefinition/NSAttributeDefinition). Upstream page: https://www.ltg.ed.ac.uk/~richard/rxp.html",
+    "source": "https://deb.debian.org/debian/pool/main/r/rxp/rxp_1.5.0.orig.tar.gz",
+    "scope": "RXP's namespace-resolved XBit stream of one local document: document-order expanded element and attribute names, attribute values in source order, maximum depth, distinct namespace URIs carried by names, and trimmed PCDATA and CDATA runs between markup; no namespace-declaration count",
+    "namespace_semantics": "namespace_resolved_by_package_no_declaration_count",
+    "namespace_note": "RXP 1.5.0 resolves namespaces itself when XMLNamespaces is set (doc/Manual): a start bit's ns_element_definition and each attribute's ns_definition carry the namespace URI (nsname) and local name. RXP files unprefixed attributes as per-element-type attributes under the element's namespace (their NSAttributeDefinition has a non-null element field); the harness reports those by local name with no namespace, as Namespaces in XML requires, and keeps RXP's URI for prefixed (global) attributes. Namespace declarations are not returned as attributes and the binding list (ns_dict) is documented as 'not yet documented', so no declaration count is reported; 'namespaces' lists the URIs carried by expanded names. RXP links attributes in reverse source order (each is prepended); the harness reverses each element's run back to source order.",
+    "family": "RXP (Edinburgh LTG)",
+    "family_note": "RXP has its own validating parser (src/xmlparser.c, input.c, dtd.c, namespaces.c) and links no other XML library; independent of expat, libxml2, GMarkup, IXML, Mini-XML, nXML and LibUCW. Built from Debian's orig tarball with Debian 1.5.0-3.1's two patches; only the library sources are compiled. The pyexpat oracle is a different family.",
+    "control": "controls/xml/catalog-ns.xml",
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "root": "{urn:parsarium:order}order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "oracle": "controls/xml/check_controls.py (Python pyexpat, namespace-aware) without namespace_declarations",
+    "verification_note": "Namespace-aware path without a declaration count: RXP returns no xmlns declarations and documents no binding list, so the shared expected outputs are compared with namespace_declarations dropped (as for Python's defusedxml). Unprefixed attributes, which RXP files as per-element-type attributes under the element's namespace, are reported with no namespace.",
+    "metric": {
+      "name": "Debian popcon installations of runtime library binary package (librxp0t64; max of librxp0t64 and librxp0)",
+      "value": 16,
+      "source": "data/c/xml/registry-snapshot.json"
+    },
+    "metric_note": "librxp0t64 has 16 installations and librxp0 10 in the same hashed by_inst file (the rxp command-line package has 25). A very weak package signal.",
+    "project": "projects/xml/c/rxp/verification.json"
   }
 ]
