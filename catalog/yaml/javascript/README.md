@@ -17,6 +17,7 @@ Nine verified third-party YAML paths (js-yaml 5.5.0, yaml 2.9.1, yaml-ast-parser
 - [yaml-to-momoa](yaml-to-momoa/README.md) — verified Docker harness
 - [@visulima/yaml](visulima-yaml/README.md) — verified Docker harness
 - [@amritk/yaml](amritk-yaml/README.md) — verified Docker harness
+- [yaml.min](yaml-min/README.md) — verified API path
 
 ## Standard and runtime APIs
 

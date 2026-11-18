@@ -1,10 +1,10 @@
 # JavaScript × YAML: selected parsers (pilot)
 
-Nine control-verified third-party paths; the ceiling is ten and the cell is not padded. Each path parses both schema-neutral YAML controls to the hand-written typed tree.
+Ten control-verified third-party paths; the cell is at the ten-path ceiling and is not padded. Each path parses both schema-neutral YAML controls to the hand-written typed tree.
 
 ## Primary within-cell adoption metric
 
-npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snapshot](registry-snapshot.json)). Package adoption, largely transitive, not YAML-specific use. Round-2 and round-3 values use the same window through the explicit-range endpoint.
+npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snapshot](registry-snapshot.json)). Package adoption, largely transitive, not YAML-specific use. Round-2, round-3 and round-4 values use the same window through the explicit-range endpoint.
 
 | Rank | Package | Release | Metric | AFL++ parser ranges (control / differing) | Parser family |
 | ---: | --- | --- | ---: | ---: | --- |
@@ -17,6 +17,7 @@ npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snap
 | 7 | [yaml-to-momoa](https://github.com/drwpow/yaml-to-momoa/blob/0fe4b94a79f198a90d2fdbd47e718e0275428826/README.md) | 0.1.0 | 812,266 | 622 / 110 | Wrapper: yaml-to-momoa document-to-Momoa AST transform over eemeli/yaml 2.9.1 parseDocument (shared with the selected yaml path) |
 | 8 | [@visulima/yaml](https://github.com/visulima/visulima/blob/%40visulima/yaml%402.0.0/packages/data-manipulation/yaml/README.md) | 2.0.0 | 145,409 | 234 / 64 | @visulima/yaml own scanner, parser and composer |
 | 9 | [@amritk/yaml](https://github.com/amritk/mjst/blob/%40amritk/yaml%400.8.1/packages/yaml/README.md) | 0.8.1 | 93,353 | 328 / 151 | @amritk/yaml own single-pass scanner and tree builder |
+| 10 | [yaml.min](https://github.com/wellwelwel/yaml.min/blob/v2.0.0/README.md) | 2.0.0 | 3,606 | 370 / 109 | yaml.min own zero-dependency scanner and parser |
 
 ## Leads not counted
 

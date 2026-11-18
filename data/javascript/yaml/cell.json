@@ -1,10 +1,10 @@
 {
   "ecosystem": "javascript",
   "format": "yaml",
-  "status": "pilot_nine_verified_bounded_search",
+  "status": "pilot_ten_verified_bounded_search",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 9,
+  "verified_third_party_count": 10,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "yaml",
@@ -17,17 +17,17 @@
     "yaml": 41087,
     "yaml parser": 89726
   },
-  "leads_recorded": 59,
+  "leads_recorded": 60,
   "leads_by_status": {
     "excluded": 25,
+    "excluded_shared_family": 13,
+    "selected": 10,
     "excluded_control_failed": 6,
     "excluded_duplicate_fork": 3,
-    "excluded_no_library_api": 3,
-    "excluded_shared_family": 13,
-    "selected": 9
+    "excluded_no_library_api": 3
   },
   "ranking_metric": "npm downloads in the last month",
-  "uncertainty": "Nine verified third-party YAML paths (js-yaml 5.5.0, yaml 2.9.1, yaml-ast-parser 0.0.43, @stoplight/yaml 4.3.0, yaml-eslint-parser 2.1.0, yaml-js 0.3.1, yaml-to-momoa 0.1.0, @visulima/yaml 2.0.0, @amritk/yaml 0.8.1), selected in descending npm last-month order (window 2026-10-18 to 2026-11-16) from two bounded npm searches (query 'yaml', first 100 of 41087 hits; query 'yaml parser', first 100 of 89726 hits, added in round 2) and named leads. js-yaml 5.5.0 ships its own YAML 1.2 event parser and constructor in one bundled dist/js-yaml.cjs.js. eemeli/yaml 2.9.1 has its own lexer, CST parser and composer. yaml-ast-parser 0.0.43 is a js-yaml 3.x fork that builds a YAML AST (83 of its 1,451 distinct source lines shared with js-yaml 5.5.0). @stoplight/yaml is a labelled wrapper: its own AST walker over @stoplight/yaml-ast-parser, a near-identical yaml-ast-parser fork (1,364 of 1,447 lines shared). yaml-eslint-parser is a labelled wrapper: its own ESTree AST conversion and value resolver over the yaml 2.9.1 Parser and Composer. yaml-js 0.3.1 is an archived line-for-line PyYAML port. yaml-to-momoa is a labelled wrapper: its own document-to-Momoa AST transform and alias expansion over yaml 2.9.1 parseDocument (found in the round-3 metric sweep of the recorded hits); its own ranges do not differ between the controls. @visulima/yaml 2.0.0 is a separate zero-dependency parser. @amritk/yaml 0.8.1 is a separate zero-dependency parser. Each adapter decodes local bytes as strict UTF-8, calls the documented text API with default options and maps the result to the Parsarium typed tree. JavaScript numbers lose YAML's int/float distinction, so a finite integral number is typed int; the controls contain no integral-valued floats or integer-like keys, so this cannot change the result. 16 leads are not counted (see leads.json): confbox, @zkochan/js-yaml, read-yaml-file, @lezer/yaml, @stoplight/yaml-ast-parser, yaml-language-server, front-matter, load-yaml-file, yamljs, @swagger-api/apidom-parser-adapter-yaml-1-2, tap-yaml, yamlparser, @sap-ux/yaml, @speclynx/apidom-parser-adapter-yaml-1-2, yaml-unist-parser, yawn-yaml. npm downloads measure package adoption, largely transitive, not YAML parsing volume. Two schema-neutral valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed-input behavior. Round 3 swept the npm last-month value of every recorded hit without a decision (same window) and named lookups: yaml-to-momoa was promoted; 34 further YAML-related hits at or above the lowest selected value are not counted (leads.json): loaders, bundler and lint plugins, schemas and emitters over js-yaml or yaml, tree-sitter/Lezer syntax trees, and two packages that fail the controls in exploratory runs (@yarnpkg/parsers types every scalar as a string under js-yaml FAILSAFE_SCHEMA and rejects the sequence root; @fmvilas/pseudo-yaml-ast returns raw scalar text and drops aliases). The cell therefore stays at nine: no further npm package in the bounded search with a positive value above the lowest selected path has its own parse or tree-building step that passes both controls.",
+  "uncertainty": "Ten verified third-party YAML paths (js-yaml 5.5.0, yaml 2.9.1, yaml-ast-parser 0.0.43, @stoplight/yaml 4.3.0, yaml-eslint-parser 2.1.0, yaml-js 0.3.1, yaml-to-momoa 0.1.0, @visulima/yaml 2.0.0, @amritk/yaml 0.8.1, yaml.min 2.0.0), selected in descending npm last-month order (window 2026-10-18 to 2026-11-16) from two bounded npm searches (query 'yaml', first 100 of 41087 hits; query 'yaml parser', first 100 of 89726 hits, added in round 2) and named leads. js-yaml 5.5.0 ships its own YAML 1.2 event parser and constructor in one bundled dist/js-yaml.cjs.js. eemeli/yaml 2.9.1 has its own lexer, CST parser and composer. yaml-ast-parser 0.0.43 is a js-yaml 3.x fork that builds a YAML AST (83 of its 1,451 distinct source lines shared with js-yaml 5.5.0). @stoplight/yaml is a labelled wrapper: its own AST walker over @stoplight/yaml-ast-parser, a near-identical yaml-ast-parser fork (1,364 of 1,447 lines shared). yaml-eslint-parser is a labelled wrapper: its own ESTree AST conversion and value resolver over the yaml 2.9.1 Parser and Composer. yaml-js 0.3.1 is an archived line-for-line PyYAML port. yaml-to-momoa is a labelled wrapper: its own document-to-Momoa AST transform and alias expansion over yaml 2.9.1 parseDocument (found in the round-3 metric sweep of the recorded hits); its own ranges do not differ between the controls. @visulima/yaml 2.0.0 is a separate zero-dependency parser. @amritk/yaml 0.8.1 is a separate zero-dependency parser. yaml.min 2.0.0 is a separate zero-dependency parser (one esbuild bundle of its own scanner and parsers), found by the round-4 npm keyword and text searches. Each adapter decodes local bytes as strict UTF-8, calls the documented text API with default options and maps the result to the Parsarium typed tree. JavaScript numbers lose YAML's int/float distinction, so a finite integral number is typed int; the controls contain no integral-valued floats or integer-like keys, so this cannot change the result. 16 leads are not counted (see leads.json): confbox, @zkochan/js-yaml, read-yaml-file, @lezer/yaml, @stoplight/yaml-ast-parser, yaml-language-server, front-matter, load-yaml-file, yamljs, @swagger-api/apidom-parser-adapter-yaml-1-2, tap-yaml, yamlparser, @sap-ux/yaml, @speclynx/apidom-parser-adapter-yaml-1-2, yaml-unist-parser, yawn-yaml. npm downloads measure package adoption, largely transitive, not YAML parsing volume. Two schema-neutral valid controls do not establish tags, merge keys, multi-document streams, YAML 1.1-only scalars or malformed-input behavior. Round 3 swept the npm last-month value of every recorded hit without a decision (same window) and named lookups: yaml-to-momoa was promoted; 34 further YAML-related hits at or above the lowest selected value are not counted (leads.json): loaders, bundler and lint plugins, schemas and emitters over js-yaml or yaml, tree-sitter/Lezer syntax trees, and two packages that fail the controls in exploratory runs (@yarnpkg/parsers types every scalar as a string under js-yaml FAILSAFE_SCHEMA and rejects the sequence root; @fmvilas/pseudo-yaml-ast returns raw scalar text and drops aliases). No further npm package in the bounded search with a positive value above the lowest selected path had its own parse or tree-building step that passed both controls. Round 4 (2026-11-18) added the tenth path, yaml.min 2.0.0 (3,606), from new npm text and keyword searches; the cell is at the ten-path ceiling.",
   "runtime_evidence": "data/javascript/yaml/standard.json",
   "registry_snapshot": "data/javascript/yaml/registry-snapshot.json",
   "unresolved_leads": "data/javascript/yaml/leads.json",
@@ -42,6 +42,7 @@
     "data/javascript/yaml/yaml-js-valid-feedback.json",
     "data/javascript/yaml/yaml-to-momoa-valid-feedback.json",
     "data/javascript/yaml/visulima-yaml-valid-feedback.json",
-    "data/javascript/yaml/amritk-yaml-valid-feedback.json"
+    "data/javascript/yaml/amritk-yaml-valid-feedback.json",
+    "data/javascript/yaml/yaml.min-valid-feedback.json"
   ]
 }
