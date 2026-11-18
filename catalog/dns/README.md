@@ -8,9 +8,9 @@ This format is incomplete across the eight ecosystems. Each row reports only doc
 | --- | --- | ---: | ---: |
 | [C](c/README.md) | pilot_five_verified_search_bounded | 5 | 5 |
 | [C++](cpp/README.md) | pilot_one_verified_search_bounded | 1 | 1 |
-| [Go](go/README.md) | pilot_eight_verified_search_bounded | 8 | 8 |
-| [Java](java/README.md) | pilot_five_verified_search_bounded | 5 | 5 |
+| [Go](go/README.md) | pilot_nine_verified_search_bounded | 9 | 9 |
+| [Java](java/README.md) | pilot_six_verified_search_bounded | 6 | 6 |
 | [JavaScript](javascript/README.md) | pilot_ten_verified_search_bounded | 10 | 10 |
-| [Python](python/README.md) | pilot_seven_verified_search_bounded | 7 | 7 |
+| [Python](python/README.md) | pilot_eight_verified_search_bounded | 8 | 8 |
 | [Rust](rust/README.md) | pilot_ten_verified_search_bounded | 10 | 10 |
 | [PHP](php/README.md) | pilot_five_verified_search_bounded | 5 | 5 |
