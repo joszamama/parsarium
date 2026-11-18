@@ -1,0 +1,67 @@
+{
+  "kind": "third_party",
+  "api": "Kwasii\\LaravelSqlParser\\Dialects\\Dialect::get(null)->parse(local SQL text) -> list of Expression trees (Expressions\\Select, Expressions\\Insert, ...)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T01:17:40.931103+00:00",
+  "manifest": "projects/sql/php/kwasii_laravel_sql_parser/manifest.json",
+  "image_id": "sha256:85fc15fc630535f8b6cc9ad3cb115b6f7033cea86bfaec0d1955e9a520f012d7",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+    "Composer version 2.9.5 2026-01-29 11:40:53"
+  ],
+  "source_sha256": "9c1bb198aceb536fb1d415012ae6b7b6a5407a12e71dbe88d5a0c9c2c86935f9",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "5d3fc23566dce66cac2b9aabe2adc6aa2e8accb769f65a36b5a44f2763a0b277",
+    "composer.json": "2b6be4d52c2e5c51f1b0e9c09e9013ca237dc57b738a22eadb89c66e903f514d",
+    "composer.lock": "ecd05a5839d69c91e2d7250d738e8c7c8eb3774883a011aacaa0eb30a7926ce6",
+    "fuzz-target.php": "ce06aa611e84b8baa762a0943ec8119dee8da50fb90b3aad5a9142de98d474a2",
+    "harness.php": "f4b3647d836c4982012aa6ff996b017534495f33b62d091c1e6fb05eb1b88c64",
+    "manifest.json": "017d0e2e3ea5957510bdad9e9741597e2f22fc2896c2833e4aeee92bfed50745",
+    "replay.php": "44ce32d4c2d4c0e07d4deed4f438cb6a7f754ba92e62f29519aafb36b1f22188",
+    "run-control.php": "4c6b0771df7b36be4566bcbecf6442b0d3d40051450be3c43dce0c65fddface3",
+    "source-lock.json": "651183f458a4785c9a1c5f47f865563878546b8c64e682dcdac933b9e8076dcc",
+    "target.json": "794c1d084bfbbd09b2a60aa825ae50f30d86aad6a04e506525afcdb5058e9e4e"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 63,
+  "parser_source_lines_covered": 1155,
+  "format_specific_source_lines_covered": 131,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/php/kwasii_laravel_sql_parser/target/coverage/coverage.json",
+  "pass": true
+}

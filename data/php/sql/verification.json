@@ -751,6 +751,98 @@
       "afl_feedback": "fuzzing/afl-native/sql/php/crodas_sql_parser/differential.json"
     },
     {
+      "package": "kwasii/laravel-sql-parser",
+      "version": "v0.1.0",
+      "pass": true,
+      "input_api": "Kwasii\\LaravelSqlParser\\Dialects\\Dialect::get(null)->parse(local SQL text) -> list of Expression trees (Expressions\\Select, Expressions\\Insert, ...)",
+      "dialect": "sqlglot base dialect (Dialect::get(null)); the package also offers MySQL, Postgres, SQLite and other dialects",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "sqlglot family: PHP port of sqlglot 30.21.0 (own tokenizer, recursive-descent parser and expression classes)",
+      "parser_source_files": 63,
+      "parser_source_lines_covered": 1155,
+      "afl_tuple_difference": 766,
+      "parser_feature_difference": 779,
+      "project_receipt": "projects/sql/php/kwasii_laravel_sql_parser/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/php/kwasii_laravel_sql_parser/differential.json"
+    },
+    {
       "package": "bleksak/sqlite-toolkit",
       "version": "1.0.4",
       "pass": true,

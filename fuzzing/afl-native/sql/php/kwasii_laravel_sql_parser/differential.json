@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-18T01:18:29.107215+00:00",
+  "project": "sql/php/kwasii_laravel_sql_parser",
+  "pass": true,
+  "feedback_kind": "php_parser_source_lines_to_afl_bitmap",
+  "base_project_receipt_sha256": "3d994e35346be8c2a5dcc81edb888433668395ee837ed583892561c3e097015d",
+  "overlay_receipt_sha256": "1694192cd50b34504348a89fb7d2a5d10f14d6aeb3ad6d33af558c5290eb1ca1",
+  "base_image_id": "sha256:85fc15fc630535f8b6cc9ad3cb115b6f7033cea86bfaec0d1955e9a520f012d7",
+  "overlay_image_id": "sha256:e2cca4c67cce8daa22bdc01c9c504d8aacb4606844cacec3b39138028aed4626",
+  "afl_input_mode": "file",
+  "repeats_per_control": 3,
+  "repeat_maps_identical": true,
+  "repeat_features_identical": true,
+  "mutation_campaign_run": false,
+  "oracle": "controls/sql/expected.json",
+  "first_control": "controls/sql/select-join.sql",
+  "first_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "first_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "second_control": "controls/sql/insert-values.sql",
+  "second_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "second_control_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "first_afl_tuples": 1168,
+  "second_afl_tuples": 828,
+  "afl_tuple_difference": 766,
+  "first_parser_features": 1155,
+  "second_parser_features": 812,
+  "parser_feature_difference": 779,
+  "first_only_features_by_file": {
+    "src/Expressions/AggFunc.php": 2,
+    "src/Expressions/Alias.php": 2,
+    "src/Expressions/AndExpr.php": 2,
+    "src/Expressions/Binary.php": 2,
+    "src/Expressions/Column.php": 2,
+    "src/Expressions/Concerns/AliasBehavior.php": 1,
+    "src/Expressions/Concerns/BinaryBehavior.php": 1,
+    "src/Expressions/Concerns/ColumnBehavior.php": 1,
+    "src/Expressions/Concerns/FromBehavior.php": 1,
+    "src/Expressions/Concerns/JoinBehavior.php": 1,
+    "src/Expressions/Concerns/OrderedBehavior.php": 1,
+    "src/Expressions/Concerns/QueryBehavior.php": 1,
+    "src/Expressions/Concerns/SelectBehavior.php": 1,
+    "src/Expressions/Concerns/StarBehavior.php": 1,
+    "src/Expressions/Connector.php": 2,
+    "src/Expressions/Count.php": 2,
+    "src/Expressions/EQ.php": 2,
+    "src/Expressions/Expression.php": 40,
+    "src/Expressions/From.php": 2,
+    "src/Expressions/Func.php": 2,
+    "src/Expressions/GTE.php": 2,
+    "src/Expressions/Group.php": 1,
+    "src/Expressions/Join.php": 2,
+    "src/Expressions/Order.php": 1,
+    "src/Expressions/Ordered.php": 2,
+    "src/Expressions/Predicate.php": 2,
+    "src/Expressions/Query.php": 2,
+    "src/Expressions/Select.php": 2,
+    "src/Expressions/Star.php": 2,
+    "src/Expressions/Sum.php": 2,
+    "src/Expressions/TableAlias.php": 1,
+    "src/Expressions/Where.php": 1,
+    "src/Parser/Concerns/HandlesTables.php": 5,
+    "src/Parser/Concerns/ParsesExpressions.php": 131,
+    "src/Parser/Concerns/ParsesFunctions.php": 93,
+    "src/Parser/Concerns/ParsesQueries.php": 104,
+    "src/Parser/Concerns/ParsesStatements.php": 6,
+    "src/Parser/Concerns/ParsesTables.php": 114,
+    "src/Parser/Parser.php": 5,
+    "src/Tokenizer/Tokenizer.php": 14
+  },
+  "second_only_features_by_file": {
+    "src/Expressions/Concerns/DMLBehavior.php": 1,
+    "src/Expressions/Concerns/InsertBehavior.php": 1,
+    "src/Expressions/Concerns/TableBehavior.php": 7,
+    "src/Expressions/DDL.php": 2,
+    "src/Expressions/DML.php": 1,
+    "src/Expressions/DerivedTable.php": 2,
+    "src/Expressions/Expression.php": 2,
+    "src/Expressions/Insert.php": 2,
+    "src/Expressions/Schema.php": 1,
+    "src/Expressions/Tuple.php": 1,
+    "src/Expressions/UDTF.php": 2,
+    "src/Expressions/Values.php": 2,
+    "src/Parser/Concerns/ParsesDdl.php": 35,
+    "src/Parser/Concerns/ParsesDml.php": 62,
+    "src/Parser/Concerns/ParsesFunctions.php": 2,
+    "src/Parser/Concerns/ParsesQueries.php": 14,
+    "src/Parser/Concerns/ParsesStatements.php": 7,
+    "src/Parser/Concerns/ParsesTables.php": 69,
+    "src/Parser/Parser.php": 2,
+    "src/Tokenizer/Tokenizer.php": 3
+  }
+}

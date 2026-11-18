@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "php",
+  "pilot": true,
+  "package": "kwasii/laravel-sql-parser",
+  "release": "v0.1.0",
+  "catalog_parser": "data/php/sql/parsers.json",
+  "source_lock": "projects/sql/php/kwasii_laravel_sql_parser/source-lock.json",
+  "source_sha256": "9c1bb198aceb536fb1d415012ae6b7b6a5407a12e71dbe88d5a0c9c2c86935f9",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "harness": "harness.php",
+  "fuzz_engine": "nikic/php-fuzzer",
+  "fuzz_engine_release": "v0.0.11",
+  "fuzz_entry": "fuzz-target.php",
+  "fuzz_smoke_entrypoint": "/usr/bin/php",
+  "fuzz_smoke_args": [
+    "/work/vendor/bin/php-fuzzer",
+    "run-single",
+    "/work/fuzz-target.php",
+    "/input/control"
+  ],
+  "fuzz_smoke_expect": "",
+  "coverage": "Xdebug executed line coverage in kwasii/laravel-sql-parser PHP source (Tokenizer, Parser, the base Dialect and the Expression node classes); php-fuzzer basic-block instrumentation for fuzz entry",
+  "coverage_subject_prefix": "/work/vendor/kwasii/laravel-sql-parser/",
+  "format_specific_coverage_file_suffix": "/src/Parser/Parser.php",
+  "scope": "SQL text from local bytes passed to Dialect::get(null)->parse() (sqlglot's base dialect), which tokenizes the text and returns one expression tree per ';'-separated statement (Select, Insert). The harness reads Select expressions, where, group and order and Insert Schema columns and Values tuples, and walks each tree with Expression::dfs() for Table names, Join nodes, Func call names (Anonymous name or the class SQL name; And/Or connectors excluded) and Literal nodes (is_string flag and token text). The Laravel facade, transpiler, generator and optimizer are not used.",
+  "summary_command": [
+    "/usr/bin/php",
+    "/work/replay.php",
+    "/input/case"
+  ],
+  "dialect": "sqlglot base dialect (Dialect::get(null); the package also offers MySQL, Postgres, SQLite and other dialects)",
+  "parser_family": "kwasii/laravel-sql-parser: PHP port of sqlglot 30.21.0 (Python; its README and generated node classes name sqlglot as the source) with its own tokenizer, recursive-descent parser and expression classes; shares design lineage with the Python sqlglot path but no code with the phpMyAdmin, PHP-SQL-Parser, pg_builder, crodas, libpg_query, bleksak or vimeo code bases",
+  "api": "Kwasii\\LaravelSqlParser\\Dialects\\Dialect::get(null)->parse(local SQL text) -> list of Expression trees (Expressions\\Select, Expressions\\Insert, ...)"
+}

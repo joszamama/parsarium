@@ -12020,6 +12020,12 @@
         "url": "https://packagist.org/packages/fuwasegu/php-sql-snapshot.json",
         "description": "PHPUnit extension for testing SQL queries using AST comparison instead of string comparison",
         "observed_at_utc": "2026-11-18T00:35:57.563409+00:00"
+      },
+      "kwasii/laravel-sql-parser": {
+        "value": 51,
+        "url": "https://packagist.org/packages/kwasii/laravel-sql-parser.json",
+        "description": "Fast SQL Parser for PHP Laravel",
+        "observed_at_utc": "2026-11-18T01:30:00+00:00"
       }
     }
   },
@@ -12027,5 +12033,78 @@
   "round_3_captured_at_utc": "2026-11-17T23:02:16.703362+00:00",
   "round_3_note": "Round 3 (2026-11-18) added six queries. No new hit is a SQL statement parser: the first 100 \"sql\" hits are database layers, ORMs, query builders, formatters and Doctrine extensions; \"sqlite parser\", \"pgsql parser\", \"sql statement parser\" and \"query parser sql\" returned only packages already recorded or unrelated packages; \"sql tokenizer ast\" returned none. Packagist totals of flow-php/pg-query-ext (18,762), flow-php/postgresql (45,374), inilim/sqlite-parser (1) and subapp/sql (19) were re-read on 2026-11-17T22:33Z and equal the recorded values.",
   "round_4_captured_at_utc": "2026-11-18T00:35:57.563409+00:00",
-  "round_4_note": "Round 4 (2026-11-18) added 62 Packagist queries: 53 text queries (SQL engine, emulator, mock, linter, analyzer, grammar, AST, translator, libpg_query, tree-sitter and WordPress terms) and 9 tag searches (sql-parser, sqlparser, parser/ast/lexer with q=sql, mysql-parser, sql-ast, postgresql-parser). The one new SQL statement parser is vimeo/php-mysql-engine (selected). Other plausible hits are greenlion, phpMyAdmin and vimeo copies (normalized- statement overlap recorded in leads.json), consumers of already selected parsers, mocks, EXPLAIN analyzers, generators, builders and packages without a tagged release; most remaining hits are Laravel and API query-string, OData, RQL, Lucene and search-syntax parsers that are not SQL. The WordPress MySQL-on-SQLite parser is not published on Packagist."
+  "round_4_note": "Round 4 (2026-11-18) added 62 Packagist queries: 53 text queries (SQL engine, emulator, mock, linter, analyzer, grammar, AST, translator, libpg_query, tree-sitter and WordPress terms) and 9 tag searches (sql-parser, sqlparser, parser/ast/lexer with q=sql, mysql-parser, sql-ast, postgresql-parser). The one new SQL statement parser is vimeo/php-mysql-engine (selected). Other plausible hits are greenlion, phpMyAdmin and vimeo copies (normalized- statement overlap recorded in leads.json), consumers of already selected parsers, mocks, EXPLAIN analyzers, generators, builders and packages without a tagged release; most remaining hits are Laravel and API query-string, OData, RQL, Lucene and search-syntax parsers that are not SQL. The WordPress MySQL-on-SQLite parser is not published on Packagist.",
+  "round_5_captured_at_utc": "2026-11-18T01:09:23Z",
+  "round_5_note": "Round 5 (2026-11-18) searched outside Packagist: six GitHub repository searches (language PHP, sorted by stars, first 100 results each; stars recorded only to list hits, never as a metric), each plausible repository mapped to its Packagist name. The one new qualifying parser is kwasii/laravel-sql-parser (a PHP port of sqlglot, selected). It had been the 33rd hit of the round-1 'sql parser' query without a follow-up.",
+  "round_5_github_search": {
+    "api": "https://api.github.com/search/repositories (q=<terms> language:PHP, sort=stars, per_page=100)",
+    "captured_at_utc": "2026-11-18T01:09:23Z",
+    "queries": [
+      {
+        "query": "sql parser language:PHP",
+        "total": 178,
+        "inspected": 100
+      },
+      {
+        "query": "sql ast language:PHP",
+        "total": 15,
+        "inspected": 15
+      },
+      {
+        "query": "mysql parser language:PHP",
+        "total": 182,
+        "inspected": 100
+      },
+      {
+        "query": "sqlite parser language:PHP",
+        "total": 24,
+        "inspected": 24
+      },
+      {
+        "query": "postgresql parser language:PHP",
+        "total": 17,
+        "inspected": 17
+      },
+      {
+        "query": "sql lexer language:PHP",
+        "total": 5,
+        "inspected": 5
+      }
+    ],
+    "packagist_mapping": {
+      "kwasii1/laravel-sql-parser": "kwasii/laravel-sql-parser (selected)",
+      "moledet/database-change-log": "moledet/database-change-log (excluded)",
+      "graze/morphism": "graze/morphism (excluded)",
+      "AaronBernabeu/apm-sql-lexer": "aaronidas/apm-sql-lexer (excluded)",
+      "qieangel2013/EsParser": "qieangel2013/esparser (excluded)",
+      "pear/SQL_Parser": "not on Packagist (pear/sql_parser 404)",
+      "ichiriac/sql-parser": "not on Packagist",
+      "terrafrost/sqlparser": "not on Packagist",
+      "xsist10/mysql-antlr4-parser": "not on Packagist (cadfael/mysql-antlr4-parser is the recorded lead)",
+      "abiusx/QuickMySQLLexer": "not on Packagist",
+      "digitalspy/SQL-Parser": "not on Packagist",
+      "kamshory/ParseSQL": "not on Packagist",
+      "already recorded": [
+        "greenlion/PHP-SQL-Parser",
+        "phpmyadmin/sql-parser",
+        "iamcal/SQLParser",
+        "sad-spirit/pg-builder",
+        "jasny/persist-sql-query",
+        "marcocesarato/PHP-Light-SQL-Parser",
+        "SQLFTW/sqlftw",
+        "crodas/SQLParser",
+        "maghead/sqlite-parser",
+        "nextras/multi-query-parser",
+        "intersvyaz/yii2-sqlparser",
+        "GetDKAN/sql-parser",
+        "subapp/sql",
+        "szonov/sql-splitter",
+        "erkineren/sql-manipulator",
+        "calebdw/pg-schema-parser",
+        "xp-forge/sql-parser",
+        "pimcore/search-query-parser",
+        "qieangel2013/hbase-parser"
+      ]
+    }
+  }
 }

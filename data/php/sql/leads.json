@@ -638,6 +638,16 @@
       "family": "WordPress MySQL-on-SQLite grammar-driven parser (MySQL Workbench grammar)",
       "documented_api_lead": null,
       "reason": "Round-4 lead from the \"wordpress mysql parser\" and \"sqlite database integration\" queries (both returned no Packagist package). WordPress/sqlite-database-integration (v3.1.3, 2026-11-03) contains a grammar-driven MySQL lexer and parser (packages/mysql-on-sqlite/src/mysql/class-wp-mysql-parser.php, grammar from MySQL Workbench MySQLParser.g4) whose composer.json names wordpress/mysql-on-sqlite, but neither that name nor wordpress/sqlite-database-integration is published on Packagist (HTTP 404, 2026-11-18). No primary metric, so not verified or ranked."
+    },
+    {
+      "name": "kwasii/laravel-sql-parser",
+      "status": "selected",
+      "metric_value": 51,
+      "metric_error": null,
+      "latest_release_observed": "v0.1.0",
+      "family": "sqlglot family (PHP port of sqlglot 30.21.0)",
+      "documented_api_lead": "https://github.com/kwasii1/laravel-sql-parser/blob/17aa576c47feb38ef3b66b11d0cca449730f7b96/README.md#parsing",
+      "reason": "Round-5 GitHub repository search (language PHP; sql parser, sql ast, mysql parser, sqlite parser, postgresql parser, sql lexer; 2026-11-18) mapped to Packagist; also the 33rd hit of the round-1 'sql parser' query, where its description (\"Fast SQL Parser for PHP Laravel\") was not followed up. README-documented parse API (Sql::parse(), and Dialect::get(...)->parseOne() without Laravel) returning sqlglot-style expression trees. Dialect::get(null)->parse() on both valid controls gives the oracle summary from Select/Insert, Table, Join, Func and Literal nodes; 1155 package lines covered in 63 files; parser-line AFL++ bridge identical over three repeats, 1168/828 tuples, 766 tuples differ. MIT, only release v0.1.0 (2026-10-10). Requires illuminate/* for its Laravel integration only. Port of Python sqlglot (shared design lineage across ecosystems); independent of the other PHP code bases."
     }
   ]
 }

@@ -875,6 +875,115 @@
     }
   },
   {
+    "name": "kwasii/laravel-sql-parser",
+    "version": "v0.1.0",
+    "license": "MIT",
+    "license_evidence": "LICENSE.md in the pinned codeload archive (SHA-256 9c1bb198aceb536fb1d415012ae6b7b6a5407a12e71dbe88d5a0c9c2c86935f9; LICENSE.md SHA-256 91457e43f9cd0d3ff941944bd756371faeeaedd0db7c5fee4b097d1750d54ba1, MIT); Packagist license MIT",
+    "input_api": "Kwasii\\LaravelSqlParser\\Dialects\\Dialect::get(null)->parse(local SQL text) -> list of Expression trees (Expressions\\Select, Expressions\\Insert, ...)",
+    "documentation": "https://github.com/kwasii1/laravel-sql-parser/blob/17aa576c47feb38ef3b66b11d0cca449730f7b96/README.md#parsing",
+    "source": "https://codeload.github.com/kwasii1/laravel-sql-parser/legacy.zip/17aa576c47feb38ef3b66b11d0cca449730f7b96",
+    "source_sha256": "9c1bb198aceb536fb1d415012ae6b7b6a5407a12e71dbe88d5a0c9c2c86935f9",
+    "composer_reference": "17aa576c47feb38ef3b66b11d0cca449730f7b96",
+    "dependencies": [
+      "illuminate/console ^12.0||^13.0",
+      "illuminate/database ^12.0||^13.0",
+      "illuminate/support ^12.0||^13.0 (Laravel integration only; the parser core does not use them)"
+    ],
+    "dialect": "sqlglot base dialect (Dialect::get(null)); the package also offers MySQL, Postgres, SQLite and other dialects",
+    "scope": "SQL text from local bytes; valid SELECT-with-join and multi-row INSERT controls, each equal to the hand-written oracle summary. v0.1.0 (2026-10-10) is the only release. The README documents Sql::parse()/parseOne() and, for use without Laravel, Dialect::get(...)->parseOne(); the harness calls the same Dialect::parse() core without the Laravel facade.",
+    "family": "sqlglot family: PHP port of sqlglot 30.21.0 (own tokenizer, recursive-descent parser and expression classes)",
+    "family_note": "The README calls the package a port of sqlglot v30.21.0 that passes sqlglot's test cases, and its expression classes are generated from sqlglot's exp classes by the package's tools/generate.php. It is PHP code, not a binding or vendored copy of the Python sqlglot path, so it shares design lineage across ecosystems, as the libpg_query family does. Independent of the phpMyAdmin, PHP-SQL-Parser, pg_builder, crodas, libpg_query, bleksak and vimeo code bases in this cell. Very low adoption (51 lifetime downloads) but a positive primary metric.",
+    "popularity": {
+      "metric": "Packagist total downloads",
+      "value": 51,
+      "source": "https://packagist.org/packages/kwasii/laravel-sql-parser.json",
+      "observed_on_utc": "2026-11-18",
+      "snapshot": "data/php/sql/registry-snapshot.json",
+      "limitation": "Lifetime downloads; a package first released on 2026-10-10 with very little adoption."
+    },
+    "project": "projects/sql/php/kwasii_laravel_sql_parser",
+    "control": "controls/sql/select-join.sql",
+    "differential_control": "controls/sql/insert-values.sql",
+    "expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "select",
+          "tables": [
+            "customers",
+            "orders"
+          ],
+          "select_items": 3,
+          "joins": 1,
+          "where": true,
+          "group_by": 1,
+          "order_by": 1,
+          "functions": [
+            "count",
+            "sum"
+          ],
+          "literals": [
+            [
+              "number",
+              "10"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    },
+    "differential_expected_output": {
+      "statement_count": 1,
+      "statements": [
+        {
+          "kind": "insert",
+          "tables": [
+            "orders"
+          ],
+          "columns": 4,
+          "rows": 2,
+          "literals": [
+            [
+              "number",
+              "1"
+            ],
+            [
+              "number",
+              "19.5"
+            ],
+            [
+              "number",
+              "2"
+            ],
+            [
+              "number",
+              "250"
+            ],
+            [
+              "number",
+              "42"
+            ],
+            [
+              "number",
+              "7"
+            ],
+            [
+              "string",
+              "open"
+            ],
+            [
+              "string",
+              "paid"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  {
     "name": "bleksak/sqlite-toolkit",
     "version": "1.0.4",
     "license": "MIT",
