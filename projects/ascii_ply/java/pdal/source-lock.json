@@ -1,0 +1,46 @@
+{
+  "pdal_2.13": {
+    "release": "2.10.0",
+    "artifact": "io.pdal:pdal_2.13:2.10.0",
+    "source_sha256": "34e5c0e3ad3ccc6aa1d9151f5c1dca7c71e24226d9c08754c3a1f4712031b6af",
+    "jar_sha256": "0ce4f834f2bb435ef8b26d8f5cc07a87418618746941f6d83d1da26653ac677b",
+    "pom_sha256": "feeffe9648bb91b004335107c519fbeb255fac44f50a2259bea29ff95920240e",
+    "source_url": "https://repo.maven.apache.org/maven2/io/pdal/pdal_2.13/2.10.0/pdal_2.13-2.10.0-sources.jar",
+    "vcs_tag": "https://github.com/PDAL/java/tree/v2.10.0",
+    "license": "BSD-3-Clause (PDAL/java LICENSE.txt; pinned POM and source headers carry the Hobu BSD terms)",
+    "maven_artifacts": {
+      "io.pdal:pdal_2.13:2.10.0": {
+        "sha256": "0ce4f834f2bb435ef8b26d8f5cc07a87418618746941f6d83d1da26653ac677b",
+        "central_sha1": "54bda9f00275cbda738551366dea7db25a68805c"
+      },
+      "io.pdal:pdal_2.13:2.10.0:sources": {
+        "sha256": "34e5c0e3ad3ccc6aa1d9151f5c1dca7c71e24226d9c08754c3a1f4712031b6af",
+        "central_sha1": "584c17916c408672fcb1f2fd6a40eea6d4d794d6"
+      },
+      "io.pdal:pdal-native:2.10.0": {
+        "sha256": "8690bffe5fff8a28cc35e42d8203cba6406ee0b93bb2c067fec091333a5f2754",
+        "central_sha1": "647ffba08c8487648da101c1632c3e9ff7c2c939",
+        "contents": "native/x86_64-linux/libpdaljni.2.10.so (NEEDED libpdalcpp.so.20) and native/arm64-darwin/libpdaljni.2.10.dylib"
+      },
+      "org.scala-lang:scala-library:2.13.16": {
+        "sha256": "1ebb2b6f9e4eb4022497c19b1e1e825019c08514f962aaac197145f88ed730f1",
+        "central_sha1": "9e064d9304904fd7b6bd2b55a9e601b8c1c9006e"
+      },
+      "com.github.sbt:sbt-jni-core_2.13:1.7.0": {
+        "sha256": "c681cec01d0ca22a47369f370f054fa1ecc03cd30688c69008b330b86e2b10c9",
+        "central_sha1": "7f3badb50678b5611887a2f05c2f6550ef99bccb"
+      }
+    },
+    "runtime_closure_note": "pdal_2.13 2.10.0 POM: scala-library 2.13.16 and sbt-jni-core_2.13 1.7.0 (compile); scala-reflect is provided and scalatest/circe-parser are test scope. pdal-native is the separately published JNI artifact the PDAL/java README tells users to add.",
+    "underlying_source": {
+      "package": "PDAL",
+      "release": "2.10.2",
+      "archive_url": "https://github.com/PDAL/PDAL/releases/download/2.10.2/PDAL-2.10.2-src.tar.bz2",
+      "archive_sha256": "882b97aa3ae5db682c3b2dc8edef4e29bcc7ecea51c70592e71bc1f34112ad00",
+      "published_sha256sum": "https://github.com/PDAL/PDAL/releases/download/2.10.2/PDAL-2.10.2-src.tar.bz2.sha256sum",
+      "license": "BSD-3-Clause",
+      "parser_source": "io/PlyReader.cpp (readers.ply)",
+      "abi_note": "pdal-native 2.10.0 ships only the JNI glue; libpdalcpp.so.20 is a separate native prerequisite. The coverage image builds it from the 2.10.2 release source and build-native.sh checks that every PDAL symbol the stock libpdaljni.2.10.so imports is defined."
+    }
+  }
+}

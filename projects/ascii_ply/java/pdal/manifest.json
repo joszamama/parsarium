@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "java",
+  "package": "pdal_2.13",
+  "release": "2.10.0",
+  "catalog_parser": "data/java/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/java/pdal/source-lock.json",
+  "source_sha256": "34e5c0e3ad3ccc6aa1d9151f5c1dca7c71e24226d9c08754c3a1f4712031b6af",
+  "underlying_package": "PDAL",
+  "underlying_release": "2.10.2",
+  "underlying_source_sha256": "882b97aa3ae5db682c3b2dc8edef4e29bcc7ecea51c70592e71bc1f34112ad00",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/amd64",
+  "tmpfs_exec": true,
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "points": 3,
+    "second_x": 1.0,
+    "last_y": 1.0
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/pdal_2.13-2.10.0.jar:/work/lib/pdal-native-2.10.0.jar:/work/lib/scala-library-2.13.16.jar:/work/lib/sbt-jni-core_2.13-1.7.0.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "fuzz_engine_feedback_scope": "Jazzer instruments JVM bytecode only; libpdalcpp carries LLVM profile counters, not SanitizerCoverage, so Jazzer receives no native parser feedback",
+  "coverage": "JaCoCo coverage of the pdal_2.13 Scala API plus LLVM source coverage of PDAL 2.10.2 readers.ply (io/PlyReader.cpp), built from the release source and loaded by the unmodified pdal-native 2.10.0 JNI library",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "underlying_coverage_subject_prefix": "/work/source/io/",
+  "underlying_format_specific_coverage_file_suffix": "/PlyReader.cpp"
+}
