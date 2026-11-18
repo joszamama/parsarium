@@ -64,6 +64,66 @@
         "service-config.toml": "matches the hand-written typed tree",
         "typed-scalars.toml": "rejected with TOMLDecodeError \"Didn't find expected newline (line 27, column 28)\" at `offset = 1979-05-27T00:32:00.5-07:00`: an offset date-time with fractional seconds is not accepted"
       }
+    },
+    {
+      "name": "toml.py",
+      "release": "0.1.7",
+      "metric_value": 855,
+      "status": "unresolved_control_failed",
+      "family": "toml.py (hit9; PLY grammar, an improved marksteve/toml-ply)",
+      "evidence": "Run on the host (Python 3.14, with its ply dependency): loads rejects service-config at the inline table (\"Illegal character: '{' at Line 13\") and typed-scalars at the \"+\" of a signed integer; a TOML 0.x-era grammar.",
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "source": "https://pypi.org/project/toml.py/",
+      "checked_at_utc": "2026-11-18",
+      "found_by": "round-4 screening of the PyPI Simple index names and the toml-lang wiki lists"
+    },
+    {
+      "name": "toml-python",
+      "release": "0.4.1",
+      "metric_value": 655,
+      "status": "unresolved_control_failed",
+      "family": "toml-python (f03lipe; toml-lang wiki Old page)",
+      "evidence": "Run on the host: tomlpython.parse fails on both controls with NameError: name 'unicode' is not defined; the 0.4.1 release is Python 2 code.",
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "source": "https://pypi.org/project/toml-python/",
+      "checked_at_utc": "2026-11-18",
+      "found_by": "round-4 screening of the PyPI Simple index names and the toml-lang wiki lists"
+    },
+    {
+      "name": "contoml",
+      "release": "0.32",
+      "metric_value": 504,
+      "status": "unresolved_control_failed",
+      "family": "contoml/prettytoml (Jumpscale/Ahmad Saleh; TOML 0.4 lexer and element tree)",
+      "evidence": "Run on the host with its six, strict-rfc3339, timestamp and iso8601 dependencies: contoml.loads(...).primitive fails service-config with \"generator raised StopIteration\" and typed-scalars with a LexerError at the local time 00:32:00.25. prettytoml 0.3 (140) is the same element-tree code base and is not run separately.",
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "source": "https://pypi.org/project/contoml/",
+      "checked_at_utc": "2026-11-18",
+      "found_by": "round-4 screening of the PyPI Simple index names and the toml-lang wiki lists"
+    },
+    {
+      "name": "libtoml",
+      "release": "1.0",
+      "metric_value": 56,
+      "status": "unresolved_control_failed",
+      "family": "libtoml (rply experiment)",
+      "evidence": "Not run: its README states it parses everything except arrays of tables, which service-config uses ([[products]]).",
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "source": "https://pypi.org/project/libtoml/",
+      "checked_at_utc": "2026-11-18",
+      "found_by": "round-4 screening of the PyPI Simple index names and the toml-lang wiki lists"
+    },
+    {
+      "name": "fasttoml",
+      "release": "0.2.0b3",
+      "metric_value": 35,
+      "status": "unresolved_no_stable_release",
+      "family": "fasttoml (SIMD parser)",
+      "evidence": "Only pre-release versions (latest 0.2.0b3) are published; not run.",
+      "metric": "PyPI Stats last_month downloads excluding known mirrors",
+      "source": "https://pypi.org/project/fasttoml/",
+      "checked_at_utc": "2026-11-18",
+      "found_by": "round-4 screening of the PyPI Simple index names and the toml-lang wiki lists"
     }
   ],
   "excluded": [
@@ -112,6 +172,62 @@
           "b3ab4b9d": "1,852 of 1,919 (96.5%)"
         }
       }
+    },
+    {
+      "name": "dom-toml",
+      "metric_value": 238660,
+      "reason": "Configuration helpers over the standard library: dom_toml.loads hands the text to tomllib on Python 3.11+ (tomli before), so its parse is the standard tomllib API recorded in standard.json, not a third-party parser.",
+      "status": "excluded",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "tomli-rs",
+      "metric_value": 65,
+      "reason": "PyO3 wrapper over the toml crate 0.8 (toml-rs family, already present through rtoml); README describes it as a tomli-compatible front end to the toml crate.",
+      "status": "excluded",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "rustoml",
+      "metric_value": 20,
+      "reason": "A fork of rtoml (same authors listed, same API); excluded as a fork of the selected rtoml path.",
+      "status": "excluded",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "spanned-toml",
+      "metric_value": 26,
+      "reason": "A tomli fork with spans (\"A lil' TOML parser, but with span\"); tomli family.",
+      "status": "excluded",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "tomli-null",
+      "metric_value": 18,
+      "reason": "Self-described fork of tomli with null values; tomli family.",
+      "status": "excluded",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "toml-tools",
+      "metric_value": 95,
+      "reason": "Tomli and tomli-w back-ported to Python 2 and IronPython; tomli family.",
+      "status": "excluded",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "tombi",
+      "metric_value": null,
+      "reason": "Rust CLI and language server distributed as a binary wheel; no Python parsing API.",
+      "status": "excluded",
+      "checked_at_utc": "2026-11-18"
+    },
+    {
+      "name": "taplo",
+      "metric_value": 531454,
+      "reason": "Rust taplo CLI distributed as a binary wheel; no Python parsing API (the Rust taplo crate is a selected Rust path).",
+      "status": "excluded",
+      "checked_at_utc": "2026-11-18"
     }
   ],
   "promoted": [
@@ -157,5 +273,18 @@
       "project": "projects/toml/python/pytoml11",
       "status": "promoted_to_verified"
     }
-  ]
+  ],
+  "round_4": {
+    "checked_at_utc": "2026-11-18",
+    "routes": [
+      "toml-lang/toml wiki lists (Python: tomlrt, tomlclass, toml-rs, tomli, tomlkit, rtoml, pytomlpp, pytoml11; Old: qtoml, toml, pytoml, toml-python, toml.py, toml-ply and others)",
+      "PyPI Simple index (JSON API) names containing \"toml\": all 300 names outside the recorded first-100 window screened by summary and dependencies, with PyPI Stats lookups of every plausible parser (registry-snapshot round_4_targeted_lookups)"
+    ],
+    "promoted": [
+      "tomlrt 2.3.3",
+      "tomlclass 0.4.1",
+      "pytoml11 0.0.5"
+    ],
+    "pypistats_note": "PyPI Stats rate-limited part of the lookup batch (HTTP 429); names recorded with a null value there were either rate-limited or have no download record, and none of them is a selected path."
+  }
 }
