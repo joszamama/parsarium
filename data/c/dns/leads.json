@@ -150,7 +150,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 2780,
     "found_by": "registry search hit (debian-source:dns)",
-    "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
+    "metric_source": "targeted lookup in registry-snapshot.json (round2_targeted)",
     "documentation": "https://github.com/videolabs/libmicrodns/blob/master/include/microdns/microdns.h",
     "family": "VideoLAN libmicrodns mDNS",
     "reason": "mDNS client/announcer library. Its installed header microdns.h exports only mdns_init, mdns_destroy, mdns_entries_send, mdns_entries_print, mdns_strerror, mdns_listen, mdns_announce, mdns_serve and mdns_request_initial_announce; message parsing is internal to the socket loop, with no documented API for caller-supplied message bytes."
@@ -161,11 +161,11 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 4,
     "found_by": "registry search hit (debian-source:dns)",
-    "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
+    "metric_source": "targeted lookup in registry-snapshot.json (round2_targeted)",
     "documentation": "https://www.dns-oarc.net/tools/dnsjit",
     "input_api_lead": "Lua core.object.dns (parse) inside the dnsjit engine",
     "family": "DNS-OARC dnsjit core.object.dns",
-    "reason": "Not attempted this round. dnsjit is a LuaJIT engine program: Debian builds dnsjit and an Architecture: all dnsjit-dev that installs only usr/include and man3 pages, so there is no linkable C library; the documented parser is the Lua core.object.dns module, which a harness would have to drive through the dnsjit executable and a Lua script."
+    "reason": "Not attempted. dnsjit is a LuaJIT engine program: Debian builds dnsjit and an Architecture: all dnsjit-dev that installs only usr/include and man3 pages, so there is no linkable C library; the documented parser is the Lua core.object.dns module, which a harness would have to drive through the dnsjit executable and a Lua script."
   },
   {
     "name": "libjdns",
@@ -173,7 +173,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 8,
     "found_by": "registry search hit (debian-source:dns)",
-    "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
+    "metric_source": "targeted lookup in registry-snapshot.json (round2_targeted)",
     "documentation": "https://github.com/psi-im/jdns",
     "family": "jdns",
     "reason": "Resolver/mDNS session library. src/jdns/CMakeLists.txt installs only jdns.h and jdns_export.h as public headers; the packet decoder (jdns_packet.h) is private, so no documented API parses caller-supplied message bytes."
@@ -184,7 +184,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 31,
     "found_by": "registry search hit (debian-source:dns)",
-    "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
+    "metric_source": "targeted lookup in registry-snapshot.json (round2_targeted)",
     "documentation": "https://cr.yp.to/djbdns.html",
     "family": "djbdns",
     "reason": "Server and client programs; Debian builds no library or development package, and the dns_packet_* routines are internal to the programs."
@@ -195,10 +195,10 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": null,
     "found_by": "registry search hit (conan:dns)",
-    "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
+    "metric_source": "targeted lookup in registry-snapshot.json (round2_targeted)",
     "documentation": "https://github.com/mjansson/mdns",
     "family": "mjansson/mdns (header-only mDNS)",
-    "reason": "No primary metric (Conan only, no Debian source package). Star fallback checked in round 6: mjansson/mdns has 598 stars and tag 1.4.3 (archive sha256 be1fd8e3...), but by source inspection of mdns.h 1.4.3 the message header, questions and records are decoded only inside the socket receive functions (mdns_query_recv, mdns_discovery_recv and mdns_socket_listen call recvfrom), and the documented record helpers decode PTR, SRV, A, AAAA and TXT RDATA only (no MX). There is no documented API for caller-supplied message bytes, and the harness may not open a socket.",
+    "reason": "No primary metric (Conan only, no Debian source package). Star fallback checked (2026-11-18): mjansson/mdns has 598 stars and tag 1.4.3 (archive sha256 be1fd8e3...), but by source inspection of mdns.h 1.4.3 the message header, questions and records are decoded only inside the socket receive functions (mdns_query_recv, mdns_discovery_recv and mdns_socket_listen call recvfrom), and the documented record helpers decode PTR, SRV, A, AAAA and TXT RDATA only (no MX). There is no documented API for caller-supplied message bytes, and the harness may not open a socket.",
     "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
     "supplemental_metric_value": 598,
     "checked_version": "1.4.3",
@@ -211,7 +211,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": null,
     "found_by": "registry search hit (conan:dns)",
-    "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
+    "metric_source": "targeted lookup in registry-snapshot.json (round2_targeted)",
     "documentation": "https://github.com/apple-oss-distributions/mDNSResponder",
     "family": "Apple mDNSResponder dns_sd",
     "reason": "No Debian source package (no primary metric); its public dns_sd.h API registers, browses and resolves services over the daemon and documents no parser for caller-supplied message bytes."
@@ -222,10 +222,10 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": null,
     "found_by": "registry search hit (conan:dns)",
-    "metric_source": "round-2 targeted lookup in registry-snapshot.json (round2_targeted)",
+    "metric_source": "targeted lookup in registry-snapshot.json (round2_targeted)",
     "documentation": "https://github.com/Pro/mdnsd",
     "family": "mdnsd (Jeremie Miller) fork",
-    "reason": "Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. Star fallback (round 6, 2026-11-18): Pro/mdnsd has 11 GitHub stars, below the 100-star threshold, and is a GitHub fork (fork: true) of mdnsd; registry-snapshot.json round_6_star_fallback.",
+    "reason": "Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. Star fallback (2026-11-18): Pro/mdnsd has 11 GitHub stars, below the 100-star threshold, and is a GitHub fork (fork: true) of mdnsd; registry-snapshot.json round_6_star_fallback.",
     "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
     "supplemental_metric_value": 11
   },
@@ -238,9 +238,9 @@
     "documentation": "https://packages.debian.org/sid/libmdnsd-dev",
     "input_api_lead": "int message_parse(struct message *m, unsigned char *packet) (libmdnsd/1035.h)",
     "api_lead_checked_against_pinned_release": true,
-    "reason": "Debian builds libmdnsd-dev with libmdnsd/1035.h, whose message_parse decodes the header, questions and records of caller-supplied bytes, but by source inspection of v1.2 (libmdnsd/1035.c) the record parser decodes only A, AAAA, NS, CNAME, PTR, SRV and TXT RDATA; the MX answer of controls/dns/response.bin keeps raw RDATA, so its exchange name is not decoded by the library. Round 6: troglobit/mdnsd has 75 GitHub stars, below the star-fallback threshold as well.",
+    "reason": "Debian builds libmdnsd-dev with libmdnsd/1035.h, whose message_parse decodes the header, questions and records of caller-supplied bytes, but by source inspection of v1.2 (libmdnsd/1035.c) the record parser decodes only A, AAAA, NS, CNAME, PTR, SRV and TXT RDATA; the MX answer of controls/dns/response.bin keeps raw RDATA, so its exchange name is not decoded by the library. Star fallback (2026-11-18): troglobit/mdnsd has 75 GitHub stars, below the 100-star threshold as well.",
     "primary_metric_value": 28,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 6
   },
   {
@@ -249,7 +249,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "mDNS/DNS-SD daemon and libraries; libavahi-core-dev installs core, lookup, publish, rr and log headers but not the packet decoder (avahi-core/dns.h is internal), so there is no documented API for caller-supplied message bytes.",
     "primary_metric_value": 221882,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 7
   },
   {
@@ -258,7 +258,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "systemd-resolved's DNS packet code is internal to the daemon; libsystemd-dev installs no DNS message parser API.",
     "primary_metric_value": 297072,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 8
   },
   {
@@ -267,7 +267,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "NSS module that resolves .local names through the Avahi daemon; no DNS message parser API.",
     "primary_metric_value": 150803,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 9
   },
   {
@@ -276,7 +276,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "DNS forwarder and DHCP server program; Debian builds no library or development package.",
     "primary_metric_value": 149868,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 10
   },
   {
@@ -285,7 +285,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "Packet-capture library; it reads frames and does not decode DNS messages.",
     "primary_metric_value": 126795,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 11
   },
   {
@@ -294,7 +294,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "Packet construction library (libnet_build_dnsv4 builds headers); it does not parse DNS messages.",
     "primary_metric_value": 38354,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 12
   },
   {
@@ -303,7 +303,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "libwireshark (libwireshark-dev) dissects captured frames through its epan dissector framework; the DNS dissector is a registered dissector (packet-dns.c), not a documented library API for caller-supplied DNS message bytes.",
     "primary_metric_value": 16012,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 13
   },
   {
@@ -312,7 +312,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "SIP stack; its sresolv/sres resolver sends queries and returns record structures (sres_record.h), decoding replies inside the resolver; no API for caller-supplied message bytes.",
     "primary_metric_value": 572,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 14
   },
   {
@@ -321,7 +321,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "Deep-packet-inspection flow classifier over IP packets; it extracts DNS metadata (query name, response addresses) for classification and exposes no message decoder.",
     "primary_metric_value": 85,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 15
   },
   {
@@ -331,7 +331,7 @@
     "family": "libknot",
     "reason": "Resolver daemon and libkres; DNS messages are parsed with libknot, whose packet parser is already selected as the knot path.",
     "primary_metric_value": 55,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 16
   },
   {
@@ -340,7 +340,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "Embedded TCP/IP stack; lwip/dns.h is a resolver (dns_gethostbyname) and lwip/apps/mdns.h a responder, both parsing replies internally; no API for caller-supplied message bytes.",
     "primary_metric_value": 31,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 17
   },
   {
@@ -350,7 +350,7 @@
     "family": "djbdns",
     "reason": "Its dns.h carries djbdns's routines (excluded djbdns family): dns_packet_copy/getname/skipname primitives and per-type answer extractors such as dns_ip4_packet and dns_mx_packet; no decoder of the header, questions and record sections.",
     "primary_metric_value": 28,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 18
   },
   {
@@ -359,7 +359,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "Trace-processing library; libpacketdump's protocol decoders print packets read from capture traces and need link-layer frames, with no documented API that returns a decoded DNS message.",
     "primary_metric_value": 15,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 19
   },
   {
@@ -368,7 +368,7 @@
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "reason": "SRV resolver library (asynchronous queries); no API for caller-supplied message bytes.",
     "primary_metric_value": 7,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "Debian source-package name search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 20
   },
   {
@@ -376,7 +376,7 @@
     "status": "unresolved",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 58,
-    "found_by": "round-4 discovery: Debian package-list review of libraries with an exported DNS decoder; metric in registry-snapshot.json round4_targeted",
+    "found_by": "Debian package-list review of libraries with an exported DNS decoder; metric in registry-snapshot.json round4_targeted",
     "documentation": "https://docs.gnunet.org/doxygen/",
     "input_api_lead": "struct GNUNET_DNSPARSER_Packet *GNUNET_DNSPARSER_parse(const char *udp_payload, size_t udp_payload_length) (gnunet_dnsparser_lib.h, libgnunetutil)",
     "family": "GNUnet DNSPARSER (src/util/dnsparser.c)",
@@ -389,7 +389,7 @@
     "status": "unresolved",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 1,
-    "found_by": "round-4 discovery: Debian package-list review (libyadifa-dev); metric in registry-snapshot.json round4_targeted",
+    "found_by": "Debian package-list review (libyadifa-dev); metric in registry-snapshot.json round4_targeted",
     "documentation": "https://www.yadifa.eu/",
     "input_api_lead": "dns_packet_reader_init(reader, buffer, size) then dns_packet_reader_read_record (dnscore/dns_packet_reader.h)",
     "family": "YADIFA dnscore",
@@ -402,7 +402,7 @@
     "status": "excluded",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 3,
-    "found_by": "round-4 discovery: Debian package-list review (embedded networking libraries); metric in registry-snapshot.json round4_targeted",
+    "found_by": "Debian package-list review (embedded networking libraries); metric in registry-snapshot.json round4_targeted",
     "documentation": "https://mongoose.ws/documentation/",
     "input_api_lead": "mg_dns_parse(const uint8_t *buf, size_t len, struct mg_dns_message *dm)",
     "family": "Cesanta Mongoose DNS/mDNS",
@@ -415,7 +415,7 @@
     "status": "excluded",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 125,
-    "found_by": "round-4 discovery: Debian package-list review (libraries bundling William Ahern's dns.c); metric in registry-snapshot.json round4_targeted",
+    "found_by": "Debian package-list review (libraries bundling William Ahern's dns.c); metric in registry-snapshot.json round4_targeted",
     "documentation": "https://www.linphone.org/en/belle-sip/",
     "input_api_lead": "",
     "family": "dns.c (William Ahern), bundled",
@@ -428,7 +428,7 @@
     "status": "excluded",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 111,
-    "found_by": "round-4 discovery: Debian package-list review (libraries bundling William Ahern's dns.c); metric in registry-snapshot.json round4_targeted",
+    "found_by": "Debian package-list review (libraries bundling William Ahern's dns.c); metric in registry-snapshot.json round4_targeted",
     "documentation": "https://25thandclement.com/~william/projects/cqueues.html",
     "input_api_lead": "cqueues.dns.packet (Lua)",
     "family": "dns.c (William Ahern), bundled",
@@ -440,7 +440,7 @@
     "status": "excluded",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 1278,
-    "found_by": "round-4 discovery: Debian package-list review (applications with a bundled DNS library); metric in registry-snapshot.json round4_targeted",
+    "found_by": "Debian package-list review (applications with a bundled DNS library); metric in registry-snapshot.json round4_targeted",
     "documentation": "https://rspamd.com/",
     "input_api_lead": "",
     "family": "librdns (bundled in rspamd)",
@@ -452,7 +452,7 @@
     "status": "excluded",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": 241,
-    "found_by": "round-4 discovery: Debian package-list review (applications with a bundled DNS library); metric in registry-snapshot.json round4_targeted",
+    "found_by": "Debian package-list review (applications with a bundled DNS library); metric in registry-snapshot.json round4_targeted",
     "documentation": "https://www.opensmtpd.org/",
     "input_api_lead": "",
     "family": "OpenBSD asr (bundled)",
@@ -464,7 +464,7 @@
     "status": "excluded",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": null,
-    "found_by": "round-4 discovery: Fedora/Debian package-list review (pjlib-util); metric in registry-snapshot.json round4_targeted",
+    "found_by": "Fedora/Debian package-list review (pjlib-util); metric in registry-snapshot.json round4_targeted",
     "documentation": "https://docs.pjsip.org/en/latest/api/generated/pjlib-util/group/group__PJ__DNS.html",
     "input_api_lead": "pj_dns_parse_packet(pj_pool_t *pool, const void *packet, unsigned size, pj_dns_parsed_packet **p_res)",
     "family": "pjlib-util DNS",
@@ -477,12 +477,12 @@
     "status": "unresolved_no_primary_metric",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": null,
-    "found_by": "round-4 discovery: GitHub topic search (topic:dns language:C, rofl0r/firedns) and old Debian package lists",
+    "found_by": "GitHub topic search (topic:dns language:C, rofl0r/firedns) and old Debian package lists",
     "documentation": "https://github.com/rofl0r/firedns",
     "input_api_lead": "",
     "family": "firedns",
     "api_lead_checked_against_pinned_release": false,
-    "reason": "Asynchronous resolver library last packaged in Debian jessie (0.9.12); absent from the pinned popcon table, so no primary metric and no Debian dev-package fallback. Not attempted. Star fallback (round 6, 2026-11-18): rofl0r/firedns has 18 GitHub stars, below the 100-star threshold, and has no tagged release; registry-snapshot.json round_6_star_fallback.",
+    "reason": "Asynchronous resolver library last packaged in Debian jessie (0.9.12); absent from the pinned popcon table, so no primary metric and no Debian dev-package fallback. Not attempted. Star fallback (2026-11-18): rofl0r/firedns has 18 GitHub stars, below the 100-star threshold, and has no tagged release; registry-snapshot.json round_6_star_fallback.",
     "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
     "supplemental_metric_value": 18
   },
@@ -491,12 +491,12 @@
     "status": "unresolved_no_primary_metric",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": null,
-    "found_by": "round-4 discovery: Alpine package lists (s6-dns-dev)",
+    "found_by": "Alpine package lists (s6-dns-dev)",
     "documentation": "https://skarnet.org/software/s6-dns/libs6dns/",
     "input_api_lead": "s6dns_message_parse_init / s6dns_message_parse_next and per-type s6dns_message_get_* (libs6dns)",
     "family": "skarnet s6-dns",
     "api_lead_checked_against_pinned_release": false,
-    "reason": "skarnet's libs6dns documents message-parsing functions and is packaged in Alpine, but Debian has no s6-dns source package (sources.debian.org 404; only skalibs), so there is no primary metric and no Debian dev-package fallback. Not attempted. Star fallback (round 6, 2026-11-18): skarnet/s6-dns has 47 GitHub stars, below the 100-star threshold; registry-snapshot.json round_6_star_fallback.",
+    "reason": "skarnet's libs6dns documents message-parsing functions and is packaged in Alpine, but Debian has no s6-dns source package (sources.debian.org 404; only skalibs), so there is no primary metric and no Debian dev-package fallback. Not attempted. Star fallback (2026-11-18): skarnet/s6-dns has 47 GitHub stars, below the 100-star threshold; registry-snapshot.json round_6_star_fallback.",
     "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
     "supplemental_metric_value": 47
   },
@@ -505,12 +505,12 @@
     "status": "unresolved_no_primary_metric",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": null,
-    "found_by": "round-4 discovery: GitHub repository search (language:C, 'dns wire format': reedjc/wdns-parse-hex)",
+    "found_by": "GitHub repository search (language:C, 'dns wire format': reedjc/wdns-parse-hex)",
     "documentation": "https://github.com/farsightsec/wdns",
     "input_api_lead": "wdns_parse_message(wdns_message_t *m, const uint8_t *pkt, size_t len)",
     "family": "Farsight wdns",
     "api_lead_checked_against_pinned_release": false,
-    "reason": "Farsight Security's low-level DNS wire library, distributed through Farsight's own package repository; no Debian source package, so no primary metric. Not attempted. Star fallback (round 6, 2026-11-18): farsightsec/wdns has 20 GitHub stars, below the 100-star threshold; registry-snapshot.json round_6_star_fallback.",
+    "reason": "Farsight Security's low-level DNS wire library, distributed through Farsight's own package repository; no Debian source package, so no primary metric. Not attempted. Star fallback (2026-11-18): farsightsec/wdns has 20 GitHub stars, below the 100-star threshold; registry-snapshot.json round_6_star_fallback.",
     "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
     "supplemental_metric_value": 20
   },
@@ -519,12 +519,12 @@
     "status": "unresolved_no_primary_metric",
     "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
     "primary_metric_value": null,
-    "found_by": "round-4 discovery: GitHub repository search (language:C, 'dns parser': robertdavidgraham/dnsparse)",
+    "found_by": "GitHub repository search (language:C, 'dns parser': robertdavidgraham/dnsparse)",
     "documentation": "https://github.com/robertdavidgraham/dnsparse",
     "input_api_lead": "",
     "family": "dnsparse (Robert Graham)",
     "api_lead_checked_against_pinned_release": false,
-    "reason": "Stand-alone DNS response parser on GitHub with no Debian source package; no primary metric. Not attempted. Star fallback (round 6, 2026-11-18): robertdavidgraham/dnsparse has 24 GitHub stars, below the 100-star threshold, and has no tagged release; registry-snapshot.json round_6_star_fallback.",
+    "reason": "Stand-alone DNS response parser on GitHub with no Debian source package; no primary metric. Not attempted. Star fallback (2026-11-18): robertdavidgraham/dnsparse has 24 GitHub stars, below the 100-star threshold, and has no tagged release; registry-snapshot.json round_6_star_fallback.",
     "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
     "supplemental_metric_value": 24
   },
@@ -537,11 +537,11 @@
     "supplemental_metric_value": 273,
     "supplemental_metric_source": "https://api.github.com/repos/wahern/dns",
     "supplemental_captured_at_utc": "2026-11-18T07:17:48.503233+00:00",
-    "found_by": "round-6 star-fallback GitHub repository search ('dns library language:C stars:>=100', 'dns in:name language:C stars:>=100'); registry-snapshot.json round_6_star_fallback",
+    "found_by": "star-fallback GitHub repository search ('dns library language:C stars:>=100', 'dns in:name language:C stars:>=100'); registry-snapshot.json round_6_star_fallback",
     "documentation": "https://github.com/wahern/dns/blob/rel-20160808/README.md",
     "input_api_lead": "dns_p_make + P->data/P->end, dns_p_study, dns_rr_foreach/dns_rr_grep, dns_any_parse (src/dns.h)",
     "family": "dns.c (William Ahern) single-file packet decoder",
-    "note": "Debian does not package dns.c; belle-sip and lua-cqueues embed copies (both excluded in round 4 for exposing no C packet API), which do not give dns.c a Debian source identity or popcon count.",
+    "note": "Debian does not package dns.c; belle-sip and lua-cqueues embed copies (both excluded for exposing no C packet API), which do not give dns.c a Debian source identity or popcon count.",
     "api_lead_checked_against_pinned_release": true,
     "lead_adoption_order": null,
     "supplemental_rank": 1,
@@ -555,7 +555,7 @@
     "primary_metric_value": null,
     "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
     "supplemental_metric_value": 140,
-    "found_by": "round-6 star-fallback GitHub search ('dns parser language:C stars:>=100')",
+    "found_by": "star-fallback GitHub search ('dns parser language:C stars:>=100')",
     "documentation": "https://github.com/NLnetLabs/simdzone",
     "input_api_lead": "",
     "family": "NLnet Labs simdzone",
@@ -569,7 +569,7 @@
     "primary_metric_value": null,
     "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
     "supplemental_metric_value": 84,
-    "found_by": "round-6 star-fallback lookup of known C DNS codec libraries",
+    "found_by": "star-fallback lookup of known C DNS codec libraries",
     "documentation": "https://github.com/spc476/SPCDNS",
     "input_api_lead": "dns_decode(dns_decoded_t *, size_t *, const dns_packet_t *, size_t) (dns.h)",
     "family": "SPCDNS (Sean Conner)",

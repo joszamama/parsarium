@@ -40,7 +40,7 @@
     "control_result": "Both controls match the oracle summaries through (new DecoderFactory)->create(null, false)->decode($data) under plain PHP (Z, AD and CD are not kept, reported as 0).",
     "reason": "Pinned v2.1.0 passes both DNS controls; see parsers.json and data/php/dns/daverandom-libdns-feedback-differential.json.",
     "verification": "projects/dns/php/daverandom_libdns/verification.json",
-    "runnability_note": "Round 1 recorded a php-fuzzer blocker: the include-interceptor rewrite of src/Records/Types/DomainName.php (a PHP_INT_SIZE ternary class constant) ends in 'Constant expression contains invalid operations'. Round 2 resolves it in fuzz-target.php only: the parent class is autoloaded first, then DomainName.php alone is required through the native file:// wrapper and the interceptor's wrapper is registered again (Interceptor::unwrap()/wrap() steps). Parsing and harness.php are unchanged; Xdebug coverage and the AFL++ bridge count DomainName.php normally."
+    "runnability_note": "php-fuzzer blocker: the include-interceptor rewrite of src/Records/Types/DomainName.php (a PHP_INT_SIZE ternary class constant) ends in 'Constant expression contains invalid operations'. It is resolved in fuzz-target.php only: the parent class is autoloaded first, then DomainName.php alone is required through the native file:// wrapper and the interceptor's wrapper is registered again (Interceptor::unwrap()/wrap() steps). Parsing and harness.php are unchanged; Xdebug coverage and the AFL++ bridge count DomainName.php normally."
   },
   {
     "name": "spatie/dns",
@@ -165,7 +165,7 @@
     "status": "resolved_verified_selected",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 196676,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/utopia-php/dns#readme",
     "input_api_lead": "Utopia\\DNS\\Message::decode($packet)",
     "family": "Utopia DNS",
@@ -179,7 +179,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 545803,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/bluelibraries/dns#readme",
     "input_api_lead": null,
     "family": "bluelibraries DNS (dns_get_record, dig, UDP and TCP handlers)",
@@ -192,7 +192,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 890764,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/danog/LibDNSJson#readme",
     "input_api_lead": null,
     "family": "LibDNS (JSON DoH format adapter)",
@@ -205,7 +205,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 891767,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/danog/dns-over-https#readme",
     "input_api_lead": null,
     "family": "amphp/LibDNS resolver",
@@ -218,7 +218,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 50720,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/icicleio/dns#readme",
     "input_api_lead": null,
     "family": "LibDNS 1.x resolver",
@@ -231,7 +231,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 1508,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/plesk/net_dns2",
     "input_api_lead": "Net_DNS2_Packet_Response",
     "family": "Net_DNS2 1.x (fork)",
@@ -244,7 +244,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 12091,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/metaregistrar/php-dns-client",
     "input_api_lead": null,
     "family": "metaregistrar DNS client",
@@ -257,7 +257,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 6309,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/splitice/php-dns",
     "input_api_lead": null,
     "family": "php-dns client",
@@ -270,7 +270,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 6887,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/nytris/dns",
     "input_api_lead": null,
     "family": "ReactPHP DNS wrapper",
@@ -283,7 +283,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 360,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/php-standard-library/dns#readme",
     "input_api_lead": null,
     "family": "PSL DNS resolver",
@@ -296,7 +296,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 1588,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/hiblaphp/dns",
     "input_api_lead": null,
     "family": "HiblaPHP DNS resolver",
@@ -309,7 +309,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 2785,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/clue/php-mdns-react#readme",
     "input_api_lead": null,
     "family": "ReactPHP DNS (mDNS resolver)",
@@ -322,7 +322,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 23,
-    "found_by": "round-2 Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
+    "found_by": "Packagist search hit (recorded first-100 'dns' results); metric in registry-snapshot.json round2_targeted",
     "documentation": "https://github.com/danog/LibDNSNative",
     "input_api_lead": null,
     "family": "LibDNS (dns_get_record format adapter)",
@@ -337,7 +337,7 @@
     "documentation": "https://packagist.org/packages/dapphp/torutils",
     "reason": "Tor control-protocol and DNSEL utilities; v2.0.0beta1's TorDNSEL class builds and reads its own DNS query packets inside the network lookup (no public API for caller-supplied message bytes), and its count covers the whole Tor toolkit.",
     "primary_metric_value": 90856,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 22
   },
   {
@@ -347,7 +347,7 @@
     "family": "LibDNS",
     "reason": "Amp multicast DNS resolver for WebRTC; 1.1.12 requires daverandom/libdns (selected) for message decoding. No own parser.",
     "primary_metric_value": 28073,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 23
   },
   {
@@ -356,7 +356,7 @@
     "primary_metric": "Packagist total downloads",
     "reason": "DNS-over-HTTPS client: 1.3.0 decodes responses inside the static DNS::query() call (private processHeader/getHeader and per-type decode() helpers fed from the HTTPS response), with no public API for caller-supplied message bytes.",
     "primary_metric_value": 18711,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 24
   },
   {
@@ -366,7 +366,7 @@
     "family": "Net_DNS2",
     "reason": "Recursive resolver with DNSSEC validation; v1.5.0 requires mikepultz/netdns2 (the selected Net_DNS2 family) and uses it as its transport and packet layer.",
     "primary_metric_value": 15189,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 25
   },
   {
@@ -375,7 +375,7 @@
     "primary_metric": "Packagist total downloads",
     "reason": "Service-name registry (getServices, resolveHost, setService); 1.0.1 has no DNS wire-format code.",
     "primary_metric_value": 8036,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 26
   },
   {
@@ -387,7 +387,7 @@
     "input_api_lead": "Cbox\\Dns\\Protocol\\Decoder::decode(string $message, RecordType $expected, string $host, ...)",
     "reason": "Raw-socket resolver toolkit. Its Protocol\\Decoder::decode (not covered by the documentation, which describes typed lookups) requires the expected type and host and returns a DnsResponse with records and rcode: by source inspection of v1.1.0 it discards the header ID, QR, opcode, TC, RD, RA and the question entries and does not keep record classes, so the oracle summary cannot be produced from its parse.",
     "primary_metric_value": 6740,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 27
   },
   {
@@ -396,7 +396,7 @@
     "primary_metric": "Packagist total downloads",
     "reason": "No tagged release (dev-master only); the client calls swoole_async_dns_lookup, with no message parser.",
     "primary_metric_value": 4080,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 28
   },
   {
@@ -406,7 +406,7 @@
     "family": "LibDNS",
     "reason": "Fork of daverandom/libdns (same 'DNS protocol implementation written in pure PHP' code base) with no tagged release (1.0.x-dev only).",
     "primary_metric_value": 2894,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 29
   },
   {
@@ -416,7 +416,7 @@
     "family": "react/dns",
     "reason": "mDNS resolver; v1.0.0 requires react/dns (selected) for message handling. No own parser.",
     "primary_metric_value": 1766,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 30
   },
   {
@@ -426,7 +426,7 @@
     "family": "react/dns",
     "reason": "mDNS resolver and responder; v1.8 requires react/dns (selected). No own parser.",
     "primary_metric_value": 58,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 31
   },
   {
@@ -435,7 +435,7 @@
     "primary_metric": "Packagist total downloads",
     "reason": "Hoa\\Dns is a DNS server event loop: its Resolver parses incoming queries inside the socket server and documents no message-bytes parser.",
     "primary_metric_value": 200,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 32
   },
   {
@@ -445,7 +445,7 @@
     "family": "react/dns",
     "reason": "DNS-over-HTTPS proxy (pre-release 0.4.0-beta) that requires react/dns for message handling.",
     "primary_metric_value": 150,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 33
   },
   {
@@ -454,7 +454,7 @@
     "primary_metric": "Packagist total downloads",
     "reason": "From-scratch resolver client; its DnsMessageDecoder::decode(data, expectedId, type) is not documented in the README (which documents the resolver contract) and returns only answers of the queried type.",
     "primary_metric_value": 72,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 34
   },
   {
@@ -463,7 +463,7 @@
     "primary_metric": "Packagist total downloads",
     "reason": "Resolver client: the README documents only lookup(); packet classes are used internally by the resolver.",
     "primary_metric_value": 56,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 35
   },
   {
@@ -473,7 +473,7 @@
     "family": "react/dns",
     "reason": "Port of an early ReactPHP DNS component to the Thruster event loop (its Parser::parseChunk mirrors react/dns's old chunked parser); resolver API only, 38 downloads.",
     "primary_metric_value": 38,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 36
   },
   {
@@ -482,7 +482,7 @@
     "primary_metric": "Packagist total downloads",
     "reason": "Parses dig text output lines (Aux_Func::fill_dns_array splits host/ttl/class/type/data), not DNS wire messages.",
     "primary_metric_value": 8,
-    "found_by": "round-3 search extension or documentation lead; metric in registry-snapshot.json round2_targeted",
+    "found_by": "additional Packagist search (registry-snapshot.json round3_search) or documentation lead; metric in registry-snapshot.json round2_targeted",
     "lead_adoption_order": 37
   },
   {
@@ -490,7 +490,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 41424,
-    "found_by": "round-6 discovery: GitHub code search (qdcount ancount nscount arcount language:PHP); metric in registry-snapshot.json round6_targeted",
+    "found_by": "GitHub code search (qdcount ancount nscount arcount language:PHP); metric in registry-snapshot.json round6_targeted",
     "documentation": "https://github.com/kakserpom/phpdaemon",
     "input_api_lead": "PHPDaemon\\Clients\\DNS\\Connection::onUdpPacket($pct)",
     "family": "phpDaemon DNS client",
@@ -502,7 +502,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 35,
-    "found_by": "round-6 discovery: GitHub repository search (dns client language:PHP); metric in registry-snapshot.json round6_targeted",
+    "found_by": "GitHub repository search (dns client language:PHP); metric in registry-snapshot.json round6_targeted",
     "documentation": "https://github.com/sirmonti/DOH/blob/3.0.0/README.md",
     "input_api_lead": "DOHGG::dns($name, $type)",
     "family": "sirmonti DOH",
@@ -514,7 +514,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 814,
-    "found_by": "round-6 discovery: Packagist search (dnssd, dnssec); metric in registry-snapshot.json round6_targeted",
+    "found_by": "Packagist search (dnssd, dnssec); metric in registry-snapshot.json round6_targeted",
     "documentation": "https://github.com/yocto/yoclib-dns-php/blob/master/README.md",
     "input_api_lead": "TypeHelper::deserializeFromWireFormatByClassAndType($rdata, $class, $type)",
     "family": "yocLib DNS",
@@ -526,7 +526,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 37,
-    "found_by": "round-6 discovery: Packagist search (domain name system); metric in registry-snapshot.json round6_targeted",
+    "found_by": "Packagist search (domain name system); metric in registry-snapshot.json round6_targeted",
     "documentation": "https://github.com/horde/dns",
     "input_api_lead": "Horde_Dns backends",
     "family": "Horde DNS",
@@ -538,7 +538,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 66,
-    "found_by": "round-6 discovery: GitHub repository search (dns library language:PHP); metric in registry-snapshot.json round6_targeted",
+    "found_by": "GitHub repository search (dns library language:PHP); metric in registry-snapshot.json round6_targeted",
     "documentation": "https://github.com/YGGverse/net-php",
     "input_api_lead": "Yggverse\\Net\\Dig::records(...)",
     "family": "",
@@ -550,7 +550,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 14,
-    "found_by": "round-6 discovery: GitHub repository search (dns library language:PHP); metric in registry-snapshot.json round6_targeted",
+    "found_by": "GitHub repository search (dns library language:PHP); metric in registry-snapshot.json round6_targeted",
     "documentation": "https://github.com/chielteuben/php-dns-extended",
     "input_api_lead": "",
     "family": "remotelyliving/php-dns fork",
@@ -562,7 +562,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 6,
-    "found_by": "round-6 discovery: Packagist search (dnssd, dnssec); metric in registry-snapshot.json round6_targeted",
+    "found_by": "Packagist search (dnssd, dnssec); metric in registry-snapshot.json round6_targeted",
     "documentation": "https://github.com/php-standard-library/dnssec",
     "input_api_lead": "",
     "family": "PSL DNS",
@@ -574,7 +574,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 35,
-    "found_by": "round-6 discovery: Packagist search (dns record); metric in registry-snapshot.json round6_targeted",
+    "found_by": "Packagist search (dns record); metric in registry-snapshot.json round6_targeted",
     "documentation": "https://github.com/anquanssl/dns",
     "input_api_lead": "",
     "family": "bluelibraries/dns fork",
@@ -586,7 +586,7 @@
     "status": "excluded",
     "primary_metric": "Packagist total downloads",
     "primary_metric_value": 21,
-    "found_by": "round-6 discovery: Packagist search (dns record); metric in registry-snapshot.json round6_targeted",
+    "found_by": "Packagist search (dns record); metric in registry-snapshot.json round6_targeted",
     "documentation": "https://github.com/bluelibraries/php5-dns",
     "input_api_lead": "",
     "family": "bluelibraries/dns",
