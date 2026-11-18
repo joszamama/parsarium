@@ -183,6 +183,19 @@
       "source": "https://packagist.org/packages/blixon/toml",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "hypnotox/toml",
+      "release": "v1.0.1",
+      "metric_value": 100,
+      "metric": "Packagist total downloads",
+      "family": "hypnotox/toml (own lexer, token stream and parser)",
+      "source": "https://packagist.org/packages/hypnotox/toml",
+      "api_lead": "TomlFactory::fromString(string) -> Toml; Toml::getData() -> TomlTable of TomlValue(ValueType, value)",
+      "status": "unresolved_datetime_source_text",
+      "checked_at_utc": "2026-11-18",
+      "found_by": "round-4 GitHub repository search \"toml parser language:php\" (repository hypnotox/php-toml, Packagist name hypnotox/toml)",
+      "evidence": "Run on the host (PHP 8.5.12, composer) against v1.0.1 (dist reference 9b40f89d, MIT): toArray() returns every date-time as a string, and the documented node tree keeps a ValueType enum with the four date-time kinds but stores each date-time value as its validated source text (Parser::parseAndValidateDatetime returns the string), so the offset date-time UTC instant would have to be computed by parsing that text in the harness, which the TOML protocol excludes. Integers, floats and strings are typed correctly on both controls."
     }
   ],
   "excluded": [
@@ -216,5 +229,89 @@
       "status": "excluded",
       "reason": "Code-style fixers; not a parser API."
     }
-  ]
+  ],
+  "round_4": {
+    "checked_at_utc": "2026-11-18",
+    "routes": [
+      "toml-lang/toml wiki lists: PHP entries PetalBranch/toml and php-collective/toml (selected) and vanodevium/toml (the GitHub home of the decided devium/toml lead); Old page entries yosymfony/toml, leonelquinteros/php-toml, zidizei/toml-php, jamesmoss/toml, checkdomain/toml (decided) and betrixed/Toml-Pun8, coop182/toml-php, shukean/php-toml (no Packagist package)",
+      "Packagist search pages 2-3 of \"toml\" (page 4 onward returns no results) and the queries \"toml decoder\", \"toml decode\", \"toml reader\", \"toml lexer\", \"tomlparser\": no unrecorded TOML package",
+      "GitHub repository search \"toml parser language:php\" (62 repositories): hypnotox/toml is the only unrecorded parser with a Packagist release; withinboredom/toml, malofan/toml-php, nxu/php-toml, thomasdotusername/TOML-parser, GiovanniSalmeri/yellow-toml and jphenow/tomlrs-php are not on Packagist"
+    ],
+    "result": "No new path qualifies; the cell stays at 3.",
+    "packagist_queries": [
+      {
+        "query": "toml",
+        "page": 2,
+        "url": "https://packagist.org/search.json?q=toml&per_page=100&page=2",
+        "total": 14639,
+        "captured_at_utc": "2026-11-18T01:08:32.032396+00:00",
+        "hits_returned": 100
+      },
+      {
+        "query": "toml",
+        "page": 3,
+        "url": "https://packagist.org/search.json?q=toml&per_page=100&page=3",
+        "total": 14639,
+        "captured_at_utc": "2026-11-18T01:08:33.307725+00:00",
+        "hits_returned": 100
+      },
+      {
+        "query": "toml",
+        "page": 4,
+        "url": "https://packagist.org/search.json?q=toml&per_page=100&page=4",
+        "total": 0,
+        "captured_at_utc": "2026-11-18T01:08:34.498427+00:00",
+        "hits_returned": 0
+      },
+      {
+        "query": "toml",
+        "page": 5,
+        "url": "https://packagist.org/search.json?q=toml&per_page=100&page=5",
+        "total": 0,
+        "captured_at_utc": "2026-11-18T01:08:35.676691+00:00",
+        "hits_returned": 0
+      },
+      {
+        "query": "toml decoder",
+        "page": 1,
+        "url": "https://packagist.org/search.json?q=toml+decoder&per_page=100&page=1",
+        "total": 14,
+        "captured_at_utc": "2026-11-18T01:08:36.891967+00:00",
+        "hits_returned": 14
+      },
+      {
+        "query": "toml decode",
+        "page": 1,
+        "url": "https://packagist.org/search.json?q=toml+decode&per_page=100&page=1",
+        "total": 17,
+        "captured_at_utc": "2026-11-18T01:08:38.072683+00:00",
+        "hits_returned": 17
+      },
+      {
+        "query": "toml reader",
+        "page": 1,
+        "url": "https://packagist.org/search.json?q=toml+reader&per_page=100&page=1",
+        "total": 46,
+        "captured_at_utc": "2026-11-18T01:08:39.371825+00:00",
+        "hits_returned": 46
+      },
+      {
+        "query": "toml lexer",
+        "page": 1,
+        "url": "https://packagist.org/search.json?q=toml+lexer&per_page=100&page=1",
+        "total": 18,
+        "captured_at_utc": "2026-11-18T01:08:40.581695+00:00",
+        "hits_returned": 18
+      },
+      {
+        "query": "tomlparser",
+        "page": 1,
+        "url": "https://packagist.org/search.json?q=tomlparser&per_page=100&page=1",
+        "total": 36,
+        "captured_at_utc": "2026-11-18T01:08:41.779786+00:00",
+        "hits_returned": 36
+      }
+    ],
+    "packagist_hits": "data/php/toml/registry-snapshot.json round_4_targeted_lookups"
+  }
 }
