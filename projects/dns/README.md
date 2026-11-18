@@ -20,6 +20,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [tangled.sh/seiso.moe/magna / Go](go/tangled_sh_seiso_moe_magna/README.md)
 - [dns4s-core_2.13 / Java](java/dns4s_core/README.md)
 - [dnsjava / Java](java/dnsjava/README.md)
+- [dnslib / Java](java/sidn_dnslib/README.md)
 - [minidns-core / Java](java/minidns_core/README.md)
 - [netty-codec-dns / Java](java/netty_codec_dns/README.md)
 - [pcap4j-core / Java](java/pcap4j_core/README.md)
