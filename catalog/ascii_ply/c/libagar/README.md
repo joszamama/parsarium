@@ -25,6 +25,11 @@
 
 Agar's scene-graph library ships its own ASCII and binary PLY header, element and property parser behind SG_ObjectLoadPLY(3); it does not bundle RPly, Greg Turk ply.c or another counted C PLY engine. The library is part of the Agar GUI toolkit; no display driver is opened.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/c/libagar/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply c libagar
+python3 parsarium.py run ascii_ply c libagar controls/ascii_ply/triangle.ply
+```

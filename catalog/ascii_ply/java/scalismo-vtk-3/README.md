@@ -25,6 +25,11 @@
 
 scalismo-vtk is a separate unibas-gravis repository and Maven artifact from the selected scalismo_3 (whose 1.0 PLY reader is pure Scala). Its MeshIO.readPLY scans the header in Scala, then parses through VTK's vtkPLYReader from the vtkjavanatives VTK 9.1 Java build; the VTK PLY family is shared with the f3d Java path, so it is not an independent engine.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/java/scalismo_vtk/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply java scalismo_vtk
+python3 parsarium.py run ascii_ply java scalismo_vtk controls/ascii_ply/triangle.ply
+```

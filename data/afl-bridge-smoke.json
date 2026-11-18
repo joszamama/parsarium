@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-11-18T03:13:03.047271+00:00",
-  "projects_total": 622,
-  "projects_verified": 622,
+  "checked_at_utc": "2026-11-18T04:18:00.430894+00:00",
+  "projects_total": 624,
+  "projects_verified": 624,
   "results": [
     {
       "schema_version": 1,
@@ -428,6 +428,47 @@
     },
     {
       "schema_version": 1,
+      "project": "ascii_ply/java/pdal",
+      "pass": true,
+      "feedback_kind": "java_native_pdal_ply_regions_to_afl_bitmap",
+      "feedback_scope": "LLVM source regions in PDAL 2.10.2 io/PlyReader.cpp (readers.ply); Scala API and JNI glue excluded",
+      "base_project_receipt_sha256": "fc0ea067cf10fa0542e06bd2bd5ebd8310c52b086805dbae354b20055ef0e810",
+      "base_image_id": "sha256:0a2385f6763500cda5b9efb664c5eac17eaf29d8330cd04856dba7aea2072ebf",
+      "image_id": "sha256:28884a874c3e6b0dc085add07ab0b399c1444dfc8c6e7d5e01e210e632daa62b",
+      "platform": "linux/amd64",
+      "source_sha256": "34e5c0e3ad3ccc6aa1d9151f5c1dca7c71e24226d9c08754c3a1f4712031b6af",
+      "underlying_source_sha256": "882b97aa3ae5db682c3b2dc8edef4e29bcc7ecea51c70592e71bc1f34112ad00",
+      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+      "variant_sha256": "9e5272dad9d3ec7e9c3a48bfcd6c7cb439ba7ed46b813020335980802975d342",
+      "parser_source_features": 157,
+      "control_repeat_feature_counts": [
+        157,
+        157
+      ],
+      "stable_control_features": 157,
+      "variant_repeat_feature_counts": [
+        141,
+        141
+      ],
+      "stable_variant_only_features": 0,
+      "stable_control_only_features": 16,
+      "feedback_edges": 177,
+      "variant_feedback_edges": 161,
+      "afl_map_size": 65536,
+      "afl_package": "4.09c-1ubuntu3",
+      "overlay_file_sha256": {
+        "Dockerfile": "e4f6c3d09b1b69494d7ed49d37bd71a6b10bbe98f153051335c5728fd3afb315",
+        "afl_trace": "c14c096477a2f3b80f68d4399654303edf76b39b26847d84f381e90634ea8865",
+        "native_trace.py": "26948c0a67b526fb71f68451deb0078c528631497b603934a9cdf50b3c1a6c0f",
+        "build.py": "0304f81a073b04f3ec409a549461f8584cac29c42e5f3e8860df2288b2887642"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "JavaCase.java": "1b90b2fe2457060d7e6794a10a29487130bcacdd312f0ceb444b98bab7f21ad7"
+      }
+    },
+    {
+      "schema_version": 1,
       "project": "ascii_ply/java/scalismo",
       "pass": true,
       "feedback_kind": "java_parser_source_lines_to_afl_bitmap",
@@ -468,6 +509,47 @@
       "variant_feedback_edges": 83,
       "afl_tuple_difference": 198,
       "variant_check_sha256": "1a2d8c946bb4f31acbfb577930f91c9a837e3d43578cc61b802a862cb95e2442"
+    },
+    {
+      "schema_version": 1,
+      "project": "ascii_ply/java/scalismo_vtk",
+      "pass": true,
+      "feedback_kind": "java_native_vtk_ply_regions_to_afl_bitmap",
+      "feedback_scope": "LLVM source regions in VTK 9.1.0 IO/PLY (vtkPLYReader, vtkPLY) rebuilt in place of the stock libvtkIOPLY-9.1.so; Scala binding, JNI wrappers and other VTK libraries excluded",
+      "base_project_receipt_sha256": "f0494c61f6d46e8b70e470df04c9f268c2f97187ad9b8f3652fd162d84a9ec7b",
+      "base_image_id": "sha256:c1379b35df2cea78852af4d97b4d5d4a38712a82ab0d66fa1cf2bd2730cfe734",
+      "image_id": "sha256:ce9275663a9241b8976e76636e5c1f912b567c57688711ad4211ba38709906b5",
+      "platform": "linux/amd64",
+      "source_sha256": "392a407074fc3f9be865737d1cb41cc33db93ee5afee95777dc3ca38c0182e81",
+      "underlying_source_sha256": "8fed42f4f8f1eb8083107b68eaa9ad71da07110161a3116ad807f43e5ca5ce96",
+      "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+      "variant_sha256": "9e5272dad9d3ec7e9c3a48bfcd6c7cb439ba7ed46b813020335980802975d342",
+      "parser_source_features": 551,
+      "control_repeat_feature_counts": [
+        551,
+        551
+      ],
+      "stable_control_features": 551,
+      "variant_repeat_feature_counts": [
+        498,
+        498
+      ],
+      "stable_variant_only_features": 25,
+      "stable_control_only_features": 78,
+      "feedback_edges": 567,
+      "variant_feedback_edges": 515,
+      "afl_map_size": 65536,
+      "afl_package": "4.09c-1ubuntu3",
+      "overlay_file_sha256": {
+        "Dockerfile": "e73204617af0d8979c70d7b53658c43df09308b01f7e17869b971ca01ce0cf9c",
+        "afl_trace": "c14c096477a2f3b80f68d4399654303edf76b39b26847d84f381e90634ea8865",
+        "native_trace.py": "e1b68c55662508094e596e20c4769b1903edaf7475154a55e287dc65d640e0f3",
+        "build.py": "4e328472bc078be05f30418b1d8a1594fc353ea344156860418260f8c04c15de"
+      },
+      "bridge_file_sha256": {
+        "afl_proxy.c": "10bcb7a7d74a7016ef831a1c2da3188e1542f0f87668987b03efc858d1ed6950",
+        "JavaCase.java": "1b90b2fe2457060d7e6794a10a29487130bcacdd312f0ceb444b98bab7f21ad7"
+      }
     },
     {
       "schema_version": 1,

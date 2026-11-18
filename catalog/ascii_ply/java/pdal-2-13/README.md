@@ -21,6 +21,11 @@
 
 pdal_2.13 is the Scala/Java API of PDAL/java; pdal-native 2.10.0 is its JNI glue over libpdalcpp. The PLY text is parsed by PDAL io/PlyReader.cpp, the same engine as the C pdal-c lead (excluded there for adoption), not an independent JVM parser.
 
-## Runnable harness
+## Run this target
 
-A Docker harness with parser-source coverage has not yet been verified for this API path.
+[Docker harness and verification receipt](../../../../projects/ascii_ply/java/pdal/README.md)
+
+```sh
+python3 parsarium.py build ascii_ply java pdal
+python3 parsarium.py run ascii_ply java pdal controls/ascii_ply/triangle.ply
+```
