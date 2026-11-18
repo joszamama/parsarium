@@ -24,6 +24,7 @@ usage: parsarium <command> [options]
 Catalog and targets (from the snapshot):
   list, catalog, projects, show     browse verified parsers and runnable targets
   build, run, replay, run-format    build a target and run inputs through it
+  observe FORMAT --corpus --results  record what each target read from each file
   afl ..., native ...               fuzz a target with AFL++ or its native engine
   fandango ...                      generate and replay format-aware inputs
 

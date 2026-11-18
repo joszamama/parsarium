@@ -6,7 +6,7 @@ Guidance for automated agents and new contributors. Read [README.md](README.md) 
 
 | Path | Contents |
 | --- | --- |
-| `parsarium.py` | Repository CLI: `list`, `catalog`, `projects`, `show`, `build`, `run`, `run-format`, `replay`, `afl`, `native`, `fandango`, `report` |
+| `parsarium.py` | Repository CLI: `list`, `catalog`, `projects`, `show`, `build`, `run`, `run-format`, `replay`, `observe`, `afl`, `native`, `fandango`, `report` |
 | `src/parsarium/` | Installable package (`parsarium` command, `run-selection`, snapshot handling) |
 | `data/formats.json` | Format registry: active and pilot formats, read by scripts and the website |
 | `data/<ecosystem>/<format>/` | One cell: `cell.json` (status, counts, search limits, uncertainty), `parsers.json` (selected third-party paths), `standard.json`, `leads.json` (candidates not counted, with reasons), `ranking.md`, `registry-snapshot.json` (hashed adoption-metric captures), receipts |

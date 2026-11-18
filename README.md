@@ -98,6 +98,14 @@ python3 parsarium.py run-format png --file my.png --results runs/png-my-file
 
 Use `--ecosystem python` to narrow the batch. A shared file may be accepted by some parsers and rejected by others; the receipts record each outcome.
 
+`run` and `run-format` report whether a harness completed. To see what each parser read, `observe` runs every target's verification check (the one that checks the valid control) once per corpus file, with that file in place of the control, and keeps the value the check computed. Each target gets a JSON Lines file with one record per input: `accepted` with the `observed` value and whether it equals the control's expected output, `rejected` with the parser's error, `harness_error` when the check failed for a reason unrelated to the parser, or `timeout`. A coverage step that fails after the value was read does not change an `accepted` record. Interrupted runs resume where they stopped.
+
+```sh
+python3 parsarium.py observe png --corpus runs/lodepng-fandango/generated --results runs/png-observe --workers 6
+```
+
+Some harnesses report only the fields of their control, or accept only inputs shaped like it (for example a 2×1 image); `summary.json` lists targets that rejected every input except the control and targets that reported the same value for every input.
+
 Formats: `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, `mp3`, `json`, `xml`, `yaml`, `toml`, `sql`, `dns`. Ecosystems: `c`, `cpp`, `go`, `java`, `javascript`, `python`, `rust`, `php`.
 
 ## Fuzzing

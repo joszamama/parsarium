@@ -264,6 +264,17 @@ def main() -> int:
     format_run.add_argument("--limit", type=int)
     format_run.add_argument("--list", action="store_true")
 
+    observed = commands.add_parser("observe", help="record what every target of a format read from each corpus file")
+    observed.add_argument("format", choices=FORMATS)
+    observed.add_argument("--corpus", type=Path, required=True)
+    observed.add_argument("--results", type=Path, required=True)
+    observed.add_argument("--ecosystem", choices=ECOSYSTEMS)
+    observed.add_argument("--target", action="append", default=[], help="ECOSYSTEM/SLUG; repeatable")
+    observed.add_argument("--workers", type=int, default=4)
+    observed.add_argument("--timeout", type=int, default=120)
+    observed.add_argument("--retry-errors", action="store_true")
+    observed.add_argument("--list", action="store_true")
+
     afl = commands.add_parser("afl", help="build, prepare, run, and summarize AFL++")
     afl_commands = afl.add_subparsers(dest="action", required=True)
     afl_build = afl_commands.add_parser("build", help="build and verify one AFL++ overlay")
@@ -388,6 +399,18 @@ def main() -> int:
         if args.list:
             extra.append("--list")
         return execute("run_format.py", args.format, *extra)
+    if args.command == "observe":
+        extra = ["--corpus", str(args.corpus), "--results", str(args.results),
+                 "--workers", str(args.workers), "--timeout", str(args.timeout)]
+        if args.ecosystem:
+            extra += ["--ecosystem", args.ecosystem]
+        for target in args.target:
+            extra += ["--target", target]
+        if args.retry_errors:
+            extra.append("--retry-errors")
+        if args.list:
+            extra.append("--list")
+        return execute("observe.py", args.format, *extra)
     if args.command == "afl":
         if args.action == "build":
             return build_afl(args.format, args.ecosystem, args.slug)
