@@ -127,8 +127,12 @@ def _safe_members(archive: tarfile.TarFile, prefix: str):
         if name.startswith("/") or ".." in Path(name).parts:
             raise SnapshotError(f"unsafe path in snapshot: {name}")
         if member.issym() or member.islnk():
-            link = Path(name).parent / member.linkname
-            if member.linkname.startswith("/") or ".." in Path(os.path.normpath(link)).parts:
+            # Symlink targets are relative to the link's directory; hard-link
+            # targets are archive paths. Either way they must stay in the prefix.
+            base = Path(name).parent if member.issym() else Path()
+            resolved = os.path.normpath(base / member.linkname)
+            if (member.linkname.startswith("/") or ".." in Path(resolved).parts
+                    or not (resolved == prefix or resolved.startswith(prefix + "/"))):
                 raise SnapshotError(f"unsafe link in snapshot: {name}")
         if not (member.isfile() or member.isdir() or member.issym() or member.islnk()):
             raise SnapshotError(f"unsupported entry in snapshot: {name}")
