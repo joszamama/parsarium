@@ -90,12 +90,12 @@
   },
   {
     "name": "Arabica",
-    "status": "unresolved",
+    "status": "unresolved_below_ceiling",
     "popcon_dev_package": {
       "libarabica-dev": 2
     },
     "family": "wrapper over expat, libxml2 or Xerces-C++ (build-time choice)",
-    "reason": "C++ SAX/DOM toolkit that delegates tokenizing to a selected C/C++ parser; two dev installations. Not built.",
+    "reason": "C++ SAX/DOM toolkit that delegates tokenizing to Expat, libxml2 or Xerces-C++; libarabica-dev has two installations (source no longer in sid), below libcutl-dev (3), the tenth path, so with the cell at its ten-path ceiling it was not built (round 4).",
     "source": "https://github.com/jezhiggins/arabica"
   },
   {
@@ -190,5 +190,36 @@
     "reason": "Round 4 Debian -dev lookup (libosp-dev 82; runtime libosp5 10,165). Verified OpenSP 1.5.2 (Debian orig tarball, MIT) through its generic event API in the XML mode doc/xml.htm documents (xml.soc catalog, SP_CHARSET_FIXED=YES, SP_ENCODING=XML, -wxml, -wno-valid): both shared valid controls match the expat non-namespace raw-name summary (SGML has no namespaces). 7846 libosp lines covered; the controls differ by 575 covered lines and 326 repeat-stable AFL++ tuples. Rank 7 of nine, between gSOAP and cxxtools. Own family.",
     "source": "https://openjade.sourceforge.net/doc/xml.htm",
     "project": "projects/xml/cpp/opensp"
+  },
+  {
+    "name": "libcutl",
+    "status": "resolved_verified_selected",
+    "popcon_dev_package": {
+      "libcutl-dev": 3
+    },
+    "family": "Expat family (cutl::xml pull layer over Expat)",
+    "reason": "Round 4 Debian -dev lookup (libcutl-dev 3, none with recent use; runtime libcutl-1.10 9). Verified libcutl 1.10.0+ds1 (Debian orig tarball, MIT) cutl::xml::parser over the pinned Expat 2.10.0, as Debian builds it with external Expat: both shared valid controls give the exact namespace-aware summary from the parser's qnames and namespace-declaration events. 329 cutl lines and 2413 Expat lines covered; the controls differ by 6 cutl lines, 567 Expat lines and 162 repeat-stable AFL++ tuples (Expat hash salt fixed by a harness arc4random_buf). Rank 10 of ten. libstudxml, the later split of the same API, has no Debian package.",
+    "source": "https://codesynthesis.com/projects/libcutl/",
+    "project": "projects/xml/cpp/libcutl"
+  },
+  {
+    "name": "ACEXML",
+    "status": "unresolved_below_ceiling",
+    "popcon_dev_package": {
+      "libacexml-dev": 1
+    },
+    "family": "ACE's own ACEXML SAX parser",
+    "reason": "Round 4 Debian -dev lookup: ACE's ACEXML_Parser is its own namespace-aware SAX parser, but libacexml-dev has one installation, below libcutl-dev (3), the tenth path; the cell is at its ten-path ceiling, so it was not built.",
+    "source": "https://www.dre.vanderbilt.edu/~schmidt/ACE.html"
+  },
+  {
+    "name": "ACE XML_Utils",
+    "status": "excluded",
+    "popcon_dev_package": {
+      "libace-xml-utils-dev": 3
+    },
+    "family": "Xerces-C++",
+    "reason": "Round 4 Debian -dev lookup: ACE's XML_Utils (libace-xml-utils-dev 3) are helper classes that parse through Xerces-C++ for ACE/TAO configuration; no parser of their own.",
+    "source": "https://packages.debian.org/source/sid/ace"
   }
 ]

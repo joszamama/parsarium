@@ -593,5 +593,91 @@
     "project": "projects/xml/cpp/rapidxml",
     "not_verified": "Two small valid namespace-aware UTF-8 controls do not establish complete XML 1.0, DTD/entity, other encoding, processing-instruction node or malformed-input behavior. The order control's processing instruction is skipped by the default parse flags, not exposed as a node.",
     "verification_note": "RapidXML parses in situ: xml_document<>::parse<0>(char*) writes into the caller's mutable, zero-terminated buffer, so the adapter parses a copy. RapidXML keeps qualified names; namespace resolution is adapter code. Both shared valid controls pass; the default flags skip the order control's processing instruction instead of exposing it as a node. The control run covers 413 rapidxml.hpp lines; the parser-only AFL++ probe gives 38 and 45 repeat-stable tuples on the two controls (difference 15). Adoption is weak: Debian librapidxml-dev has 17 installations, none with recent use, and vendored or Boost.PropertyTree-embedded copies are not counted. Boost.PropertyTree's reader is RapidXML-derived, not a separate engine."
+  },
+  {
+    "name": "libcutl",
+    "version": "1.10.0+ds1",
+    "license": "MIT",
+    "license_evidence": "https://deb.debian.org/debian/pool/main/libc/libcutl/libcutl_1.10.0+ds1.orig.tar.xz (libcutl-1.10.0/LICENSE: Code Synthesis Tools CC, MIT)",
+    "input_api": "cutl::xml::parser(std::istream&, input_name, receive_elements | receive_characters | receive_attributes_event | receive_namespace_decls) over a std::istringstream of the local bytes; next() until eof; qname().namespace_()/name() for start_element and start_attribute, value() for characters (inside start_attribute/end_attribute: the attribute value), start_namespace_decl events for xmlns declarations",
+    "documentation": "https://codesynthesis.com/projects/libcutl/",
+    "documentation_parser": "cutl/xml/parser.hxx in the pinned orig tarball (feature flags, 'Parse std::istream' constructor, event_type, qname()/value() accessors); the tarball ships no separate manual",
+    "source": "https://deb.debian.org/debian/pool/main/libc/libcutl/libcutl_1.10.0+ds1.orig.tar.xz",
+    "adapter": "projects/xml/cpp/libcutl/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "cutl::xml::parser pull events over Expat 2.10.0 in namespace mode: expanded element and attribute names from the parser's qnames, namespace declarations from its start_namespace_decl events, attributes sorted per element, trimmed character and CDATA runs between markup",
+    "family": "Expat family: libcutl's own pull-event layer (cutl/xml/parser.cxx) over Expat",
+    "family_note": "cutl::xml::parser drives Expat's push parser in namespace mode and queues its callbacks as pull events; Debian's +ds1 repack removes libcutl's bundled Expat subset and builds against the system Expat, as this harness does with the pinned Expat 2.10.0. The same Code Synthesis parser API was later split out as libstudxml (no Debian package, not selected). No other selected C++ path uses Expat; the C cell's expat path is the same underlying engine. Its input-dependent AFL++ difference is measured in both the cutl layer and Expat.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 3,
+      "dev_package_installs": {
+        "libcutl-dev": 3
+      },
+      "popcon_source_inst": 9,
+      "homebrew_install_on_request_365d": null,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json",
+      "qualification": "Very weak signal: 3 dev installations, none with recent use (0 votes, 3 old), of a general C++ utility library mostly installed as a build dependency of CodeSynthesis XSD/ODB tools; runtime libcutl-1.10 has 9."
+    },
+    "expected_output": {
+      "attributes": [
+        "version=1",
+        "id=a1",
+        "{urn:parsarium:catalog}lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "{urn:parsarium:catalog}catalog",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}item",
+        "{urn:parsarium:item}name",
+        "{urn:parsarium:item}note"
+      ],
+      "max_depth": 3,
+      "namespace_declarations": 2,
+      "namespaces": [
+        "urn:parsarium:catalog",
+        "urn:parsarium:item"
+      ],
+      "root": "{urn:parsarium:catalog}catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "n=1",
+        "{urn:parsarium:price}currency=EUR",
+        "n=2",
+        "note=say \"hi\""
+      ],
+      "elements": [
+        "{urn:parsarium:order}order",
+        "{urn:parsarium:order}line",
+        "{urn:parsarium:order}sku",
+        "{urn:parsarium:price}amount",
+        "{urn:parsarium:order}line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "namespace_declarations": 3,
+      "namespaces": [
+        "urn:parsarium:order",
+        "urn:parsarium:price"
+      ],
+      "root": "{urn:parsarium:order}order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "project": "projects/xml/cpp/libcutl",
+    "not_verified": "Two valid namespace-aware controls (the shared catalog and order controls) are used. Only the XML component of libcutl is built. DTD, XML 1.1, external entities, other encodings, large inputs and malformed input remain unverified; comments and processing instructions are not reported by the parser."
   }
 ]

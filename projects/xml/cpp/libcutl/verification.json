@@ -1,0 +1,61 @@
+{
+  "kind": "third_party",
+  "api": "cutl::xml::parser(std::istream&, input_name, receive_elements | receive_characters | receive_attributes_event | receive_namespace_decls) over a std::istringstream of the local bytes; next() until eof; qname().namespace_()/name() for start_element and start_attribute, value() for characters (inside start_attribute/end_attribute: the attribute value), start_namespace_decl events for xmlns declarations",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T00:37:19.954342+00:00",
+  "manifest": "projects/xml/cpp/libcutl/manifest.json",
+  "image_id": "sha256:de605d6009a2d1c0c8526efa620be76b8c3be9f8a1d6b2624278aa56e507bbdf",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "source_sha256": "957e9cf366501577bcdbc160a0bcb4eeeea9ba0d21de104340b861622c17218b",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "project_file_sha256": {
+    "Dockerfile": "116e01a3e396662e578ead46116b7d0aeaf609987dab9e9dd84c6999295a8516",
+    "build.sh": "17039d1f84f565315c02da4770a8f5c05799fcdcf16af168c2c872fc17efb493",
+    "harness.cpp": "12ceb8fa79b4d619f364860617f877d1da1ad24307228fc2957b76f4c45596bf",
+    "harness.h": "5b04b659b8e65da3560b742b19044ed19c232b689650a3c989378d046ab0f46b",
+    "manifest.json": "a6ec882e0c3eef3b284b720c7376f6b94bcfb5eca9fbcf38731043e6aa2fa7ac",
+    "replay.cpp": "4deda22273c2b82be5ef8106f143e8bdd6b85b612ccb5080470fc559f87ef932",
+    "run-control.sh": "77a5ec06a260c54f338e23e986cea742471c6ca1bc4a05d8e263767552ccbb3b",
+    "source-lock.json": "ff77f59d9786de1989a86c6cf29666b95c626c9bd71201d7d1f4e6e486637fe6"
+  },
+  "output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Caf\u00e9 & t\u00e9",
+      "Z\u00fcrich <HQ>",
+      "x < y"
+    ]
+  },
+  "parser_source_files": 10,
+  "parser_source_lines_covered": 329,
+  "format_specific_source_lines_covered": 309,
+  "underlying_source_files": 15,
+  "underlying_source_lines_covered": 2413,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/xml/cpp/libcutl/target/coverage/coverage.json",
+  "pass": true
+}

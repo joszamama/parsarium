@@ -80,7 +80,7 @@ class CppXmlOpenspPilotTest(unittest.TestCase):
         self.assertEqual(parser["namespace_semantics"], "raw_names_only")
         values = [item["popularity"]["value"] for item in parsers]
         self.assertEqual(values, sorted(values, reverse=True))
-        self.assertEqual([item["name"] for item in parsers][-3:], [PACKAGE, "cxxtools", "rapidxml"])
+        self.assertEqual([item["name"] for item in parsers][-4:], [PACKAGE, "cxxtools", "rapidxml", "libcutl"])
         snapshot = read(BASE / "registry-snapshot.json")
         self.assertEqual(entry("OpenSP", snapshot["candidates"], "library")["dev_installs"], 82)
         self.assertEqual(entry("OpenSP", read(BASE / "leads.json"))["status"], "resolved_verified_selected")

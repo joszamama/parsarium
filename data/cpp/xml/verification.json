@@ -557,6 +557,75 @@
       },
       "parser_only_afl_feedback": "fuzzing/afl-native/xml/cpp/rapidxml/differential.json",
       "error": null
+    },
+    {
+      "package": "libcutl",
+      "version": "1.10.0+ds1",
+      "scope": "cutl::xml::parser pull events over Expat 2.10.0 in namespace mode; namespace URIs and declarations from the parser's events; attributes sorted per element",
+      "command": "python3 scripts/run_project.py xml cpp libcutl",
+      "receipt": "projects/xml/cpp/libcutl/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 329,
+      "format_specific_source_lines_covered": 309,
+      "underlying_source_lines_covered": 2413,
+      "second_valid_control": "controls/xml/order-default-ns.xml",
+      "second_valid_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "limit": "Expat family wrapper: namespace URIs come from Expat's namespace mode through cutl's qnames; the parser reports no comments or processing instructions.",
+      "error": null
     }
   ],
   "standard": []

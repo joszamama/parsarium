@@ -69,7 +69,7 @@ class CppXmlRapidXmlPilotTest(unittest.TestCase):
         self.assertEqual(receipt["parser_source_lines_covered"], 413)
         self.assertEqual(record["parser_source_lines_covered"], receipt["parser_source_lines_covered"])
 
-    def test_weak_metric_is_ranked_last_from_snapshot(self):
+    def test_weak_metric_rank_from_snapshot(self):
         parser = entry(PACKAGE, read(BASE / "parsers.json"))
         popularity = parser["popularity"]
         self.assertEqual(popularity["value"], 17)
@@ -79,7 +79,7 @@ class CppXmlRapidXmlPilotTest(unittest.TestCase):
         snapshot = read(BASE / "registry-snapshot.json")
         row = entry("RapidXML", snapshot["candidates"], "library")
         self.assertEqual(row["dev_installs"], popularity["value"])
-        self.assertEqual(snapshot["primary_order_by_dev_installs"][-1], "RapidXML")
+        self.assertEqual(snapshot["primary_order_by_dev_installs"][-2:], ["RapidXML", "libcutl"])
         installs = [entry(name, snapshot["candidates"], "library")["dev_installs"]
                     for name in snapshot["primary_order_by_dev_installs"]]
         self.assertEqual(installs, sorted(installs, reverse=True))

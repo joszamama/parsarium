@@ -130,6 +130,18 @@
       "homebrew_formula": null,
       "homebrew_install_on_request_365d": null,
       "note": "Added after the four-library comparison from the same pinned popcon snapshots: sourcemax row 'rapidxml 17 0 0 0 17' (data/curation/popcon-sourcemax-by_inst.gz, SHA-256 9d5e341c8ede7267acab176e255be83aca763f09901477eef5324d644cdaebf8) and by_inst row 'librapidxml-dev 17 0 0 0 17'. A refetch of by_inst.gz on 2026-11-17 (a newer file, Last-Modified 14:09:44 GMT) shows the same row. Debian source rapidxml builds only librapidxml-dev. No Homebrew formula; zero recent-use votes."
+    },
+    {
+      "library": "libcutl",
+      "debian_source": "libcutl",
+      "popcon_source_inst": 9,
+      "dev_packages": {
+        "libcutl-dev": 3
+      },
+      "dev_installs": 3,
+      "homebrew_formula": null,
+      "homebrew_install_on_request_365d": null,
+      "note": "Code Synthesis C++ utility library with an Expat-based XML pull parser. Same pinned by_inst snapshot: 'libcutl-dev 3 0 3 0 0'; runtime libcutl-1.10 9 (sourcemax libcutl 9). Added from the round-4 debian_dev_package_search extension."
     }
   ],
   "primary_order_by_dev_installs": [
@@ -141,7 +153,8 @@
     "gSOAP",
     "OpenSP",
     "cxxtools",
-    "RapidXML"
+    "RapidXML",
+    "libcutl"
   ],
   "homebrew_order_by_install_on_request": [
     "tinyxml2",
@@ -208,7 +221,7 @@
         "package": "libarabica-dev",
         "installed": 2,
         "library": "Arabica",
-        "decision": "unresolved: SAX/DOM wrapper over expat, libxml2 or Xerces-C++; two dev installations; not built"
+        "decision": "unresolved_below_ceiling: SAX/DOM wrapper over Expat, libxml2 or Xerces-C++; ranks below the tenth path; not built"
       },
       {
         "package": "libboost-dev",
@@ -233,10 +246,176 @@
         "installed": 82,
         "library": "OpenSP",
         "decision": "selected as opensp (round 4; raw-name path in documented XML mode)"
+      },
+      {
+        "package": "libcutl-dev",
+        "installed": 3,
+        "library": "libcutl cutl::xml::parser",
+        "decision": "selected as libcutl (round 4; Expat-family wrapper, namespace-aware)"
+      },
+      {
+        "package": "libace-xml-utils-dev",
+        "installed": 3,
+        "library": "ACE XML_Utils",
+        "decision": "excluded: helper classes over Xerces-C++"
+      },
+      {
+        "package": "libacexml-dev",
+        "installed": 1,
+        "library": "ACEXML",
+        "decision": "unresolved_below_ceiling: own SAX parser, ranks below the tenth path; not built"
       }
     ],
     "not_in_debian": [
       "libstudxml (no Debian binary package in the snapshot)"
-    ]
+    ],
+    "round_4_extension": "2026-11-18: the same hashed by_inst snapshot (299486c4) was searched again for C++ -dev packages with an XML parser that the first lookup did not list: binary names containing 'xml' beyond the first 100 hits, plus targeted names (gsoap, opensp/libosp, libcutl, ace/acexml, arabica, xmlwrapp, ticpp, libstudxml). Rows added: libosp-dev, libcutl-dev, libace-xml-utils-dev, libacexml-dev. xmlwrapp, ticpp and libstudxml have no binary package in the snapshot.",
+    "round_4_description_search": {
+      "searched_at": "2026-11-18",
+      "packages_index": "https://deb.debian.org/debian/dists/sid/main/binary-amd64/Packages.xz",
+      "packages_index_sha256": "8923a20d38aefac3ca762300a78155ec8d95faf80c5d3ad1fc0490b580e9eb51",
+      "popcon_snapshot_sha256": "299486c46a56fc44b390058490a50b9f1250335c7cdf6f1e02b8cee0a212a802",
+      "method": "Every Debian sid binary package ending in -dev whose name or description contains 'xml' (case-insensitive), joined with the pinned by_inst installations; 131 packages have at least one installation. Packages for other languages (Haskell, OCaml, Rust, Go, Ada, Fortran, Tcl, PHP), C libraries (expat, libxml2, libxmlsec1, mxml, libxmlb, libnxml0, libplist, libtidy, xmlrpc-c, wbxml2, liblouisxml, libcomps) and GObject introspection data are outside this cell; the C++ rows are listed with their decisions.",
+      "cpp_rows": [
+        {
+          "package": "libxerces-c-dev",
+          "installed": 2676,
+          "description": "validating XML parser library for C++ (development files)",
+          "decision": "selected as xerces-c"
+        },
+        {
+          "package": "libpugixml-dev",
+          "installed": 1503,
+          "description": "Light-weight C++ XML processing library (development)",
+          "decision": "selected as pugixml"
+        },
+        {
+          "package": "libtinyxml-dev",
+          "installed": 533,
+          "description": "TinyXml library - header and static library",
+          "decision": "selected as tinyxml"
+        },
+        {
+          "package": "libtinyxml2-dev",
+          "installed": 487,
+          "description": "TinyXML2 library - header and static library",
+          "decision": "selected as tinyxml2"
+        },
+        {
+          "package": "libkf5xmlgui-dev",
+          "installed": 469,
+          "description": "User configurable main windows.",
+          "decision": "excluded: KDE main-window/UI framework (XMLGUI), not an XML parser"
+        },
+        {
+          "package": "libqt5xmlpatterns5-dev",
+          "installed": 431,
+          "description": "Qt 5 XML patterns development files",
+          "decision": "excluded: Qt 5 XQuery/XPath engine module over Qt's XML stream reader; framework module and XPath engine"
+        },
+        {
+          "package": "libkf6xmlgui-dev",
+          "installed": 269,
+          "description": "User configurable main windows - development files",
+          "decision": "excluded: KDE main-window/UI framework (XMLGUI), not an XML parser"
+        },
+        {
+          "package": "libxml++2.6-dev",
+          "installed": 266,
+          "description": "C++ interface to the GNOME XML library (libxml2) - dev files",
+          "decision": "selected as libxml++ (summed ABI family)"
+        },
+        {
+          "package": "qt6-scxml-dev",
+          "installed": 185,
+          "description": "Qt 6 SCXML - development files",
+          "decision": "excluded: Qt SCXML state-chart module, schema-specific"
+        },
+        {
+          "package": "libxmlrpcpp-dev",
+          "installed": 150,
+          "description": "development files for Robot OS libxmlrpcpp",
+          "decision": "excluded: ROS XML-RPC protocol library"
+        },
+        {
+          "package": "libxml-security-c-dev",
+          "installed": 23,
+          "description": "C++ library for XML Digital Signatures (development)",
+          "decision": "excluded: XML Signature/Encryption over Xerces-C++"
+        },
+        {
+          "package": "libplist++-dev",
+          "installed": 21,
+          "description": "C++ library for handling Apple binary and XML property lists - dev files",
+          "decision": "excluded: Apple property-list reader (schema-specific; C++ binding of libplist)"
+        },
+        {
+          "package": "libflxmlrpc-dev",
+          "installed": 21,
+          "description": "fldigi suite XmlRpc library - Development files",
+          "decision": "excluded: fldigi XML-RPC protocol library"
+        },
+        {
+          "package": "libxmlrpc-c++9-dev",
+          "installed": 17,
+          "description": "Lightweight RPC library based on XML and HTTP [C++ development libraries]",
+          "decision": "excluded: XML-RPC protocol library"
+        },
+        {
+          "package": "librapidxml-dev",
+          "installed": 17,
+          "description": "fast XML DOM-style parser in C++ (development files)",
+          "decision": "selected as rapidxml"
+        },
+        {
+          "package": "libxmltooling-dev",
+          "installed": 15,
+          "description": "C++ XML parsing library with encryption support (development)",
+          "decision": "excluded: SAML/XML security tooling over Xerces-C++"
+        },
+        {
+          "package": "libpwizlite-dev",
+          "installed": 12,
+          "description": "Library to load mzML/mzXML files (dev files)",
+          "decision": "excluded: mzML/mzXML mass-spectrometry reader (schema-specific)"
+        },
+        {
+          "package": "libxml++-5.0-dev",
+          "installed": 7,
+          "description": "C++ interface to the GNOME XML library (libxml2) - dev files",
+          "decision": "selected as libxml++ (summed ABI family)"
+        },
+        {
+          "package": "libkode-qt6-dev",
+          "installed": 5,
+          "description": "C++/Qt code for C++ code generation and XML/XSD parsing (Qt6 development files)",
+          "decision": "excluded: Qt code generator from XML Schema"
+        },
+        {
+          "package": "libace-xml-utils-dev",
+          "installed": 3,
+          "description": "ACE XML utility classes and methods - development files",
+          "decision": "excluded: ACE helper classes over Xerces-C++"
+        },
+        {
+          "package": "libxml++-4.0-dev",
+          "installed": 2,
+          "description": "C++ interface to the GNOME XML library (libxml2) - dev files",
+          "decision": "selected as libxml++ (summed ABI family)"
+        },
+        {
+          "package": "libui-gxmlcpp-dev",
+          "installed": 2,
+          "description": "High-level C++ wrapper library for libxml2/libxslt (development)",
+          "decision": "unresolved_below_ceiling: C++ wrapper over libxml2/libxslt; 2 installations, below the tenth path"
+        },
+        {
+          "package": "libacexml-dev",
+          "installed": 1,
+          "description": "ACE SAX based XML parsing library - development files",
+          "decision": "unresolved_below_ceiling: ACE's own SAX parser; 1 installation, below the tenth path"
+        }
+      ]
+    }
   }
 }

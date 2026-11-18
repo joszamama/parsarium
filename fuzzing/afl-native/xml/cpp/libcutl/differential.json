@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-11-18T00:37:38.488553+00:00",
+  "project": "xml/cpp/libcutl",
+  "pass": true,
+  "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+  "base_project_receipt_sha256": "b57379e4430d7c8ab2ede5c42d062a7bd16cb42c0bebb1b92ea1770fe136fcc1",
+  "overlay_receipt_sha256": "ef4148fceeea409609aa40a058cc0fbecb6dc768c13e1d3e8f4e1f537f71869f",
+  "base_image_id": "sha256:de605d6009a2d1c0c8526efa620be76b8c3be9f8a1d6b2624278aa56e507bbdf",
+  "overlay_image_id": "sha256:e8096a8257f2f763d849bfdb308c7518dc51048104e13108f9f3333ce79b7abf",
+  "afl_package": "4.33c-1.1ubuntu1",
+  "repeats_per_control": 2,
+  "first_control": "controls/xml/catalog-ns.xml",
+  "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "second_control": "controls/xml/order-default-ns.xml",
+  "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "second_control_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 \u20ac"
+    ]
+  },
+  "first_source_lines": 329,
+  "second_source_lines": 335,
+  "source_line_difference": 6,
+  "first_only_lines_by_file": {},
+  "second_only_lines_by_file": {
+    "xml/parser.cxx": 6
+  },
+  "first_afl_tuples": 1244,
+  "second_afl_tuples": 1326,
+  "afl_tuple_difference": 162,
+  "second_case_kind": "valid_control"
+}

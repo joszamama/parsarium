@@ -77,7 +77,7 @@ class CppXmlCxxtoolsPilotTest(unittest.TestCase):
         self.assertEqual(parser["namespace_semantics"], "raw_names_only")
         values = [item["popularity"]["value"] for item in parsers]
         self.assertEqual(values, sorted(values, reverse=True))
-        self.assertEqual([item["name"] for item in parsers][-2:], [PACKAGE, "rapidxml"])
+        self.assertEqual([item["name"] for item in parsers][-3:], [PACKAGE, "rapidxml", "libcutl"])
         snapshot = read(BASE / "registry-snapshot.json")
         self.assertEqual(entry("cxxtools", snapshot["candidates"], "library")["dev_installs"], 42)
         self.assertEqual(entry(PACKAGE, read(BASE / "leads.json"))["status"], "resolved_verified_selected")

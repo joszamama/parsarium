@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "checked_at_utc": "2026-11-17T14:32:54.446410+00:00",
-  "projects_total": 9,
-  "projects_passed": 9,
+  "projects_total": 10,
+  "projects_passed": 10,
   "differential_kind": "valid namespace XML controls; Xerces-C++, libxml++ and RapidXML use parser-only probes; tinyxml2 uses the alternate no-processing-instruction second control",
-  "command": "for slug in pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done; for slug in xerces_c libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/xerces_c/verify-parser-feedback.py; python3 projects/xml/cpp/libxmlpp/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp rapidxml; python3 projects/xml/cpp/rapidxml/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp tinyxml && python3 scripts/verify_cpp_json_feedback.py --format xml --slug tinyxml; python3 scripts/build_afl_native.py xml cpp cxxtools && python3 scripts/verify_cpp_json_feedback.py --format xml --slug cxxtools; python3 scripts/build_afl_native.py xml cpp gsoap && python3 scripts/verify_cpp_json_feedback.py --format xml --slug gsoap; python3 scripts/build_afl_native.py xml cpp opensp && python3 scripts/verify_cpp_json_feedback.py --format xml --slug opensp",
+  "command": "for slug in pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done; for slug in xerces_c libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/xerces_c/verify-parser-feedback.py; python3 projects/xml/cpp/libxmlpp/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp rapidxml; python3 projects/xml/cpp/rapidxml/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp tinyxml && python3 scripts/verify_cpp_json_feedback.py --format xml --slug tinyxml; python3 scripts/build_afl_native.py xml cpp cxxtools && python3 scripts/verify_cpp_json_feedback.py --format xml --slug cxxtools; python3 scripts/build_afl_native.py xml cpp gsoap && python3 scripts/verify_cpp_json_feedback.py --format xml --slug gsoap; python3 scripts/build_afl_native.py xml cpp opensp && python3 scripts/verify_cpp_json_feedback.py --format xml --slug opensp; python3 scripts/build_afl_native.py xml cpp libcutl && python3 scripts/verify_cpp_json_feedback.py --format xml --slug libcutl",
   "results": [
     {
       "project": "xml/cpp/xerces_c",
@@ -189,6 +189,31 @@
       "afl_tuple_difference": 326,
       "parse_file_line_difference": 277,
       "limit": "The overlay instruments all of libosp and the adapter; 277 of the 575 differing covered lines are in OpenSP's parse*.cxx parser files (parseInstance, parseCommon, parseDecl, parseParam, parseAttribute), the rest in its event, entity, markup and character-set classes."
+    },
+    {
+      "project": "xml/cpp/libcutl",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+      "overlay_receipt_sha256": "ef4148fceeea409609aa40a058cc0fbecb6dc768c13e1d3e8f4e1f537f71869f",
+      "differential_receipt_sha256": "f881e8fe12f72951e16410a2ecb3aea0eb9524eeb6aeb0ab364118079d06c4a7",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeated_control_identical": true,
+      "control_source_lines": 329,
+      "control_afl_tuples": 1244,
+      "differential_source_lines": 335,
+      "differential_afl_tuples": 1326,
+      "source_line_difference": 6,
+      "afl_tuple_difference": 162,
+      "underlying_expat_line_difference": 567,
+      "underlying_expat_lines": {
+        "control": 2596,
+        "differential": 2799
+      },
+      "underlying_method": "Replay binary of the base image on each control, llvm-cov export -format=lcov, Expat lib/ lines with a nonzero DA count; identical over two runs (2026-11-18). lcov DA counts exceed llvm-cov's covered-line summary.",
+      "limit": "The overlay instruments libcutl's cutl/xml sources, the pinned Expat 2.10.0 and the adapter. The cutl layer's covered lines differ by 6 (cutl/xml/parser.cxx); the input-dependent difference is mainly in Expat (567 differing nonzero-count lines in xmlparse.c, xmltok_impl.c, xmltok.c and headers). Expat's hash salt is fixed by a harness-supplied arc4random_buf because cutl exposes no XML_SetHashSalt hook; without it the order control's map varied between runs."
     }
   ]
 }

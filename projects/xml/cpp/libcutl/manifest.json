@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "cpp",
+  "package": "libcutl",
+  "release": "1.10.0+ds1",
+  "pilot": true,
+  "catalog_parser": "data/cpp/xml/parsers.json",
+  "source_lock": "projects/xml/cpp/libcutl/source-lock.json",
+  "source_sha256": "957e9cf366501577bcdbc160a0bcb4eeeea9ba0d21de104340b861622c17218b",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "version=1",
+      "id=a1",
+      "{urn:parsarium:catalog}lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "{urn:parsarium:catalog}catalog",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}item",
+      "{urn:parsarium:item}name",
+      "{urn:parsarium:item}note"
+    ],
+    "max_depth": 3,
+    "namespace_declarations": 2,
+    "namespaces": [
+      "urn:parsarium:catalog",
+      "urn:parsarium:item"
+    ],
+    "root": "{urn:parsarium:catalog}catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "n=1",
+      "{urn:parsarium:price}currency=EUR",
+      "n=2",
+      "note=say \"hi\""
+    ],
+    "elements": [
+      "{urn:parsarium:order}order",
+      "{urn:parsarium:order}line",
+      "{urn:parsarium:order}sku",
+      "{urn:parsarium:price}amount",
+      "{urn:parsarium:order}line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "namespace_declarations": 3,
+    "namespaces": [
+      "urn:parsarium:order",
+      "urn:parsarium:price"
+    ],
+    "root": "{urn:parsarium:order}order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage in libcutl 1.10.0's XML pull parser (cutl/xml) and the pinned Expat 2.10.0 it runs in namespace mode (external Expat, as Debian builds libcutl)",
+  "coverage_subject_prefix": "/work/source/cutl/",
+  "format_specific_coverage_file_suffix": "/cutl/xml/parser.cxx",
+  "underlying_source_sha256": "c624ba2998fc65df1163a49641ff3f9ab73138b11641d92c86bee0fb01b1bc7f",
+  "underlying_coverage_subject_prefix": "/work/expat-source/lib/",
+  "underlying_format_specific_coverage_file_suffix": "/xmlparse.c",
+  "api": "cutl::xml::parser(std::istream&, input_name, receive_elements | receive_characters | receive_attributes_event | receive_namespace_decls) over a std::istringstream of the local bytes; next() until eof; qname().namespace_()/name() for start_element and start_attribute, value() for characters (inside start_attribute/end_attribute: the attribute value), start_namespace_decl events for xmlns declarations",
+  "scope_limit": "cutl::xml::parser is a pull-event wrapper over Expat's namespace mode: element and attribute qnames carry the URI Expat resolved and xmlns declarations arrive as start_namespace_decl events. The adapter formats these events and sorts attributes per element as in the other C++ paths; it resolves nothing. Comments and processing instructions are not reported by the parser. Only the cutl/xml component (with cutl/exception.cxx) is compiled, against the pinned Expat 2.10.0 as an external Expat, matching Debian's +ds1 repack, which removes the bundled Expat subset; Expat's hash salt is left at its default (random per parser)."
+}
