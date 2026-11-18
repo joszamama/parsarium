@@ -4,6 +4,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 
 - [libgda / C](c/libgda/README.md)
 - [libpg_query / C](c/libpg_query/README.md)
+- [tree-sitter-sql / C](c/tree_sitter_sql/README.md)
 - [duckdb / C++](cpp/duckdb/README.md)
 - [github.com/AfterShip/clickhouse-sql-parser/parser / Go](go/github_com_aftership_clickhouse_sql_parser_parser/README.md)
 - [github.com/akito0107/xsqlparser / Go](go/github_com_akito0107_xsqlparser/README.md)
@@ -43,6 +44,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [phpmyadmin/sql-parser / PHP](php/phpmyadmin_sql_parser/README.md)
 - [sad_spirit/pg_builder / PHP](php/sad_spirit_pg_builder/README.md)
 - [soundintheory/php-sql-parser / PHP](php/soundintheory_php_sql_parser/README.md)
+- [vimeo/php-mysql-engine / PHP](php/vimeo_php_mysql_engine/README.md)
 - [antlr-tsql / Python](python/antlr_tsql/README.md)
 - [mindsdb-sql-parser / Python](python/mindsdb_sql_parser/README.md)
 - [mo-sql-parsing / Python](python/mo_sql_parsing/README.md)
