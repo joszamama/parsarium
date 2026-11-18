@@ -73,7 +73,8 @@ class CppXmlGsoapPilotTest(unittest.TestCase):
         values = [item["popularity"]["value"] for item in parsers]
         self.assertEqual(values, sorted(values, reverse=True))
         names = [item["name"] for item in parsers]
-        self.assertEqual(names[names.index("libxml++"):], ["libxml++", PACKAGE, "cxxtools", "rapidxml"])
+        self.assertEqual(names.index(PACKAGE), names.index("libxml++") + 1)
+        self.assertLess(names.index(PACKAGE), names.index("cxxtools"))
         snapshot = read(BASE / "registry-snapshot.json")
         self.assertEqual(entry("gSOAP", snapshot["candidates"], "library")["dev_installs"], 95)
         self.assertEqual(entry("gSOAP", read(BASE / "leads.json"))["status"], "resolved_verified_selected")

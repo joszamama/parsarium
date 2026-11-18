@@ -368,6 +368,90 @@
     "not_verified": "Two valid namespace-aware controls (the shared catalog and order controls) are used. The DOM drops comments and processing instructions. DTD, XML 1.1, external entities, other encodings, SOAP envelopes, data-binding deserialization (SOAP_DOM_NODE), large inputs and malformed input remain unverified."
   },
   {
+    "name": "opensp",
+    "version": "1.5.2",
+    "license": "MIT",
+    "license_evidence": "https://deb.debian.org/debian/pool/main/o/opensp/opensp_1.5.2.orig.tar.gz (OpenSP-1.5.2/COPYING: James Clark's MIT-style permission notice)",
+    "input_api": "ParserEventGeneratorKit with addCatalog=pubtext/xml.soc (SGMLDECL xml.dcl) and enableWarning 'xml' and 'no-valid', SP_CHARSET_FIXED=YES and SP_ENCODING=XML as doc/xml.htm documents; makeEventGenerator over the local bytes written to a private temporary file, then EventGenerator::run(SGMLApplication&) with startElement (gi, specified attributes and CDATA chunks), endElement, data, pi and error callbacks",
+    "documentation": "https://openjade.sourceforge.net/doc/generic.htm",
+    "documentation_parser": "doc/generic.htm (generic API: ParserEventGeneratorKit, EventGenerator, SGMLApplication) and doc/xml.htm ('Using OpenSP to parse XML') in the pinned orig tarball",
+    "source": "https://deb.debian.org/debian/pool/main/o/opensp/opensp_1.5.2.orig.tar.gz",
+    "adapter": "projects/xml/cpp/opensp/harness.cpp",
+    "control": "controls/xml/catalog-ns.xml",
+    "scope": "OpenSP generic-API events of one document parsed in XML mode as a raw-name path: document-order qualified element and attribute names as written, xmlns attributes, specified attributes and decoded values, maximum depth, and trimmed character and CDATA runs between markup; no namespace URIs or expanded names",
+    "namespace_semantics": "raw_names_only",
+    "namespace_note": "OpenSP parses XML as SGML under the XML SGML declaration (xml.dcl). SGML has no Namespaces in XML, so names are generic identifiers as written and xmlns/xmlns:* are ordinary CDATA attributes; the adapter resolves nothing.",
+    "family": "OpenSP (James Clark's SP) own SGML/XML parser",
+    "family_note": "libosp's own entity manager, tokenizer and SGML parser (lib/parseInstance.cxx, Parser*.cxx) with no libxml2, expat or Xerces-C++ dependency; XML support comes from the Web SGML Adaptations and the XML SGML declaration. OpenJade and other SGML tools build on it. The pyexpat oracle is a different family, so the match is cross-family.",
+    "popularity": {
+      "metric": "Debian popcon installations of the library's -dev package(s) (by_inst)",
+      "value": 82,
+      "dev_package_installs": {
+        "libosp-dev": 82
+      },
+      "popcon_source_inst": 10165,
+      "homebrew_install_on_request_365d": 65,
+      "source": "https://popcon.debian.org/by_inst.gz",
+      "captured_at_utc": "2026-11-17T03:42:31+00:00",
+      "snapshot": "data/cpp/xml/registry-snapshot.json",
+      "qualification": "Weak signal: 82 dev installations (7 regular-use votes) of an SGML/XML parser library; the runtime libosp5 (10,165) is pulled in mostly by SGML/DocBook tool chains, and neither count is XML-specific use."
+    },
+    "expected_output": {
+      "attributes": [
+        "xmlns:c=urn:parsarium:catalog",
+        "xmlns=urn:parsarium:item",
+        "version=1",
+        "id=a1",
+        "c:lang=es",
+        "id=b2"
+      ],
+      "elements": [
+        "c:catalog",
+        "item",
+        "item",
+        "name",
+        "note"
+      ],
+      "max_depth": 3,
+      "root": "c:catalog",
+      "text": [
+        "Café & té",
+        "Zürich <HQ>",
+        "x < y"
+      ]
+    },
+    "differential_control": "controls/xml/order-default-ns.xml",
+    "differential_expected_output": {
+      "attributes": [
+        "xmlns=urn:parsarium:order",
+        "xmlns:p=urn:parsarium:price",
+        "n=1",
+        "p:currency=EUR",
+        "n=2",
+        "note=say \"hi\"",
+        "xmlns="
+      ],
+      "elements": [
+        "order",
+        "line",
+        "sku",
+        "p:amount",
+        "line",
+        "plain",
+        "leaf"
+      ],
+      "max_depth": 4,
+      "root": "order",
+      "text": [
+        "A-7",
+        "12.50 €"
+      ]
+    },
+    "oracle": "projects/xml/cpp/opensp/oracle.py (Python expat without namespace processing, ordered attributes)",
+    "project": "projects/xml/cpp/opensp",
+    "not_verified": "Measured as a raw-name path against the expat non-namespace oracle, not as a namespace-aware parser. Attribute order follows OpenSP's implied attribute definitions, which equals source order on these controls only. DTDs, validation, XML 1.1, external entities, other encodings, large inputs and malformed input remain unverified."
+  },
+  {
     "name": "cxxtools",
     "version": "3.0.0",
     "license": "LGPL-2.1-or-later",

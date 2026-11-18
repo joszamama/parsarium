@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "checked_at_utc": "2026-11-17T14:32:54.446410+00:00",
-  "projects_total": 8,
-  "projects_passed": 8,
+  "projects_total": 9,
+  "projects_passed": 9,
   "differential_kind": "valid namespace XML controls; Xerces-C++, libxml++ and RapidXML use parser-only probes; tinyxml2 uses the alternate no-processing-instruction second control",
-  "command": "for slug in pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done; for slug in xerces_c libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/xerces_c/verify-parser-feedback.py; python3 projects/xml/cpp/libxmlpp/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp rapidxml; python3 projects/xml/cpp/rapidxml/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp tinyxml && python3 scripts/verify_cpp_json_feedback.py --format xml --slug tinyxml; python3 scripts/build_afl_native.py xml cpp cxxtools && python3 scripts/verify_cpp_json_feedback.py --format xml --slug cxxtools; python3 scripts/build_afl_native.py xml cpp gsoap && python3 scripts/verify_cpp_json_feedback.py --format xml --slug gsoap",
+  "command": "for slug in pugixml tinyxml2; do python3 scripts/build_afl_native.py xml cpp $slug && python3 scripts/verify_cpp_json_feedback.py --format xml --slug $slug; done; for slug in xerces_c libxmlpp; do python3 scripts/build_afl_native.py xml cpp $slug; done; python3 projects/xml/cpp/xerces_c/verify-parser-feedback.py; python3 projects/xml/cpp/libxmlpp/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp rapidxml; python3 projects/xml/cpp/rapidxml/verify-feedback.py; python3 scripts/build_afl_native.py xml cpp tinyxml && python3 scripts/verify_cpp_json_feedback.py --format xml --slug tinyxml; python3 scripts/build_afl_native.py xml cpp cxxtools && python3 scripts/verify_cpp_json_feedback.py --format xml --slug cxxtools; python3 scripts/build_afl_native.py xml cpp gsoap && python3 scripts/verify_cpp_json_feedback.py --format xml --slug gsoap; python3 scripts/build_afl_native.py xml cpp opensp && python3 scripts/verify_cpp_json_feedback.py --format xml --slug opensp",
   "results": [
     {
       "project": "xml/cpp/xerces_c",
@@ -169,6 +169,26 @@
       "afl_tuple_difference": 84,
       "gsoap_engine_line_difference": 126,
       "limit": "The overlay instruments gSOAP's stdsoap2.cpp and dom.cpp, the soapcpp2-generated soapC.cpp and the adapter. All differing covered lines are in gSOAP's own stdsoap2.cpp/stdsoap2.h; dom.cpp covers the same lines on both controls. The fuzz target disables only UBSan's alignment check, because stdsoap2.cpp's allocator canary is stored at unaligned offsets on every valid parse."
+    },
+    {
+      "project": "xml/cpp/opensp",
+      "pass": true,
+      "feedback_kind": "native_afl_clang_fast_edges_with_llvm_source_lines",
+      "overlay_receipt_sha256": "44a27824da24c971247c4b3db523e62f80fa2c0625b180b59df8a8c60d427a79",
+      "differential_receipt_sha256": "5d32479822cdba4b2210465eb0f0a084cf28516930f14848898c1f2138fae999",
+      "control": "controls/xml/catalog-ns.xml",
+      "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "differential": "controls/xml/order-default-ns.xml",
+      "differential_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "repeated_control_identical": true,
+      "control_source_lines": 9682,
+      "control_afl_tuples": 4668,
+      "differential_source_lines": 9597,
+      "differential_afl_tuples": 4702,
+      "source_line_difference": 575,
+      "afl_tuple_difference": 326,
+      "parse_file_line_difference": 277,
+      "limit": "The overlay instruments all of libosp and the adapter; 277 of the 575 differing covered lines are in OpenSP's parse*.cxx parser files (parseInstance, parseCommon, parseDecl, parseParam, parseAttribute), the rest in its event, entity, markup and character-set classes."
     }
   ]
 }

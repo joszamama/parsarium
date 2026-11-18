@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "format": "xml",
+  "ecosystem": "cpp",
+  "package": "opensp",
+  "release": "1.5.2",
+  "pilot": true,
+  "catalog_parser": "data/cpp/xml/parsers.json",
+  "source_lock": "projects/xml/cpp/opensp/source-lock.json",
+  "source_sha256": "334c444c97590a000f20bcef7c1bec63d4e396bae6ba48b3ff49596443c467dd",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/xml/catalog-ns.xml",
+  "control_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+  "expected_output": {
+    "attributes": [
+      "xmlns:c=urn:parsarium:catalog",
+      "xmlns=urn:parsarium:item",
+      "version=1",
+      "id=a1",
+      "c:lang=es",
+      "id=b2"
+    ],
+    "elements": [
+      "c:catalog",
+      "item",
+      "item",
+      "name",
+      "note"
+    ],
+    "max_depth": 3,
+    "root": "c:catalog",
+    "text": [
+      "Café & té",
+      "Zürich <HQ>",
+      "x < y"
+    ]
+  },
+  "differential_control": "controls/xml/order-default-ns.xml",
+  "differential_control_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+  "differential_expected_output": {
+    "attributes": [
+      "xmlns=urn:parsarium:order",
+      "xmlns:p=urn:parsarium:price",
+      "n=1",
+      "p:currency=EUR",
+      "n=2",
+      "note=say \"hi\"",
+      "xmlns="
+    ],
+    "elements": [
+      "order",
+      "line",
+      "sku",
+      "p:amount",
+      "line",
+      "plain",
+      "leaf"
+    ],
+    "max_depth": 4,
+    "root": "order",
+    "text": [
+      "A-7",
+      "12.50 €"
+    ]
+  },
+  "oracle": "projects/xml/cpp/opensp/oracle.py (Python expat without namespace processing, ordered attributes)",
+  "namespace_resolution": false,
+  "output_name_form": "raw qualified names (prefix:local); xmlns/xmlns:* are ordinary attributes",
+  "api": "ParserEventGeneratorKit with addCatalog=pubtext/xml.soc (SGMLDECL xml.dcl) and enableWarning 'xml' and 'no-valid', SP_CHARSET_FIXED=YES and SP_ENCODING=XML as doc/xml.htm documents; makeEventGenerator over the local bytes written to a private temporary file, then EventGenerator::run(SGMLApplication&) with startElement (gi, specified attributes and CDATA chunks), endElement, data, pi and error callbacks",
+  "namespace_semantics": "OpenSP 1.5.2 parses XML with its SGML parser and the XML SGML declaration; SGML has no Namespaces in XML. Element generic identifiers and attribute names are reported as written (prefix:local) and xmlns/xmlns:* are ordinary CDATA attributes. harness.cpp reports the specified attributes of each start tag and resolves nothing.",
+  "harness": "harness.cpp",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "coverage": "LLVM source coverage of OpenSP 1.5.2's parser library libosp (lib/), built static from Debian's orig tarball (no NLS, HTTP storage manager, programs or documentation)",
+  "coverage_subject_prefix": "/work/source/lib/",
+  "format_specific_coverage_file_suffix": "/lib/parseInstance.cxx",
+  "coverage_limit": "Two valid UTF-8 XML 1.0 controls without DOCTYPE establish OpenSP's XML-mode element, attribute, CDATA and text events for them only, as a raw-name path: qualified names, xmlns attributes, attribute order and decoded values, depth and trimmed text runs. Without a DTD, OpenSP implies an attribute list per element type from the first start tags it sees and reports attributes in that definition order; the harness keeps only attributes specified in each start tag, which on these controls is source order, but attribute order is not established in general. No namespace URI or expanded name is reported. The order control's comment and processing instruction end text runs and are otherwise not reported. DTDs, validation, entities beyond the controls' references, other encodings and well-formedness rejection are not established. The expected outputs come from oracle.py (Python pyexpat in non-namespace mode, a different family)."
+}

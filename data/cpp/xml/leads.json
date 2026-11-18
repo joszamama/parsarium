@@ -179,5 +179,16 @@
     "reason": "Verified cxxtools 3.0.0 XmlReader(std::istream&) get()/next() on both shared valid controls as a raw-name path matching the expat non-namespace oracle (XmlReader never fills its NamespaceContext), 717 libcxxtools lines covered (478 in xml/xmlreader.cpp) and a stable AFL++ difference (123 tuples; 177 of 237 differing covered lines in xmlreader.cpp). Rank 6 by Debian dev installations (libcxxtools-dev 42, a weak signal for a general utility library).",
     "source": "https://github.com/maekitalo/cxxtools",
     "verification": "projects/xml/cpp/cxxtools/verification.json"
+  },
+  {
+    "name": "OpenSP",
+    "status": "resolved_verified_selected",
+    "popcon_dev_package": {
+      "libosp-dev": 82
+    },
+    "family": "OpenSP (James Clark's SP) own SGML/XML parser",
+    "reason": "Round 4 Debian -dev lookup (libosp-dev 82; runtime libosp5 10,165). Verified OpenSP 1.5.2 (Debian orig tarball, MIT) through its generic event API in the XML mode doc/xml.htm documents (xml.soc catalog, SP_CHARSET_FIXED=YES, SP_ENCODING=XML, -wxml, -wno-valid): both shared valid controls match the expat non-namespace raw-name summary (SGML has no namespaces). 7846 libosp lines covered; the controls differ by 575 covered lines and 326 repeat-stable AFL++ tuples. Rank 7 of nine, between gSOAP and cxxtools. Own family.",
+    "source": "https://openjade.sourceforge.net/doc/xml.htm",
+    "project": "projects/xml/cpp/opensp"
   }
 ]
