@@ -174,6 +174,19 @@
       "found_by": "round_4_targeted_lookup",
       "evidence": "korlibs-serialization-toml-jvm 5.4.0: every date-time is a plain String, underscored/hex/octal/binary integers stay Strings ('1_000_000', '0xDEAD_BEEF'), the literal string loses characters ('C: sarium') and the line-ending backslash of the multiline string is not applied; service-config fails on owner.since as a String.",
       "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-18"
+    },
+    {
+      "name": "org.dromara.hutool:hutool-setting",
+      "release": "6.0.0-M22",
+      "metric_value": 80,
+      "family": "TOML-javalib (TheElectronWill) copy inside Hutool's setting module",
+      "api_lead": "new TomlReader(String, boolean).read() -> Map<String, Object>",
+      "jar_sha256": "9a85c6f00142c5d6e0345510121972e7bc94e3e62f52f585cc0dfece143d6ffe",
+      "status": "unresolved_control_failed",
+      "evidence": "Run on the host (Temurin 21.0.2) with hutool-setting, hutool-core and hutool-log 6.0.0-M22 (every org.dromara.hutool release is a milestone): service-config gives the expected structure (Integer/Double, ZonedDateTime), but typed-scalars is rejected with SettingException 'Invalid value: \"0xDEADBEEF\" at line 6'. The class comment credits TheElectronWill/TOML-javalib and documents only LocalDate, LocalDateTime and ZonedDateTime (no local time). The 5.x coordinate cn.hutool:hutool-setting (871) has no TOML package.",
+      "found_by": "round-6 Maven Central class-name search c:TomlReader",
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "checked_at_utc": "2026-11-18"
     }
   ],
   "excluded": [
@@ -260,6 +273,18 @@
       "metric_value": 0,
       "status": "excluded",
       "reason": "Tree-sitter grammar binding (syntax tree only); zero recorded adoption."
+    },
+    {
+      "name": "top.redscorpion.means:redscorpion-means-setting",
+      "metric_value": 72,
+      "status": "excluded",
+      "reason": "Round 6: ships the same setting.toml Toml/TomlReader/TomlWriter class set as hutool-setting (Hutool-derived TOML-javalib copy); not run."
+    },
+    {
+      "name": "Scala/Kotlin and small JVM TOML coordinates with no dependents",
+      "metric_value": 0,
+      "status": "excluded",
+      "reason": "Round 6: stoml (me.vican.jorge, com.github.jvican), com.indoorvivants toml, io.macgyver.tomlson, org.scalameta moped-toml, dev.denux dtp (alpha only) and io.github.xtomlj xtomlj (tomlj fork) all have a deps.dev summed directDependentCount of 0, so no positive primary metric."
     }
   ],
   "promoted": [
@@ -308,6 +333,22 @@
     ],
     "promoted": [
       "net.vieiro:toml-java"
+    ]
+  },
+  "round_6": {
+    "observed": "2026-11-18",
+    "routes": [
+      "toml-lang/toml-test-matrix parser list (commit 71475d29): no JVM entry",
+      "Maven Central class-name searches c:TomlParser (2,257 classes), c:TomlReader (76), c:TomlLexer (761), c:Toml (2,419), c:TomlDecoder (30), c:TomlTable (960), c:TomlValue (178), c:TomlDocument (0), c:TomlScanner, c:TomlTokenizer and c:TomlDeserializer (no new library), c:TomlMapper (909; the Jackson TOML module and applications shading it): finds TOML parsers shipped inside larger libraries and Kotlin/Scala artifacts",
+      "deps.dev summed directDependentCount for every new coordinate"
+    ],
+    "promoted": [],
+    "new_leads": [
+      "org.dromara.hutool:hutool-setting"
+    ],
+    "excluded": [
+      "top.redscorpion.means:redscorpion-means-setting",
+      "Scala/Kotlin and small JVM TOML coordinates with no dependents"
     ]
   }
 }
