@@ -47,5 +47,69 @@
     "status": "unresolved",
     "source": "https://github.com/cansik/pointcloud-processing/blob/v0.2.0/src/main/java/ch/bildspur/pointcloud/io/reader/PLYReader.java",
     "reason": "Tagged v0.2.0 reader wraps DirkToewe sjmply and has a local-file method, but the tagged tree has no license file and GitHub identifies no open-source license. No qualifying open-source package release or control result was established."
+  },
+  {
+    "name": "scalismo-faces_2.13 0.90.0",
+    "status": "excluded_zero_recorded_adoption",
+    "reason": "unibas-gravis/scalismo-faces (123 stars, Apache-2.0) ships its own Scala PLY reader (scalismo.faces.io.ply.PlyMeshReader), but deps.dev records 0 direct dependents for the exact Maven Central releases ch.unibas.cs.gravis:scalismo-faces_2.13:0.90.0 and _2.12:0.90.0. A recorded zero is not a missing value, so the star fallback does not apply.",
+    "source": "https://api.deps.dev/v3alpha/systems/MAVEN/packages/ch.unibas.cs.gravis%3Ascalismo-faces_2.13/versions/0.90.0:dependents",
+    "discovery_route": "GitHub code search \"end_header\" language:Scala (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "scalismo_2.13 0.91.1",
+    "status": "excluded_same_project_predecessor",
+    "reason": "Earlier Scala 2.13 release line of the selected scalismo_3 path (1 deps.dev direct dependent). Its MeshIO.readPLY delegates to VTK vtkPLYReader through scalismo-native, not to the Scala reader counted for scalismo_3; the same project is counted once at its newest release.",
+    "source": "https://github.com/unibas-gravis/scalismo/blob/v0.91.1/src/main/scala/scalismo/io/MeshIO.scala",
+    "discovery_route": "Maven Central search g:ch.unibas.cs.gravis (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "ShapeNet/shapenet-viewer PLYLoader",
+    "status": "unresolved",
+    "reason": "MIT application (190 stars, tag v0.1.0) with a jME3 AssetLoader, edu.stanford.graphics.shapenet.jme3.plugins.PLYLoader, that parses PLY through jPLY 0.2.0 (the jPLY family already counted via jzy3d-core). No library artifact is published, and the tag's pinned com.jme3:jme3-core 3.0.10 resolves only from the offline updates.jmonkeyengine.org repository (HTTP 404 on Maven Central), so the tagged loader cannot be rebuilt as pinned.",
+    "source": "https://github.com/ShapeNet/shapenet-viewer/blob/v0.1.0/src/main/java/edu/stanford/graphics/shapenet/jme3/plugins/PLYLoader.java",
+    "discovery_route": "GitHub code search PlyReader language:Java (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "dbrant/ModelViewer3D PlyModel",
+    "status": "excluded_android_application",
+    "reason": "Apache-2.0 Android app (211 stars; tags are app versionCodes) whose PlyModel(InputStream) extends IndexedModel and imports android.opengl.GLES20 and Matrix. No JVM library artifact is published, and the parser is coupled to the Android runtime.",
+    "source": "https://github.com/dbrant/ModelViewer3D/blob/versionCode_20/app/src/main/java/com/dmitrybrant/modelviewer/ply/PlyModel.kt",
+    "discovery_route": "GitHub repository search ply language:Kotlin (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "eqgis/Sceneform-EQR",
+    "status": "excluded_android_native",
+    "reason": "Apache-2.0 Android SDK (150 stars, tag v1.2.1) whose PLY support is the bundled C++ tinyply (Eq-Renderer/Android/eq-renderer/src/main/cpp/tinyply) behind JNI; it needs the Android runtime, and its parser is the tinyply family already counted in the C++ cell.",
+    "source": "https://github.com/eqgis/Sceneform-EQR/tree/v1.2.1",
+    "discovery_route": "GitHub code search loadPLY language:Java (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "MarginallyClever/Robot-Overlord-App LoadPLY",
+    "status": "excluded_wrong_input_format",
+    "reason": "Despite its name, the tagged 3.118.0 com.marginallyclever.ro3.mesh.load.LoadPLY registers the csv extension and reads X,Y,Z,SIGNAL_STRENGTH comma-separated rows; it is not a PLY parser.",
+    "source": "https://github.com/MarginallyClever/Robot-Overlord-App/blob/3.118.0/src/main/java/com/marginallyclever/ro3/mesh/load/LoadPLY.java",
+    "discovery_route": "GitHub code search loadPLY language:Java (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "Java repositories with PLY writers only (round 4)",
+    "status": "excluded_no_ply_input_api",
+    "reason": "postspectacular/toxiclibs (208 stars) matches 'end_header' only in toxi.geom.mesh.PLYWriter, and BobHanson/Jmol-SwingJS (net.sourceforge.jmol:jmol) only in org.jmol.shapesurface.PLYWriter; neither has a PLY reader.",
+    "source": "https://api.github.com/search/code?q=%22end_header%22+language%3AJava",
+    "discovery_route": "GitHub code search \"end_header\" language:Java (round 4)",
+    "round": "2026-11-18 round 4"
+  },
+  {
+    "name": "org.bytedeco:opencv 4.14.0-1.5.14",
+    "status": "excluded_no_ply_input_api",
+    "reason": "The JavaCPP OpenCV presets (10 deps.dev direct dependents) do not map the opencv_contrib surface_matching module that holds cv::ppf_match_3d::loadPLYSimple; no PLY input API is exposed to Java.",
+    "source": "https://github.com/bytedeco/javacpp-presets/tree/master/opencv/src/gen/java/org/bytedeco/opencv/global",
+    "discovery_route": "Maven/deps.dev check of OpenCV Java bindings (round 4)",
+    "round": "2026-11-18 round 4"
   }
 ]
