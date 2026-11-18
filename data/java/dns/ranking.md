@@ -36,10 +36,20 @@ deps.dev directDependentCount summed over all releases, from [registry-snapshot.
 | ---: | --- | ---: | --- | --- |
 | 1 | org.apache.directory.server:apacheds-protocol-dns | 75 | `new DnsMessageDecoder().decode(IoBuffer)` | ApacheDS DNS protocol (DnsMessageDecoder) |
 | 2 | com.github.greysoft.naf:greynaf-dns | 0 |  | Greysoft NAF |
-| 3 | com.github.connecttag:packet-dissector-lib-kmp | — | — | packet-dissector-lib-kmp |
+| 3 | dev.sitar:dnskotlin-jvm | 0 |  | Kotlin Multiplatform DNS client with a Message model (proto/Message.kt) |
+| 4 | com.kendamasoft:dns-client | 0 |  | Java DNS client with typed record classes |
+| 5 | tech.relaycorp:doh | 0 |  | Kotlin DNS-over-HTTPS client (decodes through dnsjava) |
+| 6 | com.github.ofmooseandmen:halo | 0 |  | Java mDNS/DNS-SD library |
+| 7 | com.youview:tinydnssd | 0 |  | minimal DNS-SD client for Android |
+| 8 | com.github.connecttag:packet-dissector-lib-kmp | — | — | packet-dissector-lib-kmp |
 
 - **org.apache.directory.server:apacheds-protocol-dns** (unresolved_control_failure): Fails the response control (run, not only source inspection): DnsMessageDecoder registers record decoders only for A, NS, MX and AAAA and throws IllegalArgumentException (ERR_600 Decoder unavailable for CNAME) on the CNAME answer of controls/dns/response.bin. It also decodes no Z, AD or CD bits. The artifact is part of the ApacheDS server (compile dependencies on apacheds-core, MINA and the LDAP API).
 - **com.github.greysoft.naf:greynaf-dns** (unresolved): Not tried: zero deps.dev direct dependents, so it has no positive primary metric and is not added.
+- **dev.sitar:dnskotlin-jvm** (unresolved): Kotlin Multiplatform DNS client with a Message model (proto/Message.kt). Not tried: zero deps.dev direct dependents over all releases, so it has no positive primary metric and is not added.
+- **com.kendamasoft:dns-client** (unresolved): Java DNS client with typed record classes. Not tried: zero deps.dev direct dependents over all releases, so it has no positive primary metric and is not added.
+- **tech.relaycorp:doh** (unresolved): Kotlin DNS-over-HTTPS client (decodes through dnsjava). Not tried: zero deps.dev direct dependents over all releases, so it has no positive primary metric and is not added.
+- **com.github.ofmooseandmen:halo** (unresolved): Java mDNS/DNS-SD library. Not tried: zero deps.dev direct dependents over all releases, so it has no positive primary metric and is not added.
+- **com.youview:tinydnssd** (unresolved): minimal DNS-SD client for Android. Not tried: zero deps.dev direct dependents over all releases, so it has no positive primary metric and is not added.
 - **com.github.connecttag:packet-dissector-lib-kmp** (unresolved_no_primary_metric): Kotlin Multiplatform packet dissector advertising a DNS wire parser, published only through JitPack (com.github.connecttag:packet-dissector-lib-kmp); it is not on Maven Central (Solr search: 0 hits), so deps.dev has no direct-dependent count and the primary metric is missing. Not attempted.
 
 ## Checked, excluded or recorded separately
@@ -65,3 +75,10 @@ deps.dev directDependentCount summed over all releases, from [registry-snapshot.
 - **net.straylightlabs:hola** (excluded): Fails the response control by source inspection: Record.fromBuffer builds typed records only for A, AAAA, PTR, SRV and TXT; CNAME and MX become UnknownRecord raw data, so their names cannot come from the library's parse. Its input is a DatagramPacket from the mDNS querier.
 - **cn.rtast.nmdns:native-mdns** (excluded): Kotlin Multiplatform mDNS announcer (broadcast only) supporting A, PTR, SRV and TXT records, no AAAA; no documented decoder for caller-supplied messages and no positive primary metric.
 - **timboudreau/netty-dns-support** (excluded): Record codecs layered on an unmerged fork of Netty's codec-dns (the README requires the author's dns-server-41 branch); no Maven Central release (Solr search: 0 hits), so no pinned release or primary metric, and its message decoding is the selected Netty family.
+- **xyz.gianlu.zeroconf:zeroconf** (excluded): mDNS service-discovery library: by source inspection of 1.3.2 its Packet.read is package-private (called by the Zeroconf listener on received datagrams) and Record.readFrom builds records only for A, AAAA, SRV, PTR, TXT and ANY, so CNAME and MX answers of controls/dns/response.bin are not decoded and there is no public message-bytes API.
+- **io.zrz.rtcore.sip:dns-resolver** (excluded): DNS-over-HTTPS resolver for a SIP stack: 4.1.0 parses Google/Cloudflare JSON answers (JsonBodyHandler over Jackson), not DNS wire messages.
+- **org.apache.tuweni:tuweni-dns-discovery** (excluded): Ethereum EIP-1459 node-list discovery over DNS TXT lookups; its 2.3.1 POM depends on dnsjava (selected) for DNS messages, so it has no own parser.
+- **uk.nominet:dnsjnio** (excluded): Non-blocking NIO transport (NonblockingResolver, Connection, Transaction classes) for dnsjava resolvers; messages are dnsjava's (selected), so it has no own parser.
+- **org.dnsjava:dnsjava** (excluded): Old third-party upload of dnsjava 2.0.6 (POM 'DNSJAVA Pom', sourceforge URL); same project and family as the selected dnsjava:dnsjava, not counted twice.
+- **net.posick:mdnsjava** (excluded): Multicast DNS / DNS-SD layer on dnsjava: the 2.2.0 POM depends on dnsjava (selected) and the jar adds only org.xbill.DNS.MulticastDNSUtils, so messages are parsed by dnsjava.
+- **com.qiniu:happy-dns-java** (excluded): Java edition of the excluded Android happy-dns resolver. By source inspection of 0.1.6, its public static DnsMessage.parseResponse requires the expected id and domain, returns only the A/CNAME answers as Record values, and discards the header flags, counts, questions and record classes, so the oracle summary cannot be produced (as with PHP cboxdk/dns). Its README documents resolver use only.
