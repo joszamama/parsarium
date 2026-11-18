@@ -1,0 +1,939 @@
+{
+  "format": "png",
+  "engines": {
+    "commons-imaging": {
+      "name": "Apache Commons Imaging",
+      "language": "java",
+      "repository": "https://github.com/apache/commons-imaging"
+    },
+    "fast-image-size": {
+      "name": "FastImageSize",
+      "language": "php",
+      "repository": "https://github.com/marc1706/fast-image-size"
+    },
+    "fast-png": {
+      "name": "fast-png",
+      "language": "javascript",
+      "repository": "https://github.com/image-js/fast-png"
+    },
+    "go-image-png": {
+      "name": "Go image/png",
+      "language": "go",
+      "repository": "https://github.com/golang/go"
+    },
+    "go-png-image-structure": {
+      "name": "go-png-image-structure",
+      "language": "go",
+      "repository": "https://github.com/dsoprea/go-png-image-structure"
+    },
+    "gufo-png": {
+      "name": "gufo-png",
+      "language": "rust",
+      "repository": "https://github.com/gufo-rs/gufo"
+    },
+    "image-png": {
+      "name": "image-rs png crate",
+      "language": "rust",
+      "repository": "https://github.com/image-rs/image-png"
+    },
+    "image-size": {
+      "name": "image-size",
+      "language": "javascript",
+      "repository": "https://codeberg.org/image-size/image-size"
+    },
+    "imagesize": {
+      "name": "imagesize",
+      "language": "python",
+      "repository": "https://github.com/shibukawa/imagesize_py"
+    },
+    "img-parts": {
+      "name": "img-parts",
+      "language": "rust",
+      "repository": "https://github.com/paolobarbolini/img-parts"
+    },
+    "iospng": {
+      "name": "iospng",
+      "language": "go",
+      "repository": "https://github.com/AndrianBdn/iospng"
+    },
+    "itextpdf": {
+      "name": "iText 5 PngImage",
+      "language": "java",
+      "repository": "https://github.com/itext/itextpdf"
+    },
+    "java-javax-imageio-png": {
+      "name": "JDK javax.imageio PNG reader (com.sun.imageio.plugins.png)",
+      "language": "java",
+      "repository": "https://github.com/openjdk/jdk"
+    },
+    "jcodec": {
+      "name": "JCodec",
+      "language": "java",
+      "repository": "https://github.com/jcodec/jcodec"
+    },
+    "libpng": {
+      "name": "libpng",
+      "language": "c",
+      "repository": "https://github.com/pnggroup/libpng"
+    },
+    "libspng": {
+      "name": "libspng",
+      "language": "c",
+      "repository": "https://github.com/randy408/libspng"
+    },
+    "lodepng": {
+      "name": "LodePNG",
+      "language": "c",
+      "repository": "https://github.com/lvandeve/lodepng"
+    },
+    "minipng": {
+      "name": "minipng",
+      "language": "rust",
+      "repository": "https://github.com/pommicket/minipng"
+    },
+    "pillow": {
+      "name": "Pillow PngImagePlugin",
+      "language": "python",
+      "repository": "https://github.com/python-pillow/Pillow"
+    },
+    "png-js": {
+      "name": "png.js",
+      "language": "javascript",
+      "repository": "https://github.com/foliojs/png.js"
+    },
+    "png-pong": {
+      "name": "png_pong",
+      "language": "rust",
+      "repository": "https://github.com/AldaronLau/png_pong"
+    },
+    "pngj": {
+      "name": "PNGJ",
+      "language": "java",
+      "repository": "https://github.com/leonbloy/pngj"
+    },
+    "pngjs": {
+      "name": "pngjs",
+      "language": "javascript",
+      "repository": "https://github.com/pngjs/pngjs"
+    },
+    "probe-image-size": {
+      "name": "probe-image-size",
+      "language": "javascript",
+      "repository": "https://github.com/nodeca/probe-image-size"
+    },
+    "pypng": {
+      "name": "PyPNG",
+      "language": "python",
+      "repository": "https://gitlab.com/drj11/pypng"
+    },
+    "stb-image": {
+      "name": "stb_image",
+      "language": "c",
+      "repository": "https://github.com/nothings/stb"
+    },
+    "upng-js": {
+      "name": "UPNG.js",
+      "language": "javascript",
+      "repository": "https://github.com/photopea/UPNG.js"
+    },
+    "wuffs": {
+      "name": "Wuffs PNG decoder",
+      "language": "other:wuffs",
+      "repository": "https://github.com/google/wuffs"
+    },
+    "zenpng": {
+      "name": "zenpng",
+      "language": "rust",
+      "repository": "https://github.com/imazen/zenpng"
+    },
+    "zune-png": {
+      "name": "zune-png",
+      "language": "rust",
+      "repository": "https://github.com/etemesi254/zune-image"
+    }
+  },
+  "paths": [
+    {
+      "path": "c/png/stb",
+      "engine": "stb-image",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/c/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "c/png/lodepng",
+      "engine": "lodepng",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/c/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "c/png/imagemagick",
+      "engine": "libpng",
+      "relation": "wrapper",
+      "chain": [
+        "imagemagick"
+      ],
+      "evidence": "family_evidence coders/png.c; family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "c/png/gdk-pixbuf",
+      "engine": "libpng",
+      "relation": "wrapper",
+      "chain": [
+        "gdk-pixbuf io-png"
+      ],
+      "evidence": "family_evidence io-png.c; family",
+      "confidence": "high"
+    },
+    {
+      "path": "c/png/vips",
+      "engine": "libpng",
+      "relation": "wrapper",
+      "chain": [
+        "vips"
+      ],
+      "evidence": "family_evidence vipspng.c; projects/png/c/vips/Dockerfile builds against libpng-dev (no libspng)",
+      "confidence": "high"
+    },
+    {
+      "path": "c/png/sdl3",
+      "engine": "stb-image",
+      "relation": "vendored",
+      "chain": [
+        "sdl3 SDL_stb.c"
+      ],
+      "evidence": "family_evidence SDL_stb.c; family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "c/png/cairo",
+      "engine": "libpng",
+      "relation": "wrapper",
+      "chain": [
+        "cairo"
+      ],
+      "evidence": "family_evidence cairo-png.c; family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "c/png/raylib",
+      "engine": "stb-image",
+      "relation": "vendored",
+      "chain": [
+        "raylib rtextures.c"
+      ],
+      "evidence": "family_evidence rtextures.c; family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "c/png/imlib2",
+      "engine": "libpng",
+      "relation": "wrapper",
+      "chain": [
+        "imlib2 PNG loader"
+      ],
+      "evidence": "family: Imlib2 PNG loader (libpng-backed)",
+      "confidence": "high"
+    },
+    {
+      "path": "c/png/wuffs",
+      "engine": "wuffs",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/c/png/parsers.json family: own parser",
+      "confidence": "high",
+      "note": "Parsing code written in the Wuffs language and released as generated C."
+    },
+    {
+      "path": "cpp/png/stb",
+      "engine": "stb-image",
+      "relation": "own",
+      "chain": [],
+      "evidence": "family_note: same decoder as C cell; C API from C++",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/png/imagemagick",
+      "engine": "libpng",
+      "relation": "wrapper",
+      "chain": [
+        "imagemagick"
+      ],
+      "evidence": "family_evidence coders/png.c; family_note",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/png/gdk-pixbuf",
+      "engine": "libpng",
+      "relation": "wrapper",
+      "chain": [
+        "gdk-pixbuf io-png"
+      ],
+      "evidence": "family_evidence io-png.c",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/png/vips",
+      "engine": "libpng",
+      "relation": "wrapper",
+      "chain": [
+        "vips"
+      ],
+      "evidence": "family_evidence vipspng.c; same build as C cell",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/png/sdl3",
+      "engine": "stb-image",
+      "relation": "vendored",
+      "chain": [
+        "sdl3 SDL_stb.c"
+      ],
+      "evidence": "family_evidence SDL_stb.c",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/png/cairo",
+      "engine": "libpng",
+      "relation": "wrapper",
+      "chain": [
+        "cairo"
+      ],
+      "evidence": "family_evidence cairo-png.c",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/png/raylib",
+      "engine": "stb-image",
+      "relation": "vendored",
+      "chain": [
+        "raylib rtextures.c"
+      ],
+      "evidence": "family_evidence rtextures.c",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/png/imlib2",
+      "engine": "libpng",
+      "relation": "wrapper",
+      "chain": [
+        "imlib2 PNG loader"
+      ],
+      "evidence": "family: Imlib2 PNG loader (libpng-backed)",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/png/sfml",
+      "engine": "stb-image",
+      "relation": "vendored",
+      "chain": [
+        "sfml Image.cpp"
+      ],
+      "evidence": "family_note: Image.cpp embeds stb_image",
+      "confidence": "high"
+    },
+    {
+      "path": "cpp/png/opencv",
+      "engine": "libpng",
+      "relation": "vendored",
+      "chain": [
+        "opencv imgcodecs"
+      ],
+      "evidence": "projects/png/cpp/opencv/manifest.json underlying_source: 3rdparty/libpng (BUILD_PNG=ON), libpng 1.6.57",
+      "confidence": "high"
+    },
+    {
+      "path": "go/png/github.com/disintegration/imaging",
+      "engine": "go-image-png",
+      "relation": "wrapper",
+      "chain": [
+        "imaging"
+      ],
+      "evidence": "family: Go image/png wrapper",
+      "confidence": "high"
+    },
+    {
+      "path": "go/png/github.com/fogleman/gg",
+      "engine": "go-image-png",
+      "relation": "wrapper",
+      "chain": [
+        "gg"
+      ],
+      "evidence": "family: Go image/png wrapper",
+      "confidence": "high"
+    },
+    {
+      "path": "go/png/github.com/anthonynsimon/bild/imgio",
+      "engine": "go-image-png",
+      "relation": "wrapper",
+      "chain": [
+        "bild/imgio"
+      ],
+      "evidence": "family: Go image/png wrapper",
+      "confidence": "high"
+    },
+    {
+      "path": "go/png/github.com/gameparrot/fastpng",
+      "engine": "go-image-png",
+      "relation": "fork",
+      "chain": [],
+      "evidence": "family: Go image/png-derived decoder",
+      "confidence": "high"
+    },
+    {
+      "path": "go/png/github.com/dsoprea/go-png-image-structure/v2",
+      "engine": "go-png-image-structure",
+      "relation": "own",
+      "chain": [],
+      "evidence": "family: PNG chunk structure parser",
+      "confidence": "high"
+    },
+    {
+      "path": "go/png/github.com/go-images/png",
+      "engine": "go-image-png",
+      "relation": "fork",
+      "chain": [],
+      "evidence": "family: Go image/png fork",
+      "confidence": "high"
+    },
+    {
+      "path": "go/png/github.com/andrianbdn/iospng",
+      "engine": "iospng",
+      "relation": "own",
+      "chain": [],
+      "evidence": "family: iOS PNG converter (own chunk reader)",
+      "confidence": "medium",
+      "note": "Reverts Apple CgBI PNG chunks; Go image/png not on the parse path per family record, not re-checked in source."
+    },
+    {
+      "path": "go/png/github.com/h2non/bimg",
+      "engine": "libspng",
+      "relation": "binding",
+      "chain": [
+        "bimg (cgo)",
+        "vips"
+      ],
+      "evidence": "projects/png/go/github_com_h2non_bimg/Dockerfile installs Debian libvips42; Debian trixie libvips42t64 8.16.1 depends on libspng0 and not libpng16 (packages.debian.org/trixie/libvips42t64)",
+      "confidence": "medium",
+      "note": "Record family says libvips only; libspng assumes the golang base image is Debian trixie. libvips uses libspng for PNG load when built with it."
+    },
+    {
+      "path": "go/png/github.com/davidbyttow/govips/v2/vips",
+      "engine": "libspng",
+      "relation": "binding",
+      "chain": [
+        "govips (cgo)",
+        "vips"
+      ],
+      "evidence": "Dockerfile installs Debian libvips42; Debian trixie libvips42t64 depends on libspng0, not libpng16",
+      "confidence": "medium",
+      "note": "Same caveat as bimg: record family is libvips; libspng depends on the Debian release of the golang base image."
+    },
+    {
+      "path": "go/png/gopkg.in/gographics/imagick.v3/imagick",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "imagick (cgo)",
+        "imagemagick"
+      ],
+      "evidence": "family: ImageMagick MagickWand; Dockerfile libmagickwand-7.q16-10; ImageMagick coders/png.c uses libpng",
+      "confidence": "medium"
+    },
+    {
+      "path": "java/png/commons-imaging",
+      "engine": "commons-imaging",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/java/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "java/png/pngj",
+      "engine": "pngj",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/java/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "java/png/thumbnailator",
+      "engine": "java-javax-imageio-png",
+      "relation": "wrapper",
+      "chain": [
+        "thumbnailator",
+        "javax.imageio"
+      ],
+      "evidence": "family: over Java ImageIO",
+      "confidence": "high"
+    },
+    {
+      "path": "java/png/ij",
+      "engine": "java-javax-imageio-png",
+      "relation": "wrapper",
+      "chain": [
+        "ImageJ Opener.openUsingImageIO",
+        "javax.imageio"
+      ],
+      "evidence": "ImageJ v1.54p ij/io/Opener.java: case PNG -> openUsingImageIO -> ImageIO.read",
+      "confidence": "high"
+    },
+    {
+      "path": "java/png/itextpdf",
+      "engine": "itextpdf",
+      "relation": "own",
+      "chain": [],
+      "evidence": "family: iText 5 PNG codec (PngImage parses chunks; inflate via java.util.zip)",
+      "confidence": "high"
+    },
+    {
+      "path": "java/png/pdfbox",
+      "engine": "java-javax-imageio-png",
+      "relation": "wrapper",
+      "chain": [
+        "pdfbox PDImageXObject",
+        "javax.imageio"
+      ],
+      "evidence": "PDFBox 3.0.8 PNGConverter parses chunks but returns null for colour type 6; control red-green.png is colour type 6, so ImageIO decodes",
+      "confidence": "medium",
+      "note": "For colour types PNGConverter accepts (e.g. indexed, RGB without tRNS) PDFBox's own chunk parser is the engine."
+    },
+    {
+      "path": "java/png/jcodec",
+      "engine": "jcodec",
+      "relation": "own",
+      "chain": [],
+      "evidence": "family: JCodec core PNG decoder",
+      "confidence": "high"
+    },
+    {
+      "path": "java/png/jcodec-javase",
+      "engine": "java-javax-imageio-png",
+      "relation": "wrapper",
+      "chain": [
+        "jcodec-javase pngawt",
+        "javax.imageio"
+      ],
+      "evidence": "family: Java SE PNG wrapper over Java ImageIO",
+      "confidence": "high"
+    },
+    {
+      "path": "java/png/openpdf",
+      "engine": "java-javax-imageio-png",
+      "relation": "wrapper",
+      "chain": [
+        "openpdf ImageLoader",
+        "javax.imageio"
+      ],
+      "evidence": "family: current PNG path over Java ImageIO",
+      "confidence": "high"
+    },
+    {
+      "path": "java/png/openpnp-opencv",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "openpnp-opencv (JNI)",
+        "opencv imgcodecs"
+      ],
+      "evidence": "family: JNI packaging of native OpenCV image decoder",
+      "confidence": "medium",
+      "note": "Assumes the packaged native OpenCV 4.9 uses its bundled libpng (not libspng); not traced in the native library."
+    },
+    {
+      "path": "javascript/png/sharp",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "sharp (N-API)",
+        "vips"
+      ],
+      "evidence": "sharp-libvips v1.3.4 versions.properties lists PNG 1.6.58 and no libspng (github.com/lovell/sharp-libvips)",
+      "confidence": "medium",
+      "note": "Record family_note leaves the backend open; resolved from the pinned @img/sharp-libvips 1.3.4 build manifest."
+    },
+    {
+      "path": "javascript/png/image-size",
+      "engine": "image-size",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/javascript/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/png/pngjs",
+      "engine": "pngjs",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/javascript/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/png/png-js",
+      "engine": "png-js",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/javascript/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/png/fast-png",
+      "engine": "fast-png",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/javascript/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/png/@pdf-lib/upng",
+      "engine": "upng-js",
+      "relation": "fork",
+      "chain": [],
+      "evidence": "family_note: fork of UPNG.js",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/png/parse-png",
+      "engine": "pngjs",
+      "relation": "wrapper",
+      "chain": [
+        "parse-png"
+      ],
+      "evidence": "family_note: depends on pngjs@^3.3.0",
+      "confidence": "high"
+    },
+    {
+      "path": "javascript/png/canvas",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "canvas (N-API)",
+        "cairo"
+      ],
+      "evidence": "family_note: PNG decoding delegated to Cairo/libpng",
+      "confidence": "medium"
+    },
+    {
+      "path": "javascript/png/@napi-rs/canvas",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "@napi-rs/canvas (N-API)",
+        "skia SkPngCodec"
+      ],
+      "evidence": "family: Skia",
+      "confidence": "low",
+      "note": "Assumes the prebuilt Skia uses its libpng codec (SkPngCodec), not the Rust PNG codec; not verified in the pinned binary."
+    },
+    {
+      "path": "javascript/png/probe-image-size",
+      "engine": "probe-image-size",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/javascript/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "php/png/intervention/image",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "intervention/image GdDriver",
+        "PHP ext/gd (libgd)"
+      ],
+      "evidence": "family_note: delegates to PHP GD; libgd gd_png.c uses libpng",
+      "confidence": "high"
+    },
+    {
+      "path": "php/png/imagine/imagine",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "imagine Gd\\Imagine",
+        "PHP ext/gd (libgd)"
+      ],
+      "evidence": "family_note: delegates to PHP GD; GD PNG path uses libpng",
+      "confidence": "high"
+    },
+    {
+      "path": "php/png/spatie/image",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "spatie/image Gd driver",
+        "PHP ext/gd (libgd)"
+      ],
+      "evidence": "family_note: GD driver; GD PNG path uses libpng",
+      "confidence": "high"
+    },
+    {
+      "path": "php/png/marc1706/fast-image-size",
+      "engine": "fast-image-size",
+      "relation": "own",
+      "chain": [],
+      "evidence": "family_note: parses PNG headers in PHP",
+      "confidence": "high"
+    },
+    {
+      "path": "php/png/gumlet/php-image-resize",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "php-image-resize",
+        "PHP ext/gd (libgd)"
+      ],
+      "evidence": "family_note: loads through PHP GD",
+      "confidence": "high"
+    },
+    {
+      "path": "php/png/league/glide",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "league/glide",
+        "intervention/image",
+        "PHP ext/gd (libgd)"
+      ],
+      "evidence": "family_note: Glide -> Intervention Image -> PHP GD",
+      "confidence": "high"
+    },
+    {
+      "path": "php/png/rosell-dk/webp-convert",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "webp-convert gd converter",
+        "PHP ext/gd (libgd)"
+      ],
+      "evidence": "family_note: decodes through bundled PHP GD",
+      "confidence": "high"
+    },
+    {
+      "path": "php/png/yiisoft/yii2-imagine",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "yii2-imagine",
+        "imagine/imagine",
+        "PHP ext/gd (libgd)"
+      ],
+      "evidence": "family_note: Yii -> Imagine -> PHP GD",
+      "confidence": "high"
+    },
+    {
+      "path": "php/png/nette/utils",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "nette/utils Image",
+        "PHP ext/gd (libgd)"
+      ],
+      "evidence": "family_note: delegates to PHP GD",
+      "confidence": "high"
+    },
+    {
+      "path": "php/png/intervention/image-laravel",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "image-laravel facade",
+        "intervention/image",
+        "PHP ext/gd (libgd)"
+      ],
+      "evidence": "family_note: forwards to Intervention Image 4 with PHP GD",
+      "confidence": "high"
+    },
+    {
+      "path": "python/png/Pillow",
+      "engine": "pillow",
+      "relation": "own",
+      "chain": [],
+      "evidence": "family: Pillow PNG",
+      "confidence": "high",
+      "note": "PngImagePlugin.py parses chunks in Python; zlib inflate and unfiltering run in Pillow's C decoder."
+    },
+    {
+      "path": "python/png/opencv-python-headless",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "cv2 (C extension)",
+        "opencv imgcodecs"
+      ],
+      "evidence": "family: OpenCV imgcodecs; cpp/png/opencv shows OpenCV bundles 3rdparty/libpng",
+      "confidence": "medium",
+      "note": "Assumes the pinned wheel's imgcodecs uses bundled libpng rather than libspng; not traced in the wheel."
+    },
+    {
+      "path": "python/png/imageio",
+      "engine": "pillow",
+      "relation": "wrapper",
+      "chain": [
+        "imageio"
+      ],
+      "evidence": "family_note: ImageIO via Pillow",
+      "confidence": "high"
+    },
+    {
+      "path": "python/png/scikit-image",
+      "engine": "pillow",
+      "relation": "wrapper",
+      "chain": [
+        "skimage.io",
+        "imageio"
+      ],
+      "evidence": "family: scikit-image via ImageIO/Pillow",
+      "confidence": "high"
+    },
+    {
+      "path": "python/png/matplotlib",
+      "engine": "pillow",
+      "relation": "wrapper",
+      "chain": [
+        "matplotlib.image"
+      ],
+      "evidence": "family: Matplotlib via Pillow",
+      "confidence": "high"
+    },
+    {
+      "path": "python/png/pypng",
+      "engine": "pypng",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/python/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "python/png/pycairo",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "pycairo (C extension)",
+        "cairo"
+      ],
+      "evidence": "family: Cairo/libpng",
+      "confidence": "high"
+    },
+    {
+      "path": "python/png/pygame",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "pygame (C extension)",
+        "SDL_image"
+      ],
+      "evidence": "projects/png/python/pygame manifest binary_feedback_module pygame.libs/libpng16 (AFL++ feedback observed in libpng)",
+      "confidence": "high"
+    },
+    {
+      "path": "python/png/rasterio",
+      "engine": "libpng",
+      "relation": "binding",
+      "chain": [
+        "rasterio (Cython)",
+        "GDAL PNG driver"
+      ],
+      "evidence": "family: GDAL PNG; GDAL frmts/png uses libpng",
+      "confidence": "medium",
+      "note": "libpng copy inside the wheel's GDAL not traced."
+    },
+    {
+      "path": "python/png/imagesize",
+      "engine": "imagesize",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/python/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/png/png",
+      "engine": "image-png",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/rust/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/png/image",
+      "engine": "image-png",
+      "relation": "wrapper",
+      "chain": [
+        "image"
+      ],
+      "evidence": "family: image-rs PNG lineage; projects/png/rust/image/Cargo.lock depends on png",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/png/img-parts",
+      "engine": "img-parts",
+      "relation": "own",
+      "chain": [],
+      "evidence": "Cargo.lock: img-parts depends only on bytes, crc32fast, miniz_oxide",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/png/png_pong",
+      "engine": "png-pong",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/rust/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/png/lodepng",
+      "engine": "lodepng",
+      "relation": "port",
+      "chain": [],
+      "evidence": "kornelski/lodepng-rust README: derived from the C LodePNG",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/png/zune-png",
+      "engine": "zune-png",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/rust/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/png/load_image",
+      "engine": "lodepng",
+      "relation": "port",
+      "chain": [
+        "load_image",
+        "lodepng (Rust crate)"
+      ],
+      "evidence": "family: LodePNG family; projects/png/rust/load_image/Cargo.lock depends on lodepng",
+      "confidence": "high",
+      "note": "load_image wraps the Rust lodepng crate, itself a port of C LodePNG."
+    },
+    {
+      "path": "rust/png/gufo-png",
+      "engine": "gufo-png",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/rust/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/png/minipng",
+      "engine": "minipng",
+      "relation": "own",
+      "chain": [],
+      "evidence": "data/rust/png/parsers.json family: own parser",
+      "confidence": "high"
+    },
+    {
+      "path": "rust/png/zenpng",
+      "engine": "zenpng",
+      "relation": "own",
+      "chain": [],
+      "evidence": "family: zenpng engine; Cargo.lock uses zenflate for inflate",
+      "confidence": "high"
+    }
+  ]
+}
