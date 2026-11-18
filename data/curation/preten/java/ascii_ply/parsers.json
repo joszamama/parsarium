@@ -471,5 +471,30 @@
     },
     "release_note": "Pinned official v1.03.4 source release; isolated javac builds the draco library module and three common utilities because the root Gradle project configures unrelated game-mod builds.",
     "source_kind": "source_build"
+  },
+  {
+    "name": "scalismo_3",
+    "group": "ch.unibas.cs.gravis",
+    "artifact": "scalismo_3",
+    "version": "1.0-RC1",
+    "license": "Apache-2.0",
+    "license_evidence": "Pinned Maven POM licenses section (Apache-2.0) and https://github.com/unibas-gravis/scalismo/blob/v1.0-RC1/LICENSE",
+    "documentation": "https://github.com/unibas-gravis/scalismo/blob/v1.0-RC1/src/main/scala/scalismo/io/MeshIO.scala",
+    "input_api": "scalismo.io.MeshIO.readMesh(File) on a local .ply path, returning Try[TriangleMesh[_3D]] (point count, triangle count, first triangle point ids)",
+    "control": "controls/ascii_ply/triangle.ply",
+    "expected_output": {
+      "vertices": 3,
+      "faces": 1,
+      "indices": [
+        0,
+        1,
+        2
+      ]
+    },
+    "scope": "ASCII PLY triangle vertices, face list and parsed point ids",
+    "family": "Scalismo pure Scala PLY reader (scalismo.io.ply)",
+    "family_note": "Scalismo 1.0 replaced its former VTK vtkPLYReader path with its own Scala PLY header, ASCII and binary readers; the release is a Scala 3 JVM artifact callable from Java. scalismo-faces ships a separate Scala PLY reader and records 0 deps.dev dependents.",
+    "release_note": "1.0-RC1 is the newest Maven Central release of the Scala 3 artifact (Git tag v1.0-RC1); release candidates are accepted as pinned releases, as for libfyaml 1.0.0rc2 in the Python YAML cell.",
+    "adapter_manifest_dir": "projects/ascii_ply/java/scalismo"
   }
 ]

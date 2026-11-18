@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "java",
+  "package": "scalismo_3",
+  "release": "1.0-RC1",
+  "catalog_parser": "data/java/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/java/scalismo/source-lock.json",
+  "source_sha256": "24bd1d35bc98febdb7bc2e4908b4c44aaa4cdb9f3df28b3fecd0bb99653a4009",
+  "base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "runtime_base_image": "eclipse-temurin@sha256:06c1f157dacf6b68198bd9a4186dd4c34ef24e65d7bbbe2a0cf8e62571ad38c9",
+  "platform": "linux/arm64",
+  "tmpfs_exec": true,
+  "control": "controls/ascii_ply/triangle.ply",
+  "control_sha256": "d6f46efd47104401bef9f510970e5a3510203f947cdc6679781df60685796378",
+  "expected_output": {
+    "vertices": 3,
+    "faces": 1,
+    "indices": [
+      0,
+      1,
+      2
+    ]
+  },
+  "harness": "GenericHarness.java",
+  "fuzz_engine": "Jazzer",
+  "fuzz_engine_release": "v0.26.0",
+  "fuzz_entry": "GenericHarness.fuzzerTestOneInput",
+  "fuzz_smoke_entrypoint": "/work/jazzer",
+  "fuzz_smoke_args": [
+    "--cp=/work/classes:/work/lib/scalismo_3-1.0-RC1.jar:/work/lib/scala3-library_3-3.3.0.jar:/work/lib/scala-library-2.13.10.jar:/work/lib/scalactic_3-3.2.16.jar:/work/lib/breeze_3-2.1.0.jar:/work/lib/breeze-macros_3-2.1.0.jar:/work/lib/blas-3.0.1.jar:/work/lib/lapack-3.0.1.jar:/work/lib/arpack-3.0.1.jar:/work/lib/arpack_combined_all-0.1.jar:/work/lib/opencsv-2.3.jar:/work/lib/JTransforms-3.1.jar:/work/lib/JLargeArrays-1.5.jar:/work/lib/commons-math3-3.2.jar:/work/lib/slf4j-api-1.7.5.jar:/work/lib/scala-collection-compat_3-2.7.0.jar:/work/lib/spire_3-0.18.0.jar:/work/lib/spire-macros_3-0.18.0.jar:/work/lib/spire-platform_3-0.18.0.jar:/work/lib/spire-util_3-0.18.0.jar:/work/lib/algebra_3-2.8.0.jar:/work/lib/cats-kernel_3-2.8.0.jar:/work/lib/breeze-natives_3-2.1.0.jar:/work/lib/scalismo-niftijiojar-0.1.0.jar:/work/lib/scalismo-hdf5-json_3-0.1-RC1.jar:/work/lib/upickle_3-2.0.0.jar:/work/lib/ujson_3-2.0.0.jar:/work/lib/upickle-core_3-2.0.0.jar:/work/lib/geny_3-0.7.1.jar:/work/lib/upack_3-2.0.0.jar:/work/lib/upickle-implicits_3-2.0.0.jar:/work/lib/jhdf-0.6.10.jar:/work/lib/commons-lang3-3.12.0.jar:/work/lib/compress-lzf-1.1.2.jar:/work/lib/lz4-java-1.8.0.jar:/work/lib/scala-parallel-collections_3-1.0.4.jar:/work/lib/slf4j-nop-2.0.7.jar",
+    "--target_class=GenericHarness",
+    "-help=1"
+  ],
+  "fuzz_smoke_expect": "Usage:",
+  "coverage": "JaCoCo coverage of the scalismo_3 release JAR (pure Scala scalismo.io.ply reader behind MeshIO.readMesh) during valid ASCII PLY replay; Jazzer fuzz entry",
+  "coverage_subject_prefix": "/work/parser-source/",
+  "format_specific_coverage_file_suffix": "/PLYMeshReaderAscii.scala"
+}
