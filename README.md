@@ -31,7 +31,11 @@
 
 ## What is in it
 
-Parsarium catalogs open-source parsers by **format** and **language**. For each pair, a *cell*, it selects up to ten third-party packages that read that format, ranked by how widely they are used in that language. Each selected package gets a pinned release, a documented input API, a Docker harness, a check against valid control files, source coverage, and an AFL++ overlay.
+Parsarium catalogs open-source parsers by **format** and **language**. For each pair, a *cell*, it selects up to ten third-party packages that read that format, ranked by how widely they are used in that language. Every selected package comes with a pinned release, a documented input API, and a Docker harness that is checked against valid control files and measures coverage in the parser's own source. Every target can then be:
+
+- run on your own files or on a whole corpus, with a JSON receipt per input;
+- fuzzed with AFL++ (each target has its own overlay), and most also with their language's native fuzzer (libFuzzer, Go fuzzing, Jazzer, Jazzer.js, Atheris, PHP-Fuzzer);
+- fed inputs that [Fandango](https://fandango-fuzzer.github.io/) generates from the format's grammar (every format has one).
 
 | | |
 | --- | --- |
@@ -72,7 +76,7 @@ export PARSARIUM_HOME="$PWD"
 
 ## Start here
 
-Requirements: Python 3.11+ and Docker with Linux amd64 and arm64 support for container runs. Catalog browsing requires only Python. Commands run from the repository root.
+Requirements: Python 3.11+, and Docker for anything that runs a parser. Browsing the catalog needs only Python. The examples use `python3 parsarium.py` from a clone; with the installed package, `parsarium` takes the same commands.
 
 ```sh
 python3 parsarium.py list --format png
@@ -126,9 +130,7 @@ python3 parsarium.py native run runs/pypng-native --check
 python3 parsarium.py native run runs/pypng-native
 ```
 
-[Fandango and Fanbase](https://fandango-fuzzer.github.io/Fanbase.html) generate inputs from format specifications. `fandango setup` installs Fandango 1.3.1 and its dependencies from a [hash-locked requirements file](fuzzing/fandango/requirements.lock) in the ignored local `.venv/`. `fandango generate` runs it for one verified project, writes a receipt, and can replay the corpus or prepare (not start) an AFL++ run:
-
-On Linux arm64, install a C compiler before setup: the locked `accumulation-tree` release builds from source there.
+[Fandango and Fanbase](https://fandango-fuzzer.github.io/Fanbase.html) generate inputs from format specifications. `fandango setup` installs Fandango 1.3.1 and its dependencies from a [hash-locked requirements file](fuzzing/fandango/requirements.lock) in the ignored local `.venv/`. `fandango generate` runs it for one verified project, writes a receipt, and can replay the corpus or prepare (not start) an AFL++ run. On Linux arm64, install a C compiler before setup: the locked `accumulation-tree` release builds from source there.
 
 ```sh
 python3 parsarium.py afl build png c lodepng
