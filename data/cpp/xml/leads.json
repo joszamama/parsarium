@@ -79,13 +79,14 @@
   },
   {
     "name": "gSOAP",
-    "status": "unresolved",
+    "status": "resolved_verified_selected",
     "popcon_dev_package": {
       "libgsoap-dev": 95
     },
     "family": "gSOAP own XML engine (stdsoap2)",
-    "reason": "SOAP/XML web-services toolkit (GPL-2.0 or commercial). It has its own XML parser and a documented generic DOM (dom.cpp, soap_dom_element), but that route needs soapcpp2-generated serializers and a soap context; not evaluated in this round. 95 dev installations would rank it after libxml++.",
-    "source": "https://www.genivia.com/doc/dom/html/index.html"
+    "reason": "Verified gSOAP 2.8.142 (Debian forky/sid orig tarball, GPL-2.0) through the documented DOM-only route: soapcpp2 -CSL import/dom.h, then xsd__anyType read with operator>> from a std::istream (SOAP_C_UTFSTRING | SOAP_DOM_TREE). gSOAP resolves namespaces itself and both shared valid controls give the exact namespace-aware summary. 1,648 gSOAP lines covered (1,501 stdsoap2.cpp, 147 dom.cpp); the controls differ by 126 covered lines and 84 repeat-stable AFL++ tuples, all differing lines in stdsoap2.cpp/stdsoap2.h. Rank 6 of eight by libgsoap-dev 95, between libxml++ and cxxtools. Own family.",
+    "source": "https://www.genivia.com/doc/dom/html/index.html",
+    "project": "projects/xml/cpp/gsoap"
   },
   {
     "name": "Arabica",

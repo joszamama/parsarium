@@ -297,6 +297,74 @@
       "error": null
     },
     {
+      "package": "gsoap",
+      "version": "2.8.142",
+      "scope": "gSOAP DOM (xsd__anyType read with operator>> from a std::istream, SOAP_DOM_TREE) with namespace URIs resolved by gSOAP; attributes sorted per element",
+      "command": "python3 scripts/run_project.py xml cpp gsoap",
+      "receipt": "projects/xml/cpp/gsoap/verification.json",
+      "pass": true,
+      "output": {
+        "attributes": [
+          "version=1",
+          "id=a1",
+          "{urn:parsarium:catalog}lang=es",
+          "id=b2"
+        ],
+        "elements": [
+          "{urn:parsarium:catalog}catalog",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}item",
+          "{urn:parsarium:item}name",
+          "{urn:parsarium:item}note"
+        ],
+        "max_depth": 3,
+        "namespace_declarations": 2,
+        "namespaces": [
+          "urn:parsarium:catalog",
+          "urn:parsarium:item"
+        ],
+        "root": "{urn:parsarium:catalog}catalog",
+        "text": [
+          "Café & té",
+          "Zürich <HQ>",
+          "x < y"
+        ]
+      },
+      "parser_source_lines_covered": 1648,
+      "format_specific_source_lines_covered": 147,
+      "second_valid_control": "controls/xml/order-default-ns.xml",
+      "second_valid_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "limit": "Namespace URIs are gSOAP's own (nstr on each DOM element and attribute); the DOM keeps xmlns declarations as attributes and drops the order control's comment and processing instruction.",
+      "error": null
+    },
+    {
       "package": "cxxtools",
       "version": "3.0.0",
       "scope": "cxxtools XmlReader pull events as a raw-name path (qualified names, xmlns attributes, attribute order and values, depth, trimmed text); no namespace URIs",
