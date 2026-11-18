@@ -10,10 +10,16 @@ public final class PngAdapter {
 
     private record Parsed(int width, int height, String pixels) {}
 
+    /** Pixel (0,0) and, when the image is wider than one pixel, pixel (1,0), as ARGB hex. */
+    private static String pixels(int width, int first, java.util.function.IntSupplier second) {
+        return width > 1 ? String.format("%08x,%08x", first, second.getAsInt())
+                : String.format("%08x", first);
+    }
+
     private static Parsed fromImage(BufferedImage image) {
         if (image == null) throw new IllegalStateException("no image decoded");
         return new Parsed(image.getWidth(), image.getHeight(),
-                String.format("%08x,%08x", image.getRGB(0, 0), image.getRGB(1, 0)));
+                pixels(image.getWidth(), image.getRGB(0, 0), () -> image.getRGB(1, 0)));
     }
 
     private static Parsed fromAwtImage(java.awt.Image image) {
@@ -60,9 +66,9 @@ public final class PngAdapter {
                     var line = (ar.com.hjg.pngj.ImageLineInt) reader.readRow();
                     var values = line.getScanline();
                     int first = (values[3] << 24) | (values[0] << 16) | (values[1] << 8) | values[2];
-                    int second = (values[7] << 24) | (values[4] << 16) | (values[5] << 8) | values[6];
                     Parsed result = new Parsed(reader.imgInfo.cols, reader.imgInfo.rows,
-                            String.format("%08x,%08x", first, second));
+                            pixels(reader.imgInfo.cols, first,
+                                    () -> (values[7] << 24) | (values[4] << 16) | (values[5] << 8) | values[6]));
                     reader.end();
                     yield result;
                 }
@@ -159,9 +165,9 @@ public final class PngAdapter {
                 try {
                     int first = (pixels.get(3) & 255) << 24 | (pixels.get(0) & 255) << 16
                             | (pixels.get(1) & 255) << 8 | (pixels.get(2) & 255);
-                    int second = (pixels.get(7) & 255) << 24 | (pixels.get(4) & 255) << 16
-                            | (pixels.get(5) & 255) << 8 | (pixels.get(6) & 255);
-                    yield new Parsed(width[0], height[0], String.format("%08x,%08x", first, second));
+                    yield new Parsed(width[0], height[0], pixels(width[0], first,
+                            () -> (pixels.get(7) & 255) << 24 | (pixels.get(4) & 255) << 16
+                                    | (pixels.get(5) & 255) << 8 | (pixels.get(6) & 255)));
                 } finally {
                     org.lwjgl.stb.STBImage.stbi_image_free(pixels);
                 }
@@ -195,7 +201,7 @@ public final class PngAdapter {
                     var pixels = image.getPixelReader();
                     if (pixels == null) throw new IllegalStateException("JavaFX pixel reader missing");
                     yield new Parsed((int) image.getWidth(), (int) image.getHeight(),
-                            String.format("%08x,%08x", pixels.getArgb(0, 0), pixels.getArgb(1, 0)));
+                            pixels((int) image.getWidth(), pixels.getArgb(0, 0), () -> pixels.getArgb(1, 0)));
                 }
             }
             case "openpnp-opencv" -> {

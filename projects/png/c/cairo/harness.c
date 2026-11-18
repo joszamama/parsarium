@@ -11,11 +11,21 @@ static unsigned char cairo_float_byte(float value) {
     if (value >= 1.f) return 255;
     return (unsigned char)((unsigned)(value * 65535.f + 0.5f) >> 8);
 }
+static unsigned char cairo_unpremultiply(unsigned char color, unsigned char alpha) {
+    /* ARGB32 colour is premultiplied by alpha; report straight RGBA, rounded.
+       Fully transparent pixels keep the stored 0,0,0,0. */
+    if (alpha == 0 || alpha == 255) return color;
+    unsigned value = ((unsigned)color * 510u + alpha) / (2u * alpha);
+    return value > 255u ? 255u : (unsigned char)value;
+}
 static void cairo_pixel(cairo_format_t format, const unsigned char *row, int x, unsigned char out[4]) {
     if (format == CAIRO_FORMAT_RGBA128F || format == CAIRO_FORMAT_RGB96F) {
         int bands = format == CAIRO_FORMAT_RGBA128F ? 4 : 3;
         float values[4] = {0.f, 0.f, 0.f, 1.f};
         memcpy(values, row + (size_t)x * (size_t)bands * sizeof(float), (size_t)bands * sizeof(float));
+        /* RGBA128F colour is premultiplied by alpha; RGB96F has no alpha. */
+        if (format == CAIRO_FORMAT_RGBA128F && values[3] > 0.f)
+            for (int i = 0; i < 3; i++) values[i] /= values[3];
         for (int i = 0; i < 4; i++) out[i] = cairo_float_byte(values[i]);
         return;
     }
@@ -23,6 +33,7 @@ static void cairo_pixel(cairo_format_t format, const unsigned char *row, int x, 
     memcpy(&value, row + (size_t)x * 4, sizeof value);
     out[0] = (value >> 16) & 255; out[1] = (value >> 8) & 255; out[2] = value & 255;
     out[3] = format == CAIRO_FORMAT_ARGB32 ? value >> 24 : 255;
+    for (int i = 0; i < 3; i++) out[i] = cairo_unpremultiply(out[i], out[3]);
 }
 int parsarium_parse_png(const uint8_t *data, size_t size, struct parsarium_png_result *result) {
     if (!data || !result || !size || size > (1u << 20)) return 0;

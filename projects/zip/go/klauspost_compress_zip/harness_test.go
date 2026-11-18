@@ -13,17 +13,18 @@ func TestControl(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	got, err := Parse(data)
+	entries, err := Parse(data)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := Observed(entries)
+	encoded, err := json.Marshal(got)
 	if err != nil {
 		t.Fatal(err)
 	}
 	want := Result{Name: "hello.txt", Text: "parsarium\n"}
-	if !reflect.DeepEqual(got, want) {
-		t.Fatalf("control mismatch: got %+v, want %+v", got, want)
-	}
-	encoded, err := json.Marshal(got)
-	if err != nil {
-		t.Fatal(err)
+	if !reflect.DeepEqual(got, any(want)) {
+		t.Fatalf("control mismatch: %s", encoded)
 	}
 	fmt.Printf("OBSERVED_JSON:%s\n", encoded)
 }

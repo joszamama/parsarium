@@ -95,11 +95,30 @@ def run(name: str, path: Path):
         return {"width": width, "height": height}
     if name == "pycairo":
         import cairo
+        import struct
         img = cairo.ImageSurface.create_from_png(str(path))
         raw = bytes(img.get_data())
-        first = [raw[2], raw[1], raw[0], raw[3]]
-        second = [raw[6], raw[5], raw[4], raw[7]]
-        return pixels(img.get_width(), img.get_height(), lambda x: second if x else first)
+        image_format = img.get_format()
+
+        def float_byte(value):
+            # Cairo stores 16-bit PNG samples as value / 65535; keep the high byte.
+            return 0 if not value > 0.0 else 255 if value >= 1.0 else int(value * 65535.0 + 0.5) >> 8
+
+        def at(x):
+            # Cairo premultiplies colour by alpha in ARGB32 and RGBA128F; report straight RGBA.
+            if image_format in (cairo.Format.RGBA128F, cairo.Format.RGB96F):
+                bands = 4 if image_format == cairo.Format.RGBA128F else 3
+                values = list(struct.unpack_from(f"={bands}f", raw, x * bands * 4)) + [1.0] * (4 - bands)
+                if image_format == cairo.Format.RGBA128F and values[3] > 0.0:
+                    values[:3] = [value / values[3] for value in values[:3]]
+                return [float_byte(value) for value in values]
+            (value,) = struct.unpack_from("=I", raw, x * 4)
+            alpha = value >> 24 if image_format == cairo.Format.ARGB32 else 255
+            colour = [(value >> shift) & 255 for shift in (16, 8, 0)]
+            if alpha not in (0, 255):
+                colour = [min(255, (sample * 510 + alpha) // (2 * alpha)) for sample in colour]
+            return colour + [alpha]
+        return pixels(img.get_width(), img.get_height(), at)
     if name == "pygame":
         import pygame
         img = pygame.image.load(str(path))
