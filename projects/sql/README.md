@@ -6,6 +6,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [libpg_query / C](c/libpg_query/README.md)
 - [tree-sitter-sql / C](c/tree_sitter_sql/README.md)
 - [duckdb / C++](cpp/duckdb/README.md)
+- [googlesql / C++](cpp/googlesql/README.md)
 - [github.com/AfterShip/clickhouse-sql-parser/parser / Go](go/github_com_aftership_clickhouse_sql_parser_parser/README.md)
 - [github.com/akito0107/xsqlparser / Go](go/github_com_akito0107_xsqlparser/README.md)
 - [github.com/auxten/postgresql-parser/pkg/sql/parser / Go](go/github_com_auxten_postgresql_parser_pkg_sql_parser/README.md)
