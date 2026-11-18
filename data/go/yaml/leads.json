@@ -75,6 +75,21 @@
     "evidence": "projects/yaml/go/github_com_go_rotini_yaml/verification.json"
   },
   {
+    "name": "github.com/yongjohnlee80/golib/parse/yaml",
+    "status": "selected",
+    "metric_value": 2,
+    "metric_error": null,
+    "family": "golib parse/yaml",
+    "api_hint": "pyaml.Parse([]byte); yaml.Evaluate(stream.Docs[0], yaml.Core)",
+    "note": "Round 6: pkg.go.dev search 'yaml 1.2' hit rank 3 (2 Imported by); YAML 1.2 parser package of the golib utility monorepo, evaluated with the same module's golib/yaml (1 Imported by).",
+    "found_by": "registry_search_round_6",
+    "source": "https://pkg.go.dev/github.com/yongjohnlee80/golib/parse/yaml",
+    "reason": "Selected: pinned v0.8.62 module zip; pyaml.Parse([]byte) (golib parse/yaml) then yaml.Evaluate(doc, yaml.Core) (golib/yaml) over one complete local YAML byte slice gives the oracle typed tree on both controls; 841 package lines covered; three identical AFL++ runs per control, controls differ by 42 parser blocks and 42 tuples.",
+    "version_seen": "v0.8.62",
+    "license": "Apache-2.0",
+    "evidence": "projects/yaml/go/github_com_yongjohnlee80_golib_parse_yaml/verification.json"
+  },
+  {
     "name": "github.com/ghodss/yaml",
     "status": "excluded_control_failed",
     "metric_value": 19254,

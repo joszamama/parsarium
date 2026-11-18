@@ -1,6 +1,6 @@
 # Go × YAML: selected parsers (pilot)
 
-Five control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection, and the leads below the line are not counted (evidence: [lead-check.json](lead-check.json)). yaml.v2, yaml.v3 and go.yaml.in/yaml/v4 share the go-yaml lineage (Go ports of the libyaml scanner and parser, one code base per major version); goccy/go-yaml and go-rotini/yaml are independent implementations.
+Six control-verified third-party paths. The ceiling is ten; this pilot does not pad the selection, and the leads below the line are not counted (evidence: [lead-check.json](lead-check.json)). yaml.v2, yaml.v3 and go.yaml.in/yaml/v4 share the go-yaml lineage (Go ports of the libyaml scanner and parser, one code base per major version); goccy/go-yaml, go-rotini/yaml and golib parse/yaml are independent implementations; go-rotini/yaml and golib parse/yaml tie at 2 Imported by and are ordered by package path.
 
 ## Primary within-cell adoption metric
 
@@ -13,6 +13,7 @@ pkg.go.dev Imported by package count, captured 2026-11-17 (rounds 1-4) and 2026-
 | 3 | [github.com/goccy/go-yaml](https://pkg.go.dev/github.com/goccy/go-yaml@v1.19.2#UnmarshalWithOptions) | v1.19.2 | 2,983 | yaml.UnmarshalWithOptions([]byte, *interface{}, yaml.UseOrderedMap()) over one complete local YAML byte slice | goccy/go-yaml |
 | 4 | [go.yaml.in/yaml/v4](https://pkg.go.dev/go.yaml.in/yaml/v4@v4.0.0#Load) | v4.0.0 | 376 | yaml.Load([]byte, *yaml.Node) with the default v4 options over one complete local YAML byte slice | go-yaml v4 |
 | 5 | [github.com/go-rotini/yaml](https://pkg.go.dev/github.com/go-rotini/yaml@v1.2.6#UnmarshalWithOptions) | v1.2.6 | 2 | yaml.UnmarshalWithOptions([]byte, *interface{}, yaml.WithOrderedMap()) over one complete local YAML byte slice | go-rotini/yaml |
+| 6 | [github.com/yongjohnlee80/golib/parse/yaml](https://pkg.go.dev/github.com/yongjohnlee80/golib/parse/yaml@v0.8.62#Parse) | v0.8.62 | 2 | pyaml.Parse([]byte) (golib parse/yaml) then yaml.Evaluate(doc, yaml.Core) (golib/yaml) over one complete local YAML byte slice | golib parse/yaml |
 
 ## Unselected leads
 

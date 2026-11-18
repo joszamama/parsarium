@@ -129,6 +129,34 @@ class GoYamlPilotTest(unittest.TestCase):
         self.assertEqual(row["popularity"]["value"], 2)
         self.assertIn("independent", row["family"])
 
+    def test_golib_harness_parses_then_evaluates_core_schema(self):
+        name = "github.com/yongjohnlee80/golib/parse/yaml"
+        if not any(row["name"] == name for row in self.parsers):
+            self.skipTest("golib parse/yaml not selected")
+        project = ROOT / "projects/yaml/go/github_com_yongjohnlee80_golib_parse_yaml"
+        harness = (project / "harness.go").read_text()
+        self.assertIn('pyaml "github.com/yongjohnlee80/golib/parse/yaml"', harness)
+        self.assertIn("pyaml.Parse(data)", harness)
+        self.assertIn("yaml.Evaluate(stream.Docs[0], yaml.Core)", harness)
+        self.assertIn("case yaml.Map:", harness)
+        # Coverage and AFL++ feedback stay inside the parser and its same-module schema evaluator.
+        dockerfile = (project / "Dockerfile").read_text()
+        self.assertIn("-coverpkg=github.com/yongjohnlee80/golib/parse/yaml,github.com/yongjohnlee80/golib/yaml ",
+                      dockerfile)
+        manifest = read(project / "manifest.json")
+        self.assertEqual(manifest["coverage_subject_prefix"], "github.com/yongjohnlee80/golib/")
+        row = next(row for row in self.parsers if row["name"] == name)
+        self.assertEqual(row["module"], "github.com/yongjohnlee80/golib")
+        coverage = read(project / "verification.json")
+        self.assertEqual(coverage["parser_source_files"], 8)
+        feedback = self.feedback["yaml/go/github_com_yongjohnlee80_golib_parse_yaml"]
+        self.assertLessEqual(set(feedback["control_features_by_file"]),
+                             {"compose.go", "encoding.go", "parser.go", "scanner.go", "yaml.go",
+                              "evaluate.go", "resolve.go"})
+        # Ties go-rotini/yaml at 2 Imported by; the tie is ordered by package path.
+        names = [row["name"] for row in self.parsers]
+        self.assertLess(names.index("github.com/go-rotini/yaml"), names.index(name))
+
     def test_round_four_leads_are_decided(self):
         leads = {lead["name"]: lead for lead in read(CELL / "leads.json")}
         check = read(CELL / "round4-lead-check.json")
