@@ -29,9 +29,20 @@
   <a href="ETHICS.md">Ethics</a>
 </p>
 
-Parsarium is a format-first catalog and target set for parser experiments. Its active collection covers ten formats across C, C++, Go, Java, JavaScript, Python, Rust, and PHP. Six more formats (JSON, XML, YAML, TOML, SQL, and DNS messages) are pilots with their own counts. Selected third-party paths have containerized, instrumented harnesses that accept local inputs and generated corpora. Each verified catalog entry has a pinned release, parser API, valid control, observed result, and evidence. Popularity ranks verified third-party packages **within a format and ecosystem**; the rankings do not compare ecosystems or imply independent parser engines.
+## What is in it
 
-The active catalog selects **791 fully runnable third-party package paths** across ten formats and eight ecosystems. Each cell has at most ten; 77 of 80 reach ten, and the other three report the smaller supported count. Every selected path has a positive numeric adoption signal, though 53 use a separately labeled secondary source. Three adopted, control-verified candidates lack verified parser feedback and are [excluded with their blockers recorded](data/curation/feedback-exclusions.json), without filling their slots with lower-ranked leads. The [curation record](data/curation/README.md) explains metrics and remaining uncertainty. The six pilot formats add 372 selected paths in 48 cells, 28 of which reach ten. Standard/runtime APIs and the pilot formats have [separate coverage counts](data/projects-coverage.json). Cells below ten record their search limits and blockers rather than filling slots with unqualified packages.
+Parsarium catalogs open-source parsers by **format** and **language**. For each pair, a *cell*, it selects up to ten third-party packages that read that format, ranked by how widely they are used in that language. Each selected package gets a pinned release, a documented input API, a Docker harness, a check against valid control files, source coverage, and an AFL++ overlay.
+
+| | |
+| --- | --- |
+| Formats (16) | PNG, ZIP, MP4, WAV, PDF, SVG, HTTP/1.1 requests, ASCII PLY, ASCII PNM, MP3, JSON, XML, YAML, TOML, SQL, DNS messages |
+| Languages (8) | C, C++, Go, Java, JavaScript, Python, Rust, PHP |
+| Parser paths | 1,163 third-party packages in 128 cells, plus 48 standard-library APIs with harnesses |
+| Full cells | 105 of 128 have ten paths |
+
+The other 23 cells have fewer than ten because not enough packages qualify, for example YAML and TOML in C or DNS in C++. Each of those cells records what was searched and why it stopped, rather than filling up with packages that fail a check. Rankings compare packages only **within one cell**: download counts from npm and installation counts from Debian are not comparable, and several packages may wrap the same underlying parser, which the catalog states.
+
+The first ten formats were curated together and share one [selection plan](data/curation/plan.json); JSON, XML, YAML, TOML, SQL and DNS were added later and keep their records per cell (they are labeled `pilot` in the data). The [selection protocol](PROTOCOL.md) and the [curation record](data/curation/README.md) explain the adoption metrics, secondary sources, exclusions, and remaining uncertainty.
 
 The [website](https://parsarium.com/) is built from this repository on every push: it helps you choose a format, find a documented parser, and assemble a runnable target set.
 
@@ -83,11 +94,7 @@ python3 parsarium.py run-format png --file my.png --results runs/png-my-file
 
 Use `--ecosystem python` to narrow the batch. A shared file may be accepted by some parsers and rejected by others; the receipts record each outcome.
 
-Formats: `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, `mp3`, plus the `json`, `xml`, `yaml`, `toml`, `sql`, and `dns` pilots. Ecosystems: `c`, `cpp`, `go`, `java`, `javascript`, `python`, `rust`, `php`.
-
-### MP3 targets
-
-MP3 is one format. Each ecosystem keeps the ten most-adopted paths from the former MP3-with-ID3v2 and plain-MP3 cells ([merge record](data/curation/mp3-merge.json)). A path is verified either on the ID3v2-tagged control (`controls/mp3/id3v2-tagged-tone.mp3`) or on the untagged MPEG frame controls; its parser record says which (`control_kind`). Every MP3 target lives under `projects/mp3/` and uses the format name `mp3`, for example `python3 parsarium.py run mp3 java jaudiotagger controls/mp3/id3v2-tagged-tone.mp3`; `parsarium.py projects --format mp3` lists all of them.
+Formats: `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii_pnm`, `mp3`, `json`, `xml`, `yaml`, `toml`, `sql`, `dns`. Ecosystems: `c`, `cpp`, `go`, `java`, `javascript`, `python`, `rust`, `php`.
 
 ## Fuzzing
 
@@ -131,7 +138,7 @@ python3 parsarium.py fandango generate png c lodepng runs/lodepng-fandango \
 python3 parsarium.py afl run runs/lodepng-fandango/afl --check
 ```
 
-Fanbase supplies the default specs for `png`, `zip`, `wav`, `svg`, `json`, `xml`, and MP3 targets verified on the ID3v2-tagged control (`mp3` in Fanbase, including an ID3v2.3 tag). Parsarium supplies local specs for MP4, PDF, HTTP/1.1 requests, ASCII PLY, ASCII PNM P3, YAML, TOML, SQL, DNS messages, and MP3 targets verified on untagged Layer III frames. `--fanbase` selects a Fanbase variant such as `png-boundary`; `--spec` selects another local spec. Every format, active or pilot, has a default generation route. The MP4 grammar includes one decodable 2×2 H.264 video frame and no audio track. Parsers may differ in which valid grammar variations they accept; replay records each outcome.
+Fanbase supplies the default specs for `png`, `zip`, `wav`, `svg`, `json`, `xml`, and MP3 targets verified on the ID3v2-tagged control (`mp3` in Fanbase, including an ID3v2.3 tag). Parsarium supplies local specs for MP4, PDF, HTTP/1.1 requests, ASCII PLY, ASCII PNM P3, YAML, TOML, SQL, DNS messages, and MP3 targets verified on untagged Layer III frames. `--fanbase` selects a Fanbase variant such as `png-boundary`; `--spec` selects another local spec. Every format has a default generation route. The MP4 grammar includes one decodable 2×2 H.264 video frame and no audio track. Parsers may differ in which valid grammar variations they accept; replay records each outcome.
 
 MP3 targets verified on untagged frames use a [local Layer III seed grammar](fuzzing/fandango/plain-mp3-decision.md). Fanbase's `-F mp3` grammar emits tags and Layer I/II frames, so it cannot be converted to those targets by stripping tags.
 
