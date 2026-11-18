@@ -1,0 +1,67 @@
+{
+ "checked_at": "2026-11-18",
+ "environment": "local PHP 8.5.12 CLI (macOS arm64); exploratory probes on both valid controls with the GitHub release archives, not pinned harnesses",
+ "oracle": "hand-written typed trees in controls/yaml/check_controls.py; mappings must arrive as stdClass or a node type distinct from sequences",
+ "probes": [
+  {
+   "package": "ktomk/symfony-yaml",
+   "version": "v2.6.13.5",
+   "archive_sha256": "b93c64c817ff7da47543b5b8ddde755f33fc9d8582938771a9bda567ebc6d48a",
+   "call": "Ktomk\\Symfony\\Component\\Yaml\\Yaml::parse(text, true, false, true)",
+   "source_overlap": {
+    "compared_with": "symfony/yaml v8.1.11",
+    "distinct_lines": 610,
+    "shared_lines": 223,
+    "share": 0.366
+   },
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": false,
+     "difference": "items[*].note block scalars lose the final line break ('line one\\nline two', 'folded text')"
+    },
+    "order.yaml": {
+     "matches_oracle": false,
+     "difference": "meta: {} returned as an empty PHP array, read as a sequence"
+    }
+   }
+  },
+  {
+   "package": "atk14/mini-yaml",
+   "version": "v1.1",
+   "archive_sha256": "f3fae4c53ecc5347bbddb63dc3adb809a99a1bc2af997a8e8d5da5f717fd728b",
+   "call": "miniYAML::Load(text)",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": false,
+     "difference": "scalars untyped (version \"2\", enabled \"true\"), flow sequence kept as text, \\u00e9 and \\t escapes undecoded"
+    },
+    "order.yaml": {
+     "matches_oracle": false,
+     "difference": "exception: Unexpected multi-line scalar value starting with: &shared"
+    }
+   }
+  },
+  {
+   "package": "jason-gao/yaml",
+   "version": "v4.3.0",
+   "archive_sha256": "5e91a159054ac7be3c1afab98193e86c86b768ba207d760f4f0cdc581062407a",
+   "call": "Symfony\\Component\\Yaml\\Yaml::parse(text, Yaml::PARSE_OBJECT_FOR_MAP)",
+   "source_overlap": {
+    "compared_with": "symfony/yaml v4.3.0",
+    "distinct_lines": 1002,
+    "shared_lines": 1002,
+    "share": 1.0
+   },
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": false,
+     "difference": "TypeError: abs(): Argument #1 ($num) must be of type int|float, string given (PHP 8.5)"
+    },
+    "order.yaml": {
+     "matches_oracle": false,
+     "difference": "same TypeError"
+    }
+   }
+  }
+ ]
+}

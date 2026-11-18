@@ -26,25 +26,39 @@ Packagist lifetime downloads, captured 2026-11-17 (purrphp/yaml: round-4 targete
 | jbzoo/data | excluded | 1,679,280 | symfony/yaml (Yaml::parse into PHP arrays) |
 | aplus/config | excluded | 1,609,834 | libyaml via ext-yaml (yaml_parse_file) |
 | dallgoot/yaml | excluded | 372,583 | dallgoot/yaml |
+| fitbug/symfony-yaml-serializer-encoder-decoder | excluded | 287,415 | symfony/yaml via a Symfony Serializer encoder |
 | maikuolan/common | excluded | 251,761 | Maikuolan Common YAML handler (own line parser) |
+| kyos/configparser | excluded | 183,896 | symfony/yaml via a configuration loader |
 | webignition/yaml-document-set-parser | excluded | 84,925 | document splitter (no YAML parser) |
+| deresh/sfyaml | excluded | 52,796 | sfYaml (symfony 1 standalone YAML, fabpot/yaml mirror) |
 | xp-forge/yaml | excluded | 36,737 | xp-forge/yaml (own parser) |
+| chubbyphp/chubbyphp-decode-encode | excluded | 34,002 | symfony/yaml via a decode/encode layer |
+| ktomk/symfony-yaml | excluded | 25,879 | Symfony Yaml 2.6 (namespaced fork) |
+| corneltek/configkit | excluded | 14,682 | symfony/yaml via ConfigKit |
 | horde/yaml | excluded | 12,259 | Horde_Yaml (own loader) |
+| atk14/mini-yaml | excluded | 9,104 | MiniYAML (own minimal pure-PHP reader) |
+| radioactivehamster/yaml | excluded | 8,694 | symfony/yaml ^3.0 (extension) |
 | mougrim/yaml-cst | excluded | 8,374 | tree-sitter-yaml via FFI |
+| bravo3/properties | excluded | 7,653 | symfony/yaml via a property loader |
+| sunrise/coder | excluded | 5,957 | generic data coder (no YAML codec in the release) |
 | eureka/component-yaml | excluded | 3,704 | Spyc 0.5.1 (renamed copy) |
 | secondparty/dipper | excluded | 2,553 | Dipper (own subset parser) |
 | yalesov/yaml | excluded | 1,694 | symfony/yaml (Yaml::parse into PHP arrays) |
 | charcoal-dev/yaml | excluded | 1,640 | comely-io/yaml lineage (own line parser) |
+| steevanb/php-yaml | excluded | 1,520 | symfony/yaml ^3.1|^4.0 (feature additions) |
 | klausi/yaml_comments | excluded | 1,482 | Symfony Yaml fork (comment-preserving) |
 | comely-io/yaml | excluded | 1,445 | comely-io/yaml (own line parser) |
 | sndsgd/yaml | excluded | 1,298 | libyaml via ext-yaml (pecl/yaml family) |
 | pieter/yaml | excluded | 1,276 | symfony/yaml 2.5.5 via a Laravel 4 loader |
+| nlib/lib-yaml | excluded | 1,242 | symfony/yaml ^4.3 via a helper library |
 | phpalchemy/yaml | excluded | 980 | Spyc-derived ("maintained version of spyc") |
 | mecha-cms/x.y-a-m-l | excluded | 562 | mecha-cms/x.y-a-m-l |
+| topolis/yaml | excluded | 551 | symfony/yaml ^4.1|^5.0 (extension) |
 | 3rd-party/yaml | excluded | 406 | Spyc-derived (phpalchemy/yaml variant) |
 | aeliot/yaml-token | excluded | 352 | yaml-token own lexer and node/token tree |
 | maxbeckers/php-yaml-parser | excluded | 309 | maxbeckers/php-yaml-parser (own scan parser) |
 | atphp/yaml | excluded | 257 | wrapper over several YAML parsers |
+| webvariants/sfyaml | excluded | 204 | sfYaml (fabpot/yaml Mercurial mirror) |
 | gijsbos/yamlspeed | excluded | 132 | YamlSpeed (own parser) |
 | rindow/rindow-module-yaml | excluded | 78 | symfony/yaml via a Rindow module |
 | nigatedev/yaml | excluded | 28 | symfony/yaml v5.3.6 |
@@ -52,5 +66,7 @@ Packagist lifetime downloads, captured 2026-11-17 (purrphp/yaml: round-4 targete
 | tbela99/yaml | excluded | 15 | symfony/yaml 5.1 fork (comment-preserving AST) |
 | keruald/yaml | excluded | 13 | symfony/yaml |
 | scottchiefbaker/yaml-polyfill | excluded | 8 | yaml-polyfill (own pure-PHP yaml_parse) |
+| jason-gao/yaml | excluded | 5 | symfony/yaml v4.3.0 (byte-identical copy) |
+| sixacross/unaliased_yaml | excluded | 4 | symfony/yaml wrapper that ignores aliases |
 
-mustangostang/spyc fails both valid controls ([probe](spyc-valid-control-probe.json)); dallgoot/yaml fails the primary control ([probe](dallgoot-yaml-valid-control-probe.json)). The round-2 leads were probed on both valid controls or excluded from source evidence ([probes and reasons](round2-lead-probes.json), [leads](leads.json)): wrappers over symfony/yaml return PHP arrays that lose {} versus [], nette/neon is NEON, the own parsers and Spyc forks fail escapes, aliases or block scalars, and tbela99/yaml is a symfony/yaml 5.1 fork. Searches: `yaml`, `yaml parser`, `yaml-parser`, `yml`, `spyc` (first 100 hits each). Standard and runtime APIs: none documented ([standard.json](standard.json)). Round 4 (2026-11-18) added purrphp/yaml from a GitHub search for PHP YAML parsers and decided the other round-4 leads ([probes](round4-lead-probes.json)).
+mustangostang/spyc fails both valid controls ([probe](spyc-valid-control-probe.json)); dallgoot/yaml fails the primary control ([probe](dallgoot-yaml-valid-control-probe.json)). The round-2 leads were probed on both valid controls or excluded from source evidence ([probes and reasons](round2-lead-probes.json), [leads](leads.json)): wrappers over symfony/yaml return PHP arrays that lose {} versus [], nette/neon is NEON, the own parsers and Spyc forks fail escapes, aliases or block scalars, and tbela99/yaml is a symfony/yaml 5.1 fork. Searches: `yaml`, `yaml parser`, `yaml-parser`, `yml`, `spyc` (first 100 hits each). Standard and runtime APIs: none documented ([standard.json](standard.json)). Round 4 (2026-11-18) added purrphp/yaml from a GitHub search for PHP YAML parsers and decided the other round-4 leads ([probes](round4-lead-probes.json)). Round 6 (2026-11-18) ran eleven further Packagist searches and measured Symfony YAML forks; all 16 new leads are excluded ([probes](round6-lead-probes.json)).

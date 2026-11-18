@@ -107,6 +107,23 @@ class PhpYamlPurrphpYamlTest(unittest.TestCase):
         self.assertNotIn("Symfony", harness)
         self.assertIn("parsarium_parse", (PROJECT / "fuzz-target.php").read_text())
 
+    def test_round_six_leads_are_decided_with_packagist_values(self):
+        data = ROOT / "data/php/yaml"
+        snapshot = json.loads((data / "registry-snapshot.json").read_text())
+        leads = {lead["name"]: lead for lead in json.loads((data / "leads.json").read_text())}
+        cell = json.loads((data / "cell.json").read_text())
+        round6 = snapshot["round_6_discovery"]
+        self.assertEqual(len(round6["leads_added"]), 16)
+        for name in round6["leads_added"]:
+            self.assertEqual(leads[name]["status"], "excluded", name)
+            self.assertTrue(leads[name]["note"].startswith("Discovery route: round 6"), name)
+            self.assertEqual(leads[name]["metric_value"], snapshot["metrics"][name]["value"], name)
+        probes = json.loads((data / "round6-lead-probes.json").read_text())["probes"]
+        self.assertTrue(all(not c["matches_oracle"] for probe in probes for c in probe["controls"].values()))
+        self.assertEqual(cell["leads_recorded"], len(leads))
+        self.assertEqual(cell["verified_third_party_count"], 3)
+        self.assertIn("Round 6", cell["uncertainty"])
+
 
 if __name__ == "__main__":
     unittest.main()
