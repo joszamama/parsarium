@@ -512,5 +512,25 @@
     "family": "dnsparse (Robert Graham)",
     "api_lead_checked_against_pinned_release": false,
     "reason": "Stand-alone DNS response parser on GitHub with no Debian source package; no primary metric. Not attempted."
+  },
+  {
+    "name": "wahern-dns",
+    "status": "resolved_verified_selected",
+    "primary_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
+    "primary_metric_value": null,
+    "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "supplemental_metric_value": 273,
+    "supplemental_metric_source": "https://api.github.com/repos/wahern/dns",
+    "supplemental_captured_at_utc": "2026-11-18T07:17:48.503233+00:00",
+    "found_by": "round-6 star-fallback GitHub repository search ('dns library language:C stars:>=100', 'dns in:name language:C stars:>=100'); registry-snapshot.json round_6_star_fallback",
+    "documentation": "https://github.com/wahern/dns/blob/rel-20160808/README.md",
+    "input_api_lead": "dns_p_make + P->data/P->end, dns_p_study, dns_rr_foreach/dns_rr_grep, dns_any_parse (src/dns.h)",
+    "family": "dns.c (William Ahern) single-file packet decoder",
+    "note": "Debian does not package dns.c; belle-sip and lua-cqueues embed copies (both excluded in round 4 for exposing no C packet API), which do not give dns.c a Debian source identity or popcon count.",
+    "api_lead_checked_against_pinned_release": true,
+    "lead_adoption_order": null,
+    "supplemental_rank": 1,
+    "verification": "projects/dns/c/wahern-dns/verification.json",
+    "reason": "Pinned rel-20160808 passes both DNS controls; star-fallback path (273 stars) ranked after the five Debian-ranked paths; see parsers.json and data/c/dns/wahern-dns-feedback-differential.json."
   }
 ]

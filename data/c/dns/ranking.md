@@ -1,6 +1,6 @@
 # C × DNS: selected parsers (pilot)
 
-Five verified third-party path(s), ranked by one metric. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
+Six verified third-party path(s): five ranked by the primary metric, then one star-fallback path ranked separately. The ceiling is ten; the remaining leads stay unselected until they pass the same gates.
 
 ## Adoption metric
 
@@ -23,6 +23,16 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 **udns 0.7** (LGPL-2.1-or-later) parses local bytes with `dns_getdn(pkt, &cur, end, dn, dnsiz) for question names, then void dns_initparse(struct dns_parse *p, dnscc_t *qdn, dnscc_t *pkt, dnscc_t *cur, dnscc_t *end) + int dns_nextrr(struct dns_parse *p, struct dns_rr *rr), with the dns_qid/dns_qr/.../dns_numar header accessors`. Both controls match the oracle summary. The response control covers 110 library lines in 4 files. AFL++ feedback repeats 3 times per control; response and query give 100/72 parser features and 110/86 AFL++ tuples, differing by 28 features and 24 tuples ([receipt](udns-feedback-differential.json)). Own C decoder of an asynchronous stub-resolver library; only its documented low-level parsing routines are called and no resolver context is created. The routines return each RR's owner, type, class, TTL and RDATA span; the harness renders RDATA with udns calls (dns_ntop for A/AAAA, dns_getdn + dns_dntop for names, dns_get16 for the MX preference) and reads authority/additional by resetting dnsp_rrl to the section count. udns has accessors for AD and CD but none for the reserved Z bit, so z carries AD and CD only.
 
 **getdns 1.7.3** (BSD-3-Clause) parses local bytes with `getdns_return_t getdns_wire2msg_dict(const uint8_t *wire, size_t wire_sz, getdns_dict **msg_dict)`. Both controls match the oracle summary. The response control covers 881 library lines in 58 files. AFL++ feedback repeats 3 times per control; response and query give 860/629 parser features and 701/533 AFL++ tuples, differing by 231 features and 168 tuples ([receipt](getdns-feedback-differential.json)). getdns walks the message with its own rr-iter.c/rr-dict.c iterators and builds the message dict in util-internal.c; it bundles gldns, an import of Unbound's sldns (ldns lineage). Distinct normalized non-blank source lines (comments removed, gldns_ mapped to ldns_): getdns's own decoder files rr-iter.c, rr-dict.c, util-internal.c, convert.c, dict.c and list.c share 75 of 3,228 lines (2.3%) with ldns 1.8.4's *.c; the bundled gldns *.c share 1,128 of 3,610 (31.2%). Kept as a distinct package API with the shared lineage stated. Built stub-only without libunbound; no context is created. Names come from getdns_convert_dns_name_to_fqdn and addresses from getdns_display_ip_address; the harness lower-cases names and joins the MX preference and exchange. getdns reports the reserved Z bit, AD and CD separately, so z carries all three.
+
+## Star-fallback paths (ranked separately)
+
+GitHub stars (secondary, repository interest, not downloads), from the GitHub REST API (`stargazers_count`) captured 2026-11-18 in [registry-snapshot.json](registry-snapshot.json) (`round_6_star_fallback`). These paths fill slots left empty after the Debian-ranked paths and are never compared with popcon counts.
+
+| Star rank | Package | Release | Stars | Parser family |
+| ---: | --- | --- | ---: | --- |
+| 1 | [wahern-dns](https://github.com/wahern/dns/blob/rel-20160808/README.md) | rel-20160808 | 273 | dns.c (William Ahern) single-file packet decoder (src/dns.c) |
+
+**wahern-dns rel-20160808** (MIT) parses local bytes by copying them into a `struct dns_packet` from `dns_p_make` (`P->data`, `P->end`, as the release's `parse-packet` command does), then `dns_p_study`, `dns_header`/`dns_p_count`, `dns_rr_foreach` (`dns_rr_grep`) per section in packet order, `dns_d_expand` for names and `dns_any_parse` + `dns_any_print` for RDATA. Both controls match the oracle summary. The response control covers 426 library lines in 2 files. AFL++ feedback repeats 3 times per control; response and query give 311/172 parser features and 345/178 AFL++ tuples, differing by 139 features and 169 tuples ([receipt](wahern-dns-feedback-differential.json)). Own C decoder of a DNS-specific stub and recursive resolver library; no resolver object is created. It shares no code with the Debian-ranked paths; belle-sip and lua-cqueues embed copies but expose no C packet API. Documentation is the README, the public `dns.h` declarations and the `parse-packet` example; the TeX guide in the release does not cover the packet API. The harness lower-cases names, adds a missing trailing dot and splits the MX text from `dns_any_print`. `struct dns_header` keeps the three bits after RA in one field, so z carries Z, AD and CD.
 
 ## Remaining leads
 

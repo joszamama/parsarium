@@ -2881,5 +2881,909 @@
         "reason": "no Debian source package"
       }
     }
+  },
+  "round_6_star_fallback": {
+    "note": "Round-6 star-fallback discovery (2026-11-18): GitHub repository searches restricted to language:C and stars:>=100 (first 100 hits each, sorted by stars), plus the cell's earlier GitHub-only leads. stargazers_count, fork flag and tags were captured from the GitHub REST API (star_captures, with the response SHA-256). Most hits are servers, proxies, tunnels, scanners or test tools without a parser library API; the decisions list covers every DNS library candidate.",
+    "rule": "PROTOCOL.md star fallback (2026-11-18): C/C++ slots left empty after primary-metric and Debian-fallback paths may be filled by pinned tagged releases of upstream, format-specific GitHub repositories with stargazers_count >= 100; ranked separately by stars; metric 'GitHub stars (secondary, repository interest, not downloads)'.",
+    "github_repository_search": [
+      {
+        "query": "dns parser language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns parser language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 1,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:08:34Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "NLnetLabs/simdzone",
+            "stars": 140
+          }
+        ]
+      },
+      {
+        "query": "dns packet language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns packet language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 1,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:08:43Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "libnet/libnet",
+            "stars": 961
+          }
+        ]
+      },
+      {
+        "query": "dns message language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns message language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 0,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:08:52Z",
+        "hits": []
+      },
+      {
+        "query": "dns library language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns library language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 7,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:09:01Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "c-ares/c-ares",
+            "stars": 2215
+          },
+          {
+            "rank": 2,
+            "repository": "troglobit/inadyn",
+            "stars": 1150
+          },
+          {
+            "rank": 3,
+            "repository": "mjansson/mdns",
+            "stars": 598
+          },
+          {
+            "rank": 4,
+            "repository": "ntruchsess/arduino_uip",
+            "stars": 491
+          },
+          {
+            "rank": 5,
+            "repository": "NLnetLabs/ldns",
+            "stars": 363
+          },
+          {
+            "rank": 6,
+            "repository": "avahi/nss-mdns",
+            "stars": 279
+          },
+          {
+            "rank": 7,
+            "repository": "wahern/dns",
+            "stars": 273
+          }
+        ]
+      },
+      {
+        "query": "dns decoder language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns decoder language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 0,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:09:09Z",
+        "hits": []
+      },
+      {
+        "query": "rfc1035 language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "rfc1035 language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 0,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:09:18Z",
+        "hits": []
+      },
+      {
+        "query": "dns wire language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns wire language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 0,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:09:27Z",
+        "hits": []
+      },
+      {
+        "query": "topic:dns language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "topic:dns language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 37,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:09:37Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "pymumu/smartdns",
+            "stars": 11425
+          },
+          {
+            "rank": 2,
+            "repository": "yarrick/iodine",
+            "stars": 8043
+          },
+          {
+            "rank": 3,
+            "repository": "NLnetLabs/unbound",
+            "stars": 5077
+          },
+          {
+            "rank": 4,
+            "repository": "blechschmidt/massdns",
+            "stars": 3666
+          },
+          {
+            "rank": 5,
+            "repository": "c-ares/c-ares",
+            "stars": 2215
+          },
+          {
+            "rank": 6,
+            "repository": "heiher/hev-socks5-tunnel",
+            "stars": 2115
+          },
+          {
+            "rank": 7,
+            "repository": "pi-hole/FTL",
+            "stars": 1735
+          },
+          {
+            "rank": 8,
+            "repository": "libnet/libnet",
+            "stars": 961
+          },
+          {
+            "rank": 9,
+            "repository": "isc-projects/bind9",
+            "stars": 792
+          },
+          {
+            "rank": 10,
+            "repository": "taviso/rbndr",
+            "stars": 765
+          },
+          {
+            "rank": 11,
+            "repository": "samboy/MaraDNS",
+            "stars": 575
+          },
+          {
+            "rank": 12,
+            "repository": "NLnetLabs/nsd",
+            "stars": 574
+          },
+          {
+            "rank": 13,
+            "repository": "gdnsd/gdnsd",
+            "stars": 563
+          },
+          {
+            "rank": 14,
+            "repository": "cofyc/dnscrypt-wrapper",
+            "stars": 535
+          },
+          {
+            "rank": 15,
+            "repository": "wolfSSL/wolfip",
+            "stars": 517
+          },
+          {
+            "rank": 16,
+            "repository": "idealeer/xmap",
+            "stars": 498
+          },
+          {
+            "rank": 17,
+            "repository": "DNS-OARC/dnsperf",
+            "stars": 478
+          },
+          {
+            "rank": 18,
+            "repository": "CZ-NIC/knot-resolver",
+            "stars": 476
+          },
+          {
+            "rank": 19,
+            "repository": "mwarning/KadNode",
+            "stars": 441
+          },
+          {
+            "rank": 20,
+            "repository": "NLnetLabs/ldns",
+            "stars": 363
+          },
+          {
+            "rank": 21,
+            "repository": "dnomd343/ClearDNS",
+            "stars": 361
+          },
+          {
+            "rank": 22,
+            "repository": "EndPositive/slipstream",
+            "stars": 341
+          },
+          {
+            "rank": 23,
+            "repository": "tiglabs/containerdns",
+            "stars": 337
+          },
+          {
+            "rank": 24,
+            "repository": "cfadmin-cn/cfadmin",
+            "stars": 336
+          },
+          {
+            "rank": 25,
+            "repository": "CZ-NIC/knot",
+            "stars": 330
+          },
+          {
+            "rank": 26,
+            "repository": "DNS-OARC/dnscap",
+            "stars": 292
+          },
+          {
+            "rank": 27,
+            "repository": "jedisct1/dnsblast",
+            "stars": 254
+          },
+          {
+            "rank": 28,
+            "repository": "dyne/dowse",
+            "stars": 168
+          },
+          {
+            "rank": 29,
+            "repository": "mwarning/SimpleDNS",
+            "stars": 165
+          },
+          {
+            "rank": 30,
+            "repository": "yvesf/andiodine",
+            "stars": 152
+          },
+          {
+            "rank": 31,
+            "repository": "m0nad/DNS-Discovery",
+            "stars": 151
+          },
+          {
+            "rank": 32,
+            "repository": "splify2/steer",
+            "stars": 150
+          },
+          {
+            "rank": 33,
+            "repository": "JsBergbau/BindToInterface",
+            "stars": 145
+          },
+          {
+            "rank": 34,
+            "repository": "zfl9/dns2tcp",
+            "stars": 144
+          },
+          {
+            "rank": 35,
+            "repository": "DNS-OARC/dsc",
+            "stars": 110
+          },
+          {
+            "rank": 36,
+            "repository": "nigoroll/libvmod-dynamic",
+            "stars": 108
+          },
+          {
+            "rank": 37,
+            "repository": "zhaojh329/lua-eco",
+            "stars": 105
+          }
+        ]
+      },
+      {
+        "query": "dns resolver library language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns resolver library language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 1,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:09:45Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "c-ares/c-ares",
+            "stars": 2215
+          }
+        ]
+      },
+      {
+        "query": "mdns language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "mdns language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 10,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:09:54Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "avahi/avahi",
+            "stars": 1573
+          },
+          {
+            "rank": 2,
+            "repository": "lxi-tools/lxi-tools",
+            "stars": 634
+          },
+          {
+            "rank": 3,
+            "repository": "mjansson/mdns",
+            "stars": 598
+          },
+          {
+            "rank": 4,
+            "repository": "apple-oss-distributions/mDNSResponder",
+            "stars": 410
+          },
+          {
+            "rank": 5,
+            "repository": "espressif/esp-protocols",
+            "stars": 311
+          },
+          {
+            "rank": 6,
+            "repository": "avahi/nss-mdns",
+            "stars": 279
+          },
+          {
+            "rank": 7,
+            "repository": "vfreex/mdns-reflector",
+            "stars": 252
+          },
+          {
+            "rank": 8,
+            "repository": "geekman/mdns-repeater",
+            "stars": 226
+          },
+          {
+            "rank": 9,
+            "repository": "haesbaert/mdnsd",
+            "stars": 141
+          },
+          {
+            "rank": 10,
+            "repository": "jevinskie/mDNSResponder",
+            "stars": 124
+          }
+        ]
+      },
+      {
+        "query": "dns in:name language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns in:name language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 35,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:11:38Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "shadowsocks/ChinaDNS",
+            "stars": 3597
+          },
+          {
+            "rank": 2,
+            "repository": "DNSPod/dnspod-sr",
+            "stars": 1377
+          },
+          {
+            "rank": 3,
+            "repository": "aarond10/https_dns_proxy",
+            "stars": 920
+          },
+          {
+            "rank": 4,
+            "repository": "samboy/MaraDNS",
+            "stars": 575
+          },
+          {
+            "rank": 5,
+            "repository": "drakmor/nanoDNS",
+            "stars": 575
+          },
+          {
+            "rank": 6,
+            "repository": "cofyc/dnscrypt-wrapper",
+            "stars": 535
+          },
+          {
+            "rank": 7,
+            "repository": "DNS-OARC/dnsperf",
+            "stars": 478
+          },
+          {
+            "rank": 8,
+            "repository": "apple-oss-distributions/mDNSResponder",
+            "stars": 410
+          },
+          {
+            "rank": 9,
+            "repository": "imp/dnsmasq",
+            "stars": 395
+          },
+          {
+            "rank": 10,
+            "repository": "dnomd343/ClearDNS",
+            "stars": 361
+          },
+          {
+            "rank": 11,
+            "repository": "infinet/dnsmasq",
+            "stars": 318
+          },
+          {
+            "rank": 12,
+            "repository": "andriydruk/RxDNSSD",
+            "stars": 302
+          },
+          {
+            "rank": 13,
+            "repository": "DNS-OARC/dnscap",
+            "stars": 292
+          },
+          {
+            "rank": 14,
+            "repository": "jtripper/dns-tcp-socks-proxy",
+            "stars": 281
+          },
+          {
+            "rank": 15,
+            "repository": "wahern/dns",
+            "stars": 273
+          },
+          {
+            "rank": 16,
+            "repository": "jedisct1/dnsblast",
+            "stars": 254
+          },
+          {
+            "rank": 17,
+            "repository": "examplecode/gfw_dns_resolver",
+            "stars": 244
+          },
+          {
+            "rank": 18,
+            "repository": "alex-sector/dns2tcp",
+            "stars": 235
+          },
+          {
+            "rank": 19,
+            "repository": "cobblau/dnsperf",
+            "stars": 220
+          },
+          {
+            "rank": 20,
+            "repository": "softwareengineer1/YourFriendlyDNS",
+            "stars": 181
+          },
+          {
+            "rank": 21,
+            "repository": "dyne/dnscrypt-proxy",
+            "stars": 169
+          },
+          {
+            "rank": 22,
+            "repository": "ValdikSS/openvpn-fix-dns-leak-plugin",
+            "stars": 167
+          },
+          {
+            "rank": 23,
+            "repository": "mwarning/SimpleDNS",
+            "stars": 165
+          },
+          {
+            "rank": 24,
+            "repository": "BII-Lab/DNSoverHTTP",
+            "stars": 165
+          },
+          {
+            "rank": 25,
+            "repository": "xyzmos/GeekDNS",
+            "stars": 156
+          },
+          {
+            "rank": 26,
+            "repository": "GaryOderNichts/DNSpresso",
+            "stars": 155
+          },
+          {
+            "rank": 27,
+            "repository": "m0nad/DNS-Discovery",
+            "stars": 151
+          },
+          {
+            "rank": 28,
+            "repository": "qiuzi/dns2socks",
+            "stars": 144
+          },
+          {
+            "rank": 29,
+            "repository": "zfl9/dns2tcp",
+            "stars": 144
+          },
+          {
+            "rank": 30,
+            "repository": "measurement-factory/dnstop",
+            "stars": 130
+          },
+          {
+            "rank": 31,
+            "repository": "jevinskie/mDNSResponder",
+            "stars": 124
+          },
+          {
+            "rank": 32,
+            "repository": "makefu/dnsmap",
+            "stars": 118
+          },
+          {
+            "rank": 33,
+            "repository": "dnsdb/dnsdbq",
+            "stars": 117
+          },
+          {
+            "rank": 34,
+            "repository": "styxyang/dnsmasq-chinadns",
+            "stars": 117
+          },
+          {
+            "rank": 35,
+            "repository": "DNS-OARC/dsc",
+            "stars": 110
+          }
+        ]
+      },
+      {
+        "query": "dns in:description library language:C stars:>=100",
+        "url": "https://api.github.com/search/repositories",
+        "parameters": {
+          "q": "dns in:description library language:C stars:>=100",
+          "sort": "stars",
+          "per_page": 100
+        },
+        "total": 7,
+        "limit": 100,
+        "captured_on_utc": "2026-11-18T07:11:47Z",
+        "hits": [
+          {
+            "rank": 1,
+            "repository": "c-ares/c-ares",
+            "stars": 2215
+          },
+          {
+            "rank": 2,
+            "repository": "troglobit/inadyn",
+            "stars": 1150
+          },
+          {
+            "rank": 3,
+            "repository": "mjansson/mdns",
+            "stars": 598
+          },
+          {
+            "rank": 4,
+            "repository": "ntruchsess/arduino_uip",
+            "stars": 491
+          },
+          {
+            "rank": 5,
+            "repository": "NLnetLabs/ldns",
+            "stars": 363
+          },
+          {
+            "rank": 6,
+            "repository": "avahi/nss-mdns",
+            "stars": 279
+          },
+          {
+            "rank": 7,
+            "repository": "wahern/dns",
+            "stars": 273
+          }
+        ]
+      }
+    ],
+    "search_limit_per_query": 100,
+    "star_captures": {
+      "wahern/dns": {
+        "api_url": "https://api.github.com/repos/wahern/dns",
+        "resolved_url": "https://github.com/wahern/dns",
+        "stargazers_count": 273,
+        "fork": false,
+        "archived": false,
+        "license": "MIT",
+        "tag_count_first_100": 19,
+        "latest_tags": [
+          "snap-20160727",
+          "snap-20160722",
+          "rel-20160808"
+        ],
+        "captured_at_utc": "2026-11-18T07:17:48.503233+00:00",
+        "response_sha256": "e6ec6d89722e597b2fb2af7aad22f6013bc3bc9e7c26f6fb926963cf23e12605"
+      },
+      "mjansson/mdns": {
+        "api_url": "https://api.github.com/repos/mjansson/mdns",
+        "resolved_url": "https://github.com/mjansson/mdns",
+        "stargazers_count": 598,
+        "fork": false,
+        "archived": false,
+        "license": "Unlicense",
+        "tag_count_first_100": 8,
+        "latest_tags": [
+          "1.4.3",
+          "1.4.2",
+          "1.4.1"
+        ],
+        "captured_at_utc": "2026-11-18T07:17:49.817213+00:00",
+        "response_sha256": "b581c80b4421e64b272eb1d2d1059aedd94bea8ac4910464d3ca8fe343c025c5"
+      },
+      "skarnet/s6-dns": {
+        "api_url": "https://api.github.com/repos/skarnet/s6-dns",
+        "resolved_url": "https://github.com/skarnet/s6-dns",
+        "stargazers_count": 47,
+        "fork": false,
+        "archived": false,
+        "license": "ISC",
+        "tag_count_first_100": 35,
+        "latest_tags": [
+          "v2.4.1.3",
+          "v2.4.1.2",
+          "v2.4.1.1"
+        ],
+        "captured_at_utc": "2026-11-18T07:17:51.086583+00:00",
+        "response_sha256": "60fdddf0fd38e8a01eff3fe9c4bc3f4ffee774b30d82dd49db5f58a45351f207"
+      },
+      "farsightsec/wdns": {
+        "api_url": "https://api.github.com/repos/farsightsec/wdns",
+        "resolved_url": "https://github.com/farsightsec/wdns",
+        "stargazers_count": 20,
+        "fork": false,
+        "archived": false,
+        "license": "Apache-2.0",
+        "tag_count_first_100": 36,
+        "latest_tags": [
+          "tags/v0.13.0",
+          "tags/v0.12.0",
+          "tags/v0.11.0"
+        ],
+        "captured_at_utc": "2026-11-18T07:17:52.320148+00:00",
+        "response_sha256": "1ad7026dc8cac79bd7d4eb85cc26ce39ef37ec6ca35f52b5c1546b325182f59d"
+      },
+      "robertdavidgraham/dnsparse": {
+        "api_url": "https://api.github.com/repos/robertdavidgraham/dnsparse",
+        "resolved_url": "https://github.com/robertdavidgraham/dnsparse",
+        "stargazers_count": 24,
+        "fork": false,
+        "archived": false,
+        "license": null,
+        "tag_count_first_100": 0,
+        "latest_tags": [],
+        "captured_at_utc": "2026-11-18T07:17:53.454921+00:00",
+        "response_sha256": "5b22ae8d4d7201875d89122568ee77bc8b95ed33042f8663b8e3fefc31b1d1a5"
+      },
+      "rofl0r/firedns": {
+        "api_url": "https://api.github.com/repos/rofl0r/firedns",
+        "resolved_url": "https://github.com/rofl0r/firedns",
+        "stargazers_count": 18,
+        "fork": false,
+        "archived": false,
+        "license": null,
+        "tag_count_first_100": 0,
+        "latest_tags": [],
+        "captured_at_utc": "2026-11-18T07:17:54.551154+00:00",
+        "response_sha256": "a13b9e88444a000a381625a6b03d444b64b96a56528320371b87db8a0246f891"
+      },
+      "Pro/mdnsd": {
+        "api_url": "https://api.github.com/repos/Pro/mdnsd",
+        "resolved_url": "https://github.com/Pro/mdnsd",
+        "stargazers_count": 11,
+        "fork": true,
+        "archived": false,
+        "license": "BSD-3-Clause",
+        "tag_count_first_100": 7,
+        "latest_tags": [
+          "v0.8.4.1",
+          "v0.8.4",
+          "v0.8.3"
+        ],
+        "captured_at_utc": "2026-11-18T07:17:55.702627+00:00",
+        "response_sha256": "0885fa2f17cc529f438facee504a482905e182167c7c4fcf1093518460de6fc3"
+      },
+      "troglobit/mdnsd": {
+        "api_url": "https://api.github.com/repos/troglobit/mdnsd",
+        "resolved_url": "https://github.com/troglobit/mdnsd",
+        "stargazers_count": 75,
+        "fork": false,
+        "archived": false,
+        "license": "BSD-3-Clause",
+        "tag_count_first_100": 9,
+        "latest_tags": [
+          "v1.2",
+          "v1.1",
+          "v1.0"
+        ],
+        "captured_at_utc": "2026-11-18T07:17:56.884390+00:00",
+        "response_sha256": "f7fc92c9aa5b92b4be1c4de0b7081a4499ab21898492146b8bc233c5c81d9e52"
+      },
+      "spc476/SPCDNS": {
+        "api_url": "https://api.github.com/repos/spc476/SPCDNS",
+        "resolved_url": "https://github.com/spc476/SPCDNS",
+        "stargazers_count": 84,
+        "fork": false,
+        "archived": false,
+        "license": "LGPL-3.0",
+        "tag_count_first_100": 35,
+        "latest_tags": [
+          "v2.1.3",
+          "v2.1.2",
+          "v2.1.1"
+        ],
+        "captured_at_utc": "2026-11-18T07:17:58.262761+00:00",
+        "response_sha256": "339daebfe35029009bd62d0e0bcf3bffbb14517861241f05d271f3ce5aa14fb5"
+      },
+      "NLnetLabs/simdzone": {
+        "api_url": "https://api.github.com/repos/NLnetLabs/simdzone",
+        "resolved_url": "https://github.com/NLnetLabs/simdzone",
+        "stargazers_count": 140,
+        "fork": false,
+        "archived": false,
+        "license": "BSD-3-Clause",
+        "tag_count_first_100": 20,
+        "latest_tags": [
+          "v0.2.8",
+          "v0.2.8-rc1",
+          "v0.2.7"
+        ],
+        "captured_at_utc": "2026-11-18T07:17:59.641042+00:00",
+        "response_sha256": "66604d5ade055eb9fec9048e56e1a2160d9c140fca6253ac7e89daf84ebe5e62"
+      },
+      "libnet/libnet": {
+        "api_url": "https://api.github.com/repos/libnet/libnet",
+        "resolved_url": "https://github.com/libnet/libnet",
+        "stargazers_count": 961,
+        "fork": false,
+        "archived": false,
+        "license": "BSD-2-Clause",
+        "tag_count_first_100": 23,
+        "latest_tags": [
+          "v1.3",
+          "v1.2",
+          "v1.2-rc4"
+        ],
+        "captured_at_utc": "2026-11-18T07:18:01.131017+00:00",
+        "response_sha256": "f9f40571b60b16613595b86d0f0bdc8a39116241fd891ecb728edd166c9648b6"
+      },
+      "apple-oss-distributions/mDNSResponder": {
+        "api_url": "https://api.github.com/repos/apple-oss-distributions/mDNSResponder",
+        "resolved_url": "https://github.com/apple-oss-distributions/mDNSResponder",
+        "stargazers_count": 410,
+        "fork": false,
+        "archived": false,
+        "license": "NOASSERTION",
+        "tag_count_first_100": 100,
+        "latest_tags": [
+          "mDNSResponder-2881.120.11",
+          "mDNSResponder-2881.100.56.0.1",
+          "mDNSResponder-2881.80.4.0.1"
+        ],
+        "captured_at_utc": "2026-11-18T07:18:02.533615+00:00",
+        "response_sha256": "beb1ea41dbbf5efed221c723df553a23ef24318dfaaf8caa8898d5d96efceb75"
+      },
+      "NLnetLabs/unbound": {
+        "api_url": "https://api.github.com/repos/NLnetLabs/unbound",
+        "resolved_url": "https://github.com/NLnetLabs/unbound",
+        "stargazers_count": 5077,
+        "fork": false,
+        "archived": false,
+        "license": "BSD-3-Clause",
+        "tag_count_first_100": 100,
+        "latest_tags": [
+          "release-1.26.2",
+          "release-1.26.1",
+          "release-1.26.0"
+        ],
+        "captured_at_utc": "2026-11-18T07:18:03.981432+00:00",
+        "response_sha256": "cfefe23633c0991ed66676f575c31b9ca26861b3c32868e14b6965d6aa9104cb"
+      },
+      "avahi/avahi": {
+        "api_url": "https://api.github.com/repos/avahi/avahi",
+        "resolved_url": "https://github.com/avahi/avahi",
+        "stargazers_count": 1573,
+        "fork": false,
+        "archived": false,
+        "license": "LGPL-2.1",
+        "tag_count_first_100": 48,
+        "latest_tags": [
+          "v0.9-rc5",
+          "v0.9-rc4",
+          "v0.9-rc3"
+        ],
+        "captured_at_utc": "2026-11-18T07:18:05.447207+00:00",
+        "response_sha256": "c3d1b3cc2307ee3d3b3385a6f4dd83ad3f1dd566f11e4f3f3db6cdf4111e9866"
+      }
+    },
+    "decisions": {
+      "wahern/dns": "selected (supplemental, stars 273): dns.c rel-20160808, DNS-specific single-file resolver library whose public packet API (struct dns_packet, dns_p_study, dns_rr_grep, dns_any_parse) decodes caller-supplied bytes; both controls match the oracle.",
+      "mjansson/mdns": "excluded: mDNS/DNS-SD library whose message decoding runs only inside socket receive functions (mdns_query_recv, mdns_discovery_recv, mdns_socket_listen read with recvfrom); the public record helpers parse PTR, SRV, A, AAAA and TXT RDATA only (no MX), so there is no documented API for caller-supplied message bytes.",
+      "NLnetLabs/simdzone": "excluded: zone-file parser (out of scope for the wire-format cell).",
+      "c-ares/c-ares": "already selected by the primary metric (Debian popcon).",
+      "NLnetLabs/ldns": "already selected by the primary metric (Debian popcon).",
+      "CZ-NIC/knot": "already selected by the primary metric (mirror repository; Debian source knot).",
+      "NLnetLabs/unbound": "excluded in round 1 (sldns parser internal; resolver API).",
+      "libnet/libnet": "excluded: packet-construction library (round 3).",
+      "avahi/avahi": "excluded: packet decoder internal (round 3).",
+      "apple-oss-distributions/mDNSResponder": "excluded: daemon with dns_sd.h service API (round 4); no message-bytes API.",
+      "avahi/nss-mdns": "excluded: NSS module (round 3).",
+      "skarnet/s6-dns": "below the star threshold (47 stars).",
+      "spc476/SPCDNS": "below the star threshold (84 stars).",
+      "troglobit/mdnsd": "below the star threshold (75 stars) and response-control failure (MX RDATA not decoded).",
+      "farsightsec/wdns": "below the star threshold (20 stars).",
+      "robertdavidgraham/dnsparse": "below the star threshold (24 stars) and no tagged release.",
+      "rofl0r/firedns": "below the star threshold (18 stars) and no tagged release.",
+      "Pro/mdnsd": "GitHub fork of mdnsd (fork: true) with 11 stars; not eligible."
+    }
   }
 }

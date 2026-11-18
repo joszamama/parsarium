@@ -1,28 +1,30 @@
 {
   "ecosystem": "c",
   "format": "dns",
-  "status": "pilot_five_verified_search_bounded",
+  "status": "pilot_six_verified_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 5,
+  "verified_third_party_count": 6,
   "verified_standard_or_runtime_count": 1,
   "search_queries": [
     "debian-source:dns",
     "conan:dns",
-    "targeted c DNS message sources"
+    "targeted c DNS message sources",
+    "github star-fallback (language:C stars:>=100)"
   ],
   "search_limit_per_query": 100,
   "search_totals": {
     "debian-source:dns": 128,
     "conan:dns": 5,
-    "targeted c DNS message sources": 12
+    "targeted c DNS message sources": 12,
+    "github star-fallback (language:C stars:>=100)": 99
   },
   "search_hits_recorded": 117,
   "unique_search_hits": 111,
   "unresolved_documentation_leads": 10,
-  "leads_recorded": 46,
+  "leads_recorded": 47,
   "leads_by_status": {
-    "resolved_verified_selected": 5,
+    "resolved_verified_selected": 6,
     "excluded": 29,
     "standard_runtime": 2,
     "unresolved": 3,
@@ -30,7 +32,7 @@
     "unresolved_control_failure": 1
   },
   "ranking_metric": "Debian popcon sourcemax installations (max over binary packages built from the source package)",
-  "uncertainty": "Pilot cell: five C paths verified, c-ares, ldns, knot (libknot), udns and getdns, ranked by Debian popcon sourcemax installations from the pinned table; the cell stays below ten because no further Debian-packaged C library with a documented API for caller-supplied message bytes decodes the controls. getdns bundles gldns (Unbound's sldns, ldns lineage), but its own decoder files share 75 of 3,228 distinct normalized source lines (2.3%) with ldns 1.8.4, so it is kept as a distinct package API with the lineage stated. Round 2 added targeted lookups for further debian-source:dns and conan:dns hits (registry-snapshot.json round2_targeted): libmicrodns, libjdns and djbdns are excluded (no documented message-bytes API or no library), as are adns, unbound, bind9, libevent and libspf2 from round 1; dnsjit (popcon 4) stays unresolved because its parser is a Lua module inside the dnsjit engine with no linkable C library; Conan-only mdns and pro-mdnsd have no primary metric. Round 3 read all 128 debian-source:dns names (round 1 recorded the first 100) and looked up libraries and packet tools that might carry a decoder: mdnsd's libmdnsd message_parse is public but leaves MX RDATA raw (control failure); avahi and systemd keep their packet code internal; wireshark, libpcap, libnet, libtrace3 and ndpi are capture, construction or classification libraries without a documented message decoder; sofia-sip, lwip and ruli are resolvers; knot-resolver parses with the selected libknot; libowfat carries djbdns's primitives. glibc libresolv ns_initparse/ns_parserr is verified on both controls as a standard/runtime path (not instrumented, no AFL++ feedback, outside the ranking); musl was not run. c-ares, ldns and udns drop the reserved Z bit (z carries AD and CD); knot and getdns report all three bits. Harness-side RDATA formatting (lower-casing, joining the MX preference and exchange) is disclosed per path. Round 4 searched beyond the registry windows (registry-snapshot.json round4_discovery): GitHub repository searches for C (dns parser, dns packet, dns message, topic:dns, rfc1035, dns codec, dns decoder, dns wire format; first 100 each), Debian, Fedora and Alpine package lists for libraries with an exported or bundled DNS decoder, and awesome lists, with popcon values from the same pinned table (round4_targeted). GNUnet's documented GNUNET_DNSPARSER_parse (popcon 58) stays a lead because it stores each record's TTL as a wall-clock expiration time, so the controls' TTLs cannot be read back from its parse without harness clock arithmetic; YADIFA's libyadifa-dev ships headers only with no API reference. Mongoose (no TTL, one answer) and pjproject (MX RDATA raw; Debian experimental only) fail the response control by source inspection; belle-sip, lua-cqueues, rspamd and opensmtpd keep their DNS code internal or Lua-only. The new GitHub libraries (firedns, s6-dns, wdns, dnsparse) have no Debian source package and so no primary metric; the Debian dev-package fallback does not apply to any of them. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Popcon counts are package-level, include non-DNS use and are small below c-ares; the cell is not a definitive top ten.",
+  "uncertainty": "Pilot cell: six C paths verified. c-ares, ldns, knot (libknot), udns and getdns are ranked by Debian popcon sourcemax installations from the pinned table; William Ahern's dns.c (wahern-dns, rel-20160808, 273 GitHub stars) fills a sixth slot under the 2026-11-18 star-fallback rule for C and C++ cells and is ranked separately by stars, after every Debian-ranked path. The cell stays below ten because no further C library with a documented API for caller-supplied message bytes, a Debian metric or at least 100 stars on a tagged upstream release, decodes the controls. getdns bundles gldns (Unbound's sldns, ldns lineage), but its own decoder files share 75 of 3,228 distinct normalized source lines (2.3%) with ldns 1.8.4, so it is kept as a distinct package API with the lineage stated. Round 2 added targeted lookups for further debian-source:dns and conan:dns hits (registry-snapshot.json round2_targeted): libmicrodns, libjdns and djbdns are excluded (no documented message-bytes API or no library), as are adns, unbound, bind9, libevent and libspf2 from round 1; dnsjit (popcon 4) stays unresolved because its parser is a Lua module inside the dnsjit engine with no linkable C library; Conan-only mdns and pro-mdnsd have no primary metric (see round 6). Round 3 read all 128 debian-source:dns names (round 1 recorded the first 100) and looked up libraries and packet tools that might carry a decoder: mdnsd's libmdnsd message_parse is public but leaves MX RDATA raw (control failure); avahi and systemd keep their packet code internal; wireshark, libpcap, libnet, libtrace3 and ndpi are capture, construction or classification libraries without a documented message decoder; sofia-sip, lwip and ruli are resolvers; knot-resolver parses with the selected libknot; libowfat carries djbdns's primitives. glibc libresolv ns_initparse/ns_parserr is verified on both controls as a standard/runtime path (not instrumented, no AFL++ feedback, outside the ranking); musl was not run. c-ares, ldns and udns drop the reserved Z bit (z carries AD and CD); knot and getdns report all three bits. Harness-side RDATA formatting (lower-casing, joining the MX preference and exchange) is disclosed per path. Round 4 searched beyond the registry windows (registry-snapshot.json round4_discovery): GitHub repository searches for C (dns parser, dns packet, dns message, topic:dns, rfc1035, dns codec, dns decoder, dns wire format; first 100 each), Debian, Fedora and Alpine package lists for libraries with an exported or bundled DNS decoder, and awesome lists, with popcon values from the same pinned table (round4_targeted). GNUnet's documented GNUNET_DNSPARSER_parse (popcon 58) stays a lead because it stores each record's TTL as a wall-clock expiration time, so the controls' TTLs cannot be read back from its parse without harness clock arithmetic; YADIFA's libyadifa-dev ships headers only with no API reference. Mongoose (no TTL, one answer) and pjproject (MX RDATA raw; Debian experimental only) fail the response control by source inspection; belle-sip, lua-cqueues, rspamd and opensmtpd keep their DNS code internal or Lua-only. The new GitHub libraries (firedns, s6-dns, wdns, dnsparse) have no Debian source package and so no primary metric; the Debian dev-package fallback does not apply to any of them. Round 6 (registry-snapshot.json round_6_star_fallback) applied the star fallback: twelve GitHub repository searches restricted to language:C and stars:>=100 (first 100 hits each), with stars, fork flags and tags captured from the GitHub REST API. dns.c passes both controls through its public packet API (dns_p_study, dns_rr_grep, dns_any_parse); its documentation is the README, the public dns.h declarations and the release's own parse-packet command, since the TeX guide does not cover the packet API. mjansson/mdns (598 stars) is excluded because it decodes messages only inside its socket receive functions and has no MX decoder; simdzone is a zone-file parser; s6-dns (47), SPCDNS (84), mdnsd (75), dnsparse (24), wdns (20), firedns (18) and the pro-mdnsd fork (11) are below 100 stars; the other hits are servers, proxies, tunnels and tools. dns.c keeps the three bits after RA in one field, so z carries Z, AD and CD. Each verified path parses the two valid controls (a query and a response with compressed CNAME/A/AAAA/MX answers) to the hand-written oracle summary, has library source coverage and stable AFL++ feedback that differs between the controls. Two valid controls do not establish EDNS0, DNSSEC, TXT, authority/additional or malformed-input behaviour. Popcon counts are package-level, include non-DNS use and are small below c-ares; GitHub stars measure repository interest, not downloads, and are not comparable to popcon; the cell is not a definitive top ten.",
   "registry_snapshot": "data/c/dns/registry-snapshot.json",
   "unresolved_leads": "data/c/dns/leads.json",
   "runtime_evidence": "data/c/dns/standard.json",
@@ -42,5 +44,6 @@
   },
   "third_party_evidence": "data/c/dns/parsers.json",
   "third_party_control_results": "data/c/dns/verification.json",
-  "selection": "Five control-verified C DNS path(s), ranked by Debian popcon sourcemax installations (max over binary packages built from the source package): c-ares 1.34.9 (43,027), ldns 1.8.4 (1,240), knot 3.6.2 (483), udns 0.7 (463), getdns 1.7.3 (118)."
+  "selection": "Six control-verified C DNS path(s): five ranked by Debian popcon sourcemax installations (max over binary packages built from the source package): c-ares 1.34.9 (43,027), ldns 1.8.4 (1,240), knot 3.6.2 (483), udns 0.7 (463), getdns 1.7.3 (118); then one star-fallback path ranked separately by GitHub stars: wahern-dns (dns.c) rel-20160808 (273 stars).",
+  "supplemental_metric": "GitHub stars (secondary, repository interest, not downloads), captured from the GitHub REST API in registry-snapshot.json round_6_star_fallback; star paths are ranked separately after the Debian-ranked paths"
 }

@@ -1,0 +1,36 @@
+{
+  "checked_at_utc": "2026-11-18T07:20:04.827387+00:00",
+  "project": "dns/c/wahern-dns",
+  "pass": true,
+  "input_kind": "two fixed valid DNS messages (RFC 1035 section 4)",
+  "oracle": "controls/dns/check_controls.py hand-written decoder; summaries pinned in controls/dns/expected.json",
+  "feature_kind": "LLVM source regions of the base replay under coverage_subject_prefix",
+  "subject_prefix": "/work/build-cov/",
+  "base_image_id": "sha256:7e3429d86fbbba71bd42c2c4bc66f432a7dfacf9f37766023277ca6a4394b8a0",
+  "overlay_image_id": "sha256:8b411e87a032ccc5f268bdaa783f15f70d60b84de909c1fca787109d6e4521b6",
+  "overlay_receipt_sha256": "1c0a0d6d2d501fdcd88009bf0e49d0871f20294263d676c7f04b3a32cafcdc04",
+  "control_sha256": "5cee83cea76a8b67b5687e6b5d6bc5b97b736fdbc28735f59a999275266977f1",
+  "variant_sha256": "c5b3fafec872a1662a46e0316dfb88d5bec7a2406368d6cc4beb885fd687c59a",
+  "control_output_matches": true,
+  "variant_output_matches": true,
+  "runs_per_control": 3,
+  "control_repeat_identical": true,
+  "variant_repeat_identical": true,
+  "afl_target": "/work/fuzzer",
+  "afl_map_size": 10356,
+  "control_parser_features": 311,
+  "variant_parser_features": 172,
+  "parser_feature_difference": 139,
+  "control_afl_tuples": 345,
+  "variant_afl_tuples": 178,
+  "afl_tuple_difference": 169,
+  "control_features_by_file": {
+    "/work/build-cov/dns.c": 290,
+    "/work/build-cov/dns.h": 21
+  },
+  "variant_features_by_file": {
+    "/work/build-cov/dns.c": 151,
+    "/work/build-cov/dns.h": 21
+  },
+  "mutation_campaign_run": false
+}

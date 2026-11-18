@@ -548,5 +548,120 @@
     },
     "rank": 5,
     "afl_feedback": "data/c/dns/getdns-feedback-differential.json"
+  },
+  {
+    "name": "wahern-dns",
+    "version": "rel-20160808",
+    "license": "MIT",
+    "license_evidence": "LICENSE and the src/dns.c header in the tagged GitHub archive (sha256 39b857be...), checked in the image",
+    "input_api": "struct dns_packet *dns_p_make(size_t, int *) filled with the message bytes (P->data, P->end), int dns_p_study(struct dns_packet *), dns_header(P) and dns_p_count(P, section), then dns_rr_grep via dns_rr_foreach(&rr, P, .section = ..., .sort = dns_rr_i_packet); names from dns_d_expand, RDATA from dns_any_parse + dns_any_print",
+    "documentation": "https://github.com/wahern/dns/blob/rel-20160808/README.md",
+    "documentation_note": "The README presents the 'core DNS API built around actual DNS packet' with type-specific RDATA interfaces and dns_rr_foreach/dns_rr_grep iterators; src/dns.h declares struct dns_packet (size, end, data) and the DNS_PUBLIC packet, name, RR and dns_any functions; the release's own parse-packet command (src/dns.c parse_packet) loads raw bytes exactly this way (fread into P->data, set P->end, then dns_rr_foreach). The doc/dns.tex guide in the release does not cover the packet API.",
+    "source": "https://github.com/wahern/dns/archive/refs/tags/rel-20160808.tar.gz",
+    "scope": "RFC 1035 message from local bytes: header flags, questions and CNAME/A/AAAA/MX answers with compressed names",
+    "family": "dns.c (William Ahern) single-file packet decoder (src/dns.c)",
+    "family_note": "Own C decoder of a non-blocking stub and recursive resolver library in one file; only the packet, name and RR routines are called and no resolver, resolv.conf or hosts object is created. It shares no code with c-ares, ldns/gldns, libknot, udns or getdns. Debian does not package dns.c itself; belle-sip and lua-cqueues embed copies (both excluded in round 4), which do not give dns.c a Debian source identity. The harness lower-cases names, adds a trailing dot when missing, and splits dns_any_print's MX text to normalise the exchange; every value comes from the library. struct dns_header exposes the three bits after RA as one field, so z carries Z, AD and CD.",
+    "selection": "supplemental",
+    "popularity": {
+      "metric": "GitHub stars (secondary, repository interest, not downloads)",
+      "value": 273,
+      "source": "https://api.github.com/repos/wahern/dns",
+      "snapshot": "data/c/dns/registry-snapshot.json",
+      "note": "Star-fallback path under PROTOCOL.md: no Debian source package (absent from the pinned popcon table), so no primary metric and no Debian fallback; ranked separately by stars after all Debian-ranked paths."
+    },
+    "project": "projects/dns/c/wahern-dns",
+    "control": "controls/dns/response.bin",
+    "differential_control": "controls/dns/query.bin",
+    "metric": {
+      "metric": "GitHub stars (secondary, repository interest, not downloads)",
+      "value": 273,
+      "source": "https://api.github.com/repos/wahern/dns",
+      "resolved_url": "https://github.com/wahern/dns",
+      "captured_at_utc": "2026-11-18T07:17:48.503233+00:00",
+      "response_sha256": "e6ec6d89722e597b2fb2af7aad22f6013bc3bc9e7c26f6fb926963cf23e12605",
+      "snapshot": "data/c/dns/registry-snapshot.json",
+      "snapshot_key": "round_6_star_fallback"
+    },
+    "expected_output": {
+      "id": 43981,
+      "qr": 1,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 1,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 4,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "www.example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [
+        {
+          "name": "www.example.test.",
+          "type": 5,
+          "class": 1,
+          "ttl": 3600,
+          "rdata": "example.test."
+        },
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1,
+          "ttl": 300,
+          "rdata": "192.0.2.10"
+        },
+        {
+          "name": "example.test.",
+          "type": 28,
+          "class": 1,
+          "ttl": 600,
+          "rdata": "2001:db8::10"
+        },
+        {
+          "name": "example.test.",
+          "type": 15,
+          "class": 1,
+          "ttl": 7200,
+          "rdata": "10 mail.example.test."
+        }
+      ],
+      "authority": [],
+      "additional": []
+    },
+    "differential_expected_output": {
+      "id": 4660,
+      "qr": 0,
+      "opcode": 0,
+      "aa": 0,
+      "tc": 0,
+      "rd": 1,
+      "ra": 0,
+      "z": 0,
+      "rcode": 0,
+      "qdcount": 1,
+      "ancount": 0,
+      "nscount": 0,
+      "arcount": 0,
+      "questions": [
+        {
+          "name": "example.test.",
+          "type": 1,
+          "class": 1
+        }
+      ],
+      "answers": [],
+      "authority": [],
+      "additional": []
+    },
+    "supplemental_rank": 1,
+    "afl_feedback": "data/c/dns/wahern-dns-feedback-differential.json"
   }
 ]
