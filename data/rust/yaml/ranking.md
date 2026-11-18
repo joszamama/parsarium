@@ -4,7 +4,7 @@ Ten control-verified third-party paths; bounded pilot scope. The ceiling is ten 
 
 ## Primary within-cell adoption metric
 
-crates.io `recent_downloads` (90 days), captured 2026-11-17 ([snapshot](registry-snapshot.json)). Values are package adoption, not YAML-specific use, and are compared only within this cell. Leads named in round 2 (serde_yaml_ng, granit-parser, yaml_serde, libyml, tree-sitter-yaml, noyalib, dbt-yaml, yaml_parser, yaml-edit, serde_yaml_bw) take the `recent_downloads` value of their hit in the same recorded first-100 search.
+crates.io `recent_downloads` (90 days), captured 2026-11-17 ([snapshot](registry-snapshot.json)). Values are package adoption, not YAML-specific use, and are compared only within this cell. The named leads (serde_yaml_ng, granit-parser, yaml_serde, libyml, tree-sitter-yaml, noyalib, dbt-yaml, yaml_parser, yaml-edit, serde_yaml_bw) take the `recent_downloads` value of their hit in the same recorded first-100 search.
 
 | Rank | Package | Release | Metric | Parser family |
 | ---: | --- | --- | ---: | --- |

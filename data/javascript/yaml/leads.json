@@ -113,7 +113,7 @@
     "note": null,
     "found_by": "round_4_npm_keyword_search",
     "source": "https://www.npmjs.com/package/yaml.min",
-    "reason": "Selected: pinned 2.0.0 passes both schema-neutral YAML controls against the hand-written typed-tree oracle, with Docker V8 coverage and stable input-dependent AFL++ feedback. Highest npm value among the round-4 leads with their own parse step; every higher-valued unclassified hit was decided in round 4 (leads.json).",
+    "reason": "Selected: pinned 2.0.0 passes both schema-neutral YAML controls against the hand-written typed-tree oracle, with Docker V8 coverage and stable input-dependent AFL++ feedback. Highest npm value among the leads from the further discovery routes (registry-snapshot.json round_4_discovery) with their own parse step; every higher-valued unclassified hit is decided in leads.json.",
     "evidence": "projects/yaml/javascript/yaml_min/verification.json"
   },
   {
@@ -126,7 +126,7 @@
     "note": null,
     "found_by": "registry_search_round_2",
     "source": "https://www.npmjs.com/package/confbox",
-    "reason": "Not counted: copy of the selected parser behind a thin wrapper. confbox 0.3.2 parseYAML(text) strips a BOM, calls load() from dist/_chunks/libs/js-yaml.mjs and records indentation for stringifyYAML. That chunk is a rolldown-minified copy of js-yaml 5.x built from its js-yaml ^5.5.0 devDependency (THIRD-PARTY-LICENSES lists js-yaml): all 195 property names in the chunk occur in js-yaml 5.5.0 dist/js-yaml.mjs, and the 5.x-only identifiers implicitFirstChars, matchByTagPrefix and representTagName occur 21, 13 and 7 times, exactly as in js-yaml 5.5.0 and never in js-yaml 4.1.1. Both controls match the oracle in an exploratory run, but the whole parse is the selected js-yaml code (fgergo/mp3 byte-identical-fork precedent; the thin JSON.parse wrappers of the JavaScript JSON cell are likewise not counted). The integrator may instead count it as a labelled wrapper.",
+    "reason": "Not counted: copy of the selected parser behind a thin wrapper. confbox 0.3.2 parseYAML(text) strips a BOM, calls load() from dist/_chunks/libs/js-yaml.mjs and records indentation for stringifyYAML. That chunk is a rolldown-minified copy of js-yaml 5.x built from its js-yaml ^5.5.0 devDependency (THIRD-PARTY-LICENSES lists js-yaml): all 195 property names in the chunk occur in js-yaml 5.5.0 dist/js-yaml.mjs, and the 5.x-only identifiers implicitFirstChars, matchByTagPrefix and representTagName occur 21, 13 and 7 times, exactly as in js-yaml 5.5.0 and never in js-yaml 4.1.1. Both controls match the oracle in an exploratory run, but the whole parse is the selected js-yaml code (fgergo/mp3 byte-identical-fork precedent; the thin JSON.parse wrappers of the JavaScript JSON cell are likewise not counted). Counting it as a labelled wrapper instead would also be defensible.",
     "version_seen": "0.3.2",
     "evidence": "data/javascript/yaml/round2-lead-probes.json"
   },
@@ -763,7 +763,7 @@
     "note": null,
     "found_by": "round_4_npm_keyword_search",
     "source": "https://www.npmjs.com/package/yamlish",
-    "reason": "Not counted: parses only the TAP YAMLish subset. In the round-4 probe 0.0.7 decode() reads ratio: 0.25 as the integer 0 and returns the order.yaml sequence root as a mapping.",
+    "reason": "Not counted: parses only the TAP YAMLish subset. In the discovery probe (round4-lead-probes.json) 0.0.7 decode() reads ratio: 0.25 as the integer 0 and returns the order.yaml sequence root as a mapping.",
     "evidence": "data/javascript/yaml/round4-lead-probes.json",
     "version_seen": "0.0.7"
   },
@@ -881,7 +881,7 @@
     "note": null,
     "found_by": "round_4_github_search",
     "source": "https://www.npmjs.com/package/instant-yaml",
-    "reason": "Not counted: its README calls it a parser for a 'sort of YAML' subset; in the round-4 probe 0.1.5 YAML.parse throws 'invalid character' on the flow sequence of catalog.yaml (line 10, column 13) and order.yaml (line 8, column 16).",
+    "reason": "Not counted: its README calls it a parser for a 'sort of YAML' subset; in the discovery probe (round4-lead-probes.json) 0.1.5 YAML.parse throws 'invalid character' on the flow sequence of catalog.yaml (line 10, column 13) and order.yaml (line 8, column 16).",
     "evidence": "data/javascript/yaml/round4-lead-probes.json",
     "version_seen": "0.1.5"
   },
@@ -895,7 +895,7 @@
     "note": null,
     "found_by": "round_4_github_search",
     "source": "https://www.npmjs.com/package/@xliic/preserving-json-yaml-parser",
-    "reason": "Not counted: no documented input API. 2.4.0 parseYaml(text) runs yaml parseAllDocuments and builds its own value tree with preserved number text and locations (lib/visit/yaml.js), and both controls match the oracle in the round-4 probe, but the package ships no README and the 42Crunch/preserving-json-yaml-parser repository has none either (public but undocumented entry point stays a lead). Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
+    "reason": "Not counted: no documented input API. 2.4.0 parseYaml(text) runs yaml parseAllDocuments and builds its own value tree with preserved number text and locations (lib/visit/yaml.js), and both controls match the oracle in the discovery probe (round4-lead-probes.json), but the package ships no README and the 42Crunch/preserving-json-yaml-parser repository has none either (public but undocumented entry point stays a lead). Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
     "evidence": "data/javascript/yaml/round4-lead-probes.json",
     "version_seen": "2.4.0"
   },
@@ -909,7 +909,7 @@
     "note": null,
     "found_by": "round_3_named_lookup_decided_round_4",
     "source": "https://www.npmjs.com/package/yaml-parser",
-    "reason": "Not counted: fork of a superseded js-yaml release. Its README calls it 'a fork of js-yaml' without the CLI; 3.5.3 lib/ shares 1,479 of its 1,737 distinct non-test source lines with js-yaml 3.5.3 lib/ (85.1%) and 95 with the selected js-yaml 5.5.0 dist/js-yaml.cjs.js. Both controls match the oracle in the round-4 probe. Predecessor-version rule (@zkochan/js-yaml precedent).",
+    "reason": "Not counted: fork of a superseded js-yaml release. Its README calls it 'a fork of js-yaml' without the CLI; 3.5.3 lib/ shares 1,479 of its 1,737 distinct non-test source lines with js-yaml 3.5.3 lib/ (85.1%) and 95 with the selected js-yaml 5.5.0 dist/js-yaml.cjs.js. Both controls match the oracle in the discovery probe (round4-lead-probes.json). Predecessor-version rule (@zkochan/js-yaml precedent).",
     "evidence": "data/javascript/yaml/round4-lead-probes.json",
     "version_seen": "3.5.3"
   },
@@ -949,7 +949,7 @@
     "note": null,
     "found_by": "round_4_github_search",
     "source": "https://www.npmjs.com/package/mapped-yaml",
-    "reason": "Not counted: in the round-4 probe 0.2.2 parse() returns each alias as {source: anchor} instead of the anchored node (catalog.yaml service.settings, order.yaml item 3). Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
+    "reason": "Not counted: in the discovery probe (round4-lead-probes.json) 0.2.2 parse() returns each alias as {source: anchor} instead of the anchored node (catalog.yaml service.settings, order.yaml item 3). Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
     "evidence": "data/javascript/yaml/round4-lead-probes.json",
     "version_seen": "0.2.2"
   },
@@ -963,7 +963,7 @@
     "note": null,
     "found_by": "round_4_npm_keyword_search",
     "source": "https://www.npmjs.com/package/lightning-yaml",
-    "reason": "Not counted: 0.1.1 parse(text) gives the exact oracle tree on both controls in the round-4 probe, but its npm value (352) is below the tenth selected path. Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
+    "reason": "Not counted: 0.1.1 parse(text) gives the exact oracle tree on both controls in the discovery probe (round4-lead-probes.json), but its npm value (352) is below the tenth selected path. Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
     "evidence": "data/javascript/yaml/round4-lead-probes.json",
     "version_seen": "0.1.1"
   },
@@ -977,7 +977,7 @@
     "note": null,
     "found_by": "round_3_named_lookup_decided_round_4",
     "source": "https://www.npmjs.com/package/tinyaml",
-    "reason": "Not counted: zero-dependency parser recorded in the round-3 named lookups (939); below the tenth selected path. Not run. Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
+    "reason": "Not counted: zero-dependency parser recorded in the named lookups (939; registry-snapshot.json round_3_named_lookups); below the tenth selected path. Not run. Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
     "version_seen": "0.1.2"
   },
   {
@@ -990,7 +990,7 @@
     "note": null,
     "found_by": "round_3_named_lookup_decided_round_4",
     "source": "https://www.npmjs.com/package/yayp",
-    "reason": "Not counted: 1.3.0 load(text) gives the exact oracle tree on both controls in the round-4 probe, but its npm value (22) is below the tenth selected path. Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
+    "reason": "Not counted: 1.3.0 load(text) gives the exact oracle tree on both controls in the discovery probe (round4-lead-probes.json), but its npm value (22) is below the tenth selected path. Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
     "evidence": "data/javascript/yaml/round4-lead-probes.json",
     "version_seen": "1.3.0"
   },
@@ -1004,7 +1004,7 @@
     "note": null,
     "found_by": "round_4_npm_keyword_search",
     "source": "https://www.npmjs.com/package/@agentine/yamlite",
-    "reason": "Not counted: 0.1.0 load(text) gives the exact oracle tree on both controls in the round-4 probe, but its npm value (16) is below the tenth selected path. Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
+    "reason": "Not counted: 0.1.0 load(text) gives the exact oracle tree on both controls in the discovery probe (round4-lead-probes.json), but its npm value (16) is below the tenth selected path. Below the tenth selected path (yaml.min, 3,606), so it cannot enter the ten-path ceiling; not gated further (no Docker harness or AFL++ overlay).",
     "evidence": "data/javascript/yaml/round4-lead-probes.json",
     "version_seen": "0.1.0"
   },

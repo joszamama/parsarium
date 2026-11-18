@@ -22,7 +22,7 @@
     "note": "c2rust translation of libyaml.",
     "found_by": "targeted_documentation_lead",
     "source": "https://crates.io/crates/unsafe-libyaml",
-    "reason": "Selected. Pinned 0.2.11 parses both schema-neutral YAML controls into the exact typed trees of controls/yaml/check_controls.py; Docker coverage 2427 own lines; AFL++ scoped to unsafe_libyaml: 5 identical repeats per control, 1367 vs 1374 edges, 89/96 unique. Round 1 recorded it as shared family because its only API is the unsafe C-style interface. That interface is documented on docs.rs (yaml_parser_load composes a document from local bytes), the crate is a distinct package with its own metric, and an unsafe API is not an eligibility criterion, so it is selected as a libyaml-family path next to serde_yaml, as C libyaml is in the C cell. Plain scalars are typed by the harness.",
+    "reason": "Selected. Pinned 0.2.11 parses both schema-neutral YAML controls into the exact typed trees of controls/yaml/check_controls.py; Docker coverage 2427 own lines; AFL++ scoped to unsafe_libyaml: 5 identical repeats per control, 1367 vs 1374 edges, 89/96 unique. Its only API is the unsafe C-style interface, but that does not make it a shared-family duplicate of serde_yaml: the interface is documented on docs.rs (yaml_parser_load composes a document from local bytes), the crate is a distinct package with its own metric, and an unsafe API is not an eligibility criterion, so it is selected as a libyaml-family path next to serde_yaml, as C libyaml is in the C cell. Plain scalars are typed by the harness.",
     "evidence": "projects/yaml/rust/unsafe_libyaml/verification.json"
   },
   {

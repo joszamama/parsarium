@@ -20,12 +20,12 @@ The C libraries hand back scalar text and style; plain scalars are typed by the 
 | libcyaml 1.4.2 | excluded: no generic document API | 18 | Schema-mapping layer over libyaml events: `cyaml_load_data` needs a hand-written C schema that names every key and supplies every scalar type, and one entry schema per sequence cannot describe the mixed `order.yaml` root. The parser would not report the document; the YAML parsing is the selected libyaml's. |
 | tree-sitter-yaml | excluded: syntax tree only | 9 | Concrete-syntax-tree grammar: escapes, block-scalar folding and chomping, and aliases stay unresolved, so the harness would do the YAML semantics (jsmn tokenizer precedent). |
 
-## Round-2 search
+## Search
 
-All 90 `yaml` hits are classified in the [registry snapshot](registry-snapshot.json) (`round2_debian_search`): 3 C and 2 C++ YAML libraries, 1 C syntax-tree grammar, 9 other-language bindings (several bundle a libyaml copy), 6 tools or editor modes and 69 other-language packages. The substrings `yml`, `syck`, `ryml` and `fkyaml` and exact lookups for C YAML sources without `yaml` in their names (Syck, mini-yaml) found no further C YAML parser library in the pinned snapshot.
+All 90 `yaml` hits are classified in the [registry snapshot](registry-snapshot.json) (`round2_debian_search`): 3 C and 2 C++ YAML libraries, 1 C syntax-tree grammar, 9 other-language bindings (several bundle a libyaml copy), 6 tools or editor modes and 69 other-language packages. The substrings `yml`, `syck`, `ryml` and `fkyaml` and exact lookups for C YAML sources without `yaml` in their names (Syck, mini-yaml) find no further C YAML parser library in the pinned snapshot.
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).
 
-Round 4 (2026-11-18): yaml-runtimes, Debian apt-cache search, vcpkg/Homebrew/Conan lists and a GitHub C search found no further C YAML library with a Debian source ([snapshot](registry-snapshot.json), `round_4_discovery`).
+Further discovery routes (checked 2026-11-18): yaml-runtimes, Debian apt-cache search, vcpkg/Homebrew/Conan lists and a GitHub C search find no further C YAML library with a Debian source ([snapshot](registry-snapshot.json), `round_4_discovery`).
 
-Round 6 (2026-11-18): bounded GitHub star search for C YAML libraries with at least 100 stars ([snapshot](registry-snapshot.json), `round_6_star_fallback`) found no new qualifying library. libcyaml (333 stars) stays excluded on eligibility; r-lib/yaml (R package), lyaml (Lua binding) and a demo collection are not C parser libraries ([leads.json](leads.json)).
+GitHub star fallback (checked 2026-11-18): a bounded GitHub search for C YAML libraries with at least 100 stars ([snapshot](registry-snapshot.json), `round_6_star_fallback`) finds no further qualifying library. libcyaml (333 stars) is excluded on eligibility; r-lib/yaml (R package), lyaml (Lua binding) and a demo collection are not C parser libraries ([leads.json](leads.json)).

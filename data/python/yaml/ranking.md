@@ -4,7 +4,7 @@ Ten control-verified third-party paths. The ceiling is ten; this pilot does not 
 
 ## Primary within-cell adoption metric
 
-PyPI Stats `last_month` downloads excluding known mirrors, captured 2026-11-17 ([snapshot](registry-snapshot.json)). Values are package adoption, not YAML-specific use, and are compared only within this cell. PyYAML CSafeLoader is a route of the PyYAML package and carries the same package value (PyPI does not split by loader); it is listed after the pure SafeLoader path, which was selected first.
+PyPI Stats `last_month` downloads excluding known mirrors, captured 2026-11-17 ([snapshot](registry-snapshot.json)). Values are package adoption, not YAML-specific use, and are compared only within this cell. PyYAML CSafeLoader is a route of the PyYAML package and carries the same package value (PyPI does not split by loader); it is listed after the pure SafeLoader path.
 
 | Rank | Package | Release | Last-month downloads | Parsed scope | Parser family |
 | ---: | --- | --- | ---: | --- | --- |

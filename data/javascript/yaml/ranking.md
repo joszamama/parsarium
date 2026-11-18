@@ -4,7 +4,7 @@ Ten control-verified third-party paths; the cell is at the ten-path ceiling and 
 
 ## Primary within-cell adoption metric
 
-npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snapshot](registry-snapshot.json)). Package adoption, largely transitive, not YAML-specific use. Round-2, round-3 and round-4 values use the same window through the explicit-range endpoint.
+npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snapshot](registry-snapshot.json)). Package adoption, largely transitive, not YAML-specific use. Values for the second search query, the metric sweep, the named lookups and the further discovery leads use the same window through the explicit-range endpoint.
 
 | Rank | Package | Release | Metric | AFL++ parser ranges (control / differing) | Parser family |
 | ---: | --- | --- | ---: | ---: | --- |
@@ -74,9 +74,9 @@ npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snap
 | eslint-plugin-yaml | excluded | 123,010 | js-yaml 4.1.0 via dependency |
 | write-yaml | excluded | 96,436 | emitter |
 
-### Round-4 leads (2026-11-18)
+### Further discovery leads (checked 2026-11-18)
 
-Round-4 discovery routes and every decision are in [leads.json](leads.json), [round4-lead-probes.json](round4-lead-probes.json) and the `round_4_discovery` block of the [snapshot](registry-snapshot.json).
+The discovery routes beyond the recorded search windows and every decision are in [leads.json](leads.json), [round4-lead-probes.json](round4-lead-probes.json) and the `round_4_discovery` block of the [snapshot](registry-snapshot.json).
 
 | Lead | Status | Metric | Parser family |
 | --- | --- | ---: | --- |

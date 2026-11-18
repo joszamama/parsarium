@@ -13,7 +13,7 @@ Debian popcon `sourcemax/by_inst` installations by source package, from the pinn
 
 ## Star-fallback path (secondary metric)
 
-Since 2026-11-18, [PROTOCOL.md](../../../PROTOCOL.md) lets C and C++ cells fill slots left empty after the primary and Debian paths with pinned tagged releases of format-specific upstream GitHub repositories with at least 100 stars. GitHub stars (secondary, repository interest, not downloads) are captured in the [snapshot](registry-snapshot.json) (`round_6_star_fallback`) and are not comparable to the installation counts above.
+[PROTOCOL.md](../../../PROTOCOL.md) lets C and C++ cells fill slots left empty after the primary and Debian paths with pinned tagged releases of format-specific upstream GitHub repositories with at least 100 stars. GitHub stars (secondary, repository interest, not downloads) are captured in the [snapshot](registry-snapshot.json) (`round_6_star_fallback`) and are not comparable to the installation counts above.
 
 | Rank | Library | Release | GitHub stars | Parser family |
 | ---: | --- | --- | ---: | --- |
@@ -27,12 +27,12 @@ Both controls ([catalog.yaml](../../../controls/yaml/catalog.yaml), [order.yaml]
 | --- | --- | ---: | --- |
 | OpenCV 5.1.0 `cv::FileStorage` | excluded: controls fail | n/a | Its own YAML-subset reader rejects `catalog.yaml` (`Multi-line text literals are not supported`) and `order.yaml` (`Incorrect indentation`) and has no alias support; the 46,494 `opencv` installations cover the whole multi-library source, with no YAML-specific package. |
 
-## Round-2 search
+## Search
 
-All 90 `yaml` hits are classified in the [registry snapshot](registry-snapshot.json) (`round2_debian_search`). The substrings `yml`, `syck`, `ryml` and `fkyaml` and exact lookups for C++ YAML sources without `yaml` in their names (`opencv`, `fkyaml`, `libfkyaml`, `mini-yaml`, `yaml-cpp0.3`) found no further C++ YAML parser with a YAML-specific Debian count.
+All 90 `yaml` hits are classified in the [registry snapshot](registry-snapshot.json) (`round2_debian_search`). The substrings `yml`, `syck`, `ryml` and `fkyaml` and exact lookups for C++ YAML sources without `yaml` in their names (`opencv`, `fkyaml`, `libfkyaml`, `mini-yaml`, `yaml-cpp0.3`) find no further C++ YAML parser with a YAML-specific Debian count.
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).
 
-Round 4 (2026-11-18): yaml-runtimes, Debian apt-cache search, vcpkg/Homebrew/Conan lists and a GitHub C++ search found no further C++ YAML library with a Debian source ([snapshot](registry-snapshot.json), `round_4_discovery`).
+Further discovery routes (checked 2026-11-18): yaml-runtimes, Debian apt-cache search, vcpkg/Homebrew/Conan lists and a GitHub C++ search find no further C++ YAML library with a Debian source ([snapshot](registry-snapshot.json), `round_4_discovery`).
 
-Round 6 (2026-11-18): bounded GitHub star search for C++ YAML libraries with at least 100 stars ([snapshot](registry-snapshot.json), `round_6_star_fallback`). fkYAML (153) was selected. mini-yaml (244) has no tagged release. Glaze, reflect-cpp, xpack, figcone, config-loader, serdepp and easy_reflection_cpp are multi-format serialization or caller-schema mapping libraries; ESPHome and Conduit are frameworks; rAthena, Doxide, VJE and three other hits are applications. All are recorded in [leads.json](leads.json).
+GitHub star fallback (checked 2026-11-18): a bounded GitHub search for C++ YAML libraries with at least 100 stars ([snapshot](registry-snapshot.json), `round_6_star_fallback`). fkYAML (153) is selected. mini-yaml (244) has no tagged release. Glaze, reflect-cpp, xpack, figcone, config-loader, serdepp and easy_reflection_cpp are multi-format serialization or caller-schema mapping libraries; ESPHome and Conduit are frameworks; rAthena, Doxide, VJE and three other hits are applications. All are recorded in [leads.json](leads.json).

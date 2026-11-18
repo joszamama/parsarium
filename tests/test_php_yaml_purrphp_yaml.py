@@ -116,13 +116,13 @@ class PhpYamlPurrphpYamlTest(unittest.TestCase):
         self.assertEqual(len(round6["leads_added"]), 16)
         for name in round6["leads_added"]:
             self.assertEqual(leads[name]["status"], "excluded", name)
-            self.assertTrue(leads[name]["note"].startswith("Discovery route: round 6"), name)
+            self.assertTrue(leads[name]["note"].startswith("Discovery route: Packagist searches"), name)
             self.assertEqual(leads[name]["metric_value"], snapshot["metrics"][name]["value"], name)
         probes = json.loads((data / "round6-lead-probes.json").read_text())["probes"]
         self.assertTrue(all(not c["matches_oracle"] for probe in probes for c in probe["controls"].values()))
         self.assertEqual(cell["leads_recorded"], len(leads))
         self.assertEqual(cell["verified_third_party_count"], 3)
-        self.assertIn("Round 6", cell["uncertainty"])
+        self.assertIn("round_6_discovery", cell["uncertainty"])
 
 
 if __name__ == "__main__":

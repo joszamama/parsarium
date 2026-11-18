@@ -156,14 +156,14 @@ class JavaYamlPilotTest(unittest.TestCase):
         for name in round4["leads_added"]:
             self.assertIn(name, decisions)
             self.assertIn(decisions[name]["status"], {"fails_control", "excluded"}, name)
-            self.assertTrue(decisions[name]["note"].startswith("Discovery route: round 4"), name)
+            self.assertTrue(decisions[name]["note"].startswith("Discovery route (registry-snapshot.json round_4_targeted_leads)"), name)
         for name in ("org.apache.groovy:groovy-yaml", "org.openrewrite:rewrite-yaml", "org.jruby:yecht",
                      "dev.hnaderi:yaml4s-snake_2.13", "org.jruby.extras:jvyamlb"):
             self.assertEqual(decisions[name]["status"], "fails_control", name)
         for name, metric in round4["zero_metric_hits_not_leads"].items():
             self.assertEqual(metric["value"], 0, name)
             self.assertNotIn(name, decisions)
-        self.assertIn("Round 4", self.cell["uncertainty"])
+        self.assertIn("round_4_targeted_leads", self.cell["uncertainty"])
 
     def test_round_six_discovery_routes_are_decided(self):
         leads = read(DATA / "leads.json")
@@ -172,7 +172,7 @@ class JavaYamlPilotTest(unittest.TestCase):
         round6 = snapshot["round_6_targeted_leads"]
         for name in round6["leads_added"]:
             self.assertIn(decisions[name]["status"], {"fails_control", "excluded"}, name)
-            self.assertTrue(decisions[name]["note"].startswith("Discovery route: round 6"), name)
+            self.assertTrue(decisions[name]["note"].startswith("Discovery route (registry-snapshot.json round_6_targeted_leads)"), name)
             self.assertGreater(decisions[name]["metric_value"], 0, name)
         for name in ("com.soywiz.korlibs.korio:korio-jvm", "com.soywiz.korge:korlibs-serialization-yaml"):
             self.assertEqual(decisions[name]["status"], "fails_control", name)
@@ -183,7 +183,7 @@ class JavaYamlPilotTest(unittest.TestCase):
         for name, metric in round6["zero_metric_hits_not_leads"].items():
             self.assertEqual(metric["value"], 0, name)
             self.assertNotIn(name, decisions)
-        self.assertIn("Round 6", self.cell["uncertainty"])
+        self.assertIn("round_6_targeted_leads", self.cell["uncertainty"])
 
 
 if __name__ == "__main__":

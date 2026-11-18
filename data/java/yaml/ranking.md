@@ -124,6 +124,6 @@ All paths load the documents into ordered trees; aliases resolve to the anchored
 | com.societegenerale.sonar.sslr:sslr-yaml-parser | excluded | 1 | Jackson YAML via SSLR grammar toolkit |
 | space.kscience:dataforge-io-yaml | excluded | 1 | yamlkt via DataForge meta format |
 
-Round 6 (2026-11-18) searched Maven Central further ('yaml parser', 'yaml-parser', 'yml', 'snakeyaml', 'a:yaml', 'yaml kotlin', 'yaml scala') and named JVM leads; no lead qualifies ([probes](round6-lead-probes.json)). org.raml:yagi passes both controls but documents no input API.
+Further Maven Central searches ('yaml parser', 'yaml-parser', 'yml', 'snakeyaml', 'a:yaml', 'yaml kotlin', 'yaml scala'; checked 2026-11-18) and named JVM leads add no qualifying lead ([probes](round6-lead-probes.json)). org.raml:yagi passes both controls but documents no input API.
 
 Standard and runtime APIs: none documented ([standard.json](standard.json)).
