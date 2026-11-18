@@ -1,6 +1,6 @@
 # JAVA × ASCII PLY: selected parsers
 
-6 control-verified third-party paths selected from 20 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
+7 control-verified third-party paths selected from 21 verified candidates. The ceiling is ten. A path is an API or package route, not necessarily an independent parser engine.
 
 ## Primary within-cell adoption metric
 
@@ -10,6 +10,7 @@ deps.dev version-level directDependentCount.
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | [lwjgl-assimp](https://javadoc.lwjgl.org/org/lwjgl/assimp/Assimp.html) | 3.4.3 | 13 | ASCII PLY triangle vertex and face counts, parsed face indices | LWJGL Java binding over native Assimp PLY importer; same Assimp parser family as C++ path |
 | 2 | [boofcv-io](https://boofcv.org/index.php?title=Example_Load_and_Save_Point_Clouds) | 1.6.0 | 11 | ASCII triangle, three vertices, one face, parsed indices [0,1,2] | BoofCV native Java PLY mesh reader |
+| 3 | [scalismo_3](https://github.com/unibas-gravis/scalismo/blob/v1.0-RC1/src/main/scala/scalismo/io/MeshIO.scala) | 1.0-RC1 | 2 | ASCII PLY triangle vertices, face list and parsed point ids | Scalismo pure Scala PLY reader (scalismo.io.ply) |
 
 ## Supplemental numeric evidence
 

@@ -4,7 +4,7 @@
   "status": "curated_below_ten_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 7,
+  "verified_third_party_count": 9,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "ply",
@@ -54,7 +54,7 @@
   "search_hits_recorded": 1162,
   "unique_search_hits": 979,
   "unresolved_documentation_leads": 0,
-  "uncertainty": "7 selected paths with a positive pkg.go.dev imported-by count, including go.viam.com/rdk/spatialmath (44 importers) added in the 2026-11-18 gap round as a wrapper over the selected goply parser family. Three of the seven share the Assimp C++ importer family. The cell stays below ten because every other control-verified Go path records zero importers (Go has a recorded primary value for every path, so the PLY GitHub-star fallback does not apply), and the remaining leads fail: go-game passes a headless GL control but its 5 importers are only its own demo packages under a lowercase module path, hultan/ply-viewer is an internal package, several assimp bindings do not build, and other readers reject ASCII PLY. Fourteen bounded pkg.go.dev queries (limit 100) are recorded; one valid control does not establish complete format support or independent parser families.",
+  "uncertainty": "9 selected paths with a positive pkg.go.dev imported-by count. Round 4 (2026-11-18) added github.com/fogleman/fauxgl (303 importers, its own ply.go reader, pinned by module pseudo-version like goply) and github.com/unixpickle/model3d/model3d (23 importers, ReadColorPLY over the model3d fileformats reader, verified on the vertex_index control triangle-vertex-index.ply). Three of the nine share the Assimp C++ importer family and spatialmath shares goply. The cell stays below ten because every other control-verified Go path records zero importers (Go records a primary value for every path, so the PLY GitHub-star fallback does not apply) and the remaining leads fail: fauxgl copies with importers are byte-identical or package-renamed duplicates, odx, arata-nvm/poly and c3dff have 0 importers, go-game's importers are its own demos, gsbox is a CLI, raylib-go and other 3D modules have no PLY reader, several assimp bindings do not build, and other readers reject ASCII PLY. Round 4 added ten pkg.go.dev symbol searches, ten package searches and eight GitHub repository/code searches (limit 100); one valid control does not establish complete format support or independent parser families.",
   "third_party_evidence": "data/go/ascii_ply/parsers.json",
   "third_party_control_results": "data/go/ascii_ply/verification.json",
   "runtime_evidence": "data/go/ascii_ply/standard.json",
