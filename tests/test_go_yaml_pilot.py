@@ -253,6 +253,58 @@ class GoYamlPilotTest(unittest.TestCase):
         self.assertEqual(leads["github.com/yamlstar/yamlstar-plugin-parser-reference/parser"]["status"],
                          "excluded_control_failed")
 
+    def test_round_seven_leads_are_decided(self):
+        leads = {lead["name"]: lead for lead in read(CELL / "leads.json")}
+        check = read(CELL / "round7-lead-check.json")
+        self.assertEqual(self.cell["leads_recorded"], len(leads))
+        # pkg.go.dev cannot page past 100 hits: page 2 repeats the window and limit=200 returns nothing.
+        for paging in check["paging_check"]:
+            with self.subTest(paging=paging["query"]):
+                self.assertEqual(paging["limit200_hits"], 0)
+                self.assertLessEqual(len(paging["page2_not_in_page1"]), 2)
+        self.assertEqual({s["query"] for s in check["searches"] if s["mode"] == "package"},
+                         {"yml", "yaml tokenizer", "yaml node", "yaml document", "yaml stream", "yaml event",
+                          "libyaml go", "libyaml", "yaml scanner", "yaml reader", "yaml loader", "yaml library"})
+        self.assertEqual({s["query"] for s in check["searches"] if s["mode"] == "symbol"},
+                         {"yaml Unmarshal", "yaml Parse", "yaml Decoder", "yaml Node", "yaml Load", "yaml Event",
+                          "yaml Token", "yaml Scanner"})
+        for search in check["searches"]:
+            self.assertEqual(search["hits_recorded"], len(search["hits"]))
+            self.assertLessEqual(len(search["hits"]), 100)
+        selected = {row["name"]: row for row in self.parsers}
+        for name, metric in check["selected"].items():
+            with self.subTest(selected=name):
+                self.assertEqual(leads[name]["status"], "selected")
+                self.assertEqual(leads[name]["found_by"], "registry_search_round_7")
+                self.assertEqual(selected[name]["popularity"]["value"], metric["value"])
+                self.assertEqual(selected[name]["project"], metric["project"])
+                self.assertTrue(all(result["oracle_match"] for result in check["probes"][name]["controls"].values()))
+        for name, metric in check["metrics"].items():
+            with self.subTest(lead=name):
+                lead = leads[name]
+                self.assertNotEqual(lead["status"], "selected")
+                self.assertEqual(lead["metric_value"], metric["value"])
+                self.assertEqual(lead["evidence"], "data/go/yaml/round7-lead-check.json")
+                self.assertTrue(lead["reason"])
+        hits = {}
+        for search in check["searches"]:
+            for hit in search["hits"]:
+                hits[hit["name"]] = max(hits.get(hit["name"], 0), hit["imported_by"] or 0)
+        decided = set(check["selected"]) | set(check["metrics"]) | set(check["not_separate"])
+        for name in decided:
+            self.assertGreater(hits[name], 0)
+        self.assertEqual(len(decided), check["hit_counts"]["new_positive_metric"])
+        for name in check["zero_metric_hits_not_leads"]:
+            self.assertEqual(hits[name], 0)
+            self.assertNotIn(name, leads)
+        for row in check["source_overlap"]:
+            with self.subTest(fork=row["package"]):
+                self.assertGreater(row["shared_distinct_lines"] / row["distinct_non_test_lines"], 0.85)
+                self.assertEqual(leads[row["package"]]["status"], "excluded_duplicate_fork")
+        ytt, = check["normalized_overlap"]
+        self.assertGreater(ytt["normalized_share"], 0.85)
+        self.assertEqual(leads["carvel.dev/ytt/pkg/yamlmeta"]["status"], "excluded")
+
 
 if __name__ == "__main__":
     unittest.main()
