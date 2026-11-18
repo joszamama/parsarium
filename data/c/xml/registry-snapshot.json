@@ -723,6 +723,41 @@
       },
       "primary_installed": null,
       "note": "libxmltok 1.2 is expat 1.2; libxml1 is libxml 1.x. Both sources are gone from Debian."
+    },
+    "libucw-xml": {
+      "conan_recipe": false,
+      "debian_source": null,
+      "debian_source_note": "not in the Debian archive; binary name from the upstream tarball's own debian/ packaging",
+      "debian_binary_packages": {
+        "libucw-xml-6.5": {
+          "rank": 46537,
+          "installed": 60,
+          "regular_use_votes": 0,
+          "old": 0,
+          "recent": 0,
+          "no_files": 60
+        },
+        "libucw-xml-dev": {
+          "rank": 46538,
+          "installed": 60,
+          "regular_use_votes": 0,
+          "old": 60,
+          "recent": 0,
+          "no_files": 0
+        },
+        "libucw-6.5": {
+          "rank": 46237,
+          "installed": 61,
+          "regular_use_votes": 4,
+          "old": 0,
+          "recent": 0,
+          "no_files": 57
+        }
+      },
+      "primary_installed": 60,
+      "debian_sourcemax": null,
+      "homebrew_formula": null,
+      "homebrew_install_365d": null
     }
   },
   "debian_source_search": {
@@ -5746,7 +5781,7 @@
         "libxmltok1t64",
         "libxml-dev"
       ],
-      "outcome": "No new C XML parser path from names alone: libxmltok (expat 1.2) and libxml1 are predecessors of the selected expat and libxml2, libucw-xml is a lead (not in the Debian archive), libxmlbird and GXml are Vala libraries. gdome2, RXP, neon and APR-util lack 'xml' in their binary names and were found by the round-4 targeted lookups.",
+      "outcome": "No new C XML parser path from names alone: libxmltok (expat 1.2) and libxml1 are predecessors of the selected expat and libxml2, libucw-xml (not in the Debian archive) is selected, libxmlbird and GXml are Vala libraries. gdome2, RXP, neon and APR-util lack 'xml' in their binary names and were found by the round-4 targeted lookups.",
       "hits": [
         {
           "position": 101,
@@ -7514,7 +7549,7 @@
           "name": "libucw-xml-6.5",
           "installed": 60,
           "classification": "c_xml_parser_library",
-          "reason": "LibUCW's XML parser library; round-4 lead (not in the Debian archive)"
+          "reason": "LibUCW's XML parser library (upstream-built package, not in the Debian archive); selected as libucw-xml in round 4"
         },
         {
           "position": 322,
@@ -7522,7 +7557,7 @@
           "name": "libucw-xml-dev",
           "installed": 60,
           "classification": "c_xml_parser_library",
-          "reason": "development files of LibUCW's XML parser; see libucw-xml-6.5"
+          "reason": "LibUCW's XML parser library (upstream-built package, not in the Debian archive); selected as libucw-xml in round 4"
         },
         {
           "position": 323,

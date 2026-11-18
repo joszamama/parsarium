@@ -1,8 +1,8 @@
 {
   "schema_version": 2,
-  "checked_at_utc": "2026-11-18T00:56:26.201066+00:00",
-  "projects_total": 7,
-  "projects_passed": 7,
+  "checked_at_utc": "2026-11-18T01:06:50.054327+00:00",
+  "projects_total": 8,
+  "projects_passed": 8,
   "pass": true,
   "results": [
     {
@@ -339,6 +339,55 @@
       "first_afl_tuples": 1389,
       "second_afl_tuples": 1490,
       "afl_tuple_difference": 259
+    },
+    {
+      "project": "xml/c/libucw_xml",
+      "checked_at_utc": "2026-11-18T01:06:50.054110+00:00",
+      "pass": true,
+      "feedback_kind": "afl_clang_fast_libucw_and_harness_edges",
+      "feedback_scope": "AFL++ instruments LibUCW 6.5 (libucw, libucw-charset and ucw-xml, all static) and the xml_next pull-loop harness; no other XML library is linked.",
+      "base_project_receipt_sha256": "e7b89f0c451c781e0771539e0b6b3f8e063e2a79f9545a6d3045050694f7ac17",
+      "overlay_receipt_sha256": "9ca14d28c944f95e9a910f2b2f9bc4a8716b914ee8b865c952b9b9d22f6345e0",
+      "base_image_id": "sha256:f84885556c432257d4b7ac74b2caa728597d709fba8125468ee02a3e7eb94e97",
+      "overlay_image_id": "sha256:54765ffe17337d26bc8fc007f14c2de978278556a8d9e1343429f56ba2031a8a",
+      "repeats_per_control": 5,
+      "repeated_controls_identical": true,
+      "first_control": "controls/xml/catalog-ns.xml",
+      "first_sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "second_control": "controls/xml/order-default-ns.xml",
+      "second_sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "second_control_output": {
+        "attributes": [
+          "n=1",
+          "{urn:parsarium:price}currency=EUR",
+          "n=2",
+          "note=say \"hi\""
+        ],
+        "elements": [
+          "{urn:parsarium:order}order",
+          "{urn:parsarium:order}line",
+          "{urn:parsarium:order}sku",
+          "{urn:parsarium:price}amount",
+          "{urn:parsarium:order}line",
+          "plain",
+          "leaf"
+        ],
+        "max_depth": 4,
+        "namespace_declarations": 3,
+        "namespaces": [
+          "urn:parsarium:order",
+          "urn:parsarium:price"
+        ],
+        "root": "{urn:parsarium:order}order",
+        "text": [
+          "A-7",
+          "12.50 €"
+        ]
+      },
+      "second_case_kind": "valid_control",
+      "first_afl_tuples": 501,
+      "second_afl_tuples": 544,
+      "afl_tuple_difference": 87
     }
   ]
 }

@@ -81,7 +81,8 @@ class CXmlLibnxmlPilotTest(unittest.TestCase):
         self.assertEqual(candidate["debian_binary_packages"]["libnxml0"]["installed"], 48)
         values = [item["metric"]["value"] for item in parsers]
         self.assertEqual(values, sorted(values, reverse=True))
-        self.assertEqual(parsers[-1]["name"], PACKAGE)
+        names = [item["name"] for item in parsers]
+        self.assertEqual(names[names.index(PACKAGE) - 1:names.index(PACKAGE) + 2], ["gdome2", PACKAGE, "libucw-xml"])
         leads = read(BASE / "leads.json")["leads"]
         self.assertEqual(entry(PACKAGE, leads)["status"], "selected")
         self.assertEqual(entry("iksemel", leads)["status"], "unresolved_control_mismatch")
