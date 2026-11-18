@@ -428,6 +428,216 @@
       "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
       "documented_api_lead": "https://github.com/vimeo/php-mysql-engine/blob/780c49d233834dc91d5b5624c0a709080e238682/src/Parser/SQLParser.php",
       "reason": "Round-4 search hit (\"mysql engine\", 2026-11-18). In-memory MySQL simulation for tests whose README says it parses SELECT, INSERT, UPDATE and DELETE with a validating query parser. The public final class Vimeo\\MysqlEngine\\Parser\\SQLParser::parse($sql) (docblock-typed; not described in the README) returns SelectQuery/InsertQuery objects with FromClause tables, expression trees, groupBy and orderBy; it is called directly, without FakePdo, so nothing is executed. Both valid controls equal the oracle (the adapter cuts at the package SQLLexer's ';' lexemes because parse() rejects the terminator after INSERT or FROM). Engine-with-public-parser precedent: DuckDB in the C++ cell."
+    },
+    {
+      "name": "cweiske/php-sqllint",
+      "status": "excluded",
+      "metric_value": 95400,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "phpMyAdmin hand-written lexer and parser",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (\"sql validator\"). Command-line syntax checker (AGPL-3.0) whose v0.2.3 composer.json requires phpmyadmin/sql-parser ^4.1.1; it reports the phpMyAdmin parser's errors and has no own tree, like liquipedia/sqllint."
+    },
+    {
+      "name": "jimbojsb/pseudo",
+      "status": "excluded",
+      "metric_value": 88995,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (\"pdo mock\"). PDO mocking library: Pseudo\\Pdo::mock() registers SQL strings with result arrays and query() looks the text up (README 0.5); no SQL parser or tree."
+    },
+    {
+      "name": "slack/hack-sql-fake",
+      "status": "excluded",
+      "metric_value": 3838,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (\"sql fake\"). Hack-language (HHVM) testing library, not PHP; it is the origin named by the selected vimeo/php-mysql-engine README."
+    },
+    {
+      "name": "vdauchy/sql-analyzer",
+      "status": "excluded",
+      "metric_value": 1674,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (\"sql analyzer\"). Laravel query analyzer (0.4.1, requires ext-pdo and illuminate/database): src/analyzers/MySql.php and SQLite.php inspect EXPLAIN rows returned by the database; it has no SQL parser."
+    },
+    {
+      "name": "pierresh/phpstan-pdo-mysql",
+      "status": "excluded",
+      "metric_value": 672,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "SQLFTW",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (\"sql validator\"). PHPStan rules for PDO/MySQL code; 2.1.6 requires sqlftw/sqlftw ^0.1 for SQL syntax, which is excluded as proprietary in this cell; no own parser."
+    },
+    {
+      "name": "zent/php-sql-parser",
+      "status": "excluded",
+      "metric_value": 239,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "PHP-SQL-Parser (greenlion fork)",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (tag parser, q sql). Self-described PHP-SQL-Parser copy (v4.1.3, 2018): 7,047 of 7,111 normalized statements (99.1%) occur in greenlion v5.0.0 and 137 of 177 files are identical after php -w (round-4 check, same method as the earlier greenlion forks)."
+    },
+    {
+      "name": "k-kinzal/sql-faker",
+      "status": "excluded",
+      "metric_value": 157,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (\"sql grammar\"). Grammar-based SQL generator (FakerPHP provider); it emits SQL text and does not parse it."
+    },
+    {
+      "name": "chh/sirel",
+      "status": "excluded",
+      "metric_value": 68,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (\"sql syntax tree\"). SQL builder that builds its own AST from method calls and dumps SQL; no tagged release on Packagist and no SQL text input."
+    },
+    {
+      "name": "janfish/phpmyadmin-sql-parser",
+      "status": "excluded",
+      "metric_value": 56,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "phpMyAdmin hand-written lexer and parser",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (tag parser, q sql). Copy of phpmyadmin/sql-parser 5.4.2 under another name: 5,101 of 5,104 normalized statements (99.9%) occur in phpmyadmin/sql-parser 5.4.2 and 85 of 86 files are identical after php -w."
+    },
+    {
+      "name": "dmitry-php/sql-parser",
+      "status": "excluded",
+      "metric_value": 25,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "phpMyAdmin hand-written lexer and parser",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (tag lexer, q sql). Same description as phpmyadmin/sql-parser; no tagged release on Packagist (targeted lookup 2026-11-18), so no release can be pinned."
+    },
+    {
+      "name": "tiny/sql",
+      "status": "excluded",
+      "metric_value": 19,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (\"sql parse\"). Described as an SQL parsing library, but Packagist lists no tagged release (targeted lookup 2026-11-18), so no release can be pinned."
+    },
+    {
+      "name": "jtfnetoo/sql-parser",
+      "status": "excluded",
+      "metric_value": 18,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "phpMyAdmin hand-written lexer and parser",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (tag parser, q sql). Self-described fork of phpmyadmin/sql-parser (v4.1.6, 2017): 4,125 of 4,127 normalized statements (100.0%) occur in phpmyadmin/sql-parser v4.1.6 and 73 of 74 files are identical after php -w."
+    },
+    {
+      "name": "dottwatson/php-mysql-engine",
+      "status": "excluded",
+      "metric_value": 16,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (\"mysql engine\"). Fork of the selected vimeo/php-mysql-engine with the same description (1.1, 2024): 5,903 of 6,740 normalized statements (87.6%) occur in vimeo 0.7.15 and 132 of 148 files are identical after php -w; the additions are data-source adapters (dottwatson/simple-data, justinrainbow/json-schema), not a separate parser. Not promoted to avoid counting one parser twice."
+    },
+    {
+      "name": "erkineren/sql-manipulator",
+      "status": "excluded",
+      "metric_value": 14,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "greenlion PHP-SQL-Parser consumer",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (tag parser, q sql). SQL string manipulator whose 1.0.0 requires greenlion/php-sql-parser ^4.3; no own parser."
+    },
+    {
+      "name": "dottwatson/fpdo",
+      "status": "excluded",
+      "metric_value": 13,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (tag parser, q sql). PDO wrapper whose 1.1 requires dottwatson/php-mysql-engine (a vimeo fork); no own parser."
+    },
+    {
+      "name": "bleksak/mago-pdo-extension",
+      "status": "excluded",
+      "metric_value": 11,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (\"sql validator\"). Mago static-analysis extension whose 0.0.6 requires phpmyadmin/sql-parser ^6.0 and bleksak/sqlite-toolkit ^1.0, both already selected; no own parser."
+    },
+    {
+      "name": "rob-lester-jr04/php-sql-parser",
+      "status": "excluded",
+      "metric_value": 10,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "PHP-SQL-Parser (greenlion fork)",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (tag parser, q sql). Self-described PHP-SQL-Parser copy (v4.4.0, 2021): 7,111 of 7,137 normalized statements (99.6%) occur in greenlion v5.0.0 and 151 of 177 files are identical after php -w."
+    },
+    {
+      "name": "zqx/sql-translation",
+      "status": "excluded",
+      "metric_value": 8,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (tag parser, q sql). Translates custom bracketed formula expressions (for example date_diff([a],[b])) into MySQL or PostgreSQL expression text (README v1.2); not a statement parser."
+    },
+    {
+      "name": "jozefhornik/php-mysql-engine",
+      "status": "excluded",
+      "metric_value": 5,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake)",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (\"mysql engine\"). Copy of vimeo/php-mysql-engine with the same description and no tagged release on Packagist (targeted lookup 2026-11-18)."
+    },
+    {
+      "name": "fuwasegu/php-sql-snapshot",
+      "status": "excluded",
+      "metric_value": 1,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "greenlion PHP-SQL-Parser consumer",
+      "documented_api_lead": null,
+      "reason": "Round-4 hit (tag ast, q sql). PHPUnit extension that compares SQL through greenlion/php-sql-parser ^4.0 trees; no own parser."
+    },
+    {
+      "name": "wordpress/mysql-on-sqlite",
+      "status": "unresolved",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "WordPress MySQL-on-SQLite grammar-driven parser (MySQL Workbench grammar)",
+      "documented_api_lead": null,
+      "reason": "Round-4 lead from the \"wordpress mysql parser\" and \"sqlite database integration\" queries (both returned no Packagist package). WordPress/sqlite-database-integration (v3.1.3, 2026-11-03) contains a grammar-driven MySQL lexer and parser (packages/mysql-on-sqlite/src/mysql/class-wp-mysql-parser.php, grammar from MySQL Workbench MySQLParser.g4) whose composer.json names wordpress/mysql-on-sqlite, but neither that name nor wordpress/sqlite-database-integration is published on Packagist (HTTP 404, 2026-11-18). No primary metric, so not verified or ranked."
     }
   ]
 }

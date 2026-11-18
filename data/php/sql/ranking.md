@@ -35,6 +35,8 @@ Receipts: [phpmyadmin/sql-parser](../../../projects/sql/php/phpmyadmin_sql_parse
 | jasny/persist-sql-query | 578,756 | excluded | — |
 | vimeo/php-mysql-engine | 312,980 | selected | vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake) |
 | sqlftw/sqlftw | 169,733 | excluded | SQLFTW |
+| cweiske/php-sqllint | 95,400 | excluded | phpMyAdmin hand-written lexer and parser |
+| jimbojsb/pseudo | 88,995 | excluded | — |
 | sad_spirit/pg_builder | 76,924 | selected | pg_builder hand-written PostgreSQL parser |
 | getdkan/sql-parser | 66,786 | excluded | DKAN state-machine validator |
 | manticoresoftware/php-sql-parser | 63,809 | excluded | PHP-SQL-Parser (greenlion fork) |
@@ -50,21 +52,40 @@ Receipts: [phpmyadmin/sql-parser](../../../projects/sql/php/phpmyadmin_sql_parse
 | udan11/sql-parser | 9,823 | excluded | phpMyAdmin hand-written lexer and parser |
 | processfast/php-sql-parser | 8,250 | excluded | PHP-SQL-Parser (greenlion fork) |
 | liquipedia/sqllint | 5,398 | excluded | phpMyAdmin hand-written lexer and parser |
+| slack/hack-sql-fake | 3,838 | excluded | vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake) |
 | crodas/sql-parser | 2,490 | selected | crodas SQLParser Lemon-generated parser |
 | michabbb/php-sql-parser | 2,299 | excluded | PHP-SQL-Parser (greenlion fork) |
+| vdauchy/sql-analyzer | 1,674 | excluded | — |
 | fmizzell/sql-parser | 1,367 | excluded | DKAN state-machine validator |
 | maghead/sqlite-parser | 937 | excluded | — |
+| pierresh/phpstan-pdo-mysql | 672 | excluded | SQLFTW |
 | aitradeinc/php-sql-parser | 399 | excluded | PHP-SQL-Parser (greenlion fork) |
+| zent/php-sql-parser | 239 | excluded | PHP-SQL-Parser (greenlion fork) |
 | offsite-solutions/eisodos-sqlparser | 181 | excluded | — |
+| k-kinzal/sql-faker | 157 | excluded | — |
+| chh/sirel | 68 | excluded | — |
 | rstoetter/csmartsqlstatement-php | 56 | excluded | — |
+| janfish/phpmyadmin-sql-parser | 56 | excluded | phpMyAdmin hand-written lexer and parser |
 | codexsoft/sql-parser | 46 | excluded | — |
+| dmitry-php/sql-parser | 25 | excluded | phpMyAdmin hand-written lexer and parser |
 | subapp/sql | 19 | unresolved_blocked | subapp/sql lexer and parser |
+| tiny/sql | 19 | excluded | — |
+| jtfnetoo/sql-parser | 18 | excluded | phpMyAdmin hand-written lexer and parser |
+| dottwatson/php-mysql-engine | 16 | excluded | vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake) |
 | bleksak/sqlite-toolkit | 14 | selected | bleksak/sqlite-toolkit hand-written SQLite state-machine parser |
+| erkineren/sql-manipulator | 14 | excluded | greenlion PHP-SQL-Parser consumer |
+| dottwatson/fpdo | 13 | excluded | vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake) |
+| bleksak/mago-pdo-extension | 11 | excluded | — |
+| rob-lester-jr04/php-sql-parser | 10 | excluded | PHP-SQL-Parser (greenlion fork) |
+| zqx/sql-translation | 8 | excluded | — |
 | lbreme/lexepa-sql | 7 | excluded | — |
 | ozh/sqltableextractor | 5 | excluded | — |
+| jozefhornik/php-mysql-engine | 5 | excluded | vimeo/php-mysql-engine hand-written MySQL parser (port of Slack hack-sql-fake) |
 | xp-forge/sql-parser | 4 | excluded | xp-forge Pratt parser |
 | cadfael/mysql-antlr4-parser | 2 | excluded | ANTLR MySQL grammar |
 | inilim/sqlite-parser | 1 | unresolved | inilim/sqlite-parser phplrt grammar (typed SQLite AST) |
+| fuwasegu/php-sql-snapshot | 1 | excluded | greenlion PHP-SQL-Parser consumer |
 | k-kinzal/sql-parser | 0 | excluded | — |
+| wordpress/mysql-on-sqlite | n/a | unresolved | WordPress MySQL-on-SQLite grammar-driven parser (MySQL Workbench grammar) |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).
