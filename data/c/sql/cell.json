@@ -1,10 +1,10 @@
 {
   "ecosystem": "c",
   "format": "sql",
-  "status": "pilot_two_selected_search_bounded",
+  "status": "pilot_three_selected_search_bounded",
   "working_target": 10,
   "ceiling": 10,
-  "verified_third_party_count": 2,
+  "verified_third_party_count": 3,
   "verified_standard_or_runtime_count": 0,
   "search_queries": [
     "sql"
@@ -18,13 +18,14 @@
   "search_captured_at_utc": "2026-11-17T16:38:43.688960+00:00",
   "primary_metric": "Debian popcon sourcemax installations by source package (pinned snapshot)",
   "unresolved_documentation_leads": 0,
-  "uncertainty": "Two verified C SQL paths after a bounded Debian popcon source-name search (names containing 'sql', first 100 of 229 by rank) plus targeted lookups, captured 2026-11-17 from the pinned popcon snapshot. libgda 5.2.10 (Debian source libgda5, 2,105 installations) parses both valid controls with its generic Lemon-generated GdaSqlParser into a GdaSqlStatement tree, and libpg_query 18.1.0 (Debian source libpg-query, 41) parses them with the PostgreSQL 18 grammar; both trees give the oracle summary. sqlite3, sqlcipher and postgresql-18 rank higher but are engines or a server without a library syntax-tree API. Both popcon counts are small or library-wide (libgda's covers the whole data-access library) and reflect packaged installs, not use of SQL parsing. Round 3 (2026-11-18) checked further source packages of the same pinned snapshot outside the first 100 'sql' hits (mariadb, unixodbc, spatialite, freetds, psqlodbc, mdbtools; C++ candidates are in the C++ cell): they are a server and client, a driver manager, drivers, a SQLite extension, or a grammar without JOIN, GROUP BY or INSERT (libmdbsql), with evidence in leads.json. No other C source package in the snapshot was found with a documented SQL syntax-tree API, and no unranked C path exists for the Debian development-package fallback, so the cell stops at two paths, not ten; adding more would need a different metric (GitHub stars are allowed only in PLY cells). Two valid controls establish only the tested dialect-neutral subset.",
+  "uncertainty": "Three verified C SQL paths after a bounded Debian popcon source-name search (names containing 'sql', first 100 of 229 by rank) plus targeted lookups, captured 2026-11-17 from the pinned popcon snapshot. libgda 5.2.10 (Debian source libgda5, 2,105 installations) parses both valid controls with its generic Lemon-generated GdaSqlParser into a GdaSqlStatement tree, and libpg_query 18.1.0 (Debian source libpg-query, 41) parses them with the PostgreSQL 18 grammar; both trees give the oracle summary. sqlite3, sqlcipher and postgresql-18 rank higher but are engines or a server without a library syntax-tree API. Both popcon counts are small or library-wide (libgda's covers the whole data-access library) and reflect packaged installs, not use of SQL parsing. Round 3 (2026-11-18) checked further source packages of the same pinned snapshot outside the first 100 'sql' hits (mariadb, unixodbc, spatialite, freetds, psqlodbc, mdbtools; C++ candidates are in the C++ cell): they are a server and client, a driver manager, drivers, a SQLite extension, or a grammar without JOIN, GROUP BY or INSERT (libmdbsql), with evidence in leads.json. No other C source package in the snapshot was found with a documented SQL syntax-tree API, and no unranked C path exists for the Debian development-package fallback, so after round 3 the cell stopped at two paths; adding more would need a different metric (GitHub stars are allowed only in PLY cells). Two valid controls establish only the tested dialect-neutral subset. Round 4 (2026-11-18) looked up tree-sitter grammar sources in the same pinned snapshot and added tree-sitter-sql 0.3.11 (Debian source tree-sitter-sql, 8 installations, rank 3 of 3): the DerekStride grammar (generated parser.c and scanner.c, byte-identical to Debian 0.3.11-1) on the tree-sitter 0.26.11 C runtime builds a concrete syntax tree that gives the oracle summary for both controls. Its count is the weakest in the cell and measures the only binary package of that source, the Python binding python3-tree-sitter-sql, not C use; tree-sitter is error-tolerant, so the adapter rejects trees with ERROR or MISSING nodes.",
   "registry_snapshot": "data/c/sql/registry-snapshot.json",
   "unresolved_leads": "data/c/sql/leads.json",
   "runtime_evidence": "data/c/sql/standard.json",
   "third_party_evidence": "data/c/sql/parsers.json",
   "third_party_control_results": [
     "projects/sql/c/libgda/verification.json",
-    "projects/sql/c/libpg_query/verification.json"
+    "projects/sql/c/libpg_query/verification.json",
+    "projects/sql/c/tree_sitter_sql/verification.json"
   ]
 }

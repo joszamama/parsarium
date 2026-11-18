@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "format": "sql",
+  "ecosystem": "c",
+  "pilot": true,
+  "package": "tree-sitter-sql",
+  "release": "0.3.11",
+  "catalog_parser": "data/c/sql/parsers.json",
+  "source_lock": "projects/sql/c/tree_sitter_sql/source-lock.json",
+  "source_sha256": "a97a324eae9c81ed68f6e162b9b33f8911fc6442caa2950e57c498e2460d1387",
+  "base_image": "ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96",
+  "platform": "linux/arm64",
+  "control": "controls/sql/select-join.sql",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "differential_control": "controls/sql/insert-values.sql",
+  "differential_control_sha256": "df8f5805de6eb11bd431411bb8642e95b5a53c13c37306a6bd38ad9edf5c8c35",
+  "differential_expected_output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "insert",
+        "tables": [
+          "orders"
+        ],
+        "columns": 4,
+        "rows": 2,
+        "literals": [
+          [
+            "number",
+            "1"
+          ],
+          [
+            "number",
+            "19.5"
+          ],
+          [
+            "number",
+            "2"
+          ],
+          [
+            "number",
+            "250"
+          ],
+          [
+            "number",
+            "42"
+          ],
+          [
+            "number",
+            "7"
+          ],
+          [
+            "string",
+            "open"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "summary_command": [
+    "/usr/bin/python3",
+    "/work/summarize.py",
+    "/input/case"
+  ],
+  "dialect": "tree-sitter-sql multi-dialect grammar (no dialect option)",
+  "parser_family": "tree-sitter-sql (DerekStride grammar, generated parser.c tables and lexer plus scanner.c) on the tree-sitter C runtime; error-tolerant incremental LR parsing with a concrete syntax tree",
+  "harness": "harness.c",
+  "fuzz_entry": "LLVMFuzzerTestOneInput",
+  "oracle": "The replay rejects trees with ERROR or MISSING nodes and prints the named syntax-tree nodes as JSON; summarize.py reads statement, select_expression, relation, join, where, group_by, order_by, invocation, insert, list, column and literal nodes from it, and run-control requires the hand-written oracle summary.",
+  "api": "ts_parser_new(); ts_parser_set_language(parser, tree_sitter_sql()); ts_parser_parse_string(parser, NULL, local SQL text, length) -> TSTree (concrete syntax tree; ts_node_has_error false)",
+  "coverage": "LLVM source coverage of the pinned tree-sitter-sql 0.3.11 grammar (generated parser.c, scanner.c) and the tree-sitter 0.26.11 runtime (lib/src, compiled through lib.c) reached by ts_parser_parse_string",
+  "coverage_subject_prefix": "/work/src/",
+  "format_specific_coverage_file_suffix": "/tree-sitter-sql/src/parser.c",
+  "afl_entrypoint": "/work/parser-probe",
+  "scope": "SQL text from local bytes parsed by ts_parser_parse_string with tree_sitter_sql(); valid SELECT-with-join and multi-row INSERT controls only, each matching the hand-written oracle summary. The parser is error-tolerant: the replay and probe reject trees that contain ERROR or MISSING nodes. Incremental re-parsing, queries and highlighting are untested."
+}

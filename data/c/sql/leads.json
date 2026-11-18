@@ -124,6 +124,17 @@
       "family": "libmdbsql lex/yacc grammar for Access databases",
       "documented_api_lead": "mdb_sql_run_query",
       "reason": "Round 3 targeted lookup. libmdbsql parses a small SQL subset to query an opened .mdb file: its grammar (src/sql/parser.y at tag v1.0.1) declares SELECT, FROM, WHERE, LIMIT and TOP but no JOIN, GROUP BY, ORDER BY or INSERT, so it cannot parse either control, and its query entry point runs against a database handle. Debian popcon sourcemax rank 8,360, 579 installations (pinned snapshot)."
+    },
+    {
+      "name": "tree-sitter-sql",
+      "status": "selected",
+      "metric_value": 8,
+      "metric_error": null,
+      "latest_release_observed": "0.3.11",
+      "family": "tree-sitter-sql grammar on the tree-sitter C runtime",
+      "documented_api_lead": "ts_parser_parse_string with tree_sitter_sql() (tree-sitter C API)",
+      "reason": "Round-4 targeted lookup in the pinned popcon snapshot (source names starting with 'tree-sitter', outside the first 100 'sql' hits). Debian source tree-sitter-sql 0.3.11-1 (rank 30,115, 8 installations) ships the DerekStride grammar; its only binary is python3-tree-sitter-sql, so the count measures the Python binding. The upstream v0.3.11 release archive's generated src/parser.c and src/scanner.c are byte-identical to the Debian source. With the tree-sitter 0.26.11 C runtime (Debian sid version), ts_parser_parse_string builds a concrete syntax tree (statement, select_expression, relation, join, where, group_by, order_by, invocation, insert, list, literal) that gives the oracle summary for both valid controls.",
+      "selected_release": "0.3.11"
     }
   ]
 }

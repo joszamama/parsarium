@@ -1,0 +1,66 @@
+{
+  "kind": "third_party",
+  "api": "ts_parser_new(); ts_parser_set_language(parser, tree_sitter_sql()); ts_parser_parse_string(parser, NULL, local SQL text, length) -> TSTree (concrete syntax tree; ts_node_has_error false)",
+  "runtime": null,
+  "verified_at_utc": "2026-11-18T00:52:48.433710+00:00",
+  "manifest": "projects/sql/c/tree_sitter_sql/manifest.json",
+  "image_id": "sha256:1814db47e6b3909a622e06974f58314cc103f39979bd5fbd3933bf459ac7ffab",
+  "docker_server_version": "29.9.3",
+  "platform": "linux/arm64",
+  "toolchain": [
+    "Ubuntu clang version 21.1.8 (6ubuntu1)",
+    "Ubuntu LLVM version 21.1.8"
+  ],
+  "source_sha256": "a97a324eae9c81ed68f6e162b9b33f8911fc6442caa2950e57c498e2460d1387",
+  "control_sha256": "331b604d98d4d6c553e86b0fdc866c3c415260df7f1f59c5c2c71d1dfc7be3ca",
+  "project_file_sha256": {
+    "Dockerfile": "0b7d4a4b247011fac5744b0b1a903de937532a1c0bc30ba9575795bcc90ea3db",
+    "afl-allowlist.txt": "bf12b520590120ae3b6a1cac55ce8e3e1196e5de9c00f9fc12375308cb447e9e",
+    "build.sh": "2ee1712ccb408de9aa1f9e6595d80d667256c8588e455aa67d2404b018d4cc18",
+    "harness.c": "89d2baefd8ff170cbe9f57c240958d48e187b59a871522708aa9bd4de8b0cef6",
+    "manifest.json": "c57eb73f31c2a6db2323172ec0cca5dbc060b2f14607396b7ea19273b0e914db",
+    "parser-probe.c": "b384d78eeca35a8d30c022807cc9b381d322f5a48a32d4577ffe645e97847265",
+    "run-control.sh": "76afb430b19193c8096b9b64baf4ea3188fc7946bb128bbfe6a71eeeb65101a8",
+    "source-lock.json": "11c80fd3484b399896d151a7333ab6d9d851a0b3dda12d83bf698fb58cdf32ce",
+    "summarize.py": "7dcb588d8959320ca2f4e94ab0b1329d6dc8393fecf161ee7a3862c0599f1089"
+  },
+  "output": {
+    "statement_count": 1,
+    "statements": [
+      {
+        "kind": "select",
+        "tables": [
+          "customers",
+          "orders"
+        ],
+        "select_items": 3,
+        "joins": 1,
+        "where": true,
+        "group_by": 1,
+        "order_by": 1,
+        "functions": [
+          "count",
+          "sum"
+        ],
+        "literals": [
+          [
+            "number",
+            "10"
+          ],
+          [
+            "string",
+            "paid"
+          ]
+        ]
+      }
+    ]
+  },
+  "parser_source_files": 20,
+  "parser_source_lines_covered": 2856,
+  "format_specific_source_lines_covered": 706,
+  "underlying_source_files": null,
+  "underlying_source_lines_covered": null,
+  "fuzz_engine_smoke_pass": true,
+  "coverage_output": "projects/sql/c/tree_sitter_sql/target/coverage/coverage.json",
+  "pass": true
+}

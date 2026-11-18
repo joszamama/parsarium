@@ -187,8 +187,100 @@
       "parser_feature_difference": null,
       "project_receipt": "projects/sql/c/libpg_query/verification.json",
       "afl_feedback": "fuzzing/afl-native/sql/c/libpg_query/differential.json"
+    },
+    {
+      "package": "tree-sitter-sql",
+      "version": "0.3.11",
+      "pass": true,
+      "input_api": "ts_parser_new(); ts_parser_set_language(parser, tree_sitter_sql()); ts_parser_parse_string(parser, NULL, local SQL text, length) -> TSTree (concrete syntax tree; ts_node_has_error false)",
+      "dialect": "tree-sitter-sql multi-dialect grammar (no dialect option)",
+      "output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "select",
+            "tables": [
+              "customers",
+              "orders"
+            ],
+            "select_items": 3,
+            "joins": 1,
+            "where": true,
+            "group_by": 1,
+            "order_by": 1,
+            "functions": [
+              "count",
+              "sum"
+            ],
+            "literals": [
+              [
+                "number",
+                "10"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "differential_output": {
+        "statement_count": 1,
+        "statements": [
+          {
+            "kind": "insert",
+            "tables": [
+              "orders"
+            ],
+            "columns": 4,
+            "rows": 2,
+            "literals": [
+              [
+                "number",
+                "1"
+              ],
+              [
+                "number",
+                "19.5"
+              ],
+              [
+                "number",
+                "2"
+              ],
+              [
+                "number",
+                "250"
+              ],
+              [
+                "number",
+                "42"
+              ],
+              [
+                "number",
+                "7"
+              ],
+              [
+                "string",
+                "open"
+              ],
+              [
+                "string",
+                "paid"
+              ]
+            ]
+          }
+        ]
+      },
+      "parser_family": "tree-sitter-sql grammar on the tree-sitter C runtime",
+      "parser_source_files": 20,
+      "parser_source_lines_covered": 2856,
+      "afl_tuple_difference": 222,
+      "parser_feature_difference": null,
+      "project_receipt": "projects/sql/c/tree_sitter_sql/verification.json",
+      "afl_feedback": "fuzzing/afl-native/sql/c/tree_sitter_sql/differential.json"
     }
   ],
   "standard": [],
-  "checked_at_utc": "2026-11-17T20:04:56.014567+00:00"
+  "checked_at_utc": "2026-11-18T00:54:06.892003+00:00"
 }
