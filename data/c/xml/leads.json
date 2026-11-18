@@ -34,43 +34,47 @@
     },
     {
       "name": "libroxml",
-      "status": "unresolved_no_primary_metric",
+      "status": "excluded_below_star_threshold",
       "language": "C",
       "conan_recipe": false,
       "popcon_installed": null,
       "homebrew_install_365d": null,
-      "reason": "No libroxml0 binary or libroxml source row in either captured popcon table; no Conan recipe or Homebrew formula. Not built.",
-      "source": "https://github.com/blunderer/libroxml"
+      "reason": "No Debian package (no primary or Debian value). Under the C/C++ star fallback blunderer/libroxml has 15 GitHub stars (tags up to 3.0.2), below the 100-star threshold. Not built.",
+      "source": "https://github.com/blunderer/libroxml",
+      "github_stars": 15
     },
     {
       "name": "yxml",
-      "status": "unresolved_no_primary_metric",
+      "status": "excluded_below_star_threshold",
       "language": "C",
       "conan_recipe": false,
       "popcon_installed": null,
       "homebrew_install_365d": null,
-      "reason": "Small byte-at-a-time tokenizer without namespace resolution; not packaged in Debian or Conan. Not built.",
-      "source": "https://dev.yorhel.nl/yxml"
+      "reason": "No Debian package. Upstream is hosted at code.blicky.net (dev.yorhel.nl), not GitHub; the GitHub copy JulStrat/yxml has 14 stars and no tags, so the star fallback does not apply. Also a byte-at-a-time tokenizer without namespace resolution. Not built.",
+      "source": "https://dev.yorhel.nl/yxml",
+      "github_stars": null
     },
     {
       "name": "ezxml",
-      "status": "unresolved_no_primary_metric",
+      "status": "excluded_below_star_threshold",
       "language": "C",
       "conan_recipe": false,
       "popcon_installed": null,
       "homebrew_install_365d": null,
-      "reason": "Unmaintained single-file parser; not packaged in Debian or Conan. Not built.",
-      "source": "https://ezxml.sourceforge.net/"
+      "reason": "No Debian package. Upstream is SourceForge; the GitHub copy lxfontes/ezxml has 52 stars and no tags, so the star fallback does not apply. Not built.",
+      "source": "https://ezxml.sourceforge.net/",
+      "github_stars": null
     },
     {
       "name": "sxmlc",
-      "status": "unresolved_no_primary_metric",
+      "status": "excluded_below_star_threshold",
       "language": "C",
       "conan_recipe": false,
       "popcon_installed": null,
       "homebrew_install_365d": null,
-      "reason": "Single-file parser; not packaged in Debian or Conan. Not built.",
-      "source": "https://sourceforge.net/projects/sxmlc/"
+      "reason": "No Debian package. Under the C/C++ star fallback matthieu-labas/sxmlc has 22 GitHub stars (tags up to v4.6.0), below the 100-star threshold. Not built.",
+      "source": "https://sourceforge.net/projects/sxmlc/",
+      "github_stars": 22
     },
     {
       "name": "xmlsec",
@@ -367,6 +371,17 @@
       "search": "round-4 targeted Debian binary lookup (C parsers named in XML parser comparisons)",
       "reason": "Selected and verified: RXP 1.5.0 (Debian orig plus Debian patches) NewParser/ParserSetFlag(XMLNamespaces)/ReadXBit gave the shared namespace-resolved summary of both valid controls without a declaration count (RXP returns no xmlns declarations); 2,544 RXP lines covered (987 in xmlparser.c); stable AFL++ differential (903 vs 942 tuples, 119 differing). Own parser family; 16 installations are a very weak signal.",
       "source": "https://www.ltg.ed.ac.uk/~richard/rxp.html"
+    },
+    {
+      "name": "xml.c",
+      "status": "unresolved_control_mismatch",
+      "language": "C",
+      "conan_recipe": false,
+      "popcon_installed": null,
+      "homebrew_install_365d": null,
+      "github_stars": 225,
+      "reason": "Star-fallback candidate (225 stars, tag release-0.2.0, MIT): xml_parse_document returns NULL on both valid controls because it parses tags without attributes; it also has no CDATA or entity decoding (data/c/xml/xmlc-lead-check.json).",
+      "source": "https://github.com/ooxi/xml.c"
     }
   ],
   "debian_search": {

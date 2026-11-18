@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "name": "xml.c",
+  "checked_at_utc": "2026-11-18T07:40:00+00:00",
+  "status": "unresolved_failed_control",
+  "release": "release-0.2.0",
+  "repository": "https://github.com/ooxi/xml.c",
+  "source_archive": "https://github.com/ooxi/xml.c/archive/refs/tags/release-0.2.0.tar.gz",
+  "source_archive_sha256": "070d55386c1aaeb131a0481f50f1beeecb71e940cd9de207a285d3073d0d7e1b",
+  "tag_commit": "591052005ba3a92bcc944e45eadf86f0faec1626",
+  "license": "MIT (LICENSE)",
+  "documented_input_api": "xml_parse_document(uint8_t *buffer, size_t length), then xml_document_root, xml_node_name, xml_node_content, xml_node_children / xml_node_child (README usage, src/xml.h)",
+  "documentation": "https://github.com/ooxi/xml.c/blob/release-0.2.0/README.md",
+  "popularity": {
+    "metric": "GitHub stars (secondary, repository interest, not downloads)",
+    "value": 225,
+    "source": "https://api.github.com/repos/ooxi/xml.c",
+    "snapshot": "data/c/xml/registry-snapshot.json#round_6_star_fallback"
+  },
+  "probe": "Throwaway tree printer compiled with clang against the pinned src/xml.c in the pinned ubuntu image (linux/arm64, no network); it read each valid control and called xml_parse_document once. Not committed as a project.",
+  "controls": {
+    "controls/xml/catalog-ns.xml": {
+      "sha256": "dffe6fcacbea13d5da12b3939756d22cf0a425db8d21c8295ff6a01f8ed22928",
+      "result": "rejected: xml_parse_document returned NULL (\"xml_parse_node::tag missmatch\" at 3:49)"
+    },
+    "controls/xml/order-default-ns.xml": {
+      "sha256": "c0ac18eb0c6e31f6cd920302ac46d9a13959caaa78f2ee7f1f01e0f9a43eccba",
+      "result": "rejected: xml_parse_document returned NULL (\"xml_parse_node::tag missmatch\" at 5:95)"
+    }
+  },
+  "cause": "The README describes xml.c as a subset parser like GLib GMarkup. Its xml_parse_tag_open is documented as \"Parses an opening XML tag without attributes\": the tag name runs to \">\", so <item id=\"a1\"> never matches </item>. xml.c also states that CDATA is not supported and has no entity or character-reference decoding, XML declaration or comment handling.",
+  "decision": "Fails both valid controls; the cell keeps its tenth slot open."
+}
