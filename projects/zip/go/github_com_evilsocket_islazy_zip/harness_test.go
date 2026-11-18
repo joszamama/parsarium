@@ -13,7 +13,7 @@ import (
 const parserName = "github.com/evilsocket/islazy/zip"
 const expectedJSON = "{\"name\":\"hello.txt\",\"text\":\"parsarium\\n\"}"
 
-func parseControl(source string) (map[string]any, error) {
+func parseControl(source string) (any, error) {
     reader, writer, err := os.Pipe()
     if err != nil { return nil, err }
     originalStdout, originalArgs := os.Stdout, os.Args
@@ -23,7 +23,7 @@ func parseControl(source string) (map[string]any, error) {
     writer.Close()
     data, err := io.ReadAll(reader)
     if err != nil { return nil, err }
-    var output map[string]any
+    var output any
     err = json.Unmarshal(data, &output)
     return output, err
 }
