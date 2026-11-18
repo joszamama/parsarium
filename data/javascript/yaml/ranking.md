@@ -74,4 +74,81 @@ npm downloads, 2026-10-18 to 2026-11-16 (last month), captured 2026-11-17 ([snap
 | eslint-plugin-yaml | excluded | 123,010 | js-yaml 4.1.0 via dependency |
 | write-yaml | excluded | 96,436 | emitter |
 
+### Round-4 leads (2026-11-18)
+
+Round-4 discovery routes and every decision are in [leads.json](leads.json), [round4-lead-probes.json](round4-lead-probes.json) and the `round_4_discovery` block of the [snapshot](registry-snapshot.json).
+
+| Lead | Status | Metric | Parser family |
+| --- | --- | ---: | --- |
+| c12 | excluded_shared_family | 152,424,717 | confbox via dependency |
+| rc-config-loader | excluded_shared_family | 9,462,343 | js-yaml via dependency |
+| @swagger-api/apidom-ast | excluded | 5,356,695 | ApiDOM AST helpers |
+| auto-config-loader | excluded_shared_family | 521,090 | yaml-eslint-parser via dependency |
+| @stacksjs/ts-i18n | excluded | 306,920 | i18n loader |
+| json2yaml | excluded | 209,445 | emitter |
+| vite-plugin-i18next-loader | excluded_shared_family | 159,102 | js-yaml via dependency |
+| yamlish | excluded_control_failed | 152,534 | yamlish (TAP YAMLish subset) |
+| hexo-front-matter | excluded_shared_family | 123,361 | eemeli/yaml via dependency |
+| @alexlafroscia/yaml-merge | excluded_shared_family | 90,266 | js-yaml via dependency |
+| jest-transform-yaml | excluded_shared_family | 76,075 | js-yaml via dependency |
+| merge-yaml | excluded_shared_family | 75,420 | js-yaml via dependency |
+| yaml-jest-transform | excluded_shared_family | 74,690 | js-yaml via dependency |
+| bun-plugin-yaml | excluded_shared_family | 71,116 | js-yaml via dependency |
+| prettier-plugin-yaml | excluded_shared_family | 68,911 | eemeli/yaml via dependency |
+| yaml-jest | excluded_shared_family | 67,995 | js-yaml via dependency |
+| @veryfront/ext-yaml | excluded_shared_family | 61,861 | eemeli/yaml via dependency |
+| cloudformation-schema-js-yaml | excluded | 61,567 | js-yaml schema |
+| esbuild-plugin-yaml | excluded_shared_family | 53,375 | js-yaml via dependency |
+| @itgorillaz/configify | excluded_shared_family | 45,915 | js-yaml via dependency |
+| @alienfast/i18next-loader | excluded_shared_family | 41,718 | js-yaml via dependency |
+| yaml-validator | excluded_shared_family | 39,936 | js-yaml via dependency |
+| remark-parse-yaml | excluded_shared_family | 39,470 | js-yaml via dependency |
+| read-yaml | excluded_shared_family | 38,545 | js-yaml via dependency |
+| merge-yaml-cli | excluded_shared_family | 37,308 | js-yaml via dependency |
+| @aid-framework/spec | excluded_shared_family | 36,879 | eemeli/yaml via dependency |
+| unplugin-yaml | excluded_shared_family | 36,572 | eemeli/yaml via dependency |
+| remark-yaml-config | excluded_shared_family | 35,267 | eemeli/yaml via dependency |
+| @citation-js/plugin-yaml | excluded_shared_family | 35,061 | js-yaml via dependency |
+| gatsby-transformer-yaml | excluded_shared_family | 34,368 | js-yaml via dependency |
+| @redocly/yaml-language-server-parser | excluded_duplicate_fork | 32,613 | yaml-ast-parser (js-yaml 3.x fork) |
+| yaml-sort | excluded_shared_family | 30,442 | js-yaml via dependency |
+| yaml-include | excluded | 26,883 | js-yaml 3.x custom tags |
+| @cordisjs/unyaml | excluded_shared_family | 26,500 | js-yaml via dependency |
+| frontmatter | excluded_shared_family | 19,825 | js-yaml via dependency |
+| env-yaml | excluded_shared_family | 18,886 | js-yaml via dependency |
+| yaml-language-server-parser | excluded_duplicate_fork | 18,299 | yaml-ast-parser (js-yaml 3.x fork) |
+| yaml-edit | excluded | 17,112 | line editor (no YAML parser) |
+| gulp-yaml | excluded_shared_family | 16,739 | js-yaml via dependency |
+| @kanonak-protocol/sdk | excluded_shared_family | 15,690 | eemeli/yaml and js-yaml via dependency |
+| yaml-flat-loader | excluded_shared_family | 12,074 | js-yaml via dependency |
+| vite-yaml-plugin | excluded_shared_family | 11,776 | js-yaml via dependency |
+| yaml-ast-parser-custom-tags | excluded_duplicate_fork | 11,649 | yaml-ast-parser (js-yaml 3.x fork) |
+| @maikolib/vite-plugin-yaml | excluded_shared_family | 11,579 | js-yaml via dependency |
+| yaml-env-defaults | excluded_shared_family | 9,738 | js-yaml via dependency |
+| @mazix/n8n-nodes-converter-documents | excluded | 9,169 | n8n node |
+| mocha-yaml-loader | excluded_shared_family | 8,367 | js-yaml via dependency |
+| require-yml | excluded_shared_family | 7,529 | js-yaml via dependency |
+| yaml-boost | excluded_shared_family | 7,333 | js-yaml 4.x via dependency |
+| quaff | excluded_shared_family | 7,192 | js-yaml via dependency |
+| gulp-front-matter | excluded_shared_family | 6,926 | front-matter via dependency |
+| coc-yaml | excluded_no_library_api | 6,680 | yaml-language-server |
+| yaml2json | excluded_shared_family | 5,759 | eemeli/yaml via dependency |
+| yaml-import-loader | excluded_shared_family | 5,703 | js-yaml via dependency |
+| js-yaml-lite | excluded_duplicate_fork | 5,494 | js-yaml 3.x (minified copy) |
+| enhanced-yaml | excluded_shared_family | 5,088 | eemeli/yaml 1.x via dependency |
+| smart-fs | excluded_shared_family | 4,952 | js-yaml and yaml-boost via dependency |
+| yml-register | excluded_shared_family | 4,539 | js-yaml via dependency |
+| dotenv-yaml-safe | excluded_shared_family | 4,476 | env-yaml via dependency |
+| unreadconfig | excluded_shared_family | 4,154 | yaml-eslint-parser via dependency |
+| instant-yaml | excluded_control_failed | 3,521 | instant-yaml own single-pass parser (YAML subset) |
+| @xliic/preserving-json-yaml-parser | excluded_undocumented_api | 1,720 | eemeli/yaml 2.9.1 via own value visitor |
+| yaml-parser | excluded_duplicate_fork | 1,327 | js-yaml 3.x (fork) |
+| tinyaml | excluded_ten_path_ceiling | 939 | tinyaml own zero-dependency parser |
+| tetra-stream | excluded_shared_family | 769 | eemeli/yaml 2.x via dependency |
+| yaml-transmute | excluded_shared_family | 530 | eemeli/yaml 2.x via dependency |
+| lightning-yaml | excluded_ten_path_ceiling | 352 | lightning-yaml own zero-dependency parser |
+| mapped-yaml | excluded_control_failed | 51 | eemeli/yaml 2.x via own location walker |
+| yayp | excluded_ten_path_ceiling | 22 | yayp own parser |
+| @agentine/yamlite | excluded_ten_path_ceiling | 16 | @agentine/yamlite own zero-dependency parser |
+
 Standard and runtime APIs: none documented ([standard.json](standard.json)).

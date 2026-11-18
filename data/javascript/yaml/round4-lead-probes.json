@@ -1,0 +1,129 @@
+{
+ "checked_at": "2026-11-18",
+ "environment": "node@sha256:c8890e48c4572d2f912bf787272b34d122a4009911a5aafe604912194ff89c47 (Node 26.10.0, linux/arm64); packages installed from the npm registry at the listed versions; exploratory probes, not pinned harnesses (yaml.min is gated separately in projects/yaml/javascript/yaml_min)",
+ "controls": [
+  "controls/yaml/catalog.yaml",
+  "controls/yaml/order.yaml"
+ ],
+ "oracle": "hand-written typed trees in controls/yaml/check_controls.py",
+ "mapping": "native values mapped with the same typing rule as the selected JavaScript adapters (finite integral number -> int)",
+ "probes": [
+  {
+   "package": "yamlish",
+   "version": "0.0.7",
+   "call": "decode(text)",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": false
+    },
+    "order.yaml": {
+     "matches_oracle": false
+    }
+   }
+  },
+  {
+   "package": "instant-yaml",
+   "version": "0.1.5",
+   "call": "YAML.parse(text)",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": false
+    },
+    "order.yaml": {
+     "matches_oracle": false
+    }
+   }
+  },
+  {
+   "package": "mapped-yaml",
+   "version": "0.2.2",
+   "call": "parse(text) with {object, location} wrappers stripped",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": false
+    },
+    "order.yaml": {
+     "matches_oracle": false
+    }
+   }
+  },
+  {
+   "package": "@xliic/preserving-json-yaml-parser",
+   "version": "2.4.0",
+   "call": "parseYaml(text) (no errors)",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": true
+    },
+    "order.yaml": {
+     "matches_oracle": true
+    }
+   }
+  },
+  {
+   "package": "yaml-parser",
+   "version": "3.5.3",
+   "call": "safeLoad(text)",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": true
+    },
+    "order.yaml": {
+     "matches_oracle": true
+    }
+   }
+  },
+  {
+   "package": "yaml.min",
+   "version": "2.0.0",
+   "call": "parse(text)",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": true
+    },
+    "order.yaml": {
+     "matches_oracle": true
+    }
+   }
+  },
+  {
+   "package": "lightning-yaml",
+   "version": "0.1.1",
+   "call": "parse(text)",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": true
+    },
+    "order.yaml": {
+     "matches_oracle": true
+    }
+   }
+  },
+  {
+   "package": "yayp",
+   "version": "1.3.0",
+   "call": "load(text)",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": true
+    },
+    "order.yaml": {
+     "matches_oracle": true
+    }
+   }
+  },
+  {
+   "package": "@agentine/yamlite",
+   "version": "0.1.0",
+   "call": "load(text)",
+   "controls": {
+    "catalog.yaml": {
+     "matches_oracle": true
+    },
+    "order.yaml": {
+     "matches_oracle": true
+    }
+   }
+  }
+ ]
+}
