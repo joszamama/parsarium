@@ -23,13 +23,24 @@ Receipts: [libgda](../../../projects/sql/c/libgda/verification.json) and its [AF
 | postgresql-18 | 104,539 | excluded | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | unixodbc | 58,128 | excluded | unixODBC driver manager |
 | spatialite | 30,735 | excluded | SpatiaLite SQLite extension |
+| tree-sitter | 15,318 | excluded | tree-sitter C runtime (no SQL grammar) |
 | freetds | 8,190 | excluded | FreeTDS TDS client library |
 | sqlcipher | 3,786 | excluded | SQLite (fork) |
 | libgda5 | 2,105 | selected | libgda Lemon-generated SQL parser |
 | psqlodbc | 1,581 | excluded | PostgreSQL ODBC driver |
+| virtuoso-opensource | 967 | excluded | OpenLink Virtuoso SQL/SPARQL engine |
+| cowsql | 728 | excluded | SQLite (distributed engine) |
 | mdbtools | 579 | excluded | libmdbsql lex/yacc grammar for Access databases |
+| mydumper | 382 | excluded | — |
+| dqlite | 209 | excluded | SQLite (distributed engine) |
+| sqliteodbc | 180 | excluded | SQLite |
+| pgpool2 | 57 | excluded | PostgreSQL grammar (copy compiled into pgpool-II) |
 | libpg-query | 41 | selected | PostgreSQL grammar (libpg_query extraction of the PostgreSQL server parser) |
 | duckdb | 40 | excluded | DuckDB PEG parser (own grammar since 2.0.0; 1.x used a libpg_query-derived grammar) |
+| tarantool | 24 | excluded | Tarantool SQL (SQLite-derived front end) |
+| libcypher-parser | 22 | excluded | — |
 | tree-sitter-sql | 8 | selected | tree-sitter-sql grammar on the tree-sitter C runtime |
+| liteparser (sqliteai/liteparser) | n/a | unresolved_no_primary_metric | SQLite grammar (Lemon parse.y extraction) |
+| libinjection | n/a | excluded | — |
 
 Reasons are in [leads.json](leads.json). Standard and runtime findings are in [standard.json](standard.json).

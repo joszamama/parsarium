@@ -163,6 +163,116 @@
       "family": "KDE FutureSQL asynchronous database wrapper",
       "documented_api_lead": null,
       "reason": "Round 3 targeted lookup. Asynchronous Qt database access library (QtSql drivers underneath); it passes statement text to the database driver and has no SQL parser. Debian popcon sourcemax rank 1,911, 24,225 installations (pinned snapshot)."
+    },
+    {
+      "name": "mysql-9.7",
+      "status": "excluded",
+      "metric_value": 5827,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "MySQL server grammar (sql_yacc.yy)",
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. MySQL server and client source package: the server's bison grammar is compiled into mysqld and is not a documented library API (same grounds as mariadb in the C cell). Debian popcon sourcemax rank 3,576, 5,827 installations (pinned snapshot)."
+    },
+    {
+      "name": "firebird4.0",
+      "status": "excluded",
+      "metric_value": 18423,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "Firebird DSQL parser (internal)",
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. Firebird database engine; its DSQL parser is internal to the engine and has no documented library syntax-tree API. Debian popcon sourcemax rank 2,441, 18,423 installations (pinned snapshot)."
+    },
+    {
+      "name": "firebird3.0",
+      "status": "excluded",
+      "metric_value": 11394,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "Firebird DSQL parser (internal)",
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. Older Firebird engine series; same grounds as firebird4.0. Debian popcon sourcemax rank 2,864, 11,394 installations (pinned snapshot)."
+    },
+    {
+      "name": "apache-arrow",
+      "status": "excluded",
+      "metric_value": 5700,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. Columnar data libraries; Acero executes Substrait or builder-made plans and Arrow ships no SQL parser. Debian popcon sourcemax rank 3,604, 5,700 installations (pinned snapshot)."
+    },
+    {
+      "name": "mysql-connector-c++",
+      "status": "excluded",
+      "metric_value": 125,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. MySQL client library; the X DevAPI parses CRUD condition expressions, not SQL statements, and the classic API sends SQL text to the server. Debian popcon sourcemax rank 15,101, 125 installations (pinned snapshot)."
+    },
+    {
+      "name": "sqlsmith",
+      "status": "excluded",
+      "metric_value": 5,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. Random SQL query generator for testing servers; it emits SQL and has no parser API. Debian popcon sourcemax rank 33,355, 5 installations (pinned snapshot)."
+    },
+    {
+      "name": "usql",
+      "status": "excluded",
+      "metric_value": 5,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. The Debian source usql is xo/usql (Go command-line SQL client; Homepage and XS-Go-Import-Path github.com/xo/usql in debian/control), not the C++ cybergarage/usql parser; an identical short name does not establish source identity. Debian popcon sourcemax rank 33,394, 5 installations (pinned snapshot)."
+    },
+    {
+      "name": "cybergarage/usql",
+      "status": "unresolved_no_primary_metric",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "cybergarage uSQL parser",
+      "documented_api_lead": null,
+      "reason": "Round-4 GitHub discovery (search 'sql parser language:C++', 2026-11-18; stars are not used). BSD-3-Clause C++ SQL parser (tags up to 0.8.2). No Debian source package (Debian 'usql' is the unrelated Go client) and no vcpkg or Conan Center port, so it has no admissible metric and was not built."
+    },
+    {
+      "name": "sqltoast (jaypipes/sqltoast)",
+      "status": "unresolved_no_primary_metric",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "sqltoast hand-written C++ parser",
+      "documented_api_lead": null,
+      "reason": "Round-4 GitHub discovery. Apache-2.0 C++ SQL parser with one tag (0.1) and no change since 2021. No Debian source package, vcpkg or Conan Center port, so it has no admissible metric and was not built."
+    },
+    {
+      "name": "GoogleSQL (google/zetasql)",
+      "status": "unresolved_no_primary_metric",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "GoogleSQL/ZetaSQL analyzer front end",
+      "documented_api_lead": null,
+      "reason": "Round-4 lead (task list: ZetaSQL). Apache-2.0 C++ SQL parser and analyzer (release 2026.11.2). No Debian source package in the pinned snapshot and no vcpkg or Conan Center port, so it has no admissible metric and was not built."
+    },
+    {
+      "name": "ClickHouse parsers",
+      "status": "excluded",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "ClickHouse server parser (internal)",
+      "documented_api_lead": null,
+      "reason": "Round-4 lead (task list: ClickHouse parser libs). ClickHouse's SQL parser (src/Parsers) is part of the server source and is not released as a standalone library; no clickhouse source package is in the pinned popcon snapshot, and vcpkg's clickhouse-cpp is a client without a parser."
     }
   ]
 }

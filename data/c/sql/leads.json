@@ -135,6 +135,116 @@
       "documented_api_lead": "ts_parser_parse_string with tree_sitter_sql() (tree-sitter C API)",
       "reason": "Round-4 targeted lookup in the pinned popcon snapshot (source names starting with 'tree-sitter', outside the first 100 'sql' hits). Debian source tree-sitter-sql 0.3.11-1 (rank 30,115, 8 installations) ships the DerekStride grammar; its only binary is python3-tree-sitter-sql, so the count measures the Python binding. The upstream v0.3.11 release archive's generated src/parser.c and src/scanner.c are byte-identical to the Debian source. With the tree-sitter 0.26.11 C runtime (Debian sid version), ts_parser_parse_string builds a concrete syntax tree (statement, select_expression, relation, join, where, group_by, order_by, invocation, insert, list, literal) that gives the oracle summary for both valid controls.",
       "selected_release": "0.3.11"
+    },
+    {
+      "name": "tree-sitter",
+      "status": "excluded",
+      "metric_value": 15318,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "tree-sitter C runtime (no SQL grammar)",
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup (source names starting with 'tree-sitter'). The tree-sitter incremental parsing runtime ships no grammar; it parses SQL only with the separate tree-sitter-sql grammar, whose path (selected) already pins this runtime (0.26.11) as its dependency. Debian popcon sourcemax rank 2,587, 15,318 installations (pinned snapshot)."
+    },
+    {
+      "name": "virtuoso-opensource",
+      "status": "excluded",
+      "metric_value": 967,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "OpenLink Virtuoso SQL/SPARQL engine",
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. Database server (SQL and SPARQL); its SQL compiler is internal to the server and has no documented library syntax-tree API. Debian popcon sourcemax rank 7,115, 967 installations (pinned snapshot)."
+    },
+    {
+      "name": "cowsql",
+      "status": "excluded",
+      "metric_value": 728,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "SQLite (distributed engine)",
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. Distributed SQLite engine (a dqlite fork); statements are compiled by SQLite, which exposes no syntax tree. Debian popcon sourcemax rank 7,762, 728 installations (pinned snapshot)."
+    },
+    {
+      "name": "dqlite",
+      "status": "excluded",
+      "metric_value": 209,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "SQLite (distributed engine)",
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. Distributed SQLite engine; statements are compiled by SQLite, which exposes no syntax tree. Debian popcon sourcemax rank 12,130, 209 installations (pinned snapshot)."
+    },
+    {
+      "name": "mydumper",
+      "status": "excluded",
+      "metric_value": 382,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. MySQL backup and restore tool; it splits dump files into statements for loading and has no SQL syntax-tree library API. Debian popcon sourcemax rank 9,871, 382 installations (pinned snapshot)."
+    },
+    {
+      "name": "sqliteodbc",
+      "status": "excluded",
+      "metric_value": 180,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "SQLite",
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. ODBC driver over SQLite; statement text goes to sqlite3_prepare, no syntax tree. Debian popcon sourcemax rank 12,830, 180 installations (pinned snapshot)."
+    },
+    {
+      "name": "pgpool2",
+      "status": "excluded",
+      "metric_value": 57,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "PostgreSQL grammar (copy compiled into pgpool-II)",
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. Connection-pooling middleware that compiles its own copy of the PostgreSQL raw parser (src/parser) into the pgpool server; no library or development package exposes it (libpg_query is the library form of that grammar and is selected). Debian popcon sourcemax rank 19,244, 57 installations (pinned snapshot)."
+    },
+    {
+      "name": "tarantool",
+      "status": "excluded",
+      "metric_value": 24,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "Tarantool SQL (SQLite-derived front end)",
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup. In-memory database server whose SQL front end is derived from SQLite's and is internal to the server; no library syntax-tree API. Debian popcon sourcemax rank 23,644, 24 installations (pinned snapshot)."
+    },
+    {
+      "name": "libcypher-parser",
+      "status": "excluded",
+      "metric_value": 22,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 targeted lookup (source names containing 'parser'). Parses the Cypher graph query language, not SQL. Debian popcon sourcemax rank 23,974, 22 installations (pinned snapshot)."
+    },
+    {
+      "name": "liteparser (sqliteai/liteparser)",
+      "status": "unresolved_no_primary_metric",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": "SQLite grammar (Lemon parse.y extraction)",
+      "documented_api_lead": null,
+      "reason": "Round-4 GitHub discovery (search 'sql parser language:C', 2026-11-18; stars are not used). Apache-2.0 C library, tag 1.0.0, whose README documents an AST with JSON serialization from a Lemon grammar extracted from SQLite parse.y. No Debian source package in the pinned popcon snapshot and no vcpkg or Conan Center port, so it has no admissible metric and was not built."
+    },
+    {
+      "name": "libinjection",
+      "status": "excluded",
+      "metric_value": null,
+      "metric_error": null,
+      "latest_release_observed": null,
+      "family": null,
+      "documented_api_lead": null,
+      "reason": "Round-4 GitHub discovery (search 'sql parser language:C'). SQL-injection detector that tokenizes and fingerprints input; no statement tree. No Debian source package in the pinned snapshot."
     }
   ]
 }
