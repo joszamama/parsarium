@@ -61,13 +61,14 @@
   },
   {
     "name": "parson",
-    "status": "unresolved_no_primary_metric",
+    "status": "excluded_untagged_release",
     "language": "C",
     "conan_recipe": true,
     "popcon_installed": null,
     "popcon_rank": null,
-    "reason": "Technically verified as a candidate (local commit 271447a6): pinned 1.5.4 (MIT), json_parse_string on local text, both valid controls match the full nested value, 530 own parson.c lines covered, 34 stable AFL++ tuple differences between controls. Not selected: no Debian source package in the pinned popcon snapshot, so no value on this cell's primary metric; GitHub stars (1,481) are supplemental and PROTOCOL.md allows star fallback only in PLY cells.",
-    "source": "https://github.com/kgabis/parson"
+    "reason": "Technically verified as a candidate (local commit 271447a6): 1.5.4 (MIT), json_parse_string on local text, both valid controls match, 530 own parson.c lines, 34 stable AFL++ tuple differences. Not selected under the C/C++ star fallback: kgabis/parson publishes no git tags or GitHub releases (checked 2026-11-18), so only an untagged master commit can be pinned, and the star rule requires a tagged release. No Debian source package.",
+    "source": "https://github.com/kgabis/parson",
+    "github_stars": 1481
   },
   {
     "name": "frozen",
@@ -116,5 +117,60 @@
     "source": "https://sources.debian.org/src/tree-sitter-json/0.24.8-3/",
     "documentation": "https://sources.debian.org/src/tree-sitter-json/0.24.8-3/src/node-types.json/",
     "reason": "Excluded under the tree-sitter rule in PROTOCOL.md: tree-sitter-json 0.24.8 returns a concrete syntax tree whose string nodes keep escape_sequence children undecoded (node-types.json SHA-256 620b6f5d38676a97526e9d128972d4b156ddbdf6e130cd7e6b9c35e6823e943f). Both controls need decoded strings (caf\\u00e9 \\\"quoted\\\", \\u0041), so the harness would have to decode JSON escapes itself, as with the jsmn tokenizer. Not built. 7 Debian installations would also have been a very weak signal."
+  },
+  {
+    "name": "json.h",
+    "status": "resolved_verified_selected",
+    "language": "C",
+    "conan_recipe": false,
+    "popcon_installed": null,
+    "popcon_rank": null,
+    "github_stars": 846,
+    "reason": "Selected through the C/C++ GitHub-star fallback for the tenth slot (846 stars, tag pre-ai): json_parse on local bytes, both valid controls match, 678 json.h lines covered, 12 stable AFL++ tuple differences. No Debian source package.",
+    "source": "https://github.com/sheredom/json.h"
+  },
+  {
+    "name": "sj.h",
+    "status": "excluded_untagged_release",
+    "language": "C",
+    "conan_recipe": false,
+    "popcon_installed": null,
+    "popcon_rank": null,
+    "github_stars": 1556,
+    "reason": "rxi/sj.h has no tag or GitHub release, so the star fallback cannot pin it; it is also a span reader that leaves string escapes undecoded (like jsmn).",
+    "source": "https://github.com/rxi/sj.h"
+  },
+  {
+    "name": "lua-cjson",
+    "status": "excluded",
+    "language": "C",
+    "conan_recipe": false,
+    "popcon_installed": null,
+    "popcon_rank": null,
+    "github_stars": 1001,
+    "reason": "Lua C module exposing a lua_State API (Lua cell material), not a C JSON library.",
+    "source": "https://github.com/mpx/lua-cjson"
+  },
+  {
+    "name": "Barenboim/json-parser",
+    "status": "excluded_ten_path_ceiling",
+    "language": "C",
+    "conan_recipe": false,
+    "popcon_installed": null,
+    "popcon_rank": null,
+    "github_stars": 700,
+    "reason": "Tagged (v1.5.3), but below json.h (846 stars) in the star order; the tenth slot is filled. Not built.",
+    "source": "https://github.com/Barenboim/json-parser"
+  },
+  {
+    "name": "mjson",
+    "status": "excluded_ten_path_ceiling",
+    "language": "C",
+    "conan_recipe": false,
+    "popcon_installed": null,
+    "popcon_rank": null,
+    "github_stars": 473,
+    "reason": "Tagged (1.2.7), but below json.h in the star order; the tenth slot is filled. Not built.",
+    "source": "https://github.com/cesanta/mjson"
   }
 ]
