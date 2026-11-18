@@ -62,6 +62,118 @@
       "source": "https://github.com/valderman/4koma",
       "status": "unresolved_not_run",
       "api_lead_checked_against_pinned_release": false
+    },
+    {
+      "name": "org.openrewrite:rewrite-toml",
+      "metric_value": 567,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "OpenRewrite TOML (own ANTLR grammar in org.openrewrite.toml.internal.grammar, lossless syntax tree)",
+      "api_lead": "TomlParser.builder().build().parse(String...) -> Toml.Document of Toml.Table/Toml.KeyValue/Toml.Array/Toml.Literal (TomlType.Primitive and getValue())",
+      "note": "OpenRewrite's TOML LST for refactoring recipes. Highest round-4 value; three of 206 releases have no deps.dev :dependents record and count as 0.",
+      "source": "https://github.com/openrewrite/rewrite/tree/main/rewrite-toml",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "8.90.4",
+      "version_seen": "8.90.4",
+      "found_by": "round_4_targeted_lookup",
+      "evidence": "rewrite-toml 8.90.4: Toml.Literal types integers (Long), floats (Double, 1e3 as 1000.0), booleans and the four java.time kinds correctly, but String literals keep their source body: escapes is returned as the raw text tab\\tquote\\\"backslash\\\\ \\u00e9 and multiline as the raw body with its leading newline and line-ending backslash. Dotted keys and table headers are single Toml.Identifier names (site.\"example.com\", a.b.c, servers.alpha), so a typed tree would need the harness to unescape strings and split keys itself. Both controls fail as returned (service-config on the escaped title and the [servers.alpha] header).",
+      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-18"
+    },
+    {
+      "name": "org.apache.groovy:groovy-toml",
+      "metric_value": 15,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "Jackson TOML family (wrapper: TomlSlurper over jackson-dataformat-toml 2.22.2 and groovy-json)",
+      "api_lead": "new groovy.toml.TomlSlurper().parseText(String)",
+      "note": "Wrapper over the selected jackson-dataformat-toml path; it would count only as a labelled wrapper with its own control match and differential in Jackson's parser.",
+      "source": "https://groovy-lang.org/processing-toml.html",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "6.0.0",
+      "version_seen": "6.0.0",
+      "found_by": "round_4_targeted_lookup",
+      "evidence": "groovy-toml 6.0.0: TomlSlurper converts the Jackson tree to JSON and back through JsonSlurper, so every TOML date-time comes back as a plain String (owner.since '1979-05-27T07:32:00Z', local date/time strings) and floats as BigDecimal (1e3 as 1E+3). Integers and floats stay apart, but the date-time kinds are lost: both controls fail.",
+      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-18"
+    },
+    {
+      "name": "io.ous:jtoml",
+      "metric_value": 9,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "jtoml (asafh, io.ous; own tokenizer and parser, TOML 0.x)",
+      "api_lead": "JToml.parseString(String) -> Toml (a HashMap TomlTable)",
+      "note": "Listed in the toml-lang wiki Old.md (asafh/jtoml); Maven Central search 'jtoml'. Last release 2017; dates are java.util.Date.",
+      "source": "https://github.com/asafh/jtoml",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "2.0.0",
+      "version_seen": "2.0.0",
+      "found_by": "round_4_targeted_lookup",
+      "evidence": "io.ous:jtoml 2.0.0 parses service-config (offset date-time only as a java.util.Date) and rejects typed-scalars: ParseException 'Newline expected after assignment at 6:7' on hex = 0xDEAD_BEEF. java.util.Date cannot carry local date-time, local date or local time.",
+      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-18"
+    },
+    {
+      "name": "com.github.jezza:toml",
+      "metric_value": 5,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "jezza toml (own JFlex lexer and hand-written TomlParser, TOML 0.5)",
+      "api_lead": "Toml.from(Reader) -> TomlTable (HashMap); values Boolean, Long, Double, String, TomlArray, TomlTable, java.time TemporalAccessor",
+      "note": "Maven Central 'toml' results 101-335 (page 1 of the recorded query listed it but no lead was recorded). Releases 1.2 and 1.2-java-8 are the same code for two Java levels; the metric sums both lines.",
+      "source": "https://github.com/Jezza/toml",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "1.2",
+      "version_seen": "1.2",
+      "found_by": "round_4_targeted_lookup",
+      "evidence": "com.github.jezza:toml 1.2 in the pinned project image (eclipse-temurin@sha256:b8705e93..., linux/arm64, strict UTF-8 Reader): service-config matches the expected typed tree exactly; typed-scalars matches except strings.escapes, where the basic-string escape \\\\ comes back as two backslashes ('tab\\tquote\"backslash\\\\\\\\ é' instead of one backslash before the space). Integer/float typing and the four date-time kinds (TemporalAccessor queries) are correct. The project was not kept.",
+      "run": "Docker eclipse-temurin@sha256:b8705e936964c228dfce359e63dbf08f6c69cb380ed1d576b1f6b1064f15567d (linux/arm64), toml-1.2.jar sha256 1cd8addce322c12aeba090e3e4b73ad098d899a518d27f2f5f3d3597a836a5ce"
+    },
+    {
+      "name": "tech.sparse:toml-scala_2.12",
+      "metric_value": 3,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "toml-scala (sparsetech; fastparse grammar)",
+      "api_lead": "toml.Toml.parse(String) -> Either[(List[String], String), Value.Tbl]",
+      "note": "Scala cross-built coordinates: _2.12 (3), _2.13 (2), _2.11 (0); each coordinate is a separate deps.dev package and the values are not added.",
+      "source": "https://github.com/sparsetech/toml-scala",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "0.2.2",
+      "version_seen": "0.2.2 (_2.13 jar)",
+      "found_by": "round_4_targeted_lookup",
+      "evidence": "toml-scala_2.13 0.2.2 parses service-config into Value.Tbl (Num/Real/Str/Bool/OffsetDateTime) and rejects typed-scalars: Left((List(), End:6:8 ...\"xDEAD_BEEF\")), i.e. no hexadecimal integers.",
+      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-18"
+    },
+    {
+      "name": "me.grison:jtoml",
+      "metric_value": 2,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "jtoml (agrison; regex-based SimpleTomlParser, 2013)",
+      "api_lead": "me.grison.jtoml.impl.Toml.parse(String)",
+      "note": "Listed in the toml-lang wiki Old.md (agrison/jtoml).",
+      "source": "https://github.com/agrison/jtoml",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "1.0.0",
+      "version_seen": "1.0.0",
+      "found_by": "round_4_targeted_lookup",
+      "evidence": "me.grison:jtoml 1.0.0 returns dates as java.util.Calendar in the host time zone and, on typed-scalars, drops the whole [integers] and [keys] tables, the literal strings and three date-times, and returns multiline as '\"'.",
+      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-18"
+    },
+    {
+      "name": "com.soywiz:korlibs-serialization-toml-jvm",
+      "metric_value": 2,
+      "metric": "deps.dev directDependentCount summed over all releases",
+      "family": "korlibs TOML (soywiz; small Kotlin reader)",
+      "api_lead": "korlibs.io.serialization.toml.TOML.parseToml(String) -> Map<String, Any?>",
+      "note": "Kotlin multiplatform; the stable com.soywiz.korge coordinate 5.4.0 (1) was run; com.soywiz 6.0.0-alpha2 is a pre-release line (2).",
+      "source": "https://github.com/korlibs/korge",
+      "status": "unresolved_control_failed",
+      "api_lead_checked_against_pinned_release": true,
+      "release": "5.4.0",
+      "version_seen": "5.4.0 (com.soywiz.korge coordinate)",
+      "found_by": "round_4_targeted_lookup",
+      "evidence": "korlibs-serialization-toml-jvm 5.4.0: every date-time is a plain String, underscored/hex/octal/binary integers stay Strings ('1_000_000', '0xDEAD_BEEF'), the literal string loses characters ('C: sarium') and the line-ending backslash of the multiline string is not applied; service-config fails on owner.since as a String.",
+      "run": "host OpenJDK 21.0.2 (darwin/arm64), Maven Central release jars resolved by mvn dependency:copy-dependencies on 2026-11-18"
     }
   ],
   "excluded": [
@@ -70,6 +182,84 @@
       "metric_value": null,
       "status": "excluded",
       "reason": "Apache Tuweni toml 1.3.0 is the retired predecessor of the selected tomlj (tomlj originated as Tuweni toml); not counted as a separate path."
+    },
+    {
+      "name": "tools.jackson.dataformat:jackson-dataformat-toml",
+      "metric_value": 71,
+      "status": "excluded",
+      "reason": "Jackson 3.x line (3.3.0) of the selected com.fasterxml.jackson.dataformat:jackson-dataformat-toml, renamed to the tools.jackson package: its TomlParser.java keeps 77% of the 2.23.0 Parser.java lines and Lexer.java 72% (whitespace-normalized difflib line match over the release sources jars), so it is the same parser family under a successor coordinate, not a separate path."
+    },
+    {
+      "name": "net.consensys.cava:cava-toml",
+      "metric_value": 13,
+      "status": "excluded",
+      "reason": "ConsenSys Cava toml 0.5.0 (2018) is the predecessor of Apache Tuweni toml and so of the selected tomlj; same lineage as the already excluded org.apache.tuweni:toml."
+    },
+    {
+      "name": "io.tmio:tuweni-toml",
+      "metric_value": 4,
+      "status": "excluded",
+      "reason": "Republication of Apache Tuweni toml (2.4.x) after the Apache project retired; tomlj predecessor lineage like org.apache.tuweni:toml."
+    },
+    {
+      "name": "io.hotmoka:io-hotmoka-toml",
+      "metric_value": 7,
+      "status": "excluded",
+      "reason": "Hotmoka module whose only runtime dependency is com.moandjiezana.toml:toml4j 0.7.2 (a lead that rejects the typed-scalars hexadecimal integer); a wrapper of that parser, not a separate path."
+    },
+    {
+      "name": "com.sksamuel.hoplite:hoplite-toml",
+      "metric_value": 22,
+      "status": "excluded",
+      "reason": "Hoplite configuration-mapping source that reads TOML through tomlj (runtime dependency org.tomlj:tomlj); a mapping layer over the selected tomlj path."
+    },
+    {
+      "name": "com.phodal.chapi:chapi-parser-toml",
+      "metric_value": 4,
+      "status": "excluded",
+      "reason": "ANTLR-generated TomlLexer/TomlParser from the grammars-v4 TOML grammar for Chapi code analysis; exposes only the ANTLR parse tree (no decoded values)."
+    },
+    {
+      "name": "com.teesoft:jackson-dataformat-toml",
+      "metric_value": 1,
+      "status": "excluded",
+      "reason": "1.0 (2019) bundles the JavaScript toml.js and runs it through a script engine behind Jackson decorators; not a Java parser path."
+    },
+    {
+      "name": "org.ceylon-lang:ceylon.toml",
+      "metric_value": 1,
+      "status": "excluded",
+      "reason": "Ceylon language module (Ceylon runtime, last release 1.3.3); not a Java library API."
+    },
+    {
+      "name": "com.indoorvivants:toml_3",
+      "metric_value": 0,
+      "status": "excluded",
+      "reason": "Scala TOML parser (_3, _2.13, _2.12 coordinates all 0 on deps.dev): zero recorded adoption; not run."
+    },
+    {
+      "name": "net.cactusthorn.config:toml",
+      "metric_value": 0,
+      "status": "excluded",
+      "reason": "Loader module of the cactusthorn config library; zero recorded adoption; not run."
+    },
+    {
+      "name": "com.syntaxphoenix.syntaxapi:config-toml",
+      "metric_value": 0,
+      "status": "excluded",
+      "reason": "Configuration module of SyntaxAPI; zero recorded adoption; not run."
+    },
+    {
+      "name": "org.scalameta:moped-toml_2.13",
+      "metric_value": 0,
+      "status": "excluded",
+      "reason": "moped command-line configuration module; zero recorded adoption; not run."
+    },
+    {
+      "name": "io.github.bonede:tree-sitter-toml",
+      "metric_value": 0,
+      "status": "excluded",
+      "reason": "Tree-sitter grammar binding (syntax tree only); zero recorded adoption."
     }
   ],
   "promoted": [
@@ -107,5 +297,17 @@
       "status": "promoted_to_verified",
       "found_by": "round_4_targeted_lookup"
     }
-  ]
+  ],
+  "round_4": {
+    "observed": "2026-11-18",
+    "routes": [
+      "Maven Central Solr 'toml' results 101-335 (start=100, 200, 300)",
+      "Maven Central Solr 'jtoml', 'toml4j', 'toml-javalib', 'a:toml', 'clj-toml', 'tomelette'",
+      "toml-lang wiki Home.md and Old.md Java/Kotlin/Scala/Clojure entries",
+      "deps.dev lookups recorded in registry-snapshot.json round_4_targeted_lookups"
+    ],
+    "promoted": [
+      "net.vieiro:toml-java"
+    ]
+  }
 }
