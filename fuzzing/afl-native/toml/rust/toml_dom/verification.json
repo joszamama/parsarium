@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "project": "toml/rust/toml_dom",
+  "pass": true,
+  "base_project_receipt_sha256": "465025b42372313b1bb3964508b2f54806fb98c1368c5838a8b5c08dc27c5d1c",
+  "overlay_file_sha256": {
+    "Cargo.toml": "a0714be53068d9cecfe603efe54fc5654239c2f6ddc5a7ff7881d68e80977808",
+    "Cargo.lock": "c8c6e5507c0729f973da4a34b069ac7634f535d734e29d695065dc4e5a0e6aaf",
+    "afl_fuzzer.rs": "af36bef89365025b9c826c03f26b3a4659e60511ace186318c8381ba769f8e17",
+    "Dockerfile": "2090adc2696f590cedc94085d6e07cc8503c67ad76f6f9c311258668a34f8742",
+    "rustc-scope.sh": "9464f412b109d559fca47eaa451ec1c080c37b46fce39b895cd09bc30cd43d67",
+    "sancov_scope.py": "47d99cef8e14551177974dcc4fe76359328dd9450f5ca6a975d10fef0f08f2e1",
+    "fixed_getrandom.c": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "build.py": "8a1e95c90c6aa9690945013f6beac0ca6e72ccbc0f1c16c24f05773507605eb5"
+  },
+  "afl_package": "4.33c-1.1ubuntu1",
+  "afl_rust_release": "0.18.2",
+  "afl_rust_checksum": "97f234ba65eadcb51ea4e5c33dfdf05d6c512e297b4fb8fd31159e2dac4e7cc8",
+  "parser_source_sha256": "8142718810e97f8b4581a983bdb49676d650cf6be8f5e0094de4396bb8a0db2c",
+  "image_id": "sha256:1699678604c62b96282a1f1daecb6db94e7b9ae8d4dab4ece5421afa3d618676",
+  "platform": "linux/arm64",
+  "control_sha256": "590659301fe3d555dd34803e1aa70ea0befbd5546c8b2ed23f0e0a932a806257",
+  "feedback_edges": 1833,
+  "afl_map_size": 22695,
+  "feedback_kind": "afl_rs_toml_dom_only_sancov_edges",
+  "feedback_scope": "Only toml_dom crate objects carry SanitizerCoverage guards; harness, indexmap, chrono, serde_json, AFL runtime and std are uninstrumented; hash seeds are fixed by the getrandom AFL_PRELOAD shim",
+  "sancov_scope": {
+    "instrumented_crates": [
+      "toml_dom"
+    ],
+    "rlib_guard_bytes": {
+      "toml_dom": 90760
+    },
+    "uninstrumented_rlibs": [
+      "afl",
+      "chrono",
+      "equivalent",
+      "hashbrown",
+      "indexmap",
+      "itoa",
+      "libc",
+      "memchr",
+      "num_traits",
+      "parsarium_toml_toml_dom_harness",
+      "rustc_version",
+      "ryu",
+      "semver",
+      "serde_core",
+      "serde_json",
+      "xdg"
+    ],
+    "binary_guards": 22690
+  },
+  "fixed_hashmap_keys": {
+    "afl_preload": "/work/fixed_getrandom.so",
+    "shim_source": "fixed_getrandom.c",
+    "shim_sha256": "8c8cd6637091891e25eebfe581710a158181817ecc438d9d48948e5c8bc26075",
+    "reason": "toml_dom keeps tables in IndexMaps with std RandomState hashing; constant getrandom bytes fix their seeds; the parser source is unchanged.",
+    "replay_output_unchanged": true
+  },
+  "afl_version_output": "4.33c-1.1ubuntu1",
+  "base_image_id": "sha256:cd8a7b2c0c24a832090ef6169a02575f9342a915f4242e5890e26629b82dcbaa",
+  "variant_sha256": "bfd655fd12df79f6b61ecb258d5713a300b03197f46a7f84f2b1f6d7a19d36d0",
+  "control_output": {
+    "database": {
+      "limits": {
+        "max": {
+          "type": "integer",
+          "value": "10"
+        },
+        "min": {
+          "type": "integer",
+          "value": "-2"
+        }
+      },
+      "ports": [
+        {
+          "type": "integer",
+          "value": "8000"
+        },
+        {
+          "type": "integer",
+          "value": "8001"
+        },
+        {
+          "type": "integer",
+          "value": "8002"
+        }
+      ],
+      "ratio": {
+        "type": "float",
+        "value": "3.25"
+      }
+    },
+    "enabled": {
+      "type": "bool",
+      "value": "true"
+    },
+    "owner": {
+      "name": {
+        "type": "string",
+        "value": "Zoë"
+      },
+      "since": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00Z"
+      }
+    },
+    "products": [
+      {
+        "name": {
+          "type": "string",
+          "value": "Hammer"
+        },
+        "sku": {
+          "type": "integer",
+          "value": "738594937"
+        }
+      },
+      {
+        "color": {
+          "type": "string",
+          "value": "gray"
+        },
+        "name": {
+          "type": "string",
+          "value": "Nail"
+        },
+        "points": [
+          {
+            "x": {
+              "type": "integer",
+              "value": "1"
+            },
+            "y": {
+              "type": "integer",
+              "value": "2"
+            }
+          },
+          {
+            "x": {
+              "type": "integer",
+              "value": "3"
+            },
+            "y": {
+              "type": "integer",
+              "value": "4"
+            }
+          }
+        ]
+      }
+    ],
+    "retries": {
+      "type": "integer",
+      "value": "3"
+    },
+    "servers": {
+      "alpha": {
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.1"
+        },
+        "tags": [
+          {
+            "type": "string",
+            "value": "edge"
+          },
+          {
+            "type": "string",
+            "value": "eu"
+          }
+        ]
+      },
+      "beta": {
+        "enabled": {
+          "type": "bool",
+          "value": "false"
+        },
+        "ip": {
+          "type": "string",
+          "value": "10.0.0.2"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "value": "Parsarium \"service\" control"
+    }
+  },
+  "variant_output": {
+    "floats": {
+      "exponent": {
+        "type": "float",
+        "value": "1000.0"
+      },
+      "fraction": {
+        "type": "float",
+        "value": "3.25"
+      },
+      "mixed": {
+        "type": "float",
+        "value": "0.015625"
+      },
+      "negative": {
+        "type": "float",
+        "value": "-0.5"
+      }
+    },
+    "integers": {
+      "binary": {
+        "type": "integer",
+        "value": "13"
+      },
+      "decimal": {
+        "type": "integer",
+        "value": "99"
+      },
+      "hex": {
+        "type": "integer",
+        "value": "3735928559"
+      },
+      "negative": {
+        "type": "integer",
+        "value": "-17"
+      },
+      "octal": {
+        "type": "integer",
+        "value": "493"
+      },
+      "underscored": {
+        "type": "integer",
+        "value": "1000000"
+      }
+    },
+    "keys": {
+      "a": {
+        "b": {
+          "c": {
+            "type": "integer",
+            "value": "1"
+          }
+        }
+      },
+      "quoted key": {
+        "type": "string",
+        "value": "q"
+      },
+      "site": {
+        "example.com": {
+          "type": "bool",
+          "value": "true"
+        }
+      }
+    },
+    "strings": {
+      "escapes": {
+        "type": "string",
+        "value": "tab\tquote\"backslash\\ é"
+      },
+      "literal": {
+        "type": "string",
+        "value": "C:\\Users\\parsarium"
+      },
+      "multiline": {
+        "type": "string",
+        "value": "first second"
+      },
+      "raw_multiline": {
+        "type": "string",
+        "value": "line one\nline two"
+      }
+    },
+    "times": {
+      "local_date": {
+        "type": "date-local",
+        "value": "1979-05-27"
+      },
+      "local_datetime": {
+        "type": "datetime-local",
+        "value": "1979-05-27T07:32:00"
+      },
+      "local_time": {
+        "type": "time-local",
+        "value": "00:32:00.25"
+      },
+      "offset": {
+        "type": "datetime",
+        "value": "1979-05-27T07:32:00.5Z"
+      }
+    }
+  },
+  "repeats": 10,
+  "variant_feedback_edges": 1993,
+  "edges_only_in_control": 517,
+  "edges_only_in_variant": 677,
+  "source_differential": {
+    "parser_prefix": "/usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml_dom-0.6.0/",
+    "control_lines": {
+      "src/cst.rs": 0,
+      "src/datetime.rs": 0,
+      "src/document.rs": 9,
+      "src/edit.rs": 0,
+      "src/error.rs": 0,
+      "src/parser.rs": 783,
+      "src/serializer.rs": 0,
+      "src/value.rs": 26
+    },
+    "variant_lines": {
+      "src/cst.rs": 0,
+      "src/datetime.rs": 0,
+      "src/document.rs": 9,
+      "src/edit.rs": 0,
+      "src/error.rs": 0,
+      "src/parser.rs": 770,
+      "src/serializer.rs": 0,
+      "src/value.rs": 16
+    },
+    "files_with_different_line_counts": [
+      "src/parser.rs",
+      "src/value.rs"
+    ]
+  },
+  "control_stability": {
+    "repeat_edge_counts": [
+      1833,
+      1833,
+      1833,
+      1833,
+      1833,
+      1833,
+      1833,
+      1833,
+      1833,
+      1833
+    ],
+    "stable_edges": 1833,
+    "union_edges": 1833,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  },
+  "variant_stability": {
+    "repeat_edge_counts": [
+      1993,
+      1993,
+      1993,
+      1993,
+      1993,
+      1993,
+      1993,
+      1993,
+      1993,
+      1993
+    ],
+    "stable_edges": 1993,
+    "union_edges": 1993,
+    "stable_ratio": 1.0,
+    "all_repeats_identical": true
+  }
+}
