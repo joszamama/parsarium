@@ -1,6 +1,7 @@
 #include "harness.h"
 #include "lodepng.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -11,15 +12,15 @@ int parsarium_parse_png(const uint8_t *data, size_t size,
     unsigned char *pixels = NULL;
     unsigned width = 0, height = 0;
     unsigned error = lodepng_decode32(&pixels, &width, &height, data, size);
-    if (error || width == 0 || height == 0 ||
-        (uint64_t)width * height > (1u << 22)) {
+    if (error) {
+        fprintf(stderr, "lodepng error %u: %s\n", error, lodepng_error_text(error));
         free(pixels);
         return 0;
     }
     result->width = width;
     result->height = height;
     memcpy(result->first, pixels, 4);
-    result->has_second = (uint64_t)width * height > 1;
+    result->has_second = width > 1;
     if (result->has_second) memcpy(result->second, pixels + 4, 4);
     free(pixels);
     return 1;

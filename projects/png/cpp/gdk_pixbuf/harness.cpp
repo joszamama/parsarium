@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 int parsarium_parse_png(const uint8_t *data, size_t size, struct parsarium_png_result *result) {
     if (!data || !result || !size || size > (1u << 20)) return 0;
     memset(result, 0, sizeof(*result));
@@ -19,14 +20,25 @@ int parsarium_parse_png(const uint8_t *data, size_t size, struct parsarium_png_r
     GError *error = NULL;
     GdkPixbuf *image = gdk_pixbuf_new_from_file(path, &error);
     unlink(path);
-    if (!image) { if (error) g_error_free(error); return 0; }
+    if (!image) {
+        fprintf(stderr, "gdk-pixbuf: %s\n", error ? error->message : "load failed");
+        if (error) g_error_free(error);
+        return 0;
+    }
+    int width = gdk_pixbuf_get_width(image), height = gdk_pixbuf_get_height(image);
     int channels = gdk_pixbuf_get_n_channels(image);
+    int alpha = gdk_pixbuf_get_has_alpha(image);
     const guchar *pixels = gdk_pixbuf_read_pixels(image);
-    int ok = gdk_pixbuf_get_width(image) == 2 && gdk_pixbuf_get_height(image) == 1 && channels == 4 && pixels;
+    int ok = pixels != NULL;
     if (ok) {
-        result->width = 2; result->height = 1;
-        memcpy(result->first, pixels, 4); memcpy(result->second, pixels + 4, 4);
-        result->has_second = 1;
+        unsigned char *out[2] = {result->first, result->second};
+        result->width = (unsigned)width; result->height = (unsigned)height;
+        result->has_second = width > 1;
+        for (int i = 0; i < 1 + result->has_second; i++) {
+            const guchar *pixel = pixels + (size_t)i * (size_t)channels;
+            memcpy(out[i], pixel, 3);
+            out[i][3] = alpha ? pixel[3] : 255;
+        }
     }
     g_object_unref(image);
     return ok;

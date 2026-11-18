@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdio.h>
 
 int parsarium_parse_png(const uint8_t *data, size_t size, struct parsarium_png_result *result) {
     if (!data || !result || !size || size > (1u << 20)) return 0;
@@ -19,23 +20,27 @@ int parsarium_parse_png(const uint8_t *data, size_t size, struct parsarium_png_r
     close(fd);
     Imlib_Image image = imlib_load_image_immediately(path);
     unlink(path);
-    if (!image) return 0;
+    if (!image) {
+        int error = imlib_get_error();
+        fprintf(stderr, "imlib2: %s\n", error ? imlib_strerror(error) : "load failed");
+        return 0;
+    }
     imlib_context_set_image(image);
     int width = imlib_image_get_width(), height = imlib_image_get_height();
     const uint32_t *pixels = imlib_image_get_data_for_reading_only();
-    int ok = width == 2 && height == 1 && pixels;
+    int alpha = imlib_image_has_alpha();
+    int ok = pixels != NULL;
     if (ok) {
         result->width = (unsigned)width; result->height = (unsigned)height;
-        const uint32_t first = pixels[0], second = pixels[1];
-        const uint32_t values[2] = {first, second};
+        result->has_second = width > 1;
         unsigned char *out[2] = {result->first, result->second};
-        for (int i = 0; i < 2; i++) {
-            out[i][0] = (values[i] >> 16) & 255;
-            out[i][1] = (values[i] >> 8) & 255;
-            out[i][2] = values[i] & 255;
-            out[i][3] = values[i] >> 24;
+        for (int i = 0; i < 1 + result->has_second; i++) {
+            const uint32_t value = pixels[i];
+            out[i][0] = (value >> 16) & 255;
+            out[i][1] = (value >> 8) & 255;
+            out[i][2] = value & 255;
+            out[i][3] = alpha ? value >> 24 : 255;
         }
-        result->has_second = 1;
     }
     imlib_free_image();
     return ok;

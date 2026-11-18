@@ -10,8 +10,13 @@ int main(int argc, char **argv) {
     fclose(file);
     struct parsarium_png_result result;
     if (!parsarium_parse_png(input, size, &result)) return 5;
-    printf("{\"width\":%u,\"height\":%u,\"first\":[%u,%u,%u,%u],\"second\":[%u,%u,%u,%u]}\n",
-           result.width, result.height, result.first[0], result.first[1], result.first[2], result.first[3],
-           result.second[0], result.second[1], result.second[2], result.second[3]);
+    if (result.has_second) {
+        printf("{\"width\":%u,\"height\":%u,\"first\":[%u,%u,%u,%u],\"second\":[%u,%u,%u,%u]}\n",
+               result.width, result.height, result.first[0], result.first[1], result.first[2], result.first[3],
+               result.second[0], result.second[1], result.second[2], result.second[3]);
+    } else {
+        printf("{\"width\":%u,\"height\":%u,\"first\":[%u,%u,%u,%u],\"second\":null}\n",
+               result.width, result.height, result.first[0], result.first[1], result.first[2], result.first[3]);
+    }
     return 0;
 }
