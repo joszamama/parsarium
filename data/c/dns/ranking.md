@@ -28,15 +28,27 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 
 | Order | Lead | Metric | Input API lead | Family | Status |
 | ---: | --- | ---: | --- | --- | --- |
-| 1 | mdnsd | 28 | `int message_parse(struct message *m, unsigned char *packet) (libmdnsd/1035.h)` | mdnsd (Jeremie Miller's 1035.c, troglobit fork) | unresolved_control_failure |
-| 2 | dnsjit | 4 | `Lua core.object.dns (parse) inside the dnsjit engine` | DNS-OARC dnsjit core.object.dns | unresolved |
-| 3 | mdns | missing | `` | mjansson/mdns (header-only mDNS) | unresolved_no_primary_metric |
-| 4 | pro-mdnsd | missing | `` | mdnsd (Jeremie Miller) fork | unresolved_no_primary_metric |
+| 1 | gnunet | 58 | `struct GNUNET_DNSPARSER_Packet *GNUNET_DNSPARSER_parse(const char *udp_payload, size_t udp_payload_length) (gnunet_dnsparser_lib.h, libgnunetutil)` | GNUnet DNSPARSER (src/util/dnsparser.c) | unresolved |
+| 2 | mdnsd | 28 | `int message_parse(struct message *m, unsigned char *packet) (libmdnsd/1035.h)` | mdnsd (Jeremie Miller's 1035.c, troglobit fork) | unresolved_control_failure |
+| 3 | dnsjit | 4 | `Lua core.object.dns (parse) inside the dnsjit engine` | DNS-OARC dnsjit core.object.dns | unresolved |
+| 4 | yadifa | 1 | `dns_packet_reader_init(reader, buffer, size) then dns_packet_reader_read_record (dnscore/dns_packet_reader.h)` | YADIFA dnscore | unresolved |
+| 5 | mdns | missing | `` | mjansson/mdns (header-only mDNS) | unresolved_no_primary_metric |
+| 6 | pro-mdnsd | missing | `` | mdnsd (Jeremie Miller) fork | unresolved_no_primary_metric |
+| 7 | firedns | missing | `` | firedns | unresolved_no_primary_metric |
+| 8 | s6-dns | missing | `s6dns_message_parse_init / s6dns_message_parse_next and per-type s6dns_message_get_* (libs6dns)` | skarnet s6-dns | unresolved_no_primary_metric |
+| 9 | wdns | missing | `wdns_parse_message(wdns_message_t *m, const uint8_t *pkt, size_t len)` | Farsight wdns | unresolved_no_primary_metric |
+| 10 | dnsparse | missing | `` | dnsparse (Robert Graham) | unresolved_no_primary_metric |
 
+- **gnunet**: Documented own decoder (header comment: 'Parse a UDP payload of a DNS packet in to a nice struct'): it decodes the header flags (Z, AD and CD included), questions, and names inside CNAME/NS/PTR/MX RDATA with compression. Not verified because it does not keep the TTL: GNUNET_DNSPARSER_parse_record stores expiration_time = now + TTL from the wall clock, and the library's own serializer recovers a TTL by truncating the remaining time, which yields TTL-1 once any time has passed. Reporting the controls' TTLs would need harness arithmetic on the clock, so it stays a lead. A/AAAA RDATA would also stay raw bytes.
 - **mdnsd**: Debian builds libmdnsd-dev with libmdnsd/1035.h, whose message_parse decodes the header, questions and records of caller-supplied bytes, but by source inspection of v1.2 (libmdnsd/1035.c) the record parser decodes only A, AAAA, NS, CNAME, PTR, SRV and TXT RDATA; the MX answer of controls/dns/response.bin keeps raw RDATA, so its exchange name is not decoded by the library.
 - **dnsjit**: Not attempted this round. dnsjit is a LuaJIT engine program: Debian builds dnsjit and an Architecture: all dnsjit-dev that installs only usr/include and man3 pages, so there is no linkable C library; the documented parser is the Lua core.object.dns module, which a harness would have to drive through the dnsjit executable and a Lua script.
+- **yadifa**: Debian's libyadifa-dev is Architecture: all and installs only usr/include (no shared or static library); the YADIFA name server links its dnscore statically. The packet reader has terse header comments but no API reference, so there is no documented library API for caller-supplied messages. Not attempted; popcon 1.
 - **mdns**: Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. GitHub stars are not allowed outside PLY cells.
 - **pro-mdnsd**: Conan recipe only; no Debian source package in the pinned popcon table, so no primary metric and no Debian dev-package fallback. GitHub stars are not allowed outside PLY cells.
+- **firedns**: Asynchronous resolver library last packaged in Debian jessie (0.9.12); absent from the pinned popcon table, so no primary metric and no Debian dev-package fallback. Not attempted.
+- **s6-dns**: skarnet's libs6dns documents message-parsing functions and is packaged in Alpine, but Debian has no s6-dns source package (sources.debian.org 404; only skalibs), so there is no primary metric and no Debian dev-package fallback. Not attempted.
+- **wdns**: Farsight Security's low-level DNS wire library, distributed through Farsight's own package repository; no Debian source package, so no primary metric. Not attempted.
+- **dnsparse**: Stand-alone DNS response parser on GitHub with no Debian source package; no primary metric. Not attempted.
 
 ## Checked, excluded or recorded separately
 
@@ -65,3 +77,9 @@ Debian popcon sourcemax installations (max over binary packages built from the s
 - **libowfat** (excluded): Its dns.h carries djbdns's routines (excluded djbdns family): dns_packet_copy/getname/skipname primitives and per-type answer extractors such as dns_ip4_packet and dns_mx_packet; no decoder of the header, questions and record sections.
 - **libtrace3** (excluded): Trace-processing library; libpacketdump's protocol decoders print packets read from capture traces and need link-layer frames, with no documented API that returns a decoded DNS message.
 - **ruli** (excluded): SRV resolver library (asynchronous queries); no API for caller-supplied message bytes.
+- **mongoose** (excluded): Fails the response control by source inspection of mongoose.h 7.23: struct mg_dns_message keeps one name and one resolved address, and struct mg_dns_rr has only name length, type, class and RDATA length (no TTL); CNAME and MX RDATA are not decoded.
+- **belle-sip** (excluded): SIP stack that bundles William Ahern's dns.c under src/dns; its installed headers (include/belle-sip/) expose only the SIP resolver (resolver.h), not the dns_p_* packet API. No documented message-bytes API.
+- **lua-cqueues** (excluded): Lua module: dns.c's packet parser is exposed only as the Lua cqueues.dns.packet object, not as a C library API; outside the C cell like dnsjit's Lua parser.
+- **rspamd** (excluded): Spam-filter daemon whose bundled librdns resolver is private to rspamd (Debian builds no rspamd development package); no documented message-bytes API.
+- **opensmtpd** (excluded): Mail server that bundles OpenBSD's asynchronous resolver (asr); its _asr_unpack_* message routines are internal and no library or header is installed. No documented message-bytes API.
+- **pjproject** (excluded): No primary metric (absent from the pinned popcon table; Debian ships pjproject 2.17 only in experimental), and by source inspection of pjlib-util/src/pjlib-util/dns.c 2.17 parse_rr decodes RDATA only for A, AAAA, CNAME, NS, PTR and SRV, leaving the MX answer as raw data (response-control failure).
