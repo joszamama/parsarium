@@ -18,6 +18,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from audit_projects import fully_runnable
+from audit_upstream_repositories import load_rows as load_upstream, registry_name
 from format_registry import (ECOSYSTEMS as REGISTRY_ECOSYSTEMS, FORMAT_RECORDS, catalog_format,
                              resolve_data_path)
 
@@ -264,6 +265,7 @@ def build(output: Path) -> None:
                 and fully_runnable(path, manifest)):
             standard_projects[(project_format, manifest["ecosystem"], manifest["api"])] = path
 
+    upstream = load_upstream()
     parsers = []
     cells = []
     for cell in cells_source:
@@ -344,6 +346,14 @@ def build(output: Path) -> None:
                 "guideUrl": repo_link(guide["readme"]),
                 "rankingUrl": repo_link(f"data/{eco}/{fmt}/ranking.md"),
             }
+            links = upstream.get(f"{eco}/{fmt}/{entry['name']}")
+            if links is None:
+                raise ValueError(f"no upstream repository row: {eco}/{fmt}/{entry['name']}")
+            if links.get("repository"):
+                record["repository"] = links["repository"]
+            if links.get("registry_url"):
+                record["registryUrl"] = links["registry_url"]
+                record["registryName"] = registry_name(links["registry_url"])
             ranked = rank_for(entry)
             if ranked:
                 record["rank"] = ranked[0]
@@ -445,6 +455,8 @@ def build(output: Path) -> None:
                 if verification.get("coverage_kind") == "native_binary_edges" else None
             ),
             "projectGuideUrl": record["projectUrl"],
+            "repository": record.get("repository"),
+            "registryUrl": record.get("registryUrl"),
             "controlCommand": f"parsarium run {target_args} \"$PARSARIUM/{manifest['control']}\" --results {run_dir}-control",
             "inputCommand": f"parsarium run {target_args} INPUT_FILE --results {run_dir}-single",
             "replayCommand": f"parsarium replay {target_args} CORPUS_DIR {run_dir}-replay",
@@ -767,10 +779,15 @@ def render_site(output: Path, catalog: dict, targets: dict, demos: list) -> None
             height = max(4, round(120 * per_day[day] / peak))
             bars.append(f'<li><span class="bar" style="--h:{height}px"></span>'
                         f'<b>{per_day[day]}</b><time datetime="{day}">{day[5:]}</time></li>')
+        def package_html(t: dict) -> str:
+            name = html.escape(t["package"])
+            url = t.get("repository") or t.get("registryUrl")
+            return f'<a href="{html.escape(url)}" rel="noopener">{name}</a>' if url else name
+
         recent = "".join(
             f'<li><time>{t["verifiedAt"][:16].replace("T", " ")}</time>'
             f'<code>{t["format"]}/{t["ecosystem"]}/{html.escape(t["slug"])}</code>'
-            f'<span>{html.escape(t["package"])} {html.escape(t["release"])}</span></li>' for t in latest)
+            f'<span>{package_html(t)} {html.escape(t["release"])}</span></li>' for t in latest)
         return (f'<ol class="days" aria-label="{STRINGS[lang]["day_label"]}">{"".join(bars)}</ol>'
                 f'<ol class="recent">{recent}</ol>')
 

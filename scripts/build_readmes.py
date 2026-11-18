@@ -12,6 +12,7 @@ from audit_projects import (browser_control_verified, native_source_control_veri
                             native_function_control_verified,
                             macos_host_control_verified, third_party_control_verified,
                             fully_runnable)
+from audit_upstream_repositories import load_rows as load_upstream, registry_name
 from format_registry import (ACTIVE_FORMATS, ECOSYSTEMS, FORMAT_BY_ID, PILOT_FORMATS,
                              catalog_format, resolve_data_path)
 
@@ -38,6 +39,32 @@ def label(value: str) -> str:
 def slug(name: str, collisions: Counter) -> str:
     base = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-") or "parser"
     return base + ("-" + sha256(name.encode()).hexdigest()[:8] if collisions[base] > 1 else "")
+
+
+UPSTREAM = load_upstream()
+
+
+def upstream_links(eco: str, fmt: str, name: str) -> list[str]:
+    """Markdown links to the package's source repository and registry page."""
+    row = UPSTREAM.get(f"{eco}/{fmt}/{name}")
+    if row is None:
+        raise ValueError(f"no upstream repository row: {eco}/{fmt}/{name}")
+    links = []
+    if row.get("repository"):
+        links.append(f"[source repository](<{row['repository']}>)")
+    if row.get("registry_url"):
+        links.append(f"[{registry_name(row['registry_url'])}](<{row['registry_url']}>)")
+    return links
+
+
+def upstream_line(eco: str, fmt: str, name: str) -> list[str]:
+    links = upstream_links(eco, fmt, name)
+    return [f"- **Upstream:** {' · '.join(links)}"] if links else []
+
+
+def upstream_suffix(eco: str, fmt: str, name: str) -> str:
+    links = upstream_links(eco, fmt, name)
+    return (" · " + " · ".join(links)) if links else ""
 
 
 def verified_result(entry: dict, verification: dict) -> tuple[str | None, object | None]:
@@ -138,6 +165,7 @@ def main() -> None:
                     raise ValueError(f"missing control file: {control}")
                 lines = [f"# {name} — {format_label} / {ECO_LABEL[eco]}", "",
                          f"- **Pinned release:** `{entry['version']}`",
+                         *upstream_line(eco, fmt, name),
                          f"- **License:** {entry['license']}",
                          f"- **Parsed scope:** {entry['scope']}",
                          f"- **Underlying family:** {entry['family']}",
@@ -177,7 +205,8 @@ def main() -> None:
                 index.append({"format": fmt, "ecosystem": eco, "name": name,
                               "readme": str(readme.relative_to(ROOT)), "runnable": ready})
                 cell_rows.append(f"- [{label(name)}]({link(cell_dir, readme)}) — "
-                                 f"{'Docker harness ready' if ready else 'verified API path'}")
+                                 f"{'Docker harness ready' if ready else 'verified API path'}"
+                                 + upstream_suffix(eco, fmt, name))
             inventory = read(source / "standard.json")
             standard_entries = inventory["verified_apis"]
             standard_bases = Counter(re.sub(r"[^a-z0-9]+", "-", (item.get("name") or item.get("api") or "api").lower()).strip("-") or "api"
@@ -331,6 +360,7 @@ def main() -> None:
                          "**Pilot / incomplete format cell.** This path is verified on its stated control; "
                          "the format-wide search is still in progress.", "",
                          f"- **Pinned release:** `{entry['version']}`",
+                         *upstream_line(eco, fmt, entry["name"]),
                          f"- **License:** {entry['license']}",
                          f"- **Parser family:** {entry.get('family') or entry['parser_family']}",
                          f"- **Local input API:** `{entry['input_api']}`",
@@ -354,7 +384,8 @@ def main() -> None:
                                     "readme": str(readme.relative_to(ROOT)), "runnable": ready,
                                     "phase": "pilot", "complete": False})
                 parser_rows.append(f"- [{label(entry['name'])}]({link(cell_dir, readme)})" +
-                                   (" — verified Docker harness" if ready else " — verified API path"))
+                                   (" — verified Docker harness" if ready else " — verified API path") +
+                                   upstream_suffix(eco, fmt, entry["name"]))
             standard_file = source / "standard.json"
             standard = read(standard_file)["verified_apis"] if standard_file.is_file() else []
             standard_bases = Counter(re.sub(r"[^a-z0-9]+", "-", (item.get("name") or item["api"]).lower()).strip("-") or "parser"

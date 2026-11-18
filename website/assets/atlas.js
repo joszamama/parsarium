@@ -133,11 +133,11 @@
     const body = shown.slice(0, limit).map((p) => `<tr>
       <td><span class="dot${p.projectUrl ? " on" : ""}" title="${p.projectUrl ? T.runnable : T.verified}"></span></td>
       <td class="num">${esc(p.rank || "")}</td>
-      <td><span class="pkg">${esc(p.name)}</span> <span class="rel">${esc(p.version)}</span>${p.standard ? ` <span class="tag std">${T.std}</span>` : ""}${state.format && state.ecosystem ? "" : `<br><span class="rel">${esc(label[p.format])} · ${ECO[p.ecosystem]}</span>`}</td>
+      <td>${p.repository || p.registryUrl ? `<a class="pkg" href="${esc(p.repository || p.registryUrl)}" rel="noopener">${esc(p.name)}</a>` : `<span class="pkg">${esc(p.name)}</span>`} <span class="rel">${esc(p.version)}</span>${p.standard ? ` <span class="tag std">${T.std}</span>` : ""}${state.format && state.ecosystem ? "" : `<br><span class="rel">${esc(label[p.format])} · ${ECO[p.ecosystem]}</span>`}</td>
       <td>${esc(p.family)}</td>
       <td class="api" title="${esc(p.inputApi)}">${esc(p.inputApi)}</td>
       <td>${p.metricValue ? `${esc(metricValue(p.metricValue))}<br><span class="rel">${esc(metricName(p.popularityMetric))}</span>` : ""}</td>
-      <td style="white-space:nowrap"><a href="${esc(p.guideUrl)}" rel="noopener">${T.guide}</a>${p.projectUrl && !p.standard ? ` · <a href="${esc(p.projectUrl)}" rel="noopener">${T.harness}</a>` : ""} · <a href="${esc(p.documentation)}" rel="noopener">${T.docs}</a></td></tr>`).join("");
+      <td style="white-space:nowrap"><a href="${esc(p.guideUrl)}" rel="noopener">${T.guide}</a>${p.projectUrl && !p.standard ? ` · <a href="${esc(p.projectUrl)}" rel="noopener">${T.harness}</a>` : ""} · <a href="${esc(p.documentation)}" rel="noopener">${T.docs}</a>${p.registryUrl ? ` · <a href="${esc(p.registryUrl)}" rel="noopener">${esc(p.registryName)}</a>` : ""}</td></tr>`).join("");
     const more = shown.length > limit ? `<p class="more"><button type="button" class="chip" data-more>${T.more(shown.length)}</button></p>` : "";
     root.querySelector(".atlas-list").innerHTML = head + `<div class="table-scroll"><table class="t"><thead><tr>${T.cols.map((c) => `<th>${c}</th>`).join("")}</tr></thead><tbody>${body}</tbody></table></div>${more}`;
     const m = root.querySelector("[data-more]");

@@ -6,14 +6,14 @@
     loading: "Cargando el catálogo…", targets: "targets", formats: "formatos", ecosystems: "lenguajes",
     families: "familias", id: "ID", none: "Ningún target coincide con esta selección.",
     cols: ["Formato", "Lenguaje", "Paquete", "Familia", "API de entrada", "Rango", "Feedback AFL++"],
-    showAll: (n) => `Mostrar los ${n} targets`, std: "estándar",
+    showAll: (n) => `Mostrar los ${n} targets`, std: "estándar", harness: "harness",
     modes: { control: "Controles", file: "Mis archivos", replay: "Corpus", afl: "AFL++", fandango: "Fandango" },
     unranked: "—",
   } : {
     loading: "Loading the catalog…", targets: "targets", formats: "formats", ecosystems: "languages",
     families: "families", id: "ID", none: "No target matches this selection.",
     cols: ["Format", "Language", "Package", "Family", "Input API", "Rank", "AFL++ feedback"],
-    showAll: (n) => `Show all ${n} targets`, std: "standard",
+    showAll: (n) => `Show all ${n} targets`, std: "standard", harness: "harness",
     modes: { control: "Controls", file: "My files", replay: "Corpus", afl: "AFL++", fandango: "Fandango" },
     unranked: "—",
   };
@@ -254,7 +254,7 @@
     const limit = state.expanded ? picked.length : 150;
     const rows = picked.slice(0, limit).map((t) => `<tr>
       <td>${esc(label[t.format])}</td><td>${ECO[t.ecosystem]}</td>
-      <td><a class="pkg" href="${esc(t.projectGuideUrl)}" rel="noopener">${esc(t.package)}</a> <span class="rel">${esc(t.release)}</span>${t.type === "standard" ? ` <span class="tag std">${T.std}</span>` : ""}</td>
+      <td><a class="pkg" href="${esc(t.repository || t.registryUrl || t.projectGuideUrl)}" rel="noopener">${esc(t.package)}</a> <span class="rel">${esc(t.release)}${t.repository || t.registryUrl ? ` · <a href="${esc(t.projectGuideUrl)}" rel="noopener">${T.harness}</a>` : ""}</span>${t.type === "standard" ? ` <span class="tag std">${T.std}</span>` : ""}</td>
       <td>${esc(t.family)}</td>
       <td class="api" title="${esc(t.inputApi)}">${esc(t.inputApi)}</td>
       <td class="num">${esc(t.rank || T.unranked)}</td>
