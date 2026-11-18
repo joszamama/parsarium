@@ -7,6 +7,7 @@ Only verified Docker targets appear below; the format remains incomplete.
 - [knot / C](c/knot/README.md)
 - [ldns / C](c/ldns/README.md)
 - [udns / C](c/udns/README.md)
+- [wahern-dns / C](c/wahern-dns/README.md)
 - [libtins / C++](cpp/libtins/README.md)
 - [codeberg.org/miekg/dns / Go](go/codeberg_org_miekg_dns/README.md)
 - [github.com/benburkert/dns / Go](go/github_com_benburkert_dns/README.md)
