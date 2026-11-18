@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "format": "ascii_ply",
+  "ecosystem": "go",
+  "package": "github.com/unixpickle/model3d/model3d",
+  "release": "v0.4.23",
+  "catalog_parser": "data/go/ascii_ply/parsers.json",
+  "source_lock": "projects/ascii_ply/go/github_com_unixpickle_model3d_model3d/source-lock.json",
+  "source_sha256": "e5fe87f3b3394dc20f24bd6021695e89c03e61bb5c0b2235233ac5af2452be03",
+  "base_image": "golang@sha256:8d48e12ec56735e9358640898b9d9b9fcca110612ed8a5567438c0a1baa24e66",
+  "platform": "linux/arm64",
+  "control": "controls/ascii_ply/triangle-vertex-index.ply",
+  "control_sha256": "dea53cdfaebc861db3ed99e689c9dd71b305f66c73819ade17f27578b8ee1d05",
+  "expected_output": {
+    "triangles": 1,
+    "first_triangle": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0
+      ]
+    ],
+    "coloured_vertices": 3
+  },
+  "harness": "harness_test.go",
+  "fuzz_engine": "Go native fuzzing",
+  "fuzz_entry": "FuzzParser",
+  "fuzz_smoke_entrypoint": "/work/harness.test",
+  "fuzz_smoke_args": [
+    "-test.list=Fuzz"
+  ],
+  "fuzz_smoke_expect": "FuzzParser",
+  "toolchain_entrypoint": "/work/reporter",
+  "toolchain_args": [
+    "--toolchain"
+  ],
+  "coverage": "Go test coverpkg instrumentation of github.com/unixpickle/model3d/model3d (ReadColorPLY in import.go) and the underlying github.com/unixpickle/model3d/fileformats PLY reader during valid-control replay",
+  "coverage_subject_prefix": "github.com/unixpickle/model3d/model3d/",
+  "format_specific_coverage_file_suffix": "/model3d/import.go",
+  "underlying_coverage_subject_prefix": "github.com/unixpickle/model3d/fileformats/",
+  "afl_coverage_subject_prefix": "github.com/unixpickle/model3d/fileformats/"
+}

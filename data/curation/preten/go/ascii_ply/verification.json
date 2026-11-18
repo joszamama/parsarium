@@ -387,6 +387,40 @@
       },
       "error": null,
       "native_environment": "pure Go (CGO_ENABLED=0); fauxgl's own ply.go reader"
+    },
+    {
+      "package": "github.com/unixpickle/model3d/model3d",
+      "module": "github.com/unixpickle/model3d",
+      "version": "v0.4.23",
+      "scope": "ASCII PLY with x/y/z (optional red/green/blue) vertices and a vertex_index triangle face list, returned as triangles and a vertex colour map",
+      "command": "go run . github.com/unixpickle/model3d/model3d ../../../../controls/ascii_ply/triangle-vertex-index.ply (projects/ascii_ply/go/github_com_unixpickle_model3d_model3d, Go 1.27.1, 2026-11-18)",
+      "control": "controls/ascii_ply/triangle-vertex-index.ply",
+      "control_sha256": "dea53cdfaebc861db3ed99e689c9dd71b305f66c73819ade17f27578b8ee1d05",
+      "control_meaning": "Valid ASCII PLY triangle whose face list is named vertex_index, the alternative list name the reader requires; triangle.ply (vertex_indices) is rejected by ReadColorPLY's header check",
+      "pass": true,
+      "output": {
+        "triangles": 1,
+        "first_triangle": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ]
+        ],
+        "coloured_vertices": 3
+      },
+      "error": null,
+      "native_environment": "pure Go (CGO_ENABLED=0); model3d fileformats PLYReader is the underlying parser"
     }
   ]
 }
