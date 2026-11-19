@@ -11,7 +11,7 @@ def parse_mp4(data: bytes):
         return None
     audio = MP4(BytesIO(data))
     if audio.tags is None or not audio.tags.get("\u00a9nam"):
-        return None
+        return {}
     return {"title": str(audio.tags["\u00a9nam"][0])}
 
 

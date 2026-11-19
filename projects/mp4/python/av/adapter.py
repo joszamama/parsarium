@@ -51,11 +51,17 @@ def parse(name, path):
     if name == "av":
         import av
         with av.open(path) as doc:
-            video, audio = doc.streams.video[0], doc.streams.audio[0]
-            return {"title": doc.metadata["title"], "width": video.codec_context.width,
-                    "height": video.codec_context.height,
-                    "video_codec": video.codec_context.name,
-                    "audio_codec": audio.codec_context.name}
+            result = {}
+            if "title" in doc.metadata:
+                result["title"] = doc.metadata["title"]
+            if doc.streams.video:
+                video = doc.streams.video[0]
+                result.update(width=video.codec_context.width,
+                              height=video.codec_context.height,
+                              video_codec=video.codec_context.name)
+            if doc.streams.audio:
+                result["audio_codec"] = doc.streams.audio[0].codec_context.name
+            return result
     if name == "audiomath":
         import audiomath
         doc = audiomath.Sound(path)
@@ -63,9 +69,16 @@ def parse(name, path):
     if name == "ffmpeg-python":
         import ffmpeg
         doc = ffmpeg.probe(path)
-        video = next(stream for stream in doc["streams"] if stream["codec_type"] == "video")
-        return {"title": doc["format"]["tags"]["title"], "width": video["width"],
-                "height": video["height"], "video_codec": video["codec_name"]}
+        result = {}
+        tags = doc["format"].get("tags", {})
+        if "title" in tags:
+            result["title"] = tags["title"]
+        video = next((stream for stream in doc["streams"]
+                      if stream["codec_type"] == "video"), None)
+        if video is not None:
+            result.update(width=video["width"], height=video["height"],
+                          video_codec=video["codec_name"])
+        return result
     if name == "moviepy":
         from moviepy import VideoFileClip
         with VideoFileClip(path) as doc:

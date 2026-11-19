@@ -51,11 +51,11 @@ switch ($package) {
         ];
         break;
     case 'mhor/php-mediainfo':
-        $video = (new \Mhor\MediaInfo\MediaInfo())->getInfo($path)->getVideos()[0];
+        $video = (new \Mhor\MediaInfo\MediaInfo())->getInfo($path)->getVideos()[0] ?? null;
         $output = [
-            'video_format' => $video->get('format')->getShortName(),
-            'width' => $video->get('width')->getAbsoluteValue(),
-            'height' => $video->get('height')->getAbsoluteValue(),
+            'video_format' => $video?->get('format')?->getShortName(),
+            'width' => $video?->get('width')?->getAbsoluteValue(),
+            'height' => $video?->get('height')?->getAbsoluteValue(),
         ];
         break;
     case 'buggedcom/phpvideotoolkit':
@@ -71,10 +71,10 @@ switch ($package) {
     case 'protonemedia/php-ffmpeg':
         $video = \FFMpeg\FFProbe::create()->streams($path)->videos()->first();
         $output = [
-            'video_codec' => $video->get('codec_name'),
-            'width' => $video->get('width'),
-            'height' => $video->get('height'),
-            'video_fourcc' => $video->get('codec_tag_string'),
+            'video_codec' => $video?->get('codec_name'),
+            'width' => $video?->get('width'),
+            'height' => $video?->get('height'),
+            'video_fourcc' => $video?->get('codec_tag_string'),
         ];
         break;
     case 'sempia/getid3':
@@ -164,9 +164,9 @@ switch ($package) {
     case 'aminyazdanpanah/php-ffmpeg-video-streaming':
         $video = \Streaming\FFMpeg::create()->open($path)->getStreams()->videos()->first();
         $output = [
-            'video_codec' => $video->get('codec_name'),
-            'width' => $video->get('width'),
-            'height' => $video->get('height'),
+            'video_codec' => $video?->get('codec_name'),
+            'width' => $video?->get('width'),
+            'height' => $video?->get('height'),
         ];
         break;
     case 'fmonts/ffmpeg-bundle':
@@ -181,9 +181,9 @@ switch ($package) {
         $container->compile();
         $video = $container->get('dubture_ffmpeg.ffprobe')->streams($path)->videos()->first();
         $output = [
-            'video_codec' => $video->get('codec_name'),
-            'width' => $video->get('width'),
-            'height' => $video->get('height'),
+            'video_codec' => $video?->get('codec_name'),
+            'width' => $video?->get('width'),
+            'height' => $video?->get('height'),
         ];
         break;
     case 'minuteoflaravel/laravel-audio-video-validator':

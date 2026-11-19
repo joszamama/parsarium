@@ -10,9 +10,9 @@ ENV PARSARIUM_SUBJECT_PREFIX=/work/parser-source/
 ENV PARSARIUM_FUZZ_ENTRY=GenericHarness.fuzzerTestOneInput
 ENV PARSARIUM_JAVA_CLASSPATH=/work/classes:/work/lib/javasound-aac-0.9.8.jar:/work/lib/javasound-resloader-0.1.3.jar
 ENV PARSARIUM_TARGET_CLASS=GenericHarness
-ENV PARSARIUM_JACOCO_INCLUDES=*
 ENV PARSARIUM_PARSER_JAR=/work/lib/javasound-aac-0.9.8.jar
 ENV PARSARIUM_PARSER_SOURCES=/work/parser-source
+ENV PARSARIUM_JACOCO_INCLUDES=*
 RUN mkdir /work/afl-java-classes && javac -d /work/afl-java-classes /work/JavaCase.java
 RUN AFL_LLVM_INSTRUMENT=CLASSIC afl-clang-fast -O2 /work/afl_proxy.c -ldl -o /work/afl_proxy
 ENTRYPOINT ["/work/afl_proxy"]

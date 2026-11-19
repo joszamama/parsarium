@@ -7,8 +7,9 @@ async function parseMp4(data) {
     { maxMemoryAllocation: 1 << 20 });
   const video = meta.format.trackInfo.find(track => track.type === 1);
   const audio = meta.format.trackInfo.find(track => track.type === 2);
+  // Fields of a track the input does not have stay undefined and are left out of the JSON output.
   return { title: meta.common.title,
-           width: video.video.displayWidth, height: video.video.displayHeight,
-           sampleRate: audio.audio.samplingFrequency };
+           width: video?.video?.displayWidth, height: video?.video?.displayHeight,
+           sampleRate: audio?.audio?.samplingFrequency };
 }
 module.exports = { parseMp4 };

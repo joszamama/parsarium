@@ -21,7 +21,8 @@ if (name === 'music-metadata') {
   const general = parsed.media.track.find((track) => track['@type'] === 'General');
   const video = parsed.media.track.find((track) => track['@type'] === 'Video');
   const audio = parsed.media.track.find((track) => track['@type'] === 'Audio');
-  result = { title: general.Title, width: Number(video.Width), height: Number(video.Height), sampleRate: Number(audio.SamplingRate) };
+  const number = (value) => (value === undefined ? undefined : Number(value));
+  result = { title: general?.Title, width: number(video?.Width), height: number(video?.Height), sampleRate: number(audio?.SamplingRate) };
 } else if (name === 'codem-isoboxer') {
   const { default: ISOBoxer } = await import(name);
   const file = ISOBoxer.parseBuffer(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength));
@@ -35,7 +36,8 @@ if (name === 'music-metadata') {
   buffer.fileStart = 0;
   file.appendBuffer(buffer);
   file.flush();
-  result = { brand: info.brands[0], width: info.videoTracks[0].video.width, height: info.videoTracks[0].video.height, tracks: info.tracks.length };
+  const video = info.videoTracks[0];
+  result = { brand: info.brands[0], width: video?.video.width, height: video?.video.height, tracks: info.tracks.length };
 } else if (name === 'isobmff-inspector') {
   const { default: inspect } = await import(name);
   const tree = await inspect(bytes);
@@ -46,7 +48,7 @@ if (name === 'music-metadata') {
   const tracks = await input.getTracks();
   const video = tracks.find((track) => track.type === 'video');
   const audio = tracks.find((track) => track.type === 'audio');
-  result = { format: (await input.getFormat()).name, duration: await input.computeDuration(), width: video.displayWidth, height: video.displayHeight, audioCodec: audio.codec };
+  result = { format: (await input.getFormat()).name, duration: await input.computeDuration(), width: video?.displayWidth, height: video?.displayHeight, audioCodec: audio?.codec };
 } else if (name === '@audio/decode-mp4') {
   const { default: decode } = await import(name);
   const audio = await decode(bytes);
@@ -134,6 +136,6 @@ if (name === 'music-metadata') {
   result = { creationTime: await metadata.getCreationTime(new Blob([bytes]), { maxBytesRead: bytes.length }) };
 } else throw new Error(`unsupported package: ${name}`);
 
-if (Object.values(result).some((value) => value === undefined || value === null)) throw new Error(`${name} returned missing parsed fields`);
+// A field the input does not have stays undefined and is left out of the JSON output.
 return result;
 }

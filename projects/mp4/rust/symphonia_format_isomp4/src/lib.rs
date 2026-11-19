@@ -10,11 +10,19 @@ fn parse_package(package: &str, path: &Path) -> Result<serde_json::Value, Box<dy
             let mut source = MediaSourceStream::new(Box::new(File::open(path)?), Default::default());
             source.read_quad_bytes()?;
             let mut movie = symphonia_format_isomp4::IsoMp4Reader::try_new(source, FormatOptions::default())?;
-            let track = movie.default_track(TrackType::Audio).ok_or("no audio track")?;
-            let params = track.codec_params.as_ref().ok_or("no codec parameters")?.audio().ok_or("not audio")?;
-            let sample_rate = params.sample_rate.ok_or("no sample rate")?;
-            let packet = movie.next_packet()?.ok_or("no audio packet")?;
-            serde_json::json!({"sample_rate":sample_rate,"packet_bytes":packet.data.len()})
+            let mut summary = serde_json::Map::new();
+            let sample_rate = movie.default_track(TrackType::Audio).map(|track| {
+                track.codec_params.as_ref().and_then(|params| params.audio()).and_then(|params| params.sample_rate)
+            });
+            if let Some(sample_rate) = sample_rate {
+                if let Some(sample_rate) = sample_rate {
+                    summary.insert("sample_rate".into(), sample_rate.into());
+                }
+                if let Some(packet) = movie.next_packet()? {
+                    summary.insert("packet_bytes".into(), packet.data.len().into());
+                }
+            }
+            serde_json::Value::Object(summary)
         }
         _ => return Err(format!("unknown package: {package}").into()),
     };

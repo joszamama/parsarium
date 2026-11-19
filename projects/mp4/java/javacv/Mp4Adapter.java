@@ -26,16 +26,16 @@ public final class Mp4Adapter {
             case "metadata-extractor" -> {
                 var metadata = com.drew.imaging.mp4.Mp4MetadataReader.readMetadata(file);
                 var video = metadata.getFirstDirectoryOfType(com.drew.metadata.mp4.media.Mp4VideoDirectory.class);
-                if (video == null) throw new IllegalStateException("no MP4 video directory");
-                System.out.printf("{\"width\":%d,\"height\":%d}%n",
-                    video.getInt(com.drew.metadata.mp4.media.Mp4VideoDirectory.TAG_WIDTH),
-                    video.getInt(com.drew.metadata.mp4.media.Mp4VideoDirectory.TAG_HEIGHT));
+                if (video == null) System.out.println("{}");
+                else System.out.printf("{\"width\":%d,\"height\":%d}%n",
+                    video.getInteger(com.drew.metadata.mp4.media.Mp4VideoDirectory.TAG_WIDTH),
+                    video.getInteger(com.drew.metadata.mp4.media.Mp4VideoDirectory.TAG_HEIGHT));
             }
             case "jcodec" -> {
                 var movie = org.jcodec.containers.mp4.MP4Util.parseMovie(file);
                 var video = movie.getVideoTrack();
-                if (video == null) throw new IllegalStateException("no MP4 video track");
-                System.out.printf("{\"tracks\":%d,\"video_width\":%d,\"video_height\":%d}%n",
+                if (video == null) System.out.printf("{\"tracks\":%d}%n", movie.getTracks().length);
+                else System.out.printf("{\"tracks\":%d,\"video_width\":%d,\"video_height\":%d}%n",
                     movie.getTracks().length, video.getCodedSize().getWidth(), video.getCodedSize().getHeight());
             }
             case "tika-mp4" -> {
@@ -54,9 +54,17 @@ public final class Mp4Adapter {
             case "javacv" -> {
                 try (var grabber = new org.bytedeco.javacv.FFmpegFrameGrabber(file)) {
                     grabber.start();
-                    System.out.printf("{\"format\":\"%s\",\"width\":%d,\"height\":%d,\"sample_rate\":%d,\"channels\":%d}%n",
-                        grabber.getFormat(), grabber.getImageWidth(), grabber.getImageHeight(),
-                        grabber.getSampleRate(), grabber.getAudioChannels());
+                    var fields = new java.util.StringJoiner(",", "{", "}");
+                    fields.add("\"format\":\"" + grabber.getFormat() + "\"");
+                    if (grabber.hasVideo()) {
+                        fields.add("\"width\":" + grabber.getImageWidth());
+                        fields.add("\"height\":" + grabber.getImageHeight());
+                    }
+                    if (grabber.hasAudio()) {
+                        fields.add("\"sample_rate\":" + grabber.getSampleRate());
+                        fields.add("\"channels\":" + grabber.getAudioChannels());
+                    }
+                    System.out.println(fields);
                 }
             }
             case "bytedeco-ffmpeg" -> {
@@ -67,8 +75,14 @@ public final class Mp4Adapter {
                     if (org.bytedeco.ffmpeg.global.avformat.avformat_find_stream_info(context,
                         (org.bytedeco.ffmpeg.avutil.AVDictionary) null) < 0)
                         throw new IllegalStateException("FFmpeg could not read stream info");
-                    var video = context.streams(0).codecpar();
-                    System.out.printf("{\"format\":\"%s\",\"streams\":%d,\"width\":%d,\"height\":%d}%n",
+                    org.bytedeco.ffmpeg.avcodec.AVCodecParameters video = null;
+                    for (int index = 0; index < context.nb_streams() && video == null; index++) {
+                        var parameters = context.streams(index).codecpar();
+                        if (parameters.codec_type() == org.bytedeco.ffmpeg.global.avutil.AVMEDIA_TYPE_VIDEO) video = parameters;
+                    }
+                    if (video == null) System.out.printf("{\"format\":\"%s\",\"streams\":%d}%n",
+                        context.iformat().name().getString(), context.nb_streams());
+                    else System.out.printf("{\"format\":\"%s\",\"streams\":%d,\"width\":%d,\"height\":%d}%n",
                         context.iformat().name().getString(), context.nb_streams(), video.width(), video.height());
                 } finally {
                     org.bytedeco.ffmpeg.global.avformat.avformat_close_input(context);
