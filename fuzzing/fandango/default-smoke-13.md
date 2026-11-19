@@ -61,3 +61,12 @@ local Exiv2 base and AFL++ images were rebuilt and their receipts refreshed
 first; the AFL++ feedback edge count is unchanged. The Fandango executable
 hash differs from the other rows because the managed environment's entry
 script records its own install path.
+
+The PDF row was rechecked on 19 November 2026 after `pdf.fan` gained one to
+five pages, per-page or inherited MediaBoxes, optional `/Rotate` and optional
+Info fields (`--case pdf/cpp/poppler`). The default route now passes
+`--max-nodes 2000` with the bundled spec, because Fandango's default node
+budget yields only one- and two-page files. The seed-7 output has four pages.
+The local Poppler base image had been rebuilt and its AFL++ image removed, so
+both receipts were refreshed first; the base control coverage (39 library
+lines) and the AFL++ feedback edge count (953) are unchanged.

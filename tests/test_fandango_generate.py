@@ -209,6 +209,16 @@ class FandangoGenerateTest(unittest.TestCase):
         self.assertEqual(json.loads(self.log.read_text())["argv"][5:7],
                          ["--max-nodes", "2000"])
 
+    def test_default_local_pdf_spec_raises_node_budget(self):
+        run = self.tmp / "default-pdf"
+        code, output = self.run_cli("pdf", "cpp", "poppler", str(run), "--count", "1")
+        self.assertEqual(code, 0, output)
+        spec = ROOT / "fuzzing/fandango/specs/pdf.fan"
+        self.assertEqual(self.receipt(run)["spec"]["sha256"], sha256(spec.read_bytes()).hexdigest())
+        argv = json.loads(self.log.read_text())["argv"]
+        self.assertEqual(argv[1:3], ["-f", str(spec)])
+        self.assertEqual(argv[5:7], ["--max-nodes", "2000"])
+
     def test_pinned_registry_checks_index_hash(self):
         registry = self.tmp / "fanbase"
         registry.mkdir()
