@@ -219,6 +219,25 @@ class FandangoGenerateTest(unittest.TestCase):
         self.assertEqual(argv[1:3], ["-f", str(spec)])
         self.assertEqual(argv[5:7], ["--max-nodes", "2000"])
 
+    def test_default_svg_route_is_local_spec(self):
+        run = self.tmp / "default-svg"
+        code, output = self.run_cli("svg", "c", "librsvg", str(run), "--count", "1")
+        self.assertEqual(code, 0, output)
+        spec = ROOT / "fuzzing/fandango/specs/svg.fan"
+        receipt = self.receipt(run)
+        self.assertEqual(receipt["spec"]["kind"], "file")
+        self.assertEqual(receipt["spec"]["sha256"], sha256(spec.read_bytes()).hexdigest())
+        argv = json.loads(self.log.read_text())["argv"]
+        self.assertEqual(argv[1:5], ["-f", str(spec), "-x", ".svg"])
+        self.assertEqual(argv[5:7], ["--max-nodes", "2000"])
+
+    def test_fanbase_svg_stays_selectable(self):
+        run = self.tmp / "fanbase-svg"
+        code, output = self.run_cli("svg", "c", "librsvg", str(run), "--fanbase", "svg",
+                                    "--count", "1")
+        self.assertEqual(code, 0, output)
+        self.assertEqual(json.loads(self.log.read_text())["argv"][1:3], ["-F", "svg"])
+
     def test_pinned_registry_checks_index_hash(self):
         registry = self.tmp / "fanbase"
         registry.mkdir()

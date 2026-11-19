@@ -221,17 +221,16 @@
       "status": "pass",
       "generator_exit_code": 0,
       "generator_version": "Fandango 1.3.1",
-      "generator_sha256": "9b0033ef8b15d883a90a2445d6f2e4a21fb9f56d3c802c6b0e49d5736eb80f05",
+      "generator_sha256": "16d4b3b39657197cfd86ab491fc3bf15d6cf3619bfe47571c8e75ce4faab928d",
       "source_sha256": "31f07d9350dad3f8964fd613c31309ac160fdef13dfac59df6fd082de78d6e8f",
       "spec": {
-        "kind": "fanbase",
-        "name": "svg",
-        "sha256": "1355a18f63a724a63d7975f79f4477c9e72605d5ed19917861ba6bfa565bd09a",
-        "matches_registry_index": null
+        "kind": "file",
+        "name": "fuzzing/fandango/specs/svg.fan",
+        "sha256": "4f103c6e0579230a27cebd68287c62d381c6a8bdb0cccc85c17196135d9d67d9"
       },
       "output": {
-        "sha256": "b52e84c53a55932ed2d532b11f6ef298b261e231599d2bb41b4a531c8cb89e80",
-        "bytes": 601
+        "sha256": "29a0c90ef53cd12d8f01267aa6b42a9e82e53b060bc6f7a3ab0287ac83060d54",
+        "bytes": 1283
       },
       "replay": {
         "batch_status": "ok",
@@ -239,12 +238,12 @@
           "ok": 1
         },
         "image_ids": [
-          "sha256:11eedfaf0f227da456ed42dd0605ee3e00e0230b39617995c21529bc525640b6"
+          "sha256:4adaabb450931c33102e7bc1317dda3e4b03472c64dece30667b20d972d4ef76"
         ]
       },
       "afl": {
         "prepared": true,
-        "image_id": "sha256:bb0c4671cd7b82a3b8d8bceadbfc33f94d09fd25dd669664cc37095847e10b39",
+        "image_id": "sha256:0ace94e53e5ba53e6937c75b83e512505ae9541827ad895a3c8bb632d5cb13fe",
         "feedback_kind": "librsvg_rust_pcguard_edges",
         "unique_seeds": 2,
         "check": {
@@ -253,9 +252,9 @@
         }
       },
       "problems": [],
-      "fandango_receipt_sha256": "bad24baf0ebe76602d1974fa93759adf5908ddfa251b16b9551bbba15b9f32c9",
-      "replay_receipt_sha256": "4a15ff520a0bf64f92886b3c0dc9567443bfc512ee9479ed271e15e05c223f32",
-      "afl_plan_sha256": "25cf2e77a489f7b0a2d9a1180dd34aec25a1e219ac99a5863e8dc482e1e8572d"
+      "fandango_receipt_sha256": "5c51ed6bfd4ac24f136f7cb468eed1f00a2f222f080b8848b68c3f92c4782843",
+      "replay_receipt_sha256": "a75d518a7d225e267c2326bc50e50c335d29169a2f5d43fe3cd454656f5a8a39",
+      "afl_plan_sha256": "538d095fdea01e85a7562eccdfd37e0d052608b538c1f1154bfa5fdece4647af"
     },
     {
       "format": "http11",
@@ -560,7 +559,7 @@
     }
   ],
   "limitations": [
-    "The seven Fanbase -F routes fetched live registry specs; their exact SHA-256 snapshots are recorded, but an upstream Fanbase change can alter a future default run.",
+    "The Fanbase -F routes (seven in the first run, six after SVG moved to the local svg.fan) fetched live registry specs; their exact SHA-256 snapshots are recorded, but an upstream Fanbase change can alter a future default run.",
     "Replay success records one-case target process completion. Some fuzz entrypoints can swallow parser rejection; these results do not by themselves prove semantic acceptance of every generated file.",
     "AFL++ was prepared and checked only; no fuzz campaign or generated-input coverage measurement was run.",
     "The local plain-MP3 spec emits six fixed whole-frame valid prefixes, not a general MP3 grammar or stripped Fanbase output."

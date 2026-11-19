@@ -38,16 +38,23 @@ FORMATS = PROJECT_FORMATS
 # stream.
 # Fanbase has no YAML spec, so yaml uses the bundled schema-neutral yaml.fan.
 # Fanbase has no TOML spec either; toml uses the local toml.fan.
+# Fanbase's svg spec stays selectable with --fanbase svg, but most of its
+# output has zero or near-zero sizes, references to undefined ids or invalid
+# property values, so the default svg route is the local svg.fan.
 FANBASE_FORMATS = {"png": "png", "zip": "zip", "wav": "wav", "svg": "svg",
                    "json": "json", "xml": "xml"}
 TAGGED_MP3_CONTROL_PREFIX = "controls/mp3/id3v2-tagged-"
 LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan", "mp3": "mp3_plain.fan",
                "http11": "http11_request.fan", "ascii_ply": "ascii_ply.fan",
-               "ascii_pnm": "ascii_pnm_p3.fan", "yaml": "yaml.fan", "toml": "toml.fan", "sql": "sql.fan", "dns": "dns_message.fan"}
+               "ascii_pnm": "ascii_pnm_p3.fan", "yaml": "yaml.fan", "toml": "toml.fan", "sql": "sql.fan", "dns": "dns_message.fan",
+               "svg": "svg.fan"}
+# Formats with a Fanbase spec whose default route is the bundled spec.
+PREFER_LOCAL = {"svg"}
 # Extra Fandango options for a bundled spec. Fandango's default node budget
-# keeps mp4.fan at its smallest derivation (audio only, with no metadata) and
-# pdf.fan at one or two pages.
-LOCAL_SPEC_OPTIONS = {"mp4": ["--max-nodes", "2000"], "pdf": ["--max-nodes", "2000"]}
+# keeps mp4.fan at its smallest derivation (audio only, with no metadata),
+# pdf.fan at one or two pages and svg.fan at one to six top-level elements.
+LOCAL_SPEC_OPTIONS = {"mp4": ["--max-nodes", "2000"], "pdf": ["--max-nodes", "2000"],
+                      "svg": ["--max-nodes", "2000"]}
 # Passed as -x with --spec; Fandango defaults to '.txt' for -f.
 EXTENSIONS = {"png": ".png", "zip": ".zip", "mp4": ".mp4", "wav": ".wav",
               "pdf": ".pdf", "svg": ".svg", "http11": ".http", "ascii_ply": ".ply",
@@ -224,7 +231,7 @@ def validate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> Path | N
         cli.error("--timeout must be positive")
     expected_fanbase = fanbase_format(args)
     if args.fanbase is None and args.spec is None:
-        if expected_fanbase is not None:
+        if expected_fanbase is not None and args.format not in PREFER_LOCAL:
             args.fanbase = expected_fanbase
         elif args.format in LOCAL_SPECS:
             args.spec = ROOT / "fuzzing/fandango/specs" / LOCAL_SPECS[args.format]

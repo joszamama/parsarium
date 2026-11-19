@@ -14,7 +14,7 @@ plan check. No AFL++ campaign was started.
 | MP4 | `cpp/exiv2` | local `mp4.fan` | 1/1 / ready |
 | WAV | `c/dr_wav` | Fanbase `wav` | 1/1 / ready |
 | PDF | `cpp/poppler` | local `pdf.fan` | 1/1 / ready |
-| SVG | `c/librsvg` | Fanbase `svg` | 1/1 / ready |
+| SVG | `c/librsvg` | local `svg.fan` | 1/1 / ready |
 | HTTP/1.1 | `cpp/poco` | local `http11_request.fan` | 1/1 / ready |
 | ASCII PLY | `c/assetkit` | local `ascii_ply.fan` | 1/1 / ready |
 | ASCII PNM | `cpp/openimageio` | local `ascii_pnm_p3.fan` | 1/1 / ready |
@@ -70,3 +70,13 @@ budget yields only one- and two-page files. The seed-7 output has four pages.
 The local Poppler base image had been rebuilt and its AFL++ image removed, so
 both receipts were refreshed first; the base control coverage (39 library
 lines) and the AFL++ feedback edge count (953) are unchanged.
+
+The SVG row was rechecked on 19 November 2026 after SVG moved from Fanbase's
+`svg` spec to the local `svg.fan` (`--case svg/c/librsvg`). The default route
+passes `--max-nodes 2000` with the bundled spec, because Fandango's default
+node budget yields one to six top-level elements. The seed-7 output is a
+128×4 file with a viewBox, two ellipses, a rect, a line and nested groups. The
+local librsvg base image differed from its receipt, so `afl build` re-verified
+it (2,949 library lines, unchanged) and the AFL++ image, which was missing,
+was rebuilt; control feedback is 5,204 edges (5,214 before), with the valid
+path still adding stable edges.
