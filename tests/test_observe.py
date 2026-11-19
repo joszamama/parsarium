@@ -57,6 +57,11 @@ class ExtractionTests(unittest.TestCase):
         record = observe.classify(EXPECTED, None, "", "", {}, True)
         self.assertEqual(record, {"class": "timeout"})
 
+    def test_unreachable_daemon_is_a_harness_error(self):
+        stderr = "docker: Cannot connect to the Docker daemon at unix:///x/docker.sock."
+        record = observe.classify(EXPECTED, 125, "", stderr, {}, False)
+        self.assertEqual(record["class"], "harness_error")
+
     def test_python_repr_message(self):
         stderr = "control mismatch: {'width': 5, 'height': 4, 'alpha': True, 'mode': None, 'px': (1, 2)}\n"
         record = observe.classify(EXPECTED, 1, "", stderr, {}, False)
