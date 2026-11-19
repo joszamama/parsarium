@@ -34,10 +34,16 @@ int parsarium_parse_mp4(const uint8_t *data, size_t size, struct parsarium_mp4_r
     const openshot::ReaderInfo &info = reader.info;
     result->video = info.has_video ? 1 : 0;
     result->audio = info.has_audio ? 1 : 0;
-    result->width = info.width;
-    result->height = info.height;
-    copy_codec(result->video_codec, info.vcodec);
-    copy_codec(result->audio_codec, info.acodec);
+    // Without a video stream FFmpegReader fills width and height with its
+    // 720x480 default and the codec fields describe no stream, so the video
+    // fields are kept only with a video stream and the audio codec only with
+    // an audio stream.
+    if (info.has_video) {
+      result->width = info.width;
+      result->height = info.height;
+      copy_codec(result->video_codec, info.vcodec);
+    }
+    if (info.has_audio) copy_codec(result->audio_codec, info.acodec);
     reader.Close();
     ok = result->video || result->audio;
   } catch (const openshot::ExceptionBase &) {

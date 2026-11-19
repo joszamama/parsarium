@@ -18,8 +18,8 @@ int main(int argc, char **argv) {
   fclose(file);
   struct parsarium_mp4_result result;
   if (!parsarium_parse_mp4(input, size, &result)) return 5;
-  printf("{\"video\":%d,\"audio\":%d,\"width\":%d,\"height\":%d",
-         result.video, result.audio, result.width, result.height);
+  printf("{\"video\":%d,\"audio\":%d", result.video, result.audio);
+  if (result.video) printf(",\"width\":%d,\"height\":%d", result.width, result.height);
   print_codec("video_codec", result.video_codec);
   print_codec("audio_codec", result.audio_codec);
   puts("}");

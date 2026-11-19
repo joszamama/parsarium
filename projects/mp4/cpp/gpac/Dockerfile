@@ -12,7 +12,7 @@ RUN python3 -I /work/check-source.py /work/source-lock.json /work/gpac-26.07.0
 COPY adapter /work/adapter
 RUN printf '%s\n' \
  '81e02f3264bb94e4e299b8e1e4be401f9bf20f97ff7822768cd9f891606b0ca3  /work/adapter/cpp/mp4/gpac.cpp' \
- '7eda82a3d182550fb28aa3efbeaa97b9057d216ddbbf67d49e351fb4c2bcbc5e  /work/adapter/c/mp4/gpac.c' | sha256sum --check
+ '2d6689b53a8e59435a0e141a416adc26aa334cb6e9110c07a00deb9cb7b2017b  /work/adapter/c/mp4/gpac.c' | sha256sum --check
 COPY harness.cpp harness.h replay.cpp build.sh /work/
 RUN chmod +x /work/build.sh && /work/build.sh \
  && { clang++ --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt

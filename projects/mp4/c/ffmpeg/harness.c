@@ -26,24 +26,28 @@ int parsarium_parse_mp4(const uint8_t *data, size_t size, struct parsarium_mp4_r
   if (avformat_find_stream_info(ctx, NULL) < 0) goto done;
   AVDictionaryEntry *brand = av_dict_get(ctx->metadata, "major_brand", NULL, 0);
   AVDictionaryEntry *title = av_dict_get(ctx->metadata, "title", NULL, 0);
-  if (!brand || !title || strlen(brand->value) >= sizeof(result->brand) ||
-      strlen(title->value) >= sizeof(result->title)) goto done;
-  strcpy(result->brand, brand->value); strcpy(result->title, title->value);
+  if ((brand && !(result->brand = strdup(brand->value))) ||
+      (title && !(result->title = strdup(title->value)))) goto done;
   for (unsigned i = 0; i < ctx->nb_streams; ++i) {
     AVCodecParameters *codec = ctx->streams[i]->codecpar;
     if (codec->codec_type == AVMEDIA_TYPE_VIDEO) {
-      result->video_tracks++;
-      result->width = codec->width; result->height = codec->height;
+      if (!result->video_tracks++) { result->width = codec->width; result->height = codec->height; }
     } else if (codec->codec_type == AVMEDIA_TYPE_AUDIO) result->audio_tracks++;
   }
-  ok = result->video_tracks > 0 && result->audio_tracks > 0;
+  ok = 1;
 done:
+  if (!ok) parsarium_free_mp4(result);
   avformat_close_input(&ctx);
   return ok;
 }
 
+void parsarium_free_mp4(struct parsarium_mp4_result *result) {
+  free(result->brand); free(result->title);
+  result->brand = result->title = NULL;
+}
+
 int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
   struct parsarium_mp4_result result;
-  (void)parsarium_parse_mp4(data, size, &result);
+  if (parsarium_parse_mp4(data, size, &result)) parsarium_free_mp4(&result);
   return 0;
 }

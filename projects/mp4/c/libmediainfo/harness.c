@@ -5,14 +5,13 @@
 #include <string.h>
 #include <unistd.h>
 
-static int copy_ascii(char *out, size_t capacity, const char *input) {
-    if (!input || !*input) return 0;
-    size_t length = strlen(input);
-    if (length >= capacity) return 0;
-    for (size_t i = 0; i < length; i++)
-        if ((unsigned char)input[i] < 32 || (unsigned char)input[i] > 126 || input[i] == '"' || input[i] == '\\') return 0;
-    memcpy(out, input, length + 1);
-    return 1;
+/* MediaInfo returns "" for a field the input does not have; that field is
+   left NULL and omitted from the output. */
+static int copy_field(char **out, void *handle, MediaInfo_stream_C stream, const char *name) {
+    const char *value = MediaInfoA_Get(handle, stream, 0, name, MediaInfo_Info_Text, MediaInfo_Info_Name);
+    if (!value || !*value) return 1;
+    *out = strdup(value);
+    return *out != NULL;
 }
 
 int parsarium_parse_mp4(const uint8_t *data, size_t size, struct parsarium_mp4_result *result) {
@@ -31,22 +30,28 @@ int parsarium_parse_mp4(const uint8_t *data, size_t size, struct parsarium_mp4_r
     void *handle = MediaInfoA_New();
     int ok = handle && MediaInfoA_Open(handle, path);
     if (ok) {
-        ok = copy_ascii(result->container, sizeof(result->container), MediaInfoA_Get(handle, MediaInfo_Stream_General, 0, "Format", MediaInfo_Info_Text, MediaInfo_Info_Name)) &&
-             copy_ascii(result->title, sizeof(result->title), MediaInfoA_Get(handle, MediaInfo_Stream_General, 0, "Title", MediaInfo_Info_Text, MediaInfo_Info_Name)) &&
-             copy_ascii(result->video, sizeof(result->video), MediaInfoA_Get(handle, MediaInfo_Stream_Video, 0, "Format", MediaInfo_Info_Text, MediaInfo_Info_Name)) &&
-             copy_ascii(result->audio, sizeof(result->audio), MediaInfoA_Get(handle, MediaInfo_Stream_Audio, 0, "Format", MediaInfo_Info_Text, MediaInfo_Info_Name));
-        result->width = atoi(MediaInfoA_Get(handle, MediaInfo_Stream_Video, 0, "Width", MediaInfo_Info_Text, MediaInfo_Info_Name));
-        result->height = atoi(MediaInfoA_Get(handle, MediaInfo_Stream_Video, 0, "Height", MediaInfo_Info_Text, MediaInfo_Info_Name));
-        ok = ok && result->width > 0 && result->height > 0;
+        ok = copy_field(&result->container, handle, MediaInfo_Stream_General, "Format") &&
+             copy_field(&result->title, handle, MediaInfo_Stream_General, "Title") &&
+             copy_field(&result->video, handle, MediaInfo_Stream_Video, "Format") &&
+             copy_field(&result->audio, handle, MediaInfo_Stream_Audio, "Format") &&
+             copy_field(&result->width, handle, MediaInfo_Stream_Video, "Width") &&
+             copy_field(&result->height, handle, MediaInfo_Stream_Video, "Height");
         MediaInfoA_Close(handle);
+        if (!ok) parsarium_free_mp4(result);
     }
     if (handle) MediaInfoA_Delete(handle);
     unlink(path);
     return ok;
 }
 
+void parsarium_free_mp4(struct parsarium_mp4_result *result) {
+    free(result->container); free(result->title); free(result->video);
+    free(result->audio); free(result->width); free(result->height);
+    memset(result, 0, sizeof(*result));
+}
+
 int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     struct parsarium_mp4_result result;
-    (void)parsarium_parse_mp4(data, size, &result);
+    if (parsarium_parse_mp4(data, size, &result)) parsarium_free_mp4(&result);
     return 0;
 }

@@ -34,7 +34,9 @@ int parsarium_parse_mp4(const uint8_t *data, size_t size, struct parsarium_mp4_r
     if (!producer) { mlt_profile_close(profile); mlt_factory_close(); return 0; }
     mlt_properties properties = mlt_producer_properties(producer);
     result->streams = mlt_properties_get_int(properties, "meta.media.nb_streams");
-    int ok = result->streams > 0 && result->streams <= 64;
+    /* Stream count, codecs and the first video stream's size are the
+       producer's meta.media properties; a missing stream kind stays unset. */
+    int ok = result->streams >= 0;
     if (ok) {
         for (int i = 0; i < result->streams; ++i) {
             char key[96];
@@ -42,13 +44,15 @@ int parsarium_parse_mp4(const uint8_t *data, size_t size, struct parsarium_mp4_r
             const char *type = mlt_properties_get(properties, key);
             snprintf(key, sizeof(key), "meta.media.%d.codec.name", i);
             const char *codec = mlt_properties_get(properties, key);
-            if (type && strcmp(type, "video") == 0 && !result->video_codec[0]) {
+            if (type && strcmp(type, "video") == 0 && !result->has_video) {
+                result->has_video = 1;
                 copy_codec(result->video_codec, codec);
                 snprintf(key, sizeof(key), "meta.media.%d.codec.width", i);
                 result->width = mlt_properties_get_int(properties, key);
                 snprintf(key, sizeof(key), "meta.media.%d.codec.height", i);
                 result->height = mlt_properties_get_int(properties, key);
-            } else if (type && strcmp(type, "audio") == 0 && !result->audio_codec[0]) {
+            } else if (type && strcmp(type, "audio") == 0 && !result->has_audio) {
+                result->has_audio = 1;
                 copy_codec(result->audio_codec, codec);
             }
         }

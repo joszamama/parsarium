@@ -3,7 +3,8 @@
 #include <stddef.h>
 #include <stdint.h>
 struct parsarium_mp4_result {
-  char container[64], title[256], video_codec[32], audio_codec[32];
+  char *container, *title, *video_codec, *audio_codec;
 };
 int parsarium_parse_mp4(const uint8_t *data, size_t size, struct parsarium_mp4_result *result);
+void parsarium_free_mp4(struct parsarium_mp4_result *result);
 #endif

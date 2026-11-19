@@ -7,10 +7,18 @@
 #include <string.h>
 #include <unistd.h>
 
-static void copy_property(mpv_handle *mpv, const char *name, char *out, size_t size) {
+/* A property libmpv does not report stays NULL and prints as "". */
+static int copy_property(mpv_handle *mpv, const char *name, char **out) {
   char *value = mpv_get_property_string(mpv, name);
-  if (value) snprintf(out, size, "%s", value);
+  if (value && !(*out = strdup(value))) { mpv_free(value); return 0; }
   mpv_free(value);
+  return 1;
+}
+
+void parsarium_free_mp4(struct parsarium_mp4_result *result) {
+  free(result->container); free(result->title);
+  free(result->video_codec); free(result->audio_codec);
+  memset(result, 0, sizeof(*result));
 }
 
 #ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
@@ -71,8 +79,8 @@ int parsarium_parse_mp4(const uint8_t *data, size_t size, struct parsarium_mp4_r
     else if (event->event_id == MPV_EVENT_END_FILE || event->event_id == MPV_EVENT_SHUTDOWN) break;
   }
   if (!loaded) goto done;
-  copy_property(mpv, "file-format", result->container, sizeof(result->container));
-  copy_property(mpv, "metadata/by-key/title", result->title, sizeof(result->title));
+  if (!copy_property(mpv, "file-format", &result->container) ||
+      !copy_property(mpv, "metadata/by-key/title", &result->title)) goto done;
   int64_t count = 0;
   if (mpv_get_property(mpv, "track-list/count", MPV_FORMAT_INT64, &count) < 0) goto done;
   for (int64_t i = 0; i < count && i < 64; ++i) {
@@ -80,16 +88,19 @@ int parsarium_parse_mp4(const uint8_t *data, size_t size, struct parsarium_mp4_r
     snprintf(name, sizeof(name), "track-list/%lld/type", (long long)i);
     char *type = mpv_get_property_string(mpv, name);
     snprintf(name, sizeof(name), "track-list/%lld/codec", (long long)i);
-    if (type && !strcmp(type, "video") && !result->video_codec[0])
-      copy_property(mpv, name, result->video_codec, sizeof(result->video_codec));
-    else if (type && !strcmp(type, "audio") && !result->audio_codec[0])
-      copy_property(mpv, name, result->audio_codec, sizeof(result->audio_codec));
+    int copied = 1;
+    if (type && !strcmp(type, "video") && !result->video_codec)
+      copied = copy_property(mpv, name, &result->video_codec);
+    else if (type && !strcmp(type, "audio") && !result->audio_codec)
+      copied = copy_property(mpv, name, &result->audio_codec);
     mpv_free(type);
+    if (!copied) goto done;
   }
   /* The MOV demuxer is the only configured FFmpeg demuxer. Track types are
      optional: valid MP4s may contain only video, only audio, or metadata. */
-  ok = result->container[0] != 0;
+  ok = result->container && result->container[0] != 0;
 done:
+  if (!ok) parsarium_free_mp4(result);
   mpv_terminate_destroy(mpv);
 #ifdef FUZZING_BUILD_MODE_UNSAFE_FOR_PRODUCTION
   close(42);
@@ -100,6 +111,6 @@ done:
 
 int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
   struct parsarium_mp4_result result;
-  (void)parsarium_parse_mp4(data, size, &result);
+  if (parsarium_parse_mp4(data, size, &result)) parsarium_free_mp4(&result);
   return 0;
 }

@@ -26,25 +26,22 @@ int parsarium_parse(const uint8_t *data, size_t size, struct parsarium_result *r
     GstDiscovererInfo *info = gst_discoverer_discover_uri(discoverer, uri, NULL);
     int ok = 0;
     if (info && gst_discoverer_info_get_result(info) == GST_DISCOVERER_OK) {
+        /* The title is optional; the stream counts and the first video
+           stream's size are what the discoverer reported for this input. */
         const GstTagList *tags = gst_discoverer_info_get_tags(info);
-        gchar *title = NULL;
-        if (tags && gst_tag_list_get_string(tags, GST_TAG_TITLE, &title) &&
-            strlen(title) < sizeof(result->title)) {
-            memcpy(result->title, title, strlen(title) + 1);
-            GList *video = gst_discoverer_info_get_video_streams(info);
-            GList *audio = gst_discoverer_info_get_audio_streams(info);
-            if (video && !video->next && audio && !audio->next) {
-                GstDiscovererVideoInfo *stream = GST_DISCOVERER_VIDEO_INFO(video->data);
-                result->width = gst_discoverer_video_info_get_width(stream);
-                result->height = gst_discoverer_video_info_get_height(stream);
-                result->video_tracks = 1;
-                result->audio_tracks = 1;
-                ok = result->width > 0 && result->height > 0;
-            }
-            gst_discoverer_stream_info_list_free(video);
-            gst_discoverer_stream_info_list_free(audio);
+        if (tags) gst_tag_list_get_string(tags, GST_TAG_TITLE, &result->title);
+        GList *video = gst_discoverer_info_get_video_streams(info);
+        GList *audio = gst_discoverer_info_get_audio_streams(info);
+        result->video_tracks = g_list_length(video);
+        result->audio_tracks = g_list_length(audio);
+        if (video) {
+            GstDiscovererVideoInfo *stream = GST_DISCOVERER_VIDEO_INFO(video->data);
+            result->width = gst_discoverer_video_info_get_width(stream);
+            result->height = gst_discoverer_video_info_get_height(stream);
         }
-        g_free(title);
+        gst_discoverer_stream_info_list_free(video);
+        gst_discoverer_stream_info_list_free(audio);
+        ok = 1;
     }
     if (info) gst_discoverer_info_unref(info);
     g_object_unref(discoverer);
@@ -53,8 +50,13 @@ int parsarium_parse(const uint8_t *data, size_t size, struct parsarium_result *r
     return ok;
 }
 
+void parsarium_free(struct parsarium_result *result) {
+    g_free(result->title);
+    result->title = NULL;
+}
+
 int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     struct parsarium_result result;
-    (void)parsarium_parse(data, size, &result);
+    if (parsarium_parse(data, size, &result)) parsarium_free(&result);
     return 0;
 }

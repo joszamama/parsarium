@@ -7,6 +7,7 @@
 const char *__asan_default_options(void) { return "detect_leaks=0"; }
 
 static void json_string(const char *s) {
+  if (!s) s = "";
   putchar('"');
   for (; *s; ++s) {
     unsigned char c = (unsigned char)*s;
@@ -28,5 +29,6 @@ int main(int argc,char **argv){
  printf(",\"video_codec\":");json_string(result.video_codec);
  printf(",\"audio_codec\":");json_string(result.audio_codec);
  printf("}\n");
+ parsarium_free_mp4(&result);
  return 0;
 }

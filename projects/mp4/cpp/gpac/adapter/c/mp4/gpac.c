@@ -7,19 +7,22 @@ int main(int argc, char **argv) {
   if (!file) return 1;
   u32 tracks = gf_isom_get_track_count(file);
   u32 video = 0, audio = 0, width = 0, height = 0;
+  int has_size = 0;
   for (u32 i = 1; i <= tracks; i++) {
     u32 type = gf_isom_get_media_type(file, i);
     if (type == GF_ISOM_MEDIA_VISUAL) {
-      video++;
-      if (gf_isom_get_visual_info(file, i, 1, &width, &height) != GF_OK) return 1;
+      /* The reported size is the first visual track's sample description. */
+      if (!video++) has_size = gf_isom_get_visual_info(file, i, 1, &width, &height) == GF_OK;
     } else if (type == GF_ISOM_MEDIA_AUDIO) audio++;
   }
   u32 timescale = gf_isom_get_timescale(file);
   u64 duration = gf_isom_get_duration(file);
-  if (!video || !audio || !timescale) return 1;
-  printf("{\"tracks\":%u,\"video_tracks\":%u,\"audio_tracks\":%u,\"width\":%u,\"height\":%u,\"duration_ms\":%llu}\n",
-         tracks, video, audio, width, height,
-         (unsigned long long)(duration * 1000 / timescale));
+  /* Size needs a visual track with a sample description and duration a movie
+     timescale; either is omitted when the file has none. */
+  printf("{\"tracks\":%u,\"video_tracks\":%u,\"audio_tracks\":%u", tracks, video, audio);
+  if (has_size) printf(",\"width\":%u,\"height\":%u", width, height);
+  if (timescale) printf(",\"duration_ms\":%llu", (unsigned long long)(duration * 1000 / timescale));
+  printf("}\n");
   gf_isom_delete(file);
   return 0;
 }

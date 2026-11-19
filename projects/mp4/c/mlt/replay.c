@@ -17,6 +17,7 @@ int main(int argc, char **argv) {
     if (result.video_codec[0]) printf("\"%s\"", result.video_codec); else fputs("null", stdout);
     fputs(",\"audio_codec\":", stdout);
     if (result.audio_codec[0]) printf("\"%s\"", result.audio_codec); else fputs("null", stdout);
-    printf(",\"width\":%d,\"height\":%d}\n", result.width, result.height);
+    if (result.has_video) printf(",\"width\":%d,\"height\":%d", result.width, result.height);
+    puts("}");
     return 0;
 }

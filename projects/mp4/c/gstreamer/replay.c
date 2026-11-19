@@ -21,10 +21,12 @@ int main(int argc, char **argv) {
     fclose(file);
     struct parsarium_result result;
     if (!parsarium_parse(data, size, &result)) return 5;
-    printf("{\"title\":");
-    json_title(result.title);
-    printf(",\"video_tracks\":%u,\"audio_tracks\":%u,\"width\":%u,\"height\":%u}\n",
-           result.video_tracks, result.audio_tracks, result.width, result.height);
+    putchar('{');
+    if (result.title) { printf("\"title\":"); json_title(result.title); putchar(','); }
+    printf("\"video_tracks\":%u,\"audio_tracks\":%u", result.video_tracks, result.audio_tracks);
+    if (result.video_tracks) printf(",\"width\":%u,\"height\":%u", result.width, result.height);
+    printf("}\n");
+    parsarium_free(&result);
 
     return 0;
 }
