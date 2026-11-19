@@ -44,7 +44,10 @@ switch ($package) {
         $root = $image->getDocument();
         $rects = $root->getElementsByTagName('rect');
         $output = ['width' => $root->getWidth(), 'height' => $root->getHeight(),
-            'rectangles' => count($rects), 'first_rect_width' => $rects[0]->getWidth()];
+            'rectangles' => count($rects)];
+        if (count($rects) > 0) {
+            $output['first_rect_width'] = $rects[0]->getWidth();
+        }
         break;
     case 'enshrined/svg-sanitize':
         $sanitized = (new \enshrined\svgSanitize\Sanitizer())->sanitize(file_get_contents($path));
@@ -55,9 +58,11 @@ switch ($package) {
         if (!$doc->loadXML($sanitized)) {
             throw new RuntimeException('sanitized SVG is not XML');
         }
-        $output = ['root' => $doc->documentElement->localName,
-            'rectangles' => $doc->getElementsByTagName('rect')->length,
-            'first_fill' => $doc->getElementsByTagName('rect')->item(0)->getAttribute('fill')];
+        $rects = $doc->getElementsByTagName('rect');
+        $output = ['root' => $doc->documentElement->localName, 'rectangles' => $rects->length];
+        if ($rects->length > 0) {
+            $output['first_fill'] = $rects->item(0)->getAttribute('fill');
+        }
         break;
     case 'atelier/svg':
         $image = \Atelier\Svg\Svg::load($path);
@@ -73,7 +78,10 @@ switch ($package) {
             throw new RuntimeException('optimized SVG is not XML');
         }
         $rects = $doc->getElementsByTagName('rect');
-        $output = ['rectangles' => $rects->length, 'first_fill' => $rects->item(0)->getAttribute('fill')];
+        $output = ['rectangles' => $rects->length];
+        if ($rects->length > 0) {
+            $output['first_fill'] = $rects->item(0)->getAttribute('fill');
+        }
         break;
     case 'rhukster/dom-sanitizer':
         $sanitized = (new \Rhukster\DomSanitizer\DOMSanitizer(\Rhukster\DomSanitizer\DOMSanitizer::SVG))
@@ -83,8 +91,10 @@ switch ($package) {
             throw new RuntimeException('sanitized SVG is not XML');
         }
         $rects = $doc->getElementsByTagName('rect');
-        $output = ['root' => $doc->documentElement->localName,
-            'rectangles' => $rects->length, 'first_fill' => $rects->item(0)->getAttribute('fill')];
+        $output = ['root' => $doc->documentElement->localName, 'rectangles' => $rects->length];
+        if ($rects->length > 0) {
+            $output['first_fill'] = $rects->item(0)->getAttribute('fill');
+        }
         break;
     case 'atelier/rasterizer':
         $bitmap = \Atelier\Rasterizer\Rasterizer::rsvgConvert()->rasterize(
@@ -119,14 +129,25 @@ switch ($package) {
             'rectangles' => $root->countChildren()];
         break;
     case 'choowx/rasterize-svg':
+        // The package returns sharp's stdout; an empty string is how it reports a failed render.
         $png = \Choowx\RasterizeSvg\Svg::make(file_get_contents($path))->toPng();
+        if ($png === '') {
+            throw new RuntimeException('rasterize-svg returned no image');
+        }
         $size = getimagesizefromstring($png);
         $image = imagecreatefromstring($png);
-        $red = imagecolorsforindex($image, imagecolorat($image, 0, 0));
-        $green = imagecolorsforindex($image, imagecolorat($image, 1, 0));
-        $output = ['width' => $size[0], 'height' => $size[1],
-            'left_rgb' => [$red['red'], $red['green'], $red['blue']],
-            'right_rgb' => [$green['red'], $green['green'], $green['blue']]];
+        if ($size === false || $image === false) {
+            throw new RuntimeException('rasterize-svg returned an undecodable image');
+        }
+        $output = ['width' => $size[0], 'height' => $size[1]];
+        if ($size[0] > 0 && $size[1] > 0) {
+            $red = imagecolorsforindex($image, imagecolorat($image, 0, 0));
+            $output['left_rgb'] = [$red['red'], $red['green'], $red['blue']];
+        }
+        if ($size[0] > 1 && $size[1] > 0) {
+            $green = imagecolorsforindex($image, imagecolorat($image, 1, 0));
+            $output['right_rgb'] = [$green['red'], $green['green'], $green['blue']];
+        }
         break;
     case 'phil/svg-sanitizer':
         $result = (new \Phil\SvgSanitizer\SvgSanitizer())->sanitize(file_get_contents($path));
@@ -186,7 +207,10 @@ switch ($package) {
             throw new RuntimeException('sanitized SVG is not XML');
         }
         $rects = $doc->getElementsByTagName('rect');
-        $output = ['rectangles' => $rects->length, 'first_fill' => $rects->item(0)->getAttribute('fill')];
+        $output = ['rectangles' => $rects->length];
+        if ($rects->length > 0) {
+            $output['first_fill'] = $rects->item(0)->getAttribute('fill');
+        }
         break;
     case 'laratusk/larasvg':
         \Illuminate\Support\Facades\Process::swap(new \Illuminate\Process\Factory());

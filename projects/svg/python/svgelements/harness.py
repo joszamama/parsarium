@@ -11,10 +11,14 @@ def parse_svg(data: bytes):
     if not data or len(data) > (1 << 20):
         return None
     root = SVG.parse(BytesIO(data))
-    if root.width is None or root.height is None:
-        return None
-    return {"size": [int(root.width), int(root.height)],
-            "rectangles": sum(type(element).__name__ == "Rect" for element in root.elements())}
+    observed = {}
+    # svgelements leaves a dimension it cannot resolve to pixels (em, ex, %
+    # without a context) as a Length or None; size is reported only when both
+    # dimensions resolved to numbers.
+    if all(isinstance(value, (int, float)) for value in (root.width, root.height)):
+        observed["size"] = [int(root.width), int(root.height)]
+    observed["rectangles"] = sum(type(element).__name__ == "Rect" for element in root.elements())
+    return observed
 
 
 def fuzz_one_input(data: bytes):

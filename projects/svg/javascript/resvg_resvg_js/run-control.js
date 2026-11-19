@@ -8,6 +8,8 @@ const rawDir = path.join(outputDir, 'v8');
 fs.mkdirSync(rawDir, { recursive: true });
 const child = spawnSync(process.execPath, ['/work/replay.js', '/input/control'], {
   encoding: 'utf8',
+  // The replay prints every RGBA value; the 1 MiB default would cut off larger images.
+  maxBuffer: 1 << 30,
   env: { ...process.env, NODE_V8_COVERAGE: rawDir },
 });
 if (child.status !== 0) {

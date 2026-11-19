@@ -2,10 +2,14 @@ use serde_json::{Value, json};
 use std::{env, fs, path::Path};
 
 // The component parsers accept an SVG path-data value, rather than a document.
-// This extraction is deliberately limited to the checked-in valid control.
-fn path_data(text: &str) -> Result<&str, Box<dyn std::error::Error>> {
-    let after = text.split_once("<path d=\"").ok_or("control has no path")?.1;
-    Ok(after.split_once('"').ok_or("path attribute is not closed")?.0)
+// The value is the `d` attribute of the document's first SVG `path` element
+// that has one; a document without such a path gives no value.
+fn path_data(text: &str) -> Result<Option<String>, Box<dyn std::error::Error>> {
+    let options = roxmltree::ParsingOptions { allow_dtd: true, ..Default::default() };
+    let document = roxmltree::Document::parse_with_options(text, options)?;
+    Ok(document.descendants()
+        .filter(|node| node.has_tag_name(("http://www.w3.org/2000/svg", "path")))
+        .find_map(|node| node.attribute("d").map(str::to_owned)))
 }
 
 fn size_usvg(tree: &usvg::Tree) -> Value {
@@ -24,10 +28,17 @@ fn parse_package(package: &str, path: &std::path::Path) -> Result<serde_json::Va
     let text = std::str::from_utf8(&bytes)?;
     let output = match package {
         "svgtypes" => {
-            let segments: Vec<_> = svgtypes::PathParser::from(path_data(text)?)
-                .collect::<Result<_, _>>()?;
-            json!({"path_segments": segments.len(),
-                   "first_command": (segments[0].command() as char).to_string()})
+            let mut output = serde_json::Map::new();
+            if let Some(data) = path_data(text)? {
+                let segments: Vec<_> = svgtypes::PathParser::from(data.as_str())
+                    .collect::<Result<_, _>>()?;
+                output.insert("path_segments".into(), json!(segments.len()));
+                if let Some(first) = segments.first() {
+                    output.insert("first_command".into(),
+                                  json!((first.command() as char).to_string()));
+                }
+            }
+            Value::Object(output)
         }
         _ => return Err(format!("unknown package: {package}").into()),
     };

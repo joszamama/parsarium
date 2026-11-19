@@ -11,14 +11,16 @@ int parsarium_parse_svg(const uint8_t *data, size_t size, struct parsarium_svg_r
     int bands = vips_image_get_bands(image);
     size_t bytes = 0;
     unsigned char *pixels = vips_image_write_to_memory(image, &bytes);
-    int ok = pixels && width > 0 && height > 0 && width * height > 1 && bands >= 3 &&
+    int ok = pixels && width > 0 && height > 0 && bands >= 3 &&
              vips_image_get_format(image) == VIPS_FORMAT_UCHAR &&
              bytes >= (size_t)width * (size_t)height * (size_t)bands;
     if (ok) {
         result->width = (unsigned)width;
         result->height = (unsigned)height;
         memcpy(result->first, pixels, 3);
-        memcpy(result->second, pixels + bands, 3);
+        /* The second sample is the next pixel in row-major order and is absent for a 1x1 image. */
+        result->second_present = width > 1 || height > 1;
+        if (result->second_present) memcpy(result->second, pixels + bands, 3);
     }
     g_free(pixels);
     g_object_unref(image);

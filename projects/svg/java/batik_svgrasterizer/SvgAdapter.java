@@ -42,10 +42,7 @@ public final class SvgAdapter {
                     Document svg = factory.createDocument(path.toUri().toString(), input);
                     int rects = svg.getDocumentElement()
                         .getElementsByTagNameNS("http://www.w3.org/2000/svg", "rect").getLength();
-                    String width = svg.getDocumentElement().getAttribute("width");
-                    String height = svg.getDocumentElement().getAttribute("height");
-                    System.out.printf("{\"width\":%s,\"height\":%s,\"rects\":%d}%n",
-                        width, height, rects);
+                    printRoot(svg.getDocumentElement(), rects);
                 }
             }
             case "batik-transcoder" -> {
@@ -59,7 +56,15 @@ public final class SvgAdapter {
             case "batik-svgrasterizer" -> {
                 Path output = Files.createTempFile("parsarium-svg-", ".png");
                 try {
-                    SVGConverter parser = new SVGConverter();
+                    // The default controller only logs a failed file and goes on; stop on it so
+                    // execute() raises the library's SVGConverterException.
+                    SVGConverter parser = new SVGConverter(new org.apache.batik.apps.rasterizer.DefaultSVGConverterController() {
+                        @Override public boolean proceedOnSourceTranscodingFailure(
+                                org.apache.batik.apps.rasterizer.SVGConverterSource source,
+                                java.io.File dest, String errorCode) {
+                            return false;
+                        }
+                    });
                     parser.setSources(new String[] {path.toAbsolutePath().toString()});
                     parser.setDst(output.toFile());
                     parser.execute();
@@ -69,20 +74,29 @@ public final class SvgAdapter {
                 }
             }
             case "batik-swing" -> {
-                JSVGCanvas canvas = new JSVGCanvas();
+                // Same as new JSVGCanvas(), but load errors are not shown in a dialog (headless).
+                JSVGCanvas canvas = new JSVGCanvas(new org.apache.batik.swing.svg.SVGUserAgentAdapter() {
+                    @Override public void displayError(String message) {}
+                    @Override public void displayError(Exception error) {}
+                }, true, true);
                 CountDownLatch loaded = new CountDownLatch(1);
+                Exception[] failure = new Exception[1];
                 canvas.addSVGDocumentLoaderListener(new SVGDocumentLoaderAdapter() {
                     @Override public void documentLoadingCompleted(SVGDocumentLoaderEvent event) {
+                        loaded.countDown();
+                    }
+                    @Override public void documentLoadingFailed(SVGDocumentLoaderEvent event) {
+                        failure[0] = ((org.apache.batik.swing.svg.SVGDocumentLoader) event.getSource()).getException();
+                        if (failure[0] == null) failure[0] = new IllegalStateException("SVG canvas document loading failed");
                         loaded.countDown();
                     }
                 });
                 canvas.setURI(path.toUri().toString());
                 if (!loaded.await(15, TimeUnit.SECONDS)) throw new IllegalStateException("SVG canvas load timed out");
+                if (failure[0] != null) throw failure[0];
                 var svg = canvas.getSVGDocument();
                 if (svg == null) throw new IllegalStateException("SVG canvas did not parse document");
-                System.out.printf("{\"width\":%s,\"height\":%s,\"rects\":%d}%n",
-                    svg.getDocumentElement().getAttribute("width"),
-                    svg.getDocumentElement().getAttribute("height"),
+                printRoot(svg.getDocumentElement(),
                     svg.getDocumentElement().getElementsByTagNameNS("http://www.w3.org/2000/svg", "rect").getLength());
                 canvas.stopProcessing();
             }
@@ -137,18 +151,27 @@ public final class SvgAdapter {
                          .getBytes(java.nio.charset.StandardCharsets.UTF_8))) {
                     Document svg = parser.transcode(template);
                     if (svg == null) throw new IllegalStateException("Aurora did not parse SVG");
-                    System.out.printf("{\"width\":%s,\"height\":%s,\"rects\":%d}%n",
-                        svg.getDocumentElement().getAttribute("width"),
-                        svg.getDocumentElement().getAttribute("height"),
+                    printRoot(svg.getDocumentElement(),
                         svg.getDocumentElement().getElementsByTagNameNS("http://www.w3.org/2000/svg", "rect").getLength());
                 }
             }
             case "gsvg" -> {
                 var svg = se.alipsa.groovy.svg.io.SvgReader.parse(path.toFile());
                 var rects = svg.findAll(se.alipsa.groovy.svg.Rect.class);
-                System.out.printf("{\"width\":%s,\"height\":%s,\"rects\":%d,\"fills\":\"%s,%s\"}%n",
-                    svg.getWidth(), svg.getHeight(), rects.size(),
-                    rects.get(0).getFill(), rects.get(1).getFill());
+                StringBuilder out = new StringBuilder("{");
+                attribute(out, "width", svg.getWidth());
+                attribute(out, "height", svg.getHeight());
+                out.append("\"rects\":").append(rects.size());
+                if (!rects.isEmpty()) {
+                    StringBuilder fills = new StringBuilder();
+                    for (var rect : rects) {
+                        if (fills.length() > 0) fills.append(',');
+                        Object fill = rect.getFill();
+                        if (fill != null) fills.append(fill);
+                    }
+                    out.append(",\"fills\":").append(quote(fills.toString()));
+                }
+                System.out.println(out.append('}'));
             }
             case "furutuki-transcoder" -> {
                 var generated = new java.io.StringWriter();
@@ -217,8 +240,47 @@ public final class SvgAdapter {
         }
     }
 
+    // The first two pixels in raster order; an image with one pixel reports one.
     private static void printPixels(BufferedImage image) {
-        System.out.printf("{\"width\":%d,\"height\":%d,\"pixels\":\"%08x,%08x\"}%n",
-            image.getWidth(), image.getHeight(), image.getRGB(0, 0), image.getRGB(1, 0));
+        int width = image.getWidth();
+        long count = Math.min(2L, (long) width * image.getHeight());
+        StringBuilder pixels = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            if (i > 0) pixels.append(',');
+            pixels.append(String.format("%08x", image.getRGB(i % width, i / width)));
+        }
+        System.out.printf("{\"width\":%d,\"height\":%d,\"pixels\":\"%s\"}%n",
+            width, image.getHeight(), pixels);
+    }
+
+    // Root width and height as written; a number stays a JSON number, any other value
+    // (units, percentages) is a JSON string, and an absent attribute is omitted.
+    private static void printRoot(org.w3c.dom.Element root, int rects) {
+        StringBuilder out = new StringBuilder("{");
+        attribute(out, "width", root.getAttribute("width"));
+        attribute(out, "height", root.getAttribute("height"));
+        System.out.println(out.append("\"rects\":").append(rects).append('}'));
+    }
+
+    private static void attribute(StringBuilder out, String name, String value) {
+        if (value == null || value.isEmpty()) return;
+        out.append('"').append(name).append("\":");
+        out.append(value.matches("-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?") ? value : quote(value));
+        out.append(',');
+    }
+
+    private static String quote(String value) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : value.toCharArray()) {
+            switch (c) {
+                case '"' -> out.append("\\\"");
+                case '\\' -> out.append("\\\\");
+                default -> {
+                    if (c < 0x20) out.append(String.format("\\u%04x", (int) c));
+                    else out.append(c);
+                }
+            }
+        }
+        return out.append('"').toString();
     }
 }

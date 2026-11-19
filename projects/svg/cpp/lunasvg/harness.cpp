@@ -20,12 +20,17 @@ int parsarium_parse_svg(const uint8_t *data, size_t size, struct parsarium_svg_r
     unlink(path);
     if (!document) return 0;
     auto bitmap = document->renderToBitmap();
-    if (bitmap.isNull() || bitmap.width() != 2 || bitmap.height() != 1) return 0;
+    if (bitmap.isNull() || bitmap.width() <= 0 || bitmap.height() <= 0) return 0;
     bitmap.convertToRGBA();
     const unsigned char *pixels = bitmap.data();
     if (!pixels) return 0;
-    result->width = 2; result->height = 1;
-    memcpy(result->first, pixels, 3); memcpy(result->second, pixels + 4, 3);
+    const int width = bitmap.width(), height = bitmap.height();
+    result->width = unsigned(width); result->height = unsigned(height);
+    memcpy(result->first, pixels, 3);
+    /* The second sample is the next pixel in row-major order and is absent for a 1x1 bitmap. */
+    result->second_present = width > 1 || height > 1;
+    if (result->second_present)
+        memcpy(result->second, width > 1 ? pixels + 4 : pixels + bitmap.stride(), 3);
     return 1;
 }
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {

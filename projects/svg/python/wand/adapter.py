@@ -7,10 +7,16 @@ from pathlib import Path
 
 
 def pixels(image):
+    # Samples are the pixels at (0, 0) and (1, 0); a sample the rendered
+    # image does not have is omitted.
     rgba = image.convert("RGBA")
-    return {"size": [rgba.width, rgba.height],
-            "red": list(rgba.getpixel((0, 0))),
-            "green": list(rgba.getpixel((1, 0)))}
+    observed = {"size": [rgba.width, rgba.height]}
+    if rgba.height > 0:
+        if rgba.width > 0:
+            observed["red"] = list(rgba.getpixel((0, 0)))
+        if rgba.width > 1:
+            observed["green"] = list(rgba.getpixel((1, 0)))
+    return observed
 
 
 def png_pixels(data):
@@ -41,9 +47,15 @@ def parse(name, path):
     if name == "svgpathtools":
         from svgpathtools import svg2paths2
         paths, attributes, svg_attributes = svg2paths2(str(path))
-        return {"paths": len(paths), "width": svg_attributes["width"],
-                "height": svg_attributes["height"],
-                "blue_path": next(a["d"] for a in attributes if a.get("fill") == "#0000ff")}
+        observed = {"paths": len(paths)}
+        for key in ("width", "height"):
+            if key in svg_attributes:
+                observed[key] = svg_attributes[key]
+        # The d of the first path filled #0000ff, omitted when there is none.
+        blue = next((a["d"] for a in attributes if a.get("fill") == "#0000ff"), None)
+        if blue is not None:
+            observed["blue_path"] = blue
+        return observed
 
     if name == "resvg_py":
         import resvg_py
@@ -75,18 +87,24 @@ def parse(name, path):
     if name == "pyvips":
         import pyvips
         image = pyvips.Image.new_from_file(str(path))
-        return {"size": [image.width, image.height],
-                "red": list(image.getpoint(0, 0)),
-                "green": list(image.getpoint(1, 0))}
+        observed = {"size": [image.width, image.height]}
+        if image.height > 0:
+            if image.width > 0:
+                observed["red"] = list(image.getpoint(0, 0))
+            if image.width > 1:
+                observed["green"] = list(image.getpoint(1, 0))
+        return observed
 
     if name == "Wand":
         from wand.image import Image
         with Image(filename=str(path)) as image:
-            return {"size": [image.width, image.height],
-                    "red": [image[0, 0].red_int8, image[0, 0].green_int8,
-                            image[0, 0].blue_int8, image[0, 0].alpha_int8],
-                    "green": [image[1, 0].red_int8, image[1, 0].green_int8,
-                              image[1, 0].blue_int8, image[1, 0].alpha_int8]}
+            observed = {"size": [image.width, image.height]}
+            for key, x in (("red", 0), ("green", 1)):
+                if x < image.width and image.height > 0:
+                    pixel = image[x, 0]
+                    observed[key] = [pixel.red_int8, pixel.green_int8,
+                                     pixel.blue_int8, pixel.alpha_int8]
+            return observed
 
     if name == "scour":
         from scour.scour import scourString

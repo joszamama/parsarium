@@ -8,6 +8,8 @@ const source = bytes.toString('utf8');
 const dimensions = (width, height, format = 'svg') => ({ width, height, format });
 const structure = (width, height, fills) => ({ width: Number(width), height: Number(height), rects: fills.length, fills });
 const pixels = (width, height, rgba) => ({ width: Number(width), height: Number(height), rgba: [...rgba] });
+// A canvas with no pixels has no image data to read: report it empty.
+const imageData = (ctx, width, height) => (width > 0 && height > 0 ? ctx.getImageData(0, 0, width, height).data : []);
 let result;
 
 if (name === 'sharp') {
@@ -21,6 +23,8 @@ if (name === 'sharp') {
 } else if (name === 'probe-image-size') {
   const { sync } = await import(name);
   const meta = sync(bytes);
+  // sync() returns null when it cannot read a size from the input.
+  if (!meta) throw new Error('probe-image-size could not read the image size');
   result = dimensions(meta.width, meta.height, meta.type);
 } else if (['skia-canvas', '@napi-rs/canvas', 'canvas'].includes(name)) {
   const api = await import(name);
@@ -28,16 +32,16 @@ if (name === 'sharp') {
   const canvas = name === 'skia-canvas' ? new api.Canvas(image.width, image.height) : api.createCanvas(image.width, image.height);
   const ctx = canvas.getContext('2d');
   ctx.drawImage(image, 0, 0);
-  result = pixels(image.width, image.height, ctx.getImageData(0, 0, image.width, image.height).data);
+  result = pixels(image.width, image.height, imageData(ctx, image.width, image.height));
 } else if (['canvg', '@yworks/canvg'].includes(name)) {
   const api = await import(name);
   const { createCanvas } = await import('canvas');
   const { DOMParser } = await import('@xmldom/xmldom');
   const canvas = createCanvas(2, 1);
   const ctx = canvas.getContext('2d');
-  const renderer = api.Canvg.fromString(ctx, source, api.presets.node({ DOMParser, canvas: createCanvas, fetch }));
+  const renderer = api.Canvg.fromString(ctx, source, api.presets.node({ DOMParser, canvas: await import('canvas'), fetch }));
   await renderer.render();
-  result = pixels(canvas.width, canvas.height, ctx.getImageData(0, 0, canvas.width, canvas.height).data);
+  result = pixels(canvas.width, canvas.height, imageData(ctx, canvas.width, canvas.height));
 } else if (name === 'svg-parser') {
   const { parse } = await import(name);
   const svg = parse(source).children.find((item) => item.tagName === 'svg');

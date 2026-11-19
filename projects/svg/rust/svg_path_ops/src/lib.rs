@@ -2,10 +2,14 @@ use serde_json::{Value, json};
 use std::{env, fs, path::Path};
 
 // The component parsers accept an SVG path-data value, rather than a document.
-// This extraction is deliberately limited to the checked-in valid control.
-fn path_data(text: &str) -> Result<&str, Box<dyn std::error::Error>> {
-    let after = text.split_once("<path d=\"").ok_or("control has no path")?.1;
-    Ok(after.split_once('"').ok_or("path attribute is not closed")?.0)
+// The value is the `d` attribute of the document's first SVG `path` element
+// that has one; a document without such a path gives no value.
+fn path_data(text: &str) -> Result<Option<String>, Box<dyn std::error::Error>> {
+    let options = roxmltree::ParsingOptions { allow_dtd: true, ..Default::default() };
+    let document = roxmltree::Document::parse_with_options(text, options)?;
+    Ok(document.descendants()
+        .filter(|node| node.has_tag_name(("http://www.w3.org/2000/svg", "path")))
+        .find_map(|node| node.attribute("d").map(str::to_owned)))
 }
 
 fn size_usvg(tree: &usvg::Tree) -> Value {
@@ -24,8 +28,13 @@ fn parse_package(package: &str, path: &std::path::Path) -> Result<serde_json::Va
     let text = std::str::from_utf8(&bytes)?;
     let output = match package {
         "svg_path_ops" => {
-            let parsed = svg_path_ops::pt::PathTransformer::parse(path_data(text)?)?;
-            json!({"serialized": parsed.to_string()})
+            match path_data(text)? {
+                Some(data) => {
+                    let parsed = svg_path_ops::pt::PathTransformer::parse(&data)?;
+                    json!({"serialized": parsed.to_string()})
+                }
+                None => json!({}),
+            }
         }
         _ => return Err(format!("unknown package: {package}").into()),
     };

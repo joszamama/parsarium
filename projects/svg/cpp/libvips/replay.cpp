@@ -8,8 +8,12 @@ int main(int argc, char **argv) {
     fclose(file);
     struct parsarium_svg_result result;
     if (!parsarium_parse_svg(input, size, &result)) return 5;
-    printf("{\"width\":%u,\"height\":%u,\"first\":[%u,%u,%u],\"second\":[%u,%u,%u]}\n",
-           result.width,result.height,result.first[0],result.first[1],result.first[2],
-           result.second[0],result.second[1],result.second[2]);
+    printf("{\"width\":%u,\"height\":%u,\"first\":[%u,%u,%u],\"second\":",
+           result.width,result.height,result.first[0],result.first[1],result.first[2]);
+    if (result.second_present)
+        printf("[%u,%u,%u]", result.second[0], result.second[1], result.second[2]);
+    else
+        fputs("null", stdout);
+    puts("}");
     return 0;
 }

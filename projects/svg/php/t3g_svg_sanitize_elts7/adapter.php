@@ -13,5 +13,8 @@ if (!$doc->loadXML($sanitized)) {
     throw new RuntimeException('sanitized SVG is not XML');
 }
 $rects = $doc->getElementsByTagName('rect');
-echo json_encode(array('rectangles' => $rects->length,
-    'first_fill' => $rects->item(0)->getAttribute('fill'))) . PHP_EOL;
+$output = array('rectangles' => $rects->length);
+if ($rects->length > 0) {
+    $output['first_fill'] = $rects->item(0)->getAttribute('fill');
+}
+echo json_encode($output) . PHP_EOL;

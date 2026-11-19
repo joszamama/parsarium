@@ -14,13 +14,14 @@ int parsarium_parse_svg(const uint8_t *data, size_t size, struct parsarium_svg_r
   SDL_Surface *rgba = SDL_ConvertSurfaceFormat(decoded, SDL_PIXELFORMAT_RGBA32, 0);
   SDL_FreeSurface(decoded);
   if (!rgba) { SDL_Quit(); return 0; }
-  int ok = rgba->w >= 2 && rgba->h >= 1 && rgba->pitch >= 8;
+  int ok = rgba->w >= 1 && rgba->h >= 1 && rgba->pixels;
   if (ok) {
     const unsigned char *pixels = (const unsigned char *)rgba->pixels;
     result->width = rgba->w; result->height = rgba->h;
     memcpy(result->first, pixels, 4);
-    memcpy(result->second, pixels + 4, 4);
-    result->has_second = 1;
+    /* The second sample is the next pixel in row-major order and is absent for a 1x1 image. */
+    result->has_second = rgba->w > 1 || rgba->h > 1;
+    if (result->has_second) memcpy(result->second, rgba->w > 1 ? pixels + 4 : pixels + rgba->pitch, 4);
   }
   SDL_FreeSurface(rgba); SDL_Quit();
   return ok;

@@ -1,13 +1,20 @@
 """Render one local SVG byte stream through PyQt6's QSvgRenderer (QtSvg 6.12.0)."""
 
 from PyQt6.QtCore import QByteArray
-from PyQt6.QtGui import QImage, QPainter
+from PyQt6.QtGui import QGuiApplication, QImage, QPainter
 from PyQt6.QtSvg import QSvgRenderer
+
+_APPLICATION = []
 
 
 def parse_svg(data: bytes):
     if not data or len(data) > (1 << 20):
         return None
+    # Qt requires a QGuiApplication before text is laid out (QFontDatabase);
+    # without one, an SVG with <text> aborts the process. The image sets
+    # QT_QPA_PLATFORM=offscreen.
+    if QGuiApplication.instance() is None:
+        _APPLICATION.append(QGuiApplication([]))
     renderer = QSvgRenderer(QByteArray(data))
     if not renderer.isValid():
         raise ValueError("QSvgRenderer rejected the SVG")

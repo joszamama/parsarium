@@ -1,13 +1,26 @@
 #include "harness.h"
 #include <QByteArray>
+#include <QGuiApplication>
 #include <QImage>
 #include <QPainter>
 #include <QSvgRenderer>
 #include <cstring>
 
+/* Qt requires a QGuiApplication before text is laid out with QFontDatabase;
+ * the offscreen platform plugin needs no display. */
+static void ensure_gui_application() {
+    if (QGuiApplication::instance()) return;
+    static int argc = 3;
+    static char name[] = "parsarium", option[] = "-platform", platform[] = "offscreen";
+    static char *argv[] = {name, option, platform, nullptr};
+    static QGuiApplication *application = new QGuiApplication(argc, argv);
+    (void)application;
+}
+
 int parsarium_parse_svg(const uint8_t *data, size_t size, struct parsarium_svg_result *result) {
     if (!data || !result || !size || size > (1u << 20)) return 0;
     std::memset(result, 0, sizeof(*result));
+    ensure_gui_application();
     QSvgRenderer renderer;
     if (!renderer.load(QByteArray(reinterpret_cast<const char *>(data), int(size))) || !renderer.isValid()) return 0;
     const QSize dimensions = renderer.defaultSize();
