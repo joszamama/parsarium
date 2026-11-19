@@ -206,6 +206,8 @@ class FandangoGenerateTest(unittest.TestCase):
         self.assertEqual(self.receipt(run)["spec"]["sha256"], sha256(spec.read_bytes()).hexdigest())
         self.assertEqual(json.loads(self.log.read_text())["argv"][1:4],
                          ["-f", str(spec), "-x"])
+        self.assertEqual(json.loads(self.log.read_text())["argv"][5:7],
+                         ["--max-nodes", "2000"])
 
     def test_pinned_registry_checks_index_hash(self):
         registry = self.tmp / "fanbase"

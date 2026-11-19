@@ -51,3 +51,13 @@ to `projects/mp3/` (`--case mp3/c/mpv --case mp3/go/github_com_dmulholl_mp3lib`)
 The default grammar is now chosen per MP3 target from its control. Both outputs
 are byte-identical to the first run; the untagged row now uses the default case
 `dmulholl/mp3lib`, because the plain go-mp3 project was removed in the merge.
+
+The MP4 row was rechecked on 19 November 2026 after `mp4.fan` gained an
+optional AAC audio track and iTunes metadata
+(`--case mp4/cpp/exiv2`). The default route now passes `--max-nodes 2000`
+with the bundled spec, because Fandango's default node budget yields only
+audio-only files without metadata. The seed-7 output is a video-only file. The
+local Exiv2 base and AFL++ images were rebuilt and their receipts refreshed
+first; the AFL++ feedback edge count is unchanged. The Fandango executable
+hash differs from the other rows because the managed environment's entry
+script records its own install path.

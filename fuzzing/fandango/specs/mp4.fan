@@ -1,28 +1,70 @@
-# Minimal ISO BMFF / MP4: ftyp + moov with one H.264 video track holding a
-# single 2x2 IDR frame, an mdat with that frame, and optional free boxes.
-# The mdat goes either after moov or between ftyp and moov. Every box size
-# is a 32-bit big-endian field that a constraint ties to the box's own byte
-# length, and the stco chunk offset is tied to the frame's position in the
-# file; Fandango repairs these fields directly.
+# Minimal ISO BMFF / MP4: ftyp, moov and one mdat, plus optional free boxes.
+# A file holds an H.264 video track (one 2x2 IDR frame), an AAC audio track
+# (nine samples of one second of 8 kHz mono silence), or both. moov may end
+# with iTunes-style metadata (udta/meta/hdlr mdir/ilst). The mdat goes either
+# after moov or between ftyp and moov; with both tracks, the video sample comes
+# before or after the audio chunk. Every box size is a 32-bit big-endian field
+# that a constraint ties to the box's own byte length, and each stco chunk
+# offset is tied to its sample's position in the file; Fandango repairs these
+# fields directly.
 #
-# The SPS/PPS (avcC) and the IDR slice are copied byte for byte from the
-# video track of controls/mp4/red-av.mp4 (FFmpeg/libx264, 2x2 red frame).
+# The SPS/PPS (avcC), the IDR slice, the AAC sample entry (mp4a, esds, btrt),
+# the audio sample tables and the audio sample bytes are copied byte for byte
+# from controls/mp4/red-av.mp4 (FFmpeg/libx264/AAC). The ilst layout follows
+# the control's udta.
 
 import struct
 
 def u32(n):
     return struct.pack('>I', n)
 
-# File offset of the first byte of the mdat payload.
-def sample_offset(start):
-    offset = 0
-    for child in start.children:
-        if str(child.symbol) == '<mdat>':
-            return u32(offset + 8)
-        offset += len(bytes(child))
-    return u32(0)
+# Byte offset of the first node named `name` inside `node`, or None.
+def locate(node, name, base=0):
+    if str(node.symbol) == name:
+        return base
+    for child in node.children:
+        found = locate(child, name, base)
+        if found is not None:
+            return found
+        base += len(bytes(child))
+    return None
 
-<start> ::= <ftyp> <free>? <moov> <free>? <mdat> | <ftyp> <free>? <mdat> <moov> <free>?
+def find(node, name):
+    if str(node.symbol) == name:
+        return node
+    for child in node.children:
+        found = find(child, name)
+        if found is not None:
+            return found
+    return None
+
+# File offset of a track's sample data.
+def chunk_offset(start, name):
+    offset = locate(start, name)
+    return u32(offset if offset is not None else 0)
+
+# The audio media lasts 9024 samples at 8000 Hz; express that in the movie
+# timescale, rounded up.
+AUDIO_MEDIA_DURATION = 9024
+AUDIO_RATE = 8000
+
+def audio_track_duration(timescale):
+    scale = int.from_bytes(bytes(timescale), 'big')
+    return u32(-(-AUDIO_MEDIA_DURATION * scale // AUDIO_RATE))
+
+# The movie lasts as long as its longest track.
+def movie_duration(start, timescale):
+    durations = []
+    video = find(start, '<vmdhd>')
+    if video is not None:
+        durations.append(int.from_bytes(bytes(find(video, '<duration>')), 'big'))
+    if find(start, '<atrak>') is not None:
+        durations.append(int.from_bytes(audio_track_duration(timescale), 'big'))
+    return u32(max(durations) if durations else 0)
+
+# Track IDs are fixed: video 1, audio 2. Files with one track still use
+# next_track_ID 3.
+<start> ::= <ftyp> <free>? <v_moov> <free>? <v_mdat> | <ftyp> <free>? <v_mdat> <v_moov> <free>? | <ftyp> <free>? <a_moov> <free>? <a_mdat> | <ftyp> <free>? <a_mdat> <a_moov> <free>? | <ftyp> <free>? <av_moov> <free>? <av_mdat> | <ftyp> <free>? <av_mdat> <av_moov> <free>?
 
 <size> ::= <byte>{4}
 
@@ -30,27 +72,31 @@ def sample_offset(start):
 <ftyp> ::= <size> b'ftyp' <brand> b'\x00\x00\x00\x00' <brand>{1,4}
 <brand> ::= b'isom' | b'iso2' | b'mp41' | b'mp42' | b'avc1'
 
-# Movie box
-<moov> ::= <size> b'moov' <mvhd> <trak>
-<mvhd> ::= <size> b'mvhd' b'\x00\x00\x00\x00' <time> <time> <timescale> <duration> b'\x00\x01\x00\x00' b'\x01\x00' b'\x00'{10} <matrix> b'\x00'{24} b'\x00\x00\x00\x02'
-<trak> ::= <size> b'trak' <tkhd> <mdia>
-<tkhd> ::= <size> b'tkhd' b'\x00\x00\x00\x03' <time> <time> b'\x00\x00\x00\x01' b'\x00\x00\x00\x00' <duration> b'\x00'{8} b'\x00\x00\x00\x00' b'\x00\x00\x00\x00' <matrix> <dimension> <dimension>
-<mdia> ::= <size> b'mdia' <mdhd> <hdlr> <minf>
-<mdhd> ::= <size> b'mdhd' b'\x00\x00\x00\x00' <time> <time> <timescale> <duration> <language> b'\x00\x00'
-<hdlr> ::= <size> b'hdlr' b'\x00\x00\x00\x00' b'\x00\x00\x00\x00' b'vide' b'\x00'{12} <handler_name>
-<minf> ::= <size> b'minf' <vmhd> <dinf> <stbl>
+# Movie boxes: video only, audio only, or video and audio.
+<v_moov> ::= <size> b'moov' <mvhd> <vtrak> <udta>?
+<a_moov> ::= <size> b'moov' <mvhd> <atrak> <udta>?
+<av_moov> ::= <size> b'moov' <mvhd> <vtrak> <atrak> <udta>?
+<mvhd> ::= <size> b'mvhd' b'\x00\x00\x00\x00' <time> <time> <timescale> <movie_duration> b'\x00\x01\x00\x00' b'\x01\x00' b'\x00'{10} <matrix> b'\x00'{24} b'\x00\x00\x00\x03'
+
+# Video track
+<vtrak> ::= <size> b'trak' <vtkhd> <vmdia>
+<vtkhd> ::= <size> b'tkhd' b'\x00\x00\x00\x03' <time> <time> b'\x00\x00\x00\x01' b'\x00\x00\x00\x00' <track_duration> b'\x00'{8} b'\x00\x00\x00\x00' b'\x00\x00\x00\x00' <matrix> <dimension> <dimension>
+<vmdia> ::= <size> b'mdia' <vmdhd> <vhdlr> <vminf>
+<vmdhd> ::= <size> b'mdhd' b'\x00\x00\x00\x00' <time> <time> <timescale> <duration> <language> b'\x00\x00'
+<vhdlr> ::= <size> b'hdlr' b'\x00\x00\x00\x00' b'\x00\x00\x00\x00' b'vide' b'\x00'{12} <vhandler_name>
+<vminf> ::= <size> b'minf' <vmhd> <dinf> <vstbl>
 <vmhd> ::= <size> b'vmhd' b'\x00\x00\x00\x01' b'\x00'{8}
 <dinf> ::= <size> b'dinf' <dref>
 <dref> ::= <size> b'dref' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' <url>
 <url> ::= <size> b'url ' b'\x00\x00\x00\x01'
 
-# Sample tables: one sample in one chunk, lasting the whole track.
-<stbl> ::= <size> b'stbl' <stsd> <stts> <stsc> <stsz> <stco>
-<stsd> ::= <size> b'stsd' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' <avc1>
-<stts> ::= <size> b'stts' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01' <duration>
-<stsc> ::= <size> b'stsc' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01'
-<stsz> ::= <size> b'stsz' b'\x00\x00\x00\x00' <sample_size> b'\x00\x00\x00\x01'
-<stco> ::= <size> b'stco' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' <chunk_offset>
+# Video sample tables: one sample in one chunk, lasting the whole track.
+<vstbl> ::= <size> b'stbl' <vstsd> <vstts> <vstsc> <vstsz> <vstco>
+<vstsd> ::= <size> b'stsd' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' <avc1>
+<vstts> ::= <size> b'stts' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01' <duration>
+<vstsc> ::= <size> b'stsc' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01'
+<vstsz> ::= <size> b'stsz' b'\x00\x00\x00\x00' <sample_size> b'\x00\x00\x00\x01'
+<vstco> ::= <size> b'stco' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' <chunk_offset>
 <sample_size> ::= <byte>{4}
 <chunk_offset> ::= <byte>{4}
 
@@ -63,9 +109,70 @@ def sample_offset(start):
 # Pixel aspect ratio, square pixels
 <pasp> ::= <size> b'pasp' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01'
 
-# Media data: one access unit of 4-byte length-prefixed NAL units, an
-# optional access unit delimiter (I slices) followed by the IDR slice.
-<mdat> ::= <size> b'mdat' <sample>
+# Audio track: enabled and in movie, alternate group 1, full volume.
+<atrak> ::= <size> b'trak' <atkhd> <amdia>
+<atkhd> ::= <size> b'tkhd' b'\x00\x00\x00\x03' <time> <time> b'\x00\x00\x00\x02' b'\x00\x00\x00\x00' <track_duration> b'\x00'{8} b'\x00\x00\x00\x01' b'\x01\x00\x00\x00' <matrix> b'\x00'{8}
+<amdia> ::= <size> b'mdia' <amdhd> <ahdlr> <aminf>
+# Media timescale 8000 (the sample rate), duration 9024 samples.
+<amdhd> ::= <size> b'mdhd' b'\x00\x00\x00\x00' <time> <time> b'\x00\x00\x1f\x40' b'\x00\x00\x23\x40' <language> b'\x00\x00'
+<ahdlr> ::= <size> b'hdlr' b'\x00\x00\x00\x00' b'\x00\x00\x00\x00' b'soun' b'\x00'{12} <ahandler_name>
+<aminf> ::= <size> b'minf' <smhd> <dinf> <astbl>
+<smhd> ::= <size> b'smhd' b'\x00\x00\x00\x00' b'\x00\x00\x00\x00'
+
+# Audio sample tables: nine samples in one chunk, eight of 1024 PCM frames and
+# a last one of 832.
+<astbl> ::= <size> b'stbl' <astsd> <astts> <astsc> <astsz> <astco>
+<astsd> ::= <size> b'stsd' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' <mp4a>
+<astts> ::= <size> b'stts' b'\x00\x00\x00\x00' b'\x00\x00\x00\x02' b'\x00\x00\x00\x08' b'\x00\x00\x04\x00' b'\x00\x00\x00\x01' b'\x00\x00\x03\x40'
+<astsc> ::= <size> b'stsc' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' b'\x00\x00\x00\x01' b'\x00\x00\x00\x09' b'\x00\x00\x00\x01'
+<astsz> ::= <size> b'stsz' b'\x00\x00\x00\x00' b'\x00\x00\x00\x00' b'\x00\x00\x00\x09' b'\x00\x00\x00\x13' b'\x00\x00\x00\x04'{8}
+<astco> ::= <size> b'stco' b'\x00\x00\x00\x00' b'\x00\x00\x00\x01' <chunk_offset>
+
+# Audio sample entry: data reference 1, mono, 16-bit, 8000 Hz; AAC-LC
+# decoder configuration and bitrate box from the control.
+<mp4a> ::= <size> b'mp4a' b'\x00'{6} b'\x00\x01' b'\x00'{8} b'\x00\x01\x00\x10' b'\x00\x00\x00\x00' b'\x1f\x40\x00\x00' <esds> <btrt>?
+<esds> ::= <size> b'esds' (b'\x00\x00\x00\x00\x03\x80\x80\x80\x25\x00\x02\x00\x04\x80\x80\x80\x17\x40\x15\x00\x00\x00\x00\x00'
+                         b'\x3e\x80\x00\x00\x01\x69\x05\x80\x80\x80\x05\x15\x88\x56\xe5\x00\x06\x80\x80\x80\x01\x02')
+<btrt> ::= <size> b'btrt' b'\x00\x00\x00\x00\x00\x00\x3e\x80\x00\x00\x01\x69'
+
+# iTunes-style metadata: one to five of title, artist, album, date and track
+# number, in that order. Text items are UTF-8 (data type 1); trkn is binary
+# (data type 0).
+<udta> ::= <size> b'udta' <meta>
+<meta> ::= <size> b'meta' b'\x00\x00\x00\x00' <mhdlr> <ilst>
+<mhdlr> ::= <size> b'hdlr' b'\x00\x00\x00\x00' b'\x00\x00\x00\x00' b'mdir' b'appl' b'\x00'{8} b'\x00'
+<ilst> ::= <size> b'ilst' <items>
+<items> ::= <inam> <iart>? <ialb>? <iday>? <itrkn>? | <iart> <ialb>? <iday>? <itrkn>? | <ialb> <iday>? <itrkn>? | <iday> <itrkn>? | <itrkn>
+<inam> ::= <size> b'\xa9nam' <tdata>
+<iart> ::= <size> b'\xa9ART' <tdata>
+<ialb> ::= <size> b'\xa9alb' <tdata>
+<iday> ::= <size> b'\xa9day' <ddata>
+<itrkn> ::= <size> b'trkn' <ndata>
+<tdata> ::= <size> b'data' b'\x00\x00\x00\x01' b'\x00\x00\x00\x00' <text>
+<ddata> ::= <size> b'data' b'\x00\x00\x00\x01' b'\x00\x00\x00\x00' <date>
+<ndata> ::= <size> b'data' b'\x00\x00\x00\x00' b'\x00\x00\x00\x00' b'\x00\x00' <track_number> <track_total> b'\x00\x00'
+
+# One to three words separated by single spaces; a word may hold one
+# two- or three-byte UTF-8 character.
+<text> ::= <word> (b' ' <word>){0,2}
+<word> ::= <alnum>{1,8} | <alnum>{0,3} <utf8_char> <alnum>{0,3}
+<alnum> ::= rb'[A-Za-z0-9]'
+<utf8_char> ::= b'\xc3\xa9' | b'\xc3\xb1' | b'\xc3\xbc' | b'\xc3\x9f' | b'\xd0\x96' | b'\xe6\x97\xa5'
+<date> ::= <year> | <year> b'-' <month> b'-' <day_of_month>
+<year> ::= (b'19' | b'20') rb'[0-9]' rb'[0-9]'
+<month> ::= b'0' rb'[1-9]' | b'1' rb'[0-2]'
+<day_of_month> ::= b'0' rb'[1-9]' | b'1' rb'[0-9]' | b'2' rb'[0-8]'
+# Track 1..9 of 0 (unknown) or 10..20 tracks.
+<track_number> ::= b'\x00' rb'[\x01-\x09]'
+<track_total> ::= b'\x00\x00' | b'\x00' rb'[\x0a-\x14]'
+
+# Media data: the video access unit, the audio chunk, or both.
+<v_mdat> ::= <size> b'mdat' <sample>
+<a_mdat> ::= <size> b'mdat' <aac_chunk>
+<av_mdat> ::= <size> b'mdat' (<sample> <aac_chunk> | <aac_chunk> <sample>)
+
+# One access unit of 4-byte length-prefixed NAL units, an optional access
+# unit delimiter (I slices) followed by the IDR slice.
 <sample> ::= <aud>? <idr>
 <aud> ::= b'\x00\x00\x00\x02\x09\x10'
 <idr> ::= (b'\x00\x00\x02\x5b\x65\x88\x84\xa0\xc6\x00\x08\x00\x02\x07\xa0\x00\x20\x42\x00\x34\x1d\x3d\x3d\x3d'
@@ -95,47 +202,93 @@ def sample_offset(start):
            b'\x78\x5e\x17\xb8\x00\x01\x0b\xe0\x00\x10\xa2\x00\x01\x06\x60\x00\x78\x0f\x85\xe1\x78\x5e\x17\x85'
            b'\xe1\x78\x5e\x17\x85\xe1\x7a')
 
+# The audio chunk: nine raw AAC frames (19 bytes, then eight of 4 bytes).
+<aac_chunk> ::= (b'\xdc\x00\x4c\x61\x76\x63\x36\x33\x2e\x31\x2e\x31\x30\x32\x00\x02\x30\x40\x0e'
+                 b'\x01\x18\x20\x07\x01\x18\x20\x07\x01\x18\x20\x07\x01\x18\x20\x07'
+                 b'\x01\x18\x20\x07\x01\x18\x20\x07\x01\x18\x20\x07\x01\x18\x20\x07')
+
 <free> ::= <size> b'free' <byte>{0,16}
 
 # Field values
 <time> ::= b'\x00\x00\x00\x00' | b'\xe0' <byte>{3}
 <timescale> ::= b'\x00\x00\x02\x58' | b'\x00\x00\x03\xe8' | b'\x00\x00\x75\x30' | b'\x00\x01\x5f\x90'
 <duration> ::= b'\x00\x00' rb'[\x01-\xff]' <byte>
+# Movie and track durations are computed by constraints.
+<movie_duration> ::= <byte>{4}
+<track_duration> ::= <byte>{4}
 <matrix> ::= b'\x00\x01\x00\x00' b'\x00'{12} b'\x00\x01\x00\x00' b'\x00'{12} b'\x40\x00\x00\x00'
 # 16.16 fixed point, integer part 1..255 (Exiv2 rejects zero dimensions)
 <dimension> ::= b'\x00' rb'[\x01-\xff]' b'\x00\x00'
 <language> ::= b'\x55\xc4' | b'\x15\xc7' | b'\x19\x4c'
-<handler_name> ::= b'\x00' | b'VideoHandler\x00' | b'Parsarium\x00'
+<vhandler_name> ::= b'\x00' | b'VideoHandler\x00' | b'Parsarium\x00'
+<ahandler_name> ::= b'\x00' | b'SoundHandler\x00' | b'Parsarium\x00'
 
 where <ftyp>.<size> == u32(len(bytes(<ftyp>)))
-where <moov>.<size> == u32(len(bytes(<moov>)))
+where <v_moov>.<size> == u32(len(bytes(<v_moov>)))
+where <a_moov>.<size> == u32(len(bytes(<a_moov>)))
+where <av_moov>.<size> == u32(len(bytes(<av_moov>)))
 where <mvhd>.<size> == u32(len(bytes(<mvhd>)))
-where <trak>.<size> == u32(len(bytes(<trak>)))
-where <tkhd>.<size> == u32(len(bytes(<tkhd>)))
-where <mdia>.<size> == u32(len(bytes(<mdia>)))
-where <mdhd>.<size> == u32(len(bytes(<mdhd>)))
-where <hdlr>.<size> == u32(len(bytes(<hdlr>)))
-where <minf>.<size> == u32(len(bytes(<minf>)))
+where <vtrak>.<size> == u32(len(bytes(<vtrak>)))
+where <vtkhd>.<size> == u32(len(bytes(<vtkhd>)))
+where <vmdia>.<size> == u32(len(bytes(<vmdia>)))
+where <vmdhd>.<size> == u32(len(bytes(<vmdhd>)))
+where <vhdlr>.<size> == u32(len(bytes(<vhdlr>)))
+where <vminf>.<size> == u32(len(bytes(<vminf>)))
 where <vmhd>.<size> == u32(len(bytes(<vmhd>)))
 where <dinf>.<size> == u32(len(bytes(<dinf>)))
 where <dref>.<size> == u32(len(bytes(<dref>)))
 where <url>.<size> == u32(len(bytes(<url>)))
-where <stbl>.<size> == u32(len(bytes(<stbl>)))
-where <stsd>.<size> == u32(len(bytes(<stsd>)))
+where <vstbl>.<size> == u32(len(bytes(<vstbl>)))
+where <vstsd>.<size> == u32(len(bytes(<vstsd>)))
 where <avc1>.<size> == u32(len(bytes(<avc1>)))
 where <avcC>.<size> == u32(len(bytes(<avcC>)))
 where <pasp>.<size> == u32(len(bytes(<pasp>)))
-where <stts>.<size> == u32(len(bytes(<stts>)))
-where <stsc>.<size> == u32(len(bytes(<stsc>)))
-where <stsz>.<size> == u32(len(bytes(<stsz>)))
-where <stco>.<size> == u32(len(bytes(<stco>)))
-where <mdat>.<size> == u32(len(bytes(<mdat>)))
+where <vstts>.<size> == u32(len(bytes(<vstts>)))
+where <vstsc>.<size> == u32(len(bytes(<vstsc>)))
+where <vstsz>.<size> == u32(len(bytes(<vstsz>)))
+where <vstco>.<size> == u32(len(bytes(<vstco>)))
+where <atrak>.<size> == u32(len(bytes(<atrak>)))
+where <atkhd>.<size> == u32(len(bytes(<atkhd>)))
+where <amdia>.<size> == u32(len(bytes(<amdia>)))
+where <amdhd>.<size> == u32(len(bytes(<amdhd>)))
+where <ahdlr>.<size> == u32(len(bytes(<ahdlr>)))
+where <aminf>.<size> == u32(len(bytes(<aminf>)))
+where <smhd>.<size> == u32(len(bytes(<smhd>)))
+where <astbl>.<size> == u32(len(bytes(<astbl>)))
+where <astsd>.<size> == u32(len(bytes(<astsd>)))
+where <mp4a>.<size> == u32(len(bytes(<mp4a>)))
+where <esds>.<size> == u32(len(bytes(<esds>)))
+where <btrt>.<size> == u32(len(bytes(<btrt>)))
+where <astts>.<size> == u32(len(bytes(<astts>)))
+where <astsc>.<size> == u32(len(bytes(<astsc>)))
+where <astsz>.<size> == u32(len(bytes(<astsz>)))
+where <astco>.<size> == u32(len(bytes(<astco>)))
+where <udta>.<size> == u32(len(bytes(<udta>)))
+where <meta>.<size> == u32(len(bytes(<meta>)))
+where <mhdlr>.<size> == u32(len(bytes(<mhdlr>)))
+where <ilst>.<size> == u32(len(bytes(<ilst>)))
+where <inam>.<size> == u32(len(bytes(<inam>)))
+where <iart>.<size> == u32(len(bytes(<iart>)))
+where <ialb>.<size> == u32(len(bytes(<ialb>)))
+where <iday>.<size> == u32(len(bytes(<iday>)))
+where <itrkn>.<size> == u32(len(bytes(<itrkn>)))
+where <tdata>.<size> == u32(len(bytes(<tdata>)))
+where <ddata>.<size> == u32(len(bytes(<ddata>)))
+where <ndata>.<size> == u32(len(bytes(<ndata>)))
+where <v_mdat>.<size> == u32(len(bytes(<v_mdat>)))
+where <a_mdat>.<size> == u32(len(bytes(<a_mdat>)))
+where <av_mdat>.<size> == u32(len(bytes(<av_mdat>)))
 where <free>.<size> == u32(len(bytes(<free>)))
-# One movie timescale for everything: track, media and sample durations agree.
-where <mdhd>.<timescale> == bytes(<mvhd>.<timescale>)
-where <mdhd>.<duration> == bytes(<mvhd>.<duration>)
-where <tkhd>.<duration> == bytes(<mvhd>.<duration>)
-where <stts>.<duration> == bytes(<mvhd>.<duration>)
-# The single sample is the whole mdat payload.
-where <stsz>.<sample_size> == u32(len(bytes(<sample>)))
-where <stco>.<chunk_offset> == sample_offset(<start>)
+# The video media uses the movie timescale; its track, media and sample
+# durations agree. The audio track duration is the audio media duration in
+# the movie timescale, and the movie lasts as long as its longest track.
+where <vmdhd>.<timescale> == bytes(<mvhd>.<timescale>)
+where <vtkhd>.<track_duration> == bytes(<vmdhd>.<duration>)
+where <vstts>.<duration> == bytes(<vmdhd>.<duration>)
+where <atkhd>.<track_duration> == audio_track_duration(<mvhd>.<timescale>)
+where <mvhd>.<movie_duration> == movie_duration(<start>, <mvhd>.<timescale>)
+# The video sample is the whole access unit; each stco points at its track's
+# data in mdat.
+where <vstsz>.<sample_size> == u32(len(bytes(<sample>)))
+where <vstco>.<chunk_offset> == chunk_offset(<start>, '<sample>')
+where <astco>.<chunk_offset> == chunk_offset(<start>, '<aac_chunk>')

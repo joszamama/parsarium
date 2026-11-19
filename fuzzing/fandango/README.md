@@ -37,7 +37,7 @@ python3 parsarium.py fandango generate xml python xmltodict runs/xml-fandango \
 
 | Spec | Cell | Scope |
 | --- | --- | --- |
-| [`mp4.fan`](specs/mp4.fan) | `mp4` | ISO BMFF with one 2×2 H.264 video frame, constrained box sizes and chunk offset; see [details](specs/README.md) |
+| [`mp4.fan`](specs/mp4.fan) | `mp4` | ISO BMFF with a 2×2 H.264 video frame, a silent AAC audio track, or both, and optional iTunes metadata; constrained box sizes, durations and chunk offsets; see [details](specs/README.md) |
 | [`pdf.fan`](specs/pdf.fan) | `pdf` | One-page PDF with constrained xref offsets and stream length; see [details](specs/README.md) |
 | [`ascii_ply.fan`](specs/ascii_ply.fan) | `ascii_ply` | `format ascii 1.0`; 3 vertices with 1 triangle or 4 vertices with 2 triangles; `float x y z`, optionally `uchar red green blue`; face list `uchar int` or `uchar uint`; 0–2 comment lines |
 | [`ascii_pnm_p3.fan`](specs/ascii_pnm_p3.fan) | `ascii_pnm` | Plain PPM (`P3`) only; 1×1, 2×1, 1×2 or 2×2; maxval 255 or 15 with every sample at most maxval; space or newline header separators; optional comment after the magic; optional trailing newline |

@@ -44,6 +44,9 @@ TAGGED_MP3_CONTROL_PREFIX = "controls/mp3/id3v2-tagged-"
 LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan", "mp3": "mp3_plain.fan",
                "http11": "http11_request.fan", "ascii_ply": "ascii_ply.fan",
                "ascii_pnm": "ascii_pnm_p3.fan", "yaml": "yaml.fan", "toml": "toml.fan", "sql": "sql.fan", "dns": "dns_message.fan"}
+# Extra Fandango options for a bundled spec. Fandango's default node budget
+# keeps mp4.fan at its smallest derivation: audio only, with no metadata.
+LOCAL_SPEC_OPTIONS = {"mp4": ["--max-nodes", "2000"]}
 # Passed as -x with --spec; Fandango defaults to '.txt' for -f.
 EXTENSIONS = {"png": ".png", "zip": ".zip", "mp4": ".mp4", "wav": ".wav",
               "pdf": ".pdf", "svg": ".svg", "http11": ".http", "ascii_ply": ".ply",
@@ -184,10 +187,16 @@ def build_command(executable: Path, args: argparse.Namespace, generated: Path,
         command += ["-F", args.fanbase]
     else:
         command += ["-f", str(spec), "-x", EXTENSIONS[args.format]]
+        if spec == bundled_spec(args.format):
+            command += LOCAL_SPEC_OPTIONS.get(args.format, [])
     command += ["-n", str(args.count), "-d", str(generated)]
     if args.seed is not None:
         command += ["--random-seed", str(args.seed)]
     return command
+
+
+def bundled_spec(fmt: str) -> Path | None:
+    return (ROOT / "fuzzing/fandango/specs" / LOCAL_SPECS[fmt]).resolve() if fmt in LOCAL_SPECS else None
 
 
 def tagged_mp3_target(ecosystem: str, slug: str) -> bool:
