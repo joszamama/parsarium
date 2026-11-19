@@ -19,6 +19,31 @@ import org.webpieces.httpparser.api.common.Header;
 public final class Http11Adapter {
     private Http11Adapter() {}
 
+    /** Print a flat JSON object; a field whose value the parser did not report is omitted. */
+    private static String requestJson(String... pairs) {
+        StringBuilder out = new StringBuilder("{");
+        for (int i = 0; i < pairs.length; i += 2) {
+            if (pairs[i + 1] == null) continue;
+            if (out.length() > 1) out.append(',');
+            out.append('"').append(pairs[i]).append("\":\"");
+            for (char c : pairs[i + 1].toCharArray()) {
+                if (c == '"' || c == '\\') out.append('\\').append(c);
+                else if (c < 0x20) out.append(String.format("\\u%04x", (int) c));
+                else out.append(c);
+            }
+            out.append('"');
+        }
+        return out.append('}').toString();
+    }
+
+    private static String headerValue(org.apache.http.Header header) {
+        return header == null ? null : header.getValue();
+    }
+
+    private static String headerValue(org.apache.hc.core5.http.Header header) {
+        return header == null ? null : header.getValue();
+    }
+
     public static void main(String[] args) throws Exception {
         if (args.length != 2) System.exit(2);
         byte[] bytes = Files.readAllBytes(Path.of(args[1]));
@@ -63,12 +88,8 @@ public final class Http11Adapter {
         String version = request.protocolVersion().text();
         String host = request.headers().get("Host");
         String marker = request.headers().get("X-Parsarium");
-        if (host == null || marker == null) {
-            channel.finishAndReleaseAll();
-            System.exit(1);
-        }
-        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
-                method, target, version, host, marker);
+        System.out.println(requestJson("method", method, "target", target, "version", version,
+                "host", host, "x_parsarium", marker));
         channel.finishAndReleaseAll();
     }
 
@@ -100,10 +121,10 @@ public final class Http11Adapter {
         var buffer = new org.apache.hc.core5.http.impl.io.SessionInputBufferImpl(1024);
         var request = new org.apache.hc.core5.http.impl.io.DefaultHttpRequestParser()
                 .parse(buffer, new ByteArrayInputStream(bytes));
-        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
-                request.getMethod(), request.getRequestUri(), request.getVersion(),
-                request.getFirstHeader("Host").getValue(),
-                request.getFirstHeader("X-Parsarium").getValue());
+        System.out.println(requestJson("method", request.getMethod(),
+                "target", request.getRequestUri(), "version", String.valueOf(request.getVersion()),
+                "host", headerValue(request.getFirstHeader("Host")),
+                "x_parsarium", headerValue(request.getFirstHeader("X-Parsarium"))));
     }
 
     private static void runHttpCore4(byte[] bytes) throws Exception {
@@ -111,11 +132,11 @@ public final class Http11Adapter {
                 new org.apache.http.impl.io.HttpTransportMetricsImpl(), 1024);
         buffer.bind(new ByteArrayInputStream(bytes));
         var request = new org.apache.http.impl.io.DefaultHttpRequestParser(buffer).parse();
-        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
-                request.getRequestLine().getMethod(), request.getRequestLine().getUri(),
-                request.getRequestLine().getProtocolVersion(),
-                request.getFirstHeader("Host").getValue(),
-                request.getFirstHeader("X-Parsarium").getValue());
+        System.out.println(requestJson("method", request.getRequestLine().getMethod(),
+                "target", request.getRequestLine().getUri(),
+                "version", String.valueOf(request.getRequestLine().getProtocolVersion()),
+                "host", headerValue(request.getFirstHeader("Host")),
+                "x_parsarium", headerValue(request.getFirstHeader("X-Parsarium"))));
     }
 
     private static void runJetty(byte[] bytes) {
@@ -150,9 +171,11 @@ public final class Http11Adapter {
                 System.exit(1);
             }
             var request = (io.netty5.handler.codec.http.HttpRequest) value;
-            System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
-                    request.method(), request.uri(), request.protocolVersion(),
-                    request.headers().get("Host"), request.headers().get("X-Parsarium"));
+            System.out.println(requestJson("method", String.valueOf(request.method()),
+                    "target", request.uri(), "version", String.valueOf(request.protocolVersion()),
+                    "host", request.headers().get("Host") == null ? null : request.headers().get("Host").toString(),
+                    "x_parsarium", request.headers().get("X-Parsarium") == null ? null
+                            : request.headers().get("X-Parsarium").toString()));
             channel.finishAndReleaseAll();
         }
     }
@@ -161,8 +184,8 @@ public final class Http11Adapter {
         var request = jodd.http.HttpRequest.readFrom(new ByteArrayInputStream(bytes));
         String target = request.path() + (request.queryString() == null ? "" : "?" + request.queryString());
         String version = request.httpVersion();
-        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
-                request.method(), target, version, request.header("Host"), request.header("X-Parsarium"));
+        System.out.println(requestJson("method", request.method(), "target", target, "version", version,
+                "host", request.header("Host"), "x_parsarium", request.header("X-Parsarium")));
     }
 
     private static void runRawHttp(byte[] bytes) throws Exception {
@@ -192,9 +215,9 @@ public final class Http11Adapter {
             public fi.iki.elonen.NanoHTTPD.Response serve(fi.iki.elonen.NanoHTTPD.IHTTPSession request) {
                 String query = request.getQueryParameterString();
                 String target = request.getUri() + (query == null ? "" : "?" + query);
-                parsed[0] = String.format("{\"method\":\"%s\",\"target\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}",
-                        request.getMethod(), target, request.getHeaders().get("host"),
-                        request.getHeaders().get("x-parsarium"));
+                parsed[0] = requestJson("method", String.valueOf(request.getMethod()), "target", target,
+                        "host", request.getHeaders().get("host"),
+                        "x_parsarium", request.getHeaders().get("x-parsarium"));
                 return fi.iki.elonen.NanoHTTPD.newFixedLengthResponse("");
             }
         };
@@ -262,11 +285,11 @@ public final class Http11Adapter {
         parser.fillBuffer(channel);
         var request = parser.parse();
         if (request == null) System.exit(1);
-        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
-                request.getRequestLine().getMethod(), request.getRequestLine().getUri(),
-                request.getRequestLine().getProtocolVersion(),
-                request.getFirstHeader("Host").getValue(),
-                request.getFirstHeader("X-Parsarium").getValue());
+        System.out.println(requestJson("method", request.getRequestLine().getMethod(),
+                "target", request.getRequestLine().getUri(),
+                "version", String.valueOf(request.getRequestLine().getProtocolVersion()),
+                "host", headerValue(request.getFirstHeader("Host")),
+                "x_parsarium", headerValue(request.getFirstHeader("X-Parsarium"))));
     }
 
     private static void runMina(byte[] bytes) {
@@ -303,9 +326,9 @@ public final class Http11Adapter {
         var request = (org.glassfish.grizzly.http.HttpRequestPacket) content.getHttpHeader();
         String target = request.getRequestURI()
                 + (request.getQueryString() == null ? "" : "?" + request.getQueryString());
-        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
-                request.getMethod(), target, request.getProtocolString(),
-                request.getHeader("Host"), request.getHeader("X-Parsarium"));
+        System.out.println(requestJson("method", String.valueOf(request.getMethod()), "target", target,
+                "version", request.getProtocolString(),
+                "host", request.getHeader("Host"), "x_parsarium", request.getHeader("X-Parsarium")));
         context.completeAndRecycle();
     }
 

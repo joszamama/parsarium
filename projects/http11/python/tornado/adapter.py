@@ -189,6 +189,7 @@ def parse(name, raw):
 
         class Delegate(HTTPMessageDelegate):
             body = b""
+            finished = False
 
             def headers_received(self, start_line, headers):
                 self.start_line = start_line

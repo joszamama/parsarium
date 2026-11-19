@@ -32,7 +32,24 @@ public final class NettyHarness {
     public static void main(String[] args) throws Exception {
         if (args.length != 1) throw new IllegalArgumentException("expected control path");
         Parsed p = parse(Files.readAllBytes(Path.of(args[0])));
-        System.out.printf("{\"method\":\"%s\",\"target\":\"%s\",\"version\":\"%s\",\"host\":\"%s\",\"x_parsarium\":\"%s\"}%n",
-                          p.method(), p.target(), p.version(), p.host(), p.xParsarium());
+        System.out.println(json("method", p.method(), "target", p.target(), "version", p.version(),
+                                "host", p.host(), "x_parsarium", p.xParsarium()));
+    }
+
+    /** Print a flat JSON object; a header the request does not carry is omitted. */
+    static String json(String... pairs) {
+        StringBuilder out = new StringBuilder("{");
+        for (int i = 0; i < pairs.length; i += 2) {
+            if (pairs[i + 1] == null) continue;
+            if (out.length() > 1) out.append(',');
+            out.append('"').append(pairs[i]).append("\":\"");
+            for (char c : pairs[i + 1].toCharArray()) {
+                if (c == '"' || c == '\\') out.append('\\').append(c);
+                else if (c < 0x20) out.append(String.format("\\u%04x", (int) c));
+                else out.append(c);
+            }
+            out.append('"');
+        }
+        return out.append('}').toString();
     }
 }

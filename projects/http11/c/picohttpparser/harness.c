@@ -1,6 +1,5 @@
 #include "harness.h"
 #include <picohttpparser.h>
-#include <string.h>
 
 int parsarium_parse_http(const uint8_t *data, size_t size,
                          struct parsarium_http_result *result) {
@@ -8,15 +7,18 @@ int parsarium_parse_http(const uint8_t *data, size_t size,
     const char *method, *path;
     size_t method_len, path_len;
     struct phr_header headers[32];
-    size_t header_count = 32;
+    size_t header_count = sizeof(headers) / sizeof(headers[0]);
     int minor;
+    /* phr_parse_request returns the length of the request head; any message
+       body that follows it is not part of what PicoHTTPParser reads. */
     int consumed = phr_parse_request((const char *)data, size,
         &method, &method_len, &path, &path_len, &minor,
         headers, &header_count, 0);
-    if (consumed != (int)size || method_len == 0 || path_len == 0 ||
-        method_len >= sizeof(result->method) || path_len >= sizeof(result->path)) return 0;
-    memcpy(result->method, method, method_len); result->method[method_len] = 0;
-    memcpy(result->path, path, path_len); result->path[path_len] = 0;
+    if (consumed <= 0) return 0;
+    result->method = method;
+    result->method_len = method_len;
+    result->path = path;
+    result->path_len = path_len;
     result->minor = minor;
     return 1;
 }

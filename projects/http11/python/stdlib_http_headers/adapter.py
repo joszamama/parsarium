@@ -60,8 +60,13 @@ def parse(api, raw):
     if api == "http.client.parse_headers":
         fields = raw.split(b"\r\n", 1)[1]
         headers = http.client.parse_headers(io.BytesIO(fields))
-        return {"content_type": headers["Content-Type"],
-                "content_length": int(headers["Content-Length"])}
+        # A field the message does not carry is omitted.
+        result = {}
+        if headers["Content-Type"] is not None:
+            result["content_type"] = headers["Content-Type"]
+        if headers["Content-Length"] is not None:
+            result["content_length"] = int(headers["Content-Length"])
+        return result
 
     raise ValueError(api)
 

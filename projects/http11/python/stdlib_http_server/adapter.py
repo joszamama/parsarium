@@ -35,8 +35,16 @@ def parse(api, raw):
             parsed = None
 
             def do_GET(self):
-                type(self).parsed = {"method": self.command, "target": self.path,
-                                     "host": self.headers["Host"]}
+                type(self).parsed = {"method": self.command, "target": self.path}
+                if self.headers["Host"] is not None:
+                    type(self).parsed["host"] = self.headers["Host"]
+
+            def __getattr__(self, name):
+                # BaseHTTPRequestHandler dispatches on do_<METHOD>; observe every
+                # method the request line names, not only GET.
+                if name.startswith("do_"):
+                    return self.do_GET
+                raise AttributeError(name)
 
             def log_message(self, *_args):
                 pass

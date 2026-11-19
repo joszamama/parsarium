@@ -26,9 +26,14 @@ if ($package === 'zendframework/zend-http') {
         'method' => $request->getMethod(),
         'target' => $request->getUriString(),
         'version' => $request->getVersion(),
-        'host' => $request->getHeaders()->get('Host')->getFieldValue(),
-        'custom' => $request->getHeaders()->get('X-Parsarium')->getFieldValue(),
+        'host' => $request->getHeaders()->get('Host'),
+        'custom' => $request->getHeaders()->get('X-Parsarium'),
     ];
+    // Headers::get() returns false for a header the request does not carry; omit that field.
+    foreach (['host', 'custom'] as $field) {
+        if ($result[$field] === false) { unset($result[$field]); }
+        else { $result[$field] = $result[$field]->getFieldValue(); }
+    }
 } elseif ($package === 'zendframework/zend-diactoros') {
     $request = \Zend\Diactoros\Request\Serializer::fromString($raw);
     $result = [
