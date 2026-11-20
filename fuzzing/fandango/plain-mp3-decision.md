@@ -30,7 +30,26 @@ public one-input fuzz bridges can exit successfully after swallowing a parser
 error, so their exit status alone does not verify this file.
 
 The default `parsarium fandango generate mp3 ...` route therefore uses the
-[local `mp3_plain.fan` grammar](specs/mp3_plain.fan), not `-F mp3`. It embeds
+[local `mp3_plain.fan` grammar](specs/mp3_plain.fan), not `-F mp3`.
+
+## 20 November 2026: generated audio
+
+The first `mp3_plain.fan`, described in the rest of this note, chose among six
+literal byte strings, so its language had exactly six words. Fandango keeps
+only distinct outputs, and a 50-file request with seed 2027 returned six
+files. The spec now generates the audio instead: 5 to 60 silent MPEG-1 or
+MPEG-2 Layer III frames with one sample rate (32, 44.1 or 48 kHz; 16, 22.05 or
+24 kHz), channel mode and CRC setting per file, a constant or per-frame
+bitrate, and an optional Xing or Info frame. Frame lengths, CRCs and the Xing
+counts are constraints over the headers. The same audio grammar is used by
+[`mp3_tagged.fan`](specs/mp3_tagged.fan), which replaces Fanbase's `mp3` as
+the tagged default. The checks and distributions are in
+[the spec details](specs/README.md). The receipt keeps the structural check of
+contiguous Layer III headers; the six-sample decode pin no longer applies.
+
+## The first grammar (17 November 2026)
+
+The first local grammar embeds
 whole frames from two hash-pinned, untagged controls and selects one of three
 complete frame-boundary prefixes from each. This yields six structurally
 valid, tag-free Layer III streams. It is a bounded valid-frame seed generator:

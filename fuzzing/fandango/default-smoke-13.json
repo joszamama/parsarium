@@ -385,17 +385,24 @@
       "status": "pass",
       "generator_exit_code": 0,
       "generator_version": "Fandango 1.3.1",
-      "generator_sha256": "179f6c5817f7ce083c75a961b1f39ca85f5d83bae7928af80ef83484df9c37cb",
+      "generator_sha256": "ea8529c2087f6e614c97ca9bbb4b469756be2a55b4beedb79bcc1d5eab70ea85",
       "source_sha256": "bcfebbfa2b65a6d88dc97ea18117831072373e38b5785a2afb874ed4df5070dd",
       "spec": {
-        "kind": "fanbase",
-        "name": "mp3",
-        "sha256": "686fd83716aee495f75c1ad788cb3c7cdc423fd91fb8d0fe8e1165d0c1caf1f5",
-        "matches_registry_index": null
+        "kind": "file",
+        "name": "fuzzing/fandango/specs/mp3_tagged.fan",
+        "sha256": "9ab582d46781256e09afc22fa232d75644228979c091813f11d8d734d694bc43"
       },
       "output": {
-        "sha256": "7ef93f3b6fe2db9435bffd92298dcef7b4fb2d4bef2fc623c142dc365172ec72",
-        "bytes": 4538
+        "sha256": "55159f1d883f68437c742da68eb282267980261fa06fe55bc15244969022bafd",
+        "bytes": 10312,
+        "format_validation": {
+          "kind": "id3_tagged_contiguous_layer_iii_headers",
+          "frames": 7,
+          "mpeg_version": "1",
+          "sample_rate": 32000,
+          "id3v2_version": "2.3",
+          "id3v1": true
+        }
       },
       "replay": {
         "batch_status": "ok",
@@ -417,11 +424,11 @@
         }
       },
       "problems": [],
-      "fandango_receipt_sha256": "dde44e723169b49a280cb756d7ef62c474dad595c1e25995d1ba36c7156b0ba4",
-      "replay_receipt_sha256": "1060ef6a1cad06e58a4359d4b47326465f3f5a0cf754485cd343cdb2652df1b0",
-      "afl_plan_sha256": "f07d0cea6ff35ff0b756c6745b7b0948918393b2ac99e8e55f6cb561127675a8",
-      "rechecked_at_utc": "2026-11-17T19:30:40.996951+00:00",
-      "recheck_reason": "MP3 targets moved to projects/mp3; default grammar now chosen per target control; the plain go-mp3 project was removed in the MP3 merge, so the untagged route is checked on the default case dmulholl/mp3lib"
+      "fandango_receipt_sha256": "49e246de047169e78a768a4031871529ca76fb6136f2669dc44abcc394cced8d",
+      "replay_receipt_sha256": "6798ddb3c59f6d2c4854e65a8d335a0b65025a77e5b8ef8694db0807245f9dd0",
+      "afl_plan_sha256": "d52753951453619d1b0847e9c8d076a4bb19d69d0de88c582c5e060ccd692806",
+      "rechecked_at_utc": "2026-11-20T21:14:05.873616+00:00",
+      "recheck_reason": "MP3 routes moved to local specs: tagged targets default to mp3_tagged.fan (Fanbase mp3 stays selectable with --fanbase mp3) and mp3_plain.fan generates its Layer III audio instead of six fixed prefixes"
     },
     {
       "format": "json",
@@ -513,22 +520,21 @@
       "status": "pass",
       "generator_exit_code": 0,
       "generator_version": "Fandango 1.3.1",
-      "generator_sha256": "179f6c5817f7ce083c75a961b1f39ca85f5d83bae7928af80ef83484df9c37cb",
+      "generator_sha256": "ea8529c2087f6e614c97ca9bbb4b469756be2a55b4beedb79bcc1d5eab70ea85",
       "source_sha256": "c29d82de91787cc30c6bc9c6a5d5b14e203f8765563de23aa2c242f54c3ea1d9",
       "spec": {
         "kind": "file",
         "name": "fuzzing/fandango/specs/mp3_plain.fan",
-        "sha256": "c3e773f45880cd27c09decb51496aa151ae27eef0afe031ac37f5bf6db6d24e0"
+        "sha256": "8b2a59c27a64f22995c6cc26aaee4f05a0a283a76cbf49f7a12d5d530f39b868"
       },
       "output": {
-        "sha256": "3353cac7b815fa1c23cb75424016fa85f5c41d773e07ee96e719a2f619dfb100",
-        "bytes": 1671,
+        "sha256": "506523659ef9f28c52d7b23154800d4df66ba1f1f7b4283b9d579b1576c277b4",
+        "bytes": 11703,
         "format_validation": {
           "kind": "contiguous_untagged_layer_iii_headers",
-          "frames": 8,
-          "mpeg_version": "1",
-          "sample_rate": 44100,
-          "pinned_go_and_rust_decode_checked": true
+          "frames": 28,
+          "mpeg_version": "2",
+          "sample_rate": 22050
         }
       },
       "replay": {
@@ -537,12 +543,12 @@
           "ok": 1
         },
         "image_ids": [
-          "sha256:530cc3384da67ab153ea7e443132521476ed0f34a0a37280b03a5811f8957127"
+          "sha256:ae34d2976659e530f7436325b9f75b6da68bc53e4684a4e72fbe7616ab4fbcd5"
         ]
       },
       "afl": {
         "prepared": true,
-        "image_id": "sha256:59a5597eb7ea525fac45c1d5668c713c492a4a93b997a1a87d73f6f63064b705",
+        "image_id": "sha256:d95c36d9cc1022bd5ae3abc28ca87a6dca63e38742690278dd5ec16a3e47d044",
         "feedback_kind": "go_parser_source_blocks_to_afl_bitmap",
         "unique_seeds": 2,
         "check": {
@@ -551,18 +557,18 @@
         }
       },
       "problems": [],
-      "fandango_receipt_sha256": "66c5087a06d33ac06ac0b0f2ae5945a2aacd5177ddb4622ec53bb02418e24d6a",
-      "replay_receipt_sha256": "5fcc0c9dee1f48d413b15e68606bbe4c8c6854f960a6a57c06d13d65e391652c",
-      "afl_plan_sha256": "0a9eeb35f812c96064fbf64a66e72058c80fab70f028d986dec9d3a0af9f3015",
-      "rechecked_at_utc": "2026-11-17T19:30:40.996951+00:00",
-      "recheck_reason": "MP3 targets moved to projects/mp3; default grammar now chosen per target control; the plain go-mp3 project was removed in the MP3 merge, so the untagged route is checked on the default case dmulholl/mp3lib"
+      "fandango_receipt_sha256": "6b9494a35d759b76923de97ac443817b8a3059a963b92f58691ca608983eee63",
+      "replay_receipt_sha256": "b6d4941caf1748692bf81f2f6007c35a031a784522c698495beb59cfa9875879",
+      "afl_plan_sha256": "bb8b035b15880f78ebca69399db35211105abc4ad21ca3f11e97e194cce4e0af",
+      "rechecked_at_utc": "2026-11-20T21:14:05.873616+00:00",
+      "recheck_reason": "MP3 routes moved to local specs: tagged targets default to mp3_tagged.fan (Fanbase mp3 stays selectable with --fanbase mp3) and mp3_plain.fan generates its Layer III audio instead of six fixed prefixes"
     }
   ],
   "limitations": [
-    "The Fanbase -F routes (seven in the first run, six after SVG moved to the local svg.fan) fetched live registry specs; their exact SHA-256 snapshots are recorded, but an upstream Fanbase change can alter a future default run.",
+    "The Fanbase -F routes (seven in the first run, five after SVG and tagged MP3 moved to local specs) fetched live registry specs; their exact SHA-256 snapshots are recorded, but an upstream Fanbase change can alter a future default run.",
     "Replay success records one-case target process completion. Some fuzz entrypoints can swallow parser rejection; these results do not by themselves prove semantic acceptance of every generated file.",
     "AFL++ was prepared and checked only; no fuzz campaign or generated-input coverage measurement was run.",
-    "The local plain-MP3 spec emits six fixed whole-frame valid prefixes, not a general MP3 grammar or stripped Fanbase output."
+    "The local MP3 specs generate silent Layer III frames (all-zero side information and main data); they do not vary audio payloads."
   ],
   "setup_observations": [
     {

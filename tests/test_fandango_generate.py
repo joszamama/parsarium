@@ -162,22 +162,58 @@ class FandangoGenerateTest(unittest.TestCase):
         self.assertEqual(code, 0, output)
         spec = ROOT / "fuzzing/fandango/specs/mp3_plain.fan"
         logged = json.loads(self.log.read_text())
-        self.assertEqual(logged["argv"][1:5], ["-f", str(spec), "-x", ".mp3"])
+        self.assertEqual(logged["argv"][1:7], ["-f", str(spec), "-x", ".mp3", "--max-nodes", "2000"])
         receipt = self.receipt(run)
         self.assertEqual(receipt["spec"]["sha256"], sha256(spec.read_bytes()).hexdigest())
         self.assertEqual(receipt["outputs"][0]["sha256"], sha256(control.read_bytes()).hexdigest())
         self.assertEqual(receipt["outputs"][0]["format_validation"]["frames"], 11)
-        self.assertTrue(receipt["outputs"][0]["format_validation"]["pinned_go_and_rust_decode_checked"])
+        self.assertIn("plain_mp3_route", receipt)
         self.assertEqual(receipt["problems"], [])
 
-    def test_plain_mp3_bundled_route_rejects_other_valid_stream(self):
-        control = ROOT / "controls/mp3/tone-44k-mono.mp3"
-        run = self.tmp / "other-plain-mp3"
+    def test_plain_mp3_route_rejects_tagged_stream(self):
+        control = ROOT / "controls/mp3/id3v2-tagged-tone-44k.mp3"
+        run = self.tmp / "tagged-into-plain"
         with mock.patch.dict(os.environ, {"FAKE_MP3_CONTROL": str(control)}):
             code, output = self.run_cli("mp3", "go", "github_com_dmulholl_mp3lib",
                                         str(run), "--count", "1", mode="plain-mp3")
         self.assertEqual(code, 1, output)
-        self.assertIn("differs from the six decoded samples", output)
+        self.assertIn("contains an ID3 tag", output)
+
+    def test_tagged_mp3_default_is_local_spec(self):
+        control = ROOT / "controls/mp3/id3v2-tagged-tone-44k.mp3"
+        run = self.tmp / "tagged-mp3"
+        with mock.patch.dict(os.environ, {"FAKE_MP3_CONTROL": str(control)}):
+            code, output = self.run_cli("mp3", "c", "ffmpeg", str(run), "--count", "1",
+                                        mode="plain-mp3")
+        self.assertEqual(code, 0, output)
+        spec = ROOT / "fuzzing/fandango/specs/mp3_tagged.fan"
+        argv = json.loads(self.log.read_text())["argv"]
+        self.assertEqual(argv[1:7], ["-f", str(spec), "-x", ".mp3", "--max-nodes", "2000"])
+        receipt = self.receipt(run)
+        self.assertEqual(receipt["spec"]["sha256"], sha256(spec.read_bytes()).hexdigest())
+        validation = receipt["outputs"][0]["format_validation"]
+        self.assertEqual((validation["frames"], validation["id3v2_version"]), (41, "2.3"))
+        self.assertIn("tagged_mp3_route", receipt)
+        self.assertEqual(receipt["problems"], [])
+
+    def test_tagged_mp3_rejects_untagged_stream(self):
+        control = ROOT / "controls/mp3/go-tone-44k-mono.mp3"
+        run = self.tmp / "plain-into-tagged"
+        with mock.patch.dict(os.environ, {"FAKE_MP3_CONTROL": str(control)}):
+            code, output = self.run_cli("mp3", "c", "ffmpeg", str(run), "--count", "1",
+                                        mode="plain-mp3")
+        self.assertEqual(code, 1, output)
+        self.assertIn("has no ID3 tag", output)
+
+    def test_fanbase_mp3_stays_selectable_for_tagged_targets(self):
+        run = self.tmp / "fanbase-mp3"
+        code, output = self.run_cli("mp3", "c", "ffmpeg", str(run), "--fanbase", "mp3",
+                                    "--count", "1")
+        self.assertEqual(code, 0, output)
+        self.assertEqual(json.loads(self.log.read_text())["argv"][1:3], ["-F", "mp3"])
+        code, output = self.run_cli("mp3", "go", "github_com_dmulholl_mp3lib",
+                                    str(self.tmp / "fanbase-plain"), "--fanbase", "mp3")
+        self.assertEqual(code, 2, output)
 
     def test_plain_mp3_rejects_output_without_frames(self):
         run = self.tmp / "bad-plain-mp3"

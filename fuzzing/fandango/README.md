@@ -3,7 +3,7 @@
 The [13-format default-route smoke](default-smoke-13.md) shows one fixed valid
 generation, replay, and AFL++ preparation for each active format and pilot.
 
-[Fandango](https://fandango-fuzzer.github.io/) 1.3.1 specs for seven formats. MP4 and PDF use constraints to keep box sizes and offsets correct, and ASCII PLY to keep element counts and vertex indices correct; SVG keeps every reference inside the file by fixed ids; the PNM and HTTP grammars keep headers and data consistent through their productions. The plain-MP3 pilot spec reuses whole decoded frames from pinned controls.
+[Fandango](https://fandango-fuzzer.github.io/) 1.3.1 specs for seven formats. MP4 and PDF use constraints to keep box sizes and offsets correct, and ASCII PLY to keep element counts and vertex indices correct; SVG keeps every reference inside the file by fixed ids; the PNM and HTTP grammars keep headers and data consistent through their productions. The two MP3 specs derive every frame length, CRC, Xing count and ID3 size from the headers with constraints.
 
 ```sh
 python3 parsarium.py fandango setup
@@ -14,7 +14,7 @@ The generator selects the bundled spec automatically, saves its hash and generat
 
 SVG targets default to the local [`svg.fan`](specs/svg.fan). Fanbase's `-F svg` stays selectable with `--fanbase svg`, but most of its outputs have a zero or near-zero width, height or viewBox, `<use>` or `url(#…)` references to ids the file does not define, or invalid property values such as `opacity: #90C`, so parser rejections there mostly measure the corpus.
 
-JSON and XML pilot targets default to Fanbase's `-F json` and `-F xml` specs. One fixed output from each was checked with Python's JSON or XML parser. MP3 targets verified on the ID3v2-tagged control default to Fanbase's `-F mp3` spec. MP3 targets verified on untagged frames default to a [small local grammar](specs/mp3_plain.fan) over six decodable, untagged Layer III streams. Fanbase's `-F mp3` output includes ID3 tags **and** Layer I/II frames; [stripping the tags is insufficient](plain-mp3-decision.md). Fanbase has no TOML spec, so the TOML pilot defaults to the local [`toml.fan`](specs/toml.fan); 200 outputs from `--random-seed 1` were distinct and all parsed with Python's `tomllib`.
+JSON and XML pilot targets default to Fanbase's `-F json` and `-F xml` specs. One fixed output from each was checked with Python's JSON or XML parser. MP3 targets verified on the ID3v2-tagged control default to the local [`mp3_tagged.fan`](specs/mp3_tagged.fan); Fanbase's `-F mp3` stays selectable with `--fanbase mp3`, but it keeps the audio frames fixed, mixes Layer III with Layer I and II frames, varies only the tag text and emits no TIT2, so almost every target gives one answer across its outputs. MP3 targets verified on untagged frames default to the local [`mp3_plain.fan`](specs/mp3_plain.fan), the same Layer III audio grammar without tags. Fanbase's `-F mp3` output includes ID3 tags **and** Layer I/II frames; [stripping the tags is insufficient](plain-mp3-decision.md). Fanbase has no TOML spec, so the TOML pilot defaults to the local [`toml.fan`](specs/toml.fan); 200 outputs from `--random-seed 1` were distinct and all parsed with Python's `tomllib`.
 
 ```sh
 python3 parsarium.py fandango generate mp3 go github_com_dmulholl_mp3lib runs/mp3lib-fandango \
@@ -23,10 +23,10 @@ python3 parsarium.py afl run runs/mp3lib-fandango/afl --check
 ```
 
 The MP3 receipt names the local spec and hashes every generated file. Its
-`format_validation` fields check contiguous Layer III frame headers and bind
-the bundled outputs to six SHA-pinned samples decoded by the Go and Rust
-adapters. A custom `--spec` gets the structural check without that decode
-claim. The bundled grammar reuses pinned frame bytes and has limited variety.
+`format_validation` fields check contiguous, complete MPEG-1/2 Layer III frame
+headers with one MPEG version and sample rate, and, on the tagged route, an
+ID3v2.3/2.4 header, an ID3v1 trailer or both. The decode and tag checks of the
+bundled specs are in [the spec details](specs/README.md).
 
 ```sh
 python3 parsarium.py fandango generate json python simplejson runs/json-fandango \
@@ -45,7 +45,8 @@ python3 parsarium.py fandango generate xml python xmltodict runs/xml-fandango \
 | [`ascii_ply.fan`](specs/ascii_ply.fan) | `ascii_ply` | `format ascii 1.0` meshes with 3–60 vertices and 1–60 triangles, quads, pentagons and hexagons, optionally followed by an `edge` element, and point clouds without faces; `float` or `double` x/y/z, optional `float` normals and `uchar` RGB or RGBA; `uchar`, `int` or `uint` list counts and indices; 0–3 `comment`/`obj_info` lines; constrained element counts and in-range, distinct indices; see [details](specs/README.md) |
 | [`ascii_pnm_p3.fan`](specs/ascii_pnm_p3.fan) | `ascii_pnm` | Plain PPM (`P3`) only; 1×1, 2×1, 1×2 or 2×2; maxval 255 or 15 with every sample at most maxval; space or newline header separators; optional comment after the magic; optional trailing newline |
 | [`http11_request.fan`](specs/http11_request.fan) | `http11` | Requests only; `GET`, `HEAD`, `OPTIONS`, `DELETE` without body, or `POST` with a matching `Content-Length` (0, 3 or 9 bytes); origin-form targets; `Host` always present; optional `User-Agent`, `Accept`, `X-Parsarium`, `Connection`, each at most once; optional whitespace after the colon; CRLF line endings |
-| [`mp3_plain.fan`](specs/mp3_plain.fan) | untagged `mp3` targets | Six whole-frame prefixes from two pinned, untagged Layer III controls; no ID3 tags or mixed layers |
+| [`mp3_tagged.fan`](specs/mp3_tagged.fan) | tagged `mp3` targets | ID3v2.3 or 2.4 (TIT2, TPE1, TALB, TYER/TDRC, TRCK, TCON, COMM, each optional and at most once; ISO-8859-1, UTF-16 with BOM, UTF-8 in 2.4; optional padding), an optional ID3v1/1.1 trailer, or ID3v1 only, around the `mp3_plain.fan` audio; see [details](specs/README.md) |
+| [`mp3_plain.fan`](specs/mp3_plain.fan) | untagged `mp3` targets | 5–60 silent MPEG-1 or MPEG-2 Layer III frames with one sample rate (32/44.1/48 or 16/22.05/24 kHz), channel mode and CRC setting per file; CBR or VBR; optional Xing/Info frame; no tags or other layers; see [details](specs/README.md) |
 | [`yaml.fan`](specs/yaml.fan) | `yaml` pilot | One block-mapping document with fixed optional keys, flow and block collections, quoted scalars with escapes, block scalars and one anchor/alias; plain scalars typed the same under YAML 1.1 and the 1.2 core schema. Fanbase has no YAML spec |
 | [`toml.fan`](specs/toml.fan) | `toml` pilot | TOML 1.0.0 documents with fixed key names per position: root keys, optional `[server]`, `[owner]` and dotted-key tables, zero to three `[[products]]`; typed integers, floats, strings with escapes, booleans, arrays, inline tables and date-times |
 | [`dns_message.fan`](specs/dns_message.fan) | `dns` pilot | One DNS message: a query, or a response with 1–4 A, AAAA, CNAME, MX or TXT answers; counts fixed per alternative, `RDLENGTH` constrained, compression only by pointer to the question name at offset 12; see [decision](dns-decision.md) |

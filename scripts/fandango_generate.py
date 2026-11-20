@@ -25,17 +25,18 @@ import venv
 
 from run_case import MAX_CASE_BYTES, ROOT, project_for
 from format_registry import ECOSYSTEMS, PROJECT_FORMATS
-from mp3_plain import BUNDLED_DECODED_SHA256, SOURCE_CONTROLS, validate_frames
+from mp3_plain import validate_frames, validate_tagged
 
 
 FORMATS = PROJECT_FORMATS
 # Target format -> Fanbase format directory. Formats missing here have no
 # Fanbase spec as of index.yml schema 2 and need --spec. MP3 is resolved per
 # target (tagged_mp3_target): targets verified on the ID3v2-tagged control use
-# Fanbase's mp3 grammar; targets verified on untagged Layer III frames use the
-# local plain grammar, because Fanbase's mp3 grammar emits ID3 tags plus
-# Layer I/II frames and removing the tags does not yield a contiguous Layer III
-# stream.
+# the local mp3_tagged.fan, and Fanbase's mp3 grammar stays selectable with
+# --fanbase mp3; targets verified on untagged Layer III frames use the local
+# mp3_plain.fan. Fanbase's mp3 grammar keeps the audio frames fixed, mixes
+# Layer III with Layer I and II frames and varies only the tag text, and
+# removing its tags does not yield a contiguous Layer III stream.
 # Fanbase has no YAML spec, so yaml uses the bundled schema-neutral yaml.fan.
 # Fanbase has no TOML spec either; toml uses the local toml.fan.
 # Fanbase's svg spec stays selectable with --fanbase svg, but most of its
@@ -48,14 +49,16 @@ LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan", "mp3": "mp3_plain.fan",
                "http11": "http11_request.fan", "ascii_ply": "ascii_ply.fan",
                "ascii_pnm": "ascii_pnm_p3.fan", "yaml": "yaml.fan", "toml": "toml.fan", "sql": "sql.fan", "dns": "dns_message.fan",
                "svg": "svg.fan"}
+TAGGED_MP3_SPEC = "mp3_tagged.fan"
 # Formats with a Fanbase spec whose default route is the bundled spec.
-PREFER_LOCAL = {"svg"}
+PREFER_LOCAL = {"svg", "mp3"}
 # Extra Fandango options for a bundled spec. Fandango's default node budget
 # keeps mp4.fan at its smallest derivation (audio only, with no metadata),
 # pdf.fan at one or two pages, svg.fan at one to six top-level elements and
 # ascii_ply.fan at a few vertices and faces with no normals or alpha.
 LOCAL_SPEC_OPTIONS = {"mp4": ["--max-nodes", "2000"], "pdf": ["--max-nodes", "2000"],
-                      "svg": ["--max-nodes", "2000"], "ascii_ply": ["--max-nodes", "5000"]}
+                      "svg": ["--max-nodes", "2000"], "ascii_ply": ["--max-nodes", "5000"],
+                      "mp3": ["--max-nodes", "2000"]}
 # Passed as -x with --spec; Fandango defaults to '.txt' for -f.
 EXTENSIONS = {"png": ".png", "zip": ".zip", "mp4": ".mp4", "wav": ".wav",
               "pdf": ".pdf", "svg": ".svg", "http11": ".http", "ascii_ply": ".ply",
@@ -196,7 +199,7 @@ def build_command(executable: Path, args: argparse.Namespace, generated: Path,
         command += ["-F", args.fanbase]
     else:
         command += ["-f", str(spec), "-x", EXTENSIONS[args.format]]
-        if spec == bundled_spec(args.format):
+        if spec in bundled_specs(args.format):
             command += LOCAL_SPEC_OPTIONS.get(args.format, [])
     command += ["-n", str(args.count), "-d", str(generated)]
     if args.seed is not None:
@@ -208,6 +211,13 @@ def bundled_spec(fmt: str) -> Path | None:
     return (ROOT / "fuzzing/fandango/specs" / LOCAL_SPECS[fmt]).resolve() if fmt in LOCAL_SPECS else None
 
 
+def bundled_specs(fmt: str) -> set[Path]:
+    specs = {bundled_spec(fmt)} - {None}
+    if fmt == "mp3":
+        specs.add((ROOT / "fuzzing/fandango/specs" / TAGGED_MP3_SPEC).resolve())
+    return specs
+
+
 def tagged_mp3_target(ecosystem: str, slug: str) -> bool:
     """True for an MP3 target verified on the ID3v2-tagged control."""
     manifest = ROOT / "projects" / "mp3" / ecosystem / slug / "manifest.json"
@@ -216,7 +226,7 @@ def tagged_mp3_target(ecosystem: str, slug: str) -> bool:
 
 
 def fanbase_format(args: argparse.Namespace) -> str | None:
-    if args.format == "mp3" and not args.fanbase:
+    if args.format == "mp3":
         return "mp3" if tagged_mp3_target(args.ecosystem, args.slug) else None
     return FANBASE_FORMATS.get(args.format)
 
@@ -234,6 +244,8 @@ def validate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> Path | N
     if args.fanbase is None and args.spec is None:
         if expected_fanbase is not None and args.format not in PREFER_LOCAL:
             args.fanbase = expected_fanbase
+        elif args.format == "mp3" and expected_fanbase is not None:
+            args.spec = ROOT / "fuzzing/fandango/specs" / TAGGED_MP3_SPEC
         elif args.format in LOCAL_SPECS:
             args.spec = ROOT / "fuzzing/fandango/specs" / LOCAL_SPECS[args.format]
         else:
@@ -311,12 +323,7 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
         cli.error("--spec must be outside the output directory")
     executable = fandango_executable(args.fandango)
     version = fandango_version(executable)
-    bundled_plain_mp3 = (args.format == "mp3" and
-                         spec == ROOT / "fuzzing/fandango/specs/mp3_plain.fan")
-    if bundled_plain_mp3:
-        for path, expected in SOURCE_CONTROLS.items():
-            if digest(ROOT / path) != expected:
-                raise ValueError(f"bundled MP3 source control changed: {path}")
+    tagged_mp3 = args.format == "mp3" and tagged_mp3_target(args.ecosystem, args.slug)
 
     generated = run_dir / "generated"
     spec_home = run_dir / "fanbase-specs"
@@ -420,13 +427,13 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
     receipt["symlinks_skipped"] = [str(path.relative_to(generated)) for path in links]
     receipt["input_limit_bytes"] = MAX_CASE_BYTES
     if args.format == "mp3" and not args.fanbase:
-        receipt["plain_mp3_route"] = {
+        receipt["tagged_mp3_route" if tagged_mp3 else "plain_mp3_route"] = {
             "source": "local_spec", "postprocess": "none",
-            "validation": "contiguous complete MPEG-1/2 Layer III frame headers",
+            "validation": ("an ID3v2.3/2.4 tag, an ID3v1 trailer or both around "
+                           "contiguous complete MPEG-1/2 Layer III frame headers" if tagged_mp3
+                           else "contiguous complete MPEG-1/2 Layer III frame headers"),
             "limit_bytes": MAX_CASE_BYTES,
-            "bundled_decoded_samples": bundled_plain_mp3,
             "validator_sha256": digest(ROOT / "scripts/mp3_plain.py"),
-            "source_controls": SOURCE_CONTROLS if bundled_plain_mp3 else None,
         }
 
     problems = []
@@ -435,13 +442,8 @@ def generate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> int:
             if record["bytes"] > MAX_CASE_BYTES:
                 continue
             try:
-                validation = validate_frames(path.read_bytes())
-                bundled = receipt["plain_mp3_route"]["bundled_decoded_samples"]
-                validation["pinned_go_and_rust_decode_checked"] = (
-                    bundled and record["sha256"] in BUNDLED_DECODED_SHA256)
-                record["format_validation"] = validation
-                if bundled and not validation["pinned_go_and_rust_decode_checked"]:
-                    problems.append(f"{record['path']}: bundled MP3 output differs from the six decoded samples")
+                check = validate_tagged if tagged_mp3 else validate_frames
+                record["format_validation"] = check(path.read_bytes())
             except ValueError as error:
                 problems.append(f"{record['path']}: {error}")
     if receipt["exit_code"] != 0:

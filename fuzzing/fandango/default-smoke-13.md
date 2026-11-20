@@ -18,7 +18,7 @@ plan check. No AFL++ campaign was started.
 | HTTP/1.1 | `cpp/poco` | local `http11_request.fan` | 1/1 / ready |
 | ASCII PLY | `c/assetkit` | local `ascii_ply.fan` | 1/1 / ready |
 | ASCII PNM | `cpp/openimageio` | local `ascii_pnm_p3.fan` | 1/1 / ready |
-| MP3, ID3v2-tagged control | `c/mpv` | Fanbase `mp3` | 1/1 / ready |
+| MP3, ID3v2-tagged control | `c/mpv` | local `mp3_tagged.fan` | 1/1 / ready |
 | JSON pilot | `python/simplejson` | Fanbase `json` | 1/1 / ready |
 | XML pilot | `python/xmltodict` | Fanbase `xml` | 1/1 / ready |
 | MP3, untagged controls | `go/github_com_dmulholl_mp3lib` | local `mp3_plain.fan` | 1/1 / ready |
@@ -37,8 +37,8 @@ registry; the recorded spec hashes identify this run but future defaults may
 change upstream. Replay reports target process completion. Some fuzz entries
 can swallow a parser error, so this smoke alone does not establish semantic
 acceptance of every generated file. The base projects separately verify their
-valid controls. The plain MP3 route is a [bounded valid-frame seed
-generator](plain-mp3-decision.md), not a general MP3 grammar.
+valid controls. The MP3 routes generate silent Layer III frames; see
+[the plain MP3 decision](plain-mp3-decision.md).
 
 The first isolated run lacked the managed macOS certificate bundle for four
 Fanbase fetches; using the managed Fandango setup resolved it. A pre-existing
@@ -91,3 +91,12 @@ vertices with normals, 46 faces and 12 edges. The local AssetKit base image
 differed from its receipt and its AFL++ image was missing, so `afl build`
 re-verified the base (525 library lines, unchanged) and rebuilt the overlay
 (2,116 feedback edges, unchanged).
+
+The two MP3 rows were rechecked on 20 November 2026 after tagged MP3 moved
+from Fanbase's `mp3` spec to the local `mp3_tagged.fan` and `mp3_plain.fan`
+started generating its audio (`--case mp3/c/mpv --case
+mp3/go/github_com_dmulholl_mp3lib`). Both routes pass `--max-nodes 2000`. The
+seed-7 tagged output has an ID3v2.3 tag, an ID3v1 trailer and seven MPEG-1
+32 kHz frames; the plain output has 28 MPEG-2 22.05 kHz frames. The
+`dmulholl/mp3lib` base and AFL++ images had been rebuilt for the RQ2 harness
+change before this check.
