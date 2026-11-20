@@ -3,14 +3,14 @@
 The [13-format default-route smoke](default-smoke-13.md) shows one fixed valid
 generation, replay, and AFL++ preparation for each active format and pilot.
 
-[Fandango](https://fandango-fuzzer.github.io/) 1.3.1 specs for seven formats. MP4 and PDF use constraints to keep box sizes and offsets correct; SVG keeps every reference inside the file by fixed ids; the three text grammars keep headers and data consistent through their productions. The plain-MP3 pilot spec reuses whole decoded frames from pinned controls.
+[Fandango](https://fandango-fuzzer.github.io/) 1.3.1 specs for seven formats. MP4 and PDF use constraints to keep box sizes and offsets correct, and ASCII PLY to keep element counts and vertex indices correct; SVG keeps every reference inside the file by fixed ids; the PNM and HTTP grammars keep headers and data consistent through their productions. The plain-MP3 pilot spec reuses whole decoded frames from pinned controls.
 
 ```sh
 python3 parsarium.py fandango setup
 python3 parsarium.py fandango generate ascii_ply c assetkit runs/ply-fandango --count 100 --seed 1 --replay
 ```
 
-The generator selects the bundled spec automatically, saves its hash and generated files, and can prepare the same corpus for AFL++ with `--prepare-afl`. [The MP4, PDF and SVG grammar details](specs/README.md) describe their scope.
+The generator selects the bundled spec automatically, saves its hash and generated files, and can prepare the same corpus for AFL++ with `--prepare-afl`. [The MP4, PDF, SVG and ASCII PLY grammar details](specs/README.md) describe their scope.
 
 SVG targets default to the local [`svg.fan`](specs/svg.fan). Fanbase's `-F svg` stays selectable with `--fanbase svg`, but most of its outputs have a zero or near-zero width, height or viewBox, `<use>` or `url(#…)` references to ids the file does not define, or invalid property values such as `opacity: #90C`, so parser rejections there mostly measure the corpus.
 
@@ -42,7 +42,7 @@ python3 parsarium.py fandango generate xml python xmltodict runs/xml-fandango \
 | [`mp4.fan`](specs/mp4.fan) | `mp4` | ISO BMFF with a 2×2 H.264 video frame, a silent AAC audio track, or both, and optional iTunes metadata; constrained box sizes, durations and chunk offsets; see [details](specs/README.md) |
 | [`pdf.fan`](specs/pdf.fan) | `pdf` | PDF with one to five pages, per-page or inherited MediaBox, optional `/Rotate` and optional Info fields; constrained xref rows, object counts, stream lengths and `startxref`; see [details](specs/README.md) |
 | [`svg.fan`](specs/svg.fan) | `svg` | SVG 1.1 documents with a positive width and height (1–512, unitless or px) and an optional positive viewBox; rect, circle, ellipse, line, polyline, polygon and path (M/L/H/V/C/Q/A/Z, absolute and relative), groups with transforms, hex, `rgb()` and named colors, opacity in [0, 1], optional title and desc, an optional linear gradient and `<use>` whose ids are defined in the same file; see [details](specs/README.md) |
-| [`ascii_ply.fan`](specs/ascii_ply.fan) | `ascii_ply` | `format ascii 1.0`; 3 vertices with 1 triangle or 4 vertices with 2 triangles; `float x y z`, optionally `uchar red green blue`; face list `uchar int` or `uchar uint`; 0–2 comment lines |
+| [`ascii_ply.fan`](specs/ascii_ply.fan) | `ascii_ply` | `format ascii 1.0` meshes with 3–60 vertices and 1–60 triangles, quads, pentagons and hexagons, optionally followed by an `edge` element, and point clouds without faces; `float` or `double` x/y/z, optional `float` normals and `uchar` RGB or RGBA; `uchar`, `int` or `uint` list counts and indices; 0–3 `comment`/`obj_info` lines; constrained element counts and in-range, distinct indices; see [details](specs/README.md) |
 | [`ascii_pnm_p3.fan`](specs/ascii_pnm_p3.fan) | `ascii_pnm` | Plain PPM (`P3`) only; 1×1, 2×1, 1×2 or 2×2; maxval 255 or 15 with every sample at most maxval; space or newline header separators; optional comment after the magic; optional trailing newline |
 | [`http11_request.fan`](specs/http11_request.fan) | `http11` | Requests only; `GET`, `HEAD`, `OPTIONS`, `DELETE` without body, or `POST` with a matching `Content-Length` (0, 3 or 9 bytes); origin-form targets; `Host` always present; optional `User-Agent`, `Accept`, `X-Parsarium`, `Connection`, each at most once; optional whitespace after the colon; CRLF line endings |
 | [`mp3_plain.fan`](specs/mp3_plain.fan) | untagged `mp3` targets | Six whole-frame prefixes from two pinned, untagged Layer III controls; no ID3 tags or mixed layers |
@@ -66,7 +66,7 @@ From the repository root:
 
 ```sh
 PYTHONHASHSEED=0 $FANDANGO fuzz -f fuzzing/fandango/specs/ascii_ply.fan \
-  -n 2 --random-seed 1 --progress-bar off -d /tmp/fandango/ascii_ply -x .ply
+  -n 2 --random-seed 1 --max-nodes 5000 --progress-bar off -d /tmp/fandango/ascii_ply -x .ply
 PYTHONHASHSEED=0 $FANDANGO fuzz -f fuzzing/fandango/specs/ascii_pnm_p3.fan \
   -n 2 --random-seed 1 --progress-bar off -d /tmp/fandango/ascii_pnm_p3 -x .ppm
 PYTHONHASHSEED=0 $FANDANGO fuzz -f fuzzing/fandango/specs/http11_request.fan \
@@ -97,9 +97,9 @@ python3 parsarium.py replay http11 c libmicrohttpd /tmp/fandango/http11_request 
 
 ## Validation
 
-Fandango 1.3.1 parsed both seeded examples for each spec. Regenerating them with the same seed and `PYTHONHASHSEED=0` reproduced all six file hashes. Direct parser replays accepted 18 valid PLY examples with AssetKit, 18 P3 examples with PyQt5's `QImageReader`, and 34 HTTP/1.1 requests with libmicrohttpd. The two-example Parsarium replay commands above each returned `2 unique inputs, {'ok': 2}`. The HTTP sample included all five methods, and the PLY sample included both index types, both mesh sizes, and optional vertex colors.
+The checks in this paragraph predate the wider `ascii_ply.fan`; its current validation is in the [spec details](specs/README.md). Fandango 1.3.1 parsed both seeded examples for each spec. Regenerating them with the same seed and `PYTHONHASHSEED=0` reproduced all six file hashes. Direct parser replays accepted 18 valid PLY examples with AssetKit, 18 P3 examples with PyQt5's `QImageReader`, and 34 HTTP/1.1 requests with libmicrohttpd. The two-example Parsarium replay commands above each returned `2 unique inputs, {'ok': 2}`. The HTTP sample included all five methods,.
 
-AssetKit expands face corners in its mesh result, so a PLY header with four vertices and two triangles can report six output vertices. PyQt5 scales P3 samples declared with maxval 15 to 8-bit color values.
+AssetKit expands face corners in its mesh result, so a PLY mesh can report one output vertex per face corner rather than the declared vertex count. PyQt5 scales P3 samples declared with maxval 15 to 8-bit color values.
 
 ## Limits
 

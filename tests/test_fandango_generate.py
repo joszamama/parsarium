@@ -219,6 +219,16 @@ class FandangoGenerateTest(unittest.TestCase):
         self.assertEqual(argv[1:3], ["-f", str(spec)])
         self.assertEqual(argv[5:7], ["--max-nodes", "2000"])
 
+    def test_default_local_ply_spec_raises_node_budget(self):
+        run = self.tmp / "default-ply"
+        code, output = self.run_cli("ascii_ply", "c", "assetkit", str(run), "--count", "1")
+        self.assertEqual(code, 0, output)
+        spec = ROOT / "fuzzing/fandango/specs/ascii_ply.fan"
+        self.assertEqual(self.receipt(run)["spec"]["sha256"], sha256(spec.read_bytes()).hexdigest())
+        argv = json.loads(self.log.read_text())["argv"]
+        self.assertEqual(argv[1:5], ["-f", str(spec), "-x", ".ply"])
+        self.assertEqual(argv[5:7], ["--max-nodes", "5000"])
+
     def test_default_svg_route_is_local_spec(self):
         run = self.tmp / "default-svg"
         code, output = self.run_cli("svg", "c", "librsvg", str(run), "--count", "1")

@@ -52,9 +52,10 @@ LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan", "mp3": "mp3_plain.fan",
 PREFER_LOCAL = {"svg"}
 # Extra Fandango options for a bundled spec. Fandango's default node budget
 # keeps mp4.fan at its smallest derivation (audio only, with no metadata),
-# pdf.fan at one or two pages and svg.fan at one to six top-level elements.
+# pdf.fan at one or two pages, svg.fan at one to six top-level elements and
+# ascii_ply.fan at a few vertices and faces with no normals or alpha.
 LOCAL_SPEC_OPTIONS = {"mp4": ["--max-nodes", "2000"], "pdf": ["--max-nodes", "2000"],
-                      "svg": ["--max-nodes", "2000"]}
+                      "svg": ["--max-nodes", "2000"], "ascii_ply": ["--max-nodes", "5000"]}
 # Passed as -x with --spec; Fandango defaults to '.txt' for -f.
 EXTENSIONS = {"png": ".png", "zip": ".zip", "mp4": ".mp4", "wav": ".wav",
               "pdf": ".pdf", "svg": ".svg", "http11": ".http", "ascii_ply": ".ply",

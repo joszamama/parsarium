@@ -80,3 +80,14 @@ local librsvg base image differed from its receipt, so `afl build` re-verified
 it (2,949 library lines, unchanged) and the AFL++ image, which was missing,
 was rebuilt; control feedback is 5,204 edges (5,214 before), with the valid
 path still adding stable edges.
+
+The ASCII PLY row was rechecked on 20 November 2026 after `ascii_ply.fan`
+gained meshes of 3–60 vertices with 1–60 polygonal faces, optional normals,
+RGB or RGBA, `double` coordinates, an optional `edge` element and point
+clouds (`--case ascii_ply/c/assetkit`). The default route now passes
+`--max-nodes 5000` with the bundled spec, because Fandango's default node
+budget yields only a few vertices and faces. The seed-7 output has 13
+vertices with normals, 46 faces and 12 edges. The local AssetKit base image
+differed from its receipt and its AFL++ image was missing, so `afl build`
+re-verified the base (525 library lines, unchanged) and rebuilt the overlay
+(2,116 feedback edges, unchanged).
