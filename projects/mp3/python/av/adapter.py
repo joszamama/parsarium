@@ -7,8 +7,9 @@ from pathlib import Path
 
 
 def tags(title, artist, album):
-    return {"title": str(title).strip("\x00"), "artist": str(artist).strip("\x00"),
-            "album": str(album).strip("\x00")}
+    """Tag fields as text; a field the file does not have is omitted."""
+    values = {"title": title, "artist": artist, "album": album}
+    return {key: str(value).strip("\x00") for key, value in values.items() if value is not None}
 
 
 def parse(name, path):
@@ -75,8 +76,8 @@ def parse(name, path):
         import av
         with av.open(path) as doc:
             audio = doc.streams.audio[0]
-            return {**tags(doc.metadata["title"], doc.metadata["artist"],
-                           doc.metadata["album"]), "sample_rate": audio.codec_context.sample_rate}
+            return {**tags(doc.metadata.get("title"), doc.metadata.get("artist"),
+                           doc.metadata.get("album")), "sample_rate": audio.codec_context.sample_rate}
     if name == "audiofile":
         import audiofile
         samples, rate = audiofile.read(path)
@@ -105,8 +106,8 @@ def parse(name, path):
     if name == "ffmpeg-python":
         import ffmpeg
         doc = ffmpeg.probe(path)
-        return {**tags(doc["format"]["tags"]["title"], doc["format"]["tags"]["artist"],
-                       doc["format"]["tags"]["album"]),
+        found = doc["format"].get("tags", {})
+        return {**tags(found.get("title"), found.get("artist"), found.get("album")),
                 "codec": doc["streams"][0]["codec_name"]}
     if name == "moviepy":
         from moviepy import AudioFileClip

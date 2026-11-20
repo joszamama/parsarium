@@ -5,6 +5,30 @@ import java.nio.file.Path;
 public final class Mp3Id3v2Adapter {
     private Mp3Id3v2Adapter() { }
 
+    /** JSON string literal; non-ASCII characters are written as \\uXXXX escapes. */
+    static String quote(String value) {
+        StringBuilder out = new StringBuilder("\"");
+        for (char c : value.toCharArray()) {
+            if (c == '"' || c == '\\') out.append('\\').append(c);
+            else if (c < 0x20 || c > 0x7e) out.append(String.format("\\u%04x", (int) c));
+            else out.append(c);
+        }
+        return out.append('"').toString();
+    }
+
+    /** JSON object of the non-null values, in the given key order. */
+    static String object(Object... pairs) {
+        StringBuilder out = new StringBuilder("{");
+        for (int i = 0; i < pairs.length; i += 2) {
+            if (pairs[i + 1] == null) continue;
+            if (out.length() > 1) out.append(',');
+            Object value = pairs[i + 1];
+            out.append(quote((String) pairs[i])).append(':')
+               .append(value instanceof String text ? quote(text) : String.valueOf(value));
+        }
+        return out.append('}').toString();
+    }
+
     public static void main(String[] args) throws Exception {
         if (args.length != 2) System.exit(2);
         Path path = Path.of(args[1]);
@@ -22,10 +46,9 @@ public final class Mp3Id3v2Adapter {
                     tag.getFirst(org.jaudiotagger.tag.FieldKey.ALBUM));
         } else if (args[0].equals("mp3agic")) {
             var mp3 = new com.mpatric.mp3agic.Mp3File(path);
-            if (!mp3.hasId3v2Tag()) System.exit(1);
-            var tag = mp3.getId3v2Tag();
-            System.out.printf("{\"title\":\"%s\",\"artist\":\"%s\",\"album\":\"%s\",\"tag_version\":\"%s\"}%n",
-                    tag.getTitle(), tag.getArtist(), tag.getAlbum(), tag.getVersion());
+            var tag = mp3.hasId3v2Tag() ? mp3.getId3v2Tag() : null;
+            System.out.println(tag == null ? "{}" : object("title", tag.getTitle(), "artist", tag.getArtist(),
+                    "album", tag.getAlbum(), "tag_version", tag.getVersion()));
         } else if (args[0].equals("tika")) {
             var parser = new org.apache.tika.parser.mp3.Mp3Parser();
             var metadata = new org.apache.tika.metadata.Metadata();
@@ -40,9 +63,9 @@ public final class Mp3Id3v2Adapter {
             try (var input = java.nio.file.Files.newInputStream(path)) {
                 var stream = new javazoom.jl.decoder.Bitstream(input);
                 var header = stream.readFrame();
-                if (header == null || stream.getRawID3v2() == null) System.exit(1);
-                System.out.printf("{\"frequency\":%d,\"layer\":%d,\"id3v2_present\":true}%n",
-                        header.frequency(), header.layer());
+                if (header == null) System.exit(1);
+                System.out.printf("{\"frequency\":%d,\"layer\":%d,\"id3v2_present\":%s}%n",
+                        header.frequency(), header.layer(), stream.getRawID3v2() != null);
                 stream.close();
             }
         } else if (args[0].equals("jave")) {
@@ -56,8 +79,8 @@ public final class Mp3Id3v2Adapter {
                     .setShowStreams(true).setShowFormat(true).setInput(path).execute();
             var audio = result.getStreams().get(0);
             var format = result.getFormat();
-            System.out.printf("{\"codec\":\"%s\",\"frequency\":%d,\"title\":\"%s\",\"artist\":\"%s\"}%n",
-                    audio.getCodecName(), audio.getSampleRate(), format.getTag("title"), format.getTag("artist"));
+            System.out.println(object("codec", audio.getCodecName(), "frequency", audio.getSampleRate(),
+                    "title", format.getTag("title"), "artist", format.getTag("artist")));
         } else if (args[0].equals("jcodec")) {
             org.jcodec.common.logging.Logger.setLevel(org.jcodec.common.logging.LogLevel.ERROR);
             try (var channel = org.jcodec.common.io.NIOUtils.readableChannel(path.toFile());

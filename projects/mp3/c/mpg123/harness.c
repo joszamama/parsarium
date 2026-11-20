@@ -14,8 +14,9 @@ int parsarium_parse_mp3(const uint8_t *data,size_t size,struct parsarium_mp3_res
  int ok=mpg123_open(handle,path)==MPG123_OK;unlink(path);
  if(ok)ok=mpg123_scan(handle)==MPG123_OK;
  mpg123_id3v1 *v1=NULL;mpg123_id3v2 *v2=NULL;
- if(ok)ok=mpg123_id3(handle,&v1,&v2)==MPG123_OK&&v2&&v2->title;
- if(ok){size_t n=v2->title->fill;while(n&&v2->title->p[n-1]==0)n--;ok=n<sizeof(result->title);if(ok){memcpy(result->title,v2->title->p,n);result->title[n]=0;result->id3v2_version=v2->version;}}
+ if(ok)ok=mpg123_id3(handle,&v1,&v2)==MPG123_OK;
+ if(ok&&v2&&v2->version){result->has_id3v2=1;result->id3v2_version=v2->version;}
+ if(ok&&v2&&v2->title){size_t n=v2->title->fill;while(n&&v2->title->p[n-1]==0)n--;ok=n<sizeof(result->title);if(ok){memcpy(result->title,v2->title->p,n);result->title[n]=0;result->has_title=1;}}
  mpg123_close(handle);mpg123_delete(handle);mpg123_exit();return ok;
 }
 int LLVMFuzzerTestOneInput(const uint8_t *data,size_t size){struct parsarium_mp3_result r;(void)parsarium_parse_mp3(data,size,&r);return 0;}

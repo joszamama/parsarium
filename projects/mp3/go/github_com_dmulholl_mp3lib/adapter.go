@@ -10,39 +10,52 @@ import (
 )
 
 type summary struct {
-    SampleRate int `json:"sample_rate"`
-    Channels int `json:"channels"`
+    SampleRate *int `json:"sample_rate,omitempty"`
+    Channels *int `json:"channels,omitempty"`
     Frames int `json:"frames"`
     FrameBytes int `json:"frame_bytes"`
-    SamplesPerFrame int `json:"samples_per_frame"`
-    Bitrate int `json:"bitrate"`
+    SamplesPerFrame *int `json:"samples_per_frame,omitempty"`
+    Bitrate *int `json:"bitrate,omitempty"`
 }
 
-// parse walks complete untagged Layer III frames using the package's stream API.
+// same keeps a per-frame property while every frame agrees and drops it when
+// the stream changes it from frame to frame (for example a VBR bitrate).
+func same(field **int, value int, first bool) {
+    if first {
+        *field = &value
+    } else if *field != nil && **field != value {
+        *field = nil
+    }
+}
+
+// parse walks the frames that the package's stream API returns.
 // mp3lib parses frame headers and boundaries; it does not produce PCM.
 func parse(data []byte) (summary, error) {
     reader := bytes.NewReader(data)
     var result summary
+    varying := map[string]bool{}
     for {
         frame := mp3lib.NextFrame(reader)
         if frame == nil { break }
-        if frame.MPEGLayer != mp3lib.MPEGLayerIII {
-            return summary{}, fmt.Errorf("input contains non-Layer-III frame")
-        }
         channels := 2
         if frame.ChannelMode == mp3lib.Mono { channels = 1 }
-        bitrate := frame.BitRate
-        if result.Frames == 0 {
-            result.SampleRate, result.Channels = frame.SamplingRate, channels
-            result.SamplesPerFrame, result.Bitrate = frame.SampleCount, bitrate
-        } else if result.SampleRate != frame.SamplingRate || result.Channels != channels || result.SamplesPerFrame != frame.SampleCount || result.Bitrate != bitrate {
-            return summary{}, fmt.Errorf("control frames disagree")
+        first := result.Frames == 0
+        for name, pair := range map[string]struct{ field **int; value int }{
+            "sample_rate": {&result.SampleRate, frame.SamplingRate},
+            "channels": {&result.Channels, channels},
+            "samples_per_frame": {&result.SamplesPerFrame, frame.SampleCount},
+            "bitrate": {&result.Bitrate, frame.BitRate},
+        } {
+            if !varying[name] {
+                same(pair.field, pair.value, first)
+                varying[name] = *pair.field == nil
+            }
         }
         result.Frames++
         result.FrameBytes += frame.FrameLength
     }
-    if result.Frames == 0 || result.FrameBytes != len(data) || reader.Len() != 0 {
-        return summary{}, fmt.Errorf("no complete frames or trailing bytes: %d of %d", result.FrameBytes, len(data))
+    if result.Frames == 0 {
+        return summary{}, fmt.Errorf("no MPEG audio frames")
     }
     return result, nil
 }

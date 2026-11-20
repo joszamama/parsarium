@@ -22,9 +22,9 @@ int parsarium_parse_mp3(const uint8_t *data,size_t size,struct parsarium_mp3_res
  int ok=(info.format&SF_FORMAT_TYPEMASK)==SF_FORMAT_MPEG &&
   (info.format&SF_FORMAT_SUBMASK)==SF_FORMAT_MPEG_LAYER_III;
  const char *title=ok?sf_get_string(file,SF_STR_TITLE):NULL;
- if(!title||strlen(title)>=sizeof(result->title))ok=0;
+ if(title&&strlen(title)>=sizeof(result->title))ok=0;
  float sample[2]={0};sf_count_t decoded=ok?sf_readf_float(file,sample,1):0;
- if(ok){strcpy(result->title,title);result->sample_rate=info.samplerate;
+ if(ok){result->has_title=title!=NULL;if(title)strcpy(result->title,title);result->sample_rate=info.samplerate;
  result->channels=info.channels;result->frames=info.frames;result->decoded_frames=decoded;}
  sf_close(file);return ok;
 }

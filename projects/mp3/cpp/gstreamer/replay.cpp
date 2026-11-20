@@ -21,9 +21,9 @@ int main(int argc, char **argv) {
     fclose(file);
     struct parsarium_result result;
     if (!parsarium_parse(data, size, &result)) return 5;
-    printf("{\"title\":");
-    json_title(result.title);
-    printf(",\"sample_rate\":%u,\"channels\":%u,\"audio_streams\":%u}\n",
+    printf("{");
+    if (result.has_title) { printf("\"title\":"); json_title(result.title); printf(","); }
+    printf("\"sample_rate\":%u,\"channels\":%u,\"audio_streams\":%u}\n",
            result.sample_rate, result.channels, result.audio_streams);
 
     return 0;

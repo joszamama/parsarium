@@ -8,8 +8,11 @@ fn parse_package(package: &str, path: &Path) -> Result<serde_json::Value, Box<dy
             use lofty::file::TaggedFileExt;
             use lofty::tag::Accessor;
             let file = lofty::read_from_path(path)?;
-            let tag = file.primary_tag().ok_or("no primary tag")?;
-            serde_json::json!({"title":tag.title(), "artist":tag.artist(), "album":tag.album()})
+            // A file without a tag of the primary type (ID3v2 for MPEG) has no tag fields.
+            match file.primary_tag() {
+                Some(tag) => serde_json::json!({"title":tag.title(), "artist":tag.artist(), "album":tag.album()}),
+                None => serde_json::json!({}),
+            }
         }
         _ => return Err(format!("unknown package: {package}").into()),
     };

@@ -17,7 +17,7 @@ int parsarium_parse_mp3(const uint8_t *data, size_t size, struct parsarium_mp3_r
   const char *title=Mix_GetMusicTitleTag(music), *artist=Mix_GetMusicArtistTag(music);
   double seconds=Mix_MusicDuration(music);
   int ok=Mix_GetMusicType(music)==MUS_MP3 && title && artist &&
-         strlen(title)<sizeof(result->title) && strlen(artist)<sizeof(result->artist) && seconds>0;
+         strlen(title)<sizeof(result->title) && strlen(artist)<sizeof(result->artist) && seconds>=0;
   if (ok) {
     memcpy(result->title,title,strlen(title)+1); memcpy(result->artist,artist,strlen(artist)+1);
     result->duration_ms=(int)(seconds*1000.0+0.5);

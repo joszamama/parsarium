@@ -221,4 +221,16 @@ switch ($package) {
         throw new InvalidArgumentException('unknown MP3/ID3v2 package: ' . $package);
 }
 
+// A string the library returns that is not UTF-8 (for example ID3v1 text) is
+// written as ISO-8859-1, one character per byte, instead of failing the encoder.
+array_walk_recursive($output, static function (&$value): void {
+    if (is_string($value) && preg_match('//u', $value) !== 1) {
+        $text = '';
+        foreach (str_split($value) as $byte) {
+            $code = ord($byte);
+            $text .= $code < 0x80 ? $byte : chr(0xC0 | ($code >> 6)) . chr(0x80 | ($code & 0x3F));
+        }
+        $value = $text;
+    }
+});
 echo json_encode($output, JSON_THROW_ON_ERROR), "\n";

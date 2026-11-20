@@ -98,7 +98,9 @@ switch ($package) {
         $output = [];
         foreach (['title' => 'TIT2', 'artist' => 'TPE1', 'album' => 'TALB'] as $field => $frameId) {
             $frames = $parsed->getFramesByIdentifier($frameId);
-            $output[$field] = $frames[0]->getText();
+            if ($frames) {
+                $output[$field] = $frames[0]->getText();
+            }
         }
         break;
     case 'mhor/php-mediainfo':
@@ -124,7 +126,9 @@ switch ($package) {
         $output = [];
         foreach (['title' => 'TIT2', 'artist' => 'TPE1', 'album' => 'TALB'] as $field => $frameId) {
             $frames = $parsed->getFramesByIdentifier($frameId);
-            $output[$field] = $frames[0]->getText();
+            if ($frames) {
+                $output[$field] = $frames[0]->getText();
+            }
         }
         break;
     case 'pyrex-fwi/id3':

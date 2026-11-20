@@ -6,8 +6,10 @@ export async function parse(name, control) {
 if (!name || !control) throw new Error('usage: node adapters/javascript/mp3.mjs PACKAGE CONTROL_PATH');
 const bytes = await readFile(control);
 const arrayBuffer = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
-const clean = (value) => String(value ?? '').replace(/\0+$/, '');
-const tags = (title, artist, album) => ({ title: clean(title), artist: clean(artist), album: clean(album) });
+const clean = (value) => String(value).replace(/\0+$/, '');
+// A tag field the file does not have is omitted.
+const tags = (title, artist, album) => Object.fromEntries(Object.entries({ title, artist, album })
+  .filter(([, value]) => value !== undefined && value !== null).map(([key, value]) => [key, clean(value)]));
 let result;
 
 if (name === 'music-metadata') {
@@ -43,7 +45,8 @@ if (name === 'music-metadata') {
 } else if (name === 'id3js') {
   const { fromPath } = await import(name);
   const parsed = await fromPath(control);
-  result = { ...tags(parsed.title, parsed.artist, parsed.album), version: parsed.version };
+  // id3js returns null for a file without an ID3 tag.
+  result = parsed === null ? {} : { ...tags(parsed.title, parsed.artist, parsed.album), version: parsed.version };
 } else if (name === 'mp3-duration') {
   const { default: duration } = await import(name);
   const seconds = await new Promise((resolve, reject) => duration(bytes, (error, value) => error ? reject(error) : resolve(value)));
@@ -112,6 +115,6 @@ if (name === 'music-metadata') {
   result = tags(field('TIT2'), field('TPE1'), field('TALB'));
 } else throw new Error(`unsupported package: ${name}`);
 
-if (Object.values(result).some((value) => value === undefined || value === null || value === '')) throw new Error(`${name} returned missing parsed fields`);
+if (Object.values(result).some((value) => value === undefined)) throw new Error(`${name} returned missing parsed fields`);
 return result;
 }

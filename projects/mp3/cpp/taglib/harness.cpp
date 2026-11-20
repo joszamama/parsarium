@@ -14,6 +14,7 @@ int parsarium_parse_mp3(const uint8_t *data,size_t size,struct parsarium_mp3_res
   TagLib::MPEG::File file(path);
   if(file.isValid()){
    TagLib::ID3v2::Tag *tag=file.ID3v2Tag();
+   result->has_id3v2=tag!=nullptr;ok=!tag;
    if(tag){
     std::string title=tag->title().to8Bit(true),artist=tag->artist().to8Bit(true);
     if(title.size()<sizeof(result->title)&&artist.size()<sizeof(result->artist)){

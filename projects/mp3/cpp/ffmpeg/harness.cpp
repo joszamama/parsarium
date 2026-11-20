@@ -28,8 +28,9 @@ int parsarium_parse_mp3(const uint8_t *data, size_t size, struct parsarium_mp3_r
   const AVDictionaryEntry *title = NULL;
   if (avformat_find_stream_info(ctx, NULL) < 0) goto done;
   title = av_dict_get(ctx->metadata, "title", NULL, 0);
-  if (!title || strlen(title->value) >= sizeof(result->title)) goto done;
-  strcpy(result->title, title->value);
+  if (title && strlen(title->value) >= sizeof(result->title)) goto done;
+  result->has_title = title != NULL;
+  if (title) strcpy(result->title, title->value);
   for (unsigned i = 0; i < ctx->nb_streams; ++i)
     if (ctx->streams[i]->codecpar->codec_id == AV_CODEC_ID_MP3) result->mp3_streams++;
   ok = result->mp3_streams > 0;

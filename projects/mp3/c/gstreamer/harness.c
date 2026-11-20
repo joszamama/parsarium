@@ -28,9 +28,9 @@ int parsarium_parse(const uint8_t *data, size_t size, struct parsarium_result *r
     if (info && gst_discoverer_info_get_result(info) == GST_DISCOVERER_OK) {
         const GstTagList *tags = gst_discoverer_info_get_tags(info);
         gchar *title = NULL;
-        if (tags && gst_tag_list_get_string(tags, GST_TAG_TITLE, &title) &&
-            strlen(title) < sizeof(result->title)) {
-            memcpy(result->title, title, strlen(title) + 1);
+        result->has_title = tags && gst_tag_list_get_string(tags, GST_TAG_TITLE, &title);
+        if (!result->has_title || strlen(title) < sizeof(result->title)) {
+            if (result->has_title) memcpy(result->title, title, strlen(title) + 1);
                     GList *audio = gst_discoverer_info_get_audio_streams(info);
             if (audio && !audio->next) {
                 GstDiscovererAudioInfo *stream = GST_DISCOVERER_AUDIO_INFO(audio->data);
