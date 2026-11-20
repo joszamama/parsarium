@@ -3,7 +3,6 @@ package main
 import (
     "encoding/json"
     "fmt"
-    "io"
     "os"
     "path/filepath"
     "reflect"
@@ -13,20 +12,7 @@ import (
 const parserName = "github.com/unixpickle/model3d/model3d"
 const expectedJSON = "{\"triangles\":1,\"first_triangle\":[[0,0,0],[1,0,0],[0,1,0]],\"coloured_vertices\":3}"
 
-func parseControl(source string) (map[string]any, error) {
-    reader, writer, err := os.Pipe()
-    if err != nil { return nil, err }
-    originalStdout, originalArgs := os.Stdout, os.Args
-    os.Stdout, os.Args = writer, []string{"parser", parserName, source}
-    defer func() { os.Stdout, os.Args = originalStdout, originalArgs; reader.Close(); writer.Close() }()
-    main()
-    writer.Close()
-    data, err := io.ReadAll(reader)
-    if err != nil { return nil, err }
-    var output map[string]any
-    err = json.Unmarshal(data, &output)
-    return output, err
-}
+func parseControl(source string) (map[string]any, error) { return run(parserName, source) }
 
 func TestControl(t *testing.T) {
     got, err := parseControl("/input/control")
