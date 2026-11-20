@@ -100,3 +100,11 @@ seed-7 tagged output has an ID3v2.3 tag, an ID3v1 trailer and seven MPEG-1
 32 kHz frames; the plain output has 28 MPEG-2 22.05 kHz frames. The
 `dmulholl/mp3lib` base and AFL++ images had been rebuilt for the RQ2 harness
 change before this check.
+
+The ASCII PNM row was rechecked on 20 November 2026 after `ascii_pnm_p3.fan`
+was widened to sizes up to 32×32, maxvals up to 65535, header comments, tabs
+and CRLF, and a computed raster (`--case ascii_pnm/cpp/openimageio`). The
+seed-7 output is a 1×9 file with maxval 4 and two empty header comments. The
+local OpenImageIO base image differed from its receipt and its AFL++ image was
+missing, so `afl build` re-verified the base (150 library lines) and rebuilt
+the AFL++ image; the control feedback count (1,507 edges) is unchanged.
