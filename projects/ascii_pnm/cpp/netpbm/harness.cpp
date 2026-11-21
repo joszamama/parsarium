@@ -26,24 +26,30 @@ int parsarium_parse_pnm(const uint8_t *data, size_t size,
         int cols, rows, format;
         pixval maxval;
         ppm_readppminit(file, &cols, &rows, &maxval, &format);
-        if (cols > 0 && rows > 0 && cols <= 4096 && rows <= 4096 &&
-            (size_t)cols * (size_t)rows <= (1u << 20)) {
+        /* A plain PPM pixel takes at least six bytes ("0 0 0 "), so this
+           bound never rejects a valid input; it only caps the row buffer. */
+        if (cols > 0 && rows > 0 && (size_t)cols * (size_t)rows <= size) {
             row = ppm_allocrow(cols);
+            result->width = (size_t)cols;
+            result->height = (size_t)rows;
+            result->maxval = maxval;
             for (int y = 0; y < rows; ++y) {
                 ppm_readppmrow(file, (pixel *)row, cols, maxval, format);
-                if (y == 0 && cols >= 2) {
-                    result->width = (size_t)cols;
-                    result->height = (size_t)rows;
-                    result->maxval = maxval;
+                /* The second pixel is the next one in raster order, if any. */
+                if (y == 0) {
                     result->first[0] = PPM_GETR(row[0]);
                     result->first[1] = PPM_GETG(row[0]);
                     result->first[2] = PPM_GETB(row[0]);
-                    result->second[0] = PPM_GETR(row[1]);
-                    result->second[1] = PPM_GETG(row[1]);
-                    result->second[2] = PPM_GETB(row[1]);
+                }
+                if ((y == 0 && cols > 1) || (y == 1 && cols == 1)) {
+                    int x = y == 0 ? 1 : 0;
+                    result->has_second = 1;
+                    result->second[0] = PPM_GETR(row[x]);
+                    result->second[1] = PPM_GETG(row[x]);
+                    result->second[2] = PPM_GETB(row[x]);
                 }
             }
-            okay = cols >= 2;
+            okay = 1;
         }
     }
     pm_setjmpbuf(NULL);

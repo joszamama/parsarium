@@ -10,8 +10,9 @@ int main(int argc, char **argv) {
  fclose(file);
  struct parsarium_pnm_result result;
  if (!parsarium_parse_pnm(data, size, &result)) return 5;
- printf("{\"width\":%d,\"height\":%d,\"first\":[%d,%d,%d],\"second\":[%d,%d,%d]}\n",
- result.width, result.height, result.first[0], result.first[1], result.first[2],
- result.second[0], result.second[1], result.second[2]);
+ printf("{\"width\":%d,\"height\":%d,\"first\":[%d,%d,%d],\"second\":",
+ result.width, result.height, result.first[0], result.first[1], result.first[2]);
+ if (result.has_second) printf("[%d,%d,%d]}\n", result.second[0], result.second[1], result.second[2]);
+ else printf("null}\n");
  return 0;
 }

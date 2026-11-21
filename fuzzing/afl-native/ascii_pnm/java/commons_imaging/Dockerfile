@@ -10,9 +10,9 @@ ENV PARSARIUM_SUBJECT_PREFIX=/work/parser-source/
 ENV PARSARIUM_FUZZ_ENTRY=GenericHarness.fuzzerTestOneInput
 ENV PARSARIUM_JAVA_CLASSPATH=/work/classes:/work/lib/commons-imaging-1.0.0-alpha6.jar:/work/lib/commons-io-2.19.0.jar:/work/lib/commons-lang3-3.17.0.jar:/work/lib/imageio-pnm-3.15.3.jar:/work/lib/imageio-core-3.15.3.jar:/work/lib/common-lang-3.15.3.jar:/work/lib/common-io-3.15.3.jar:/work/lib/common-image-3.15.3.jar:/work/lib/jai-imageio-core-1.4.0.jar:/work/lib/ij-1.54p.jar:/work/lib/opencv-4.9.0-0.jar:/work/lib/thumbnailator-0.4.21.jar:/work/lib/boofcv-io-1.6.0.jar:/work/lib/georegression-0.30.2.jar:/work/lib/ddogleg-1.0.0.jar:/work/lib/ejml-core-0.46.1.jar:/work/lib/ejml-fdense-0.46.1.jar:/work/lib/ejml-ddense-0.46.1.jar:/work/lib/ejml-simple-0.46.1.jar:/work/lib/ejml-cdense-0.46.1.jar:/work/lib/ejml-zdense-0.46.1.jar:/work/lib/ejml-fsparse-0.46.1.jar:/work/lib/ejml-dsparse-0.46.1.jar:/work/lib/trove4j-3.0.3.jar:/work/lib/boofcv-ip-1.6.0.jar:/work/lib/boofcv-types-1.6.0.jar:/work/lib/boofcv-geo-1.6.0.jar:/work/lib/boofcv-sfm-1.6.0.jar:/work/lib/boofcv-ip-multiview-1.6.0.jar:/work/lib/boofcv-feature-1.6.0.jar:/work/lib/boofcv-recognition-1.6.0.jar:/work/lib/boofcv-reconstruction-1.6.0.jar:/work/lib/snakeyaml-2.3.jar:/work/lib/tika-parser-image-module-4.2.0.jar:/work/lib/metadata-extractor-2.22.0.jar:/work/lib/xmpcore-6.1.11.jar:/work/lib/tika-parser-xmp-commons-4.2.0.jar:/work/lib/jbig2-imageio-3.0.5.jar:/work/lib/tika-core-4.2.0.jar:/work/lib/slf4j-api-2.0.20.jar:/work/lib/commons-secure-xml-1.1.0.jar:/work/lib/commonmark-0.31.0.jar:/work/lib/commonmark-ext-gfm-tables-0.31.0.jar:/work/lib/commonmark-ext-gfm-strikethrough-0.31.0.jar
 ENV PARSARIUM_TARGET_CLASS=GenericHarness
-ENV PARSARIUM_JACOCO_INCLUDES=*
 ENV PARSARIUM_PARSER_JAR=/work/lib/commons-imaging-1.0.0-alpha6.jar
 ENV PARSARIUM_PARSER_SOURCES=/work/parser-source
+ENV PARSARIUM_JACOCO_INCLUDES=*
 RUN mkdir /work/afl-java-classes && javac -d /work/afl-java-classes /work/JavaCase.java
 RUN AFL_LLVM_INSTRUMENT=CLASSIC afl-clang-fast -O2 /work/afl_proxy.c -ldl -o /work/afl_proxy
 ENTRYPOINT ["/work/afl_proxy"]

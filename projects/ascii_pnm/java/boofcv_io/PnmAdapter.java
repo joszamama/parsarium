@@ -76,8 +76,12 @@ public final class PnmAdapter {
             }
         }
         if (image == null) throw new IllegalStateException("No image decoded");
-        System.out.printf("{\"width\":%d,\"height\":%d,\"pixels\":\"%08x,%08x\"}%n",
-            image.getWidth(), image.getHeight(), image.getRGB(0, 0), image.getRGB(1, 0));
+        // The first pixel and the next one in raster order, if the image has one.
+        int width = image.getWidth(), height = image.getHeight();
+        String pixels = String.format("%08x", image.getRGB(0, 0));
+        if (width > 1) pixels += String.format(",%08x", image.getRGB(1, 0));
+        else if (height > 1) pixels += String.format(",%08x", image.getRGB(0, 1));
+        System.out.printf("{\"width\":%d,\"height\":%d,\"pixels\":\"%s\"}%n", width, height, pixels);
     }
 
     private static void requirePnmReader(Path path) throws Exception {

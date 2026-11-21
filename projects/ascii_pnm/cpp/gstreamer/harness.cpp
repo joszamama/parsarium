@@ -37,14 +37,19 @@ int parsarium_parse_pnm(const uint8_t *data, size_t size, struct parsarium_pnm_r
         GstMapInfo mapped;
         if (format && gst_structure_get_int(format, "width", &width) &&
             gst_structure_get_int(format, "height", &height) &&
-            encoding && strcmp(encoding, "RGB") == 0 && width > 1 && height > 0 &&
+            encoding && strcmp(encoding, "RGB") == 0 && width > 0 && height > 0 &&
             buffer && gst_buffer_map(buffer, &mapped, GST_MAP_READ)) {
-            if (mapped.size >= 6) {
+            /* Raw RGB rows are padded to four bytes; the second pixel is the
+               next one in raster order, if the image has one. */
+            size_t stride = GST_ROUND_UP_4((size_t)width * 3);
+            size_t second = width > 1 ? 3 : height > 1 ? stride : 0;
+            if (mapped.size >= 3 && mapped.size >= second + 3) {
                 result->width = (unsigned)width;
                 result->height = (unsigned)height;
                 memcpy(result->format, "RGB", 4);
                 memcpy(result->first, mapped.data, 3);
-                memcpy(result->second, mapped.data + 3, 3);
+                result->has_second = second != 0;
+                if (second) memcpy(result->second, mapped.data + second, 3);
                 ok = 1;
             }
             gst_buffer_unmap(buffer, &mapped);

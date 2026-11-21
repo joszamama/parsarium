@@ -22,11 +22,16 @@ int parsarium_parse_ascii_pnm(const uint8_t *data, size_t size, struct parsarium
     if (!image) { if (error) g_error_free(error); return 0; }
     int channels = gdk_pixbuf_get_n_channels(image);
     const guchar *pixels = gdk_pixbuf_read_pixels(image);
-    int ok = gdk_pixbuf_get_width(image) == 2 && gdk_pixbuf_get_height(image) == 1 && channels == 3 && pixels;
+    int width = gdk_pixbuf_get_width(image), height = gdk_pixbuf_get_height(image);
+    int ok = width > 0 && height > 0 && channels >= 3 && pixels;
     if (ok) {
-        result->width = 2; result->height = 1;
-        memcpy(result->first, pixels, 3); memcpy(result->second, pixels + 3, 3);
-
+        /* The second pixel is the next one in raster order, if the image has one. */
+        const guchar *next = width > 1 ? pixels + channels
+                             : height > 1 ? pixels + gdk_pixbuf_get_rowstride(image) : NULL;
+        result->width = (unsigned)width; result->height = (unsigned)height;
+        memcpy(result->first, pixels, 3);
+        result->has_second = next != NULL;
+        if (next) memcpy(result->second, next, 3);
     }
     g_object_unref(image);
     return ok;

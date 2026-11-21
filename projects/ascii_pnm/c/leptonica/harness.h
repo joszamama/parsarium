@@ -9,6 +9,7 @@ struct parsarium_pnm_result {
     int height;
     int first_rgb[3];
     int second_rgb[3];
+    int has_second;
 };
 
 int parsarium_parse_pnm(const uint8_t *data, size_t size,

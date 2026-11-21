@@ -19,8 +19,8 @@ type Summary struct {
 
 var startup sync.Once
 
-func point(image *vips.Image, x int) ([]int, error) {
-	values, err := image.Getpoint(x, 0, nil)
+func point(image *vips.Image, x, y int) ([]int, error) {
+	values, err := image.Getpoint(x, y, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -31,8 +31,9 @@ func point(image *vips.Image, x int) ([]int, error) {
 	return result, nil
 }
 
-// Parse loads the bytes with libvips ppmload_buffer and reads the first two
-// pixels of row 0, which makes libvips decode the ASCII samples.
+// Parse loads the bytes with libvips ppmload_buffer and reads the first pixel
+// and the next one in raster order, which makes libvips decode the ASCII
+// samples. RGB1 is nil for a one-pixel image.
 func Parse(data []byte) (Summary, error) {
 	startup.Do(func() {
 		vips.Startup(&vips.Config{MaxCacheFiles: 0, MaxCacheMem: 0, MaxCacheSize: 0, ConcurrencyLevel: 1})
@@ -43,13 +44,18 @@ func Parse(data []byte) (Summary, error) {
 	}
 	defer image.Close()
 	summary := Summary{Width: image.Width(), Height: image.Height()}
-	if summary.Width < 2 {
+	if summary.Width < 1 || summary.Height < 1 {
 		return summary, nil
 	}
-	if summary.RGB0, err = point(image, 0); err != nil {
+	if summary.RGB0, err = point(image, 0, 0); err != nil {
 		return Summary{}, err
 	}
-	if summary.RGB1, err = point(image, 1); err != nil {
+	if summary.Width > 1 {
+		summary.RGB1, err = point(image, 1, 0)
+	} else if summary.Height > 1 {
+		summary.RGB1, err = point(image, 0, 1)
+	}
+	if err != nil {
 		return Summary{}, err
 	}
 	return summary, nil

@@ -14,9 +14,12 @@ int main(int argc, char **argv) {
     struct parsarium_pnm_result result;
     if (!parsarium_parse_pnm(data, size, &result)) return 5;
     printf("{\"width\":%zu,\"height\":%zu,\"maxval\":%u,"
-           "\"first\":[%u,%u,%u],\"second\":[%u,%u,%u]}\n",
+           "\"first\":[%u,%u,%u],\"second\":",
            result.width, result.height, result.maxval,
-           result.first[0], result.first[1], result.first[2],
-           result.second[0], result.second[1], result.second[2]);
+           result.first[0], result.first[1], result.first[2]);
+    if (result.has_second)
+        printf("[%u,%u,%u]}\n", result.second[0], result.second[1], result.second[2]);
+    else
+        printf("null}\n");
     return 0;
 }

@@ -12,14 +12,22 @@ int parsarium_parse_pnm(const uint8_t *data, size_t size, struct parsarium_pnm_r
     int bands = vips_image_get_bands(image);
     size_t bytes = 0;
     unsigned char *pixels = vips_image_write_to_memory(image, &bytes);
+    /* 8-bit samples for maxval up to 255, 16-bit above. The second pixel is
+       the next one in raster order, if the image has one. */
+    VipsBandFormat format = vips_image_get_format(image);
+    size_t sample = format == VIPS_FORMAT_USHORT ? 2 : 1;
     int ok = pixels && width > 0 && height > 0 && bands == 3 &&
-             vips_image_get_format(image) == VIPS_FORMAT_UCHAR &&
-             bytes >= (size_t)width * (size_t)height * (size_t)bands;
+             (format == VIPS_FORMAT_UCHAR || format == VIPS_FORMAT_USHORT) &&
+             bytes >= (size_t)width * (size_t)height * (size_t)bands * sample;
     if (ok) {
         result->width = (unsigned)width;
         result->height = (unsigned)height;
-        memcpy(result->first, pixels, 3);
-        if (width * height > 1) memcpy(result->second, pixels + 3, 3);
+        result->has_second = (size_t)width * (size_t)height > 1;
+        for (int c = 0; c < 3; ++c) {
+            result->first[c] = sample == 2 ? ((const unsigned short *)pixels)[c] : pixels[c];
+            if (result->has_second)
+                result->second[c] = sample == 2 ? ((const unsigned short *)pixels)[3 + c] : pixels[3 + c];
+        }
     }
     g_free(pixels);
     g_object_unref(image);

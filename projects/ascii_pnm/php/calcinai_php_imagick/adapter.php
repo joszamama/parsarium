@@ -33,7 +33,9 @@ switch ($package) {
             'width' => $image->width,
             'height' => $image->height,
             'left_rgb' => array_map('intval', $image->getpoint(0, 0)),
-            'right_rgb' => array_map('intval', $image->getpoint(1, 0)),
+            // The next pixel in raster order, or null for a one-pixel image.
+            'right_rgb' => $image->width > 1 ? array_map('intval', $image->getpoint(1, 0))
+                : ($image->height > 1 ? array_map('intval', $image->getpoint(0, 1)) : null),
         ];
         break;
     case 'spatie/image':
@@ -91,16 +93,32 @@ switch ($package) {
     case 'calcinai/php-imagick':
         $image = new \Imagick($path);
         $blob = $image->getImageBlob();
-        if (!preg_match('/\AP6\s+(\d+)\s+(\d+)\s+(\d+)\s/s', $blob, $matches, PREG_OFFSET_CAPTURE)) {
+        // ImageMagick writes P6 and keeps the input's header comments.
+        $header = '/\AP6(?:\s|#[^\n]*\n)+(\d+)(?:\s|#[^\n]*\n)+(\d+)(?:\s|#[^\n]*\n)+(\d+)\s/s';
+        if (!preg_match($header, $blob, $matches, PREG_OFFSET_CAPTURE)) {
             throw new RuntimeException('ImageMagick did not decode the P3 control to P6');
         }
         $pixels = substr($blob, $matches[0][1] + strlen($matches[0][0]));
+        $width = (int) $matches[1][0];
+        $height = (int) $matches[2][0];
+        $maxval = (int) $matches[3][0];
+        // Samples are one byte up to maxval 255 and two big-endian bytes above.
+        $format = $maxval > 255 ? 'n3' : 'C3';
+        $bytes = $maxval > 255 ? 6 : 3;
+        $sample = function (int $index) use ($pixels, $format, $bytes) {
+            $values = unpack($format, substr($pixels, $index * $bytes, $bytes));
+            if ($values === false) {
+                throw new RuntimeException('ImageMagick P6 output is shorter than its header');
+            }
+            return array_values($values);
+        };
         $output = [
-            'width' => (int) $matches[1][0],
-            'height' => (int) $matches[2][0],
-            'maxval' => (int) $matches[3][0],
-            'left_rgb' => array_values(unpack('C3', substr($pixels, 0, 3))),
-            'right_rgb' => array_values(unpack('C3', substr($pixels, 3, 3))),
+            'width' => $width,
+            'height' => $height,
+            'maxval' => $maxval,
+            'left_rgb' => $sample(0),
+            // The next pixel in raster order, or null for a one-pixel image.
+            'right_rgb' => $width * $height > 1 ? $sample(1) : null,
         ];
         break;
     case 'phpixie/image':

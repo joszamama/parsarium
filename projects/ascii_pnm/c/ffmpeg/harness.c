@@ -40,12 +40,21 @@ int parsarium_parse_pnm(const uint8_t *data, size_t size, struct parsarium_pnm_r
     if (!packet || !frame) break;
     while (av_read_frame(ctx, packet) >= 0) {
       if (packet->stream_index == index && avcodec_send_packet(decoder, packet) >= 0 &&
-          avcodec_receive_frame(decoder, frame) >= 0 && frame->width >= 2 &&
-          frame->height >= 1 && frame->format == AV_PIX_FMT_RGB24) {
+          avcodec_receive_frame(decoder, frame) >= 0 && frame->width >= 1 &&
+          frame->height >= 1 && (frame->format == AV_PIX_FMT_RGB24 ||
+                                 frame->format == AV_PIX_FMT_RGB48)) {
+        /* RGB24 for maxval up to 255, native-endian RGB48 above (the PNM
+           decoder's formats); the second pixel is the next one in raster
+           order, absent in a one-pixel image. */
         const unsigned char *pixels = frame->data[0];
+        int wide = frame->format == AV_PIX_FMT_RGB48, bytes = wide ? 2 : 1;
+        const unsigned char *next = frame->width > 1 ? pixels + 3 * bytes
+                                    : frame->height > 1 ? pixels + frame->linesize[0] : NULL;
         result->width = frame->width; result->height = frame->height;
+        result->has_second = next != NULL;
         for (int c = 0; c < 3; ++c) {
-          result->first[c] = pixels[c]; result->second[c] = pixels[c + 3];
+          result->first[c] = wide ? ((const uint16_t *)pixels)[c] : pixels[c];
+          if (next) result->second[c] = wide ? ((const uint16_t *)next)[c] : next[c];
         }
         ok = 1;
         av_packet_unref(packet);

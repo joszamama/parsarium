@@ -6,10 +6,14 @@ int parsarium_parse_pnm(const uint8_t *data,size_t size,struct parsarium_pnm_res
  memset(result,0,sizeof(*result));MagickWandGenesis();MagickWand *wand=NewMagickWand();
  if(!wand){MagickWandTerminus();return 0;}
  int ok=MagickReadImageBlob(wand,data,size)!=MagickFalse;
- if(ok)ok=MagickGetImageWidth(wand)==2&&MagickGetImageHeight(wand)==1;
- unsigned char pixels[8]={0};
- if(ok)ok=MagickExportImagePixels(wand,0,0,2,1,"RGBA",CharPixel,pixels)!=MagickFalse;
- if(ok){result->width=2;result->height=1;memcpy(result->first,pixels,4);memcpy(result->second,pixels+4,4);result->has_second=1;}
+ size_t width=ok?MagickGetImageWidth(wand):0,height=ok?MagickGetImageHeight(wand):0;
+ if(ok)ok=width>0&&height>0;
+ /* The second pixel is the next one in raster order, if the image has one. */
+ ssize_t second_x=width>1?1:0,second_y=width>1?0:1;
+ int has_second=width>1||height>1;
+ if(ok)ok=MagickExportImagePixels(wand,0,0,1,1,"RGBA",CharPixel,result->first)!=MagickFalse;
+ if(ok&&has_second)ok=MagickExportImagePixels(wand,second_x,second_y,1,1,"RGBA",CharPixel,result->second)!=MagickFalse;
+ if(ok){result->width=(unsigned)width;result->height=(unsigned)height;result->has_second=has_second;}
  DestroyMagickWand(wand);MagickWandTerminus();return ok;
 }
 int LLVMFuzzerTestOneInput(const uint8_t *data,size_t size){struct parsarium_pnm_result r;(void)parsarium_parse_pnm(data,size,&r);return 0;}

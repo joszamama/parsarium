@@ -7,7 +7,9 @@ int main(int argc,char **argv) {
   if(ferror(f)||(n==sizeof(data)&&fgetc(f)!=EOF)){fclose(f);return 4;}
   fclose(f);struct parsarium_pnm_result r;
   if(!parsarium_parse_pnm(data,n,&r))return 5;
-  printf("{\"width\":%d,\"height\":%d,\"codec\":\"ppm\",\"first\":[%u,%u,%u],\"second\":[%u,%u,%u]}\n",
-         r.width,r.height,r.first[0],r.first[1],r.first[2],r.second[0],r.second[1],r.second[2]);
+  printf("{\"width\":%d,\"height\":%d,\"codec\":\"ppm\",\"first\":[%u,%u,%u],\"second\":",
+         r.width,r.height,r.first[0],r.first[1],r.first[2]);
+  if(r.has_second)printf("[%u,%u,%u]}\n",r.second[0],r.second[1],r.second[2]);
+  else printf("null}\n");
   return 0;
 }

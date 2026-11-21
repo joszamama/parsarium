@@ -6,18 +6,35 @@ from pathlib import Path
 
 
 def rgb(width, height, first, second):
+    """Report the first pixel and the next one in raster order (None if absent).
+
+    Floating-point samples in [0, 1] are scaled to 0-255; integer samples are
+    reported as the reader returned them.
+    """
     def channel(values):
-        values = [float(value) for value in values[:3]]
-        if max(values) <= 1:
-            values = [value * 255 for value in values]
-        return [round(value) for value in values]
+        values = list(values[:3])
+        if any(isinstance(value, float) or getattr(getattr(value, "dtype", None), "kind", "") == "f"
+               for value in values):
+            values = [float(value) for value in values]
+            if max(values) <= 1:
+                values = [value * 255 for value in values]
+            return [round(value) for value in values]
+        return [int(value) for value in values]
 
     return {"width": int(width), "height": int(height),
-            "rgb0": channel(first), "rgb1": channel(second)}
+            "rgb0": channel(first), "rgb1": None if second is None else channel(second)}
+
+
+def second_xy(width, height):
+    """(x, y) of the second pixel in raster order, or None for a one-pixel image."""
+    if width > 1:
+        return 1, 0
+    return (0, 1) if height > 1 else None
 
 
 def array_rgb(image):
-    return rgb(image.shape[1], image.shape[0], image[0, 0], image[0, 1])
+    at = second_xy(image.shape[1], image.shape[0])
+    return rgb(image.shape[1], image.shape[0], image[0, 0], None if at is None else image[at[1], at[0]])
 
 
 def run(name: str, path: Path):
@@ -25,13 +42,16 @@ def run(name: str, path: Path):
         from PIL import Image
         with Image.open(path) as image:
             image.load()
-            return rgb(*image.size, image.getpixel((0, 0)), image.getpixel((1, 0)))
+            at = second_xy(*image.size)
+            return rgb(*image.size, image.getpixel((0, 0)), None if at is None else image.getpixel(at))
     if name == "opencv-python-headless":
         import cv2
         image = cv2.imread(str(path), cv2.IMREAD_UNCHANGED)
         if image is None:
             raise ValueError("OpenCV did not read the PNM")
-        return rgb(image.shape[1], image.shape[0], image[0, 0][::-1], image[0, 1][::-1])
+        at = second_xy(image.shape[1], image.shape[0])
+        return rgb(image.shape[1], image.shape[0], image[0, 0][::-1],
+                   None if at is None else image[at[1], at[0]][::-1])
     if name == "imageio":
         import imageio.v3 as imageio
         return array_rgb(imageio.imread(path))
@@ -101,10 +121,11 @@ def run(name: str, path: Path):
         image = QImageReader(str(path)).read()
         if image.isNull():
             raise ValueError("Qt did not read the PNM")
-        def pixel(x):
-            color = image.pixelColor(x, 0)
+        def pixel(x, y):
+            color = image.pixelColor(x, y)
             return [color.red(), color.green(), color.blue()]
-        return rgb(image.width(), image.height(), pixel(0), pixel(1))
+        at = second_xy(image.width(), image.height())
+        return rgb(image.width(), image.height(), pixel(0, 0), None if at is None else pixel(*at))
     if name == "mahotas":
         import mahotas
         return array_rgb(mahotas.imread(str(path)))

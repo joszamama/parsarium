@@ -4,7 +4,8 @@
 #include <stdint.h>
 struct parsarium_pnm_result {
     unsigned width, height;
-    unsigned char first[3], second[3];
+    unsigned first[3], second[3];
+    int has_second;
 };
 int parsarium_parse_pnm(const uint8_t *data, size_t size, struct parsarium_pnm_result *result);
 #endif

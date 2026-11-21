@@ -11,12 +11,15 @@ int parsarium_parse_pnm(const uint8_t *data, size_t size,
     if (!image) return 0;
     result->width = pixGetWidth(image);
     result->height = pixGetHeight(image);
-    int ok = result->width >= 2 && result->height >= 1 &&
-             result->width <= 4096 && result->height <= 4096 &&
+    /* The second pixel is the next one in raster order, if the image has one. */
+    result->has_second = result->width > 1 || result->height > 1;
+    int ok = result->width >= 1 && result->height >= 1 &&
              !pixGetRGBPixel(image, 0, 0, &result->first_rgb[0],
                               &result->first_rgb[1], &result->first_rgb[2]) &&
-             !pixGetRGBPixel(image, 1, 0, &result->second_rgb[0],
-                              &result->second_rgb[1], &result->second_rgb[2]);
+             (!result->has_second ||
+              !pixGetRGBPixel(image, result->width > 1 ? 1 : 0, result->width > 1 ? 0 : 1,
+                              &result->second_rgb[0], &result->second_rgb[1],
+                              &result->second_rgb[2]));
     pixDestroy(&image);
     return ok;
 }

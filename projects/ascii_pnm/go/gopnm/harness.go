@@ -21,11 +21,18 @@ func Parse(data []byte) (Result, error) {
 	}
 	bounds := img.Bounds()
 	result := Result{Width: bounds.Dx(), Height: bounds.Dy()}
-	if result.Width >= 2 && result.Height >= 1 {
-		first := color.NRGBAModel.Convert(img.At(bounds.Min.X, bounds.Min.Y)).(color.NRGBA)
-		second := color.NRGBAModel.Convert(img.At(bounds.Min.X+1, bounds.Min.Y)).(color.NRGBA)
-		result.RGB0 = []int{int(first.R), int(first.G), int(first.B)}
-		result.RGB1 = []int{int(second.R), int(second.G), int(second.B)}
+	rgb := func(x, y int) []int {
+		c := color.NRGBAModel.Convert(img.At(x, y)).(color.NRGBA)
+		return []int{int(c.R), int(c.G), int(c.B)}
+	}
+	if result.Width >= 1 && result.Height >= 1 {
+		result.RGB0 = rgb(bounds.Min.X, bounds.Min.Y)
+	}
+	// The second pixel is the next one in raster order, if the image has one.
+	if result.Width > 1 {
+		result.RGB1 = rgb(bounds.Min.X+1, bounds.Min.Y)
+	} else if result.Width == 1 && result.Height > 1 {
+		result.RGB1 = rgb(bounds.Min.X, bounds.Min.Y+1)
 	}
 	return result, nil
 }

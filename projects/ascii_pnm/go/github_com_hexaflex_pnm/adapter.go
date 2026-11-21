@@ -14,9 +14,18 @@ import (
 
 func pixels(img image.Image) map[string]any {
 	b := img.Bounds()
-	a := color.NRGBAModel.Convert(img.At(b.Min.X, b.Min.Y)).(color.NRGBA)
-	z := color.NRGBAModel.Convert(img.At(b.Min.X+1, b.Min.Y)).(color.NRGBA)
-	return map[string]any{"width": b.Dx(), "height": b.Dy(), "rgb0": []int{int(a.R), int(a.G), int(a.B)}, "rgb1": []int{int(z.R), int(z.G), int(z.B)}}
+	rgb := func(x, y int) []int {
+		c := color.NRGBAModel.Convert(img.At(x, y)).(color.NRGBA)
+		return []int{int(c.R), int(c.G), int(c.B)}
+	}
+	// The second pixel is the next one in raster order; nil for a one-pixel image.
+	var second []int
+	if b.Dx() > 1 {
+		second = rgb(b.Min.X+1, b.Min.Y)
+	} else if b.Dy() > 1 {
+		second = rgb(b.Min.X, b.Min.Y+1)
+	}
+	return map[string]any{"width": b.Dx(), "height": b.Dy(), "rgb0": rgb(b.Min.X, b.Min.Y), "rgb1": second}
 }
 
 func run(name string, data []byte) (map[string]any, error) {

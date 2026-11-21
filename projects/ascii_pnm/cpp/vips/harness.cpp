@@ -11,14 +11,23 @@ int parsarium_parse_pnm(const uint8_t *data, size_t size, struct parsarium_pnm_r
         int width = image.width(), height = image.height(), bands = image.bands();
         size_t bytes = 0;
         unsigned char *pixels = static_cast<unsigned char *>(image.write_to_memory(&bytes));
+        // 8-bit samples for maxval up to 255, 16-bit above. The second pixel
+        // is the next one in raster order, if the image has one.
+        VipsBandFormat format = image.format();
+        size_t sample = format == VIPS_FORMAT_USHORT ? 2 : 1;
         int ok = pixels && width > 0 && height > 0 && bands == 3 &&
-                 image.format() == VIPS_FORMAT_UCHAR &&
-                 bytes >= static_cast<size_t>(width) * static_cast<size_t>(height) * static_cast<size_t>(bands);
+                 (format == VIPS_FORMAT_UCHAR || format == VIPS_FORMAT_USHORT) &&
+                 bytes >= static_cast<size_t>(width) * static_cast<size_t>(height) *
+                              static_cast<size_t>(bands) * sample;
         if (ok) {
+            const unsigned short *wide = reinterpret_cast<const unsigned short *>(pixels);
             result->width = static_cast<unsigned>(width);
             result->height = static_cast<unsigned>(height);
-            std::memcpy(result->first, pixels, 3);
-            if (width * height > 1) std::memcpy(result->second, pixels + 3, 3);
+            result->has_second = static_cast<size_t>(width) * static_cast<size_t>(height) > 1;
+            for (int c = 0; c < 3; ++c) {
+                result->first[c] = sample == 2 ? wide[c] : pixels[c];
+                if (result->has_second) result->second[c] = sample == 2 ? wide[3 + c] : pixels[3 + c];
+            }
         }
         g_free(pixels);
         return ok;

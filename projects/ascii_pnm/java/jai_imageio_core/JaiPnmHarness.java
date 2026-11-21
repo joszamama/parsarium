@@ -30,10 +30,10 @@ public final class JaiPnmHarness {
             BufferedImage image = reader.read(0);
             int width = image.getWidth();
             int height = image.getHeight();
-            if (width < 2 || height < 1 || width > 4096 || height > 4096) {
-                throw new IOException("dimensions outside harness limit");
-            }
-            String pixels = String.format("%08x,%08x", image.getRGB(0, 0), image.getRGB(1, 0));
+            // The first pixel and the next one in raster order, if the image has one.
+            String pixels = String.format("%08x", image.getRGB(0, 0));
+            if (width > 1) pixels += String.format(",%08x", image.getRGB(1, 0));
+            else if (height > 1) pixels += String.format(",%08x", image.getRGB(0, 1));
             return new Parsed(width, height, pixels);
         } finally {
             reader.dispose();

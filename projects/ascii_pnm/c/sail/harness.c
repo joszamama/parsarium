@@ -23,13 +23,23 @@ int parsarium_parse_pnm(const uint8_t *data, size_t size, struct parsarium_pnm_r
  sail_status_t status = sail_load_from_file(path, &image);
  unlink(path);
  if (status != SAIL_OK || !image) { if (image) sail_destroy_image(image); return 0; }
- if (image->pixel_format != SAIL_PIXEL_FORMAT_BPP24_RGB ||
-     image->width < 2 || image->height < 1 || image->bytes_per_line < 6) {
+ /* 8-bit RGB for maxval up to 255, 16-bit RGB above. The second pixel is
+    the next one in raster order, if the image has one. */
+ int wide = image->pixel_format == SAIL_PIXEL_FORMAT_BPP48_RGB;
+ if ((image->pixel_format != SAIL_PIXEL_FORMAT_BPP24_RGB && !wide) ||
+     image->width < 1 || image->height < 1) {
   sail_destroy_image(image); return 0;
  }
  const unsigned char *pixels = image->pixels;
+ size_t pixel_bytes = wide ? 6 : 3;
+ const unsigned char *next = image->width > 1 ? pixels + pixel_bytes
+                             : image->height > 1 ? pixels + image->bytes_per_line : NULL;
  result->width = (int)image->width; result->height = (int)image->height;
- for (int i = 0; i < 3; i++) { result->first[i] = pixels[i]; result->second[i] = pixels[i+3]; }
+ result->has_second = next != NULL;
+ for (int i = 0; i < 3; i++) {
+  result->first[i] = wide ? ((const uint16_t *)pixels)[i] : pixels[i];
+  if (next) result->second[i] = wide ? ((const uint16_t *)next)[i] : next[i];
+ }
  sail_destroy_image(image);
  return 1;
 }
