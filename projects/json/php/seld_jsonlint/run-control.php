@@ -9,7 +9,7 @@ $data = file_get_contents('/input/control');
 if ($data === false) { throw new RuntimeException('cannot read valid control'); }
 $observed = parsarium_parse($data);
 $expected = json_decode(file_get_contents(__DIR__ . '/target.json'), true, 512, JSON_THROW_ON_ERROR)['expected_output'];
-if ($observed != $expected) { throw new RuntimeException('control mismatch: ' . json_encode($observed)); }
+if ($observed != $expected) { throw new RuntimeException('control mismatch: ' . parsarium_json_text($observed, 0)); }
 $raw = xdebug_get_code_coverage();
 $files = [];
 $total = 0;

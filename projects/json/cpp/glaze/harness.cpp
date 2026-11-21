@@ -13,11 +13,16 @@ static bool parse_json(const uint8_t* data, size_t size, bool print_tree) {
     std::string buffer(reinterpret_cast<const char*>(data), size);
     glz::generic_i64 root{};
     if (glz::read_json(root, buffer)) return false;
-    if (!root.is_object() && !root.is_array()) return false;
     if (print_tree) {
         auto output = root.dump();
         if (!output) return false;
-        std::fwrite(output->data(), 1, output->size(), stdout);
+        // glaze's compact writer emits no whitespace, so a byte below 0x20 can
+        // only be inside a string; write it as a \u00XX escape so the printed
+        // tree is RFC 8259 text the checker can read.
+        for (unsigned char c : *output) {
+            if (c < 0x20) std::printf("\\u%04x", c);
+            else std::putchar(c);
+        }
         std::putchar('\n');
     }
     return true;

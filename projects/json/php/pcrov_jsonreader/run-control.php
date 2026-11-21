@@ -15,10 +15,12 @@ $flags = JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON
 $expectations = json_decode(file_get_contents(__DIR__ . '/target.json'), false, 512, JSON_THROW_ON_ERROR)
     ->expected_output_by_control_sha256;
 $digest = hash('sha256', $data);
-if (!property_exists($expectations, $digest)) { throw new RuntimeException('unknown valid control'); }
-$expected = json_encode($expectations->{$digest}, $flags);
-if (json_encode($observed, $flags) !== $expected) {
-    throw new RuntimeException('control mismatch: ' . json_encode($observed, $flags));
+// Ordered comparison: member order and integer/float kinds must match the oracle tree.
+// Any other valid input reports the tree the parser produced in the mismatch message.
+$expected = parsarium_json_text($observed, $flags);
+if (!property_exists($expectations, $digest)
+        || json_encode($expectations->{$digest}, $flags) !== $expected) {
+    throw new RuntimeException('control mismatch: ' . $expected);
 }
 // The documented local-file and stream entry points must yield the same tree (outside coverage).
 $reader = new pcrov\JsonReader\JsonReader();

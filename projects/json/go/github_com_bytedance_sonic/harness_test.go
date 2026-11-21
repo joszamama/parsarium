@@ -39,13 +39,15 @@ func TestControl(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !reflect.DeepEqual(root, expectedObject) {
-		t.Fatalf("decoded tree mismatch: %#v", root)
-	}
+	// The summary is compared first so that any other valid input reports what
+	// Sonic decoded; the exact tree check then still guards the control.
 	got := summarize(root)
 	encoded := Encode(got)
 	if encoded != expectedJSON {
 		t.Fatalf("control mismatch: %s", encoded)
+	}
+	if !reflect.DeepEqual(root, expectedObject) {
+		t.Fatalf("decoded tree mismatch: %#v", root)
 	}
 	fmt.Printf("OBSERVED_JSON:%s\n", encoded)
 }

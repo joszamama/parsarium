@@ -14,8 +14,8 @@ int main(int argc, char **argv) {
         return 4;
     }
     fclose(file);
-    struct json_object *root = parsarium_parse_json(input, size);
-    if (!root) return 5;
+    struct json_object *root;
+    if (!parsarium_parse_json(input, size, &root)) return 5;
     if (argc == 3) {
         parsarium_print_tree(root);
         putchar('\n');

@@ -42,8 +42,14 @@ int parsarium_parse_json(const uint8_t *data, size_t size,
                                                 member->name.GetStringLength());
     } else if (document.IsArray()) {
         result->root = "array";
+    } else if (document.IsString()) {
+        result->root = "string";
+    } else if (document.IsNumber()) {
+        result->root = "number";
+    } else if (document.IsBool()) {
+        result->root = "boolean";
     } else {
-        return 0; // controls and harness cover object/array roots only
+        result->root = "null";
     }
     walk(document, 1, result);
     std::sort(result->top_level_keys.begin(), result->top_level_keys.end());

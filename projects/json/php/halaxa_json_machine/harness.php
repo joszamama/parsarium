@@ -11,14 +11,12 @@ function parsarium_parse(string $input): array {
         throw new InvalidArgumentException('input outside harness limit');
     }
     // JSON Machine scans the document's members; ext/json decodes each value.
+    // JSON Machine itself rejects a scalar root with a SyntaxErrorException.
     $first = substr(ltrim($input), 0, 1);
-    if ($first !== '{' && $first !== '[') {
-        throw new InvalidArgumentException('harness supports object/array roots');
-    }
-    $root = $first === '{' ? new stdClass() : [];
+    $root = $first === '{' ? new ParsariumObject() : [];
     foreach (Items::fromString($input, ['decoder' => new ExtJsonDecoder()]) as $key => $value) {
-        if ($root instanceof stdClass) {
-            $root->{(string) $key} = $value;
+        if ($root instanceof ParsariumObject) {
+            $root->members[(string) $key] = $value;
         } else {
             $root[] = $value;
         }

@@ -26,9 +26,9 @@ function parsarium_tag(mixed $value): array {
         }
         $kind = $value->__debugInfo()['kind'];
         if ($kind === 'object') {
-            $members = new stdClass();
-            foreach ($entries as [$name, $member]) { $members->{(string) $name} = $member; }
-            return ['type' => 'object', 'members' => $members];
+            $members = [];
+            foreach ($entries as [$name, $member]) { $members[(string) $name] = $member; }
+            return ['type' => 'object', 'members' => parsarium_members($members)];
         }
         if ($kind === 'array') {
             return ['type' => 'array', 'items' => array_column($entries, 1)];
@@ -50,4 +50,34 @@ function parsarium_parse(string $input): array {
     // JSON_STREAM_TRANSIENT). Full iteration reaches the root's closing bracket,
     // where the package rejects trailing bytes.
     return parsarium_tag(json_stream_decode($input));
+}
+
+// json_encode() cannot write INF or NAN. A float infinity the parser returned (for
+// an out-of-range exponent) is written as an Infinity/-Infinity/NaN token, which
+// Python's json module reads, so the value stays a number in the reported result.
+function parsarium_json_text(mixed $value, int $flags): string {
+    $marker = "\u{1}parsarium-nonfinite\u{1}";
+    $map = function (mixed $item) use (&$map, $marker): mixed {
+        if (is_float($item) && !is_finite($item)) {
+            return $marker . (is_nan($item) ? 'NaN' : ($item > 0 ? 'Infinity' : '-Infinity'));
+        }
+        if (is_array($item)) { return array_map($map, $item); }
+        if ($item instanceof stdClass) { return (object) array_map($map, get_object_vars($item)); }
+        return $item;
+    };
+    $text = json_encode($map($value), $flags | JSON_THROW_ON_ERROR);
+    foreach (['NaN', 'Infinity', '-Infinity'] as $token) {
+        $text = str_replace(json_encode($marker . $token, $flags | JSON_THROW_ON_ERROR), $token, $text);
+    }
+    return $text;
+}
+
+// Object members collected in a PHP array. A stdClass cannot hold a property whose
+// name starts with "\0" (a valid JSON key such as "\u0000"); such members stay an
+// array, which json_encode() still writes as a JSON object.
+function parsarium_members(array $members): array|stdClass {
+    foreach (array_keys($members) as $name) {
+        if (str_starts_with((string) $name, "\0")) { return $members; }
+    }
+    return (object) $members;
 }

@@ -58,7 +58,11 @@ static void print_value(const json::value &value) {
     case json::kind::double_: {
         char text[40];
         std::snprintf(text, sizeof(text), "%.17g", value.get_double());
-        if (!std::isfinite(value.get_double())) std::strcpy(text, "null");
+        // An out-of-range exponent parses to infinity; print it as a number token
+        // the observer's JSON reader accepts (Infinity/-Infinity/NaN), not null.
+        if (std::isnan(value.get_double())) std::strcpy(text, "NaN");
+        else if (std::isinf(value.get_double()))
+            std::strcpy(text, value.get_double() > 0 ? "Infinity" : "-Infinity");
         else if (!std::strpbrk(text, ".e")) std::strcat(text, ".0");
         std::fputs(text, stdout);
         break;
@@ -75,7 +79,6 @@ static bool parse_json(const uint8_t *data, size_t size, bool print_tree) {
     json::value root = json::parse(
         json::string_view(reinterpret_cast<const char *>(data), size), error);
     if (error) return false;
-    if (!root.is_object() && !root.is_array()) return false;  // controls cover object/array roots
     if (print_tree) {
         print_value(root);
         std::putchar('\n');

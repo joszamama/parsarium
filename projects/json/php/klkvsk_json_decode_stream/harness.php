@@ -42,3 +42,23 @@ function parsarium_parse(string $input): array {
     }
     return parsarium_documents(Parser::fromString($input));
 }
+
+// json_encode() cannot write INF or NAN. A float infinity the parser returned (for
+// an out-of-range exponent) is written as an Infinity/-Infinity/NaN token, which
+// Python's json module reads, so the value stays a number in the reported result.
+function parsarium_json_text(mixed $value, int $flags): string {
+    $marker = "\u{1}parsarium-nonfinite\u{1}";
+    $map = function (mixed $item) use (&$map, $marker): mixed {
+        if (is_float($item) && !is_finite($item)) {
+            return $marker . (is_nan($item) ? 'NaN' : ($item > 0 ? 'Infinity' : '-Infinity'));
+        }
+        if (is_array($item)) { return array_map($map, $item); }
+        if ($item instanceof stdClass) { return (object) array_map($map, get_object_vars($item)); }
+        return $item;
+    };
+    $text = json_encode($map($value), $flags | JSON_THROW_ON_ERROR);
+    foreach (['NaN', 'Infinity', '-Infinity'] as $token) {
+        $text = str_replace(json_encode($marker . $token, $flags | JSON_THROW_ON_ERROR), $token, $text);
+    }
+    return $text;
+}

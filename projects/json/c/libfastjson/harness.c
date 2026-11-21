@@ -8,33 +8,37 @@
 
 /* fjson_tokener_parse_ex on the exact local byte length in strict mode. The
  * header documents detecting trailing bytes through tok->char_offset; only JSON
- * whitespace may follow the value. */
-static struct fjson_object *parse_json(const uint8_t *data, size_t size) {
-    if (!data || size == 0 || size > (1u << 20)) return NULL;
+ * whitespace may follow the value. A JSON null root is a NULL object with
+ * fjson_tokener_success, so success is reported separately from the object. */
+static int parse_json(const uint8_t *data, size_t size, struct fjson_object **out) {
+    *out = NULL;
+    if (!data || size == 0 || size > (1u << 20)) return 0;
     struct fjson_tokener *tok = fjson_tokener_new();
-    if (!tok) return NULL;
+    if (!tok) return 0;
     fjson_tokener_set_flags(tok, FJSON_TOKENER_STRICT);
     struct fjson_object *root = fjson_tokener_parse_ex(tok, (const char *)data, (int)size);
-    if (root && fjson_tokener_get_error(tok) == fjson_tokener_success) {
+    int ok = fjson_tokener_get_error(tok) == fjson_tokener_success;
+    if (ok) {
         for (size_t end = (size_t)tok->char_offset; end < size; end++) {
             char c = (char)data[end];
             if (c != ' ' && c != '\t' && c != '\n' && c != '\r') {
-                fjson_object_put(root);
-                root = NULL;
+                ok = 0;
                 break;
             }
         }
-    } else if (root) {
+    }
+    if (!ok && root) {
         fjson_object_put(root);
         root = NULL;
     }
     fjson_tokener_free(tok);
-    return root;
+    *out = root;
+    return ok;
 }
 
 int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
-    struct fjson_object *root = parse_json(data, size);
-    if (root) fjson_object_put(root);
+    struct fjson_object *root;
+    if (parse_json(data, size, &root) && root) fjson_object_put(root);
     return 0;
 }
 
@@ -90,12 +94,13 @@ int main(int argc, char **argv) {
         free(data); fclose(file); return 4;
     }
     fclose(file);
-    struct fjson_object *root = parse_json(data, size);
+    struct fjson_object *root;
+    int ok = parse_json(data, size, &root);
     free(data);
-    if (!root) return 5;
+    if (!ok) return 5;
     emit(stdout, root);
     fputc('\n', stdout);
-    fjson_object_put(root);
+    if (root) fjson_object_put(root);
     return 0;
 }
 #endif

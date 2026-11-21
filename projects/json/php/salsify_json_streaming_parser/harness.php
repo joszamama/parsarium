@@ -6,14 +6,15 @@ require __DIR__ . '/summary.php';
 use JsonStreamingParser\Listener\IdleListener;
 use JsonStreamingParser\Parser;
 
-// Builds stdClass objects and lists from the parser's listener events.
+// Builds objects (ParsariumObject, which keeps "\0"-prefixed member names) and
+// lists from the parser's listener events.
 final class ParsariumTreeListener extends IdleListener {
     public mixed $root = null;
     public int $documents = 0;
     private array $stack = [];
     private array $keys = [];
 
-    public function startObject(): void { $this->stack[] = new stdClass(); }
+    public function startObject(): void { $this->stack[] = new ParsariumObject(); }
     public function startArray(): void { $this->stack[] = []; }
     public function endObject(): void { $this->insert(array_pop($this->stack)); }
     public function endArray(): void { $this->insert(array_pop($this->stack)); }
@@ -24,8 +25,8 @@ final class ParsariumTreeListener extends IdleListener {
     private function insert(mixed $value): void {
         if ($this->stack === []) { $this->root = $value; return; }
         $top = array_key_last($this->stack);
-        if ($this->stack[$top] instanceof stdClass) {
-            $this->stack[$top]->{array_pop($this->keys)} = $value;
+        if ($this->stack[$top] instanceof ParsariumObject) {
+            $this->stack[$top]->members[array_pop($this->keys)] = $value;
         } else {
             $this->stack[$top][] = $value;
         }

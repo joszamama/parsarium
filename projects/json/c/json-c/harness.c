@@ -1,6 +1,7 @@
 #include "harness.h"
 
 #include <inttypes.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,13 +19,15 @@ struct summary {
     size_t string_count, string_capacity;
 };
 
-struct json_object *parsarium_parse_json(const uint8_t *data, size_t size) {
+int parsarium_parse_json(const uint8_t *data, size_t size, struct json_object **out) {
     static int configured;
     struct json_tokener *tok;
     struct json_object *root;
     char *text;
     size_t end;
-    if (!data || size > (1u << 20)) return NULL;
+    int ok;
+    *out = NULL;
+    if (!data || size > (1u << 20)) return 0;
     if (!configured) {
         /* The Perl-like string hash has no random seed, so object table layout
          * and feedback repeat across runs. */
@@ -38,29 +41,33 @@ struct json_object *parsarium_parse_json(const uint8_t *data, size_t size) {
     if (!text || !tok) {
         free(text);
         if (tok) json_tokener_free(tok);
-        return NULL;
+        return 0;
     }
     memcpy(text, data, size);
     text[size] = '\0';
     json_tokener_set_flags(tok, JSON_TOKENER_STRICT);
     root = json_tokener_parse_ex(tok, text, (int)size + 1);
-    if (root && json_tokener_get_error(tok) == json_tokener_success) {
+    /* A JSON null root is a NULL json_object with json_tokener_success, so
+     * success is reported separately from the object. */
+    ok = json_tokener_get_error(tok) == json_tokener_success;
+    if (ok) {
         /* Reject trailing bytes other than JSON whitespace. */
         for (end = json_tokener_get_parse_end(tok); end < size; end++) {
             char c = text[end];
             if (c != ' ' && c != '\t' && c != '\n' && c != '\r') {
-                json_object_put(root);
-                root = NULL;
+                ok = 0;
                 break;
             }
         }
-    } else if (root) {
+    }
+    if (!ok && root) {
         json_object_put(root);
         root = NULL;
     }
     json_tokener_free(tok);
     free(text);
-    return root;
+    *out = root;
+    return ok;
 }
 
 static int push_number(struct summary *s, double value) {
@@ -149,7 +156,17 @@ static void print_string(const char *data, size_t size) {
     putchar('"');
 }
 
+/* Non-finite doubles (an out-of-range exponent json-c turned into infinity)
+ * print as Infinity/-Infinity/NaN, which the observer's JSON reader accepts. */
+static int print_nonfinite(double value) {
+    if (isnan(value)) fputs("NaN", stdout);
+    else if (isinf(value)) fputs(value > 0 ? "Infinity" : "-Infinity", stdout);
+    else return 0;
+    return 1;
+}
+
 static void print_number(double value) {
+    if (print_nonfinite(value)) return;
     if (value == (double)(long long)value && value > -1e15 && value < 1e15)
         printf("%lld", (long long)value);
     else
@@ -189,7 +206,8 @@ void parsarium_print_tree(struct json_object *value) {
         printf("%" PRId64, json_object_get_int64(value));
         break;
     case json_type_double:
-        printf("%.17g", json_object_get_double(value));
+        if (!print_nonfinite(json_object_get_double(value)))
+            printf("%.17g", json_object_get_double(value));
         break;
     case json_type_boolean:
         fputs(json_object_get_boolean(value) ? "true" : "false", stdout);
@@ -239,21 +257,29 @@ void parsarium_print_summary(struct json_object *root) {
         }
         fputs("]}\n", stdout);
         free(keys);
-    } else {
+    } else if (json_object_is_type(root, json_type_array)) {
         fputs("\"array\",\"strings\":[", stdout);
         for (size_t i = 0; i < s.string_count; i++) {
             if (i) putchar(',');
             print_string(s.strings[i].data, s.strings[i].size);
         }
         printf("],\"top_level_items\":%zu}\n", json_object_array_length(root));
+    } else {
+        /* A scalar root (RFC 8259 allows any value) has no top-level members. */
+        fputs("\"scalar\",\"strings\":[", stdout);
+        for (size_t i = 0; i < s.string_count; i++) {
+            if (i) putchar(',');
+            print_string(s.strings[i].data, s.strings[i].size);
+        }
+        fputs("]}\n", stdout);
     }
     free(s.numbers);
     free(s.strings);
 }
 
 int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
-    struct json_object *root = parsarium_parse_json(data, size);
-    if (root) {
+    struct json_object *root;
+    if (parsarium_parse_json(data, size, &root) && root) {
         struct summary s = {0};
         (void)walk(root, 0, &s);
         free(s.numbers);

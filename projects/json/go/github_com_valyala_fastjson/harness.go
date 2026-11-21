@@ -2,6 +2,7 @@ package jsonharness
 
 import (
 	"fmt"
+	"math"
 	"sort"
 	"strconv"
 	"strings"
@@ -143,7 +144,7 @@ func Encode(value any) string {
 	case []float64:
 		parts := make([]string, len(node))
 		for index, item := range node {
-			parts[index] = strconv.FormatFloat(item, 'g', -1, 64)
+			parts[index] = formatNumber(item)
 		}
 		return "[" + strings.Join(parts, ",") + "]"
 	case int:
@@ -170,4 +171,19 @@ func quote(text string) string {
 	}
 	builder.WriteByte('"')
 	return builder.String()
+}
+
+// formatNumber writes a float64 as a JSON number. An out-of-range exponent the
+// parser turned into an infinity is written as Infinity/-Infinity (NaN as NaN),
+// tokens the observer's JSON reader accepts, instead of Go's "+Inf".
+func formatNumber(value float64) string {
+	switch {
+	case math.IsNaN(value):
+		return "NaN"
+	case math.IsInf(value, 1):
+		return "Infinity"
+	case math.IsInf(value, -1):
+		return "-Infinity"
+	}
+	return strconv.FormatFloat(value, 'g', -1, 64)
 }

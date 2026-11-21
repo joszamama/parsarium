@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 
+#include <cmath>
+
 static void json_string(const std::string &text) {
     putchar('"');
     for (unsigned char c : text) {
@@ -42,7 +44,14 @@ int main(int argc, char **argv) {
     printf("{\"arrays\":%lld,\"booleans\":%lld,\"max_depth\":%lld,\"nulls\":%lld,\"numbers\":[",
            (long long)result.arrays, (long long)result.booleans,
            (long long)result.max_depth, (long long)result.nulls);
-    for (size_t i = 0; i < result.numbers.size(); i++) printf("%s%.17g", i ? "," : "", result.numbers[i]);
+    for (size_t i = 0; i < result.numbers.size(); i++) {
+        const double number = result.numbers[i];
+        // An out-of-range exponent parses to infinity; Infinity/-Infinity/NaN
+        // tokens keep it a number the observer's JSON reader accepts.
+        if (std::isnan(number)) printf("%sNaN", i ? "," : "");
+        else if (std::isinf(number)) printf("%s%s", i ? "," : "", number > 0 ? "Infinity" : "-Infinity");
+        else printf("%s%.17g", i ? "," : "", number);
+    }
     printf("],\"objects\":%lld,\"root\":", (long long)result.objects);
     json_string(result.root);
     fputs(",\"strings\":", stdout);

@@ -1,4 +1,5 @@
 #include <cpprest/json.h>
+#include <cmath>
 #include <cstdint>
 #include <cstdio>
 #include <exception>
@@ -43,6 +44,13 @@ static void print(const web::json::value &value) {
         if (number.is_int64()) { std::cout << number.to_int64(); return; }
         if (number.is_uint64()) { std::cout << number.to_uint64(); return; }
         if (number.is_integral()) throw std::runtime_error("integral number outside 64-bit range");
+        // An out-of-range exponent parses to infinity; Infinity/-Infinity/NaN
+        // tokens keep it a number the observer's JSON reader accepts.
+        if (std::isnan(value.as_double())) { std::cout << "NaN"; return; }
+        if (std::isinf(value.as_double())) {
+            std::cout << (value.as_double() > 0 ? "Infinity" : "-Infinity");
+            return;
+        }
         char buf[64];
         std::snprintf(buf, sizeof buf, "%.17g", value.as_double());
         std::string text(buf);

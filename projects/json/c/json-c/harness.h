@@ -6,8 +6,9 @@
 
 #include <json.h>
 
-/* Parse one complete local JSON byte buffer with json_tokener_parse_ex. */
-struct json_object *parsarium_parse_json(const uint8_t *data, size_t size);
+/* Parse one complete local JSON byte buffer with json_tokener_parse_ex. Returns
+ * nonzero on success; *out is NULL for a JSON null root. */
+int parsarium_parse_json(const uint8_t *data, size_t size, struct json_object **out);
 
 /* Print the cross-ecosystem control summary for a parsed value. */
 void parsarium_print_summary(struct json_object *root);

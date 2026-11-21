@@ -46,7 +46,10 @@ int parsarium_parse_json(const uint8_t *data, size_t size,
     if (root.is_discarded()) return 0;
     if (root.is_object()) result->root = "object";
     else if (root.is_array()) result->root = "array";
-    else return 0;
+    else if (root.is_string()) result->root = "string";
+    else if (root.is_number()) result->root = "number";
+    else if (root.is_boolean()) result->root = "boolean";
+    else result->root = "null";
     if (root.is_object())
         for (const auto &item : root.items()) result->top_level_keys.push_back(item.key());
     walk(root, 1, result);

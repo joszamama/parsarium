@@ -42,6 +42,9 @@ int parsarium_parse_json(const uint8_t *data, size_t size,
     // Documented byte-range API: CharReaderBuilder::newCharReader()->parse(begin, end, ...).
     Json::CharReaderBuilder builder;
     Json::CharReaderBuilder::strictMode(&builder.settings_);
+    // strictMode also sets strictRoot (RFC 4627's object/array-only root); RFC
+    // 8259 allows any value at the root, so that one setting is turned back off.
+    builder.settings_["strictRoot"] = false;
     std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
     Json::Value root;
     std::string errors;
@@ -49,7 +52,10 @@ int parsarium_parse_json(const uint8_t *data, size_t size,
     if (!reader->parse(begin, begin + size, &root, &errors)) return 0;
     if (root.isObject()) result->root = "object";
     else if (root.isArray()) result->root = "array";
-    else return 0;
+    else if (root.isString()) result->root = "string";
+    else if (root.isNumeric()) result->root = "number";
+    else if (root.isBool()) result->root = "boolean";
+    else result->root = "null";
     if (root.isObject()) result->top_level_keys = root.getMemberNames();
     walk(root, 1, result);
     std::sort(result->top_level_keys.begin(), result->top_level_keys.end());
