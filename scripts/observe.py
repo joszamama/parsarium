@@ -44,7 +44,8 @@ TAIL = 4000
 MAX_CASE_BYTES = 1 << 20
 # Files a verification check writes before comparing, in the order they are read.
 OBSERVED_FILES = ("observed.json", "observed.raw", "tree.json")
-MISMATCH = re.compile(r"mismatch: ")
+# "mismatch: <value>", or "mismatch for <path>: <value>" (the Go YAML typed-tree checks).
+MISMATCH = re.compile(r"mismatch(?: for [^\s:]+)?: ")
 # Failures raised only after the check compared the observed value and found it equal.
 POST_COMPARISON = re.compile(
     r"no (?:instrumented )?[\w .+/-]*?(?:source )?lines covered|missing coverage in|"

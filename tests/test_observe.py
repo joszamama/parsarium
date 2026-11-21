@@ -88,6 +88,12 @@ class ExtractionTests(unittest.TestCase):
         record = observe.classify(EXPECTED, 1, "", stderr, {}, False, {})
         self.assertEqual(record["observed"], {"height": 4, "width": 3})
 
+    def test_go_message_naming_the_input_path(self):
+        stderr = ("control replay failed: exit status 1: === RUN   TestControl\n"
+                  '    harness_test.go:32: typed tree mismatch for /input/control: {"tree":["map",[]]}\n--- FAIL: TestControl\n')
+        record = observe.classify(EXPECTED, 1, "", stderr, {}, False, {})
+        self.assertEqual(record["observed"], {"tree": ["map", []]})
+
     def test_go_struct_message_uses_json_tags(self):
         tags = observe.go_field_tags(['type Result struct {\n\tWidth  int   `json:"width"`\n'
                                       '\tRGBA   []int `json:"rgba"`\n\tName string `json:"name,omitempty"`\n}\n'])
