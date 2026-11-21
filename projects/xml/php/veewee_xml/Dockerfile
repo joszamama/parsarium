@@ -16,8 +16,9 @@ RUN grep -v '^#' /work/vendor-archives.txt | while read -r digest name version u
 
 FROM --platform=linux/arm64 ubuntu@sha256:065aa8626841f16057b78b027b464cd59c4fac36c204c72dcbf48d66f5fa8a96
 ENV DEBIAN_FRONTEND=noninteractive
+# php-standard-library/str (Psl\Str\uppercase, used when veewee/xml formats a libxml issue) requires ext-mbstring.
 RUN apt-get update -qq && apt-get install -y --no-install-recommends \
-    php8.5-cli php8.5-xml php8.5-xdebug \
+    php8.5-cli php8.5-xml php8.5-mbstring php8.5-xdebug \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /work
 COPY --from=build /work/vendor /work/vendor

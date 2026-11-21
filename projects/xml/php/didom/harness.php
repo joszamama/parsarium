@@ -16,8 +16,10 @@ function parsarium_decode(string $bytes): DOMDocument {
 
 function parsarium_parse(string $bytes): array {
     $document = parsarium_decode($bytes);
-    if (libxml_get_errors() !== []) {
-        throw new RuntimeException('XML parse error: ' . trim(libxml_get_errors()[0]->message));
+    // libxml2 warnings (LIBXML_ERR_WARNING, such as "Unsupported version '1.1'") do not stop the parse; only errors fail.
+    $errors = array_values(array_filter(libxml_get_errors(), fn (LibXMLError $error): bool => $error->level !== LIBXML_ERR_WARNING));
+    if ($errors !== []) {
+        throw new RuntimeException('XML parse error: ' . trim($errors[0]->message));
     }
     return parsarium_xml_summary($document);
 }

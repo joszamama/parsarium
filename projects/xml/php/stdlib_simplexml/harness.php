@@ -8,8 +8,10 @@ if ($bytes === false) { throw new RuntimeException('cannot read XML'); }
 libxml_use_internal_errors(true);
 // The bytes are passed as a string; simplexml_load_file() (file/URL input) is not exercised.
 $root = simplexml_load_string($bytes, SimpleXMLElement::class, LIBXML_NONET);
-if ($root === false || libxml_get_errors() !== []) {
-    throw new RuntimeException('XML parse error: ' . trim(libxml_get_errors()[0]->message ?? 'simplexml_load_string returned false'));
+// libxml2 warnings (LIBXML_ERR_WARNING, such as "Unsupported version '1.1'") do not stop the parse; only errors fail.
+$errors = array_values(array_filter(libxml_get_errors(), fn (LibXMLError $error): bool => $error->level !== LIBXML_ERR_WARNING));
+if ($root === false || $errors !== []) {
+    throw new RuntimeException('XML parse error: ' . trim($errors[0]->message ?? 'simplexml_load_string returned false'));
 }
 $summary = parsarium_xml_summary($root);
 echo json_encode($summary, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), "\n";

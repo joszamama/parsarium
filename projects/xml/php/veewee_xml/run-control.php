@@ -9,7 +9,8 @@ $data = file_get_contents('/input/control');
 if ($data === false) { throw new RuntimeException('cannot read valid control'); }
 $observed = parsarium_parse($data);
 $targets = json_decode(file_get_contents(__DIR__ . '/target.json'), true, 512, JSON_THROW_ON_ERROR)['expected_by_control_sha256'];
-$expected = $targets[hash('sha256', $data)] ?? throw new RuntimeException('control is not one of the pinned valid controls');
+// Any other valid input reports what the package parsed in the mismatch message.
+$expected = $targets[hash('sha256', $data)] ?? null;
 if ($observed !== $expected) { throw new RuntimeException('control mismatch: ' . json_encode($observed)); }
 $raw = xdebug_get_code_coverage();
 $files = [];

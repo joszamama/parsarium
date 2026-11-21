@@ -188,14 +188,17 @@ char *parsarium_parse_xml(const uint8_t *data, size_t size) {
     walk(&s, tree);
     flush(&s);
     char *out = NULL;
-    if (s.ok && s.elements.len) {
+    /* mxml can return a tree without an element node (no error reported); the result then lists no
+     * elements and its root is null. */
+    if (s.ok) {
         qsort(s.namespaces.items, s.namespaces.len, sizeof(char *), compare);
         struct buffer b = {0}; int ok = 1; char num[64];
         append(&b, "{", 1, &ok); array(&b, "attributes", &s.attributes, &ok);
         append(&b, ",", 1, &ok); array(&b, "elements", &s.elements, &ok);
         snprintf(num, sizeof(num), ",\"max_depth\":%d,\"namespace_declarations\":%d,", s.max_depth, s.declarations);
         append(&b, num, strlen(num), &ok); array(&b, "namespaces", &s.namespaces, &ok);
-        append(&b, ",\"root\":", 8, &ok); quote(&b, s.elements.items[0], &ok);
+        append(&b, ",\"root\":", 8, &ok);
+        if (s.elements.len) quote(&b, s.elements.items[0], &ok); else append(&b, "null", 4, &ok);
         append(&b, ",", 1, &ok); array(&b, "text", &s.text, &ok); append(&b, "}", 1, &ok);
         if (ok) out = b.data; else free(b.data);
     }

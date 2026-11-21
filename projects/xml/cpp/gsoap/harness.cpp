@@ -81,9 +81,21 @@ int parsarium_parse_xml(const uint8_t *data, size_t size,
         in >> dom;
         if (!ctx->error) {
             std::set<std::string> uris;
-            ok = walk(&dom, 1, result, &uris);
+            if (dom.name) {
+                ok = walk(&dom, 1, result, &uris);
+            } else {
+                // gSOAP can return a top node without an element name and report no error (after an
+                // internal DTD subset, for instance). Its character data and any named children are
+                // reported; with no element the result lists none and the replay prints a null root.
+                ok = 1;
+                add_text(dom.text, result);
+                for (const soap_dom_element *child = dom.elts; child && ok; child = child->next) {
+                    if (!child->name) add_text(child->text, result);
+                    else ok = walk(child, 1, result, &uris);
+                }
+            }
             if (ok) {
-                result->root = result->elements.front();
+                if (!result->elements.empty()) result->root = result->elements.front();
                 result->namespaces.assign(uris.begin(), uris.end());
             }
         }

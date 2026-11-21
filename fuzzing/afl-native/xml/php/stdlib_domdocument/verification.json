@@ -6,8 +6,8 @@
   "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c (DOMDocument::loadXML) via AFL++ allowlist; libxml2 tree, XPath and dict code, the other ext/dom classes, ext/libxml/libxml.c and the Zend engine are uninstrumented",
   "fuzz_target": "projects/xml/php/stdlib_domdocument/fuzz-target.php (new DOMDocument, loadXML only)",
   "harness": "projects/xml/php/stdlib_domdocument/harness.php (loadXML, then summary.php DOM traversal)",
-  "base_project_receipt_sha256": "4a3a1457423d5b8627a5a2cfaf93c7f006ef6d20bea3a3b290990831660eaa40",
-  "base_image_id": "sha256:24980dfb6e10540668f6efa571be91fa86366881e91d5164a460a3ccf03141dd",
+  "base_project_receipt_sha256": "147978483a0147640b970b4bba6bc804660131b46ad4d615c02c4ed0c9424fe8",
+  "base_image_id": "sha256:d29a2ba1c64e6c2400519a915d854f32088b3fe6fa9802a8c81eefc86af51e2d",
   "source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
   "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
   "license_file_sha256": {
@@ -33,19 +33,19 @@
     "control": {
       "parser_source_lines_covered": 2890,
       "format_specific_source_lines_covered": 126,
-      "underlying_source_lines_covered": 3238,
+      "underlying_source_lines_covered": 3237,
       "underlying_parser_c_lines_covered": 1279,
       "underlying_sax2_c_lines_covered": 358
     },
     "differential": {
       "parser_source_lines_covered": 2894,
       "format_specific_source_lines_covered": 126,
-      "underlying_source_lines_covered": 3536,
+      "underlying_source_lines_covered": 3543,
       "underlying_parser_c_lines_covered": 1451,
       "underlying_sax2_c_lines_covered": 372
     }
   },
-  "image_id": "sha256:be305b622817f6b27b3953a6d8d24b68999f68b596957a407aaf46007f4020d3",
+  "image_id": "sha256:28da6f56baf5ec61f528b2321b5772107fea96a4c51f136b26405d250ffa0fbc",
   "platform": "linux/arm64",
   "afl_package": "4.33c-1.1ubuntu1",
   "afl_map_size": 65536,

@@ -8,5 +8,7 @@ if ($bytes === false) { throw new RuntimeException('cannot read XML'); }
 libxml_use_internal_errors(true);
 $reader = XMLReader::XML($bytes, null, LIBXML_NONET);
 $summary = parsarium_xml_summary($reader);
-if (libxml_get_errors() !== []) { throw new RuntimeException('XML parse error: ' . trim(libxml_get_errors()[0]->message)); }
+// libxml2 warnings (LIBXML_ERR_WARNING, such as "Unsupported version '1.1'") do not stop the parse; only errors fail.
+$errors = array_values(array_filter(libxml_get_errors(), fn (LibXMLError $error): bool => $error->level !== LIBXML_ERR_WARNING));
+if ($errors !== []) { throw new RuntimeException('XML parse error: ' . trim($errors[0]->message)); }
 echo json_encode($summary, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), "\n";

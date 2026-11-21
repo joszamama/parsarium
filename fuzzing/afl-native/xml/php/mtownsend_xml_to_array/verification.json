@@ -6,8 +6,8 @@
   "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c (DOMDocument::loadXML) via AFL++ allowlist; libxml2 tree, XPath and dict code, the other ext/dom classes, ext/libxml/libxml.c, the Zend engine and the interpreted XmlToArray PHP code are uninstrumented",
   "harness": "projects/xml/php/mtownsend_xml_to_array/fuzz-target.php -> harness.php parsarium_parse (XmlToArray::convert($bytes, true), summary.php array walk)",
   "parse_only_target": "DOMDocument::loadXML with default options, as XmlToArray::convert calls it",
-  "base_project_receipt_sha256": "8bbedbf6a9109e78ce99c6d5f2c76338202d630c9e96e4bbdbdc1b70aaf4828d",
-  "base_image_id": "sha256:83ab8742c3ff8ef1e3d9d942e042cccf44d1e8c18ffa7ffc67b0dbeee702364f",
+  "base_project_receipt_sha256": "ac763ec24b9e9257963b6253f92ce0175e439264dfb1d25d979a8554c49676e2",
+  "base_image_id": "sha256:94578affd1993918e8671b89af17c5a423afd9e180747bfa4755147b2682bc25",
   "source_sha256": "57a261f641eee98d20e27600e4846ebbcb05150277a67aa167f07ab3b3ce7e2c",
   "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
   "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
@@ -30,14 +30,14 @@
     "control": {
       "item": [
         {
-          "@content": "Café & té",
+          "@content": "Caf\u00e9 & t\u00e9",
           "@attributes": {
             "id": "a1",
             "lang": "es"
           }
         },
         {
-          "name": "Zürich <HQ>",
+          "name": "Z\u00fcrich <HQ>",
           "note": "x < y",
           "@attributes": {
             "id": "b2"
@@ -53,7 +53,7 @@
       "line": [
         {
           "sku": "A-7",
-          "p:amount": "12.50 €",
+          "p:amount": "12.50 \u20ac",
           "@attributes": {
             "n": "1",
             "currency": "EUR"
@@ -98,7 +98,7 @@
       ]
     }
   },
-  "image_id": "sha256:0730ff97afca81f3f8d72e67f38d6ef5654665a8090c9bb513155012b24538d7",
+  "image_id": "sha256:ffa10240487e010baba184ae27c80363d19a23a9c765761b81c55d54e2aef3d2",
   "platform": "linux/arm64",
   "afl_package": "4.33c-1.1ubuntu1",
   "afl_map_size": 65536,

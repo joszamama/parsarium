@@ -85,14 +85,15 @@ export function parse(bytes) {
     }
   };
   walk(tree, new Map(), 1);
-  if (elements.length === 0) throw new Error('no root element');
+  // fast-xml-parser can return a tree without an element and no error; the result then lists no
+  // elements and its root is null.
   return {
     attributes,
     elements,
     max_depth: maxDepth,
     namespace_declarations: declarations,
     namespaces: [...namespaces].sort(),
-    root: elements[0],
+    root: elements.length ? elements[0] : null,
     text: segments,
   };
 }

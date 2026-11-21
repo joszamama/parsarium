@@ -47,7 +47,8 @@ int main(int argc, char **argv) {
            (long long)result.max_depth, (long long)result.namespace_declarations);
     string_list(result.namespaces);
     fputs(",\"root\":", stdout);
-    json_string(result.root);
+    if (result.elements.empty()) fputs("null", stdout);
+    else json_string(result.root);
     fputs(",\"text\":", stdout);
     string_list(result.text);
     puts("}");

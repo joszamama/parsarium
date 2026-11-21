@@ -1,5 +1,6 @@
 """Replay gokogiri and export separate Go binding and native libxml2 source lines."""
 
+from hashlib import sha256
 import json
 import os
 from pathlib import Path
@@ -42,7 +43,13 @@ def go_lines() -> list[dict]:
     ]
 
 
-def native_lines() -> list[dict]:
+def pinned_control(path: Path) -> bool:
+    digest = sha256(path.read_bytes()).hexdigest()
+    return any(sha256(control.read_bytes()).hexdigest() == digest
+               for control in sorted(Path("/work/controls").glob("*.xml")))
+
+
+def native_lines(is_control: bool) -> list[dict]:
     raw = OUT / "native.profraw"
     if raw.stat().st_size < 100:
         raise ValueError("libxml2 emitted no LLVM profile")
@@ -62,7 +69,11 @@ def native_lines() -> list[dict]:
             if match and float(match.group(2).rstrip("kM")) > 0:
                 lines.add(int(match.group(1)))
         if official.get(source, 0) == 0 or not lines:
-            raise ValueError(f"native parser file uncovered: {basename}")
+            # Every pinned control reaches all three files. Another valid input may not reach one
+            # (entities.c without an entity reference); its file is then left out of the report.
+            if is_control:
+                raise ValueError(f"native parser file uncovered: {basename}")
+            continue
         result.append({"filename": source,
                        "summary": {"lines": {"covered": len(lines)}},
                        "executed_lines": sorted(lines),
@@ -76,10 +87,10 @@ def main() -> None:
     run("/work/harness.test", "-test.run=^TestControls$", "-test.coverprofile=/coverage/raw.cover",
         env=dict(os.environ, LLVM_PROFILE_FILE=str(OUT / "test.profraw")))
     own = go_lines()
-    native = native_lines()
+    native = native_lines(pinned_control(Path("/input/control")))
     if not own or sum(item["summary"]["lines"]["covered"] for item in own) < 20:
         raise ValueError("gokogiri Go binding source uncovered")
-    if native[0]["summary"]["lines"]["covered"] < 100:
+    if not native or native[0]["filename"] != "/work/libxml2-source/parser.c" or native[0]["summary"]["lines"]["covered"] < 100:
         raise ValueError("libxml2 XML parser source uncovered")
     summary = {
         "control_pass": True, "output": observed,

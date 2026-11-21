@@ -13,8 +13,8 @@ use Saloon\XmlWrangler\XmlReader;
 $data = file_get_contents('/input/control');
 if ($data === false) { throw new RuntimeException('cannot read valid control'); }
 $target = json_decode(file_get_contents(__DIR__ . '/target.json'), true, 512, JSON_THROW_ON_ERROR);
-$expected = $target['expected_output_by_control_sha256'][hash('sha256', $data)]
-    ?? throw new RuntimeException('control is not one of the pinned valid controls');
+// Any other valid input reports what the package parsed in the mismatch message.
+$expected = $target['expected_output_by_control_sha256'][hash('sha256', $data)] ?? null;
 
 // Coverage covers only the documented string entry point and elements().
 xdebug_start_code_coverage();
