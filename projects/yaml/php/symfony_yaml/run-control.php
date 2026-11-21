@@ -15,11 +15,12 @@ $flags = JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE | JSON
 $expectations = json_decode(file_get_contents(__DIR__ . '/target.json'), false, 512, JSON_THROW_ON_ERROR)
     ->expected_output_by_control_sha256;
 $digest = hash('sha256', $data);
-if (!property_exists($expectations, $digest)) { throw new RuntimeException('unknown valid control'); }
 // Ordered comparison: map member order and scalar type tags must match the oracle tree.
-$expected = json_encode($expectations->{$digest}, $flags);
-if (json_encode($observed, $flags) !== $expected) {
-    throw new RuntimeException('control mismatch: ' . json_encode($observed, $flags));
+// Any other valid input reports the summary the parser produced in the mismatch message.
+$expected = json_encode($observed, $flags);
+if (!property_exists($expectations, $digest)
+        || json_encode($expectations->{$digest}, $flags) !== $expected) {
+    throw new RuntimeException('control mismatch: ' . $expected);
 }
 
 $files = [];

@@ -5,9 +5,13 @@ require __DIR__ . '/vendor/autoload.php';
 use Symfony\Component\Yaml\Yaml;
 
 // Shortest round-trip decimal text for a PHP float (serialize_precision=-1).
+// json_encode() cannot write INF or NAN; the parser's .inf/-.inf/.nan values are
+// written as Infinity/-Infinity/NaN, the tokens the JSON harnesses use.
 function parsarium_float(float $value): string {
-    $text = json_encode($value, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION);
-    return $text;
+    if (!is_finite($value)) {
+        return is_nan($value) ? 'NaN' : ($value > 0 ? 'Infinity' : '-Infinity');
+    }
+    return json_encode($value, JSON_THROW_ON_ERROR | JSON_PRESERVE_ZERO_FRACTION);
 }
 
 // Builds the shared YAML typed tree from the values Yaml::parse returns with
