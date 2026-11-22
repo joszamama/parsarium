@@ -8,21 +8,15 @@ import (
 	"go.viam.com/rdk/spatialmath"
 )
 
-// The documented spatialmath.NewMeshFromPLYFile(path) reads the PLY through
-// goply and converts each three-index face into a millimetre-scaled triangle.
-func main() {
-	if len(os.Args) != 3 {
-		panic("usage: go run . PACKAGE CONTROL")
-	}
-	name, path := os.Args[1], os.Args[2]
-	output := map[string]any{}
+// run reads the PLY with the documented spatialmath.NewMeshFromPLYFile(path),
+// which reads it through goply and converts each three-index face into a
+// millimetre-scaled triangle. A library error is returned unchanged.
+func run(name, path string) (map[string]any, error) {
 	switch name {
-
 	case "go.viam.com/rdk/spatialmath":
 		mesh, err := spatialmath.NewMeshFromPLYFile(path)
 		if err != nil {
-			fmt.Println(`{"error":"rejected"}`)
-			return
+			return nil, err
 		}
 		triangles := mesh.Triangles()
 		first := [][]float64{}
@@ -31,10 +25,19 @@ func main() {
 				first = append(first, []float64{point.X, point.Y, point.Z})
 			}
 		}
-		output = map[string]any{"triangles": len(triangles), "first_triangle_mm": first}
-
+		return map[string]any{"triangles": len(triangles), "first_triangle_mm": first}, nil
 	default:
-		panic(fmt.Sprintf("unknown ASCII PLY package: %s", name))
+		return nil, fmt.Errorf("unknown ASCII PLY package: %s", name)
+	}
+}
+
+func main() {
+	if len(os.Args) != 3 {
+		panic("usage: go run . PACKAGE CONTROL")
+	}
+	output, err := run(os.Args[1], os.Args[2])
+	if err != nil {
+		panic(err)
 	}
 	encoded, err := json.Marshal(output)
 	if err != nil {

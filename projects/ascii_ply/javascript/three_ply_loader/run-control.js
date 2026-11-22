@@ -13,7 +13,9 @@ const child = spawnSync(process.execPath, ['/work/replay.js', '/input/control'],
 if (child.status !== 0) {
   throw new Error(`control replay failed: ${child.stderr}`);
 }
-const observed = JSON.parse(child.stdout.trim());
+// The parser may log to stdout (e.g. "unhandled obj_info ..."); the replay's
+// JSON result is the last line.
+const observed = JSON.parse(child.stdout.trim().split('\n').pop());
 const expected = {"vertices": [[0, 0, 0], [1, 0, 0], [0, 1, 0]], "faces": [[0, 1, 2]]};
 if (JSON.stringify(observed) !== JSON.stringify(expected)) {
   throw new Error(`control mismatch: ${JSON.stringify(observed)}`);

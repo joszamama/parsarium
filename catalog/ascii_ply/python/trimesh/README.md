@@ -5,7 +5,7 @@
 - **License:** MIT
 - **Parsed scope:** ASCII PLY triangle vertices and face count
 - **Underlying family:** trimesh PLY loader
-- **Local input API:** `trimesh.load(path, force="mesh")`
+- **Local input API:** `trimesh.load_scene(path), then Scene.to_mesh() (what trimesh.load(path, force="mesh") returns); a file without faces reports its PointCloud vertices`
 - **Documentation:** [API reference](<https://trimesh.org/trimesh.html>)
 - **Catalog evidence:** [parser record](../../../../data/python/ascii_ply/parsers.json) · [control verification](../../../../data/python/ascii_ply/verification.json) · [within-ecosystem ranking](../../../../data/python/ascii_ply/ranking.md)
 - **Valid control:** [`controls/ascii_ply/triangle.ply`](../../../../controls/ascii_ply/triangle.ply)

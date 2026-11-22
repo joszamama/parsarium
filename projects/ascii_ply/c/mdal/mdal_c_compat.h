@@ -5,12 +5,17 @@
 
 typedef void *MDAL_MeshH;
 typedef void *MDAL_MeshFaceIteratorH;
+/* MDAL_LogLevel and MDAL_Status are plain C++ enums (int-sized). */
+typedef void (*MDAL_LoggerCallback)(int logLevel, int status, const char *message);
+
+void MDAL_SetLoggerCallback(MDAL_LoggerCallback callback);
 
 MDAL_MeshH MDAL_LoadMesh(const char *uri);
 void MDAL_CloseMesh(MDAL_MeshH mesh);
 const char *MDAL_M_driverName(MDAL_MeshH mesh);
 int MDAL_M_vertexCount(MDAL_MeshH mesh);
 int MDAL_M_faceCount(MDAL_MeshH mesh);
+int MDAL_M_faceVerticesMaximumCount(MDAL_MeshH mesh);
 MDAL_MeshFaceIteratorH MDAL_M_faceIterator(MDAL_MeshH mesh);
 int MDAL_FI_next(MDAL_MeshFaceIteratorH iterator,
                  int faceOffsetsBufferLen, int *faceOffsetsBuffer,

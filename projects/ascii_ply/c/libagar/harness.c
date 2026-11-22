@@ -18,6 +18,9 @@
 const char *__asan_default_options(void) { return "detect_leaks=0"; }
 
 static int initialized;
+static char last_error[512];
+
+const char *parsarium_last_error(void) { return last_error[0] ? last_error : NULL; }
 
 static int initialize(void) {
     if (initialized) return initialized > 0;
@@ -33,6 +36,7 @@ static int initialize(void) {
 
 int parsarium_parse_ply(const uint8_t *data, size_t size,
                         struct parsarium_ply_result *result) {
+    last_error[0] = '\0';
     if (!data || !result || size == 0 || size > (1u << 20)) return 0;
     if (!initialize()) return 0;
     char directory[] = "/tmp/parsarium-libagar-XXXXXX";
@@ -64,16 +68,20 @@ int parsarium_parse_ply(const uint8_t *data, size_t size,
                 if (!first) first = facet;
             }
         }
-        for (int i = 0; i < 3; ++i) result->face[i] = 0;
-        if (first && first->n >= 3) {
-            for (int i = 0; i < 3; ++i) {
+        result->face_size = 0;
+        if (first && first->n >= 3 && first->n <= 4) {
+            for (Uint i = 0; i < first->n; ++i) {
                 /* Halfedge e[k] runs v[k] -> v[k+1] and stores its destination vertex. */
-                SG_Edge *edge = first->e[(i + 2) % 3];
+                SG_Edge *edge = first->e[(i + first->n - 1) % first->n];
                 int vertex = edge ? edge->v : 0;
-                result->face[i] = vertex > 0 ? (unsigned)(vertex - 1) : 0;
+                result->face[i] = vertex > 0 ? vertex - 1 : -1;
             }
+            result->face_size = first->n;
         }
         okay = 1;
+    } else if (written) {
+        const char *error = AG_GetError();
+        snprintf(last_error, sizeof(last_error), "%s", error ? error : "");
     }
     AG_ObjectDestroy(so);
     unlink(path);

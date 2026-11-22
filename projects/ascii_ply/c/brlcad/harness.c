@@ -18,6 +18,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* BRL-CAD's PLY importer (ply_read.c convert_input) leaves the RPly handle open
+ * when it stops early, e.g. on a file without vertex_indices faces. That leak is
+ * not a parse result, and the library default (a build without LeakSanitizer)
+ * does not fail on it; leak reports are off, as for libagar and atril. */
+const char *__asan_default_options(void) { return "detect_leaks=0"; }
+
 int parsarium_parse_ply(const uint8_t *data, size_t size,
                         struct parsarium_ply_result *result) {
     if (!data || !result || size == 0 || size > (1u << 20)) return 0;

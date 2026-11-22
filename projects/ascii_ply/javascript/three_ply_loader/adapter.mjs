@@ -11,9 +11,10 @@ const verticesFromFlat = (flat) => {
   const numbers = Array.from(flat);
   return Array.from({ length: numbers.length / 3 }, (_, i) => numbers.slice(i * 3, i * 3 + 3));
 };
+// A geometry without an index (a point cloud) has no faces.
 const fromGeometry = (geometry) => ({
   vertices: verticesFromFlat(geometry.getAttribute('position').array),
-  faces: [Array.from(geometry.index.array)]
+  faces: geometry.index ? [Array.from(geometry.index.array)] : []
 });
 
 let output;
@@ -31,10 +32,21 @@ if (name === 'three') {
     faces: [Array.from(mesh.indices.value)] };
 } else if (name === 'parse-ply') {
   const { default: parse } = await import('parse-ply');
-  const mesh = await new Promise((resolve, reject) =>
-    parse(createReadStream(path), (error, value) => error ? reject(error) : resolve(value)));
+  const mesh = await new Promise((resolve, reject) => {
+    // parse-ply can stop reading without calling back (e.g. on a header line it
+    // does not handle); the process would then end with neither a result nor an error.
+    const stalled = () => reject(new Error('parse-ply stopped without a result or an error'));
+    process.once('beforeExit', stalled);
+    parse(createReadStream(path), (error, value) => {
+      process.removeListener('beforeExit', stalled);
+      error ? reject(error) : resolve(value);
+    });
+  });
+  // The face list is the face element's vertex_indices (or vertex_index) property;
+  // a point cloud has no face element.
+  const faceList = mesh.face && (mesh.face.vertex_indices ?? mesh.face.vertex_index);
   output = { vertices: Array.from(mesh.vertex.x, (x, i) => [x, mesh.vertex.y[i], mesh.vertex.z[i]]),
-    faces: mesh.face.vertex_indices.map((indices) => Array.from(indices)) };
+    faces: faceList ? faceList.map((indices) => Array.from(indices)) : [] };
 } else if (name === 'plyparser') {
   const { default: parse } = await import('plyparser');
   const mesh = parse(bytes);

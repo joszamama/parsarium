@@ -1,6 +1,17 @@
 #include "harness.h"
+#include "mdal_c_compat.h"
 
 #include <stdio.h>
+
+/* MDAL's default logger writes to stdout; send its messages to stderr so the
+ * JSON line stays alone on stdout and a failed load reports MDAL's reason. */
+static int logged;
+
+static void log_to_stderr(int level, int status, const char *message) {
+    (void)level;
+    logged = 1;
+    fprintf(stderr, "MDAL status %d: %s\n", status, message ? message : "");
+}
 
 int main(int argc, char **argv) {
     if (argc != 2) return 2;
@@ -13,10 +24,17 @@ int main(int argc, char **argv) {
         return 4;
     }
     fclose(file);
-    struct parsarium_ply_result result;
-    if (!parsarium_parse_ply(input, size, &result)) return 5;
-    printf("{\"vertices\":%d,\"faces\":%d,\"indices\":[%d,%d,%d]}\n",
-           result.vertices, result.faces, result.indices[0], result.indices[1],
-           result.indices[2]);
+    MDAL_SetLoggerCallback(log_to_stderr);
+    struct parsarium_ply_result result = {0};
+    if (!parsarium_parse_ply(input, size, &result)) {
+        if (!logged)
+            fputs("MDAL_LoadMesh did not return a PLY mesh with a readable first face\n", stderr);
+        return 5;
+    }
+    printf("{\"vertices\":%d,\"faces\":%d,\"indices\":[", result.vertices, result.faces);
+    for (int i = 0; i < result.index_count; ++i)
+        printf(i ? ",%d" : "%d", result.indices[i]);
+    puts("]}");
+    parsarium_free_result(&result);
     return 0;
 }

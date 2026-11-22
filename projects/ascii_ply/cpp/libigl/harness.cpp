@@ -3,7 +3,9 @@
 #include <igl/readPLY.h>
 #include <Eigen/Core>
 
+#include <cstdio>
 #include <cstdlib>
+#include <exception>
 #include <unistd.h>
 
 bool parsarium_parse_ply(const std::uint8_t *data, std::size_t size,
@@ -32,14 +34,19 @@ bool parsarium_parse_ply(const std::uint8_t *data, std::size_t size,
     bool parsed = false;
     try {
         parsed = igl::readPLY(path, vertices, faces);
+    } catch (const std::exception &error) {
+        std::fprintf(stderr, "igl::readPLY threw: %s\n", error.what());
+        parsed = false;
     } catch (...) {
+        std::fputs("igl::readPLY threw a non-standard exception\n", stderr);
         parsed = false;
     }
     unlink(path);
-    if (!parsed || vertices.cols() != 3 || faces.cols() != 3 || faces.rows() < 1)
-        return false;
+    if (!parsed) return false;
     result->vertices = static_cast<std::size_t>(vertices.rows());
     result->faces = static_cast<std::size_t>(faces.rows());
-    for (int i = 0; i < 3; ++i) result->face[i] = faces(0, i);
+    result->face.clear();
+    if (faces.rows() > 0)
+        for (Eigen::Index i = 0; i < faces.cols(); ++i) result->face.push_back(faces(0, i));
     return true;
 }

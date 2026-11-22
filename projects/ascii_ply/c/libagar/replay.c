@@ -13,9 +13,14 @@ int main(int argc, char **argv) {
     }
     fclose(file);
     struct parsarium_ply_result result;
-    if (!parsarium_parse_ply(input, size, &result)) return 5;
-    printf("{\"vertices\":%u,\"faces\":%u,\"indices\":[%u,%u,%u]}\n",
-           result.vertices, result.faces,
-           result.face[0], result.face[1], result.face[2]);
+    if (!parsarium_parse_ply(input, size, &result)) {
+        const char *error = parsarium_last_error();
+        if (error) fprintf(stderr, "SG_ObjectLoadPLY: %s\n", error);
+        return 5;
+    }
+    printf("{\"vertices\":%u,\"faces\":%u,\"indices\":[", result.vertices, result.faces);
+    for (unsigned i = 0; i < result.face_size; ++i)
+        printf(i ? ",%d" : "%d", result.face[i]);
+    puts("]}");
     return 0;
 }

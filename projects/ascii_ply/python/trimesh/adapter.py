@@ -24,16 +24,28 @@ def parse(name, path):
         return summarize(vertices, len(mesh["face"]))
     if name == "trimesh":
         import trimesh
-        mesh = trimesh.load(path, force="mesh")
+        # trimesh.load(force="mesh") is load_scene(...).to_mesh(), which keeps only
+        # Trimesh geometry; a PLY without faces loads as a PointCloud instead.
+        scene = trimesh.load_scene(path)
+        geometry = list(scene.geometry.values())
+        if not any(isinstance(item, trimesh.Trimesh) for item in geometry):
+            clouds = [item for item in geometry if isinstance(item, trimesh.PointCloud)]
+            if len(clouds) == 1:
+                return summarize(clouds[0].vertices, 0)
+        mesh = scene.to_mesh()
         return summarize(mesh.vertices, len(mesh.faces))
     if name == "meshio":
         import meshio
         mesh = meshio.read(path)
-        return summarize(mesh.points, len(mesh.cells_dict["triangle"]))
+        # meshio's PLY reader puts each run of same-sized faces in its own cell
+        # block (triangle, quad, polygon); every block is part of the face element.
+        return summarize(mesh.points, sum(len(block.data) for block in mesh.cells))
     if name == "pyntcloud":
         from pyntcloud import PyntCloud
         cloud = PyntCloud.from_file(path)
-        return summarize(cloud.points[["x", "y", "z"]].to_numpy(), len(cloud.mesh))
+        # PyntCloud.mesh is None when the file has no face element.
+        faces = 0 if cloud.mesh is None else len(cloud.mesh)
+        return summarize(cloud.points[["x", "y", "z"]].to_numpy(), faces)
     if name == "pyminiply":
         import pyminiply
         vertices, indices, *_ = pyminiply.read(path)
@@ -83,7 +95,8 @@ def parse(name, path):
     if name == "point-cloud-utils":
         import point_cloud_utils
         vertices, faces = point_cloud_utils.load_mesh_vf(path)
-        return summarize(vertices, len(faces))
+        # load_mesh_vf returns None for the faces of a file without faces.
+        return summarize(vertices, 0 if faces is None else len(faces))
     if name == "vedo":
         import vedo
         mesh = vedo.load(path)

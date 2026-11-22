@@ -13,8 +13,16 @@ public final class BoofcvPlyAdapter {
         try (FileInputStream input = new FileInputStream(args[0])) {
             PointCloudIO.load(PointCloudIO.Format.PLY, input, mesh);
         }
-        System.out.printf("{\"vertices\":%d,\"faces\":%d,\"indices\":[%d,%d,%d]}%n",
-                mesh.vertexes.size(), mesh.size(), mesh.faceVertexes.get(0),
-                mesh.faceVertexes.get(1), mesh.faceVertexes.get(2));
+        // Vertex indices of the first face: faceOffsets holds each face's start
+        // in faceVertexes (it starts with 0); empty when the mesh has no faces.
+        StringBuilder indices = new StringBuilder();
+        if (mesh.size() > 0) {
+            for (int i = mesh.faceOffsets.get(0); i < mesh.faceOffsets.get(1); i++) {
+                if (indices.length() > 0) indices.append(',');
+                indices.append(mesh.faceVertexes.get(i));
+            }
+        }
+        System.out.printf("{\"vertices\":%d,\"faces\":%d,\"indices\":[%s]}%n",
+                mesh.vertexes.size(), mesh.size(), indices);
     }
 }

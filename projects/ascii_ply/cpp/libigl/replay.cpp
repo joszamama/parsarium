@@ -26,9 +26,11 @@ int main(int argc, char **argv) {
     }
     std::fclose(file);
     ParsariumPlyResult result{};
+    // igl::readPLY prints its own reason to stderr when it returns false.
     if (!parsarium_parse_ply(input.data(), input.size(), &result)) return 5;
-    std::printf("{\"vertices\":%zu,\"faces\":%zu,\"face\":[%d,%d,%d]}\n",
-                result.vertices, result.faces, result.face[0], result.face[1],
-                result.face[2]);
+    std::printf("{\"vertices\":%zu,\"faces\":%zu,\"face\":[", result.vertices, result.faces);
+    for (std::size_t i = 0; i < result.face.size(); ++i)
+        std::printf(i ? ",%d" : "%d", result.face[i]);
+    std::printf("]}\n");
     return 0;
 }
