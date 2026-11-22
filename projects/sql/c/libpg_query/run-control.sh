@@ -3,9 +3,10 @@ set -eu
 test -f /input/control
 mkdir -p /coverage
 LLVM_PROFILE_FILE=/coverage/control.profraw /work/replay /input/control > /coverage/tree.json
+# The summary is written before the coverage export, which takes most of the run time.
+python3 /work/summarize.py --tree /coverage/tree.json > /coverage/observed.json
 llvm-profdata merge -sparse /coverage/control.profraw -o /coverage/control.profdata
 llvm-cov export /work/replay -instr-profile=/coverage/control.profdata > /coverage/coverage.json
-python3 /work/summarize.py --tree /coverage/tree.json > /coverage/observed.json
 python3 - <<'PY'
 import json
 from pathlib import Path
