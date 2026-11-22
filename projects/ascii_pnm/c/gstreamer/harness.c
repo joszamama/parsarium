@@ -1,6 +1,7 @@
 #include "harness.h"
 #include <gst/app/gstappsink.h>
 #include <gst/gst.h>
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -55,6 +56,29 @@ int parsarium_parse_pnm(const uint8_t *data, size_t size, struct parsarium_pnm_r
             gst_buffer_unmap(buffer, &mapped);
         }
         gst_sample_unref(sample);
+    }
+    if (!ok && pipeline) {
+        /* Report the errors GStreamer posted, verbatim, instead of a bare failure. */
+        GstBus *bus = gst_element_get_bus(pipeline);
+        GstMessage *message;
+        int reported = 0;
+        while (bus && (message = gst_bus_pop_filtered(bus, GST_MESSAGE_ERROR))) {
+            GError *posted = NULL;
+            gchar *debug = NULL;
+            gst_message_parse_error(message, &posted, &debug);
+            if (debug) g_strdelimit(debug, "\n", ' ');
+            fprintf(stderr, "GStreamer error from %s: %s (%s)\n",
+                    GST_MESSAGE_SRC_NAME(message), posted ? posted->message : "unknown",
+                    debug ? debug : "no debug info");
+            if (posted) g_error_free(posted);
+            g_free(debug);
+            gst_message_unref(message);
+            reported = 1;
+        }
+        if (bus) gst_object_unref(bus);
+        if (!reported)
+            fprintf(stderr, "GStreamer posted no error; %s\n",
+                    sample ? "the decoded sample was not an RGB frame" : "no decoded sample");
     }
     if (pipeline) { gst_element_set_state(pipeline, GST_STATE_NULL); gst_object_unref(pipeline); }
     if (source) gst_object_unref(source);

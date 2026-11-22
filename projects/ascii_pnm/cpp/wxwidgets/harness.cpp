@@ -6,6 +6,7 @@
 #include <wx/log.h>
 
 #include <cstdlib>
+#include <fcntl.h>
 #include <unistd.h>
 
 bool parsarium_parse_pnm(const std::uint8_t *data, std::size_t size,
@@ -16,11 +17,17 @@ bool parsarium_parse_pnm(const std::uint8_t *data, std::size_t size,
     if (!initializer.IsOk()) return false;
     if (!registered) {
         wxImage::AddHandler(new wxPNMHandler);
+        // Send the errors wxImage logs while loading to stderr, untimestamped,
+        // instead of the GUI log target.
+        delete wxLog::SetActiveTarget(new wxLogStderr);
+        wxLog::DisableTimestamp();
         registered = true;
     }
 
-    char path[] = "/tmp/parsarium-wx-pnm-XXXXXX";
-    int fd = mkstemp(path);
+    // A fixed name keeps wxImage's "Failed to load image from file" message
+    // the same for every run; each container has its own private /tmp.
+    const char path[] = "/tmp/parsarium-wx-pnm-input";
+    int fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0600);
     if (fd < 0) return false;
     bool written = true;
     for (std::size_t offset = 0; offset < size;) {
@@ -32,7 +39,6 @@ bool parsarium_parse_pnm(const std::uint8_t *data, std::size_t size,
     if (!written) { unlink(path); return false; }
 
     wxImage image;
-    wxLogNull quiet;
     bool loaded = image.LoadFile(wxString::FromUTF8(path), wxBITMAP_TYPE_PNM);
     unlink(path);
     if (!loaded || !image.IsOk() || !image.GetData()) return false;
