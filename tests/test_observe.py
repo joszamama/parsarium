@@ -94,6 +94,14 @@ class ExtractionTests(unittest.TestCase):
         record = observe.classify(EXPECTED, 1, "", stderr, {}, False, {})
         self.assertEqual(record["observed"], {"tree": ["map", []]})
 
+    def test_error_wrapped_by_the_node_runner(self):
+        stderr = ("Error: control replay failed: TypeError: Invalid PNM\n"
+                  "    at Object.<anonymous> (/work/run-control.js:14:9)\n\nNode.js v24.22.3\n")
+        self.assertEqual(observe.parser_error("", stderr, {}), "TypeError: Invalid PNM")
+
+    def test_node_version_trailer_is_not_the_error(self):
+        self.assertEqual(observe.parser_error("", "bad header\n\nNode.js v24.22.3\n", {}), "bad header")
+
     def test_go_struct_message_uses_json_tags(self):
         tags = observe.go_field_tags(['type Result struct {\n\tWidth  int   `json:"width"`\n'
                                       '\tRGBA   []int `json:"rgba"`\n\tName string `json:"name,omitempty"`\n}\n'])

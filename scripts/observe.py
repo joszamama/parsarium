@@ -256,14 +256,25 @@ def parser_error(stdout: str, stderr: str, files: dict[str, str]) -> str:
         r"thread '[^']*' panicked at (.+)",                              # Rust
         r"^Error: (.+)$",                                                # Rust main()
     ]
+    wrapped = []
     for pattern in patterns:
         found = re.findall(pattern, text, re.MULTILINE)
+        wrapped += [item for item in found if "control replay failed" in item]
         found = [item for item in found if "control replay failed" not in item]
         if found:
             return found[-1].strip()[:1000]
+    # Only a runner's "control replay failed: <error>" line names the error: keep what it wraps.
+    for item in wrapped:
+        inner = re.sub(r"^.*?control replay failed:\s*(?:exit status \d+:\s*)?", "", item).strip()
+        if inner:
+            return inner[:1000]
     observed = files.get("observed.json") or files.get("observed.raw") or ""
-    lines = [line.strip() for line in (observed + "\n" + stderr).splitlines() if line.strip()]
+    lines = [line.strip() for line in (observed + "\n" + stderr).splitlines()
+             if line.strip() and not NODE_TRAILER.match(line.strip())]
     return lines[-1][:1000] if lines else ""
+
+
+NODE_TRAILER = re.compile(r"^Node\.js v\d+\.\d+\.\d+$")  # Node prints its version after an uncaught error
 
 
 PROGRAMMING_ERRORS = re.compile(
