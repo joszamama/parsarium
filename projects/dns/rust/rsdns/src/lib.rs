@@ -10,6 +10,13 @@ fn absolute(name: String) -> String {
     if lower.ends_with('.') { lower } else { format!("{lower}.") }
 }
 
+/// TXT character-strings as `"<string>"` separated by spaces, the form the other DNS
+/// harnesses print.
+fn quoted<T: AsRef<[u8]>>(items: impl IntoIterator<Item = T>) -> String {
+    items.into_iter().map(|item| format!("\"{}\"", String::from_utf8_lossy(item.as_ref())))
+        .collect::<Vec<_>>().join(" ")
+}
+
 fn rdata(record: &ResourceRecord) -> Result<String, Box<dyn Error>> {
     Ok(match &record.rdata {
         RecordData::A(a) => a.address.to_string(),
@@ -18,6 +25,8 @@ fn rdata(record: &ResourceRecord) -> Result<String, Box<dyn Error>> {
         RecordData::Ns(ns) => absolute(ns.nsdname.to_string()),
         RecordData::Ptr(ptr) => absolute(ptr.ptrdname.to_string()),
         RecordData::Mx(mx) => format!("{} {}", mx.preference, absolute(mx.exchange.to_string())),
+        // rsdns joins the character-strings of a TXT record into one `text` buffer.
+        RecordData::Txt(txt) => quoted([&txt.text]),
         _ => return Err("record data outside the control subset".into()),
     })
 }

@@ -22,6 +22,9 @@ function parsarium_rdata(Record $record): string {
         case Record::TYPE_MX:
             // Record::decode keeps the MX preference in $priority and the exchange in $rdata.
             return $record->priority . ' ' . parsarium_absolute($record->rdata);
+        case Record::TYPE_TXT:
+            // Record::decode joins the character-strings of a TXT record into one $rdata string.
+            return '"' . $record->rdata . '"';
     }
     throw new UnexpectedValueException('record type outside the control subset: ' . $record->type);
 }

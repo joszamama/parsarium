@@ -4,12 +4,20 @@ use std::error::Error;
 
 /// hns-dns-wire prints names lower case and absolute (with the trailing dot) and keeps
 /// A/AAAA as std::net addresses; the harness only joins MX as "<preference> <exchange>".
+/// TXT character-strings as `"<string>"` separated by spaces, the form the other DNS
+/// harnesses print.
+fn quoted<T: AsRef<[u8]>>(items: impl IntoIterator<Item = T>) -> String {
+    items.into_iter().map(|item| format!("\"{}\"", String::from_utf8_lossy(item.as_ref())))
+        .collect::<Vec<_>>().join(" ")
+}
+
 fn rdata(record: &ResourceRecord) -> Result<String, Box<dyn Error>> {
     Ok(match &record.rdata {
         Rdata::A(address) => address.to_string(),
         Rdata::Aaaa(address) => address.to_string(),
         Rdata::Cname(target) | Rdata::Ns(target) => target.to_string(),
         Rdata::Mx(mx) => format!("{} {}", mx.preference, mx.exchange),
+        Rdata::Txt(strings) => quoted(strings),
         _ => return Err(format!("record type {} is outside the control subset", record.record_type.code()).into()),
     })
 }

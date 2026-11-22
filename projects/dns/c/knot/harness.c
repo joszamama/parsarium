@@ -19,18 +19,30 @@ static void name_out(FILE *out, const knot_dname_t *name) {
     free(text);
 }
 
+/* Writes text inside a JSON string: quotes and backslashes escaped, other bytes outside
+ * printable ASCII as \u00XX. */
+static void json_text(FILE *out, const unsigned char *text, size_t length) {
+    for (size_t i = 0; i < length; i++) {
+        unsigned char c = text[i];
+        if (c == '"' || c == '\\') { fputc('\\', out); fputc(c, out); }
+        else if (c < 0x20 || c > 0x7e) fprintf(out, "\\u%04x", c);
+        else fputc(c, out);
+    }
+}
+
 static int rdata_out(FILE *out, const knot_rrset_t *rrset) {
     char text[1024];
     switch (rrset->type) {
     case KNOT_RRTYPE_A: case KNOT_RRTYPE_AAAA: case KNOT_RRTYPE_CNAME: case KNOT_RRTYPE_NS:
-    case KNOT_RRTYPE_PTR: case KNOT_RRTYPE_MX:
+    case KNOT_RRTYPE_PTR: case KNOT_RRTYPE_MX: case KNOT_RRTYPE_TXT:
         break;
     default:
         return -1;
     }
     if (knot_rrset_txt_dump_data(rrset, 0, text, sizeof(text), &KNOT_DUMP_STYLE_DEFAULT) < 0) return -1;
     fputc('"', out);
-    for (const char *p = text; *p; p++) fputc(tolower((unsigned char)*p), out);
+    if (rrset->type == KNOT_RRTYPE_TXT) json_text(out, (const unsigned char *)text, strlen(text));
+    else for (const char *p = text; *p; p++) fputc(tolower((unsigned char)*p), out);
     fputc('"', out);
     return 0;
 }

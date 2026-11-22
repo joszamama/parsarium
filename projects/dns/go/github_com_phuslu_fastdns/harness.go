@@ -72,6 +72,16 @@ func name(message *fastdns.Message, wire []byte) (string, error) {
 // rdata formats one record's RDATA. fastdns hands out each record's RDATA as a byte
 // slice and decodes names with DecodeName; the harness reads the A/AAAA address bytes
 // (printed with net/netip) and the 16-bit MX preference from that slice.
+// quoted joins TXT character-strings as "<string>" separated by spaces, the form the
+// other DNS harnesses print.
+func quoted(items []string) string {
+	out := make([]string, len(items))
+	for index, item := range items {
+		out[index] = `"` + item + `"`
+	}
+	return strings.Join(out, " ")
+}
+
 func rdata(message *fastdns.Message, item fastdns.MessageRecord) (string, error) {
 	data := item.Data
 	switch item.Type {
@@ -96,6 +106,19 @@ func rdata(message *fastdns.Message, item fastdns.MessageRecord) (string, error)
 			return "", err
 		}
 		return fmt.Sprintf("%d %s", uint16(data[0])<<8|uint16(data[1]), exchange), nil
+	case fastdns.TypeTXT:
+		// fastdns returns TXT RDATA as raw bytes: one or more length-prefixed
+		// character-strings (RFC 1035 3.3.14), split here like A/AAAA/MX above.
+		items := []string{}
+		for len(data) > 0 {
+			size := int(data[0])
+			if 1+size > len(data) {
+				return "", fmt.Errorf("bad TXT length")
+			}
+			items = append(items, string(data[1:1+size]))
+			data = data[1+size:]
+		}
+		return quoted(items), nil
 	}
 	return "", fmt.Errorf("record type %d is outside the control subset", item.Type)
 }

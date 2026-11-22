@@ -11,6 +11,13 @@ fn absolute(name: String) -> String {
 
 /// simple-dns stores A and AAAA addresses as u32/u128 integers; the harness prints them
 /// with std::net (dotted quad, RFC 5952).
+/// TXT character-strings as `"<string>"` separated by spaces, the form the other DNS
+/// harnesses print.
+fn quoted<T: AsRef<[u8]>>(items: impl IntoIterator<Item = T>) -> String {
+    items.into_iter().map(|item| format!("\"{}\"", String::from_utf8_lossy(item.as_ref())))
+        .collect::<Vec<_>>().join(" ")
+}
+
 fn rdata(record: &ResourceRecord) -> Result<String, Box<dyn Error>> {
     Ok(match &record.rdata {
         RData::A(address) => Ipv4Addr::from(address.address).to_string(),
@@ -19,6 +26,8 @@ fn rdata(record: &ResourceRecord) -> Result<String, Box<dyn Error>> {
         RData::NS(target) => absolute(target.0.to_string()),
         RData::PTR(target) => absolute(target.0.to_string()),
         RData::MX(mx) => format!("{} {}", mx.preference, absolute(mx.exchange.to_string())),
+        // String::try_from(TXT) is the crate's text of a TXT record: its character-strings joined.
+        RData::TXT(txt) => quoted([String::try_from(txt.clone())?]),
         other => return Err(format!("record type {} is outside the control subset", u16::from(other.type_code())).into()),
     })
 }

@@ -67,6 +67,13 @@ fn get<'a, 'pkt>(fields: &[(&str, &'a Field<'pkt>)], key: &str) -> Res<&'a Field
     fields.iter().find(|(k, _)| *k == key).map(|(_, f)| *f).ok_or_else(|| format!("missing {key}").into())
 }
 
+/// TXT character-strings as `"<string>"` separated by spaces, the form the other DNS
+/// harnesses print.
+fn quoted<T: AsRef<[u8]>>(items: impl IntoIterator<Item = T>) -> String {
+    items.into_iter().map(|item| format!("\"{}\"", String::from_utf8_lossy(item.as_ref())))
+        .collect::<Vec<_>>().join(" ")
+}
+
 fn records(data: &[u8], buf: &DissectBuffer<'_>, layer: &Layer, key: &str) -> Res<Vec<Value>> {
     let Some(array) = buf.field_by_name(layer, key) else { return Ok(vec![]) };
     let mut out = Vec::new();
@@ -84,6 +91,22 @@ fn records(data: &[u8], buf: &DissectBuffer<'_>, layer: &Layer, key: &str) -> Re
             2 | 5 | 12 => name(data, buf, layer, get(&fields, "rdata")?)?,
             15 => format!("{} {}", number(get(&fields, "rdata_preference")?)?,
                           name(data, buf, layer, get(&fields, "rdata_exchange")?)?),
+            // The dissector stores TXT RDATA as raw bytes: length-prefixed character-strings.
+            16 => match get(&fields, "rdata")?.value {
+                FieldValue::Bytes(mut rest) => {
+                    let mut items = Vec::new();
+                    while let Some((&size, tail)) = rest.split_first() {
+                        if tail.len() < size as usize {
+                            return Err("bad TXT length".into());
+                        }
+                        let (item, next) = tail.split_at(size as usize);
+                        items.push(item);
+                        rest = next;
+                    }
+                    quoted(items)
+                }
+                _ => return Err("TXT rdata not raw bytes".into()),
+            },
             other => return Err(format!("record type {other} is outside the control subset").into()),
         };
         out.push(json!({"name": name(data, buf, layer, get(&fields, "name")?)?, "type": rtype,

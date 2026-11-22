@@ -11,6 +11,13 @@ fn absolute(name: String) -> String {
     if lower.ends_with('.') { lower } else { format!("{lower}.") }
 }
 
+/// TXT character-strings as `"<string>"` separated by spaces, the form the other DNS
+/// harnesses print.
+fn quoted<T: AsRef<[u8]>>(items: impl IntoIterator<Item = T>) -> String {
+    items.into_iter().map(|item| format!("\"{}\"", String::from_utf8_lossy(item.as_ref())))
+        .collect::<Vec<_>>().join(" ")
+}
+
 fn rdata(data: &AllRecordData<&[u8], Parsed>) -> Result<String, Box<dyn Error>> {
     Ok(match data {
         AllRecordData::A(a) => a.addr().to_string(),
@@ -19,6 +26,7 @@ fn rdata(data: &AllRecordData<&[u8], Parsed>) -> Result<String, Box<dyn Error>> 
         AllRecordData::Ns(ns) => absolute(ns.nsdname().to_string()),
         AllRecordData::Ptr(ptr) => absolute(ptr.ptrdname().to_string()),
         AllRecordData::Mx(mx) => format!("{} {}", mx.preference(), absolute(mx.exchange().to_string())),
+        AllRecordData::Txt(txt) => quoted(txt.iter()),
         other => return Err(format!("record data {other:?} is outside the control subset").into()),
     })
 }

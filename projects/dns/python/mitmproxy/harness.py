@@ -25,6 +25,9 @@ def rdata(record) -> str:
         (preference,) = struct.unpack_from("!H", record.data, 0)
         exchange, _ = domain_names.unpack_from(record.data, 2)
         return f"{preference} {absolute(exchange)}"
+    if record.type == types.TXT:
+        # The record's text property: its whole RDATA decoded as UTF-8, length octets included.
+        return '"' + record.text + '"'
     raise ValueError(f"record type {record.type} is outside the control subset")
 
 

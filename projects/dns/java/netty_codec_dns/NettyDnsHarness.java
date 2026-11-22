@@ -98,6 +98,18 @@ public final class NettyDnsHarness {
             int preference = content.readUnsignedShort();
             return preference + " " + absolute(DefaultDnsRecordDecoder.decodeName(content));
         }
+        // Netty keeps TXT as a raw record: one or more length-prefixed character-strings.
+        if (type == DnsRecordType.TXT) {
+            StringBuilder text = new StringBuilder();
+            while (content.isReadable()) {
+                int length = content.readUnsignedByte();
+                byte[] item = new byte[length];
+                content.readBytes(item);
+                if (text.length() > 0) text.append(' ');
+                text.append('"').append(new String(item, StandardCharsets.UTF_8)).append('"');
+            }
+            return text.toString();
+        }
         throw new IllegalArgumentException("record type outside the control subset: " + type);
     }
 

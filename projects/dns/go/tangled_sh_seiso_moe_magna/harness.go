@@ -62,6 +62,16 @@ func absolute(name string) string {
 
 // rdata formats the decoded RDATA. magna 0.0.2 has no AAAA type: RDATA of type 28 is
 // kept as magna.Reserved raw bytes, which the harness prints with net/netip (disclosed).
+// quoted joins TXT character-strings as "<string>" separated by spaces, the form the
+// other DNS harnesses print.
+func quoted(items []string) string {
+	out := make([]string, len(items))
+	for index, item := range items {
+		out[index] = `"` + item + `"`
+	}
+	return strings.Join(out, " ")
+}
+
 func rdata(item magna.ResourceRecord) (string, error) {
 	switch value := item.RData.(type) {
 	case *magna.A:
@@ -74,6 +84,8 @@ func rdata(item magna.ResourceRecord) (string, error) {
 		return absolute(value.PTRDName), nil
 	case *magna.MX:
 		return fmt.Sprintf("%d %s", value.Preference, absolute(value.Exchange)), nil
+	case *magna.TXT:
+		return quoted(value.TxtData), nil
 	case *magna.Reserved:
 		if item.RType == 28 && len(value.Bytes) == 16 {
 			return netip.AddrFrom16([16]byte(value.Bytes)).String(), nil

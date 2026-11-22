@@ -70,6 +70,16 @@ func init() {
 	time.Sleep(50 * time.Millisecond)
 }
 
+// quoted joins TXT character-strings as "<string>" separated by spaces, the form the
+// other DNS harnesses print.
+func quoted(items []string) string {
+	out := make([]string, len(items))
+	for index, item := range items {
+		out[index] = `"` + item + `"`
+	}
+	return strings.Join(out, " ")
+}
+
 func rdata(data interface{}) (string, error) {
 	switch value := data.(type) {
 	case *rr.A:
@@ -84,6 +94,8 @@ func rdata(data interface{}) (string, error) {
 		return absolute(value.PTRDName), nil
 	case *rr.MX:
 		return fmt.Sprintf("%d %s", value.Preference, absolute(value.Exchange)), nil
+	case *rr.TXT:
+		return quoted(value.S), nil
 	}
 	return "", fmt.Errorf("record data %T is outside the control subset", data)
 }

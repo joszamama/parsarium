@@ -52,6 +52,16 @@ func absolute(name string) string {
 }
 
 // rdata prints the typed RDATA value the layer decoded for the record.
+// quoted joins TXT character-strings as "<string>" separated by spaces, the form the
+// other DNS harnesses print.
+func quoted(items []string) string {
+	out := make([]string, len(items))
+	for index, item := range items {
+		out[index] = `"` + item + `"`
+	}
+	return strings.Join(out, " ")
+}
+
 func rdata(value layers.RData) (string, error) {
 	switch item := value.(type) {
 	case *layers.RDataA:
@@ -65,6 +75,9 @@ func rdata(value layers.RData) (string, error) {
 		return absolute(item.NsdName), nil
 	case *layers.RDataMX:
 		return fmt.Sprintf("%d %s", item.Preference, absolute(item.Exchange)), nil
+	case *layers.RDataTXT:
+		// mshark keeps the whole TXT RDATA, length octets included, as one string.
+		return quoted([]string{item.TxtData}), nil
 	}
 	return "", fmt.Errorf("record data %T is outside the control subset", value)
 }

@@ -1,7 +1,7 @@
 """PyAsyncDNS wire codec over local DNS message bytes through PyAsyncDNS.codec.DNSCodec.decode."""
 
 from PyAsyncDNS.codec import DNSCodec
-from PyAsyncDNS.datatypes import AAAARecord, ARecord, CNAMERecord, MXRecord, NSRecord, PTRRecord
+from PyAsyncDNS.datatypes import AAAARecord, ARecord, CNAMERecord, MXRecord, NSRecord, PTRRecord, TXTRecord
 
 CODEC = DNSCodec()
 
@@ -25,6 +25,8 @@ def rdata(record) -> str:
         return absolute(value.ptrdname)
     if isinstance(value, MXRecord):
         return f"{int(value.preference)} {absolute(value.exchange)}"
+    if isinstance(value, TXTRecord):
+        return " ".join('"' + bytes(item).decode("latin-1") + '"' for item in value.strings)
     raise ValueError(f"record type {record.rtype} ({type(value).__name__}) is outside the control subset")
 
 

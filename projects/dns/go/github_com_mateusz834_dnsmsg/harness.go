@@ -61,6 +61,16 @@ func absolute(name string) string {
 }
 
 // rdata decodes the record data with the parser method for the header's type.
+// quoted joins TXT character-strings as "<string>" separated by spaces, the form the
+// other DNS harnesses print.
+func quoted(items []string) string {
+	out := make([]string, len(items))
+	for index, item := range items {
+		out[index] = `"` + item + `"`
+	}
+	return strings.Join(out, " ")
+}
+
 func rdata(parser *dnsmsg.Parser, header dnsmsg.ResourceHeader) (string, error) {
 	switch header.Type {
 	case dnsmsg.TypeA:
@@ -100,6 +110,16 @@ func rdata(parser *dnsmsg.Parser, header dnsmsg.ResourceHeader) (string, error) 
 			return "", err
 		}
 		return fmt.Sprintf("%d %s", value.Pref, absolute(value.MX.String())), nil
+	case dnsmsg.TypeTXT:
+		value, err := parser.RawResourceTXT()
+		if err != nil {
+			return "", err
+		}
+		items := []string{}
+		for _, item := range value.ToResourceTXT().TXT {
+			items = append(items, string(item))
+		}
+		return quoted(items), nil
 	}
 	return "", fmt.Errorf("record type %d is outside the control subset", header.Type)
 }

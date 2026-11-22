@@ -3,6 +3,13 @@ use serde_json::{Value, json};
 use std::error::Error;
 
 /// oxidns-proto's Name::to_fqdn() is the canonical (lower-case) name with the trailing dot.
+/// TXT character-strings as `"<string>"` separated by spaces, the form the other DNS
+/// harnesses print.
+fn quoted<T: AsRef<[u8]>>(items: impl IntoIterator<Item = T>) -> String {
+    items.into_iter().map(|item| format!("\"{}\"", String::from_utf8_lossy(item.as_ref())))
+        .collect::<Vec<_>>().join(" ")
+}
+
 fn rdata(record: &Record) -> Result<String, Box<dyn Error>> {
     Ok(match record.data() {
         RData::A(address) => address.0.to_string(),
@@ -11,6 +18,7 @@ fn rdata(record: &Record) -> Result<String, Box<dyn Error>> {
         RData::NS(target) => target.0.to_fqdn(),
         RData::PTR(target) => target.0.to_fqdn(),
         RData::MX(mx) => format!("{} {}", mx.preference(), mx.exchange().to_fqdn()),
+        RData::TXT(txt) => quoted(txt.txt_data()),
         _ => return Err(format!("record type {} is outside the control subset", u16::from(record.rr_type())).into()),
     })
 }

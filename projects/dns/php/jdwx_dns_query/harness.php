@@ -27,6 +27,9 @@ function parsarium_rdata(RR $record): string {
             return parsarium_absolute($record->ptrDName);
         case 'MX':
             return $record->preference . ' ' . parsarium_absolute($record->exchange);
+        case 'TXT':
+            // TXT::rrSet keeps each character-string in $text.
+            return implode(' ', array_map(fn (string $item): string => '"' . $item . '"', $record->text));
     }
     throw new UnexpectedValueException('record type outside the control subset: ' . $record->type);
 }

@@ -33,6 +33,17 @@ static int address_out(FILE *out, const getdns_dict *rdata, const char *key) {
     return 0;
 }
 
+/* Writes text inside a JSON string: quotes and backslashes escaped, other bytes outside
+ * printable ASCII as \u00XX. */
+static void json_text(FILE *out, const unsigned char *text, size_t length) {
+    for (size_t i = 0; i < length; i++) {
+        unsigned char c = text[i];
+        if (c == '"' || c == '\\') { fputc('\\', out); fputc(c, out); }
+        else if (c < 0x20 || c > 0x7e) fprintf(out, "\\u%04x", c);
+        else fputc(c, out);
+    }
+}
+
 static int rdata_out(FILE *out, const getdns_dict *rr, uint32_t type) {
     getdns_dict *rdata = NULL;
     uint32_t preference = 0;
@@ -50,6 +61,21 @@ static int rdata_out(FILE *out, const getdns_dict *rr, uint32_t type) {
         fprintf(out, "%u ", preference);
         status = name_out(out, rdata, "exchange");
         break;
+    case GETDNS_RRTYPE_TXT: {
+        /* getdns lists each character-string of the RDATA under "txt_strings". */
+        getdns_list *strings = NULL;
+        size_t count = 0;
+        if (getdns_dict_get_list(rdata, "txt_strings", &strings) || getdns_list_get_length(strings, &count))
+            return -1;
+        for (size_t i = 0; i < count; i++) {
+            getdns_bindata *item = NULL;
+            if (getdns_list_get_bindata(strings, i, &item)) return -1;
+            fputs(i ? " \\\"" : "\\\"", out);
+            json_text(out, item->data, item->size);
+            fputs("\\\"", out);
+        }
+        break;
+    }
     default:
         return -1;
     }

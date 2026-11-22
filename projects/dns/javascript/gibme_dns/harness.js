@@ -29,7 +29,9 @@ function rdata(record) {
     case 'AAAA': return rfc5952(record.data);
     case 'CNAME': case 'NS': case 'PTR': return absolute(record.data);
     case 'MX': return `${record.data.preference} ${absolute(record.data.exchange)}`;
-    case 'TXT': return record.data.map(item => `"${item}"`).join(' ');
+    // TXT.decode returns an object: each character-string split at its first '=' into key and
+    // value (a repeated key keeps the last value). Each entry prints as TXT.encode writes it back.
+    case 'TXT': return Object.entries(record.data).map(([key, value]) => `"${key}=${value ?? ''}"`).join(' ');
     default: return JSON.stringify(record.data);
   }
 }

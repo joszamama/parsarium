@@ -19,6 +19,9 @@ function parsarium_rdata(\NetDNS2\RR $record): string {
             return parsarium_absolute(strval($record->cname));
         case 15:
             return $record->preference . ' ' . parsarium_absolute(strval($record->exchange));
+        case 16:
+            // TXT::rrSet keeps each character-string as a NetDNS2\Data\Text in $text.
+            return implode(' ', array_map(fn (\NetDNS2\Data $item): string => '"' . $item->value() . '"', $record->text));
     }
     throw new UnexpectedValueException('record type outside the control subset: ' . $record->type->value);
 }

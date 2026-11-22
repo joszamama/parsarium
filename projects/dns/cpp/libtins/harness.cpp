@@ -43,6 +43,18 @@ std::string rdata(const Tins::DNS::resource& record) {
         return absolute(record.data());
     case Tins::DNS::MX:
         return std::to_string(record.preference()) + " " + absolute(record.data());
+    case Tins::DNS::TXT: {
+        // libtins keeps TXT RDATA raw: one or more length-prefixed character-strings.
+        const std::string raw = record.data();
+        std::string text;
+        for (std::size_t at = 0; at < raw.size();) {
+            const std::size_t length = static_cast<unsigned char>(raw[at++]);
+            if (length > raw.size() - at) throw std::runtime_error("bad TXT length");
+            text += (text.empty() ? "\"" : " \"") + raw.substr(at, length) + "\"";
+            at += length;
+        }
+        return text;
+    }
     default:
         throw std::runtime_error("record type outside the control subset");
     }

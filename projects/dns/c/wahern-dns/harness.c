@@ -28,6 +28,17 @@ static int name_out(FILE *out, unsigned short at, struct dns_packet *P) {
     return 0;
 }
 
+/* Writes text inside a JSON string: quotes and backslashes escaped, other bytes outside
+ * printable ASCII as \u00XX. */
+static void json_text(FILE *out, const unsigned char *text, size_t length) {
+    for (size_t i = 0; i < length; i++) {
+        unsigned char c = text[i];
+        if (c == '"' || c == '\\') { fputc('\\', out); fputc(c, out); }
+        else if (c < 0x20 || c > 0x7e) fprintf(out, "\\u%04x", c);
+        else fputc(c, out);
+    }
+}
+
 static int rdata_out(FILE *out, struct dns_rr *rr, struct dns_packet *P) {
     union dns_any any;
     char text[sizeof(any) * 2];
@@ -51,6 +62,10 @@ static int rdata_out(FILE *out, struct dns_rr *rr, struct dns_packet *P) {
     }
     case DNS_T_A: case DNS_T_AAAA:
         fwrite(text, 1, length, out);
+        break;
+    case DNS_T_TXT:
+        /* dns_txt_parse joins the character-strings; dns_any_print quotes the result. */
+        json_text(out, (const unsigned char *)text, length);
         break;
     default:
         return -1;

@@ -23,6 +23,9 @@ def rdata(answer) -> str:
         return absolute(content.ptrname)
     if rtype == 15:
         return f"{int(content.preference)} {absolute(content.exchange)}"
+    if rtype == 16:
+        # pydns.content.TXT keeps one text blob.
+        return '"' + bytes(content.text).decode("latin-1") + '"'
     raise ValueError(f"record type {rtype} is outside the control subset")
 
 

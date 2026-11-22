@@ -23,6 +23,17 @@ static int rdf_text(FILE *out, const ldns_rdf *rdf, int is_name) {
     return 0;
 }
 
+/* Writes text inside a JSON string: quotes and backslashes escaped, other bytes outside
+ * printable ASCII as \u00XX. */
+static void json_text(FILE *out, const unsigned char *text, size_t length) {
+    for (size_t i = 0; i < length; i++) {
+        unsigned char c = text[i];
+        if (c == '"' || c == '\\') { fputc('\\', out); fputc(c, out); }
+        else if (c < 0x20 || c > 0x7e) fprintf(out, "\\u%04x", c);
+        else fputc(c, out);
+    }
+}
+
 static int rdata_out(FILE *out, const ldns_rr *rr) {
     int status = 0;
     fputc('"', out);
@@ -40,6 +51,16 @@ static int rdata_out(FILE *out, const ldns_rr *rr) {
         status = rdf_text(out, ldns_rr_rdf(rr, 0), 0);
         fputc(' ', out);
         status |= rdf_text(out, ldns_rr_rdf(rr, 1), 1);
+        break;
+    case LDNS_RR_TYPE_TXT:
+        /* ldns keeps each character-string as one rdf; ldns_rdf2str prints it quoted. */
+        for (size_t i = 0; i < ldns_rr_rd_count(rr); i++) {
+            char *text = ldns_rdf2str(ldns_rr_rdf(rr, i));
+            if (!text) return -1;
+            if (i) fputc(' ', out);
+            json_text(out, (const unsigned char *)text, strlen(text));
+            free(text);
+        }
         break;
     default:
         return -1;

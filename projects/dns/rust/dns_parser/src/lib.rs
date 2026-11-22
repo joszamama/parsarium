@@ -9,6 +9,13 @@ fn absolute(name: String) -> String {
 
 /// dns-parser's ResourceRecord carries no numeric type field; the decoded RData variant
 /// selects it, so the harness maps the variant to its RFC 1035/3596 type number.
+/// TXT character-strings as `"<string>"` separated by spaces, the form the other DNS
+/// harnesses print.
+fn quoted<T: AsRef<[u8]>>(items: impl IntoIterator<Item = T>) -> String {
+    items.into_iter().map(|item| format!("\"{}\"", String::from_utf8_lossy(item.as_ref())))
+        .collect::<Vec<_>>().join(" ")
+}
+
 fn rdata(record: &ResourceRecord) -> Result<(u16, String), Box<dyn Error>> {
     Ok(match &record.data {
         RData::A(a) => (1, a.0.to_string()),
@@ -17,6 +24,7 @@ fn rdata(record: &ResourceRecord) -> Result<(u16, String), Box<dyn Error>> {
         RData::NS(ns) => (2, absolute(ns.0.to_string())),
         RData::PTR(ptr) => (12, absolute(ptr.0.to_string())),
         RData::MX(mx) => (15, format!("{} {}", mx.preference, absolute(mx.exchange.to_string()))),
+        RData::TXT(txt) => (16, quoted(txt.iter())),
         _ => return Err("record data outside the control subset".into()),
     })
 }
