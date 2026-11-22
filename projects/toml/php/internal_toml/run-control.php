@@ -15,10 +15,10 @@ $flags = JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE;
 $expectations = json_decode(file_get_contents(__DIR__ . '/target.json'), true, 512, JSON_THROW_ON_ERROR)
     ['expected_output_by_control_sha256'];
 $digest = hash('sha256', $data);
-if (!array_key_exists($digest, $expectations)) { throw new RuntimeException('unknown valid control'); }
 // Typed-tree comparison: table keys are sorted on both sides (TOML key order is not significant).
-$expected = json_encode(parsarium_canonical($expectations[$digest]), $flags);
-if (json_encode($observed, $flags) !== $expected) {
+// Any other valid input reports the typed tree the parser produced in the mismatch message.
+if (!array_key_exists($digest, $expectations)
+        || json_encode($observed, $flags) !== json_encode(parsarium_canonical($expectations[$digest]), $flags)) {
     throw new RuntimeException('control mismatch: ' . json_encode($observed, $flags));
 }
 // The documented array API must agree with the AST walk's values (outside coverage).

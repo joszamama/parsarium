@@ -41,7 +41,7 @@ function parsarium_seconds(DateTimeInterface $value): string {
 }
 
 // Type-tags one internal/toml AST value node (the library's typed value, not the input text).
-function parsarium_tag(Value $value): array {
+function parsarium_tag(Value $value): array|stdClass {
     return match (true) {
         $value instanceof StringValue => ['type' => 'string', 'value' => $value->value],
         $value instanceof IntegerValue => ['type' => 'integer', 'value' => (string) $value->value],
@@ -59,7 +59,7 @@ function parsarium_tag(Value $value): array {
         $value instanceof LocalTimeValue => ['type' => 'time-local', 'value' => str_contains($value->value, '.')
             ? rtrim(rtrim($value->value, '0'), '.') : $value->value],
         $value instanceof ArrayValue => array_map('parsarium_tag', $value->elements),
-        $value instanceof InlineTableValue => array_map('parsarium_tag', $value->pairs),
+        $value instanceof InlineTableValue => $value->pairs === [] ? new stdClass() : array_map('parsarium_tag', $value->pairs),
         default => throw new UnexpectedValueException('unexpected value node: ' . get_debug_type($value)),
     };
 }
@@ -115,8 +115,10 @@ function parsarium_project(mixed $tree): mixed {
     return $tree instanceof Value ? $tree->toPhpValue() : array_map('parsarium_project', $tree);
 }
 
-function parsarium_typed(mixed $tree): array {
-    return $tree instanceof Value ? parsarium_tag($tree) : array_map('parsarium_typed', $tree);
+// An empty table is an empty stdClass so it prints as {} (a PHP empty array would print as []).
+function parsarium_typed(mixed $tree): array|stdClass {
+    if ($tree instanceof Value) { return parsarium_tag($tree); }
+    return $tree === [] ? new stdClass() : array_map('parsarium_typed', $tree);
 }
 
 // Recursively sorts table keys (TOML key order is not significant); lists keep their order.
@@ -127,7 +129,7 @@ function parsarium_canonical(mixed $tree): mixed {
     return $tree;
 }
 
-function parsarium_parse(string $input): array {
+function parsarium_parse(string $input): array|stdClass {
     if ($input === '' || strlen($input) > (1 << 20)) {
         throw new InvalidArgumentException('input outside harness limit');
     }

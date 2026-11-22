@@ -63,11 +63,12 @@ function parsarium_value(ValueNode $node): array {
 
 // Walks the documented node tree from Parser::parseToNode: TableNode (and InlineTableNode) entries,
 // ArrayNode elements (arrays and arrays of tables) and typed ValueNode leaves.
-function parsarium_typed(NodeInterface $node): array {
+// An empty table is an empty stdClass so it prints as {} (a PHP empty array would print as []).
+function parsarium_typed(NodeInterface $node): array|stdClass {
     if ($node instanceof TableNode) {
         $result = [];
         foreach ($node->getEntries() as $entry) { $result[$entry->key] = parsarium_typed($entry->value); }
-        return $result;
+        return $result === [] ? new stdClass() : $result;
     }
     if ($node instanceof ArrayNode) { return array_map('parsarium_typed', $node->getElements()); }
     if ($node instanceof ValueNode) { return parsarium_value($node); }
@@ -82,7 +83,7 @@ function parsarium_canonical(mixed $tree): mixed {
     return $tree;
 }
 
-function parsarium_parse(string $input): array {
+function parsarium_parse(string $input): array|stdClass {
     if ($input === '' || strlen($input) > (1 << 20)) {
         throw new InvalidArgumentException('input outside harness limit');
     }

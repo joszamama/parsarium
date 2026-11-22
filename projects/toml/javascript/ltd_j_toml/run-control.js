@@ -22,7 +22,6 @@ const observedText = child.stdout.trim();
 const observed = JSON.parse(observedText);
 const digest = crypto.createHash('sha256').update(fs.readFileSync('/input/control')).digest('hex');
 const expected = JSON.parse(fs.readFileSync('/work/expected-trees.json', 'utf8'))[digest];
-if (!expected) throw new Error(`unknown control ${digest}`);
 const canonical = node => JSON.stringify(sortKeys(node));
 function sortKeys(node) {
   if (Array.isArray(node)) return node.map(sortKeys);
@@ -31,7 +30,8 @@ function sortKeys(node) {
   }
   return node;
 }
-if (canonical(observed) !== canonical(expected.tree)) {
+// Any other valid input reports the typed tree the parser produced in the mismatch message.
+if (!expected || canonical(observed) !== canonical(expected.tree)) {
   throw new Error(`control typed tree mismatch: ${observedText}`);
 }
 
