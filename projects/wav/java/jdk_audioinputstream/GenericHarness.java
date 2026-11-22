@@ -67,7 +67,12 @@ public final class GenericHarness {
                 }
                 case "audio_input_stream": {
                     try (AudioInputStream parsed = AudioSystem.getAudioInputStream(file.toFile())) {
-                        int sampleBytes = parsed.readNBytes(8).length;
+                        // AudioInputStream returns whole frames only, and a read
+                        // shorter than one frame returns 0, so ask for the whole
+                        // frames within the first 8 bytes (at least one frame).
+                        int frameSize = parsed.getFormat().getFrameSize();
+                        int request = frameSize <= 0 ? 8 : frameSize > 8 ? frameSize : 8 - 8 % frameSize;
+                        int sampleBytes = parsed.readNBytes(request).length;
                         return String.format("{\"sample_rate\":%d,\"channels\":%d,\"frames\":%d,\"sample_bytes\":%d}",
                             (int) parsed.getFormat().getSampleRate(),
                             parsed.getFormat().getChannels(), parsed.getFrameLength(), sampleBytes);

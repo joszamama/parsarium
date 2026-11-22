@@ -20,15 +20,16 @@ bool parse_data(const std::uint8_t *data, std::size_t size, Result *result) {
     close(fd);
     bool ok = false;
     sf::SoundBuffer buffer;
-    if (buffer.loadFromFile(path) && buffer.getChannelCount() == 1 && buffer.getSampleCount() >= 4) {
+    // SFML reports its own load errors on sf::err() (stderr by default).
+    if (buffer.loadFromFile(path)) {
         const std::int16_t *pcm = buffer.getSamples();
-        if (pcm) {
-            result->sample_rate = buffer.getSampleRate();
-            result->channels = buffer.getChannelCount();
-            result->frames = buffer.getSampleCount() / result->channels;
-            for (int i = 0; i < 4; ++i) result->first[i] = pcm[i];
-            ok = true;
-        }
+        std::uint64_t count = buffer.getSampleCount();
+        result->sample_rate = buffer.getSampleRate();
+        result->channels = buffer.getChannelCount();
+        result->frames = result->channels ? count / result->channels : 0;
+        result->sample_count = pcm ? static_cast<unsigned>(count < 4 ? count : 4) : 0;
+        for (unsigned i = 0; i < result->sample_count; ++i) result->first[i] = pcm[i];
+        ok = true;
     }
     unlink(path);
     return ok;

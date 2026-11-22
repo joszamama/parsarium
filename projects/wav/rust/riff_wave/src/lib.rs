@@ -7,9 +7,24 @@ fn parse_package(package: &str, path: &Path) -> Result<serde_json::Value, Box<dy
     let (sample_rate, channels, samples): (u32, u16, usize) = match package {
         "riff-wave" => {
             let mut reader = riff_wave::WaveReader::new(File::open(path)?)?;
-            let values: Vec<i16> = (0..4).map(|_| reader.read_sample_i16()).collect::<Result<_, _>>()?;
-            assert_eq!(values, [0, 1000, -1000, 0]);
-            (reader.pcm_format.sample_rate, reader.pcm_format.num_channels, values.len())
+            // WaveReader does not keep the data chunk length: it reads samples of
+            // the header's bit depth until the input ends, so count those.
+            let bits = reader.pcm_format.bits_per_sample;
+            let mut count = 0usize;
+            loop {
+                let read = match bits {
+                    8 => reader.read_sample_u8().map(|_| ()),
+                    16 => reader.read_sample_i16().map(|_| ()),
+                    24 => reader.read_sample_i24().map(|_| ()),
+                    _ => reader.read_sample_i32().map(|_| ()),
+                };
+                match read {
+                    Ok(()) => count += 1,
+                    Err(error) if error.kind() == std::io::ErrorKind::UnexpectedEof => break,
+                    Err(error) => return Err(error.into()),
+                }
+            }
+            (reader.pcm_format.sample_rate, reader.pcm_format.num_channels, count)
         }
         _ => return Err(format!("unknown package: {package}").into()),
     };

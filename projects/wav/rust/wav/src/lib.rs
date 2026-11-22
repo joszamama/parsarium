@@ -7,9 +7,14 @@ fn parse_package(package: &str, path: &Path) -> Result<serde_json::Value, Box<dy
     let (sample_rate, channels, samples): (u32, u16, usize) = match package {
         "wav" => {
             let (header, data) = wav::read(&mut File::open(path)?)?;
-            let values = data.as_sixteen().ok_or("expected 16-bit PCM")?;
-            assert_eq!(values, &[0, 1000, -1000, 0]);
-            (header.sampling_rate, header.channel_count, values.len())
+            let count = match &data {
+                wav::BitDepth::Eight(values) => values.len(),
+                wav::BitDepth::Sixteen(values) => values.len(),
+                wav::BitDepth::TwentyFour(values) => values.len(),
+                wav::BitDepth::ThirtyTwoFloat(values) => values.len(),
+                wav::BitDepth::Empty => 0,
+            };
+            (header.sampling_rate, header.channel_count, count)
         }
         _ => return Err(format!("unknown package: {package}").into()),
     };

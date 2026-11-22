@@ -13,11 +13,17 @@ public final class WavAdapter {
             case "wavfile" -> {
                 var reader = com.github.psambit9791.wavfile.WavFile.openWavFile(file);
                 try {
-                    int[] samples = new int[4];
-                    if (reader.readFrames(samples, 4) != 4) throw new IllegalStateException("four samples required");
-                    System.out.printf("{\"sample_rate\":%d,\"channels\":%d,\"frames\":%d,\"samples\":[%d,%d,%d,%d]}%n",
-                        reader.getSampleRate(), reader.getNumChannels(), reader.getNumFrames(),
-                        samples[0], samples[1], samples[2], samples[3]);
+                    // The first four interleaved samples as the library's integers:
+                    // read enough frames to hold them.
+                    int channels = reader.getNumChannels();
+                    int frames = channels > 0 ? (4 + channels - 1) / channels : 0;
+                    int[] samples = new int[frames * channels];
+                    int read = frames > 0 ? reader.readFrames(samples, frames) : 0;
+                    var first = new StringBuilder();
+                    for (int i = 0; i < Math.min(4, read * channels); i++)
+                        first.append(i == 0 ? "" : ",").append(samples[i]);
+                    System.out.printf("{\"sample_rate\":%d,\"channels\":%d,\"frames\":%d,\"samples\":[%s]}%n",
+                        reader.getSampleRate(), channels, reader.getNumFrames(), first);
                 } finally { reader.close(); }
             }
             case "jaudiotagger" -> {

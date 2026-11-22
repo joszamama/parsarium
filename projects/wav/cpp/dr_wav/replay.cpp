@@ -12,10 +12,15 @@ int main(int argc, char **argv) {
         return 4;
     }
     fclose(file);
-    struct parsarium_wav_result result;
-    if (!parsarium_parse_wav(data, size, &result)) return 5;
-    printf("{\"sample_rate\":%u,\"channels\":%u,\"frames\":%llu,\"samples\":[%d,%d,%d,%d]}\n",
-           result.sample_rate, result.channels, result.frames,
-           result.samples[0], result.samples[1], result.samples[2], result.samples[3]);
+    struct parsarium_wav_result result = {0};
+    if (!parsarium_parse_wav(data, size, &result)) {
+        if (result.error[0]) fprintf(stderr, "%s\n", result.error);
+        return 5;
+    }
+    printf("{\"sample_rate\":%u,\"channels\":%u,\"frames\":%llu,\"samples\":[",
+           result.sample_rate, result.channels, result.frames);
+    for (unsigned i = 0; i < result.sample_count && i < 4; i++)
+        printf("%s%d", i ? "," : "", result.samples[i]);
+    printf("]}\n");
     return 0;
 }

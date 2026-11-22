@@ -85,10 +85,17 @@ public final class WavAdapter {
                 var metadata = com.drew.imaging.wav.WavMetadataReader.readMetadata(file);
                 var wav = metadata.getFirstDirectoryOfType(com.drew.metadata.wav.WavDirectory.class);
                 if (wav == null) throw new IllegalStateException("no WAV directory");
-                System.out.printf("{\"sample_rate\":%d,\"channels\":%d,\"bits\":%d}%n",
-                    wav.getInt(com.drew.metadata.wav.WavDirectory.TAG_SAMPLES_PER_SEC),
-                    wav.getInt(com.drew.metadata.wav.WavDirectory.TAG_CHANNELS),
-                    wav.getInt(com.drew.metadata.wav.WavDirectory.TAG_BITS_PER_SAMPLE));
+                // Report only the tags the WAV directory holds; the reader does not
+                // set every tag for every format.
+                var fields = new java.util.ArrayList<String>();
+                int[] tags = {com.drew.metadata.wav.WavDirectory.TAG_SAMPLES_PER_SEC,
+                    com.drew.metadata.wav.WavDirectory.TAG_CHANNELS,
+                    com.drew.metadata.wav.WavDirectory.TAG_BITS_PER_SAMPLE};
+                String[] names = {"sample_rate", "channels", "bits"};
+                for (int i = 0; i < tags.length; i++)
+                    if (wav.containsTag(tags[i]))
+                        fields.add("\"" + names[i] + "\":" + wav.getInt(tags[i]));
+                System.out.println("{" + String.join(",", fields) + "}");
             }
             default -> throw new IllegalArgumentException("unknown mode: " + mode);
         }

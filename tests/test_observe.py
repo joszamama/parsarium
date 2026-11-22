@@ -232,6 +232,14 @@ class HarnessFrameTests(unittest.TestCase):
                   "    at parsePng (/work/harness.js:12:20)\n")
         self.assertEqual(observe.classify(EXPECTED, 1, "", stderr, {}, False)["class"], "harness_error")
 
+    def test_javascript_module_harness_type_error(self):
+        stderr = ("Error: control replay failed: TypeError: Cannot read properties of undefined (reading 'length')\n"
+                  "    at decoded (file:///work/adapter.mjs:11:37)\n"
+                  "    at parse (file:///work/adapter.mjs:47:14)\n")
+        record = observe.classify(EXPECTED, 1, "", stderr, {}, False)
+        self.assertEqual(record["class"], "harness_error")
+        self.assertIn("/work/adapter.mjs", record["error"])
+
     def test_java_harness_index_error(self):
         stderr = ('Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds\n'
                   "\tat GenericHarness.main(GenericHarness.java:30)\n")
@@ -241,6 +249,35 @@ class HarnessFrameTests(unittest.TestCase):
         stderr = ('Exception in thread "main" java.lang.NullPointerException\n'
                   "\tat org.apache.pdfbox.Foo.bar(Foo.java:3)\n")
         self.assertEqual(observe.classify(EXPECTED, 1, "", stderr, {}, False)["class"], "rejected")
+
+
+GO_PANIC = ("panic: runtime error: index out of range [5] with length 4 [recovered, repanicked]\n\n"
+            "goroutine 7 [running]:\n"
+            "testing.tRunner.func1.2({0x40f040, 0x7ed30d20e000})\n"
+            "\t/usr/local/go/src/testing/testing.go:2123 +0x1a0\n"
+            "testing.tRunner.func1()\n"
+            "\t/usr/local/go/src/testing/testing.go:2126 +0x2c8\n"
+            "panic({0x40f040?, 0x7ed30d20e000?})\n"
+            "\t/usr/local/go/src/runtime/panic.go:859 +0x120\n"
+            "{inner}"
+            "parsarium.local/wav-adapters.run({0x2070cf, 0x19}, {0x202f1b?, 0x24ae87?})\n"
+            "\t/work/adapter.go:36 +0xdc\n"
+            "parsarium.local/wav-adapters.TestControl(0x7ed30d1cc248)\n"
+            "\t/work/harness_test.go:16 +0x3c\n")
+
+
+class GoPanicTests(unittest.TestCase):
+    def test_library_panic_is_rejection(self):
+        stderr = GO_PANIC.replace("{inner}", "github.com/moutend/go-wav.(*File).Int32s(0x7ed30d1bfe50)\n"
+                                  "\t/go/pkg/mod/github.com/moutend/go-wav@v0.0.0/wav.go:141 +0x214\n")
+        record = observe.classify(EXPECTED, 2, "", stderr, {}, False)
+        self.assertEqual(record["class"], "rejected")
+        self.assertIn("index out of range", record["error"])
+
+    def test_adapter_panic_is_harness_error(self):
+        record = observe.classify(EXPECTED, 2, "", GO_PANIC.replace("{inner}", ""), {}, False)
+        self.assertEqual(record["class"], "harness_error")
+        self.assertIn("/work/adapter.go:36", record["error"])
 
 
 class OrderTests(unittest.TestCase):

@@ -301,7 +301,7 @@ def harness_frame(text: str) -> str | None:
         return f"{frames[-1][0]}:{frames[-1][1]}: {final[-1][:300]}"
     # JavaScript: first stack frame after the error line.
     for match in re.finditer(r"^\s*(?:Uncaught )?([\w.$]*(?:Error|Exception)\b[^\n]*)\n"
-                             r"\s+at (?:[^\n(]*\()?(/[^\s():]+)", text, re.MULTILINE):
+                             r"\s+at (?:[^\n(]*\()?(?:file://)?(/[^\s():]+)", text, re.MULTILINE):
         if PROGRAMMING_ERRORS.search(match.group(1)) and own(match.group(2)):
             return f"{match.group(2)}: {match.group(1)[:300]}"
     # Java: first frame is a class in the default package (the harness classes).
@@ -313,11 +313,16 @@ def harness_frame(text: str) -> str | None:
     match = re.search(r"Uncaught ((?:TypeError|Error|ArgumentCountError|DivisionByZeroError)[^\n]*?) in (/\S+):(\d+)", text)
     if match and own(match.group(2)):
         return f"{match.group(2)}:{match.group(3)}: {match.group(1)[:300]}"
-    # Go: panic whose first frame after the goroutine header is harness code.
-    match = re.search(r"panic: ([^\n]*)[\s\S]*?goroutine \d+ \[running\]:\n(?:[^\n]*\n\s+[^\n]*\n)*?"
-                      r"[^\n]*\n\s+(\S*harness[^\s:]*\.go):(\d+)", text)
+    # Go: panic whose innermost frame outside the runtime and testing packages
+    # is harness code (a file under /work/, not a module dependency).
+    match = re.search(r"panic: ([^\n]*)[\s\S]*?goroutine \d+ \[running\]:\n((?:[^\n]*\n\t[^\n]*\n?)*)", text)
     if match and PROGRAMMING_ERRORS.search(match.group(1)):
-        return f"{match.group(2)}:{match.group(3)}: panic: {match.group(1)[:300]}"
+        for function, path, line in re.findall(r"^([^\t\n][^\n]*)\n\t(\S+):(\d+)", match.group(2), re.MULTILINE):
+            if re.match(r"(?:runtime|testing)\.|panic\(", function):
+                continue
+            if own(path):
+                return f"{path}:{line}: panic: {match.group(1)[:300]}"
+            break
     return None
 
 

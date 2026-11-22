@@ -1,6 +1,7 @@
 #include "harness.h"
 #include <sndfile.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 struct memfile { const uint8_t *data; sf_count_t size, pos; };
 static sf_count_t length(void *p) { return ((struct memfile *)p)->size; }
@@ -17,18 +18,31 @@ static sf_count_t readbytes(void *dst, sf_count_t count, void *p) {
 static sf_count_t writebytes(const void *src, sf_count_t count, void *p) { (void)src;(void)count;(void)p;return 0; }
 int parsarium_parse_wav(const uint8_t *data, size_t size, struct parsarium_wav_result *result) {
     if (!data || !result || size == 0 || size > (1u << 20)) return 0;
+    memset(result, 0, sizeof(*result));
     struct memfile input = {data, (sf_count_t)size, 0};
     SF_VIRTUAL_IO io = {length, seek, readbytes, writebytes, tell};
     SF_INFO info = {0};
     SNDFILE *file = sf_open_virtual(&io, SFM_READ, &info, &input);
-    if (!file) return 0;
-    int ok = (info.format & SF_FORMAT_TYPEMASK) == SF_FORMAT_WAV &&
-             info.channels == 1 && info.samplerate == 8000 && info.frames == 4;
-    int16_t samples[4] = {0};
-    if (ok) ok = sf_readf_short(file, samples, 4) == 4;
-    if (ok) { result->sample_rate=info.samplerate; result->channels=info.channels;
-              result->frames=info.frames; memcpy(result->samples,samples,sizeof(samples)); }
-    sf_close(file); return ok;
+    if (!file) {
+        snprintf(result->error, sizeof(result->error), "%s", sf_strerror(NULL));
+        return 0;
+    }
+    result->sample_rate = (unsigned)info.samplerate;
+    result->channels = (unsigned)info.channels;
+    result->frames = (unsigned long long)info.frames;
+    /* The first four interleaved samples, as s16: enough frames to hold them. */
+    if (info.channels > 0) {
+        sf_count_t want = (4 + info.channels - 1) / info.channels;
+        short *buffer = (short *)calloc((size_t)(want * info.channels), sizeof(short));
+        if (buffer) {
+            sf_count_t read = sf_readf_short(file, buffer, want);
+            sf_count_t count = read > 0 ? read * info.channels : 0;
+            result->sample_count = (unsigned)(count < 4 ? count : 4);
+            memcpy(result->samples, buffer, result->sample_count * sizeof(short));
+            free(buffer);
+        }
+    }
+    sf_close(file); return 1;
 }
 int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     struct parsarium_wav_result result; (void)parsarium_parse_wav(data,size,&result); return 0;

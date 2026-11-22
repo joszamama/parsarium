@@ -10,12 +10,14 @@ def parse_data(data: bytes) -> dict:
     if pygame.mixer.get_init() is None:
         pygame.mixer.init(frequency=8000, size=-16, channels=1, allowedchanges=0)
     sound = pygame.mixer.Sound(file=BytesIO(data))
+    # Sound converts the decoded audio to the mixer format opened above, so
+    # sample_rate and channels are the mixer's and the samples are the first
+    # (at most four) samples of the converted audio.
     raw = sound.get_raw()
-    if len(raw) != 8:
-        raise ValueError(f"unexpected decoded sample count: {len(raw) // 2}")
     frequency, _, channels = pygame.mixer.get_init()
+    count = min(4, len(raw) // 2)
     return {
         "sample_rate": frequency,
         "channels": channels,
-        "samples": list(struct.unpack("<4h", raw)),
+        "samples": list(struct.unpack(f"<{count}h", raw[:2 * count])),
     }

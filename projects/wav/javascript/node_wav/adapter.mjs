@@ -5,7 +5,8 @@ export async function parse(name, path) {
 
 if (!name || !path) throw new Error('usage: node adapters/javascript/wav.mjs <package> <WAV path>');
 const bytes = await readFile(path);
-const decoded = (audio) => ({
+// node-wav's decode returns undefined when it finds no data chunk.
+const decoded = (audio) => audio === undefined ? (() => { throw new Error('decode returned no audio'); })() : ({
   sampleRate: audio.sampleRate,
   channels: audio.channelData.length,
   sampleCount: audio.channelData[0].length,

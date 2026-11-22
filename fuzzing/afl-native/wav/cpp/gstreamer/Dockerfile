@@ -7,7 +7,7 @@ RUN curl --fail --location --retry 3 'https://gitlab.freedesktop.org/gstreamer/g
  && echo '6f4074f5bdd071a074220a3642b5861410aa6929c179d903feff4af82d9a05d7  /work/source.tar.bz2' | sha256sum --check \
  && mkdir /work/source && tar -xjf /work/source.tar.bz2 -C /work/source --strip-components=1
 COPY build-source.sh /work/build-source.sh
-RUN python3 -c 'from pathlib import Path; p=Path("/work/build-source.sh"); s=p.read_text().replace("clang","afl-clang-fast"); p.write_text(s)' && chmod +x /work/build-source.sh && /work/build-source.sh
+RUN python3 -c 'from pathlib import Path; p=Path("/work/build-source.sh"); s=p.read_text().replace("clang++","AFL_CXX").replace("clang","afl-clang-fast").replace("AFL_CXX","afl-clang-fast++"); p.write_text(s)' && chmod +x /work/build-source.sh && /work/build-source.sh
 COPY harness.cpp harness.h replay.cpp build.sh /work/
 RUN python3 -c 'from pathlib import Path; p=Path("/work/build.sh"); s=p.read_text(); s=s.replace("clang++","AFL_CXX").replace("clang","afl-clang-fast").replace("AFL_CXX","afl-clang-fast++").replace(",undefined",",undefined -fno-sanitize=function"); p.write_text(s)' && chmod +x /work/build.sh && /work/build.sh \
  && { clang --version | head -1; llvm-cov --version | head -1; } > /work/toolchain.txt

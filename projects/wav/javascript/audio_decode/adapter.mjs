@@ -5,11 +5,13 @@ export async function parse(name, path) {
 
 if (!name || !path) throw new Error('usage: node adapters/javascript/wav.mjs <package> <WAV path>');
 const bytes = await readFile(path);
+// A decoder may return no channels (audio-decode's empty result); then there
+// are no samples to count.
 const decoded = (audio) => ({
   sampleRate: audio.sampleRate,
   channels: audio.channelData.length,
-  sampleCount: audio.channelData[0].length,
-  sampleSigns: Array.from(audio.channelData[0], (value) => Math.sign(value))
+  sampleCount: audio.channelData.length ? audio.channelData[0].length : 0,
+  sampleSigns: audio.channelData.length ? Array.from(audio.channelData[0], (value) => Math.sign(value)) : []
 });
 const header = (sampleRate, channels, bitsPerSample) => ({ sampleRate, channels, bitsPerSample });
 const fromWaveFile = (wave) => header(wave.fmt.sampleRate, wave.fmt.numChannels, wave.fmt.bitsPerSample);

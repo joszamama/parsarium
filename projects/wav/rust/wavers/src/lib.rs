@@ -7,7 +7,6 @@ fn parse_package(package: &str, path: &Path) -> Result<serde_json::Value, Box<dy
     let (sample_rate, channels, samples): (u32, u16, usize) = match package {
         "wavers" => {
             let (values, sample_rate) = wavers::read::<i16, _>(path)?;
-            assert_eq!(&*values, &[0, 1000, -1000, 0]);
             let reader = wavers::Wav::<i16>::from_path(path)?;
             (sample_rate as u32, reader.n_channels(), values.len())
         }

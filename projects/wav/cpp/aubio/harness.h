@@ -8,6 +8,8 @@ struct parsarium_wav_result {
     unsigned int channels;
     unsigned long long frames;
     int16_t samples[4];
+    unsigned int sample_count; /* first samples read, at most 4 */
+    char error[256]; /* library error message when parsing fails */
 };
 
 int parsarium_parse_wav(const uint8_t *data, size_t size,

@@ -10,6 +10,8 @@ int main(int argc, char **argv) {
     std::fclose(file);
     Result result{};
     if (!parse_data(data, size, &result)) return 5;
-    std::printf("{\"sample_rate\":%u,\"channels\":%u,\"frames\":%llu,\"samples\":[%d,%d,%d,%d]}\n", result.sample_rate, result.channels, static_cast<unsigned long long>(result.frames), result.first[0], result.first[1], result.first[2], result.first[3]);
+    std::printf("{\"sample_rate\":%u,\"channels\":%u,\"frames\":%llu,\"samples\":[", result.sample_rate, result.channels, static_cast<unsigned long long>(result.frames));
+    for (unsigned i = 0; i < result.sample_count && i < 4; ++i) std::printf("%s%d", i ? "," : "", result.first[i]);
+    std::printf("]}\n");
     return 0;
 }

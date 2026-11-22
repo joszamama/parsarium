@@ -98,6 +98,10 @@ RUN mkdir /work/lib \
     && echo 'aed1ba04957299d7c9fbdbca8bb38123f9680136bdf4f5890d7b6acd2e744795  /work/lib/musicg-1.4.2.2.jar' | sha256sum --check \
     && curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/com/drewnoakes/metadata-extractor/2.19.0/metadata-extractor-2.19.0.jar -o /work/lib/metadata-extractor-2.19.0.jar \
     && echo 'e51bb454ed08ea2bfcc3ad147d088ad1aa73a999e0072563f8ae50021a2fcadb  /work/lib/metadata-extractor-2.19.0.jar' | sha256sum --check
+# JHOVE 1.20 calls javax.xml.bind.DatatypeConverter, which Java 11 and later
+# no longer ship; jaxb-api carries it (with its default implementation).
+RUN curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.jar -o /work/lib/jaxb-api-2.3.1.jar \
+    && echo '88b955a0df57880a26a74708bc34f74dcaf8ebf4e78843a28b50eae945732b06  /work/lib/jaxb-api-2.3.1.jar' | sha256sum --check
 RUN curl --fail --location --retry 3 https://repo.maven.apache.org/maven2/org/openpreservation/jhove/jhove-modules/1.20.1/jhove-modules-1.20.1-sources.jar -o /work/parser-sources.jar \
     && echo 'bd909aeb01062c6d2968afa88a9bc8e0b434c0733a127ecf9f77f07ff72d326e  /work/parser-sources.jar' | sha256sum --check \
     && mkdir /work/parser-source && unzip -qo /work/parser-sources.jar -d /work/parser-source
