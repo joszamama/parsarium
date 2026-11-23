@@ -41,11 +41,11 @@ public final class PdalPlyAdapter {
                 PointView view = views.next();
                 try {
                     int points = view.length();
-                    if (points < 2) throw new IOException("fewer than two points");
-                    double secondX = view.getDouble(1, "X");
-                    double lastY = view.getDouble(points - 1, "Y");
-                    System.out.printf("{\"points\":%d,\"second_x\":%.1f,\"last_y\":%.1f}%n",
-                            points, secondX, lastY);
+                    // second_x and last_y are reported only when the view has those points.
+                    StringBuilder out = new StringBuilder(String.format("{\"points\":%d", points));
+                    if (points > 1) out.append(String.format(",\"second_x\":%.1f", view.getDouble(1, "X")));
+                    if (points > 0) out.append(String.format(",\"last_y\":%.1f", view.getDouble(points - 1, "Y")));
+                    System.out.println(out.append('}'));
                 } finally {
                     view.close();
                 }

@@ -1,13 +1,14 @@
 package org.parsarium;
 
 import java.io.File;
+import java.io.IOException;
 import scalismo.geometry._3D;
 import scalismo.mesh.TriangleCell;
 import scalismo.mesh.TriangleMesh;
 import scala.util.Try;
 
 public final class ScalismoVtkPlyAdapter {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length != 1) {
             throw new IllegalArgumentException("Expected a local ASCII PLY file path");
         }
@@ -16,8 +17,9 @@ public final class ScalismoVtkPlyAdapter {
         scalismo.vtk.initialize.apply(false, 0L);
         Try<TriangleMesh<_3D>> result = scalismo.vtk.io.MeshIO.readMesh(new File(args[0]));
         if (result.isFailure()) {
-            System.out.println("{\"rejected\":\"Failure\"}");
-            return;
+            // readMesh reports a read error as a Failure; its exception is the reason.
+            Throwable failure = result.failed().get();
+            throw new IOException(failure.toString(), failure);
         }
         TriangleMesh<_3D> mesh = result.get();
         int triangles = mesh.triangulation().triangles().size();
