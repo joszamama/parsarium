@@ -73,17 +73,26 @@ static bool walk(const tinyxml2::XMLElement *element, scope_map scope, int64_t d
 }
 
 int parsarium_parse_xml(const uint8_t *data, size_t size,
-                        parsarium_xml_result *result) {
+                        parsarium_xml_result *result, std::string *error) {
     if (!data || !result || size == 0 || size > (1u << 20)) return 0;
     *result = parsarium_xml_result();
     tinyxml2::XMLDocument document;
     // Documented local byte-buffer API with an explicit buffer length.
-    if (document.Parse(reinterpret_cast<const char *>(data), size) != tinyxml2::XML_SUCCESS)
+    if (document.Parse(reinterpret_cast<const char *>(data), size) != tinyxml2::XML_SUCCESS) {
+        if (error) *error = document.ErrorStr();
         return 0;
+    }
     const tinyxml2::XMLElement *root = document.RootElement();
-    if (!root) return 0;
+    if (!root) {
+        if (error) *error = "TinyXML-2 parsed a document without a root element";
+        return 0;
+    }
     std::set<std::string> uris;
     if (!walk(root, scope_map(), 1, result, &uris)) {
+        // TinyXML-2 keeps qualified names as written; the harness resolves them
+        // and stops at a name that is not namespace-well-formed.
+        if (error) *error = "namespace resolution failed: unbound or malformed prefix, empty prefix "
+                            "declaration, or duplicate expanded attribute name";
         *result = parsarium_xml_result();
         return 0;
     }

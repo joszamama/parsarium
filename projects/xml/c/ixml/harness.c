@@ -113,8 +113,39 @@ static void array(struct buffer *b, const char *key, const struct list *l, int *
     append(b, "]", 1, ok);
 }
 
+/* IXML reports failures only as an IXML_ERRORCODE; keep its name for the caller. */
+static char last_error[96];
+const char *parsarium_xml_error(void) { return last_error; }
+static const char *code_name(int code) {
+    switch (code) {
+    case IXML_INDEX_SIZE_ERR: return "IXML_INDEX_SIZE_ERR";
+    case IXML_DOMSTRING_SIZE_ERR: return "IXML_DOMSTRING_SIZE_ERR";
+    case IXML_HIERARCHY_REQUEST_ERR: return "IXML_HIERARCHY_REQUEST_ERR";
+    case IXML_WRONG_DOCUMENT_ERR: return "IXML_WRONG_DOCUMENT_ERR";
+    case IXML_INVALID_CHARACTER_ERR: return "IXML_INVALID_CHARACTER_ERR";
+    case IXML_NO_DATA_ALLOWED_ERR: return "IXML_NO_DATA_ALLOWED_ERR";
+    case IXML_NO_MODIFICATION_ALLOWED_ERR: return "IXML_NO_MODIFICATION_ALLOWED_ERR";
+    case IXML_NOT_FOUND_ERR: return "IXML_NOT_FOUND_ERR";
+    case IXML_NOT_SUPPORTED_ERR: return "IXML_NOT_SUPPORTED_ERR";
+    case IXML_INUSE_ATTRIBUTE_ERR: return "IXML_INUSE_ATTRIBUTE_ERR";
+    case IXML_INVALID_STATE_ERR: return "IXML_INVALID_STATE_ERR";
+    case IXML_SYNTAX_ERR: return "IXML_SYNTAX_ERR";
+    case IXML_INVALID_MODIFICATION_ERR: return "IXML_INVALID_MODIFICATION_ERR";
+    case IXML_NAMESPACE_ERR: return "IXML_NAMESPACE_ERR";
+    case IXML_INVALID_ACCESS_ERR: return "IXML_INVALID_ACCESS_ERR";
+    case IXML_NO_SUCH_FILE: return "IXML_NO_SUCH_FILE";
+    case IXML_INSUFFICIENT_MEMORY: return "IXML_INSUFFICIENT_MEMORY";
+    case IXML_FILE_DONE: return "IXML_FILE_DONE";
+    case IXML_INVALID_PARAMETER: return "IXML_INVALID_PARAMETER";
+    case IXML_FAILED: return "IXML_FAILED";
+    case IXML_INVALID_ITEM_NUMBER: return "IXML_INVALID_ITEM_NUMBER";
+    default: return "unknown IXML_ERRORCODE";
+    }
+}
+
 /* Parse the whole byte buffer with ixmlParseBufferEx, then walk IXML's DOM. */
 char *parsarium_parse_xml(const uint8_t *data, size_t size) {
+    last_error[0] = 0;
     if (!data || !size || size > (1u << 20)) return NULL;
     /* ixmlParseBufferEx takes a NUL-terminated string, so input stops at the first NUL byte. */
     char *text = malloc(size + 1);
@@ -123,7 +154,11 @@ char *parsarium_parse_xml(const uint8_t *data, size_t size) {
     IXML_Document *doc = NULL;
     int err = ixmlParseBufferEx(text, &doc);
     free(text);
-    if (err != IXML_SUCCESS || !doc) { if (doc) ixmlDocument_free(doc); return NULL; }
+    if (err != IXML_SUCCESS || !doc) {
+        snprintf(last_error, sizeof(last_error), "ixmlParseBufferEx failed: %s (%d)", code_name(err), err);
+        if (doc) ixmlDocument_free(doc);
+        return NULL;
+    }
     struct summary s = {0}; s.ok = 1;
     walk(&s, ixmlNode_getFirstChild((IXML_Node *)doc), 0);
     flush(&s);
@@ -136,6 +171,8 @@ char *parsarium_parse_xml(const uint8_t *data, size_t size) {
         append(&b, num, strlen(num), &ok); quote(&b, s.elements.items[0], &ok);
         append(&b, ",", 1, &ok); array(&b, "text", &s.text, &ok); append(&b, "}", 1, &ok);
         if (ok) out = b.data; else free(b.data);
+    } else if (s.ok) {
+        snprintf(last_error, sizeof(last_error), "ixmlParseBufferEx returned a document without an element");
     }
     release(&s.elements); release(&s.attributes); release(&s.text);
     free(s.run.data);

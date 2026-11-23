@@ -116,9 +116,48 @@ switch (name) {
     break;
   }
   case 'fast-png': {
-    const { decode } = await import('fast-png');
+    // decode returns samples at the file's bit depth: 16-bit values, packed
+    // sub-byte rows, palette indices and gray/gray+alpha/RGB channel counts.
+    // Turn the first two pixels into 8-bit straight RGBA from what decode
+    // returned: an indexed image (one channel with a palette; a truecolour
+    // image may carry a suggested PLTE) through the library's
+    // convertIndexedToRgb, which already carries tRNS alpha, and otherwise
+    // depth, channels and the tRNS colour key, keeping the high byte of a
+    // 16-bit sample. An 8-bit RGBA image is passed through unchanged.
+    const { decode, convertIndexedToRgb } = await import('fast-png');
     const image = decode(bytes);
-    result = { width: image.width, height: image.height, rgba: rgba(image.data) };
+    const count = Math.min(2, image.width * image.height);
+    const out = [];
+    if (image.palette && image.channels === 1) {
+      const colours = convertIndexedToRgb(image);
+      const size = image.palette[0].length;
+      for (let i = 0; i < count; i++) {
+        const colour = Array.from(colours.slice(i * size, i * size + size));
+        out.push(...(size === 4 ? colour : [...colour, 255]));
+      }
+    } else {
+      const { width, depth, channels, data } = image;
+      const rowSamples = width * channels;
+      const rowLength = depth < 8 ? Math.ceil(rowSamples * depth / 8) : rowSamples;
+      const sample = (pixel, channel) => {
+        const row = Math.floor(pixel / width);
+        const index = (pixel % width) * channels + channel;
+        if (depth >= 8) return data[row * rowLength + index];
+        const bit = index * depth;
+        return (data[row * rowLength + (bit >> 3)] >> (8 - depth - (bit & 7))) & ((1 << depth) - 1);
+      };
+      const eight = (value) => depth === 16 ? value >> 8 : depth < 8 ? value * 255 / ((1 << depth) - 1) : value;
+      const key = image.transparency && image.transparency.length === (channels >= 3 ? 3 : 1)
+        ? Array.from(image.transparency) : null;
+      for (let i = 0; i < count; i++) {
+        const raw = Array.from({ length: channels }, (_, channel) => sample(i, channel));
+        const colour = channels >= 3 ? raw.slice(0, 3) : [raw[0], raw[0], raw[0]];
+        let alpha = channels === 2 || channels === 4 ? eight(raw[channels - 1]) : 255;
+        if (key && key.every((value, channel) => value === raw[channel])) alpha = 0;
+        out.push(...colour.map(eight), alpha);
+      }
+    }
+    result = { width: image.width, height: image.height, rgba: out };
     break;
   }
   case 'upng-js': {

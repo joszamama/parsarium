@@ -14,7 +14,11 @@ int main(int argc, char **argv) {
     }
     fclose(file);
     std::string json;
-    if (!parsarium_parse_xml(input, size, &json)) return 5;
+    std::string error;
+    if (!parsarium_parse_xml(input, size, &json, &error)) {
+        if (!error.empty()) fprintf(stderr, "%s\n", error.c_str());
+        return 5;
+    }
     printf("%s\n", json.c_str());
     return 0;
 }

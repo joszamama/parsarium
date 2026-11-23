@@ -46,9 +46,12 @@ def parse(name, path):
         return {"pages": len(doc.tree.findall(".//LTPage")),
                 "text": text(doc.tree.xpath("string(.//LTTextLineHorizontal)"))}
     if name == "pdf2image":
-        from pdf2image import convert_from_path
+        from pdf2image import convert_from_path, pdfinfo_from_path
+        # Render page 1 for its size; the page count comes from pdf2image's
+        # pdfinfo_from_path, not from the one page rendered.
         pages = convert_from_path(path, first_page=1, last_page=1)
-        return {"pages": len(pages), "width": pages[0].width, "height": pages[0].height}
+        info = pdfinfo_from_path(path)
+        return {"pages": info["Pages"], "width": pages[0].width, "height": pages[0].height}
     if name == "PyPDF4":
         from PyPDF4 import PdfFileReader
         with open(path, "rb") as stream:

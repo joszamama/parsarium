@@ -42,11 +42,14 @@ switch (name) {
     const zip = await yauzl.fromBufferPromise(bytes);
     const entries = [];
     let content;
+    // Every file entry is still read through yauzl; content is the first
+    // one's, the entry that entries[0] names.
     for await (const entry of zip.eachEntry()) {
       if (entry.fileName.endsWith('/')) continue;
       entries.push(entry.fileName);
       const stream = await zip.openReadStreamPromise(entry);
-      content = await streamText(stream);
+      const text = await streamText(stream);
+      if (entries.length === 1) content = text;
     }
     result = { entries, content };
     break;

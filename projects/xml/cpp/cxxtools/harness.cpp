@@ -55,7 +55,7 @@ void array(std::string *out, const char *key, const std::vector<std::string> &it
 
 }  // namespace
 
-int parsarium_parse_xml(const uint8_t *data, size_t size, std::string *json) {
+int parsarium_parse_xml(const uint8_t *data, size_t size, std::string *json, std::string *error) {
     if (!data || !json || size == 0 || size > (1u << 20)) return 0;
     std::vector<std::string> elements, attributes, text;
     std::string run;
@@ -88,11 +88,16 @@ int parsarium_parse_xml(const uint8_t *data, size_t size, std::string *json) {
                 break;
             }
         }
-    } catch (const std::exception &) {
+    } catch (const std::exception &failure) {
+        if (error) *error = failure.what();
         return 0;
     }
     flush(&run, &text);
-    if (elements.empty() || depth != 0) return 0;
+    if (elements.empty() || depth != 0) {
+        if (error) *error = elements.empty() ? "XmlReader reached EndDocument without an element"
+                                             : "XmlReader reached EndDocument inside an open element";
+        return 0;
+    }
     std::string out = "{";
     array(&out, "attributes", attributes);
     out.push_back(',');

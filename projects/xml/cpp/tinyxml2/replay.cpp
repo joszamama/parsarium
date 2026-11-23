@@ -38,7 +38,19 @@ int main(int argc, char **argv) {
     }
     fclose(file);
     parsarium_xml_result result;
-    if (!parsarium_parse_xml(input, size, &result)) return 5;
+    std::string error;
+    if (!parsarium_parse_xml(input, size, &result, &error)) {
+        // ErrorStr() quotes the failing node's text, which can span lines;
+        // print it on one line, each run of line breaks and tabs as one space.
+        std::string line;
+        for (char c : error) {
+            bool brk = c == '\n' || c == '\r' || c == '\t';
+            if (!brk) line += c;
+            else if (line.empty() || line.back() != ' ') line += ' ';
+        }
+        if (!line.empty()) fprintf(stderr, "%s\n", line.c_str());
+        return 5;
+    }
     fputs("{\"attributes\":", stdout);
     string_list(result.attributes);
     fputs(",\"elements\":", stdout);
