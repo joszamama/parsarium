@@ -10,9 +10,9 @@ ENV PARSARIUM_SUBJECT_PREFIX=/work/pngj-sources/ar/com/hjg/pngj/
 ENV PARSARIUM_FUZZ_ENTRY=PngjHarness.fuzzerTestOneInput
 ENV PARSARIUM_JAVA_CLASSPATH=/work/classes:/work/pngj.jar
 ENV PARSARIUM_TARGET_CLASS=PngjHarness
-ENV PARSARIUM_JACOCO_INCLUDES=ar.com.hjg.pngj.*
 ENV PARSARIUM_PARSER_JAR=/work/pngj.jar
 ENV PARSARIUM_PARSER_SOURCES=/work/pngj-sources
+ENV PARSARIUM_JACOCO_INCLUDES=ar.com.hjg.pngj.*
 RUN mkdir /work/afl-java-classes && javac -d /work/afl-java-classes /work/JavaCase.java
 RUN AFL_LLVM_INSTRUMENT=CLASSIC afl-clang-fast -O2 /work/afl_proxy.c -ldl -o /work/afl_proxy
 ENTRYPOINT ["/work/afl_proxy"]

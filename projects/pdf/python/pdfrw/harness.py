@@ -9,8 +9,9 @@ def parse_pdf(data: bytes):
         return None
     reader = PdfReader(fdata=data)
     pages = len(reader.pages)
-    title = str(reader.Info.Title).strip("()") if reader.Info else ""
-    return {"pages": pages, "title": title}
+    # A file without /Info or without /Info /Title has no title: report null, not str(None).
+    title = reader.Info.Title if reader.Info else None
+    return {"pages": pages, "title": None if title is None else str(title).strip("()")}
 
 
 def fuzz_one_input(data: bytes):

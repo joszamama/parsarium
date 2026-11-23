@@ -20,6 +20,9 @@ def child():
         raise SystemExit('BeautifulSoup(..., "xml") did not select LXMLTreeBuilderForXML')
     tracer = trace.Trace(count=True, trace=False)
     observed = tracer.runfunc(parse_xml, Path('/input/control').read_bytes())
+    if observed is None:
+        # With recover=True lxml can return a tree without an element; that is no document.
+        raise SystemExit('BeautifulSoup(..., "xml") built no root element')
     expected_key = 'differential_expected_output' if '--differential' in sys.argv else 'expected_output'
     if observed != CONFIG[expected_key]:
         raise SystemExit(f'control mismatch: {observed!r}')
@@ -44,7 +47,9 @@ def parent():
     child_args = [sys.executable, '/work/run-control.py', '--child']
     if '--differential' in sys.argv:
         child_args.append('--differential')
-    subprocess.run(child_args, env=env, check=True)
+    child_result = subprocess.run(child_args, env=env)
+    if child_result.returncode:
+        sys.exit(child_result.returncode)
     subprocess.run(['llvm-profdata', 'merge', str(OUT / 'control.profraw'), '-o', str(OUT / 'control.profdata')], check=True)
     result = subprocess.run(['llvm-cov', 'export', CONFIG['native_module'], f'-instr-profile={OUT / "control.profdata"}'],
                             capture_output=True, text=True, check=True)

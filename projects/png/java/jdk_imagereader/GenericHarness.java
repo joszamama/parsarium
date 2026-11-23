@@ -19,24 +19,24 @@ public final class GenericHarness {
     private static final String MODE = "imagereader";
     private static final String SUFFIX = ".png";
 
+    // A one-pixel-wide image has no second pixel; report the first only.
     private static String pixels(int width, int height, int first, int second) {
-        return String.format("{\"width\":%d,\"height\":%d,\"pixels\":\"%08x,%08x\"}",
-                             width, height, first, second);
+        String values = width > 1 ? String.format("%08x,%08x", first, second) : String.format("%08x", first);
+        return String.format("{\"width\":%d,\"height\":%d,\"pixels\":\"%s\"}", width, height, values);
     }
 
     private static String imageResult(BufferedImage image) throws Exception {
-        if (image == null || image.getWidth() < 2 || image.getHeight() < 1)
-            throw new IllegalArgumentException("no decoded PNG pixels");
+        if (image == null) throw new IllegalArgumentException("no decoded PNG pixels");
         return pixels(image.getWidth(), image.getHeight(),
-                      image.getRGB(0, 0), image.getRGB(1, 0));
+                      image.getRGB(0, 0), image.getWidth() > 1 ? image.getRGB(1, 0) : 0);
     }
 
     private static String imageResult(Image image) throws Exception {
         if (image == null) throw new IllegalArgumentException("no decoded PNG image");
         int width = image.getWidth(null), height = image.getHeight(null);
-        if (width < 2 || height < 1) throw new IllegalArgumentException("no decoded PNG pixels");
+        if (width < 1 || height < 1) throw new IllegalArgumentException("no decoded PNG pixels");
         int[] argb = new int[2];
-        PixelGrabber grabber = new PixelGrabber(image, 0, 0, 2, 1, argb, 0, 2);
+        PixelGrabber grabber = new PixelGrabber(image, 0, 0, Math.min(width, 2), 1, argb, 0, 2);
         if (!grabber.grabPixels(3000)) throw new IllegalArgumentException("PNG pixel decode timed out");
         return pixels(width, height, argb[0], argb[1]);
     }
