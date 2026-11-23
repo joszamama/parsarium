@@ -5,7 +5,8 @@ function parseZip(data) {
     throw new Error('input size outside harness limit');
   }
   const files = unzipSync(data, { filter: info => info.originalSize <= (1 << 20) });
-  const entries = Object.keys(files).sort();
+  // unzipSync fills the object in central-directory order; keep that order.
+  const entries = Object.keys(files);
   if (entries.length === 0) return { entries, content: '' };
   return {
     entries,

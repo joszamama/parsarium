@@ -5,7 +5,7 @@
 - **License:** MIT OR Apache-2.0
 - **Parsed scope:** Decoded PNG dimensions and first pixel
 - **Underlying family:** image-rs PNG lineage
-- **Local input API:** `Decoder::new(BufReader<Cursor<&[u8]>>).read_info().next_frame()`
+- **Local input API:** `Decoder::new(BufReader<Cursor<&[u8]>>); set_transformations(Transformations::EXPAND); read_info().next_frame()`
 - **Documentation:** [API reference](<https://docs.rs/png/0.18.1/png/>)
 - **Catalog evidence:** [parser record](../../../../data/rust/png/parsers.json) · [control verification](../../../../data/rust/png/verification.json) · [within-ecosystem ranking](../../../../data/rust/png/ranking.md)
 - **Valid control:** [`controls/png/red-green.png`](../../../../controls/png/red-green.png)

@@ -13,7 +13,7 @@ pkg.go.dev Imported by package count.
 | 3 | [github.com/JoshVarga/svgparser](https://pkg.go.dev/github.com/JoshVarga/svgparser@v0.0.0-20200804023048-5eaba627a7d1) | v0.0.0-20200804023048-5eaba627a7d1 | 16 | rects, root | JoshVarga SVG tree parser |
 | 4 | [github.com/rustyoz/svg](https://pkg.go.dev/github.com/rustyoz/svg@v0.0.0-20260625015314-1aeec84fa7e2) | v0.0.0-20260625015314-1aeec84fa7e2 | 11 | height, width | rustyoz SVG parser |
 | 5 | [github.com/boxesandglue/svgreader](https://pkg.go.dev/github.com/boxesandglue/svgreader@v0.0.9) | v0.0.9 | 6 | elements | boxesandglue SVG reader |
-| 6 | [cogentcore.org/core/svg](https://pkg.go.dev/cogentcore.org/core/svg@v0.5.30) | v0.5.30 | 4 | parsed viewBox and two rectangle elements | Goki/Cogent SVG lineage |
+| 6 | [cogentcore.org/core/svg](https://pkg.go.dev/cogentcore.org/core/svg@v0.5.30) | v0.5.30 | 4 | parsed root width/height and two rectangle elements | Goki/Cogent SVG lineage |
 | 7 | [github.com/lafriks/go-svg](https://pkg.go.dev/github.com/lafriks/go-svg@v0.5.1) | v0.5.1 | 3 | paths, width | oksvg lineage |
 | 8 | [github.com/gen2brain/svg](https://pkg.go.dev/github.com/gen2brain/svg@v0.1.0) | v0.1.0 | 2 | height, width | gen2brain SVG decoder |
 | 9 | [github.com/pgavlin/svg2](https://pkg.go.dev/github.com/pgavlin/svg2) | v0.0.0-20210919231505-4ace7308edc1 | 2 | height, width | pgavlin SVG2 decoder |

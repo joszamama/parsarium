@@ -24,7 +24,18 @@ func run(name string, data []byte) (map[string]any, error) {
 		if err != nil {
 			return nil, err
 		}
-		return map[string]any{"width": doc.Root.ViewBox.Size.X, "height": doc.Root.ViewBox.Size.Y, "elements": doc.Root.NumChildren()}, nil
+		// ReadXML stores the root width and height attributes, converted to
+		// dots, in PhysicalWidth and PhysicalHeight; the viewBox is the user
+		// coordinate system, not the document size. An attribute the file
+		// does not set leaves the value empty and the field is omitted.
+		result := map[string]any{"elements": doc.Root.NumChildren()}
+		if doc.PhysicalWidth.Value != 0 {
+			result["width"] = doc.PhysicalWidth.Dots
+		}
+		if doc.PhysicalHeight.Value != 0 {
+			result["height"] = doc.PhysicalHeight.Dots
+		}
+		return result, nil
 	default:
 		return nil, fmt.Errorf("unknown package %q", name)
 	}

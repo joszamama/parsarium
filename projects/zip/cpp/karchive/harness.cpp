@@ -13,6 +13,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <utility>
 
 // KZip's documented local-file API takes a path, so the bytes are written to
 // a private temporary directory first and removed after the archive closes.
@@ -42,9 +43,22 @@ static bool read_archive(const std::string& path, std::size_t input_size, ParseR
     archive.close();
     return true;
   }
-  // entries() follows QHash order; sorting keeps the reported entry stable.
+  // entries() follows QHash order. The archive order KArchive keeps per entry
+  // is KArchiveFile::position(), the entry's data offset; directories carry no
+  // offset. Report the top-level file with the lowest offset. Without
+  // top-level files, fall back to the first name in sorted order.
   names.sort();
-  const KArchiveFile* file = root->file(names.first());
+  QString first = names.first();
+  qint64 first_position = -1;
+  for (const QString& candidate : std::as_const(names)) {
+    const KArchiveFile* entry_file = root->file(candidate);
+    if (!entry_file) continue;
+    if (first_position < 0 || entry_file->position() < first_position) {
+      first = candidate;
+      first_position = entry_file->position();
+    }
+  }
+  const KArchiveFile* file = root->file(first);
   const auto* entry = dynamic_cast<const KZipFileEntry*>(file);
   if (!entry) return false;
   // Bound decoded output before KArchiveFile::data(). KZip takes sizes from
@@ -63,7 +77,7 @@ static bool read_archive(const std::string& path, std::size_t input_size, ParseR
   if (entry->encoding() == 8 && declared == 0 && compressed > 0) return false;
   const QByteArray content = file->data();
   if (content.size() > static_cast<qsizetype>(kMaxContentBytes)) return false;
-  const QByteArray name = names.first().toUtf8();
+  const QByteArray name = first.toUtf8();
   out.entries = static_cast<std::size_t>(names.size());
   out.name.assign(name.constData(), static_cast<std::size_t>(name.size()));
   out.content.assign(content.constData(), static_cast<std::size_t>(content.size()));

@@ -5,7 +5,7 @@
 - **License:** AGPL-3.0-only
 - **Parsed scope:** parsed SVG drawable bounds from local file
 - **Underlying family:** JUCE juce_graphics over bundled LunaSVG
-- **Local input API:** `juce::Drawable::createFromSVGFile(juce::File(local filename)); getDrawableBounds()`
+- **Local input API:** `juce::Drawable::createFromSVGFile(juce::File(local filename)); getContentBounds()`
 - **Documentation:** [API reference](<https://docs.juce.com/develop/classjuce_1_1Drawable.html>)
 - **Catalog evidence:** [parser record](../../../../data/cpp/svg/parsers.json) · [control verification](../../../../data/cpp/svg/verification.json) · [within-ecosystem ranking](../../../../data/cpp/svg/ranking.md)
 - **Valid control:** [`controls/svg/red-green.svg`](../../../../controls/svg/red-green.svg)

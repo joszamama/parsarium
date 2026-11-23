@@ -26,7 +26,10 @@ int parsarium_parse_svg(const uint8_t *data, size_t size, struct parsarium_svg_r
     auto drawable = juce::Drawable::createFromSVGFile(juce::File(path));
     unlink(path);
     if (!drawable) return 0;
-    const auto bounds = drawable->getDrawableBounds();
+    // createFromSVGString sets the content area to LunaSVG's document width and
+    // height; getContentBounds() returns it. getDrawableBounds() would be the
+    // box around the painted shapes instead of the document size.
+    const auto bounds = drawable->getContentBounds();
     return rounded(bounds.getWidth(), &result->width) && rounded(bounds.getHeight(), &result->height);
 }
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {

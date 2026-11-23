@@ -5,7 +5,7 @@
 - **License:** BSD-2-Clause AND LGPL-2.0-only AND LGPL-2.0-or-later AND (LGPL-2.0-only OR LGPL-3.0-only)
 - **Parsed scope:** entry name and decompressed entry bytes
 - **Underlying family:** KArchive KZip reader
-- **Local input API:** `KZip(local filename); open(QIODevice::ReadOnly); directory()->entries; KArchiveDirectory::file; KArchiveFile::data`
+- **Local input API:** `KZip(local filename); open(QIODevice::ReadOnly); directory()->entries; KArchiveDirectory::file; KArchiveFile::position; KArchiveFile::data`
 - **Documentation:** [API reference](<https://api.kde.org/kzip.html>)
 - **Catalog evidence:** [parser record](../../../../data/cpp/zip/parsers.json) · [control verification](../../../../data/cpp/zip/verification.json) · [within-ecosystem ranking](../../../../data/cpp/zip/ranking.md)
 - **Valid control:** [`controls/zip/hello.zip`](../../../../controls/zip/hello.zip)

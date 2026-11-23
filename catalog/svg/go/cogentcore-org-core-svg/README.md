@@ -3,7 +3,7 @@
 - **Pinned release:** `v0.5.30`
 - **Upstream:** [source repository](<https://github.com/cogentcore/core>) · [pkg.go.dev](<https://pkg.go.dev/cogentcore.org/core/svg>)
 - **License:** BSD-3-Clause
-- **Parsed scope:** parsed viewBox and two rectangle elements
+- **Parsed scope:** parsed root width/height and two rectangle elements
 - **Underlying family:** Goki/Cogent SVG lineage
 - **Local input API:** `NewSVG(size).ReadXML(io.Reader).Root.ViewBox`
 - **Documentation:** [API reference](<https://pkg.go.dev/cogentcore.org/core/svg@v0.5.30>)
