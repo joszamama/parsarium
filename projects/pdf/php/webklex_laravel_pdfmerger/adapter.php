@@ -95,7 +95,7 @@ switch ($package) {
         break;
     case 'webklex/laravel-pdfmerger':
         $merger = new \Webklex\PDFMerger\PDFMerger(new \Illuminate\Filesystem\Filesystem());
-        $merger->addPDF($path, [1]);
+        $merger->addPDF($path);
         $merger->merge();
         $merged = $merger->output();
         $output = ['pdf_header' => str_starts_with($merged, '%PDF-'), 'page_objects' => preg_match_all('~/Type\s*/Page\b~', $merged)];

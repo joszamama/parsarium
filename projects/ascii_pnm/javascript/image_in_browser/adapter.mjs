@@ -102,6 +102,8 @@ if (name === 'image-size') {
 } else if (name === 'image-in-browser') {
   const { decodePnm } = await import('image-in-browser');
   const image = decodePnm({ data: bytes });
+  // decodePnm documents undefined as its result when decoding fails.
+  if (image === undefined) throw new Error('image-in-browser decodePnm could not decode the image');
   const rgb = [];
   for (let y = 0; y < image.height; y++) {
     for (let x = 0; x < image.width; x++) {

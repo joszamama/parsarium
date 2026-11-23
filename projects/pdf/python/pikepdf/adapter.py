@@ -38,7 +38,8 @@ def parse(name, path):
     if name == "pikepdf":
         import pikepdf
         with pikepdf.open(path) as doc:
-            return {"pages": len(doc.pages), "title": str(doc.docinfo["/Title"])}
+            title = doc.docinfo.get("/Title")
+            return {"pages": len(doc.pages), "title": None if title is None else str(title)}
     if name == "pdfquery":
         import pdfquery
         doc = pdfquery.PDFQuery(path)
