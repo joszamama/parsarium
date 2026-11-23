@@ -69,6 +69,14 @@ class ExtractionTests(unittest.TestCase):
         record = observe.classify(EXPECTED, 1, "", stderr, {}, False)
         self.assertEqual(record["class"], "harness_error")
 
+    def test_rust_panic_message_on_the_next_line(self):
+        stderr = ("\nthread 'main' (8) panicked at /cargo/minihttpse-0.1.6/src/lib.rs:135:59:\n"
+                  "index out of bounds: the len is 1 but the index is 1\n"
+                  "note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n")
+        record = observe.classify(EXPECTED, 101, "", stderr, {}, False)
+        self.assertEqual(record["error"], "/cargo/minihttpse-0.1.6/src/lib.rs:135:59: "
+                         "index out of bounds: the len is 1 but the index is 1")
+
     def test_python_repr_message(self):
         stderr = "control mismatch: {'width': 5, 'height': 4, 'alpha': True, 'mode': None, 'px': (1, 2)}\n"
         record = observe.classify(EXPECTED, 1, "", stderr, {}, False)

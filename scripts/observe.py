@@ -254,7 +254,7 @@ def parser_error(stdout: str, stderr: str, files: dict[str, str]) -> str:
         r'Exception in thread "main" (.+)',                              # Java
         r"Caused by: (.+)",                                              # Java
         r"^(?:Uncaught )?([\w.$]*(?:Error|Exception|Exit)(?:: .*)?)$",  # JS / Python
-        r"thread '[^']*' panicked at (.+)",                              # Rust
+        r"thread '[^']*'(?: \(\d+\))? panicked at (.+:\d+:\d+:\n.+|.+)",     # Rust (message on the next line since 1.73)
         r"^Error: (.+)$",                                                # Rust main()
     ]
     wrapped = []
@@ -263,7 +263,7 @@ def parser_error(stdout: str, stderr: str, files: dict[str, str]) -> str:
         wrapped += [item for item in found if "control replay failed" in item]
         found = [item for item in found if "control replay failed" not in item]
         if found:
-            return found[-1].strip()[:1000]
+            return found[-1].strip().replace("\n", " ")[:1000]
     # Only a runner's "control replay failed: <error>" line names the error: keep what it wraps.
     for item in wrapped:
         inner = re.sub(r"^.*?control replay failed:\s*(?:exit status \d+:\s*)?", "", item).strip()
