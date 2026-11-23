@@ -317,8 +317,10 @@ class SelectionModeTests(unittest.TestCase):
         replay = self.dry("replay", self.inputs)
         self.assertTrue(all(cmd.startswith("parsarium replay png python") for cmd in replay))
         afl = self.dry("afl")
-        self.assertEqual([cmd.split()[2] for cmd in afl[:4]], ["build", "prepare", "run", "summary"])
-        self.assertIn("--seconds 60", afl[2])
+        self.assertEqual(afl[0], "parsarium fandango setup")
+        self.assertEqual([cmd.split()[2] for cmd in afl[1:5]], ["build", "prepare", "run", "summary"])
+        self.assertIn("--fandango 100 --fandango-seed 42", afl[2])
+        self.assertIn("--seconds 60", afl[3])
 
     def test_file_and_replay_need_input(self) -> None:
         for mode in ("file", "replay"):

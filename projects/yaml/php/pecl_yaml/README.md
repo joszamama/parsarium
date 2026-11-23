@@ -10,11 +10,13 @@ Pinned release: `2.3.0`. [Manifest](manifest.json) · [verification receipt](ver
 python3 parsarium.py build yaml php pecl_yaml
 python3 parsarium.py run yaml php pecl_yaml controls/yaml/catalog.yaml
 python3 parsarium.py replay yaml php pecl_yaml CORPUS_DIR runs/yaml-pecl_yaml-replay
+python3 parsarium.py fandango setup
 python3 parsarium.py afl build yaml php pecl_yaml
-python3 parsarium.py afl prepare yaml php pecl_yaml runs/yaml-pecl_yaml-afl
+python3 parsarium.py afl prepare yaml php pecl_yaml runs/yaml-pecl_yaml-afl --fandango 100
+python3 parsarium.py afl run runs/yaml-pecl_yaml-afl --seconds 600
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. `afl prepare --fandango 100` seeds the run with the control and 100 valid inputs generated from the format's default Fandango spec, and `plan.json` records the spec, its SHA-256, the random seed and the Fandango version. Without `--fandango`, the control is the only seed. `afl run` starts a bounded campaign; add `--check` to verify the plan without starting it.
 
 **Coverage limit:** One run records Clang/LLVM source coverage of the yaml extension (yaml.c, parse.c, detect.c; emit.c and the headers report 0) and of source-built libyaml 0.2.5 (api.c, reader.c, scanner.c, parser.c) for one yaml_parse() call on a valid control. PHP itself is a plain build and is not covered; the PHP tree walk in summary.php runs no extension or libyaml code. AFL++ feedback comes from the native overlay: pecl/yaml yaml.c, parse.c and detect.c plus libyaml 0.2.5 reader.c, scanner.c and parser.c, instrumented through an allowlist while the same harness runs; the PHP runtime, emit.c and the rest of libyaml add no AFL++ tuples, and the full-harness maps equal the parse-only fuzz-target maps. The pinned base image does not bundle php-fuzzer; replay is per case.
 

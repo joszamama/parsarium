@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "json/javascript/stdlib_json_parse",
-  "verified_at_utc": "2026-11-17T12:58:54.223385+00:00",
+  "verified_at_utc": "2026-11-23T22:19:01.441329+00:00",
   "pass": true,
   "coverage_kind": "native_parser_afl_edges",
   "feedback_kind": "v8_json_parser_sancov_edges",
@@ -157,8 +157,8 @@
   },
   "fixed_valid_control_timing": {
     "cases": 6,
-    "wall_seconds": 0.294,
-    "seconds_per_case": 0.049,
+    "wall_seconds": 2.403,
+    "seconds_per_case": 0.401,
     "measurement": "Six fixed valid afl-showmap replays in one fresh Docker container; not a fuzz campaign or a sustained throughput measurement."
   },
   "limit": "AFL++ map entries come from SanitizerCoverage trace-pc-guard points in the one json-parser.o object of a Node.js 26.10.0 binary built from the official source tarball, not the pinned official binary (whose hash differs because of the build and the instrumentation). Map entries are guard indices with bucketed hit counts; they are not source lines and not comparable to the LLVM line counts. Code inlined from other V8 files into json-parser.o is counted; JSON.parse builtin glue, string internalization outside that object, and the adapter's TextDecoder step are not. Each case starts a fresh node process through the AFL++ fork server (no persistent mode).",

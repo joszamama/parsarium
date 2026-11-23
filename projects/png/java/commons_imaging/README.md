@@ -10,8 +10,10 @@ Pinned release: `1.0.0-alpha6`. [Manifest](manifest.json) · [verification recei
 python3 parsarium.py build png java commons_imaging
 python3 parsarium.py run png java commons_imaging controls/png/red-green.png
 python3 parsarium.py replay png java commons_imaging CORPUS_DIR runs/png-commons_imaging-replay
+python3 parsarium.py fandango setup
 python3 parsarium.py afl build png java commons_imaging
-python3 parsarium.py afl prepare png java commons_imaging runs/png-commons_imaging-afl
+python3 parsarium.py afl prepare png java commons_imaging runs/png-commons_imaging-afl --fandango 100
+python3 parsarium.py afl run runs/png-commons_imaging-afl --seconds 600
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. `afl prepare --fandango 100` seeds the run with the control and 100 valid inputs generated from the format's default Fandango spec, and `plan.json` records the spec, its SHA-256, the random seed and the Fandango version. Without `--fandango`, the control is the only seed. `afl run` starts a bounded campaign; add `--check` to verify the plan without starting it.

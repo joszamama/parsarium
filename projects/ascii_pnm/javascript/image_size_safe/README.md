@@ -10,8 +10,10 @@ Pinned release: `2.0.3`. [Manifest](manifest.json) · [verification receipt](ver
 python3 parsarium.py build ascii_pnm javascript image_size_safe
 python3 parsarium.py run ascii_pnm javascript image_size_safe controls/ascii_pnm/red-green.ppm
 python3 parsarium.py replay ascii_pnm javascript image_size_safe CORPUS_DIR runs/ascii_pnm-image_size_safe-replay
+python3 parsarium.py fandango setup
 python3 parsarium.py afl build ascii_pnm javascript image_size_safe
-python3 parsarium.py afl prepare ascii_pnm javascript image_size_safe runs/ascii_pnm-image_size_safe-afl
+python3 parsarium.py afl prepare ascii_pnm javascript image_size_safe runs/ascii_pnm-image_size_safe-afl --fandango 100
+python3 parsarium.py afl run runs/ascii_pnm-image_size_safe-afl --seconds 600
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. `afl prepare --fandango 100` seeds the run with the control and 100 valid inputs generated from the format's default Fandango spec, and `plan.json` records the spec, its SHA-256, the random seed and the Fandango version. Without `--fandango`, the control is the only seed. `afl run` starts a bounded campaign; add `--check` to verify the plan without starting it.

@@ -19,19 +19,21 @@ parsarium list --format png
 parsarium show png c lodepng
 parsarium run png c lodepng my.png --results runs/lodepng
 parsarium run-format png --file my.png --results runs/png-my-file
-parsarium afl build png c lodepng
-parsarium afl prepare png c lodepng runs/lodepng-afl
-parsarium afl run runs/lodepng-afl --seconds 3600
 parsarium fandango setup
+parsarium afl build png c lodepng
+parsarium afl prepare png c lodepng runs/lodepng-afl --fandango 100
+parsarium afl run runs/lodepng-afl --seconds 3600
 parsarium fandango generate png c lodepng runs/lodepng-fandango --count 100 --seed 42 --replay --prepare-afl
 parsarium afl run runs/lodepng-fandango/afl --check
 ```
+
+`afl prepare --fandango 100` seeds the run with the control and 100 valid inputs generated from the format's default Fandango spec; `plan.json` records the spec, its SHA-256, the random seed (`--fandango-seed`, default 42) and the Fandango version. Without it, the control is the only seed. `native prepare` takes the same option.
 
 Run a selection saved from the [bench](https://parsarium.com/bench/):
 
 ```sh
 parsarium run-selection sel-90378f4e58.json --mode control
-parsarium run-selection sel-90378f4e58.json --mode afl --seconds 600
+parsarium run-selection sel-90378f4e58.json --mode afl --seconds 600 --count 100
 parsarium run-selection sel-90378f4e58.json --mode fandango --count 100 --seed 42
 ```
 

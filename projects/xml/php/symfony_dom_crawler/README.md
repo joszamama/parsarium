@@ -10,11 +10,13 @@ Pinned release: `v8.1.10`. [Manifest](manifest.json) · [verification receipt](v
 python3 parsarium.py build xml php symfony_dom_crawler
 python3 parsarium.py run xml php symfony_dom_crawler controls/xml/catalog-ns.xml
 python3 parsarium.py replay xml php symfony_dom_crawler CORPUS_DIR runs/xml-symfony_dom_crawler-replay
+python3 parsarium.py fandango setup
 python3 parsarium.py afl build xml php symfony_dom_crawler
-python3 parsarium.py afl prepare xml php symfony_dom_crawler runs/xml-symfony_dom_crawler-afl
+python3 parsarium.py afl prepare xml php symfony_dom_crawler runs/xml-symfony_dom_crawler-afl --fandango 100
+python3 parsarium.py afl run runs/xml-symfony_dom_crawler-afl --seconds 600
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. `afl prepare --fandango 100` seeds the run with the control and 100 valid inputs generated from the format's default Fandango spec, and `plan.json` records the spec, its SHA-256, the random seed and the Fandango version. Without `--fandango`, the control is the only seed. `afl run` starts a bounded campaign; add `--check` to verify the plan without starting it.
 
 **Coverage limit:** Xdebug line coverage sees only symfony/dom-crawler PHP lines (Crawler navigation, XPath relativizing and namespace discovery) and is reported separately. AFL++ feedback comes from the native overlay: libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c and ext/libxml/libxml.c, instrumented through an allowlist while the same Crawler harness runs; libxml2 tree/XPath code, other ext/dom classes and the interpreted Crawler code add no AFL++ tuples. The pinned base image does not bundle php-fuzzer; replay is per case.
 

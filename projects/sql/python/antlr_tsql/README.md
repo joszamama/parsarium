@@ -10,10 +10,12 @@ Pinned release: `0.12.6`. [Manifest](manifest.json) · [verification receipt](ve
 python3 parsarium.py build sql python antlr_tsql
 python3 parsarium.py run sql python antlr_tsql controls/sql/select-join.sql
 python3 parsarium.py replay sql python antlr_tsql CORPUS_DIR runs/sql-antlr_tsql-replay
+python3 parsarium.py fandango setup
 python3 parsarium.py afl build sql python antlr_tsql
-python3 parsarium.py afl prepare sql python antlr_tsql runs/sql-antlr_tsql-afl
+python3 parsarium.py afl prepare sql python antlr_tsql runs/sql-antlr_tsql-afl --fandango 100
+python3 parsarium.py afl run runs/sql-antlr_tsql-afl --seconds 600
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. `afl prepare --fandango 100` seeds the run with the control and 100 valid inputs generated from the format's default Fandango spec, and `plan.json` records the spec, its SHA-256, the random seed and the Fandango version. Without `--fandango`, the control is the only seed. `afl run` starts a bounded campaign; add `--check` to verify the plan without starting it.
 
 **Native engine limit:** This target starts a fresh process for each input. In-process native fuzzing is unsupported; use one-input replay or the prepared AFL++ run.

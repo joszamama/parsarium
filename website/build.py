@@ -484,8 +484,9 @@ def build(output: Path) -> None:
             "inputCommand": f"parsarium run {target_args} INPUT_FILE --results {run_dir}-single",
             "replayCommand": f"parsarium replay {target_args} CORPUS_DIR {run_dir}-replay",
             "aflCommands": [
+                "parsarium fandango setup",
                 f"parsarium afl build {target_args}",
-                f"parsarium afl prepare {target_args} {run_dir}-afl",
+                f"parsarium afl prepare {target_args} {run_dir}-afl --fandango 100",
                 f"parsarium afl run {run_dir}-afl --seconds 60",
             ],
         }
@@ -551,8 +552,9 @@ def build(output: Path) -> None:
             "inputCommand": f"parsarium run {target} INPUT_FILE --results {run_dir}-single",
             "replayCommand": f"parsarium replay {target} CORPUS_DIR {run_dir}-replay",
             "aflCommands": [
+                "parsarium fandango setup",
                 f"parsarium afl build {target}",
-                f"parsarium afl prepare {target} {run_dir}-afl",
+                f"parsarium afl prepare {target} {run_dir}-afl --fandango 100",
                 f"parsarium afl run {run_dir}-afl --seconds 60",
             ],
         })

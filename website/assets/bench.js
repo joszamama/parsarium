@@ -173,7 +173,7 @@
         ? 'CORPUS="${1:?usage: run-selection.sh CORPUS_DIR}"'
         : 'CORPUS="${1:?usage: run-selection.sh CORPUS_DIR  (one subdirectory per format, e.g. CORPUS_DIR/png/)}"');
     } else if (state.mode === "afl") {
-      lines.push('SECONDS_PER_TARGET="${SECONDS_PER_TARGET:-3600}"');
+      lines.push('SECONDS_PER_TARGET="${SECONDS_PER_TARGET:-3600}"', 'COUNT="${COUNT:-100}"', 'SEED="${SEED:-42}"', "parsarium fandango setup || exit 1");
     } else if (state.mode === "fandango") {
       lines.push('COUNT="${COUNT:-100}"', 'SEED="${SEED:-42}"', "parsarium fandango setup || exit 1");
     }
@@ -194,7 +194,7 @@
       lines.push(`  parsarium fandango generate "$fmt" "$eco" "$slug" "$OUT/$name" --count "$COUNT" --seed "$SEED" --replay ${fail}`);
     } else {
       lines.push('  parsarium afl build "$fmt" "$eco" "$slug" || { echo "$name" >> "$OUT/failed.txt"; continue; }',
-        '  parsarium afl prepare "$fmt" "$eco" "$slug" "$OUT/$name" || { echo "$name" >> "$OUT/failed.txt"; continue; }',
+        '  parsarium afl prepare "$fmt" "$eco" "$slug" "$OUT/$name" --fandango "$COUNT" --fandango-seed "$SEED" || { echo "$name" >> "$OUT/failed.txt"; continue; }',
         `  parsarium afl run "$OUT/$name" --seconds "$SECONDS_PER_TARGET" ${fail}`,
         '  parsarium afl summary "$OUT/$name" >/dev/null || true');
     }
@@ -304,7 +304,7 @@
     root.querySelector('[data-out="script"]').textContent = script;
     root.querySelector('[data-out="manifest"]').textContent = manifest;
     root.querySelector('[data-out="runcmd"]').innerHTML =
-      `<span class="p">$ </span>parsarium run-selection ${id}.json --mode ${state.mode}${state.mode === "afl" ? " --seconds 3600" : ""}${state.mode === "fandango" ? " --count 100 --seed 42" : ""}${["file", "replay"].includes(state.mode) ? " --input PATH" : ""}`;
+      `<span class="p">$ </span>parsarium run-selection ${id}.json --mode ${state.mode}${state.mode === "afl" ? " --seconds 3600 --count 100" : ""}${state.mode === "fandango" ? " --count 100 --seed 42" : ""}${["file", "replay"].includes(state.mode) ? " --input PATH" : ""}`;
     root.querySelector('[data-out="report"]').textContent = report;
     setDownload("script", "run-selection.sh", script, "text/x-shellscript");
     setDownload("manifest", `${id}.json`, manifest, "application/json");

@@ -42,10 +42,11 @@
 <div class="exercise">
   <p class="label"><span>Ejercicio 5.1</span><span class="level">Calentamiento</span></p>
   <p>Prepara una ejecución de AFL++ para un target compilado y otra para un target con puente, y compara sus planes.</p>
-  <pre data-copy><span class="p">$ </span>parsarium afl build png c stb
-<span class="p">$ </span>parsarium afl prepare png c stb runs/stb-afl
+  <pre data-copy><span class="p">$ </span>parsarium fandango setup
+<span class="p">$ </span>parsarium afl build png c stb
+<span class="p">$ </span>parsarium afl prepare png c stb runs/stb-afl --fandango 100
 <span class="p">$ </span>parsarium afl build png python pillow
-<span class="p">$ </span>parsarium afl prepare png python pillow runs/pillow-afl
+<span class="p">$ </span>parsarium afl prepare png python pillow runs/pillow-afl --fandango 100
 <span class="p">$ </span>parsarium afl run runs/pillow-afl --check</pre>
   <p>Abre los dos archivos <code>plan.json</code> y busca el tipo de feedback. Después ejecuta cada uno durante cinco minutos con <code>--seconds 300</code> y compara <code>execs_per_sec</code> en <code>afl-out/default/fuzzer_stats</code>.</p>
   <details><summary>Pista</summary><p><code>fuzzer_stats</code> es un archivo de texto plano con líneas <code>key : value</code>.</p></details>

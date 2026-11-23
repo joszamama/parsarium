@@ -93,7 +93,9 @@ def main() -> None:
                "finished_at_utc": datetime.now(timezone.utc).isoformat(),
                "elapsed_seconds": round(time.monotonic() - started, 3),
                "image_id": plan["image_id"], "plan_sha256": sha256((run_dir / "plan.json").read_bytes()).hexdigest(),
-               "log_sha256": file_sha256(log_path)}
+               "log_sha256": file_sha256(log_path),
+               "unique_seeds": plan["unique_seeds"],
+               "seed_generation": plan.get("seed_generation")}
     receipt_path.write_text(json.dumps(receipt, indent=2) + "\n")
     print(f"{status}: {plan['project']} ({receipt['elapsed_seconds']}s); log: {log_path}")
     if status == "engine_nonzero":

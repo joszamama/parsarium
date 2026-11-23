@@ -10,11 +10,13 @@ Pinned release: `v1.5.0`. [Manifest](manifest.json) · [verification receipt](ve
 python3 parsarium.py build xml php saloon_xml_wrangler
 python3 parsarium.py run xml php saloon_xml_wrangler controls/xml/catalog-ns.xml
 python3 parsarium.py replay xml php saloon_xml_wrangler CORPUS_DIR runs/xml-saloon_xml_wrangler-replay
+python3 parsarium.py fandango setup
 python3 parsarium.py afl build xml php saloon_xml_wrangler
-python3 parsarium.py afl prepare xml php saloon_xml_wrangler runs/xml-saloon_xml_wrangler-afl
+python3 parsarium.py afl prepare xml php saloon_xml_wrangler runs/xml-saloon_xml_wrangler-afl --fandango 100
+python3 parsarium.py afl run runs/xml-saloon_xml_wrangler-afl --seconds 600
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. `afl prepare --fandango 100` seeds the run with the control and 100 valid inputs generated from the format's default Fandango spec, and `plan.json` records the spec, its SHA-256, the random seed and the Fandango version. Without `--fandango`, the control is the only seed. `afl run` starts a bounded campaign; add `--check` to verify the plan without starting it.
 
 **Coverage limit:** Xdebug line coverage is reported for two PHP groups: saloonphp/xml-wrangler src (package) and veewee/xml src (underlying delegate that drives XMLReader and decodes each matched subtree through DOMDocument). It is recorded for the fromString()->elements() call only; the fromFile/fromStream cross-check runs after coverage stops. AFL++ feedback comes from the native overlay: libxml2 2.15.4 parser.c, parserInternals.c, SAX2.c and xmlreader.c plus PHP 8.5.12 ext/xmlreader/php_xmlreader.c and ext/dom/document.c, instrumented through an allowlist while the same harness runs. libxml2 tree, save, XPath and dict code, ext/libxml, the other ext/dom classes, the Zend engine and the interpreted package PHP code add no AFL++ tuples. libxml2 parses each input twice on this path: once through XMLReader over the original bytes and once through DOMDocument::loadXML over the readOuterXml() serialization of the root element. The pinned base image does not bundle php-fuzzer; replay is per case.
 

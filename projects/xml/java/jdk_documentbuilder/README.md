@@ -10,8 +10,10 @@ Pinned release: `25.0.5`. [Manifest](manifest.json) · [verification receipt](ve
 python3 parsarium.py build xml java jdk_documentbuilder
 python3 parsarium.py run xml java jdk_documentbuilder controls/xml/catalog-ns.xml
 python3 parsarium.py replay xml java jdk_documentbuilder CORPUS_DIR runs/xml-jdk_documentbuilder-replay
+python3 parsarium.py fandango setup
 python3 parsarium.py afl build xml java jdk_documentbuilder
-python3 parsarium.py afl prepare xml java jdk_documentbuilder runs/xml-jdk_documentbuilder-afl
+python3 parsarium.py afl prepare xml java jdk_documentbuilder runs/xml-jdk_documentbuilder-afl --fandango 100
+python3 parsarium.py afl run runs/xml-jdk_documentbuilder-afl --seconds 600
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. `afl prepare --fandango 100` seeds the run with the control and 100 valid inputs generated from the format's default Fandango spec, and `plan.json` records the spec, its SHA-256, the random seed and the Fandango version. Without `--fandango`, the control is the only seed. `afl run` starts a bounded campaign; add `--check` to verify the plan without starting it.

@@ -68,8 +68,9 @@
         <div class="use">
           <div><h3>Haz fuzzing a un parser con AFL++.</h3>
             <p>Todos los targets ejecutables tienen una imagen para AFL++. Los parsers en C, C++ y Rust se instrumentan directamente. Los parsers en Go, Java, JavaScript, Python y PHP envían su cobertura a AFL++ mediante un pequeño puente.</p></div>
-          <pre data-copy><span class="p">$ </span>parsarium afl build png python pillow
-<span class="p">$ </span>parsarium afl prepare png python pillow runs/pillow
+          <pre data-copy><span class="p">$ </span>parsarium fandango setup
+<span class="p">$ </span>parsarium afl build png python pillow
+<span class="p">$ </span>parsarium afl prepare png python pillow runs/pillow --fandango 100
 <span class="p">$ </span>parsarium afl run runs/pillow --seconds 3600</pre>
         </div>
         <div class="use">

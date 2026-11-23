@@ -10,8 +10,10 @@ Pinned release: `8.1.2-1.5.14`. [Manifest](manifest.json) · [verification recei
 python3 parsarium.py build wav java bytedeco_ffmpeg
 python3 parsarium.py run wav java bytedeco_ffmpeg controls/wav/256-samples.wav
 python3 parsarium.py replay wav java bytedeco_ffmpeg CORPUS_DIR runs/wav-bytedeco_ffmpeg-replay
+python3 parsarium.py fandango setup
 python3 parsarium.py afl build wav java bytedeco_ffmpeg
-python3 parsarium.py afl prepare wav java bytedeco_ffmpeg runs/wav-bytedeco_ffmpeg-afl
+python3 parsarium.py afl prepare wav java bytedeco_ffmpeg runs/wav-bytedeco_ffmpeg-afl --fandango 100
+python3 parsarium.py afl run runs/wav-bytedeco_ffmpeg-afl --seconds 600
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. `afl prepare --fandango 100` seeds the run with the control and 100 valid inputs generated from the format's default Fandango spec, and `plan.json` records the spec, its SHA-256, the random seed and the Fandango version. Without `--fandango`, the control is the only seed. `afl run` starts a bounded campaign; add `--check` to verify the plan without starting it.

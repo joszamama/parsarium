@@ -2,6 +2,8 @@
 
 The generated plan.json records the exact Docker command, seeds, image, and
 source hashes. Run the printed command when ready to start a campaign.
+--fandango N adds N valid inputs from the target's default Fandango route to
+the control and records their provenance in the plan's seed_generation field.
 """
 
 import argparse
@@ -11,9 +13,11 @@ import os
 from pathlib import Path
 import shlex
 import subprocess
+import sys
 import uuid
 
 from build_afl_native import OVERLAYS
+import fandango_seeds
 from run_case import MAX_CASE_BYTES, ROOT, project_for
 
 
@@ -91,7 +95,9 @@ def main() -> None:
     cli.add_argument("--seed", type=Path, action="append", default=[])
     cli.add_argument("--seed-dir", type=Path, action="append", default=[])
     cli.add_argument("--timeout-ms", type=int)
+    fandango_seeds.add_arguments(cli)
     args = cli.parse_args()
+    fandango_seeds.check_arguments(cli, args)
     project, manifest = project_for(args.format, args.ecosystem, args.package_slug)
     timeout_ms = args.timeout_ms if args.timeout_ms is not None else (
         30000 if manifest.get("coverage_kind") == "native_binary_edges"
@@ -127,22 +133,41 @@ def main() -> None:
     run_dir = args.run_dir.resolve()
     if run_dir.exists() and any(run_dir.iterdir()):
         cli.error("run directory already contains files")
-    seeds = [ROOT / manifest["control"], *args.seed]
     for directory in args.seed_dir:
         if not directory.is_dir():
             cli.error(f"seed directory does not exist: {directory}")
-        seeds.extend(sorted(path for path in directory.rglob("*") if path.is_file()))
-    if not seeds:
-        cli.error("at least one seed is required")
+    seeds = [(ROOT / manifest["control"], "control"), *((path, "seed") for path in args.seed)]
+    for directory in args.seed_dir:
+        seeds.extend((path, "seed_dir") for path in
+                     sorted(path for path in directory.rglob("*") if path.is_file()))
+    seed_generation = None
+    fandango_receipt = args.fandango_receipt
+    if args.fandango is not None:
+        try:
+            fandango_receipt = fandango_seeds.generate_seeds(
+                args.format, args.ecosystem, args.package_slug, run_dir, args.fandango,
+                args.fandango_seed)
+        except (OSError, RuntimeError, ValueError) as error:
+            cli.error(str(error))
+    if fandango_receipt is not None:
+        try:
+            _, generated, seed_generation = fandango_seeds.provenance(
+                fandango_receipt, run_dir, str(project.relative_to(ROOT / "projects")))
+        except (OSError, ValueError, KeyError) as error:
+            cli.error(str(error))
+        if args.fandango is not None:
+            seed_generation["receipt_sha256"] = sha256(fandango_receipt.read_bytes()).hexdigest()
+        seeds.extend((path, "fandango") for path in generated)
     seed_data = {}
     sources = []
-    for seed in seeds:
+    for seed, origin in seeds:
         data = seed.read_bytes()
         if not data or len(data) > MAX_CASE_BYTES:
             cli.error(f"seed is empty or exceeds {MAX_CASE_BYTES} bytes: {seed}")
         digest = sha256(data).hexdigest()
         seed_data[digest] = data
-        sources.append({"path": str(seed.resolve()), "sha256": digest, "bytes": len(data)})
+        sources.append({"path": str(seed.resolve()), "sha256": digest, "bytes": len(data),
+                        "origin": origin})
     seed_dir = run_dir / "seeds"
     output_dir = run_dir / "afl-out"
     seed_dir.mkdir(parents=True, exist_ok=True)
@@ -169,9 +194,14 @@ def main() -> None:
                               receipt.get("feedback_kind", "source_instrumented_edges")),
             "command": command, "resume_command": resume,
             "output_directory": str(output_dir)}
+    if seed_generation is not None:
+        plan["seed_generation"] = seed_generation
     (run_dir / "plan.json").write_text(json.dumps(plan, indent=2) + "\n")
     print(f"Prepared {len(seed_data)} seeds in {run_dir}")
     print(shlex.join(command))
+    if len(seed_data) == 1:
+        print("note: the only seed is the control; add --fandango N to start from N generated "
+              "valid inputs as well", file=sys.stderr)
 
 
 if __name__ == "__main__":

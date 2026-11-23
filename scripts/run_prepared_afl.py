@@ -52,6 +52,8 @@ def verify(run_dir: Path, plan: dict) -> None:
     expected = {item["sha256"] for item in plan["seed_sources"]}
     if actual != expected or len(actual) != plan["unique_seeds"]:
         raise ValueError("seed file set changed since preparation")
+    if manifest["control_sha256"] not in actual:
+        raise ValueError("the project's valid control is missing from the seeds")
     for name in actual:
         data = (seeds / name).read_bytes()
         if not data or len(data) > MAX_CASE_BYTES or sha256(data).hexdigest() != name:
@@ -127,6 +129,8 @@ def main() -> None:
                "image_id": plan["image_id"],
                "plan_sha256": sha256(plan_path.read_bytes()).hexdigest(),
                "log_sha256": file_sha256(log_path),
+               "unique_seeds": plan["unique_seeds"],
+               "seed_generation": plan.get("seed_generation"),
                "summary": "afl-summary.json" if summary_command.returncode == 0 else None}
     receipt_path.write_text(json.dumps(receipt, indent=2) + "\n")
     print(f"{status}: {plan['project']} ({receipt['elapsed_seconds']}s)")

@@ -77,7 +77,8 @@ def _selection_command(argv: list[str]) -> int:
                              "one subdirectory per format (e.g. DIR/png/)")
     parser.add_argument("--out", type=Path, help="results directory (default: runs/<selection id>)")
     parser.add_argument("--seconds", type=int, default=3600, help="AFL++ budget per target")
-    parser.add_argument("--count", type=int, default=100, help="Fandango inputs per target")
+    parser.add_argument("--count", type=int, default=100,
+                        help="Fandango inputs per target (--mode fandango, and AFL++ seeds besides the control)")
     parser.add_argument("--seed", type=int, default=42, help="Fandango random seed")
     parser.add_argument("--dry-run", action="store_true", help="print the commands without running them")
     parser.add_argument("--allow-mismatch", action="store_true",

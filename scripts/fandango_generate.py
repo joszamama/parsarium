@@ -303,7 +303,7 @@ def bridge_commands(args: argparse.Namespace, run_dir: Path, receipt: dict) -> l
         steps.append(("afl_prepare", [
             sys.executable, str(ROOT / "scripts/prepare_afl_run.py"),
             args.format, args.ecosystem, args.slug, str(run_dir / "afl"),
-            "--seed-dir", generated]))
+            "--fandango-receipt", str(run_dir / "fandango.json")]))
     return steps
 
 

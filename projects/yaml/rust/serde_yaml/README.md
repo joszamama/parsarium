@@ -10,10 +10,12 @@ Pinned release: `0.9.34+deprecated`. [Manifest](manifest.json) · [verification 
 python3 parsarium.py build yaml rust serde_yaml
 python3 parsarium.py run yaml rust serde_yaml controls/yaml/catalog.yaml
 python3 parsarium.py replay yaml rust serde_yaml CORPUS_DIR runs/yaml-serde_yaml-replay
+python3 parsarium.py fandango setup
 python3 parsarium.py afl build yaml rust serde_yaml
-python3 parsarium.py afl prepare yaml rust serde_yaml runs/yaml-serde_yaml-afl
+python3 parsarium.py afl prepare yaml rust serde_yaml runs/yaml-serde_yaml-afl --fandango 100
+python3 parsarium.py afl run runs/yaml-serde_yaml-afl --seconds 600
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. `afl prepare --fandango 100` seeds the run with the control and 100 valid inputs generated from the format's default Fandango spec, and `plan.json` records the spec, its SHA-256, the random seed and the Fandango version. Without `--fandango`, the control is the only seed. `afl run` starts a bounded campaign; add `--check` to verify the plan without starting it.
 
 **Coverage limit:** serde_yaml::from_str::<Value> on one YAML document from local UTF-8 text. serde_yaml expands aliases and resolves plain scalars itself (true/false, null/~, decimal ints and floats); the event scanner and parser are unsafe-libyaml, a c2rust translation of libyaml, so this path is in the libyaml family. Mapping keys must be strings for the typed tree and explicit tags are rejected by the harness. The schema-neutral controls do not test tags, merge keys, multi-document streams or YAML 1.1-only scalars.

@@ -10,10 +10,12 @@ Pinned release: `0.25.19+spec-1.1.0`. [Manifest](manifest.json) · [verification
 python3 parsarium.py build toml rust toml_edit
 python3 parsarium.py run toml rust toml_edit controls/toml/service-config.toml
 python3 parsarium.py replay toml rust toml_edit CORPUS_DIR runs/toml-toml_edit-replay
+python3 parsarium.py fandango setup
 python3 parsarium.py afl build toml rust toml_edit
-python3 parsarium.py afl prepare toml rust toml_edit runs/toml-toml_edit-afl
+python3 parsarium.py afl prepare toml rust toml_edit runs/toml-toml_edit-afl --fandango 100
+python3 parsarium.py afl run runs/toml-toml_edit-afl --seconds 600
 ```
 
-Replace `CORPUS_DIR` with a directory of matching files. The AFL++ command prepares a seeded run; it does not start a campaign.
+Replace `CORPUS_DIR` with a directory of matching files. `afl prepare --fandango 100` seeds the run with the control and 100 valid inputs generated from the format's default Fandango spec, and `plan.json` records the spec, its SHA-256, the random seed and the Fandango version. Without `--fandango`, the control is the only seed. `afl run` starts a bounded campaign; add `--check` to verify the plan without starting it.
 
 **Coverage limit:** toml_edit 0.25.19 lexes and parses through toml_parser 1.1.5 (the same crate toml 1.2.1 drives) and builds its own format-preserving Document/Item/Value tree with decor and spans; the two paths share the toml_parser family. Only decoded values are observed, not the preserved formatting. Datetime values are toml_datetime 1.1.3 structs; the harness converts offset date-times to the UTC instant arithmetically. Tables are IndexMaps with std RandomState hashing.

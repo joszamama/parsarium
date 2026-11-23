@@ -40,12 +40,16 @@ def main() -> None:
     if not instances:
         cli.error("no AFL++ fuzzer_stats found; the prepared campaign has not run")
     report = {"schema_version": 1, "project": plan["project"],
-              "image_id": plan["image_id"], "instances": []}
+              "image_id": plan["image_id"], "unique_seeds": plan["unique_seeds"],
+              "seed_generation": plan.get("seed_generation"), "instances": []}
     for instance in instances:
+        queue = inventory(instance / "queue")
         report["instances"].append({
             "name": instance.name,
             "fuzzer_stats": stats(instance / "fuzzer_stats"),
-            "queue": inventory(instance / "queue"),
+            # AFL++ names imported seeds "id:N,time:0,execs:0,orig:NAME".
+            "initial_queue_entries": sum(1 for item in queue if ",orig:" in item["name"]),
+            "queue": queue,
             "crashes": inventory(instance / "crashes"),
             "hangs": inventory(instance / "hangs"),
         })
@@ -53,6 +57,7 @@ def main() -> None:
     for instance in report["instances"]:
         values = instance["fuzzer_stats"]
         print(f"{instance['name']}: execs={values.get('execs_done', '?')} "
+              f"seeds={instance['initial_queue_entries']} "
               f"paths={len(instance['queue'])} crashes={len(instance['crashes'])} "
               f"hangs={len(instance['hangs'])}")
 

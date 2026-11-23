@@ -10,7 +10,7 @@ python3 parsarium.py fandango setup
 python3 parsarium.py fandango generate ascii_ply c assetkit runs/ply-fandango --count 100 --seed 1 --replay
 ```
 
-The generator selects the bundled spec automatically, saves its hash and generated files, and can prepare the same corpus for AFL++ with `--prepare-afl`. [The MP4, PDF, SVG and ASCII PLY grammar details](specs/README.md) describe their scope.
+The generator selects the bundled spec automatically, saves its hash and generated files, and can prepare the same corpus for AFL++ with `--prepare-afl`. `afl prepare --fandango N` and `native prepare --fandango N` run the same default route inside the run directory and record the spec, its hash, the random seed and the Fandango version in `plan.json`. [The MP4, PDF, SVG and ASCII PLY grammar details](specs/README.md) describe their scope.
 
 SVG targets default to the local [`svg.fan`](specs/svg.fan). Fanbase's `-F svg` stays selectable with `--fanbase svg`, but most of its outputs have a zero or near-zero width, height or viewBox, `<use>` or `url(#…)` references to ids the file does not define, or invalid property values such as `opacity: #90C`, so parser rejections there mostly measure the corpus.
 

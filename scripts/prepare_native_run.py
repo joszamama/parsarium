@@ -1,7 +1,9 @@
 """Prepare a coverage-guided campaign with each project's existing fuzz engine.
 
 This writes seeds and an exact Docker command. It never starts a campaign.
-For AFL++ C/C++ campaigns, use prepare_afl_run.py instead.
+For AFL++ C/C++ campaigns, use prepare_afl_run.py instead. --fandango N adds
+N valid inputs from the target's default Fandango route to the control and
+records their provenance in the plan's seed_generation field.
 """
 
 import argparse
@@ -10,8 +12,10 @@ import json
 import os
 from pathlib import Path
 import shlex
+import sys
 import uuid
 
+import fandango_seeds
 from run_case import MAX_CASE_BYTES, ROOT, image_for, project_for
 
 
@@ -87,7 +91,9 @@ def main() -> None:
     cli.add_argument("--seed", type=Path, action="append", default=[])
     cli.add_argument("--seed-dir", type=Path, action="append", default=[])
     cli.add_argument("--duration-seconds", type=int, default=3600)
+    fandango_seeds.add_arguments(cli)
     args = cli.parse_args()
+    fandango_seeds.check_arguments(cli, args)
     if args.duration_seconds < 1:
         cli.error("duration-seconds must be positive")
     project, manifest = project_for(args.format, args.ecosystem, args.package_slug)
@@ -110,20 +116,41 @@ def main() -> None:
     run_dir = args.run_dir.resolve()
     if run_dir.exists() and any(run_dir.iterdir()):
         cli.error("run directory already contains files")
-    seeds = [ROOT / manifest["control"], *args.seed]
     for directory in args.seed_dir:
         if not directory.is_dir():
             cli.error(f"seed directory does not exist: {directory}")
-        seeds.extend(sorted(path for path in directory.rglob("*") if path.is_file()))
+    seeds = [(ROOT / manifest["control"], "control"), *((path, "seed") for path in args.seed)]
+    for directory in args.seed_dir:
+        seeds.extend((path, "seed_dir") for path in
+                     sorted(path for path in directory.rglob("*") if path.is_file()))
+    seed_generation = None
+    fandango_receipt = args.fandango_receipt
+    if args.fandango is not None:
+        try:
+            fandango_receipt = fandango_seeds.generate_seeds(
+                args.format, args.ecosystem, args.package_slug, run_dir, args.fandango,
+                args.fandango_seed)
+        except (OSError, RuntimeError, ValueError) as error:
+            cli.error(str(error))
+    if fandango_receipt is not None:
+        try:
+            _, generated, seed_generation = fandango_seeds.provenance(
+                fandango_receipt, run_dir, str(project.relative_to(ROOT / "projects")))
+        except (OSError, ValueError, KeyError) as error:
+            cli.error(str(error))
+        if args.fandango is not None:
+            seed_generation["receipt_sha256"] = sha256(fandango_receipt.read_bytes()).hexdigest()
+        seeds.extend((path, "fandango") for path in generated)
     data_by_sha = {}
     sources = []
-    for seed in seeds:
+    for seed, origin in seeds:
         data = seed.read_bytes()
         if not data or len(data) > MAX_CASE_BYTES:
             cli.error(f"seed is empty or exceeds {MAX_CASE_BYTES} bytes: {seed}")
         digest = sha256(data).hexdigest()
         data_by_sha[digest] = data
-        sources.append({"path": str(seed.resolve()), "sha256": digest, "bytes": len(data)})
+        sources.append({"path": str(seed.resolve()), "sha256": digest, "bytes": len(data),
+                        "origin": origin})
     corpus = run_dir / "corpus"
     artifacts = run_dir / "artifacts"
     corpus.mkdir(parents=True, exist_ok=True)
@@ -158,11 +185,16 @@ def main() -> None:
             "command": command, "corpus_directory": str(corpus),
             "artifacts_directory": str(artifacts),
             "go_cache_directory": str(go_cache) if go_cache else None}
+    if seed_generation is not None:
+        plan["seed_generation"] = seed_generation
     (run_dir / "plan.json").write_text(json.dumps(plan, indent=2) + "\n")
     print(f"Prepared {len(data_by_sha)} seeds for {engine} in {run_dir}")
     print(shlex.join(command))
     if args.ecosystem == "php":
         print(f"{engine} uses the prepared duration as the run limit.")
+    if len(data_by_sha) == 1:
+        print("note: the only seed is the control; add --fandango N to start from N generated "
+              "valid inputs as well", file=sys.stderr)
 
 
 if __name__ == "__main__":

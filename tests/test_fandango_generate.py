@@ -436,7 +436,7 @@ class FandangoGenerateTest(unittest.TestCase):
                       replay[replay.index("--generator-command") + 1])
         self.assertEqual(prepare[1:], [str(ROOT / "scripts/prepare_afl_run.py"), "png", "c",
                                        "lodepng", str(run.resolve() / "afl"),
-                                       "--seed-dir", generated])
+                                       "--fandango-receipt", str(run.resolve() / "fandango.json")])
         self.assertNotIn("run_prepared_afl.py", " ".join(map(str, prepare)))
         self.assertEqual([item["step"] for item in receipt["bridges"]], ["replay", "afl_prepare"])
         self.assertIn("prepared, not started", output)

@@ -106,8 +106,9 @@ def run(manifest_path: Path, root: Path, mode: str, input_path: Path | None,
         return input_path if len(formats) == 1 else input_path / fmt
 
     failed = []
-    if mode == "fandango":
+    if mode in {"fandango", "afl"}:
         # Install the hash-locked Fandango once; every target then uses its format's default spec.
+        # AFL++ runs start from the control plus COUNT inputs generated with that spec.
         if dry_run:
             print("   parsarium fandango setup")
         elif subprocess.call([*entry, "fandango", "setup"]) != 0:
@@ -130,7 +131,8 @@ def run(manifest_path: Path, root: Path, mode: str, input_path: Path | None,
                       "--count", str(count), "--seed", str(seed), "--replay"]]
         else:
             steps = [["afl", "build", fmt, eco, slug],
-                     ["afl", "prepare", fmt, eco, slug, str(dest)],
+                     ["afl", "prepare", fmt, eco, slug, str(dest),
+                      "--fandango", str(count), "--fandango-seed", str(seed)],
                      ["afl", "run", str(dest), "--seconds", str(seconds)],
                      ["afl", "summary", str(dest)]]
         print(f"== {t['id']}", flush=True)

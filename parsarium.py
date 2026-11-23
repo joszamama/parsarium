@@ -170,12 +170,26 @@ def build_afl(format_name: str, ecosystem: str, slug: str) -> int:
     return execute(script, format_name, ecosystem, slug)
 
 
+def add_seed_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--seed", type=Path, action="append", default=[],
+                        help="add one seed file (repeatable)")
+    parser.add_argument("--seed-dir", type=Path, action="append", default=[],
+                        help="add every file in a directory (repeatable)")
+    parser.add_argument("--fandango", type=int, metavar="N",
+                        help="add N valid inputs generated with the target's default Fandango "
+                             "route into RUN_DIR/fandango; the plan records their provenance")
+    parser.add_argument("--fandango-seed", type=int, default=42, metavar="S",
+                        help="Fandango --random-seed for --fandango (default 42)")
+
+
 def seed_arguments(args: argparse.Namespace) -> list[str]:
     result = []
     for path in args.seed:
         result += ["--seed", str(path)]
     for path in args.seed_dir:
         result += ["--seed-dir", str(path)]
+    if args.fandango is not None:
+        result += ["--fandango", str(args.fandango), "--fandango-seed", str(args.fandango_seed)]
     return result
 
 
@@ -281,13 +295,13 @@ def main() -> int:
     afl_build.add_argument("format", choices=FORMATS)
     afl_build.add_argument("ecosystem", choices=ECOSYSTEMS)
     afl_build.add_argument("slug")
-    afl_prepare = afl_commands.add_parser("prepare", help="copy seeds and pin an AFL++ run")
+    afl_prepare = afl_commands.add_parser(
+        "prepare", help="copy the control and other seeds and pin an AFL++ run")
     afl_prepare.add_argument("format", choices=FORMATS)
     afl_prepare.add_argument("ecosystem", choices=ECOSYSTEMS)
     afl_prepare.add_argument("slug")
     afl_prepare.add_argument("run_dir", type=Path)
-    afl_prepare.add_argument("--seed", type=Path, action="append", default=[])
-    afl_prepare.add_argument("--seed-dir", type=Path, action="append", default=[])
+    add_seed_arguments(afl_prepare)
     afl_prepare.add_argument("--timeout-ms", type=int)
     afl_run = afl_commands.add_parser("run", help="check or start a bounded AFL++ run")
     afl_run.add_argument("run_dir", type=Path)
@@ -307,13 +321,13 @@ def main() -> int:
 
     native = commands.add_parser("native", help="prepare and run ecosystem fuzz engines")
     native_commands = native.add_subparsers(dest="action", required=True)
-    native_prepare = native_commands.add_parser("prepare", help="copy seeds and pin a native engine run")
+    native_prepare = native_commands.add_parser(
+        "prepare", help="copy the control and other seeds and pin a native engine run")
     native_prepare.add_argument("format", choices=FORMATS)
     native_prepare.add_argument("ecosystem", choices=ECOSYSTEMS)
     native_prepare.add_argument("slug")
     native_prepare.add_argument("run_dir", type=Path)
-    native_prepare.add_argument("--seed", type=Path, action="append", default=[])
-    native_prepare.add_argument("--seed-dir", type=Path, action="append", default=[])
+    add_seed_arguments(native_prepare)
     native_prepare.add_argument("--duration-seconds", type=int, default=3600)
     native_run = native_commands.add_parser("run", help="check or start a native engine run")
     native_run.add_argument("run_dir", type=Path)

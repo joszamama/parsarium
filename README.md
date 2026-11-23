@@ -110,17 +110,18 @@ Formats: `png`, `zip`, `mp4`, `wav`, `pdf`, `svg`, `http11`, `ascii_ply`, `ascii
 
 ## Fuzzing
 
-Every runnable project has an AFL++ overlay with parser-dependent feedback. AFL++ instruments compiled C, C++, and Rust targets directly. Go, Java, JavaScript, Python, and PHP harnesses use parser coverage bridges. A prepared run includes a valid seed, pinned image ID, exact command, and output directory.
+Every runnable project has an AFL++ overlay with parser-dependent feedback. AFL++ instruments compiled C, C++, and Rust targets directly. Go, Java, JavaScript, Python, and PHP harnesses use parser coverage bridges. A prepared run includes the valid control, any generated or supplied seeds, the pinned image ID, the exact command, and the output directory.
 
 ```sh
+python3 parsarium.py fandango setup
 python3 parsarium.py afl build png python pypng
-python3 parsarium.py afl prepare png python pypng runs/pypng-afl
+python3 parsarium.py afl prepare png python pypng runs/pypng-afl --fandango 100
 python3 parsarium.py afl run runs/pypng-afl --check
 python3 parsarium.py afl run runs/pypng-afl --seconds 60
 python3 parsarium.py afl summary runs/pypng-afl
 ```
 
-Additional seeds enter with `--seed FILE` or `--seed-dir DIRECTORY` on `afl prepare`. `afl run --resume` continues an existing output directory. AFL++ saves interesting inputs in `queue/`, potential crashes in `crashes/`, potential timeouts in `hangs/`, and progress in `fuzzer_stats`.
+`--fandango 100` generates 100 valid inputs with the format's default Fandango spec into `runs/pypng-afl/fandango/` and seeds AFL++ with them and the control. `plan.json` records their provenance under `seed_generation`: Fandango version, spec and spec SHA-256, random seed (`--fandango-seed`, default 42), requested and written counts, and the generator command; `afl run` and `afl summary` copy it into their receipts. Without `--fandango`, the control is the only seed. Further seeds enter with `--seed FILE` or `--seed-dir DIRECTORY`. Generated files stay in the run directory; do not commit them. `afl run --resume` continues an existing output directory. AFL++ saves interesting inputs in `queue/`, potential crashes in `crashes/`, potential timeouts in `hangs/`, and progress in `fuzzer_stats`.
 
 After a run has saved queue files, `report --replay-queue` measures parser source lines reached by a bounded sample. It replays each selected input once in the project's verified coverage image; it does not start AFL++. LLVM-covered C, C++ and Rust merge profiles from `/work/replay`; Go replays one fuzz test corpus seed per input; Java replays literal verified harness commands and unions JaCoCo source lines, including pinned JDK module-patch paths. Python, PHP and JavaScript package paths use Python `trace`, PHP Xdebug or Node V8 coverage. The report records input hashes, both image IDs, and hashes of profiles or trace exports. The LWJGL/Assimp Java/native hybrid and the standard Node `JSON.parse` path are labeled unsupported for queue line replay; each has separate valid-control coverage and AFL feedback.
 
@@ -133,7 +134,7 @@ Each project also has a plan for its ecosystem fuzz engine:
 
 ```sh
 python3 parsarium.py build png python pypng
-python3 parsarium.py native prepare png python pypng runs/pypng-native --duration-seconds 60
+python3 parsarium.py native prepare png python pypng runs/pypng-native --fandango 100 --duration-seconds 60
 python3 parsarium.py native run runs/pypng-native --check
 python3 parsarium.py native run runs/pypng-native
 ```
