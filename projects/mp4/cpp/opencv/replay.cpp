@@ -9,7 +9,10 @@ int main(int argc, char **argv) {
     if (std::ferror(file) || (size == sizeof(data) && std::fgetc(file) != EOF)) { std::fclose(file); return 4; }
     std::fclose(file);
     Result result{};
-    if (!parse_data(data, size, &result)) return 5;
+    if (!parse_data(data, size, &result)) {
+        std::fprintf(stderr, "%s\n", result.error.c_str());
+        return 5;
+    }
     // Same rounding as the catalog adapter (adapters/cpp/mp4/opencv.cpp).
     std::printf("{\"width\":%.0f,\"height\":%.0f,\"frames\":%.0f,\"fps\":%.0f}\n",
                 result.width, result.height, result.frames, result.fps);

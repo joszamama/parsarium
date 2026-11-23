@@ -13,34 +13,39 @@ static std::string brand_name(std::string label){
  if(cut!=std::string::npos&&cut+2<label.size()&&label.find_first_not_of("0123456789",cut+2)==std::string::npos)label.erase(cut);
  return label;
 }
+// A dimension is reported only when Exiv2 recorded it as an integer; an audio-only
+// file has no video track, so Exiv2 records no width or height.
 static int read_dimension(const Exiv2::XmpData &xmp,const char *key,long *out){
  auto it=xmp.findKey(Exiv2::XmpKey(key));if(it==xmp.end())return 0;
  std::string text=it->toString();char *end=nullptr;long value=strtol(text.c_str(),&end,10);
- if(text.empty()||*end||value<=0||value>65535)return 0;
+ if(text.empty()||*end)return 0;
  *out=value;return 1;
 }
 int parsarium_parse_mp4(const uint8_t *data,size_t size,struct parsarium_mp4_result *result){
- if(!data||!result||!size||size>(1u<<20))return 0;
+ if(!result)return 0;
+ result->has_brand=result->has_width=result->has_height=0;result->brand.clear();result->error.clear();
+ if(!data||!size||size>(1u<<20)){result->error="input outside harness limit";return 0;}
  Exiv2::LogMsg::setLevel(Exiv2::LogMsg::mute);
- char path[]="/tmp/parsarium-mp4-XXXXXX.mp4";int fd=mkstemps(path,4);if(fd<0)return 0;
- size_t off=0;while(off<size){ssize_t n=write(fd,data+off,size-off);if(n<=0){close(fd);unlink(path);return 0;}off+=(size_t)n;}
+ char path[]="/tmp/parsarium-mp4-XXXXXX.mp4";int fd=mkstemps(path,4);
+ if(fd<0){result->error="cannot create parser input";return 0;}
+ size_t off=0;while(off<size){ssize_t n=write(fd,data+off,size-off);
+  if(n<=0){close(fd);unlink(path);result->error="cannot write parser input";return 0;}off+=(size_t)n;}
  close(fd);int ok=0;
  try{
   auto image=Exiv2::ImageFactory::open(path);
-  if(image&&image->imageType()==Exiv2::ImageType::qtime){
+  if(!image)result->error="Exiv2::ImageFactory::open returned no image";
+  else if(image->imageType()!=Exiv2::ImageType::qtime)
+   result->error="Exiv2 did not open the file as QuickTime (image type "+std::to_string((int)image->imageType())+")";
+  else{
    image->readMetadata();
    const Exiv2::XmpData &xmp=image->xmpData();
    auto brand=xmp.findKey(Exiv2::XmpKey("Xmp.video.MajorBrand"));
-   if(brand!=xmp.end()&&read_dimension(xmp,"Xmp.video.Width",&result->width)
-      &&read_dimension(xmp,"Xmp.video.Height",&result->height)){
-    std::string name=brand_name(brand->toString());
-    if(!name.empty()&&name.size()<sizeof(result->brand)
-       &&name.find_first_of("\"\\")==std::string::npos){
-     memcpy(result->brand,name.c_str(),name.size()+1);ok=1;
-    }
-   }
+   if(brand!=xmp.end()){result->brand=brand_name(brand->toString());result->has_brand=1;}
+   result->has_width=read_dimension(xmp,"Xmp.video.Width",&result->width);
+   result->has_height=read_dimension(xmp,"Xmp.video.Height",&result->height);
+   ok=1;
   }
- }catch(const std::exception &){ok=0;}
+ }catch(const std::exception &error){result->error=error.what();ok=0;}
  unlink(path);return ok;
 }
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data,size_t size){
