@@ -1,7 +1,6 @@
 """Read WAV bytes through CPython's wave parser."""
 
 from io import BytesIO
-import struct
 import wave
 
 
@@ -10,12 +9,14 @@ def parse_wav(data: bytes):
         return None
     with wave.open(BytesIO(data), "rb") as reader:
         params = reader.getparams()
-        if params.nchannels != 1 or params.sampwidth != 2:
-            return None
-        frames = reader.readframes(min(4, params.nframes))
-    if len(frames) % 2:
-        return None
-    samples = list(struct.unpack(f"<{len(frames) // 2}h", frames))
+        # The first four interleaved samples: enough frames to hold them.
+        wanted = -(-4 // params.nchannels) if params.nchannels else 0
+        frames = reader.readframes(min(wanted, params.nframes))
+    width = params.sampwidth
+    count = min(4, len(frames) // width) if width else 0
+    # wave returns raw little-endian samples; 8-bit WAV samples are unsigned.
+    samples = [int.from_bytes(frames[i * width:(i + 1) * width], "little", signed=width > 1)
+               for i in range(count)]
     return {"sample_rate": params.framerate, "channels": params.nchannels,
             "bits_per_sample": params.sampwidth * 8, "samples": samples}
 

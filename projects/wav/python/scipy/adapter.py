@@ -7,8 +7,11 @@ from pathlib import Path
 
 
 def samples(rate, channels, values):
+    # The first four interleaved samples; floats in [-1, 1] are scaled to 16 bits.
     out = []
     for value in values:
+        if len(out) == 4:
+            break
         value = float(value)
         out.append(round(value * 32768) if -1 <= value <= 1 and not value.is_integer()
                    else round(value))
@@ -24,11 +27,11 @@ def run(name: str, path: Path):
     if name == "scipy":
         from scipy.io import wavfile
         rate, data = wavfile.read(str(path))
-        return samples(rate, 1, data)
+        return samples(rate, data.shape[1] if data.ndim == 2 else 1, data.reshape(-1))
     if name == "soundfile":
         import soundfile
         data, rate = soundfile.read(str(path))
-        return samples(rate, 1, data)
+        return samples(rate, data.shape[1] if data.ndim == 2 else 1, data.reshape(-1))
     if name == "librosa":
         import librosa
         data, rate = librosa.load(str(path), sr=None)
@@ -91,7 +94,7 @@ def run(name: str, path: Path):
         import av
         with av.open(str(path)) as container:
             stream = container.streams.audio[0]
-            values = [int(value) for frame in container.decode(audio=0)
+            values = [value for frame in container.decode(audio=0)
                       for value in frame.to_ndarray().ravel()]
             return samples(stream.sample_rate, stream.channels, values)
     if name == "audiofile":
