@@ -54,7 +54,8 @@ POST_COMPARISON = re.compile(
 INFRASTRUCTURE = [
     (re.compile(r"Unable to find image|No such image|pull access denied"), "image missing"),
     (re.compile(r"exec format error"), "wrong image platform"),
-    (re.compile(r"Cannot connect to the Docker daemon"), "docker daemon unreachable"),
+    (re.compile(r"Cannot connect to the Docker daemon|failed to connect to the docker API"),
+     "docker daemon unreachable"),
     (re.compile(r"OCI runtime|failed to create task|Error response from daemon"), "container failed to start"),
     (re.compile(r"No space left on device"), "no space left on device"),
     (re.compile(r"Read-only file system: '/coverage|Permission denied: '/coverage|EACCES[^\n]*/coverage"),

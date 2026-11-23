@@ -62,6 +62,13 @@ class ExtractionTests(unittest.TestCase):
         record = observe.classify(EXPECTED, 125, "", stderr, {}, False)
         self.assertEqual(record["class"], "harness_error")
 
+    def test_unreachable_docker_api_is_a_harness_error(self):
+        stderr = ("failed to connect to the docker API at unix:///x/docker.sock; check if the path "
+                  "is correct and if the daemon is running: dial unix /x/docker.sock: connect: "
+                  "no such file or directory\n")
+        record = observe.classify(EXPECTED, 1, "", stderr, {}, False)
+        self.assertEqual(record["class"], "harness_error")
+
     def test_python_repr_message(self):
         stderr = "control mismatch: {'width': 5, 'height': 4, 'alpha': True, 'mode': None, 'px': (1, 2)}\n"
         record = observe.classify(EXPECTED, 1, "", stderr, {}, False)
