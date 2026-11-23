@@ -183,9 +183,21 @@ def parse(name, raw):
                               parser.get_headers()["Host"])
 
     if name == "tornado":
+        import logging
         from tornado.http1connection import HTTP1Connection
         from tornado.httputil import HTTPMessageDelegate
         from tornado.iostream import IOStream
+        from tornado.log import gen_log
+
+        # HTTP1Connection logs an HTTPInputError at INFO on tornado.general
+        # and returns instead of raising; keep the message to report it.
+        class InputErrors(logging.Handler):
+            def __init__(self):
+                super().__init__(logging.INFO)
+                self.messages = []
+
+            def emit(self, record):
+                self.messages.append(record.getMessage())
 
         class Delegate(HTTPMessageDelegate):
             body = b""
@@ -208,15 +220,24 @@ def parse(name, raw):
             sender.shutdown(socket.SHUT_WR)
             stream = IOStream(receiver)
             delegate = Delegate()
+            errors = InputErrors()
+            level = gen_log.level
+            gen_log.addHandler(errors)
+            gen_log.setLevel(logging.INFO)
             try:
                 await asyncio.wait_for(HTTP1Connection(stream, is_client=True)
                                        .read_response(delegate), 3)
                 if not delegate.finished:
-                    raise ValueError("response not finished")
-                return {"status": delegate.start_line.code,
-                        "content_type": delegate.headers["Content-Type"],
-                        "body": delegate.body.decode("ascii")}
+                    raise ValueError("; ".join(errors.messages) or "response not finished")
+                # A field the response does not carry is omitted.
+                result = {"status": delegate.start_line.code}
+                if "Content-Type" in delegate.headers:
+                    result["content_type"] = delegate.headers["Content-Type"]
+                result["body"] = delegate.body.decode("ascii")
+                return result
             finally:
+                gen_log.removeHandler(errors)
+                gen_log.setLevel(level)
                 stream.close()
                 sender.close()
 

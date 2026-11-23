@@ -1,9 +1,12 @@
 #include "harness.h"
 
+#include <apr_errno.h>
 #include <apr_general.h>
 #include <apr_pools.h>
 #include <serf.h>
 #include <serf_bucket_types.h>
+
+#include <string>
 
 namespace {
 
@@ -17,6 +20,29 @@ constexpr int idle_read_limit = 64;
 bool apr_ready() {
     static const bool ready = apr_initialize() == APR_SUCCESS;
     return ready;
+}
+
+// serf_error_string() lives in Serf's context.c, which is not built here; the
+// response bucket returns these serf.h codes, so they are named directly.
+const char *serf_status_name(apr_status_t status) {
+    switch (status) {
+    case SERF_ERROR_CLOSING: return "SERF_ERROR_CLOSING";
+    case SERF_ERROR_REQUEST_LOST: return "SERF_ERROR_REQUEST_LOST";
+    case SERF_ERROR_WAIT_CONN: return "SERF_ERROR_WAIT_CONN";
+    case SERF_ERROR_DECOMPRESSION_FAILED: return "SERF_ERROR_DECOMPRESSION_FAILED";
+    case SERF_ERROR_BAD_HTTP_RESPONSE: return "SERF_ERROR_BAD_HTTP_RESPONSE";
+    case SERF_ERROR_TRUNCATED_HTTP_RESPONSE: return "SERF_ERROR_TRUNCATED_HTTP_RESPONSE";
+    case SERF_ERROR_ABORTED_CONNECTION: return "SERF_ERROR_ABORTED_CONNECTION";
+    default: return nullptr;
+    }
+}
+
+std::string status_error(const char *call, apr_status_t status) {
+    char text[120];
+    const char *name = serf_status_name(status);
+    if (!name) name = apr_strerror(status, text, sizeof(text));
+    return std::string(call) + " returned " + name + " (status " +
+           std::to_string(static_cast<int>(status)) + ")";
 }
 
 // Serf 1.3 reads a response from a bucket stream: serf_bucket_simple_create
@@ -62,23 +88,32 @@ bool parse(serf_bucket_alloc_t *allocator, const std::uint8_t *data, std::size_t
                 apr_size_t length = 0;
                 status = serf_bucket_read(response, SERF_READ_ALL_AVAIL, &chunk, &length);
                 if (SERF_BUCKET_READ_ERROR(status)) {
+                    result->error = status_error("serf_bucket_read", status);
                     ok = false;
                     break;
                 }
                 if (length) {
                     if (result->body.size() + length > body_limit) {
+                        result->error = "body over the harness limit of " +
+                                        std::to_string(body_limit) + " bytes";
                         ok = false;
                         break;
                     }
                     result->body.append(chunk, length);
                     idle = 0;
                 } else if (++idle > idle_read_limit) {
+                    result->error = "serf_bucket_read made no progress in " +
+                                    std::to_string(idle_read_limit) + " reads";
                     ok = false;
                     break;
                 }
                 if (APR_STATUS_IS_EOF(status)) break;
             }
+        } else {
+            result->error = status_error("serf_bucket_response_wait_for_headers", status);
         }
+    } else {
+        result->error = status_error("serf_bucket_response_status", status);
     }
     serf_bucket_destroy(response);
     return ok;
@@ -88,9 +123,16 @@ bool parse(serf_bucket_alloc_t *allocator, const std::uint8_t *data, std::size_t
 
 bool parsarium_parse_http_response(const std::uint8_t *data, std::size_t size,
                                    ParsariumHttpResponse *result) {
-    if (!data || !result || size == 0 || size > input_limit || !apr_ready()) return false;
+    if (!result) return false;
+    if (!data || size == 0 || size > input_limit) {
+        result->error = "input outside harness limit";
+        return false;
+    }
     apr_pool_t *pool = nullptr;
-    if (apr_pool_create(&pool, nullptr) != APR_SUCCESS) return false;
+    if (!apr_ready() || apr_pool_create(&pool, nullptr) != APR_SUCCESS) {
+        result->error = "APR initialization failed";
+        return false;
+    }
     serf_bucket_alloc_t *allocator = serf_bucket_allocator_create(pool, nullptr, nullptr);
     bool ok = parse(allocator, data, size, result);
     apr_pool_destroy(pool);

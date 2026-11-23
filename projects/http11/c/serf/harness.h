@@ -13,6 +13,8 @@ struct parsarium_http_response {
     size_t content_type_len;
     char *body;
     size_t body_len;
+    /* Why parsing failed: the Serf call and the status it returned. */
+    char error[192];
 };
 int parsarium_parse_http_response(const uint8_t *data, size_t size,
                                   struct parsarium_http_response *result);

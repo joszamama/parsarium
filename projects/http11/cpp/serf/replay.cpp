@@ -44,7 +44,11 @@ int main(int argc, char **argv) {
     }
     std::fclose(file);
     ParsariumHttpResponse result{};
-    if (!parsarium_parse_http_response(input.data(), input.size(), &result)) return 5;
+    if (!parsarium_parse_http_response(input.data(), input.size(), &result)) {
+        std::fprintf(stderr, "%s\n",
+                     result.error.empty() ? "Serf response parse failed" : result.error.c_str());
+        return 5;
+    }
     std::printf("{\"version\":\"%d.%d\",\"status\":%d,\"reason\":%s,\"content_type\":%s,"
                 "\"body\":%s}\n",
                 result.major, result.minor, result.status, json_string(result.reason).c_str(),

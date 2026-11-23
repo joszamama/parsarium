@@ -37,6 +37,8 @@ FORMATS = PROJECT_FORMATS
 # mp3_plain.fan. Fanbase's mp3 grammar keeps the audio frames fixed, mixes
 # Layer III with Layer I and II frames and varies only the tag text, and
 # removing its tags does not yield a contiguous Layer III stream.
+# HTTP/1.1 is resolved per target too: targets verified on a response control
+# use the local http11_response.fan, all others http11_request.fan.
 # Fanbase has no YAML spec, so yaml uses the bundled schema-neutral yaml.fan.
 # Fanbase has no TOML spec either; toml uses the local toml.fan.
 # Fanbase's svg spec stays selectable with --fanbase svg, but most of its
@@ -54,6 +56,8 @@ LOCAL_SPECS = {"mp4": "mp4.fan", "pdf": "pdf.fan", "mp3": "mp3_plain.fan",
                "ascii_pnm": "ascii_pnm_p3.fan", "yaml": "yaml.fan", "toml": "toml.fan", "sql": "sql.fan", "dns": "dns_message.fan",
                "svg": "svg.fan", "wav": "wav.fan"}
 TAGGED_MP3_SPEC = "mp3_tagged.fan"
+HTTP_RESPONSE_CONTROL_PREFIX = "controls/http11/response"
+HTTP_RESPONSE_SPEC = "http11_response.fan"
 # Formats with a Fanbase spec whose default route is the bundled spec.
 PREFER_LOCAL = {"svg", "mp3", "wav"}
 # Extra Fandango options for a bundled spec. Fandango's default node budget
@@ -220,6 +224,8 @@ def bundled_specs(fmt: str) -> set[Path]:
     specs = {bundled_spec(fmt)} - {None}
     if fmt == "mp3":
         specs.add((ROOT / "fuzzing/fandango/specs" / TAGGED_MP3_SPEC).resolve())
+    if fmt == "http11":
+        specs.add((ROOT / "fuzzing/fandango/specs" / HTTP_RESPONSE_SPEC).resolve())
     return specs
 
 
@@ -228,6 +234,13 @@ def tagged_mp3_target(ecosystem: str, slug: str) -> bool:
     manifest = ROOT / "projects" / "mp3" / ecosystem / slug / "manifest.json"
     return (manifest.is_file() and
             json.loads(manifest.read_text())["control"].startswith(TAGGED_MP3_CONTROL_PREFIX))
+
+
+def http_response_target(ecosystem: str, slug: str) -> bool:
+    """True for an HTTP/1.1 target verified on a response control."""
+    manifest = ROOT / "projects" / "http11" / ecosystem / slug / "manifest.json"
+    return (manifest.is_file() and
+            json.loads(manifest.read_text())["control"].startswith(HTTP_RESPONSE_CONTROL_PREFIX))
 
 
 def fanbase_format(args: argparse.Namespace) -> str | None:
@@ -251,6 +264,8 @@ def validate(cli: argparse.ArgumentParser, args: argparse.Namespace) -> Path | N
             args.fanbase = expected_fanbase
         elif args.format == "mp3" and expected_fanbase is not None:
             args.spec = ROOT / "fuzzing/fandango/specs" / TAGGED_MP3_SPEC
+        elif args.format == "http11" and http_response_target(args.ecosystem, args.slug):
+            args.spec = ROOT / "fuzzing/fandango/specs" / HTTP_RESPONSE_SPEC
         elif args.format in LOCAL_SPECS:
             args.spec = ROOT / "fuzzing/fandango/specs" / LOCAL_SPECS[args.format]
         else:

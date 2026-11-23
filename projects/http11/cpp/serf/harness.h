@@ -13,6 +13,8 @@ struct ParsariumHttpResponse {
     bool has_content_type;
     std::string content_type;
     std::string body;
+    // Why parsing failed: the Serf call and the status it returned.
+    std::string error;
 };
 
 bool parsarium_parse_http_response(const std::uint8_t *data, std::size_t size,

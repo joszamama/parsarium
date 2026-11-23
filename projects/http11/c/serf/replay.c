@@ -23,7 +23,10 @@ int main(int argc, char **argv) {
     }
     fclose(file);
     struct parsarium_http_response result;
-    if (!parsarium_parse_http_response(data, size, &result)) return 5;
+    if (!parsarium_parse_http_response(data, size, &result)) {
+        fprintf(stderr, "%s\n", result.error[0] ? result.error : "Serf response parse failed");
+        return 5;
+    }
     printf("{\"version\":\"%d.%d\",\"status\":%d,\"reason\":", result.major, result.minor,
            result.status);
     print_json_string(result.reason, result.reason_len);

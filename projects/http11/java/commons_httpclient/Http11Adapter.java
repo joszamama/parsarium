@@ -335,9 +335,11 @@ public final class Http11Adapter {
             if (header.getName().equalsIgnoreCase("Content-Type")) contentType = header.getValue();
             if (header.getName().equalsIgnoreCase("Content-Length")) contentLength = header.getValue();
         }
-        if (contentType == null || contentLength == null) System.exit(1);
-        System.out.printf("{\"version\":\"%s\",\"status\":%d,\"reason\":\"%s\",\"content_type\":\"%s\",\"content_length\":%s}%n",
-                status.getHttpVersion(), status.getStatusCode(), status.getReasonPhrase(),
-                contentType, contentLength);
+        // A field the response does not carry is omitted.
+        var output = new StringBuilder(String.format("{\"version\":\"%s\",\"status\":%d,\"reason\":\"%s\"",
+                status.getHttpVersion(), status.getStatusCode(), status.getReasonPhrase()));
+        if (contentType != null) output.append(",\"content_type\":\"").append(contentType).append('"');
+        if (contentLength != null) output.append(",\"content_length\":").append(contentLength);
+        System.out.println(output.append('}'));
     }
 }

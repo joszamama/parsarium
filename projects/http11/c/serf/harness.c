@@ -1,8 +1,10 @@
 #include "harness.h"
 #include <apr_general.h>
+#include <apr_errno.h>
 #include <apr_pools.h>
 #include <serf.h>
 #include <serf_bucket_types.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -18,6 +20,30 @@ static int apr_ready(void) {
     static int state = 0;
     if (!state) state = apr_initialize() == APR_SUCCESS ? 1 : -1;
     return state == 1;
+}
+
+/* serf_error_string() lives in Serf's context.c, which is not built here; the
+ * response bucket returns these serf.h codes, so they are named directly. */
+static const char *serf_status_name(apr_status_t status) {
+    switch (status) {
+    case SERF_ERROR_CLOSING: return "SERF_ERROR_CLOSING";
+    case SERF_ERROR_REQUEST_LOST: return "SERF_ERROR_REQUEST_LOST";
+    case SERF_ERROR_WAIT_CONN: return "SERF_ERROR_WAIT_CONN";
+    case SERF_ERROR_DECOMPRESSION_FAILED: return "SERF_ERROR_DECOMPRESSION_FAILED";
+    case SERF_ERROR_BAD_HTTP_RESPONSE: return "SERF_ERROR_BAD_HTTP_RESPONSE";
+    case SERF_ERROR_TRUNCATED_HTTP_RESPONSE: return "SERF_ERROR_TRUNCATED_HTTP_RESPONSE";
+    case SERF_ERROR_ABORTED_CONNECTION: return "SERF_ERROR_ABORTED_CONNECTION";
+    default: return NULL;
+    }
+}
+
+static void set_error(struct parsarium_http_response *result, const char *call,
+                      apr_status_t status) {
+    char text[120];
+    const char *name = serf_status_name(status);
+    if (!name) name = apr_strerror(status, text, sizeof(text));
+    snprintf(result->error, sizeof(result->error), "%s returned %s (status %d)", call, name,
+             (int)status);
 }
 
 /* Serf returns NUL-terminated strings owned by the bucket allocator; copy them
@@ -66,15 +92,20 @@ static int parse(serf_bucket_alloc_t *allocator, const uint8_t *data, size_t siz
      * first call reports no status line; the second returns the stored one. */
     if (!SERF_BUCKET_READ_ERROR(status) && line.version == 0)
         status = serf_bucket_response_status(response, &line);
-    if (SERF_BUCKET_READ_ERROR(status) || line.version == 0) goto done;
+    if (SERF_BUCKET_READ_ERROR(status) || line.version == 0) {
+        set_error(result, "serf_bucket_response_status", status);
+        goto done;
+    }
     status = serf_bucket_response_wait_for_headers(response);
     /* When the blank line ends the input, the machine reaches the body state
      * but still reports the stream's EOF; asking again confirms it. */
     if (APR_STATUS_IS_EOF(status))
         status = serf_bucket_response_wait_for_headers(response);
     /* Serf hands everything after a 101 status line to the body unparsed. */
-    if (!(status == APR_SUCCESS || (line.code == 101 && APR_STATUS_IS_EOF(status))))
+    if (!(status == APR_SUCCESS || (line.code == 101 && APR_STATUS_IS_EOF(status)))) {
+        set_error(result, "serf_bucket_response_wait_for_headers", status);
         goto done;
+    }
     result->major = SERF_HTTP_VERSION_MAJOR(line.version);
     result->minor = SERF_HTTP_VERSION_MINOR(line.version);
     result->status = line.code;
@@ -91,11 +122,21 @@ static int parse(serf_bucket_alloc_t *allocator, const uint8_t *data, size_t siz
         const char *chunk = NULL;
         apr_size_t length = 0;
         status = serf_bucket_read(response, SERF_READ_ALL_AVAIL, &chunk, &length);
-        if (SERF_BUCKET_READ_ERROR(status)) goto done;
+        if (SERF_BUCKET_READ_ERROR(status)) {
+            set_error(result, "serf_bucket_read", status);
+            goto done;
+        }
         if (length) {
-            if (!chunk || !append_body(result, &capacity, chunk, length)) goto done;
+            if (!chunk || !append_body(result, &capacity, chunk, length)) {
+                snprintf(result->error, sizeof(result->error),
+                         "body over the harness limit of %zu bytes or out of memory",
+                         (size_t)BODY_LIMIT);
+                goto done;
+            }
             idle = 0;
         } else if (++idle > IDLE_READ_LIMIT) {
+            snprintf(result->error, sizeof(result->error),
+                     "serf_bucket_read made no progress in %d reads", IDLE_READ_LIMIT);
             goto done;
         }
         if (APR_STATUS_IS_EOF(status)) break;
@@ -114,9 +155,15 @@ int parsarium_parse_http_response(const uint8_t *data, size_t size,
                                   struct parsarium_http_response *result) {
     if (!result) return 0;
     memset(result, 0, sizeof(*result));
-    if (!data || !size || size > INPUT_LIMIT || !apr_ready()) return 0;
+    if (!data || !size || size > INPUT_LIMIT) {
+        snprintf(result->error, sizeof(result->error), "input outside harness limit");
+        return 0;
+    }
     apr_pool_t *pool = NULL;
-    if (apr_pool_create(&pool, NULL) != APR_SUCCESS) return 0;
+    if (!apr_ready() || apr_pool_create(&pool, NULL) != APR_SUCCESS) {
+        snprintf(result->error, sizeof(result->error), "APR initialization failed");
+        return 0;
+    }
     serf_bucket_alloc_t *allocator = serf_bucket_allocator_create(pool, NULL, NULL);
     int ok = parse(allocator, data, size, result);
     apr_pool_destroy(pool);

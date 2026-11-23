@@ -196,6 +196,18 @@ class FandangoGenerateTest(unittest.TestCase):
         self.assertIn("tagged_mp3_route", receipt)
         self.assertEqual(receipt["problems"], [])
 
+    def test_http11_route_follows_control_kind(self):
+        specs = ROOT / "fuzzing/fandango/specs"
+        for slug, spec in (("stdlib_response", "http11_response.fan"),
+                           ("stdlib_request", "http11_request.fan")):
+            code, output = self.run_cli("http11", "go", slug, str(self.tmp / slug),
+                                        "--count", "1")
+            self.assertEqual(code, 0, output)
+            argv = json.loads(self.log.read_text())["argv"]
+            self.assertEqual(argv[1:5], ["-f", str(specs / spec), "-x", ".http"])
+            self.assertEqual(self.receipt(self.tmp / slug)["spec"]["sha256"],
+                             sha256((specs / spec).read_bytes()).hexdigest())
+
     def test_tagged_mp3_rejects_untagged_stream(self):
         control = ROOT / "controls/mp3/go-tone-44k-mono.mp3"
         run = self.tmp / "plain-into-tagged"
