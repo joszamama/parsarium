@@ -4,6 +4,7 @@ import io.github.sceneview.core.ply.PlyLoader;
 import io.github.sceneview.core.ply.PlyModel;
 import io.github.sceneview.core.ply.PlyParseException;
 import io.github.sceneview.core.threemf.ThreeMfUnit;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -20,9 +21,8 @@ public final class SceneviewPlyAdapter {
             model = PlyLoader.INSTANCE.parse(bytes, ThreeMfUnit.MILLIMETER,
                     1_000_000, 1_000_000, 32 * 1024 * 1024);
         } catch (PlyParseException rejected) {
-            // Documented parser rejection, not a harness failure.
-            System.out.println("{\"rejected\":\"PlyParseException\"}");
-            return;
+            // Documented parser rejection, not a harness failure: report the parser's message.
+            throw new IOException(rejected.toString(), rejected);
         }
         String indices = Arrays.stream(model.getIndices()).mapToObj(Integer::toString)
                 .collect(Collectors.joining(","));

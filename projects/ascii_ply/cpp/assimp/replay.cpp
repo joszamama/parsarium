@@ -26,9 +26,15 @@ int main(int argc, char **argv) {
     }
     std::fclose(file);
     ParsariumPlyResult result{};
-    if (!parsarium_parse_ply(input.data(), input.size(), &result)) return 5;
-    std::printf("{\"meshes\":%u,\"vertices\":%u,\"faces\":%u,\"face\":[%u,%u,%u]}\n",
-                result.meshes, result.vertices, result.faces,
-                result.face[0], result.face[1], result.face[2]);
+    if (!parsarium_parse_ply(input.data(), input.size(), &result)) {
+        // Assimp's own reason for rejecting the file.
+        std::fprintf(stderr, "%s\n", result.error.c_str());
+        return 5;
+    }
+    std::printf("{\"meshes\":%u,\"vertices\":%u,\"faces\":%u,\"face\":[",
+                result.meshes, result.vertices, result.faces);
+    for (std::size_t i = 0; i < result.face.size(); ++i)
+        std::printf("%s%u", i ? "," : "", result.face[i]);
+    std::printf("]}\n");
     return 0;
 }

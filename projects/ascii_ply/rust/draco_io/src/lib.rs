@@ -19,7 +19,9 @@ fn parse_package(package: &str, path: &std::path::Path) -> Result<serde_json::Va
         "draco-io" => {
             let mut reader = draco_io::ply_reader::PlyReader::from_bytes(bytes.clone());
             let positions = reader.read_positions()?;
-            json!({"vertices": positions.len(), "last_vertex": positions[2]})
+            // last_vertex is the last position read (empty when there is none).
+            let last_vertex = match positions.last() { Some(v) => json!(v), None => json!([]) };
+            json!({"vertices": positions.len(), "last_vertex": last_vertex})
         }
         other => return Err(format!("unknown package: {other}").into()),
     };

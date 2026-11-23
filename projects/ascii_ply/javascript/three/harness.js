@@ -10,7 +10,8 @@ async function parsePly(data) {
   const vertices = [];
   for (let i = 0; i < values.length; i += 3) vertices.push(values.slice(i, i + 3));
   const faces = [];
-  const indices = Array.from(geometry.index.array);
+  // A geometry without an index (a point cloud) has no faces.
+  const indices = geometry.index ? Array.from(geometry.index.array) : [];
   for (let i = 0; i < indices.length; i += 3) faces.push(indices.slice(i, i + 3));
   return { vertices, faces };
 }

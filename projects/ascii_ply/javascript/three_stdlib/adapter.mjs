@@ -11,9 +11,10 @@ const verticesFromFlat = (flat) => {
   const numbers = Array.from(flat);
   return Array.from({ length: numbers.length / 3 }, (_, i) => numbers.slice(i * 3, i * 3 + 3));
 };
+// A geometry without an index (a point cloud) has no faces.
 const fromGeometry = (geometry) => ({
   vertices: verticesFromFlat(geometry.getAttribute('position').array),
-  faces: [Array.from(geometry.index.array)]
+  faces: geometry.index ? [Array.from(geometry.index.array)] : []
 });
 
 let output;

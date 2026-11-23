@@ -11,7 +11,9 @@ $binary = getenv('PARSARIUM_ASSIMP_BIN') ?: '/usr/bin/assimp';
 $verb = new Assimp\Command\Verbs\InfoVerb($argv[1]);
 $result = (new Assimp\Command\Command($binary))->execute($verb, true);
 if (!$result->isSuccess() || strpos($result->getCommand(), $argv[1]) === false) {
-    fwrite(STDERR, "Assimp import did not succeed on the supplied path\n");
+    // The assimp command's own output says why the import failed.
+    fwrite(STDERR, "Assimp import did not succeed on the supplied path: "
+        . implode("\n", $result->getOutput()) . "\n");
     exit(1);
 }
 

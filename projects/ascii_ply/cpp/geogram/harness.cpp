@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <exception>
 #include <iostream>
 #include <streambuf>
 #include <unistd.h>
@@ -68,16 +69,23 @@ bool parsarium_parse_ply(const std::uint8_t *data, std::size_t size,
     bool parsed = false;
     try {
         parsed = GEO::mesh_load(path, mesh, flags);
+        if (!parsed) result->error = "GEO::mesh_load returned false";
+    } catch (const std::exception &error) {
+        parsed = false;
+        result->error = error.what();
     } catch (...) {
         parsed = false;
+        result->error = "GEO::mesh_load threw a non-standard exception";
     }
     unlink(path);
     if (!parsed) return false;
     result->vertices = mesh.vertices.nb();
     result->faces = mesh.facets.nb();
-    result->face_vertices = mesh.facets.nb() == 0 ? 0 :
-        std::min<std::size_t>(3, mesh.facets.nb_vertices(0));
-    for (std::size_t i = 0; i < result->face_vertices; ++i)
-        result->face[i] = mesh.facets.vertex(0, i);
+    // Geogram keeps polygonal facets: report every vertex of the first one.
+    result->face.clear();
+    if (mesh.facets.nb() != 0) {
+        for (GEO::index_t i = 0; i < mesh.facets.nb_vertices(0); ++i)
+            result->face.push_back(mesh.facets.vertex(0, i));
+    }
     return true;
 }

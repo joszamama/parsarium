@@ -3,12 +3,17 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <string>
+#include <vector>
 
 struct ParsariumPlyResult {
     unsigned meshes;
     unsigned vertices;
     unsigned faces;
-    unsigned face[3];
+    // All indices of the first mesh's first face; empty without a mesh or face.
+    std::vector<unsigned> face;
+    // Importer::GetErrorString() when the import fails.
+    std::string error;
 };
 
 bool parsarium_parse_ply(const std::uint8_t *data, std::size_t size,

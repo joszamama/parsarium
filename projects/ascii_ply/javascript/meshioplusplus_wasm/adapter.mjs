@@ -78,7 +78,9 @@ if (name === 'three') {
   meshio.FS.writeFile('/triangle.ply', bytes);
   const mesh = meshio.readMesh('/triangle.ply');
   output = { vertices: verticesFromFlat(mesh.points),
-    faces: mesh.cells.flatMap((cell) => cell.type === 'triangle' ? [Array.from(cell.data)] : []) };
+    // meshio++ puts each run of same-sized faces in its own cell block (triangle,
+    // quad, polygon); every block comes from the face element.
+    faces: mesh.cells.map((cell) => Array.from(cell.data)) };
 } else if (name === 'online-3d-viewer') {
   const { ImporterPly } = await import('online-3d-viewer');
   const importer = new ImporterPly();

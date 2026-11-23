@@ -9,17 +9,19 @@ def parse_ascii_ply(data: bytes):
     if not data or len(data) > (1 << 20):
         return None
     mesh = PlyData.read(BytesIO(data), mmap=False)
-    if not mesh.text or "vertex" not in mesh or "face" not in mesh:
+    if not mesh.text:
         return None
+    # Elements and properties the file does not have are reported as 0 or empty.
+    face_count = len(mesh["face"]) if "face" in mesh else 0
+    if "vertex" not in mesh:
+        return {"vertex_count": 0, "face_count": face_count,
+                "first_vertex": [], "last_vertex": []}
     vertices = mesh["vertex"]
-    if not len(vertices):
-        return None
     names = vertices.data.dtype.names or ()
-    if not all(axis in names for axis in ("x", "y", "z")):
-        return None
-    first = [float(vertices[0][axis]) for axis in ("x", "y", "z")]
-    last = [float(vertices[-1][axis]) for axis in ("x", "y", "z")]
-    return {"vertex_count": len(vertices), "face_count": len(mesh["face"]),
+    axes = [axis for axis in ("x", "y", "z") if axis in names]
+    first = [float(vertices[0][axis]) for axis in axes] if len(vertices) else []
+    last = [float(vertices[-1][axis]) for axis in axes] if len(vertices) else []
+    return {"vertex_count": len(vertices), "face_count": face_count,
             "first_vertex": first, "last_vertex": last}
 
 

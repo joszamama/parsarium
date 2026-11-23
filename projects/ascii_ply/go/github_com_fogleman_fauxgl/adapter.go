@@ -21,8 +21,7 @@ func main() {
 	case "github.com/fogleman/fauxgl":
 		mesh, err := fauxgl.LoadPLY(path)
 		if err != nil {
-			fmt.Println(`{"error":"rejected"}`)
-			return
+			panic(err)
 		}
 		first := [][]float64{}
 		if len(mesh.Triangles) > 0 {

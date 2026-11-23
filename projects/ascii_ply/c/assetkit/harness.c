@@ -51,7 +51,15 @@ int parsarium_parse_ply(const uint8_t *data, size_t size,
 
     AkDoc *doc = NULL;
     int okay = 0;
-    if (written && ak_load(&doc, path, AK_FILE_TYPE_AUTO) == AK_OK && doc) {
+    result->face_count = 0;
+    result->error = written ? NULL : "could not write the input file";
+    AkResult loaded = written ? ak_load(&doc, path, AK_FILE_TYPE_AUTO) : AK_OK;
+    if (written && (loaded != AK_OK || !doc)) {
+        static char message[64];
+        snprintf(message, sizeof(message), "ak_load returned %d", (int)loaded);
+        result->error = message;
+    }
+    if (written && loaded == AK_OK && doc) {
         AkMesh *mesh = NULL;
         unsigned mesh_count = 0;
         for (AkGeometry *geometry = doc->lib.geometries.first; geometry;
@@ -68,17 +76,20 @@ int parsarium_parse_ply(const uint8_t *data, size_t size,
                 result->faces = (primitive->type == AK_PRIMITIVE_TRIANGLES ||
                                  primitive->type == AK_PRIMITIVE_POLYGONS)
                                     ? primitive->nPolygons : 0;
+                /* The first face's indices as read; none (not zeros) when there
+                 * are no faces or an index cannot be read. */
                 for (int i = 0; i < 3; ++i) result->face[i] = 0;
                 if (result->faces && indices &&
                     ak_meshPrimitiveIndexCount(primitive) >= 3) {
-                    for (int i = 0; i < 3; ++i) {
-                        if (!read_index(indices, (unsigned)i, &result->face[i]))
-                            result->face[i] = 0;
-                    }
+                    while (result->face_count < 3 &&
+                           read_index(indices, result->face_count,
+                                      &result->face[result->face_count]))
+                        result->face_count++;
                 }
                 okay = 1;
             }
         }
+        if (!okay) result->error = "ak_load returned no mesh primitive with positions";
     }
     if (doc) ak_free(doc);
     unlink(path);

@@ -13,10 +13,17 @@ int main(int argc, char **argv) {
         return 4;
     }
     fclose(file);
-    struct parsarium_ply_result result;
-    if (!parsarium_parse_ply(input, size, &result)) return 5;
-    printf("{\"meshes\":%u,\"vertices\":%u,\"faces\":%u,\"face\":[%u,%u,%u]}\n",
-           result.meshes, result.vertices, result.faces,
-           result.face[0], result.face[1], result.face[2]);
+    struct parsarium_ply_result result = {0};
+    if (!parsarium_parse_ply(input, size, &result)) {
+        /* Assimp's own reason for rejecting the file. */
+        fprintf(stderr, "%s\n", parsarium_error());
+        return 5;
+    }
+    printf("{\"meshes\":%u,\"vertices\":%u,\"faces\":%u,\"face\":[",
+           result.meshes, result.vertices, result.faces);
+    for (unsigned i = 0; i < result.face_count; ++i)
+        printf(i ? ",%u" : "%u", result.face[i]);
+    puts("]}");
+    parsarium_free_result(&result);
     return 0;
 }

@@ -27,7 +27,10 @@ func main() {
 			panic("Assimp import failed")
 		}
 		defer scene.ReleaseImport()
-		output = map[string]any{"meshes": scene.NumMeshes(), "vertices": scene.Meshes()[0].NumVertices(), "faces": scene.Meshes()[0].NumFaces()}
+		output = map[string]any{"meshes": 0}
+		if scene.NumMeshes() > 0 {
+			output = map[string]any{"meshes": scene.NumMeshes(), "vertices": scene.Meshes()[0].NumVertices(), "faces": scene.Meshes()[0].NumFaces()}
+		}
 
 	default:
 		panic(fmt.Sprintf("unknown ASCII PLY package: %s", name))

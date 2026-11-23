@@ -4,6 +4,7 @@ import assimp.AiMesh;
 import assimp.AiScene;
 import assimp.Importer;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,12 +12,16 @@ import java.util.stream.Collectors;
 public final class KotlinAssimpPlyAdapter {
     private KotlinAssimpPlyAdapter() {}
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length != 1) throw new IllegalArgumentException("Expected local PLY path");
-        AiScene scene = new Importer().readFile(new File(args[0]).toURI(), 0);
-        if (scene == null || scene.getNumMeshes() < 1) {
-            // Importer.readFile returns null when the importer rejects the file.
-            System.out.println("{\"rejected\":\"no mesh\"}");
+        Importer importer = new Importer();
+        AiScene scene = importer.readFile(new File(args[0]).toURI(), 0);
+        // Importer.readFile returns null when the importer rejects the file; the
+        // reason is in Importer.getErrorString().
+        if (scene == null) throw new IOException(importer.getErrorString());
+        if (scene.getNumMeshes() < 1) {
+            // An imported scene without meshes has no vertices or faces to report.
+            System.out.println("{\"vertices\":0,\"faces\":0,\"indices\":[]}");
             return;
         }
         AiMesh mesh = scene.getMeshes().get(0);

@@ -8,11 +8,12 @@ from pathlib import Path
 
 def summarize(vertices, face_count):
     points = [list(map(float, vertex)) for vertex in vertices]
+    # A file without vertices has no first or last vertex: those are reported empty.
     return {
         "vertex_count": len(points),
         "face_count": int(face_count),
-        "first_vertex": points[0],
-        "last_vertex": points[-1],
+        "first_vertex": points[0] if points else [],
+        "last_vertex": points[-1] if points else [],
     }
 
 
@@ -113,6 +114,9 @@ def parse(name, path):
                 os.environ["LD_LIBRARY_PATH"] = f"{brew_lib}:{os.environ.get('LD_LIBRARY_PATH', '')}"
         import pyassimp
         with pyassimp.load(path) as scene:
+            # A scene without meshes has no vertices or faces.
+            if not scene.meshes:
+                return summarize([], 0)
             mesh = scene.meshes[0]
             return summarize(mesh.vertices, len(mesh.faces))
     raise ValueError(f"unknown package: {name}")

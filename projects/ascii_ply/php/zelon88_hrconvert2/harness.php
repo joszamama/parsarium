@@ -57,16 +57,24 @@ function parsarium_parse_ply(string $input): array|false {
     try {
         if (file_put_contents($inputPath, $input) !== strlen($input)) throw new RuntimeException('Could not write input');
         $result = convertModels($inputPath, $outputPath, 'obj');
-        if ($result[0] !== true || $result[1] !== false || !is_file($outputPath)) return false;
-        if (count($stageMarkers) !== 2 || !is_file($stageMarkers[0]) || !is_file($stageMarkers[1])) return false;
+        // The pipeline's own verdict: element 0 is success, element 1 the error flag,
+        // with the reasons passed to errorEntry().
+        if ($result[0] !== true || $result[1] !== false) {
+            throw new RuntimeException('convertModels failed: ' . (implode('; ', $observedErrors) ?: 'no error entry'));
+        }
+        if (!is_file($outputPath)) throw new RuntimeException('convertModels reported success without writing ' . basename($outputPath));
         $obj = file_get_contents($outputPath);
-        if ($obj === false) return false;
+        if ($obj === false) throw new RuntimeException('Could not read converted OBJ');
+        // A stage (e.g. the PyMeshLab rectification) may fail while the pipeline still
+        // succeeds through the next one: completed_stages counts the stages whose
+        // command created its output.
+        $completed = count(array_filter($stageMarkers, 'is_file'));
         preg_match_all('/^v\s+([-+0-9.eE]+)\s+([-+0-9.eE]+)\s+([-+0-9.eE]+)/m', $obj, $vertexRows, PREG_SET_ORDER);
         preg_match_all('/^f\s+([^\r\n]+)/m', $obj, $faceRows, PREG_SET_ORDER);
         $xSum = 0.0;
         foreach ($vertexRows as $vertex) $xSum += (float)$vertex[1];
         return ['vertices' => count($vertexRows), 'faces' => count($faceRows),
-                'x_sum' => $xSum, 'completed_stages' => count($stageMarkers)];
+                'x_sum' => $xSum, 'completed_stages' => $completed];
     } finally {
         foreach ($stageMarkers as $marker) if (is_file($marker)) unlink($marker);
         if (is_file($inputPath)) unlink($inputPath);

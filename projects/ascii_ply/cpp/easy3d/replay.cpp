@@ -26,7 +26,10 @@ int main(int argc, char **argv) {
     }
     std::fclose(file);
     ParsariumPlyResult result{};
-    if (!parsarium_parse_ply(input.data(), input.size(), &result)) return 5;
+    if (!parsarium_parse_ply(input.data(), input.size(), &result)) {
+        std::fprintf(stderr, "%s\n", result.error.c_str());
+        return 5;
+    }
     std::printf("{\"vertices\":%zu,\"faces\":%zu,\"face\":[",
                 result.vertices, result.faces);
     for (std::size_t i = 0; i < result.face.size(); ++i)

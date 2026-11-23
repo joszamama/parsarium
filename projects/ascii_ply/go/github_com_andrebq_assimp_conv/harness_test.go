@@ -29,7 +29,13 @@ func parseControl(source string) (map[string]any, error) {
 }
 
 func TestControl(t *testing.T) {
-    got, err := parseControl("/input/control")
+    // Assimp picks its importer from the file extension, so the input is read
+    // from a .ply copy, as in FuzzParser (/input/control has no extension).
+    data, err := os.ReadFile("/input/control")
+    if err != nil { t.Fatal(err) }
+    source := filepath.Join(t.TempDir(), "input.ply")
+    if err := os.WriteFile(source, data, 0600); err != nil { t.Fatal(err) }
+    got, err := parseControl(source)
     if err != nil { t.Fatal(err) }
     encoded, err := json.Marshal(got)
     if err != nil { t.Fatal(err) }

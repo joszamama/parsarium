@@ -8,11 +8,12 @@ from pathlib import Path
 
 def summarize(vertices, face_count):
     points = [list(map(float, vertex)) for vertex in vertices]
+    # A file without vertices has no first or last vertex: those are reported empty.
     return {
         "vertex_count": len(points),
         "face_count": int(face_count),
-        "first_vertex": points[0],
-        "last_vertex": points[-1],
+        "first_vertex": points[0] if points else [],
+        "last_vertex": points[-1] if points else [],
     }
 
 

@@ -87,7 +87,8 @@ if (name === 'three') {
     getDefaultMaterialColor: () => ({ r: 200, g: 200, b: 200 }),
     onError: () => {}, onSuccess: () => {}, onComplete: () => {}
   });
-  if (importer.WasError()) throw new Error(importer.GetError?.() || 'PLY import failed');
+  // ImporterBase keeps the reason of a failed import in GetErrorMessage().
+  if (importer.WasError()) throw new Error(importer.GetErrorMessage());
   const mesh = importer.GetModel().GetMesh(0);
   output = { vertices: Array.from({ length: mesh.VertexCount() }, (_, i) => {
     const { x, y, z } = mesh.GetVertex(i); return [x, y, z];

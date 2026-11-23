@@ -30,17 +30,27 @@ public final class LwjglAssimpPlyAdapter {
             throw new IllegalArgumentException("Expected a local ASCII PLY file path");
         }
         AIScene scene = Assimp.aiImportFile(args[0], 0);
-        // Import failures and scenes without a triangle are parser rejections, not harness faults.
+        // Import failures are parser rejections, with Assimp's own error string.
         if (scene == null) throw new IOException(Assimp.aiGetErrorString());
         try {
-            if (scene.mNumMeshes() == 0) throw new IOException("no mesh");
-            AIMesh mesh = AIMesh.create(scene.mMeshes().get(0));
-            if (mesh.mNumFaces() == 0) throw new IOException("no face");
-            AIFace face = mesh.mFaces().get(0);
-            if (face.mNumIndices() < 3) throw new IOException("face has fewer than three indices");
-            System.out.printf("{\"vertices\":%d,\"faces\":%d,\"indices\":[%d,%d,%d]}%n",
-                    mesh.mNumVertices(), mesh.mNumFaces(), face.mIndices().get(0),
-                    face.mIndices().get(1), face.mIndices().get(2));
+            // The first mesh and all indices of its first face (Assimp keeps polygons
+            // without aiProcess_Triangulate); a scene without meshes or faces has none.
+            int vertices = 0, faces = 0;
+            StringBuilder indices = new StringBuilder();
+            if (scene.mNumMeshes() > 0) {
+                AIMesh mesh = AIMesh.create(scene.mMeshes().get(0));
+                vertices = mesh.mNumVertices();
+                faces = mesh.mNumFaces();
+                if (faces > 0) {
+                    AIFace face = mesh.mFaces().get(0);
+                    for (int i = 0; i < face.mNumIndices(); i++) {
+                        if (i > 0) indices.append(',');
+                        indices.append(face.mIndices().get(i));
+                    }
+                }
+            }
+            System.out.printf("{\"vertices\":%d,\"faces\":%d,\"indices\":[%s]}%n",
+                    vertices, faces, indices);
         } finally {
             Assimp.aiReleaseImport(scene);
         }

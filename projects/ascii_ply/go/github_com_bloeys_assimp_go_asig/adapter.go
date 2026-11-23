@@ -23,7 +23,10 @@ func main() {
 			panic(err)
 		}
 		defer release()
-		output = map[string]any{"meshes": len(scene.Meshes), "vertices": len(scene.Meshes[0].Vertices), "faces": len(scene.Meshes[0].Faces)}
+		output = map[string]any{"meshes": 0}
+		if len(scene.Meshes) > 0 {
+			output = map[string]any{"meshes": len(scene.Meshes), "vertices": len(scene.Meshes[0].Vertices), "faces": len(scene.Meshes[0].Faces)}
+		}
 
 	default:
 		panic(fmt.Sprintf("unknown ASCII PLY package: %s", name))

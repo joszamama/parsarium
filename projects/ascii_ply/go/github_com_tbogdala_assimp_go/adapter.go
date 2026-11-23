@@ -16,7 +16,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	encoded, err := json.Marshal(map[string]any{"meshes": len(meshes), "vertices": meshes[0].VertexCount, "faces": meshes[0].FaceCount})
+	output := map[string]any{"meshes": 0}
+	if len(meshes) > 0 {
+		output = map[string]any{"meshes": len(meshes), "vertices": meshes[0].VertexCount, "faces": meshes[0].FaceCount}
+	}
+	encoded, err := json.Marshal(output)
 	if err != nil {
 		panic(err)
 	}

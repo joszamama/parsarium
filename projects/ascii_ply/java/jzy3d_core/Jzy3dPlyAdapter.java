@@ -10,8 +10,11 @@ public final class Jzy3dPlyAdapter {
         }
         try (FileInputStream input = new FileInputStream(args[0])) {
             var vertices = Ply.read(input);
-            System.out.printf("{\"vertices\":%d,\"second_x\":%.1f,\"third_y\":%.1f}%n",
-                    vertices.size(), vertices.get(1).x, vertices.get(2).y);
+            // second_x and third_y are reported only when the file has that many vertices.
+            StringBuilder json = new StringBuilder(String.format("{\"vertices\":%d", vertices.size()));
+            if (vertices.size() > 1) json.append(String.format(",\"second_x\":%.1f", vertices.get(1).x));
+            if (vertices.size() > 2) json.append(String.format(",\"third_y\":%.1f", vertices.get(2).y));
+            System.out.println(json.append('}'));
         }
     }
 }

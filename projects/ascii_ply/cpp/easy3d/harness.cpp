@@ -5,6 +5,7 @@
 #include <easy3d/util/logging.h>
 
 #include <cstdlib>
+#include <exception>
 #include <memory>
 #include <unistd.h>
 
@@ -37,8 +38,13 @@ bool parsarium_parse_ply(const std::uint8_t *data, std::size_t size,
     std::unique_ptr<easy3d::SurfaceMesh> mesh;
     try {
         mesh.reset(easy3d::SurfaceMeshIO::load(path));
+        if (!mesh) result->error = "easy3d::SurfaceMeshIO::load returned null";
+    } catch (const std::exception &error) {
+        mesh.reset();
+        result->error = error.what();
     } catch (...) {
         mesh.reset();
+        result->error = "easy3d::SurfaceMeshIO::load threw a non-standard exception";
     }
     unlink(path);
     if (!mesh) return false;
