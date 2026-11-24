@@ -1,10 +1,14 @@
 #include <picojson.h>
+#include <cxxabi.h>
 #include <cstdint>
+#include <cstdlib>
 #include <cstdio>
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <stdexcept>
 #include <string>
+#include <typeinfo>
 
 #ifdef PARSARIUM_FUZZER
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
@@ -79,7 +83,20 @@ int main(int argc, char **argv) {
     std::string input(std::istreambuf_iterator<char>{file}, {});
     if (input.empty() || input.size() > (1u << 20)) return 2;
     picojson::value document;
-    const std::string error = picojson::parse(document, input);
+    std::string error;
+    try {
+        error = picojson::parse(document, input);
+    } catch (const std::exception &ex) {
+        // picojson refuses some valid numbers by throwing from parse (e.g.
+        // std::overflow_error when a number does not fit in a finite double).
+        // That is the library rejecting the input, so report it as a rejection.
+        int status = 0;
+        char *name = abi::__cxa_demangle(typeid(ex).name(), nullptr, nullptr, &status);
+        std::cerr << "picojson::parse threw " << (status == 0 && name ? name : typeid(ex).name())
+                  << ": " << ex.what() << '\n';
+        std::free(name);
+        return 1;
+    }
     if (!error.empty()) {
         std::cerr << error << '\n';
         return 1;
