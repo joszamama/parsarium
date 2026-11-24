@@ -47,6 +47,7 @@ static void release(struct list *l) {
 }
 static char *pair(const char *name, const char *value) {
     struct buffer b = {0}; int ok = 1;
+    if (!name) name = "";
     append(&b, name, strlen(name), &ok);
     if (value) { append(&b, "=", 1, &ok); append(&b, value, strlen(value), &ok); }
     if (!ok) { free(b.data); return NULL; }
@@ -66,10 +67,19 @@ static void add_text(struct summary *s, const char *text) {
 }
 
 /* Element, its attributes, its text, then each child followed by that child's tail. */
+/*
+ * xb_node_get_element returns NULL for a node without a silo node. When
+ * GMarkup stores nothing, xb_silo_get_root still returns such a placeholder
+ * root ("if there are no XbSiloNodes, still build a root XbNode"). It is not
+ * an element, so it is skipped like any non-element; a silo with no element
+ * is reported below as libxmlb's rejection.
+ */
 static void walk(struct summary *s, XbNode *node, int depth) {
+    const char *element = xb_node_get_element(node);
+    if (!element) return;
     flush(s);
     if (depth > s->max_depth) s->max_depth = depth;
-    push(&s->elements, pair(xb_node_get_element(node), NULL), &s->ok);
+    push(&s->elements, pair(element, NULL), &s->ok);
     XbNodeAttrIter iter;
     const char *name, *value;
     xb_node_attr_iter_init(&iter, node);
