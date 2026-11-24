@@ -1,4 +1,5 @@
 #include "harness.h"
+#include <math.h>
 #include <sndfile.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,13 +34,31 @@ int parsarium_parse_wav(const uint8_t *data, size_t size, struct parsarium_wav_r
     /* The first four interleaved samples, as s16: enough frames to hold them. */
     if (info.channels > 0) {
         sf_count_t want = (4 + info.channels - 1) / info.channels;
-        short *buffer = (short *)calloc((size_t)(want * info.channels), sizeof(short));
-        if (buffer) {
-            sf_count_t read = sf_readf_short(file, buffer, want);
-            sf_count_t count = read > 0 ? read * info.channels : 0;
-            result->sample_count = (unsigned)(count < 4 ? count : 4);
-            memcpy(result->samples, buffer, result->sample_count * sizeof(short));
-            free(buffer);
+        int subtype = info.format & SF_FORMAT_SUBMASK;
+        if (subtype == SF_FORMAT_FLOAT || subtype == SF_FORMAT_DOUBLE) {
+            /* sf_readf_short does not scale float data by default, so every
+               sample in [-1, 1] would read as 0. Read the floats and scale
+               them to s16 (x 32768, rounded, saturated). */
+            float *buffer = (float *)calloc((size_t)(want * info.channels), sizeof(float));
+            if (buffer) {
+                sf_count_t read = sf_readf_float(file, buffer, want);
+                sf_count_t count = read > 0 ? read * info.channels : 0;
+                result->sample_count = (unsigned)(count < 4 ? count : 4);
+                for (unsigned i = 0; i < result->sample_count; i++) {
+                    double scaled = nearbyint((double)buffer[i] * 32768.0);
+                    result->samples[i] = (int16_t)(scaled > 32767.0 ? 32767 : scaled < -32768.0 ? -32768 : scaled);
+                }
+                free(buffer);
+            }
+        } else {
+            short *buffer = (short *)calloc((size_t)(want * info.channels), sizeof(short));
+            if (buffer) {
+                sf_count_t read = sf_readf_short(file, buffer, want);
+                sf_count_t count = read > 0 ? read * info.channels : 0;
+                result->sample_count = (unsigned)(count < 4 ? count : 4);
+                memcpy(result->samples, buffer, result->sample_count * sizeof(short));
+                free(buffer);
+            }
         }
     }
     sf_close(file); return 1;

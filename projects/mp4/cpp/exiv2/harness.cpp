@@ -14,7 +14,10 @@ static std::string brand_name(std::string label){
  return label;
 }
 // A dimension is reported only when Exiv2 recorded it as an integer; an audio-only
-// file has no video track, so Exiv2 records no width or height.
+// file has no video track, so Exiv2 records no width or height. width/height are the
+// coded frame size from the visual sample description (Xmp.video.SourceImageWidth/
+// SourceImageHeight); Xmp.video.Width/Height hold the tkhd presentation size, which a
+// file may set differently.
 static int read_dimension(const Exiv2::XmpData &xmp,const char *key,long *out){
  auto it=xmp.findKey(Exiv2::XmpKey(key));if(it==xmp.end())return 0;
  std::string text=it->toString();char *end=nullptr;long value=strtol(text.c_str(),&end,10);
@@ -41,8 +44,8 @@ int parsarium_parse_mp4(const uint8_t *data,size_t size,struct parsarium_mp4_res
    const Exiv2::XmpData &xmp=image->xmpData();
    auto brand=xmp.findKey(Exiv2::XmpKey("Xmp.video.MajorBrand"));
    if(brand!=xmp.end()){result->brand=brand_name(brand->toString());result->has_brand=1;}
-   result->has_width=read_dimension(xmp,"Xmp.video.Width",&result->width);
-   result->has_height=read_dimension(xmp,"Xmp.video.Height",&result->height);
+   result->has_width=read_dimension(xmp,"Xmp.video.SourceImageWidth",&result->width);
+   result->has_height=read_dimension(xmp,"Xmp.video.SourceImageHeight",&result->height);
    ok=1;
   }
  }catch(const std::exception &error){result->error=error.what();ok=0;}
