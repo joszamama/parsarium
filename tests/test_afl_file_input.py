@@ -82,3 +82,20 @@ class AFLFileInputTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class AFLRsMapSizeTest(unittest.TestCase):
+    def map_size(self, manifest: dict, receipt_size: int) -> str:
+        receipt = {"afl_map_size": receipt_size, "image_id": "sha256:" + "1" * 64}
+        command, _ = commands_for({"platform": "linux/arm64", **manifest}, receipt, Path("/seeds"),
+                                  Path("/results"), 1000, "parsarium-test")
+        return next(part for part in command if part.startswith("AFL_MAP_SIZE="))
+
+    def test_afl_rs_targets_get_the_runtime_map(self):
+        self.assertEqual(self.map_size({"ecosystem": "rust"}, 11592), "AFL_MAP_SIZE=65536")
+
+    def test_other_targets_keep_the_receipt_map(self):
+        self.assertEqual(self.map_size({"ecosystem": "c"}, 11592), "AFL_MAP_SIZE=11592")
+        self.assertEqual(self.map_size({"ecosystem": "rust", "afl_native_c_binding": True,
+                                       "afl_entrypoint": "/work/fuzzer"}, 11592),
+                         "AFL_MAP_SIZE=11592")

@@ -26,6 +26,15 @@ def uses_afl_file_input(manifest: dict) -> bool:
     return manifest.get("afl_file_input", manifest["ecosystem"] in {"c", "cpp"}) is True
 
 
+AFL_RS_RUNTIME_MAP_SIZE = 65536
+
+
+def rust_afl_rs(manifest: dict) -> bool:
+    """Rust targets fuzzed through afl.rs's afl::fuzz! (not a native C binding or cgo entry)."""
+    return (manifest["ecosystem"] == "rust" and not manifest.get("afl_native_c_binding")
+            and not manifest.get("afl_target"))
+
+
 def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
                  output_dir: Path, timeout_ms: int, container_name: str) -> tuple[list[str], list[str]]:
     binary = manifest.get("coverage_kind") == "native_binary_edges"
@@ -37,6 +46,12 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
                       "-e", f"AFL_QEMU_EXCLUDE_RANGES={feedback['executable_excluded_range']}",
                       "-e", f"LD_PRELOAD={feedback['module']}",
                       "-e", "AFL_QEMU_MODE=trace"]
+    map_size = receipt["afl_map_size"]
+    if rust_afl_rs(manifest):
+        # afl.rs links AFL++'s own compiler runtime, which writes a 65536-entry map whatever the
+        # receipt's dumped edge count says. A smaller shared map makes the target crash on its
+        # first shared-memory test case, so afl-fuzz aborts in the dry run.
+        map_size = max(map_size, AFL_RS_RUNTIME_MAP_SIZE)
     common = ["docker", "run", "--rm", "--name", container_name,
               "--pull", "never", "--platform", manifest["platform"],
               "--network", "none", "--read-only", "--cap-drop", "ALL",
@@ -44,7 +59,7 @@ def commands_for(manifest: dict, receipt: dict, seed_dir: Path,
               "--tmpfs", "/tmp:rw,exec,nosuid,size=256m" if tk_source_feedback
                   else "/tmp:rw,exec,nosuid,size=64m", "--workdir", "/tmp",
               "-e", "AFL_SKIP_CPUFREQ=1", "-e", "AFL_NO_AFFINITY=1",
-              "-e", "AFL_NO_UI=1", "-e", f"AFL_MAP_SIZE={receipt['afl_map_size']}",
+              "-e", "AFL_NO_UI=1", "-e", f"AFL_MAP_SIZE={map_size}",
               *binary_env,
               "-v", f"{seed_dir}:/seeds:ro", "-v", f"{output_dir}:/results",
               "--entrypoint", "/opt/afl/bin/afl-fuzz" if binary else
