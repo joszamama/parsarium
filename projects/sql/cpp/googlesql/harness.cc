@@ -25,7 +25,8 @@ struct Summary {
   std::string kind;
   std::set<std::string> tables;
   std::set<std::string> functions;
-  std::set<std::pair<std::string, std::string>> literals;
+  // Sorted, keeping repeated literals (two 0 values are two literals).
+  std::multiset<std::pair<std::string, std::string>> literals;
   int select_items = 0, joins = 0, group_by = 0, order_by = 0, columns = 0, rows = 0;
   bool where = false;
 };

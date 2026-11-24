@@ -13,10 +13,13 @@ import net.sf.jsqlparser.expression.DoubleValue;
 import net.sf.jsqlparser.expression.Function;
 import net.sf.jsqlparser.expression.LongValue;
 import net.sf.jsqlparser.expression.StringValue;
+import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
+import net.sf.jsqlparser.expression.operators.relational.ParenthesedExpressionList;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.insert.Insert;
 import net.sf.jsqlparser.statement.select.PlainSelect;
+import net.sf.jsqlparser.statement.select.Values;
 import net.sf.jsqlparser.util.TablesNamesFinder;
 
 /**
@@ -86,10 +89,15 @@ public final class SqlHarness {
                     + ",\"functions\":" + names(collector.functions)
                     + ",\"literals\":" + collector.literalJson() + "}";
         }
-        if (statement instanceof Insert insert && insert.getValues() != null) {
+        // Insert.getValues() casts the insert's query to Values; INSERT ... SELECT has no VALUES rows.
+        if (statement instanceof Insert insert && insert.getSelect() instanceof Values values) {
+            // VALUES (a, b) is one ParenthesedExpressionList holding the row's values; VALUES (a), (b)
+            // is an ExpressionList with one ParenthesedExpressionList per row.
+            ExpressionList<?> expressions = values.getExpressions();
+            int rows = expressions instanceof ParenthesedExpressionList ? 1 : expressions.size();
             return "{\"kind\":\"insert\",\"tables\":" + tables
                     + ",\"columns\":" + (insert.getColumns() == null ? 0 : insert.getColumns().size())
-                    + ",\"rows\":" + insert.getValues().getExpressions().size()
+                    + ",\"rows\":" + rows
                     + ",\"literals\":" + collector.literalJson() + "}";
         }
         return "{\"kind\":" + quote(statement.getClass().getSimpleName().toLowerCase(Locale.ROOT)) + "}";

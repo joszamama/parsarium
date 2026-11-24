@@ -74,13 +74,29 @@ def summarize(statement: dict) -> dict:
                 "order_by": len(_as_list(statement.get("orderby"))),
                 "functions": sorted(functions), "literals": sorted(literals)}
     if "insert" in statement:
-        rows = _as_list(statement.get("values"))
         literals = []
-        for row in rows:
-            for value in row.values():
-                literals.append(["string", value] if isinstance(value, str) else _number(value))
+        if "values" in statement:
+            # to_insert_call keeps a VALUES list whose cells are all truthy literals as "values":
+            # one {column: value} mapping per row, or one list per row without a column list.
+            rows = _as_list(statement["values"])
+            for row in rows:
+                for value in (row.values() if isinstance(row, dict) else row):
+                    literals.append(["string", value] if isinstance(value, str) else _number(value))
+            columns = len(rows[0]) if rows and isinstance(rows[0], dict) else 0
+        else:
+            # Otherwise the tree keeps the column list and the rows as a query: one row is a
+            # select of its values, several rows are a union_all of such selects (to_values).
+            # A query with any other clause (INSERT ... SELECT ... FROM) has no VALUES rows.
+            query = statement.get("query")
+            selects = (query["union_all"] if isinstance(query, dict) and list(query) == ["union_all"]
+                       else [query])
+            rows = selects if all(isinstance(row, dict) and list(row) == ["select"] for row in selects) else []
+            for row in rows:
+                for item in _as_list(row["select"]):
+                    _expression(item.get("value") if isinstance(item, dict) else item, set(), literals)
+            columns = len(_as_list(statement.get("columns")))
         return {"kind": "insert", "tables": [statement["insert"].lower()],
-                "columns": len(rows[0]) if rows else 0, "rows": len(rows),
+                "columns": columns, "rows": len(rows),
                 "literals": sorted(literals)}
     return {"kind": next(iter(statement), "unknown")}
 

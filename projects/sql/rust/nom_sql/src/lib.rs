@@ -4,8 +4,8 @@ use std::collections::BTreeSet;
 use std::error::Error;
 
 use nom_sql::{
-    Column, ConditionBase, ConditionExpression, FieldDefinitionExpression, FunctionExpression,
-    JoinConstraint, JoinRightSide, Literal, SqlQuery,
+    ArithmeticBase, Column, ConditionBase, ConditionExpression, FieldDefinitionExpression,
+    FieldValueExpression, FunctionExpression, JoinConstraint, JoinRightSide, Literal, SqlQuery,
 };
 use serde_json::{json, Value as Json};
 
@@ -44,6 +44,13 @@ impl Walk {
         }
     }
 
+    fn arithmetic_base(&mut self, base: &ArithmeticBase) {
+        match base {
+            ArithmeticBase::Column(column) => self.column(column),
+            ArithmeticBase::Scalar(literal) => self.literal(literal),
+        }
+    }
+
     fn condition(&mut self, condition: &ConditionExpression) {
         match condition {
             ConditionExpression::ComparisonOp(tree) | ConditionExpression::LogicalOp(tree) => {
@@ -74,8 +81,17 @@ fn summarize(query: &SqlQuery) -> Result<Json, Box<dyn Error>> {
                 walk.tables.insert(table.name.to_lowercase());
             }
             for field in &select.fields {
-                if let FieldDefinitionExpression::Col(column) = field {
-                    walk.column(column);
+                match field {
+                    FieldDefinitionExpression::Col(column) => walk.column(column),
+                    // A select item that is a literal (`1 AS one`) or arithmetic over literals and columns.
+                    FieldDefinitionExpression::Value(FieldValueExpression::Literal(literal)) => {
+                        walk.literal(&literal.value)
+                    }
+                    FieldDefinitionExpression::Value(FieldValueExpression::Arithmetic(arithmetic)) => {
+                        walk.arithmetic_base(&arithmetic.left);
+                        walk.arithmetic_base(&arithmetic.right);
+                    }
+                    _ => {}
                 }
             }
             for join in &select.join {

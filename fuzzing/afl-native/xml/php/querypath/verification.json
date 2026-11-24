@@ -6,8 +6,8 @@
   "feedback_scope": "libxml2 2.15.4 parser.c, parserInternals.c and SAX2.c plus PHP 8.5.12 ext/dom/document.c (DOMDocument::loadXML) via AFL++ allowlist; libxml2 tree, XPath and dict code, the other ext/dom classes, ext/libxml/libxml.c, the Zend engine and the interpreted querypath/querypath PHP code are uninstrumented",
   "harness": "projects/xml/php/querypath/fuzz-target.php -> harness.php parsarium_parse (querypath/querypath load, summary.php namespace-aware DOM walk)",
   "parse_only_target": "DOMDocument::loadXML with options 0, as DOMQuery::parseXMLString calls it (QueryPath passes null options, which PHP 8.5 coerces to 0 with a deprecation)",
-  "base_project_receipt_sha256": "634dcf523e3f4ff87f0bfde6c13c90a29bc48bbfa56b81c9a99876515f0990c8",
-  "base_image_id": "sha256:90398ea2860445e2b0142f5bf371da82566ee20447a4789abff1c59546e32f18",
+  "base_project_receipt_sha256": "7ea9ef50b6fc991d0b5ee5e74dbfa553bdcae0514a39ca62b731bf6b292619a9",
+  "base_image_id": "sha256:a77a9deaf2f8d2617c58a5034d59fc85b5a0417354e0956ef0793d9d8c084e62",
   "source_sha256": "10e8e6195661a3e0c1345d2d640e4f9f291fc410b92bd363bf477dbb27c77a60",
   "underlying_source_sha256": "98087fd181d9070724f3fbc65c7377db03038eb92bd882374daff44940138821",
   "php_source_sha256": "08bc2eba2a588654ade1357174aa646b761556c862dda0678345ee29ed481209",
@@ -60,7 +60,7 @@
       ]
     }
   },
-  "image_id": "sha256:08dfa1a9fd5819a27a8f60ed22da84d212be60626058f735e056e79dbdc7338f",
+  "image_id": "sha256:4c20c6b21378a22bc50d09555f5142f10e19a5c7c139c2f8ed561a7df14af470",
   "platform": "linux/arm64",
   "afl_package": "4.33c-1.1ubuntu1",
   "afl_map_size": 65536,

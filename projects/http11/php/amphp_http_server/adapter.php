@@ -11,7 +11,8 @@ function amp_parse_request(string $input): array {
         $uri = $request->getUri();
         $observed = [
             'method' => $request->getMethod(),
-            'target' => $uri->getPath() . '?' . $uri->getQuery(),
+            // getQuery() is '' when the request target has no query; '?' only precedes a query.
+            'target' => $uri->getPath() . ($uri->getQuery() === '' ? '' : '?' . $uri->getQuery()),
             'version' => $request->getProtocolVersion(),
             'host' => $request->getHeader('Host'),
             'custom' => $request->getHeader('X-Parsarium'),

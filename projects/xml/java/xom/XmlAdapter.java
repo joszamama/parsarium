@@ -61,8 +61,12 @@ public final class XmlAdapter {
         for (int i = 0; i < element.getNamespaceDeclarationCount(); i++) {
             String prefix = element.getNamespacePrefix(i);
             String uri = element.getNamespaceURI(prefix);
-            if (element.getParent() instanceof Element parent &&
-                    uri.equals(parent.getNamespaceURI(prefix))) continue;
+            // getNamespaceDeclarationCount() also lists the element's own namespace and its
+            // attributes' namespaces. A binding equal to the one in scope (the parent's, or no
+            // namespace for the default prefix at the root) was not declared on this element.
+            if (element.getParent() instanceof Element parent) {
+                if (uri.equals(parent.getNamespaceURI(prefix))) continue;
+            } else if (prefix.isEmpty() && uri.isEmpty()) continue;
             summary.declarations++;
             if (uri != null && !uri.isEmpty()) summary.namespaces.add(uri);
         }

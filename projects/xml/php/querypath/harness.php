@@ -7,9 +7,12 @@ require __DIR__ . '/autoload.php';
 require __DIR__ . '/summary.php';
 
 // Documented package entry point; returns the DOM document the package built from the bytes.
+// qp() picks its parser from the first five bytes: without a leading '<?xml' declaration it calls
+// DOMDocument::loadHTML. The documented use_parser => 'xml' option selects the XML parser for every
+// input (DOMQuery::parseXMLString); inputs that start with '<?xml' take the same path as before.
 function parsarium_decode(string $bytes): DOMDocument {
     libxml_use_internal_errors(true);
-    $qp = qp($bytes);
+    $qp = qp($bytes, null, ['use_parser' => 'xml']);
     // DOMQuery::document() returns the DOMDocument that QueryPath built with DOMDocument::loadXML.
     return $qp->document();
 }

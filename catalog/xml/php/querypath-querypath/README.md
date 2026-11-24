@@ -6,7 +6,7 @@
 - **Upstream:** [source repository](<https://github.com/technosophos/querypath>) · [Packagist](<https://packagist.org/packages/querypath/querypath>)
 - **License:** MIT
 - **Parser family:** libxml2 via PHP DOMDocument, shared with the standard path, symfony/dom-crawler, symfony/serializer and mtownsend/xml-to-array
-- **Local input API:** `qp(string $xml) (QueryPath::with) on the local bytes, which DOMQuery::parseXMLString loads with DOMDocument::loadXML because the string starts with an XML declaration; DOMQuery::document() returns that DOMDocument, walked namespace-aware`
+- **Local input API:** `qp(string $xml, null, ['use_parser' => 'xml']) (QueryPath::with) on the local bytes; the documented use_parser option makes DOMQuery::parseXMLString load every input with DOMDocument::loadXML (without it, a string that does not start with an XML declaration goes to loadHTML); DOMQuery::document() returns that DOMDocument, walked namespace-aware`
 - **Documentation:** [API reference](<https://github.com/technosophos/querypath/blob/6b8e2395fac61fac25bbe962f94def556cb85f7d/README.md>)
 - **Valid control:** [`controls/xml/catalog-ns.xml`](../../../../controls/xml/catalog-ns.xml)
 - **Catalog evidence:** [parser record](../../../../data/php/xml/parsers.json) · [control result](../../../../data/php/xml/verification.json)

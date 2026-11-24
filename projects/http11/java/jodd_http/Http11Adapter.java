@@ -182,7 +182,9 @@ public final class Http11Adapter {
 
     private static void runJodd(byte[] bytes) {
         var request = jodd.http.HttpRequest.readFrom(new ByteArrayInputStream(bytes));
-        String target = request.path() + (request.queryString() == null ? "" : "?" + request.queryString());
+        // queryString() returns "" when the request line has no query (HttpRequest.queryString).
+        String query = request.queryString();
+        String target = request.path() + (query == null || query.isEmpty() ? "" : "?" + query);
         String version = request.httpVersion();
         System.out.println(requestJson("method", request.method(), "target", target, "version", version,
                 "host", request.header("Host"), "x_parsarium", request.header("X-Parsarium")));

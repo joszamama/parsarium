@@ -55,7 +55,8 @@ switch ($package) {
         $request = (new \Guzzle\Parser\Message\MessageParser())->parseRequest($raw);
         $result = [
             'method' => $request['method'],
-            'target' => $request['request_url']['path'] . '?' . $request['request_url']['query'],
+            // getUrlPartsFromMessage sets query to '' when the path has no '?'; '?' only precedes a query.
+            'target' => $request['request_url']['path'] . ($request['request_url']['query'] === '' ? '' : '?' . $request['request_url']['query']),
             'version' => $request['version'],
             'host' => $request['headers']['Host'],
             'custom' => $request['headers']['X-Parsarium'],
