@@ -246,8 +246,14 @@ def file_observation(files: dict[str, str]) -> dict | None:
 
 def parser_error(stdout: str, stderr: str, files: dict[str, str]) -> str:
     """Pick the line that best states why the parser or harness failed."""
-    # Some runners write the program's whole output to observed.raw (PHP prints uncaught errors to stdout).
-    text = stderr + "\n" + stdout + "\n" + files.get("observed.raw", "")
+    # Some runners redirect the program's output to observed.json or observed.raw, so PHP's
+    # uncaught-error text lands there; search those files too unless they hold valid JSON.
+    extra = [files.get("observed.raw", "")]
+    try:
+        json.loads(files.get("observed.json", "") or "null")
+    except ValueError:
+        extra.append(files["observed.json"])
+    text = "\n".join([stderr, stdout, *extra])
     patterns = [
         r"harness_test\.go:\d+: (.+)",                                   # Go t.Fatal
         r"panic: (.+)",                                                  # Go panic

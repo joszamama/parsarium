@@ -83,6 +83,13 @@ class ExtractionTests(unittest.TestCase):
                "  thrown in /work/harness.php on line 8\n")
         self.assertEqual(observe.parser_error("", "", {"observed.raw": raw}), "JsonException: Syntax error")
 
+    def test_php_uncaught_error_in_observed_json(self):
+        raw = ("Fatal error: Uncaught JsonException: The decoded property name is invalid in /work/harness.php:8\n"
+               "Stack trace:\n#0 /work/harness.php(8): json_decode()\n#1 {main}\n"
+               "  thrown in /work/harness.php on line 8")
+        self.assertEqual(observe.parser_error("", "", {"observed.json": raw}),
+                         "JsonException: The decoded property name is invalid")
+
     def test_python_repr_message(self):
         stderr = "control mismatch: {'width': 5, 'height': 4, 'alpha': True, 'mode': None, 'px': (1, 2)}\n"
         record = observe.classify(EXPECTED, 1, "", stderr, {}, False)
