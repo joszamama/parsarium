@@ -257,7 +257,7 @@ def parser_error(stdout: str, stderr: str, files: dict[str, str]) -> str:
     patterns = [
         r"harness_test\.go:\d+: (.+)",                                   # Go t.Fatal
         r"panic: (.+)",                                                  # Go panic
-        r"Uncaught ([\w\\]+(?:Exception|Error)[^\n]*?)(?: in /\S+:\d+)?$",  # PHP
+        r"Uncaught ([\w\\]*(?:Exception|Error)[^\n]*?)(?: in /\S+:\d+)?$",  # PHP
         r'Exception in thread "main" (.+)',                              # Java
         r"Caused by: (.+)",                                              # Java
         r"^(?:Uncaught )?([\w.$]*(?:Error|Exception|Exit)(?:: .*)?)$",  # JS / Python

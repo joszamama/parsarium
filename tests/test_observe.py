@@ -90,6 +90,13 @@ class ExtractionTests(unittest.TestCase):
         self.assertEqual(observe.parser_error("", "", {"observed.json": raw}),
                          "JsonException: The decoded property name is invalid")
 
+    def test_php_bare_exception_class(self):
+        stderr = ("PHP Fatal error:  Uncaught Exception: At 2910(0xb5e) should be a frame header! in "
+                  "/work/vendor/wapmorgan/mp3info/src/Mp3Info.php:370\nStack trace:\n#0 {main}\n"
+                  "  thrown in /work/vendor/wapmorgan/mp3info/src/Mp3Info.php on line 370\n")
+        self.assertEqual(observe.parser_error("", stderr, {}),
+                         "Exception: At 2910(0xb5e) should be a frame header!")
+
     def test_python_repr_message(self):
         stderr = "control mismatch: {'width': 5, 'height': 4, 'alpha': True, 'mode': None, 'px': (1, 2)}\n"
         record = observe.classify(EXPECTED, 1, "", stderr, {}, False)
