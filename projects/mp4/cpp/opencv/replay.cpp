@@ -13,8 +13,9 @@ int main(int argc, char **argv) {
         std::fprintf(stderr, "%s\n", result.error.c_str());
         return 5;
     }
-    // Same rounding as the catalog adapter (adapters/cpp/mp4/opencv.cpp).
-    std::printf("{\"width\":%.0f,\"height\":%.0f,\"frames\":%.0f,\"fps\":%.0f}\n",
+    // Width, height and frame count are whole numbers. CAP_PROP_FPS is printed with
+    // %.17g so a fractional rate is not rounded; an integral rate prints as before.
+    std::printf("{\"width\":%.0f,\"height\":%.0f,\"frames\":%.0f,\"fps\":%.17g}\n",
                 result.width, result.height, result.frames, result.fps);
     return 0;
 }

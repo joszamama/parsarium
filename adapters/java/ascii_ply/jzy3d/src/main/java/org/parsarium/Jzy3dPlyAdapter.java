@@ -10,8 +10,10 @@ public final class Jzy3dPlyAdapter {
         }
         try (FileInputStream input = new FileInputStream(args[0])) {
             var vertices = Ply.read(input);
-            System.out.printf("{\"vertices\":%d,\"second_x\":%.1f,\"third_y\":%.1f}%n",
-                    vertices.size(), vertices.get(1).x, vertices.get(2).y);
+            // Coord3d stores float coordinates; print them at full float precision.
+            System.out.println("{\"vertices\":" + vertices.size()
+                    + ",\"second_x\":" + Float.toString(vertices.get(1).x)
+                    + ",\"third_y\":" + Float.toString(vertices.get(2).y) + "}");
         }
     }
 }

@@ -43,8 +43,9 @@ public final class PdalPlyAdapter {
                     int points = view.length();
                     // second_x and last_y are reported only when the view has those points.
                     StringBuilder out = new StringBuilder(String.format("{\"points\":%d", points));
-                    if (points > 1) out.append(String.format(",\"second_x\":%.1f", view.getDouble(1, "X")));
-                    if (points > 0) out.append(String.format(",\"last_y\":%.1f", view.getDouble(points - 1, "Y")));
+                    // Coordinates are the view's doubles at full precision (Double.toString).
+                    if (points > 1) out.append(",\"second_x\":").append(Double.toString(view.getDouble(1, "X")));
+                    if (points > 0) out.append(",\"last_y\":").append(Double.toString(view.getDouble(points - 1, "Y")));
                     System.out.println(out.append('}'));
                 } finally {
                     view.close();
