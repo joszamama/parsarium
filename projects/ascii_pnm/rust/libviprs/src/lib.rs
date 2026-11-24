@@ -13,7 +13,16 @@ fn parse_package(package: &str, path: &std::path::Path) -> Result<serde_json::Va
     let output = match args[1].as_str() {
         "libviprs" => {
             let img = libviprs::Raster::ppm_load(&bytes)?;
-            json!({"width": img.width(), "height": img.height(), "rgb": img.data()})
+            // data() is the raster's native-endian buffer: one byte per sample
+            // for maxval up to 255, two (Rgb16/Gray16) above. Report samples.
+            let samples: Vec<u32> = match img.format().bytes_per_channel() {
+                2 => img.data().chunks_exact(2)
+                    .map(|b| u32::from(u16::from_ne_bytes([b[0], b[1]]))).collect(),
+                4 => img.data().chunks_exact(4)
+                    .map(|b| u32::from_ne_bytes([b[0], b[1], b[2], b[3]])).collect(),
+                _ => img.data().iter().map(|&b| u32::from(b)).collect(),
+            };
+            json!({"width": img.width(), "height": img.height(), "rgb": samples})
         }
         other => return Err(format!("unknown package: {other}").into()),
     };

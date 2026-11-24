@@ -45,15 +45,8 @@ bool parsarium_parse_svg(const std::uint8_t *data, std::size_t size,
     if (!bundle.IsOk()) return false;
     wxSize svg_size = bundle.GetDefaultSize();
     if (svg_size.x <= 0 || svg_size.y <= 0) return false;
-    // Bound the raster buffer; the parser has already consumed the input.
-    const int limit = 256;
-    wxSize raster = svg_size;
-    if (raster.x > limit || raster.y > limit) {
-        const double scale = static_cast<double>(limit) / std::max(raster.x, raster.y);
-        raster.x = std::max(1, static_cast<int>(raster.x * scale));
-        raster.y = std::max(1, static_cast<int>(raster.y * scale));
-    }
-    wxImage image = bundle.GetBitmap(raster).ConvertToImage();
+    // Render at the SVG's own size, as wxDefaultSize selects.
+    wxImage image = bundle.GetBitmap(svg_size).ConvertToImage();
     if (!image.IsOk() || !image.GetData()) return false;
     int width = image.GetWidth();
     int height = image.GetHeight();
