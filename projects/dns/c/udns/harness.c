@@ -1,8 +1,8 @@
 /* Local DNS message bytes reach udns' documented raw-packet parsing routines: the header
  * accessor macros (dns_qid, dns_qr, ... dns_numar), dns_getdn for the question names and
  * dns_initparse/dns_nextrr for the resource records, with selection fields cleared so every
- * RR is returned. RDATA text uses udns' dns_ntop, dns_getdn and dns_dntop. No resolver
- * context is initialised and no socket is used. */
+ * RR is returned. RDATA text uses udns' dns_ntop, dns_getdn and dns_dntop; TXT follows
+ * dns_parse_txt. No resolver context is initialised and no socket is used. */
 #include <ctype.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -19,6 +19,15 @@ static void name_out(FILE *out, dnscc_t *dn) {
     size_t length = strlen(text);
     for (size_t i = 0; i < length; i++) fputc(tolower((unsigned char)text[i]), out);
     if (length == 0 || text[length - 1] != '.') fputc('.', out);
+}
+
+static void json_text(FILE *out, dnscc_t *text, size_t length) {
+    for (size_t i = 0; i < length; i++) {
+        unsigned char c = text[i];
+        if (c == '"' || c == '\\') { fputc('\\', out); fputc(c, out); }
+        else if (c < 0x20 || c > 0x7e) fprintf(out, "\\u%04x", c);
+        else fputc(c, out);
+    }
 }
 
 static int rdata_out(FILE *out, dnscc_t *pkt, dnscc_t *end, const struct dns_rr *rr) {
@@ -45,6 +54,18 @@ static int rdata_out(FILE *out, dnscc_t *pkt, dnscc_t *end, const struct dns_rr 
         cur += 2;
         if (dns_getdn(pkt, &cur, end, dn, sizeof(dn)) <= 0 || cur != rr->dnsrr_dend) return -1;
         name_out(out, dn);
+        break;
+    case DNS_T_TXT:
+        /* dns_parse_txt rejects a character-string that runs past the RDATA end and joins the
+         * character-strings of one RR without a separator; the joined text is printed quoted. */
+        for (dnscc_t *p = cur; p < rr->dnsrr_dend; p += 1 + *p)
+            if (p + 1 + *p > rr->dnsrr_dend) return -1;
+        fputs("\\\"", out);
+        while (cur < rr->dnsrr_dend) {
+            json_text(out, cur + 1, *cur);
+            cur += 1 + *cur;
+        }
+        fputs("\\\"", out);
         break;
     default:
         return -1;
