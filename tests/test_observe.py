@@ -77,6 +77,12 @@ class ExtractionTests(unittest.TestCase):
         self.assertEqual(record["error"], "/cargo/minihttpse-0.1.6/src/lib.rs:135:59: "
                          "index out of bounds: the len is 1 but the index is 1")
 
+    def test_php_uncaught_error_in_observed_raw(self):
+        raw = ("PHP Fatal error:  Uncaught JsonException: Syntax error in /work/harness.php:8\n"
+               "Stack trace:\n#0 /work/harness.php(8): json_decode()\n#1 {main}\n"
+               "  thrown in /work/harness.php on line 8\n")
+        self.assertEqual(observe.parser_error("", "", {"observed.raw": raw}), "JsonException: Syntax error")
+
     def test_python_repr_message(self):
         stderr = "control mismatch: {'width': 5, 'height': 4, 'alpha': True, 'mode': None, 'px': (1, 2)}\n"
         record = observe.classify(EXPECTED, 1, "", stderr, {}, False)

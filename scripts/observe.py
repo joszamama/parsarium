@@ -246,7 +246,8 @@ def file_observation(files: dict[str, str]) -> dict | None:
 
 def parser_error(stdout: str, stderr: str, files: dict[str, str]) -> str:
     """Pick the line that best states why the parser or harness failed."""
-    text = stderr + "\n" + stdout
+    # Some runners write the program's whole output to observed.raw (PHP prints uncaught errors to stdout).
+    text = stderr + "\n" + stdout + "\n" + files.get("observed.raw", "")
     patterns = [
         r"harness_test\.go:\d+: (.+)",                                   # Go t.Fatal
         r"panic: (.+)",                                                  # Go panic
