@@ -15,7 +15,11 @@ int main(int argc, char **argv) {
     }
     fclose(file);
     struct parsarium_pnm_result result;
-    if (!parsarium_parse_pnm(input, size, &result)) return 5;
+    if (!parsarium_parse_pnm(input, size, &result)) {
+        const char *error = parsarium_pnm_error();
+        if (*error) fprintf(stderr, "%s\n", error);
+        return 5;
+    }
     if (result.has_second) {
         printf("{\"width\":%u,\"height\":%u,\"first\":[%u,%u,%u,%u],\"second\":[%u,%u,%u,%u]}\n",
                result.width, result.height,

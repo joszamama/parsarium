@@ -17,7 +17,8 @@ struct parsarium_xml_result {
     int64_t max_depth = 0;
 };
 
+// Returns 0 on failure; *error (when given) then says why (libxml++'s exception text where it gives one).
 int parsarium_parse_xml(const uint8_t *data, size_t size,
-                        parsarium_xml_result *result);
+                        parsarium_xml_result *result, std::string *error = nullptr);
 
 #endif

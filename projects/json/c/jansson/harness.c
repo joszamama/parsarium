@@ -17,16 +17,26 @@ struct summary {
     size_t string_count, string_capacity;
 };
 
+/* jansson reports why json_loadb failed in json_error_t; keep it for the caller. */
+static char last_error[JSON_ERROR_TEXT_LENGTH + 64];
+const char *parsarium_json_error(void) { return last_error; }
+
 json_t *parsarium_parse_json(const uint8_t *data, size_t size) {
     static int seeded;
     json_error_t error;
+    json_t *root;
+    last_error[0] = 0;
     if (!data || size > (1u << 20)) return NULL;
     if (!seeded) {
         /* A fixed hash seed keeps object table layout and feedback repeatable. */
         json_object_seed(1);
         seeded = 1;
     }
-    return json_loadb((const char *)data, size, 0, &error);
+    root = json_loadb((const char *)data, size, 0, &error);
+    if (!root)
+        snprintf(last_error, sizeof(last_error), "json_loadb failed: %s (line %d, column %d, position %d)",
+                 error.text, error.line, error.column, error.position);
+    return root;
 }
 
 static int push_number(struct summary *s, double value) {

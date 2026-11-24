@@ -38,7 +38,11 @@ int main(int argc, char **argv) {
     }
     fclose(file);
     parsarium_xml_result result;
-    if (!parsarium_parse_xml(input, size, &result)) return 5;
+    std::string error;
+    if (!parsarium_parse_xml(input, size, &result, &error)) {
+        if (!error.empty()) fprintf(stderr, "%s\n", error.c_str());
+        return 5;
+    }
     fputs("{\"attributes\":", stdout);
     string_list(result.attributes);
     fputs(",\"elements\":", stdout);

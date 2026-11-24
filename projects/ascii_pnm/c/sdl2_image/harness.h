@@ -14,5 +14,7 @@ struct parsarium_pnm_result {
 
 int parsarium_parse_pnm(const uint8_t *data, size_t size,
                         struct parsarium_pnm_result *result);
+/* Why the last parsarium_parse_pnm call returned 0, or "" when SDL gave no reason. */
+const char *parsarium_pnm_error(void);
 
 #endif

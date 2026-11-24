@@ -104,8 +104,13 @@ static void array(struct buffer *b, const char *key, const struct list *l, int *
     append(b, "]", 1, ok);
 }
 
+/* libxmlb reports a failed load or compile as a GError; keep its message. */
+static char last_error[256];
+const char *parsarium_xml_error(void) { return last_error; }
+
 /* Load the bytes with xb_builder_source_load_xml, compile a silo, then walk its nodes. */
 char *parsarium_parse_xml(const uint8_t *data, size_t size) {
+    last_error[0] = 0;
     if (!data || !size || size > (1u << 20)) return NULL;
     /* xb_builder_source_load_xml takes a NUL-terminated string, so input stops at the first NUL byte. */
     char *text = malloc(size + 1);
@@ -123,6 +128,9 @@ char *parsarium_parse_xml(const uint8_t *data, size_t size) {
         g_object_unref(builder);
     }
     g_object_unref(source);
+    if (error)
+        snprintf(last_error, sizeof(last_error), "%s failed: %s",
+                 loaded ? "xb_builder_compile" : "xb_builder_source_load_xml", error->message);
     g_clear_error(&error);
     if (!silo) return NULL;
     struct summary s = {0}; s.ok = 1;
@@ -144,6 +152,8 @@ char *parsarium_parse_xml(const uint8_t *data, size_t size) {
         append(&b, num, strlen(num), &ok); quote(&b, s.elements.items[0], &ok);
         append(&b, ",", 1, &ok); array(&b, "text", &s.text, &ok); append(&b, "}", 1, &ok);
         if (ok) out = b.data; else free(b.data);
+    } else if (s.ok) {
+        snprintf(last_error, sizeof(last_error), "xb_builder_compile returned a silo without an element");
     }
     release(&s.elements); release(&s.attributes); release(&s.text);
     free(s.run.data);

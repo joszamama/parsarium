@@ -59,6 +59,17 @@ int parsarium_parse_json(const uint8_t *data, size_t size,
     return 1;
 }
 
+std::string parsarium_json_error(const uint8_t *data, size_t size) {
+    // allow_exceptions=false only discards the value; the same call with
+    // exceptions enabled reports why, through nlohmann::json::exception::what().
+    try {
+        (void)nlohmann::json::parse(data, data + size, nullptr, true, false);
+    } catch (const nlohmann::json::exception &error) {
+        return error.what();
+    }
+    return "";
+}
+
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
     parsarium_json_result result;
     (void)parsarium_parse_json(data, size, &result);

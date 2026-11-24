@@ -69,22 +69,34 @@ static bool walk(const rapidxml::xml_node<> *element, scope_map scope, int64_t d
     return true;
 }
 
-int parsarium_parse_xml(const uint8_t *data, size_t size, parsarium_xml_result *result) {
-    if (!data || !result || size == 0 || size > (1u << 20) ||
-        std::memchr(data, 0, size)) return 0;
+int parsarium_parse_xml(const uint8_t *data, size_t size, parsarium_xml_result *result,
+                        std::string *error) {
+    if (!data || !result || size == 0 || size > (1u << 20)) return 0;
+    if (std::memchr(data, 0, size)) {
+        if (error) *error = "input contains a NUL byte (RapidXml parses a NUL-terminated buffer)";
+        return 0;
+    }
     *result = parsarium_xml_result();
     std::vector<char> buffer(data, data + size);
     buffer.push_back('\0');
     rapidxml::xml_document<> document;
     try { document.parse<0>(buffer.data()); }
-    catch (const rapidxml::parse_error &) { return 0; }
+    catch (const rapidxml::parse_error &exception) {
+        if (error) *error = std::string("rapidxml::parse_error: ") + exception.what() + " at offset " +
+                            std::to_string(exception.where<char>() - buffer.data());
+        return 0;
+    }
     const rapidxml::xml_node<> *root = nullptr;
     for (auto *node = document.first_node(); node; node = node->next_sibling())
         if (node->type() == rapidxml::node_element) { root = node; break; }
-    if (!root) return 0;
+    if (!root) {
+        if (error) *error = "rapidxml::xml_document::parse returned a document without an element";
+        return 0;
+    }
     std::set<std::string> uris;
     if (!walk(root, scope_map(), 1, result, &uris)) {
         *result = parsarium_xml_result();
+        if (error) *error = "names are not namespace-well-formed (unbound prefix, empty prefix binding or repeated expanded attribute)";
         return 0;
     }
     result->root = result->elements.front();

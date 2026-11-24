@@ -38,7 +38,11 @@ int main(int argc, char **argv) {
     }
     fclose(file);
     parsarium_json_result result;
-    if (!parsarium_parse_json(input, size, &result)) return 5;
+    if (!parsarium_parse_json(input, size, &result)) {
+        std::string error = parsarium_json_error(input, size);
+        if (!error.empty()) fprintf(stderr, "%s\n", error.c_str());
+        return 5;
+    }
     printf("{\"arrays\":%lld,\"booleans\":%lld,\"max_depth\":%lld,\"nulls\":%lld,\"numbers\":[",
            (long long)result.arrays, (long long)result.booleans,
            (long long)result.max_depth, (long long)result.nulls);

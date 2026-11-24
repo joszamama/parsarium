@@ -96,7 +96,17 @@ static void start_tag(struct xml_context *ctx, struct summary *s) {
 }
 
 static struct summary *current;
-static void on_problem(struct xml_context *ctx) { (void)ctx; if (current) current->failed = 1; }
+/* ucw-xml passes each problem's level (err_code) and text (err_msg) to the handler; the first is kept. */
+static char last_error[256];
+const char *parsarium_xml_error(void) { return last_error; }
+static void on_problem(struct xml_context *ctx) {
+    if (!current) return;
+    if (!current->failed) {
+        const char *level = ctx->err_code == XML_ERR_ERROR ? "error" : "fatal error";
+        snprintf(last_error, sizeof(last_error), "ucw-xml %s: %s", level, ctx->err_msg ? ctx->err_msg : "");
+    }
+    current->failed = 1;
+}
 
 static int compare(const void *a, const void *b) { return strcmp(*(char *const *)a, *(char *const *)b); }
 static void quote(struct buffer *b, const char *s, int *ok) {
@@ -116,6 +126,7 @@ static void array(struct buffer *b, const char *key, const struct list *l, int *
 }
 
 char *parsarium_parse_xml(const uint8_t *data, size_t size) {
+    last_error[0] = 0;
     if (!data || !size || size > (1u << 20)) return NULL;
     byte *copy = malloc(size);
     if (!copy) return NULL;
@@ -124,7 +135,8 @@ char *parsarium_parse_xml(const uint8_t *data, size_t size) {
     current = &s;
     struct xml_context ctx;
     xml_init(&ctx);
-    ctx.h_warn = ctx.h_error = ctx.h_fatal = on_problem;
+    /* Warnings keep ucw-xml's default (no handler, ignored); errors and fatal errors fail the input. */
+    ctx.h_error = ctx.h_fatal = on_problem;
     ctx.flags |= XML_ALLOC_ALL;
     xml_ns_enable(&ctx);
     struct fastbuf *fb = malloc(sizeof(*fb));
@@ -154,6 +166,8 @@ char *parsarium_parse_xml(const uint8_t *data, size_t size) {
         append(&b, ",\"root\":", 8, &ok); quote(&b, s.elements.items[0], &ok);
         append(&b, ",", 1, &ok); array(&b, "text", &s.text, &ok); append(&b, "}", 1, &ok);
         if (ok) out = b.data; else free(b.data);
+    } else if (!ctx.err_code && !s.failed && s.ok) {
+        snprintf(last_error, sizeof(last_error), "ucw-xml reached the end of the document without an element");
     }
     release(&s.elements); release(&s.attributes); release(&s.namespaces); release(&s.text);
     free(s.run.data);

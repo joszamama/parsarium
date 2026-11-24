@@ -22,4 +22,8 @@ struct parsarium_json_result {
 int parsarium_parse_json(const uint8_t *data, size_t size,
                          parsarium_json_result *result);
 
+// After a failed parsarium_parse_json: nlohmann's parse_error text for the same
+// bytes (parse() with exceptions enabled), or "" if it gives none.
+std::string parsarium_json_error(const uint8_t *data, size_t size);
+
 #endif

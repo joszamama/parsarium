@@ -19,6 +19,10 @@ struct summary {
     size_t string_count, string_capacity;
 };
 
+/* json-c reports why parsing stopped as an enum json_tokener_error; keep its description. */
+static char last_error[160];
+const char *parsarium_json_error(void) { return last_error; }
+
 int parsarium_parse_json(const uint8_t *data, size_t size, struct json_object **out) {
     static int configured;
     struct json_tokener *tok;
@@ -27,6 +31,7 @@ int parsarium_parse_json(const uint8_t *data, size_t size, struct json_object **
     size_t end;
     int ok;
     *out = NULL;
+    last_error[0] = 0;
     if (!data || size > (1u << 20)) return 0;
     if (!configured) {
         /* The Perl-like string hash has no random seed, so object table layout
@@ -50,11 +55,15 @@ int parsarium_parse_json(const uint8_t *data, size_t size, struct json_object **
     /* A JSON null root is a NULL json_object with json_tokener_success, so
      * success is reported separately from the object. */
     ok = json_tokener_get_error(tok) == json_tokener_success;
+    if (!ok)
+        snprintf(last_error, sizeof(last_error), "json_tokener_parse_ex failed: %s (offset %zu)",
+                 json_tokener_error_desc(json_tokener_get_error(tok)), json_tokener_get_parse_end(tok));
     if (ok) {
         /* Reject trailing bytes other than JSON whitespace. */
         for (end = json_tokener_get_parse_end(tok); end < size; end++) {
             char c = text[end];
             if (c != ' ' && c != '\t' && c != '\n' && c != '\r') {
+                snprintf(last_error, sizeof(last_error), "bytes after the JSON value at offset %zu", end);
                 ok = 0;
                 break;
             }

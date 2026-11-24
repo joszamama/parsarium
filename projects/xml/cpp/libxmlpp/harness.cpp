@@ -49,7 +49,7 @@ static bool walk(const xmlpp::Element* element, int64_t depth,
 }
 
 int parsarium_parse_xml(const uint8_t* data, size_t size,
-                        parsarium_xml_result* result) {
+                        parsarium_xml_result* result, std::string* error) {
     if (!data || !result || size == 0 || size > (1u << 20)) return 0;
     *result = parsarium_xml_result();
     try {
@@ -61,12 +61,21 @@ int parsarium_parse_xml(const uint8_t* data, size_t size,
         const xmlpp::Document* document = parser.get_document();
         const xmlpp::Element* root = document ? document->get_root_node() : nullptr;
         std::set<std::string> uris;
-        if (!walk(root, 1, result, &uris)) return 0;
+        if (!walk(root, 1, result, &uris)) {
+            if (error && !root) *error = "xmlpp::DomParser returned a document without a root element";
+            return 0;
+        }
         result->root = result->elements.front();
         result->namespaces.assign(uris.begin(), uris.end());
         return 1;
-    } catch (const std::exception&) {
+    } catch (const std::exception& exception) {
         *result = parsarium_xml_result();
+        if (error) {
+            // libxml++ collects libxml2's messages into the exception text, one per line.
+            std::string text(exception.what());
+            for (char& c : text) if (c == '\n' || c == '\r') c = ' ';
+            *error = text;
+        }
         return 0;
     }
 }

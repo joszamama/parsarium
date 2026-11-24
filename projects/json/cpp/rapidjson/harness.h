@@ -19,7 +19,9 @@ struct parsarium_json_result {
     int64_t max_depth = 0;
 };
 
+// Returns 0 on failure; *error (when given) then holds RapidJSON's
+// GetParseError_En() text and error offset.
 int parsarium_parse_json(const uint8_t *data, size_t size,
-                         parsarium_json_result *result);
+                         parsarium_json_result *result, std::string *error = nullptr);
 
 #endif

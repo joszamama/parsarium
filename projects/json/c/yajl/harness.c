@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <yajl/yajl_parse.h>
 #include "emit.h"
@@ -46,12 +47,22 @@ static const yajl_callbacks callbacks = {
 
 /* Documented yajl_parse(handle, bytes, length) then yajl_complete_parse with the
  * default configuration: no comments, no trailing garbage, one value. */
+/* The replay keeps yajl_get_error's description of a failed parse for stderr. */
+static char last_error[256];
+
 static int parse_json(const uint8_t *data, size_t size, printer *p) {
     if (!data || size > (1u << 20)) return 0;
     yajl_handle handle = yajl_alloc(&callbacks, NULL, p);
     if (!handle) return 0;
     int ok = yajl_parse(handle, data, size) == yajl_status_ok
           && yajl_complete_parse(handle) == yajl_status_ok;
+    if (!ok && p) {
+        unsigned char *error = yajl_get_error(handle, 0, data, size);
+        snprintf(last_error, sizeof last_error, "yajl_parse failed: %s", error ? (const char *)error : "");
+        size_t n = strlen(last_error);
+        while (n && (last_error[n - 1] == '\n' || last_error[n - 1] == ' ')) last_error[--n] = 0;
+        if (error) yajl_free_error(handle, error);
+    }
     yajl_free(handle);
     return ok;
 }
@@ -76,7 +87,11 @@ int main(int argc, char **argv) {
     printer p = { stdout, 0, {0}, 0 };
     int ok = parse_json(data, size, &p);
     free(data);
-    if (!ok || p.depth != 0) return 5;
+    if (!ok || p.depth != 0) {
+        fflush(stdout);
+        if (last_error[0]) fprintf(stderr, "%s\n", last_error);
+        return 5;
+    }
     fputc('\n', stdout);
     return 0;
 }

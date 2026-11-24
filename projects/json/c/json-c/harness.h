@@ -10,6 +10,9 @@
  * nonzero on success; *out is NULL for a JSON null root. */
 int parsarium_parse_json(const uint8_t *data, size_t size, struct json_object **out);
 
+/* Why the last parsarium_parse_json call failed, or "" when json-c gave no reason. */
+const char *parsarium_json_error(void);
+
 /* Print the cross-ecosystem control summary for a parsed value. */
 void parsarium_print_summary(struct json_object *root);
 

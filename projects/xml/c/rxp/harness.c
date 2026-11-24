@@ -129,6 +129,10 @@ static void start_bit(struct summary *s, XBit bit) {
 
 static void quiet(XBit bit, void *arg) { (void)bit; (void)arg; }
 
+/* RXP returns a failed parse as an XBIT_error bit carrying its message; keep it for the caller. */
+static char last_error[256];
+const char *parsarium_xml_error(void) { return last_error; }
+
 static int compare(const void *a, const void *b) { return strcmp(*(char *const *)a, *(char *const *)b); }
 static void quote(struct buffer *b, const char *s, int *ok) {
     append(b, "\"", 1, ok);
@@ -147,6 +151,7 @@ static void array(struct buffer *b, const char *key, const struct list *l, int *
 }
 
 char *parsarium_parse_xml(const uint8_t *data, size_t size) {
+    last_error[0] = 0;
     if (!data || !size || size > (1u << 20)) return NULL;
     /* RXP opens documents by system identifier; the local bytes go to a private temporary file. */
     char path[] = "/tmp/parsarium-rxp-XXXXXX";
@@ -174,7 +179,12 @@ char *parsarium_parse_xml(const uint8_t *data, size_t size) {
         for (;;) {
             XBit bit = ReadXBit(p);
             if (bit->type == XBIT_eof) { parsed = 1; FreeXBit(bit); break; }
-            if (bit->type == XBIT_error) { FreeXBit(bit); break; }
+            if (bit->type == XBIT_error) {
+                snprintf(last_error, sizeof(last_error), "RXP error: %s",
+                         bit->error_message ? (const char *)bit->error_message : "");
+                FreeXBit(bit);
+                break;
+            }
             switch (bit->type) {
             case XBIT_start: case XBIT_empty:
                 start_bit(&s, bit);
@@ -201,6 +211,8 @@ char *parsarium_parse_xml(const uint8_t *data, size_t size) {
         append(&b, ",\"root\":", 8, &ok); quote(&b, s.elements.items[0], &ok);
         append(&b, ",", 1, &ok); array(&b, "text", &s.text, &ok); append(&b, "}", 1, &ok);
         if (ok) out = b.data; else free(b.data);
+    } else if (parsed && s.ok) {
+        snprintf(last_error, sizeof(last_error), "RXP reached the end of the document without an element");
     }
     release(&s.elements); release(&s.attributes); release(&s.namespaces); release(&s.text);
     free(s.run.data);

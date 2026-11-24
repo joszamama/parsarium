@@ -15,7 +15,11 @@ int main(int argc, char **argv) {
     }
     fclose(file);
     json_t *root = parsarium_parse_json(input, size);
-    if (!root) return 5;
+    if (!root) {
+        const char *error = parsarium_json_error();
+        if (*error) fprintf(stderr, "%s\n", error);
+        return 5;
+    }
     if (argc == 3) {
         parsarium_print_tree(root);
         putchar('\n');

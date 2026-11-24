@@ -12,10 +12,21 @@ static bool parse_json(const uint8_t* data, size_t size, bool print_tree) {
     // keeps object insertion order while preserving signed integer kinds.
     std::string buffer(reinterpret_cast<const char*>(data), size);
     glz::generic_i64 root{};
-    if (glz::read_json(root, buffer)) return false;
+    if (auto ec = glz::read_json(root, buffer)) {
+        // The replay prints glaze's own description of the read error.
+        if (print_tree) {
+            std::string message = glz::format_error(ec, buffer);
+            for (char& c : message) if (c == '\n' || c == '\r') c = ' ';
+            std::fprintf(stderr, "glz::read_json failed: %s\n", message.c_str());
+        }
+        return false;
+    }
     if (print_tree) {
         auto output = root.dump();
-        if (!output) return false;
+        if (!output) {
+            std::fprintf(stderr, "glz::generic_i64::dump failed: %s\n", glz::format_error(output.error()).c_str());
+            return false;
+        }
         // glaze's compact writer emits no whitespace, so a byte below 0x20 can
         // only be inside a string; write it as a \u00XX escape so the printed
         // tree is RFC 8259 text the checker can read.

@@ -76,19 +76,28 @@ static bool walk(const TiXmlElement *element, scope_map scope, int64_t depth,
 }
 
 int parsarium_parse_xml(const uint8_t *data, size_t size,
-                        parsarium_xml_result *result) {
+                        parsarium_xml_result *result, std::string *error) {
     if (!data || !result || size == 0 || size > (1u << 20)) return 0;
     *result = parsarium_xml_result();
     // TiXmlDocument::Parse takes a NUL-terminated string, so input stops at the first NUL byte.
     std::string text(reinterpret_cast<const char *>(data), size);
     TiXmlDocument document;
     document.Parse(text.c_str(), nullptr, TIXML_ENCODING_UTF8);
-    if (document.Error()) return 0;
+    if (document.Error()) {
+        if (error) *error = std::string("TiXmlDocument::Parse failed: ") + document.ErrorDesc() + " (id " +
+                            std::to_string(document.ErrorId()) + ", row " + std::to_string(document.ErrorRow()) +
+                            ", column " + std::to_string(document.ErrorCol()) + ")";
+        return 0;
+    }
     const TiXmlElement *root = document.RootElement();
-    if (!root) return 0;
+    if (!root) {
+        if (error) *error = "TiXmlDocument::Parse returned a document without a root element";
+        return 0;
+    }
     std::set<std::string> uris;
     if (!walk(root, scope_map(), 1, result, &uris)) {
         *result = parsarium_xml_result();
+        if (error) *error = "names are not namespace-well-formed (unbound prefix, empty prefix binding or repeated expanded attribute)";
         return 0;
     }
     result->root = result->elements.front();

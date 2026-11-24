@@ -78,6 +78,10 @@ static void flush(struct summary *s) {
 
 static const char XML_URI[] = "http://www.w3.org/XML/1998/namespace";
 
+/* Why the last parse returned NULL: mxml's first error message or the name that could not be resolved. */
+static char last_error[256];
+const char *parsarium_xml_error(void) { return last_error; }
+
 /* Innermost binding for a prefix ("" is the default namespace); NULL when unbound. */
 static const char *lookup(const struct summary *s, const char *prefix, size_t len) {
     if (len == 3 && !strncmp(prefix, "xml", 3)) return XML_URI;
@@ -90,7 +94,10 @@ static char *resolve(struct summary *s, const char *qname, const char *value, in
     const char *colon = strchr(qname, ':');
     if (!colon) return clark(attribute ? NULL : lookup(s, "", 0), qname, value);
     const char *uri = lookup(s, qname, (size_t)(colon - qname));
-    if (!uri || !*uri || !colon[1]) return NULL;
+    if (!uri || !*uri || !colon[1]) {
+        if (!last_error[0]) snprintf(last_error, sizeof(last_error), "namespace prefix of %s is not bound", qname);
+        return NULL;
+    }
     return clark(uri, colon + 1, value);
 }
 
@@ -167,10 +174,18 @@ static void array(struct buffer *b, const char *key, const struct list *l, int *
     for (size_t i = 0; i < l->len; i++) { if (i) append(b, ",", 1, ok); quote(b, l->items[i], ok); }
     append(b, "]", 1, ok);
 }
-static void quiet(void *user, const char *message) { (void)user; (void)message; }
+/* mxml hands each load error to the error callback; the first message is kept for the caller. */
+static void quiet(void *user, const char *message) {
+    (void)user;
+    if (!last_error[0] && message) {
+        snprintf(last_error, sizeof(last_error), "mxmlLoadString failed: %s", message);
+        for (char *c = last_error; *c; c++) if (*c == '\n' || *c == '\r') *c = ' ';
+    }
+}
 
 /* Load the whole byte buffer as one string with mxmlLoadString (opaque text values), then walk the tree. */
 char *parsarium_parse_xml(const uint8_t *data, size_t size) {
+    last_error[0] = 0;
     if (!data || !size || size > (1u << 20)) return NULL;
     /* mxmlLoadString takes a NUL-terminated string, so input stops at the first NUL byte. */
     char *text = malloc(size + 1);

@@ -12,7 +12,11 @@ static bool parse_json(const uint8_t *data, size_t size, bool print_tree) {
     simdjson::dom::parser parser;
     simdjson::dom::element root;
     auto error = parser.parse(reinterpret_cast<const char *>(data), size).get(root);
-    if (error) return false;
+    if (error) {
+        // The replay prints simdjson's own text for the error code.
+        if (print_tree) std::fprintf(stderr, "simdjson::dom::parser::parse failed: %s\n", simdjson::error_message(error));
+        return false;
+    }
     if (print_tree) std::cout << root << '\n';
     return true;
 }

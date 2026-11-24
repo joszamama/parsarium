@@ -1,6 +1,7 @@
 #include "harness.h"
 
 #include <rapidjson/document.h>
+#include <rapidjson/error/en.h>
 
 #include <algorithm>
 
@@ -28,13 +29,20 @@ static void walk(const rapidjson::Value &value, int64_t depth,
 }
 
 int parsarium_parse_json(const uint8_t *data, size_t size,
-                         parsarium_json_result *result) {
+                         parsarium_json_result *result, std::string *error) {
     if (!data || !result || size == 0 || size > (1u << 20)) return 0;
     *result = parsarium_json_result();
     rapidjson::Document document;
     // Documented length-bounded in-memory parsing API; default flags are strict.
     document.Parse(reinterpret_cast<const char *>(data), size);
-    if (document.HasParseError()) return 0;
+    if (document.HasParseError()) {
+        if (error) {
+            *error = std::string("rapidjson::Document::Parse failed: ") +
+                     rapidjson::GetParseError_En(document.GetParseError()) +
+                     " (offset " + std::to_string(document.GetErrorOffset()) + ")";
+        }
+        return 0;
+    }
     if (document.IsObject()) {
         result->root = "object";
         for (auto member = document.MemberBegin(); member != document.MemberEnd(); ++member)

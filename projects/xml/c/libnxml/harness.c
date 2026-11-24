@@ -102,8 +102,13 @@ static void array(struct buffer *b, const char *key, const struct list *l, int *
     append(b, "]", 1, ok);
 }
 
+/* libnxml reports a failed parse as an nxml_error_t and the line it reached; keep both. */
+static char last_error[160];
+const char *parsarium_xml_error(void) { return last_error; }
+
 /* Parse the whole byte buffer with nxml_parse_buffer, then walk libnxml's tree. */
 char *parsarium_parse_xml(const uint8_t *data, size_t size) {
+    last_error[0] = 0;
     if (!data || !size || size > (1u << 20)) return NULL;
     /* nxml_parse_buffer takes a char buffer and an explicit size; keep a NUL after it. */
     char *text = malloc(size + 1);
@@ -113,7 +118,13 @@ char *parsarium_parse_xml(const uint8_t *data, size_t size) {
     if (nxml_new(&doc) != NXML_OK) { free(text); return NULL; }
     nxml_error_t err = nxml_parse_buffer(doc, text, size);
     free(text);
-    if (err != NXML_OK) { nxml_free(doc); return NULL; }
+    if (err != NXML_OK) {
+        int line = 0;
+        nxml_line_error(doc, &line);
+        snprintf(last_error, sizeof(last_error), "nxml_parse_buffer failed: %s (line %d)", nxml_strerror(doc, err), line);
+        nxml_free(doc);
+        return NULL;
+    }
     struct summary s = {0}; s.ok = 1;
     walk(&s, doc->data, 0);
     flush(&s);
@@ -126,6 +137,8 @@ char *parsarium_parse_xml(const uint8_t *data, size_t size) {
         append(&b, num, strlen(num), &ok); quote(&b, s.elements.items[0], &ok);
         append(&b, ",", 1, &ok); array(&b, "text", &s.text, &ok); append(&b, "}", 1, &ok);
         if (ok) out = b.data; else free(b.data);
+    } else if (s.ok) {
+        snprintf(last_error, sizeof(last_error), "nxml_parse_buffer returned a document without an element");
     }
     release(&s.elements); release(&s.attributes); release(&s.text);
     free(s.run.data);

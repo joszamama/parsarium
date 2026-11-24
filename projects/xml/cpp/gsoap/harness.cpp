@@ -69,7 +69,7 @@ static bool walk(const soap_dom_element *element, int64_t depth,
 }
 
 int parsarium_parse_xml(const uint8_t *data, size_t size,
-                        parsarium_xml_result *result) {
+                        parsarium_xml_result *result, std::string *error) {
     if (!data || !result || size == 0 || size > (1u << 20)) return 0;
     *result = parsarium_xml_result();
     std::istringstream in(std::string(reinterpret_cast<const char *>(data), size));
@@ -79,6 +79,14 @@ int parsarium_parse_xml(const uint8_t *data, size_t size,
     {
         xsd__anyType dom(ctx);
         in >> dom;
+        if (ctx->error && error) {
+            // soap_sprint_fault renders gSOAP's own fault text for the error code.
+            char fault[1024];
+            soap_sprint_fault(ctx, fault, sizeof fault);
+            std::string text(fault);
+            for (char &c : text) if (c == '\n' || c == '\r') c = ' ';
+            *error = "gSOAP DOM read failed: " + text;
+        }
         if (!ctx->error) {
             std::set<std::string> uris;
             if (dom.name) {
